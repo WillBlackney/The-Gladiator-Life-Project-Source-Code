@@ -1,23 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TbsFramework.Cells;
-using UnityEditor;
-using System;
-using HexGameEngine.Characters;
-using HexGameEngine.Pathfinding;
-using HexGameEngine.Combat;
-using HexGameEngine.TurnLogic;
+﻿using DG.Tweening;
 using HexGameEngine.Abilities;
-using UnityEngine.EventSystems;
-using TMPro;
-using DG.Tweening;
+using HexGameEngine.Characters;
+using HexGameEngine.Combat;
+using HexGameEngine.Pathfinding;
 using HexGameEngine.Perks;
+using HexGameEngine.TurnLogic;
 using HexGameEngine.UI;
 using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
 using Sirenix.OdinInspector;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using TMPro;
+using UnityEngine;
 
 namespace HexGameEngine.HexTiles
 {
@@ -56,8 +53,8 @@ namespace HexGameEngine.HexTiles
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Dungeon Scenery References")]
-        [SerializeField] private GameObject dungeonViewParent;
-        [SerializeField] private GameObject[] allDungeonParents;
+        [SerializeField] private GameObject mainArenaViewParent;
+        [SerializeField] private GameObject[] allNightTimeArenaParents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Dungeon Scenery References")]
@@ -972,27 +969,27 @@ namespace HexGameEngine.HexTiles
         }
 
         // Dungeon
-        public void EnableDungeonScenery()
+        public void EnableNightTimeArenaScenery()
         {
-            DisableAllDungeons();
-            dungeonViewParent.SetActive(true);
-            EnableRandomDungeon();
+            DisableAllArenas();
+            mainArenaViewParent.SetActive(true);
+            EnableRandomNighTimeArena();
         }
-        public void DisableDungeonScenery()
+        public void DisableArenaView()
         {
-            DisableAllDungeons();
-            dungeonViewParent.SetActive(false);
+            DisableAllArenas();
+            mainArenaViewParent.SetActive(false);
         }
-        private void DisableAllDungeons()
+        private void DisableAllArenas()
         {
-            for (int i = 0; i < allDungeonParents.Length; i++)
+            for (int i = 0; i < allNightTimeArenaParents.Length; i++)
             {
-                allDungeonParents[i].SetActive(false);
+                allNightTimeArenaParents[i].SetActive(false);
             }
         }
-        private void EnableRandomDungeon()
+        private void EnableRandomNighTimeArena()
         {
-            allDungeonParents[RandomGenerator.NumberBetween(0, allDungeonParents.Length - 1)].SetActive(true);
+            allNightTimeArenaParents[RandomGenerator.NumberBetween(0, allNightTimeArenaParents.Length - 1)].SetActive(true);
 
         }
 

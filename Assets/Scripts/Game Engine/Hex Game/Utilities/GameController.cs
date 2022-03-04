@@ -113,7 +113,7 @@ namespace HexGameEngine
 
             // Enable world view
             LightController.Instance.EnableDungeonGlobalLight();
-            LevelController.Instance.EnableDungeonScenery();
+            LevelController.Instance.EnableNightTimeArenaScenery();
             LevelController.Instance.ShowAllNodeViews();
 
             // Setup player characters
@@ -818,7 +818,7 @@ namespace HexGameEngine
 
             // Enable world view
             LightController.Instance.EnableDungeonGlobalLight();
-            LevelController.Instance.EnableDungeonScenery();
+            LevelController.Instance.EnableNightTimeArenaScenery();
             LevelController.Instance.ShowAllNodeViews();
 
             // Spawn player characters
