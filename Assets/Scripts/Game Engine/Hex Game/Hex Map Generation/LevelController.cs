@@ -111,7 +111,7 @@ namespace HexGameEngine.HexTiles
             List<LevelNode> nodes = new List<LevelNode>();
             foreach(LevelNode n in AllLevelNodes)
             {
-                if(n.GridPosition.x == 1 || n.GridPosition.x == 2)
+                if(n.GridPosition.x == -2 || n.GridPosition.x == -3)
                 {
                     nodes.Add(n);
                 }
@@ -125,7 +125,7 @@ namespace HexGameEngine.HexTiles
             List<LevelNode> nodes = new List<LevelNode>();
             foreach (LevelNode n in AllLevelNodes)
             {
-                if (n.GridPosition.x == 5 || n.GridPosition.x == 6)
+                if (n.GridPosition.x == 2 || n.GridPosition.x == 3)
                 {
                     nodes.Add(n);
                 }

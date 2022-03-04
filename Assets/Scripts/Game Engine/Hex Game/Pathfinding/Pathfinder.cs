@@ -299,7 +299,6 @@ namespace HexGameEngine.Pathfinding
         {
             var edges = GetGraphEdges(character, cells);
             var paths = dijikstra.FindAllPaths(edges, start);
-           // Debug.Log("GetDijisktraPaths() paths found: " + paths.Count.ToString());
             return paths;
         }
        
@@ -308,6 +307,90 @@ namespace HexGameEngine.Pathfinding
     }
     class DPathfinder : IPathfinding
     {
+        public Dictionary<LevelNode, List<LevelNode>> FindAllPaths(Dictionary<LevelNode, Dictionary<LevelNode, float>> edges, LevelNode originNode)
+        {
+            IPriorityQueue<LevelNode> frontier = new HeapPriorityQueue<LevelNode>();
+            frontier.Enqueue(originNode, 0);
+
+            Dictionary<LevelNode, LevelNode> cameFrom = new Dictionary<LevelNode, LevelNode>();
+            cameFrom.Add(originNode, default(LevelNode));
+            Dictionary<LevelNode, float> costSoFar = new Dictionary<LevelNode, float>();
+            costSoFar.Add(originNode, 0);
+
+            while (frontier.Count != 0)
+            {
+                var current = frontier.Dequeue();
+                var neighbours = GetNeigbours(edges, current);
+                foreach (var neighbour in neighbours)
+                {
+                    var newCost = costSoFar[current] + edges[current][neighbour];
+                    if (!costSoFar.ContainsKey(neighbour) || newCost < costSoFar[neighbour])
+                    {
+                        costSoFar[neighbour] = newCost;
+                        cameFrom[neighbour] = current;
+                        frontier.Enqueue(neighbour, newCost);
+                    }
+                }
+            }
+
+            Dictionary<LevelNode, List<LevelNode>> paths = new Dictionary<LevelNode, List<LevelNode>>();
+            foreach (LevelNode destination in cameFrom.Keys)
+            {
+                List<LevelNode> path = new List<LevelNode>();
+                var current = destination;
+                while (!current.Equals(originNode))
+                {
+                    path.Add(current);
+                    current = cameFrom[current];
+                }
+                paths.Add(destination, path);
+            }
+            return paths;
+        }
+        public override List<T> FindPath<T>(Dictionary<T, Dictionary<T, float>> edges, T originNode, T destinationNode)
+        {
+            IPriorityQueue<T> frontier = new HeapPriorityQueue<T>();
+            frontier.Enqueue(originNode, 0);
+
+            Dictionary<T, T> cameFrom = new Dictionary<T, T>();
+            cameFrom.Add(originNode, default(T));
+            Dictionary<T, float> costSoFar = new Dictionary<T, float>();
+            costSoFar.Add(originNode, 0);
+
+            while (frontier.Count != 0)
+            {
+                var current = frontier.Dequeue();
+                var neighbours = GetNeigbours(edges, current);
+                foreach (var neighbour in neighbours)
+                {
+                    var newCost = costSoFar[current] + edges[current][neighbour];
+                    if (!costSoFar.ContainsKey(neighbour) || newCost < costSoFar[neighbour])
+                    {
+                        costSoFar[neighbour] = newCost;
+                        cameFrom[neighbour] = current;
+                        frontier.Enqueue(neighbour, newCost);
+                    }
+                }
+                if (current.Equals(destinationNode)) break;
+            }
+            List<T> path = new List<T>();
+            if (!cameFrom.ContainsKey(destinationNode))
+                return path;
+
+            path.Add(destinationNode);
+            var temp = destinationNode;
+
+            while (!cameFrom[temp].Equals(originNode))
+            {
+                var currentPathElement = cameFrom[temp];
+                path.Add(currentPathElement);
+
+                temp = currentPathElement;
+            }
+
+            return path;
+        }
+        /*
         public Dictionary<LevelNode, List<LevelNode>> FindAllPaths(Dictionary<LevelNode, Dictionary<LevelNode, float>> edges, LevelNode originNode)
         {
             IPriorityQueue<LevelNode> frontier = new HeapPriorityQueue<LevelNode>();
@@ -360,7 +443,7 @@ namespace HexGameEngine.Pathfinding
                     n.PrintGridPosition();
                 }
             }
-            */
+            
             return paths;
         }
         public override List<T> FindPath<T>(Dictionary<T, Dictionary<T, float>> edges, T originNode, T destinationNode)
@@ -410,6 +493,7 @@ namespace HexGameEngine.Pathfinding
         {
             return a.GetDistance(b);
         }
+        */
     }
 
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace HexGameEngine.HexTiles
 {
-    public class LevelNode : Square
+    public class LevelNode : Hexagon
     {
         // Components + Properties
         #region
@@ -40,10 +40,12 @@ namespace HexGameEngine.HexTiles
         private void Start()
         {
             _offsetCoord = gridPosition;
+            HexGridType = HexGridType.odd_q;
         }
         private void OnEnable()
         {
             _offsetCoord = gridPosition;
+            HexGridType = HexGridType.odd_q;
         }
         public Vector2 GridPosition
         {
@@ -61,7 +63,9 @@ namespace HexGameEngine.HexTiles
                 neighbourNodes = new List<LevelNode>();
                 foreach (var direction in _directions)
                 {
-                    var neighbour = otherHexs.Find(c => c.GridPosition == GridPosition + direction);
+                    Vector2 dir = direction;
+                    var neighbour = otherHexs.Find(c => c.OffsetCoord == CubeToOffsetCoords(CubeCoord + direction));
+                    //var neighbour = otherHexs.Find(c => c.GridPosition == GridPosition + dir);
                     if (neighbour == null) continue;
 
                     neighbourNodes.Add(neighbour);
@@ -74,12 +78,19 @@ namespace HexGameEngine.HexTiles
         {
             get { return 2; }
         }
+        /*
         public int Distance(LevelNode other)
         {
             int yDif = (int) Mathf.Abs(gridPosition.y - other.gridPosition.y);
             int xDif = (int) Mathf.Abs(gridPosition.x - other.gridPosition.x);
             if (xDif > yDif) return xDif;
             else return yDif;
+        }
+        */
+        public int Distance(LevelNode other)
+        {
+            return (int)(Mathf.Abs(CubeCoord.x - other.CubeCoord.x) + Mathf.Abs(CubeCoord.y - other.CubeCoord.y) +
+                Mathf.Abs(CubeCoord.z - other.CubeCoord.z)) / 2;
         }
         #endregion
 
