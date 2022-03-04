@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
+  m_Name: Brigand Assassin
+  m_EditorClassIdentifier: 
+  myName: Brigand Assassin
+  race: 1
+  modelSize: 0
+  xpReward: 10
+  attributeSheet:
+    strength: 0
+    intelligence: 0
+    constitution: 0
+    dodge: 15
+    accuracy: 0
+    resolve: 5
+    wits: 5
+    maxHealth: 0
+    stamina: 4
+    maxEnergy: 4
+    initiative: 3
+    criticalChance: 5
+    criticalModifier: 50
+    auraSize: 1
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+  randomizeHealth: 1
+  lowerHealthLimit: 50
+  upperHealthLimit: 55
+  aiTurnRoutine:
+    directives:
+    - requirements: []
+      action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Cheap Shot
+    - requirements: []
+      action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Puncture
+    - requirements: []
+      action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Shank
+    - requirements: []
+      action:
+        actionType: 2
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: 
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
+  serializedPassiveManager:
+    perks:
+    - perkTag: 77
+      stacks: 3
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  modelParts:
+  - Human_Chest
+  - Human_Face_1
+  - Human_Head_1
+  - Human_Right_Arm
+  - Human_Right_Hand
+  - Human_Right_Leg
+  - Demon_Mask_Head_Wear
+  - Barbarian_Chest_Wear
+  - Left_Hand_Serated_Sword_2H

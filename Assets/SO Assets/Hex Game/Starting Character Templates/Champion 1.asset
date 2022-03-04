@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fc18e607558964b9506f2b2cdb1260, type: 3}
+  m_Name: Champion 1
+  m_EditorClassIdentifier: 
+  myName: Ragnar
+  myClassName: Champion
+  race: 1
+  modelSize: 0
+  attributeSheet:
+    strength: 0
+    intelligence: 0
+    constitution: 0
+    dodge: 0
+    accuracy: 75
+    resolve: 0
+    wits: 0
+    maxHealth: 100
+    stamina: 4
+    maxEnergy: 6
+    initiative: 5
+    criticalChance: 5
+    criticalModifier: 50
+    auraSize: 1
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: d7f2a84d3e2517244b6dfd8e1cf54539, type: 2}
+    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
+    - {fileID: 11400000, guid: 1d653fb7e4e89d448bae7106e8b49b73, type: 2}
+  serializedPassiveManager:
+    perks:
+    - perkTag: 19
+      stacks: 1
+  modelParts:
+  - Human_Chest
+  - Human_Face_1
+  - Human_Head_1
+  - Human_Right_Arm
+  - Human_Right_Hand
+  - Human_Right_Leg
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: bcda3a1ec0dfdfe469dfdd16aabf8736, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  talentPairings:
+  - talentSchool: 2
+    level: 1
+  - talentSchool: 5
+    level: 1

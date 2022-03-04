@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
+  m_Name: Reinforced Kite Shield
+  m_EditorClassIdentifier: 
+  itemSprite: {fileID: 21300000, guid: 1f0a7ec39de6af74c8d35ba37e729c2e, type: 3}
+  itemName: Reinforced Kite Shield
+  itemDescription: 'Place holder item description. Place holder item description. '
+  itemType: 3
+  rarity: 2
+  lootable: 1
+  includeInLibrary: 1
+  weaponClass: 9
+  handRequirement: 0
+  allowedSlot: 1
+  injuryTypesCaused: 02000000
+  grantedAbilities:
+  - {fileID: 11400000, guid: b503794611246a24ab47b71e16c0eeba, type: 2}
+  itemEffectSets:
+  - possibleEffects:
+    - effectType: 1
+      attributeModified: 8
+      modAmount: 10
+      perkGained:
+        perkTag: 0
+        passiveStacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+    - effectType: 1
+      attributeModified: 9
+      modAmount: 10
+      perkGained:
+        perkTag: 0
+        passiveStacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+    - effectType: 1
+      attributeModified: 10
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        passiveStacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+    - effectType: 1
+      attributeModified: 11
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        passiveStacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+    - effectType: 1
+      attributeModified: 4
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        passiveStacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+    - effectType: 1
+      attributeModified: 5
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        passiveStacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+    - effectType: 1
+      attributeModified: 1
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        passiveStacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0

@@ -1,0 +1,89 @@
+﻿Version 1.0
+Initial release
+
+Version 1.0.1
+-Added a GridGeneratorHelper script that extends the inspector and allows to generate and clear grids by pressing a button.
+-Added a CustomUnitGenerator script that extends the inspector and allows to snap manually placed units to grid by pressing a button.
+-Added a CustomObstacleGenerator script that extends the inspector and allows to snap manually placed obstacles to grid by pressing a button.
+-Added a IsUnitAttackable method to the Unit class.
+
+-Removed the CustomCellGridGenerator script. It is no longer necessary.
+
+-Modified the CellGridStateUnitSelected to make use of IsUnitAttackable method.
+-Modified the NaiveAiPlayer to make use of IsUnitAttackable method.
+-Modified the Hexagon prefab that can be found in Prefabs/Example1 folder. The previous version was broken.
+-Modified (just a little) the folder structure of the project. The previous structure was confusing to navigate.
+
+-Updated the documentation to reflect changes made in this release.
+
+Version 1.1
+-Improved pathfinding performance.
+-Improved CellGridStateUnitSelected performance.
+
+-Added Grid Helper inspector that facilitates the process of generating basic scene structure.
+-Added Initialize method to CellGrid.
+-Added UnitAdded event to CellGrid.
+
+-Modified grid generation - generating grids across XZ plane.
+-Modified the Hexagon prefab that can be found in Prefabs/Example1 folder. The new prefab consists of a single hexagon mesh instead of six cubes.
+
+-Revised and upgraded comments on the code.
+-Updated the documentation to reflect changes made in this release.
+
+Version 1.1.1
+-Added information about names of missing parameters in Grid Helper.
+
+-Fixed a bug where Grid Helper faultily displayed information about missing parameters.
+-Fixed a bug where unreachable cells might have been highlighted as reachable.
+
+Version 1.1.2
+-Added FAQ
+-Added forum thread at https://forum.unity.com/threads/turn-based-strategy-framework.704129/
+
+-Removed obsolete code for loading scenes
+
+-Fixed a bug in AddUnit method where unit was not added to Unit list
+-Fixed a bug in GUIController where pressing 'n' multiple times could interrupt AI turn
+-Fixed layers in ExampleScene4
+-Fixed GUI elements in ExampleScene5
+
+Version 2.0
+-Added Tile Painter custom editor
+-Added Unit Painter custom editor
+-Added Prefab Helper custom editor
+-Added CameraController script
+-Added default value to MovementCost in Unit script
+-Added default value to ActionPoints in Unit script
+-Added default value to nHumanPlayers in GridHelper script
+-Added OnMoveFinished method to Unit script
+-Added CurrentUnit field to Cell script
+-Added new example scene
+-Added readme to example scenes
+-Added namespaces to code
+
+-Removed BreadthFirstSearch script
+-Removed GreedyBestFirstSearch script
+-Removed ListPriorityQueue script
+-Removed CustomObstacleGenerator script
+
+-Modified folder structure of the project for easier navigation
+-Changed MovementCost type to float
+-Changed ActionPoints type to float
+-Changed MovementSpeed to MovementAnimationSpeed
+-Changed MovementPoints to be accessible with getter
+-Changed ActionPoints to be accessible with getter
+
+-Maintaining cell prefab link when generating map
+-Centering camera on generated grid
+-Cell prefab is in XY plane now
+
+-Split DealDamage into AttackHandler, DealDamage and AttackActionPerformed methods
+-Split Defend into DefenceHandler, Defend and DefenceActionPerformed methods
+
+Version 2.0.1
+-Added Game state management chapter to project documentation
+-Added compatibility with Unity 2020
+
+-Merged CellGridStateAiTurn, CellGridStateGameOver and CellGridStateTurnChanging scripts into CellGridStateBlockInput script
+
+-Removed package manager dependencies from the project

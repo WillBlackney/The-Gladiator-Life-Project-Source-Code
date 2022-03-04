@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9edb0cd5414864bae8560f53b9599e, type: 3}
+  m_Name: Volatile
+  m_EditorClassIdentifier: 
+  passiveSprite: {fileID: 21300000, guid: 9c328861c70e8bd46ab825061cd38a03, type: 3}
+  passiveName: Volatile
+  passiveDescription:
+  - color: 1
+    getPhraseFromCardValue: 0
+    cardEffectType: 0
+    phrase: 'When this character dies, it deals '
+  - color: 2
+    getPhraseFromCardValue: 0
+    cardEffectType: 0
+    phrase: 'X '
+  - color: 4
+    getPhraseFromCardValue: 0
+    cardEffectType: 0
+    phrase: 'Physical '
+  - color: 1
+    getPhraseFromCardValue: 0
+    cardEffectType: 0
+    phrase: damage to all enemies.
+  showStackCount: 1
+  hiddenOnPassivePanel: 0
+  runeBlocksIncrease: 0
+  runeBlocksDecrease: 0

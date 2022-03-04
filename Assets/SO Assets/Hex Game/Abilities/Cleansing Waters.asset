@@ -1,0 +1,342 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c332a1f403e665468640b734668f781, type: 3}
+  m_Name: Cleansing Waters
+  m_EditorClassIdentifier: 
+  abilityName: Cleansing Waters
+  includeInGame: 1
+  baseAbilityDescription: Give an ally 1 Block and remove Burning, Bleeding and Poisoned.
+  abilitySprite: {fileID: 21300000, guid: 4131713cd1d11d54aa11c32344e1c8d8, type: 3}
+  energyCost: 1
+  baseCooldown: 2
+  abilityType: 1
+  doesNotBreakStealth: 0
+  weaponRequirement: 0
+  derivedFromWeapon: 0
+  weaponAbilityType: 0
+  weaponClass: 0
+  targetRequirement: 1
+  secondaryTargetRequirement: 0
+  rangeFromTarget: 0
+  talentRequirementData:
+    talentSchool: 13
+    level: 1
+  abilitySubRequirements: []
+  baseRange: 2
+  hitChanceModifier: 0
+  accuracyPenaltyFromMelee: 0
+  abilityEffects:
+  - effectType: 10
+    stressEventData:
+      stressAmountMin: 0
+      stressAmountMax: 0
+      successChance: 0
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart:
+    - eventType: 2
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 4
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    - eventType: 3
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 14
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 2
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish:
+    - eventType: 6
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0.5
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    ignoresBlock: 0
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 74
+      passiveStacks: 1
+    perkApplicationChance: 100
+    knockBackDistance: 0
+  - effectType: 18
+    stressEventData:
+      stressAmountMin: 0
+      stressAmountMax: 0
+      successChance: 0
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements:
+    - requirementType: 2
+      perk: 1
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish:
+    - eventType: 6
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0.5
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    ignoresBlock: 0
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 1
+      passiveStacks: 0
+    perkApplicationChance: 100
+    knockBackDistance: 0
+  - effectType: 18
+    stressEventData:
+      stressAmountMin: 0
+      stressAmountMax: 0
+      successChance: 0
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements:
+    - requirementType: 2
+      perk: 7
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish:
+    - eventType: 6
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0.5
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    ignoresBlock: 0
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 7
+      passiveStacks: 0
+    perkApplicationChance: 100
+    knockBackDistance: 0
+  - effectType: 18
+    stressEventData:
+      stressAmountMin: 0
+      stressAmountMax: 0
+      successChance: 0
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements:
+    - requirementType: 2
+      perk: 80
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish:
+    - eventType: 6
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0.5
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    ignoresBlock: 0
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 80
+      passiveStacks: 0
+    perkApplicationChance: 100
+    knockBackDistance: 0
+  onHitEffects: []
+  onPerkAppliedSuccessEffects: []
+  onCollisionEffects: []
+  chainLoops: 0
+  chainedEffects: []
+  dynamicDescription:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Give an ally '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '1 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Block '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and remove '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Burning
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Bleeding '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Poisoned
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
+  keyWords:
+  - kewWordType: 5
+    passiveType: 0
+  - kewWordType: 1
+    passiveType: 74
+  - kewWordType: 1
+    passiveType: 1
+  - kewWordType: 1
+    passiveType: 7
+  - kewWordType: 1
+    passiveType: 80

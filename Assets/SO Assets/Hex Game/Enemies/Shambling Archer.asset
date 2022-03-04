@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
+  m_Name: Shambling Archer
+  m_EditorClassIdentifier: 
+  myName: Shambling Skeleton
+  race: 3
+  modelSize: 0
+  xpReward: 10
+  attributeSheet:
+    strength: 0
+    intelligence: 0
+    constitution: 0
+    dodge: 5
+    accuracy: 80
+    resolve: 10
+    wits: 0
+    maxHealth: 0
+    stamina: 4
+    maxEnergy: 4
+    initiative: 5
+    criticalChance: 15
+    criticalModifier: 50
+    auraSize: 1
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+  randomizeHealth: 1
+  lowerHealthLimit: 70
+  upperHealthLimit: 75
+  aiTurnRoutine:
+    directives:
+    - requirements: []
+      action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Plink
+    - requirements: []
+      action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Steady Shot
+    - requirements: []
+      action:
+        actionType: 3
+        targettingPriority: 1
+        getRangeFromAbility: 1
+        range: 0
+        abilityName: Steady Shot
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: 96c24683940f0c84ab3b141cd96b29b9, type: 2}
+    - {fileID: 11400000, guid: d7093f1ed4669bd4c86796356559460c, type: 2}
+  serializedPassiveManager:
+    perks:
+    - perkTag: 24
+      stacks: 1
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: c420762d59a4b8f4788afabeee27eb35, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  modelParts:
+  - Undead_Head_1
+  - Undead_Face_2
+  - Undead_Chest
+  - Undead_Right_Arm
+  - Undead_Right_Hand
+  - Undead_Left_Arm
+  - Undead_Left_Hand
+  - Undead_Right_Leg
+  - Undead_Left_Leg
+  - Grey_Archer_Vest_Chest_Wear
+  - Archer_Helmet_Head_Wear
+  - Left_Hand_Simple_Bow

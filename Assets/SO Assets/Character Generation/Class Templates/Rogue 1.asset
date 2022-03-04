@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad4f6f3ac19f3b24389408288d63c16e, type: 3}
+  m_Name: Rogue 1
+  m_EditorClassIdentifier: 
+  templateName: Rogue
+  possibleRaces: 01000000040000000300000006000000050000000700000002000000
+  possibleDecks:
+  - {fileID: 11400000, guid: 94e9579e154f8334da161df92438c3d2, type: 2}
+  - {fileID: 11400000, guid: 55fd3de242ac6ff45b6860f55667436b, type: 2}
+  - {fileID: 11400000, guid: 3328c89bedbf0e549bbdd715820084ad, type: 2}
+  possibleOutfits:
+  - {fileID: 11400000, guid: 6e0b14d023449bb47a2c3fbea7404558, type: 2}
+  - {fileID: 11400000, guid: a36274bd0a2ff9a47a5e5225441953b8, type: 2}
+  possibleWeapons:
+  - mainHandItem: {fileID: 11400000, guid: b441e018b9d907a49b6f8e74e5b0e065, type: 2}
+    offHandItem: {fileID: 11400000, guid: b441e018b9d907a49b6f8e74e5b0e065, type: 2}
+    trinketOne: {fileID: 0}
+    trinketTwo: {fileID: 0}
+    trinketThree: {fileID: 0}
+  - mainHandItem: {fileID: 11400000, guid: 62a9acf524030624ea3db6b23448dd47, type: 2}
+    offHandItem: {fileID: 11400000, guid: 62a9acf524030624ea3db6b23448dd47, type: 2}
+    trinketOne: {fileID: 0}
+    trinketTwo: {fileID: 0}
+    trinketThree: {fileID: 0}
+  strengthMod: 2
+  intelligenceMod: 0
+  dexterityMod: 0
+  witsMod: 0
+  constitutionMod: 2
+  maxHealth: 90
+  talentPairings:
+  - talentSchool: 3
+    talentLevel: 1
+  - talentSchool: 12
+    talentLevel: 1

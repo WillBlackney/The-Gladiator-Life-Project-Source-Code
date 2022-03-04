@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c332a1f403e665468640b734668f781, type: 3}
+  m_Name: Intimidating Shout
+  m_EditorClassIdentifier: 
+  abilityName: Intimidating Shout
+  includeInGame: 1
+  baseAbilityDescription: Apply 2 Vulnerable to all enemies within your Aura.
+  abilitySprite: {fileID: 21300000, guid: 46aa60f2e8fa48c4bb842d6628dee45e, type: 3}
+  energyCost: 2
+  baseCooldown: 3
+  abilityType: 1
+  doesNotBreakStealth: 0
+  weaponRequirement: 0
+  derivedFromWeapon: 0
+  weaponAbilityType: 0
+  weaponClass: 0
+  targetRequirement: 0
+  secondaryTargetRequirement: 0
+  rangeFromTarget: 0
+  talentRequirementData:
+    talentSchool: 2
+    level: 1
+  abilitySubRequirements: []
+  baseRange: 0
+  hitChanceModifier: 0
+  accuracyPenaltyFromMelee: 0
+  abilityEffects:
+  - effectType: 12
+    stressEventData:
+      stressAmountMin: 0
+      stressAmountMax: 0
+      successChance: 0
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart:
+    - eventType: 2
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 4
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    visualEventsOnHit:
+    - eventType: 3
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 15
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 2
+    visualEventsOnEffectFinish: []
+    aoeType: 2
+    includeCentreTile: 0
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 1
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    ignoresBlock: 0
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 48
+      passiveStacks: 2
+    perkApplicationChance: 100
+    knockBackDistance: 0
+  onHitEffects: []
+  onPerkAppliedSuccessEffects: []
+  onCollisionEffects: []
+  chainLoops: 0
+  chainedEffects: []
+  dynamicDescription:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Apply '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '2 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Vulnerable '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'to all enemies within your '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Aura
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
+  keyWords:
+  - kewWordType: 5
+    passiveType: 0
+  - kewWordType: 1
+    passiveType: 48
+  - kewWordType: 6
+    passiveType: 0

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94acc2d915f047f41b5532a31dacba5d, type: 3}
+  m_Name: Toke
+  m_EditorClassIdentifier: 
+  activitySprite: {fileID: -3267242511693967257, guid: d441413972d34ce42ab88fc3aa9fb597,
+    type: 3}
+  activityName: Toke
+  activityCost: 1
+  effects:
+  - effectType: 2
+    requirements: 0100000004000000
+    restoreType: 1
+    flatHealthRestored: 20
+    healthPercentageRestored: 35
+    stressRemoved: 20
+  dynamicDescription:
+  - color: 0
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Remove '
+  - color: 0
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '20 '
+  - color: 0
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Stress
+  - color: 0
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: from target character.

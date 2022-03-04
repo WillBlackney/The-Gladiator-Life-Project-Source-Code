@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad4f6f3ac19f3b24389408288d63c16e, type: 3}
+  m_Name: Juggernaut 1
+  m_EditorClassIdentifier: 
+  templateName: Juggernaut
+  possibleRaces: 080000000200000003000000010000000600000007000000
+  possibleDecks:
+  - {fileID: 11400000, guid: e2b3c0c97212aaa45926454aab3b477d, type: 2}
+  - {fileID: 11400000, guid: 5d732e076c9f9584783a2c3a0fc39e4b, type: 2}
+  - {fileID: 11400000, guid: b78e3f7195beec74ba4601055122e152, type: 2}
+  - {fileID: 11400000, guid: 826acd3f077c03745bad084203179dd6, type: 2}
+  possibleOutfits:
+  - {fileID: 11400000, guid: c07bc0bac5e41f447a06cee4c710ab9b, type: 2}
+  possibleWeapons:
+  - mainHandItem: {fileID: 11400000, guid: e561792383921474c9710a3ebc1add23, type: 2}
+    offHandItem: {fileID: 11400000, guid: a49466273aff6954d8e0303879ded604, type: 2}
+    trinketOne: {fileID: 0}
+    trinketTwo: {fileID: 0}
+    trinketThree: {fileID: 0}
+  - mainHandItem: {fileID: 11400000, guid: 62a9acf524030624ea3db6b23448dd47, type: 2}
+    offHandItem: {fileID: 11400000, guid: a49466273aff6954d8e0303879ded604, type: 2}
+    trinketOne: {fileID: 0}
+    trinketTwo: {fileID: 0}
+    trinketThree: {fileID: 0}
+  strengthMod: 0
+  intelligenceMod: 0
+  dexterityMod: 3
+  witsMod: 0
+  constitutionMod: 1
+  maxHealth: 90
+  talentPairings:
+  - talentSchool: 5
+    talentLevel: 2

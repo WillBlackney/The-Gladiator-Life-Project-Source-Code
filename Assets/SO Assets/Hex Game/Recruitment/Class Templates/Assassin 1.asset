@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eaa51bbd3588a643aa1c5b44ef5d003, type: 3}
+  m_Name: Assassin 1
+  m_EditorClassIdentifier: 
+  templateName: Assassin
+  possibleRaces: 03000000050000000600000007000000
+  possibleAbilities:
+  - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
+  - {fileID: 11400000, guid: 36a0268a5ac37d742960a07bfe17be42, type: 2}
+  - {fileID: 11400000, guid: e270d32e998f6e34fa639b54342d93e8, type: 2}
+  - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
+  - {fileID: 11400000, guid: f2990956e456afa46af43accbd061445, type: 2}
+  possibleOutfits:
+  - {fileID: 11400000, guid: 2b1b9f474621d8045a4fc7b5259e904a, type: 2}
+  - {fileID: 11400000, guid: bfc2b7d5050ca944882c6d6cb9fd8e69, type: 2}
+  - {fileID: 11400000, guid: 23cbe950d3e366d419710f97a44987d6, type: 2}
+  - {fileID: 11400000, guid: c8812ca2ce121b94185523df2dc62009, type: 2}
+  possibleWeapons:
+  - mainHandItem: {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+  strengthMod: 0
+  intelligenceMod: 0
+  accuracyMod: 0
+  dodgeMod: 0
+  resolveMod: 0
+  constitutionMod: 0
+  witsMod: 0
+  talentPairings:
+  - talentSchool: 3
+    level: 2

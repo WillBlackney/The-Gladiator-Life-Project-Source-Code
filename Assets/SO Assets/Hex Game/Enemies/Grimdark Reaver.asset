@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
+  m_Name: Grimdark Reaver
+  m_EditorClassIdentifier: 
+  myName: Grimdark Reaver
+  race: 1
+  modelSize: 0
+  xpReward: 15
+  attributeSheet:
+    strength: 0
+    intelligence: 0
+    constitution: 0
+    dodge: 0
+    accuracy: 75
+    resolve: 20
+    wits: 0
+    maxHealth: 100
+    stamina: 4
+    maxEnergy: 4
+    initiative: 5
+    criticalChance: 5
+    criticalModifier: 50
+    auraSize: 1
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+  randomizeHealth: 1
+  lowerHealthLimit: 90
+  upperHealthLimit: 95
+  aiTurnRoutine:
+    directives:
+    - requirements:
+      - requirementType: 6
+        range: 0
+        perkPairing:
+          perkTag: 3
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 2
+        energyReq: 0
+      action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Headbutt
+    - requirements: []
+      action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Rend
+    - requirements: []
+      action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Strike
+    - requirements: []
+      action:
+        actionType: 2
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: 
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: 8d56902a3c9804a4fbff21b2ffa15e0b, type: 2}
+    - {fileID: 11400000, guid: f3ee4d9a3cf799d4eb1ba07249d0aab7, type: 2}
+    - {fileID: 11400000, guid: 5da6171d9b5a21b47b2adc4c680a46c2, type: 2}
+  serializedPassiveManager:
+    perks: []
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  modelParts:
+  - Human_Chest
+  - Human_Face_1
+  - Human_Head_1
+  - Human_Right_Arm
+  - Human_Right_Hand
+  - Human_Right_Leg
+  - Demon_Mask_Head_Wear
+  - Barbarian_Chest_Wear
+  - Left_Hand_Serated_Sword_2H

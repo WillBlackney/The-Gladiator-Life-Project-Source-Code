@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
+  m_Name: Ravenous Ghoul
+  m_EditorClassIdentifier: 
+  myName: Ravenous Ghoul
+  race: 3
+  modelSize: 0
+  xpReward: 8
+  attributeSheet:
+    strength: 0
+    intelligence: 0
+    constitution: 0
+    dodge: 0
+    accuracy: 0
+    resolve: 5
+    wits: 5
+    maxHealth: 0
+    stamina: 4
+    maxEnergy: 4
+    initiative: 5
+    criticalChance: 5
+    criticalModifier: 50
+    auraSize: 1
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+  randomizeHealth: 1
+  lowerHealthLimit: 45
+  upperHealthLimit: 50
+  aiTurnRoutine:
+    directives:
+    - requirements:
+      - requirementType: 9
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 0
+        healthPercentage: 50
+        enemiesInMeleeRange: 1
+        energyReq: 0
+      action:
+        actionType: 1
+        targettingPriority: 0
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Feast
+    - requirements: []
+      action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Bite
+    - requirements: []
+      action:
+        actionType: 2
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: 
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: 37337f2c0e477084d89556a9bfb4a04a, type: 2}
+    - {fileID: 11400000, guid: 1f930ab22680469408549be930c7c677, type: 2}
+  serializedPassiveManager:
+    perks:
+    - perkTag: 71
+      stacks: 1
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 3a500198396fb49449c175b9490a8009, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  modelParts:
+  - Undead_Head_4
+  - Undead_Face_6
+  - Ghoul_Chest
+  - Ghoul_Right_Leg

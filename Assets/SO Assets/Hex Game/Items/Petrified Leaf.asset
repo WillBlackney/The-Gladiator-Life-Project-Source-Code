@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
+  m_Name: Petrified Leaf
+  m_EditorClassIdentifier: 
+  itemSprite: {fileID: 21300000, guid: 94e13edd84af7d74b8187293c2c8f8bd, type: 3}
+  itemName: Petrified Leaf
+  itemDescription: 'Place holder item description. Place holder item description. '
+  itemType: 4
+  rarity: 2
+  lootable: 1
+  includeInLibrary: 1
+  weaponClass: 0
+  handRequirement: 0
+  allowedSlot: 0
+  injuryTypesCaused: 
+  grantedAbilities: []
+  itemEffectSets:
+  - possibleEffects:
+    - effectType: 2
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 122
+        stacks: 2
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0

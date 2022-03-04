@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
+  m_Name: Brigand Rogue
+  m_EditorClassIdentifier: 
+  myName: Brigand Rogue
+  race: 1
+  modelSize: 0
+  xpReward: 10
+  attributeSheet:
+    strength: 0
+    intelligence: 0
+    constitution: 0
+    dodge: 15
+    accuracy: 0
+    resolve: 5
+    wits: 5
+    maxHealth: 0
+    stamina: 4
+    maxEnergy: 4
+    initiative: 3
+    criticalChance: 5
+    criticalModifier: 50
+    auraSize: 1
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+  randomizeHealth: 1
+  lowerHealthLimit: 60
+  upperHealthLimit: 65
+  aiTurnRoutine:
+    directives:
+    - requirements: []
+      action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Throwing Knife
+    - requirements:
+      - requirementType: 8
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 0
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+      action:
+        actionType: 3
+        targettingPriority: 1
+        getRangeFromAbility: 1
+        range: 0
+        abilityName: Throwing Knife
+    - requirements:
+      - requirementType: 2
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 0
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+      - requirementType: 3
+        range: 0
+        perkPairing:
+          perkTag: 74
+          passiveStacks: 3
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+      action:
+        actionType: 1
+        targettingPriority: 0
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Parry
+    - requirements: []
+      action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Slash
+    - requirements: []
+      action:
+        actionType: 2
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: 
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: f2990956e456afa46af43accbd061445, type: 2}
+  serializedPassiveManager:
+    perks: []
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  modelParts:
+  - Shadow_Blade_Chest_Wear
+  - Shadow_Blade_Right_Hand_Wear
+  - Shadow_Blade_Right_Arm_Wear
+  - Shadow_Blade_Right_Leg_Wear
+  - Human_Face_1
+  - Human_Head_7
+  - Red_Face_Mask_Head_Wear

@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
+  m_Name: Orc Berserker
+  m_EditorClassIdentifier: 
+  myName: Orc Berserker
+  race: 2
+  modelSize: 2
+  xpReward: 20
+  attributeSheet:
+    strength: 20
+    intelligence: 0
+    constitution: 0
+    dodge: 0
+    accuracy: 10
+    resolve: 10
+    wits: 5
+    maxHealth: 0
+    stamina: 4
+    maxEnergy: 4
+    initiative: 6
+    criticalChance: 5
+    criticalModifier: 50
+    auraSize: 1
+    physicalResistance: 25
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+  randomizeHealth: 1
+  lowerHealthLimit: 120
+  upperHealthLimit: 130
+  aiTurnRoutine:
+    directives:
+    - requirements:
+      - requirementType: 2
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 0
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+      - requirementType: 10
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 0
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 3
+      action:
+        actionType: 1
+        targettingPriority: 2
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Enrage
+    - requirements:
+      - requirementType: 2
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 0
+        healthPercentage: 0
+        enemiesInMeleeRange: 2
+        energyReq: 0
+      action:
+        actionType: 1
+        targettingPriority: 2
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Cleave
+    - requirements:
+      - requirementType: 7
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 0
+        healthPercentage: 95
+        enemiesInMeleeRange: 1
+        energyReq: 0
+      action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Decapitate
+    - requirements: []
+      action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Big Chop
+    - requirements: []
+      action:
+        actionType: 2
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: 
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
+    - {fileID: 11400000, guid: 90e62be2d401c2f4383195876bbc8ff5, type: 2}
+  serializedPassiveManager:
+    perks:
+    - perkTag: 86
+      stacks: 1
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  modelParts:
+  - Orc_Head_1
+  - Orc_Face_7
+  - Orc_Chest
+  - Orc_Right_Arm
+  - Orc_Right_Hand
+  - Orc_Left_Arm
+  - Orc_Left_Hand
+  - Orc_Right_Leg
+  - Orc_Left_Leg
+  - Barbarian_Chest_Wear
+  - Left_Hand_Simple_Battle_Axe

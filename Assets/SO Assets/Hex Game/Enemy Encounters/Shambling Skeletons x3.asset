@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8ad5d7c5edf914b8061f29d31b419f, type: 3}
+  m_Name: Shambling Skeletons x3
+  m_EditorClassIdentifier: 
+  encounterName: Shambling Skeletons
+  baseXpReward: 25
+  difficulty: 0
+  enemyGroups:
+  - possibleEnemies:
+    - {fileID: 11400000, guid: 0458651f3f9d4394f8a41badae3a6019, type: 2}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: fcb0c292f7664bd489a4192f764ac573, type: 2}
+    - {fileID: 11400000, guid: 9f593af19ea914c4197092adba7918b7, type: 2}
+    - {fileID: 11400000, guid: c821c0b02eb8ba94db4a4d700ceed222, type: 2}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: 2d44f38c5294aba4fac79435d4995daa, type: 2}
+    - {fileID: 11400000, guid: 411174cc1d7978540b2f5a815fed0c00, type: 2}
+    - {fileID: 11400000, guid: e3ce9db1838c75540a91d606ea551494, type: 2}
+    - {fileID: 11400000, guid: c821c0b02eb8ba94db4a4d700ceed222, type: 2}

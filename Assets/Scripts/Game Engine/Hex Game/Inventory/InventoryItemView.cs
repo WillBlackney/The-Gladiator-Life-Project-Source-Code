@@ -1,0 +1,211 @@
+﻿using HexGameEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using HexGameEngine.Audio;
+using DG.Tweening;
+using HexGameEngine.UCM;
+
+namespace HexGameEngine.Items
+{
+    public class InventoryItemView : MonoBehaviour
+    {
+        // Properties + Components
+        #region
+        [Header("Ability Book Components")]
+        [SerializeField] private GameObject bookVisualParent;
+        [SerializeField] private Image bookImage;
+
+        [Header("Item Components")]
+        [SerializeField] private GameObject weaponVisualParent;
+        [SerializeField] private Image weaponImage;
+        [SerializeField] private Image rarityOutline;
+
+        private InventoryItem myItemRef;
+        public static InventoryItemView itemDragged { get; private set; }
+
+        // Drag values
+        [HideInInspector] public bool currentlyBeingDragged = false;
+        private Canvas dragCanvas;
+        private RectTransform dragTransform;
+        #endregion
+
+        // Getters + Accessors
+        #region
+        public GameObject BookVisualParent
+        {
+            get { return bookVisualParent; }
+        }
+        public Image BookImage
+        {
+            get { return bookImage; }
+        }
+        public GameObject WeaponVisualParent
+        {
+            get { return weaponVisualParent; }
+        }
+        public Image WeaponImage
+        {
+            get { return weaponImage; }
+        }
+        public Image RarityOutline
+        {
+            get { return rarityOutline; }
+        }
+        public InventoryItem MyItemRef
+        {
+            get { return myItemRef; }
+        }
+        #endregion
+
+        // Input
+        #region
+        public void Click()
+        {
+            Debug.Log("InventoryItemView.Click()");
+            InventoryController.Instance.OnItemViewClicked(this);
+        }
+        public void MouseEnter()
+        {          
+            Debug.Log("InventoryItemView.MouseEnter()");
+            if (itemDragged != null) return;
+            if (MyItemRef.abilityData != null)
+                AbilityPopupController.Instance.OnAbilityBookItemMousedOver(this);
+            if (MyItemRef.itemData != null)
+            {
+                ItemPopupController.Instance.OnInventoryItemMousedOver(this);
+            }
+        }
+        public void MouseExit()
+        {
+            Debug.Log("InventoryItemView.MouseExit()");
+            if (itemDragged != null) return;
+            AbilityPopupController.Instance.HidePanel();
+            ItemPopupController.Instance.HidePanel();
+        }
+        #endregion
+
+        // Drag Logic
+        #region
+        private void OnMouseUp()
+        {
+            if (currentlyBeingDragged)
+            {
+                currentlyBeingDragged = false;
+                itemDragged = null;
+
+                // Stop dragging SFX
+                AudioManager.Instance.FadeOutSound(Sound.Card_Dragging, 0.2f);
+
+                // Was the drag succesful?
+                if (DragSuccessful())
+                {
+                    // Card added SFX
+                    AudioManager.Instance.PlaySound(Sound.GUI_Chime_1);
+
+                    // Snap drag item view back to inventory slot position
+                    InventorySlot slot = InventoryController.Instance.AllInventorySlots[InventoryController.Instance.Inventory.IndexOf(MyItemRef)];
+
+                    Sequence s = DOTween.Sequence();
+                    s.Append(transform.DOMove(slot.transform.position, 0f));
+                    s.OnComplete(() => transform.SetParent(slot.transform));
+
+                    // add item to player
+                    ItemController.Instance.HandleGiveItemToCharacterFromInventory
+                        (CharacterRosterViewController.Instance.CharacterCurrentlyViewing, MyItemRef, CharacterRosterViewController.Instance.rosterSlotMousedOver);
+
+                    // re build roster, inventory and model views
+                    CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
+                    InventoryController.Instance.RebuildInventoryView();
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterRosterViewController.Instance.CharacterCurrentlyViewing.itemSet, CharacterRosterViewController.Instance.CharacterPanelUcm);
+                }
+
+                else
+                {
+                    // Move item back towards slot position
+                    Sequence s = DOTween.Sequence();
+                    InventorySlot slot = InventoryController.Instance.AllInventorySlots[InventoryController.Instance.Inventory.IndexOf(MyItemRef)];
+                    s.Append(transform.DOMove(slot.transform.position, 0.25f));
+
+                    // Re-parent self on arrival
+                    s.OnComplete(() => transform.SetParent(slot.transform));
+                }
+
+                // Hide card previews, just in case
+                /*
+                CharacterRosterViewController.Instance.HidePreviewItemCardInInventory();
+                CharacterRosterViewController.Instance.HidePreviewItemCardInRoster();
+                */
+            }
+        }
+        public void OnMouseDrag()
+        {
+            Debug.Log("InventoryItemView.Drag()");
+            if (myItemRef == null || myItemRef.itemData == null) return;
+
+            // On drag start logic
+            if (currentlyBeingDragged == false)
+            {
+                currentlyBeingDragged = true;
+                itemDragged = this;
+
+                // Play dragging SFX
+                AudioManager.Instance.FadeInSound(Sound.Card_Dragging, 0.2f);
+
+                // Hide pop up window
+                ItemPopupController.Instance.HidePanel();
+            }
+
+            // Unparent from vert fitter, so it wont be masked while dragging
+            transform.SetParent(InventoryController.Instance.DragParent);
+
+            // Get the needed components, if we dont have them already
+            if (dragCanvas == null)
+                dragCanvas = InventoryController.Instance.MainVisualParent.GetComponent<Canvas>();
+
+            if (dragTransform == null)
+                dragTransform = InventoryController.Instance.MainVisualParent.transform as RectTransform;
+
+            // Weird hoki poki magic for dragging in local space on a non screen overlay canvas
+            Vector2 pos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(dragTransform, Input.mousePosition,
+                dragCanvas.worldCamera, out pos);
+
+            // Follow the mouse
+            transform.position = dragCanvas.transform.TransformPoint(pos);
+
+        }       
+        private bool DragSuccessful()
+        {
+            bool bRet = false;
+            
+            if (InventoryController.Instance.IsItemValidOnSlot(MyItemRef.itemData, CharacterRosterViewController.Instance.rosterSlotMousedOver, 
+                CharacterRosterViewController.Instance.CharacterCurrentlyViewing))
+            {
+                bRet = true;
+            }
+            
+            return bRet;
+        }
+        #endregion
+
+
+        // Misc
+        #region
+        public void Reset()
+        {
+            gameObject.SetActive(false);
+            bookVisualParent.SetActive(false);
+            weaponVisualParent.SetActive(false);
+            myItemRef = null;
+        }
+        public void SetMyItemRef(InventoryItem item)
+        {
+            myItemRef = item;
+        }
+
+        #endregion
+    }
+}

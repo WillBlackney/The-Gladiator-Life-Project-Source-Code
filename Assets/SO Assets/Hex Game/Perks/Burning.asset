@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
+  m_Name: Burning
+  m_EditorClassIdentifier: 
+  passiveSprite: {fileID: 21300000, guid: a3292657731a13947a2e981f7581f5a7, type: 3}
+  passiveName: Burning
+  perkTag: 1
+  passiveDescription:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'On turn start, this character takes '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '5 '
+  - color: 9
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Magic '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: damage for each stack.
+  maxAllowedStacks: 5
+  showStackCount: 1
+  hiddenOnPassivePanel: 0
+  isRewardable: 0
+  resistanceBlocksIncrease: 1
+  resistanceBlocksDecrease: 0
+  runeBlocksIncrease: 1
+  runeBlocksDecrease: 0
+  isInjury: 0
+  severity: 0
+  injuryType: 0
+  isRacial: 0
+  race: 0
+  isBackground: 0
+  backgroundPerkQuality: 0
+  perksRemovedOnThisApplication: 
+  perksGainedOnThisExpiry: 
+  perksThatBlockThis: 51000000
+  visualEventsOnApplication:
+  - eventType: 3
+    screenOverlayType: 0
+    overlayColor: 0
+    overlayFadeInTime: 0
+    overlayDuration: 0
+    overlayFadeOutTime: 0
+    particleEffect: 16
+    cameraShake: 0
+    movementAnimation: 0
+    soundEffect: 0
+    characterAnimation: 0
+    delayDuration: 0
+    projectileFired: 0
+    projectileStartPosition: 0
+    onCharacter: 1
