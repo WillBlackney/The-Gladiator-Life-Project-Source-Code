@@ -1011,14 +1011,15 @@ namespace HexGameEngine.Abilities
             else if (abilityEffect.effectType == AbilityEffectType.TeleportSelfBehindTarget)
             {
                 // Try find a valid back arc tile to teleport to
-
+                /*
                 LevelNode destination = HexCharacterController.Instance.GetCharacterBackTile(target);
                 if (destination)
                 {
                     LevelController.Instance.HandleTeleportCharacter(caster, destination);
                     LevelController.Instance.FaceCharacterTowardsHex(caster, target.currentTile);
                 }
-                /*
+                */
+                
                 LevelNode destination = null;
                 List<LevelNode> targetBackTiles = HexCharacterController.Instance.GetCharacterBackArcTiles(target);
                 List<LevelNode> validTiles = new List<LevelNode>();
@@ -1034,8 +1035,8 @@ namespace HexGameEngine.Abilities
                 else destination = validTiles[RandomGenerator.NumberBetween(0, validTiles.Count - 1)];
 
                 LevelController.Instance.HandleTeleportCharacter(caster, destination);
-                LevelController.Instance.FaceCharacterTowardsHex(caster, target.myCurrentHex);
-                */
+                LevelController.Instance.FaceCharacterTowardsHex(caster, target.currentTile);
+                
             }
 
             // Move in line
@@ -1502,7 +1503,7 @@ namespace HexGameEngine.Abilities
             {
                 if (req.requirementType == AbilityEffectRequirementType.BackStrike)
                 {
-                    if (HexCharacterController.Instance.GetCharacterBackTile(target) != character.currentTile)
+                    if (!HexCharacterController.Instance.GetCharacterBackArcTiles(target).Contains(character.currentTile))
                     {
                         Debug.Log("AbilityController.DoesAbilityEffectMeetAllRequirements() failed back strike requirement check...");
                         bRet = false;
@@ -1769,12 +1770,14 @@ namespace HexGameEngine.Abilities
                 {
                     if (ar.type == AbilityRequirementType.TargetHasUnoccupiedBackTile)
                     {
-                        LevelNode backTile = HexCharacterController.Instance.GetCharacterBackTile(target);
-                        if (backTile != null && Pathfinder.CanHexBeOccupied(backTile))
+                        foreach (LevelNode n in HexCharacterController.Instance.GetCharacterBackArcTiles(target))
                         {
-                            Debug.Log("DoesTargetOfAbilityMeetSubRequirements() passed 'TargetHasAnUnoccupiedBackTile' check");
-                            pass = true;
-                            break;
+                            if (Pathfinder.CanHexBeOccupied(n))
+                            {
+                                Debug.Log("DoesTargetOfAbilityMeetSubRequirements() passed 'TargetHasAnUnoccupiedBackTile' check");
+                                pass = true;
+                                break;
+                            }
                         }
                     }
 

@@ -256,7 +256,7 @@ namespace HexGameEngine.HexTiles
                     if (tiles.Contains(enemy.currentTile))
                     {
                         // Moved into back arc 
-                        if (HexCharacterController.Instance.GetCharacterBackTile(enemy) == character.currentTile)
+                        if (HexCharacterController.Instance.GetCharacterBackArcTiles(enemy).Contains(character.currentTile))
                         {
                             CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedBehindMe);
                         }
@@ -300,7 +300,7 @@ namespace HexGameEngine.HexTiles
                     if (tiles.Contains(enemy.currentTile))
                     {
                         // Moved into back arc 
-                        if (HexCharacterController.Instance.GetCharacterBackTile(enemy) == character.currentTile)
+                        if (HexCharacterController.Instance.GetCharacterBackArcTiles(enemy).Contains(character.currentTile))
                         {
                             CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedBehindMe);
                         }
@@ -478,7 +478,7 @@ namespace HexGameEngine.HexTiles
                     if (tiles.Contains(enemy.currentTile))
                     {
                         // Moved into back arc 
-                        if (HexCharacterController.Instance.GetCharacterBackTile(enemy) == character.currentTile)
+                        if (HexCharacterController.Instance.GetCharacterBackArcTiles(enemy).Contains(character.currentTile))
                         {
                             CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedBehindMe);
                         }

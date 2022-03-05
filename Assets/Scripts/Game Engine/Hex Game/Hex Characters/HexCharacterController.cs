@@ -1547,7 +1547,7 @@ namespace HexGameEngine.Characters
             if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Footwork))
                 return 0;
 
-            if (GetCharacterBackTile(target) == attacker.currentTile)
+            if (GetCharacterBackArcTiles(target).Contains(attacker.currentTile))
             {
                 // Add base back strike bonus
                 bonusRet += 10;
