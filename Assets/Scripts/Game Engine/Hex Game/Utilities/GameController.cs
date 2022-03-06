@@ -105,7 +105,6 @@ namespace HexGameEngine
             RunController.Instance.SetGameStartValues();
             RunController.Instance.SetCurrentEncounterType(EncounterType.BasicEnemy);
             RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
-            RunController.Instance.IncrementWorldMapPosition();
 
             // Build character roster + mock data
             List<HexCharacterData> characters = CreateSandboxCharacterDataFiles();
@@ -466,10 +465,11 @@ namespace HexGameEngine
                 //StartCombatVictorySequence(encounter);
             }
 
+            /*
             else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.DraftEvent)
             {
                 HandleLoadCharacterDraftEvent();
-            }
+            }*/
 
             /*
             else if (JourneyManager.Instance.CheckPointType == SaveCheckPoint.CampSite)
@@ -536,7 +536,6 @@ namespace HexGameEngine
             }
 
             // Increment world position + set next encounter
-            RunController.Instance.IncrementWorldMapPosition();
             //ScoreManager.Instance.IncrementRoomsCleared();
             RunController.Instance.SetCurrentEncounterType(nextEncounterType);
 
@@ -701,14 +700,14 @@ namespace HexGameEngine
                 {
                     RunController.Instance.SetCurrentEnemyEncounter
                         (RunController.Instance.GenerateEnemyEncounterFromTemplate
-                        (RunController.Instance.GetRandomCombatData(RunController.Instance.CurrentAct, CombatDifficulty.Basic)));
+                        (RunController.Instance.GetRandomCombatData(RunController.Instance.CurrentChapter, CombatDifficulty.Basic)));
                 }
                 
                 else if (RunController.Instance.CurrentEncounterType == EncounterType.EliteEnemy)
                 {
                     RunController.Instance.SetCurrentEnemyEncounter
                         (RunController.Instance.GenerateEnemyEncounterFromTemplate
-                        (RunController.Instance.GetRandomCombatData(RunController.Instance.CurrentAct, CombatDifficulty.Elite)));
+                        (RunController.Instance.GetRandomCombatData(RunController.Instance.CurrentChapter, CombatDifficulty.Elite)));
                 }
 
 
@@ -766,7 +765,7 @@ namespace HexGameEngine
             else if (RunController.Instance.CurrentEncounterType == EncounterType.DraftEvent)
             {
                 // Set check point
-                RunController.Instance.SetCheckPoint(SaveCheckPoint.DraftEvent);
+                //RunController.Instance.SetCheckPoint(SaveCheckPoint.DraftEvent);
 
                 // Auto save
                 PersistencyController.Instance.AutoUpdateSaveFile();
@@ -778,7 +777,7 @@ namespace HexGameEngine
             else if (RunController.Instance.CurrentEncounterType == EncounterType.CampSite)
             {
                 // Set check point
-                RunController.Instance.SetCheckPoint(SaveCheckPoint.CampSite);
+               // RunController.Instance.SetCheckPoint(SaveCheckPoint.CampSite);
 
                 // Auto save
                 PersistencyController.Instance.AutoUpdateSaveFile();

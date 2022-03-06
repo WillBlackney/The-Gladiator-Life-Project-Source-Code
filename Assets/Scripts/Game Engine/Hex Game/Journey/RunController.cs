@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 using HexGameEngine.Utilities;
 using HexGameEngine.Characters;
 using HexGameEngine.Persistency;
+using HexGameEngine.UI;
 
 namespace HexGameEngine.JourneyLogic
 {
@@ -14,14 +15,10 @@ namespace HexGameEngine.JourneyLogic
     {
         // Properties + Component Refs
         #region
-        [Header("General Properties")]
-        [SerializeField] private bool allowSameEnemyWaveMultipleTimes;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Combat Encounter Data")]
         [SerializeField] private EnemyEncounterSet[] allCombatEncounterSets;
 
-
+        // Non inspector fields
         private List<EnemyEncounterData> enemyWavesAlreadyEncountered = new List<EnemyEncounterData>();       
 
         #endregion
@@ -31,13 +28,9 @@ namespace HexGameEngine.JourneyLogic
         public EnemyEncounterData CurrentCombatEncounterData { get; private set; }
         public EncounterType CurrentEncounterType { get; private set; }
         public SaveCheckPoint SaveCheckPoint { get; private set; }
-        public int CurrentJourneyPosition { get; private set; }
-        public int CurrentAct { get; private set; }
-        public bool AllowSameEnemyWaveMultipleTimes
-        {
-            get { return allowSameEnemyWaveMultipleTimes; }
-            private set { allowSameEnemyWaveMultipleTimes = value; }
-        }
+        public int CurrentDay { get; private set; }
+        public int CurrentChapter { get; private set; }
+       
 
         #endregion
 
@@ -45,8 +38,8 @@ namespace HexGameEngine.JourneyLogic
         #region
         public void BuildMyDataFromSaveFile(SaveGameData saveData)
         {
-            CurrentJourneyPosition = saveData.currentJourneyPosition;
-            CurrentAct = saveData.currentAct;
+            CurrentDay = saveData.currentDay;
+            CurrentChapter = saveData.currentChapter;
             SetCurrentEncounterType(saveData.currentEncounterType);
             SetCheckPoint(saveData.saveCheckPoint);
             enemyWavesAlreadyEncountered = saveData.encounteredCombats;
@@ -55,8 +48,8 @@ namespace HexGameEngine.JourneyLogic
         }
         public void SaveMyDataToSaveFile(SaveGameData saveFile)
         {
-            saveFile.currentJourneyPosition = CurrentJourneyPosition;
-            saveFile.currentAct = CurrentAct;
+            saveFile.currentDay = CurrentDay;
+            saveFile.currentChapter = CurrentChapter;
             saveFile.currentEncounterType = CurrentEncounterType;
             saveFile.currentCombatEncounterData = CurrentCombatEncounterData;
             saveFile.saveCheckPoint = SaveCheckPoint;
@@ -64,10 +57,10 @@ namespace HexGameEngine.JourneyLogic
         }
         public void SetGameStartValues()
         {
-            CurrentJourneyPosition = 0;
-            CurrentAct = 1;
-            SetCurrentEncounterType(EncounterType.DraftEvent);
-            SetCheckPoint(SaveCheckPoint.DraftEvent);
+            CurrentDay = 1;
+            CurrentChapter = 1;
+            SetCurrentEncounterType(EncounterType.None);
+            SetCheckPoint(SaveCheckPoint.Town);
             enemyWavesAlreadyEncountered.Clear();
             CurrentCombatEncounterData = null;
         }
@@ -83,16 +76,11 @@ namespace HexGameEngine.JourneyLogic
         public void SetCheckPoint(SaveCheckPoint type)
         {
             SaveCheckPoint = type;
-        }
-        public void IncrementWorldMapPosition()
-        {
-            CurrentJourneyPosition++;
-            UpdateCurrentEncounterText();
-        }
+        }       
         private void UpdateCurrentEncounterText()
         {
-            //TopBarController.Instance.CurrentEncounterText.text = (CurrentJourneyPosition + 1).ToString();
-            //TopBarController.Instance.MaxEncounterText.text = (MapSystem.MapManager.Instance.config.layers.Length + 1).ToString();
+            TopBarController.Instance.CurrentDaytext.text = "Day: " + CurrentDay.ToString();
+            TopBarController.Instance.CurrentChapterText.text = "Chapter: " + CurrentChapter.ToString();
         }
         #endregion
 
@@ -115,12 +103,16 @@ namespace HexGameEngine.JourneyLogic
                     List<EnemyEncounterSO> validCombats = new List<EnemyEncounterSO>();
                     foreach(EnemyEncounterSO encounter in set.possibleEnemyEncounters)
                     {
+                        validCombats.Add(encounter);
+                        /*
                         if (!HasCombatAlreadyBeenEncountered(encounter.encounterName) ||
-                            (HasCombatAlreadyBeenEncountered(encounter.encounterName) && AllowSameEnemyWaveMultipleTimes))
+                            HasCombatAlreadyBeenEncountered(encounter.encounterName))
                         {
                             validCombats.Add(encounter);
                         }
+                        */
                     }
+                    
 
                     // No unseen combats in the set, just give one the player has already seen
                     if (validCombats.Count == 0)                        
@@ -169,23 +161,6 @@ namespace HexGameEngine.JourneyLogic
         }
         #endregion
 
-        // Misc
-        #region
-        private bool HasCombatAlreadyBeenEncountered(string encounterName)
-        {
-            bool ret = false;
-            foreach(EnemyEncounterData e in enemyWavesAlreadyEncountered)
-            {
-                if(e.encounterName == encounterName)
-                {
-                    ret = true;
-                    break;
-                }
-            }
-
-            return ret;
-        }
-        #endregion
 
     }
 }

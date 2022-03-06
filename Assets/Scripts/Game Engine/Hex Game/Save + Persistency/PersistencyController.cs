@@ -84,7 +84,7 @@ namespace HexGameEngine.Persistency
 
             RunController.Instance.SaveMyDataToSaveFile(newSave);
             CharacterDataController.Instance.SaveMyDataToSaveFile(newSave);
-            TownController.Instance.SaveMyDataToSaveFile(newSave);
+            OLDTownController.Instance.SaveMyDataToSaveFile(newSave);
             PlayerDataController.Instance.SaveMyDataToSaveFile(newSave);
             RewardController.Instance.SaveMyDataToSaveFile(newSave);
             MapManager.Instance.SaveMyDataToSaveFile(newSave);
@@ -105,7 +105,7 @@ namespace HexGameEngine.Persistency
 
             RunController.Instance.BuildMyDataFromSaveFile(newLoad);
             CharacterDataController.Instance.BuildMyDataFromSaveFile(newLoad);
-            TownController.Instance.BuildMyDataFromSaveFile(newLoad);
+            OLDTownController.Instance.BuildMyDataFromSaveFile(newLoad);
             PlayerDataController.Instance.BuildMyDataFromSaveFile(newLoad);
             RewardController.Instance.BuildMyDataFromSaveFile(newLoad);
             MapManager.Instance.BuildMyDataFromSaveFile(newLoad);

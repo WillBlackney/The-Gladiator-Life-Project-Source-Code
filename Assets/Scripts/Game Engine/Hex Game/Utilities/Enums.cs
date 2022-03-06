@@ -727,9 +727,7 @@ namespace HexGameEngine
         None = 0,
         CombatStart = 1,
         CombatEnd = 2,
-        CampSite = 5,
-        MysteryEventStart = 3,
-        DraftEvent = 6,
+        Town = 3,
     }
     #endregion
 

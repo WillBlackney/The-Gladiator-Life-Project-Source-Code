@@ -16,8 +16,8 @@ namespace HexGameEngine.Persistency
         public List<HexCharacterData> characterRoster = new List<HexCharacterData>();
 
         // Journey + Run data
-        public int currentJourneyPosition;
-        public int currentAct;
+        public int currentDay;
+        public int currentChapter;
         public SaveCheckPoint saveCheckPoint;
         public EncounterType currentEncounterType;
 

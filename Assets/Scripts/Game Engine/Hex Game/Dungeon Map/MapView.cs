@@ -101,7 +101,7 @@ namespace HexGameEngine.DungeonMap
             ShowMap(MapManager.Instance.CurrentMap);
 
             // Make map centre pn current encounter row
-            int playerPos = RunController.Instance.CurrentJourneyPosition;
+            int playerPos = 1;//RunController.Instance.CurrentJourneyPosition;
             if(playerPos > 3)
                 mapParent.transform.localPosition = new Vector3(mapParent.transform.localPosition.x, -(playerPos * 2 -2), mapParent.transform.localPosition.z);
 

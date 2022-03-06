@@ -19,8 +19,8 @@ namespace HexGameEngine.UI
         [Header("Text Components")]
         [SerializeField] private TextMeshProUGUI currentGoldText;
         [SerializeField] private TextMeshProUGUI currentFoodText;
-        [SerializeField] private TextMeshProUGUI currentDayText;
-        [SerializeField] private TextMeshProUGUI currentHourText;
+        [SerializeField] private TextMeshProUGUI currentChapterText;
+        [SerializeField] private TextMeshProUGUI currentDaytext;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Main Button Components")]
@@ -40,22 +40,18 @@ namespace HexGameEngine.UI
         public TextMeshProUGUI CurrentGoldText
         {
             get { return currentGoldText; }
-        }
-        public TextMeshProUGUI CurrentFoodText
-        {
-            get { return currentFoodText; }
-        }
+        }       
         public GameObject GoldTopBarImage
         {
             get { return goldTopBarImage; }
         }
-        public TextMeshProUGUI CurrentHourText
+        public TextMeshProUGUI CurrentDaytext
         {
-            get { return currentHourText; }
+            get { return currentDaytext; }
         }
-        public TextMeshProUGUI CurrentDayText
+        public TextMeshProUGUI CurrentChapterText
         {
-            get { return currentDayText; }
+            get { return currentChapterText; }
         }
         public GameObject CharacterRosterButton
         {
@@ -117,17 +113,17 @@ namespace HexGameEngine.UI
         }
         public void UpdateDayText(int day)
         {
-            currentDayText.text = "Day " + day.ToString();
+            currentChapterText.text = "Day " + day.ToString();
         }
         public void UpdateHourText(int hour)
         {
             if(hour > 12)
             {
-                currentHourText.text = (hour - 12).ToString() + " PM";
+                currentDaytext.text = (hour - 12).ToString() + " PM";
             }
             else
             {
-                currentHourText.text = hour.ToString() + " AM";
+                currentDaytext.text = hour.ToString() + " AM";
             }
         }
         #endregion
