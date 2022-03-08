@@ -203,7 +203,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputType: 0
-  onClickEvents: []
+  onClickEvents:
+  - widgetEvent: 9
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectDisabled: {fileID: 0}
+    objectEnabled: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 7403744540773156837}
+    text: {fileID: 0}
+    endColour: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
+    fadeSpeed: 0
+  - widgetEvent: 9
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectDisabled: {fileID: 0}
+    objectEnabled: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 7403744540644084989}
+    text: {fileID: 0}
+    endColour: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
+    fadeSpeed: 0
+  - widgetEvent: 9
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectDisabled: {fileID: 0}
+    objectEnabled: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 7403744540728360206}
+    text: {fileID: 0}
+    endColour: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
+    fadeSpeed: 0
+  - widgetEvent: 9
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectDisabled: {fileID: 0}
+    objectEnabled: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 7403744539962164113}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 1}
+    fadeSpeed: 0
+  - widgetEvent: 3
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectDisabled: {fileID: 0}
+    objectEnabled: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    fadeSpeed: 0
   mouseEnterEvents:
   - widgetEvent: 9
     enableStartDelay: 0

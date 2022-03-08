@@ -12,8 +12,14 @@ namespace HexGameEngine.TownFeatures
     {
         // Properties + Components
         #region
+        [Header("Core Components")]
         [SerializeField] GameObject mainVisualParent;
 
+        [Header("Recruit Page Components")]
+        [SerializeField] GameObject recruitPageVisualParent;
+
+
+        // Non-inspector properties
         private List<HexCharacterData> currentRecruits = new List<HexCharacterData>();
         #endregion
 
@@ -33,9 +39,9 @@ namespace HexGameEngine.TownFeatures
         }
         #endregion
 
-        // Show + Hide Logic
+        // Show + Hide Main View Logic
         #region
-        public void ShowTownDefaultView()
+        public void ShowTownView()
         {
             mainVisualParent.SetActive(true);
         }
@@ -59,6 +65,14 @@ namespace HexGameEngine.TownFeatures
             currentRecruits.Add(CharacterDataController.Instance.CharacterDeck[0]);
             CharacterDataController.Instance.CharacterDeck.RemoveAt(0);
 
+        }
+        public void BuildAndShowRecruitPage()
+        {
+            recruitPageVisualParent.SetActive(true);
+        }
+        public void HideRecruitPage()
+        {
+            recruitPageVisualParent.SetActive(false);
         }
         #endregion
 

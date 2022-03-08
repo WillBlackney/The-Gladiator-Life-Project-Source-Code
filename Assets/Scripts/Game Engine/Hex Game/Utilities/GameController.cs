@@ -343,7 +343,7 @@ namespace HexGameEngine
             */
 
             // TO DO: Build town views here
-            TownController.Instance.ShowTownDefaultView();
+            TownController.Instance.ShowTownView();
             CharacterScrollPanelController.Instance.BuildAndShowPanel(CharacterDataController.Instance.AllPlayerCharacters);
 
             yield return new WaitForSeconds(0.5f);
