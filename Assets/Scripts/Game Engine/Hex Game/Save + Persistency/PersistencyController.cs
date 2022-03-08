@@ -59,15 +59,18 @@ namespace HexGameEngine.Persistency
             // Build character recruit deck
             CharacterDataController.Instance.AutoGenerateAndCacheNewCharacterDeck();
 
+            // Setup town
+            TownController.Instance.GenerateDailyRecruits(4);
+
             // Generate map data
-            MapManager.Instance.SetCurrentMap(MapManager.Instance.GenerateNewMap());           
-            MapPlayerTracker.Instance.LockMap();
+            //MapManager.Instance.SetCurrentMap(MapManager.Instance.GenerateNewMap());           
+            //MapPlayerTracker.Instance.LockMap();
 
             // Player Data
             PlayerDataController.Instance.SetGameStartValues();
 
             // Run data
-            RunController.Instance.SetGameStartValues();
+            RunController.Instance.SetGameStartValues();            
 
             // Inventory
             InventoryController.Instance.Inventory.Clear();
@@ -84,10 +87,10 @@ namespace HexGameEngine.Persistency
 
             RunController.Instance.SaveMyDataToSaveFile(newSave);
             CharacterDataController.Instance.SaveMyDataToSaveFile(newSave);
-            OLDTownController.Instance.SaveMyDataToSaveFile(newSave);
+            TownController.Instance.SaveMyDataToSaveFile(newSave);
             PlayerDataController.Instance.SaveMyDataToSaveFile(newSave);
             RewardController.Instance.SaveMyDataToSaveFile(newSave);
-            MapManager.Instance.SaveMyDataToSaveFile(newSave);
+            //MapManager.Instance.SaveMyDataToSaveFile(newSave);
             InventoryController.Instance.SaveMyDataToSaveFile(newSave);
 
             // START SAVE!        
@@ -105,10 +108,10 @@ namespace HexGameEngine.Persistency
 
             RunController.Instance.BuildMyDataFromSaveFile(newLoad);
             CharacterDataController.Instance.BuildMyDataFromSaveFile(newLoad);
-            OLDTownController.Instance.BuildMyDataFromSaveFile(newLoad);
+            TownController.Instance.BuildMyDataFromSaveFile(newLoad);
             PlayerDataController.Instance.BuildMyDataFromSaveFile(newLoad);
             RewardController.Instance.BuildMyDataFromSaveFile(newLoad);
-            MapManager.Instance.BuildMyDataFromSaveFile(newLoad);
+            //MapManager.Instance.BuildMyDataFromSaveFile(newLoad);
             InventoryController.Instance.BuildMyDataFromSaveFile(newLoad);
         }
         #endregion

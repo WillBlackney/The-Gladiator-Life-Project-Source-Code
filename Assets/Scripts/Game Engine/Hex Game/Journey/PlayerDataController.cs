@@ -46,23 +46,7 @@ namespace HexGameEngine.Player
         {
             saveData.currentGold = currentGold;
         }
-        #endregion
-
-        // Food Logic
-        #region
-        public void ModifyPlayerFood(int foodGainedOrLost)
-        {
-            currentFood += foodGainedOrLost;
-            int vEventValue = currentFood;
-
-            // update food text;
-            VisualEventManager.Instance.CreateVisualEvent(() => TopBarController.Instance.UpdateFoodText(vEventValue.ToString()));
-        }
-        public bool HasEnoughFood(int required)
-        {
-            return currentFood >= required;
-        }
-        #endregion
+        #endregion      
 
         // Gold Logic
         #region

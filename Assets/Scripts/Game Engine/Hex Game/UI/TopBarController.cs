@@ -18,7 +18,6 @@ namespace HexGameEngine.UI
 
         [Header("Text Components")]
         [SerializeField] private TextMeshProUGUI currentGoldText;
-        [SerializeField] private TextMeshProUGUI currentFoodText;
         [SerializeField] private TextMeshProUGUI currentChapterText;
         [SerializeField] private TextMeshProUGUI currentDaytext;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
@@ -103,10 +102,7 @@ namespace HexGameEngine.UI
 
         // Update Texts
         #region
-        public void UpdateFoodText(string value)
-        {
-            currentFoodText.text = value;
-        }
+        
         public void UpdateGoldText(string value)
         {
             currentGoldText.text = value;

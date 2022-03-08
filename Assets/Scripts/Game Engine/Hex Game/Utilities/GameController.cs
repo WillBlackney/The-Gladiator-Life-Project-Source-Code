@@ -11,6 +11,7 @@ using HexGameEngine.JourneyLogic;
 using HexGameEngine.MainMenu;
 using HexGameEngine.Persistency;
 using HexGameEngine.RewardSystems;
+using HexGameEngine.TownFeatures;
 using HexGameEngine.TurnLogic;
 using HexGameEngine.UCM;
 using HexGameEngine.UI;
@@ -332,15 +333,27 @@ namespace HexGameEngine
             MainMenuController.Instance.HideChooseCharacterScreen();
 
             // Act start visual sequence
+            /*
             yield return new WaitForSeconds(0.5f);
             AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
             yield return new WaitForSeconds(1f);
             PlayActNotificationVisualEvent();
             BlackScreenController.Instance.FadeInScreen(0f);
             yield return new WaitForSeconds(3.5f);
+            */
+
+            // TO DO: Build town views here
+            TownController.Instance.ShowTownDefaultView();
+            CharacterScrollPanelController.Instance.BuildAndShowPanel(CharacterDataController.Instance.AllPlayerCharacters);
+
+            yield return new WaitForSeconds(0.5f);
+            AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
+            BlackScreenController.Instance.FadeInScreen(2f);
+
+
 
             // Start the first encounter set up sequence
-            HandleLoadEncounter(RunController.Instance.CurrentEncounterType);
+            //HandleLoadEncounter(RunController.Instance.CurrentEncounterType);
         }       
         public void HandleQuitToMainMenuFromInGame()
         {
