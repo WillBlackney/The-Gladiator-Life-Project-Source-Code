@@ -17,6 +17,7 @@ namespace HexGameEngine.TownFeatures
         [Header("Core Components")]
         [SerializeField] TextMeshProUGUI nameText;
         [SerializeField] UniversalCharacterModel portaitModel;
+        [SerializeField] GameObject selectedParent;
 
         [Space(20)]
 
@@ -34,10 +35,23 @@ namespace HexGameEngine.TownFeatures
         private HexCharacterData myCharacterData;
         #endregion
 
+        // Getters + Accesors
+        #region
+        public HexCharacterData MyCharacterData
+        {
+            get { return myCharacterData; }
+        }
+        public GameObject SelectedParent
+        {
+            get { return selectedParent; }
+        }
+        #endregion
+
         // Logic
         #region
         public void BuildFromCharacterData(HexCharacterData data)
         {
+            Show();
             myCharacterData = data;
 
             // Texts
@@ -51,7 +65,7 @@ namespace HexGameEngine.TownFeatures
 
             // TO DO: upkeep and recruit costs
         }
-        public void Show()
+        private void Show()
         {
             gameObject.SetActive(true);
         }
@@ -59,6 +73,15 @@ namespace HexGameEngine.TownFeatures
         {
             myCharacterData = null;
             gameObject.SetActive(false);
+            selectedParent.SetActive(false);
+        }
+        #endregion
+
+        // Input
+        #region
+        public void OnClick()
+        {
+            TownController.Instance.OnCharacterRecruitTabClicked(this);
         }
         #endregion
     }

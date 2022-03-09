@@ -36,13 +36,13 @@ namespace HexGameEngine.UI
         [SerializeField] private Slider xpbar;
 
         [Header("Abilities Section Components")]
-        [SerializeField] private RosterAbilityButton[] abilityButtons;
+        [SerializeField] private UIAbilityIcon[] abilityButtons;
 
         [Header("Talent Section Components")]
-        [SerializeField] private UITalentButton[] talentButtons;
+        [SerializeField] private UITalentIcon[] talentButtons;
 
         [Header("Perk Section Components")]
-        [SerializeField] private UIPerkButton[] perkButtons;
+        [SerializeField] private UIPerkIcon[] perkButtons;
         [SerializeField] private GameObject[] perkRows;
 
         [Header("Formation Section Components")]
@@ -167,7 +167,7 @@ namespace HexGameEngine.UI
             {
                 g.SetActive(false);
             }
-            foreach (UIPerkButton b in perkButtons)
+            foreach (UIPerkIcon b in perkButtons)
             {
                 b.gameObject.SetActive(false);
             }
@@ -343,7 +343,7 @@ namespace HexGameEngine.UI
             Debug.Log("CharacterRosterViewController.BuildAbilitiesSection() called...");
 
             // reset ability buttons
-            foreach (RosterAbilityButton b in abilityButtons)
+            foreach (UIAbilityIcon b in abilityButtons)
             {
                 b.AbilityImageParent.SetActive(false);
                 b.SetMyDataReference(null);
@@ -381,7 +381,7 @@ namespace HexGameEngine.UI
                 BuildAbilityButtonFromAbility(abilityButtons[i + newIndexCount], character.abilityBook.allKnownAbilities[i]);
             }
         }
-        public void BuildAbilityButtonFromAbility(RosterAbilityButton b, AbilityData d)
+        public void BuildAbilityButtonFromAbility(UIAbilityIcon b, AbilityData d)
         {
             Debug.Log("CharacterRosterViewController.BuildAbilityButtonFromAbility() building from ability: " + d.abilityName);
             b.AbilityImage.sprite = d.AbilitySprite;
@@ -395,7 +395,7 @@ namespace HexGameEngine.UI
         private void BuildTalentsSection(HexCharacterData character)
         {
             // reset buttons
-            foreach(UITalentButton b in talentButtons)
+            foreach(UITalentIcon b in talentButtons)
             {
                 b.TalentImageParent.SetActive(false);
                 b.SetMyTalent(null);

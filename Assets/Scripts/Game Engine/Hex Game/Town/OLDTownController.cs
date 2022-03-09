@@ -31,9 +31,9 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] private CanvasGroup recruitScreenCg;
         [SerializeField] private GameObject[] recruitScreenRightPanelRows;
         [SerializeField] private OLDCharacterRecruitTab[] allCharacterRecruitTabs;
-        [SerializeField] private UIPerkButton[] recruitPerkIcons;
-        [SerializeField] private UITalentButton[] recruitTalentIcons;
-        [SerializeField] private RosterAbilityButton[] recruitAbilityIcons;
+        [SerializeField] private UIPerkIcon[] recruitPerkIcons;
+        [SerializeField] private UITalentIcon[] recruitTalentIcons;
+        [SerializeField] private UIAbilityIcon[] recruitAbilityIcons;
         [SerializeField] private TextMeshProUGUI recruitRightPanelNameText;
         [SerializeField] private TextMeshProUGUI recruitRightPanelClassNameText;
         [SerializeField] private UniversalCharacterModel recruitRightPanelUcm;

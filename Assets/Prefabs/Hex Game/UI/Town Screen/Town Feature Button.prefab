@@ -264,6 +264,21 @@ MonoBehaviour:
     text: {fileID: 0}
     endColour: {r: 0, g: 0, b: 0, a: 1}
     fadeSpeed: 0
+  - widgetEvent: 4
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectDisabled: {fileID: 0}
+    objectEnabled: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 34
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    fadeSpeed: 0
   - widgetEvent: 3
     enableStartDelay: 0
     startDelay: 0

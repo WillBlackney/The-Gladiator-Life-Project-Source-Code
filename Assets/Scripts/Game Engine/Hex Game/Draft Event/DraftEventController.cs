@@ -61,9 +61,9 @@ namespace HexGameEngine.DraftEvent
         [SerializeField] private GameObject draftCharacterScreenMovementParent;
         [SerializeField] private TextMeshProUGUI draftCharacterScreenBannerText;
         [SerializeField] private DraftCharacterBox[] allDraftCharacterBoxes;
-        [SerializeField] private UIPerkButton[] rightPanelPerkIcons;
-        [SerializeField] private RosterAbilityButton[] rightPanelAbilityIcons;
-        [SerializeField] private UITalentButton[] rightPanelTalentIcons;
+        [SerializeField] private UIPerkIcon[] rightPanelPerkIcons;
+        [SerializeField] private UIAbilityIcon[] rightPanelAbilityIcons;
+        [SerializeField] private UITalentIcon[] rightPanelTalentIcons;
         [SerializeField] private Transform screenStartPos;
         [SerializeField] private Transform screenCentrePos;
 
@@ -425,7 +425,7 @@ namespace HexGameEngine.DraftEvent
         private void BuildRightPanelAbilitiesSection(HexCharacterData character)
         {
             // reset ability buttons
-            foreach (RosterAbilityButton p in rightPanelAbilityIcons)
+            foreach (UIAbilityIcon p in rightPanelAbilityIcons)
             {
                 p.gameObject.SetActive(false);
                 p.SetMyDataReference(null);
@@ -461,7 +461,7 @@ namespace HexGameEngine.DraftEvent
                 BuildAbilityButtonFromAbility(rightPanelAbilityIcons[i + newIndexCount], character.abilityBook.allKnownAbilities[i]);
             }
         }
-        private void BuildAbilityButtonFromAbility(RosterAbilityButton b, AbilityData d)
+        private void BuildAbilityButtonFromAbility(UIAbilityIcon b, AbilityData d)
         {
             b.AbilityImage.sprite = d.AbilitySprite;
             b.gameObject.SetActive(true);
@@ -469,7 +469,7 @@ namespace HexGameEngine.DraftEvent
         }
         private void BuildRightPanelPerksSection(HexCharacterData character)
         {
-            foreach (UIPerkButton b in rightPanelPerkIcons)
+            foreach (UIPerkIcon b in rightPanelPerkIcons)
             {
                 b.gameObject.SetActive(false);
             }
@@ -484,7 +484,7 @@ namespace HexGameEngine.DraftEvent
         private void BuildRightPanelTalentsSection(HexCharacterData character)
         {
             // reset buttons
-            foreach (UITalentButton b in rightPanelTalentIcons)
+            foreach (UITalentIcon b in rightPanelTalentIcons)
             {
                 b.gameObject.SetActive(false);
                 b.SetMyTalent(null);

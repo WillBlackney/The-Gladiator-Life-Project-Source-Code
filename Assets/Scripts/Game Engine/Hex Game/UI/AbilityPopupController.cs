@@ -58,7 +58,7 @@ namespace HexGameEngine.UI
             PlacePanelOnAbilityBarButton(b);
             ForceRebuildLayouts();
         }
-        public void OnRosterAbilityButtonMousedOver(RosterAbilityButton b)
+        public void OnRosterAbilityButtonMousedOver(UIAbilityIcon b)
         {
             FadeInPanel();
             BuildPanelFromAbilityData(b.MyDataRef);
