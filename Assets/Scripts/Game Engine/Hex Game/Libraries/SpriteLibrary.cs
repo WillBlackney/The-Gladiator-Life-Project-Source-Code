@@ -101,6 +101,25 @@ namespace HexGameEngine.Libraries
 
         // Stress State Images
         #region
+        [Header("Racial Images")]
+        [PreviewField(75)]
+        public Sprite human;
+        [PreviewField(75)]
+        public Sprite orc;
+        [PreviewField(75)]
+        public Sprite elf;
+        [PreviewField(75)]
+        public Sprite goblin;
+        [PreviewField(75)]
+        public Sprite undead;
+        [PreviewField(75)]
+        public Sprite gnoll;
+        [PreviewField(75)]
+        public Sprite satyr;
+        #endregion
+
+        // Stress State Images
+        #region
         [Header("Stress State Images")]
         [PreviewField(75)]
         public Sprite confident;
@@ -123,6 +142,42 @@ namespace HexGameEngine.Libraries
 
         // Logic 
         #region
+        public Sprite GetRacialSpriteFromEnum(CharacterRace race)
+        {
+            Sprite spriteReturned = null;
+
+            if (race == CharacterRace.Human)
+            {
+                spriteReturned = human;
+            }
+            else if (race == CharacterRace.Elf)
+            {
+                spriteReturned = elf;
+            }
+            else if (race == CharacterRace.Gnoll)
+            {
+                spriteReturned = gnoll;
+            }
+            else if (race == CharacterRace.Goblin)
+            {
+                spriteReturned = goblin;
+            }
+            else if (race == CharacterRace.Orc)
+            {
+                spriteReturned = orc;
+            }
+            else if (race == CharacterRace.Satyr)
+            {
+                spriteReturned = satyr;
+            }
+            else if (race == CharacterRace.Undead)
+            {
+                spriteReturned = undead;
+            }
+
+
+            return spriteReturned;
+        }
         public Sprite GetStressStateSpriteFromEnum(StressState state)
         {
             Sprite spriteReturned = null;
