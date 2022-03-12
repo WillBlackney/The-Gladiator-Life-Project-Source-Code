@@ -46,25 +46,24 @@ namespace HexGameEngine.Persistency
 
         // Build Save Files Data
         #region
-        public void BuildNewSaveFileOnNewGameStarted()
+        public void BuildNewSaveFileOnNewGameStarted(HexCharacterData startingCharacter = null)
         {
             // Clear any previous character roster data + rebuild character deck
             CharacterDataController.Instance.ClearCharacterRoster();
             CharacterDataController.Instance.ClearCharacterDeck();
 
             // Determine charactes + add them to roster
-            HexCharacterData chosenCharacter = MainMenuController.Instance.GetChosenCharacterDataFiles()[0];
-            CharacterDataController.Instance.AddCharacterToRoster(chosenCharacter);
+            if(startingCharacter == null)
+            {
+                startingCharacter = MainMenuController.Instance.GetChosenCharacterDataFiles()[0];
+            }
+            CharacterDataController.Instance.AddCharacterToRoster(startingCharacter);
            
             // Build character recruit deck
             CharacterDataController.Instance.AutoGenerateAndCacheNewCharacterDeck();
 
             // Setup town
-            TownController.Instance.GenerateDailyRecruits(4);
-
-            // Generate map data
-            //MapManager.Instance.SetCurrentMap(MapManager.Instance.GenerateNewMap());           
-            //MapPlayerTracker.Instance.LockMap();
+            TownController.Instance.GenerateDailyRecruits(6);
 
             // Player Data
             PlayerDataController.Instance.SetGameStartValues();
@@ -90,7 +89,6 @@ namespace HexGameEngine.Persistency
             TownController.Instance.SaveMyDataToSaveFile(newSave);
             PlayerDataController.Instance.SaveMyDataToSaveFile(newSave);
             RewardController.Instance.SaveMyDataToSaveFile(newSave);
-            //MapManager.Instance.SaveMyDataToSaveFile(newSave);
             InventoryController.Instance.SaveMyDataToSaveFile(newSave);
 
             // START SAVE!        
@@ -111,7 +109,6 @@ namespace HexGameEngine.Persistency
             TownController.Instance.BuildMyDataFromSaveFile(newLoad);
             PlayerDataController.Instance.BuildMyDataFromSaveFile(newLoad);
             RewardController.Instance.BuildMyDataFromSaveFile(newLoad);
-            //MapManager.Instance.BuildMyDataFromSaveFile(newLoad);
             InventoryController.Instance.BuildMyDataFromSaveFile(newLoad);
         }
         #endregion

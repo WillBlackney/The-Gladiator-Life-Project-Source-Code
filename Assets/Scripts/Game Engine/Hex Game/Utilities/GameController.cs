@@ -65,6 +65,9 @@ namespace HexGameEngine
             else if (GlobalSettings.Instance.GameMode == GameMode.CombatSandbox)
                 RunSandboxCombat();
 
+            else if (GlobalSettings.Instance.GameMode == GameMode.TownSandbox)
+                RunSandboxTown();
+
             else if (GlobalSettings.Instance.GameMode == GameMode.PostCombatReward)
                 RunPostCombatRewardTestEventSetup();
 
@@ -90,6 +93,33 @@ namespace HexGameEngine
 
             yield return null;
         }
+        private void RunSandboxTown()
+        {
+            // Set state
+            SetGameState(GameState.NonCombatEvent);
+
+            // Show UI
+            TopBarController.Instance.ShowTopBar();
+
+            // Set up new save file 
+            PersistencyController.Instance.BuildNewSaveFileOnNewGameStarted(CreateSandboxCharacterDataFiles()[0]);
+
+            // Build and prepare all session data
+            PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();
+
+            // Reset+ Centre camera
+            CameraController.Instance.ResetMainCameraPositionAndZoom();
+
+            // Hide Main Menu
+            MainMenuController.Instance.HideChooseCharacterScreen();
+
+            // TO DO: Build town views here
+            TownController.Instance.ShowTownView();
+            CharacterScrollPanelController.Instance.BuildAndShowPanel();
+
+            AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
+            BlackScreenController.Instance.FadeInScreen(1f);
+        }
         private void RunSandboxCombat()
         {
             // Set state
@@ -97,10 +127,6 @@ namespace HexGameEngine
 
             // Show UI
             TopBarController.Instance.ShowTopBar();
-
-            // Build mock map data
-            MapManager.Instance.SetCurrentMap(MapManager.Instance.GenerateNewMap());
-            MapPlayerTracker.Instance.LockMap();
 
             // Build mock save file + journey data
             RunController.Instance.SetGameStartValues();
@@ -344,7 +370,7 @@ namespace HexGameEngine
 
             // TO DO: Build town views here
             TownController.Instance.ShowTownView();
-            CharacterScrollPanelController.Instance.BuildAndShowPanel(CharacterDataController.Instance.AllPlayerCharacters);
+            CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
             yield return new WaitForSeconds(0.5f);
             AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);

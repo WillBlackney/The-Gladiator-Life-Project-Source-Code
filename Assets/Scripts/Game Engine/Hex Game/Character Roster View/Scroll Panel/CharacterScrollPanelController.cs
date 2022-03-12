@@ -38,13 +38,15 @@ namespace HexGameEngine.UI
 
         // Build Logic
         #region
-        public void BuildAndShowPanel(List<HexCharacterData> characters)
+        public void BuildAndShowPanel()
         {
             ShowMainView();
-            RebuildViews(characters);
+            BuildViews(CharacterDataController.Instance.AllPlayerCharacters);
         }
-        private void RebuildViews(List<HexCharacterData> characters)
+        public void BuildViews(List<HexCharacterData> characters = null)
         {
+            if (characters == null) characters = CharacterDataController.Instance.AllPlayerCharacters;
+
             // Set total characters text
             int maxCharacters = 10; // TO DO: get the actual max character limit
             totalCharactersText.text = characters.Count.ToString() + " / " + maxCharacters.ToString();

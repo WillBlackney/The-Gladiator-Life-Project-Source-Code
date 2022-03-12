@@ -7,6 +7,8 @@ using CardGameEngine.UCM;
 using HexGameEngine.Characters;
 using HexGameEngine.UCM;
 using HexGameEngine.Libraries;
+using HexGameEngine.Player;
+using HexGameEngine.Utilities;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -63,7 +65,11 @@ namespace HexGameEngine.TownFeatures
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(portaitModel, data.modelParts);
             portaitModel.SetBaseAnim();
 
-            // TO DO: upkeep and recruit costs
+            // Wage and recruit costs
+            string col = "<color=#FFFFFF>";
+            if (PlayerDataController.Instance.CurrentGold < data.recruitCost) col = TextLogic.lightRed;
+            upkeepCostText.text = data.dailyWage.ToString();
+            recruitCostText.text = TextLogic.ReturnColoredText(data.recruitCost.ToString(),col);
         }
         private void Show()
         {

@@ -13,6 +13,7 @@ using HexGameEngine.UCM;
 using System;
 using HexGameEngine.Abilities;
 using HexGameEngine.Libraries;
+using HexGameEngine.Player;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -139,6 +140,29 @@ namespace HexGameEngine.TownFeatures
             BuildRecruitPageRightPanel(tab.MyCharacterData);
             ShowAllRightPanelRows();
         }
+        public void OnRecruitCharacterButtonClicked()
+        {
+            if (!selectedRecruitTab) return;
+
+            // to do: check if player has enough gold and roster space before recruiting + pay gold for recruitment
+            if (// enough space in roster &&
+               PlayerDataController.Instance.CurrentGold < selectedRecruitTab.MyCharacterData.recruitCost) return;
+
+            // Pay for recruit
+            PlayerDataController.Instance.ModifyPlayerGold(-selectedRecruitTab.MyCharacterData.recruitCost);
+
+            // Add character to roster
+            CharacterDataController.Instance.AddCharacterToRoster(selectedRecruitTab.MyCharacterData);
+
+            // Remove from current recruit pool
+            currentRecruits.Remove(selectedRecruitTab.MyCharacterData);
+
+            // Redraw windows
+            BuildAndShowRecruitPage();
+
+            // Rebuild character scroll roster
+            CharacterScrollPanelController.Instance.BuildViews();
+        }
         private void BuildRecruitPageRightPanel(HexCharacterData character)
         {
             // Reset
@@ -153,7 +177,10 @@ namespace HexGameEngine.TownFeatures
             // Texts
             recruitRightPanelNameText.text = character.myName;
             recruitRightPanelRacialText.text = character.race.ToString();
-            // to do: cost + upkeep texts
+            string col = "<color=#FFFFFF>";
+            if (PlayerDataController.Instance.CurrentGold < character.recruitCost) col = TextLogic.lightRed;
+            recruitRightPanelUpkeepText.text = character.dailyWage.ToString();
+            recruitRightPanelCostText.text = TextLogic.ReturnColoredText(character.recruitCost.ToString(), col);
 
             // Misc
             recruitRightPanelRacialImage.sprite = SpriteLibrary.Instance.GetRacialSpriteFromEnum(character.race);

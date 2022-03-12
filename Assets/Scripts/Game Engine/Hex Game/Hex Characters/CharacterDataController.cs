@@ -199,7 +199,8 @@ namespace HexGameEngine.Characters
             newCharacter.currentLevel = original.currentLevel;
             newCharacter.currentMaxXP = original.currentMaxXP;
             newCharacter.currentXP = original.currentXP;
-
+            newCharacter.dailyWage = original.dailyWage;
+            newCharacter.recruitCost = original.recruitCost;
             // Set stress
             newCharacter.currentStress = original.currentStress;
 
@@ -545,7 +546,7 @@ namespace HexGameEngine.Characters
 
         // Character Generation + Character Deck Logic
         #region
-        public List<HexCharacterData> GenerateDraftCharacters(HexCharacterData startingCharacter)
+        public List<HexCharacterData> GenerateRecruitCharacters(HexCharacterData startingCharacter)
         {
             List<HexCharacterData> charactersRet = new List<HexCharacterData>();
             List<ClassTemplateSO> validTemplates = new List<ClassTemplateSO>();
@@ -575,12 +576,12 @@ namespace HexGameEngine.Characters
             validTemplates.Shuffle();
             for (int i = 0; i < validTemplates.Count; i++)
             {
-                charactersRet.Add(GenerateDraftCharacter(validTemplates[i], GetRandomRace(validTemplates[i].possibleRaces)));
+                charactersRet.Add(GenerateRecruitCharacter(validTemplates[i], GetRandomRace(validTemplates[i].possibleRaces)));
             }
 
             return charactersRet;
         }
-        private HexCharacterData GenerateDraftCharacter(ClassTemplateSO ct, CharacterRace race)
+        private HexCharacterData GenerateRecruitCharacter(ClassTemplateSO ct, CharacterRace race)
         {
             Debug.Log("CharacterDataController.GenerateCharacter() called...");
 
@@ -601,7 +602,11 @@ namespace HexGameEngine.Characters
 
             // Setup stats
             newCharacter.attributeSheet = new AttributeSheet();
-            GenerateDraftCharacterStatRolls(newCharacter.attributeSheet, RandomGenerator.NumberBetween(2,4));
+            GenerateRecruitCharacterStatRolls(newCharacter.attributeSheet, RandomGenerator.NumberBetween(2,4));
+
+            // Randomize cost + daily wage
+            newCharacter.dailyWage = RandomGenerator.NumberBetween(5, 10);
+            newCharacter.recruitCost = RandomGenerator.NumberBetween(30, 50);
 
             // Set up health
             SetCharacterMaxHealth(newCharacter, 100);
@@ -631,7 +636,7 @@ namespace HexGameEngine.Characters
 
             // Set up abilities
             newCharacter.abilityBook = new AbilityBook();
-            List<AbilityDataSO> selectedAbilities = GenerateDraftCharacterAbilitiesFromProspects(ct.possibleAbilities);
+            List<AbilityDataSO> selectedAbilities = GenerateRecruitCharacterAbilitiesFromProspects(ct.possibleAbilities);
             foreach(AbilityDataSO a in selectedAbilities)
             {
                 AbilityController.Instance.HandleCharacterDataLearnNewAbility
@@ -647,7 +652,7 @@ namespace HexGameEngine.Characters
 
             return newCharacter;
         }
-        private List<AbilityDataSO> GenerateDraftCharacterAbilitiesFromProspects(List<AbilityDataSO> prospects, int amount = 3)
+        private List<AbilityDataSO> GenerateRecruitCharacterAbilitiesFromProspects(List<AbilityDataSO> prospects, int amount = 3)
         {
             // Determine and randomize valid abilities to learn
             List<AbilityDataSO> abilitiesRet = new List<AbilityDataSO>();
@@ -708,7 +713,7 @@ namespace HexGameEngine.Characters
             }
             return abilitiesRet;
         }
-        private void GenerateDraftCharacterStatRolls(AttributeSheet sheet, int totalMods)
+        private void GenerateRecruitCharacterStatRolls(AttributeSheet sheet, int totalMods)
         {
             List<CoreAttribute> attributes = new List<CoreAttribute> 
             { 
@@ -800,7 +805,7 @@ namespace HexGameEngine.Characters
 
             foreach (ClassTemplateSO ct in allClassTemplateSOs)
             {
-                newCharacterDeck.Add(GenerateDraftCharacter(ct, GetRandomRace(ct.possibleRaces)));
+                newCharacterDeck.Add(GenerateRecruitCharacter(ct, GetRandomRace(ct.possibleRaces)));
             }
 
             return newCharacterDeck;
