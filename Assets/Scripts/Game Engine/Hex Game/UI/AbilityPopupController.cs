@@ -9,6 +9,7 @@ using HexGameEngine.Abilities;
 using HexGameEngine.Characters;
 using HexGameEngine.Libraries;
 using HexGameEngine.Items;
+using HexGameEngine.TownFeatures;
 
 namespace HexGameEngine.UI
 {
@@ -51,6 +52,13 @@ namespace HexGameEngine.UI
 
         // Input
         #region
+        public void OnCombatContractAbilityIconMousedOver(CombatContractCard b)
+        {
+            FadeInPanel();
+            BuildPanelFromAbilityData(b.MyContractData.combatRewardData.abilityAwarded);
+            PlacePanelOnCombatContractAbilityIcon(b.AbilityTomeImage.transform);
+            ForceRebuildLayouts();
+        }
         public void OnAbilityButtonMousedOver(AbilityButton b)
         {
             FadeInPanel();
@@ -101,6 +109,13 @@ namespace HexGameEngine.UI
         private void PlacePanelOnAbilityBarButton(AbilityButton b)
         {
             float yOffSet = 75f;
+
+            mainPositioningRect.position = b.transform.position;
+            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x, mainPositioningRect.localPosition.y + yOffSet, 0);
+        }
+        private void PlacePanelOnCombatContractAbilityIcon(Transform b)
+        {
+            float yOffSet = 50f;
 
             mainPositioningRect.position = b.transform.position;
             mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x, mainPositioningRect.localPosition.y + yOffSet, 0);

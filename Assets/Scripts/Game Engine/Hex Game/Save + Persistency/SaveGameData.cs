@@ -6,6 +6,7 @@ using HexGameEngine.Characters;
 using HexGameEngine.RewardSystems;
 using HexGameEngine.DungeonMap;
 using HexGameEngine.Items;
+using HexGameEngine.TownFeatures;
 
 namespace HexGameEngine.Persistency
 {
@@ -39,9 +40,10 @@ namespace HexGameEngine.Persistency
         // Story events
        
 
-        // Recruit event data
+        // Town data
         public List<HexCharacterData> characterDeck = new List<HexCharacterData>();
         public List<HexCharacterData> townRecruits = new List<HexCharacterData>();
+        public List<CombatContractData> currentDailyCombatContracts = new List<CombatContractData>();
 
         // Loot data
         public RewardContainerSet currentLootResult;

@@ -14,6 +14,7 @@ using System;
 using HexGameEngine.Abilities;
 using HexGameEngine.Libraries;
 using HexGameEngine.Player;
+using HexGameEngine.JourneyLogic;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -26,18 +27,18 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] GameObject mainVisualParent;
         [Space(20)]
 
-        [Title("Recruit Page Components")]
+        [Title("Recruit Page Core Components")]
         [SerializeField] GameObject recruitPageVisualParent;
         [SerializeField] RecruitableCharacterTab[] allRecruitTabs;
         [Space(20)]
 
-        [Header("Right Panel Components")]
+        [Header("Recruit Page Right Panel Components")]
         [SerializeField] private GameObject[] recruitRightPanelRows;
         [SerializeField] private TextMeshProUGUI recruitRightPanelNameText;
         [SerializeField] private UniversalCharacterModel recruitRightPanelPortaitModel;
         [Space(20)]
         [SerializeField] private TextMeshProUGUI recruitRightPanelRacialText;
-        [SerializeField] private Image recruitRightPanelRacialImage;       
+        [SerializeField] private Image recruitRightPanelRacialImage;
         [SerializeField] private TextMeshProUGUI recruitRightPanelCostText;
         [SerializeField] private TextMeshProUGUI recruitRightPanelUpkeepText;
         [Space(20)]
@@ -53,9 +54,17 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] private TextMeshProUGUI recruitRightPanelResolveText;
         [SerializeField] private TextMeshProUGUI recruitRightPanelWitsText;
 
+        [Title("Choose Combat Page Components")]
+        [SerializeField] private GameObject chooseCombatPageMainVisualParent;
+        [SerializeField] private CombatContractCard[] allContractCards;
+        [SerializeField] private Image goToDeploymentButton;
+        [SerializeField] private Sprite readyButtonSprite;
+        [SerializeField] private Sprite notReadyButtonSprite;
+
         // Non-inspector properties
         private List<HexCharacterData> currentRecruits = new List<HexCharacterData>();
         private RecruitableCharacterTab selectedRecruitTab;
+        private List<CombatContractData> currentDailyCombatContracts = new List<CombatContractData>();
         #endregion
 
         // Save + Load Logic
@@ -65,12 +74,18 @@ namespace HexGameEngine.TownFeatures
             currentRecruits.Clear();
             foreach (HexCharacterData c in saveFile.townRecruits)
                 currentRecruits.Add(c);
+
+            currentDailyCombatContracts.Clear();
+            currentDailyCombatContracts.AddRange(saveFile.currentDailyCombatContracts);
         }
         public void SaveMyDataToSaveFile(SaveGameData saveFile)
         {
             saveFile.townRecruits.Clear();
             foreach (HexCharacterData c in currentRecruits)
                 saveFile.townRecruits.Add(c);
+
+            saveFile.currentDailyCombatContracts.Clear();
+            saveFile.currentDailyCombatContracts.AddRange(currentDailyCombatContracts);
         }
         #endregion
 
@@ -195,12 +210,12 @@ namespace HexGameEngine.TownFeatures
             recruitRightPanelWitsText.text = character.attributeSheet.wits.ToString();
 
             // Build perk buttons
-            for (int i = 0; i < character.passiveManager.perks.Count; i++)            
-                recruitPerkIcons[i].BuildFromPerkData(character.passiveManager.perks[i]);            
+            for (int i = 0; i < character.passiveManager.perks.Count; i++)
+                recruitPerkIcons[i].BuildFromPerkData(character.passiveManager.perks[i]);
 
             // Build talent buttons
-            for (int i = 0; i < character.talentPairings.Count; i++)            
-                recruitTalentIcons[i].BuildFromTalentData(character.talentPairings[i]);            
+            for (int i = 0; i < character.talentPairings.Count; i++)
+                recruitTalentIcons[i].BuildFromTalentData(character.talentPairings[i]);
 
             // Build abilities section
             // Main hand weapon abilities
@@ -226,8 +241,8 @@ namespace HexGameEngine.TownFeatures
             }
 
             // Build non item derived abilities
-            for (int i = 0; i < character.abilityBook.allKnownAbilities.Count; i++)            
-                recruitAbilityIcons[i + newIndexCount].BuildFromAbilityData(character.abilityBook.allKnownAbilities[i]);            
+            for (int i = 0; i < character.abilityBook.allKnownAbilities.Count; i++)
+                recruitAbilityIcons[i + newIndexCount].BuildFromAbilityData(character.abilityBook.allKnownAbilities[i]);
 
         }
         #endregion
@@ -242,11 +257,81 @@ namespace HexGameEngine.TownFeatures
         {
             recruitPageVisualParent.SetActive(false);
         }
+        public void OnCombatPageBackToTownButtonClicked()
+        {
+            BlackScreenController.Instance.FadeOutScreen(1f, () =>
+            {
+                HideCombatContractPage();
+                ShowTownView();
+                BlackScreenController.Instance.FadeInScreen(1f);
+            });
+        }
+        public void OnCombatPageDeploymentButtonClicked()
+        {
+            if (CombatContractCard.SelectectedCombatCard == null) return;
+
+
+        }
+        public void OnArenaPageButtonClicked()
+        {
+            BlackScreenController.Instance.FadeOutScreen(1f, () =>
+            {
+                HideTownView();
+                BuildAndShowCombatContractPage();
+                BlackScreenController.Instance.FadeInScreen(1f);
+            });
+        }
         #endregion
 
         // Choose Combat Contract Page Logic
         #region
+        public void GenerateDailyCombatContracts()
+        {
+            currentDailyCombatContracts.Clear();
 
+            // On normal days, generate 2 basics and 1 elite combat
+            if (RunController.Instance.CurrentDay != 5)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    currentDailyCombatContracts.Add(GenerateRandomDailyCombatContract(RunController.Instance.CurrentChapter, CombatDifficulty.Basic));
+                }
+                currentDailyCombatContracts.Add(GenerateRandomDailyCombatContract(RunController.Instance.CurrentChapter, CombatDifficulty.Elite));
+
+            }
+
+            // on 5th day, only offer the boss fight
+            else
+            {
+                currentDailyCombatContracts.Add(GenerateRandomDailyCombatContract(RunController.Instance.CurrentChapter, CombatDifficulty.Boss));
+            }
+        }
+        private CombatContractData GenerateRandomDailyCombatContract(int currentAct, CombatDifficulty difficulty)
+        {
+            CombatContractData ret = new CombatContractData();
+            ret.enemyEncounterData = RunController.Instance.GenerateEnemyEncounterFromTemplate(RunController.Instance.GetRandomCombatData(currentAct, difficulty));
+            ret.combatRewardData = new CombatRewardData(difficulty);
+            return ret;
+        }
+        private void BuildAndShowCombatContractPage()
+        {          
+            chooseCombatPageMainVisualParent.SetActive(true);
+            for(int i =0; i < currentDailyCombatContracts.Count && i < allContractCards.Length; i++)
+            {
+                allContractCards[i].BuildFromContractData(currentDailyCombatContracts[i]);
+            }
+            
+            CombatContractCard.HandleDeselect();
+        }
+        private void HideCombatContractPage()
+        {
+            chooseCombatPageMainVisualParent.SetActive(false);
+        }
+        public void SetDeploymentButtonReadyState(bool onOrOff)
+        {
+            if (onOrOff) goToDeploymentButton.sprite = readyButtonSprite;
+            else goToDeploymentButton.sprite = notReadyButtonSprite;
+        }
         #endregion
 
     }

@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using HexGameEngine.Characters;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Characters
+namespace HexGameEngine.TownFeatures
 {
     public class CombatContractData
     {

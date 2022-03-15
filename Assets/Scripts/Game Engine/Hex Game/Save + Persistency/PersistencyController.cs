@@ -48,6 +48,9 @@ namespace HexGameEngine.Persistency
         #region
         public void BuildNewSaveFileOnNewGameStarted(HexCharacterData startingCharacter = null)
         {
+            // Run data
+            RunController.Instance.SetGameStartValues();
+
             // Clear any previous character roster data + rebuild character deck
             CharacterDataController.Instance.ClearCharacterRoster();
             CharacterDataController.Instance.ClearCharacterDeck();
@@ -63,12 +66,10 @@ namespace HexGameEngine.Persistency
 
             // Setup town
             TownController.Instance.GenerateDailyRecruits(8);
+            TownController.Instance.GenerateDailyCombatContracts();
 
             // Player Data
-            PlayerDataController.Instance.SetGameStartValues();
-
-            // Run data
-            RunController.Instance.SetGameStartValues();            
+            PlayerDataController.Instance.SetGameStartValues();                       
 
             // Inventory
             InventoryController.Instance.Inventory.Clear();

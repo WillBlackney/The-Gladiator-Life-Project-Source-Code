@@ -110,9 +110,6 @@ namespace HexGameEngine
             // Reset+ Centre camera
             CameraController.Instance.ResetMainCameraPositionAndZoom();
 
-            // Hide Main Menu
-            MainMenuController.Instance.HideChooseCharacterScreen();
-
             // TO DO: Build town views here
             TownController.Instance.ShowTownView();
             CharacterScrollPanelController.Instance.BuildAndShowPanel();

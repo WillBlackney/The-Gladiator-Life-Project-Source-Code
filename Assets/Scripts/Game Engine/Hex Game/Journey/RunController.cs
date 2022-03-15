@@ -7,6 +7,7 @@ using HexGameEngine.Utilities;
 using HexGameEngine.Characters;
 using HexGameEngine.Persistency;
 using HexGameEngine.UI;
+using HexGameEngine.TownFeatures;
 
 namespace HexGameEngine.JourneyLogic
 {
@@ -194,16 +195,7 @@ namespace HexGameEngine.JourneyLogic
         }
         #endregion
 
-        // Combat Contract Generation + Logic
-        #region
-        private CombatContractData GenerateRandomDailyCombatContract(int currentAct, CombatDifficulty difficulty)
-        {
-            CombatContractData ret = new CombatContractData();
-            ret.enemyEncounterData = GenerateEnemyEncounterFromTemplate(GetRandomCombatData(currentAct, difficulty));
-            ret.combatRewardData = new CombatRewardData(difficulty);
-            return ret;
-        }
-        #endregion
+      
 
 
     }

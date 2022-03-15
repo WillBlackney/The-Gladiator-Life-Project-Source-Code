@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   encounterName: Necromancer
   baseXpReward: 50
+  difficulty: 1
   enemyGroups:
   - possibleEnemies:
     - {fileID: 11400000, guid: 51017f4a8beb79e419ea1361430ecc1b, type: 2}

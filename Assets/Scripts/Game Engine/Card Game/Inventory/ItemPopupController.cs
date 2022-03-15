@@ -8,6 +8,7 @@ using DG.Tweening;
 using HexGameEngine.Abilities;
 using HexGameEngine.UI;
 using HexGameEngine.Perks;
+using HexGameEngine.TownFeatures;
 
 namespace HexGameEngine.Items
 {
@@ -45,6 +46,13 @@ namespace HexGameEngine.Items
 
         // Input
         #region
+        public void OnCombatContractItemIconMousedOver(CombatContractCard card)
+        {
+            FadeInPanel();
+            BuildPanelFromItemData(card.MyContractData.combatRewardData.item);
+            PlacePanelAtCombatCardItemIconPosition(card.ItemImage.transform);
+            ForceRebuildLayouts();
+        }
         public void OnInventoryItemMousedOver(InventoryItemView item)
         {
             FadeInPanel();
@@ -87,6 +95,14 @@ namespace HexGameEngine.Items
 
         // Build + Place Panel
         #region
+        private void PlacePanelAtCombatCardItemIconPosition(Transform t)
+        {
+            RectTransform rect = visualParent.GetComponent<RectTransform>();
+            float yOffset = 50 + rect.rect.height;
+
+            rect.position = t.position;
+            rect.localPosition = new Vector3(rect.localPosition.x, rect.localPosition.y + yOffset, 0);
+        }
         private void PlacePanelAtInventoryItemPosition(InventoryItemView view)
         {
             RectTransform rect = visualParent.GetComponent<RectTransform>();

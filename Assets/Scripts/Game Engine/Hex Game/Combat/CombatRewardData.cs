@@ -11,7 +11,7 @@ namespace HexGameEngine.Characters
     {
         public int goldAmount;
         public ItemData item;
-        public AbilityData abilityTome;
+        public AbilityData abilityAwarded;
 
         public CombatRewardData(CombatDifficulty difficulty)
         {
@@ -25,14 +25,14 @@ namespace HexGameEngine.Characters
         public void BuildAsBasicReward(CombatRewardData crd)
         {
             crd.goldAmount = RandomGenerator.NumberBetween(125, 150);
-            crd.abilityTome = AbilityController.Instance.GetRandomAbilityTomeAbility();
+            crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
             crd.item = ItemController.Instance.GetRandomLootableItemByRarity(Rarity.Rare);
 
         }
         public void BuildAsEliteReward(CombatRewardData crd)
         {
             crd.goldAmount = RandomGenerator.NumberBetween(225, 250);
-            crd.abilityTome = AbilityController.Instance.GetRandomAbilityTomeAbility();
+            crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
             crd.item = ItemController.Instance.GetRandomLootableItemByRarity(Rarity.Epic);
         }
         public void BuildAsBossReward()
