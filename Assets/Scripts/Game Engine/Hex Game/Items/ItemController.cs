@@ -81,6 +81,23 @@ namespace HexGameEngine.Items
         {
             return Array.FindAll(allItems, i => i.lootable).ToList();
         }
+        public ItemData GetRandomLootableItemByRarity(Rarity rarity)
+        {
+            ItemData ret = null;
+            var items = GetAllLootableItems();
+            items.Shuffle();
+            for(int i = 0; i < items.Count; i++)
+            {
+                if(items[i].rarity == rarity)
+                {
+                    ret = items[i];
+                    break;
+                }                      
+            }
+
+            return ret;
+        }
+       
         #endregion
 
         // Data Conversion

@@ -119,6 +119,23 @@ namespace HexGameEngine.Abilities
 
             return abilityReturned;
         }
+        public AbilityData GetRandomAbilityTomeAbility()
+        {
+            List<TalentSchool> talentSchools = new List<TalentSchool> { TalentSchool.Divinity, TalentSchool.Guardian, TalentSchool.Manipulation,
+            TalentSchool.Naturalism, TalentSchool.Pyromania, TalentSchool.Ranger, TalentSchool.Scoundrel, TalentSchool.Shadowcraft, TalentSchool.Warfare };
+
+            talentSchools.Shuffle();
+            TalentSchool ts = talentSchools[0];
+            List<AbilityData> validAbilities = new List<AbilityData>();
+            foreach (AbilityData a in AllAbilities)
+            {
+                if (a.talentRequirementData.talentSchool == ts)
+                    validAbilities.Add(a);
+            }
+
+            validAbilities.Shuffle();
+            return validAbilities[0];
+        }
         #endregion
 
         // Data Conversion

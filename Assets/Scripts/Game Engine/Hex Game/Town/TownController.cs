@@ -244,5 +244,10 @@ namespace HexGameEngine.TownFeatures
         }
         #endregion
 
+        // Choose Combat Contract Page Logic
+        #region
+
+        #endregion
+
     }
 }

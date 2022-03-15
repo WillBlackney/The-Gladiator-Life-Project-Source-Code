@@ -53,17 +53,16 @@ namespace HexGameEngine.Persistency
             CharacterDataController.Instance.ClearCharacterDeck();
 
             // Determine charactes + add them to roster
-            if(startingCharacter == null)
-            {
+            if(startingCharacter == null)            
                 startingCharacter = MainMenuController.Instance.GetChosenCharacterDataFiles()[0];
-            }
+            
             CharacterDataController.Instance.AddCharacterToRoster(startingCharacter);
            
             // Build character recruit deck
             CharacterDataController.Instance.AutoGenerateAndCacheNewCharacterDeck();
 
             // Setup town
-            TownController.Instance.GenerateDailyRecruits(6);
+            TownController.Instance.GenerateDailyRecruits(8);
 
             // Player Data
             PlayerDataController.Instance.SetGameStartValues();

@@ -67,6 +67,39 @@ namespace HexGameEngine.JourneyLogic
 
         #endregion
 
+        // Core Events
+        #region       
+        public void OnNewDayStart()
+        {
+            // Increment day
+
+            // Increment chapter count if over day 5
+
+            // Generate and offer new repuation if new chapter started 
+
+            // pay wages
+
+            // reduce all injury duration by 1 day
+
+            // generate and apply effect of new town event
+
+            // generate new daily recruits
+
+            // generate new combat contracts
+
+            // refresh library books
+
+            // refresh black smith items
+
+            // characters in town features gain effect of feature (heal, remove stress, remove all injuries)
+
+            // all characters heal 10 health and 10 stress
+
+
+
+        }
+        #endregion
+
         // Modify Core Journey Properties
         #region
         public void SetCurrentEncounterType(EncounterType type)
@@ -158,6 +191,17 @@ namespace HexGameEngine.JourneyLogic
         {
             Debug.Log("JourneyManager.AddEnemyWaveToAlreadyEncounteredList() adding " + wave.encounterName + " to already encounter list");
             enemyWavesAlreadyEncountered.Add(wave);
+        }
+        #endregion
+
+        // Combat Contract Generation + Logic
+        #region
+        private CombatContractData GenerateRandomDailyCombatContract(int currentAct, CombatDifficulty difficulty)
+        {
+            CombatContractData ret = new CombatContractData();
+            ret.enemyEncounterData = GenerateEnemyEncounterFromTemplate(GetRandomCombatData(currentAct, difficulty));
+            ret.combatRewardData = new CombatRewardData(difficulty);
+            return ret;
         }
         #endregion
 

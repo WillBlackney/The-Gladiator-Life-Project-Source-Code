@@ -152,23 +152,6 @@ namespace HexGameEngine.Items
         {
             return new InventoryItem(itemData);
         }
-        private InventoryItem GenerateRandomAbilityBookItem()
-        {
-            List<TalentSchool> talentSchools = new List<TalentSchool> { TalentSchool.Divinity, TalentSchool.Guardian, TalentSchool.Manipulation,
-            TalentSchool.Naturalism, TalentSchool.Pyromania, TalentSchool.Ranger, TalentSchool.Scoundrel, TalentSchool.Shadowcraft, TalentSchool.Warfare };
-
-            talentSchools.Shuffle();
-            TalentSchool ts = talentSchools[0];
-            List<AbilityData> validAbilities = new List<AbilityData>();
-            foreach(AbilityData a in AbilityController.Instance.AllAbilities)
-            {
-                if(a.talentRequirementData.talentSchool == ts)                
-                    validAbilities.Add(a);
-            }
-
-            validAbilities.Shuffle();
-            return CreateInventoryItem(validAbilities[0]);
-        }
         private InventoryItem GenerateRandomEquipableItem()
         {
             // to do in future: add arguments for rarity and type
