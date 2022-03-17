@@ -61,6 +61,11 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] private Sprite readyButtonSprite;
         [SerializeField] private Sprite notReadyButtonSprite;
 
+        [Title("Deployment Page Components")]
+        [SerializeField] private GameObject deploymentPageMainVisualParent;
+
+
+
         // Non-inspector properties
         private List<HexCharacterData> currentRecruits = new List<HexCharacterData>();
         private RecruitableCharacterTab selectedRecruitTab;
@@ -259,28 +264,47 @@ namespace HexGameEngine.TownFeatures
         }
         public void OnCombatPageBackToTownButtonClicked()
         {
-            BlackScreenController.Instance.FadeOutScreen(1f, () =>
+            BlackScreenController.Instance.FadeOutScreen(0.5f, () =>
             {
                 HideCombatContractPage();
                 ShowTownView();
-                BlackScreenController.Instance.FadeInScreen(1f);
+                BlackScreenController.Instance.FadeInScreen(0.5f);
             });
         }
         public void OnCombatPageDeploymentButtonClicked()
         {
             if (CombatContractCard.SelectectedCombatCard == null) return;
+            BlackScreenController.Instance.FadeOutScreen(0.5f, () =>
+            {
+                HideCombatContractPage();
+                BuildAndShowDeploymentPage();
+                BlackScreenController.Instance.FadeInScreen(0.5f);
+            });
 
-
+        }
+        public void OnDeploymentPageBackButtonClicked()
+        {
+            BlackScreenController.Instance.FadeOutScreen(0.5f, () =>
+            {
+                HideDeploymentPage();
+                BuildAndShowCombatContractPage();
+                BlackScreenController.Instance.FadeInScreen(0.5f);
+            });
+        }
+        public void OnDeploymentPageReadyButtonClicked()
+        {
+           
         }
         public void OnArenaPageButtonClicked()
         {
-            BlackScreenController.Instance.FadeOutScreen(1f, () =>
+            BlackScreenController.Instance.FadeOutScreen(0.5f, () =>
             {
                 HideTownView();
                 BuildAndShowCombatContractPage();
-                BlackScreenController.Instance.FadeInScreen(1f);
+                BlackScreenController.Instance.FadeInScreen(0.5f);
             });
         }
+      
         #endregion
 
         // Choose Combat Contract Page Logic
@@ -331,6 +355,18 @@ namespace HexGameEngine.TownFeatures
         {
             if (onOrOff) goToDeploymentButton.sprite = readyButtonSprite;
             else goToDeploymentButton.sprite = notReadyButtonSprite;
+        }
+        #endregion
+
+        // Deployment Page Logic
+        #region
+        private void BuildAndShowDeploymentPage()
+        {
+            deploymentPageMainVisualParent.SetActive(true);
+        }
+        private void HideDeploymentPage()
+        {
+            deploymentPageMainVisualParent.SetActive(false);
         }
         #endregion
 
