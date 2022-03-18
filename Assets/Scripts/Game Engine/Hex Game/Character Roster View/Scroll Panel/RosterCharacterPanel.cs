@@ -30,6 +30,14 @@ namespace HexGameEngine.UI
         private HexCharacterData myCharacterData;
         #endregion
 
+        // Getters + Accessors
+        #region
+        public HexCharacterData MyCharacterData
+        {
+            get { return myCharacterData; }
+        }
+        #endregion
+
         // Logic
         #region
         public void BuildFromCharacterData(HexCharacterData data)
@@ -59,6 +67,11 @@ namespace HexGameEngine.UI
         {
             myCharacterData = null;
             gameObject.SetActive(false);
+        }
+        public void OnClickAndDragStart()
+        {
+            Debug.Log("OnClickAndDragStart()");
+            PortraitDragController.Instance.OnRosterCharacterPanelDragStart(this);
         }
         #endregion
     }
