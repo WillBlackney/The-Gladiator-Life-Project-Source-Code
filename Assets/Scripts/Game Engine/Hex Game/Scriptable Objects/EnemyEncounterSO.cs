@@ -33,4 +33,37 @@ namespace HexGameEngine.Characters
         public List<EnemyTemplateSO> possibleEnemies;
         public Vector2 spawnPosition;
     }
+    public class CharacterWithSpawnData
+    {
+        public Vector2 spawnPosition;
+        public HexCharacterData enemyData;
+        public CharacterWithSpawnData(HexCharacterData data, Vector2 position)
+        {
+            spawnPosition = position;
+            enemyData = data;
+        }
+
+        /*         
+            player back row
+            - x = -3
+            - north node is y -1
+            - south node is y 2
+
+            player front row
+            - x = -2
+            - north node is y -2
+            - south node is y 2
+
+            enemy back row
+            - x = 3
+            - north node is y -1
+            - south node is y 2
+
+            enemy front row
+            - x = 2
+            - north node is y -2
+            - south node is y 2
+         */
+    }
+
 }

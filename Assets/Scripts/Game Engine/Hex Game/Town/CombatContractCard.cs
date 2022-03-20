@@ -121,9 +121,9 @@ namespace HexGameEngine.TownFeatures
             else if (data.enemyEncounterData.difficulty == CombatDifficulty.Elite) eliteSkullsParent.SetActive(true);
             else if (data.enemyEncounterData.difficulty == CombatDifficulty.Boss) bossSkullsParent.SetActive(true);
 
-            foreach (HexCharacterData enemy in data.enemyEncounterData.enemiesInEncounter)
+            foreach (CharacterWithSpawnData enemy in data.enemyEncounterData.enemiesInEncounter)
             {
-                enemiesText.text += "- " + enemy.myName + "\n";
+                enemiesText.text += "- " + enemy.enemyData.myName + "\n";
             }
             goldRewardText.text = data.combatRewardData.goldAmount.ToString();
             abilityTomeImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookFromEnumData(data.combatRewardData.abilityAwarded.talentRequirementData.talentSchool);

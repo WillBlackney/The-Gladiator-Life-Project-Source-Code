@@ -10,16 +10,16 @@ namespace HexGameEngine.Characters
     {
         public string encounterName;
         public int baseXpReward;
-        public List<HexCharacterData> enemiesInEncounter = new List<HexCharacterData>();
+        public List<CharacterWithSpawnData> enemiesInEncounter = new List<CharacterWithSpawnData>();
         public CombatDifficulty difficulty;
         public int TotalEnemyXP
         {
             get 
             {
                 int xp = 0;
-                foreach (HexCharacterData c in enemiesInEncounter)
+                foreach (CharacterWithSpawnData c in enemiesInEncounter)
                 {
-                    xp += c.xpReward;
+                    xp += c.enemyData.xpReward;
                 }
 
                 return xp;

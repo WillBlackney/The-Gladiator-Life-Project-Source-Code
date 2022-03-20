@@ -50,21 +50,22 @@ namespace HexGameEngine.UI
         void HandleEndDrag()
         {
             followMouseParent.SetActive(false);
-            if(DeploymentNodeView.NodeMousedOver != null)
+            if (DeploymentNodeView.NodeMousedOver != null)
             {
-                TownController.Instance.HandleDropCharacterOnDeploymentNode(DeploymentNodeView.NodeMousedOver, draggedCharacterData);
-                draggedCharacterData = null;
-                draggedNode = null;
+                if (DeploymentNodeView.NodeMousedOver.AllowedCharacter == Allegiance.Player)                
+                    TownController.Instance.HandleDropCharacterOnDeploymentNode(DeploymentNodeView.NodeMousedOver, draggedCharacterData);
+                
+                else if(draggedNode != null)               
+                    TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);            
             }
 
             // Handle dragging a node (not character panel) and drag did not end on a new node: rebuild old node position
             else if (DeploymentNodeView.NodeMousedOver == null &&
-                draggedNode != null)
-            {
-                TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);
-                draggedCharacterData = null;
-                draggedNode = null;
-            }
+                draggedNode != null )            
+                TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);            
+
+            draggedCharacterData = null;
+            draggedNode = null;
         }
         private void BuildAndShowPortrait(List<string> modelParts)
         {

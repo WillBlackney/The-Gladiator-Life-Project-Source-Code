@@ -338,9 +338,10 @@ namespace HexGameEngine.Characters
             List<LevelNode> spawnLocations = LevelController.Instance.GetEnemySpawnZone();
           
             // Create all enemies in wave
-            foreach (HexCharacterData enemy in encounterData.enemiesInEncounter)
+            foreach (CharacterWithSpawnData dataSet in encounterData.enemiesInEncounter)
             {
-                CreateEnemyHexCharacter(enemy, LevelController.Instance.GetRandomSpawnableLevelNode(spawnLocations, false));
+                // TO DO: SPAWN AT IDEAL POSITION
+                CreateEnemyHexCharacter(dataSet.enemyData, LevelController.Instance.GetRandomSpawnableLevelNode(spawnLocations, false));
             }
 
         }

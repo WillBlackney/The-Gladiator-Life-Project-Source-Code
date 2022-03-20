@@ -475,6 +475,13 @@ namespace HexGameEngine
 
         // Load Encounters Logic (General)
         #region
+        public void HandleLoadIntoCombatFromDeploymentScreen()
+        {
+
+        }
+
+
+
         public void HandleLoadEncounter(EncounterType encounter)
         {
             Debug.LogWarning("EventSequenceController.HandleLoadEncounter() loading: " + encounter.ToString());

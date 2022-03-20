@@ -377,7 +377,21 @@ namespace HexGameEngine.TownFeatures
             UpdateCharactersDeployedText();
 
             // build enemy deployment nodes
-
+            BuildEnemyNodes(CombatContractCard.SelectectedCombatCard.MyContractData);
+        }
+        private void BuildEnemyNodes(CombatContractData combatData)
+        {
+            foreach(CharacterWithSpawnData eg in combatData.enemyEncounterData.enemiesInEncounter)
+            {
+                foreach(DeploymentNodeView node in allDeploymentNodes)
+                {
+                    if(node.GridPosition == eg.spawnPosition)
+                    {
+                        node.BuildFromCharacterData(eg.enemyData);
+                        break;
+                    }
+                }
+            }
         }
         private void HideDeploymentPage()
         {
@@ -421,6 +435,19 @@ namespace HexGameEngine.TownFeatures
                 return false;
             else return true;
             
+        }
+        private void HandleReadyButtonClicked()
+        {
+            // Validate
+            if(GetDeployedCharacters().Count == 0)
+            {
+                Debug.Log("HandleReadyButtonClicked() cancelling: player has not deployed any characters");
+                return;
+            }
+            else
+            {
+
+            }
         }
         #endregion
 

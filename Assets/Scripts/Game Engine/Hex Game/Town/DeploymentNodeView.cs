@@ -38,6 +38,10 @@ namespace HexGameEngine.TownFeatures
         {
             get { return myCharacterData; }
         }
+        public Vector2 GridPosition
+        {
+            get { return gridPosition; }
+        }
         #endregion
 
         // Input
@@ -52,7 +56,7 @@ namespace HexGameEngine.TownFeatures
         public void OnRightClick()
         {
             Debug.Log("OnRightClick");
-            if (myCharacterData != null)
+            if (myCharacterData != null && allowedCharacter == Allegiance.Player)
             {
                 SetUnoccupiedState();
                 TownController.Instance.UpdateCharactersDeployedText();
@@ -60,7 +64,8 @@ namespace HexGameEngine.TownFeatures
         }
         public void OnLeftClick()
         {
-            PortraitDragController.Instance.OnDeploymentNodeDragStart(this);
+            if(allowedCharacter == Allegiance.Player)
+                PortraitDragController.Instance.OnDeploymentNodeDragStart(this);
         }
         public void MouseEnter()
         {

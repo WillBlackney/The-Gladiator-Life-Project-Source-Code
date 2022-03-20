@@ -45,14 +45,14 @@ namespace HexGameEngine.JourneyLogic
             SetCheckPoint(saveData.saveCheckPoint);
             enemyWavesAlreadyEncountered = saveData.encounteredCombats;
             UpdateCurrentEncounterText();
-            SetCurrentEnemyEncounter(saveData.currentCombatEncounterData);
+            //SetCurrentEnemyEncounter(saveData.currentCombatEncounterData);
         }
         public void SaveMyDataToSaveFile(SaveGameData saveFile)
         {
             saveFile.currentDay = CurrentDay;
             saveFile.currentChapter = CurrentChapter;
             saveFile.currentEncounterType = CurrentEncounterType;
-            saveFile.currentCombatEncounterData = CurrentCombatEncounterData;
+            //saveFile.currentCombatEncounterData = CurrentCombatEncounterData;
             saveFile.saveCheckPoint = SaveCheckPoint;
             saveFile.encounteredCombats = enemyWavesAlreadyEncountered;
         }
@@ -174,7 +174,7 @@ namespace HexGameEngine.JourneyLogic
             ret.baseXpReward = template.baseXpReward;
             ret.difficulty = template.difficulty;
             ret.encounterName = template.encounterName;
-            ret.enemiesInEncounter = new List<HexCharacterData>();
+            ret.enemiesInEncounter = new List<CharacterWithSpawnData>();
 
             // Create all enemies in wave
             foreach (EnemyGroup enemyGroup in template.enemyGroups)
@@ -183,7 +183,7 @@ namespace HexGameEngine.JourneyLogic
                 int randomIndex = Random.Range(0, enemyGroup.possibleEnemies.Count);
                 EnemyTemplateSO data = enemyGroup.possibleEnemies[randomIndex];
                 HexCharacterData enemy = CharacterDataController.Instance.GenerateEnemyDataFromEnemyTemplate(data);
-                ret.enemiesInEncounter.Add(enemy);
+                ret.enemiesInEncounter.Add(new CharacterWithSpawnData(enemy, enemyGroup.spawnPosition));
             }
 
             return ret;
