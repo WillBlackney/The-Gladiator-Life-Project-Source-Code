@@ -17,6 +17,8 @@ using CardGameEngine.UCM;
 using HexGameEngine.AI;
 using System.Linq;
 using System;
+using HexGameEngine.JourneyLogic;
+using HexGameEngine.Pathfinding;
 
 namespace HexGameEngine.Characters
 {
@@ -86,7 +88,24 @@ namespace HexGameEngine.Characters
             foreach(HexCharacterData c in characters)
             {
                 if(c.currentHealth > 0)
-                    CreatePlayerHexCharacter(c, LevelController.Instance.GetRandomSpawnableLevelNode(LevelController.Instance.GetPlayerSpawnZone()));
+                {
+                    LevelNode spawnPos = null;
+                    foreach(CharacterWithSpawnData cw in RunController.Instance.CurrentDeployedCharacters)
+                    {
+                        LevelNode n = LevelController.Instance.GetHexAtGridPosition(cw.spawnPosition);
+                        if (cw != null && 
+                            cw.characterData == c && 
+                            n != null &&
+                            Pathfinder.IsHexSpawnable(n))
+                        {
+                            spawnPos = n;
+                            break;
+                        }
+                    }
+                    if (spawnPos == null)
+                        spawnPos = LevelController.Instance.GetRandomSpawnableLevelNode(LevelController.Instance.GetPlayerSpawnZone());
+                    CreatePlayerHexCharacter(c, spawnPos);
+                }
             }
         }
         public void CreatePlayerHexCharacter(HexCharacterData data, LevelNode startPosition)
@@ -340,8 +359,10 @@ namespace HexGameEngine.Characters
             // Create all enemies in wave
             foreach (CharacterWithSpawnData dataSet in encounterData.enemiesInEncounter)
             {
-                // TO DO: SPAWN AT IDEAL POSITION
-                CreateEnemyHexCharacter(dataSet.enemyData, LevelController.Instance.GetRandomSpawnableLevelNode(spawnLocations, false));
+                LevelNode spawnNode = LevelController.Instance.GetHexAtGridPosition(dataSet.spawnPosition);
+                if (Pathfinder.IsHexSpawnable(spawnNode) == false) 
+                    spawnNode = LevelController.Instance.GetRandomSpawnableLevelNode(spawnLocations, false);
+                CreateEnemyHexCharacter(dataSet.characterData, spawnNode);
             }
 
         }

@@ -797,6 +797,20 @@ namespace HexGameEngine.HexTiles
 
         // Get Hexs Logic
         #region
+        public LevelNode GetHexAtGridPosition(Vector2 gridPos)
+        {
+            LevelNode ret = null;
+            foreach(LevelNode n in allLevelNodes)
+            {
+                if(n.GridPosition == gridPos)
+                {
+                    ret = n;
+                    break;
+                }
+            }
+
+            return ret;
+        }
         public List<LevelNode> GetAllHexsWithinRange(LevelNode start, int range, bool includeStart = false)
         {
             List<LevelNode> hexsRet = new List<LevelNode>();

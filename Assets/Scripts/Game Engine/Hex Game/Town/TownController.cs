@@ -299,7 +299,7 @@ namespace HexGameEngine.TownFeatures
         }
         public void OnDeploymentPageReadyButtonClicked()
         {
-
+            HandleReadyButtonClicked();
         }
         public void OnArenaPageButtonClicked()
         {
@@ -315,6 +315,13 @@ namespace HexGameEngine.TownFeatures
 
         // Choose Combat Contract Page Logic
         #region
+        public CombatContractData GenerateSandboxContractData()
+        {
+            CombatContractData ret = new CombatContractData();
+            ret.enemyEncounterData = RunController.Instance.GenerateEnemyEncounterFromTemplate(GlobalSettings.Instance.SandboxEnemyEncounters.GetRandomElement());
+            ret.combatRewardData = new CombatRewardData(ret.enemyEncounterData.difficulty);
+            return ret;
+        }
         public void GenerateDailyCombatContracts()
         {
             currentDailyCombatContracts.Clear();
@@ -387,13 +394,13 @@ namespace HexGameEngine.TownFeatures
                 {
                     if(node.GridPosition == eg.spawnPosition)
                     {
-                        node.BuildFromCharacterData(eg.enemyData);
+                        node.BuildFromCharacterData(eg.characterData);
                         break;
                     }
                 }
             }
         }
-        private void HideDeploymentPage()
+        public void HideDeploymentPage()
         {
             deploymentPageMainVisualParent.SetActive(false);
         }
@@ -415,23 +422,32 @@ namespace HexGameEngine.TownFeatures
                 UpdateCharactersDeployedText();
             }
         }
-        private List<HexCharacterData> GetDeployedCharacters()
+        public List<CharacterWithSpawnData> GetDeployedCharacters()
         {
-            List<HexCharacterData> ret = new List<HexCharacterData>();
+            List<CharacterWithSpawnData> ret = new List<CharacterWithSpawnData>();
 
             foreach(DeploymentNodeView n in allDeploymentNodes)
             {
                 if (n.AllowedCharacter == Allegiance.Player &&
                     n.MyCharacterData != null)
-                    ret.Add(n.MyCharacterData);
+                {
+                    ret.Add(new CharacterWithSpawnData(n.MyCharacterData, n.GridPosition));
+                }
+                   
             }
 
             return ret;
         }
         public bool IsCharacterDraggableFromRosterToDeploymentNode(HexCharacterData character)
         {
+            List<HexCharacterData> charactersDep = new List<HexCharacterData>();
+            foreach(CharacterWithSpawnData c in GetDeployedCharacters())
+            {
+                charactersDep.Add(c.characterData);
+            }
+
             if (deploymentPageMainVisualParent.activeSelf &&
-                GetDeployedCharacters().Contains(character))
+                charactersDep.Contains(character))
                 return false;
             else return true;
             
@@ -446,7 +462,7 @@ namespace HexGameEngine.TownFeatures
             }
             else
             {
-
+                GameController.Instance.HandleLoadIntoCombatFromDeploymentScreen();
             }
         }
         #endregion

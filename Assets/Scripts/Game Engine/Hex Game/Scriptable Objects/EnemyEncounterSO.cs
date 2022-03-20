@@ -36,11 +36,11 @@ namespace HexGameEngine.Characters
     public class CharacterWithSpawnData
     {
         public Vector2 spawnPosition;
-        public HexCharacterData enemyData;
+        public HexCharacterData characterData;
         public CharacterWithSpawnData(HexCharacterData data, Vector2 position)
         {
             spawnPosition = position;
-            enemyData = data;
+            characterData = data;
         }
 
         /*         

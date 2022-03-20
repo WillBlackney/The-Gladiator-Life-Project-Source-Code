@@ -19,7 +19,7 @@ namespace HexGameEngine.Characters
                 int xp = 0;
                 foreach (CharacterWithSpawnData c in enemiesInEncounter)
                 {
-                    xp += c.enemyData.xpReward;
+                    xp += c.characterData.xpReward;
                 }
 
                 return xp;

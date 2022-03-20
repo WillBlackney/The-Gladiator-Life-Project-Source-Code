@@ -123,7 +123,7 @@ namespace HexGameEngine.TownFeatures
 
             foreach (CharacterWithSpawnData enemy in data.enemyEncounterData.enemiesInEncounter)
             {
-                enemiesText.text += "- " + enemy.enemyData.myName + "\n";
+                enemiesText.text += "- " + enemy.characterData.myName + "\n";
             }
             goldRewardText.text = data.combatRewardData.goldAmount.ToString();
             abilityTomeImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookFromEnumData(data.combatRewardData.abilityAwarded.talentRequirementData.talentSchool);

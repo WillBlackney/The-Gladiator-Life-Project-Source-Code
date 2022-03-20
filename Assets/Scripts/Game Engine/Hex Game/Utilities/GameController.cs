@@ -71,12 +71,6 @@ namespace HexGameEngine
 
             else if (GlobalSettings.Instance.GameMode == GameMode.PostCombatReward)
                 RunPostCombatRewardTestEventSetup();
-
-            else if (GlobalSettings.Instance.GameMode == GameMode.CampSiteSandbox)
-                RunCampSiteSandbox();
-
-            else if (GlobalSettings.Instance.GameMode == GameMode.CharacterDraftSandbox)
-                RunCharacterDraftTestEventSetup();
         }
         #endregion
 
@@ -128,7 +122,7 @@ namespace HexGameEngine
 
             // Build mock save file + journey data
             RunController.Instance.SetGameStartValues();
-            RunController.Instance.SetCurrentEncounterType(EncounterType.BasicEnemy);
+           // RunController.Instance.SetCurrentEncounterType(EncounterType.BasicEnemy);
             RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
 
             // Build character roster + mock data
@@ -143,12 +137,12 @@ namespace HexGameEngine
             // Setup player characters
             HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
 
-            // Generate enemy wave + enemies data + save to run controller           
-            EnemyEncounterData enemyEncounter = RunController.Instance.GenerateEnemyEncounterFromTemplate(GlobalSettings.Instance.SandboxEnemyEncounters.GetRandomElement());
-            RunController.Instance.SetCurrentEnemyEncounter(enemyEncounter);
+            // Generate enemy wave + enemies data + save to run controller
+            CombatContractData sandboxContractData = TownController.Instance.GenerateSandboxContractData();
+            RunController.Instance.SetCurrentContractData(sandboxContractData);
 
             // Spawn enemies in world
-            HexCharacterController.Instance.SpawnEnemyEncounter(enemyEncounter);
+            HexCharacterController.Instance.SpawnEnemyEncounter(sandboxContractData.enemyEncounterData);
 
             // Place characters off screen
             HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();
@@ -186,54 +180,7 @@ namespace HexGameEngine
             HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
 
             StartCombatVictorySequence();
-        }
-        private void RunCampSiteSandbox()
-        {
-            // Set state
-            SetGameState(GameState.NonCombatEvent);
-
-            // Show UI
-            TopBarController.Instance.ShowTopBar();
-
-            // Reset Camera + Lighting           
-            CameraController.Instance.ResetMainCameraPositionAndZoom();
-
-            // Reset Camera + Lighting
-            LightController.Instance.EnableStandardGlobalLight();
-
-            // Build character roster + mock data
-            List<HexCharacterData> characters = CreateSandboxCharacterDataFiles();
-            CharacterDataController.Instance.BuildCharacterRoster(characters);
-
-            // Build mock map data
-            MapManager.Instance.SetCurrentMap(MapManager.Instance.GenerateNewMap());
-            MapPlayerTracker.Instance.LockMap();
-
-            // Load new camp event
-            HandleLoadCampSiteEvent();
-        }
-        private void RunCharacterDraftTestEventSetup()
-        {
-            // Set state
-            SetGameState(GameState.NonCombatEvent);
-
-            // Build mock map data
-            MapManager.Instance.SetCurrentMap(MapManager.Instance.GenerateNewMap());
-            MapPlayerTracker.Instance.LockMap();
-
-            // Show UI
-            TopBarController.Instance.ShowTopBar();
-
-            // Reset Camera + Lighting           
-            CameraController.Instance.ResetMainCameraPositionAndZoom();
-
-            // Build character roster from mock data
-            List<HexCharacterData> characters = new List<HexCharacterData>();
-            characters.Add(CreateSandboxCharacterDataFiles()[0]);
-            CharacterDataController.Instance.BuildCharacterRoster(characters);
-
-            HandleLoadCharacterDraftEvent();
-        }
+        }      
         #endregion
 
         // Handle Post Combat Stuff
@@ -469,7 +416,7 @@ namespace HexGameEngine
             MainMenuController.Instance.HideFrontScreen();
 
             // Load the encounter the player saved at
-            HandleLoadEncounter(RunController.Instance.CurrentEncounterType);
+            //HandleLoadEncounter(RunController.Instance.CurrentEncounterType);
         }
         #endregion
 
@@ -477,7 +424,47 @@ namespace HexGameEngine
         #region
         public void HandleLoadIntoCombatFromDeploymentScreen()
         {
+            StartCoroutine(HandleLoadIntoCombatFromDeploymentScreenCoroutine());
 
+        }
+        private IEnumerator HandleLoadIntoCombatFromDeploymentScreenCoroutine()
+        {
+            BlackScreenController.Instance.FadeOutScreen(1f);          
+            yield return new WaitForSeconds(1f);
+
+            // Hide down town views
+            BlackScreenController.Instance.FadeInScreen(1f);
+            TownController.Instance.HideTownView();
+            TownController.Instance.HideDeploymentPage();
+            CharacterScrollPanelController.Instance.HideMainView();
+            // in future: hide top bar
+
+
+            RunController.Instance.SetCurrentContractData(CombatContractCard.SelectectedCombatCard.MyContractData);
+            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
+            RunController.Instance.SetPlayerDeployedCharacters(TownController.Instance.GetDeployedCharacters());
+            PersistencyController.Instance.AutoUpdateSaveFile();
+
+            // Enable world view
+            LightController.Instance.EnableDungeonGlobalLight();
+            LevelController.Instance.EnableNightTimeArenaScenery();
+            LevelController.Instance.ShowAllNodeViews();
+
+            // Setup player characters
+            HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
+
+            // Setup enemy characters
+            HexCharacterController.Instance.SpawnEnemyEncounter(RunController.Instance.CurrentCombatContractData.enemyEncounterData);
+
+            // Place characters off screen
+            HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();
+
+            // Move characters towards start nodes
+            CoroutineData cData = new CoroutineData();
+            VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
+
+            // Start a new combat event
+            TurnController.Instance.OnNewCombatEventStarted();
         }
 
 
@@ -494,7 +481,7 @@ namespace HexGameEngine
                 )
             {
                 
-                HandleLoadCombatEncounter(RunController.Instance.CurrentCombatEncounterData);
+                //HandleLoadCombatEncounter(RunController.Instance.CurrentCombatContractData);
             }
 
             else if ((encounter == EncounterType.BasicEnemy ||
@@ -540,13 +527,14 @@ namespace HexGameEngine
         }
         private IEnumerator HandleLoadNextEncounterCoroutine(MapNode mapNode)
         {
+            yield return null;
             // Hide world map view
             MapView.Instance.HideMainMapView();
 
             // Cache previous encounter data 
             EncounterType nextEncounterType = mapNode.Node.NodeType;
-            EncounterType previousEncounter = RunController.Instance.CurrentEncounterType;
-            EnemyEncounterData previousEnemyWave = RunController.Instance.CurrentCombatEncounterData;
+            //EncounterType previousEncounter = RunController.Instance.CurrentEncounterType;
+            //EnemyEncounterData previousEnemyWave = RunController.Instance.CurrentCombatContractData;
 
             // If mystery node, roll for story event, combat or shop
             if (nextEncounterType == EncounterType.Story)
@@ -581,8 +569,9 @@ namespace HexGameEngine
 
             // Increment world position + set next encounter
             //ScoreManager.Instance.IncrementRoomsCleared();
-            RunController.Instance.SetCurrentEncounterType(nextEncounterType);
+            //RunController.Instance.SetCurrentEncounterType(nextEncounterType);
 
+            /*
             // Destroy all characters and activation windows if the previous encounter was a combat event
             if (previousEncounter == EncounterType.BasicEnemy ||
                 previousEncounter == EncounterType.EliteEnemy ||
@@ -622,119 +611,14 @@ namespace HexGameEngine
                 
 
             }
-
-            // TO DO IN FUTURE: Boss victory means loading the next act, so we need
-            // different loading/continuation logic here. We also need to end the game,
-            // show score, etc, if the boss is last boss (act 3).
-            else if (previousEncounter == EncounterType.BossEnemy)
-            {
-
-            }
-
-            // Do draft event end sequence + tear down
-            else if (previousEncounter == EncounterType.DraftEvent)
-            {
-                CoroutineData kbcSequence = new CoroutineData();
-                HandlDraftEventContinueSequence(kbcSequence);
-                yield return new WaitUntil(() => kbcSequence.CoroutineCompleted());
-                LevelController.Instance.DisableGraveyardScenery();
-            }
-
-            // Do camp site end sequence + tear down
-            else if (previousEncounter == EncounterType.CampSite)
-            {
-                // Fade out Screen
-                BlackScreenController.Instance.FadeOutScreen(2f);
-                yield return new WaitForSeconds(2f);
-
-                // Close vamp site views
-                CampSiteController.Instance.HideMainView();
-
-                
-            }
-
-            // Mystery Event teardown
-            else if (previousEncounter == EncounterType.Story)
-            {
-                /*
-                // Fade out Screen
-                BlackScreenController.Instance.FadeOutScreen(1f);
-
-                // Wait for visual events
-                yield return new WaitForSeconds(1f);
-
-                // Close views and clear data
-                StoryEventController.Instance.ClearCurrentStoryEvent();
-                StoryEventController.Instance.HideMainScreen();
-                */
-            }
-
-            // Do shop end sequence + tear down
-            else if (previousEncounter == EncounterType.Shop)
-            {
-                /*
-                // Shop keeper farewell
-                ShopController.Instance.DoMerchantFarewell();
-
-                // disable shop keeper clickability + GUI
-                ShopController.Instance.SetShopKeeperInteractionState(false);
-                ShopController.Instance.SetContinueButtonInteractionState(false);
-                ShopController.Instance.HideContinueButton();
-
-                // Clear shop content result data
-                ShopController.Instance.ClearShopContentDataSet();
-
-                // Move characters off screen
-                ShopController.Instance.MoveCharactersToOffScreenRight();
-
-                // Zoom and move camera
-                yield return new WaitForSeconds(0.5f);
-                CameraManager.Instance.DoCameraMove(3, 0, 3f);
-                CameraManager.Instance.DoCameraZoom(5, 3, 3f);
-
-                // Fade out Screen
-                BlackScreenController.Instance.FadeOutScreen(3f);
-
-                // Wait for visual events
-                yield return new WaitForSeconds(4f);
-
-                ShopController.Instance.DisableCharacterViewParent();
-                LevelManager.Instance.DisableShopScenery();
-                */
-            }
-
-            // Do shrine end sequence + tear down
-            else if (previousEncounter == EncounterType.TreasureRoom)
-            {
-                /*
-                // Hide shrine GUI
-                ShrineController.Instance.HideContinueButton();
-
-                // Move characters off screen
-                ShrineController.Instance.MoveCharactersToOffScreenRight();
-
-                // Zoom and move camera
-                yield return new WaitForSeconds(0.5f);
-                CameraManager.Instance.DoCameraMove(3, 0, 3f);
-                CameraManager.Instance.DoCameraZoom(5, 3, 3f);
-
-                // Fade out Screen
-                BlackScreenController.Instance.FadeOutScreen(3f);
-
-                // Wait for visual events
-                yield return new WaitForSeconds(4f);
-
-                ShrineController.Instance.DisableAllViews();
-                LevelManager.Instance.DisableShrineScenery();
-                */
-            }
-
+            */
 
             // ::: LOAD NEXT EVENT START :::
 
             // Reset Camera
             CameraController.Instance.ResetMainCameraPositionAndZoom();
 
+            /*
             // If next event is a combat, get + set enemy wave before saving to disk
             if (RunController.Instance.CurrentEncounterType == EncounterType.BasicEnemy ||
                 RunController.Instance.CurrentEncounterType == EncounterType.EliteEnemy ||
@@ -765,89 +649,7 @@ namespace HexGameEngine
                 HandleLoadCombatEncounter(RunController.Instance.CurrentCombatEncounterData);
             }
 
-            // Shop event
-            else if (RunController.Instance.CurrentEncounterType == EncounterType.Shop)
-            {
-                /*
-                // Generate new shop contents
-                if (ShopController.Instance.CurrentShopContentResultData == null)
-                {
-                    ShopController.Instance.SetAndCacheNewShopContentDataSet();
-                }
-
-                // Set check point
-                JourneyManager.Instance.SetCheckPoint(SaveCheckPoint.Shop);
-
-                // Auto save
-                PersistencyManager.Instance.AutoUpdateSaveFile();
-
-                HandleLoadShopEvent();
-                */
-            }
-
-            // Shrine event
-            else if (RunController.Instance.CurrentEncounterType == EncounterType.TreasureRoom)
-            {
-                /*
-                // Generate new shop contents
-                if (ShrineController.Instance.CurrentShrineStates == null)
-                {
-                    ShrineController.Instance.SetAndCacheNewShrineContentDataSet();
-                }
-
-                // Set check point
-                JourneyManager.Instance.SetCheckPoint(SaveCheckPoint.Shrine);
-
-                // Auto save
-                PersistencyManager.Instance.AutoUpdateSaveFile();
-
-                HandleLoadShrineEvent();
-                */
-            }
-
-            // Draft
-            else if (RunController.Instance.CurrentEncounterType == EncounterType.DraftEvent)
-            {
-                // Set check point
-                //RunController.Instance.SetCheckPoint(SaveCheckPoint.DraftEvent);
-
-                // Auto save
-                PersistencyController.Instance.AutoUpdateSaveFile();
-
-                HandleLoadCharacterDraftEvent();
-            }
-
-            // Camp site
-            else if (RunController.Instance.CurrentEncounterType == EncounterType.CampSite)
-            {
-                // Set check point
-               // RunController.Instance.SetCheckPoint(SaveCheckPoint.CampSite);
-
-                // Auto save
-                PersistencyController.Instance.AutoUpdateSaveFile();
-
-                HandleLoadCampSiteEvent();
-            }
-
-            // Story Event 
-            else if (RunController.Instance.CurrentEncounterType == EncounterType.Story)
-            {
-                /*
-                // Generate and cache mystery event, if dont have one saved
-                if (StoryEventController.Instance.CurrentStoryEvent == null)
-                {
-                    StoryEventController.Instance.GenerateAndCacheNextStoryEventRandomly();
-                }
-
-                // Set check point
-                RunController.Instance.SetCheckPoint(SaveCheckPoint.MysteryEventStart);
-
-                // Auto save
-                PersistencyController.Instance.AutoUpdateSaveFile();
-
-                HandleLoadMysteryEvent();
-                */
-            }
+            */
         }
         private void HandleLoadCombatEncounter(EnemyEncounterData enemyWave)
         {

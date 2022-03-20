@@ -69,9 +69,9 @@ namespace HexGameEngine.RewardSystems
             List<CharacterCombatStatData> dataRet = new List<CharacterCombatStatData>();
 
             // Calculate xp gain          
-            int baseXp = RunController.Instance.CurrentCombatEncounterData.baseXpReward;
+            int baseXp = RunController.Instance.CurrentCombatContractData.enemyEncounterData.baseXpReward;
             int killXpSlice = 0;
-            var encounterData = RunController.Instance.CurrentCombatEncounterData;
+            var encounterData = RunController.Instance.CurrentCombatContractData.enemyEncounterData;
 
             // Prevent divide by zero error
             if (encounterData.TotalEnemyXP != 0 &&
@@ -130,7 +130,7 @@ namespace HexGameEngine.RewardSystems
             // Generate gold reward
             newLoot.goldReward = 0;
 
-            EnemyEncounterData combatData = RunController.Instance.CurrentCombatEncounterData;
+            EnemyEncounterData combatData = RunController.Instance.CurrentCombatContractData.enemyEncounterData;
 
             // Determine gold reward
             if (combatData.difficulty == CombatDifficulty.Basic)

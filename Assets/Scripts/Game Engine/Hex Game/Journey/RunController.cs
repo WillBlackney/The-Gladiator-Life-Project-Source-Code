@@ -19,15 +19,18 @@ namespace HexGameEngine.JourneyLogic
         [Header("Combat Encounter Data")]
         [SerializeField] private EnemyEncounterSet[] allCombatEncounterSets;
 
-        // Non inspector fields
-        private List<EnemyEncounterData> enemyWavesAlreadyEncountered = new List<EnemyEncounterData>();       
-
+        // Non inspector fields     
+        public List<CharacterWithSpawnData> currentDeployedCharacters = new List<CharacterWithSpawnData>();
         #endregion
 
         // Getters + Accessors
         #region
-        public EnemyEncounterData CurrentCombatEncounterData { get; private set; }
-        public EncounterType CurrentEncounterType { get; private set; }
+        public CombatContractData CurrentCombatContractData { get; private set; }
+        public List<CharacterWithSpawnData> CurrentDeployedCharacters 
+        { 
+            get { return currentDeployedCharacters; } 
+            private set { currentDeployedCharacters = value; }
+        }
         public SaveCheckPoint SaveCheckPoint { get; private set; }
         public int CurrentDay { get; private set; }
         public int CurrentChapter { get; private set; }
@@ -41,29 +44,26 @@ namespace HexGameEngine.JourneyLogic
         {
             CurrentDay = saveData.currentDay;
             CurrentChapter = saveData.currentChapter;
-            SetCurrentEncounterType(saveData.currentEncounterType);
+            CurrentCombatContractData = saveData.currentCombatContractData;
+            CurrentDeployedCharacters = saveData.playerCombatCharacters;
             SetCheckPoint(saveData.saveCheckPoint);
-            enemyWavesAlreadyEncountered = saveData.encounteredCombats;
+
             UpdateCurrentEncounterText();
-            //SetCurrentEnemyEncounter(saveData.currentCombatEncounterData);
         }
         public void SaveMyDataToSaveFile(SaveGameData saveFile)
         {
             saveFile.currentDay = CurrentDay;
             saveFile.currentChapter = CurrentChapter;
-            saveFile.currentEncounterType = CurrentEncounterType;
-            //saveFile.currentCombatEncounterData = CurrentCombatEncounterData;
+            saveFile.currentCombatContractData = CurrentCombatContractData;
             saveFile.saveCheckPoint = SaveCheckPoint;
-            saveFile.encounteredCombats = enemyWavesAlreadyEncountered;
+            saveFile.playerCombatCharacters = CurrentDeployedCharacters;
         }
         public void SetGameStartValues()
         {
             CurrentDay = 1;
             CurrentChapter = 1;
-            SetCurrentEncounterType(EncounterType.None);
             SetCheckPoint(SaveCheckPoint.Town);
-            enemyWavesAlreadyEncountered.Clear();
-            CurrentCombatEncounterData = null;
+            CurrentCombatContractData = null;
         }
 
         #endregion
@@ -102,11 +102,7 @@ namespace HexGameEngine.JourneyLogic
         #endregion
 
         // Modify Core Journey Properties
-        #region
-        public void SetCurrentEncounterType(EncounterType type)
-        {
-            CurrentEncounterType = type;
-        }
+        #region       
         public void SetCheckPoint(SaveCheckPoint type)
         {
             SaveCheckPoint = type;
@@ -120,9 +116,13 @@ namespace HexGameEngine.JourneyLogic
 
         // Get + Set Enemy Waves
         #region
-        public void SetCurrentEnemyEncounter(EnemyEncounterData wave)
+        public void SetPlayerDeployedCharacters(List<CharacterWithSpawnData> characters)
         {
-            CurrentCombatEncounterData = wave;
+            CurrentDeployedCharacters = characters;
+        }
+        public void SetCurrentContractData(CombatContractData wave)
+        {
+            CurrentCombatContractData = wave;
         }
         public EnemyEncounterSO GetRandomCombatData(int currentAct, CombatDifficulty difficulty)
         {
@@ -188,11 +188,7 @@ namespace HexGameEngine.JourneyLogic
 
             return ret;
         }
-        public void AddEnemyWaveToAlreadyEncounteredList(EnemyEncounterData wave)
-        {
-            Debug.Log("JourneyManager.AddEnemyWaveToAlreadyEncounteredList() adding " + wave.encounterName + " to already encounter list");
-            enemyWavesAlreadyEncountered.Add(wave);
-        }
+        
         #endregion
 
       
