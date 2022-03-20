@@ -20,6 +20,7 @@ namespace HexGameEngine.Utilities
 
         [Title("Combat Settings")]
         [SerializeField] private int baseHitChance;
+        [SerializeField] private int startingDeploymentLimit;
 
         [Title("Resource Settings")]
         [SerializeField] private int baseStartingGold;
@@ -77,7 +78,11 @@ namespace HexGameEngine.Utilities
         public int BaseStartingGold
         {
             get { return baseStartingGold; }
-        }       
+        }
+        public int StartingDeploymentLimit
+        {
+            get { return startingDeploymentLimit; }
+        }
         public HexCharacterTemplateSO[] ChosenCharacterTemplates
         {
             get { return chosenCharacterTemplates; }

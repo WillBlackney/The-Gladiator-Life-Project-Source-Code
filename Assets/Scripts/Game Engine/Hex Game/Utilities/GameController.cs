@@ -10,6 +10,7 @@ using HexGameEngine.Items;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.MainMenu;
 using HexGameEngine.Persistency;
+using HexGameEngine.Player;
 using HexGameEngine.RewardSystems;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.TurnLogic;

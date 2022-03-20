@@ -31,5 +31,6 @@ namespace HexGameEngine.Characters
     public class EnemyGroup
     {
         public List<EnemyTemplateSO> possibleEnemies;
+        public Vector2 spawnPosition;
     }
 }

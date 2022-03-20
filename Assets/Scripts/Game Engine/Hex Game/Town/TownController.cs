@@ -63,13 +63,19 @@ namespace HexGameEngine.TownFeatures
 
         [Title("Deployment Page Components")]
         [SerializeField] private GameObject deploymentPageMainVisualParent;
-
+        [SerializeField] private TextMeshProUGUI charactersDeployedText;
+        [SerializeField] private DeploymentNodeView[] allDeploymentNodes;
 
 
         // Non-inspector properties
         private List<HexCharacterData> currentRecruits = new List<HexCharacterData>();
         private RecruitableCharacterTab selectedRecruitTab;
         private List<CombatContractData> currentDailyCombatContracts = new List<CombatContractData>();
+        #endregion
+
+        // Getters + Accessors
+        #region
+       
         #endregion
 
         // Save + Load Logic
@@ -293,7 +299,7 @@ namespace HexGameEngine.TownFeatures
         }
         public void OnDeploymentPageReadyButtonClicked()
         {
-           
+
         }
         public void OnArenaPageButtonClicked()
         {
@@ -304,7 +310,7 @@ namespace HexGameEngine.TownFeatures
                 BlackScreenController.Instance.FadeInScreen(0.5f);
             });
         }
-      
+
         #endregion
 
         // Choose Combat Contract Page Logic
@@ -338,13 +344,13 @@ namespace HexGameEngine.TownFeatures
             return ret;
         }
         private void BuildAndShowCombatContractPage()
-        {          
+        {
             chooseCombatPageMainVisualParent.SetActive(true);
-            for(int i =0; i < currentDailyCombatContracts.Count && i < allContractCards.Length; i++)
+            for (int i = 0; i < currentDailyCombatContracts.Count && i < allContractCards.Length; i++)
             {
                 allContractCards[i].BuildFromContractData(currentDailyCombatContracts[i]);
             }
-            
+
             CombatContractCard.HandleDeselect();
         }
         private void HideCombatContractPage()
@@ -363,10 +369,58 @@ namespace HexGameEngine.TownFeatures
         private void BuildAndShowDeploymentPage()
         {
             deploymentPageMainVisualParent.SetActive(true);
+
+            // Reset deployment nodes
+            for (int i = 0; i < allDeploymentNodes.Length; i++)
+                allDeploymentNodes[i].SetUnoccupiedState();
+
+            UpdateCharactersDeployedText();
+
+            // build enemy deployment nodes
+
         }
         private void HideDeploymentPage()
         {
             deploymentPageMainVisualParent.SetActive(false);
+        }
+        public void UpdateCharactersDeployedText()
+        {
+            charactersDeployedText.text = "Characters Deployed: " + GetDeployedCharacters().Count.ToString() + 
+                " / " + PlayerDataController.Instance.DeploymentLimit.ToString();
+        }
+        public void HandleDropCharacterOnDeploymentNode(DeploymentNodeView node, HexCharacterData draggedCharacter)
+        {
+            Debug.Log("HandleDropCharacterOnDeploymentNode");
+            // Prevent drag drop new character when already deployed maximum characters
+            if (node.IsNodeAvailable() && GetDeployedCharacters().Count >= PlayerDataController.Instance.DeploymentLimit) return;
+
+            // Handle dropped on empty slot
+            if (node.AllowedCharacter == Allegiance.Player)
+            {
+                node.BuildFromCharacterData(draggedCharacter);
+                UpdateCharactersDeployedText();
+            }
+        }
+        private List<HexCharacterData> GetDeployedCharacters()
+        {
+            List<HexCharacterData> ret = new List<HexCharacterData>();
+
+            foreach(DeploymentNodeView n in allDeploymentNodes)
+            {
+                if (n.AllowedCharacter == Allegiance.Player &&
+                    n.MyCharacterData != null)
+                    ret.Add(n.MyCharacterData);
+            }
+
+            return ret;
+        }
+        public bool IsCharacterDraggableFromRosterToDeploymentNode(HexCharacterData character)
+        {
+            if (deploymentPageMainVisualParent.activeSelf &&
+                GetDeployedCharacters().Contains(character))
+                return false;
+            else return true;
+            
         }
         #endregion
 

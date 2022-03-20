@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using CardGameEngine.UCM;
 using HexGameEngine.Characters;
+using HexGameEngine.UCM;
+using HexGameEngine.UI;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -18,26 +20,57 @@ namespace HexGameEngine.TownFeatures
 
         // Non inspector values
         private HexCharacterData myCharacterData;
+        private static DeploymentNodeView nodeMousedOver;
         #endregion
 
         // Getters + Accessors
         #region
-
+        public static DeploymentNodeView NodeMousedOver
+        {
+            get { return nodeMousedOver; }
+            private set { nodeMousedOver = value; }
+        }
+        public Allegiance AllowedCharacter
+        {
+            get { return allowedCharacter; }
+        }
+        public HexCharacterData MyCharacterData
+        {
+            get { return myCharacterData; }
+        }
         #endregion
 
         // Input
         #region
+        void Update()
+        {
+            if(NodeMousedOver == this && Input.GetKeyDown(KeyCode.Mouse1))            
+                OnRightClick();
+            else if (NodeMousedOver == this && Input.GetKeyDown(KeyCode.Mouse0))
+                OnLeftClick();
+        }
         public void OnRightClick()
         {
-
+            Debug.Log("OnRightClick");
+            if (myCharacterData != null)
+            {
+                SetUnoccupiedState();
+                TownController.Instance.UpdateCharactersDeployedText();
+            }        
+        }
+        public void OnLeftClick()
+        {
+            PortraitDragController.Instance.OnDeploymentNodeDragStart(this);
         }
         public void MouseEnter()
         {
-
+            Debug.Log("MouseEnter");
+            NodeMousedOver = this;
         }
         public void MouseExit()
         {
-
+            Debug.Log("MouseExit");
+            NodeMousedOver = null;
         }
         #endregion
 
@@ -45,16 +78,26 @@ namespace HexGameEngine.TownFeatures
         #region
         public void BuildFromCharacterData(HexCharacterData character)
         {
-            portraitVisualParent.SetActive(false);
+            portraitVisualParent.SetActive(true);
             myCharacterData = character;
 
             // build model mugshot
+            CharacterModeller.BuildModelFromStringReferencesAsMugshot(portraitModel, character.modelParts);
         }
         public void SetUnoccupiedState()
         {
             myCharacterData = null;
             portraitVisualParent.SetActive(false);
         }
+        #endregion
+
+        // Conditional Checks
+        #region
+        public bool IsNodeAvailable()
+        {
+            return myCharacterData == null;
+        }
+       
         #endregion
 
     }

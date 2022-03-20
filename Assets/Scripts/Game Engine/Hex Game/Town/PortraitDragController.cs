@@ -6,6 +6,7 @@ using CardGameEngine.UCM;
 using UnityEngine.UI;
 using HexGameEngine.UCM;
 using HexGameEngine.Characters;
+using HexGameEngine.TownFeatures;
 
 namespace HexGameEngine.UI
 {
@@ -24,6 +25,7 @@ namespace HexGameEngine.UI
 
         // Non inspector fields
         private HexCharacterData draggedCharacterData;
+        private DeploymentNodeView draggedNode;
         #endregion
 
         // Getters + Accessors
@@ -48,16 +50,39 @@ namespace HexGameEngine.UI
         void HandleEndDrag()
         {
             followMouseParent.SetActive(false);
+            if(DeploymentNodeView.NodeMousedOver != null)
+            {
+                TownController.Instance.HandleDropCharacterOnDeploymentNode(DeploymentNodeView.NodeMousedOver, draggedCharacterData);
+                draggedCharacterData = null;
+                draggedNode = null;
+            }
+
+            // Handle dragging a node (not character panel) and drag did not end on a new node: rebuild old node position
+            else if (DeploymentNodeView.NodeMousedOver == null &&
+                draggedNode != null)
+            {
+                TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);
+                draggedCharacterData = null;
+                draggedNode = null;
+            }
         }
-        public void BuildAndShowPortrait(List<string> modelParts)
+        private void BuildAndShowPortrait(List<string> modelParts)
         {
             followMouseParent.SetActive(true);
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(potraitUcm, modelParts);
         }
         public void OnRosterCharacterPanelDragStart(RosterCharacterPanel panel)
         {
+            if (!TownController.Instance.IsCharacterDraggableFromRosterToDeploymentNode(panel.MyCharacterData)) return;
             BuildAndShowPortrait(panel.MyCharacterData.modelParts);
             draggedCharacterData = panel.MyCharacterData;
+        }
+        public void OnDeploymentNodeDragStart(DeploymentNodeView node)
+        {
+            BuildAndShowPortrait(node.MyCharacterData.modelParts);
+            draggedCharacterData = node.MyCharacterData;
+            draggedNode = node;
+            node.SetUnoccupiedState();
         }
         private void PlacePortraitAtMousePosition()
         {
