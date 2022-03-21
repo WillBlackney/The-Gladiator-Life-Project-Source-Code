@@ -439,7 +439,7 @@ namespace HexGameEngine
             CharacterScrollPanelController.Instance.HideMainView();
             // in future: hide top bar
 
-
+            SetGameState(GameState.CombatActive);
             RunController.Instance.SetCurrentContractData(CombatContractCard.SelectectedCombatCard.MyContractData);
             RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
             RunController.Instance.SetPlayerDeployedCharacters(TownController.Instance.GetDeployedCharacters());

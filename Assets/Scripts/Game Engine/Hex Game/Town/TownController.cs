@@ -65,7 +65,9 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] private GameObject deploymentPageMainVisualParent;
         [SerializeField] private TextMeshProUGUI charactersDeployedText;
         [SerializeField] private DeploymentNodeView[] allDeploymentNodes;
-
+        [SerializeField] private GameObject deploymentWarningPopupVisualParent; 
+        [SerializeField] private TextMeshProUGUI deploymentWarningPopupText;
+        [SerializeField] private GameObject deploymentWarningPopupContinueButton;
 
         // Non-inspector properties
         private List<HexCharacterData> currentRecruits = new List<HexCharacterData>();
@@ -454,16 +456,44 @@ namespace HexGameEngine.TownFeatures
         }
         private void HandleReadyButtonClicked()
         {
+            var characters = GetDeployedCharacters();
             // Validate
-            if(GetDeployedCharacters().Count == 0)
+            if (characters.Count == 0)
             {
                 Debug.Log("HandleReadyButtonClicked() cancelling: player has not deployed any characters");
+                ShowNoCharactersDeployedPopup();
                 return;
+            }
+            else if(characters.Count > 0 && characters.Count < PlayerDataController.Instance.DeploymentLimit)
+            {
+                ShowLessThanMaxCharactersDeployedPopup();
             }
             else
             {
                 GameController.Instance.HandleLoadIntoCombatFromDeploymentScreen();
             }
+        }
+        private void ShowNoCharactersDeployedPopup()
+        {
+            deploymentWarningPopupVisualParent.SetActive(true);
+            deploymentWarningPopupContinueButton.SetActive(false);
+            deploymentWarningPopupText.text = "Cannot start combat as you have not deployed any characters!";
+        }
+        private void ShowLessThanMaxCharactersDeployedPopup()
+        {
+            deploymentWarningPopupVisualParent.SetActive(true);
+            deploymentWarningPopupContinueButton.SetActive(true);
+            deploymentWarningPopupText.text = "You have deployed less characters than your allowed limit of " + PlayerDataController.Instance.DeploymentLimit.ToString()
+                + ". Are you sure want to start this combat?";
+        }
+        public void OnDeploymentPopupBackButtonClicked()
+        {
+            deploymentWarningPopupVisualParent.SetActive(false);
+        }
+        public void OnDeploymentPopupContinueButtonClicked()
+        {
+            deploymentWarningPopupVisualParent.SetActive(false);
+            GameController.Instance.HandleLoadIntoCombatFromDeploymentScreen();
         }
         #endregion
 
