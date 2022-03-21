@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Necromancer + Shambling Skeleton x2
   m_EditorClassIdentifier: 
   encounterName: Necromancer
-  baseXpReward: 50
+  baseXpReward: 75
   difficulty: 1
   enemyGroups:
   - possibleEnemies:

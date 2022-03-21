@@ -14,6 +14,9 @@ using HexGameEngine.JourneyLogic;
 using HexGameEngine.UCM;
 using HexGameEngine.Combat;
 using HexGameEngine.DungeonMap;
+using HexGameEngine.TownFeatures;
+using HexGameEngine.Player;
+using HexGameEngine.Items;
 
 namespace HexGameEngine.RewardSystems
 {
@@ -86,12 +89,12 @@ namespace HexGameEngine.RewardSystems
                 // apply xp gain + level up
                 int xpGained = baseXp + (killXpSlice * character.totalKills);
                 int previousLevel = character.characterData.currentLevel;
-                if(character.characterData.currentXP + xpGained >= character.characterData.currentMaxXP)
+                if (character.characterData.currentXP + xpGained >= character.characterData.currentMaxXP)
                 {
                     result.didLevelUp = true;
                 }
-               // CharacterDataController.Instance.HandleGainXP(character.characterData, xpGained);
-               // if (previousLevel < character.characterData.currentLevel)
+                // CharacterDataController.Instance.HandleGainXP(character.characterData, xpGained);
+                // if (previousLevel < character.characterData.currentLevel)
                 //    result.didLevelUp = true;
                 result.xpGained = xpGained;
             }
@@ -100,7 +103,7 @@ namespace HexGameEngine.RewardSystems
         }
         public void ApplyXpGainFromStatResultsToCharacters(List<CharacterCombatStatData> results)
         {
-            foreach(CharacterCombatStatData result in results)
+            foreach (CharacterCombatStatData result in results)
             {
                 CharacterDataController.Instance.HandleGainXP(result.characterData, result.xpGained);
             }
@@ -121,73 +124,13 @@ namespace HexGameEngine.RewardSystems
         }
         #endregion
 
-        // Loot Generation 
+        // Items Loot Reward Logic
         #region
-        public LootSet GenerateNewLootResult()
+        public void HandleGainRewardsOfContract(CombatContractData contract)
         {
-            LootSet newLoot = new LootSet();
-
-            // Generate gold reward
-            newLoot.goldReward = 0;
-
-            EnemyEncounterData combatData = RunController.Instance.CurrentCombatContractData.enemyEncounterData;
-
-            // Determine gold reward
-            if (combatData.difficulty == CombatDifficulty.Basic)
-            {
-                newLoot.goldReward = RandomGenerator.NumberBetween(10, 20);
-                //    (GlobalSettings.Instance.basicEnemyGoldRewardLowerLimit, GlobalSettings.Instance.basicEnemyGoldRewardUpperLimit);
-            }
-            else if (combatData.difficulty == CombatDifficulty.Basic)
-            {
-                newLoot.goldReward = RandomGenerator.NumberBetween(25, 35);
-                //    (GlobalSettings.Instance.eliteEnemyGoldRewardLowerLimit, GlobalSettings.Instance.eliteEnemyGoldRewardUpperLimit);
-            }
-
-
-            /*
-            else if (JourneyManager.Instance.CurrentEncounter == EncounterType.EliteEnemy)
-            {
-                newLoot.goldReward = RandomGenerator.NumberBetween
-                    (GlobalSettings.Instance.eliteEnemyGoldRewardLowerLimit, GlobalSettings.Instance.eliteEnemyGoldRewardUpperLimit);
-            }
-            else if (JourneyManager.Instance.CurrentEncounter == EncounterType.BossEnemy)
-            {
-                newLoot.goldReward = RandomGenerator.NumberBetween
-                    (GlobalSettings.Instance.bossEnemyGoldRewardLowerLimit, GlobalSettings.Instance.bossEnemyGoldRewardUpperLimit);
-            }
-
-            // Generate character card choices
-            for (int i = 0; i < CharacterDataController.Instance.AllPlayerCharacters.Count; i++)
-            {
-                newLoot.allCharacterCardChoices.Add(new List<CardData>());
-                newLoot.allCharacterCardChoices[i] = GenerateCharacterCardLootChoices(CharacterDataController.Instance.AllPlayerCharacters[i]);
-            }
-
-            // Forced loot item
-            if (JourneyManager.Instance.CurrentEnemyWave.itemReward != null)
-                newLoot.itemReward = ItemController.Instance.GetItemDataByName(JourneyManager.Instance.CurrentEnemyWave.itemReward.itemName);
-
-            // Roll for a trinket reward normally
-            else
-            {
-                bool shouldGetTrinket = false;
-                int trinketRoll = RandomGenerator.NumberBetween(1, 100);
-
-                if (JourneyManager.Instance.CurrentEncounter == EncounterType.BasicEnemy &&
-                 trinketRoll <= GlobalSettings.Instance.basicTrinketProbability)
-                    shouldGetTrinket = true;
-
-                if (JourneyManager.Instance.CurrentEncounter == EncounterType.EliteEnemy &&
-                  trinketRoll <= GlobalSettings.Instance.eliteTrinketProbability)
-                    shouldGetTrinket = true;
-
-                // Rolled successfully for trinket?
-                if (shouldGetTrinket)
-                    newLoot.itemReward = GetRandomTrinketLootReward();
-            }
-            */
-            return newLoot;
+            PlayerDataController.Instance.ModifyPlayerGold(contract.combatRewardData.goldAmount);
+            InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(contract.combatRewardData.item));
+            InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemAbilityData(contract.combatRewardData.abilityAwarded));
         }
         #endregion
 
@@ -197,24 +140,25 @@ namespace HexGameEngine.RewardSystems
         {
             mainVisualParent.SetActive(false);
         }
-        public void BuildAndShowPostCombatScreen(List<CharacterCombatStatData> data)
+        public void BuildAndShowPostCombatScreen(List<CharacterCombatStatData> data, CombatContractData contractData)
         {
             mainVisualParent.SetActive(true);
             characterStatPageVisualParent.SetActive(true);
             currentWindowViewing = WindowState.CharactersPage;
             lootPageVisualParent.SetActive(false);
             BuildCharacterStatCardPage(data);
+            BuildLootPageFromContractLootData(contractData);
         }
         private void BuildCharacterStatCardPage(List<CharacterCombatStatData> data)
-        {           
+        {
             // Reset views
-            foreach (CharacterCombatStatCard c in allCharacterStatCards)            
-                c.gameObject.SetActive(false);            
+            foreach (CharacterCombatStatCard c in allCharacterStatCards)
+                c.gameObject.SetActive(false);
             foreach (GameObject g in statCardRows)
                 g.SetActive(false);
 
             // Build a card for each character
-            for(int i = 0; i < data.Count; i++)
+            for (int i = 0; i < data.Count; i++)
             {
                 BuildStatCardFromStatData(allCharacterStatCards[i], data[i]);
             }
@@ -229,7 +173,7 @@ namespace HexGameEngine.RewardSystems
             HexCharacterData character = data.characterData;
 
             // Reset
-            foreach(CharacterCombatStatCardPerkIcon p in card.InjuryIcons)
+            foreach (CharacterCombatStatCardPerkIcon p in card.InjuryIcons)
             {
                 p.gameObject.SetActive(false);
             }
@@ -249,10 +193,10 @@ namespace HexGameEngine.RewardSystems
 
             // level up indicator
             if (data.didLevelUp) card.LevelUpParent.SetActive(true);
-            else card.LevelUpParent.SetActive(false);            
+            else card.LevelUpParent.SetActive(false);
 
             // build injury icons
-            for(int i = 0; i < data.injuriesGained.Count; i++)
+            for (int i = 0; i < data.injuriesGained.Count; i++)
             {
                 if (i == 4) break;
 
@@ -261,6 +205,10 @@ namespace HexGameEngine.RewardSystems
                 card.InjuryIcons[i].SetMyDataReference(perkData);
                 card.InjuryIcons[i].gameObject.SetActive(true);
             }
+
+        }
+        private void BuildLootPageFromContractLootData(CombatContractData contract)
+        {
 
         }
         #endregion

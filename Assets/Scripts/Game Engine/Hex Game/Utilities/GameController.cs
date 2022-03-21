@@ -246,20 +246,18 @@ namespace HexGameEngine
                 List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();
                 foreach (HexCharacterModel character in HexCharacterController.Instance.AllDefenders)
                 {
-                    if (character.livingState == LivingState.Alive && character.currentHealth > 0)
-                    {
-                        charactersRewarded.Add(character);
-                    }
+                    if (character.livingState == LivingState.Alive && character.currentHealth > 0)                    
+                        charactersRewarded.Add(character);                    
                 }
 
                 // Reward XP, build and show combat stats screen
                 List<CharacterCombatStatData> combatStats = CombatRewardController.Instance.GenerateCombatStatResultsForCharacters(charactersRewarded);
                 CombatRewardController.Instance.CacheStatResult(combatStats);
                 CombatRewardController.Instance.ApplyXpGainFromStatResultsToCharacters(combatStats);
-                CombatRewardController.Instance.BuildAndShowPostCombatScreen(combatStats);
+                CombatRewardController.Instance.BuildAndShowPostCombatScreen(combatStats, RunController.Instance.CurrentCombatContractData);
 
-                // Generate loot data
-
+                // Gain loot
+                CombatRewardController.Instance.HandleGainRewardsOfContract(RunController.Instance.CurrentCombatContractData);
 
                 // Cache loot data + combat stat data to persistency, save data and set save checkpoint.
                 RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatEnd);

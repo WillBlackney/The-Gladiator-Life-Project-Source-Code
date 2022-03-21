@@ -144,11 +144,11 @@ namespace HexGameEngine.Items
 
         // Create Inventory items
         #region
-        public InventoryItem CreateInventoryItem(AbilityData abilityData)
+        public InventoryItem CreateInventoryItemAbilityData(AbilityData abilityData)
         {
             return new InventoryItem(abilityData);
         }
-        public InventoryItem CreateInventoryItem(ItemData itemData)
+        public InventoryItem CreateInventoryItemFromItemData(ItemData itemData)
         {
             return new InventoryItem(itemData);
         }
@@ -157,7 +157,7 @@ namespace HexGameEngine.Items
             // to do in future: add arguments for rarity and type
             var items = ItemController.Instance.GetAllLootableItems();
             items.Shuffle();
-            return CreateInventoryItem(ItemController.Instance.GenerateNewItemWithRandomEffects(items[0]));
+            return CreateInventoryItemFromItemData(ItemController.Instance.GenerateNewItemWithRandomEffects(items[0]));
         }
         #endregion
 
