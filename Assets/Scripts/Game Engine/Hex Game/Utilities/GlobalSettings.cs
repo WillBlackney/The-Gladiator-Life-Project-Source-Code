@@ -147,7 +147,5 @@ namespace HexGameEngine.Utilities
         CombatSandbox = 1,
         TownSandbox = 5,
         PostCombatReward = 2,
-        CharacterDraftSandbox = 3,
-        CampSiteSandbox = 4,
     }
 }

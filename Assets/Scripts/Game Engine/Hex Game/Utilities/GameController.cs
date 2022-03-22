@@ -122,8 +122,8 @@ namespace HexGameEngine
 
             // Build mock save file + journey data
             RunController.Instance.SetGameStartValues();
-           // RunController.Instance.SetCurrentEncounterType(EncounterType.BasicEnemy);
             RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
+            // set combat with run controller
 
             // Build character roster + mock data
             List<HexCharacterData> characters = CreateSandboxCharacterDataFiles();
@@ -157,28 +157,32 @@ namespace HexGameEngine
         private void RunPostCombatRewardTestEventSetup()
         {
             // Set state
-            SetGameState(GameState.CombatRewardPhase);
-
-            // Set up day + time
-            //RunController.Instance.SetGameStartValues();
+            SetGameState(GameState.CombatActive);
 
             // Show UI
             TopBarController.Instance.ShowTopBar();
 
-            // Create + setup hex level
-           // LevelController.Instance.SetupNewHexMap(GlobalSettings.Instance.SandboxLevelSeed);
+            // Build mock save file + journey data
+            RunController.Instance.SetGameStartValues();
+            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
 
-            // Reset Camera + Lighting
-            LightController.Instance.EnableDungeonGlobalLight();
-            //CameraController.Instance.DoCameraMove(LevelController.Instance.CurrentHexMap.WorldCentre, 0);
-
-            // Build character roster from mock data
+            // Build character roster + mock data
             List<HexCharacterData> characters = CreateSandboxCharacterDataFiles();
             CharacterDataController.Instance.BuildCharacterRoster(characters);
+
+            // Enable world view
+            LightController.Instance.EnableDungeonGlobalLight();
+            LevelController.Instance.EnableNightTimeArenaScenery();
+            LevelController.Instance.ShowAllNodeViews();
 
             // Setup player characters
             HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
 
+            // Generate enemy wave + enemies data + save to run controller
+            CombatContractData sandboxContractData = TownController.Instance.GenerateSandboxContractData();
+            RunController.Instance.SetCurrentContractData(sandboxContractData);
+
+            // Start a new combat event
             StartCombatVictorySequence();
         }      
         #endregion

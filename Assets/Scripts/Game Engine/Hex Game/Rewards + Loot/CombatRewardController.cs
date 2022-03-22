@@ -30,6 +30,7 @@ namespace HexGameEngine.RewardSystems
         [SerializeField] private GameObject lootPageVisualParent;
         [SerializeField] private CharacterCombatStatCard[] allCharacterStatCards;
         [SerializeField] private GameObject[] statCardRows;
+        [SerializeField] private CombatLootIcon[] lootIcons;
 
         private List<CharacterCombatStatData> currentStatResults = new List<CharacterCombatStatData>();
 
@@ -209,6 +210,25 @@ namespace HexGameEngine.RewardSystems
         }
         private void BuildLootPageFromContractLootData(CombatContractData contract)
         {
+            for(int i = 0; i < lootIcons.Length;i++)            
+                lootIcons[i].Reset();
+
+            int iconIndex = 0;
+            if(contract.combatRewardData.item != null)
+            {
+                lootIcons[iconIndex].BuildAsItemReward(contract.combatRewardData.item);
+                iconIndex++;
+            }
+            if (contract.combatRewardData.abilityAwarded != null)
+            {
+                lootIcons[iconIndex].BuildAsAbilityReward(contract.combatRewardData.abilityAwarded);
+                iconIndex++;
+            }
+            if (contract.combatRewardData.goldAmount > 0)
+            {
+                lootIcons[iconIndex].BuildAsGoldReward(contract.combatRewardData.goldAmount);
+                iconIndex++;
+            }
 
         }
         #endregion
@@ -239,9 +259,7 @@ namespace HexGameEngine.RewardSystems
                 OnLootButtonClicked();
             else
             {
-                // show map + unlock
-                MapPlayerTracker.Instance.UnlockMap();
-                MapView.Instance.OnWorldMapButtonClicked();
+                
             }
         }
      

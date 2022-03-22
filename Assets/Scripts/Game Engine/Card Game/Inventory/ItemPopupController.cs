@@ -9,6 +9,7 @@ using HexGameEngine.Abilities;
 using HexGameEngine.UI;
 using HexGameEngine.Perks;
 using HexGameEngine.TownFeatures;
+using HexGameEngine.RewardSystems;
 
 namespace HexGameEngine.Items
 {
@@ -46,11 +47,18 @@ namespace HexGameEngine.Items
 
         // Input
         #region
+        public void OnCombatItemLootIconMousedOver(CombatLootIcon icon)
+        {
+            FadeInPanel();
+            BuildPanelFromItemData(icon.ItemReward);
+            PlacePanelAboveTransform(icon.transform);
+            ForceRebuildLayouts();
+        }
         public void OnCombatContractItemIconMousedOver(CombatContractCard card)
         {
             FadeInPanel();
             BuildPanelFromItemData(card.MyContractData.combatRewardData.item);
-            PlacePanelAtCombatCardItemIconPosition(card.ItemImage.transform);
+            PlacePanelAboveTransform(card.ItemImage.transform);
             ForceRebuildLayouts();
         }
         public void OnInventoryItemMousedOver(InventoryItemView item)
@@ -95,7 +103,7 @@ namespace HexGameEngine.Items
 
         // Build + Place Panel
         #region
-        private void PlacePanelAtCombatCardItemIconPosition(Transform t)
+        private void PlacePanelAboveTransform(Transform t)
         {
             RectTransform rect = visualParent.GetComponent<RectTransform>();
             float yOffset = 50 + rect.rect.height;

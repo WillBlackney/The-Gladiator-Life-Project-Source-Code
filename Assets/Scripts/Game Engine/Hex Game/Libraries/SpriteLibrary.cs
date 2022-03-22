@@ -99,7 +99,7 @@ namespace HexGameEngine.Libraries
         public Sprite pyromaniaBook;
         #endregion
 
-        // Stress State Images
+        // Racial Images
         #region
         [Header("Racial Images")]
         [PreviewField(75)]
