@@ -118,6 +118,7 @@ namespace HexGameEngine.TownFeatures
         #region
         public void GenerateDailyRecruits(int amount)
         {
+            currentRecruits.Clear();
             for (int i = 0; i < amount; i++)
                 HandleAddNewRecruitFromCharacterDeck();
         }

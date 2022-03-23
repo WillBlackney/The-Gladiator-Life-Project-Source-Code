@@ -106,22 +106,8 @@ namespace HexGameEngine.UI
         public void UpdateGoldText(string value)
         {
             currentGoldText.text = value;
-        }
-        public void UpdateDayText(int day)
-        {
-            currentChapterText.text = "Day " + day.ToString();
-        }
-        public void UpdateHourText(int hour)
-        {
-            if(hour > 12)
-            {
-                currentDaytext.text = (hour - 12).ToString() + " PM";
-            }
-            else
-            {
-                currentDaytext.text = hour.ToString() + " AM";
-            }
-        }
+        }      
+       
         #endregion
     }
 }

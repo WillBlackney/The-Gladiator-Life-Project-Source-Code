@@ -259,7 +259,7 @@ namespace HexGameEngine.RewardSystems
                 OnLootButtonClicked();
             else
             {
-                
+                GameController.Instance.HandlePostCombatToTownTransistion();
             }
         }
      

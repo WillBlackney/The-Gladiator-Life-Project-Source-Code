@@ -5,6 +5,7 @@ using HexGameEngine.Abilities;
 using HexGameEngine.Perks;
 using HexGameEngine.Utilities;
 using HexGameEngine.Persistency;
+using HexGameEngine.Player;
 
 namespace HexGameEngine.Characters
 {
@@ -263,6 +264,7 @@ namespace HexGameEngine.Characters
             // prevent current health exceeding max health
             if (data.currentHealth > StatCalculator.GetTotalMaxHealth(data))
                 data.currentHealth = StatCalculator.GetTotalMaxHealth(data);
+            else if (data.currentHealth < 0) data.currentHealth = 0;
         }
         public void SetCharacterMaxHealth(HexCharacterData data, int newValue)
         {
@@ -301,6 +303,33 @@ namespace HexGameEngine.Characters
         public void ClearCharacterDeck()
         {
             CharacterDeck.Clear();
+        }
+        #endregion
+
+        // Town + New day logic
+        #region
+        public void HandlePayDailyWagesOnNewDayStart()
+        {
+            foreach(HexCharacterData character in AllPlayerCharacters)
+            {
+                if(PlayerDataController.Instance.CurrentGold > character.dailyWage)
+                {
+                    PlayerDataController.Instance.ModifyPlayerGold(-character.dailyWage);
+                }
+                // if not enough money to pay wage, chance that character will eave the roster, or gain stress?
+                else
+                {
+
+                }
+            }
+        }
+        public void HandlePassiveStressAndHealthRecoveryOnNewDayStart()
+        {
+            foreach(HexCharacterData c in AllPlayerCharacters)
+            {
+                SetCharacterStress(c, c.currentStress - 5);
+                SetCharacterHealth(c, c.currentHealth + 10);
+            }
         }
         #endregion
 

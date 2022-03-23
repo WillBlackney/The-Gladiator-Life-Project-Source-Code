@@ -96,6 +96,7 @@ namespace HexGameEngine.HexTiles
             AbilityController.Instance.HideHitChancePopup();
             AbilityPopupController.Instance.HidePanel();
             MoveActionController.Instance.HidePathCostPopup();
+            DisableAllArenas();
             HideTileInfoPopup();
             HideAllNodeViews();
         }
@@ -982,7 +983,7 @@ namespace HexGameEngine.HexTiles
             graveyardSceneryParent.SetActive(false);
         }
 
-        // Dungeon
+        // Arena
         public void EnableNightTimeArenaScenery()
         {
             DisableAllArenas();
@@ -1007,32 +1008,7 @@ namespace HexGameEngine.HexTiles
 
         }
 
-        // Camp Site
-        public void EnableCampSiteScenery()
-        {
-            DisableAllCampSites();
-            campsiteViewParent.SetActive(true);
-            EnableRandomCampSite();
-        }
-        public void DisableCampSiteScenery()
-        {
-            DisableAllCampSites();
-            campsiteViewParent.SetActive(false);
-        }
-        private void DisableAllCampSites()
-        {
-            for (int i = 0; i < allCampSiteParents.Length; i++)
-            {
-                allCampSiteParents[i].SetActive(false);
-            }
-        }
-        private void EnableRandomCampSite()
-        {
-            allCampSiteParents[RandomGenerator.NumberBetween(0, allCampSiteParents.Length - 1)].SetActive(true);
-
-        }
         #endregion
-
 
     }
 

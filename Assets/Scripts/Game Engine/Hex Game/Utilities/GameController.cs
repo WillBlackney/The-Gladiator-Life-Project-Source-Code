@@ -105,7 +105,7 @@ namespace HexGameEngine
             // Reset+ Centre camera
             CameraController.Instance.ResetMainCameraPositionAndZoom();
 
-            // TO DO: Build town views here
+            // Build town views here
             TownController.Instance.ShowTownView();
             CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
@@ -274,6 +274,41 @@ namespace HexGameEngine
            
 
         }
+        public void HandlePostCombatToTownTransistion()
+        {
+            StartCoroutine(HandlePostCombatToTownTransistionCoroutine());
+        }
+        private IEnumerator HandlePostCombatToTownTransistionCoroutine()
+        {
+            // Fade out
+            BlackScreenController.Instance.FadeOutScreen(1f);
+            yield return new WaitForSeconds(1f);
+
+            // Tear down combat views
+            HexCharacterController.Instance.HandleTearDownCombatScene();
+            LevelController.Instance.HandleTearDownCombatViews();
+            LightController.Instance.EnableStandardGlobalLight();
+            CombatRewardController.Instance.HidePostCombatRewardScreen();
+
+            // town new day start stuff
+            RunController.Instance.OnNewDayStart();
+
+            // Show town UI
+            TownController.Instance.ShowTownView();
+            CharacterScrollPanelController.Instance.BuildAndShowPanel();
+            TopBarController.Instance.ShowTopBar();
+
+            // Reset+ Centre camera
+            CameraController.Instance.ResetMainCameraPositionAndZoom();
+
+            // Save game
+            PersistencyController.Instance.AutoUpdateSaveFile();
+
+            // Fade back in views + sound
+            yield return new WaitForSeconds(0.5f);
+            AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
+            BlackScreenController.Instance.FadeInScreen(1f);
+        }
         #endregion
 
         // Main menu to game transisitions
@@ -367,6 +402,7 @@ namespace HexGameEngine
             // Destroy game scene
             HexCharacterController.Instance.HandleTearDownCombatScene();
             LevelController.Instance.HandleTearDownCombatViews();
+            LightController.Instance.EnableStandardGlobalLight();
 
             // Hide world map + roster
             MapView.Instance.HideMainMapView();

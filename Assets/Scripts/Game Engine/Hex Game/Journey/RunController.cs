@@ -48,7 +48,7 @@ namespace HexGameEngine.JourneyLogic
             CurrentDeployedCharacters = saveData.playerCombatCharacters;
             SetCheckPoint(saveData.saveCheckPoint);
 
-            UpdateCurrentEncounterText();
+            UpdateDayAndChapterTopbarText();
         }
         public void SaveMyDataToSaveFile(SaveGameData saveFile)
         {
@@ -73,28 +73,37 @@ namespace HexGameEngine.JourneyLogic
         public void OnNewDayStart()
         {
             // Increment day
+            if(CurrentDay == 5)
+            {
+                CurrentDay = 1;
+                CurrentChapter++;
 
-            // Increment chapter count if over day 5
+                // To do in future: OnNewChapterStart() logic (gain reputation, etc)
+            }
+            else CurrentDay++;
+            UpdateDayAndChapterTopbarText();
 
-            // Generate and offer new repuation if new chapter started 
+            // Pay daily wages
+            CharacterDataController.Instance.HandlePayDailyWagesOnNewDayStart();            
 
-            // pay wages
+            // Reduce all injury duration by 1 day
 
-            // reduce all injury duration by 1 day
+            // Generate and apply effect of new random town events 
 
-            // generate and apply effect of new town event
+            // Generate new daily recruits
+            TownController.Instance.GenerateDailyRecruits(RandomGenerator.NumberBetween(4,6));
 
-            // generate new daily recruits
+            // Generate new combat contracts
+            TownController.Instance.GenerateDailyCombatContracts();
 
-            // generate new combat contracts
+            // Refresh library books
 
-            // refresh library books
+            // Refresh black smith items
 
-            // refresh black smith items
+            // Characters in town features gain effect of hospital feature (heal, remove stress, remove all injuries, etc)
 
-            // characters in town features gain effect of feature (heal, remove stress, remove all injuries)
-
-            // all characters heal 10 health and 10 stress
+            // All characters heal 10 health and 5 stress
+            CharacterDataController.Instance.HandlePassiveStressAndHealthRecoveryOnNewDayStart();
 
 
 
@@ -107,7 +116,7 @@ namespace HexGameEngine.JourneyLogic
         {
             SaveCheckPoint = type;
         }       
-        private void UpdateCurrentEncounterText()
+        private void UpdateDayAndChapterTopbarText()
         {
             TopBarController.Instance.CurrentDaytext.text = "Day: " + CurrentDay.ToString();
             TopBarController.Instance.CurrentChapterText.text = "Chapter: " + CurrentChapter.ToString();
