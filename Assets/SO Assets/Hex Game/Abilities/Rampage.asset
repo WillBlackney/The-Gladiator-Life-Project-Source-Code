@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Rampage
   includeInGame: 1
-  baseAbilityDescription: Deal 135% weapon damage to an enemy. Damage is increased
+  baseAbilityDescription: Deal 125% weapon damage to an enemy. Damage is increased
     by 1% for each point of health you have lost.
   abilitySprite: {fileID: 21300000, guid: 9fdb7221a4198b6468f04eac78cdfb71, type: 3}
-  energyCost: 2
+  energyCost: 4
   baseCooldown: 1
   abilityType: 2
   doesNotBreakStealth: 0
@@ -104,8 +104,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 25
-    maxBaseDamage: 29
+    minBaseDamage: 23
+    maxBaseDamage: 27
     guaranteedHit: 0
     ignoresBlock: 0
     injuryTypesCaused: 

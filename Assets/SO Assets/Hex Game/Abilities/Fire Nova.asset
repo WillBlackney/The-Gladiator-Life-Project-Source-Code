@@ -17,7 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Deal 50% Magic damage and apply Burning to all characters
     within your Aura.
   abilitySprite: {fileID: 21300000, guid: 47e5b56c2b8c33d4aa7fbe97403d9708, type: 3}
-  energyCost: 2
+  energyCost: 3
   baseCooldown: 1
   abilityType: 1
   doesNotBreakStealth: 0

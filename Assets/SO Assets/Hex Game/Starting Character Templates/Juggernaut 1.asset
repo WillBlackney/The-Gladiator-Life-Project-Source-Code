@@ -38,7 +38,7 @@ MonoBehaviour:
     injuryResistance: 0
   abilityBook:
     activeAbilities:
-    - {fileID: 11400000, guid: b797b73cc067e4042b5552ae13740736, type: 2}
+    - {fileID: 11400000, guid: 6c906fd5c22e64f43adc16680c0264ea, type: 2}
     - {fileID: 11400000, guid: 7dccc139645f4674f896d6d093471616, type: 2}
     - {fileID: 11400000, guid: 507ff3973c3f4a44ea421a51ff989b75, type: 2}
   serializedPassiveManager:

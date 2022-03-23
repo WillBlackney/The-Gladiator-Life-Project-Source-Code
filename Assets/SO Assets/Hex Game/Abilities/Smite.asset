@@ -17,7 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Deal 125% Weapon damage and apply 2 Crippled. +50 Critical
     Chance against undead.
   abilitySprite: {fileID: 21300000, guid: a4f1e4e6aeaf9d84e9c366ac02926eba, type: 3}
-  energyCost: 2
+  energyCost: 4
   baseCooldown: 2
   abilityType: 2
   doesNotBreakStealth: 0

@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Gain 3 Wrath and 3 Vulnerable.
   abilitySprite: {fileID: 21300000, guid: 3f35b0e5b580e174f9321085e285cfcd, type: 3}
-  energyCost: 3
+  energyCost: 2
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0

@@ -40,7 +40,7 @@ MonoBehaviour:
     activeAbilities:
     - {fileID: 11400000, guid: 30fba2b2b3154994f91264dd96a76258, type: 2}
     - {fileID: 11400000, guid: e9972b20921e6e7468dbf49561e14ac9, type: 2}
-    - {fileID: 11400000, guid: c1061f44ef3eb3c408eb895d2b7064bb, type: 2}
+    - {fileID: 11400000, guid: 63b93d8887404354592f0b988319347e, type: 2}
   serializedPassiveManager:
     perks:
     - perkTag: 25

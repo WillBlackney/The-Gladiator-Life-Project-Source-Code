@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Give 2 Block to self or ally. Removes Stunned and Rooted.
   abilitySprite: {fileID: 21300000, guid: fbb60405ce962734fb1fedb95d7b99ec, type: 3}
-  energyCost: 2
+  energyCost: 3
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0

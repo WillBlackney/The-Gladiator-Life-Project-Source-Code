@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Unholy Gift
   includeInGame: 1
-  baseAbilityDescription: Give an ally 1 Energy and 2 Wrath.
+  baseAbilityDescription: Give an ally 2 Wrath and 2 Block.
   abilitySprite: {fileID: 21300000, guid: aedc92aafd3884840b8d1c38ac208f97, type: 3}
-  energyCost: 2
+  energyCost: 6
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0
@@ -114,11 +114,11 @@ MonoBehaviour:
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
     perkPairing:
-      perkTag: 75
+      perkTag: 50
       passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
-  - effectType: 11
+  - effectType: 10
     stressEventData:
       stressAmountMin: 0
       stressAmountMax: 0
@@ -152,8 +152,8 @@ MonoBehaviour:
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
     perkPairing:
-      perkTag: 0
-      passiveStacks: 0
+      perkTag: 74
+      passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
@@ -169,11 +169,11 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '1 '
+    phrase: '2 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Energy '
+    phrase: 'Wrath '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Wrath
+    phrase: Block
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
   keyWords:
   - kewWordType: 5
     passiveType: 0
-  - kewWordType: 2
-    passiveType: 0
+  - kewWordType: 1
+    passiveType: 74
   - kewWordType: 1
     passiveType: 50

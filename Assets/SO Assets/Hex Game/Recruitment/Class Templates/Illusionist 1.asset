@@ -20,6 +20,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3dc85c0a7ccd4904a972e6aa977e23b3, type: 2}
   - {fileID: 11400000, guid: 15d89fdb6bcfaee4ba1e1b1f74ec4dd3, type: 2}
   - {fileID: 11400000, guid: 26fab6752e3479540aa2600e5772413e, type: 2}
+  - {fileID: 11400000, guid: b566ecb35016fa449ae9e743e809d086, type: 2}
+  - {fileID: 11400000, guid: a1b64ada9457a2b4a951d2b5f2f7ced7, type: 2}
   possibleOutfits:
   - {fileID: 11400000, guid: c77b170664c64ab4b9b6d225d728624e, type: 2}
   - {fileID: 11400000, guid: fdb5800ba0e016e42912d371a9f86cfa, type: 2}
@@ -28,6 +30,7 @@ MonoBehaviour:
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
   strengthMod: 0
   intelligenceMod: 0
   accuracyMod: 0

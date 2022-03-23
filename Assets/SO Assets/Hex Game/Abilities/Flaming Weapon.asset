@@ -17,7 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: 'Gain 1 Wrath. For 2 turns, your weapon based attacks apply
     1 Burning. '
   abilitySprite: {fileID: 21300000, guid: 15232d52bcd2235428bab1f7a099fa43, type: 3}
-  energyCost: 1
+  energyCost: 3
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0

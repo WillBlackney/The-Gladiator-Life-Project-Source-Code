@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Vanish
   includeInGame: 1
-  baseAbilityDescription: Gain 2 Stealth and 2 Evasion.
+  baseAbilityDescription: Gain 2 Stealth.
   abilitySprite: {fileID: 21300000, guid: d0311d9693fe4114a9ce35e231bac878, type: 3}
-  energyCost: 3
-  baseCooldown: 3
+  energyCost: 5
+  baseCooldown: 4
   abilityType: 1
   doesNotBreakStealth: 1
   weaponRequirement: 0
@@ -103,44 +103,6 @@ MonoBehaviour:
       passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
-  - effectType: 1
-    stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
-      successChance: 0
-    energyGained: 0
-    normalTeleportVFX: 1
-    tilesMoved: 0
-    lineLength: 0
-    healthGained: 0
-    healthLost: 0
-    requirements: []
-    chainedEffect: 0
-    triggersChainEffectSequence: 0
-    visualEventsOnStart: []
-    visualEventsOnHit: []
-    visualEventsOnEffectFinish: []
-    aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
-    damageType: 0
-    minBaseDamage: 0
-    maxBaseDamage: 0
-    guaranteedHit: 0
-    ignoresBlock: 0
-    injuryTypesCaused: 
-    damageEffectModifiers: []
-    characterSummoned: {fileID: 0}
-    modelFadeInSpeed: 0
-    uiFadeInSpeed: 0
-    summonedCreatureVisualEvents: []
-    perkPairing:
-      perkTag: 76
-      passiveStacks: 2
-    perkApplicationChance: 100
-    knockBackDistance: 0
   onHitEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
@@ -162,23 +124,9 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'and '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '2 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Evasion
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
     phrase: .
   keyWords:
   - kewWordType: 5
     passiveType: 0
   - kewWordType: 1
     passiveType: 77
-  - kewWordType: 1
-    passiveType: 76

@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Deal 125% Weapon damage to target and apply 2 Weakened.
   abilitySprite: {fileID: 21300000, guid: f1a479e622c1a7d468856ba2c0f89a66, type: 3}
-  energyCost: 2
+  energyCost: 4
   baseCooldown: 2
   abilityType: 2
   doesNotBreakStealth: 0

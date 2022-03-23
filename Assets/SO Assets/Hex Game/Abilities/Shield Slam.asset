@@ -18,7 +18,7 @@ MonoBehaviour:
     tile and dealing 125% Physical damage. Damage is increased 25% for each stack
     of Block on self.
   abilitySprite: {fileID: 21300000, guid: e70d073abde6860498c58ff485c21a96, type: 3}
-  energyCost: 2
+  energyCost: 4
   baseCooldown: 2
   abilityType: 2
   doesNotBreakStealth: 0

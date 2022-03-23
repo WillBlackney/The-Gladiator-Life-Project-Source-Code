@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Gain 1 Block.
   abilitySprite: {fileID: 21300000, guid: ac7fae9736edd5346a53060af8fccbf3, type: 3}
-  energyCost: 2
+  energyCost: 3
   baseCooldown: 1
   abilityType: 1
   doesNotBreakStealth: 0

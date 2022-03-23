@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Teleport to a tile within 2 and gain 1 Focus.
   abilitySprite: {fileID: 21300000, guid: 1d4a4c76798682b4e9a11b9f48db43f3, type: 3}
-  energyCost: 2
+  energyCost: 3
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0

@@ -30,14 +30,17 @@ MonoBehaviour:
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
   - mainHandItem: {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
   - mainHandItem: {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
   strengthMod: 0
   intelligenceMod: 0
   accuracyMod: 0

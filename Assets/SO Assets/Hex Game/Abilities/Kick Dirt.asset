@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Apply 2 Blinded to an enemy.
   abilitySprite: {fileID: 21300000, guid: 44958d7cc1c9422488a488f1ebda25cf, type: 3}
-  energyCost: 1
+  energyCost: 3
   baseCooldown: 2
   abilityType: 1
   doesNotBreakStealth: 0
