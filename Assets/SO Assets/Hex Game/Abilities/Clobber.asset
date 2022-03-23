@@ -16,8 +16,8 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Deal 100% damage to target and Knock Back 1 tile.
   abilitySprite: {fileID: 21300000, guid: 29798da6155f8ca40b07c4f5cefb99d4, type: 3}
-  energyCost: 2
-  baseCooldown: 1
+  energyCost: 5
+  baseCooldown: 2
   abilityType: 2
   doesNotBreakStealth: 0
   weaponRequirement: 1

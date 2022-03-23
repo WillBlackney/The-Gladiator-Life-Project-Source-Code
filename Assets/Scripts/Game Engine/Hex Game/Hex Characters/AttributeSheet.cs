@@ -46,11 +46,11 @@ namespace HexGameEngine.Characters
         [BoxGroup("Secondary Attributes")]
         [LabelWidth(100)]
         [GUIColor("Blue")]
-        public int stamina = 4;
+        public int stamina = 8;
         [BoxGroup("Secondary Attributes")]
         [LabelWidth(100)]
         [GUIColor("Blue")]
-        public int maxEnergy = 6;
+        public int maxEnergy = 8;
         [BoxGroup("Secondary Attributes")]
         [LabelWidth(100)]
         [GUIColor("Blue")]

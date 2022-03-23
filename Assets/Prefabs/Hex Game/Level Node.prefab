@@ -204,7 +204,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _offsetCoord: {x: 0, y: 0}
   IsTaken: 0
-  MovementCost: 1
+  MovementCost: 2
+  HexGridType: 0
   occupied: 0
   gridPosition: {x: 0, y: 0}
   mouseOverParent: {fileID: 5037005589569911983}

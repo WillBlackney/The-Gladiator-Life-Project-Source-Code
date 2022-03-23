@@ -25,8 +25,8 @@ MonoBehaviour:
     resolve: 10
     wits: 0
     maxHealth: 50
-    stamina: 4
-    maxEnergy: 4
+    stamina: 8
+    maxEnergy: 8
     initiative: 8
     criticalChance: 5
     criticalModifier: 50

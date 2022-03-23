@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Apply 10-12 Stress to a target.
   abilitySprite: {fileID: 21300000, guid: 254db86f895cba142ba5fe87e82418f1, type: 3}
-  energyCost: 2
+  energyCost: 4
   baseCooldown: 0
   abilityType: 1
   doesNotBreakStealth: 0

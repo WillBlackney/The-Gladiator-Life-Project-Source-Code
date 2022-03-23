@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Deal 100% weapon damage. This has a +10 Accuracy bonus.
   abilitySprite: {fileID: 21300000, guid: 9cacf63bfa17f7f42b672d2f30dc8569, type: 3}
-  energyCost: 3
+  energyCost: 5
   baseCooldown: 0
   abilityType: 2
   doesNotBreakStealth: 0

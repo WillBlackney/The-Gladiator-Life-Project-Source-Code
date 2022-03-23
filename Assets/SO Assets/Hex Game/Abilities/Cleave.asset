@@ -17,7 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Deal 100% Weapon damage to all enemies in your zone of
     control.
   abilitySprite: {fileID: 21300000, guid: fead2e562e86f7b42b67646529469f30, type: 3}
-  energyCost: 2
+  energyCost: 4
   baseCooldown: 2
   abilityType: 2
   doesNotBreakStealth: 0

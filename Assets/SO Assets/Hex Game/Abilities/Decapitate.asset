@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Decapitate
   includeInGame: 1
-  baseAbilityDescription: Deal 100% weapon damage to an enemy. Damage is increased
+  baseAbilityDescription: Deal 75% weapon damage to an enemy. Damage is increased
     by 1% for each point of health target has lost.
   abilitySprite: {fileID: 21300000, guid: a9dc6980304bfa94798c01c1c961aa49, type: 3}
-  energyCost: 2
+  energyCost: 3
   baseCooldown: 2
   abilityType: 2
   doesNotBreakStealth: 0
@@ -104,8 +104,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 18
-    maxBaseDamage: 22
+    minBaseDamage: 13
+    maxBaseDamage: 17
     guaranteedHit: 0
     ignoresBlock: 0
     injuryTypesCaused: 

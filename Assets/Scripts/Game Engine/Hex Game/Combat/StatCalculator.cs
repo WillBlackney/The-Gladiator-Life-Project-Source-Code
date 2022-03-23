@@ -116,7 +116,7 @@ namespace HexGameEngine
                 constitution += 10;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fat))
-                constitution += 30;
+                constitution += 20;
             // Items
             constitution += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Constituition, c.itemSet);
 
@@ -133,7 +133,7 @@ namespace HexGameEngine
                 constitution += 10;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fat))
-                constitution += 30;
+                constitution += 20;
 
             // Items
             constitution += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Constituition, c.itemSet);
@@ -519,8 +519,11 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedLeg))
                 intitiative -= 10;
 
+            // Items
+            intitiative += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Initiative, c.itemSet);
+
             // 50% initiative penalty for delaying turn.
-            if((c.hasRequestedTurnDelay || c.hasDelayedPreviousTurn) && intitiative > 0)
+            if ((c.hasRequestedTurnDelay || c.hasDelayedPreviousTurn) && intitiative > 0)
             {
                 intitiative = (int) (intitiative * 0.5f);
             }
@@ -528,8 +531,7 @@ namespace HexGameEngine
             // Cant go negative
             if (intitiative < 0) intitiative = 0;
 
-            // Items
-            intitiative += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Initiative, c.itemSet);
+            
 
 
             return intitiative;
@@ -556,8 +558,8 @@ namespace HexGameEngine
         public static int GetTotalStamina(HexCharacterModel c)
         {
             int stamina = c.attributeSheet.stamina;
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DivineFavour))
-                stamina += 1;
+            //if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DivineFavour))
+            //    stamina += 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Dazed))
                 stamina -= 1;
@@ -566,10 +568,10 @@ namespace HexGameEngine
                 stamina -= 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenNose))
-                stamina -= 1;
+                stamina -= 2;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenRibs))
-                stamina -= 2;
+                stamina -= 3;
 
             // cant go below
             if (stamina < 0)
@@ -585,13 +587,13 @@ namespace HexGameEngine
             int stamina = c.attributeSheet.stamina;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenNose))
-                stamina -= 1;
+                stamina -= 2;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fat))
                 stamina -= 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenRibs))
-                stamina -= 2;
+                stamina -= 3;
 
             // cant go below
             if (stamina < 0)
