@@ -85,10 +85,7 @@ namespace HexGameEngine.UI
         public void BuildTalentButton(UITalentIcon b, TalentSchool talent)
         {
             TalentDataSO talentData = CharacterDataController.Instance.GetTalentDataFromTalentEnum(talent);
-            b.SetMyTalent(talentData);
-            b.gameObject.SetActive(true);
-            b.TalentImageParent.SetActive(true);
-            b.TalentImage.sprite = talentData.talentSprite;
+            b.BuildFromTalentEnum(talent);
         }
         public void BuildPerkButton(ActivePerk p, UIPerkIcon b)
         {

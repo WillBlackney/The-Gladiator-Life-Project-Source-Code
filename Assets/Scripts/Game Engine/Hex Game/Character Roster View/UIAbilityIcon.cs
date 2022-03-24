@@ -12,7 +12,6 @@ namespace HexGameEngine.UI
         // Properties + Components
         #region
         [SerializeField] Image abilityImage;
-        [SerializeField] GameObject abilityImageParent;
         [SerializeField] PopupPositon popupPosition;
         private AbilityData myDataRef;
         #endregion
@@ -22,11 +21,7 @@ namespace HexGameEngine.UI
         public Image AbilityImage
         {
             get { return abilityImage; }
-        }
-        public GameObject AbilityImageParent
-        {
-            get { return abilityImageParent; }
-        }
+        }       
         public AbilityData MyDataRef
         {
             get { return myDataRef; }
@@ -65,7 +60,6 @@ namespace HexGameEngine.UI
         public void BuildFromAbilityData(AbilityData d)
         {
             AbilityImage.sprite = d.AbilitySprite;
-            AbilityImageParent.SetActive(true);
             gameObject.SetActive(true);
             SetMyDataReference(d);
         }

@@ -217,8 +217,7 @@ namespace HexGameEngine.TownFeatures
             // Build talent buttons
             for (int i = 0; i < character.talentPairings.Count; i++)
             {
-                UIController.Instance.BuildTalentButton(recruitTalentIcons[i], character.talentPairings[i].talentSchool);
-                recruitTalentIcons[i].gameObject.SetActive(true);
+                recruitTalentIcons[i].BuildFromTalentPairing(character.talentPairings[i]);
             }
 
             // Build abilities section
@@ -229,8 +228,7 @@ namespace HexGameEngine.TownFeatures
                 // Characters dont gain special weapon ability if they have an off hand item
                 if (character.itemSet.offHandItem == null || (character.itemSet.offHandItem != null && character.itemSet.mainHandItem.grantedAbilities[i].weaponAbilityType == WeaponAbilityType.Basic))
                 {
-                    CharacterRosterViewController.Instance.BuildAbilityButtonFromAbility(recruitAbilityIcons[i], character.itemSet.mainHandItem.grantedAbilities[i]);
-                    recruitAbilityIcons[i].gameObject.SetActive(true);
+                    recruitAbilityIcons[i].BuildFromAbilityData(character.itemSet.mainHandItem.grantedAbilities[i]);
                     newIndexCount++;
                 }
             }
@@ -240,8 +238,7 @@ namespace HexGameEngine.TownFeatures
             {
                 for (int i = 0; i < character.itemSet.offHandItem.grantedAbilities.Count; i++)
                 {
-                    CharacterRosterViewController.Instance.BuildAbilityButtonFromAbility(recruitAbilityIcons[i + newIndexCount], character.itemSet.offHandItem.grantedAbilities[i]);
-                    recruitAbilityIcons[i + newIndexCount].gameObject.SetActive(true);
+                    recruitAbilityIcons[i + newIndexCount].BuildFromAbilityData(character.itemSet.offHandItem.grantedAbilities[i]);
                     newIndexCount++;
                 }
             }
@@ -249,8 +246,7 @@ namespace HexGameEngine.TownFeatures
             // Build non item derived abilities
             for (int i = 0; i < character.abilityBook.allKnownAbilities.Count; i++)
             {
-                CharacterRosterViewController.Instance.BuildAbilityButtonFromAbility(recruitAbilityIcons[i + newIndexCount], character.abilityBook.allKnownAbilities[i]);
-                recruitAbilityIcons[i + newIndexCount].gameObject.SetActive(true);
+                recruitAbilityIcons[i + newIndexCount].BuildFromAbilityData(character.abilityBook.allKnownAbilities[i]);
             }   
            
         }

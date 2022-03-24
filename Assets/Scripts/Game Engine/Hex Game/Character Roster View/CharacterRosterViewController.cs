@@ -113,6 +113,11 @@ namespace HexGameEngine.UI
             else
                 HandleBuildAndShowCharacterRoster();
         }
+        public void BuildAndShowFromCharacterData(HexCharacterData data)
+        {
+            mainVisualParent.SetActive(true);
+            BuildRosterForCharacter(data);
+        }
         private void HandleBuildAndShowCharacterRoster()
         {
             Debug.Log("ShowCharacterRosterScreen()");
@@ -155,6 +160,26 @@ namespace HexGameEngine.UI
             if (button.CharacterDataRef == null) return;
 
             BuildRosterForCharacter(button.CharacterDataRef);
+        }
+        public void OnPreviousCharacterButtonClicked()
+        {
+            Debug.Log("OnPreviousCharacterButtonClicked");
+            int index = CharacterDataController.Instance.AllPlayerCharacters.IndexOf(characterCurrentlyViewing);
+            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0) return;
+            int nextIndex = 0;
+            if (index == 0) nextIndex = CharacterDataController.Instance.AllPlayerCharacters.Count - 1;
+            else nextIndex = index - 1;
+            BuildRosterForCharacter(CharacterDataController.Instance.AllPlayerCharacters[nextIndex]);
+        }
+        public void OnNextCharacterButtonClicked()
+        {
+            Debug.Log("OnNextCharacterButtonClicked");
+            int index = CharacterDataController.Instance.AllPlayerCharacters.IndexOf(characterCurrentlyViewing);
+            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0) return;
+            int nextIndex = 0;
+            if (index == CharacterDataController.Instance.AllPlayerCharacters.Count - 1) nextIndex = 0;
+            else nextIndex = index + 1;
+            BuildRosterForCharacter(CharacterDataController.Instance.AllPlayerCharacters[nextIndex]);
         }
         #endregion              
 
@@ -345,8 +370,7 @@ namespace HexGameEngine.UI
             // reset ability buttons
             foreach (UIAbilityIcon b in abilityButtons)
             {
-                b.AbilityImageParent.SetActive(false);
-                b.SetMyDataReference(null);
+                b.HideAndReset();
             }
 
             // Main hand weapon abilities
@@ -359,7 +383,7 @@ namespace HexGameEngine.UI
                 if (character.itemSet.offHandItem == null || (character.itemSet.offHandItem != null && character.itemSet.mainHandItem.grantedAbilities[i].weaponAbilityType == WeaponAbilityType.Basic))
                 {
                     Debug.LogWarning("gained main hand weapon ability");
-                    BuildAbilityButtonFromAbility(abilityButtons[i], character.itemSet.mainHandItem.grantedAbilities[i]);
+                    abilityButtons[i].BuildFromAbilityData(character.itemSet.mainHandItem.grantedAbilities[i]);
                     newIndexCount++;
                 }
             }
@@ -369,7 +393,7 @@ namespace HexGameEngine.UI
             {
                 for (int i = 0; i < character.itemSet.offHandItem.grantedAbilities.Count; i++)
                 {
-                    BuildAbilityButtonFromAbility(abilityButtons[i + newIndexCount], character.itemSet.offHandItem.grantedAbilities[i]);
+                    abilityButtons[i + newIndexCount].BuildFromAbilityData(character.itemSet.offHandItem.grantedAbilities[i]);
                     newIndexCount++;
                 }
             }
@@ -378,15 +402,13 @@ namespace HexGameEngine.UI
             // Build non item derived abilities
             for (int i = 0; i < character.abilityBook.allKnownAbilities.Count; i++)
             {
-                BuildAbilityButtonFromAbility(abilityButtons[i + newIndexCount], character.abilityBook.allKnownAbilities[i]);
+                abilityButtons[i + newIndexCount].BuildFromAbilityData(character.abilityBook.allKnownAbilities[i]);
+                newIndexCount++;
             }
         }
         public void BuildAbilityButtonFromAbility(UIAbilityIcon b, AbilityData d)
         {
-            Debug.Log("CharacterRosterViewController.BuildAbilityButtonFromAbility() building from ability: " + d.abilityName);
-            b.AbilityImage.sprite = d.AbilitySprite;
-            b.AbilityImageParent.SetActive(true);
-            b.SetMyDataReference(d);
+            b.BuildFromAbilityData(d);
         }
         #endregion
 
@@ -397,13 +419,12 @@ namespace HexGameEngine.UI
             // reset buttons
             foreach(UITalentIcon b in talentButtons)
             {
-                b.TalentImageParent.SetActive(false);
-                b.SetMyTalent(null);
+                b.HideAndReset();
             }
 
             for(int i = 0; i < character.talentPairings.Count; i++)
             {
-                UIController.Instance.BuildTalentButton(talentButtons[i], character.talentPairings[i].talentSchool);
+                talentButtons[i].BuildFromTalentPairing(character.talentPairings[i]);
             }
         }
 

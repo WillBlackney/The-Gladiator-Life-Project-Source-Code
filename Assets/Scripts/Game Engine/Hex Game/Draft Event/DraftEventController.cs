@@ -486,13 +486,12 @@ namespace HexGameEngine.DraftEvent
             // reset buttons
             foreach (UITalentIcon b in rightPanelTalentIcons)
             {
-                b.gameObject.SetActive(false);
-                b.SetMyTalent(null);
+                b.HideAndReset();
             }
 
             for (int i = 0; i < character.talentPairings.Count; i++)
             {
-                UIController.Instance.BuildTalentButton(rightPanelTalentIcons[i], character.talentPairings[i].talentSchool);
+                rightPanelTalentIcons[i].BuildFromTalentPairing(character.talentPairings[i]);
             }
         }
         private void BuildAttributeSection(HexCharacterData character)

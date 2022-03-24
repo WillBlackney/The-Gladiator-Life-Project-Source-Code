@@ -229,7 +229,7 @@ namespace HexGameEngine.TownFeatures
 
             // Build talent buttons
             for (int i = 0; i < character.talentPairings.Count; i++)
-                recruitTalentIcons[i].BuildFromTalentData(character.talentPairings[i]);
+                recruitTalentIcons[i].BuildFromTalentPairing(character.talentPairings[i]);
 
             // Build abilities section
             // Main hand weapon abilities

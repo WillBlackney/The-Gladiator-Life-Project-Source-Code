@@ -14,7 +14,6 @@ namespace HexGameEngine.UI
         #region
         [SerializeField] Image talentImage;
         [SerializeField] TextMeshProUGUI talentLevelText;
-        [SerializeField] GameObject talentImageParent;
         [SerializeField] private PopupPositon popupPositon;
         private TalentDataSO myTalentData;
         #endregion
@@ -28,11 +27,7 @@ namespace HexGameEngine.UI
         public TextMeshProUGUI TalentLevelText
         {
             get { return talentLevelText; }
-        }
-        public GameObject TalentImageParent
-        {
-            get { return talentImageParent; }
-        }
+        }       
         public TalentDataSO MyTalentData
         {
             get { return myTalentData; }
@@ -59,19 +54,23 @@ namespace HexGameEngine.UI
 
         // Misc
         #region
-        public void BuildFromTalentData(TalentPairing tp)
+        public void BuildFromTalentPairing(TalentPairing tp)
         {
             TalentDataSO talentData = CharacterDataController.Instance.GetTalentDataFromTalentEnum(tp.talentSchool);
-            SetMyTalent(talentData);
+            myTalentData = talentData;
             gameObject.SetActive(true);
-            TalentImageParent.SetActive(true);
             TalentImage.sprite = talentData.talentSprite;
 
             // to do in future: we may want to set the talent level as a text on the icon
         }
-        public void SetMyTalent(TalentDataSO talent)
+        public void BuildFromTalentEnum(TalentSchool ts)
         {
-            myTalentData = talent;
+            TalentDataSO talentData = CharacterDataController.Instance.GetTalentDataFromTalentEnum(ts);
+            myTalentData = talentData;
+            gameObject.SetActive(true);
+            TalentImage.sprite = talentData.talentSprite;
+
+            // to do in future: we may want to set the talent level as a text on the icon
         }
         public void HideAndReset()
         {
