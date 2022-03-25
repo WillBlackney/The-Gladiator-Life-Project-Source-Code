@@ -70,15 +70,12 @@ namespace HexGameEngine.UI
         }
         public void OnClickAndDragStart()
         {
-            Debug.Log("OnClickAndDragStart()");
             PortraitDragController.Instance.OnRosterCharacterPanelDragStart(this);
         }
         public void OnRightClick()
         {
-            Debug.Log("OnRightClick()");
-            if (Input.GetKeyDown(KeyCode.Mouse1))
+            if (Input.GetKeyUp(KeyCode.Mouse1))
             {
-                Debug.Log("OnRightClick() YASSS");
                 CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
             }
         }
