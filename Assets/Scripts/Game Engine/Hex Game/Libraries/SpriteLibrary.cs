@@ -38,6 +38,25 @@ namespace HexGameEngine.Libraries
         public Sprite manipulationBadge;
         #endregion
 
+        // Attribute Images Images
+        #region
+        [Header("Ability Type Images")]
+        [PreviewField(75)]
+        public Sprite strength;
+        [PreviewField(75)]
+        public Sprite intelligence;
+        [PreviewField(75)]
+        public Sprite constitution;
+        [PreviewField(75)]
+        public Sprite accuracy;
+        [PreviewField(75)]
+        public Sprite dodge;
+        [PreviewField(75)]
+        public Sprite wits;
+        [PreviewField(75)]
+        public Sprite resolve;
+        #endregion
+
         // Ability Type Images
         #region
         [Header("Ability Type Images")]
@@ -142,6 +161,18 @@ namespace HexGameEngine.Libraries
 
         // Logic 
         #region
+        public Sprite GetAttributeSprite(CoreAttribute attribute)
+        {
+            if (attribute == CoreAttribute.Strength) return strength;
+            else if (attribute == CoreAttribute.Intelligence) return intelligence;
+            else if (attribute == CoreAttribute.Accuracy) return accuracy;
+            else if (attribute == CoreAttribute.Constituition) return constitution;
+            else if (attribute == CoreAttribute.Dodge) return dodge;
+            else if (attribute == CoreAttribute.Resolve) return resolve;
+            else if (attribute == CoreAttribute.Wits) return wits;
+            else return null;
+        }
+
         public Sprite GetRacialSpriteFromEnum(CharacterRace race)
         {
             Sprite spriteReturned = null;

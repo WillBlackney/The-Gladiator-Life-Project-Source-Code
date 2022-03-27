@@ -35,6 +35,10 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI xpBarText;
         [SerializeField] private Slider xpbar;
 
+        [Header("Level Up Components")]
+        [SerializeField] private GameObject attributeLevelUpButton;
+        [SerializeField] private AttributeLevelUpPage attributeLevelUpPageComponent;
+
         [Header("Abilities Section Components")]
         [SerializeField] private UIAbilityIcon[] abilityButtons;
 
@@ -73,7 +77,6 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI staminaText;
         [SerializeField] private TextMeshProUGUI maxEnergyText;
         [SerializeField] private TextMeshProUGUI initiativeText;
-        [SerializeField] private TextMeshProUGUI visionText;
 
         [Header("Resistances Text Components")]
         [SerializeField] private TextMeshProUGUI physicalResistanceText;
@@ -181,6 +184,10 @@ namespace HexGameEngine.UI
             else nextIndex = index + 1;
             BuildRosterForCharacter(CharacterDataController.Instance.AllPlayerCharacters[nextIndex]);
         }
+        public void OnLevelUpAttributeButtonClicked()
+        {
+            attributeLevelUpPageComponent.ShowAndBuildPage(characterCurrentlyViewing);
+        }
         #endregion              
 
         // Build Perk Section
@@ -250,6 +257,10 @@ namespace HexGameEngine.UI
             stressResistanceText.text = StatCalculator.GetTotalStressResistance(character).ToString();
             injuryResistanceText.text = StatCalculator.GetTotalInjuryResistance(character).ToString();
             debuffResistanceText.text = StatCalculator.GetTotalDebuffResistance(character).ToString();
+
+            if(character.attributeRolls.Count > 0)            
+                attributeLevelUpButton.SetActive(true);            
+            else attributeLevelUpButton.SetActive(false);
         }
         #endregion
 

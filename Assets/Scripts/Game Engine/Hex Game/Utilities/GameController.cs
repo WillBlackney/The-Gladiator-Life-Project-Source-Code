@@ -854,14 +854,18 @@ namespace HexGameEngine
                 List<HexCharacterTemplateSO> randomCharacters = GenerateRandomSandboxCharacters(GlobalSettings.Instance.TotalCharacters);
                 foreach (HexCharacterTemplateSO c in randomCharacters)
                 {
-                    characters.Add(CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(c));
+                    HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(c);
+                    character.attributeRolls.Add(AttributeRollResult.GenerateRoll(character)); // generate roll result for testing
+                    characters.Add(character);
                 }
             }
             else
             {
                 foreach (HexCharacterTemplateSO dataSO in GlobalSettings.Instance.ChosenCharacterTemplates)
                 {
-                    characters.Add(CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(dataSO));
+                    HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(dataSO);
+                    character.attributeRolls.Add(AttributeRollResult.GenerateRoll(character)); // generate roll result for testing
+                    characters.Add(character);
                 }
             }
 

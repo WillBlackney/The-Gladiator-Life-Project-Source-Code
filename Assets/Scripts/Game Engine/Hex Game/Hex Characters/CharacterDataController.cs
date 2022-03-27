@@ -228,11 +228,14 @@ namespace HexGameEngine.Characters
             newCharacter.abilityBook = new AbilityBook();
             newCharacter.abilityBook.allKnownAbilities.AddRange(original.abilityBook.allKnownAbilities);
 
+            // Attribute rolls        
+            newCharacter.attributeRolls = new List<AttributeRollResult>();
+            foreach (AttributeRollResult arr in original.attributeRolls)            
+                newCharacter.attributeRolls.Add(arr);            
+
             // Talent Data
-            foreach (TalentPairing tp in original.talentPairings)
-            {
-                newCharacter.talentPairings.Add(new TalentPairing(tp.talentSchool, tp.level));
-            }
+            foreach (TalentPairing tp in original.talentPairings)            
+                newCharacter.talentPairings.Add(new TalentPairing(tp.talentSchool, tp.level));            
 
             return newCharacter;
 
@@ -490,7 +493,7 @@ namespace HexGameEngine.Characters
                 //ModifyCharacterTalentPoints(data, 1);
 
                 // Do attribute level up roll result logic
-                //GenerateAndCacheAttributeRollOnLevelUp(data);
+                data.attributeRolls.Add(AttributeRollResult.GenerateRoll(data));
 
                 // Reset current xp
                 data.currentXP = 0;
@@ -517,7 +520,7 @@ namespace HexGameEngine.Characters
                 //ModifyCharacterTalentPoints(data, 1);
 
                 // Do attribute level up roll result logic
-                //GenerateAndCacheAttributeRollOnLevelUp(data);
+                data.attributeRolls.Add(AttributeRollResult.GenerateRoll(data));
 
                 // Reset current xp
                 data.currentXP = 0;
