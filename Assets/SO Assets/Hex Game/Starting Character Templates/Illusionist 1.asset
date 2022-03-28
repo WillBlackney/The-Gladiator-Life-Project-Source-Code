@@ -61,4 +61,4 @@ MonoBehaviour:
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 9
-    level: 1
+    level: 2

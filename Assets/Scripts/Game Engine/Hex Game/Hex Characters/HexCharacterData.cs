@@ -53,5 +53,7 @@ namespace HexGameEngine.Characters
         public int dailyWage;
 
         public List<AttributeRollResult> attributeRolls = new List<AttributeRollResult>();
+        public List<PerkRollResult> perkRolls = new List<PerkRollResult>();
+        public List<TalentRollResult> talentRolls = new List<TalentRollResult>();
     }
 }

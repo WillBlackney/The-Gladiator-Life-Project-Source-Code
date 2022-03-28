@@ -59,4 +59,8 @@ MonoBehaviour:
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
-  talentPairings: []
+  talentPairings:
+  - talentSchool: 6
+    level: 1
+  - talentSchool: 11
+    level: 1

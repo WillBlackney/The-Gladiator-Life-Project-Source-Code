@@ -21,6 +21,7 @@ namespace HexGameEngine.UI
         #region
         [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
+        [SerializeField] private Scrollbar rightPanelScrollBar;
 
         [Header("Health Components")]
         [SerializeField] private TextMeshProUGUI healthBarText;
@@ -38,6 +39,9 @@ namespace HexGameEngine.UI
         [Header("Level Up Components")]
         [SerializeField] private GameObject attributeLevelUpButton;
         [SerializeField] private AttributeLevelUpPage attributeLevelUpPageComponent;
+        [SerializeField] private GameObject perkLevelUpButton;
+        [SerializeField] private GameObject talentLevelUpButton;
+        [SerializeField] private PerkTalentLevelUpPage perkTalentLevelUpPage;
 
         [Header("Abilities Section Components")]
         [SerializeField] private UIAbilityIcon[] abilityButtons;
@@ -47,7 +51,6 @@ namespace HexGameEngine.UI
 
         [Header("Perk Section Components")]
         [SerializeField] private UIPerkIcon[] perkButtons;
-        [SerializeField] private GameObject[] perkRows;
 
         [Header("Formation Section Components")]
         [SerializeField] private RosterFormationButton[] formationButtons;
@@ -118,12 +121,14 @@ namespace HexGameEngine.UI
         }
         public void BuildAndShowFromCharacterData(HexCharacterData data)
         {
+            if(!mainVisualParent.activeInHierarchy) rightPanelScrollBar.value = 1;
             mainVisualParent.SetActive(true);
             BuildRosterForCharacter(data);
         }
         private void HandleBuildAndShowCharacterRoster()
         {
             Debug.Log("ShowCharacterRosterScreen()");
+            if (!mainVisualParent.activeInHierarchy) rightPanelScrollBar.value = 1;
             mainVisualParent.SetActive(true);
             HexCharacterData data = CharacterDataController.Instance.AllPlayerCharacters[0];
             BuildRosterForCharacter(data);
@@ -146,6 +151,7 @@ namespace HexGameEngine.UI
             BuildAbilitiesSection(data);
             BuildTalentsSection(data);
             BuildFormationButtons(CharacterDataController.Instance.AllPlayerCharacters);
+            
         }
         public void HideCharacterRosterScreen()
         {
@@ -188,24 +194,24 @@ namespace HexGameEngine.UI
         {
             attributeLevelUpPageComponent.ShowAndBuildPage(characterCurrentlyViewing);
         }
+        public void OnLevelUpPerkButtonClicked()
+        {
+            perkTalentLevelUpPage.ShowAndBuildForPerkReward(characterCurrentlyViewing);
+        }
+        public void OnLevelUpTalentButtonClicked()
+        {
+            perkTalentLevelUpPage.ShowAndBuildForTalentReward(characterCurrentlyViewing);
+        }
         #endregion              
 
         // Build Perk Section
         #region      
         private void BuildPerkViews(HexCharacterData character)
         {
-            // Reset views
-            foreach (GameObject g in perkRows)
-            {
-                g.SetActive(false);
-            }
-            foreach (UIPerkIcon b in perkButtons)
-            {
-                b.gameObject.SetActive(false);
-            }
+            foreach (UIPerkIcon b in perkButtons)            
+                b.HideAndReset();            
 
             // Build Icons
-            int activeIcons = 0;
             List<ActivePerk> allPerks = new List<ActivePerk>();
 
             // Get character perks
@@ -219,16 +225,11 @@ namespace HexGameEngine.UI
             for(int i = 0; i < allPerks.Count; i++)            
                 UIController.Instance.BuildPerkButton(allPerks[i], perkButtons[i]);            
 
-            activeIcons = allPerks.Count;
-            Debug.Log("Active perk icons = " + activeIcons.ToString());
+            Debug.Log("Active perk icons = " + allPerks.Count.ToString());           
 
-            // Enable rows
-            int rows = activeIcons / 4;
-            rows++;
-            for (int i = 0; i < rows; i++)
-            {
-                perkRows[i].SetActive(true);
-            }
+            if (character.perkRolls.Count > 0)
+                perkLevelUpButton.SetActive(true);
+            else perkLevelUpButton.SetActive(false);
 
         }
        
@@ -437,6 +438,10 @@ namespace HexGameEngine.UI
             {
                 talentButtons[i].BuildFromTalentPairing(character.talentPairings[i]);
             }
+
+            if (character.talentRolls.Count > 0)
+                talentLevelUpButton.SetActive(true);
+            else talentLevelUpButton.SetActive(false);
         }
 
         #endregion

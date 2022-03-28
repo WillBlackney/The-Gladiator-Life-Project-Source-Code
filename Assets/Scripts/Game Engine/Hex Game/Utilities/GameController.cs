@@ -855,8 +855,14 @@ namespace HexGameEngine
                 foreach (HexCharacterTemplateSO c in randomCharacters)
                 {
                     HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(c);
+                    CharacterDataController.Instance.HandleGainXP(character, 300);
+                    /*
                     for(int i = 0; i < 2; i++)
+                    {
                         character.attributeRolls.Add(AttributeRollResult.GenerateRoll(character)); // generate roll result for testing
+                        character.perkRolls.Add(PerkRollResult.GenerateRoll(character));
+                    }
+                    */
                     characters.Add(character);
                 }
             }
@@ -865,8 +871,13 @@ namespace HexGameEngine
                 foreach (HexCharacterTemplateSO dataSO in GlobalSettings.Instance.ChosenCharacterTemplates)
                 {
                     HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(dataSO);
-                    for (int i = 0; i < 2; i++)
+                    CharacterDataController.Instance.HandleGainXP(character, 300);
+                    /*for (int i = 0; i < 2; i++)
+                    {
                         character.attributeRolls.Add(AttributeRollResult.GenerateRoll(character)); // generate roll result for testing
+                        character.perkRolls.Add(PerkRollResult.GenerateRoll(character));
+                    }
+                    */
                     characters.Add(character);
                 }
             }

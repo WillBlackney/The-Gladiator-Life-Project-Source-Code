@@ -1,4 +1,5 @@
-﻿using HexGameEngine.Utilities;
+﻿using HexGameEngine.Perks;
+using HexGameEngine.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,11 +26,41 @@ namespace HexGameEngine.Characters
             roll.accuracyRoll = RandomGenerator.NumberBetween(1, 3);
             roll.dodgeRoll = RandomGenerator.NumberBetween(1, 3);
             roll.resolveRoll = RandomGenerator.NumberBetween(2, 4);
-            roll.constitutionRoll = RandomGenerator.NumberBetween(3, 5);
+            roll.constitutionRoll = RandomGenerator.NumberBetween(2, 4);
             roll.witsRoll = RandomGenerator.NumberBetween(2, 4);
 
             return roll;
 
+        }
+    }
+    public class PerkRollResult
+    {
+        public List<PerkIconData> perkChoices = new List<PerkIconData>();
+        public static PerkRollResult GenerateRoll(HexCharacterData character)
+        {
+            PerkRollResult roll = new PerkRollResult();
+
+            List<PerkIconData> choices = PerkController.Instance.GetValidLevelUpPerksForCharacter(character);
+            choices.Shuffle();
+            for(int i = 0; i < 3; i++)            
+                roll.perkChoices.Add(choices[i]);                       
+
+            return roll;
+        }
+    }
+    public class TalentRollResult
+    {
+        public List<TalentPairing> talentChoices = new List<TalentPairing>();
+        public static TalentRollResult GenerateRoll(HexCharacterData character)
+        {
+            TalentRollResult roll = new TalentRollResult();
+
+            List<TalentPairing> choices = CharacterDataController.Instance.GetValidLevelUpTalents(character);
+            choices.Shuffle();
+            for (int i = 0; i < 3; i++)
+                roll.talentChoices.Add(choices[i]);
+
+            return roll;
         }
     }
 }

@@ -674,6 +674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   talentImage: {fileID: 5573788783109934055}
   talentLevelText: {fileID: 3058033784349783067}
+  talentLevelParent: {fileID: 8413101060036560947}
   popupPositon: 0
 --- !u!1 &5573788783109934053
 GameObject:
@@ -764,7 +765,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4765429044822926842
 RectTransform:
   m_ObjectHideFlags: 0

@@ -236,6 +236,49 @@ namespace HexGameEngine.Perks
             }
             return rp;
         }
+        public List<PerkIconData> GetAllLevelUpPerks()
+        {
+            List<PerkIconData> perks = new List<PerkIconData>();
+            foreach(PerkIconData p in allPerks)            
+                if (p.isRewardable) perks.Add(p); 
+            return perks;
+        }
+        public List<PerkIconData> GetValidLevelUpPerksForCharacter(HexCharacterData character)
+        {
+            List<PerkIconData> validPerks = GetAllLevelUpPerks();
+            List<PerkIconData> invalidPerks = new List<PerkIconData>();
+
+            // filter out invalid perks
+            foreach (PerkIconData p in validPerks)
+            {                
+                if (DoesCharacterHavePerk(character.passiveManager, p.perkTag))
+                    invalidPerks.Add(p);
+                else
+                {
+                    // check if perk was previously offered in another roll
+                    foreach(PerkRollResult roll in character.perkRolls)
+                    {
+                        foreach (PerkIconData p2 in roll.perkChoices)
+                        {
+                            if (p2.perkTag == p.perkTag)
+                            {
+                                invalidPerks.Add(p);
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach(PerkIconData p in invalidPerks)
+            {
+                if (validPerks.Contains(p))
+                {
+                    validPerks.Remove(p);
+                }
+            }
+
+            return validPerks;
+        }
         #endregion
 
         // Setup Logic

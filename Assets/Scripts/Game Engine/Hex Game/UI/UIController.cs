@@ -81,12 +81,7 @@ namespace HexGameEngine.UI
         #endregion
 
         // Perk + Talent Button Logic
-        #region
-        public void BuildTalentButton(UITalentIcon b, TalentSchool talent)
-        {
-            TalentDataSO talentData = CharacterDataController.Instance.GetTalentDataFromTalentEnum(talent);
-            b.BuildFromTalentEnum(talent);
-        }
+        #region        
         public void BuildPerkButton(ActivePerk p, UIPerkIcon b)
         {
             PerkIconData data = PerkController.Instance.GetPerkIconDataByTag(p.perkTag);

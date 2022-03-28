@@ -416,6 +416,61 @@ namespace HexGameEngine.Characters
 
             return dataRet;
         }
+        public List<TalentPairing> GetValidLevelUpTalents(HexCharacterData character)
+        {
+            List<TalentPairing> ret = new List<TalentPairing>();
+            List<TalentSchool> talentSchools = new List<TalentSchool> { TalentSchool.Divinity, TalentSchool.Guardian, TalentSchool.Manipulation,
+            TalentSchool.Naturalism, TalentSchool.Pyromania, TalentSchool.Ranger, TalentSchool.Scoundrel, TalentSchool.Shadowcraft, TalentSchool.Warfare };
+
+            foreach(TalentSchool ts in talentSchools)
+            {
+                if (!DoesCharacterHaveTalent(character.talentPairings, ts, 1))
+                    ret.Add(new TalentPairing(ts, 1));
+                else if (!DoesCharacterHaveTalent(character.talentPairings, ts, 2))
+                    ret.Add(new TalentPairing(ts, 2));
+            }
+
+            List<TalentPairing> invalidPairings = new List<TalentPairing>();
+
+            // filter out invalid perks
+            foreach (TalentPairing p in ret)
+            {
+                // check if perk was previously offered in another roll
+                foreach (TalentRollResult roll in character.talentRolls)
+                {
+                    foreach (TalentPairing p2 in roll.talentChoices)
+                    {
+                        if (p2.talentSchool == p.talentSchool &&
+                            p2.level == p.level)
+                        {
+                            invalidPairings.Add(p);
+                        }
+                    }
+                }
+            }
+
+            foreach(TalentPairing p in invalidPairings)
+            {
+                ret.Remove(p);
+            }
+
+            /*
+            foreach (TalentPairing p in invalidPairings)
+            {
+                for(int i = 0; i < ret.Count; i++)
+                {
+                    if(ret[i].talentSchool == p.talentSchool &&
+                        ret[i].level == p.level)
+                    {
+                        ret.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+            */
+
+            return ret;
+        }
         #endregion
 
         // Save + Load Logic
@@ -453,8 +508,8 @@ namespace HexGameEngine.Characters
         }
         private int GetMaxXpCapForLevel(int level)
         {
-            // each level requires 40 more XP than the previous.
-            return 100 + (40 * (level - 1));
+            // each level requires 50 more XP than the previous.
+            return 100 + (50 * (level - 1));
         }
         private void SetCharacterLevel(HexCharacterData data, int newLevelValue)
         {
@@ -483,17 +538,18 @@ namespace HexGameEngine.Characters
             // Level up occured with spill over XP
             if (spillOver > 0)
             {
-                // Glow top bar button
-                //TopBarController.Instance.ShowCharacterRosterButtonGlow();
-
                 // Gain level
                 SetCharacterLevel(data, data.currentLevel + 1);
 
-                // Gain Talent point
-                //ModifyCharacterTalentPoints(data, 1);
-
                 // Do attribute level up roll result logic
                 data.attributeRolls.Add(AttributeRollResult.GenerateRoll(data));
+
+                // Gain perk level up
+                data.perkRolls.Add(PerkRollResult.GenerateRoll(data));
+
+                // Gain talent level up
+                if (data.currentLevel == 3 || data.currentLevel == 5)
+                    data.talentRolls.Add(TalentRollResult.GenerateRoll(data));
 
                 // Reset current xp
                 data.currentXP = 0;
@@ -510,17 +566,18 @@ namespace HexGameEngine.Characters
             // Level up with no spill over
             else if (spillOver == 0)
             {
-                // Glow top bar button
-                //TopBarController.Instance.ShowCharacterRosterButtonGlow();
-
                 // Gain level
                 SetCharacterLevel(data, data.currentLevel + 1);
 
-                // Gain Talent point
-                //ModifyCharacterTalentPoints(data, 1);
-
                 // Do attribute level up roll result logic
                 data.attributeRolls.Add(AttributeRollResult.GenerateRoll(data));
+
+                // Gain perk level up
+                data.perkRolls.Add(PerkRollResult.GenerateRoll(data));
+
+                // Gain talent level up
+                if (data.currentLevel == 3 || data.currentLevel == 5)
+                    data.talentRolls.Add(TalentRollResult.GenerateRoll(data));
 
                 // Reset current xp
                 data.currentXP = 0;

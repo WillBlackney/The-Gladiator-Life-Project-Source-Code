@@ -11,12 +11,12 @@ namespace HexGameEngine.UI
     {
         // Properties + Components
         #region
-        [Header("Text Components")]
+        [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
         [SerializeField] private AttributeLevelUpWidget[] attributeRows;
         [SerializeField] private TextMeshProUGUI totalSelectedAttributesText;
 
-        [Header("Button Components")]
+        [Header("Confirm Button Components")]
         [SerializeField] private Image confirmButtonImage;
         [SerializeField] private Sprite readyImage;
         [SerializeField] private Sprite notReadyImage;
@@ -41,6 +41,7 @@ namespace HexGameEngine.UI
         }
         public void OnCancelButtonClicked()
         {
+            currentCharacter = null;
             mainVisualParent.SetActive(false);
         }
         #endregion

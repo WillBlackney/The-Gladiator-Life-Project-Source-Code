@@ -962,14 +962,14 @@ namespace HexGameEngine.Combat
                 // Attacker 'on killed an enemy' events
                 if(attacker != null)
                 {
-                    // Exectioner perk: attacker gains 2 energy on kill
+                    // Exectioner perk: attacker gains 4 energy on kill
                     if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Executioner) && attacker.charactersKilledThisTurn == 0)
                     {
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
                         VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Executioner!"), QueuePosition.Back, 0, 0, attacker.GetLastStackEventParent());
 
-                        HexCharacterController.Instance.ModifyEnergy(attacker, 2);
+                        HexCharacterController.Instance.ModifyEnergy(attacker, 4);
                     }
 
                     // Increment kills this turn
