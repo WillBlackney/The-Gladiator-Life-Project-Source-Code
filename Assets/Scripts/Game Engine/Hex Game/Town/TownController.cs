@@ -54,6 +54,11 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] private TextMeshProUGUI recruitRightPanelResolveText;
         [SerializeField] private TextMeshProUGUI recruitRightPanelWitsText;
 
+        [Title("Hospital Page Core Components")]
+        [SerializeField] GameObject hospitalPageVisualParent;
+        [SerializeField] HospitalDropSlot[] hospitalSlots;
+        [Space(20)]
+
         [Title("Choose Combat Page Components")]
         [SerializeField] private GameObject chooseCombatPageMainVisualParent;
         [SerializeField] private CombatContractCard[] allContractCards;
@@ -130,7 +135,7 @@ namespace HexGameEngine.TownFeatures
             CharacterDataController.Instance.CharacterDeck.RemoveAt(0);
 
         }
-        public void BuildAndShowRecruitPage()
+        private void BuildAndShowRecruitPage()
         {
             recruitPageVisualParent.SetActive(true);
 
@@ -261,6 +266,42 @@ namespace HexGameEngine.TownFeatures
         }
         #endregion
 
+        // Hospital Page Logic
+        #region
+        private void BuildAndShowHospitalPage()
+        {
+            hospitalPageVisualParent.SetActive(true);
+            foreach(HospitalDropSlot slot in hospitalSlots)
+            {
+                slot.BuildViews();
+            }
+        }
+        public bool IsCharacterPlacedInHospital(HexCharacterData character)
+        {
+            bool ret = false;
+            foreach(HospitalDropSlot slot in hospitalSlots)
+            {
+                if(slot.MyCharacterData == character)
+                {
+                    ret = true;
+                    break;
+                }
+            }
+            return ret;
+        }
+        public void HandleDropCharacterOnHospitalSlot(HospitalDropSlot slot, HexCharacterData draggedCharacter)
+        {
+            Debug.Log("HandleDropCharacterOnDeploymentNode");
+
+            // check slot available and player has enough gold
+            if(slot.Available && PlayerDataController.Instance.CurrentGold >= HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType))
+            {
+
+            }
+
+        }
+        #endregion
+
         // Feature Buttons On Click
         #region
         public void OnRecruitPageButtonClicked()
@@ -270,6 +311,15 @@ namespace HexGameEngine.TownFeatures
         public void OnRecruitPageLeaveButtonClicked()
         {
             recruitPageVisualParent.SetActive(false);
+        }
+        public void OnHospitalPageButtonClicked()
+        {
+            // build and show hospital page
+            BuildAndShowHospitalPage();
+        }
+        public void OnHospitalPageLeaveButtonClicked()
+        {
+            hospitalPageVisualParent.SetActive(false);
         }
         public void OnCombatPageBackToTownButtonClicked()
         {
@@ -443,14 +493,14 @@ namespace HexGameEngine.TownFeatures
         }
         public bool IsCharacterDraggableFromRosterToDeploymentNode(HexCharacterData character)
         {
-            List<HexCharacterData> charactersDep = new List<HexCharacterData>();
+            List<HexCharacterData> charactersDeployed = new List<HexCharacterData>();
             foreach(CharacterWithSpawnData c in GetDeployedCharacters())
             {
-                charactersDep.Add(c.characterData);
+                charactersDeployed.Add(c.characterData);
             }
 
             if (deploymentPageMainVisualParent.activeSelf &&
-                charactersDep.Contains(character))
+                charactersDeployed.Contains(character))
                 return false;
             else return true;
             

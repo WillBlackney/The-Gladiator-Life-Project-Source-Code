@@ -50,6 +50,8 @@ namespace HexGameEngine.UI
         void HandleEndDrag()
         {
             followMouseParent.SetActive(false);
+
+            // Character Deployment logic
             if (DeploymentNodeView.NodeMousedOver != null)
             {
                 if (DeploymentNodeView.NodeMousedOver.AllowedCharacter == Allegiance.Player)                
@@ -62,7 +64,12 @@ namespace HexGameEngine.UI
             // Handle dragging a node (not character panel) and drag did not end on a new node: rebuild old node position
             else if (DeploymentNodeView.NodeMousedOver == null &&
                 draggedNode != null )            
-                TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);            
+                TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);    
+            
+            else if(HospitalDropSlot.SlotMousedOver != null)
+            {
+                TownController.Instance.HandleDropCharacterOnHospitalSlot(HospitalDropSlot.SlotMousedOver, draggedCharacterData);
+            }
 
             draggedCharacterData = null;
             draggedNode = null;
@@ -74,7 +81,9 @@ namespace HexGameEngine.UI
         }
         public void OnRosterCharacterPanelDragStart(RosterCharacterPanel panel)
         {
-            if (!TownController.Instance.IsCharacterDraggableFromRosterToDeploymentNode(panel.MyCharacterData)) return;
+            if (!TownController.Instance.IsCharacterDraggableFromRosterToDeploymentNode(panel.MyCharacterData) ||
+                TownController.Instance.IsCharacterPlacedInHospital(panel.MyCharacterData)) return;
+
             BuildAndShowPortrait(panel.MyCharacterData.modelParts);
             draggedCharacterData = panel.MyCharacterData;
         }
