@@ -36,6 +36,10 @@ namespace HexGameEngine.UI
         {
             get { return selected; }
         }
+        public CoreAttribute MyAttribute
+        {
+            get { return myAttribute; }
+        }
         #endregion
 
         // Input

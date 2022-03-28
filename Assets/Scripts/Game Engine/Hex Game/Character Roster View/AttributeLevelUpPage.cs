@@ -33,11 +33,11 @@ namespace HexGameEngine.UI
         #region
         public void OnConfirmButtonClicked()
         {
-            // validate selections
-            // apply stat boosts
-            // pop a stat roll from character
-            // close window
-            // rebuild character roster views
+            List<AttributeLevelUpWidget> selectedAttributes = GetSelectedAttributes();
+
+            // Validate selections
+            if (selectedAttributes.Count != 3) return;
+            HandleSelectionsConfirmed(selectedAttributes);            
         }
         public void OnCancelButtonClicked()
         {
@@ -75,6 +75,37 @@ namespace HexGameEngine.UI
             totalSelectedAttributesText.text = selected.ToString() + " / 3";
             if (selected >= 3) confirmButtonImage.sprite = readyImage;
             else confirmButtonImage.sprite = notReadyImage;
+        }
+        private void HandleSelectionsConfirmed(List<AttributeLevelUpWidget> selections)
+        {
+            // Apply stat boosts
+            foreach(AttributeLevelUpWidget w in selections)
+            {
+                if(w.MyAttribute == CoreAttribute.Strength)                
+                    currentCharacter.attributeSheet.strength += currentCharacter.attributeRolls[0].strengthRoll;
+                else if (w.MyAttribute == CoreAttribute.Intelligence)
+                    currentCharacter.attributeSheet.intelligence += currentCharacter.attributeRolls[0].intelligenceRoll;
+                else if (w.MyAttribute == CoreAttribute.Accuracy)
+                    currentCharacter.attributeSheet.accuracy += currentCharacter.attributeRolls[0].accuracyRoll;
+                else if (w.MyAttribute == CoreAttribute.Dodge)
+                    currentCharacter.attributeSheet.dodge += currentCharacter.attributeRolls[0].dodgeRoll;
+                else if (w.MyAttribute == CoreAttribute.Resolve)
+                    currentCharacter.attributeSheet.resolve += currentCharacter.attributeRolls[0].resolveRoll;
+                else if (w.MyAttribute == CoreAttribute.Constituition)
+                    currentCharacter.attributeSheet.constitution += currentCharacter.attributeRolls[0].constitutionRoll;
+                else if (w.MyAttribute == CoreAttribute.Wits)
+                    currentCharacter.attributeSheet.wits += currentCharacter.attributeRolls[0].witsRoll;
+
+            }
+
+            // Pop stat roll from character
+            currentCharacter.attributeRolls.RemoveAt(0);
+
+            // Close attribute level up page views
+            mainVisualParent.SetActive(false);
+
+            // Rebuild character roster views
+            CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
         }
         #endregion
     }
