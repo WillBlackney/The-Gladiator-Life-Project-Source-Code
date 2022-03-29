@@ -5,6 +5,8 @@ using CardGameEngine.UCM;
 using HexGameEngine.Characters;
 using HexGameEngine.UCM;
 using HexGameEngine.UI;
+using HexGameEngine.Player;
+using HexGameEngine.Perks;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -16,6 +18,7 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] HospitalFeature featureType;
         [SerializeField] GameObject portraitVisualParent;
         [SerializeField] UniversalCharacterModel portraitModel;
+        [SerializeField] GameObject cancelButtonParent;
 
         // Non inspector fields
         private static HospitalDropSlot slotMousedOver;
@@ -28,8 +31,10 @@ namespace HexGameEngine.TownFeatures
         {
             // to do: probably should find a better place for this function
             // the costs of features should probably be determined by GlobalSettings
-
-            return 50;
+            if (feature == HospitalFeature.BedRest) return 50;
+            else if (feature == HospitalFeature.Therapy) return 75;
+            else if (feature == HospitalFeature.Surgery) return 75;
+            else return 0;
         }
         public static HospitalDropSlot SlotMousedOver
         {
@@ -60,14 +65,7 @@ namespace HexGameEngine.TownFeatures
         public void OnRightClick()
         {
             Debug.Log("OnRightClick");
-            if (myCharacterData != null)
-            {
-                myCharacterData = null;
-                portraitVisualParent.SetActive(false);
-                // todo: update character roster panel view (remove unavailble indicator)
-
-                // refund gold (maybe make this all a function called "HandleRemoveCharacterFromSlot()"
-            }
+            HandleCancel();
         }
         public void MouseEnter()
         {
@@ -79,20 +77,67 @@ namespace HexGameEngine.TownFeatures
             Debug.Log("MouseExit");
             SlotMousedOver = null;
         }
+        public void OnCancelButtonClicked()
+        {
+            HandleCancel();
+        }
         #endregion
 
         // Logic 
         #region
+        private void HandleCancel()
+        {
+            if (myCharacterData != null)
+            {
+                myCharacterData = null;
+                PlayerDataController.Instance.ModifyPlayerGold(GetFeatureGoldCost(featureType));
+                BuildViews();
+            }
+        }
         public void BuildViews()
         {
             if(myCharacterData != null)
             {
                 portraitVisualParent.SetActive(true);
                 CharacterModeller.BuildModelFromStringReferencesAsMugshot(portraitModel, myCharacterData.modelParts);
+                cancelButtonParent.SetActive(true);
             }
             else
             {
                 portraitVisualParent.SetActive(false);
+                cancelButtonParent.SetActive(false);
+            }
+        }
+        public void OnCharacterDragDropSuccess(HexCharacterData character)
+        {
+            Debug.Log("HospitalDropSlot.OnCharacterDragDropSuccess");
+            myCharacterData = character;
+            BuildViews();
+        }
+        public void OnNewDayStart()
+        {
+            if(myCharacterData != null)
+            {
+                if(featureType == HospitalFeature.BedRest)
+                {
+                    CharacterDataController.Instance.SetCharacterHealth(myCharacterData, StatCalculator.GetTotalMaxHealth(myCharacterData));
+                }
+                else if (featureType == HospitalFeature.Therapy)
+                {
+                    CharacterDataController.Instance.SetCharacterStress(myCharacterData, 0);
+                }
+                else if (featureType == HospitalFeature.Surgery)
+                {
+                    List<ActivePerk> allInjuries = PerkController.Instance.GetAllInjuriesOnCharacter(myCharacterData);
+                    foreach(ActivePerk p in allInjuries)
+                    {
+                        PerkController.Instance.ModifyPerkOnCharacterData(myCharacterData.passiveManager, p.perkTag, -p.stacks);
+                    }
+                }
+
+                // to do: rebuild character's panel views to be available
+
+                myCharacterData = null;
             }
         }
         #endregion

@@ -16,7 +16,6 @@ namespace HexGameEngine.UI
         #region
         [Header("Core Components")]
         [SerializeField] private UniversalCharacterModel potraitUcm;
-        [SerializeField] private GameObject canvasParent;
         [SerializeField] private GameObject followMouseParent;
 
         [Header("Drag Components")]
@@ -24,8 +23,8 @@ namespace HexGameEngine.UI
         [SerializeField] private RectTransform dragRect;
 
         // Non inspector fields
-        private HexCharacterData draggedCharacterData;
-        private DeploymentNodeView draggedNode;
+        private HexCharacterData draggedCharacterData = null;
+        private DeploymentNodeView draggedNode = null;
         #endregion
 
         // Getters + Accessors
@@ -49,6 +48,7 @@ namespace HexGameEngine.UI
         }
         void HandleEndDrag()
         {
+            Debug.Log("PortraitDragController.HandleEndDrag");
             followMouseParent.SetActive(false);
 
             // Character Deployment logic
@@ -66,8 +66,10 @@ namespace HexGameEngine.UI
                 draggedNode != null )            
                 TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);    
             
+            // Handle drag on to hospital feature slot
             else if(HospitalDropSlot.SlotMousedOver != null)
             {
+                Debug.Log("HIT");
                 TownController.Instance.HandleDropCharacterOnHospitalSlot(HospitalDropSlot.SlotMousedOver, draggedCharacterData);
             }
 

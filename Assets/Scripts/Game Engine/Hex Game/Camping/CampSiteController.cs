@@ -136,7 +136,8 @@ namespace HexGameEngine.Camping
             List<PerkIconData> injuries = new List<PerkIconData>();
             foreach(ActivePerk ap in data.passiveManager.perks)
             {
-                var perk = PerkController.Instance.GetPerkIconDataByTag(ap.perkTag);
+                //var perk = PerkController.Instance.GetPerkIconDataByTag(ap.perkTag);
+                var perk = ap.Data;
                 if (perk.isInjury)                
                     injuries.Add(perk);                
             }
@@ -319,7 +320,8 @@ namespace HexGameEngine.Camping
                     {
                         if(ap.stacks > 0)
                         {
-                            var perk = PerkController.Instance.GetPerkIconDataByTag(ap.perkTag);
+                            //var perk = PerkController.Instance.GetPerkIconDataByTag(ap.perkTag);
+                            var perk = ap.Data;
                             if (perk.isInjury)
                                 injuries.Add(ap);
                         }

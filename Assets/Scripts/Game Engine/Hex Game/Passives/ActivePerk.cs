@@ -9,6 +9,18 @@ namespace HexGameEngine.Perks
     {
         public Perk perkTag;
         public int stacks;
+        private PerkIconData data;
+        public PerkIconData Data
+        {
+            get 
+            { 
+                if(data == null)
+                {
+                    data = PerkController.Instance.GetPerkIconDataByTag(perkTag);
+                };
+                return data;
+            }
+        }
 
         public ActivePerk(Perk perk, int stacks)
         {

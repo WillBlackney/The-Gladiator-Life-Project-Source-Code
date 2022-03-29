@@ -15,6 +15,7 @@ using HexGameEngine.Abilities;
 using HexGameEngine.Libraries;
 using HexGameEngine.Player;
 using HexGameEngine.JourneyLogic;
+using HexGameEngine.Perks;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -57,6 +58,9 @@ namespace HexGameEngine.TownFeatures
         [Title("Hospital Page Core Components")]
         [SerializeField] GameObject hospitalPageVisualParent;
         [SerializeField] HospitalDropSlot[] hospitalSlots;
+        [SerializeField] TextMeshProUGUI bedrestCostText;
+        [SerializeField] TextMeshProUGUI surgeryCostText;
+        [SerializeField] TextMeshProUGUI therapyCostText;
         [Space(20)]
 
         [Title("Choose Combat Page Components")]
@@ -271,10 +275,9 @@ namespace HexGameEngine.TownFeatures
         private void BuildAndShowHospitalPage()
         {
             hospitalPageVisualParent.SetActive(true);
-            foreach(HospitalDropSlot slot in hospitalSlots)
-            {
-                slot.BuildViews();
-            }
+            foreach(HospitalDropSlot slot in hospitalSlots)            
+                slot.BuildViews();            
+            UpdateHospitalFeatureCostTexts();
         }
         public bool IsCharacterPlacedInHospital(HexCharacterData character)
         {
@@ -291,14 +294,55 @@ namespace HexGameEngine.TownFeatures
         }
         public void HandleDropCharacterOnHospitalSlot(HospitalDropSlot slot, HexCharacterData draggedCharacter)
         {
-            Debug.Log("HandleDropCharacterOnDeploymentNode");
+            Debug.Log("TownController.HandleDropCharacterOnHospitalSlot");
 
             // check slot available and player has enough gold
             if(slot.Available && PlayerDataController.Instance.CurrentGold >= HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType))
             {
+                // Validation
+                // Cant heal characters already at full health
+                if (slot.FeatureType == HospitalFeature.BedRest && draggedCharacter.currentHealth == StatCalculator.GetTotalMaxHealth(draggedCharacter)) return;
+                
+                // Cant stress heal characters already at 0 stress
+                if (slot.FeatureType == HospitalFeature.Therapy && draggedCharacter.currentStress == 0) return;
 
+                // Cant remove injuries if character has none
+                if (slot.FeatureType == HospitalFeature.Surgery && !PerkController.Instance.IsCharacteInjured(draggedCharacter.passiveManager)) return;
+
+
+                // Attach character to slot
+                slot.OnCharacterDragDropSuccess(draggedCharacter);             
+
+                // Pay gold price
+                PlayerDataController.Instance.ModifyPlayerGold(-HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType));
+                               
+                // Update page text views
+                UpdateHospitalFeatureCostTexts();
+
+                // to do: mark character portait in scroll panel as unavailable
             }
 
+        }
+        private void UpdateHospitalFeatureCostTexts()
+        {
+            int playerGold = PlayerDataController.Instance.CurrentGold;
+            bedrestCostText.color = Color.white;
+            surgeryCostText.color = Color.white;
+            therapyCostText.color = Color.white;
+            bedrestCostText.text = HospitalDropSlot.GetFeatureGoldCost(HospitalFeature.BedRest).ToString();
+            surgeryCostText.text = HospitalDropSlot.GetFeatureGoldCost(HospitalFeature.Surgery).ToString();
+            therapyCostText.text = HospitalDropSlot.GetFeatureGoldCost(HospitalFeature.Therapy).ToString();
+            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(HospitalFeature.BedRest)) bedrestCostText.color = Color.red;
+            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(HospitalFeature.Surgery)) surgeryCostText.color = Color.red;
+            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(HospitalFeature.Therapy)) therapyCostText.color = Color.red;
+        }
+        public void HandleApplyHospitalFeaturesOnNewDayStart()
+        {
+            foreach(HospitalDropSlot slot in hospitalSlots)
+            {
+                if(slot.MyCharacterData != null)                
+                    slot.OnNewDayStart();                
+            }
         }
         #endregion
 

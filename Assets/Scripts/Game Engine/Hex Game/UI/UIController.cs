@@ -84,7 +84,8 @@ namespace HexGameEngine.UI
         #region        
         public void BuildPerkButton(ActivePerk p, UIPerkIcon b)
         {
-            PerkIconData data = PerkController.Instance.GetPerkIconDataByTag(p.perkTag);
+            //PerkIconData data = PerkController.Instance.GetPerkIconDataByTag(p.perkTag);
+            PerkIconData data = p.Data;
             b.SetMyDataReference(data);
             b.gameObject.SetActive(true);
             b.PerkImage.sprite = data.passiveSprite;

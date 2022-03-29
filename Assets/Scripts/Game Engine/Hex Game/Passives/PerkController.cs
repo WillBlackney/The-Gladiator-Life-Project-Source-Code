@@ -728,7 +728,8 @@ namespace HexGameEngine.Perks
             bool bRet = false;
             foreach (ActivePerk ap in pManager.perks)
             {
-                if (GetPerkIconDataByTag(ap.perkTag).isInjury)
+                //if (GetPerkIconDataByTag(ap.perkTag).isInjury)
+                if(ap.Data.isInjury)
                 {
                     bRet = true;
                     break;
@@ -738,7 +739,25 @@ namespace HexGameEngine.Perks
 
             return bRet;
         }
-        #endregion        
+        #endregion
+
+        // Misc
+        #region
+        public List<ActivePerk> GetAllInjuriesOnCharacter(HexCharacterData c)
+        {
+            List<ActivePerk> ret = new List<ActivePerk>();
+
+            foreach(ActivePerk p in c.passiveManager.perks)
+            {
+                //PerkIconData pData = GetPerkIconDataByTag(p.perkTag);
+                PerkIconData pData = p.Data;
+                if (pData.isInjury)                
+                    ret.Add(p);                
+            }
+
+            return ret;
+        }
+        #endregion
 
     }
 }

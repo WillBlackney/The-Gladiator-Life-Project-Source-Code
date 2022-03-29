@@ -208,7 +208,8 @@ namespace HexGameEngine.Items
                     }
                     else if (item.itemEffects[i].effectType == ItemEffectType.GainPerk)
                     {
-                        var pd = PerkController.Instance.GetPerkIconDataByTag(item.itemEffects[i].perkGained.perkTag);
+                        var pd = item.itemEffects[i].perkGained.Data;
+                        //var pd = PerkController.Instance.GetPerkIconDataByTag(item.itemEffects[i].perkGained.perkTag);
                         string s = TextLogic.ConvertCustomStringListToString(pd.passiveDescription);
                         s = s.Replace("X", item.itemEffects[i].perkGained.stacks.ToString());
                         effectsText.text += "- " + s;
