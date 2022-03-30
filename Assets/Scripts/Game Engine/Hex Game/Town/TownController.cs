@@ -56,11 +56,17 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] private TextMeshProUGUI recruitRightPanelWitsText;
 
         [Title("Hospital Page Core Components")]
-        [SerializeField] GameObject hospitalPageVisualParent;
-        [SerializeField] HospitalDropSlot[] hospitalSlots;
-        [SerializeField] TextMeshProUGUI bedrestCostText;
-        [SerializeField] TextMeshProUGUI surgeryCostText;
-        [SerializeField] TextMeshProUGUI therapyCostText;
+        [SerializeField] private GameObject hospitalPageVisualParent;
+        [SerializeField] private HospitalDropSlot[] hospitalSlots;
+        [Header("Bed Rest Components")]
+        [SerializeField] private TextMeshProUGUI bedrestCostText;
+        [SerializeField] private Image bedrestIcon;
+        [Header("Surgery Components")]
+        [SerializeField] private TextMeshProUGUI surgeryCostText;
+        [SerializeField] private Image surgeryIcon;
+        [Header("Therapy Components")]
+        [SerializeField] private TextMeshProUGUI therapyCostText;
+        [SerializeField] private Image therapyIcon;
         [Space(20)]
 
         [Title("Choose Combat Page Components")]
@@ -86,7 +92,10 @@ namespace HexGameEngine.TownFeatures
 
         // Getters + Accessors
         #region
-       
+       public HospitalDropSlot[] HospitalSlots
+        {
+            get { return hospitalSlots; }
+        }
         #endregion
 
         // Save + Load Logic
@@ -221,7 +230,7 @@ namespace HexGameEngine.TownFeatures
             recruitRightPanelCostText.text = TextLogic.ReturnColoredText(character.recruitCost.ToString(), col);
 
             // Misc
-            recruitRightPanelRacialImage.sprite = SpriteLibrary.Instance.GetRacialSpriteFromEnum(character.race);
+            recruitRightPanelRacialImage.sprite = SpriteLibrary.Instance.GetRacialSprite(character.race);
 
             // Build stats section
             recruitRightPanelStrengthText.text = character.attributeSheet.strength.ToString();
@@ -278,6 +287,13 @@ namespace HexGameEngine.TownFeatures
             foreach(HospitalDropSlot slot in hospitalSlots)            
                 slot.BuildViews();            
             UpdateHospitalFeatureCostTexts();
+            BuildHospitalActivityIcons();
+        }
+        private void BuildHospitalActivityIcons()
+        {
+            bedrestIcon.sprite = SpriteLibrary.Instance.GetTownActivitySprite(TownActivity.BedRest);
+            surgeryIcon.sprite = SpriteLibrary.Instance.GetTownActivitySprite(TownActivity.Surgery);
+            therapyIcon.sprite = SpriteLibrary.Instance.GetTownActivitySprite(TownActivity.Therapy);
         }
         public bool IsCharacterPlacedInHospital(HexCharacterData character)
         {
@@ -301,14 +317,15 @@ namespace HexGameEngine.TownFeatures
             {
                 // Validation
                 // Cant heal characters already at full health
-                if (slot.FeatureType == HospitalFeature.BedRest && draggedCharacter.currentHealth == StatCalculator.GetTotalMaxHealth(draggedCharacter)) return;
+                if (slot.FeatureType == TownActivity.BedRest && draggedCharacter.currentHealth == StatCalculator.GetTotalMaxHealth(draggedCharacter)) return;
                 
                 // Cant stress heal characters already at 0 stress
-                if (slot.FeatureType == HospitalFeature.Therapy && draggedCharacter.currentStress == 0) return;
+                if (slot.FeatureType == TownActivity.Therapy && draggedCharacter.currentStress == 0) return;
 
                 // Cant remove injuries if character has none
-                if (slot.FeatureType == HospitalFeature.Surgery && !PerkController.Instance.IsCharacteInjured(draggedCharacter.passiveManager)) return;
+                if (slot.FeatureType == TownActivity.Surgery && !PerkController.Instance.IsCharacteInjured(draggedCharacter.passiveManager)) return;
 
+                // todo in future: error messages above for the player, explaing why they cant drop player on slot (not stress, not enough old, etc)
 
                 // Attach character to slot
                 slot.OnCharacterDragDropSuccess(draggedCharacter);             
@@ -319,7 +336,8 @@ namespace HexGameEngine.TownFeatures
                 // Update page text views
                 UpdateHospitalFeatureCostTexts();
 
-                // to do: mark character portait in scroll panel as unavailable
+                // Update character's scroll panel activity indicator
+                CharacterScrollPanelController.Instance.GetCharacterPanel(draggedCharacter).UpdateActivityIndicator();
             }
 
         }
@@ -329,12 +347,12 @@ namespace HexGameEngine.TownFeatures
             bedrestCostText.color = Color.white;
             surgeryCostText.color = Color.white;
             therapyCostText.color = Color.white;
-            bedrestCostText.text = HospitalDropSlot.GetFeatureGoldCost(HospitalFeature.BedRest).ToString();
-            surgeryCostText.text = HospitalDropSlot.GetFeatureGoldCost(HospitalFeature.Surgery).ToString();
-            therapyCostText.text = HospitalDropSlot.GetFeatureGoldCost(HospitalFeature.Therapy).ToString();
-            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(HospitalFeature.BedRest)) bedrestCostText.color = Color.red;
-            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(HospitalFeature.Surgery)) surgeryCostText.color = Color.red;
-            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(HospitalFeature.Therapy)) therapyCostText.color = Color.red;
+            bedrestCostText.text = HospitalDropSlot.GetFeatureGoldCost(TownActivity.BedRest).ToString();
+            surgeryCostText.text = HospitalDropSlot.GetFeatureGoldCost(TownActivity.Surgery).ToString();
+            therapyCostText.text = HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy).ToString();
+            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.BedRest)) bedrestCostText.color = Color.red;
+            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.Surgery)) surgeryCostText.color = Color.red;
+            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy)) therapyCostText.color = Color.red;
         }
         public void HandleApplyHospitalFeaturesOnNewDayStart()
         {

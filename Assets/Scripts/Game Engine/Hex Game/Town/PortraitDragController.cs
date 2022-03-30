@@ -69,7 +69,6 @@ namespace HexGameEngine.UI
             // Handle drag on to hospital feature slot
             else if(HospitalDropSlot.SlotMousedOver != null)
             {
-                Debug.Log("HIT");
                 TownController.Instance.HandleDropCharacterOnHospitalSlot(HospitalDropSlot.SlotMousedOver, draggedCharacterData);
             }
 

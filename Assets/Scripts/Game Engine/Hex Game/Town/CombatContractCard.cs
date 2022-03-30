@@ -126,7 +126,7 @@ namespace HexGameEngine.TownFeatures
                 enemiesText.text += "- " + enemy.characterData.myName + "\n";
             }
             goldRewardText.text = data.combatRewardData.goldAmount.ToString();
-            abilityTomeImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookFromEnumData(data.combatRewardData.abilityAwarded.talentRequirementData.talentSchool);
+            abilityTomeImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(data.combatRewardData.abilityAwarded.talentRequirementData.talentSchool);
             itemRarityOverlay.color = ColorLibrary.Instance.GetRarityColor(data.combatRewardData.item.rarity);
             itemImage.sprite = data.combatRewardData.item.ItemSprite;
 

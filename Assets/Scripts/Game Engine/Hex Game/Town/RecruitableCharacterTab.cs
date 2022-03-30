@@ -59,7 +59,7 @@ namespace HexGameEngine.TownFeatures
             // Texts
             nameText.text = data.myName;
             racialText.text = data.race.ToString();
-            racialImage.sprite = SpriteLibrary.Instance.GetRacialSpriteFromEnum(data.race);
+            racialImage.sprite = SpriteLibrary.Instance.GetRacialSprite(data.race);
 
             // Build model
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(portaitModel, data.modelParts);

@@ -20,7 +20,20 @@ namespace HexGameEngine.UI
 
         // Getters + Accessors
         #region
+        public RosterCharacterPanel GetCharacterPanel(HexCharacterData character)
+        {
+            RosterCharacterPanel ret = null;
+            foreach(RosterCharacterPanel panel in allCharacterPanels)
+            {
+                if(panel.MyCharacterData == character)
+                {
+                    ret = panel;
+                    break;
+                }
+            }
+            return ret;
 
+        }
         #endregion
 
         // Show + Hide Logic

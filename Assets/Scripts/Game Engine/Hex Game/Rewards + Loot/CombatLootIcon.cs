@@ -90,7 +90,7 @@ namespace HexGameEngine.RewardSystems
             gameObject.SetActive(true);
             abilityReward = ability;
             abilityBookParent.SetActive(true);
-            abilityBookImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookFromEnumData(ability.talentRequirementData.talentSchool);
+            abilityBookImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(ability.talentRequirementData.talentSchool);
         }
         public void BuildAsGoldReward(int goldAmount)
         {

@@ -501,6 +501,17 @@ namespace HexGameEngine
     }
     #endregion
 
+    // Town Related
+    #region
+    public enum TownActivity
+    {
+        None = 0,
+        BedRest = 1,
+        Surgery = 2,
+        Therapy = 3,
+    }
+    #endregion
+
     // Stress + Combat + Injuries
     #region
     public enum InjurySeverity

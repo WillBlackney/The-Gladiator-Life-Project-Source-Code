@@ -238,13 +238,13 @@ namespace HexGameEngine.UI
             if (data.talentRequirementData.talentSchool != TalentSchool.None && data.talentRequirementData.talentSchool != TalentSchool.Neutral)
             {
                 talentReqRowParent.SetActive(true);
-                SetTalentRequirementImages(SpriteLibrary.Instance.GetTalentSchoolSpriteFromEnumData(data.talentRequirementData.talentSchool));
+                SetTalentRequirementImages(SpriteLibrary.Instance.GetTalentSchoolSprite(data.talentRequirementData.talentSchool));
                 talentReqRowText.text = data.talentRequirementData.talentSchool.ToString();
             }
             else if (data.derivedFromWeapon)
             {
                 talentReqRowParent.SetActive(true);
-                SetTalentRequirementImages(SpriteLibrary.Instance.GetWeaponSpriteFromEnumData(data.weaponClass));
+                SetTalentRequirementImages(SpriteLibrary.Instance.GetWeaponSprite(data.weaponClass));
                 talentReqRowText.text = data.weaponClass.ToString();
             }
         }

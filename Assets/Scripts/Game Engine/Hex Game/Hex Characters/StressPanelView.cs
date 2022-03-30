@@ -41,7 +41,7 @@ namespace HexGameEngine.Characters
         public void BuildPanelViews(HexCharacterModel character)
         {
             StressState stressState = CombatController.Instance.GetStressStateFromStressAmount(character.currentStress);
-            Sprite stressSprite = SpriteLibrary.Instance.GetStressStateSpriteFromEnum(stressState);
+            Sprite stressSprite = SpriteLibrary.Instance.GetStressStateSprite(stressState);
             int stressMod = CombatController.Instance.GetStatMultiplierFromStressState(stressState);
             int[] stressRanges = CombatController.Instance.GetStressStateRanges(stressState);
             stressStateText.text = stressState.ToString();

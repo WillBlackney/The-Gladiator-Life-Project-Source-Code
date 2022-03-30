@@ -15,141 +15,196 @@ namespace HexGameEngine.Libraries
         #region
         [Header("Talent School Badges")]
         [PreviewField(75)]
-        public Sprite neutralBadge;
+        [SerializeField]
+        private Sprite neutralBadge;
         [PreviewField(75)]
-        public Sprite warfareBadge;
+        [SerializeField]
+        private Sprite warfareBadge;
         [PreviewField(75)]
-        public Sprite guardianBadge;
+        [SerializeField]
+        private Sprite guardianBadge;
         [PreviewField(75)]
-        public Sprite scoundrelBadge;
+        [SerializeField]
+        private Sprite scoundrelBadge;
         [PreviewField(75)]
-        public Sprite rangerBadge;
+        [SerializeField]
+        private Sprite rangerBadge;
         [PreviewField(75)]
-        public Sprite pyromaniaBadge;
+        [SerializeField]
+        private Sprite pyromaniaBadge;
         [PreviewField(75)]
-        public Sprite divinityBadge;
+        [SerializeField]
+        private Sprite divinityBadge;
         [PreviewField(75)]
-        public Sprite shadowCraftBadge;
+        [SerializeField]
+        private Sprite shadowCraftBadge;
         [PreviewField(75)]
-        public Sprite corruptionBadge;
+        [SerializeField]
+        private Sprite corruptionBadge;
         [PreviewField(75)]
-        public Sprite naturalismBadge;
+        [SerializeField]
+        private Sprite naturalismBadge;
         [PreviewField(75)]
-        public Sprite manipulationBadge;
+        [SerializeField]
+        private Sprite manipulationBadge;
         #endregion
 
         // Attribute Images Images
         #region
         [Header("Ability Type Images")]
         [PreviewField(75)]
-        public Sprite strength;
+        [SerializeField]
+        private Sprite strength;
         [PreviewField(75)]
-        public Sprite intelligence;
+        [SerializeField]
+        private Sprite intelligence;
         [PreviewField(75)]
-        public Sprite constitution;
+        [SerializeField]
+        private Sprite constitution;
         [PreviewField(75)]
-        public Sprite accuracy;
+        [SerializeField]
+        private Sprite accuracy;
         [PreviewField(75)]
-        public Sprite dodge;
+        [SerializeField]
+        private Sprite dodge;
         [PreviewField(75)]
-        public Sprite wits;
+        [SerializeField]
+        private Sprite wits;
         [PreviewField(75)]
-        public Sprite resolve;
+        [SerializeField]
+        private Sprite resolve;
         #endregion
 
         // Ability Type Images
         #region
         [Header("Ability Type Images")]
         [PreviewField(75)]
-        public Sprite meleeAttack;
+        [SerializeField]
+        private Sprite meleeAttack;
         [PreviewField(75)]
-        public Sprite rangedAttack;
+        [SerializeField]
+        private Sprite rangedAttack;
         [PreviewField(75)]
-        public Sprite skill;
+        [SerializeField]
+        private Sprite skill;
         #endregion
 
         // Weapon Images
         #region
         [Header("Weapon Images")]
         [PreviewField(75)]
-        public Sprite axeIcon;
+        [SerializeField]
+        private Sprite axeIcon;
         [PreviewField(75)]
-        public Sprite swordIcon;
+        [SerializeField]
+        private Sprite swordIcon;
         [PreviewField(75)]
-        public Sprite hammerIcon;
+        [SerializeField]
+        private Sprite hammerIcon;
         [PreviewField(75)]
-        public Sprite daggerIcon;
+        [SerializeField]
+        private Sprite daggerIcon;
         [PreviewField(75)]
-        public Sprite staffIcon;
+        [SerializeField]
+        private Sprite staffIcon;
         [PreviewField(75)]
-        public Sprite bowIcon;
+        [SerializeField]
+        private Sprite bowIcon;
         [PreviewField(75)]
-        public Sprite shieldIcon;
+        [SerializeField]
+        private Sprite shieldIcon;
         #endregion
 
         // Skill Book Images
         #region
         [Header("Skill Book Images")]
         [PreviewField(75)]
-        public Sprite warfareBook;
-
+        [SerializeField]
+        private Sprite warfareBook;
         [PreviewField(75)]
-        public Sprite guadianBook;
-
+        [SerializeField]
+        private Sprite guadianBook;
         [PreviewField(75)]
-        public Sprite scoundrelBook;
-
+        [SerializeField]
+        private Sprite scoundrelBook;
         [PreviewField(75)]
-        public Sprite rangerBook;
-
+        [SerializeField]
+        private Sprite rangerBook;
         [PreviewField(75)]
-        public Sprite divinityBook;
-
+        [SerializeField]
+        private Sprite divinityBook;
         [PreviewField(75)]
-        public Sprite naturalismBook;
-
+        [SerializeField]
+        private Sprite naturalismBook;
         [PreviewField(75)]
-        public Sprite shadowcraftBook;
-
+        [SerializeField]
+        private Sprite shadowcraftBook;
         [PreviewField(75)]
-        public Sprite manipulationBook;
-
+        [SerializeField]
+        private Sprite manipulationBook;
         [PreviewField(75)]
-        public Sprite pyromaniaBook;
+        [SerializeField]
+        private Sprite pyromaniaBook;
         #endregion
 
         // Racial Images
         #region
         [Header("Racial Images")]
         [PreviewField(75)]
-        public Sprite human;
+        [SerializeField]
+        private Sprite human;
         [PreviewField(75)]
-        public Sprite orc;
+        [SerializeField]
+        private Sprite orc;
         [PreviewField(75)]
-        public Sprite elf;
+        [SerializeField]
+        private Sprite elf;
         [PreviewField(75)]
-        public Sprite goblin;
+        [SerializeField]
+        private Sprite goblin;
         [PreviewField(75)]
-        public Sprite undead;
+        [SerializeField]
+        private Sprite undead;
         [PreviewField(75)]
-        public Sprite gnoll;
+        [SerializeField]
+        private Sprite gnoll;
         [PreviewField(75)]
-        public Sprite satyr;
+        [SerializeField]
+        private Sprite satyr;
         #endregion
 
         // Stress State Images
         #region
         [Header("Stress State Images")]
         [PreviewField(75)]
-        public Sprite confident;
+        [SerializeField]
+        private Sprite confident;
         [PreviewField(75)]
-        public Sprite nervous;
+        [SerializeField]
+        private Sprite nervous;
         [PreviewField(75)]
-        public Sprite wavering;
+        [SerializeField]
+        private Sprite wavering;
         [PreviewField(75)]
-        public Sprite panicking;
+        [SerializeField]
+        private Sprite panicking;
         [PreviewField(75)]
-        public Sprite shattered;
+        [SerializeField]
+        private Sprite shattered;
+        #endregion
+
+        // Town Activity Images
+        #region
+        [Header("Town Activity Images")]
+        [PreviewField(75)]
+        [SerializeField]
+        private Sprite bedRest;
+        [PreviewField(75)]
+        [SerializeField]
+        private Sprite surgery;
+        [PreviewField(75)]
+        [SerializeField]
+        private Sprite therapy;
         #endregion
 
         // Misc Images
@@ -159,8 +214,15 @@ namespace HexGameEngine.Libraries
         public Sprite weaponAbilityIcon;
         #endregion
 
-        // Logic 
+        // Get Sprites Logic 
         #region
+        public Sprite GetTownActivitySprite(TownActivity activity)
+        {
+            if (activity == TownActivity.BedRest) return bedRest;
+            else if (activity == TownActivity.Surgery) return surgery;
+            else if (activity == TownActivity.Therapy) return therapy;
+            else return null;
+        }
         public Sprite GetAttributeSprite(CoreAttribute attribute)
         {
             if (attribute == CoreAttribute.Strength) return strength;
@@ -172,8 +234,7 @@ namespace HexGameEngine.Libraries
             else if (attribute == CoreAttribute.Wits) return wits;
             else return null;
         }
-
-        public Sprite GetRacialSpriteFromEnum(CharacterRace race)
+        public Sprite GetRacialSprite(CharacterRace race)
         {
             Sprite spriteReturned = null;
 
@@ -209,7 +270,7 @@ namespace HexGameEngine.Libraries
 
             return spriteReturned;
         }
-        public Sprite GetStressStateSpriteFromEnum(StressState state)
+        public Sprite GetStressStateSprite(StressState state)
         {
             Sprite spriteReturned = null;
 
@@ -237,58 +298,58 @@ namespace HexGameEngine.Libraries
 
             return spriteReturned;
         }
-        public Sprite GetTalentSchoolSpriteFromEnumData(TalentSchool data)
+        public Sprite GetTalentSchoolSprite(TalentSchool ts)
         {
             Sprite spriteReturned = null;
 
-            if (data == TalentSchool.Scoundrel)
+            if (ts == TalentSchool.Scoundrel)
             {
                 spriteReturned = scoundrelBadge;
             }
-            else if (data == TalentSchool.Warfare)
+            else if (ts == TalentSchool.Warfare)
             {
                 spriteReturned = warfareBadge;
             }
-            else if (data == TalentSchool.Ranger)
+            else if (ts == TalentSchool.Ranger)
             {
                 spriteReturned = rangerBadge;
             }
-            else if (data == TalentSchool.Corruption)
+            else if (ts == TalentSchool.Corruption)
             {
                 spriteReturned = corruptionBadge;
             }
-            else if (data == TalentSchool.Divinity)
+            else if (ts == TalentSchool.Divinity)
             {
                 spriteReturned = divinityBadge;
             }
-            else if (data == TalentSchool.Guardian)
+            else if (ts == TalentSchool.Guardian)
             {
                 spriteReturned = guardianBadge;
             }
-            else if (data == TalentSchool.Manipulation)
+            else if (ts == TalentSchool.Manipulation)
             {
                 spriteReturned = manipulationBadge;
             }
-            else if (data == TalentSchool.Naturalism)
+            else if (ts == TalentSchool.Naturalism)
             {
                 spriteReturned = naturalismBadge;
             }
-            else if (data == TalentSchool.Pyromania)
+            else if (ts == TalentSchool.Pyromania)
             {
                 spriteReturned = pyromaniaBadge;
             }
-            else if (data == TalentSchool.Shadowcraft)
+            else if (ts == TalentSchool.Shadowcraft)
             {
                 spriteReturned = shadowCraftBadge;
             }
-            else if (data == TalentSchool.Neutral)
+            else if (ts == TalentSchool.Neutral)
             {
                 spriteReturned = neutralBadge;
             }
 
             return spriteReturned;
         }
-        public Sprite GetAbilityTypeImageFromTypeEnumData(AbilityType abilityType)
+        public Sprite GetAbilityTypeSprite(AbilityType abilityType)
         {
             Sprite spriteReturned = null;
 
@@ -306,7 +367,7 @@ namespace HexGameEngine.Libraries
             }
             return spriteReturned;
         }
-        public Sprite GetWeaponSpriteFromEnumData(WeaponClass weaponClass)
+        public Sprite GetWeaponSprite(WeaponClass weaponClass)
         {
             Sprite spriteReturned = null;
 
@@ -341,43 +402,43 @@ namespace HexGameEngine.Libraries
 
             return spriteReturned;
         }
-        public Sprite GetTalentSchoolBookFromEnumData(TalentSchool data)
+        public Sprite GetTalentSchoolBookSprite(TalentSchool ts)
         {
             Sprite spriteReturned = null;
 
-            if (data == TalentSchool.Scoundrel)
+            if (ts == TalentSchool.Scoundrel)
             {
                 spriteReturned = scoundrelBook;
             }
-            else if (data == TalentSchool.Warfare)
+            else if (ts == TalentSchool.Warfare)
             {
                 spriteReturned = warfareBook;
             }
-            else if (data == TalentSchool.Ranger)
+            else if (ts == TalentSchool.Ranger)
             {
                 spriteReturned = rangerBook;
             }
-            else if (data == TalentSchool.Divinity)
+            else if (ts == TalentSchool.Divinity)
             {
                 spriteReturned = divinityBook;
             }
-            else if (data == TalentSchool.Guardian)
+            else if (ts == TalentSchool.Guardian)
             {
                 spriteReturned = guadianBook;
             }
-            else if (data == TalentSchool.Manipulation)
+            else if (ts == TalentSchool.Manipulation)
             {
                 spriteReturned = manipulationBook;
             }
-            else if (data == TalentSchool.Naturalism)
+            else if (ts == TalentSchool.Naturalism)
             {
                 spriteReturned = naturalismBook ;
             }
-            else if (data == TalentSchool.Pyromania)
+            else if (ts == TalentSchool.Pyromania)
             {
                 spriteReturned = pyromaniaBook;
             }
-            else if (data == TalentSchool.Shadowcraft)
+            else if (ts == TalentSchool.Shadowcraft)
             {
                 spriteReturned = shadowcraftBook;
             }

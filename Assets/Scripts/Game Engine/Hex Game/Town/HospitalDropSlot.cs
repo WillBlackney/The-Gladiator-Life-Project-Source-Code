@@ -15,7 +15,7 @@ namespace HexGameEngine.TownFeatures
         // Components + Properties
         #region
         [Header("Core Components")]
-        [SerializeField] HospitalFeature featureType;
+        [SerializeField] TownActivity featureType;
         [SerializeField] GameObject portraitVisualParent;
         [SerializeField] UniversalCharacterModel portraitModel;
         [SerializeField] GameObject cancelButtonParent;
@@ -27,13 +27,13 @@ namespace HexGameEngine.TownFeatures
 
         // Getters + Accessors
         #region
-        public static int GetFeatureGoldCost(HospitalFeature feature)
+        public static int GetFeatureGoldCost(TownActivity feature)
         {
             // to do: probably should find a better place for this function
             // the costs of features should probably be determined by GlobalSettings
-            if (feature == HospitalFeature.BedRest) return 50;
-            else if (feature == HospitalFeature.Therapy) return 75;
-            else if (feature == HospitalFeature.Surgery) return 75;
+            if (feature == TownActivity.BedRest) return 50;
+            else if (feature == TownActivity.Therapy) return 75;
+            else if (feature == TownActivity.Surgery) return 75;
             else return 0;
         }
         public static HospitalDropSlot SlotMousedOver
@@ -49,7 +49,7 @@ namespace HexGameEngine.TownFeatures
         {
             get { return myCharacterData; }
         }
-        public HospitalFeature FeatureType
+        public TownActivity FeatureType
         {
             get { return featureType; }
         }
@@ -89,9 +89,11 @@ namespace HexGameEngine.TownFeatures
         {
             if (myCharacterData != null)
             {
+                var character = MyCharacterData;
                 myCharacterData = null;
                 PlayerDataController.Instance.ModifyPlayerGold(GetFeatureGoldCost(featureType));
                 BuildViews();
+                CharacterScrollPanelController.Instance.GetCharacterPanel(character).UpdateActivityIndicator();
             }
         }
         public void BuildViews()
@@ -118,15 +120,15 @@ namespace HexGameEngine.TownFeatures
         {
             if(myCharacterData != null)
             {
-                if(featureType == HospitalFeature.BedRest)
+                if(featureType == TownActivity.BedRest)
                 {
                     CharacterDataController.Instance.SetCharacterHealth(myCharacterData, StatCalculator.GetTotalMaxHealth(myCharacterData));
                 }
-                else if (featureType == HospitalFeature.Therapy)
+                else if (featureType == TownActivity.Therapy)
                 {
                     CharacterDataController.Instance.SetCharacterStress(myCharacterData, 0);
                 }
-                else if (featureType == HospitalFeature.Surgery)
+                else if (featureType == TownActivity.Surgery)
                 {
                     List<ActivePerk> allInjuries = PerkController.Instance.GetAllInjuriesOnCharacter(myCharacterData);
                     foreach(ActivePerk p in allInjuries)
@@ -143,11 +145,5 @@ namespace HexGameEngine.TownFeatures
         #endregion
     }
 
-    public enum HospitalFeature
-    {
-        None = 0,
-        BedRest = 1,
-        Surgery = 2,
-        Therapy = 3,
-    }
+    
 }

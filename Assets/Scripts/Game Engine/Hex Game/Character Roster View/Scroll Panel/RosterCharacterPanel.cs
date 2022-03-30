@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using CardGameEngine.UCM;
 using HexGameEngine.Characters;
 using HexGameEngine.UCM;
+using HexGameEngine.TownFeatures;
+using HexGameEngine.Libraries;
 
 namespace HexGameEngine.UI
 {
@@ -25,6 +27,9 @@ namespace HexGameEngine.UI
         [SerializeField] Slider stressBar;
         [SerializeField] TextMeshProUGUI stressText;
 
+        [Header("Activity Indicator Components")]
+        [SerializeField] private GameObject[] activityIndicatorParents;
+        [SerializeField] private Image activityIndicatorImage;
 
         // Non-inspector properties
         private HexCharacterData myCharacterData;
@@ -44,6 +49,8 @@ namespace HexGameEngine.UI
         {
             myCharacterData = data;
 
+            UpdateActivityIndicator();
+
             // Texts
             nameText.text = data.myName;
             healthText.text = data.currentHealth.ToString();
@@ -58,6 +65,19 @@ namespace HexGameEngine.UI
             stressBar.value = (float)((float) data.currentStress / 100f);
 
             // TO DO: Injuries
+        }
+        public void UpdateActivityIndicator()
+        {
+            SetIndicatorParentViewStates(false);
+            foreach(HospitalDropSlot slot in TownController.Instance.HospitalSlots)
+            {
+                if(slot.MyCharacterData == myCharacterData)
+                {
+                    SetIndicatorParentViewStates(true);
+                    activityIndicatorImage.sprite = SpriteLibrary.Instance.GetTownActivitySprite(slot.FeatureType);
+                    break;
+                }
+            }
         }
         public void Show()
         {
@@ -78,6 +98,11 @@ namespace HexGameEngine.UI
             {
                 CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
             }
+        }
+        private void SetIndicatorParentViewStates(bool onOrOff)
+        {
+            foreach (GameObject g in activityIndicatorParents)
+                g.SetActive(onOrOff);
         }
         #endregion
     }

@@ -126,7 +126,7 @@ namespace HexGameEngine.Items
             {
                 view.BookVisualParent.SetActive(true);
                 view.BookImage.sprite = SpriteLibrary.Instance.
-                    GetTalentSchoolBookFromEnumData(item.abilityData.talentRequirementData.talentSchool);
+                    GetTalentSchoolBookSprite(item.abilityData.talentRequirementData.talentSchool);
             }
             else if(item.itemData != null)
             {
