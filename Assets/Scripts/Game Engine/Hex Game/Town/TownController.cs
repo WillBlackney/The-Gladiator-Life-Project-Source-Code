@@ -33,7 +33,7 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] RecruitableCharacterTab[] allRecruitTabs;
         [Space(20)]
 
-        [Header("Recruit Page Right Panel Components")]
+        [Header("Recruit Page Core Components")]
         [SerializeField] private GameObject[] recruitRightPanelRows;
         [SerializeField] private TextMeshProUGUI recruitRightPanelNameText;
         [SerializeField] private UniversalCharacterModel recruitRightPanelPortaitModel;
@@ -47,13 +47,29 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] private UITalentIcon[] recruitTalentIcons;
         [SerializeField] private UIAbilityIcon[] recruitAbilityIcons;
         [Space(20)]
+
+        [Header("Recruit Page Attribute Components")]
         [SerializeField] private TextMeshProUGUI recruitRightPanelStrengthText;
+        [SerializeField] private GameObject[] recruitRightPanelStrengthStars;
+        [Space(10)]
         [SerializeField] private TextMeshProUGUI recruitRightPanelIntelligenceText;
+        [SerializeField] private GameObject[] recruitRightPanelIntelligenceStars;
+        [Space(10)]
         [SerializeField] private TextMeshProUGUI recruitRightPanelAccuracyText;
+        [SerializeField] private GameObject[] recruitRightPanelAccuracyStars;
+        [Space(10)]
         [SerializeField] private TextMeshProUGUI recruitRightPanelDodgeText;
+        [SerializeField] private GameObject[] recruitRightPanelDodgeStars;
+        [Space(10)]
         [SerializeField] private TextMeshProUGUI recruitRightPanelConstitutionText;
+        [SerializeField] private GameObject[] recruitRightPanelConstitutionStars;
+        [Space(10)]
         [SerializeField] private TextMeshProUGUI recruitRightPanelResolveText;
+        [SerializeField] private GameObject[] recruitRightPanelResolveStars;
+        [Space(10)]
         [SerializeField] private TextMeshProUGUI recruitRightPanelWitsText;
+        [SerializeField] private GameObject[] recruitRightPanelWitsStars;
+        [Space(10)]
 
         [Title("Hospital Page Core Components")]
         [SerializeField] private GameObject hospitalPageVisualParent;
@@ -233,13 +249,26 @@ namespace HexGameEngine.TownFeatures
             recruitRightPanelRacialImage.sprite = SpriteLibrary.Instance.GetRacialSprite(character.race);
 
             // Build stats section
-            recruitRightPanelStrengthText.text = character.attributeSheet.strength.ToString();
-            recruitRightPanelIntelligenceText.text = character.attributeSheet.intelligence.ToString();
-            recruitRightPanelConstitutionText.text = character.attributeSheet.constitution.ToString();
-            recruitRightPanelAccuracyText.text = character.attributeSheet.accuracy.ToString();
-            recruitRightPanelDodgeText.text = character.attributeSheet.dodge.ToString();
-            recruitRightPanelResolveText.text = character.attributeSheet.resolve.ToString();
-            recruitRightPanelWitsText.text = character.attributeSheet.wits.ToString();
+            recruitRightPanelStrengthText.text = character.attributeSheet.strength.value.ToString();
+            BuildStars(recruitRightPanelStrengthStars, character.attributeSheet.strength.stars);
+
+            recruitRightPanelIntelligenceText.text = character.attributeSheet.intelligence.value.ToString();
+            BuildStars(recruitRightPanelIntelligenceStars, character.attributeSheet.intelligence.stars);
+
+            recruitRightPanelConstitutionText.text = character.attributeSheet.constitution.value.ToString();
+            BuildStars(recruitRightPanelConstitutionStars, character.attributeSheet.constitution.stars);
+
+            recruitRightPanelAccuracyText.text = character.attributeSheet.accuracy.value.ToString();
+            BuildStars(recruitRightPanelAccuracyStars, character.attributeSheet.accuracy.stars);
+
+            recruitRightPanelDodgeText.text = character.attributeSheet.dodge.value.ToString();
+            BuildStars(recruitRightPanelDodgeStars, character.attributeSheet.dodge.stars);
+
+            recruitRightPanelResolveText.text = character.attributeSheet.resolve.value.ToString();
+            BuildStars(recruitRightPanelResolveStars, character.attributeSheet.resolve.stars);
+
+            recruitRightPanelWitsText.text = character.attributeSheet.wits.value.ToString();
+            BuildStars(recruitRightPanelWitsStars, character.attributeSheet.wits.stars);
 
             // Build perk buttons
             for (int i = 0; i < character.passiveManager.perks.Count; i++)
@@ -276,6 +305,15 @@ namespace HexGameEngine.TownFeatures
             for (int i = 0; i < character.abilityBook.allKnownAbilities.Count; i++)
                 recruitAbilityIcons[i + newIndexCount].BuildFromAbilityData(character.abilityBook.allKnownAbilities[i]);
 
+        }
+        private void BuildStars(GameObject[] arr, int starCount)
+        {
+            // Reset
+            for (int i = 0; i < arr.Length; i++)
+                arr[i].gameObject.SetActive(false);
+
+            for (int i = 0; i < starCount; i++)
+                arr[i].gameObject.SetActive(true);
         }
         #endregion
 

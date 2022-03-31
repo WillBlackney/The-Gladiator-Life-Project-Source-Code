@@ -496,13 +496,13 @@ namespace HexGameEngine.DraftEvent
         }
         private void BuildAttributeSection(HexCharacterData character)
         {
-            strengthText.text = character.attributeSheet.strength.ToString();
-            intelligenceText.text = character.attributeSheet.intelligence.ToString();
-            constitutionText.text = character.attributeSheet.constitution.ToString();
-            accuracyText.text = character.attributeSheet.accuracy.ToString();
-            dodgeText.text = character.attributeSheet.dodge.ToString();
-            resolveText.text = character.attributeSheet.resolve.ToString();
-            witsText.text = character.attributeSheet.wits.ToString();
+            strengthText.text = character.attributeSheet.strength.value.ToString();
+            intelligenceText.text = character.attributeSheet.intelligence.value.ToString();
+            constitutionText.text = character.attributeSheet.constitution.value.ToString();
+            accuracyText.text = character.attributeSheet.accuracy.value.ToString();
+            dodgeText.text = character.attributeSheet.dodge.value.ToString();
+            resolveText.text = character.attributeSheet.resolve.value.ToString();
+            witsText.text = character.attributeSheet.wits.value.ToString();
             AutoColouriseStatTexts();
         }
         private void AutoColouriseStatTexts()

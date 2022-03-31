@@ -689,9 +689,10 @@ namespace HexGameEngine.Characters
             PerkController.Instance.ModifyPerkOnCharacterData(newCharacter.passiveManager, p.perkTag, 1);
             ApplyBackgroundPerksToCharacter(newCharacter);
 
-            // Setup stats
+            // Setup stats + stars
             newCharacter.attributeSheet = new AttributeSheet();
             GenerateRecruitCharacterStatRolls(newCharacter.attributeSheet, RandomGenerator.NumberBetween(2,4));
+            GenerateCharacterStarRolls(newCharacter.attributeSheet);
 
             // Randomize cost + daily wage
             newCharacter.dailyWage = RandomGenerator.NumberBetween(5, 10);
@@ -714,14 +715,6 @@ namespace HexGameEngine.Characters
             newCharacter.itemSet = new ItemSet();
             SerializedItemSet randomItemSet = ct.possibleWeapons[RandomGenerator.NumberBetween(0, ct.possibleWeapons.Count - 1)];
             ItemController.Instance.CopySerializedItemManagerIntoStandardItemManager(randomItemSet, newCharacter.itemSet);
-
-            // Set up perks
-            /*
-            newCharacter.passiveManager = new PerkManagerModel(newCharacter);
-            PerkIconData p = PerkController.Instance.GetRacialPerk(race);
-            PerkController.Instance.ModifyPerkOnCharacterData(newCharacter.passiveManager, p.perkTag, 1);
-            ApplyBackgroundPerksToCharacter(newCharacter);
-            */
 
             // Set up abilities
             newCharacter.abilityBook = new AbilityBook();
@@ -826,16 +819,44 @@ namespace HexGameEngine.Characters
                 bool lowerStat = RandomGenerator.NumberBetween(1, 5) <= 2; 
                 if (lowerStat) statMod = -statMod;
 
-                if (attributes[i] == CoreAttribute.Accuracy) sheet.accuracy += statMod;
-                else if (attributes[i] == CoreAttribute.Constituition) sheet.constitution += statMod;
-                else if (attributes[i] == CoreAttribute.Dodge) sheet.dodge += statMod;
-                else if (attributes[i] == CoreAttribute.Intelligence) sheet.intelligence += statMod;
-                else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve += statMod;
-                else if (attributes[i] == CoreAttribute.Strength) sheet.strength += statMod;
-                else if (attributes[i] == CoreAttribute.Wits) sheet.wits += statMod;
+                if (attributes[i] == CoreAttribute.Accuracy) sheet.accuracy.value += statMod;
+                else if (attributes[i] == CoreAttribute.Constituition) sheet.constitution.value += statMod;
+                else if (attributes[i] == CoreAttribute.Dodge) sheet.dodge.value += statMod;
+                else if (attributes[i] == CoreAttribute.Intelligence) sheet.intelligence.value += statMod;
+                else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.value += statMod;
+                else if (attributes[i] == CoreAttribute.Strength) sheet.strength.value += statMod;
+                else if (attributes[i] == CoreAttribute.Wits) sheet.wits.value += statMod;
             }
 
 
+        }
+        private void GenerateCharacterStarRolls(AttributeSheet sheet, int statsStarred = 3, int maxStarsGainedPerStat = 2)
+        {
+            List<CoreAttribute> attributes = new List<CoreAttribute>
+            {
+                CoreAttribute.Accuracy,
+                CoreAttribute.Constituition,
+                CoreAttribute.Dodge,
+                CoreAttribute.Intelligence,
+                CoreAttribute.Resolve,
+                CoreAttribute.Strength,
+                CoreAttribute.Wits
+            };
+
+            attributes.Shuffle();
+
+            for(int i = 0; i < statsStarred; i++)
+            {
+                int starsGained = RandomGenerator.NumberBetween(1, maxStarsGainedPerStat);
+
+                if (attributes[i] == CoreAttribute.Accuracy) sheet.accuracy.stars += starsGained;
+                else if (attributes[i] == CoreAttribute.Constituition) sheet.constitution.stars += starsGained;
+                else if (attributes[i] == CoreAttribute.Dodge) sheet.dodge.stars += starsGained;
+                else if (attributes[i] == CoreAttribute.Intelligence) sheet.intelligence.stars += starsGained;
+                else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.stars += starsGained;
+                else if (attributes[i] == CoreAttribute.Strength) sheet.strength.stars += starsGained;
+                else if (attributes[i] == CoreAttribute.Wits) sheet.wits.stars += starsGained;
+            }
         }
         public string GetRandomCharacterName(CharacterRace race)
         {

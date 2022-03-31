@@ -22,57 +22,72 @@ namespace HexGameEngine.UI
         [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
         [SerializeField] private Scrollbar rightPanelScrollBar;
-
+        [Space(20)]
         [Header("Health Components")]
         [SerializeField] private TextMeshProUGUI healthBarText;
         [SerializeField] private Slider healthBar;
-
+        [Space(20)]
         [Header("Stress Components")]
         [SerializeField] private TextMeshProUGUI stressBarText;
         [SerializeField] private Slider stressBar;
-
+        [Space(20)]
         [Header("XP + Level Components")]
         [SerializeField] private TextMeshProUGUI currentLevelText;
         [SerializeField] private TextMeshProUGUI xpBarText;
         [SerializeField] private Slider xpbar;
-
+        [Space(20)]
         [Header("Level Up Components")]
         [SerializeField] private GameObject attributeLevelUpButton;
         [SerializeField] private AttributeLevelUpPage attributeLevelUpPageComponent;
         [SerializeField] private GameObject perkLevelUpButton;
         [SerializeField] private GameObject talentLevelUpButton;
         [SerializeField] private PerkTalentLevelUpPage perkTalentLevelUpPage;
-
+        [Space(20)]
         [Header("Abilities Section Components")]
         [SerializeField] private UIAbilityIcon[] abilityButtons;
-
+        [Space(20)]
         [Header("Talent Section Components")]
         [SerializeField] private UITalentIcon[] talentButtons;
-
+        [Space(20)]
         [Header("Perk Section Components")]
         [SerializeField] private UIPerkIcon[] perkButtons;
-
+        [Space(20)]
         [Header("Formation Section Components")]
         [SerializeField] private RosterFormationButton[] formationButtons;
-
+        [Space(20)]
         [Header("Character View Panel Components")]
         [SerializeField] private UniversalCharacterModel characterPanelUcm;
         [SerializeField] private RosterItemSlot mainHandSlot;
         [SerializeField] private RosterItemSlot offHandSlot;
         [SerializeField] private RosterItemSlot trinketSlot;
-
+        [Space(20)]
         [Header("Overview Panel Components")]
         [SerializeField] private TextMeshProUGUI characterNameText;
         [SerializeField] private TextMeshProUGUI characterClassText;
+        [Space(20)]
 
-        [Header("Core Attribute Text Components")]
+        [Header("Core Attribute Components")]
         [SerializeField] private TextMeshProUGUI strengthText;
+        [SerializeField] private GameObject[] strengthStars;
+        [Space(10)]
         [SerializeField] private TextMeshProUGUI intelligenceText;
+        [SerializeField] private GameObject[] intelligenceStars;
+        [Space(10)]
         [SerializeField] private TextMeshProUGUI constitutionText;
+        [SerializeField] private GameObject[] constitutionStars;
+        [Space(10)]
         [SerializeField] private TextMeshProUGUI accuracyText;
+        [SerializeField] private GameObject[] accuracyStars;
+        [Space(10)]
         [SerializeField] private TextMeshProUGUI dodgeText;
+        [SerializeField] private GameObject[] dodgeStars;
+        [Space(10)]
         [SerializeField] private TextMeshProUGUI resolveText;
+        [SerializeField] private GameObject[] resolveStars;
+        [Space(10)]
         [SerializeField] private TextMeshProUGUI witsText;
+        [SerializeField] private GameObject[] witsStars;
+        [Space(20)]
 
         [Header("Secondary Attribute Text Components")]
         [SerializeField] private TextMeshProUGUI criticalChanceText;
@@ -80,14 +95,14 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI staminaText;
         [SerializeField] private TextMeshProUGUI maxEnergyText;
         [SerializeField] private TextMeshProUGUI initiativeText;
-
+        [Space(20)]
         [Header("Resistances Text Components")]
         [SerializeField] private TextMeshProUGUI physicalResistanceText;
         [SerializeField] private TextMeshProUGUI magicResistanceText;
         [SerializeField] private TextMeshProUGUI stressResistanceText;
         [SerializeField] private TextMeshProUGUI injuryResistanceText;
         [SerializeField] private TextMeshProUGUI debuffResistanceText;
-
+        [Space(20)]
 
         [HideInInspector] public RosterItemSlot rosterSlotMousedOver = null;
 
@@ -240,12 +255,25 @@ namespace HexGameEngine.UI
         private void BuildAttributeSection(HexCharacterData character)
         {
             strengthText.text = StatCalculator.GetTotalStrength(character).ToString();
+            BuildStars(strengthStars, character.attributeSheet.strength.stars);
+
             intelligenceText.text = StatCalculator.GetTotalIntelligence(character).ToString();
+            BuildStars(intelligenceStars, character.attributeSheet.intelligence.stars);
+
             constitutionText.text = StatCalculator.GetTotalConstitution(character).ToString();
+            BuildStars(constitutionStars, character.attributeSheet.constitution.stars);
+
             accuracyText.text = StatCalculator.GetTotalAccuracy(character).ToString();
+            BuildStars(accuracyStars, character.attributeSheet.accuracy.stars);
+
             dodgeText.text = StatCalculator.GetTotalDodge(character).ToString();
+            BuildStars(dodgeStars, character.attributeSheet.dodge.stars);
+
             resolveText.text = StatCalculator.GetTotalResolve(character).ToString();
+            BuildStars(resolveStars, character.attributeSheet.resolve.stars);
+
             witsText.text = StatCalculator.GetTotalWits(character).ToString();
+            BuildStars(witsStars, character.attributeSheet.wits.stars);
 
             criticalChanceText.text = StatCalculator.GetTotalCriticalChance(character).ToString();
             criticalModifierText.text = StatCalculator.GetTotalCriticalModifier(character).ToString();
@@ -262,6 +290,15 @@ namespace HexGameEngine.UI
             if(character.attributeRolls.Count > 0)            
                 attributeLevelUpButton.SetActive(true);            
             else attributeLevelUpButton.SetActive(false);
+        }
+        private void BuildStars(GameObject[] arr, int starCount)
+        {
+            // Reset
+            for(int i = 0; i < arr.Length; i++)            
+                arr[i].gameObject.SetActive(false);
+
+            for (int i = 0; i < starCount; i++)
+                arr[i].gameObject.SetActive(true);
         }
         #endregion
 

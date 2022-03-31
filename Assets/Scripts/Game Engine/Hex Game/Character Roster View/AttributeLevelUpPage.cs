@@ -83,19 +83,19 @@ namespace HexGameEngine.UI
             foreach(AttributeLevelUpWidget w in selections)
             {
                 if(w.MyAttribute == CoreAttribute.Strength)                
-                    currentCharacter.attributeSheet.strength += currentCharacter.attributeRolls[0].strengthRoll;
+                    currentCharacter.attributeSheet.strength.value += currentCharacter.attributeRolls[0].strengthRoll;
                 else if (w.MyAttribute == CoreAttribute.Intelligence)
-                    currentCharacter.attributeSheet.intelligence += currentCharacter.attributeRolls[0].intelligenceRoll;
+                    currentCharacter.attributeSheet.intelligence.value += currentCharacter.attributeRolls[0].intelligenceRoll;
                 else if (w.MyAttribute == CoreAttribute.Accuracy)
-                    currentCharacter.attributeSheet.accuracy += currentCharacter.attributeRolls[0].accuracyRoll;
+                    currentCharacter.attributeSheet.accuracy.value += currentCharacter.attributeRolls[0].accuracyRoll;
                 else if (w.MyAttribute == CoreAttribute.Dodge)
-                    currentCharacter.attributeSheet.dodge += currentCharacter.attributeRolls[0].dodgeRoll;
+                    currentCharacter.attributeSheet.dodge.value += currentCharacter.attributeRolls[0].dodgeRoll;
                 else if (w.MyAttribute == CoreAttribute.Resolve)
-                    currentCharacter.attributeSheet.resolve += currentCharacter.attributeRolls[0].resolveRoll;
+                    currentCharacter.attributeSheet.resolve.value += currentCharacter.attributeRolls[0].resolveRoll;
                 else if (w.MyAttribute == CoreAttribute.Constituition)
-                    currentCharacter.attributeSheet.constitution += currentCharacter.attributeRolls[0].constitutionRoll;
+                    currentCharacter.attributeSheet.constitution.value += currentCharacter.attributeRolls[0].constitutionRoll;
                 else if (w.MyAttribute == CoreAttribute.Wits)
-                    currentCharacter.attributeSheet.wits += currentCharacter.attributeRolls[0].witsRoll;
+                    currentCharacter.attributeSheet.wits.value += currentCharacter.attributeRolls[0].witsRoll;
 
             }
 

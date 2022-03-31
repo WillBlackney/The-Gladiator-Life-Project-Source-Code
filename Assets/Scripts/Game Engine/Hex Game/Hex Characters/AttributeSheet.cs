@@ -12,31 +12,31 @@ namespace HexGameEngine.Characters
         [BoxGroup("Core Attributes", centerLabel: true)]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public int strength = 0;
+        public Attribute strength = new Attribute(0, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public int intelligence = 0;
+        public Attribute intelligence = new Attribute(0, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public int constitution = 0;
+        public Attribute constitution = new Attribute(0, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public int dodge = 0;
+        public Attribute dodge = new Attribute(0, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public int accuracy = 75;
+        public Attribute accuracy = new Attribute(75, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public int resolve = 0;
+        public Attribute resolve = new Attribute(0, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public int wits = 0;
+        public Attribute wits = new Attribute(0, 0);
 
 
         [BoxGroup("Secondary Attributes", centerLabel: true)]
@@ -99,13 +99,20 @@ namespace HexGameEngine.Characters
 
         public void CopyValuesIntoOther(AttributeSheet other)
         {
-            other.strength = strength;
+            other.strength.value = strength.value;
+            other.strength.stars = strength.stars;
             other.intelligence = intelligence;
+            other.intelligence.stars = intelligence.stars;
             other.constitution = constitution;
+            other.constitution.stars = constitution.stars;
             other.accuracy = accuracy;
+            other.accuracy.stars = accuracy.stars;
             other.dodge = dodge;
+            other.dodge.stars = dodge.stars;
             other.resolve = resolve;
+            other.resolve.stars = resolve.stars;
             other.wits = wits;
+            other.wits.stars = wits.stars;
 
             other.maxHealth = maxHealth;
             other.stamina = stamina;
@@ -135,5 +142,18 @@ namespace HexGameEngine.Characters
     public class SerializedAttrbuteSheet : AttributeSheet
     {
 
+    }
+    [System.Serializable]
+    public class Attribute
+    {
+        public int value;
+        [Range(0,2)]
+        public int stars;
+
+        public Attribute(int _value, int _stars)
+        {
+            value = _value;
+            stars = _stars;
+        }
     }
 }

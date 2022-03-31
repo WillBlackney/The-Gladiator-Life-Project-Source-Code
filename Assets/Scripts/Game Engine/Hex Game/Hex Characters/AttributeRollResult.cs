@@ -19,15 +19,17 @@ namespace HexGameEngine.Characters
         public static AttributeRollResult GenerateRoll(HexCharacterData character)
         {
             // to do in future: consider character attribute stars
+            int lower = 2;
+            int upper = 4;
 
             AttributeRollResult roll = new AttributeRollResult();
-            roll.strengthRoll = RandomGenerator.NumberBetween(2, 4);
-            roll.intelligenceRoll = RandomGenerator.NumberBetween(2, 4);
-            roll.accuracyRoll = RandomGenerator.NumberBetween(1, 3);
-            roll.dodgeRoll = RandomGenerator.NumberBetween(1, 3);
-            roll.resolveRoll = RandomGenerator.NumberBetween(2, 4);
-            roll.constitutionRoll = RandomGenerator.NumberBetween(2, 4);
-            roll.witsRoll = RandomGenerator.NumberBetween(2, 4);
+            roll.strengthRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.strength.stars;
+            roll.intelligenceRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.intelligence.stars;
+            roll.accuracyRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.accuracy.stars;
+            roll.dodgeRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.dodge.stars;
+            roll.resolveRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.resolve.stars;
+            roll.constitutionRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.constitution.stars;
+            roll.witsRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.wits.stars;
 
             return roll;
 

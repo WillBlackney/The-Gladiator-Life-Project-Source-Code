@@ -201,12 +201,12 @@ namespace HexGameEngine.TownFeatures
             recruitRightPanelClassNameText.text = TextLogic.ReturnColoredText(character.race.ToString() + " " + character.myClassName, TextLogic.neutralYellow);
 
             // Build stats section
-            strengthText.text = character.attributeSheet.strength.ToString();
-            intelligenceText.text = character.attributeSheet.intelligence.ToString();
-            constitutionText.text = character.attributeSheet.constitution.ToString();
-            accuracyText.text = character.attributeSheet.accuracy.ToString();
-            dodgeText.text = character.attributeSheet.dodge.ToString();
-            resolveText.text = character.attributeSheet.resolve.ToString();
+            strengthText.text = character.attributeSheet.strength.value.ToString();
+            intelligenceText.text = character.attributeSheet.intelligence.value.ToString();
+            constitutionText.text = character.attributeSheet.constitution.value.ToString();
+            accuracyText.text = character.attributeSheet.accuracy.value.ToString();
+            dodgeText.text = character.attributeSheet.dodge.value.ToString();
+            resolveText.text = character.attributeSheet.resolve.value.ToString();
 
             // Build perk buttons
             for (int i = 0; i < character.passiveManager.perks.Count; i++)

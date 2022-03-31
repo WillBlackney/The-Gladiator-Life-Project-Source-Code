@@ -17,7 +17,7 @@ namespace HexGameEngine
         #region
         public static int GetTotalStrength(HexCharacterModel c)
         {
-            int strength = c.attributeSheet.strength;
+            int strength = c.attributeSheet.strength.value;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DislocatedShoulder))
                 strength -= 20;
@@ -41,7 +41,7 @@ namespace HexGameEngine
         }
         public static int GetTotalStrength(HexCharacterData c)
         {
-            int strength = c.attributeSheet.strength;
+            int strength = c.attributeSheet.strength.value;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DislocatedShoulder))
                 strength -= 20;
@@ -65,7 +65,7 @@ namespace HexGameEngine
         }
         public static int GetTotalIntelligence(HexCharacterModel c)
         {
-            int intelligence = c.attributeSheet.intelligence;
+            int intelligence = c.attributeSheet.intelligence.value;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Concussion))
                 intelligence -= 20;
@@ -86,7 +86,7 @@ namespace HexGameEngine
         }
         public static int GetTotalIntelligence(HexCharacterData c)
         {
-            int intelligence = c.attributeSheet.intelligence;
+            int intelligence = c.attributeSheet.intelligence.value;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Concussion))
                 intelligence -= 20;
@@ -107,7 +107,7 @@ namespace HexGameEngine
         }
         public static int GetTotalConstitution(HexCharacterModel c)
         {
-            int constitution = c.attributeSheet.constitution;
+            int constitution = c.attributeSheet.constitution.value;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Frail))
                 constitution -= 10;
@@ -124,7 +124,7 @@ namespace HexGameEngine
         }
         public static int GetTotalConstitution(HexCharacterData c)
         {
-            int constitution = c.attributeSheet.constitution;
+            int constitution = c.attributeSheet.constitution.value;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Frail))
                 constitution -= 10;
@@ -142,7 +142,7 @@ namespace HexGameEngine
         }
         public static int GetTotalAccuracy(HexCharacterModel c)
         {
-            int accuracy = c.attributeSheet.accuracy;
+            int accuracy = c.attributeSheet.accuracy.value;
 
             // if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.EagleEye))
             //     accuracy += 10;
@@ -193,7 +193,7 @@ namespace HexGameEngine
         }
         public static int GetTotalAccuracy(HexCharacterData c)
         {
-            int accuracy = c.attributeSheet.accuracy;
+            int accuracy = c.attributeSheet.accuracy.value;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Blinded))
                 accuracy -= 30;
@@ -228,7 +228,7 @@ namespace HexGameEngine
         public static int GetTotalDodge(HexCharacterModel c)
         {
             int dodge = 0;
-            dodge += c.attributeSheet.dodge;
+            dodge += c.attributeSheet.dodge.value;
 
             // Stunned characters do not benefit from base dodge.
             /*
@@ -312,7 +312,7 @@ namespace HexGameEngine
         public static int GetTotalDodge(HexCharacterData c)
         {
             int dodge = 0;
-            dodge += c.attributeSheet.dodge;
+            dodge += c.attributeSheet.dodge.value;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Crippled))
                 dodge -= 30;
@@ -366,7 +366,7 @@ namespace HexGameEngine
         }
         public static int GetTotalResolve(HexCharacterModel c)
         {
-            int resolve = c.attributeSheet.resolve;
+            int resolve = c.attributeSheet.resolve.value;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BruisedKidney))
                 resolve -= 10;
@@ -431,7 +431,7 @@ namespace HexGameEngine
         }
         public static int GetTotalResolve(HexCharacterData c)
         {
-            int resolve = c.attributeSheet.resolve;
+            int resolve = c.attributeSheet.resolve.value;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BruisedKidney))
                 resolve -= 10;
@@ -458,7 +458,7 @@ namespace HexGameEngine
         }
         public static int GetTotalWits(HexCharacterModel c)
         {
-            int wits = c.attributeSheet.wits;
+            int wits = c.attributeSheet.wits.value;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Indecisive))
                 wits -= 5;
@@ -476,7 +476,7 @@ namespace HexGameEngine
         }
         public static int GetTotalWits(HexCharacterData c)
         {
-            int wits = c.attributeSheet.wits;
+            int wits = c.attributeSheet.wits.value;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Indecisive))
                 wits -= 5;
