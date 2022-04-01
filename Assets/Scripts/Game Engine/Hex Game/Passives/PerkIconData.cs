@@ -26,6 +26,7 @@ namespace HexGameEngine.Perks
         public bool isInjury;
         public InjurySeverity severity;
         public InjuryType injuryType;
+        public bool isPermanentInjury;
 
         public bool isRacial;
         public CharacterRace race;

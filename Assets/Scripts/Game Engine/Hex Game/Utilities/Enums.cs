@@ -419,6 +419,7 @@ namespace HexGameEngine
         Inattentive = 103,
         Inoculated = 118,
         InspiringLeader = 72,
+        IronWill = 128,
         Irrational = 116,
         LoomingPresence = 125,
         Masochist = 82,
@@ -473,6 +474,7 @@ namespace HexGameEngine
         Wise = 89,
         Wrath = 50,
 
+        // Injuries
         BrokenNose = 27,
         BrokenRibs = 28,
         BrokenFinger = 29,
@@ -492,6 +494,17 @@ namespace HexGameEngine
         ExposedRibs = 43,
         CutArtery = 44,
         PiercedArmMuscles = 45,
+
+        // Permanent Injuries
+        MissingEye = 129,
+        ScarredLung = 130,
+        MissingFingers = 131,
+        MissingNose = 132,
+        PermanentlyConcussed = 133,
+        CrippledKnee = 134,
+        CrippledShoulder = 135,
+        DeeplyDisturbed = 136,
+        CompromisedLiver = 137,
     }
     public enum PerkQuality
     {

@@ -94,8 +94,11 @@ namespace HexGameEngine.Characters
         [Range(0, 100)]
         [GUIColor("Yellow")]
         public int injuryResistance = 0;
-
-        // copy function!!
+        [BoxGroup("Resistances")]
+        [LabelWidth(150)]
+        [Range(0, 100)]
+        [GUIColor("Yellow")]
+        public int deathResistance = 25;
 
         public void CopyValuesIntoOther(AttributeSheet other)
         {
@@ -127,6 +130,7 @@ namespace HexGameEngine.Characters
             other.stressResistance = stressResistance;
             other.debuffResistance = debuffResistance;
             other.injuryResistance = injuryResistance;
+            other.deathResistance = deathResistance;
         }
 
         // GUI Colours for Odin

@@ -57,7 +57,12 @@ namespace HexGameEngine.Perks
         [Header("Injury Properties")]
         [VerticalGroup("Resistance Interactions")]
         [LabelWidth(200)]
+        [ShowIf("ShowInjury")]
         public bool isInjury;
+        [VerticalGroup("Resistance Interactions")]
+        [ShowIf("ShowPermanentInjury")]
+        [LabelWidth(200)]
+        public bool isPermanentInjury;
         [VerticalGroup("Resistance Interactions")]
         [ShowIf("ShowInjuryFields")]
         [LabelWidth(200)]
@@ -105,6 +110,14 @@ namespace HexGameEngine.Perks
         public bool ShowInjuryFields()
         {
             return isInjury;
+        }
+        public bool ShowInjury()
+        {
+            return !isPermanentInjury;
+        }
+        public bool ShowPermanentInjury()
+        {
+            return !isInjury;
         }
 
         public bool ShowRace()

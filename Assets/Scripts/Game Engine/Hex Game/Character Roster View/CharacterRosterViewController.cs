@@ -102,6 +102,7 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI stressResistanceText;
         [SerializeField] private TextMeshProUGUI injuryResistanceText;
         [SerializeField] private TextMeshProUGUI debuffResistanceText;
+        [SerializeField] private TextMeshProUGUI deathResistanceText;
         [Space(20)]
 
         [HideInInspector] public RosterItemSlot rosterSlotMousedOver = null;
@@ -286,8 +287,9 @@ namespace HexGameEngine.UI
             stressResistanceText.text = StatCalculator.GetTotalStressResistance(character).ToString();
             injuryResistanceText.text = StatCalculator.GetTotalInjuryResistance(character).ToString();
             debuffResistanceText.text = StatCalculator.GetTotalDebuffResistance(character).ToString();
+            deathResistanceText.text = StatCalculator.GetTotalDeathResistance(character).ToString();
 
-            if(character.attributeRolls.Count > 0)            
+            if (character.attributeRolls.Count > 0)            
                 attributeLevelUpButton.SetActive(true);            
             else attributeLevelUpButton.SetActive(false);
         }

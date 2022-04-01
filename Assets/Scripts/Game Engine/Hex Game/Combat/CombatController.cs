@@ -1012,12 +1012,21 @@ namespace HexGameEngine.Combat
             }
 
         }
+        private DeathRollResult RollForDeathResist(HexCharacterModel c)
+        {
+            DeathRollResult ret = new DeathRollResult();
+            int resistance = StatCalculator.GetTotalDeathResistance(c);
+            ret.roll = RandomGenerator.NumberBetween(1, 100);
+            if (ret.roll <= resistance) ret.pass = true;
+            else ret.pass = false;
+            return ret;
 
+        }
         #endregion
 
         // Handle Death
         #region
-        public void HandleDeath(HexCharacterModel character, VisualEvent parentEvent = null)
+        private void HandleDeath(HexCharacterModel character, VisualEvent parentEvent = null)
         {
             Debug.Log("CombatLogic.HandleDeath() started for " + character.myName);
 
@@ -1077,6 +1086,15 @@ namespace HexGameEngine.Combat
                 HexCharacterController.Instance.DisconnectModelFromView(character);
                 HexCharacterController.Instance.DestroyCharacterView(view);
             }, QueuePosition.Back, 0, 0, parentEvent);
+
+            // Roll for death or knock down on player characters
+            if(character.controller == Controller.Player)
+            {
+                DeathRollResult result = RollForDeathResist(character);
+               // if(result.pass) // Handle knock down
+                // else handle death
+            }
+            
 
             // If character dying has fragile binding
             if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FragileBinding))
@@ -1186,4 +1204,10 @@ namespace HexGameEngine.Combat
         public int damageLowerLimit;
         public int damageUpperLimit;
     }
+    public class DeathRollResult
+    {
+        public int roll;
+        public bool pass;
+    }
+    
 }

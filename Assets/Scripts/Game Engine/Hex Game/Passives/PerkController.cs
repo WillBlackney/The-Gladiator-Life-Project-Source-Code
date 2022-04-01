@@ -104,6 +104,7 @@ namespace HexGameEngine.Perks
             p.isInjury = data.isInjury;
             p.injuryType = data.injuryType;
             p.severity = data.severity;
+            p.isPermanentInjury = data.isPermanentInjury;
 
             p.isRacial = data.isRacial;
             p.race = data.race;

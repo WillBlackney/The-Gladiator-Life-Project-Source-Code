@@ -914,6 +914,32 @@ namespace HexGameEngine
 
             return resistanceReturned;
         }
+        public static int GetTotalDeathResistance(HexCharacterModel c)
+        {
+            int resistanceReturned = c.attributeSheet.deathResistance;
+
+            // Iron Will Perk
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.IronWill))
+                resistanceReturned += 25;
+
+            // Items
+            resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.InjuryResistance, c.itemSet);
+
+            return resistanceReturned;
+        }
+        public static int GetTotalDeathResistance(HexCharacterData c)
+        {
+            int resistanceReturned = c.attributeSheet.deathResistance;
+
+            // Iron Will Perk
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.IronWill))
+                resistanceReturned += 25; 
+
+            // Items
+            resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.InjuryResistance, c.itemSet);
+
+            return resistanceReturned;
+        }
         #endregion
 
         // Misc Calculators
