@@ -185,44 +185,6 @@ namespace HexGameEngine.Perks
 
             return sprite;
         }
-        private List<PerkIconData> GetValidInjuries(HexCharacterModel character, InjurySeverity severity, InjuryType injuryType)
-        {
-            List<PerkIconData> matchingInjuries = new List<PerkIconData>();
-
-            foreach(PerkIconData d in allPerks)
-            {
-                if(d.isInjury &&
-                    d.severity == severity &&
-                    d.injuryType == injuryType &&
-                    !DoesCharacterHavePerk(character.pManager, d.perkTag))
-                {
-                    matchingInjuries.Add(d);
-                }
-            }
-
-            return matchingInjuries;
-
-        }
-        public PerkIconData GetRandomValidInjury(HexCharacterModel character, InjurySeverity severity, InjuryType injuryType)
-        {
-            PerkIconData iRet = null;
-            List<PerkIconData> injuries = GetValidInjuries(character, severity, injuryType);
-
-            if (injuries.Count == 0)
-            {
-                Debug.Log("PerkController.GetRandomValidInjury() couldn't find a valid injury, returning null...");
-                return null;
-            }
-            else if (injuries.Count == 1)
-                iRet = injuries[0];
-            else
-                iRet = injuries[RandomGenerator.NumberBetween(0, injuries.Count - 1)];
-
-            Debug.Log("PerkController.GetRandomValidInjury() returning injury " + iRet.passiveName);
-
-            return iRet;
-
-        }
         public PerkIconData GetRacialPerk(CharacterRace race)
         {
             PerkIconData rp = null;
@@ -504,11 +466,12 @@ namespace HexGameEngine.Perks
             }
 
             // Add perk to linked character data for perks that should persist (e.g. injuries gained in combat should persist)
-            if (perkData.isInjury && character != null && character.characterData != null &&
+            if ((perkData.isInjury || perkData.isPermanentInjury) && character != null && character.characterData != null &&
                 DoesCharacterHavePerk(character.characterData.passiveManager, perk) == false)
             {
                 ModifyPerkOnCharacterData(character.characterData.passiveManager, perk, stacks);
-                character.injuriesGainedThisCombat.Add(perk);
+                if (perkData.isInjury) character.injuriesGainedThisCombat.Add(perk);
+                else if (perkData.isPermanentInjury) character.permanentInjuriesGainedThisCombat.Add(perk);
             }
 
             return true;
@@ -724,13 +687,69 @@ namespace HexGameEngine.Perks
                 return false;
             }
         }
+      
+        #endregion
+
+        // Injury Logic
+        #region
+        private List<PerkIconData> GetValidInjuries(HexCharacterModel character, InjurySeverity severity, InjuryType injuryType)
+        {
+            List<PerkIconData> matchingInjuries = new List<PerkIconData>();
+
+            foreach (PerkIconData d in allPerks)
+            {
+                if (d.isInjury &&
+                    d.severity == severity &&
+                    d.injuryType == injuryType &&
+                    !DoesCharacterHavePerk(character.pManager, d.perkTag))
+                {
+                    matchingInjuries.Add(d);
+                }
+            }
+
+            return matchingInjuries;
+
+        }
+        public PerkIconData GetRandomValidInjury(HexCharacterModel character, InjurySeverity severity, InjuryType injuryType)
+        {
+            PerkIconData iRet = null;
+            List<PerkIconData> injuries = GetValidInjuries(character, severity, injuryType);
+
+            if (injuries.Count == 0)
+            {
+                Debug.Log("PerkController.GetRandomValidInjury() couldn't find a valid injury, returning null...");
+                return null;
+            }
+            else if (injuries.Count == 1)
+                iRet = injuries[0];
+            else
+                iRet = injuries[RandomGenerator.NumberBetween(0, injuries.Count - 1)];
+
+            Debug.Log("PerkController.GetRandomValidInjury() returning injury " + iRet.passiveName);
+
+            return iRet;
+
+        }
+        public List<ActivePerk> GetAllInjuriesOnCharacter(HexCharacterData c)
+        {
+            List<ActivePerk> ret = new List<ActivePerk>();
+
+            foreach (ActivePerk p in c.passiveManager.perks)
+            {
+                PerkIconData pData = p.Data;
+                if (pData.isInjury)
+                    ret.Add(p);
+            }
+
+            return ret;
+        }
         public bool IsCharacteInjured(PerkManagerModel pManager)
         {
             bool bRet = false;
             foreach (ActivePerk ap in pManager.perks)
             {
                 //if (GetPerkIconDataByTag(ap.perkTag).isInjury)
-                if(ap.Data.isInjury)
+                if (ap.Data.isInjury)
                 {
                     bRet = true;
                     break;
@@ -742,23 +761,87 @@ namespace HexGameEngine.Perks
         }
         #endregion
 
-        // Misc
+        // Permanent Injury Logic
         #region
-        public List<ActivePerk> GetAllInjuriesOnCharacter(HexCharacterData c)
+        public List<PerkIconData> GetAllPermanentInjuries()
+        {
+            List<PerkIconData> matchingInjuries = new List<PerkIconData>();
+
+            foreach (PerkIconData d in allPerks)
+            {
+                if (d.isPermanentInjury)
+                    matchingInjuries.Add(d);
+            }
+
+            return matchingInjuries;
+        }
+        private List<PerkIconData> GetValidPermanentInjuries(HexCharacterModel character)
+        {
+            List<PerkIconData> matchingInjuries = new List<PerkIconData>();
+
+            foreach (PerkIconData d in allPerks)
+            {
+                if (d.isPermanentInjury &&
+                    !DoesCharacterHavePerk(character.pManager, d.perkTag))
+                {
+                    matchingInjuries.Add(d);
+                }
+            }
+
+            return matchingInjuries;
+
+        }
+        public PerkIconData GetRandomValidPermanentInjury(HexCharacterModel character)
+        {
+            PerkIconData iRet = null;
+            List<PerkIconData> permanentInjuries = GetValidPermanentInjuries(character);
+
+            if (permanentInjuries.Count == 0)
+            {
+                Debug.Log("PerkController.GetRandomValidInjury() couldn't find a valid injury, returning null...");
+                return null;
+            }
+            else if (permanentInjuries.Count == 1)
+                iRet = permanentInjuries[0];
+            else
+                iRet = permanentInjuries[RandomGenerator.NumberBetween(0, permanentInjuries.Count - 1)];
+
+            Debug.Log("PerkController.GetRandomValidInjury() returning injury " + iRet.passiveName);
+
+            return iRet;
+
+        }
+        public List<ActivePerk> GetAllPermanentInjuriesOnCharacter(HexCharacterData c)
         {
             List<ActivePerk> ret = new List<ActivePerk>();
 
-            foreach(ActivePerk p in c.passiveManager.perks)
+            foreach (ActivePerk p in c.passiveManager.perks)
             {
-                //PerkIconData pData = GetPerkIconDataByTag(p.perkTag);
                 PerkIconData pData = p.Data;
-                if (pData.isInjury)                
-                    ret.Add(p);                
+                if (pData.isPermanentInjury)
+                    ret.Add(p);
             }
 
             return ret;
         }
+        public bool IsCharactePermanentlyInjured(PerkManagerModel pManager)
+        {
+            bool bRet = false;
+            foreach (ActivePerk ap in pManager.perks)
+            {
+                if (ap.Data.isPermanentInjury)
+                {
+                    bRet = true;
+                    break;
+                }
+
+            }
+
+            return bRet;
+        }
         #endregion
+
+
 
     }
 }

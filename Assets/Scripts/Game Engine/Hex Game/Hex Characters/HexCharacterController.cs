@@ -29,6 +29,7 @@ namespace HexGameEngine.Characters
         [Header("Active Characters")]
         private List<HexCharacterModel> allCharacters = new List<HexCharacterModel>();
         private List<HexCharacterModel> allDefenders = new List<HexCharacterModel>();
+        private List<HexCharacterModel> graveyard = new List<HexCharacterModel>();
         private List<HexCharacterModel> allEnemies = new List<HexCharacterModel>();
         private List<HexCharacterModel> allSummonedDefenders = new List<HexCharacterModel>();
         #endregion
@@ -77,6 +78,17 @@ namespace HexGameEngine.Characters
             private set
             {
                 allEnemies = value;
+            }
+        }
+        public List<HexCharacterModel> Graveyard
+        {
+            get
+            {
+                return graveyard;
+            }
+            private set
+            {
+                graveyard = value;
             }
         }
         #endregion
@@ -1781,6 +1793,7 @@ namespace HexGameEngine.Characters
             AllEnemies.Clear();
             AllSummonedDefenders.Clear();
             AllDefenders.Clear();
+            Graveyard.Clear();
 
 
         }

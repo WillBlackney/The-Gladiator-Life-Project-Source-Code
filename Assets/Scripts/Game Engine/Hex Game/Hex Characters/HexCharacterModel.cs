@@ -70,6 +70,7 @@ namespace HexGameEngine.Characters
         public int healthLostThisCombat;
         public int stressGainedThisCombat;
         public List<Perk> injuriesGainedThisCombat = new List<Perk>();
+        public List<Perk> permanentInjuriesGainedThisCombat = new List<Perk>();
 
         // Abilities
         [HideInInspector] public AbilityBook abilityBook;

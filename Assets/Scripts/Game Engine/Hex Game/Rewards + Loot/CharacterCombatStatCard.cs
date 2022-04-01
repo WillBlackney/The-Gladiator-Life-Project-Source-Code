@@ -12,9 +12,14 @@ namespace HexGameEngine.RewardSystems
         // Properties + Components
         #region
         [Header("Core Components")]
-        [SerializeField] private UniversalCharacterModel ucm;
         [SerializeField] private GameObject levelUpParent;
         [SerializeField] private CharacterCombatStatCardPerkIcon[] injuryIcons;
+        [SerializeField] private GameObject knockDownIndicatorParent;
+        [SerializeField] private GameObject deathIndicatorParent;
+
+        [Header("Model Components")]
+        [SerializeField] private UniversalCharacterModel ucm;
+        [SerializeField] private GameObject portraitDeathIcon;
 
         [Header("Text Components")]
         [SerializeField] private TextMeshProUGUI nameText;
@@ -27,6 +32,18 @@ namespace HexGameEngine.RewardSystems
 
         // Getters + Accessors
         #region
+        public GameObject KnockDownIndicatorParent
+        {
+            get { return knockDownIndicatorParent; }
+        }
+        public GameObject DeathIndicatorParent
+        {
+            get { return deathIndicatorParent; }
+        }
+        public GameObject PortraitDeathIcon
+        {
+            get { return portraitDeathIcon; }
+        }
         public UniversalCharacterModel Ucm
         {
             get { return ucm; }

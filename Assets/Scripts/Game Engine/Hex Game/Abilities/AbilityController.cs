@@ -1499,6 +1499,9 @@ namespace HexGameEngine.Abilities
                 if (PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.GrazedEyeSocket))
                     rangeReturned -= 1;
 
+                if (PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.MissingEye))
+                    rangeReturned -= 1;
+
                 if (PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.ShortSighted))
                     rangeReturned -= 1;
             }

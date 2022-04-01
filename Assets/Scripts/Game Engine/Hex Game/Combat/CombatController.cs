@@ -1008,7 +1008,7 @@ namespace HexGameEngine.Combat
                     CreateStressCheck(c, StressEventType.AllyKilled);
                 }
 
-                HandleDeath(target, parentEvent);
+                HandleDeathBlow(target, parentEvent);
             }
 
         }
@@ -1019,6 +1019,12 @@ namespace HexGameEngine.Combat
             ret.roll = RandomGenerator.NumberBetween(1, 100);
             if (ret.roll <= resistance) ret.pass = true;
             else ret.pass = false;
+
+            // Catch check: in the extremely rare circumstance where a character has every single permanent injury, kill them
+            // automatically to prevent bugs
+            if (PerkController.Instance.GetAllPermanentInjuriesOnCharacter(c.characterData).Count >= 
+                PerkController.Instance.GetAllPermanentInjuries().Count)
+                ret.pass = false;
             return ret;
 
         }
@@ -1026,9 +1032,9 @@ namespace HexGameEngine.Combat
 
         // Handle Death
         #region
-        private void HandleDeath(HexCharacterModel character, VisualEvent parentEvent = null)
+        private void HandleDeathBlow(HexCharacterModel character, VisualEvent parentEvent = null)
         {
-            Debug.Log("CombatLogic.HandleDeath() started for " + character.myName);
+            Debug.Log("CombatLogic.HandleDeathBlow() started for " + character.myName);
 
             // Cache relevant references for visual events
             HexCharacterView view = character.hexCharacterView;
@@ -1037,6 +1043,7 @@ namespace HexGameEngine.Combat
 
             // Mark as dead
             character.livingState = LivingState.Dead;
+            HexCharacterController.Instance.Graveyard.Add(character);
 
             // Remove from persitency
             if (character.allegiance == Allegiance.Enemy)
@@ -1076,6 +1083,25 @@ namespace HexGameEngine.Combat
             HexCharacterModel currentlyActivatedEntity = TurnController.Instance.EntityActivated;
             VisualEventManager.Instance.CreateVisualEvent(() => TurnController.Instance.OnCharacterKilledVisualEvent(window, currentlyActivatedEntity, null), QueuePosition.Back, 0, 1f, parentEvent);
 
+            // Roll for death or knock down on player characters
+            if(character.controller == Controller.Player)
+            {
+                DeathRollResult result = RollForDeathResist(character);
+                if (result.pass)
+                {
+                    // Gain permanent injury
+                    PerkIconData permInjury = PerkController.Instance.GetRandomValidPermanentInjury(character);
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, permInjury.perkTag, 1, false, 0, null);
+
+                    // Move health to 1 (since 0 is invalid and there not dead)
+                    CharacterDataController.Instance.SetCharacterHealth(character.characterData, 1);
+                }
+                else
+                {
+                    CharacterDataController.Instance.AllPlayerCharacters.Remove(character.characterData);
+                }
+            }
+
             // Break references
             LevelController.Instance.DisconnectCharacterFromTheirHex(character);
 
@@ -1087,17 +1113,8 @@ namespace HexGameEngine.Combat
                 HexCharacterController.Instance.DestroyCharacterView(view);
             }, QueuePosition.Back, 0, 0, parentEvent);
 
-            // Roll for death or knock down on player characters
-            if(character.controller == Controller.Player)
-            {
-                DeathRollResult result = RollForDeathResist(character);
-               // if(result.pass) // Handle knock down
-                // else handle death
-            }
-            
-
             // If character dying has fragile binding
-            if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FragileBinding))
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FragileBinding))
             {
                 List<HexCharacterModel> skeletons = new List<HexCharacterModel>();
                 foreach(HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(character, false))
@@ -1105,7 +1122,7 @@ namespace HexGameEngine.Combat
                     if (c.myName == "Shambling Skeleton")
                     {
                         //VisualEventManager.Instance.CreateStackParentVisualEvent(character);
-                        HandleDeath(c, c.GetLastStackEventParent());
+                        HandleDeathBlow(c, c.GetLastStackEventParent());
                     }
                        
                 }

@@ -87,16 +87,14 @@ namespace HexGameEngine.RewardSystems
                 CharacterCombatStatData result = GenerateCharacterCombatStatResult(character);
                 dataRet.Add(result);
 
-                // apply xp gain + level up
+                // Dead characters dont get XP
+                if (character.characterData.currentHealth <= 0) continue;
+
+                // Apply xp gain + level up
                 int xpGained = baseXp + (killXpSlice * character.totalKills);
                 int previousLevel = character.characterData.currentLevel;
-                if (character.characterData.currentXP + xpGained >= character.characterData.currentMaxXP)
-                {
-                    result.didLevelUp = true;
-                }
-                // CharacterDataController.Instance.HandleGainXP(character.characterData, xpGained);
-                // if (previousLevel < character.characterData.currentLevel)
-                //    result.didLevelUp = true;
+                if (character.characterData.currentXP + xpGained >= character.characterData.currentMaxXP)                
+                    result.didLevelUp = true;                
                 result.xpGained = xpGained;
             }
 
@@ -119,7 +117,8 @@ namespace HexGameEngine.RewardSystems
             result.healthLost = character.healthLostThisCombat;
             result.stressGained = character.stressGainedThisCombat;
             result.injuriesGained.AddRange(character.injuriesGainedThisCombat);
-            // to do: need some extra logic for tracking PERMANENT injuires gained from combat
+            result.permanentInjuriesGained.AddRange(character.permanentInjuriesGainedThisCombat);
+            if (character.characterData.currentHealth <= 0) result.died = true;
 
             return result;
         }
@@ -174,16 +173,28 @@ namespace HexGameEngine.RewardSystems
             HexCharacterData character = data.characterData;
 
             // Reset
-            foreach (CharacterCombatStatCardPerkIcon p in card.InjuryIcons)
-            {
+            foreach (CharacterCombatStatCardPerkIcon p in card.InjuryIcons)            
                 p.gameObject.SetActive(false);
-            }
+            card.DeathIndicatorParent.SetActive(false);
+            card.KnockDownIndicatorParent.SetActive(false);
+            card.PortraitDeathIcon.SetActive(false);
 
             // show card
             card.gameObject.SetActive(true);
 
             // ucm 
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(card.Ucm, character.modelParts);
+
+            // Death views setup
+            if (data.died)
+            {
+                card.PortraitDeathIcon.SetActive(true);
+                card.DeathIndicatorParent.SetActive(true);
+            }
+
+            // Knock down views setup
+            if (data.permanentInjuriesGained.Count > 0)            
+                card.KnockDownIndicatorParent.SetActive(true);            
 
             // text fields
             card.NameText.text = character.myName;
@@ -197,10 +208,11 @@ namespace HexGameEngine.RewardSystems
             else card.LevelUpParent.SetActive(false);
 
             // build injury icons
-            for (int i = 0; i < data.injuriesGained.Count; i++)
+            List<Perk> injuriesShown = new List<Perk>();
+            injuriesShown.AddRange(data.injuriesGained);
+            injuriesShown.AddRange(data.permanentInjuriesGained);
+            for (int i = 0; i < injuriesShown.Count && i < 4; i++)
             {
-                if (i == 4) break;
-
                 PerkIconData perkData = PerkController.Instance.GetPerkIconDataByTag(data.injuriesGained[i]);
                 card.InjuryIcons[i].PerkImage.sprite = perkData.passiveSprite;
                 card.InjuryIcons[i].SetMyDataReference(perkData);
@@ -277,6 +289,8 @@ namespace HexGameEngine.RewardSystems
         public int healthLost;
         public int stressGained;
         public List<Perk> injuriesGained = new List<Perk>();
+        public List<Perk> permanentInjuriesGained = new List<Perk>();
+        public bool died = false;
     }
    
 }

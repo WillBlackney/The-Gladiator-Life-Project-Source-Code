@@ -253,6 +253,11 @@ namespace HexGameEngine
                     if (character.livingState == LivingState.Alive && character.currentHealth > 0)                    
                         charactersRewarded.Add(character);                    
                 }
+                foreach (HexCharacterModel character in HexCharacterController.Instance.Graveyard)
+                {
+                    if (character.controller == Controller.Player)
+                        charactersRewarded.Add(character);
+                }
 
                 // Reward XP, build and show combat stats screen
                 List<CharacterCombatStatData> combatStats = CombatRewardController.Instance.GenerateCombatStatResultsForCharacters(charactersRewarded);
@@ -264,8 +269,8 @@ namespace HexGameEngine
                 CombatRewardController.Instance.HandleGainRewardsOfContract(RunController.Instance.CurrentCombatContractData);
 
                 // Cache loot data + combat stat data to persistency, save data and set save checkpoint.
-                RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatEnd);
-                PersistencyController.Instance.AutoUpdateSaveFile();
+                //RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatEnd);
+                //PersistencyController.Instance.AutoUpdateSaveFile();
             }
             else
             {

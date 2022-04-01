@@ -520,14 +520,14 @@ namespace HexGameEngine.Characters
             float xpGainMod = 1f;
             if(xpGained > 0)
             {
-                if (PerkController.Instance.DoesCharacterHavePerk(data.passiveManager, Perk.FastLearner))
-                {
+                if (PerkController.Instance.DoesCharacterHavePerk(data.passiveManager, Perk.FastLearner))                
                     xpGainMod += 0.25f;
-                }
-                if (PerkController.Instance.DoesCharacterHavePerk(data.passiveManager, Perk.DimWitted))
-                {
+                
+                if (PerkController.Instance.DoesCharacterHavePerk(data.passiveManager, Perk.DimWitted))                
                     xpGainMod -= 0.25f;
-                }
+                
+                if (PerkController.Instance.DoesCharacterHavePerk(data.passiveManager, Perk.PermanentlyConcussed))                
+                    xpGainMod -= 0.15f;                
             }         
 
             xpGained = (int)(xpGained * xpGainMod);
