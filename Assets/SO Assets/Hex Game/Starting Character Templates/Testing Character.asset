@@ -17,14 +17,28 @@ MonoBehaviour:
   race: 3
   modelSize: 0
   attributeSheet:
-    strength: 5
-    intelligence: 5
-    constitution: 5
-    dodge: 100
-    accuracy: 5
-    resolve: 0
-    wits: 5
-    maxHealth: 100
+    strength:
+      value: 0
+      stars: 0
+    intelligence:
+      value: 0
+      stars: 0
+    constitution:
+      value: 0
+      stars: 0
+    dodge:
+      value: 0
+      stars: 0
+    accuracy:
+      value: 75
+      stars: 0
+    resolve:
+      value: 0
+      stars: 0
+    wits:
+      value: 0
+      stars: 0
+    maxHealth: 1
     stamina: 20
     maxEnergy: 20
     initiative: 100
@@ -36,6 +50,7 @@ MonoBehaviour:
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
+    deathResistance: 0
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 36a0268a5ac37d742960a07bfe17be42, type: 2}

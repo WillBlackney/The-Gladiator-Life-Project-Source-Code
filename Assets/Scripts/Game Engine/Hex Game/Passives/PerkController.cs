@@ -798,7 +798,7 @@ namespace HexGameEngine.Perks
 
             if (permanentInjuries.Count == 0)
             {
-                Debug.Log("PerkController.GetRandomValidInjury() couldn't find a valid injury, returning null...");
+                Debug.Log("PerkController.GetRandomValidInjury() couldn't find a valid permanent injury, returning null...");
                 return null;
             }
             else if (permanentInjuries.Count == 1)
@@ -806,7 +806,7 @@ namespace HexGameEngine.Perks
             else
                 iRet = permanentInjuries[RandomGenerator.NumberBetween(0, permanentInjuries.Count - 1)];
 
-            Debug.Log("PerkController.GetRandomValidInjury() returning injury " + iRet.passiveName);
+            Debug.Log("PerkController.GetRandomValidInjury() returning permanent injury " + iRet.passiveName);
 
             return iRet;
 

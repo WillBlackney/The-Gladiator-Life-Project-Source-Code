@@ -17,6 +17,7 @@ using HexGameEngine.DungeonMap;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.Player;
 using HexGameEngine.Items;
+using TMPro;
 
 namespace HexGameEngine.RewardSystems
 {
@@ -26,6 +27,7 @@ namespace HexGameEngine.RewardSystems
         #region
         [Header("Stat Screen Components")]
         [SerializeField] private GameObject mainVisualParent;
+        [SerializeField] private TextMeshProUGUI headerText;
         [SerializeField] private GameObject characterStatPageVisualParent;
         [SerializeField] private GameObject lootPageVisualParent;
         [SerializeField] private CharacterCombatStatCard[] allCharacterStatCards;
@@ -68,7 +70,7 @@ namespace HexGameEngine.RewardSystems
 
         // Xp Reward Logic
         #region
-        public List<CharacterCombatStatData> GenerateCombatStatResultsForCharacters(List<HexCharacterModel> characters)
+        public List<CharacterCombatStatData> GenerateCombatStatResultsForCharacters(List<HexCharacterModel> characters, bool victory)
         {
             List<CharacterCombatStatData> dataRet = new List<CharacterCombatStatData>();
 
@@ -88,11 +90,10 @@ namespace HexGameEngine.RewardSystems
                 dataRet.Add(result);
 
                 // Dead characters dont get XP
-                if (character.characterData.currentHealth <= 0) continue;
+                if (character.characterData.currentHealth <= 0 || !victory) continue;
 
                 // Apply xp gain + level up
                 int xpGained = baseXp + (killXpSlice * character.totalKills);
-                int previousLevel = character.characterData.currentLevel;
                 if (character.characterData.currentXP + xpGained >= character.characterData.currentMaxXP)                
                     result.didLevelUp = true;                
                 result.xpGained = xpGained;
@@ -140,14 +141,20 @@ namespace HexGameEngine.RewardSystems
         {
             mainVisualParent.SetActive(false);
         }
-        public void BuildAndShowPostCombatScreen(List<CharacterCombatStatData> data, CombatContractData contractData)
+        public void BuildAndShowPostCombatScreen(List<CharacterCombatStatData> data, CombatContractData contractData, bool victory)
         {
-            mainVisualParent.SetActive(true);
+            mainVisualParent.SetActive(true);            
             characterStatPageVisualParent.SetActive(true);
             currentWindowViewing = WindowState.CharactersPage;
             lootPageVisualParent.SetActive(false);
             BuildCharacterStatCardPage(data);
-            BuildLootPageFromContractLootData(contractData);
+            if (victory)
+            {
+                headerText.text = "VICTORY!";
+                BuildLootPageFromContractLootData(contractData);
+            }
+            else headerText.text = "DEFEAT!";
+
         }
         private void BuildCharacterStatCardPage(List<CharacterCombatStatData> data)
         {
@@ -213,7 +220,7 @@ namespace HexGameEngine.RewardSystems
             injuriesShown.AddRange(data.permanentInjuriesGained);
             for (int i = 0; i < injuriesShown.Count && i < 4; i++)
             {
-                PerkIconData perkData = PerkController.Instance.GetPerkIconDataByTag(data.injuriesGained[i]);
+                PerkIconData perkData = PerkController.Instance.GetPerkIconDataByTag(injuriesShown[i]);
                 card.InjuryIcons[i].PerkImage.sprite = perkData.passiveSprite;
                 card.InjuryIcons[i].SetMyDataReference(perkData);
                 card.InjuryIcons[i].gameObject.SetActive(true);

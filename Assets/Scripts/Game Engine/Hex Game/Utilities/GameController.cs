@@ -187,7 +187,7 @@ namespace HexGameEngine
         }      
         #endregion
 
-        // Handle Post Combat Stuff
+        // Post Combat Logic
         #region
         public void StartCombatVictorySequence()
         {
@@ -243,42 +243,114 @@ namespace HexGameEngine
             TurnController.Instance.DisableEndTurnButtonView();
             TurnController.Instance.DisableDelayTurnButtonView();
 
-            // Loading in from main menu? or combat just finished?
-            if(RunController.Instance.SaveCheckPoint != SaveCheckPoint.CombatEnd)
+            // Determine characters to reward XP to
+            List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();
+            foreach (HexCharacterModel character in HexCharacterController.Instance.AllDefenders)
             {
-                // Determine characters to reward XP to
-                List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();
-                foreach (HexCharacterModel character in HexCharacterController.Instance.AllDefenders)
-                {
-                    if (character.livingState == LivingState.Alive && character.currentHealth > 0)                    
-                        charactersRewarded.Add(character);                    
-                }
-                foreach (HexCharacterModel character in HexCharacterController.Instance.Graveyard)
-                {
-                    if (character.controller == Controller.Player)
-                        charactersRewarded.Add(character);
-                }
-
-                // Reward XP, build and show combat stats screen
-                List<CharacterCombatStatData> combatStats = CombatRewardController.Instance.GenerateCombatStatResultsForCharacters(charactersRewarded);
-                CombatRewardController.Instance.CacheStatResult(combatStats);
-                CombatRewardController.Instance.ApplyXpGainFromStatResultsToCharacters(combatStats);
-                CombatRewardController.Instance.BuildAndShowPostCombatScreen(combatStats, RunController.Instance.CurrentCombatContractData);
-
-                // Gain loot
-                CombatRewardController.Instance.HandleGainRewardsOfContract(RunController.Instance.CurrentCombatContractData);
-
-                // Cache loot data + combat stat data to persistency, save data and set save checkpoint.
-                //RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatEnd);
-                //PersistencyController.Instance.AutoUpdateSaveFile();
+                if (character.livingState == LivingState.Alive && character.currentHealth > 0)
+                    charactersRewarded.Add(character);
             }
-            else
+            foreach (HexCharacterModel character in HexCharacterController.Instance.Graveyard)
             {
-
+                if (character.controller == Controller.Player)
+                    charactersRewarded.Add(character);
             }
-           
+
+            // Reward XP, build and show combat stats screen
+            List<CharacterCombatStatData> combatStats = CombatRewardController.Instance.GenerateCombatStatResultsForCharacters(charactersRewarded, true);
+            CombatRewardController.Instance.CacheStatResult(combatStats);
+            CombatRewardController.Instance.ApplyXpGainFromStatResultsToCharacters(combatStats);
+            CombatRewardController.Instance.BuildAndShowPostCombatScreen(combatStats, RunController.Instance.CurrentCombatContractData, true);
+
+            // Gain loot
+            CombatRewardController.Instance.HandleGainRewardsOfContract(RunController.Instance.CurrentCombatContractData);
 
         }
+        public void StartCombatDefeatSequence()
+        {
+            StartCoroutine(StartCombatDefeatSequenceCoroutine());
+        }
+        private IEnumerator StartCombatDefeatSequenceCoroutine()
+        {
+            Debug.Log("GameController.StartCombatDefeatSequence() called");
+            // Set state
+            SetGameState(GameState.CombatRewardPhase);
+
+            // wait until v queue count = 0
+            yield return new WaitUntil(() => VisualEventManager.Instance.EventQueue.Count == 0);
+
+            // Zoom camera to reset settings
+            CameraController.Instance.DoPostCombatZoomAndMove(1f);
+
+            // Tear down summoned characters + enemies
+            List<HexCharacterModel> destCharacters = new List<HexCharacterModel>();
+            destCharacters.AddRange(HexCharacterController.Instance.AllSummonedDefenders);
+            destCharacters.AddRange(HexCharacterController.Instance.AllEnemies);
+            foreach (HexCharacterModel model in destCharacters)
+            {
+                // Smokey vanish effect
+                VisualEffectManager.Instance.CreateExpendEffect(model.hexCharacterView.WorldPosition, 15, 0.2f, false);
+
+                // Fade out character model
+                CharacterModeller.FadeOutCharacterModel(model.hexCharacterView.ucm, 1f);
+
+                // Fade out UI elements
+                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
+                HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
+                if (model.hexCharacterView.uiCanvasParent.activeSelf == true)
+                {
+                    HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
+                }
+            }
+
+            // Disable any player character gui's if they're still active
+            foreach (HexCharacterModel model in HexCharacterController.Instance.AllDefenders)
+            {
+                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
+                HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
+                if (model.hexCharacterView != null && model.hexCharacterView.uiCanvasParent.activeSelf == true)
+                {
+                    HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
+                }
+            }
+
+            // Hide level nodes
+            LevelController.Instance.HideAllNodeViews();
+
+            // Destroy Activation windows
+            TurnController.Instance.DestroyAllActivationWindows();
+
+            // Hide end turn button
+            TurnController.Instance.DisableEndTurnButtonView();
+            TurnController.Instance.DisableDelayTurnButtonView();
+
+            // Determine characters to reward XP to
+            List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();
+            foreach (HexCharacterModel character in HexCharacterController.Instance.AllDefenders)
+            {
+                if (character.livingState == LivingState.Alive && character.currentHealth > 0)
+                    charactersRewarded.Add(character);
+            }
+            foreach (HexCharacterModel character in HexCharacterController.Instance.Graveyard)
+            {
+                if (character.controller == Controller.Player)
+                    charactersRewarded.Add(character);
+            }
+
+            // Reward XP, build and show combat stats screen
+            List<CharacterCombatStatData> combatStats = CombatRewardController.Instance.GenerateCombatStatResultsForCharacters(charactersRewarded, false);
+            CombatRewardController.Instance.CacheStatResult(combatStats);
+            CombatRewardController.Instance.BuildAndShowPostCombatScreen(combatStats, RunController.Instance.CurrentCombatContractData, false);
+        }
+        public void StartGameOverSequenceFromCombat()
+        {
+            StartCoroutine(StartGameOverSequenceFromCombatCoroutine());
+        }
+        private IEnumerator StartGameOverSequenceFromCombatCoroutine()
+        {
+            yield return null;
+        }
+
         public void HandlePostCombatToTownTransistion()
         {
             StartCoroutine(HandlePostCombatToTownTransistionCoroutine());

@@ -760,9 +760,8 @@ namespace HexGameEngine
     public enum CombatGameState
     {
         None = 0,
-        VictoryTriggered = 1,
-        DefeatTriggered = 2,
-        CombatActive = 3,
+        CombatInactive = 1,
+        CombatActive = 2,
     }
     #endregion
 

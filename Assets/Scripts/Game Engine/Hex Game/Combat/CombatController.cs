@@ -1127,8 +1127,8 @@ namespace HexGameEngine.Combat
                        
                 }
             }
-           
-            
+
+
             /*
             // Check if the game over defeat event should be triggered
             if (HexCharacterController.Instance.AllDefenders.Count == 0)
@@ -1137,12 +1137,34 @@ namespace HexGameEngine.Combat
             }
             */
 
-            // Check if the combat victory event should be triggered
-            if (HexCharacterController.Instance.AllEnemies.Count == 0 &&
+            // Check if the combat defeat event should be triggered
+            if (HexCharacterController.Instance.AllDefenders.Count == 0 &&
                 currentCombatState == CombatGameState.CombatActive)
             {
-                StartCombatOverVictoryProcess();
+                // Game over? or just normal defeat?
+                if(RunController.Instance.CurrentCombatContractData.enemyEncounterData.difficulty == CombatDifficulty.Boss)
+                {
+                    // Game over on boss defeat
+                }
+                else
+                {
+                    currentCombatState = CombatGameState.CombatInactive;
+                    GameController.Instance.StartCombatDefeatSequence();
+                }
+              
+
             }
+
+            // Check if the combat victory event should be triggered
+            else if (HexCharacterController.Instance.AllEnemies.Count == 0 &&
+                currentCombatState == CombatGameState.CombatActive)
+            {
+                currentCombatState = CombatGameState.CombatInactive;
+                HandleOnCombatVictoryEffects();
+                GameController.Instance.StartCombatVictorySequence();               
+            }
+
+            
 
             // If this character died during their turn (but no during end turn phase), 
             // resolve the transition to next character activation
@@ -1153,15 +1175,8 @@ namespace HexGameEngine.Combat
         }
         #endregion
 
-        // Game Over Logic
-        #region
-        private void StartCombatOverVictoryProcess()
-        {
-            Debug.Log("CombatLogic.StartCombatOverVictoryProcess() called...");
-            currentCombatState = CombatGameState.VictoryTriggered;
-            HandleOnCombatVictoryEffects();
-            GameController.Instance.StartCombatVictorySequence();
-        }
+        // Combat Vuctory, Defeat + Game Over Logic
+        #region      
         private void HandleOnCombatVictoryEffects()
         {
             // Orc passive
