@@ -57,7 +57,7 @@ namespace HexGameEngine.TownFeatures
             myCharacterData = data;
 
             // Texts
-            nameText.text = data.myName;
+            nameText.text = TextLogic.ReturnColoredText(data.myName, TextLogic.neutralYellow) + "      The " + data.myClassName;
             racialText.text = data.race.ToString();
             racialImage.sprite = SpriteLibrary.Instance.GetRacialSprite(data.race);
 

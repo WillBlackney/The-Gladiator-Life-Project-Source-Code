@@ -12,18 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
   m_Name: Shambling Archer
   m_EditorClassIdentifier: 
-  myName: Shambling Skeleton
+  myName: Shambling Archer
   race: 3
   modelSize: 0
   xpReward: 10
   attributeSheet:
-    strength: 0
-    intelligence: 0
-    constitution: 0
-    dodge: 5
-    accuracy: 80
-    resolve: 10
-    wits: 0
+    strength:
+      value: 0
+      stars: 0
+    intelligence:
+      value: 0
+      stars: 0
+    constitution:
+      value: 0
+      stars: 0
+    dodge:
+      value: 0
+      stars: 0
+    accuracy:
+      value: 75
+      stars: 0
+    resolve:
+      value: 0
+      stars: 0
+    wits:
+      value: 0
+      stars: 0
     maxHealth: 0
     stamina: 8
     maxEnergy: 8
@@ -36,6 +50,7 @@ MonoBehaviour:
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
+    deathResistance: 25
   randomizeHealth: 1
   lowerHealthLimit: 70
   upperHealthLimit: 75

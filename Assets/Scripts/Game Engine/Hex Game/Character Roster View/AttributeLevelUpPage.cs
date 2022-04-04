@@ -93,7 +93,10 @@ namespace HexGameEngine.UI
                 else if (w.MyAttribute == CoreAttribute.Resolve)
                     currentCharacter.attributeSheet.resolve.value += currentCharacter.attributeRolls[0].resolveRoll;
                 else if (w.MyAttribute == CoreAttribute.Constituition)
+                {
                     currentCharacter.attributeSheet.constitution.value += currentCharacter.attributeRolls[0].constitutionRoll;
+                    CharacterDataController.Instance.SetCharacterHealth(currentCharacter, currentCharacter.currentHealth + currentCharacter.attributeRolls[0].constitutionRoll);
+                }
                 else if (w.MyAttribute == CoreAttribute.Wits)
                     currentCharacter.attributeSheet.wits.value += currentCharacter.attributeRolls[0].witsRoll;
 

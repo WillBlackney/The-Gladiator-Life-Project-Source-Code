@@ -419,6 +419,10 @@ namespace HexGameEngine.Abilities
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, ability.abilityName), QueuePosition.Back, 0, 0.5f);
             }
+
+            // Hide pop up
+            HideHitChancePopup();
+
             OnAbilityUsedStart(character, ability, target);
 
             // Face target
