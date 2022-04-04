@@ -635,7 +635,7 @@ namespace HexGameEngine.Characters
 
         // Character Generation + Character Deck Logic
         #region
-        public List<HexCharacterData> GenerateRecruitCharacters(HexCharacterData startingCharacter)
+        public List<HexCharacterData> GenerateCompanionCharacters(HexCharacterData startingCharacter)
         {
             List<HexCharacterData> charactersRet = new List<HexCharacterData>();
             List<ClassTemplateSO> validTemplates = new List<ClassTemplateSO>();
@@ -729,7 +729,11 @@ namespace HexGameEngine.Characters
             // Talent Data
             foreach (TalentPairing tp in ct.talentPairings)
             {
-                HandleLearnNewTalent(newCharacter, tp.talentSchool);
+                newCharacter.talentPairings.Add(new TalentPairing
+                {
+                    talentSchool = tp.talentSchool,
+                    level = tp.level
+                });
             }
 
             return newCharacter;

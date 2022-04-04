@@ -628,6 +628,9 @@ namespace HexGameEngine.Abilities
                         // Start free strike attack
                         UseAbility(target, RiposteAbility, caster);
                         VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+
+                        // Remove a riposte stack
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(caster.pManager, Perk.Riposte, -1, false);
                     }                       
                 }
                 

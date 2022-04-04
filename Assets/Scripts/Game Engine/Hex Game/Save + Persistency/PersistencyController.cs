@@ -20,10 +20,15 @@ namespace HexGameEngine.Persistency
 
         // Properties + Getters
         #region
-        public const string SAVE_DIRECTORY = "/SaveFile.json";
+        private const string SAVE_DIRECTORY = "/SaveFile.json";
+        private const string TEST_SAVE_DIRECTORY = "/TestSaveFile.json";
         public string GetSaveFileDirectory()
         {
-            return Application.persistentDataPath + SAVE_DIRECTORY;
+            if (GlobalSettings.Instance == null)
+                return Application.persistentDataPath + SAVE_DIRECTORY;
+            else if (GlobalSettings.Instance.GameMode == GameMode.Standard)
+                return Application.persistentDataPath + SAVE_DIRECTORY;
+            else return Application.persistentDataPath + TEST_SAVE_DIRECTORY;
         }
         #endregion
 

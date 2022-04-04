@@ -19,6 +19,7 @@ using System.Linq;
 using System;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.Pathfinding;
+using HexGameEngine.UI;
 
 namespace HexGameEngine.Characters
 {
@@ -946,6 +947,13 @@ namespace HexGameEngine.Characters
             // Disable end turn button clickability
             TurnController.Instance.DisableEndTurnButtonInteractions();
             TurnController.Instance.DisableDelayTurnButtonInteractions();
+
+            // Disable info windows
+            if(character.controller == Controller.Player)
+            {
+                AbilityPopupController.Instance.HidePanel();
+                AbilityController.Instance.HideHitChancePopup();
+            }
 
             // Stop if combat has ended
             if (CombatController.Instance.CurrentCombatState != CombatGameState.CombatActive)

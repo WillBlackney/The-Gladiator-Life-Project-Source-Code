@@ -281,7 +281,7 @@ namespace HexGameEngine.DraftEvent
         public void StartBuildAndShowDraftCharacterScreenInitialSequence()
         {
             // Generate and get draft characters
-            draftCharacterData = CharacterDataController.Instance.GenerateRecruitCharacters(CharacterDataController.Instance.AllPlayerCharacters[0]); ;
+            draftCharacterData = CharacterDataController.Instance.GenerateCompanionCharacters(CharacterDataController.Instance.AllPlayerCharacters[0]); ;
 
             // Build draft character boxes + views
             BuildAllCharacterBoxes(PopThreeCharacters(draftCharacterData));
