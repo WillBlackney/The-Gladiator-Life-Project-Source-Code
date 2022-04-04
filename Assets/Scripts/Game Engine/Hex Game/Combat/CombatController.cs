@@ -12,6 +12,7 @@ using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.UI;
+using HexGameEngine.Persistency;
 
 namespace HexGameEngine.Combat
 {
@@ -1141,18 +1142,11 @@ namespace HexGameEngine.Combat
             if (HexCharacterController.Instance.AllDefenders.Count == 0 &&
                 currentCombatState == CombatGameState.CombatActive)
             {
+                currentCombatState = CombatGameState.CombatInactive;
                 // Game over? or just normal defeat?
-                if(RunController.Instance.CurrentCombatContractData.enemyEncounterData.difficulty == CombatDifficulty.Boss)
-                {
-                    // Game over on boss defeat
-                }
-                else
-                {
-                    currentCombatState = CombatGameState.CombatInactive;
-                    GameController.Instance.StartCombatDefeatSequence();
-                }
-              
-
+                if (RunController.Instance.CurrentCombatContractData.enemyEncounterData.difficulty == CombatDifficulty.Boss)                
+                    GameController.Instance.StartGameOverSequenceFromCombat();            
+                else GameController.Instance.StartCombatDefeatSequence();
             }
 
             // Check if the combat victory event should be triggered

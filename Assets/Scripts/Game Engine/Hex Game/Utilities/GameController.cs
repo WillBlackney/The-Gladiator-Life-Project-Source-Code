@@ -348,7 +348,63 @@ namespace HexGameEngine
         }
         private IEnumerator StartGameOverSequenceFromCombatCoroutine()
         {
-            yield return null;
+            // Delete save file
+            PersistencyController.Instance.DeleteSaveFileOnDisk();
+
+            // Set state
+            SetGameState(GameState.CombatRewardPhase);
+
+            // wait until v queue count = 0
+            yield return new WaitUntil(() => VisualEventManager.Instance.EventQueue.Count == 0);
+
+            // Zoom camera to reset settings
+            CameraController.Instance.DoPostCombatZoomAndMove(1f);
+
+            // Tear down summoned characters + enemies
+            List<HexCharacterModel> destCharacters = new List<HexCharacterModel>();
+            destCharacters.AddRange(HexCharacterController.Instance.AllSummonedDefenders);
+            destCharacters.AddRange(HexCharacterController.Instance.AllEnemies);
+            foreach (HexCharacterModel model in destCharacters)
+            {
+                // Smokey vanish effect
+                VisualEffectManager.Instance.CreateExpendEffect(model.hexCharacterView.WorldPosition, 15, 0.2f, false);
+
+                // Fade out character model
+                CharacterModeller.FadeOutCharacterModel(model.hexCharacterView.ucm, 1f);
+
+                // Fade out UI elements
+                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
+                HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
+                if (model.hexCharacterView.uiCanvasParent.activeSelf == true)
+                {
+                    HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
+                }
+            }
+
+            // Disable any player character gui's if they're still active
+            foreach (HexCharacterModel model in HexCharacterController.Instance.AllDefenders)
+            {
+                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
+                HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
+                if (model.hexCharacterView != null && model.hexCharacterView.uiCanvasParent.activeSelf == true)
+                {
+                    HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
+                }
+            }
+
+            // Hide level nodes
+            LevelController.Instance.HideAllNodeViews();
+
+            // Destroy Activation windows
+            TurnController.Instance.DestroyAllActivationWindows();
+
+            // Hide end turn button
+            TurnController.Instance.DisableEndTurnButtonView();
+            TurnController.Instance.DisableDelayTurnButtonView();
+
+            // Show Game over screen
+            CombatRewardController.Instance.BuildAndShowGameOverScreen();
+
         }
 
         public void HandlePostCombatToTownTransistion()
@@ -482,15 +538,16 @@ namespace HexGameEngine
             LightController.Instance.EnableStandardGlobalLight();
 
             // Hide world map + roster
-            MapView.Instance.HideMainMapView();
+            //MapView.Instance.HideMainMapView();
             CharacterRosterViewController.Instance.HideCharacterRosterScreen();
 
-            // Hide Loot screen elements
-            CombatRewardController.Instance.HidePostCombatRewardScreen();
-
             // Hide Draft event elements
-            DraftEventController.Instance.HideMainViewParent();
-            LevelController.Instance.DisableGraveyardScenery();
+            //DraftEventController.Instance.HideMainViewParent();
+            LevelController.Instance.DisableArenaView();
+
+            // Hide post combat views
+            CombatRewardController.Instance.HideGameOverScreen();
+            CombatRewardController.Instance.HidePostCombatRewardScreen();
 
             // Fade in menu music
             AudioManager.Instance.FadeInSound(Sound.Music_Main_Menu_Theme_1, 1f);
@@ -533,6 +590,10 @@ namespace HexGameEngine
             // Load the encounter the player saved at
             //HandleLoadEncounter(RunController.Instance.CurrentEncounterType);
         }
+        public void OnGameOverScreenMainMenuButtonClicked()
+        {
+            HandleQuitToMainMenuFromInGame();
+        }
         #endregion
 
         // Load Encounters Logic (General)
@@ -570,231 +631,6 @@ namespace HexGameEngine
 
             // Setup enemy characters
             HexCharacterController.Instance.SpawnEnemyEncounter(RunController.Instance.CurrentCombatContractData.enemyEncounterData);
-
-            // Place characters off screen
-            HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();
-
-            // Move characters towards start nodes
-            CoroutineData cData = new CoroutineData();
-            VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
-
-            // Start a new combat event
-            TurnController.Instance.OnNewCombatEventStarted();
-        }
-
-
-
-        public void HandleLoadEncounter(EncounterType encounter)
-        {
-            Debug.LogWarning("EventSequenceController.HandleLoadEncounter() loading: " + encounter.ToString());
-
-            if ((encounter == EncounterType.BasicEnemy ||
-                encounter == EncounterType.EliteEnemy ||
-                 encounter == EncounterType.MysteryCombat ||
-                encounter == EncounterType.BossEnemy) &&
-                RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatStart
-                )
-            {
-                
-                //HandleLoadCombatEncounter(RunController.Instance.CurrentCombatContractData);
-            }
-
-            else if ((encounter == EncounterType.BasicEnemy ||
-                 encounter == EncounterType.MysteryCombat ||
-                encounter == EncounterType.EliteEnemy) &&
-                RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatEnd
-                )
-            {
-                BlackScreenController.Instance.FadeInScreen(1f);
-               // LevelManager.Instance.EnableDungeonScenery();
-                //CharacterEntityController.Instance.CreateAllPlayerCombatCharacters();
-                //StartCombatVictorySequence(encounter);
-            }
-
-            /*
-            else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.DraftEvent)
-            {
-                HandleLoadCharacterDraftEvent();
-            }*/
-
-            /*
-            else if (JourneyManager.Instance.CheckPointType == SaveCheckPoint.CampSite)
-            {
-                HandleLoadCampSiteEvent();
-            }
-            else if (JourneyManager.Instance.CheckPointType == SaveCheckPoint.Shop)
-            {
-                HandleLoadShopEvent();
-            }
-            else if (JourneyManager.Instance.CheckPointType == SaveCheckPoint.Shrine)
-            {
-                HandleLoadShrineEvent();
-            }
-            else if (JourneyManager.Instance.CheckPointType == SaveCheckPoint.MysteryEventStart)
-            {
-                HandleLoadMysteryEvent();
-            }
-            */
-        }
-        public void HandleLoadNextEncounter(MapNode mapNode)
-        {
-            StartCoroutine(HandleLoadNextEncounterCoroutine(mapNode));
-        }
-        private IEnumerator HandleLoadNextEncounterCoroutine(MapNode mapNode)
-        {
-            yield return null;
-            // Hide world map view
-            MapView.Instance.HideMainMapView();
-
-            // Cache previous encounter data 
-            EncounterType nextEncounterType = mapNode.Node.NodeType;
-            //EncounterType previousEncounter = RunController.Instance.CurrentEncounterType;
-            //EnemyEncounterData previousEnemyWave = RunController.Instance.CurrentCombatContractData;
-
-            // If mystery node, roll for story event, combat or shop
-            if (nextEncounterType == EncounterType.Story)
-            {
-                int roll = RandomGenerator.NumberBetween(1, 100);
-                if (roll >= 81 && roll <= 90)
-                {
-                    nextEncounterType = EncounterType.BasicEnemy;
-                }
-                else if (roll >= 91 && roll <= 95)
-                {
-                    nextEncounterType = EncounterType.EliteEnemy;
-                }
-                else if (roll >= 96 && roll <= 100)
-                {
-                    nextEncounterType = EncounterType.Shop;
-                }
-
-                Debug.Log("Mystery event roll result: " + nextEncounterType.ToString());
-
-                /* UNCOMMENT AFTER REIMPLEMENTING STORY EVENTS
-                 * 
-                // Force roll as combat event if no available story events
-                if (nextEncounterType == EncounterType.Story &&
-                   StoryEventController.Instance.GetValidStoryEvents().Count == 0)
-                {
-                    nextEncounterType = EncounterType.BasicEnemy;
-                    Debug.Log("No valid story events at this time, next encounter will be a basic enemy combat...");
-                }
-                */
-            }
-
-            // Increment world position + set next encounter
-            //ScoreManager.Instance.IncrementRoomsCleared();
-            //RunController.Instance.SetCurrentEncounterType(nextEncounterType);
-
-            /*
-            // Destroy all characters and activation windows if the previous encounter was a combat event
-            if (previousEncounter == EncounterType.BasicEnemy ||
-                previousEncounter == EncounterType.EliteEnemy ||
-                previousEncounter == EncounterType.MysteryCombat)
-            {
-                // Mark wave as seen
-                RunController.Instance.AddEnemyWaveToAlreadyEncounteredList(previousEnemyWave);
-
-                // Update scoring
-                // if (previousEncounter == EncounterType.BasicEnemy) ScoreManager.Instance.IncrementBasicsCleared();
-                // else if (previousEncounter == EncounterType.EliteEnemy) ScoreManager.Instance.IncrementMinibossesCleared();
-
-                // Fade out visual event
-                BlackScreenController.Instance.FadeOutScreen(1.5f);
-
-                // Hide Loot screen elements
-                CombatRewardController.Instance.HidePostCombatRewardScreen();
-
-                // Move characters off screen
-                HexCharacterController.Instance.MoveCharactersToOffScreenRight(HexCharacterController.Instance.AllDefenders, null);
-                AudioManager.Instance.FadeOutSound(Sound.Environment_Camp_Fire, 3f);
-
-                // Zoom and move camera & Fade foot steps
-                yield return new WaitForSeconds(0.5f);
-                AudioManager.Instance.FadeOutSound(Sound.Character_Footsteps, 2.5f);
-                CameraController.Instance.DoCameraMove(3, 0, 3f);
-                CameraController.Instance.DoCameraZoom(5, 3, 3f);
-
-                // Wait for visual events
-                yield return new WaitForSeconds(4f);
-
-                // Tear down remaining combat views
-                HexCharacterController.Instance.HandleTearDownCombatScene();
-                LevelController.Instance.HandleTearDownCombatViews();
-                yield return new WaitForSeconds(1.5f);
-
-                
-
-            }
-            */
-
-            // ::: LOAD NEXT EVENT START :::
-
-            // Reset Camera
-            CameraController.Instance.ResetMainCameraPositionAndZoom();
-
-            /*
-            // If next event is a combat, get + set enemy wave before saving to disk
-            if (RunController.Instance.CurrentEncounterType == EncounterType.BasicEnemy ||
-                RunController.Instance.CurrentEncounterType == EncounterType.EliteEnemy ||
-                RunController.Instance.CurrentEncounterType == EncounterType.BossEnemy)
-            {
-                if (RunController.Instance.CurrentEncounterType == EncounterType.BasicEnemy)
-                {
-                    RunController.Instance.SetCurrentEnemyEncounter
-                        (RunController.Instance.GenerateEnemyEncounterFromTemplate
-                        (RunController.Instance.GetRandomCombatData(RunController.Instance.CurrentChapter, CombatDifficulty.Basic)));
-                }
-                
-                else if (RunController.Instance.CurrentEncounterType == EncounterType.EliteEnemy)
-                {
-                    RunController.Instance.SetCurrentEnemyEncounter
-                        (RunController.Instance.GenerateEnemyEncounterFromTemplate
-                        (RunController.Instance.GetRandomCombatData(RunController.Instance.CurrentChapter, CombatDifficulty.Elite)));
-                }
-
-
-                // Set check point
-                RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
-
-                // Auto save
-                PersistencyController.Instance.AutoUpdateSaveFile();
-
-                // Start Load combat
-                HandleLoadCombatEncounter(RunController.Instance.CurrentCombatEncounterData);
-            }
-
-            */
-        }
-        private void HandleLoadCombatEncounter(EnemyEncounterData enemyWave)
-        {
-            // Set state
-            SetGameState(GameState.CombatActive);
-            MapPlayerTracker.Instance.LockMap();
-
-            // Enable ambience if not playing
-            if (!AudioManager.Instance.IsSoundPlaying(Sound.Ambience_Crypt))            
-                AudioManager.Instance.FadeInSound(Sound.Ambience_Crypt, 1f);
-
-            // Enable world view
-            LightController.Instance.EnableDungeonGlobalLight();
-            LevelController.Instance.EnableNightTimeArenaScenery();
-            LevelController.Instance.ShowAllNodeViews();
-
-            // Spawn player characters
-            HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
-
-            // Spawn enemies in world
-            HexCharacterController.Instance.SpawnEnemyEncounter(enemyWave);           
-
-            // Camera Zoom out effect
-            CameraController.Instance.DoCameraZoom(4, 5, 1);
-
-            // Play battle music
-            AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
-
-            // Fade In
-            BlackScreenController.Instance.FadeInScreen(1f);
 
             // Place characters off screen
             HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();

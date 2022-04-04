@@ -34,6 +34,9 @@ namespace HexGameEngine.RewardSystems
         [SerializeField] private GameObject[] statCardRows;
         [SerializeField] private CombatLootIcon[] lootIcons;
 
+        [Header("Game Over Screen Components")]
+        [SerializeField] private GameObject gameOverVisualParent;
+
         private List<CharacterCombatStatData> currentStatResults = new List<CharacterCombatStatData>();
 
         private WindowState currentWindowViewing = WindowState.CharactersPage;
@@ -153,7 +156,14 @@ namespace HexGameEngine.RewardSystems
                 headerText.text = "VICTORY!";
                 BuildLootPageFromContractLootData(contractData);
             }
-            else headerText.text = "DEFEAT!";
+            else
+            {
+                // Hide Loot Icons
+                for (int i = 0; i < lootIcons.Length; i++)
+                    lootIcons[i].Reset();
+
+                headerText.text = "DEFEAT!";
+            }
 
         }
         private void BuildCharacterStatCardPage(List<CharacterCombatStatData> data)
@@ -281,7 +291,19 @@ namespace HexGameEngine.RewardSystems
                 GameController.Instance.HandlePostCombatToTownTransistion();
             }
         }
-     
+
+        #endregion
+
+        // Game Over Screen Logic
+        #region
+        public void BuildAndShowGameOverScreen()
+        {
+            gameOverVisualParent.SetActive(true);
+        }
+        public void HideGameOverScreen()
+        {
+            gameOverVisualParent.SetActive(false);
+        }
         #endregion
 
     }

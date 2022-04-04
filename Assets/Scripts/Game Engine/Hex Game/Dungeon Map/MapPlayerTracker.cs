@@ -70,7 +70,7 @@ namespace HexGameEngine.DungeonMap
         {
             Debug.Log("Entering node: " + mapNode.Node.BlueprintName + " of type: " + mapNode.Node.NodeType);
 
-            GameController.Instance.HandleLoadNextEncounter(mapNode);
+            //GameController.Instance.HandleLoadNextEncounter(mapNode);
 
         }
 
