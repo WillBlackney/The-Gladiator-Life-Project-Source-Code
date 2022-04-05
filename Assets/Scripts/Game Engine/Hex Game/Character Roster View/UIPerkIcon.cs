@@ -43,7 +43,6 @@ namespace HexGameEngine.UI
         }
         public void BuildFromPerkData(ActivePerk p)
         {
-            //PerkIconData data = PerkController.Instance.GetPerkIconDataByTag(p.perkTag);
             PerkIconData data = p.Data;
             SetMyDataReference(data);
             gameObject.SetActive(true);

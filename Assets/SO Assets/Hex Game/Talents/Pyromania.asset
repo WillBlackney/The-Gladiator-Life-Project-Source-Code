@@ -43,4 +43,6 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: targets.
-  keyWords: []
+  keyWords:
+  - kewWordType: 1
+    passiveType: 1

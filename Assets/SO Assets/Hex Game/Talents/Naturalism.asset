@@ -39,4 +39,6 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: per point.
-  keyWords: []
+  keyWords:
+  - kewWordType: 28
+    passiveType: 0
