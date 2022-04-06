@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Grazed Eye Socket
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: cc66d0ed4ef44cf45a2e48fb61eb5a73, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 197bf28d7be66474dadb85b5f86f2c6e, type: 3}
   passiveName: Grazed Eye Socket
   perkTag: 31
   passiveDescription:
@@ -20,6 +20,18 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'This character has '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '-10 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Accuracy '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -44,7 +56,7 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: abilities.
-  maxAllowedStacks: 1
+  maxAllowedStacks: 10
   showStackCount: 0
   hiddenOnPassivePanel: 0
   isRewardable: 0
@@ -53,6 +65,7 @@ MonoBehaviour:
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
   isInjury: 1
+  isPermanentInjury: 0
   severity: 1
   injuryType: 1
   isRacial: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Exposed Ribs
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: cc66d0ed4ef44cf45a2e48fb61eb5a73, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 862e9a3256d747946a2f9d6f82d96037, type: 3}
   passiveName: Exposed Ribs
   perkTag: 43
   passiveDescription:
@@ -23,7 +23,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '-30 '
+    phrase: '-35 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: .
-  maxAllowedStacks: 1
+  maxAllowedStacks: 10
   showStackCount: 0
   hiddenOnPassivePanel: 0
   isRewardable: 0
@@ -41,6 +41,7 @@ MonoBehaviour:
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
   isInjury: 1
+  isPermanentInjury: 0
   severity: 2
   injuryType: 1
   isRacial: 0

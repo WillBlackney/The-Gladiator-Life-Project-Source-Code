@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Crippled Knee
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: cc66d0ed4ef44cf45a2e48fb61eb5a73, type: 3}
+  passiveSprite: {fileID: 21300000, guid: ec0835ed24cf28c4daf59fb5e7c7f668, type: 3}
   passiveName: Crippled Knee
   perkTag: 134
   passiveDescription:

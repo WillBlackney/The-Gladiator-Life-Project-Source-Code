@@ -478,7 +478,6 @@ namespace HexGameEngine
         BrokenNose = 27,
         BrokenRibs = 28,
         BrokenFinger = 29,
-        BrokenWrist = 30,
         GrazedEyeSocket = 31,
         DislocatedShoulder = 32,
         BrokenArm = 33,
@@ -489,11 +488,8 @@ namespace HexGameEngine
         BrokenHip = 38,
         BruisedKidney = 39,
         DeepAbdominalCut = 40,
-        SlicedEar = 41,
-        StabbedLeg = 42,
         ExposedRibs = 43,
         CutArtery = 44,
-        PiercedArmMuscles = 45,
 
         // Permanent Injuries
         MissingEye = 129,

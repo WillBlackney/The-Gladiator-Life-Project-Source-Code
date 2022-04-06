@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Cut Artery
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: cc66d0ed4ef44cf45a2e48fb61eb5a73, type: 3}
+  passiveSprite: {fileID: 21300000, guid: cc9041445d8bd5746ae1d3d08e307f91, type: 3}
   passiveName: Cut Artery
   perkTag: 44
   passiveDescription:
@@ -23,16 +23,28 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '-30 '
+    phrase: '-20 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Injury Resistance
+    phrase: 'Injury Resistance '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '-20 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Physical Resistance
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: .
-  maxAllowedStacks: 1
+  maxAllowedStacks: 10
   showStackCount: 0
   hiddenOnPassivePanel: 0
   isRewardable: 0
@@ -41,7 +53,8 @@ MonoBehaviour:
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
   isInjury: 1
-  severity: 2
+  isPermanentInjury: 0
+  severity: 1
   injuryType: 1
   isRacial: 0
   race: 0

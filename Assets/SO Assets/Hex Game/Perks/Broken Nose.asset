@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Broken Nose
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: cc66d0ed4ef44cf45a2e48fb61eb5a73, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 50845da2cb6e08740928f629370075ac, type: 3}
   passiveName: Broken Nose
   perkTag: 27
   passiveDescription:
@@ -32,7 +32,7 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: .
-  maxAllowedStacks: 1
+  maxAllowedStacks: 10
   showStackCount: 0
   hiddenOnPassivePanel: 0
   isRewardable: 0
@@ -41,6 +41,7 @@ MonoBehaviour:
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
   isInjury: 1
+  isPermanentInjury: 0
   severity: 1
   injuryType: 2
   isRacial: 0
