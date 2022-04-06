@@ -138,8 +138,10 @@ namespace HexGameEngine.TownFeatures
                 }
 
                 // to do: rebuild character's panel views to be available
-
+                var c = myCharacterData;
                 myCharacterData = null;
+                CharacterScrollPanelController.Instance.GetCharacterPanel(c).UpdateActivityIndicator();
+                
             }
         }
         #endregion

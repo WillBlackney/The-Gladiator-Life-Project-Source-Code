@@ -8,6 +8,7 @@ using HexGameEngine.Characters;
 using HexGameEngine.Persistency;
 using HexGameEngine.UI;
 using HexGameEngine.TownFeatures;
+using HexGameEngine.Perks;
 
 namespace HexGameEngine.JourneyLogic
 {
@@ -84,9 +85,10 @@ namespace HexGameEngine.JourneyLogic
             UpdateDayAndChapterTopbarText();
 
             // Pay daily wages
-            CharacterDataController.Instance.HandlePayDailyWagesOnNewDayStart();            
+            CharacterDataController.Instance.HandlePayDailyWagesOnNewDayStart();
 
             // Reduce all injury duration by 1 day
+            PerkController.Instance.HandleTickDownInjuriesOnNewDayStart();
 
             // Generate and apply effect of new random town events 
 
@@ -98,9 +100,10 @@ namespace HexGameEngine.JourneyLogic
 
             // Refresh library books
 
-            // Refresh black smith items
+            // Refresh armoury items
 
             // Characters in town features gain effect of hospital feature (heal, remove stress, remove all injuries, etc)
+            TownController.Instance.HandleApplyHospitalFeaturesOnNewDayStart();
 
             // All characters heal 10 health and 5 stress
             CharacterDataController.Instance.HandlePassiveStressAndHealthRecoveryOnNewDayStart();

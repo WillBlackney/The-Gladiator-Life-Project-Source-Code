@@ -105,6 +105,8 @@ namespace HexGameEngine.Perks
             p.injuryType = data.injuryType;
             p.severity = data.severity;
             p.isPermanentInjury = data.isPermanentInjury;
+            p.minInjuryDuration = data.minInjuryDuration;
+            p.maxInjuryDuration = data.maxInjuryDuration;
 
             p.isRacial = data.isRacial;
             p.race = data.race;
@@ -758,6 +760,19 @@ namespace HexGameEngine.Perks
             }
 
             return bRet;
+        }
+        public void HandleTickDownInjuriesOnNewDayStart()
+        {
+            foreach(HexCharacterData c in CharacterDataController.Instance.AllPlayerCharacters)
+            {
+                List<ActivePerk> injuries = GetAllInjuriesOnCharacter(c);
+
+                foreach(ActivePerk p in injuries)
+                {
+                    ModifyPerkOnCharacterData(c.passiveManager, p.perkTag, -1);
+                }
+
+            }
         }
         #endregion
 

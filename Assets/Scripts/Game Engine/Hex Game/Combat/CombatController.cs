@@ -509,7 +509,8 @@ namespace HexGameEngine.Combat
                     // Apply the injury
                     if (injuryGained != null)
                     {
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, injuryGained.perkTag, 1, true, 0.5f);
+                        int injuryStacks = RandomGenerator.NumberBetween(injuryGained.minInjuryDuration + 1, injuryGained.maxInjuryDuration + 1);
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, injuryGained.perkTag, injuryStacks, true, 0.5f);
 
                         // Stress Check events on injury applied
                         CreateStressCheck(character, StressEventType.InjuryGained);

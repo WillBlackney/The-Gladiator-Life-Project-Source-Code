@@ -71,6 +71,16 @@ namespace HexGameEngine.Perks
         [ShowIf("ShowInjuryFields")]
         [LabelWidth(200)]
         public InjuryType injuryType;
+        [VerticalGroup("Resistance Interactions")]
+        [ShowIf("ShowInjuryFields")]
+        [LabelWidth(200)]
+        [Range(1,12)]
+        public int minInjuryDuration;
+        [VerticalGroup("Resistance Interactions")]
+        [ShowIf("ShowInjuryFields")]
+        [LabelWidth(200)]
+        [Range(1, 12)]
+        public int maxInjuryDuration;
 
         [VerticalGroup("Resistance Interactions")]
         [LabelWidth(200)]
