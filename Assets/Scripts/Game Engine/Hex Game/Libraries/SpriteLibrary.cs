@@ -51,7 +51,7 @@ namespace HexGameEngine.Libraries
 
         // Attribute Images Images
         #region
-        [Header("Ability Type Images")]
+        [Header("Core Attribute Images")]
         [PreviewField(75)]
         [SerializeField]
         private Sprite strength;

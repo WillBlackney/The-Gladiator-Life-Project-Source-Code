@@ -1,6 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -68,6 +66,10 @@ namespace HexGameEngine.Characters
         [LabelWidth(100)]
         [GUIColor("Blue")]
         public int auraSize = 1;
+        [BoxGroup("Misc Attributes")]
+        [LabelWidth(100)]
+        [GUIColor("Blue")]
+        public int vision = 0;
 
         [BoxGroup("Resistances", centerLabel: true)]
         [LabelWidth(150)]
@@ -124,6 +126,7 @@ namespace HexGameEngine.Characters
             other.criticalChance = criticalChance;
             other.criticalModifier = criticalModifier;
             other.auraSize = auraSize;
+            other.vision = vision;
 
             other.physicalResistance = physicalResistance;
             other.magicResistance = magicResistance;

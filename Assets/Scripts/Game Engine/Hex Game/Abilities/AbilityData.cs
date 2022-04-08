@@ -31,6 +31,7 @@ namespace HexGameEngine.Abilities
         public int currentCooldown = 0;       
 
         public int baseRange = 0;
+        public bool gainRangeBonusFromVision = false;
         public int hitChanceModifier;
         public bool accuracyPenaltyFromMelee = false;
 

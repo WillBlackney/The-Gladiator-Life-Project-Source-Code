@@ -31,7 +31,8 @@ MonoBehaviour:
     talentSchool: 6
     level: 1
   abilitySubRequirements: []
-  baseRange: 2
+  baseRange: 3
+  gainRangeBonusFromVision: 1
   hitChanceModifier: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:

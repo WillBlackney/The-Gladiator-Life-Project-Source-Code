@@ -35,6 +35,7 @@ MonoBehaviour:
   - type: 1
     healthRequired: 0
   baseRange: 1
+  gainRangeBonusFromVision: 1
   hitChanceModifier: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:

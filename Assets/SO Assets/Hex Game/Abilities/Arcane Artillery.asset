@@ -33,8 +33,9 @@ MonoBehaviour:
     level: 1
   abilitySubRequirements: []
   baseRange: 2
+  gainRangeBonusFromVision: 1
   hitChanceModifier: 0
-  accuracyPenaltyFromMelee: 0
+  accuracyPenaltyFromMelee: 1
   abilityEffects:
   - effectType: 3
     stressEventData:

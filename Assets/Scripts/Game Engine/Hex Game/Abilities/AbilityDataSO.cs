@@ -103,6 +103,12 @@ namespace HexGameEngine.Abilities
         [BoxGroup("Range Settings")]
         [LabelWidth(200)]
         [GUIColor("Yellow")]
+        [ShowIf("ShowGainRangeBonusFromVision")]
+        public bool gainRangeBonusFromVision = false;
+
+        [BoxGroup("Range Settings")]
+        [LabelWidth(200)]
+        [GUIColor("Yellow")]
         [ShowIf("ShowHitChanceModifier")]
         [Range(-50, 50)]
         public int hitChanceModifier;
@@ -178,6 +184,10 @@ namespace HexGameEngine.Abilities
             return targetRequirement != TargetRequirement.NoTarget;
         }
         public bool ShowBaseRangeBonus()
+        {
+            return targetRequirement != TargetRequirement.NoTarget;
+        }
+        public bool ShowGainRangeBonusFromVision()
         {
             return targetRequirement != TargetRequirement.NoTarget;
         }

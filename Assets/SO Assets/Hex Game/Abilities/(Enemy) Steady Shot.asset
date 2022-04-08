@@ -33,6 +33,7 @@ MonoBehaviour:
     level: 0
   abilitySubRequirements: []
   baseRange: 4
+  gainRangeBonusFromVision: 1
   hitChanceModifier: 10
   accuracyPenaltyFromMelee: 1
   abilityEffects:

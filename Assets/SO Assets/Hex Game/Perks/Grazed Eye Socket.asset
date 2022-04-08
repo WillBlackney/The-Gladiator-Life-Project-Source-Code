@@ -36,26 +36,14 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: '-1 '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'range with '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Ranged Attack '
+    phrase: Vision
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'and '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'Skill '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: abilities.
+    phrase: .
   maxAllowedStacks: 10
   showStackCount: 0
   hiddenOnPassivePanel: 0

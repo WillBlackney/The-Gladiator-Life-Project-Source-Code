@@ -562,8 +562,8 @@ namespace HexGameEngine.Combat
             if (accuracyMod != 0) ret.details.Add(new HitChanceDetailData("Accuracy", accuracyMod));
 
             // Stress State            
-            StressState stressState = CombatController.Instance.GetStressStateFromStressAmount(attacker.currentStress);
-            int stressMod = CombatController.Instance.GetStatMultiplierFromStressState(stressState);
+            StressState stressState = GetStressStateFromStressAmount(attacker.currentStress);
+            int stressMod = GetStatMultiplierFromStressState(stressState);
             ret.details.Add(new HitChanceDetailData(stressState.ToString(), stressMod));
 
             // Melee modifiers

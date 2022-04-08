@@ -835,6 +835,45 @@ namespace HexGameEngine
 
             return aura;
         }
+        public static int GetTotalVision(HexCharacterModel c)
+        {
+            int vision = c.attributeSheet.auraSize;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.EagleEye))
+                vision += 1;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Clairvoyant))
+                vision += 1;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.GrazedEyeSocket))
+                vision -= 1;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingEye))
+                vision -= 1;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ShortSighted))
+                vision -= 1;
+
+            return vision;
+        }
+        public static int GetTotalVision(HexCharacterData c)
+        {
+            int vision = c.attributeSheet.auraSize;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.EagleEye))
+                vision += 1;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Clairvoyant))
+                vision += 1;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.GrazedEyeSocket))
+                vision -= 1;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingEye))
+                vision -= 1;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ShortSighted))
+                vision -= 1;
+            return vision;
+        }
 
         #endregion
 

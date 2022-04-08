@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Unholy Gift
   includeInGame: 1
-  baseAbilityDescription: Give an ally 2 Wrath and 2 Block.
+  baseAbilityDescription: Give an ally 2 Wrath and 2 Focus.
   abilitySprite: {fileID: 21300000, guid: aedc92aafd3884840b8d1c38ac208f97, type: 3}
   energyCost: 6
   baseCooldown: 3
@@ -32,6 +32,7 @@ MonoBehaviour:
     level: 1
   abilitySubRequirements: []
   baseRange: 2
+  gainRangeBonusFromVision: 1
   hitChanceModifier: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
@@ -152,7 +153,7 @@ MonoBehaviour:
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
     perkPairing:
-      perkTag: 74
+      perkTag: 75
       passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
@@ -185,7 +186,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Block
+    phrase: Focus
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -194,6 +195,6 @@ MonoBehaviour:
   - kewWordType: 5
     passiveType: 0
   - kewWordType: 1
-    passiveType: 74
-  - kewWordType: 1
     passiveType: 50
+  - kewWordType: 1
+    passiveType: 75

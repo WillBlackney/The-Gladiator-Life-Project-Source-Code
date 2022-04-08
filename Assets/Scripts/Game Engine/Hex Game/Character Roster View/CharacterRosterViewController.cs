@@ -95,6 +95,7 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI staminaText;
         [SerializeField] private TextMeshProUGUI maxEnergyText;
         [SerializeField] private TextMeshProUGUI initiativeText;
+        [SerializeField] private TextMeshProUGUI visionText;
         [Space(20)]
         [Header("Resistances Text Components")]
         [SerializeField] private TextMeshProUGUI physicalResistanceText;
@@ -281,6 +282,7 @@ namespace HexGameEngine.UI
             staminaText.text = StatCalculator.GetTotalStamina(character).ToString();
             maxEnergyText.text = StatCalculator.GetTotalMaxEnergy(character).ToString();
             initiativeText.text = StatCalculator.GetTotalInitiative(character).ToString();
+            visionText.text = StatCalculator.GetTotalVision(character).ToString();
 
             physicalResistanceText.text = StatCalculator.GetTotalPhysicalResistance(character).ToString();
             magicResistanceText.text = StatCalculator.GetTotalMagicResistance(character).ToString();

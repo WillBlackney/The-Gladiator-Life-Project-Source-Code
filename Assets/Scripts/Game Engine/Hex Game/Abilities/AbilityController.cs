@@ -160,6 +160,7 @@ namespace HexGameEngine.Abilities
             a.baseCooldown = d.baseCooldown;
 
             a.baseRange = d.baseRange;
+            a.gainRangeBonusFromVision = d.gainRangeBonusFromVision;
             a.hitChanceModifier = d.hitChanceModifier;
             a.accuracyPenaltyFromMelee = d.accuracyPenaltyFromMelee;
             a.secondaryTargetRequirement = d.secondaryTargetRequirement;
@@ -1495,22 +1496,14 @@ namespace HexGameEngine.Abilities
                 "' used by character " + caster.myName);
 
             int rangeReturned = ability.baseRange;
-            if (ability.abilityType == AbilityType.RangedAttack || ability.abilityType == AbilityType.Skill)
+
+            if ((ability.abilityType == AbilityType.RangedAttack || ability.abilityType == AbilityType.Skill) && ability.gainRangeBonusFromVision)
             {
-                if (PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.EagleEye))
-                    rangeReturned += 1;
+                rangeReturned += StatCalculator.GetTotalVision(caster);
 
-                if (PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.Clairvoyant))
-                    rangeReturned += 1;
-
-                if (PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.GrazedEyeSocket))
-                    rangeReturned -= 1;
-
-                if (PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.MissingEye))
-                    rangeReturned -= 1;
-
-                if (PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.ShortSighted))
-                    rangeReturned -= 1;
+                // Check elevation range bonus
+                // if (caster.myCurrentHex.elevation == TileElevation.Elevated)
+                //    rangeReturned += 1;
             }
 
             if (rangeReturned < 1) rangeReturned = 1;
