@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accb5c33da2a75e479ff64dac541103c, type: 3}
+  m_Name: Debuff Resistance
+  m_EditorClassIdentifier: 
+  myPreset: 21
+  mainSprite: {fileID: 21300000, guid: 675c2573fbae18e488227360a59b1b0d, type: 3}
+  frameSprite: 1
+  headerName: Debuff Resistance
+  description:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: A character's stoutness when afflicted by harmful effects.
+  infoRows:
+  - dotStyle: 1
+    message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Each point increases a character's chance to completely resist a negative
+        effect by
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 1%
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: .

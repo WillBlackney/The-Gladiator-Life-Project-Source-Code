@@ -15,6 +15,7 @@ namespace HexGameEngine.UI
         #region
         [Header("Components")]
         [SerializeField] Canvas mainCanvas;
+        [SerializeField] CanvasGroup mainCg;
         [SerializeField] GameObject visualParent;
         [SerializeField] RectTransform positionParent;
         [SerializeField] RectTransform[] fitters;
@@ -24,10 +25,13 @@ namespace HexGameEngine.UI
         [SerializeField] Image framedImage;
         [SerializeField] Image unframedImage;
 
-        [Header("Proerties")]
-        [SerializeField] ModalBuildDataSO[] buildDataFiles;
+        [Header("Properties")]
+        [SerializeField] ModalBuildDataSO[] buildDataFiles;      
+        [SerializeField] private float baseOffset = 25f;
 
+        // Non inspector values
         private ModalSceneWidget currentlyMousedOver;
+        private ModalDirection currentDir = ModalDirection.SouthWest;
         #endregion
 
         // Getters + Accessors
@@ -51,6 +55,7 @@ namespace HexGameEngine.UI
         #region
         void Update()
         {
+            UpdateDynamicDirection();
             if (visualParent.activeSelf)
             {
                 Debug.Log("Mouse pos: " + Input.mousePosition);
@@ -58,27 +63,117 @@ namespace HexGameEngine.UI
                 Vector2 pos;
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(mainCanvas.transform as RectTransform, Input.mousePosition, mainCanvas.worldCamera, out pos);
                 positionParent.position = mainCanvas.transform.TransformPoint(pos);
+                positionParent.localPosition += (Vector3) GetMouseOffset(currentDir);
             }
         }       
+        void UpdateDynamicDirection()
+        {
+            Vector2 mousePos = Input.mousePosition;
+            currentDir = ModalDirection.SouthWest;
+            float xLimit = Screen.width / 5f;
+            float yLimit = Screen.height / 4f;
+
+            // too far north east
+            if (mousePos.x > Screen.width - xLimit &&
+                mousePos.y > Screen.height - yLimit)
+            {
+                Debug.Log("Too far north east");
+                currentDir = ModalDirection.SouthWest;
+            }
+                
+
+            // too far north west
+            else if (mousePos.x < xLimit &&
+                mousePos.y > Screen.height - yLimit)
+            {
+                Debug.Log("Too far north west");
+                currentDir = ModalDirection.SouthEast;
+            }
+
+
+            // too far south east
+            else if (mousePos.x > Screen.width - xLimit &&
+                mousePos.y < yLimit)
+            {
+                Debug.Log("Too far south east");
+                currentDir = ModalDirection.NorthWest;
+            }
+
+
+            // too far south west
+            else if (mousePos.x < xLimit &&
+                mousePos.y < yLimit)
+            {
+                Debug.Log("Too far south west");
+                currentDir = ModalDirection.NorthEast;
+            }
+        }
+        private Vector2 GetMouseOffset(ModalDirection dir)
+        {
+            Vector2 ret = new Vector2();
+            float x = 0;
+            float y = 0;
+
+            if (dir == ModalDirection.SouthEast)
+            {
+                x = ((positionParent.rect.width / 2) + baseOffset);
+                y = -((positionParent.rect.height / 2) + baseOffset);               
+            }
+            else if (dir == ModalDirection.SouthWest)
+            {
+                x = -((positionParent.rect.width / 2)+ baseOffset);
+                y = -((positionParent.rect.height / 2) + baseOffset);
+            }
+            else if (dir == ModalDirection.NorthEast)
+            {
+                x = ((positionParent.rect.width / 2) + baseOffset);
+                y = ((positionParent.rect.height / 2) + baseOffset);
+            }
+            else if (dir == ModalDirection.NorthWest)
+            {
+                x = -((positionParent.rect.width / 2) + baseOffset);
+                y = ((positionParent.rect.height / 2) + baseOffset);
+            }
+
+
+            ret = new Vector2(x, y);
+            return ret;
+        }
        
         public void HideModal()
         {
+            mainCg.DOKill();
+            mainCg.alpha = 0.01f;
             visualParent.SetActive(false);
         }
-        public void BuildAndShowModal(ModalBuildPreset preset, RectTransform mouseOverTransform = null, ModalSceneWidget w = null)
+        public void BuildAndShowModal(ModalSceneWidget w)
         {
-            ModalBuildDataSO data = GetBuildData(preset);
-            if (!data) return;
-
-            if (w != null) currentlyMousedOver = w;
-            visualParent.SetActive(true);
-            Reset();
-            UpdateFitters();            
-            BuildContentFromData(data);
-            UpdateFitters();
+            StartCoroutine(BuildAndShowModalCoroutine(w));
 
         }
-      
+        private IEnumerator BuildAndShowModalCoroutine(ModalSceneWidget w)
+        {
+            ModalBuildDataSO data = GetBuildData(w.preset);
+            if (!data) yield break;
+            currentlyMousedOver = w;
+
+            yield return new WaitForSeconds(0.25f);
+            if(currentlyMousedOver == w)
+            {
+                UpdateDynamicDirection();
+                visualParent.SetActive(true);
+                mainCg.DOKill();
+                mainCg.alpha = 0.01f;
+                mainCg.DOFade(1f, 0.25f);
+                Reset();
+                UpdateFitters();
+                BuildContentFromData(data);
+                UpdateFitters();
+            }
+            
+
+        }
+
         private void BuildContentFromData(ModalBuildDataSO data)
         {           
             headerText.text = data.headerName;
@@ -136,7 +231,7 @@ namespace HexGameEngine.UI
         }
         public void WidgetMouseEnter(ModalSceneWidget w)
         {
-            BuildAndShowModal(w.preset);
+            BuildAndShowModal(w);
         }
         #endregion
 
@@ -169,5 +264,17 @@ namespace HexGameEngine.UI
         DebuffResistance = 21,
        
 
+    }
+    public enum ModalDirection
+    {
+        None = 0,
+        North = 1,
+        NorthEast = 2,
+        SouthEast = 3,
+        South = 4,
+        SouthWest = 5,
+        NorthWest = 6,
+        East = 7,
+        West = 8,
     }
 }
