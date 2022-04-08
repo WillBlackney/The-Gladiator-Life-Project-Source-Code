@@ -645,83 +645,81 @@ namespace HexGameEngine
 
             return intitiative;
         }
-        public static int GetTotalStamina(HexCharacterModel c)
+        public static int GetTotalEnergyRecovery(HexCharacterModel c)
         {
-            int stamina = c.attributeSheet.stamina;
-            //if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DivineFavour))
-            //    stamina += 1;
+            int energyRecovery = c.attributeSheet.energyRecovery;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Dazed))
-                stamina -= 1;
+                energyRecovery -= 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fat))
-                stamina -= 1;
+                energyRecovery -= 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenNose))
-                stamina -= 2;
+                energyRecovery -= 2;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BruisedKidney))
-                stamina -= 1;
+                energyRecovery -= 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ScarredLung))
-                stamina -= 2;
+                energyRecovery -= 2;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenRibs))
-                stamina -= 3;
+                energyRecovery -= 3;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingNose))
-                stamina -= 1;
+                energyRecovery -= 1;
 
             // cant go below
-            if (stamina < 0)
-                stamina = 0;
+            if (energyRecovery < 0)
+                energyRecovery = 0;
             // Items
-            stamina += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Stamina, c.itemSet);
+            energyRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.EnergyRecovery, c.itemSet);
 
-            return stamina;
+            return energyRecovery;
 
         }
-        public static int GetTotalStamina(HexCharacterData c)
+        public static int GetTotalEnergyRecovery(HexCharacterData c)
         {
-            int stamina = c.attributeSheet.stamina;
+            int energyRecovery = c.attributeSheet.energyRecovery;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenNose))
-                stamina -= 2;
+                energyRecovery -= 2;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fat))
-                stamina -= 1;
+                energyRecovery -= 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BruisedKidney))
-                stamina -= 1;
+                energyRecovery -= 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenRibs))
-                stamina -= 3;
+                energyRecovery -= 3;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ScarredLung))
-                stamina -= 2;
+                energyRecovery -= 2;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingNose))
-                stamina -= 1;
+                energyRecovery -= 1;
 
             // cant go below
-            if (stamina < 0)
-                stamina = 0;
+            if (energyRecovery < 0)
+                energyRecovery = 0;
 
             // Items
-            stamina += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Stamina, c.itemSet);
+            energyRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.EnergyRecovery, c.itemSet);
 
-            return stamina;
+            return energyRecovery;
 
         }
         public static int GetTotalMaxEnergy(HexCharacterModel c)
         {
-            int stamina = c.attributeSheet.maxEnergy;
-            return stamina;
+            int maxEnergy = c.attributeSheet.maxEnergy;
+            return maxEnergy;
         }
         public static int GetTotalMaxEnergy(HexCharacterData c)
         {
-            int stamina = c.attributeSheet.maxEnergy;
-            return stamina;
+            int maxEnergy = c.attributeSheet.maxEnergy;
+            return maxEnergy;
         }
         public static float GetTotalCriticalChance(HexCharacterModel c)
         {

@@ -780,7 +780,7 @@ namespace HexGameEngine.Characters
             if (!character.hasRequestedTurnDelay)
             {
                 // Gain Energy + update energy views
-                int energyGain = StatCalculator.GetTotalStamina(character);
+                int energyGain = StatCalculator.GetTotalEnergyRecovery(character);
                 
                 // Check pyromania perk bonus
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Eager) && TurnController.Instance.CurrentTurn == 1)
@@ -1212,22 +1212,7 @@ namespace HexGameEngine.Characters
             int maxEnergyVfxValue = StatCalculator.GetTotalMaxEnergy(character);
             VisualEventManager.Instance.CreateVisualEvent(() => UpdateEnergyGUIElements(character, energyVfxValue, maxEnergyVfxValue), qPos, 0, 0);
 
-        }
-        public void ModifyBaseStamina(HexCharacterModel character, int staminaGainedOrLost)
-        {
-            Debug.Log("CharacterEntityController.ModifyBaseStamina() called for " + character.myName);
-            character.attributeSheet.stamina += staminaGainedOrLost;
-            HexCharacterView view = character.hexCharacterView;
-
-            if (character.attributeSheet.stamina < 0)
-            {
-                character.attributeSheet.stamina = 0;
-            }
-
-            int staminaVfxValue = StatCalculator.GetTotalStamina(character);
-
-            //VisualEventManager.Instance.CreateVisualEvent(() => UpdateStaminaGUI(view, staminaVfxValue), QueuePosition.Back, 0, 0);
-        }       
+        }             
         private void UpdateEnergyGUIElements(HexCharacterModel character, int energy, int maxEnergy)
         {
             // Convert energy int values to floats

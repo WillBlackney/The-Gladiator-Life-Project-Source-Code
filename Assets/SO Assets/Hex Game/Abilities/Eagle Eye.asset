@@ -207,3 +207,5 @@ MonoBehaviour:
     passiveType: 75
   - kewWordType: 1
     passiveType: 77
+  - kewWordType: 21
+    passiveType: 0

@@ -92,7 +92,7 @@ namespace HexGameEngine.UI
         [Header("Secondary Attribute Text Components")]
         [SerializeField] private TextMeshProUGUI criticalChanceText;
         [SerializeField] private TextMeshProUGUI criticalModifierText;
-        [SerializeField] private TextMeshProUGUI staminaText;
+        [SerializeField] private TextMeshProUGUI energyRecoveryText;
         [SerializeField] private TextMeshProUGUI maxEnergyText;
         [SerializeField] private TextMeshProUGUI initiativeText;
         [SerializeField] private TextMeshProUGUI visionText;
@@ -279,7 +279,7 @@ namespace HexGameEngine.UI
 
             criticalChanceText.text = StatCalculator.GetTotalCriticalChance(character).ToString();
             criticalModifierText.text = StatCalculator.GetTotalCriticalModifier(character).ToString();
-            staminaText.text = StatCalculator.GetTotalStamina(character).ToString();
+            energyRecoveryText.text = StatCalculator.GetTotalEnergyRecovery(character).ToString();
             maxEnergyText.text = StatCalculator.GetTotalMaxEnergy(character).ToString();
             initiativeText.text = StatCalculator.GetTotalInitiative(character).ToString();
             visionText.text = StatCalculator.GetTotalVision(character).ToString();
