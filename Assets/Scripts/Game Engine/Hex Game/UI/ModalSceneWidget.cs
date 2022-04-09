@@ -12,19 +12,35 @@ namespace HexGameEngine.UI
     public class ModalSceneWidget : MonoBehaviour
     {
         public ModalBuildPreset preset;
+        public UIPerkIcon myUIPerkIcon;
+
+        private static ModalSceneWidget mousedOver;
+        public static ModalSceneWidget MousedOver
+        {
+            get { return mousedOver; }
+        }
 
 
         public void MouseEnter()
         {
+            mousedOver = this;
             MainModalController.Instance.WidgetMouseEnter(this);
         }
         public void MouseExit()
         {
-            MainModalController.Instance.WidgetMouseExit(this);
+            if(mousedOver == this)
+            {
+                mousedOver = null;
+                MainModalController.Instance.WidgetMouseExit(this);
+            }
         }
         void OnDisable()
         {
-            MainModalController.Instance.WidgetMouseExit(this);
+            if (mousedOver == this)
+            {
+                mousedOver = null;
+                MainModalController.Instance.WidgetMouseExit(this);
+            }
         }
     }
 }

@@ -82,24 +82,6 @@ namespace HexGameEngine.UI
 
         // Perk + Talent Button Logic
         #region        
-        public void BuildPerkButton(ActivePerk p, UIPerkIcon b)
-        {
-            //PerkIconData data = PerkController.Instance.GetPerkIconDataByTag(p.perkTag);
-            PerkIconData data = p.Data;
-            b.SetMyDataReference(data);
-            b.gameObject.SetActive(true);
-            b.PerkImage.sprite = data.passiveSprite;
-        }
-        public void OnPerkButtonMouseOver(UIPerkIcon b)
-        {
-            CardController.Instance.BuildCardViewModelFromPerkTag(b.PerkDataRef.perkTag, perkTalentInfoCard);
-            ShowPerkTalentInfoCard(b.PopupPositon);
-            // to do: build key word lay out
-        }       
-        public void OnPerkButtonMouseExit()
-        {
-            HidePerkTalentInfoCard();
-        }
         public void OnTalentButtonMouseOver(UITalentIcon b)
         {
             CardController.Instance.BuildCardViewModelFromTalentData(b.MyTalentData.talentSchool, perkTalentInfoCard);

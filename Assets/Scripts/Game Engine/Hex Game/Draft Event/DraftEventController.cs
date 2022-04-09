@@ -477,7 +477,7 @@ namespace HexGameEngine.DraftEvent
             // Build Icons
             for (int i = 0; i < character.passiveManager.perks.Count; i++)
             {
-                UIController.Instance.BuildPerkButton(character.passiveManager.perks[i], rightPanelPerkIcons[i]);
+                rightPanelPerkIcons[i].BuildFromActivePerk(character.passiveManager.perks[i]);
             }
 
         }

@@ -6,6 +6,7 @@ using HexGameEngine.Utilities;
 using UnityEngine.UI;
 using HexGameEngine.CameraSystems;
 using TMPro;
+using HexGameEngine.Perks;
 
 namespace HexGameEngine.UI
 {
@@ -30,7 +31,6 @@ namespace HexGameEngine.UI
         [SerializeField] private float baseOffset = 25f;
 
         // Non inspector values
-        private ModalSceneWidget currentlyMousedOver;
         private ModalDirection currentDir = ModalDirection.SouthWest;
         #endregion
 
@@ -55,11 +55,10 @@ namespace HexGameEngine.UI
         #region
         void Update()
         {
-            UpdateDynamicDirection();
+           
             if (visualParent.activeSelf)
             {
                 Debug.Log("Mouse pos: " + Input.mousePosition);
-
                 Vector2 pos;
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(mainCanvas.transform as RectTransform, Input.mousePosition, mainCanvas.worldCamera, out pos);
                 positionParent.position = mainCanvas.transform.TransformPoint(pos);
@@ -69,7 +68,7 @@ namespace HexGameEngine.UI
         void UpdateDynamicDirection()
         {
             Vector2 mousePos = Input.mousePosition;
-            currentDir = ModalDirection.SouthWest;
+            currentDir = ModalDirection.SouthEast;
             float xLimit = Screen.width / 5f;
             float yLimit = Screen.height / 4f;
 
@@ -149,16 +148,26 @@ namespace HexGameEngine.UI
         public void BuildAndShowModal(ModalSceneWidget w)
         {
             StartCoroutine(BuildAndShowModalCoroutine(w));
-
+        }
+        public void BuildAndShowModal(ActivePerk perk)
+        {
+            UpdateDynamicDirection();
+            visualParent.SetActive(true);
+            mainCg.DOKill();
+            mainCg.alpha = 0.01f;
+            mainCg.DOFade(1f, 0.25f);
+            Reset();
+            UpdateFitters();
+            BuildModalContent(perk);
+            UpdateFitters();
         }
         private IEnumerator BuildAndShowModalCoroutine(ModalSceneWidget w)
         {
             ModalBuildDataSO data = GetBuildData(w.preset);
             if (!data) yield break;
-            currentlyMousedOver = w;
 
             yield return new WaitForSeconds(0.25f);
-            if(currentlyMousedOver == w)
+            if (ModalSceneWidget.MousedOver == w)
             {
                 UpdateDynamicDirection();
                 visualParent.SetActive(true);
@@ -167,14 +176,14 @@ namespace HexGameEngine.UI
                 mainCg.DOFade(1f, 0.25f);
                 Reset();
                 UpdateFitters();
-                BuildContentFromData(data);
+                BuildModalContent(data);
                 UpdateFitters();
             }
             
 
         }
-
-        private void BuildContentFromData(ModalBuildDataSO data)
+       
+        private void BuildModalContent(ModalBuildDataSO data)
         {           
             headerText.text = data.headerName;
 
@@ -203,6 +212,35 @@ namespace HexGameEngine.UI
             for (int i = 0; i < data.infoRows.Length; i++)
                 dottedRows[i].Build(data.infoRows[i]);
         }
+        private void BuildModalContent(ActivePerk ap)
+        {
+            headerText.text = ap.Data.passiveName;
+
+            // Main Image
+            framedImage.transform.parent.gameObject.SetActive(true);
+            framedImage.sprite = ap.Data.passiveSprite;
+
+            // Build description text
+            string description = ap.Data.passiveItalicDescription;
+            if (description == "") descriptionText.gameObject.SetActive(false);
+            else
+            {
+                descriptionText.gameObject.SetActive(true);
+                descriptionText.text = description;
+            }
+
+            // todo: change below once we had effect detail data to perk data files
+            dottedRows[0].Build(TextLogic.ConvertCustomStringListToString(ap.Data.passiveDescription), DotStyle.Neutral);
+
+            if (ap.Data.isInjury)
+            {
+                string mes = "Will heal in " + TextLogic.ReturnColoredText(ap.stacks.ToString(), TextLogic.blueNumber) + " days.";
+                dottedRows[1].Build(mes, DotStyle.Red);
+            }
+            else if (ap.Data.isPermanentInjury)            
+                dottedRows[1].Build("Permanent", DotStyle.Red);
+            
+        }
         private void Reset()
         {
             framedImage.transform.parent.gameObject.SetActive(false);
@@ -222,12 +260,7 @@ namespace HexGameEngine.UI
         #region
         public void WidgetMouseExit(ModalSceneWidget w)
         {
-            if (currentlyMousedOver = w)
-            {
-                currentlyMousedOver = null;
-                HideModal();
-            }
-
+            HideModal();
         }
         public void WidgetMouseEnter(ModalSceneWidget w)
         {

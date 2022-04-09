@@ -272,7 +272,7 @@ namespace HexGameEngine.TownFeatures
 
             // Build perk buttons
             for (int i = 0; i < character.passiveManager.perks.Count; i++)
-                recruitPerkIcons[i].BuildFromPerkData(character.passiveManager.perks[i]);
+                recruitPerkIcons[i].BuildFromActivePerk(character.passiveManager.perks[i]);
 
             // Build talent buttons
             for (int i = 0; i < character.talentPairings.Count; i++)

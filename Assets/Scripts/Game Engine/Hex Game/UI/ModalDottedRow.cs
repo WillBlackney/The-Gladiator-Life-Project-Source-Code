@@ -33,5 +33,14 @@ namespace HexGameEngine.UI
             else if (data.dotStyle == DotStyle.Green) dotImage.color = green;
             RebuildFitters();
         }
+        public void Build(string message, DotStyle style)
+        {
+            gameObject.SetActive(true);
+            mainText.text = message;
+            if (style == DotStyle.Neutral) dotImage.color = neutral;
+            else if (style == DotStyle.Red) dotImage.color = red;
+            else if (style == DotStyle.Green) dotImage.color = green;
+            RebuildFitters();
+        }
     }
 }

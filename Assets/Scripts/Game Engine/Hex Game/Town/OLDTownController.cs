@@ -209,16 +209,12 @@ namespace HexGameEngine.TownFeatures
             resolveText.text = character.attributeSheet.resolve.value.ToString();
 
             // Build perk buttons
-            for (int i = 0; i < character.passiveManager.perks.Count; i++)
-            {
-                UIController.Instance.BuildPerkButton(character.passiveManager.perks[i], recruitPerkIcons[i]);
-            }
+            for (int i = 0; i < character.passiveManager.perks.Count; i++)            
+                recruitPerkIcons[i].BuildFromActivePerk(character.passiveManager.perks[i]);            
 
             // Build talent buttons
-            for (int i = 0; i < character.talentPairings.Count; i++)
-            {
-                recruitTalentIcons[i].BuildFromTalentPairing(character.talentPairings[i]);
-            }
+            for (int i = 0; i < character.talentPairings.Count; i++)            
+                recruitTalentIcons[i].BuildFromTalentPairing(character.talentPairings[i]);            
 
             // Build abilities section
             // Main hand weapon abilities

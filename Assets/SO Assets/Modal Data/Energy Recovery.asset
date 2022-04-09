@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accb5c33da2a75e479ff64dac541103c, type: 3}
+  m_Name: Energy Recovery
+  m_EditorClassIdentifier: 
+  myPreset: 13
+  mainSprite: {fileID: 21300000, guid: 5b789f3e7b59e4e4a85f5dc3ddc07c4d, type: 3}
+  frameSprite: 1
+  headerName: Energy Recovery
+  description:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Reflects a character's fitness and the speed that they catch their breath.
+  infoRows:
+  - dotStyle: 1
+    message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'At the start of each turn, characters gain '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Energy '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'equal to their current '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Energy Recovery
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: ' attribute.'

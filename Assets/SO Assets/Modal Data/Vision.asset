@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accb5c33da2a75e479ff64dac541103c, type: 3}
+  m_Name: Vision
+  m_EditorClassIdentifier: 
+  myPreset: 12
+  mainSprite: {fileID: 8742143385516289682, guid: 6d42f09bb07c6d44d8f62879d17d3d78,
+    type: 3}
+  frameSprite: 1
+  headerName: Vision
+  description:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: The quality of a character's eye sight and ability to perceive details.
+  infoRows:
+  - dotStyle: 1
+    message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Each point modifies the range of most '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Ranged Attack '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'and '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Skill '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'abilities by '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 1
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: .

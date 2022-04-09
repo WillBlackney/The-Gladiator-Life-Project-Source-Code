@@ -20,7 +20,8 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: A character's cunning and ability to strike at the soft spots of an enemy.
+    phrase: A character's agression and ability to strike at the soft spots of an
+      enemy.
   infoRows:
   - dotStyle: 1
     message:

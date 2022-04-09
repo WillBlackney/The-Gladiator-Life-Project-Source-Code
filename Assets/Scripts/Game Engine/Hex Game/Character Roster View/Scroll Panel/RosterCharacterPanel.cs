@@ -27,6 +27,9 @@ namespace HexGameEngine.UI
         [SerializeField] Slider stressBar;
         [SerializeField] TextMeshProUGUI stressText;
 
+        [Header("Perk + Injury Components")]
+        [SerializeField] UIPerkIcon[] perkIcons;
+
         [Header("Activity Indicator Components")]
         [SerializeField] private GameObject[] activityIndicatorParents;
         [SerializeField] private Image activityIndicatorImage;
@@ -64,7 +67,17 @@ namespace HexGameEngine.UI
             healthBar.value = (float)((float) data.currentHealth / (float) StatCalculator.GetTotalMaxHealth(data));
             stressBar.value = (float)((float) data.currentStress / 100f);
 
-            // TO DO: Injuries
+            // Reset perk icons
+            foreach (UIPerkIcon b in perkIcons)
+                b.HideAndReset();
+
+            // Injury perk icons
+            for (int i = 0; i < data.passiveManager.perks.Count && i < perkIcons.Length; i++)
+            {
+                if(data.passiveManager.perks[i].Data.isInjury ||
+                    data.passiveManager.perks[i].Data.isPermanentInjury)
+                    perkIcons[i].BuildFromActivePerk(data.passiveManager.perks[i]);
+            }
         }
         public void UpdateActivityIndicator()
         {

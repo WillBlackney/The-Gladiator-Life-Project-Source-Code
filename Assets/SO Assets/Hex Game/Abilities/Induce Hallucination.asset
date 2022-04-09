@@ -218,7 +218,7 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: .
   keyWords:
-  - kewWordType: 3
+  - kewWordType: 4
     passiveType: 0
   - kewWordType: 1
     passiveType: 3

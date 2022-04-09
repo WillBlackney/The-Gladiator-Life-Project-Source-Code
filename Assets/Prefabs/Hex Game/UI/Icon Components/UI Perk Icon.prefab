@@ -84,6 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5358068474120544754}
   - component: {fileID: 486359399132862930}
+  - component: {fileID: 8626049251541270999}
   m_Layer: 0
   m_Name: UI Perk Icon
   m_TagString: Untagged
@@ -126,7 +127,118 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   perkImage: {fileID: 5358068475248262323}
-  popupPositon: 0
+  activePerk:
+    perkTag: 0
+    stacks: 0
+--- !u!114 &8626049251541270999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5358068474120544755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db09d9cca6141a47a3c991340f1f29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputType: 0
+  onClickEvents: []
+  mouseEnterEvents:
+  - widgetEvent: 9
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectDisabled: {fileID: 0}
+    objectEnabled: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 5358068474255745390}
+    text: {fileID: 0}
+    endColour: {r: 1, g: 1, b: 1, a: 1}
+    fadeSpeed: 0.2
+  - widgetEvent: 9
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectDisabled: {fileID: 0}
+    objectEnabled: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 5358068475248262323}
+    text: {fileID: 0}
+    endColour: {r: 1, g: 1, b: 1, a: 1}
+    fadeSpeed: 0.2
+  mouseExitEvents:
+  - widgetEvent: 9
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectDisabled: {fileID: 0}
+    objectEnabled: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 5358068474255745390}
+    text: {fileID: 0}
+    endColour: {r: 0.79607844, g: 0.79607844, b: 0.79607844, a: 1}
+    fadeSpeed: 0.2
+  - widgetEvent: 9
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectDisabled: {fileID: 0}
+    objectEnabled: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 5358068475248262323}
+    text: {fileID: 0}
+    endColour: {r: 0.79607844, g: 0.79607844, b: 0.79607844, a: 1}
+    fadeSpeed: 0.2
+  onDisableEvents:
+  - widgetEvent: 9
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectDisabled: {fileID: 0}
+    objectEnabled: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 5358068474255745390}
+    text: {fileID: 0}
+    endColour: {r: 0.79607844, g: 0.79607844, b: 0.79607844, a: 1}
+    fadeSpeed: 0.2
+  - widgetEvent: 9
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectDisabled: {fileID: 0}
+    objectEnabled: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 5358068475248262323}
+    text: {fileID: 0}
+    endColour: {r: 0.79607844, g: 0.79607844, b: 0.79607844, a: 1}
+    fadeSpeed: 0.2
+  pointerIsOverMe: 0
+  timeSinceLastPointerEnter: 0
 --- !u!1 &5358068474255745384
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
   m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -349,7 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
   m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:

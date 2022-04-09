@@ -14,7 +14,7 @@ namespace HexGameEngine.UI
         #region
         [SerializeField] private Image perkImage;
         [SerializeField] private PerkIconData perkDataRef;
-        [SerializeField] private PopupPositon popupPositon;
+        [SerializeField] private ActivePerk activePerk;
         #endregion
 
         // Getters + Accessors
@@ -26,10 +26,10 @@ namespace HexGameEngine.UI
         public PerkIconData PerkDataRef
         {
             get { return perkDataRef; }
-        }
-        public PopupPositon PopupPositon
+        }       
+        public ActivePerk ActivePerk
         {
-            get { return popupPositon; }
+            get { return activePerk; }
         }
 
 
@@ -41,17 +41,19 @@ namespace HexGameEngine.UI
         {
             perkDataRef = data;
         }
-        public void BuildFromPerkData(ActivePerk p)
+        public void BuildFromActivePerk(ActivePerk p)
         {
-            PerkIconData data = p.Data;
-            SetMyDataReference(data);
+            activePerk = p;
+            SetMyDataReference(p.Data);
             gameObject.SetActive(true);
-            PerkImage.sprite = data.passiveSprite;
+            PerkImage.sprite = p.Data.passiveSprite;
         }
+
         public void HideAndReset()
         {
             gameObject.SetActive(false);
             perkDataRef = null;
+            activePerk = null;
         }
         #endregion
 
@@ -59,11 +61,12 @@ namespace HexGameEngine.UI
         #region
         public void OnPointerEnter(PointerEventData eventData)
         {
-            UIController.Instance.OnPerkButtonMouseOver(this);
+            if(activePerk != null)            
+                MainModalController.Instance.BuildAndShowModal(activePerk);            
         }
         public void OnPointerExit(PointerEventData eventData)
         {
-            UIController.Instance.OnPerkButtonMouseExit();
+            MainModalController.Instance.HideModal();
         }
         #endregion
 

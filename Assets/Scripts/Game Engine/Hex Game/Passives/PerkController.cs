@@ -83,13 +83,15 @@ namespace HexGameEngine.Perks
             NegativeBackgroundPerks = negTemp.ToArray();
             NeutralBackgroundPerks = neutralTemp.ToArray();
         }
-        public PerkIconData BuildIconDataFromScriptableObjectData(PerkIconDataSO data)
+        private PerkIconData BuildIconDataFromScriptableObjectData(PerkIconDataSO data)
         {
             PerkIconData p = new PerkIconData();
             p.passiveName = data.passiveName;
             p.perkTag = data.perkTag;
             p.passiveDescription = data.passiveDescription;
-            p.passiveSprite = GetPassiveSpriteByName(data.passiveName);
+            p.passiveItalicDescription = data.passiveItalicDescription;
+            p.effectDetailTabs = data.effectDetailTabs;
+            p.passiveSprite = data.passiveSprite;// GetPassiveSpriteByName(data.passiveName);
             p.showStackCount = data.showStackCount;
             p.maxAllowedStacks = data.maxAllowedStacks;
             p.hiddenOnPassivePanel = data.hiddenOnPassivePanel;

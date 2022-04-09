@@ -4,6 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
+using HexGameEngine.UI;
 
 namespace HexGameEngine.Perks
 {
@@ -23,6 +24,14 @@ namespace HexGameEngine.Perks
         [VerticalGroup("Core Data/Properties")]
         [LabelWidth(200)]
         public List<CustomString> passiveDescription;
+        [VerticalGroup("Modal Data")]
+        [LabelWidth(200)]
+        [TextArea]
+        public string passiveItalicDescription;
+        [VerticalGroup("Modal Data")]
+        [LabelWidth(200)]
+        public ModalDotRowBuildData[] effectDetailTabs;
+
         [VerticalGroup("Core Data/Properties")]
         [LabelWidth(200)]
         [Range(1, 99)]

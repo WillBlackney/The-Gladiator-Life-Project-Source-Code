@@ -1,4 +1,5 @@
-﻿using HexGameEngine.Utilities;
+﻿using HexGameEngine.UI;
+using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace HexGameEngine.Perks
         public string passiveName;
         public Perk perkTag;
         public List<CustomString> passiveDescription;
+        public string passiveItalicDescription;
+        public ModalDotRowBuildData[] effectDetailTabs;
         public bool showStackCount;
         public bool hiddenOnPassivePanel;
         public bool isRewardable;

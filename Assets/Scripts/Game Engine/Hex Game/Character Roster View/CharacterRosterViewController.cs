@@ -239,8 +239,8 @@ namespace HexGameEngine.UI
             allPerks.AddRange(ItemController.Instance.GetActivePerksFromItemSet(character.itemSet));
 
             // Build perk button for each perk
-            for(int i = 0; i < allPerks.Count; i++)            
-                UIController.Instance.BuildPerkButton(allPerks[i], perkButtons[i]);            
+            for (int i = 0; i < allPerks.Count; i++)
+                perkButtons[i].BuildFromActivePerk(allPerks[i]);          
 
             Debug.Log("Active perk icons = " + allPerks.Count.ToString());           
 
