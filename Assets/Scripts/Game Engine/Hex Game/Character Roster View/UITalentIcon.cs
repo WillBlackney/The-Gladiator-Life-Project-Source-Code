@@ -16,7 +16,7 @@ namespace HexGameEngine.UI
         [SerializeField] TextMeshProUGUI talentLevelText;
         [SerializeField] GameObject talentLevelParent;
         [SerializeField] private PopupPositon popupPositon;
-        private TalentDataSO myTalentData;
+        private TalentPairing myTalentPairing;
         #endregion
 
         // Getters + Accessors
@@ -28,10 +28,10 @@ namespace HexGameEngine.UI
         public TextMeshProUGUI TalentLevelText
         {
             get { return talentLevelText; }
-        }       
-        public TalentDataSO MyTalentData
+        }        
+        public TalentPairing MyTalentPairing
         {
-            get { return myTalentData; }
+            get { return myTalentPairing; }
         }
         public PopupPositon PopupPositon
         {
@@ -43,13 +43,18 @@ namespace HexGameEngine.UI
         #region
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (myTalentData != null)
-                UIController.Instance.OnTalentButtonMouseOver(this);
+            if (myTalentPairing != null)
+            {
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(myTalentPairing.Data.keyWords);
+                MainModalController.Instance.BuildAndShowModal(myTalentPairing);
+            }
+                
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            UIController.Instance.OnTalentButtonMouseExit();
+            MainModalController.Instance.HideModal();
+            KeyWordLayoutController.Instance.FadeOutMainView();
         }
         #endregion
 
@@ -57,10 +62,9 @@ namespace HexGameEngine.UI
         #region
         public void BuildFromTalentPairing(TalentPairing tp)
         {
-            TalentDataSO talentData = CharacterDataController.Instance.GetTalentDataFromTalentEnum(tp.talentSchool);
-            myTalentData = talentData;
+            myTalentPairing = tp;
             gameObject.SetActive(true);
-            TalentImage.sprite = talentData.talentSprite;
+            TalentImage.sprite = tp.Data.talentSprite;
             talentLevelParent.SetActive(true);
             talentLevelText.text = tp.level.ToString();
         }      
@@ -68,7 +72,7 @@ namespace HexGameEngine.UI
         {
             gameObject.SetActive(false);
             talentLevelParent.SetActive(false);
-            myTalentData = null;
+            myTalentPairing = null;
         }
         #endregion
     }

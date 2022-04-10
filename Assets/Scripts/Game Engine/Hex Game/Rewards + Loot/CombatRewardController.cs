@@ -18,6 +18,7 @@ using HexGameEngine.TownFeatures;
 using HexGameEngine.Player;
 using HexGameEngine.Items;
 using TMPro;
+using HexGameEngine.UI;
 
 namespace HexGameEngine.RewardSystems
 {
@@ -190,8 +191,8 @@ namespace HexGameEngine.RewardSystems
             HexCharacterData character = data.characterData;
 
             // Reset
-            foreach (CharacterCombatStatCardPerkIcon p in card.InjuryIcons)            
-                p.gameObject.SetActive(false);
+            foreach (UIPerkIcon p in card.InjuryIcons)
+                p.HideAndReset();
             card.DeathIndicatorParent.SetActive(false);
             card.KnockDownIndicatorParent.SetActive(false);
             card.PortraitDeathIcon.SetActive(false);
@@ -202,16 +203,18 @@ namespace HexGameEngine.RewardSystems
             // ucm 
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(card.Ucm, character.modelParts);
 
+            
+
+            // Knock down views setup
+            if (data.permanentInjuriesGained.Count > 0)            
+                card.KnockDownIndicatorParent.SetActive(true);
+
             // Death views setup
-            if (data.died)
+            else if (data.died)
             {
                 card.PortraitDeathIcon.SetActive(true);
                 card.DeathIndicatorParent.SetActive(true);
             }
-
-            // Knock down views setup
-            if (data.permanentInjuriesGained.Count > 0)            
-                card.KnockDownIndicatorParent.SetActive(true);            
 
             // text fields
             card.NameText.text = character.myName;
@@ -230,10 +233,8 @@ namespace HexGameEngine.RewardSystems
             injuriesShown.AddRange(data.permanentInjuriesGained);
             for (int i = 0; i < injuriesShown.Count && i < 4; i++)
             {
-                PerkIconData perkData = PerkController.Instance.GetPerkIconDataByTag(injuriesShown[i]);
-                card.InjuryIcons[i].PerkImage.sprite = perkData.passiveSprite;
-                card.InjuryIcons[i].SetMyDataReference(perkData);
-                card.InjuryIcons[i].gameObject.SetActive(true);
+                ActivePerk ap = PerkController.Instance.GetActivePerkOnCharacter(character.passiveManager, injuriesShown[i]);
+                card.InjuryIcons[i].BuildFromActivePerk(ap);
             }
 
         }

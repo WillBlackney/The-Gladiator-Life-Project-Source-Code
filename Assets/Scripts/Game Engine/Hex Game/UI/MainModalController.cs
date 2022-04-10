@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using HexGameEngine.CameraSystems;
 using TMPro;
 using HexGameEngine.Perks;
+using HexGameEngine.Characters;
 
 namespace HexGameEngine.UI
 {
@@ -14,6 +15,10 @@ namespace HexGameEngine.UI
     {
         // Components + Properties
         #region
+        [Header("Properties")]
+        [SerializeField] ModalBuildDataSO[] buildDataFiles;
+        [SerializeField] private float baseMouseOffset = 10f;
+
         [Header("Components")]
         [SerializeField] Canvas mainCanvas;
         [SerializeField] CanvasGroup mainCg;
@@ -24,11 +29,7 @@ namespace HexGameEngine.UI
         [SerializeField] TextMeshProUGUI headerText;
         [SerializeField] TextMeshProUGUI descriptionText;
         [SerializeField] Image framedImage;
-        [SerializeField] Image unframedImage;
-
-        [Header("Properties")]
-        [SerializeField] ModalBuildDataSO[] buildDataFiles;      
-        [SerializeField] private float baseOffset = 25f;
+        [SerializeField] Image unframedImage;        
 
         // Non inspector values
         private ModalDirection currentDir = ModalDirection.SouthWest;
@@ -106,6 +107,20 @@ namespace HexGameEngine.UI
                 Debug.Log("Too far south west");
                 currentDir = ModalDirection.NorthEast;
             }
+
+            // too far west
+            else if (mousePos.x < xLimit)
+            {
+                Debug.Log("Too far west");
+                currentDir = ModalDirection.SouthEast;
+            }
+
+            // too far east
+            else if (mousePos.x > Screen.width - xLimit)
+            {
+                Debug.Log("Too far east");
+                currentDir = ModalDirection.SouthWest;
+            }
         }
         private Vector2 GetMouseOffset(ModalDirection dir)
         {
@@ -115,23 +130,23 @@ namespace HexGameEngine.UI
 
             if (dir == ModalDirection.SouthEast)
             {
-                x = ((positionParent.rect.width / 2) + baseOffset);
-                y = -((positionParent.rect.height / 2) + baseOffset);               
+                x = ((positionParent.rect.width / 2) + baseMouseOffset);
+                y = -((positionParent.rect.height / 2) + baseMouseOffset);               
             }
             else if (dir == ModalDirection.SouthWest)
             {
-                x = -((positionParent.rect.width / 2)+ baseOffset);
-                y = -((positionParent.rect.height / 2) + baseOffset);
+                x = -((positionParent.rect.width / 2)+ baseMouseOffset);
+                y = -((positionParent.rect.height / 2) + baseMouseOffset);
             }
             else if (dir == ModalDirection.NorthEast)
             {
-                x = ((positionParent.rect.width / 2) + baseOffset);
-                y = ((positionParent.rect.height / 2) + baseOffset);
+                x = ((positionParent.rect.width / 2) + baseMouseOffset);
+                y = ((positionParent.rect.height / 2) + baseMouseOffset);
             }
             else if (dir == ModalDirection.NorthWest)
             {
-                x = -((positionParent.rect.width / 2) + baseOffset);
-                y = ((positionParent.rect.height / 2) + baseOffset);
+                x = -((positionParent.rect.width / 2) + baseMouseOffset);
+                y = ((positionParent.rect.height / 2) + baseMouseOffset);
             }
 
 
@@ -161,12 +176,24 @@ namespace HexGameEngine.UI
             BuildModalContent(perk);
             UpdateFitters();
         }
+        public void BuildAndShowModal(TalentPairing tp)
+        {
+            UpdateDynamicDirection();
+            visualParent.SetActive(true);
+            mainCg.DOKill();
+            mainCg.alpha = 0.01f;
+            mainCg.DOFade(1f, 0.25f);
+            Reset();
+            UpdateFitters();
+            BuildModalContent(tp);
+            UpdateFitters();
+        }
         private IEnumerator BuildAndShowModalCoroutine(ModalSceneWidget w)
         {
             ModalBuildDataSO data = GetBuildData(w.preset);
             if (!data) yield break;
 
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.15f);
             if (ModalSceneWidget.MousedOver == w)
             {
                 UpdateDynamicDirection();
@@ -204,6 +231,7 @@ namespace HexGameEngine.UI
             if (description == "") descriptionText.gameObject.SetActive(false);
             else
             {
+                descriptionText.fontStyle = FontStyles.Italic;
                 descriptionText.gameObject.SetActive(true);
                 descriptionText.text = description;
             }
@@ -220,14 +248,18 @@ namespace HexGameEngine.UI
             framedImage.transform.parent.gameObject.SetActive(true);
             framedImage.sprite = ap.Data.passiveSprite;
 
+            // TO DO: uncomment and fix when we add italic desriptions to perks
             // Build description text
+            /*
             string description = ap.Data.passiveItalicDescription;
             if (description == "") descriptionText.gameObject.SetActive(false);
             else
             {
+                descriptionText.fontStyle = FontStyles.Italic;
                 descriptionText.gameObject.SetActive(true);
                 descriptionText.text = description;
             }
+            
 
             // todo: change below once we had effect detail data to perk data files
             dottedRows[0].Build(TextLogic.ConvertCustomStringListToString(ap.Data.passiveDescription), DotStyle.Neutral);
@@ -238,8 +270,45 @@ namespace HexGameEngine.UI
                 dottedRows[1].Build(mes, DotStyle.Red);
             }
             else if (ap.Data.isPermanentInjury)            
-                dottedRows[1].Build("Permanent", DotStyle.Red);
-            
+                dottedRows[1].Build("PERMANENT", DotStyle.Red);
+            */
+
+            descriptionText.fontStyle = FontStyles.Normal;
+            descriptionText.gameObject.SetActive(true);
+            descriptionText.text = TextLogic.ConvertCustomStringListToString(ap.Data.passiveDescription);
+
+            if (ap.Data.isInjury)
+            {
+                string mes = "Will heal in " + TextLogic.ReturnColoredText(ap.stacks.ToString(), TextLogic.blueNumber) + " days.";
+                dottedRows[0].Build(mes, DotStyle.Red);
+            }
+            else if (ap.Data.isPermanentInjury)
+                dottedRows[0].Build("PERMANENT", DotStyle.Red);
+
+        }
+        private void BuildModalContent(TalentPairing tp)
+        {
+            headerText.text = TextLogic.SplitByCapitals(tp.talentSchool.ToString()) + " (" + tp.level + ")";
+
+            // Main Image
+            framedImage.transform.parent.gameObject.SetActive(true);
+            framedImage.sprite = tp.Data.talentSprite;
+
+            // TO DO: uncomment and fix when we add italic descriptions to talents
+            // Build description text
+            /*
+            string description = tp.Data.passiveItalicDescription;
+            if (description == "") descriptionText.gameObject.SetActive(false);
+            else
+            {
+                descriptionText.gameObject.SetActive(true);
+                descriptionText.text = description;
+            }
+            */
+            descriptionText.gameObject.SetActive(true);
+            descriptionText.text = TextLogic.ConvertCustomStringListToString(tp.Data.talentDescription);
+            descriptionText.fontStyle = FontStyles.Normal;
+
         }
         private void Reset()
         {

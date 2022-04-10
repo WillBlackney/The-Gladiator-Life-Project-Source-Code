@@ -436,11 +436,11 @@ namespace HexGameEngine.Combat
             int mildThreshold = 0;
             int severeThreshold = (int)(StatCalculator.GetTotalMaxHealth(character) * 0.25f);
 
-            Debug.Log("CombatController.CheckAndHandleInjuryOnHealthLost() called on character " + character.myName +
-               ", Rolled = : " + roll.ToString() +
-               ", injury probability = " + injuryChanceActual.ToString() + "%" +
+            Debug.Log("CheckAndHandleInjuryOnHealthLost() called on character " + character.myName +
+               ", Rolled = : " + roll.ToString() + "/1000" + 
+               ", injury probability = " + (injuryChanceActual / 10).ToString() + "%" +
                ", health lost = " + damageResult.healthDamage +
-               ", injury thresholds: Mild = " + mildThreshold.ToString() + ", Severe = " + severeThreshold.ToString());
+               ", injury thresholds: Mild = " + mildThreshold.ToString() + " or more, Severe = " + severeThreshold.ToString() + " or more.");
 
             // TO DO: if the character is immune to being injured for whatever reason, check it here and return
             //
@@ -452,12 +452,15 @@ namespace HexGameEngine.Combat
             // Character successfully resisted the injury
             if(roll > injuryChanceActual)
             {
-                Debug.Log("HandleInjury() character successfully resisted the injury, rolled " + roll.ToString() +
+                Debug.Log("CheckAndHandleInjuryOnHealthLost() character successfully resisted the injury, rolled " + roll.ToString() +
                     ", needed less than " + injuryChanceActual.ToString());
                 return;
             }
             else if(roll <= injuryChanceActual)
             {
+                Debug.Log("CheckAndHandleInjuryOnHealthLost() character failed to resist the injury, rolled " + roll.ToString() +
+                    ", needed more than " + injuryChanceActual.ToString());
+
                 // Determine injury severity
                 InjurySeverity severity = InjurySeverity.None;
 
@@ -468,7 +471,7 @@ namespace HexGameEngine.Combat
                     severity = InjurySeverity.Mild;
 
                 // Determine injury type based on the weapon used, or the ability (if it doesnt require a weapon e.g. fireball)
-                InjuryType injuryType = InjuryType.None;
+                InjuryType injuryType = InjuryType.Blunt;
                 if(ability.weaponRequirement == WeaponRequirement.None && 
                     effect != null)
                 {
@@ -497,7 +500,7 @@ namespace HexGameEngine.Combat
                     }
                 }
 
-                Debug.Log("HandleInjury() injury determinations: Severity = " + severity.ToString() +
+                Debug.Log("CheckAndHandleInjuryOnHealthLost() injury determinations: Severity = " + severity.ToString() +
                    ", Injury Type = " + injuryType.ToString());
 
                 // Succesfully made all calculations??
@@ -533,8 +536,6 @@ namespace HexGameEngine.Combat
                         }
 
                     }
-
-                    // TO DO IN FUTURE: The injury is also applied to this character's persistent data file.
                 }
 
             }

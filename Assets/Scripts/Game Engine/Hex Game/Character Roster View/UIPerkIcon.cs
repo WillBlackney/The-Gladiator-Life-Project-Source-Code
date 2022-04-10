@@ -14,7 +14,7 @@ namespace HexGameEngine.UI
         #region
         [SerializeField] private Image perkImage;
         [SerializeField] private PerkIconData perkDataRef;
-        [SerializeField] private ActivePerk activePerk;
+        private ActivePerk activePerk;
         #endregion
 
         // Getters + Accessors
@@ -66,7 +66,7 @@ namespace HexGameEngine.UI
         }
         public void OnPointerExit(PointerEventData eventData)
         {
-            MainModalController.Instance.HideModal();
+            MainModalController.Instance.HideModal();            
         }
         #endregion
 

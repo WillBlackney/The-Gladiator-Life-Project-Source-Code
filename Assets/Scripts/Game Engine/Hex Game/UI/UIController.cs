@@ -84,14 +84,14 @@ namespace HexGameEngine.UI
         #region        
         public void OnTalentButtonMouseOver(UITalentIcon b)
         {
-            CardController.Instance.BuildCardViewModelFromTalentData(b.MyTalentData.talentSchool, perkTalentInfoCard);
-            KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(b.MyTalentData.keyWords);
-            ShowPerkTalentInfoCard(b.PopupPositon);
+            //CardController.Instance.BuildCardViewModelFromTalentData(b.MyTalentData.talentSchool, perkTalentInfoCard);
+           // KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(b.MyTalentData.keyWords);
+           // ShowPerkTalentInfoCard(b.PopupPositon);
         }
         public void OnTalentButtonMouseExit()
         {
-            KeyWordLayoutController.Instance.FadeOutMainView();
-            HidePerkTalentInfoCard();
+           // KeyWordLayoutController.Instance.FadeOutMainView();
+            //HidePerkTalentInfoCard();
         }
         #endregion
     }

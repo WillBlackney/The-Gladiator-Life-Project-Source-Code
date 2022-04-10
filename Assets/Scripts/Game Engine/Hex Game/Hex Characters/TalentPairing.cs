@@ -10,6 +10,18 @@ namespace HexGameEngine.Characters
         public TalentSchool talentSchool;
         [Range(0,2)]
         public int level;
+        private TalentDataSO data;
+        public TalentDataSO Data
+        {
+            get
+            {
+                if (data == null)
+                {
+                    data = CharacterDataController.Instance.GetTalentDataFromTalentEnum(talentSchool);
+                };
+                return data;
+            }
+        }
 
         public TalentPairing()
         {

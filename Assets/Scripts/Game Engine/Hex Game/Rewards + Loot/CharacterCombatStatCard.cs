@@ -4,6 +4,7 @@ using UnityEngine;
 using HexGameEngine.UCM;
 using CardGameEngine.UCM;
 using TMPro;
+using HexGameEngine.UI;
 
 namespace HexGameEngine.RewardSystems
 {
@@ -13,7 +14,7 @@ namespace HexGameEngine.RewardSystems
         #region
         [Header("Core Components")]
         [SerializeField] private GameObject levelUpParent;
-        [SerializeField] private CharacterCombatStatCardPerkIcon[] injuryIcons;
+        [SerializeField] private UIPerkIcon[] injuryIcons;
         [SerializeField] private GameObject knockDownIndicatorParent;
         [SerializeField] private GameObject deathIndicatorParent;
 
@@ -54,7 +55,7 @@ namespace HexGameEngine.RewardSystems
             get { return levelUpParent; }
         }
 
-        public CharacterCombatStatCardPerkIcon[] InjuryIcons
+        public UIPerkIcon[] InjuryIcons
         {
             get { return injuryIcons; }
         }

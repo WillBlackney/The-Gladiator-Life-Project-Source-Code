@@ -747,6 +747,20 @@ namespace HexGameEngine.Perks
 
             return ret;
         }
+        public ActivePerk GetActivePerkOnCharacter(PerkManagerModel pManager, Perk p)
+        {
+            ActivePerk ret = null;
+            foreach (ActivePerk ap in pManager.perks)
+            {
+                if (ap.perkTag == p)
+                {
+                    ret = ap;
+                    break;
+                }
+            }
+
+            return ret;
+        }
         public bool IsCharacteInjured(PerkManagerModel pManager)
         {
             bool bRet = false;

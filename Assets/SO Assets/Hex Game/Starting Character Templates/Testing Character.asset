@@ -24,7 +24,7 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 0
+      value: 22
       stars: 0
     dodge:
       value: 0
@@ -39,18 +39,19 @@ MonoBehaviour:
       value: 0
       stars: 0
     maxHealth: 1
-    stamina: 20
+    energyRecovery: 8
     maxEnergy: 20
     initiative: 100
     criticalChance: 5
     criticalModifier: 50
     auraSize: 1
+    vision: 0
     physicalResistance: 0
     magicResistance: 0
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
-    deathResistance: 0
+    deathResistance: 100
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 36a0268a5ac37d742960a07bfe17be42, type: 2}
