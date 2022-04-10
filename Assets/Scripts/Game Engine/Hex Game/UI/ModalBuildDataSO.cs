@@ -14,6 +14,7 @@ namespace HexGameEngine.UI
         public Sprite mainSprite;
         public bool frameSprite = true;
         public string headerName;
+        public bool italicDescription = true;
         public List<CustomString> description;       
         public ModalDotRowBuildData[] infoRows;
 

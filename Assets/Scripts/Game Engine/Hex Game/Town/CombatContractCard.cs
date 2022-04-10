@@ -73,7 +73,11 @@ namespace HexGameEngine.TownFeatures
         }      
         public void OnCardClicked()
         {
-            if (selectectedCombatCard == this) return;
+            if (selectectedCombatCard == this)
+            {
+                HandleDeselect();
+                return;
+            }
             if(selectectedCombatCard != null)
             {
                 // Deselct + shrink old selection
@@ -88,7 +92,7 @@ namespace HexGameEngine.TownFeatures
             selectectedCombatCard.glowOutline.SetActive(true);
             selectectedCombatCard.gameObject.transform.DOKill();
             selectectedCombatCard.gameObject.transform.DOScale(1.1f, 0f);
-        }
+        }       
         public void OnItemBoxMouseOver()
         {
             ItemPopupController.Instance.OnCombatContractItemIconMousedOver(this);            

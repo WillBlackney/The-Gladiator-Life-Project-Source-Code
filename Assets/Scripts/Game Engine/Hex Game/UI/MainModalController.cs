@@ -231,7 +231,8 @@ namespace HexGameEngine.UI
             if (description == "") descriptionText.gameObject.SetActive(false);
             else
             {
-                descriptionText.fontStyle = FontStyles.Italic;
+                if(data.italicDescription) descriptionText.fontStyle = FontStyles.Italic;
+                else descriptionText.fontStyle = FontStyles.Normal;
                 descriptionText.gameObject.SetActive(true);
                 descriptionText.text = description;
             }

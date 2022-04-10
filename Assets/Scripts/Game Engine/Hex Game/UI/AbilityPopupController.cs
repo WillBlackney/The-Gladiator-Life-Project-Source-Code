@@ -78,8 +78,7 @@ namespace HexGameEngine.UI
         {
             FadeInPanel();
             BuildPanelFromAbilityData(b.MyDataRef);
-            if (b.PopupPosition == PopupPositon.CharacterRoster) PlacePanelOnRosterAbilityButtonPosition();
-            else if (b.PopupPosition == PopupPositon.DraftCharacterSheet) PlacePanelOnDraftScreenAbilityButtonPosition();
+            PlacePanelAboveAbilityIcon(b);
             ForceRebuildLayouts();
         }
         public void OnAbilityBookItemMousedOver(InventoryItemView item)
@@ -121,21 +120,20 @@ namespace HexGameEngine.UI
             mainPositioningRect.position = b.transform.position;
             mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x, mainPositioningRect.localPosition.y + yOffSet, 0);
         }
+        private void PlacePanelAboveAbilityIcon(UIAbilityIcon b)
+        {
+            float yOffSet = 30f;
+
+            mainPositioningRect.position = b.transform.position;
+            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x, mainPositioningRect.localPosition.y + yOffSet, 0);
+        }
         private void PlacePanelAboveTransform(Transform b)
         {
             float yOffSet = 50f;
 
             mainPositioningRect.position = b.transform.position;
             mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x, mainPositioningRect.localPosition.y + yOffSet, 0);
-        }
-        private void PlacePanelOnRosterAbilityButtonPosition()
-        {
-            mainPositioningRect.localPosition = characterRosterPosition.transform.localPosition;
-        }
-        private void PlacePanelOnDraftScreenAbilityButtonPosition()
-        {
-            mainPositioningRect.localPosition = draftCharacterPosition.transform.localPosition;
-        }
+        }       
         private void PlacePanelOnInventoryItemPosition(InventoryItemView item)
         {
             mainPositioningRect.position = item.transform.position;
@@ -169,17 +167,20 @@ namespace HexGameEngine.UI
         {
             requirementsParent.SetActive(false);
             string message = "";
+            bool lineBreak = false;
 
             if (data.talentRequirementData.talentSchool != TalentSchool.None && data.talentRequirementData.talentSchool != TalentSchool.Neutral)
             {
                 requirementsParent.SetActive(true);
                 message += "- Requires " + data.talentRequirementData.talentSchool.ToString() + " " + data.talentRequirementData.level.ToString();
+                lineBreak = true;
             }
 
             if (data.weaponRequirement != WeaponRequirement.None)
             {
                 requirementsParent.SetActive(true);
-                message += "\n" + "- Requires " + TextLogic.SplitByCapitals(data.weaponRequirement.ToString());
+                if (lineBreak) message += "\n";
+                message += "- Requires " + TextLogic.SplitByCapitals(data.weaponRequirement.ToString());
             }
 
             requirementsText.text = message;

@@ -15,7 +15,6 @@ namespace HexGameEngine.UI
         [SerializeField] Image talentImage;
         [SerializeField] TextMeshProUGUI talentLevelText;
         [SerializeField] GameObject talentLevelParent;
-        [SerializeField] private PopupPositon popupPositon;
         private TalentPairing myTalentPairing;
         #endregion
 
@@ -33,10 +32,7 @@ namespace HexGameEngine.UI
         {
             get { return myTalentPairing; }
         }
-        public PopupPositon PopupPositon
-        {
-            get { return popupPositon; }
-        }
+       
         #endregion
 
         // Input

@@ -12,7 +12,6 @@ namespace HexGameEngine.UI
         // Properties + Components
         #region
         [SerializeField] Image abilityImage;
-        [SerializeField] PopupPositon popupPosition;
         private AbilityData myDataRef;
         #endregion
 
@@ -25,10 +24,6 @@ namespace HexGameEngine.UI
         public AbilityData MyDataRef
         {
             get { return myDataRef; }
-        }
-        public PopupPositon PopupPosition
-        {
-            get { return popupPosition; }
         }
 
 
