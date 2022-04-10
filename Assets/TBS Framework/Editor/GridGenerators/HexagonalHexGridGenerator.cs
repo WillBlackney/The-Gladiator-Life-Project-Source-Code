@@ -30,7 +30,7 @@ namespace TbsFramework.EditorUtils.GridGenerators
             {
                 for (int j = 0; j < (Radius * 2) - i - 1; j++)
                 {
-                    GameObject hexagon = PrefabUtility.InstantiatePrefab(HexagonPrefab) as GameObject;
+                    GameObject hexagon = null;// PrefabUtility.InstantiatePrefab(HexagonPrefab) as GameObject;
                     var hexSize = hexagon.GetComponent<Cell>().GetCellDimensions();
 
                     hexagon.transform.position = new Vector3((i * hexSize.x * 0.75f), (i * hexSize.y * 0.5f) + (j * hexSize.y), 0);
@@ -44,7 +44,7 @@ namespace TbsFramework.EditorUtils.GridGenerators
 
                     if (i == 0) continue;
 
-                    GameObject hexagon2 = PrefabUtility.InstantiatePrefab(HexagonPrefab) as GameObject;
+                    GameObject hexagon2 = null;// PrefabUtility.InstantiatePrefab(HexagonPrefab) as GameObject;
                     hexagon2.transform.position = new Vector3((-i * hexSize.x * 0.75f), (i * hexSize.y * 0.5f) + (j * hexSize.y), 0);
                     hexagon2.GetComponent<Hexagon>().OffsetCoord = new Vector2(-i, Radius - j - 1 - (i / 2));
                     hexagon2.GetComponent<Hexagon>().HexGridType = HexGridType.odd_q;

@@ -30,7 +30,7 @@ namespace TbsFramework.EditorUtils.GridGenerators
             {
                 for (int j = 0; j < Height; j++)
                 {
-                    var square = PrefabUtility.InstantiatePrefab(SquarePrefab) as GameObject;
+                    GameObject square = null;//PrefabUtility.InstantiatePrefab(SquarePrefab) as GameObject;
                     var squareSize = square.GetComponent<Cell>().GetCellDimensions();
 
                     square.transform.position = new Vector3(i * squareSize.x, j * squareSize.y, 0);

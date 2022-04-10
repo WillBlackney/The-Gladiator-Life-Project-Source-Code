@@ -30,7 +30,7 @@ namespace TbsFramework.EditorUtils.GridGenerators
             {
                 for (int j = 0; j < SideB; j++)
                 {
-                    GameObject hexagon = PrefabUtility.InstantiatePrefab(HexagonPrefab) as GameObject;
+                    GameObject hexagon = null;// PrefabUtility.InstantiatePrefab(HexagonPrefab) as GameObject;
 
                     var hexSize = hexagon.GetComponent<Cell>().GetCellDimensions();
 

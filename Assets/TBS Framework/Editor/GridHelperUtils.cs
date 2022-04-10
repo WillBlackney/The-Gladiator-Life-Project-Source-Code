@@ -31,7 +31,7 @@ namespace TbsFramework.EditorUtils
                 }
 
                 string dialogOK = "Ok";
-                EditorUtility.DisplayDialog(dialogTitle, dialogMessage.ToString(), dialogOK);
+                //EditorUtility.DisplayDialog(dialogTitle, dialogMessage.ToString(), dialogOK);
                 return true;
             }
             return false;
