@@ -690,7 +690,7 @@ namespace HexGameEngine.Characters
 
             return charactersRet;
         }
-        private HexCharacterData GenerateRecruitCharacter(ClassTemplateSO ct, CharacterRace race)
+        private HexCharacterData GenerateRecruitCharacter(ClassTemplateSO ct, CharacterRace race, int tier = 1)
         {
             Debug.Log("CharacterDataController.GenerateCharacter() called...");
 
@@ -707,15 +707,19 @@ namespace HexGameEngine.Characters
             newCharacter.passiveManager = new PerkManagerModel(newCharacter);
             PerkIconData p = PerkController.Instance.GetRacialPerk(race);
             PerkController.Instance.ModifyPerkOnCharacterData(newCharacter.passiveManager, p.perkTag, 1);
-            ApplyBackgroundPerksToCharacter(newCharacter);
+            ApplyBackgroundPerksToCharacter(newCharacter, tier);
 
             // Setup stats + stars
             newCharacter.attributeSheet = new AttributeSheet();
-            GenerateRecruitCharacterStatRolls(newCharacter.attributeSheet, RandomGenerator.NumberBetween(2,4));
-            GenerateCharacterStarRolls(newCharacter.attributeSheet);
+            GenerateRecruitCharacterStatRolls(newCharacter.attributeSheet, RandomGenerator.NumberBetween(2,4), tier);
+            int maxStars = 2;
+            int minStars = 1;
+            if (tier > 1) maxStars = 3;
+            if (tier == 3) minStars = 2;
+            GenerateCharacterStarRolls(newCharacter.attributeSheet, 3, minStars, maxStars);
 
             // Randomize cost + daily wage
-            newCharacter.dailyWage = RandomGenerator.NumberBetween(5, 10);
+            newCharacter.dailyWage = RandomGenerator.NumberBetween(5, 8);
             newCharacter.recruitCost = RandomGenerator.NumberBetween(30, 50);
 
             // Set up health
@@ -819,7 +823,7 @@ namespace HexGameEngine.Characters
             }
             return abilitiesRet;
         }
-        private void GenerateRecruitCharacterStatRolls(AttributeSheet sheet, int totalMods)
+        private void GenerateRecruitCharacterStatRolls(AttributeSheet sheet, int totalMods, int tier)
         {
             List<CoreAttribute> attributes = new List<CoreAttribute> 
             { 
@@ -834,27 +838,34 @@ namespace HexGameEngine.Characters
 
             attributes.Shuffle();
 
-            for(int i = 0; i < totalMods; i++)
+            int baseStatBoost = 0;
+            if (tier == 2) baseStatBoost = 3;
+            else if (tier == 3) baseStatBoost = 5;
+
+            for (int i = 0; i < totalMods; i++)
             {
                 // Randomize how much a stat is boosted or lowered
                 int statMod = RandomGenerator.NumberBetween(2, 5);
+                int positiveBoostChance = 50;
+                if (tier == 2) positiveBoostChance = 40;
+                else if (tier == 3) positiveBoostChance = 25;
 
-                // 40% chance to get a negative stat boost
-                bool lowerStat = RandomGenerator.NumberBetween(1, 5) <= 2; 
+                // 50% chance to get a negative stat boost
+                bool lowerStat = RandomGenerator.NumberBetween(1, 100) <= positiveBoostChance; 
                 if (lowerStat) statMod = -statMod;
 
-                if (attributes[i] == CoreAttribute.Accuracy) sheet.accuracy.value += statMod;
-                else if (attributes[i] == CoreAttribute.Constituition) sheet.constitution.value += statMod;
-                else if (attributes[i] == CoreAttribute.Dodge) sheet.dodge.value += statMod;
-                else if (attributes[i] == CoreAttribute.Intelligence) sheet.intelligence.value += statMod;
-                else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.value += statMod;
-                else if (attributes[i] == CoreAttribute.Strength) sheet.strength.value += statMod;
-                else if (attributes[i] == CoreAttribute.Wits) sheet.wits.value += statMod;
+                if (attributes[i] == CoreAttribute.Accuracy) sheet.accuracy.value += statMod + baseStatBoost;
+                else if (attributes[i] == CoreAttribute.Constituition) sheet.constitution.value += statMod + baseStatBoost;
+                else if (attributes[i] == CoreAttribute.Dodge) sheet.dodge.value += statMod + baseStatBoost;
+                else if (attributes[i] == CoreAttribute.Intelligence) sheet.intelligence.value += statMod + baseStatBoost;
+                else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.value += statMod + baseStatBoost;
+                else if (attributes[i] == CoreAttribute.Strength) sheet.strength.value += statMod + baseStatBoost;
+                else if (attributes[i] == CoreAttribute.Wits) sheet.wits.value += statMod + baseStatBoost;
             }
 
 
         }
-        private void GenerateCharacterStarRolls(AttributeSheet sheet, int statsStarred = 3, int maxStarsGainedPerStat = 2)
+        private void GenerateCharacterStarRolls(AttributeSheet sheet, int statsStarred = 3, int minStarsGainedPerStat = 1, int maxStarsGainedPerStat = 2)
         {
             List<CoreAttribute> attributes = new List<CoreAttribute>
             {
@@ -871,7 +882,7 @@ namespace HexGameEngine.Characters
 
             for(int i = 0; i < statsStarred; i++)
             {
-                int starsGained = RandomGenerator.NumberBetween(1, maxStarsGainedPerStat);
+                int starsGained = RandomGenerator.NumberBetween(minStarsGainedPerStat, maxStarsGainedPerStat);
 
                 if (attributes[i] == CoreAttribute.Accuracy) sheet.accuracy.stars += starsGained;
                 else if (attributes[i] == CoreAttribute.Constituition) sheet.constitution.stars += starsGained;
@@ -939,7 +950,11 @@ namespace HexGameEngine.Characters
 
             foreach (ClassTemplateSO ct in allClassTemplateSOs)
             {
-                newCharacterDeck.Add(GenerateRecruitCharacter(ct, GetRandomRace(ct.possibleRaces)));
+                int roll = RandomGenerator.NumberBetween(1, 100);
+                int tier = 1;
+                if (roll >= 86) tier = 3;
+                else if (roll >= 61) tier = 2;
+                newCharacterDeck.Add(GenerateRecruitCharacter(ct, GetRandomRace(ct.possibleRaces),tier));
             }
 
             return newCharacterDeck;
@@ -951,16 +966,24 @@ namespace HexGameEngine.Characters
             CharacterDeck = GenerateCharacterDeck();
             CharacterDeck.Shuffle();
         }
-        private void ApplyBackgroundPerksToCharacter(HexCharacterData character)
+        private void ApplyBackgroundPerksToCharacter(HexCharacterData character, int tier = 1)
         {
             for(int i = 0; i < 2; i++)
             {
+                int goodRange = 40;
+                if (tier == 2) goodRange = 50;
+                else if (tier == 3) goodRange = 60;
                 int roll = RandomGenerator.NumberBetween(1, 2);
                 if(roll == 1)
                 {
                     int typeRoll = RandomGenerator.NumberBetween(1, 100);
-                    if (typeRoll < 40) GetValidBackroundPerkForCharacter(character, PerkController.Instance.PositiveBackgroundPerks);
+                    // Good perk
+                    if (typeRoll < goodRange) GetValidBackroundPerkForCharacter(character, PerkController.Instance.PositiveBackgroundPerks);
+
+                    // Bad perk
                     else if (typeRoll < 80) GetValidBackroundPerkForCharacter(character, PerkController.Instance.NegativeBackgroundPerks);
+
+                    // Neutral perk
                     else GetValidBackroundPerkForCharacter(character, PerkController.Instance.NeutralBackgroundPerks);
                 }          
             }
