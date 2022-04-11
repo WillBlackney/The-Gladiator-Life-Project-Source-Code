@@ -440,9 +440,6 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepAbdominalCut))
                 resolve -= 20;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Enrage))
-                resolve -= 15;
-
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.PermanentlyConcussed))
                 resolve += 15;
 
@@ -510,9 +507,6 @@ namespace HexGameEngine
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepAbdominalCut))
                 resolve -= 20;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Enrage))
-                resolve -= 15;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.PermanentlyConcussed))
                 resolve += 15;
@@ -730,10 +724,6 @@ namespace HexGameEngine
             // Satyr perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Drunkard))
                 crit += 5;
-
-            // Enrage perk
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Enrage))
-                crit += 15;
                         
             // Cant go negative
             if (crit < 0) crit = 0;
@@ -756,10 +746,6 @@ namespace HexGameEngine
             // Satyr perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Drunkard))
                 crit += 5;
-
-            // Enrage perk
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Enrage))
-                crit += 15;
 
             // Cant go negative
             if (crit < 0) crit = 0;

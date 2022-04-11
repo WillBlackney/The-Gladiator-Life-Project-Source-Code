@@ -1031,12 +1031,6 @@ namespace HexGameEngine.Characters
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.EnrichedSoul, -1, true, 0.5f);
                 }
 
-                // Enrage
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Enrage) && character.currentHealth > 0)
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Enrage, -1, true, 0.5f);
-                }
-
                 // Ignited Weapon
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FlamingWeapon) && character.currentHealth > 0)
                 {

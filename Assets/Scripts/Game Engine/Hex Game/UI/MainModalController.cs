@@ -33,6 +33,7 @@ namespace HexGameEngine.UI
 
         // Non inspector values
         private ModalDirection currentDir = ModalDirection.SouthWest;
+        private bool shouldRebuild = false;
         #endregion
 
         // Getters + Accessors
@@ -64,6 +65,12 @@ namespace HexGameEngine.UI
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(mainCanvas.transform as RectTransform, Input.mousePosition, mainCanvas.worldCamera, out pos);
                 positionParent.position = mainCanvas.transform.TransformPoint(pos);
                 positionParent.localPosition += (Vector3) GetMouseOffset(currentDir);
+
+                if (shouldRebuild)
+                {
+                    shouldRebuild = false;
+                    UpdateFitters();
+                }
             }
         }       
         void UpdateDynamicDirection()
@@ -175,6 +182,7 @@ namespace HexGameEngine.UI
             UpdateFitters();
             BuildModalContent(race);
             UpdateFitters();
+            shouldRebuild = true;
         }
         public void BuildAndShowModal(ActivePerk perk)
         {
@@ -187,6 +195,7 @@ namespace HexGameEngine.UI
             UpdateFitters();
             BuildModalContent(perk);
             UpdateFitters();
+            shouldRebuild = true;
         }
         public void BuildAndShowModal(TalentPairing tp)
         {
@@ -199,6 +208,7 @@ namespace HexGameEngine.UI
             UpdateFitters();
             BuildModalContent(tp);
             UpdateFitters();
+            shouldRebuild = true;
         }
         private IEnumerator BuildAndShowModalCoroutine(ModalSceneWidget w)
         {
@@ -217,6 +227,7 @@ namespace HexGameEngine.UI
                 UpdateFitters();
                 BuildModalContent(data);
                 UpdateFitters();
+                shouldRebuild = true;
             }
             
 

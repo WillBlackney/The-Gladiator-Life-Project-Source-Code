@@ -65,6 +65,7 @@ namespace HexGameEngine.UI
         [Header("Overview Panel Components")]
         [SerializeField] private TextMeshProUGUI characterNameText;
         [SerializeField] private TextMeshProUGUI characterClassText;
+        [SerializeField] private TextMeshProUGUI dailyWageText;
         [Space(20)]
 
         [Header("Core Attribute Components")]
@@ -161,6 +162,7 @@ namespace HexGameEngine.UI
             characterCurrentlyViewing = data;
             characterNameText.text = data.myName;
             characterClassText.text = data.myClassName;
+            dailyWageText.text = data.dailyWage.ToString();
             BuildPerkViews(data);
             BuildAttributeSection(data);
             BuildGeneralInfoSection(data);

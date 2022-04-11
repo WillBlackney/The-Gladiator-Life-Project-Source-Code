@@ -372,6 +372,7 @@ namespace HexGameEngine
         Abusive = 107,
         ArmsMaster = 126,
         Barrier = 47,
+        Berserk = 46,
         BigMuscles = 87,
         Bleeding = 7,
         Blinded = 4,
@@ -399,7 +400,7 @@ namespace HexGameEngine
         Eager = 19,
         EagleEye = 9,        
         EnrichedSoul = 54,       
-        Enrage = 46,
+       
         Evasion = 76,
         Executioner = 16,
         FastLearner = 101,

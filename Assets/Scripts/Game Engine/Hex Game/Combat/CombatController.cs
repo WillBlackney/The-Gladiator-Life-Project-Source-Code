@@ -138,7 +138,18 @@ namespace HexGameEngine.Combat
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stunned))
             {
                 damageModPercentageAdditive += 0.50f;
-                Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in bully perk modifier = " + damageModPercentageAdditive.ToString());
+                Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Bully perk modifier = " + damageModPercentageAdditive.ToString());
+            }
+
+            // Check 'Enrage' bonus
+            // Check 'bully' bonus
+            if (attacker != null &&
+                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Berserk) &&
+                target != null)
+            {
+                float missingHealth = StatCalculator.GetTotalMaxHealth(attacker) - attacker.currentHealth;
+                damageModPercentageAdditive += 0.01f * missingHealth;
+                Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Enrage perk modifier = " + damageModPercentageAdditive.ToString());
             }
 
             /*
