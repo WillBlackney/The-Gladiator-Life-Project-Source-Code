@@ -18,6 +18,7 @@ namespace HexGameEngine.Characters
         [Header("Data Buckets")]
         [SerializeField] private HexCharacterTemplateSO[] allCharacterTemplatesSOs;
         [SerializeField] private TalentDataSO[] allTalentData;
+        [SerializeField] private RaceDataSO[] allRacialData;
 
         [Header("Character Generation")]
         [SerializeField] private List<ClassTemplateSO> allClassTemplateSOs;
@@ -73,6 +74,25 @@ namespace HexGameEngine.Characters
             private set { characterDeck = value; }
         }
 
+        #endregion
+
+        // Racial Data
+        #region
+        public RaceDataSO GetRaceData(CharacterRace race)
+        {
+            RaceDataSO ret = null;
+
+            foreach(RaceDataSO r in allRacialData)
+            {
+                if(r.racialTag == race)
+                {
+                    ret = r;
+                    break;
+                }
+            }
+
+            return ret;
+        }
         #endregion
 
         // Initialization + Setup

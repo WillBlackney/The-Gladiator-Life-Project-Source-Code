@@ -6,13 +6,13 @@ using HexGameEngine.Utilities;
 using UnityEngine.UI;
 using HexGameEngine.CameraSystems;
 using TMPro;
+using Sirenix.OdinInspector;
 
 namespace HexGameEngine.UI
 {
     public class ModalSceneWidget : MonoBehaviour
     {
         public ModalBuildPreset preset;
-        public UIPerkIcon myUIPerkIcon;
 
         private static ModalSceneWidget mousedOver;
         public static ModalSceneWidget MousedOver
@@ -42,5 +42,6 @@ namespace HexGameEngine.UI
                 MainModalController.Instance.WidgetMouseExit(this);
             }
         }
+
     }
 }

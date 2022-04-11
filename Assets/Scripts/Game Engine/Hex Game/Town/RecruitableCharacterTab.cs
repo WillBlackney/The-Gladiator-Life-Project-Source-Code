@@ -9,6 +9,7 @@ using HexGameEngine.UCM;
 using HexGameEngine.Libraries;
 using HexGameEngine.Player;
 using HexGameEngine.Utilities;
+using HexGameEngine.UI;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -25,7 +26,7 @@ namespace HexGameEngine.TownFeatures
 
         [Header("Race Section Components")]
         [SerializeField] TextMeshProUGUI racialText;
-        [SerializeField] Image racialImage;
+        [SerializeField] UIRaceIcon racialIcon;
 
         [Space(20)]
 
@@ -59,7 +60,7 @@ namespace HexGameEngine.TownFeatures
             // Texts
             nameText.text = TextLogic.ReturnColoredText(data.myName, TextLogic.neutralYellow) + "      The " + data.myClassName;
             racialText.text = data.race.ToString();
-            racialImage.sprite = SpriteLibrary.Instance.GetRacialSprite(data.race);
+            racialIcon.BuildFromRacialData(CharacterDataController.Instance.GetRaceData(data.race));
 
             // Build model
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(portaitModel, data.modelParts);

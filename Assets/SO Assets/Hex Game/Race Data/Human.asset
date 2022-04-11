@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8a0c40588e5784ea83123743fc3851, type: 3}
+  m_Name: Human
+  m_EditorClassIdentifier: 
+  racialTag: 1
+  racialSprite: {fileID: 21300000, guid: dd2c478783ec4f34bad2c97be58a8744, type: 3}
+  loreDescription: 'A once proud and noble race, the threat of extinction has pushed
+    humanity to the depths of desperation. Strong, adaptable and cunning, they make
+    great allies: so long as your interests are aligned.'
+  racialPassiveDotRows:
+  - dotStyle: 3
+    message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Start each combat with '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '1 '
+    - color: 0
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'extra '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Energy
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: .

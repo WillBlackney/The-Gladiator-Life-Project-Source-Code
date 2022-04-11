@@ -164,6 +164,18 @@ namespace HexGameEngine.UI
         {
             StartCoroutine(BuildAndShowModalCoroutine(w));
         }
+        public void BuildAndShowModal(RaceDataSO race)
+        {
+            UpdateDynamicDirection();
+            visualParent.SetActive(true);
+            mainCg.DOKill();
+            mainCg.alpha = 0.01f;
+            mainCg.DOFade(1f, 0.25f);
+            Reset();
+            UpdateFitters();
+            BuildModalContent(race);
+            UpdateFitters();
+        }
         public void BuildAndShowModal(ActivePerk perk)
         {
             UpdateDynamicDirection();
@@ -311,6 +323,23 @@ namespace HexGameEngine.UI
             descriptionText.fontStyle = FontStyles.Normal;
 
         }
+        private void BuildModalContent(RaceDataSO data)
+        {
+            headerText.text = data.racialTag.ToString();
+
+            // Main Image
+            framedImage.transform.parent.gameObject.SetActive(true);
+            framedImage.sprite = data.racialSprite;
+
+            // Lore text
+            descriptionText.fontStyle = FontStyles.Italic;
+            descriptionText.gameObject.SetActive(true);
+            descriptionText.text = data.loreDescription;
+
+            // Build dot points
+            for (int i = 0; i < data.racialPassiveDotRows.Length; i++)
+                dottedRows[i].Build(data.racialPassiveDotRows[i]);
+        }
         private void Reset()
         {
             framedImage.transform.parent.gameObject.SetActive(false);
@@ -358,6 +387,7 @@ namespace HexGameEngine.UI
         EnergyRecovery = 13,
         MaxEnergy = 14,
         CriticalModifier = 15,
+        Energy = 29,
 
         PhysicalResistance = 16,
         MagicResistance = 17,
@@ -365,6 +395,15 @@ namespace HexGameEngine.UI
         InjuryResistance = 19,
         DeathResistance = 20,
         DebuffResistance = 21,
+
+        DailyWage = 22,
+        RecruitCost = 23,
+        Health = 24,
+        Stress = 25,
+        Level = 26,
+        AbilityTome = 27,
+        Experience = 28,
+        Gold = 30,
        
 
     }

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accb5c33da2a75e479ff64dac541103c, type: 3}
+  m_Name: Ability Book
+  m_EditorClassIdentifier: 
+  myPreset: 27
+  mainSprite: {fileID: 21300000, guid: 83693530afd1ed94ea4890badd86d995, type: 3}
+  frameSprite: 0
+  headerName: Ability Book
+  italicDescription: 0
+  description:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Ability books can be used at the Library to teach new abilities to characters.
+      An ability book is destroyed after it is used.
+  infoRows: []

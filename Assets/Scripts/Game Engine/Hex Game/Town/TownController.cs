@@ -39,7 +39,7 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] private UniversalCharacterModel recruitRightPanelPortaitModel;
         [Space(20)]
         [SerializeField] private TextMeshProUGUI recruitRightPanelRacialText;
-        [SerializeField] private Image recruitRightPanelRacialImage;
+        [SerializeField] private UIRaceIcon recruitRightPanelRacialIcon;
         [SerializeField] private TextMeshProUGUI recruitRightPanelCostText;
         [SerializeField] private TextMeshProUGUI recruitRightPanelUpkeepText;
         [Space(20)]
@@ -246,7 +246,7 @@ namespace HexGameEngine.TownFeatures
             recruitRightPanelCostText.text = TextLogic.ReturnColoredText(character.recruitCost.ToString(), col);
 
             // Misc
-            recruitRightPanelRacialImage.sprite = SpriteLibrary.Instance.GetRacialSprite(character.race);
+            recruitRightPanelRacialIcon.BuildFromRacialData(CharacterDataController.Instance.GetRaceData(character.race)); 
 
             // Build stats section
             recruitRightPanelStrengthText.text = character.attributeSheet.strength.value.ToString();

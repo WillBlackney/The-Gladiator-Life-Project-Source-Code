@@ -32,6 +32,7 @@ namespace HexGameEngine.UI
         [SerializeField] private Slider stressBar;
         [Space(20)]
         [Header("XP + Level Components")]
+        [SerializeField] private UIRaceIcon racialIcon;
         [SerializeField] private TextMeshProUGUI currentLevelText;
         [SerializeField] private TextMeshProUGUI xpBarText;
         [SerializeField] private Slider xpbar;
@@ -313,6 +314,7 @@ namespace HexGameEngine.UI
             BuildHealthBar(character);
             BuildXpBar(character);
             BuildStressBar(character);
+            racialIcon.BuildFromRacialData(CharacterDataController.Instance.GetRaceData(character.race));
         }
         private void BuildHealthBar(HexCharacterData character)
         {

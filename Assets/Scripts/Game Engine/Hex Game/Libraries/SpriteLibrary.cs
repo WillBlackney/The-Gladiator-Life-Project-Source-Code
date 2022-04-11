@@ -145,33 +145,7 @@ namespace HexGameEngine.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite pyromaniaBook;
-        #endregion
-
-        // Racial Images
-        #region
-        [Header("Racial Images")]
-        [PreviewField(75)]
-        [SerializeField]
-        private Sprite human;
-        [PreviewField(75)]
-        [SerializeField]
-        private Sprite orc;
-        [PreviewField(75)]
-        [SerializeField]
-        private Sprite elf;
-        [PreviewField(75)]
-        [SerializeField]
-        private Sprite goblin;
-        [PreviewField(75)]
-        [SerializeField]
-        private Sprite undead;
-        [PreviewField(75)]
-        [SerializeField]
-        private Sprite gnoll;
-        [PreviewField(75)]
-        [SerializeField]
-        private Sprite satyr;
-        #endregion
+        #endregion             
 
         // Stress State Images
         #region
@@ -233,42 +207,6 @@ namespace HexGameEngine.Libraries
             else if (attribute == CoreAttribute.Resolve) return resolve;
             else if (attribute == CoreAttribute.Wits) return wits;
             else return null;
-        }
-        public Sprite GetRacialSprite(CharacterRace race)
-        {
-            Sprite spriteReturned = null;
-
-            if (race == CharacterRace.Human)
-            {
-                spriteReturned = human;
-            }
-            else if (race == CharacterRace.Elf)
-            {
-                spriteReturned = elf;
-            }
-            else if (race == CharacterRace.Gnoll)
-            {
-                spriteReturned = gnoll;
-            }
-            else if (race == CharacterRace.Goblin)
-            {
-                spriteReturned = goblin;
-            }
-            else if (race == CharacterRace.Orc)
-            {
-                spriteReturned = orc;
-            }
-            else if (race == CharacterRace.Satyr)
-            {
-                spriteReturned = satyr;
-            }
-            else if (race == CharacterRace.Undead)
-            {
-                spriteReturned = undead;
-            }
-
-
-            return spriteReturned;
         }
         public Sprite GetStressStateSprite(StressState state)
         {
