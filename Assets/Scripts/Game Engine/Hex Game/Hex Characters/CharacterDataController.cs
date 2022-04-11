@@ -351,7 +351,7 @@ namespace HexGameEngine.Characters
             foreach(HexCharacterData c in AllPlayerCharacters)
             {
                 SetCharacterStress(c, c.currentStress - 5);
-                SetCharacterHealth(c, c.currentHealth + 10);
+                SetCharacterHealth(c, c.currentHealth + (int)(StatCalculator.GetTotalMaxHealth(c) * 0.1f));
             }
         }
         #endregion
@@ -692,7 +692,7 @@ namespace HexGameEngine.Characters
         }
         private HexCharacterData GenerateRecruitCharacter(ClassTemplateSO ct, CharacterRace race, int tier = 1)
         {
-            Debug.Log("CharacterDataController.GenerateCharacter() called...");
+            Debug.Log("CharacterDataController.GenerateRecruitCharacter() called...");
 
             HexCharacterData newCharacter = new HexCharacterData();
 
@@ -719,8 +719,8 @@ namespace HexGameEngine.Characters
             GenerateCharacterStarRolls(newCharacter.attributeSheet, 3, minStars, maxStars);
 
             // Randomize cost + daily wage
-            newCharacter.dailyWage = RandomGenerator.NumberBetween(5, 8);
-            newCharacter.recruitCost = RandomGenerator.NumberBetween(30, 50);
+            newCharacter.dailyWage = GenerateCharacterDailyWage(tier);
+            newCharacter.recruitCost = GenerateCharacterRecruitCost(tier);
 
             // Set up health
             SetCharacterMaxHealth(newCharacter, 100);
@@ -893,6 +893,40 @@ namespace HexGameEngine.Characters
                 else if (attributes[i] == CoreAttribute.Wits) sheet.wits.stars += starsGained;
             }
         }
+        private int GenerateCharacterDailyWage(int tier = 1)
+        {
+            int lower = 5;
+            int upper = 8;
+            if(tier == 2)
+            {
+                lower = 10;
+                upper = 15;
+            }
+            else if(tier == 3)
+            {
+                lower = 17;
+                upper = 22;
+            }
+
+            return RandomGenerator.NumberBetween(lower, upper);
+        }
+        private int GenerateCharacterRecruitCost(int tier = 1)
+        {
+            int lower = 30;
+            int upper = 50;
+            if (tier == 2)
+            {
+                lower = 75;
+                upper = 100;
+            }
+            else if (tier == 3)
+            {
+                lower = 125;
+                upper = 150;
+            }
+
+            return RandomGenerator.NumberBetween(lower, upper);
+        }
         public string GetRandomCharacterName(CharacterRace race)
         {
             string nameReturned = "";
@@ -952,8 +986,8 @@ namespace HexGameEngine.Characters
             {
                 int roll = RandomGenerator.NumberBetween(1, 100);
                 int tier = 1;
-                if (roll >= 86) tier = 3;
-                else if (roll >= 61) tier = 2;
+                if (roll >= 91) tier = 3;
+                else if (roll >= 71) tier = 2;
                 newCharacterDeck.Add(GenerateRecruitCharacter(ct, GetRandomRace(ct.possibleRaces),tier));
             }
 
