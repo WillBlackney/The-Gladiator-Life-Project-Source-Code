@@ -99,6 +99,7 @@ namespace HexGameEngine.JourneyLogic
             TownController.Instance.GenerateDailyCombatContracts();
 
             // Refresh library books
+            TownController.Instance.GenerateDailyAbilityTomes();
 
             // Refresh armoury items
 

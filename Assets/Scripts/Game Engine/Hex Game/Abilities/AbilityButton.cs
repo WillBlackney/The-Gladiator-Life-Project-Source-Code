@@ -58,7 +58,7 @@ namespace HexGameEngine.Abilities
             if (CurrentButtonMousedOver == this || CurrentButtonMousedOver == null)
             {
                 KeyWordLayoutController.Instance.FadeOutMainView();
-                AbilityPopupController.Instance.OnAbilityButtonMousedExit(this);
+                AbilityPopupController.Instance.OnAbilityButtonMousedExit();
                 CurrentButtonMousedOver = null;
             }
                

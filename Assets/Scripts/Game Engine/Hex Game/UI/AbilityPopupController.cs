@@ -88,7 +88,14 @@ namespace HexGameEngine.UI
             PlacePanelOnInventoryItemPosition(item);
             ForceRebuildLayouts();
         }
-        public void OnAbilityButtonMousedExit(AbilityButton b = null)
+        public void OnAbilityShopTomeMousedOver(AbilityTomeShopSlot slot)
+        {
+            FadeInPanel();
+            BuildPanelFromAbilityData(slot.MyData.ability);
+            PlacePanelOnAbilityTomeShopSlotPosition(slot);
+            ForceRebuildLayouts();
+        }
+        public void OnAbilityButtonMousedExit()
         {
             HidePanel();
         }
@@ -141,6 +148,14 @@ namespace HexGameEngine.UI
             float yOffset = mainPositioningRect.rect.height - 100;
             mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x - xOffset, mainPositioningRect.localPosition.y - yOffset, 0);
         }
+        private void PlacePanelOnAbilityTomeShopSlotPosition(AbilityTomeShopSlot slot)
+        {
+            mainPositioningRect.position = slot.transform.position;
+            float xOffset = mainPositioningRect.rect.width / 2 + 80;
+            float yOffset = mainPositioningRect.rect.height - 100;
+            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x - xOffset, mainPositioningRect.localPosition.y, 0);
+        }
+        
         #endregion
 
         // Setup + Build Individual Components

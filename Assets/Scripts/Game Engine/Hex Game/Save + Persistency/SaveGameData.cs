@@ -45,6 +45,7 @@ namespace HexGameEngine.Persistency
         public List<HexCharacterData> characterDeck = new List<HexCharacterData>();
         public List<HexCharacterData> townRecruits = new List<HexCharacterData>();
         public List<CombatContractData> currentDailyCombatContracts = new List<CombatContractData>();
+        public List<AbilityTomeShopData> currentLibraryTomes = new List<AbilityTomeShopData>();
 
         // Loot data
         public RewardContainerSet currentLootResult;

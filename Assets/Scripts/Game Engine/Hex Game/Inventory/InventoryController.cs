@@ -182,7 +182,7 @@ namespace HexGameEngine.Items
 
         // Conditional Checks
         #region
-        private bool HasFreeInventorySpace()
+        public bool HasFreeInventorySpace()
         {
             return inventory.Count < maxInventorySize;
         }

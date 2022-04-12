@@ -16,6 +16,7 @@ using HexGameEngine.Libraries;
 using HexGameEngine.Player;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.Perks;
+using HexGameEngine.Items;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -85,6 +86,11 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] private Image therapyIcon;
         [Space(20)]
 
+        [Title("Library Page Components")]
+        [SerializeField] private GameObject libraryPageVisualParent;
+        [SerializeField] private AbilityTomeShopSlot[] abilityTomeShopSlots;
+
+
         [Title("Choose Combat Page Components")]
         [SerializeField] private GameObject chooseCombatPageMainVisualParent;
         [SerializeField] private CombatContractCard[] allContractCards;
@@ -104,11 +110,12 @@ namespace HexGameEngine.TownFeatures
         private List<HexCharacterData> currentRecruits = new List<HexCharacterData>();
         private RecruitableCharacterTab selectedRecruitTab;
         private List<CombatContractData> currentDailyCombatContracts = new List<CombatContractData>();
+        private List<AbilityTomeShopData> currentLibraryTomes = new List<AbilityTomeShopData>();
         #endregion
 
         // Getters + Accessors
         #region
-       public HospitalDropSlot[] HospitalSlots
+        public HospitalDropSlot[] HospitalSlots
         {
             get { return hospitalSlots; }
         }
@@ -124,6 +131,8 @@ namespace HexGameEngine.TownFeatures
 
             currentDailyCombatContracts.Clear();
             currentDailyCombatContracts.AddRange(saveFile.currentDailyCombatContracts);
+            currentLibraryTomes.Clear();
+            currentLibraryTomes.AddRange(saveFile.currentLibraryTomes);
         }
         public void SaveMyDataToSaveFile(SaveGameData saveFile)
         {
@@ -133,6 +142,9 @@ namespace HexGameEngine.TownFeatures
 
             saveFile.currentDailyCombatContracts.Clear();
             saveFile.currentDailyCombatContracts.AddRange(currentDailyCombatContracts);
+
+            saveFile.currentLibraryTomes.Clear();
+            saveFile.currentLibraryTomes.AddRange(currentLibraryTomes);
         }
         #endregion
 
@@ -402,6 +414,56 @@ namespace HexGameEngine.TownFeatures
         }
         #endregion
 
+        // Library Logic
+        #region
+        private void BuildAndShowLibraryPage()
+        {
+            libraryPageVisualParent.SetActive(true);
+
+            // Reset tome slots
+            for (int i = 0; i < abilityTomeShopSlots.Length; i++)
+                abilityTomeShopSlots[i].Reset();
+
+            // Build tomes
+            for (int i = 0; i < currentLibraryTomes.Count && i < abilityTomeShopSlots.Length; i++)
+                abilityTomeShopSlots[i].BuildFromTomeShopData(currentLibraryTomes[i]);
+        }
+        public void GenerateDailyAbilityTomes()
+        {
+            currentLibraryTomes.Clear();
+            List<AbilityData> abilities = new List<AbilityData>();
+            foreach(AbilityData a in AbilityController.Instance.AllAbilities)
+            {
+                if (a.talentRequirementData.talentSchool != TalentSchool.None &&
+                    a.talentRequirementData.talentSchool != TalentSchool.Neutral)
+                    abilities.Add(a);
+            }
+            abilities.Shuffle();
+
+            for(int i = 0; i < 9; i++)
+            {
+                int goldCost = RandomGenerator.NumberBetween(30, 60);
+                currentLibraryTomes.Add(new AbilityTomeShopData(abilities[i], goldCost));
+            }
+
+        }
+        public void HandleBuyAbilityTomeFromLibrary(AbilityTomeShopData data)
+        {
+            // Pay gold cost
+            PlayerDataController.Instance.ModifyPlayerGold(-data.goldCost);
+
+            // Add tome to inventory
+            InventoryController.Instance.AddItemToInventory(
+                InventoryController.Instance.CreateInventoryItemAbilityData(data.ability));
+
+            // Remove from shop
+            currentLibraryTomes.Remove(data);
+
+            // Rebuild page
+            BuildAndShowLibraryPage();
+        }
+        #endregion
+
         // Feature Buttons On Click
         #region
         public void OnRecruitPageButtonClicked()
@@ -411,6 +473,14 @@ namespace HexGameEngine.TownFeatures
         public void OnRecruitPageLeaveButtonClicked()
         {
             recruitPageVisualParent.SetActive(false);
+        }
+        public void OnLibraryPageButtonClicked()
+        {
+            BuildAndShowLibraryPage();
+        }
+        public void OnLibraryPageLeaveButtonClicked()
+        {
+            libraryPageVisualParent.SetActive(false);
         }
         public void OnHospitalPageButtonClicked()
         {
