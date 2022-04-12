@@ -28,10 +28,11 @@ MonoBehaviour:
   secondaryTargetRequirement: 0
   rangeFromTarget: 0
   talentRequirementData:
-    talentSchool: 2
+    talentSchool: 5
     level: 1
   abilitySubRequirements: []
   baseRange: 1
+  gainRangeBonusFromVision: 0
   hitChanceModifier: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:

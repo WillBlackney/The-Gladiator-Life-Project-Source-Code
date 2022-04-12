@@ -17,6 +17,7 @@ MonoBehaviour:
     type: 3}
   frameSprite: 1
   headerName: Vision
+  italicDescription: 1
   description:
   - color: 1
     getPhraseFromAbilityValue: 0
@@ -28,7 +29,7 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Each point modifies the range of most '
+      phrase: 'Modifies the range of most '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
@@ -44,11 +45,18 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'abilities by '
-    - color: 2
+      phrase: abilities.
+  - dotStyle: 1
+    message:
+    - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 1
+      phrase: 'Determines how close a character needs to be in order to target an
+        enemy that has '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Stealth
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

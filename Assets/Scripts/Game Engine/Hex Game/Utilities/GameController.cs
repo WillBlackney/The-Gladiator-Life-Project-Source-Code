@@ -112,7 +112,7 @@ namespace HexGameEngine
             AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
             BlackScreenController.Instance.FadeInScreen(1f);
 
-            InventoryController.Instance.PopulateInventoryWithMockDataItems(30);
+            InventoryController.Instance.PopulateInventoryWithMockDataItems(20);
         }
         private void RunSandboxCombat()
         {

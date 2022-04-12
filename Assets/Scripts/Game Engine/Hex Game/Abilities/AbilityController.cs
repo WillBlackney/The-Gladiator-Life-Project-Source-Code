@@ -287,11 +287,11 @@ namespace HexGameEngine.Abilities
 
             ab.allKnownAbilities.Add(ability);
         }
-        private bool DoesCharacterHaveSpaceForNewAbility(HexCharacterData character)
+        public bool DoesCharacterHaveSpaceForNewAbility(HexCharacterData character)
         {
             return character.abilityBook.allKnownAbilities.Count < 8;
         }
-        private bool DoesCharacterAlreadyKnowAbility(HexCharacterData character, AbilityData ability)
+        public bool DoesCharacterAlreadyKnowAbility(HexCharacterData character, AbilityData ability)
         {
             bool ret = false;
             foreach(AbilityData a in character.abilityBook.allKnownAbilities)
@@ -1720,8 +1720,11 @@ namespace HexGameEngine.Abilities
             bool bRet = false;
             bRet = GetTargettableTilesOfAbility(ability, caster).Contains(target.currentTile);
 
+            int stealthDistance = StatCalculator.GetTotalVision(caster) + 1;
+            if (stealthDistance < 1) stealthDistance = 1;
+
             // Check stealth + eagle eye (EE ignores stealth)
-            if (caster.currentTile.Distance(target.currentTile) > 1 &&
+            if (caster.currentTile.Distance(target.currentTile) > stealthDistance &&
                 HexCharacterController.Instance.IsTargetFriendly(caster, target) == false &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stealth) &&                
                 !PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.EagleEye))

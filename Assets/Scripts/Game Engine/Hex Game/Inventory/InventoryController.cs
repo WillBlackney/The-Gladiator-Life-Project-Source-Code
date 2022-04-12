@@ -70,7 +70,7 @@ namespace HexGameEngine.Items
 
         // Build + Show Inventory Views
         #region
-        private void BuildAndShowInventoryView()
+        public void BuildAndShowInventoryView()
         {
             mainVisualParent.SetActive(true);
             BuildInventoryView();
@@ -159,6 +159,24 @@ namespace HexGameEngine.Items
             items.Shuffle();
             return CreateInventoryItemFromItemData(ItemController.Instance.GenerateNewItemWithRandomEffects(items[0]));
         }
+        private void AddRandomAbilityBookToInventory(int amount)
+        {
+            List<AbilityData> abilities = new List<AbilityData>();
+            foreach (AbilityData a in AbilityController.Instance.AllAbilities)
+            {
+                if (a.talentRequirementData.talentSchool != TalentSchool.None &&
+                    a.talentRequirementData.talentSchool != TalentSchool.Neutral)
+                    abilities.Add(a);
+            }
+            abilities.Shuffle();
+
+            for(int i = 0; i < amount; i++)
+            {
+                AddItemToInventory(CreateInventoryItemAbilityData(abilities[i]));
+            }
+           
+        }
+       
         #endregion
 
         // Modify Inventory Contents
@@ -235,10 +253,11 @@ namespace HexGameEngine.Items
         #region
         public void PopulateInventoryWithMockDataItems(int totalItemsGenerated)
         {
-            for(int i = 0; i < totalItemsGenerated; i++)
+            AddRandomAbilityBookToInventory(totalItemsGenerated);
+            for (int i = 0; i < totalItemsGenerated; i++)
             {
                 //AddItemToInventory(GenerateRandomAbilityBookItem());
-                AddItemToInventory(GenerateRandomEquipableItem());
+                //AddItemToInventory(GenerateRandomEquipableItem());
                 /*
                 if(RandomGenerator.NumberBetween(1,2) == 1)
                     AddItemToInventory(GenerateRandomAbilityBookItem());

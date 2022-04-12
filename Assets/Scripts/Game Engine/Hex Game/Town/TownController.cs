@@ -89,7 +89,12 @@ namespace HexGameEngine.TownFeatures
         [Title("Library Page Components")]
         [SerializeField] private GameObject libraryPageVisualParent;
         [SerializeField] private AbilityTomeShopSlot[] abilityTomeShopSlots;
-
+        [SerializeField] private LibraryCharacterDropSlot libraryCharacterSlot;
+        [SerializeField] private LibraryAbilityDropSlot libraryAbilitySlot;
+        [SerializeField] private TextMeshProUGUI invalidLibraryActionText;
+        [SerializeField] private Image confirmLearnAbilityImage;
+        [SerializeField] private Sprite invalidButtonSprite;
+        [SerializeField] private Sprite validButtonSprite;
 
         [Title("Choose Combat Page Components")]
         [SerializeField] private GameObject chooseCombatPageMainVisualParent;
@@ -118,6 +123,14 @@ namespace HexGameEngine.TownFeatures
         public HospitalDropSlot[] HospitalSlots
         {
             get { return hospitalSlots; }
+        }
+        public LibraryAbilityDropSlot LibraryAbilitySlot
+        {
+            get { return libraryAbilitySlot; }
+        }
+        public LibraryCharacterDropSlot LibraryCharacterSlot
+        {
+            get { return libraryCharacterSlot; }
         }
         #endregion
 
@@ -461,6 +474,100 @@ namespace HexGameEngine.TownFeatures
 
             // Rebuild page
             BuildAndShowLibraryPage();
+        }        
+        public void EvaluateLibrarySlots()
+        {
+            confirmLearnAbilityImage.sprite = invalidButtonSprite;
+            invalidLibraryActionText.text = "";
+
+            // Both character and ability have been slotted, evaluate validity
+            if (libraryAbilitySlot.MyAbilityData != null &&
+                libraryCharacterSlot.MyCharacterData != null)
+            {
+                HexCharacterData character = libraryCharacterSlot.MyCharacterData;
+                AbilityData ability = libraryAbilitySlot.MyAbilityData;
+
+                // Doesn't meet talent req
+                if (!CharacterDataController.Instance.DoesCharacterHaveTalent(character.talentPairings,
+                    ability.talentRequirementData.talentSchool, ability.talentRequirementData.level))
+                {
+                    invalidLibraryActionText.text = TextLogic.ReturnColoredText("INVALID \n" +
+                        character.myName + " does not have the required talent: " + ability.talentRequirementData.talentSchool.ToString() + 
+                        " " + ability.talentRequirementData.level.ToString() +".", TextLogic.redText);
+                }
+
+                // Already knows max abilities
+                else if (!AbilityController.Instance.DoesCharacterHaveSpaceForNewAbility(character))
+                {
+                    invalidLibraryActionText.text = TextLogic.ReturnColoredText("INVALID \n" +
+                        character.myName + " has already learnt the maximum of 8 abilities.", TextLogic.redText);
+                }
+
+                // Already knows the ability
+                else if (AbilityController.Instance.DoesCharacterAlreadyKnowAbility(character, ability))
+                {
+                    invalidLibraryActionText.text = TextLogic.ReturnColoredText("INVALID \n" +
+                        character.myName + " already has already learnt " + ability.abilityName + ".", TextLogic.redText);
+                }
+
+                // Valid
+                else
+                {
+                    confirmLearnAbilityImage.sprite = validButtonSprite;
+                    invalidLibraryActionText.text = "Are you sure you want to teach " + 
+                        TextLogic.ReturnColoredText(ability.abilityName, TextLogic.neutralYellow) +
+                        " to " + TextLogic.ReturnColoredText(character.myName, TextLogic.neutralYellow) + "?";
+                }
+            }
+        }
+        public void OnLibraryConfirmLearnActionButtonClicked()
+        {
+            if (!IsTeachAbilityActionValidAndReady()) return;
+
+            // Teach ability to character
+            AbilityController.Instance.HandleCharacterDataLearnNewAbility
+                (LibraryCharacterSlot.MyCharacterData, LibraryCharacterSlot.MyCharacterData.abilityBook, LibraryAbilitySlot.MyAbilityData);
+
+            // Remove tome from inventory
+            foreach(InventoryItem i in InventoryController.Instance.Inventory)
+            {
+                if(i.abilityData != null &&
+                    i.abilityData.abilityName == libraryAbilitySlot.MyAbilityData.abilityName)
+                {
+                    InventoryController.Instance.RemoveItemFromInventory(i);
+                    break;
+                }
+            }           
+
+            // Rebuild inventory view, if open
+            if(InventoryController.Instance.MainVisualParent.activeSelf)
+                InventoryController.Instance.BuildAndShowInventoryView();
+
+            // Clear slots
+            libraryAbilitySlot.ClearAbility();
+            libraryCharacterSlot.ClearCharacter();
+
+            // Rebuild views
+            BuildAndShowLibraryPage();
+        }
+        private bool IsTeachAbilityActionValidAndReady()
+        {
+            bool ret = false;
+
+            if(libraryAbilitySlot.MyAbilityData != null &&
+                libraryCharacterSlot.MyCharacterData != null &&
+                CharacterDataController.Instance.DoesCharacterHaveTalent(libraryCharacterSlot.MyCharacterData.talentPairings,
+                    libraryAbilitySlot.MyAbilityData.talentRequirementData.talentSchool, libraryAbilitySlot.MyAbilityData.talentRequirementData.level) &&
+                    AbilityController.Instance.DoesCharacterHaveSpaceForNewAbility(libraryCharacterSlot.MyCharacterData) &&
+                     !AbilityController.Instance.DoesCharacterAlreadyKnowAbility(libraryCharacterSlot.MyCharacterData, libraryAbilitySlot.MyAbilityData)
+                )
+            {
+                ret = true;
+            }
+
+            Debug.Log("IsTeachAbilityActionValidAndReady() returning " + ret.ToString());
+
+            return ret;
         }
         #endregion
 

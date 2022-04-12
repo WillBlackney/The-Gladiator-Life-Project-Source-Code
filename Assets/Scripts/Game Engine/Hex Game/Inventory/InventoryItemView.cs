@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using HexGameEngine.Audio;
 using DG.Tweening;
 using HexGameEngine.UCM;
+using HexGameEngine.TownFeatures;
 
 namespace HexGameEngine.Items
 {
@@ -112,14 +113,23 @@ namespace HexGameEngine.Items
                     s.Append(transform.DOMove(slot.transform.position, 0f));
                     s.OnComplete(() => transform.SetParent(slot.transform));
 
-                    // add item to player
-                    ItemController.Instance.HandleGiveItemToCharacterFromInventory
-                        (CharacterRosterViewController.Instance.CharacterCurrentlyViewing, MyItemRef, CharacterRosterViewController.Instance.rosterSlotMousedOver);
+                    if(myItemRef.itemData != null)
+                    {
+                        // add item to player
+                        ItemController.Instance.HandleGiveItemToCharacterFromInventory
+                            (CharacterRosterViewController.Instance.CharacterCurrentlyViewing, MyItemRef, CharacterRosterViewController.Instance.rosterSlotMousedOver);
 
-                    // re build roster, inventory and model views
-                    CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
-                    InventoryController.Instance.RebuildInventoryView();
-                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterRosterViewController.Instance.CharacterCurrentlyViewing.itemSet, CharacterRosterViewController.Instance.CharacterPanelUcm);
+                        // re build roster, inventory and model views
+                        CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
+                        InventoryController.Instance.RebuildInventoryView();
+                        CharacterModeller.ApplyItemSetToCharacterModelView(CharacterRosterViewController.Instance.CharacterCurrentlyViewing.itemSet, CharacterRosterViewController.Instance.CharacterPanelUcm);
+
+                    }
+                    else if(myItemRef.abilityData != null)
+                    {
+                        // to do: handle place ability tome on library learning slot
+                        TownController.Instance.LibraryAbilitySlot.BuildFromAbility(myItemRef.abilityData);
+                    }
                 }
 
                 else
@@ -132,18 +142,13 @@ namespace HexGameEngine.Items
                     // Re-parent self on arrival
                     s.OnComplete(() => transform.SetParent(slot.transform));
                 }
-
-                // Hide card previews, just in case
-                /*
-                CharacterRosterViewController.Instance.HidePreviewItemCardInInventory();
-                CharacterRosterViewController.Instance.HidePreviewItemCardInRoster();
-                */
             }
         }
         public void OnMouseDrag()
         {
             Debug.Log("InventoryItemView.Drag()");
-            if (myItemRef == null || myItemRef.itemData == null) return;
+            //if (myItemRef == null || myItemRef.itemData == null) return;
+            if (myItemRef == null) return;
 
             // On drag start logic
             if (currentlyBeingDragged == false)
@@ -181,11 +186,20 @@ namespace HexGameEngine.Items
         {
             bool bRet = false;
             
-            if (InventoryController.Instance.IsItemValidOnSlot(MyItemRef.itemData, CharacterRosterViewController.Instance.rosterSlotMousedOver, 
+            if(MyItemRef.itemData != null)
+            {
+                if (InventoryController.Instance.IsItemValidOnSlot(MyItemRef.itemData, CharacterRosterViewController.Instance.rosterSlotMousedOver,
                 CharacterRosterViewController.Instance.CharacterCurrentlyViewing))
+                {
+                    bRet = true;
+                }
+            }
+
+            else if(MyItemRef.abilityData != null)
             {
                 bRet = true;
             }
+           
             
             return bRet;
         }

@@ -71,6 +71,11 @@ namespace HexGameEngine.UI
             {
                 TownController.Instance.HandleDropCharacterOnHospitalSlot(HospitalDropSlot.SlotMousedOver, draggedCharacterData);
             }
+            // Handle drag on library learn ability slot
+            else if (LibraryCharacterDropSlot.MousedOver)
+            {
+                TownController.Instance.LibraryCharacterSlot.BuildFromCharacter(draggedCharacterData);
+            }
 
             draggedCharacterData = null;
             draggedNode = null;

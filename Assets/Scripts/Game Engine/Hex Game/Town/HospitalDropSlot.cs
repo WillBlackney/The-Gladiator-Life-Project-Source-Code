@@ -64,17 +64,14 @@ namespace HexGameEngine.TownFeatures
         }
         public void OnRightClick()
         {
-            Debug.Log("OnRightClick");
             HandleCancel();
         }
         public void MouseEnter()
         {
-            Debug.Log("MouseEnter");
             SlotMousedOver = this;
         }
         public void MouseExit()
         {
-            Debug.Log("MouseExit");
             SlotMousedOver = null;
         }
         public void OnCancelButtonClicked()
@@ -112,7 +109,6 @@ namespace HexGameEngine.TownFeatures
         }
         public void OnCharacterDragDropSuccess(HexCharacterData character)
         {
-            Debug.Log("HospitalDropSlot.OnCharacterDragDropSuccess");
             myCharacterData = character;
             BuildViews();
         }
