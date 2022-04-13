@@ -50,10 +50,20 @@ namespace HexGameEngine.TownFeatures
         public void MouseEnter()
         {
             mousedOver = true;
+            if (myAbilityData != null)
+            {
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(myAbilityData.keyWords);
+                AbilityPopupController.Instance.OnLibraryAbilityDropSlotMousedOver(this);
+            }
         }
         public void MouseExit()
         {
             mousedOver = false;
+            if (myAbilityData != null)
+            {
+                KeyWordLayoutController.Instance.FadeOutMainView();
+                AbilityPopupController.Instance.OnAbilityButtonMousedExit();
+            }
         }
         #endregion
 

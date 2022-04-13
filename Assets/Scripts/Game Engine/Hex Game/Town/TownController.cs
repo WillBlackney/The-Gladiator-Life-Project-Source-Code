@@ -587,6 +587,10 @@ namespace HexGameEngine.TownFeatures
         }
         public void OnLibraryPageLeaveButtonClicked()
         {
+            // Clear slots
+            libraryAbilitySlot.ClearAbility();
+            libraryCharacterSlot.ClearCharacter();
+
             libraryPageVisualParent.SetActive(false);
         }
         public void OnHospitalPageButtonClicked()
