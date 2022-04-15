@@ -19,7 +19,9 @@ MonoBehaviour:
   - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: When this character dies, any characters it has summoned will also die.
+    phrase: If this character's master dies, then this character is also killed.
+  passiveItalicDescription: 
+  effectDetailTabs: []
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 0
@@ -29,8 +31,15 @@ MonoBehaviour:
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
   isInjury: 0
+  isPermanentInjury: 0
   severity: 0
   injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
+  isRacial: 0
+  race: 0
+  isBackground: 0
+  backgroundPerkQuality: 0
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 

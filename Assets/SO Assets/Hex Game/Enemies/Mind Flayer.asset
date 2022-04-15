@@ -17,38 +17,60 @@ MonoBehaviour:
   modelSize: 0
   xpReward: 15
   attributeSheet:
-    strength: 0
-    intelligence: 0
-    constitution: 0
-    dodge: 10
-    accuracy: 75
-    resolve: 10
-    wits: 0
+    strength:
+      value: 0
+      stars: 0
+    intelligence:
+      value: 0
+      stars: 0
+    constitution:
+      value: 0
+      stars: 0
+    dodge:
+      value: 10
+      stars: 0
+    accuracy:
+      value: 75
+      stars: 0
+    resolve:
+      value: 10
+      stars: 0
+    wits:
+      value: 0
+      stars: 0
     maxHealth: 50
-    stamina: 8
+    energyRecovery: 8
     maxEnergy: 8
     initiative: 8
     criticalChance: 5
     criticalModifier: 50
     auraSize: 1
+    vision: 0
     physicalResistance: 0
     magicResistance: 50
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
+    deathResistance: 0
   randomizeHealth: 1
   lowerHealthLimit: 70
   upperHealthLimit: 75
   aiTurnRoutine:
     directives:
-    - requirements: []
-      action:
+    - action:
         actionType: 1
         targettingPriority: 1
         getRangeFromAbility: 0
         range: 0
         abilityName: Shriek
-    - requirements:
+      requirements: []
+    - action:
+        actionType: 3
+        targettingPriority: 1
+        getRangeFromAbility: 1
+        range: 0
+        abilityName: Shriek
+      requirements:
       - requirementType: 8
         range: 0
         perkPairing:
@@ -57,12 +79,6 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
-      action:
-        actionType: 3
-        targettingPriority: 1
-        getRangeFromAbility: 1
-        range: 0
-        abilityName: Shriek
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: e7bbef8e195ca0a429df7f1da90b09ec, type: 2}

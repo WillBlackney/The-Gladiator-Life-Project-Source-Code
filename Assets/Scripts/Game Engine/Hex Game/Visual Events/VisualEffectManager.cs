@@ -78,12 +78,17 @@ namespace HexGameEngine.VisualEvents
         [Header("Melee Impact Prefab References")]
         public GameObject smallMeleeImpact;
 
+        [Header("Weather + Static VFX Prefabs")]
+        public GameObject toxicRain;
+
         #endregion
 
         // CORE FUNCTIONS
         #region
         public void CreateEffectAtLocation(ParticleEffect effect, Vector3 location)
         {
+            Debug.Log("VisualEffectManager.CreateEffectAtLocation() called, effect: " + effect.ToString());
+
             if (effect == ParticleEffect.None)
             {
                 return;
@@ -203,6 +208,10 @@ namespace HexGameEngine.VisualEvents
             {
                 CreateAoEMeleeArc(location);
             }
+            else if (effect == ParticleEffect.ToxicRain)
+            {
+                CreateToxicRain();
+            }
         }
         public void ShootProjectileAtLocation(ProjectileFired projectileFired, Vector3 start, Vector3 end, CoroutineData cData)
         {
@@ -251,7 +260,7 @@ namespace HexGameEngine.VisualEvents
         #region
         public void DoScreenOverlayEffect(ScreenOverlayType type, ScreenOverlayColor color, float duration, float fadeInDuration, float fadeOutDuration)
         {
-            StartCoroutine(DoScreenOverlayEffectCoroutine(type, color, duration, fadeInDuration, fadeInDuration));
+            StartCoroutine(DoScreenOverlayEffectCoroutine(type, color, duration, fadeInDuration, fadeOutDuration));
         }
         private IEnumerator DoScreenOverlayEffectCoroutine(ScreenOverlayType type, ScreenOverlayColor color, float duration, float fadeInDuration, float fadeOutDuration)
         {
@@ -987,6 +996,17 @@ namespace HexGameEngine.VisualEvents
             GameObject hn = Instantiate(ritualCirclePurple, location, ritualCirclePurple.transform.rotation);
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
+        }
+        #endregion
+
+        // MISC
+        #region
+        public void CreateToxicRain()
+        {
+            Debug.Log("VisualEffectManager.CreateToxicRain() called...");
+            GameObject hn = Instantiate(toxicRain, new Vector3(0,7,0), toxicRain.transform.rotation);
+            ToonEffect teScript = hn.GetComponent<ToonEffect>();
+            teScript.InitializeSetup(0, 1);
         }
         #endregion
 

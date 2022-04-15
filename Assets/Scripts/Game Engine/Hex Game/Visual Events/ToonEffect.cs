@@ -25,7 +25,7 @@ namespace HexGameEngine.VisualEvents
             Destroy(gameObject, 5);
 
         }
-        public void SetSortingOrder(GameObject parent, int sortingOrder)
+        private void SetSortingOrder(GameObject parent, int sortingOrder)
         {
             Debug.Log("SetSortingOrder() called on " + parent.name);
 
@@ -53,7 +53,7 @@ namespace HexGameEngine.VisualEvents
                 psr.sortingOrder += sortingOrder;
             }
         }
-        public void SetScale(GameObject parent, float scalePercentage)
+        private void SetScale(GameObject parent, float scalePercentage)
         {
             Debug.Log("SetScale() called for " + parent.name + ", scaling by " + scalePercentage.ToString());
 
@@ -68,7 +68,7 @@ namespace HexGameEngine.VisualEvents
             parent.transform.localScale = newScale;
             Debug.Log(parent.name + " new scale: " + parent.transform.localScale.x.ToString() + ", " + parent.transform.localScale.y.ToString() + ", " + parent.transform.localScale.z.ToString());
         }
-        public void StopAllEmissions()
+        private void StopAllEmissions()
         {
             foreach (ParticleSystem ps in allMyPSystems)
             {

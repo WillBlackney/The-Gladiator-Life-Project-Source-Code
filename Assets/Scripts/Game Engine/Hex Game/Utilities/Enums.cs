@@ -290,6 +290,7 @@ namespace HexGameEngine
         AtTarget = 0,
         ZoneOfControl = 1,
         Aura = 2,
+        Global = 3,
     }
     public enum AbilityEffectType
     {
@@ -408,7 +409,6 @@ namespace HexGameEngine
         FearOfUndead = 108,
         Finesse = 121,
         Focus = 75,
-        Fortified = 2,
         Footwork = 13,
         Frail = 94,
         FragileBinding = 85,            
@@ -623,6 +623,7 @@ namespace HexGameEngine
         White = 0,
         Fire = 1,
         Purple = 2,
+        PoisonGreen = 3,
     }
     public enum MovementAnimEvent
     {
@@ -670,6 +671,7 @@ namespace HexGameEngine
         HolyNova = 13,
         RitualCircleYellow = 19,
         RitualCirclePurple = 20,
+        ToxicRain = 26,
 
     }
     public enum ProjectileFired

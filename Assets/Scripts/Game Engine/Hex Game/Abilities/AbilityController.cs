@@ -14,6 +14,7 @@ using HexGameEngine.UI;
 using HexGameEngine.VisualEvents;
 using HexGameEngine.UCM;
 using UnityEngine.UI;
+using System.Linq;
 
 namespace HexGameEngine.Abilities
 {
@@ -662,11 +663,15 @@ namespace HexGameEngine.Abilities
                 {
                     tilesEffected = LevelController.Instance.GetAllHexsWithinRange(tileTarget, abilityEffect.aoeSize, true);
                 }
+                else if (abilityEffect.aoeType == AoeType.Global)
+                {
+                    tilesEffected.AddRange(LevelController.Instance.AllLevelNodes.ToList());
+                }
 
                 // Remove centre point, if needed
                 if (abilityEffect.includeCentreTile == false)
                 {
-                    if (abilityEffect.aoeType == AoeType.Aura &&
+                    if ((abilityEffect.aoeType == AoeType.Aura || abilityEffect.aoeType == AoeType.Global) &&
                         tilesEffected.Contains(caster.currentTile))
                         tilesEffected.Remove(caster.currentTile);
 
@@ -813,11 +818,15 @@ namespace HexGameEngine.Abilities
                 {
                     tilesEffected = LevelController.Instance.GetAllHexsWithinRange(tileTarget, abilityEffect.aoeSize, true);
                 }
+                else if (abilityEffect.aoeType == AoeType.Global)
+                {
+                    tilesEffected.AddRange(LevelController.Instance.AllLevelNodes.ToList());
+                }
 
                 // Remove centre point, if needed
                 if (abilityEffect.includeCentreTile == false)
                 {
-                    if (abilityEffect.aoeType == AoeType.Aura &&
+                    if ((abilityEffect.aoeType == AoeType.Aura || abilityEffect.aoeType == AoeType.Global) &&
                         tilesEffected.Contains(caster.currentTile))
                         tilesEffected.Remove(caster.currentTile);
 
@@ -1374,7 +1383,7 @@ namespace HexGameEngine.Abilities
                         // make sure that the target is teleportable if the effect is a teleport
                         if (currentAbilityAwaiting.abilityEffects.Count > 0 &&
                             currentAbilityAwaiting.abilityEffects[0].effectType == AbilityEffectType.TeleportTargetToTile &&
-                            PerkController.Instance.DoesCharacterHavePerk(firstSelectionCharacter.pManager, Perk.Fortified))
+                            HexCharacterController.Instance.IsCharacterTeleportable(firstSelectionCharacter))
                         {
                             return;
                         }
@@ -1456,10 +1465,8 @@ namespace HexGameEngine.Abilities
         {
             List<LevelNode> targettableTiles = new List<LevelNode>();
             bool includeSelfTile = false;
-            if (ability.targetRequirement == TargetRequirement.AllyOrSelf || ability.targetRequirement == TargetRequirement.AllCharacters)
-            {
-                includeSelfTile = true;
-            }
+            if (ability.targetRequirement == TargetRequirement.AllyOrSelf || ability.targetRequirement == TargetRequirement.AllCharacters)            
+                includeSelfTile = true;            
 
             targettableTiles = LevelController.Instance.GetAllHexsWithinRange(caster.currentTile, CalculateFinalRangeOfAbility(ability, caster), includeSelfTile);
 

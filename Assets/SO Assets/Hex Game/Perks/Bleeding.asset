@@ -32,7 +32,9 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: damage for each stack.
-  maxAllowedStacks: 5
+  passiveItalicDescription: 
+  effectDetailTabs: []
+  maxAllowedStacks: 10
   showStackCount: 1
   hiddenOnPassivePanel: 0
   isRewardable: 0
@@ -41,8 +43,11 @@ MonoBehaviour:
   runeBlocksIncrease: 1
   runeBlocksDecrease: 0
   isInjury: 0
+  isPermanentInjury: 0
   severity: 0
   injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 0

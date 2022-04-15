@@ -15,55 +15,48 @@ MonoBehaviour:
   myName: Orc Berserker
   race: 2
   modelSize: 2
-  xpReward: 20
+  xpReward: 55
   attributeSheet:
-    strength: 20
-    intelligence: 0
-    constitution: 0
-    dodge: 0
-    accuracy: 10
-    resolve: 10
-    wits: 5
-    maxHealth: 0
-    stamina: 8
+    strength:
+      value: 25
+      stars: 0
+    intelligence:
+      value: 0
+      stars: 0
+    constitution:
+      value: 0
+      stars: 0
+    dodge:
+      value: 0
+      stars: 0
+    accuracy:
+      value: 85
+      stars: 0
+    resolve:
+      value: 35
+      stars: 0
+    wits:
+      value: 0
+      stars: 0
+    maxHealth: 200
+    energyRecovery: 8
     maxEnergy: 8
-    initiative: 6
+    initiative: 5
     criticalChance: 5
     criticalModifier: 50
     auraSize: 1
-    physicalResistance: 25
+    vision: 0
+    physicalResistance: 35
     magicResistance: 0
     debuffResistance: 0
     stressResistance: 0
-    injuryResistance: 0
-  randomizeHealth: 1
-  lowerHealthLimit: 120
+    injuryResistance: 50
+    deathResistance: 0
+  randomizeHealth: 0
+  lowerHealthLimit: 175
   upperHealthLimit: 130
   aiTurnRoutine:
     directives:
-    - requirements:
-      - requirementType: 2
-        range: 0
-        perkPairing:
-          perkTag: 0
-          passiveStacks: 0
-        healthPercentage: 0
-        enemiesInMeleeRange: 1
-        energyReq: 0
-      - requirementType: 10
-        range: 0
-        perkPairing:
-          perkTag: 0
-          passiveStacks: 0
-        healthPercentage: 0
-        enemiesInMeleeRange: 1
-        energyReq: 3
-      action:
-        actionType: 1
-        targettingPriority: 2
-        getRangeFromAbility: 0
-        range: 0
-        abilityName: Enrage
     - requirements:
       - requirementType: 2
         range: 0
@@ -75,32 +68,17 @@ MonoBehaviour:
         energyReq: 0
       action:
         actionType: 1
-        targettingPriority: 2
+        targettingPriority: 0
         getRangeFromAbility: 0
         range: 0
         abilityName: Cleave
-    - requirements:
-      - requirementType: 7
-        range: 0
-        perkPairing:
-          perkTag: 0
-          passiveStacks: 0
-        healthPercentage: 95
-        enemiesInMeleeRange: 1
-        energyReq: 0
-      action:
-        actionType: 1
-        targettingPriority: 1
-        getRangeFromAbility: 0
-        range: 0
-        abilityName: Decapitate
     - requirements: []
       action:
         actionType: 1
         targettingPriority: 1
         getRangeFromAbility: 0
         range: 0
-        abilityName: Big Chop
+        abilityName: Strike
     - requirements: []
       action:
         actionType: 2
@@ -110,11 +88,13 @@ MonoBehaviour:
         abilityName: 
   abilityBook:
     activeAbilities:
-    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
-    - {fileID: 11400000, guid: 90e62be2d401c2f4383195876bbc8ff5, type: 2}
+    - {fileID: 11400000, guid: 5da6171d9b5a21b47b2adc4c680a46c2, type: 2}
+    - {fileID: 11400000, guid: b0a84f007fec2134c8e8baa16312f884, type: 2}
   serializedPassiveManager:
     perks:
-    - perkTag: 86
+    - perkTag: 60
+      stacks: 1
+    - perkTag: 46
       stacks: 1
   itemSet:
     mainHandItem: {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}

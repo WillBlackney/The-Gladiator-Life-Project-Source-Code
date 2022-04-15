@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
+  m_Name: Lich
+  m_EditorClassIdentifier: 
+  myName: Lich
+  race: 3
+  modelSize: 2
+  xpReward: 55
+  attributeSheet:
+    strength:
+      value: 0
+      stars: 0
+    intelligence:
+      value: 0
+      stars: 0
+    constitution:
+      value: 0
+      stars: 0
+    dodge:
+      value: 10
+      stars: 0
+    accuracy:
+      value: 75
+      stars: 0
+    resolve:
+      value: 25
+      stars: 0
+    wits:
+      value: 0
+      stars: 0
+    maxHealth: 110
+    energyRecovery: 8
+    maxEnergy: 8
+    initiative: 7
+    criticalChance: 5
+    criticalModifier: 50
+    auraSize: 1
+    vision: 0
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+    deathResistance: 0
+  randomizeHealth: 0
+  lowerHealthLimit: 110
+  upperHealthLimit: 120
+  aiTurnRoutine:
+    directives:
+    - action:
+        actionType: 1
+        targettingPriority: 0
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Toxic Rain
+      requirements: []
+    - action:
+        actionType: 5
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Summon Skeleton
+      requirements: []
+    - action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Strike
+      requirements: []
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: 82b43c0a427979b48946285cd214d509, type: 2}
+    - {fileID: 11400000, guid: 68ebbc5400e2348409a99ff9ca0ec6c5, type: 2}
+    - {fileID: 11400000, guid: 5da6171d9b5a21b47b2adc4c680a46c2, type: 2}
+  serializedPassiveManager:
+    perks:
+    - perkTag: 24
+      stacks: 1
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 12b837d9baaf68e4eb55cfab4ef25cbd, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  modelParts:
+  - Skeleton_Necromancer_Head
+  - Undead_Face_3
+  - Black_Necromancer_Chest_Wear
+  - Black_Necromancer_Right_Hand_Wear
+  - Black_Necromancer_Right_Leg_Wear
+  - Left_Hand_Green_Staff_1

@@ -152,20 +152,17 @@ namespace HexGameEngine.VisualEvents
             else if (vEvent.onCharacter == CreateOnCharacter.Target)
             {
                 HexCharacterView view = characterTarget.hexCharacterView;
-                /*
-                // Find target vector
-                Vector3 targetPos = Vector3.zero;
-                if (tileTarget != null)
-                    targetPos = tileTarget.WorldPosition;
-                else if (characterTarget != null)
-                    targetPos = characterTarget.hexCharacterView.WorldPosition;
-                else targetPos = user.hexCharacterView.WorldPosition;
-                */
-
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 VisualEffectManager.Instance.CreateEffectAtLocation(vEvent.particleEffect, view.WorldPosition), QueuePosition.Back, 0, 0, stackEvent);
             }
-           
+
+            else if (vEvent.onCharacter == CreateOnCharacter.None)
+            {
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                   VisualEffectManager.Instance.CreateEffectAtLocation(vEvent.particleEffect, new Vector3(0,0,0)), QueuePosition.Back, 0, 0, stackEvent);
+
+            }
+
         }
         private void ResolveScreenOverlay(AnimationEventData vEvent, VisualEvent stackEvent)
         {

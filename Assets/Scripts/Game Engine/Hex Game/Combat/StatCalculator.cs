@@ -821,7 +821,7 @@ namespace HexGameEngine
         }
         public static int GetTotalVision(HexCharacterModel c)
         {
-            int vision = c.attributeSheet.auraSize;
+            int vision = c.attributeSheet.vision;
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.EagleEye))
                 vision += 1;
 
@@ -841,7 +841,7 @@ namespace HexGameEngine
         }
         public static int GetTotalVision(HexCharacterData c)
         {
-            int vision = c.attributeSheet.auraSize;
+            int vision = c.attributeSheet.vision;
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.EagleEye))
                 vision += 1;
 
@@ -866,10 +866,6 @@ namespace HexGameEngine
         public static int GetTotalPhysicalResistance(HexCharacterModel c)
         {
             int resistanceReturned = c.attributeSheet.physicalResistance;
-
-            // Fortified
-            if(PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fortified))            
-                resistanceReturned += 25;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutArtery))
                 resistanceReturned -= 20;

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Sundering Strike
   includeInGame: 1
-  baseAbilityDescription: Deal 125% Weapon damage to target and apply 2 Weakened.
+  baseAbilityDescription: Deal 125% Weapon damage to target and apply 2 Crippled.
   abilitySprite: {fileID: 21300000, guid: f1a479e622c1a7d468856ba2c0f89a66, type: 3}
   energyCost: 4
   baseCooldown: 2
@@ -32,6 +32,7 @@ MonoBehaviour:
     level: 1
   abilitySubRequirements: []
   baseRange: 1
+  gainRangeBonusFromVision: 0
   hitChanceModifier: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
@@ -168,7 +169,7 @@ MonoBehaviour:
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
     perkPairing:
-      perkTag: 49
+      perkTag: 5
       passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
@@ -200,7 +201,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Weakened
+    phrase: Crippled
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -209,4 +210,4 @@ MonoBehaviour:
   - kewWordType: 3
     passiveType: 0
   - kewWordType: 1
-    passiveType: 49
+    passiveType: 5

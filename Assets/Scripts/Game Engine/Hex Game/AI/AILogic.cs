@@ -58,16 +58,20 @@ namespace HexGameEngine.AI
             // Ability usage
             if (directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
             {
-                if (target == null) return false;
+                if (target == null && directive.action.targettingPriority != TargettingPriority.None) 
+                {
+                    Debug.Log("AILogic.IsDirectiveActionable() returning false: target is null");
+                    return false; 
+                }
                 // Check ability useability
                 AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
                 if (ability == null)
-                    Debug.LogWarning("AILogic.IsDirectiveActionable() could not find the ability '" + directive.action.abilityName +
+                    Debug.Log("AILogic.IsDirectiveActionable() could not find the ability '" + directive.action.abilityName +
                         "' in the AI's spell book...");
 
                 if(!AbilityController.Instance.IsAbilityUseable(character, ability))
                 {
-                    Debug.LogWarning("AILogic.IsDirectiveActionable() ability '" + directive.action.abilityName +
+                    Debug.Log("AILogic.IsDirectiveActionable() ability '" + directive.action.abilityName +
                        "' is not useable");
                     return false;
                 }
@@ -76,7 +80,7 @@ namespace HexGameEngine.AI
                 if(ability.targetRequirement != TargetRequirement.NoTarget &&
                    !AbilityController.Instance.IsTargetOfAbilityValid(character, target, ability))
                 {
-                    Debug.LogWarning("AILogic.IsDirectiveActionable() target of ability '" + directive.action.abilityName +
+                    Debug.Log("AILogic.IsDirectiveActionable() target of ability '" + directive.action.abilityName +
                       "' is not valid");
                     return false;
                 }
@@ -88,12 +92,12 @@ namespace HexGameEngine.AI
                 // Check ability useability
                 AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
                 if (ability == null)
-                    Debug.LogWarning("AILogic.IsDirectiveActionable() could not find the ability '" + directive.action.abilityName +
+                    Debug.Log("AILogic.IsDirectiveActionable() could not find the ability '" + directive.action.abilityName +
                         "' in the AI's spell book...");
 
                 if (!AbilityController.Instance.IsAbilityUseable(character, ability))
                 {
-                    Debug.LogWarning("AILogic.IsDirectiveActionable() ability '" + directive.action.abilityName +
+                    Debug.Log("AILogic.IsDirectiveActionable() ability '" + directive.action.abilityName +
                        "' is not useable");
                     return false;
                 }
@@ -633,7 +637,7 @@ namespace HexGameEngine.AI
                         allies.Add(ally);
                 }
 
-                Debug.LogWarning("AI, allies found = " + allies.Count.ToString());
+                Debug.Log("AI, allies found = " + allies.Count.ToString());
 
                 target = allies.GetRandomElement();
             }

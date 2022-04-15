@@ -1009,12 +1009,6 @@ namespace HexGameEngine.Characters
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.ConcealingClouds, -1, true, 0.5f);
                 }
 
-                // Fortify
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fortified) && character.currentHealth > 0)
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Fortified, -1, true, 0.5f);
-                }
-
                 // Cleansing Waters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.CleaningWaters) && character.currentHealth > 0)
                 {
@@ -1499,8 +1493,7 @@ namespace HexGameEngine.Characters
         }
         public bool IsCharacterTeleportable(HexCharacterModel character)
         {
-            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fortified) ||
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Implaccable))
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Implaccable))
             {
                 return false;
             }
@@ -1508,8 +1501,7 @@ namespace HexGameEngine.Characters
         }
         public bool IsCharacterKnockBackable(HexCharacterModel character)
         {
-            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fortified) ||
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Implaccable))
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Implaccable))
             {
                 return false;
             }

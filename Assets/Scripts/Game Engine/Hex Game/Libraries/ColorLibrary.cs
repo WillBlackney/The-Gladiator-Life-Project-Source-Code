@@ -41,6 +41,7 @@ namespace HexGameEngine.Libraries
         public Color whiteOverlayColour;
         public Color fireOverlayColour;
         public Color purpleOverlayColour;
+        public Color poisonGreenOverlayColour;
 
         [Header("Font Colors")]
         public Color cardUpgradeFontColor;
@@ -137,6 +138,10 @@ namespace HexGameEngine.Libraries
             else if (overlay == ScreenOverlayColor.Purple)
             {
                 colorReturned = purpleOverlayColour;
+            }
+            else if (overlay == ScreenOverlayColor.PoisonGreen)
+            {
+                colorReturned = poisonGreenOverlayColour;
             }
 
             return colorReturned;

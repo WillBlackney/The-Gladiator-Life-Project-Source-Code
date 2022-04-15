@@ -141,8 +141,7 @@ namespace HexGameEngine.Combat
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Bully perk modifier = " + damageModPercentageAdditive.ToString());
             }
 
-            // Check 'Enrage' bonus
-            // Check 'bully' bonus
+            // Check 'Berserk' bonus
             if (attacker != null &&
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Berserk) &&
                 target != null)
@@ -1127,6 +1126,21 @@ namespace HexGameEngine.Combat
                 HexCharacterController.Instance.DestroyCharacterView(view);
             }, QueuePosition.Back, 0, 0, parentEvent);
 
+            // Lich death, kill all summoned skeletons
+            if(character.myName == "Lich")
+            {
+                List<HexCharacterModel> skeletons = new List<HexCharacterModel>();
+                foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(character, false))
+                {
+                    if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FragileBinding))
+                    {
+                        HandleDeathBlow(c, c.GetLastStackEventParent());
+                    }
+
+                }
+            }
+
+            /*
             // If character dying has fragile binding
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FragileBinding))
             {
@@ -1141,6 +1155,7 @@ namespace HexGameEngine.Combat
                        
                 }
             }
+            */
 
 
             /*
