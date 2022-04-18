@@ -742,7 +742,7 @@ namespace HexGameEngine.Characters
 
             // Set up abilities
             newCharacter.abilityBook = new AbilityBook();
-            List<AbilityDataSO> selectedAbilities = GenerateRecruitCharacterAbilitiesFromProspects(ct.possibleAbilities);
+            List<AbilityDataSO> selectedAbilities = GenerateRecruitCharacterAbilitiesFromProspects(ct.possibleAbilities, ct.startingAbilityCount);
             foreach(AbilityDataSO a in selectedAbilities)
             {
                 AbilityController.Instance.HandleCharacterDataLearnNewAbility
