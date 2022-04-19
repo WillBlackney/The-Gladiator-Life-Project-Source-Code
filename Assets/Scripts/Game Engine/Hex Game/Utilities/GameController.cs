@@ -629,7 +629,10 @@ namespace HexGameEngine
             LevelController.Instance.ShowAllNodeViews();
 
             // Setup player characters
-            HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
+            List<HexCharacterData> spawnedPlayerCharacters = new List<HexCharacterData>();
+            foreach(CharacterWithSpawnData c in RunController.Instance.CurrentDeployedCharacters)            
+                spawnedPlayerCharacters.Add(c.characterData);            
+            HexCharacterController.Instance.CreateAllPlayerCombatCharacters(spawnedPlayerCharacters);
 
             // Setup enemy characters
             HexCharacterController.Instance.SpawnEnemyEncounter(RunController.Instance.CurrentCombatContractData.enemyEncounterData);

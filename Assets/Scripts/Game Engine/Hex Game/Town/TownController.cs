@@ -788,7 +788,8 @@ namespace HexGameEngine.TownFeatures
         }
         private void HandleReadyButtonClicked()
         {
-            var characters = GetDeployedCharacters();
+            List<CharacterWithSpawnData> characters = GetDeployedCharacters();
+
             // Validate
             if (characters.Count == 0)
             {
