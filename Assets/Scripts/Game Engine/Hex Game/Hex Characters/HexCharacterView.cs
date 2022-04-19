@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace HexGameEngine.Characters
 {
@@ -37,6 +38,7 @@ namespace HexGameEngine.Characters
         public Slider stressBarWorld;
         public TextMeshProUGUI stressTextWorld;
         public TextMeshProUGUI maxStressTextWorld;
+        public Image stressBarShatteredGlowWorld;
         [PropertySpace(SpaceBefore = 50, SpaceAfter = 0)]
 
         [Header("GUI Canvas References")]
@@ -88,6 +90,7 @@ namespace HexGameEngine.Characters
         public UniversalCharacterModel ucm;
         public Animator ucmAnimator;
         public EntityRenderer entityRenderer;
+        public CharacterVfxManager vfxManager;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Perk Components")]
@@ -119,11 +122,29 @@ namespace HexGameEngine.Characters
         public void OnAnyWorldUiMouseExit()
         {
             mouseOverWorldUI = false;
-            if (!mouseOverWorldUI && !mouseOverModel)
-            {
-                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(this, null, 0.25f, 0.25f);
-            }
+            StartCoroutine(OnAnyWorldUiMouseExitCoroutine());
 
+        }
+        private IEnumerator OnAnyWorldUiMouseExitCoroutine()
+        {
+            yield return new WaitForSeconds(0.15f);
+            if (!mouseOverWorldUI && !mouseOverModel)            
+                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(this, null, 0.25f, 0.25f);            
+        }
+        #endregion
+
+        // Misc
+        #region
+        public void DoShatteredGlow()
+        {
+            stressBarShatteredGlowWorld.DOKill();
+            stressBarShatteredGlowWorld.DOFade(0, 0);
+            stressBarShatteredGlowWorld.DOFade(1, 0.25f).SetLoops(-1, LoopType.Yoyo);
+        }
+        public void StopShatteredGlow()
+        {
+            stressBarShatteredGlowWorld.DOKill();
+            stressBarShatteredGlowWorld.DOFade(0, 0.25f);
         }
         #endregion
     }

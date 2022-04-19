@@ -1046,7 +1046,7 @@ namespace HexGameEngine.Combat
 
         // Handle Death
         #region
-        private void HandleDeathBlow(HexCharacterModel character, VisualEvent parentEvent = null)
+        public void HandleDeathBlow(HexCharacterModel character, VisualEvent parentEvent = null, bool guaranteedDeath = false)
         {
             Debug.Log("CombatLogic.HandleDeathBlow() started for " + character.myName);
 
@@ -1061,25 +1061,23 @@ namespace HexGameEngine.Combat
 
             // Remove from persitency
             if (character.allegiance == Allegiance.Enemy)
-            {
                 HexCharacterController.Instance.RemoveEnemyFromPersistency(character);
-            }
-            
+
             else if (character.allegiance == Allegiance.Player && HexCharacterController.Instance.AllSummonedDefenders.Contains(character))
-            {
                 HexCharacterController.Instance.RemoveSummonedDefenderFromPersistency(character);
-            }
-            
+
             else if (character.allegiance == Allegiance.Player)
-            {
                 HexCharacterController.Instance.RemoveDefenderFromPersistency(character);
-            }
 
             // Remove from activation order
             TurnController.Instance.RemoveEntityFromActivationOrder(character);
 
             // Fade out world space GUI
-            VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null), QueuePosition.Back, 0, 0, parentEvent);
+            VisualEventManager.Instance.CreateVisualEvent(() => 
+            { 
+                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null);
+                view.vfxManager.StopAllEffects();
+            }, QueuePosition.Back, 0, 0, parentEvent);
 
             // Play death animation
             // VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySound(entity.audioProfile, AudioSet.Die));
@@ -1090,9 +1088,8 @@ namespace HexGameEngine.Combat
 
             // Fade out UCM
             VisualEventManager.Instance.CreateVisualEvent(() => CharacterModeller.FadeOutCharacterModel(view.ucm, 1), QueuePosition.Back, 0, 0, parentEvent);
-            VisualEventManager.Instance.CreateVisualEvent(() => CharacterModeller.FadeInCharacterShadow(view, 0.5f), QueuePosition.Back, 0, 1, parentEvent);
-            //VisualEventManager.Instance.InsertTimeDelayInQueue(1f);
-
+            VisualEventManager.Instance.CreateVisualEvent(() => CharacterModeller.FadeOutCharacterShadow(view, 0.5f), QueuePosition.Back, 0, 1, parentEvent);
+           
             // Destroy characters activation window and update other window positions
             HexCharacterModel currentlyActivatedEntity = TurnController.Instance.EntityActivated;
             VisualEventManager.Instance.CreateVisualEvent(() => TurnController.Instance.OnCharacterKilledVisualEvent(window, currentlyActivatedEntity, null), QueuePosition.Back, 0, 1f, parentEvent);
@@ -1101,13 +1098,13 @@ namespace HexGameEngine.Combat
             if(character.controller == Controller.Player)
             {
                 DeathRollResult result = RollForDeathResist(character);
-                if (result.pass)
+                if (result.pass && !guaranteedDeath)
                 {
                     // Gain permanent injury
                     PerkIconData permInjury = PerkController.Instance.GetRandomValidPermanentInjury(character);
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, permInjury.perkTag, 1, false, 0, null);
 
-                    // Move health to 1 (since 0 is invalid and there not dead)
+                    // Move health to 1 (since 0 is invalid and they're not dead)
                     CharacterDataController.Instance.SetCharacterHealth(character.characterData, 1);
                 }
                 else
@@ -1141,32 +1138,6 @@ namespace HexGameEngine.Combat
                 }
             }
 
-            /*
-            // If character dying has fragile binding
-            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FragileBinding))
-            {
-                List<HexCharacterModel> skeletons = new List<HexCharacterModel>();
-                foreach(HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(character, false))
-                {
-                    if (c.myName == "Shambling Skeleton")
-                    {
-                        //VisualEventManager.Instance.CreateStackParentVisualEvent(character);
-                        HandleDeathBlow(c, c.GetLastStackEventParent());
-                    }
-                       
-                }
-            }
-            */
-
-
-            /*
-            // Check if the game over defeat event should be triggered
-            if (HexCharacterController.Instance.AllDefenders.Count == 0)
-            {
-                StartCombatOverDefeatProcess();
-            }
-            */
-
             // Check if the combat defeat event should be triggered
             if (HexCharacterController.Instance.AllDefenders.Count == 0 &&
                 currentCombatState == CombatGameState.CombatActive)
@@ -1185,9 +1156,7 @@ namespace HexGameEngine.Combat
                 currentCombatState = CombatGameState.CombatInactive;
                 HandleOnCombatVictoryEffects();
                 GameController.Instance.StartCombatVictorySequence();               
-            }
-
-            
+            }            
 
             // If this character died during their turn (but no during end turn phase), 
             // resolve the transition to next character activation
@@ -1195,7 +1164,7 @@ namespace HexGameEngine.Combat
             {
                 TurnController.Instance.ActivateNextEntity();
             }
-        }
+        }       
         #endregion
 
         // Combat Vuctory, Defeat + Game Over Logic

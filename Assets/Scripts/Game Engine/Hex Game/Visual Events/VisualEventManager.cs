@@ -281,16 +281,6 @@ namespace HexGameEngine.VisualEvents
         {
             VisualEvent vEvent = new VisualEvent(eventFunction, null, startDelay, endDelay, VisualEventType.Single);
 
-            /*
-            if (parentEvent != null )
-            {
-                if (parentEvent.isPlaying == false)
-                    parentEvent.AddEventToStack(vEvent);
-                else
-                    CreateStackParentVisualEvent(parentEvent.myCharacter);
-            }
-            */
-
             if (parentEvent != null && parentEvent.isPlaying == false)
                 parentEvent.AddEventToStack(vEvent);
 

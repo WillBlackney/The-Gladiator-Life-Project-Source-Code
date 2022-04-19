@@ -151,6 +151,9 @@ namespace HexGameEngine.Characters
 
             // Add to persistency
             AddDefenderToPersistency(model);
+
+            // REMOVE AFTER TESTING SHATTERED STRESS STATE!
+            ModifyStress(model, 99);
         }
         public HexCharacterModel CreateEnemyHexCharacter(HexCharacterData data, LevelNode startPosition)
         {
@@ -510,6 +513,8 @@ namespace HexGameEngine.Characters
         {
             Debug.Log("CharacterEntityController.ModifyStress() called for " + character.myName);
 
+            if (character.currentStress >= 100 && stressGainedOrLost > 0) return;
+
             // Enemy characters do not suffer from stress
             if (character.allegiance == Allegiance.Enemy) return;
 
@@ -517,34 +522,26 @@ namespace HexGameEngine.Characters
             int originalStress = character.currentStress;
             int finalStress = character.currentStress;
             StressState previousStressState = CombatController.Instance.GetStressStateFromStressAmount(character.currentStress);
+            finalStress += stressGainedOrLost;            
 
-            finalStress += stressGainedOrLost;
-            StressState newStressState = CombatController.Instance.GetStressStateFromStressAmount(character.currentStress);
+            // prevent stress increasing over maximum
+            if (finalStress > 100)            
+                finalStress = 100;            
 
-            // prevent health increasing over maximum
-            if (finalStress > 100)
-            {
-                finalStress = 100;
-            }
-
-            // prevent health going less then 0
-            if (finalStress < 0)
-            {
+            // prevent stress going less then 0
+            if (finalStress < 0)            
                 finalStress = 0;
-            }
 
+            // Determine new stress state
+            StressState newStressState = CombatController.Instance.GetStressStateFromStressAmount(finalStress);
+            
             // Set stress after calculation
             character.stressGainedThisCombat += finalStress - originalStress;
             character.currentStress = finalStress;
 
             // relay changes to character data
-            if (character.characterData != null && relayToCharacterData)
-            {
-                CharacterDataController.Instance.SetCharacterStress(character.characterData, finalStress);
-            }
-
-            // Print
-            Debug.Log(character.myName + " stress value = " + character.currentStress.ToString());
+            if (character.characterData != null && relayToCharacterData)            
+                CharacterDataController.Instance.SetCharacterStress(character.characterData, finalStress);            
 
             // Stress VFX
             if (stressGainedOrLost > 0 && showVFX)
@@ -568,7 +565,17 @@ namespace HexGameEngine.Characters
             // Check if there was a change of stress state, up or down
             if(previousStressState != newStressState)
             {
+                // Check if shattered
+                if(newStressState == StressState.Shattered && showVFX)
+                {
+                    // Notification event
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    {
+                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "SHATTERED!");
+                        view.vfxManager.PlayShattered();
+                    }, QueuePosition.Back, 0.5f, 0.5f);
 
+            }
             }
         }
         private void UpdateStressGUIElements(HexCharacterModel character, int stress)
@@ -585,14 +592,11 @@ namespace HexGameEngine.Characters
             // Modify WORLD space ui
             character.hexCharacterView.stressBarWorld.value = stressBarFloat;
             character.hexCharacterView.stressTextWorld.text = stress.ToString();
-            //character.hexCharacterView.maxStressTextWorld.text = "100";
 
             // Modify UI elements
             character.hexCharacterView.stressBarUI.value = stressBarFloat;
             character.hexCharacterView.stressTextUI.text = stress.ToString();
             character.hexCharacterView.maxStressTextUI.text = "100";
-
-            //myActivationWindow.myHealthBar.value = finalValue;
 
             character.hexCharacterView.stressPanel.BuildPanelViews(character);
 
@@ -902,13 +906,62 @@ namespace HexGameEngine.Characters
                 {
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.DivineFavour, -1, true, 0.5f);
                 }
+            }           
+
+            // If shattered, determine result
+            if(CombatController.Instance.GetStressStateFromStressAmount(character.currentStress) == StressState.Shattered)
+            {
+                int roll = RandomGenerator.NumberBetween(1, 4);
+                Debug.Log("HexCharacterController.OnTurnStart() resolving shattered stress state event...");
+
+
+                
+                // Rally
+                if (roll == 1)
+                {
+                    Debug.Log("HexCharacterController.OnTurnStart() character rallied from shattered");
+
+                    // Rally notification
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    {
+                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Rallied!");
+                        view.vfxManager.StopShattered();
+                    }, QueuePosition.Back, 0, 0.5f);
+
+                    // Recover 10 stress
+                    ModifyStress(character, -10, true, true);
+
+                    // End turn
+                    CharacterOnTurnEnd(character);
+                    return;
+
+                }
+
+                // Heart atack => Death
+                else if(roll == 2)
+                {
+                     Debug.Log("HexCharacterController.OnTurnStart() character had a heart attack from being shattered");
+
+                // Rally notification
+                VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "HEART ATTACK!"), QueuePosition.Back, 0, 0.25f);
+
+                // Die
+                CombatController.Instance.HandleDeathBlow(character, null, true);
+                }
+
+                // Pass
+                else
+                {
+                    Debug.Log("HexCharacterController.OnTurnStart() character passing turn due to shattered stress state");
+
+                    // Notification
+                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Frozen by Fear..."), QueuePosition.Back, 0, 0.5f);
+                }
+                
             }
 
-            // was character killed by a DoT?
-            if(character.currentHealth <= 0)
-            {
-                return;
-            }
+            // Was character killed by a DoT or heart attack?
+            if (character.currentHealth <= 0) return;
 
             // ENEMY Start turn 
             if (character.controller == Controller.AI)
@@ -1347,7 +1400,7 @@ namespace HexGameEngine.Characters
         }
         public void FadeOutCharacterShadow(HexCharacterView view, float speed)
         {
-            view.ucmShadowCg.DOFade(1f, 0f);
+            view.ucmShadowCg.DOKill();
             view.ucmShadowCg.DOFade(0f, speed);
         }
         public void ShowFreeStrikeIndicator(HexCharacterView view)
@@ -1794,7 +1847,8 @@ namespace HexGameEngine.Characters
         {
             bool bRet = true;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Stunned) )
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Stunned) ||
+                CombatController.Instance.GetStressStateFromStressAmount(c.currentStress) == StressState.Shattered)
                 bRet = false;
 
             return bRet;

@@ -478,6 +478,12 @@ namespace HexGameEngine.Perks
                 else if (perkData.isPermanentInjury) character.permanentInjuriesGainedThisCombat.Add(perk);
             }
 
+            if(perk == Perk.Stunned && showVFX)
+            {
+                if (newFinalStackcount > 0) VisualEventManager.Instance.CreateVisualEvent(() => character.hexCharacterView.vfxManager.PlayStunned());
+                else VisualEventManager.Instance.CreateVisualEvent(() => character.hexCharacterView.vfxManager.StopStunned());
+            }
+
             return true;
 
         }

@@ -17,31 +17,53 @@ MonoBehaviour:
   modelSize: 0
   xpReward: 5
   attributeSheet:
-    strength: 0
-    intelligence: 0
-    constitution: 0
-    dodge: 0
-    accuracy: 65
-    resolve: 5
-    wits: 0
-    maxHealth: 0
-    stamina: 8
+    strength:
+      value: 0
+      stars: 0
+    intelligence:
+      value: 0
+      stars: 0
+    constitution:
+      value: 0
+      stars: 0
+    dodge:
+      value: 0
+      stars: 0
+    accuracy:
+      value: 75
+      stars: 0
+    resolve:
+      value: 0
+      stars: 0
+    wits:
+      value: 0
+      stars: 0
+    maxHealth: 20
+    energyRecovery: 8
     maxEnergy: 8
     initiative: 1
     criticalChance: 5
     criticalModifier: 50
     auraSize: 1
+    vision: 0
     physicalResistance: 0
     magicResistance: 0
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
-  randomizeHealth: 1
+    deathResistance: 25
+  randomizeHealth: 0
   lowerHealthLimit: 1
   upperHealthLimit: 1
   aiTurnRoutine:
     directives:
-    - requirements:
+    - action:
+        actionType: 1
+        targettingPriority: 1
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Strike
+      requirements:
       - requirementType: 1
         range: 1
         perkPairing:
@@ -50,19 +72,13 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
-      action:
-        actionType: 1
-        targettingPriority: 1
-        getRangeFromAbility: 0
-        range: 0
-        abilityName: Strike
-    - requirements: []
-      action:
+    - action:
         actionType: 2
         targettingPriority: 1
         getRangeFromAbility: 0
         range: 0
         abilityName: 
+      requirements: []
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 5da6171d9b5a21b47b2adc4c680a46c2, type: 2}

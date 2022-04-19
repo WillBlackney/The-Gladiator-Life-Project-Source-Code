@@ -24,13 +24,13 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 22
+      value: 0
       stars: 0
     dodge:
       value: 0
       stars: 0
     accuracy:
-      value: 75
+      value: 200
       stars: 0
     resolve:
       value: 0
@@ -38,9 +38,9 @@ MonoBehaviour:
     wits:
       value: 0
       stars: 0
-    maxHealth: 1
-    energyRecovery: 8
-    maxEnergy: 20
+    maxHealth: 1000
+    energyRecovery: 50
+    maxEnergy: 50
     initiative: 100
     criticalChance: 5
     criticalModifier: 50
@@ -54,13 +54,7 @@ MonoBehaviour:
     deathResistance: 100
   abilityBook:
     activeAbilities:
-    - {fileID: 11400000, guid: 36a0268a5ac37d742960a07bfe17be42, type: 2}
-    - {fileID: 11400000, guid: a0eec0cf113916e40bbb19662454dc56, type: 2}
-    - {fileID: 11400000, guid: a1b64ada9457a2b4a951d2b5f2f7ced7, type: 2}
     - {fileID: 11400000, guid: b566ecb35016fa449ae9e743e809d086, type: 2}
-    - {fileID: 11400000, guid: 30fba2b2b3154994f91264dd96a76258, type: 2}
-    - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
-    - {fileID: 11400000, guid: c367e762d7251324b9199c63a443d4af, type: 2}
   serializedPassiveManager:
     perks: []
   modelParts:
@@ -77,10 +71,4 @@ MonoBehaviour:
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
-  talentPairings:
-  - talentSchool: 2
-    level: 1
-  - talentSchool: 5
-    level: 1
-  - talentSchool: 8
-    level: 1
+  talentPairings: []

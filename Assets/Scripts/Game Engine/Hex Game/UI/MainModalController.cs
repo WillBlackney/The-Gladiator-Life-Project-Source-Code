@@ -56,8 +56,7 @@ namespace HexGameEngine.UI
         // Logic
         #region
         void Update()
-        {
-           
+        {           
             if (visualParent.activeSelf)
             {
                 Debug.Log("Mouse pos: " + Input.mousePosition);
@@ -159,8 +158,7 @@ namespace HexGameEngine.UI
 
             ret = new Vector2(x, y);
             return ret;
-        }
-       
+        }       
         public void HideModal()
         {
             mainCg.DOKill();
