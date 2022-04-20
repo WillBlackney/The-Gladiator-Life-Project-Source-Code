@@ -102,6 +102,7 @@ namespace HexGameEngine.JourneyLogic
             TownController.Instance.GenerateDailyAbilityTomes();
 
             // Refresh armoury items
+            TownController.Instance.GenerateDailyItems();
 
             // Characters in town features gain effect of hospital feature (heal, remove stress, remove all injuries, etc)
             TownController.Instance.HandleApplyHospitalFeaturesOnNewDayStart();

@@ -81,6 +81,10 @@ namespace HexGameEngine.Items
         {
             return Array.FindAll(allItems, i => i.lootable).ToList();
         }
+        public List<ItemData> GetAllLootableItems(Rarity rarity)
+        {
+            return Array.FindAll(allItems, i => i.lootable && i.rarity == rarity).ToList();
+        }
         public ItemData GetRandomLootableItemByRarity(Rarity rarity)
         {
             ItemData ret = null;

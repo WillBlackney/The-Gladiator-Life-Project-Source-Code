@@ -291,6 +291,8 @@ namespace HexGameEngine.Items
         #region
         private void BuildAndShowConfirmActionScreenFromItem(InventoryItem item, ItemActionType actionType)
         {
+            // TO DO: Recreate discard item screen pop up, the uncomment
+            /*
             HexCharacterData c = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;            
             itemInSelection = item;
             currentActionType = actionType;
@@ -326,6 +328,7 @@ namespace HexGameEngine.Items
                 currentActionType = ItemActionType.None;
                 confirmActionScreenVisualParent.SetActive(false);
             }
+            */
 
 
         }

@@ -66,7 +66,7 @@ MonoBehaviour:
   - Arcanist_Chest_Wear
   - Arcanist_Right_Leg_Wear
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: fa120bf877f019540988f7ee83a357fc, type: 2}
+    mainHandItem: {fileID: 11400000, guid: c420762d59a4b8f4788afabeee27eb35, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}

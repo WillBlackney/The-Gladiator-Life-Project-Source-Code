@@ -595,7 +595,7 @@ namespace HexGameEngine.TownFeatures
             for (int i = 0; i < currentItems.Count && i < itemShopSlots.Length; i++)
                 itemShopSlots[i].BuildFromItemShopData(currentItems[i]);
         }
-        public void HandleBuyItemFromLibrary(ItemShopData data)
+        public void HandleBuyItemFromArmoury(ItemShopData data)
         {
             // Pay gold cost
             PlayerDataController.Instance.ModifyPlayerGold(-data.goldCost);
@@ -609,6 +609,25 @@ namespace HexGameEngine.TownFeatures
 
             // Rebuild page
             BuildAndShowArmouryPage();
+        }
+        public void GenerateDailyItems()
+        {
+            currentItems.Clear();
+            List<ItemData> possibleItems = ItemController.Instance.GetAllLootableItems(Rarity.Rare);
+            possibleItems.AddRange(ItemController.Instance.GetAllLootableItems(Rarity.Epic));
+            possibleItems.Shuffle();
+
+            // to do in future: generate 2 trinkets, 2 weapons and 2 armour pieces: 4 rare, 2 epic
+
+            for (int i = 0; i < 6; i++)
+            {
+                ItemData item = ItemController.Instance.GenerateNewItemWithRandomEffects(possibleItems[i]);
+                int goldCost = 0;
+                if (item.rarity == Rarity.Rare) goldCost = RandomGenerator.NumberBetween(75, 100);
+                else if (item.rarity == Rarity.Epic) goldCost = RandomGenerator.NumberBetween(140, 160);
+                currentItems.Add(new ItemShopData(item, goldCost));
+            }
+
         }
         #endregion
 

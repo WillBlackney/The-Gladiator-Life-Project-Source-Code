@@ -75,6 +75,13 @@ namespace HexGameEngine.Items
             PlacePanelAtRosterItemSlotPosition(item);
             ForceRebuildLayouts();
         }
+        public void OnShopItemMousedOver(ItemShopSlot item)
+        {
+            FadeInPanel();
+            BuildPanelFromItemData(item.MyData.item);
+            PlacePanelAtShopItemSlotPosition(item);
+            ForceRebuildLayouts();
+        }
         public void OnInventoryItemMouseExit()
         {
             HidePanel(); 
@@ -119,6 +126,15 @@ namespace HexGameEngine.Items
            
             rect.position = view.transform.position;
             rect.localPosition = new Vector3(rect.localPosition.x - xOffset, rect.localPosition.y - yOffset, 0);
+        }
+        private void PlacePanelAtShopItemSlotPosition(ItemShopSlot view)
+        {
+            RectTransform rect = visualParent.GetComponent<RectTransform>();
+            float xOffset = rect.rect.width / 2 + 80;
+            float yOffset = rect.rect.height / 2;
+
+            rect.position = view.transform.position;
+            rect.localPosition = new Vector3(rect.localPosition.x - xOffset, rect.localPosition.y + yOffset, 0);
         }
         private void PlacePanelAtRosterItemSlotPosition(RosterItemSlot view)
         {

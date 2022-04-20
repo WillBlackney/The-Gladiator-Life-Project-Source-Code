@@ -38,24 +38,17 @@ namespace HexGameEngine.TownFeatures
         public void MouseClick()
         {            
             if (AbleToBuy())
-                TownController.Instance.HandleBuyItemFromLibrary(MyData);            
+                TownController.Instance.HandleBuyItemFromArmoury(MyData);            
         }
         public void MouseEnter()
         {            
-            if (myData != null)
-            {
-                //ItemPopupController.Instance.OnInventoryItemMousedOver(this);
-            }
-            
+            if (myData != null)            
+                ItemPopupController.Instance.OnShopItemMousedOver(this);         
         }
         public void MouseExit()
-        {
-            
-            if (myData != null)
-            {
-                ItemPopupController.Instance.HidePanel();
-            }
-            
+        {            
+            if (myData != null)            
+                ItemPopupController.Instance.HidePanel();          
         }
         #endregion
 
