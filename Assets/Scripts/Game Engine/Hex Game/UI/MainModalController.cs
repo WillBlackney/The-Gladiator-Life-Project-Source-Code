@@ -59,7 +59,6 @@ namespace HexGameEngine.UI
         {           
             if (visualParent.activeSelf)
             {
-                Debug.Log("Mouse pos: " + Input.mousePosition);
                 Vector2 pos;
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(mainCanvas.transform as RectTransform, Input.mousePosition, mainCanvas.worldCamera, out pos);
                 positionParent.position = mainCanvas.transform.TransformPoint(pos);

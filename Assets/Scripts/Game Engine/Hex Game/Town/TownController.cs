@@ -96,6 +96,10 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] private Sprite invalidButtonSprite;
         [SerializeField] private Sprite validButtonSprite;
 
+        [Title("Armoury Page Components")]
+        [SerializeField] private GameObject armouryPageVisualParent;
+        [SerializeField] private ItemShopSlot[] itemShopSlots;
+
         [Title("Choose Combat Page Components")]
         [SerializeField] private GameObject chooseCombatPageMainVisualParent;
         [SerializeField] private CombatContractCard[] allContractCards;
@@ -116,6 +120,7 @@ namespace HexGameEngine.TownFeatures
         private RecruitableCharacterTab selectedRecruitTab;
         private List<CombatContractData> currentDailyCombatContracts = new List<CombatContractData>();
         private List<AbilityTomeShopData> currentLibraryTomes = new List<AbilityTomeShopData>();
+        private List<ItemShopData> currentItems = new List<ItemShopData>();
         #endregion
 
         // Getters + Accessors
@@ -146,6 +151,8 @@ namespace HexGameEngine.TownFeatures
             currentDailyCombatContracts.AddRange(saveFile.currentDailyCombatContracts);
             currentLibraryTomes.Clear();
             currentLibraryTomes.AddRange(saveFile.currentLibraryTomes);
+            currentItems.Clear();
+            currentItems.AddRange(saveFile.currentItems);
         }
         public void SaveMyDataToSaveFile(SaveGameData saveFile)
         {
@@ -158,6 +165,9 @@ namespace HexGameEngine.TownFeatures
 
             saveFile.currentLibraryTomes.Clear();
             saveFile.currentLibraryTomes.AddRange(currentLibraryTomes);
+
+            saveFile.currentItems.Clear();
+            saveFile.currentItems.AddRange(currentItems);
         }
         #endregion
 
@@ -571,8 +581,47 @@ namespace HexGameEngine.TownFeatures
         }
         #endregion
 
+        // Armoury Logic
+        #region
+        private void BuildAndShowArmouryPage()
+        {
+            armouryPageVisualParent.SetActive(true);
+
+            // Reset item slots
+            for (int i = 0; i < itemShopSlots.Length; i++)
+                itemShopSlots[i].Reset();
+
+            // Build items
+            for (int i = 0; i < currentItems.Count && i < itemShopSlots.Length; i++)
+                itemShopSlots[i].BuildFromItemShopData(currentItems[i]);
+        }
+        public void HandleBuyItemFromLibrary(ItemShopData data)
+        {
+            // Pay gold cost
+            PlayerDataController.Instance.ModifyPlayerGold(-data.goldCost);
+
+            // Add tome to inventory
+            InventoryController.Instance.AddItemToInventory(
+                InventoryController.Instance.CreateInventoryItemFromItemData(data.item));
+
+            // Remove from shop
+            currentItems.Remove(data);
+
+            // Rebuild page
+            BuildAndShowArmouryPage();
+        }
+        #endregion
+
         // Feature Buttons On Click
         #region
+        public void OnArmouryPageLeaveButtonClicked()
+        {
+            armouryPageVisualParent.SetActive(false);
+        }
+        public void OnArmouryPageButtonClicked()
+        {
+            BuildAndShowArmouryPage();
+        }
         public void OnRecruitPageButtonClicked()
         {
             BuildAndShowRecruitPage();
@@ -587,7 +636,7 @@ namespace HexGameEngine.TownFeatures
         }
         public void OnLibraryPageLeaveButtonClicked()
         {
-            // Clear slots
+            // Reset drop slots
             libraryAbilitySlot.ClearAbility();
             libraryCharacterSlot.ClearCharacter();
 
@@ -595,7 +644,6 @@ namespace HexGameEngine.TownFeatures
         }
         public void OnHospitalPageButtonClicked()
         {
-            // build and show hospital page
             BuildAndShowHospitalPage();
         }
         public void OnHospitalPageLeaveButtonClicked()

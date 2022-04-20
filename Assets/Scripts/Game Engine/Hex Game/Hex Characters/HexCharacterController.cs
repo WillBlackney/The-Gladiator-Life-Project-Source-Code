@@ -151,9 +151,6 @@ namespace HexGameEngine.Characters
 
             // Add to persistency
             AddDefenderToPersistency(model);
-
-            // REMOVE AFTER TESTING SHATTERED STRESS STATE!
-            ModifyStress(model, 99);
         }
         public HexCharacterModel CreateEnemyHexCharacter(HexCharacterData data, LevelNode startPosition)
         {
