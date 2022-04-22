@@ -23,6 +23,7 @@ namespace HexGameEngine.HexTiles
         // Properties + Components
         #region
         [Header("Prefabs + Core Components")]
+        [SerializeField] CombatMapSeedDataSO[] allCombatMapSeeds;
         [SerializeField] GameObject obstaclePrefab;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
@@ -90,7 +91,6 @@ namespace HexGameEngine.HexTiles
 
         // Map Generation + Teardown
         #region
-
         public void HandleTearDownCombatViews()
         {
             AbilityController.Instance.HideHitChancePopup();
@@ -99,6 +99,29 @@ namespace HexGameEngine.HexTiles
             DisableAllArenas();
             HideTileInfoPopup();
             HideAllNodeViews();
+        }
+
+        public void GenerateLevelNodes()
+        {
+            // Get random seed
+            CombatMapSeedDataSO seed = allCombatMapSeeds.GetRandomElement();
+
+            // Reset type, obstacle and elevation on all nodes
+            foreach (LevelNode n in allLevelNodes)
+                n.Reset();
+
+            // Rebuild
+            foreach (LevelNode n in allLevelNodes)
+            {
+                int roll = RandomGenerator.NumberBetween(1, 5);
+                if(roll == 1)                
+                    n.SetHexTileElevation(TileElevation.Elevated);
+                
+                // To do: randomize and set type
+
+                // To do: randomize and set obstacle
+            }
+
         }
         #endregion
 

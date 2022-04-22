@@ -135,6 +135,7 @@ namespace HexGameEngine
             LightController.Instance.EnableDungeonGlobalLight();
             LevelController.Instance.EnableNightTimeArenaScenery();
             LevelController.Instance.ShowAllNodeViews();
+            LevelController.Instance.GenerateLevelNodes();
 
             // Setup player characters
             HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
@@ -176,6 +177,7 @@ namespace HexGameEngine
             LightController.Instance.EnableDungeonGlobalLight();
             LevelController.Instance.EnableNightTimeArenaScenery();
             LevelController.Instance.ShowAllNodeViews();
+            LevelController.Instance.GenerateLevelNodes();
 
             // Setup player characters
             HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
@@ -627,6 +629,7 @@ namespace HexGameEngine
             LightController.Instance.EnableDungeonGlobalLight();
             LevelController.Instance.EnableNightTimeArenaScenery();
             LevelController.Instance.ShowAllNodeViews();
+            LevelController.Instance.GenerateLevelNodes();
 
             // Setup player characters
             List<HexCharacterData> spawnedPlayerCharacters = new List<HexCharacterData>();

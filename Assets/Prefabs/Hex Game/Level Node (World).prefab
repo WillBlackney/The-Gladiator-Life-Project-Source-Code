@@ -91,12 +91,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8790398778795649362}
   m_Layer: 0
-  m_Name: Elevation Sprites
+  m_Name: Elevation Pillar Sprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8790398778795649362
 Transform:
   m_ObjectHideFlags: 0
@@ -328,6 +328,8 @@ MonoBehaviour:
   occupied: 0
   gridPosition: {x: 0, y: 0}
   mouseOverParent: {fileID: 8944885819890159452}
+  elevationPositioningParent: {fileID: 8944885819292419967}
+  elevationPillarImagesParent: {fileID: 1080915834532012943}
   inRangeMarker: {fileID: 8944885819097843771}
   moveMarker: {fileID: 8944885819934804169}
 --- !u!61 &8944885818504147629
@@ -530,7 +532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8944885819292419967}
   m_Layer: 0
-  m_Name: Sprites Parent
+  m_Name: Elevation Positioning Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -762,11 +764,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mouse Over Indicator Glow
       objectReference: {fileID: 0}
-    - target: {fileID: 8244828299067075502, guid: 6867c7217b32fa14b991aed884b55b46,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8244828299067342174, guid: 6867c7217b32fa14b991aed884b55b46,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -821,21 +818,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8244828299067342174, guid: 6867c7217b32fa14b991aed884b55b46,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 8244828299067342174, guid: 6867c7217b32fa14b991aed884b55b46,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 8244828299067342174, guid: 6867c7217b32fa14b991aed884b55b46,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.275
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6867c7217b32fa14b991aed884b55b46, type: 3}

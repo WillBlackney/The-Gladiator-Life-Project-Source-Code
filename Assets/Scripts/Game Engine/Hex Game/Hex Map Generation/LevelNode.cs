@@ -19,26 +19,27 @@ namespace HexGameEngine.HexTiles
 
         [Header("Parent References")]
         public GameObject mouseOverParent;
+        [SerializeField] Transform elevationPositioningParent;
+        [SerializeField] GameObject elevationPillarImagesParent;
 
         [Header("Marker Components")]
         [SerializeField] GameObject inRangeMarker;
         [SerializeField] GameObject moveMarker;
 
         private List<LevelNode> neighbourNodes = null;
+        private TileElevation elevation;
         [HideInInspector]public HexCharacterModel myCharacter;
         #endregion
 
         // Getters + Accessors
         #region
-        private void Start()
+        public TileElevation Elevation
         {
-            _offsetCoord = gridPosition;
-            HexGridType = HexGridType.odd_q;
+            get { return elevation; }
         }
-        private void OnEnable()
+        public Transform ElevationPositioningParent
         {
-            _offsetCoord = gridPosition;
-            HexGridType = HexGridType.odd_q;
+            get { return elevationPositioningParent; }
         }
         public Vector2 GridPosition
         {
@@ -46,7 +47,7 @@ namespace HexGameEngine.HexTiles
         }
         public Vector3 WorldPosition
         {
-            get { return new Vector3(transform.position.x, transform.position.y, transform.position.z); }
+            get { return new Vector3(elevationPositioningParent.position.x, elevationPositioningParent.position.y + 0.1f, elevationPositioningParent.position.z); }
         }
         public List<LevelNode> NeighbourNodes(List<LevelNode> otherHexs = null)
         {
@@ -84,6 +85,20 @@ namespace HexGameEngine.HexTiles
         {
             return (int)(Mathf.Abs(CubeCoord.x - other.CubeCoord.x) + Mathf.Abs(CubeCoord.y - other.CubeCoord.y) +
                 Mathf.Abs(CubeCoord.z - other.CubeCoord.z)) / 2;
+        }
+        #endregion
+
+        // Events
+        #region
+        private void Start()
+        {
+            _offsetCoord = gridPosition;
+            HexGridType = HexGridType.odd_q;
+        }
+        private void OnEnable()
+        {
+            _offsetCoord = gridPosition;
+            HexGridType = HexGridType.odd_q;
         }
         #endregion
 
@@ -148,7 +163,27 @@ namespace HexGameEngine.HexTiles
         {
             inRangeMarker.SetActive(false);
         }
-        
+
+        #endregion
+
+        // Elevation Logic
+        #region
+        public void SetHexTileElevation(TileElevation elevation)
+        {
+            this.elevation = elevation;
+            if (elevation == TileElevation.Elevated)
+            {
+                ElevationPositioningParent.position += new Vector3(0, 0.2f, 0);
+                elevationPillarImagesParent.SetActive(true);
+            }
+               
+            else if (elevation == TileElevation.Ground)
+            {
+                ElevationPositioningParent.localPosition = new Vector3(0, 0f, 0);
+                elevationPillarImagesParent.SetActive(false);
+            }
+               
+        }
         #endregion
 
         // Misc
@@ -156,6 +191,11 @@ namespace HexGameEngine.HexTiles
         public string PrintGridPosition()
         {
             return "X:" + GridPosition.x.ToString() + ", Y:" + GridPosition.y.ToString();
+        }
+        public void Reset()
+        {
+            SetHexTileElevation(TileElevation.Ground);
+            elevationPillarImagesParent.SetActive(false);        
         }
         #endregion
     }
