@@ -1699,14 +1699,12 @@ namespace HexGameEngine.Characters
         }
         private void MoveEntityToOffScreenPosition(HexCharacterModel entity)
         {
-            if (entity.allegiance == Allegiance.Player)
-            {
+            if (entity.allegiance == Allegiance.Player)            
                 entity.hexCharacterView.ucmMovementParent.transform.position = LevelController.Instance.DefenderOffScreenNode.transform.position;
-            }
-            else if (entity.allegiance == Allegiance.Enemy)
-            {
+            
+            else if (entity.allegiance == Allegiance.Enemy)            
                 entity.hexCharacterView.ucmMovementParent.transform.position = LevelController.Instance.EnemyOffScreenNode.transform.position;
-            }
+            
         }
         public void MoveAllCharactersToStartingNodes(CoroutineData data)
         {

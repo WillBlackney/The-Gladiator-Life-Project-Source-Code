@@ -26,13 +26,22 @@ namespace HexGameEngine.HexTiles
         [SerializeField] GameObject inRangeMarker;
         [SerializeField] GameObject moveMarker;
 
+        [Header("Obstruction Components")]
+        [SerializeField] GameObject obstacleParent;
+        [SerializeField] GameObject[] obstacleImages;
+
         private List<LevelNode> neighbourNodes = null;
         private TileElevation elevation;
+        private bool obstructed = false;
         [HideInInspector]public HexCharacterModel myCharacter;
         #endregion
 
         // Getters + Accessors
         #region
+        public bool Obstructed
+        {
+            get { return obstructed; }
+        }
         public TileElevation Elevation
         {
             get { return elevation; }
@@ -184,6 +193,23 @@ namespace HexGameEngine.HexTiles
             }
                
         }
+        public void SetHexObstruction(bool obstructed)
+        {
+            DisableObstructionViews();
+            this.obstructed = obstructed;
+            if (obstructed)
+            {
+                obstacleParent.SetActive(true);
+                obstacleImages.GetRandomElement().SetActive(true);
+            }
+        }
+        private void DisableObstructionViews()
+        {
+            foreach (GameObject g in obstacleImages)
+                g.SetActive(false);
+
+            obstacleParent.SetActive(false);
+        }
         #endregion
 
         // Misc
@@ -194,6 +220,8 @@ namespace HexGameEngine.HexTiles
         }
         public void Reset()
         {
+            DisableObstructionViews();
+            obstructed = false;
             SetHexTileElevation(TileElevation.Ground);
             elevationPillarImagesParent.SetActive(false);        
         }

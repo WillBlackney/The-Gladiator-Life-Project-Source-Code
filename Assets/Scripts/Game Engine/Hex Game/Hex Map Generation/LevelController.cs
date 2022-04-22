@@ -106,17 +106,24 @@ namespace HexGameEngine.HexTiles
             foreach (LevelNode n in allLevelNodes)
                 n.Reset();
 
+            //List<LevelNode> spawnPositions = GetPlayerSpawnZone();
+            // spawnPositions.AddRange(GetEnemySpawnZone());
+
             // Rebuild
             foreach (LevelNode n in allLevelNodes)
             {
-                int roll = RandomGenerator.NumberBetween(1, 100);
-                if(roll >= 1 && roll <= seed.elevationPercentage)
-                    // && n.NeighbourNodes().Count >= 6) // prevent edge nodes from being elevated          
+                int elevationRoll = RandomGenerator.NumberBetween(1, 100);
+                if (elevationRoll >= 1 && elevationRoll <= seed.elevationPercentage)
                     n.SetHexTileElevation(TileElevation.Elevated);
-                
+
                 // To do: randomize and set type
 
                 // To do: randomize and set obstacle
+                int obstructionRoll = RandomGenerator.NumberBetween(1, 100);
+                if (obstructionRoll >= 1 && obstructionRoll <= seed.obstructionPercentage &&
+                    Pathfinder.IsHexSpawnable(n) &&
+                    (n.Elevation == TileElevation.Ground || (seed.allowObstaclesOnElevation && n.Elevation == TileElevation.Elevated)))        
+                    n.SetHexObstruction(true);
             }
 
         }
@@ -897,9 +904,14 @@ namespace HexGameEngine.HexTiles
 
             // build views logic
             tileInfoNameText.text = "Dry Dirt";//data.tileName;
-            tileInfoDescriptionText.text = "Solid, dry dirt that is easy to balance and move on.";//data.tileDescription;
+            tileInfoDescriptionText.text = "Dry dirt that is easy to balance and move on.";//data.tileDescription;
 
-            if(start == null)
+            if (destination.Obstructed)
+            {
+                tileInfoCostText.text = "This location is obstructed and cannot be moved on.";
+            }
+
+            else if(start == null)
             {
                 tileInfoCostText.text = "Costs " + TextLogic.ReturnColoredText(destination.BaseMoveCost.ToString(), TextLogic.blueNumber) +
                    " " + TextLogic.ReturnColoredText("Energy", TextLogic.neutralYellow) + " to traverse.";

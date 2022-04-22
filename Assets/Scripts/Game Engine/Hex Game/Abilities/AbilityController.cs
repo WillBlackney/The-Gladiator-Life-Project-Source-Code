@@ -1134,10 +1134,8 @@ namespace HexGameEngine.Abilities
                         if (LevelController.Instance.GetDirectionToTargetHex(previousTile, h) == dir)
                         {
                             // Found next tile in direction
-                            if (Pathfinder.CanHexBeOccupied(h))
-                            {
-                                previousTile = h;
-                            }
+                            if (Pathfinder.CanHexBeOccupied(h))                            
+                                previousTile = h;                            
                             else
                             {
                                 forceBreak = true;

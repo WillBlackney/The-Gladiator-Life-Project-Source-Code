@@ -135,7 +135,7 @@ namespace HexGameEngine
             LightController.Instance.EnableDungeonGlobalLight();
             LevelController.Instance.EnableNightTimeArenaScenery();
             LevelController.Instance.ShowAllNodeViews();
-            LevelController.Instance.GenerateLevelNodes();
+            
 
             // Setup player characters
             HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
@@ -146,6 +146,9 @@ namespace HexGameEngine
 
             // Spawn enemies in world
             HexCharacterController.Instance.SpawnEnemyEncounter(sandboxContractData.enemyEncounterData);
+
+            // Randomize level node elevation and obstructions
+            LevelController.Instance.GenerateLevelNodes();
 
             // Place characters off screen
             HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();
@@ -177,10 +180,12 @@ namespace HexGameEngine
             LightController.Instance.EnableDungeonGlobalLight();
             LevelController.Instance.EnableNightTimeArenaScenery();
             LevelController.Instance.ShowAllNodeViews();
-            LevelController.Instance.GenerateLevelNodes();
 
             // Setup player characters
             HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
+
+            // Randomize level node elevation and obstructions
+            LevelController.Instance.GenerateLevelNodes();
 
             // Generate enemy wave + enemies data + save to run controller
             CombatContractData sandboxContractData = TownController.Instance.GenerateSandboxContractData();
@@ -629,7 +634,6 @@ namespace HexGameEngine
             LightController.Instance.EnableDungeonGlobalLight();
             LevelController.Instance.EnableNightTimeArenaScenery();
             LevelController.Instance.ShowAllNodeViews();
-            LevelController.Instance.GenerateLevelNodes();
 
             // Setup player characters
             List<HexCharacterData> spawnedPlayerCharacters = new List<HexCharacterData>();
@@ -639,6 +643,9 @@ namespace HexGameEngine
 
             // Setup enemy characters
             HexCharacterController.Instance.SpawnEnemyEncounter(RunController.Instance.CurrentCombatContractData.enemyEncounterData);
+
+            // Randomize level node elevation and obstructions
+            LevelController.Instance.GenerateLevelNodes();
 
             // Place characters off screen
             HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();

@@ -266,24 +266,22 @@ namespace HexGameEngine.Pathfinding
             // to do in future: should also check if there is an obstacle or thing on the hex that prevents a character standing on it,
             // not just checking if a character is already standing on it
             // TO DO: uncomment when we have obnstacles
-            return hex.myCharacter == null;// && hex.MyHexObstacle == null;
+            return hex.myCharacter == null && hex.Obstructed == false;
         }
         public static bool IsHexTraversable(LevelNode hex, HexCharacterModel mover)
         {
             // can the character move THROUGH the hex enroute to some other hex?
             // NOTE: characters can move through allies: if enemy or obstruction on tile, should return false, else true
 
-           // if (hex.MyHexObstacle != null)
-           //     return false;
-            
+            if (hex.Obstructed)
+                return false;
+
             //else 
-            if (hex.myCharacter != null) //&& hex.MyHexObstacle == null)
+            if (hex.myCharacter != null)
             {
                 // Characters can move over and through allies
-                if (HexCharacterController.Instance.GetAllAlliesOfCharacter(mover).Contains(hex.myCharacter))
-                {
-                    return true;
-                }
+                if (HexCharacterController.Instance.GetAllAlliesOfCharacter(mover).Contains(hex.myCharacter))                
+                    return true;                
                 else return false;
             }
 
@@ -292,7 +290,7 @@ namespace HexGameEngine.Pathfinding
         }
         public static bool IsHexSpawnable(LevelNode hex)
         {
-            return hex.myCharacter == null; //&& hex.MyHexObstacle == null;
+            return hex.myCharacter == null && hex.Obstructed == false; 
         }
         #endregion        
 

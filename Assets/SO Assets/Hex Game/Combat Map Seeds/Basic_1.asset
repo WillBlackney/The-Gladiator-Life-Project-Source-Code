@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Basic_1
   m_EditorClassIdentifier: 
   elevationPercentage: 20
-  obstructionPercentage: 0
-  allowObstaclesOnElevation: 1
+  obstructionPercentage: 10
+  allowObstaclesOnElevation: 0
