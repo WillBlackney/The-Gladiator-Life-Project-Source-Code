@@ -19,17 +19,10 @@ namespace HexGameEngine.HexTiles
 
         [Header("Parent References")]
         public GameObject mouseOverParent;
-        public GameObject activatedParent;
 
         [Header("Marker Components")]
         [SerializeField] GameObject inRangeMarker;
         [SerializeField] GameObject moveMarker;
-
-        [Header("Target Path Components")]
-        public LineRenderer myLr;
-        public GameObject myLrVisualParent;
-        public RectTransform nose;
-        public RectTransform attackPos;
 
         private List<LevelNode> neighbourNodes = null;
         [HideInInspector]public HexCharacterModel myCharacter;
