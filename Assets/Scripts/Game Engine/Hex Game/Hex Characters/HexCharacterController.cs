@@ -1628,22 +1628,21 @@ namespace HexGameEngine.Characters
         public int CalculateElevationAccuracyModifier(HexCharacterModel attacker, HexCharacterModel target)
         {
             int bonusRet = 0;
-
-            /*
+            
             // +10 Accuracy attacking from elevation
-            if (attacker.myCurrentHex.elevation == TileElevation.Elevated &&
-                target.myCurrentHex.elevation == TileElevation.Ground)
+            if (attacker.currentTile.Elevation == TileElevation.Elevated &&
+                target.currentTile.Elevation == TileElevation.Ground)
             {
                 bonusRet += 10;
             }
 
             // -10 Accuracy attacking from ground to elevated target
-            else if (attacker.myCurrentHex.elevation == TileElevation.Ground &&
-                target.myCurrentHex.elevation == TileElevation.Elevated)
+            else if (attacker.currentTile.Elevation == TileElevation.Ground &&
+                target.currentTile.Elevation == TileElevation.Elevated)
             {
                 bonusRet -= 10;
             }
-            */
+            
 
             return bonusRet;
         }

@@ -21,8 +21,8 @@ namespace HexGameEngine.Pathfinding
         public static int GetEnergyCostBetweenHexs(HexCharacterModel character, LevelNode start, LevelNode destination)
         {
             int cost = destination.BaseMoveCost;
-           // if (start.elevation != destination.elevation)
-            //    cost += 1;
+            if (start.Elevation != destination.Elevation)
+                cost += 1;
 
             if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.TornKneeLigament))
                 cost += 1;

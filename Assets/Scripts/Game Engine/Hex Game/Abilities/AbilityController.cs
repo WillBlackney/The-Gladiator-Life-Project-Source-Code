@@ -1509,8 +1509,8 @@ namespace HexGameEngine.Abilities
                 rangeReturned += StatCalculator.GetTotalVision(caster);
 
                 // Check elevation range bonus
-                // if (caster.myCurrentHex.elevation == TileElevation.Elevated)
-                //    rangeReturned += 1;
+                if (caster.currentTile.Elevation == TileElevation.Elevated)
+                   rangeReturned += 1;
             }
 
             if (rangeReturned < 1) rangeReturned = 1;

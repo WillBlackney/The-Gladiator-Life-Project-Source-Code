@@ -58,11 +58,6 @@ namespace HexGameEngine.HexTiles
         [SerializeField] private GameObject[] allNightTimeArenaParents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        [Header("Dungeon Scenery References")]
-        [SerializeField] private GameObject campsiteViewParent;
-        [SerializeField] private GameObject[] allCampSiteParents;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         #endregion
 
         // Getters + Accessors
@@ -105,6 +100,7 @@ namespace HexGameEngine.HexTiles
         {
             // Get random seed
             CombatMapSeedDataSO seed = allCombatMapSeeds.GetRandomElement();
+            if (!seed) return;
 
             // Reset type, obstacle and elevation on all nodes
             foreach (LevelNode n in allLevelNodes)
@@ -113,8 +109,9 @@ namespace HexGameEngine.HexTiles
             // Rebuild
             foreach (LevelNode n in allLevelNodes)
             {
-                int roll = RandomGenerator.NumberBetween(1, 5);
-                if(roll == 1)                
+                int roll = RandomGenerator.NumberBetween(1, 100);
+                if(roll >= 1 && roll <= seed.elevationPercentage)
+                    // && n.NeighbourNodes().Count >= 6) // prevent edge nodes from being elevated          
                     n.SetHexTileElevation(TileElevation.Elevated);
                 
                 // To do: randomize and set type
@@ -899,8 +896,8 @@ namespace HexGameEngine.HexTiles
             tileInfoCg.DOFade(1, 0.5f);
 
             // build views logic
-            tileInfoNameText.text = "tile name";//data.tileName;
-            tileInfoDescriptionText.text = "tile description";//data.tileDescription;
+            tileInfoNameText.text = "Dry Dirt";//data.tileName;
+            tileInfoDescriptionText.text = "Solid, dry dirt that is easy to balance and move on.";//data.tileDescription;
 
             if(start == null)
             {
