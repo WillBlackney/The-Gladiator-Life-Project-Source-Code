@@ -1003,6 +1003,8 @@ namespace HexGameEngine.Characters
             {
                 AbilityPopupController.Instance.HidePanel();
                 AbilityController.Instance.HideHitChancePopup();
+                KeyWordLayoutController.Instance.FadeOutMainView();
+                MainModalController.Instance.HideModal();
             }
 
             // Stop if combat has ended
@@ -1117,16 +1119,81 @@ namespace HexGameEngine.Characters
                 {
                     List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
                     HexCharacterModel ally = allies[RandomGenerator.NumberBetween(0, allies.Count - 1)];
+                    int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.SavageLeader);
 
-                    if(ally != null)
+                    if (ally != null)
                     {
-                        int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.SavageLeader);
                         VisualEventManager.Instance.CreateVisualEvent(() =>
                         VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Savage Leader!"), QueuePosition.Back, 0f, 0.5f);
                         PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Wrath, stacks, true, 0, character.pManager);
                         VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                    }                  
+                }
+
+                // Hymn of Fellowship
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.HymnOfFellowship) && character.currentHealth > 0)
+                {
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                       VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Fellowship!"), QueuePosition.Back, 0f, 0.5f);
+
+                    List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
+                    foreach(HexCharacterModel ally in allies)
+                    {
+                        Vector3 pos = ally.hexCharacterView.WorldPosition;
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Block, 1, true, 0, character.pManager);
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                            VisualEffectManager.Instance.CreateGeneralBuffEffect(pos));
+                    }               
+                                            
+                    VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                }
+
+                // Hymn of Wrath
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.HymnOfVengeance) && character.currentHealth > 0)
+                {
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                       VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Wrath!"), QueuePosition.Back, 0f, 0.5f);
+
+                    List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
+                    foreach (HexCharacterModel ally in allies)
+                    {
+                        Vector3 pos = ally.hexCharacterView.WorldPosition;
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Wrath, 1, true, 0, character.pManager);
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                            VisualEffectManager.Instance.CreateGeneralBuffEffect(pos));
                     }
-                  
+
+                    VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                }
+
+                // Hymn of Purity
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.HymnOfPurity) && character.currentHealth > 0)
+                {
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                       VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Purity!"), QueuePosition.Back, 0f, 0.5f);
+
+                    List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
+                    foreach (HexCharacterModel ally in allies)
+                    {
+                        Vector3 pos = ally.hexCharacterView.WorldPosition;
+
+                        // Remove poisoned
+                        PerkController.Instance.ModifyPerkOnCharacterEntity
+                            (ally.pManager, Perk.Poisoned, -PerkController.Instance.GetStackCountOfPerkOnCharacter(ally.pManager, Perk.Poisoned), false, 0, character.pManager);
+
+                        // Remove burning
+                        PerkController.Instance.ModifyPerkOnCharacterEntity
+                            (ally.pManager, Perk.Burning, -PerkController.Instance.GetStackCountOfPerkOnCharacter(ally.pManager, Perk.Burning), false, 0, character.pManager);
+
+                        // Remove bleeding
+                        PerkController.Instance.ModifyPerkOnCharacterEntity
+                            (ally.pManager, Perk.Bleeding, -PerkController.Instance.GetStackCountOfPerkOnCharacter(ally.pManager, Perk.Bleeding), false, 0, character.pManager);
+
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                            VisualEffectManager.Instance.CreateGeneralBuffEffect(pos));
+                    }
+
+                    VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
                 }
 
                 // Regeneration

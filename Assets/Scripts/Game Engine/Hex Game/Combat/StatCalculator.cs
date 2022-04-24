@@ -1,8 +1,5 @@
 ﻿using HexGameEngine.Characters;
 using HexGameEngine.HexTiles;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using HexGameEngine.Combat;
 using HexGameEngine.Perks;
@@ -337,6 +334,7 @@ namespace HexGameEngine
                 dodge += 10;
             
             // Nearby allies with shield wall give +5 dodge bonus
+            /*
             foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(c))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ShieldWall))
@@ -347,7 +345,9 @@ namespace HexGameEngine
                     }
                 }
             }
+            */
 
+            /*
             // Nearby allies with concealing clouds give +10 dodge bonus
             foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(c))
             {
@@ -359,6 +359,7 @@ namespace HexGameEngine
                     }
                 }
             }
+            */
 
             // Stress State Modifier
             dodge += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress));
@@ -416,8 +417,8 @@ namespace HexGameEngine
                 dodge += GetTotalInitiative(c);
 
             // Concealing Clouds Perk (self only effect)
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ConcealingClouds))
-                dodge += 10;
+           // if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ConcealingClouds))
+           //     dodge += 10;
 
             // Soul token
             // dodge += PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.SoulToken);
@@ -452,7 +453,7 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brave))
                 resolve += 5;
 
-            // Check divinity perk: +10 resolve if within an ally's aura and they have divinity
+            // Check Inspiring Leader perk: +50% resolve if within an ally's aura
             foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(c))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.InspiringLeader) &&

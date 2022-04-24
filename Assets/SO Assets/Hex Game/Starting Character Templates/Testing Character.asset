@@ -55,8 +55,17 @@ MonoBehaviour:
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: b566ecb35016fa449ae9e743e809d086, type: 2}
+    - {fileID: 11400000, guid: 0cb27b15e018e5c48a867e343537d59a, type: 2}
+    - {fileID: 11400000, guid: 9e3e39c959174ff4e9c6a071583dbd4c, type: 2}
+    - {fileID: 11400000, guid: 6aaacae56c5e191439e09ae358d8f78f, type: 2}
   serializedPassiveManager:
-    perks: []
+    perks:
+    - perkTag: 7
+      stacks: 2
+    - perkTag: 80
+      stacks: 2
+    - perkTag: 1
+      stacks: 2
   modelParts:
   - Ghoul_Chest
   - Undead_Face_6

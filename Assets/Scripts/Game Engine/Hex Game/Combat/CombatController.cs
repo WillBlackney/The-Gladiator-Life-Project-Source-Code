@@ -357,6 +357,19 @@ namespace HexGameEngine.Combat
             {
                 Debug.Log("Character rolled below the required roll threshold, applying effects of stress event...");
                 int finalStressAmount = RandomGenerator.NumberBetween(data.StressAmountMin, data.StressAmountMax);
+
+                // Check Hymn Of Courage perk: reduce stress gained by 50%
+                foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(character))
+                {
+                    if (finalStressAmount > 0 &&
+                        PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.HymnOfCourage) &&
+                        LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, StatCalculator.GetTotalAuraSize(ally)).Contains(character.currentTile))
+                    {
+                        finalStressAmount = finalStressAmount / 2;
+                        break;
+                    }
+                }
+
                 HexCharacterController.Instance.ModifyStress(character, finalStressAmount, true, true);
             }
 
@@ -399,6 +412,18 @@ namespace HexGameEngine.Combat
             {
                 Debug.Log("Character rolled below the required roll threshold, applying effects of stress event...");
                 int finalStressAmount = RandomGenerator.NumberBetween(data.stressAmountMin, data.stressAmountMax);
+
+                // Check Hymn Of Courage perk: reduce stress gained by 50%
+                foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(character))
+                {
+                    if (finalStressAmount > 0 &&
+                        PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.HymnOfCourage) &&
+                        LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, StatCalculator.GetTotalAuraSize(ally)).Contains(character.currentTile))
+                    {
+                        finalStressAmount = finalStressAmount / 2;
+                        break;
+                    }
+                }
                 HexCharacterController.Instance.ModifyStress(character, finalStressAmount, true, showVFX);
             }
 

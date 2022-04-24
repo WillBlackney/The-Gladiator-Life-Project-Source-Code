@@ -106,8 +106,9 @@ namespace HexGameEngine.HexTiles
             foreach (LevelNode n in allLevelNodes)
                 n.Reset();
 
-            //List<LevelNode> spawnPositions = GetPlayerSpawnZone();
-            // spawnPositions.AddRange(GetEnemySpawnZone());
+            // Get banned nodes for obstacles
+            List<LevelNode> spawnPositions = GetPlayerSpawnZone();
+            spawnPositions.AddRange(GetEnemySpawnZone());
 
             // Rebuild
             foreach (LevelNode n in allLevelNodes)
@@ -122,6 +123,7 @@ namespace HexGameEngine.HexTiles
                 int obstructionRoll = RandomGenerator.NumberBetween(1, 100);
                 if (obstructionRoll >= 1 && obstructionRoll <= seed.obstructionPercentage &&
                     Pathfinder.IsHexSpawnable(n) &&
+                    !spawnPositions.Contains(n) &&
                     (n.Elevation == TileElevation.Ground || (seed.allowObstaclesOnElevation && n.Elevation == TileElevation.Elevated)))        
                     n.SetHexObstruction(true);
             }
