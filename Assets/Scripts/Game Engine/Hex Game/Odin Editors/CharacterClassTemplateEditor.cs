@@ -9,22 +9,22 @@ using HexGameEngine.Characters;
 namespace HexGameEngine.Editor
 {
 
-    public class CharacterTemplateEditor : OdinMenuEditorWindow
+    public class CharacterClassTemplateEditor : OdinMenuEditorWindow
     {
-        [MenuItem("Tools/Hex Game Tools/Starting Character Templates")]
+        [MenuItem("Tools/Hex Game Tools/Character Class Templates")]
         private static void OpenWindow()
         {
-            GetWindow<CharacterTemplateEditor>().Show();
+            GetWindow<CharacterClassTemplateEditor>().Show();
         }
 
-        private CreateNewCharacterTemplateData createNewCharacterTemplateData;
+        private CreateNewCharacterClassTemplateData createNewCharacterClassTemplateData;
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            if (createNewCharacterTemplateData != null)
+            if (createNewCharacterClassTemplateData != null)
             {
-                DestroyImmediate(createNewCharacterTemplateData.templateDataSO);
+                DestroyImmediate(createNewCharacterClassTemplateData.templateDataSO);
             }
         }
 
@@ -32,9 +32,9 @@ namespace HexGameEngine.Editor
         {
             var tree = new OdinMenuTree();
 
-            createNewCharacterTemplateData = new CreateNewCharacterTemplateData();
-            tree.Add("Create New", new CreateNewCharacterTemplateData());
-            tree.AddAllAssetsAtPath("Starting Character Templates", "Assets/SO Assets/Hex Game/Starting Character Templates/", typeof(HexCharacterTemplateSO));
+            createNewCharacterClassTemplateData = new CreateNewCharacterClassTemplateData();
+            tree.Add("Create New", new CreateNewCharacterClassTemplateData());
+            tree.AddAllAssetsAtPath("Character Class Templates", "Assets/SO Assets/Hex Game/Recruitment/Class Templates", typeof(ClassTemplateSO));
             tree.SortMenuItemsByName();
             return tree;
         }
@@ -49,7 +49,7 @@ namespace HexGameEngine.Editor
 
                 if (SirenixEditorGUI.ToolbarButton("Delete Current"))
                 {
-                    HexCharacterTemplateSO asset = selected.SelectedValue as HexCharacterTemplateSO;
+                    ClassTemplateSO asset = selected.SelectedValue as ClassTemplateSO;
                     string path = AssetDatabase.GetAssetPath(asset);
                     AssetDatabase.DeleteAsset(path);
                     AssetDatabase.SaveAssets();
@@ -59,26 +59,26 @@ namespace HexGameEngine.Editor
 
         }
 
-        public class CreateNewCharacterTemplateData
+        public class CreateNewCharacterClassTemplateData
         {
             [InlineEditor(ObjectFieldMode = InlineEditorObjectFieldModes.Hidden)]
-            public HexCharacterTemplateSO templateDataSO;
+            public ClassTemplateSO templateDataSO;
 
-            public CreateNewCharacterTemplateData()
+            public CreateNewCharacterClassTemplateData()
             {
-                templateDataSO = CreateInstance<HexCharacterTemplateSO>();
-                templateDataSO.myName = "New Character Name";
+                templateDataSO = CreateInstance<ClassTemplateSO>();
+                templateDataSO.templateName = "New Template Name";
             }
 
-            [Button("Add New Starting Character Template")]
+            [Button("Add New Character Template")]
             public void CreateNewData()
             {
-                AssetDatabase.CreateAsset(templateDataSO, "Assets/SO Assets/Hex Game/Starting Character Templates/" + templateDataSO.myName + ".asset");
+                AssetDatabase.CreateAsset(templateDataSO, "Assets/SO Assets/Hex Game/Starting Character Templates/" + templateDataSO.templateName + ".asset");
                 AssetDatabase.SaveAssets();
 
                 // Create the SO 
-                templateDataSO = CreateInstance<HexCharacterTemplateSO>();
-                templateDataSO.myName = "New Character Template";
+                templateDataSO = CreateInstance<ClassTemplateSO>();
+                templateDataSO.templateName = "New Character Template";
             }
 
         }

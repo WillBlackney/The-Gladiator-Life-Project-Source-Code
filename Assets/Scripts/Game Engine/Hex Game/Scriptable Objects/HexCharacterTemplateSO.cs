@@ -9,7 +9,7 @@ using HexGameEngine.Perks;
 
 namespace HexGameEngine.Characters
 {
-    [CreateAssetMenu(fileName = "New Hex Character Template", menuName = "Hex Character Template", order = 52)]
+    [CreateAssetMenu(fileName = "New Starting Character Template", menuName = "Starting Character Template", order = 52)]
     public class HexCharacterTemplateSO : ScriptableObject
     {
         // General Info
