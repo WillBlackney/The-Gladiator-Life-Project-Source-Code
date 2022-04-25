@@ -17,10 +17,10 @@ MonoBehaviour:
   startingAbilityCount: 2
   possibleAbilities:
   - {fileID: 11400000, guid: c367e762d7251324b9199c63a443d4af, type: 2}
-  - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
   - {fileID: 11400000, guid: 398250cb2316f1243a0859410e7d26c8, type: 2}
   - {fileID: 11400000, guid: 4e4bf822749dff044b3b1112dba35a22, type: 2}
   - {fileID: 11400000, guid: b5c01764d146376488c2e994ba16968e, type: 2}
+  - {fileID: 11400000, guid: 993e8338c564e804fb94a571dc1a86c7, type: 2}
   possibleOutfits:
   - {fileID: 11400000, guid: 518b47ff8cdc728408e77dfb15a0b8ba, type: 2}
   - {fileID: 11400000, guid: 982509f290f98b94fa9e8874d338d3a6, type: 2}

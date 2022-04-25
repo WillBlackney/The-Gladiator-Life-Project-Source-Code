@@ -433,6 +433,7 @@ namespace HexGameEngine
         Motivated = 122,
         Nimble = 18,        
         Opportunist = 71,
+        Overcharged = 149,
         Overload = 73,
         Paranoid = 114,
         PathFinder = 124,

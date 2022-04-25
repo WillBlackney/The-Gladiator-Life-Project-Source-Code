@@ -18,9 +18,9 @@ MonoBehaviour:
   possibleAbilities:
   - {fileID: 11400000, guid: 0134e6b9269bcec47bf322060ceda37f, type: 2}
   - {fileID: 11400000, guid: fb58bc9b02d9e60418c36237ae9c0d64, type: 2}
-  - {fileID: 11400000, guid: 30fba2b2b3154994f91264dd96a76258, type: 2}
   - {fileID: 11400000, guid: 583e0b24725a2cc47aaff1156982fe93, type: 2}
   - {fileID: 11400000, guid: c6a496fc658e03746b90b909c44794fa, type: 2}
+  - {fileID: 11400000, guid: 28fa3342a94c64a4f8a737a92f8f6a5d, type: 2}
   possibleOutfits:
   - {fileID: 11400000, guid: c5837ff533063784aa6242254286e342, type: 2}
   - {fileID: 11400000, guid: 859d38b011b4d5344bfba7f7be9a6747, type: 2}

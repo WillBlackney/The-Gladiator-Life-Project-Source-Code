@@ -870,7 +870,7 @@ namespace HexGameEngine.Abilities
                     if (success) charactersHit.Add(character);
                 }
 
-                // On passive succesfully applied visual events
+                // On passive succesfully applied visual events + effects
                 foreach (HexCharacterModel character in charactersHit)
                 {
                     if (CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
@@ -883,6 +883,12 @@ namespace HexGameEngine.Abilities
                                 AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, character.GetLastStackEventParent());
                             }
                         }
+                    }
+
+                    foreach (AbilityEffect e in ability.onPerkAppliedSuccessEffects)
+                    {
+                        triggerEffectEndEvents = false;
+                        TriggerAbilityEffect(ability, e, caster, character, tileTarget);
                     }
                 }
             }

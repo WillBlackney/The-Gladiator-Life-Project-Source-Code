@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   templateName: Cleric
   possibleRaces: 0100000002000000040000000600000007000000
+  startingAbilityCount: 3
   possibleAbilities:
   - {fileID: 11400000, guid: e9972b20921e6e7468dbf49561e14ac9, type: 2}
   - {fileID: 11400000, guid: e9cf250cc1667994fac7ba558332a2d9, type: 2}
@@ -22,7 +23,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c1061f44ef3eb3c408eb895d2b7064bb, type: 2}
   - {fileID: 11400000, guid: 63b93d8887404354592f0b988319347e, type: 2}
   - {fileID: 11400000, guid: 16e76af6c245d1b44b45f27ca5118113, type: 2}
-  - {fileID: 11400000, guid: cf911e75338237b45a6321623d1f8c84, type: 2}
+  - {fileID: 11400000, guid: 6aaacae56c5e191439e09ae358d8f78f, type: 2}
+  - {fileID: 11400000, guid: ef22061e81fedbe428a6cef1134f5f5c, type: 2}
   possibleOutfits:
   - {fileID: 11400000, guid: 3ab0fa265857f48458941d48f1eaa3e7, type: 2}
   possibleWeapons:
@@ -30,10 +32,12 @@ MonoBehaviour:
     offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
   - mainHandItem: {fileID: 11400000, guid: 130ab6972593ec14d8dda796c434cefb, type: 2}
     offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
   strengthMod: 0
   intelligenceMod: 0
   accuracyMod: 0

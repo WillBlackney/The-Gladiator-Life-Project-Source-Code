@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Shock
   includeInGame: 1
-  baseAbilityDescription: Apply 2 Crippled to an enemy.
+  baseAbilityDescription: Apply 2 Crippled to an enemy. If not resisted, gain 2 Focus.
   abilitySprite: {fileID: 21300000, guid: ab09f139d75a3fe4e92fa2598454cd93, type: 3}
-  energyCost: 3
-  baseCooldown: 2
+  energyCost: 4
+  baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0
   weaponRequirement: 0
@@ -105,7 +105,60 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
-  onPerkAppliedSuccessEffects: []
+  onPerkAppliedSuccessEffects:
+  - effectType: 1
+    stressEventData:
+      stressAmountMin: 0
+      stressAmountMax: 0
+      successChance: 0
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart:
+    - eventType: 3
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 18
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 1
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish: []
+    aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    ignoresBlock: 0
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 75
+      passiveStacks: 2
+    perkApplicationChance: 100
+    knockBackDistance: 0
   onCollisionEffects: []
   chainLoops: 0
   chainedEffects: []
@@ -125,9 +178,23 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: to an enemy.
+    phrase: 'to an enemy. If not resisted, gain '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '2 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Focus
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
   keyWords:
   - kewWordType: 5
     passiveType: 0
   - kewWordType: 1
     passiveType: 5
+  - kewWordType: 1
+    passiveType: 75

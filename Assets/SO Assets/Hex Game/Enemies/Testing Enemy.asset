@@ -84,8 +84,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 5da6171d9b5a21b47b2adc4c680a46c2, type: 2}
   serializedPassiveManager:
     perks:
-    - perkTag: 24
-      stacks: 1
+    - perkTag: 77
+      stacks: 3
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
     offHandItem: {fileID: 0}

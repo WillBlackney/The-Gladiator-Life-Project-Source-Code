@@ -178,7 +178,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'to an enemy and gain '
+    phrase: 'to an enemy. If not resisted, gain '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
