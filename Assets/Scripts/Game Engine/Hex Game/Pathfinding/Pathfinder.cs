@@ -43,7 +43,8 @@ namespace HexGameEngine.Pathfinding
 
             else if (path.Count == 1)
             {
-                if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Nimble) && character.tilesMovedThisTurn == 0)
+                if((PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Nimble) && character.tilesMovedThisTurn == 0)
+                   || PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Flight))
                 {
 
                 }
@@ -52,17 +53,29 @@ namespace HexGameEngine.Pathfinding
             }
             else if (path.Count > 1)
             {
+                List<LevelNode> fullPath = new List<LevelNode>();
+                fullPath.Add(start);
+                fullPath.AddRange(path);
+                int freeMoves = 0;
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Nimble) && character.tilesMovedThisTurn == 0)
+                    freeMoves++;
+                freeMoves += PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Flight);
+
+                for (int i = 0; i < fullPath.Count - 1; i++)
                 {
-
+                    if(i >= freeMoves)
+                    {
+                        pathCost += GetEnergyCostBetweenHexs(character, fullPath[i], fullPath[i + 1]);
+                    }
                 }
-                else
-                    pathCost += GetEnergyCostBetweenHexs(character, start, path[0]);
-
+                
+                /*
+                pathCost += GetEnergyCostBetweenHexs(character, start, path[0]);
                 for (int i = 0; i < path.Count - 1; i++)
                 {
                     pathCost += GetEnergyCostBetweenHexs(character, path[i], path[i + 1]);
                 }
+                */
             }
 
             Debug.Log("Energy cost of path = " + pathCost.ToString());

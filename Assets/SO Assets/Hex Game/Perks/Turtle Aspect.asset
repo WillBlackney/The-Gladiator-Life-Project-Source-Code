@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
+  m_Name: Turtle Aspect
+  m_EditorClassIdentifier: 
+  passiveSprite: {fileID: 21300000, guid: 4429562a7200c594db690002251c1211, type: 3}
+  passiveName: Turtle Aspect
+  perkTag: 143
+  passiveDescription:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'This character reduces all damage taken by '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 10%
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', but is unable to '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Move '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'or '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Dodge '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: attacks. Only one aspect may be active at a time.
+  passiveItalicDescription: 
+  effectDetailTabs: []
+  maxAllowedStacks: 1
+  showStackCount: 0
+  hiddenOnPassivePanel: 0
+  isRewardable: 0
+  resistanceBlocksIncrease: 0
+  resistanceBlocksDecrease: 0
+  runeBlocksIncrease: 0
+  runeBlocksDecrease: 0
+  isInjury: 0
+  isPermanentInjury: 0
+  severity: 0
+  injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
+  isRacial: 0
+  race: 0
+  isBackground: 0
+  backgroundPerkQuality: 0
+  perksRemovedOnThisApplication: 9100000090000000
+  perksGainedOnThisExpiry: 
+  perksThatBlockThis: 
+  visualEventsOnApplication: []

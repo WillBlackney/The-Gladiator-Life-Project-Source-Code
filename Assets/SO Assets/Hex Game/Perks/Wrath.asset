@@ -16,19 +16,28 @@ MonoBehaviour:
   passiveName: Wrath
   perkTag: 50
   passiveDescription:
-  - color: 0
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'Increases all damage dealt by this character from abilities and attacks
-      by '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 25%
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: .
+    phrase: 'This character''s next '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'X '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'abilities deal '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '30% '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: more damage.
+  passiveItalicDescription: 
+  effectDetailTabs: []
   maxAllowedStacks: 3
   showStackCount: 1
   hiddenOnPassivePanel: 0
@@ -38,8 +47,11 @@ MonoBehaviour:
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
   isInjury: 0
+  isPermanentInjury: 0
   severity: 0
   injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 0

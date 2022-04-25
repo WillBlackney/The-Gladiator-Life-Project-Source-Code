@@ -115,14 +115,11 @@ namespace HexGameEngine.Combat
             }
 
             // Calculate strength + intelligence damage modifiers
-            if (effect != null && damageType == DamageType.Physical)
-            {
+            if (effect != null && damageType == DamageType.Physical)            
                 damageModPercentageAdditive += StatCalculator.GetTotalStrength(attacker) * 0.01f;
-            }
-            else if (effect != null && damageType == DamageType.Magic)
-            {
-                damageModPercentageAdditive += StatCalculator.GetTotalIntelligence(attacker) * 0.01f;
-            }
+            
+            else if (effect != null && damageType == DamageType.Magic)            
+                damageModPercentageAdditive += StatCalculator.GetTotalIntelligence(attacker) * 0.01f;            
 
             // Add critical modifier to damage mod
             if (didCrit && attacker != null)
@@ -193,6 +190,13 @@ namespace HexGameEngine.Combat
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Block modifier = " + damageModPercentageAdditive.ToString());
             }
 
+            // Turtle Aspect
+            if (target != null && PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.TurtleAspect))
+            {
+                damageModPercentageAdditive -= 0.1f;
+                Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Turtle Aspect modifier = " + damageModPercentageAdditive.ToString());
+            }
+
             // Calculate talent additive multipliers
             // Pyromania
             if (effect != null && attacker != null && target != null &&
@@ -202,6 +206,7 @@ namespace HexGameEngine.Combat
                 damageModPercentageAdditive += CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Pyromania) * 0.1f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in pyromania modifier = " + damageModPercentageAdditive.ToString());
             }
+            /*
             // Shadowcraft
             if (effect != null && attacker != null && target != null &&
                 CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Shadowcraft, 1) &&
@@ -210,6 +215,7 @@ namespace HexGameEngine.Combat
                 damageModPercentageAdditive += CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Shadowcraft) * 0.1f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in shadowcraft modifier = " + damageModPercentageAdditive.ToString());
             }
+            */
 
             // Check damage mod effect from ability effect
             if (effect != null)
@@ -289,6 +295,21 @@ namespace HexGameEngine.Combat
             }
 
             Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Base damage AFTER applying final multiplicative modifiers + resistance: " + baseDamageFinal.ToString());
+            
+            // Metamorph talent passive
+            if(target != null &&
+                CharacterDataController.Instance.DoesCharacterHaveTalent(target.talentPairings, TalentSchool.Metamorph, 1))
+            {
+                int reduction = CharacterDataController.Instance.GetCharacterTalentLevel(target.talentPairings, TalentSchool.Metamorph);
+                baseDamageFinal -= reduction;
+                lowerDamageFinal -= reduction;
+                upperDamageFinal -= reduction;
+            }
+
+            // Prevent damage gong negative
+            if (baseDamageFinal < 0) baseDamageFinal = 0;
+            if (lowerDamageFinal < 0) lowerDamageFinal = 0;
+            if (upperDamageFinal < 0) upperDamageFinal = 0;
 
             resultReturned.healthDamage = baseDamageFinal;
             resultReturned.damageLowerLimit = lowerDamageFinal;
@@ -714,7 +735,11 @@ namespace HexGameEngine.Combat
             else if (hitChance < 5)
                 hitChance = 5;
 
-            if(hitRoll <= hitChance)
+            // Check turtle aspect => unable to dodge attacks
+            if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.TurtleAspect))
+                result = HitRollResult.Hit;
+
+            else if(hitRoll <= hitChance)
             {
                 result = HitRollResult.Hit;
             }
@@ -759,6 +784,14 @@ namespace HexGameEngine.Combat
                 ability.abilityType == AbilityType.MeleeAttack)
             {
                 critChance += 50;
+            }
+
+            // Check Tiger Aspect
+            else if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.TigerAspect) &&
+                ability != null &&
+                ability.abilityType == AbilityType.MeleeAttack)
+            {
+                critChance += 100;
             }
 
             if (effect != null)
@@ -810,11 +843,14 @@ namespace HexGameEngine.Combat
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Inoculated))
                 totalResistance += 50;
 
+            // Check attacker has shadowcraft talent passive
+            if (attacker != null &&
+                CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Shadowcraft, 1))
+                totalResistance -= CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Shadowcraft) * 15;
+            
             int roll = RandomGenerator.NumberBetween(1, 100);
-            if(roll <= totalResistance)
-            {
-                didResist = true;
-            }
+            if(roll <= totalResistance)            
+                didResist = true;            
 
             // make sure to check that attacker is not null before doing checks there
             Debug.Log("Target rolled " + roll.ToString() + " and needed " + totalResistance.ToString() + " or less. Resisted = " + didResist.ToString());
@@ -933,8 +969,54 @@ namespace HexGameEngine.Combat
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Poisoned, 1, true, 0.5f, attacker.pManager);
             }
 
+            // Tiger Aspect => apply bleeding
+            if (target.currentHealth > 0 &&
+                target.livingState == LivingState.Alive &&
+                attacker != null &&
+                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.TigerAspect) &&
+                ability != null &&
+                ability.abilityType == AbilityType.MeleeAttack)
+            {
+                Debug.Log("ExecuteHandleDamage() attacker has Tiger Aspect, applying bleeding on target");
+                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Bleeding, 1, true, 0.5f, attacker.pManager);
+            }
+
+            // Thorns
+            if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Thorns) &&
+                attacker != null &&
+                attacker.currentHealth > 0 &&
+                attacker.livingState == LivingState.Alive &&
+                ability != null &&
+                ability.abilityType == AbilityType.MeleeAttack)
+            {
+                // Take 10 damage
+                DamageResult dr = GetFinalDamageValueAfterAllCalculations(attacker, 10, DamageType.Physical, false);
+                HandleDamage(attacker, dr, DamageType.Physical);
+
+                // Remove a stack of thorns from target
+                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Thorns, -1, false);
+            }
+
+            // Storm Shield
+            if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.StormShield) &&
+                attacker != null &&
+                attacker.currentHealth > 0 &&
+                attacker.livingState == LivingState.Alive &&
+                ability != null)
+            {
+                // Take 10 damage
+                DamageResult dr = GetFinalDamageValueAfterAllCalculations(attacker, 10, DamageType.Magic, false);
+                HandleDamage(attacker, dr, DamageType.Magic);
+
+                // Remove a stack of thorns from target
+                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.StormShield, -1, false);
+            }
+
+
             // Item 'on hit' effects
-            if(attacker != null &&
+            if (attacker != null &&
+                attacker.currentHealth > 0 &&
+                attacker.livingState == LivingState.Alive &&
                 target.currentHealth > 0 &&
                 target.livingState == LivingState.Alive &&
                 ability != null &&
@@ -999,7 +1081,9 @@ namespace HexGameEngine.Combat
             if (target.currentHealth <= 0 && target.livingState == LivingState.Alive)
             {
                 // Attacker 'on killed an enemy' events
-                if(attacker != null)
+                if(attacker != null &&
+                    attacker.currentHealth > 0 &&
+                    attacker.livingState == LivingState.Alive)
                 {
                     // Exectioner perk: attacker gains 4 energy on kill
                     if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Executioner) && attacker.charactersKilledThisTurn == 0)

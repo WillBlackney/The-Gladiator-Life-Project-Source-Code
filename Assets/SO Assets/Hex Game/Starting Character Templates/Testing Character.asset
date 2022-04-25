@@ -54,18 +54,10 @@ MonoBehaviour:
     deathResistance: 100
   abilityBook:
     activeAbilities:
-    - {fileID: 11400000, guid: b566ecb35016fa449ae9e743e809d086, type: 2}
-    - {fileID: 11400000, guid: 0cb27b15e018e5c48a867e343537d59a, type: 2}
-    - {fileID: 11400000, guid: 9e3e39c959174ff4e9c6a071583dbd4c, type: 2}
-    - {fileID: 11400000, guid: 6aaacae56c5e191439e09ae358d8f78f, type: 2}
+    - {fileID: 11400000, guid: 5602763a1054f90458e04f735dfd3a0b, type: 2}
+    - {fileID: 11400000, guid: 66e4c4e87b27b7a40bf592016e74b1ea, type: 2}
   serializedPassiveManager:
-    perks:
-    - perkTag: 7
-      stacks: 2
-    - perkTag: 80
-      stacks: 2
-    - perkTag: 1
-      stacks: 2
+    perks: []
   modelParts:
   - Ghoul_Chest
   - Undead_Face_6
@@ -75,7 +67,7 @@ MonoBehaviour:
   - Arcanist_Chest_Wear
   - Arcanist_Right_Leg_Wear
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: c420762d59a4b8f4788afabeee27eb35, type: 2}
+    mainHandItem: {fileID: 0}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}

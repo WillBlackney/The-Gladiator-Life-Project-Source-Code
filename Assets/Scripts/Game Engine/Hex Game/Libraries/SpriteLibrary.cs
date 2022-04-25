@@ -40,13 +40,14 @@ namespace HexGameEngine.Libraries
         private Sprite shadowCraftBadge;
         [PreviewField(75)]
         [SerializeField]
-        private Sprite corruptionBadge;
-        [PreviewField(75)]
-        [SerializeField]
         private Sprite naturalismBadge;
         [PreviewField(75)]
         [SerializeField]
         private Sprite manipulationBadge;
+        [PreviewField(75)]
+        [SerializeField]
+        private Sprite metamorphBadge;
+        
         #endregion
 
         // Attribute Images Images
@@ -145,6 +146,9 @@ namespace HexGameEngine.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite pyromaniaBook;
+        [PreviewField(75)]
+        [SerializeField]
+        private Sprite metamorphBook;
         #endregion             
 
         // Stress State Images
@@ -252,10 +256,7 @@ namespace HexGameEngine.Libraries
             {
                 spriteReturned = rangerBadge;
             }
-            else if (ts == TalentSchool.Corruption)
-            {
-                spriteReturned = corruptionBadge;
-            }
+            
             else if (ts == TalentSchool.Divinity)
             {
                 spriteReturned = divinityBadge;
@@ -279,6 +280,10 @@ namespace HexGameEngine.Libraries
             else if (ts == TalentSchool.Shadowcraft)
             {
                 spriteReturned = shadowCraftBadge;
+            }
+            else if (ts == TalentSchool.Metamorph)
+            {
+                spriteReturned = metamorphBadge;
             }
             else if (ts == TalentSchool.Neutral)
             {
@@ -379,6 +384,10 @@ namespace HexGameEngine.Libraries
             else if (ts == TalentSchool.Shadowcraft)
             {
                 spriteReturned = shadowcraftBook;
+            }
+            else if (ts == TalentSchool.Metamorph)
+            {
+                spriteReturned = metamorphBook;
             }
 
             return spriteReturned;

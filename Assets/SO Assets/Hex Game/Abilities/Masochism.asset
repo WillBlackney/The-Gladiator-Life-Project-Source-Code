@@ -32,8 +32,9 @@ MonoBehaviour:
     level: 1
   abilitySubRequirements:
   - type: 4
-    healthRequired: 10
+    healthRequired: 8
   baseRange: 0
+  gainRangeBonusFromVision: 0
   hitChanceModifier: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:

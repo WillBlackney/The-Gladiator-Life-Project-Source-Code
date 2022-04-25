@@ -28,23 +28,19 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: 'abilities.
 
-      Deal '
+      Enemies have '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '10% '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'more damage per point. when attacking '
+    phrase: '-15 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Weakened '
+    phrase: Debuff Resistance
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: targets.
+    phrase: against your harmful effects per point.
   keyWords:
-  - kewWordType: 1
-    passiveType: 49
+  - kewWordType: 16
+    passiveType: 0

@@ -416,7 +416,11 @@ namespace HexGameEngine.HexTiles
                 (character.hexCharacterView, destination, cData), cData, QueuePosition.Back);
 
             // TO DO: events that trigger when the character steps onto a new tile go here (maybe?)...
-            character.tilesMovedThisTurn++;           
+            character.tilesMovedThisTurn++;
+
+            // Remove flight
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Flight))
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Flight, -1, false);
 
         }
         public void DoCharacterMoveVisualEvent(HexCharacterView view, LevelNode hex, CoroutineData cData, Action onCompleteCallback = null)

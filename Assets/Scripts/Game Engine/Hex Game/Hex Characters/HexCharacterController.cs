@@ -782,11 +782,6 @@ namespace HexGameEngine.Characters
             {
                 // Gain Energy + update energy views
                 int energyGain = StatCalculator.GetTotalEnergyRecovery(character);
-                
-                // Check pyromania perk bonus
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Eager) && TurnController.Instance.CurrentTurn == 1)
-                    energyGain += 1;                
-
                 ModifyEnergy(character, energyGain, false, false);
             }              
 
@@ -814,6 +809,12 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BloodOfTheAncients))
                 {
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Rune, 1, true, 0.5f);
+                }
+
+                // Human (gain flight)
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Eager))
+                {
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Flight, 1, true, 0.5f);
                 }
 
                 // Blood Thristy (gain 2 wrath)
@@ -1107,10 +1108,35 @@ namespace HexGameEngine.Characters
                     VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Looming Presence!"), QueuePosition.Back, 0f, 0.5f);
                     int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.LoomingPresence);
                     List<HexCharacterModel> enemies = GetAllEnemiesWithinMyAura(character);
+                    foreach (HexCharacterModel enemy in enemies)                    
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(enemy.pManager, Perk.Weakened,stacks, true, 0,character.pManager);
+                    
+                    VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                }
+
+                // Dragon Aspect
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.DragonAspect) && character.currentHealth > 0)
+                {
+                    // Status Notif 
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Dragon Aspect!"), QueuePosition.Back, 0f, 0.5f);
+
+                    // Fire nova VFX
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEffectManager.Instance.CreateFireNova(view.WorldPosition), QueuePosition.Back);
+
+                    // Apply 1 burning to all enemies in aura
+                    List<HexCharacterModel> enemies = GetAllEnemiesWithinMyAura(character);
                     foreach (HexCharacterModel enemy in enemies)
                     {
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(enemy.pManager, Perk.Weakened,stacks, true, 0,character.pManager);
+                        // Burning VFX
+                        HexCharacterView enemyView = enemy.hexCharacterView;
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                            VisualEffectManager.Instance.CreateApplyBurningEffect(enemyView.WorldPosition), QueuePosition.Back);
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(enemy.pManager, Perk.Burning, 1, true, 0, character.pManager);
+
                     }
+
                     VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
                 }
 
@@ -1892,6 +1918,7 @@ namespace HexGameEngine.Characters
         }
         #endregion
 
+
         // Conditional Checks on Characters
         #region
         public bool IsCharacterAbleToMove(HexCharacterModel c)
@@ -1899,7 +1926,8 @@ namespace HexGameEngine.Characters
             bool bRet = true;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Rooted) ||
-                    PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Stunned))
+                    PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Stunned) ||
+                    PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.TurtleAspect))
                 bRet = false;
 
             return bRet;

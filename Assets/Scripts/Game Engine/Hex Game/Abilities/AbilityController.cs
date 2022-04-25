@@ -123,7 +123,7 @@ namespace HexGameEngine.Abilities
         public AbilityData GetRandomAbilityTomeAbility()
         {
             List<TalentSchool> talentSchools = new List<TalentSchool> { TalentSchool.Divinity, TalentSchool.Guardian, TalentSchool.Manipulation,
-            TalentSchool.Naturalism, TalentSchool.Pyromania, TalentSchool.Ranger, TalentSchool.Scoundrel, TalentSchool.Shadowcraft, TalentSchool.Warfare };
+            TalentSchool.Naturalism, TalentSchool.Pyromania, TalentSchool.Ranger, TalentSchool.Scoundrel, TalentSchool.Shadowcraft, TalentSchool.Warfare, TalentSchool.Metamorph };
 
             talentSchools.Shuffle();
             TalentSchool ts = talentSchools[0];
@@ -618,7 +618,6 @@ namespace HexGameEngine.Abilities
                     // Duck animation on miss
                     VisualEventManager.Instance.CreateVisualEvent(() =>
                     HexCharacterController.Instance.PlayDuckAnimation(target.hexCharacterView), QueuePosition.Back, 0f, 0.5f, target.GetLastStackEventParent());
-
 
                     if (HexCharacterController.Instance.IsCharacterAbleToMakeRiposteAttack(target) &&
                         ability.abilityType == AbilityType.MeleeAttack &&
@@ -1237,6 +1236,10 @@ namespace HexGameEngine.Abilities
             // Pay Energy Cost
             HexCharacterController.Instance.ModifyEnergy(character, -GetAbilityEnergyCost(character, ability));
 
+            // Check shed perk: remove if ability used was an aspect ability
+            if (ability.abilityName.Contains("Aspect") && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Shed, -1, false);
+
             // Increment skills used this turn
             if (ability.abilityType == AbilityType.Skill)            
                 character.skillAbilitiesUsedThisTurn++;
@@ -1417,6 +1420,10 @@ namespace HexGameEngine.Abilities
         public int GetAbilityEnergyCost(HexCharacterModel character, AbilityData ability)
         {
             int energyCost = ability.energyCost;
+
+            // Check shed perk: aspect ability costs 0
+            if (ability.abilityName.Contains("Aspect") && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
+                return 0;
 
             // Check resolute passive
             if (character != null &&

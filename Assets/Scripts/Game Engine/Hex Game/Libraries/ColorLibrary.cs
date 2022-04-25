@@ -19,6 +19,7 @@ namespace HexGameEngine.Libraries
         public Color naturalismColor;
         public Color corruptionColor;
         public Color scoundrelColor;
+        public Color metamorphColor;
 
         [Header("Misc Card Colors")]
         public Color racialColor;
@@ -81,10 +82,7 @@ namespace HexGameEngine.Libraries
             {
                 colorReturned = shadowcraftColor;
             }
-            else if (talent == TalentSchool.Corruption)
-            {
-                colorReturned = corruptionColor;
-            }
+            
             else if (talent == TalentSchool.Divinity)
             {
                 colorReturned = divinityColor;
@@ -92,6 +90,10 @@ namespace HexGameEngine.Libraries
             else if (talent == TalentSchool.Manipulation)
             {
                 colorReturned = manipulationColor;
+            }
+            else if (talent == TalentSchool.Metamorph)
+            {
+                colorReturned = metamorphColor;
             }
 
             colorReturned = new Color(colorReturned.r, colorReturned.g, colorReturned.b, colorReturned.a);
