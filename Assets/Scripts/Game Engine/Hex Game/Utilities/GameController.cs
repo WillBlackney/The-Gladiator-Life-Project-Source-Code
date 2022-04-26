@@ -132,12 +132,24 @@ namespace HexGameEngine
             CharacterDataController.Instance.BuildCharacterRoster(characters);
 
             // Enable world view
-            LightController.Instance.EnableDungeonGlobalLight();
-            LevelController.Instance.EnableNightTimeArenaScenery();
+            bool dayTime = true;
+            if (RandomGenerator.NumberBetween(1, 2) == 1) dayTime = false;
+            if (dayTime)
+            {
+                LightController.Instance.EnableDayTimeGlobalLight();
+                LevelController.Instance.EnableDayTimeArenaScenery();
+            }
+            else
+            {
+                LightController.Instance.EnableNightTimeGlobalLight();
+                LevelController.Instance.EnableNightTimeArenaScenery();
+            }          
             LevelController.Instance.ShowAllNodeViews();
+            LevelController.Instance.SetLevelNodeDayOrNightViewState(dayTime);
 
             // Randomize level node elevation and obstructions
             LevelController.Instance.GenerateLevelNodes();
+            
 
             // Setup player characters
             HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
@@ -179,9 +191,20 @@ namespace HexGameEngine
             CharacterDataController.Instance.BuildCharacterRoster(characters);
 
             // Enable world view
-            LightController.Instance.EnableDungeonGlobalLight();
-            LevelController.Instance.EnableNightTimeArenaScenery();
+            bool dayTime = true;
+            if (RandomGenerator.NumberBetween(1, 2) == 1) dayTime = false;
+            if (dayTime)
+            {
+                LightController.Instance.EnableDayTimeGlobalLight();
+                LevelController.Instance.EnableDayTimeArenaScenery();
+            }
+            else
+            {
+                LightController.Instance.EnableNightTimeGlobalLight();
+                LevelController.Instance.EnableNightTimeArenaScenery();
+            }
             LevelController.Instance.ShowAllNodeViews();
+            LevelController.Instance.SetLevelNodeDayOrNightViewState(dayTime);
 
             // Setup player characters
             HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
@@ -630,9 +653,20 @@ namespace HexGameEngine
             PersistencyController.Instance.AutoUpdateSaveFile();
 
             // Enable world view
-            LightController.Instance.EnableDungeonGlobalLight();
-            LevelController.Instance.EnableNightTimeArenaScenery();
+            bool dayTime = true;
+            if (RandomGenerator.NumberBetween(1, 2) == 1) dayTime = false;
+            if (dayTime)
+            {
+                LightController.Instance.EnableDayTimeGlobalLight();
+                LevelController.Instance.EnableDayTimeArenaScenery();
+            }
+            else
+            {
+                LightController.Instance.EnableNightTimeGlobalLight();
+                LevelController.Instance.EnableNightTimeArenaScenery();
+            }
             LevelController.Instance.ShowAllNodeViews();
+            LevelController.Instance.SetLevelNodeDayOrNightViewState(dayTime);
 
             // Randomize level node elevation and obstructions
             LevelController.Instance.GenerateLevelNodes();
@@ -656,99 +690,7 @@ namespace HexGameEngine
             // Start a new combat event
             TurnController.Instance.OnNewCombatEventStarted();
         }
-        #endregion
-
-        // Character Draft Event
-        #region
-        private void HandleLoadCharacterDraftEvent()
-        {
-            StartCoroutine(HandleLoadCharacterDraftEventCoroutine());
-        }
-        private IEnumerator HandleLoadCharacterDraftEventCoroutine()
-        {
-            // Disable dungeon view, if open
-            //LevelController.Instance.DisableDungeonScenery();
-
-            // Reset event 
-            DraftEventController.Instance.ResetDraftEventViewsAndData();
-
-            // Set lighting
-            LightController.Instance.EnableOutdoorCryptGlobalLight();
-
-            // Play ambience if not already playing
-            if (!AudioManager.Instance.IsSoundPlaying(Sound.Ambience_Outdoor_Spooky))            
-                AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f); 
-
-            // Build starting views           
-            DraftEventController.Instance.BuildInitialViews(CharacterDataController.Instance.AllPlayerCharacters[0]);
-
-            // Screen Reveal
-            BlackScreenController.Instance.FadeInScreen(1.5f);
-
-            // Set Camera start settings
-            CameraController.Instance.DoCameraZoom(2, 2, 0f);
-            CameraController.Instance.DoCameraMove(-5, -3, 0f);
-
-            // Start moving player model + animate king
-            DraftEventController.Instance.PlayKingFloatAnim();
-            DraftEventController.Instance.DoPlayerModelMoveToMeetingSequence();
-            yield return new WaitForSeconds(0.5f);
-
-            // Move + Zoom out camera
-            CameraController.Instance.DoCameraZoom(2, 5, 2f);
-            CameraController.Instance.DoCameraMove(0, 0, 2f);
-            yield return new WaitForSeconds(1.5f);
-
-            // King greeting
-            DraftEventController.Instance.DoKingGreeting();
-            yield return new WaitForSeconds(1.5f);
-
-            // Start draft choices + UI here
-            DraftEventController.Instance.StartBuildAndShowDraftCharacterScreenInitialSequence();
-
-            // Fade in choice buttons + health bar
-            // KingsBlessingController.Instance.FadeInChoiceButtons();
-            // KingsBlessingController.Instance.FadeHealthBar(1, 1);
-        }
-        public void HandlDraftEventContinueSequence(CoroutineData cData)
-        {
-            StartCoroutine(HandlDraftEventContinueSequenceCoroutine(cData));
-        }
-        private IEnumerator HandlDraftEventContinueSequenceCoroutine(CoroutineData cData)
-        {
-            // Disable continue button
-            DraftEventController.Instance.HideContinueButton();
-
-            // King greeting
-            DraftEventController.Instance.DoKingFarewell();
-
-            // Open door visual sequence
-            DraftEventController.Instance.DoDoorOpeningSequence();
-            yield return new WaitForSeconds(1.75f);
-
-            // start camera zoom + movement here
-            CameraController.Instance.DoCameraZoom(5, 2, 3.25f);
-            CameraController.Instance.DoCameraMove(0, 2, 3.25f);
-
-            // Player moves towards door visual sequence
-            StartCoroutine(DraftEventController.Instance.DoPlayerCharactersMoveThroughEntranceSequence());
-            yield return new WaitForSeconds(2.25f);
-
-            // Fade out outdoor ambience
-            AudioManager.Instance.FadeOutSound(Sound.Ambience_Outdoor_Spooky, 1f);
-
-            // Black screen fade out start here
-            BlackScreenController.Instance.FadeOutScreen(1f);
-            yield return new WaitForSeconds(1.1f);
-
-            DraftEventController.Instance.HideMainViewParent();
-
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
-        }
-        #endregion
+        #endregion               
 
         // Camping Events
         #region

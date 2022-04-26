@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: c6a28b48bf8e1bc4a809f818e35ad00b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 76493d76aa797844ab12ff64036767e5, type: 3}
   m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8790398778795649362
 Transform:
   m_ObjectHideFlags: 0
@@ -215,12 +215,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: c78f2ecf15fbbdd41ab5e8b4585d222c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e7f81d36169f1a447a50e9e55bce44dc, type: 3}
+  m_Color: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.77, y: 0.77}
+  m_Size: {x: 21.6, y: 21.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -377,12 +377,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: 21300000, guid: c78f2ecf15fbbdd41ab5e8b4585d222c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e7f81d36169f1a447a50e9e55bce44dc, type: 3}
   m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.77, y: 0.77}
+  m_Size: {x: 21.6, y: 21.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -442,11 +442,20 @@ MonoBehaviour:
   mouseOverParent: {fileID: 8944885819890159452}
   elevationPositioningParent: {fileID: 8944885819292419967}
   elevationPillarImagesParent: {fileID: 1080915834532012943}
+  elevationPillarCircleRenderers:
+  - {fileID: 4228435234701096525}
+  - {fileID: 2662315391701593645}
+  elevationPillarSquareRenderers:
+  - {fileID: 5361543183046550189}
   inRangeMarker: {fileID: 8944885819097843771}
   moveMarker: {fileID: 8944885819934804169}
   obstacleParent: {fileID: 1089604167021973704}
   obstacleImages:
   - {fileID: 5378591750786922047}
+  nightTimeCircle: {fileID: 21300000, guid: d69024db83b262c41907825fcf767935, type: 3}
+  nightTimeSquare: {fileID: 21300000, guid: c6a28b48bf8e1bc4a809f818e35ad00b, type: 3}
+  dayTimeCircle: {fileID: 21300000, guid: e7f81d36169f1a447a50e9e55bce44dc, type: 3}
+  dayTimeSquare: {fileID: 21300000, guid: 76493d76aa797844ab12ff64036767e5, type: 3}
 --- !u!61 &8944885818504147629
 BoxCollider2D:
   m_ObjectHideFlags: 0

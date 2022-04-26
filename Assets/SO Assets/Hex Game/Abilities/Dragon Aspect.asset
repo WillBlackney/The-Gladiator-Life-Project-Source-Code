@@ -29,7 +29,7 @@ MonoBehaviour:
   secondaryTargetRequirement: 0
   rangeFromTarget: 0
   talentRequirementData:
-    talentSchool: 10
+    talentSchool: 14
     level: 1
   abilitySubRequirements: []
   baseRange: 0

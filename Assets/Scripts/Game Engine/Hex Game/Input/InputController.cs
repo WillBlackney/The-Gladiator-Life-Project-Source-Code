@@ -75,7 +75,7 @@ namespace HexGameEngine.Utilities
                 // Toggle character world space GUI
                 if (Input.GetKeyDown(KeyCode.LeftAlt))
                 {
-                    //UIController.Instance.OnTKeyPressed();
+                    UIController.Instance.OnAltKeyPressed();
                 }
 
                 // End turn with E

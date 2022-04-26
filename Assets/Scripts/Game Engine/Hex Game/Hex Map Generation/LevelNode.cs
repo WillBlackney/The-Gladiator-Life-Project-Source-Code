@@ -21,6 +21,8 @@ namespace HexGameEngine.HexTiles
         public GameObject mouseOverParent;
         [SerializeField] Transform elevationPositioningParent;
         [SerializeField] GameObject elevationPillarImagesParent;
+        [SerializeField] SpriteRenderer[] elevationPillarCircleRenderers;
+        [SerializeField] SpriteRenderer[] elevationPillarSquareRenderers;
 
         [Header("Marker Components")]
         [SerializeField] GameObject inRangeMarker;
@@ -34,6 +36,13 @@ namespace HexGameEngine.HexTiles
         private TileElevation elevation;
         private bool obstructed = false;
         [HideInInspector]public HexCharacterModel myCharacter;
+
+        [Header("Pillar Sprites")]
+        [SerializeField] private Sprite nightTimeCircle;
+        [SerializeField] private Sprite nightTimeSquare;
+        [Space(10)]
+        [SerializeField] private Sprite dayTimeCircle;
+        [SerializeField] private Sprite dayTimeSquare;
         #endregion
 
         // Getters + Accessors
@@ -209,6 +218,29 @@ namespace HexGameEngine.HexTiles
                 g.SetActive(false);
 
             obstacleParent.SetActive(false);
+        }
+        #endregion
+
+        // Elevation Pillar sprite logic
+        #region
+        public void SetPillarSprites(bool dayTime)
+        {
+            if (dayTime)
+            {
+                foreach (SpriteRenderer sr in elevationPillarCircleRenderers)
+                    sr.sprite = dayTimeCircle;
+
+                foreach (SpriteRenderer sr in elevationPillarSquareRenderers)
+                    sr.sprite = dayTimeSquare;
+            }
+            else if (!dayTime)
+            {
+                foreach (SpriteRenderer sr in elevationPillarCircleRenderers)
+                    sr.sprite = nightTimeCircle;
+
+                foreach (SpriteRenderer sr in elevationPillarSquareRenderers)
+                    sr.sprite = nightTimeSquare;
+            }
         }
         #endregion
 

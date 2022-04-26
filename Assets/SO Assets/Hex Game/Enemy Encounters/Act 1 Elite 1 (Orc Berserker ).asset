@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Act 1 Elite 1 (Orc Berserker )
   m_EditorClassIdentifier: 
   encounterName: Orc Berserker
-  baseXpReward: 100
+  baseXpReward: 75
   difficulty: 1
   enemyGroups:
   - possibleEnemies:

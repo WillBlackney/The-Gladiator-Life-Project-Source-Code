@@ -5,16 +5,14 @@ using HexGameEngine.Utilities;
 
 namespace HexGameEngine.VisualEvents
 {
-
-
     public class LightController : Singleton<LightController>
     {
         // Properties + Components
         #region
         [Header("Global Light Components")]
         [SerializeField] private GameObject standardGlobalLight;
-        [SerializeField] private GameObject outdoorCryptGlobalLight;
-        [SerializeField] private GameObject dungeonGlobalLight;
+        [SerializeField] private GameObject nightTimeGlobalLight;
+        [SerializeField] private GameObject dayTimeGlobalLight;
         #endregion
 
         // Logic
@@ -22,23 +20,23 @@ namespace HexGameEngine.VisualEvents
         private void DisableAllGlobalLights()
         {
             standardGlobalLight.SetActive(false);
-            outdoorCryptGlobalLight.SetActive(false);
-            dungeonGlobalLight.SetActive(false);
-        }
-        public void EnableOutdoorCryptGlobalLight()
-        {
-            DisableAllGlobalLights();
-            outdoorCryptGlobalLight.SetActive(true);
-        }
+            nightTimeGlobalLight.SetActive(false);
+            dayTimeGlobalLight.SetActive(false);
+        }       
         public void EnableStandardGlobalLight()
         {
             DisableAllGlobalLights();
             standardGlobalLight.SetActive(true);
         }
-        public void EnableDungeonGlobalLight()
+        public void EnableNightTimeGlobalLight()
         {
             DisableAllGlobalLights();
-            dungeonGlobalLight.SetActive(true);
+            nightTimeGlobalLight.SetActive(true);
+        }
+        public void EnableDayTimeGlobalLight()
+        {
+            DisableAllGlobalLights();
+            dayTimeGlobalLight.SetActive(true);
         }
         #endregion
 

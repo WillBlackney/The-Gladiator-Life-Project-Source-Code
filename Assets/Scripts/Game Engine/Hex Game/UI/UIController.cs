@@ -19,7 +19,7 @@ namespace HexGameEngine.UI
         [SerializeField] private GameObject perkTalentInfoCardVisualParent;
         [SerializeField] private Transform perkTalentCardRosterPosition;
         [SerializeField] private Transform perkTalentCardDraftCharacterPosition;
-        private ShowCharacterWorldUiState characterWorldUiState;
+        private ShowCharacterWorldUiState characterWorldUiState = ShowCharacterWorldUiState.Always;
         #endregion
 
         // Getters + Accesors
@@ -32,7 +32,7 @@ namespace HexGameEngine.UI
 
         // Input + Key Presses
         #region
-        public void OnTKeyPressed()
+        public void OnAltKeyPressed()
         {
             if(characterWorldUiState == ShowCharacterWorldUiState.Always)
             {

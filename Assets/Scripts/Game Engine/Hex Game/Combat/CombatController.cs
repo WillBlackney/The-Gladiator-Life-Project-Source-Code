@@ -919,13 +919,13 @@ namespace HexGameEngine.Combat
             // Combat Token Expiries >>
             // Check Block
             if (!removedBarrier && 
-                ability != null &&
+                totalLifeLost > 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Block))
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Block, -1, false);
 
             // Check Vulnerable
             if (!removedBarrier &&
-                ability != null &&
+                totalLifeLost > 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Vulnerable))
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Vulnerable, -1, false);
 

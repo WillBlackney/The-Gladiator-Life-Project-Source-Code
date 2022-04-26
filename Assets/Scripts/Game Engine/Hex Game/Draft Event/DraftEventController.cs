@@ -119,7 +119,7 @@ namespace HexGameEngine.DraftEvent
         {
             Debug.LogWarning("DraftEventController.BuildAllViews()");
 
-            LevelController.Instance.EnableGraveyardScenery();
+            //LevelController.Instance.EnableGraveyardScenery();
 
             // Build player model
             CharacterModeller.BuildModelFromStringReferences(playerModel, startingCharacter.modelParts);

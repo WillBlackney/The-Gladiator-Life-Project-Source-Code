@@ -523,13 +523,14 @@ namespace HexGameEngine.Characters
         private void SetStartingLevelAndXpValues(HexCharacterData character)
         {
             character.currentXP = 0;
-            character.currentMaxXP = 100;
+            character.currentMaxXP = 50;
             SetCharacterLevel(character, 1);
         }
         private int GetMaxXpCapForLevel(int level)
         {
             // each level requires 50 more XP than the previous.
-            return 100 + (50 * (level - 1));
+            if (level == 1) return 50;
+            else return 50 + (75 * (level - 1));
         }
         private void SetCharacterLevel(HexCharacterData data, int newLevelValue)
         {

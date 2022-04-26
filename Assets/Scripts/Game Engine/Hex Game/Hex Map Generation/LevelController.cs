@@ -56,6 +56,7 @@ namespace HexGameEngine.HexTiles
         [Header("Dungeon Scenery References")]
         [SerializeField] private GameObject mainArenaViewParent;
         [SerializeField] private GameObject[] allNightTimeArenaParents;
+        [SerializeField] private GameObject[] allDayTimeArenaParents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         #endregion
@@ -128,6 +129,11 @@ namespace HexGameEngine.HexTiles
                     n.SetHexObstruction(true);
             }
 
+        }
+        public void SetLevelNodeDayOrNightViewState(bool dayTime)
+        {
+            foreach (LevelNode n in allLevelNodes)
+                n.SetPillarSprites(dayTime);
         }
         #endregion
 
@@ -764,7 +770,7 @@ namespace HexGameEngine.HexTiles
             h.mouseOverParent.SetActive(true);
 
             // Show the world space UI of the character on the tile
-            if(h.myCharacter != null) //&& UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
+            if(h.myCharacter != null && UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
             {
                 h.myCharacter.hexCharacterView.mouseOverModel = true;
                 HexCharacterController.Instance.FadeInCharacterWorldCanvas(h.myCharacter.hexCharacterView, null, 0.25f);
@@ -790,7 +796,7 @@ namespace HexGameEngine.HexTiles
             if (HexMousedOver == h)
             {
                 // Hide the world space UI of the character on the tile
-                if (HexMousedOver.myCharacter != null)//&& UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
+                if (HexMousedOver.myCharacter != null && UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
                 {
                     h.myCharacter.hexCharacterView.mouseOverModel = false;
                     if (h.myCharacter.hexCharacterView.mouseOverModel == false &&
@@ -1009,24 +1015,30 @@ namespace HexGameEngine.HexTiles
         #endregion
 
         // Scenery Logic
-        #region
-
-        // Graveyard
-        public void EnableGraveyardScenery()
-        {
-            graveyardSceneryParent.SetActive(true);
-        }
-        public void DisableGraveyardScenery()
-        {
-            graveyardSceneryParent.SetActive(false);
-        }
+        #region        
 
         // Arena
         public void EnableNightTimeArenaScenery()
         {
             DisableAllArenas();
             mainArenaViewParent.SetActive(true);
-            EnableRandomNighTimeArena();
+            EnableRandomNightTimeArena();
+        }
+        private void EnableRandomNightTimeArena()
+        {
+            allNightTimeArenaParents[RandomGenerator.NumberBetween(0, allNightTimeArenaParents.Length - 1)].SetActive(true);
+
+        }
+        public void EnableDayTimeArenaScenery()
+        {
+            DisableAllArenas();
+            mainArenaViewParent.SetActive(true);
+            EnableRandomDayTimeArena();
+        }
+        private void EnableRandomDayTimeArena()
+        {
+            allDayTimeArenaParents[RandomGenerator.NumberBetween(0, allDayTimeArenaParents.Length - 1)].SetActive(true);
+
         }
         public void DisableArenaView()
         {
@@ -1039,12 +1051,12 @@ namespace HexGameEngine.HexTiles
             {
                 allNightTimeArenaParents[i].SetActive(false);
             }
+            for (int i = 0; i < allDayTimeArenaParents.Length; i++)
+            {
+                allDayTimeArenaParents[i].SetActive(false);
+            }
         }
-        private void EnableRandomNighTimeArena()
-        {
-            allNightTimeArenaParents[RandomGenerator.NumberBetween(0, allNightTimeArenaParents.Length - 1)].SetActive(true);
-
-        }
+        
 
         #endregion
 

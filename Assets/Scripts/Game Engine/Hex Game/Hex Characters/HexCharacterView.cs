@@ -12,6 +12,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using HexGameEngine.UI;
 
 namespace HexGameEngine.Characters
 {
@@ -117,7 +118,8 @@ namespace HexGameEngine.Characters
         public void OnAnyWorldUiMouseEnter()
         {
             mouseOverWorldUI = true;
-            HexCharacterController.Instance.FadeInCharacterWorldCanvas(this, null, 0.25f);
+            if(UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
+                HexCharacterController.Instance.FadeInCharacterWorldCanvas(this, null, 0.25f);
         }
         public void OnAnyWorldUiMouseExit()
         {
@@ -128,7 +130,8 @@ namespace HexGameEngine.Characters
         private IEnumerator OnAnyWorldUiMouseExitCoroutine()
         {
             yield return new WaitForSeconds(0.15f);
-            if (!mouseOverWorldUI && !mouseOverModel)            
+            if (!mouseOverWorldUI && !mouseOverModel &&
+                UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)            
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(this, null, 0.25f, 0.25f);            
         }
         #endregion
