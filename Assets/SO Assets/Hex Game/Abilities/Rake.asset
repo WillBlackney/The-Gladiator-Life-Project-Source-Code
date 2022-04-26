@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Rake
   includeInGame: 1
-  baseAbilityDescription: Deal 125% Weapon damage to target and apply 2 Bleeding.
-  abilitySprite: {fileID: 21300000, guid: cf105b97ff430cd40b75c76e20bebe1f, type: 3}
+  baseAbilityDescription: Deal 125% Physical damage to target and apply 2 Bleeding.
+  abilitySprite: {fileID: 21300000, guid: 4bbf99b6f356bf149ad821e47565f799, type: 3}
   energyCost: 4
   baseCooldown: 2
   abilityType: 2

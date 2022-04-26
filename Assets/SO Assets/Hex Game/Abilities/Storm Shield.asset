@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: The next 3 times target is attacked, deal 10 Magic damage
     back to the attacker.
-  abilitySprite: {fileID: 21300000, guid: ba29272667fc44549b00ac2368f61ac4, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 56682cecfd122b94ca7182850b4e6b6d, type: 3}
   energyCost: 5
   baseCooldown: 3
   abilityType: 1

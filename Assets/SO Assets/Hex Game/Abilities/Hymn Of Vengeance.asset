@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c332a1f403e665468640b734668f781, type: 3}
   m_Name: Hymn Of Vengeance
   m_EditorClassIdentifier: 
-  abilityName: Hymn Of Fellowship
+  abilityName: Hymn Of Vengeance
   includeInGame: 1
   baseAbilityDescription: At the end of each turn, give 1 Wrath to allies within
     your Aura. Only one hymn may be active at a time.
-  abilitySprite: {fileID: 21300000, guid: 0c3edab45ee79f4499e61f70997d4725, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 0077f2bbbbcc5d84490035b48dc71f4b, type: 3}
   energyCost: 6
   baseCooldown: 2
   abilityType: 1

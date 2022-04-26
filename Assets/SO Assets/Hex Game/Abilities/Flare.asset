@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Apply 1 Crippled and remove Stealth from all enemies within
     1 of target location.
-  abilitySprite: {fileID: 21300000, guid: c5a0d9f988aeb08479b0bc34a711628d, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 4ac1c0ebf18b3454fa1be04b4da20155, type: 3}
   energyCost: 6
   baseCooldown: 3
   abilityType: 1

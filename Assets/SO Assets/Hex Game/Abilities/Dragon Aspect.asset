@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Gain 1 Flight. While active, apply 1 Burning to enemies
     within your Aura at the end of each turn.
-  abilitySprite: {fileID: 21300000, guid: c64eb6389d4553d45b963bcee32e5ede, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 019103e5a5f6bef4cb135e83c31f4819, type: 3}
   energyCost: 6
   baseCooldown: 2
   abilityType: 1

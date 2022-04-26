@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Flame Barrier
   includeInGame: 1
   baseAbilityDescription: Gain 3 Block. but also gain 3 Burning.
-  abilitySprite: {fileID: 21300000, guid: 7dce0e89304761c48b9523d476e9943a, type: 3}
+  abilitySprite: {fileID: 21300000, guid: e37ecb7dafc3c9047ba661484549db2d, type: 3}
   energyCost: 3
   baseCooldown: 3
   abilityType: 1

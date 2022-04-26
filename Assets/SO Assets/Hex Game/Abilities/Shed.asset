@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Shed
   includeInGame: 1
   baseAbilityDescription: 'Lose 10 health. Your next aspect ability costs 0 Energy. '
-  abilitySprite: {fileID: 21300000, guid: f4403c8b18d66a94493f1a47f6687289, type: 3}
+  abilitySprite: {fileID: 21300000, guid: c0060084ebe73c348be4d30603aee5a2, type: 3}
   energyCost: 0
   baseCooldown: 3
   abilityType: 1

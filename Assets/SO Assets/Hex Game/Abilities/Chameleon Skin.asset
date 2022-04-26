@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Chameleon Skin
   includeInGame: 1
   baseAbilityDescription: Gain 1 Stealth.
-  abilitySprite: {fileID: 21300000, guid: 2dd7a9aebc980974aa5a9ebcb4194044, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 6794d5d6ab2e5d64b9000fead29a7e82, type: 3}
   energyCost: 3
   baseCooldown: 3
   abilityType: 1

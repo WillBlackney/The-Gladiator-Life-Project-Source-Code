@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Tiger Aspect
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 4429562a7200c594db690002251c1211, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 53f5695e6b485b94983e16c3d9880f79, type: 3}
   passiveName: Tiger Aspect
   perkTag: 144
   passiveDescription:

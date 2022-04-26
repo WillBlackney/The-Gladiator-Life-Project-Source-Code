@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a319fe98d9e9648b913f7499b146c6, type: 3}
   m_Name: Metamorph
   m_EditorClassIdentifier: 
-  talentSprite: {fileID: 21300000, guid: 9231274193d07df4e9a87c2f4c4ef4df, type: 3}
+  talentSprite: {fileID: 21300000, guid: 4bbf99b6f356bf149ad821e47565f799, type: 3}
   talentSchool: 14
   talentDescription:
   - color: 1
