@@ -17,25 +17,41 @@ MonoBehaviour:
   race: 7
   modelSize: 0
   attributeSheet:
-    strength: 0
-    intelligence: 0
-    constitution: 0
-    dodge: 0
-    accuracy: 75
-    resolve: 0
-    wits: 0
+    strength:
+      value: 0
+      stars: 0
+    intelligence:
+      value: 0
+      stars: 0
+    constitution:
+      value: 0
+      stars: 0
+    dodge:
+      value: 0
+      stars: 0
+    accuracy:
+      value: 75
+      stars: 0
+    resolve:
+      value: 0
+      stars: 0
+    wits:
+      value: 0
+      stars: 0
     maxHealth: 100
-    stamina: 8
+    energyRecovery: 8
     maxEnergy: 8
     initiative: 5
     criticalChance: 5
     criticalModifier: 50
     auraSize: 1
+    vision: 0
     physicalResistance: 0
     magicResistance: 0
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
+    deathResistance: 25
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: dbf70824a5994e0449938fd3bee091ad, type: 2}
@@ -52,12 +68,11 @@ MonoBehaviour:
   - Gnoll_Right_Arm
   - Gnoll_Chest
   - Gnoll_Right_Leg
-  - Arcanist_Head_Wear
   itemSet:
     mainHandItem: {fileID: 11400000, guid: bcda3a1ec0dfdfe469dfdd16aabf8736, type: 2}
     offHandItem: {fileID: 0}
-    headArmour: {fileID: 0}
-    chestArmour: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 2a8009f93c956f24c8b19c406b89be76, type: 2}
+    chestArmour: {fileID: 11400000, guid: 3218ca08d4db8c6458c1e4c5fc55069a, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 2

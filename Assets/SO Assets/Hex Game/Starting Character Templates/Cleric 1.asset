@@ -17,25 +17,41 @@ MonoBehaviour:
   race: 6
   modelSize: 0
   attributeSheet:
-    strength: 0
-    intelligence: 0
-    constitution: 0
-    dodge: 0
-    accuracy: 75
-    resolve: 0
-    wits: 0
+    strength:
+      value: 0
+      stars: 0
+    intelligence:
+      value: 0
+      stars: 0
+    constitution:
+      value: 0
+      stars: 0
+    dodge:
+      value: 0
+      stars: 0
+    accuracy:
+      value: 75
+      stars: 0
+    resolve:
+      value: 0
+      stars: 0
+    wits:
+      value: 0
+      stars: 0
     maxHealth: 100
-    stamina: 8
+    energyRecovery: 8
     maxEnergy: 8
     initiative: 5
     criticalChance: 5
     criticalModifier: 50
     auraSize: 1
+    vision: 0
     physicalResistance: 0
     magicResistance: 0
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
+    deathResistance: 25
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 30fba2b2b3154994f91264dd96a76258, type: 2}
@@ -55,14 +71,11 @@ MonoBehaviour:
   - Satyr_Chest
   - Satyr_Right_Leg
   - Satyr_Left_Leg
-  - Blue_Rune_Chest_Wear
-  - Blue_Rune_Right_Leg_Wear
-  - Blue_Rune_Head_Wear
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
     offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
-    headArmour: {fileID: 0}
-    chestArmour: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 335c81cb722666345aa6c308b1d780f5, type: 2}
+    chestArmour: {fileID: 11400000, guid: 885404dfa0107114abd21b026368a161, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 10

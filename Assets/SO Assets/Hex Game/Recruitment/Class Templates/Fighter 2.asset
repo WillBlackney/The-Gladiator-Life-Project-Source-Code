@@ -26,13 +26,13 @@ MonoBehaviour:
   possibleWeapons:
   - mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
     offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
-    headArmour: {fileID: 0}
-    chestArmour: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 50abf88b96467f9438dfec4ded22f4b5, type: 2}
+    chestArmour: {fileID: 11400000, guid: ae8cf90ad093c0e4682a7455d7737a9e, type: 2}
     trinket: {fileID: 0}
   - mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
     offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
-    headArmour: {fileID: 0}
-    chestArmour: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 50abf88b96467f9438dfec4ded22f4b5, type: 2}
+    chestArmour: {fileID: 11400000, guid: ae8cf90ad093c0e4682a7455d7737a9e, type: 2}
     trinket: {fileID: 0}
   strengthMod: 0
   intelligenceMod: 0

@@ -17,25 +17,41 @@ MonoBehaviour:
   race: 3
   modelSize: 0
   attributeSheet:
-    strength: 0
-    intelligence: 0
-    constitution: 0
-    dodge: 0
-    accuracy: 75
-    resolve: 0
-    wits: 0
+    strength:
+      value: 0
+      stars: 0
+    intelligence:
+      value: 0
+      stars: 0
+    constitution:
+      value: 0
+      stars: 0
+    dodge:
+      value: 0
+      stars: 0
+    accuracy:
+      value: 75
+      stars: 0
+    resolve:
+      value: 0
+      stars: 0
+    wits:
+      value: 0
+      stars: 0
     maxHealth: 100
-    stamina: 8
+    energyRecovery: 8
     maxEnergy: 8
     initiative: 5
     criticalChance: 5
     criticalModifier: 50
     auraSize: 1
+    vision: 0
     physicalResistance: 0
     magicResistance: 0
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
+    deathResistance: 25
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 6451adb01f12c8e4b956aa5692dddb09, type: 2}
@@ -52,14 +68,11 @@ MonoBehaviour:
   - Undead_Right_Arm
   - Undead_Right_Hand
   - Undead_Right_Leg
-  - Death_Knight_Head_Wear
-  - Death_Knight_Chest_Wear
-  - Death_Knight_Right_Leg_Wear
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
     offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
-    headArmour: {fileID: 0}
-    chestArmour: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 7863df9bf5ee25e4c9aba96c0edfa299, type: 2}
+    chestArmour: {fileID: 11400000, guid: 6d45e462827082c419dad6ea907b3ceb, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 11

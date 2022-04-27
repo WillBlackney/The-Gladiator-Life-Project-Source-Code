@@ -68,14 +68,11 @@ MonoBehaviour:
   - Human_Right_Arm
   - Human_Right_Hand
   - Human_Right_Leg
-  - Paladin_Head_Wear
-  - Paladin_Chest_Wear
-  - Paladin_Right_Leg_Wear
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 130ab6972593ec14d8dda796c434cefb, type: 2}
     offHandItem: {fileID: 0}
-    headArmour: {fileID: 0}
-    chestArmour: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 7863df9bf5ee25e4c9aba96c0edfa299, type: 2}
+    chestArmour: {fileID: 11400000, guid: 6d45e462827082c419dad6ea907b3ceb, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 10

@@ -17,25 +17,41 @@ MonoBehaviour:
   race: 5
   modelSize: 0
   attributeSheet:
-    strength: 0
-    intelligence: 0
-    constitution: 0
-    dodge: 0
-    accuracy: 75
-    resolve: 0
-    wits: 0
+    strength:
+      value: 0
+      stars: 0
+    intelligence:
+      value: 0
+      stars: 0
+    constitution:
+      value: 0
+      stars: 0
+    dodge:
+      value: 0
+      stars: 0
+    accuracy:
+      value: 75
+      stars: 0
+    resolve:
+      value: 0
+      stars: 0
+    wits:
+      value: 0
+      stars: 0
     maxHealth: 100
-    stamina: 8
+    energyRecovery: 8
     maxEnergy: 8
     initiative: 5
     criticalChance: 5
     criticalModifier: 50
     auraSize: 1
+    vision: 0
     physicalResistance: 0
     magicResistance: 0
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
+    deathResistance: 25
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: f2990956e456afa46af43accbd061445, type: 2}
@@ -52,14 +68,11 @@ MonoBehaviour:
   - Goblin_Right_Arm_2
   - Goblin_Right_Hand_2
   - Goblin_Right_Leg_2
-  - Red_Face_Mask_Head_Wear
-  - Shadow_Blade_Chest_Wear
-  - Shadow_Blade_Right_Leg_Wear
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
     offHandItem: {fileID: 0}
-    headArmour: {fileID: 0}
-    chestArmour: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 376e95580d3f6fc4c88532c345302ad3, type: 2}
+    chestArmour: {fileID: 11400000, guid: a064fbe0bfd2cba409f1f66f9cf8a071, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 3

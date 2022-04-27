@@ -99,6 +99,7 @@ namespace HexGameEngine.UCM
             // MH
             if (itemSet.mainHandItem != null)
             {
+                bool shouldBreak = false;
                 foreach (UniversalCharacterModelElement ucme in model.allMainHandWeapons)
                 {
                     foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
@@ -107,15 +108,18 @@ namespace HexGameEngine.UCM
                         {
                             Debug.Log("CharacterModeller.ApplyItemSetToCharacterModelView() found matching MH weapon view for item: " + itemSet.mainHandItem.itemName);
                             EnableAndSetElementOnModel(model, ucme);
+                            shouldBreak = true;
                             break;
                         }
                     }
+                    if (shouldBreak) break;
                 }
             }
 
             // Off hand
             if (itemSet.offHandItem != null)
             {
+                bool shouldBreak = false;
                 foreach (UniversalCharacterModelElement ucme in model.allOffHandWeapons)
                 {
                     foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
@@ -124,9 +128,11 @@ namespace HexGameEngine.UCM
                         {
                             Debug.Log("CharacterModeller.ApplyItemSetToCharacterModelView() found matching OH weapon view for item: " + itemSet.offHandItem.itemName);
                             EnableAndSetElementOnModel(model, ucme);
+                            shouldBreak = true;
                             break;
                         }
                     }
+                    if (shouldBreak) break;
                 }
             }
 
@@ -134,6 +140,7 @@ namespace HexGameEngine.UCM
             // Chest Armour
             if (itemSet.chestArmour != null)
             {
+                bool shouldBreak = false;
                 foreach (UniversalCharacterModelElement ucme in model.allChestArmour)
                 {
                     foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
@@ -142,15 +149,19 @@ namespace HexGameEngine.UCM
                         {
                             Debug.Log("CharacterModeller.ApplyItemSetToCharacterModelView() found matching chest armour view for item: " + itemSet.chestArmour.itemName);
                             EnableAndSetElementOnModel(model, ucme);
+                            shouldBreak = true;
                             break;
                         }
                     }
+
+                    if (shouldBreak) break;
                 }
             }
 
             // Head Armour
             if (itemSet.headArmour != null)
             {
+                bool shouldBreak = false;
                 foreach (UniversalCharacterModelElement ucme in model.allHeadArmour)
                 {
                     foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
@@ -159,9 +170,11 @@ namespace HexGameEngine.UCM
                         {
                             Debug.Log("CharacterModeller.ApplyItemSetToCharacterModelView() found matching chest armour view for item: " + itemSet.headArmour.itemName);
                             EnableAndSetElementOnModel(model, ucme);
+                            shouldBreak = true;
                             break;
                         }
                     }
+                    if (shouldBreak) break;
                 }
             }
         }

@@ -68,13 +68,11 @@ MonoBehaviour:
   - Human_Right_Arm
   - Human_Right_Hand
   - Human_Right_Leg
-  - Knight_Chest_Wear
-  - Knight_Head_Wear
   itemSet:
     mainHandItem: {fileID: 11400000, guid: bcda3a1ec0dfdfe469dfdd16aabf8736, type: 2}
     offHandItem: {fileID: 0}
-    headArmour: {fileID: 0}
-    chestArmour: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 50abf88b96467f9438dfec4ded22f4b5, type: 2}
+    chestArmour: {fileID: 11400000, guid: ae8cf90ad093c0e4682a7455d7737a9e, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 2

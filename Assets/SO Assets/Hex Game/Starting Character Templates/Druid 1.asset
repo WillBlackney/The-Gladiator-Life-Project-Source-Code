@@ -71,13 +71,11 @@ MonoBehaviour:
   - Satyr_Chest
   - Satyr_Right_Leg
   - Satyr_Left_Leg
-  - Dark_Green_Hood_Head_Wear
-  - Barbarian_Chest_Wear
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 12b837d9baaf68e4eb55cfab4ef25cbd, type: 2}
     offHandItem: {fileID: 0}
-    headArmour: {fileID: 0}
-    chestArmour: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 7ac975a3abf940040ac3e0ca78352642, type: 2}
+    chestArmour: {fileID: 11400000, guid: 3218ca08d4db8c6458c1e4c5fc55069a, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 13

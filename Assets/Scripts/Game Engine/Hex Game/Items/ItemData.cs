@@ -6,26 +6,34 @@ using UnityEngine;
 namespace HexGameEngine.Items
 {
     public class ItemData
-    {    
+    {
+        #region Properties
+        // Core Properties
         public string itemName;
+        private Sprite itemSprite;
         public string itemDescription;
         public ItemType itemType;
         public bool lootable;
         public bool includeInLibrary;
+        public Rarity rarity;
 
+        // Weapon Properties
         public WeaponClass weaponClass;
         public HandRequirement handRequirement;
         public WeaponSlot allowedSlot;
         public InjuryType[] injuryTypesCaused;
-        public Rarity rarity;
 
-        public int armourValue;
+        // Armour Properties
+        public int armourAmount;
+        public int minArmourRoll;
+        public int maxArmourRoll;
 
         public List<AbilityData> grantedAbilities = new List<AbilityData>();
         public List<ItemEffect> itemEffects = new List<ItemEffect>();
         public ItemEffectSet[] itemEffectSets;
+        #endregion
 
-        private Sprite itemSprite;
+        #region Getters + Accessors
         public Sprite ItemSprite
         {
             get
@@ -60,7 +68,9 @@ namespace HexGameEngine.Items
 
             return s;
         }
+        #endregion
 
+        #region Misc
         public bool IsMeleeWeapon
         {
             get
@@ -81,5 +91,6 @@ namespace HexGameEngine.Items
                 weaponClass == WeaponClass.Staff;
             }
         }
+        #endregion
     }
 }

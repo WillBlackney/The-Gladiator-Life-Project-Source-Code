@@ -64,6 +64,7 @@ namespace HexGameEngine.TownFeatures
 
             // Build model
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(portaitModel, data.modelParts);
+            CharacterModeller.ApplyItemSetToCharacterModelView(data.itemSet, portaitModel);
             portaitModel.SetBaseAnim();
 
             // Wage and recruit costs

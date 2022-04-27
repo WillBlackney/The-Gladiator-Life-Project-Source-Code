@@ -68,14 +68,11 @@ MonoBehaviour:
   - Goblin_Right_Arm_2
   - Goblin_Right_Hand_2
   - Goblin_Right_Leg_2
-  - Brown_Rune_Chest_Wear
-  - Brown_Rune_Right_Leg_Wear
-  - Brown_Hood_Visor_Head_Wear
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 12b837d9baaf68e4eb55cfab4ef25cbd, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
-    chestArmour: {fileID: 0}
+    chestArmour: {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 14

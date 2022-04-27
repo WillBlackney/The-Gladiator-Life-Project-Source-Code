@@ -10,6 +10,7 @@ namespace HexGameEngine.Items
     [CreateAssetMenu(fileName = "New Item Data", menuName = "Item Data", order = 52)]
     public class ItemDataSO: ScriptableObject
     {
+        #region Properties
         [HorizontalGroup("General Info", 75)]
         [HideLabel]
         [PreviewField(75)]
@@ -52,6 +53,18 @@ namespace HexGameEngine.Items
         [ShowIf("ShowWeaponField")]
         public InjuryType[] injuryTypesCaused;
 
+        [BoxGroup("Armour Info", true, true)]
+        [LabelWidth(100)]
+        [Range(0, 50)]
+        [ShowIf("ShowArmourFields")]
+        public int minArmourRoll;
+
+        [BoxGroup("Armour Info")]
+        [LabelWidth(100)]
+        [Range(0, 50)]
+        [ShowIf("ShowArmourFields")]
+        public int maxArmourRoll;
+
         [BoxGroup("Ability Info", true, true)]
         [LabelWidth(100)]
         public AbilityDataSO[] grantedAbilities;
@@ -59,13 +72,16 @@ namespace HexGameEngine.Items
         [BoxGroup("Effects Info", true, true)]
         [LabelWidth(100)]
         public ItemEffectSet[] itemEffectSets;
+        #endregion
 
-
-        // Odin Showifs
-        #region
+        #region Odin Showifs
         public bool ShowWeaponField()
         {
             return itemType == ItemType.Weapon;
+        }
+        public bool ShowArmourFields()
+        {
+            return itemType == ItemType.Head || itemType == ItemType.Chest;
         }
         public bool ShowWeaponDamageField()
         {

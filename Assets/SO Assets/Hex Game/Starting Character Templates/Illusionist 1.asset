@@ -17,25 +17,41 @@ MonoBehaviour:
   race: 3
   modelSize: 0
   attributeSheet:
-    strength: 0
-    intelligence: 0
-    constitution: 0
-    dodge: 0
-    accuracy: 75
-    resolve: 0
-    wits: 0
+    strength:
+      value: 0
+      stars: 0
+    intelligence:
+      value: 0
+      stars: 0
+    constitution:
+      value: 0
+      stars: 0
+    dodge:
+      value: 0
+      stars: 0
+    accuracy:
+      value: 75
+      stars: 0
+    resolve:
+      value: 0
+      stars: 0
+    wits:
+      value: 0
+      stars: 0
     maxHealth: 100
-    stamina: 8
+    energyRecovery: 8
     maxEnergy: 8
     initiative: 5
     criticalChance: 5
     criticalModifier: 50
     auraSize: 1
+    vision: 0
     physicalResistance: 0
     magicResistance: 0
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
+    deathResistance: 25
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 3dc85c0a7ccd4904a972e6aa977e23b3, type: 2}
@@ -50,14 +66,11 @@ MonoBehaviour:
   - Undead_Face_6
   - Undead_Head_4
   - Ghoul_Right_Leg
-  - Arcanist_Head_Wear
-  - Arcanist_Chest_Wear
-  - Arcanist_Right_Leg_Wear
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 12b837d9baaf68e4eb55cfab4ef25cbd, type: 2}
     offHandItem: {fileID: 0}
-    headArmour: {fileID: 0}
-    chestArmour: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 335c81cb722666345aa6c308b1d780f5, type: 2}
+    chestArmour: {fileID: 11400000, guid: 885404dfa0107114abd21b026368a161, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 9

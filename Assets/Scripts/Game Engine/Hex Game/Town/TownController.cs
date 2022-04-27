@@ -270,6 +270,7 @@ namespace HexGameEngine.TownFeatures
 
             // Character Model
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(recruitRightPanelPortaitModel, character.modelParts);
+            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, recruitRightPanelPortaitModel);
             recruitRightPanelPortaitModel.SetIdleAnim();
 
             // Texts

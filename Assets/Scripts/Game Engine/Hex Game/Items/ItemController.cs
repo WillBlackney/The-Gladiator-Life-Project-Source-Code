@@ -157,6 +157,10 @@ namespace HexGameEngine.Items
         {
             List<ItemEffect> ret = new List<ItemEffect>();
 
+            // Generate armour
+            itemData.armourAmount = RandomGenerator.NumberBetween(itemData.minArmourRoll, itemData.maxArmourRoll);
+
+            // Generate effects
             for(int i = 0; i < itemData.itemEffectSets.Length; i++)
             {
                 ItemEffectSet set = itemData.itemEffectSets[i];

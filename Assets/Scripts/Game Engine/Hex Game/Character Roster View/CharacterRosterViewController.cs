@@ -431,19 +431,21 @@ namespace HexGameEngine.UI
             }
 
             // Main hand weapon abilities
-            Debug.LogWarning("main hand weapon abilities = " + character.itemSet.mainHandItem.grantedAbilities.Count.ToString());
             int newIndexCount = 0;
-            for (int i = 0; i < character.itemSet.mainHandItem.grantedAbilities.Count; i++)
+            if(character.itemSet.mainHandItem != null)
             {
-                Debug.LogWarning("main hand weapon is not null");
-                // Characters dont gain special weapon ability if they have an off hand item
-                if (character.itemSet.offHandItem == null || (character.itemSet.offHandItem != null && character.itemSet.mainHandItem.grantedAbilities[i].weaponAbilityType == WeaponAbilityType.Basic))
+                for (int i = 0; i < character.itemSet.mainHandItem.grantedAbilities.Count; i++)
                 {
-                    Debug.LogWarning("gained main hand weapon ability");
-                    abilityButtons[i].BuildFromAbilityData(character.itemSet.mainHandItem.grantedAbilities[i]);
-                    newIndexCount++;
+                    Debug.LogWarning("main hand weapon is not null");
+                    // Characters dont gain special weapon ability if they have an off hand item
+                    if (character.itemSet.offHandItem == null || (character.itemSet.offHandItem != null && character.itemSet.mainHandItem.grantedAbilities[i].weaponAbilityType == WeaponAbilityType.Basic))
+                    {
+                        Debug.LogWarning("gained main hand weapon ability");
+                        abilityButtons[i].BuildFromAbilityData(character.itemSet.mainHandItem.grantedAbilities[i]);
+                        newIndexCount++;
+                    }
                 }
-            }
+            }               
 
             // Off hand weapon abilities
             if (character.itemSet.offHandItem != null)
@@ -454,7 +456,6 @@ namespace HexGameEngine.UI
                     newIndexCount++;
                 }
             }
-
 
             // Build non item derived abilities
             for (int i = 0; i < character.abilityBook.allKnownAbilities.Count; i++)
