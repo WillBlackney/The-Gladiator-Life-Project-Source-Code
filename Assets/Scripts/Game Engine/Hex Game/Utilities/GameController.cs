@@ -720,18 +720,11 @@ namespace HexGameEngine
 
             if (GlobalSettings.Instance.RandomizePlayerCharacters)
             {
-                List<HexCharacterTemplateSO> randomCharacters = GenerateRandomSandboxCharacters(GlobalSettings.Instance.TotalCharacters);
+                List<HexCharacterTemplateSO> randomCharacters = GetRandomSandboxCharacters(GlobalSettings.Instance.TotalCharacters);
                 foreach (HexCharacterTemplateSO c in randomCharacters)
                 {
                     HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(c);
-                    CharacterDataController.Instance.HandleGainXP(character, 300);
-                    /*
-                    for(int i = 0; i < 2; i++)
-                    {
-                        character.attributeRolls.Add(AttributeRollResult.GenerateRoll(character)); // generate roll result for testing
-                        character.perkRolls.Add(PerkRollResult.GenerateRoll(character));
-                    }
-                    */
+                    //CharacterDataController.Instance.HandleGainXP(character, 300);
                     characters.Add(character);
                 }
             }
@@ -740,13 +733,7 @@ namespace HexGameEngine
                 foreach (HexCharacterTemplateSO dataSO in GlobalSettings.Instance.ChosenCharacterTemplates)
                 {
                     HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(dataSO);
-                    CharacterDataController.Instance.HandleGainXP(character, 300);
-                    /*for (int i = 0; i < 2; i++)
-                    {
-                        character.attributeRolls.Add(AttributeRollResult.GenerateRoll(character)); // generate roll result for testing
-                        character.perkRolls.Add(PerkRollResult.GenerateRoll(character));
-                    }
-                    */
+                    //CharacterDataController.Instance.HandleGainXP(character, 300);
                     characters.Add(character);
                 }
             }
@@ -754,7 +741,7 @@ namespace HexGameEngine
 
             return characters;
         }
-        public List<HexCharacterTemplateSO> GenerateRandomSandboxCharacters(int characters)
+        private List<HexCharacterTemplateSO> GetRandomSandboxCharacters(int characters)
         {
             List<HexCharacterTemplateSO> listReturned = new List<HexCharacterTemplateSO>();
             List<HexCharacterTemplateSO> shuffleList = new List<HexCharacterTemplateSO>();

@@ -81,6 +81,10 @@ namespace HexGameEngine.Items
         {
             return Array.FindAll(allItems, i => i.lootable).ToList();
         }
+        public List<ItemData> GetAllNonLootableItems()
+        {
+            return Array.FindAll(allItems, i => i.lootable == false).ToList();
+        }
         public List<ItemData> GetAllLootableItems(Rarity rarity)
         {
             return Array.FindAll(allItems, i => i.lootable && i.rarity == rarity).ToList();
@@ -122,6 +126,9 @@ namespace HexGameEngine.Items
             i.injuryTypesCaused = d.injuryTypesCaused;
             i.itemEffectSets = d.itemEffectSets;
 
+            i.minArmourRoll = d.minArmourRoll;
+            i.maxArmourRoll = d.maxArmourRoll;
+
             foreach (AbilityDataSO ability in d.grantedAbilities)
             {
                 i.grantedAbilities.Add(AbilityController.Instance.BuildAbilityDataFromScriptableObjectData(ability));
@@ -144,21 +151,27 @@ namespace HexGameEngine.Items
             i.injuryTypesCaused = original.injuryTypesCaused;
             i.itemEffectSets = original.itemEffectSets;
             i.grantedAbilities = original.grantedAbilities;
+
+            i.armourAmount = original.armourAmount;
+            i.minArmourRoll = original.minArmourRoll;
+            i.maxArmourRoll = original.maxArmourRoll;
+
             return i;
         }
         public ItemData GenerateNewItemWithRandomEffects(ItemData original)
         {
             ItemData ret = CloneItem(original);
             ret.itemEffects = GenerateRandomItemEffects(original);
+
+            // Generate armour
+            ret.armourAmount = RandomGenerator.NumberBetween(ret.minArmourRoll, ret.maxArmourRoll);
+
             Debug.Log("GenerateNewItemWithRandomEffects() Granted abilities = " + ret.grantedAbilities.Count());
             return ret;
         }
         private List<ItemEffect> GenerateRandomItemEffects(ItemData itemData)
         {
-            List<ItemEffect> ret = new List<ItemEffect>();
-
-            // Generate armour
-            itemData.armourAmount = RandomGenerator.NumberBetween(itemData.minArmourRoll, itemData.maxArmourRoll);
+            List<ItemEffect> ret = new List<ItemEffect>();            
 
             // Generate effects
             for(int i = 0; i < itemData.itemEffectSets.Length; i++)

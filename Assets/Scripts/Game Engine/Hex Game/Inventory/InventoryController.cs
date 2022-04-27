@@ -159,6 +159,13 @@ namespace HexGameEngine.Items
             items.Shuffle();
             return CreateInventoryItemFromItemData(ItemController.Instance.GenerateNewItemWithRandomEffects(items[0]));
         }
+        private InventoryItem GenerateRandomNonEquipableItem()
+        {
+            // to do in future: add arguments for rarity and type
+            var items = ItemController.Instance.GetAllNonLootableItems();
+            items.Shuffle();
+            return CreateInventoryItemFromItemData(ItemController.Instance.GenerateNewItemWithRandomEffects(items[0]));
+        }
         private void AddRandomAbilityBookToInventory(int amount)
         {
             List<AbilityData> abilities = new List<AbilityData>();
@@ -231,7 +238,8 @@ namespace HexGameEngine.Items
             // check if adding offhand item while holding a 2h item in the main hand (not allowed)
             if(character != null)
             {
-                if(character.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded &&
+                if(character.itemSet.mainHandItem != null &&
+                    character.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded &&
                     slot.SlotType == RosterSlotType.OffHand)
                 {
                     Debug.Log("IsItemValidOnSlot() returning false: cant add off hand item while using a 2H weapon");
@@ -257,9 +265,10 @@ namespace HexGameEngine.Items
         #region
         public void PopulateInventoryWithMockDataItems(int totalItemsGenerated)
         {
-            AddRandomAbilityBookToInventory(totalItemsGenerated);
+            //AddRandomAbilityBookToInventory(totalItemsGenerated);
             for (int i = 0; i < totalItemsGenerated; i++)
             {
+                AddItemToInventory(GenerateRandomNonEquipableItem());
                 //AddItemToInventory(GenerateRandomAbilityBookItem());
                 //AddItemToInventory(GenerateRandomEquipableItem());
                 /*

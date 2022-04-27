@@ -136,7 +136,6 @@ namespace HexGameEngine.UCM
                 }
             }
 
-            // TO DO: CHEST AND HEAD ITEMS
             // Chest Armour
             if (itemSet.bodyArmour != null)
             {
@@ -145,7 +144,7 @@ namespace HexGameEngine.UCM
                 {
                     foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
                     {
-                        if (itemData.itemName == itemSet.bodyArmour.itemName)
+                        if (itemData != null && itemData.itemName == itemSet.bodyArmour.itemName)
                         {
                             Debug.Log("CharacterModeller.ApplyItemSetToCharacterModelView() found matching chest armour view for item: " + itemSet.bodyArmour.itemName);
                             EnableAndSetElementOnModel(model, ucme);
@@ -166,7 +165,7 @@ namespace HexGameEngine.UCM
                 {
                     foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
                     {
-                        if (itemData.itemName == itemSet.headArmour.itemName)
+                        if (itemData != null && itemData.itemName == itemSet.headArmour.itemName)
                         {
                             Debug.Log("CharacterModeller.ApplyItemSetToCharacterModelView() found matching chest armour view for item: " + itemSet.headArmour.itemName);
                             EnableAndSetElementOnModel(model, ucme);
