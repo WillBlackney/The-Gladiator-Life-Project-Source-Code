@@ -211,7 +211,7 @@ namespace HexGameEngine
     {
         None = 0,
         Head = 1,
-        Chest = 2,
+        Body = 2,
         Weapon = 3,
         Trinket = 4,
     }
@@ -226,6 +226,8 @@ namespace HexGameEngine
         Trinket = 1,
         MainHand = 2,
         OffHand = 3,
+        Head = 4,
+        Body = 5,
     }
     public enum HandRequirement
     {

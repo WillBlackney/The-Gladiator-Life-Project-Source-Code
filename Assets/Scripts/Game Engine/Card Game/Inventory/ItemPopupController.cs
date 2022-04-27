@@ -176,7 +176,7 @@ namespace HexGameEngine.Items
                 ret = "Trinket";
             else if (item.itemType == ItemType.Head)
                 ret = "Head Armour"; 
-            else if (item.itemType == ItemType.Chest)
+            else if (item.itemType == ItemType.Body)
                 ret = "Chest Armour";
 
             return ret;
@@ -203,19 +203,23 @@ namespace HexGameEngine.Items
             effectsParent.SetActive(false);
             effectsText.text = "";
 
-            // to do: when items have stat bonuses and effects, update this code
+            // to do: update with better coloured dot point tabs for each effect
             if (item.itemEffects.Count > 0)
             {
                 effectsParent.SetActive(true);
                 for (int i = 0; i < item.itemEffects.Count; i++)
                 {
                     // need to update this when we add item effects that arent stat boosts
-                    if(item.itemEffects[i].effectType == ItemEffectType.ModifyAttribute)                    
-                        effectsText.text += "- " + TextLogic.SplitByCapitals(item.itemEffects[i].attributeModified.ToString()) + 
-                            TextLogic.ReturnColoredText(
-                            " +" +
-                            item.itemEffects[i].modAmount.ToString(), TextLogic.blueNumber);
-
+                    if(item.itemEffects[i].effectType == ItemEffectType.ModifyAttribute)
+                    {
+                        string symbol = " +";
+                        if (item.itemEffects[i].modAmount < 0) symbol = " -";
+                        effectsText.text += "- " + TextLogic.SplitByCapitals(item.itemEffects[i].attributeModified.ToString()) +
+                           TextLogic.ReturnColoredText(
+                           symbol +
+                           item.itemEffects[i].modAmount.ToString(), TextLogic.blueNumber);
+                    }               
+                       
                     else if (item.itemEffects[i].effectType == ItemEffectType.OnHitEffect)
                     {
                         effectsText.text += "- On hit: Apply " + TextLogic.ReturnColoredText(item.itemEffects[i].perkApplied.passiveStacks.ToString(),TextLogic.blueNumber) + " " +

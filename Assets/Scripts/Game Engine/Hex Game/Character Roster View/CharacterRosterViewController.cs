@@ -61,6 +61,9 @@ namespace HexGameEngine.UI
         [SerializeField] private RosterItemSlot mainHandSlot;
         [SerializeField] private RosterItemSlot offHandSlot;
         [SerializeField] private RosterItemSlot trinketSlot;
+        [SerializeField] private RosterItemSlot headSlot;
+        [SerializeField] private RosterItemSlot bodySlot;
+        [SerializeField] private TextMeshProUGUI totalArmourText;
         [Space(20)]
         [Header("Overview Panel Components")]
         [SerializeField] private TextMeshProUGUI characterNameText;
@@ -163,10 +166,11 @@ namespace HexGameEngine.UI
             characterNameText.text = data.myName;
             characterClassText.text = data.myClassName;
             dailyWageText.text = data.dailyWage.ToString();
+            totalArmourText.text = ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet).ToString();
             BuildPerkViews(data);
             BuildAttributeSection(data);
             BuildGeneralInfoSection(data);
-            BuildWeaponSlots(data);
+            BuildItemSlots(data);
             BuildCharacterViewPanelModel(data);
             BuildAbilitiesSection(data);
             BuildTalentsSection(data);
@@ -362,16 +366,20 @@ namespace HexGameEngine.UI
             CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, characterPanelUcm);
             characterPanelUcm.SetIdleAnim();
         }
-        private void BuildWeaponSlots(HexCharacterData character)
+        private void BuildItemSlots(HexCharacterData character)
         {
             // Reset slots
             ResetItemSlot(mainHandSlot);
             ResetItemSlot(offHandSlot);
             ResetItemSlot(trinketSlot);
+            ResetItemSlot(bodySlot);
+            ResetItemSlot(headSlot);
 
             BuildItemSlotFromItemData(mainHandSlot, character.itemSet.mainHandItem);
             BuildItemSlotFromItemData(offHandSlot, character.itemSet.offHandItem);
             BuildItemSlotFromItemData(trinketSlot, character.itemSet.trinket);
+            BuildItemSlotFromItemData(headSlot, character.itemSet.headArmour);
+            BuildItemSlotFromItemData(bodySlot, character.itemSet.bodyArmour);
         }
         private void BuildItemSlotFromItemData(RosterItemSlot slot, ItemData item)
         {

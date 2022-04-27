@@ -208,7 +208,7 @@ namespace HexGameEngine.Items
         {
             clone.mainHandItem = originalData.mainHandItem;
             clone.offHandItem = originalData.offHandItem;
-            clone.chestArmour = originalData.chestArmour;
+            clone.bodyArmour = originalData.bodyArmour;
             clone.headArmour = originalData.headArmour;
             clone.trinket = originalData.trinket;
         }
@@ -219,7 +219,7 @@ namespace HexGameEngine.Items
             if (data.offHandItem != null)            
                 iManager.offHandItem = GenerateNewItemWithRandomEffects(GetItemDataByName(data.offHandItem.itemName));  
             if (data.chestArmour != null)            
-                iManager.chestArmour = GenerateNewItemWithRandomEffects(GetItemDataByName(data.chestArmour.itemName));            
+                iManager.bodyArmour = GenerateNewItemWithRandomEffects(GetItemDataByName(data.chestArmour.itemName));            
             if (data.headArmour != null)            
                 iManager.headArmour = GenerateNewItemWithRandomEffects(GetItemDataByName(data.headArmour.itemName));
             if (data.trinket != null)
@@ -253,7 +253,15 @@ namespace HexGameEngine.Items
 
             // Trinket
             else if (slot.SlotType == RosterSlotType.Trinket)            
-                character.itemSet.trinket = newItem.itemData;           
+                character.itemSet.trinket = newItem.itemData;
+
+            // Head
+            else if (slot.SlotType == RosterSlotType.Head)
+                character.itemSet.headArmour = newItem.itemData;
+
+            // Trinket
+            else if (slot.SlotType == RosterSlotType.Body)
+                character.itemSet.bodyArmour = newItem.itemData;
 
         }
         #endregion
@@ -268,7 +276,19 @@ namespace HexGameEngine.Items
             ret += GetTotalAttributeBonusFromItemData(attribute, set.offHandItem);
             ret += GetTotalAttributeBonusFromItemData(attribute, set.trinket);
             return ret;
-        }      
+        }   
+        public int GetTotalArmourBonusFromItemSet(ItemSet set)
+        {
+            int ret = 0;
+            if (set.mainHandItem != null) ret += set.mainHandItem.armourAmount;
+            if (set.offHandItem != null) ret += set.offHandItem.armourAmount;
+            if (set.trinket != null) ret += set.trinket.armourAmount;
+            if (set.headArmour != null) ret += set.headArmour.armourAmount;
+            if (set.bodyArmour != null) ret += set.bodyArmour.armourAmount;
+
+            Debug.Log("ItemController.GetTotalArmourBonusFromItemSet() returning: " + ret.ToString());
+            return ret;
+        }
         private int GetTotalAttributeBonusFromItemData(ItemCoreAttribute attribute, ItemData item)
         {
             int ret = 0;

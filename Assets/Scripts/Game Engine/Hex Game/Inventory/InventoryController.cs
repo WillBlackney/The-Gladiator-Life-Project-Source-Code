@@ -217,6 +217,10 @@ namespace HexGameEngine.Items
 
             if (itemType == ItemType.Trinket && slot.SlotType == RosterSlotType.Trinket)
                 bRet = true;
+            else if (itemType == ItemType.Head && slot.SlotType == RosterSlotType.Head)
+                bRet = true;
+            else if (itemType == ItemType.Body && slot.SlotType == RosterSlotType.Body)
+                bRet = true;
             else if (itemType == ItemType.Weapon)
             {
                 if ((item.allowedSlot == WeaponSlot.MainHand && slot.SlotType == RosterSlotType.MainHand) ||

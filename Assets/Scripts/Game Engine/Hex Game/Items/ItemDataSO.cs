@@ -81,7 +81,7 @@ namespace HexGameEngine.Items
         }
         public bool ShowArmourFields()
         {
-            return itemType == ItemType.Head || itemType == ItemType.Chest;
+            return itemType == ItemType.Head || itemType == ItemType.Body;
         }
         public bool ShowWeaponDamageField()
         {
@@ -98,7 +98,7 @@ namespace HexGameEngine.Items
         }
         public bool ShowArmourValue()
         {
-            return (itemType == ItemType.Weapon && weaponClass == WeaponClass.Shield) || itemType == ItemType.Head || itemType == ItemType.Chest;
+            return (itemType == ItemType.Weapon && weaponClass == WeaponClass.Shield) || itemType == ItemType.Head || itemType == ItemType.Body;
         }
         #endregion
     }

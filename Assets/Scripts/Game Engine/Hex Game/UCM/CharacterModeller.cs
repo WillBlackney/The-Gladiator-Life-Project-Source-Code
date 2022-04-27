@@ -138,16 +138,16 @@ namespace HexGameEngine.UCM
 
             // TO DO: CHEST AND HEAD ITEMS
             // Chest Armour
-            if (itemSet.chestArmour != null)
+            if (itemSet.bodyArmour != null)
             {
                 bool shouldBreak = false;
                 foreach (UniversalCharacterModelElement ucme in model.allChestArmour)
                 {
                     foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
                     {
-                        if (itemData.itemName == itemSet.chestArmour.itemName)
+                        if (itemData.itemName == itemSet.bodyArmour.itemName)
                         {
-                            Debug.Log("CharacterModeller.ApplyItemSetToCharacterModelView() found matching chest armour view for item: " + itemSet.chestArmour.itemName);
+                            Debug.Log("CharacterModeller.ApplyItemSetToCharacterModelView() found matching chest armour view for item: " + itemSet.bodyArmour.itemName);
                             EnableAndSetElementOnModel(model, ucme);
                             shouldBreak = true;
                             break;

@@ -8,7 +8,7 @@ namespace HexGameEngine.Items
     {
         public ItemData mainHandItem;
         public ItemData offHandItem;
-        public ItemData chestArmour;
+        public ItemData bodyArmour;
         public ItemData headArmour;
         public ItemData trinket;
     }
