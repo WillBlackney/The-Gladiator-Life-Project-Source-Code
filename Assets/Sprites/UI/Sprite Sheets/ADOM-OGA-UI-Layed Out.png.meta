@@ -116,6 +116,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -124,9 +126,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -147,9 +149,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
@@ -840,6 +845,38 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      ADOM-OGA-UI-Layed Out_26: 21300052
+      ADOM-OGA-UI-Layed Out_16: 21300032
+      ADOM-OGA-UI-Layed Out_23: 21300046
+      ADOM-OGA-UI-Layed Out_20: 21300040
+      ADOM-OGA-UI-Layed Out_8: 21300016
+      ADOM-OGA-UI-Layed Out_21: 21300042
+      ADOM-OGA-UI-Layed Out_27: 21300054
+      ADOM-OGA-UI-Layed Out_9: 21300018
+      ADOM-OGA-UI-Layed Out_11: 21300022
+      ADOM-OGA-UI-Layed Out_17: 21300034
+      ADOM-OGA-UI-Layed Out_15: 21300030
+      ADOM-OGA-UI-Layed Out_14: 21300028
+      ADOM-OGA-UI-Layed Out_3: 21300006
+      ADOM-OGA-UI-Layed Out_7: 21300014
+      ADOM-OGA-UI-Layed Out_10: 21300020
+      ADOM-OGA-UI-Layed Out_18: 21300036
+      ADOM-OGA-UI-Layed Out_2: 21300004
+      ADOM-OGA-UI-Layed Out_19: 21300038
+      ADOM-OGA-UI-Layed Out_5: 21300010
+      ADOM-OGA-UI-Layed Out_25: 21300050
+      ADOM-OGA-UI-Layed Out_12: 21300024
+      ADOM-OGA-UI-Layed Out_13: 21300026
+      ADOM-OGA-UI-Layed Out_6: 21300012
+      ADOM-OGA-UI-Layed Out_29: 21300058
+      ADOM-OGA-UI-Layed Out_22: 21300044
+      ADOM-OGA-UI-Layed Out_28: 21300056
+      ADOM-OGA-UI-Layed Out_30: 21300060
+      ADOM-OGA-UI-Layed Out_1: 21300002
+      ADOM-OGA-UI-Layed Out_4: 21300008
+      ADOM-OGA-UI-Layed Out_24: 21300048
+      ADOM-OGA-UI-Layed Out_0: 21300000
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -281,7 +281,7 @@ namespace HeurekaGames.AssetHunterPRO
                 case BuildTargetGroup.WSA:
                     {
                         List<Texture2D> textures = new List<Texture2D>();
-                        textures.Add(AssetDatabase.LoadAssetAtPath<Texture2D>(PlayerSettings.WSA.packageLogo));
+                        textures.Add(AssetDatabase.LoadAssetAtPath<Texture2D>(PlayerSettings.WSA.GetVisualAssetsImage(PlayerSettings.WSAImageType.PackageLogo, PlayerSettings.WSAImageScale.Target16)));
 
                         HashSet<PlayerSettings.WSAImageScale> exceptionScales = new HashSet<PlayerSettings.WSAImageScale>();
 
