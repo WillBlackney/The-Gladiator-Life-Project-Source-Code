@@ -239,6 +239,37 @@ namespace HexGameEngine.Items
                 iManager.trinket = GenerateNewItemWithRandomEffects(GetItemDataByName(data.trinket.itemName));
 
         }
+        public void HandleSendItemFromCharacterToInventory(HexCharacterData character, RosterItemSlot slot)
+        {
+            // Add item back to inventory
+            InventoryController.Instance.AddItemToInventory(new InventoryItem(slot.ItemDataRef), false);
+
+            // Remove item from character
+            // Main hand
+            if (slot.SlotType == RosterSlotType.MainHand)
+                character.itemSet.mainHandItem = null;
+
+            // Off hand
+            else if (slot.SlotType == RosterSlotType.OffHand)
+                character.itemSet.offHandItem = null;
+
+            // Trinket
+            else if (slot.SlotType == RosterSlotType.Trinket)
+                character.itemSet.trinket = null;
+
+            // Head
+            else if (slot.SlotType == RosterSlotType.Head)
+                character.itemSet.headArmour = null;
+
+            // Trinket
+            else if (slot.SlotType == RosterSlotType.Body)
+                character.itemSet.bodyArmour = null;
+
+            // Redraw Inventory and Character roster views
+            CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
+            InventoryController.Instance.RebuildInventoryView();
+
+        }
         public void HandleGiveItemToCharacterFromInventory(HexCharacterData character, InventoryItem newItem, RosterItemSlot slot)
         {
             Debug.LogWarning("ItemController.HandleGiveItemToCharacterFromInventory() called, character = " +

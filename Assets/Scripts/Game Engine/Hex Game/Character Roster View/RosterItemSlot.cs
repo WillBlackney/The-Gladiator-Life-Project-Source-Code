@@ -14,10 +14,16 @@ namespace HexGameEngine.UI
         [SerializeField] private Image itemImage;
         [SerializeField] private ItemData itemDataRef;
         [SerializeField] private RosterSlotType slotType;
+
+        private static RosterItemSlot slotMousedOver;
         #endregion
 
         // Getters + Accessors
         #region
+        public static RosterItemSlot SlotMousedOver
+        {
+            get { return slotMousedOver; }
+        }
         public Image ItemImage
         {
             get { return itemImage; }
@@ -33,7 +39,7 @@ namespace HexGameEngine.UI
         #endregion
 
         // Misc
-        #region
+        #region       
         public void SetMyDataReference(ItemData data)
         {
             itemDataRef = data;
@@ -42,23 +48,33 @@ namespace HexGameEngine.UI
 
         // Input
         #region
-        private void OnMouseOver()
+        private void HandleRightClick()
         {
-            if (CharacterRosterViewController.Instance.rosterSlotMousedOver != this)
+            Debug.Log("RosterItemSlot.HandleRightClick()");
+            if(itemDataRef != null && InventoryController.Instance.HasFreeInventorySpace())
             {
-                CharacterRosterViewController.Instance.rosterSlotMousedOver = this;
+                ItemPopupController.Instance.OnInventoryItemMouseExit();
+                ItemController.Instance.HandleSendItemFromCharacterToInventory(CharacterRosterViewController.Instance.CharacterCurrentlyViewing, this);
 
-                if (itemDataRef == null)
-                    return;
-
-                ItemPopupController.Instance.OnRosterItemSlotMousedOver(this);
             }
-           
+          
+        }
+        private void OnMouseOver()
+        {            
+            if (slotMousedOver != this)
+            {
+                slotMousedOver = this;
+                if (itemDataRef == null) return;
+                ItemPopupController.Instance.OnRosterItemSlotMousedOver(this);
+                
+            }
+            // Right click
+            if (Input.GetKeyDown(KeyCode.Mouse1)) HandleRightClick();
         }
         public void OnMouseExit()
         {
-            if (CharacterRosterViewController.Instance.rosterSlotMousedOver == this)
-                CharacterRosterViewController.Instance.rosterSlotMousedOver = null;
+            if (slotMousedOver == this)
+                slotMousedOver = null;
 
             ItemPopupController.Instance.OnInventoryItemMouseExit();
 

@@ -117,12 +117,12 @@ namespace HexGameEngine.Items
                     {
                         // add item to player
                         ItemController.Instance.HandleGiveItemToCharacterFromInventory
-                            (CharacterRosterViewController.Instance.CharacterCurrentlyViewing, MyItemRef, CharacterRosterViewController.Instance.rosterSlotMousedOver);
+                            (CharacterRosterViewController.Instance.CharacterCurrentlyViewing, MyItemRef, RosterItemSlot.SlotMousedOver);
 
                         // re build roster, inventory and model views
                         CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
                         InventoryController.Instance.RebuildInventoryView();
-                        CharacterModeller.ApplyItemSetToCharacterModelView(CharacterRosterViewController.Instance.CharacterCurrentlyViewing.itemSet, CharacterRosterViewController.Instance.CharacterPanelUcm);
+                        //CharacterModeller.ApplyItemSetToCharacterModelView(CharacterRosterViewController.Instance.CharacterCurrentlyViewing.itemSet, CharacterRosterViewController.Instance.CharacterPanelUcm);
 
                     }
                     else if(myItemRef.abilityData != null)
@@ -188,7 +188,7 @@ namespace HexGameEngine.Items
             
             if(MyItemRef.itemData != null)
             {
-                if (InventoryController.Instance.IsItemValidOnSlot(MyItemRef.itemData, CharacterRosterViewController.Instance.rosterSlotMousedOver,
+                if (InventoryController.Instance.IsItemValidOnSlot(MyItemRef.itemData, RosterItemSlot.SlotMousedOver,
                 CharacterRosterViewController.Instance.CharacterCurrentlyViewing))
                 {
                     bRet = true;

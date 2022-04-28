@@ -111,8 +111,6 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI deathResistanceText;
         [Space(20)]
 
-        [HideInInspector] public RosterItemSlot rosterSlotMousedOver = null;
-
         private HexCharacterData characterCurrentlyViewing;
         #endregion
 
