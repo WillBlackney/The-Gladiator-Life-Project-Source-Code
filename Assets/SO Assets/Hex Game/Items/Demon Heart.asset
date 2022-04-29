@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Demon Heart
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 540af71b7ccd8c048a49f40c9be16b40, type: 3}
+  itemSprite: {fileID: 21300000, guid: 0d4a84f6cefef0c4f8d8a112b83ab711, type: 3}
   itemName: Demon Heart
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
