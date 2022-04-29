@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
+  m_Name: Assassin Hood
+  m_EditorClassIdentifier: 
+  itemSprite: {fileID: 0}
+  itemName: Assassin Hood
+  itemDescription: 'Place holder item description. Place holder item description. '
+  itemType: 1
+  rarity: 2
+  lootable: 1
+  includeInLibrary: 1
+  weaponClass: 1
+  handRequirement: 0
+  allowedSlot: 0
+  injuryTypesCaused: 01000000
+  minArmourRoll: 9
+  maxArmourRoll: 11
+  grantedAbilities: []
+  itemEffectSets:
+  - possibleEffects:
+    - effectType: 1
+      attributeModified: 3
+      modAmount: 3
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+  - possibleEffects:
+    - effectType: 1
+      attributeModified: 0
+      modAmount: 3
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+    - effectType: 1
+      attributeModified: 1
+      modAmount: 3
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+    - effectType: 1
+      attributeModified: 2
+      modAmount: 3
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+    - effectType: 1
+      attributeModified: 3
+      modAmount: 3
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+    - effectType: 1
+      attributeModified: 4
+      modAmount: 3
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+    - effectType: 1
+      attributeModified: 6
+      modAmount: 3
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+    - effectType: 1
+      attributeModified: 5
+      modAmount: 3
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0
+    - effectType: 1
+      attributeModified: 7
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 0

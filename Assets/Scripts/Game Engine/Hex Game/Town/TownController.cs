@@ -111,7 +111,7 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] private GameObject deploymentPageMainVisualParent;
         [SerializeField] private TextMeshProUGUI charactersDeployedText;
         [SerializeField] private DeploymentNodeView[] allDeploymentNodes;
-        [SerializeField] private GameObject deploymentWarningPopupVisualParent; 
+        [SerializeField] private GameObject deploymentWarningPopupVisualParent;
         [SerializeField] private TextMeshProUGUI deploymentWarningPopupText;
         [SerializeField] private GameObject deploymentWarningPopupContinueButton;
 
@@ -282,7 +282,7 @@ namespace HexGameEngine.TownFeatures
             recruitRightPanelCostText.text = TextLogic.ReturnColoredText(character.recruitCost.ToString(), col);
 
             // Misc
-            recruitRightPanelRacialIcon.BuildFromRacialData(CharacterDataController.Instance.GetRaceData(character.race)); 
+            recruitRightPanelRacialIcon.BuildFromRacialData(CharacterDataController.Instance.GetRaceData(character.race));
 
             // Build stats section
             recruitRightPanelStrengthText.text = character.attributeSheet.strength.value.ToString();
@@ -358,8 +358,8 @@ namespace HexGameEngine.TownFeatures
         private void BuildAndShowHospitalPage()
         {
             hospitalPageVisualParent.SetActive(true);
-            foreach(HospitalDropSlot slot in hospitalSlots)            
-                slot.BuildViews();            
+            foreach (HospitalDropSlot slot in hospitalSlots)
+                slot.BuildViews();
             UpdateHospitalFeatureCostTexts();
             BuildHospitalActivityIcons();
         }
@@ -372,9 +372,9 @@ namespace HexGameEngine.TownFeatures
         public bool IsCharacterPlacedInHospital(HexCharacterData character)
         {
             bool ret = false;
-            foreach(HospitalDropSlot slot in hospitalSlots)
+            foreach (HospitalDropSlot slot in hospitalSlots)
             {
-                if(slot.MyCharacterData == character)
+                if (slot.MyCharacterData == character)
                 {
                     ret = true;
                     break;
@@ -387,12 +387,12 @@ namespace HexGameEngine.TownFeatures
             Debug.Log("TownController.HandleDropCharacterOnHospitalSlot");
 
             // check slot available and player has enough gold
-            if(slot.Available && PlayerDataController.Instance.CurrentGold >= HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType))
+            if (slot.Available && PlayerDataController.Instance.CurrentGold >= HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType))
             {
                 // Validation
                 // Cant heal characters already at full health
                 if (slot.FeatureType == TownActivity.BedRest && draggedCharacter.currentHealth == StatCalculator.GetTotalMaxHealth(draggedCharacter)) return;
-                
+
                 // Cant stress heal characters already at 0 stress
                 if (slot.FeatureType == TownActivity.Therapy && draggedCharacter.currentStress == 0) return;
 
@@ -402,11 +402,11 @@ namespace HexGameEngine.TownFeatures
                 // todo in future: error messages above for the player, explaing why they cant drop player on slot (not stress, not enough old, etc)
 
                 // Attach character to slot
-                slot.OnCharacterDragDropSuccess(draggedCharacter);             
+                slot.OnCharacterDragDropSuccess(draggedCharacter);
 
                 // Pay gold price
                 PlayerDataController.Instance.ModifyPlayerGold(-HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType));
-                               
+
                 // Update page text views
                 UpdateHospitalFeatureCostTexts();
 
@@ -430,10 +430,10 @@ namespace HexGameEngine.TownFeatures
         }
         public void HandleApplyHospitalFeaturesOnNewDayStart()
         {
-            foreach(HospitalDropSlot slot in hospitalSlots)
+            foreach (HospitalDropSlot slot in hospitalSlots)
             {
-                if(slot.MyCharacterData != null)                
-                    slot.OnNewDayStart();                
+                if (slot.MyCharacterData != null)
+                    slot.OnNewDayStart();
             }
         }
         #endregion
@@ -456,7 +456,7 @@ namespace HexGameEngine.TownFeatures
         {
             currentLibraryTomes.Clear();
             List<AbilityData> abilities = new List<AbilityData>();
-            foreach(AbilityData a in AbilityController.Instance.AllAbilities)
+            foreach (AbilityData a in AbilityController.Instance.AllAbilities)
             {
                 if (a.talentRequirementData.talentSchool != TalentSchool.None &&
                     a.talentRequirementData.talentSchool != TalentSchool.Neutral)
@@ -464,7 +464,7 @@ namespace HexGameEngine.TownFeatures
             }
             abilities.Shuffle();
 
-            for(int i = 0; i < 9; i++)
+            for (int i = 0; i < 9; i++)
             {
                 int goldCost = RandomGenerator.NumberBetween(30, 60);
                 currentLibraryTomes.Add(new AbilityTomeShopData(abilities[i], goldCost));
@@ -485,7 +485,7 @@ namespace HexGameEngine.TownFeatures
 
             // Rebuild page
             BuildAndShowLibraryPage();
-        }        
+        }
         public void EvaluateLibrarySlots()
         {
             confirmLearnAbilityImage.sprite = invalidButtonSprite;
@@ -503,8 +503,8 @@ namespace HexGameEngine.TownFeatures
                     ability.talentRequirementData.talentSchool, ability.talentRequirementData.level))
                 {
                     invalidLibraryActionText.text = TextLogic.ReturnColoredText("INVALID \n" +
-                        character.myName + " does not have the required talent: " + ability.talentRequirementData.talentSchool.ToString() + 
-                        " " + ability.talentRequirementData.level.ToString() +".", TextLogic.redText);
+                        character.myName + " does not have the required talent: " + ability.talentRequirementData.talentSchool.ToString() +
+                        " " + ability.talentRequirementData.level.ToString() + ".", TextLogic.redText);
                 }
 
                 // Already knows max abilities
@@ -525,7 +525,7 @@ namespace HexGameEngine.TownFeatures
                 else
                 {
                     confirmLearnAbilityImage.sprite = validButtonSprite;
-                    invalidLibraryActionText.text = "Are you sure you want to teach " + 
+                    invalidLibraryActionText.text = "Are you sure you want to teach " +
                         TextLogic.ReturnColoredText(ability.abilityName, TextLogic.neutralYellow) +
                         " to " + TextLogic.ReturnColoredText(character.myName, TextLogic.neutralYellow) + "?";
                 }
@@ -540,18 +540,18 @@ namespace HexGameEngine.TownFeatures
                 (LibraryCharacterSlot.MyCharacterData, LibraryCharacterSlot.MyCharacterData.abilityBook, LibraryAbilitySlot.MyAbilityData);
 
             // Remove tome from inventory
-            foreach(InventoryItem i in InventoryController.Instance.Inventory)
+            foreach (InventoryItem i in InventoryController.Instance.Inventory)
             {
-                if(i.abilityData != null &&
+                if (i.abilityData != null &&
                     i.abilityData.abilityName == libraryAbilitySlot.MyAbilityData.abilityName)
                 {
                     InventoryController.Instance.RemoveItemFromInventory(i);
                     break;
                 }
-            }           
+            }
 
             // Rebuild inventory view, if open
-            if(InventoryController.Instance.MainVisualParent.activeSelf)
+            if (InventoryController.Instance.MainVisualParent.activeSelf)
                 InventoryController.Instance.BuildAndShowInventoryView();
 
             // Clear slots
@@ -565,7 +565,7 @@ namespace HexGameEngine.TownFeatures
         {
             bool ret = false;
 
-            if(libraryAbilitySlot.MyAbilityData != null &&
+            if (libraryAbilitySlot.MyAbilityData != null &&
                 libraryCharacterSlot.MyCharacterData != null &&
                 CharacterDataController.Instance.DoesCharacterHaveTalent(libraryCharacterSlot.MyCharacterData.talentPairings,
                     libraryAbilitySlot.MyAbilityData.talentRequirementData.talentSchool, libraryAbilitySlot.MyAbilityData.talentRequirementData.level) &&
@@ -618,11 +618,36 @@ namespace HexGameEngine.TownFeatures
             possibleItems.AddRange(ItemController.Instance.GetAllLootableItems(Rarity.Epic));
             possibleItems.Shuffle();
 
-            // to do in future: generate 2 trinkets, 2 weapons and 2 armour pieces: 4 rare, 2 epic
+            List<ItemData> finalItems = new List<ItemData>();
+            int trinkets = 0;
+            int weapons = 0;
+            int armour = 0;
 
-            for (int i = 0; i < 6; i++)
+            // Filter for 2 of each type (weapon, armour, trinket)
+            for (int i = 0; finalItems.Count < 6; i++)
             {
-                ItemData item = ItemController.Instance.GenerateNewItemWithRandomEffects(possibleItems[i]);
+                if (possibleItems[i].itemType == ItemType.Trinket && trinkets < 2)
+                {
+                    finalItems.Add(possibleItems[i]);
+                    trinkets++;
+                }                    
+
+                else if (possibleItems[i].itemType == ItemType.Weapon && weapons < 2)
+                {
+                    finalItems.Add(possibleItems[i]);
+                    weapons++;
+                }
+
+                else if ((possibleItems[i].itemType == ItemType.Head || possibleItems[i].itemType == ItemType.Body) && armour < 2)
+                {
+                    finalItems.Add(possibleItems[i]);
+                    armour++;
+                }
+            }
+
+            for (int i = 0; i < finalItems.Count; i++)
+            {
+                ItemData item = ItemController.Instance.GenerateNewItemWithRandomEffects(finalItems[i]);
                 int goldCost = 0;
                 if (item.rarity == Rarity.Rare) goldCost = RandomGenerator.NumberBetween(75, 100);
                 else if (item.rarity == Rarity.Epic) goldCost = RandomGenerator.NumberBetween(140, 160);
