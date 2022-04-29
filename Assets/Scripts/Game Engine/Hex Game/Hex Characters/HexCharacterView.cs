@@ -33,6 +33,8 @@ namespace HexGameEngine.Characters
         public Slider healthBarWorld;
         public TextMeshProUGUI healthTextWorld;
         public TextMeshProUGUI maxHealthTextWorld;
+        public GameObject armourParentWorldUI;
+        public TextMeshProUGUI armourTextWorld;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]       
 
         [Header("Stress Bar World References")]
@@ -55,7 +57,7 @@ namespace HexGameEngine.Characters
         [Header("Health Bar UI References")]
         public Slider healthBarUI;
         public TextMeshProUGUI healthTextUI;
-        public TextMeshProUGUI maxHealthTextUI;
+        public TextMeshProUGUI maxHealthTextUI;        
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Energy UI References")]

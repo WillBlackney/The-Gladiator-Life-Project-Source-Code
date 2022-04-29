@@ -39,6 +39,10 @@ namespace HexGameEngine.Characters
         [BoxGroup("Attributes")]
         [LabelWidth(100)]
         [GUIColor("Blue")]
+        public int baseArmour;
+        [BoxGroup("Attributes")]
+        [LabelWidth(100)]
+        [GUIColor("Blue")]
         public bool randomizeHealth;
         [BoxGroup("Attributes")]
         [LabelWidth(100)]

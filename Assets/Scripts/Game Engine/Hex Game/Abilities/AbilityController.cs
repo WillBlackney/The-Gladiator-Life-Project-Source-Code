@@ -530,7 +530,7 @@ namespace HexGameEngine.Abilities
                     LevelNode lastChainHex = target.currentTile;
 
                     // Deal damage
-                    CombatController.Instance.HandleDamage(caster, target, damageResult, ability, abilityEffect, target.GetLastStackEventParent());
+                    CombatController.Instance.HandleDamage(caster, target, damageResult, ability, abilityEffect, false, target.GetLastStackEventParent());
 
                     // On ability effect completed VFX
                     if (CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
@@ -746,7 +746,7 @@ namespace HexGameEngine.Abilities
                     }
 
                     // Deal damage
-                    CombatController.Instance.HandleDamage(caster, character, dResult, ability, abilityEffect, character.GetLastStackEventParent());
+                    CombatController.Instance.HandleDamage(caster, character, dResult, ability, abilityEffect, false, character.GetLastStackEventParent());
 
                     // On ability effect completed VFX
                     if (CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
@@ -1006,7 +1006,7 @@ namespace HexGameEngine.Abilities
             else if (abilityEffect.effectType == AbilityEffectType.LoseHealthSelf)
             {
                 DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(caster, abilityEffect.healthLost, DamageType.None);
-                CombatController.Instance.HandleDamage(caster, damageResult, DamageType.None);
+                CombatController.Instance.HandleDamage(caster, damageResult, DamageType.None, true);
                 //CombatController.Instance.HandleDamage(caster, target, damageResult, null, abilityEffect, caster.myCurrentEventStack);
             }
 

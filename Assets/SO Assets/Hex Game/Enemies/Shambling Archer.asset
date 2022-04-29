@@ -39,44 +39,46 @@ MonoBehaviour:
       value: 0
       stars: 0
     maxHealth: 0
-    stamina: 8
+    energyRecovery: 8
     maxEnergy: 8
     initiative: 5
     criticalChance: 15
     criticalModifier: 50
     auraSize: 1
+    vision: 0
     physicalResistance: 0
     magicResistance: 0
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
     deathResistance: 25
+  baseArmour: 10
   randomizeHealth: 1
-  lowerHealthLimit: 70
-  upperHealthLimit: 75
+  lowerHealthLimit: 60
+  upperHealthLimit: 65
   aiTurnRoutine:
     directives:
-    - requirements: []
-      action:
+    - action:
         actionType: 1
         targettingPriority: 1
         getRangeFromAbility: 0
         range: 0
         abilityName: Plink
-    - requirements: []
-      action:
+      requirements: []
+    - action:
         actionType: 1
         targettingPriority: 1
         getRangeFromAbility: 0
         range: 0
         abilityName: Steady Shot
-    - requirements: []
-      action:
+      requirements: []
+    - action:
         actionType: 3
         targettingPriority: 1
         getRangeFromAbility: 1
         range: 0
         abilityName: Steady Shot
+      requirements: []
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 96c24683940f0c84ab3b141cd96b29b9, type: 2}

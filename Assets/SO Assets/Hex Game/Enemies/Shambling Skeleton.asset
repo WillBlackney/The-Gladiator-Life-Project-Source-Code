@@ -52,9 +52,10 @@ MonoBehaviour:
     stressResistance: 0
     injuryResistance: 0
     deathResistance: 25
+  baseArmour: 0
   randomizeHealth: 1
-  lowerHealthLimit: 55
-  upperHealthLimit: 60
+  lowerHealthLimit: 60
+  upperHealthLimit: 65
   aiTurnRoutine:
     directives:
     - action:

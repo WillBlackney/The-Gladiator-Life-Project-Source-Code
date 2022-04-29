@@ -28,6 +28,7 @@ namespace HexGameEngine.Characters
         public Facing currentFacing;
         public int currentInitiativeRoll;
         public int currentStress;
+        public int currentArmour;
 
         [Header("AI Logic")]
         public AITurnRoutine aiTurnRoutine;

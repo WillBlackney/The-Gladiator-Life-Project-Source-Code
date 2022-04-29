@@ -16,6 +16,7 @@ namespace HexGameEngine.Characters
         public CharacterRace race;
         public CharacterModelSize modelSize;
         public int xpReward;
+        public int baseArmour;
 
         [Header("Passive Properties")]
         public PerkManagerModel passiveManager;

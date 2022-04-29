@@ -20,6 +20,7 @@ using System;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.Pathfinding;
 using HexGameEngine.UI;
+using HexGameEngine.Items;
 
 namespace HexGameEngine.Characters
 {
@@ -256,11 +257,12 @@ namespace HexGameEngine.Characters
             // Set up passive traits
             PerkController.Instance.BuildPlayerCharacterEntityPassivesFromCharacterData(character, data);
 
-            // Set up health + energy + stress with views
+            // Set up health, armour, energy + stress with views
             ModifyBaseMaxEnergy(character, 0); // modify by 0 just to update views
             ModifyMaxHealth(character, 0); // modify by 0 just to update views
             ModifyHealth(character, data.currentHealth, false);
             ModifyStress(character, data.currentStress, false);
+            ModifyArmour(character, ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet));
 
             // Misc UI setup
             character.hexCharacterView.characterNameTextUI.text = character.myName;
@@ -296,10 +298,11 @@ namespace HexGameEngine.Characters
             // Set up passive traits
             PerkController.Instance.BuildPlayerCharacterEntityPassivesFromCharacterData(character, data);
 
-            // Set up health + energy views
+            // Set up health, armour and energy views
             ModifyBaseMaxEnergy(character, 0);
             ModifyMaxHealth(character, 0);
             ModifyHealth(character, StatCalculator.GetTotalMaxHealth(character));
+            ModifyArmour(character, data.baseArmour);
 
             // AI Logic
             character.aiTurnRoutine = data.aiTurnRoutine;
@@ -500,6 +503,40 @@ namespace HexGameEngine.Characters
             character.hexCharacterView.healthBarUI.value = healthBarFloat;
             character.hexCharacterView.healthTextUI.text = health.ToString();
             character.hexCharacterView.maxHealthTextUI.text = maxHealth.ToString();
+
+        }
+        #endregion
+
+        // Modify Armour
+        #region
+        public void ModifyArmour(HexCharacterModel character, int armourGainedOrLost)
+        {
+            Debug.Log("CharacterEntityController.ModifyArmour() called for " + character.myName);
+
+            int finalBlockValue = character.currentArmour;
+            finalBlockValue += armourGainedOrLost;
+
+            // Prevent armour going less then 0
+            if (finalBlockValue < 0)
+            {
+                finalBlockValue = 0;
+            }
+
+            // Set health after calculation
+            character.currentArmour = finalBlockValue;
+
+            Debug.Log(character.myName + " armour value = " + character.currentArmour.ToString());
+
+            VisualEventManager.Instance.CreateVisualEvent(() => UpdateArmourGUIElements(character, finalBlockValue), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+        }
+        private void UpdateArmourGUIElements(HexCharacterModel character, int armour)
+        {
+            Debug.Log("CharacterEntityController.UpdateArmourGUIElements() called, armour = " + armour.ToString());
+
+            if (character.hexCharacterView == null) return;
+            if (armour > 0) character.hexCharacterView.armourParentWorldUI.SetActive(true);
+            else character.hexCharacterView.armourParentWorldUI.SetActive(false);
+            character.hexCharacterView.armourTextWorld.text = armour.ToString();
 
         }
         #endregion
@@ -845,7 +882,7 @@ namespace HexGameEngine.Characters
                     // Calculate and deal Physical damage
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Poisoned), DamageType.Physical);
                     VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.ApplyPoisoned, view.WorldPosition));
-                    CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical);
+                    CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
                     VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
 
                     // Remove 1 stack of poisoned
@@ -863,7 +900,7 @@ namespace HexGameEngine.Characters
                     // Calculate and deal Magic damage
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Burning), DamageType.Magic);
                     VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.FireExplosion, view.WorldPosition));
-                    CombatController.Instance.HandleDamage(character, damageResult, DamageType.Magic);
+                    CombatController.Instance.HandleDamage(character, damageResult, DamageType.Magic, true);
                     VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
                     
                     // Remove 1 stack of burning
@@ -881,7 +918,7 @@ namespace HexGameEngine.Characters
                     // Calculate and deal Magic damage
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Bleeding), DamageType.Physical);
                     VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition));
-                    CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical);
+                    CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
                     VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
 
                     // Remove 1 stack of bleeding

@@ -17,31 +17,54 @@ MonoBehaviour:
   modelSize: 0
   xpReward: 10
   attributeSheet:
-    strength: 0
-    intelligence: 0
-    constitution: 0
-    dodge: 0
-    accuracy: 75
-    resolve: 15
-    wits: 0
+    strength:
+      value: 0
+      stars: 0
+    intelligence:
+      value: 0
+      stars: 0
+    constitution:
+      value: 0
+      stars: 0
+    dodge:
+      value: 0
+      stars: 0
+    accuracy:
+      value: 75
+      stars: 0
+    resolve:
+      value: 0
+      stars: 0
+    wits:
+      value: 0
+      stars: 0
     maxHealth: 0
-    stamina: 8
+    energyRecovery: 8
     maxEnergy: 8
     initiative: 2
     criticalChance: 5
     criticalModifier: 50
     auraSize: 1
+    vision: 0
     physicalResistance: 15
     magicResistance: 0
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
+    deathResistance: 25
+  baseArmour: 20
   randomizeHealth: 1
-  lowerHealthLimit: 80
-  upperHealthLimit: 85
+  lowerHealthLimit: 60
+  upperHealthLimit: 65
   aiTurnRoutine:
     directives:
-    - requirements:
+    - action:
+        actionType: 1
+        targettingPriority: 0
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Cleave
+      requirements:
       - requirementType: 2
         range: 0
         perkPairing:
@@ -50,26 +73,20 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 2
         energyReq: 0
-      action:
-        actionType: 1
-        targettingPriority: 0
-        getRangeFromAbility: 0
-        range: 0
-        abilityName: Cleave
-    - requirements: []
-      action:
+    - action:
         actionType: 1
         targettingPriority: 1
         getRangeFromAbility: 0
         range: 0
         abilityName: Strike
-    - requirements: []
-      action:
+      requirements: []
+    - action:
         actionType: 2
         targettingPriority: 1
         getRangeFromAbility: 0
         range: 0
         abilityName: 
+      requirements: []
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 5da6171d9b5a21b47b2adc4c680a46c2, type: 2}

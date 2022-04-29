@@ -52,6 +52,7 @@ MonoBehaviour:
     stressResistance: 0
     injuryResistance: 0
     deathResistance: 25
+  baseArmour: 40
   randomizeHealth: 0
   lowerHealthLimit: 1
   upperHealthLimit: 1

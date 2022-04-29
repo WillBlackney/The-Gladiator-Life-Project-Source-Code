@@ -311,11 +311,11 @@ namespace HexGameEngine.Combat
             if (lowerDamageFinal < 0) lowerDamageFinal = 0;
             if (upperDamageFinal < 0) upperDamageFinal = 0;
 
-            resultReturned.healthDamage = baseDamageFinal;
+            resultReturned.totalDamage = baseDamageFinal;
             resultReturned.damageLowerLimit = lowerDamageFinal;
             resultReturned.damageUpperLimit = upperDamageFinal;
 
-            Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Final health damage = " + resultReturned.healthDamage.ToString());
+            Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Final health damage = " + resultReturned.totalDamage.ToString());
            
             return resultReturned;
         }
@@ -487,7 +487,7 @@ namespace HexGameEngine.Combat
             if (ability == null || effect == null) return;
 
             int roll = RandomGenerator.NumberBetween(1, 1000);
-            float baseInjuryChance = StatCalculator.GetPercentage(damageResult.healthDamage, StatCalculator.GetTotalMaxHealth(character));
+            float baseInjuryChance = StatCalculator.GetPercentage(damageResult.totalDamage, StatCalculator.GetTotalMaxHealth(character));
             float injuryResistanceMod = StatCalculator.GetTotalInjuryResistance(character) / 100f;
             float injuryChanceActual = (baseInjuryChance * (1 - injuryResistanceMod) * 10);
             int mildThreshold = 0;
@@ -496,7 +496,7 @@ namespace HexGameEngine.Combat
             Debug.Log("CheckAndHandleInjuryOnHealthLost() called on character " + character.myName +
                ", Rolled = : " + roll.ToString() + "/1000" + 
                ", injury probability = " + (injuryChanceActual / 10).ToString() + "%" +
-               ", health lost = " + damageResult.healthDamage +
+               ", health lost = " + damageResult.totalDamage +
                ", injury thresholds: Mild = " + mildThreshold.ToString() + " or more, Severe = " + severeThreshold.ToString() + " or more.");
 
             // TO DO: if the character is immune to being injured for whatever reason, check it here and return
@@ -504,7 +504,7 @@ namespace HexGameEngine.Combat
             //
 
             // Did character even lose enough health to trigger an injury?
-            if (damageResult.healthDamage < mildThreshold) return;            
+            if (damageResult.totalDamage < mildThreshold) return;            
 
             // Character successfully resisted the injury
             if(roll > injuryChanceActual)
@@ -522,9 +522,9 @@ namespace HexGameEngine.Combat
                 InjurySeverity severity = InjurySeverity.None;
 
                 // Injury is severe if character lost at least 30% health, or if the attack was a critical
-                if (damageResult.healthDamage >= severeThreshold ||
+                if (damageResult.totalDamage >= severeThreshold ||
                     damageResult.didCrit) severity = InjurySeverity.Severe;
-                else if(damageResult.healthDamage >= mildThreshold)
+                else if(damageResult.totalDamage >= mildThreshold)
                     severity = InjurySeverity.Mild;
 
                 // Determine injury type based on the weapon used, or the ability (if it doesnt require a weapon e.g. fireball)
@@ -862,34 +862,67 @@ namespace HexGameEngine.Combat
 
         // Handle Damage + Entry Points
         #region       
-        public void HandleDamage(HexCharacterModel attacker, HexCharacterModel target, DamageResult damageResult, AbilityData ability, AbilityEffect effect, VisualEvent parentEvent = null)
+        public void HandleDamage(HexCharacterModel attacker, HexCharacterModel target, DamageResult damageResult, AbilityData ability, AbilityEffect effect, bool ignoreArmour = false, VisualEvent parentEvent = null)
         {
             // Normal ability damage entry point
-            ExecuteHandleDamage(attacker, target, damageResult, GetFinalFinalDamageTypeOfAbility(attacker, effect, ability), ability, effect, parentEvent);
+            ExecuteHandleDamage(attacker, target, damageResult, GetFinalFinalDamageTypeOfAbility(attacker, effect, ability), ability, effect, ignoreArmour, parentEvent);
         }
-        public void HandleDamage(HexCharacterModel target, DamageResult damageResult, DamageType damageType)
+        public void HandleDamage(HexCharacterModel target, DamageResult damageResult, DamageType damageType, bool ignoreArmour)
         {
             // Non ability and attacker damage source entry point
-            ExecuteHandleDamage(null, target, damageResult, damageType);
+            ExecuteHandleDamage(null, target, damageResult, damageType, null, null, ignoreArmour);
         }
-        private void ExecuteHandleDamage(HexCharacterModel attacker, HexCharacterModel target, DamageResult damageResult, DamageType damageType, AbilityData ability = null, AbilityEffect effect = null, VisualEvent parentEvent = null)
+        private void ExecuteHandleDamage(HexCharacterModel attacker, HexCharacterModel target, DamageResult damageResult, DamageType damageType, AbilityData ability = null, AbilityEffect effect = null, bool ignoreArmour = false, VisualEvent parentEvent = null)
         {
-            // Final health lost calculations
-            int totalLifeLost = damageResult.healthDamage;
+            // Final health and armour loss calculations
+            int totalDamage = damageResult.totalDamage;
+            int totalHealthLost = 0;
+            int totalArmourLost = 0;
+
+            // Damage that completely skips armour check
+            if (ignoreArmour)
+            {
+                totalHealthLost = damageResult.totalDamage;
+                damageResult.totalHealthLost = totalHealthLost;
+                damageResult.totalArmourLost = 0;
+            }
+
+            // Damaged over armour
+            else if(totalDamage > target.currentArmour)
+            {
+                totalArmourLost = target.currentArmour;
+                totalHealthLost = totalDamage - target.currentArmour;
+                damageResult.totalHealthLost = totalHealthLost;
+                damageResult.totalArmourLost = totalArmourLost;
+            }
+
+            // Armour full blocked damage
+            else
+            {
+                totalArmourLost = totalDamage;
+                totalHealthLost = 0;
+                damageResult.totalHealthLost = totalHealthLost;
+                damageResult.totalArmourLost = totalArmourLost;
+            }
+
+            Debug.Log("ExecuteHandleDamage() results,Total damage = " + totalDamage.ToString() +
+                ", Health lost = " + totalHealthLost.ToString() + 
+                ", Armour Lost = " + totalArmourLost.ToString());
             bool removedBarrier = false;
 
             // Check for barrier
             if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Barrier) &&
-                totalLifeLost > 0)
+                totalHealthLost > 0)
             {
-                totalLifeLost = 0;
-                damageResult.healthDamage = 0;
+                totalHealthLost = 0;
+                damageResult.totalHealthLost = 0;
                 removedBarrier = true;
             }
 
-            // Reduce health
-            HexCharacterController.Instance.ModifyHealth(target, -totalLifeLost);
-            target.healthLostThisCombat += totalLifeLost;
+            // Reduce health + armour
+            HexCharacterController.Instance.ModifyHealth(target, -totalHealthLost);
+            HexCharacterController.Instance.ModifyArmour(target, -totalArmourLost);
+            target.healthLostThisCombat += totalHealthLost;
 
             bool didCrit = false;
             if (damageResult != null && damageResult.didCrit)
@@ -906,7 +939,7 @@ namespace HexGameEngine.Combat
             }
 
             // On health lost animations
-            if (totalLifeLost > 0)
+            if (totalHealthLost > 0)
             {
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                     HexCharacterController.Instance.PlayHurtAnimation(target.hexCharacterView), QueuePosition.Back, 0, 0, parentEvent);               
@@ -914,18 +947,18 @@ namespace HexGameEngine.Combat
 
             // Create damage text effect            
             VisualEventManager.Instance.CreateVisualEvent(() =>
-            VisualEffectManager.Instance.CreateDamageTextEffect(target.hexCharacterView.WorldPosition, totalLifeLost, didCrit), QueuePosition.Back, 0, 0, parentEvent);
+            VisualEffectManager.Instance.CreateDamageTextEffect(target.hexCharacterView.WorldPosition, totalDamage, didCrit), QueuePosition.Back, 0, 0, parentEvent);
 
             // Combat Token Expiries >>
             // Check Block
             if (!removedBarrier && 
-                totalLifeLost > 0 &&
+                totalDamage > 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Block))
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Block, -1, false);
 
             // Check Vulnerable
             if (!removedBarrier &&
-                totalLifeLost > 0 &&
+                totalDamage > 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Vulnerable))
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Vulnerable, -1, false);
 
@@ -991,7 +1024,7 @@ namespace HexGameEngine.Combat
             {
                 // Take 10 damage
                 DamageResult dr = GetFinalDamageValueAfterAllCalculations(attacker, 10, DamageType.Physical, false);
-                HandleDamage(attacker, dr, DamageType.Physical);
+                HandleDamage(attacker, dr, DamageType.Physical, false);
 
                 // Remove a stack of thorns from target
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Thorns, -1, false);
@@ -1006,7 +1039,7 @@ namespace HexGameEngine.Combat
             {
                 // Take 10 damage
                 DamageResult dr = GetFinalDamageValueAfterAllCalculations(attacker, 10, DamageType.Magic, false);
-                HandleDamage(attacker, dr, DamageType.Magic);
+                HandleDamage(attacker, dr, DamageType.Magic, false);
 
                 // Remove a stack of thorns from target
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.StormShield, -1, false);
@@ -1038,7 +1071,7 @@ namespace HexGameEngine.Combat
                 }
             }
             // On health lost events
-            if (totalLifeLost > 0 && target.currentHealth > 0)
+            if (totalHealthLost > 0 && target.currentHealth > 0)
             {
                 // Masochist perk
                 if(target != null &&
@@ -1059,7 +1092,7 @@ namespace HexGameEngine.Combat
             }
 
             // Stress Events on health lost
-            if (totalLifeLost > 0)
+            if (totalHealthLost > 0)
             {
                 CreateStressCheck(target, StressEventType.HealthLost);
 
@@ -1332,7 +1365,9 @@ namespace HexGameEngine.Combat
 
     public class DamageResult
     {
-        public int healthDamage;
+        public int totalDamage;
+        public int totalHealthLost;
+        public int totalArmourLost;
         public bool didCrit;
         public int damageLowerLimit;
         public int damageUpperLimit;

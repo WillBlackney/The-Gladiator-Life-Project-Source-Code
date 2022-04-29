@@ -412,6 +412,8 @@ namespace HexGameEngine.UI
         AbilityTome = 27,
         Experience = 28,
         Gold = 30,
+        
+        Armour = 31,
        
 
     }

@@ -38,7 +38,7 @@ MonoBehaviour:
     wits:
       value: 0
       stars: 0
-    maxHealth: 110
+    maxHealth: 100
     energyRecovery: 8
     maxEnergy: 8
     initiative: 7
@@ -52,6 +52,7 @@ MonoBehaviour:
     stressResistance: 0
     injuryResistance: 0
     deathResistance: 0
+  baseArmour: 20
   randomizeHealth: 0
   lowerHealthLimit: 110
   upperHealthLimit: 120
