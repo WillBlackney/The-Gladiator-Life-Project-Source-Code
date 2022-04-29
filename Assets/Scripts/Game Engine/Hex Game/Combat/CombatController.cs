@@ -146,20 +146,19 @@ namespace HexGameEngine.Combat
             {
                 float missingHealth = StatCalculator.GetTotalMaxHealth(attacker) - attacker.currentHealth;
                 damageModPercentageAdditive += 0.01f * missingHealth;
-                Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Enrage perk modifier = " + damageModPercentageAdditive.ToString());
+                Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Berserk perk modifier = " + damageModPercentageAdditive.ToString());
             }
 
-            /*
-            // Add back strike damage bonus if attacker has opportunist perk, and is behind target
-            if(attacker != null && PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Opportunist))
+
+            // Check Locomotion bonus
+            if (attacker != null &&
+                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Locomotion) &&
+                target != null)
             {
-                if (target != null && HexCharacterController.Instance.GetCharacterBackArcTiles(target).Contains(attacker.myCurrentHex))
-                {
-                    damageModPercentageAdditive += 0.25f;
-                    Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in opportunist perk modifier = " + damageModPercentageAdditive.ToString());
-                }
+                float init = StatCalculator.GetTotalInitiative(attacker);
+                damageModPercentageAdditive += 0.01f * init;
+                Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Locomotion perk modifier = " + damageModPercentageAdditive.ToString());
             }
-            */
 
             // Calculate core additive multipliers
             // Wrath
@@ -206,16 +205,6 @@ namespace HexGameEngine.Combat
                 damageModPercentageAdditive += CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Pyromania) * 0.1f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in pyromania modifier = " + damageModPercentageAdditive.ToString());
             }
-            /*
-            // Shadowcraft
-            if (effect != null && attacker != null && target != null &&
-                CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Shadowcraft, 1) &&
-                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Weakened))
-            {
-                damageModPercentageAdditive += CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Shadowcraft) * 0.1f;
-                Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in shadowcraft modifier = " + damageModPercentageAdditive.ToString());
-            }
-            */
 
             // Check damage mod effect from ability effect
             if (effect != null)

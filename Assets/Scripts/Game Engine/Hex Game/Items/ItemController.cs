@@ -318,6 +318,8 @@ namespace HexGameEngine.Items
             int ret = 0;
             ret += GetTotalAttributeBonusFromItemData(attribute, set.mainHandItem);
             ret += GetTotalAttributeBonusFromItemData(attribute, set.offHandItem);
+            ret += GetTotalAttributeBonusFromItemData(attribute, set.headArmour);
+            ret += GetTotalAttributeBonusFromItemData(attribute, set.bodyArmour);
             ret += GetTotalAttributeBonusFromItemData(attribute, set.trinket);
             return ret;
         }   

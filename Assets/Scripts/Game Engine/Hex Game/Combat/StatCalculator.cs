@@ -709,11 +709,19 @@ namespace HexGameEngine
         public static int GetTotalMaxEnergy(HexCharacterModel c)
         {
             int maxEnergy = c.attributeSheet.maxEnergy;
+
+            // Items
+            maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxEnergy, c.itemSet);
+
             return maxEnergy;
         }
         public static int GetTotalMaxEnergy(HexCharacterData c)
         {
             int maxEnergy = c.attributeSheet.maxEnergy;
+
+            // Items
+            maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxEnergy, c.itemSet);
+
             return maxEnergy;
         }
         public static float GetTotalCriticalChance(HexCharacterModel c)

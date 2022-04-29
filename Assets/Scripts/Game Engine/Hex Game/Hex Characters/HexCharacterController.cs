@@ -1177,6 +1177,58 @@ namespace HexGameEngine.Characters
                     VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
                 }
 
+                // Flaming Presence
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FlamingPresence) && character.currentHealth > 0)
+                {
+                    // Status Notif 
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Flaming Aspect!"), QueuePosition.Back, 0f, 0.5f);
+
+                    // Fire nova VFX
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEffectManager.Instance.CreateFireNova(view.WorldPosition), QueuePosition.Back);
+
+                    // Apply 1 burning to all enemies in aura
+                    List<HexCharacterModel> enemies = GetAllEnemiesWithinMyAura(character);
+                    foreach (HexCharacterModel enemy in enemies)
+                    {
+                        // Burning VFX
+                        HexCharacterView enemyView = enemy.hexCharacterView;
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                            VisualEffectManager.Instance.CreateApplyBurningEffect(enemyView.WorldPosition), QueuePosition.Back);
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(enemy.pManager, Perk.Burning, 1, true, 0, character.pManager);
+
+                    }
+
+                    VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                }
+
+                // Contagious
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Contagious) && character.currentHealth > 0)
+                {
+                    // Status Notif 
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Contagious!"), QueuePosition.Back, 0f, 0.5f);
+
+                    // Fire nova VFX
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEffectManager.Instance.CreatePoisonNova(view.WorldPosition), QueuePosition.Back);
+
+                    // Apply 1 poisoned to all enemies in aura
+                    List<HexCharacterModel> enemies = GetAllEnemiesWithinMyAura(character);
+                    foreach (HexCharacterModel enemy in enemies)
+                    {
+                        // Burning VFX
+                        HexCharacterView enemyView = enemy.hexCharacterView;
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                            VisualEffectManager.Instance.CreateApplyPoisonedEffect(enemyView.WorldPosition), QueuePosition.Back);
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(enemy.pManager, Perk.Poisoned, 1, true, 0, character.pManager);
+
+                    }
+
+                    VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                }
+
                 // Savage Leader
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SavageLeader) && character.currentHealth > 0)
                 {

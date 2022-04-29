@@ -66,5 +66,5 @@ MonoBehaviour:
     offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: 335c81cb722666345aa6c308b1d780f5, type: 2}
     chestArmour: {fileID: 11400000, guid: 885404dfa0107114abd21b026368a161, type: 2}
-    trinket: {fileID: 0}
+    trinket: {fileID: 11400000, guid: 7757c682a5768294a988f54d46f1de90, type: 2}
   talentPairings: []

@@ -16,13 +16,15 @@ MonoBehaviour:
   itemName: Orc Signet
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
-  rarity: 3
+  rarity: 2
   lootable: 1
   includeInLibrary: 1
   weaponClass: 0
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 
+  minArmourRoll: 0
+  maxArmourRoll: 0
   grantedAbilities: []
   itemEffectSets:
   - possibleEffects:
