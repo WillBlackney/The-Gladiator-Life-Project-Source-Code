@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Simple Staff
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: e6d89319722caab43879a138638a4c98, type: 3}
+  itemSprite: {fileID: 21300000, guid: 27c84c7a59ec04f409070868a48f03b0, type: 3}
   itemName: Simple Staff
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -23,6 +23,8 @@ MonoBehaviour:
   handRequirement: 1
   allowedSlot: 0
   injuryTypesCaused: 02000000
+  minArmourRoll: 0
+  maxArmourRoll: 0
   grantedAbilities:
   - {fileID: 11400000, guid: 1a60d53c0edffd5458e7f7b939ad6630, type: 2}
   - {fileID: 11400000, guid: 239a5065f2168f143894fbb2fbac01d0, type: 2}

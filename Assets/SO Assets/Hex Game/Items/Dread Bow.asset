@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Dread Bow
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: dcdab248c3ccc544ca1bb5bfc4f2ee13, type: 3}
+  itemSprite: {fileID: 21300000, guid: 5e84fea6ff1044d46ad00e2ba9ec30da, type: 3}
   itemName: Dread Bow
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -23,6 +23,8 @@ MonoBehaviour:
   handRequirement: 1
   allowedSlot: 0
   injuryTypesCaused: 01000000
+  minArmourRoll: 0
+  maxArmourRoll: 0
   grantedAbilities:
   - {fileID: 11400000, guid: 3ca86d39f1f8dec4e99b3d3c232d1b49, type: 2}
   - {fileID: 11400000, guid: 8adbbef4caa30944583cb66a9f0fc4c7, type: 2}
@@ -33,7 +35,7 @@ MonoBehaviour:
       modAmount: 8
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -43,7 +45,7 @@ MonoBehaviour:
       modAmount: 8
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -53,7 +55,7 @@ MonoBehaviour:
       modAmount: 8
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -63,7 +65,7 @@ MonoBehaviour:
       modAmount: 8
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -73,7 +75,7 @@ MonoBehaviour:
       modAmount: 8
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -83,7 +85,7 @@ MonoBehaviour:
       modAmount: 8
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -93,7 +95,7 @@ MonoBehaviour:
       modAmount: 8
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -103,7 +105,7 @@ MonoBehaviour:
       modAmount: 15
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -113,7 +115,7 @@ MonoBehaviour:
       modAmount: 0
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 50
       perkApplied:
         perkTag: 1
@@ -123,7 +125,7 @@ MonoBehaviour:
       modAmount: 0
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 50
       perkApplied:
         perkTag: 80
@@ -133,7 +135,7 @@ MonoBehaviour:
       modAmount: 0
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 50
       perkApplied:
         perkTag: 7
@@ -143,7 +145,7 @@ MonoBehaviour:
       modAmount: 0
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 50
       perkApplied:
         perkTag: 49
@@ -153,7 +155,7 @@ MonoBehaviour:
       modAmount: 0
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 50
       perkApplied:
         perkTag: 48
@@ -163,7 +165,7 @@ MonoBehaviour:
       modAmount: 0
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 50
       perkApplied:
         perkTag: 4
@@ -173,7 +175,7 @@ MonoBehaviour:
       modAmount: 0
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 50
       perkApplied:
         perkTag: 5
@@ -184,7 +186,7 @@ MonoBehaviour:
       modAmount: 5
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -194,7 +196,7 @@ MonoBehaviour:
       modAmount: 5
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -204,7 +206,7 @@ MonoBehaviour:
       modAmount: 5
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -214,7 +216,7 @@ MonoBehaviour:
       modAmount: 5
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -224,7 +226,7 @@ MonoBehaviour:
       modAmount: 5
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -234,7 +236,7 @@ MonoBehaviour:
       modAmount: 5
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -244,7 +246,7 @@ MonoBehaviour:
       modAmount: 5
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -254,7 +256,7 @@ MonoBehaviour:
       modAmount: 10
       perkGained:
         perkTag: 0
-        passiveStacks: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Iron War Hammer
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 822a89702a8a7504890d0b74eb1f9915, type: 3}
+  itemSprite: {fileID: 21300000, guid: 8d9bc5973451a50408bde3bff44daf03, type: 3}
   itemName: Iron War Hammer
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -23,6 +23,8 @@ MonoBehaviour:
   handRequirement: 1
   allowedSlot: 0
   injuryTypesCaused: 02000000
+  minArmourRoll: 0
+  maxArmourRoll: 0
   grantedAbilities:
   - {fileID: 11400000, guid: 4e36a24a076914546b585a2e527c864a, type: 2}
   - {fileID: 11400000, guid: ba24d48ee36272141ba5f17b68d432dd, type: 2}
@@ -33,11 +35,19 @@ MonoBehaviour:
       modAmount: 5
       perkGained:
         perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
         passiveStacks: 0
     - effectType: 1
       attributeModified: 1
       modAmount: 5
       perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
         perkTag: 0
         passiveStacks: 0
     - effectType: 1
@@ -45,11 +55,19 @@ MonoBehaviour:
       modAmount: 5
       perkGained:
         perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
         passiveStacks: 0
     - effectType: 1
       attributeModified: 3
       modAmount: 5
       perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
         perkTag: 0
         passiveStacks: 0
     - effectType: 1
@@ -57,11 +75,19 @@ MonoBehaviour:
       modAmount: 5
       perkGained:
         perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
         passiveStacks: 0
     - effectType: 1
       attributeModified: 6
       modAmount: 5
       perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
         perkTag: 0
         passiveStacks: 0
     - effectType: 1
@@ -69,10 +95,18 @@ MonoBehaviour:
       modAmount: 5
       perkGained:
         perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
         passiveStacks: 0
     - effectType: 1
       attributeModified: 7
       modAmount: 10
       perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
         perkTag: 0
         passiveStacks: 0

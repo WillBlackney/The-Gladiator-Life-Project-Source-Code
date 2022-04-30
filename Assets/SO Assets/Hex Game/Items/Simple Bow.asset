@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Simple Bow
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 7fb607e9ab1443b4ab027ade5368bb9a, type: 3}
+  itemSprite: {fileID: 21300000, guid: bc2a8d42b454a91429dcf093c66957cb, type: 3}
   itemName: Simple Bow
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -23,6 +23,8 @@ MonoBehaviour:
   handRequirement: 1
   allowedSlot: 0
   injuryTypesCaused: 01000000
+  minArmourRoll: 0
+  maxArmourRoll: 0
   grantedAbilities:
   - {fileID: 11400000, guid: 3ca86d39f1f8dec4e99b3d3c232d1b49, type: 2}
   - {fileID: 11400000, guid: 8adbbef4caa30944583cb66a9f0fc4c7, type: 2}

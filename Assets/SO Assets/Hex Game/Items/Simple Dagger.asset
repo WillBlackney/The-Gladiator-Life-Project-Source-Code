@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Simple Dagger
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 8163f56ac57856944847769199f399cd, type: 3}
+  itemSprite: {fileID: 21300000, guid: 9f9da86a86ed524458e31524dfe0adc0, type: 3}
   itemName: Simple Dagger
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -23,6 +23,8 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 01000000
+  minArmourRoll: 0
+  maxArmourRoll: 0
   grantedAbilities:
   - {fileID: 11400000, guid: 19bafa2a006ece44c82e50a4be414c13, type: 2}
   - {fileID: 11400000, guid: f6bde575555fb7f479fa11a9623b7995, type: 2}
