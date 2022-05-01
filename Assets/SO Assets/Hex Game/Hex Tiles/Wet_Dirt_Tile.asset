@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 890a710f1c09c5b4db20c6f8845576ac, type: 3}
-  m_Name: Mud_Tile
+  m_Name: Wet_Dirt_Tile
   m_EditorClassIdentifier: 
   tileMaterial: {fileID: 2100000, guid: 81f3220391a393442aab9bfe7ff7131b, type: 2}
-  tileName: Mud
-  tileDescription: Wet, sticky dirt.
+  tileName: Wet Dirt
+  tileDescription: Wet, sticky dirt that is difficult to move on.
   baseMoveCost: 3
   allowElevation: 1

@@ -13,5 +13,15 @@ MonoBehaviour:
   m_Name: Basic_1
   m_EditorClassIdentifier: 
   elevationPercentage: 20
+  tilingConfigs:
+  - hexData: {fileID: 11400000, guid: d9a12c9bbebc9ca46a208837c764a48c, type: 2}
+    lowerProbability: 1
+    upperProbability: 50
+  - hexData: {fileID: 11400000, guid: e07bc2df6adb63543bb5a0a4ce6891da, type: 2}
+    lowerProbability: 51
+    upperProbability: 75
+  - hexData: {fileID: 11400000, guid: 4afdcc2298d39e74ab0970d2f26487af, type: 2}
+    lowerProbability: 76
+    upperProbability: 100
   obstructionPercentage: 10
   allowObstaclesOnElevation: 0

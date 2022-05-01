@@ -16,7 +16,7 @@ namespace HexGameEngine.HexTiles
         public string tileName;
         [TextArea]
         public string tileDescription;
-        public int baseMoveCost;
+        public int moveCostModifier;
         public bool allowElevation;
 
        

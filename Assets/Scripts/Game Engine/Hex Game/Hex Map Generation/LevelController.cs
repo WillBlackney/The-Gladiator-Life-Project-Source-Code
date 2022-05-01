@@ -118,7 +118,18 @@ namespace HexGameEngine.HexTiles
                 if (elevationRoll >= 1 && elevationRoll <= seed.elevationPercentage)
                     n.SetHexTileElevation(TileElevation.Elevated);
 
-                // To do: randomize and set type
+                // Set up tile type + data
+                int tileTypeRoll = RandomGenerator.NumberBetween(1, 100);
+                HexMapTilingConfig randomHexConfig = null;
+                foreach (HexMapTilingConfig c in seed.tilingConfigs)
+                {
+                    if (tileTypeRoll >= c.lowerProbability && tileTypeRoll <= c.upperProbability)
+                    {
+                        randomHexConfig = c;
+                        break;
+                    }
+                }
+                n.BuildFromData(randomHexConfig.hexData);
 
                 // To do: randomize and set obstacle
                 int obstructionRoll = RandomGenerator.NumberBetween(1, 100);

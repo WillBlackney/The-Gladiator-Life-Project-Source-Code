@@ -12,8 +12,8 @@ namespace HexGameEngine.HexTiles
         [Range(0, 100)]
         public int elevationPercentage;
         [Space(10)]
-        //[Header("Tile Type Settings")]
-        //public HexMapTilingConfig[] tilingConfigs;
+        [Header("Tile Type Settings")]
+        public HexMapTilingConfig[] tilingConfigs;
 
         [Header("Obstruction Settings")]
         [Range(0, 100)]
@@ -22,9 +22,9 @@ namespace HexGameEngine.HexTiles
 
     }
 
-    /*
+    
     [System.Serializable]
-    public class HexMapTilingConfig
+    public class CombatMapTilingConfig
     {
         public HexDataSO hexData;
         [Range(1, 100)]
@@ -32,5 +32,5 @@ namespace HexGameEngine.HexTiles
         [Range(1, 100)]
         public int upperProbability;
     }
-    */
+    
 }

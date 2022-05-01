@@ -36,6 +36,7 @@ namespace HexGameEngine.HexTiles
         private TileElevation elevation;
         private bool obstructed = false;
         [HideInInspector]public HexCharacterModel myCharacter;
+        private HexDataSO tileData;
 
         [Header("Pillar Sprites")]
         [SerializeField] private Sprite nightTimeCircle;
@@ -50,6 +51,10 @@ namespace HexGameEngine.HexTiles
         public bool Obstructed
         {
             get { return obstructed; }
+        }
+        public HexDataSO TileData
+        {
+            get { return tileData; }
         }
         public TileElevation Elevation
         {
@@ -88,17 +93,14 @@ namespace HexGameEngine.HexTiles
         }
         public int BaseMoveCost
         {
-            get { return 2; }
+            get 
+            {
+                int sum = 2;
+                if (tileData != null) sum += tileData.moveCostModifier;
+                return sum; 
+            }
         }
-        /*
-        public int Distance(LevelNode other)
-        {
-            int yDif = (int) Mathf.Abs(gridPosition.y - other.gridPosition.y);
-            int xDif = (int) Mathf.Abs(gridPosition.x - other.gridPosition.x);
-            if (xDif > yDif) return xDif;
-            else return yDif;
-        }
-        */
+        
         public int Distance(LevelNode other)
         {
             return (int)(Mathf.Abs(CubeCoord.x - other.CubeCoord.x) + Mathf.Abs(CubeCoord.y - other.CubeCoord.y) +
@@ -108,6 +110,16 @@ namespace HexGameEngine.HexTiles
 
         // Events
         #region
+        public void BuildFromData(HexDataSO data)
+        {
+            tileData = data;
+
+            // build views
+            if(data.tileName != "Dirt")
+            {
+
+            }
+        }
         private void Start()
         {
             _offsetCoord = gridPosition;

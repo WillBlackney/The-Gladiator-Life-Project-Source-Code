@@ -106,7 +106,7 @@ namespace HexGameEngine.HexTiles
         }
         public int BaseMoveCost
         {
-            get { return myHexData.baseMoveCost; }
+            get { return myHexData.moveCostModifier; }
         }
         #endregion
 

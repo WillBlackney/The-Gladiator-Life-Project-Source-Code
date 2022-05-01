@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileMaterial: {fileID: 2100000, guid: bb4cb8f646112d7459a063e036255bf9, type: 2}
   tileName: Grass
-  tileDescription: Short, flat grass on a patch of dirt.
+  tileDescription: Shruby grass that is tall enough to hide in.
   baseMoveCost: 3
   allowElevation: 1
