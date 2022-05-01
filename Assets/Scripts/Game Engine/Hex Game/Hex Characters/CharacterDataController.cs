@@ -726,16 +726,12 @@ namespace HexGameEngine.Characters
             newCharacter.recruitCost = GenerateCharacterRecruitCost(tier);
 
             // Set up health
-            SetCharacterMaxHealth(newCharacter, 100);
+            SetCharacterMaxHealth(newCharacter, 0);
             SetCharacterHealth(newCharacter, StatCalculator.GetTotalMaxHealth(newCharacter));
 
             // Randomize model appearance + outfit
             newCharacter.modelParts = new List<string>();
-            //OutfitTemplateSO randomOutfit = null;
-            // if (ct.possibleOutfits.Count == 1) randomOutfit = ct.possibleOutfits[0];
-            //else randomOutfit = ct.possibleOutfits[RandomGenerator.NumberBetween(0, ct.possibleOutfits.Count - 1)];
             CharacterModelTemplateSO randomRaceModel = GetRandomModelTemplate(race);
-            //newCharacter.modelParts.AddRange(randomOutfit.outfitParts);
             newCharacter.modelParts.AddRange(randomRaceModel.bodyParts);
 
             // Randomize items

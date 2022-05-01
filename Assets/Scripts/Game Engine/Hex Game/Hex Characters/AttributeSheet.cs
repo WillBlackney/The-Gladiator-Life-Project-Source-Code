@@ -18,7 +18,7 @@ namespace HexGameEngine.Characters
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public Attribute constitution = new Attribute(0, 0);
+        public Attribute constitution = new Attribute(80, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
