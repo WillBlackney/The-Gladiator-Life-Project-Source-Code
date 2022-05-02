@@ -12,8 +12,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890a710f1c09c5b4db20c6f8845576ac, type: 3}
   m_Name: Thick_Mud_Tile
   m_EditorClassIdentifier: 
-  tileMaterial: {fileID: 2100000, guid: 81f3220391a393442aab9bfe7ff7131b, type: 2}
+  tileSprite: {fileID: 0}
   tileName: Thick Mud
   tileDescription: Wet, sticky dirt.
-  baseMoveCost: 3
+  description:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Wet, sticky dirt that is difficult to move on. Costs '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '2 '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'extra '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Energy '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'to traverse. Characters standing in thick mud suffer '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '-10 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Accuracy '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Dodge
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
+  moveCostModifier: 2
   allowElevation: 1

@@ -918,7 +918,8 @@ namespace HexGameEngine.HexTiles
             yield return new WaitForSeconds(popupDelay);
             if (HexMousedOver != destination) yield break;
 
-            //HexDataSO data = destination.myHexData;
+            HexDataSO data = destination.TileData;
+            if (!data) yield break;
 
             tileInfoVisualParent.SetActive(true);
             tileInfoPositionParent.transform.position = destination.WorldPosition;
@@ -926,13 +927,11 @@ namespace HexGameEngine.HexTiles
             tileInfoCg.DOFade(1, 0.5f);
 
             // build views logic
-            tileInfoNameText.text = "Dry Dirt";//data.tileName;
-            tileInfoDescriptionText.text = "Dry dirt that is easy to balance and move on.";//data.tileDescription;
+            tileInfoNameText.text = data.tileName;
+            tileInfoDescriptionText.text = TextLogic.ConvertCustomStringListToString(data.description);
 
-            if (destination.Obstructed)
-            {
-                tileInfoCostText.text = "This location is obstructed and cannot be moved on.";
-            }
+            if (destination.Obstructed)            
+                tileInfoCostText.text = "This location is obstructed and cannot be moved on or through.";            
 
             else if(start == null)
             {

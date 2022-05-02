@@ -32,6 +32,9 @@ namespace HexGameEngine.HexTiles
         [SerializeField] GameObject obstacleParent;
         [SerializeField] GameObject[] obstacleImages;
 
+        [Header("Sprite Type Components")]
+        [SerializeField] SpriteRenderer tileTypeSprite;
+
         private List<LevelNode> neighbourNodes = null;
         private TileElevation elevation;
         private bool obstructed = false;
@@ -113,12 +116,7 @@ namespace HexGameEngine.HexTiles
         public void BuildFromData(HexDataSO data)
         {
             tileData = data;
-
-            // build views
-            if(data.tileName != "Dirt")
-            {
-
-            }
+            tileTypeSprite.sprite = data.tileSprite;
         }
         private void Start()
         {

@@ -86,23 +86,16 @@ MonoBehaviour:
         targettingPriority: 1
         getRangeFromAbility: 0
         range: 0
-        abilityName: Shield Slam
+        abilityName: Sword And Board
       requirements:
-      - requirementType: 4
+      - requirementType: 3
         range: 0
         perkPairing:
           perkTag: 74
-          passiveStacks: 1
+          passiveStacks: 3
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
-    - action:
-        actionType: 1
-        targettingPriority: 1
-        getRangeFromAbility: 0
-        range: 0
-        abilityName: Sword And Board
-      requirements: []
     - action:
         actionType: 1
         targettingPriority: 1
@@ -120,8 +113,8 @@ MonoBehaviour:
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 5da6171d9b5a21b47b2adc4c680a46c2, type: 2}
-    - {fileID: 11400000, guid: c8e3f3fec5ce19245921460d29f2de40, type: 2}
     - {fileID: 11400000, guid: 6c906fd5c22e64f43adc16680c0264ea, type: 2}
+    - {fileID: 11400000, guid: b503794611246a24ab47b71e16c0eeba, type: 2}
   serializedPassiveManager:
     perks:
     - perkTag: 24

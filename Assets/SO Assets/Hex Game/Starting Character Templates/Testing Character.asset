@@ -55,7 +55,9 @@ MonoBehaviour:
   abilityBook:
     activeAbilities: []
   serializedPassiveManager:
-    perks: []
+    perks:
+    - perkTag: 124
+      stacks: 1
   modelParts:
   - Ghoul_Chest
   - Undead_Face_6

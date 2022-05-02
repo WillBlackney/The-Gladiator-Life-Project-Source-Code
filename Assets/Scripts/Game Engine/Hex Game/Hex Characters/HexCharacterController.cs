@@ -431,34 +431,25 @@ namespace HexGameEngine.Characters
         {
             Debug.Log("CharacterEntityController.ModifyHealth() called for " + character.myName);
 
-            //int originalHealth = character.currentHealth;
             int finalHealthValue = character.currentHealth;
-
             finalHealthValue += healthGainedOrLost;
 
             // prevent health increasing over maximum
-            if (finalHealthValue > StatCalculator.GetTotalMaxHealth(character))
-            {
-                finalHealthValue = StatCalculator.GetTotalMaxHealth(character);
-            }
+            if (finalHealthValue > StatCalculator.GetTotalMaxHealth(character))            
+                finalHealthValue = StatCalculator.GetTotalMaxHealth(character);            
 
             // prevent health going less then 0
-            if (finalHealthValue < 0)
-            {
-                finalHealthValue = 0;
-            }
+            if (finalHealthValue < 0)            
+                finalHealthValue = 0;            
 
             // Set health after calculation
             character.currentHealth = finalHealthValue;
 
             // relay changes to character data
-            if (character.characterData != null && relayToCharacterData)
-            {
-                CharacterDataController.Instance.SetCharacterHealth(character.characterData, character.currentHealth);
-            }
+            if (character.characterData != null && relayToCharacterData)            
+                CharacterDataController.Instance.SetCharacterHealth(character.characterData, character.currentHealth);            
 
             Debug.Log(character.myName + " health value = " + character.currentHealth.ToString());
-
             VisualEventManager.Instance.CreateVisualEvent(() => UpdateHealthGUIElements(character, finalHealthValue, StatCalculator.GetTotalMaxHealth(character)), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
         }
         public void ModifyMaxHealth(HexCharacterModel character, int maxHealthGainedOrLost)
@@ -1083,6 +1074,13 @@ namespace HexGameEngine.Characters
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Stunned, -1, true, 0.5f);
                 }
 
+                // Overcharged
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Overcharged) && character.currentHealth > 0)
+                {
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Overcharged, -1, false);
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Stunned, 1, true, 0.5f);
+                }
+
                 #endregion
 
                 // BUFF EXPIRIES
@@ -1322,6 +1320,23 @@ namespace HexGameEngine.Characters
                         VisualEffectManager.Instance.CreateHealEffect(view.WorldPosition));
                     ModifyHealth(character, stacks);
                     VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                }
+
+                // Grass tile
+                if(character.currentTile.TileData.tileName == "Grass")
+                {
+                    // Text Notif
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hiding in Grass!"), QueuePosition.Back, 0f, 0.5f);
+
+                    // Gain stealth
+                    PerkController.Instance.ModifyPerkOnCharacterEntity
+                        (character.pManager, Perk.Stealth, 1, true, 0, character.pManager);
+
+                    // Poof VFX
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEffectManager.Instance.CreateExpendEffect(view.WorldPosition, 15, 0.2f));
+
                 }
                 #endregion
             }

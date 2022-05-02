@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using HexGameEngine.Utilities;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,12 +11,11 @@ namespace HexGameEngine.HexTiles
     {
         [Header("Asset References")]
         [PreviewField(75)]
-        public Material tileMaterial;
+        public Sprite tileSprite;
 
         [Header("Properties")]
         public string tileName;
-        [TextArea]
-        public string tileDescription;
+        public List<CustomString> description;
         public int moveCostModifier;
         public bool allowElevation;
 

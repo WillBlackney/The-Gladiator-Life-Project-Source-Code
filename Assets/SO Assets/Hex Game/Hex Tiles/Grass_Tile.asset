@@ -12,8 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890a710f1c09c5b4db20c6f8845576ac, type: 3}
   m_Name: Grass_Tile
   m_EditorClassIdentifier: 
-  tileMaterial: {fileID: 2100000, guid: bb4cb8f646112d7459a063e036255bf9, type: 2}
+  tileSprite: {fileID: 21300000, guid: 33913e129ab88644e891c5170ba069d6, type: 3}
   tileName: Grass
-  tileDescription: Shruby grass that is tall enough to hide in.
-  baseMoveCost: 3
+  tileDescription: Thick, shruby grass that is tall enough to hide in.
+  description:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Thick, shruby grass that is tall enough to hide in. Characters to end
+      their turn on a grass tile gain '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '1 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Stealth
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
+  moveCostModifier: 1
   allowElevation: 1
