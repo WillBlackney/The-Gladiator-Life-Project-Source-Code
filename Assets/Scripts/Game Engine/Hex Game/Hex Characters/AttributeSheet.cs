@@ -154,7 +154,7 @@ namespace HexGameEngine.Characters
     public class Attribute
     {
         public int value;
-        [Range(0,2)]
+        [Range(0,3)]
         public int stars;
 
         public Attribute(int _value, int _stars)
