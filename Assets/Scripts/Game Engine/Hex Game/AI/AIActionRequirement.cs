@@ -32,6 +32,10 @@ namespace HexGameEngine.AI
         [LabelWidth(100)]
         public int energyReq;
 
+        [ShowIf("ShowAlliesAlive")]
+        [LabelWidth(100)]
+        public int alliesAlive;
+
 
         public bool ShowEnergyReq()
         {
@@ -77,6 +81,11 @@ namespace HexGameEngine.AI
             }
             else return false;
         }
+        public bool ShowAlliesAlive()
+        {
+            return requirementType == AIActionRequirementType.LessThanAlliesAlive || 
+                requirementType == AIActionRequirementType.MoreThanAlliesAlive;
+        }
     }
 
     public enum AIActionRequirementType
@@ -92,5 +101,7 @@ namespace HexGameEngine.AI
         TargetHasLessPerkStacks = 6,
         TargetHasLessHealthThanX = 7,
         SelfHasLessHealthThanX = 9,
+        MoreThanAlliesAlive = 11,
+        LessThanAlliesAlive = 12,
     }
 }

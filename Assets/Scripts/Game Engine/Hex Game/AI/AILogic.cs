@@ -196,6 +196,16 @@ namespace HexGameEngine.AI
                 StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(character) < req.healthPercentage)
                 bRet = true;
 
+            // Check less than X allies alive
+            else if (req.requirementType == AIActionRequirementType.LessThanAlliesAlive &&
+                HexCharacterController.Instance.GetAllAlliesOfCharacter(character, false).Count < req.alliesAlive)
+                bRet = true;
+
+            // Check more than X allies alive
+            else if (req.requirementType == AIActionRequirementType.MoreThanAlliesAlive &&
+                HexCharacterController.Instance.GetAllAlliesOfCharacter(character, false).Count > req.alliesAlive)
+                bRet = true;
+
             return bRet;
         }
 
