@@ -1680,6 +1680,18 @@ namespace HexGameEngine.Characters
 
             return backArcTiles;
         }
+        public List<HexCharacterModel> GetAllCharactersWithinMyAura(HexCharacterModel character, bool includeSelf = false)
+        {
+            List<LevelNode> auraTiles = GetCharacterAura(character, includeSelf);
+            List<HexCharacterModel> characters = new List<HexCharacterModel>();
+            foreach (LevelNode h in auraTiles)
+            {
+                if (h.myCharacter != null)
+                    characters.Add(h.myCharacter);
+            }
+
+            return characters;
+        }
         public List<HexCharacterModel> GetAlliesWithinMyAura(HexCharacterModel character, bool includeSelf = false)
         {
             List<LevelNode> auraTiles = GetCharacterAura(character, includeSelf);

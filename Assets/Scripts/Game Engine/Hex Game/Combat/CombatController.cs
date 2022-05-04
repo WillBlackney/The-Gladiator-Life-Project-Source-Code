@@ -1269,6 +1269,35 @@ namespace HexGameEngine.Combat
                 }
             }
 
+            // Volatile (explode on death)
+            if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Volatile))
+            {
+                Debug.Log("CombatLogic.HandleDeathBlow() character killed has Volatile perk, applying Poisoned to nearby characters...");
+
+                // Poison Explosion VFX on character killed
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                {
+                    VisualEffectManager.Instance.CreatePoisonNova(view.WorldPosition);
+                }, QueuePosition.Back, 0, 0, parentEvent);
+
+                // Poison all nearby characters
+                foreach(var tile in LevelController.Instance.GetAllHexsWithinRange(hex, 1))
+                {
+                    if(tile.myCharacter != null &&
+                        tile.myCharacter.livingState == LivingState.Alive &&
+                        tile.myCharacter.currentHealth > 0)
+                    {
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(tile.myCharacter.pManager, Perk.Poisoned,
+                        PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Volatile), true, 0, character.pManager);
+
+                    }
+                }
+                
+
+                VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+            }
+           
+
             // Check if the combat defeat event should be triggered
             if (HexCharacterController.Instance.AllDefenders.Count == 0 &&
                 currentCombatState == CombatGameState.CombatActive)

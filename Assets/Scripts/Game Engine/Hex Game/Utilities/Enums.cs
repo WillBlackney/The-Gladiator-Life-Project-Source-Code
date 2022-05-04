@@ -491,6 +491,7 @@ namespace HexGameEngine
         Wimp = 88,
         Wise = 89,
         Wrath = 50,
+        Volatile = 153,
 
         // Injuries
         BrokenNose = 27,

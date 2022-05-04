@@ -117,6 +117,21 @@ namespace HexGameEngine.VisualEvents
                 if (vEvent.projectileStartPosition == ProjectileStartPosition.Shooter)
                 {
                     projectileStartPos = user.hexCharacterView.WorldPosition;
+
+                    // Create projectile
+                    CoroutineData cData2 = new CoroutineData();
+                    VisualEventManager.Instance.CreateVisualEvent(() => 
+                    {
+                        if(user != null &&
+                           user.hexCharacterView != null)
+                        {
+                            projectileStartPos = user.hexCharacterView.WorldPosition;
+                        }
+                            
+                        VisualEffectManager.Instance.ShootProjectileAtLocation(vEvent.projectileFired, projectileStartPos, targetPos, cData2);
+                    }, cData2, QueuePosition.Back, 0, 0, stackEvent);
+                    return;
+
                 }
                 else if (vEvent.projectileStartPosition == ProjectileStartPosition.AboveTargetOffScreen)
                 {                       
@@ -124,7 +139,7 @@ namespace HexGameEngine.VisualEvents
                 }
                 else if (vEvent.projectileStartPosition == ProjectileStartPosition.SkyCentreOffScreen)
                 {
-                    projectileStartPos = new Vector3(0, 8, 0);
+                    projectileStartPos = new Vector3(0, 8, 0);                    
                 }
 
                 // Create projectile

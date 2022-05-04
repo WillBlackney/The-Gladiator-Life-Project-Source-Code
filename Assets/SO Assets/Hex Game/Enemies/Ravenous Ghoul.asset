@@ -17,62 +17,63 @@ MonoBehaviour:
   modelSize: 0
   xpReward: 8
   attributeSheet:
-    strength: 0
-    intelligence: 0
-    constitution: 0
-    dodge: 0
-    accuracy: 0
-    resolve: 5
-    wits: 5
+    strength:
+      value: 0
+      stars: 0
+    intelligence:
+      value: 0
+      stars: 0
+    constitution:
+      value: 0
+      stars: 0
+    dodge:
+      value: 5
+      stars: 0
+    accuracy:
+      value: 75
+      stars: 0
+    resolve:
+      value: 10
+      stars: 0
+    wits:
+      value: 0
+      stars: 0
     maxHealth: 0
-    stamina: 8
+    energyRecovery: 8
     maxEnergy: 8
-    initiative: 5
+    initiative: 8
     criticalChance: 5
     criticalModifier: 50
     auraSize: 1
+    vision: 0
     physicalResistance: 0
     magicResistance: 0
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
+    deathResistance: 0
+  baseArmour: 0
   randomizeHealth: 1
-  lowerHealthLimit: 45
-  upperHealthLimit: 50
+  lowerHealthLimit: 55
+  upperHealthLimit: 60
   aiTurnRoutine:
     directives:
-    - requirements:
-      - requirementType: 9
-        range: 0
-        perkPairing:
-          perkTag: 0
-          passiveStacks: 0
-        healthPercentage: 50
-        enemiesInMeleeRange: 1
-        energyReq: 0
-      action:
-        actionType: 1
-        targettingPriority: 0
-        getRangeFromAbility: 0
-        range: 0
-        abilityName: Feast
-    - requirements: []
-      action:
+    - action:
         actionType: 1
         targettingPriority: 1
         getRangeFromAbility: 0
         range: 0
         abilityName: Bite
-    - requirements: []
-      action:
+      requirements: []
+    - action:
         actionType: 2
         targettingPriority: 1
         getRangeFromAbility: 0
         range: 0
         abilityName: 
+      requirements: []
   abilityBook:
     activeAbilities:
-    - {fileID: 11400000, guid: 37337f2c0e477084d89556a9bfb4a04a, type: 2}
     - {fileID: 11400000, guid: 1f930ab22680469408549be930c7c677, type: 2}
   serializedPassiveManager:
     perks:
