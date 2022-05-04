@@ -52,8 +52,8 @@ MonoBehaviour:
     stressResistance: 0
     injuryResistance: 0
     deathResistance: 25
-  baseArmour: 40
-  randomizeHealth: 0
+  baseArmour: 0
+  randomizeHealth: 1
   lowerHealthLimit: 1
   upperHealthLimit: 1
   aiTurnRoutine:
@@ -73,6 +73,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        alliesAlive: 0
     - action:
         actionType: 2
         targettingPriority: 1

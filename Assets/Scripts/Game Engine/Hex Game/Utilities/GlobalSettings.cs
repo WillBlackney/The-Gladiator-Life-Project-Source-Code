@@ -26,6 +26,14 @@ namespace HexGameEngine.Utilities
         [SerializeField] private int baseStartingGold;
         [SerializeField] private int campActivityPointRegen;
 
+        [Title("Starting Timeline Settings")]
+        [Range(1,5)]
+        [ShowIf("ShowStartingTimeSettings")]
+        [SerializeField] private int startingDay = 1;
+        [Range(1, 5)]
+        [ShowIf("ShowStartingTimeSettings")]
+        [SerializeField] private int startingChapter = 1;
+        
         // Single Combat Scene Properties
         [Title("Combat Sandbox Settings")]      
         [ShowIf("ShowSandBoxLevelSeed")]
@@ -54,6 +62,14 @@ namespace HexGameEngine.Utilities
         public GameMode GameMode
         {
             get { return gameMode; }
+        }
+        public int StartingDay
+        {
+            get { return startingDay; }
+        }
+        public int StartingChapter
+        {
+            get { return startingChapter; }
         }
         public HexMapSeedDataSO SandboxLevelSeed
         {
@@ -110,10 +126,14 @@ namespace HexGameEngine.Utilities
         }
         #endregion
 
-        
+
 
         // Odin Showifs
         #region
+        public bool ShowStartingTimeSettings()
+        {
+            return gameMode != GameMode.Standard;
+        }
         public bool ShowSandBoxLevelSeed()
         {
             return gameMode == GameMode.CombatSandbox;

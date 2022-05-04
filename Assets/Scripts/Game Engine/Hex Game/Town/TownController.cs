@@ -611,7 +611,7 @@ namespace HexGameEngine.TownFeatures
             // Rebuild page
             BuildAndShowArmouryPage();
         }
-        public void GenerateDailyItems()
+        public void GenerateDailyArmouryItems()
         {
             currentItems.Clear();
             List<ItemData> possibleItems = ItemController.Instance.GetAllLootableItems(Rarity.Rare);

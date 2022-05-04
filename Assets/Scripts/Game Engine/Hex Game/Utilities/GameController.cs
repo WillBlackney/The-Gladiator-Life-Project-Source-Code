@@ -11,6 +11,7 @@ using HexGameEngine.JourneyLogic;
 using HexGameEngine.MainMenu;
 using HexGameEngine.Persistency;
 using HexGameEngine.Player;
+using HexGameEngine.Reputations;
 using HexGameEngine.RewardSystems;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.TurnLogic;
@@ -111,8 +112,6 @@ namespace HexGameEngine
 
             AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
             BlackScreenController.Instance.FadeInScreen(1f);
-
-            InventoryController.Instance.PopulateInventoryWithMockDataItems(20);
         }
         private void RunSandboxCombat()
         {
@@ -455,7 +454,7 @@ namespace HexGameEngine
             CombatRewardController.Instance.HidePostCombatRewardScreen();
 
             // town new day start stuff
-            RunController.Instance.OnNewDayStart();
+            bool newChapter = RunController.Instance.OnNewDayStart();           
 
             // Show town UI
             TownController.Instance.ShowTownView();
@@ -472,6 +471,12 @@ namespace HexGameEngine
             yield return new WaitForSeconds(0.5f);
             AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
             BlackScreenController.Instance.FadeInScreen(1f);
+
+            // Show choose rep screen?
+            if (newChapter)
+            {
+                ReputationController.Instance.BuildAndShowReputationRewardScreen();
+            }
         }
         #endregion
 

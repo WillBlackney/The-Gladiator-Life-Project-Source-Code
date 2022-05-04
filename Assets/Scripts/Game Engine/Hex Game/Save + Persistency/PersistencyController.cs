@@ -73,7 +73,7 @@ namespace HexGameEngine.Persistency
             TownController.Instance.GenerateDailyRecruits(6);
             TownController.Instance.GenerateDailyCombatContracts();
             TownController.Instance.GenerateDailyAbilityTomes();
-            TownController.Instance.GenerateDailyItems();
+            TownController.Instance.GenerateDailyArmouryItems();
 
             // Player Data
             PlayerDataController.Instance.SetGameStartValues();                       

@@ -63,6 +63,11 @@ namespace HexGameEngine.JourneyLogic
         {
             CurrentDay = 1;
             CurrentChapter = 1;
+            if(GlobalSettings.Instance.GameMode != GameMode.Standard)
+            {
+                CurrentDay = GlobalSettings.Instance.StartingDay;
+                CurrentChapter = GlobalSettings.Instance.StartingChapter;
+            }
             SetCheckPoint(SaveCheckPoint.Town);
             CurrentCombatContractData = null;
         }
@@ -71,17 +76,20 @@ namespace HexGameEngine.JourneyLogic
 
         // Core Events
         #region       
-        public void OnNewDayStart()
+        public bool OnNewDayStart()
         {
+            bool newChapterStarted = false;
             // Increment day
             if(CurrentDay == 5)
             {
+                newChapterStarted = true;
                 CurrentDay = 1;
                 CurrentChapter++;
-
-                // To do in future: OnNewChapterStart() logic (gain reputation, etc)
+                OnNewChapterStart();
             }
             else CurrentDay++;
+
+            // Update day + act GUI
             UpdateDayAndChapterTopbarText();
 
             // Pay daily wages
@@ -102,15 +110,20 @@ namespace HexGameEngine.JourneyLogic
             TownController.Instance.GenerateDailyAbilityTomes();
 
             // Refresh armoury items
-            TownController.Instance.GenerateDailyItems();
+            TownController.Instance.GenerateDailyArmouryItems();
 
             // Characters in town features gain effect of hospital feature (heal, remove stress, remove all injuries, etc)
             TownController.Instance.HandleApplyHospitalFeaturesOnNewDayStart();
 
-            // All characters heal 10 health and 5 stress
+            // All characters heal 10% health and 5 stress
             CharacterDataController.Instance.HandlePassiveStressAndHealthRecoveryOnNewDayStart();
 
+            return newChapterStarted;
 
+        }
+        public void OnNewChapterStart()
+        {
+            // TO DO: generate reputation reward choices
 
         }
         #endregion

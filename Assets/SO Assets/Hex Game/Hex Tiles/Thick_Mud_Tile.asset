@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890a710f1c09c5b4db20c6f8845576ac, type: 3}
   m_Name: Thick_Mud_Tile
   m_EditorClassIdentifier: 
-  tileSprite: {fileID: 0}
+  tileSprite: {fileID: 21300000, guid: 6ec7b82ef1ba04f42b9ac43a78e318ec, type: 3}
   tileName: Thick Mud
-  tileDescription: Wet, sticky dirt.
   description:
   - color: 1
     getPhraseFromAbilityValue: 0
@@ -35,7 +34,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'to traverse. Characters standing in thick mud suffer '
+    phrase: 'to traverse. Characters standing here suffer '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
