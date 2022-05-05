@@ -47,11 +47,13 @@ namespace HexGameEngine.Player
         #region
         public void BuildMyDataFromSaveFile(SaveGameData saveFile)
         {
+            deploymentLimit = saveFile.deploymentLimit;
             ModifyPlayerGold(-currentGold + saveFile.currentGold);
         }
         public void SaveMyDataToSaveFile(SaveGameData saveData)
         {
             saveData.currentGold = currentGold;
+            saveData.deploymentLimit = deploymentLimit;
         }
         #endregion      
 

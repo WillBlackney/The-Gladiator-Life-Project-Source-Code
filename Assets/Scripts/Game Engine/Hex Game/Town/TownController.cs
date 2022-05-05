@@ -838,9 +838,8 @@ namespace HexGameEngine.TownFeatures
         }
         public void HandleDropCharacterOnDeploymentNode(DeploymentNodeView node, HexCharacterData draggedCharacter)
         {
-            Debug.Log("HandleDropCharacterOnDeploymentNode");
-            // Prevent drag drop new character when already deployed maximum characters
-            if (node.IsNodeAvailable() && GetDeployedCharacters().Count >= PlayerDataController.Instance.DeploymentLimit) return;
+            Debug.Log("HandleDropCharacterOnDeploymentNode()");
+            if (node.IsUnoccupied() && GetDeployedCharacters().Count >= PlayerDataController.Instance.DeploymentLimit) return;
 
             // Handle dropped on empty slot
             if (node.AllowedCharacter == Allegiance.Player)
@@ -862,6 +861,7 @@ namespace HexGameEngine.TownFeatures
                 }
                    
             }
+            Debug.Log("TownController.GetDeployedCharacters(), total deployed characters =  " + ret.Count.ToString());
 
             return ret;
         }

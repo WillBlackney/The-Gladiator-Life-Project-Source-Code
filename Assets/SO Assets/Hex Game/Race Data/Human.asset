@@ -28,14 +28,10 @@ MonoBehaviour:
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
       phrase: '1 '
-    - color: 0
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: 'extra '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: Energy
+      phrase: Flight
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

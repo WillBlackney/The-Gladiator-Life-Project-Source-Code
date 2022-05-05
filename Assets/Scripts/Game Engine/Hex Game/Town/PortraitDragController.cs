@@ -65,6 +65,8 @@ namespace HexGameEngine.UI
             else if (DeploymentNodeView.NodeMousedOver == null &&
                 draggedNode != null )            
                 TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);    
+
+            // Handle drag and swap two character positions
             
             // Handle drag on to hospital feature slot
             else if(HospitalDropSlot.SlotMousedOver != null)
@@ -95,6 +97,7 @@ namespace HexGameEngine.UI
         }
         public void OnDeploymentNodeDragStart(DeploymentNodeView node)
         {
+            if (node.MyCharacterData == null) return;
             BuildAndShowPortrait(node.MyCharacterData.modelParts);
             draggedCharacterData = node.MyCharacterData;
             draggedNode = node;

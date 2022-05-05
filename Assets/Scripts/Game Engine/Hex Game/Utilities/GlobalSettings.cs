@@ -20,7 +20,7 @@ namespace HexGameEngine.Utilities
 
         [Title("Combat Settings")]
         [SerializeField] private int baseHitChance;
-        [SerializeField] private int startingDeploymentLimit;
+        [SerializeField] private int startingDeploymentLimit = 3;
 
         [Title("Resource Settings")]
         [SerializeField] private int baseStartingGold;

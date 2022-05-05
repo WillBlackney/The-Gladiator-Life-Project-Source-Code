@@ -83,10 +83,11 @@ namespace HexGameEngine.TownFeatures
         #region
         public void BuildFromCharacterData(HexCharacterData character)
         {
+            Debug.Log("DeploymentNodeView.BuildFromCharacterData() character = " + character.myName);
             portraitVisualParent.SetActive(true);
             myCharacterData = character;
 
-            // build model mugshot
+            // Build model mugshot
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(portraitModel, character.modelParts);
         }
         public void SetUnoccupiedState()
@@ -98,7 +99,7 @@ namespace HexGameEngine.TownFeatures
 
         // Conditional Checks
         #region
-        public bool IsNodeAvailable()
+        public bool IsUnoccupied()
         {
             return myCharacterData == null;
         }

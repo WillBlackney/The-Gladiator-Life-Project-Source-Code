@@ -45,24 +45,6 @@ namespace HexGameEngine.UCM
                 DisableAndClearElementOnModel(model, model.activeLeftLegWear);
             if (model.activeRightLegWear)
                 DisableAndClearElementOnModel(model, model.activeRightLegWear);
-
-            /*
-            if (model.activeLeftLeg)
-            {
-                model.activeLeftLeg.gameObject.SetActive(false);
-            }
-            if (model.activeRightLeg)
-            {
-                model.activeRightLeg.gameObject.SetActive(false);
-            }
-            if (model.activeRightLegWear)
-            {
-                model.activeRightLegWear.gameObject.SetActive(false);
-            }
-            if (model.activeLeftLegWear)
-            {
-                model.activeLeftLegWear.gameObject.SetActive(false);
-            }*/
         }
         public static void BuildModelFromModelClone(UniversalCharacterModel modelToBuild, UniversalCharacterModel modelClonedFrom)
         {

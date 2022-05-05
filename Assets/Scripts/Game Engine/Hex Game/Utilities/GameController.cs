@@ -509,28 +509,14 @@ namespace HexGameEngine
             // Hide Main Menu
             MainMenuController.Instance.HideChooseCharacterScreen();
 
-            // Act start visual sequence
-            /*
-            yield return new WaitForSeconds(0.5f);
-            AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
-            yield return new WaitForSeconds(1f);
-            PlayActNotificationVisualEvent();
-            BlackScreenController.Instance.FadeInScreen(0f);
-            yield return new WaitForSeconds(3.5f);
-            */
-
-            // TO DO: Build town views here
+            // Build town views 
             TownController.Instance.ShowTownView();
             CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
+            // Start music, fade in
             yield return new WaitForSeconds(0.5f);
             AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
             BlackScreenController.Instance.FadeInScreen(2f);
-
-
-
-            // Start the first encounter set up sequence
-            //HandleLoadEncounter(RunController.Instance.CurrentEncounterType);
         }       
         public void HandleQuitToMainMenuFromInGame()
         {
@@ -623,8 +609,13 @@ namespace HexGameEngine
             // Hide Main Menu
             MainMenuController.Instance.HideFrontScreen();
 
-            // Load the encounter the player saved at
-            //HandleLoadEncounter(RunController.Instance.CurrentEncounterType);
+            // Build town views 
+            TownController.Instance.ShowTownView();
+            CharacterScrollPanelController.Instance.BuildAndShowPanel();
+
+            // Start music, fade in
+            AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
+            BlackScreenController.Instance.FadeInScreen(2f);
         }
         public void OnGameOverScreenMainMenuButtonClicked()
         {
