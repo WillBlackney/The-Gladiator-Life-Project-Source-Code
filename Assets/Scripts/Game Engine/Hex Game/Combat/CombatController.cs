@@ -918,8 +918,12 @@ namespace HexGameEngine.Combat
                 didCrit = true;
 
             // Create impact effect
-            VisualEventManager.Instance.CreateVisualEvent(() =>
-            VisualEffectManager.Instance.CreateSmallMeleeImpact(target.hexCharacterView.WorldPosition), QueuePosition.Back, 0, 0, parentEvent);
+            Vector3 pos = target.hexCharacterView.WorldPosition;
+            VisualEventManager.Instance.CreateVisualEvent(() => 
+            {
+                if (target.hexCharacterView != null) pos = target.hexCharacterView.WorldPosition;
+                VisualEffectManager.Instance.CreateSmallMeleeImpact(pos);
+            }, QueuePosition.Back, 0, 0, parentEvent);
 
             // Check for barrier
             if (removedBarrier)

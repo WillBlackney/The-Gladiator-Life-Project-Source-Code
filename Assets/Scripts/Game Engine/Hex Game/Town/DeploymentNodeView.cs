@@ -89,6 +89,7 @@ namespace HexGameEngine.TownFeatures
 
             // Build model mugshot
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(portraitModel, character.modelParts);
+            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, portraitModel);
         }
         public void SetUnoccupiedState()
         {

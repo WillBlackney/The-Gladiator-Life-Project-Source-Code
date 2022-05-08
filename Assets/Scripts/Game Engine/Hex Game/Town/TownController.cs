@@ -923,5 +923,16 @@ namespace HexGameEngine.TownFeatures
         }
         #endregion
 
+        // Misc
+        #region
+        public void TearDownOnExitToMainMenu()
+        {
+            foreach(HospitalDropSlot slot in hospitalSlots)
+            {
+                slot.ClearAndReset();
+            }
+        }
+        #endregion
+
     }
 }

@@ -140,6 +140,12 @@ namespace HexGameEngine.TownFeatures
                 
             }
         }
+        public void ClearAndReset()
+        {
+            myCharacterData = null;
+            portraitVisualParent.SetActive(false);
+            cancelButtonParent.SetActive(false);
+        }
         #endregion
     }
 

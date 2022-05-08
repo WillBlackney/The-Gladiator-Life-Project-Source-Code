@@ -556,6 +556,7 @@ namespace HexGameEngine
 
             // Destroy game scene
             HexCharacterController.Instance.HandleTearDownCombatScene();
+            TownController.Instance.TearDownOnExitToMainMenu();
             LevelController.Instance.HandleTearDownCombatViews();
             LightController.Instance.EnableStandardGlobalLight();
 

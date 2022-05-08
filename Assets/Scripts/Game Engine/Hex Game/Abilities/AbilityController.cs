@@ -718,9 +718,13 @@ namespace HexGameEngine.Abilities
                     else if (hitRoll.Result == HitRollResult.Miss)
                     {
                         // Miss notification
+                        Vector3 pos = character.hexCharacterView.WorldPosition;
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateStatusEffect
-                            (character.hexCharacterView.WorldPosition, "MISS"), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                        {
+                            if (character.hexCharacterView != null) pos = character.hexCharacterView.WorldPosition;
+                            VisualEffectManager.Instance.CreateStatusEffect(pos, "MISS");
+                        }, QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+
 
                         // Duck animation on miss
                         VisualEventManager.Instance.CreateVisualEvent(() =>

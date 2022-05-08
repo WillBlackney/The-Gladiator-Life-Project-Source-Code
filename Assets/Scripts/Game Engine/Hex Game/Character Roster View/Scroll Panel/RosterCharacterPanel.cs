@@ -61,6 +61,7 @@ namespace HexGameEngine.UI
 
             // Build model
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(portaitModel, data.modelParts);
+            CharacterModeller.ApplyItemSetToCharacterModelView(data.itemSet, portaitModel);
             portaitModel.SetBaseAnim();
 
             // Build bars

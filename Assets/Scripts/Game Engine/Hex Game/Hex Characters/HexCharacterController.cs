@@ -267,16 +267,18 @@ namespace HexGameEngine.Characters
             // Misc UI setup
             character.hexCharacterView.characterNameTextUI.text = character.myName;
 
-            // Build UCM
+            // Set up items
+            ItemController.Instance.RunItemSetupOnHexCharacterFromItemSet(character, data.itemSet);
+
+            // Build UCMs
             CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.ucm, data.modelParts);
+            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.ucm);
             CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.uiPotraitUCM, data.modelParts);
+            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.uiPotraitUCM);
             SetCharacterModelSize(character.hexCharacterView, data.modelSize);
 
             // Build activation window
-            TurnController.Instance.CreateActivationWindow(character);
-
-            // Set up items
-            Items.ItemController.Instance.RunItemSetupOnHexCharacterFromItemSet(character, data.itemSet);
+            TurnController.Instance.CreateActivationWindow(character);           
 
             // Setup abilities
             AbilityController.Instance.BuildHexCharacterAbilityBookFromData(character, data.abilityBook);
