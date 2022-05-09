@@ -33,14 +33,6 @@ MonoBehaviour:
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Critical Strike '
-    - color: 1
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: 'and '
-    - color: 3
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
       phrase: 'Initiative '
     - color: 1
       getPhraseFromAbilityValue: 0
@@ -50,6 +42,28 @@ MonoBehaviour:
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
       phrase: 1
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: .
+  - dotStyle: 0
+    message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Each point increases a character''s '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Critical Chance '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'by '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 0.5
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

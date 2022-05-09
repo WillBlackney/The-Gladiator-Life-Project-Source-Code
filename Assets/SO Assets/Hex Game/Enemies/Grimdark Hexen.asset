@@ -36,12 +36,12 @@ MonoBehaviour:
       value: 25
       stars: 0
     wits:
-      value: 0
+      value: 5
       stars: 0
     maxHealth: 0
     energyRecovery: 8
     maxEnergy: 8
-    initiative: 7
+    initiative: 6
     criticalChance: 5
     criticalModifier: 50
     auraSize: 1
@@ -73,6 +73,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        alliesAlive: 0
       - requirementType: 6
         range: 0
         perkPairing:
@@ -81,6 +82,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        alliesAlive: 0
     - action:
         actionType: 1
         targettingPriority: 1

@@ -36,13 +36,13 @@ MonoBehaviour:
       value: 35
       stars: 0
     wits:
-      value: 0
+      value: 5
       stars: 0
     maxHealth: 200
     energyRecovery: 8
     maxEnergy: 8
     initiative: 5
-    criticalChance: 5
+    criticalChance: 10
     criticalModifier: 50
     auraSize: 1
     vision: 0
@@ -52,12 +52,19 @@ MonoBehaviour:
     stressResistance: 0
     injuryResistance: 50
     deathResistance: 0
+  baseArmour: 0
   randomizeHealth: 0
   lowerHealthLimit: 175
   upperHealthLimit: 130
   aiTurnRoutine:
     directives:
-    - requirements:
+    - action:
+        actionType: 1
+        targettingPriority: 0
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Cleave
+      requirements:
       - requirementType: 2
         range: 0
         perkPairing:
@@ -66,26 +73,21 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 2
         energyReq: 0
-      action:
-        actionType: 1
-        targettingPriority: 0
-        getRangeFromAbility: 0
-        range: 0
-        abilityName: Cleave
-    - requirements: []
-      action:
+        alliesAlive: 0
+    - action:
         actionType: 1
         targettingPriority: 1
         getRangeFromAbility: 0
         range: 0
         abilityName: Strike
-    - requirements: []
-      action:
+      requirements: []
+    - action:
         actionType: 2
         targettingPriority: 1
         getRangeFromAbility: 0
         range: 0
         abilityName: 
+      requirements: []
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 5da6171d9b5a21b47b2adc4c680a46c2, type: 2}

@@ -36,12 +36,12 @@ MonoBehaviour:
       value: 0
       stars: 0
     wits:
-      value: 0
+      value: 5
       stars: 0
     maxHealth: 0
     energyRecovery: 8
     maxEnergy: 8
-    initiative: 5
+    initiative: 4
     criticalChance: 15
     criticalModifier: 50
     auraSize: 1

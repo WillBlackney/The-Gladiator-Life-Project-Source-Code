@@ -8,6 +8,7 @@ using HexGameEngine.Audio;
 using DG.Tweening;
 using HexGameEngine.UCM;
 using HexGameEngine.TownFeatures;
+using HexGameEngine.Characters;
 
 namespace HexGameEngine.Items
 {
@@ -96,9 +97,30 @@ namespace HexGameEngine.Items
             {
                 currentlyBeingDragged = false;
                 itemDragged = null;
+                HexCharacterData character = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
 
                 // Stop dragging SFX
                 AudioManager.Instance.FadeOutSound(Sound.Card_Dragging, 0.2f);
+
+                // Check equipping 2h item with two 1h items already equip without enough inventory space.
+                if(myItemRef.itemData != null &&
+                    myItemRef.itemData.handRequirement == HandRequirement.TwoHanded &&
+                    character.itemSet.mainHandItem != null &&
+                    character.itemSet.offHandItem != null &&
+                    !InventoryController.Instance.HasFreeInventorySpace(2)
+                    )
+                {
+                    Debug.Log("InventoryItemView() warning, not enough inventory space to equip a 2H item while holding two 1H items, cancelling...");
+                   
+                    // Move item back towards slot position
+                    Sequence s = DOTween.Sequence();
+                    InventorySlot slot = InventoryController.Instance.AllInventorySlots[InventoryController.Instance.Inventory.IndexOf(MyItemRef)];
+                    s.Append(transform.DOMove(slot.transform.position, 0.25f));
+
+                    // Re-parent self on arrival
+                    s.OnComplete(() => transform.SetParent(slot.transform));
+                    return;
+                }
 
                 // Was the drag succesful?
                 if (DragSuccessful())
@@ -117,17 +139,14 @@ namespace HexGameEngine.Items
                     {
                         // add item to player
                         ItemController.Instance.HandleGiveItemToCharacterFromInventory
-                            (CharacterRosterViewController.Instance.CharacterCurrentlyViewing, MyItemRef, RosterItemSlot.SlotMousedOver);
+                            (character, MyItemRef, RosterItemSlot.SlotMousedOver);
 
                         // re build roster, inventory and model views
                         CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
                         InventoryController.Instance.RebuildInventoryView();
-                        //CharacterModeller.ApplyItemSetToCharacterModelView(CharacterRosterViewController.Instance.CharacterCurrentlyViewing.itemSet, CharacterRosterViewController.Instance.CharacterPanelUcm);
-
                     }
                     else if(myItemRef.abilityData != null)
                     {
-                        // to do: handle place ability tome on library learning slot
                         TownController.Instance.LibraryAbilitySlot.BuildFromAbility(myItemRef.abilityData);
                     }
                 }

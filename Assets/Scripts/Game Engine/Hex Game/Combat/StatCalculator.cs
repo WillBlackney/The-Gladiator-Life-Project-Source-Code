@@ -734,7 +734,7 @@ namespace HexGameEngine
         {
             float crit = c.attributeSheet.criticalChance;
 
-            crit += GetTotalWits(c);
+            crit += (float) GetTotalWits(c) / 2f;
 
             // Satyr perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Drunkard))
@@ -756,7 +756,7 @@ namespace HexGameEngine
         {
             float crit = c.attributeSheet.criticalChance;
 
-            crit += GetTotalWits(c);
+            crit += (float)GetTotalWits(c) / 2f;
 
             // Satyr perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Drunkard))

@@ -16,6 +16,7 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: 944cad79318280044b38336516cc4c2f, type: 3}
   frameSprite: 1
   headerName: Critical Chance
+  italicDescription: 1
   description:
   - color: 1
     getPhraseFromAbilityValue: 0
@@ -40,7 +41,7 @@ MonoBehaviour:
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 1%
+      phrase: 1
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

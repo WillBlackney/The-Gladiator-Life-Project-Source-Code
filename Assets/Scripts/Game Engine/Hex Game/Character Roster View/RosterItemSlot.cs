@@ -55,7 +55,6 @@ namespace HexGameEngine.UI
             {
                 ItemPopupController.Instance.OnInventoryItemMouseExit();
                 ItemController.Instance.HandleSendItemFromCharacterToInventory(CharacterRosterViewController.Instance.CharacterCurrentlyViewing, this);
-
             }
           
         }

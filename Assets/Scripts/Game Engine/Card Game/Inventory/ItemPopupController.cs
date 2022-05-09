@@ -38,6 +38,10 @@ namespace HexGameEngine.Items
         [Header("Row 4 Components")]
         [SerializeField] GameObject effectsParent;
         [SerializeField] TextMeshProUGUI effectsText;
+
+        [Header("Armour Components")]
+        [SerializeField] GameObject armourParent;
+        [SerializeField] TextMeshProUGUI armourText;
         #endregion
 
         // Getters + Accessors
@@ -161,6 +165,9 @@ namespace HexGameEngine.Items
 
             // Row 4
             BuildGrantedEffectsSection(item);
+
+            // Armour Section
+            BuildArmourSection(item);
         }
         private string GetItemTypeString(ItemData item)
         {
@@ -198,6 +205,15 @@ namespace HexGameEngine.Items
                
             }
         }
+        private void BuildArmourSection(ItemData item)
+        {
+            armourParent.SetActive(false);
+            if(item.armourAmount != 0)
+            {
+                armourParent.SetActive(true);
+                armourText.text = item.armourAmount.ToString();
+            }
+        }
         private void BuildGrantedEffectsSection(ItemData item)
         {
             effectsParent.SetActive(false);
@@ -223,7 +239,7 @@ namespace HexGameEngine.Items
                     else if (item.itemEffects[i].effectType == ItemEffectType.OnHitEffect)
                     {
                         effectsText.text += "- On hit: Apply " + TextLogic.ReturnColoredText(item.itemEffects[i].perkApplied.passiveStacks.ToString(),TextLogic.blueNumber) + " " +
-                            TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(item.itemEffects[i].perkApplied.perkTag.ToString()), TextLogic.blueNumber) + " (" +
+                            TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(item.itemEffects[i].perkApplied.perkTag.ToString()), TextLogic.neutralYellow) + " (" +
                             item.itemEffects[i].effectChance.ToString() + "% chance).";
                     }
                     else if (item.itemEffects[i].effectType == ItemEffectType.GainPerk)

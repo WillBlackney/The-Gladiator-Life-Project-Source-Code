@@ -837,11 +837,11 @@ namespace HexGameEngine.Combat
                 CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Shadowcraft, 1))
                 totalResistance -= CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Shadowcraft) * 15;
             
+            // Roll for resist
             int roll = RandomGenerator.NumberBetween(1, 100);
             if(roll <= totalResistance)            
                 didResist = true;            
 
-            // make sure to check that attacker is not null before doing checks there
             Debug.Log("Target rolled " + roll.ToString() + " and needed " + totalResistance.ToString() + " or less. Resisted = " + didResist.ToString());
             return didResist;
         }

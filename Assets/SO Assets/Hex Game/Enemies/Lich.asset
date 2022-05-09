@@ -36,7 +36,7 @@ MonoBehaviour:
       value: 25
       stars: 0
     wits:
-      value: 0
+      value: 5
       stars: 0
     maxHealth: 100
     energyRecovery: 8

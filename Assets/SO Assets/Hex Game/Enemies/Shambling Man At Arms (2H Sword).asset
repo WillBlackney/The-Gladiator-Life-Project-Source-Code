@@ -36,7 +36,7 @@ MonoBehaviour:
       value: 0
       stars: 0
     wits:
-      value: 0
+      value: 5
       stars: 0
     maxHealth: 0
     energyRecovery: 8
@@ -73,6 +73,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 2
         energyReq: 0
+        alliesAlive: 0
     - action:
         actionType: 1
         targettingPriority: 1

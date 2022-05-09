@@ -36,7 +36,7 @@ MonoBehaviour:
       value: 10
       stars: 0
     wits:
-      value: 0
+      value: 5
       stars: 0
     maxHealth: 50
     energyRecovery: 8
@@ -52,6 +52,7 @@ MonoBehaviour:
     stressResistance: 0
     injuryResistance: 0
     deathResistance: 0
+  baseArmour: 0
   randomizeHealth: 1
   lowerHealthLimit: 70
   upperHealthLimit: 75
@@ -79,6 +80,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        alliesAlive: 0
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: e7bbef8e195ca0a429df7f1da90b09ec, type: 2}

@@ -287,6 +287,14 @@ namespace HexGameEngine.Items
                 InventoryController.Instance.AddItemToInventory(new InventoryItem(previousItem), false, index);
             }
 
+            // Check if equipping 2H item while using two 1h items: send off hand to inventory too
+            if(newItem.itemData.handRequirement == HandRequirement.TwoHanded &&
+                character.itemSet.offHandItem != null)
+            {
+                InventoryController.Instance.AddItemToInventory(new InventoryItem(character.itemSet.offHandItem), false, index);
+                character.itemSet.offHandItem = null;
+            }
+
             // Main hand
             if (slot.SlotType == RosterSlotType.MainHand)            
                 character.itemSet.mainHandItem = newItem.itemData;            

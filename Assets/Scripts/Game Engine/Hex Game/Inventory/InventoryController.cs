@@ -207,9 +207,9 @@ namespace HexGameEngine.Items
 
         // Conditional Checks
         #region
-        public bool HasFreeInventorySpace()
+        public bool HasFreeInventorySpace(int freeSpace = 1)
         {
-            return inventory.Count < maxInventorySize;
+            return inventory.Count + freeSpace <= maxInventorySize;
         }
         public bool IsItemValidOnSlot(ItemData item, RosterItemSlot slot, HexCharacterData character = null)
         {
@@ -236,6 +236,7 @@ namespace HexGameEngine.Items
             }
 
             // check if adding offhand item while holding a 2h item in the main hand (not allowed)
+            /*
             if(character != null)
             {
                 if(character.itemSet.mainHandItem != null &&
@@ -252,6 +253,7 @@ namespace HexGameEngine.Items
                     return false;
                 }
             }
+            */
 
             Debug.LogWarning("IsItemValidOnSlot() returning " + bRet.ToString());
 

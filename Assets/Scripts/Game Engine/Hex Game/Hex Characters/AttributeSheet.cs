@@ -30,11 +30,11 @@ namespace HexGameEngine.Characters
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public Attribute resolve = new Attribute(0, 0);
+        public Attribute resolve = new Attribute(5, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public Attribute wits = new Attribute(0, 0);
+        public Attribute wits = new Attribute(5, 0);
 
 
         [BoxGroup("Secondary Attributes", centerLabel: true)]
