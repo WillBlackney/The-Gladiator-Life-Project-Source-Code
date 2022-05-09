@@ -10,6 +10,6 @@ namespace HexGameEngine.Perks
     public class PerkPairingData
     {
         public Perk perkTag;
-        public int passiveStacks;
+        public int passiveStacks = 1;
     }
 }
