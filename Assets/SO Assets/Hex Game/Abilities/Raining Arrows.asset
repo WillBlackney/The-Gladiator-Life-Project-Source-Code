@@ -119,7 +119,7 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 1
     abilityEffectType: 3
     phrase: 
-  - color: 9
+  - color: 4
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: ' Physical '

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Guerilla Tunic
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 21300000, guid: 7bf39500bbc2fa0409be0b0d7fdb973d, type: 3}
   itemName: Guerilla Tunic
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 2

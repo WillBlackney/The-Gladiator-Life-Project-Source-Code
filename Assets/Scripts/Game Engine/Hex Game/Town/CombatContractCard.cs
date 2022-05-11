@@ -135,7 +135,7 @@ namespace HexGameEngine.TownFeatures
             itemImage.sprite = data.combatRewardData.item.ItemSprite;
 
         }
-        private void ResetAndHide()
+        public void ResetAndHide()
         {
             gameObject.transform.parent.gameObject.SetActive(false);
             gameObject.SetActive(false);
@@ -145,13 +145,13 @@ namespace HexGameEngine.TownFeatures
             bossSkullsParent.SetActive(false);
             enemiesText.text = "";
         }
-        public static void HandleDeselect()
+        public static void HandleDeselect(float speed = 0.25f)
         {
             TownController.Instance.SetDeploymentButtonReadyState(false);
             if (selectectedCombatCard != null)
             {
                 selectectedCombatCard.gameObject.transform.DOKill();
-                selectectedCombatCard.gameObject.transform.DOScale(1f, 0.25f);
+                selectectedCombatCard.gameObject.transform.DOScale(1f, speed);
                 selectectedCombatCard.glowOutline.SetActive(false);
                 selectectedCombatCard = null;
             }

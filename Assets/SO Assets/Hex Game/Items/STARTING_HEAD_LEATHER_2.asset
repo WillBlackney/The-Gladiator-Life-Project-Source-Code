@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: STARTING_HEAD_LEATHER_2
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: aca0122ae825eb44cbd1b12213ae6fe0, type: 3}
+  itemSprite: {fileID: 21300000, guid: 94d29c0443613e6428205ff5ae3df53b, type: 3}
   itemName: Red Mask
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 1

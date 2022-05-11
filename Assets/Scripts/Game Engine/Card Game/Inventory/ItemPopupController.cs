@@ -228,12 +228,17 @@ namespace HexGameEngine.Items
                     // need to update this when we add item effects that arent stat boosts
                     if(item.itemEffects[i].effectType == ItemEffectType.ModifyAttribute)
                     {
+                        string col = TextLogic.blueNumber;
                         string symbol = " +";
-                        if (item.itemEffects[i].modAmount < 0) symbol = " -";
+                        if (item.itemEffects[i].modAmount < 0)
+                        {
+                            col = TextLogic.lightRed;
+                            symbol = " ";
+                        }
                         effectsText.text += "- " + TextLogic.SplitByCapitals(item.itemEffects[i].attributeModified.ToString()) +
                            TextLogic.ReturnColoredText(
                            symbol +
-                           item.itemEffects[i].modAmount.ToString(), TextLogic.blueNumber);
+                           item.itemEffects[i].modAmount.ToString(), col);
                     }               
                        
                     else if (item.itemEffects[i].effectType == ItemEffectType.OnHitEffect)

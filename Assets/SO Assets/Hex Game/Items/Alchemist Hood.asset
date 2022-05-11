@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Alchemist Hood
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 21300000, guid: cd3c14aa26b112940a592e9c954e98a2, type: 3}
   itemName: Alchemist Hood
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 1

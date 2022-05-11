@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Death Knight Plate
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 21300000, guid: 9c13034733c75cc4dace5eee60437bd5, type: 3}
   itemName: Death Knight Plate
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 2

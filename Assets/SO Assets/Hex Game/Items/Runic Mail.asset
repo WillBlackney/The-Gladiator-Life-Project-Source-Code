@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Runic Mail
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 21300000, guid: 819599f50e83a424bb45b72518fd35d9, type: 3}
   itemName: Runic Mail
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 2

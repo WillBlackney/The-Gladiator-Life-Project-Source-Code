@@ -756,10 +756,17 @@ namespace HexGameEngine.TownFeatures
             // On normal days, generate 2 basics and 1 elite combat
             if (RunController.Instance.CurrentDay != 5)
             {
-                for (int i = 0; i < 2; i++)
-                {
+                // Generate 2 basic encounters
+                List<EnemyEncounterSO> validBasics = RunController.Instance.GetCombatData
+                    (2, RunController.Instance.CurrentChapter, CombatDifficulty.Basic).ShuffledCopy();
+                foreach(var encounter in validBasics)                
+                    currentDailyCombatContracts.Add(GenerateCombatContractFromData(encounter));
+                
+                /*
+                for (int i = 0; i < 2; i++)                
                     currentDailyCombatContracts.Add(GenerateRandomDailyCombatContract(RunController.Instance.CurrentChapter, CombatDifficulty.Basic));
-                }
+                */
+                // Generate an elite encounter
                 currentDailyCombatContracts.Add(GenerateRandomDailyCombatContract(RunController.Instance.CurrentChapter, CombatDifficulty.Elite));
 
             }
@@ -769,6 +776,13 @@ namespace HexGameEngine.TownFeatures
             {
                 currentDailyCombatContracts.Add(GenerateRandomDailyCombatContract(RunController.Instance.CurrentChapter, CombatDifficulty.Boss));
             }
+        }
+        private CombatContractData GenerateCombatContractFromData(EnemyEncounterSO data)
+        {
+            CombatContractData ret = new CombatContractData();
+            ret.enemyEncounterData = RunController.Instance.GenerateEnemyEncounterFromTemplate(data);
+            ret.combatRewardData = new CombatRewardData(data.difficulty);
+            return ret;
         }
         private CombatContractData GenerateRandomDailyCombatContract(int currentAct, CombatDifficulty difficulty)
         {
@@ -780,12 +794,16 @@ namespace HexGameEngine.TownFeatures
         private void BuildAndShowCombatContractPage()
         {
             chooseCombatPageMainVisualParent.SetActive(true);
-            for (int i = 0; i < currentDailyCombatContracts.Count && i < allContractCards.Length; i++)
-            {
-                allContractCards[i].BuildFromContractData(currentDailyCombatContracts[i]);
-            }
 
-            CombatContractCard.HandleDeselect();
+            // Reset contract cards
+            for (int i = 0; i < allContractCards.Length; i++)
+                allContractCards[i].ResetAndHide();
+
+            // Rebuild from daily contract data
+            for (int i = 0; i < currentDailyCombatContracts.Count && i < allContractCards.Length; i++)            
+                allContractCards[i].BuildFromContractData(currentDailyCombatContracts[i]);            
+
+            CombatContractCard.HandleDeselect(0f);
         }
         private void HideCombatContractPage()
         {

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Angelic Robes
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 21300000, guid: ebd8316e96b941b4d8736ac3d8b122fc, type: 3}
   itemName: Angelic Robes
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 2

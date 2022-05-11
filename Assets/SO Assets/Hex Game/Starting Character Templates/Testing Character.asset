@@ -18,13 +18,13 @@ MonoBehaviour:
   modelSize: 0
   attributeSheet:
     strength:
-      value: 0
+      value: 500
       stars: 0
     intelligence:
       value: 0
       stars: 0
     constitution:
-      value: 0
+      value: 1000
       stars: 0
     dodge:
       value: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
     wits:
       value: 5
       stars: 0
-    maxHealth: 1000
+    maxHealth: 0
     energyRecovery: 50
     maxEnergy: 50
     initiative: 100
@@ -51,7 +51,7 @@ MonoBehaviour:
     debuffResistance: 0
     stressResistance: 0
     injuryResistance: 0
-    deathResistance: 100
+    deathResistance: 25
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 06f22294614248946a629ab645bc6650, type: 2}

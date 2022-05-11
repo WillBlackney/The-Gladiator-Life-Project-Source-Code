@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Crusader Plate
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 21300000, guid: 28d332865655f9846aee3a2f9124eb7f, type: 3}
   itemName: Crusader Full Helm
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 2

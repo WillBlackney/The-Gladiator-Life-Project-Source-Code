@@ -165,15 +165,7 @@ namespace HexGameEngine.JourneyLogic
                     foreach(EnemyEncounterSO encounter in set.possibleEnemyEncounters)
                     {
                         validCombats.Add(encounter);
-                        /*
-                        if (!HasCombatAlreadyBeenEncountered(encounter.encounterName) ||
-                            HasCombatAlreadyBeenEncountered(encounter.encounterName))
-                        {
-                            validCombats.Add(encounter);
-                        }
-                        */
-                    }
-                    
+                    }                    
 
                     // No unseen combats in the set, just give one the player has already seen
                     if (validCombats.Count == 0)                        
@@ -193,6 +185,22 @@ namespace HexGameEngine.JourneyLogic
 
             return ret;
 
+        }
+        public List<EnemyEncounterSO> GetCombatData(int amount, int currentAct, CombatDifficulty difficulty)
+        {
+            List<EnemyEncounterSO> ret = new List<EnemyEncounterSO>();
+            foreach (EnemyEncounterSet set in allCombatEncounterSets)
+            {
+                if (currentAct >= set.actRangeLower &&
+                    currentAct <= set.actRangeUpper &&
+                    set.combatDifficulty == difficulty)
+                {
+                    for (int i = 0; i < amount; i++)
+                        ret.Add(set.possibleEnemyEncounters[i]);
+                    break;
+                }
+            }
+            return ret;
         }
         public EnemyEncounterData GenerateEnemyEncounterFromTemplate(EnemyEncounterSO template)
         {

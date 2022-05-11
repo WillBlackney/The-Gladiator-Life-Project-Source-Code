@@ -140,11 +140,11 @@ namespace HexGameEngine.Utilities
         }       
         public bool ShowRandomizeCharacters()
         {
-            return gameMode == GameMode.CombatSandbox;
+            return (gameMode == GameMode.CombatSandbox || gameMode == GameMode.TownSandbox);
         }
         public bool ShowChosenCharacterTemplates()
         {
-            return gameMode == GameMode.CombatSandbox && randomizePlayerCharacters == false;
+            return (gameMode == GameMode.CombatSandbox || gameMode == GameMode.TownSandbox) && randomizePlayerCharacters == false;
         }
         public bool ShowTotalCharacters()
         {
