@@ -587,7 +587,7 @@ namespace HexGameEngine.Combat
             }
             
         }
-        
+
         #endregion
 
         // Rolls + Critical Logic
@@ -596,9 +596,17 @@ namespace HexGameEngine.Combat
         {
             HitChanceDataSet ret = new HitChanceDataSet();
 
+            // Check turtle aspect => unable to dodge attacks
+            if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.TurtleAspect))
+            {
+                ret.details.Add(new HitChanceDetailData("Turtle Aspect", 100));
+                ret.guaranteedHit = true;
+                return ret;
+            }
+
             // Base hit chance
-            //int baseHitMod = GlobalSettings.Instance.BaseHitChance;
-            //if (baseHitMod != 0) ret.details.Add(new HitChanceDetailData("Base Hit Chance", baseHitMod));
+            int baseHitMod = GlobalSettings.Instance.BaseHitChance;
+            if (baseHitMod != 0) ret.details.Add(new HitChanceDetailData("Base Hit Chance", baseHitMod));
 
             // Target Dodge
             int dodgeMod = -StatCalculator.GetTotalDodge(target);
@@ -703,7 +711,7 @@ namespace HexGameEngine.Combat
                 if (distanceMod != 0) ret.details.Add(new HitChanceDetailData("Distance Penalty", distanceMod));
             }
 
-            // Attacks never have less than 5% chance to hit, or more than 95% to hit.
+            // Check guaranteed hit effect for abilities
             if (ability != null && ability.abilityEffects[0] != null &&
                 ability.abilityEffects[0].guaranteedHit)
             {
@@ -716,27 +724,17 @@ namespace HexGameEngine.Combat
         {
             HitRollResult result;
             int hitRoll = RandomGenerator.NumberBetween(1, 100);
-            int hitChance = GetHitChance(attacker, target, ability).FinalHitChance;
-
-            // clamp hit between 95% and 5%
-            if (hitChance > 95)
-                hitChance = 95;
-            else if (hitChance < 5)
-                hitChance = 5;
+            var hitData = GetHitChance(attacker, target, ability);
 
             // Check turtle aspect => unable to dodge attacks
+            /*
             if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.TurtleAspect))
-                result = HitRollResult.Hit;
+                result = HitRollResult.Hit;*/
 
-            else if(hitRoll <= hitChance)
-            {
-                result = HitRollResult.Hit;
-            }
-            else
-            {
-                // to do: determine if it was a miss or a dodge.
-                result = HitRollResult.Miss;
-            }
+            if(hitRoll <= hitData.FinalHitChance || hitData.guaranteedHit)            
+                result = HitRollResult.Hit;            
+            else            
+                result = HitRollResult.Miss;            
 
             HitRoll rollReturned = new HitRoll(hitRoll, result, attacker, target);         
 
@@ -844,8 +842,7 @@ namespace HexGameEngine.Combat
 
             Debug.Log("Target rolled " + roll.ToString() + " and needed " + totalResistance.ToString() + " or less. Resisted = " + didResist.ToString());
             return didResist;
-        }
-        
+        }        
       
         #endregion
 
@@ -947,28 +944,28 @@ namespace HexGameEngine.Combat
             if (!removedBarrier && 
                 totalDamage > 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Block))
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Block, -1, false);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Block, -1);
 
             // Check Vulnerable
             if (!removedBarrier &&
                 totalDamage > 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Vulnerable))
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Vulnerable, -1, false);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Vulnerable, -1);
 
             // Check Evasion
             if (ability != null &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Evasion))
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Evasion, -1, false);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Evasion, -1);
 
             // Check Crippled
             if (ability != null &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Crippled))
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Crippled, -1, false);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Crippled, -1);
 
             // Check Stealth
             if (ability != null &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stealth))
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Stealth, -1, false);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Stealth, -1);
 
             // On hit effects
             // Ignited weapon => apply burning
@@ -1020,7 +1017,7 @@ namespace HexGameEngine.Combat
                 HandleDamage(attacker, dr, DamageType.Physical, false);
 
                 // Remove a stack of thorns from target
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Thorns, -1, false);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Thorns, -1);
             }
 
             // Storm Shield
@@ -1035,7 +1032,7 @@ namespace HexGameEngine.Combat
                 HandleDamage(attacker, dr, DamageType.Magic, false);
 
                 // Remove a stack of thorns from target
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.StormShield, -1, false);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.StormShield, -1);
             }
 
 

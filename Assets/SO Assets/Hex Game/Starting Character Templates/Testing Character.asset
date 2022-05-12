@@ -18,7 +18,7 @@ MonoBehaviour:
   modelSize: 0
   attributeSheet:
     strength:
-      value: 500
+      value: 0
       stars: 0
     intelligence:
       value: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
       value: 1000
       stars: 0
     dodge:
-      value: 0
+      value: 1000
       stars: 0
     accuracy:
       value: 200
@@ -56,14 +56,16 @@ MonoBehaviour:
     activeAbilities:
     - {fileID: 11400000, guid: 06f22294614248946a629ab645bc6650, type: 2}
   serializedPassiveManager:
-    perks: []
+    perks:
+    - perkTag: 119
+      stacks: 3
   modelParts:
   - Ghoul_Chest
   - Undead_Face_6
   - Undead_Head_4
   - Ghoul_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: c420762d59a4b8f4788afabeee27eb35, type: 2}
+    mainHandItem: {fileID: 11400000, guid: bcda3a1ec0dfdfe469dfdd16aabf8736, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: 335c81cb722666345aa6c308b1d780f5, type: 2}
     chestArmour: {fileID: 11400000, guid: 885404dfa0107114abd21b026368a161, type: 2}

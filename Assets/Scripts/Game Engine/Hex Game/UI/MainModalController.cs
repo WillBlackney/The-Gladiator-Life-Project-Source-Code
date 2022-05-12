@@ -414,6 +414,7 @@ namespace HexGameEngine.UI
         Gold = 30,
         
         Armour = 31,
+        UnusedLevelUp = 32,
        
 
     }

@@ -38,7 +38,6 @@ namespace HexGameEngine.Combat
 
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                ClearPath();
                 clickedHex = null;
                 ResetSelectionState();
             }
@@ -96,7 +95,7 @@ namespace HexGameEngine.Combat
                 clickedHex = hexClicked;
                 currentPath = p;
 
-                // Sho move markers for each tile on the path
+                // Show move markers for each tile on the path
                 foreach(LevelNode h in currentPath.HexsOnPath)
                 {
                     h.ShowMoveMarker();
@@ -115,11 +114,17 @@ namespace HexGameEngine.Combat
                 tilesMovedFrom.Remove(p.Destination);
 
                 // Determine which characters are able to free strike the tile.
-                foreach(LevelNode h in tilesMovedFrom)
+                HexCharacterController.Instance.HideAllFreeStrikeIndicators();
+                foreach (LevelNode h in tilesMovedFrom)
                 {
+                    // Enemies dont free strike when a character moves through an ally
+                    if (h.myCharacter != null && h.myCharacter != character)
+                        continue;
+
                     List<LevelNode> meleeTiles = LevelController.Instance.GetAllHexsWithinRange(h, 1);
                     foreach(LevelNode meleeHex in meleeTiles)
-                    {
+                    {                       
+                        // Check validity of free strike
                         if(meleeHex.myCharacter != null &&
                             !HexCharacterController.Instance.IsTargetFriendly(character, meleeHex.myCharacter) &&
                              HexCharacterController.Instance.IsCharacterAbleToMakeFreeStrikes(meleeHex.myCharacter) &&

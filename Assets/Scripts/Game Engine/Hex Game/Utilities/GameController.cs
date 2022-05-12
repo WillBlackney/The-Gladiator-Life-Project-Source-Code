@@ -532,7 +532,7 @@ namespace HexGameEngine
 
             // Fade out battle music + ambience
             AudioManager.Instance.FadeOutAllCombatMusic(2f);
-            AudioManager.Instance.FadeOutAllAmbience(2f);
+            AudioManager.Instance.FadeOutAllAmbience(2f);          
 
             // Do black screen fade out
             BlackScreenController.Instance.FadeOutScreen(2f);
@@ -542,6 +542,9 @@ namespace HexGameEngine
 
             // Wait till its safe to tearn down event queue and scene
             yield return new WaitForSeconds(2f);
+
+            // Pause run timer
+            RunController.Instance.PauseTimer();
 
             // Hide Game GUI
             TopBarController.Instance.HideTopBar();
@@ -560,15 +563,9 @@ namespace HexGameEngine
             LevelController.Instance.HandleTearDownCombatViews();
             LightController.Instance.EnableStandardGlobalLight();
 
-            // Hide world map + roster
-            //MapView.Instance.HideMainMapView();
+            // Hide UI + level views
             CharacterRosterViewController.Instance.HideCharacterRosterScreen();
-
-            // Hide Draft event elements
-            //DraftEventController.Instance.HideMainViewParent();
             LevelController.Instance.DisableArenaView();
-
-            // Hide post combat views
             CombatRewardController.Instance.HideGameOverScreen();
             CombatRewardController.Instance.HidePostCombatRewardScreen();
 

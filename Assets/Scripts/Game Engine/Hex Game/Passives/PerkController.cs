@@ -432,13 +432,14 @@ namespace HexGameEngine.Perks
                     }                   
                 }
 
+                /*
                 else if (stacksAppliedActual < 0 && newFinalStackcount == 0 && showVFX)
                 {
                     VisualEventManager.Instance.CreateVisualEvent(() =>
                     {
                         VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName + " Removed!");
                     }, QueuePosition.Back, 0, 0.5f, character.GetLastStackEventParent());
-                }
+                }*/
 
                 // Create brief delay
                 if (showVFX)

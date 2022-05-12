@@ -54,9 +54,9 @@ namespace HexGameEngine.UI
         public void BuildAndShowPanel()
         {
             ShowMainView();
-            BuildViews(CharacterDataController.Instance.AllPlayerCharacters);
+            RebuildViews(CharacterDataController.Instance.AllPlayerCharacters);
         }
-        public void BuildViews(List<HexCharacterData> characters = null)
+        public void RebuildViews(List<HexCharacterData> characters = null)
         {
             if (characters == null) characters = CharacterDataController.Instance.AllPlayerCharacters;
 
@@ -73,8 +73,7 @@ namespace HexGameEngine.UI
             {
                 allCharacterPanels[i].Show();
                 allCharacterPanels[i].BuildFromCharacterData(characters[i]);
-            }
-               
+            }              
 
             RebuildFitters();
         }

@@ -898,7 +898,7 @@ namespace HexGameEngine.Characters
                     
                     // Remove 1 stack of burning
                     if (character.currentHealth > 0)
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Burning, -1, false);
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Burning, -1);
                     
                 }
 
@@ -916,7 +916,7 @@ namespace HexGameEngine.Characters
 
                     // Remove 1 stack of bleeding
                     if (character.currentHealth > 0)
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Bleeding, -1, false);
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Bleeding, -1);
 
 
                 }
@@ -1609,6 +1609,7 @@ namespace HexGameEngine.Characters
         }
         public void HideAllFreeStrikeIndicators()
         {
+            Debug.Log("HexCharacterController.HideAllFreeStrikeIndicators() called...");
             foreach(HexCharacterModel c in AllCharacters)
             {
                 if(c.hexCharacterView != null)

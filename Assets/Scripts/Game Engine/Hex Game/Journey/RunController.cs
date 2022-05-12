@@ -17,12 +17,22 @@ namespace HexGameEngine.JourneyLogic
     {
         // Properties + Component Refs
         #region
+        [Header("Run Timer Components")]
+        [Tooltip("When disabled, the game will not track or display the play time duration of the player's runs")]
+        [SerializeField] private bool disableRunTiming = false;
+        [SerializeField] private TextMeshProUGUI runTimerText;
+        [SerializeField] private GameObject runTimerVisualParent;
+        [Space(10)]      
+
         [Header("Combat Encounter Data")]
-        [SerializeField] private EnemyEncounterSet[] allCombatEncounterSets;
+        [SerializeField] private EnemyEncounterSet[] allCombatEncounterSets;       
 
         // Non inspector fields     
-        public List<CharacterWithSpawnData> currentDeployedCharacters = new List<CharacterWithSpawnData>();
+        private List<CharacterWithSpawnData> currentDeployedCharacters = new List<CharacterWithSpawnData>();
+        private float runTimer = 0f;
+        private bool updateTimer = false;
         #endregion
+
 
         // Getters + Accessors
         #region
@@ -48,7 +58,9 @@ namespace HexGameEngine.JourneyLogic
             CurrentCombatContractData = saveData.currentCombatContractData;
             CurrentDeployedCharacters = saveData.playerCombatCharacters;
             SetCheckPoint(saveData.saveCheckPoint);
+            runTimer = saveData.runTimer;
 
+            StartTimer();
             UpdateDayAndChapterTopbarText();
         }
         public void SaveMyDataToSaveFile(SaveGameData saveFile)
@@ -58,17 +70,20 @@ namespace HexGameEngine.JourneyLogic
             saveFile.currentCombatContractData = CurrentCombatContractData;
             saveFile.saveCheckPoint = SaveCheckPoint;
             saveFile.playerCombatCharacters = CurrentDeployedCharacters;
+            saveFile.runTimer = runTimer;
         }
         public void SetGameStartValues()
         {
             CurrentDay = 1;
             CurrentChapter = 1;
+            runTimer = 0;
             if(GlobalSettings.Instance.GameMode != GameMode.Standard)
             {
                 CurrentDay = GlobalSettings.Instance.StartingDay;
                 CurrentChapter = GlobalSettings.Instance.StartingChapter;
             }
             SetCheckPoint(SaveCheckPoint.Town);
+            StartTimer();
             CurrentCombatContractData = null;
         }
 
@@ -223,10 +238,39 @@ namespace HexGameEngine.JourneyLogic
 
             return ret;
         }
-        
+
         #endregion
 
-      
+        // Run Timer Logic
+        #region       
+        private void Update()
+        {
+            if (!disableRunTiming && updateTimer) UpdateTimer();            
+        }
+        private void UpdateTimer()
+        {
+            runTimer += Time.deltaTime;
+
+            int seconds = (int)(runTimer % 60);
+            int minutes = (int)(runTimer / 60) % 60;
+            int hours = (int)(runTimer / 3600) % 24;
+
+            string runTimerString = string.Format("{0:0}:{1:00}:{2:00}", hours, minutes, seconds);
+            runTimerText.text = runTimerString;
+        }
+        public void StartTimer()
+        {
+            runTimerVisualParent.SetActive(true);
+            updateTimer = true;
+        }
+        public void PauseTimer()
+        {
+            runTimerVisualParent.SetActive(false);
+            updateTimer = false;
+        }
+        #endregion
+
+
 
 
     }

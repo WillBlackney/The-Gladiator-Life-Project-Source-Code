@@ -82,23 +82,24 @@ namespace HexGameEngine.UI
             draggedCharacterData = null;
             draggedNode = null;
         }
-        private void BuildAndShowPortrait(List<string> modelParts)
+        private void BuildAndShowPortrait(HexCharacterData character)
         {
             followMouseParent.SetActive(true);
-            CharacterModeller.BuildModelFromStringReferencesAsMugshot(potraitUcm, modelParts);
+            CharacterModeller.BuildModelFromStringReferencesAsMugshot(potraitUcm, character.modelParts);
+            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, potraitUcm);
         }
         public void OnRosterCharacterPanelDragStart(RosterCharacterPanel panel)
         {
             if (!TownController.Instance.IsCharacterDraggableFromRosterToDeploymentNode(panel.MyCharacterData) ||
                 TownController.Instance.IsCharacterPlacedInHospital(panel.MyCharacterData)) return;
 
-            BuildAndShowPortrait(panel.MyCharacterData.modelParts);
+            BuildAndShowPortrait(panel.MyCharacterData);
             draggedCharacterData = panel.MyCharacterData;
         }
         public void OnDeploymentNodeDragStart(DeploymentNodeView node)
         {
             if (node.MyCharacterData == null) return;
-            BuildAndShowPortrait(node.MyCharacterData.modelParts);
+            BuildAndShowPortrait(node.MyCharacterData);
             draggedCharacterData = node.MyCharacterData;
             draggedNode = node;
             node.SetUnoccupiedState();

@@ -445,17 +445,22 @@ namespace HexGameEngine.Abilities
                 ability.abilityType == AbilityType.RangedAttack)
             {
                 if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Wrath))                
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Wrath, -1, false);                
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Wrath, -1);                
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Weakened))                
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Weakened, -1, false);
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Weakened, -1);
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Focus))
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Focus, -1, false);
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Focus, -1);
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Blinded))
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Blinded, -1, false);
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Blinded, -1);
             }
 
 
-            // REMOVE evasion if target not null (it wont work properly here on AoE abiities like cleave though)
+            if(ability.abilityName == "Riposte")
+            {
+                Debug.Log("Removing riposte");
+                // Remove a riposte stack
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Riposte, -1);
+            }
 
         }
         private void TriggerAbilityEffect(AbilityData ability, AbilityEffect abilityEffect, HexCharacterModel caster, HexCharacterModel target, LevelNode tileTarget = null, HexCharacterModel previousChainTarget = null)
@@ -512,7 +517,7 @@ namespace HexGameEngine.Abilities
 
                // VisualEventManager.Instance.CreateStackParentVisualEvent(target);
 
-                if (hitResult.Result == HitRollResult.Hit || abilityEffect.guaranteedHit)
+                if (hitResult.Result == HitRollResult.Hit)
                 {
                     DamageResult damageResult = null;
                     damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(caster, target, ability, abilityEffect, didCrit);
@@ -634,8 +639,7 @@ namespace HexGameEngine.Abilities
                         UseAbility(target, RiposteAbility, caster);
                         VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
 
-                        // Remove a riposte stack
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(caster.pManager, Perk.Riposte, -1, false);
+                        
                     }                       
                 }
                 
@@ -704,8 +708,7 @@ namespace HexGameEngine.Abilities
                     // Roll for hit
                     HitRoll hitRoll = CombatController.Instance.RollForHit(caster, character, ability);                   
 
-                    if (hitRoll.Result == HitRollResult.Hit ||
-                        abilityEffect.guaranteedHit)
+                    if (hitRoll.Result == HitRollResult.Hit)
                     {
                         charactersHit.Add(character);
 
@@ -1248,7 +1251,7 @@ namespace HexGameEngine.Abilities
 
             // Check shed perk: remove if ability used was an aspect ability
             if (ability.abilityName.Contains("Aspect") && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
-                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Shed, -1, false);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Shed, -1);
 
             // Increment skills used this turn
             if (ability.abilityType == AbilityType.Skill)            
@@ -1265,7 +1268,7 @@ namespace HexGameEngine.Abilities
             if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Stealth) &&
                 ability.doesNotBreakStealth == false)
             {
-                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Stealth, -1, false);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Stealth, -1);
             }
         }
         private void SetAbilityOnCooldown(AbilityData ability)

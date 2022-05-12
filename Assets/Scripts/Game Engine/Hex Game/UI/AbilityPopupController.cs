@@ -216,6 +216,15 @@ namespace HexGameEngine.UI
         private void BuildEnergyCostSection(AbilityData data)
         {
             energyCostText.text = data.energyCost.ToString();
+            if(data.myCharacter != null)
+            {
+                string col = TextLogic.white;
+                int baseCost = data.energyCost;
+                int dynamicCost = AbilityController.Instance.GetAbilityEnergyCost(data.myCharacter, data);
+                if (baseCost > dynamicCost) col = TextLogic.lightGreen;
+                else if (baseCost < dynamicCost) col = TextLogic.lightRed;
+                energyCostText.text = TextLogic.ReturnColoredText(AbilityController.Instance.GetAbilityEnergyCost(data.myCharacter, data).ToString(), col);
+            }
         }
         private void BuildAbilityTypeComponents(AbilityData data)
         {

@@ -21,6 +21,7 @@ namespace HexGameEngine.Persistency
         public int currentChapter;
         public SaveCheckPoint saveCheckPoint;
         public EncounterType currentEncounterType;
+        public float runTimer;
 
         public CombatContractData currentCombatContractData;
         public List<CharacterWithSpawnData> playerCombatCharacters = new List<CharacterWithSpawnData>();

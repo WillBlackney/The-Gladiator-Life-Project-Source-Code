@@ -380,8 +380,6 @@ namespace HexGameEngine.HexTiles
                 {
                     if (adjacentTiles.Contains(c.currentTile) &&
                         HexCharacterController.Instance.IsCharacterAbleToMakeFreeStrikes(c) &&
-                        // prevent double free strike caused by character moving through an ally
-                        // (if destination's character is null, it must mean character is not moving through an ally)
                         destination.myCharacter == null)
                     {
                         freeStrikeEnemies.Add(c);
@@ -437,7 +435,7 @@ namespace HexGameEngine.HexTiles
 
             // Remove flight
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Flight))
-                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Flight, -1, false);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Flight, -1);
 
         }
         public void DoCharacterMoveVisualEvent(HexCharacterView view, LevelNode hex, CoroutineData cData, Action onCompleteCallback = null)

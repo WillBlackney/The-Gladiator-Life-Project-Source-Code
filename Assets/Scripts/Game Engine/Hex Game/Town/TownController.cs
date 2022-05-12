@@ -259,7 +259,7 @@ namespace HexGameEngine.TownFeatures
             BuildAndShowRecruitPage();
 
             // Rebuild character scroll roster
-            CharacterScrollPanelController.Instance.BuildViews();
+            CharacterScrollPanelController.Instance.RebuildViews();
         }
         private void BuildRecruitPageRightPanel(HexCharacterData character)
         {

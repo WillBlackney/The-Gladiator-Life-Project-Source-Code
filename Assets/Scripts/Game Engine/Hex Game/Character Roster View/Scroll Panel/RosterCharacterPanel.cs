@@ -34,6 +34,10 @@ namespace HexGameEngine.UI
         [SerializeField] private GameObject[] activityIndicatorParents;
         [SerializeField] private Image activityIndicatorImage;
 
+        [Header("Level Components")]
+        [SerializeField] private GameObject levelUpIndicator;
+        [SerializeField] private TextMeshProUGUI currentLevelText;
+
         // Non-inspector properties
         private HexCharacterData myCharacterData;
         #endregion
@@ -79,6 +83,10 @@ namespace HexGameEngine.UI
                     data.passiveManager.perks[i].Data.isPermanentInjury)
                     perkIcons[i].BuildFromActivePerk(data.passiveManager.perks[i]);
             }
+
+            // Level stuff
+            UpdateLevelUpIndicator();
+            currentLevelText.text = data.currentLevel.ToString();
         }
         public void UpdateActivityIndicator()
         {
@@ -91,6 +99,18 @@ namespace HexGameEngine.UI
                     activityIndicatorImage.sprite = SpriteLibrary.Instance.GetTownActivitySprite(slot.FeatureType);
                     break;
                 }
+            }
+        }
+        private void UpdateLevelUpIndicator()
+        {
+            if (myCharacterData == null) return;
+            levelUpIndicator.SetActive(false);
+            if (myCharacterData.attributeRolls.Count > 0 ||
+                myCharacterData.talentRolls.Count > 0 ||
+                myCharacterData.perkRolls.Count > 0)
+            {
+                Debug.Log("Showing indicator!");
+                levelUpIndicator.SetActive(true);
             }
         }
         public void Show()
