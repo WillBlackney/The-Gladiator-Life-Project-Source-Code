@@ -15,7 +15,7 @@ MonoBehaviour:
   myPreset: 29
   mainSprite: {fileID: 21300000, guid: c41417c04a58e8144a1ac36b7ec37550, type: 3}
   frameSprite: 0
-  headerName: Experience
+  headerName: Energy
   italicDescription: 0
   description:
   - color: 1
