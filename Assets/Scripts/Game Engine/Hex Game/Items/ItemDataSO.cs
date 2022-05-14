@@ -57,13 +57,18 @@ namespace HexGameEngine.Items
         [LabelWidth(100)]
         [Range(0, 50)]
         [ShowIf("ShowArmourFields")]
-        public int minArmourRoll;
+        public int minArmourRoll;             
 
         [BoxGroup("Armour Info")]
         [LabelWidth(100)]
         [Range(0, 50)]
         [ShowIf("ShowArmourFields")]
         public int maxArmourRoll;
+
+        [BoxGroup("Armour Info")]
+        [LabelWidth(100)]
+        [ShowIf("ShowArmourFields")]
+        public ItemArmourClass armourClass;
 
         [BoxGroup("Ability Info", true, true)]
         [LabelWidth(100)]

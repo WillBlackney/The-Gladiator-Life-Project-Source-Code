@@ -208,6 +208,13 @@ namespace HexGameEngine
 
     // Items
     #region
+    public enum ItemArmourClass
+    {
+        None = 0,
+        Light = 1,
+        Medium = 2,
+        Heavy = 3,
+    }
     public enum ItemType
     {
         None = 0,

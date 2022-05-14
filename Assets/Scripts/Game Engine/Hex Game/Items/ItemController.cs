@@ -128,6 +128,7 @@ namespace HexGameEngine.Items
 
             i.minArmourRoll = d.minArmourRoll;
             i.maxArmourRoll = d.maxArmourRoll;
+            i.armourClass = d.armourClass;
 
             foreach (AbilityDataSO ability in d.grantedAbilities)
             {
@@ -155,6 +156,7 @@ namespace HexGameEngine.Items
             i.armourAmount = original.armourAmount;
             i.minArmourRoll = original.minArmourRoll;
             i.maxArmourRoll = original.maxArmourRoll;
+            i.armourClass = original.armourClass;
 
             return i;
         }
@@ -199,6 +201,27 @@ namespace HexGameEngine.Items
                     validEffects.Shuffle();
                     ret.Add(validEffects[0]);
                 }
+            }
+
+            // to do: auto generate initiative + vision penalties/bonuses
+            if(itemData.itemType == ItemType.Head)
+            {
+                if (itemData.armourClass == ItemArmourClass.Light)
+                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, 1));
+
+                else if (itemData.armourClass == ItemArmourClass.Heavy)
+                {
+                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, -1));
+                    ret.Add(new ItemEffect(ItemCoreAttribute.Vision, -1));
+                }                   
+            }
+            else if (itemData.itemType == ItemType.Body)
+            {
+                if (itemData.armourClass == ItemArmourClass.Light)
+                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, 1));
+
+                else if (itemData.armourClass == ItemArmourClass.Heavy)                
+                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, -2));                
             }
 
 

@@ -9,6 +9,7 @@ namespace HexGameEngine.Items
     [System.Serializable]
     public class ItemEffect 
     {
+        #region Properties
         [Header("General Properties")]
         [LabelWidth(200)]
         public ItemEffectType effectType;
@@ -34,8 +35,18 @@ namespace HexGameEngine.Items
         [LabelWidth(200)]
         [ShowIf("ShowOnHitEffectFields")]
         public PerkPairingData perkApplied;
+        #endregion
 
-        // to do: on hit effects
+        #region Constructors
+        public ItemEffect() { }
+        public ItemEffect(ItemCoreAttribute attribute, int mod)
+        {
+            attributeModified = attribute;
+            modAmount = mod;
+        }
+        #endregion
+
+        #region Odin Show ifs
         public bool ShowOnHitEffectFields()
         {
             return effectType == ItemEffectType.OnHitEffect;
@@ -48,6 +59,7 @@ namespace HexGameEngine.Items
         {
             return effectType == ItemEffectType.GainPerk;
         }
+        #endregion
     }
 
     public enum ItemEffectType

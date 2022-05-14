@@ -112,7 +112,7 @@ namespace HexGameEngine.Items
         }
         #endregion
 
-        // Build + Place Panel
+        // Place + Position Panel
         #region
         private void PlacePanelAboveTransform(Transform t)
         {
@@ -127,7 +127,7 @@ namespace HexGameEngine.Items
             RectTransform rect = visualParent.GetComponent<RectTransform>();
             float xOffset = rect.rect.width / 2 + 80;
             float yOffset = 0;
-           
+
             rect.position = view.transform.position;
             rect.localPosition = new Vector3(rect.localPosition.x - xOffset, rect.localPosition.y - yOffset, 0);
         }
@@ -149,6 +149,11 @@ namespace HexGameEngine.Items
             rect.position = view.transform.position;
             rect.localPosition = new Vector3(rect.localPosition.x + xOffset, rect.localPosition.y - yOffset, 0);
         }
+        #endregion
+
+        // Build + Place Panel
+        #region
+
         private void BuildPanelFromItemData(ItemData item)
         {
             // Top row
@@ -182,9 +187,9 @@ namespace HexGameEngine.Items
             else if (item.itemType == ItemType.Trinket)
                 ret = "Trinket";
             else if (item.itemType == ItemType.Head)
-                ret = "Head Armour"; 
+                ret = item.armourClass.ToString() + " Head Armour"; 
             else if (item.itemType == ItemType.Body)
-                ret = "Chest Armour";
+                ret = item.armourClass.ToString() + " Chest Armour";
 
             return ret;
         }
