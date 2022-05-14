@@ -41,6 +41,7 @@ namespace HexGameEngine.Items
         public ItemEffect() { }
         public ItemEffect(ItemCoreAttribute attribute, int mod)
         {
+            effectType = ItemEffectType.ModifyAttribute;
             attributeModified = attribute;
             modAmount = mod;
         }

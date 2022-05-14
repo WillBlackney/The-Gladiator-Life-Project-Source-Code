@@ -25,6 +25,6 @@ MonoBehaviour:
   injuryTypesCaused: 
   minArmourRoll: 6
   maxArmourRoll: 6
-  armourClass: 0
+  armourClass: 1
   grantedAbilities: []
   itemEffectSets: []

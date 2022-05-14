@@ -25,6 +25,7 @@ MonoBehaviour:
   injuryTypesCaused: 01000000
   minArmourRoll: 12
   maxArmourRoll: 14
+  armourClass: 3
   grantedAbilities: []
   itemEffectSets:
   - possibleEffects:
@@ -112,28 +113,6 @@ MonoBehaviour:
     - effectType: 1
       attributeModified: 7
       modAmount: 5
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-  - possibleEffects:
-    - effectType: 1
-      attributeModified: 12
-      modAmount: -2
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-  - possibleEffects:
-    - effectType: 1
-      attributeModified: 15
-      modAmount: -1
       perkGained:
         perkTag: 0
         stacks: 0

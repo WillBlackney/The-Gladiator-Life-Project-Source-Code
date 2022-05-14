@@ -203,7 +203,8 @@ namespace HexGameEngine.Items
                 }
             }
 
-            // to do: auto generate initiative + vision penalties/bonuses
+            
+            // Auto generate initiative + vision penalties/bonuses
             if(itemData.itemType == ItemType.Head)
             {
                 if (itemData.armourClass == ItemArmourClass.Light)
@@ -211,7 +212,7 @@ namespace HexGameEngine.Items
 
                 else if (itemData.armourClass == ItemArmourClass.Heavy)
                 {
-                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, -1));
+                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, -2));
                     ret.Add(new ItemEffect(ItemCoreAttribute.Vision, -1));
                 }                   
             }
@@ -223,6 +224,7 @@ namespace HexGameEngine.Items
                 else if (itemData.armourClass == ItemArmourClass.Heavy)                
                     ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, -2));                
             }
+            
 
 
             return ret;
