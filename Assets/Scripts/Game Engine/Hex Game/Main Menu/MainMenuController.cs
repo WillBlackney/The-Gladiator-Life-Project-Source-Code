@@ -28,7 +28,6 @@ namespace HexGameEngine.MainMenu
 
         [Header("New Game Screen Components")]
         [SerializeField] GameObject chooseCharacterScreenVisualParent;
-        [SerializeField] private CanvasGroup chooseCharacterScreenCg;
         [SerializeField] ChooseCharacterBox[] allChooseCharacterBoxes;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
