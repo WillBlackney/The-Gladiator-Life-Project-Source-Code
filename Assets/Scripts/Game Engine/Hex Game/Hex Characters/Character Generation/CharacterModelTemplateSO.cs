@@ -11,4 +11,11 @@ namespace HexGameEngine.Characters
         public CharacterRace race;
         public List<string> bodyParts = new List<string>();
     }
+    [System.Serializable]
+    public class CharacterModelTemplateBasket
+    {
+        [Header("Properties")]
+        public CharacterRace race;
+        public CharacterModelTemplateSO[] templates;
+    }
 }

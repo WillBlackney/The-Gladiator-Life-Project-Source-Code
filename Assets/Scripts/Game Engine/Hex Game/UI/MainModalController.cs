@@ -74,13 +74,13 @@ namespace HexGameEngine.UI
         void UpdateDynamicDirection()
         {
             Vector2 mousePos = Input.mousePosition;
-            currentDir = ModalDirection.SouthEast;
+            currentDir = ModalDirection.NorthEast;
             float xLimit = Screen.width / 5f;
             float yLimit = Screen.height / 4f;
 
             // too far north east
-            if (mousePos.x > Screen.width - xLimit &&
-                mousePos.y > Screen.height - yLimit)
+            if (mousePos.x > (Screen.width - xLimit) &&
+                mousePos.y > (Screen.height - yLimit))
             {
                 Debug.Log("Too far north east");
                 currentDir = ModalDirection.SouthWest;
@@ -89,7 +89,7 @@ namespace HexGameEngine.UI
 
             // too far north west
             else if (mousePos.x < xLimit &&
-                mousePos.y > Screen.height - yLimit)
+                mousePos.y > (Screen.height - yLimit))
             {
                 Debug.Log("Too far north west");
                 currentDir = ModalDirection.SouthEast;
@@ -97,7 +97,7 @@ namespace HexGameEngine.UI
 
 
             // too far south east
-            else if (mousePos.x > Screen.width - xLimit &&
+            else if (mousePos.x > (Screen.width - xLimit) &&
                 mousePos.y < yLimit)
             {
                 Debug.Log("Too far south east");
@@ -121,7 +121,7 @@ namespace HexGameEngine.UI
             }
 
             // too far east
-            else if (mousePos.x > Screen.width - xLimit)
+            else if (mousePos.x > (Screen.width - xLimit))
             {
                 Debug.Log("Too far east");
                 currentDir = ModalDirection.SouthWest;

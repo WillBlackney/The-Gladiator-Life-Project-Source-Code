@@ -12,6 +12,9 @@ using HexGameEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
 using HexGameEngine.UI;
+using HexGameEngine.UCM;
+using CardGameEngine.UCM;
+using HexGameEngine.Abilities;
 
 namespace HexGameEngine.MainMenu
 {
@@ -39,16 +42,23 @@ namespace HexGameEngine.MainMenu
         [PropertySpace(SpaceBefore = 30, SpaceAfter = 0)]
 
         [Title("Custom Character Screen Components")]
+        [SerializeField] UniversalCharacterModel customCharacterScreenUCM;
         [SerializeField] GameObject chooseCharacterScreenVisualParent;
+        [SerializeField] CharacterModelTemplateBasket[] modelTemplateBaskets;
 
         [Header("Origin Panel Components")]
         [SerializeField] private TextMeshProUGUI originPanelRacialNameText;
         [SerializeField] private UIRaceIcon originPanelRacialIcon;
-        [SerializeField] private TextMeshProUGUI originPanelRacialDescriptionText;
+        [SerializeField] private TextMeshProUGUI originPanelRacialDescriptionText; 
+        [SerializeField] private TextMeshProUGUI originPanelPresetNameText;
+        [SerializeField] private UIAbilityIcon[] originPanelAbilityIcons;
+        [SerializeField] private UITalentRow[] originPanelTalentRows;
 
         // Non inspector proerties
-        private HexCharacterData currentCustomTemplate;
+        private HexCharacterData characterBuild;
+        private HexCharacterData currentPreset;
         private RaceDataSO currentCustomRace;
+        private CharacterModelTemplateSO currentModelTemplate;
         private void Start()
         {
             RenderMenuButtons();
@@ -187,9 +197,9 @@ namespace HexGameEngine.MainMenu
         }
         #endregion
 
-        // Custom Character Screen Logic
+        // Custom Character Screen Logic : General
         #region
-        public void ShowChooseCharacterScreen()
+        private void ShowChooseCharacterScreen()
         {
             chooseCharacterScreenVisualParent.SetActive(true);
         }
@@ -197,17 +207,98 @@ namespace HexGameEngine.MainMenu
         {
             chooseCharacterScreenVisualParent.SetActive(false);
         }
-        public void SetCustomCharacterDefaultViewState()
+        public void SetCustomCharacterDataDefaultState()
         {
+            // Set up modular character data
+            currentPreset = CharacterDataController.Instance.AllCustomCharacterTemplates[0];
+            characterBuild = ObjectCloner.CloneJSON(CharacterDataController.Instance.AllCustomCharacterTemplates[0]);
+            HandleChangeClassPreset(currentPreset);
+
             // set to template 1 
+            RebuildOriginPageView();
 
             // Set to race 1
             HandleChangeRace(CharacterDataController.Instance.PlayableRaces[0]);
         }
+        private void HandleChangeClassPreset(HexCharacterData preset)
+        {
+            // Update cached preset
+            currentPreset = preset;
+
+            // Update abilities
+            characterBuild.abilityBook = new AbilityBook();
+            characterBuild.abilityBook.allKnownAbilities.AddRange(preset.abilityBook.allKnownAbilities);
+
+            // Update talents
+            characterBuild.talentPairings.Clear();
+            characterBuild.talentPairings.AddRange(preset.talentPairings);
+
+            // to do: update core attributes, weapons, items
+
+            // Rebuild Origin page
+            RebuildOriginPageView();
+        }
+
+        #endregion
+
+        // Custom Character Screen Logic : Origin Panel
+        #region
+        private void RebuildOriginPageView()
+        {            
+            // Set name text
+            originPanelPresetNameText.text = currentPreset.myClassName.ToString();
+
+            // Reset and build ability icons
+            foreach (UIAbilityIcon a in originPanelAbilityIcons)
+                a.HideAndReset();
+            for(int i = 0; i < characterBuild.abilityBook.allKnownAbilities.Count && i < originPanelAbilityIcons.Length; i++)            
+                originPanelAbilityIcons[i].BuildFromAbilityData(characterBuild.abilityBook.allKnownAbilities[i]);
+
+            // Reset and build talent rows
+            foreach (UITalentRow r in originPanelTalentRows)
+                r.HideAndReset();
+            for (int i = 0; i < characterBuild.talentPairings.Count && i < originPanelTalentRows.Length; i++)
+                originPanelTalentRows[i].BuildFromTalentPairing(characterBuild.talentPairings[i]);
+
+
+        }
+        public void OnNextClassPresetButtonClicked()
+        {
+            HexCharacterData[] templates = CharacterDataController.Instance.AllCustomCharacterTemplates;
+            HexCharacterData nextTemplate = null;
+
+            int currentIndex = Array.IndexOf(templates, currentPreset);
+            if (currentIndex == templates.Length - 1)
+                nextTemplate = templates[0];
+
+            else
+                nextTemplate = templates[currentIndex + 1];
+
+            HandleChangeClassPreset(nextTemplate);
+        }
+        public void OnPreviousClassPresetButtonClicked()
+        {
+            HexCharacterData[] templates = CharacterDataController.Instance.AllCustomCharacterTemplates;
+            HexCharacterData nextTemplate = null;
+            int currentIndex = Array.IndexOf(templates, currentPreset);
+            if (currentIndex == 0)
+                nextTemplate = templates[templates.Length - 1];
+
+            else
+                nextTemplate = templates[currentIndex - 1];
+
+            HandleChangeClassPreset(nextTemplate);
+        }
+
+        #endregion
+
+        // Custom Character Screen Logic : Update Model + Race
+        #region
         private void HandleChangeRace(CharacterRace race)
         {
             // Get + cache race data
             currentCustomRace = CharacterDataController.Instance.GetRaceData(race);
+            characterBuild.race = currentCustomRace.racialTag;
 
             // Build race icon image
             originPanelRacialIcon.BuildFromRacialData(currentCustomRace);
@@ -215,7 +306,14 @@ namespace HexGameEngine.MainMenu
             // Build racial texts
             originPanelRacialDescriptionText.text = currentCustomRace.loreDescription;
             originPanelRacialNameText.text = currentCustomRace.racialTag.ToString();
-            // TO DO IN FUTURE: update character UCM to model 1 of new race
+
+            // Rebuild UCM as default model of race
+            HandleChangeRacialModel(GetRacialModelBasket(characterBuild.race).templates[0]);
+        }
+        private void HandleChangeRacialModel(CharacterModelTemplateSO newModel)
+        {
+            currentModelTemplate = newModel;
+            CharacterModeller.BuildModelFromStringReferences(customCharacterScreenUCM, newModel.bodyParts);
         }
         public void OnChooseRaceNextButtonClicked()
         {
@@ -224,14 +322,14 @@ namespace HexGameEngine.MainMenu
             CharacterRace nextValidRace = CharacterRace.None;
             int currentIndex = Array.IndexOf(playableRaces, currentCustomRace.racialTag);
 
-            if (currentIndex == playableRaces.Length - 1)            
+            if (currentIndex == playableRaces.Length - 1)
                 nextValidRace = playableRaces[0];
-            
-            else            
+
+            else
                 nextValidRace = playableRaces[currentIndex + 1];
 
             HandleChangeRace(nextValidRace);
-            
+
         }
         public void OnChooseRacePreviousButtonClicked()
         {
@@ -248,6 +346,61 @@ namespace HexGameEngine.MainMenu
 
             HandleChangeRace(nextValidRace);
         }
+        private CharacterModelTemplateBasket GetRacialModelBasket(CharacterRace race)
+        {
+            CharacterModelTemplateBasket ret = null;
+
+            foreach(CharacterModelTemplateBasket basket in modelTemplateBaskets)
+            {
+                if(basket.race == race)
+                {
+                    ret = basket;
+                    break;
+                }
+            }
+
+            return ret;
+
+        }
+        private CharacterModelTemplateSO GetNextRacialModel(CharacterRace race)
+        {
+            CharacterModelTemplateSO ret = null;
+
+            foreach (CharacterModelTemplateBasket b in modelTemplateBaskets)
+            {
+                if(b.race == race)
+                {
+                    int index = Array.IndexOf(b.templates, currentModelTemplate);
+                    if (index == b.templates.Length - 1)
+                        ret = b.templates[0];
+                    else ret = b.templates[index + 1];
+
+                    break;
+                }
+            }
+
+            return ret;
+        }
+        private CharacterModelTemplateSO GetPreviousRacialModel(CharacterRace race)
+        {
+            CharacterModelTemplateSO ret = null;
+
+            foreach (CharacterModelTemplateBasket b in modelTemplateBaskets)
+            {
+                if (b.race == race)
+                {
+                    int index = Array.IndexOf(b.templates, currentModelTemplate);
+                    if (index == 0)
+                        ret = b.templates[b.templates.Length - 1];
+                    else ret = b.templates[index - 1];
+
+                    break;
+                }
+            }
+
+            return ret;
+        }
+
         #endregion
 
         // Choose Character Screen Logic

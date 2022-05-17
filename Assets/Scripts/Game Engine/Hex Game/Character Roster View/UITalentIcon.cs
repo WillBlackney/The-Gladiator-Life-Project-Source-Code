@@ -61,13 +61,13 @@ namespace HexGameEngine.UI
             myTalentPairing = tp;
             gameObject.SetActive(true);
             TalentImage.sprite = tp.Data.talentSprite;
-            talentLevelParent.SetActive(true);
-            talentLevelText.text = tp.level.ToString();
+            if (talentLevelParent) talentLevelParent.SetActive(true);
+            if (talentLevelText) talentLevelText.text = tp.level.ToString();
         }      
         public void HideAndReset()
         {
             gameObject.SetActive(false);
-            talentLevelParent.SetActive(false);
+            if (talentLevelParent) talentLevelParent.SetActive(false);
             myTalentPairing = null;
         }
         #endregion
