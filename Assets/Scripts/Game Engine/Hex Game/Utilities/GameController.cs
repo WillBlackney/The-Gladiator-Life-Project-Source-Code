@@ -85,6 +85,7 @@ namespace HexGameEngine
             BlackScreenController.Instance.DoInstantFadeOut();
             BlackScreenController.Instance.FadeInScreen(2f);
             MainMenuController.Instance.SetChooseCharacterBoxStartingStates();
+            MainMenuController.Instance.SetCustomCharacterDefaultViewState();
             MainMenuController.Instance.DoGameStartMainMenuRevealSequence();
 
             yield return null;

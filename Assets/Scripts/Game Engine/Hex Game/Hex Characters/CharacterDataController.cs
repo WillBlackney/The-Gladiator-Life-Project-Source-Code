@@ -17,6 +17,7 @@ namespace HexGameEngine.Characters
         // Inspector
         [Header("Data Buckets")]
         [SerializeField] private HexCharacterTemplateSO[] allCharacterTemplatesSOs;
+        [SerializeField] private HexCharacterTemplateSO[] allCustomCharacterTemplatesSOs;
         [SerializeField] private TalentDataSO[] allTalentData;
         [SerializeField] private RaceDataSO[] allRacialData;
 
@@ -36,7 +37,8 @@ namespace HexGameEngine.Characters
         [SerializeField] string[] gnollNames;
         [SerializeField] string[] undeadNames;
 
-        // Non-Inspector
+        // Non-Inspector 
+        private HexCharacterData[] allCustomCharacterTemplates;
         private HexCharacterData[] allCharacterTemplates;
         private List<HexCharacterData> allPlayerCharacters = new List<HexCharacterData>();
         private List<HexCharacterData> characterDeck = new List<HexCharacterData>();
@@ -48,12 +50,16 @@ namespace HexGameEngine.Characters
             new Vector2(3,1), new Vector2(2,1), new Vector2(4,1), new Vector2(1,1), new Vector2(5,1),
             new Vector2(3,2), new Vector2(2,2), new Vector2(4,2), new Vector2(1,2), new Vector2(5,2),
 
-        };     
+        };
 
         #endregion
 
         // Getters + Accessors
         #region
+        public List<CharacterRace> PlayableRaces
+        {
+            get { return validCharacterRaces; }
+        }
         public TalentDataSO[] AllTalentData
         {
             get { return allTalentData; }
@@ -62,6 +68,11 @@ namespace HexGameEngine.Characters
         {
             get { return allCharacterTemplates; }
             private set { allCharacterTemplates = value; }
+        }
+        public HexCharacterData[] AllCustomCharacterTemplates
+        {
+            get { return allCustomCharacterTemplates; }
+            private set { allCustomCharacterTemplates = value; }
         }
         public List<HexCharacterData> AllPlayerCharacters
         {
@@ -91,6 +102,8 @@ namespace HexGameEngine.Characters
                 }
             }
 
+            if (ret == null) Debug.LogWarning("GetRaceData() could not racial data for " + race.ToString() + ", returning null...");
+
             return ret;
         }
         #endregion
@@ -101,6 +114,7 @@ namespace HexGameEngine.Characters
         {
             base.Awake();
             BuildTemplateLibrary();
+            BuildCustomTemplateLibrary();
         }
         private void BuildTemplateLibrary()
         {
@@ -114,6 +128,19 @@ namespace HexGameEngine.Characters
             }
 
             AllCharacterTemplates = tempList.ToArray();
+        }
+        private void BuildCustomTemplateLibrary()
+        {
+            Debug.Log("CharacterDataController.BuildCustomTemplateLibrary() called...");
+
+            List<HexCharacterData> tempList = new List<HexCharacterData>();
+
+            foreach (HexCharacterTemplateSO dataSO in allCustomCharacterTemplatesSOs)
+            {
+                tempList.Add(ConvertCharacterTemplateToCharacterData(dataSO));
+            }
+
+            AllCustomCharacterTemplates = tempList.ToArray();
         }
         #endregion
 

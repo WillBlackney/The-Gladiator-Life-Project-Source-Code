@@ -9,6 +9,9 @@ using HexGameEngine.Persistency;
 using DG.Tweening;
 using UnityEngine.EventSystems;
 using HexGameEngine.Audio;
+using UnityEngine.UI;
+using TMPro;
+using HexGameEngine.UI;
 
 namespace HexGameEngine.MainMenu
 {
@@ -26,15 +29,26 @@ namespace HexGameEngine.MainMenu
         [SerializeField] private GameObject abandonRunPopupParent;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        [Header("New Game Screen Components")]
-        [SerializeField] GameObject chooseCharacterScreenVisualParent;
+        [Header("New Game Screen Components")]      
         [SerializeField] ChooseCharacterBox[] allChooseCharacterBoxes;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("In Game Menu Components")]
         [SerializeField] private GameObject inGameMenuScreenParent;
         [SerializeField] private CanvasGroup inGameMenuScreenCg;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [PropertySpace(SpaceBefore = 30, SpaceAfter = 0)]
+
+        [Title("Custom Character Screen Components")]
+        [SerializeField] GameObject chooseCharacterScreenVisualParent;
+
+        [Header("Origin Panel Components")]
+        [SerializeField] private TextMeshProUGUI originPanelRacialNameText;
+        [SerializeField] private UIRaceIcon originPanelRacialIcon;
+        [SerializeField] private TextMeshProUGUI originPanelRacialDescriptionText;
+
+        // Non inspector proerties
+        private HexCharacterData currentCustomTemplate;
+        private RaceDataSO currentCustomRace;
         private void Start()
         {
             RenderMenuButtons();
@@ -173,6 +187,69 @@ namespace HexGameEngine.MainMenu
         }
         #endregion
 
+        // Custom Character Screen Logic
+        #region
+        public void ShowChooseCharacterScreen()
+        {
+            chooseCharacterScreenVisualParent.SetActive(true);
+        }
+        public void HideChooseCharacterScreen()
+        {
+            chooseCharacterScreenVisualParent.SetActive(false);
+        }
+        public void SetCustomCharacterDefaultViewState()
+        {
+            // set to template 1 
+
+            // Set to race 1
+            HandleChangeRace(CharacterDataController.Instance.PlayableRaces[0]);
+        }
+        private void HandleChangeRace(CharacterRace race)
+        {
+            // Get + cache race data
+            currentCustomRace = CharacterDataController.Instance.GetRaceData(race);
+
+            // Build race icon image
+            originPanelRacialIcon.BuildFromRacialData(currentCustomRace);
+
+            // Build racial texts
+            originPanelRacialDescriptionText.text = currentCustomRace.loreDescription;
+            originPanelRacialNameText.text = currentCustomRace.racialTag.ToString();
+            // TO DO IN FUTURE: update character UCM to model 1 of new race
+        }
+        public void OnChooseRaceNextButtonClicked()
+        {
+            Debug.Log("MainMenuController.OnChooseRaceNextButtonClicked() called...");
+            CharacterRace[] playableRaces = CharacterDataController.Instance.PlayableRaces.ToArray();
+            CharacterRace nextValidRace = CharacterRace.None;
+            int currentIndex = Array.IndexOf(playableRaces, currentCustomRace.racialTag);
+
+            if (currentIndex == playableRaces.Length - 1)            
+                nextValidRace = playableRaces[0];
+            
+            else            
+                nextValidRace = playableRaces[currentIndex + 1];
+
+            HandleChangeRace(nextValidRace);
+            
+        }
+        public void OnChooseRacePreviousButtonClicked()
+        {
+            Debug.Log("MainMenuController.OnChooseRacePreviousButtonClicked() called...");
+            CharacterRace[] playableRaces = CharacterDataController.Instance.PlayableRaces.ToArray();
+            CharacterRace nextValidRace = CharacterRace.None;
+            int currentIndex = Array.IndexOf(playableRaces, currentCustomRace.racialTag);
+
+            if (currentIndex == 0)
+                nextValidRace = playableRaces[playableRaces.Length - 1];
+
+            else
+                nextValidRace = playableRaces[currentIndex - 1];
+
+            HandleChangeRace(nextValidRace);
+        }
+        #endregion
+
         // Choose Character Screen Logic
         #region
         public void SetChooseCharacterBoxStartingStates()
@@ -201,15 +278,7 @@ namespace HexGameEngine.MainMenu
             }
 
             return bRet;
-        }
-        public void ShowChooseCharacterScreen()
-        {
-            chooseCharacterScreenVisualParent.SetActive(true);
-        }
-        public void HideChooseCharacterScreen()
-        {
-            chooseCharacterScreenVisualParent.SetActive(false);
-        }
+        }        
         public List<HexCharacterData> GetChosenCharacterDataFiles()
         {
             List<HexCharacterData> characters = new List<HexCharacterData>();
