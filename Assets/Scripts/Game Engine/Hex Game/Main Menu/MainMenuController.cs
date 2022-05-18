@@ -46,6 +46,21 @@ namespace HexGameEngine.MainMenu
         [SerializeField] GameObject chooseCharacterScreenVisualParent;
         [SerializeField] CharacterModelTemplateBasket[] modelTemplateBaskets;
 
+        [Header("Custom Character Screen Header Tab Refs")]
+        [SerializeField] Sprite tabSelectedSprite;
+        [SerializeField] Sprite tabUnselectedSprite;
+        [SerializeField] Color tabSelectedFontColour;
+        [SerializeField] Color tabUnselectedFontColour;
+        [SerializeField] Image[] headerTabImages;
+        [SerializeField] TextMeshProUGUI[] headerTabTexts;
+
+        [Header("Custom Character Screen Pages")]
+        [SerializeField] GameObject ccsOriginPanel;
+        [SerializeField] GameObject ccsPresetPanel;
+        [SerializeField] GameObject ccsItemsPanel;      
+        [SerializeField] GameObject ccsAbilityPanel;
+        [SerializeField] GameObject ccsTalentPanel;
+
         [Header("Origin Panel Components")]
         [SerializeField] private TextMeshProUGUI originPanelRacialNameText;
         [SerializeField] private UIRaceIcon originPanelRacialIcon;
@@ -238,13 +253,73 @@ namespace HexGameEngine.MainMenu
             // Rebuild Origin page
             RebuildOriginPageView();
         }
+        private void CloseAllCustomCharacterScreenPanels()
+        {
+            ccsOriginPanel.SetActive(false);
+            ccsPresetPanel.SetActive(false);
+            ccsItemsPanel.SetActive(false);
+            ccsAbilityPanel.SetActive(false);
+            ccsTalentPanel.SetActive(false);
+        }
 
+        // Header button clicks
+        public void OnOriginHeaderTabClicked()
+        {
+            CloseAllCustomCharacterScreenPanels();
+
+            // Reset 'selected' visual state on all tabs
+            for (int i = 0; i < headerTabImages.Length; i++)
+            {
+                headerTabImages[i].sprite = tabUnselectedSprite;
+                headerTabTexts[i].color = tabUnselectedFontColour;
+            }
+
+            headerTabImages[0]. sprite = tabSelectedSprite;
+            headerTabTexts[0].color = tabSelectedFontColour;
+            RebuildOriginPageView();
+        }
+        public void OnPresetHeaderTabClicked()
+        {
+            CloseAllCustomCharacterScreenPanels();
+
+            // Reset 'selected' visual state on all tabs
+            for (int i = 0; i < headerTabImages.Length; i++)
+            {
+                headerTabImages[i].sprite = tabUnselectedSprite;
+                headerTabTexts[i].color = tabUnselectedFontColour;
+            }
+
+            headerTabImages[1].sprite = tabSelectedSprite;
+            headerTabTexts[1].color = tabSelectedFontColour;
+
+            ccsPresetPanel.SetActive(true);
+        }
+        public void OnItemsHeaderTabClicked()
+        {
+            CloseAllCustomCharacterScreenPanels();
+
+            // Reset 'selected' visual state on all tabs
+            for (int i = 0; i < headerTabImages.Length; i++)
+            {
+                headerTabImages[i].sprite = tabUnselectedSprite;
+                headerTabTexts[i].color = tabUnselectedFontColour;
+            }
+
+            headerTabImages[2].sprite = tabSelectedSprite;
+            headerTabTexts[2].color = tabSelectedFontColour;
+
+            ccsItemsPanel.SetActive(true);
+        }
         #endregion
 
         // Custom Character Screen Logic : Origin Panel
         #region
         private void RebuildOriginPageView()
-        {            
+        {
+            // Route to page
+            CloseAllCustomCharacterScreenPanels();
+            ccsOriginPanel.SetActive(true);
+
             // Set name text
             originPanelPresetNameText.text = currentPreset.myClassName.ToString();
 
@@ -259,6 +334,8 @@ namespace HexGameEngine.MainMenu
                 r.HideAndReset();
             for (int i = 0; i < characterBuild.talentPairings.Count && i < originPanelTalentRows.Length; i++)
                 originPanelTalentRows[i].BuildFromTalentPairing(characterBuild.talentPairings[i]);
+
+
 
 
         }
