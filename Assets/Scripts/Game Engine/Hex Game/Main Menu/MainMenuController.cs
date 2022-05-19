@@ -41,10 +41,14 @@ namespace HexGameEngine.MainMenu
         [SerializeField] private CanvasGroup inGameMenuScreenCg;
         [PropertySpace(SpaceBefore = 30, SpaceAfter = 0)]
 
-        [Title("Custom Character Screen Components")]
+        [Title("Custom Character Screen Components")]    
         [SerializeField] UniversalCharacterModel customCharacterScreenUCM;
         [SerializeField] GameObject chooseCharacterScreenVisualParent;
         [SerializeField] CharacterModelTemplateBasket[] modelTemplateBaskets;
+
+        [Header("Custom Character Screen Data")]
+        [SerializeField] SerializedAttrbuteSheet baselineAttributes;
+        [SerializeField] int maxAllowedAttributePoints = 10;
 
         [Header("Custom Character Screen Header Tab Refs")]
         [SerializeField] Sprite tabSelectedSprite;
@@ -69,11 +73,16 @@ namespace HexGameEngine.MainMenu
         [SerializeField] private UIAbilityIcon[] originPanelAbilityIcons;
         [SerializeField] private UITalentRow[] originPanelTalentRows;
 
+        [Header("Preset Panel Components")]
+        [SerializeField] private TextMeshProUGUI presetPanelAttributePointsText;
+        [SerializeField] private CustomCharacterAttributeRow[] presetPanelAttributeRows;
+
         // Non inspector proerties
         private HexCharacterData characterBuild;
         private HexCharacterData currentPreset;
         private RaceDataSO currentCustomRace;
         private CharacterModelTemplateSO currentModelTemplate;
+
         private void Start()
         {
             RenderMenuButtons();
@@ -225,12 +234,13 @@ namespace HexGameEngine.MainMenu
         public void SetCustomCharacterDataDefaultState()
         {
             // Set up modular character data
-            currentPreset = CharacterDataController.Instance.AllCustomCharacterTemplates[0];
-            characterBuild = ObjectCloner.CloneJSON(CharacterDataController.Instance.AllCustomCharacterTemplates[0]);
-            HandleChangeClassPreset(currentPreset);
+            //characterBuild = ObjectCloner.CloneJSON(CharacterDataController.Instance.AllCustomCharacterTemplates[0]);
+            characterBuild = CharacterDataController.Instance.CloneCharacterData(CharacterDataController.Instance.AllCustomCharacterTemplates[0]);
+            baselineAttributes.CopyValuesIntoOther(characterBuild.attributeSheet);
+            HandleChangeClassPreset(CharacterDataController.Instance.AllCustomCharacterTemplates[0]);
 
             // set to template 1 
-            RebuildOriginPageView();
+            RebuildAndShowOriginPageView();
 
             // Set to race 1
             HandleChangeRace(CharacterDataController.Instance.PlayableRaces[0]);
@@ -248,11 +258,14 @@ namespace HexGameEngine.MainMenu
             characterBuild.talentPairings.Clear();
             characterBuild.talentPairings.AddRange(preset.talentPairings);
 
-            // to do: update core attributes, weapons, items
+            // Update attributes
+            ApplyAttributesFromPreset(preset);
+
+            // to do: update weapons, items
 
             // Rebuild Origin page
-            RebuildOriginPageView();
-        }
+            RebuildAndShowOriginPageView();
+        }       
         private void CloseAllCustomCharacterScreenPanels()
         {
             ccsOriginPanel.SetActive(false);
@@ -261,8 +274,10 @@ namespace HexGameEngine.MainMenu
             ccsAbilityPanel.SetActive(false);
             ccsTalentPanel.SetActive(false);
         }
+        #endregion        
 
-        // Header button clicks
+        // Custom Character Screen Logic : Header nav tabs
+        #region
         public void OnOriginHeaderTabClicked()
         {
             CloseAllCustomCharacterScreenPanels();
@@ -274,9 +289,9 @@ namespace HexGameEngine.MainMenu
                 headerTabTexts[i].color = tabUnselectedFontColour;
             }
 
-            headerTabImages[0]. sprite = tabSelectedSprite;
+            headerTabImages[0].sprite = tabSelectedSprite;
             headerTabTexts[0].color = tabSelectedFontColour;
-            RebuildOriginPageView();
+            RebuildAndShowOriginPageView();
         }
         public void OnPresetHeaderTabClicked()
         {
@@ -292,7 +307,7 @@ namespace HexGameEngine.MainMenu
             headerTabImages[1].sprite = tabSelectedSprite;
             headerTabTexts[1].color = tabSelectedFontColour;
 
-            ccsPresetPanel.SetActive(true);
+            RebuildAndShowPresetPanel();
         }
         public void OnItemsHeaderTabClicked()
         {
@@ -310,11 +325,11 @@ namespace HexGameEngine.MainMenu
 
             ccsItemsPanel.SetActive(true);
         }
-        #endregion
+#endregion
 
         // Custom Character Screen Logic : Origin Panel
         #region
-        private void RebuildOriginPageView()
+        private void RebuildAndShowOriginPageView()
         {
             // Route to page
             CloseAllCustomCharacterScreenPanels();
@@ -334,9 +349,6 @@ namespace HexGameEngine.MainMenu
                 r.HideAndReset();
             for (int i = 0; i < characterBuild.talentPairings.Count && i < originPanelTalentRows.Length; i++)
                 originPanelTalentRows[i].BuildFromTalentPairing(characterBuild.talentPairings[i]);
-
-
-
 
         }
         public void OnNextClassPresetButtonClicked()
@@ -367,6 +379,190 @@ namespace HexGameEngine.MainMenu
             HandleChangeClassPreset(nextTemplate);
         }
 
+        #endregion
+
+        // Custom Character Screen Logic: Preset Panel
+        #region
+        private void RebuildAttributeSection()
+        {
+            // Rebuild each row
+            foreach(CustomCharacterAttributeRow row in presetPanelAttributeRows)            
+                RebuildAttributeRow(row);
+
+            // Update availble attribute points text
+            presetPanelAttributePointsText.text = (maxAllowedAttributePoints - GetTotalAttributePointsSpent()).ToString();
+
+        }
+        private void RebuildAttributeRow(CustomCharacterAttributeRow row)
+        {
+            // Calculate stat value + difference from baseline
+            int dif = GetCharacterAttributeDifference(row.Attribute);
+            int value = GetCharacterAttributeValue(row.Attribute);
+
+            row.AmountText.text = value.ToString();
+
+            // Set plus and minus button view states
+            row.MinusButtonParent.SetActive(false);
+            row.PlusButtonParent.SetActive(false);
+            if (dif > 0) row.MinusButtonParent.SetActive(true);            
+            if (dif < 5) row.PlusButtonParent.SetActive(true);
+
+            // Hide plus button if player already spent all points
+            if (GetTotalAttributePointsSpent() >= maxAllowedAttributePoints)
+                row.PlusButtonParent.SetActive(false);
+
+            // Set text colouring
+            if (dif > 0) row.AmountText.color = row.BoostedStatTextColor;
+            else row.AmountText.color = row.NormalStatTextColor;
+
+        }
+        private int GetCharacterAttributeDifference(CoreAttribute att)
+        {
+            int dif = 0;
+
+            if (att == CoreAttribute.Strength)
+            {
+                dif = characterBuild.attributeSheet.strength.value - baselineAttributes.strength.value;
+            }
+            else if (att == CoreAttribute.Intelligence)
+            {
+                dif = characterBuild.attributeSheet.intelligence.value - baselineAttributes.intelligence.value;
+            }
+            else if (att == CoreAttribute.Accuracy)
+            {
+                dif = characterBuild.attributeSheet.accuracy.value - baselineAttributes.accuracy.value;
+            }
+            else if (att == CoreAttribute.Dodge)
+            {
+                dif = characterBuild.attributeSheet.dodge.value - baselineAttributes.dodge.value;
+            }
+            else if (att == CoreAttribute.Constituition)
+            {
+                dif = characterBuild.attributeSheet.constitution.value - baselineAttributes.constitution.value;
+            }
+            else if (att == CoreAttribute.Resolve)
+            {
+                dif = characterBuild.attributeSheet.resolve.value - baselineAttributes.resolve.value;
+            }
+            else if (att == CoreAttribute.Wits)
+            {
+                dif = characterBuild.attributeSheet.wits.value - baselineAttributes.wits.value;
+            }
+
+            Debug.Log("MainMenuController.GetCharacterAttributeDifference() returning " + dif.ToString() +
+                " for attribute: " + att.ToString());
+
+            return dif;
+        }
+        private int GetCharacterAttributeValue(CoreAttribute att)
+        {
+            int value = 0;
+
+            if (att == CoreAttribute.Strength)            
+                value = characterBuild.attributeSheet.strength.value;
+            
+            else if (att == CoreAttribute.Intelligence)            
+                value = characterBuild.attributeSheet.intelligence.value;
+            
+            else if (att == CoreAttribute.Accuracy)            
+                value = characterBuild.attributeSheet.accuracy.value;
+            
+            else if (att == CoreAttribute.Dodge)            
+                value = characterBuild.attributeSheet.dodge.value;
+            
+            else if (att == CoreAttribute.Constituition)            
+                value = characterBuild.attributeSheet.constitution.value;
+            
+            else if (att == CoreAttribute.Resolve)            
+                value = characterBuild.attributeSheet.resolve.value;
+            
+            else if (att == CoreAttribute.Wits)            
+                value = characterBuild.attributeSheet.wits.value;
+            
+
+            Debug.Log("MainMenuController.GetCharacterAttributeValue) returning " + value.ToString() +
+               " for attribute: " + att.ToString());
+
+            return value;
+        }
+        private int GetTotalAttributePointsSpent()
+        {
+            int dif = 0;
+            dif += GetCharacterAttributeDifference(CoreAttribute.Strength) ;
+            dif += GetCharacterAttributeDifference(CoreAttribute.Intelligence) ;
+            dif += GetCharacterAttributeDifference(CoreAttribute.Constituition) ;
+            dif += GetCharacterAttributeDifference(CoreAttribute.Accuracy) ;
+            dif += GetCharacterAttributeDifference(CoreAttribute.Dodge) ;
+            dif += GetCharacterAttributeDifference(CoreAttribute.Resolve) ;
+            dif += GetCharacterAttributeDifference(CoreAttribute.Wits) ;
+
+            Debug.Log("MainMenuController.GetTotalAttributePointsSpent() returning: " + dif.ToString());
+            return dif;
+        }       
+        private void RebuildAndShowPresetPanel()
+        {
+            // Show preset panel + hide other panels
+            CloseAllCustomCharacterScreenPanels();
+            ccsPresetPanel.SetActive(true);
+
+            RebuildAttributeSection();
+
+            // to do: rebuild talents and abilities section
+        }
+        private void ApplyAttributesFromPreset(HexCharacterData preset)
+        {
+            // Reset to base stats
+            preset.attributeSheet.CopyValuesIntoOther(characterBuild.attributeSheet);
+
+            // Apply stat difference from preset
+            /*
+            characterBuild.attributeSheet.strength.value += preset.attributeSheet.strength.value - characterBuild.attributeSheet.strength.value;
+            characterBuild.attributeSheet.intelligence.value += preset.attributeSheet.intelligence.value - characterBuild.attributeSheet.intelligence.value;
+            characterBuild.attributeSheet.accuracy.value += preset.attributeSheet.accuracy.value - characterBuild.attributeSheet.accuracy.value;
+            characterBuild.attributeSheet.dodge.value += preset.attributeSheet.dodge.value - characterBuild.attributeSheet.dodge.value;
+            characterBuild.attributeSheet.resolve.value += preset.attributeSheet.resolve.value - characterBuild.attributeSheet.resolve.value;
+            characterBuild.attributeSheet.constitution.value += preset.attributeSheet.constitution.value - characterBuild.attributeSheet.constitution.value;
+            characterBuild.attributeSheet.wits.value += preset.attributeSheet.wits.value - characterBuild.attributeSheet.wits.value;
+        
+        */}
+        public void OnDecreaseAttributeButtonClicked(CustomCharacterAttributeRow row)
+        {
+            if (row.Attribute == CoreAttribute.Strength)
+                characterBuild.attributeSheet.strength.value -= 1;
+            else if (row.Attribute == CoreAttribute.Intelligence)
+                characterBuild.attributeSheet.intelligence.value -= 1;
+            else if (row.Attribute == CoreAttribute.Accuracy)
+                characterBuild.attributeSheet.accuracy.value -= 1;
+            else if (row.Attribute == CoreAttribute.Dodge)
+                characterBuild.attributeSheet.dodge.value -= 1;
+            else if (row.Attribute == CoreAttribute.Constituition)
+                characterBuild.attributeSheet.constitution.value -= 1;
+            else if (row.Attribute == CoreAttribute.Resolve)
+                characterBuild.attributeSheet.resolve.value -= 1;
+            else if (row.Attribute == CoreAttribute.Wits)
+                characterBuild.attributeSheet.wits.value -= 1;
+
+            RebuildAttributeSection();
+        }
+        public void OnIncreaseAttributeButtonClicked(CustomCharacterAttributeRow row)
+        {
+            if (row.Attribute == CoreAttribute.Strength)
+                characterBuild.attributeSheet.strength.value += 1;
+            else if (row.Attribute == CoreAttribute.Intelligence)
+                characterBuild.attributeSheet.intelligence.value += 1;
+            else if (row.Attribute == CoreAttribute.Accuracy)
+                characterBuild.attributeSheet.accuracy.value += 1;
+            else if (row.Attribute == CoreAttribute.Dodge)
+                characterBuild.attributeSheet.dodge.value += 1;
+            else if (row.Attribute == CoreAttribute.Constituition)
+                characterBuild.attributeSheet.constitution.value += 1;
+            else if (row.Attribute == CoreAttribute.Resolve)
+                characterBuild.attributeSheet.resolve.value += 1;
+            else if (row.Attribute == CoreAttribute.Wits)
+                characterBuild.attributeSheet.wits.value += 1;
+
+            RebuildAttributeSection();
+        }
         #endregion
 
         // Custom Character Screen Logic : Update Model + Race

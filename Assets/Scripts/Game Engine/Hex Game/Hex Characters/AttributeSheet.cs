@@ -40,7 +40,7 @@ namespace HexGameEngine.Characters
         [BoxGroup("Secondary Attributes", centerLabel: true)]
         [LabelWidth(100)]
         [GUIColor("Blue")]
-        public int maxHealth = 100;
+        public int maxHealth = 0;
         [BoxGroup("Secondary Attributes")]
         [LabelWidth(100)]
         [GUIColor("Blue")]
@@ -104,6 +104,12 @@ namespace HexGameEngine.Characters
 
         public void CopyValuesIntoOther(AttributeSheet other)
         {
+            if (other == null)
+            {
+                Debug.LogWarning("AttributeSheet.CopyValuesIntoOther() other is null, creating a new attribute sheet...");
+                other = new AttributeSheet();
+            }
+
             other.strength.value = strength.value;
             other.strength.stars = strength.stars;
             other.intelligence = intelligence;

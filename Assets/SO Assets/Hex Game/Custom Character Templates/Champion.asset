@@ -18,25 +18,25 @@ MonoBehaviour:
   modelSize: 0
   attributeSheet:
     strength:
-      value: 0
-      stars: 0
-    intelligence:
       value: 5
       stars: 0
-    constitution:
+    intelligence:
       value: 0
+      stars: 0
+    constitution:
+      value: 80
       stars: 0
     dodge:
       value: 0
       stars: 0
     accuracy:
-      value: 5
+      value: 80
       stars: 0
     resolve:
-      value: 0
+      value: 5
       stars: 0
     wits:
-      value: 0
+      value: 5
       stars: 0
     maxHealth: 0
     energyRecovery: 8
