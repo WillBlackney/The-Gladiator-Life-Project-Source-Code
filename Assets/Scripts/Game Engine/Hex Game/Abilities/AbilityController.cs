@@ -137,6 +137,19 @@ namespace HexGameEngine.Abilities
             validAbilities.Shuffle();
             return validAbilities[0];
         }
+        public List<AbilityData> GetAllAbilitiesOfTalent(TalentSchool ts)
+        {
+            List<AbilityData> ret = new List<AbilityData>();
+
+            for(int i = 0; i < allAbilities.Length; i++)
+            {
+                if (allAbilities[i].talentRequirementData != null &&
+                    allAbilities[i].talentRequirementData.talentSchool == ts)
+                    ret.Add(allAbilities[i]);
+            }
+
+            return ret;
+        }
         #endregion
 
         // Data Conversion

@@ -30,27 +30,26 @@ namespace HexGameEngine.MainMenu
         [SerializeField] private GameObject continueButtonParent;
         [SerializeField] private GameObject abandonRunButtonParent;
         [SerializeField] private GameObject abandonRunPopupParent;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [Space(20)]
 
         [Header("New Game Screen Components")]      
         [SerializeField] ChooseCharacterBox[] allChooseCharacterBoxes;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [Space(20)]
 
         [Header("In Game Menu Components")]
         [SerializeField] private GameObject inGameMenuScreenParent;
         [SerializeField] private CanvasGroup inGameMenuScreenCg;
-        [PropertySpace(SpaceBefore = 30, SpaceAfter = 0)]
-
+        [Space(40)]
         [Title("Custom Character Screen Components")]    
         [SerializeField] UniversalCharacterModel customCharacterScreenUCM;
         [SerializeField] GameObject chooseCharacterScreenVisualParent;
         [SerializeField] CharacterModelTemplateBasket[] modelTemplateBaskets;
-
+        [Space(20)]
         [Header("Custom Character Screen Data")]
         [SerializeField] SerializedAttrbuteSheet baselineAttributes;
         [SerializeField] int maxAllowedAttributePoints = 15;
         [SerializeField] int individualAttributeBoostLimit = 10;
-
+        [Space(20)]
         [Header("Custom Character Screen Header Tab Refs")]
         [SerializeField] Sprite tabSelectedSprite;
         [SerializeField] Sprite tabUnselectedSprite;
@@ -58,14 +57,14 @@ namespace HexGameEngine.MainMenu
         [SerializeField] Color tabUnselectedFontColour;
         [SerializeField] Image[] headerTabImages;
         [SerializeField] TextMeshProUGUI[] headerTabTexts;
-
+        [Space(20)]
         [Header("Custom Character Screen Pages")]
         [SerializeField] GameObject ccsOriginPanel;
         [SerializeField] GameObject ccsPresetPanel;
         [SerializeField] GameObject ccsItemsPanel;      
         [SerializeField] GameObject ccsAbilityPanel;
         [SerializeField] GameObject ccsTalentPanel;
-
+        [Space(20)]
         [Header("Origin Panel Components")]
         [SerializeField] private TextMeshProUGUI originPanelRacialNameText;
         [SerializeField] private UIRaceIcon originPanelRacialIcon;
@@ -73,13 +72,20 @@ namespace HexGameEngine.MainMenu
         [SerializeField] private TextMeshProUGUI originPanelPresetNameText;
         [SerializeField] private UIAbilityIcon[] originPanelAbilityIcons;
         [SerializeField] private UITalentRow[] originPanelTalentRows;
-
+        [Space(20)]
         [Header("Preset Panel Components")]
         [SerializeField] private TextMeshProUGUI presetPanelAttributePointsText;
         [SerializeField] private CustomCharacterAttributeRow[] presetPanelAttributeRows;
         [SerializeField] private UIAbilityIcon[] presetPanelAbilityIcons;
         [SerializeField] private UITalentIcon[] presetPanelTalentIcons;
-
+        [Space(20)]
+        [Header("Choose Ability Panel Components")]
+        [SerializeField] private RectTransform[] chooseAbilityPanelLayouts;
+        [SerializeField] private TextMeshProUGUI chooseAbilityButtonsHeaderTextOne;
+        [SerializeField] private ChooseAbilityButton[] chooseAbilityButtonsSectionOne;
+        [SerializeField] private TextMeshProUGUI chooseAbilityButtonsHeaderTextTwo;
+        [SerializeField] private ChooseAbilityButton[] chooseAbilityButtonsSectionTwo;
+        [SerializeField] private ChooseTalentButton[] chooseTalentButtons;
         // Non inspector proerties
         private HexCharacterData characterBuild;
         private HexCharacterData currentPreset;
@@ -584,6 +590,103 @@ namespace HexGameEngine.MainMenu
             RebuildAttributeSection();
         }
 
+
+
+        #endregion
+
+        // Custom Character Screen Logic : Choose Abilities + Talents Page Logic
+        #region
+        public void OnAbilitySectionEditButtonClicked()
+        {
+            CloseAllCustomCharacterScreenPanels();
+            ccsAbilityPanel.SetActive(true);
+            BuildChooseAbilitiesPanel();
+            RebuildChooseAbilitiesPanelLayouts();
+        }
+        public void OnAbilitySectionConfirmButtonClicked()
+        {
+            CloseAllCustomCharacterScreenPanels();
+            ccsPresetPanel.SetActive(true);
+
+            // save changes
+
+            // show preset panel
+        }
+        public void OnTalentSectionEditButtonClicked()
+        {
+
+        }
+        public void OnTalentSectionConfirmButtonClicked()
+        {
+
+        }
+        private void BuildChooseAbilitiesPanel()
+        {
+            TalentSchool talentSchoolOne = characterBuild.talentPairings[0].talentSchool;
+            chooseAbilityButtonsHeaderTextOne.text = talentSchoolOne.ToString() + " Abilities";
+            List<AbilityData> allTalentOneAbilities = AbilityController.Instance.GetAllAbilitiesOfTalent(talentSchoolOne);
+
+            // Reset all first
+            for(int i = 0; i < chooseAbilityButtonsSectionOne.Length; i++)            
+                chooseAbilityButtonsSectionOne[i].ResetAndHide();
+            
+            // Rebuild
+            for (int i = 0; i < allTalentOneAbilities.Count && i < chooseAbilityButtonsSectionOne.Length; i++)            
+                chooseAbilityButtonsSectionOne[i].BuildAndShow(allTalentOneAbilities[i]);
+
+            // Select buttons based on known abilities of character
+            foreach(AbilityData a in characterBuild.abilityBook.allKnownAbilities)
+            {
+                foreach(ChooseAbilityButton button in chooseAbilityButtonsSectionOne)
+                {
+                    if(button.AbilityIcon.MyDataRef != null && a.abilityName == button.AbilityIcon.MyDataRef.abilityName)
+                    {
+                        button.HandleChangeSelectionState(true);
+                        break;
+                    }
+                }
+            }
+
+            // Build for 2nd talent (if character has a second talent
+            if(characterBuild.talentPairings.Count > 1)
+            {
+                TalentSchool talentSchoolTwo = characterBuild.talentPairings[1].talentSchool;
+                chooseAbilityButtonsHeaderTextTwo.text = talentSchoolTwo.ToString() + " Abilities";
+                List<AbilityData> allTalentTwoAbilities = AbilityController.Instance.GetAllAbilitiesOfTalent(talentSchoolTwo);
+
+                // Reset all first
+                for (int i = 0; i < chooseAbilityButtonsSectionTwo.Length; i++)
+                    chooseAbilityButtonsSectionTwo[i].ResetAndHide();
+
+                // Rebuild
+                for (int i = 0; i < allTalentTwoAbilities.Count && i < chooseAbilityButtonsSectionTwo.Length; i++)
+                    chooseAbilityButtonsSectionTwo[i].BuildAndShow(allTalentTwoAbilities[i]);
+
+                // Select buttons based on known abilities of character
+                foreach (AbilityData a in characterBuild.abilityBook.allKnownAbilities)
+                {
+                    foreach (ChooseAbilityButton button in chooseAbilityButtonsSectionTwo)
+                    {
+                        if (button.AbilityIcon.MyDataRef != null && a.abilityName == button.AbilityIcon.MyDataRef.abilityName)
+                        {
+                            button.HandleChangeSelectionState(true);
+                            break;
+                        }
+                    }
+                }
+            }
+            
+        }
+        private void RebuildChooseAbilitiesPanelLayouts()
+        {
+            for(int i = 0; i < 2; i++)
+            {
+                foreach(RectTransform r in chooseAbilityPanelLayouts)
+                {
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(r);
+                }
+            }
+        }
         #endregion
 
         // Custom Character Screen Logic : Update Model + Race
