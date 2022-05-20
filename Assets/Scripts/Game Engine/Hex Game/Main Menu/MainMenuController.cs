@@ -48,7 +48,8 @@ namespace HexGameEngine.MainMenu
 
         [Header("Custom Character Screen Data")]
         [SerializeField] SerializedAttrbuteSheet baselineAttributes;
-        [SerializeField] int maxAllowedAttributePoints = 10;
+        [SerializeField] int maxAllowedAttributePoints = 15;
+        [SerializeField] int individualAttributeBoostLimit = 10;
 
         [Header("Custom Character Screen Header Tab Refs")]
         [SerializeField] Sprite tabSelectedSprite;
@@ -76,6 +77,8 @@ namespace HexGameEngine.MainMenu
         [Header("Preset Panel Components")]
         [SerializeField] private TextMeshProUGUI presetPanelAttributePointsText;
         [SerializeField] private CustomCharacterAttributeRow[] presetPanelAttributeRows;
+        [SerializeField] private UIAbilityIcon[] presetPanelAbilityIcons;
+        [SerializeField] private UITalentIcon[] presetPanelTalentIcons;
 
         // Non inspector proerties
         private HexCharacterData characterBuild;
@@ -383,6 +386,16 @@ namespace HexGameEngine.MainMenu
 
         // Custom Character Screen Logic: Preset Panel
         #region
+        private void RebuildAndShowPresetPanel()
+        {
+            // Show preset panel + hide other panels
+            CloseAllCustomCharacterScreenPanels();
+            ccsPresetPanel.SetActive(true);
+
+            RebuildAttributeSection();
+            RebuildPresetPanelAbilitySection();
+            RebuildPresetPanelTalentSection();
+        }
         private void RebuildAttributeSection()
         {
             // Rebuild each row
@@ -392,6 +405,23 @@ namespace HexGameEngine.MainMenu
             // Update availble attribute points text
             presetPanelAttributePointsText.text = (maxAllowedAttributePoints - GetTotalAttributePointsSpent()).ToString();
 
+        }
+        private void RebuildPresetPanelAbilitySection()
+        {
+            // Reset and build ability icons
+            foreach (UIAbilityIcon a in presetPanelAbilityIcons)
+                a.HideAndReset();
+            for (int i = 0; i < characterBuild.abilityBook.allKnownAbilities.Count && i < presetPanelAbilityIcons.Length; i++)
+                presetPanelAbilityIcons[i].BuildFromAbilityData(characterBuild.abilityBook.allKnownAbilities[i]);
+
+        }
+        private void RebuildPresetPanelTalentSection()
+        {
+            // Reset and build talent rows
+            foreach (UITalentIcon r in presetPanelTalentIcons)
+                r.HideAndReset();
+            for (int i = 0; i < characterBuild.talentPairings.Count && i < presetPanelTalentIcons.Length; i++)
+                presetPanelTalentIcons[i].BuildFromTalentPairing(characterBuild.talentPairings[i]);
         }
         private void RebuildAttributeRow(CustomCharacterAttributeRow row)
         {
@@ -405,7 +435,7 @@ namespace HexGameEngine.MainMenu
             row.MinusButtonParent.SetActive(false);
             row.PlusButtonParent.SetActive(false);
             if (dif > 0) row.MinusButtonParent.SetActive(true);            
-            if (dif < 5) row.PlusButtonParent.SetActive(true);
+            if (dif < individualAttributeBoostLimit) row.PlusButtonParent.SetActive(true);
 
             // Hide plus button if player already spent all points
             if (GetTotalAttributePointsSpent() >= maxAllowedAttributePoints)
@@ -498,17 +528,7 @@ namespace HexGameEngine.MainMenu
 
             Debug.Log("MainMenuController.GetTotalAttributePointsSpent() returning: " + dif.ToString());
             return dif;
-        }       
-        private void RebuildAndShowPresetPanel()
-        {
-            // Show preset panel + hide other panels
-            CloseAllCustomCharacterScreenPanels();
-            ccsPresetPanel.SetActive(true);
-
-            RebuildAttributeSection();
-
-            // to do: rebuild talents and abilities section
-        }
+        }           
         private void ApplyAttributesFromPreset(HexCharacterData preset)
         {
             // Reset to base stats
@@ -563,6 +583,7 @@ namespace HexGameEngine.MainMenu
 
             RebuildAttributeSection();
         }
+
         #endregion
 
         // Custom Character Screen Logic : Update Model + Race
