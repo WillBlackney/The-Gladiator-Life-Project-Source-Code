@@ -81,6 +81,7 @@ namespace HexGameEngine.MainMenu
         [Space(20)]
         [Header("Choose Ability Panel Components")]
         [SerializeField] private RectTransform[] chooseAbilityPanelLayouts;
+        [SerializeField] private TextMeshProUGUI totalChosenAbilitiesText;
         [SerializeField] private TextMeshProUGUI chooseAbilityButtonsHeaderTextOne;
         [SerializeField] private ChooseAbilityButton[] chooseAbilityButtonsSectionOne;
         [SerializeField] private TextMeshProUGUI chooseAbilityButtonsHeaderTextTwo;
@@ -608,9 +609,17 @@ namespace HexGameEngine.MainMenu
             CloseAllCustomCharacterScreenPanels();
             ccsPresetPanel.SetActive(true);
 
-            // save changes
+            // save ability changes
+            List<AbilityData> newAbilities = new List<AbilityData>();
+            foreach(ChooseAbilityButton b in GetSelectedAbilities())
+            {
+                newAbilities.Add(b.AbilityIcon.MyDataRef);
+            }
+            characterBuild.abilityBook.allKnownAbilities.Clear();
+            characterBuild.abilityBook.allKnownAbilities.AddRange(newAbilities);
 
             // show preset panel
+            RebuildAndShowPresetPanel();
         }
         public void OnTalentSectionEditButtonClicked()
         {
@@ -675,7 +684,8 @@ namespace HexGameEngine.MainMenu
                     }
                 }
             }
-            
+
+            UpdateChosenAbilitiesText();
         }
         private void RebuildChooseAbilitiesPanelLayouts()
         {
@@ -686,6 +696,26 @@ namespace HexGameEngine.MainMenu
                     LayoutRebuilder.ForceRebuildLayoutImmediate(r);
                 }
             }
+        }
+        public List<ChooseAbilityButton> GetSelectedAbilities()
+        {
+            List<ChooseAbilityButton> ret = new List<ChooseAbilityButton>();
+
+            List<ChooseAbilityButton> allButtons = new List<ChooseAbilityButton>();
+            allButtons.AddRange(chooseAbilityButtonsSectionOne);
+            allButtons.AddRange(chooseAbilityButtonsSectionTwo);
+
+            foreach(ChooseAbilityButton b in allButtons)
+            {
+                if (b.Selected)
+                    ret.Add(b);
+            }
+
+            return ret;
+        }
+        public void UpdateChosenAbilitiesText()
+        {
+            totalChosenAbilitiesText.text = GetSelectedAbilities().Count.ToString() + "/3";
         }
         #endregion
 

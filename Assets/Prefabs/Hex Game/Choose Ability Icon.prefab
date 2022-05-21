@@ -86,6 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7408490721708968608}
   - component: {fileID: 7408490721708968611}
+  - component: {fileID: 2478030892943832503}
   m_Layer: 0
   m_Name: Choose Ability Icon
   m_TagString: Untagged
@@ -129,6 +130,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityIcon: {fileID: 7431313182768813131}
   selectedVisualParent: {fileID: 7431313183835617810}
+--- !u!114 &2478030892943832503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408490721708968609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db09d9cca6141a47a3c991340f1f29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputType: 0
+  onClickEvents:
+  - widgetEvent: 3
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectDisabled: {fileID: 0}
+    objectEnabled: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7408490721708968611}
+          m_TargetAssemblyTypeName: HexGameEngine.UI.ChooseAbilityButton, Main
+          m_MethodName: OnClick
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    fadeSpeed: 0
+  mouseEnterEvents: []
+  mouseExitEvents: []
+  onDisableEvents: []
+  pointerIsOverMe: 0
+  timeSinceLastPointerEnter: 0
 --- !u!1 &7408490721832894519
 GameObject:
   m_ObjectHideFlags: 0

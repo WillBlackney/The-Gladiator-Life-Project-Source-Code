@@ -1,4 +1,5 @@
 using HexGameEngine.Abilities;
+using HexGameEngine.MainMenu;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,6 +51,14 @@ namespace HexGameEngine.UI
         public void OnClick()
         {
             // to do handle select and deselect + check for excedding choice limit of 3
+            if (selected)            
+                HandleChangeSelectionState(false);
+            else if(!selected && MainMenuController.Instance.GetSelectedAbilities().Count < 3)            
+                HandleChangeSelectionState(true);
+
+            MainMenuController.Instance.UpdateChosenAbilitiesText();
+
+
         }
     }
 }
