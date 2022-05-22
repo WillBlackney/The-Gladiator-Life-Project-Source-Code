@@ -13,6 +13,7 @@ namespace HexGameEngine.UI
         #region
         [SerializeField] Image abilityImage;
         private AbilityData myDataRef;
+        [SerializeField] bool placeModalAbove = true;
         #endregion
 
         // Getters + Accessors
@@ -36,7 +37,7 @@ namespace HexGameEngine.UI
             if(MyDataRef != null)
             {
                 KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyDataRef.keyWords);
-                AbilityPopupController.Instance.OnRosterAbilityButtonMousedOver(this);
+                AbilityPopupController.Instance.OnRosterAbilityButtonMousedOver(this, placeModalAbove);
             }                       
         }
 

@@ -74,11 +74,14 @@ namespace HexGameEngine.UI
             PlacePanelOnAbilityBarButton(b);
             ForceRebuildLayouts();
         }
-        public void OnRosterAbilityButtonMousedOver(UIAbilityIcon b)
+        public void OnRosterAbilityButtonMousedOver(UIAbilityIcon b, bool above = true)
         {
             FadeInPanel();
             BuildPanelFromAbilityData(b.MyDataRef);
-            PlacePanelAboveAbilityIcon(b);
+            ForceRebuildLayouts();
+            if (above)
+                PlacePanelAboveAbilityIcon(b);
+            else PlacePanelWestOfAbilityIcon(b);
             ForceRebuildLayouts();
         }
         public void OnAbilityBookItemMousedOver(InventoryItemView item)
@@ -141,6 +144,13 @@ namespace HexGameEngine.UI
 
             mainPositioningRect.position = b.transform.position;
             mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x, mainPositioningRect.localPosition.y + yOffSet, 0);
+        }
+        private void PlacePanelWestOfAbilityIcon(UIAbilityIcon b)
+        {
+            mainPositioningRect.position = b.transform.position;
+            float xOffset = mainPositioningRect.rect.width / 2 + 40;
+            float yOffset = mainPositioningRect.rect.height - 100;
+            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x - xOffset, mainPositioningRect.localPosition.y - yOffset, 0);
         }
         private void PlacePanelAboveTransform(Transform b)
         {

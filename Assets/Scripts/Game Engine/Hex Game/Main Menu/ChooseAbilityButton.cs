@@ -8,10 +8,13 @@ namespace HexGameEngine.UI
 {
     public class ChooseAbilityButton : MonoBehaviour
     {
+        #region Properties + Components
         [SerializeField] UIAbilityIcon abilityIcon;
         [SerializeField] GameObject selectedVisualParent;
         private bool selected = false;
+        #endregion
 
+        #region Getters + Accesors
         public UIAbilityIcon AbilityIcon
         {
             get { return abilityIcon; }
@@ -24,7 +27,9 @@ namespace HexGameEngine.UI
         {
             get { return selected; }
         }
+        #endregion
 
+        #region Logic
         public void ResetAndHide()
         {
             gameObject.SetActive(false);
@@ -60,5 +65,6 @@ namespace HexGameEngine.UI
 
 
         }
+        #endregion
     }
 }

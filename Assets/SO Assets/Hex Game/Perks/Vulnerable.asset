@@ -27,11 +27,11 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: times this character takes damage, increase the amount taken by
+    phrase: 'times this character takes damage, increase the amount taken by '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '50% '
+    phrase: 30%
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

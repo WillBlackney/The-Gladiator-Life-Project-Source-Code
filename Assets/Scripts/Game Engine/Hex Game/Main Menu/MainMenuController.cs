@@ -81,12 +81,15 @@ namespace HexGameEngine.MainMenu
         [Space(20)]
         [Header("Choose Ability Panel Components")]
         [SerializeField] private RectTransform[] chooseAbilityPanelLayouts;
-        [SerializeField] private TextMeshProUGUI totalChosenAbilitiesText;
+        [SerializeField] private TextMeshProUGUI totalChosenAbilitiesText;      
         [SerializeField] private TextMeshProUGUI chooseAbilityButtonsHeaderTextOne;
         [SerializeField] private ChooseAbilityButton[] chooseAbilityButtonsSectionOne;
         [SerializeField] private TextMeshProUGUI chooseAbilityButtonsHeaderTextTwo;
         [SerializeField] private ChooseAbilityButton[] chooseAbilityButtonsSectionTwo;
+        [Space(10)]
+        [SerializeField] private TextMeshProUGUI totalChosenTalentsText;
         [SerializeField] private ChooseTalentButton[] chooseTalentButtons;
+
         // Non inspector proerties
         private HexCharacterData characterBuild;
         private HexCharacterData currentPreset;
@@ -595,7 +598,7 @@ namespace HexGameEngine.MainMenu
 
         #endregion
 
-        // Custom Character Screen Logic : Choose Abilities + Talents Page Logic
+        // Custom Character Screen Logic : Choose Abilities Sub Screeb
         #region
         public void OnAbilitySectionEditButtonClicked()
         {
@@ -607,7 +610,6 @@ namespace HexGameEngine.MainMenu
         public void OnAbilitySectionConfirmButtonClicked()
         {
             CloseAllCustomCharacterScreenPanels();
-            ccsPresetPanel.SetActive(true);
 
             // save ability changes
             List<AbilityData> newAbilities = new List<AbilityData>();
@@ -620,15 +622,7 @@ namespace HexGameEngine.MainMenu
 
             // show preset panel
             RebuildAndShowPresetPanel();
-        }
-        public void OnTalentSectionEditButtonClicked()
-        {
-
-        }
-        public void OnTalentSectionConfirmButtonClicked()
-        {
-
-        }
+        }       
         private void BuildChooseAbilitiesPanel()
         {
             TalentSchool talentSchoolOne = characterBuild.talentPairings[0].talentSchool;
@@ -717,8 +711,91 @@ namespace HexGameEngine.MainMenu
         {
             totalChosenAbilitiesText.text = GetSelectedAbilities().Count.ToString() + "/3";
         }
+        private void HandleUnlearnAbilitiesOnTalentsChanged()
+        {
+            List<AbilityData> invalidAbilities = new List<AbilityData>();
+            List<TalentSchool> newTalents = new List<TalentSchool>();
+
+            // Determine current talents
+            foreach (TalentPairing tp in characterBuild.talentPairings)
+                newTalents.Add(tp.talentSchool);
+
+            // Find invalid abilities
+            foreach(AbilityData a in characterBuild.abilityBook.allKnownAbilities)
+            {
+                if(newTalents.Contains(a.talentRequirementData.talentSchool) == false)                
+                    invalidAbilities.Add(a);                
+            }
+
+            // Remove invalid abilities
+            foreach(AbilityData a in invalidAbilities)            
+                characterBuild.abilityBook.allKnownAbilities.Remove(a);            
+        }
         #endregion
 
+        // Custom Character Screen Logic : Choose Talents Sub Screeb
+        #region
+        public void BuildChooseTalentsPanel()
+        {
+            // Reset all first
+            for (int i = 0; i < chooseTalentButtons.Length; i++)
+                chooseTalentButtons[i].ResetAndHide();
+
+            // Rebuild
+            for (int i = 0; i < chooseTalentButtons.Length; i++)
+                chooseTalentButtons[i].BuildAndShow();
+
+            // Select buttons based on known abilities of character
+            foreach (TalentPairing tp in characterBuild.talentPairings)
+            {
+                foreach (ChooseTalentButton button in chooseTalentButtons)
+                {
+                    if (tp.talentSchool == button.TalentPairing.talentSchool)
+                    {
+                        button.HandleChangeSelectionState(true);
+                        break;
+                    }
+                }
+            }
+            UpdateChosenTalentsText();
+        }
+        public void OnTalentSectionEditButtonClicked()
+        {
+            CloseAllCustomCharacterScreenPanels();         
+            ccsTalentPanel.SetActive(true);
+            BuildChooseTalentsPanel();
+        }
+        public void OnTalentSectionConfirmButtonClicked()
+        {
+            CloseAllCustomCharacterScreenPanels();
+
+            // Apply and save talent changes
+            characterBuild.talentPairings.Clear();
+            foreach (ChooseTalentButton b in GetSelectedTalents())            
+                characterBuild.talentPairings.Add(new TalentPairing(b.TalentPairing.talentSchool, 1));
+
+            // Unlearn abilities from old talents
+            HandleUnlearnAbilitiesOnTalentsChanged();
+
+            // Show preset panel
+            RebuildAndShowPresetPanel();
+        }
+        public List<ChooseTalentButton> GetSelectedTalents()
+        {
+            List<ChooseTalentButton> ret = new List<ChooseTalentButton>();
+            foreach (ChooseTalentButton b in chooseTalentButtons)
+            {
+                if (b.Selected)
+                    ret.Add(b);
+            }
+
+            return ret;
+        }
+        public void UpdateChosenTalentsText()
+        {
+            totalChosenTalentsText.text = GetSelectedTalents().Count.ToString() + "/2";
+        }
+        #endregion
         // Custom Character Screen Logic : Update Model + Race
         #region
         private void HandleChangeRace(CharacterRace race)
