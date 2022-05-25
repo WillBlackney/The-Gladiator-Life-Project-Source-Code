@@ -15,6 +15,7 @@ using HexGameEngine.UI;
 using HexGameEngine.UCM;
 using CardGameEngine.UCM;
 using HexGameEngine.Abilities;
+using HexGameEngine.Items;
 
 namespace HexGameEngine.MainMenu
 {
@@ -89,6 +90,18 @@ namespace HexGameEngine.MainMenu
         [Space(10)]
         [SerializeField] private TextMeshProUGUI totalChosenTalentsText;
         [SerializeField] private ChooseTalentButton[] chooseTalentButtons;
+
+        [Space(20)]
+        [Header("Items Panel Components")]
+        [SerializeField] private ItemDataSO[] allStartingHeadItems;
+        [SerializeField] private ItemDataSO[] allStartingBodyItems;
+        [SerializeField] private ItemDataSO[] allStartingMainHandItems;
+        [SerializeField] private ItemDataSO[] allStartingOffHandItems;
+        [SerializeField] private UIAbilityIcon[] itemsPanelAbilityIcons;
+        [SerializeField] private CustomItemIcon headItemIcon;
+        [SerializeField] private CustomItemIcon bodyItemIcon;
+        [SerializeField] private CustomItemIcon mainHandItemIcon;
+        [SerializeField] private CustomItemIcon offHandItemIcon;
 
         // Non inspector proerties
         private HexCharacterData characterBuild;
@@ -247,7 +260,6 @@ namespace HexGameEngine.MainMenu
         public void SetCustomCharacterDataDefaultState()
         {
             // Set up modular character data
-            //characterBuild = ObjectCloner.CloneJSON(CharacterDataController.Instance.AllCustomCharacterTemplates[0]);
             characterBuild = CharacterDataController.Instance.CloneCharacterData(CharacterDataController.Instance.AllCustomCharacterTemplates[0]);
             baselineAttributes.CopyValuesIntoOther(characterBuild.attributeSheet);
             HandleChangeClassPreset(CharacterDataController.Instance.AllCustomCharacterTemplates[0]);
@@ -274,7 +286,8 @@ namespace HexGameEngine.MainMenu
             // Update attributes
             ApplyAttributesFromPreset(preset);
 
-            // to do: update weapons, items
+            // Update weapons + clothing items
+            HandleSetItemsFromPreset(preset);
 
             // Rebuild Origin page
             RebuildAndShowOriginPageView();
@@ -336,7 +349,7 @@ namespace HexGameEngine.MainMenu
             headerTabImages[2].sprite = tabSelectedSprite;
             headerTabTexts[2].color = tabSelectedFontColour;
 
-            ccsItemsPanel.SetActive(true);
+            RebuildAndShowItemsPanel();
         }
 #endregion
 
@@ -796,6 +809,7 @@ namespace HexGameEngine.MainMenu
             totalChosenTalentsText.text = GetSelectedTalents().Count.ToString() + "/2";
         }
         #endregion
+
         // Custom Character Screen Logic : Update Model + Race
         #region
         private void HandleChangeRace(CharacterRace race)
@@ -818,6 +832,7 @@ namespace HexGameEngine.MainMenu
         {
             currentModelTemplate = newModel;
             CharacterModeller.BuildModelFromStringReferences(customCharacterScreenUCM, newModel.bodyParts);
+            CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
         }
         public void OnChooseRaceNextButtonClicked()
         {
@@ -903,6 +918,469 @@ namespace HexGameEngine.MainMenu
             }
 
             return ret;
+        }
+
+        #endregion
+
+        // Custom Character Screen Logic : Items Page
+        #region
+        private void RebuildAndShowItemsPanel()
+        {
+            // Route to page
+            CloseAllCustomCharacterScreenPanels();
+            ccsItemsPanel.SetActive(true);
+
+            // to do: set racial model preset text
+
+            // Set head, body and weapon item buttons
+
+            // Reset and build weapon ability icons
+            RebuildItemPanelWeaponAbilityIcons();
+        }
+        private void RebuildItemPanelWeaponAbilityIcons()
+        {
+            // Reset and build ability icons
+            foreach (UIAbilityIcon a in itemsPanelAbilityIcons)
+                a.HideAndReset();
+
+            // Determine + create weapon abilities
+            List<AbilityData> weaponAbilities = AbilityController.Instance.GetAbilitiesFromWeapons(characterBuild.itemSet);
+
+            // Build icons from weapon abilities
+            for (int i = 0; i < weaponAbilities.Count && i < itemsPanelAbilityIcons.Length; i++)
+                itemsPanelAbilityIcons[i].BuildFromAbilityData(weaponAbilities[i]);
+        }
+        private void HandleSetItemsFromPreset(HexCharacterData preset)
+        {
+            ItemController.Instance.CopyItemManagerDataIntoOtherItemManager(preset.itemSet, characterBuild.itemSet);
+            CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+
+            // Rebuild icon views for items + abilities
+            UpdateItemSlotViews();
+            RebuildItemPanelWeaponAbilityIcons();
+        }
+        private void UpdateItemSlotViews()
+        {
+            headItemIcon.BuildFromData(characterBuild.itemSet.headArmour);
+            bodyItemIcon.BuildFromData(characterBuild.itemSet.bodyArmour);
+            mainHandItemIcon.BuildFromData(characterBuild.itemSet.mainHandItem);
+            offHandItemIcon.BuildFromData(characterBuild.itemSet.offHandItem);
+        }
+        public void OnNextHeadItemClicked()
+        {          
+
+            // Not currently wearing a head item
+            if (characterBuild.itemSet.headArmour == null)
+            {
+                ItemData headItem = ItemController.Instance.GetItemDataByName(allStartingHeadItems[0].itemName);
+                characterBuild.itemSet.headArmour = headItem;
+                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                headItemIcon.BuildFromData(headItem);
+            }
+
+            else
+            {
+                ItemDataSO currentHead = null;
+                foreach (ItemDataSO headData in allStartingHeadItems)
+                {
+                    if (headData.itemName == characterBuild.itemSet.headArmour.itemName)
+                    {
+                        currentHead = headData;
+                    }
+                }
+
+                int currentIndex = Array.IndexOf(allStartingHeadItems, currentHead);
+                
+                // Set no item
+                if (currentIndex == allStartingHeadItems.Length - 1)
+                {
+                    characterBuild.itemSet.headArmour = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeHeadWear);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    headItemIcon.BuildFromData(null);
+                }
+
+                // Set next item
+                else
+                {
+                    ItemData headItem = ItemController.Instance.GetItemDataByName(allStartingHeadItems[currentIndex + 1].itemName);
+                    characterBuild.itemSet.headArmour = headItem;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    headItemIcon.BuildFromData(headItem);
+                }
+                    
+            }
+
+
+        }
+        public void OnPreviousHeadItemClicked()
+        {
+            // Not currently wearing a head item
+            if (characterBuild.itemSet.headArmour == null)
+            {
+                ItemData headItem = ItemController.Instance.GetItemDataByName(allStartingHeadItems[allStartingHeadItems.Length - 1].itemName);
+                characterBuild.itemSet.headArmour = headItem;
+                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                headItemIcon.BuildFromData(headItem);
+            }
+
+            else
+            {
+                ItemDataSO currentHead = null;
+                foreach (ItemDataSO headData in allStartingHeadItems)
+                {
+                    if (headData.itemName == characterBuild.itemSet.headArmour.itemName)
+                    {
+                        currentHead = headData;
+                    }
+                }
+                int currentIndex = Array.IndexOf(allStartingHeadItems, currentHead);
+
+                // Set no item
+                if (currentIndex == 0)
+                {
+                    characterBuild.itemSet.headArmour = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeHeadWear);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    headItemIcon.BuildFromData(null);
+                }
+                // Set previous item
+                else
+                {
+                    ItemData headItem = ItemController.Instance.GetItemDataByName(allStartingHeadItems[currentIndex - 1].itemName);
+                    characterBuild.itemSet.headArmour = headItem;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    headItemIcon.BuildFromData(headItem);
+                }
+
+            }
+
+        }
+
+
+        public void OnNextBodyItemClicked()
+        {
+
+            // Not currently wearing a head item
+            if (characterBuild.itemSet.bodyArmour == null)
+            {
+                ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingBodyItems[0].itemName);
+                characterBuild.itemSet.bodyArmour = bodyItem;
+                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                bodyItemIcon.BuildFromData(bodyItem);
+            }
+
+            else
+            {
+                ItemDataSO currentBody = null;
+                foreach (ItemDataSO bodyData in allStartingBodyItems)
+                {
+                    if (bodyData.itemName == characterBuild.itemSet.bodyArmour.itemName)                    
+                        currentBody = bodyData;                    
+                }
+
+                int currentIndex = Array.IndexOf(allStartingBodyItems, currentBody);
+
+                // Set no item
+                if (currentIndex == allStartingBodyItems.Length - 1)
+                {
+                    characterBuild.itemSet.bodyArmour = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeChestWear);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    bodyItemIcon.BuildFromData(null);
+                }
+
+                // Set next item
+                else
+                {
+                    ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingBodyItems[currentIndex + 1].itemName);
+                    characterBuild.itemSet.bodyArmour = bodyItem;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    bodyItemIcon.BuildFromData(bodyItem);
+                }
+
+            }
+
+
+        }
+        public void OnPreviousBodyItemClicked()
+        {
+            // Not currently wearing a head item
+            if (characterBuild.itemSet.bodyArmour == null)
+            {
+                ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingBodyItems[allStartingBodyItems.Length - 1].itemName);
+                characterBuild.itemSet.bodyArmour = bodyItem;
+                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                bodyItemIcon.BuildFromData(bodyItem);
+            }
+
+            else
+            {
+                ItemDataSO currentBody = null;
+                foreach (ItemDataSO bodyData in allStartingBodyItems)
+                {
+                    if (bodyData.itemName == characterBuild.itemSet.bodyArmour.itemName)                    
+                        currentBody = bodyData;                    
+                }
+                int currentIndex = Array.IndexOf(allStartingBodyItems, currentBody);
+
+                // Set no item
+                if (currentIndex == 0)
+                {
+                    characterBuild.itemSet.bodyArmour = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeChestWear);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    bodyItemIcon.BuildFromData(null);
+                }
+                // Set previous item
+                else
+                {
+                    ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingBodyItems[currentIndex - 1].itemName);
+                    characterBuild.itemSet.bodyArmour = bodyItem;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    bodyItemIcon.BuildFromData(bodyItem);
+                }
+
+            }
+
+        }
+
+
+
+        public void OnNextMainHandItemClicked()
+        {
+
+            // Not currently wearing a head item
+            if (characterBuild.itemSet.mainHandItem == null)
+            {
+                ItemData item = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[0].itemName);
+                characterBuild.itemSet.mainHandItem = item;
+                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                mainHandItemIcon.BuildFromData(item);
+
+                if (characterBuild.itemSet.offHandItem != null && item.handRequirement == HandRequirement.TwoHanded)
+                {
+                    characterBuild.itemSet.offHandItem = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
+                    offHandItemIcon.BuildFromData(null);
+                }
+            }
+
+            else
+            {
+                ItemDataSO currentBody = null;
+                foreach (ItemDataSO bodyData in allStartingMainHandItems)
+                {
+                    if (bodyData.itemName == characterBuild.itemSet.mainHandItem.itemName)
+                        currentBody = bodyData;
+                }
+
+                int currentIndex = Array.IndexOf(allStartingMainHandItems, currentBody);
+
+                // Set no item
+                if (currentIndex == allStartingMainHandItems.Length - 1)
+                {
+                    characterBuild.itemSet.mainHandItem = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    mainHandItemIcon.BuildFromData(null);
+                }
+
+                // Set next item
+                else
+                {
+                    ItemData item = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[currentIndex + 1].itemName);
+                    characterBuild.itemSet.mainHandItem = item;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    mainHandItemIcon.BuildFromData(item);
+
+                    if (characterBuild.itemSet.offHandItem != null && item.handRequirement == HandRequirement.TwoHanded)
+                    {
+                        characterBuild.itemSet.offHandItem = null;
+                        CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
+                        offHandItemIcon.BuildFromData(null);
+                    }
+                }
+
+            }
+
+            RebuildItemPanelWeaponAbilityIcons();
+
+
+        }
+        public void OnPreviousMainHandItemClicked()
+        {
+            // Not currently wearing a head item
+            if (characterBuild.itemSet.mainHandItem == null)
+            {
+                ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[allStartingMainHandItems.Length - 1].itemName);
+                characterBuild.itemSet.mainHandItem = bodyItem;
+                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                mainHandItemIcon.BuildFromData(bodyItem);
+
+                if (characterBuild.itemSet.offHandItem != null && bodyItem.handRequirement == HandRequirement.TwoHanded)
+                {
+                    characterBuild.itemSet.offHandItem = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
+                    offHandItemIcon.BuildFromData(null);
+                }
+            }
+
+            else
+            {
+                ItemDataSO currentBody = null;
+                foreach (ItemDataSO bodyData in allStartingMainHandItems)
+                {
+                    if (bodyData.itemName == characterBuild.itemSet.mainHandItem.itemName)
+                        currentBody = bodyData;
+                }
+                int currentIndex = Array.IndexOf(allStartingMainHandItems, currentBody);
+
+                // Set no item
+                if (currentIndex == 0)
+                {
+                    characterBuild.itemSet.mainHandItem = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    mainHandItemIcon.BuildFromData(null);
+                }
+                // Set previous item
+                else
+                {
+                    ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[currentIndex - 1].itemName);
+                    characterBuild.itemSet.mainHandItem = bodyItem;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    mainHandItemIcon.BuildFromData(bodyItem);
+
+                    if (characterBuild.itemSet.offHandItem != null && bodyItem.handRequirement == HandRequirement.TwoHanded)
+                    {
+                        characterBuild.itemSet.offHandItem = null;
+                        CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
+                        offHandItemIcon.BuildFromData(null);
+                    }
+                }
+
+            }
+            RebuildItemPanelWeaponAbilityIcons();
+        }
+
+
+
+        public void OnNextOffHandItemClicked()
+        {
+
+            // Not currently wearing a head item
+            if (characterBuild.itemSet.offHandItem == null)
+            {
+                ItemData item = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[0].itemName);
+                characterBuild.itemSet.offHandItem = item;
+                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                offHandItemIcon.BuildFromData(item);
+
+                if (characterBuild.itemSet.mainHandItem != null && characterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+                {
+                    characterBuild.itemSet.mainHandItem = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
+                    mainHandItemIcon.BuildFromData(null);
+                }
+            }
+
+            else
+            {
+                ItemDataSO currentBody = null;
+                foreach (ItemDataSO bodyData in allStartingOffHandItems)
+                {
+                    if (bodyData.itemName == characterBuild.itemSet.offHandItem.itemName)
+                        currentBody = bodyData;
+                }
+
+                int currentIndex = Array.IndexOf(allStartingOffHandItems, currentBody);
+
+                // Set no item
+                if (currentIndex == allStartingOffHandItems.Length - 1)
+                {
+                    characterBuild.itemSet.offHandItem = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    offHandItemIcon.BuildFromData(null);
+                }
+
+                // Set next item
+                else
+                {
+                    ItemData item = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[currentIndex + 1].itemName);
+                    characterBuild.itemSet.offHandItem = item;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    offHandItemIcon.BuildFromData(item);
+
+                    if (characterBuild.itemSet.mainHandItem != null && characterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+                    {
+                        characterBuild.itemSet.mainHandItem = null;
+                        CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
+                        mainHandItemIcon.BuildFromData(null);
+                    }
+                }
+
+            }
+
+            RebuildItemPanelWeaponAbilityIcons();
+
+
+        }
+        public void OnPreviousOffHandItemClicked()
+        {
+            // Not currently wearing a head item
+            if (characterBuild.itemSet.offHandItem == null)
+            {
+                ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[allStartingOffHandItems.Length - 1].itemName);
+                characterBuild.itemSet.offHandItem = bodyItem;
+                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                offHandItemIcon.BuildFromData(bodyItem);
+
+                if (characterBuild.itemSet.mainHandItem != null && characterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+                {
+                    characterBuild.itemSet.mainHandItem = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
+                    mainHandItemIcon.BuildFromData(null);
+                }
+            }
+
+            else
+            {
+                ItemDataSO currentBody = null;
+                foreach (ItemDataSO bodyData in allStartingOffHandItems)
+                {
+                    if (bodyData.itemName == characterBuild.itemSet.offHandItem.itemName)
+                        currentBody = bodyData;
+                }
+                int currentIndex = Array.IndexOf(allStartingOffHandItems, currentBody);
+
+                // Set no item
+                if (currentIndex == 0)
+                {
+                    characterBuild.itemSet.offHandItem = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    offHandItemIcon.BuildFromData(null);
+                }
+                // Set previous item
+                else
+                {
+                    ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[currentIndex - 1].itemName);
+                    characterBuild.itemSet.offHandItem = bodyItem;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    offHandItemIcon.BuildFromData(bodyItem);
+
+                    if (characterBuild.itemSet.mainHandItem != null && characterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+                    {
+                        characterBuild.itemSet.mainHandItem = null;
+                        CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
+                        mainHandItemIcon.BuildFromData(null);
+                    }
+                }
+
+            }
+            RebuildItemPanelWeaponAbilityIcons();
         }
 
         #endregion

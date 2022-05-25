@@ -254,7 +254,16 @@ namespace HexGameEngine.Abilities
         {
             character.abilityBook = new AbilityBook();
 
+            // Get weapon abilities
+            List<AbilityData> weaponAbilities = GetAbilitiesFromWeapons(character.itemSet);
+            foreach(AbilityData a in weaponAbilities)
+            {
+                a.myCharacter = character;
+                character.abilityBook.allKnownAbilities.Add(a);
+            }
+
             // build main hand weapon abilities
+            /*
             if (character.controller == Controller.Player && character.itemSet.mainHandItem != null)
             {
                 foreach (AbilityData d in character.itemSet.mainHandItem.grantedAbilities)
@@ -278,7 +287,7 @@ namespace HexGameEngine.Abilities
                     clone.myCharacter = character;
                     character.abilityBook.allKnownAbilities.Add(clone);
                 }
-            }
+            }*/
 
             foreach (AbilityData d in data.allKnownAbilities)
             {
@@ -286,6 +295,34 @@ namespace HexGameEngine.Abilities
                 clone.myCharacter = character;
                 character.abilityBook.allKnownAbilities.Add(clone);
             }
+        }
+        public List<AbilityData> GetAbilitiesFromWeapons(Items.ItemSet itemSet)
+        {
+            List<AbilityData> ret = new List<AbilityData>();
+
+            // build main hand weapon abilities
+            if (itemSet.mainHandItem != null)
+            {
+                foreach (AbilityData d in itemSet.mainHandItem.grantedAbilities)
+                {
+                    // Characters dont gain special weapon ability if they have an off hand item
+                    if (itemSet.offHandItem == null || (itemSet.offHandItem != null && d.weaponAbilityType == WeaponAbilityType.Basic))
+                    {
+                        ret.Add(ObjectCloner.CloneJSON(d));
+                    }
+                }
+            }
+
+            // build off hand weapon abilities
+            if (itemSet.offHandItem != null)
+            {
+                foreach (AbilityData d in itemSet.offHandItem.grantedAbilities)
+                {
+                    ret.Add(ObjectCloner.CloneJSON(d));
+                }
+            }
+
+            return ret;
         }
         public void HandleCharacterDataLearnNewAbility(HexCharacterData character, AbilityBook ab, AbilityData ability)
         {
