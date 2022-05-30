@@ -62,7 +62,7 @@ namespace HexGameEngine.Persistency
 
             // Determine charactes + add them to roster
             if(startingCharacter == null)            
-                startingCharacter = MainMenuController.Instance.GetChosenCharacterDataFiles()[0];
+                startingCharacter = MainMenuController.Instance.CharacterBuild;
             
             CharacterDataController.Instance.AddCharacterToRoster(startingCharacter);
            

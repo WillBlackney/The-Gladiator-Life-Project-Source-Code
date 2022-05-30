@@ -33,10 +33,6 @@ namespace HexGameEngine.MainMenu
         [SerializeField] private GameObject abandonRunPopupParent;
         [Space(20)]
 
-        [Header("New Game Screen Components")]      
-        [SerializeField] ChooseCharacterBox[] allChooseCharacterBoxes;
-        [Space(20)]
-
         [Header("In Game Menu Components")]
         [SerializeField] private GameObject inGameMenuScreenParent;
         [SerializeField] private CanvasGroup inGameMenuScreenCg;
@@ -67,6 +63,7 @@ namespace HexGameEngine.MainMenu
         [SerializeField] GameObject ccsTalentPanel;
         [Space(20)]
         [Header("Origin Panel Components")]
+        [SerializeField] private TMP_InputField characterNameInputField;
         [SerializeField] private TextMeshProUGUI originPanelRacialNameText;
         [SerializeField] private UIRaceIcon originPanelRacialIcon;
         [SerializeField] private TextMeshProUGUI originPanelRacialDescriptionText; 
@@ -93,6 +90,7 @@ namespace HexGameEngine.MainMenu
 
         [Space(20)]
         [Header("Items Panel Components")]
+        [SerializeField] private TextMeshProUGUI currentBodyModelText;
         [SerializeField] private ItemDataSO[] allStartingHeadItems;
         [SerializeField] private ItemDataSO[] allStartingBodyItems;
         [SerializeField] private ItemDataSO[] allStartingMainHandItems;
@@ -106,12 +104,20 @@ namespace HexGameEngine.MainMenu
         // Non inspector proerties
         private HexCharacterData characterBuild;
         private HexCharacterData currentPreset;
-        private RaceDataSO currentCustomRace;
+        private RaceDataSO currentCustomCharacterRace;
         private CharacterModelTemplateSO currentModelTemplate;
 
         private void Start()
         {
             RenderMenuButtons();
+        }
+        #endregion
+
+        // Getters + Accessors
+        #region
+        public HexCharacterData CharacterBuild
+        {
+            get { return characterBuild; }
         }
         #endregion
 
@@ -129,60 +135,6 @@ namespace HexGameEngine.MainMenu
                 HideChooseCharacterScreen();
                 ShowFrontScreen();
             });
-        }
-        public void OnChooseCharacterBoxNextButtonClicked(ChooseCharacterBox box)
-        {
-            Debug.Log("MainMenuController.OnChooseCharacterBoxNextButtonClicked() called...");
-            HexCharacterData[] characters = CharacterDataController.Instance.AllCharacterTemplates;
-            HexCharacterData nextValidCharacter = null;
-            int totalLoops = 0;
-            int currentIndex = Array.IndexOf(characters, box.currentCharacterSelection);
-            while (nextValidCharacter == null && totalLoops < 1000)
-            {
-                if (!IsCharacterAlreadySelected(characters[currentIndex]))
-                {
-                    nextValidCharacter = characters[currentIndex];
-                    break;
-                }
-
-                if (currentIndex == characters.Length - 1)
-                {
-                    currentIndex = 0;
-                }
-                else currentIndex++;
-
-                totalLoops++;
-
-            }
-            SetChooseCharacterBoxCharacterSelection(box, nextValidCharacter);
-        }
-        public void OnChooseCharacterBoxPreviousButtonClicked(ChooseCharacterBox box)
-        {
-            Debug.Log("MainMenuController.OnChooseCharacterBoxPreviousButtonClicked() called...");
-            HexCharacterData[] characters = CharacterDataController.Instance.AllCharacterTemplates;
-            HexCharacterData previousValidCharacter = null;
-            int totalLoops = 0;
-            int currentIndex = Array.IndexOf(characters, box.currentCharacterSelection);
-            while (previousValidCharacter == null && totalLoops < 1000)
-            {
-                if (!IsCharacterAlreadySelected(characters[currentIndex]))
-                {
-                    previousValidCharacter = characters[currentIndex];
-                    break;
-                }
-
-                if (currentIndex == 0)
-                {
-                    currentIndex = characters.Length - 1;
-                }
-                else currentIndex--;
-
-                totalLoops++;
-
-            }
-
-            SetChooseCharacterBoxCharacterSelection(box, previousValidCharacter);
-
         }
         public void OnMenuNewGameButtonClicked()
         {
@@ -260,11 +212,13 @@ namespace HexGameEngine.MainMenu
         public void SetCustomCharacterDataDefaultState()
         {
             // Set up modular character data
-            characterBuild = CharacterDataController.Instance.CloneCharacterData(CharacterDataController.Instance.AllCustomCharacterTemplates[0]);
+            HexCharacterData startingClassTemplate = CharacterDataController.Instance.AllCustomCharacterTemplates[0];
+            characterBuild = CharacterDataController.Instance.CloneCharacterData(startingClassTemplate);
+            characterBuild.attributeSheet = new AttributeSheet();
             baselineAttributes.CopyValuesIntoOther(characterBuild.attributeSheet);
-            HandleChangeClassPreset(CharacterDataController.Instance.AllCustomCharacterTemplates[0]);
+            HandleChangeClassPreset(startingClassTemplate);
 
-            // set to template 1 
+            // Set to template 1 
             RebuildAndShowOriginPageView();
 
             // Set to race 1
@@ -284,7 +238,7 @@ namespace HexGameEngine.MainMenu
             characterBuild.talentPairings.AddRange(preset.talentPairings);
 
             // Update attributes
-            ApplyAttributesFromPreset(preset);
+            preset.attributeSheet.CopyValuesIntoOther(characterBuild.attributeSheet);
 
             // Update weapons + clothing items
             HandleSetItemsFromPreset(preset);
@@ -403,6 +357,11 @@ namespace HexGameEngine.MainMenu
                 nextTemplate = templates[currentIndex - 1];
 
             HandleChangeClassPreset(nextTemplate);
+        }
+        public void OnNameInputFieldValueChanged()
+        {
+            characterBuild.myName = characterNameInputField.text;
+            characterBuild.myClassName = "Captain";
         }
 
         #endregion
@@ -552,22 +511,6 @@ namespace HexGameEngine.MainMenu
             Debug.Log("MainMenuController.GetTotalAttributePointsSpent() returning: " + dif.ToString());
             return dif;
         }           
-        private void ApplyAttributesFromPreset(HexCharacterData preset)
-        {
-            // Reset to base stats
-            preset.attributeSheet.CopyValuesIntoOther(characterBuild.attributeSheet);
-
-            // Apply stat difference from preset
-            /*
-            characterBuild.attributeSheet.strength.value += preset.attributeSheet.strength.value - characterBuild.attributeSheet.strength.value;
-            characterBuild.attributeSheet.intelligence.value += preset.attributeSheet.intelligence.value - characterBuild.attributeSheet.intelligence.value;
-            characterBuild.attributeSheet.accuracy.value += preset.attributeSheet.accuracy.value - characterBuild.attributeSheet.accuracy.value;
-            characterBuild.attributeSheet.dodge.value += preset.attributeSheet.dodge.value - characterBuild.attributeSheet.dodge.value;
-            characterBuild.attributeSheet.resolve.value += preset.attributeSheet.resolve.value - characterBuild.attributeSheet.resolve.value;
-            characterBuild.attributeSheet.constitution.value += preset.attributeSheet.constitution.value - characterBuild.attributeSheet.constitution.value;
-            characterBuild.attributeSheet.wits.value += preset.attributeSheet.wits.value - characterBuild.attributeSheet.wits.value;
-        
-        */}
         public void OnDecreaseAttributeButtonClicked(CustomCharacterAttributeRow row)
         {
             if (row.Attribute == CoreAttribute.Strength)
@@ -815,15 +758,15 @@ namespace HexGameEngine.MainMenu
         private void HandleChangeRace(CharacterRace race)
         {
             // Get + cache race data
-            currentCustomRace = CharacterDataController.Instance.GetRaceData(race);
-            characterBuild.race = currentCustomRace.racialTag;
+            currentCustomCharacterRace = CharacterDataController.Instance.GetRaceData(race);
+            characterBuild.race = currentCustomCharacterRace.racialTag;
 
             // Build race icon image
-            originPanelRacialIcon.BuildFromRacialData(currentCustomRace);
+            originPanelRacialIcon.BuildFromRacialData(currentCustomCharacterRace);
 
             // Build racial texts
-            originPanelRacialDescriptionText.text = currentCustomRace.loreDescription;
-            originPanelRacialNameText.text = currentCustomRace.racialTag.ToString();
+            originPanelRacialDescriptionText.text = currentCustomCharacterRace.loreDescription;
+            originPanelRacialNameText.text = currentCustomCharacterRace.racialTag.ToString();
 
             // Rebuild UCM as default model of race
             HandleChangeRacialModel(GetRacialModelBasket(characterBuild.race).templates[0]);
@@ -831,15 +774,18 @@ namespace HexGameEngine.MainMenu
         private void HandleChangeRacialModel(CharacterModelTemplateSO newModel)
         {
             currentModelTemplate = newModel;
+            characterBuild.modelParts = newModel.bodyParts;
             CharacterModeller.BuildModelFromStringReferences(customCharacterScreenUCM, newModel.bodyParts);
             CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+            int index = Array.IndexOf(GetRacialModelBasket(characterBuild.race).templates, currentModelTemplate);
+            currentBodyModelText.text = "Body " + (index + 1).ToString();
         }
         public void OnChooseRaceNextButtonClicked()
         {
             Debug.Log("MainMenuController.OnChooseRaceNextButtonClicked() called...");
             CharacterRace[] playableRaces = CharacterDataController.Instance.PlayableRaces.ToArray();
             CharacterRace nextValidRace = CharacterRace.None;
-            int currentIndex = Array.IndexOf(playableRaces, currentCustomRace.racialTag);
+            int currentIndex = Array.IndexOf(playableRaces, currentCustomCharacterRace.racialTag);
 
             if (currentIndex == playableRaces.Length - 1)
                 nextValidRace = playableRaces[0];
@@ -855,7 +801,7 @@ namespace HexGameEngine.MainMenu
             Debug.Log("MainMenuController.OnChooseRacePreviousButtonClicked() called...");
             CharacterRace[] playableRaces = CharacterDataController.Instance.PlayableRaces.ToArray();
             CharacterRace nextValidRace = CharacterRace.None;
-            int currentIndex = Array.IndexOf(playableRaces, currentCustomRace.racialTag);
+            int currentIndex = Array.IndexOf(playableRaces, currentCustomCharacterRace.racialTag);
 
             if (currentIndex == 0)
                 nextValidRace = playableRaces[playableRaces.Length - 1];
@@ -962,9 +908,11 @@ namespace HexGameEngine.MainMenu
         private void UpdateItemSlotViews()
         {
             headItemIcon.BuildFromData(characterBuild.itemSet.headArmour);
+            if (characterBuild.itemSet.headArmour == null) CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeHeadWear);
             bodyItemIcon.BuildFromData(characterBuild.itemSet.bodyArmour);
             mainHandItemIcon.BuildFromData(characterBuild.itemSet.mainHandItem);
             offHandItemIcon.BuildFromData(characterBuild.itemSet.offHandItem);
+            if(characterBuild.itemSet.offHandItem == null) CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
         }
         public void OnNextHeadItemClicked()
         {          
@@ -1056,8 +1004,6 @@ namespace HexGameEngine.MainMenu
             }
 
         }
-
-
         public void OnNextBodyItemClicked()
         {
 
@@ -1144,9 +1090,6 @@ namespace HexGameEngine.MainMenu
             }
 
         }
-
-
-
         public void OnNextMainHandItemClicked()
         {
 
@@ -1263,9 +1206,6 @@ namespace HexGameEngine.MainMenu
             }
             RebuildItemPanelWeaponAbilityIcons();
         }
-
-
-
         public void OnNextOffHandItemClicked()
         {
 
@@ -1383,43 +1323,13 @@ namespace HexGameEngine.MainMenu
             RebuildItemPanelWeaponAbilityIcons();
         }
 
-        #endregion
-
-        // Choose Character Screen Logic
-        #region
-        public void SetChooseCharacterBoxStartingStates()
+        public void OnNextRacialModelButtonClicked()
         {
-            for(int i = 0; i < allChooseCharacterBoxes.Length; i++)
-            {
-                SetChooseCharacterBoxCharacterSelection(allChooseCharacterBoxes[i], CharacterDataController.Instance.AllCharacterTemplates[i]);
-            }
+            HandleChangeRacialModel(GetNextRacialModel(characterBuild.race));
         }
-        private void SetChooseCharacterBoxCharacterSelection(ChooseCharacterBox box, HexCharacterData character)
+        public void OnPreviousRacialModelButtonClicked()
         {
-            Debug.Log("MainMenuController.SetChooseCharacterBoxCharacterSelection() new character selection = " + character.myClassName);
-            box.currentCharacterSelection = character;
-            box.ClassNameText.text = character.myClassName;
-        }
-        private bool IsCharacterAlreadySelected(HexCharacterData character)
-        {
-            bool bRet = false;
-            foreach(ChooseCharacterBox box in allChooseCharacterBoxes)
-            {
-                if(box.currentCharacterSelection == character)
-                {
-                    bRet = true;
-                    break;
-                }
-            }
-
-            return bRet;
-        }        
-        public List<HexCharacterData> GetChosenCharacterDataFiles()
-        {
-            List<HexCharacterData> characters = new List<HexCharacterData>();
-            foreach (ChooseCharacterBox box in allChooseCharacterBoxes)
-                characters.Add(box.currentCharacterSelection);
-            return characters;
+            HandleChangeRacialModel(GetPreviousRacialModel(characterBuild.race));
         }
         #endregion
 

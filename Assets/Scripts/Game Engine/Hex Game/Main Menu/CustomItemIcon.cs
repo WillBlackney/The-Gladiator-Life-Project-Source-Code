@@ -44,14 +44,14 @@ namespace HexGameEngine.UI
 
         // Input
         #region
-        private void OnMouseOver()
+        public void MouseEnter()
         {
-            //if (itemDataRef == null) return;
-            //ItemPopupController.Instance.OnRosterItemSlotMousedOver(this);
+            if (itemDataRef == null) return;
+            ItemPopupController.Instance.OnCustomCharacterItemSlotMousedOver(this);
         }
-        public void OnMouseExit()
+        public void MouseExit()
         {
-            //ItemPopupController.Instance.OnInventoryItemMouseExit();
+            ItemPopupController.Instance.OnInventoryItemMouseExit();
         }
         #endregion
     }

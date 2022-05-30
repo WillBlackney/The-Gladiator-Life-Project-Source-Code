@@ -17,7 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Gain 1 Stealth.
   abilitySprite: {fileID: 21300000, guid: 6794d5d6ab2e5d64b9000fead29a7e82, type: 3}
   energyCost: 3
-  baseCooldown: 3
+  baseCooldown: 2
   abilityType: 1
   doesNotBreakStealth: 1
   weaponRequirement: 0

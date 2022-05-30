@@ -679,6 +679,7 @@ namespace HexGameEngine.UCM
         public static void DisableAndClearElementOnModel(UniversalCharacterModel model, UniversalCharacterModelElement element)
         {
             // disable view
+            if (element == null) return;
             element.gameObject.SetActive(false);
 
             // Clear reference on model

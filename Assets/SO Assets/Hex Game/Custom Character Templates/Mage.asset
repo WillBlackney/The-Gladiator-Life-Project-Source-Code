@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fc18e607558964b9506f2b2cdb1260, type: 3}
   m_Name: Mage
   m_EditorClassIdentifier: 
-  myName: Ella
+  myName: X
   myClassName: Mage
   race: 4
   modelSize: 0
@@ -21,16 +21,16 @@ MonoBehaviour:
       value: 0
       stars: 0
     intelligence:
-      value: 5
+      value: 0
       stars: 0
     constitution:
-      value: 80
+      value: 75
       stars: 0
     dodge:
       value: 0
       stars: 0
     accuracy:
-      value: 80
+      value: 75
       stars: 0
     resolve:
       value: 5
@@ -58,9 +58,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4e4bf822749dff044b3b1112dba35a22, type: 2}
     - {fileID: 11400000, guid: d84fc754f00f92b458fef9d08a4c3005, type: 2}
   serializedPassiveManager:
-    perks:
-    - perkTag: 66
-      stacks: 1
+    perks: []
   modelParts:
   - Human_Chest
   - Elf_Face_4

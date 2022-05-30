@@ -79,6 +79,13 @@ namespace HexGameEngine.Items
             PlacePanelAtRosterItemSlotPosition(item);
             ForceRebuildLayouts();
         }
+        public void OnCustomCharacterItemSlotMousedOver(CustomItemIcon item)
+        {
+            FadeInPanel();
+            BuildPanelFromItemData(item.ItemDataRef);
+            PlacePanelAtCustomCharacterScreenItemSlotPosition(item);
+            ForceRebuildLayouts();
+        }
         public void OnShopItemMousedOver(ItemShopSlot item)
         {
             FadeInPanel();
@@ -148,6 +155,15 @@ namespace HexGameEngine.Items
 
             rect.position = view.transform.position;
             rect.localPosition = new Vector3(rect.localPosition.x + xOffset, rect.localPosition.y - yOffset, 0);
+        }
+        private void PlacePanelAtCustomCharacterScreenItemSlotPosition(CustomItemIcon view)
+        {
+            RectTransform rect = visualParent.GetComponent<RectTransform>();
+            float xOffset = rect.rect.width / 2 + 80;
+            float yOffset = 0;
+
+            rect.position = view.transform.position;
+            rect.localPosition = new Vector3(rect.localPosition.x - xOffset, rect.localPosition.y - yOffset, 0);
         }
         #endregion
 

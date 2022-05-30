@@ -16,13 +16,5 @@ namespace HexGameEngine.MainMenu
             get { return classNameText; }
         }
 
-        public void OnNextButtonClicked()
-        {
-            MainMenuController.Instance.OnChooseCharacterBoxNextButtonClicked(this);
-        }
-        public void OnPreviousButtonClicked()
-        {
-            MainMenuController.Instance.OnChooseCharacterBoxPreviousButtonClicked(this);
-        }
     }
 }
