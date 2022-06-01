@@ -1322,7 +1322,6 @@ namespace HexGameEngine.MainMenu
             }
             RebuildItemPanelWeaponAbilityIcons();
         }
-
         public void OnNextRacialModelButtonClicked()
         {
             HandleChangeRacialModel(GetNextRacialModel(characterBuild.race));
