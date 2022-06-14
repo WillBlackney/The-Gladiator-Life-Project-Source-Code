@@ -72,7 +72,7 @@ namespace HexGameEngine.TownFeatures
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            //if (blockMouseActions) return; 
+            if (blockMouseActions) return; 
 
             foreach(Image i in buildingImages)            
                 i.color = mouseOverColor;
@@ -89,7 +89,7 @@ namespace HexGameEngine.TownFeatures
 
         public void OnPointerExit(PointerEventData eventData)
         {
-           // if (blockMouseActions) return;
+            if (blockMouseActions) return;
 
             foreach (Image i in buildingImages)
                 i.color = normalColor;
