@@ -27,17 +27,6 @@ public class GUIWidgetController : Singleton<GUIWidgetController>
         {
             yield return new WaitForSeconds(wEvent.startDelay);
 
-            // Cancel if the pointer needs to be held over the
-            // object, and the user has moved their mouse off the widget
-            /*
-            if(wEvent.onlyIfMouseIsStillOverMe &&
-                (widget.pointerIsOverMe == false ||
-                ((Time.realtimeSinceStartup - widget.timeSinceLastPointerEnter) < wEvent.startDelay)))
-            {
-                yield break;
-            }
-            */
-
             if (wEvent.onlyIfMouseIsStillOverMe &&
                 (widget.pointerIsOverMe == false ||
                 ((Time.realtimeSinceStartup - widget.timeSinceLastPointerEnter) < wEvent.startDelay)))

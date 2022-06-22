@@ -22,16 +22,6 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI currentDaytext;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        [Header("Main Button Components")]
-        [SerializeField] private GameObject characterRosterButton;
-        [SerializeField] private Image characterRosterButtonGlow;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [Header("Misc Components")]
-        [SerializeField] private GameObject goldTopBarImage;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        private bool charRosterGlowIsPlaying = false;
         #endregion
 
         // Getters + Accessors
@@ -39,11 +29,7 @@ namespace HexGameEngine.UI
         public TextMeshProUGUI CurrentGoldText
         {
             get { return currentGoldText; }
-        }       
-        public GameObject GoldTopBarImage
-        {
-            get { return goldTopBarImage; }
-        }
+        }     
         public TextMeshProUGUI CurrentDaytext
         {
             get { return currentDaytext; }
@@ -52,10 +38,7 @@ namespace HexGameEngine.UI
         {
             get { return currentChapterText; }
         }
-        public GameObject CharacterRosterButton
-        {
-            get { return characterRosterButton; }
-        }
+       
         #endregion
 
         // Core Functions
@@ -68,22 +51,7 @@ namespace HexGameEngine.UI
         {
             visualParent.SetActive(false);
         }
-        public void ShowCharacterRosterButtonGlow()
-        {
-            if (charRosterGlowIsPlaying == false)
-            {
-                charRosterGlowIsPlaying = true;
-                characterRosterButtonGlow.DOKill();
-                characterRosterButtonGlow.DOFade(0.33f, 0.5f).SetLoops(-1, LoopType.Yoyo);
-            }
-
-        }
-        public void HideCharacterRosterButtonGlow()
-        {
-            charRosterGlowIsPlaying = false;
-            characterRosterButtonGlow.DOKill();
-            characterRosterButtonGlow.DOFade(0, 0);
-        }
+       
         #endregion
 
         // Keypad Control Logic

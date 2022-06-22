@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3425471649495823505}
   - component: {fileID: 5227163141755619256}
   m_Layer: 0
-  m_Name: Inne rFrame Shadow
+  m_Name: Inner Frame Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

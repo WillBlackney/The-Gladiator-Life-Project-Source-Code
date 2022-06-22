@@ -210,7 +210,12 @@ namespace HexGameEngine.UI
         private IEnumerator BuildAndShowModalCoroutine(ModalSceneWidget w)
         {
             ModalBuildDataSO data = GetBuildData(w.preset);
-            if (!data) yield break;
+            if (!data)
+            {
+                Debug.LogWarning("MainModalController.BuildAndShowModal() provided could not find data from preset '" + w.preset.ToString() +
+                    "', cancelling...");
+                yield break;
+            }
 
             yield return new WaitForSeconds(0.15f);
             if (ModalSceneWidget.MousedOver == w)

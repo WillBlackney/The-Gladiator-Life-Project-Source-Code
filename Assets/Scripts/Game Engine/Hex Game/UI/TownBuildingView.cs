@@ -68,6 +68,8 @@ namespace HexGameEngine.TownFeatures
             Sequence s = DOTween.Sequence();
             s.Append(cam.transform.DOMove(new Vector3(cameraZoomToPoint.position.x, cameraZoomToPoint.position.y, -15), 0.75f));           
             s.OnComplete(() => { blockMouseActions = false; });
+
+
         }
 
         public void OnPointerEnter(PointerEventData eventData)
