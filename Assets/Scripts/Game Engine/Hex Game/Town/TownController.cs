@@ -199,9 +199,9 @@ namespace HexGameEngine.TownFeatures
             CharacterDataController.Instance.CharacterDeck.RemoveAt(0);
 
         }
-        private void BuildAndShowRecruitPage()
+        public void BuildAndShowRecruitPage()
         {
-            recruitPageVisualParent.SetActive(true);
+            //recruitPageVisualParent.SetActive(true);
 
             // Reset recruit tabs
             foreach (RecruitableCharacterTab tab in allRecruitTabs)
@@ -657,7 +657,7 @@ namespace HexGameEngine.TownFeatures
         }
         #endregion
 
-        // Feature Buttons On Click
+        // Feature Buttons On Click 
         #region
         public void OnArmouryPageLeaveButtonClicked()
         {
@@ -737,6 +737,11 @@ namespace HexGameEngine.TownFeatures
                 BlackScreenController.Instance.FadeInScreen(0.5f);
             });
         }
+
+        #endregion
+
+        // Feature Page Transisition Logic
+        #region
 
         #endregion
 

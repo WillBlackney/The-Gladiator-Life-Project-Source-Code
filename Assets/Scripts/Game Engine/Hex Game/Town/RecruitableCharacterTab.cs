@@ -58,7 +58,7 @@ namespace HexGameEngine.TownFeatures
             myCharacterData = data;
 
             // Texts
-            nameText.text = TextLogic.ReturnColoredText(data.myName, TextLogic.neutralYellow) + "      The " + data.myClassName;
+            nameText.text = "<color=#BC8252>" + data.myName + "<color=#DDC6AB>    The " + data.myClassName;
             racialText.text = data.race.ToString();
             racialIcon.BuildFromRacialData(CharacterDataController.Instance.GetRaceData(data.race));
 

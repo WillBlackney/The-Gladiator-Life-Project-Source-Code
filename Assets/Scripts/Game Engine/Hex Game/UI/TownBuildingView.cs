@@ -6,11 +6,13 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using HexGameEngine.CameraSystems;
+using UnityEngine.Events;
 
 namespace HexGameEngine.TownFeatures
 {
     public class TownBuildingView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
+        [Header("World Building Components")]
         [SerializeField] Color normalColor;
         [SerializeField] Color mouseOverColor;
         [SerializeField] Image[] buildingImages;
@@ -23,34 +25,23 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] RectTransform cameraZoomToPoint;
 
         private static bool blockMouseActions = false;
-        private static bool rightClicked = false;
 
-        void Update()
-        {
-            if (Input.GetKey(KeyCode.Mouse1))
-            {
-                rightClicked = true;
-            }
-            else rightClicked = false;
-        }
-
-
+        [Header("Page Components")]
+        [SerializeField] UnityEvent pageBuildFunction;
+        [SerializeField] GameObject pageVisualParent;
+        [SerializeField] RectTransform pageMovementParent;
+        [SerializeField] CanvasGroup pageCg;
+        [SerializeField] RectTransform pageStartPos;
+        [SerializeField] RectTransform pageEndPos;      
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (blockMouseActions) return;
+            StartCoroutine(ClickCoroutine());
+        }
+        private IEnumerator ClickCoroutine()
+        {
+            if (blockMouseActions) yield break;
             blockMouseActions = true;
-
-            if (rightClicked)
-            {
-                Debug.Log("Move camera away");
-                var c = CameraController.Instance.MainCamera;
-                c.DOOrthoSize(5, 0.75f);
-                Sequence seq = DOTween.Sequence();               
-                seq.Append(c.transform.DOMove(new Vector3(0, 0, -15), 0.75f));                
-                seq.OnComplete(() => { blockMouseActions = false; });
-                return;
-            }
 
             foreach (Image i in buildingImages)
                 i.color = normalColor;
@@ -63,13 +54,54 @@ namespace HexGameEngine.TownFeatures
             popUpRect.DOMove(startPos.position, 0.25f);
             popUpCg.DOFade(0f, 0.15f);
 
+            // Move canvas to start pos + setup
+            pageCg.DOKill();
+            pageMovementParent.DOKill();
+            pageCg.alpha = 0.001f;
+            pageVisualParent.SetActive(true);
+            pageBuildFunction.Invoke();
+            pageMovementParent.position = pageStartPos.position;
+
+            // Fade in screen
+            pageCg.DOFade(1f, 0.5f);
+
+            // Move + zoom camera towards building
             var cam = CameraController.Instance.MainCamera;
-            cam.DOOrthoSize(2.5f, 0.75f);
-            Sequence s = DOTween.Sequence();
-            s.Append(cam.transform.DOMove(new Vector3(cameraZoomToPoint.position.x, cameraZoomToPoint.position.y, -15), 0.75f));           
-            s.OnComplete(() => { blockMouseActions = false; });
+            cam.DOOrthoSize(2.5f, 0.6f).SetEase(Ease.OutCubic);
+            cam.transform.DOMove(new Vector3(cameraZoomToPoint.position.x, cameraZoomToPoint.position.y, -15), 0.6f).SetEase(Ease.OutCubic);
+            yield return new WaitForSeconds(0.61f);
 
+            // Move page to centre
+            Sequence s2 = DOTween.Sequence();
+            s2.Append(pageMovementParent.DOMove(pageEndPos.position, 0.35f));
+            s2.OnComplete(() => { blockMouseActions = false; });
+        }
 
+        public void OnLeaveFeatureButtonClicked()
+        {
+            if (blockMouseActions) return;
+            blockMouseActions = true;
+
+            // Move canvas to start pos + setup
+            pageCg.DOKill();
+            pageMovementParent.DOKill();
+
+            // Fade out screen
+            pageCg.DOFade(0f, 0.5f);
+
+            // Move page offscreen
+            pageMovementParent.DOMove(pageStartPos.position, 0.35f);
+
+            // Move and zoom out camera
+            var c = CameraController.Instance.MainCamera;
+            c.DOOrthoSize(5, 0.6f);
+            Sequence seq = DOTween.Sequence();
+            seq.Append(c.transform.DOMove(new Vector3(0, 0, -15), 0.6f));
+            seq.OnComplete(() => 
+            { 
+                blockMouseActions = false; 
+                pageVisualParent.SetActive(false); 
+            });            
         }
 
         public void OnPointerEnter(PointerEventData eventData)
