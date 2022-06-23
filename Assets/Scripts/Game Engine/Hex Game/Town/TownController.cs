@@ -31,7 +31,9 @@ namespace HexGameEngine.TownFeatures
 
         [Title("Recruit Page Core Components")]
         [SerializeField] GameObject recruitPageVisualParent;
-        [SerializeField] RecruitableCharacterTab[] allRecruitTabs;
+        [SerializeField] List<RecruitableCharacterTab> allRecruitTabs = new List<RecruitableCharacterTab>();
+        [SerializeField] GameObject recruitTabPrefab;
+        [SerializeField] GameObject recruitTabParent;
         [Space(20)]
 
         [Header("Recruit Page Core Components")]
@@ -52,9 +54,6 @@ namespace HexGameEngine.TownFeatures
         [Header("Recruit Page Attribute Components")]
         [SerializeField] private TextMeshProUGUI recruitRightPanelStrengthText;
         [SerializeField] private GameObject[] recruitRightPanelStrengthStars;
-        [Space(10)]
-        [SerializeField] private TextMeshProUGUI recruitRightPanelIntelligenceText;
-        [SerializeField] private GameObject[] recruitRightPanelIntelligenceStars;
         [Space(10)]
         [SerializeField] private TextMeshProUGUI recruitRightPanelAccuracyText;
         [SerializeField] private GameObject[] recruitRightPanelAccuracyStars;
@@ -201,15 +200,21 @@ namespace HexGameEngine.TownFeatures
         }
         public void BuildAndShowRecruitPage()
         {
-            //recruitPageVisualParent.SetActive(true);
-
             // Reset recruit tabs
             foreach (RecruitableCharacterTab tab in allRecruitTabs)
                 tab.ResetAndHide();
 
             // Build a tab for each recruit
-            for (int i = 0; i < currentRecruits.Count && i < allRecruitTabs.Length; i++)
+            for (int i = 0; i < currentRecruits.Count; i++)
+            {
+                if(allRecruitTabs.Count <= i)
+                {
+                    RecruitableCharacterTab newTab = Instantiate(recruitTabPrefab, recruitTabParent.transform).GetComponent<RecruitableCharacterTab>();
+                    allRecruitTabs.Add(newTab);
+                }
                 allRecruitTabs[i].BuildFromCharacterData(currentRecruits[i]);
+            }
+               
 
             // Build right panel
             if (currentRecruits.Count == 0) HideAllRightPanelRows();
@@ -274,9 +279,9 @@ namespace HexGameEngine.TownFeatures
             recruitRightPanelPortaitModel.SetIdleAnim();
 
             // Texts
-            recruitRightPanelNameText.text = character.myName;
+            recruitRightPanelNameText.text = "<color=#BC8252>" + character.myName + "<color=#DDC6AB>    The " + character.myClassName;
             recruitRightPanelRacialText.text = character.race.ToString();
-            string col = "<color=#FFFFFF>";
+            string col = "<color=#DDC6AB>";
             if (PlayerDataController.Instance.CurrentGold < character.recruitCost) col = TextLogic.lightRed;
             recruitRightPanelUpkeepText.text = character.dailyWage.ToString();
             recruitRightPanelCostText.text = TextLogic.ReturnColoredText(character.recruitCost.ToString(), col);
@@ -287,9 +292,6 @@ namespace HexGameEngine.TownFeatures
             // Build stats section
             recruitRightPanelStrengthText.text = character.attributeSheet.strength.value.ToString();
             BuildStars(recruitRightPanelStrengthStars, character.attributeSheet.strength.stars);
-
-            recruitRightPanelIntelligenceText.text = character.attributeSheet.intelligence.value.ToString();
-            BuildStars(recruitRightPanelIntelligenceStars, character.attributeSheet.intelligence.stars);
 
             recruitRightPanelConstitutionText.text = character.attributeSheet.constitution.value.ToString();
             BuildStars(recruitRightPanelConstitutionStars, character.attributeSheet.constitution.stars);

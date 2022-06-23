@@ -77,9 +77,9 @@ namespace HexGameEngine.TownFeatures
             s2.OnComplete(() => { blockMouseActions = false; });
         }
 
-        public void OnLeaveFeatureButtonClicked()
+        private IEnumerator LeaveCoroutine()
         {
-            if (blockMouseActions) return;
+            if (blockMouseActions) yield break;
             blockMouseActions = true;
 
             // Move canvas to start pos + setup
@@ -92,16 +92,21 @@ namespace HexGameEngine.TownFeatures
             // Move page offscreen
             pageMovementParent.DOMove(pageStartPos.position, 0.35f);
 
+            yield return new WaitForSeconds(0.2f);
             // Move and zoom out camera
             var c = CameraController.Instance.MainCamera;
             c.DOOrthoSize(5, 0.6f);
             Sequence seq = DOTween.Sequence();
             seq.Append(c.transform.DOMove(new Vector3(0, 0, -15), 0.6f));
-            seq.OnComplete(() => 
-            { 
-                blockMouseActions = false; 
-                pageVisualParent.SetActive(false); 
-            });            
+            seq.OnComplete(() =>
+            {
+                blockMouseActions = false;
+                pageVisualParent.SetActive(false);
+            });
+        }
+        public void OnLeaveFeatureButtonClicked()
+        {
+            StartCoroutine(LeaveCoroutine());           
         }
 
         public void OnPointerEnter(PointerEventData eventData)

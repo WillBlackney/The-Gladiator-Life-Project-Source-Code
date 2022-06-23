@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Satyr
   m_EditorClassIdentifier: 
   racialTag: 6
-  racialSprite: {fileID: 21300000, guid: e54869f7cda59f34bb31c7b1d83de2f0, type: 3}
+  racialSprite: {fileID: 21300000, guid: 06601114e8dc0ce45a36697324499b0b, type: 3}
   loreDescription: Exotic, wild and playful, the satyrs are far kinder than their
     half demon - half elf heritage would suggest. Their affinity with nature and
     love of ale make them fantastic adventuring companions.
