@@ -151,7 +151,7 @@ namespace HexGameEngine.UWidget
             // To remedy this, whenever this game object is enabled, it will check if the set up
             // has already executed. If it hasn't, it will run the set up as part of the 'OnEnable' event.
             if (!hasRunSetup)
-            {
+            {           
                 RunSetup();
             }
         }
@@ -166,6 +166,7 @@ namespace HexGameEngine.UWidget
         }
         void RunSetup()
         {
+            Debug.Log("Running setup on " + gameObject.name);
             // Set and cache original scaling values of transforms for shrink/enlarge/etc events,
             // but only if the widget event manipulates a transform's scale in some way
 

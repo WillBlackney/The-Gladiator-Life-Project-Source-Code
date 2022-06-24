@@ -128,10 +128,8 @@ namespace HexGameEngine.UI
         }
         public void OnRightClick()
         {
-            if (Input.GetKeyUp(KeyCode.Mouse1))
-            {
-                CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
-            }
+            if (Input.GetKeyUp(KeyCode.Mouse1))            
+                CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);            
         }
         private void SetIndicatorParentViewStates(bool onOrOff)
         {

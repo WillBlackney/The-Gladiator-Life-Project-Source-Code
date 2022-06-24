@@ -33,10 +33,10 @@ RectTransform:
   m_Father: {fileID: 2676166998435424442}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1851828786877449869
 CanvasRenderer:
@@ -59,8 +59,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -86,6 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2676166997555709819}
   - component: {fileID: 5178763769135994191}
+  - component: {fileID: 1611310250098508040}
   m_Layer: 0
   m_Name: Shop Item
   m_TagString: Untagged
@@ -102,19 +103,18 @@ RectTransform:
   m_GameObject: {fileID: 2676166997555709818}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2676166998435424442}
-  - {fileID: 2676166997986345771}
   - {fileID: 2676166998982949815}
+  - {fileID: 106487231442672052}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -210, y: -118}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5178763769135994191
 MonoBehaviour:
@@ -131,6 +131,760 @@ MonoBehaviour:
   itemNameText: {fileID: 2676166999401572610}
   goldCostText: {fileID: 2676166998680255431}
   itemImage: {fileID: 2676166998008205543}
+  scaleParent: {fileID: 106487231442672052}
+--- !u!114 &1611310250098508040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2676166997555709818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2c16d7d3f7add43ac8fd7d93abe631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputType: 0
+  killPreviousTweensOnNewSequenceStart: 1
+  onClickEvents:
+  - widgetEventType: 4
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 53
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 3
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5178763769135994191}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: MouseClick
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  mouseEnterEvents:
+  - widgetEventType: 4
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 33
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 9
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 4187971613264785216}
+    text: {fileID: 0}
+    endColour: {r: 1, g: 1, b: 1, a: 1}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0.2
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 9
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 2676166998008205543}
+    text: {fileID: 0}
+    endColour: {r: 1, g: 1, b: 1, a: 1}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0.2
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 9
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 2676166999033968140}
+    text: {fileID: 0}
+    endColour: {r: 1, g: 1, b: 1, a: 1}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0.2
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 9
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 2676166999227507158}
+    text: {fileID: 0}
+    endColour: {r: 1, g: 1, b: 1, a: 1}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0.2
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 3
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5178763769135994191}
+          m_TargetAssemblyTypeName: HexGameEngine.TownFeatures.ItemShopSlot, Main
+          m_MethodName: Enlarge
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 3
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5178763769135994191}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: MouseEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  mouseExitEvents:
+  - widgetEventType: 9
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 4187971613264785216}
+    text: {fileID: 0}
+    endColour: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0.2
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 9
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 2676166998008205543}
+    text: {fileID: 0}
+    endColour: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0.2
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 9
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 2676166999033968140}
+    text: {fileID: 0}
+    endColour: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0.2
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 9
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 2676166999227507158}
+    text: {fileID: 0}
+    endColour: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0.2
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 3
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5178763769135994191}
+          m_TargetAssemblyTypeName: HexGameEngine.TownFeatures.ItemShopSlot, Main
+          m_MethodName: Shrink
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.2
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 3
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5178763769135994191}
+          m_TargetAssemblyTypeName: HexGameEngine.TownFeatures.ItemShopSlot, Main
+          m_MethodName: MouseExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  onDisableEvents:
+  - widgetEventType: 9
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 4187971613264785216}
+    text: {fileID: 0}
+    endColour: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 9
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 2676166998008205543}
+    text: {fileID: 0}
+    endColour: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 9
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 2676166999033968140}
+    text: {fileID: 0}
+    endColour: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 9
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 2676166999227507158}
+    text: {fileID: 0}
+    endColour: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 3
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5178763769135994191}
+          m_TargetAssemblyTypeName: HexGameEngine.TownFeatures.ItemShopSlot, Main
+          m_MethodName: Shrink
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+  - widgetEventType: 3
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5178763769135994191}
+          m_TargetAssemblyTypeName: HexGameEngine.TownFeatures.ItemShopSlot, Main
+          m_MethodName: MouseExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
 --- !u!1 &2676166997986345770
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,20 +908,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2676166997986345770}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2676166999227507157}
   - {fileID: 2676166999401572609}
-  m_Father: {fileID: 2676166997555709819}
+  m_Father: {fileID: 106487231442672052}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: -0.5, y: 0.85}
+  m_AnchorMax: {x: 1.5, y: 1.35}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2676166998008205541
 GameObject:
@@ -202,10 +956,10 @@ RectTransform:
   m_Father: {fileID: 2676166998435424442}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.065, y: 0.065}
+  m_AnchorMax: {x: 0.935, y: 0.935}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 87, y: 87}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2676166998008205544
 CanvasRenderer:
@@ -228,8 +982,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -254,8 +1008,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2676166998435424442}
-  - component: {fileID: 2926460168531421543}
-  - component: {fileID: 7581983146697905310}
   m_Layer: 0
   m_Name: Item Image Parent
   m_TagString: Untagged
@@ -270,340 +1022,23 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2676166998435424441}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4855849273429278235}
   - {fileID: 2676166998008205542}
   - {fileID: 2676166999033968139}
-  m_Father: {fileID: 2676166997555709819}
+  - {fileID: 2038457402351658165}
+  m_Father: {fileID: 106487231442672052}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 6.5}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: -0.125, y: -0.06000004}
+  m_AnchorMax: {x: 1.125, y: 1.19}
+  m_AnchoredPosition: {x: 0, y: -0.0000038146973}
+  m_SizeDelta: {x: 0, y: -0.0000038146973}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2926460168531421543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2676166998435424441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9db09d9cca6141a47a3c991340f1f29f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputType: 1
-  onClickEvents:
-  - widgetEvent: 4
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls: []
-    soundPlayed: 34
-    canvasGroup: {fileID: 0}
-    image: {fileID: 0}
-    text: {fileID: 0}
-    endColour: {r: 0, g: 0, b: 0, a: 0}
-    fadeSpeed: 0
-  - widgetEvent: 3
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5178763769135994191}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: MouseClick
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    soundPlayed: 0
-    canvasGroup: {fileID: 0}
-    image: {fileID: 0}
-    text: {fileID: 0}
-    endColour: {r: 0, g: 0, b: 0, a: 0}
-    fadeSpeed: 0
-  mouseEnterEvents:
-  - widgetEvent: 4
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls: []
-    soundPlayed: 4
-    canvasGroup: {fileID: 0}
-    image: {fileID: 0}
-    text: {fileID: 0}
-    endColour: {r: 0, g: 0, b: 0, a: 0}
-    fadeSpeed: 0
-  - widgetEvent: 9
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls: []
-    soundPlayed: 0
-    canvasGroup: {fileID: 0}
-    image: {fileID: 2676166998689487580}
-    text: {fileID: 0}
-    endColour: {r: 1, g: 1, b: 1, a: 1}
-    fadeSpeed: 0.2
-  - widgetEvent: 9
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls: []
-    soundPlayed: 0
-    canvasGroup: {fileID: 0}
-    image: {fileID: 2676166999033968140}
-    text: {fileID: 0}
-    endColour: {r: 1, g: 1, b: 1, a: 1}
-    fadeSpeed: 0.2
-  - widgetEvent: 9
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls: []
-    soundPlayed: 0
-    canvasGroup: {fileID: 0}
-    image: {fileID: 2676166998008205543}
-    text: {fileID: 0}
-    endColour: {r: 1, g: 1, b: 1, a: 1}
-    fadeSpeed: 0.2
-  - widgetEvent: 3
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5178763769135994191}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: MouseEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    soundPlayed: 0
-    canvasGroup: {fileID: 0}
-    image: {fileID: 0}
-    text: {fileID: 0}
-    endColour: {r: 0, g: 0, b: 0, a: 0}
-    fadeSpeed: 0
-  mouseExitEvents:
-  - widgetEvent: 9
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls: []
-    soundPlayed: 0
-    canvasGroup: {fileID: 0}
-    image: {fileID: 2676166999033968140}
-    text: {fileID: 0}
-    endColour: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
-    fadeSpeed: 0
-  - widgetEvent: 9
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls: []
-    soundPlayed: 0
-    canvasGroup: {fileID: 0}
-    image: {fileID: 2676166998008205543}
-    text: {fileID: 0}
-    endColour: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
-    fadeSpeed: 0
-  - widgetEvent: 9
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls: []
-    soundPlayed: 0
-    canvasGroup: {fileID: 0}
-    image: {fileID: 2676166998689487580}
-    text: {fileID: 0}
-    endColour: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
-    fadeSpeed: 0
-  - widgetEvent: 3
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5178763769135994191}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: MouseExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    soundPlayed: 0
-    canvasGroup: {fileID: 0}
-    image: {fileID: 0}
-    text: {fileID: 0}
-    endColour: {r: 0, g: 0, b: 0, a: 0}
-    fadeSpeed: 0
-  onDisableEvents:
-  - widgetEvent: 9
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls: []
-    soundPlayed: 0
-    canvasGroup: {fileID: 0}
-    image: {fileID: 2676166999033968140}
-    text: {fileID: 0}
-    endColour: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
-    fadeSpeed: 0
-  - widgetEvent: 9
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls: []
-    soundPlayed: 0
-    canvasGroup: {fileID: 0}
-    image: {fileID: 2676166998008205543}
-    text: {fileID: 0}
-    endColour: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
-    fadeSpeed: 0
-  - widgetEvent: 9
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls: []
-    soundPlayed: 0
-    canvasGroup: {fileID: 0}
-    image: {fileID: 2676166998689487580}
-    text: {fileID: 0}
-    endColour: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
-    fadeSpeed: 0
-  - widgetEvent: 3
-    enableStartDelay: 0
-    startDelay: 0
-    onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
-    functionInvoked:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5178763769135994191}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: MouseExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    soundPlayed: 0
-    canvasGroup: {fileID: 0}
-    image: {fileID: 0}
-    text: {fileID: 0}
-    endColour: {r: 0, g: 0, b: 0, a: 0}
-    fadeSpeed: 0
-  pointerIsOverMe: 0
-  timeSinceLastPointerEnter: 0
---- !u!61 &7581983146697905310
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2676166998435424441}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 100, y: 100}
-  m_EdgeRadius: 0
 --- !u!1 &2676166998680255429
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +1099,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -801,7 +1236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -864,12 +1299,12 @@ RectTransform:
   - {fileID: 2676166999216557463}
   - {fileID: 2676166998680255430}
   m_Father: {fileID: 2676166997555709819}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -90}
-  m_SizeDelta: {x: 120, y: 50}
+  m_AnchorMin: {x: 0.26, y: 0.04}
+  m_AnchorMax: {x: 0.74, y: 0.24}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2676166999033968138
 GameObject:
@@ -904,10 +1339,10 @@ RectTransform:
   m_Father: {fileID: 2676166998435424442}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2676166999033968141
 CanvasRenderer:
@@ -930,8 +1365,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.84313726, g: 0.84313726, b: 0.84313726, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1008,7 +1443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1099,8 +1534,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1166,7 +1601,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 5.2623}
+  m_AnchoredPosition: {x: 0, y: 5.2623005}
   m_SizeDelta: {x: 115.3379, y: 35.0329}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2676166999401572611
@@ -1191,7 +1626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1267,3 +1702,117 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &5860447613415638960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2038457402351658165}
+  - component: {fileID: 9131355229267172883}
+  - component: {fileID: 4221998536648842407}
+  m_Layer: 0
+  m_Name: Mouse Detector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2038457402351658165
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5860447613415638960}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2676166998435424442}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9131355229267172883
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5860447613415638960}
+  m_CullTransparentMesh: 0
+--- !u!114 &4221998536648842407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5860447613415638960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.003921569}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: c0ba86de494a17a46a15615ed92b7a30, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6315119901650822234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 106487231442672052}
+  m_Layer: 0
+  m_Name: Scaling Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &106487231442672052
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6315119901650822234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2676166998435424442}
+  - {fileID: 2676166997986345771}
+  m_Father: {fileID: 2676166997555709819}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.3, y: 0.3}
+  m_AnchorMax: {x: 0.7, y: 0.7}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0}

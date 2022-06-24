@@ -357,7 +357,7 @@ namespace HexGameEngine.TownFeatures
 
         // Hospital Page Logic
         #region
-        private void BuildAndShowHospitalPage()
+        public void BuildAndShowHospitalPage()
         {
             hospitalPageVisualParent.SetActive(true);
             foreach (HospitalDropSlot slot in hospitalSlots)
@@ -586,7 +586,7 @@ namespace HexGameEngine.TownFeatures
 
         // Armoury Logic
         #region
-        private void BuildAndShowArmouryPage()
+        public void BuildAndShowArmouryPage()
         {
             armouryPageVisualParent.SetActive(true);
 
@@ -625,8 +625,8 @@ namespace HexGameEngine.TownFeatures
             int weapons = 0;
             int armour = 0;
 
-            // Filter for 2 of each type (weapon, armour, trinket)
-            for (int i = 0; finalItems.Count < 6; i++)
+            // Filter for 3 weapons, 3 armour pieces and 2 trinkets
+            for (int i = 0; finalItems.Count < 8; i++)
             {
                 if (possibleItems[i].itemType == ItemType.Trinket && trinkets < 2)
                 {
@@ -634,13 +634,13 @@ namespace HexGameEngine.TownFeatures
                     trinkets++;
                 }                    
 
-                else if (possibleItems[i].itemType == ItemType.Weapon && weapons < 2)
+                else if (possibleItems[i].itemType == ItemType.Weapon && weapons < 3)
                 {
                     finalItems.Add(possibleItems[i]);
                     weapons++;
                 }
 
-                else if ((possibleItems[i].itemType == ItemType.Head || possibleItems[i].itemType == ItemType.Body) && armour < 2)
+                else if ((possibleItems[i].itemType == ItemType.Head || possibleItems[i].itemType == ItemType.Body) && armour < 3)
                 {
                     finalItems.Add(possibleItems[i]);
                     armour++;

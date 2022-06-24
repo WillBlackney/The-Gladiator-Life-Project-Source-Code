@@ -9,6 +9,7 @@ using HexGameEngine.Player;
 using HexGameEngine.Utilities;
 using HexGameEngine.UI;
 using HexGameEngine.Items;
+using DG.Tweening;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -20,6 +21,7 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] TextMeshProUGUI itemNameText;
         [SerializeField] TextMeshProUGUI goldCostText;
         [SerializeField] Image itemImage;
+        [SerializeField] Transform scaleParent;
 
         // Non inspector fields
         private ItemShopData myData;
@@ -79,6 +81,24 @@ namespace HexGameEngine.TownFeatures
         {
             gameObject.SetActive(false);
             myData = null;
+        }
+        public void Enlarge()
+        {
+            // Calculate enlargement scale and convert it to to a vector 3
+            Vector3 endScale = new Vector3(1.15f,1.15f, 1f);
+
+            // Scale the transform to its new size
+            scaleParent.DOKill();
+            scaleParent.DOScale(endScale, 0.2f);
+        }
+        public void Shrink(float speed = 0.2f)
+        {
+            // Calculate enlargement scale and convert it to to a vector 3
+            Vector3 endScale = new Vector3(1f, 1f, 1f);
+
+            // Scale the transform to its new size
+            scaleParent.DOKill();
+            scaleParent.DOScale(endScale, speed);
         }
         #endregion
     }
