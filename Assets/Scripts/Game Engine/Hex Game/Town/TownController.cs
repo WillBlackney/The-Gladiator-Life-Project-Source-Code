@@ -442,7 +442,7 @@ namespace HexGameEngine.TownFeatures
 
         // Library Logic
         #region
-        private void BuildAndShowLibraryPage()
+        public void BuildAndShowLibraryPage()
         {
             libraryPageVisualParent.SetActive(true);
 
