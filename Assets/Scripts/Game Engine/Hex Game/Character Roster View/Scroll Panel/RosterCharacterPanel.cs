@@ -25,7 +25,7 @@ namespace HexGameEngine.UI
 
         [Header("Stress Bar Components")]
         [SerializeField] Slider stressBar;
-        [SerializeField] TextMeshProUGUI stressText;
+        //[SerializeField] TextMeshProUGUI stressText;
 
         [Header("Perk + Injury Components")]
         [SerializeField] UIPerkIcon[] perkIcons;
@@ -59,9 +59,9 @@ namespace HexGameEngine.UI
             UpdateActivityIndicator();
 
             // Texts
-            nameText.text = data.myName;
+            nameText.text = "<color=#BC8252>" + data.myName + "<color=#DDC6AB>    The " + data.myClassName;
             healthText.text = data.currentHealth.ToString();
-            stressText.text = data.currentStress.ToString();
+            //stressText.text = data.currentStress.ToString();
 
             // Build model
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(portaitModel, data.modelParts);

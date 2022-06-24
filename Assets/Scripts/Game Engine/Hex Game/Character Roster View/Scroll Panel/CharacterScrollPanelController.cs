@@ -12,10 +12,13 @@ namespace HexGameEngine.UI
     {
         // Components + Properties
         #region
+        [Header("Components")]
         [SerializeField] private GameObject mainVisualParent;
         [SerializeField] private TextMeshProUGUI totalCharactersText;
-        [SerializeField] private RosterCharacterPanel[] allCharacterPanels;
+        [SerializeField] private List<RosterCharacterPanel> allCharacterPanels;
         [SerializeField] private RectTransform[] dynamicContentFitters;
+        [SerializeField] private GameObject characterPanelPrefab;
+        [SerializeField] private Transform characterPanelParent;
         #endregion
 
         // Getters + Accessors
@@ -71,6 +74,11 @@ namespace HexGameEngine.UI
             // Build a tab for each character
             for (int i = 0; i < characters.Count; i++)
             {
+                if(i >= allCharacterPanels.Count)
+                {
+                    RosterCharacterPanel newTab = Instantiate(characterPanelPrefab, characterPanelParent).GetComponent<RosterCharacterPanel>();
+                    allCharacterPanels.Add(newTab);
+                }
                 allCharacterPanels[i].Show();
                 allCharacterPanels[i].BuildFromCharacterData(characters[i]);
             }              
