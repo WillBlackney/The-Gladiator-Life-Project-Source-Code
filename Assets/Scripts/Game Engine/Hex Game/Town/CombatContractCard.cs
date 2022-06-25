@@ -22,7 +22,7 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] private GameObject bossSkullsParent;
 
         [Header("Core Components")]
-        [SerializeField] private TextMeshProUGUI enemiesText;
+        [SerializeField] private CombatContractCardEnemyInfoRow[] enemyRows;
         [SerializeField] private GameObject glowOutline;
 
         [Header("Reward Components")]
@@ -63,13 +63,13 @@ namespace HexGameEngine.TownFeatures
         {
             if (selectectedCombatCard == this) return;
             gameObject.transform.DOKill();
-            gameObject.transform.DOScale(1.1f, 0.25f);
+            gameObject.transform.DOScale(1.1f, 0.2f);
         }
         public void OnCardMouseExit()
         {
             if (selectectedCombatCard == this) return;
             gameObject.transform.DOKill();
-            gameObject.transform.DOScale(1f, 0.25f);
+            gameObject.transform.DOScale(1f, 0.2f);
         }      
         public void OnCardClicked()
         {
@@ -83,7 +83,7 @@ namespace HexGameEngine.TownFeatures
                 // Deselct + shrink old selection
                 selectectedCombatCard.glowOutline.SetActive(false);
                 selectectedCombatCard.gameObject.transform.DOKill();
-                selectectedCombatCard.gameObject.transform.DOScale(1f, 0.25f);                
+                selectectedCombatCard.gameObject.transform.DOScale(1f, 0.2f);                
             }
 
             // Scale up this card and flag as selected
@@ -125,10 +125,14 @@ namespace HexGameEngine.TownFeatures
             else if (data.enemyEncounterData.difficulty == CombatDifficulty.Elite) eliteSkullsParent.SetActive(true);
             else if (data.enemyEncounterData.difficulty == CombatDifficulty.Boss) bossSkullsParent.SetActive(true);
 
-            foreach (CharacterWithSpawnData enemy in data.enemyEncounterData.enemiesInEncounter)
+            for (int i = 0; i < enemyRows.Length; i++)
+                enemyRows[i].HideAndReset();
+
+            for (int i = 0; i < enemyRows.Length && i < data.enemyEncounterData.enemiesInEncounter.Count; i++)
             {
-                enemiesText.text += "- " + enemy.characterData.myName + "\n";
+                enemyRows[i].BuildFromEnemyData(data.enemyEncounterData.enemiesInEncounter[i]);
             }
+
             goldRewardText.text = data.combatRewardData.goldAmount.ToString();
             abilityTomeImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(data.combatRewardData.abilityAwarded.talentRequirementData.talentSchool);
             itemRarityOverlay.color = ColorLibrary.Instance.GetRarityColor(data.combatRewardData.item.rarity);
@@ -143,9 +147,10 @@ namespace HexGameEngine.TownFeatures
             basicSkullsParent.SetActive(false);
             eliteSkullsParent.SetActive(false);
             bossSkullsParent.SetActive(false);
-            enemiesText.text = "";
+            for (int i = 0; i < enemyRows.Length; i++)
+                enemyRows[i].HideAndReset();
         }
-        public static void HandleDeselect(float speed = 0.25f)
+        public static void HandleDeselect(float speed = 0.2f)
         {
             TownController.Instance.SetDeploymentButtonReadyState(false);
             if (selectectedCombatCard != null)

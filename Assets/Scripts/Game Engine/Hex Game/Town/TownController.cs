@@ -717,15 +717,7 @@ namespace HexGameEngine.TownFeatures
             });
 
         }
-        public void OnDeploymentPageBackButtonClicked()
-        {
-            BlackScreenController.Instance.FadeOutScreen(0.5f, () =>
-            {
-                HideDeploymentPage();
-                BuildAndShowCombatContractPage();
-                BlackScreenController.Instance.FadeInScreen(0.5f);
-            });
-        }
+      
         public void OnDeploymentPageReadyButtonClicked()
         {
             HandleReadyButtonClicked();
@@ -798,10 +790,8 @@ namespace HexGameEngine.TownFeatures
             ret.combatRewardData = new CombatRewardData(difficulty);
             return ret;
         }
-        private void BuildAndShowCombatContractPage()
+        public void BuildAndShowCombatContractPage()
         {
-            chooseCombatPageMainVisualParent.SetActive(true);
-
             // Reset contract cards
             for (int i = 0; i < allContractCards.Length; i++)
                 allContractCards[i].ResetAndHide();

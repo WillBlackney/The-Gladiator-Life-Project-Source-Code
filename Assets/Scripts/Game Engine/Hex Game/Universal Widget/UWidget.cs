@@ -38,21 +38,22 @@ namespace HexGameEngine.UWidget
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Input State")]
-        private bool pointerIsOverMe;
         private float timeSinceLastPointerEnter;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Misc Properties")]
         private bool hasRunSetup = false;
+
+        private static UWidget mousedOver;
         #endregion
 
         //  Properties + Accessors
         #region
-        public bool PointerIsOverMe
+        public static UWidget MousedOver
         {
-            get { return pointerIsOverMe; }
-            private set { pointerIsOverMe = value; }
-        }
+            get { return mousedOver; }
+            private set { mousedOver = value; }
+        }       
         public float TimeSinceLastPointerEnter
         {
             get { return timeSinceLastPointerEnter; }
@@ -92,9 +93,9 @@ namespace HexGameEngine.UWidget
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (UWidgetController.Instance != null && inputType == WidgetInputType.IPointer)
+            if (MousedOver != this && UWidgetController.Instance != null && inputType == WidgetInputType.IPointer)
             {
-                PointerIsOverMe = true;
+                MousedOver = this;
                 TimeSinceLastPointerEnter = Time.realtimeSinceStartup;
                 UWidgetController.Instance.HandleWidgetEvents(this, MouseEnterEvents);
             }
@@ -104,7 +105,7 @@ namespace HexGameEngine.UWidget
         {
             if (UWidgetController.Instance != null && inputType == WidgetInputType.IPointer)
             {
-                PointerIsOverMe = false;
+                if (MousedOver == this) MousedOver = null;
                 UWidgetController.Instance.HandleWidgetEvents(this, MouseExitEvents);
             }
 
@@ -119,9 +120,9 @@ namespace HexGameEngine.UWidget
         }
         public void OnMouseEnter()
         {
-            if (UWidgetController.Instance != null && inputType == WidgetInputType.Collider)
+            if (MousedOver != this && UWidgetController.Instance != null && inputType == WidgetInputType.Collider)
             {
-                PointerIsOverMe = true;
+                MousedOver = this;
                 TimeSinceLastPointerEnter = Time.realtimeSinceStartup;
                 UWidgetController.Instance.HandleWidgetEvents(this, MouseEnterEvents);
             }
@@ -130,7 +131,7 @@ namespace HexGameEngine.UWidget
         {
             if (UWidgetController.Instance != null && inputType == WidgetInputType.Collider)
             {
-                PointerIsOverMe = false;
+                if (MousedOver == this) MousedOver = null;
                 UWidgetController.Instance.HandleWidgetEvents(this, MouseExitEvents);
             }
         }
