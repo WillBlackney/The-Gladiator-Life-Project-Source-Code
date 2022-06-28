@@ -38,7 +38,7 @@ namespace HexGameEngine.UI
 
         [Header("Requirement Components")]
         [SerializeField] GameObject requirementsParent;
-        [SerializeField] TextMeshProUGUI requirementsText;
+        [SerializeField] ModalDottedRow[] requirementRows;
         [SerializeField] GameObject talentReqRowParent;
         [SerializeField] Image[] talentReqImages;
         [SerializeField] TextMeshProUGUI talentReqRowText;
@@ -203,25 +203,39 @@ namespace HexGameEngine.UI
         }
         private void BuildRequirementsText(AbilityData data)
         {
+            for (int i = 0; i < requirementRows.Length; i++)
+                requirementRows[i].gameObject.SetActive(false);
             requirementsParent.SetActive(false);
-            string message = "";
-            bool lineBreak = false;
+            int modalRowCount = 0;
 
             if (data.talentRequirementData.talentSchool != TalentSchool.None && data.talentRequirementData.talentSchool != TalentSchool.Neutral)
             {
+                DotStyle dotStyle = DotStyle.Neutral;
+                if (data.myCharacter != null && CharacterDataController.Instance.DoesCharacterHaveTalent(data.myCharacter.talentPairings, data.talentRequirementData.talentSchool, 1))
+                    dotStyle = DotStyle.Green;
+                else if (data.myCharacter != null && !CharacterDataController.Instance.DoesCharacterHaveTalent(data.myCharacter.talentPairings, data.talentRequirementData.talentSchool, 1))
+                    dotStyle = DotStyle.Red;
+
                 requirementsParent.SetActive(true);
-                message += "- Requires " + data.talentRequirementData.talentSchool.ToString() + " " + data.talentRequirementData.level.ToString();
-                lineBreak = true;
+                requirementRows[modalRowCount].gameObject.SetActive(true);
+                requirementRows[modalRowCount].Build("Requires " + data.talentRequirementData.talentSchool.ToString() + " Talent", dotStyle);
+
+                modalRowCount++;
             }
 
             if (data.weaponRequirement != WeaponRequirement.None)
             {
+                DotStyle dotStyle = DotStyle.Neutral;
+                if (data.myCharacter != null && AbilityController.Instance.DoesCharacterMeetAbilityWeaponRequirement(data.myCharacter, data))
+                    dotStyle = DotStyle.Green;
+                if (data.myCharacter != null && !AbilityController.Instance.DoesCharacterMeetAbilityWeaponRequirement(data.myCharacter, data))
+                    dotStyle = DotStyle.Red;
+
                 requirementsParent.SetActive(true);
-                if (lineBreak) message += "\n";
-                message += "- Requires " + TextLogic.SplitByCapitals(data.weaponRequirement.ToString());
+                requirementRows[modalRowCount].gameObject.SetActive(true);
+                requirementRows[modalRowCount].Build("Requires " + TextLogic.SplitByCapitals(data.weaponRequirement.ToString()), dotStyle);
             }
 
-            requirementsText.text = message;
         }
         private void BuildEnergyCostSection(AbilityData data)
         {

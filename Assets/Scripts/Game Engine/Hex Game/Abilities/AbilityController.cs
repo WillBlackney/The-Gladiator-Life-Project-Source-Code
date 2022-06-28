@@ -1751,7 +1751,7 @@ namespace HexGameEngine.Abilities
 
             return bRet;
         }
-        private bool DoesCharacterMeetAbilityWeaponRequirement(HexCharacterModel character, AbilityData ability)
+        public bool DoesCharacterMeetAbilityWeaponRequirement(HexCharacterModel character, AbilityData ability)
         {
             bool bRet = false;
 
