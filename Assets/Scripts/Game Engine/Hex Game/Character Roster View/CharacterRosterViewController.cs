@@ -21,7 +21,7 @@ namespace HexGameEngine.UI
         #region
         [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
-        [SerializeField] private Scrollbar rightPanelScrollBar;
+        [SerializeField] private Scrollbar[] scrollBarResets;
         [Space(20)]
         [Header("Health Components")]
         [SerializeField] private TextMeshProUGUI healthBarText;
@@ -53,9 +53,6 @@ namespace HexGameEngine.UI
         [Header("Perk Section Components")]
         [SerializeField] private UIPerkIcon[] perkButtons;
         [Space(20)]
-        [Header("Formation Section Components")]
-        [SerializeField] private RosterFormationButton[] formationButtons;
-        [Space(20)]
         [Header("Character View Panel Components")]
         [SerializeField] private UniversalCharacterModel characterPanelUcm;
         [SerializeField] private RosterItemSlot mainHandSlot;
@@ -72,11 +69,8 @@ namespace HexGameEngine.UI
         [Space(20)]
 
         [Header("Core Attribute Components")]
-        [SerializeField] private TextMeshProUGUI strengthText;
-        [SerializeField] private GameObject[] strengthStars;
-        [Space(10)]
-        [SerializeField] private TextMeshProUGUI intelligenceText;
-        [SerializeField] private GameObject[] intelligenceStars;
+        [SerializeField] private TextMeshProUGUI mightText;
+        [SerializeField] private GameObject[] mightStars;
         [Space(10)]
         [SerializeField] private TextMeshProUGUI constitutionText;
         [SerializeField] private GameObject[] constitutionStars;
@@ -141,14 +135,18 @@ namespace HexGameEngine.UI
         }
         public void BuildAndShowFromCharacterData(HexCharacterData data)
         {
-            if(!mainVisualParent.activeInHierarchy) rightPanelScrollBar.value = 1;
+            if (!mainVisualParent.activeInHierarchy)
+                for (int i = 0; i < scrollBarResets.Length; i++)
+                scrollBarResets[i].value = 1;
             mainVisualParent.SetActive(true);
             BuildRosterForCharacter(data);
         }
         private void HandleBuildAndShowCharacterRoster()
         {
             Debug.Log("ShowCharacterRosterScreen()");
-            if (!mainVisualParent.activeInHierarchy) rightPanelScrollBar.value = 1;
+            if (!mainVisualParent.activeInHierarchy)
+                for (int i = 0; i < scrollBarResets.Length; i++)
+                    scrollBarResets[i].value = 1;
             mainVisualParent.SetActive(true);
             HexCharacterData data = CharacterDataController.Instance.AllPlayerCharacters[0];
             BuildRosterForCharacter(data);
@@ -164,7 +162,7 @@ namespace HexGameEngine.UI
             characterNameText.text = data.myName;
             characterClassText.text = data.myClassName;
             dailyWageText.text = data.dailyWage.ToString();
-            totalArmourText.text = ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet).ToString();
+            //totalArmourText.text = ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet).ToString();
             BuildPerkViews(data);
             BuildAttributeSection(data);
             BuildGeneralInfoSection(data);
@@ -172,7 +170,6 @@ namespace HexGameEngine.UI
             BuildCharacterViewPanelModel(data);
             BuildAbilitiesSection(data);
             BuildTalentsSection(data);
-            BuildFormationButtons(CharacterDataController.Instance.AllPlayerCharacters);
             
         }
         public void HideCharacterRosterScreen()
@@ -261,11 +258,8 @@ namespace HexGameEngine.UI
         #region
         private void BuildAttributeSection(HexCharacterData character)
         {
-            strengthText.text = StatCalculator.GetTotalStrength(character).ToString();
-            BuildStars(strengthStars, character.attributeSheet.strength.stars);
-
-            intelligenceText.text = StatCalculator.GetTotalIntelligence(character).ToString();
-            BuildStars(intelligenceStars, character.attributeSheet.intelligence.stars);
+            mightText.text = StatCalculator.GetTotalStrength(character).ToString();
+            BuildStars(mightStars, character.attributeSheet.strength.stars);
 
             constitutionText.text = StatCalculator.GetTotalConstitution(character).ToString();
             BuildStars(constitutionStars, character.attributeSheet.constitution.stars);
@@ -282,8 +276,8 @@ namespace HexGameEngine.UI
             witsText.text = StatCalculator.GetTotalWits(character).ToString();
             BuildStars(witsStars, character.attributeSheet.wits.stars);
 
-            criticalChanceText.text = StatCalculator.GetTotalCriticalChance(character).ToString();
-            criticalModifierText.text = StatCalculator.GetTotalCriticalModifier(character).ToString();
+            criticalChanceText.text = StatCalculator.GetTotalCriticalChance(character).ToString() + "%";
+            criticalModifierText.text = StatCalculator.GetTotalCriticalModifier(character).ToString() + "%";
             energyRecoveryText.text = StatCalculator.GetTotalEnergyRecovery(character).ToString();
             maxEnergyText.text = StatCalculator.GetTotalMaxEnergy(character).ToString();
             initiativeText.text = StatCalculator.GetTotalInitiative(character).ToString();
@@ -393,36 +387,7 @@ namespace HexGameEngine.UI
         }
         #endregion
 
-        // Build Formation Section
-        #region
-        private void BuildFormationButtons(List<HexCharacterData> characters)
-        {
-            // Reset buttons
-            foreach (RosterFormationButton b in formationButtons)
-                b.Reset();
-
-            // Build buttons for each character
-            foreach (HexCharacterData c in characters)
-            {
-                foreach (RosterFormationButton b in formationButtons)
-                {
-                    if (c.formationPosition == b.FormationPosition)
-                    {
-                        // build button
-                        BuildFormationButtonFromCharacter(b, c);
-                        break;
-                    }
-                }
-            }
-        }
-        private void BuildFormationButtonFromCharacter(RosterFormationButton button, HexCharacterData character)
-        {
-            button.SetMyCharacter(character);
-            button.CharacterVisualParent.SetActive(true);
-            CharacterModeller.BuildModelFromStringReferencesAsMugshot(button.Ucm, character.modelParts);
-            button.Ucm.SetBaseAnim();
-        }
-        #endregion
+       
 
         // Build Abilities Section
         #region

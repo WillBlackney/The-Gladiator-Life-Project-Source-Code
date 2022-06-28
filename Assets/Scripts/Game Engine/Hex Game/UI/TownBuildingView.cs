@@ -34,6 +34,19 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] RectTransform pageStartPos;
         [SerializeField] RectTransform pageEndPos;      
 
+        public RectTransform PageMovementParent
+        {
+            get { return pageMovementParent; }
+        }
+        public RectTransform PageStartPos
+        {
+            get { return pageStartPos; }
+        }
+        public CanvasGroup PageCg
+        {
+            get { return pageCg; }
+        }
+
         public void OnPointerClick(PointerEventData eventData)
         {
             StartCoroutine(ClickCoroutine());
@@ -108,7 +121,6 @@ namespace HexGameEngine.TownFeatures
         {
             StartCoroutine(LeaveCoroutine());           
         }
-
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (blockMouseActions) return; 
@@ -125,7 +137,6 @@ namespace HexGameEngine.TownFeatures
             popUpCg.DOFade(1f, 0.15f);
             
         }
-
         public void OnPointerExit(PointerEventData eventData)
         {
             if (blockMouseActions) return;
@@ -140,6 +151,19 @@ namespace HexGameEngine.TownFeatures
             outlineCg.DOFade(0, 0.1f);
             popUpRect.DOMove(startPos.position, 0.25f);
             popUpCg.DOFade(0f, 0.15f);
+        }
+
+        public void SnapToArenaViewSettings()
+        {
+            // Move canvas to start pos + setup
+            pageCg.DOKill();
+            pageMovementParent.DOKill();
+            pageCg.alpha = 1f;
+            pageVisualParent.SetActive(true);
+            pageBuildFunction.Invoke();
+            pageMovementParent.position = pageEndPos.position;
+            CameraController.Instance.MainCamera.DOOrthoSize(2.5f, 0f);
+            CameraController.Instance.MainCamera.transform.position = new Vector3(cameraZoomToPoint.position.x, cameraZoomToPoint.position.y, -15);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace HexGameEngine.UI
         [SerializeField] private Image itemImage;
         [SerializeField] private ItemData itemDataRef;
         [SerializeField] private RosterSlotType slotType;
+        [SerializeField] private Image slotTypeImage;
 
         private static RosterItemSlot slotMousedOver;
         #endregion
@@ -42,6 +43,8 @@ namespace HexGameEngine.UI
         #region       
         public void SetMyDataReference(ItemData data)
         {
+            slotTypeImage.gameObject.SetActive(false);
+            if (data == null) slotTypeImage.gameObject.SetActive(true);
             itemDataRef = data;
         }
         #endregion

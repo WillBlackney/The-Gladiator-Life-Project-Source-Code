@@ -17,6 +17,8 @@ using HexGameEngine.Player;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.Perks;
 using HexGameEngine.Items;
+using HexGameEngine.CameraSystems;
+using DG.Tweening;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -27,6 +29,7 @@ namespace HexGameEngine.TownFeatures
         #region
         [Title("Town Page Components")]
         [SerializeField] GameObject mainVisualParent;
+        [SerializeField] TownBuildingView arenaBuilding;
         [Space(20)]
 
         [Title("Recruit Page Core Components")]
@@ -696,48 +699,53 @@ namespace HexGameEngine.TownFeatures
         public void OnHospitalPageLeaveButtonClicked()
         {
             hospitalPageVisualParent.SetActive(false);
-        }
-        public void OnCombatPageBackToTownButtonClicked()
+        }     
+        public void OnChooseCombatPageDeploymentButtonClicked()
         {
-            BlackScreenController.Instance.FadeOutScreen(0.5f, () =>
-            {
-                HideCombatContractPage();
-                ShowTownView();
-                BlackScreenController.Instance.FadeInScreen(0.5f);
-            });
+            StartCoroutine(OnChooseCombatPageDeploymentButtonClickedCoroutine());
         }
-        public void OnCombatPageDeploymentButtonClicked()
-        {
-            if (CombatContractCard.SelectectedCombatCard == null) return;
-            BlackScreenController.Instance.FadeOutScreen(0.5f, () =>
-            {
-                HideCombatContractPage();
-                BuildAndShowDeploymentPage();
-                BlackScreenController.Instance.FadeInScreen(0.5f);
-            });
 
+        private IEnumerator OnChooseCombatPageDeploymentButtonClickedCoroutine()
+        {
+            if (CombatContractCard.SelectectedCombatCard == null) yield break;
+            Camera cam = CameraController.Instance.MainCamera;
+
+            // Move arena page upwards
+            arenaBuilding.PageMovementParent.DOKill();
+            arenaBuilding.PageCg.DOKill();
+            arenaBuilding.PageMovementParent.DOMove(arenaBuilding.PageStartPos.position, 0.3f);
+            arenaBuilding.PageCg.DOFade(0f, 0.5f);
+            yield return new WaitForSeconds(0.4f);
+
+            cam.DOOrthoSize(0.5f, 0.65f).SetEase(Ease.OutCubic);
+            BlackScreenController.Instance.FadeOutScreen(0.65f, () =>
+            {
+                HideCombatContractPage();
+                HideTownView();
+                BuildAndShowDeploymentPage();
+                cam.DOOrthoSize(5f, 0);
+                BlackScreenController.Instance.FadeInScreen(0.5f);
+                cam.transform.position = new Vector3(0, 0, -15);
+            });
+        }
+        public void OnDeploymentPageBackToTownButtonClicked()
+        {
+            BlackScreenController.Instance.FadeOutScreen(0.5f, () =>
+            {            
+                ShowTownView();
+                HideDeploymentPage();
+                arenaBuilding.SnapToArenaViewSettings();
+                BlackScreenController.Instance.FadeInScreen(0.5f);
+            });
         }
       
         public void OnDeploymentPageReadyButtonClicked()
         {
             HandleReadyButtonClicked();
-        }
-        public void OnArenaPageButtonClicked()
-        {
-            BlackScreenController.Instance.FadeOutScreen(0.5f, () =>
-            {
-                HideTownView();
-                BuildAndShowCombatContractPage();
-                BlackScreenController.Instance.FadeInScreen(0.5f);
-            });
-        }
+        }      
 
         #endregion
 
-        // Feature Page Transisition Logic
-        #region
-
-        #endregion
 
         // Choose Combat Contract Page Logic
         #region
