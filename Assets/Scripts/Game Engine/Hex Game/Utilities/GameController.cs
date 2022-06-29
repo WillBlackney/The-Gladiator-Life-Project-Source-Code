@@ -103,6 +103,9 @@ namespace HexGameEngine
             // Build and prepare all session data
             PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();
 
+            // Apply global settings
+            GlobalSettings.Instance.ApplyStartingXPBonus();
+
             // Reset+ Centre camera
             CameraController.Instance.ResetMainCameraPositionAndZoom();
 
@@ -123,12 +126,14 @@ namespace HexGameEngine
 
             // Build mock save file + journey data
             RunController.Instance.SetGameStartValues();
-            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
-            // set combat with run controller
+            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);           
 
             // Build character roster + mock data
             List<HexCharacterData> characters = CreateSandboxCharacterDataFiles();
             CharacterDataController.Instance.BuildCharacterRoster(characters);
+
+            // Apply global settings
+            GlobalSettings.Instance.ApplyStartingXPBonus();
 
             // Enable world view
             bool dayTime = true;
@@ -188,6 +193,9 @@ namespace HexGameEngine
             // Build character roster + mock data
             List<HexCharacterData> characters = CreateSandboxCharacterDataFiles();
             CharacterDataController.Instance.BuildCharacterRoster(characters);
+
+            // Apply global settings
+            GlobalSettings.Instance.ApplyStartingXPBonus();
 
             // Enable world view
             bool dayTime = true;

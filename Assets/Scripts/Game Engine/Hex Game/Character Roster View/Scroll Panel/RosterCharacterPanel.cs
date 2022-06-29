@@ -35,7 +35,7 @@ namespace HexGameEngine.UI
         [SerializeField] private Image activityIndicatorImage;
 
         [Header("Level Components")]
-        [SerializeField] private GameObject levelUpIndicator;
+        [SerializeField] private LevelUpButton levelUpIndicator;
         [SerializeField] private TextMeshProUGUI currentLevelText;
 
         // Non-inspector properties
@@ -104,13 +104,13 @@ namespace HexGameEngine.UI
         private void UpdateLevelUpIndicator()
         {
             if (myCharacterData == null) return;
-            levelUpIndicator.SetActive(false);
+            levelUpIndicator.Hide();
             if (myCharacterData.attributeRolls.Count > 0 ||
                 myCharacterData.talentRolls.Count > 0 ||
                 myCharacterData.perkRolls.Count > 0)
             {
                 Debug.Log("Showing indicator!");
-                levelUpIndicator.SetActive(true);
+                levelUpIndicator.ShowAndAnimate();
             }
         }
         public void Show()
@@ -130,6 +130,10 @@ namespace HexGameEngine.UI
         {
             if (Input.GetKeyUp(KeyCode.Mouse1))            
                 CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);            
+        }
+        public void OnLevelButtonClicked()
+        {
+            CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
         }
         private void SetIndicatorParentViewStates(bool onOrOff)
         {

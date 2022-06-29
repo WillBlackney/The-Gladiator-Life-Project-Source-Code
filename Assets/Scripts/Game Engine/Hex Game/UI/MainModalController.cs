@@ -29,7 +29,9 @@ namespace HexGameEngine.UI
         [SerializeField] TextMeshProUGUI headerText;
         [SerializeField] TextMeshProUGUI descriptionText;
         [SerializeField] Image framedImage;
-        [SerializeField] Image unframedImage;        
+        [SerializeField] GameObject framedImageParent;
+        [SerializeField] Image unframedImage;
+        [SerializeField] GameObject unframedImageParent;
 
         // Non inspector values
         private ModalDirection currentDir = ModalDirection.SouthWest;
@@ -242,12 +244,12 @@ namespace HexGameEngine.UI
             // Main Image
             if (data.frameSprite)
             {
-                framedImage.transform.parent.gameObject.SetActive(true);
+                framedImageParent.SetActive(true);
                 framedImage.sprite = data.mainSprite;
             }
             else if (!data.frameSprite)
             {
-                unframedImage.gameObject.SetActive(true);
+                unframedImageParent.gameObject.SetActive(true);
                 unframedImage.sprite = data.mainSprite;
             }
 
@@ -271,7 +273,7 @@ namespace HexGameEngine.UI
             headerText.text = ap.Data.passiveName;
 
             // Main Image
-            framedImage.transform.parent.gameObject.SetActive(true);
+            framedImageParent.SetActive(true);
             framedImage.sprite = ap.Data.passiveSprite;
 
             // TO DO: uncomment and fix when we add italic desriptions to perks
@@ -317,7 +319,7 @@ namespace HexGameEngine.UI
             headerText.text = TextLogic.SplitByCapitals(tp.talentSchool.ToString()) + " (" + tp.level + ")";
 
             // Main Image
-            framedImage.transform.parent.gameObject.SetActive(true);
+            framedImageParent.SetActive(true);
             framedImage.sprite = tp.Data.talentSprite;
 
             // TO DO: uncomment and fix when we add italic descriptions to talents
@@ -341,7 +343,7 @@ namespace HexGameEngine.UI
             headerText.text = data.racialTag.ToString();
 
             // Main Image
-            framedImage.transform.parent.gameObject.SetActive(true);
+            framedImageParent.SetActive(true);
             framedImage.sprite = data.racialSprite;
 
             // Lore text
@@ -355,8 +357,8 @@ namespace HexGameEngine.UI
         }
         private void Reset()
         {
-            framedImage.transform.parent.gameObject.SetActive(false);
-            unframedImage.gameObject.SetActive(false);
+            framedImageParent.SetActive(false);
+            unframedImageParent.gameObject.SetActive(false);
 
             foreach (ModalDottedRow row in dottedRows)            
                 row.gameObject.SetActive(false);            

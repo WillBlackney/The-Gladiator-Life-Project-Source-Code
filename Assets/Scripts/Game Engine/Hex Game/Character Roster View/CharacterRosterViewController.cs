@@ -38,11 +38,11 @@ namespace HexGameEngine.UI
         [SerializeField] private Slider xpbar;
         [Space(20)]
         [Header("Level Up Components")]
-        [SerializeField] private GameObject attributeLevelUpButton;
+        [SerializeField] private LevelUpButton attributeLevelUpButton;
         [SerializeField] private AttributeLevelUpPage attributeLevelUpPageComponent;
-        [SerializeField] private GameObject perkLevelUpButton;
-        [SerializeField] private GameObject talentLevelUpButton;
-        [SerializeField] private PerkTalentLevelUpPage perkTalentLevelUpPage;
+        [SerializeField] private LevelUpButton perkLevelUpButton;
+        [SerializeField] private LevelUpButton talentLevelUpButton;
+        [SerializeField] private PerkTalentLevelUpPage talentLevelUpPage;
         [Space(20)]
         [Header("Abilities Section Components")]
         [SerializeField] private UIAbilityIcon[] abilityButtons;
@@ -215,11 +215,11 @@ namespace HexGameEngine.UI
         }
         public void OnLevelUpPerkButtonClicked()
         {
-            perkTalentLevelUpPage.ShowAndBuildForPerkReward(characterCurrentlyViewing);
+            talentLevelUpPage.ShowAndBuildForPerkReward(characterCurrentlyViewing);
         }
         public void OnLevelUpTalentButtonClicked()
         {
-            perkTalentLevelUpPage.ShowAndBuildForTalentReward(characterCurrentlyViewing);
+            talentLevelUpPage.ShowAndBuildForTalentReward(characterCurrentlyViewing);
         }
         #endregion              
 
@@ -247,8 +247,8 @@ namespace HexGameEngine.UI
             Debug.Log("Active perk icons = " + allPerks.Count.ToString());           
 
             if (character.perkRolls.Count > 0)
-                perkLevelUpButton.SetActive(true);
-            else perkLevelUpButton.SetActive(false);
+                perkLevelUpButton.ShowAndAnimate();
+            else perkLevelUpButton.Hide();
 
         }
        
@@ -290,9 +290,9 @@ namespace HexGameEngine.UI
             debuffResistanceText.text = StatCalculator.GetTotalDebuffResistance(character).ToString();
             deathResistanceText.text = StatCalculator.GetTotalDeathResistance(character).ToString();
 
-            if (character.attributeRolls.Count > 0)            
-                attributeLevelUpButton.SetActive(true);            
-            else attributeLevelUpButton.SetActive(false);
+            if (character.attributeRolls.Count > 0)
+                attributeLevelUpButton.ShowAndAnimate();
+            else attributeLevelUpButton.Hide();
         }
         private void BuildStars(GameObject[] arr, int starCount)
         {
@@ -457,8 +457,8 @@ namespace HexGameEngine.UI
             }
 
             if (character.talentRolls.Count > 0)
-                talentLevelUpButton.SetActive(true);
-            else talentLevelUpButton.SetActive(false);
+                talentLevelUpButton.ShowAndAnimate();
+            else talentLevelUpButton.Hide();
         }
 
         #endregion

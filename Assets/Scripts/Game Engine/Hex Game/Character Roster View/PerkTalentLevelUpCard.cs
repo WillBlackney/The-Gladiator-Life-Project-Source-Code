@@ -23,6 +23,8 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private Image artImage;
 
+        [SerializeField] float startScale = 1f, endScale = 1.1f;
+
         // non inspector fields
         private PerkIconData perkData;
         private TalentPairing talentData;
@@ -61,14 +63,14 @@ namespace HexGameEngine.UI
         {
             selected = false;
             scalingParent.transform.DOKill();
-            scalingParent.transform.DOScale(0.5f, 0.25f);
+            scalingParent.transform.DOScale(startScale, 0.25f);
             myPage.UpdateConfirmButtonState();
         }
         private void HandleSelect()
         {
             selected = true;
             scalingParent.transform.DOKill();
-            scalingParent.transform.DOScale(0.55f, 0.25f);            
+            scalingParent.transform.DOScale(endScale, 0.25f);            
 
             // If another card is already selected, deselect it
             foreach (PerkTalentLevelUpCard card in myPage.AllLevelUpCards)
@@ -77,7 +79,7 @@ namespace HexGameEngine.UI
                 {
                     card.selected = false;
                     card.scalingParent.transform.DOKill();
-                    card.scalingParent.transform.DOScale(0.5f, 0.25f);
+                    card.scalingParent.transform.DOScale(startScale, 0.25f);
                     break;
                 }
             }
@@ -87,7 +89,8 @@ namespace HexGameEngine.UI
         public void Reset()
         {
             gameObject.SetActive(false);
-            scalingParent.transform.DOScale(0.5f, 0f);
+            scalingParent.transform.DOKill();
+            scalingParent.transform.DOScale(startScale, 0f);
             perkData = null;
             talentData = null;
             HandleDeselect();

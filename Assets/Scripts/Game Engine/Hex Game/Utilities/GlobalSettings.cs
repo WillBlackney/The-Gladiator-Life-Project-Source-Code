@@ -18,6 +18,9 @@ namespace HexGameEngine.Utilities
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
         [SerializeField] private bool preventAudioProfiles = true;
 
+        [Title("Character Settings")]
+        [SerializeField] private int startingXpBonus;
+
         [Title("Combat Settings")]
         [SerializeField] private int baseHitChance;
         [SerializeField] private int startingDeploymentLimit = 3;
@@ -66,6 +69,10 @@ namespace HexGameEngine.Utilities
         public int StartingDay
         {
             get { return startingDay; }
+        }
+        public int StartingXpBonus
+        {
+            get { return startingXpBonus; }
         }
         public int StartingChapter
         {
@@ -124,9 +131,14 @@ namespace HexGameEngine.Utilities
             else if (!enableDebugLogs)
                 Debug.unityLogger.logEnabled = false;
         }
+        public void ApplyStartingXPBonus()
+        {
+            foreach(HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
+            {
+                CharacterDataController.Instance.HandleGainXP(character, StartingXpBonus);
+            }
+        }
         #endregion
-
-
 
         // Odin Showifs
         #region
@@ -159,6 +171,7 @@ namespace HexGameEngine.Utilities
             return gameMode == GameMode.CombatSandbox;
         }
         #endregion
+
     }
 
     public enum GameMode

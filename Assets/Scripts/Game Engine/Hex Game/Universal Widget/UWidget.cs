@@ -235,6 +235,27 @@ namespace HexGameEngine.UWidget
                 }
             }
 
+            // Disable events
+            for (int i = 0; i < OnDisableEvents.Length; i++)
+            {
+                if (OnDisableEvents[i].transformToScale != null && !OnDisableEvents[i].OriginalScaleIsSet)
+                {
+                    OnDisableEvents[i].SetOriginalScale(OnDisableEvents[i].transformToScale.localScale);
+                }
+                if (OnDisableEvents[i].transformToWiggle != null && !OnDisableEvents[i].OriginalPositionIsSet)
+                {
+                    OnDisableEvents[i].SetOriginalPosition(OnDisableEvents[i].transformToWiggle.localPosition);
+                }
+                if (OnDisableEvents[i].transformToWiggle != null && !OnDisableEvents[i].OriginalRotationIsSet)
+                {
+                    OnDisableEvents[i].SetOriginalRotation(OnDisableEvents[i].transformToWiggle.localRotation.eulerAngles);
+                }
+                if (OnDisableEvents[i].transformToMove != null && !OnDisableEvents[i].OriginalPositionIsSet)
+                {
+                    OnDisableEvents[i].SetOriginalPosition(OnDisableEvents[i].transformToMove.localPosition);
+                }
+            }
+
             hasRunSetup = true;
         }
         #endregion

@@ -73,7 +73,7 @@ namespace HexGameEngine.UI
         public void UpdateTotalSelectedAttributes()
         {
             int selected = GetSelectedAttributes().Count;
-            totalSelectedAttributesText.text = selected.ToString() + " / 3";
+            totalSelectedAttributesText.text = selected.ToString() + "/3";
             if (selected >= 3) confirmButtonImage.sprite = readyImage;
             else confirmButtonImage.sprite = notReadyImage;
         }

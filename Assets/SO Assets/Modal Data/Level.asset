@@ -21,8 +21,61 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: A character's current level. Characters start at level 1 and can reach
-      a maximum of level 6. When characters level up, their core attributes increase
-      and they gain a new passive bonus. On levels 3 and 5, characters may also choose
-      a new talent to learn.
+    phrase: 'A characters current level. Characters start at level '
+  - color: 0
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '1 '
+  - color: 0
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and can reach a maximum of level '
+  - color: 0
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 6
+  - color: 0
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: . When characters level up, their
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Core Attributes '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'increase and they gain a new '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Perk
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '. On levels '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '3 '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 5
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', they gain a new '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Talent
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
   infoRows: []
