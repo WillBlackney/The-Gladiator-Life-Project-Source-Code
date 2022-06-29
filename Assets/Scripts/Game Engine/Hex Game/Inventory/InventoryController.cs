@@ -18,10 +18,12 @@ namespace HexGameEngine.Items
         #region
         [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
-        [SerializeField] private InventorySlot[] allInventorySlots;
-        [SerializeField] private InventoryItemView[] allInventoryItemViews;
+        [SerializeField] private List<InventorySlot> allInventorySlots = new List<InventorySlot>();
+        [SerializeField] private List<InventoryItemView> allInventoryItemViews = new List<InventoryItemView>();
         [SerializeField] private TextMeshProUGUI slotsMaxCountText;
-        private int maxInventorySize = 30;
+        [SerializeField] private InventorySlot inventorySlotPrefab;
+        [SerializeField] private Transform slotsParent;
+        private int maxInventorySize = 1000;
 
         [Header("Confirm Action Screen Components")]
         [SerializeField] private GameObject confirmActionScreenVisualParent;
@@ -50,7 +52,7 @@ namespace HexGameEngine.Items
         {
             get { return inventory; }
         }
-        public InventorySlot[] AllInventorySlots
+        public List<InventorySlot> AllInventorySlots
         {
             get { return allInventorySlots; }
         }
@@ -76,7 +78,7 @@ namespace HexGameEngine.Items
             BuildInventoryView();
             UpdateMaxSlotsTexts();
         }
-        private void HideInventoryView()
+        public void HideInventoryView()
         {
             mainVisualParent.SetActive(false);
         }
@@ -105,16 +107,24 @@ namespace HexGameEngine.Items
             foreach (InventoryItemView i in allInventoryItemViews)
                 i.Reset();
             foreach(InventorySlot s in allInventorySlots)            
-                s.Reset();            
+                s.Reset();
 
-            for(int i = 0; i < maxInventorySize; i++)
+            // Always show at least 24 slots
+            for (int i = 0; i < 24; i++)
+                AllInventorySlots[i].Show();
+
+            for(int i = 0; i < inventory.Count; i++)
             {
-                allInventorySlots[i].gameObject.SetActive(true);
-
-                if (i < inventory.Count)
+                // Create a new slot if not enough available
+                if(i >= allInventorySlots.Count)
                 {
-                    BuildInventoryItemViewFromInventoryItemData(allInventoryItemViews[i], inventory[i]);
+                    InventorySlot newSlot = Instantiate(inventorySlotPrefab, slotsParent).GetComponent<InventorySlot>();
+                    allInventorySlots.Add(newSlot);
+                    allInventoryItemViews.Add(newSlot.MyItemView);
                 }
+                allInventorySlots[i].Show();
+
+                BuildInventoryItemViewFromInventoryItemData(allInventoryItemViews[i], inventory[i]);
             }            
         }
         private void BuildInventoryItemViewFromInventoryItemData(InventoryItemView view, InventoryItem item)
@@ -138,7 +148,7 @@ namespace HexGameEngine.Items
         }
         private void UpdateMaxSlotsTexts()
         {
-            slotsMaxCountText.text = inventory.Count.ToString() + " / " + maxInventorySize.ToString();
+            //slotsMaxCountText.text = inventory.Count.ToString() + " / " + maxInventorySize.ToString();
         }
         #endregion
 
