@@ -33,11 +33,11 @@ namespace HexGameEngine.Items
 
         [Header("Row 3 Components")]
         [SerializeField] GameObject abilitiesParent;
-        [SerializeField] TextMeshProUGUI abilitiesText;
+        [SerializeField] UiAbilityIconRow[] abilityRows;
 
         [Header("Row 4 Components")]
         [SerializeField] GameObject effectsParent;
-        [SerializeField] TextMeshProUGUI effectsText;
+        [SerializeField] ModalDottedRow[] effectRows;
 
         [Header("Armour Components")]
         [SerializeField] GameObject armourParent;
@@ -212,16 +212,15 @@ namespace HexGameEngine.Items
         private void BuildGrantedAbilitiesSection(ItemData item)
         {
             abilitiesParent.SetActive(false);
-            abilitiesText.text = "";
-
+            for(int i = 0; i < abilityRows.Length; i++)            
+                abilityRows[i].Hide();
+            
             if(item.grantedAbilities.Count > 0)
             {
                 abilitiesParent.SetActive(true);
                 for(int i = 0; i < item.grantedAbilities.Count; i++)
                 {
-                    abilitiesText.text += "- " + item.grantedAbilities[i].abilityName;
-                    if (i < item.grantedAbilities.Count - 1)
-                        abilitiesText.text += "\n";
+                    abilityRows[i].Build(item.grantedAbilities[i]);
                 }
                
             }
@@ -238,52 +237,48 @@ namespace HexGameEngine.Items
         private void BuildGrantedEffectsSection(ItemData item)
         {
             effectsParent.SetActive(false);
-            effectsText.text = "";
 
-            // to do: update with better coloured dot point tabs for each effect
+            for (int i = 0; i < effectRows.Length; i++)
+                effectRows[i].gameObject.SetActive(false);
+
             if (item.itemEffects.Count > 0)
             {
                 effectsParent.SetActive(true);
-                for (int i = 0; i < item.itemEffects.Count; i++)
+                for(int i = 0; i < item.itemEffects.Count;i++)
                 {
-                    // need to update this when we add item effects that arent stat boosts
-                    if(item.itemEffects[i].effectType == ItemEffectType.ModifyAttribute)
+                    ModalDottedRow row = effectRows[i];
+                    ItemEffect effect = item.itemEffects[i];
+                    DotStyle dotStyle = DotStyle.Neutral;
+
+                    if (effect.effectType == ItemEffectType.ModifyAttribute)
                     {
-                        string col = TextLogic.blueNumber;
-                        string symbol = " +";
-                        if (item.itemEffects[i].modAmount < 0)
+                        if (effect.modAmount < 0)
                         {
-                            col = TextLogic.lightRed;
-                            symbol = " ";
+                            dotStyle = DotStyle.Red;
+                            row.Build(TextLogic.ReturnColoredText("-" + effect.modAmount.ToString() + " ", TextLogic.blueNumber) + TextLogic.SplitByCapitals(effect.attributeModified.ToString()), dotStyle);
                         }
-                        effectsText.text += "- " + TextLogic.SplitByCapitals(item.itemEffects[i].attributeModified.ToString()) +
-                           TextLogic.ReturnColoredText(
-                           symbol +
-                           item.itemEffects[i].modAmount.ToString(), col);
-                    }               
-                       
-                    else if (item.itemEffects[i].effectType == ItemEffectType.OnHitEffect)
+                        else
+                        {
+                            dotStyle = DotStyle.Green;
+                            row.Build(TextLogic.ReturnColoredText("+" + effect.modAmount.ToString() + " ", TextLogic.blueNumber) + TextLogic.SplitByCapitals(effect.attributeModified.ToString()), dotStyle);
+                        }
+                    }
+
+                    else if (effect.effectType == ItemEffectType.OnHitEffect)
                     {
-                        effectsText.text += "- On hit: Apply " + TextLogic.ReturnColoredText(item.itemEffects[i].perkApplied.passiveStacks.ToString(),TextLogic.blueNumber) + " " +
-                            TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(item.itemEffects[i].perkApplied.perkTag.ToString()), TextLogic.neutralYellow) + " (" +
-                            item.itemEffects[i].effectChance.ToString() + "% chance).";
+                        row.Build("On hit: Apply " + TextLogic.ReturnColoredText(effect.perkApplied.passiveStacks.ToString(), TextLogic.blueNumber) + " " +
+                            TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkApplied.perkTag.ToString()), TextLogic.neutralYellow) + " (" +
+                            effect.effectChance.ToString() + "% chance).", dotStyle);
                     }
                     else if (item.itemEffects[i].effectType == ItemEffectType.GainPerk)
                     {
-                        var pd = item.itemEffects[i].perkGained.Data;
-                        //var pd = PerkController.Instance.GetPerkIconDataByTag(item.itemEffects[i].perkGained.perkTag);
+                        var pd = effect.perkGained.Data;
                         string s = TextLogic.ConvertCustomStringListToString(pd.passiveDescription);
-                        s = s.Replace("X", item.itemEffects[i].perkGained.stacks.ToString());
-                        effectsText.text += "- " + s;
+                        s = s.Replace("X", effect.perkGained.stacks.ToString());
+                        row.Build(s, dotStyle);
                     }
-
-                    if (i < item.itemEffects.Count - 1)
-                        effectsText.text += "\n";
                 }
-
             }
-
-
         }
         #endregion
 
