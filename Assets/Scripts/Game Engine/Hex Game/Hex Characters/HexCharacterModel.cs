@@ -21,6 +21,7 @@ namespace HexGameEngine.Characters
         public LivingState livingState;
         public ActivationPhase activationPhase = ActivationPhase.NotActivated;
         public CharacterRace race;
+        public BackgroundData background;
 
         [Header("Active Properties")]
         public int currentEnergy;

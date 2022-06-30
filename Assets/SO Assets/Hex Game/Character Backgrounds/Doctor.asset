@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
+  m_Name: Doctor
+  m_EditorClassIdentifier: 
+  backgroundSprite: {fileID: 21300000, guid: 1886607cdf482494480f936d8caa21fe, type: 3}
+  backgroundType: 9
+  description: 'Place holder description Place holder description Place holder description
+    Place holder description Place holder description Place holder description Place
+    holder description Place holder description '
+  dailyWageMin: 17
+  dailyWageMax: 19
+  recruitCostMin: 120
+  recruitCostMax: 140
+  mightLower: -5
+  mightUpper: 0
+  constitutionLower: -10
+  constitutionUpper: -5
+  witsLower: 5
+  witsUpper: 10
+  dodgeLower: 0
+  dodgeUpper: 0
+  accuracyLower: 15
+  accuracyUpper: 20
+  resolveLower: 10
+  resolveUpper: 15
+  validRaces: 0100000003000000040000000500000006000000
+  passiveEffectDescriptions:
+  - dotStyle: 3
+    message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'All '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Experience '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'gains are incresed by '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 15%
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: .

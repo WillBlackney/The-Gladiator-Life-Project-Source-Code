@@ -183,6 +183,19 @@ namespace HexGameEngine.UI
             UpdateFitters();
             shouldRebuild = true;
         }
+        public void BuildAndShowModal(BackgroundData background)
+        {
+            UpdateDynamicDirection();
+            visualParent.SetActive(true);
+            mainCg.DOKill();
+            mainCg.alpha = 0.01f;
+            mainCg.DOFade(1f, 0.25f);
+            Reset();
+            UpdateFitters();
+            BuildModalContent(background);
+            UpdateFitters();
+            shouldRebuild = true;
+        }
         public void BuildAndShowModal(ActivePerk perk)
         {
             UpdateDynamicDirection();
@@ -337,6 +350,23 @@ namespace HexGameEngine.UI
             descriptionText.text = TextLogic.ConvertCustomStringListToString(tp.Data.talentDescription);
             descriptionText.fontStyle = FontStyles.Normal;
 
+        }
+        private void BuildModalContent(BackgroundData data)
+        {
+            headerText.text = TextLogic.SplitByCapitals(data.backgroundType.ToString());
+
+            // Main Image
+            framedImageParent.SetActive(true);
+            framedImage.sprite = data.BackgroundSprite;
+
+            // Lore text
+            descriptionText.fontStyle = FontStyles.Italic;
+            descriptionText.gameObject.SetActive(true);
+            descriptionText.text = data.description;
+
+            // Build dot points
+            for (int i = 0; i < data.passiveEffectDescriptions.Count; i++)
+                dottedRows[i].Build(data.passiveEffectDescriptions[i]);
         }
         private void BuildModalContent(RaceDataSO data)
         {

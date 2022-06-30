@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
+  m_Name: Labourer
+  m_EditorClassIdentifier: 
+  backgroundSprite: {fileID: 21300000, guid: 1df2cdf4fbe2fe0499b79254c75a27ad, type: 3}
+  backgroundType: 10
+  description: 'Place holder description Place holder description Place holder description
+    Place holder description Place holder description Place holder description Place
+    holder description Place holder description '
+  dailyWageMin: 5
+  dailyWageMax: 7
+  recruitCostMin: 70
+  recruitCostMax: 80
+  mightLower: -5
+  mightUpper: 5
+  constitutionLower: -5
+  constitutionUpper: 5
+  witsLower: -5
+  witsUpper: 5
+  dodgeLower: -5
+  dodgeUpper: 5
+  accuracyLower: -5
+  accuracyUpper: 5
+  resolveLower: -5
+  resolveUpper: 5
+  validRaces: 010000000200000003000000050000000600000007000000
+  passiveEffectDescriptions: []

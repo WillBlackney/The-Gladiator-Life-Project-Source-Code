@@ -22,13 +22,19 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] UniversalCharacterModel portaitModel;
         [SerializeField] GameObject selectedParent;
 
-        [Space(20)]
+        [Space(10)]
 
         [Header("Race Section Components")]
         [SerializeField] TextMeshProUGUI racialText;
         [SerializeField] UIRaceIcon racialIcon;
 
-        [Space(20)]
+        [Space(10)]
+
+        [Header("Background Section Components")]
+        [SerializeField] TextMeshProUGUI backgroundText;
+        [SerializeField] UIBackgroundIcon backgroundIcon;
+
+        [Space(10)]
 
         [Header("Cost Section Components")]
         [SerializeField] TextMeshProUGUI recruitCostText;
@@ -61,6 +67,8 @@ namespace HexGameEngine.TownFeatures
             nameText.text = "<color=#BC8252>" + data.myName + "<color=#DDC6AB>    The " + data.myClassName;
             racialText.text = data.race.ToString();
             racialIcon.BuildFromRacialData(CharacterDataController.Instance.GetRaceData(data.race));
+            backgroundText.text = TextLogic.SplitByCapitals(data.background.backgroundType.ToString());
+            backgroundIcon.BuildFromBackgroundData(data.background);
 
             // Build model
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(portaitModel, data.modelParts);

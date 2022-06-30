@@ -15,6 +15,7 @@ namespace HexGameEngine.Characters
         public string myClassName;
         public CharacterRace race;
         public CharacterModelSize modelSize;
+        public BackgroundData background;
         public int xpReward;
         public int baseArmour;
 

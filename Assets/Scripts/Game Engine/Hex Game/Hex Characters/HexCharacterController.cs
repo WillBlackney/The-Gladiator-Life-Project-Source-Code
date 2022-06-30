@@ -248,6 +248,7 @@ namespace HexGameEngine.Characters
             character.characterData = data;
             character.myName = data.myName;
             character.race = data.race;
+            character.background = data.background;
             //character.audioProfile = data.audioProfile;
 
             // Setup stats

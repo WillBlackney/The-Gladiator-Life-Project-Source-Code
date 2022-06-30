@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
+  m_Name: Zealot
+  m_EditorClassIdentifier: 
+  backgroundSprite: {fileID: 21300000, guid: c14e70742140d494d84710de7e06fe99, type: 3}
+  backgroundType: 6
+  description: 'Place holder description Place holder description Place holder description
+    Place holder description Place holder description Place holder description Place
+    holder description Place holder description '
+  dailyWageMin: 14
+  dailyWageMax: 16
+  recruitCostMin: 105
+  recruitCostMax: 125
+  mightLower: 0
+  mightUpper: 0
+  constitutionLower: 5
+  constitutionUpper: 10
+  witsLower: 0
+  witsUpper: 0
+  dodgeLower: 0
+  dodgeUpper: 0
+  accuracyLower: 0
+  accuracyUpper: 0
+  resolveLower: 10
+  resolveUpper: 15
+  validRaces: 01000000020000000300000004000000050000000600000007000000
+  passiveEffectDescriptions:
+  - dotStyle: 3
+    message:
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '+10 '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Stress Resistance
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: .

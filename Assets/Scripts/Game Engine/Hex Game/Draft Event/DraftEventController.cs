@@ -278,21 +278,6 @@ namespace HexGameEngine.DraftEvent
 
         // Draft Screen General Logic
         #region
-        public void StartBuildAndShowDraftCharacterScreenInitialSequence()
-        {
-            // Generate and get draft characters
-            draftCharacterData = CharacterDataController.Instance.GenerateCompanionCharacters(CharacterDataController.Instance.AllPlayerCharacters[0]); ;
-
-            // Build draft character boxes + views
-            BuildAllCharacterBoxes(PopThreeCharacters(draftCharacterData));
-
-            // to do: auto select first box
-            HandleSelectCharacterBox(allDraftCharacterBoxes[0]);
-
-            // Show + Fade in screen
-            DoSlideInScreenSequence();
-
-        }
         private List<HexCharacterData> PopThreeCharacters(List<HexCharacterData> allDraftCharacters)
         {
             List<HexCharacterData> characterOffering = new List<HexCharacterData>();

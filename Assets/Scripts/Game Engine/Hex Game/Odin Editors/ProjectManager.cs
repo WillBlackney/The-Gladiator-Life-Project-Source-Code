@@ -42,6 +42,7 @@ namespace HexGameEngine.Editor
         private DrawSelected<OutfitTemplateSO> drawOutfitTemplates = new DrawSelected<OutfitTemplateSO>();
         private DrawSelected<ClassTemplateSO> drawClassTemplates = new DrawSelected<ClassTemplateSO>();
         private DrawSelected<CharacterModelTemplateSO> drawCharacterModelTemplates = new DrawSelected<CharacterModelTemplateSO>();
+        private DrawSelected<BackgroundDataSO> drawCharacterBackgrounds = new DrawSelected<BackgroundDataSO>();
 
         // Hard coded file directory paths to specific SO's
         private string abilityPath = "Assets/SO Assets/Hex Game/Abilities";
@@ -54,6 +55,7 @@ namespace HexGameEngine.Editor
         private string outfitTemplatesPath = "Assets/SO Assets/Hex Game/Recruitment/Outfit Templates";
         private string classTemplatesPath = "Assets/SO Assets/Hex Game/Recruitment/Class Templates";
         private string characterModelTemplatesPath = "Assets/SO Assets/Hex Game/Recruitment/Character Model Templates";
+        private string characterBackgroundsPath = "Assets/SO Assets/Hex Game/Character Backgrounds";
 
         // Create field for each type of manager object in project to be drawn       
         private DrawGlobalSettings drawGlobalSettings = new DrawGlobalSettings();
@@ -95,6 +97,7 @@ namespace HexGameEngine.Editor
             drawClassTemplates.SetPath(classTemplatesPath);
             drawOutfitTemplates.SetPath(outfitTemplatesPath);
             drawCharacterModelTemplates.SetPath(characterModelTemplatesPath);
+            drawCharacterBackgrounds.SetPath(characterBackgroundsPath);
 
             // Find manager objects
             drawGlobalSettings.FindMyObject();
@@ -134,6 +137,7 @@ namespace HexGameEngine.Editor
                 case ManagerState.OutfitTemplates:
                 case ManagerState.CharacterClassTemplates:
                 case ManagerState.CharacterModelTemplates:
+                case ManagerState.CharacterBackgrounds:
                     DrawEditor(enumIndex);
                     break;
                 default:
@@ -236,6 +240,10 @@ namespace HexGameEngine.Editor
                 case ManagerState.CharacterModelTemplates:
                     drawCharacterModelTemplates.SetSelected(MenuTree.Selection.SelectedValue);
                     break;
+
+                case ManagerState.CharacterBackgrounds:
+                    drawCharacterBackgrounds.SetSelected(MenuTree.Selection.SelectedValue);
+                    break;
             }
 
             // Which editor window should be drawn?
@@ -265,6 +273,7 @@ namespace HexGameEngine.Editor
             targets.Add(drawOutfitTemplates);
             targets.Add(drawClassTemplates);
             targets.Add(drawCharacterModelTemplates);
+            targets.Add(drawCharacterBackgrounds);
 
             targets.Add(drawLevelController);
             targets.Add(drawCharacterDataController);
@@ -297,6 +306,7 @@ namespace HexGameEngine.Editor
                 case ManagerState.OutfitTemplates:
                 case ManagerState.CharacterClassTemplates:
                 case ManagerState.CharacterModelTemplates:
+                case ManagerState.CharacterBackgrounds:
                     base.DrawMenu();
                     break;
                 default:
@@ -359,6 +369,11 @@ namespace HexGameEngine.Editor
                     tree.SortMenuItemsByName();
                     break;
 
+                case ManagerState.CharacterBackgrounds:
+                    tree.AddAllAssetsAtPath("Character Background Data", characterBackgroundsPath, typeof(BackgroundDataSO));
+                    tree.SortMenuItemsByName();
+                    break;
+
             }
             return tree;
         }
@@ -376,6 +391,7 @@ namespace HexGameEngine.Editor
             OutfitTemplates,
             CharacterClassTemplates,
             CharacterModelTemplates,
+            CharacterBackgrounds,
 
             LevelController,
             CharacterDataController,

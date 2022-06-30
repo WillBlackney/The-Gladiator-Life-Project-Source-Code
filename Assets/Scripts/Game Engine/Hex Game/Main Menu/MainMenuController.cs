@@ -216,6 +216,7 @@ namespace HexGameEngine.MainMenu
             characterBuild = CharacterDataController.Instance.CloneCharacterData(startingClassTemplate);
             characterBuild.attributeSheet = new AttributeSheet();
             baselineAttributes.CopyValuesIntoOther(characterBuild.attributeSheet);
+            characterBuild.background = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.Unknown);
             HandleChangeClassPreset(startingClassTemplate);
 
             // Set to template 1 

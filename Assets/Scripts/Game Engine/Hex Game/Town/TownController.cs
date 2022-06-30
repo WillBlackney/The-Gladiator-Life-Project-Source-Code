@@ -46,6 +46,8 @@ namespace HexGameEngine.TownFeatures
         [Space(20)]
         [SerializeField] private TextMeshProUGUI recruitRightPanelRacialText;
         [SerializeField] private UIRaceIcon recruitRightPanelRacialIcon;
+        [SerializeField] private TextMeshProUGUI recruitRightPanelBackgroundText;
+        [SerializeField] private UIBackgroundIcon recruitRightPanelBackgroundIcon;
         [SerializeField] private TextMeshProUGUI recruitRightPanelCostText;
         [SerializeField] private TextMeshProUGUI recruitRightPanelUpkeepText;
         [Space(20)]
@@ -284,6 +286,7 @@ namespace HexGameEngine.TownFeatures
             // Texts
             recruitRightPanelNameText.text = "<color=#BC8252>" + character.myName + "<color=#DDC6AB>    The " + character.myClassName;
             recruitRightPanelRacialText.text = character.race.ToString();
+            recruitRightPanelBackgroundText.text = TextLogic.SplitByCapitals(character.background.backgroundType.ToString());
             string col = "<color=#DDC6AB>";
             if (PlayerDataController.Instance.CurrentGold < character.recruitCost) col = TextLogic.lightRed;
             recruitRightPanelUpkeepText.text = character.dailyWage.ToString();
@@ -291,6 +294,7 @@ namespace HexGameEngine.TownFeatures
 
             // Misc
             recruitRightPanelRacialIcon.BuildFromRacialData(CharacterDataController.Instance.GetRaceData(character.race));
+            recruitRightPanelBackgroundIcon.BuildFromBackgroundData(character.background);
 
             // Build stats section
             recruitRightPanelStrengthText.text = character.attributeSheet.strength.value.ToString();
@@ -352,8 +356,7 @@ namespace HexGameEngine.TownFeatures
             // Reset
             for (int i = 0; i < arr.Length; i++)
                 arr[i].gameObject.SetActive(false);
-
-            for (int i = 0; i < starCount; i++)
+            for (int i = 0; i < starCount && i < arr.Length; i++)
                 arr[i].gameObject.SetActive(true);
         }
         #endregion

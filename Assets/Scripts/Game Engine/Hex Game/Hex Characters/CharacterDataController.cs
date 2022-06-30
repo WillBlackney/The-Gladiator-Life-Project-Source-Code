@@ -20,11 +20,13 @@ namespace HexGameEngine.Characters
         [SerializeField] private HexCharacterTemplateSO[] allCustomCharacterTemplatesSOs;
         [SerializeField] private TalentDataSO[] allTalentData;
         [SerializeField] private RaceDataSO[] allRacialData;
+        [SerializeField] private BackgroundDataSO[] allCharacterBackgroundSOs;
 
         [Header("Character Generation")]
         [SerializeField] private List<ClassTemplateSO> allClassTemplateSOs;
         [SerializeField] private List<ClassTemplateSO> allDraftTemplateSOs;
-        [SerializeField] private List<CharacterModelTemplateSO> allModelTemplateSOs;
+        [SerializeField] private List<CharacterModelTemplateSO> allModelTemplateSOs;    
+        [SerializeField] SerializedAttrbuteSheet baselineRecruitAttributes;
 
         [Header("Character Name Buckets")]
         [SerializeField] string[] humanNames;
@@ -40,6 +42,7 @@ namespace HexGameEngine.Characters
         // Non-Inspector 
         private HexCharacterData[] allCustomCharacterTemplates;
         private HexCharacterData[] allCharacterTemplates;
+        private BackgroundData[] allCharacterBackgrounds;
         private List<HexCharacterData> allPlayerCharacters = new List<HexCharacterData>();
         private List<HexCharacterData> characterDeck = new List<HexCharacterData>();
         private List<CharacterRace> validCharacterRaces = new List<CharacterRace>
@@ -63,6 +66,11 @@ namespace HexGameEngine.Characters
         public TalentDataSO[] AllTalentData
         {
             get { return allTalentData; }
+        }
+        public BackgroundData[] AllCharacterBackgrounds
+        {
+            get { return allCharacterBackgrounds; }
+            private set { allCharacterBackgrounds = value; }
         }
         public HexCharacterData[] AllCharacterTemplates
         {
@@ -113,8 +121,22 @@ namespace HexGameEngine.Characters
         protected override void Awake()
         {
             base.Awake();
+            BuildBackgroundLibrary();
             BuildTemplateLibrary();
-            BuildCustomTemplateLibrary();
+            BuildCustomTemplateLibrary();           
+        }
+        private void BuildBackgroundLibrary()
+        {
+            Debug.Log("CharacterDataController.BuildBackgroundLibrary() called...");
+
+            List<BackgroundData> tempList = new List<BackgroundData>();
+
+            foreach (BackgroundDataSO dataSO in allCharacterBackgroundSOs)
+            {
+                tempList.Add(new BackgroundData(dataSO));
+            }
+
+            AllCharacterBackgrounds = tempList.ToArray();
         }
         private void BuildTemplateLibrary()
         {
@@ -157,6 +179,7 @@ namespace HexGameEngine.Characters
             newCharacter.race = template.race;
             newCharacter.modelSize = template.modelSize;
             SetStartingLevelAndXpValues(newCharacter);
+            newCharacter.background = GetBackgroundData(CharacterBackground.Unknown);
 
             // Setup stats
             newCharacter.attributeSheet = new AttributeSheet();
@@ -241,6 +264,7 @@ namespace HexGameEngine.Characters
             newCharacter.myName = original.myName;
             newCharacter.myClassName = original.myClassName;
             newCharacter.race = original.race;
+            newCharacter.background = original.background;
             newCharacter.modelSize = original.modelSize;
             newCharacter.xpReward = original.xpReward;
             newCharacter.baseArmour = original.baseArmour;
@@ -288,6 +312,21 @@ namespace HexGameEngine.Characters
 
             return newCharacter;
 
+        }
+        public BackgroundData GetBackgroundData(CharacterBackground bg)
+        {
+            BackgroundData ret = null;
+
+            foreach(BackgroundData data in allCharacterBackgrounds)
+            {
+                if(data.backgroundType == bg)
+                {
+                    ret = data;
+                    break;
+                }
+            }
+
+            return ret;
         }
         #endregion
 
@@ -685,41 +724,6 @@ namespace HexGameEngine.Characters
 
         // Character Generation + Character Deck Logic
         #region
-        public List<HexCharacterData> GenerateCompanionCharacters(HexCharacterData startingCharacter)
-        {
-            List<HexCharacterData> charactersRet = new List<HexCharacterData>();
-            List<ClassTemplateSO> validTemplates = new List<ClassTemplateSO>();
-            List<TalentSchool> bannedTalents = new List<TalentSchool>();
-
-            // determine banned talents
-            foreach (TalentPairing tp in startingCharacter.talentPairings)
-                bannedTalents.Add(tp.talentSchool);
-
-            // get valid characters
-            foreach (ClassTemplateSO t in allClassTemplateSOs)
-            {
-                bool passedTalentCheck = true;
-                foreach (TalentPairing tp in t.talentPairings)
-                {
-                    if (bannedTalents.Contains(tp.talentSchool))
-                    {
-                        passedTalentCheck = false;
-                        break;
-                    }
-                }
-
-                if (passedTalentCheck) validTemplates.Add(t);
-            }
-
-            Debug.Log("Valid companion templates = " + validTemplates.Count.ToString());
-            validTemplates.Shuffle();
-            for (int i = 0; i < validTemplates.Count; i++)
-            {
-                charactersRet.Add(GenerateRecruitCharacter(validTemplates[i], GetRandomRace(validTemplates[i].possibleRaces)));
-            }
-
-            return charactersRet;
-        }
         private HexCharacterData GenerateRecruitCharacter(ClassTemplateSO ct, CharacterRace race, int tier = 1)
         {
             Debug.Log("CharacterDataController.GenerateRecruitCharacter() called...");
@@ -732,6 +736,7 @@ namespace HexGameEngine.Characters
             newCharacter.race = race;
             newCharacter.modelSize = CharacterModelSize.Normal;
             SetStartingLevelAndXpValues(newCharacter);
+            newCharacter.background = GenerateRandomBackgroundForCharacter(race);
 
             // Set up perks
             newCharacter.passiveManager = new PerkManagerModel(newCharacter);
@@ -741,16 +746,26 @@ namespace HexGameEngine.Characters
 
             // Setup stats + stars
             newCharacter.attributeSheet = new AttributeSheet();
-            GenerateRecruitCharacterStatRolls(newCharacter.attributeSheet, RandomGenerator.NumberBetween(2,4), tier);
-            int maxStars = 2;
-            int minStars = 1;
-            if (tier > 1) maxStars = 3;
-            if (tier == 3) minStars = 2;
-            GenerateCharacterStarRolls(newCharacter.attributeSheet, 3, minStars, maxStars);
+           // Debug.Log("fresh sheet::: ");
+           // newCharacter.attributeSheet.LogCoreStats();
+            //baselineRecruitAttributes.CopyValuesIntoOther(newCharacter.attributeSheet);
+            //Debug.Log("baseline sheet::: ");
+            //newCharacter.attributeSheet.LogCoreStats();
+            ApplyBackgroundAttributeModsToAttributeSheet(newCharacter.attributeSheet, newCharacter.background);
+           // Debug.Log("modded sheet::: ");
+           // newCharacter.attributeSheet.LogCoreStats();
+            //GenerateRecruitCharacterStatRolls(newCharacter.attributeSheet, RandomGenerator.NumberBetween(2,4), tier);
+            // int minStars = 1;
+            //int maxStars = 2;        
+            //if (tier > 1) maxStars = 3;
+            //if (tier == 3) minStars = 2;
+            GenerateCharacterStarRolls(newCharacter.attributeSheet, 3);
 
             // Randomize cost + daily wage
-            newCharacter.dailyWage = GenerateCharacterDailyWage(tier);
-            newCharacter.recruitCost = GenerateCharacterRecruitCost(tier);
+            newCharacter.dailyWage = RandomGenerator.NumberBetween(newCharacter.background.dailyWageMin, newCharacter.background.dailyWageMax);
+            newCharacter.recruitCost = RandomGenerator.NumberBetween(newCharacter.background.recruitCostMin, newCharacter.background.recruitCostMax);
+            //newCharacter.dailyWage = GenerateCharacterDailyWage(tier);
+            //newCharacter.recruitCost = GenerateCharacterRecruitCost(tier);
 
             // Set up health
             SetCharacterMaxHealth(newCharacter, 0);
@@ -787,6 +802,25 @@ namespace HexGameEngine.Characters
             }
 
             return newCharacter;
+        }
+        private BackgroundData GenerateRandomBackgroundForCharacter(CharacterRace race)
+        {
+            List<BackgroundData> validBackgrounds = new List<BackgroundData>();
+            foreach(BackgroundData b in allCharacterBackgrounds)
+            {
+                if (b.validRaces.Contains(race))
+                    validBackgrounds.Add(b);
+            }
+            return validBackgrounds[RandomGenerator.NumberBetween(0, validBackgrounds.Count - 1)];
+        }
+        private void ApplyBackgroundAttributeModsToAttributeSheet(AttributeSheet sheet, BackgroundData background)
+        {
+            sheet.strength.value += RandomGenerator.NumberBetween(background.mightLower, background.mightUpper);
+            sheet.constitution.value += RandomGenerator.NumberBetween(background.constitutionLower, background.constitutionUpper);
+            sheet.accuracy.value += RandomGenerator.NumberBetween(background.accuracyLower, background.accuracyUpper);
+            sheet.dodge.value += RandomGenerator.NumberBetween(background.dodgeLower, background.dodgeUpper);
+            sheet.wits.value += RandomGenerator.NumberBetween(background.witsLower, background.witsUpper);
+            sheet.resolve.value += RandomGenerator.NumberBetween(background.resolveLower, background.resolveUpper);
         }
         private List<AbilityDataSO> GenerateRecruitCharacterAbilitiesFromProspects(List<AbilityDataSO> prospects, int amount = 3)
         {
@@ -898,7 +932,6 @@ namespace HexGameEngine.Characters
                 CoreAttribute.Accuracy,
                 CoreAttribute.Constituition,
                 CoreAttribute.Dodge,
-                CoreAttribute.Intelligence,
                 CoreAttribute.Resolve,
                 CoreAttribute.Strength,
                 CoreAttribute.Wits
@@ -910,13 +943,12 @@ namespace HexGameEngine.Characters
             {
                 int starsGained = RandomGenerator.NumberBetween(minStarsGainedPerStat, maxStarsGainedPerStat);
 
-                if (attributes[i] == CoreAttribute.Accuracy) sheet.accuracy.stars += starsGained;
-                else if (attributes[i] == CoreAttribute.Constituition) sheet.constitution.stars += starsGained;
-                else if (attributes[i] == CoreAttribute.Dodge) sheet.dodge.stars += starsGained;
-                else if (attributes[i] == CoreAttribute.Intelligence) sheet.intelligence.stars += starsGained;
-                else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.stars += starsGained;
-                else if (attributes[i] == CoreAttribute.Strength) sheet.strength.stars += starsGained;
-                else if (attributes[i] == CoreAttribute.Wits) sheet.wits.stars += starsGained;
+                if (attributes[i] == CoreAttribute.Accuracy) sheet.accuracy.stars = starsGained;
+                else if (attributes[i] == CoreAttribute.Constituition) sheet.constitution.stars = starsGained;
+                else if (attributes[i] == CoreAttribute.Dodge) sheet.dodge.stars = starsGained;
+                else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.stars = starsGained;
+                else if (attributes[i] == CoreAttribute.Strength) sheet.strength.stars = starsGained;
+                else if (attributes[i] == CoreAttribute.Wits) sheet.wits.stars = starsGained;
             }
         }
         private int GenerateCharacterDailyWage(int tier = 1)
@@ -1010,11 +1042,11 @@ namespace HexGameEngine.Characters
 
             foreach (ClassTemplateSO ct in allClassTemplateSOs)
             {
-                int roll = RandomGenerator.NumberBetween(1, 100);
-                int tier = 1;
-                if (roll >= 91) tier = 3;
-                else if (roll >= 71) tier = 2;
-                newCharacterDeck.Add(GenerateRecruitCharacter(ct, GetRandomRace(ct.possibleRaces),tier));
+                //int roll = RandomGenerator.NumberBetween(1, 100);
+                //int tier = 1;
+                //if (roll >= 91) tier = 3;
+                //else if (roll >= 71) tier = 2;
+                newCharacterDeck.Add(GenerateRecruitCharacter(ct, GetRandomRace(ct.possibleRaces)));
             }
 
             return newCharacterDeck;

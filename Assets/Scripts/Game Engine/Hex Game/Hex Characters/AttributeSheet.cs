@@ -142,6 +142,16 @@ namespace HexGameEngine.Characters
             other.deathResistance = deathResistance;
         }
 
+        public void LogCoreStats()
+        {
+            Debug.Log("strength: " + strength.value +", " +
+                "constitution: " + constitution.value +", " +
+                "accuracy: " + accuracy.value +", " +
+                "dodge: " + dodge.value +", " +
+                "wits: " + wits.value +", " +
+                "resolve: " + resolve.value);
+        }
+
         // GUI Colours for Odin
         #region
         private Color Blue() { return Color.cyan; }
