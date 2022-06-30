@@ -255,7 +255,7 @@ namespace HexGameEngine.Abilities
             character.abilityBook = new AbilityBook();
 
             // Get weapon abilities
-            List<AbilityData> weaponAbilities = GetAbilitiesFromWeapons(character.itemSet);
+            List<AbilityData> weaponAbilities = GenerateAbilitiesFromWeapons(character.itemSet);
             foreach(AbilityData a in weaponAbilities)
             {
                 a.myCharacter = character;
@@ -296,7 +296,7 @@ namespace HexGameEngine.Abilities
                 character.abilityBook.allKnownAbilities.Add(clone);
             }
         }
-        public List<AbilityData> GetAbilitiesFromWeapons(Items.ItemSet itemSet)
+        public List<AbilityData> GenerateAbilitiesFromWeapons(Items.ItemSet itemSet)
         {
             List<AbilityData> ret = new List<AbilityData>();
 

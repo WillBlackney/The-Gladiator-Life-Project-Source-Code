@@ -890,7 +890,7 @@ namespace HexGameEngine.MainMenu
                 a.HideAndReset();
 
             // Determine + create weapon abilities
-            List<AbilityData> weaponAbilities = AbilityController.Instance.GetAbilitiesFromWeapons(characterBuild.itemSet);
+            List<AbilityData> weaponAbilities = AbilityController.Instance.GenerateAbilitiesFromWeapons(characterBuild.itemSet);
 
             // Build icons from weapon abilities
             for (int i = 0; i < weaponAbilities.Count && i < itemsPanelAbilityIcons.Length; i++)

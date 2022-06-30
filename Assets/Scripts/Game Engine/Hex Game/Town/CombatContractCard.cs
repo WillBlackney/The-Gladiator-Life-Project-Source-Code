@@ -27,6 +27,7 @@ namespace HexGameEngine.TownFeatures
 
         [Header("Reward Components")]
         [SerializeField] private TextMeshProUGUI goldRewardText;
+        [SerializeField] private GameObject itemParent;
         [SerializeField] private Image itemImage;
         [SerializeField] private Image itemRarityOverlay;
         [SerializeField] private Image abilityTomeImage;
@@ -135,8 +136,15 @@ namespace HexGameEngine.TownFeatures
 
             goldRewardText.text = data.combatRewardData.goldAmount.ToString();
             abilityTomeImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(data.combatRewardData.abilityAwarded.talentRequirementData.talentSchool);
-            itemRarityOverlay.color = ColorLibrary.Instance.GetRarityColor(data.combatRewardData.item.rarity);
-            itemImage.sprite = data.combatRewardData.item.ItemSprite;
+            itemParent.SetActive(false);
+            
+            if(data.combatRewardData.item != null)
+            {
+                itemParent.SetActive(true);
+                itemRarityOverlay.color = ColorLibrary.Instance.GetRarityColor(data.combatRewardData.item.rarity);
+                itemImage.sprite = data.combatRewardData.item.ItemSprite;
+            }
+          
 
         }
         public void ResetAndHide()
@@ -147,6 +155,7 @@ namespace HexGameEngine.TownFeatures
             basicSkullsParent.SetActive(false);
             eliteSkullsParent.SetActive(false);
             bossSkullsParent.SetActive(false);
+            itemParent.SetActive(false);
             for (int i = 0; i < enemyRows.Length; i++)
                 enemyRows[i].HideAndReset();
         }
