@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Goblin
   m_EditorClassIdentifier: 
   racialTag: 5
-  racialSprite: {fileID: 21300000, guid: 78fceee91d268144a9a9ab175a9b17e8, type: 3}
+  racialSprite: {fileID: 21300000, guid: 1416305f424513e44a2a692870a5c0a0, type: 3}
   loreDescription: "Deceptive and vile, the goblins are driven entirely by their
     unnatural lust for gold, riches, and all things shiny! \r\nAlthough small in
     stature, their speed and capacity for team work is unrivaled."

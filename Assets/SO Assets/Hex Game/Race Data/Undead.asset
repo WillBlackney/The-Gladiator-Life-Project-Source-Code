@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Undead
   m_EditorClassIdentifier: 
   racialTag: 3
-  racialSprite: {fileID: 21300000, guid: 58cb98fa4e2bbdb4f9b808e08b9a05df, type: 3}
+  racialSprite: {fileID: 21300000, guid: fd780afe8f5aad34b8c7819ccc378fb1, type: 3}
   loreDescription: For reasons unknown, the Undead have broken the magical bindings
     that enslaved them and regained their freedom. Using their new found free will,
     they seek to carve out a home for themselves in the world.

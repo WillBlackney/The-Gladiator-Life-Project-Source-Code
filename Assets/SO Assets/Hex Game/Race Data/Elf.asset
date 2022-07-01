@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Elf
   m_EditorClassIdentifier: 
   racialTag: 4
-  racialSprite: {fileID: 21300000, guid: 3ad989884e6751449ab2996afefb68c7, type: 3}
+  racialSprite: {fileID: 21300000, guid: 54211b66ca2c9ca47a60f78afef2f639, type: 3}
   loreDescription: Mysterious and elusive, the elves rarely leave the sanctuary of
     their forest homelands. Masters of magic and archery, they make for highly intelligent,
     dependable allies.

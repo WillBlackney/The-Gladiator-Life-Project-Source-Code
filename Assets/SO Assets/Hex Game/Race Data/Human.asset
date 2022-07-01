@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Human
   m_EditorClassIdentifier: 
   racialTag: 1
-  racialSprite: {fileID: 21300000, guid: c4ceaaab5b6c1c3479185d8553e597e4, type: 3}
+  racialSprite: {fileID: 21300000, guid: dd2c478783ec4f34bad2c97be58a8744, type: 3}
   loreDescription: 'A once proud and noble race, the threat of extinction has pushed
     humanity to the depths of desperation. Strong, adaptable and cunning, they make
     great allies: so long as your interests are aligned.'
