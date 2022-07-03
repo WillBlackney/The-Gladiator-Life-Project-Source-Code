@@ -285,8 +285,8 @@ namespace HexGameEngine.TownFeatures
 
             // Texts
             recruitRightPanelNameText.text = "<color=#BC8252>" + character.myName + "<color=#DDC6AB>    The " + character.myClassName;
-            recruitRightPanelRacialText.text = character.race.ToString();
-            recruitRightPanelBackgroundText.text = TextLogic.SplitByCapitals(character.background.backgroundType.ToString());
+            if (recruitRightPanelRacialText != null) recruitRightPanelRacialText.text = character.race.ToString();
+            if (recruitRightPanelBackgroundText != null) recruitRightPanelBackgroundText.text = TextLogic.SplitByCapitals(character.background.backgroundType.ToString());
             string col = "<color=#DDC6AB>";
             if (PlayerDataController.Instance.CurrentGold < character.recruitCost) col = TextLogic.lightRed;
             recruitRightPanelUpkeepText.text = character.dailyWage.ToString();
