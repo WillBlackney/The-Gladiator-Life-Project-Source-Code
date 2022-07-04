@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundSprite: {fileID: 21300000, guid: a68a816db347d91448de636e7dd57150, type: 3}
   backgroundType: 8
-  description: 'Place holder description Place holder description Place holder description
-    Place holder description Place holder description Place holder description Place
-    holder description Place holder description '
+  description: Banished from society upon pain of death, a life or ambushing travelers
+    and militias in the wilds has given them some decent martial experience, certainly
+    so when it comes to fighting dirty. Just hope that the local guards don't recognize
+    them from the wanted posters.
   dailyWageMin: 8
   dailyWageMax: 10
   recruitCostMin: 80
@@ -40,7 +41,7 @@ MonoBehaviour:
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: +15%
+      phrase: '+15% '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

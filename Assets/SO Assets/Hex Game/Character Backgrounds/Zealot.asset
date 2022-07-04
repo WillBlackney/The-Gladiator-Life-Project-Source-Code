@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundSprite: {fileID: 21300000, guid: c14e70742140d494d84710de7e06fe99, type: 3}
   backgroundType: 6
-  description: 'Place holder description Place holder description Place holder description
-    Place holder description Place holder description Place holder description Place
-    holder description Place holder description '
+  description: 'An unwavering belief of being acquainted with God upon death tends
+    to make zealots exceptionally courageous in the face of danger. That same blind
+    faith also makes them astonishngly stupid, so best cover these idiots in heavy
+    armour before sending them to their god. '
   dailyWageMin: 14
   dailyWageMax: 16
   recruitCostMin: 105

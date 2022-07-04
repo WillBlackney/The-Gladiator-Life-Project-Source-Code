@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundSprite: {fileID: 21300000, guid: f72b0309edeccd944bffdc943ccdf2db, type: 3}
   backgroundType: 3
-  description: 'Place holder description Place holder description Place holder description
-    Place holder description Place holder description Place holder description Place
-    holder description Place holder description '
+  description: 'Lumberjacks are ok: they sleep all night and work all day. A lifetime
+    of swinging an axe makes them strong, fit and great at murdering people with
+    axes.'
   dailyWageMin: 12
   dailyWageMax: 14
   recruitCostMin: 95
@@ -45,6 +45,14 @@ MonoBehaviour:
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
       phrase: 'Accuracy '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'with '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Melee Attacks '
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

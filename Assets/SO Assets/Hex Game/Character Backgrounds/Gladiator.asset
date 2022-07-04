@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundSprite: {fileID: 21300000, guid: 715142ea160d1824babbc41f67935ce8, type: 3}
   backgroundType: 1
-  description: 'Place holder description Place holder description Place holder description
-    Place holder description Place holder description Place holder description Place
-    holder description Place holder description '
+  description: "The only thing more awe-inspiring than a gladiator\u2019s martial
+    prowess is the size of their ego. A career of combat and showmanship forges them
+    into godlike warriors, but they don\u2019t often play well with others\u2026"
   dailyWageMin: 23
   dailyWageMax: 25
   recruitCostMin: 155
