@@ -450,6 +450,16 @@ namespace HexGameEngine.Items
 
             return perks;
         }
+        public bool IsCharacterUsingWeaponClass(ItemSet set, WeaponClass weaponClass)
+        {
+            bool ret = false;
+
+            if ((set.mainHandItem != null && set.mainHandItem.weaponClass == weaponClass) ||
+                (set.offHandItem != null && set.offHandItem.weaponClass == weaponClass))
+                ret = true;
+
+            return ret;
+        }
         #endregion
 
     }

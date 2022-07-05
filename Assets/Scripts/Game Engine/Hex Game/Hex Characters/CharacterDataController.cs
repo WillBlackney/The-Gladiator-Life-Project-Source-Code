@@ -342,6 +342,9 @@ namespace HexGameEngine.Characters
             // prevent stress exceeding limits
             if (data.currentStress > 100)
                 data.currentStress = 100;
+            // Zealots can never reach shattered stress state
+            else if (DoesCharacterHaveBackground(data.background, CharacterBackground.Zealot) &&
+                data.currentStress > 99) data.currentStress = 99;
             else if (data.currentStress < 0)
                 data.currentStress = 0;
         }
@@ -461,6 +464,11 @@ namespace HexGameEngine.Characters
             }
 
             return bRet;
+        }
+        public bool DoesCharacterHaveBackground(BackgroundData character, CharacterBackground background)
+        {
+            if (character != null && character.backgroundType == background) return true;
+            else return false;
         }
         public int GetCharacterTalentLevel(List<TalentPairing> allTalents, TalentSchool ts)
         {
@@ -616,7 +624,10 @@ namespace HexGameEngine.Characters
                     xpGainMod -= 0.25f;
                 
                 if (PerkController.Instance.DoesCharacterHavePerk(data.passiveManager, Perk.PermanentlyConcussed))                
-                    xpGainMod -= 0.15f;                
+                    xpGainMod -= 0.15f;
+
+                if (DoesCharacterHaveBackground(data.background, CharacterBackground.Doctor))
+                    xpGainMod += 0.15f;
             }         
 
             xpGained = (int)(xpGained * xpGainMod);

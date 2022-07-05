@@ -542,6 +542,9 @@ namespace HexGameEngine.Characters
             Debug.Log("CharacterEntityController.ModifyStress() called for " + character.myName);
 
             if (character.currentStress >= 100 && stressGainedOrLost > 0) return;
+            // Zealots can never reach shattered stress state
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Zealot) &&
+                character.currentStress >= 99 && stressGainedOrLost > 0) return;
 
             // Enemy characters do not suffer from stress
             if (character.allegiance == Allegiance.Enemy) return;
@@ -834,6 +837,13 @@ namespace HexGameEngine.Characters
                 {
                     int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Motivated);
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Focus, stacks, true, 0.5f);
+                }
+
+                // Thief background (gain 1 stealth)
+                if (RandomGenerator.NumberBetween(1,2) == 1 && 
+                    CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Thief))
+                {
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Stealth, 1, true, 0.5f);
                 }
 
                 // Elf (gain rune)

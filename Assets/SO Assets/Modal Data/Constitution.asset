@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Constitution
   m_EditorClassIdentifier: 
   myPreset: 3
-  mainSprite: {fileID: 21300000, guid: abfd67f656e627945bebca53bcda58b2, type: 3}
-  frameSprite: 1
+  mainSprite: {fileID: 21300000, guid: 7e30376514d7c44acbc0f231178e446a, type: 3}
+  frameSprite: 0
   headerName: Constitution
   italicDescription: 1
   description:

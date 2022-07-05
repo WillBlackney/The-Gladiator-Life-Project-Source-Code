@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unused Level Up
   m_EditorClassIdentifier: 
   myPreset: 32
-  mainSprite: {fileID: 21300000, guid: ca71995a3089d403c8332b2cda336610, type: 3}
+  mainSprite: {fileID: 21300000, guid: a52342ebbb0de4d42b40038ec099a59b, type: 3}
   frameSprite: 0
   headerName: Level Up
   italicDescription: 0

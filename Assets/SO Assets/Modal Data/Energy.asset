@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Energy
   m_EditorClassIdentifier: 
   myPreset: 29
-  mainSprite: {fileID: 21300000, guid: c41417c04a58e8144a1ac36b7ec37550, type: 3}
+  mainSprite: {fileID: 21300000, guid: f6fa855d4ddf8498ba52567a120cd2be, type: 3}
   frameSprite: 0
   headerName: Energy
   italicDescription: 0

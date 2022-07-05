@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Accuracy
   m_EditorClassIdentifier: 
   myPreset: 7
-  mainSprite: {fileID: 21300000, guid: bd1f7bfcdca335a4c93af886265e2709, type: 3}
-  frameSprite: 1
+  mainSprite: {fileID: 21300000, guid: 72e50234581bc4a629e38e0a5ae465ea, type: 3}
+  frameSprite: 0
   headerName: Accuracy
+  italicDescription: 1
   description:
   - color: 1
     getPhraseFromAbilityValue: 0

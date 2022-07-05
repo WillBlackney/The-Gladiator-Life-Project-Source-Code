@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Resolve
   m_EditorClassIdentifier: 
   myPreset: 4
-  mainSprite: {fileID: 21300000, guid: 2cb874393ff42c640a4c382ba7885c9a, type: 3}
-  frameSprite: 1
+  mainSprite: {fileID: 21300000, guid: bcd50bb6462b24bc4a62f2318f88e3d3, type: 3}
+  frameSprite: 0
   headerName: Resolve
+  italicDescription: 1
   description:
   - color: 1
     getPhraseFromAbilityValue: 0

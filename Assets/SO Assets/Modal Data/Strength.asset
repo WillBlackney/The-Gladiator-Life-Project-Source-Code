@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Strength
   m_EditorClassIdentifier: 
   myPreset: 1
-  mainSprite: {fileID: 21300000, guid: 12cf980e5e19b0840b3b476ff359dee9, type: 3}
-  frameSprite: 1
+  mainSprite: {fileID: 21300000, guid: d0e9695c0153948809694226675d9b29, type: 3}
+  frameSprite: 0
   headerName: Strength
+  italicDescription: 1
   description:
   - color: 1
     getPhraseFromAbilityValue: 0

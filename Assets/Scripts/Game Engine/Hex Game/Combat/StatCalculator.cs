@@ -223,7 +223,7 @@ namespace HexGameEngine
 
 
             // Stress State Modifier
-            accuracy += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress));
+            accuracy += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress), c);
 
             // Items
             accuracy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Accuracy, c.itemSet);
@@ -368,7 +368,7 @@ namespace HexGameEngine
             */
 
             // Stress State Modifier
-            dodge += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress));
+            dodge += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress), c);
 
             // Items
             dodge += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Dodge, c.itemSet);
@@ -498,7 +498,7 @@ namespace HexGameEngine
 
 
             // Stress State Modifier
-            resolve += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress));
+            resolve += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress), c);
 
             // Items
             resolve += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Resolve, c.itemSet);
@@ -781,6 +781,10 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Sadistic))
                 criticalModifier += 50;
 
+            // Outlaw background
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Outlaw))
+                criticalModifier += 15;
+
             // Scoundrel talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Scoundrel, 1))
                 criticalModifier += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Scoundrel) * 20;
@@ -799,6 +803,10 @@ namespace HexGameEngine
             // Sadistic perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sadistic))
                 criticalModifier += 50;
+
+            // Outlaw background
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Outlaw))
+                criticalModifier += 15;
 
             // Scoundrel talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Scoundrel, 1))
@@ -1022,6 +1030,10 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeadHeart))
                 resistanceReturned += 25;
 
+            // Farmer background
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Farmer))
+                resistanceReturned += 10;
+
             // hard noggin Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HardNoggin))
                 resistanceReturned += 10;
@@ -1041,6 +1053,10 @@ namespace HexGameEngine
             // Undead Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeadHeart))
                 resistanceReturned += 25;
+
+            // Farmer background
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Farmer))
+                resistanceReturned += 10;
 
             // hard noggin Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.HardNoggin))

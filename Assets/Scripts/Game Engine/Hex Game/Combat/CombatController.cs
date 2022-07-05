@@ -160,6 +160,11 @@ namespace HexGameEngine.Combat
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Locomotion perk modifier = " + damageModPercentageAdditive.ToString());
             }
 
+            // Scholar background bonus
+            if (effect != null && attacker != null && damageType == DamageType.Magic &&
+                CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Scholar))
+                damageModPercentageAdditive += 0.1f;
+
             // Calculate core additive multipliers
             // Wrath
             if (effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Wrath))
@@ -447,10 +452,20 @@ namespace HexGameEngine.Combat
             else if (stressAmount >= 100) return StressState.Shattered;
             else return StressState.None;
         }
-        public int GetStatMultiplierFromStressState(StressState stressState)
+        public int GetStatMultiplierFromStressState(StressState stressState, HexCharacterData character)
         {
             int multiplier = 0;
-            if (stressState == StressState.Confident) multiplier = 5;
+            if (stressState == StressState.Confident && !CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Slave)) multiplier = 5;
+            else if (stressState == StressState.Nervous) multiplier = -5;
+            else if (stressState == StressState.Wavering) multiplier = -15;
+            else if (stressState == StressState.Panicking) multiplier = -25;
+            else if (stressState == StressState.Shattered) multiplier = -35;
+            return multiplier;
+        }
+        public int GetStatMultiplierFromStressState(StressState stressState, HexCharacterModel character)
+        {
+            int multiplier = 0;
+            if (stressState == StressState.Confident && !CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Slave)) multiplier = 5;
             else if (stressState == StressState.Nervous) multiplier = -5;
             else if (stressState == StressState.Wavering) multiplier = -15;
             else if (stressState == StressState.Panicking) multiplier = -25;
@@ -618,7 +633,7 @@ namespace HexGameEngine.Combat
 
             // Stress State            
             StressState stressState = GetStressStateFromStressAmount(attacker.currentStress);
-            int stressMod = GetStatMultiplierFromStressState(stressState);
+            int stressMod = GetStatMultiplierFromStressState(stressState, attacker);
             ret.details.Add(new HitChanceDetailData(stressState.ToString(), stressMod));
 
             // Melee modifiers
@@ -665,7 +680,7 @@ namespace HexGameEngine.Combat
                 if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Ability Bonus", innateBonus));
             }             
 
-            // warfare talent bonus
+            // Warfare talent bonus
             if (ability != null &&
                 ability.abilityType == AbilityType.MeleeAttack &&
                 CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Warfare, 1))
@@ -682,6 +697,17 @@ namespace HexGameEngine.Combat
             {
                 int rangerBonus = CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Ranger) * 5;
                 if (rangerBonus != 0) ret.details.Add(new HitChanceDetailData("Ranger Talent", rangerBonus));
+            }
+
+            // Lumberjack background bonus
+            if (ability != null &&
+                ability.abilityType == AbilityType.MeleeAttack &&
+                CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Lumberjack) &&
+                ItemController.Instance.IsCharacterUsingWeaponClass(attacker.itemSet, WeaponClass.Axe)
+                )
+            {
+                int lumberjackBonus = 10;
+                ret.details.Add(new HitChanceDetailData("Lumberjack Bonus", lumberjackBonus));
             }
 
 
@@ -1118,6 +1144,12 @@ namespace HexGameEngine.Combat
                         HexCharacterController.Instance.ModifyEnergy(attacker, 4);
                     }
 
+                    // Gladiator background: recover 10 stress on kill
+                    if (CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Gladiator))
+                    {
+                        HexCharacterController.Instance.ModifyStress(attacker, -10, true, true);
+                    }
+
                     // Increment kills this turn
                     attacker.charactersKilledThisTurn++;
                     attacker.totalKills++;
@@ -1145,7 +1177,7 @@ namespace HexGameEngine.Combat
                 // Enemy Killed (Positive)
                 foreach(HexCharacterModel c in HexCharacterController.Instance.GetAllEnemiesOfCharacter(target))
                 {
-                    CreateStressCheck(c, StressEventType.EnemyKilled);
+                    CreateStressCheck(c, StressEventType.EnemyKilled);                    
                 }
 
                 // Ally Killed (Negative)

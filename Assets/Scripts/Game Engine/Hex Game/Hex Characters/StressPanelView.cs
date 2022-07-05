@@ -42,7 +42,7 @@ namespace HexGameEngine.Characters
         {
             StressState stressState = CombatController.Instance.GetStressStateFromStressAmount(character.currentStress);
             Sprite stressSprite = SpriteLibrary.Instance.GetStressStateSprite(stressState);
-            int stressMod = CombatController.Instance.GetStatMultiplierFromStressState(stressState);
+            int stressMod = CombatController.Instance.GetStatMultiplierFromStressState(stressState, character);
             int[] stressRanges = CombatController.Instance.GetStressStateRanges(stressState);
             stressStateText.text = stressState.ToString();
             stressStateIcon.sprite = stressSprite;

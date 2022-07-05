@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Armour
   m_EditorClassIdentifier: 
   myPreset: 31
-  mainSprite: {fileID: 5865670524570963042, guid: 9729f56e25992ec459778432a6e370b8,
-    type: 3}
-  frameSprite: 1
+  mainSprite: {fileID: 21300000, guid: e023bceb09cb84de7bf8c49e4f861343, type: 3}
+  frameSprite: 0
   headerName: Armour
   italicDescription: 1
   description:
