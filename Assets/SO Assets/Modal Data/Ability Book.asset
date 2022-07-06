@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ability Book
   m_EditorClassIdentifier: 
   myPreset: 27
-  mainSprite: {fileID: 21300000, guid: 83693530afd1ed94ea4890badd86d995, type: 3}
+  mainSprite: {fileID: 21300000, guid: 6281873f6fb71d44ead9fd703d012d38, type: 3}
   frameSprite: 0
   headerName: Ability Book
   italicDescription: 0
