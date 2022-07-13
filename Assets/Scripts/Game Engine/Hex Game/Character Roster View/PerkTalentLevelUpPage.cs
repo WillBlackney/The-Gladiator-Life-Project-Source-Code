@@ -61,7 +61,7 @@ namespace HexGameEngine.UI
             for(int i = 0; i < 3; i++)
             {
                 allLevelUpCards[i].Reset();
-                allLevelUpCards[i].BuildFromPerkData(character.perkRolls[0].perkChoices[i]);
+                //allLevelUpCards[i].BuildFromPerkData(character.perkRolls[0].perkChoices[i]);
             }
 
             UpdateConfirmButtonState();
@@ -117,7 +117,7 @@ namespace HexGameEngine.UI
             if(card.PerkData != null)
             {
                 PerkController.Instance.ModifyPerkOnCharacterData(currentCharacter.passiveManager, card.PerkData.perkTag, 1);
-                currentCharacter.perkRolls.RemoveAt(0);                
+                currentCharacter.perkPoints--;                
             }
 
             // Talent
@@ -133,7 +133,7 @@ namespace HexGameEngine.UI
             // Update scroll panel views
             if (currentCharacter.attributeRolls.Count == 0 &&
                 currentCharacter.talentRolls.Count == 0 &&
-                currentCharacter.perkRolls.Count == 0)
+                currentCharacter.perkPoints == 0)
             {
                 // Rebuild character scroll roster
                 CharacterScrollPanelController.Instance.RebuildViews();

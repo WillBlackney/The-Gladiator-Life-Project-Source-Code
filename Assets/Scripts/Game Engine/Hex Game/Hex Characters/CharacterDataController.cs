@@ -274,7 +274,10 @@ namespace HexGameEngine.Characters
             newCharacter.currentMaxXP = original.currentMaxXP;
             newCharacter.currentXP = original.currentXP;
             newCharacter.dailyWage = original.dailyWage;
+            newCharacter.perkPoints = original.perkPoints;
+            newCharacter.levelUpPerksData = new LevelUpPerkSet(original.levelUpPerksData);
             newCharacter.recruitCost = original.recruitCost;
+
             // Set stress
             newCharacter.currentStress = original.currentStress;
 
@@ -645,7 +648,7 @@ namespace HexGameEngine.Characters
                 data.attributeRolls.Add(AttributeRollResult.GenerateRoll(data));
 
                 // Gain perk level up
-                data.perkRolls.Add(PerkRollResult.GenerateRoll(data));
+                data.perkPoints++;
 
                 // Gain talent level up
                 if (data.currentLevel == 3 || data.currentLevel == 5)
@@ -673,7 +676,7 @@ namespace HexGameEngine.Characters
                 data.attributeRolls.Add(AttributeRollResult.GenerateRoll(data));
 
                 // Gain perk level up
-                data.perkRolls.Add(PerkRollResult.GenerateRoll(data));
+                data.perkPoints++;
 
                 // Gain talent level up
                 if (data.currentLevel == 3 || data.currentLevel == 5)

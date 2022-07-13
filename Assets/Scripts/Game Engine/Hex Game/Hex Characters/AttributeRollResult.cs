@@ -35,21 +35,22 @@ namespace HexGameEngine.Characters
 
         }
     }
-    public class PerkRollResult
+    public class LevelUpPerkSet
     {
         public List<PerkIconData> perkChoices = new List<PerkIconData>();
-        public static PerkRollResult GenerateRoll(HexCharacterData character)
+        public LevelUpPerkSet()
         {
-            PerkRollResult roll = new PerkRollResult();
-
-            List<PerkIconData> choices = PerkController.Instance.GetValidLevelUpPerksForCharacter(character);
+            List<PerkIconData> choices = PerkController.Instance.GetAllLevelUpPerks();
             choices.Shuffle();
-            for(int i = 0; i < 3; i++)            
-                roll.perkChoices.Add(choices[i]);                       
-
-            return roll;
+            for (int i = 0; i < 10; i++)
+                perkChoices.Add(choices[i]);
+        }
+        public LevelUpPerkSet(LevelUpPerkSet clonedFrom)
+        {
+            perkChoices.AddRange(clonedFrom.perkChoices);
         }
     }
+    
     public class TalentRollResult
     {
         public List<TalentPairing> talentChoices = new List<TalentPairing>();

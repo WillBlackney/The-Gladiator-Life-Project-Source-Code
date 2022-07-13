@@ -44,6 +44,10 @@ namespace HexGameEngine.UI
         [SerializeField] private LevelUpButton perkLevelUpButton;
         [SerializeField] private LevelUpButton talentLevelUpButton;
         [SerializeField] private PerkTalentLevelUpPage talentLevelUpPage;
+        [SerializeField] private UILevelUpPerkIcon[] perkLevelUpIcons;
+        [SerializeField] private UICard perkLevelUpScreenUICard;
+        [SerializeField] private GameObject perkLevelUpConfirmChoiceScreenParent;
+        private UILevelUpPerkIcon currentSelectedLevelUpPerkChoice;
         [Space(20)]
         [Header("Abilities Section Components")]
         [SerializeField] private UIAbilityIcon[] abilityButtons;
@@ -171,6 +175,7 @@ namespace HexGameEngine.UI
             BuildCharacterViewPanelModel(data);
             BuildAbilitiesSection(data);
             BuildTalentsSection(data);
+            BuildPerkTreeSection(data);
             
         }
         public void HideCharacterRosterScreen()
@@ -247,7 +252,7 @@ namespace HexGameEngine.UI
 
             Debug.Log("Active perk icons = " + allPerks.Count.ToString());           
 
-            if (character.perkRolls.Count > 0)
+            if (character.perkPoints > 0)
                 perkLevelUpButton.ShowAndAnimate();
             else perkLevelUpButton.Hide();
 
@@ -389,7 +394,51 @@ namespace HexGameEngine.UI
         }
         #endregion
 
-       
+        // Perk Tree Section Logic
+        #region
+        private void BuildPerkTreeSection(HexCharacterData character)
+        {
+            for(int i = 0;i < character.levelUpPerksData.perkChoices.Count; i++)
+            {
+                perkLevelUpIcons[i].BuildFromCharacterAndPerkData(character, character.levelUpPerksData.perkChoices[i]);
+            }
+        }
+        public void OnPerkTreeIconClicked(UILevelUpPerkIcon icon)
+        {
+            if (icon.alreadyKnown || icon.myCharacter.perkPoints == 0) return;
+
+            currentSelectedLevelUpPerkChoice = icon;
+
+            // Build and show confirm perk choice
+            perkLevelUpConfirmChoiceScreenParent.SetActive(true);
+
+            // Build page card
+            perkLevelUpScreenUICard.BuildCard(
+                icon.perkIcon.PerkDataRef.passiveName, 
+                TextLogic.ConvertCustomStringListToString(icon.perkIcon.PerkDataRef.passiveDescription), 
+                icon.perkIcon.PerkDataRef.passiveSprite);
+        }
+        public void OnConfirmLevelUpPerkPageConfirmButtonClicked()
+        {
+            // Pay perk point
+            currentSelectedLevelUpPerkChoice.myCharacter.perkPoints--;
+
+            // Learn new perk
+            PerkController.Instance.ModifyPerkOnCharacterData(currentSelectedLevelUpPerkChoice.myCharacter.passiveManager, currentSelectedLevelUpPerkChoice.perkIcon.ActivePerk.perkTag, 1);
+            
+            // Close views
+            perkLevelUpConfirmChoiceScreenParent.SetActive(false);
+            currentSelectedLevelUpPerkChoice = null;
+
+            // Trigger rebuild roster page to reflect updates
+            HandleRedrawRosterOnCharacterUpdated();
+        }
+        public void OnConfirmLevelUpPerkPageCancelButtonClicked()
+        {
+            perkLevelUpConfirmChoiceScreenParent.SetActive(false);
+            currentSelectedLevelUpPerkChoice = null;
+        }
+        #endregion
 
         // Build Abilities Section
         #region

@@ -212,6 +212,8 @@ namespace HexGameEngine.Perks
         }
         public List<PerkIconData> GetValidLevelUpPerksForCharacter(HexCharacterData character)
         {
+            return null;
+            /*
             List<PerkIconData> validPerks = GetAllLevelUpPerks();
             List<PerkIconData> invalidPerks = new List<PerkIconData>();
 
@@ -223,7 +225,7 @@ namespace HexGameEngine.Perks
                 else
                 {
                     // check if perk was previously offered in another roll
-                    foreach(PerkRollResult roll in character.perkRolls)
+                    foreach(LevelUpPerkSet roll in character.perkRolls)
                     {
                         foreach (PerkIconData p2 in roll.perkChoices)
                         {
@@ -245,6 +247,7 @@ namespace HexGameEngine.Perks
             }
 
             return validPerks;
+            */
         }
         #endregion
 
