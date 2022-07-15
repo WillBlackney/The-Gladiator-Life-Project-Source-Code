@@ -55,7 +55,7 @@ namespace HexGameEngine.Libraries
         [Header("Core Attribute Images")]
         [PreviewField(75)]
         [SerializeField]
-        private Sprite strength;
+        private Sprite might;
         [PreviewField(75)]
         [SerializeField]
         private Sprite intelligence;
@@ -203,8 +203,7 @@ namespace HexGameEngine.Libraries
         }
         public Sprite GetAttributeSprite(CoreAttribute attribute)
         {
-            if (attribute == CoreAttribute.Strength) return strength;
-            else if (attribute == CoreAttribute.Intelligence) return intelligence;
+            if (attribute == CoreAttribute.Might) return might;
             else if (attribute == CoreAttribute.Accuracy) return accuracy;
             else if (attribute == CoreAttribute.Constituition) return constitution;
             else if (attribute == CoreAttribute.Dodge) return dodge;

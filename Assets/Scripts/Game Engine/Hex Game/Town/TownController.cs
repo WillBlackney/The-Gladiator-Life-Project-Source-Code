@@ -57,8 +57,8 @@ namespace HexGameEngine.TownFeatures
         [Space(20)]
 
         [Header("Recruit Page Attribute Components")]
-        [SerializeField] private TextMeshProUGUI recruitRightPanelStrengthText;
-        [SerializeField] private GameObject[] recruitRightPanelStrengthStars;
+        [SerializeField] private TextMeshProUGUI recruitRightPanelMightText;
+        [SerializeField] private GameObject[] recruitRightPanelMightStars;
         [Space(10)]
         [SerializeField] private TextMeshProUGUI recruitRightPanelAccuracyText;
         [SerializeField] private GameObject[] recruitRightPanelAccuracyStars;
@@ -297,8 +297,8 @@ namespace HexGameEngine.TownFeatures
             recruitRightPanelBackgroundIcon.BuildFromBackgroundData(character.background);
 
             // Build stats section
-            recruitRightPanelStrengthText.text = character.attributeSheet.strength.value.ToString();
-            BuildStars(recruitRightPanelStrengthStars, character.attributeSheet.strength.stars);
+            recruitRightPanelMightText.text = character.attributeSheet.might.value.ToString();
+            BuildStars(recruitRightPanelMightStars, character.attributeSheet.might.stars);
 
             recruitRightPanelConstitutionText.text = character.attributeSheet.constitution.value.ToString();
             BuildStars(recruitRightPanelConstitutionStars, character.attributeSheet.constitution.stars);
@@ -957,6 +957,8 @@ namespace HexGameEngine.TownFeatures
             {
                 slot.ClearAndReset();
             }
+            HideTownView();
+            HideDeploymentPage();
         }
         #endregion
 

@@ -100,6 +100,8 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI maxEnergyText;
         [SerializeField] private TextMeshProUGUI initiativeText;
         [SerializeField] private TextMeshProUGUI visionText;
+        [SerializeField] private TextMeshProUGUI physicalDamageText;
+        [SerializeField] private TextMeshProUGUI magicDamageText;
         [Space(20)]
         [Header("Resistances Text Components")]
         [SerializeField] private TextMeshProUGUI physicalResistanceText;
@@ -264,8 +266,8 @@ namespace HexGameEngine.UI
         #region
         private void BuildAttributeSection(HexCharacterData character)
         {
-            mightText.text = StatCalculator.GetTotalStrength(character).ToString();
-            BuildStars(mightStars, character.attributeSheet.strength.stars);
+            mightText.text = StatCalculator.GetTotalMight(character).ToString();
+            BuildStars(mightStars, character.attributeSheet.might.stars);
 
             constitutionText.text = StatCalculator.GetTotalConstitution(character).ToString();
             BuildStars(constitutionStars, character.attributeSheet.constitution.stars);
@@ -288,6 +290,8 @@ namespace HexGameEngine.UI
             maxEnergyText.text = StatCalculator.GetTotalMaxEnergy(character).ToString();
             initiativeText.text = StatCalculator.GetTotalInitiative(character).ToString();
             visionText.text = StatCalculator.GetTotalVision(character).ToString();
+            physicalDamageText.text = StatCalculator.GetTotalPhysicalDamageBonus(character).ToString() + "%";
+            magicDamageText.text = StatCalculator.GetTotalMagicDamageBonus(character).ToString() + "%";
 
             physicalResistanceText.text = StatCalculator.GetTotalPhysicalResistance(character).ToString();
             magicResistanceText.text = StatCalculator.GetTotalMagicResistance(character).ToString();
@@ -398,9 +402,9 @@ namespace HexGameEngine.UI
         #region
         private void BuildPerkTreeSection(HexCharacterData character)
         {
-            for(int i = 0;i < character.levelUpPerksData.perkChoices.Count; i++)
+            for(int i = 0; i < character.perkTree.PerkChoices.Count; i++)
             {
-                perkLevelUpIcons[i].BuildFromCharacterAndPerkData(character, character.levelUpPerksData.perkChoices[i]);
+                perkLevelUpIcons[i].BuildFromCharacterAndPerkData(character, character.perkTree.PerkChoices[i]);
             }
         }
         public void OnPerkTreeIconClicked(UILevelUpPerkIcon icon)

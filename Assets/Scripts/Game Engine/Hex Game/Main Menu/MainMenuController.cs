@@ -433,13 +433,9 @@ namespace HexGameEngine.MainMenu
         {
             int dif = 0;
 
-            if (att == CoreAttribute.Strength)
+            if (att == CoreAttribute.Might)
             {
-                dif = characterBuild.attributeSheet.strength.value - baselineAttributes.strength.value;
-            }
-            else if (att == CoreAttribute.Intelligence)
-            {
-                dif = characterBuild.attributeSheet.intelligence.value - baselineAttributes.intelligence.value;
+                dif = characterBuild.attributeSheet.might.value - baselineAttributes.might.value;
             }
             else if (att == CoreAttribute.Accuracy)
             {
@@ -471,12 +467,9 @@ namespace HexGameEngine.MainMenu
         {
             int value = 0;
 
-            if (att == CoreAttribute.Strength)            
-                value = characterBuild.attributeSheet.strength.value;
-            
-            else if (att == CoreAttribute.Intelligence)            
-                value = characterBuild.attributeSheet.intelligence.value;
-            
+            if (att == CoreAttribute.Might)            
+                value = characterBuild.attributeSheet.might.value;
+                        
             else if (att == CoreAttribute.Accuracy)            
                 value = characterBuild.attributeSheet.accuracy.value;
             
@@ -501,8 +494,7 @@ namespace HexGameEngine.MainMenu
         private int GetTotalAttributePointsSpent()
         {
             int dif = 0;
-            dif += GetCharacterAttributeDifference(CoreAttribute.Strength) ;
-            dif += GetCharacterAttributeDifference(CoreAttribute.Intelligence) ;
+            dif += GetCharacterAttributeDifference(CoreAttribute.Might) ;
             dif += GetCharacterAttributeDifference(CoreAttribute.Constituition) ;
             dif += GetCharacterAttributeDifference(CoreAttribute.Accuracy) ;
             dif += GetCharacterAttributeDifference(CoreAttribute.Dodge) ;
@@ -514,10 +506,8 @@ namespace HexGameEngine.MainMenu
         }           
         public void OnDecreaseAttributeButtonClicked(CustomCharacterAttributeRow row)
         {
-            if (row.Attribute == CoreAttribute.Strength)
-                characterBuild.attributeSheet.strength.value -= 1;
-            else if (row.Attribute == CoreAttribute.Intelligence)
-                characterBuild.attributeSheet.intelligence.value -= 1;
+            if (row.Attribute == CoreAttribute.Might)
+                characterBuild.attributeSheet.might.value -= 1;
             else if (row.Attribute == CoreAttribute.Accuracy)
                 characterBuild.attributeSheet.accuracy.value -= 1;
             else if (row.Attribute == CoreAttribute.Dodge)
@@ -533,10 +523,8 @@ namespace HexGameEngine.MainMenu
         }
         public void OnIncreaseAttributeButtonClicked(CustomCharacterAttributeRow row)
         {
-            if (row.Attribute == CoreAttribute.Strength)
-                characterBuild.attributeSheet.strength.value += 1;
-            else if (row.Attribute == CoreAttribute.Intelligence)
-                characterBuild.attributeSheet.intelligence.value += 1;
+            if (row.Attribute == CoreAttribute.Might)
+                characterBuild.attributeSheet.might.value += 1;
             else if (row.Attribute == CoreAttribute.Accuracy)
                 characterBuild.attributeSheet.accuracy.value += 1;
             else if (row.Attribute == CoreAttribute.Dodge)

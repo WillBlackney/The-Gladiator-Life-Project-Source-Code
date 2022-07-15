@@ -275,7 +275,7 @@ namespace HexGameEngine.Characters
             newCharacter.currentXP = original.currentXP;
             newCharacter.dailyWage = original.dailyWage;
             newCharacter.perkPoints = original.perkPoints;
-            newCharacter.levelUpPerksData = new LevelUpPerkSet(original.levelUpPerksData);
+            newCharacter.perkTree = original.perkTree;
             newCharacter.recruitCost = original.recruitCost;
 
             // Set stress
@@ -829,7 +829,7 @@ namespace HexGameEngine.Characters
         }
         private void ApplyBackgroundAttributeModsToAttributeSheet(AttributeSheet sheet, BackgroundData background)
         {
-            sheet.strength.value += RandomGenerator.NumberBetween(background.mightLower, background.mightUpper);
+            sheet.might.value += RandomGenerator.NumberBetween(background.mightLower, background.mightUpper);
             sheet.constitution.value += RandomGenerator.NumberBetween(background.constitutionLower, background.constitutionUpper);
             sheet.accuracy.value += RandomGenerator.NumberBetween(background.accuracyLower, background.accuracyUpper);
             sheet.dodge.value += RandomGenerator.NumberBetween(background.dodgeLower, background.dodgeUpper);
@@ -904,9 +904,8 @@ namespace HexGameEngine.Characters
                 CoreAttribute.Accuracy, 
                 CoreAttribute.Constituition, 
                 CoreAttribute.Dodge, 
-                CoreAttribute.Intelligence, 
                 CoreAttribute.Resolve, 
-                CoreAttribute.Strength, 
+                CoreAttribute.Might, 
                 CoreAttribute.Wits 
             };
 
@@ -931,9 +930,8 @@ namespace HexGameEngine.Characters
                 if (attributes[i] == CoreAttribute.Accuracy) sheet.accuracy.value += statMod + baseStatBoost;
                 else if (attributes[i] == CoreAttribute.Constituition) sheet.constitution.value += statMod + baseStatBoost;
                 else if (attributes[i] == CoreAttribute.Dodge) sheet.dodge.value += statMod + baseStatBoost;
-                else if (attributes[i] == CoreAttribute.Intelligence) sheet.intelligence.value += statMod + baseStatBoost;
                 else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.value += statMod + baseStatBoost;
-                else if (attributes[i] == CoreAttribute.Strength) sheet.strength.value += statMod + baseStatBoost;
+                else if (attributes[i] == CoreAttribute.Might) sheet.might.value += statMod + baseStatBoost;
                 else if (attributes[i] == CoreAttribute.Wits) sheet.wits.value += statMod + baseStatBoost;
             }
 
@@ -947,7 +945,7 @@ namespace HexGameEngine.Characters
                 CoreAttribute.Constituition,
                 CoreAttribute.Dodge,
                 CoreAttribute.Resolve,
-                CoreAttribute.Strength,
+                CoreAttribute.Might,
                 CoreAttribute.Wits
             };
 
@@ -961,7 +959,7 @@ namespace HexGameEngine.Characters
                 else if (attributes[i] == CoreAttribute.Constituition) sheet.constitution.stars = starsGained;
                 else if (attributes[i] == CoreAttribute.Dodge) sheet.dodge.stars = starsGained;
                 else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.stars = starsGained;
-                else if (attributes[i] == CoreAttribute.Strength) sheet.strength.stars = starsGained;
+                else if (attributes[i] == CoreAttribute.Might) sheet.might.stars = starsGained;
                 else if (attributes[i] == CoreAttribute.Wits) sheet.wits.stars = starsGained;
             }
         }

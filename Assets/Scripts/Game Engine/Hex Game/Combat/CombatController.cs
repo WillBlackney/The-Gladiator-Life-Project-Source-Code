@@ -114,12 +114,15 @@ namespace HexGameEngine.Combat
                     " = " + baseDamageFinal.ToString());               
             }
 
-            // Calculate strength + intelligence damage modifiers
+            // Calculate might, magic and physical damage modifiers
+            if (effect != null)
+                damageModPercentageAdditive += StatCalculator.GetTotalMight(attacker) * 0.01f;
+
             if (effect != null && damageType == DamageType.Physical)            
-                damageModPercentageAdditive += StatCalculator.GetTotalStrength(attacker) * 0.01f;
+                damageModPercentageAdditive += StatCalculator.GetTotalPhysicalDamageBonus(attacker) * 0.01f;
             
             else if (effect != null && damageType == DamageType.Magic)            
-                damageModPercentageAdditive += StatCalculator.GetTotalIntelligence(attacker) * 0.01f;            
+                damageModPercentageAdditive += StatCalculator.GetTotalMagicDamageBonus(attacker) * 0.01f;            
 
             // Add critical modifier to damage mod
             if (didCrit && attacker != null)

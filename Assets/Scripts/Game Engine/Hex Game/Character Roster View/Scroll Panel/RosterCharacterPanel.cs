@@ -8,10 +8,10 @@ using HexGameEngine.Characters;
 using HexGameEngine.UCM;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.Libraries;
-
+using UnityEngine.EventSystems;
 namespace HexGameEngine.UI
 {
-    public class RosterCharacterPanel : MonoBehaviour
+    public class RosterCharacterPanel : MonoBehaviour, IPointerClickHandler
     {
         // Components
         #region
@@ -126,11 +126,6 @@ namespace HexGameEngine.UI
         {
             PortraitDragController.Instance.OnRosterCharacterPanelDragStart(this);
         }
-        public void OnRightClick()
-        {
-            if (Input.GetKeyUp(KeyCode.Mouse1))            
-                CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);            
-        }
         public void OnLevelButtonClicked()
         {
             CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
@@ -139,6 +134,16 @@ namespace HexGameEngine.UI
         {
             foreach (GameObject g in activityIndicatorParents)
                 g.SetActive(onOrOff);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+
+            if(eventData.button == PointerEventData.InputButton.Right)
+            {
+                Debug.Log("RIGHT CLICK!!");
+                CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
+            }
         }
         #endregion
     }

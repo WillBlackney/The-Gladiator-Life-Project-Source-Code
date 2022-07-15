@@ -76,8 +76,7 @@ namespace HexGameEngine.UI
 
             if (myAttribute == CoreAttribute.Accuracy) rollText.text = "+" + roll.accuracyRoll.ToString();
             else if (myAttribute == CoreAttribute.Dodge) rollText.text = "+" + roll.dodgeRoll.ToString();
-            else if (myAttribute == CoreAttribute.Strength) rollText.text = "+" + roll.strengthRoll.ToString();
-            else if (myAttribute == CoreAttribute.Intelligence) rollText.text = "+" + roll.intelligenceRoll.ToString();
+            else if (myAttribute == CoreAttribute.Might) rollText.text = "+" + roll.mightRoll.ToString();
             else if (myAttribute == CoreAttribute.Resolve) rollText.text = "+" + roll.resolveRoll.ToString();
             else if (myAttribute == CoreAttribute.Constituition) rollText.text = "+" + roll.constitutionRoll.ToString();
             else if (myAttribute == CoreAttribute.Wits) rollText.text = "+" + roll.witsRoll.ToString();

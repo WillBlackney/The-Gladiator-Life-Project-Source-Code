@@ -12,9 +12,51 @@ namespace HexGameEngine
 
         // Primary Attributes
         #region
-        public static int GetTotalStrength(HexCharacterModel c)
+        public static int GetTotalMight(HexCharacterModel c)
         {
-            int strength = c.attributeSheet.strength.value;
+            int might = c.attributeSheet.might.value;
+
+            // Items
+            might += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Might, c.itemSet);
+
+            return might;
+
+            /*
+            int intelligence = c.attributeSheet.intelligence.value;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Concussion))
+                intelligence -= 20;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.PermanentlyConcussed))
+                intelligence -= 40;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedSkull))
+                intelligence -= 40;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Slow))
+                intelligence -= 10;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Wise))
+                intelligence += 10;
+
+            // Items
+            intelligence += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicDamage, c.itemSet);
+
+            return intelligence;
+            */
+        }
+        public static int GetTotalMight(HexCharacterData c)
+        {
+            int might = c.attributeSheet.might.value;
+
+            // Items
+            might += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Might, c.itemSet);
+
+            return might;
+        }
+        public static int GetTotalPhysicalDamageBonus(HexCharacterModel c)
+        {
+            int strength = c.attributeSheet.physicalDamageBonus;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DislocatedShoulder))
                 strength -= 20;
@@ -38,13 +80,13 @@ namespace HexGameEngine
                 strength += 15;
 
             // Items
-            strength += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Strength, c.itemSet);
+            strength += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.PhysicalDamage, c.itemSet);
 
             return strength;
         }
-        public static int GetTotalStrength(HexCharacterData c)
+        public static int GetTotalPhysicalDamageBonus(HexCharacterData c)
         {
-            int strength = c.attributeSheet.strength.value;
+            int strength = c.attributeSheet.physicalDamageBonus;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DislocatedShoulder))
                 strength -= 20;
@@ -68,13 +110,13 @@ namespace HexGameEngine
                 strength += 15;
 
             // Items
-            strength += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Strength, c.itemSet);
+            strength += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.PhysicalDamage, c.itemSet);
 
             return strength;
         }
-        public static int GetTotalIntelligence(HexCharacterModel c)
+        public static int GetTotalMagicDamageBonus(HexCharacterModel c)
         {
-            int intelligence = c.attributeSheet.intelligence.value;
+            int intelligence = c.attributeSheet.magicDamageBonus;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Concussion))
                 intelligence -= 20;
@@ -92,13 +134,13 @@ namespace HexGameEngine
                 intelligence += 10;
 
             // Items
-            intelligence += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Intelligence, c.itemSet);
+            intelligence += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicDamage, c.itemSet);
 
             return intelligence;
         }
-        public static int GetTotalIntelligence(HexCharacterData c)
+        public static int GetTotalMagicDamageBonus(HexCharacterData c)
         {
-            int intelligence = c.attributeSheet.intelligence.value;
+            int intelligence = c.attributeSheet.magicDamageBonus;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Concussion))
                 intelligence -= 20;
@@ -116,7 +158,7 @@ namespace HexGameEngine
                 intelligence += 10;
 
             // Items
-            intelligence += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Intelligence, c.itemSet);
+            intelligence += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicDamage, c.itemSet);
 
             return intelligence;
         }

@@ -8,7 +8,7 @@ namespace HexGameEngine.Characters
 {
     public class AttributeRollResult
     {
-        public int strengthRoll;
+        public int mightRoll;
         public int intelligenceRoll;
         public int constitutionRoll;
         public int resolveRoll;
@@ -23,8 +23,7 @@ namespace HexGameEngine.Characters
             int upper = 4;
 
             AttributeRollResult roll = new AttributeRollResult();
-            roll.strengthRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.strength.stars;
-            roll.intelligenceRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.intelligence.stars;
+            roll.mightRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.might.stars;
             roll.accuracyRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.accuracy.stars;
             roll.dodgeRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.dodge.stars;
             roll.resolveRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.resolve.stars;
@@ -35,19 +34,25 @@ namespace HexGameEngine.Characters
 
         }
     }
-    public class LevelUpPerkSet
+    public class PerkTreeData
     {
-        public List<PerkIconData> perkChoices = new List<PerkIconData>();
-        public LevelUpPerkSet()
+        private List<PerkIconData> perkChoices;
+        public List<PerkIconData> PerkChoices
+        {
+            get
+            {
+                if (perkChoices == null || perkChoices.Count == 0)
+                    GeneratePerkChoices();
+                return perkChoices;
+            }
+        }
+        private void GeneratePerkChoices()
         {
             List<PerkIconData> choices = PerkController.Instance.GetAllLevelUpPerks();
             choices.Shuffle();
+            perkChoices = new List<PerkIconData>();
             for (int i = 0; i < 10; i++)
                 perkChoices.Add(choices[i]);
-        }
-        public LevelUpPerkSet(LevelUpPerkSet clonedFrom)
-        {
-            perkChoices.AddRange(clonedFrom.perkChoices);
         }
     }
     

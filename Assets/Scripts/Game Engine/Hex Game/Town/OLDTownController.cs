@@ -201,8 +201,8 @@ namespace HexGameEngine.TownFeatures
             recruitRightPanelClassNameText.text = TextLogic.ReturnColoredText(character.race.ToString() + " " + character.myClassName, TextLogic.neutralYellow);
 
             // Build stats section
-            strengthText.text = character.attributeSheet.strength.value.ToString();
-            intelligenceText.text = character.attributeSheet.intelligence.value.ToString();
+            //strengthText.text = character.attributeSheet.strength.value.ToString();
+            //intelligenceText.text = character.attributeSheet.intelligence.value.ToString();
             constitutionText.text = character.attributeSheet.constitution.value.ToString();
             accuracyText.text = character.attributeSheet.accuracy.value.ToString();
             dodgeText.text = character.attributeSheet.dodge.value.ToString();

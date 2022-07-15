@@ -47,8 +47,7 @@ namespace HexGameEngine
     }
     public enum CoreAttribute
     {
-        Strength = 0,
-        Intelligence = 1,
+        Might = 0,
         Accuracy = 2,
         Dodge = 3,
         Constituition = 4,
@@ -57,8 +56,9 @@ namespace HexGameEngine
     }
     public enum ItemCoreAttribute
     {
-        Strength = 0,
-        Intelligence = 1,
+        Might = 19,
+        PhysicalDamage = 0,
+        MagicDamage = 1,
         Accuracy = 2,
         Dodge = 3,
         Constituition = 4,

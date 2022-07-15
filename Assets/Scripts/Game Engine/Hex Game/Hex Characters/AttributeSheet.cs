@@ -10,11 +10,7 @@ namespace HexGameEngine.Characters
         [BoxGroup("Core Attributes", centerLabel: true)]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public Attribute strength = new Attribute(0, 0);
-        [BoxGroup("Core Attributes")]
-        [LabelWidth(100)]
-        [GUIColor("Green")]
-        public Attribute intelligence = new Attribute(0, 0);
+        public Attribute might = new Attribute(0, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
@@ -65,6 +61,14 @@ namespace HexGameEngine.Characters
         [BoxGroup("Misc Attributes")]
         [LabelWidth(100)]
         [GUIColor("Blue")]
+        public int physicalDamageBonus = 0;
+        [BoxGroup("Misc Attributes")]
+        [LabelWidth(100)]
+        [GUIColor("Blue")]
+        public int magicDamageBonus = 0;
+        [BoxGroup("Misc Attributes")]
+        [LabelWidth(100)]
+        [GUIColor("Blue")]
         public int auraSize = 1;
         [BoxGroup("Misc Attributes")]
         [LabelWidth(100)]
@@ -110,10 +114,8 @@ namespace HexGameEngine.Characters
                 other = new AttributeSheet();
             }
 
-            other.strength.value = strength.value;
-            other.strength.stars = strength.stars;
-            other.intelligence = intelligence;
-            other.intelligence.stars = intelligence.stars;
+            other.might.value = might.value;
+            other.might.stars = might.stars;
             other.constitution = constitution;
             other.constitution.stars = constitution.stars;
             other.accuracy = accuracy;
@@ -133,6 +135,8 @@ namespace HexGameEngine.Characters
             other.criticalModifier = criticalModifier;
             other.auraSize = auraSize;
             other.vision = vision;
+            other.physicalDamageBonus = physicalDamageBonus;
+            other.magicDamageBonus = magicDamageBonus;
 
             other.physicalResistance = physicalResistance;
             other.magicResistance = magicResistance;
@@ -144,7 +148,7 @@ namespace HexGameEngine.Characters
 
         public void LogCoreStats()
         {
-            Debug.Log("strength: " + strength.value +", " +
+            Debug.Log("might: " + might.value +", " +
                 "constitution: " + constitution.value +", " +
                 "accuracy: " + accuracy.value +", " +
                 "dodge: " + dodge.value +", " +

@@ -3,14 +3,10 @@ using HexGameEngine.Audio;
 using HexGameEngine.CameraSystems;
 using HexGameEngine.Camping;
 using HexGameEngine.Characters;
-using HexGameEngine.DraftEvent;
-using HexGameEngine.DungeonMap;
 using HexGameEngine.HexTiles;
-using HexGameEngine.Items;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.MainMenu;
 using HexGameEngine.Persistency;
-using HexGameEngine.Player;
 using HexGameEngine.Reputations;
 using HexGameEngine.RewardSystems;
 using HexGameEngine.TownFeatures;
@@ -565,9 +561,10 @@ namespace HexGameEngine
                 yield return new WaitUntil(() => handle.cData.CoroutineCompleted() == true);
             }
 
-            // Destroy game scene
+            // Destroy combat + town scenes
             HexCharacterController.Instance.HandleTearDownCombatScene();
             TownController.Instance.TearDownOnExitToMainMenu();
+            CharacterScrollPanelController.Instance.HideMainView();
             LevelController.Instance.HandleTearDownCombatViews();
             LightController.Instance.EnableStandardGlobalLight();
 

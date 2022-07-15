@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: accb5c33da2a75e479ff64dac541103c, type: 3}
-  m_Name: Strength
+  m_Name: Might
   m_EditorClassIdentifier: 
   myPreset: 1
   mainSprite: {fileID: 21300000, guid: d0e9695c0153948809694226675d9b29, type: 3}
   frameSprite: 0
-  headerName: Strength
+  headerName: Might
   italicDescription: 1
   description:
   - color: 1
@@ -29,15 +29,7 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Each point increases '
-    - color: 4
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: 'Physical '
-    - color: 1
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: 'damage dealt by this character by '
+      phrase: 'Each point increases all damage dealt by this character by '
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

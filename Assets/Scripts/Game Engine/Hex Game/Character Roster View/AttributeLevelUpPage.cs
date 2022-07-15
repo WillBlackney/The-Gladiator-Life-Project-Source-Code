@@ -82,10 +82,8 @@ namespace HexGameEngine.UI
             // Apply stat boosts
             foreach(AttributeLevelUpWidget w in selections)
             {
-                if(w.MyAttribute == CoreAttribute.Strength)                
-                    currentCharacter.attributeSheet.strength.value += currentCharacter.attributeRolls[0].strengthRoll;
-                else if (w.MyAttribute == CoreAttribute.Intelligence)
-                    currentCharacter.attributeSheet.intelligence.value += currentCharacter.attributeRolls[0].intelligenceRoll;
+                if(w.MyAttribute == CoreAttribute.Might)                
+                    currentCharacter.attributeSheet.might.value += currentCharacter.attributeRolls[0].mightRoll;
                 else if (w.MyAttribute == CoreAttribute.Accuracy)
                     currentCharacter.attributeSheet.accuracy.value += currentCharacter.attributeRolls[0].accuracyRoll;
                 else if (w.MyAttribute == CoreAttribute.Dodge)

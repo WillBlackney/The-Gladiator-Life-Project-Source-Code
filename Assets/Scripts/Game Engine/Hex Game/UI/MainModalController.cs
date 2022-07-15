@@ -417,8 +417,7 @@ namespace HexGameEngine.UI
     public enum ModalBuildPreset
     {
         None = 0,
-        Strength = 1,
-        Intelligence = 2,
+        Might = 1,
         Constitution = 3,
         Resolve = 4,
         Dodge = 6,
