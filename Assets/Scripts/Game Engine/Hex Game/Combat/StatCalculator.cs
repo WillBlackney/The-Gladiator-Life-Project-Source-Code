@@ -374,7 +374,8 @@ namespace HexGameEngine
                 dodge += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Manipulation) * 5;
 
             // Goblin racial perk
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Cunning))
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Cunning) ||
+                (c.race == CharacterRace.Goblin && c.controller == Controller.Player))
                 dodge += GetTotalInitiative(c);
 
             // Concealing Clouds Perk (self only effect)
@@ -461,18 +462,19 @@ namespace HexGameEngine
                 dodge += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Manipulation) * 5;
 
             // Goblin racial perk
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Cunning))
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Cunning) ||
+                    c.race == CharacterRace.Goblin)
                 dodge += GetTotalInitiative(c);
 
             // Concealing Clouds Perk (self only effect)
-           // if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ConcealingClouds))
-           //     dodge += 10;
+            // if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ConcealingClouds))
+            //     dodge += 10;
 
             // Soul token
             // dodge += PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.SoulToken);
 
             // Stress State Modifier
-           // dodge += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress));
+            // dodge += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress));
 
             // Items
             dodge += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Dodge, c.itemSet);
@@ -779,7 +781,7 @@ namespace HexGameEngine
             crit += (float) GetTotalWits(c) / 2f;
 
             // Satyr perk
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Drunkard))
+            if (c.race == CharacterRace.Satyr && c.controller == Controller.Player)
                 crit += 5;
                         
             // Cant go negative
@@ -801,7 +803,7 @@ namespace HexGameEngine
             crit += (float)GetTotalWits(c) / 2f;
 
             // Satyr perk
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Drunkard))
+            if (c.race == CharacterRace.Satyr)
                 crit += 5;
 
             // Cant go negative
@@ -1042,7 +1044,7 @@ namespace HexGameEngine
             sr += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.StressResistance, c.itemSet);
 
             // Satyr perk
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Drunkard))
+            if (c.race == CharacterRace.Satyr && c.controller == Controller.Player)
                 sr += 10;
 
             return sr;
@@ -1052,7 +1054,7 @@ namespace HexGameEngine
             int sr = c.attributeSheet.stressResistance + GetTotalResolve(c);
 
             // Satyr perk
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Drunkard))
+            if (c.race == CharacterRace.Satyr)
                 sr += 10;
 
             // Divinity talent bonus
@@ -1070,6 +1072,8 @@ namespace HexGameEngine
 
             // Undead Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeadHeart))
+                resistanceReturned += 25;
+            else if (c.race == CharacterRace.Undead && c.controller == Controller.Player)
                 resistanceReturned += 25;
 
             // Farmer background
@@ -1094,6 +1098,9 @@ namespace HexGameEngine
 
             // Undead Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeadHeart))
+                resistanceReturned += 25;
+
+            else if (c.race == CharacterRace.Undead)
                 resistanceReturned += 25;
 
             // Farmer background

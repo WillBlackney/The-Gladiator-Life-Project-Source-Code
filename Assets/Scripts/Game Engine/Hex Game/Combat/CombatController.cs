@@ -1163,7 +1163,7 @@ namespace HexGameEngine.Combat
                 List<LevelNode> tiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1);
                 foreach(HexCharacterModel enemy in enemies)
                 {
-                    if(PerkController.Instance.DoesCharacterHavePerk(enemy.pManager, Perk.Cannibalism) &&
+                    if(enemy.race == CharacterRace.Gnoll && enemy.controller == Controller.Player &&
                         tiles.Contains(enemy.currentTile))
                     {
                         // Gain health
@@ -1368,6 +1368,7 @@ namespace HexGameEngine.Combat
         private void HandleOnCombatVictoryEffects()
         {
             // Orc passive
+            /*
             foreach(HexCharacterModel character in HexCharacterController.Instance.AllDefenders)
             {
                 if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.ThrillOfTheHunt))
@@ -1375,6 +1376,7 @@ namespace HexGameEngine.Combat
                     HexCharacterController.Instance.ModifyStress(character, -10);
                 }
             }
+            */
         }
         #endregion
     }

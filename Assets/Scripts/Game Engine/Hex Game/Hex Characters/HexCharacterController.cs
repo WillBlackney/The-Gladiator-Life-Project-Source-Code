@@ -847,15 +847,23 @@ namespace HexGameEngine.Characters
                 }
 
                 // Elf (gain rune)
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BloodOfTheAncients))
+                if (character.race == CharacterRace.Elf && character.controller == Controller.Player)
                 {
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Rune, 1, true, 0.5f);
                 }
 
                 // Human (gain flight)
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Eager))
+                if (character.race == CharacterRace.Human && character.controller == Controller.Player)
                 {
+                    // to do: change to gain 1 combo
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Flight, 1, true, 0.5f);
+                }
+
+                // Orc (gain courage)
+                if (character.race == CharacterRace.Orc && character.controller == Controller.Player)
+                {
+                    // to do: change to gain 1 courage
+                    // PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Flight, 1, true, 0.5f);
                 }
 
                 // Blood Thristy (gain 2 wrath)

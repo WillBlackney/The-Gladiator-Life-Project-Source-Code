@@ -754,8 +754,8 @@ namespace HexGameEngine.Characters
 
             // Set up perks
             newCharacter.passiveManager = new PerkManagerModel(newCharacter);
-            PerkIconData p = PerkController.Instance.GetRacialPerk(race);
-            PerkController.Instance.ModifyPerkOnCharacterData(newCharacter.passiveManager, p.perkTag, 1);
+            //PerkIconData p = PerkController.Instance.GetRacialPerk(race);
+            //PerkController.Instance.ModifyPerkOnCharacterData(newCharacter.passiveManager, p.perkTag, 1);
             ApplyBackgroundPerksToCharacter(newCharacter, tier);
 
             // Setup stats + stars

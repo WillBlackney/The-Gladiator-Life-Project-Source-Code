@@ -23,15 +23,15 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'At the end of each combat, recover '
+      phrase: 'Start combat with '
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: '10 '
+      phrase: '1 '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: Stress
+      phrase: Courage
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

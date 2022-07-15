@@ -23,7 +23,7 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Immediately recovers '
+      phrase: 'Immediately recover '
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
