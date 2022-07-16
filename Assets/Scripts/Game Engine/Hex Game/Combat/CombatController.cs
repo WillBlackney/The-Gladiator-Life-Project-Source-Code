@@ -775,6 +775,13 @@ namespace HexGameEngine.Combat
             int critRoll = RandomGenerator.NumberBetween(1, 1000);
             float critChance = StatCalculator.GetTotalCriticalChance(attacker);
 
+            // Check combo
+            if(PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Combo) &&
+                ability != null)
+            {
+                return true;
+            }
+
             // Check Point Blank bonus
             /*
             if(PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.PointBlank) &&

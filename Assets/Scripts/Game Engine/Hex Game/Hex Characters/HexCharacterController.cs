@@ -544,10 +544,18 @@ namespace HexGameEngine.Characters
             if (character.currentStress >= 100 && stressGainedOrLost > 0) return;
             // Zealots can never reach shattered stress state
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Zealot) &&
-                character.currentStress >= 99 && stressGainedOrLost > 0) return;
-
+                character.currentStress >= 99 && stressGainedOrLost > 0) return;   
+              
             // Enemy characters do not suffer from stress
             if (character.allegiance == Allegiance.Enemy) return;
+
+            // Check courage token
+            if (stressGainedOrLost > 0 &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Courage))
+            {
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Courage, -1);
+                return;
+            }
 
             HexCharacterView view = character.hexCharacterView;
             int originalStress = character.currentStress;
@@ -787,6 +795,53 @@ namespace HexGameEngine.Characters
 
         // Turn Events + Sequences
         #region
+        public void ApplyCombatStartPerkEffects(HexCharacterModel character)
+        {
+            // Tough (gain X block)
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Tough))
+            {
+                int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Tough);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Block, stacks, false);
+            }
+
+            // Motivated (gain X focus)
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Motivated))
+            {
+                int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Motivated);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Focus, stacks, false);
+            }
+
+            // Thief background (gain 1 stealth)
+            if (RandomGenerator.NumberBetween(1, 2) == 1 &&
+                CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Thief))
+            {
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Stealth, 1, false);
+            }
+
+            // Elf (gain rune)
+            if (character.race == CharacterRace.Elf && character.controller == Controller.Player)
+            {
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Rune, 1, false);
+            }
+
+            // Human (gain flight)
+            if (character.race == CharacterRace.Human && character.controller == Controller.Player)
+            {
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Combo, 1, false);
+            }
+
+            // Orc (gain courage)
+            if (character.race == CharacterRace.Orc && character.controller == Controller.Player)
+            {
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Courage, 1, false);
+            }
+
+            // Blood Thristy (gain 2 wrath)
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BloodThirsty))
+            {
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Wrath, 2, false);
+            }
+        }
         public void CharacterOnTurnStart(HexCharacterModel character)
         {
             Debug.Log("HexCharacterController.CharacterOnTurnStart() called for " + character.myName);
@@ -821,7 +876,8 @@ namespace HexGameEngine.Characters
 
             // Check effects that are triggered on the first turn only
             if (TurnController.Instance.CurrentTurn == 1 && !character.hasRequestedTurnDelay)
-            {                
+            {            
+                /*
                 // TO DO: characters should START combat with these effects, not gain them on the start of their
                 // first turn. move this code somewhere else.
 
@@ -855,15 +911,13 @@ namespace HexGameEngine.Characters
                 // Human (gain flight)
                 if (character.race == CharacterRace.Human && character.controller == Controller.Player)
                 {
-                    // to do: change to gain 1 combo
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Flight, 1, true, 0.5f);
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Combo, 1, true, 0.5f);
                 }
 
                 // Orc (gain courage)
                 if (character.race == CharacterRace.Orc && character.controller == Controller.Player)
                 {
-                    // to do: change to gain 1 courage
-                    // PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Flight, 1, true, 0.5f);
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Courage, 1, true, 0.5f);
                 }
 
                 // Blood Thristy (gain 2 wrath)
@@ -871,6 +925,7 @@ namespace HexGameEngine.Characters
                 {
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Wrath, 2, true, 0.5f);
                 }
+                */
             }
 
             // Perk expiries on turn start

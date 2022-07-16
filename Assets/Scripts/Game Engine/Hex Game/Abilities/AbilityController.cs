@@ -502,6 +502,8 @@ namespace HexGameEngine.Abilities
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Focus, -1);
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Blinded))
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Blinded, -1);
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Combo))
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Combo, -1);
             }
 
 

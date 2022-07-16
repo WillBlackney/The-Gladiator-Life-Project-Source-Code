@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: X
   myClassName: Shaman
-  race: 1
+  race: 2
   modelSize: 0
   attributeSheet:
     might:

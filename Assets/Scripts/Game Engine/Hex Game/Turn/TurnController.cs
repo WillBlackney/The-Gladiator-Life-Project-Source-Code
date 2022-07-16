@@ -150,6 +150,11 @@ namespace HexGameEngine.TurnLogic
         {
             CurrentTurn = 0;
             CombatController.Instance.SetCombatState(CombatGameState.CombatActive);
+
+            // Apply starting perks (elf, human and orc racials, etc)
+            foreach (HexCharacterModel c in activationOrder)
+                HexCharacterController.Instance.ApplyCombatStartPerkEffects(c);
+            // Start first turn
             StartNewTurnSequence();
         }
         private void StartNewTurnSequence()
