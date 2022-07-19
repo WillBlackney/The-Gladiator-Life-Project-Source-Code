@@ -340,6 +340,9 @@ namespace HexGameEngine.Items
             else if (slot.SlotType == RosterSlotType.Body)
                 character.itemSet.bodyArmour = null;
 
+            // Update item abilities
+            character.abilityBook.OnItemSetChanged(character.itemSet);
+
             // Redraw Inventory and Character roster views
             CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
             InventoryController.Instance.RebuildInventoryView();
@@ -399,6 +402,8 @@ namespace HexGameEngine.Items
             else if (slot.SlotType == RosterSlotType.Body)
                 character.itemSet.bodyArmour = newItem.itemData;
 
+            // Update item abilities
+            character.abilityBook.OnItemSetChanged(character.itemSet);
         }
         #endregion
 

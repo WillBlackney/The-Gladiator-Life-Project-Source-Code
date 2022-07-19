@@ -29,7 +29,7 @@ namespace HexGameEngine.UI
         #endregion
         public void OnClick()
         {
-
+            CharacterRosterViewController.Instance.OnSelectableAbilityButtonClicked(this);
         }
         
         public void Hide()
@@ -41,6 +41,10 @@ namespace HexGameEngine.UI
         {
             gameObject.SetActive(true);
             icon.BuildFromAbilityData(data);
+            SetSelectedViewState(selected);
+        }
+        public void SetSelectedViewState(bool selected)
+        {
             if (selected)
             {
                 selectedParent.SetActive(true);

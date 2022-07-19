@@ -475,48 +475,34 @@ namespace HexGameEngine.UI
                 selectableAbilityButtons[i].Build(character.abilityBook.knownAbilities[i], active);
             }
 
-            activeAbilitiesText.text = character.abilityBook.activeAbilities.Count.ToString();
+            // Update active abilities text
+            activeAbilitiesText.text = character.abilityBook.activeAbilities.Count.ToString() + 
+                " / " + AbilityBook.ActiveAbilityLimit.ToString();
 
-
-            /*
-            // Main hand weapon abilities
-            int newIndexCount = 0;
-            if(character.itemSet.mainHandItem != null)
-            {
-                for (int i = 0; i < character.itemSet.mainHandItem.grantedAbilities.Count; i++)
-                {
-                    Debug.LogWarning("main hand weapon is not null");
-                    // Characters dont gain special weapon ability if they have an off hand item
-                    if (character.itemSet.offHandItem == null || (character.itemSet.offHandItem != null && character.itemSet.mainHandItem.grantedAbilities[i].weaponAbilityType == WeaponAbilityType.Basic))
-                    {
-                        Debug.LogWarning("gained main hand weapon ability");
-                        abilityButtons[i].BuildFromAbilityData(character.itemSet.mainHandItem.grantedAbilities[i]);
-                        newIndexCount++;
-                    }
-                }
-            }               
-
-            // Off hand weapon abilities
-            if (character.itemSet.offHandItem != null)
-            {
-                for (int i = 0; i < character.itemSet.offHandItem.grantedAbilities.Count; i++)
-                {
-                    abilityButtons[i + newIndexCount].BuildFromAbilityData(character.itemSet.offHandItem.grantedAbilities[i]);
-                    newIndexCount++;
-                }
-            }
-
-            // Build non item derived abilities
-            for (int i = 0; i < character.abilityBook.activeAbilities.Count; i++)
-            {
-                abilityButtons[i + newIndexCount].BuildFromAbilityData(character.abilityBook.activeAbilities[i]);
-                newIndexCount++;
-            }
-            */
         }
-        public void BuildAbilityButtonFromAbility(UIAbilityIcon b, AbilityData d)
+        public void OnSelectableAbilityButtonClicked(UIAbilityIconSelectable button)
         {
-            b.BuildFromAbilityData(d);
+            AbilityBook book = characterCurrentlyViewing.abilityBook;
+            AbilityData ability = button.icon.MyDataRef;
+
+            // Make inactive ability go active
+            if (!book.HasActiveAbility(ability.abilityName) &&
+                book.activeAbilities.Count < AbilityBook.ActiveAbilityLimit)
+            {
+                characterCurrentlyViewing.abilityBook.SetAbilityAsActive(book.GetKnownAbility(ability.abilityName));
+                button.SetSelectedViewState(true);
+                activeAbilitiesText.text = book.activeAbilities.Count.ToString() + " / " + AbilityBook.ActiveAbilityLimit.ToString();
+            }
+
+            // Make active ability go inactive
+            else if (book.HasActiveAbility(ability.abilityName) &&
+                !ability.derivedFromItemLoadout && 
+                !ability.derivedFromWeapon)
+            {
+                characterCurrentlyViewing.abilityBook.SetAbilityAsInactive(book.GetKnownAbility(ability.abilityName));
+                button.SetSelectedViewState(false);
+                activeAbilitiesText.text = book.activeAbilities.Count.ToString() + " / " + AbilityBook.ActiveAbilityLimit.ToString();
+            }
         }
         #endregion
 

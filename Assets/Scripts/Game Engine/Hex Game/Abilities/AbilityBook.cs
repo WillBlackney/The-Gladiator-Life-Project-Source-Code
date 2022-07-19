@@ -11,6 +11,10 @@ namespace HexGameEngine.Abilities
         #region Properties
         public List<AbilityData> activeAbilities = new List<AbilityData>();
         public List<AbilityData> knownAbilities = new List<AbilityData>();
+        public static int ActiveAbilityLimit
+        {
+            get { return 10; }
+        }
         #endregion
 
         #region Learn + Unlearn Abilities
@@ -22,7 +26,7 @@ namespace HexGameEngine.Abilities
 
             knownAbilities.Add(newAbility);
 
-            if (activeAbilities.Count < 10) activeAbilities.Add(newAbility);
+            if (activeAbilities.Count < ActiveAbilityLimit) activeAbilities.Add(newAbility);
         }
         public void HandleLearnNewAbilities(List<AbilityData> abilities)
         {
@@ -48,11 +52,12 @@ namespace HexGameEngine.Abilities
         }
         public void SetAbilityAsActive(AbilityData a)
         {
-            knownAbilities.Add(a);
+            if(knownAbilities.Contains(a))
+                activeAbilities.Add(a);
         }
-        public void SetAbilityAsInActive(AbilityData a)
+        public void SetAbilityAsInactive(AbilityData a)
         {
-            knownAbilities.Remove(a);
+            if(activeAbilities.Contains(a)) activeAbilities.Remove(a);
         }
         public void ForgetAllAbilities()
         {
@@ -76,10 +81,24 @@ namespace HexGameEngine.Abilities
 
             return ret;
         }
+        public bool HasActiveAbility(string abilityName)
+        {
+            bool ret = false;
+            foreach (AbilityData a in activeAbilities)
+            {
+                if (a.abilityName == abilityName)
+                {
+                    ret = true;
+                    break;
+                }
+            }
+
+            return ret;
+        }
         #endregion
 
         #region Item Ability Logic
-        public List<AbilityData> GenerateAbilitiesFromWeapons(ItemSet itemSet, bool includeLoadOutAbility = true)
+        public List<AbilityData> GetAbilitiesFromItemSet(ItemSet itemSet, bool includeLoadOutAbility = true)
         {
             List<AbilityData> ret = new List<AbilityData>();
 
@@ -153,13 +172,38 @@ namespace HexGameEngine.Abilities
         {
             HandleUnlearnAbilitiesFromCurrentItemSet();
 
-            foreach (AbilityData a in GenerateAbilitiesFromWeapons(itemSet))
+            var itemAbilities = GetAbilitiesFromItemSet(itemSet);
+            int difference = itemAbilities.Count + activeAbilities.Count - ActiveAbilityLimit;
+
+            // Item abilities must always be active and placed at the front of active abilities list
+            // Remove other non item abilities to make room for item abilities if needed
+            if(difference > 0)
+            {
+                for(int i = 0; i < difference; i++)
+                {
+                    SetAbilityAsInactive(activeAbilities[activeAbilities.Count - 1]);
+                }
+            }
+
+            foreach (AbilityData a in GetAbilitiesFromItemSet(itemSet))
             {
                 HandleLearnNewAbility(a);
             }
 
+            // Move new item abilities to the front of active and known abilities
+            for(int i = 0; i < itemAbilities.Count; i++)
+            {
+                AbilityData a = activeAbilities[activeAbilities.Count - 1];
+                //Debug.Log("Previous index: " + activeAbilities.IndexOf(a).ToString());
+                activeAbilities.Remove(a);
+                activeAbilities.Insert(0, a);
+                knownAbilities.Remove(a);
+                knownAbilities.Insert(0, a);
+               // Debug.Log("New index: " + activeAbilities.IndexOf(a).ToString());
+            }
+
         }
-        public void HandleUnlearnAbilitiesFromCurrentItemSet()
+        private void HandleUnlearnAbilitiesFromCurrentItemSet()
         {
             List<AbilityData> abilitiesRemoved = new List<AbilityData>();
 
@@ -175,6 +219,10 @@ namespace HexGameEngine.Abilities
                 if (activeAbilities.Contains(a))
                     activeAbilities.Remove(a);
             }
+        }
+        public void OnItemSetChanged(ItemSet itemSet)
+        {
+            HandleLearnAbilitiesFromItemSet(itemSet);
         }
         #endregion
 

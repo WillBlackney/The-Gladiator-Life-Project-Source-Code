@@ -17,10 +17,7 @@ MonoBehaviour:
   race: 3
   modelSize: 0
   attributeSheet:
-    strength:
-      value: 0
-      stars: 0
-    intelligence:
+    might:
       value: 0
       stars: 0
     constitution:
@@ -44,6 +41,8 @@ MonoBehaviour:
     initiative: 100
     criticalChance: 5
     criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
     auraSize: 1
     vision: 5
     physicalResistance: 0
@@ -55,10 +54,17 @@ MonoBehaviour:
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 06f22294614248946a629ab645bc6650, type: 2}
+    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
+    - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
+    - {fileID: 11400000, guid: c367e762d7251324b9199c63a443d4af, type: 2}
+    - {fileID: 11400000, guid: cf911e75338237b45a6321623d1f8c84, type: 2}
+    - {fileID: 11400000, guid: d0524e894377b9e47bce3ed475daf53c, type: 2}
+    - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
+    - {fileID: 11400000, guid: d7f2a84d3e2517244b6dfd8e1cf54539, type: 2}
+    - {fileID: 11400000, guid: 6b5c6b02a64c9fe4cb91b8ff26213bd2, type: 2}
+    - {fileID: 11400000, guid: 5ad35601948f9e34e85410fdd290304e, type: 2}
   serializedPassiveManager:
-    perks:
-    - perkTag: 119
-      stacks: 3
+    perks: []
   modelParts:
   - Ghoul_Chest
   - Undead_Face_6
