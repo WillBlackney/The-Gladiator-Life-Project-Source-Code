@@ -4,6 +4,7 @@ using HexGameEngine.CameraSystems;
 using HexGameEngine.Camping;
 using HexGameEngine.Characters;
 using HexGameEngine.HexTiles;
+using HexGameEngine.Items;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.MainMenu;
 using HexGameEngine.Persistency;
@@ -111,6 +112,9 @@ namespace HexGameEngine
 
             AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
             BlackScreenController.Instance.FadeInScreen(1f);
+
+            // Testing
+            InventoryController.Instance.PopulateInventoryWithMockDataItems(20);
         }
         private void RunSandboxCombat()
         {

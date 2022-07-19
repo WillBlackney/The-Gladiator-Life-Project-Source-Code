@@ -50,7 +50,10 @@ namespace HexGameEngine.UI
         private UILevelUpPerkIcon currentSelectedLevelUpPerkChoice;
         [Space(20)]
         [Header("Abilities Section Components")]
-        [SerializeField] private UIAbilityIcon[] abilityButtons;
+        [SerializeField] private List<UIAbilityIconSelectable> selectableAbilityButtons;
+        [SerializeField] private GameObject selectableAbilityButtonPrefab;
+        [SerializeField] private TextMeshProUGUI activeAbilitiesText;
+        [SerializeField] private Transform selectableAbilityButtonsParent;
         [Space(20)]
         [Header("Talent Section Components")]
         [SerializeField] private UITalentIcon[] talentButtons;
@@ -451,11 +454,31 @@ namespace HexGameEngine.UI
             Debug.Log("CharacterRosterViewController.BuildAbilitiesSection() called...");
 
             // reset ability buttons
-            foreach (UIAbilityIcon b in abilityButtons)
+            foreach (UIAbilityIconSelectable b in selectableAbilityButtons)            
+                b.Hide();
+            
+
+            // build an icon for each known ability
+            // set selected state of icons by comparing against active abilities
+            // update selected abilities text
+
+            for(int i = 0; i < character.abilityBook.knownAbilities.Count; i++)
             {
-                b.HideAndReset();
+                if(selectableAbilityButtons.Count < character.abilityBook.knownAbilities.Count)
+                {
+                    UIAbilityIconSelectable newIcon = Instantiate(selectableAbilityButtonPrefab, selectableAbilityButtonsParent).GetComponent<UIAbilityIconSelectable>();
+                    newIcon.Hide();
+                    selectableAbilityButtons.Add(newIcon);
+                }
+
+                bool active = character.abilityBook.activeAbilities.Contains(character.abilityBook.knownAbilities[i]);
+                selectableAbilityButtons[i].Build(character.abilityBook.knownAbilities[i], active);
             }
 
+            activeAbilitiesText.text = character.abilityBook.activeAbilities.Count.ToString();
+
+
+            /*
             // Main hand weapon abilities
             int newIndexCount = 0;
             if(character.itemSet.mainHandItem != null)
@@ -484,11 +507,12 @@ namespace HexGameEngine.UI
             }
 
             // Build non item derived abilities
-            for (int i = 0; i < character.abilityBook.allKnownAbilities.Count; i++)
+            for (int i = 0; i < character.abilityBook.activeAbilities.Count; i++)
             {
-                abilityButtons[i + newIndexCount].BuildFromAbilityData(character.abilityBook.allKnownAbilities[i]);
+                abilityButtons[i + newIndexCount].BuildFromAbilityData(character.abilityBook.activeAbilities[i]);
                 newIndexCount++;
             }
+            */
         }
         public void BuildAbilityButtonFromAbility(UIAbilityIcon b, AbilityData d)
         {

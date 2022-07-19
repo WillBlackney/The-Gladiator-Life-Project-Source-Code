@@ -366,8 +366,9 @@ namespace HexGameEngine.Characters
             TurnController.Instance.CreateActivationWindow(character);
 
             // Setup abilities
-            AbilityController.Instance.BuildHexCharacterAbilityBookFromData(character,
-                AbilityController.Instance.ConvertSerializedAbilityBookToUnserialized(data.abilityBook));
+            //character.abilityBook = new AbilityBook(data.abilityBook);
+            AbilityController.Instance.BuildHexCharacterAbilityBookFromData(character, new AbilityBook(data.abilityBook));
+              //  AbilityController.Instance.ConvertSerializedAbilityBookToUnserialized(data.abilityBook));
         }
         public void SpawnEnemyEncounter(EnemyEncounterData encounterData)
         {

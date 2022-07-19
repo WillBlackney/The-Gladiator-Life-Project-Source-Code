@@ -324,7 +324,12 @@ namespace HexGameEngine.TownFeatures
                 recruitTalentIcons[i].BuildFromTalentPairing(character.talentPairings[i]);
 
             // Build abilities section
+            for(int i = 0; i < character.abilityBook.knownAbilities.Count; i++)
+            {
+                recruitAbilityIcons[i].BuildFromAbilityData(character.abilityBook.knownAbilities[i]);
+            }
             // Main hand weapon abilities
+            /*
             int newIndexCount = 0;
             for (int i = 0; i < character.itemSet.mainHandItem.grantedAbilities.Count; i++)
             {
@@ -347,8 +352,9 @@ namespace HexGameEngine.TownFeatures
             }
 
             // Build non item derived abilities
-            for (int i = 0; i < character.abilityBook.allKnownAbilities.Count; i++)
-                recruitAbilityIcons[i + newIndexCount].BuildFromAbilityData(character.abilityBook.allKnownAbilities[i]);
+            for (int i = 0; i < character.abilityBook.activeAbilities.Count; i++)
+                recruitAbilityIcons[i + newIndexCount].BuildFromAbilityData(character.abilityBook.activeAbilities[i]);
+            */
 
         }
         private void BuildStars(GameObject[] arr, int starCount)
@@ -515,15 +521,8 @@ namespace HexGameEngine.TownFeatures
                         " " + ability.talentRequirementData.level.ToString() + ".", TextLogic.redText);
                 }
 
-                // Already knows max abilities
-                else if (!AbilityController.Instance.DoesCharacterHaveSpaceForNewAbility(character))
-                {
-                    invalidLibraryActionText.text = TextLogic.ReturnColoredText("INVALID \n" +
-                        character.myName + " has already learnt the maximum of 8 abilities.", TextLogic.redText);
-                }
-
                 // Already knows the ability
-                else if (AbilityController.Instance.DoesCharacterAlreadyKnowAbility(character, ability))
+                else if (character.abilityBook.KnowsAbility(ability.abilityName))
                 {
                     invalidLibraryActionText.text = TextLogic.ReturnColoredText("INVALID \n" +
                         character.myName + " already has already learnt " + ability.abilityName + ".", TextLogic.redText);
@@ -544,8 +543,7 @@ namespace HexGameEngine.TownFeatures
             if (!IsTeachAbilityActionValidAndReady()) return;
 
             // Teach ability to character
-            AbilityController.Instance.HandleCharacterDataLearnNewAbility
-                (LibraryCharacterSlot.MyCharacterData, LibraryCharacterSlot.MyCharacterData.abilityBook, LibraryAbilitySlot.MyAbilityData);
+            LibraryCharacterSlot.MyCharacterData.abilityBook.HandleLearnNewAbility(LibraryAbilitySlot.MyAbilityData);
 
             // Remove tome from inventory
             foreach (InventoryItem i in InventoryController.Instance.Inventory)
@@ -577,8 +575,7 @@ namespace HexGameEngine.TownFeatures
                 libraryCharacterSlot.MyCharacterData != null &&
                 CharacterDataController.Instance.DoesCharacterHaveTalent(libraryCharacterSlot.MyCharacterData.talentPairings,
                     libraryAbilitySlot.MyAbilityData.talentRequirementData.talentSchool, libraryAbilitySlot.MyAbilityData.talentRequirementData.level) &&
-                    AbilityController.Instance.DoesCharacterHaveSpaceForNewAbility(libraryCharacterSlot.MyCharacterData) &&
-                     !AbilityController.Instance.DoesCharacterAlreadyKnowAbility(libraryCharacterSlot.MyCharacterData, libraryAbilitySlot.MyAbilityData)
+                     !libraryCharacterSlot.MyCharacterData.abilityBook.KnowsAbility(libraryAbilitySlot.MyAbilityData.abilityName)
                 )
             {
                 ret = true;

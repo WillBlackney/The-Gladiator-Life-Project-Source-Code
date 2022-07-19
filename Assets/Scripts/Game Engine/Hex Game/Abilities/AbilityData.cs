@@ -19,6 +19,7 @@ namespace HexGameEngine.Abilities
         public TargetRequirement targetRequirement;
         public WeaponRequirement weaponRequirement;
         public bool derivedFromWeapon = false;
+        public bool derivedFromItemLoadout = false;
         public WeaponClass weaponClass;
         public TalentPairing talentRequirementData;
         public int talentLevelRequirement = 0;

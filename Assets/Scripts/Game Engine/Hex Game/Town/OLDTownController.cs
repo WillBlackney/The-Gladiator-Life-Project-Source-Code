@@ -217,7 +217,12 @@ namespace HexGameEngine.TownFeatures
                 recruitTalentIcons[i].BuildFromTalentPairing(character.talentPairings[i]);            
 
             // Build abilities section
+            for(int i = 0; i < character.abilityBook.knownAbilities.Count; i++)
+            {
+                recruitAbilityIcons[i].BuildFromAbilityData(character.abilityBook.knownAbilities[i]);
+            }
             // Main hand weapon abilities
+            /*
             int newIndexCount = 0;
             for (int i = 0; i < character.itemSet.mainHandItem.grantedAbilities.Count; i++)
             {
@@ -240,10 +245,11 @@ namespace HexGameEngine.TownFeatures
             }
 
             // Build non item derived abilities
-            for (int i = 0; i < character.abilityBook.allKnownAbilities.Count; i++)
+            for (int i = 0; i < character.abilityBook.activeAbilities.Count; i++)
             {
-                recruitAbilityIcons[i + newIndexCount].BuildFromAbilityData(character.abilityBook.allKnownAbilities[i]);
+                recruitAbilityIcons[i + newIndexCount].BuildFromAbilityData(character.abilityBook.activeAbilities[i]);
             }   
+            */
            
         }
         private void ShowAllRightPanelRows()

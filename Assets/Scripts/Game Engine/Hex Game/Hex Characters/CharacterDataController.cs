@@ -201,10 +201,13 @@ namespace HexGameEngine.Characters
             ItemController.Instance.CopySerializedItemManagerIntoStandardItemManager(template.itemSet, newCharacter.itemSet);
 
             // Ability Data
-            newCharacter.abilityBook = AbilityController.Instance.ConvertSerializedAbilityBookToUnserialized(template.abilityBook);
+            newCharacter.abilityBook = new AbilityBook(template.abilityBook);
+
+            // Learn weapon abilities
+            newCharacter.abilityBook.HandleLearnAbilitiesFromItemSet(newCharacter.itemSet);
 
             // Talent Data
-            foreach(TalentPairing tp in template.talentPairings)
+            foreach (TalentPairing tp in template.talentPairings)
             {
                 newCharacter.talentPairings.Add(tp);
             }
@@ -250,7 +253,10 @@ namespace HexGameEngine.Characters
             ItemController.Instance.CopySerializedItemManagerIntoStandardItemManager(template.itemSet, newCharacter.itemSet);
 
             // Ability Data
-            newCharacter.abilityBook = AbilityController.Instance.ConvertSerializedAbilityBookToUnserialized(template.abilityBook);
+            newCharacter.abilityBook = new AbilityBook(template.abilityBook);
+
+            // Learn weapon abilities
+            newCharacter.abilityBook.HandleLearnAbilitiesFromItemSet(newCharacter.itemSet);
 
             return newCharacter;
         }
@@ -301,8 +307,9 @@ namespace HexGameEngine.Characters
             ItemController.Instance.CopyItemManagerDataIntoOtherItemManager(original.itemSet, newCharacter.itemSet);
 
             // Ability Data
-            newCharacter.abilityBook = new AbilityBook();
-            newCharacter.abilityBook.allKnownAbilities.AddRange(original.abilityBook.allKnownAbilities);
+            newCharacter.abilityBook = new AbilityBook(original.abilityBook);
+           // foreach (AbilityData a in original.abilityBook.knownAbilities)
+           //     newCharacter.abilityBook.HandleLearnNewAbility(a);
 
             // Attribute rolls        
             newCharacter.attributeRolls = new List<AttributeRollResult>();
@@ -800,10 +807,11 @@ namespace HexGameEngine.Characters
             List<AbilityDataSO> selectedAbilities = GenerateRecruitCharacterAbilitiesFromProspects(ct.possibleAbilities, ct.startingAbilityCount);
             foreach(AbilityDataSO a in selectedAbilities)
             {
-                AbilityController.Instance.HandleCharacterDataLearnNewAbility
-                    (newCharacter, newCharacter.abilityBook, 
-                    AbilityController.Instance.BuildAbilityDataFromScriptableObjectData(a));
+                newCharacter.abilityBook.HandleLearnNewAbility(AbilityController.Instance.BuildAbilityDataFromScriptableObjectData(a));
             }
+
+            // Learn weapon abilities
+            newCharacter.abilityBook.HandleLearnAbilitiesFromItemSet(newCharacter.itemSet);
 
             // Talent Data
             foreach (TalentPairing tp in ct.talentPairings)

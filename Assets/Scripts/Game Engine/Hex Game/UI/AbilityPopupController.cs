@@ -309,6 +309,8 @@ namespace HexGameEngine.UI
                 SetTalentRequirementImages(SpriteLibrary.Instance.GetWeaponSprite(data.weaponClass));
                 talentReqRowText.text = data.weaponClass.ToString();
             }
+
+            // TO DO: build talent req row for weapon load out derived abilities (e.g. Two Handed, Dual Wield, One Handed)
         }
         private void SetTalentRequirementImages(Sprite s)
         {

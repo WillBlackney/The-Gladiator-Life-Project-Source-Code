@@ -131,7 +131,7 @@ namespace HexGameEngine.RewardSystems
                 if( // Does character meet talent requirement?
                     CharacterDataController.Instance.DoesCharacterHaveTalent(character.talentPairings, ability.talentRequirementData.talentSchool, ability.talentRequirementData.level) &&
                     // has character already learnt the ability?
-                    character.abilityBook.allKnownAbilities.Contains(ability) == false)
+                    !character.abilityBook.KnowsAbility(ability.abilityName))
                 {
                     validAbilities.Add(ability);
                 }
@@ -255,8 +255,8 @@ namespace HexGameEngine.RewardSystems
             // Ability chosen reward to character
             if (chosenReward.rewardType == RewardType.Ability)
             {
-                AbilityController.Instance.HandleCharacterDataLearnNewAbility
-                    (character, character.abilityBook, chosenReward.abilityOffered);
+               // AbilityController.Instance.HandleCharacterDataLearnNewAbility
+               //     (character, character.abilityBook, chosenReward.abilityOffered);
             }
             else if (chosenReward.rewardType == RewardType.Perk)
             {

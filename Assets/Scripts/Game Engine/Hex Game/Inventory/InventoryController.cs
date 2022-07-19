@@ -221,75 +221,21 @@ namespace HexGameEngine.Items
         {
             return inventory.Count + freeSpace <= maxInventorySize;
         }
-        public bool IsItemValidOnSlot(ItemData item, RosterItemSlot slot, HexCharacterData character = null)
-        {
-            bool bRet = false;
-            ItemType itemType = item.itemType;
-
-            if (!slot)
-            {
-                Debug.Log("IsItemValidOnSlot() returning false: slot is null");
-                return false;
-            }
-
-            if (itemType == ItemType.Trinket && slot.SlotType == RosterSlotType.Trinket)
-                bRet = true;
-            else if (itemType == ItemType.Head && slot.SlotType == RosterSlotType.Head)
-                bRet = true;
-            else if (itemType == ItemType.Body && slot.SlotType == RosterSlotType.Body)
-                bRet = true;
-            else if (itemType == ItemType.Weapon)
-            {
-                if ((item.allowedSlot == WeaponSlot.MainHand && slot.SlotType == RosterSlotType.MainHand) ||
-                    (item.allowedSlot == WeaponSlot.Offhand && slot.SlotType == RosterSlotType.OffHand))
-                    bRet = true;
-            }
-
-            // check if adding offhand item while holding a 2h item in the main hand (not allowed)
-            /*
-            if(character != null)
-            {
-                if(character.itemSet.mainHandItem != null &&
-                    character.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded &&
-                    slot.SlotType == RosterSlotType.OffHand)
-                {
-                    Debug.Log("IsItemValidOnSlot() returning false: cant add off hand item while using a 2H weapon");
-                    return false;
-                }
-
-                if (character.itemSet.offHandItem != null && item.handRequirement == HandRequirement.TwoHanded)
-                {
-                    Debug.Log("IsItemValidOnSlot() returning false: cant add two handed item while holding an off hand item");
-                    return false;
-                }
-            }
-            */
-
-            Debug.LogWarning("IsItemValidOnSlot() returning " + bRet.ToString());
-
-            return bRet;
-
-        }
-
+       
         #endregion
 
         // Misc
         #region
         public void PopulateInventoryWithMockDataItems(int totalItemsGenerated)
         {
-            //AddRandomAbilityBookToInventory(totalItemsGenerated);
             for (int i = 0; i < totalItemsGenerated; i++)
             {
                 AddItemToInventory(GenerateRandomNonEquipableItem());
-                //AddItemToInventory(GenerateRandomAbilityBookItem());
-                //AddItemToInventory(GenerateRandomEquipableItem());
-                /*
-                if(RandomGenerator.NumberBetween(1,2) == 1)
-                    AddItemToInventory(GenerateRandomAbilityBookItem());
-                else
-                    AddItemToInventory(GenerateRandomEquipableItem());
-                */
             }
+        }
+        public void PopulateInventoryWithMockAbilityBooks(int totalItemsGenerated)
+        {
+            AddRandomAbilityBookToInventory(totalItemsGenerated);
         }
         #endregion
 
@@ -363,8 +309,7 @@ namespace HexGameEngine.Items
 
             if (currentActionType == ItemActionType.Use && itemInSelection.abilityData != null && c != null)
             {
-                AbilityController.Instance.HandleCharacterDataLearnNewAbility(c, c.abilityBook, itemInSelection.abilityData);
-
+                c.abilityBook.HandleLearnNewAbility(itemInSelection.abilityData);
                 // discard the ability book on usage
 
                 // rerender character roster screen + inventory

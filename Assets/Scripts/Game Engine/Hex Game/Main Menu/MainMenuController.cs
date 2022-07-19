@@ -231,8 +231,7 @@ namespace HexGameEngine.MainMenu
             currentPreset = preset;
 
             // Update abilities
-            characterBuild.abilityBook = new AbilityBook();
-            characterBuild.abilityBook.allKnownAbilities.AddRange(preset.abilityBook.allKnownAbilities);
+            characterBuild.abilityBook = new AbilityBook(preset.abilityBook);
 
             // Update talents
             characterBuild.talentPairings.Clear();
@@ -320,10 +319,11 @@ namespace HexGameEngine.MainMenu
             originPanelPresetNameText.text = currentPreset.myClassName.ToString();
 
             // Reset and build ability icons
+            var nonItemAbilities = characterBuild.abilityBook.GetAllKnownNonItemSetAbilities();
             foreach (UIAbilityIcon a in originPanelAbilityIcons)
                 a.HideAndReset();
-            for(int i = 0; i < characterBuild.abilityBook.allKnownAbilities.Count && i < originPanelAbilityIcons.Length; i++)            
-                originPanelAbilityIcons[i].BuildFromAbilityData(characterBuild.abilityBook.allKnownAbilities[i]);
+            for(int i = 0; i < characterBuild.abilityBook.knownAbilities.Count && i < originPanelAbilityIcons.Length; i++)            
+                originPanelAbilityIcons[i].BuildFromAbilityData(nonItemAbilities[i]);
 
             // Reset and build talent rows
             foreach (UITalentRow r in originPanelTalentRows)
@@ -392,10 +392,11 @@ namespace HexGameEngine.MainMenu
         private void RebuildPresetPanelAbilitySection()
         {
             // Reset and build ability icons
+            var nonItemAbilities = characterBuild.abilityBook.GetAllKnownNonItemSetAbilities();
             foreach (UIAbilityIcon a in presetPanelAbilityIcons)
                 a.HideAndReset();
-            for (int i = 0; i < characterBuild.abilityBook.allKnownAbilities.Count && i < presetPanelAbilityIcons.Length; i++)
-                presetPanelAbilityIcons[i].BuildFromAbilityData(characterBuild.abilityBook.allKnownAbilities[i]);
+            for (int i = 0; i < characterBuild.abilityBook.knownAbilities.Count && i < presetPanelAbilityIcons.Length; i++)
+                presetPanelAbilityIcons[i].BuildFromAbilityData(nonItemAbilities[i]);
 
         }
         private void RebuildPresetPanelTalentSection()
@@ -562,8 +563,8 @@ namespace HexGameEngine.MainMenu
             {
                 newAbilities.Add(b.AbilityIcon.MyDataRef);
             }
-            characterBuild.abilityBook.allKnownAbilities.Clear();
-            characterBuild.abilityBook.allKnownAbilities.AddRange(newAbilities);
+            characterBuild.abilityBook.ForgetAllAbilities();
+            characterBuild.abilityBook.HandleLearnNewAbilities(newAbilities);
 
             // show preset panel
             RebuildAndShowPresetPanel();
@@ -583,7 +584,7 @@ namespace HexGameEngine.MainMenu
                 chooseAbilityButtonsSectionOne[i].BuildAndShow(allTalentOneAbilities[i]);
 
             // Select buttons based on known abilities of character
-            foreach(AbilityData a in characterBuild.abilityBook.allKnownAbilities)
+            foreach(AbilityData a in characterBuild.abilityBook.knownAbilities)
             {
                 foreach(ChooseAbilityButton button in chooseAbilityButtonsSectionOne)
                 {
@@ -611,7 +612,7 @@ namespace HexGameEngine.MainMenu
                     chooseAbilityButtonsSectionTwo[i].BuildAndShow(allTalentTwoAbilities[i]);
 
                 // Select buttons based on known abilities of character
-                foreach (AbilityData a in characterBuild.abilityBook.allKnownAbilities)
+                foreach (AbilityData a in characterBuild.abilityBook.knownAbilities)
                 {
                     foreach (ChooseAbilityButton button in chooseAbilityButtonsSectionTwo)
                     {
@@ -666,7 +667,7 @@ namespace HexGameEngine.MainMenu
                 newTalents.Add(tp.talentSchool);
 
             // Find invalid abilities
-            foreach(AbilityData a in characterBuild.abilityBook.allKnownAbilities)
+            foreach(AbilityData a in characterBuild.abilityBook.knownAbilities)
             {
                 if(newTalents.Contains(a.talentRequirementData.talentSchool) == false)                
                     invalidAbilities.Add(a);                
@@ -674,7 +675,7 @@ namespace HexGameEngine.MainMenu
 
             // Remove invalid abilities
             foreach(AbilityData a in invalidAbilities)            
-                characterBuild.abilityBook.allKnownAbilities.Remove(a);            
+                characterBuild.abilityBook.HandleUnlearnAbility(a.abilityName);            
         }
         #endregion
 
@@ -879,7 +880,7 @@ namespace HexGameEngine.MainMenu
                 a.HideAndReset();
 
             // Determine + create weapon abilities
-            List<AbilityData> weaponAbilities = AbilityController.Instance.GenerateAbilitiesFromWeapons(characterBuild.itemSet);
+            List<AbilityData> weaponAbilities = characterBuild.abilityBook.GenerateAbilitiesFromWeapons(characterBuild.itemSet);
 
             // Build icons from weapon abilities
             for (int i = 0; i < weaponAbilities.Count && i < itemsPanelAbilityIcons.Length; i++)

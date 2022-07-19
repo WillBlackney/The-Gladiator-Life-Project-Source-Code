@@ -207,7 +207,7 @@ namespace HexGameEngine.Items
             
             if(MyItemRef.itemData != null)
             {
-                if (InventoryController.Instance.IsItemValidOnSlot(MyItemRef.itemData, RosterItemSlot.SlotMousedOver,
+                if (ItemController.Instance.IsItemValidOnSlot(MyItemRef.itemData, RosterItemSlot.SlotMousedOver,
                 CharacterRosterViewController.Instance.CharacterCurrentlyViewing))
                 {
                     bRet = true;

@@ -64,6 +64,10 @@ namespace HexGameEngine.Abilities
         [VerticalGroup("Requirements")]
         [LabelWidth(150)]
         [GUIColor("Blue")]
+        public bool derivedFromItemLoadout;
+        [VerticalGroup("Requirements")]
+        [LabelWidth(150)]
+        [GUIColor("Blue")]
         [ShowIf("ShowWeaponAbilityType")]
         public WeaponAbilityType weaponAbilityType;
         [VerticalGroup("Requirements")]

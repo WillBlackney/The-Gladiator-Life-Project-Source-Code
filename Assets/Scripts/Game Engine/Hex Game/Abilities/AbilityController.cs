@@ -106,7 +106,7 @@ namespace HexGameEngine.Abilities
         public AbilityData GetCharacterAbilityByName(HexCharacterModel character, string name)
         {
             AbilityData abilityReturned = null;
-            foreach (AbilityData a in character.abilityBook.allKnownAbilities)
+            foreach (AbilityData a in character.abilityBook.activeAbilities)
             {
                 if (a.abilityName == name)
                 {
@@ -165,6 +165,7 @@ namespace HexGameEngine.Abilities
             a.doesNotBreakStealth = d.doesNotBreakStealth;
             a.weaponAbilityType = d.weaponAbilityType;
             a.derivedFromWeapon = d.derivedFromWeapon;
+            a.derivedFromItemLoadout = d.derivedFromItemLoadout;
             a.weaponClass = d.weaponClass;
             a.targetRequirement = d.targetRequirement;
             a.weaponRequirement = d.weaponRequirement;
@@ -233,6 +234,7 @@ namespace HexGameEngine.Abilities
 
             return a;
         }
+        
         public AbilityBook ConvertSerializedAbilityBookToUnserialized(SerializedAbilityBook data)
         {
             AbilityBook a = new AbilityBook();
@@ -240,7 +242,7 @@ namespace HexGameEngine.Abilities
             foreach (AbilityDataSO d in data.activeAbilities)
             {
                 AbilityData ab = BuildAbilityDataFromScriptableObjectData(d);
-                a.allKnownAbilities.Add(ab);
+                a.HandleLearnNewAbility(ab);
             }
 
             return a;
@@ -252,133 +254,14 @@ namespace HexGameEngine.Abilities
         #region
         public void BuildHexCharacterAbilityBookFromData(HexCharacterModel character, AbilityBook data)
         {
-            character.abilityBook = new AbilityBook();
+            // Copy ability book from data character into hex character
+            character.abilityBook = new AbilityBook(data);
 
-            // Get weapon abilities
-            List<AbilityData> weaponAbilities = GenerateAbilitiesFromWeapons(character.itemSet);
-            foreach(AbilityData a in weaponAbilities)
+            // Link hex character to ability data
+            foreach (AbilityData a in character.abilityBook.activeAbilities)
             {
                 a.myCharacter = character;
-                character.abilityBook.allKnownAbilities.Add(a);
-            }
-
-            // build main hand weapon abilities
-            /*
-            if (character.controller == Controller.Player && character.itemSet.mainHandItem != null)
-            {
-                foreach (AbilityData d in character.itemSet.mainHandItem.grantedAbilities)
-                {
-                    // Characters dont gain special weapon ability if they have an off hand item
-                    if (character.itemSet.offHandItem == null || (character.itemSet.offHandItem != null && d.weaponAbilityType == WeaponAbilityType.Basic))
-                    {
-                        AbilityData clone = ObjectCloner.CloneJSON(d);
-                        clone.myCharacter = character;
-                        character.abilityBook.allKnownAbilities.Add(clone);
-                    }
-                }
-            }
-
-            // build off hand weapon abilities
-            if (character.controller == Controller.Player && character.itemSet.offHandItem != null)
-            {
-                foreach (AbilityData d in character.itemSet.offHandItem.grantedAbilities)
-                {
-                    AbilityData clone = ObjectCloner.CloneJSON(d);
-                    clone.myCharacter = character;
-                    character.abilityBook.allKnownAbilities.Add(clone);
-                }
-            }*/
-
-            foreach (AbilityData d in data.allKnownAbilities)
-            {
-                AbilityData clone = ObjectCloner.CloneJSON(d);
-                clone.myCharacter = character;
-                character.abilityBook.allKnownAbilities.Add(clone);
-            }
-        }
-        public List<AbilityData> GenerateAbilitiesFromWeapons(Items.ItemSet itemSet)
-        {
-            List<AbilityData> ret = new List<AbilityData>();
-
-            // build main hand weapon abilities
-            if (itemSet.mainHandItem != null)
-            {
-                foreach (AbilityData d in itemSet.mainHandItem.grantedAbilities)
-                {
-                    // Characters dont gain special weapon ability if they have an off hand item
-                    if (itemSet.offHandItem == null || (itemSet.offHandItem != null && d.weaponAbilityType == WeaponAbilityType.Basic))
-                    {
-                        ret.Add(ObjectCloner.CloneJSON(d));
-                    }
-                }
-            }
-
-            // build off hand weapon abilities
-            if (itemSet.offHandItem != null)
-            {
-                foreach (AbilityData d in itemSet.offHandItem.grantedAbilities)
-                {
-                    ret.Add(ObjectCloner.CloneJSON(d));
-                }
-            }
-
-            return ret;
-        }
-        public void HandleCharacterDataLearnNewAbility(HexCharacterData character, AbilityBook ab, AbilityData ability)
-        {
-            Debug.Log("AbilityController.HandleCharacterDataLearnNewAbility() called, character " + character.myName +
-                " learning " + ability.abilityName);
-
-            // Can't learn more than 8 abilities
-            if(!DoesCharacterHaveSpaceForNewAbility(character))
-            {
-                Debug.Log("HandleCharacterDataLearnNewAbility() cancelling, character already knows max amount of ability (8)");
-                return; 
-            }
-
-            ab.allKnownAbilities.Add(ability);
-        }
-        public bool DoesCharacterHaveSpaceForNewAbility(HexCharacterData character)
-        {
-            return character.abilityBook.allKnownAbilities.Count < 8;
-        }
-        public bool DoesCharacterAlreadyKnowAbility(HexCharacterData character, AbilityData ability)
-        {
-            bool ret = false;
-            foreach(AbilityData a in character.abilityBook.allKnownAbilities)
-            {
-                if(a.abilityName == ability.abilityName)
-                {
-                    ret = true;
-                    break;
-                }
-            }
-            return ret;
-        }
-        private bool DoesCharacterMeetAbilityTalentRequirements(HexCharacterData character, AbilityData ability)
-        {
-            bool ret = false;
-
-            if(CharacterDataController.Instance.DoesCharacterHaveTalent(
-                character.talentPairings, ability.talentRequirementData.talentSchool, ability.talentRequirementData.level))
-            {
-                ret = true;
-            }
-
-            return ret;
-        }
-        public bool DoesCharacterMeetAbilityBookRequirements(HexCharacterData character, AbilityData ability)
-        {
-            bool ret = false;
-
-            if(DoesCharacterHaveSpaceForNewAbility(character) &&
-                !DoesCharacterAlreadyKnowAbility(character, ability) &&
-                DoesCharacterMeetAbilityTalentRequirements(character, ability))
-            {
-                ret = true;
-            }
-
-            return ret;
+            }            
         }
         #endregion
 
@@ -390,17 +273,14 @@ namespace HexGameEngine.Abilities
 
             ResetCharacterAbilityBar(character);
 
-            // build from weapons + ability book in future
-
-            for (int i = 0; i < character.abilityBook.allKnownAbilities.Count; i++)
+            for (int i = 0; i < character.abilityBook.activeAbilities.Count; i++)
             {
-                BuildAbilityButton(character.hexCharacterView.abilityButtons[i], character.abilityBook.allKnownAbilities[i]);
+                BuildAbilityButton(character.hexCharacterView.abilityButtons[i], character.abilityBook.activeAbilities[i]);
             }
 
         }
         private void BuildAbilityButton(AbilityButton button, AbilityData data)
         {
-
             // enable GO
             button.gameObject.SetActive(true);
 
@@ -1330,7 +1210,7 @@ namespace HexGameEngine.Abilities
         }
         public void ReduceCharacterAbilityCooldownsOnTurnStart(HexCharacterModel character)
         {
-            foreach (AbilityData a in character.abilityBook.allKnownAbilities)
+            foreach (AbilityData a in character.abilityBook.activeAbilities)
             {
                 if (a.currentCooldown > 0)
                 {
@@ -1519,7 +1399,7 @@ namespace HexGameEngine.Abilities
 
             // Check Arms Master passive
             else if (character != null &&
-                ability.derivedFromWeapon &&
+                (ability.derivedFromWeapon || ability.derivedFromItemLoadout) &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.ArmsMaster))
             {
                 energyCost -= PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.ArmsMaster);
@@ -1650,7 +1530,6 @@ namespace HexGameEngine.Abilities
 
             return bRet;
         }
-
         public bool IsTargetOfAbilityValid(HexCharacterModel caster, HexCharacterModel target, AbilityData ability)
         {
             if (ability.targetRequirement == TargetRequirement.NoTarget) return true;

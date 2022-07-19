@@ -441,9 +441,9 @@ namespace HexGameEngine.DraftEvent
 
 
             // Build non item derived abilities
-            for (int i = 0; i < character.abilityBook.allKnownAbilities.Count; i++)
+            for (int i = 0; i < character.abilityBook.activeAbilities.Count; i++)
             {
-                BuildAbilityButtonFromAbility(rightPanelAbilityIcons[i + newIndexCount], character.abilityBook.allKnownAbilities[i]);
+                BuildAbilityButtonFromAbility(rightPanelAbilityIcons[i + newIndexCount], character.abilityBook.activeAbilities[i]);
             }
         }
         private void BuildAbilityButtonFromAbility(UIAbilityIcon b, AbilityData d)
