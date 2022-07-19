@@ -455,8 +455,7 @@ namespace HexGameEngine.UI
 
             // reset ability buttons
             foreach (UIAbilityIconSelectable b in selectableAbilityButtons)            
-                b.Hide();
-            
+                b.Hide();            
 
             // build an icon for each known ability
             // set selected state of icons by comparing against active abilities

@@ -122,7 +122,8 @@ namespace HexGameEngine.Abilities
             {
                 foreach (AbilityData d in itemSet.offHandItem.grantedAbilities)
                 {
-                    if (itemSet.offHandItem.weaponClass != itemSet.mainHandItem.weaponClass)
+                    if (itemSet.offHandItem.weaponClass != itemSet.mainHandItem.weaponClass && 
+                        d.weaponAbilityType == WeaponAbilityType.Basic)
                         ret.Add(d);
                 }
             }

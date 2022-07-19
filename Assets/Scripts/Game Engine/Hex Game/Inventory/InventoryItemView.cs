@@ -207,6 +207,19 @@ namespace HexGameEngine.Items
             
             if(MyItemRef.itemData != null)
             {
+                var mainHandItem = CharacterRosterViewController.Instance.CharacterCurrentlyViewing.itemSet.mainHandItem;
+                // Cant equip an off hand if main hand is empty
+                if (RosterItemSlot.SlotMousedOver.SlotType == RosterSlotType.OffHand &&
+                    mainHandItem == null)
+                    return false;
+
+                // Cant equip off hand if main hand weapon is 2 handed
+                if (RosterItemSlot.SlotMousedOver.SlotType == RosterSlotType.OffHand &&
+                   mainHandItem != null &&
+                   mainHandItem.handRequirement == HandRequirement.TwoHanded)
+                    return false;
+
+
                 if (ItemController.Instance.IsItemValidOnSlot(MyItemRef.itemData, RosterItemSlot.SlotMousedOver,
                 CharacterRosterViewController.Instance.CharacterCurrentlyViewing))
                 {

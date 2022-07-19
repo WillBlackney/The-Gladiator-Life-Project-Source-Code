@@ -373,14 +373,16 @@ namespace HexGameEngine.Items
                 character.itemSet.offHandItem = null;
             }
 
-            // Check if equipping off hand weapon while wielding a 2h weapon in the main hand: send main hand 2H back to inventory
-            if (character.itemSet.mainHandItem != null &&
+            /*
+            // Check if equipping off hand weapon while wielding a 2h weapon in the main hand: cancel (must have main hand weapon to equip an offhand
+            else if (character.itemSet.mainHandItem != null &&
                 character.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded && 
                 slot.SlotType == RosterSlotType.OffHand)
             {
                 InventoryController.Instance.AddItemToInventory(new InventoryItem(character.itemSet.mainHandItem), false, index);
                 character.itemSet.mainHandItem = null;
             }
+            */
 
             // Main hand
             if (slot.SlotType == RosterSlotType.MainHand)            

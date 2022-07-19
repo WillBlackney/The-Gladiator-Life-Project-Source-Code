@@ -56,8 +56,12 @@ namespace HexGameEngine.UI
             Debug.Log("RosterItemSlot.HandleRightClick()");
             if(itemDataRef != null && InventoryController.Instance.HasFreeInventorySpace())
             {
+                var character = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
+
+                // Prevent removing main hand if an off hand is equipt
+                if (slotType == RosterSlotType.MainHand && character.itemSet.offHandItem != null) return;
                 ItemPopupController.Instance.OnInventoryItemMouseExit();
-                ItemController.Instance.HandleSendItemFromCharacterToInventory(CharacterRosterViewController.Instance.CharacterCurrentlyViewing, this);
+                ItemController.Instance.HandleSendItemFromCharacterToInventory(character, this);
             }
           
         }
