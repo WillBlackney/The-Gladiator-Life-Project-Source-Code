@@ -205,7 +205,7 @@ namespace HexGameEngine.Libraries
         {
             if (attribute == CoreAttribute.Might) return might;
             else if (attribute == CoreAttribute.Accuracy) return accuracy;
-            else if (attribute == CoreAttribute.Constituition) return constitution;
+            else if (attribute == CoreAttribute.Constitution) return constitution;
             else if (attribute == CoreAttribute.Dodge) return dodge;
             else if (attribute == CoreAttribute.Resolve) return resolve;
             else if (attribute == CoreAttribute.Wits) return wits;

@@ -910,7 +910,7 @@ namespace HexGameEngine.Characters
             List<CoreAttribute> attributes = new List<CoreAttribute> 
             { 
                 CoreAttribute.Accuracy, 
-                CoreAttribute.Constituition, 
+                CoreAttribute.Constitution, 
                 CoreAttribute.Dodge, 
                 CoreAttribute.Resolve, 
                 CoreAttribute.Might, 
@@ -936,7 +936,7 @@ namespace HexGameEngine.Characters
                 if (lowerStat) statMod = -statMod;
 
                 if (attributes[i] == CoreAttribute.Accuracy) sheet.accuracy.value += statMod + baseStatBoost;
-                else if (attributes[i] == CoreAttribute.Constituition) sheet.constitution.value += statMod + baseStatBoost;
+                else if (attributes[i] == CoreAttribute.Constitution) sheet.constitution.value += statMod + baseStatBoost;
                 else if (attributes[i] == CoreAttribute.Dodge) sheet.dodge.value += statMod + baseStatBoost;
                 else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.value += statMod + baseStatBoost;
                 else if (attributes[i] == CoreAttribute.Might) sheet.might.value += statMod + baseStatBoost;
@@ -950,7 +950,7 @@ namespace HexGameEngine.Characters
             List<CoreAttribute> attributes = new List<CoreAttribute>
             {
                 CoreAttribute.Accuracy,
-                CoreAttribute.Constituition,
+                CoreAttribute.Constitution,
                 CoreAttribute.Dodge,
                 CoreAttribute.Resolve,
                 CoreAttribute.Might,
@@ -964,7 +964,7 @@ namespace HexGameEngine.Characters
                 int starsGained = RandomGenerator.NumberBetween(minStarsGainedPerStat, maxStarsGainedPerStat);
 
                 if (attributes[i] == CoreAttribute.Accuracy) sheet.accuracy.stars = starsGained;
-                else if (attributes[i] == CoreAttribute.Constituition) sheet.constitution.stars = starsGained;
+                else if (attributes[i] == CoreAttribute.Constitution) sheet.constitution.stars = starsGained;
                 else if (attributes[i] == CoreAttribute.Dodge) sheet.dodge.stars = starsGained;
                 else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.stars = starsGained;
                 else if (attributes[i] == CoreAttribute.Might) sheet.might.stars = starsGained;

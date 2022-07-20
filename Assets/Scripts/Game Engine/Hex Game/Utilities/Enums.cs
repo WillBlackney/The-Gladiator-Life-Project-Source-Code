@@ -50,7 +50,7 @@ namespace HexGameEngine
         Might = 0,
         Accuracy = 2,
         Dodge = 3,
-        Constituition = 4,
+        Constitution = 4,
         Resolve = 5,
         Wits = 6,
     }

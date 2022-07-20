@@ -90,7 +90,7 @@ namespace HexGameEngine.UI
                     currentCharacter.attributeSheet.dodge.value += currentCharacter.attributeRolls[0].dodgeRoll;
                 else if (w.MyAttribute == CoreAttribute.Resolve)
                     currentCharacter.attributeSheet.resolve.value += currentCharacter.attributeRolls[0].resolveRoll;
-                else if (w.MyAttribute == CoreAttribute.Constituition)
+                else if (w.MyAttribute == CoreAttribute.Constitution)
                 {
                     currentCharacter.attributeSheet.constitution.value += currentCharacter.attributeRolls[0].constitutionRoll;
                     CharacterDataController.Instance.SetCharacterHealth(currentCharacter, currentCharacter.currentHealth + currentCharacter.attributeRolls[0].constitutionRoll);

@@ -78,7 +78,7 @@ namespace HexGameEngine.UI
             else if (myAttribute == CoreAttribute.Dodge) rollText.text = "+" + roll.dodgeRoll.ToString();
             else if (myAttribute == CoreAttribute.Might) rollText.text = "+" + roll.mightRoll.ToString();
             else if (myAttribute == CoreAttribute.Resolve) rollText.text = "+" + roll.resolveRoll.ToString();
-            else if (myAttribute == CoreAttribute.Constituition) rollText.text = "+" + roll.constitutionRoll.ToString();
+            else if (myAttribute == CoreAttribute.Constitution) rollText.text = "+" + roll.constitutionRoll.ToString();
             else if (myAttribute == CoreAttribute.Wits) rollText.text = "+" + roll.witsRoll.ToString();
 
         }

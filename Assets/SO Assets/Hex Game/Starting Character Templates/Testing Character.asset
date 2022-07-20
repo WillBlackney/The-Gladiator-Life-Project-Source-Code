@@ -52,17 +52,7 @@ MonoBehaviour:
     injuryResistance: 0
     deathResistance: 25
   abilityBook:
-    activeAbilities:
-    - {fileID: 11400000, guid: 06f22294614248946a629ab645bc6650, type: 2}
-    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
-    - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
-    - {fileID: 11400000, guid: c367e762d7251324b9199c63a443d4af, type: 2}
-    - {fileID: 11400000, guid: cf911e75338237b45a6321623d1f8c84, type: 2}
-    - {fileID: 11400000, guid: d0524e894377b9e47bce3ed475daf53c, type: 2}
-    - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
-    - {fileID: 11400000, guid: d7f2a84d3e2517244b6dfd8e1cf54539, type: 2}
-    - {fileID: 11400000, guid: 6b5c6b02a64c9fe4cb91b8ff26213bd2, type: 2}
-    - {fileID: 11400000, guid: 5ad35601948f9e34e85410fdd290304e, type: 2}
+    activeAbilities: []
   serializedPassiveManager:
     perks: []
   modelParts:
@@ -71,8 +61,8 @@ MonoBehaviour:
   - Undead_Head_4
   - Ghoul_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: bcda3a1ec0dfdfe469dfdd16aabf8736, type: 2}
-    offHandItem: {fileID: 0}
+    mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+    offHandItem: {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
     headArmour: {fileID: 11400000, guid: 335c81cb722666345aa6c308b1d780f5, type: 2}
     chestArmour: {fileID: 11400000, guid: 885404dfa0107114abd21b026368a161, type: 2}
     trinket: {fileID: 0}

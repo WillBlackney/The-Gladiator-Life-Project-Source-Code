@@ -150,6 +150,20 @@ namespace HexGameEngine.Abilities
 
             return ret;
         }
+        public AbilityData FindAbilityData(string abilityName)
+        {
+            AbilityData ret = null;
+            foreach(AbilityData a in allAbilities)
+            {
+                if (a.abilityName == abilityName)
+                {
+                    ret = a;
+                    break;
+                }
+            }
+               
+            return ret;
+        }
         #endregion
 
         // Data Conversion

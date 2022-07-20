@@ -446,7 +446,7 @@ namespace HexGameEngine.MainMenu
             {
                 dif = characterBuild.attributeSheet.dodge.value - baselineAttributes.dodge.value;
             }
-            else if (att == CoreAttribute.Constituition)
+            else if (att == CoreAttribute.Constitution)
             {
                 dif = characterBuild.attributeSheet.constitution.value - baselineAttributes.constitution.value;
             }
@@ -477,7 +477,7 @@ namespace HexGameEngine.MainMenu
             else if (att == CoreAttribute.Dodge)            
                 value = characterBuild.attributeSheet.dodge.value;
             
-            else if (att == CoreAttribute.Constituition)            
+            else if (att == CoreAttribute.Constitution)            
                 value = characterBuild.attributeSheet.constitution.value;
             
             else if (att == CoreAttribute.Resolve)            
@@ -496,7 +496,7 @@ namespace HexGameEngine.MainMenu
         {
             int dif = 0;
             dif += GetCharacterAttributeDifference(CoreAttribute.Might) ;
-            dif += GetCharacterAttributeDifference(CoreAttribute.Constituition) ;
+            dif += GetCharacterAttributeDifference(CoreAttribute.Constitution) ;
             dif += GetCharacterAttributeDifference(CoreAttribute.Accuracy) ;
             dif += GetCharacterAttributeDifference(CoreAttribute.Dodge) ;
             dif += GetCharacterAttributeDifference(CoreAttribute.Resolve) ;
@@ -513,7 +513,7 @@ namespace HexGameEngine.MainMenu
                 characterBuild.attributeSheet.accuracy.value -= 1;
             else if (row.Attribute == CoreAttribute.Dodge)
                 characterBuild.attributeSheet.dodge.value -= 1;
-            else if (row.Attribute == CoreAttribute.Constituition)
+            else if (row.Attribute == CoreAttribute.Constitution)
                 characterBuild.attributeSheet.constitution.value -= 1;
             else if (row.Attribute == CoreAttribute.Resolve)
                 characterBuild.attributeSheet.resolve.value -= 1;
@@ -530,7 +530,7 @@ namespace HexGameEngine.MainMenu
                 characterBuild.attributeSheet.accuracy.value += 1;
             else if (row.Attribute == CoreAttribute.Dodge)
                 characterBuild.attributeSheet.dodge.value += 1;
-            else if (row.Attribute == CoreAttribute.Constituition)
+            else if (row.Attribute == CoreAttribute.Constitution)
                 characterBuild.attributeSheet.constitution.value += 1;
             else if (row.Attribute == CoreAttribute.Resolve)
                 characterBuild.attributeSheet.resolve.value += 1;

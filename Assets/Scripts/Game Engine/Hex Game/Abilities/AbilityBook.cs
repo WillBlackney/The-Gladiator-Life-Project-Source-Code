@@ -110,6 +110,7 @@ namespace HexGameEngine.Abilities
                     // Characters dont gain special weapon ability if they have an off hand weapon
                     if (itemSet.offHandItem == null ||
                         (itemSet.offHandItem != null && d.weaponAbilityType == WeaponAbilityType.Basic) ||
+                        (itemSet.offHandItem != null && !itemSet.offHandItem.IsMeleeWeapon) ||
                         (itemSet.offHandItem != null && itemSet.offHandItem.weaponClass == itemSet.mainHandItem.weaponClass))
                     {
                         ret.Add(d);
@@ -141,32 +142,35 @@ namespace HexGameEngine.Abilities
         private AbilityData GetLoadoutAbilityDataFromItemSet(ItemSet itemSet)
         {
             AbilityData loadOutAbility = null;
-            // 2H melee: All In
+
+            // 2H melee: Heavy Blow
             if (itemSet.mainHandItem != null &&
                 itemSet.mainHandItem.IsMeleeWeapon &&
                 itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
             {
-
+                loadOutAbility = AbilityController.Instance.FindAbilityData("Heavy Blow");
             }
+
             // Dual wielding 1h: Twin Strike
-            if (itemSet.mainHandItem != null &&
+            else if (itemSet.mainHandItem != null &&
                 itemSet.mainHandItem.IsMeleeWeapon &&
                 itemSet.mainHandItem.handRequirement == HandRequirement.OneHanded &&
                 itemSet.offHandItem != null &&
                 itemSet.offHandItem.IsMeleeWeapon &&
                 itemSet.offHandItem.handRequirement == HandRequirement.OneHanded)
             {
-
+                loadOutAbility = AbilityController.Instance.FindAbilityData("Twin Strike");
             }
 
             // 1h melee weapon: shove
-            if (itemSet.mainHandItem != null &&
+            else if (itemSet.mainHandItem != null &&
                 itemSet.mainHandItem.IsMeleeWeapon &&
                 itemSet.mainHandItem.handRequirement == HandRequirement.OneHanded &&
                 itemSet.offHandItem == null)
             {
-
+                loadOutAbility = AbilityController.Instance.FindAbilityData("Shove");
             }
+
             return loadOutAbility;
         }
         public void HandleLearnAbilitiesFromItemSet(ItemSet itemSet)
