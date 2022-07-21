@@ -16,6 +16,7 @@ namespace HexGameEngine
         None = 0,
         Accuracy = 11,
         Aura = 6,
+        Armour = 30,
         BackStrike = 7,
         Constitution = 13,
         CriticalChance = 19,
@@ -43,6 +44,7 @@ namespace HexGameEngine
         Vision = 21,
         Wits = 29,
         ZoneOfControl = 18,
+        Might = 31,
         
     }
     public enum CoreAttribute
@@ -317,6 +319,7 @@ namespace HexGameEngine
         LoseHealthSelf = 17,
         MoveToTile = 6,
         MoveInLine = 7,
+        //RemoveArmour = 21,
         RemovePassiveTarget = 18,
         StressCheck = 9,
         SummonCharacter = 16,       
@@ -412,7 +415,8 @@ namespace HexGameEngine
         DivineFavour = 10,
         DragonAspect = 145,
         Eager = 19,
-        EagleEye = 9,        
+
+        TrueSight = 9,        
         EnrichedSoul = 54,       
        
         Evasion = 76,
@@ -425,6 +429,7 @@ namespace HexGameEngine
         Flight = 147,
         Focus = 75,
         Footwork = 13,
+        Fortified = 156,
         Frail = 94,
         FragileBinding = 85,            
         FlamingWeapon = 8,

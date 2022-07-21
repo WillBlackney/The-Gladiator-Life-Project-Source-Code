@@ -472,7 +472,11 @@ namespace HexGameEngine.Abilities
                 {
                     DamageResult damageResult = null;
                     damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(caster, target, ability, abilityEffect, didCrit);
-                    damageResult.didCrit = didCrit;                    
+                    damageResult.didCrit = didCrit;       
+                    
+                    // Resolve bonus armour damage
+                    if(abilityEffect.bonusArmourDamage > 0)                    
+                        HexCharacterController.Instance.ModifyArmour(target, abilityEffect.bonusArmourDamage);                    
 
                     // Do on hit visual effects for this ability
                     foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)                    
@@ -713,6 +717,10 @@ namespace HexGameEngine.Abilities
                     {
                         CombatController.Instance.CreateStressCheck(caster, StressEventType.LandedCriticalStrike);
                     }
+
+                    // Resolve bonus armour damage
+                    if (abilityEffect.bonusArmourDamage > 0)
+                        HexCharacterController.Instance.ModifyArmour(target, abilityEffect.bonusArmourDamage);
 
                     // Deal damage
                     CombatController.Instance.HandleDamage(caster, character, dResult, ability, abilityEffect, false, character.GetLastStackEventParent());
@@ -1723,7 +1731,7 @@ namespace HexGameEngine.Abilities
             if (caster.currentTile.Distance(target.currentTile) > stealthDistance &&
                 HexCharacterController.Instance.IsTargetFriendly(caster, target) == false &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stealth) &&                
-                !PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.EagleEye))
+                !PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.TrueSight))
                 bRet = false;
 
             return bRet;

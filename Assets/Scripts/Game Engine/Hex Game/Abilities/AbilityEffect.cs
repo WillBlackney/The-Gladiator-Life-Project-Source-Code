@@ -148,6 +148,16 @@ namespace HexGameEngine.Abilities
 
         [BoxGroup("Damage Settings")]
         [LabelWidth(200)]
+        [ShowIf("ShowIgnoreBlock")]
+        public bool ignoresArmour;
+
+        [BoxGroup("Damage Settings")]
+        [LabelWidth(200)]
+        [ShowIf("ShowIgnoreBlock")]
+        public int bonusArmourDamage;
+
+        [BoxGroup("Damage Settings")]
+        [LabelWidth(200)]
         [ShowIf("ShowGuaranteedHit")]
         public InjuryType[] injuryTypesCaused;
 

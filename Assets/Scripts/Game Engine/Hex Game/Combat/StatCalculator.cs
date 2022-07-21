@@ -889,7 +889,7 @@ namespace HexGameEngine
         public static int GetTotalVision(HexCharacterModel c)
         {
             int vision = c.attributeSheet.vision;
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.EagleEye))
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.TrueSight))
                 vision += 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Clairvoyant))
@@ -909,7 +909,7 @@ namespace HexGameEngine
         public static int GetTotalVision(HexCharacterData c)
         {
             int vision = c.attributeSheet.vision;
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.EagleEye))
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.TrueSight))
                 vision += 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Clairvoyant))

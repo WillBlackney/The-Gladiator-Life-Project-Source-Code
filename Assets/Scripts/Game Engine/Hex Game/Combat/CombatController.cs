@@ -32,7 +32,7 @@ namespace HexGameEngine.Combat
             get { return currentCombatState; }
             private set { currentCombatState = value; }
         }
-       
+
 
         #endregion
 
@@ -81,7 +81,7 @@ namespace HexGameEngine.Combat
         public DamageResult GetFinalDamageValueAfterAllCalculations(HexCharacterModel character, HexCharacterModel target, AbilityData ability, AbilityEffect effect, bool didCrit)
         {
             // Entry point for abilities not using a weapon
-            return ExecuteGetFinalDamageValueAfterAllCalculations(character, target, 0, ability, effect, null, 
+            return ExecuteGetFinalDamageValueAfterAllCalculations(character, target, 0, ability, effect, null,
                 GetFinalFinalDamageTypeOfAbility(character, effect, ability), didCrit);
 
         }
@@ -97,10 +97,13 @@ namespace HexGameEngine.Combat
             int lowerDamageFinal = baseDamage;
             int upperDamageFinal = baseDamage;
 
-            if(effect != null)
+            if (effect != null)
             {
                 lowerDamageFinal = effect.minBaseDamage;
                 upperDamageFinal = effect.maxBaseDamage;
+
+                // Check armour ignore from ability effect
+                //if(effect.ignoresArmour) igna
             }
 
             float damageModPercentageAdditive = 1f;
@@ -111,18 +114,18 @@ namespace HexGameEngine.Combat
             {
                 baseDamageFinal = RandomGenerator.NumberBetween(effect.minBaseDamage, effect.maxBaseDamage);
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Base damage drawn from ABILITY, roll result between " + effect.minBaseDamage.ToString() + " and " + effect.maxBaseDamage.ToString() +
-                    " = " + baseDamageFinal.ToString());               
+                    " = " + baseDamageFinal.ToString());
             }
 
             // Calculate might, magic and physical damage modifiers
             if (effect != null)
                 damageModPercentageAdditive += StatCalculator.GetTotalMight(attacker) * 0.01f;
 
-            if (effect != null && damageType == DamageType.Physical)            
+            if (effect != null && damageType == DamageType.Physical)
                 damageModPercentageAdditive += StatCalculator.GetTotalPhysicalDamageBonus(attacker) * 0.01f;
-            
-            else if (effect != null && damageType == DamageType.Magic)            
-                damageModPercentageAdditive += StatCalculator.GetTotalMagicDamageBonus(attacker) * 0.01f;            
+
+            else if (effect != null && damageType == DamageType.Magic)
+                damageModPercentageAdditive += StatCalculator.GetTotalMagicDamageBonus(attacker) * 0.01f;
 
             // Add critical modifier to damage mod
             if (didCrit && attacker != null)
@@ -132,7 +135,7 @@ namespace HexGameEngine.Combat
             }
 
             // Check 'bully' bonus
-            if (attacker != null && 
+            if (attacker != null &&
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Bully) &&
                 target != null &&
                 (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stunned) ||
@@ -217,10 +220,10 @@ namespace HexGameEngine.Combat
             // Check damage mod effect from ability effect
             if (effect != null)
             {
-                foreach(DamageEffectModifier dMod in effect.damageEffectModifiers)
+                foreach (DamageEffectModifier dMod in effect.damageEffectModifiers)
                 {
                     // Health missing self
-                    if(dMod.type == DamageEffectModifierType.AddHealthMissingOnSelfToDamage && attacker != null)
+                    if (dMod.type == DamageEffectModifierType.AddHealthMissingOnSelfToDamage && attacker != null)
                     {
                         // Get total max health missing percentage
                         float healthMissing = StatCalculator.GetTotalMaxHealth(attacker) - attacker.currentHealth;
@@ -248,7 +251,7 @@ namespace HexGameEngine.Combat
                     }
 
                     // Caster perks added to damage
-                    if (dMod.type == DamageEffectModifierType.ExtraDamageIfCasterHasSpecificPerk && attacker != null )
+                    if (dMod.type == DamageEffectModifierType.ExtraDamageIfCasterHasSpecificPerk && attacker != null)
                     {
                         float perkStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(attacker.pManager, dMod.perk);
                         damageModPercentageAdditive += dMod.bonusDamageModifier * perkStacks;
@@ -264,11 +267,11 @@ namespace HexGameEngine.Combat
                     }
                 }
             }
-            
+
             Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Base damage BEFORE applying final additive modifiers: " + baseDamageFinal.ToString());
 
             // Apply additive damage modifier to base damage (+min and max limits for ability description panels)
-            baseDamageFinal = (int) (baseDamageFinal * damageModPercentageAdditive);
+            baseDamageFinal = (int)(baseDamageFinal * damageModPercentageAdditive);
             lowerDamageFinal = (int)(lowerDamageFinal * damageModPercentageAdditive);
             upperDamageFinal = (int)(upperDamageFinal * damageModPercentageAdditive);
 
@@ -276,10 +279,10 @@ namespace HexGameEngine.Combat
 
             // TO DO : Properly calculate effect of magic/physical resistance when these stats are negative, and therefore should INCREASE the damage
             // Resistance Modifiers + multiplicative modifiers
-            if (target != null && damageType == DamageType.Physical )
+            if (target != null && damageType == DamageType.Physical)
             {
                 float mod = (100 - StatCalculator.GetTotalPhysicalResistance(target)) * 0.01f;
-                baseDamageFinal = (int) (baseDamageFinal * mod);
+                baseDamageFinal = (int)(baseDamageFinal * mod);
                 lowerDamageFinal = (int)(lowerDamageFinal * mod);
                 upperDamageFinal = (int)(upperDamageFinal * mod);
             }
@@ -292,9 +295,9 @@ namespace HexGameEngine.Combat
             }
 
             Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Base damage AFTER applying final multiplicative modifiers + resistance: " + baseDamageFinal.ToString());
-            
+
             // Metamorph talent passive
-            if(target != null &&
+            if (target != null &&
                 CharacterDataController.Instance.DoesCharacterHaveTalent(target.talentPairings, TalentSchool.Metamorph, 1))
             {
                 int reduction = CharacterDataController.Instance.GetCharacterTalentLevel(target.talentPairings, TalentSchool.Metamorph);
@@ -313,7 +316,7 @@ namespace HexGameEngine.Combat
             resultReturned.damageUpperLimit = upperDamageFinal;
 
             Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Final health damage = " + resultReturned.totalDamage.ToString());
-           
+
             return resultReturned;
         }
         #endregion
@@ -334,7 +337,7 @@ namespace HexGameEngine.Combat
             // Get data
             foreach (StressEventSO d in allStressEventData)
             {
-                if(d.Type == eventType)
+                if (d.Type == eventType)
                 {
                     data = d;
                     break;
@@ -342,7 +345,7 @@ namespace HexGameEngine.Combat
             }
 
             // Check data was actually found
-            if(data == null) return;
+            if (data == null) return;
 
             // Calculate total resolve + roll for 'Irrational' perk.
             int characterResolve = StatCalculator.GetTotalStressResistance(character);
@@ -368,10 +371,10 @@ namespace HexGameEngine.Combat
                 requiredRoll = 5;
 
             Debug.Log("CreateStressCheck() Stress event stats: Roll = " + roll.ToString() + ", Stress Resistance modifier: " + resolveMod.ToString() +
-             ", Required roll to pass: " + requiredRoll.ToString());           
+             ", Required roll to pass: " + requiredRoll.ToString());
 
             // Negative event roll failure + positive event roll success
-            if(roll <= requiredRoll)
+            if (roll <= requiredRoll)
             {
                 Debug.Log("Character rolled below the required roll threshold, applying effects of stress event...");
                 int finalStressAmount = RandomGenerator.NumberBetween(data.StressAmountMin, data.StressAmountMax);
@@ -425,7 +428,7 @@ namespace HexGameEngine.Combat
             if (requiredRoll > 95)
                 requiredRoll = 95;
             if (requiredRoll < 5)
-                requiredRoll = 5;           
+                requiredRoll = 5;
 
             // negative event roll failure + positice event roll success
             if (roll <= requiredRoll)
@@ -481,7 +484,7 @@ namespace HexGameEngine.Combat
         }
         public int[] GetStressStateRanges(StressState state)
         {
-            if (state == StressState.Confident) return new int[2]{ 0, 24};
+            if (state == StressState.Confident) return new int[2] { 0, 24 };
             else if (state == StressState.Nervous) return new int[2] { 25, 49 };
             else if (state == StressState.Wavering) return new int[2] { 50, 74 };
             else if (state == StressState.Panicking) return new int[2] { 75, 99 };
@@ -505,7 +508,7 @@ namespace HexGameEngine.Combat
             int severeThreshold = (int)(StatCalculator.GetTotalMaxHealth(character) * 0.25f);
 
             Debug.Log("CheckAndHandleInjuryOnHealthLost() called on character " + character.myName +
-               ", Rolled = : " + roll.ToString() + "/1000" + 
+               ", Rolled = : " + roll.ToString() + "/1000" +
                ", injury probability = " + (injuryChanceActual / 10).ToString() + "%" +
                ", health lost = " + damageResult.totalDamage +
                ", injury thresholds: Mild = " + mildThreshold.ToString() + " or more, Severe = " + severeThreshold.ToString() + " or more.");
@@ -515,16 +518,16 @@ namespace HexGameEngine.Combat
             //
 
             // Did character even lose enough health to trigger an injury?
-            if (damageResult.totalDamage < mildThreshold) return;            
+            if (damageResult.totalDamage < mildThreshold) return;
 
             // Character successfully resisted the injury
-            if(roll > injuryChanceActual)
+            if (roll > injuryChanceActual)
             {
                 Debug.Log("CheckAndHandleInjuryOnHealthLost() character successfully resisted the injury, rolled " + roll.ToString() +
                     ", needed less than " + injuryChanceActual.ToString());
                 return;
             }
-            else if(roll <= injuryChanceActual)
+            else if (roll <= injuryChanceActual)
             {
                 Debug.Log("CheckAndHandleInjuryOnHealthLost() character failed to resist the injury, rolled " + roll.ToString() +
                     ", needed more than " + injuryChanceActual.ToString());
@@ -535,12 +538,12 @@ namespace HexGameEngine.Combat
                 // Injury is severe if character lost at least 30% health, or if the attack was a critical
                 if (damageResult.totalDamage >= severeThreshold ||
                     damageResult.didCrit) severity = InjurySeverity.Severe;
-                else if(damageResult.totalDamage >= mildThreshold)
+                else if (damageResult.totalDamage >= mildThreshold)
                     severity = InjurySeverity.Mild;
 
                 // Determine injury type based on the weapon used, or the ability (if it doesnt require a weapon e.g. fireball)
                 InjuryType injuryType = InjuryType.Blunt;
-                if(ability.weaponRequirement == WeaponRequirement.None && 
+                if (ability.weaponRequirement == WeaponRequirement.None &&
                     effect != null)
                 {
                     // Get injury type from ability effect
@@ -553,7 +556,7 @@ namespace HexGameEngine.Combat
                 {
                     // Get injury type from weapon used
                     ItemData weaponUsed = attacker.itemSet.mainHandItem;
-                    
+
                     // Check if injury type should be drawn from the shield instead
                     if (ability.weaponRequirement == WeaponRequirement.Shield)
                         weaponUsed = attacker.itemSet.offHandItem;
@@ -596,7 +599,7 @@ namespace HexGameEngine.Combat
                         foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllEnemiesOfCharacter(character))
                         {
                             // Check squeamish trait
-                            if(PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Squeamish))
+                            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Squeamish))
                             {
                                 CreateStressCheck(c, StressEventType.AllyInjured);
                             }
@@ -607,7 +610,7 @@ namespace HexGameEngine.Combat
                 }
 
             }
-            
+
         }
 
         #endregion
@@ -653,13 +656,13 @@ namespace HexGameEngine.Combat
                 // Check flanking bonus
                 int flankingMod = HexCharacterController.Instance.CalculateFlankingHitChanceModifier(attacker, target);
                 if (flankingMod != 0) ret.details.Add(new HitChanceDetailData("Flanking Bonus", flankingMod));
-            }            
+            }
 
             // Check elevation bonus
             int elevationMod = HexCharacterController.Instance.CalculateElevationAccuracyModifier(attacker, target);
             if (elevationMod != 0)
             {
-                if(elevationMod < 0)
+                if (elevationMod < 0)
                 {
                     ret.details.Add(new HitChanceDetailData("Elevation Penalty", elevationMod));
                 }
@@ -676,7 +679,7 @@ namespace HexGameEngine.Combat
                 if (HexCharacterController.Instance.IsCharacterEngagedInMelee(attacker))
                     ret.details.Add(new HitChanceDetailData("Shooting From Melee", -20));
 
-                if(HexCharacterController.Instance.IsCharacterEngagedInMelee(target))
+                if (HexCharacterController.Instance.IsCharacterEngagedInMelee(target))
                     ret.details.Add(new HitChanceDetailData("Target in Melee", -10));
             }
 
@@ -685,7 +688,7 @@ namespace HexGameEngine.Combat
             {
                 int innateBonus = ability.hitChanceModifier;
                 if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Ability Bonus", innateBonus));
-            }             
+            }
 
             // Warfare talent bonus
             if (ability != null &&
@@ -694,7 +697,7 @@ namespace HexGameEngine.Combat
             {
                 int warfareBonus = CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Warfare) * 5;
                 if (warfareBonus != 0) ret.details.Add(new HitChanceDetailData("Warfare Talent", warfareBonus));
-            }               
+            }
 
 
             // ranger talent bonus
@@ -764,12 +767,12 @@ namespace HexGameEngine.Combat
             if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.TurtleAspect))
                 result = HitRollResult.Hit;*/
 
-            if(hitRoll <= hitData.FinalHitChance || hitData.guaranteedHit)            
-                result = HitRollResult.Hit;            
-            else            
-                result = HitRollResult.Miss;            
+            if (hitRoll <= hitData.FinalHitChance || hitData.guaranteedHit)
+                result = HitRollResult.Hit;
+            else
+                result = HitRollResult.Miss;
 
-            HitRoll rollReturned = new HitRoll(hitRoll, result, attacker, target);         
+            HitRoll rollReturned = new HitRoll(hitRoll, result, attacker, target);
 
             return rollReturned;
         }
@@ -780,7 +783,7 @@ namespace HexGameEngine.Combat
             float critChance = StatCalculator.GetTotalCriticalChance(attacker);
 
             // Check combo
-            if(PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Combo) &&
+            if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Combo) &&
                 ability != null)
             {
                 return true;
@@ -823,7 +826,7 @@ namespace HexGameEngine.Combat
 
             if (effect != null)
             {
-                foreach(DamageEffectModifier d in effect.damageEffectModifiers)
+                foreach (DamageEffectModifier d in effect.damageEffectModifiers)
                 {
                     // target has specific perk
                     if (d.type == DamageEffectModifierType.ExtraCriticalChanceIfTargetHasSpecificPerk &&
@@ -843,7 +846,7 @@ namespace HexGameEngine.Combat
                 }
             }
 
-            critChance *= 10f; 
+            critChance *= 10f;
             Debug.Log("RollForCrit() critical chance = " + (critChance / 10f).ToString() + "%. Roll result from 1-1000: " + critRoll.ToString());
 
 
@@ -874,16 +877,16 @@ namespace HexGameEngine.Combat
             if (attacker != null &&
                 CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Shadowcraft, 1))
                 totalResistance -= CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Shadowcraft) * 15;
-            
+
             // Roll for resist
             int roll = RandomGenerator.NumberBetween(1, 100);
-            if(roll <= totalResistance)            
-                didResist = true;            
+            if (roll <= totalResistance)
+                didResist = true;
 
             Debug.Log("Target rolled " + roll.ToString() + " and needed " + totalResistance.ToString() + " or less. Resisted = " + didResist.ToString());
             return didResist;
-        }        
-      
+        }
+
         #endregion
 
         // Handle Damage + Entry Points
@@ -906,7 +909,7 @@ namespace HexGameEngine.Combat
             int totalArmourLost = 0;
 
             // Damage that completely skips armour check
-            if (ignoreArmour)
+            if (ignoreArmour || (effect != null && effect.ignoresArmour))
             {
                 totalHealthLost = damageResult.totalDamage;
                 damageResult.totalHealthLost = totalHealthLost;

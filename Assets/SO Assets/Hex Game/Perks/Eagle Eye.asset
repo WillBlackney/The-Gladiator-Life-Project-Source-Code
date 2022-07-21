@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Eagle Eye
   m_EditorClassIdentifier: 
   passiveSprite: {fileID: 21300000, guid: 9975ae6ee3594a744abda0ad6f91c1ae, type: 3}
-  passiveName: Eagle Eye
+  passiveName: True Sight
   perkTag: 9
   passiveDescription:
   - color: 1
@@ -48,6 +48,8 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: turns.
+  passiveItalicDescription: 
+  effectDetailTabs: []
   maxAllowedStacks: 2
   showStackCount: 1
   hiddenOnPassivePanel: 0
@@ -66,7 +68,7 @@ MonoBehaviour:
   race: 0
   isBackground: 0
   backgroundPerkQuality: 0
-  perksRemovedOnThisApplication: 04000000
+  perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
   visualEventsOnApplication: []

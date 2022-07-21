@@ -91,10 +91,12 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 8
-    maxBaseDamage: 12
+    minBaseDamage: 18
+    maxBaseDamage: 22
     guaranteedHit: 0
     ignoresBlock: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 10
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -106,45 +108,7 @@ MonoBehaviour:
       passiveStacks: 0
     perkApplicationChance: 100
     knockBackDistance: 0
-  onHitEffects:
-  - effectType: 18
-    stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
-      successChance: 0
-    energyGained: 0
-    normalTeleportVFX: 1
-    tilesMoved: 0
-    lineLength: 0
-    healthGained: 0
-    healthLost: 0
-    requirements: []
-    chainedEffect: 0
-    triggersChainEffectSequence: 0
-    visualEventsOnStart: []
-    visualEventsOnHit: []
-    visualEventsOnEffectFinish: []
-    aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
-    damageType: 0
-    minBaseDamage: 0
-    maxBaseDamage: 0
-    guaranteedHit: 0
-    ignoresBlock: 0
-    injuryTypesCaused: 
-    damageEffectModifiers: []
-    characterSummoned: {fileID: 0}
-    modelFadeInSpeed: 0
-    uiFadeInSpeed: 0
-    summonedCreatureVisualEvents: []
-    perkPairing:
-      perkTag: 74
-      passiveStacks: 3
-    perkApplicationChance: 100
-    knockBackDistance: 0
+  onHitEffects: []
   onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
@@ -154,7 +118,19 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Deal '
+    phrase: 'Remove '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '10 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Armour '
+  - color: 0
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'from an enemy, then deal '
   - color: 2
     getPhraseFromAbilityValue: 1
     abilityEffectType: 2
@@ -166,15 +142,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'damage and remove all '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'Block '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: from target.
+    phrase: damage.
   keyWords:
-  - kewWordType: 3
+  - kewWordType: 30
     passiveType: 0
