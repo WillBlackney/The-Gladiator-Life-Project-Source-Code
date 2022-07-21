@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Decapitate
   includeInGame: 1
-  baseAbilityDescription: Deal 75% weapon damage to an enemy. Damage is increased
+  baseAbilityDescription: Deal 100% weapon damage to an enemy. Damage is increased
     by 1% for each point of health target has lost.
   abilitySprite: {fileID: 21300000, guid: a9dc6980304bfa94798c01c1c961aa49, type: 3}
-  energyCost: 3
+  energyCost: 4
   baseCooldown: 2
   abilityType: 2
   doesNotBreakStealth: 0
   weaponRequirement: 1
   derivedFromWeapon: 1
+  derivedFromItemLoadout: 0
   weaponAbilityType: 2
   weaponClass: 3
   targetRequirement: 3
@@ -33,6 +34,7 @@ MonoBehaviour:
     level: 0
   abilitySubRequirements: []
   baseRange: 1
+  gainRangeBonusFromVision: 0
   hitChanceModifier: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
@@ -104,8 +106,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 13
-    maxBaseDamage: 17
+    minBaseDamage: 18
+    maxBaseDamage: 22
     guaranteedHit: 0
     ignoresBlock: 0
     injuryTypesCaused: 
@@ -125,6 +127,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -162,6 +165,4 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: missing on the target.
-  keyWords:
-  - kewWordType: 3
-    passiveType: 0
+  keyWords: []

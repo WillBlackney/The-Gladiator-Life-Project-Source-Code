@@ -106,6 +106,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 1
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -128,7 +129,5 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: tile.
   keyWords:
-  - kewWordType: 5
-    passiveType: 0
   - kewWordType: 23
     passiveType: 0

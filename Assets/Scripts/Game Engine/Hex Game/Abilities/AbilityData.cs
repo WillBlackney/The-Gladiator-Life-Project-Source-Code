@@ -38,6 +38,7 @@ namespace HexGameEngine.Abilities
 
         public List<AbilityEffect> abilityEffects;
         public List<AbilityEffect> onHitEffects;
+        public List<AbilityEffect> onCritEffects;
         public List<AbilityEffect> onPerkAppliedSuccessEffects;
         public List<AbilityEffect> onCollisionEffects;
         public List<CustomString> dynamicDescription;

@@ -22,6 +22,7 @@ MonoBehaviour:
   doesNotBreakStealth: 0
   weaponRequirement: 3
   derivedFromWeapon: 1
+  derivedFromItemLoadout: 0
   weaponAbilityType: 1
   weaponClass: 11
   targetRequirement: 3
@@ -120,6 +121,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -141,6 +143,4 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: damage to an enemy.
-  keyWords:
-  - kewWordType: 4
-    passiveType: 0
+  keyWords: []

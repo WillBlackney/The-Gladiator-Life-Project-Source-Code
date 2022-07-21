@@ -208,6 +208,11 @@ namespace HexGameEngine.Abilities
             {
                 a.onHitEffects.Add(ObjectCloner.CloneJSON(effect));
             }
+            a.onCritEffects = new List<AbilityEffect>();
+            foreach (AbilityEffect effect in d.onCritEffects)
+            {
+                a.onCritEffects.Add(ObjectCloner.CloneJSON(effect));
+            }
             a.onPerkAppliedSuccessEffects = new List<AbilityEffect>();
             foreach (AbilityEffect effect in d.onPerkAppliedSuccessEffects)
             {
@@ -496,13 +501,24 @@ namespace HexGameEngine.Abilities
                         }
                     }
 
-                    // Trigger on hit effects
+                    // Trigger on hit/crit effects
                     if (abilityEffect.chainedEffect == false)
                     {
-                        foreach (AbilityEffect e in ability.onHitEffects)
+                        if (didCrit)
                         {
-                            TriggerAbilityEffect(ability, e, caster, target, tileTarget);
+                            foreach (AbilityEffect e in ability.onCritEffects)
+                            {
+                                TriggerAbilityEffect(ability, e, caster, target, tileTarget);
+                            }
                         }
+                        else
+                        {
+                            foreach (AbilityEffect e in ability.onHitEffects)
+                            {
+                                TriggerAbilityEffect(ability, e, caster, target, tileTarget);
+                            }
+                        }
+                       
                     }
 
                     // trigger chain effect here?
@@ -714,10 +730,20 @@ namespace HexGameEngine.Abilities
                         }
                     }
 
-                    // Trigger on hit effects
-                    foreach (AbilityEffect e in ability.onHitEffects)
+                    // Trigger on hit/crit effects
+                    if (didCrit)
                     {
-                        TriggerAbilityEffect(ability, e, caster, character, tileTarget);
+                        foreach (AbilityEffect e in ability.onCritEffects)
+                        {
+                            TriggerAbilityEffect(ability, e, caster, character, tileTarget);
+                        }
+                    }
+                    else
+                    {
+                        foreach (AbilityEffect e in ability.onHitEffects)
+                        {
+                            TriggerAbilityEffect(ability, e, caster, character, tileTarget);
+                        }
                     }
                 }
 
@@ -1908,8 +1934,20 @@ namespace HexGameEngine.Abilities
                                 break;
                             }
                         }
+                    }
 
-
+                    // Check on hit effects for matching effects if couldnt find them in "abilities effects" list
+                    if (matchingEffect == null)
+                    {
+                        foreach (AbilityEffect effect in ability.onCritEffects)
+                        {
+                            if (effect.effectType == cs.abilityEffectType)
+                            {
+                                // Found a match, cache it and break
+                                matchingEffect = effect;
+                                break;
+                            }
+                        }
                     }
                     // Check on collision effects for matching effects if couldnt find them in "abilities effects" list
                     if (matchingEffect == null)

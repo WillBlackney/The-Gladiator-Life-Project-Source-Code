@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Clobber
   includeInGame: 1
-  baseAbilityDescription: Deal 100% damage to target and Knock Back 1 tile.
+  baseAbilityDescription: Deal 100% damage to target. On a Critical Strike, the target
+    is Knocked Back 1 tile.
   abilitySprite: {fileID: 21300000, guid: 29798da6155f8ca40b07c4f5cefb99d4, type: 3}
   energyCost: 4
-  baseCooldown: 2
+  baseCooldown: 0
   abilityType: 2
   doesNotBreakStealth: 0
   weaponRequirement: 1
   derivedFromWeapon: 1
+  derivedFromItemLoadout: 0
   weaponAbilityType: 1
   weaponClass: 6
   targetRequirement: 3
@@ -104,7 +106,8 @@ MonoBehaviour:
       passiveStacks: 0
     perkApplicationChance: 100
     knockBackDistance: 2
-  onHitEffects:
+  onHitEffects: []
+  onCritEffects:
   - effectType: 5
     stressEventData:
       stressAmountMin: 0
@@ -163,11 +166,19 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'damage to an enemy and '
+    phrase: 'damage to an enemy. On a '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Knock Back '
+    phrase: Critical Strike
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', the target is '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Knocked Back '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -177,7 +188,7 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: tile.
   keyWords:
-  - kewWordType: 3
-    passiveType: 0
   - kewWordType: 23
+    passiveType: 0
+  - kewWordType: 20
     passiveType: 0

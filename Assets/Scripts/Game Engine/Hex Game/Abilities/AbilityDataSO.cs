@@ -131,6 +131,9 @@ namespace HexGameEngine.Abilities
         public List<AbilityEffect> onHitEffects;
         [VerticalGroup("Ability Effects")]
         [LabelWidth(200)]
+        public List<AbilityEffect> onCritEffects;
+        [VerticalGroup("Ability Effects")]
+        [LabelWidth(200)]
         public List<AbilityEffect> onPerkAppliedSuccessEffects;
         [VerticalGroup("Ability Effects")]
         [LabelWidth(200)]
