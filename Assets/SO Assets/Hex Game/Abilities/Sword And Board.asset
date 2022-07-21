@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Sword And Board
   includeInGame: 1
-  baseAbilityDescription: Deal 100% Weapon damage to target and gain 1 Block.
+  baseAbilityDescription: Deal 125% Weapon damage to target and gain 1 Block.
   abilitySprite: {fileID: 21300000, guid: 233bcd20846a9d34882266c08b8b78d3, type: 3}
   energyCost: 4
   baseCooldown: 2
@@ -22,6 +22,7 @@ MonoBehaviour:
   doesNotBreakStealth: 0
   weaponRequirement: 4
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 3
@@ -104,8 +105,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 18
-    maxBaseDamage: 22
+    minBaseDamage: 23
+    maxBaseDamage: 27
     guaranteedHit: 0
     ignoresBlock: 0
     injuryTypesCaused: 
@@ -173,6 +174,7 @@ MonoBehaviour:
       passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -207,7 +209,5 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: .
   keyWords:
-  - kewWordType: 3
-    passiveType: 0
   - kewWordType: 1
     passiveType: 74

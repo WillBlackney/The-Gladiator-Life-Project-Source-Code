@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Ignite
   includeInGame: 1
-  baseAbilityDescription: Apply 2 Burning to target.
+  baseAbilityDescription: Apply 2 Burning to an enemy.
   abilitySprite: {fileID: 21300000, guid: d28e42559cd7ee04c874b492f4088cf6, type: 3}
-  energyCost: 3
+  energyCost: 4
   baseCooldown: 1
   abilityType: 1
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 3
@@ -105,6 +106,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -127,7 +129,5 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: to an enemy.
   keyWords:
-  - kewWordType: 5
-    passiveType: 0
   - kewWordType: 1
     passiveType: 1

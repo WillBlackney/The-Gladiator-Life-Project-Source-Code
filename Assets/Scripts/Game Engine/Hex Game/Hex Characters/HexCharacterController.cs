@@ -1356,6 +1356,24 @@ namespace HexGameEngine.Characters
                     VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
                 }
 
+                // Hymn of Courage
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.HymnOfCourage) && character.currentHealth > 0)
+                {
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                       VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Courage!"), QueuePosition.Back, 0f, 0.5f);
+
+                    List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
+                    foreach (HexCharacterModel ally in allies)
+                    {
+                        Vector3 pos = ally.hexCharacterView.WorldPosition;
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Courage, 1, true, 0, character.pManager);
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                            VisualEffectManager.Instance.CreateGeneralBuffEffect(pos));
+                    }
+
+                    VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                }
+
                 // Hymn of Purity
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.HymnOfPurity) && character.currentHealth > 0)
                 {

@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Guardian Angel
   includeInGame: 1
-  baseAbilityDescription: Give 2 Rune to self or an ally.
+  baseAbilityDescription: Give 1 Rune to self or an ally.
   abilitySprite: {fileID: 21300000, guid: 31463702aa3acbb438fd301ccddb6488, type: 3}
-  energyCost: 5
-  baseCooldown: 3
+  energyCost: 3
+  baseCooldown: 2
   abilityType: 1
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 2
@@ -101,10 +102,11 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 26
-      passiveStacks: 2
+      passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -113,11 +115,11 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Give '
+    phrase: 'Apply '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '2 '
+    phrase: '1 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -127,7 +129,5 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: to self or an ally.
   keyWords:
-  - kewWordType: 5
-    passiveType: 0
   - kewWordType: 1
     passiveType: 26

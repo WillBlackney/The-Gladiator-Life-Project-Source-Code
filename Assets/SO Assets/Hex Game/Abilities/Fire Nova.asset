@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Fire Nova
   includeInGame: 1
-  baseAbilityDescription: Deal 50% Magic damage and apply Burning to all characters
+  baseAbilityDescription: Deal 50% Magic damage and apply 2 Burning to all characters
     within your Aura.
   abilitySprite: {fileID: 21300000, guid: 47e5b56c2b8c33d4aa7fbe97403d9708, type: 3}
-  energyCost: 3
-  baseCooldown: 1
+  energyCost: 4
+  baseCooldown: 2
   abilityType: 1
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 0
@@ -33,6 +34,7 @@ MonoBehaviour:
     level: 1
   abilitySubRequirements: []
   baseRange: 0
+  gainRangeBonusFromVision: 0
   hitChanceModifier: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
@@ -185,9 +187,10 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 1
-      passiveStacks: 1
+      passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -230,8 +233,6 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: .
   keyWords:
-  - kewWordType: 5
-    passiveType: 0
   - kewWordType: 1
     passiveType: 1
   - kewWordType: 6

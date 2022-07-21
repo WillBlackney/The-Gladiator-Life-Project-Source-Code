@@ -18,11 +18,12 @@ MonoBehaviour:
     by 1% for each point of health you have lost.
   abilitySprite: {fileID: 21300000, guid: 9fdb7221a4198b6468f04eac78cdfb71, type: 3}
   energyCost: 4
-  baseCooldown: 1
+  baseCooldown: 2
   abilityType: 2
   doesNotBreakStealth: 0
   weaponRequirement: 1
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 3
@@ -33,6 +34,7 @@ MonoBehaviour:
     level: 1
   abilitySubRequirements: []
   baseRange: 1
+  gainRangeBonusFromVision: 0
   hitChanceModifier: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
@@ -125,6 +127,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0

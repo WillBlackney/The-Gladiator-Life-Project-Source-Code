@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Hymn Of Courage
   includeInGame: 1
-  baseAbilityDescription: At the end of each turn, give 1 Block to allies within
+  baseAbilityDescription: At the end of each turn, give 1 Courage to allies within
     your Aura. Only one hymn may be active at a time.
   abilitySprite: {fileID: 21300000, guid: 312c01fedda28d245886da5f6545c6f3, type: 3}
   energyCost: 6
-  baseCooldown: 2
+  baseCooldown: 1
   abilityType: 1
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 0
@@ -121,6 +122,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0

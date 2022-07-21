@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Throwing Knife
   includeInGame: 1
-  baseAbilityDescription: Deal 100% weapon damage to an enemy and apply 1 Bleeding.
+  baseAbilityDescription: Deal 125% weapon damage to an enemy and apply 2 Bleeding.
     No Accuracy penalty when used in melee.
   abilitySprite: {fileID: 21300000, guid: c0dc47eec4b755941a3b7abef52cd326, type: 3}
   energyCost: 4
-  baseCooldown: 1
+  baseCooldown: 2
   abilityType: 3
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 3
@@ -120,8 +121,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 18
-    maxBaseDamage: 22
+    minBaseDamage: 23
+    maxBaseDamage: 27
     guaranteedHit: 0
     ignoresBlock: 0
     injuryTypesCaused: 
@@ -186,9 +187,10 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 7
-      passiveStacks: 1
+      passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -213,7 +215,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '1 '
+    phrase: '2 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -221,7 +223,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '. Has no '
+    phrase: '. Suffers no '
   - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -231,7 +233,7 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: penalty when used in melee.
   keyWords:
-  - kewWordType: 4
-    passiveType: 0
   - kewWordType: 1
     passiveType: 7
+  - kewWordType: 11
+    passiveType: 0

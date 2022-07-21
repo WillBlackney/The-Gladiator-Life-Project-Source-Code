@@ -22,6 +22,7 @@ MonoBehaviour:
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 3
@@ -105,6 +106,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects:
   - effectType: 1
     stressEventData:
@@ -192,8 +194,6 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: .
   keyWords:
-  - kewWordType: 5
-    passiveType: 0
   - kewWordType: 1
     passiveType: 49
   - kewWordType: 1

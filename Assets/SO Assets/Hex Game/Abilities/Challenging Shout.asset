@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Challenging Shout
   includeInGame: 1
-  baseAbilityDescription: Gain 2 Taunt
+  baseAbilityDescription: Gain 1 Taunt
   abilitySprite: {fileID: 21300000, guid: 637f256bd6160484b89e9eb605128016, type: 3}
-  energyCost: 4
-  baseCooldown: 4
+  energyCost: 3
+  baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 0
@@ -32,6 +33,7 @@ MonoBehaviour:
     level: 1
   abilitySubRequirements: []
   baseRange: 0
+  gainRangeBonusFromVision: 0
   hitChanceModifier: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
@@ -100,10 +102,11 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 78
-      passiveStacks: 2
+      passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -116,7 +119,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '2 '
+    phrase: '1 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -126,7 +129,5 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: .
   keyWords:
-  - kewWordType: 5
-    passiveType: 0
   - kewWordType: 1
     passiveType: 78

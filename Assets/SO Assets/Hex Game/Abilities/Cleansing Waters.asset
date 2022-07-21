@@ -17,11 +17,12 @@ MonoBehaviour:
   baseAbilityDescription: Give an ally 1 Block and remove Burning, Bleeding and Poisoned.
   abilitySprite: {fileID: 21300000, guid: 4131713cd1d11d54aa11c32344e1c8d8, type: 3}
   energyCost: 3
-  baseCooldown: 1
+  baseCooldown: 2
   abilityType: 1
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 1
@@ -285,6 +286,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -331,8 +333,6 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: .
   keyWords:
-  - kewWordType: 5
-    passiveType: 0
   - kewWordType: 1
     passiveType: 74
   - kewWordType: 1

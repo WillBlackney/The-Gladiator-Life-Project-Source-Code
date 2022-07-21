@@ -23,6 +23,7 @@ MonoBehaviour:
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 3
@@ -144,6 +145,7 @@ MonoBehaviour:
       passiveStacks: 0
     perkApplicationChance: 100
     knockBackDistance: 1
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -180,7 +182,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'tile. Has no '
+    phrase: 'tile. Suffers no '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -190,7 +192,5 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: penalty when used in melee.
   keyWords:
-  - kewWordType: 4
-    passiveType: 0
   - kewWordType: 23
     passiveType: 0

@@ -22,6 +22,7 @@ MonoBehaviour:
   doesNotBreakStealth: 0
   weaponRequirement: 1
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 0
@@ -32,6 +33,7 @@ MonoBehaviour:
     level: 1
   abilitySubRequirements: []
   baseRange: 0
+  gainRangeBonusFromVision: 0
   hitChanceModifier: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
@@ -142,6 +144,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -176,8 +179,6 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: .
   keyWords:
-  - kewWordType: 5
-    passiveType: 0
   - kewWordType: 1
     passiveType: 76
   - kewWordType: 1

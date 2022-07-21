@@ -200,7 +200,7 @@ namespace HexGameEngine.Combat
             // Turtle Aspect
             if (target != null && PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.TurtleAspect))
             {
-                damageModPercentageAdditive -= 0.1f;
+                damageModPercentageAdditive -= 0.15f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Turtle Aspect modifier = " + damageModPercentageAdditive.ToString());
             }
 
@@ -377,6 +377,7 @@ namespace HexGameEngine.Combat
                 int finalStressAmount = RandomGenerator.NumberBetween(data.StressAmountMin, data.StressAmountMax);
 
                 // Check Hymn Of Courage perk: reduce stress gained by 50%
+                /*
                 foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(character))
                 {
                     if (finalStressAmount > 0 &&
@@ -387,6 +388,7 @@ namespace HexGameEngine.Combat
                         break;
                     }
                 }
+                */
 
                 HexCharacterController.Instance.ModifyStress(character, finalStressAmount, true, true);
             }
@@ -432,6 +434,7 @@ namespace HexGameEngine.Combat
                 int finalStressAmount = RandomGenerator.NumberBetween(data.stressAmountMin, data.stressAmountMax);
 
                 // Check Hymn Of Courage perk: reduce stress gained by 50%
+                /*
                 foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(character))
                 {
                     if (finalStressAmount > 0 &&
@@ -442,6 +445,7 @@ namespace HexGameEngine.Combat
                         break;
                     }
                 }
+                */
                 HexCharacterController.Instance.ModifyStress(character, finalStressAmount, true, showVFX);
             }
 
@@ -814,7 +818,7 @@ namespace HexGameEngine.Combat
                 ability != null &&
                 ability.abilityType == AbilityType.MeleeAttack)
             {
-                critChance += 100;
+                critChance += 150;
             }
 
             if (effect != null)
@@ -1029,6 +1033,7 @@ namespace HexGameEngine.Combat
             }
 
             // Tiger Aspect => apply bleeding
+            /*
             if (target.currentHealth > 0 &&
                 target.livingState == LivingState.Alive &&
                 attacker != null &&
@@ -1038,7 +1043,7 @@ namespace HexGameEngine.Combat
             {
                 Debug.Log("ExecuteHandleDamage() attacker has Tiger Aspect, applying bleeding on target");
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Bleeding, 1, true, 0.5f, attacker.pManager);
-            }
+            }*/
 
             // Thorns
             if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Thorns) &&

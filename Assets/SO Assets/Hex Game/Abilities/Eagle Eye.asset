@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Eagle Eye
   includeInGame: 1
-  baseAbilityDescription: Give 2 Focus to self or an ally. For 2 turns, target gains
-    1 Vision and ignores Stealth.
+  baseAbilityDescription: Give 2 Focus and 2 True Sight to self or an ally.
   abilitySprite: {fileID: 21300000, guid: 03f985a47e484e94c858542c49a08bac, type: 3}
-  energyCost: 4
-  baseCooldown: 3
+  energyCost: 5
+  baseCooldown: 4
   abilityType: 1
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 2
@@ -159,6 +159,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -167,7 +168,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Give self or an ally '
+    phrase: 'Apply '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -179,33 +180,19 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '. For two turns, target ignores '
+    phrase: 'and '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Stealth
+    phrase: '2 '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'and gains '
+    phrase: 'True Sight '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '1 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Vision
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: .
+    phrase: to self or an ally.
   keyWords:
-  - kewWordType: 5
-    passiveType: 0
   - kewWordType: 1
     passiveType: 75
-  - kewWordType: 1
-    passiveType: 77
-  - kewWordType: 21
-    passiveType: 0

@@ -22,6 +22,7 @@ MonoBehaviour:
   doesNotBreakStealth: 0
   weaponRequirement: 3
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 3
@@ -188,6 +189,7 @@ MonoBehaviour:
       passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -222,7 +224,5 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: .
   keyWords:
-  - kewWordType: 4
-    passiveType: 0
   - kewWordType: 1
     passiveType: 79

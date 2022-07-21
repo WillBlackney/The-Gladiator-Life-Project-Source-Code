@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Inspire
   includeInGame: 1
-  baseAbilityDescription: Apply 2 Wrath to self and all allies within your Aura.
+  baseAbilityDescription: Apply 2 Courage to self and all allies within your Aura.
   abilitySprite: {fileID: 21300000, guid: c5187ff44f169ca4598dc6156cf96072, type: 3}
   energyCost: 5
   baseCooldown: 3
@@ -22,6 +22,7 @@ MonoBehaviour:
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 0
@@ -130,11 +131,12 @@ MonoBehaviour:
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
     perkPairing:
-      perkTag: 50
+      perkTag: 155
       passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -151,7 +153,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Wrath '
+    phrase: 'Courage '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -165,9 +167,7 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: .
   keyWords:
-  - kewWordType: 5
-    passiveType: 0
   - kewWordType: 1
-    passiveType: 50
+    passiveType: 155
   - kewWordType: 6
     passiveType: 0

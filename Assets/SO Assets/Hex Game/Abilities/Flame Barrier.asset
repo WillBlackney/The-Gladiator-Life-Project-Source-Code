@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Flame Barrier
   includeInGame: 1
-  baseAbilityDescription: Gain 3 Block. but also gain 3 Burning.
+  baseAbilityDescription: Gain 2 Block. but also gain 2 Burning.
   abilitySprite: {fileID: 21300000, guid: e37ecb7dafc3c9047ba661484549db2d, type: 3}
   energyCost: 3
   baseCooldown: 3
@@ -22,6 +22,7 @@ MonoBehaviour:
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 0
@@ -101,7 +102,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 74
-      passiveStacks: 3
+      passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
   - effectType: 1
@@ -154,10 +155,11 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 1
-      passiveStacks: 3
+      passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -170,7 +172,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '3 '
+    phrase: '2 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -178,11 +180,11 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'and '
+    phrase: ', but gain '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '3 '
+    phrase: '2 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -192,8 +194,6 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: .
   keyWords:
-  - kewWordType: 5
-    passiveType: 0
   - kewWordType: 1
     passiveType: 74
   - kewWordType: 1

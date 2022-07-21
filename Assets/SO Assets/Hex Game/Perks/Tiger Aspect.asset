@@ -27,27 +27,15 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'abilities have '
+    phrase: abilities gain
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '+10 '
+    phrase: '+15 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Critical Chance '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'and apply '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '1 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Bleeding
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

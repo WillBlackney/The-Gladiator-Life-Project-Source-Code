@@ -23,6 +23,7 @@ MonoBehaviour:
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 5
@@ -136,6 +137,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects:
   - effectType: 18
     stressEventData:
@@ -202,7 +204,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'from ALL characters within '
+    phrase: 'from all characters within '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Shadow Bolt
   includeInGame: 1
-  baseAbilityDescription: Deal 125% damage to an enemy and apply 2 Weakened.
+  baseAbilityDescription: Deal 125% damage to an enemy and apply 1 Weakened. On a
+    Critical Strike, apply 2 Weakened.
   abilitySprite: {fileID: 21300000, guid: 341eea4151db4c146bb68edb101d7613, type: 3}
   energyCost: 4
   baseCooldown: 2
@@ -22,6 +23,7 @@ MonoBehaviour:
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 3
@@ -185,6 +187,60 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 49
+      passiveStacks: 1
+    perkApplicationChance: 100
+    knockBackDistance: 0
+  onCritEffects:
+  - effectType: 10
+    stressEventData:
+      stressAmountMin: 0
+      stressAmountMax: 0
+      successChance: 0
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish:
+    - eventType: 6
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0.5
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    ignoresBlock: 0
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 49
       passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
@@ -212,6 +268,26 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
+    phrase: '1 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Weakened
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '. On a '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Critical Strike
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ',  apply '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
     phrase: '2 '
   - color: 3
     getPhraseFromAbilityValue: 0
@@ -222,7 +298,7 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: .
   keyWords:
-  - kewWordType: 4
-    passiveType: 0
   - kewWordType: 1
     passiveType: 49
+  - kewWordType: 20
+    passiveType: 0

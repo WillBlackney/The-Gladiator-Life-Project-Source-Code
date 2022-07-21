@@ -16,12 +16,13 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Apply 2 Weakened to all enemies within your Aura.
   abilitySprite: {fileID: 21300000, guid: 254db86f895cba142ba5fe87e82418f1, type: 3}
-  energyCost: 3
+  energyCost: 4
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 0
@@ -32,6 +33,7 @@ MonoBehaviour:
     level: 1
   abilitySubRequirements: []
   baseRange: 0
+  gainRangeBonusFromVision: 0
   hitChanceModifier: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
@@ -119,6 +121,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0

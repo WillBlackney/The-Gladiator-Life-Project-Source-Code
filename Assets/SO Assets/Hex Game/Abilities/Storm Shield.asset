@@ -17,12 +17,13 @@ MonoBehaviour:
   baseAbilityDescription: The next 3 times target is attacked, deal 10 Magic damage
     back to the attacker.
   abilitySprite: {fileID: 21300000, guid: 56682cecfd122b94ca7182850b4e6b6d, type: 3}
-  energyCost: 5
+  energyCost: 4
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 2
@@ -106,6 +107,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -135,6 +137,4 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: damage back to the attacker.
-  keyWords:
-  - kewWordType: 1
-    passiveType: 148
+  keyWords: []

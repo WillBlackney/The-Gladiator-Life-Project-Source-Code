@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Bouncing Shield
   includeInGame: 1
-  baseAbilityDescription: Deal 100% Physical damage to a target. Bounces to a random
-    adjacent enemy for half damage.
+  baseAbilityDescription: 'Deal 75% Physical damage to an enemy and a random enemy
+    adjacent to them. '
   abilitySprite: {fileID: 21300000, guid: db36f981e95040b4da4f833d503af39d, type: 3}
   energyCost: 4
   baseCooldown: 2
@@ -23,6 +23,7 @@ MonoBehaviour:
   doesNotBreakStealth: 0
   weaponRequirement: 4
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 3
@@ -105,8 +106,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 18
-    maxBaseDamage: 22
+    minBaseDamage: 13
+    maxBaseDamage: 17
     guaranteedHit: 0
     ignoresBlock: 0
     injuryTypesCaused: 02000000
@@ -121,6 +122,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 1
@@ -192,9 +194,9 @@ MonoBehaviour:
     aoeSize: 1
     effectsAllies: 0
     effectsEnemies: 0
-    damageType: 2
-    minBaseDamage: 8
-    maxBaseDamage: 12
+    damageType: 1
+    minBaseDamage: 13
+    maxBaseDamage: 17
     guaranteedHit: 1
     ignoresBlock: 0
     injuryTypesCaused: 
@@ -224,7 +226,5 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: damage to an enemy. Bounces to a random adjacent enemy for half damage.
-  keyWords:
-  - kewWordType: 4
-    passiveType: 0
+    phrase: damage to an enemy and a random enemy adjacent to them.
+  keyWords: []
