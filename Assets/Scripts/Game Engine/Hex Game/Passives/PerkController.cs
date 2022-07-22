@@ -355,7 +355,9 @@ namespace HexGameEngine.Perks
 
             // Check specific resistances
             // Undead = immune to bleeding
-            if (character.race == CharacterRace.Undead && character.controller == Controller.Player)
+            if (character.race == CharacterRace.Undead && 
+                character.controller == Controller.Player &&
+                perk == Perk.Bleeding)
             {
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                     VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "IMMUNE!"), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());

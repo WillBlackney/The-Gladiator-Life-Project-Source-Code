@@ -52,7 +52,8 @@ MonoBehaviour:
     injuryResistance: 0
     deathResistance: 25
   abilityBook:
-    activeAbilities: []
+    activeAbilities:
+    - {fileID: 11400000, guid: 1d653fb7e4e89d448bae7106e8b49b73, type: 2}
   serializedPassiveManager:
     perks:
     - perkTag: 154
