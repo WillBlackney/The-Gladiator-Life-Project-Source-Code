@@ -322,7 +322,7 @@ namespace HexGameEngine.MainMenu
             var nonItemAbilities = characterBuild.abilityBook.GetAllKnownNonItemSetAbilities();
             foreach (UIAbilityIcon a in originPanelAbilityIcons)
                 a.HideAndReset();
-            for(int i = 0; i < characterBuild.abilityBook.knownAbilities.Count && i < originPanelAbilityIcons.Length; i++)            
+            for(int i = 0; i < nonItemAbilities.Count && i < originPanelAbilityIcons.Length; i++)            
                 originPanelAbilityIcons[i].BuildFromAbilityData(nonItemAbilities[i]);
 
             // Reset and build talent rows
@@ -395,7 +395,7 @@ namespace HexGameEngine.MainMenu
             var nonItemAbilities = characterBuild.abilityBook.GetAllKnownNonItemSetAbilities();
             foreach (UIAbilityIcon a in presetPanelAbilityIcons)
                 a.HideAndReset();
-            for (int i = 0; i < characterBuild.abilityBook.knownAbilities.Count && i < presetPanelAbilityIcons.Length; i++)
+            for (int i = 0; i < nonItemAbilities.Count && i < presetPanelAbilityIcons.Length; i++)
                 presetPanelAbilityIcons[i].BuildFromAbilityData(nonItemAbilities[i]);
 
         }

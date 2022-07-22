@@ -24,6 +24,7 @@ namespace HexGameEngine.TownFeatures
         [Header("Core Components")]
         [SerializeField] private CombatContractCardEnemyInfoRow[] enemyRows;
         [SerializeField] private GameObject glowOutline;
+        [SerializeField] private TextMeshProUGUI deploymentLimitText;
 
         [Header("Reward Components")]
         [SerializeField] private TextMeshProUGUI goldRewardText;
@@ -55,6 +56,10 @@ namespace HexGameEngine.TownFeatures
         public Image ItemImage
         {
             get { return itemImage; }
+        }
+        public TextMeshProUGUI DeploymentLimitText
+        {
+            get { return deploymentLimitText; }
         }
         #endregion
 

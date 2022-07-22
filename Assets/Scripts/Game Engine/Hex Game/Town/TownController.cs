@@ -763,16 +763,36 @@ namespace HexGameEngine.TownFeatures
             // On normal days, generate 2 basics and 1 elite combat
             if (RunController.Instance.CurrentDay != 5)
             {
-                // Generate 2 basic encounters
-                List<EnemyEncounterSO> validBasics = RunController.Instance.GetCombatData
+                List<int> deploymentLimits = new List<int> { 1, 3, 5 };
+
+                // On first 2 days, only generate combat with deployment limits of 1 and 3
+                if (RunController.Instance.CurrentChapter == 1 &&
+                (RunController.Instance.CurrentDay == 1 || RunController.Instance.CurrentDay == 2))
+                {
+                    deploymentLimits.Remove(5);
+                }
+
+                // Get all basic combats that match the day + act conditions
+                List<EnemyEncounterSO> filteredBasics = new List<EnemyEncounterSO>();
+                List <EnemyEncounterSO> allValidBasics = RunController.Instance.GetCombatData
                     (2, RunController.Instance.CurrentChapter, CombatDifficulty.Basic).ShuffledCopy();
-                foreach(var encounter in validBasics)                
+
+                // Filter for 2 combats with different deployment limits
+                foreach(var encounter in allValidBasics)
+                {
+                    if (deploymentLimits.Contains(encounter.deploymentLimit))
+                    {
+                        filteredBasics.Add(encounter);
+                        deploymentLimits.Remove(encounter.deploymentLimit);
+                    }
+
+                    // Break once 2 combats have been determined
+                    if (filteredBasics.Count == 2) break;
+                }
+
+                foreach(var encounter in filteredBasics)                
                     currentDailyCombatContracts.Add(GenerateCombatContractFromData(encounter));
                 
-                /*
-                for (int i = 0; i < 2; i++)                
-                    currentDailyCombatContracts.Add(GenerateRandomDailyCombatContract(RunController.Instance.CurrentChapter, CombatDifficulty.Basic));
-                */
                 // Generate an elite encounter
                 currentDailyCombatContracts.Add(GenerateRandomDailyCombatContract(RunController.Instance.CurrentChapter, CombatDifficulty.Elite));
 
@@ -857,12 +877,12 @@ namespace HexGameEngine.TownFeatures
         public void UpdateCharactersDeployedText()
         {
             charactersDeployedText.text = "Characters Deployed: " + GetDeployedCharacters().Count.ToString() + 
-                " / " + PlayerDataController.Instance.DeploymentLimit.ToString();
+                " / " + CombatContractCard.SelectectedCombatCard.MyContractData.enemyEncounterData.deploymentLimit.ToString();
         }
         public void HandleDropCharacterOnDeploymentNode(DeploymentNodeView node, HexCharacterData draggedCharacter)
         {
             Debug.Log("HandleDropCharacterOnDeploymentNode()");
-            if (node.IsUnoccupied() && GetDeployedCharacters().Count >= PlayerDataController.Instance.DeploymentLimit) return;
+            if (node.IsUnoccupied() && GetDeployedCharacters().Count >= CombatContractCard.SelectectedCombatCard.MyContractData.enemyEncounterData.deploymentLimit) return;
 
             // Handle dropped on empty slot
             if (node.AllowedCharacter == Allegiance.Player)
@@ -913,7 +933,7 @@ namespace HexGameEngine.TownFeatures
                 ShowNoCharactersDeployedPopup();
                 return;
             }
-            else if(characters.Count > 0 && characters.Count < PlayerDataController.Instance.DeploymentLimit)
+            else if(characters.Count > 0 && characters.Count < CombatContractCard.SelectectedCombatCard.MyContractData.enemyEncounterData.deploymentLimit)
             {
                 ShowLessThanMaxCharactersDeployedPopup();
             }
@@ -932,7 +952,7 @@ namespace HexGameEngine.TownFeatures
         {
             deploymentWarningPopupVisualParent.SetActive(true);
             deploymentWarningPopupContinueButton.SetActive(true);
-            deploymentWarningPopupText.text = "You have deployed less characters than your allowed limit of " + PlayerDataController.Instance.DeploymentLimit.ToString()
+            deploymentWarningPopupText.text = "You have deployed less characters than your allowed limit of " + CombatContractCard.SelectectedCombatCard.MyContractData.enemyEncounterData.deploymentLimit.ToString()
                 + ". Are you sure want to start this combat?";
         }
         public void OnDeploymentPopupBackButtonClicked()

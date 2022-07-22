@@ -170,6 +170,52 @@ namespace HexGameEngine.UI
         {
             StartCoroutine(BuildAndShowModalCoroutine(w));
         }
+        private IEnumerator BuildAndShowModalCoroutine(ModalSceneWidget w)
+        {
+            // Small mouse over delay
+            yield return new WaitForSeconds(0.15f);
+
+            // Find modal data
+            ModalBuildDataSO data = GetBuildData(w.preset);
+            if (!data)
+            {
+                Debug.LogWarning("MainModalController.BuildAndShowModal() provided could not find data from preset '" + w.preset.ToString() +
+                    "', cancelling...");
+                yield break;
+            }
+
+            // If user still moused over widget after delay, build + show modal.
+            if (ModalSceneWidget.MousedOver == w)
+            {
+                if (w.customData)
+                {
+                    UpdateDynamicDirection();
+                    visualParent.SetActive(true);
+                    mainCg.DOKill();
+                    mainCg.alpha = 0.01f;
+                    mainCg.DOFade(1f, 0.25f);
+                    Reset();
+                    UpdateFitters();
+                    BuildModalContent(w.headerMessage, w.descriptionMessage, w.headerSprite, w.frameSprite);
+                    UpdateFitters();
+                    shouldRebuild = true;
+                }
+                else
+                {
+                    UpdateDynamicDirection();
+                    visualParent.SetActive(true);
+                    mainCg.DOKill();
+                    mainCg.alpha = 0.01f;
+                    mainCg.DOFade(1f, 0.25f);
+                    Reset();
+                    UpdateFitters();
+                    BuildModalContent(data);
+                    UpdateFitters();
+                    shouldRebuild = true;
+                }
+            }
+
+        }
         public void BuildAndShowModal(RaceDataSO race)
         {
             UpdateDynamicDirection();
@@ -222,34 +268,7 @@ namespace HexGameEngine.UI
             UpdateFitters();
             shouldRebuild = true;
         }
-        private IEnumerator BuildAndShowModalCoroutine(ModalSceneWidget w)
-        {
-            ModalBuildDataSO data = GetBuildData(w.preset);
-            if (!data)
-            {
-                Debug.LogWarning("MainModalController.BuildAndShowModal() provided could not find data from preset '" + w.preset.ToString() +
-                    "', cancelling...");
-                yield break;
-            }
-
-            yield return new WaitForSeconds(0.15f);
-            if (ModalSceneWidget.MousedOver == w)
-            {
-                UpdateDynamicDirection();
-                visualParent.SetActive(true);
-                mainCg.DOKill();
-                mainCg.alpha = 0.01f;
-                mainCg.DOFade(1f, 0.25f);
-                Reset();
-                UpdateFitters();
-                BuildModalContent(data);
-                UpdateFitters();
-                shouldRebuild = true;
-            }
-            
-
-        }
-       
+        
         private void BuildModalContent(ModalBuildDataSO data)
         {           
             headerText.text = data.headerName;
@@ -280,6 +299,32 @@ namespace HexGameEngine.UI
             // Build dot points
             for (int i = 0; i < data.infoRows.Length; i++)
                 dottedRows[i].Build(data.infoRows[i]);
+        }
+        private void BuildModalContent(string headerMessage, List<CustomString> descriptionMessage, Sprite headerSprite, bool frameImage)
+        {
+            headerText.text = headerMessage;
+            descriptionText.fontStyle = FontStyles.Normal;
+            descriptionText.gameObject.SetActive(true);
+            descriptionText.text = TextLogic.ConvertCustomStringListToString(descriptionMessage); 
+
+            if (headerSprite != null && frameImage)
+            {
+                unframedImageParent.SetActive(false);
+                framedImageParent.SetActive(true);
+                framedImage.sprite = headerSprite;
+            }
+            else if (headerSprite != null)
+            {
+                framedImageParent.SetActive(false);
+                unframedImageParent.SetActive(true);
+                unframedImage.sprite = headerSprite;
+            }
+
+            /*
+            // Build dot points
+            for (int i = 0; i < data.infoRows.Length; i++)
+                dottedRows[i].Build(data.infoRows[i]);
+            */
         }
         private void BuildModalContent(ActivePerk ap)
         {

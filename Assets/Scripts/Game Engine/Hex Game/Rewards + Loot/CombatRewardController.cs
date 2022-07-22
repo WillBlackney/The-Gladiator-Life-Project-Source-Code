@@ -79,7 +79,7 @@ namespace HexGameEngine.RewardSystems
             List<CharacterCombatStatData> dataRet = new List<CharacterCombatStatData>();
 
             // Calculate xp gain          
-            int baseXp = RunController.Instance.CurrentCombatContractData.enemyEncounterData.baseXpReward;
+            int baseXp = RunController.Instance.CurrentCombatContractData.enemyEncounterData.baseXpReward / characters.Count;
             int killXpSlice = 0;
             var encounterData = RunController.Instance.CurrentCombatContractData.enemyEncounterData;
 

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   encounterName: Lich
   baseXpReward: 100
+  deploymentLimit: 3
   difficulty: 2
   enemyGroups:
   - possibleEnemies:

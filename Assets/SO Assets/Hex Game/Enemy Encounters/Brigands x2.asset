@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   encounterName: Brigands
   baseXpReward: 25
+  deploymentLimit: 3
   difficulty: 0
   enemyGroups:
   - possibleEnemies:
     - {fileID: 11400000, guid: dfd6487f7f65b2a4381d8f775d6f6f54, type: 2}
     - {fileID: 11400000, guid: 9411ac1cf1176004ab5e7960645a5c78, type: 2}
+    spawnPosition: {x: 0, y: 0}
   - possibleEnemies:
     - {fileID: 11400000, guid: dfd6487f7f65b2a4381d8f775d6f6f54, type: 2}
     - {fileID: 11400000, guid: 9411ac1cf1176004ab5e7960645a5c78, type: 2}
+    spawnPosition: {x: 0, y: 0}

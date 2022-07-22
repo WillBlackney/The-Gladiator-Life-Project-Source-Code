@@ -38,7 +38,6 @@ namespace HexGameEngine.Persistency
 
         // Player data
         public int currentGold;
-        public int deploymentLimit;
 
         // Story events
        

@@ -14,7 +14,6 @@ namespace HexGameEngine.Player
         #region
         private int currentGold;
         private int currentFood;
-        private int deploymentLimit;
         #endregion
 
         // Getters + Accessors
@@ -27,11 +26,6 @@ namespace HexGameEngine.Player
         {
             get { return currentFood; }
         }
-        public int DeploymentLimit
-        {
-            get { return deploymentLimit; }
-            private set { deploymentLimit = value; }
-        }
         #endregion
 
         // Initialization
@@ -39,7 +33,7 @@ namespace HexGameEngine.Player
         public void SetGameStartValues()
         {
             ModifyPlayerGold(GlobalSettings.Instance.BaseStartingGold);
-            DeploymentLimit = GlobalSettings.Instance.StartingDeploymentLimit;
+            //DeploymentLimit = GlobalSettings.Instance.StartingDeploymentLimit;
         }
         #endregion
 
@@ -47,13 +41,11 @@ namespace HexGameEngine.Player
         #region
         public void BuildMyDataFromSaveFile(SaveGameData saveFile)
         {
-            deploymentLimit = saveFile.deploymentLimit;
             ModifyPlayerGold(-currentGold + saveFile.currentGold);
         }
         public void SaveMyDataToSaveFile(SaveGameData saveData)
         {
             saveData.currentGold = currentGold;
-            saveData.deploymentLimit = deploymentLimit;
         }
         #endregion      
 

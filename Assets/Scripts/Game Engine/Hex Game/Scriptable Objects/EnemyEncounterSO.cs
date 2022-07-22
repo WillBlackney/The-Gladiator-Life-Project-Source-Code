@@ -17,6 +17,10 @@ namespace HexGameEngine.Characters
         public int baseXpReward;
         [BoxGroup("General Info")]
         [LabelWidth(100)]
+        [Range(1,5)]
+        public int deploymentLimit;
+        [BoxGroup("General Info")]
+        [LabelWidth(100)]
         public CombatDifficulty difficulty;
 
         [BoxGroup("Enemy Groupings", centerLabel: true)]

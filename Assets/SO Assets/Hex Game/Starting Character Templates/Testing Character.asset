@@ -39,7 +39,7 @@ MonoBehaviour:
     energyRecovery: 50
     maxEnergy: 50
     initiative: 100
-    criticalChance: 5
+    criticalChance: 100
     criticalModifier: 50
     physicalDamageBonus: 0
     magicDamageBonus: 0

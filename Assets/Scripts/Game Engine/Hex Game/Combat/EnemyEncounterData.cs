@@ -10,6 +10,7 @@ namespace HexGameEngine.Characters
     {
         public string encounterName;
         public int baseXpReward;
+        public int deploymentLimit;
         public List<CharacterWithSpawnData> enemiesInEncounter = new List<CharacterWithSpawnData>();
         public CombatDifficulty difficulty;
         public int TotalEnemyXP

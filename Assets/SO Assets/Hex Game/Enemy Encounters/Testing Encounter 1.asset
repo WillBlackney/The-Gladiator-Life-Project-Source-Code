@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   encounterName: Testing Encounter 1
   baseXpReward: 100
+  deploymentLimit: 3
   difficulty: 0
   enemyGroups:
   - possibleEnemies:

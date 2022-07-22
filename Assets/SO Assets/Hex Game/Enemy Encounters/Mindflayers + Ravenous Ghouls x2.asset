@@ -14,12 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   encounterName: Undead
   baseXpReward: 25
+  deploymentLimit: 3
   difficulty: 0
   enemyGroups:
   - possibleEnemies:
     - {fileID: 11400000, guid: fff98a0fc61312f47be1b02b39e4a12e, type: 2}
+    spawnPosition: {x: 0, y: 0}
   - possibleEnemies:
     - {fileID: 11400000, guid: fff98a0fc61312f47be1b02b39e4a12e, type: 2}
     - {fileID: 11400000, guid: eab8d5fe0687e4448af27fdf6d47d606, type: 2}
+    spawnPosition: {x: 0, y: 0}
   - possibleEnemies:
     - {fileID: 11400000, guid: eab8d5fe0687e4448af27fdf6d47d606, type: 2}
+    spawnPosition: {x: 0, y: 0}

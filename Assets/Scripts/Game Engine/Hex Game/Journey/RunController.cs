@@ -223,6 +223,7 @@ namespace HexGameEngine.JourneyLogic
 
             ret.baseXpReward = template.baseXpReward;
             ret.difficulty = template.difficulty;
+            ret.deploymentLimit = template.deploymentLimit;
             ret.encounterName = template.encounterName;
             ret.enemiesInEncounter = new List<CharacterWithSpawnData>();
 
