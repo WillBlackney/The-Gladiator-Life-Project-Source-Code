@@ -201,7 +201,7 @@ namespace HexGameEngine.JourneyLogic
             return ret;
 
         }
-        public List<EnemyEncounterSO> GetCombatData(int amount, int currentAct, CombatDifficulty difficulty)
+        public List<EnemyEncounterSO> GetCombatData(int currentAct, CombatDifficulty difficulty)
         {
             List<EnemyEncounterSO> ret = new List<EnemyEncounterSO>();
             foreach (EnemyEncounterSet set in allCombatEncounterSets)
@@ -210,8 +210,12 @@ namespace HexGameEngine.JourneyLogic
                     currentAct <= set.actRangeUpper &&
                     set.combatDifficulty == difficulty)
                 {
-                    for (int i = 0; i < amount; i++)
-                        ret.Add(set.possibleEnemyEncounters[i]);
+                    //for (int i = 0; i < amount; i++)
+                    //    ret.Add(set.possibleEnemyEncounters[i]);
+                    foreach(EnemyEncounterSO e in set.possibleEnemyEncounters)
+                    {
+                        ret.Add(e);
+                    }
                     break;
                 }
             }

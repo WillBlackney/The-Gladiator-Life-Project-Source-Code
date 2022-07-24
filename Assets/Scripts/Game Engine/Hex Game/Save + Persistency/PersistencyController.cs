@@ -61,8 +61,15 @@ namespace HexGameEngine.Persistency
             CharacterDataController.Instance.ClearCharacterDeck();
 
             // Determine charactes + add them to roster
-            if(startingCharacter == null)            
+            if(startingCharacter == null)
+            {
+                // Get player custom made character data
                 startingCharacter = MainMenuController.Instance.CharacterBuild;
+
+                // Learn abilites from selected items for starting character
+                startingCharacter.abilityBook.HandleLearnAbilitiesFromItemSet(startingCharacter.itemSet);
+            }           
+               
             
             CharacterDataController.Instance.AddCharacterToRoster(startingCharacter);
            

@@ -177,7 +177,7 @@ namespace HexGameEngine.UI
 
             // Find modal data
             ModalBuildDataSO data = GetBuildData(w.preset);
-            if (!data)
+            if (!data && !w.customData)
             {
                 Debug.LogWarning("MainModalController.BuildAndShowModal() provided could not find data from preset '" + w.preset.ToString() +
                     "', cancelling...");

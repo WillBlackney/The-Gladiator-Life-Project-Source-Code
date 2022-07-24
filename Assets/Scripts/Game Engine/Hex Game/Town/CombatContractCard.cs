@@ -139,6 +139,7 @@ namespace HexGameEngine.TownFeatures
                 enemyRows[i].BuildFromEnemyData(data.enemyEncounterData.enemiesInEncounter[i]);
             }
 
+            deploymentLimitText.text = data.enemyEncounterData.deploymentLimit.ToString();
             goldRewardText.text = data.combatRewardData.goldAmount.ToString();
             abilityTomeImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(data.combatRewardData.abilityAwarded.talentRequirementData.talentSchool);
             itemParent.SetActive(false);

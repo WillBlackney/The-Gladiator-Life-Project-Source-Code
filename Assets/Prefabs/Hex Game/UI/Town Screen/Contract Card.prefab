@@ -121,8 +121,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3541211994267978788}
   m_HandleRect: {fileID: 3541211994267978789}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.50000036
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4510,7 +4510,7 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: The maximum amount of characters you can deploy for this combat.
-  headerSprite: {fileID: 0}
+  headerSprite: {fileID: 21300000, guid: 34af3d0ef65e24fb89c8cbfcfc1370a1, type: 3}
   frameSprite: 0
 --- !u!114 &3882691524026191751
 MonoBehaviour:

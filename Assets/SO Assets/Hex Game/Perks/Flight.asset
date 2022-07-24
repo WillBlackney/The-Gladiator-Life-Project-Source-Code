@@ -27,8 +27,8 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'times this character moves, they pay '
-  - color: 1
+    phrase: 'times this character moves, it costs '
+  - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: '0 '
@@ -39,7 +39,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'and are immune to '
+    phrase: 'and they are immune to '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

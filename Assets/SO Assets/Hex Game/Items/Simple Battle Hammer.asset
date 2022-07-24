@@ -25,7 +25,8 @@ MonoBehaviour:
   injuryTypesCaused: 02000000
   minArmourRoll: 0
   maxArmourRoll: 0
+  armourClass: 0
   grantedAbilities:
-  - {fileID: 11400000, guid: 4e36a24a076914546b585a2e527c864a, type: 2}
   - {fileID: 11400000, guid: ba24d48ee36272141ba5f17b68d432dd, type: 2}
+  - {fileID: 11400000, guid: 559f58196d604614ba752161e53b302c, type: 2}
   itemEffectSets: []

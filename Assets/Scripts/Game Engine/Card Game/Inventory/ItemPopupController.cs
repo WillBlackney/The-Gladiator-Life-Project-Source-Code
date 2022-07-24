@@ -150,11 +150,11 @@ namespace HexGameEngine.Items
         private void PlacePanelAtRosterItemSlotPosition(RosterItemSlot view)
         {
             RectTransform rect = visualParent.GetComponent<RectTransform>();
-            float xOffset = rect.rect.width / 2 + 80;
-            float yOffset = 0;
+            float xOffset = rect.rect.width / 2 + 40;
+            float yOffset = 25 + rect.rect.height;
 
             rect.position = view.transform.position;
-            rect.localPosition = new Vector3(rect.localPosition.x + xOffset, rect.localPosition.y - yOffset, 0);
+            rect.localPosition = new Vector3(rect.localPosition.x + xOffset, rect.localPosition.y + yOffset, 0);
         }
         private void PlacePanelAtCustomCharacterScreenItemSlotPosition(CustomItemIcon view)
         {
@@ -255,7 +255,7 @@ namespace HexGameEngine.Items
                         if (effect.modAmount < 0)
                         {
                             dotStyle = DotStyle.Red;
-                            row.Build(TextLogic.ReturnColoredText("-" + effect.modAmount.ToString() + " ", TextLogic.blueNumber) + TextLogic.SplitByCapitals(effect.attributeModified.ToString()), dotStyle);
+                            row.Build(TextLogic.ReturnColoredText(effect.modAmount.ToString() + " ", TextLogic.blueNumber) + TextLogic.SplitByCapitals(effect.attributeModified.ToString()), dotStyle);
                         }
                         else
                         {

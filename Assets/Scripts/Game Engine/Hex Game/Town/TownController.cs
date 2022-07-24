@@ -774,8 +774,7 @@ namespace HexGameEngine.TownFeatures
 
                 // Get all basic combats that match the day + act conditions
                 List<EnemyEncounterSO> filteredBasics = new List<EnemyEncounterSO>();
-                List <EnemyEncounterSO> allValidBasics = RunController.Instance.GetCombatData
-                    (2, RunController.Instance.CurrentChapter, CombatDifficulty.Basic).ShuffledCopy();
+                List <EnemyEncounterSO> allValidBasics = RunController.Instance.GetCombatData(RunController.Instance.CurrentChapter, CombatDifficulty.Basic).ShuffledCopy();
 
                 // Filter for 2 combats with different deployment limits
                 foreach(var encounter in allValidBasics)
