@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Act 1 Elite 2 (Captain)
   m_EditorClassIdentifier: 
   encounterName: Shambling Captain
-  baseXpReward: 75
+  baseXpReward: 150
   deploymentLimit: 3
   difficulty: 1
   enemyGroups:

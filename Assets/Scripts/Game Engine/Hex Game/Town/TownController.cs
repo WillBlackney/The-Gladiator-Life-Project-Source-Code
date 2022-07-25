@@ -881,7 +881,9 @@ namespace HexGameEngine.TownFeatures
         public void HandleDropCharacterOnDeploymentNode(DeploymentNodeView node, HexCharacterData draggedCharacter)
         {
             Debug.Log("HandleDropCharacterOnDeploymentNode()");
-            if (node.IsUnoccupied() && GetDeployedCharacters().Count >= CombatContractCard.SelectectedCombatCard.MyContractData.enemyEncounterData.deploymentLimit) return;
+            if (CombatContractCard.SelectectedCombatCard != null &&
+                node.IsUnoccupied() && 
+                GetDeployedCharacters().Count >= CombatContractCard.SelectectedCombatCard.MyContractData.enemyEncounterData.deploymentLimit) return;
 
             // Handle dropped on empty slot
             if (node.AllowedCharacter == Allegiance.Player)

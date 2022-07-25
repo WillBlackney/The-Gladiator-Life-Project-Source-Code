@@ -501,7 +501,7 @@ namespace HexGameEngine.Combat
             if (ability == null || effect == null) return;
 
             int roll = RandomGenerator.NumberBetween(1, 1000);
-            float baseInjuryChance = StatCalculator.GetPercentage(damageResult.totalDamage, StatCalculator.GetTotalMaxHealth(character));
+            float baseInjuryChance = StatCalculator.GetPercentage(damageResult.totalHealthLost, StatCalculator.GetTotalMaxHealth(character));
             float injuryResistanceMod = StatCalculator.GetTotalInjuryResistance(character) / 100f;
             float injuryChanceActual = (baseInjuryChance * (1 - injuryResistanceMod) * 10);
             int mildThreshold = 0;
@@ -510,7 +510,7 @@ namespace HexGameEngine.Combat
             Debug.Log("CheckAndHandleInjuryOnHealthLost() called on character " + character.myName +
                ", Rolled = : " + roll.ToString() + "/1000" +
                ", injury probability = " + (injuryChanceActual / 10).ToString() + "%" +
-               ", health lost = " + damageResult.totalDamage +
+               ", health lost = " + damageResult.totalHealthLost +
                ", injury thresholds: Mild = " + mildThreshold.ToString() + " or more, Severe = " + severeThreshold.ToString() + " or more.");
 
             // TO DO: if the character is immune to being injured for whatever reason, check it here and return
@@ -518,7 +518,7 @@ namespace HexGameEngine.Combat
             //
 
             // Did character even lose enough health to trigger an injury?
-            if (damageResult.totalDamage < mildThreshold) return;
+            if (damageResult.totalHealthLost < mildThreshold) return;
 
             // Character successfully resisted the injury
             if (roll > injuryChanceActual)
@@ -536,9 +536,9 @@ namespace HexGameEngine.Combat
                 InjurySeverity severity = InjurySeverity.None;
 
                 // Injury is severe if character lost at least 30% health, or if the attack was a critical
-                if (damageResult.totalDamage >= severeThreshold ||
+                if (damageResult.totalHealthLost >= severeThreshold ||
                     damageResult.didCrit) severity = InjurySeverity.Severe;
-                else if (damageResult.totalDamage >= mildThreshold)
+                else if (damageResult.totalHealthLost >= mildThreshold)
                     severity = InjurySeverity.Mild;
 
                 // Determine injury type based on the weapon used, or the ability (if it doesnt require a weapon e.g. fireball)

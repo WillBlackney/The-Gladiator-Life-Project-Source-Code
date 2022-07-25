@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Act 1 Basic 10
   m_EditorClassIdentifier: 
   encounterName: Testing Encounter 1
-  baseXpReward: 50
+  baseXpReward: 100
   deploymentLimit: 1
   difficulty: 0
   enemyGroups:

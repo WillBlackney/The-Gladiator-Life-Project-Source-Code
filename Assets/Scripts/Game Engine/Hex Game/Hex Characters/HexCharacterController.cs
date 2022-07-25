@@ -801,8 +801,8 @@ namespace HexGameEngine.Characters
             // Tough (gain X block)
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Tough))
             {
-                int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Tough);
-                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Block, stacks, false);
+                //int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Tough);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Block, 2, false);
             }
 
             // Motivated (gain X focus)
