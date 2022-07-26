@@ -9,6 +9,7 @@ using HexGameEngine.Persistency;
 using HexGameEngine.UI;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.Perks;
+using HexGameEngine.HexTiles;
 
 namespace HexGameEngine.JourneyLogic
 {
@@ -33,7 +34,6 @@ namespace HexGameEngine.JourneyLogic
         private bool updateTimer = false;
         #endregion
 
-
         // Getters + Accessors
         #region
         public CombatContractData CurrentCombatContractData { get; private set; }
@@ -45,8 +45,8 @@ namespace HexGameEngine.JourneyLogic
         public SaveCheckPoint SaveCheckPoint { get; private set; }
         public int CurrentDay { get; private set; }
         public int CurrentChapter { get; private set; }
-       
 
+        public SerializedCombatMapData CurrentCombatMapData { get; private set; }
         #endregion
 
         // Initialization, Save + Load Logic
@@ -57,6 +57,7 @@ namespace HexGameEngine.JourneyLogic
             CurrentChapter = saveData.currentChapter;
             CurrentCombatContractData = saveData.currentCombatContractData;
             CurrentDeployedCharacters = saveData.playerCombatCharacters;
+            CurrentCombatMapData = saveData.currentCombatMapData;
             SetCheckPoint(saveData.saveCheckPoint);
             runTimer = saveData.runTimer;
 
@@ -67,6 +68,7 @@ namespace HexGameEngine.JourneyLogic
         {
             saveFile.currentDay = CurrentDay;
             saveFile.currentChapter = CurrentChapter;
+            saveFile.currentCombatMapData = CurrentCombatMapData;
             saveFile.currentCombatContractData = CurrentCombatContractData;
             saveFile.saveCheckPoint = SaveCheckPoint;
             saveFile.playerCombatCharacters = CurrentDeployedCharacters;
@@ -158,6 +160,10 @@ namespace HexGameEngine.JourneyLogic
 
         // Get + Set Enemy Waves
         #region
+        public void SetCurrentCombatMapData(SerializedCombatMapData mapData)
+        {
+            CurrentCombatMapData = mapData;
+        }
         public void SetPlayerDeployedCharacters(List<CharacterWithSpawnData> characters)
         {
             CurrentDeployedCharacters = characters;

@@ -567,6 +567,10 @@ namespace HexGameEngine
 
             // Destroy combat + town scenes
             HexCharacterController.Instance.HandleTearDownCombatScene();
+            TurnController.Instance.DestroyAllActivationWindows();
+            TurnController.Instance.DisableEndTurnButtonView();
+            TurnController.Instance.DisableDelayTurnButtonView();
+
             TownController.Instance.TearDownOnExitToMainMenu();
             CharacterScrollPanelController.Instance.HideMainView();
             LevelController.Instance.HandleTearDownCombatViews();
@@ -617,12 +621,60 @@ namespace HexGameEngine
             MainMenuController.Instance.HideFrontScreen();
 
             // Build town views 
-            TownController.Instance.ShowTownView();
-            CharacterScrollPanelController.Instance.BuildAndShowPanel();
+            if(RunController.Instance.SaveCheckPoint == SaveCheckPoint.Town)
+            {
+                TownController.Instance.ShowTownView();
+                CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
-            // Start music, fade in
-            AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
-            BlackScreenController.Instance.FadeInScreen(2f);
+                // Start music, fade in
+                AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
+                BlackScreenController.Instance.FadeInScreen(2f);
+            }
+            else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatStart)
+            {
+                BlackScreenController.Instance.FadeInScreen(1f);
+                SetGameState(GameState.CombatActive);
+                LevelController.Instance.GenerateLevelNodes(RunController.Instance.CurrentCombatMapData);
+
+                // Determine if night time or daytime combat
+                bool dayTime = RandomGenerator.NumberBetween(1, 2) == 1;
+                if (dayTime)
+                {
+                    LightController.Instance.EnableDayTimeGlobalLight();
+                    LevelController.Instance.EnableDayTimeArenaScenery();
+                }
+                else
+                {
+                    LightController.Instance.EnableNightTimeGlobalLight();
+                    LevelController.Instance.EnableNightTimeArenaScenery();
+                }
+                LevelController.Instance.ShowAllNodeViews();
+                LevelController.Instance.SetLevelNodeDayOrNightViewState(dayTime);
+
+                // Setup player characters
+                List<HexCharacterData> spawnedPlayerCharacters = new List<HexCharacterData>();
+                foreach (CharacterWithSpawnData c in RunController.Instance.CurrentDeployedCharacters)
+                    spawnedPlayerCharacters.Add(c.characterData);
+                HexCharacterController.Instance.CreateAllPlayerCombatCharacters(spawnedPlayerCharacters);
+
+                // Setup enemy characters
+                HexCharacterController.Instance.SpawnEnemyEncounter(RunController.Instance.CurrentCombatContractData.enemyEncounterData);
+
+                // Place characters off screen
+                HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();               
+
+                // Move characters towards start nodes
+                CoroutineData cData = new CoroutineData();
+                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
+
+                // Start a new combat event
+                TurnController.Instance.OnNewCombatEventStarted();
+            }
+            else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatEnd)
+            {
+
+            }
+            // TO DO : FIX ALL THIS!! load into combat not working
         }
         public void OnGameOverScreenMainMenuButtonClicked()
         {
@@ -647,17 +699,23 @@ namespace HexGameEngine
             TownController.Instance.HideTownView();
             TownController.Instance.HideDeploymentPage();
             CharacterScrollPanelController.Instance.HideMainView();
-            // in future: hide top bar
 
-            SetGameState(GameState.CombatActive);
+            SetGameState(GameState.CombatActive);          
+
+            // Generate combat map data
+            SerializedCombatMapData combatMapData =  LevelController.Instance.GenerateLevelNodes();
+
+            // Setup combat data for persistency
             RunController.Instance.SetCurrentContractData(CombatContractCard.SelectectedCombatCard.MyContractData);
             RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
             RunController.Instance.SetPlayerDeployedCharacters(TownController.Instance.GetDeployedCharacters());
+            RunController.Instance.SetCurrentCombatMapData(combatMapData);
+
+            // Save game data
             PersistencyController.Instance.AutoUpdateSaveFile();
 
-            // Enable world view
-            bool dayTime = true;
-            if (RandomGenerator.NumberBetween(1, 2) == 1) dayTime = false;
+            // Determine if night time or daytime combat
+            bool dayTime = RandomGenerator.NumberBetween(1, 2) == 1;
             if (dayTime)
             {
                 LightController.Instance.EnableDayTimeGlobalLight();
@@ -670,9 +728,6 @@ namespace HexGameEngine
             }
             LevelController.Instance.ShowAllNodeViews();
             LevelController.Instance.SetLevelNodeDayOrNightViewState(dayTime);
-
-            // Randomize level node elevation and obstructions
-            LevelController.Instance.GenerateLevelNodes();
 
             // Setup player characters
             List<HexCharacterData> spawnedPlayerCharacters = new List<HexCharacterData>();
@@ -693,26 +748,7 @@ namespace HexGameEngine
             // Start a new combat event
             TurnController.Instance.OnNewCombatEventStarted();
         }
-        #endregion               
-
-        // Camping Events
-        #region
-        public void HandleLoadCampSiteEvent()
-        {
-            StartCoroutine(HandleLoadCampSiteEventCoroutine());
-        }
-        private IEnumerator HandleLoadCampSiteEventCoroutine()
-        {
-            // Screen Reveal
-            BlackScreenController.Instance.FadeInScreen(1.5f);
-
-            CampSiteController.Instance.BuildAllViewsAndPropertiesOnNewEventStart();
-            yield return null;
-
-        }
-        #endregion
-
-
+        #endregion              
 
 
         // Misc Logic

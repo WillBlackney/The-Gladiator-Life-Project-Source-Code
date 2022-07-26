@@ -15,12 +15,9 @@ MonoBehaviour:
   myName: Orc Berserker
   race: 2
   modelSize: 2
-  xpReward: 55
+  xpReward: 65
   attributeSheet:
-    strength:
-      value: 25
-      stars: 0
-    intelligence:
+    might:
       value: 0
       stars: 0
     constitution:
@@ -44,6 +41,8 @@ MonoBehaviour:
     initiative: 5
     criticalChance: 10
     criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
     auraSize: 1
     vision: 0
     physicalResistance: 35

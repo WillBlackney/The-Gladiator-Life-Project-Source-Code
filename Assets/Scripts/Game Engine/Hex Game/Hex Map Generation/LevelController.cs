@@ -24,6 +24,7 @@ namespace HexGameEngine.HexTiles
         #region
         [Header("Prefabs + Core Components")]
         [SerializeField] CombatMapSeedDataSO[] allCombatMapSeeds;
+        [SerializeField] HexDataSO[] allHexTileData;
         [SerializeField] GameObject obstaclePrefab;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
@@ -63,7 +64,10 @@ namespace HexGameEngine.HexTiles
 
         // Getters + Accessors
         #region
-       
+        public HexDataSO[] AllHexTileData
+        {
+            get { return allHexTileData; }
+        }
         public LevelNode[] AllLevelNodes
         {
             get { return allLevelNodes; }
@@ -97,11 +101,13 @@ namespace HexGameEngine.HexTiles
             HideAllNodeViews();
         }
 
-        public void GenerateLevelNodes()
+        public SerializedCombatMapData GenerateLevelNodes()
         {
+            SerializedCombatMapData ret = new SerializedCombatMapData();
+
             // Get random seed
             CombatMapSeedDataSO seed = allCombatMapSeeds.GetRandomElement();
-            if (!seed) return;
+            if (!seed) return null;
 
             // Reset type, obstacle and elevation on all nodes
             foreach (LevelNode n in allLevelNodes)
@@ -138,8 +144,30 @@ namespace HexGameEngine.HexTiles
                     !spawnPositions.Contains(n) &&
                     (n.Elevation == TileElevation.Ground || (seed.allowObstaclesOnElevation && n.Elevation == TileElevation.Elevated)))        
                     n.SetHexObstruction(true);
+
+                SerializedLevelNodeData saveableNode = new SerializedLevelNodeData(n);
+                ret.nodes.Add(saveableNode);
             }
 
+            return ret;
+
+        }
+        public void GenerateLevelNodes(SerializedCombatMapData data)
+        {
+            foreach(LevelNode n in allLevelNodes)
+            {
+                foreach(SerializedLevelNodeData d in data.nodes)
+                {
+                    if(n.GridPosition == d.gridPosition)
+                    {
+                        n.Reset();
+                        n.SetHexTileElevation(d.elevation);
+                        n.BuildFromData(d.TileData);
+                        n.SetHexObstruction(d.obstructed);
+                        break;
+                    }
+                }
+            }
         }
         public void SetLevelNodeDayOrNightViewState(bool dayTime)
         {

@@ -82,12 +82,27 @@ namespace HexGameEngine.RewardSystems
             int baseXp = RunController.Instance.CurrentCombatContractData.enemyEncounterData.baseXpReward / characters.Count;
             int killXpSlice = 0;
             var encounterData = RunController.Instance.CurrentCombatContractData.enemyEncounterData;
+            int totalKillingBlowXp = 0;
 
             // Prevent divide by zero error
             if (encounterData.TotalEnemyXP != 0 &&
                 encounterData.TotalEnemies != 0)
                 killXpSlice = encounterData.TotalEnemyXP / encounterData.TotalEnemies;
 
+            // Determine if any enemies were killed indirectly by player (from burning, poisoned, etc)
+            // Split their xp value evenly over all player characters
+            foreach (HexCharacterModel character in characters)
+            {
+                totalKillingBlowXp += character.charactersKilledThisTurn * killXpSlice;
+            }
+
+            // Is there experience from an enemy death that has gone unrewarded?
+            if(totalKillingBlowXp < encounterData.TotalEnemyXP)
+            {
+                baseXp += (encounterData.TotalEnemyXP - totalKillingBlowXp) / characters.Count;
+            }
+
+            // Start xp reward process
             foreach (HexCharacterModel character in characters)
             {
                 CharacterCombatStatData result = GenerateCharacterCombatStatResult(character);

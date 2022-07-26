@@ -1377,7 +1377,7 @@ namespace HexGameEngine.Abilities
                         // make sure that the target is teleportable if the effect is a teleport
                         if (currentAbilityAwaiting.abilityEffects.Count > 0 &&
                             currentAbilityAwaiting.abilityEffects[0].effectType == AbilityEffectType.TeleportTargetToTile &&
-                            HexCharacterController.Instance.IsCharacterTeleportable(firstSelectionCharacter))
+                            !HexCharacterController.Instance.IsCharacterTeleportable(firstSelectionCharacter))
                         {
                             return;
                         }

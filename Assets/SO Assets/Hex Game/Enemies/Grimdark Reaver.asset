@@ -15,12 +15,9 @@ MonoBehaviour:
   myName: Grimdark Reaver
   race: 1
   modelSize: 0
-  xpReward: 15
+  xpReward: 20
   attributeSheet:
-    strength:
-      value: 0
-      stars: 0
-    intelligence:
+    might:
       value: 0
       stars: 0
     constitution:
@@ -44,6 +41,8 @@ MonoBehaviour:
     initiative: 5
     criticalChance: 10
     criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
     auraSize: 1
     vision: 0
     physicalResistance: 0

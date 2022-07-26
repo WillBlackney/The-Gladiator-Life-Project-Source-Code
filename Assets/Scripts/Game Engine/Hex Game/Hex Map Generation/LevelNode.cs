@@ -14,8 +14,8 @@ namespace HexGameEngine.HexTiles
         #region
         [Header("Properties")]
         [HideInInspector] public HexCharacterModel myEntity;
-        [HideInInspector] public bool occupied;
         [SerializeField] Vector2 gridPosition;
+        [HideInInspector] public string tileName;
 
         [Header("Parent References")]
         public GameObject mouseOverParent;
@@ -116,6 +116,7 @@ namespace HexGameEngine.HexTiles
         public void BuildFromData(HexDataSO data)
         {
             tileData = data;
+            tileName = data.tileName;
             tileTypeSprite.sprite = data.tileSprite;
         }
         private void Start()
@@ -268,6 +269,62 @@ namespace HexGameEngine.HexTiles
             elevationPillarImagesParent.SetActive(false);        
         }
         #endregion
+    }
+
+    public class SerializedCombatMapData
+    {
+        public List<SerializedLevelNodeData> nodes = new List<SerializedLevelNodeData>();
+    }
+
+    public class SerializedLevelNodeData
+    {
+        [Header("Properties")]
+        public string tileName;
+        public Vector2 gridPosition;
+        public TileElevation elevation;
+        private HexDataSO tileData;
+        public bool obstructed;
+
+        public HexDataSO TileData
+        {
+            get 
+            { 
+                if (tileData == null)
+                {
+                    tileData = FindMyTileData();
+                }
+                return tileData;
+            }
+        }
+
+        private HexDataSO FindMyTileData()
+        {
+            HexDataSO ret = null;
+
+            foreach(HexDataSO data in LevelController.Instance.AllHexTileData)
+            {
+                if(data.tileName == tileName)
+                {
+                    ret = data;
+                    break;
+                }
+            }
+
+            return ret;
+        }
+        public SerializedLevelNodeData()
+        {
+
+        }
+
+        public SerializedLevelNodeData(LevelNode node)
+        {
+            gridPosition = node.GridPosition;
+            elevation = node.Elevation;
+            tileData = node.TileData;
+            obstructed = node.Obstructed;
+            tileName = node.TileData.tileName;
+        }
     }
 
 }

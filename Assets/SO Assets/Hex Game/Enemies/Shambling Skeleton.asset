@@ -15,12 +15,9 @@ MonoBehaviour:
   myName: Shambling Skeleton
   race: 3
   modelSize: 0
-  xpReward: 5
+  xpReward: 10
   attributeSheet:
-    strength:
-      value: 0
-      stars: 0
-    intelligence:
+    might:
       value: 0
       stars: 0
     constitution:
@@ -44,6 +41,8 @@ MonoBehaviour:
     initiative: 2
     criticalChance: 5
     criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
     auraSize: 1
     vision: 0
     physicalResistance: 0

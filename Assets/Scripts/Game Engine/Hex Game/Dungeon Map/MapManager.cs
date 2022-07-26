@@ -97,11 +97,11 @@ namespace HexGameEngine.DungeonMap
                 Debug.LogWarning("MapManager.SaveMyDataToSaveFile() failed, current map is null...");
                 return;
             }
-            saveFile.map = CurrentMap.ToJson();
+            //saveFile.map = CurrentMap.ToJson();
         }
         public void BuildMyDataFromSaveFile(SaveGameData saveFile)
         {
-            CurrentMap = JsonConvert.DeserializeObject<Map>(saveFile.map);
+            //CurrentMap = JsonConvert.DeserializeObject<Map>(saveFile.map);
         }
         #endregion
     }
