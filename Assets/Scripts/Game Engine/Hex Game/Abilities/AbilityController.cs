@@ -284,80 +284,7 @@ namespace HexGameEngine.Abilities
         }
         #endregion
 
-        // Ability Buttons Logic
-        #region
-        public void BuildHexCharacterAbilityBar(HexCharacterModel character)
-        {
-            Debug.Log("AbilityController.BuildHexCharacterAbilityBar() called...");
-
-            ResetCharacterAbilityBar(character);
-
-            for (int i = 0; i < character.abilityBook.activeAbilities.Count; i++)
-            {
-                BuildAbilityButton(character.hexCharacterView.abilityButtons[i], character.abilityBook.activeAbilities[i]);
-            }
-
-        }
-        private void BuildAbilityButton(AbilityButton button, AbilityData data)
-        {
-            // enable GO
-            button.gameObject.SetActive(true);
-
-            // set sprite
-            button.AbilityImage.sprite = data.AbilitySprite;
-
-            // link data to button
-            button.myAbilityData = data;
-
-            // set cooldown text + views if needed
-            UpdateAbilityButtonCooldownView(button);
-        }
-        private void ResetAbilityButton(AbilityButton button)
-        {
-            button.gameObject.SetActive(false);
-            button.myAbilityData = null;
-        }
-        private void ResetCharacterAbilityBar(HexCharacterModel character)
-        {
-            foreach (AbilityButton b in character.hexCharacterView.abilityButtons)
-            {
-                ResetAbilityButton(b);
-            }
-        }
-        private void UpdateAbilityButtonCooldownView(AbilityButton b)
-        {
-            if (b == null) return;
-
-            b.CooldownText.text = b.myAbilityData.currentCooldown.ToString();
-            if (b.myAbilityData.currentCooldown == 0)
-            {
-                b.CooldownOverlay.SetActive(false);
-                b.CooldownText.gameObject.SetActive(false);
-            }
-            else
-            {
-                b.CooldownOverlay.SetActive(true);
-                b.CooldownText.gameObject.SetActive(true);
-            }
-        }
-        private AbilityButton FindAbilityButton(AbilityData ability)
-        {
-            if (ability.myCharacter == null ||
-                ability.myCharacter.hexCharacterView == null) return null;
-
-            AbilityButton bRet = null;
-            foreach (AbilityButton b in ability.myCharacter.hexCharacterView.abilityButtons)
-            {
-                if (b.myAbilityData == ability)
-                {
-                    bRet = b;
-                    break;
-                }
-            }
-
-            return bRet;
-        }
-        #endregion
+       
 
         // Ability Usage Logic
         #region     
@@ -1254,7 +1181,8 @@ namespace HexGameEngine.Abilities
         private void SetAbilityOnCooldown(AbilityData ability)
         {
             ability.currentCooldown = ability.baseCooldown;
-            UpdateAbilityButtonCooldownView(FindAbilityButton(ability));
+            if(ability.myCharacter != null && TurnController.Instance.EntityActivated == ability.myCharacter)
+                CombatUIController.Instance.UpdateAbilityButtonCooldownView(CombatUIController.Instance.FindAbilityButton(ability));
         }
         public void ReduceCharacterAbilityCooldownsOnTurnStart(HexCharacterModel character)
         {

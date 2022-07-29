@@ -3,7 +3,6 @@ using HexGameEngine.Abilities;
 using HexGameEngine.Combat;
 using HexGameEngine.Perks;
 using HexGameEngine.TurnLogic;
-using HexGameEngine.UCM;
 using Sirenix.OdinInspector;
 using Spriter2UnityDX;
 using System.Collections;
@@ -42,35 +41,7 @@ namespace HexGameEngine.Characters
         public TextMeshProUGUI stressTextWorld;
         public TextMeshProUGUI maxStressTextWorld;
         public Image stressBarShatteredGlowWorld;
-        [PropertySpace(SpaceBefore = 50, SpaceAfter = 0)]
-
-        [Header("GUI Canvas References")]
-        public Canvas uiCanvas;
-        public GameObject uiCanvasParent;
-        public CanvasGroup uiCanvasCg;
-        public UniversalCharacterModel uiPotraitUCM;
-        public TextMeshProUGUI characterNameTextUI;
-        public AbilityButton[] abilityButtons;
-        public StressPanelView stressPanel;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [Header("Health Bar UI References")]
-        public Slider healthBarUI;
-        public TextMeshProUGUI healthTextUI;
-        public TextMeshProUGUI maxHealthTextUI;        
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [Header("Energy UI References")]
-        public Slider energyBar;
-        public TextMeshProUGUI energyTextUI;
-        public TextMeshProUGUI maxEnergyTextUI;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [Header("Stress Bar UI References")]
-        public Slider stressBarUI;
-        public TextMeshProUGUI stressTextUI;
-        public TextMeshProUGUI maxStressTextUI;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [PropertySpace(SpaceBefore = 50, SpaceAfter = 0)]    
 
         [Header("Custom Components")]
         [HideInInspector] public TurnWindow myActivationWindow;

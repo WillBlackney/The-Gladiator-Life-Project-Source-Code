@@ -253,22 +253,14 @@ namespace HexGameEngine
 
                 // Fade out UI elements
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
-                HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
-                if (model.hexCharacterView.uiCanvasParent.activeSelf == true)
-                {
-                    HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
-                }
+                CombatUIController.Instance.FadeOutCharacterUICanvas(null);
             }
 
             // Disable any player character gui's if they're still active
             foreach (HexCharacterModel model in HexCharacterController.Instance.AllDefenders)
             {
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
-                HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
-                if (model.hexCharacterView != null && model.hexCharacterView.uiCanvasParent.activeSelf == true)
-                {
-                    HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
-                }
+                CombatUIController.Instance.FadeOutCharacterUICanvas(null);
             }
 
             // Hide level nodes
@@ -320,6 +312,10 @@ namespace HexGameEngine
             // Zoom camera to reset settings
             CameraController.Instance.DoPostCombatZoomAndMove(1f);
 
+            // Hide main combat GUI
+            if (CombatUIController.Instance.ViewIsActive)
+                CombatUIController.Instance.FadeOutCharacterUICanvas(null);
+
             // Tear down summoned characters + enemies
             List<HexCharacterModel> destCharacters = new List<HexCharacterModel>();
             destCharacters.AddRange(HexCharacterController.Instance.AllSummonedDefenders);
@@ -333,23 +329,13 @@ namespace HexGameEngine
                 CharacterModeller.FadeOutCharacterModel(model.hexCharacterView.ucm, 1f);
 
                 // Fade out UI elements
-                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
-                HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
-                if (model.hexCharacterView.uiCanvasParent.activeSelf == true)
-                {
-                    HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
-                }
+                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);               
             }
 
             // Disable any player character gui's if they're still active
             foreach (HexCharacterModel model in HexCharacterController.Instance.AllDefenders)
             {
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
-                HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
-                if (model.hexCharacterView != null && model.hexCharacterView.uiCanvasParent.activeSelf == true)
-                {
-                    HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
-                }
             }
 
             // Hide level nodes
@@ -398,6 +384,10 @@ namespace HexGameEngine
             // Zoom camera to reset settings
             CameraController.Instance.DoPostCombatZoomAndMove(1f);
 
+            // Hide main combat GUI
+            if (CombatUIController.Instance.ViewIsActive)
+                CombatUIController.Instance.FadeOutCharacterUICanvas(null);
+
             // Tear down summoned characters + enemies
             List<HexCharacterModel> destCharacters = new List<HexCharacterModel>();
             destCharacters.AddRange(HexCharacterController.Instance.AllSummonedDefenders);
@@ -412,22 +402,12 @@ namespace HexGameEngine
 
                 // Fade out UI elements
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
-                HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
-                if (model.hexCharacterView.uiCanvasParent.activeSelf == true)
-                {
-                    HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
-                }
             }
 
             // Disable any player character gui's if they're still active
             foreach (HexCharacterModel model in HexCharacterController.Instance.AllDefenders)
             {
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
-                HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
-                if (model.hexCharacterView != null && model.hexCharacterView.uiCanvasParent.activeSelf == true)
-                {
-                    HexCharacterController.Instance.FadeOutCharacterUICanvas(model.hexCharacterView, null);
-                }
             }
 
             // Hide level nodes

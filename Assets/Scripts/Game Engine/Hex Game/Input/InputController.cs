@@ -64,9 +64,21 @@ namespace HexGameEngine.Utilities
                         didPress = true;
                     }
 
-                    if (didPress && character.hexCharacterView.abilityButtons[key - 1] != null)
+                    else if (Input.GetKeyDown(KeyCode.Alpha9))
                     {
-                        AbilityController.Instance.OnAbilityButtonClicked(character.hexCharacterView.abilityButtons[key - 1]);
+                        key = 9;
+                        didPress = true;
+                    }
+
+                    else if (Input.GetKeyDown(KeyCode.Alpha0))
+                    {
+                        key = 10;
+                        didPress = true;
+                    }
+
+                    if (didPress && CombatUIController.Instance.AbilityButtons[key - 1] != null)
+                    {
+                        AbilityController.Instance.OnAbilityButtonClicked(CombatUIController.Instance.AbilityButtons[key - 1]);
 
                     }
 

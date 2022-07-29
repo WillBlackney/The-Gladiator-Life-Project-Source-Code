@@ -233,12 +233,6 @@ namespace HexGameEngine.Characters
         {
             HexCharacterView view = character.hexCharacterView;
 
-            // Get camera references
-            view.uiCanvas.worldCamera = CameraController.Instance.MainCamera;
-
-            // Disable main UI canvas + card UI stuff
-            view.uiCanvasParent.SetActive(false);
-
             if (character.controller == Controller.Player) view.stressBarWorld.gameObject.SetActive(true);
             
         }
@@ -266,7 +260,7 @@ namespace HexGameEngine.Characters
             ModifyArmour(character, ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet));
 
             // Misc UI setup
-            character.hexCharacterView.characterNameTextUI.text = character.myName;
+            //character.hexCharacterView.characterNameTextUI.text = character.myName;
 
             // Set up items
             ItemController.Instance.RunItemSetupOnHexCharacterFromItemSet(character, data.itemSet);
@@ -274,8 +268,8 @@ namespace HexGameEngine.Characters
             // Build UCMs
             CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.ucm, data.modelParts);
             CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.ucm);
-            CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.uiPotraitUCM, data.modelParts);
-            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.uiPotraitUCM);
+            //CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.uiPotraitUCM, data.modelParts);
+            //CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.uiPotraitUCM);
             SetCharacterModelSize(character.hexCharacterView, data.modelSize);
 
             // Build activation window
@@ -494,10 +488,9 @@ namespace HexGameEngine.Characters
             character.hexCharacterView.healthTextWorld.text = health.ToString();
             //character.hexCharacterView.maxHealthTextWorld.text = maxHealth.ToString();
 
-            // Modify UI elements
-            character.hexCharacterView.healthBarUI.value = healthBarFloat;
-            character.hexCharacterView.healthTextUI.text = health.ToString();
-            character.hexCharacterView.maxHealthTextUI.text = maxHealth.ToString();
+            // Modify Screen UI elements
+            if (TurnController.Instance.EntityActivated == character)
+                CombatUIController.Instance.UpdateHealthComponents(health, maxHealth);
 
         }
         #endregion
@@ -532,6 +525,9 @@ namespace HexGameEngine.Characters
             if (armour > 0) character.hexCharacterView.armourParentWorldUI.SetActive(true);
             else character.hexCharacterView.armourParentWorldUI.SetActive(false);
             character.hexCharacterView.armourTextWorld.text = armour.ToString();
+
+            if(TurnController.Instance.EntityActivated == character)
+                CombatUIController.Instance.CurrentArmourText.text = armour.ToString();
 
         }
         #endregion
@@ -634,11 +630,8 @@ namespace HexGameEngine.Characters
             character.hexCharacterView.stressTextWorld.text = stress.ToString();
 
             // Modify UI elements
-            character.hexCharacterView.stressBarUI.value = stressBarFloat;
-            character.hexCharacterView.stressTextUI.text = stress.ToString();
-            character.hexCharacterView.maxStressTextUI.text = "100";
-
-            character.hexCharacterView.stressPanel.BuildPanelViews(character);
+            if(TurnController.Instance.EntityActivated == character)            
+                CombatUIController.Instance.UpdateStressComponents(stress, character);            
 
         }
 
@@ -864,8 +857,9 @@ namespace HexGameEngine.Characters
             if (character.controller == Controller.Player && IsCharacterAbleToTakeActions(character))
             {
                 // Build ability bar
-                AbilityController.Instance.BuildHexCharacterAbilityBar(character);
-                VisualEventManager.Instance.CreateVisualEvent(() => FadeInCharacterUICanvas(character.hexCharacterView, null), QueuePosition.Back);
+                //CombatUIController.Instance.BuildHexCharacterAbilityBar(character);
+                // VisualEventManager.Instance.CreateVisualEvent(() => FadeInCharacterUICanvas(character.hexCharacterView, null), QueuePosition.Back);
+                VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.BuildAndShowView(character), QueuePosition.Back);
             }              
 
             if (!character.hasRequestedTurnDelay)
@@ -1123,9 +1117,9 @@ namespace HexGameEngine.Characters
             // Do player character exclusive logic
             if (character.controller == Controller.Player)
             {
-                // Fade out view
+                // Fade out viewFF
                 CoroutineData fadeOutEvent = new CoroutineData();
-                VisualEventManager.Instance.CreateVisualEvent(() => FadeOutCharacterUICanvas(character.hexCharacterView, fadeOutEvent), fadeOutEvent);
+                VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.FadeOutCharacterUICanvas(fadeOutEvent), fadeOutEvent);
             }
 
             if (!character.hasRequestedTurnDelay)
@@ -1514,10 +1508,11 @@ namespace HexGameEngine.Characters
             QueuePosition qPos = QueuePosition.Back;
             if (updateEnergyGuiInstantly) qPos = QueuePosition.Front;
 
+            /*
             int energyVfxValue = character.currentEnergy;
             int maxEnergyVfxValue = StatCalculator.GetTotalMaxEnergy(character);
             VisualEventManager.Instance.CreateVisualEvent(() => UpdateEnergyGUIElements(character, energyVfxValue, maxEnergyVfxValue), qPos, 0, 0);
-
+            */
             //CardController.Instance.AutoUpdateCardsInHandGlowOutlines(character);
             // to do maybe: auto update ability bar glows??
         }
@@ -1538,67 +1533,18 @@ namespace HexGameEngine.Characters
             QueuePosition qPos = QueuePosition.Back;
             if (updateEnergyGuiInstantly) qPos = QueuePosition.Front;
 
+            /*
             int energyVfxValue = character.currentEnergy;
             int maxEnergyVfxValue = StatCalculator.GetTotalMaxEnergy(character);
             VisualEventManager.Instance.CreateVisualEvent(() => UpdateEnergyGUIElements(character, energyVfxValue, maxEnergyVfxValue), qPos, 0, 0);
+            */
 
         }             
-        private void UpdateEnergyGUIElements(HexCharacterModel character, int energy, int maxEnergy)
-        {
-            // Convert energy int values to floats
-            float currentHealthFloat = energy;
-            float currentMaxHealthFloat = maxEnergy;
-            float healthBarFloat = currentHealthFloat / currentMaxHealthFloat;
-
-            // Modify text + slider ui
-            character.hexCharacterView.energyBar.value = healthBarFloat;
-            character.hexCharacterView.energyTextUI.text = energy.ToString();
-            character.hexCharacterView.maxEnergyTextUI.text = maxEnergy.ToString();
-
-        }
         #endregion
 
         // UI Visual Events
         #region
-        public void FadeInCharacterUICanvas(HexCharacterView view, CoroutineData cData)
-        {
-            if (view == null)
-            {
-                if (cData != null) cData.MarkAsCompleted();
-                return;
-            }
-            view.uiCanvasParent.SetActive(true);
-            view.uiCanvasCg.alpha = 0;
-            Sequence s = DOTween.Sequence();
-            s.Append(view.uiCanvasCg.DOFade(1, 0.75f));
-            s.OnComplete(() =>
-            {
-                // Resolve
-                if (cData != null)
-                    cData.MarkAsCompleted();
-            });
-        }
-        public void FadeOutCharacterUICanvas(HexCharacterView view, CoroutineData cData)
-        {
-            if (view == null)
-            {
-                if (cData != null) cData.MarkAsCompleted();
-                return;
-            }
-            view.uiCanvasParent.SetActive(true);
-            Sequence s = DOTween.Sequence();
-            s.Append(view.uiCanvasCg.DOFade(0, 0.75f));
-            s.OnComplete(() =>
-            {
-                view.uiCanvasParent.SetActive(false);
-
-                // Resolve
-                if (cData != null)
-                {
-                    cData.MarkAsCompleted();
-                }
-            });
-        }
+       
         public void FadeOutCharacterWorldCanvas(HexCharacterView view, CoroutineData cData, float fadeSpeed = 1f, float endAlpha = 0f)
         {
             if (view == null)
