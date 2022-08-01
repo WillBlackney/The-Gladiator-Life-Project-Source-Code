@@ -16,9 +16,22 @@ namespace HexGameEngine.Characters
     public class CombatUIController : Singleton<CombatUIController>
     {
         [Header("Core Canvas Components")]
-        [SerializeField] private Canvas uiCanvas;
-        [SerializeField] private GameObject uiCanvasParent;
-        [SerializeField] private CanvasGroup uiCanvasCg;     
+        [SerializeField] private GameObject mainVisualParent;
+        [SerializeField] private CanvasGroup mainCanvasCg;     
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+
+        [Header("Positioning Components")]
+        [SerializeField] private Transform middlePanelTransform;
+        [SerializeField] private Transform middlePanelOnScreenPos;
+        [SerializeField] private Transform middlePanelOffScreenPos;
+        [PropertySpace(SpaceBefore = 10, SpaceAfter = 0)]
+        [SerializeField] private Transform leftPanelTransform;
+        [SerializeField] private Transform leftPanelOnScreenPos;
+        [SerializeField] private Transform leftPanelOffScreenPos;
+        [PropertySpace(SpaceBefore = 10, SpaceAfter = 0)]
+        [SerializeField] private Transform rightPanelTransform;
+        [SerializeField] private Transform rightPanelOnScreenPos;
+        [SerializeField] private Transform rightPanelOffScreenPos;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Middle Section Components")]
@@ -34,14 +47,23 @@ namespace HexGameEngine.Characters
 
         [Header("Health Bar UI References")]
         [SerializeField] private Slider healthBarUI;
-        [SerializeField] private TextMeshProUGUI healthTextUI;
-        [SerializeField] private TextMeshProUGUI maxHealthTextUI;
+        [SerializeField] private TextMeshProUGUI currentHealthText;
+        [SerializeField] private TextMeshProUGUI maxHealthText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Stress Bar UI References")]
         [SerializeField] private Slider stressBarUI;
-        [SerializeField] private TextMeshProUGUI stressTextUI;
-        [SerializeField] private TextMeshProUGUI maxStressTextUI;
+        [SerializeField] private TextMeshProUGUI stressText;
+        [SerializeField] private TextMeshProUGUI maxStressText;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+
+        [Header("End + Delay Turn Button Components")]
+        public Button endTurnButton;
+        public Button delayTurnButton;
+        public Image delayTurnButtonImage;
+        public Sprite delayTurnButtonReadySprite;
+        public Sprite delayTurnButtonNotReadySprite;
+
 
         #region Getters + Accessors
         public TextMeshProUGUI CurrentArmourText
@@ -56,14 +78,23 @@ namespace HexGameEngine.Characters
         {
             get 
             { 
-                return uiCanvasParent.activeSelf; 
+                return mainVisualParent.activeSelf; 
             } 
         }
         #endregion
 
-        #region Build Show, Hide and Move Main View
-        public void BuildAndShowView(HexCharacterModel character)
+        #region Build Show, Hide and Animate Main Views
+        public void BuildAndShowViewsOnTurnStart(HexCharacterModel character)
         {
+            SetInteractability(true);
+            mainVisualParent.SetActive(true);
+
+            float speed = 0.75f;
+
+            middlePanelTransform.localPosition = middlePanelOffScreenPos.localPosition;
+            rightPanelTransform.localPosition = rightPanelOffScreenPos.localPosition;
+            leftPanelTransform.localPosition = leftPanelOffScreenPos.localPosition;
+
             // Ability Bar
             BuildHexCharacterAbilityBar(character);
 
@@ -82,47 +113,69 @@ namespace HexGameEngine.Characters
 
             // Armour
             currentArmourText.text = character.currentArmour.ToString();
-        }
-        public void FadeInCharacterUICanvas(HexCharacterView view, CoroutineData cData)
-        {
-            // TO DO:
-            // build all the views to current character state
-            // animate the canvas on screen from off screen
 
-            if (view == null)
+            // End + Delay Turn Buttons
+            BuildTurnButtons(character);
+
+            // Fade in views
+            CharacterModeller.FadeOutCharacterModel(uiPotraitUCM, 0);
+            CharacterModeller.FadeInCharacterModel(uiPotraitUCM, speed);
+            mainCanvasCg.DOKill();
+            mainCanvasCg.alpha = 0.001f;
+            mainCanvasCg.DOFade(1f, speed);
+
+            // Animate on screen
+            MovePanelsOnScreen(speed);
+        }
+        public void HideViewsOnTurnEnd(CoroutineData cData = null, float speed = 1.5f)
+        {
+            SetInteractability(false);
+            mainCanvasCg.DOKill();
+           // mainCanvasCg.interactable = false;
+           // mainCanvasCg.blocksRaycasts = false;
+
+            middlePanelTransform.localPosition = middlePanelOnScreenPos.localPosition;
+            rightPanelTransform.localPosition = rightPanelOnScreenPos.localPosition;
+            leftPanelTransform.localPosition = leftPanelOnScreenPos.localPosition;
+
+            MovePanelsOffScreen(speed);
+            
+            // Fade out views
+            CharacterModeller.FadeOutCharacterModel(uiPotraitUCM, speed);            
+            Sequence s = DOTween.Sequence();
+            s.Append(mainCanvasCg.DOFade(0f, speed));
+            s.OnComplete(() =>
             {
+                mainVisualParent.SetActive(false);
                 if (cData != null) cData.MarkAsCompleted();
-                return;
-            }
-            uiCanvasParent.SetActive(true);
-            uiCanvasCg.alpha = 0;
-            Sequence s = DOTween.Sequence();
-            s.Append(uiCanvasCg.DOFade(1, 0.75f));
-            s.OnComplete(() =>
-            {
-                // Resolve
-                if (cData != null)
-                    cData.MarkAsCompleted();
             });
         }
-        public void FadeOutCharacterUICanvas(CoroutineData cData)
+        private void MovePanelsOnScreen(float moveSpeed = 0.5f)
         {
-            // TO DO:
-            // animate the canvas on screen from off screen and fade out
+            // Stop all animations + reset
+            middlePanelTransform.DOKill();
+            rightPanelTransform.DOKill();
+            leftPanelTransform.DOKill();
 
-            uiCanvasParent.SetActive(true);
-            Sequence s = DOTween.Sequence();
-            s.Append(uiCanvasCg.DOFade(0, 0.75f));
-            s.OnComplete(() =>
-            {
-                uiCanvasParent.SetActive(false);
+            middlePanelTransform.DOMove(middlePanelOnScreenPos.position, moveSpeed);
+            rightPanelTransform.DOMove(rightPanelOnScreenPos.position, moveSpeed);
+            leftPanelTransform.DOMove(leftPanelOnScreenPos.position, moveSpeed);
+        }
+        private void MovePanelsOffScreen(float moveSpeed = 0.5f)
+        {
+            // Stop all animations + reset
+            middlePanelTransform.DOKill();
+            rightPanelTransform.DOKill();
+            leftPanelTransform.DOKill();
 
-                // Resolve
-                if (cData != null)
-                {
-                    cData.MarkAsCompleted();
-                }
-            });
+            middlePanelTransform.DOMove(middlePanelOffScreenPos.position, moveSpeed);
+            rightPanelTransform.DOMove(rightPanelOffScreenPos.position, moveSpeed);
+            leftPanelTransform.DOMove(leftPanelOffScreenPos.position, moveSpeed);
+        }
+        public void SetInteractability(bool onOrOff)
+        {
+            mainCanvasCg.interactable = onOrOff;
+            mainCanvasCg.blocksRaycasts = onOrOff;
         }
         #endregion
 
@@ -136,8 +189,8 @@ namespace HexGameEngine.Characters
 
             // Modify UI elements
             healthBarUI.value = healthBarFloat;
-            healthTextUI.text = health.ToString();
-            maxHealthTextUI.text = maxHealth.ToString();
+            currentHealthText.text = health.ToString();
+            maxHealthText.text = maxHealth.ToString();
         }
         public void UpdateStressComponents(int stress, HexCharacterModel character)
         {
@@ -147,8 +200,8 @@ namespace HexGameEngine.Characters
 
             // Modify UI elements
             stressBarUI.value = stressBarFloat;
-            stressTextUI.text = stress.ToString();
-            maxStressTextUI.text = "100";
+            stressText.text = stress.ToString();
+            maxStressText.text = "100";
 
             stressPanel.BuildPanelViews(character);
         }
@@ -161,58 +214,16 @@ namespace HexGameEngine.Characters
         #region Ability Bar Logic
         private void BuildHexCharacterAbilityBar(HexCharacterModel character)
         {
-            Debug.Log("AbilityController.BuildHexCharacterAbilityBar() called...");
+            ResetCharacterAbilityBar();
 
-            ResetCharacterAbilityBar(character);
-
-            for (int i = 0; i < character.abilityBook.activeAbilities.Count; i++)
-            {
-                BuildAbilityButton(abilityButtons[i], character.abilityBook.activeAbilities[i]);
-            }
-
-        }
-        private void BuildAbilityButton(AbilityButton button, AbilityData data)
+            for (int i = 0; i < character.abilityBook.activeAbilities.Count; i++)            
+                abilityButtons[i].BuildButton(character.abilityBook.activeAbilities[i]);
+        }             
+        private void ResetCharacterAbilityBar()
         {
-            // enable GO
-            button.gameObject.SetActive(true);
-
-            // set sprite
-            button.AbilityImage.sprite = data.AbilitySprite;
-
-            // link data to button
-            button.myAbilityData = data;
-
-            // set cooldown text + views if needed
-            UpdateAbilityButtonCooldownView(button);
-        }
-        private void ResetAbilityButton(AbilityButton button)
-        {
-            button.gameObject.SetActive(false);
-            button.myAbilityData = null;
-        }
-        private void ResetCharacterAbilityBar(HexCharacterModel character)
-        {
-            foreach (AbilityButton b in abilityButtons)
-            {
-                ResetAbilityButton(b);
-            }
-        }
-        public void UpdateAbilityButtonCooldownView(AbilityButton b)
-        {
-            if (b == null) return;
-
-            b.CooldownText.text = b.myAbilityData.currentCooldown.ToString();
-            if (b.myAbilityData.currentCooldown == 0)
-            {
-                b.CooldownOverlay.SetActive(false);
-                b.CooldownText.gameObject.SetActive(false);
-            }
-            else
-            {
-                b.CooldownOverlay.SetActive(true);
-                b.CooldownText.gameObject.SetActive(true);
-            }
-        }
+            foreach (AbilityButton b in abilityButtons)            
+                b.ResetButton();            
+        }       
         public AbilityButton FindAbilityButton(AbilityData ability)
         {
             if (ability.myCharacter == null) return null;
@@ -220,7 +231,7 @@ namespace HexGameEngine.Characters
             AbilityButton bRet = null;
             foreach (AbilityButton b in abilityButtons)
             {
-                if (b.myAbilityData == ability)
+                if (b.MyAbilityData == ability)
                 {
                     bRet = b;
                     break;
@@ -229,6 +240,33 @@ namespace HexGameEngine.Characters
 
             return bRet;
         }
+        #endregion
+
+        #region End + Delay Turn Buttons Logic
+        private void BuildTurnButtons(HexCharacterModel character)
+        {
+            SetEndTurnButtonInteractions(true);
+            if (character.hasRequestedTurnDelay)
+            {
+                SetEndDelayTurnButtonInteractions(false);
+                delayTurnButtonImage.sprite = delayTurnButtonNotReadySprite;
+            }
+            else
+            {
+                SetEndDelayTurnButtonInteractions(true);
+                delayTurnButtonImage.sprite = delayTurnButtonReadySprite;
+            }
+        }
+        public void SetEndTurnButtonInteractions(bool interactable)
+        {
+            endTurnButton.interactable = interactable;
+        }
+        public void SetEndDelayTurnButtonInteractions(bool interactable)
+        {
+            delayTurnButton.interactable = interactable;
+        }
+
+
         #endregion
     }
 }

@@ -1181,8 +1181,20 @@ namespace HexGameEngine.Abilities
         private void SetAbilityOnCooldown(AbilityData ability)
         {
             ability.currentCooldown = ability.baseCooldown;
-            if(ability.myCharacter != null && TurnController.Instance.EntityActivated == ability.myCharacter)
-                CombatUIController.Instance.UpdateAbilityButtonCooldownView(CombatUIController.Instance.FindAbilityButton(ability));
+            if (ability.myCharacter != null &&
+                TurnController.Instance.EntityActivated == ability.myCharacter &&
+                ability.myCharacter.controller == Controller.Player)
+            { 
+                foreach(AbilityButton b in CombatUIController.Instance.AbilityButtons)
+                {
+                    if(b.MyAbilityData == ability)
+                    {
+                        b.UpdateAbilityButtonCooldownView();
+                        break;
+                    }
+                }
+            }
+            
         }
         public void ReduceCharacterAbilityCooldownsOnTurnStart(HexCharacterModel character)
         {
@@ -1203,7 +1215,7 @@ namespace HexGameEngine.Abilities
         public void OnAbilityButtonClicked(AbilityButton b)
         {
             Debug.Log("AbilityController.OnAbilityButtonClicked() called...");
-            if (IsAbilityUseable(b.myAbilityData.myCharacter, b.myAbilityData))
+            if (IsAbilityUseable(b.MyAbilityData.myCharacter, b.MyAbilityData))
             {
                 // clear move selection state + views
                 MoveActionController.Instance.ResetSelectionState();
@@ -1214,8 +1226,8 @@ namespace HexGameEngine.Abilities
         }
         private void HandleAbilityButtonClicked(AbilityButton b)
         {
-            HexCharacterModel caster = b.myAbilityData.myCharacter;
-            AbilityData ability = b.myAbilityData;
+            HexCharacterModel caster = b.MyAbilityData.myCharacter;
+            AbilityData ability = b.MyAbilityData;
 
             if (currentAbilityAwaiting != null || ability.targetRequirement == TargetRequirement.NoTarget)
             {
@@ -1224,7 +1236,7 @@ namespace HexGameEngine.Abilities
             }
 
             // cache ability, get ready for second click, or for instant use
-            currentAbilityAwaiting = b.myAbilityData;
+            currentAbilityAwaiting = b.MyAbilityData;
             currentSelectionPhase = AbilitySelectionPhase.None;
 
             // Highlight tiles in range of ability

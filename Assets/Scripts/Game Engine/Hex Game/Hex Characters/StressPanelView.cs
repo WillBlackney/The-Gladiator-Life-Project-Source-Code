@@ -6,6 +6,7 @@ using TMPro;
 using HexGameEngine.Combat;
 using HexGameEngine.Libraries;
 using HexGameEngine.Utilities;
+using HexGameEngine.UI;
 
 namespace HexGameEngine.Characters
 {
@@ -21,6 +22,7 @@ namespace HexGameEngine.Characters
         [SerializeField] Image popUpStressStateIcon;
         [SerializeField] TextMeshProUGUI popUpHeaderText;
         [SerializeField] TextMeshProUGUI popUpDescriptionText;
+        [SerializeField] ModalDottedRow[] dottedRows;
         #endregion
 
 
@@ -49,15 +51,26 @@ namespace HexGameEngine.Characters
 
             // Popup
             popUpStressStateIcon.sprite = stressSprite;
-            popUpHeaderText.text = TextLogic.ReturnColoredText(stressState.ToString(), TextLogic.neutralYellow) + " (" +
-                stressRanges[0].ToString() + " - " + stressRanges[1].ToString() + ")";
+            popUpHeaderText.text = stressState.ToString() +
+               TextLogic.ReturnColoredText(" (" + stressRanges[0].ToString() + " - " + stressRanges[1].ToString() + ")", TextLogic.neutralYellow);
 
-            string modSymbol = "";
-            if (stressState == StressState.Confident) modSymbol = "+";
+            // to do: italic description text
 
-            popUpDescriptionText.text = modSymbol + stressMod.ToString() + " " + "Accuracy \n" +
-                modSymbol + stressMod.ToString() + " " + "Dodge \n" +
-                modSymbol + stressMod.ToString() + " " + "Resolve";
+            string[] attributes = { "Accuracy", "Dodge", "Resolve" };
+
+            for(int i = 0; i < 3; i++)
+            {
+                DotStyle style = DotStyle.Red;
+                string modSymbol = "";
+                if (stressState == StressState.Confident) 
+                {
+                    style = DotStyle.Green;
+                    modSymbol = "+";
+                }
+
+                dottedRows[i].Build(modSymbol + stressMod.ToString() + " " + attributes[i], style);
+            }
+           
 
         }
         #endregion

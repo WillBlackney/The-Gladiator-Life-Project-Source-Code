@@ -109,19 +109,7 @@ namespace HexGameEngine.CameraSystems
             // Reset Orthographic size
             MainCamera.DOOrthoSize(5, duration);
         }
-        public void DoPostCombatZoomAndMove(float duration = 0)
-        {
-            /*
-            // Get centre vector pos
-            Vector2 centre = LevelController.Instance.CurrentHexMap.WorldCentre;
-
-            // Reset position
-            MainCamera.transform.DOMove(new Vector3(centre.x, centre.y, -15), duration);
-
-            // Reset Orthographic size
-            MainCamera.DOOrthoSize(5, duration);
-            */
-        }
+       
         #endregion
 
     }

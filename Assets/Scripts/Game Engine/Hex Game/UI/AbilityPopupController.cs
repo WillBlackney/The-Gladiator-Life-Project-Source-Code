@@ -70,7 +70,7 @@ namespace HexGameEngine.UI
         public void OnAbilityButtonMousedOver(AbilityButton b)
         {
             FadeInPanel();
-            BuildPanelFromAbilityData(b.myAbilityData);
+            BuildPanelFromAbilityData(b.MyAbilityData);
             PlacePanelOnAbilityBarButton(b);
             ForceRebuildLayouts();
         }

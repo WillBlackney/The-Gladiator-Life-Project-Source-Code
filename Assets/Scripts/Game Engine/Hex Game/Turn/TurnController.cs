@@ -163,8 +163,8 @@ namespace HexGameEngine.TurnLogic
             VisualEventManager.Instance.CreateVisualEvent(() => SetPanelArrowViewState(false));
 
             // Disable End turn + delay turn button
-            VisualEventManager.Instance.CreateVisualEvent(() => DisableEndTurnButtonView());
-            VisualEventManager.Instance.CreateVisualEvent(() => DisableDelayTurnButtonView());
+           // VisualEventManager.Instance.CreateVisualEvent(() => DisableEndTurnButtonView());
+           // VisualEventManager.Instance.CreateVisualEvent(() => DisableDelayTurnButtonView());
 
             // Move windows to start positions if combat has only just started
             if (CurrentTurn == 0)
@@ -238,12 +238,13 @@ namespace HexGameEngine.TurnLogic
             VisualEventManager.Instance.CreateVisualEvent(() => DisplayTurnChangeNotification(turnNotificationCoroutine), turnNotificationCoroutine);
 
             // Enable end turn + delay button visual event
+            /*
             VisualEventManager.Instance.CreateVisualEvent(() => 
             { 
                 EnableEndTurnButtonView();
                 EnableDelayTurnButtonView();
             });
-
+            */
             // Activate the first character in the turn cycle
             ActivateEntity(activationOrder[0]);
         }
@@ -329,7 +330,7 @@ namespace HexGameEngine.TurnLogic
         {
             Debug.Log("TurnController.OnEndTurnButtonClicked() called...");
 
-            // wait until all card draw visual events have completed
+            // wait until all visual events have completed
             // prevent function if game over sequence triggered
             if (CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
                  //MainMenuController.Instance.AnyMenuScreenIsActive() == false &&
@@ -389,23 +390,16 @@ namespace HexGameEngine.TurnLogic
             // Player controlled characters
             if (entity.controller == Controller.Player)
             {
-                VisualEventManager.Instance.CreateVisualEvent(() => SetPlayerTurnButtonState());
+                //VisualEventManager.Instance.CreateVisualEvent(() => SetPlayerTurnButtonState());
 
                 if (entity.hasRequestedTurnDelay)
                 {
-                    DisableDelayTurnButtonInteractions();
+                    //DisableDelayTurnButtonInteractions();
                 }
                 else
                 {
-                    EnableDelayTurnButtonInteractions();
+                   // EnableDelayTurnButtonInteractions();
                 }
-            }
-
-            // Enemy controlled characters
-            else if (entity.allegiance == Allegiance.Enemy &&
-                     entity.controller == Controller.AI)
-            {
-                VisualEventManager.Instance.CreateVisualEvent(() => SetEnemyTurnButtonState());
             }
 
             // Move arrow to point at activated enemy
@@ -478,93 +472,6 @@ namespace HexGameEngine.TurnLogic
             }
             return boolReturned;
         }
-        #endregion
-
-        // End Turn Button Logic
-        #region
-        public void DisableEndTurnButtonInteractions()
-        {
-            EndTurnButton.interactable = false;
-        }
-        public void EnableEndTurnButtonInteractions()
-        {
-            EndTurnButton.interactable = true;
-        }
-        public void DisableEndTurnButtonView()
-        {
-            EndTurnButton.gameObject.SetActive(false);
-            StartCoroutine(FadeOutEndTurnButton());
-        }
-        private IEnumerator FadeOutEndTurnButton()
-        {
-            EndTurnButtonCG.alpha = 1;
-            float uiFadeSpeed = 10f;
-
-            while (EndTurnButtonCG.alpha > 0)
-            {
-                EndTurnButtonCG.alpha -= 0.1f * uiFadeSpeed * Time.deltaTime;
-                yield return new WaitForEndOfFrame();
-            }
-        }
-        public void EnableEndTurnButtonView()
-        {
-            EndTurnButton.gameObject.SetActive(true);
-            StartCoroutine(FadeInEndTurnButton());
-        }
-        private IEnumerator FadeInEndTurnButton()
-        {
-            EndTurnButtonCG.alpha = 0;
-            float uiFadeSpeed = 10f;
-
-            while (EndTurnButtonCG.alpha < 1)
-            {
-                EndTurnButtonCG.alpha += 0.1f * uiFadeSpeed * Time.deltaTime;
-                yield return new WaitForEndOfFrame();
-            }
-        }
-        public void SetEndTurnButtonColor(Color newColor)
-        {
-            EndTurnButtonBGImage.DOColor(newColor, 0.5f);
-        }
-        public void SetEndTurnButtonText(string newText)
-        {
-            EndTurnButtonText.text = newText;
-        }
-        public void SetPlayerTurnButtonState()
-        {
-            Debug.Log("TurnController.SetPlayerTurnButtonState() called...");
-            EnableEndTurnButtonInteractions();
-            SetEndTurnButtonText("End Activation");
-            SetEndTurnButtonColor(endTurnButtonEnabledColor);
-        }
-        public void SetEnemyTurnButtonState()
-        {
-            Debug.Log("TurnController.SetEnemyTurnButtonState() called...");
-            DisableEndTurnButtonInteractions();
-            SetEndTurnButtonText("Enemy Activation...");
-            SetEndTurnButtonColor(endTurnButtonDisabledColor);
-        }
-        #endregion
-
-        // Delay Turn Button Logic
-        #region
-        public void DisableDelayTurnButtonInteractions()
-        {
-            DelayTurnButton.interactable = false;
-        }
-        public void EnableDelayTurnButtonInteractions()
-        {
-            DelayTurnButton.interactable = true;
-        }
-        public void DisableDelayTurnButtonView()
-        {
-            DelayTurnButton.gameObject.SetActive(false);
-        }      
-        public void EnableDelayTurnButtonView()
-        {
-            DelayTurnButton.gameObject.SetActive(true);
-        }       
-       
         #endregion
 
 

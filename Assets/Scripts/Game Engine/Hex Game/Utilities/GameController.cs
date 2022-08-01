@@ -239,9 +239,6 @@ namespace HexGameEngine
             // wait until v queue count = 0
             yield return new WaitUntil(() => VisualEventManager.Instance.EventQueue.Count == 0);
 
-            // Zoom camera to reset settings
-            CameraController.Instance.DoPostCombatZoomAndMove(1f);
-
             // Tear down summoned characters
             foreach (HexCharacterModel model in HexCharacterController.Instance.AllSummonedDefenders)
             {
@@ -253,14 +250,12 @@ namespace HexGameEngine
 
                 // Fade out UI elements
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
-                CombatUIController.Instance.FadeOutCharacterUICanvas(null);
             }
 
             // Disable any player character gui's if they're still active
             foreach (HexCharacterModel model in HexCharacterController.Instance.AllDefenders)
             {
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
-                CombatUIController.Instance.FadeOutCharacterUICanvas(null);
             }
 
             // Hide level nodes
@@ -269,9 +264,8 @@ namespace HexGameEngine
             // Destroy Activation windows
             TurnController.Instance.DestroyAllActivationWindows();
 
-            // Hide end turn button
-            TurnController.Instance.DisableEndTurnButtonView();
-            TurnController.Instance.DisableDelayTurnButtonView();
+            // Hide combat UI
+            CombatUIController.Instance.HideViewsOnTurnEnd();
 
             // Determine characters to reward XP to
             List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();
@@ -309,13 +303,6 @@ namespace HexGameEngine
             // wait until v queue count = 0
             yield return new WaitUntil(() => VisualEventManager.Instance.EventQueue.Count == 0);
 
-            // Zoom camera to reset settings
-            CameraController.Instance.DoPostCombatZoomAndMove(1f);
-
-            // Hide main combat GUI
-            if (CombatUIController.Instance.ViewIsActive)
-                CombatUIController.Instance.FadeOutCharacterUICanvas(null);
-
             // Tear down summoned characters + enemies
             List<HexCharacterModel> destCharacters = new List<HexCharacterModel>();
             destCharacters.AddRange(HexCharacterController.Instance.AllSummonedDefenders);
@@ -344,9 +331,8 @@ namespace HexGameEngine
             // Destroy Activation windows
             TurnController.Instance.DestroyAllActivationWindows();
 
-            // Hide end turn button
-            TurnController.Instance.DisableEndTurnButtonView();
-            TurnController.Instance.DisableDelayTurnButtonView();
+            // Hide combat UI
+            CombatUIController.Instance.HideViewsOnTurnEnd();
 
             // Determine characters to reward XP to
             List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();
@@ -381,13 +367,6 @@ namespace HexGameEngine
             // wait until v queue count = 0
             yield return new WaitUntil(() => VisualEventManager.Instance.EventQueue.Count == 0);
 
-            // Zoom camera to reset settings
-            CameraController.Instance.DoPostCombatZoomAndMove(1f);
-
-            // Hide main combat GUI
-            if (CombatUIController.Instance.ViewIsActive)
-                CombatUIController.Instance.FadeOutCharacterUICanvas(null);
-
             // Tear down summoned characters + enemies
             List<HexCharacterModel> destCharacters = new List<HexCharacterModel>();
             destCharacters.AddRange(HexCharacterController.Instance.AllSummonedDefenders);
@@ -416,9 +395,8 @@ namespace HexGameEngine
             // Destroy Activation windows
             TurnController.Instance.DestroyAllActivationWindows();
 
-            // Hide end turn button
-            TurnController.Instance.DisableEndTurnButtonView();
-            TurnController.Instance.DisableDelayTurnButtonView();
+            // Hide combat UI
+            CombatUIController.Instance.HideViewsOnTurnEnd();
 
             // Show Game over screen
             CombatRewardController.Instance.BuildAndShowGameOverScreen();
@@ -548,8 +526,9 @@ namespace HexGameEngine
             // Destroy combat + town scenes
             HexCharacterController.Instance.HandleTearDownCombatScene();
             TurnController.Instance.DestroyAllActivationWindows();
-            TurnController.Instance.DisableEndTurnButtonView();
-            TurnController.Instance.DisableDelayTurnButtonView();
+
+            // Hide combat UI
+            CombatUIController.Instance.HideViewsOnTurnEnd();
 
             TownController.Instance.TearDownOnExitToMainMenu();
             CharacterScrollPanelController.Instance.HideMainView();

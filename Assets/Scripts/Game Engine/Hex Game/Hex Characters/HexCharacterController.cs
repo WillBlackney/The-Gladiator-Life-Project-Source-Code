@@ -489,7 +489,7 @@ namespace HexGameEngine.Characters
             //character.hexCharacterView.maxHealthTextWorld.text = maxHealth.ToString();
 
             // Modify Screen UI elements
-            if (TurnController.Instance.EntityActivated == character)
+            if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
                 CombatUIController.Instance.UpdateHealthComponents(health, maxHealth);
 
         }
@@ -630,7 +630,7 @@ namespace HexGameEngine.Characters
             character.hexCharacterView.stressTextWorld.text = stress.ToString();
 
             // Modify UI elements
-            if(TurnController.Instance.EntityActivated == character)            
+            if(TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)            
                 CombatUIController.Instance.UpdateStressComponents(stress, character);            
 
         }
@@ -856,10 +856,8 @@ namespace HexGameEngine.Characters
 
             if (character.controller == Controller.Player && IsCharacterAbleToTakeActions(character))
             {
-                // Build ability bar
-                //CombatUIController.Instance.BuildHexCharacterAbilityBar(character);
-                // VisualEventManager.Instance.CreateVisualEvent(() => FadeInCharacterUICanvas(character.hexCharacterView, null), QueuePosition.Back);
-                VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.BuildAndShowView(character), QueuePosition.Back);
+                // Build combat GUI
+                VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.BuildAndShowViewsOnTurnStart(character), QueuePosition.Back);
             }              
 
             if (!character.hasRequestedTurnDelay)
@@ -871,56 +869,7 @@ namespace HexGameEngine.Characters
 
             // Check effects that are triggered on the first turn only
             if (TurnController.Instance.CurrentTurn == 1 && !character.hasRequestedTurnDelay)
-            {            
-                /*
-                // TO DO: characters should START combat with these effects, not gain them on the start of their
-                // first turn. move this code somewhere else.
-
-                // Tough (gain X block)
-                if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Tough))
-                {
-                    int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Tough);
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Block, stacks, true, 0.5f);
-                }
-
-                // Motivated (gain X focus)
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Motivated))
-                {
-                    int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Motivated);
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Focus, stacks, true, 0.5f);
-                }
-
-                // Thief background (gain 1 stealth)
-                if (RandomGenerator.NumberBetween(1,2) == 1 && 
-                    CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Thief))
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Stealth, 1, true, 0.5f);
-                }
-
-                // Elf (gain rune)
-                if (character.race == CharacterRace.Elf && character.controller == Controller.Player)
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Rune, 1, true, 0.5f);
-                }
-
-                // Human (gain flight)
-                if (character.race == CharacterRace.Human && character.controller == Controller.Player)
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Combo, 1, true, 0.5f);
-                }
-
-                // Orc (gain courage)
-                if (character.race == CharacterRace.Orc && character.controller == Controller.Player)
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Courage, 1, true, 0.5f);
-                }
-
-                // Blood Thristy (gain 2 wrath)
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BloodThirsty))
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Wrath, 2, true, 0.5f);
-                }
-                */
+            {   
             }
 
             // Perk expiries on turn start
@@ -1094,10 +1043,7 @@ namespace HexGameEngine.Characters
             LevelNode hex = character.currentTile;
             HexCharacterView view = character.hexCharacterView;
 
-            // Disable end turn button clickability
-            TurnController.Instance.DisableEndTurnButtonInteractions();
-            TurnController.Instance.DisableDelayTurnButtonInteractions();
-
+            // TO DO: start new hide UI logic here
             // Disable info windows
             if(character.controller == Controller.Player)
             {
@@ -1117,9 +1063,10 @@ namespace HexGameEngine.Characters
             // Do player character exclusive logic
             if (character.controller == Controller.Player)
             {
-                // Fade out viewFF
+                // Disable and hide player combat UI
+                CombatUIController.Instance.SetInteractability(false);
                 CoroutineData fadeOutEvent = new CoroutineData();
-                VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.FadeOutCharacterUICanvas(fadeOutEvent), fadeOutEvent);
+                VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.HideViewsOnTurnEnd(fadeOutEvent), fadeOutEvent);
             }
 
             if (!character.hasRequestedTurnDelay)
