@@ -37,7 +37,7 @@ namespace HexGameEngine.UWidget
                 // Cancel if the pointer needs to be held over the
                 // object, and the user has moved their mouse off the widget
                 if (wEvent.onlyIfMouseIsStillOverMe &&
-                    (UWidget.MousedOver == widget || ((Time.realtimeSinceStartup - widget.TimeSinceLastPointerEnter) < wEvent.startDelay)))
+                    (UWidget.MousedOver != widget || ((Time.realtimeSinceStartup - widget.TimeSinceLastPointerEnter) < wEvent.startDelay)))
                 {
                     yield break;
                 }

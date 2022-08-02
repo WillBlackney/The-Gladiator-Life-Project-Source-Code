@@ -133,7 +133,7 @@ namespace HexGameEngine.UI
         }
         private void PlacePanelOnAbilityBarButton(AbilityButton b)
         {
-            float yOffSet = 75f;
+            float yOffSet = 85f;
 
             mainPositioningRect.position = b.transform.position;
             mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x, mainPositioningRect.localPosition.y + yOffSet, 0);

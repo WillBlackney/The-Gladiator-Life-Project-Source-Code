@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 using HexGameEngine.UI;
+using HexGameEngine.Characters;
 
 namespace HexGameEngine.Abilities
 {
@@ -25,14 +26,6 @@ namespace HexGameEngine.Abilities
         public AbilityData MyAbilityData
         {
             get { return myAbilityData; }
-        }
-        public Image AbilityImage
-        {
-            get { return abilityImage; }
-        }
-        public GameObject AbilityImageParent
-        {
-            get { return abilityImageParent; }
         }
         public GameObject CooldownOverlay
         {
@@ -59,16 +52,29 @@ namespace HexGameEngine.Abilities
         public void OnPointerEnter(PointerEventData eventData)
         {
             CurrentButtonMousedOver = this;
-            KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyAbilityData.keyWords);             
-            AbilityPopupController.Instance.OnAbilityButtonMousedOver(this);
+            if (MyAbilityData != null && MyAbilityData.myCharacter != null)
+            {
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyAbilityData.keyWords);
+                AbilityPopupController.Instance.OnAbilityButtonMousedOver(this);
+                CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter
+                              (MyAbilityData.myCharacter.currentEnergy, AbilityController.Instance.GetAbilityEnergyCost(MyAbilityData.myCharacter, MyAbilityData));
+
+            }
+
+
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             if (CurrentButtonMousedOver == this || CurrentButtonMousedOver == null)
             {
-                KeyWordLayoutController.Instance.FadeOutMainView();
-                AbilityPopupController.Instance.OnAbilityButtonMousedExit();
+                if(MyAbilityData != null && MyAbilityData.myCharacter != null)
+                {
+                    AbilityPopupController.Instance.OnAbilityButtonMousedExit();
+                    CombatUIController.Instance.EnergyBar.UpdateIcons(MyAbilityData.myCharacter.currentEnergy, 0.25f);
+                    KeyWordLayoutController.Instance.FadeOutMainView();
+                }                   
+             
                 CurrentButtonMousedOver = null;
             }
                
@@ -89,7 +95,8 @@ namespace HexGameEngine.Abilities
             myAbilityData = data;
 
             // set sprite
-            AbilityImage.sprite = data.AbilitySprite;            
+            abilityImage.sprite = data.AbilitySprite;
+            abilityImageParent.SetActive(true);
 
             // set cooldown text + views if needed
             UpdateAbilityButtonCooldownView();

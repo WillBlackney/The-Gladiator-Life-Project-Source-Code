@@ -36,6 +36,7 @@ namespace HexGameEngine.Characters
 
         [Header("Middle Section Components")]
         [SerializeField] private AbilityButton[] abilityButtons;
+        [SerializeField] private EnergyPanelView energyBar;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Left Section Components")]
@@ -66,6 +67,10 @@ namespace HexGameEngine.Characters
 
 
         #region Getters + Accessors
+        public EnergyPanelView EnergyBar
+        {
+            get { return energyBar; }
+        }
         public TextMeshProUGUI CurrentArmourText
         {
             get { return currentArmourText; }
@@ -99,11 +104,13 @@ namespace HexGameEngine.Characters
             BuildHexCharacterAbilityBar(character);
 
             // Energy Bar
+            energyBar.UpdateIcons(character.currentEnergy);
 
             // Portrait
             characterNameTextUI.text = character.myName;
             CharacterModeller.BuildModelFromStringReferences(uiPotraitUCM, character.characterData.modelParts);
             CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, uiPotraitUCM);
+            uiPotraitUCM.SetIdleAnim();
 
             // Health 
             UpdateHealthComponents(character.currentHealth, StatCalculator.GetTotalMaxHealth(character));

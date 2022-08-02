@@ -36,8 +36,8 @@ MonoBehaviour:
       value: 5
       stars: 0
     maxHealth: 0
-    energyRecovery: 50
-    maxEnergy: 50
+    energyRecovery: 8
+    maxEnergy: 8
     initiative: 100
     criticalChance: 100
     criticalModifier: 50

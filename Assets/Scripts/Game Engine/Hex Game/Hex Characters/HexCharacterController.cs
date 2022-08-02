@@ -1455,6 +1455,13 @@ namespace HexGameEngine.Characters
             QueuePosition qPos = QueuePosition.Back;
             if (updateEnergyGuiInstantly) qPos = QueuePosition.Front;
 
+            // Update GUI
+            if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
+            {
+                int energyVFX = character.currentEnergy;
+                VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.EnergyBar.UpdateIcons(energyVFX));
+            }
+
             /*
             int energyVfxValue = character.currentEnergy;
             int maxEnergyVfxValue = StatCalculator.GetTotalMaxEnergy(character);

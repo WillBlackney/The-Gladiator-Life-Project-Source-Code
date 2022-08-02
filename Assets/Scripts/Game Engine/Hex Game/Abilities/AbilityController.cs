@@ -1154,7 +1154,7 @@ namespace HexGameEngine.Abilities
         private void OnAbilityUsedStart(HexCharacterModel character, AbilityData ability, HexCharacterModel target = null)
         {
             // Pay Energy Cost
-            HexCharacterController.Instance.ModifyEnergy(character, -GetAbilityEnergyCost(character, ability));
+            HexCharacterController.Instance.ModifyEnergy(character, -GetAbilityEnergyCost(character, ability));           
 
             // Check shed perk: remove if ability used was an aspect ability
             if (ability.abilityName.Contains("Aspect") && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
@@ -1214,7 +1214,7 @@ namespace HexGameEngine.Abilities
         #region
         public void OnAbilityButtonClicked(AbilityButton b)
         {
-            Debug.Log("AbilityController.OnAbilityButtonClicked() called...");
+            if (b.MyAbilityData == null) return;
             if (IsAbilityUseable(b.MyAbilityData.myCharacter, b.MyAbilityData))
             {
                 // clear move selection state + views

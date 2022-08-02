@@ -138,7 +138,7 @@ namespace HexGameEngine.TurnLogic
             // Build window UCM
             CharacterModeller.BuildModelFromModelClone(newWindowScript.myUCM, entity.hexCharacterView.ucm);
 
-            // play window idle anim on ucm
+            // play window still anim on ucm
             newWindowScript.myUCM.SetBaseAnim();
 
         }
