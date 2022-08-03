@@ -101,7 +101,10 @@ namespace HexGameEngine.Combat
                     h.ShowMoveMarker();
                 }
 
-                ShowPathCostPopup(Pathfinder.GetEnergyCostOfPath(character, character.currentTile, p.HexsOnPath));
+                // Show UI indicators
+                int energyCost = Pathfinder.GetEnergyCostOfPath(character, character.currentTile, p.HexsOnPath);
+                ShowPathCostPopup(energyCost);
+                CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter(character.currentEnergy, energyCost);
 
                 // Characters with Slippery perk are immune to free strikes.
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Slippery)) return;
@@ -146,6 +149,7 @@ namespace HexGameEngine.Combat
             else
             {
                 HidePathCostPopup();
+                CombatUIController.Instance.EnergyBar.UpdateIcons(character.currentEnergy, 0.25f);
             }
 
         }
@@ -161,12 +165,8 @@ namespace HexGameEngine.Combat
             foreach (LevelNode h in currentPath.HexsOnPath)
             {
                 h.HideMoveMarker();
-               // h.TileSprite.color = Color.white;
             }
             currentPath = null;
-
-           // HexCharacterController.Instance.HideAllFreeStrikeIndicators();
-           // HidePathCostPopup();
         }
         public void ResetSelectionState()
         {
@@ -174,6 +174,8 @@ namespace HexGameEngine.Combat
             HexCharacterController.Instance.HideAllFreeStrikeIndicators();
             ClearPath();
             HidePathCostPopup();
+            if(TurnController.Instance.EntityActivated != null)
+                CombatUIController.Instance.EnergyBar.UpdateIcons(TurnController.Instance.EntityActivated.currentEnergy, 0.25f);
             clickedHex = null;
         }
         #endregion
@@ -183,7 +185,6 @@ namespace HexGameEngine.Combat
         public void ShowPathCostPopup(int cost)
         {
             pathCostVisualParent.SetActive(true);
-            //pathCostPositionParent.transform.position = destination.WorldPosition;
             pathCostText.text = cost.ToString();
             pathCostCg.alpha = 0;
             pathCostCg.DOFade(1, 0.5f);

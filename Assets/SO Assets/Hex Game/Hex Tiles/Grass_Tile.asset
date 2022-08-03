@@ -14,24 +14,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileSprite: {fileID: 21300000, guid: 33913e129ab88644e891c5170ba069d6, type: 3}
   tileName: Grass
-  tileDescription: Thick, shruby grass that is tall enough to hide in.
   description:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Thick, shruby grass that is tall enough to hide in. Characters to end
-      their turn on a grass tile gain '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '1 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Stealth
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: .
+    phrase: Thick, shruby grass that is tall enough to hide in.
+  effectDescriptions:
+  - dotStyle: 3
+    message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Gain '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '1 '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Stealth '
+    - color: 0
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: on turn end if standing here.
   moveCostModifier: 1
   allowElevation: 1

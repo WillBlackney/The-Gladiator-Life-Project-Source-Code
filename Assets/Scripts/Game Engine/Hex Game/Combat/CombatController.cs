@@ -635,11 +635,11 @@ namespace HexGameEngine.Combat
 
             // Target Dodge
             int dodgeMod = -StatCalculator.GetTotalDodge(target);
-            if (dodgeMod != 0) ret.details.Add(new HitChanceDetailData("Dodge", dodgeMod));
+            if (dodgeMod != 0) ret.details.Add(new HitChanceDetailData("Target Dodge", dodgeMod));
 
             // Attacker Accuracy
             int accuracyMod = StatCalculator.GetTotalAccuracy(attacker); //+ GlobalSettings.Instance.BaseHitChance;
-            if (accuracyMod != 0) ret.details.Add(new HitChanceDetailData("Accuracy", accuracyMod));
+            if (accuracyMod != 0) ret.details.Add(new HitChanceDetailData("Attacker Accuracy", accuracyMod));
 
             // Stress State            
             StressState stressState = GetStressStateFromStressAmount(attacker.currentStress);
@@ -687,7 +687,7 @@ namespace HexGameEngine.Combat
             if (ability != null)
             {
                 int innateBonus = ability.hitChanceModifier;
-                if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Ability Bonus", innateBonus));
+                if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Ability Innate Bonus", innateBonus));
             }
 
             // Warfare talent bonus
@@ -717,7 +717,7 @@ namespace HexGameEngine.Combat
                 )
             {
                 int lumberjackBonus = 10;
-                ret.details.Add(new HitChanceDetailData("Lumberjack Bonus", lumberjackBonus));
+                ret.details.Add(new HitChanceDetailData("Lumberjack Axe Bonus", lumberjackBonus));
             }
 
 

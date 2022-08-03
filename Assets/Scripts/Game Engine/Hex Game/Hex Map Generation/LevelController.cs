@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HexGameEngine.HexTiles
 {
@@ -44,7 +45,8 @@ namespace HexGameEngine.HexTiles
         [SerializeField] CanvasGroup tileInfoCg;
         [SerializeField] TextMeshProUGUI tileInfoNameText;
         [SerializeField] TextMeshProUGUI tileInfoDescriptionText;
-        [SerializeField] TextMeshProUGUI tileInfoCostText;
+        [SerializeField] ModalDottedRow[] tileEffectDotRows;
+        [SerializeField] RectTransform[] tileInfoPopUpLayoutRebuilds;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
         private float popupDelay = 0.5f;
 
@@ -956,13 +958,17 @@ namespace HexGameEngine.HexTiles
             tileInfoNameText.text = data.tileName;
             tileInfoDescriptionText.text = TextLogic.ConvertCustomStringListToString(data.description);
 
-            if (destination.Obstructed)            
-                tileInfoCostText.text = "This location is obstructed and cannot be moved on or through.";            
+            // Hide + reset dotted rows
+            foreach (ModalDottedRow r in tileEffectDotRows)
+                r.gameObject.SetActive(false);
+
+            if (destination.Obstructed)
+                tileEffectDotRows[0].Build("This location is obstructed and cannot be moved on or through.", DotStyle.Neutral);            
 
             else if(start == null)
             {
-                tileInfoCostText.text = "Costs " + TextLogic.ReturnColoredText(destination.BaseMoveCost.ToString(), TextLogic.blueNumber) +
-                   " " + TextLogic.ReturnColoredText("Energy", TextLogic.neutralYellow) + " to traverse.";
+                tileEffectDotRows[0].Build("Costs " + TextLogic.ReturnColoredText(destination.BaseMoveCost.ToString(), TextLogic.blueNumber) +
+                   " " + TextLogic.ReturnColoredText("Energy", TextLogic.neutralYellow) + " to traverse.", DotStyle.Neutral);
             }
             else if (start != null && 
                 start.myCharacter != null &&
@@ -972,17 +978,30 @@ namespace HexGameEngine.HexTiles
                 int energyCostDifference = Pathfinder.GetEnergyCostBetweenHexs(start.myCharacter, start, destination) - destination.BaseMoveCost;
                 if (energyCostDifference > 0)
                 {
-                    tileInfoCostText.text = "Costs " + TextLogic.ReturnColoredText(destination.BaseMoveCost.ToString(), TextLogic.blueNumber) +
+                    tileEffectDotRows[0].Build("Costs " + TextLogic.ReturnColoredText(destination.BaseMoveCost.ToString(), TextLogic.blueNumber) +
                      " + " + TextLogic.ReturnColoredText(energyCostDifference.ToString(), TextLogic.blueNumber) + " " +
-                    TextLogic.ReturnColoredText("Energy", TextLogic.neutralYellow) + " to traverse due to elevation difference.";
+                    TextLogic.ReturnColoredText("Energy", TextLogic.neutralYellow) + " to traverse due to elevation difference.", DotStyle.Neutral);
                 }
                 else
                 {
-                    tileInfoCostText.text = "Costs " + TextLogic.ReturnColoredText(destination.BaseMoveCost.ToString(), TextLogic.blueNumber) +
+                    tileEffectDotRows[0].Build("Costs " + TextLogic.ReturnColoredText(destination.BaseMoveCost.ToString(), TextLogic.blueNumber) +
                     " " + TextLogic.ReturnColoredText("Energy", TextLogic.neutralYellow) +
-                    " to traverse.";
+                    " to traverse.", DotStyle.Neutral);
                 }
           
+            }
+
+            // Build effect rows
+            for(int i = 0; i < destination.TileData.effectDescriptions.Length; i++)
+            {
+                tileEffectDotRows[i + 1].Build(destination.TileData.effectDescriptions[i]);
+            }
+
+            // Rebuild fitters
+            for(int i = 0; i < 2; i++)
+            {
+                foreach(RectTransform rt in tileInfoPopUpLayoutRebuilds)                
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(rt);                
             }
         }
         private void HideTileInfoPopup()

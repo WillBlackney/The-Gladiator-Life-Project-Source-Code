@@ -1,4 +1,5 @@
-﻿using HexGameEngine.Utilities;
+﻿using HexGameEngine.UI;
+using HexGameEngine.Utilities;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace HexGameEngine.HexTiles
         [Header("Properties")]
         public string tileName;
         public List<CustomString> description;
+        public ModalDotRowBuildData[] effectDescriptions;
         public int moveCostModifier;
         public bool allowElevation;
 

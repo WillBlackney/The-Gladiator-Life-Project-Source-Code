@@ -15,6 +15,7 @@ using HexGameEngine.VisualEvents;
 using HexGameEngine.UCM;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 namespace HexGameEngine.Abilities
 {
@@ -33,7 +34,7 @@ namespace HexGameEngine.Abilities
         [SerializeField] GameObject hitChancePositionParent;
         [SerializeField] CanvasGroup hitChanceCg;
         [SerializeField] TextMeshProUGUI hitChanceText;
-        [SerializeField] HitChanceDetailBox[] hitChanceBoxes;
+        [SerializeField] ModalDottedRow[] hitChanceBoxes;
         [SerializeField] RectTransform[] hitChanceLayouts;
         private float popupDelay = 0.5f;
 
@@ -1797,7 +1798,8 @@ namespace HexGameEngine.Abilities
                 hitChanceCg.alpha = 0;
                 hitChanceVisualParent.SetActive(true);
                 hitChanceCg.DOFade(1, 0.5f);
-                var hitChanceData = CombatController.Instance.GetHitChance(caster, target, ability);
+                HitChanceDataSet hitChanceData = CombatController.Instance.GetHitChance(caster, target, ability);
+                hitChanceData.details = hitChanceData.details.OrderByDescending(x => x.accuracyMod).ToList();
                 BuildHitChancePopup(hitChanceData);
                 foreach(RectTransform t in hitChanceLayouts)
                 {
@@ -1821,7 +1823,7 @@ namespace HexGameEngine.Abilities
         private void BuildHitChancePopup(HitChanceDataSet data)
         {
             // Header text
-            hitChanceText.text = TextLogic.ReturnColoredText(data.FinalHitChance.ToString() + "%", TextLogic.blueNumber) + " chance to hit";
+            hitChanceText.text = TextLogic.ReturnColoredText(data.FinalHitChance.ToString() + "%", TextLogic.neutralYellow) + " chance to hit";
 
             // Reset tabs
             for(int i = 0; i < hitChanceBoxes.Length; i++)
@@ -1830,8 +1832,11 @@ namespace HexGameEngine.Abilities
             }
             for(int i = 0; i < data.details.Count; i++)
             {
+                string extra = data.details[i].accuracyMod > 0 ? "+" : "";
                 if (i == hitChanceBoxes.Length - 1) break;
-                hitChanceBoxes[i].BuildFromDetailData(data.details[i]);
+                hitChanceBoxes[i].Build(data.details[i].reason + ": " + 
+                    TextLogic.ReturnColoredText(extra + data.details[i].accuracyMod.ToString(), 
+                    TextLogic.neutralYellow), data.details[i].accuracyMod > 0 ? DotStyle.Green : DotStyle.Red);
             }
         }
         public void HideHitChancePopup()
