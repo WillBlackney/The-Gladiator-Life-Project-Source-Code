@@ -1,6 +1,7 @@
 using CardGameEngine.UCM;
 using DG.Tweening;
 using HexGameEngine.Abilities;
+using HexGameEngine.Perks;
 using HexGameEngine.UCM;
 using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
@@ -37,6 +38,7 @@ namespace HexGameEngine.Characters
         [Header("Middle Section Components")]
         [SerializeField] private AbilityButton[] abilityButtons;
         [SerializeField] private EnergyPanelView energyBar;
+        [SerializeField] private PerkLayoutPanel perkPanel;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Left Section Components")]
@@ -105,6 +107,10 @@ namespace HexGameEngine.Characters
 
             // Energy Bar
             energyBar.UpdateIcons(character.currentEnergy);
+
+            // Perk Panel
+            perkPanel.ResetPanel();
+            perkPanel.BuildFromPerkManager(character.pManager);
 
             // Portrait
             characterNameTextUI.text = character.myName;

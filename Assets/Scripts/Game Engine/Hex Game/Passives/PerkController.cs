@@ -420,12 +420,12 @@ namespace HexGameEngine.Perks
                 // Add icon view visual event
                 if (showVFX)
                 {
-                    VisualEventManager.Instance.CreateVisualEvent(() => StartAddPassiveToPanelProcess(character.hexCharacterView, perkData, stacksAppliedActual),
+                    VisualEventManager.Instance.CreateVisualEvent(() => character.hexCharacterView.perkIconsPanel.HandleAddNewIconToPanel(perkData, stacksAppliedActual),
                         QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
                 }
                 else
                 {
-                    StartAddPassiveToPanelProcess(character.hexCharacterView, perkData, stacksAppliedActual);
+                    character.hexCharacterView.perkIconsPanel.HandleAddNewIconToPanel(perkData, stacksAppliedActual);
                 }
                 
                 // Status notification + 'On Perk Applied' vfx and particles
@@ -540,6 +540,7 @@ namespace HexGameEngine.Perks
 
         // Update Passive Icons and Panel View
         #region
+        /*
         public void BuildPassiveIconViewFromData(PerkIconView icon, PerkIconData iconData)
         {
             Debug.Log("PassiveController.BuildPassiveIconViewFromData() called...");
@@ -575,13 +576,13 @@ namespace HexGameEngine.Perks
         {
             Debug.Log("PassiveController.StartAddPassiveToPanelProcess() called...");
 
-            if (view.passiveIcons.Count > 0)
+            if (view.perkIconsPanel.PerkIcons.Count > 0)
             {
                 //StatusIconDataSO si = null;
                 //int stacks = 0;
                 bool matchFound = false;
 
-                foreach (PerkIconView icon in view.passiveIcons)
+                foreach (PerkIconView icon in view.perkIconsPanel)
                 {
                     if (iconData.passiveName == icon.statusName)
                     {
@@ -613,14 +614,14 @@ namespace HexGameEngine.Perks
                 PerkIconView newStatus = newIconGO.GetComponent<PerkIconView>();
                 BuildPassiveIconViewFromData(newStatus, iconData);
                 ModifyIconViewStacks(newStatus, stacksGained);
-                view.passiveIcons.Add(newStatus);
+                view.perkIconsPanel.Add(newStatus);
             }
 
         }
         private void RemovePassiveIconFromPanel(HexCharacterView view, PerkIconView iconToRemove)
         {
             Debug.Log("PassiveController.RemovePassiveIconFromPanel() called...");
-            view.passiveIcons.Remove(iconToRemove);
+            view.perkIconsPanel.Remove(iconToRemove);
             Destroy(iconToRemove.gameObject);
         }
         private void UpdatePassiveIconOnPanel(HexCharacterView view, PerkIconView iconToUpdate, int stacksGainedOrLost)
@@ -634,6 +635,7 @@ namespace HexGameEngine.Perks
             }
 
         }
+        */
         #endregion
 
         // Conditional Checks + Getters

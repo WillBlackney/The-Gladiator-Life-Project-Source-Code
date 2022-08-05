@@ -142,12 +142,14 @@ namespace HexGameEngine.Camping
                     injuries.Add(perk);                
             }
 
+            /*
             // Build perk panel
             for(int i = 0; i < injuries.Count; i++)
             {
                 PerkController.Instance.BuildPassiveIconViewFromData(box.PerkIcons[i], injuries[i]);
                 box.PerkIcons[i].gameObject.SetActive(true);
             }
+            */
         }
         public void OnCharacterBoxClicked(CampSiteCharacterBox box)
         {

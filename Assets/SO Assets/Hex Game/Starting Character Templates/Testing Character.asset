@@ -61,6 +61,8 @@ MonoBehaviour:
     perks:
     - perkTag: 154
       stacks: 1
+    - perkTag: 1
+      stacks: 2
   modelParts:
   - Ghoul_Chest
   - Undead_Face_6

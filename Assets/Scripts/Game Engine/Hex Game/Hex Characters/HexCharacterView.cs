@@ -68,8 +68,7 @@ namespace HexGameEngine.Characters
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Perk Components")]
-        public GameObject passiveIconsVisualParent;
-        [HideInInspector] public List<PerkIconView> passiveIcons;
+        public PerkLayoutPanel perkIconsPanel;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         public bool mouseOverModel = false;
