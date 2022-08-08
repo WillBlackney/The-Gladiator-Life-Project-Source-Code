@@ -248,7 +248,7 @@ namespace HexGameEngine
                 accuracy -= 20;
 
             // Mud tile
-            if (c.currentTile.TileData.tileName == "Thick Mud") accuracy -= 10;
+            if (c.currentTile.TileData.tileName == "Water") accuracy -= 10;
 
             // Check hate of undead perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.UndeadHater))
@@ -367,7 +367,7 @@ namespace HexGameEngine
                 dodge += 5;
 
             // Mud tile
-            if (c.currentTile.TileData.tileName == "Thick Mud") dodge -= 10;
+            if (c.currentTile.TileData.tileName == "Water") dodge -= 10;
 
             // Manipulation talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Manipulation, 1))

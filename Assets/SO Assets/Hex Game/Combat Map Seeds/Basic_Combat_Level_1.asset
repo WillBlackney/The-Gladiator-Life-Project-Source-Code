@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: Basic_Combat_Level_1
   m_EditorClassIdentifier: 
   elevationPercentage: 10
+  defaultTile: {fileID: 11400000, guid: d9a12c9bbebc9ca46a208837c764a48c, type: 2}
   tilingConfigs:
   - hexData: {fileID: 11400000, guid: d9a12c9bbebc9ca46a208837c764a48c, type: 2}
     lowerProbability: 1
-    upperProbability: 80
-  - hexData: {fileID: 11400000, guid: ef2cfea870e69bc43b2e1577533f12c8, type: 2}
-    lowerProbability: 81
     upperProbability: 85
-  - hexData: {fileID: 11400000, guid: e07bc2df6adb63543bb5a0a4ce6891da, type: 2}
+  - hexData: {fileID: 11400000, guid: ef2cfea870e69bc43b2e1577533f12c8, type: 2}
     lowerProbability: 86
+    upperProbability: 90
+  - hexData: {fileID: 11400000, guid: e07bc2df6adb63543bb5a0a4ce6891da, type: 2}
+    lowerProbability: 91
     upperProbability: 95
   - hexData: {fileID: 11400000, guid: 4afdcc2298d39e74ab0970d2f26487af, type: 2}
     lowerProbability: 96

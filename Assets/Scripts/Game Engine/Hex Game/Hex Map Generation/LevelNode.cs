@@ -32,9 +32,6 @@ namespace HexGameEngine.HexTiles
         [SerializeField] GameObject obstacleParent;
         [SerializeField] GameObject[] obstacleImages;
 
-        [Header("Sprite Type Components")]
-        [SerializeField] SpriteRenderer tileTypeSprite;
-
         private List<LevelNode> neighbourNodes = null;
         private TileElevation elevation;
         private bool obstructed = false;
@@ -47,6 +44,11 @@ namespace HexGameEngine.HexTiles
         [Space(10)]
         [SerializeField] private Sprite dayTimeCircle;
         [SerializeField] private Sprite dayTimeSquare;
+
+        [Header("Tile Type Sprites")]
+        [SerializeField] GameObject mudParent;
+        [SerializeField] GameObject waterParent;
+        [SerializeField] GameObject grassParent;
         #endregion
 
         // Getters + Accessors
@@ -117,7 +119,15 @@ namespace HexGameEngine.HexTiles
         {
             tileData = data;
             tileName = data.tileName;
-            tileTypeSprite.sprite = data.tileSprite;
+
+            mudParent.SetActive(false);
+            grassParent.SetActive(false);
+            waterParent.SetActive(false);
+
+            if (tileName == "Grass") grassParent.SetActive(true);
+            else if (tileName == "Mud") mudParent.SetActive(true);
+            else if (tileName == "Water") waterParent.SetActive(true);
+            //tileTypeSprite.sprite = data.tileSprite;
         }
         private void Start()
         {

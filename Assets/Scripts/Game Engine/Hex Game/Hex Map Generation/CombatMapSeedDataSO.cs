@@ -13,6 +13,7 @@ namespace HexGameEngine.HexTiles
         public int elevationPercentage;
         [Space(10)]
         [Header("Tile Type Settings")]
+        public HexDataSO defaultTile;
         public HexMapTilingConfig[] tilingConfigs;
 
         [Header("Obstruction Settings")]

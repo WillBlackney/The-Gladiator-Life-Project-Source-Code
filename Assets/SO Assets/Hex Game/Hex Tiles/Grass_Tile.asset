@@ -39,4 +39,4 @@ MonoBehaviour:
       abilityEffectType: 0
       phrase: on turn end if standing here.
   moveCostModifier: 1
-  allowElevation: 1
+  allowElevation: 0

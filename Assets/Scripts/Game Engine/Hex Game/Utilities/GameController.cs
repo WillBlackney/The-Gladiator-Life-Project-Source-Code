@@ -145,8 +145,10 @@ namespace HexGameEngine
             }
             else
             {
-                LightController.Instance.EnableNightTimeGlobalLight();
-                LevelController.Instance.EnableNightTimeArenaScenery();
+                //LightController.Instance.EnableNightTimeGlobalLight();
+                //LevelController.Instance.EnableNightTimeArenaScenery();
+                LightController.Instance.EnableDayTimeGlobalLight();
+                LevelController.Instance.EnableDayTimeArenaScenery();
             }          
             LevelController.Instance.ShowAllNodeViews();
             LevelController.Instance.SetLevelNodeDayOrNightViewState(dayTime);
@@ -207,8 +209,10 @@ namespace HexGameEngine
             }
             else
             {
-                LightController.Instance.EnableNightTimeGlobalLight();
-                LevelController.Instance.EnableNightTimeArenaScenery();
+                //LightController.Instance.EnableNightTimeGlobalLight();
+                // LevelController.Instance.EnableNightTimeArenaScenery();
+                LightController.Instance.EnableDayTimeGlobalLight();
+                LevelController.Instance.EnableDayTimeArenaScenery();
             }
             LevelController.Instance.ShowAllNodeViews();
             LevelController.Instance.SetLevelNodeDayOrNightViewState(dayTime);
@@ -604,8 +608,10 @@ namespace HexGameEngine
                 }
                 else
                 {
-                    LightController.Instance.EnableNightTimeGlobalLight();
-                    LevelController.Instance.EnableNightTimeArenaScenery();
+                   // LightController.Instance.EnableNightTimeGlobalLight();
+                   // LevelController.Instance.EnableNightTimeArenaScenery();
+                    LightController.Instance.EnableDayTimeGlobalLight();
+                    LevelController.Instance.EnableDayTimeArenaScenery();
                 }
                 LevelController.Instance.ShowAllNodeViews();
                 LevelController.Instance.SetLevelNodeDayOrNightViewState(dayTime);
@@ -682,8 +688,10 @@ namespace HexGameEngine
             }
             else
             {
-                LightController.Instance.EnableNightTimeGlobalLight();
-                LevelController.Instance.EnableNightTimeArenaScenery();
+               // LightController.Instance.EnableNightTimeGlobalLight();
+                //LevelController.Instance.EnableNightTimeArenaScenery();
+                LightController.Instance.EnableDayTimeGlobalLight();
+                LevelController.Instance.EnableDayTimeArenaScenery();
             }
             LevelController.Instance.ShowAllNodeViews();
             LevelController.Instance.SetLevelNodeDayOrNightViewState(dayTime);

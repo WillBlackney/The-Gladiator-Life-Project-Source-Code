@@ -52,14 +52,11 @@ namespace HexGameEngine.HexTiles
 
         private List<LevelNode> markedTiles = new List<LevelNode>();
 
-        [Header("KBC Scenery References")]
-        [SerializeField] private GameObject graveyardSceneryParent;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [Header("Dungeon Scenery References")]
+        [Header("Arena Scenery References")]
         [SerializeField] private GameObject mainArenaViewParent;
         [SerializeField] private GameObject[] allNightTimeArenaParents;
         [SerializeField] private GameObject[] allDayTimeArenaParents;
+        [SerializeField] private CrowdRowAnimator[] crowdRowAnimators;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         #endregion
@@ -128,16 +125,18 @@ namespace HexGameEngine.HexTiles
 
                 // Set up tile type + data
                 int tileTypeRoll = RandomGenerator.NumberBetween(1, 100);
-                HexMapTilingConfig randomHexConfig = null;
+                HexDataSO randomHexType = seed.defaultTile;
                 foreach (HexMapTilingConfig c in seed.tilingConfigs)
                 {
-                    if (tileTypeRoll >= c.lowerProbability && tileTypeRoll <= c.upperProbability)
+                    if (tileTypeRoll >= c.lowerProbability && 
+                        tileTypeRoll <= c.upperProbability &&
+                        (n.Elevation == TileElevation.Ground || (n.Elevation == TileElevation.Elevated && c.hexData.allowElevation)))
                     {
-                        randomHexConfig = c;
+                        randomHexType = c.hexData;
                         break;
                     }
                 }
-                n.BuildFromData(randomHexConfig.hexData);
+                n.BuildFromData(randomHexType);
 
                 // To do: randomize and set obstacle
                 int obstructionRoll = RandomGenerator.NumberBetween(1, 100);
@@ -1089,6 +1088,7 @@ namespace HexGameEngine.HexTiles
             DisableAllArenas();
             mainArenaViewParent.SetActive(true);
             EnableRandomDayTimeArena();
+            PlayCrowdAnims();
         }
         private void EnableRandomDayTimeArena()
         {
@@ -1098,6 +1098,7 @@ namespace HexGameEngine.HexTiles
         public void DisableArenaView()
         {
             DisableAllArenas();
+            StopCrowdAnims();
             mainArenaViewParent.SetActive(false);
         }
         private void DisableAllArenas()
@@ -1111,7 +1112,16 @@ namespace HexGameEngine.HexTiles
                 allDayTimeArenaParents[i].SetActive(false);
             }
         }
-        
+        private void PlayCrowdAnims()
+        {
+            foreach (CrowdRowAnimator cra in crowdRowAnimators)
+                cra.PlayAnimation();
+        }
+        private void StopCrowdAnims()
+        {
+            foreach (CrowdRowAnimator cra in crowdRowAnimators)
+                cra.StopAnimation();
+        }
 
         #endregion
 
