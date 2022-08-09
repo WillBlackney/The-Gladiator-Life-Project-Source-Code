@@ -25,7 +25,8 @@ namespace HexGameEngine.HexTiles
         [SerializeField] SpriteRenderer[] elevationPillarSquareRenderers;
 
         [Header("Marker Components")]
-        [SerializeField] GameObject inRangeMarker;
+        [SerializeField] GameObject inRangeMarkerNeutral;
+        [SerializeField] GameObject inRangeMarkerEnemy;
         [SerializeField] GameObject moveMarker;
 
         [Header("Obstruction Components")]
@@ -194,13 +195,15 @@ namespace HexGameEngine.HexTiles
             Debug.Log("HideMoveMarker() called...");
             moveMarker.SetActive(false);
         }
-        public void ShowInRangeMarker()
+        public void ShowInRangeMarker(bool neutral = true)
         {
-            inRangeMarker.SetActive(true);
+            if(neutral) inRangeMarkerNeutral.SetActive(true);
+            else inRangeMarkerEnemy.SetActive(true);
         }
         public void HideInRangeMarker()
         {
-            inRangeMarker.SetActive(false);
+            inRangeMarkerNeutral.SetActive(false);
+            inRangeMarkerEnemy.SetActive(false);
         }
 
         #endregion
@@ -271,7 +274,7 @@ namespace HexGameEngine.HexTiles
         {
             return "X:" + GridPosition.x.ToString() + ", Y:" + GridPosition.y.ToString();
         }
-        public void Reset()
+        public void ResetNode()
         {
             DisableObstructionViews();
             obstructed = false;

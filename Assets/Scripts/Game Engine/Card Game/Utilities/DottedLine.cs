@@ -18,10 +18,8 @@ namespace CardGameEngine
         List<Vector2> positions = new List<Vector2>();
         List<GameObject> dots = new List<GameObject>();
 
-        public void DrawDottedLine(Vector2 start, Vector2 end)
+        private void DrawDottedLine(Vector2 start, Vector2 end)
         {
-            //DestroyAllPaths();
-
             Vector2 point = start;
             Vector2 direction = (end - start).normalized;
 
@@ -33,6 +31,14 @@ namespace CardGameEngine
 
             Render(start, end);
         }
+        public void DrawDottedPath(List<Vector2> points)
+        {
+            DestroyAllPaths();
+            for(int i = 0; i < points.Count - 1; i++)
+            {
+                DrawDottedLine(points[i], points[i + 1]);
+            }
+        }
         public void DestroyAllPaths()
         {
             foreach (var dot in dots)
@@ -43,19 +49,7 @@ namespace CardGameEngine
             positions.Clear();
             dots.Clear();
         }
-
-        /*
-        GameObject GetOneDot()
-        {
-            var gameObject = new GameObject();
-            gameObject.transform.localScale = Vector3.one * Size;
-            gameObject.transform.parent = transform;
-
-            var sr = gameObject.AddComponent<SpriteRenderer>();
-            sr.sprite = Dot;
-            return gameObject;
-        }
-        */
+               
         GameObject GetOneArrow()
         {
             var gameObject = Instantiate(ArrowPrefab);
@@ -69,7 +63,7 @@ namespace CardGameEngine
             var dir = end - start;
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-            foreach (var position in positions)
+            foreach (Vector2 position in positions)
             {
                 // var g = GetOneDot();
                 var g = GetOneArrow();

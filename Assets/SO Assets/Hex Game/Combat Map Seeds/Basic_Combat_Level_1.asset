@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35548c25f2aac0f4198f79153cd682f0, type: 3}
   m_Name: Basic_Combat_Level_1
   m_EditorClassIdentifier: 
-  elevationPercentage: 10
+  elevationPercentage: 8
   defaultTile: {fileID: 11400000, guid: d9a12c9bbebc9ca46a208837c764a48c, type: 2}
   tilingConfigs:
   - hexData: {fileID: 11400000, guid: d9a12c9bbebc9ca46a208837c764a48c, type: 2}
@@ -27,5 +27,5 @@ MonoBehaviour:
   - hexData: {fileID: 11400000, guid: 4afdcc2298d39e74ab0970d2f26487af, type: 2}
     lowerProbability: 96
     upperProbability: 100
-  obstructionPercentage: 10
+  obstructionPercentage: 8
   allowObstaclesOnElevation: 0

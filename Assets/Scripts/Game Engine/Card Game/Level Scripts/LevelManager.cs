@@ -176,7 +176,7 @@ namespace CardGameEngine
             if (Draggable.DraggingThis == null)
             {
                 // Activate view         
-                DottedLine.Instance.DrawDottedLine(startNode.nose.position, targetNode.nose.position);
+                //DottedLine.Instance.DrawDottedLine(startNode.nose.position, targetNode.nose.position);
             }
         }
         #endregion

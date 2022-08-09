@@ -1243,7 +1243,9 @@ namespace HexGameEngine.Abilities
             // Highlight tiles in range of ability
             if (ability.targetRequirement != TargetRequirement.NoTarget)
             {
-                LevelController.Instance.MarkTilesInRange(GetTargettableTilesOfAbility(ability, caster));
+                bool neutral = true;
+                if (ability.targetRequirement == TargetRequirement.Enemy) neutral = false;
+                LevelController.Instance.MarkTilesInRange(GetTargettableTilesOfAbility(ability, caster), neutral);
             }
             else if (ability.targetRequirement == TargetRequirement.NoTarget)
             {
@@ -1280,7 +1282,9 @@ namespace HexGameEngine.Abilities
                             // Get ready for second selection
                             currentSelectionPhase = AbilitySelectionPhase.First;
                             LevelController.Instance.UnmarkAllTiles();
-                            LevelController.Instance.MarkTilesInRange(validHexs);
+                            bool neutral = true;
+                            if (currentAbilityAwaiting.targetRequirement == TargetRequirement.Enemy) neutral = false;
+                            LevelController.Instance.MarkTilesInRange(validHexs, neutral);
                             firstSelectionCharacter = target;
                         }
                     }

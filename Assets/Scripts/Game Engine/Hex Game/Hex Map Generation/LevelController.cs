@@ -110,7 +110,7 @@ namespace HexGameEngine.HexTiles
 
             // Reset type, obstacle and elevation on all nodes
             foreach (LevelNode n in allLevelNodes)
-                n.Reset();
+                n.ResetNode();
 
             // Get banned nodes for obstacles
             List<LevelNode> spawnPositions = GetPlayerSpawnZone();
@@ -161,7 +161,7 @@ namespace HexGameEngine.HexTiles
                 {
                     if(n.GridPosition == d.gridPosition)
                     {
-                        n.Reset();
+                        n.ResetNode();
                         n.SetHexTileElevation(d.elevation);
                         n.BuildFromData(d.TileData);
                         n.SetHexObstruction(d.obstructed);
@@ -853,13 +853,16 @@ namespace HexGameEngine.HexTiles
 
         // Tile Marking
         #region
-        public void MarkTilesInRange(List<LevelNode> tiles)
+        public void MarkTilesInRange(List<LevelNode> tiles, bool neutral = true)
         {
             Debug.Log("LevelController.MarkTilesInRange(), marking " + tiles.Count.ToString() + " tiles...");
             foreach (LevelNode h in tiles)
             {
-                h.ShowInRangeMarker();
-                markedTiles.Add(h);
+                if(h.Obstructed == false)
+                {
+                    h.ShowInRangeMarker(neutral);
+                    markedTiles.Add(h);
+                }                
             }
         }
         public void UnmarkAllTiles()
