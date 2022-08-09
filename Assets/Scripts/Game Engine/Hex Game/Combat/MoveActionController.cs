@@ -96,16 +96,18 @@ namespace HexGameEngine.Combat
                 currentPath = p;
 
                 // Show move markers for each tile on the path
+                
                 foreach(LevelNode h in currentPath.HexsOnPath)
                 {
                     h.ShowMoveMarker();
                 }
+                //p.Destination.ShowMoveMarker();
 
                 // Draw dotted path
                 List<Vector2> points = new List<Vector2>();
                 points.Add(p.Start.WorldPosition);
-                for (int i = 0; i < p.HexsOnPath.Count; i++) points.Add(p.HexsOnPath[i].WorldPosition);
-                CardGameEngine.DottedLine.Instance.DrawDottedPath(points);
+                for (int i = 0; i < p.HexsOnPath.Count; i++) points.Add(p.HexsOnPath[i].ElevationPositioningParent.transform.position);
+                CardGameEngine.DottedLine.Instance.DrawPathAlongPoints(points);
 
                 // Show UI indicators
                 int energyCost = Pathfinder.GetEnergyCostOfPath(character, character.currentTile, p.HexsOnPath);

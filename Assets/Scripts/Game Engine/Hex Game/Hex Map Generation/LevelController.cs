@@ -817,7 +817,7 @@ namespace HexGameEngine.HexTiles
 
             // Hex Pop up info
             if(!AbilityController.Instance.AwaitingAbilityOrder() &&
-                Pathfinder.CanHexBeOccupied(h) &&
+                //Pathfinder.CanHexBeOccupied(h) &&
                 TurnController.Instance.EntityActivated != null)
                 StartCoroutine(ShowTileInfoPopup(h, TurnController.Instance.EntityActivated.currentTile));
 
@@ -965,7 +965,7 @@ namespace HexGameEngine.HexTiles
                 r.gameObject.SetActive(false);
 
             if (destination.Obstructed)
-                tileEffectDotRows[0].Build("This location is obstructed and cannot be moved on or through.", DotStyle.Neutral);            
+                tileEffectDotRows[0].Build("This location is obstructed and cannot be moved on or through.", DotStyle.Red);            
 
             else if(start == null)
             {
@@ -993,10 +993,24 @@ namespace HexGameEngine.HexTiles
           
             }
 
+            // to do: add dotted rows for elevated tile (+10 accuracy and dodge ahainst unelevated enemies, +1 range)
+
+            int extraDotRows = 0;
+
+            if(destination.Elevation == TileElevation.Elevated && !destination.Obstructed)
+            {
+                tileEffectDotRows[1].Build(TextLogic.ReturnColoredText("+10 ", TextLogic.blueNumber) + TextLogic.ReturnColoredText("Accuracy ", TextLogic.neutralYellow) +
+                    " and " + TextLogic.ReturnColoredText("+10 ", TextLogic.blueNumber) + TextLogic.ReturnColoredText("Dodge ", TextLogic.neutralYellow) +
+                    " against non elevated enemies.", DotStyle.Green);
+                tileEffectDotRows[2].Build(TextLogic.ReturnColoredText("+1 ", TextLogic.blueNumber) + TextLogic.ReturnColoredText("Vision", TextLogic.neutralYellow) +
+                   ".", DotStyle.Green);
+                extraDotRows = 2;
+            }
+
             // Build effect rows
             for(int i = 0; i < destination.TileData.effectDescriptions.Length; i++)
             {
-                tileEffectDotRows[i + 1].Build(destination.TileData.effectDescriptions[i]);
+                tileEffectDotRows[i + 1 + extraDotRows].Build(destination.TileData.effectDescriptions[i]);
             }
 
             // Rebuild fitters

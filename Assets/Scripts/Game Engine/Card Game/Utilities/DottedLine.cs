@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HexGameEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,23 +16,24 @@ namespace CardGameEngine
         public float Delta;
 
         // Utility fields
-        List<Vector2> positions = new List<Vector2>();
         List<GameObject> dots = new List<GameObject>();
 
         private void DrawDottedLine(Vector2 start, Vector2 end)
         {
             Vector2 point = start;
             Vector2 direction = (end - start).normalized;
+            List<Vector2> positions = new List<Vector2>();
 
             while ((end - start).magnitude > (point - start).magnitude)
             {
+                //if(!positions.Contains(point))
                 positions.Add(point);
                 point += (direction * Delta);
             }
 
-            Render(start, end);
+            Render(start, end, positions);
         }
-        public void DrawDottedPath(List<Vector2> points)
+        public void DrawPathAlongPoints(List<Vector2> points)
         {
             DestroyAllPaths();
             for(int i = 0; i < points.Count - 1; i++)
@@ -46,7 +48,6 @@ namespace CardGameEngine
                 Destroy(dot);
             }
 
-            positions.Clear();
             dots.Clear();
         }
                
@@ -58,12 +59,12 @@ namespace CardGameEngine
             return gameObject;
         }
 
-        private void Render(Vector2 start, Vector2 end)
+        private void Render(Vector2 start, Vector2 end, List<Vector2> renderPositions)
         {
             var dir = end - start;
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-            foreach (Vector2 position in positions)
+            foreach (Vector2 position in renderPositions)
             {
                 // var g = GetOneDot();
                 var g = GetOneArrow();
