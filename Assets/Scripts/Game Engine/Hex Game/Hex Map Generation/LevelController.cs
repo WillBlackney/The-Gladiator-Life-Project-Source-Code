@@ -807,8 +807,12 @@ namespace HexGameEngine.HexTiles
             HexMousedOver = h;
             h.mouseOverParent.SetActive(true);
 
+            // Glow activation window
+            if (h.myCharacter != null && h.myCharacter.hexCharacterView != null &&
+                h.myCharacter.hexCharacterView.myActivationWindow != null) h.myCharacter.hexCharacterView.myActivationWindow.MouseEnter();
+
             // Show the world space UI of the character on the tile
-            if(h.myCharacter != null && UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
+            if (h.myCharacter != null && UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
             {
                 h.myCharacter.hexCharacterView.mouseOverModel = true;
                 HexCharacterController.Instance.FadeInCharacterWorldCanvas(h.myCharacter.hexCharacterView, null, 0.25f);
@@ -846,6 +850,9 @@ namespace HexGameEngine.HexTiles
             }
                 
             h.mouseOverParent.SetActive(false);
+            if (h.myCharacter != null && h.myCharacter.hexCharacterView != null &&
+               h.myCharacter.hexCharacterView.myActivationWindow != null) h.myCharacter.hexCharacterView.myActivationWindow.MouseExit();
+
             HideTileInfoPopup();
             AbilityController.Instance.HideHitChancePopup();
         }

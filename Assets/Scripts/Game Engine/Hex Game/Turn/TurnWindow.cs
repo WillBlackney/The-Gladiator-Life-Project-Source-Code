@@ -8,10 +8,12 @@ using Sirenix.OdinInspector;
 using HexGameEngine.Characters;
 using HexGameEngine.UCM;
 using CardGameEngine.UCM;
+using HexGameEngine.HexTiles;
+using DG.Tweening;
 
 namespace HexGameEngine.TurnLogic
 {
-    public class TurnWindow : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class TurnWindow : MonoBehaviour
     {
         // Properties + Component References
         #region
@@ -28,26 +30,45 @@ namespace HexGameEngine.TurnLogic
         public HexCharacterModel myCharacter;
         public bool animateNumberText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+
+        [Header("Colouring References")]
+        [SerializeField] private Image frameImage;
+        [SerializeField] private Color normalColor;
+        [SerializeField] private Color highlightColor;
         #endregion
 
         // Mouse + Pointer Events
         #region
-        public void OnPointerEnter(PointerEventData eventData)
+        public void MouseEnter()
         {
-            Debug.Log("ActivationWindow.OnMouseEnter called...");
-            //CharacterEntityController.Instance.OnCharacterMouseEnter(myCharacter.characterEntityView);
+            frameImage.DOKill();
+            frameImage.DOColor(highlightColor, 0.2f);
+            if (myCharacter != null && myCharacter.livingState == LivingState.Alive &&
+                myCharacter.currentTile != null)
+            {
+                myCharacter.currentTile.mouseOverParent.SetActive(true);
+            }
         }
-        public void OnPointerExit(PointerEventData eventData)
+        public void MouseExit()
         {
-            Debug.Log("ActivationWindow.OnMouseExit called...");
-            //CharacterEntityController.Instance.OnCharacterMouseExit(myCharacter.characterEntityView);
+            frameImage.DOKill();
+            frameImage.DOColor(normalColor, 0.2f);
+            if (myCharacter != null &&
+                myCharacter.currentTile != null)
+            {
+                myCharacter.currentTile.mouseOverParent.SetActive(false);
+            }
         }
         public void Hide()
         {
+            frameImage.DOKill();
+            frameImage.color = normalColor;
             visualParent.SetActive(false);
         }
         public void Show()
         {
+            frameImage.DOKill();
+            frameImage.color = normalColor;
             visualParent.SetActive(true);
         }
 
