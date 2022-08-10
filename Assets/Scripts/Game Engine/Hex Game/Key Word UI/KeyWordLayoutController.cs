@@ -14,8 +14,9 @@ namespace HexGameEngine.UI
         #region
         [Header("Transform + Parent Component")]
         [SerializeField] private GameObject visualParent;
-        [SerializeField] private RectTransform mainGridRect;
-        [SerializeField] private RectTransform[] mainColumnRects;
+        [SerializeField] private RectTransform panelFitterParent;
+        [SerializeField] private RectTransform normalPos;
+        [SerializeField] private RectTransform combatPos;
 
         [Header("Canvas Components")]
         [SerializeField] private CanvasGroup mainCg;
@@ -34,7 +35,7 @@ namespace HexGameEngine.UI
             FadeInMainView();
 
             // build each panel
-            for (int i = 0; i < keyWords.Count; i++)
+            for (int i = 0; i < keyWords.Count && i < allKeyWordPanels.Length; i++)
             {
                 // Setup
                 KeyWordPanel panel = allKeyWordPanels[i];
@@ -177,16 +178,15 @@ namespace HexGameEngine.UI
         }
         private void RebuildEntireLayout()
         {
-            LayoutRebuilder.ForceRebuildLayoutImmediate(mainGridRect);
-
-            for (int i = 0; i < mainColumnRects.Length; i++)
-            {
-                LayoutRebuilder.ForceRebuildLayoutImmediate(mainColumnRects[i]);
-            }
+            for(int i = 0; i < 2; i++)
+                LayoutRebuilder.ForceRebuildLayoutImmediate(panelFitterParent);
         }
         private void EnableMainView()
         {
             visualParent.SetActive(true);
+            if (GameController.Instance.GameState == GameState.CombatActive)
+                panelFitterParent.position = combatPos.position;
+            else panelFitterParent.position = normalPos.position;
         }
         private void DisableMainView()
         {
@@ -203,7 +203,6 @@ namespace HexGameEngine.UI
             DisableMainView();
             mainCg.DOKill();
             mainCg.alpha = 0f;
-
         }
         #endregion
 

@@ -78,7 +78,8 @@ namespace HexGameEngine
         {
             gameState = GameState.MainMenu;
             LightController.Instance.EnableStandardGlobalLight();
-            TopBarController.Instance.HideTopBar();
+            TopBarController.Instance.HideMainTopBar();
+            TopBarController.Instance.HideCombatTopBar();
             BlackScreenController.Instance.DoInstantFadeOut();
             BlackScreenController.Instance.FadeInScreen(2f);
             MainMenuController.Instance.SetCustomCharacterDataDefaultState();
@@ -92,7 +93,7 @@ namespace HexGameEngine
             SetGameState(GameState.NonCombatEvent);
 
             // Show UI
-            TopBarController.Instance.ShowTopBar();
+            TopBarController.Instance.ShowMainTopBar();
 
             // Set up new save file 
             PersistencyController.Instance.BuildNewSaveFileOnNewGameStarted(CreateSandboxCharacterDataFiles()[0]);
@@ -122,7 +123,7 @@ namespace HexGameEngine
             SetGameState(GameState.CombatActive); 
 
             // Show UI
-            TopBarController.Instance.ShowTopBar();
+            TopBarController.Instance.ShowCombatTopBar();
 
             // Build mock save file + journey data
             RunController.Instance.SetGameStartValues();
@@ -183,7 +184,7 @@ namespace HexGameEngine
             SetGameState(GameState.CombatActive);
 
             // Show UI
-            TopBarController.Instance.ShowTopBar();
+            TopBarController.Instance.ShowCombatTopBar();
 
             // Build mock save file + journey data
             RunController.Instance.SetGameStartValues();
@@ -429,7 +430,7 @@ namespace HexGameEngine
             // Show town UI
             TownController.Instance.ShowTownView();
             CharacterScrollPanelController.Instance.BuildAndShowPanel();
-            TopBarController.Instance.ShowTopBar();
+            TopBarController.Instance.ShowMainTopBar();
 
             // Reset+ Centre camera
             CameraController.Instance.ResetMainCameraPositionAndZoom();
@@ -465,7 +466,7 @@ namespace HexGameEngine
             yield return new WaitForSeconds(2f);
 
             // Enable GUI
-            TopBarController.Instance.ShowTopBar();
+            TopBarController.Instance.ShowMainTopBar();
 
             // Set up new save file 
             PersistencyController.Instance.BuildNewSaveFileOnNewGameStarted();
@@ -516,8 +517,9 @@ namespace HexGameEngine
             // Pause run timer
             RunController.Instance.PauseTimer();
 
-            // Hide Game GUI
-            TopBarController.Instance.HideTopBar();
+            // Hide top bars
+            TopBarController.Instance.HideMainTopBar();
+            TopBarController.Instance.HideCombatTopBar();
 
             // Brute force stop all game music
             AudioManager.Instance.ForceStopAllCombatMusic();
@@ -572,10 +574,7 @@ namespace HexGameEngine
             yield return new WaitForSeconds(2f);
 
             // Build and prepare all session data
-            PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();
-
-            // Enable GUI
-            TopBarController.Instance.ShowTopBar();
+            PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();         
 
             // Reset Camera
             CameraController.Instance.ResetMainCameraPositionAndZoom();
@@ -586,6 +585,8 @@ namespace HexGameEngine
             // Build town views 
             if(RunController.Instance.SaveCheckPoint == SaveCheckPoint.Town)
             {
+                // Enable GUI
+                TopBarController.Instance.ShowMainTopBar();
                 TownController.Instance.ShowTownView();
                 CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
@@ -595,6 +596,7 @@ namespace HexGameEngine
             }
             else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatStart)
             {
+                TopBarController.Instance.ShowCombatTopBar();
                 BlackScreenController.Instance.FadeInScreen(1f);
                 SetGameState(GameState.CombatActive);
                 LevelController.Instance.GenerateLevelNodes(RunController.Instance.CurrentCombatMapData);
@@ -652,7 +654,6 @@ namespace HexGameEngine
         public void HandleLoadIntoCombatFromDeploymentScreen()
         {
             StartCoroutine(HandleLoadIntoCombatFromDeploymentScreenCoroutine());
-
         }
         private IEnumerator HandleLoadIntoCombatFromDeploymentScreenCoroutine()
         {
@@ -664,6 +665,7 @@ namespace HexGameEngine
             TownController.Instance.HideTownView();
             TownController.Instance.HideDeploymentPage();
             CharacterScrollPanelController.Instance.HideMainView();
+            TopBarController.Instance.ShowCombatTopBar();
 
             SetGameState(GameState.CombatActive);          
 

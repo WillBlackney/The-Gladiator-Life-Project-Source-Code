@@ -14,7 +14,8 @@ namespace HexGameEngine.UI
         // Properties + Components
         #region
         [Header("Core Components")]
-        [SerializeField] private GameObject visualParent;
+        [SerializeField] private GameObject mainTopBarVisualParent;
+        [SerializeField] private GameObject combatTopBarVisualParent;
 
         [Header("Text Components")]
         [SerializeField] private TextMeshProUGUI currentGoldText;
@@ -43,15 +44,25 @@ namespace HexGameEngine.UI
 
         // Core Functions
         #region
-        public void ShowTopBar()
+        public void ShowMainTopBar()
         {
-            visualParent.SetActive(true);
+            mainTopBarVisualParent.SetActive(true);
+            HideCombatTopBar();
         }
-        public void HideTopBar()
+        public void HideMainTopBar()
         {
-            visualParent.SetActive(false);
+            mainTopBarVisualParent.SetActive(false);
         }
-       
+        public void ShowCombatTopBar()
+        {
+            combatTopBarVisualParent.SetActive(true);
+            HideMainTopBar();
+        }
+        public void HideCombatTopBar()
+        {
+            combatTopBarVisualParent.SetActive(false);
+        }
+
         #endregion
 
         // Keypad Control Logic
@@ -59,7 +70,7 @@ namespace HexGameEngine.UI
         private void Update()
         {
             // Handle key board input
-            if (visualParent.activeSelf == true)
+            if (mainTopBarVisualParent.activeSelf == true)
             {
                // if (Input.GetKeyDown(KeyCode.C)) CharacterRosterViewController.Instance.OnCharacterRosterButtonClicked();
                 //else if (Input.GetKeyDown(KeyCode.M)) MapSystem.MapView.Instance.OnWorldMapButtonClicked();
