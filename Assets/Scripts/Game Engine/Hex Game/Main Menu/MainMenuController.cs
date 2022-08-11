@@ -25,12 +25,13 @@ namespace HexGameEngine.MainMenu
         #region
         [Header("Front Screen Components")]
         [SerializeField] private GameObject frontScreenParent;
-        public GameObject frontScreenBgParent;
-        public CanvasGroup frontScreenGuiCg;
+        [SerializeField] private GameObject frontScreenBgParent;
+        [SerializeField] private CanvasGroup frontScreenGuiCg;
         [SerializeField] private GameObject newGameButtonParent;
         [SerializeField] private GameObject continueButtonParent;
         [SerializeField] private GameObject abandonRunButtonParent;
         [SerializeField] private GameObject abandonRunPopupParent;
+        [SerializeField] private CrowdRowAnimator[] frontScreenCrowdRows;
         [Space(20)]
 
         [Header("In Game Menu Components")]
@@ -1341,10 +1342,17 @@ namespace HexGameEngine.MainMenu
         public void ShowFrontScreen()
         {
             frontScreenParent.SetActive(true);
+            foreach(CrowdRowAnimator cra in frontScreenCrowdRows)
+            {
+                cra.StopAnimation();
+                cra.PlayAnimation();
+            }
         }
         public void HideFrontScreen()
         {
             frontScreenParent.SetActive(false);
+            foreach (CrowdRowAnimator cra in frontScreenCrowdRows)            
+                cra.StopAnimation();            
         }
         private bool ShouldShowContinueButton()
         {
@@ -1447,7 +1455,7 @@ namespace HexGameEngine.MainMenu
             ShowFrontScreen();
 
             frontScreenGuiCg.alpha = 0;
-            frontScreenBgParent.transform.DOScale(1.2f, 0f);
+            frontScreenBgParent.transform.DOScale(1.25f, 0f);
             yield return new WaitForSeconds(1);
 
             AudioManager.Instance.FadeInSound(Sound.Music_Main_Menu_Theme_1, 3f);
