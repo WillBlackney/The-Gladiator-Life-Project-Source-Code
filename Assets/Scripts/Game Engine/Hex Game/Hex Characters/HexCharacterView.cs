@@ -114,7 +114,7 @@ namespace HexGameEngine.Characters
         {
             stressBarShatteredGlowWorld.DOKill();
             stressBarShatteredGlowWorld.DOFade(0, 0);
-            stressBarShatteredGlowWorld.DOFade(1, 0.25f).SetLoops(-1, LoopType.Yoyo);
+            stressBarShatteredGlowWorld.DOFade(1, 0.5f).SetLoops(-1, LoopType.Yoyo);
         }
         public void StopShatteredGlow()
         {
