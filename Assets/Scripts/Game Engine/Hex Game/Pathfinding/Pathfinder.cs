@@ -110,7 +110,7 @@ namespace HexGameEngine.Pathfinding
         // Get Paths + Valid Destinations
         #region
        
-        public static Path GetPath(HexCharacterModel character, LevelNode start, LevelNode destination, List<LevelNode> allHexes)
+        public static Path GetValidPath(HexCharacterModel character, LevelNode start, LevelNode destination, List<LevelNode> allHexes)
         {
             // Simple way to get a path from A to B. If it is impossible to draw a path between A and B, 
             // or the path is invalid for the character (not enough energy, untraversable destination, etc),

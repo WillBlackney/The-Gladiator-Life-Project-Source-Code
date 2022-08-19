@@ -1012,12 +1012,17 @@ namespace HexGameEngine.Characters
             // ENEMY Start turn 
             if (character.controller == Controller.AI)
             {
+                // Redetermine who has the ranged advantage
+                AILogic.UpdateCurrentRangedAdvantage();
+
+                // Do AI turn
                 VisualEventManager.Instance.InsertTimeDelayInQueue(1f);
                 SetCharacterActivationPhase(character, ActivationPhase.ActivationPhase);
                 AILogic.RunEnemyRoutine(character);
 
                 if(character.livingState == LivingState.Alive &&
-                    TurnController.Instance.EntityActivated == character)
+                    TurnController.Instance.EntityActivated == character && 
+                    character.activationPhase == ActivationPhase.ActivationPhase)
                 CharacterOnTurnEnd(character);
             }
 

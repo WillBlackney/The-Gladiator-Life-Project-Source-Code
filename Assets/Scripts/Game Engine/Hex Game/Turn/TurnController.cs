@@ -316,7 +316,7 @@ namespace HexGameEngine.TurnLogic
 
             activationOrder = sortedList;
         }
-        private void HandleMoveCharacterToEndOfTurnOrder(HexCharacterModel character)
+        public void HandleMoveCharacterToEndOfTurnOrder(HexCharacterModel character)
         {
             activationOrder.Remove(character);
             activationOrder.Add(character);
@@ -363,7 +363,7 @@ namespace HexGameEngine.TurnLogic
                     // Mouse click SFX
                     AudioManager.Instance.PlaySoundPooled(Sound.GUI_Button_Clicked);
 
-                    // TO DO: move this character to the end of the turn order.
+                    // Move this character to the end of the turn order.
                     HandleMoveCharacterToEndOfTurnOrder(EntityActivated);
 
                     // Trigger character on activation end sequence and events

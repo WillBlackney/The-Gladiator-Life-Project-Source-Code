@@ -36,7 +36,14 @@ namespace HexGameEngine.AI
         [LabelWidth(100)]
         public int alliesAlive;
 
+        [ShowIf("ShowAbilityName")]
+        [LabelWidth(100)]
+        public string abilityName;
 
+        public bool ShowAbilityName()
+        {
+            return requirementType == AIActionRequirementType.AbilityIsOffCooldown;
+        }
         public bool ShowEnergyReq()
         {
             if (requirementType == AIActionRequirementType.HasMoreEnergyThanX)
@@ -103,5 +110,8 @@ namespace HexGameEngine.AI
         SelfHasLessHealthThanX = 9,
         MoreThanAlliesAlive = 11,
         LessThanAlliesAlive = 12,
+        HasRangedAdvantage = 13,
+        DoesNotHaveRangedAdvantage = 14,
+        AbilityIsOffCooldown = 15,
     }
 }

@@ -10,8 +10,10 @@ namespace HexGameEngine.AI
     {
         [Header("Core Properties")]
         [LabelWidth(100)]
+   
         public AIActionType actionType;
         [LabelWidth(100)]
+        [ShowIf("ShowTargettingPriority")]
         public TargettingPriority targettingPriority;
 
         [ShowIf("ShowGetRangeFromAbility")]
@@ -27,6 +29,11 @@ namespace HexGameEngine.AI
         [ShowIf("ShowAbilityName")]
         [LabelWidth(100)]
         public string abilityName;
+
+        public bool ShowTargettingPriority()
+        {
+            return actionType != AIActionType.DelayTurn;            
+        }
 
         public bool ShowAbilityName()
         {
@@ -59,12 +66,15 @@ namespace HexGameEngine.AI
         UseCharacterTargettedSummonAbility = 5,
         MoveToEngageInMelee = 2,
         MoveIntoRangeOfTarget = 3,
+        MoveToElevationCloserToEnemy = 6,
+        DelayTurn = 7,
     }
 
     public enum TargettingPriority
     {
         None = 0,
         ClosestUnfriendlyTarget = 1,
+        BestValidUnfriendlyTarget = 5,
         RandomAlly = 3,
         RandomAllyOrSelf = 4,
         Self = 2,

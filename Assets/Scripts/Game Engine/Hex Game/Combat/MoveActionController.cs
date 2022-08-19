@@ -86,10 +86,43 @@ namespace HexGameEngine.Combat
                 ClearPath();
                 HandleFirstHexSelection(h, character);
             }
-        }       
+        }     
+        public List<HexCharacterModel> GetFreeStrikersOnPath(HexCharacterModel characterMoving, Path p)
+        {
+            // Check Free strike opportunities along the path.
+            List<LevelNode> tilesMovedFrom = new List<LevelNode>();
+            List<HexCharacterModel> freeStrikers = new List<HexCharacterModel>();
+            tilesMovedFrom.Add(characterMoving.currentTile);
+            tilesMovedFrom.AddRange(p.HexsOnPath);
+            tilesMovedFrom.Remove(p.Destination);
+
+            // Determine which characters are able to free strike the tile.
+            HexCharacterController.Instance.HideAllFreeStrikeIndicators();
+            foreach (LevelNode h in tilesMovedFrom)
+            {
+                // Enemies dont free strike when a character moves through an ally
+                if (h.myCharacter != null && h.myCharacter != characterMoving)
+                    continue;
+
+                List<LevelNode> meleeTiles = LevelController.Instance.GetAllHexsWithinRange(h, 1);
+                foreach (LevelNode meleeHex in meleeTiles)
+                {
+                    // Check validity of free strike
+                    if (meleeHex.myCharacter != null &&
+                        !HexCharacterController.Instance.IsTargetFriendly(characterMoving, meleeHex.myCharacter) &&
+                         HexCharacterController.Instance.IsCharacterAbleToMakeFreeStrikes(meleeHex.myCharacter) &&
+                         !freeStrikers.Contains(meleeHex.myCharacter))
+                    {
+                        freeStrikers.Add(meleeHex.myCharacter);
+                    }
+                }
+            }
+
+            return freeStrikers;
+        }
         private void HandleFirstHexSelection(LevelNode hexClicked, HexCharacterModel character)
         {
-            Path p = Pathfinder.GetPath(character, character.currentTile, hexClicked, LevelController.Instance.AllLevelNodes.ToList());
+            Path p = Pathfinder.GetValidPath(character, character.currentTile, hexClicked, LevelController.Instance.AllLevelNodes.ToList());
             if (Pathfinder.IsPathValid(p))
             {
                 clickedHex = hexClicked;
@@ -118,33 +151,7 @@ namespace HexGameEngine.Combat
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Slippery)) return;
 
                 // Check Free strike opportunities along the path.
-                List<LevelNode> tilesMovedFrom = new List<LevelNode>();
-                List<HexCharacterModel> freeStrikers = new List<HexCharacterModel>();
-                tilesMovedFrom.Add(character.currentTile);
-                tilesMovedFrom.AddRange(p.HexsOnPath);
-                tilesMovedFrom.Remove(p.Destination);
-
-                // Determine which characters are able to free strike the tile.
-                HexCharacterController.Instance.HideAllFreeStrikeIndicators();
-                foreach (LevelNode h in tilesMovedFrom)
-                {
-                    // Enemies dont free strike when a character moves through an ally
-                    if (h.myCharacter != null && h.myCharacter != character)
-                        continue;
-
-                    List<LevelNode> meleeTiles = LevelController.Instance.GetAllHexsWithinRange(h, 1);
-                    foreach(LevelNode meleeHex in meleeTiles)
-                    {                       
-                        // Check validity of free strike
-                        if(meleeHex.myCharacter != null &&
-                            !HexCharacterController.Instance.IsTargetFriendly(character, meleeHex.myCharacter) &&
-                             HexCharacterController.Instance.IsCharacterAbleToMakeFreeStrikes(meleeHex.myCharacter) &&
-                             !freeStrikers.Contains(meleeHex.myCharacter))
-                        {
-                            freeStrikers.Add(meleeHex.myCharacter);
-                        }
-                    }
-                }
+                List<HexCharacterModel> freeStrikers = GetFreeStrikersOnPath(character, p);
 
                 // disable all character free strike indicators
                 foreach(HexCharacterModel enemy in freeStrikers)

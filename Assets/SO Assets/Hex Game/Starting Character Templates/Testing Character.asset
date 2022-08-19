@@ -24,7 +24,7 @@ MonoBehaviour:
       value: 1000
       stars: 0
     dodge:
-      value: 0
+      value: 50
       stars: 0
     accuracy:
       value: 200
@@ -54,15 +54,8 @@ MonoBehaviour:
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 4e4bf822749dff044b3b1112dba35a22, type: 2}
-    - {fileID: 11400000, guid: fb57f167ec3edab43baad8230d973425, type: 2}
-    - {fileID: 11400000, guid: 7226b1084c8524348ac57922965a3699, type: 2}
-    - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
   serializedPassiveManager:
-    perks:
-    - perkTag: 154
-      stacks: 1
-    - perkTag: 1
-      stacks: 2
+    perks: []
   modelParts:
   - Ghoul_Chest
   - Undead_Face_6

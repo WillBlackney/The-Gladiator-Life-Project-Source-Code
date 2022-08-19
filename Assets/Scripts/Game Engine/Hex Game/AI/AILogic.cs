@@ -4,6 +4,7 @@ using HexGameEngine.Combat;
 using HexGameEngine.HexTiles;
 using HexGameEngine.Pathfinding;
 using HexGameEngine.Perks;
+using HexGameEngine.TurnLogic;
 using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
 using System;
@@ -24,7 +25,7 @@ namespace HexGameEngine.AI
             bool successfulAction = TryTakeAction(character);
             int loops = 0;
 
-            while (successfulAction && loops < 50)
+            while (successfulAction && loops < 100)
             {
                 successfulAction = TryTakeAction(character);
             }
@@ -33,7 +34,8 @@ namespace HexGameEngine.AI
         {
             bool actionTaken = false;
 
-            if (!HexCharacterController.Instance.IsCharacterAbleToTakeActions(character)) return false;
+            if (!HexCharacterController.Instance.IsCharacterAbleToTakeActions(character) ||
+                character.activationPhase != ActivationPhase.ActivationPhase) return false;
 
             foreach (AIDirective dir in character.aiTurnRoutine.directives)
             {
@@ -92,8 +94,12 @@ namespace HexGameEngine.AI
                 // Check ability useability
                 AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
                 if (ability == null)
+                {
                     Debug.Log("AILogic.IsDirectiveActionable() could not find the ability '" + directive.action.abilityName +
-                        "' in the AI's spell book...");
+                       "' in the AI's spell book...");
+                    return false;
+                }
+                   
 
                 if (!AbilityController.Instance.IsAbilityUseable(character, ability))
                 {
@@ -115,17 +121,74 @@ namespace HexGameEngine.AI
                 }
             }
 
-            // Move into range
+            // Move into range of target
             else if (directive.action.actionType == AIActionType.MoveIntoRangeOfTarget)
             {
-                // Able to move 
+                // Ablility to move 
                 AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
 
-                if (!HexCharacterController.Instance.IsCharacterAbleToMove(character) ||
+                if (target == null || 
+                    !HexCharacterController.Instance.IsCharacterAbleToMove(character) ||
                     target.currentTile.Distance(character.currentTile) <= AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character))
                 {
                     return false;
                 }
+            }
+
+            // Move To Elevation Closer To Enemy
+            else if (directive.action.actionType == AIActionType.MoveToElevationCloserToEnemy)
+            {
+                // find all tiles that are
+                // 1. closer to the enemy than current position
+                // 2. are elevated
+                // 3. within energy/walk distance
+                // 4. would not subject the AI to free strikes
+                // after getting these positions, pick the one that is closest to the enemy.
+
+                if (target == null ||
+                   !HexCharacterController.Instance.IsCharacterAbleToMove(character))
+                {
+                    return false;
+                }
+
+                int distBetweenCharacters = character.currentTile.Distance(target.currentTile);
+                int bestCurrentDistance = 0;
+                Path bestPath = null;
+                List<LevelNode> possibleDestinations = new List<LevelNode>();
+
+                // Filter for possible destinations that are elevated and actually closer to the enemy than current position
+                foreach (LevelNode node in LevelController.Instance.AllLevelNodes)
+                {
+                    if (node.Elevation == TileElevation.Elevated && distBetweenCharacters > node.Distance(character.currentTile))
+                        possibleDestinations.Add(node);
+                }
+
+                // After filtering for elevated closer tiles, filter again by paths
+                // that wont result in a freestrike, and where the AI has the energy/capacity to move there
+                foreach (LevelNode node in possibleDestinations)
+                {
+                    Path p = Pathfinder.GetValidPath(character, character.currentTile, node, LevelController.Instance.AllLevelNodes.ToList());
+                    if (p != null &&
+                       p.Length > bestCurrentDistance &&
+                       MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
+                    {
+                        bestCurrentDistance = p.Length;
+                        bestPath = p;
+                    }
+                }
+
+                if (bestPath != null)
+                {
+                    return false;
+                }
+            }
+
+            // Delay turn
+            else if(directive.action.actionType == AIActionType.DelayTurn)
+            {
+                // Prevent turn delay if already the last to act
+                if (character.hasRequestedTurnDelay || 
+                    TurnController.Instance.ActivationOrder[TurnController.Instance.ActivationOrder.Count - 1] == character) return false;
             }
 
             // Evaluate each user specified condition
@@ -205,6 +268,25 @@ namespace HexGameEngine.AI
             else if (req.requirementType == AIActionRequirementType.MoreThanAlliesAlive &&
                 HexCharacterController.Instance.GetAllAlliesOfCharacter(character, false).Count > req.alliesAlive)
                 bRet = true;
+
+            // Check has ranged advantage
+            else if (req.requirementType == AIActionRequirementType.HasRangedAdvantage &&
+                CurrentRangedAdvantage == Allegiance.Enemy)
+                bRet = true;
+
+            // Check does NOT have ranged advantage
+            else if (req.requirementType == AIActionRequirementType.DoesNotHaveRangedAdvantage &&
+                CurrentRangedAdvantage == Allegiance.Player)
+                bRet = true;
+
+            // Ability is off cooldown
+            else if (req.requirementType == AIActionRequirementType.AbilityIsOffCooldown)
+            {
+                AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, req.abilityName);
+                if(ability != null && ability.currentCooldown == 0)
+                    bRet = true;
+            }
+               
 
             return bRet;
         }
@@ -408,6 +490,66 @@ namespace HexGameEngine.AI
 
             }
 
+            // Move closer to enemy via elevation
+            else if (directive.action.actionType == AIActionType.MoveToElevationCloserToEnemy)
+            {
+                // find all tiles that are
+                // 1. closer to the enemy than current position
+                // 2. are elevated
+                // 3. within energy/walk distance
+                // 4. would not subject the AI to free strikes
+                // after getting these positions, pick the one that is closest to the enemy.
+
+                int distBetweenCharacters = character.currentTile.Distance(target.currentTile);
+                int bestCurrentDistance = 0;
+                Path bestPath = null;
+                List<LevelNode> possibleDestinations = new List<LevelNode>();
+
+                // Filter for possible destinations that are elevated and actually closer to the enemy than current position
+                foreach (LevelNode node in LevelController.Instance.AllLevelNodes)
+                {
+                    if(node.Elevation == TileElevation.Elevated && distBetweenCharacters > node.Distance(character.currentTile))                    
+                        possibleDestinations.Add(node);
+                    
+                }
+                
+                // After filtering for elevated closer tiles, filter again by paths
+                // that wont result in a freestrike, and where the AI has the energy/capacity to move there
+                foreach (LevelNode node in possibleDestinations)
+                {
+                    Path p = Pathfinder.GetValidPath(character, character.currentTile, node, LevelController.Instance.AllLevelNodes.ToList());
+                    if(p != null &&
+                       p.Length > bestCurrentDistance &&
+                       MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
+                    {
+                        bestCurrentDistance = p.Length;
+                        bestPath = p;
+                    }
+                }
+
+                if (bestPath != null)
+                {
+                    LevelController.Instance.HandleMoveDownPath(character, bestPath);
+                    VisualEventManager.Instance.InsertTimeDelayInQueue(1);
+                    actionTaken = true;
+                }
+            }
+
+            else if(directive.action.actionType == AIActionType.DelayTurn)
+            {
+                // Delays status VFX
+                VisualEventManager.Instance.CreateVisualEvent(()=> 
+                VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "Delay Turn!"), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+
+                // Move character to the end of the turn order.
+                TurnController.Instance.HandleMoveCharacterToEndOfTurnOrder(character);
+                VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+
+                // Trigger character on activation end sequence and events
+                HexCharacterController.Instance.CharacterOnTurnEnd(character, true);
+                actionTaken = true;
+            }
 
             return actionTaken;
         }
@@ -599,14 +741,21 @@ namespace HexGameEngine.AI
 
             if(directive.action.actionType == AIActionType.MoveIntoRangeOfTarget ||
                 directive.action.actionType == AIActionType.MoveToEngageInMelee ||
-                directive.action.actionType == AIActionType.UseCharacterTargettedSummonAbility)
+                directive.action.actionType == AIActionType.UseCharacterTargettedSummonAbility ||
+                directive.action.actionType == AIActionType.MoveToElevationCloserToEnemy)
             {
                 if (directive.action.targettingPriority == TargettingPriority.ClosestUnfriendlyTarget)
                     target = GetClosestNonFriendlyCharacter(attacker);
+
+                else if (directive.action.targettingPriority == TargettingPriority.BestValidUnfriendlyTarget)
+                {
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                    target = GetBestValidAttackTarget(attacker, ability);
+                }
             }
 
             // Check for taunted enemies first when using actions that require a target
-            else if (directive.action.targettingPriority == TargettingPriority.ClosestUnfriendlyTarget &&
+            else if ((directive.action.targettingPriority == TargettingPriority.ClosestUnfriendlyTarget || directive.action.targettingPriority == TargettingPriority.BestValidUnfriendlyTarget) &&
                 directive.action.abilityName != "" &&
                 directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
             {
@@ -628,6 +777,8 @@ namespace HexGameEngine.AI
                 {
                     if(directive.action.targettingPriority == TargettingPriority.ClosestUnfriendlyTarget)
                         target = GetClosestNonFriendlyCharacter(attacker);
+                    else if (directive.action.targettingPriority == TargettingPriority.BestValidUnfriendlyTarget)
+                        target = GetBestValidAttackTarget(attacker, ability);
                 }
             }
 
@@ -657,7 +808,7 @@ namespace HexGameEngine.AI
 
             return target;
         }
-        public static HexCharacterModel GetClosestNonFriendlyCharacter(HexCharacterModel character)
+        private static HexCharacterModel GetClosestNonFriendlyCharacter(HexCharacterModel character)
         {
             HexCharacterModel closestEnemy = null;
             int currentClosest = 10000;
@@ -673,6 +824,26 @@ namespace HexGameEngine.AI
             }
 
             return closestEnemy;
+        }
+        private static HexCharacterModel GetBestValidAttackTarget(HexCharacterModel character, AbilityData ability)
+        {
+            // Used to determine target for attack actions
+            if (ability == null) return null;
+            HexCharacterModel bestTarget = null;
+            int currentBestHitChance = 0;
+
+            foreach (HexCharacterModel enemy in HexCharacterController.Instance.GetAllEnemiesOfCharacter(character))
+            {
+                int hitChance = CombatController.Instance.GetHitChance(character, enemy, ability).FinalHitChance;
+                if (AbilityController.Instance.IsTargetOfAbilityValid(character, enemy, ability) &&
+                   hitChance > currentBestHitChance)
+                {
+                    currentBestHitChance = hitChance;
+                    bestTarget = enemy;
+                }
+            }
+
+            return bestTarget;
         }
         private static List<HexCharacterModel> GetAllEnemiesWithinRange(HexCharacterModel character, int range)
         {
@@ -701,6 +872,55 @@ namespace HexGameEngine.AI
             if (listRet.Contains(character) && !includeSelf) listRet.Remove(character);
 
             return listRet;
+        }
+        #endregion
+
+        // Ranged Advantage Logic
+        #region
+        public static Allegiance CurrentRangedAdvantage
+        {
+            get; private set;
+        }
+        public static void UpdateCurrentRangedAdvantage()
+        {
+            float playerScore = GetTeamRangedScore(Allegiance.Player);
+            float enemyScore = GetTeamRangedScore(Allegiance.Enemy);
+
+            if (enemyScore > playerScore && TurnController.Instance.CurrentTurn < 3) CurrentRangedAdvantage = Allegiance.Enemy;
+            else CurrentRangedAdvantage = Allegiance.Player;
+
+            Debug.Log("AILogic.UpdateCurrentRangedAdvantage() determined that " + CurrentRangedAdvantage.ToString() +
+                " currently has the ranged advantage");
+        }
+        private static float GetTeamRangedScore(Allegiance team)
+        {
+            List<HexCharacterModel> characters = new List<HexCharacterModel>();
+            float rangedAbilitiesTotal = 0;
+            float cooldownTotal = 0;
+            float score = 0;
+
+            if (team == Allegiance.Player) characters.AddRange(HexCharacterController.Instance.AllDefenders);
+            else characters.AddRange(HexCharacterController.Instance.AllEnemies);
+
+            foreach(HexCharacterModel c in characters)
+            {
+                foreach(AbilityData a in c.abilityBook.activeAbilities)
+                {
+                    if(a.abilityType == AbilityType.RangedAttack)
+                    {
+                        rangedAbilitiesTotal += 1;
+                        cooldownTotal += a.baseCooldown;
+                    }
+                }
+            }
+
+            // Prevent divide by 0 error
+            if (rangedAbilitiesTotal != 0 && cooldownTotal != 0)            
+                score = rangedAbilitiesTotal / cooldownTotal;
+
+            Debug.Log("AILogic.GetTeamRangedScore() calculated " + team.ToString() + " team has a ranged score of " + score.ToString());
+
+            return score;
         }
         #endregion
     }

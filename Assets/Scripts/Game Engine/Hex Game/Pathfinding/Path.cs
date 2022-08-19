@@ -36,6 +36,10 @@ namespace HexGameEngine.Pathfinding
         {
             get { return character; }
         }
+        public int Length
+        {
+            get { return hexsOnPath.Count; }
+        }
         #endregion
 
 
