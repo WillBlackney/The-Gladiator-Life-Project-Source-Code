@@ -216,6 +216,11 @@ namespace HexGameEngine.AI
                 character.currentEnergy > req.energyReq)
                 bRet = true;
 
+            // Check has LESS energy than X 
+            else if (req.requirementType == AIActionRequirementType.HasLessEnergyThanX &&
+                character.currentEnergy < req.energyReq)
+                bRet = true;
+
             // Check has MORE than X perk stacks SELF
             else if (req.requirementType == AIActionRequirementType.HasMoreThanPerkStacksSelf &&
                 PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, req.perkPairing.perkTag) > req.perkPairing.passiveStacks)
@@ -286,7 +291,22 @@ namespace HexGameEngine.AI
                 if(ability != null && ability.currentCooldown == 0)
                     bRet = true;
             }
-               
+
+            // Target is not engaged
+            else if (req.requirementType == AIActionRequirementType.TargetIsNotEngagedInMelee)
+            {
+                if (!HexCharacterController.Instance.IsCharacterEngagedInMelee(target))
+                    bRet = true;
+            }
+
+            // Target is adjacent to ally
+            else if (req.requirementType == AIActionRequirementType.TargetIsAdjacentToAlly)
+            {
+                // TO DO: this will get non adjacent allies if the target has an aura larger than 2, fix in future
+                if (HexCharacterController.Instance.GetAlliesWithinMyAura(target).Count >= 1)
+                    bRet = true;
+            }
+
 
             return bRet;
         }
@@ -752,10 +772,19 @@ namespace HexGameEngine.AI
                     AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
                     target = GetBestValidAttackTarget(attacker, ability);
                 }
+
+                else if (directive.action.targettingPriority == TargettingPriority.RandomValidUnfriendlyTarget)
+                {
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                    target = GetRandomValidAttackTarget(attacker, ability);
+                }
             }
 
             // Check for taunted enemies first when using actions that require a target
-            else if ((directive.action.targettingPriority == TargettingPriority.ClosestUnfriendlyTarget || directive.action.targettingPriority == TargettingPriority.BestValidUnfriendlyTarget) &&
+            else if (
+                (directive.action.targettingPriority == TargettingPriority.ClosestUnfriendlyTarget ||
+                directive.action.targettingPriority == TargettingPriority.BestValidUnfriendlyTarget ||
+                directive.action.targettingPriority == TargettingPriority.RandomValidUnfriendlyTarget) &&
                 directive.action.abilityName != "" &&
                 directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
             {
@@ -775,10 +804,12 @@ namespace HexGameEngine.AI
                 // No taunt enemies, just determine target normally
                 else
                 {
-                    if(directive.action.targettingPriority == TargettingPriority.ClosestUnfriendlyTarget)
+                    if (directive.action.targettingPriority == TargettingPriority.ClosestUnfriendlyTarget)
                         target = GetClosestNonFriendlyCharacter(attacker);
                     else if (directive.action.targettingPriority == TargettingPriority.BestValidUnfriendlyTarget)
                         target = GetBestValidAttackTarget(attacker, ability);
+                    else if (directive.action.targettingPriority == TargettingPriority.RandomValidUnfriendlyTarget)
+                        target = GetRandomValidAttackTarget(attacker, ability);
                 }
             }
 
@@ -844,6 +875,24 @@ namespace HexGameEngine.AI
             }
 
             return bestTarget;
+        }
+        private static HexCharacterModel GetRandomValidAttackTarget(HexCharacterModel character, AbilityData ability)
+        {
+            // Used to determine target for attack actions
+            if (ability == null) return null;
+            HexCharacterModel randomTarget = null;
+            List<HexCharacterModel> allValidTargets = new List<HexCharacterModel>();
+
+            foreach (HexCharacterModel enemy in HexCharacterController.Instance.GetAllEnemiesOfCharacter(character))
+            {
+                if (AbilityController.Instance.IsTargetOfAbilityValid(character, enemy, ability))
+                {
+                    allValidTargets.Add(enemy);
+                }
+            }
+
+            if (allValidTargets.Count > 0) randomTarget = allValidTargets.GetRandomElement();
+            return randomTarget;
         }
         private static List<HexCharacterModel> GetAllEnemiesWithinRange(HexCharacterModel character, int range)
         {

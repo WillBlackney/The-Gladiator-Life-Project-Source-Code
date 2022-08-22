@@ -75,6 +75,7 @@ namespace HexGameEngine.AI
         None = 0,
         ClosestUnfriendlyTarget = 1,
         BestValidUnfriendlyTarget = 5,
+        RandomValidUnfriendlyTarget = 6,
         RandomAlly = 3,
         RandomAllyOrSelf = 4,
         Self = 2,

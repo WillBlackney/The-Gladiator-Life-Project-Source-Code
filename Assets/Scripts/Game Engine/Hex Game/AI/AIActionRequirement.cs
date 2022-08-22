@@ -7,7 +7,7 @@ using UnityEngine;
 namespace HexGameEngine.AI
 {
     [System.Serializable]
-    public class AIActionRequirement 
+    public class AIActionRequirement
     {
         [LabelWidth(100)]
         public AIActionRequirementType requirementType;
@@ -20,7 +20,7 @@ namespace HexGameEngine.AI
         public PerkPairingData perkPairing;
 
         [ShowIf("ShowHealthPercentage")]
-        [Range (0, 100)]
+        [Range(0, 100)]
         [LabelWidth(100)]
         public int healthPercentage;
 
@@ -46,7 +46,7 @@ namespace HexGameEngine.AI
         }
         public bool ShowEnergyReq()
         {
-            if (requirementType == AIActionRequirementType.HasMoreEnergyThanX)
+            if (requirementType == AIActionRequirementType.HasMoreEnergyThanX || requirementType == AIActionRequirementType.HasLessEnergyThanX)
             {
                 return true;
             }
@@ -102,6 +102,7 @@ namespace HexGameEngine.AI
         AlreadyEngagedInMelee = 2,
         NotEngagedInMelee = 8,
         HasMoreEnergyThanX = 10,
+        HasLessEnergyThanX = 18,
         HasLessThanPerkStacksSelf = 3,
         HasMoreThanPerkStacksSelf = 4,
         TargetHasMorePerkStacks = 5,
@@ -113,5 +114,7 @@ namespace HexGameEngine.AI
         HasRangedAdvantage = 13,
         DoesNotHaveRangedAdvantage = 14,
         AbilityIsOffCooldown = 15,
+        TargetIsNotEngagedInMelee = 16,
+        TargetIsAdjacentToAlly = 17,
     }
 }

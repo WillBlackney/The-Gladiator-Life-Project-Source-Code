@@ -63,7 +63,7 @@ MonoBehaviour:
       cameraShake: 0
       movementAnimation: 0
       soundEffect: 0
-      characterAnimation: 3
+      characterAnimation: 2
       delayDuration: 0
       projectileFired: 10
       projectileStartPosition: 0
@@ -110,6 +110,8 @@ MonoBehaviour:
     maxBaseDamage: 17
     guaranteedHit: 0
     ignoresBlock: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 01000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -199,6 +201,8 @@ MonoBehaviour:
     maxBaseDamage: 17
     guaranteedHit: 1
     ignoresBlock: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
