@@ -184,13 +184,13 @@ namespace HexGameEngine.Combat
             currentPath = null;
             CardGameEngine.DottedLine.Instance.DestroyAllPaths();
         }
-        public void ResetSelectionState()
+        public void ResetSelectionState(bool resetEnergyBar = true)
         {
             LevelController.Instance.UnmarkAllTiles();
             HexCharacterController.Instance.HideAllFreeStrikeIndicators();
             ClearPath();
             HidePathCostPopup();
-            if(TurnController.Instance.EntityActivated != null)
+            if(TurnController.Instance.EntityActivated != null && resetEnergyBar)
                 CombatUIController.Instance.EnergyBar.UpdateIcons(TurnController.Instance.EntityActivated.currentEnergy, 0.25f);
             clickedHex = null;
         }

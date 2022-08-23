@@ -60,8 +60,6 @@ namespace HexGameEngine.Abilities
                               (MyAbilityData.myCharacter.currentEnergy, AbilityController.Instance.GetAbilityEnergyCost(MyAbilityData.myCharacter, MyAbilityData));
 
             }
-
-
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -71,8 +69,21 @@ namespace HexGameEngine.Abilities
                 if(MyAbilityData != null && MyAbilityData.myCharacter != null)
                 {
                     AbilityPopupController.Instance.OnAbilityButtonMousedExit();
-                    CombatUIController.Instance.EnergyBar.UpdateIcons(MyAbilityData.myCharacter.currentEnergy, 0.25f);
                     KeyWordLayoutController.Instance.FadeOutMainView();
+                    if (AbilityController.Instance.CurrentAbilityAwaiting != null)
+                    {
+                        AbilityData a = AbilityController.Instance.CurrentAbilityAwaiting;
+                        CombatUIController.Instance.EnergyBar.UpdateIcons(a.myCharacter.currentEnergy);
+                        CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter
+                          (a.myCharacter.currentEnergy, AbilityController.Instance.GetAbilityEnergyCost(a.myCharacter, a));
+
+                    }
+                    else
+                    {
+                        CombatUIController.Instance.EnergyBar.UpdateIcons(MyAbilityData.myCharacter.currentEnergy, 0.25f);
+                    }
+                    
+                    
                 }                   
              
                 CurrentButtonMousedOver = null;

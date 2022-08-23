@@ -302,6 +302,10 @@ namespace HexGameEngine.Abilities
             // Hide pop up
             HideHitChancePopup();
 
+            // Update UI energy bar
+            if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
+                CombatUIController.Instance.EnergyBar.UpdateIcons(TurnController.Instance.EntityActivated.currentEnergy);
+
             OnAbilityUsedStart(character, ability, target);
 
             // Face target
@@ -1219,7 +1223,7 @@ namespace HexGameEngine.Abilities
             if (IsAbilityUseable(b.MyAbilityData.myCharacter, b.MyAbilityData))
             {
                 // clear move selection state + views
-                MoveActionController.Instance.ResetSelectionState();
+                MoveActionController.Instance.ResetSelectionState(false);
 
                 // start ability usage part 1 !!
                 HandleAbilityButtonClicked(b);

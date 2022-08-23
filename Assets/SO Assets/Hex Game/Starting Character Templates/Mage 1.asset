@@ -17,10 +17,7 @@ MonoBehaviour:
   race: 4
   modelSize: 0
   attributeSheet:
-    strength:
-      value: 0
-      stars: 0
-    intelligence:
+    might:
       value: 0
       stars: 0
     constitution:
@@ -30,7 +27,7 @@ MonoBehaviour:
       value: 0
       stars: 0
     accuracy:
-      value: 75
+      value: 60
       stars: 0
     resolve:
       value: 5
@@ -44,6 +41,8 @@ MonoBehaviour:
     initiative: 5
     criticalChance: 5
     criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
     auraSize: 1
     vision: 0
     physicalResistance: 0

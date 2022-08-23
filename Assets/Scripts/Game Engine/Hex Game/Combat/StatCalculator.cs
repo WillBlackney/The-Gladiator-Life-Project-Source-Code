@@ -666,7 +666,7 @@ namespace HexGameEngine
             // 50% initiative penalty for delaying turn.
             if ((c.hasRequestedTurnDelay || c.hasDelayedPreviousTurn) && intitiative > 0)
             {
-                intitiative = (int) (intitiative * 0.5f);
+                intitiative = (int) (intitiative * 0.75f);
             }
 
             // Cant go negative

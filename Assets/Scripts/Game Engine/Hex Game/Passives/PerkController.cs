@@ -420,12 +420,31 @@ namespace HexGameEngine.Perks
                 // Add icon view visual event
                 if (showVFX)
                 {
-                    VisualEventManager.Instance.CreateVisualEvent(() => character.hexCharacterView.perkIconsPanel.HandleAddNewIconToPanel(perkData, stacksAppliedActual),
-                        QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                    // Update character world UI
+                    VisualEventManager.Instance.CreateVisualEvent(() =>                   
+                        character.hexCharacterView.perkIconsPanel.HandleAddNewIconToPanel(perkData, stacksAppliedActual), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+
+                    // Update player ovelray UI
+                    if (TurnLogic.TurnController.Instance.EntityActivated == character)
+                    {
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                        {
+                            CombatUIController.Instance.PerkPanel.ResetPanel();
+                            CombatUIController.Instance.PerkPanel.BuildFromPerkManager(pManager);
+                        },QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                    }
                 }
                 else
                 {
+                    // Update character world UI
                     character.hexCharacterView.perkIconsPanel.HandleAddNewIconToPanel(perkData, stacksAppliedActual);
+
+                    // Update player ovelray UI
+                    if (TurnLogic.TurnController.Instance.EntityActivated == character)
+                    {
+                        CombatUIController.Instance.PerkPanel.ResetPanel();
+                        CombatUIController.Instance.PerkPanel.BuildFromPerkManager(pManager);
+                    }
                 }
                 
                 // Status notification + 'On Perk Applied' vfx and particles
@@ -446,20 +465,9 @@ namespace HexGameEngine.Perks
                     }                   
                 }
 
-                /*
-                else if (stacksAppliedActual < 0 && newFinalStackcount == 0 && showVFX)
-                {
-                    VisualEventManager.Instance.CreateVisualEvent(() =>
-                    {
-                        VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName + " Removed!");
-                    }, QueuePosition.Back, 0, 0.5f, character.GetLastStackEventParent());
-                }*/
-
                 // Create brief delay
-                if (showVFX)
-                {
-                    VisualEventManager.Instance.InsertTimeDelayInQueue(vfxDelay, QueuePosition.Back, character.GetLastStackEventParent());
-                }
+                if (showVFX)                
+                    VisualEventManager.Instance.InsertTimeDelayInQueue(vfxDelay, QueuePosition.Back, character.GetLastStackEventParent());                
             }
 
 

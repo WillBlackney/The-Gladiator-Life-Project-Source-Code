@@ -138,7 +138,17 @@ MonoBehaviour:
         getRangeFromAbility: 0
         range: 0
         abilityName: 
-      requirements: []
+      requirements:
+      - requirementType: 10
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 3
+        alliesAlive: 0
+        abilityName: 
     - action:
         actionType: 2
         targettingPriority: 1

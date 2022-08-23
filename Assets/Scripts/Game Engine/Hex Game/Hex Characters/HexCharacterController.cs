@@ -232,7 +232,6 @@ namespace HexGameEngine.Characters
         private void SetCharacterViewStartingState(HexCharacterModel character)
         {
             HexCharacterView view = character.hexCharacterView;
-
             if (character.controller == Controller.Player) view.stressBarWorld.transform.parent.gameObject.SetActive(true);
             else view.stressBarWorld.transform.parent.gameObject.SetActive(false);
         }

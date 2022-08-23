@@ -69,6 +69,10 @@ namespace HexGameEngine.Characters
 
 
         #region Getters + Accessors
+        public PerkLayoutPanel PerkPanel
+        {
+            get { return perkPanel; }
+        }
         public EnergyPanelView EnergyBar
         {
             get { return energyBar; }

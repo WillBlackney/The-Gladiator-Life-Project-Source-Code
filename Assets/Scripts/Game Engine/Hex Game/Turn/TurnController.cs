@@ -52,15 +52,6 @@ namespace HexGameEngine.TurnLogic
         [SerializeField] private float alphaChangeSpeed;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        [Header("End Turn Button Component References")]
-        public CanvasGroup EndTurnButtonCG;
-        public Button EndTurnButton;       
-        public Image EndTurnButtonBGImage;
-        public Button DelayTurnButton;
-        public TextMeshProUGUI EndTurnButtonText;
-        public Color endTurnButtonDisabledColor;
-        public Color endTurnButtonEnabledColor;
-
         [Header("Variables")]
         private List<HexCharacterModel> activationOrder = new List<HexCharacterModel>();
         private List<GameObject> panelSlots = new List<GameObject>();
@@ -332,11 +323,13 @@ namespace HexGameEngine.TurnLogic
 
             // wait until all visual events have completed
             // prevent function if game over sequence triggered
-            if (CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
-                 //MainMenuController.Instance.AnyMenuScreenIsActive() == false &&
+            if (CombatUIController.Instance.endTurnButton.interactable == true &&
+                CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
                  EntityActivated.controller == Controller.Player &&
                  EntityActivated.activationPhase == ActivationPhase.ActivationPhase)
             {
+                CombatUIController.Instance.SetEndTurnButtonInteractions(false);
+
                 // Mouse click SFX
                 AudioManager.Instance.PlaySoundPooled(Sound.GUI_Button_Clicked);
 
@@ -347,17 +340,17 @@ namespace HexGameEngine.TurnLogic
         public void OnDelayTurnButtonClicked()
         {
             Debug.Log("TurnController.OnDelayTurnButtonClicked() called...");
-            if (DelayTurnButton.interactable == true)
+            if (CombatUIController.Instance.delayTurnButton.interactable == true &&
+                EntityActivated != activationOrder[activationOrder.Count - 1])
             {
+                CombatUIController.Instance.SetEndDelayTurnButtonInteractions(false);
+
                 // prevent function if game over sequence triggered
                 if (CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
                      EntityActivated.controller == Controller.Player &&
                      EntityActivated.activationPhase == ActivationPhase.ActivationPhase &&
                      EntityActivated.hasRequestedTurnDelay == false)
                 {
-                    // Cant delay your turn if character is aleady the last in the turn sequence
-                    if (EntityActivated == activationOrder[activationOrder.Count - 1]) return;
-
                     EntityActivated.hasRequestedTurnDelay = true;
 
                     // Mouse click SFX

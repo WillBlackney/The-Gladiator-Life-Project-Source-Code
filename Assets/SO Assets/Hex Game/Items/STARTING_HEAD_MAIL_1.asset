@@ -23,8 +23,8 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 
-  minArmourRoll: 8
-  maxArmourRoll: 8
+  minArmourRoll: 16
+  maxArmourRoll: 16
   armourClass: 3
   grantedAbilities: []
   itemEffectSets: []
