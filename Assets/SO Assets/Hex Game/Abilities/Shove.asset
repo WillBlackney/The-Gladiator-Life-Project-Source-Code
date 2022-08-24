@@ -20,7 +20,7 @@ MonoBehaviour:
   baseCooldown: 2
   abilityType: 1
   doesNotBreakStealth: 0
-  weaponRequirement: 0
+  weaponRequirement: 6
   derivedFromWeapon: 0
   derivedFromItemLoadout: 1
   weaponAbilityType: 0
@@ -94,6 +94,8 @@ MonoBehaviour:
     maxBaseDamage: 0
     guaranteedHit: 0
     ignoresBlock: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}

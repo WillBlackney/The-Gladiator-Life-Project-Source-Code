@@ -257,7 +257,8 @@ namespace HexGameEngine
         Shield = 9,
         Spear = 5,
         Staff = 6,
-        Sword = 2,      
+        Sword = 2,     
+        ThrowingNet = 13,
       
       
     }
@@ -268,6 +269,8 @@ namespace HexGameEngine
         RangedWeapon = 2,
         Bow = 3,
         Shield = 4,
+        ThrowingNet = 5,
+        EmptyOffhand = 6,
 
     }
 

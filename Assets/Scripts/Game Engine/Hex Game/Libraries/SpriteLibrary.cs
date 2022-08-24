@@ -114,6 +114,9 @@ namespace HexGameEngine.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite shieldIcon;
+        [PreviewField(75)]
+        [SerializeField]
+        private Sprite throwingNetIcon;
         #endregion
 
         // Skill Book Images
@@ -340,7 +343,11 @@ namespace HexGameEngine.Libraries
             else if (weaponClass == WeaponClass.Shield)
             {
                 spriteReturned = shieldIcon;
-            }          
+            }
+            else if (weaponClass == WeaponClass.ThrowingNet)
+            {
+                spriteReturned = throwingNetIcon;
+            }
 
             return spriteReturned;
         }

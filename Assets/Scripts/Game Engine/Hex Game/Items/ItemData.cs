@@ -78,6 +78,7 @@ namespace HexGameEngine.Items
             {
                 return
                 weaponClass != WeaponClass.Holdable &&
+                weaponClass != WeaponClass.ThrowingNet &&
                 weaponClass != WeaponClass.None &&
                 weaponClass != WeaponClass.Shield &&
                 weaponClass != WeaponClass.Bow;

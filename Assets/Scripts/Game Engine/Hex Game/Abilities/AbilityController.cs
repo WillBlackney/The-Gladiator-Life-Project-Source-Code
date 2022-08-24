@@ -1656,7 +1656,16 @@ namespace HexGameEngine.Abilities
               character.itemSet.mainHandItem.weaponClass == WeaponClass.Bow)
                 bRet = true;
 
-            if(bRet == false)
+            else if (ability.weaponRequirement == WeaponRequirement.ThrowingNet &&
+              character.itemSet.offHandItem != null &&
+              character.itemSet.offHandItem.weaponClass == WeaponClass.ThrowingNet)
+                bRet = true;
+
+            else if (ability.weaponRequirement == WeaponRequirement.EmptyOffhand &&
+            character.itemSet.offHandItem == null)
+                bRet = true;
+
+            if (bRet == false)
             {
                 Debug.Log("AbilityController.DoesCharacterMeetAbilityWeaponRequirement() returning false: '" + ability.abilityName +
                     "' has requirement of " + ability.weaponRequirement.ToString() + ", character '" + character.myName + "' does not meet this requirement");
