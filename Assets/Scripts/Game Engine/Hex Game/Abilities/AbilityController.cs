@@ -192,6 +192,7 @@ namespace HexGameEngine.Abilities
             a.baseRange = d.baseRange;
             a.gainRangeBonusFromVision = d.gainRangeBonusFromVision;
             a.hitChanceModifier = d.hitChanceModifier;
+            a.hitChanceModifierAgainstAdjacent = d.hitChanceModifierAgainstAdjacent;
             a.accuracyPenaltyFromMelee = d.accuracyPenaltyFromMelee;
             a.secondaryTargetRequirement = d.secondaryTargetRequirement;
             a.rangeFromTarget = d.rangeFromTarget;

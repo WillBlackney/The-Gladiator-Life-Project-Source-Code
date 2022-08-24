@@ -117,6 +117,9 @@ namespace HexGameEngine.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite throwingNetIcon;
+        [PreviewField(75)]
+        [SerializeField]
+        private Sprite polearmIcon;
         #endregion
 
         // Skill Book Images
@@ -347,6 +350,10 @@ namespace HexGameEngine.Libraries
             else if (weaponClass == WeaponClass.ThrowingNet)
             {
                 spriteReturned = throwingNetIcon;
+            }
+            else if (weaponClass == WeaponClass.Polearm)
+            {
+                spriteReturned = polearmIcon;
             }
 
             return spriteReturned;

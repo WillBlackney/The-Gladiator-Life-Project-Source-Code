@@ -120,6 +120,13 @@ namespace HexGameEngine.Abilities
         [BoxGroup("Range Settings")]
         [LabelWidth(200)]
         [GUIColor("Yellow")]
+        [ShowIf("ShowHitChanceModifier")]
+        [Range(-50, 50)]
+        public int hitChanceModifierAgainstAdjacent;
+
+        [BoxGroup("Range Settings")]
+        [LabelWidth(200)]
+        [GUIColor("Yellow")]
         [ShowIf("ShowAccuracyPenaltyFromMelee")]
         public bool accuracyPenaltyFromMelee = false;
 

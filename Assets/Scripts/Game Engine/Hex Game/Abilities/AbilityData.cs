@@ -35,6 +35,7 @@ namespace HexGameEngine.Abilities
         public bool gainRangeBonusFromVision = false;
         public int hitChanceModifier;
         public bool accuracyPenaltyFromMelee = false;
+        public int hitChanceModifierAgainstAdjacent;
 
         public List<AbilityEffect> abilityEffects;
         public List<AbilityEffect> onHitEffects;

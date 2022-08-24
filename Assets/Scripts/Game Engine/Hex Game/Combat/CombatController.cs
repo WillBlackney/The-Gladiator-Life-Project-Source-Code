@@ -690,6 +690,13 @@ namespace HexGameEngine.Combat
                 if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Ability Innate Bonus", innateBonus));
             }
 
+            // Check ability adjacent bonus/penalty
+            if (ability != null && attacker.currentTile.Distance(target.currentTile) == 1)
+            {
+                int innateBonus = ability.hitChanceModifierAgainstAdjacent;
+                if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Adjacent Target", innateBonus));
+            }
+
             // Warfare talent bonus
             if (ability != null &&
                 ability.abilityType == AbilityType.MeleeAttack &&
