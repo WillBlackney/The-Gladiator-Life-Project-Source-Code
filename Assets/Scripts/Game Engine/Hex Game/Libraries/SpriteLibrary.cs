@@ -120,6 +120,9 @@ namespace HexGameEngine.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite polearmIcon;
+        [PreviewField(75)]
+        [SerializeField]
+        private Sprite holdableIcon;
         #endregion
 
         // Skill Book Images
@@ -354,6 +357,10 @@ namespace HexGameEngine.Libraries
             else if (weaponClass == WeaponClass.Polearm)
             {
                 spriteReturned = polearmIcon;
+            }
+            else if (weaponClass == WeaponClass.Holdable)
+            {
+                spriteReturned = holdableIcon;
             }
 
             return spriteReturned;
