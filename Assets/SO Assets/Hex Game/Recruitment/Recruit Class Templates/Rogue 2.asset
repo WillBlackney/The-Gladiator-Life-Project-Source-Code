@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eaa51bbd3588a643aa1c5b44ef5d003, type: 3}
+  m_Name: Rogue 2
+  m_EditorClassIdentifier: 
+  templateName: Rogue
+  possibleRaces: 0100000002000000030000000500000006000000
+  startingAbilityCount: 2
+  possibleAbilities:
+  - {fileID: 11400000, guid: f2990956e456afa46af43accbd061445, type: 2}
+  - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
+  - {fileID: 11400000, guid: 5ecefaa87e0004a4ea1921898981fe66, type: 2}
+  - {fileID: 11400000, guid: 2840137d1904dcb4eb8e7a15c992591f, type: 2}
+  - {fileID: 11400000, guid: a37a6ad45063e5f46bc53c49d9d8094c, type: 2}
+  possibleOutfits:
+  - {fileID: 11400000, guid: 4f853226c2657e7449c7bdaaccfb2433, type: 2}
+  - {fileID: 11400000, guid: 1e495d8830ac99f439a20823d7386a27, type: 2}
+  possibleWeapons:
+  - mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 376e95580d3f6fc4c88532c345302ad3, type: 2}
+    chestArmour: {fileID: 11400000, guid: a064fbe0bfd2cba409f1f66f9cf8a071, type: 2}
+    trinket: {fileID: 0}
+  - mainHandItem: {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 376e95580d3f6fc4c88532c345302ad3, type: 2}
+    chestArmour: {fileID: 11400000, guid: a064fbe0bfd2cba409f1f66f9cf8a071, type: 2}
+    trinket: {fileID: 0}
+  - mainHandItem: {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 376e95580d3f6fc4c88532c345302ad3, type: 2}
+    chestArmour: {fileID: 11400000, guid: a064fbe0bfd2cba409f1f66f9cf8a071, type: 2}
+    trinket: {fileID: 0}
+  strengthMod: 0
+  intelligenceMod: 0
+  accuracyMod: 0
+  dodgeMod: 0
+  resolveMod: 0
+  constitutionMod: 0
+  witsMod: 0
+  talentPairings:
+  - talentSchool: 3
+    level: 1

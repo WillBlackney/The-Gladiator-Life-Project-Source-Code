@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eaa51bbd3588a643aa1c5b44ef5d003, type: 3}
+  m_Name: Marksman 2
+  m_EditorClassIdentifier: 
+  templateName: Marksman
+  possibleRaces: 0400000005000000060000000700000001000000
+  startingAbilityCount: 2
+  possibleAbilities:
+  - {fileID: 11400000, guid: 54c98d698a2d4054aac0406f0d58abbc, type: 2}
+  - {fileID: 11400000, guid: 6c3343bfc6662a742897620834e447ae, type: 2}
+  - {fileID: 11400000, guid: ce2ef944c37b61f4c97e37c51e222629, type: 2}
+  - {fileID: 11400000, guid: 7226b1084c8524348ac57922965a3699, type: 2}
+  - {fileID: 11400000, guid: 467b76d01ea5a7f438c9ae6b33c02557, type: 2}
+  possibleOutfits:
+  - {fileID: 11400000, guid: 17f5de3a44140b44a8270b1265cdb03b, type: 2}
+  - {fileID: 11400000, guid: 44345b952e12b324d99daa0d4d956066, type: 2}
+  - {fileID: 11400000, guid: 6779c6aab3b5146489d7e4a3f2740fcc, type: 2}
+  possibleWeapons:
+  - mainHandItem: {fileID: 11400000, guid: c420762d59a4b8f4788afabeee27eb35, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 7ac975a3abf940040ac3e0ca78352642, type: 2}
+    chestArmour: {fileID: 11400000, guid: 6619ca9751f129b4f9bbe139415e2c37, type: 2}
+    trinket: {fileID: 0}
+  strengthMod: 0
+  intelligenceMod: 0
+  accuracyMod: 0
+  dodgeMod: 0
+  resolveMod: 0
+  constitutionMod: 0
+  witsMod: 0
+  talentPairings:
+  - talentSchool: 8
+    level: 1

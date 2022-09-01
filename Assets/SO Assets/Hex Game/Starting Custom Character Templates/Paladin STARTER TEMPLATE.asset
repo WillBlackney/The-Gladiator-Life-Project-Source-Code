@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fc18e607558964b9506f2b2cdb1260, type: 3}
+  m_Name: Paladin STARTER TEMPLATE
+  m_EditorClassIdentifier: 
+  myName: X
+  myClassName: Paladin
+  race: 1
+  modelSize: 0
+  attributeSheet:
+    might:
+      value: 0
+      stars: 0
+    constitution:
+      value: 85
+      stars: 0
+    dodge:
+      value: 0
+      stars: 0
+    accuracy:
+      value: 75
+      stars: 0
+    resolve:
+      value: 10
+      stars: 0
+    wits:
+      value: 5
+      stars: 0
+    maxHealth: 0
+    energyRecovery: 8
+    maxEnergy: 8
+    initiative: 5
+    criticalChance: 5
+    criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
+    auraSize: 1
+    vision: 0
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+    deathResistance: 25
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: 082a91aafafc0bb4eb24a7695c715bdf, type: 2}
+    - {fileID: 11400000, guid: 9e3e39c959174ff4e9c6a071583dbd4c, type: 2}
+    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
+  serializedPassiveManager:
+    perks: []
+  modelParts:
+  - Human_Chest
+  - Human_Face_1
+  - Human_Head_1
+  - Human_Right_Arm
+  - Human_Right_Hand
+  - Human_Right_Leg
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 130ab6972593ec14d8dda796c434cefb, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 7863df9bf5ee25e4c9aba96c0edfa299, type: 2}
+    chestArmour: {fileID: 11400000, guid: 6d45e462827082c419dad6ea907b3ceb, type: 2}
+    trinket: {fileID: 0}
+  talentPairings:
+  - talentSchool: 10
+    level: 1
+  - talentSchool: 2
+    level: 1

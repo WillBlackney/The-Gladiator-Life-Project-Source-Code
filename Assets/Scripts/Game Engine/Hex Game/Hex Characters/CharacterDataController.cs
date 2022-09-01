@@ -16,7 +16,6 @@ namespace HexGameEngine.Characters
 
         // Inspector
         [Header("Data Buckets")]
-        [SerializeField] private HexCharacterTemplateSO[] allCharacterTemplatesSOs;
         [SerializeField] private HexCharacterTemplateSO[] allCustomCharacterTemplatesSOs;
         [SerializeField] private TalentDataSO[] allTalentData;
         [SerializeField] private RaceDataSO[] allRacialData;
@@ -72,11 +71,7 @@ namespace HexGameEngine.Characters
             get { return allCharacterBackgrounds; }
             private set { allCharacterBackgrounds = value; }
         }
-        public HexCharacterData[] AllCharacterTemplates
-        {
-            get { return allCharacterTemplates; }
-            private set { allCharacterTemplates = value; }
-        }
+       
         public HexCharacterData[] AllCustomCharacterTemplates
         {
             get { return allCustomCharacterTemplates; }
@@ -122,7 +117,6 @@ namespace HexGameEngine.Characters
         {
             base.Awake();
             BuildBackgroundLibrary();
-            BuildTemplateLibrary();
             BuildCustomTemplateLibrary();           
         }
         private void BuildBackgroundLibrary()
@@ -138,19 +132,7 @@ namespace HexGameEngine.Characters
 
             AllCharacterBackgrounds = tempList.ToArray();
         }
-        private void BuildTemplateLibrary()
-        {
-            Debug.Log("CharacterDataController.BuildTemplateLibrary() called...");
-
-            List<HexCharacterData> tempList = new List<HexCharacterData>();
-
-            foreach (HexCharacterTemplateSO dataSO in allCharacterTemplatesSOs)
-            {
-                tempList.Add(ConvertCharacterTemplateToCharacterData(dataSO));
-            }
-
-            AllCharacterTemplates = tempList.ToArray();
-        }
+      
         private void BuildCustomTemplateLibrary()
         {
             Debug.Log("CharacterDataController.BuildCustomTemplateLibrary() called...");

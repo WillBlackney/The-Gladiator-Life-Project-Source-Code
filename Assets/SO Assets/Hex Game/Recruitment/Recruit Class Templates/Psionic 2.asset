@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eaa51bbd3588a643aa1c5b44ef5d003, type: 3}
+  m_Name: Psionic 2
+  m_EditorClassIdentifier: 
+  templateName: Psionic
+  possibleRaces: 04000000010000000300000005000000
+  startingAbilityCount: 2
+  possibleAbilities:
+  - {fileID: 11400000, guid: 3dc85c0a7ccd4904a972e6aa977e23b3, type: 2}
+  - {fileID: 11400000, guid: dbf70824a5994e0449938fd3bee091ad, type: 2}
+  - {fileID: 11400000, guid: 15d89fdb6bcfaee4ba1e1b1f74ec4dd3, type: 2}
+  - {fileID: 11400000, guid: b566ecb35016fa449ae9e743e809d086, type: 2}
+  possibleOutfits:
+  - {fileID: 11400000, guid: 518b47ff8cdc728408e77dfb15a0b8ba, type: 2}
+  - {fileID: 11400000, guid: 982509f290f98b94fa9e8874d338d3a6, type: 2}
+  - {fileID: 11400000, guid: dd63bc2862016d9458c56380356c54e8, type: 2}
+  possibleWeapons:
+  - mainHandItem: {fileID: 11400000, guid: bcda3a1ec0dfdfe469dfdd16aabf8736, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 2a8009f93c956f24c8b19c406b89be76, type: 2}
+    chestArmour: {fileID: 11400000, guid: 3218ca08d4db8c6458c1e4c5fc55069a, type: 2}
+    trinket: {fileID: 0}
+  - mainHandItem: {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 2a8009f93c956f24c8b19c406b89be76, type: 2}
+    chestArmour: {fileID: 11400000, guid: 3218ca08d4db8c6458c1e4c5fc55069a, type: 2}
+    trinket: {fileID: 0}
+  - mainHandItem: {fileID: 11400000, guid: 130ab6972593ec14d8dda796c434cefb, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 2a8009f93c956f24c8b19c406b89be76, type: 2}
+    chestArmour: {fileID: 11400000, guid: 3218ca08d4db8c6458c1e4c5fc55069a, type: 2}
+    trinket: {fileID: 0}
+  - mainHandItem: {fileID: 11400000, guid: 12b837d9baaf68e4eb55cfab4ef25cbd, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 2a8009f93c956f24c8b19c406b89be76, type: 2}
+    chestArmour: {fileID: 11400000, guid: 3218ca08d4db8c6458c1e4c5fc55069a, type: 2}
+    trinket: {fileID: 0}
+  strengthMod: 0
+  intelligenceMod: 0
+  accuracyMod: 0
+  dodgeMod: 0
+  resolveMod: 0
+  constitutionMod: 0
+  witsMod: 0
+  talentPairings:
+  - talentSchool: 9
+    level: 1

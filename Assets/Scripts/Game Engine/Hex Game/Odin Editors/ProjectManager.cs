@@ -46,14 +46,14 @@ namespace HexGameEngine.Editor
 
         // Hard coded file directory paths to specific SO's
         private string abilityPath = "Assets/SO Assets/Hex Game/Abilities";
-        private string characterTemplatePath = "Assets/SO Assets/Hex Game/Starting Character Templates";
+        private string characterTemplatePath = "Assets/SO Assets/Hex Game/Misc Character Templates";
         private string perkPath = "Assets/SO Assets/Hex Game/Perks";
         private string itemPath = "Assets/SO Assets/Hex Game/Items";
         private string enemyPath = "Assets/SO Assets/Hex Game/Enemies";
         private string enemyEncounterPath = "Assets/SO Assets/Hex Game/Enemy Encounters";
         private string mapSeedPath = "Assets/SO Assets/Hex Game/Hex Map Seeds";
         private string outfitTemplatesPath = "Assets/SO Assets/Hex Game/Recruitment/Outfit Templates";
-        private string classTemplatesPath = "Assets/SO Assets/Hex Game/Recruitment/Class Templates";
+        private string recruitClassTemplatesPath = "Assets/SO Assets/Hex Game/Recruitment/Recruit Class Templates";
         private string characterModelTemplatesPath = "Assets/SO Assets/Hex Game/Recruitment/Character Model Templates";
         private string characterBackgroundsPath = "Assets/SO Assets/Hex Game/Character Backgrounds";
 
@@ -94,7 +94,7 @@ namespace HexGameEngine.Editor
             drawEnemies.SetPath(enemyPath);
             drawEnemyEncounters.SetPath(enemyEncounterPath);
             drawMapSeeds.SetPath(mapSeedPath);
-            drawClassTemplates.SetPath(classTemplatesPath);
+            drawClassTemplates.SetPath(recruitClassTemplatesPath);
             drawOutfitTemplates.SetPath(outfitTemplatesPath);
             drawCharacterModelTemplates.SetPath(characterModelTemplatesPath);
             drawCharacterBackgrounds.SetPath(characterBackgroundsPath);
@@ -133,9 +133,9 @@ namespace HexGameEngine.Editor
                 case ManagerState.EnemyEncounterData:
                 case ManagerState.PerkData:
                 case ManagerState.MapSeedData:
-                case ManagerState.CharacterTemplateData:
+                case ManagerState.MiscClassTemplates:
                 case ManagerState.OutfitTemplates:
-                case ManagerState.CharacterClassTemplates:
+                case ManagerState.RecruitClassTemplates:
                 case ManagerState.CharacterModelTemplates:
                 case ManagerState.CharacterBackgrounds:
                     DrawEditor(enumIndex);
@@ -209,7 +209,7 @@ namespace HexGameEngine.Editor
                     drawAbilities.SetSelected(MenuTree.Selection.SelectedValue);
                     break;
 
-                case ManagerState.CharacterTemplateData:
+                case ManagerState.MiscClassTemplates:
                     drawCharacterTemplates.SetSelected(MenuTree.Selection.SelectedValue);
                     break;
 
@@ -233,7 +233,7 @@ namespace HexGameEngine.Editor
                     drawOutfitTemplates.SetSelected(MenuTree.Selection.SelectedValue);
                     break;
 
-                case ManagerState.CharacterClassTemplates:
+                case ManagerState.RecruitClassTemplates:
                     drawClassTemplates.SetSelected(MenuTree.Selection.SelectedValue);
                     break;
 
@@ -302,9 +302,9 @@ namespace HexGameEngine.Editor
                 case ManagerState.EnemyEncounterData:
                 case ManagerState.PerkData:
                 case ManagerState.MapSeedData:
-                case ManagerState.CharacterTemplateData:
+                case ManagerState.MiscClassTemplates:
                 case ManagerState.OutfitTemplates:
-                case ManagerState.CharacterClassTemplates:
+                case ManagerState.RecruitClassTemplates:
                 case ManagerState.CharacterModelTemplates:
                 case ManagerState.CharacterBackgrounds:
                     base.DrawMenu();
@@ -339,7 +339,7 @@ namespace HexGameEngine.Editor
                     tree.SortMenuItemsByName();
                     break;
 
-                case ManagerState.CharacterTemplateData:
+                case ManagerState.MiscClassTemplates:
                     tree.AddAllAssetsAtPath("Character Template Data", characterTemplatePath, typeof(HexCharacterTemplateSO));
                     tree.SortMenuItemsByName();
                     break;
@@ -359,8 +359,8 @@ namespace HexGameEngine.Editor
                     tree.SortMenuItemsByName();
                     break;
 
-                case ManagerState.CharacterClassTemplates:
-                    tree.AddAllAssetsAtPath("Class Template Data", classTemplatesPath, typeof(ClassTemplateSO));
+                case ManagerState.RecruitClassTemplates:
+                    tree.AddAllAssetsAtPath("Class Template Data", recruitClassTemplatesPath, typeof(ClassTemplateSO));
                     tree.SortMenuItemsByName();
                     break;
 
@@ -382,14 +382,14 @@ namespace HexGameEngine.Editor
             GlobalSettings,
 
             AbilityData,
-            CharacterTemplateData,
+            MiscClassTemplates,
             PerkData,
             ItemData,
             EnemyTemplateData,
             EnemyEncounterData,
             MapSeedData,
             OutfitTemplates,
-            CharacterClassTemplates,
+            RecruitClassTemplates,
             CharacterModelTemplates,
             CharacterBackgrounds,
 

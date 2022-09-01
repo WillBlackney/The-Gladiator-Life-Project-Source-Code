@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eaa51bbd3588a643aa1c5b44ef5d003, type: 3}
+  m_Name: Battle Mage 1
+  m_EditorClassIdentifier: 
+  templateName: Battle Mage
+  possibleRaces: 01000000040000000500000007000000
+  possibleAbilities:
+  - {fileID: 11400000, guid: c367e762d7251324b9199c63a443d4af, type: 2}
+  - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
+  - {fileID: 11400000, guid: 398250cb2316f1243a0859410e7d26c8, type: 2}
+  - {fileID: 11400000, guid: 4e4bf822749dff044b3b1112dba35a22, type: 2}
+  - {fileID: 11400000, guid: b5c01764d146376488c2e994ba16968e, type: 2}
+  - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
+  - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
+  - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
+  - {fileID: 11400000, guid: 7438f6132b8f4544aa2ecfd3edf7886c, type: 2}
+  - {fileID: 11400000, guid: d7f2a84d3e2517244b6dfd8e1cf54539, type: 2}
+  possibleOutfits:
+  - {fileID: 11400000, guid: 518b47ff8cdc728408e77dfb15a0b8ba, type: 2}
+  - {fileID: 11400000, guid: 982509f290f98b94fa9e8874d338d3a6, type: 2}
+  - {fileID: 11400000, guid: dd63bc2862016d9458c56380356c54e8, type: 2}
+  possibleWeapons:
+  - mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+    offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+  - mainHandItem: {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+    offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+  strengthMod: 0
+  intelligenceMod: 0
+  accuracyMod: 0
+  dodgeMod: 0
+  resolveMod: 0
+  constitutionMod: 0
+  witsMod: 0
+  talentPairings:
+  - talentSchool: 2
+    level: 1
+  - talentSchool: 6
+    level: 1
