@@ -1784,7 +1784,9 @@ namespace HexGameEngine.Characters
             foreach (LevelNode h in LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1))
             {
                 if (h.myCharacter != null &&
-                    !IsTargetFriendly(target, h.myCharacter))
+                    !IsTargetFriendly(target, h.myCharacter) &&
+                    h.myCharacter.itemSet.mainHandItem != null &&
+                    h.myCharacter.itemSet.mainHandItem.IsMeleeWeapon)
                     attackers++;
             }
             return attackers;

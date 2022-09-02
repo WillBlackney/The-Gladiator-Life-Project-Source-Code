@@ -62,7 +62,7 @@ namespace HexGameEngine.AI
             {
                 if (target == null && directive.action.targettingPriority != TargettingPriority.None) 
                 {
-                    Debug.Log("AILogic.IsDirectiveActionable() returning false: target is null");
+                    Debug.Log("AILogic.IsDirectiveActionable() returning false: target is null for action type " + directive.action.actionType);
                     return false; 
                 }
                 // Check ability useability
@@ -136,7 +136,7 @@ namespace HexGameEngine.AI
             }
 
             // Move To Elevation Closer To Enemy
-            else if (directive.action.actionType == AIActionType.MoveToElevationCloserToEnemy)
+            else if (directive.action.actionType == AIActionType.MoveToElevationCloserToTarget)
             {
                 // find all tiles that are
                 // 1. closer to the enemy than current position
@@ -186,9 +186,10 @@ namespace HexGameEngine.AI
             // Delay turn
             else if(directive.action.actionType == AIActionType.DelayTurn)
             {
-                // Prevent turn delay if already the last to act
-                if (character.hasRequestedTurnDelay || 
-                    TurnController.Instance.ActivationOrder[TurnController.Instance.ActivationOrder.Count - 1] == character) return false;
+                // Prevent turn delay if already already delayed, last to act, or if there are no player characters still waiting to take their turn.
+                if (character.hasRequestedTurnDelay  ||
+                    TurnController.Instance.ActivationOrder[TurnController.Instance.ActivationOrder.Count - 1] == character ||
+                    !AreAnyPlayerCharactersActivatingAfterMe(character)) return false;
             }
 
             // Evaluate each user specified condition
@@ -244,7 +245,7 @@ namespace HexGameEngine.AI
                 bRet = true;
 
             // Check already engaged in melee
-            else if (req.requirementType == AIActionRequirementType.AlreadyEngagedInMelee &&
+            else if (req.requirementType == AIActionRequirementType.EngagedInMelee &&
                 GetAllEnemiesWithinRange(character, 1).Count >= req.enemiesInMeleeRange)
                 bRet = true;
 
@@ -293,9 +294,16 @@ namespace HexGameEngine.AI
             }
 
             // Target is not engaged
-            else if (req.requirementType == AIActionRequirementType.TargetIsNotEngagedInMelee)
+            else if (req.requirementType == AIActionRequirementType.TargetNotEngagedInMelee)
             {
                 if (!HexCharacterController.Instance.IsCharacterEngagedInMelee(target))
+                    bRet = true;
+            }
+
+            // Target is engaged
+            else if (req.requirementType == AIActionRequirementType.TargetEngagedInMelee)
+            {
+                if (HexCharacterController.Instance.IsCharacterEngagedInMelee(target))
                     bRet = true;
             }
 
@@ -511,7 +519,7 @@ namespace HexGameEngine.AI
             }
 
             // Move closer to enemy via elevation
-            else if (directive.action.actionType == AIActionType.MoveToElevationCloserToEnemy)
+            else if (directive.action.actionType == AIActionType.MoveToElevationCloserToTarget)
             {
                 // find all tiles that are
                 // 1. closer to the enemy than current position
@@ -575,183 +583,6 @@ namespace HexGameEngine.AI
         }
         #endregion
 
-        // Specific Enemy Actions
-        #region
-        private static bool SkeletonBruteAction(HexCharacterModel character)
-        {
-            bool actionTaken = false;
-            HexCharacterModel target = GetClosestNonFriendlyCharacter(character);
-            AbilityData strike = AbilityController.Instance.GetCharacterAbilityByName(character, "Strike");
-            AbilityData cleave = AbilityController.Instance.GetCharacterAbilityByName(character, "Cleave");
-            AbilityData bash = AbilityController.Instance.GetCharacterAbilityByName(character, "Bash");
-
-            if (target == null || !HexCharacterController.Instance.IsCharacterAbleToTakeActions(character)) return false;
-
-
-            // If already engaged in melee
-            if (target.currentTile.Distance(character.currentTile) == 1)
-            {
-                Debug.Log("SkeletonBruteAction() already in melee, determining attack to use...");
-
-                // Priority 1: cleave if 2+ enemies engaging
-                if (AbilityController.Instance.IsAbilityUseable(character, strike) &&
-                    GetAllEnemiesWithinRange(character, 1).Count >= 2)
-                {
-                    Debug.Log("SkeletonBruteAction() using cleave");
-                    AbilityController.Instance.UseAbility(character, cleave, target);
-                    VisualEventManager.Instance.InsertTimeDelayInQueue(1);
-                    actionTaken = true;
-                }
-
-                /*
-                // Priority 2: stun single target
-                else if (AbilityController.Instance.IsAbilityUseable(character, bash) &&
-                    !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stunned) &&
-                      !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.StunImmunity) &&
-                        !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Fortified))
-                {
-                    Debug.Log("SkeletonBruteAction() using bash");
-                    AbilityController.Instance.UseAbility(character, bash, target);
-                    VisualEventManager.Instance.InsertTimeDelayInQueue(1);
-                    actionTaken = true;
-                }
-                */
-
-                // Priority 3: basic attack
-                else if (AbilityController.Instance.IsAbilityUseable(character, strike))
-                {
-                    Debug.Log("SkeletonBruteAction() using strike");
-                    AbilityController.Instance.UseAbility(character, strike, target);
-                    VisualEventManager.Instance.InsertTimeDelayInQueue(1);
-                    actionTaken = true;
-                }
-
-            }
-
-            // Try Move into melee range
-            else if (HexCharacterController.Instance.IsCharacterAbleToMove(character) && target.currentTile.Distance(character.currentTile) > 1)
-            {
-                List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
-                List<LevelNode> targetMeleeTiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1);
-                Path bestPath = null;
-
-                foreach (Path p in allPossiblePaths)
-                {
-                    if (targetMeleeTiles.Contains(p.Destination))
-                    {
-                        bestPath = p;
-                        break;
-                    }
-                }
-
-                // Able to move into melee?
-                if (bestPath != null)
-                {
-                    Debug.Log("DoSkeletonRoutine() Skeleton able to move into melee with target");
-                    LevelController.Instance.HandleMoveDownPath(character, bestPath);
-                    VisualEventManager.Instance.InsertTimeDelayInQueue(1);
-                    actionTaken = true;
-                }
-
-                // Cant move far enough to get in melee range: just move as far as possible towards target
-                else
-                {
-                    Debug.Log("DoSkeletonRoutine() Skeleton NOT able to move into melee, trying to move as close as possible");
-
-                    // Which of the target's melee range tiles is closest to this character?
-                    LevelNode closestMeleeRangeHex = LevelController.Instance.GetClosestAvailableHexFromStart(character.currentTile, targetMeleeTiles);
-                    Path currentBestPath = null;
-                    int currentShortestDistance = 10000;
-
-                    // Out of all the cached paths, which one's destination is closest to the closest melee range hex?
-                    foreach (Path p in allPossiblePaths)
-                    {
-                        if (closestMeleeRangeHex != null)
-                        {
-                            int distance = p.Destination.Distance(closestMeleeRangeHex);
-                            if (distance < currentShortestDistance)
-                            {
-                                currentShortestDistance = distance;
-                                currentBestPath = p;
-                            }
-                        }
-
-                    }
-
-                    if (currentBestPath != null)
-                    {
-                        Debug.Log("DoSkeletonRoutine() Skeleton found path that takes it closer, moving down path");
-                        LevelController.Instance.HandleMoveDownPath(character, currentBestPath);
-                        VisualEventManager.Instance.InsertTimeDelayInQueue(1);
-                        actionTaken = true;
-                    }
-                    else
-                    {
-                        Debug.Log("DoSkeletonRoutine() something went wrong ");
-                    }
-
-                }
-
-            }
-            return actionTaken;
-        }
-        private static bool NecromancerAction(HexCharacterModel character)
-        {
-            bool actionTaken = false;
-            AbilityData ss = AbilityController.Instance.GetCharacterAbilityByName(character, "Summon Skeleton");
-
-            if (!HexCharacterController.Instance.IsCharacterAbleToTakeActions(character)) return false;
-
-            // To do idea: if the necromancer dies, all its summoned skeletons also die.
-
-            List<LevelNode> tilesInRange = LevelController.Instance.GetAllHexsWithinRange
-                (character.currentTile, AbilityController.Instance.CalculateFinalRangeOfAbility(ss, character));
-
-            if (AbilityController.Instance.IsAbilityUseable(character, ss))
-            {
-                HexCharacterModel target = null;
-                LevelNode spawnLocation = null;
-
-                // Find an enemy WITHIN RANGE that has an empty adjacent hex
-                foreach (HexCharacterModel enemy in HexCharacterController.Instance.GetAllEnemiesOfCharacter(character))
-                {
-                    bool forceBreak = false;
-                    if (tilesInRange.Contains(enemy.currentTile))
-                    {
-                        foreach(LevelNode h in LevelController.Instance.GetAllHexsWithinRange(enemy.currentTile, 1))
-                        {
-                            if (Pathfinder.CanHexBeOccupied(h))
-                            {
-                                target = enemy;
-                                spawnLocation = h;
-                                break;
-                            }
-                        }
-                    }
-
-                    if (forceBreak) break;
-                }
-
-                // if no enemy in range to drop a skelly next to, try drop a skelly as close to them as possible
-                if(spawnLocation == null)
-                {
-                    target = GetClosestNonFriendlyCharacter(character);
-                    spawnLocation = LevelController.Instance.GetClosestAvailableHexFromStart(target.currentTile, tilesInRange);
-                }
-
-                // Found a suitable spawn location?
-                if(target != null && spawnLocation != null)
-                {
-                    AbilityController.Instance.UseAbility(character, ss, null, spawnLocation);
-                    VisualEventManager.Instance.InsertTimeDelayInQueue(1);
-                    actionTaken = true;
-                }
-            }
-
-
-            return actionTaken;
-        }
-        #endregion
 
         // Shared Misc AI Logic
         #region
@@ -762,10 +593,13 @@ namespace HexGameEngine.AI
             if(directive.action.actionType == AIActionType.MoveIntoRangeOfTarget ||
                 directive.action.actionType == AIActionType.MoveToEngageInMelee ||
                 directive.action.actionType == AIActionType.UseCharacterTargettedSummonAbility ||
-                directive.action.actionType == AIActionType.MoveToElevationCloserToEnemy)
+                directive.action.actionType == AIActionType.MoveToElevationCloserToTarget)
             {
                 if (directive.action.targettingPriority == TargettingPriority.ClosestUnfriendlyTarget)
                     target = GetClosestNonFriendlyCharacter(attacker);
+
+                else if (directive.action.targettingPriority == TargettingPriority.ClosestFriendlyTarget)
+                    target = GetClosestFriendlyCharacter(attacker);
 
                 else if (directive.action.targettingPriority == TargettingPriority.BestValidUnfriendlyTarget)
                 {
@@ -814,30 +648,53 @@ namespace HexGameEngine.AI
             }
 
             // Targetting allies
-            else if ((directive.action.targettingPriority == TargettingPriority.RandomAlly || directive.action.targettingPriority == TargettingPriority.RandomAllyOrSelf ) &&
+            else if ((directive.action.targettingPriority == TargettingPriority.RandomAlly || 
+                directive.action.targettingPriority == TargettingPriority.RandomAllyOrSelf ||
+                directive.action.targettingPriority == TargettingPriority.MostEndangeredFriendly) &&
                 directive.action.abilityName != "" &&
                 directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
             {
-                bool includeSelf = false;
-                if (directive.action.targettingPriority == TargettingPriority.RandomAllyOrSelf)
-                    includeSelf = true;
-                List<HexCharacterModel> allies = new List<HexCharacterModel>();
                 AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
-                foreach (HexCharacterModel ally in GetAllAlliesWithinRange(attacker, AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker), includeSelf))
+
+                if (directive.action.targettingPriority == TargettingPriority.MostEndangeredFriendly)
                 {
-                    if (AbilityController.Instance.IsTargetOfAbilityValid(attacker, ally, ability))
-                        allies.Add(ally);
+                    target = GetMostEndangeredAlly(attacker, ability);
                 }
-
-                Debug.Log("AI, allies found = " + allies.Count.ToString());
-
-                target = allies.GetRandomElement();
+                else
+                {
+                    bool includeSelf = false;
+                    if (directive.action.targettingPriority == TargettingPriority.RandomAllyOrSelf) includeSelf = true;
+                    List<HexCharacterModel> allies = new List<HexCharacterModel>();
+                    foreach (HexCharacterModel ally in GetAllAlliesWithinRange(attacker, AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker), includeSelf))
+                    {
+                        if (AbilityController.Instance.IsTargetOfAbilityValid(attacker, ally, ability))
+                            allies.Add(ally);
+                    }
+                    target = allies.GetRandomElement();
+                }                
             }
 
             else if (directive.action.targettingPriority == TargettingPriority.Self)
                 target = attacker;
 
             return target;
+        }
+        private static HexCharacterModel GetClosestFriendlyCharacter(HexCharacterModel character)
+        {
+            HexCharacterModel closestAlly = null;
+            int currentClosest = 10000;
+
+            foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(character, false))
+            {
+                int distance = ally.currentTile.Distance(character.currentTile);
+                if (distance < currentClosest)
+                {
+                    currentClosest = distance;
+                    closestAlly = ally;
+                }
+            }
+
+            return closestAlly;
         }
         private static HexCharacterModel GetClosestNonFriendlyCharacter(HexCharacterModel character)
         {
@@ -855,6 +712,49 @@ namespace HexGameEngine.AI
             }
 
             return closestEnemy;
+        }
+        private static int GetCharacterEndangermentScore(HexCharacterModel character)
+        {
+            // Used to determine how much danger a character currently is.
+
+            /* Engagement scoring
+             * +15 points for each enemy engaged
+             * +10 points for each stack of vulnerable and crippled 
+             * +15 points if stunned
+             * +1 point for each percentage of missing health  
+             * -1 for each point of armour
+             */
+
+            int finalScore = 0;
+
+            finalScore += PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Vulnerable) * 10;
+            finalScore += PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Crippled) * 10;
+            finalScore += PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Stunned) * 15;
+            finalScore += HexCharacterController.Instance.GetTotalFlankingCharactersOnTarget(character) * 15;
+            finalScore += 100 - (int) StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(character);
+            finalScore -= character.currentArmour;
+
+            return finalScore;
+        }
+        private static HexCharacterModel GetMostEndangeredAlly(HexCharacterModel character, AbilityData ability)
+        {
+            // Used to determine most endangered ally for protective/buff abilities
+            if (ability == null) return null;
+            HexCharacterModel bestTarget = null;
+            int bestScore = 0;
+            var allies = HexCharacterController.Instance.GetAllAlliesOfCharacter(character, false);
+
+            foreach (HexCharacterModel ally in allies)
+            {
+                int score = GetCharacterEndangermentScore(ally);
+                if (score > bestScore && 
+                    AbilityController.Instance.IsTargetOfAbilityValid(character, ally, ability))
+                {
+                    bestScore = score;
+                    bestTarget = ally;
+                }
+            }
+            return bestTarget;
         }
         private static HexCharacterModel GetBestValidAttackTarget(HexCharacterModel character, AbilityData ability)
         {
@@ -921,6 +821,22 @@ namespace HexGameEngine.AI
             if (listRet.Contains(character) && !includeSelf) listRet.Remove(character);
 
             return listRet;
+        }
+        private static bool AreAnyPlayerCharactersActivatingAfterMe(HexCharacterModel enemy)
+        {
+            bool ret = false;
+            int index = TurnController.Instance.ActivationOrder.IndexOf(enemy);
+            Debug.LogWarning("ACTIVATION INDEX: " + index.ToString());
+            for(int i = index + 1; i < TurnController.Instance.ActivationOrder.Count; i++)
+            {
+                if (TurnController.Instance.ActivationOrder[i].allegiance == Allegiance.Player)
+                {
+                    ret = true;
+                    break;
+                }
+            }
+            Debug.Log("AILogic.AreAnyPlayerCharactersActivatingAfterMe() returning " + ret.ToString() + " for " + enemy.myName + " at activation index " + index.ToString());
+            return ret;
         }
         #endregion
 

@@ -54,7 +54,7 @@ namespace HexGameEngine.AI
         }
         public bool ShowEnemiesInMeleeRange()
         {
-            if (requirementType == AIActionRequirementType.AlreadyEngagedInMelee)
+            if (requirementType == AIActionRequirementType.EngagedInMelee)
             {
                 return true;
             }
@@ -99,7 +99,7 @@ namespace HexGameEngine.AI
     {
         None = 0,
         TargetIsWithinRange = 1,
-        AlreadyEngagedInMelee = 2,
+        EngagedInMelee = 2,
         NotEngagedInMelee = 8,
         HasMoreEnergyThanX = 10,
         HasLessEnergyThanX = 18,
@@ -114,7 +114,8 @@ namespace HexGameEngine.AI
         HasRangedAdvantage = 13,
         DoesNotHaveRangedAdvantage = 14,
         AbilityIsOffCooldown = 15,
-        TargetIsNotEngagedInMelee = 16,
+        TargetNotEngagedInMelee = 16,
+        TargetEngagedInMelee = 19,
         TargetIsAdjacentToAlly = 17,
     }
 }

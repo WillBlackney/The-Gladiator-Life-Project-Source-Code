@@ -174,9 +174,10 @@ namespace HexGameEngine.Abilities
 
             return loadOutAbility;
         }
-        public void HandleLearnAbilitiesFromItemSet(ItemSet itemSet)
+        public void HandleLearnAbilitiesFromItemSet(ItemSet itemSet, bool unlearnPreviousItemAbilities = true)
         {
-            HandleUnlearnAbilitiesFromCurrentItemSet();
+            // Below line if for enemies, so that their abilities are not tied to their weapons
+            if(unlearnPreviousItemAbilities) HandleUnlearnAbilitiesFromCurrentItemSet();
 
             var itemAbilities = GetAbilitiesFromItemSet(itemSet);
             int difference = itemAbilities.Count + activeAbilities.Count - ActiveAbilityLimit;

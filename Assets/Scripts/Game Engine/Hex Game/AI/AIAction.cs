@@ -66,7 +66,7 @@ namespace HexGameEngine.AI
         UseCharacterTargettedSummonAbility = 5,
         MoveToEngageInMelee = 2,
         MoveIntoRangeOfTarget = 3,
-        MoveToElevationCloserToEnemy = 6,
+        MoveToElevationCloserToTarget = 6,
         DelayTurn = 7,
     }
 
@@ -74,8 +74,10 @@ namespace HexGameEngine.AI
     {
         None = 0,
         ClosestUnfriendlyTarget = 1,
+        ClosestFriendlyTarget = 8,
         BestValidUnfriendlyTarget = 5,
         RandomValidUnfriendlyTarget = 6,
+        MostEndangeredFriendly = 7,
         RandomAlly = 3,
         RandomAllyOrSelf = 4,
         Self = 2,

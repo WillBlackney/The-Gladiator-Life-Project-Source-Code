@@ -238,7 +238,7 @@ namespace HexGameEngine.Characters
             newCharacter.abilityBook = new AbilityBook(template.abilityBook);
 
             // Learn weapon abilities
-            newCharacter.abilityBook.HandleLearnAbilitiesFromItemSet(newCharacter.itemSet);
+            newCharacter.abilityBook.HandleLearnAbilitiesFromItemSet(newCharacter.itemSet, false);
 
             return newCharacter;
         }
