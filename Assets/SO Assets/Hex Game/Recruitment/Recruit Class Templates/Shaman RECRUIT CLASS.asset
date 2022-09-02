@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eaa51bbd3588a643aa1c5b44ef5d003, type: 3}
+  m_Name: Shaman RECRUIT CLASS
+  m_EditorClassIdentifier: 
+  templateName: Shaman
+  possibleRaces: 020000000500000006000000
+  startingAbilityCount: 2
+  possibleAbilities:
+  - {fileID: 11400000, guid: 0134e6b9269bcec47bf322060ceda37f, type: 2}
+  - {fileID: 11400000, guid: fb58bc9b02d9e60418c36237ae9c0d64, type: 2}
+  - {fileID: 11400000, guid: 583e0b24725a2cc47aaff1156982fe93, type: 2}
+  - {fileID: 11400000, guid: c6a496fc658e03746b90b909c44794fa, type: 2}
+  - {fileID: 11400000, guid: 28fa3342a94c64a4f8a737a92f8f6a5d, type: 2}
+  possibleOutfits:
+  - {fileID: 11400000, guid: c5837ff533063784aa6242254286e342, type: 2}
+  - {fileID: 11400000, guid: 859d38b011b4d5344bfba7f7be9a6747, type: 2}
+  possibleWeapons:
+  - mainHandItem: {fileID: 11400000, guid: 130ab6972593ec14d8dda796c434cefb, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 7ac975a3abf940040ac3e0ca78352642, type: 2}
+    chestArmour: {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+    trinket: {fileID: 0}
+  - mainHandItem: {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+    offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
+    headArmour: {fileID: 11400000, guid: 7ac975a3abf940040ac3e0ca78352642, type: 2}
+    chestArmour: {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+    trinket: {fileID: 0}
+  - mainHandItem: {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 7ac975a3abf940040ac3e0ca78352642, type: 2}
+    chestArmour: {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+    trinket: {fileID: 0}
+  strengthMod: 0
+  intelligenceMod: 0
+  accuracyMod: 0
+  dodgeMod: 0
+  resolveMod: 0
+  constitutionMod: 0
+  witsMod: 0
+  talentPairings:
+  - talentSchool: 13
+    level: 1

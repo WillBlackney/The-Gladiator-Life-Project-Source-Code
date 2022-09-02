@@ -10,7 +10,7 @@ namespace HexGameEngine.Editor
 {
     public class PerkDataEditor : OdinMenuEditorWindow
     {
-        [MenuItem("Tools/Hex Game Tools/Perks")]
+        [MenuItem("Tools/Hex Game Tools/Passives Editor")]
         private static void OpenWindow()
         {
             GetWindow<PerkDataEditor>().Show();

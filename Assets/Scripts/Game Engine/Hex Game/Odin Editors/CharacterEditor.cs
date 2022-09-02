@@ -1,31 +1,30 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
-using HexGameEngine.Abilities;
 using HexGameEngine.Characters;
 
 namespace HexGameEngine.Editor
 {
 
-    public class EnemyDataEditor : OdinMenuEditorWindow
+    public class CharacterEditor : OdinMenuEditorWindow
     {
-        [MenuItem("Tools/Hex Game Tools/Enemy Editor")]
+        [MenuItem("Tools/Hex Game Tools/Character Editor")]
         private static void OpenWindow()
         {
-            GetWindow<EnemyDataEditor>().Show();
+            GetWindow<CharacterEditor>().Show();
         }
 
-        private CreateNewEnemyData createNewEnemyData;
+        private CreateNewCharacterTemplateData createNewCharacterTemplateData;
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            if (createNewEnemyData != null)
+            if (createNewCharacterTemplateData != null)
             {
-                DestroyImmediate(createNewEnemyData.enemyDataSO);
+                DestroyImmediate(createNewCharacterTemplateData.templateDataSO);
             }
         }
 
@@ -33,9 +32,9 @@ namespace HexGameEngine.Editor
         {
             var tree = new OdinMenuTree();
 
-            createNewEnemyData = new CreateNewEnemyData();
-            tree.Add("Create New", new CreateNewEnemyData());
-            tree.AddAllAssetsAtPath("All Abilities", "Assets/SO Assets/Hex Game/Enemies", typeof(EnemyTemplateSO));
+            createNewCharacterTemplateData = new CreateNewCharacterTemplateData();
+            tree.Add("Create New", new CreateNewCharacterTemplateData());
+            tree.AddAllAssetsAtPath("Starting Character Templates", "Assets/SO Assets/Hex Game/Characters/", typeof(HexCharacterTemplateSO));
             tree.SortMenuItemsByName();
             return tree;
         }
@@ -50,7 +49,7 @@ namespace HexGameEngine.Editor
 
                 if (SirenixEditorGUI.ToolbarButton("Delete Current"))
                 {
-                    EnemyTemplateSO asset = selected.SelectedValue as EnemyTemplateSO;
+                    HexCharacterTemplateSO asset = selected.SelectedValue as HexCharacterTemplateSO;
                     string path = AssetDatabase.GetAssetPath(asset);
                     AssetDatabase.DeleteAsset(path);
                     AssetDatabase.SaveAssets();
@@ -60,26 +59,26 @@ namespace HexGameEngine.Editor
 
         }
 
-        public class CreateNewEnemyData
+        public class CreateNewCharacterTemplateData
         {
             [InlineEditor(ObjectFieldMode = InlineEditorObjectFieldModes.Hidden)]
-            public EnemyTemplateSO enemyDataSO;
+            public HexCharacterTemplateSO templateDataSO;
 
-            public CreateNewEnemyData()
+            public CreateNewCharacterTemplateData()
             {
-                enemyDataSO = CreateInstance<EnemyTemplateSO>();
-                enemyDataSO.myName = "New Enemy Name";
+                templateDataSO = CreateInstance<HexCharacterTemplateSO>();
+                templateDataSO.myName = "New Character Name";
             }
 
-            [Button("Add New Enemy Data")]
+            [Button("Add New Character")]
             public void CreateNewData()
             {
-                AssetDatabase.CreateAsset(enemyDataSO, "Assets/SO Assets/Hex Game/Enemies/" + enemyDataSO.myName + ".asset");
+                AssetDatabase.CreateAsset(templateDataSO, "Assets/SO Assets/Hex Game/Characters/" + templateDataSO.myName + ".asset");
                 AssetDatabase.SaveAssets();
 
                 // Create the SO 
-                enemyDataSO = CreateInstance<EnemyTemplateSO>();
-                enemyDataSO.myName = "New Ability Data";
+                templateDataSO = CreateInstance<HexCharacterTemplateSO>();
+                templateDataSO.myName = "New Character";
             }
 
         }

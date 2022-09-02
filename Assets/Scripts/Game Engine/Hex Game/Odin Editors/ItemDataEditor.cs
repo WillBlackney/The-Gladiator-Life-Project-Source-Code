@@ -11,7 +11,7 @@ namespace HexGameEngine.Editor
 
     public class ItemDataEditor : OdinMenuEditorWindow
     {
-        [MenuItem("Tools/Hex Game Tools/Items")]
+        [MenuItem("Tools/Hex Game Tools/Item Editor")]
         private static void OpenWindow()
         {
             GetWindow<ItemDataEditor>().Show();
