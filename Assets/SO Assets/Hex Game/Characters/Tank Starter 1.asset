@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fc18e607558964b9506f2b2cdb1260, type: 3}
+  m_Name: Tank Starter 1
+  m_EditorClassIdentifier: 
+  myName: Tank Starter 1
+  myClassName: 
+  race: 0
+  modelSize: 0
+  attributeSheet:
+    might:
+      value: 0
+      stars: 0
+    constitution:
+      value: 75
+      stars: 0
+    dodge:
+      value: 10
+      stars: 0
+    accuracy:
+      value: 65
+      stars: 0
+    resolve:
+      value: 5
+      stars: 0
+    wits:
+      value: 5
+      stars: 0
+    maxHealth: 0
+    energyRecovery: 8
+    maxEnergy: 8
+    initiative: 5
+    criticalChance: 5
+    criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
+    auraSize: 1
+    vision: 0
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+    deathResistance: 25
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: 507ff3973c3f4a44ea421a51ff989b75, type: 2}
+    - {fileID: 11400000, guid: 6c906fd5c22e64f43adc16680c0264ea, type: 2}
+    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
+  serializedPassiveManager:
+    perks:
+    - perkTag: 68
+      stacks: 1
+  modelParts:
+  - Ghoul_Chest
+  - Undead_Face_6
+  - Undead_Head_4
+  - Ghoul_Right_Leg
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+    offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
+    headArmour: {fileID: 11400000, guid: 50abf88b96467f9438dfec4ded22f4b5, type: 2}
+    chestArmour: {fileID: 11400000, guid: ae8cf90ad093c0e4682a7455d7737a9e, type: 2}
+    trinket: {fileID: 0}
+  talentPairings:
+  - talentSchool: 5
+    level: 1
+  - talentSchool: 2
+    level: 1

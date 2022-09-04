@@ -409,7 +409,7 @@ namespace HexGameEngine.Abilities
                     
                     // Resolve bonus armour damage
                     if(abilityEffect.bonusArmourDamage > 0)                    
-                        HexCharacterController.Instance.ModifyArmour(target, abilityEffect.bonusArmourDamage);                    
+                        HexCharacterController.Instance.ModifyArmour(target, -abilityEffect.bonusArmourDamage);                    
 
                     // Do on hit visual effects for this ability
                     foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)                    
@@ -519,6 +519,14 @@ namespace HexGameEngine.Abilities
                         VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "MISS"), QueuePosition.Back
                         , 0, 0, target.GetLastStackEventParent());
 
+                    // Check Evasion
+                    if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Evasion))
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Evasion, -1);
+
+                    // Check Crippled
+                    if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Crippled))
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Crippled, -1);
+
                     // Duck animation on miss
                     VisualEventManager.Instance.CreateVisualEvent(() =>
                     HexCharacterController.Instance.PlayDuckAnimation(target.hexCharacterView), QueuePosition.Back, 0f, 0.5f, target.GetLastStackEventParent());
@@ -530,7 +538,7 @@ namespace HexGameEngine.Abilities
                         ability.abilityName != RiposteAbility.abilityName && 
                         ability.abilityName != FreeStrikeAbility.abilityName)
                     {
-                        // Miss notification
+                        // Riposte notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
                             VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "Riposte!"), QueuePosition.Back,0.5f);
 
@@ -625,8 +633,17 @@ namespace HexGameEngine.Abilities
                         {
                             if (character.hexCharacterView != null) pos = character.hexCharacterView.WorldPosition;
                             VisualEffectManager.Instance.CreateStatusEffect(pos, "MISS");
+                            
+
                         }, QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
 
+                        // Check Evasion
+                        if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Evasion))
+                            PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Evasion, -1);
+
+                        // Check Crippled
+                        if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Crippled))
+                            PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Crippled, -1);
 
                         // Duck animation on miss
                         VisualEventManager.Instance.CreateVisualEvent(() =>
@@ -653,7 +670,7 @@ namespace HexGameEngine.Abilities
 
                     // Resolve bonus armour damage
                     if (abilityEffect.bonusArmourDamage > 0)
-                        HexCharacterController.Instance.ModifyArmour(target, abilityEffect.bonusArmourDamage);
+                        HexCharacterController.Instance.ModifyArmour(target, -abilityEffect.bonusArmourDamage);
 
                     // Deal damage
                     CombatController.Instance.HandleDamage(caster, character, dResult, ability, abilityEffect, false, character.GetLastStackEventParent());

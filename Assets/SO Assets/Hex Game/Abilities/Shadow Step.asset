@@ -35,9 +35,10 @@ MonoBehaviour:
   abilitySubRequirements:
   - type: 1
     healthRequired: 0
-  baseRange: 1
+  baseRange: 2
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 14
@@ -82,6 +83,8 @@ MonoBehaviour:
     maxBaseDamage: 0
     guaranteedHit: 0
     ignoresBlock: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -150,6 +153,8 @@ MonoBehaviour:
     maxBaseDamage: 12
     guaranteedHit: 0
     ignoresBlock: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 01000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
