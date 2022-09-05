@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Fortify
   includeInGame: 1
-  baseAbilityDescription: Apply 2 Block and 2 Fortified to self or ally. Removes
+  baseAbilityDescription: Apply 2 Guard and 2 Fortified to self or ally. Removes
     Stunned and Rooted.
   abilitySprite: {fileID: 21300000, guid: fbb60405ce962734fb1fedb95d7b99ec, type: 3}
   energyCost: 5
@@ -36,6 +36,7 @@ MonoBehaviour:
   baseRange: 2
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 10
@@ -211,7 +212,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Block '
+    phrase: 'Guard '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

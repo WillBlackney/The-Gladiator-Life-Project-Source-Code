@@ -125,7 +125,7 @@ namespace HexGameEngine.HexTiles
             grassParent.SetActive(false);
             waterParent.SetActive(false);
 
-            if (tileName == "Grass") grassParent.SetActive(true);
+            if (tileName == "Grass" && !obstructed) grassParent.SetActive(true);
             else if (tileName == "Mud") mudParent.SetActive(true);
             else if (tileName == "Water") waterParent.SetActive(true);
             //tileTypeSprite.sprite = data.tileSprite;
@@ -234,6 +234,7 @@ namespace HexGameEngine.HexTiles
             {
                 obstacleParent.SetActive(true);
                 obstacleImages.GetRandomElement().SetActive(true);
+                grassParent.SetActive(false);
             }
         }
         private void DisableObstructionViews()

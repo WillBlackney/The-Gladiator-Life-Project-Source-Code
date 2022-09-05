@@ -378,9 +378,6 @@ namespace HexGameEngine
                 (c.race == CharacterRace.Goblin && c.controller == Controller.Player))
                 dodge += GetTotalInitiative(c);
 
-            // Concealing Clouds Perk (self only effect)
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ConcealingClouds))
-                dodge += 10;
             
             // Nearby allies with shield wall give +5 dodge bonus
             /*
@@ -940,12 +937,6 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ExposedRibs))
                 resistanceReturned -= 35;
 
-            // Siphoned Soul + Enriched Soul
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.EnrichedSoul))
-                resistanceReturned += 10;
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.SiphonedSoul))
-                resistanceReturned -= 10;
-
             // Guardian talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Guardian, 1))
                 resistanceReturned += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Guardian) * 5;
@@ -986,10 +977,6 @@ namespace HexGameEngine
         public static int GetTotalMagicResistance(HexCharacterModel c)
         {
             int resistanceReturned = c.attributeSheet.magicResistance;
-
-            // Cleansing waters
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CleaningWaters))
-                resistanceReturned += 20;
 
             // Naturalism talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Naturalism, 1))

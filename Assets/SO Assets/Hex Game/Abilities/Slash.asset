@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Slash
   includeInGame: 1
-  baseAbilityDescription: Deal 100% weapon damage. This has a +15 Accuracy bonus.
+  baseAbilityDescription: Deal 100% weapon damage. This has a +10 Accuracy bonus.
   abilitySprite: {fileID: 21300000, guid: 32e56c9c60dff28419898da655528c3b, type: 3}
   energyCost: 4
   baseCooldown: 0
@@ -34,7 +34,8 @@ MonoBehaviour:
   abilitySubRequirements: []
   baseRange: 1
   gainRangeBonusFromVision: 0
-  hitChanceModifier: 15
+  hitChanceModifier: 10
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 2
@@ -93,7 +94,9 @@ MonoBehaviour:
     minBaseDamage: 18
     maxBaseDamage: 22
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -131,7 +134,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '+15 '
+    phrase: '+10 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

@@ -794,7 +794,7 @@ namespace HexGameEngine.Characters
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Tough))
             {
                 //int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Tough);
-                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Block, 2, false);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Guard, 2, false);
             }
 
             // Motivated (gain X focus)
@@ -1108,38 +1108,21 @@ namespace HexGameEngine.Characters
                 // BUFF EXPIRIES
                 #region
                 // Eagle Eye
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.TrueSight) && character.currentHealth > 0)
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.TrueSight, -1, true, 0.5f);
-                }
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.TrueSight) && character.currentHealth > 0)                
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.TrueSight, -1, true, 0.5f);                
 
-                // Concealing Clouds
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.ConcealingClouds) && character.currentHealth > 0)
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.ConcealingClouds, -1, true, 0.5f);
-                }
-
-                // Cleansing Waters
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.CleaningWaters) && character.currentHealth > 0)
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.CleaningWaters, -1, true, 0.5f);
-                }
-
-                // Siphon Soul + Enriched Soul
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SiphonedSoul) && character.currentHealth > 0)
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.SiphonedSoul, -1, true, 0.5f);
-                }
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.EnrichedSoul) && character.currentHealth > 0)
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.EnrichedSoul, -1, true, 0.5f);
-                }
-
+                // Fortified
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fortified) && character.currentHealth > 0)                
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Fortified, -1, true, 0.5f);           
+              
                 // Ignited Weapon
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FlamingWeapon) && character.currentHealth > 0)
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.FlamingWeapon, -1, true, 0.5f);
-                }
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FlamingWeapon) && character.currentHealth > 0)                
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.FlamingWeapon, -1, true, 0.5f);                
+                
+                // Poisoned Weapon
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.PoisonedWeapon) && character.currentHealth > 0)                
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.PoisonedWeapon, -1, true, 0.5f);
+                
                 #endregion
 
                 // MISC
@@ -1275,7 +1258,7 @@ namespace HexGameEngine.Characters
                     foreach(HexCharacterModel ally in allies)
                     {
                         Vector3 pos = ally.hexCharacterView.WorldPosition;
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Block, 1, true, 0, character.pManager);
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Guard, 1, true, 0, character.pManager);
                         VisualEventManager.Instance.CreateVisualEvent(() =>
                             VisualEffectManager.Instance.CreateGeneralBuffEffect(pos));
                     }               
@@ -1462,17 +1445,16 @@ namespace HexGameEngine.Characters
             // Update GUI
             if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
             {
+                // Update energy bar GUI
                 int energyVFX = character.currentEnergy;
                 VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.EnergyBar.UpdateIcons(energyVFX));
-            }
 
-            /*
-            int energyVfxValue = character.currentEnergy;
-            int maxEnergyVfxValue = StatCalculator.GetTotalMaxEnergy(character);
-            VisualEventManager.Instance.CreateVisualEvent(() => UpdateEnergyGUIElements(character, energyVfxValue, maxEnergyVfxValue), qPos, 0, 0);
-            */
-            //CardController.Instance.AutoUpdateCardsInHandGlowOutlines(character);
-            // to do maybe: auto update ability bar glows??
+                // Update ability button validity overlays
+                foreach (AbilityButton b in CombatUIController.Instance.AbilityButtons)                
+                    b.UpdateAbilityButtonUnusableOverlay();
+                
+            }           
+
         }
         public void ModifyBaseMaxEnergy(HexCharacterModel character, int maxEnergyGainedOrLost, bool updateEnergyGuiInstantly = true)
         {

@@ -370,6 +370,9 @@ namespace HexGameEngine.Perks
                 // Character is protected by rune: Cancel this status application, remove a rune, then return.
                 Debug.Log("ModifyPerkOnCharacterEntity() cancelling application of " + perkName + " as character is protected by Rune.");                
                 ModifyPerkOnCharacterEntity(pManager, Perk.Rune, -1, showVFX, vfxDelay, applier);
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                  VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "BLOCKED!"), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+
                 return false; 
             }
 

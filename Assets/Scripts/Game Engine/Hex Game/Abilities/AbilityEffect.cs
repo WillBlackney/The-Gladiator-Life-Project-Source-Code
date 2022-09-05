@@ -144,7 +144,7 @@ namespace HexGameEngine.Abilities
         [BoxGroup("Damage Settings")]
         [LabelWidth(200)]
         [ShowIf("ShowIgnoreBlock")]
-        public bool ignoresBlock;
+        public bool ignoresGuard;
 
         [BoxGroup("Damage Settings")]
         [LabelWidth(200)]

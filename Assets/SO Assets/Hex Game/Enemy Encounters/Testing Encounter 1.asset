@@ -21,6 +21,5 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a58142bb89f23bd4d9d3929782710588, type: 2}
     spawnPosition: {x: 2, y: -1}
   - possibleEnemies:
-    - {fileID: 11400000, guid: 4c661fe5c495bd848909ec99dc14524d, type: 2}
-    - {fileID: 11400000, guid: c7143a1af1f26c4498814cba85efbe38, type: 2}
+    - {fileID: 11400000, guid: a58142bb89f23bd4d9d3929782710588, type: 2}
     spawnPosition: {x: 3, y: 0}

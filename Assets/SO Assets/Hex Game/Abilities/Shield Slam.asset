@@ -15,11 +15,11 @@ MonoBehaviour:
   abilityName: Shield Slam
   includeInGame: 1
   baseAbilityDescription: Slam your shield against a target, knocking them back 1
-    tile and dealing 125% Physical damage. Damage is increased 25% for each stack
-    of Block on self.
+    tile and dealing 125% Physical damage. Damage is increased 10% for each stack
+    of Guard on self.
   abilitySprite: {fileID: 21300000, guid: e70d073abde6860498c58ff485c21a96, type: 3}
   energyCost: 4
-  baseCooldown: 3
+  baseCooldown: 4
   abilityType: 2
   doesNotBreakStealth: 0
   weaponRequirement: 4
@@ -37,6 +37,7 @@ MonoBehaviour:
   baseRange: 1
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 2
@@ -95,13 +96,15 @@ MonoBehaviour:
     minBaseDamage: 23
     maxBaseDamage: 27
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers:
     - type: 8
       perk: 74
       targetRace: 0
-      bonusDamageModifier: 0.25
+      bonusDamageModifier: 0.1
       bonusCriticalChance: 0
     characterSummoned: {fileID: 0}
     modelFadeInSpeed: 0
@@ -139,7 +142,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -188,7 +193,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '25% '
+    phrase: '10% '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -196,7 +201,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Block '
+    phrase: 'Guard '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

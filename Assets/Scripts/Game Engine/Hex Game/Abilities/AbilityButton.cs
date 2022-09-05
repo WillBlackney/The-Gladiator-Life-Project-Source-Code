@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using HexGameEngine.UI;
 using HexGameEngine.Characters;
+using DG.Tweening;
 
 namespace HexGameEngine.Abilities
 {
@@ -14,10 +15,12 @@ namespace HexGameEngine.Abilities
         // Properties
         #region
         private AbilityData myAbilityData;
-        [SerializeField] Image abilityImage;
+        [SerializeField] Image[] abilityImages;
         [SerializeField] GameObject abilityImageParent;
+        [SerializeField] GameObject[] unusableOverlays;
         [SerializeField] GameObject cooldownOverlay;
         [SerializeField] TextMeshProUGUI cooldownText;
+        [SerializeField] CanvasGroup selectedGlow;
 
         #endregion
 
@@ -30,6 +33,10 @@ namespace HexGameEngine.Abilities
         public GameObject CooldownOverlay
         {
             get { return cooldownOverlay; }
+        }
+        public GameObject[] UnusableOverlays
+        {
+            get { return unusableOverlays; }
         }
         public TextMeshProUGUI CooldownText
         {
@@ -96,7 +103,8 @@ namespace HexGameEngine.Abilities
         public void ResetButton()
         {
             myAbilityData = null;
-            cooldownOverlay.SetActive(false);
+            for(int i = 0; i < unusableOverlays.Length; i++)
+                unusableOverlays[i].SetActive(false);
             abilityImageParent.SetActive(false);
             cooldownText.gameObject.SetActive(false);
         }
@@ -106,26 +114,49 @@ namespace HexGameEngine.Abilities
             myAbilityData = data;
 
             // set sprite
-            abilityImage.sprite = data.AbilitySprite;
+            for(int i = 0; i < abilityImages.Length; i++)
+                abilityImages[i].sprite = data.AbilitySprite;
             abilityImageParent.SetActive(true);
 
             // set cooldown text + views if needed
-            UpdateAbilityButtonCooldownView();
+            UpdateAbilityButtonUnusableOverlay();
         }
-        public void UpdateAbilityButtonCooldownView()
+        public void UpdateAbilityButtonUnusableOverlay()
         {
             if (myAbilityData == null) return;
             CooldownText.text = myAbilityData.currentCooldown.ToString();
-            if (myAbilityData.currentCooldown == 0)
+            if(myAbilityData.myCharacter != null &&
+                myAbilityData.currentCooldown == 0 && 
+                myAbilityData.myCharacter.currentEnergy >= AbilityController.Instance.GetAbilityEnergyCost(myAbilityData.myCharacter, myAbilityData) &&
+                AbilityController.Instance.IsAbilityUseable(myAbilityData.myCharacter, myAbilityData))
             {
-                CooldownOverlay.SetActive(false);
+                for (int i = 0; i < unusableOverlays.Length; i++)
+                    unusableOverlays[i].SetActive(false);
                 CooldownText.gameObject.SetActive(false);
+                cooldownOverlay.gameObject.SetActive(false);
+            }
+            else if (myAbilityData.currentCooldown > 0)
+            {
+                for (int i = 0; i < unusableOverlays.Length; i++)
+                    unusableOverlays[i].SetActive(true);
+                CooldownText.gameObject.SetActive(true);
+                cooldownOverlay.gameObject.SetActive(true);
             }
             else
             {
-                CooldownOverlay.SetActive(true);
-                CooldownText.gameObject.SetActive(true);
+                for (int i = 0; i < unusableOverlays.Length; i++)
+                    unusableOverlays[i].SetActive(true);
+                CooldownText.gameObject.SetActive(false);
+                cooldownOverlay.gameObject.SetActive(false);
             }
+        }
+        public void SetSelectedGlow(bool onOrOff)
+        {
+            selectedGlow.DOKill();
+            selectedGlow.alpha = 0;
+            if (onOrOff == true)            
+                selectedGlow.DOFade(1f, 0.25f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
+            
         }
     }
 }

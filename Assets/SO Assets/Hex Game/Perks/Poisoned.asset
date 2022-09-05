@@ -31,7 +31,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: damage for each stack.
+    phrase: 'damage for each stack, then a stack is removed. '
   passiveItalicDescription: 
   effectDetailTabs: []
   maxAllowedStacks: 10

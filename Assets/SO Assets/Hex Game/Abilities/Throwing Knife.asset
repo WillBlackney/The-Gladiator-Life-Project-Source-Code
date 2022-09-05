@@ -21,7 +21,7 @@ MonoBehaviour:
   baseCooldown: 2
   abilityType: 3
   doesNotBreakStealth: 0
-  weaponRequirement: 0
+  weaponRequirement: 6
   derivedFromWeapon: 0
   derivedFromItemLoadout: 0
   weaponAbilityType: 0
@@ -36,6 +36,7 @@ MonoBehaviour:
   baseRange: 2
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 2
@@ -124,7 +125,9 @@ MonoBehaviour:
     minBaseDamage: 23
     maxBaseDamage: 27
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -178,7 +181,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -224,14 +229,14 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: '. Suffers no '
-  - color: 0
+  - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Accuracy '
   - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: penalty when used in melee.
+    phrase: penalty when used from melee.
   keyWords:
   - kewWordType: 1
     passiveType: 7

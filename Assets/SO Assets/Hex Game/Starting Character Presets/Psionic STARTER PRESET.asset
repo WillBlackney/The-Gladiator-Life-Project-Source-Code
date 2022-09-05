@@ -17,10 +17,7 @@ MonoBehaviour:
   race: 1
   modelSize: 0
   attributeSheet:
-    strength:
-      value: 0
-      stars: 0
-    intelligence:
+    might:
       value: 0
       stars: 0
     constitution:
@@ -44,6 +41,8 @@ MonoBehaviour:
     initiative: 5
     criticalChance: 5
     criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
     auraSize: 1
     vision: 0
     physicalResistance: 0
@@ -55,7 +54,7 @@ MonoBehaviour:
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: dbf70824a5994e0449938fd3bee091ad, type: 2}
-    - {fileID: 11400000, guid: 15d89fdb6bcfaee4ba1e1b1f74ec4dd3, type: 2}
+    - {fileID: 11400000, guid: 43ea47fa523c20a46991726e98d06d04, type: 2}
     - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
   serializedPassiveManager:
     perks: []

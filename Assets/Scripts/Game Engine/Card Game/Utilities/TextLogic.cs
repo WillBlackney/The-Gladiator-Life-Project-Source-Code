@@ -49,7 +49,7 @@ namespace CardGameEngine
         {
             // Just give it a string and a color reference,
             // and this function takes care of everything
-            return (color + text + white);
+            return (color + text + "</" + color + ">");
         }
         private static string GetColorCodeFromEnum(TextColor color)
         {

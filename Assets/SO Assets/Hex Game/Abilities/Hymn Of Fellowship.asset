@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Hymn Of Fellowship
   includeInGame: 1
-  baseAbilityDescription: At the end of each turn, give 1 Block to allies within
+  baseAbilityDescription: At the end of each turn, give 1 Guard to allies within
     your Aura. Only one hymn may be active at a time.
   abilitySprite: {fileID: 21300000, guid: a0606b1cd6ecc3f4dadc531d4de5c334, type: 3}
   energyCost: 6
@@ -36,6 +36,7 @@ MonoBehaviour:
   baseRange: 0
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 1
@@ -110,6 +111,8 @@ MonoBehaviour:
     maxBaseDamage: 0
     guaranteedHit: 0
     ignoresBlock: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -139,7 +142,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Block '
+    phrase: 'Guard '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

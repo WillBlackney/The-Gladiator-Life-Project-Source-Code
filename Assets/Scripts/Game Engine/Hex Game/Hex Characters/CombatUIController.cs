@@ -243,7 +243,7 @@ namespace HexGameEngine.Characters
         }       
         public AbilityButton FindAbilityButton(AbilityData ability)
         {
-            if (ability.myCharacter == null) return null;
+            if (ability == null || ability.myCharacter == null) return null;
 
             AbilityButton bRet = null;
             foreach (AbilityButton b in abilityButtons)

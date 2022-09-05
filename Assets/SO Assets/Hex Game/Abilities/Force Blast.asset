@@ -18,7 +18,7 @@ MonoBehaviour:
     No Accuracy penalty when used in melee.
   abilitySprite: {fileID: 21300000, guid: ed507ec71b5df984a9540ead6d552d2a, type: 3}
   energyCost: 4
-  baseCooldown: 2
+  baseCooldown: 3
   abilityType: 3
   doesNotBreakStealth: 0
   weaponRequirement: 0
@@ -36,6 +36,7 @@ MonoBehaviour:
   baseRange: 2
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 2
@@ -94,7 +95,9 @@ MonoBehaviour:
     minBaseDamage: 23
     maxBaseDamage: 27
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 02000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -133,7 +136,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -190,7 +195,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: penalty when used in melee.
+    phrase: penalty when used from melee.
   keyWords:
   - kewWordType: 23
     passiveType: 0

@@ -441,7 +441,7 @@ namespace HexGameEngine.Abilities
                     // Trigger on hit/crit effects
                     if (abilityEffect.chainedEffect == false)
                     {
-                        if (didCrit)
+                        if (didCrit && ability.onCritEffects.Count > 0)
                         {
                             foreach (AbilityEffect e in ability.onCritEffects)
                             {
@@ -689,9 +689,9 @@ namespace HexGameEngine.Abilities
                     }
 
                     // Trigger on hit/crit effects
-                    if (didCrit)
+                    if (didCrit && ability.onCritEffects.Count > 0)
                     {
-                        foreach (AbilityEffect e in ability.onCritEffects)
+                        foreach (AbilityEffect e in ability.onCritEffects )
                         {
                             TriggerAbilityEffect(ability, e, caster, character, tileTarget);
                         }
@@ -1200,6 +1200,8 @@ namespace HexGameEngine.Abilities
             {
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Stealth, -1);
             }
+
+
         }
         private void SetAbilityOnCooldown(AbilityData ability)
         {
@@ -1212,7 +1214,7 @@ namespace HexGameEngine.Abilities
                 {
                     if(b.MyAbilityData == ability)
                     {
-                        b.UpdateAbilityButtonCooldownView();
+                        b.UpdateAbilityButtonUnusableOverlay();
                         break;
                     }
                 }
@@ -1256,10 +1258,12 @@ namespace HexGameEngine.Abilities
             {
                 // player clicked a different ability, handle new selection
                 LevelController.Instance.UnmarkAllTiles();
+                var selectedButton = CombatUIController.Instance.FindAbilityButton(currentAbilityAwaiting);
+                if (selectedButton != null) selectedButton.SetSelectedGlow(false);
             }
 
             // cache ability, get ready for second click, or for instant use
-            currentAbilityAwaiting = b.MyAbilityData;
+            currentAbilityAwaiting = b.MyAbilityData;           
             currentSelectionPhase = AbilitySelectionPhase.None;
 
             // Highlight tiles in range of ability
@@ -1267,6 +1271,7 @@ namespace HexGameEngine.Abilities
             {
                 bool neutral = true;
                 if (ability.targetRequirement == TargetRequirement.Enemy) neutral = false;
+                CombatUIController.Instance.FindAbilityButton(currentAbilityAwaiting).SetSelectedGlow(true);
                 LevelController.Instance.MarkTilesInRange(GetTargettableTilesOfAbility(ability, caster), neutral);
             }
             else if (ability.targetRequirement == TargetRequirement.NoTarget)
@@ -1357,6 +1362,8 @@ namespace HexGameEngine.Abilities
         }
         private void HandleCancelCurrentAbilityOrder()
         {
+            var selectedButton = CombatUIController.Instance.FindAbilityButton(currentAbilityAwaiting);
+            if (selectedButton != null) selectedButton.SetSelectedGlow(false);
             currentAbilityAwaiting = null;
             firstSelectionCharacter = null;
             currentSelectionPhase = AbilitySelectionPhase.None;
@@ -1391,7 +1398,7 @@ namespace HexGameEngine.Abilities
                 character.skillAbilitiesUsedThisTurn == 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Resolute))
             {
-                energyCost -= 2;
+                energyCost -= 1;
             }
 
             // Check Quick Draw passive

@@ -27,7 +27,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Block
+    phrase: Guard
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
   passiveItalicDescription: 
   effectDetailTabs: []
   maxAllowedStacks: 3
-  showStackCount: 1
+  showStackCount: 0
   hiddenOnPassivePanel: 1
   isRewardable: 1
   resistanceBlocksIncrease: 0

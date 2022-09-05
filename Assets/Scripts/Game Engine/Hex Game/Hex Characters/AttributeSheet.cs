@@ -22,7 +22,7 @@ namespace HexGameEngine.Characters
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public Attribute accuracy = new Attribute(75, 0);
+        public Attribute accuracy = new Attribute(60, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]

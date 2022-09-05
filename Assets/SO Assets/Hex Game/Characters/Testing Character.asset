@@ -36,8 +36,8 @@ MonoBehaviour:
       value: 5
       stars: 0
     maxHealth: 0
-    energyRecovery: 8
-    maxEnergy: 8
+    energyRecovery: 16
+    maxEnergy: 16
     initiative: 100
     criticalChance: 100
     criticalModifier: 50
@@ -52,7 +52,10 @@ MonoBehaviour:
     injuryResistance: 0
     deathResistance: 25
   abilityBook:
-    activeAbilities: []
+    activeAbilities:
+    - {fileID: 11400000, guid: 36a0268a5ac37d742960a07bfe17be42, type: 2}
+    - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
+    - {fileID: 11400000, guid: e270d32e998f6e34fa639b54342d93e8, type: 2}
   serializedPassiveManager:
     perks: []
   modelParts:
@@ -61,7 +64,7 @@ MonoBehaviour:
   - Undead_Head_4
   - Ghoul_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: c420762d59a4b8f4788afabeee27eb35, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: 335c81cb722666345aa6c308b1d780f5, type: 2}
     chestArmour: {fileID: 11400000, guid: 885404dfa0107114abd21b026368a161, type: 2}

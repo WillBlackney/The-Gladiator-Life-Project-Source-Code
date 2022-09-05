@@ -101,9 +101,6 @@ namespace HexGameEngine.Combat
             {
                 lowerDamageFinal = effect.minBaseDamage;
                 upperDamageFinal = effect.maxBaseDamage;
-
-                // Check armour ignore from ability effect
-                //if(effect.ignoresArmour) igna
             }
 
             float damageModPercentageAdditive = 1f;
@@ -141,7 +138,7 @@ namespace HexGameEngine.Combat
                 (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stunned) ||
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Blinded)))
             {
-                damageModPercentageAdditive += 0.30f;
+                damageModPercentageAdditive += 0.25f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Bully perk modifier = " + damageModPercentageAdditive.ToString());
             }
 
@@ -194,9 +191,9 @@ namespace HexGameEngine.Combat
             }
 
             // Block
-            if (target != null && effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Block) && effect.ignoresBlock == false)
+            if (target != null && effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Guard) && effect.ignoresGuard == false)
             {
-                damageModPercentageAdditive -= 0.5f;
+                damageModPercentageAdditive -= 0.3f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Block modifier = " + damageModPercentageAdditive.ToString());
             }
 
@@ -268,31 +265,20 @@ namespace HexGameEngine.Combat
                 }
             }
 
-            Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Base damage BEFORE applying final additive modifiers: " + baseDamageFinal.ToString());
+            // Physical + Magical Resistance
+            if (target != null && damageType == DamageType.Physical)
+                damageModPercentageAdditive -= StatCalculator.GetTotalPhysicalResistance(target) * 0.01f;
+
+            else if (target != null && damageType == DamageType.Magic)
+                damageModPercentageAdditive -= StatCalculator.GetTotalMagicResistance(target) * 0.01f;
 
             // Apply additive damage modifier to base damage (+min and max limits for ability description panels)
             baseDamageFinal = (int)(baseDamageFinal * damageModPercentageAdditive);
             lowerDamageFinal = (int)(lowerDamageFinal * damageModPercentageAdditive);
-            upperDamageFinal = (int)(upperDamageFinal * damageModPercentageAdditive);
+            upperDamageFinal = (int)(upperDamageFinal * damageModPercentageAdditive);           
 
-            Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Base damage AFTER applying final additive modifiers: " + baseDamageFinal.ToString());
-
-            // TO DO : Properly calculate effect of magic/physical resistance when these stats are negative, and therefore should INCREASE the damage
-            // Resistance Modifiers + multiplicative modifiers
-            if (target != null && damageType == DamageType.Physical)
-            {
-                float mod = (100 - StatCalculator.GetTotalPhysicalResistance(target)) * 0.01f;
-                baseDamageFinal = (int)(baseDamageFinal * mod);
-                lowerDamageFinal = (int)(lowerDamageFinal * mod);
-                upperDamageFinal = (int)(upperDamageFinal * mod);
-            }
-            else if (target != null && damageType == DamageType.Magic)
-            {
-                float mod = (100 - StatCalculator.GetTotalMagicResistance(target)) * 0.01f;
-                baseDamageFinal = (int)(baseDamageFinal * mod);
-                lowerDamageFinal = (int)(lowerDamageFinal * mod);
-                upperDamageFinal = (int)(upperDamageFinal * mod);
-            }
+            // Any multiplicative damage modifiers should go here.
+            //
 
             Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Base damage AFTER applying final multiplicative modifiers + resistance: " + baseDamageFinal.ToString());
 
@@ -677,10 +663,10 @@ namespace HexGameEngine.Combat
                 !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.PointBlank))
             {
                 if (HexCharacterController.Instance.IsCharacterEngagedInMelee(attacker))
-                    ret.details.Add(new HitChanceDetailData("Shooting From Melee", -20));
+                    ret.details.Add(new HitChanceDetailData("Shooting From Melee", -10));
 
                 if (HexCharacterController.Instance.IsCharacterEngagedInMelee(target))
-                    ret.details.Add(new HitChanceDetailData("Target in Melee", -10));
+                    ret.details.Add(new HitChanceDetailData("Shooting Into Melee", -10));
             }
 
             // Check ability innate hit bonus
@@ -991,13 +977,15 @@ namespace HexGameEngine.Combat
 
             // Combat Token Expiries >>
             // Check Block
-            if (!removedBarrier && 
+            if (ability != null &&
+                !removedBarrier && 
                 totalDamage > 0 &&
-                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Block))
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Block, -1);
+                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Guard))
+                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Guard, -1);
 
             // Check Vulnerable
-            if (!removedBarrier &&
+            if (ability != null &&
+                !removedBarrier &&
                 totalDamage > 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Vulnerable))
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Vulnerable, -1);
@@ -1018,7 +1006,7 @@ namespace HexGameEngine.Combat
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Stealth, -1);
 
             // On hit effects
-            // Ignited weapon => apply burning
+            // Flaming weapon => apply burning
             if (target.currentHealth > 0 && 
                 target.livingState == LivingState.Alive &&
                 attacker != null &&
@@ -1043,7 +1031,7 @@ namespace HexGameEngine.Combat
             }
 
             // Tiger Aspect => apply bleeding
-            /*
+            
             if (target.currentHealth > 0 &&
                 target.livingState == LivingState.Alive &&
                 attacker != null &&
@@ -1053,7 +1041,7 @@ namespace HexGameEngine.Combat
             {
                 Debug.Log("ExecuteHandleDamage() attacker has Tiger Aspect, applying bleeding on target");
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Bleeding, 1, true, 0.5f, attacker.pManager);
-            }*/
+            }
 
             // Thorns
             if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Thorns) &&

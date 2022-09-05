@@ -35,6 +35,7 @@ MonoBehaviour:
   baseRange: 2
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 10
@@ -108,7 +109,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -146,7 +149,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -168,7 +173,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Apply '
+    phrase: 'Give '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -181,11 +186,11 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'and '
-  - color: 3
+  - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: '2 '
-  - color: 1
+  - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'True Sight '
@@ -196,3 +201,5 @@ MonoBehaviour:
   keyWords:
   - kewWordType: 1
     passiveType: 75
+  - kewWordType: 1
+    passiveType: 9
