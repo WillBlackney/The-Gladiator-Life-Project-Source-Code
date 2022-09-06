@@ -45,7 +45,7 @@ MonoBehaviour:
     magicDamageBonus: 0
     auraSize: 1
     vision: 0
-    physicalResistance: 15
+    physicalResistance: 25
     magicResistance: 0
     debuffResistance: 0
     stressResistance: 0
@@ -88,6 +88,16 @@ MonoBehaviour:
         range: 0
         perkPairing:
           perkTag: 60
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        alliesAlive: 0
+        abilityName: 
+      - requirementType: 6
+        range: 0
+        perkPairing:
+          perkTag: 3
           passiveStacks: 1
         healthPercentage: 0
         enemiesInMeleeRange: 1

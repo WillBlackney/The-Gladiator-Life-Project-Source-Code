@@ -128,11 +128,16 @@ namespace HexGameEngine.AI
             else if (directive.action.actionType == AIActionType.MoveIntoRangeOfTarget)
             {
                 // Ablility to move 
-                AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
+                int range = directive.action.range;
+                if (directive.action.getRangeFromAbility)
+                {
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
+                    range = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
+                }                
 
                 if (target == null || 
                     !HexCharacterController.Instance.IsCharacterAbleToMove(character) ||
-                    target.currentTile.Distance(character.currentTile) <= AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character))
+                    target.currentTile.Distance(character.currentTile) <= range)
                 {
                     return false;
                 }

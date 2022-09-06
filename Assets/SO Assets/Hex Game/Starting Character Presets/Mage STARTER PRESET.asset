@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fc18e607558964b9506f2b2cdb1260, type: 3}
   m_Name: Mage STARTER PRESET
   m_EditorClassIdentifier: 
-  myName: X
+  myName: Mage
   myClassName: Mage
   race: 4
   modelSize: 0

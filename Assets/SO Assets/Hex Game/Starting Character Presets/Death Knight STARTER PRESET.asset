@@ -12,15 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fc18e607558964b9506f2b2cdb1260, type: 3}
   m_Name: Death Knight STARTER PRESET
   m_EditorClassIdentifier: 
-  myName: X
+  myName: Death Knight
   myClassName: Death Knight
   race: 1
   modelSize: 0
   attributeSheet:
-    strength:
-      value: 0
-      stars: 0
-    intelligence:
+    might:
       value: 0
       stars: 0
     constitution:
@@ -44,6 +41,8 @@ MonoBehaviour:
     initiative: 5
     criticalChance: 5
     criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
     auraSize: 1
     vision: 0
     physicalResistance: 0
