@@ -1570,8 +1570,6 @@ namespace HexGameEngine.Abilities
                 bRet = true;
             }
 
-            // check target allegiance validity (e.g. friendly spell cant target enemy, damage spell cant target ally, etc)
-
             Debug.Log("AbilityController.IsTargetOfAbilityValid() returning " + bRet.ToString());
             return bRet;
         }

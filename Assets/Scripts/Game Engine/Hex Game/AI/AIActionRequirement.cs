@@ -117,5 +117,8 @@ namespace HexGameEngine.AI
         TargetNotEngagedInMelee = 16,
         TargetEngagedInMelee = 19,
         TargetIsAdjacentToAlly = 17,
+        TargetPositionedForKnockBackStun = 20,
+        TargetIsElevated = 21,
+        TargetIsNotElevated = 22,
     }
 }

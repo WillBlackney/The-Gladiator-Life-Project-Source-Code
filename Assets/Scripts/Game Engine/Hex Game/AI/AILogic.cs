@@ -53,18 +53,21 @@ namespace HexGameEngine.AI
             // TO DO: add logic: if cant find the specified type of target (GetClosestEnemy,GetMostVulnerable, etc)
             // the auto targetting should just try get the next best target if possible.
 
-           //bool bRet = true;
-            HexCharacterModel target = HandleAutoTargetCharacter(character, directive);
+            //bool bRet = true;
+            TargetPriorityTuple tpv = HandleAutoTargetCharacter(character, directive);
+            HexCharacterModel target = tpv.Target;
+            TargettingPriority priority = tpv.Priority;
 
             // Evaluate default conditions first
             // Ability usage
             if (directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
             {
-                if (target == null && directive.action.targettingPriority != TargettingPriority.None) 
+                if (target == null && priority != TargettingPriority.None) 
                 {
                     Debug.Log("AILogic.IsDirectiveActionable() returning false: target is null for action type " + directive.action.actionType);
                     return false; 
                 }
+
                 // Check ability useability
                 AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
                 if (ability == null)
@@ -315,6 +318,36 @@ namespace HexGameEngine.AI
                     bRet = true;
             }
 
+            // Target is elevated
+            else if (req.requirementType == AIActionRequirementType.TargetIsElevated && 
+                target.currentTile.Elevation == TileElevation.Elevated)
+            {
+                    bRet = true;
+            }
+
+            // Target is NOT elevated
+            else if (req.requirementType == AIActionRequirementType.TargetIsNotElevated &&
+                target.currentTile.Elevation != TileElevation.Elevated)
+            {
+                bRet = true;
+            }
+
+            // Target positioned for knock back stun
+            else if (req.requirementType == AIActionRequirementType.TargetPositionedForKnockBackStun)
+            {
+                HexDirection dir = LevelController.Instance.GetDirectionToTargetHex(character.currentTile, target.currentTile);
+
+                foreach (LevelNode h in LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1))
+                {
+                    if (LevelController.Instance.GetDirectionToTargetHex(target.currentTile, h) == dir &&
+                        !Pathfinder.CanHexBeOccupied(h))
+                    {
+                        bRet = true;
+                        break;
+                    }
+                }
+            }
+
 
             return bRet;
         }
@@ -328,14 +361,16 @@ namespace HexGameEngine.AI
             bool actionTaken = false;
 
             // Set up
-            HexCharacterModel target = HandleAutoTargetCharacter(character, directive);
+            TargetPriorityTuple tpv = HandleAutoTargetCharacter(character, directive);
+            HexCharacterModel target = tpv.Target;
+            TargettingPriority priority = tpv.Priority;
 
             if (directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
             {
                 // Set up
                 AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
 
-                if (directive.action.targettingPriority == TargettingPriority.Self)
+                if (priority == TargettingPriority.Self)
                     target = character;
 
                 // Check conditions, then use ability
@@ -586,98 +621,115 @@ namespace HexGameEngine.AI
 
         // Shared Misc AI Logic
         #region
-        private static HexCharacterModel HandleAutoTargetCharacter(HexCharacterModel attacker, AIDirective directive)
+        private static TargetPriorityTuple HandleAutoTargetCharacter(HexCharacterModel attacker, AIDirective directive)
         {
             HexCharacterModel target = null;
+            TargettingPriority finalPriority = TargettingPriority.None; 
 
-            if(directive.action.actionType == AIActionType.MoveIntoRangeOfTarget ||
+            for (int i = 0; i < directive.action.targettingPriority.Length; i++)
+            {
+                TargettingPriority targetingPriority = directive.action.targettingPriority[i];
+                finalPriority = targetingPriority;
+
+                if (directive.action.actionType == AIActionType.MoveIntoRangeOfTarget ||
                 directive.action.actionType == AIActionType.MoveToEngageInMelee ||
                 directive.action.actionType == AIActionType.UseCharacterTargettedSummonAbility ||
                 directive.action.actionType == AIActionType.MoveToElevationCloserToTarget)
-            {
-                if (directive.action.targettingPriority == TargettingPriority.ClosestUnfriendlyTarget)
-                    target = GetClosestNonFriendlyCharacter(attacker);
-
-                else if (directive.action.targettingPriority == TargettingPriority.ClosestFriendlyTarget)
-                    target = GetClosestFriendlyCharacter(attacker);
-
-                else if (directive.action.targettingPriority == TargettingPriority.BestValidUnfriendlyTarget)
                 {
-                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
-                    target = GetBestValidAttackTarget(attacker, ability);
-                }
+                    if (targetingPriority == TargettingPriority.ClosestUnfriendlyTarget)
+                        target = GetClosestUnfriendlyCharacter(attacker);
 
-                else if (directive.action.targettingPriority == TargettingPriority.RandomValidUnfriendlyTarget)
-                {
-                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
-                    target = GetRandomValidAttackTarget(attacker, ability);
-                }
-            }
+                    else if (targetingPriority == TargettingPriority.ClosestFriendlyTarget)
+                        target = GetClosestFriendlyCharacter(attacker);
 
-            // Check for taunted enemies first when using actions that require a target
-            else if (
-                (directive.action.targettingPriority == TargettingPriority.ClosestUnfriendlyTarget ||
-                directive.action.targettingPriority == TargettingPriority.BestValidUnfriendlyTarget ||
-                directive.action.targettingPriority == TargettingPriority.RandomValidUnfriendlyTarget) &&
-                directive.action.abilityName != "" &&
-                directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
-            {
-                List<HexCharacterModel> tauntEnemies = new List<HexCharacterModel>();
-                AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
-                foreach (HexCharacterModel enemy in GetAllEnemiesWithinRange(attacker, AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker)))
-                {
-                    if(AbilityController.Instance.IsTargetOfAbilityValid(attacker, enemy, ability) &&
-                        PerkController.Instance.DoesCharacterHavePerk(enemy.pManager, Perk.Taunt))                    
-                        tauntEnemies.Add(enemy);                    
-                }
-
-                // Pick a random taunt character
-                if (tauntEnemies.Count > 1) target = tauntEnemies[RandomGenerator.NumberBetween(0, tauntEnemies.Count - 1)];
-                else if (tauntEnemies.Count == 1) target = tauntEnemies[0];
-
-                // No taunt enemies, just determine target normally
-                else
-                {
-                    if (directive.action.targettingPriority == TargettingPriority.ClosestUnfriendlyTarget)
-                        target = GetClosestNonFriendlyCharacter(attacker);
-                    else if (directive.action.targettingPriority == TargettingPriority.BestValidUnfriendlyTarget)
-                        target = GetBestValidAttackTarget(attacker, ability);
-                    else if (directive.action.targettingPriority == TargettingPriority.RandomValidUnfriendlyTarget)
-                        target = GetRandomValidAttackTarget(attacker, ability);
-                }
-            }
-
-            // Targetting allies
-            else if ((directive.action.targettingPriority == TargettingPriority.RandomAlly || 
-                directive.action.targettingPriority == TargettingPriority.RandomAllyOrSelf ||
-                directive.action.targettingPriority == TargettingPriority.MostEndangeredFriendly) &&
-                directive.action.abilityName != "" &&
-                directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
-            {
-                AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
-
-                if (directive.action.targettingPriority == TargettingPriority.MostEndangeredFriendly)
-                {
-                    target = GetMostEndangeredAlly(attacker, ability);
-                }
-                else
-                {
-                    bool includeSelf = false;
-                    if (directive.action.targettingPriority == TargettingPriority.RandomAllyOrSelf) includeSelf = true;
-                    List<HexCharacterModel> allies = new List<HexCharacterModel>();
-                    foreach (HexCharacterModel ally in GetAllAlliesWithinRange(attacker, AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker), includeSelf))
+                    else if (targetingPriority == TargettingPriority.BestValidUnfriendlyTarget)
                     {
-                        if (AbilityController.Instance.IsTargetOfAbilityValid(attacker, ally, ability))
-                            allies.Add(ally);
+                        AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                        target = GetBestValidAttackTarget(attacker, ability);
                     }
-                    target = allies.GetRandomElement();
-                }                
+
+                    else if (directive.action.targettingPriority[i] == TargettingPriority.RandomValidUnfriendlyTarget)
+                    {
+                        AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                        target = GetRandomValidAttackTarget(attacker, ability);
+                    }
+                    else if (directive.action.targettingPriority[i] == TargettingPriority.MostEndangeredValidFriendly)
+                    {
+                        AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                        target = GetMostEndangeredValidAlly(attacker, ability);
+                    }
+                }
+
+                // Check for taunted enemies first when using actions that require a target
+                else if (
+                    (targetingPriority == TargettingPriority.ClosestUnfriendlyTarget ||
+                    targetingPriority == TargettingPriority.BestValidUnfriendlyTarget ||
+                    targetingPriority == TargettingPriority.RandomValidUnfriendlyTarget) &&
+                    directive.action.abilityName != "" &&
+                    directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
+                {
+                    List<HexCharacterModel> tauntEnemies = new List<HexCharacterModel>();
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                    foreach (HexCharacterModel enemy in GetAllEnemiesWithinRange(attacker, AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker)))
+                    {
+                        if (AbilityController.Instance.IsTargetOfAbilityValid(attacker, enemy, ability) &&
+                            PerkController.Instance.DoesCharacterHavePerk(enemy.pManager, Perk.Taunt))
+                            tauntEnemies.Add(enemy);
+                    }
+
+                    // Pick a random taunt character
+                    if (tauntEnemies.Count > 1) target = tauntEnemies[RandomGenerator.NumberBetween(0, tauntEnemies.Count - 1)];
+                    else if (tauntEnemies.Count == 1) target = tauntEnemies[0];
+
+                    // No taunt enemies, just determine target normally
+                    else
+                    {
+                        if (targetingPriority == TargettingPriority.ClosestUnfriendlyTarget)
+                            target = GetClosestUnfriendlyCharacter(attacker);
+                        else if (targetingPriority == TargettingPriority.BestValidUnfriendlyTarget)
+                            target = GetBestValidAttackTarget(attacker, ability);
+                        else if (targetingPriority == TargettingPriority.RandomValidUnfriendlyTarget)
+                            target = GetRandomValidAttackTarget(attacker, ability);
+                    }
+                }
+
+                // Targetting allies
+                else if ((targetingPriority == TargettingPriority.RandomAlly ||
+                    targetingPriority == TargettingPriority.RandomAllyOrSelf ||
+                    targetingPriority == TargettingPriority.MostEndangeredValidFriendly) &&
+                    directive.action.abilityName != "" &&
+                    directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
+                {
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+
+                    if (targetingPriority == TargettingPriority.MostEndangeredValidFriendly)
+                    {
+                        target = GetMostEndangeredValidAlly(attacker, ability);
+                    }
+                    else
+                    {
+                        bool includeSelf = false;
+                        if (targetingPriority == TargettingPriority.RandomAllyOrSelf) includeSelf = true;
+                        List<HexCharacterModel> allies = new List<HexCharacterModel>();
+                        foreach (HexCharacterModel ally in GetAllAlliesWithinRange(attacker, AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker), includeSelf))
+                        {
+                            if (AbilityController.Instance.IsTargetOfAbilityValid(attacker, ally, ability))
+                                allies.Add(ally);
+                        }
+                        target = allies.GetRandomElement();
+                    }
+                }
+
+                else if (targetingPriority == TargettingPriority.Self)
+                    target = attacker;
+
+                // Cancel if a valid target was found
+                if (target != null) break;
             }
 
-            else if (directive.action.targettingPriority == TargettingPriority.Self)
-                target = attacker;
-
-            return target;
+            if(target != null)
+                Debug.Log("AILogic.HandleAutoTargetCharacter() determination: target = " + target.myName + ", priority type = " + finalPriority);
+            return new TargetPriorityTuple(target, finalPriority);
         }
         private static HexCharacterModel GetClosestFriendlyCharacter(HexCharacterModel character)
         {
@@ -696,7 +748,7 @@ namespace HexGameEngine.AI
 
             return closestAlly;
         }
-        private static HexCharacterModel GetClosestNonFriendlyCharacter(HexCharacterModel character)
+        private static HexCharacterModel GetClosestUnfriendlyCharacter(HexCharacterModel character)
         {
             HexCharacterModel closestEnemy = null;
             int currentClosest = 10000;
@@ -736,19 +788,19 @@ namespace HexGameEngine.AI
 
             return finalScore;
         }
-        private static HexCharacterModel GetMostEndangeredAlly(HexCharacterModel character, AbilityData ability)
+        private static HexCharacterModel GetMostEndangeredValidAlly(HexCharacterModel character, AbilityData ability = null)
         {
             // Used to determine most endangered ally for protective/buff abilities
-            if (ability == null) return null;
+            //if (ability == null) return null;
             HexCharacterModel bestTarget = null;
-            int bestScore = 0;
+            int bestScore = -1000;
             var allies = HexCharacterController.Instance.GetAllAlliesOfCharacter(character, false);
 
             foreach (HexCharacterModel ally in allies)
             {
                 int score = GetCharacterEndangermentScore(ally);
-                if (score > bestScore && 
-                    AbilityController.Instance.IsTargetOfAbilityValid(character, ally, ability))
+                if (score > bestScore &&
+                    ((ability != null && AbilityController.Instance.IsTargetOfAbilityValid(character, ally, ability)) || ability == null))
                 {
                     bestScore = score;
                     bestTarget = ally;
@@ -756,17 +808,17 @@ namespace HexGameEngine.AI
             }
             return bestTarget;
         }
-        private static HexCharacterModel GetBestValidAttackTarget(HexCharacterModel character, AbilityData ability)
+        private static HexCharacterModel GetBestValidAttackTarget(HexCharacterModel character, AbilityData ability = null)
         {
             // Used to determine target for attack actions
-            if (ability == null) return null;
+           // if (ability == null) return null;
             HexCharacterModel bestTarget = null;
             int currentBestHitChance = 0;
 
             foreach (HexCharacterModel enemy in HexCharacterController.Instance.GetAllEnemiesOfCharacter(character))
             {
                 int hitChance = CombatController.Instance.GetHitChance(character, enemy, ability).FinalHitChance;
-                if (AbilityController.Instance.IsTargetOfAbilityValid(character, enemy, ability) &&
+                if (((ability != null && AbilityController.Instance.IsTargetOfAbilityValid(character, enemy, ability)) || ability == null) &&
                    hitChance > currentBestHitChance)
                 {
                     currentBestHitChance = hitChance;
@@ -776,16 +828,16 @@ namespace HexGameEngine.AI
 
             return bestTarget;
         }
-        private static HexCharacterModel GetRandomValidAttackTarget(HexCharacterModel character, AbilityData ability)
+        private static HexCharacterModel GetRandomValidAttackTarget(HexCharacterModel character, AbilityData ability = null)
         {
             // Used to determine target for attack actions
-            if (ability == null) return null;
+            //if (ability == null) return null;
             HexCharacterModel randomTarget = null;
             List<HexCharacterModel> allValidTargets = new List<HexCharacterModel>();
 
             foreach (HexCharacterModel enemy in HexCharacterController.Instance.GetAllEnemiesOfCharacter(character))
             {
-                if (AbilityController.Instance.IsTargetOfAbilityValid(character, enemy, ability))
+                if ((ability != null && AbilityController.Instance.IsTargetOfAbilityValid(character, enemy, ability)) || ability == null)
                 {
                     allValidTargets.Add(enemy);
                 }
@@ -826,7 +878,6 @@ namespace HexGameEngine.AI
         {
             bool ret = false;
             int index = TurnController.Instance.ActivationOrder.IndexOf(enemy);
-            Debug.LogWarning("ACTIVATION INDEX: " + index.ToString());
             for(int i = index + 1; i < TurnController.Instance.ActivationOrder.Count; i++)
             {
                 if (TurnController.Instance.ActivationOrder[i].allegiance == Allegiance.Player)
@@ -888,5 +939,19 @@ namespace HexGameEngine.AI
             return score;
         }
         #endregion
+    }
+
+    public class TargetPriorityTuple
+    {
+        private HexCharacterModel target;
+        private TargettingPriority priority;
+
+        public HexCharacterModel Target { get { return target; } }
+        public TargettingPriority Priority { get { return priority; } }
+        public TargetPriorityTuple(HexCharacterModel target, TargettingPriority priority)
+        {
+            this.target = target;
+            this.priority = priority;
+        }
     }
 }

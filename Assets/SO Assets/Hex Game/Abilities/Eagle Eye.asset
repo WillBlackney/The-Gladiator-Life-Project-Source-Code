@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Give 2 Focus and 2 True Sight to self or an ally.
   abilitySprite: {fileID: 21300000, guid: 03f985a47e484e94c858542c49a08bac, type: 3}
-  energyCost: 5
+  energyCost: 4
   baseCooldown: 4
   abilityType: 1
   doesNotBreakStealth: 0

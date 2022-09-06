@@ -59,7 +59,7 @@ MonoBehaviour:
     directives:
     - action:
         actionType: 1
-        targettingPriority: 5
+        targettingPriority: 05000000
         getRangeFromAbility: 0
         range: 0
         abilityName: Kick Dirt
@@ -76,21 +76,21 @@ MonoBehaviour:
         abilityName: 
     - action:
         actionType: 1
-        targettingPriority: 5
+        targettingPriority: 05000000
         getRangeFromAbility: 0
         range: 0
         abilityName: Chop
       requirements: []
     - action:
         actionType: 1
-        targettingPriority: 5
+        targettingPriority: 05000000
         getRangeFromAbility: 0
         range: 0
         abilityName: Throwing Knife
       requirements: []
     - action:
         actionType: 6
-        targettingPriority: 1
+        targettingPriority: 0500000001000000
         getRangeFromAbility: 0
         range: 0
         abilityName: 
@@ -107,7 +107,7 @@ MonoBehaviour:
         abilityName: 
     - action:
         actionType: 3
-        targettingPriority: 1
+        targettingPriority: 0500000001000000
         getRangeFromAbility: 1
         range: 0
         abilityName: Throwing Knife
@@ -134,7 +134,7 @@ MonoBehaviour:
         abilityName: Throwing Knife
     - action:
         actionType: 7
-        targettingPriority: 0
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: 
@@ -151,7 +151,7 @@ MonoBehaviour:
         abilityName: 
     - action:
         actionType: 2
-        targettingPriority: 1
+        targettingPriority: 0500000001000000
         getRangeFromAbility: 0
         range: 0
         abilityName: 
@@ -173,7 +173,7 @@ MonoBehaviour:
           passiveStacks: 1
         healthPercentage: 0
         enemiesInMeleeRange: 1
-        energyReq: 5
+        energyReq: 3
         alliesAlive: 0
         abilityName: 
       - requirementType: 8

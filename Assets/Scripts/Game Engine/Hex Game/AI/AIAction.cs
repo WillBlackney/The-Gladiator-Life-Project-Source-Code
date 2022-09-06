@@ -14,7 +14,7 @@ namespace HexGameEngine.AI
         public AIActionType actionType;
         [LabelWidth(100)]
         [ShowIf("ShowTargettingPriority")]
-        public TargettingPriority targettingPriority;
+        public TargettingPriority[] targettingPriority;
 
         [ShowIf("ShowGetRangeFromAbility")]
         [LabelWidth(150)]
@@ -77,7 +77,7 @@ namespace HexGameEngine.AI
         ClosestFriendlyTarget = 8,
         BestValidUnfriendlyTarget = 5,
         RandomValidUnfriendlyTarget = 6,
-        MostEndangeredFriendly = 7,
+        MostEndangeredValidFriendly = 7,
         RandomAlly = 3,
         RandomAllyOrSelf = 4,
         Self = 2,
