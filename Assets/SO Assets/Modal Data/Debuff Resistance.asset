@@ -16,8 +16,9 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: 675c2573fbae18e488227360a59b1b0d, type: 3}
   frameSprite: 1
   headerName: Debuff Resistance
+  italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: A character's stoutness when afflicted by harmful effects.

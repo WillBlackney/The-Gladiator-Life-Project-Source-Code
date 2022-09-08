@@ -16,8 +16,9 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: 23bc0e2715503ec49b686000057efcd1, type: 3}
   frameSprite: 1
   headerName: Aura
+  italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: The size of a character's presence on the battlefield and distance their

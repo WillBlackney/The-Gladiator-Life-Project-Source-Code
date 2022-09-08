@@ -16,11 +16,12 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: b8cc3ee699d6879408f7a38764df073c, type: 3}
   frameSprite: 1
   headerName: Injury Resistance
+  italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Represents a character's hardiness and resistance to savage blows.
+    phrase: Represents a character's hardiness and resistance to devastating blows.
   infoRows:
   - dotStyle: 1
     message:

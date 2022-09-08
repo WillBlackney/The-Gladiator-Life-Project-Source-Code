@@ -18,7 +18,7 @@ MonoBehaviour:
   headerName: Accuracy
   italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: A measure of a character's dexterity and form when aiming a weapon.

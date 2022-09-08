@@ -18,7 +18,7 @@ MonoBehaviour:
   headerName: Critical Chance
   italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: A character's agression and ability to strike at the soft spots of an

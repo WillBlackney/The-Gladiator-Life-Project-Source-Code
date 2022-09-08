@@ -16,9 +16,9 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: 92e7fd5e4eb79486fbcff490b15f7238, type: 3}
   frameSprite: 0
   headerName: Wits
-  italicDescription: 0
+  italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: Reflects a character's cunning and ability to perceive the world around
@@ -46,7 +46,7 @@ MonoBehaviour:
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
       phrase: .
-  - dotStyle: 0
+  - dotStyle: 1
     message:
     - color: 1
       getPhraseFromAbilityValue: 0

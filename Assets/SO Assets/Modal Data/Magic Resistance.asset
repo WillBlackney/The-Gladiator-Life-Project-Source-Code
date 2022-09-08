@@ -16,8 +16,9 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: ec25ad1917cdf2e468dcd89b1feaed7c, type: 3}
   frameSprite: 1
   headerName: Magic Resistance
+  italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: Represents a character's to ability absorb magical energy.

@@ -18,7 +18,7 @@ MonoBehaviour:
   headerName: Might
   italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: Reflects a character's raw physical power and how hard they hit with

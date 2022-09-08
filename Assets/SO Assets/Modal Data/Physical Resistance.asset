@@ -16,8 +16,9 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: 76624640c10ac80419b306cc74ac0ff2, type: 3}
   frameSprite: 1
   headerName: Physical Resistance
+  italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: The thickness of this character's skin, and density of their bones.

@@ -16,8 +16,9 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: 9d4b9ca0646768c4db76622e15798d66, type: 3}
   frameSprite: 1
   headerName: Max Energy
+  italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: Reflects the speed and duration at which a character can sprint and complete

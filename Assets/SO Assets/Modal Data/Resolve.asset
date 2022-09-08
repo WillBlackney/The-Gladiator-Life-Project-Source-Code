@@ -18,7 +18,7 @@ MonoBehaviour:
   headerName: Resolve
   italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: A measure of a character's courage and stubborness in the face of adversity.

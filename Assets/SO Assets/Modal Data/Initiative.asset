@@ -16,11 +16,12 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: 13ffcc2069c31f04a903b4250213dc40, type: 3}
   frameSprite: 1
   headerName: Initiative
+  italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Determines when this character gets to take their turn during combat.
+    phrase: Reflects a character's willingness to act and seize opportunities.
   infoRows:
   - dotStyle: 1
     message:

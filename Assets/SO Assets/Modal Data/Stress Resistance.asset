@@ -16,8 +16,9 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: b1c77b1c6df283d479a6172f8e360682, type: 3}
   frameSprite: 1
   headerName: Stress Resistance
+  italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: Reflects a character's mental fortitude and ability to remain calm under

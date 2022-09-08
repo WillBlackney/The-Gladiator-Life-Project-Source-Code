@@ -18,7 +18,7 @@ MonoBehaviour:
   headerName: Constitution
   italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Represents a character''s vitality and general health. '

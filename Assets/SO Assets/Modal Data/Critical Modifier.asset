@@ -16,8 +16,9 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: c12d138169e30fe4faf5e4e3f020f562, type: 3}
   frameSprite: 1
   headerName: Critical Modifier
+  italicDescription: 1
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: A character's brutality and luck when landing powerful blows.
