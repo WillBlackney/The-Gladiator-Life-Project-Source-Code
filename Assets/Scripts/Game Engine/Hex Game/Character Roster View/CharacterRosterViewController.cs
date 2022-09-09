@@ -223,11 +223,7 @@ namespace HexGameEngine.UI
         public void OnLevelUpAttributeButtonClicked()
         {
             attributeLevelUpPageComponent.ShowAndBuildPage(characterCurrentlyViewing);
-        }
-        public void OnLevelUpPerkButtonClicked()
-        {
-            talentLevelUpPage.ShowAndBuildForPerkReward(characterCurrentlyViewing);
-        }
+        }       
         public void OnLevelUpTalentButtonClicked()
         {
             talentLevelUpPage.ShowAndBuildForTalentReward(characterCurrentlyViewing);

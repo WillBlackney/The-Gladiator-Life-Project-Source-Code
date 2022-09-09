@@ -50,23 +50,7 @@ namespace HexGameEngine.UI
         #endregion
 
         // Logic
-        #region
-        public void ShowAndBuildForPerkReward(HexCharacterData character)
-        {
-            currentCharacter = character;
-            mainVisualParent.SetActive(true);
-            confirmButtonImage.sprite = notReadyImage;
-            headerText.text = "Choose a new perk!";
-
-            for(int i = 0; i < 3; i++)
-            {
-                allLevelUpCards[i].Reset();
-                //allLevelUpCards[i].BuildFromPerkData(character.perkRolls[0].perkChoices[i]);
-            }
-
-            UpdateConfirmButtonState();
-
-        }
+        #region       
         public void ShowAndBuildForTalentReward(HexCharacterData character)
         {
             currentCharacter = character;
