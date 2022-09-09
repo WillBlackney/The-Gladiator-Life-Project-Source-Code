@@ -19,8 +19,13 @@ namespace HexGameEngine.UWidget
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Event Data")]
-        [Tooltip("Events that will be triggered when the Widget is clicked")]
+        [Tooltip("Events that will be triggered when the Widget is clicked using the left mouse button")]
         [SerializeField] WidgetEventData[] onClickEvents;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+
+        [Header("Event Data")]
+        [Tooltip("Events that will be triggered when the Widget is clicked using the right mouse button")]
+        [SerializeField] WidgetEventData[] onRightClickEvents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Tooltip("Events that will be triggered during the first frame in which the user moves their mouse " +
@@ -70,6 +75,11 @@ namespace HexGameEngine.UWidget
             get { return onClickEvents; }
             private set { onClickEvents = value; }
         }
+        public WidgetEventData[] OnRightClickEvents
+        {
+            get { return onRightClickEvents; }
+            private set { onRightClickEvents = value; }
+        }
         public WidgetEventData[] MouseExitEvents
         {
             get { return mouseExitEvents; }
@@ -88,7 +98,15 @@ namespace HexGameEngine.UWidget
         {
             if (UWidgetController.Instance != null && inputType == WidgetInputType.IPointer)
             {
-                UWidgetController.Instance.HandleWidgetEvents(this, OnClickEvents);
+                if(eventData.button == PointerEventData.InputButton.Right)
+                {
+                    UWidgetController.Instance.HandleWidgetEvents(this, OnRightClickEvents);
+                }
+                else if (eventData.button == PointerEventData.InputButton.Left)
+                {
+                    UWidgetController.Instance.HandleWidgetEvents(this, OnClickEvents);
+                }
+               
             }
         }
         public void OnPointerEnter(PointerEventData eventData)
@@ -189,6 +207,28 @@ namespace HexGameEngine.UWidget
                 if (OnClickEvents[i].transformToMove != null && !OnClickEvents[i].OriginalPositionIsSet)
                 {
                     OnClickEvents[i].SetOriginalPosition(OnClickEvents[i].transformToMove.localPosition);
+                }
+
+            }
+
+            // Set up on right click events
+            for (int i = 0; i < onRightClickEvents.Length; i++)
+            {
+                if (OnRightClickEvents[i].transformToScale != null && !OnRightClickEvents[i].OriginalScaleIsSet)
+                {
+                    OnRightClickEvents[i].SetOriginalScale(OnRightClickEvents[i].transformToScale.localScale);
+                }
+                if (OnRightClickEvents[i].transformToWiggle != null && !OnRightClickEvents[i].OriginalPositionIsSet)
+                {
+                    OnRightClickEvents[i].SetOriginalPosition(OnRightClickEvents[i].transformToWiggle.localPosition);
+                }
+                if (OnRightClickEvents[i].transformToWiggle != null && !OnRightClickEvents[i].OriginalRotationIsSet)
+                {
+                    OnRightClickEvents[i].SetOriginalRotation(OnRightClickEvents[i].transformToWiggle.localRotation.eulerAngles);
+                }
+                if (OnRightClickEvents[i].transformToMove != null && !OnRightClickEvents[i].OriginalPositionIsSet)
+                {
+                    OnRightClickEvents[i].SetOriginalPosition(OnRightClickEvents[i].transformToMove.localPosition);
                 }
 
             }

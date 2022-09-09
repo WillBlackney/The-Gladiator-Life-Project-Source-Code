@@ -106,6 +106,12 @@ namespace HexGameEngine.Characters
                 UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)            
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(this, null, 0.25f, 0.25f);            
         }
+        public void OnModelRightClick()
+        {
+            if(character != null && 
+                character.controller != Controller.Player)         
+                EnemyInfoPanel.Instance.HandleBuildAndShowPanel(character.characterData);            
+        }
         #endregion
 
         // Misc

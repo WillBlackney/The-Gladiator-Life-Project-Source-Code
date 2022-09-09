@@ -492,6 +492,7 @@ namespace HexGameEngine.UI
         Level = 26,
         AbilityTome = 27,
         Experience = 28,
+        ExperienceReward = 33,
         Gold = 30,
         
         Armour = 31,

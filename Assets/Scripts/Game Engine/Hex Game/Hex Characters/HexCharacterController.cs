@@ -285,6 +285,7 @@ namespace HexGameEngine.Characters
             // Set general info
             character.myName = data.myName;
             character.race = data.race;
+            character.characterData = data;
             //character.audioProfile = data.audioProfile;
 
             // Setup stats
@@ -313,7 +314,7 @@ namespace HexGameEngine.Characters
             TurnController.Instance.CreateActivationWindow(character);
 
             // Set up items
-            Items.ItemController.Instance.RunItemSetupOnHexCharacterFromItemSet(character, data.itemSet);
+            ItemController.Instance.RunItemSetupOnHexCharacterFromItemSet(character, data.itemSet);
 
             // Setup abilities
             AbilityController.Instance.BuildHexCharacterAbilityBookFromData(character, data.abilityBook);
