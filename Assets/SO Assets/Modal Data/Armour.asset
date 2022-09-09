@@ -16,7 +16,7 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: e00201374ca2040ee847d9d26dadbcbe, type: 3}
   frameSprite: 0
   headerName: Armour
-  italicDescription: 1
+  italicDescription: 0
   description:
   - color: 3
     getPhraseFromAbilityValue: 0

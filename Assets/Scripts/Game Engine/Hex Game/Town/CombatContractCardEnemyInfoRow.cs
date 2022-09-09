@@ -16,16 +16,24 @@ namespace HexGameEngine.TownFeatures
     public class CombatContractCardEnemyInfoRow : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI enemyNameText;
+        [SerializeField] HexCharacterData myCharacterData;
 
         public void BuildFromEnemyData(CharacterWithSpawnData data)
         {
             gameObject.SetActive(true);
+            myCharacterData = data.characterData;
             enemyNameText.text = data.characterData.myName;
         }
         public void HideAndReset()
         {
+            myCharacterData = null;
             enemyNameText.text = "";
             gameObject.SetActive(false);
+        }
+
+        public void OnClick()
+        {
+            EnemyInfoPanel.Instance.HandleBuildAndShowPanel(myCharacterData);
         }
 
     }
