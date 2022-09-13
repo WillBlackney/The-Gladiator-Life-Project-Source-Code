@@ -24,6 +24,8 @@ namespace HexGameEngine.RewardSystems
 
         [Header("Text Components")]
         [SerializeField] private TextMeshProUGUI nameText;
+        [SerializeField] private TextMeshProUGUI subNameText;
+        [SerializeField] private TextMeshProUGUI currentLevelText;
         [SerializeField] private TextMeshProUGUI xpText;
         [SerializeField] private TextMeshProUGUI healthLostText;
         [SerializeField] private TextMeshProUGUI stressGainedText;
@@ -59,9 +61,17 @@ namespace HexGameEngine.RewardSystems
         {
             get { return injuryIcons; }
         }
+        public TextMeshProUGUI CurrentLevelText
+        {
+            get { return currentLevelText; }
+        }
         public TextMeshProUGUI NameText
         {
             get { return nameText; }
+        }
+        public TextMeshProUGUI SubNameText
+        {
+            get { return subNameText; }
         }
         public TextMeshProUGUI XpText
         {

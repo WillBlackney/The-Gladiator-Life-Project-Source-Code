@@ -31,8 +31,9 @@ namespace HexGameEngine.RewardSystems
         [SerializeField] private TextMeshProUGUI headerText;
         [SerializeField] private GameObject characterStatPageVisualParent;
         [SerializeField] private GameObject lootPageVisualParent;
-        [SerializeField] private CharacterCombatStatCard[] allCharacterStatCards;
-        [SerializeField] private GameObject[] statCardRows;
+        [SerializeField] private List<CharacterCombatStatCard> allCharacterStatCards;
+        [SerializeField] private GameObject characterStatCardPrefab;
+        [SerializeField] private Transform characterStatCardParent;
         [SerializeField] private CombatLootIcon[] lootIcons;
 
         [Header("Game Over Screen Components")]
@@ -187,19 +188,17 @@ namespace HexGameEngine.RewardSystems
             // Reset views
             foreach (CharacterCombatStatCard c in allCharacterStatCards)
                 c.gameObject.SetActive(false);
-            foreach (GameObject g in statCardRows)
-                g.SetActive(false);
 
             // Build a card for each character
             for (int i = 0; i < data.Count; i++)
             {
+                if(allCharacterStatCards.Count <= i)
+                {
+                    CharacterCombatStatCard newCard = Instantiate(characterStatCardPrefab, characterStatCardParent).GetComponent<CharacterCombatStatCard>();
+                    allCharacterStatCards.Add(newCard);
+                }
                 BuildStatCardFromStatData(allCharacterStatCards[i], data[i]);
             }
-
-            // enable rows
-            int rowsToShow = 1 + (data.Count / 3);
-            for (int i = 0; i < rowsToShow; i++)
-                statCardRows[i].SetActive(true);
         }
         private void BuildStatCardFromStatData(CharacterCombatStatCard card, CharacterCombatStatData data)
         {
@@ -216,9 +215,7 @@ namespace HexGameEngine.RewardSystems
             card.gameObject.SetActive(true);
 
             // ucm 
-            CharacterModeller.BuildModelFromStringReferencesAsMugshot(card.Ucm, character.modelParts);
-
-            
+            CharacterModeller.BuildModelFromStringReferencesAsMugshot(card.Ucm, character.modelParts);            
 
             // Knock down views setup
             if (data.permanentInjuriesGained.Count > 0)            
@@ -232,7 +229,9 @@ namespace HexGameEngine.RewardSystems
             }
 
             // text fields
-            card.NameText.text = character.myName;
+            card.NameText.text = character.myName; 
+            card.SubNameText.text = character.myClassName;
+            card.CurrentLevelText.text = character.currentLevel.ToString();
             card.XpText.text = data.xpGained.ToString();
             card.HealthLostText.text = data.healthLost.ToString();
             card.StressGainedText.text = data.stressGained.ToString();
