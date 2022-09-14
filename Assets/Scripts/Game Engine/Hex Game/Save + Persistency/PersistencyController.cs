@@ -102,7 +102,7 @@ namespace HexGameEngine.Persistency
             CharacterDataController.Instance.SaveMyDataToSaveFile(newSave);
             TownController.Instance.SaveMyDataToSaveFile(newSave);
             PlayerDataController.Instance.SaveMyDataToSaveFile(newSave);
-            RewardController.Instance.SaveMyDataToSaveFile(newSave);
+            CombatRewardController.Instance.SaveMyDataToSaveFile(newSave);
             InventoryController.Instance.SaveMyDataToSaveFile(newSave);
 
             // START SAVE!        
@@ -122,7 +122,7 @@ namespace HexGameEngine.Persistency
             CharacterDataController.Instance.BuildMyDataFromSaveFile(newLoad);
             TownController.Instance.BuildMyDataFromSaveFile(newLoad);
             PlayerDataController.Instance.BuildMyDataFromSaveFile(newLoad);
-            RewardController.Instance.BuildMyDataFromSaveFile(newLoad);
+            CombatRewardController.Instance.BuildMyDataFromSaveFile(newLoad);
             InventoryController.Instance.BuildMyDataFromSaveFile(newLoad);
         }
         #endregion

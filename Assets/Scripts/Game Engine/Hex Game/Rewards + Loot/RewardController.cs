@@ -11,6 +11,7 @@ using Sirenix.OdinInspector;
 using HexGameEngine.Cards;
 using HexGameEngine.Persistency;
 
+// free to delete this class in future as its not longer used
 namespace HexGameEngine.RewardSystems
 {
     public class RewardController : Singleton<RewardController>

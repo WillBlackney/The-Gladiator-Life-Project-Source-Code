@@ -19,7 +19,7 @@ using HexGameEngine.Player;
 using HexGameEngine.Items;
 using TMPro;
 using HexGameEngine.UI;
-
+using UnityEngine.UI;
 namespace HexGameEngine.RewardSystems
 {
     public class CombatRewardController : Singleton<CombatRewardController>
@@ -34,7 +34,13 @@ namespace HexGameEngine.RewardSystems
         [SerializeField] private List<CharacterCombatStatCard> allCharacterStatCards;
         [SerializeField] private GameObject characterStatCardPrefab;
         [SerializeField] private Transform characterStatCardParent;
-        [SerializeField] private CombatLootIcon[] lootIcons;
+        [SerializeField] private List<CombatLootIcon> lootIcons;
+
+        [Header("Button Components")]
+        [SerializeField] Sprite selectedButtonSprite;
+        [SerializeField] Sprite unselectedButtonSprite;
+        [SerializeField] Image statsHeaderButtonImage;
+        [SerializeField] Image lootHeaderButtonImage;
 
         [Header("Game Over Screen Components")]
         [SerializeField] private GameObject gameOverVisualParent;
@@ -167,6 +173,8 @@ namespace HexGameEngine.RewardSystems
             characterStatPageVisualParent.SetActive(true);
             currentWindowViewing = WindowState.CharactersPage;
             lootPageVisualParent.SetActive(false);
+            statsHeaderButtonImage.sprite = selectedButtonSprite;
+            lootHeaderButtonImage.sprite = unselectedButtonSprite;
             BuildCharacterStatCardPage(data);
             if (victory)
             {
@@ -176,7 +184,7 @@ namespace HexGameEngine.RewardSystems
             else
             {
                 // Hide Loot Icons
-                for (int i = 0; i < lootIcons.Length; i++)
+                for (int i = 0; i < lootIcons.Count; i++)
                     lootIcons[i].Reset();
 
                 headerText.text = "DEFEAT!";
@@ -254,7 +262,7 @@ namespace HexGameEngine.RewardSystems
         }
         private void BuildLootPageFromContractLootData(CombatContractData contract)
         {
-            for(int i = 0; i < lootIcons.Length;i++)            
+            for(int i = 0; i < lootIcons.Count;i++)            
                 lootIcons[i].Reset();
 
             int iconIndex = 0;
@@ -286,6 +294,10 @@ namespace HexGameEngine.RewardSystems
                 currentWindowViewing = WindowState.CharactersPage;
                 characterStatPageVisualParent.SetActive(true);
                 lootPageVisualParent.SetActive(false);
+
+                // set button states
+                statsHeaderButtonImage.sprite = selectedButtonSprite;
+                lootHeaderButtonImage.sprite = unselectedButtonSprite;
             }
         }
         public void OnLootButtonClicked()
@@ -295,16 +307,16 @@ namespace HexGameEngine.RewardSystems
                 currentWindowViewing = WindowState.LootPage;
                 characterStatPageVisualParent.SetActive(false);
                 lootPageVisualParent.SetActive(true);
+
+                // set button states
+                statsHeaderButtonImage.sprite = unselectedButtonSprite;
+                lootHeaderButtonImage.sprite = selectedButtonSprite;
             }
         }
         public void OnContinueButtonClicked()
         {
-            if (currentWindowViewing == WindowState.CharactersPage)
-                OnLootButtonClicked();
-            else
-            {
-                GameController.Instance.HandlePostCombatToTownTransistion();
-            }
+            if (currentWindowViewing == WindowState.CharactersPage) OnLootButtonClicked();
+            else GameController.Instance.HandlePostCombatToTownTransistion();            
         }
 
         #endregion

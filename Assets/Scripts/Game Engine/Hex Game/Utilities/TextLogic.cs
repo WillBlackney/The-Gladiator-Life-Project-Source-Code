@@ -53,7 +53,8 @@ namespace HexGameEngine.Utilities
         {
             // Just give it a string and a color reference,
             // and this function takes care of everything
-            return (color + text + white);
+            if (color == "") return text;
+            return (color + text + "</color>");
         }
         private static string GetColorCodeFromEnum(TextColor color)
         {
@@ -115,11 +116,6 @@ namespace HexGameEngine.Utilities
             else if (color == TextColor.RareTextBlue)
             {
                 colorCodeReturned = rareTextBlue;
-            }
-
-            else
-            {
-                colorCodeReturned = white;
             }
 
             return colorCodeReturned;
