@@ -210,6 +210,16 @@ namespace HexGameEngine.Perks
                 if (p.isRewardable) perks.Add(p); 
             return perks;
         }
+        public List<ActivePerk> GetAllLevelUpPerksOnCharacter(HexCharacterData character)
+        {
+            List<ActivePerk> perks = new List<ActivePerk>();
+            foreach (ActivePerk ap in character.passiveManager.perks)
+            {
+                if (ap.Data.isRewardable)
+                    perks.Add(ap);
+            }
+            return perks;
+        }
         public List<PerkIconData> GetValidLevelUpPerksForCharacter(HexCharacterData character)
         {
             return null;
@@ -256,8 +266,8 @@ namespace HexGameEngine.Perks
         public void BuildPassiveManagerFromOtherPassiveManager(PerkManagerModel originalData, PerkManagerModel newClone)
         {
             Debug.Log("PassiveController.BuildPassiveManagerFromOtherPassiveManager() called...");
-
-            foreach(ActivePerk ap in originalData.perks)
+            newClone.perks.Clear();
+            foreach (ActivePerk ap in originalData.perks)
             {
                 ModifyPerkOnCharacterEntity(newClone, ap.perkTag, ap.stacks, false);
             }
@@ -355,7 +365,8 @@ namespace HexGameEngine.Perks
 
             // Check specific resistances
             // Undead = immune to bleeding
-            if (character.race == CharacterRace.Undead && 
+            if (character != null &&
+                character.race == CharacterRace.Undead && 
                 character.controller == Controller.Player &&
                 perk == Perk.Bleeding)
             {
@@ -365,7 +376,7 @@ namespace HexGameEngine.Perks
             }
 
             // Check for rune
-            if (ShouldRuneBlockThisPassiveApplication(pManager, perkData, stacks))
+            if (ShouldRuneBlockThisPassiveApplication(pManager, perkData, stacks) && character != null)
             {
                 // Character is protected by rune: Cancel this status application, remove a rune, then return.
                 Debug.Log("ModifyPerkOnCharacterEntity() cancelling application of " + perkName + " as character is protected by Rune.");                

@@ -637,10 +637,11 @@ namespace HexGameEngine.Characters
                 data.attributeRolls.Add(AttributeRollResult.GenerateRoll(data));
 
                 // Gain perk level up
-                data.perkPoints++;
+                if(PerkController.Instance.GetAllLevelUpPerksOnCharacter(data).Count < 5)
+                    data.perkPoints++;
 
                 // Gain talent level up
-                if (data.currentLevel == 3 || data.currentLevel == 5)
+                if ((data.currentLevel == 3 || data.currentLevel == 5) && data.talentPairings.Count < 3)
                     data.talentRolls.Add(TalentRollResult.GenerateRoll(data));
 
                 // Reset current xp
@@ -665,10 +666,11 @@ namespace HexGameEngine.Characters
                 data.attributeRolls.Add(AttributeRollResult.GenerateRoll(data));
 
                 // Gain perk level up
-                data.perkPoints++;
+                if (PerkController.Instance.GetAllLevelUpPerksOnCharacter(data).Count < 5)
+                    data.perkPoints++;
 
                 // Gain talent level up
-                if (data.currentLevel == 3 || data.currentLevel == 5)
+                if ((data.currentLevel == 3 || data.currentLevel == 5) && data.talentPairings.Count < 3)
                     data.talentRolls.Add(TalentRollResult.GenerateRoll(data));
 
                 // Reset current xp
