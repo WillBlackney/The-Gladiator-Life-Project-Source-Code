@@ -22,22 +22,22 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'A characters current level. Characters start at level '
-  - color: 0
+  - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: '1 '
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'and can reach a maximum of level '
-  - color: 0
+  - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 6
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: . When characters level up, their
+    phrase: '. When characters level up, their '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -45,11 +45,11 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'increase and they gain a new '
+    phrase: 'increase and they gain a '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Perk
+    phrase: Perk Point
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -69,11 +69,11 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: ', they gain a new '
+    phrase: ', they also gain a '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Talent
+    phrase: Talent Point
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

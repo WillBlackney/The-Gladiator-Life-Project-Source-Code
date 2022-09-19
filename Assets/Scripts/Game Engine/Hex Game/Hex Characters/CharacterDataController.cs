@@ -514,8 +514,8 @@ namespace HexGameEngine.Characters
             {
                 if (!DoesCharacterHaveTalent(character.talentPairings, ts, 1))
                     ret.Add(new TalentPairing(ts, 1));
-                else if (!DoesCharacterHaveTalent(character.talentPairings, ts, 2))
-                    ret.Add(new TalentPairing(ts, 2));
+               // else if (!DoesCharacterHaveTalent(character.talentPairings, ts, 2))
+               //     ret.Add(new TalentPairing(ts, 2));
             }
 
             List<TalentPairing> invalidPairings = new List<TalentPairing>();
@@ -523,7 +523,7 @@ namespace HexGameEngine.Characters
             // filter out invalid perks
             foreach (TalentPairing p in ret)
             {
-                // check if perk was previously offered in another roll
+                // check if talent was previously offered in another roll
                 foreach (TalentRollResult roll in character.talentRolls)
                 {
                     foreach (TalentPairing p2 in roll.talentChoices)

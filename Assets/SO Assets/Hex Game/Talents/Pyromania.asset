@@ -34,7 +34,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'more damage per point when attacking '
+    phrase: 'more damage when attacking '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

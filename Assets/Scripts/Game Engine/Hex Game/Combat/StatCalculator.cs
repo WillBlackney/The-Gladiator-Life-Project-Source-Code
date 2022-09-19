@@ -939,7 +939,7 @@ namespace HexGameEngine
 
             // Guardian talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Guardian, 1))
-                resistanceReturned += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Guardian) * 5;
+                resistanceReturned += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Guardian) * 10;
 
             // hard Noggin
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HardNoggin))
@@ -966,7 +966,7 @@ namespace HexGameEngine
 
             // Guardian talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Guardian, 1))
-                resistanceReturned += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Guardian) * 5;
+                resistanceReturned += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Guardian) * 10;
 
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.PhysicalResistance, c.itemSet);
@@ -980,7 +980,7 @@ namespace HexGameEngine
 
             // Naturalism talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Naturalism, 1))
-                resistanceReturned += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Naturalism) * 8;
+                resistanceReturned += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Naturalism) * 10;
 
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicResistance, c.itemSet);
@@ -994,7 +994,7 @@ namespace HexGameEngine
 
             // Naturalism talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Naturalism, 1))
-                resistanceReturned += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Naturalism) * 8;
+                resistanceReturned += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Naturalism) * 10;
             
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicResistance, c.itemSet);

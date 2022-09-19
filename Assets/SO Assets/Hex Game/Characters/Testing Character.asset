@@ -36,8 +36,8 @@ MonoBehaviour:
       value: 5
       stars: 0
     maxHealth: 0
-    energyRecovery: 16
-    maxEnergy: 16
+    energyRecovery: 8
+    maxEnergy: 8
     initiative: 100
     criticalChance: 100
     criticalModifier: 50
@@ -57,7 +57,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
     - {fileID: 11400000, guid: e270d32e998f6e34fa639b54342d93e8, type: 2}
   serializedPassiveManager:
-    perks: []
+    perks:
+    - perkTag: 18
+      stacks: 1
   modelParts:
   - Ghoul_Chest
   - Undead_Face_6

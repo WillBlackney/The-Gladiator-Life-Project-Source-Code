@@ -30,7 +30,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '5 '
+    phrase: '10 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: per point.
+    phrase: .
   keyWords:
   - kewWordType: 27
     passiveType: 0

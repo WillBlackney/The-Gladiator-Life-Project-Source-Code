@@ -77,7 +77,6 @@ namespace HexGameEngine.Combat
                 LevelController.Instance.UnmarkAllTiles();
                 LevelController.Instance.HandleMoveDownPath(character, currentPath);
                 ResetSelectionState();
-
             }
 
             // New hex selection

@@ -40,7 +40,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: against your harmful effects per point.
+    phrase: against your harmful effect.
   keyWords:
   - kewWordType: 16
     passiveType: 0

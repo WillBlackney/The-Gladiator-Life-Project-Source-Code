@@ -44,7 +44,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: more damage per point.
+    phrase: more damage.
   keyWords:
   - kewWordType: 20
     passiveType: 0

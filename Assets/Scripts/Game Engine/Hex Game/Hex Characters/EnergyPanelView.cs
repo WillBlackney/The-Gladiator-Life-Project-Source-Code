@@ -33,7 +33,8 @@ namespace HexGameEngine.Characters
         }
         public void OnAbilityButtonMouseEnter(int characterEnergy, int abilityEnergyCost)
         {
-            for(int i = characterEnergy; i > characterEnergy - abilityEnergyCost && i > 0 && i <= energyIcons.Length; i--)
+            UpdateIcons(characterEnergy);
+            for (int i = characterEnergy; i > characterEnergy - abilityEnergyCost && i > 0 && i <= energyIcons.Length; i--)
             {
                 energyIcons[i - 1].SetViewState(EnergyIconViewState.Red, 0.25f);
             }

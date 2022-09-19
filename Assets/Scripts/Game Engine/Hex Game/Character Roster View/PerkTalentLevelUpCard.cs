@@ -111,7 +111,7 @@ namespace HexGameEngine.UI
         {
             gameObject.SetActive(true);
             talentData = tp;
-            nameText.text = tp.talentSchool.ToString() + " " + tp.level.ToString();
+            nameText.text = tp.talentSchool.ToString(); //+ " " + tp.level.ToString();
             TalentDataSO data = CharacterDataController.Instance.GetTalentDataFromTalentEnum(tp.talentSchool);
             descriptionText.text = TextLogic.ConvertCustomStringListToString(data.talentDescription);
             artImage.sprite = data.talentSprite;

@@ -34,5 +34,5 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: per point.
+    phrase: .
   keyWords: []
