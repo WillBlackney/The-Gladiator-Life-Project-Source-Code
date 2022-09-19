@@ -110,6 +110,7 @@ namespace HexGameEngine.UI
             CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
 
             // Update scroll panel views
+            /*
             if(currentCharacter.attributeRolls.Count == 0 && 
                 currentCharacter.talentRolls.Count == 0 && 
                 currentCharacter.perkPoints == 0)
@@ -117,6 +118,8 @@ namespace HexGameEngine.UI
                 // Rebuild character scroll roster
                 CharacterScrollPanelController.Instance.RebuildViews();
             }
+            */
+            CharacterScrollPanelController.Instance.RebuildViews();
         }
         #endregion
     }

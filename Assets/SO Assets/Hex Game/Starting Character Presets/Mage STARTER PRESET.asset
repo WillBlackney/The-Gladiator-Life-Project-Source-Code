@@ -27,7 +27,7 @@ MonoBehaviour:
       value: 0
       stars: 0
     accuracy:
-      value: 80
+      value: 65
       stars: 0
     resolve:
       value: 5

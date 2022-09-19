@@ -226,6 +226,7 @@ MonoBehaviour:
   inputType: 0
   killPreviousTweensOnNewSequenceStart: 1
   onClickEvents: []
+  onRightClickEvents: []
   mouseEnterEvents:
   - widgetEventType: 3
     scalingSequence: 0
@@ -5379,6 +5380,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 43
       objectReference: {fileID: 0}
+    - target: {fileID: 1905549222428243236, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 1906644786885100067, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_BackSortingOrder
@@ -11629,6 +11635,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 43
       objectReference: {fileID: 0}
+    - target: {fileID: 5798781086506310568, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5801647445941342063, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_BackSortingOrder

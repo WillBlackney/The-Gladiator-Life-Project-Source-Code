@@ -1,8 +1,10 @@
 ﻿using DG.Tweening;
+using HexGameEngine.Abilities;
 using HexGameEngine.Audio;
 using HexGameEngine.CameraSystems;
 using HexGameEngine.Camping;
 using HexGameEngine.Characters;
+using HexGameEngine.Combat;
 using HexGameEngine.HexTiles;
 using HexGameEngine.Items;
 using HexGameEngine.JourneyLogic;
@@ -269,8 +271,12 @@ namespace HexGameEngine
             // Destroy Activation windows
             TurnController.Instance.DestroyAllActivationWindows();
 
-            // Hide combat UI
+            // Hide combat UI + Popup Modals
             CombatUIController.Instance.HideViewsOnTurnEnd();
+            LevelController.Instance.HideTileInfoPopup();
+            AbilityController.Instance.HideHitChancePopup();
+            AbilityPopupController.Instance.HidePanel();
+            MoveActionController.Instance.HidePathCostPopup();
 
             // Determine characters to reward XP to
             List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();
@@ -420,7 +426,7 @@ namespace HexGameEngine
 
             // Tear down combat views
             HexCharacterController.Instance.HandleTearDownCombatScene();
-            LevelController.Instance.HandleTearDownCombatViews();
+            LevelController.Instance.HandleTearDownAllCombatViews();
             LightController.Instance.EnableStandardGlobalLight();
             CombatRewardController.Instance.HidePostCombatRewardScreen();
 
@@ -538,7 +544,7 @@ namespace HexGameEngine
 
             TownController.Instance.TearDownOnExitToMainMenu();
             CharacterScrollPanelController.Instance.HideMainView();
-            LevelController.Instance.HandleTearDownCombatViews();
+            LevelController.Instance.HandleTearDownAllCombatViews();
             LightController.Instance.EnableStandardGlobalLight();
 
             // Hide UI + level views

@@ -90,7 +90,7 @@ namespace HexGameEngine.HexTiles
 
         // Map Generation + Teardown
         #region
-        public void HandleTearDownCombatViews()
+        public void HandleTearDownAllCombatViews()
         {
             AbilityController.Instance.HideHitChancePopup();
             AbilityPopupController.Instance.HidePanel();
@@ -952,6 +952,8 @@ namespace HexGameEngine.HexTiles
         #region
         private IEnumerator ShowTileInfoPopup(LevelNode destination, LevelNode start = null)
         {
+            if (GameController.Instance.GameState != GameState.CombatActive) yield break;
+
             yield return new WaitForSeconds(popupDelay);
             if (HexMousedOver != destination) yield break;
 
@@ -1027,7 +1029,7 @@ namespace HexGameEngine.HexTiles
                     LayoutRebuilder.ForceRebuildLayoutImmediate(rt);                
             }
         }
-        private void HideTileInfoPopup()
+        public void HideTileInfoPopup()
         {
             tileInfoCg.alpha = 1;
             tileInfoVisualParent.SetActive(false);
