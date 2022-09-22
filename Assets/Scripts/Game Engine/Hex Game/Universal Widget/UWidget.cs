@@ -23,7 +23,6 @@ namespace HexGameEngine.UWidget
         [SerializeField] WidgetEventData[] onClickEvents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        [Header("Event Data")]
         [Tooltip("Events that will be triggered when the Widget is clicked using the right mouse button")]
         [SerializeField] WidgetEventData[] onRightClickEvents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
@@ -129,11 +128,14 @@ namespace HexGameEngine.UWidget
 
         }
 
-        public void OnMouseDown()
+        public void OnMouseOver()
         {
             if (UWidgetController.Instance != null && inputType == WidgetInputType.Collider)
             {
-                UWidgetController.Instance.HandleWidgetEvents(this, OnClickEvents);
+                if(Input.GetKeyDown(KeyCode.Mouse1))
+                    UWidgetController.Instance.HandleWidgetEvents(this, OnRightClickEvents);
+                else if (Input.GetKeyDown(KeyCode.Mouse0))
+                    UWidgetController.Instance.HandleWidgetEvents(this, OnClickEvents);
             }
         }
         public void OnMouseEnter()
