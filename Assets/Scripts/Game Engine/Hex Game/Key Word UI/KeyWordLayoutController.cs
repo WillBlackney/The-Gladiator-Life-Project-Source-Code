@@ -184,7 +184,8 @@ namespace HexGameEngine.UI
         private void EnableMainView()
         {
             visualParent.SetActive(true);
-            if (GameController.Instance.GameState == GameState.CombatActive)
+            if (GameController.Instance.GameState == GameState.CombatActive ||
+                GameController.Instance.GameState == GameState.MainMenu)
                 panelFitterParent.position = combatPos.position;
             else panelFitterParent.position = normalPos.position;
         }

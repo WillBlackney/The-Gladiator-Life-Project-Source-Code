@@ -374,7 +374,7 @@ namespace HexGameEngine.UI
         }
         private void BuildModalContent(TalentPairing tp)
         {
-            headerText.text = TextLogic.SplitByCapitals(tp.talentSchool.ToString()) + " (" + tp.level + ")";
+            headerText.text = TextLogic.SplitByCapitals(tp.talentSchool.ToString());
 
             // Main Image
             framedImageParent.SetActive(true);
