@@ -57,7 +57,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 993e8338c564e804fb94a571dc1a86c7, type: 2}
     - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
   serializedPassiveManager:
-    perks: []
+    perks:
+    - perkTag: 58
+      stacks: 1
   modelParts:
   - Human_Chest
   - Human_Face_1
@@ -66,8 +68,8 @@ MonoBehaviour:
   - Human_Right_Hand
   - Human_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
-    offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 12b837d9baaf68e4eb55cfab4ef25cbd, type: 2}
+    offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: 50abf88b96467f9438dfec4ded22f4b5, type: 2}
     chestArmour: {fileID: 11400000, guid: ae8cf90ad093c0e4682a7455d7737a9e, type: 2}
     trinket: {fileID: 0}

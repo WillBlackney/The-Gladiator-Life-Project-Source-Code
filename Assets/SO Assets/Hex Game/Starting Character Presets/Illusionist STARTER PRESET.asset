@@ -57,7 +57,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: dbf70824a5994e0449938fd3bee091ad, type: 2}
     - {fileID: 11400000, guid: d0524e894377b9e47bce3ed475daf53c, type: 2}
   serializedPassiveManager:
-    perks: []
+    perks:
+    - perkTag: 17
+      stacks: 1
   modelParts:
   - Human_Chest
   - Human_Face_1

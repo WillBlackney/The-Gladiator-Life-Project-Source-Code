@@ -26,9 +26,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'abilities.
-
-      Enemies have '
+    phrase: 'abilities. Enemies have '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -36,11 +34,11 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Debuff Resistance
+    phrase: 'Debuff Resistance '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: against your harmful effect.
+    phrase: against your harmful effects.
   keyWords:
   - kewWordType: 16
     passiveType: 0
