@@ -71,4 +71,12 @@ MonoBehaviour:
     headArmour: {fileID: 11400000, guid: 335c81cb722666345aa6c308b1d780f5, type: 2}
     chestArmour: {fileID: 11400000, guid: 885404dfa0107114abd21b026368a161, type: 2}
     trinket: {fileID: 0}
-  talentPairings: []
+  talentPairings:
+  - talentSchool: 2
+    level: 1
+  - talentSchool: 3
+    level: 0
+  - talentSchool: 6
+    level: 0
+  - talentSchool: 5
+    level: 0
