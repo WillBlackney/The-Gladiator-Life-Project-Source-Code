@@ -92,7 +92,7 @@ namespace HexGameEngine
         private void RunSandboxTown()
         {
             // Set state
-            SetGameState(GameState.NonCombatEvent);
+            SetGameState(GameState.Town);
 
             // Show UI
             TopBarController.Instance.ShowMainTopBar();
@@ -471,6 +471,9 @@ namespace HexGameEngine
             BlackScreenController.Instance.FadeOutScreen(2f);
             yield return new WaitForSeconds(2f);
 
+            // Set state
+            SetGameState(GameState.Town);
+
             // Enable GUI
             TopBarController.Instance.ShowMainTopBar();
 
@@ -519,6 +522,9 @@ namespace HexGameEngine
 
             // Wait till its safe to tearn down event queue and scene
             yield return new WaitForSeconds(2f);
+
+            // Set menu state
+            SetGameState(GameState.MainMenu);
 
             // Pause run timer
             RunController.Instance.PauseTimer();
@@ -834,5 +840,6 @@ namespace HexGameEngine
         CombatActive = 1,
         CombatRewardPhase = 2,
         NonCombatEvent = 3,
+        Town = 4
     }
 }

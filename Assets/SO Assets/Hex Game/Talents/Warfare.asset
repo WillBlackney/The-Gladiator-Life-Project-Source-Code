@@ -26,7 +26,7 @@ MonoBehaviour:
   - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: "abilities. \nGain "
+    phrase: 'abilities. Gain '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

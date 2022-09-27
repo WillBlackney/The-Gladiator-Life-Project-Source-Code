@@ -405,7 +405,7 @@ namespace HexGameEngine.TownFeatures
             {
                 // Validation
                 // Cant heal characters already at full health
-                if (slot.FeatureType == TownActivity.BedRest && draggedCharacter.currentHealth == StatCalculator.GetTotalMaxHealth(draggedCharacter)) return;
+                if (slot.FeatureType == TownActivity.BedRest && draggedCharacter.currentHealth >= StatCalculator.GetTotalMaxHealth(draggedCharacter)) return;
 
                 // Cant stress heal characters already at 0 stress
                 if (slot.FeatureType == TownActivity.Therapy && draggedCharacter.currentStress == 0) return;

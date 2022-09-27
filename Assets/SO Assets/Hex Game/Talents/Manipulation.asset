@@ -23,10 +23,10 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Manipulation '
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: "abilities. \nGain "
+    phrase: 'abilities. Gain '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
