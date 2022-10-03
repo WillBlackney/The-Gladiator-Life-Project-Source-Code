@@ -27,7 +27,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Energy
+    phrase: Action Points
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

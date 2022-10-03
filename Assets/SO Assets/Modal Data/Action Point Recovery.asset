@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: accb5c33da2a75e479ff64dac541103c, type: 3}
-  m_Name: Energy Recovery
+  m_Name: Action Point Recovery
   m_EditorClassIdentifier: 
   myPreset: 13
   mainSprite: {fileID: 21300000, guid: 5b789f3e7b59e4e4a85f5dc3ddc07c4d, type: 3}
   frameSprite: 1
-  headerName: Energy Recovery
+  headerName: Action Point Recovery
   italicDescription: 1
   description:
   - color: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Energy '
+      phrase: 'Action Points '
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
@@ -40,8 +40,8 @@ MonoBehaviour:
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: Energy Recovery
+      phrase: 'Action Point Recovery '
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: ' attribute.'
+      phrase: attribute.

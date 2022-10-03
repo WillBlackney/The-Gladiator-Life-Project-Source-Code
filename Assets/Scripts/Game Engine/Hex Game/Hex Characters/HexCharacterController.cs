@@ -252,7 +252,7 @@ namespace HexGameEngine.Characters
             PerkController.Instance.BuildPlayerCharacterEntityPassivesFromCharacterData(character, data);
 
             // Set up health, armour, energy + stress with views
-            ModifyBaseMaxEnergy(character, 0); // modify by 0 just to update views
+            ModifyBaseMaxActionPoints(character, 0); // modify by 0 just to update views
             ModifyMaxHealth(character, 0); // modify by 0 just to update views
             ModifyHealth(character, data.currentHealth, false);
             ModifyStress(character, data.currentStress, false);
@@ -296,7 +296,7 @@ namespace HexGameEngine.Characters
             PerkController.Instance.BuildPlayerCharacterEntityPassivesFromCharacterData(character, data);
 
             // Set up health, armour and energy views
-            ModifyBaseMaxEnergy(character, 0);
+            ModifyBaseMaxActionPoints(character, 0);
             ModifyMaxHealth(character, 0);
             ModifyHealth(character, StatCalculator.GetTotalMaxHealth(character));
             ModifyArmour(character, data.baseArmour);
@@ -343,7 +343,7 @@ namespace HexGameEngine.Characters
                 character.attributeSheet.maxHealth = RandomGenerator.NumberBetween(data.lowerHealthLimit, data.upperHealthLimit);
 
             // Set up health + energy views
-            ModifyBaseMaxEnergy(character, 0);
+            ModifyBaseMaxActionPoints(character, 0);
             ModifyMaxHealth(character, 0);
             ModifyHealth(character, StatCalculator.GetTotalMaxHealth(character));
 
@@ -862,9 +862,9 @@ namespace HexGameEngine.Characters
 
             if (!character.hasRequestedTurnDelay)
             {
-                // Gain Energy + update energy views
-                int energyGain = StatCalculator.GetTotalEnergyRecovery(character);
-                ModifyEnergy(character, energyGain, false, false);
+                // Gain AP + update AP views
+                int apGain = StatCalculator.GetTotalActionPointRecovery(character);
+                ModifyActionPoints(character, apGain, false, false);
             }              
 
             // Check effects that are triggered on the first turn only
@@ -959,8 +959,6 @@ namespace HexGameEngine.Characters
             {
                 int roll = RandomGenerator.NumberBetween(1, 4);
                 Debug.Log("HexCharacterController.OnTurnStart() resolving shattered stress state event...");
-
-
                 
                 // Rally
                 if (roll == 1)
@@ -1401,9 +1399,9 @@ namespace HexGameEngine.Characters
 
         // Modify Energy + Stamina + Fatigue and Related Views
         #region
-        public void ModifyEnergy(HexCharacterModel character, int energyGainedOrLost, bool showVFX = false, bool updateEnergyGuiInstantly = true)
+        public void ModifyActionPoints(HexCharacterModel character, int energyGainedOrLost, bool showVFX = false, bool updateEnergyGuiInstantly = true)
         {
-            Debug.Log("CharacterEntityController.ModifyEnergy() called for " + character.myName);
+            Debug.Log("CharacterEntityController.ModifyActionPoints() called for " + character.myName);
             character.currentEnergy += energyGainedOrLost;
             HexCharacterView view = character.hexCharacterView;
 
@@ -1412,9 +1410,9 @@ namespace HexGameEngine.Characters
                 character.currentEnergy = 0;
             }
 
-            else if (character.currentEnergy > StatCalculator.GetTotalMaxEnergy(character))
+            else if (character.currentEnergy > StatCalculator.GetTotalMaxActionPoints(character))
             {
-                character.currentEnergy = StatCalculator.GetTotalMaxEnergy(character);
+                character.currentEnergy = StatCalculator.GetTotalMaxActionPoints(character);
             }
 
             if (showVFX && view != null)
@@ -1424,7 +1422,7 @@ namespace HexGameEngine.Characters
                 {
                     // Status notification
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Energy +" + energyGainedOrLost.ToString()));
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Action Points +" + energyGainedOrLost.ToString()));
 
                     // Buff sparkle VFX
                     VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateGeneralBuffEffect(view.WorldPosition));
@@ -1433,7 +1431,7 @@ namespace HexGameEngine.Characters
                 {
                     // Status notification
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Energy " + energyGainedOrLost.ToString()));
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Action Points " + energyGainedOrLost.ToString()));
 
                     // Debuff sparkle VFX
                     VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateGeneralDebuffEffect(view.WorldPosition));
@@ -1457,15 +1455,15 @@ namespace HexGameEngine.Characters
             }           
 
         }
-        public void ModifyBaseMaxEnergy(HexCharacterModel character, int maxEnergyGainedOrLost, bool updateEnergyGuiInstantly = true)
+        public void ModifyBaseMaxActionPoints(HexCharacterModel character, int maxEnergyGainedOrLost, bool updateEnergyGuiInstantly = true)
         {
-            Debug.Log("CharacterEntityController.ModifyBaseMaxEnergy() called for " + character.myName);
-            character.attributeSheet.maxEnergy += maxEnergyGainedOrLost;
+            Debug.Log("CharacterEntityController.ModifyBaseMaxActionPoints() called for " + character.myName);
+            character.attributeSheet.maxAp += maxEnergyGainedOrLost;
             HexCharacterView view = character.hexCharacterView;
 
-            if (character.attributeSheet.maxEnergy < 0)
+            if (character.attributeSheet.maxAp < 0)
             {
-                character.attributeSheet.maxEnergy = 0;
+                character.attributeSheet.maxAp = 0;
             }
 
             // int energyVfxValue = StatCalculator.GetTotalMaxEnergy(character);

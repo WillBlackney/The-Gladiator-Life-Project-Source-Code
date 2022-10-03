@@ -1154,7 +1154,7 @@ namespace HexGameEngine.Combat
                         VisualEventManager.Instance.CreateVisualEvent(() =>
                         VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Executioner!"), QueuePosition.Back, 0, 0, attacker.GetLastStackEventParent());
 
-                        HexCharacterController.Instance.ModifyEnergy(attacker, 4);
+                        HexCharacterController.Instance.ModifyActionPoints(attacker, 4);
                     }
 
                     // Gladiator background: recover 10 stress on kill

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: accb5c33da2a75e479ff64dac541103c, type: 3}
-  m_Name: Energy
+  m_Name: Action Points
   m_EditorClassIdentifier: 
   myPreset: 29
   mainSprite: {fileID: 21300000, guid: f6fa855d4ddf8498ba52567a120cd2be, type: 3}
   frameSprite: 0
-  headerName: Energy
+  headerName: Action Points
   italicDescription: 0
   description:
   - color: 1

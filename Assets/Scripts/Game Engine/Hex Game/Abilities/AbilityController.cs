@@ -928,15 +928,15 @@ namespace HexGameEngine.Abilities
             }
 
             // Gain Energy Target
-            else if (abilityEffect.effectType == AbilityEffectType.GainEnergyTarget)
+            else if (abilityEffect.effectType == AbilityEffectType.GainActionPointsTarget)
             {
-                HexCharacterController.Instance.ModifyEnergy(target, abilityEffect.energyGained, true);
+                HexCharacterController.Instance.ModifyActionPoints(target, abilityEffect.energyGained, true);
             }
 
             // Gain Energy Self
-            else if (abilityEffect.effectType == AbilityEffectType.GainEnergy)
+            else if (abilityEffect.effectType == AbilityEffectType.GainActionPoints)
             {
-                HexCharacterController.Instance.ModifyEnergy(caster, abilityEffect.energyGained, true);
+                HexCharacterController.Instance.ModifyActionPoints(caster, abilityEffect.energyGained, true);
             }
 
             // Lose Health Self
@@ -1177,7 +1177,7 @@ namespace HexGameEngine.Abilities
         private void OnAbilityUsedStart(HexCharacterModel character, AbilityData ability, HexCharacterModel target = null)
         {
             // Pay Energy Cost
-            HexCharacterController.Instance.ModifyEnergy(character, -GetAbilityEnergyCost(character, ability));           
+            HexCharacterController.Instance.ModifyActionPoints(character, -GetAbilityEnergyCost(character, ability));           
 
             // Check shed perk: remove if ability used was an aspect ability
             if (ability.abilityName.Contains("Aspect") && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))

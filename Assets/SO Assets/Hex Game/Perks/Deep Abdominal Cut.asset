@@ -39,11 +39,13 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Strength
+    phrase: Physical Damage
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: .
+  passiveItalicDescription: 
+  effectDetailTabs: []
   maxAllowedStacks: 10
   showStackCount: 0
   hiddenOnPassivePanel: 0

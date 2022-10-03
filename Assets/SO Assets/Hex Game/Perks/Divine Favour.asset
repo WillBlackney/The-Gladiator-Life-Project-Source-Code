@@ -31,7 +31,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Energy Recovery '
+    phrase: 'Action Point Recovery '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -44,6 +44,8 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: turns.
+  passiveItalicDescription: 
+  effectDetailTabs: []
   maxAllowedStacks: 2
   showStackCount: 1
   hiddenOnPassivePanel: 0

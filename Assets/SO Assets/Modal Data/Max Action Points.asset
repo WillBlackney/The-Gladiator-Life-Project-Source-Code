@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: accb5c33da2a75e479ff64dac541103c, type: 3}
-  m_Name: Max Energy
+  m_Name: Max Action Points
   m_EditorClassIdentifier: 
   myPreset: 14
   mainSprite: {fileID: 21300000, guid: 9d4b9ca0646768c4db76622e15798d66, type: 3}
   frameSprite: 1
-  headerName: Max Energy
+  headerName: Max Action Points
   italicDescription: 1
   description:
   - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Reflects the speed and duration at which a character can sprint and complete
-      high energy tasks.
+    phrase: Reflects the duration at which a character can sprint and complete high
+      energy tasks before tiring.
   infoRows:
   - dotStyle: 1
     message:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Each point increases the maximum amount of '
+      phrase: 'Each point increases the maximum '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Energy '
+      phrase: 'Action Points '
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

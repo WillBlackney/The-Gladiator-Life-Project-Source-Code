@@ -687,9 +687,9 @@ namespace HexGameEngine
 
             return intitiative;
         }
-        public static int GetTotalEnergyRecovery(HexCharacterModel c)
+        public static int GetTotalActionPointRecovery(HexCharacterModel c)
         {
-            int energyRecovery = c.attributeSheet.energyRecovery;
+            int energyRecovery = c.attributeSheet.apRecovery;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Dazed))
                 energyRecovery -= 1;
@@ -716,14 +716,14 @@ namespace HexGameEngine
             if (energyRecovery < 0)
                 energyRecovery = 0;
             // Items
-            energyRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.EnergyRecovery, c.itemSet);
+            energyRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.ActionPointRecovery, c.itemSet);
 
             return energyRecovery;
 
         }
-        public static int GetTotalEnergyRecovery(HexCharacterData c)
+        public static int GetTotalActionPointRecovery(HexCharacterData c)
         {
-            int energyRecovery = c.attributeSheet.energyRecovery;
+            int energyRecovery = c.attributeSheet.apRecovery;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenNose))
                 energyRecovery -= 2;
@@ -748,26 +748,26 @@ namespace HexGameEngine
                 energyRecovery = 0;
 
             // Items
-            energyRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.EnergyRecovery, c.itemSet);
+            energyRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.ActionPointRecovery, c.itemSet);
 
             return energyRecovery;
 
         }
-        public static int GetTotalMaxEnergy(HexCharacterModel c)
+        public static int GetTotalMaxActionPoints(HexCharacterModel c)
         {
-            int maxEnergy = c.attributeSheet.maxEnergy;
+            int maxEnergy = c.attributeSheet.maxAp;
 
             // Items
-            maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxEnergy, c.itemSet);
+            maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxActionPoints, c.itemSet);
 
             return maxEnergy;
         }
-        public static int GetTotalMaxEnergy(HexCharacterData c)
+        public static int GetTotalMaxActionPoints(HexCharacterData c)
         {
-            int maxEnergy = c.attributeSheet.maxEnergy;
+            int maxEnergy = c.attributeSheet.maxAp;
 
             // Items
-            maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxEnergy, c.itemSet);
+            maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxActionPoints, c.itemSet);
 
             return maxEnergy;
         }

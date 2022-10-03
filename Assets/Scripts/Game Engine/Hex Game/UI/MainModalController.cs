@@ -473,10 +473,10 @@ namespace HexGameEngine.UI
         Initiative = 10,
         Aura = 11,
         Vision = 12,
-        EnergyRecovery = 13,
-        MaxEnergy = 14,
+        ApRecovery = 13,
+        MaxAp = 14,
         CriticalModifier = 15,
-        Energy = 29,
+        ActionPoints = 29,
 
         PhysicalResistance = 16,
         MagicResistance = 17,

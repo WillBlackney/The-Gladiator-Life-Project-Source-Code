@@ -365,8 +365,8 @@ namespace HexGameEngine.Abilities
         }
         public bool ShowEnergyGained()
         {
-            if (effectType == AbilityEffectType.GainEnergy ||
-                effectType == AbilityEffectType.GainEnergyTarget)
+            if (effectType == AbilityEffectType.GainActionPoints ||
+                effectType == AbilityEffectType.GainActionPointsTarget)
             {
                 return true;
             }

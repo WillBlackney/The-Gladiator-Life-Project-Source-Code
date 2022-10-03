@@ -285,8 +285,8 @@ namespace HexGameEngine.UI
 
             criticalChanceText.text = StatCalculator.GetTotalCriticalChance(character).ToString() + "%";
             criticalModifierText.text = StatCalculator.GetTotalCriticalModifier(character).ToString() + "%";
-            energyRecoveryText.text = StatCalculator.GetTotalEnergyRecovery(character).ToString();
-            maxEnergyText.text = StatCalculator.GetTotalMaxEnergy(character).ToString();
+            energyRecoveryText.text = StatCalculator.GetTotalActionPointRecovery(character).ToString();
+            maxEnergyText.text = StatCalculator.GetTotalMaxActionPoints(character).ToString();
             initiativeText.text = StatCalculator.GetTotalInitiative(character).ToString();
             visionText.text = StatCalculator.GetTotalVision(character).ToString();
             physicalDamageText.text = StatCalculator.GetTotalPhysicalDamageBonus(character).ToString() + "%";

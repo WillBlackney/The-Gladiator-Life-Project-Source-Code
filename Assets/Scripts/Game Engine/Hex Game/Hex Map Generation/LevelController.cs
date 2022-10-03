@@ -305,7 +305,7 @@ namespace HexGameEngine.HexTiles
             if (payMovementCosts)
             {
                 // Pay energy cost
-                HexCharacterController.Instance.ModifyEnergy(character, -Pathfinder.GetEnergyCostOfPath(character, character.currentTile, path.HexsOnPath));
+                HexCharacterController.Instance.ModifyActionPoints(character, -Pathfinder.GetEnergyCostOfPath(character, character.currentTile, path.HexsOnPath));
             }
 
             // Play movement animation
