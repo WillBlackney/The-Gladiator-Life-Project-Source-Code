@@ -304,8 +304,9 @@ namespace HexGameEngine.HexTiles
         {
             if (payMovementCosts)
             {
-                // Pay energy cost
+                // Pay energy + fatigue costs
                 HexCharacterController.Instance.ModifyActionPoints(character, -Pathfinder.GetEnergyCostOfPath(character, character.currentTile, path.HexsOnPath));
+                HexCharacterController.Instance.ModifyCurrentFatigue(character, Pathfinder.GetFatigueCostOfPath(character, character.currentTile, path.HexsOnPath));
             }
 
             // Play movement animation
@@ -978,25 +979,35 @@ namespace HexGameEngine.HexTiles
 
             else if(start == null)
             {
-                tileEffectDotRows[0].Build("Costs " + TextLogic.ReturnColoredText(destination.BaseMoveCost.ToString(), TextLogic.blueNumber) +
-                   " " + TextLogic.ReturnColoredText("Energy", TextLogic.neutralYellow) + " to traverse.", DotStyle.Neutral);
+                tileEffectDotRows[0].Build("Costs " + TextLogic.ReturnColoredText(destination.BaseMoveActionPointCost.ToString(), TextLogic.blueNumber) +
+                   " " + TextLogic.ReturnColoredText("Action Points", TextLogic.neutralYellow) + " and " +
+                    TextLogic.ReturnColoredText(destination.BaseMoveFatigueCost.ToString(), TextLogic.blueNumber) +
+                    " " + TextLogic.ReturnColoredText("Fatigue", TextLogic.neutralYellow) +
+                    " to traverse.", DotStyle.Neutral);
             }
             else if (start != null && 
                 start.myCharacter != null &&
                 start.myCharacter.controller == Controller.Player &&
                 start.myCharacter.activationPhase == ActivationPhase.ActivationPhase)
             {
-                int energyCostDifference = Pathfinder.GetEnergyCostBetweenHexs(start.myCharacter, start, destination) - destination.BaseMoveCost;
-                if (energyCostDifference > 0)
+                int apCostDifference = Pathfinder.GetActionPointCostBetweenHexs(start.myCharacter, start, destination) - destination.BaseMoveActionPointCost;
+                int fatigueCostDifference = Pathfinder.GetFatigueCostBetweenHexs(start.myCharacter, start, destination) - destination.BaseMoveFatigueCost;
+                if (apCostDifference > 0)
                 {
-                    tileEffectDotRows[0].Build("Costs " + TextLogic.ReturnColoredText(destination.BaseMoveCost.ToString(), TextLogic.blueNumber) +
-                     " + " + TextLogic.ReturnColoredText(energyCostDifference.ToString(), TextLogic.blueNumber) + " " +
-                    TextLogic.ReturnColoredText("Energy", TextLogic.neutralYellow) + " to traverse due to elevation difference.", DotStyle.Neutral);
+                    tileEffectDotRows[0].Build("Costs " + TextLogic.ReturnColoredText(destination.BaseMoveActionPointCost.ToString(), TextLogic.blueNumber) +
+                     " + " + TextLogic.ReturnColoredText(apCostDifference.ToString(), TextLogic.blueNumber) + " " +
+                    TextLogic.ReturnColoredText("Action Points", TextLogic.neutralYellow) + " and " +
+                    TextLogic.ReturnColoredText(destination.BaseMoveFatigueCost.ToString(), TextLogic.blueNumber) +
+                     " + " + TextLogic.ReturnColoredText(fatigueCostDifference.ToString(), TextLogic.blueNumber) +
+                     TextLogic.ReturnColoredText(" Fatigue", TextLogic.neutralYellow) +
+                    " to traverse due to elevation difference.", DotStyle.Neutral);
                 }
                 else
                 {
-                    tileEffectDotRows[0].Build("Costs " + TextLogic.ReturnColoredText(destination.BaseMoveCost.ToString(), TextLogic.blueNumber) +
-                    " " + TextLogic.ReturnColoredText("Energy", TextLogic.neutralYellow) +
+                    tileEffectDotRows[0].Build("Costs " + TextLogic.ReturnColoredText(destination.BaseMoveActionPointCost.ToString(), TextLogic.blueNumber) +
+                    " " + TextLogic.ReturnColoredText("Action Points", TextLogic.neutralYellow) + " and " +
+                    TextLogic.ReturnColoredText(destination.BaseMoveFatigueCost.ToString(), TextLogic.blueNumber) +
+                    " " + TextLogic.ReturnColoredText("Fatigue", TextLogic.neutralYellow) +
                     " to traverse.", DotStyle.Neutral);
                 }
           

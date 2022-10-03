@@ -66,6 +66,7 @@ namespace HexGameEngine
         Constituition = 4,
         Resolve = 5,
         Wits = 6,
+        Fatigue = 19,
         CriticalChance = 7,
         CriticalModifier = 14,
         Initiative = 12,
@@ -73,11 +74,13 @@ namespace HexGameEngine
         MaxActionPoints = 18,
         Vision = 15,
         AuraSize = 16,
+        FatigueRecovery = 20,
         StressResistance = 8,
         DebuffResistance = 9,
         PhysicalResistance = 10,
         MagicResistance = 11,
         InjuryResistance = 17,
+        
     }
     public enum Rarity
     {

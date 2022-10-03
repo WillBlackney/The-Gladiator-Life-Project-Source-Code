@@ -30,7 +30,12 @@ namespace HexGameEngine.Characters
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
+        public Attribute fatigue = new Attribute(50, 0);
+        [BoxGroup("Core Attributes")]
+        [LabelWidth(100)]
+        [GUIColor("Green")]
         public Attribute wits = new Attribute(5, 0);
+
 
 
         [BoxGroup("Secondary Attributes", centerLabel: true)]
@@ -49,6 +54,10 @@ namespace HexGameEngine.Characters
         [LabelWidth(100)]
         [GUIColor("Blue")]
         public int initiative = 5;
+        [BoxGroup("Secondary Attributes")]
+        [LabelWidth(100)]
+        [GUIColor("Blue")]
+        public int fatigueRecovery = 8;
 
         [BoxGroup("Misc Attributes", centerLabel: true)]
         [LabelWidth(100)]
@@ -126,7 +135,10 @@ namespace HexGameEngine.Characters
             other.resolve.stars = resolve.stars;
             other.wits = wits;
             other.wits.stars = wits.stars;
+            other.fatigue = fatigue;
+            other.fatigue.stars = fatigue.stars;
 
+            other.fatigueRecovery = fatigueRecovery;          
             other.maxHealth = maxHealth;
             other.apRecovery = apRecovery;
             other.maxAp = maxAp;

@@ -28,6 +28,7 @@ namespace HexGameEngine.Abilities
         public int rangeFromTarget;
 
         public int energyCost;
+        public int fatigueCost;
         public int baseCooldown;
         public int currentCooldown = 0;       
 

@@ -97,7 +97,7 @@ namespace HexGameEngine.HexTiles
             }
             return neighbourNodes;
         }
-        public int BaseMoveCost
+        public int BaseMoveActionPointCost
         {
             get 
             {
@@ -106,7 +106,16 @@ namespace HexGameEngine.HexTiles
                 return sum; 
             }
         }
-        
+        public int BaseMoveFatigueCost
+        {
+            get
+            {
+                int sum = 3;
+                if (tileData != null) sum += tileData.fatigueCostModifier;
+                return sum;
+            }
+        }
+
         public int Distance(LevelNode other)
         {
             return (int)(Mathf.Abs(CubeCoord.x - other.CubeCoord.x) + Mathf.Abs(CubeCoord.y - other.CubeCoord.y) +

@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileSprite: {fileID: 0}
   tileName: Dirt
-  tileDescription: Dry dirt on flat, solid ground.
   description:
   - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: Dry dirt on flat, solid ground.
+  effectDescriptions: []
   moveCostModifier: 0
+  fatigueCostModifier: 1
   allowElevation: 1

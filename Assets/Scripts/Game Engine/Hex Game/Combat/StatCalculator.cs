@@ -687,6 +687,57 @@ namespace HexGameEngine
 
             return intitiative;
         }
+        public static int GetTotalFatigueRecovery(HexCharacterModel c)
+        {
+            int fatRecovery = c.attributeSheet.fatigueRecovery;
+
+            // cant go below
+            if (fatRecovery < 0)
+                fatRecovery = 0;
+            // Items
+            fatRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.FatigueRecovery, c.itemSet);
+
+            return fatRecovery;
+
+        }
+        public static int GetTotalFatigueRecovery(HexCharacterData c)
+        {
+            int fatRecovery = c.attributeSheet.fatigueRecovery;
+
+            // cant go below
+            if (fatRecovery < 0)
+                fatRecovery = 0;
+            // Items
+            fatRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.FatigueRecovery, c.itemSet);
+
+            return fatRecovery;
+
+        }
+        public static int GetTotalMaxFatigue(HexCharacterModel c)
+        {
+            int maxFat = c.attributeSheet.fatigue.value;
+
+            // cant go below
+            if (maxFat < 0)
+                maxFat = 0;
+            // Items
+            maxFat += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fatigue, c.itemSet);
+
+            return maxFat;
+        }
+        public static int GetTotalMaxFatigue(HexCharacterData c)
+        {
+            int maxFat = c.attributeSheet.fatigue.value;
+
+            // cant go below
+            if (maxFat < 0)
+                maxFat = 0;
+            // Items
+            maxFat += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fatigue, c.itemSet);
+
+            return maxFat;
+
+        }
         public static int GetTotalActionPointRecovery(HexCharacterModel c)
         {
             int energyRecovery = c.attributeSheet.apRecovery;

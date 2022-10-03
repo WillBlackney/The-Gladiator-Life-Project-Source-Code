@@ -865,6 +865,10 @@ namespace HexGameEngine.Characters
                 // Gain AP + update AP views
                 int apGain = StatCalculator.GetTotalActionPointRecovery(character);
                 ModifyActionPoints(character, apGain, false, false);
+
+                // Recover fatigue+ update fatigue views
+                int fatigueRecovered = StatCalculator.GetTotalFatigueRecovery(character);
+                ModifyCurrentFatigue(character, -fatigueRecovered, false, false);
             }              
 
             // Check effects that are triggered on the first turn only
@@ -1438,9 +1442,6 @@ namespace HexGameEngine.Characters
                 }
             }
 
-            QueuePosition qPos = QueuePosition.Back;
-            if (updateEnergyGuiInstantly) qPos = QueuePosition.Front;
-
             // Update GUI
             if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
             {
@@ -1455,35 +1456,68 @@ namespace HexGameEngine.Characters
             }           
 
         }
-        public void ModifyBaseMaxActionPoints(HexCharacterModel character, int maxEnergyGainedOrLost, bool updateEnergyGuiInstantly = true)
+        public void ModifyBaseMaxActionPoints(HexCharacterModel character, int maxEnergyGainedOrLost)
         {
             Debug.Log("CharacterEntityController.ModifyBaseMaxActionPoints() called for " + character.myName);
             character.attributeSheet.maxAp += maxEnergyGainedOrLost;
             HexCharacterView view = character.hexCharacterView;
 
-            if (character.attributeSheet.maxAp < 0)
+            if (character.attributeSheet.maxAp < 0)            
+                character.attributeSheet.maxAp = 0;      
+        }
+        public void ModifyCurrentFatigue(HexCharacterModel character, int fatigueGainedOrLost, bool showVFX = false, bool updateFatigueGuiInstantly = true)
+        {
+            character.currentFatigue += fatigueGainedOrLost;
+            HexCharacterView view = character.hexCharacterView;
+
+            if (character.currentFatigue < 0)            
+                character.currentFatigue = 0;            
+
+            else if (character.currentFatigue > StatCalculator.GetTotalMaxFatigue(character))            
+                character.currentFatigue = StatCalculator.GetTotalMaxFatigue(character);            
+
+            if (showVFX && view != null)
             {
-                character.attributeSheet.maxAp = 0;
+                if (fatigueGainedOrLost > 0)
+                {
+                    // Status notification
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Fatigue +" + fatigueGainedOrLost.ToString()));
+
+                    // Buff sparkle VFX
+                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateGeneralBuffEffect(view.WorldPosition));
+                }
+                else if (fatigueGainedOrLost < 0)
+                {
+                    // Status notification
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Fatigue " + fatigueGainedOrLost.ToString()));
+
+                    // Debuff sparkle VFX
+                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateGeneralDebuffEffect(view.WorldPosition));
+                }
             }
 
-            // int energyVfxValue = StatCalculator.GetTotalMaxEnergy(character);
-            // VisualEventManager.Instance.CreateVisualEvent(() => UpdateMaxEnergyText(view, energyVfxValue), QueuePosition.Front, 0, 0);
+            // Update GUI
+            if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
+            {
+                // Update energy bar GUI
+                int energyVFX = character.currentFatigue;
+                // to do: update fatigue bar on main UI
+               // VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.EnergyBar.UpdateIcons(energyVFX));
 
-            QueuePosition qPos = QueuePosition.Back;
-            if (updateEnergyGuiInstantly) qPos = QueuePosition.Front;
+                // Update ability button validity overlays
+                foreach (AbilityButton b in CombatUIController.Instance.AbilityButtons)
+                    b.UpdateAbilityButtonUnusableOverlay();
 
-            /*
-            int energyVfxValue = character.currentEnergy;
-            int maxEnergyVfxValue = StatCalculator.GetTotalMaxEnergy(character);
-            VisualEventManager.Instance.CreateVisualEvent(() => UpdateEnergyGUIElements(character, energyVfxValue, maxEnergyVfxValue), qPos, 0, 0);
-            */
+            }
 
-        }             
+        }
         #endregion
 
         // UI Visual Events
         #region
-       
+
         public void FadeOutCharacterWorldCanvas(HexCharacterView view, CoroutineData cData, float fadeSpeed = 1f, float endAlpha = 0f)
         {
             if (view == null)
@@ -2016,7 +2050,6 @@ namespace HexGameEngine.Characters
 
         }
         #endregion
-
 
         // Conditional Checks on Characters
         #region

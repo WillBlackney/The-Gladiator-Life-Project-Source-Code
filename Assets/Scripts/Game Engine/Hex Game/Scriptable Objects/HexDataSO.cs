@@ -19,6 +19,7 @@ namespace HexGameEngine.HexTiles
         public List<CustomString> description;
         public ModalDotRowBuildData[] effectDescriptions;
         public int moveCostModifier;
+        public int fatigueCostModifier;
         public bool allowElevation;
 
        

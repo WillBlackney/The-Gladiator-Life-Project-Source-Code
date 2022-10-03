@@ -41,6 +41,11 @@ namespace HexGameEngine.Abilities
         [VerticalGroup("Core Data/Stats")]
         [LabelWidth(100)]
         [GUIColor("Blue")]
+        [Header("Costs & Type")]
+        public int fatigueCost;
+        [VerticalGroup("Core Data/Stats")]
+        [LabelWidth(100)]
+        [GUIColor("Blue")]
         public int baseCooldown;
         [VerticalGroup("Core Data/Stats")]
         [LabelWidth(100)]

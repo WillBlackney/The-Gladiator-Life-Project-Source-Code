@@ -18,9 +18,42 @@ namespace HexGameEngine.Pathfinding
 
         // Energy Cost Logic
         #region
-        public static int GetEnergyCostBetweenHexs(HexCharacterModel character, LevelNode start, LevelNode destination)
+        public static int GetFatigueCostBetweenHexs(HexCharacterModel character, LevelNode start, LevelNode destination)
         {
-            int cost = destination.BaseMoveCost;
+            int cost = destination.BaseMoveFatigueCost;
+            if (start.Elevation != destination.Elevation)
+                cost += 2;
+
+            if (cost > 2 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.PathFinder))
+                cost = 0;
+
+            return cost;
+        }
+        public static int GetFatigueCostOfPath(HexCharacterModel character, LevelNode start, List<LevelNode> path)
+        {
+            int pathCost = 0;
+            if (path.Count == 0)
+                return 0;
+
+            else if (path.Count == 1)
+            {
+                pathCost += GetFatigueCostBetweenHexs(character, start, path[0]);
+            }
+            else if (path.Count > 1)
+            {
+                List<LevelNode> fullPath = new List<LevelNode>();
+                fullPath.Add(start);
+                fullPath.AddRange(path);
+                for (int i = 0; i < fullPath.Count - 1; i++)                
+                    pathCost += GetFatigueCostBetweenHexs(character, fullPath[i], fullPath[i + 1]);                
+            }
+
+            Debug.Log("Fatigue cost of path = " + pathCost.ToString());
+            return pathCost;
+        }
+        public static int GetActionPointCostBetweenHexs(HexCharacterModel character, LevelNode start, LevelNode destination)
+        {
+            int cost = destination.BaseMoveActionPointCost;
             if (start.Elevation != destination.Elevation)
                 cost += 1;
 
@@ -49,7 +82,7 @@ namespace HexGameEngine.Pathfinding
 
                 }
                 else
-                    pathCost += GetEnergyCostBetweenHexs(character, start, path[0]);
+                    pathCost += GetActionPointCostBetweenHexs(character, start, path[0]);
             }
             else if (path.Count > 1)
             {
@@ -65,7 +98,7 @@ namespace HexGameEngine.Pathfinding
                 {
                     if(i >= freeMoves)
                     {
-                        pathCost += GetEnergyCostBetweenHexs(character, fullPath[i], fullPath[i + 1]);
+                        pathCost += GetActionPointCostBetweenHexs(character, fullPath[i], fullPath[i + 1]);
                     }
                 }
                 
@@ -80,30 +113,7 @@ namespace HexGameEngine.Pathfinding
 
             Debug.Log("Energy cost of path = " + pathCost.ToString());
             return pathCost;
-        }
-        public static int GetEnergyCostOfPath(Path path)
-        {
-            int pathCost = 0;
-            if (path.HexsOnPath.Count == 0)
-                return 0;
-
-            else if (path.HexsOnPath.Count == 1)
-            {
-                pathCost += GetEnergyCostBetweenHexs(path.Character, path.Start, path.HexsOnPath[0]);
-            }
-            else if (path.HexsOnPath.Count > 1)
-            {
-                pathCost += GetEnergyCostBetweenHexs(path.Character, path.Start, path.HexsOnPath[0]);
-
-                for (int i = 0; i < path.HexsOnPath.Count - 1; i++)
-                {
-                    pathCost += GetEnergyCostBetweenHexs(path.Character, path.HexsOnPath[i], path.HexsOnPath[i + 1]);
-                }
-            }
-
-            Debug.Log("Energy cost of path = " + pathCost.ToString());
-            return pathCost;
-        }
+        }       
      
         #endregion
 
@@ -251,7 +261,7 @@ namespace HexGameEngine.Pathfinding
                     ret[cell] = new Dictionary<LevelNode, float>();
                     foreach (var neighbour in cell.NeighbourNodes(cells))
                     {
-                        ret[cell][neighbour] = GetEnergyCostBetweenHexs(character, cell, neighbour);
+                        ret[cell][neighbour] = GetActionPointCostBetweenHexs(character, cell, neighbour);
                     }
                 }
             }

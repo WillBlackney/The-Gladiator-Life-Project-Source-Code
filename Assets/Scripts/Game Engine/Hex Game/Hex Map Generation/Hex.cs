@@ -103,11 +103,7 @@ namespace HexGameEngine.HexTiles
         public Vector2 GridPosition
         {
             get { return OffsetCoord; }
-        }
-        public int BaseMoveCost
-        {
-            get { return myHexData.moveCostModifier; }
-        }
+        }        
         #endregion
 
         // Inherited Logic

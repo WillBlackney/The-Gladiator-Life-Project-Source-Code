@@ -25,6 +25,7 @@ namespace HexGameEngine.Characters
 
         [Header("Active Properties")]
         public int currentEnergy;
+        public int currentFatigue;
         public int currentHealth;
         public Facing currentFacing;
         public int currentInitiativeRoll;

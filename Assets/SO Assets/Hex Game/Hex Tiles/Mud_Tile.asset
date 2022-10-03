@@ -21,4 +21,5 @@ MonoBehaviour:
     phrase: 'Wet, sticky dirt that is difficult to move on. '
   effectDescriptions: []
   moveCostModifier: 1
+  fatigueCostModifier: 3
   allowElevation: 0

@@ -468,6 +468,8 @@ namespace HexGameEngine.UI
         Dodge = 6,
         Accuracy = 7,
         Wits = 8,
+        Fatigue = 34,
+        FatigueRecovery = 35,
 
         CriticalChance = 9,
         Initiative = 10,

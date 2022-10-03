@@ -187,6 +187,7 @@ namespace HexGameEngine.Abilities
             a.talentRequirementData = d.talentRequirementData;
 
             a.energyCost = d.energyCost;
+            a.fatigueCost = d.fatigueCost;
             a.baseCooldown = d.baseCooldown;
 
             a.baseRange = d.baseRange;
@@ -1177,7 +1178,8 @@ namespace HexGameEngine.Abilities
         private void OnAbilityUsedStart(HexCharacterModel character, AbilityData ability, HexCharacterModel target = null)
         {
             // Pay Energy Cost
-            HexCharacterController.Instance.ModifyActionPoints(character, -GetAbilityEnergyCost(character, ability));           
+            HexCharacterController.Instance.ModifyActionPoints(character, -GetAbilityEnergyCost(character, ability));
+            HexCharacterController.Instance.ModifyCurrentFatigue(character, GetAbilityFatigueCost(character, ability));
 
             // Check shed perk: remove if ability used was an aspect ability
             if (ability.abilityName.Contains("Aspect") && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
@@ -1433,6 +1435,16 @@ namespace HexGameEngine.Abilities
 
             return energyCost;
         }
+        public int GetAbilityFatigueCost(HexCharacterModel character, AbilityData ability)
+        {
+            int fatigueCost = ability.fatigueCost;
+
+            // prevent cost going negative
+            if (fatigueCost < 0)
+                fatigueCost = 0;
+
+            return fatigueCost;
+        }
         public List<LevelNode> GetTargettableTilesOfAbility(AbilityData ability, HexCharacterModel caster)
         {
             List<LevelNode> targettableTiles = new List<LevelNode>();
@@ -1633,6 +1645,13 @@ namespace HexGameEngine.Abilities
                 bRet =  false;
             }
 
+            // check has enough fatigue
+            if (!DoesCharacterHaveEnoughFatigue(character, ability))
+            {
+                Debug.Log("IsAbilityUseable() returning false: not enough fatigue");
+                bRet = false;
+            }
+
             // check cooldown
             if (ability.currentCooldown != 0 )
             {
@@ -1699,6 +1718,10 @@ namespace HexGameEngine.Abilities
         private bool DoesCharacterHaveEnoughEnergy(HexCharacterModel caster, AbilityData ability)
         {
             return caster.currentEnergy >= GetAbilityEnergyCost(caster, ability);
+        }
+        private bool DoesCharacterHaveEnoughFatigue(HexCharacterModel caster, AbilityData ability)
+        {
+            return StatCalculator.GetTotalMaxFatigue(caster) - caster.currentFatigue >= GetAbilityFatigueCost(caster, ability);
         }
         private bool IsTargetOfAbilityInRange(HexCharacterModel caster, HexCharacterModel target, AbilityData ability)
         {
