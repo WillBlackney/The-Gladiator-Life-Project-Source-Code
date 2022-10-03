@@ -285,9 +285,7 @@ namespace HexGameEngine.Abilities
                 a.myCharacter = character;
             }            
         }
-        #endregion
-
-       
+        #endregion       
 
         // Ability Usage Logic
         #region     
@@ -404,6 +402,9 @@ namespace HexGameEngine.Abilities
 
                 if (hitResult.Result == HitRollResult.Hit)
                 {
+                    // Gain 3 fatigue from being hit.
+                    HexCharacterController.Instance.ModifyCurrentFatigue(target, 3);
+
                     DamageResult damageResult = null;
                     damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(caster, target, ability, abilityEffect, didCrit);
                     damageResult.didCrit = didCrit;       
@@ -515,6 +516,9 @@ namespace HexGameEngine.Abilities
                 }
                 else if (hitResult.Result == HitRollResult.Miss)
                 {
+                    // Gain 3 fatigue from being hit.
+                    HexCharacterController.Instance.ModifyCurrentFatigue(target, 1);
+
                     // Miss notification
                     VisualEventManager.Instance.CreateVisualEvent(() =>
                         VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "MISS"), QueuePosition.Back
@@ -620,6 +624,9 @@ namespace HexGameEngine.Abilities
                     {
                         charactersHit.Add(character);
 
+                        // Gain 3 fatigue from being hit.
+                        HexCharacterController.Instance.ModifyCurrentFatigue(character, 3);
+
                         // Do on hit visual effects for this ability
                         foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                         {
@@ -628,6 +635,9 @@ namespace HexGameEngine.Abilities
                     }
                     else if (hitRoll.Result == HitRollResult.Miss)
                     {
+                        // Gain 1 fatigue for dodging.
+                        HexCharacterController.Instance.ModifyCurrentFatigue(character, 1);
+
                         // Miss notification
                         Vector3 pos = character.hexCharacterView.WorldPosition;
                         VisualEventManager.Instance.CreateVisualEvent(() =>

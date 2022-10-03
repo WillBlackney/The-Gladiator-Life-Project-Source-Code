@@ -28,6 +28,7 @@ namespace HexGameEngine.UI
         [SerializeField] TextMeshProUGUI nameText;
         [SerializeField] TextMeshProUGUI energyCostText;
         [SerializeField] TextMeshProUGUI cooldownText;
+        [SerializeField] TextMeshProUGUI fatigueCostText;
         [SerializeField] TextMeshProUGUI descriptionText;
 
         [Header("Range Section Components")]      
@@ -194,6 +195,17 @@ namespace HexGameEngine.UI
 
             nameText.text = data.abilityName;
             cooldownText.text = data.baseCooldown.ToString();
+            fatigueCostText.text = data.fatigueCost.ToString();
+
+            if (data.myCharacter != null)
+            {
+                string col = TextLogic.white;
+                int baseCost = data.fatigueCost;
+                int dynamicCost = AbilityController.Instance.GetAbilityFatigueCost(data.myCharacter, data);
+                if (baseCost > dynamicCost) col = TextLogic.lightGreen;
+                else if (baseCost < dynamicCost) col = TextLogic.lightRed;
+                fatigueCostText.text = TextLogic.ReturnColoredText(dynamicCost.ToString(), col);
+            }
 
 
         }
@@ -247,7 +259,7 @@ namespace HexGameEngine.UI
                 int dynamicCost = AbilityController.Instance.GetAbilityEnergyCost(data.myCharacter, data);
                 if (baseCost > dynamicCost) col = TextLogic.lightGreen;
                 else if (baseCost < dynamicCost) col = TextLogic.lightRed;
-                energyCostText.text = TextLogic.ReturnColoredText(AbilityController.Instance.GetAbilityEnergyCost(data.myCharacter, data).ToString(), col);
+                energyCostText.text = TextLogic.ReturnColoredText(dynamicCost.ToString(), col);
             }
         }
         private void BuildAbilityTypeComponents(AbilityData data)
