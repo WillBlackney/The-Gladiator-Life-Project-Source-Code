@@ -1,4 +1,5 @@
 using CardGameEngine.UCM;
+using Codice.CM.Common;
 using DG.Tweening;
 using HexGameEngine.Abilities;
 using HexGameEngine.Perks;
@@ -58,6 +59,13 @@ namespace HexGameEngine.Characters
         [SerializeField] private Slider stressBarUI;
         [SerializeField] private TextMeshProUGUI stressText;
         [SerializeField] private TextMeshProUGUI maxStressText;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+
+        [Header("Fatigue Bar UI References")]
+        [SerializeField] private Slider fatigueBarUI;
+        [SerializeField] private Slider fatigueSubBarUI;
+        [SerializeField] private TextMeshProUGUI fatigueText;
+        [SerializeField] private TextMeshProUGUI maxFatigueText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("End + Delay Turn Button Components")]
@@ -127,6 +135,9 @@ namespace HexGameEngine.Characters
 
             // Stress Components
             UpdateStressComponents(character.currentStress, character);
+
+            // Fatigue 
+            UpdateFatigueComponents(character.currentFatigue, StatCalculator.GetTotalMaxFatigue(character));
 
             // Armour
             currentArmourText.text = character.currentArmour.ToString();
@@ -221,6 +232,34 @@ namespace HexGameEngine.Characters
             maxStressText.text = "100";
 
             stressPanel.BuildPanelViews(character);
+        }
+        public void UpdateFatigueComponents(int fatigue, int maxFatigue, float speed = 0.25f)
+        {
+            float currentFat = fatigue;
+            float maxFatFloat = maxFatigue;
+            float fatBarFloat = currentFat / maxFatFloat;
+
+            // Modify UI elements
+            fatigueSubBarUI.DOKill();
+            fatigueBarUI.DOKill();
+            fatigueSubBarUI.DOValue(fatBarFloat, speed);
+            fatigueBarUI.DOValue(fatBarFloat, speed);
+            fatigueText.text = currentFat.ToString();
+            maxFatigueText.text = maxFatigue.ToString();
+        }
+        public void DoFatigueCostDemo(int fatCost, int currentFat, int maxFat)
+        {
+            float sum = fatCost + currentFat;
+            if (sum == 0 || maxFat == 0) return;
+            float fatBarFloat = sum / maxFat;
+            fatigueSubBarUI.DOKill();
+            fatigueSubBarUI.DOValue(fatBarFloat, 0.25f);
+            Debug.Log("DoFatigueCostDemo() demo value = " + fatBarFloat.ToString() + ", normal value = " + fatigueBarUI.value.ToString());
+        }
+        public void ResetFatigueCostDemo()
+        {
+            fatigueSubBarUI.DOKill();
+            fatigueSubBarUI.DOValue(fatigueBarUI.value, 0.25f);
         }
         #endregion
 

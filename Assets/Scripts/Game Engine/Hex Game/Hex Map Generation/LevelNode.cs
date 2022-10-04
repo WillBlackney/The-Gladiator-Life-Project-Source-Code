@@ -110,7 +110,7 @@ namespace HexGameEngine.HexTiles
         {
             get
             {
-                int sum = 3;
+                int sum = 2;
                 if (tileData != null) sum += tileData.fatigueCostModifier;
                 return sum;
             }

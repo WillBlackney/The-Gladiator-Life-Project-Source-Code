@@ -304,7 +304,10 @@ namespace HexGameEngine.Abilities
 
             // Update UI energy bar
             if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
+            {
                 CombatUIController.Instance.EnergyBar.UpdateIcons(TurnController.Instance.EntityActivated.currentEnergy);
+                CombatUIController.Instance.ResetFatigueCostDemo();
+            }                
 
             OnAbilityUsedStart(character, ability, target);
 

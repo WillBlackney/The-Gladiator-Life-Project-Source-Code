@@ -165,6 +165,7 @@ namespace HexGameEngine.Characters
                 "accuracy: " + accuracy.value +", " +
                 "dodge: " + dodge.value +", " +
                 "wits: " + wits.value +", " +
+                "fatigue: " + fatigue.value + ", " +
                 "resolve: " + resolve.value);
         }
 

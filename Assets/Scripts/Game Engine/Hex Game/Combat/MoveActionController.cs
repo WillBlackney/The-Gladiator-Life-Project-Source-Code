@@ -145,6 +145,8 @@ namespace HexGameEngine.Combat
                 int energyCost = Pathfinder.GetEnergyCostOfPath(character, character.currentTile, p.HexsOnPath);
                 ShowPathCostPopup(energyCost);
                 CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter(character.currentEnergy, energyCost);
+                CombatUIController.Instance.DoFatigueCostDemo(Pathfinder.GetFatigueCostOfPath(character, character.currentTile, p.HexsOnPath),
+                    character.currentFatigue, StatCalculator.GetTotalMaxFatigue(character));
 
                 // Characters with Slippery perk are immune to free strikes.
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Slippery)) return;
@@ -164,6 +166,7 @@ namespace HexGameEngine.Combat
             {
                 HidePathCostPopup();
                 CombatUIController.Instance.EnergyBar.UpdateIcons(character.currentEnergy, 0.25f);
+                CombatUIController.Instance.ResetFatigueCostDemo();
             }
 
         }
@@ -190,7 +193,11 @@ namespace HexGameEngine.Combat
             ClearPath();
             HidePathCostPopup();
             if(TurnController.Instance.EntityActivated != null && resetEnergyBar)
+            {
                 CombatUIController.Instance.EnergyBar.UpdateIcons(TurnController.Instance.EntityActivated.currentEnergy, 0.25f);
+                CombatUIController.Instance.ResetFatigueCostDemo();
+            }
+               
             clickedHex = null;
         }
         #endregion

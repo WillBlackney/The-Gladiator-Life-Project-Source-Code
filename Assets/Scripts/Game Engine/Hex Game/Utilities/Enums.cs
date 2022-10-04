@@ -55,6 +55,7 @@ namespace HexGameEngine
         Constitution = 4,
         Resolve = 5,
         Wits = 6,
+        Fatigue = 7,
     }
     public enum ItemCoreAttribute
     {

@@ -89,14 +89,16 @@ namespace HexGameEngine.UI
                 else if (w.MyAttribute == CoreAttribute.Dodge)
                     currentCharacter.attributeSheet.dodge.value += currentCharacter.attributeRolls[0].dodgeRoll;
                 else if (w.MyAttribute == CoreAttribute.Resolve)
-                    currentCharacter.attributeSheet.resolve.value += currentCharacter.attributeRolls[0].resolveRoll;
+                    currentCharacter.attributeSheet.resolve.value += currentCharacter.attributeRolls[0].resolveRoll;                
+                else if (w.MyAttribute == CoreAttribute.Wits)
+                    currentCharacter.attributeSheet.wits.value += currentCharacter.attributeRolls[0].witsRoll;
+                else if (w.MyAttribute == CoreAttribute.Fatigue)
+                    currentCharacter.attributeSheet.fatigue.value += currentCharacter.attributeRolls[0].fatigueRoll;
                 else if (w.MyAttribute == CoreAttribute.Constitution)
                 {
                     currentCharacter.attributeSheet.constitution.value += currentCharacter.attributeRolls[0].constitutionRoll;
                     CharacterDataController.Instance.SetCharacterHealth(currentCharacter, currentCharacter.currentHealth + currentCharacter.attributeRolls[0].constitutionRoll);
                 }
-                else if (w.MyAttribute == CoreAttribute.Wits)
-                    currentCharacter.attributeSheet.wits.value += currentCharacter.attributeRolls[0].witsRoll;
 
             }
 
@@ -108,17 +110,6 @@ namespace HexGameEngine.UI
 
             // Rebuild character roster views
             CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
-
-            // Update scroll panel views
-            /*
-            if(currentCharacter.attributeRolls.Count == 0 && 
-                currentCharacter.talentRolls.Count == 0 && 
-                currentCharacter.perkPoints == 0)
-            {
-                // Rebuild character scroll roster
-                CharacterScrollPanelController.Instance.RebuildViews();
-            }
-            */
             CharacterScrollPanelController.Instance.RebuildViews();
         }
         #endregion

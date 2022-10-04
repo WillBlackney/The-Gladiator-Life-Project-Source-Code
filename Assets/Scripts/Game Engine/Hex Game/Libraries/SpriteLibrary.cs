@@ -74,6 +74,9 @@ namespace HexGameEngine.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite resolve;
+        [PreviewField(75)]
+        [SerializeField]
+        private Sprite fatigue;
         #endregion
 
         // Ability Type Images
@@ -218,6 +221,7 @@ namespace HexGameEngine.Libraries
             else if (attribute == CoreAttribute.Dodge) return dodge;
             else if (attribute == CoreAttribute.Resolve) return resolve;
             else if (attribute == CoreAttribute.Wits) return wits;
+            else if (attribute == CoreAttribute.Fatigue) return fatigue;
             else return null;
         }
         public Sprite GetStressStateSprite(StressState state)

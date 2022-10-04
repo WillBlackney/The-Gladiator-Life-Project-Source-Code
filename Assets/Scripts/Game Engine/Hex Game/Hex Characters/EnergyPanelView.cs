@@ -18,9 +18,6 @@ namespace HexGameEngine.Characters
 
         #endregion
 
-        #region Getters + Accessors
-        #endregion
-
         #region Logic
         public void UpdateIcons(int energy, float changeSpeed = 0f)
         {
@@ -39,22 +36,7 @@ namespace HexGameEngine.Characters
                 energyIcons[i - 1].SetViewState(EnergyIconViewState.Red, 0.25f);
             }
         }
-        #endregion
-
-        /*
-         * Functions ::
-         * 
-         * OnABilityButtonMouseEnter
-         * OnABilityButtonMouseExit
-         * UpdateIcons
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         */
+        #endregion                
 
     }
 }

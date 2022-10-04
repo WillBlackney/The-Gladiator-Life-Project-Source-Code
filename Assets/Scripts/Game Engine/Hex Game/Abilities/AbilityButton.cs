@@ -66,7 +66,9 @@ namespace HexGameEngine.Abilities
                 CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter
                               (MyAbilityData.myCharacter.currentEnergy, AbilityController.Instance.GetAbilityEnergyCost(MyAbilityData.myCharacter, MyAbilityData));
 
-                // to do: update fatigue gui on left panel for mouse over
+                // Update fatigue gui on left panel for mouse over
+                CombatUIController.Instance.DoFatigueCostDemo(AbilityController.Instance.GetAbilityFatigueCost(MyAbilityData.myCharacter, MyAbilityData),
+                    MyAbilityData.myCharacter.currentFatigue, StatCalculator.GetTotalMaxFatigue(MyAbilityData.myCharacter));
             }
         }
 
@@ -85,14 +87,16 @@ namespace HexGameEngine.Abilities
                         CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter
                           (a.myCharacter.currentEnergy, AbilityController.Instance.GetAbilityEnergyCost(a.myCharacter, a));
 
-                        // to do: update fatigue bar ui
+                        // Update fatigue gui on left panel for mouse over
+                        CombatUIController.Instance.DoFatigueCostDemo(AbilityController.Instance.GetAbilityFatigueCost(a.myCharacter, MyAbilityData),
+                            a.myCharacter.currentFatigue, StatCalculator.GetTotalMaxFatigue(a.myCharacter));
+
 
                     }
                     else
                     {
                         CombatUIController.Instance.EnergyBar.UpdateIcons(MyAbilityData.myCharacter.currentEnergy, 0.25f);
-
-                        // to do: update fatigue bar ui
+                        CombatUIController.Instance.ResetFatigueCostDemo();
                     }
 
 

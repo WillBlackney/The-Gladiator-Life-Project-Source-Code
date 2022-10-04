@@ -1501,15 +1501,16 @@ namespace HexGameEngine.Characters
             // Update GUI
             if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
             {
-                // Update energy bar GUI
-                int energyVFX = character.currentFatigue;
-                // to do: update fatigue bar on main UI
-               // VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.EnergyBar.UpdateIcons(energyVFX));
+                int currentFat = character.currentFatigue;
+                int maxFat = StatCalculator.GetTotalMaxFatigue(character);
+
+                // Modify Screen UI elements
+                if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
+                    VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.UpdateFatigueComponents(currentFat, maxFat));
 
                 // Update ability button validity overlays
                 foreach (AbilityButton b in CombatUIController.Instance.AbilityButtons)
                     b.UpdateAbilityButtonUnusableOverlay();
-
             }
 
         }

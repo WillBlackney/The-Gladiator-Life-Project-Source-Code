@@ -50,5 +50,5 @@ MonoBehaviour:
       abilityEffectType: 0
       phrase: while standing here.
   moveCostModifier: 2
-  fatigueCostModifier: 3
+  fatigueCostModifier: 4
   allowElevation: 0
