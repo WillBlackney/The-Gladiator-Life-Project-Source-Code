@@ -75,6 +75,9 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] private TextMeshProUGUI recruitRightPanelWitsText;
         [SerializeField] private GameObject[] recruitRightPanelWitsStars;
         [Space(10)]
+        [SerializeField] private TextMeshProUGUI recruitRightPanelFatigueText;
+        [SerializeField] private GameObject[] recruitRightPanelFatigueStars;
+        [Space(10)]
 
         [Title("Hospital Page Core Components")]
         [SerializeField] private GameObject hospitalPageVisualParent;
@@ -314,6 +317,9 @@ namespace HexGameEngine.TownFeatures
 
             recruitRightPanelWitsText.text = character.attributeSheet.wits.value.ToString();
             BuildStars(recruitRightPanelWitsStars, character.attributeSheet.wits.stars);
+
+            recruitRightPanelFatigueText.text = character.attributeSheet.fatigue.value.ToString();
+            BuildStars(recruitRightPanelFatigueStars, character.attributeSheet.fatigue.stars);
 
             // Build perk buttons
             for (int i = 0; i < character.passiveManager.perks.Count; i++)

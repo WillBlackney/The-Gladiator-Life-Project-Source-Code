@@ -469,30 +469,26 @@ namespace HexGameEngine.MainMenu
         {
             int dif = 0;
 
-            if (att == CoreAttribute.Might)
-            {
+            if (att == CoreAttribute.Might)            
                 dif = characterBuild.attributeSheet.might.value - baselineAttributes.might.value;
-            }
-            else if (att == CoreAttribute.Accuracy)
-            {
+            
+            else if (att == CoreAttribute.Accuracy)            
                 dif = characterBuild.attributeSheet.accuracy.value - baselineAttributes.accuracy.value;
-            }
-            else if (att == CoreAttribute.Dodge)
-            {
+            
+            else if (att == CoreAttribute.Dodge)            
                 dif = characterBuild.attributeSheet.dodge.value - baselineAttributes.dodge.value;
-            }
-            else if (att == CoreAttribute.Constitution)
-            {
+            
+            else if (att == CoreAttribute.Constitution)            
                 dif = characterBuild.attributeSheet.constitution.value - baselineAttributes.constitution.value;
-            }
-            else if (att == CoreAttribute.Resolve)
-            {
+            
+            else if (att == CoreAttribute.Resolve)            
                 dif = characterBuild.attributeSheet.resolve.value - baselineAttributes.resolve.value;
-            }
-            else if (att == CoreAttribute.Wits)
-            {
+            
+            else if (att == CoreAttribute.Wits)            
                 dif = characterBuild.attributeSheet.wits.value - baselineAttributes.wits.value;
-            }
+            
+            else if (att == CoreAttribute.Fatigue)            
+                dif = characterBuild.attributeSheet.fatigue.value - baselineAttributes.fatigue.value;            
 
             Debug.Log("MainMenuController.GetCharacterAttributeDifference() returning " + dif.ToString() +
                 " for attribute: " + att.ToString());
@@ -520,7 +516,9 @@ namespace HexGameEngine.MainMenu
             
             else if (att == CoreAttribute.Wits)            
                 value = characterBuild.attributeSheet.wits.value;
-            
+
+            else if (att == CoreAttribute.Fatigue)
+                value = characterBuild.attributeSheet.fatigue.value;
 
             Debug.Log("MainMenuController.GetCharacterAttributeValue) returning " + value.ToString() +
                " for attribute: " + att.ToString());
@@ -536,7 +534,7 @@ namespace HexGameEngine.MainMenu
             dif += GetCharacterAttributeDifference(CoreAttribute.Dodge) ;
             dif += GetCharacterAttributeDifference(CoreAttribute.Resolve) ;
             dif += GetCharacterAttributeDifference(CoreAttribute.Wits) ;
-
+            dif += GetCharacterAttributeDifference(CoreAttribute.Fatigue);
             Debug.Log("MainMenuController.GetTotalAttributePointsSpent() returning: " + dif.ToString());
             return dif;
         }           
@@ -554,6 +552,8 @@ namespace HexGameEngine.MainMenu
                 characterBuild.attributeSheet.resolve.value -= 1;
             else if (row.Attribute == CoreAttribute.Wits)
                 characterBuild.attributeSheet.wits.value -= 1;
+            else if (row.Attribute == CoreAttribute.Fatigue)
+                characterBuild.attributeSheet.fatigue.value -= 1;
 
             RebuildAttributeSection();
         }
@@ -571,6 +571,8 @@ namespace HexGameEngine.MainMenu
                 characterBuild.attributeSheet.resolve.value += 1;
             else if (row.Attribute == CoreAttribute.Wits)
                 characterBuild.attributeSheet.wits.value += 1;
+            else if (row.Attribute == CoreAttribute.Fatigue)
+                characterBuild.attributeSheet.fatigue.value += 1;
 
             RebuildAttributeSection();
         }
