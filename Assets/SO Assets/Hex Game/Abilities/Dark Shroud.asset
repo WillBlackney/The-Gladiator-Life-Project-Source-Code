@@ -17,6 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Apply 1 Stealth to an ally.
   abilitySprite: {fileID: 21300000, guid: c3862236b3ad7b8429d56d4c9b1a2063, type: 3}
   energyCost: 4
+  fatigueCost: 12
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 1
@@ -35,6 +36,7 @@ MonoBehaviour:
   baseRange: 2
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 10
@@ -93,7 +95,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}

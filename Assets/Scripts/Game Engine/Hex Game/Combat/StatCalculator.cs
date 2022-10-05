@@ -635,6 +635,41 @@ namespace HexGameEngine
 
             return wits;
         }
+        public static int GetTotalMaxFatigue(HexCharacterModel c, bool includeItemFatigueModifiers = true)
+        {
+            int maxFat = c.attributeSheet.fatigue.value;
+
+            // cant go below
+            if (maxFat < 0)
+                maxFat = 0;
+
+            // Items
+            if (includeItemFatigueModifiers)
+            {
+                maxFat += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fatigue, c.itemSet);
+                maxFat -= ItemController.Instance.GetTotalFatiguePenaltyFromItemSet(c.itemSet);
+            }         
+
+            return maxFat;
+        }
+        public static int GetTotalMaxFatigue(HexCharacterData c, bool includeItemFatigueModifiers = true)
+        {
+            int maxFat = c.attributeSheet.fatigue.value;
+
+            // cant go below
+            if (maxFat < 0)
+                maxFat = 0;
+
+            // Items
+            if (includeItemFatigueModifiers)
+            {
+                maxFat += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fatigue, c.itemSet);
+                maxFat -= ItemController.Instance.GetTotalFatiguePenaltyFromItemSet(c.itemSet);
+            }
+
+            return maxFat;
+
+        }
         #endregion
 
         // Secondary Attributes
@@ -713,31 +748,7 @@ namespace HexGameEngine
             return fatRecovery;
 
         }
-        public static int GetTotalMaxFatigue(HexCharacterModel c)
-        {
-            int maxFat = c.attributeSheet.fatigue.value;
-
-            // cant go below
-            if (maxFat < 0)
-                maxFat = 0;
-            // Items
-            maxFat += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fatigue, c.itemSet);
-
-            return maxFat;
-        }
-        public static int GetTotalMaxFatigue(HexCharacterData c)
-        {
-            int maxFat = c.attributeSheet.fatigue.value;
-
-            // cant go below
-            if (maxFat < 0)
-                maxFat = 0;
-            // Items
-            maxFat += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fatigue, c.itemSet);
-
-            return maxFat;
-
-        }
+   
         public static int GetTotalActionPointRecovery(HexCharacterModel c)
         {
             int energyRecovery = c.attributeSheet.apRecovery;

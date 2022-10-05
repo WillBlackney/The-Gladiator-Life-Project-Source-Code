@@ -17,6 +17,7 @@ MonoBehaviour:
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
   rarity: 1
+  fatiguePenalty: 5
   lootable: 0
   includeInLibrary: 1
   weaponClass: 3
@@ -25,6 +26,7 @@ MonoBehaviour:
   injuryTypesCaused: 02000000
   minArmourRoll: 0
   maxArmourRoll: 0
+  armourClass: 0
   grantedAbilities:
   - {fileID: 11400000, guid: b469a113483952548ba6d2850fa80a02, type: 2}
   - {fileID: 11400000, guid: 2173c4e533a53184f8ac5a14628bf342, type: 2}

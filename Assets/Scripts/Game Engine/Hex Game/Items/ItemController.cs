@@ -126,6 +126,7 @@ namespace HexGameEngine.Items
             i.injuryTypesCaused = d.injuryTypesCaused;
             i.itemEffectSets = d.itemEffectSets;
 
+            i.fatiguePenalty = d.fatiguePenalty;
             i.minArmourRoll = d.minArmourRoll;
             i.maxArmourRoll = d.maxArmourRoll;
             i.armourClass = d.armourClass;
@@ -154,6 +155,7 @@ namespace HexGameEngine.Items
             i.grantedAbilities = original.grantedAbilities;
 
             i.armourAmount = original.armourAmount;
+            i.fatiguePenalty = original.fatiguePenalty;
             i.minArmourRoll = original.minArmourRoll;
             i.maxArmourRoll = original.maxArmourRoll;
             i.armourClass = original.armourClass;
@@ -219,10 +221,10 @@ namespace HexGameEngine.Items
             else if (itemData.itemType == ItemType.Body)
             {
                 if (itemData.armourClass == ItemArmourClass.Light)
-                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, 1));
+                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, 2));
 
                 else if (itemData.armourClass == ItemArmourClass.Heavy)                
-                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, -2));                
+                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, -3));                
             }
             
 
@@ -421,7 +423,19 @@ namespace HexGameEngine.Items
             ret += GetTotalAttributeBonusFromItemData(attribute, set.bodyArmour);
             ret += GetTotalAttributeBonusFromItemData(attribute, set.trinket);
             return ret;
-        }   
+        }
+        public int GetTotalFatiguePenaltyFromItemSet(ItemSet set)
+        {
+            int ret = 0;
+            if (set.mainHandItem != null) ret += set.mainHandItem.fatiguePenalty;
+            if (set.offHandItem != null) ret += set.offHandItem.fatiguePenalty;
+            if (set.trinket != null) ret += set.trinket.fatiguePenalty;
+            if (set.headArmour != null) ret += set.headArmour.fatiguePenalty;
+            if (set.bodyArmour != null) ret += set.bodyArmour.fatiguePenalty;
+
+            Debug.Log("ItemController.GetTotalArmourBonusFromItemSet() returning: " + ret.ToString());
+            return ret;
+        }
         public int GetTotalArmourBonusFromItemSet(ItemSet set)
         {
             int ret = 0;

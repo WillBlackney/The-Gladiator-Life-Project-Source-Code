@@ -30,7 +30,7 @@ namespace HexGameEngine.Characters
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public Attribute fatigue = new Attribute(50, 0);
+        public Attribute fatigue = new Attribute(60, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]

@@ -17,6 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Apply 2 Weakened to target. If not resisted, gain 2 Guard.
   abilitySprite: {fileID: 21300000, guid: e730c287369c38a45874e1bacce979ac, type: 3}
   energyCost: 4
+  fatigueCost: 12
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0

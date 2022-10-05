@@ -18,6 +18,7 @@ MonoBehaviour:
     No Accuracy penalty when used in melee.
   abilitySprite: {fileID: 21300000, guid: ed507ec71b5df984a9540ead6d552d2a, type: 3}
   energyCost: 4
+  fatigueCost: 8
   baseCooldown: 3
   abilityType: 3
   doesNotBreakStealth: 0

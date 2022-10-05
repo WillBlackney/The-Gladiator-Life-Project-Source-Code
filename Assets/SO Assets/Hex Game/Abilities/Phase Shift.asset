@@ -17,6 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Switch places with any character via teleportation.
   abilitySprite: {fileID: 21300000, guid: 52a7a8161d4971448a4c97e9a9e0d380, type: 3}
   energyCost: 6
+  fatigueCost: 8
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0
@@ -39,6 +40,7 @@ MonoBehaviour:
   baseRange: 2
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 15
@@ -67,7 +69,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}

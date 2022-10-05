@@ -17,11 +17,13 @@ MonoBehaviour:
   baseAbilityDescription: Stun all enemies within your Aura.
   abilitySprite: {fileID: 21300000, guid: f426e3ed9a4f1c349a60f72bbabc79e7, type: 3}
   energyCost: 6
+  fatigueCost: 15
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 0
@@ -32,7 +34,9 @@ MonoBehaviour:
     level: 1
   abilitySubRequirements: []
   baseRange: 0
+  gainRangeBonusFromVision: 0
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 12
@@ -121,7 +125,9 @@ MonoBehaviour:
     minBaseDamage: 8
     maxBaseDamage: 12
     guaranteedHit: 1
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 02000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -134,6 +140,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0

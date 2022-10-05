@@ -17,6 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Knock Back an enemy 1 tile.
   abilitySprite: {fileID: 21300000, guid: ed507ec71b5df984a9540ead6d552d2a, type: 3}
   energyCost: 3
+  fatigueCost: 12
   baseCooldown: 2
   abilityType: 1
   doesNotBreakStealth: 0
@@ -35,6 +36,7 @@ MonoBehaviour:
   baseRange: 1
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 5
@@ -93,7 +95,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
     injuryTypesCaused: 

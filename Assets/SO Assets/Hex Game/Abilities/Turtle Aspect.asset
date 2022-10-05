@@ -18,6 +18,7 @@ MonoBehaviour:
     by 15%, but you cannot move or dodge attacks. '
   abilitySprite: {fileID: 21300000, guid: be2008cd09bd2d3458d2cf0511d72a34, type: 3}
   energyCost: 6
+  fatigueCost: 15
   baseCooldown: 2
   abilityType: 1
   doesNotBreakStealth: 0

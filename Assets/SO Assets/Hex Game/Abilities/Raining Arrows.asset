@@ -18,11 +18,13 @@ MonoBehaviour:
     of target location. '
   abilitySprite: {fileID: 21300000, guid: 1fc0f3de37d57bc45af84b4d417f6236, type: 3}
   energyCost: 5
+  fatigueCost: 12
   baseCooldown: 2
   abilityType: 3
   doesNotBreakStealth: 0
   weaponRequirement: 3
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 5
@@ -35,6 +37,7 @@ MonoBehaviour:
   baseRange: 2
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 1
   abilityEffects:
   - effectType: 3
@@ -93,7 +96,9 @@ MonoBehaviour:
     minBaseDamage: 18
     maxBaseDamage: 22
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 01000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -106,6 +111,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0

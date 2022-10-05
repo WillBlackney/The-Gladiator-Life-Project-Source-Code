@@ -17,6 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Gain 4 Action points. At the end of your turn, become Stunned.
   abilitySprite: {fileID: 21300000, guid: e9e03de5376ddbc499c6e642933ae1fb, type: 3}
   energyCost: 0
+  fatigueCost: 8
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0

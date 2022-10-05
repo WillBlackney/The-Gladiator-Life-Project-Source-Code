@@ -31,6 +31,9 @@ namespace HexGameEngine.Items
         public Rarity rarity;
         [VerticalGroup("General Info/Stats")]
         [LabelWidth(100)]
+        public int fatiguePenalty;
+        [VerticalGroup("General Info/Stats")]
+        [LabelWidth(100)]
         public bool lootable;
         [VerticalGroup("General Info/Stats")]
         [LabelWidth(100)]

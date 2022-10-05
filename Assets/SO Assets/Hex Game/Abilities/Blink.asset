@@ -17,6 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Teleport to a tile within 2.
   abilitySprite: {fileID: 21300000, guid: fbcd6eebda6e0524baf7238501cbb61a, type: 3}
   energyCost: 4
+  fatigueCost: 5
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0

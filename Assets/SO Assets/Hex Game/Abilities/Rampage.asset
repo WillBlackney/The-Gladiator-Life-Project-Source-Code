@@ -18,6 +18,7 @@ MonoBehaviour:
     by 1% for each point of health you have lost.
   abilitySprite: {fileID: 21300000, guid: 9fdb7221a4198b6468f04eac78cdfb71, type: 3}
   energyCost: 4
+  fatigueCost: 12
   baseCooldown: 2
   abilityType: 2
   doesNotBreakStealth: 0
@@ -36,6 +37,7 @@ MonoBehaviour:
   baseRange: 1
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 2
@@ -109,7 +111,9 @@ MonoBehaviour:
     minBaseDamage: 23
     maxBaseDamage: 27
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers:
     - type: 2

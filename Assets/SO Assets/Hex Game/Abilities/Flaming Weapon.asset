@@ -18,6 +18,7 @@ MonoBehaviour:
     1 Burning. '
   abilitySprite: {fileID: 21300000, guid: 15232d52bcd2235428bab1f7a099fa43, type: 3}
   energyCost: 4
+  fatigueCost: 5
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0
@@ -36,6 +37,7 @@ MonoBehaviour:
   baseRange: 1
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 1
@@ -94,7 +96,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -147,7 +151,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}

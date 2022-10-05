@@ -18,11 +18,13 @@ MonoBehaviour:
     within your Aura at the end of each turn.
   abilitySprite: {fileID: 21300000, guid: 019103e5a5f6bef4cb135e83c31f4819, type: 3}
   energyCost: 6
+  fatigueCost: 15
   baseCooldown: 2
   abilityType: 1
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 0
@@ -35,6 +37,7 @@ MonoBehaviour:
   baseRange: 0
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 1
@@ -93,7 +96,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -131,7 +136,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -144,6 +151,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0

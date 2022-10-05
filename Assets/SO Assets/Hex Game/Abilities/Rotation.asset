@@ -17,6 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Switch places with an ally.
   abilitySprite: {fileID: 21300000, guid: 1e064f44460f29944b8c1ac2e0b24b40, type: 3}
   energyCost: 3
+  fatigueCost: 5
   baseCooldown: 1
   abilityType: 1
   doesNotBreakStealth: 0
@@ -35,6 +36,7 @@ MonoBehaviour:
   baseRange: 1
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 15
@@ -63,7 +65,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}

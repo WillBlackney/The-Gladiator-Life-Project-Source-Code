@@ -18,6 +18,7 @@ MonoBehaviour:
     within 1 tile of target location. '
   abilitySprite: {fileID: 21300000, guid: c5a0d9f988aeb08479b0bc34a711628d, type: 3}
   energyCost: 6
+  fatigueCost: 15
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0

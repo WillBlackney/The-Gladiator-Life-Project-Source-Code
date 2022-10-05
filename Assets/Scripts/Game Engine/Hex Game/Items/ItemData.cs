@@ -24,6 +24,7 @@ namespace HexGameEngine.Items
         public InjuryType[] injuryTypesCaused;
 
         // Armour Properties
+        public int fatiguePenalty;
         public int armourAmount;
         public int minArmourRoll;
         public int maxArmourRoll;
@@ -81,6 +82,7 @@ namespace HexGameEngine.Items
                 weaponClass != WeaponClass.ThrowingNet &&
                 weaponClass != WeaponClass.None &&
                 weaponClass != WeaponClass.Shield &&
+                weaponClass != WeaponClass.Staff &&
                 weaponClass != WeaponClass.Bow;
             }
         }
@@ -91,6 +93,7 @@ namespace HexGameEngine.Items
                 return
                 weaponClass == WeaponClass.Bow ||
                 weaponClass == WeaponClass.Staff;
+                // cross bow in future
             }
         }
         #endregion

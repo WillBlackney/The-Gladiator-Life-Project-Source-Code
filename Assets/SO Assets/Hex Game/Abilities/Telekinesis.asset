@@ -18,6 +18,7 @@ MonoBehaviour:
     position.
   abilitySprite: {fileID: 21300000, guid: 49bc5f6f7a4d370449b6056374d86e10, type: 3}
   energyCost: 3
+  fatigueCost: 5
   baseCooldown: 2
   abilityType: 1
   doesNotBreakStealth: 0

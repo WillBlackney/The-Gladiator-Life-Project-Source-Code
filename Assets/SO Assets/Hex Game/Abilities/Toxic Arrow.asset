@@ -18,6 +18,7 @@ MonoBehaviour:
     On a Critical Strike, apply 3 Poisoned.
   abilitySprite: {fileID: 21300000, guid: 4f94d296240f46440be6c3ad86ee1b35, type: 3}
   energyCost: 4
+  fatigueCost: 12
   baseCooldown: 2
   abilityType: 3
   doesNotBreakStealth: 0
@@ -36,6 +37,7 @@ MonoBehaviour:
   baseRange: 3
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 1
   abilityEffects:
   - effectType: 2
@@ -124,7 +126,7 @@ MonoBehaviour:
     minBaseDamage: 23
     maxBaseDamage: 27
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
     injuryTypesCaused: 01000000
@@ -180,7 +182,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
     injuryTypesCaused: 
@@ -236,7 +238,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
     injuryTypesCaused: 

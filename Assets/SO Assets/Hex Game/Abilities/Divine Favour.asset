@@ -18,6 +18,7 @@ MonoBehaviour:
     and Blinded.
   abilitySprite: {fileID: 21300000, guid: d8fde918b4dc99248b5d09432384cef1, type: 3}
   energyCost: 3
+  fatigueCost: 8
   baseCooldown: 2
   abilityType: 1
   doesNotBreakStealth: 0

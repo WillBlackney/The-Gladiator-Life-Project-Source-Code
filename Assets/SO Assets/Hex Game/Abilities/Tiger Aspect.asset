@@ -18,6 +18,7 @@ MonoBehaviour:
     have +15 Critical chance and apply 1 Bleeding.
   abilitySprite: {fileID: 21300000, guid: 53f5695e6b485b94983e16c3d9880f79, type: 3}
   energyCost: 6
+  fatigueCost: 15
   baseCooldown: 2
   abilityType: 1
   doesNotBreakStealth: 0

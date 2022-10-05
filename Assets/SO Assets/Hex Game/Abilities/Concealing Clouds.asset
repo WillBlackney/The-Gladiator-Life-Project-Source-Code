@@ -17,6 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Give 2 Evasion to self and all allies within your Aura.
   abilitySprite: {fileID: 21300000, guid: 0ea3685577f1d9140b262ee39619b1f3, type: 3}
   energyCost: 5
+  fatigueCost: 12
   baseCooldown: 4
   abilityType: 1
   doesNotBreakStealth: 0

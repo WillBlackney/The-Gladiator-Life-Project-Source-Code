@@ -17,6 +17,7 @@ MonoBehaviour:
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
   rarity: 1
+  fatiguePenalty: 7
   lootable: 0
   includeInLibrary: 1
   weaponClass: 7

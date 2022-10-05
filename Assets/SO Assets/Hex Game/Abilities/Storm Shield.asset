@@ -18,6 +18,7 @@ MonoBehaviour:
     back to the attacker.
   abilitySprite: {fileID: 21300000, guid: 56682cecfd122b94ca7182850b4e6b6d, type: 3}
   energyCost: 4
+  fatigueCost: 8
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0
@@ -36,6 +37,7 @@ MonoBehaviour:
   baseRange: 2
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 10
@@ -94,7 +96,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}

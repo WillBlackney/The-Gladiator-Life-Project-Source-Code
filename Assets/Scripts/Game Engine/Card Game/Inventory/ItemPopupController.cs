@@ -241,12 +241,21 @@ namespace HexGameEngine.Items
             for (int i = 0; i < effectRows.Length; i++)
                 effectRows[i].gameObject.SetActive(false);
 
+            int iBoost = 0;
+            if(item.fatiguePenalty > 0)
+            {
+                iBoost = 1;
+                effectsParent.SetActive(true);
+                ModalDottedRow row = effectRows[0];
+                row.Build(TextLogic.ReturnColoredText("-" + item.fatiguePenalty.ToString(), TextLogic.blueNumber) + " Fatigue", DotStyle.Red);
+            }
+
             if (item.itemEffects.Count > 0)
             {
                 effectsParent.SetActive(true);
                 for(int i = 0; i < item.itemEffects.Count;i++)
                 {
-                    ModalDottedRow row = effectRows[i];
+                    ModalDottedRow row = effectRows[i + iBoost];
                     ItemEffect effect = item.itemEffects[i];
                     DotStyle dotStyle = DotStyle.Neutral;
 

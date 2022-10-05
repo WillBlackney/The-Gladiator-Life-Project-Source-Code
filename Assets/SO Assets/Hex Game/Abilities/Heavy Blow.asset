@@ -18,6 +18,7 @@ MonoBehaviour:
     to them.
   abilitySprite: {fileID: 21300000, guid: f1a479e622c1a7d468856ba2c0f89a66, type: 3}
   energyCost: 6
+  fatigueCost: 15
   baseCooldown: 2
   abilityType: 2
   doesNotBreakStealth: 0
@@ -180,4 +181,6 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: damage to them.
-  keyWords: []
+  keyWords:
+  - kewWordType: 1
+    passiveType: 74

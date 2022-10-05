@@ -18,6 +18,7 @@ MonoBehaviour:
     1 Guard.
   abilitySprite: {fileID: 21300000, guid: 233bcd20846a9d34882266c08b8b78d3, type: 3}
   energyCost: 4
+  fatigueCost: 8
   baseCooldown: 3
   abilityType: 2
   doesNotBreakStealth: 0

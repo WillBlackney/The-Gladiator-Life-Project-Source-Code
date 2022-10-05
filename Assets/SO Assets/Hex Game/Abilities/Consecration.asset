@@ -18,6 +18,7 @@ MonoBehaviour:
     within your aura.
   abilitySprite: {fileID: 21300000, guid: 97d478cf1bb73bd4c816ca384b7f6ac9, type: 3}
   energyCost: 4
+  fatigueCost: 12
   baseCooldown: 2
   abilityType: 1
   doesNotBreakStealth: 0

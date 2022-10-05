@@ -17,6 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Deal 100% Magic damage to target and apply 1 Blinded.
   abilitySprite: {fileID: 21300000, guid: a549ce7ca67ddac469b1d8b68b720222, type: 3}
   energyCost: 4
+  fatigueCost: 12
   baseCooldown: 2
   abilityType: 3
   doesNotBreakStealth: 0
@@ -35,6 +36,7 @@ MonoBehaviour:
   baseRange: 2
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 1
   abilityEffects:
   - effectType: 2
@@ -123,7 +125,9 @@ MonoBehaviour:
     minBaseDamage: 18
     maxBaseDamage: 22
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 0100000002000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -177,7 +181,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}

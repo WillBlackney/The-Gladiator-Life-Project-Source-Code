@@ -17,6 +17,7 @@ MonoBehaviour:
   baseAbilityDescription: Give 1 Rune to self or an ally.
   abilitySprite: {fileID: 21300000, guid: 31463702aa3acbb438fd301ccddb6488, type: 3}
   energyCost: 3
+  fatigueCost: 8
   baseCooldown: 3
   abilityType: 1
   doesNotBreakStealth: 0
