@@ -33,7 +33,7 @@ MonoBehaviour:
       value: 5
       stars: 0
     fatigue:
-      value: 50
+      value: 60
       stars: 0
     wits:
       value: 15

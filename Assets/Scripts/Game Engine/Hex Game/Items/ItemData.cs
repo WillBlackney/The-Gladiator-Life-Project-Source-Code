@@ -82,7 +82,6 @@ namespace HexGameEngine.Items
                 weaponClass != WeaponClass.ThrowingNet &&
                 weaponClass != WeaponClass.None &&
                 weaponClass != WeaponClass.Shield &&
-                weaponClass != WeaponClass.Staff &&
                 weaponClass != WeaponClass.Bow;
             }
         }

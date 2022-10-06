@@ -205,9 +205,10 @@ namespace HexGameEngine.Items
         {
             bool bRet = false;
             
-            if(MyItemRef.itemData != null)
+            if(MyItemRef.itemData != null && RosterItemSlot.SlotMousedOver != null)
             {
                 var mainHandItem = CharacterRosterViewController.Instance.CharacterCurrentlyViewing.itemSet.mainHandItem;
+
                 // Cant equip an off hand if main hand is empty
                 if (RosterItemSlot.SlotMousedOver.SlotType == RosterSlotType.OffHand &&
                     mainHandItem == null)

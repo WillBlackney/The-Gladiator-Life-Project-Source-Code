@@ -32,13 +32,17 @@ MonoBehaviour:
     resolve:
       value: 0
       stars: 0
+    fatigue:
+      value: 80
+      stars: 0
     wits:
       value: 5
       stars: 0
     maxHealth: 0
-    energyRecovery: 8
-    maxEnergy: 8
+    apRecovery: 8
+    maxAp: 8
     initiative: 4
+    fatigueRecovery: 8
     criticalChance: 15
     criticalModifier: 50
     physicalDamageBonus: 0
@@ -59,21 +63,21 @@ MonoBehaviour:
     directives:
     - action:
         actionType: 1
-        targettingPriority: 1
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: Plink
       requirements: []
     - action:
         actionType: 1
-        targettingPriority: 1
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: Steady Shot
       requirements: []
     - action:
         actionType: 3
-        targettingPriority: 1
+        targettingPriority: 
         getRangeFromAbility: 1
         range: 0
         abilityName: Steady Shot

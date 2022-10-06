@@ -637,18 +637,27 @@ namespace HexGameEngine
         }
         public static int GetTotalMaxFatigue(HexCharacterModel c, bool includeItemFatigueModifiers = true)
         {
-            int maxFat = c.attributeSheet.fatigue.value;
+            int maxFat = c.attributeSheet.fatigue.value;          
 
-            // cant go below
-            if (maxFat < 0)
-                maxFat = 0;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Ailing))
+                maxFat -= 10;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fit))
+                maxFat += 10;                     
 
             // Items
             if (includeItemFatigueModifiers)
             {
                 maxFat += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fatigue, c.itemSet);
-                maxFat -= ItemController.Instance.GetTotalFatiguePenaltyFromItemSet(c.itemSet);
-            }         
+                int itemFat = ItemController.Instance.GetTotalFatiguePenaltyFromItemSet(c.itemSet);
+                if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Outfitter) && itemFat > 0)
+                    itemFat = itemFat / 2;
+                maxFat -= itemFat;
+            }
+
+            // cant go below
+            if (maxFat < 0)
+                maxFat = 0;
 
             return maxFat;
         }
@@ -656,16 +665,25 @@ namespace HexGameEngine
         {
             int maxFat = c.attributeSheet.fatigue.value;
 
-            // cant go below
-            if (maxFat < 0)
-                maxFat = 0;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Ailing))
+                maxFat -= 10;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fit))
+                maxFat += 10;           
 
             // Items
             if (includeItemFatigueModifiers)
             {
                 maxFat += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fatigue, c.itemSet);
-                maxFat -= ItemController.Instance.GetTotalFatiguePenaltyFromItemSet(c.itemSet);
+                int itemFat = ItemController.Instance.GetTotalFatiguePenaltyFromItemSet(c.itemSet);
+                if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Outfitter) && itemFat > 0)
+                    itemFat = itemFat / 2;
+                maxFat -= itemFat;
             }
+
+             // cant go below
+            if (maxFat < 0)
+                maxFat = 0;
 
             return maxFat;
 
@@ -717,6 +735,7 @@ namespace HexGameEngine
 
             // Cant go negative
             if (intitiative < 0) intitiative = 0;
+
             // Items
             intitiative += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Initiative, c.itemSet);
 
@@ -726,11 +745,18 @@ namespace HexGameEngine
         {
             int fatRecovery = c.attributeSheet.fatigueRecovery;
 
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Wheezy))
+                fatRecovery -= 2;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StrongLungs))
+                fatRecovery += 2;
+                       
+            // Items
+            fatRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.FatigueRecovery, c.itemSet);
+
             // cant go below
             if (fatRecovery < 0)
                 fatRecovery = 0;
-            // Items
-            fatRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.FatigueRecovery, c.itemSet);
 
             return fatRecovery;
 
@@ -739,16 +765,22 @@ namespace HexGameEngine
         {
             int fatRecovery = c.attributeSheet.fatigueRecovery;
 
-            // cant go below
-            if (fatRecovery < 0)
-                fatRecovery = 0;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Wheezy))
+                fatRecovery -= 2;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StrongLungs))
+                fatRecovery += 2;
+
             // Items
             fatRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.FatigueRecovery, c.itemSet);
 
+            // cant go below
+            if (fatRecovery < 0)
+                fatRecovery = 0;
+
             return fatRecovery;
 
-        }
-   
+        }   
         public static int GetTotalActionPointRecovery(HexCharacterModel c)
         {
             int energyRecovery = c.attributeSheet.apRecovery;

@@ -32,13 +32,17 @@ MonoBehaviour:
     resolve:
       value: 35
       stars: 0
+    fatigue:
+      value: 80
+      stars: 0
     wits:
       value: 5
       stars: 0
     maxHealth: 0
-    energyRecovery: 8
-    maxEnergy: 8
+    apRecovery: 8
+    maxAp: 8
     initiative: 6
+    fatigueRecovery: 8
     criticalChance: 10
     criticalModifier: 50
     physicalDamageBonus: 0
@@ -59,7 +63,7 @@ MonoBehaviour:
     directives:
     - action:
         actionType: 1
-        targettingPriority: 0
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: Shield Wall Order
@@ -73,9 +77,10 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         alliesAlive: 0
+        abilityName: 
     - action:
         actionType: 1
-        targettingPriority: 0
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: Charge Order
@@ -89,16 +94,17 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         alliesAlive: 0
+        abilityName: 
     - action:
         actionType: 1
-        targettingPriority: 1
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: Strike
       requirements: []
     - action:
         actionType: 2
-        targettingPriority: 1
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: 
@@ -112,6 +118,7 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         alliesAlive: 1
+        abilityName: 
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 5da6171d9b5a21b47b2adc4c680a46c2, type: 2}

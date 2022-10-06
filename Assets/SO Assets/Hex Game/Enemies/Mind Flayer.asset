@@ -32,13 +32,17 @@ MonoBehaviour:
     resolve:
       value: 10
       stars: 0
+    fatigue:
+      value: 80
+      stars: 0
     wits:
       value: 5
       stars: 0
     maxHealth: 50
-    energyRecovery: 8
-    maxEnergy: 8
+    apRecovery: 8
+    maxAp: 8
     initiative: 8
+    fatigueRecovery: 8
     criticalChance: 5
     criticalModifier: 50
     physicalDamageBonus: 0
@@ -59,14 +63,14 @@ MonoBehaviour:
     directives:
     - action:
         actionType: 1
-        targettingPriority: 1
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: Shriek
       requirements: []
     - action:
         actionType: 3
-        targettingPriority: 1
+        targettingPriority: 
         getRangeFromAbility: 1
         range: 0
         abilityName: Shriek
@@ -80,6 +84,7 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         alliesAlive: 0
+        abilityName: 
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: e7bbef8e195ca0a429df7f1da90b09ec, type: 2}

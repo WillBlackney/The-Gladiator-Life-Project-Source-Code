@@ -32,13 +32,17 @@ MonoBehaviour:
     resolve:
       value: 0
       stars: 0
+    fatigue:
+      value: 80
+      stars: 0
     wits:
       value: 5
       stars: 0
     maxHealth: 0
-    energyRecovery: 8
-    maxEnergy: 8
+    apRecovery: 8
+    maxAp: 8
     initiative: 3
+    fatigueRecovery: 8
     criticalChance: 5
     criticalModifier: 50
     physicalDamageBonus: 0
@@ -59,14 +63,14 @@ MonoBehaviour:
     directives:
     - action:
         actionType: 1
-        targettingPriority: 1
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: Throwing Knife
       requirements: []
     - action:
         actionType: 3
-        targettingPriority: 1
+        targettingPriority: 
         getRangeFromAbility: 1
         range: 0
         abilityName: Throwing Knife
@@ -80,9 +84,10 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         alliesAlive: 0
+        abilityName: 
     - action:
         actionType: 1
-        targettingPriority: 0
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: Parry
@@ -96,6 +101,7 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         alliesAlive: 0
+        abilityName: 
       - requirementType: 3
         range: 0
         perkPairing:
@@ -105,16 +111,17 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         alliesAlive: 0
+        abilityName: 
     - action:
         actionType: 1
-        targettingPriority: 1
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: Slash
       requirements: []
     - action:
         actionType: 2
-        targettingPriority: 1
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: 

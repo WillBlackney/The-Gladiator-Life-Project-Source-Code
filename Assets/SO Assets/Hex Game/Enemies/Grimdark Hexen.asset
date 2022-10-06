@@ -32,13 +32,17 @@ MonoBehaviour:
     resolve:
       value: 25
       stars: 0
+    fatigue:
+      value: 80
+      stars: 0
     wits:
       value: 5
       stars: 0
     maxHealth: 0
-    energyRecovery: 8
-    maxEnergy: 8
+    apRecovery: 8
+    maxAp: 8
     initiative: 6
+    fatigueRecovery: 8
     criticalChance: 5
     criticalModifier: 50
     physicalDamageBonus: 0
@@ -59,7 +63,7 @@ MonoBehaviour:
     directives:
     - action:
         actionType: 1
-        targettingPriority: 3
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: Dark Blessing
@@ -73,6 +77,7 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         alliesAlive: 0
+        abilityName: 
       - requirementType: 6
         range: 0
         perkPairing:
@@ -82,16 +87,17 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         alliesAlive: 0
+        abilityName: 
     - action:
         actionType: 1
-        targettingPriority: 1
+        targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: Shadow Bolt
       requirements: []
     - action:
         actionType: 3
-        targettingPriority: 1
+        targettingPriority: 
         getRangeFromAbility: 1
         range: 0
         abilityName: Shadow Bolt
