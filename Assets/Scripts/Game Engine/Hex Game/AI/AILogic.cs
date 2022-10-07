@@ -178,7 +178,7 @@ namespace HexGameEngine.AI
                     Path p = Pathfinder.GetValidPath(character, character.currentTile, node, LevelController.Instance.AllLevelNodes.ToList());
                     if (p != null &&
                        p.Length > bestCurrentDistance &&
-                       MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
+                       MoveActionController.Instance.GetFreeStrikersAndSpearWallStrikersOnPath(character, p).Count == 0)
                     {
                         bestCurrentDistance = p.Length;
                         bestPath = p;
@@ -588,7 +588,7 @@ namespace HexGameEngine.AI
                     Path p = Pathfinder.GetValidPath(character, character.currentTile, node, LevelController.Instance.AllLevelNodes.ToList());
                     if(p != null &&
                        p.Length > bestCurrentDistance &&
-                       MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
+                       MoveActionController.Instance.GetFreeStrikersAndSpearWallStrikersOnPath(character, p).Count == 0)
                     {
                         bestCurrentDistance = p.Length;
                         bestPath = p;

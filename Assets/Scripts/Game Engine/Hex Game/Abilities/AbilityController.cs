@@ -27,6 +27,7 @@ namespace HexGameEngine.Abilities
         [SerializeField] private AbilityDataSO[] allAbilityDataSOs;
         [SerializeField] private AbilityDataSO freeStrikeAbilityData;
         [SerializeField] private AbilityDataSO riposteAbilityData;
+        [SerializeField] private AbilityDataSO spearWallStrikeAbilityData;
         private AbilityData[] allAbilities;
 
         [Header("Hit Chance Pop Up Components")]
@@ -46,6 +47,10 @@ namespace HexGameEngine.Abilities
 
         // Getters + Accessors
         #region
+        public AbilityData SpearWallStrikeAbility
+        {
+            get; private set;
+        }
         public AbilityData FreeStrikeAbility
         {
             get; private set;
@@ -98,6 +103,7 @@ namespace HexGameEngine.Abilities
             // Setup free strike + globally shared abilities
             FreeStrikeAbility = BuildAbilityDataFromScriptableObjectData(freeStrikeAbilityData);
             RiposteAbility = BuildAbilityDataFromScriptableObjectData(riposteAbilityData);
+            SpearWallStrikeAbility = BuildAbilityDataFromScriptableObjectData(spearWallStrikeAbilityData);
 
         }
         #endregion
@@ -544,7 +550,8 @@ namespace HexGameEngine.Abilities
                         target.currentTile.Distance(caster.currentTile) <= 1 &&
                         // Cant riposte against another riposte, or free strike
                         ability.abilityName != RiposteAbility.abilityName && 
-                        ability.abilityName != FreeStrikeAbility.abilityName)
+                        ability.abilityName != FreeStrikeAbility.abilityName &&
+                         ability.abilityName != SpearWallStrikeAbility.abilityName)
                     {
                         // Riposte notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>

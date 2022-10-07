@@ -86,7 +86,7 @@ namespace HexGameEngine.Combat
                 HandleFirstHexSelection(h, character);
             }
         }     
-        public List<HexCharacterModel> GetFreeStrikersOnPath(HexCharacterModel characterMoving, Path p)
+        public List<HexCharacterModel> GetFreeStrikersAndSpearWallStrikersOnPath(HexCharacterModel characterMoving, Path p)
         {
             // Check Free strike opportunities along the path.
             List<LevelNode> tilesMovedFrom = new List<LevelNode>();
@@ -116,6 +116,25 @@ namespace HexGameEngine.Combat
                     }
                 }
             }
+
+            // Determine spear wall attacks
+            tilesMovedFrom.Add(p.Destination);
+            foreach (LevelNode h in tilesMovedFrom)
+            {
+                List<LevelNode> meleeTiles = LevelController.Instance.GetAllHexsWithinRange(h, 1);
+                foreach (LevelNode meleeHex in meleeTiles)
+                {
+                    // Check validity of free strike
+                    if (meleeHex.myCharacter != null &&
+                         HexCharacterController.Instance.IsCharacterAbleToMakeSpearWallAttack(meleeHex.myCharacter) &&
+                        !HexCharacterController.Instance.IsTargetFriendly(characterMoving, meleeHex.myCharacter) &&                        
+                         !freeStrikers.Contains(meleeHex.myCharacter))
+                    {
+                        freeStrikers.Add(meleeHex.myCharacter);
+                    }
+                }
+            }
+
 
             return freeStrikers;
         }
@@ -152,7 +171,7 @@ namespace HexGameEngine.Combat
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Slippery)) return;
 
                 // Check Free strike opportunities along the path.
-                List<HexCharacterModel> freeStrikers = GetFreeStrikersOnPath(character, p);
+                List<HexCharacterModel> freeStrikers = GetFreeStrikersAndSpearWallStrikersOnPath(character, p);
 
                 // disable all character free strike indicators
                 foreach(HexCharacterModel enemy in freeStrikers)

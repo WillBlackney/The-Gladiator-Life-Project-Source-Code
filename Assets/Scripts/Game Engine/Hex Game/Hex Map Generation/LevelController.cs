@@ -397,9 +397,10 @@ namespace HexGameEngine.HexTiles
         }
         private void HandleMoveToHex(HexCharacterModel character, LevelNode destination, bool connectCharacterWithHex = true)
         {
-            // Check and resolve free strikes before moving
+            // Check and resolve free strikes + spear wall attacks before moving
             List<HexCharacterModel> allEnemies = HexCharacterController.Instance.GetAllEnemiesOfCharacter(character);
             List<HexCharacterModel> freeStrikeEnemies = new List<HexCharacterModel>();
+            List<HexCharacterModel> spearWallEnemies = new List<HexCharacterModel>();
             List<LevelNode> adjacentTiles = GetAllHexsWithinRange(character.currentTile, 1);
             bool didPauseMoveAnim = false;
 
@@ -443,16 +444,15 @@ namespace HexGameEngine.HexTiles
             }
 
             // Resume movement anim if it stopped previously during free strike sequence
-            if (didPauseMoveAnim)
-            {
+            if (didPauseMoveAnim)            
                 VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayMoveAnimation(character.hexCharacterView));
-            }
-
+            
             // Face towards destination hex
             FaceCharacterTowardsHex(character, destination);
 
             // Lock player to hex if it is unoccupied
-            if(destination.myCharacter == null)
+            var previousTile = character.currentTile;
+            if (destination.myCharacter == null)
                 PlaceCharacterOnHex(character, destination);
 
             // Move animation
@@ -462,6 +462,46 @@ namespace HexGameEngine.HexTiles
 
             // TO DO: events that trigger when the character steps onto a new tile go here (maybe?)...
             character.tilesMovedThisTurn++;
+
+            // Determine which enemies are valid to take a spear wall attack
+            if (!PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Slippery))
+            {
+                foreach (HexCharacterModel c in allEnemies)
+                {
+                    List<LevelNode> aTiles = GetAllHexsWithinRange(c.currentTile, 1);
+                    if (aTiles.Contains(destination) &&
+                        !aTiles.Contains(previousTile) && 
+                        HexCharacterController.Instance.IsCharacterAbleToMakeSpearWallAttack(c))
+                    {
+                        spearWallEnemies.Add(c);
+                    }
+                }
+
+                if (spearWallEnemies.Count > 0)
+                {
+                    didPauseMoveAnim = true;
+                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayIdleAnimation(character.hexCharacterView));
+                }
+
+                // Resolve spear wall strike for each character
+                foreach (HexCharacterModel c in spearWallEnemies)
+                {
+                    if (character.currentHealth > 0 && character.livingState == LivingState.Alive)
+                    {
+                        // Start free strike attack
+                        AbilityController.Instance.UseAbility(c, AbilityController.Instance.SpearWallStrikeAbility, character);
+                        VisualEventManager.Instance.InsertTimeDelayInQueue(1f);
+                    }
+                }
+            }
+
+            // Cancel if character was killed from spear wall strikes
+            if (character == null ||
+                character.currentHealth == 0 ||
+                character.livingState == LivingState.Dead)
+            {
+                return;
+            }
 
             // Remove flight
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Flight))

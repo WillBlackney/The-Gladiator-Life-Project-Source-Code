@@ -483,6 +483,7 @@ namespace HexGameEngine
         Drunkard = 25,
         Shed = 146,
         ShieldWall = 12,
+        SpearWall = 162,
         ShortSighted = 105,
         Slippery = 56,
         Sloppy = 100,

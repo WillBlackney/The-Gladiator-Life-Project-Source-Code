@@ -946,16 +946,17 @@ namespace HexGameEngine.Characters
 
                 // PASSIVE EXPIRIES
                 // Taunt
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Taunt) && character.currentHealth > 0)
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Taunt, -1, true, 0.5f);
-                }
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Taunt) && character.currentHealth > 0)                
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Taunt, -1, true, 0.5f);                
+
+                // Spear Wall
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SpearWall) && character.currentHealth > 0)                
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.SpearWall, -1, true, 0.5f);                
 
                 // Divine Favour
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.DivineFavour) && character.currentHealth > 0)
-                {
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.DivineFavour) && character.currentHealth > 0)                
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.DivineFavour, -1, true, 0.5f);
-                }
+                
             }           
 
             // If shattered, determine result
@@ -2087,6 +2088,16 @@ namespace HexGameEngine.Characters
         public bool IsCharacterAbleToMakeRiposteAttack(HexCharacterModel c)
         {
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Riposte) &&
+                c.itemSet.mainHandItem != null &&
+                c.itemSet.mainHandItem.IsMeleeWeapon &&
+                IsCharacterAbleToTakeActions(c))
+                return true;
+
+            else return false;
+        }
+        public bool IsCharacterAbleToMakeSpearWallAttack(HexCharacterModel c)
+        {
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.SpearWall) &&
                 c.itemSet.mainHandItem != null &&
                 c.itemSet.mainHandItem.IsMeleeWeapon &&
                 IsCharacterAbleToTakeActions(c))

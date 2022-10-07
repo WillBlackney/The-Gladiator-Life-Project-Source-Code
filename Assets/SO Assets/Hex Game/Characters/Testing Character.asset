@@ -21,10 +21,10 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 1000
+      value: 1
       stars: 0
     dodge:
-      value: 50
+      value: 0
       stars: 0
     accuracy:
       value: 200
@@ -32,13 +32,17 @@ MonoBehaviour:
     resolve:
       value: 5
       stars: 0
+    fatigue:
+      value: 60
+      stars: 0
     wits:
       value: 5
       stars: 0
     maxHealth: 0
-    energyRecovery: 8
-    maxEnergy: 8
+    apRecovery: 20
+    maxAp: 20
     initiative: 100
+    fatigueRecovery: 8
     criticalChance: 100
     criticalModifier: 50
     physicalDamageBonus: 0
@@ -52,10 +56,7 @@ MonoBehaviour:
     injuryResistance: 0
     deathResistance: 25
   abilityBook:
-    activeAbilities:
-    - {fileID: 11400000, guid: 36a0268a5ac37d742960a07bfe17be42, type: 2}
-    - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
-    - {fileID: 11400000, guid: e270d32e998f6e34fa639b54342d93e8, type: 2}
+    activeAbilities: []
   serializedPassiveManager:
     perks:
     - perkTag: 18
@@ -66,8 +67,8 @@ MonoBehaviour:
   - Undead_Head_4
   - Ghoul_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
-    offHandItem: {fileID: 0}
+    mainHandItem: {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
+    offHandItem: {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
     headArmour: {fileID: 11400000, guid: 335c81cb722666345aa6c308b1d780f5, type: 2}
     chestArmour: {fileID: 11400000, guid: 885404dfa0107114abd21b026368a161, type: 2}
     trinket: {fileID: 0}
