@@ -517,6 +517,38 @@ namespace HexGameEngine
         Volatile = 153,
 
         // Injuries
+        BrokenArm = 27,
+        BruisedLeg = 28,
+        BrokenLeg = 29,
+        BrokenNose = 30,
+        BrokenRibs = 31,
+        BrokenFinger = 32,
+        CrushedWindpipe = 33,
+        CutArm = 34,
+        CutArmSinew = 35,
+        CutArtery = 36,
+        CutNeckVein = 37,
+        CutLegMuscles = 38,
+        DeepAbdominalCut = 39,
+        DeepChestCut = 40,
+        DeepFaceCut = 41,
+        DislocatedShoulder = 42,
+        ExposedRibs = 43,
+        FracturedElbow = 44,
+        FracturedHand = 157,
+        FracturedRibs = 158,
+        FracturedSkull = 159,
+        CutEyeSocket = 160,
+        StabbedKidney = 161,
+        StabbedCheek = 162,
+        StabbedLegMuscles = 163,
+        PiercedLung = 164,
+        TornEar = 165,
+        Concussed = 166,
+        StabbedGuts = 167,
+        TornRotatorCuff = 168,
+
+        /*
         BrokenNose = 27,
         BrokenRibs = 28,
         BrokenFinger = 29,
@@ -531,9 +563,21 @@ namespace HexGameEngine
         BruisedKidney = 39,
         DeepAbdominalCut = 40,
         ExposedRibs = 43,
-        CutArtery = 44,
+        CutArtery = 44,*/
 
         // Permanent Injuries
+        CompromisedLiver = 129,
+        CrippledShoulder = 130,
+        DeeplyDisturbed = 131,
+        MissingEye = 132,
+        MissingFingers = 133,
+        MissingEar = 134,
+        MissingNose = 135,
+        PermanentlyConcussed = 136,
+        TornKneeLigament = 137,
+        ScarredLung = 169,
+
+        /*
         MissingEye = 129,
         ScarredLung = 130,
         MissingFingers = 131,
@@ -543,6 +587,7 @@ namespace HexGameEngine
         CrippledShoulder = 135,
         DeeplyDisturbed = 136,
         CompromisedLiver = 137,
+        */
     }
     public enum PerkQuality
     {

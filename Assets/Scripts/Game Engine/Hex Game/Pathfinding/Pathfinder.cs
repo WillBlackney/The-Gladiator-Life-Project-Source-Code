@@ -57,11 +57,10 @@ namespace HexGameEngine.Pathfinding
             if (start.Elevation != destination.Elevation)
                 cost += 1;
 
+            /*
             if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.TornKneeLigament))
-                cost += 1;
+                cost += 1; */
 
-            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BrokenHip))
-                cost += 2;
 
             if (cost > 2 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.PathFinder))
                 cost -= 1;
