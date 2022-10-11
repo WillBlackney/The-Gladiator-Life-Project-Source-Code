@@ -614,9 +614,9 @@ namespace HexGameEngine.Characters
                 
                 if (PerkController.Instance.DoesCharacterHavePerk(data.passiveManager, Perk.DimWitted))                
                     xpGainMod -= 0.25f;
-                
-                if (PerkController.Instance.DoesCharacterHavePerk(data.passiveManager, Perk.PermanentlyConcussed))                
-                    xpGainMod -= 0.15f;
+
+                if (PerkController.Instance.DoesCharacterHavePerk(data.passiveManager, Perk.PermanentlyConcussed))
+                    xpGainMod -= 0.25f;
 
                 if (DoesCharacterHaveBackground(data.background, CharacterBackground.Doctor))
                     xpGainMod += 0.15f;

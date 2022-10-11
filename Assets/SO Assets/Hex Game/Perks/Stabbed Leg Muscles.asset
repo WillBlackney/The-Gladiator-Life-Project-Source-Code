@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
+  m_Name: Stabbed Leg Muscles
+  m_EditorClassIdentifier: 
+  passiveSprite: {fileID: 21300000, guid: cc66d0ed4ef44cf45a2e48fb61eb5a73, type: 3}
+  passiveName: Stabbed Cheek
+  perkTag: 162
+  passiveDescription:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'This character has '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '-25% '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Wits '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '-25% '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Dodge
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
+  passiveItalicDescription: 
+  effectDetailTabs: []
+  maxAllowedStacks: 1
+  showStackCount: 0
+  hiddenOnPassivePanel: 0
+  isRewardable: 0
+  resistanceBlocksIncrease: 0
+  resistanceBlocksDecrease: 0
+  runeBlocksIncrease: 0
+  runeBlocksDecrease: 0
+  isInjury: 1
+  isPermanentInjury: 0
+  severity: 1
+  injuryType: 1
+  minInjuryDuration: 2
+  maxInjuryDuration: 3
+  isRacial: 0
+  race: 0
+  isBackground: 0
+  backgroundPerkQuality: 0
+  perksRemovedOnThisApplication: 
+  perksGainedOnThisExpiry: 
+  perksThatBlockThis: 
+  visualEventsOnApplication: []

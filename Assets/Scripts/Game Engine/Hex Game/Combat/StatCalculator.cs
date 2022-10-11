@@ -15,66 +15,59 @@ namespace HexGameEngine
         public static int GetTotalMight(HexCharacterModel c)
         {
             int might = c.attributeSheet.might.value;
+            float mod = 1f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenArm))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.TornRotatorCuff))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutArmSinew))
+                mod -= 0.4f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CrippledShoulder))
+                mod -= 0.3f;
 
             // Items
             might += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Might, c.itemSet);
 
+            might = (int) (might * mod);
             return might;
 
-            /*
-            int intelligence = c.attributeSheet.intelligence.value;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Concussion))
-                intelligence -= 20;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.PermanentlyConcussed))
-                intelligence -= 40;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedSkull))
-                intelligence -= 40;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Slow))
-                intelligence -= 10;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Wise))
-                intelligence += 10;
-
-            // Items
-            intelligence += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicDamage, c.itemSet);
-
-            return intelligence;
-            */
         }
         public static int GetTotalMight(HexCharacterData c)
         {
             int might = c.attributeSheet.might.value;
+            float mod = 1f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenArm))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.TornRotatorCuff))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutArmSinew))
+                mod -= 0.4f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrippledShoulder))
+                mod -= 0.3f;
 
             // Items
             might += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Might, c.itemSet);
 
+            might = (int)(might * mod);
             return might;
         }
         public static int GetTotalPhysicalDamageBonus(HexCharacterModel c)
         {
             int strength = c.attributeSheet.physicalDamageBonus;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DislocatedShoulder))
-                strength -= 20;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CrippledShoulder))
-                strength -= 30;
-
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Wimp))
                 strength -= 10;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepAbdominalCut))
-                strength -= 20;
-
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BigMuscles))
                 strength += 10;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenArm))
-                strength -= 40;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brute))
                 strength += 15;
@@ -87,18 +80,6 @@ namespace HexGameEngine
         public static int GetTotalPhysicalDamageBonus(HexCharacterData c)
         {
             int strength = c.attributeSheet.physicalDamageBonus;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DislocatedShoulder))
-                strength -= 20;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrippledShoulder))
-                strength -= 30;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenArm))
-                strength -= 40;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepAbdominalCut))
-                strength -= 20;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Wimp))
                 strength -= 10;
@@ -117,15 +98,9 @@ namespace HexGameEngine
         public static int GetTotalMagicDamageBonus(HexCharacterModel c)
         {
             int intelligence = c.attributeSheet.magicDamageBonus;
-
-            //if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Concussion))
-            //    intelligence -= 20;
-
+            float mod = 1f;
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.PermanentlyConcussed))
-                intelligence -= 40;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedSkull))
-                intelligence -= 40;
+                mod -= 0.5f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Slow))
                 intelligence -= 10;
@@ -135,22 +110,15 @@ namespace HexGameEngine
 
             // Items
             intelligence += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicDamage, c.itemSet);
-
+            intelligence = (int)(intelligence * mod);
             return intelligence;
         }
         public static int GetTotalMagicDamageBonus(HexCharacterData c)
         {
             int intelligence = c.attributeSheet.magicDamageBonus;
-
-           // if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Concussion))
-            //    intelligence -= 20;
-
+            float mod = 1f;
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.PermanentlyConcussed))
-                intelligence -= 40;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedSkull))
-                intelligence -= 40;
-
+                mod -= 0.5f;
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Slow))
                 intelligence -= 10;
 
@@ -159,12 +127,13 @@ namespace HexGameEngine
 
             // Items
             intelligence += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicDamage, c.itemSet);
-
+            intelligence = (int)(intelligence * mod);
             return intelligence;
         }
         public static int GetTotalConstitution(HexCharacterModel c)
         {
             int constitution = c.attributeSheet.constitution.value;
+            float mod = 1f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Frail))
                 constitution -= 10;
@@ -175,18 +144,40 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fat))
                 constitution += 20;
 
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedKidney))
+                mod -= 0.6f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutArtery))
+                mod -= 0.35f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedGuts))
+                mod -= 0.4f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutNeckVein))
+                mod -= 0.50f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepAbdominalCut))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepChestCut))
+                mod -= 0.35f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ExposedRibs))
+                mod -= 0.35f;
+
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CompromisedLiver))
-                constitution -= 40;
+                mod -= 0.4f;
 
             // Items
             constitution += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Constituition, c.itemSet);
+            constitution = (int)(constitution * mod);
 
             return constitution;
         }
         public static int GetTotalConstitution(HexCharacterData c)
         {
             int constitution = c.attributeSheet.constitution.value;
-
+            float mod = 1f;
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Frail))
                 constitution -= 10;
 
@@ -196,41 +187,78 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fat))
                 constitution += 20;
 
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutArtery))
+                mod -= 0.35f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedKidney))
+                mod -= 0.6f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutNeckVein))
+                mod -= 0.50f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedGuts))
+                mod -= 0.4f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepAbdominalCut))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepChestCut))
+                mod -= 0.35f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ExposedRibs))
+                mod -= 0.35f;
+
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CompromisedLiver))
-                constitution -= 40;
+                mod -= 0.4f;
 
             // Items
             constitution += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Constituition, c.itemSet);
-
+            constitution = (int)(constitution * mod);
             return constitution;
         }
         public static int GetTotalAccuracy(HexCharacterModel c)
         {
             int accuracy = c.attributeSheet.accuracy.value;
-
-            // if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.EagleEye))
-            //     accuracy += 10;
+            float mod = 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Blinded))
-                accuracy -= 30;
-           
+                accuracy -= 30;          
+
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Focus))
                 accuracy += 30;
 
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenArm))
+                mod -= 0.5f;
+
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CrippledShoulder))
-                accuracy -= 15;
+                mod -= 0.3f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingEye))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutEyeSocket))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedHand))
+                mod -= 0.2f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingFingers))
+                mod -= 0.2f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepChestCut))
+                mod -= 0.35f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepFaceCut))
+                mod -= 0.25f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenFinger))
-                accuracy -= 15;
+                mod -= 0.1f;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenArm))
-                accuracy -= 20;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutArm))
+                mod -= 0.15f;
 
-            //if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.GrazedEyeSocket))
-            //    accuracy -= 10;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DislocatedShoulder))
-                accuracy -= 10;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedSkull))
+                mod -= 0.50f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brute))
                 accuracy -= 10;
@@ -241,11 +269,6 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ClutchHitter))
                 accuracy += 5;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingEye))
-                accuracy -= 30;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingFingers))
-                accuracy -= 20;
 
             // Mud tile
             if (c.currentTile.TileData.tileName == "Water") accuracy -= 10;
@@ -270,32 +293,53 @@ namespace HexGameEngine
             // Items
             accuracy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Accuracy, c.itemSet);
 
+            accuracy = (int) (accuracy * mod);
+
             return accuracy;
         }
         public static int GetTotalAccuracy(HexCharacterData c)
         {
             int accuracy = c.attributeSheet.accuracy.value;
+            float mod = 1f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenArm))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenFinger))
+                mod -= 0.1f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingEye))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrippledShoulder))
+                mod -= 0.3f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingFingers))
+                mod -= 0.2f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutArm))
+                mod -= 0.15f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutEyeSocket))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedHand))
+                mod -= 0.2f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepChestCut))
+                mod -= 0.35f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepFaceCut))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedSkull))
+                mod -= 0.50f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Blinded))
                 accuracy -= 30;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Focus))
                 accuracy += 30;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrippledShoulder))
-                accuracy -= 15;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenArm))
-                accuracy -= 20;
-
-           // if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.GrazedEyeSocket))
-           //     accuracy -= 10;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DislocatedShoulder))
-                accuracy -= 10;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenFinger))
-                accuracy -= 15;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Brute))
                 accuracy -= 10;
@@ -306,18 +350,9 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ClutchHitter))
                 accuracy += 5;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingEye))
-                accuracy -= 30;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingFingers))
-                accuracy -= 20;
-
-            // Stress State Modifier
-            //accuracy += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress));
-
             // Items
             accuracy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Accuracy, c.itemSet);
-
+            accuracy = (int)(accuracy * mod);
 
             return accuracy;
         }
@@ -325,13 +360,28 @@ namespace HexGameEngine
         {
             int dodge = 0;
             dodge += c.attributeSheet.dodge.value;
+            float mod = 1f;
 
-            // Stunned characters do not benefit from base dodge.
-            /*
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Stunned) &&
-                dodge > 0)
-                dodge -= c.baseDodge;
-            */
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutLegMuscles))
+                mod -= 0.4f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedElbow))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedLegMuscles))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Concussed))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedSkull))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.TornKneeLigament))
+                mod -= 0.3f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepFaceCut))
+                mod -= 0.25f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Crippled))
                 dodge -= 30;
@@ -345,21 +395,9 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Mirage))
                 dodge += 20;
 
-          //  if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CrippledKnee))
-            //    dodge -= 20;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BruisedLeg))
-                dodge -= 10;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.TornKneeLigament))
-                dodge -= 10;
-
-           // if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenHip))
-            //    dodge -= 20;
-
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.PoorReflexes))
                 dodge -= 5;
-
+                    
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Quick))
                 dodge += 5;
 
@@ -378,41 +416,12 @@ namespace HexGameEngine
                 (c.race == CharacterRace.Goblin && c.controller == Controller.Player))
                 dodge += GetTotalInitiative(c);
 
-            
-            // Nearby allies with shield wall give +5 dodge bonus
-            /*
-            foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(c))
-            {
-                if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ShieldWall))
-                {
-                    if (HexCharacterController.Instance.GetCharacterAura(ally).Contains(c.currentTile))
-                    {
-                        dodge += 5;
-                    }
-                }
-            }
-            */
-
-            /*
-            // Nearby allies with concealing clouds give +10 dodge bonus
-            foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(c))
-            {
-                if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ConcealingClouds))
-                {
-                    if (HexCharacterController.Instance.GetCharacterAura(ally).Contains(c.currentTile))
-                    {
-                        dodge += 10;
-                    }
-                }
-            }
-            */
-
             // Stress State Modifier
             dodge += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress), c);
 
             // Items
             dodge += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Dodge, c.itemSet);
-
+            dodge = (int)(dodge * mod);
 
             return dodge;
         }
@@ -420,6 +429,28 @@ namespace HexGameEngine
         {
             int dodge = 0;
             dodge += c.attributeSheet.dodge.value;
+            float mod = 1f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutLegMuscles))
+                mod -= 0.4f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedSkull))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedLegMuscles))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedElbow))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.TornKneeLigament))
+                mod -= 0.3f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Concussed))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepFaceCut))
+                mod -= 0.25f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Crippled))
                 dodge -= 30;
@@ -432,18 +463,6 @@ namespace HexGameEngine
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Mirage))
                 dodge += 20;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.TornKneeLigament))
-                dodge -= 10;
-
-           // if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrippledKnee))
-           //     dodge -= 20;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BruisedLeg))
-                dodge -= 10;
-
-           // if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenHip))
-           //     dodge -= 20;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.PoorReflexes))
                 dodge -= 5;
@@ -463,36 +482,21 @@ namespace HexGameEngine
                     c.race == CharacterRace.Goblin)
                 dodge += GetTotalInitiative(c);
 
-            // Concealing Clouds Perk (self only effect)
-            // if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ConcealingClouds))
-            //     dodge += 10;
-
-            // Soul token
-            // dodge += PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.SoulToken);
-
-            // Stress State Modifier
-            // dodge += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress));
-
             // Items
             dodge += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Dodge, c.itemSet);
-
+            dodge = (int)(dodge * mod);
             return dodge;
         }
         public static int GetTotalResolve(HexCharacterModel c)
         {
             int resolve = c.attributeSheet.resolve.value;
-
-           // if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BruisedKidney))
-                resolve -= 10;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepAbdominalCut))
-                resolve -= 20;
+            float mod = 1f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.PermanentlyConcussed))
-                resolve += 15;
+                mod += 0.25f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeeplyDisturbed))
-                resolve -= 30;
+                mod -= 0.5f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Coward))
                 resolve -= 5;
@@ -537,30 +541,25 @@ namespace HexGameEngine
                 }
             }
 
-
             // Stress State Modifier
             resolve += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress), c);
 
             // Items
             resolve += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Resolve, c.itemSet);
 
+            resolve = (int)(resolve * mod);
             return resolve;
         }
         public static int GetTotalResolve(HexCharacterData c)
         {
             int resolve = c.attributeSheet.resolve.value;
-
-           // if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BruisedKidney))
-           //     resolve -= 10;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepAbdominalCut))
-                resolve -= 20;
+            float mod = 1f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.PermanentlyConcussed))
-                resolve += 15;
+                mod += 0.25f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeeplyDisturbed))
-                resolve -= 30;
+                mod -= 0.5f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Coward))
                 resolve -= 5;
@@ -570,20 +569,42 @@ namespace HexGameEngine
 
             // Items
             resolve += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Resolve, c.itemSet);
-
-            // Stress State Modifier
-           // resolve += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress));
-
+            resolve = (int)(resolve * mod);
             return resolve;
         }
         public static int GetTotalWits(HexCharacterModel c)
         {
             int wits = c.attributeSheet.wits.value;
+            float mod = 1f;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Indecisive))
-                wits -= 5;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BruisedLeg))
+                mod -= 0.2f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.TornEar))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Concussed))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedLegMuscles))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingEar))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeeplyDisturbed))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenLeg))
+                mod -= 0.4f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutLegMuscles))
+                mod -= 0.4f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingNose))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Indecisive))
                 wits -= 5;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Paranoid))
@@ -592,58 +613,92 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Perceptive))
                 wits += 5;
 
-           // if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Concussion))
-           //     wits -= 10;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedSkull))
-                wits -= 20;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeeplyDisturbed))
-                wits -= 10;
-
             // Items
             wits += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Wits, c.itemSet);
-
+            wits = (int)(wits * mod);
             return wits;
         }
         public static int GetTotalWits(HexCharacterData c)
         {
             int wits = c.attributeSheet.wits.value;
+            float mod = 1f;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Indecisive))
-                wits -= 5;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BruisedLeg))
+                mod -= 0.2f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.TornEar))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Concussed))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedLegMuscles))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingEar))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenLeg))
+                mod -= 0.4f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeeplyDisturbed))
+                mod -= 0.5f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingNose))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutLegMuscles))
+                mod -= 0.4f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Indecisive))
                 wits -= 5;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Paranoid))
                 wits -= 5;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeeplyDisturbed))
-                wits -= 10;
-
-           // if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Concussion))
-           //     wits -= 10;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedSkull))
                 wits -= 20;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Perceptive))
                 wits += 5;
+
             // Items
             wits += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Wits, c.itemSet);
-
+            wits = (int)(wits * mod);
             return wits;
         }
         public static int GetTotalMaxFatigue(HexCharacterModel c, bool includeItemFatigueModifiers = true)
         {
-            int maxFat = c.attributeSheet.fatigue.value;          
-
+            int maxFat = c.attributeSheet.fatigue.value;
+            float mod = 1f;
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Ailing))
                 maxFat -= 10;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fit))
-                maxFat += 10;                     
+                maxFat += 10;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenRibs))
+                mod -= 0.35f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CrushedWindpipe))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedRibs))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ScarredLung))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepAbdominalCut))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepChestCut))
+                mod -= 0.35f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.PiercedLung))
+                mod -= 0.6f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedGuts))
+                mod -= 0.4f;
 
             // Items
             if (includeItemFatigueModifiers)
@@ -655,6 +710,8 @@ namespace HexGameEngine
                 maxFat -= itemFat;
             }
 
+            maxFat = (int)(maxFat * mod);
+
             // cant go below
             if (maxFat < 0)
                 maxFat = 0;
@@ -664,12 +721,36 @@ namespace HexGameEngine
         public static int GetTotalMaxFatigue(HexCharacterData c, bool includeItemFatigueModifiers = true)
         {
             int maxFat = c.attributeSheet.fatigue.value;
-
+            float mod = 1f;
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Ailing))
                 maxFat -= 10;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fit))
-                maxFat += 10;           
+                maxFat += 10;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenRibs))
+                mod -= 0.35f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedRibs))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ScarredLung))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrushedWindpipe))
+                mod -= 0.5f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepAbdominalCut))
+                mod -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepChestCut))
+                mod -= 0.35f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.PiercedLung))
+                mod -= 0.6f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedGuts))
+                mod -= 0.4f;
 
             // Items
             if (includeItemFatigueModifiers)
@@ -681,7 +762,9 @@ namespace HexGameEngine
                 maxFat -= itemFat;
             }
 
-             // cant go below
+            maxFat = (int)(maxFat * mod);
+
+            // cant go below
             if (maxFat < 0)
                 maxFat = 0;
 
@@ -750,7 +833,22 @@ namespace HexGameEngine
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StrongLungs))
                 fatRecovery += 2;
-                       
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenNose))
+                fatRecovery -= 3;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingNose))
+                fatRecovery -= 2;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CrushedWindpipe))
+                fatRecovery -= 5;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedCheek))
+                fatRecovery -= 2;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fat))
+                fatRecovery -= 2;
+
             // Items
             fatRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.FatigueRecovery, c.itemSet);
 
@@ -771,6 +869,21 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StrongLungs))
                 fatRecovery += 2;
 
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenNose))
+                fatRecovery -= 3;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrushedWindpipe))
+                fatRecovery -= 5;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedCheek))
+                fatRecovery -= 2;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingNose))
+                fatRecovery -= 2;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fat))
+                fatRecovery -= 2;
+
             // Items
             fatRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.FatigueRecovery, c.itemSet);
 
@@ -783,68 +896,38 @@ namespace HexGameEngine
         }   
         public static int GetTotalActionPointRecovery(HexCharacterModel c)
         {
-            int energyRecovery = c.attributeSheet.apRecovery;
+            int apRecovery = c.attributeSheet.apRecovery;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Dazed))
-                energyRecovery -= 1;
+                apRecovery -= 1;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fat))
-                energyRecovery -= 1;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenNose))
-                energyRecovery -= 2;
-
-           // if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BruisedKidney))
-            //    energyRecovery -= 1;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ScarredLung))
-                energyRecovery -= 2;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenRibs))
-                energyRecovery -= 3;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingNose))
-                energyRecovery -= 1;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DislocatedShoulder))
+                apRecovery -= 2;
 
             // cant go below
-            if (energyRecovery < 0)
-                energyRecovery = 0;
+            if (apRecovery < 0)
+                apRecovery = 0;
             // Items
-            energyRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.ActionPointRecovery, c.itemSet);
+            apRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.ActionPointRecovery, c.itemSet);
 
-            return energyRecovery;
+            return apRecovery;
 
         }
         public static int GetTotalActionPointRecovery(HexCharacterData c)
         {
-            int energyRecovery = c.attributeSheet.apRecovery;
+            int apRecovery = c.attributeSheet.apRecovery;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenNose))
-                energyRecovery -= 2;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fat))
-                energyRecovery -= 1;
-
-           // if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BruisedKidney))
-           //     energyRecovery -= 1;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenRibs))
-                energyRecovery -= 3;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ScarredLung))
-                energyRecovery -= 2;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingNose))
-                energyRecovery -= 1;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DislocatedShoulder))
+                apRecovery -= 2;
 
             // cant go below
-            if (energyRecovery < 0)
-                energyRecovery = 0;
+            if (apRecovery < 0)
+                apRecovery = 0;
 
             // Items
-            energyRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.ActionPointRecovery, c.itemSet);
+            apRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.ActionPointRecovery, c.itemSet);
 
-            return energyRecovery;
+            return apRecovery;
 
         }
         public static int GetTotalMaxActionPoints(HexCharacterModel c)
@@ -983,13 +1066,19 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.TrueSight))
                 vision += 1;
 
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingEye))
+                vision -= 1;
+
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Clairvoyant))
                 vision += 1;
 
-            //if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.GrazedEyeSocket))
-            //    vision -= 1;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedSkull))
+                vision -= 2;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingEye))
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutEyeSocket))
+                vision -= 1;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Concussed))
                 vision -= 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ShortSighted))
@@ -1006,10 +1095,16 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Clairvoyant))
                 vision += 1;
 
-           // if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.GrazedEyeSocket))
-            //    vision -= 1;
-
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingEye))
+                vision -= 1;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedSkull))
+                vision -= 2;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutEyeSocket))
+                vision -= 1;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Concussed))
                 vision -= 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ShortSighted))
@@ -1024,12 +1119,6 @@ namespace HexGameEngine
         public static int GetTotalPhysicalResistance(HexCharacterModel c)
         {
             int resistanceReturned = c.attributeSheet.physicalResistance;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutArtery))
-                resistanceReturned -= 20;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ExposedRibs))
-                resistanceReturned -= 35;
 
             // Guardian talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Guardian, 1))
@@ -1048,12 +1137,6 @@ namespace HexGameEngine
         public static int GetTotalPhysicalResistance(HexCharacterData c)
         {
             int resistanceReturned = c.attributeSheet.physicalResistance;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ExposedRibs))
-                resistanceReturned -= 35;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutArtery))
-                resistanceReturned -= 20;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.HardNoggin))
                 resistanceReturned += 10;
@@ -1165,9 +1248,6 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HardNoggin))
                 resistanceReturned += 10;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutArtery))
-                resistanceReturned -= 20;
-
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.InjuryResistance, c.itemSet);
 
@@ -1191,9 +1271,6 @@ namespace HexGameEngine
             // hard noggin Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.HardNoggin))
                 resistanceReturned += 10;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutArtery))
-                resistanceReturned -= 20;
 
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.InjuryResistance, c.itemSet);

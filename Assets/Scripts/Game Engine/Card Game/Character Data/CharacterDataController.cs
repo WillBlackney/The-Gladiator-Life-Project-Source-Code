@@ -395,8 +395,6 @@ namespace CardGameEngine
 
                 // Restart the xp gain procces with the spill over amount
                 HandleGainXP(data, spillOver);
-
-
             }
 
             // Level up with no spill over

@@ -924,6 +924,32 @@ namespace HexGameEngine.Characters
                     
                 }
 
+                // Cut Artery
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.CutArtery) && character.currentHealth > 0)
+                {
+                    // Notification event
+                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Cut Artery!"), QueuePosition.Back, 0, 0.5f);
+
+                    // Calculate and deal Magic damage
+                    DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 2, DamageType.Physical);
+                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition));
+                    CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
+                    VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                }
+
+                // Cut Neck Vein
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.CutNeckVein) && character.currentHealth > 0)
+                {
+                    // Notification event
+                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Cut Neck Vein!"), QueuePosition.Back, 0, 0.5f);
+
+                    // Calculate and deal Magic damage
+                    DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 4, DamageType.Physical);
+                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition));
+                    CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
+                    VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                }
+
                 // Bleeding
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Bleeding) && character.currentHealth > 0)
                 {
