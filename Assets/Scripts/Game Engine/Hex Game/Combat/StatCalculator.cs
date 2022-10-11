@@ -31,7 +31,7 @@ namespace HexGameEngine
 
             // Items
             might += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Might, c.itemSet);
-
+            if (mod < 0) mod = 0;
             might = (int) (might * mod);
             return might;
 
@@ -55,7 +55,7 @@ namespace HexGameEngine
 
             // Items
             might += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Might, c.itemSet);
-
+            if (mod < 0) mod = 0;
             might = (int)(might * mod);
             return might;
         }
@@ -110,6 +110,7 @@ namespace HexGameEngine
 
             // Items
             intelligence += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicDamage, c.itemSet);
+            if (mod < 0) mod = 0;
             intelligence = (int)(intelligence * mod);
             return intelligence;
         }
@@ -127,6 +128,7 @@ namespace HexGameEngine
 
             // Items
             intelligence += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicDamage, c.itemSet);
+            if (mod < 0) mod = 0; 
             intelligence = (int)(intelligence * mod);
             return intelligence;
         }
@@ -171,6 +173,7 @@ namespace HexGameEngine
             // Items
             constitution += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Constituition, c.itemSet);
             constitution = (int)(constitution * mod);
+            if (constitution < 1) constitution = 1;
 
             return constitution;
         }
@@ -214,6 +217,7 @@ namespace HexGameEngine
             // Items
             constitution += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Constituition, c.itemSet);
             constitution = (int)(constitution * mod);
+            if (constitution < 1) constitution = 1;
             return constitution;
         }
         public static int GetTotalAccuracy(HexCharacterModel c)
@@ -292,7 +296,7 @@ namespace HexGameEngine
 
             // Items
             accuracy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Accuracy, c.itemSet);
-
+            if (mod < 0) mod = 0;
             accuracy = (int) (accuracy * mod);
 
             return accuracy;
@@ -352,6 +356,7 @@ namespace HexGameEngine
 
             // Items
             accuracy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Accuracy, c.itemSet);
+            if (mod < 0) mod = 0;
             accuracy = (int)(accuracy * mod);
 
             return accuracy;
@@ -421,6 +426,7 @@ namespace HexGameEngine
 
             // Items
             dodge += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Dodge, c.itemSet);
+            if (mod < 0) mod = 0;
             dodge = (int)(dodge * mod);
 
             return dodge;
@@ -484,6 +490,7 @@ namespace HexGameEngine
 
             // Items
             dodge += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Dodge, c.itemSet);
+            if (mod < 0) mod = 0;
             dodge = (int)(dodge * mod);
             return dodge;
         }
@@ -546,7 +553,7 @@ namespace HexGameEngine
 
             // Items
             resolve += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Resolve, c.itemSet);
-
+            if (mod < 0) mod = 0;
             resolve = (int)(resolve * mod);
             return resolve;
         }
@@ -569,6 +576,7 @@ namespace HexGameEngine
 
             // Items
             resolve += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Resolve, c.itemSet);
+            if (mod < 0) mod = 0;
             resolve = (int)(resolve * mod);
             return resolve;
         }
@@ -615,6 +623,7 @@ namespace HexGameEngine
 
             // Items
             wits += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Wits, c.itemSet);
+            if (mod < 0) mod = 0;
             wits = (int)(wits * mod);
             return wits;
         }
@@ -663,6 +672,7 @@ namespace HexGameEngine
 
             // Items
             wits += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Wits, c.itemSet);
+            if (mod < 0) mod = 0;
             wits = (int)(wits * mod);
             return wits;
         }
@@ -710,11 +720,11 @@ namespace HexGameEngine
                 maxFat -= itemFat;
             }
 
+            if (mod < 0) mod = 0;
             maxFat = (int)(maxFat * mod);
 
             // cant go below
-            if (maxFat < 0)
-                maxFat = 0;
+            if (maxFat < 0) maxFat = 0;
 
             return maxFat;
         }
@@ -762,6 +772,7 @@ namespace HexGameEngine
                 maxFat -= itemFat;
             }
 
+            if (mod < 0) mod = 0;
             maxFat = (int)(maxFat * mod);
 
             // cant go below
@@ -777,14 +788,10 @@ namespace HexGameEngine
         #region
         public static int GetTotalMaxHealth(HexCharacterData c)
         {
-            //int flatMaxHealth = c.baseMaxHealth;
-            //return (int)Math.Round(flatMaxHealth * (c.baseConstitution / 20f));
             return c.attributeSheet.maxHealth + GetTotalConstitution(c);
         }
         public static int GetTotalMaxHealth(HexCharacterModel c)
         {
-            //int flatMaxHealth = c.baseMaxHealth;
-            //return (int)Math.Round(flatMaxHealth * (c.baseConstitution / 20f));
             return c.attributeSheet.maxHealth + GetTotalConstitution(c);
         }
         public static int GetTotalInitiative(HexCharacterModel c)
@@ -796,17 +803,12 @@ namespace HexGameEngine
             // Items
             intitiative += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Initiative, c.itemSet);
 
-            // 50% initiative penalty for delaying turn.
-            if ((c.hasRequestedTurnDelay || c.hasDelayedPreviousTurn) && intitiative > 0)
-            {
-                intitiative = (int) (intitiative * 0.75f);
-            }
+            // 25% initiative penalty for delaying turn.
+            if ((c.hasRequestedTurnDelay || c.hasDelayedPreviousTurn) && intitiative > 0)            
+                intitiative = (int) (intitiative * 0.75f);            
 
             // Cant go negative
-            if (intitiative < 0) intitiative = 0;
-
-            
-
+            if (intitiative < 0) intitiative = 0;           
 
             return intitiative;
         }
@@ -816,11 +818,11 @@ namespace HexGameEngine
 
             intitiative += GetTotalWits(c);
 
-            // Cant go negative
-            if (intitiative < 0) intitiative = 0;
-
             // Items
             intitiative += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Initiative, c.itemSet);
+
+            // Cant go negative
+            if (intitiative < 0) intitiative = 0;            
 
             return intitiative;
         }
@@ -892,7 +894,6 @@ namespace HexGameEngine
                 fatRecovery = 0;
 
             return fatRecovery;
-
         }   
         public static int GetTotalActionPointRecovery(HexCharacterModel c)
         {
@@ -907,9 +908,11 @@ namespace HexGameEngine
             // cant go below
             if (apRecovery < 0)
                 apRecovery = 0;
+
             // Items
             apRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.ActionPointRecovery, c.itemSet);
 
+            if (apRecovery < 0) apRecovery = 0;
             return apRecovery;
 
         }
@@ -926,7 +929,7 @@ namespace HexGameEngine
 
             // Items
             apRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.ActionPointRecovery, c.itemSet);
-
+            if (apRecovery < 0) apRecovery = 0;
             return apRecovery;
 
         }
@@ -936,7 +939,7 @@ namespace HexGameEngine
 
             // Items
             maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxActionPoints, c.itemSet);
-
+            if (maxEnergy < 0) maxEnergy = 0;
             return maxEnergy;
         }
         public static int GetTotalMaxActionPoints(HexCharacterData c)
@@ -945,7 +948,7 @@ namespace HexGameEngine
 
             // Items
             maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxActionPoints, c.itemSet);
-
+            if (maxEnergy < 0) maxEnergy = 0;
             return maxEnergy;
         }
         public static float GetTotalCriticalChance(HexCharacterModel c)
@@ -957,16 +960,15 @@ namespace HexGameEngine
             // Satyr perk
             if (c.race == CharacterRace.Satyr && c.controller == Controller.Player)
                 crit += 5;
-                        
-            // Cant go negative
-            if (crit < 0) crit = 0;
-
-            // Cant go over 100 negative
-            if (crit > 100) crit = 100;
 
             // Items
             crit += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.CriticalChance, c.itemSet);
 
+            // Cant go negative
+            if (crit < 0) crit = 0;
+
+            // Cant go over 100 
+            if (crit > 100) crit = 100;           
 
             return crit;
         }
@@ -980,15 +982,15 @@ namespace HexGameEngine
             if (c.race == CharacterRace.Satyr)
                 crit += 5;
 
+            // Items
+            crit += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.CriticalChance, c.itemSet);
+
             // Cant go negative
             if (crit < 0) crit = 0;
 
             // Cant go over 100 negative
             if (crit > 100) crit = 100;
-
-            // Items
-            crit += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.CriticalChance, c.itemSet);
-
+           
             return crit;
         }
         public static int GetTotalCriticalModifier(HexCharacterModel c)
@@ -1007,11 +1009,12 @@ namespace HexGameEngine
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Scoundrel, 1))
                 criticalModifier += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Scoundrel) * 20;
 
-            // Cant go negative
-            if (criticalModifier < 0) criticalModifier = 0;
             // Items
             criticalModifier += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.CriticalModifier, c.itemSet);
 
+            // Cant go negative
+            if (criticalModifier < 0) criticalModifier = 0;
+            
             return criticalModifier;
         }
         public static int GetTotalCriticalModifier(HexCharacterData c)
@@ -1030,11 +1033,12 @@ namespace HexGameEngine
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Scoundrel, 1))
                 criticalModifier += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Scoundrel) * 20;
 
-            // Cant go negative
-            if (criticalModifier < 0) criticalModifier = 0;
             // Items
             criticalModifier += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.CriticalModifier, c.itemSet);
 
+            // Cant go negative
+            if (criticalModifier < 0) criticalModifier = 0;
+           
             return criticalModifier;
         }
              
@@ -1042,11 +1046,13 @@ namespace HexGameEngine
         {
             int aura = c.attributeSheet.auraSize;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StrikingPresence))
-                aura += 1;
             // Items
             aura += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.AuraSize, c.itemSet);
 
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StrikingPresence))
+                aura += 1;
+
+            if (aura < 1) aura = 1;
             return aura;
         }
         public static int GetTotalAuraSize(HexCharacterData c)
@@ -1055,9 +1061,11 @@ namespace HexGameEngine
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StrikingPresence))
                 aura += 1;
+
             // Items
             aura += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.AuraSize, c.itemSet);
 
+            if (aura < 1) aura = 1;
             return aura;
         }
         public static int GetTotalVision(HexCharacterModel c)
