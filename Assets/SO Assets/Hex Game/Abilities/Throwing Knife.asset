@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Throwing Knife
   includeInGame: 1
-  baseAbilityDescription: Deal 125% weapon damage to an enemy and apply 2 Bleeding.
+  baseAbilityDescription: Deal 125% weapon damage to an enemy and apply 1 Bleeding.
     No Accuracy penalty when used in melee.
   abilitySprite: {fileID: 21300000, guid: c0dc47eec4b755941a3b7abef52cd326, type: 3}
   energyCost: 4
@@ -193,7 +193,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 7
-      passiveStacks: 2
+      passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
   onCritEffects: []
@@ -221,7 +221,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '2 '
+    phrase: '1 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

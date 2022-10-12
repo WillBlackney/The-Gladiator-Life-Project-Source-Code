@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Fire Ball
   includeInGame: 1
-  baseAbilityDescription: Deal 125% Magic damage to an enemy and apply 2 Burning.
-    On a Critical Strike, apply 3 Burning.
+  baseAbilityDescription: Deal 125% Magic damage to an enemy and apply 1 Burning.
+    On a Critical Strike, apply 2 Burning.
   abilitySprite: {fileID: 21300000, guid: 0eb36d8833544ab4e900f6f174c99fb3, type: 3}
   energyCost: 4
   fatigueCost: 8
@@ -193,7 +193,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 1
-      passiveStacks: 2
+      passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
   onCritEffects:
@@ -249,7 +249,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 1
-      passiveStacks: 3
+      passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
   onPerkAppliedSuccessEffects: []
@@ -276,7 +276,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '2 '
+    phrase: '1 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -296,7 +296,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '3 '
+    phrase: '2 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
