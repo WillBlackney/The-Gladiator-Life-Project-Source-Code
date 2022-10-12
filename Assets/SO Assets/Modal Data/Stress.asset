@@ -28,7 +28,7 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: '100 '
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'stress become '
@@ -39,7 +39,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '. '
+    phrase: '. While '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -47,6 +47,6 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: characters cannot take any action, and have a chance to suffer a heart
-      attack and die at the start of each turn.
+    phrase: ', characters cannot take any action, and have a chance to suffer a heart
+      attack and die at the start of each turn.'
   infoRows: []
