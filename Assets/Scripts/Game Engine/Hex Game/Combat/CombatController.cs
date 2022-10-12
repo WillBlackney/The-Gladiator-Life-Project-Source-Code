@@ -1018,7 +1018,7 @@ namespace HexGameEngine.Combat
                 attacker != null &&
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.FlamingWeapon) &&
                 ability != null &&
-                (ability.weaponRequirement == WeaponRequirement.MeleeWeapon || ability.weaponRequirement == WeaponRequirement.RangedWeapon || ability.weaponRequirement == WeaponRequirement.Bow))
+                (ability.weaponRequirement == WeaponRequirement.MeleeWeapon || ability.weaponRequirement == WeaponRequirement.RangedWeapon || ability.weaponRequirement == WeaponRequirement.Bow || ability.weaponRequirement == WeaponRequirement.Crossbow || ability.weaponRequirement == WeaponRequirement.BowOrCrossbow))
             {
                 Debug.Log("ExecuteHandleDamage() attacker has ignited weapon, applying burning on target");
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Burning, 1, true, 0.5f, attacker.pManager);
@@ -1030,7 +1030,7 @@ namespace HexGameEngine.Combat
                 attacker != null &&
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.PoisonedWeapon) &&
                 ability != null &&
-                (ability.weaponRequirement == WeaponRequirement.MeleeWeapon || ability.weaponRequirement == WeaponRequirement.RangedWeapon || ability.weaponRequirement == WeaponRequirement.Bow))
+                (ability.weaponRequirement == WeaponRequirement.MeleeWeapon || ability.weaponRequirement == WeaponRequirement.RangedWeapon || ability.weaponRequirement == WeaponRequirement.Bow || ability.weaponRequirement == WeaponRequirement.Crossbow || ability.weaponRequirement == WeaponRequirement.BowOrCrossbow))
             {
                 Debug.Log("ExecuteHandleDamage() attacker has poisoned weapon, applying poisoned on target");
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Poisoned, 1, true, 0.5f, attacker.pManager);
@@ -1088,7 +1088,7 @@ namespace HexGameEngine.Combat
                 target.currentHealth > 0 &&
                 target.livingState == LivingState.Alive &&
                 ability != null &&
-                (ability.weaponRequirement == WeaponRequirement.MeleeWeapon || ability.weaponRequirement == WeaponRequirement.RangedWeapon || ability.weaponRequirement == WeaponRequirement.Bow) &&
+                (ability.weaponRequirement == WeaponRequirement.MeleeWeapon || ability.weaponRequirement == WeaponRequirement.RangedWeapon || ability.weaponRequirement == WeaponRequirement.Bow || ability.weaponRequirement == WeaponRequirement.Crossbow || ability.weaponRequirement == WeaponRequirement.BowOrCrossbow) &&
                 attacker.itemSet.mainHandItem != null)
             {
                 ItemData itemUsed = attacker.itemSet.mainHandItem;

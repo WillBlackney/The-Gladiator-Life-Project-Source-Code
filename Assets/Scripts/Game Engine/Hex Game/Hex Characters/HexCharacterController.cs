@@ -711,6 +711,25 @@ namespace HexGameEngine.Characters
             }
 
         }
+        public void PlayShootCrossbowAnimation(HexCharacterView view, CoroutineData cData)
+        {
+            Debug.Log("CharacterEntityController.PlayRangedAttackAnimation() called...");
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+            AudioManager.Instance.PlaySoundPooled(Sound.Character_Draw_Bow);
+            StartCoroutine(PlayShootCrossbowAnimationCoroutine(view, cData));
+        }
+        private IEnumerator PlayShootCrossbowAnimationCoroutine(HexCharacterView view, CoroutineData cData)
+        {
+            view.ucmAnimator.SetTrigger("Shoot Crossbow");
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+            yield return new WaitForSeconds(0.5f);
+
+            // Resolve
+            if (cData != null)
+            {
+                cData.MarkAsCompleted();
+            }
+        }
         public void PlayShootBowAnimation(HexCharacterView view, CoroutineData cData)
         {
             Debug.Log("CharacterEntityController.PlayRangedAttackAnimation() called...");
@@ -982,7 +1001,11 @@ namespace HexGameEngine.Characters
                 // Divine Favour
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.DivineFavour) && character.currentHealth > 0)                
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.DivineFavour, -1, true, 0.5f);
-                
+
+                // Reload
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Reload) && character.currentHealth > 0)
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Reload, -1, true, 0.5f);
+
             }           
 
             // If shattered, determine result

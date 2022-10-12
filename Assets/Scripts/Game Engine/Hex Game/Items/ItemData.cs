@@ -82,7 +82,8 @@ namespace HexGameEngine.Items
                 weaponClass != WeaponClass.ThrowingNet &&
                 weaponClass != WeaponClass.None &&
                 weaponClass != WeaponClass.Shield &&
-                weaponClass != WeaponClass.Bow;
+                weaponClass != WeaponClass.Bow &&
+                weaponClass != WeaponClass.Crossbow;
             }
         }
         public bool IsRangedWeapon
@@ -91,8 +92,8 @@ namespace HexGameEngine.Items
             {
                 return
                 weaponClass == WeaponClass.Bow ||
+                weaponClass == WeaponClass.Crossbow ||
                 weaponClass == WeaponClass.Staff;
-                // cross bow in future
             }
         }
         #endregion

@@ -346,8 +346,13 @@ namespace HexGameEngine.Abilities
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Combo, -1);
             }
 
+            // Check for crossbow usage: apply reload perk
+            if((ability.weaponRequirement == WeaponRequirement.Crossbow || ability.weaponRequirement == WeaponRequirement.BowOrCrossbow) &&
+                character.itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow)
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Reload, 1);
 
-            if(ability.abilityName == "Riposte")
+
+            if (ability.abilityName == "Riposte")
             {
                 Debug.Log("Removing riposte");
                 // Remove a riposte stack
@@ -1686,8 +1691,15 @@ namespace HexGameEngine.Abilities
                 bRet = false;
             }
 
-            
-
+            // check unloaded crossbow
+            if((ability.weaponRequirement == WeaponRequirement.Crossbow || ability.weaponRequirement == WeaponRequirement.BowOrCrossbow) &&
+                character.itemSet.mainHandItem != null &&
+                character.itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow && 
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Reload))
+            {
+                Debug.Log("IsAbilityUseable() returning false: character is trying to fire an unloaded crossbow");
+                bRet = false;
+            }           
 
             return bRet;
         }
@@ -1716,6 +1728,16 @@ namespace HexGameEngine.Abilities
             else if (ability.weaponRequirement == WeaponRequirement.Bow &&
               character.itemSet.mainHandItem != null &&
               character.itemSet.mainHandItem.weaponClass == WeaponClass.Bow)
+                bRet = true;
+
+            else if (ability.weaponRequirement == WeaponRequirement.Crossbow &&
+            character.itemSet.mainHandItem != null &&
+            character.itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow)
+                bRet = true;
+
+            else if (ability.weaponRequirement == WeaponRequirement.BowOrCrossbow &&
+            character.itemSet.mainHandItem != null &&
+            (character.itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow || character.itemSet.mainHandItem.weaponClass == WeaponClass.Bow))
                 bRet = true;
 
             else if (ability.weaponRequirement == WeaponRequirement.ThrowingNet &&

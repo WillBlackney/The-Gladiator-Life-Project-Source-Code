@@ -21,7 +21,7 @@ MonoBehaviour:
   baseCooldown: 0
   abilityType: 3
   doesNotBreakStealth: 0
-  weaponRequirement: 3
+  weaponRequirement: 7
   derivedFromWeapon: 1
   derivedFromItemLoadout: 0
   weaponAbilityType: 1

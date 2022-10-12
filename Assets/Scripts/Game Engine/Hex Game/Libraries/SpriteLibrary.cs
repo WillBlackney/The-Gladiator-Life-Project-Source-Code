@@ -114,6 +114,9 @@ namespace HexGameEngine.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite bowIcon;
+        [SerializeField]
+        [PreviewField(75)]
+        private Sprite crossbowIcon;
         [PreviewField(75)]
         [SerializeField]
         private Sprite shieldIcon;
@@ -349,6 +352,10 @@ namespace HexGameEngine.Libraries
             else if (weaponClass == WeaponClass.Bow)
             {
                 spriteReturned = bowIcon;
+            }
+            else if (weaponClass == WeaponClass.Crossbow)
+            {
+                spriteReturned = crossbowIcon;
             }
             else if (weaponClass == WeaponClass.Shield)
             {

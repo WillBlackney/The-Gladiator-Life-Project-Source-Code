@@ -88,10 +88,20 @@ namespace HexGameEngine.VisualEvents
             else if (vEvent.characterAnimation == CharacterAnimation.ShootBow)
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
-
-                // Character shoot bow animation
                 CoroutineData cData = new CoroutineData();
-                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootBowAnimation(user.hexCharacterView, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+                // Crossbow
+                if (user.itemSet.mainHandItem != null && user.itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow)
+                {
+                    // Character shoot bow animation
+                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootCrossbowAnimation(user.hexCharacterView, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+
+                }
+                // Normal Bow
+                else
+                {
+                    // Character shoot bow animation
+                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootBowAnimation(user.hexCharacterView, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+                }
 
                 // Create and launch arrow projectile
                 CoroutineData cData2 = new CoroutineData();

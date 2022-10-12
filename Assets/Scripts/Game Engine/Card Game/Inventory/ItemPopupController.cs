@@ -244,10 +244,18 @@ namespace HexGameEngine.Items
             int iBoost = 0;
             if(item.fatiguePenalty > 0)
             {
-                iBoost = 1;
+                iBoost += 1;
                 effectsParent.SetActive(true);
-                ModalDottedRow row = effectRows[0];
+                ModalDottedRow row = effectRows[iBoost - 1];
                 row.Build(TextLogic.ReturnColoredText("-" + item.fatiguePenalty.ToString(), TextLogic.blueNumber) + " Fatigue", DotStyle.Red);
+            }
+
+            if (item.weaponClass == WeaponClass.Crossbow)
+            {
+                iBoost += 1;
+                effectsParent.SetActive(true);
+                ModalDottedRow row = effectRows[iBoost - 1];
+                row.Build("Can only be fired once per turn.", DotStyle.Red);
             }
 
             if (item.itemEffects.Count > 0)
