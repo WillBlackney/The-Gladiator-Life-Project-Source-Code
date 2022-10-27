@@ -318,9 +318,9 @@ namespace HexGameEngine.Abilities
             OnAbilityUsedStart(character, ability, target);
 
             // Face target
-            if (target != null && target != character && ability.abilityType != AbilityType.Skill)
+            if (target != null && target != character && ability.abilityType.Contains(AbilityType.Skill) == false)
                 LevelController.Instance.FaceCharacterTowardsTargetCharacter(character, target);
-            else if (tileTarget != null && ability.abilityType != AbilityType.Skill)
+            else if (tileTarget != null && ability.abilityType.Contains(AbilityType.Skill) == false)
                 LevelController.Instance.FaceCharacterTowardsHex(character, tileTarget);
 
             foreach (AbilityEffect e in ability.abilityEffects)
@@ -331,8 +331,9 @@ namespace HexGameEngine.Abilities
             OnAbilityUsedFinish(character, ability);
 
             // Check for removal of damage/accuracy related tokens
-            if(ability.abilityType == AbilityType.MeleeAttack ||
-                ability.abilityType == AbilityType.RangedAttack)
+            if(ability.abilityType.Contains(AbilityType.MeleeAttack) ||
+                ability.abilityType.Contains(AbilityType.RangedAttack) ||
+                ability.abilityType.Contains(AbilityType.WeaponAttack))
             {
                 if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Wrath))                
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Wrath, -1);                
@@ -551,7 +552,7 @@ namespace HexGameEngine.Abilities
                     HexCharacterController.Instance.PlayDuckAnimation(target.hexCharacterView), QueuePosition.Back, 0f, 0.5f, target.GetLastStackEventParent());
 
                     if (HexCharacterController.Instance.IsCharacterAbleToMakeRiposteAttack(target) &&
-                        ability.abilityType == AbilityType.MeleeAttack &&
+                        ability.abilityType.Contains(AbilityType.MeleeAttack) &&
                         target.currentTile.Distance(caster.currentTile) <= 1 &&
                         // Cant riposte against another riposte, or free strike
                         ability.abilityName != RiposteAbility.abilityName && 
@@ -1211,11 +1212,11 @@ namespace HexGameEngine.Abilities
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Shed, -1);
 
             // Increment skills used this turn
-            if (ability.abilityType == AbilityType.Skill)            
+            if (ability.abilityType.Contains(AbilityType.Skill))            
                 character.skillAbilitiesUsedThisTurn++;
-            else if (ability.abilityType == AbilityType.RangedAttack)
+            else if (ability.abilityType.Contains(AbilityType.RangedAttack))
                 character.rangedAttackAbilitiesUsedThisTurn++;
-            else if (ability.abilityType == AbilityType.MeleeAttack)
+            else if (ability.abilityType.Contains(AbilityType.MeleeAttack))
                 character.meleeAttackAbilitiesUsedThisTurn++;
 
         }
@@ -1421,7 +1422,7 @@ namespace HexGameEngine.Abilities
 
             // Check resolute passive
             if (character != null &&
-                ability.abilityType == AbilityType.Skill &&
+                ability.abilityType.Contains(AbilityType.Skill) &&
                 character.skillAbilitiesUsedThisTurn == 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Resolute))
             {
@@ -1430,7 +1431,7 @@ namespace HexGameEngine.Abilities
 
             // Check Quick Draw passive
             else if (character != null &&
-                ability.abilityType == AbilityType.RangedAttack &&
+                ability.abilityType.Contains(AbilityType.RangedAttack) &&
                 character.rangedAttackAbilitiesUsedThisTurn == 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.QuickDraw))
             {
@@ -1439,7 +1440,7 @@ namespace HexGameEngine.Abilities
 
             // Check Finesse passive
             else if (character != null &&
-                ability.abilityType == AbilityType.MeleeAttack &&
+                ability.abilityType.Contains(AbilityType.MeleeAttack) &&
                 character.meleeAttackAbilitiesUsedThisTurn == 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Finesse))
             {
@@ -1513,7 +1514,8 @@ namespace HexGameEngine.Abilities
 
             int rangeReturned = ability.baseRange;
 
-            if ((ability.abilityType == AbilityType.RangedAttack || ability.abilityType == AbilityType.Skill) && ability.gainRangeBonusFromVision)
+            if ((ability.abilityType.Contains(AbilityType.RangedAttack) || ability.abilityType.Contains(AbilityType.Skill) || ability.abilityType.Contains(AbilityType.Spell)) &&
+                ability.gainRangeBonusFromVision)
             {
                 rangeReturned += StatCalculator.GetTotalVision(caster);
 
@@ -1892,13 +1894,12 @@ namespace HexGameEngine.Abilities
         #region
         public void ShowHitChancePopup(HexCharacterModel caster, HexCharacterModel target, AbilityData ability)
         {
-
             if (target != null &&
                 target.allegiance != caster.allegiance &&
                 caster.activationPhase == ActivationPhase.ActivationPhase &&
                 ability != null &&
                 ability.targetRequirement == TargetRequirement.Enemy &&
-                (ability.abilityType == AbilityType.MeleeAttack || ability.abilityType == AbilityType.RangedAttack))
+                (ability.abilityType.Contains(AbilityType.MeleeAttack) || ability.abilityType.Contains(AbilityType.RangedAttack) || ability.abilityType.Contains(AbilityType.WeaponAttack)))
             {
                 hitChanceCg.alpha = 0;
                 hitChanceVisualParent.SetActive(true);

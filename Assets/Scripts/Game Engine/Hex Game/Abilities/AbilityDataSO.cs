@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using HexGameEngine.Utilities;
 using HexGameEngine.UI;
 using HexGameEngine.Characters;
+using System.Linq;
 
 namespace HexGameEngine.Abilities
 {
@@ -50,7 +51,7 @@ namespace HexGameEngine.Abilities
         [VerticalGroup("Core Data/Stats")]
         [LabelWidth(100)]
         [GUIColor("Blue")]
-        public AbilityType abilityType;
+        public AbilityType[] abilityType;
         [Header("Misc Attributes")]
         [VerticalGroup("Core Data/Stats")]
         [LabelWidth(150)]
@@ -212,7 +213,7 @@ namespace HexGameEngine.Abilities
         }
         public bool ShowAccuracyPenaltyFromMelee()
         {
-            return abilityType == AbilityType.RangedAttack;
+            return abilityType.Contains(AbilityType.RangedAttack);
         }
         public bool ShowRangeFromTarget()
         {
@@ -220,7 +221,7 @@ namespace HexGameEngine.Abilities
         }
         public bool ShowHitChanceModifier()
         {
-            return abilityType == AbilityType.MeleeAttack || abilityType == AbilityType.RangedAttack;
+            return abilityType.Contains(AbilityType.MeleeAttack) || abilityType.Contains(AbilityType.RangedAttack) || abilityType.Contains(AbilityType.WeaponAttack);
         }
 
         #endregion

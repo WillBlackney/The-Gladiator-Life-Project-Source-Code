@@ -19,7 +19,7 @@ MonoBehaviour:
   energyCost: 4
   fatigueCost: 12
   baseCooldown: 2
-  abilityType: 1
+  abilityType: 01000000
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0

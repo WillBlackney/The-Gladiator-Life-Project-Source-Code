@@ -14,7 +14,7 @@ namespace HexGameEngine.Abilities
         public string baseAbilityDescription;
         public WeaponAbilityType weaponAbilityType;
 
-        public AbilityType abilityType;
+        public AbilityType[] abilityType;
         public bool doesNotBreakStealth;
         public TargetRequirement targetRequirement;
         public WeaponRequirement weaponRequirement;

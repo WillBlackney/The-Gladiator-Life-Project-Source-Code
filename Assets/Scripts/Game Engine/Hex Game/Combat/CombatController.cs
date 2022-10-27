@@ -13,6 +13,7 @@ using HexGameEngine.VisualEvents;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.UI;
 using HexGameEngine.Persistency;
+using System.Linq;
 
 namespace HexGameEngine.Combat
 {
@@ -639,7 +640,7 @@ namespace HexGameEngine.Combat
             ret.details.Add(new HitChanceDetailData(stressState.ToString(), stressMod));
 
             // Melee modifiers
-            if (ability != null && ability.abilityType == AbilityType.MeleeAttack)
+            if (ability != null && ability.abilityType.Contains(AbilityType.MeleeAttack))
             {
                 // Check back strike bonus
                 int backStrikeMod = HexCharacterController.Instance.CalculateBackStrikeHitChanceModifier(attacker, target);
@@ -665,7 +666,7 @@ namespace HexGameEngine.Combat
             }
 
             // Check shooting at engaged target or shooting from melee
-            if (ability != null && ability.abilityType == AbilityType.RangedAttack &&
+            if (ability != null && ability.abilityType.Contains(AbilityType.RangedAttack) &&
                 !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.PointBlank))
             {
                 if (HexCharacterController.Instance.IsCharacterEngagedInMelee(attacker))
@@ -691,7 +692,7 @@ namespace HexGameEngine.Combat
 
             // Warfare talent bonus
             if (ability != null &&
-                ability.abilityType == AbilityType.MeleeAttack &&
+                ability.abilityType.Contains(AbilityType.MeleeAttack) &&
                 CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Warfare, 1))
             {
                 int warfareBonus = CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Warfare) * 5;
@@ -701,7 +702,7 @@ namespace HexGameEngine.Combat
 
             // ranger talent bonus
             if (ability != null &&
-                ability.abilityType == AbilityType.RangedAttack &&
+                ability.abilityType.Contains(AbilityType.RangedAttack) &&
                 CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Ranger, 1))
             {
                 int rangerBonus = CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Ranger) * 5;
@@ -710,7 +711,7 @@ namespace HexGameEngine.Combat
 
             // Lumberjack background bonus
             if (ability != null &&
-                ability.abilityType == AbilityType.MeleeAttack &&
+                ability.abilityType.Contains(AbilityType.MeleeAttack) &&
                 CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Lumberjack) &&
                 ItemController.Instance.IsCharacterUsingWeaponClass(attacker.itemSet, WeaponClass.Axe)
                 )
@@ -722,7 +723,7 @@ namespace HexGameEngine.Combat
 
             // Dead Eye
             if (ability != null &&
-                ability.abilityType == AbilityType.RangedAttack &&
+                ability.abilityType.Contains(AbilityType.RangedAttack) &&
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.DeadEye))
             {
                 int deadEyeBonus = 5;
@@ -731,7 +732,7 @@ namespace HexGameEngine.Combat
 
             // Brawny
             if (ability != null &&
-                ability.abilityType == AbilityType.MeleeAttack &&
+                ability.abilityType.Contains(AbilityType.MeleeAttack) &&
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Brawny))
             {
                 int brawnyBonus = 5;
@@ -740,7 +741,7 @@ namespace HexGameEngine.Combat
 
             // Ranged attack distance penalty
             if (!PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Sniper) &&
-                ability != null && ability.abilityType == AbilityType.RangedAttack)
+                ability != null && ability.abilityType.Contains(AbilityType.RangedAttack))
             {
                 int distanceMod = -(attacker.currentTile.Distance(target.currentTile) - 1) * 5;
                 if (distanceMod != 0) ret.details.Add(new HitChanceDetailData("Distance Penalty", distanceMod));
@@ -802,7 +803,7 @@ namespace HexGameEngine.Combat
             // Check Hawk Eye
             if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.DeadEye) &&
                 ability != null &&
-                ability.abilityType == AbilityType.RangedAttack)
+                ability.abilityType.Contains(AbilityType.RangedAttack))
             {
                 critChance += 50;
             }
@@ -810,7 +811,7 @@ namespace HexGameEngine.Combat
             // Check Brawny
             else if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Brawny) &&
                 ability != null &&
-                ability.abilityType == AbilityType.MeleeAttack)
+                ability.abilityType.Contains(AbilityType.MeleeAttack))
             {
                 critChance += 50;
             }
@@ -818,7 +819,7 @@ namespace HexGameEngine.Combat
             // Check Tiger Aspect
             else if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.TigerAspect) &&
                 ability != null &&
-                ability.abilityType == AbilityType.MeleeAttack)
+                ability.abilityType.Contains(AbilityType.MeleeAttack))
             {
                 critChance += 150;
             }
@@ -1043,7 +1044,7 @@ namespace HexGameEngine.Combat
                 attacker != null &&
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.TigerAspect) &&
                 ability != null &&
-                ability.abilityType == AbilityType.MeleeAttack)
+                ability.abilityType.Contains(AbilityType.MeleeAttack))
             {
                 Debug.Log("ExecuteHandleDamage() attacker has Tiger Aspect, applying bleeding on target");
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Bleeding, 1, true, 0.5f, attacker.pManager);
@@ -1055,7 +1056,7 @@ namespace HexGameEngine.Combat
                 attacker.currentHealth > 0 &&
                 attacker.livingState == LivingState.Alive &&
                 ability != null &&
-                ability.abilityType == AbilityType.MeleeAttack)
+                ability.abilityType.Contains(AbilityType.MeleeAttack))
             {
                 // Take 10 damage
                 DamageResult dr = GetFinalDamageValueAfterAllCalculations(attacker, 10, DamageType.Physical, false);

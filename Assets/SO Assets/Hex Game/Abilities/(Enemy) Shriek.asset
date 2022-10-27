@@ -17,11 +17,13 @@ MonoBehaviour:
   baseAbilityDescription: Apply 10-12 Stress to a target.
   abilitySprite: {fileID: 21300000, guid: 254db86f895cba142ba5fe87e82418f1, type: 3}
   energyCost: 4
+  fatigueCost: 0
   baseCooldown: 0
-  abilityType: 1
+  abilityType: 01000000
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 3
@@ -34,6 +36,7 @@ MonoBehaviour:
   baseRange: 3
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 9
@@ -107,7 +110,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -120,6 +125,7 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0

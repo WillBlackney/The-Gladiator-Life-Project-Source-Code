@@ -11,6 +11,7 @@ using HexGameEngine.Libraries;
 using HexGameEngine.Items;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.RewardSystems;
+using System.Linq;
 
 namespace HexGameEngine.UI
 {
@@ -45,11 +46,7 @@ namespace HexGameEngine.UI
         [SerializeField] TextMeshProUGUI talentReqRowText;
 
         [Header("Ability Type Components")]
-        [SerializeField] Image abilityTypeImage;
         [SerializeField] TextMeshProUGUI abilityTypeText;
-        [SerializeField] Sprite meleeAttackIcon;
-        [SerializeField] Sprite rangedAttackIcon;
-        [SerializeField] Sprite skillIcon;
         #endregion
 
         // Input
@@ -264,21 +261,14 @@ namespace HexGameEngine.UI
         }
         private void BuildAbilityTypeComponents(AbilityData data)
         {
-            if (data.abilityType == AbilityType.MeleeAttack)
+            abilityTypeText.text = "";
+            for (int i = 0; i < data.abilityType.Length; i++)
             {
-                abilityTypeImage.sprite = meleeAttackIcon;
-                abilityTypeText.text = "Melee Attack";
-            }
-
-            else if (data.abilityType == AbilityType.RangedAttack)
-            {
-                abilityTypeImage.sprite = rangedAttackIcon;
-                abilityTypeText.text = "Ranged Attack";
-            }
-            else if (data.abilityType == AbilityType.Skill)
-            {
-                abilityTypeImage.sprite = skillIcon;
-                abilityTypeText.text = "Skill";
+                abilityTypeText.text += TextLogic.SplitByCapitals(data.abilityType[i].ToString());
+                if (i != data.abilityType.Length - 1)
+                {
+                    abilityTypeText.text += ", ";
+                }
             }
         }
         private void BuildAbilityRangeComponents(AbilityData data)

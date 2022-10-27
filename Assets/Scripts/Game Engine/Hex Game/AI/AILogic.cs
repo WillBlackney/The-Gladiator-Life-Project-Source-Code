@@ -927,7 +927,7 @@ namespace HexGameEngine.AI
             {
                 foreach(AbilityData a in c.abilityBook.activeAbilities)
                 {
-                    if(a.abilityType == AbilityType.RangedAttack)
+                    if(a.abilityType.Contains(AbilityType.RangedAttack))
                     {
                         rangedAbilitiesTotal += 1;
                         cooldownTotal += a.baseCooldown;

@@ -17,11 +17,13 @@ MonoBehaviour:
   baseAbilityDescription: Deal 125% weapon damage to an enemy and apply 2 Bleeding.
   abilitySprite: {fileID: 21300000, guid: 355f873af4715a84ca2dcf3874fbf46c, type: 3}
   energyCost: 5
+  fatigueCost: 0
   baseCooldown: 0
-  abilityType: 2
+  abilityType: 0200000004000000
   doesNotBreakStealth: 0
   weaponRequirement: 1
   derivedFromWeapon: 1
+  derivedFromItemLoadout: 0
   weaponAbilityType: 1
   weaponClass: 3
   targetRequirement: 3
@@ -32,7 +34,9 @@ MonoBehaviour:
     level: 0
   abilitySubRequirements: []
   baseRange: 1
+  gainRangeBonusFromVision: 0
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 2
@@ -106,7 +110,9 @@ MonoBehaviour:
     minBaseDamage: 23
     maxBaseDamage: 27
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -145,7 +151,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -157,6 +165,7 @@ MonoBehaviour:
       passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0

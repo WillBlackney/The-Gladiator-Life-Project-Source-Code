@@ -41,7 +41,7 @@ namespace HexGameEngine.Cards
 
             // type
             SetAbilityTypeIconVisbility(cardVM, true);
-            SetCardViewModelAbilityTypeIconImage(cardVM, SpriteLibrary.Instance.GetAbilityTypeSprite(ability.abilityType));
+           // SetCardViewModelAbilityTypeIconImage(cardVM, SpriteLibrary.Instance.GetAbilityTypeSprite(ability.abilityType));
 
             // energy cost
             SetEnergyIconVisbility(cardVM, true);

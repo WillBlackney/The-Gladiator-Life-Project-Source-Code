@@ -17,11 +17,13 @@ MonoBehaviour:
   baseAbilityDescription: Deal 75% damage to an enemy and apply 1 Weakened.
   abilitySprite: {fileID: 21300000, guid: 341eea4151db4c146bb68edb101d7613, type: 3}
   energyCost: 4
+  fatigueCost: 0
   baseCooldown: 0
-  abilityType: 3
+  abilityType: 0300000005000000
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
   weaponAbilityType: 0
   weaponClass: 0
   targetRequirement: 3
@@ -34,6 +36,7 @@ MonoBehaviour:
   baseRange: 3
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 1
   abilityEffects:
   - effectType: 2
@@ -122,7 +125,9 @@ MonoBehaviour:
     minBaseDamage: 13
     maxBaseDamage: 17
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 02000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -176,7 +181,9 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
-    ignoresBlock: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
@@ -188,6 +195,7 @@ MonoBehaviour:
       passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0

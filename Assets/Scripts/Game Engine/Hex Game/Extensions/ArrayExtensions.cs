@@ -129,8 +129,7 @@ namespace HexGameEngine
             T[] newArray = new T[array.Length];
             Array.Copy(array, newArray, array.Length);
             return newArray;
-        }       
-
+        }
 
 
 
@@ -155,6 +154,7 @@ namespace HexGameEngine
 
             return (int)(minimumValue + randomValueInRange);
         }
+
 
     }
 }

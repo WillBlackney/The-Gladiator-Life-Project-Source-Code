@@ -297,6 +297,11 @@ namespace HexGameEngine
         Skill = 1,
         MeleeAttack = 2,
         RangedAttack = 3,
+        WeaponAttack = 4,
+        Spell = 5,
+        Aspect = 6,
+        Hymn = 7,
+        Summon = 8,
     }
     public enum AbilityEffectRange
     {
