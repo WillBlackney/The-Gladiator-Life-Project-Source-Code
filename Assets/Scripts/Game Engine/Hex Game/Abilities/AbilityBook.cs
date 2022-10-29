@@ -132,24 +132,24 @@ namespace HexGameEngine.Abilities
 
             if (includeLoadOutAbility)
             {
-                AbilityData loadOutAbility = GetLoadoutAbilityDataFromItemSet(itemSet);
-                if (loadOutAbility != null)
-                    ret.Add(loadOutAbility);
+                List<AbilityData> loadOutAbilities = GetLoadoutAbilitiesFromItemSet(itemSet);
+                foreach(var a in loadOutAbilities)                
+                    ret.Add(a);
             }
 
             Debug.Log("AbilityBook.GenerateAbilitiesFromWeapons() generated abilities: " + ret.Count.ToString());
             return ret;
         }
-        private AbilityData GetLoadoutAbilityDataFromItemSet(ItemSet itemSet)
+        private List<AbilityData> GetLoadoutAbilitiesFromItemSet(ItemSet itemSet)
         {
-            AbilityData loadOutAbility = null;
+            List <AbilityData> loadOutAbilities = new List<AbilityData>();
 
             // 2H melee: Heavy Blow
             if (itemSet.mainHandItem != null &&
                 itemSet.mainHandItem.IsMeleeWeapon &&
                 itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
             {
-                loadOutAbility = AbilityController.Instance.FindAbilityData("Heavy Blow");
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Heavy Blow"));
             }
 
             // Dual wielding 1h: Twin Strike
@@ -160,7 +160,7 @@ namespace HexGameEngine.Abilities
                 itemSet.offHandItem.IsMeleeWeapon &&
                 itemSet.offHandItem.handRequirement == HandRequirement.OneHanded)
             {
-                loadOutAbility = AbilityController.Instance.FindAbilityData("Twin Strike");
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Twin Strike"));
             }
 
             // 1h melee weapon: shove
@@ -169,10 +169,27 @@ namespace HexGameEngine.Abilities
                 itemSet.mainHandItem.handRequirement == HandRequirement.OneHanded &&
                 itemSet.offHandItem == null)
             {
-                loadOutAbility = AbilityController.Instance.FindAbilityData("Shove");
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Shove"));
             }
 
-            return loadOutAbility;
+            // Main hand empty: Jab + Shove
+            else if (itemSet.mainHandItem == null &&
+                itemSet.offHandItem != null)
+            {
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Jab"));
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Shove"));
+            }
+
+            // Main hand AND off hand empty: Jab, Hook and Shove
+            else if (itemSet.mainHandItem == null &&
+               itemSet.offHandItem == null)
+            {
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Jab"));
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Hook"));
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Shove"));
+            }
+
+            return loadOutAbilities;
         }
         public void HandleLearnAbilitiesFromItemSet(ItemSet itemSet, bool unlearnPreviousItemAbilities = true)
         {

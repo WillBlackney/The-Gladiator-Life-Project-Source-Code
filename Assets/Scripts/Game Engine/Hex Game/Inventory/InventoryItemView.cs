@@ -209,10 +209,11 @@ namespace HexGameEngine.Items
             {
                 var mainHandItem = CharacterRosterViewController.Instance.CharacterCurrentlyViewing.itemSet.mainHandItem;
 
+                /*
                 // Cant equip an off hand if main hand is empty
                 if (RosterItemSlot.SlotMousedOver.SlotType == RosterSlotType.OffHand &&
                     mainHandItem == null)
-                    return false;
+                    return false;*/
 
                 // Cant equip off hand if main hand weapon is 2 handed
                 if (RosterItemSlot.SlotMousedOver.SlotType == RosterSlotType.OffHand &&

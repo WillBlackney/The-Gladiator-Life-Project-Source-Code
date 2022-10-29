@@ -881,39 +881,38 @@ namespace HexGameEngine.MainMenu
                     offHandItemIcon.BuildFromData(null);
                 }
             }
-
             else
             {
-                ItemDataSO currentBody = null;
-                foreach (ItemDataSO bodyData in allStartingMainHandItems)
+
+                ItemDataSO currentMH = null;
+                foreach (ItemDataSO mainHandItem in allStartingMainHandItems)
                 {
-                    if (bodyData.itemName == characterBuild.itemSet.mainHandItem.itemName)
-                        currentBody = bodyData;
+                    if (mainHandItem.itemName == characterBuild.itemSet.mainHandItem.itemName)
+                        currentMH = mainHandItem;
                 }
 
-                int currentIndex = Array.IndexOf(allStartingMainHandItems, currentBody);
+                int currentIndex = Array.IndexOf(allStartingMainHandItems, currentMH);
 
-                // determine next index
-                int nextIndex = currentIndex + 1;
-                if (currentIndex == allStartingMainHandItems.Length - 1) nextIndex = 0;
-
-                ItemData item = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[nextIndex].itemName);
-                characterBuild.itemSet.mainHandItem = item;
-                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                mainHandItemIcon.BuildFromData(item);
-
-                // Cancel off hand item if equipping an 2h weapon
-                if (characterBuild.itemSet.offHandItem != null && item.handRequirement == HandRequirement.TwoHanded)
+                // Set no item
+                if (currentIndex == allStartingMainHandItems.Length - 1)
                 {
-                    characterBuild.itemSet.offHandItem = null;
-                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
-                    offHandItemIcon.BuildFromData(null);
+                    characterBuild.itemSet.mainHandItem = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    mainHandItemIcon.BuildFromData(null);
+                }
+
+                // Set next item
+                else
+                {
+                    ItemData item = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[currentIndex + 1].itemName);
+                    characterBuild.itemSet.mainHandItem = item;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    mainHandItemIcon.BuildFromData(item);
                 }
             }
 
             RebuildItemPanelWeaponAbilityIcons();
-
-
         }
         public void OnPreviousMainHandItemClicked()
         {
@@ -932,9 +931,44 @@ namespace HexGameEngine.MainMenu
                     offHandItemIcon.BuildFromData(null);
                 }
             }
+            /*
+            else if (characterBuild.itemSet.mainHandItem != null &&
+                Array.IndexOf(allStartingMainHandItems, characterBuild.itemSet.mainHandItem) == 0)
+            {
+                characterBuild.itemSet.mainHandItem = null;
+                CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
+                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                mainHandItemIcon.BuildFromData(null);
+            }
+            */
 
             else
             {
+                ItemDataSO currentMH = null;
+                foreach (ItemDataSO bodyData in allStartingMainHandItems)
+                {
+                    if (bodyData.itemName == characterBuild.itemSet.mainHandItem.itemName)
+                        currentMH = bodyData;
+                }
+                int currentIndex = Array.IndexOf(allStartingMainHandItems, currentMH);
+
+                // Set no item
+                if (currentIndex == 0)
+                {
+                    characterBuild.itemSet.mainHandItem = null;
+                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    mainHandItemIcon.BuildFromData(null);
+                }
+                // Set previous item
+                else
+                {
+                    ItemData mhItem = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[currentIndex - 1].itemName);
+                    characterBuild.itemSet.mainHandItem = mhItem;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    mainHandItemIcon.BuildFromData(mhItem);
+                }
+                /*
                 ItemDataSO currentItem = null;
                 foreach (ItemDataSO weapon in allStartingMainHandItems)
                 {
@@ -955,31 +989,6 @@ namespace HexGameEngine.MainMenu
                     characterBuild.itemSet.offHandItem = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
                     offHandItemIcon.BuildFromData(null);
-                }
-
-                /*
-                // Set no item
-                if (currentIndex == 0)
-                {
-                    characterBuild.itemSet.mainHandItem = null;
-                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                    mainHandItemIcon.BuildFromData(null);
-                }
-                // Set previous item
-                else
-                {
-                    ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[currentIndex - 1].itemName);
-                    characterBuild.itemSet.mainHandItem = bodyItem;
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                    mainHandItemIcon.BuildFromData(bodyItem);
-
-                    if (characterBuild.itemSet.offHandItem != null && bodyItem.handRequirement == HandRequirement.TwoHanded)
-                    {
-                        characterBuild.itemSet.offHandItem = null;
-                        CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
-                        offHandItemIcon.BuildFromData(null);
-                    }
                 }
                 */
 
@@ -1009,14 +1018,14 @@ namespace HexGameEngine.MainMenu
 
             else
             {
-                ItemDataSO currentBody = null;
-                foreach (ItemDataSO bodyData in allStartingOffHandItems)
+                ItemDataSO currentOH = null;
+                foreach (ItemDataSO offhandItem in allStartingOffHandItems)
                 {
-                    if (bodyData.itemName == characterBuild.itemSet.offHandItem.itemName)
-                        currentBody = bodyData;
+                    if (offhandItem.itemName == characterBuild.itemSet.offHandItem.itemName)
+                        currentOH = offhandItem;
                 }
 
-                int currentIndex = Array.IndexOf(allStartingOffHandItems, currentBody);
+                int currentIndex = Array.IndexOf(allStartingOffHandItems, currentOH);
 
                 // Set no item
                 if (currentIndex == allStartingOffHandItems.Length - 1)
@@ -1053,7 +1062,7 @@ namespace HexGameEngine.MainMenu
                characterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
                 return;
 
-            // Not currently wearing a head item
+            // Not currently using an off hand item
             if (characterBuild.itemSet.offHandItem == null)
             {
                 ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[allStartingOffHandItems.Length - 1].itemName);
@@ -1071,13 +1080,13 @@ namespace HexGameEngine.MainMenu
 
             else
             {
-                ItemDataSO currentBody = null;
+                ItemDataSO currentOH = null;
                 foreach (ItemDataSO bodyData in allStartingOffHandItems)
                 {
                     if (bodyData.itemName == characterBuild.itemSet.offHandItem.itemName)
-                        currentBody = bodyData;
+                        currentOH = bodyData;
                 }
-                int currentIndex = Array.IndexOf(allStartingOffHandItems, currentBody);
+                int currentIndex = Array.IndexOf(allStartingOffHandItems, currentOH);
 
                 // Set no item
                 if (currentIndex == 0)

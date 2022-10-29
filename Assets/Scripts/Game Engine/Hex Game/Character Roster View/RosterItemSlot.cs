@@ -59,7 +59,7 @@ namespace HexGameEngine.UI
                 var character = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
 
                 // Prevent removing main hand if an off hand is equipt
-                if (slotType == RosterSlotType.MainHand && character.itemSet.offHandItem != null) return;
+                //if (slotType == RosterSlotType.MainHand && character.itemSet.offHandItem != null) return;
                 ItemPopupController.Instance.OnInventoryItemMouseExit();
                 ItemController.Instance.HandleSendItemFromCharacterToInventory(character, this);
             }

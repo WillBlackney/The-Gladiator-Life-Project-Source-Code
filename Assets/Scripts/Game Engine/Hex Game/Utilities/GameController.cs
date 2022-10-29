@@ -78,7 +78,7 @@ namespace HexGameEngine
         #region
         private IEnumerator RunStandardGameModeSetup()
         {
-            gameState = GameState.MainMenu;
+            SetGameState(GameState.MainMenu);
             LightController.Instance.EnableStandardGlobalLight();
             TopBarController.Instance.HideMainTopBar();
             TopBarController.Instance.HideCombatTopBar();
@@ -597,6 +597,9 @@ namespace HexGameEngine
             // Build town views 
             if(RunController.Instance.SaveCheckPoint == SaveCheckPoint.Town)
             {
+                // Set state
+                SetGameState(GameState.Town);
+
                 // Enable GUI
                 TopBarController.Instance.ShowMainTopBar();
                 TownController.Instance.ShowTownView();
@@ -622,8 +625,6 @@ namespace HexGameEngine
                 }
                 else
                 {
-                   // LightController.Instance.EnableNightTimeGlobalLight();
-                   // LevelController.Instance.EnableNightTimeArenaScenery();
                     LightController.Instance.EnableDayTimeGlobalLight();
                     LevelController.Instance.EnableDayTimeArenaScenery();
                 }

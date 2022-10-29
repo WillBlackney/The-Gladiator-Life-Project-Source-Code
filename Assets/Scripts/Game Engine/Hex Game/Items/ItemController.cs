@@ -260,25 +260,6 @@ namespace HexGameEngine.Items
                     bRet = true;
             }
 
-            // check if adding offhand item while holding a 2h item in the main hand (not allowed)
-            /*
-            if(character != null)
-            {
-                if(character.itemSet.mainHandItem != null &&
-                    character.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded &&
-                    slot.SlotType == RosterSlotType.OffHand)
-                {
-                    Debug.Log("IsItemValidOnSlot() returning false: cant add off hand item while using a 2H weapon");
-                    return false;
-                }
-
-                if (character.itemSet.offHandItem != null && item.handRequirement == HandRequirement.TwoHanded)
-                {
-                    Debug.Log("IsItemValidOnSlot() returning false: cant add two handed item while holding an off hand item");
-                    return false;
-                }
-            }
-            */
 
             Debug.LogWarning("IsItemValidOnSlot() returning " + bRet.ToString());
 
@@ -471,6 +452,8 @@ namespace HexGameEngine.Items
             ret += GetTotalStacksOfPerkFromItem(perk, set.mainHandItem);
             ret += GetTotalStacksOfPerkFromItem(perk, set.offHandItem);
             ret += GetTotalStacksOfPerkFromItem(perk, set.trinket);
+            ret += GetTotalStacksOfPerkFromItem(perk, set.headArmour);
+            ret += GetTotalStacksOfPerkFromItem(perk, set.bodyArmour);
             return ret;
         }
         private int GetTotalStacksOfPerkFromItem(Perk perk, ItemData item)
@@ -494,7 +477,8 @@ namespace HexGameEngine.Items
             perks.AddRange(GetActivePerksFromItem(set.mainHandItem));
             perks.AddRange(GetActivePerksFromItem(set.offHandItem));
             perks.AddRange(GetActivePerksFromItem(set.trinket));
-
+            perks.AddRange(GetActivePerksFromItem(set.headArmour));
+            perks.AddRange(GetActivePerksFromItem(set.bodyArmour));
             Debug.Log("ItemController.GetActivePerksFromItemSet() found " + perks.Count.ToString() +
                 " perks from items");
             return perks;
