@@ -903,6 +903,7 @@ namespace HexGameEngine.Characters
                 character.skillAbilitiesUsedThisTurn = 0;
                 character.meleeAttackAbilitiesUsedThisTurn = 0;
                 character.rangedAttackAbilitiesUsedThisTurn = 0;
+                character.weaponAbilitiesUsedThisTurn = 0;
                 character.charactersKilledThisTurn = 0;
 
                 // DOTS
@@ -1233,8 +1234,8 @@ namespace HexGameEngine.Characters
                     VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
                 }
 
-                // Flaming Presence
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FlamingPresence) && character.currentHealth > 0)
+                // Fiery Presence
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FieryPresence) && character.currentHealth > 0)
                 {
                     // Status Notif 
                     VisualEventManager.Instance.CreateVisualEvent(() =>
@@ -1274,7 +1275,7 @@ namespace HexGameEngine.Characters
                     List<HexCharacterModel> enemies = GetAllEnemiesWithinMyAura(character);
                     foreach (HexCharacterModel enemy in enemies)
                     {
-                        // Burning VFX
+                        // Poisoned VFX
                         HexCharacterView enemyView = enemy.hexCharacterView;
                         VisualEventManager.Instance.CreateVisualEvent(() =>
                             VisualEffectManager.Instance.CreateApplyPoisonedEffect(enemyView.WorldPosition), QueuePosition.Back);
@@ -1872,7 +1873,7 @@ namespace HexGameEngine.Characters
 
                 // Bonus is doubled for characters with opportunist perk
                 if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Opportunist))
-                    bonusRet *= 2;
+                    bonusRet += 5;
 
                 // Prevent bonus going negative
                 if (bonusRet < 0) bonusRet = 0;
@@ -1894,7 +1895,7 @@ namespace HexGameEngine.Characters
 
                 // Bonus is doubled for characters with opportunist perk
                 if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Opportunist))
-                    bonusRet *= 2;
+                    bonusRet += 5;
 
                 // Backstriked characters dont benefit from dodge stat
                 bonusRet += StatCalculator.GetTotalDodge(target);
@@ -1905,9 +1906,10 @@ namespace HexGameEngine.Characters
         public int CalculateElevationAccuracyModifier(HexCharacterModel attacker, HexCharacterModel target)
         {
             int bonusRet = 0;
-            
+
             // +10 Accuracy attacking from elevation
-            if (attacker.currentTile.Elevation == TileElevation.Elevated &&
+            if (!PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Footwork) &&
+                attacker.currentTile.Elevation == TileElevation.Elevated &&
                 target.currentTile.Elevation == TileElevation.Ground)
             {
                 bonusRet += 10;

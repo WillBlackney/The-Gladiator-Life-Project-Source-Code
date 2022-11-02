@@ -551,7 +551,8 @@ namespace HexGameEngine.Abilities
                     VisualEventManager.Instance.CreateVisualEvent(() =>
                     HexCharacterController.Instance.PlayDuckAnimation(target.hexCharacterView), QueuePosition.Back, 0f, 0.5f, target.GetLastStackEventParent());
 
-                    if (HexCharacterController.Instance.IsCharacterAbleToMakeRiposteAttack(target) &&
+                    if (!PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.Slippery) &&
+                        HexCharacterController.Instance.IsCharacterAbleToMakeRiposteAttack(target) &&
                         ability.abilityType.Contains(AbilityType.MeleeAttack) &&
                         target.currentTile.Distance(caster.currentTile) <= 1 &&
                         // Cant riposte against another riposte, or free strike
@@ -1218,7 +1219,8 @@ namespace HexGameEngine.Abilities
                 character.rangedAttackAbilitiesUsedThisTurn++;
             else if (ability.abilityType.Contains(AbilityType.MeleeAttack))
                 character.meleeAttackAbilitiesUsedThisTurn++;
-
+            else if (ability.abilityType.Contains(AbilityType.WeaponAttack))
+                character.weaponAbilitiesUsedThisTurn++;
         }
         private void OnAbilityUsedFinish(HexCharacterModel character, AbilityData ability, HexCharacterModel target = null)
         {
@@ -1420,17 +1422,10 @@ namespace HexGameEngine.Abilities
             if (ability.abilityName.Contains("Aspect") && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
                 return 0;
 
-            // Check resolute passive
-            if (character != null &&
-                ability.abilityType.Contains(AbilityType.Skill) &&
-                character.skillAbilitiesUsedThisTurn == 0 &&
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Resolute))
-            {
-                energyCost -= 1;
-            }
+            
 
             // Check Quick Draw passive
-            else if (character != null &&
+            if (character != null &&
                 ability.abilityType.Contains(AbilityType.RangedAttack) &&
                 character.rangedAttackAbilitiesUsedThisTurn == 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.QuickDraw))
@@ -1439,7 +1434,7 @@ namespace HexGameEngine.Abilities
             }
 
             // Check Finesse passive
-            else if (character != null &&
+            if (character != null &&
                 ability.abilityType.Contains(AbilityType.MeleeAttack) &&
                 character.meleeAttackAbilitiesUsedThisTurn == 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Finesse))
@@ -1447,12 +1442,24 @@ namespace HexGameEngine.Abilities
                 energyCost -= PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Finesse);
             }
 
-            // Check Arms Master passive
-            else if (character != null &&
-                (ability.derivedFromWeapon || ability.derivedFromItemLoadout) &&
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.ArmsMaster))
+
+            // MASTERY PERKS
+            // Weapon mastery 
+            if (character != null &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                character.weaponAbilitiesUsedThisTurn == 0 &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.WeaponMastery))
             {
-                energyCost -= PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.ArmsMaster);
+                energyCost -= 1;
+            }
+
+            // Skill Mastery
+            if (character != null &&
+                ability.abilityType.Contains(AbilityType.Skill) &&
+                character.skillAbilitiesUsedThisTurn == 0 &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SkillMastery))
+            {
+                energyCost -= 1;
             }
 
             // prevent cost going negative

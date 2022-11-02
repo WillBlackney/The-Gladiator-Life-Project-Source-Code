@@ -55,7 +55,7 @@ namespace HexGameEngine.Combat
             DamageType damageTypeReturned = abilityEffect.damageType;
 
             // Check overload perk passive
-            if (ability.weaponRequirement != WeaponRequirement.None &&
+            if (ability.abilityType.Contains(AbilityType.WeaponAttack) &&
                 PerkController.Instance.DoesCharacterHavePerk(entity.pManager, Perk.Overload))
             {
                 Debug.Log("CalculateFinalDamageTypeOfAttack() attacker has 'Overload' perk, damage dealt converted to Magic damage");
@@ -152,7 +152,6 @@ namespace HexGameEngine.Combat
                 damageModPercentageAdditive += 0.01f * missingHealth;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Berserk perk modifier = " + damageModPercentageAdditive.ToString());
             }
-
 
             // Check Locomotion bonus
             if (attacker != null &&
@@ -278,8 +277,6 @@ namespace HexGameEngine.Combat
             lowerDamageFinal = (int)(lowerDamageFinal * damageModPercentageAdditive);
             upperDamageFinal = (int)(upperDamageFinal * damageModPercentageAdditive);           
 
-            // Any multiplicative damage modifiers should go here.
-            //
 
             Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Base damage AFTER applying final multiplicative modifiers + resistance: " + baseDamageFinal.ToString());
 
@@ -800,6 +797,14 @@ namespace HexGameEngine.Combat
             }
             */
 
+            // Check Opportunist
+            if (ability != null && 
+                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Opportunist) &&                
+                HexCharacterController.Instance.GetCharacterBackArcTiles(target).Contains(attacker.currentTile))
+            {
+                critChance += 10;
+            }
+
             // Check Hawk Eye
             if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.DeadEye) &&
                 ability != null &&
@@ -1109,11 +1114,11 @@ namespace HexGameEngine.Combat
             // On health lost events
             if (totalHealthLost > 0 && target.currentHealth > 0)
             {
-                // Masochist perk
+                // Vengeful perk
                 if(target != null &&
-                    PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Masochist))
+                    PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Vengeful))
                 {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Focus, 1, true, 0.5f);
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Combo, 1, true, 0.5f);
                 }
 
                 // Punch drunk perk (25% chance to become stunned)

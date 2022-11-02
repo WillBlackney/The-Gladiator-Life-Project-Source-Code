@@ -64,6 +64,7 @@ namespace HexGameEngine.Characters
         [Header("Turn Related + Temp Properties")]
         public int tilesMovedThisTurn;
         public int skillAbilitiesUsedThisTurn;
+        public int weaponAbilitiesUsedThisTurn;
         public int rangedAttackAbilitiesUsedThisTurn;
         public int meleeAttackAbilitiesUsedThisTurn;
         public int charactersKilledThisTurn;

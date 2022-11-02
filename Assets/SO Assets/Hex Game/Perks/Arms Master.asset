@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Arms Master
   m_EditorClassIdentifier: 
   passiveSprite: {fileID: 21300000, guid: 13897e91cec47c24087cbf50f2ff0bbb, type: 3}
-  passiveName: Arms Master
+  passiveName: Weapon Mastery
   perkTag: 126
   passiveDescription:
   - color: 1

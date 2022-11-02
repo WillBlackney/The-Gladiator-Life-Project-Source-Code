@@ -10,36 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
-  m_Name: Resolute
+  m_Name: Vengeful
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 425d0e80256263642a103c21680b16de, type: 3}
-  passiveName: Resolute
-  perkTag: 17
+  passiveSprite: {fileID: 21300000, guid: 127dd9eb2fc718b4f82a46d5d17701a1, type: 3}
+  passiveName: Vengeful
+  perkTag: 82
   passiveDescription:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'This character''s first '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'Skill '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'ability each turn costs '
+    phrase: 'Whenever this character loses health, they gain '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: '1 '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'less '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Action Point
+    phrase: Combo
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

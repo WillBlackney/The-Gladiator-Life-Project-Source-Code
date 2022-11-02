@@ -19,7 +19,11 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'The '
+    phrase: 'Gain an additional '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '+5 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -27,7 +31,19 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'bonus from '
+    phrase: 'and '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '+10 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Critical Chance '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'when '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -35,15 +51,15 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'and '
+    phrase: 'or '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Back Striking '
+    phrase: Backstriking
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: is doubled for this character.
+    phrase: .
   passiveItalicDescription: 
   effectDetailTabs: []
   maxAllowedStacks: 1
