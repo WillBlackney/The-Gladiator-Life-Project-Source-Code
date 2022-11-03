@@ -59,7 +59,7 @@ MonoBehaviour:
     activeAbilities: []
   serializedPassiveManager:
     perks:
-    - perkTag: 18
+    - perkTag: 173
       stacks: 1
   modelParts:
   - Ghoul_Chest

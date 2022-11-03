@@ -1415,6 +1415,25 @@ namespace HexGameEngine.Characters
                         VisualEffectManager.Instance.CreateExpendEffect(view.WorldPosition, 15, 0.2f));
 
                 }
+
+                // Rapid Cloaking
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.RapidCloaking) &&
+                    !PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Stealth) &&
+                    character.currentHealth > 0)
+                {
+                    // Text Notif
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Rapid Cloaking"), QueuePosition.Back, 0f, 0.5f);
+
+                    // Gain stealth
+                    PerkController.Instance.ModifyPerkOnCharacterEntity
+                        (character.pManager, Perk.Stealth, 1, true, 0, character.pManager);
+
+                    // Poof VFX
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEffectManager.Instance.CreateExpendEffect(view.WorldPosition, 15, 0.2f));
+
+                }
                 #endregion
             }
 
