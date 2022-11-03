@@ -1780,13 +1780,16 @@ namespace HexGameEngine.Abilities
             bRet = GetTargettableTilesOfAbility(ability, caster).Contains(target.currentTile);
 
             int stealthDistance = StatCalculator.GetTotalVision(caster) + 1;
+            bool ignoreStealth = PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.TrueSight) ||
+                PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.Sniper);
+
             if (stealthDistance < 1) stealthDistance = 1;
 
-            // Check stealth + eagle eye (EE ignores stealth)
+            // Check stealth + eagle eye / sniper (ignores stealth)
             if (caster.currentTile.Distance(target.currentTile) > stealthDistance &&
                 HexCharacterController.Instance.IsTargetFriendly(caster, target) == false &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stealth) &&                
-                !PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.TrueSight))
+                !ignoreStealth)
                 bRet = false;
 
             return bRet;

@@ -19,7 +19,15 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'The '
+    phrase: 'This character ignores '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Stealth '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and the '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -27,7 +35,9 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'penalty caused by distance does not apply to this character. '
+    phrase: penalty from distance.
+  passiveItalicDescription: 
+  effectDetailTabs: []
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 0
