@@ -400,7 +400,6 @@ namespace HexGameEngine
         ComboStriker = 175,
         Relentless = 176,
         ParryMaster = 177,
-        Ironjaw = 178,
         Gifted = 179,
         SpellMastery = 180,
         RangedMastery = 181,

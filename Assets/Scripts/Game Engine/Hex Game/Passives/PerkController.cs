@@ -408,10 +408,22 @@ namespace HexGameEngine.Perks
             // Calculate stacks to apply + prevent applying stacks over the passives limit
             int stacksAppliedActual = stacks;
 
-            // check torturer perk for bleeding/poisoned/burning
+            // Check 'Torturer' perk for bleeding/poisoned/burning
             if((perk == Perk.Burning || perk == Perk.Bleeding || perk == Perk.Poisoned) &&
                 applier != null &&
                 DoesCharacterHavePerk(applier, Perk.Torturer))
+            {
+                stacksAppliedActual += 1;
+            }
+
+            // Check 'Best Friend' perk for extra stack of buff
+            if (stacks > 0 &&
+                RandomGenerator.NumberBetween(1,100) <= 35 &&
+                (perk == Perk.Focus || perk == Perk.Wrath || perk == Perk.Guard 
+                || perk == Perk.Evasion || perk == Perk.Courage || perk == Perk.Combo) &&
+                applier != null &&
+                applier.myCharacterEntity.allegiance == pManager.myCharacterEntity.allegiance &&
+                DoesCharacterHavePerk(applier, Perk.BestFriend))
             {
                 stacksAppliedActual += 1;
             }

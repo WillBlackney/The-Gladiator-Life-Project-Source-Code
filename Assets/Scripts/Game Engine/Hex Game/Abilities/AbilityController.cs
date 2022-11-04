@@ -1489,6 +1489,11 @@ namespace HexGameEngine.Abilities
         {
             int fatigueCost = ability.fatigueCost;
 
+            if (fatigueCost > 0 &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.MusclesMemories))
+                return 0;
+
             if (fatigueCost > 0 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.WellDrilled))
                 fatigueCost = fatigueCost / 2;
 

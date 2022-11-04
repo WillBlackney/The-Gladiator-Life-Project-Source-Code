@@ -558,7 +558,12 @@ namespace HexGameEngine.Characters
             int originalStress = character.currentStress;
             int finalStress = character.currentStress;
             StressState previousStressState = CombatController.Instance.GetStressStateFromStressAmount(character.currentStress);
-            finalStress += stressGainedOrLost;            
+
+            // Unshakeable perk
+            if (stressGainedOrLost > 0 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Unshakeable))
+                stressGainedOrLost = stressGainedOrLost / 2;
+
+           finalStress += stressGainedOrLost;            
 
             // prevent stress increasing over maximum
             if (finalStress > 100)            

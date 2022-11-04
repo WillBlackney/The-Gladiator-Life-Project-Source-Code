@@ -1175,6 +1175,35 @@ namespace HexGameEngine.Combat
                         HexCharacterController.Instance.ModifyStress(attacker, -10, true, true);
                     }
 
+                    // Perk Soul Collector: permanently gain 1 constitution
+                    if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.SoulCollector) &&
+                        attacker.characterData != null)
+                    {
+                        // Status notification
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Collector!"), QueuePosition.Back, 0, 0, attacker.GetLastStackEventParent());
+
+                        // Increment stats
+                        attacker.characterData.attributeSheet.constitution.value += 1;
+                        attacker.attributeSheet.constitution.value += 1;
+
+                        // Update health UI
+                        HexCharacterController.Instance.ModifyMaxHealth(attacker, 0);
+                    }
+
+                    // Perk Soul Devourer: permanently gain 1 might
+                    if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.SoulDevourer) &&
+                        attacker.characterData != null)
+                    {
+                        // Status notification
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Devourer!"), QueuePosition.Back, 0, 0, attacker.GetLastStackEventParent());
+
+                        // Increment stats
+                        attacker.characterData.attributeSheet.might.value += 1;
+                        attacker.attributeSheet.might.value += 1;
+                    }
+
                     // Increment kills this turn
                     attacker.charactersKilledThisTurn++;
                     attacker.totalKills++;
