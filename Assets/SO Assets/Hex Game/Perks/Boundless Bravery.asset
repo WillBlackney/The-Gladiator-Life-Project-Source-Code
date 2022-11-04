@@ -19,7 +19,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'On turn start, if you dont have '
+    phrase: 'On turn start, if you don''t have '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

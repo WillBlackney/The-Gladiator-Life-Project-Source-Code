@@ -1213,6 +1213,7 @@ namespace HexGameEngine.Abilities
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Shed, -1);
 
             // Increment skills used this turn
+            character.abilitiesUsedThisCombat++;
             if (ability.abilityType.Contains(AbilityType.Skill))            
                 character.skillAbilitiesUsedThisTurn++;
             else if (ability.abilityType.Contains(AbilityType.RangedAttack))
@@ -1221,6 +1222,8 @@ namespace HexGameEngine.Abilities
                 character.meleeAttackAbilitiesUsedThisTurn++;
             else if (ability.abilityType.Contains(AbilityType.WeaponAttack))
                 character.weaponAbilitiesUsedThisTurn++;
+            else if (ability.abilityType.Contains(AbilityType.Spell))
+                character.spellAbilitiesUsedThisTurn++;
         }
         private void OnAbilityUsedFinish(HexCharacterModel character, AbilityData ability, HexCharacterModel target = null)
         {
@@ -1420,8 +1423,16 @@ namespace HexGameEngine.Abilities
 
             // Check shed perk: aspect ability costs 0
             if (ability.abilityName.Contains("Aspect") && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
-                return 0;         
-              
+                return 0;
+
+            // Gifted Perk
+            if (character != null &&
+                character.abilitiesUsedThisCombat == 0 &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Gifted))
+            {
+                energyCost -= 3;
+            }
+
             // MASTERY PERKS
             // Weapon mastery 
             if (character != null &&
@@ -1459,6 +1470,15 @@ namespace HexGameEngine.Abilities
                 energyCost -= 1;
             }
 
+            // Spell Mastery
+            if (character != null &&
+                ability.abilityType.Contains(AbilityType.Spell) &&
+                character.spellAbilitiesUsedThisTurn == 0 &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SpellMastery))
+            {
+                energyCost -= 1;
+            }
+
             // prevent cost going negative
             if (energyCost < 0)
                 energyCost = 0;
@@ -1468,6 +1488,9 @@ namespace HexGameEngine.Abilities
         public int GetAbilityFatigueCost(HexCharacterModel character, AbilityData ability)
         {
             int fatigueCost = ability.fatigueCost;
+
+            if (fatigueCost > 0 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.WellDrilled))
+                fatigueCost = fatigueCost / 2;
 
             // prevent cost going negative
             if (fatigueCost < 0)

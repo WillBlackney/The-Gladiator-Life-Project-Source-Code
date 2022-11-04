@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Boundless Purity
   m_EditorClassIdentifier: 
   passiveSprite: {fileID: 21300000, guid: b61b433ad55184e4bbe417b341836a93, type: 3}
-  passiveName: Boundless Grit
-  perkTag: 185
+  passiveName: Boundless Purity
+  perkTag: 184
   passiveDescription:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'On turn start, if you dont have '
+    phrase: 'On turn start, if you don''t have '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Block
+    phrase: Rune
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Block
+    phrase: Rune
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

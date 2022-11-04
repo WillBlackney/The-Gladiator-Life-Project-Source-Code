@@ -399,7 +399,7 @@ namespace HexGameEngine
     {
         ComboStriker = 175,
         Relentless = 176,
-        BladeMaster = 177,
+        ParryMaster = 177,
         Ironjaw = 178,
         Gifted = 179,
         SpellMastery = 180,
@@ -448,7 +448,6 @@ namespace HexGameEngine
         Coward = 92,
         Crippled = 5,
         Cunning = 22,
-        Dazed = 11,
         DeadHeart = 24,
         DimWitted = 102,
         DivineFavour = 10,

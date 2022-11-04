@@ -813,7 +813,6 @@ namespace HexGameEngine.Characters
             // Tough (gain X block)
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Tough))
             {
-                //int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Tough);
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Guard, 2, false);
             }
 
@@ -822,6 +821,12 @@ namespace HexGameEngine.Characters
             {
                 int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Motivated);
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Focus, stacks, false);
+            }
+
+            // Ambusher
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Ambusher))
+            {
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Stealth, 1, false);
             }
 
             // Thief background (gain 1 stealth)
@@ -904,6 +909,7 @@ namespace HexGameEngine.Characters
                 character.meleeAttackAbilitiesUsedThisTurn = 0;
                 character.rangedAttackAbilitiesUsedThisTurn = 0;
                 character.weaponAbilitiesUsedThisTurn = 0;
+                character.spellAbilitiesUsedThisTurn = 0;
                 character.charactersKilledThisTurn = 0;
 
                 // DOTS
@@ -1007,6 +1013,30 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Reload) && character.currentHealth > 0)
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Reload, -1, true, 0.5f);
 
+                // 'Boundless' perks
+                // Boundless Anger
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BoundlessAnger) && 
+                    character.currentHealth > 0 &&
+                    !PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Wrath))
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Wrath, 1, true, 0.5f);
+
+                // Boundless Bravery
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BoundlessBravery) &&
+                    character.currentHealth > 0 &&
+                    !PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Courage))
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Courage, 1, true, 0.5f);
+
+                // Boundless Purity
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BoundlessPurity) &&
+                    character.currentHealth > 0 &&
+                    !PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Rune))
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Rune, 1, true, 0.5f);
+
+                // Boundless Grit
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BoundlessGrit) &&
+                    character.currentHealth > 0 &&
+                    !PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Guard))
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Guard, 1, true, 0.5f);
             }           
 
             // If shattered, determine result
@@ -1291,15 +1321,29 @@ namespace HexGameEngine.Characters
                 {
                     List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
                     HexCharacterModel ally = allies[RandomGenerator.NumberBetween(0, allies.Count - 1)];
-                    int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.SavageLeader);
 
                     if (ally != null)
                     {
                         VisualEventManager.Instance.CreateVisualEvent(() =>
                         VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Savage Leader!"), QueuePosition.Back, 0f, 0.5f);
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Wrath, stacks, true, 0, character.pManager);
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Wrath, 1, true, 0, character.pManager);
                         VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
                     }                  
+                }
+
+                // Encouraging Leader
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.EncouragingLeader) && character.currentHealth > 0)
+                {
+                    List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
+                    HexCharacterModel ally = allies[RandomGenerator.NumberBetween(0, allies.Count - 1)];
+
+                    if (ally != null)
+                    {
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Encouraging Leader!"), QueuePosition.Back, 0f, 0.5f);
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Wrath, 1, true, 0, character.pManager);
+                        VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                    }
                 }
 
                 // Hymn of Fellowship
