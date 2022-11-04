@@ -1420,29 +1420,8 @@ namespace HexGameEngine.Abilities
 
             // Check shed perk: aspect ability costs 0
             if (ability.abilityName.Contains("Aspect") && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
-                return 0;
-
-            
-
-            // Check Quick Draw passive
-            if (character != null &&
-                ability.abilityType.Contains(AbilityType.RangedAttack) &&
-                character.rangedAttackAbilitiesUsedThisTurn == 0 &&
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.QuickDraw))
-            {
-                energyCost -= PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.QuickDraw);
-            }
-
-            // Check Finesse passive
-            if (character != null &&
-                ability.abilityType.Contains(AbilityType.MeleeAttack) &&
-                character.meleeAttackAbilitiesUsedThisTurn == 0 &&
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Finesse))
-            {
-                energyCost -= PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Finesse);
-            }
-
-
+                return 0;         
+              
             // MASTERY PERKS
             // Weapon mastery 
             if (character != null &&
@@ -1458,6 +1437,24 @@ namespace HexGameEngine.Abilities
                 ability.abilityType.Contains(AbilityType.Skill) &&
                 character.skillAbilitiesUsedThisTurn == 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SkillMastery))
+            {
+                energyCost -= 1;
+            }
+
+            // Ranged Mastery 
+            if (character != null &&
+                ability.abilityType.Contains(AbilityType.RangedAttack) &&
+                character.rangedAttackAbilitiesUsedThisTurn == 0 &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.RangedMastery))
+            {
+                energyCost -= 1;
+            }
+
+            // Melee Mastery
+            if (character != null &&
+                ability.abilityType.Contains(AbilityType.MeleeAttack) &&
+                character.meleeAttackAbilitiesUsedThisTurn == 0 &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.MeleeMastery))
             {
                 energyCost -= 1;
             }

@@ -417,6 +417,8 @@ namespace HexGameEngine
         MusclesMemories = 192,
         Unshakeable = 193,
         BestFriend = 194,
+        ComboStrike = 195,
+        Outfitter = 196,
 
 
         None = 0,
@@ -460,7 +462,7 @@ namespace HexGameEngine
         FastLearner = 101,
         Fat = 117,
         FearOfUndead = 108,
-        Finesse = 121,
+        MeleeMastery = 121,
         Fit = 160,
         FieryPresence = 152,
         Flight = 147,
@@ -491,7 +493,7 @@ namespace HexGameEngine
         Nimble = 18,        
         Opportunist = 71,
         Overcharged = 149,
-        Outfitter = 157,
+       
         Overload = 73,
         Paranoid = 114,
         PathFinder = 124,
@@ -503,7 +505,6 @@ namespace HexGameEngine
         PoorReflexes = 98,
         PunchDrunk = 106,
         Quick = 97,
-        QuickDraw = 120,
         RapidCloaking = 173,
         RecentlyStunned = 6,
         Reload = 172,
