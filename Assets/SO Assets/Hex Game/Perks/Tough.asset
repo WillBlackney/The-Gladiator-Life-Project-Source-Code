@@ -37,7 +37,7 @@ MonoBehaviour:
   maxAllowedStacks: 3
   showStackCount: 0
   hiddenOnPassivePanel: 1
-  isRewardable: 1
+  isRewardable: 0
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0

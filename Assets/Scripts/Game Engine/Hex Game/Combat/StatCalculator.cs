@@ -512,7 +512,7 @@ namespace HexGameEngine
                 if (PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.InspiringLeader) &&
                     LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, GetTotalAuraSize(ally)).Contains(c.currentTile))
                 {
-                    resolve += GetTotalResolve(ally) / 2;
+                    resolve += (int) (GetTotalResolve(ally) * 0.25f);
                     break;
                 }
             }

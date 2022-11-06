@@ -27,7 +27,15 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'gain half this character''s total '
+    phrase: 'gain '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '25% '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'of this character''s total '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
