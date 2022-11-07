@@ -818,7 +818,7 @@ namespace HexGameEngine.Characters
             // Tough (gain X block)
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Tough))
             {
-                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Guard, 2, false);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Guard, 1, false);
             }
 
             // Motivated (gain X focus)
@@ -859,10 +859,10 @@ namespace HexGameEngine.Characters
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Courage, 1, false);
             }
 
-            // Blood Thristy (gain 2 wrath)
+            // Blood Thristy (gain 1 wrath)
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BloodThirsty))
             {
-                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Wrath, 2, false);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Wrath, 1, false);
             }
         }
         public void CharacterOnTurnStart(HexCharacterModel character)

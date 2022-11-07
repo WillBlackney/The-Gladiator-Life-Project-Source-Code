@@ -16,7 +16,8 @@ MonoBehaviour:
   itemName: Bottled Pox
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
-  rarity: 3
+  rarity: 2
+  fatiguePenalty: 0
   lootable: 1
   includeInLibrary: 1
   weaponClass: 0
@@ -25,6 +26,7 @@ MonoBehaviour:
   injuryTypesCaused: 
   minArmourRoll: 0
   maxArmourRoll: 0
+  armourClass: 0
   grantedAbilities: []
   itemEffectSets:
   - possibleEffects:

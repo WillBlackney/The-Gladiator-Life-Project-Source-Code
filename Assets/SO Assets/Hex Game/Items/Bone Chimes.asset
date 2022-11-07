@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Bone Chimes
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 7a3e47963d37eb344b09db93702a99f9, type: 3}
+  itemSprite: {fileID: 21300000, guid: 70c2496ded2228c49a6296b4cb2a6d37, type: 3}
   itemName: Bone Chimes
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
-  rarity: 3
+  rarity: 2
+  fatiguePenalty: 0
   lootable: 1
   includeInLibrary: 1
   weaponClass: 0
@@ -25,6 +26,7 @@ MonoBehaviour:
   injuryTypesCaused: 
   minArmourRoll: 0
   maxArmourRoll: 0
+  armourClass: 0
   grantedAbilities: []
   itemEffectSets:
   - possibleEffects:
@@ -32,9 +34,9 @@ MonoBehaviour:
       attributeModified: 0
       modAmount: 0
       perkGained:
-        perkTag: 126
+        perkTag: 86
         stacks: 1
       effectChance: 0
       perkApplied:
         perkTag: 0
-        passiveStacks: 0
+        passiveStacks: 1

@@ -16,7 +16,8 @@ MonoBehaviour:
   itemName: Demon Heart
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
-  rarity: 3
+  rarity: 2
+  fatiguePenalty: 0
   lootable: 1
   includeInLibrary: 1
   weaponClass: 0
@@ -25,16 +26,27 @@ MonoBehaviour:
   injuryTypesCaused: 
   minArmourRoll: 0
   maxArmourRoll: 0
+  armourClass: 0
   grantedAbilities: []
   itemEffectSets:
   - possibleEffects:
     - effectType: 1
-      attributeModified: 18
-      modAmount: 2
+      attributeModified: 0
+      modAmount: 15
       perkGained:
-        perkTag: 152
-        stacks: 1
+        perkTag: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
-        passiveStacks: 0
+        passiveStacks: 1
+    - effectType: 1
+      attributeModified: 10
+      modAmount: -30
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1

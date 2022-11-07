@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
-  m_Name: Dragon Claw
+  m_Name: Liquid Courage
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 0fb6ca23da7dc47458e5d344423c2f67, type: 3}
-  itemName: Dragon Claw
+  itemSprite: {fileID: 21300000, guid: b25938ac7e0c7a14e97b7454937d4fcc, type: 3}
+  itemName: Liquid Courage
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
-  rarity: 2
+  rarity: 3
   fatiguePenalty: 0
   lootable: 1
   includeInLibrary: 1
@@ -30,13 +30,13 @@ MonoBehaviour:
   grantedAbilities: []
   itemEffectSets:
   - possibleEffects:
-    - effectType: 2
-      attributeModified: 0
-      modAmount: 0
+    - effectType: 1
+      attributeModified: 16
+      modAmount: 1
       perkGained:
-        perkTag: 152
-        stacks: 1
+        perkTag: 0
+        stacks: 0
       effectChance: 0
       perkApplied:
         perkTag: 0
-        passiveStacks: 0
+        passiveStacks: 1

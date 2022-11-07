@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
-  m_Name: Dragon Claw
+  m_Name: Mithril Calipers
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 0fb6ca23da7dc47458e5d344423c2f67, type: 3}
-  itemName: Dragon Claw
+  itemSprite: {fileID: 21300000, guid: 5093ca2cf10edc64b94e0f70ebd82934, type: 3}
+  itemName: Mithril Calipers
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
   rarity: 2
@@ -34,9 +34,9 @@ MonoBehaviour:
       attributeModified: 0
       modAmount: 0
       perkGained:
-        perkTag: 152
+        perkTag: 189
         stacks: 1
       effectChance: 0
       perkApplied:
         perkTag: 0
-        passiveStacks: 0
+        passiveStacks: 1

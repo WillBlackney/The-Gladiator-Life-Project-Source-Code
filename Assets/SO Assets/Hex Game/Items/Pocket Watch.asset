@@ -16,7 +16,8 @@ MonoBehaviour:
   itemName: Pocket Watch
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
-  rarity: 2
+  rarity: 3
+  fatiguePenalty: 0
   lootable: 1
   includeInLibrary: 1
   weaponClass: 0
@@ -25,6 +26,7 @@ MonoBehaviour:
   injuryTypesCaused: 
   minArmourRoll: 0
   maxArmourRoll: 0
+  armourClass: 0
   grantedAbilities: []
   itemEffectSets:
   - possibleEffects:
@@ -37,4 +39,4 @@ MonoBehaviour:
       effectChance: 0
       perkApplied:
         perkTag: 0
-        passiveStacks: 0
+        passiveStacks: 1

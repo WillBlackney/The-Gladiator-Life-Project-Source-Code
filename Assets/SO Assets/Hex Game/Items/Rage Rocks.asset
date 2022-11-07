@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
-  m_Name: Huntress Choker
+  m_Name: Rage Rocks
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: c5de8c15d7d93d540821031dd211be9a, type: 3}
-  itemName: Huntress Choker
+  itemSprite: {fileID: 21300000, guid: 877f03cd4f50151448ecd506e2f9d995, type: 3}
+  itemName: Rage Rocks
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
-  rarity: 3
+  rarity: 1
+  fatiguePenalty: 0
   lootable: 1
   includeInLibrary: 1
   weaponClass: 0
@@ -25,6 +26,7 @@ MonoBehaviour:
   injuryTypesCaused: 
   minArmourRoll: 0
   maxArmourRoll: 0
+  armourClass: 0
   grantedAbilities: []
   itemEffectSets:
   - possibleEffects:
@@ -32,9 +34,9 @@ MonoBehaviour:
       attributeModified: 0
       modAmount: 0
       perkGained:
-        perkTag: 124
+        perkTag: 63
         stacks: 1
       effectChance: 0
       perkApplied:
         perkTag: 0
-        passiveStacks: 0
+        passiveStacks: 1

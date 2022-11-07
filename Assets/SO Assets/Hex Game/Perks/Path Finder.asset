@@ -19,7 +19,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Tile movement costs no '
+    phrase: 'Tile movement does not generate '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'and '
+    phrase: 'and costs '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -54,10 +54,10 @@ MonoBehaviour:
     phrase: ).
   passiveItalicDescription: 
   effectDetailTabs: []
-  maxAllowedStacks: 1
+  maxAllowedStacks: 10
   showStackCount: 0
   hiddenOnPassivePanel: 1
-  isRewardable: 0
+  isRewardable: 1
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 1
   runeBlocksIncrease: 0

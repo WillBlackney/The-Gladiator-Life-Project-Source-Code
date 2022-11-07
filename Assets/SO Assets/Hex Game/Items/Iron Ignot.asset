@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
-  m_Name: Ghoul Eye
+  m_Name: Iron Ignot
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 7ffa7c1caa86a9b4ea0f20492d8b2209, type: 3}
-  itemName: Ghoul Eye
+  itemSprite: {fileID: 21300000, guid: 00a80e0358062c44d8b9b1087af1e61a, type: 3}
+  itemName: Iron Ignot
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
-  rarity: 2
+  rarity: 1
+  fatiguePenalty: 0
   lootable: 1
   includeInLibrary: 1
   weaponClass: 0
@@ -25,6 +26,7 @@ MonoBehaviour:
   injuryTypesCaused: 
   minArmourRoll: 0
   maxArmourRoll: 0
+  armourClass: 0
   grantedAbilities: []
   itemEffectSets:
   - possibleEffects:
@@ -32,9 +34,9 @@ MonoBehaviour:
       attributeModified: 0
       modAmount: 0
       perkGained:
-        perkTag: 120
+        perkTag: 68
         stacks: 1
       effectChance: 0
       perkApplied:
         perkTag: 0
-        passiveStacks: 0
+        passiveStacks: 1
