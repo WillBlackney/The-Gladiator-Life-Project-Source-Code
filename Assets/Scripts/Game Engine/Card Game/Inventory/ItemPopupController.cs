@@ -294,6 +294,18 @@ namespace HexGameEngine.Items
                         s = s.Replace("X", effect.perkGained.stacks.ToString());
                         row.Build(s, dotStyle);
                     }
+
+                    else if (item.itemEffects[i].effectType == ItemEffectType.GainPerkTurnStart)
+                    {
+                        row.Build("On turn start, " + TextLogic.ReturnColoredText(effect.gainPerkChance.ToString() + "%", TextLogic.blueNumber) + 
+                           " chance to gain " + TextLogic.ReturnColoredText(effect.perkGained.stacks.ToString(), TextLogic.blueNumber) + " " +
+                           TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkGained.perkTag.ToString()), TextLogic.neutralYellow), dotStyle);
+                    }
+                    else if (item.itemEffects[i].effectType == ItemEffectType.GainPerkCombatStart)
+                    {
+                        row.Build("On combat start, gain " + TextLogic.ReturnColoredText(effect.perkGained.stacks.ToString(), TextLogic.blueNumber) + " " +
+                           TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkGained.perkTag.ToString()), TextLogic.neutralYellow) + ".", dotStyle);
+                    }
                 }
             }
         }

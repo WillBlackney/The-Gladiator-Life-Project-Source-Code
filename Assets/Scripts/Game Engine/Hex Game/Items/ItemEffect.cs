@@ -27,6 +27,11 @@ namespace HexGameEngine.Items
         [LabelWidth(200)]
         public ActivePerk perkGained;
 
+        [ShowIf("ShowGainPerkChance")]
+        [LabelWidth(200)]
+        [Range(1,100)]
+        public int gainPerkChance = 50;
+
         [Header("On Hit Effect Data")]
         [Range(0, 100)]
         [LabelWidth(200)]
@@ -58,7 +63,13 @@ namespace HexGameEngine.Items
         }
         public bool ShowPerkGained()
         {
-            return effectType == ItemEffectType.GainPerk;
+            return effectType == ItemEffectType.GainPerk ||
+                 effectType == ItemEffectType.GainPerkTurnStart || 
+                 effectType == ItemEffectType.GainPerkCombatStart;
+        }
+        public bool ShowGainPerkChance()
+        {
+            return effectType == ItemEffectType.GainPerkTurnStart;
         }
         #endregion
     }
@@ -68,6 +79,8 @@ namespace HexGameEngine.Items
         None = 0,
         ModifyAttribute = 1,
         GainPerk = 2,
+        GainPerkCombatStart = 4,
+        GainPerkTurnStart = 5,
         OnHitEffect = 3,
     }
 

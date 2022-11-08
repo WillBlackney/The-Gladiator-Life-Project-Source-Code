@@ -17,6 +17,7 @@ MonoBehaviour:
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 1
   rarity: 1
+  fatiguePenalty: 0
   lootable: 0
   includeInLibrary: 1
   weaponClass: 0
@@ -27,4 +28,16 @@ MonoBehaviour:
   maxArmourRoll: 8
   armourClass: 1
   grantedAbilities: []
-  itemEffectSets: []
+  itemEffectSets:
+  - possibleEffects:
+    - effectType: 5
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 50
+        stacks: 2
+      gainPerkChance: 1
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1

@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using HexGameEngine.UI;
 using HexGameEngine.Perks;
+using Spriter2UnityDX.Importing;
 
 namespace HexGameEngine.Items
 {
@@ -513,6 +514,40 @@ namespace HexGameEngine.Items
             }
 
             return perks;
+        }
+        public void ApplyCombatStartPerkEffectsToCharacterFromItemSet(HexCharacterModel character)
+        {
+            ApplyCombatStartPerkEffectsToCharacterFromItem(character, character.itemSet.headArmour);
+            ApplyCombatStartPerkEffectsToCharacterFromItem(character, character.itemSet.bodyArmour);
+            ApplyCombatStartPerkEffectsToCharacterFromItem(character, character.itemSet.mainHandItem);
+            ApplyCombatStartPerkEffectsToCharacterFromItem(character, character.itemSet.offHandItem);
+            ApplyCombatStartPerkEffectsToCharacterFromItem(character, character.itemSet.trinket);
+        }
+        private void ApplyCombatStartPerkEffectsToCharacterFromItem(HexCharacterModel character, ItemData item)
+        {
+            if (item == null) return;
+            for (int i = 0; i < item.itemEffects.Count; i++)
+            {
+                if (item.itemEffects[i].effectType == ItemEffectType.GainPerkCombatStart)                
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, item.itemEffects[i].perkGained.perkTag, item.itemEffects[i].perkGained.stacks, false);                
+            }            
+        }
+        public void ApplyTurnStartPerkEffectsToCharacterFromItemSet(HexCharacterModel character)
+        {
+            ApplyTurnStartPerkEffectsToCharacterFromItem(character, character.itemSet.headArmour);
+            ApplyTurnStartPerkEffectsToCharacterFromItem(character, character.itemSet.bodyArmour);
+            ApplyTurnStartPerkEffectsToCharacterFromItem(character, character.itemSet.mainHandItem);
+            ApplyTurnStartPerkEffectsToCharacterFromItem(character, character.itemSet.offHandItem);
+            ApplyTurnStartPerkEffectsToCharacterFromItem(character, character.itemSet.trinket);
+        }
+        private void ApplyTurnStartPerkEffectsToCharacterFromItem(HexCharacterModel character, ItemData item)
+        {
+            if (item == null) return;
+            for (int i = 0; i < item.itemEffects.Count; i++)
+            {
+                if (item.itemEffects[i].effectType == ItemEffectType.GainPerkTurnStart && RandomGenerator.NumberBetween(1, 100) <= item.itemEffects[i].gainPerkChance)
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, item.itemEffects[i].perkGained.perkTag, item.itemEffects[i].perkGained.stacks, true, 0.5f);
+            }
         }
         public bool IsCharacterUsingWeaponClass(ItemSet set, WeaponClass weaponClass)
         {

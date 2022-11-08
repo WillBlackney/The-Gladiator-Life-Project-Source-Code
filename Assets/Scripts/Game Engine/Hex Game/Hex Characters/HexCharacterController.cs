@@ -864,6 +864,9 @@ namespace HexGameEngine.Characters
             {
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Wrath, 1, false);
             }
+
+            // ITEMS
+            ItemController.Instance.ApplyCombatStartPerkEffectsToCharacterFromItemSet(character);
         }
         public void CharacterOnTurnStart(HexCharacterModel character)
         {
@@ -1042,6 +1045,9 @@ namespace HexGameEngine.Characters
                     character.currentHealth > 0 &&
                     !PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Guard))
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Guard, 1, true, 0.5f);
+
+                // On turn start perk effects from items
+                ItemController.Instance.ApplyTurnStartPerkEffectsToCharacterFromItemSet(character);
             }           
 
             // If shattered, determine result
