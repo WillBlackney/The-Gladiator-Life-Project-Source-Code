@@ -13,110 +13,19 @@ MonoBehaviour:
   m_Name: Crusader Plate
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 28d332865655f9846aee3a2f9124eb7f, type: 3}
-  itemName: Crusader Full Helm
+  itemName: Crusader Plate
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 2
   rarity: 3
+  fatiguePenalty: 25
   lootable: 1
   includeInLibrary: 1
-  weaponClass: 1
+  weaponClass: 0
   handRequirement: 0
   allowedSlot: 0
-  injuryTypesCaused: 01000000
-  minArmourRoll: 28
-  maxArmourRoll: 30
+  injuryTypesCaused: 
+  minArmourRoll: 85
+  maxArmourRoll: 85
   armourClass: 3
   grantedAbilities: []
-  itemEffectSets:
-  - possibleEffects:
-    - effectType: 1
-      attributeModified: 5
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-  - possibleEffects:
-    - effectType: 1
-      attributeModified: 0
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 1
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 2
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 3
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 4
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 6
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 5
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 7
-      modAmount: 10
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
+  itemEffectSets: []

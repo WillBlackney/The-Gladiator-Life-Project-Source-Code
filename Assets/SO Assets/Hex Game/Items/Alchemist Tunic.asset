@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Alchemist Tunic
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 03e5d63ad992ef248abbb05d5ba81560, type: 3}
-  itemName: Alchemist Tunic
+  itemName: Bandit Mask
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 2
   rarity: 2
+  fatiguePenalty: 0
   lootable: 1
   includeInLibrary: 1
   weaponClass: 1
@@ -35,6 +36,7 @@ MonoBehaviour:
       perkGained:
         perkTag: 0
         stacks: 0
+      gainPerkChance: 50
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -46,6 +48,7 @@ MonoBehaviour:
       perkGained:
         perkTag: 0
         stacks: 0
+      gainPerkChance: 50
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -56,6 +59,7 @@ MonoBehaviour:
       perkGained:
         perkTag: 0
         stacks: 0
+      gainPerkChance: 50
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -66,6 +70,7 @@ MonoBehaviour:
       perkGained:
         perkTag: 0
         stacks: 0
+      gainPerkChance: 50
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -76,6 +81,7 @@ MonoBehaviour:
       perkGained:
         perkTag: 0
         stacks: 0
+      gainPerkChance: 50
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -86,6 +92,7 @@ MonoBehaviour:
       perkGained:
         perkTag: 0
         stacks: 0
+      gainPerkChance: 50
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -96,6 +103,7 @@ MonoBehaviour:
       perkGained:
         perkTag: 0
         stacks: 0
+      gainPerkChance: 50
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -106,6 +114,7 @@ MonoBehaviour:
       perkGained:
         perkTag: 0
         stacks: 0
+      gainPerkChance: 50
       effectChance: 0
       perkApplied:
         perkTag: 0
@@ -116,6 +125,7 @@ MonoBehaviour:
       perkGained:
         perkTag: 0
         stacks: 0
+      gainPerkChance: 50
       effectChance: 0
       perkApplied:
         perkTag: 0

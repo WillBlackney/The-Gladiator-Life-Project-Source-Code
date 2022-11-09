@@ -14,109 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 819599f50e83a424bb45b72518fd35d9, type: 3}
   itemName: Runic Mail
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum '
   itemType: 2
   rarity: 3
+  fatiguePenalty: 12
   lootable: 1
   includeInLibrary: 1
-  weaponClass: 1
+  weaponClass: 0
   handRequirement: 0
   allowedSlot: 0
-  injuryTypesCaused: 01000000
-  minArmourRoll: 21
-  maxArmourRoll: 23
+  injuryTypesCaused: 
+  minArmourRoll: 55
+  maxArmourRoll: 55
   armourClass: 2
   grantedAbilities: []
-  itemEffectSets:
-  - possibleEffects:
-    - effectType: 1
-      attributeModified: 9
-      modAmount: 10
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-  - possibleEffects:
-    - effectType: 1
-      attributeModified: 0
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 1
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 2
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 3
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 4
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 6
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 5
-      modAmount: 6
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 7
-      modAmount: 10
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
+  itemEffectSets: []

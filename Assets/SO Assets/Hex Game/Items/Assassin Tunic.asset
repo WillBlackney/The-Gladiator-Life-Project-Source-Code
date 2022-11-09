@@ -12,111 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Assassin Tunic
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: dbc44db2afcf28f4abfeab1e8f1a0877, type: 3}
+  itemSprite: {fileID: 21300000, guid: aefe507c5bd38e246b252aaf32ffac00, type: 3}
   itemName: Assassin Tunic
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 2
   rarity: 2
+  fatiguePenalty: 10
   lootable: 1
   includeInLibrary: 1
   weaponClass: 1
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 01000000
-  minArmourRoll: 14
-  maxArmourRoll: 16
+  minArmourRoll: 40
+  maxArmourRoll: 40
   armourClass: 2
   grantedAbilities: []
-  itemEffectSets:
-  - possibleEffects:
-    - effectType: 1
-      attributeModified: 3
-      modAmount: 3
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-  - possibleEffects:
-    - effectType: 1
-      attributeModified: 0
-      modAmount: 3
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 1
-      modAmount: 3
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 2
-      modAmount: 3
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 3
-      modAmount: 3
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 4
-      modAmount: 3
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 6
-      modAmount: 3
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 5
-      modAmount: 3
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 7
-      modAmount: 5
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
+  itemEffectSets: []
