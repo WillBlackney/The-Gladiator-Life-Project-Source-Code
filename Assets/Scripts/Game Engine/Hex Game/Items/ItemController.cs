@@ -130,7 +130,6 @@ namespace HexGameEngine.Items
             i.fatiguePenalty = d.fatiguePenalty;
             i.minArmourRoll = d.minArmourRoll;
             i.maxArmourRoll = d.maxArmourRoll;
-            i.armourClass = d.armourClass;
 
             foreach (AbilityDataSO ability in d.grantedAbilities)
             {
@@ -159,7 +158,6 @@ namespace HexGameEngine.Items
             i.fatiguePenalty = original.fatiguePenalty;
             i.minArmourRoll = original.minArmourRoll;
             i.maxArmourRoll = original.maxArmourRoll;
-            i.armourClass = original.armourClass;
 
             return i;
         }
@@ -208,6 +206,7 @@ namespace HexGameEngine.Items
 
             
             // Auto generate initiative + vision penalties/bonuses
+            /*
             if(itemData.itemType == ItemType.Head)
             {
                 if (itemData.armourClass == ItemArmourClass.Light)
@@ -226,7 +225,7 @@ namespace HexGameEngine.Items
 
                 else if (itemData.armourClass == ItemArmourClass.Heavy)                
                     ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, -3));                
-            }
+            }*/
             
 
 

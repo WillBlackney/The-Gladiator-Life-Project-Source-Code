@@ -203,9 +203,9 @@ namespace HexGameEngine.Items
             else if (item.itemType == ItemType.Trinket)
                 ret = "Trinket";
             else if (item.itemType == ItemType.Head)
-                ret = item.armourClass.ToString() + " Head Armour"; 
+                ret = "Head Armour"; 
             else if (item.itemType == ItemType.Body)
-                ret = item.armourClass.ToString() + " Chest Armour";
+                ret = "Chest Armour";
 
             return ret;
         }

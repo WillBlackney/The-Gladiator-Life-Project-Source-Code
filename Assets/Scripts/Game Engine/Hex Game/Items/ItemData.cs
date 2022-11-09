@@ -28,7 +28,6 @@ namespace HexGameEngine.Items
         public int armourAmount;
         public int minArmourRoll;
         public int maxArmourRoll;
-        public ItemArmourClass armourClass;
 
         public List<AbilityData> grantedAbilities = new List<AbilityData>();
         public List<ItemEffect> itemEffects = new List<ItemEffect>();

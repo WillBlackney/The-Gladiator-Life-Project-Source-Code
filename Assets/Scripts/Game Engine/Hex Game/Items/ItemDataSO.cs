@@ -68,11 +68,6 @@ namespace HexGameEngine.Items
         [ShowIf("ShowArmourFields")]
         public int maxArmourRoll;
 
-        [BoxGroup("Armour Info")]
-        [LabelWidth(100)]
-        [ShowIf("ShowArmourFields")]
-        public ItemArmourClass armourClass;
-
         [BoxGroup("Ability Info", true, true)]
         [LabelWidth(100)]
         public AbilityDataSO[] grantedAbilities;
