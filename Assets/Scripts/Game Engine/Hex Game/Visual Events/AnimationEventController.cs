@@ -174,7 +174,7 @@ namespace HexGameEngine.VisualEvents
                        VisualEffectManager.Instance.CreateEffectAtLocation(vEvent.particleEffect, view.WorldPosition), QueuePosition.Back, 0, 0, stackEvent);
                 }
             }
-            else if (vEvent.onCharacter == CreateOnCharacter.Target)
+            else if (vEvent.onCharacter == CreateOnCharacter.Target && characterTarget != null)
             {
                 HexCharacterView view = characterTarget.hexCharacterView;
                 VisualEventManager.Instance.CreateVisualEvent(() =>

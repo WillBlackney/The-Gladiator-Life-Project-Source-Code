@@ -21,6 +21,7 @@ using HexGameEngine.JourneyLogic;
 using HexGameEngine.Pathfinding;
 using HexGameEngine.UI;
 using HexGameEngine.Items;
+using static UnityEngine.GraphicsBuffer;
 
 namespace HexGameEngine.Characters
 {
@@ -443,12 +444,39 @@ namespace HexGameEngine.Characters
             // Set health after calculation
             character.currentHealth = finalHealthValue;
 
+            if (healthGainedOrLost < 0) 
+            {
+                character.healthLostThisTurn += healthGainedOrLost;
+                character.healthLostThisCombat += healthGainedOrLost;
+            }
+
             // relay changes to character data
             if (character.characterData != null && relayToCharacterData)            
                 CharacterDataController.Instance.SetCharacterHealth(character.characterData, character.currentHealth);            
 
             Debug.Log(character.myName + " health value = " + character.currentHealth.ToString());
             VisualEventManager.Instance.CreateVisualEvent(() => UpdateHealthGUIElements(character, finalHealthValue, StatCalculator.GetTotalMaxHealth(character)), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+        
+            // Check 'Second Wind'
+            if(StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(character) < 50 &&
+                character.currentHealth > 0 &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SecondWind) &&
+                character.hasTriggeredSecondWind == false)
+            {
+                Vector3 pos = character.hexCharacterView.WorldPosition;
+                character.hasTriggeredSecondWind = true;
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                {
+                    VisualEffectManager.Instance.CreateStatusEffect(pos, "Second Wind!");
+                    VisualEffectManager.Instance.CreateGeneralBuffEffect(pos);
+                }, QueuePosition.Back, 0.5f, 0.5f, character.GetLastStackEventParent());
+                
+                // Gain 2 guard
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Guard, 2, true, 0.5f);
+
+                // Recover all fatigue
+                ModifyCurrentFatigue(character, -character.currentFatigue);
+            }
         }
         public void ModifyMaxHealth(HexCharacterModel character, int maxHealthGainedOrLost)
         {
@@ -900,7 +928,7 @@ namespace HexGameEngine.Characters
 
                 // Recover fatigue+ update fatigue views
                 int fatigueRecovered = StatCalculator.GetTotalFatigueRecovery(character);
-                ModifyCurrentFatigue(character, -fatigueRecovered, false, false);
+                ModifyCurrentFatigue(character, -fatigueRecovered, false);
             }              
 
             // Check effects that are triggered on the first turn only
@@ -919,6 +947,7 @@ namespace HexGameEngine.Characters
                 character.weaponAbilitiesUsedThisTurn = 0;
                 character.spellAbilitiesUsedThisTurn = 0;
                 character.charactersKilledThisTurn = 0;
+                character.healthLostThisTurn = 0;
 
                 // DOTS
                 #region
@@ -1590,7 +1619,7 @@ namespace HexGameEngine.Characters
             if (character.attributeSheet.maxAp < 0)            
                 character.attributeSheet.maxAp = 0;      
         }
-        public void ModifyCurrentFatigue(HexCharacterModel character, int fatigueGainedOrLost, bool showVFX = false, bool updateFatigueGuiInstantly = true)
+        public void ModifyCurrentFatigue(HexCharacterModel character, int fatigueGainedOrLost, bool showVFX = false)
         {
             character.currentFatigue += fatigueGainedOrLost;
             HexCharacterView view = character.hexCharacterView;

@@ -958,9 +958,11 @@ namespace HexGameEngine.Combat
             }
 
             // Reduce health + armour
+            /*
             HexCharacterController.Instance.ModifyHealth(target, -totalHealthLost);
             HexCharacterController.Instance.ModifyArmour(target, -totalArmourLost);
             target.healthLostThisCombat += totalHealthLost;
+            target.healthLostThisTurn += totalHealthLost;*/
 
             bool didCrit = false;
             if (damageResult != null && damageResult.didCrit)
@@ -973,12 +975,7 @@ namespace HexGameEngine.Combat
                 if (target.hexCharacterView != null) pos = target.hexCharacterView.WorldPosition;
                 VisualEffectManager.Instance.CreateSmallMeleeImpact(pos);
             }, QueuePosition.Back, 0, 0, parentEvent);
-
-            // Check for barrier
-            if (removedBarrier)
-            {
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Barrier, -1, true, 0.5f);
-            }
+                      
 
             // On health lost animations
             if (totalHealthLost > 0)
@@ -989,7 +986,14 @@ namespace HexGameEngine.Combat
 
             // Create damage text effect            
             VisualEventManager.Instance.CreateVisualEvent(() =>
-            VisualEffectManager.Instance.CreateDamageTextEffect(target.hexCharacterView.WorldPosition, totalDamage, didCrit), QueuePosition.Back, 0, 0, parentEvent);
+                VisualEffectManager.Instance.CreateDamageTextEffect(target.hexCharacterView.WorldPosition, totalDamage, didCrit), QueuePosition.Back, 0, 0, parentEvent);
+
+            // Reduce health + armour
+            if(totalHealthLost != 0) HexCharacterController.Instance.ModifyHealth(target, -totalHealthLost);
+            if(totalArmourLost != 0) HexCharacterController.Instance.ModifyArmour(target, -totalArmourLost);
+
+            // Check for barrier
+            if (removedBarrier) PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Barrier, -1, true, 0.5f);            
 
             // Combat Token Expiries >>
             // Check Block
@@ -1116,7 +1120,7 @@ namespace HexGameEngine.Combat
                 }
             }
             // On health lost events
-            if (totalHealthLost > 0 && target.currentHealth > 0)
+            if (totalHealthLost > 0 && target.currentHealth > 0 && target.healthLostThisTurn == 0)
             {
                 // Vengeful perk
                 if(target != null &&

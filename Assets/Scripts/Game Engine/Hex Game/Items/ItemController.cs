@@ -125,6 +125,7 @@ namespace HexGameEngine.Items
             i.canBeCombatContractReward = d.canBeCombatContractReward;
             i.canSpawnInShop = d.canSpawnInShop;
             i.includeInLibrary = d.includeInLibrary;
+            i.baseGoldValue = d.baseGoldValue;
 
             i.rarity = d.rarity;
             i.weaponClass = d.weaponClass;

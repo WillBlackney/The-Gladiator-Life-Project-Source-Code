@@ -16,8 +16,9 @@ MonoBehaviour:
   itemName: Truesilver Links
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
-  rarity: 4
+  rarity: 3
   fatiguePenalty: 0
+  baseGoldValue: 500
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1

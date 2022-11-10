@@ -486,7 +486,7 @@ namespace HexGameEngine.TownFeatures
 
             for (int i = 0; i < 9; i++)
             {
-                int goldCost = RandomGenerator.NumberBetween(30, 60);
+                int goldCost = RandomGenerator.NumberBetween(40, 60);
                 currentLibraryTomes.Add(new AbilityTomeShopData(abilities[i], goldCost));
             }
 
@@ -659,10 +659,10 @@ namespace HexGameEngine.TownFeatures
             for (int i = 0; i < finalItems.Count; i++)
             {
                 ItemData item = ItemController.Instance.GenerateNewItemWithRandomEffects(finalItems[i]);
-                int goldCost = 0;
-                if (item.rarity == Rarity.Rare) goldCost = RandomGenerator.NumberBetween(75, 100);
-                else if (item.rarity == Rarity.Epic) goldCost = RandomGenerator.NumberBetween(140, 160);
-                currentItems.Add(new ItemShopData(item, goldCost));
+                int lower = (int) (item.baseGoldValue * 0.9f);
+                int upper = (int)(item.baseGoldValue * 1.1f);
+                int finalCost = RandomGenerator.NumberBetween(lower, upper);
+                currentItems.Add(new ItemShopData(item, finalCost));
             }
 
         }

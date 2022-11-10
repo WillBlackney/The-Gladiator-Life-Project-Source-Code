@@ -422,6 +422,7 @@ namespace HexGameEngine
         SpellSight = 197,
         EyelessSight = 198,
         HeartSeeker = 199,
+        SecondWind = 200,
 
         None = 0,
         Abusive = 107,

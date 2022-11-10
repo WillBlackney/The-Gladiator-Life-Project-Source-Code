@@ -17,6 +17,7 @@ namespace HexGameEngine.Items
         public bool canBeCombatContractReward;
         public bool includeInLibrary;
         public Rarity rarity;
+        public int baseGoldValue;
 
         // Weapon Properties
         public WeaponClass weaponClass;

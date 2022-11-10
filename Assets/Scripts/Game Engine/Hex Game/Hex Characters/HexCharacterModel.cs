@@ -70,6 +70,8 @@ namespace HexGameEngine.Characters
         public int meleeAttackAbilitiesUsedThisTurn;
         public int charactersKilledThisTurn;
         public int abilitiesUsedThisCombat = 0;
+        public int healthLostThisTurn = 0;
+        public bool hasTriggeredSecondWind = false;
 
         [Header("Combat Statistics Properties")]
         public int totalKills;

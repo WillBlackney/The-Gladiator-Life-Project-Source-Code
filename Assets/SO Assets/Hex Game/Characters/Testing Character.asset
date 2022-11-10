@@ -21,7 +21,7 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 1
+      value: 80
       stars: 0
     dodge:
       value: 0
@@ -56,9 +56,12 @@ MonoBehaviour:
     injuryResistance: 0
     deathResistance: 25
   abilityBook:
-    activeAbilities: []
+    activeAbilities:
+    - {fileID: 11400000, guid: a8709026bde6ab046a0b8aaf6d8b9785, type: 2}
   serializedPassiveManager:
-    perks: []
+    perks:
+    - perkTag: 200
+      stacks: 1
   modelParts:
   - Ghoul_Chest
   - Undead_Face_6
@@ -68,14 +71,6 @@ MonoBehaviour:
     mainHandItem: {fileID: 11400000, guid: 55f1648863df14d478cd9f083d4c9f38, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: 335c81cb722666345aa6c308b1d780f5, type: 2}
-    chestArmour: {fileID: 11400000, guid: 885404dfa0107114abd21b026368a161, type: 2}
+    chestArmour: {fileID: 0}
     trinket: {fileID: 0}
-  talentPairings:
-  - talentSchool: 2
-    level: 1
-  - talentSchool: 3
-    level: 0
-  - talentSchool: 6
-    level: 0
-  - talentSchool: 5
-    level: 0
+  talentPairings: []
