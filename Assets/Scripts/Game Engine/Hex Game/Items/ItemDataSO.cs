@@ -34,7 +34,10 @@ namespace HexGameEngine.Items
         public int fatiguePenalty;
         [VerticalGroup("General Info/Stats")]
         [LabelWidth(100)]
-        public bool lootable;
+        public bool canSpawnInShop;
+        [VerticalGroup("General Info/Stats")]
+        [LabelWidth(100)]
+        public bool canBeCombatContractReward;
         [VerticalGroup("General Info/Stats")]
         [LabelWidth(100)]
         public bool includeInLibrary = true;

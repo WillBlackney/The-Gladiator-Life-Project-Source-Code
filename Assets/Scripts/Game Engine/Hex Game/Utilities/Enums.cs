@@ -62,13 +62,13 @@ namespace HexGameEngine
         Might = 19,
         PhysicalDamageBonus = 0,
         MagicDamageBonus = 1,
-        WeapnDamageBonus = 21,
+        WeaponDamageBonus = 21,
         Accuracy = 2,
         Dodge = 3,
         Constituition = 4,
         Resolve = 5,
         Wits = 6,
-        Fatigue = 19,
+        Fatigue = 23,
         CriticalChance = 7,
         CriticalModifier = 14,
         Initiative = 12,
@@ -82,6 +82,7 @@ namespace HexGameEngine
         PhysicalResistance = 10,
         MagicResistance = 11,
         InjuryResistance = 17,
+        DeathResistance = 22,
         
     }
     public enum Rarity
@@ -415,9 +416,10 @@ namespace HexGameEngine
         SoulDevourer = 191,
         MusclesMemories = 192,
         Unshakeable = 193,
-        BestFriend = 194,
+        LoyalFriend = 194,
         ComboStrike = 195,
         Outfitter = 196,
+        SpellSight = 197,
 
 
         None = 0,

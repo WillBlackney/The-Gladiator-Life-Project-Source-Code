@@ -625,8 +625,8 @@ namespace HexGameEngine.TownFeatures
         public void GenerateDailyArmouryItems()
         {
             currentItems.Clear();
-            List<ItemData> possibleItems = ItemController.Instance.GetAllLootableItems(Rarity.Rare);
-            possibleItems.AddRange(ItemController.Instance.GetAllLootableItems(Rarity.Epic));
+            List<ItemData> possibleItems = ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare);
+            possibleItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic));
             possibleItems.Shuffle();
 
             List<ItemData> finalItems = new List<ItemData>();

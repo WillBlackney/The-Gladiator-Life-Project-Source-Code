@@ -1554,6 +1554,9 @@ namespace HexGameEngine.Abilities
                 // Check elevation range bonus
                 if (caster.currentTile.Elevation == TileElevation.Elevated)
                    rangeReturned += 1;
+
+                if (ability.abilityType.Contains(AbilityType.Spell) && PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.SpellSight))
+                    rangeReturned += 1;
             }
 
             if (rangeReturned < 1) rangeReturned = 1;

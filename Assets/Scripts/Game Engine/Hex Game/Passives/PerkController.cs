@@ -423,7 +423,7 @@ namespace HexGameEngine.Perks
                 || perk == Perk.Evasion || perk == Perk.Courage || perk == Perk.Combo) &&
                 applier != null &&
                 applier.myCharacterEntity.allegiance == pManager.myCharacterEntity.allegiance &&
-                DoesCharacterHavePerk(applier, Perk.BestFriend))
+                DoesCharacterHavePerk(applier, Perk.LoyalFriend))
             {
                 stacksAppliedActual += 1;
             }

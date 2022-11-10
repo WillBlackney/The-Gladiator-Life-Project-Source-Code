@@ -18,7 +18,8 @@ MonoBehaviour:
   itemType: 2
   rarity: 3
   fatiguePenalty: 0
-  lootable: 1
+  canSpawnInShop: 1
+  canBeCombatContractReward: 1
   includeInLibrary: 1
   weaponClass: 0
   handRequirement: 0
@@ -26,6 +27,17 @@ MonoBehaviour:
   injuryTypesCaused: 
   minArmourRoll: 35
   maxArmourRoll: 35
-  armourClass: 1
   grantedAbilities: []
-  itemEffectSets: []
+  itemEffectSets:
+  - possibleEffects:
+    - effectType: 1
+      attributeModified: 1
+      modAmount: 25
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1

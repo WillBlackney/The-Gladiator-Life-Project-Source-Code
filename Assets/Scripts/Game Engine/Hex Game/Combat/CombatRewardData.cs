@@ -28,21 +28,19 @@ namespace HexGameEngine.Characters
         {
             crd.goldAmount = RandomGenerator.NumberBetween(125, 150);
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
-            // crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetRandomLootableItemByRarity(Rarity.Rare));
-
         }
         private void BuildAsEliteReward(CombatRewardData crd)
         {
             crd.goldAmount = RandomGenerator.NumberBetween(225, 250);
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
-            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetRandomLootableItemByRarity(Rarity.Rare));
+            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(Rarity.Rare)[0]);
         }
         private void BuildAsBossReward(CombatRewardData crd)
         {
             // to do: update this when we create legendary items + define boss reward paramters
             crd.goldAmount = RandomGenerator.NumberBetween(225, 250);
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
-            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetRandomLootableItemByRarity(Rarity.Epic));
+            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(Rarity.Epic)[0]);
 
         }
 

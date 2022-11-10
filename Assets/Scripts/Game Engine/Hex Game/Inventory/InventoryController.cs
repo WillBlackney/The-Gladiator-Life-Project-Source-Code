@@ -165,14 +165,14 @@ namespace HexGameEngine.Items
         private InventoryItem GenerateRandomEquipableItem()
         {
             // to do in future: add arguments for rarity and type
-            var items = ItemController.Instance.GetAllLootableItems();
+            var items = ItemController.Instance.GetAllShopSpawnableItems();
             items.Shuffle();
             return CreateInventoryItemFromItemData(ItemController.Instance.GenerateNewItemWithRandomEffects(items[0]));
         }
         private InventoryItem GenerateRandomNonEquipableItem()
         {
             // to do in future: add arguments for rarity and type
-            var items = ItemController.Instance.GetAllNonLootableItems();
+            var items = ItemController.Instance.GetAllNonShopAndContractItems();
             items.Shuffle();
             return CreateInventoryItemFromItemData(ItemController.Instance.GenerateNewItemWithRandomEffects(items[0]));
         }

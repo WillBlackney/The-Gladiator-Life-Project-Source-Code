@@ -31,11 +31,11 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '1 '
+    phrase: '1% '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'point of '
+    phrase: 'of '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

@@ -13,7 +13,8 @@ namespace HexGameEngine.Items
         private Sprite itemSprite;
         public string itemDescription;
         public ItemType itemType;
-        public bool lootable;
+        public bool canSpawnInShop;
+        public bool canBeCombatContractReward;
         public bool includeInLibrary;
         public Rarity rarity;
 

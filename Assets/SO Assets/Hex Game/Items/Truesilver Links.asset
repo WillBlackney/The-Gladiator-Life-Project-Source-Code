@@ -15,10 +15,11 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: d1e564b462e62974dab48c6f92877466, type: 3}
   itemName: Truesilver Links
   itemDescription: 'Place holder item description. Place holder item description. '
-  itemType: 0
-  rarity: 0
+  itemType: 4
+  rarity: 4
   fatiguePenalty: 0
-  lootable: 1
+  canSpawnInShop: 1
+  canBeCombatContractReward: 1
   includeInLibrary: 1
   weaponClass: 0
   handRequirement: 0
@@ -26,7 +27,6 @@ MonoBehaviour:
   injuryTypesCaused: 
   minArmourRoll: 0
   maxArmourRoll: 0
-  armourClass: 0
   grantedAbilities: []
   itemEffectSets:
   - possibleEffects:
@@ -36,6 +36,7 @@ MonoBehaviour:
       perkGained:
         perkTag: 126
         stacks: 1
+      gainPerkChance: 50
       effectChance: 0
       perkApplied:
         perkTag: 0

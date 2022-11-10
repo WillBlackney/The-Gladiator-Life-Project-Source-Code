@@ -148,8 +148,8 @@ namespace HexGameEngine.Combat
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Berserk) &&
                 target != null)
             {
-                float missingHealth = StatCalculator.GetTotalMaxHealth(attacker) - attacker.currentHealth;
-                damageModPercentageAdditive += 0.01f * missingHealth;
+                float berserkMod = StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(attacker) * 0.01f;
+                damageModPercentageAdditive += berserkMod;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Berserk perk modifier = " + damageModPercentageAdditive.ToString());
             }
 

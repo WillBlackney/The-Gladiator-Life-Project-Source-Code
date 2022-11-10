@@ -78,22 +78,27 @@ namespace HexGameEngine.Items
 
             return itemReturned;
         }
-        public List<ItemData> GetAllLootableItems()
+        public List<ItemData> GetAllShopSpawnableItems()
         {
-            return Array.FindAll(allItems, i => i.lootable).ToList();
+            return Array.FindAll(allItems, i => i.canSpawnInShop).ToList();
         }
-        public List<ItemData> GetAllNonLootableItems()
+        public List<ItemData> GetAllShopSpawnableItems(Rarity rarity)
         {
-            return Array.FindAll(allItems, i => i.lootable == false).ToList();
+            return Array.FindAll(allItems, i => i.canSpawnInShop && i.rarity == rarity).ToList();
         }
-        public List<ItemData> GetAllLootableItems(Rarity rarity)
+        public List<ItemData> GetAllContractRewardableItems(Rarity rarity)
         {
-            return Array.FindAll(allItems, i => i.lootable && i.rarity == rarity).ToList();
+            return Array.FindAll(allItems, i => i.canBeCombatContractReward && i.rarity == rarity).ToList();
         }
-        public ItemData GetRandomLootableItemByRarity(Rarity rarity)
+        public List<ItemData> GetAllNonShopAndContractItems()
+        {
+            return Array.FindAll(allItems, i => i.canSpawnInShop == false && i.canBeCombatContractReward == false).ToList();
+        }
+       
+        public ItemData GetRandomShopItemByRarity(Rarity rarity)
         {
             ItemData ret = null;
-            var items = GetAllLootableItems();
+            var items = GetAllShopSpawnableItems();
             items.Shuffle();
             for(int i = 0; i < items.Count; i++)
             {
@@ -117,7 +122,8 @@ namespace HexGameEngine.Items
             i.itemName = d.itemName;
             i.itemDescription = d.itemDescription;
             i.itemType = d.itemType;
-            i.lootable = d.lootable;
+            i.canBeCombatContractReward = d.canBeCombatContractReward;
+            i.canSpawnInShop = d.canSpawnInShop;
             i.includeInLibrary = d.includeInLibrary;
 
             i.rarity = d.rarity;
@@ -143,7 +149,8 @@ namespace HexGameEngine.Items
             i.itemName = original.itemName;
             i.itemDescription = original.itemDescription;
             i.itemType = original.itemType;
-            i.lootable = original.lootable;
+            i.canBeCombatContractReward = original.canBeCombatContractReward;
+            i.canSpawnInShop = original.canSpawnInShop;
             i.includeInLibrary = original.includeInLibrary;
 
             i.rarity = original.rarity;

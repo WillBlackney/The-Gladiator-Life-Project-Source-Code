@@ -18,7 +18,8 @@ MonoBehaviour:
   itemType: 1
   rarity: 2
   fatiguePenalty: 12
-  lootable: 1
+  canSpawnInShop: 1
+  canBeCombatContractReward: 1
   includeInLibrary: 1
   weaponClass: 0
   handRequirement: 0
@@ -26,6 +27,326 @@ MonoBehaviour:
   injuryTypesCaused: 
   minArmourRoll: 40
   maxArmourRoll: 40
-  armourClass: 3
   grantedAbilities: []
-  itemEffectSets: []
+  itemEffectSets:
+  - possibleEffects:
+    - effectType: 1
+      attributeModified: 15
+      modAmount: -1
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+  - possibleEffects:
+    - effectType: 1
+      attributeModified: 19
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 1
+      attributeModified: 2
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 1
+      attributeModified: 3
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 1
+      attributeModified: 4
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 1
+      attributeModified: 5
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 1
+      attributeModified: 6
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 1
+      attributeModified: 19
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 1
+      attributeModified: 10
+      modAmount: 10
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 1
+      attributeModified: 11
+      modAmount: 10
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 1
+      attributeModified: 17
+      modAmount: 15
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 1
+      attributeModified: 9
+      modAmount: 15
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 1
+      attributeModified: 8
+      modAmount: 15
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 4
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 50
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 4
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 74
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 4
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 26
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 4
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 77
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 4
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 154
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 4
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 155
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 5
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 50
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 5
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 74
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 5
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 147
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 5
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 26
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 5
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 75
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 5
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 76
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 5
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 77
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 5
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 155
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 5
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 78
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+    - effectType: 5
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 154
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
