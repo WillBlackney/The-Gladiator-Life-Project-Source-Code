@@ -18,23 +18,26 @@ MonoBehaviour:
     and militias in the wilds has given them some decent martial experience, certainly
     so when it comes to fighting dirty. Just hope that the local guards don't recognize
     them from the wanted posters.
-  dailyWageMin: 8
-  dailyWageMax: 10
-  recruitCostMin: 80
-  recruitCostMax: 90
-  mightLower: 5
-  mightUpper: 10
+  lowerLevelLimit: 1
+  upperLevelLimit: 1
+  dailyWageMin: 5
+  dailyWageMax: 7
+  baseRecruitCost: 50
+  mightLower: 0
+  mightUpper: 0
   constitutionLower: -5
-  constitutionUpper: -10
-  witsLower: 0
-  witsUpper: 0
+  constitutionUpper: 0
+  accuracyLower: 5
+  accuracyUpper: 5
   dodgeLower: 0
   dodgeUpper: 0
-  accuracyLower: 10
-  accuracyUpper: 15
-  resolveLower: -10
-  resolveUpper: -5
-  validRaces: 01000000020000000300000004000000050000000600000007000000
+  fatigueLower: 5
+  fatigueUpper: 5
+  resolveLower: 4
+  resolveUpper: 2
+  witsLower: 0
+  witsUpper: 0
+  validRaces: 010000000200000003000000050000000600000007000000
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

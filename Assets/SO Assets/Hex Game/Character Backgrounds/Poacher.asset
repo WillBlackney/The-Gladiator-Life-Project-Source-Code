@@ -10,51 +10,53 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
-  m_Name: Slave
+  m_Name: Poacher
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: 1053726a008a6b647a6d3aa791f23959, type: 3}
-  backgroundType: 4
-  description: "Sold or born into a life of servitude, slaves are hopeless at just
-    about everything. Except dying. They\u2019re pretty good at that! They also have
-    no fear of death since their lives are so miserable, so there's that too."
+  backgroundSprite: {fileID: 21300000, guid: c359661e98a82ba4db1393090f4fdeac, type: 3}
+  backgroundType: 16
+  description: Humble peasants that feed themselves and their families by bow hunting
+    animals of the deserts and plains. If you enjoy eating desert snake for breakfast,
+    hire a poacher.
   lowerLevelLimit: 1
   upperLevelLimit: 1
-  dailyWageMin: 0
-  dailyWageMax: 0
-  baseRecruitCost: 75
+  dailyWageMin: 7
+  dailyWageMax: 9
+  baseRecruitCost: 50
   mightLower: 0
-  mightUpper: -5
-  constitutionLower: -10
-  constitutionUpper: 0
-  accuracyLower: -5
-  accuracyUpper: 0
+  mightUpper: 0
+  constitutionLower: 0
+  constitutionUpper: -5
+  accuracyLower: 5
+  accuracyUpper: 5
   dodgeLower: 0
-  dodgeUpper: -5
-  fatigueLower: -10
+  dodgeUpper: 0
+  fatigueLower: 0
   fatigueUpper: 0
   resolveLower: 0
   resolveUpper: -5
   witsLower: 0
-  witsUpper: -5
-  validRaces: 04000000050000000600000007000000
+  witsUpper: 0
+  validRaces: 010000000500000002000000
   passiveEffectDescriptions:
   - dotStyle: 3
     message:
-    - color: 1
+    - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: Will never desert the company.
-  - dotStyle: 2
-    message:
-    - color: 1
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: 'Does not benefit from '
+      phrase: '+5 '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Confident '
+      phrase: 'Accuracy '
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: stress state.
+      phrase: 'with '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Weapon Attack '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: abilities while wielding a bow.

@@ -10,31 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
-  m_Name: Gladiator
+  m_Name: Mercenary
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: 715142ea160d1824babbc41f67935ce8, type: 3}
-  backgroundType: 1
-  description: "The only thing more awe-inspiring than a gladiator\u2019s martial
-    prowess is the size of their ego. A career of combat and showmanship forges them
-    into godlike warriors, but they don\u2019t often play well with others\u2026"
+  backgroundSprite: {fileID: 21300000, guid: c359661e98a82ba4db1393090f4fdeac, type: 3}
+  backgroundType: 14
+  description: "Doesn\u2019t matter whether it\u2019s caravan raiding, gladiator
+    pit fights, or fighting local lords, if there\u2019s blood to be spilled and
+    gold to be made, mercenaries will gladly offer their services."
   lowerLevelLimit: 2
   upperLevelLimit: 3
   dailyWageMin: 33
   dailyWageMax: 37
-  baseRecruitCost: 125
+  baseRecruitCost: 150
   mightLower: 0
-  mightUpper: 5
+  mightUpper: 0
   constitutionLower: 0
   constitutionUpper: 0
   accuracyLower: 13
   accuracyUpper: 10
   dodgeLower: 5
   dodgeUpper: 8
-  fatigueLower: 0
+  fatigueLower: 5
   fatigueUpper: 0
   resolveLower: 5
-  resolveUpper: 10
-  witsLower: 0
+  resolveUpper: 5
+  witsLower: 5
   witsUpper: 0
   validRaces: 01000000020000000300000004000000050000000600000007000000
   passiveEffectDescriptions:
@@ -43,15 +43,21 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Whenever this character kills an enemy, they recover '
+      phrase: Will never desert the company.
+  - dotStyle: 3
+    message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Whenever this character kills an enemy, gain '
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: '5 '
+      phrase: '10 '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: Stress
+      phrase: Gold
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

@@ -10,48 +10,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
-  m_Name: Gladiator
+  m_Name: Tournament Knight
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: 715142ea160d1824babbc41f67935ce8, type: 3}
-  backgroundType: 1
-  description: "The only thing more awe-inspiring than a gladiator\u2019s martial
-    prowess is the size of their ego. A career of combat and showmanship forges them
-    into godlike warriors, but they don\u2019t often play well with others\u2026"
+  backgroundSprite: {fileID: 21300000, guid: c359661e98a82ba4db1393090f4fdeac, type: 3}
+  backgroundType: 13
+  description: Tournament Knights live for the thrill of a joust, the roar of the
+    crowd and the swooning of ladies. During the off season, the gladiator pits become
+    a perfect fit for them.
   lowerLevelLimit: 2
   upperLevelLimit: 3
   dailyWageMin: 33
   dailyWageMax: 37
-  baseRecruitCost: 125
-  mightLower: 0
+  baseRecruitCost: 150
+  mightLower: 10
   mightUpper: 5
-  constitutionLower: 0
-  constitutionUpper: 0
+  constitutionLower: 12
+  constitutionUpper: 13
   accuracyLower: 13
   accuracyUpper: 10
   dodgeLower: 5
-  dodgeUpper: 8
-  fatigueLower: 0
-  fatigueUpper: 0
-  resolveLower: 5
-  resolveUpper: 10
+  dodgeUpper: 5
+  fatigueLower: 15
+  fatigueUpper: 10
+  resolveLower: 7
+  resolveUpper: 5
   witsLower: 0
-  witsUpper: 0
-  validRaces: 01000000020000000300000004000000050000000600000007000000
+  witsUpper: -5
+  validRaces: 010000000200000006000000
   passiveEffectDescriptions:
   - dotStyle: 3
     message:
+    - color: 4
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Physical '
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Whenever this character kills an enemy, they recover '
+      phrase: 'damage dealt is increased by '
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: '5 '
-    - color: 3
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: Stress
+      phrase: 10%
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

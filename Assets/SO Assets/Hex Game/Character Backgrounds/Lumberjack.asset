@@ -17,30 +17,33 @@ MonoBehaviour:
   description: 'Lumberjacks are ok: they sleep all night and work all day. A lifetime
     of swinging an axe makes them strong, fit and great at murdering people with
     axes.'
+  lowerLevelLimit: 1
+  upperLevelLimit: 2
   dailyWageMin: 12
   dailyWageMax: 14
-  recruitCostMin: 95
-  recruitCostMax: 115
-  mightLower: 15
-  mightUpper: 20
+  baseRecruitCost: 75
+  mightLower: 5
+  mightUpper: 2
   constitutionLower: 5
   constitutionUpper: 10
-  witsLower: -5
-  witsUpper: 0
-  dodgeLower: -10
-  dodgeUpper: -5
   accuracyLower: 0
-  accuracyUpper: 0
+  accuracyUpper: 5
+  dodgeLower: 0
+  dodgeUpper: 0
+  fatigueLower: 10
+  fatigueUpper: 15
   resolveLower: 0
   resolveUpper: 0
-  validRaces: 01000000020000000600000007000000
+  witsLower: 0
+  witsUpper: -5
+  validRaces: 01000000020000000500000007000000
   passiveEffectDescriptions:
   - dotStyle: 3
     message:
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: '+10 '
+      phrase: '+5 '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
@@ -52,8 +55,8 @@ MonoBehaviour:
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Melee Attacks '
+      phrase: 'Weapon Attack '
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: while wielding an axe.
+      phrase: abilities while wielding an axe.

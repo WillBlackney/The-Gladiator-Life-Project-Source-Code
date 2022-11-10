@@ -10,37 +10,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
-  m_Name: Farmer
+  m_Name: Inquisitor
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: afaf0aaf275d19549b3c033917779c2f, type: 3}
-  backgroundType: 2
-  description: "Tolling the land and fighting off wild beasts is hard work that gives
-    farmers great vitality and strength. Between cleaning horse shit and making far
-    too many babies, they never made time to read, so don\u2019t expect much in the
-    way of wit and wisdom from these folk."
+  backgroundSprite: {fileID: 21300000, guid: c359661e98a82ba4db1393090f4fdeac, type: 3}
+  backgroundType: 17
+  description: "Professional hunters of witches, necromancers and all things foul.
+    Not particularly talkative or good drinking buddies\u2026"
   lowerLevelLimit: 1
-  upperLevelLimit: 1
-  dailyWageMin: 9
-  dailyWageMax: 11
+  upperLevelLimit: 2
+  dailyWageMin: 12
+  dailyWageMax: 14
   baseRecruitCost: 75
   mightLower: 0
-  mightUpper: 0
-  constitutionLower: 12
-  constitutionUpper: 10
-  accuracyLower: 0
-  accuracyUpper: 0
+  mightUpper: -5
+  constitutionLower: 0
+  constitutionUpper: 0
+  accuracyLower: 5
+  accuracyUpper: 5
   dodgeLower: 0
   dodgeUpper: 0
-  fatigueLower: 10
-  fatigueUpper: 20
-  resolveLower: -6
-  resolveUpper: -3
-  witsLower: 0
-  witsUpper: -5
-  validRaces: 0100000002000000040000000600000007000000
+  fatigueLower: 0
+  fatigueUpper: 0
+  resolveLower: 12
+  resolveUpper: 10
+  witsLower: 5
+  witsUpper: 0
+  validRaces: 01000000040000000600000003000000
   passiveEffectDescriptions:
   - dotStyle: 3
     message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Gain '
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
@@ -48,7 +50,7 @@ MonoBehaviour:
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: Injury Resistance
+      phrase: Stress Resistance
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

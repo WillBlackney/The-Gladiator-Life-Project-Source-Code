@@ -17,21 +17,24 @@ MonoBehaviour:
   description: 'No job is too big or small for laborers, as long as it pays well.
     A lifetime spent doing menial ad hoc construction tasks means they are adequately
     experienced in everything, but masters of nothing. '
+  lowerLevelLimit: 1
+  upperLevelLimit: 1
   dailyWageMin: 5
   dailyWageMax: 7
-  recruitCostMin: 70
-  recruitCostMax: 80
+  baseRecruitCost: 50
   mightLower: -5
   mightUpper: 5
   constitutionLower: -5
   constitutionUpper: 5
-  witsLower: -5
-  witsUpper: 5
-  dodgeLower: -5
-  dodgeUpper: 5
   accuracyLower: -5
   accuracyUpper: 5
+  dodgeLower: -5
+  dodgeUpper: 5
+  fatigueLower: 0
+  fatigueUpper: 0
   resolveLower: -5
   resolveUpper: 5
-  validRaces: 010000000200000003000000050000000600000007000000
+  witsLower: -5
+  witsUpper: 5
+  validRaces: 0100000002000000050000000600000007000000
   passiveEffectDescriptions: []

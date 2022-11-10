@@ -10,49 +10,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
-  m_Name: Retired Warrior
+  m_Name: Assassin
   m_EditorClassIdentifier: 
   backgroundSprite: {fileID: 21300000, guid: c359661e98a82ba4db1393090f4fdeac, type: 3}
-  backgroundType: 12
-  description: "Warriors don't survive to become old, dusty farts if they\u2019re
-    anything less than fearsome fighters. Though old age may have worn down their
-    health and fitness, retired warriors maintain remarkable technique, discipline
-    and courage."
+  backgroundType: 15
+  description: "To most, killing is killing.To assassins, killing is an art form.
+    A lifetime spent skulking in the shadows and stopping hearts makes them exceptionally
+    dangerous. Try not to fall asleep around them though, and certainly don\u2019t
+    drink any wine they give you."
   lowerLevelLimit: 1
-  upperLevelLimit: 3
-  dailyWageMin: 14
-  dailyWageMax: 16
-  baseRecruitCost: 100
+  upperLevelLimit: 2
+  dailyWageMin: 23
+  dailyWageMax: 27
+  baseRecruitCost: 125
   mightLower: 0
   mightUpper: -5
-  constitutionLower: -15
-  constitutionUpper: -10
-  accuracyLower: 13
+  constitutionLower: -5
+  constitutionUpper: -5
+  accuracyLower: 12
   accuracyUpper: 10
   dodgeLower: 5
   dodgeUpper: 8
-  fatigueLower: -10
-  fatigueUpper: -10
-  resolveLower: 7
-  resolveUpper: 7
-  witsLower: 0
-  witsUpper: -5
-  validRaces: 02000000010000000600000004000000
+  fatigueLower: 5
+  fatigueUpper: 0
+  resolveLower: 0
+  resolveUpper: -5
+  witsLower: 10
+  witsUpper: 5
+  validRaces: 03000000050000000700000006000000
   passiveEffectDescriptions:
   - dotStyle: 3
     message:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Allies within this character''s '
-    - color: 3
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: 'Aura '
-    - color: 1
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: 'gain '
+      phrase: 'Gain '
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
@@ -60,8 +52,24 @@ MonoBehaviour:
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: Resolve
+      phrase: 'Accuracy '
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: .
+      phrase: 'and '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Critical Chance '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'against enemies below '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '50% '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: health.

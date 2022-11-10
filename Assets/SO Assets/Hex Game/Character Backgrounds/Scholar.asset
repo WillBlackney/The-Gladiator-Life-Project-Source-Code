@@ -17,23 +17,26 @@ MonoBehaviour:
   description: "Scholars are fast learners, magically gifted, and willing to endanger
     themselves in the pursuit of knowledge. However, learning about warfare in books
     and learning it through experience are two very different things\u2026"
-  dailyWageMin: 14
-  dailyWageMax: 16
-  recruitCostMin: 100
-  recruitCostMax: 120
+  lowerLevelLimit: 1
+  upperLevelLimit: 1
+  dailyWageMin: 7
+  dailyWageMax: 9
+  baseRecruitCost: 50
   mightLower: 0
-  mightUpper: 0
-  constitutionLower: 0
+  mightUpper: -5
+  constitutionLower: -5
   constitutionUpper: 0
-  witsLower: 5
-  witsUpper: 10
+  accuracyLower: 5
+  accuracyUpper: 0
   dodgeLower: 0
-  dodgeUpper: 5
-  accuracyLower: 10
-  accuracyUpper: 15
+  dodgeUpper: 0
+  fatigueLower: 0
+  fatigueUpper: 0
   resolveLower: 0
-  resolveUpper: -10
-  validRaces: 0100000002000000030000000400000006000000
+  resolveUpper: -5
+  witsLower: 5
+  witsUpper: 0
+  validRaces: 01000000030000000400000006000000
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

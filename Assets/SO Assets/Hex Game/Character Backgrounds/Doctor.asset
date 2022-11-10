@@ -17,23 +17,26 @@ MonoBehaviour:
   description: Doctors have nerves as steady as their hands, intimate knowledge of
     anatomy, and are well accustomed to seeing blood and guts. What more could you
     ask for in a gladiator?
-  dailyWageMin: 17
-  dailyWageMax: 19
-  recruitCostMin: 120
-  recruitCostMax: 140
-  mightLower: -5
-  mightUpper: 0
-  constitutionLower: -10
+  lowerLevelLimit: 1
+  upperLevelLimit: 2
+  dailyWageMin: 23
+  dailyWageMax: 27
+  baseRecruitCost: 100
+  mightLower: 0
+  mightUpper: -5
+  constitutionLower: -5
   constitutionUpper: -5
-  witsLower: 5
-  witsUpper: 10
-  dodgeLower: 0
-  dodgeUpper: 0
-  accuracyLower: 15
-  accuracyUpper: 20
+  accuracyLower: 7
+  accuracyUpper: 7
+  dodgeLower: 2
+  dodgeUpper: 2
+  fatigueLower: -5
+  fatigueUpper: -5
   resolveLower: 10
-  resolveUpper: 15
-  validRaces: 0100000003000000040000000500000006000000
+  resolveUpper: 5
+  witsLower: 5
+  witsUpper: 0
+  validRaces: 01000000030000000400000006000000
   passiveEffectDescriptions:
   - dotStyle: 3
     message:
@@ -52,7 +55,7 @@ MonoBehaviour:
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 15%
+      phrase: 10%
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

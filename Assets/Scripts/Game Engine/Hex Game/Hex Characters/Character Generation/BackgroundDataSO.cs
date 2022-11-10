@@ -23,6 +23,14 @@ namespace HexGameEngine.Characters
         [TextArea]
         public string description;
 
+        [BoxGroup("Level Data", true, true)]
+        [LabelWidth(150)]
+        [Range(1,6)]
+        public int lowerLevelLimit;
+        [BoxGroup("Level Data")]
+        [LabelWidth(150)]
+        [Range(1, 6)]
+        public int upperLevelLimit;
 
         [BoxGroup("Cost Data", true, true)]
         [LabelWidth(100)]
