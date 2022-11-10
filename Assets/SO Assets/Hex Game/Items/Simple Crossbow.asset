@@ -18,7 +18,8 @@ MonoBehaviour:
   itemType: 3
   rarity: 1
   fatiguePenalty: 7
-  lootable: 0
+  canSpawnInShop: 1
+  canBeCombatContractReward: 0
   includeInLibrary: 1
   weaponClass: 14
   handRequirement: 1
@@ -26,7 +27,6 @@ MonoBehaviour:
   injuryTypesCaused: 01000000
   minArmourRoll: 0
   maxArmourRoll: 0
-  armourClass: 0
   grantedAbilities:
   - {fileID: 11400000, guid: ca711c13493c7694d9c96dfa2ec71911, type: 2}
   - {fileID: 11400000, guid: 2ebd4aa410f13da439b30fe35752f646, type: 2}

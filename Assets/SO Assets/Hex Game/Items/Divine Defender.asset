@@ -17,7 +17,9 @@ MonoBehaviour:
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
   rarity: 3
-  lootable: 1
+  fatiguePenalty: 0
+  canSpawnInShop: 1
+  canBeCombatContractReward: 1
   includeInLibrary: 1
   weaponClass: 9
   handRequirement: 0
@@ -30,143 +32,25 @@ MonoBehaviour:
   itemEffectSets:
   - possibleEffects:
     - effectType: 1
-      attributeModified: 8
+      attributeModified: 3
       modAmount: 10
       perkGained:
         perkTag: 0
         stacks: 0
+      gainPerkChance: 50
       effectChance: 0
       perkApplied:
         perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 9
-      modAmount: 10
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 10
-      modAmount: 5
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 11
-      modAmount: 5
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 4
-      modAmount: 5
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 5
-      modAmount: 5
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 1
-      modAmount: 5
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
+        passiveStacks: 1
   - possibleEffects:
-    - effectType: 1
-      attributeModified: 8
-      modAmount: 20
+    - effectType: 2
+      attributeModified: 0
+      modAmount: 0
       perkGained:
-        perkTag: 0
-        stacks: 0
+        perkTag: 185
+        stacks: 1
+      gainPerkChance: 50
       effectChance: 0
       perkApplied:
         perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 9
-      modAmount: 20
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 10
-      modAmount: 10
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 11
-      modAmount: 10
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 4
-      modAmount: 10
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 5
-      modAmount: 10
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
-    - effectType: 1
-      attributeModified: 1
-      modAmount: 10
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 0
+        passiveStacks: 1

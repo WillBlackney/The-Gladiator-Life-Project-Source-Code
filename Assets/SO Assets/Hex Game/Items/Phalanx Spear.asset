@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
+  m_Name: Phalanx Spear
+  m_EditorClassIdentifier: 
+  itemSprite: {fileID: 21300000, guid: 021fbf052345f8d4db3804cf0fc0780c, type: 3}
+  itemName: Phalanx Spear
+  itemDescription: 'Place holder item description. Place holder item description. '
+  itemType: 3
+  rarity: 3
+  fatiguePenalty: 3
+  canSpawnInShop: 1
+  canBeCombatContractReward: 1
+  includeInLibrary: 1
+  weaponClass: 5
+  handRequirement: 0
+  allowedSlot: 0
+  injuryTypesCaused: 01000000
+  minArmourRoll: 0
+  maxArmourRoll: 0
+  grantedAbilities:
+  - {fileID: 11400000, guid: 815f8fd3e896654408478085b7b333b7, type: 2}
+  - {fileID: 11400000, guid: 799283da83fcf904e8ccb07550f7bc3c, type: 2}
+  itemEffectSets:
+  - possibleEffects:
+    - effectType: 1
+      attributeModified: 21
+      modAmount: 8
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+  - possibleEffects:
+    - effectType: 1
+      attributeModified: 3
+      modAmount: 10
+      perkGained:
+        perkTag: 0
+        stacks: 10
+      gainPerkChance: 50
+      effectChance: 100
+      perkApplied:
+        perkTag: 7
+        passiveStacks: 1

@@ -914,7 +914,11 @@ namespace HexGameEngine.Combat
             int totalArmourLost = 0;
 
             // Damage that completely skips armour check
-            if (ignoreArmour || (effect != null && effect.ignoresArmour))
+            if (ignoreArmour || 
+                (effect != null && effect.ignoresArmour) ||
+                (attacker != null && PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.HeartSeeker) && 
+                ability != null && 
+                ability.abilityType.Contains(AbilityType.WeaponAttack)))
             {
                 totalHealthLost = damageResult.totalDamage;
                 damageResult.totalHealthLost = totalHealthLost;

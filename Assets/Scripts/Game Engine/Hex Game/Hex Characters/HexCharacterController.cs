@@ -1202,7 +1202,7 @@ namespace HexGameEngine.Characters
 
                 // BUFF EXPIRIES
                 #region
-                // Eagle Eye
+                // True Sight
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.TrueSight) && character.currentHealth > 0)                
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.TrueSight, -1, true, 0.5f);                
 

@@ -1809,11 +1809,12 @@ namespace HexGameEngine.Abilities
 
             int stealthDistance = StatCalculator.GetTotalVision(caster) + 1;
             bool ignoreStealth = PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.TrueSight) ||
+                PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.EyelessSight) ||
                 PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.Sniper);
 
             if (stealthDistance < 1) stealthDistance = 1;
 
-            // Check stealth + eagle eye / sniper (ignores stealth)
+            // Check stealth + true eye / sniper (ignores stealth)
             if (caster.currentTile.Distance(target.currentTile) > stealthDistance &&
                 HexCharacterController.Instance.IsTargetFriendly(caster, target) == false &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stealth) &&                

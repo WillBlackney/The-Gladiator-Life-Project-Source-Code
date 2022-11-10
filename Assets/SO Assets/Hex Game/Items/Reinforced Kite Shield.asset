@@ -17,9 +17,9 @@ MonoBehaviour:
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
   rarity: 2
-  fatiguePenalty: 0
-  canSpawnInShop: 0
-  canBeCombatContractReward: 0
+  fatiguePenalty: 8
+  canSpawnInShop: 1
+  canBeCombatContractReward: 1
   includeInLibrary: 1
   weaponClass: 9
   handRequirement: 0
@@ -30,6 +30,18 @@ MonoBehaviour:
   grantedAbilities:
   - {fileID: 11400000, guid: b503794611246a24ab47b71e16c0eeba, type: 2}
   itemEffectSets:
+  - possibleEffects:
+    - effectType: 1
+      attributeModified: 3
+      modAmount: 10
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
   - possibleEffects:
     - effectType: 1
       attributeModified: 19
@@ -44,17 +56,6 @@ MonoBehaviour:
         passiveStacks: 1
     - effectType: 1
       attributeModified: 2
-      modAmount: 5
-      perkGained:
-        perkTag: 0
-        stacks: 0
-      gainPerkChance: 50
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 1
-    - effectType: 1
-      attributeModified: 3
       modAmount: 5
       perkGained:
         perkTag: 0

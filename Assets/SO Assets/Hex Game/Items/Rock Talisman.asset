@@ -17,7 +17,9 @@ MonoBehaviour:
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
   rarity: 1
-  lootable: 0
+  fatiguePenalty: 0
+  canSpawnInShop: 1
+  canBeCombatContractReward: 0
   includeInLibrary: 1
   weaponClass: 10
   handRequirement: 0
@@ -25,7 +27,6 @@ MonoBehaviour:
   injuryTypesCaused: 
   minArmourRoll: 0
   maxArmourRoll: 0
-  armourClass: 0
   grantedAbilities:
   - {fileID: 11400000, guid: e4c3809e590e8a441aff1363602ac9cd, type: 2}
   itemEffectSets: []

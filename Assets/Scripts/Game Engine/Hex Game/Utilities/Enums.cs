@@ -420,7 +420,8 @@ namespace HexGameEngine
         ComboStrike = 195,
         Outfitter = 196,
         SpellSight = 197,
-
+        EyelessSight = 198,
+        HeartSeeker = 199,
 
         None = 0,
         Abusive = 107,
