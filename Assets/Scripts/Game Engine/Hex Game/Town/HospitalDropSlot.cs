@@ -32,7 +32,7 @@ namespace HexGameEngine.TownFeatures
             // to do: probably should find a better place for this function
             // the costs of features should probably be determined by GlobalSettings
             if (feature == TownActivity.BedRest) return 50;
-            else if (feature == TownActivity.Therapy) return 75;
+            else if (feature == TownActivity.Therapy) return 50;
             else if (feature == TownActivity.Surgery) return 75;
             else return 0;
         }
