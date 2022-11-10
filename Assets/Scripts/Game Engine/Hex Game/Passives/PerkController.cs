@@ -17,9 +17,9 @@ namespace HexGameEngine.Perks
         [SerializeField] private PerkIconDataSO[] allIconScriptableObjects;
         private PerkIconData[] allPerks;
 
-        private PerkIconData[] negativeBackgroundPerks;
-        private PerkIconData[] positiveBackgroundPerks;
-        private PerkIconData[] neutralBackgroundPerks;
+        private PerkIconData[] negativeQuirks;
+        private PerkIconData[] positiveQuirks;
+        private PerkIconData[] neutralQuirks;
 
         // Getters
         public PerkIconData[] AllPerks
@@ -31,20 +31,20 @@ namespace HexGameEngine.Perks
         {
             get { return allIconScriptableObjects; }
         }
-        public PerkIconData[] NegativeBackgroundPerks
+        public PerkIconData[] NegativeQuirks
         {
-            get { return negativeBackgroundPerks; }
-            private set { negativeBackgroundPerks = value; }
+            get { return negativeQuirks; }
+            private set { negativeQuirks = value; }
         }
-        public PerkIconData[] PositiveBackgroundPerks
+        public PerkIconData[] PositiveQuirks
         {
-            get { return positiveBackgroundPerks; }
-            private set { positiveBackgroundPerks = value; }
+            get { return positiveQuirks; }
+            private set { positiveQuirks = value; }
         }
-        public PerkIconData[] NeutralBackgroundPerks
+        public PerkIconData[] NeutralQuirks
         {
-            get { return neutralBackgroundPerks; }
-            private set { neutralBackgroundPerks = value; }
+            get { return neutralQuirks; }
+            private set { neutralQuirks = value; }
         }
         #endregion
 
@@ -79,9 +79,9 @@ namespace HexGameEngine.Perks
                 }
             }
 
-            PositiveBackgroundPerks = posTemp.ToArray();
-            NegativeBackgroundPerks = negTemp.ToArray();
-            NeutralBackgroundPerks = neutralTemp.ToArray();
+            PositiveQuirks = posTemp.ToArray();
+            NegativeQuirks = negTemp.ToArray();
+            NeutralQuirks = neutralTemp.ToArray();
         }
         private PerkIconData BuildIconDataFromScriptableObjectData(PerkIconDataSO data)
         {

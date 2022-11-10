@@ -24,8 +24,7 @@ namespace HexGameEngine.Characters
         [Header("Character Generation")]
         [SerializeField] private List<ClassTemplateSO> allClassTemplateSOs;
         [SerializeField] private List<ClassTemplateSO> allDraftTemplateSOs;
-        [SerializeField] private List<CharacterModelTemplateSO> allModelTemplateSOs;    
-        [SerializeField] SerializedAttrbuteSheet baselineRecruitAttributes;
+        [SerializeField] private List<CharacterModelTemplateSO> allModelTemplateSOs;  
 
         [Header("Character Name Buckets")]
         [SerializeField] string[] humanNames;
@@ -37,22 +36,46 @@ namespace HexGameEngine.Characters
         [SerializeField] string[] demonNames;
         [SerializeField] string[] gnollNames;
         [SerializeField] string[] undeadNames;
+        [Space(20)]
 
+        [Header("Recruit Base Attribute Ranges")]
+        [SerializeField] private int mightLower;
+        [SerializeField] private int mightUpper;
+        [Space(10)]
+        [SerializeField] private int constitutionLower;
+        [SerializeField] private int constitutionUpper;
+        [Space(10)]
+        [SerializeField] private int accuracyLower;
+        [SerializeField] private int accuracyUpper;
+        [Space(10)]
+        [SerializeField] private int dodgeLower;
+        [SerializeField] private int dodgeUpper;
+        [Space(10)]
+        [SerializeField] private int fatigueLower;
+        [SerializeField] private int fatigueUpper;
+        [Space(10)]
+        [SerializeField] private int resolveLower;
+        [SerializeField] private int resolveUpper;
+        [Space(10)]
+        [SerializeField] private int witsLower;
+        [SerializeField] private int witsUpper;
+        [Space(10)]
         // Non-Inspector 
         private HexCharacterData[] allCustomCharacterTemplates;
-        private HexCharacterData[] allCharacterTemplates;
         private BackgroundData[] allCharacterBackgrounds;
         private List<HexCharacterData> allPlayerCharacters = new List<HexCharacterData>();
         private List<HexCharacterData> characterDeck = new List<HexCharacterData>();
         private List<CharacterRace> validCharacterRaces = new List<CharacterRace>
-        { CharacterRace.Elf, CharacterRace.Gnoll, CharacterRace.Goblin, CharacterRace.Human,
-        CharacterRace.Orc, CharacterRace.Satyr, CharacterRace.Undead};
-        public static readonly Vector2[] FormationPositions =
-        {
-            new Vector2(3,1), new Vector2(2,1), new Vector2(4,1), new Vector2(1,1), new Vector2(5,1),
-            new Vector2(3,2), new Vector2(2,2), new Vector2(4,2), new Vector2(1,2), new Vector2(5,2),
-
+        { 
+            CharacterRace.Elf, 
+            CharacterRace.Gnoll, 
+            CharacterRace.Goblin,
+            CharacterRace.Human,
+            CharacterRace.Orc, 
+            CharacterRace.Satyr, 
+            CharacterRace.Undead
         };
+       
 
         #endregion
 
@@ -377,10 +400,7 @@ namespace HexGameEngine.Characters
         public void AddCharacterToRoster(HexCharacterData character)
         {
             AllPlayerCharacters.Add(character);
-            if(character.formationPosition == Vector2.zero)
-            {
-                PlaceCharacterOnNextAvailableSlot(character);
-            }
+            
         }
         public void ClearCharacterRoster()
         {
@@ -688,45 +708,7 @@ namespace HexGameEngine.Characters
             }
         }
         #endregion
-
-        // Formation Logic
-        #region
-        public bool IsFormationPositionAvailable(Vector2 position)
-        {
-            bool bRet = true;
-
-            foreach (HexCharacterData character in AllPlayerCharacters)
-            {
-                if (position == character.formationPosition)
-                {
-                    bRet = false;
-                    break;
-                }
-            }
-
-            return bRet;
-        }
-        private void PlaceCharacterOnNextAvailableSlot(HexCharacterData character)
-        {
-            Vector2 position = Vector2.zero;
-            foreach(Vector2 spot in FormationPositions)
-            {
-                if (IsFormationPositionAvailable(spot))
-                {
-                    position = spot;
-                    break;
-                }
-            }
-
-            if(position == Vector2.zero)
-            {
-                Debug.LogWarning("PlaceCharacterOnNextAvailableSlot() could not find an available slot...");
-            }
-
-            character.formationPosition = position;
-        }
-        #endregion
-
+              
         // Character Generation + Character Deck Logic
         #region
         private HexCharacterData GenerateRecruitCharacter(ClassTemplateSO ct, CharacterRace race, int tier = 1)
@@ -745,32 +727,18 @@ namespace HexGameEngine.Characters
 
             // Set up perks
             newCharacter.passiveManager = new PerkManagerModel(newCharacter);
-            //PerkIconData p = PerkController.Instance.GetRacialPerk(race);
-            //PerkController.Instance.ModifyPerkOnCharacterData(newCharacter.passiveManager, p.perkTag, 1);
-            ApplyBackgroundPerksToCharacter(newCharacter, tier);
+            GetAndApplyRandomQuirksToCharacter(newCharacter, tier);
 
             // Setup stats + stars
             newCharacter.attributeSheet = new AttributeSheet();
-           // Debug.Log("fresh sheet::: ");
-           // newCharacter.attributeSheet.LogCoreStats();
-            //baselineRecruitAttributes.CopyValuesIntoOther(newCharacter.attributeSheet);
-            //Debug.Log("baseline sheet::: ");
-            //newCharacter.attributeSheet.LogCoreStats();
-            ApplyBackgroundAttributeModsToAttributeSheet(newCharacter.attributeSheet, newCharacter.background);
-           // Debug.Log("modded sheet::: ");
-           // newCharacter.attributeSheet.LogCoreStats();
-            //GenerateRecruitCharacterStatRolls(newCharacter.attributeSheet, RandomGenerator.NumberBetween(2,4), tier);
-            // int minStars = 1;
-            //int maxStars = 2;        
-            //if (tier > 1) maxStars = 3;
-            //if (tier == 3) minStars = 2;
+            GenerateRecruitCharacterAttributeRolls(newCharacter.attributeSheet, newCharacter.background);
             GenerateCharacterStarRolls(newCharacter.attributeSheet, 3);
 
             // Randomize cost + daily wage
             newCharacter.dailyWage = RandomGenerator.NumberBetween(newCharacter.background.dailyWageMin, newCharacter.background.dailyWageMax);
-            newCharacter.recruitCost = RandomGenerator.NumberBetween(newCharacter.background.recruitCostMin, newCharacter.background.recruitCostMax);
-            //newCharacter.dailyWage = GenerateCharacterDailyWage(tier);
-            //newCharacter.recruitCost = GenerateCharacterRecruitCost(tier);
+
+            // to do: replace this with dynamic function: GetCharacterRecruitCost, which considers base cost, gear, town modifiers, difficulty mods, etc
+            newCharacter.recruitCost = newCharacter.background.baseRecruitCost;
 
             // Set up health
             SetCharacterMaxHealth(newCharacter, 0);
@@ -819,14 +787,15 @@ namespace HexGameEngine.Characters
             }
             return validBackgrounds[RandomGenerator.NumberBetween(0, validBackgrounds.Count - 1)];
         }
-        private void ApplyBackgroundAttributeModsToAttributeSheet(AttributeSheet sheet, BackgroundData background)
+        private void GenerateRecruitCharacterAttributeRolls(AttributeSheet sheet, BackgroundData background)
         {
-            sheet.might.value += RandomGenerator.NumberBetween(background.mightLower, background.mightUpper);
-            sheet.constitution.value += RandomGenerator.NumberBetween(background.constitutionLower, background.constitutionUpper);
-            sheet.accuracy.value += RandomGenerator.NumberBetween(background.accuracyLower, background.accuracyUpper);
-            sheet.dodge.value += RandomGenerator.NumberBetween(background.dodgeLower, background.dodgeUpper);
-            sheet.wits.value += RandomGenerator.NumberBetween(background.witsLower, background.witsUpper);
-            sheet.resolve.value += RandomGenerator.NumberBetween(background.resolveLower, background.resolveUpper);
+            sheet.might.value += RandomGenerator.NumberBetween(background.mightLower + mightLower, background.mightUpper + mightUpper);
+            sheet.constitution.value += RandomGenerator.NumberBetween(background.constitutionLower + constitutionLower, background.constitutionUpper + constitutionUpper);
+            sheet.accuracy.value += RandomGenerator.NumberBetween(background.accuracyLower + accuracyLower, background.accuracyUpper + accuracyUpper);
+            sheet.dodge.value += RandomGenerator.NumberBetween(background.dodgeLower + dodgeLower, background.dodgeUpper + dodgeUpper);
+            sheet.wits.value += RandomGenerator.NumberBetween(background.witsLower + witsLower, background.witsUpper + witsUpper);
+            sheet.fatigue.value += RandomGenerator.NumberBetween(background.fatigueLower + fatigueLower, background.fatigueUpper + fatigueUpper);
+            sheet.resolve.value += RandomGenerator.NumberBetween(background.resolveLower + resolveLower, background.resolveUpper + resolveUpper);
         }
         private List<AbilityDataSO> GenerateRecruitCharacterAbilitiesFromProspects(List<AbilityDataSO> prospects, int amount = 3)
         {
@@ -1062,7 +1031,7 @@ namespace HexGameEngine.Characters
             CharacterDeck = GenerateCharacterDeck();
             CharacterDeck.Shuffle();
         }
-        private void ApplyBackgroundPerksToCharacter(HexCharacterData character, int tier = 1)
+        private void GetAndApplyRandomQuirksToCharacter(HexCharacterData character, int tier = 1)
         {
             for(int i = 0; i < 2; i++)
             {
@@ -1074,24 +1043,24 @@ namespace HexGameEngine.Characters
                 {
                     int typeRoll = RandomGenerator.NumberBetween(1, 100);
                     // Good perk
-                    if (typeRoll < goodRange) GetValidBackroundPerkForCharacter(character, PerkController.Instance.PositiveBackgroundPerks);
+                    if (typeRoll < goodRange) GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.PositiveQuirks);
 
                     // Bad perk
-                    else if (typeRoll < 80) GetValidBackroundPerkForCharacter(character, PerkController.Instance.NegativeBackgroundPerks);
+                    else if (typeRoll < 80) GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NegativeQuirks);
 
                     // Neutral perk
-                    else GetValidBackroundPerkForCharacter(character, PerkController.Instance.NeutralBackgroundPerks);
+                    else GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NeutralQuirks);
                 }          
             }
         }
-        private PerkIconData GetValidBackroundPerkForCharacter(HexCharacterData character, PerkIconData[] possiblePerks)
+        private PerkIconData GetAndApplyRandomQuirkToCharacter(HexCharacterData character, PerkIconData[] possibleQuirks)
         {
             int loops = 0;
             PerkIconData perk = null;
             while (perk == null && loops < 1000)
             {
                 // Choose a random perk
-                PerkIconData possiblePerk = possiblePerks[RandomGenerator.NumberBetween(0, possiblePerks.Length - 1)];
+                PerkIconData possiblePerk = possibleQuirks[RandomGenerator.NumberBetween(0, possibleQuirks.Length - 1)];
 
                 // Check character does not already have the perk
                 if (!PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, possiblePerk.perkTag))

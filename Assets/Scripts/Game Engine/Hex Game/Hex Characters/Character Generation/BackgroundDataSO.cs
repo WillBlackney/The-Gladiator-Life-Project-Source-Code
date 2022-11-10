@@ -32,10 +32,7 @@ namespace HexGameEngine.Characters
         public int dailyWageMax;
         [BoxGroup("Cost Data")]
         [LabelWidth(100)]
-        public int recruitCostMin;
-        [BoxGroup("Cost Data")]
-        [LabelWidth(100)]
-        public int recruitCostMax;
+        public int baseRecruitCost;
 
         [BoxGroup("Stat Ranges", true, true)]
         [LabelWidth(125)]
@@ -60,11 +57,11 @@ namespace HexGameEngine.Characters
         [BoxGroup("Stat Ranges")]
         [LabelWidth(125)]
         [Range(-30, 30)]
-        public int witsLower;
+        public int accuracyLower;
         [BoxGroup("Stat Ranges")]
         [LabelWidth(125)]
         [Range(-30, 30)]
-        public int witsUpper;
+        public int accuracyUpper;
         [Space(10)]
 
         [BoxGroup("Stat Ranges")]
@@ -75,19 +72,17 @@ namespace HexGameEngine.Characters
         [LabelWidth(125)]
         [Range(-30, 30)]
         public int dodgeUpper;
-        [Space(10)]
+        [Space(10)]       
 
         [BoxGroup("Stat Ranges")]
         [LabelWidth(125)]
         [Range(-30, 30)]
-        public int accuracyLower;
+        public int fatigueLower;
         [BoxGroup("Stat Ranges")]
         [LabelWidth(125)]
         [Range(-30, 30)]
-        public int accuracyUpper;
+        public int fatigueUpper;
         [Space(10)]
-
-      
 
         [BoxGroup("Stat Ranges")]
         [LabelWidth(125)]
@@ -97,9 +92,18 @@ namespace HexGameEngine.Characters
         [LabelWidth(125)]
         [Range(-30, 30)]
         public int resolveUpper;
-    
+        [Space(10)]
 
-     
+        [BoxGroup("Stat Ranges")]
+        [LabelWidth(125)]
+        [Range(-30, 30)]
+        public int witsLower;
+        [BoxGroup("Stat Ranges")]
+        [LabelWidth(125)]
+        [Range(-30, 30)]
+        public int witsUpper;
+        [Space(10)]     
+
 
         [BoxGroup("Misc Data", true, true)]
         [LabelWidth(100)]
@@ -118,17 +122,18 @@ namespace HexGameEngine.Characters
 
         public int dailyWageMin;
         public int dailyWageMax;
-        public int recruitCostMin;
-        public int recruitCostMax;
+        public int baseRecruitCost;
 
         public int mightLower;
         public int mightUpper;
-        public int constitutionLower;
-        public int constitutionUpper;
         public int accuracyLower;
         public int accuracyUpper;
         public int dodgeLower;
         public int dodgeUpper;
+        public int constitutionLower;
+        public int constitutionUpper;   
+        public int fatigueLower;
+        public int fatigueUpper;
         public int resolveLower;
         public int resolveUpper;
         public int witsLower;
@@ -184,14 +189,16 @@ namespace HexGameEngine.Characters
             description = data.description;
             dailyWageMin = data.dailyWageMin;
             dailyWageMax = data.dailyWageMax;
-            recruitCostMin = data.recruitCostMin;
-            recruitCostMax = data.recruitCostMax;
+            baseRecruitCost = data.baseRecruitCost;
 
             mightLower = data.mightLower;
             mightUpper = data.mightUpper;
 
             constitutionLower = data.constitutionLower;
             constitutionUpper = data.constitutionUpper;
+
+            fatigueLower = data.fatigueLower;
+            fatigueUpper = data.fatigueUpper;
 
             accuracyLower = data.accuracyLower;
             accuracyUpper = data.accuracyUpper;
@@ -229,6 +236,12 @@ namespace HexGameEngine.Characters
         Doctor = 9,
         Labourer = 10,
         Unknown = 11,
+        RetiredWarrior = 12,
+        TournamentKnight = 13,
+        Mercenary = 14,
+        Assassin = 15,
+        Poacher = 16,
+        Inquisitor = 17,
 
 
     }
