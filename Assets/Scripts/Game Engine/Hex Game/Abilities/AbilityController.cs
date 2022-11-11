@@ -16,6 +16,7 @@ using HexGameEngine.UCM;
 using UnityEngine.UI;
 using System.Linq;
 using System;
+using HexGameEngine.Items;
 
 namespace HexGameEngine.Abilities
 {
@@ -261,8 +262,7 @@ namespace HexGameEngine.Abilities
 
 
             return a;
-        }
-        
+        }        
         public AbilityBook ConvertSerializedAbilityBookToUnserialized(SerializedAbilityBook data)
         {
             AbilityBook a = new AbilityBook();
@@ -286,10 +286,10 @@ namespace HexGameEngine.Abilities
             character.abilityBook = new AbilityBook(data);
 
             // Link hex character to ability data
-            foreach (AbilityData a in character.abilityBook.activeAbilities)
-            {
-                a.myCharacter = character;
-            }            
+            foreach (AbilityData a in character.abilityBook.activeAbilities)            
+                a.myCharacter = character;         
+            
+
         }
         #endregion       
 
@@ -1722,7 +1722,7 @@ namespace HexGameEngine.Abilities
             }
 
             // check weapon requirement
-            if (!DoesCharacterMeetAbilityWeaponRequirement(character, ability))
+            if (!DoesCharacterMeetAbilityWeaponRequirement(character.itemSet, ability.weaponRequirement))
             {
                 Debug.Log("IsAbilityUseable() returning false: character does not meet the ability's weapon requirement");
                 bRet = false;
@@ -1740,57 +1740,51 @@ namespace HexGameEngine.Abilities
 
             return bRet;
         }
-        public bool DoesCharacterMeetAbilityWeaponRequirement(HexCharacterModel character, AbilityData ability)
+        public bool DoesCharacterMeetAbilityWeaponRequirement(ItemSet itemSet, WeaponRequirement weaponReq)
         {
             bool bRet = false;
 
-            if (ability.weaponRequirement == WeaponRequirement.None)
+            if (weaponReq == WeaponRequirement.None)
                 bRet = true;
 
-            else if (ability.weaponRequirement == WeaponRequirement.MeleeWeapon &&
-                character.itemSet.mainHandItem != null &&
-                character.itemSet.mainHandItem.IsMeleeWeapon)
+            else if (weaponReq == WeaponRequirement.MeleeWeapon &&
+                itemSet.mainHandItem != null &&
+                itemSet.mainHandItem.IsMeleeWeapon)
                 bRet = true;
 
-            else if (ability.weaponRequirement == WeaponRequirement.RangedWeapon &&
-                character.itemSet.mainHandItem != null &&
-                character.itemSet.mainHandItem.IsRangedWeapon)
+            else if (weaponReq == WeaponRequirement.RangedWeapon &&
+                itemSet.mainHandItem != null &&
+                itemSet.mainHandItem.IsRangedWeapon)
                 bRet = true;
 
-            else if (ability.weaponRequirement == WeaponRequirement.Shield &&
-               character.itemSet.offHandItem != null &&
-               character.itemSet.offHandItem.weaponClass == WeaponClass.Shield)
+            else if (weaponReq == WeaponRequirement.Shield &&
+               itemSet.offHandItem != null &&
+               itemSet.offHandItem.weaponClass == WeaponClass.Shield)
                 bRet = true;
 
-            else if (ability.weaponRequirement == WeaponRequirement.Bow &&
-              character.itemSet.mainHandItem != null &&
-              character.itemSet.mainHandItem.weaponClass == WeaponClass.Bow)
+            else if (weaponReq == WeaponRequirement.Bow &&
+              itemSet.mainHandItem != null &&
+              itemSet.mainHandItem.weaponClass == WeaponClass.Bow)
                 bRet = true;
 
-            else if (ability.weaponRequirement == WeaponRequirement.Crossbow &&
-            character.itemSet.mainHandItem != null &&
-            character.itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow)
+            else if (weaponReq == WeaponRequirement.Crossbow &&
+            itemSet.mainHandItem != null &&
+            itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow)
                 bRet = true;
 
-            else if (ability.weaponRequirement == WeaponRequirement.BowOrCrossbow &&
-            character.itemSet.mainHandItem != null &&
-            (character.itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow || character.itemSet.mainHandItem.weaponClass == WeaponClass.Bow))
+            else if (weaponReq == WeaponRequirement.BowOrCrossbow &&
+            itemSet.mainHandItem != null &&
+            (itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow || itemSet.mainHandItem.weaponClass == WeaponClass.Bow))
                 bRet = true;
 
-            else if (ability.weaponRequirement == WeaponRequirement.ThrowingNet &&
-              character.itemSet.offHandItem != null &&
-              character.itemSet.offHandItem.weaponClass == WeaponClass.ThrowingNet)
+            else if (weaponReq == WeaponRequirement.ThrowingNet &&
+              itemSet.offHandItem != null &&
+              itemSet.offHandItem.weaponClass == WeaponClass.ThrowingNet)
                 bRet = true;
 
-            else if (ability.weaponRequirement == WeaponRequirement.EmptyOffhand &&
-            character.itemSet.offHandItem == null)
+            else if (weaponReq == WeaponRequirement.EmptyOffhand &&
+            itemSet.offHandItem == null)
                 bRet = true;
-
-            if (bRet == false)
-            {
-                Debug.Log("AbilityController.DoesCharacterMeetAbilityWeaponRequirement() returning false: '" + ability.abilityName +
-                    "' has requirement of " + ability.weaponRequirement.ToString() + ", character '" + character.myName + "' does not meet this requirement");
-            }
 
             return bRet;
         }

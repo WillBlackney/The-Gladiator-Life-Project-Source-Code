@@ -23,6 +23,11 @@ namespace HexGameEngine.Characters
         [TextArea]
         public string description;
 
+        [VerticalGroup("Core Data/Stats")]
+        [LabelWidth(100)]
+        [Range(1,100)]
+        public int spawnChance = 25;
+
         [BoxGroup("Level Data", true, true)]
         [LabelWidth(150)]
         [Range(1,6)]
@@ -113,10 +118,14 @@ namespace HexGameEngine.Characters
         [Space(10)]     
 
 
-        [BoxGroup("Misc Data", true, true)]
+        [BoxGroup("Recruit Generation Settings", true, true)]
         [LabelWidth(100)]
         public CharacterRace[] validRaces;
-        [BoxGroup("Misc Data")]
+        [BoxGroup("Recruit Generation Settings")]
+        [LabelWidth(100)]
+        public RecruitLoadoutData[] loadoutBuckets;
+
+        [BoxGroup("Misc Data", true, true)]
         [LabelWidth(100)]
         public ModalDotRowBuildData[] passiveEffectDescriptions;
 
@@ -127,7 +136,7 @@ namespace HexGameEngine.Characters
         public Sprite backgroundSprite;
         public CharacterBackground backgroundType;
         public string description;
-
+        public int spawnChance;
         public int dailyWageMin;
         public int dailyWageMax;
         public int baseRecruitCost;
@@ -147,6 +156,10 @@ namespace HexGameEngine.Characters
         public int witsLower;
         public int witsUpper;
 
+        public int lowerLevelLimit;
+        public int upperLevelLimit;
+
+        public List<RecruitLoadoutData> loadoutBuckets = new List<RecruitLoadoutData>();
         public List<CharacterRace> validRaces = new List<CharacterRace>();
         public List<ModalDotRowBuildData> passiveEffectDescriptions = new List<ModalDotRowBuildData>();
 
@@ -195,9 +208,12 @@ namespace HexGameEngine.Characters
             backgroundSprite = data.backgroundSprite;
             backgroundType = data.backgroundType;
             description = data.description;
+            spawnChance = data.spawnChance;
             dailyWageMin = data.dailyWageMin;
             dailyWageMax = data.dailyWageMax;
             baseRecruitCost = data.baseRecruitCost;
+            lowerLevelLimit = data.lowerLevelLimit;
+            upperLevelLimit = data.upperLevelLimit;
 
             mightLower = data.mightLower;
             mightUpper = data.mightUpper;
@@ -219,6 +235,9 @@ namespace HexGameEngine.Characters
 
             witsLower = data.witsLower;
             witsUpper = data.witsUpper;
+
+            foreach (RecruitLoadoutData ld in data.loadoutBuckets)
+                loadoutBuckets.Add(ld);
 
             foreach (CharacterRace race in data.validRaces)
                 validRaces.Add(race);

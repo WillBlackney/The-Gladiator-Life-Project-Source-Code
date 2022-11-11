@@ -6,6 +6,7 @@ using HexGameEngine.Perks;
 using HexGameEngine.Utilities;
 using HexGameEngine.Persistency;
 using HexGameEngine.Player;
+using System.Linq;
 
 namespace HexGameEngine.Characters
 {
@@ -21,9 +22,8 @@ namespace HexGameEngine.Characters
         [SerializeField] private RaceDataSO[] allRacialData;
         [SerializeField] private BackgroundDataSO[] allCharacterBackgroundSOs;
 
-        [Header("Character Generation")]
+        [Header("Recruit Generation")]
         [SerializeField] private List<ClassTemplateSO> allClassTemplateSOs;
-        [SerializeField] private List<ClassTemplateSO> allDraftTemplateSOs;
         [SerializeField] private List<CharacterModelTemplateSO> allModelTemplateSOs;  
 
         [Header("Character Name Buckets")]
@@ -287,7 +287,6 @@ namespace HexGameEngine.Characters
             newCharacter.dailyWage = original.dailyWage;
             newCharacter.perkPoints = original.perkPoints;
             newCharacter.perkTree = original.perkTree;
-            newCharacter.recruitCost = original.recruitCost;
 
             // Set stress
             newCharacter.currentStress = original.currentStress;
@@ -651,28 +650,10 @@ namespace HexGameEngine.Characters
             if (spillOver > 0)
             {
                 // Gain level
-                SetCharacterLevel(data, data.currentLevel + 1);
-
-                // Do attribute level up roll result logic
-                data.attributeRolls.Add(AttributeRollResult.GenerateRoll(data));
-
-                // Gain perk level up
-                if(PerkController.Instance.GetAllLevelUpPerksOnCharacter(data).Count < 5)
-                    data.perkPoints++;
-
-                // Gain talent level up
-                if ((data.currentLevel == 3 || data.currentLevel == 5) && data.talentPairings.Count < 3)
-                    data.talentRolls.Add(TalentRollResult.GenerateRoll(data));
-
-                // Reset current xp
-                data.currentXP = 0;
-
-                // Increase max xp on level up
-                data.currentMaxXP = GetMaxXpCapForLevel(data.currentLevel);
+                HandleLevelUp(data);
 
                 // Restart the xp gain procces with the spill over amount
                 HandleGainXP(data, spillOver);
-
 
             }
 
@@ -680,25 +661,7 @@ namespace HexGameEngine.Characters
             else if (spillOver == 0)
             {
                 // Gain level
-                SetCharacterLevel(data, data.currentLevel + 1);
-
-                // Do attribute level up roll result logic
-                data.attributeRolls.Add(AttributeRollResult.GenerateRoll(data));
-
-                // Gain perk level up
-                if (PerkController.Instance.GetAllLevelUpPerksOnCharacter(data).Count < 5)
-                    data.perkPoints++;
-
-                // Gain talent level up
-                if ((data.currentLevel == 3 || data.currentLevel == 5) && data.talentPairings.Count < 3)
-                    data.talentRolls.Add(TalentRollResult.GenerateRoll(data));
-
-                // Reset current xp
-                data.currentXP = 0;
-
-                // Increase max xp on level up
-                data.currentMaxXP = GetMaxXpCapForLevel(data.currentLevel);
-
+                HandleLevelUp(data);
             }
 
             // Gain xp without leveling up
@@ -707,87 +670,100 @@ namespace HexGameEngine.Characters
                 data.currentXP += xpGained;
             }
         }
+        private void HandleLevelUp(HexCharacterData data)
+        {
+            // Gain level
+            SetCharacterLevel(data, data.currentLevel + 1);
+
+            // Do attribute level up roll result logic
+            data.attributeRolls.Add(AttributeRollResult.GenerateRoll(data));
+
+            // Gain perk level up
+            if (PerkController.Instance.GetAllLevelUpPerksOnCharacter(data).Count < 5)
+                data.perkPoints++;
+
+            // Gain talent level up
+            if ((data.currentLevel == 3 || data.currentLevel == 5) && data.talentPairings.Count < 3)
+                data.talentRolls.Add(TalentRollResult.GenerateRoll(data));
+
+            // Reset current xp
+            data.currentXP = 0;
+
+            // Increase max xp on level up
+            data.currentMaxXP = GetMaxXpCapForLevel(data.currentLevel);
+        }
         #endregion
               
-        // Character Generation + Character Deck Logic
+        // Recruit Generation + Character Deck Logic
         #region
-        private HexCharacterData GenerateRecruitCharacter(ClassTemplateSO ct, CharacterRace race, int tier = 1)
+        private HexCharacterData GenerateRecruitCharacter(BackgroundData data)
         {
             Debug.Log("CharacterDataController.GenerateRecruitCharacter() called...");
 
+            // Setup
             HexCharacterData newCharacter = new HexCharacterData();
-
-            // Set up background + story data
-            newCharacter.myName = GetRandomCharacterName(race);
-            newCharacter.myClassName = ct.templateName;
-            newCharacter.race = race;
+            newCharacter.background = data;
+            RecruitLoadoutData loadoutData = data.loadoutBuckets[RandomGenerator.NumberBetween(0, data.loadoutBuckets.Count - 1)];
             newCharacter.modelSize = CharacterModelSize.Normal;
-            SetStartingLevelAndXpValues(newCharacter);
-            newCharacter.background = GenerateRandomBackgroundForCharacter(race);
 
-            // Set up perks
-            newCharacter.passiveManager = new PerkManagerModel(newCharacter);
-            GetAndApplyRandomQuirksToCharacter(newCharacter, tier);
-
+            // Set up background, race and story data
+            newCharacter.race = GetRandomRace(data.validRaces);
+            newCharacter.myName = GetRandomCharacterName(newCharacter.race);
+            newCharacter.dailyWage = RandomGenerator.NumberBetween(newCharacter.background.dailyWageMin, newCharacter.background.dailyWageMax);
+                                               
             // Setup stats + stars
             newCharacter.attributeSheet = new AttributeSheet();
-            GenerateRecruitCharacterAttributeRolls(newCharacter.attributeSheet, newCharacter.background);
+            GenerateRecruitCharacterCoreAttributeRolls(newCharacter.attributeSheet, newCharacter.background);
             GenerateCharacterStarRolls(newCharacter.attributeSheet, 3);
-
-            // Randomize cost + daily wage
-            newCharacter.dailyWage = RandomGenerator.NumberBetween(newCharacter.background.dailyWageMin, newCharacter.background.dailyWageMax);
-
-            // to do: replace this with dynamic function: GetCharacterRecruitCost, which considers base cost, gear, town modifiers, difficulty mods, etc
-            newCharacter.recruitCost = newCharacter.background.baseRecruitCost;
 
             // Set up health
             SetCharacterMaxHealth(newCharacter, 0);
             SetCharacterHealth(newCharacter, StatCalculator.GetTotalMaxHealth(newCharacter));
 
-            // Randomize model appearance + outfit
+            // Set up perks + quirks
+            newCharacter.passiveManager = new PerkManagerModel(newCharacter);
+            GetAndApplyRandomQuirksToCharacter(newCharacter);
+
+            // Set up starting XP + level
+            SetStartingLevelAndXpValues(newCharacter);
+            int startingLevelBoosts = RandomGenerator.NumberBetween(data.lowerLevelLimit, data.upperLevelLimit) - 1;
+            for(int i = 0; i < startingLevelBoosts; i++)
+                HandleLevelUp(newCharacter);
+
+            // Randomize character appearance 
             newCharacter.modelParts = new List<string>();
-            CharacterModelTemplateSO randomRaceModel = GetRandomModelTemplate(race);
+            CharacterModelTemplateSO randomRaceModel = GetRandomModelTemplate(newCharacter.race);
             newCharacter.modelParts.AddRange(randomRaceModel.bodyParts);
 
-            // Randomize items
+            // Determine starting talent
+            TalentSchool startingTalent = loadoutData.possibleStartingTalents[RandomGenerator.NumberBetween(0, loadoutData.possibleStartingTalents.Length - 1)];
+            newCharacter.talentPairings.Add(new TalentPairing(startingTalent, 1));
+
+            // Determine weapon load out
             newCharacter.itemSet = new ItemSet();
-            SerializedItemSet randomItemSet = ct.possibleWeapons[RandomGenerator.NumberBetween(0, ct.possibleWeapons.Count - 1)];
-            ItemController.Instance.CopySerializedItemManagerIntoStandardItemManager(randomItemSet, newCharacter.itemSet);
+            SerializedItemSet weaponLoadout = loadoutData.possibleWeaponLoadouts[RandomGenerator.NumberBetween(0, loadoutData.possibleWeaponLoadouts.Length - 1)];
+            ItemController.Instance.CopySerializedItemManagerIntoStandardItemManager(weaponLoadout, newCharacter.itemSet);
 
-            // Set up abilities
+            // Determine head/body gear load out
+            SerializedItemSet armourLoadout = loadoutData.possibleArmourLoadouts[RandomGenerator.NumberBetween(0, loadoutData.possibleArmourLoadouts.Length - 1)];
+            if (armourLoadout.headArmour != null) newCharacter.itemSet.headArmour = ItemController.Instance.GenerateNewItemWithRandomEffects(armourLoadout.headArmour);
+            if (armourLoadout.chestArmour != null) newCharacter.itemSet.bodyArmour = ItemController.Instance.GenerateNewItemWithRandomEffects(armourLoadout.chestArmour);
+
+            // Determine and learn abilities
             newCharacter.abilityBook = new AbilityBook();
-            List<AbilityDataSO> selectedAbilities = GenerateRecruitCharacterAbilitiesFromProspects(ct.possibleAbilities, ct.startingAbilityCount);
-            foreach(AbilityDataSO a in selectedAbilities)
-            {
-                newCharacter.abilityBook.HandleLearnNewAbility(AbilityController.Instance.BuildAbilityDataFromScriptableObjectData(a));
-            }
-
+            List<AbilityData> abilities = GenerateRecruitAbilities(newCharacter, loadoutData, 1);
+            foreach(AbilityData a in abilities)            
+                newCharacter.abilityBook.HandleLearnNewAbility(a);
+            
             // Learn weapon abilities
             newCharacter.abilityBook.HandleLearnAbilitiesFromItemSet(newCharacter.itemSet);
 
-            // Talent Data
-            foreach (TalentPairing tp in ct.talentPairings)
-            {
-                newCharacter.talentPairings.Add(new TalentPairing
-                {
-                    talentSchool = tp.talentSchool,
-                    level = tp.level
-                });
-            }
+            // TO DO: generate a cool sub name (based off race, talent, quirk or background)
+            // TO DO: generate character background story
 
             return newCharacter;
-        }
-        private BackgroundData GenerateRandomBackgroundForCharacter(CharacterRace race)
-        {
-            List<BackgroundData> validBackgrounds = new List<BackgroundData>();
-            foreach(BackgroundData b in allCharacterBackgrounds)
-            {
-                if (b.validRaces.Contains(race))
-                    validBackgrounds.Add(b);
-            }
-            return validBackgrounds[RandomGenerator.NumberBetween(0, validBackgrounds.Count - 1)];
-        }
-        private void GenerateRecruitCharacterAttributeRolls(AttributeSheet sheet, BackgroundData background)
+        }       
+        private void GenerateRecruitCharacterCoreAttributeRolls(AttributeSheet sheet, BackgroundData background)
         {
             sheet.might.value += RandomGenerator.NumberBetween(background.mightLower + mightLower, background.mightUpper + mightUpper);
             sheet.constitution.value += RandomGenerator.NumberBetween(background.constitutionLower + constitutionLower, background.constitutionUpper + constitutionUpper);
@@ -797,106 +773,32 @@ namespace HexGameEngine.Characters
             sheet.fatigue.value += RandomGenerator.NumberBetween(background.fatigueLower + fatigueLower, background.fatigueUpper + fatigueUpper);
             sheet.resolve.value += RandomGenerator.NumberBetween(background.resolveLower + resolveLower, background.resolveUpper + resolveUpper);
         }
-        private List<AbilityDataSO> GenerateRecruitCharacterAbilitiesFromProspects(List<AbilityDataSO> prospects, int amount = 3)
+        private List<AbilityData> GenerateRecruitAbilities(HexCharacterData character,  RecruitLoadoutData loadout, int totalAbilities = 1)
         {
-            // Determine and randomize valid abilities to learn
-            List<AbilityDataSO> abilitiesRet = new List<AbilityDataSO>();
-            List<AbilityDataSO> filteredPossibleAbilities = new List<AbilityDataSO>();
-            filteredPossibleAbilities.AddRange(prospects);
-            filteredPossibleAbilities.Shuffle();
+            List<AbilityData> ret = new List<AbilityData>();
+            List<AbilityDataSO> prospects = new List<AbilityDataSO>();
+            List<TalentSchool> characterTalents = new List<TalentSchool>();
+            foreach (TalentPairing tp in character.talentPairings)
+                characterTalents.Add(tp.talentSchool);
 
-            // Pop the first ability, remember its talent school to prevent trippling up on the same talent school later
-            bool multipleTalents = false;
-            abilitiesRet.Add(filteredPossibleAbilities[0]);
-            TalentSchool firstTalent = abilitiesRet[0].talentRequirementData.talentSchool;
-            filteredPossibleAbilities.RemoveAt(0);      
-            
-            // Check for more than 1 talent school in possible prospects
-            foreach(AbilityDataSO a in filteredPossibleAbilities)
+            foreach(AbilityDataSO a in loadout.possibleAbilities)
             {
-                if(a.talentRequirementData.talentSchool != firstTalent)
+                if(a.talentRequirementData == null ||
+                  (a.talentRequirementData != null &&
+                   characterTalents.Contains(a.talentRequirementData.talentSchool)))
                 {
-                    multipleTalents = true;
-                    break;
+                    if(AbilityController.Instance.DoesCharacterMeetAbilityWeaponRequirement(character.itemSet, a.weaponRequirement))                    
+                        prospects.Add(a);                   
                 }
             }
 
-            // Should try and get abilities from two different talents?
-            if (multipleTalents)
-            {
-                for (int i = 0; i < amount - 1; i++)
-                {
-                    if (i == 0)
-                    {
-                        for (int j = 0; j < filteredPossibleAbilities.Count; j++)
-                        {
-                            if (filteredPossibleAbilities[j].talentRequirementData.talentSchool != firstTalent)
-                            {
-                                abilitiesRet.Add(filteredPossibleAbilities[j]);
-                                filteredPossibleAbilities.Remove(filteredPossibleAbilities[j]);
-                                break;
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        AbilityDataSO a = filteredPossibleAbilities[0];
-                        filteredPossibleAbilities.Remove(a);
-                        abilitiesRet.Add(a);
-                    }
-                }
-            }
-
-            // Character only has points in 1 talent tree, just grab all the abilities from that tree
-            else
-            {
-                for(int i = 0; i < amount - 1; i++)
-                {
-                    abilitiesRet.Add(filteredPossibleAbilities[i]);
-                }
-            }
-            return abilitiesRet;
-        }
-        private void GenerateRecruitCharacterStatRolls(AttributeSheet sheet, int totalMods, int tier)
-        {
-            List<CoreAttribute> attributes = new List<CoreAttribute> 
-            { 
-                CoreAttribute.Accuracy, 
-                CoreAttribute.Constitution, 
-                CoreAttribute.Dodge, 
-                CoreAttribute.Resolve, 
-                CoreAttribute.Might, 
-                CoreAttribute.Wits 
-            };
-
-            attributes.Shuffle();
-
-            int baseStatBoost = 0;
-            if (tier == 2) baseStatBoost = 3;
-            else if (tier == 3) baseStatBoost = 5;
-
-            for (int i = 0; i < totalMods; i++)
-            {
-                // Randomize how much a stat is boosted or lowered
-                int statMod = RandomGenerator.NumberBetween(2, 5);
-                int positiveBoostChance = 50;
-                if (tier == 2) positiveBoostChance = 40;
-                else if (tier == 3) positiveBoostChance = 25;
-
-                // 50% chance to get a negative stat boost
-                bool lowerStat = RandomGenerator.NumberBetween(1, 100) <= positiveBoostChance; 
-                if (lowerStat) statMod = -statMod;
-
-                if (attributes[i] == CoreAttribute.Accuracy) sheet.accuracy.value += statMod + baseStatBoost;
-                else if (attributes[i] == CoreAttribute.Constitution) sheet.constitution.value += statMod + baseStatBoost;
-                else if (attributes[i] == CoreAttribute.Dodge) sheet.dodge.value += statMod + baseStatBoost;
-                else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.value += statMod + baseStatBoost;
-                else if (attributes[i] == CoreAttribute.Might) sheet.might.value += statMod + baseStatBoost;
-                else if (attributes[i] == CoreAttribute.Wits) sheet.wits.value += statMod + baseStatBoost;
-            }
+            // Get X random abilities, convert to data file, add them to returned list
+            prospects.Shuffle();
+            for (int i = 0; i < totalAbilities && i < prospects.Count; i++)
+                ret.Add(AbilityController.Instance.BuildAbilityDataFromScriptableObjectData(prospects[i]));
 
 
+            return ret;
         }
         private void GenerateCharacterStarRolls(AttributeSheet sheet, int statsStarred = 3, int minStarsGainedPerStat = 1, int maxStarsGainedPerStat = 2)
         {
@@ -923,40 +825,6 @@ namespace HexGameEngine.Characters
                 else if (attributes[i] == CoreAttribute.Might) sheet.might.stars = starsGained;
                 else if (attributes[i] == CoreAttribute.Wits) sheet.wits.stars = starsGained;
             }
-        }
-        private int GenerateCharacterDailyWage(int tier = 1)
-        {
-            int lower = 5;
-            int upper = 8;
-            if(tier == 2)
-            {
-                lower = 10;
-                upper = 15;
-            }
-            else if(tier == 3)
-            {
-                lower = 17;
-                upper = 22;
-            }
-
-            return RandomGenerator.NumberBetween(lower, upper);
-        }
-        private int GenerateCharacterRecruitCost(int tier = 1)
-        {
-            int lower = 30;
-            int upper = 50;
-            if (tier == 2)
-            {
-                lower = 75;
-                upper = 100;
-            }
-            else if (tier == 3)
-            {
-                lower = 125;
-                upper = 150;
-            }
-
-            return RandomGenerator.NumberBetween(lower, upper);
         }
         public string GetRandomCharacterName(CharacterRace race)
         {
@@ -1008,18 +876,31 @@ namespace HexGameEngine.Characters
         {
             return validRaces[RandomGenerator.NumberBetween(0, validRaces.Count - 1)];
         }
-        private List<HexCharacterData> GenerateCharacterDeck()
+        private List<HexCharacterData> GenerateCharacterDeck(int deckSize = 20)
         {
             Debug.Log("CharacterDataController.GenerateCharacterDeck() called...");
             List<HexCharacterData> newCharacterDeck = new List<HexCharacterData>();
+            BackgroundData[] backgrounds = AllCharacterBackgrounds.ShuffledCopy();
 
-            foreach (ClassTemplateSO ct in allClassTemplateSOs)
+            // TO DO IN FUTURE: if anything in the game should increase/decrease the chances of certain
+            // backgrounds appearing, that logic should go here
+            foreach (BackgroundData bd in backgrounds)
             {
-                //int roll = RandomGenerator.NumberBetween(1, 100);
-                //int tier = 1;
-                //if (roll >= 91) tier = 3;
-                //else if (roll >= 71) tier = 2;
-                newCharacterDeck.Add(GenerateRecruitCharacter(ct, GetRandomRace(ct.possibleRaces)));
+                if(RandomGenerator.NumberBetween(1,100) <= bd.spawnChance)
+                    newCharacterDeck.Add(GenerateRecruitCharacter(bd));
+            }
+
+            for(int i = 0; i < backgrounds.Length; i++)
+            {
+                if (RandomGenerator.NumberBetween(1, 100) <= backgrounds[i].spawnChance)
+                    newCharacterDeck.Add(GenerateRecruitCharacter(backgrounds[i]));
+
+                if (newCharacterDeck.Count == deckSize) break;
+                if (i == backgrounds.Length - 1)
+                {
+                    backgrounds.Shuffle();
+                    i = -1;
+                }
             }
 
             return newCharacterDeck;
@@ -1087,7 +968,19 @@ namespace HexGameEngine.Characters
 
             return perk;
         }
-      
+        public int GetCharacterInitialHiringCost(HexCharacterData character)
+        {
+            int cost = character.background.baseRecruitCost;
+            int levelMod = (character.currentLevel - 1) * 75;
+            int itemsCost = ItemController.Instance.GetCharacterItemsGoldValue(character.itemSet);
+            cost += levelMod + itemsCost;
+
+            // TO DO IN FUTURE: any special modifiers from boons and world events should be accounte for here
+
+            // round to the nearest 10 gold
+            cost = Mathf.RoundToInt(cost / 10) * 10;
+            return cost;
+        }
         #endregion
 
     }

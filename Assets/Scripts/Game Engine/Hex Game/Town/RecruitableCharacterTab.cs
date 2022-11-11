@@ -76,10 +76,11 @@ namespace HexGameEngine.TownFeatures
             portaitModel.SetBaseAnim();
 
             // Wage and recruit costs
+            int cost = CharacterDataController.Instance.GetCharacterInitialHiringCost(data);
             string col = "<color=#DDC6AB>";
-            if (PlayerDataController.Instance.CurrentGold < data.recruitCost) col = TextLogic.lightRed;
+            if (PlayerDataController.Instance.CurrentGold < cost) col = TextLogic.lightRed;
             upkeepCostText.text = data.dailyWage.ToString();
-            recruitCostText.text = TextLogic.ReturnColoredText(data.recruitCost.ToString(),col);
+            recruitCostText.text = TextLogic.ReturnColoredText(cost.ToString(),col);
         }
         private void Show()
         {

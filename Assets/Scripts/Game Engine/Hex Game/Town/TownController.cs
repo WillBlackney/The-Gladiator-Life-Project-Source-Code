@@ -255,12 +255,14 @@ namespace HexGameEngine.TownFeatures
         {
             if (!selectedRecruitTab) return;
 
+            int cost = CharacterDataController.Instance.GetCharacterInitialHiringCost(selectedRecruitTab.MyCharacterData);
+
             // to do: check if player has enough gold and roster space before recruiting + pay gold for recruitment
             if (// enough space in roster &&
-               PlayerDataController.Instance.CurrentGold < selectedRecruitTab.MyCharacterData.recruitCost) return;
+               PlayerDataController.Instance.CurrentGold < cost) return;
 
             // Pay for recruit
-            PlayerDataController.Instance.ModifyPlayerGold(-selectedRecruitTab.MyCharacterData.recruitCost);
+            PlayerDataController.Instance.ModifyPlayerGold(-cost);
 
             // Add character to roster
             CharacterDataController.Instance.AddCharacterToRoster(selectedRecruitTab.MyCharacterData);
@@ -286,14 +288,16 @@ namespace HexGameEngine.TownFeatures
             CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, recruitRightPanelPortaitModel);
             recruitRightPanelPortaitModel.SetIdleAnim();
 
+            int cost = CharacterDataController.Instance.GetCharacterInitialHiringCost(character);
+
             // Texts
             recruitRightPanelNameText.text = "<color=#BC8252>" + character.myName + "<color=#DDC6AB>    The " + character.myClassName;
             if (recruitRightPanelRacialText != null) recruitRightPanelRacialText.text = character.race.ToString();
             if (recruitRightPanelBackgroundText != null) recruitRightPanelBackgroundText.text = TextLogic.SplitByCapitals(character.background.backgroundType.ToString());
             string col = "<color=#DDC6AB>";
-            if (PlayerDataController.Instance.CurrentGold < character.recruitCost) col = TextLogic.lightRed;
+            if (PlayerDataController.Instance.CurrentGold < cost) col = TextLogic.lightRed;
             recruitRightPanelUpkeepText.text = character.dailyWage.ToString();
-            recruitRightPanelCostText.text = TextLogic.ReturnColoredText(character.recruitCost.ToString(), col);
+            recruitRightPanelCostText.text = TextLogic.ReturnColoredText(cost.ToString(), col);
 
             // Misc
             recruitRightPanelRacialIcon.BuildFromRacialData(CharacterDataController.Instance.GetRaceData(character.race));

@@ -235,9 +235,9 @@ namespace HexGameEngine.UI
             if (data.weaponRequirement != WeaponRequirement.None)
             {
                 DotStyle dotStyle = DotStyle.Neutral;
-                if (data.myCharacter != null && AbilityController.Instance.DoesCharacterMeetAbilityWeaponRequirement(data.myCharacter, data))
+                if (data.myCharacter != null && AbilityController.Instance.DoesCharacterMeetAbilityWeaponRequirement(data.myCharacter.itemSet, data.weaponRequirement))
                     dotStyle = DotStyle.Green;
-                if (data.myCharacter != null && !AbilityController.Instance.DoesCharacterMeetAbilityWeaponRequirement(data.myCharacter, data))
+                if (data.myCharacter != null && !AbilityController.Instance.DoesCharacterMeetAbilityWeaponRequirement(data.myCharacter.itemSet, data.weaponRequirement))
                     dotStyle = DotStyle.Red;
 
                 requirementsParent.SetActive(true);

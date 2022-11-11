@@ -19,15 +19,6 @@ namespace HexGameEngine.Characters
         public List<OutfitTemplateSO> possibleOutfits = new List<OutfitTemplateSO>();
         public List<SerializedItemSet> possibleWeapons = new List<SerializedItemSet>();
 
-        [Header("Core Attributes")]
-        public int strengthMod;
-        public int intelligenceMod;
-        public int accuracyMod;
-        public int dodgeMod;
-        public int resolveMod;
-        public int constitutionMod;
-        public int witsMod;
-
         [Header("Talent Data")]
         public List<TalentPairing> talentPairings = new List<TalentPairing>();
 

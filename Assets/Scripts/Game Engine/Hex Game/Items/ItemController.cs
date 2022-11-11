@@ -180,6 +180,17 @@ namespace HexGameEngine.Items
             Debug.Log("GenerateNewItemWithRandomEffects() Granted abilities = " + ret.grantedAbilities.Count());
             return ret;
         }
+        public ItemData GenerateNewItemWithRandomEffects(ItemDataSO original)
+        {
+            ItemData ret = BuildItemDataFromScriptableObjectData(original);
+            ret.itemEffects = GenerateRandomItemEffects(ret);
+
+            // Generate armour
+            ret.armourAmount = RandomGenerator.NumberBetween(ret.minArmourRoll, ret.maxArmourRoll);
+
+            Debug.Log("GenerateNewItemWithRandomEffects() Granted abilities = " + ret.grantedAbilities.Count());
+            return ret;
+        }
         private List<ItemEffect> GenerateRandomItemEffects(ItemData itemData)
         {
             List<ItemEffect> ret = new List<ItemEffect>();            
@@ -397,6 +408,16 @@ namespace HexGameEngine.Items
 
             // Update item abilities
             character.abilityBook.OnItemSetChanged(character.itemSet);
+        }
+        public int GetCharacterItemsGoldValue(ItemSet itemSet)
+        {
+            int value = 0;
+            if (itemSet.headArmour != null) value += itemSet.headArmour.baseGoldValue;
+            if (itemSet.bodyArmour != null) value += itemSet.bodyArmour.baseGoldValue;
+            if (itemSet.mainHandItem != null) value += itemSet.mainHandItem.baseGoldValue;
+            if (itemSet.offHandItem != null) value += itemSet.offHandItem.baseGoldValue;
+            if (itemSet.trinket != null) value += itemSet.trinket.baseGoldValue;
+            return value;
         }
         #endregion
 

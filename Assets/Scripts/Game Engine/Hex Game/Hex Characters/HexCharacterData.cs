@@ -51,7 +51,6 @@ namespace HexGameEngine.Characters
 
         [Header("Misc Properties")]
         public Vector2 formationPosition = Vector2.zero;
-        public int recruitCost;
         public int dailyWage;
 
         public List<AttributeRollResult> attributeRolls = new List<AttributeRollResult>();

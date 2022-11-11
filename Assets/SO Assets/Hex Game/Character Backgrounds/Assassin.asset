@@ -18,6 +18,7 @@ MonoBehaviour:
     A lifetime spent skulking in the shadows and stopping hearts makes them exceptionally
     dangerous. Try not to fall asleep around them though, and certainly don\u2019t
     drink any wine they give you."
+  spawnChance: 25
   lowerLevelLimit: 1
   upperLevelLimit: 2
   dailyWageMin: 23
@@ -38,6 +39,15 @@ MonoBehaviour:
   witsLower: 10
   witsUpper: 5
   validRaces: 03000000050000000700000006000000
+  loadoutBuckets:
+  - possibleStartingTalents: 
+    possibleAbilities: []
+    possibleWeaponLoadouts: []
+    possibleArmourLoadouts: []
+  - possibleStartingTalents: 
+    possibleAbilities: []
+    possibleWeaponLoadouts: []
+    possibleArmourLoadouts: []
   passiveEffectDescriptions:
   - dotStyle: 3
     message:
