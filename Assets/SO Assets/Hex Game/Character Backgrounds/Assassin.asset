@@ -18,7 +18,8 @@ MonoBehaviour:
     A lifetime spent skulking in the shadows and stopping hearts makes them exceptionally
     dangerous. Try not to fall asleep around them though, and certainly don\u2019t
     drink any wine they give you."
-  spawnChance: 25
+  recruitable: 1
+  spawnChance: 100
   lowerLevelLimit: 1
   upperLevelLimit: 2
   dailyWageMin: 23
@@ -40,14 +41,45 @@ MonoBehaviour:
   witsUpper: 5
   validRaces: 03000000050000000700000006000000
   loadoutBuckets:
-  - possibleStartingTalents: 
-    possibleAbilities: []
-    possibleWeaponLoadouts: []
-    possibleArmourLoadouts: []
-  - possibleStartingTalents: 
-    possibleAbilities: []
-    possibleWeaponLoadouts: []
-    possibleArmourLoadouts: []
+  - possibleStartingTalents: 03000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: 36a0268a5ac37d742960a07bfe17be42, type: 2}
+    - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
+    - {fileID: 11400000, guid: f2990956e456afa46af43accbd061445, type: 2}
+    - {fileID: 11400000, guid: e270d32e998f6e34fa639b54342d93e8, type: 2}
+    - {fileID: 11400000, guid: 5ecefaa87e0004a4ea1921898981fe66, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandItem: {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
+      offHandItem: {fileID: 0}
+      headArmour: {fileID: 0}
+      chestArmour: {fileID: 0}
+      trinket: {fileID: 0}
+    - mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+      offHandItem: {fileID: 0}
+      headArmour: {fileID: 0}
+      chestArmour: {fileID: 0}
+      trinket: {fileID: 0}
+    - mainHandItem: {fileID: 11400000, guid: 4570d8c61ccb5d0459f43f3c2be1d49f, type: 2}
+      offHandItem: {fileID: 0}
+      headArmour: {fileID: 0}
+      chestArmour: {fileID: 0}
+      trinket: {fileID: 0}
+    - mainHandItem: {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
+      offHandItem: {fileID: 0}
+      headArmour: {fileID: 0}
+      chestArmour: {fileID: 0}
+      trinket: {fileID: 0}
+    - mainHandItem: {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
+      offHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+      headArmour: {fileID: 0}
+      chestArmour: {fileID: 0}
+      trinket: {fileID: 0}
+    possibleArmourLoadouts:
+    - mainHandItem: {fileID: 0}
+      offHandItem: {fileID: 0}
+      headArmour: {fileID: 11400000, guid: 908a58d4176f1d7418f065fb97d9d4df, type: 2}
+      chestArmour: {fileID: 11400000, guid: 590fb53249c64b34ab829805e3e57a8a, type: 2}
+      trinket: {fileID: 0}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

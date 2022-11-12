@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace HexGameEngine.Items
 {
@@ -17,14 +18,19 @@ namespace HexGameEngine.Items
     public class SerializedItemSet
     {
         [Header("Weapons")]
+        [LabelWidth(100)]
         public ItemDataSO mainHandItem;
+        [LabelWidth(100)]
         public ItemDataSO offHandItem;
 
         [Header("Armour")]
+        [LabelWidth(100)]
         public ItemDataSO headArmour;
+        [LabelWidth(100)]
         public ItemDataSO chestArmour;
 
         [Header("Extra")]
+        [LabelWidth(100)]
         public ItemDataSO trinket;
 
     }

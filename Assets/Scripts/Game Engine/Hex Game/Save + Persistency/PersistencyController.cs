@@ -77,7 +77,7 @@ namespace HexGameEngine.Persistency
             CharacterDataController.Instance.AutoGenerateAndCacheNewCharacterDeck();
 
             // Setup town
-            TownController.Instance.GenerateDailyRecruits(6);
+            TownController.Instance.GenerateDailyRecruits(20);
             TownController.Instance.GenerateDailyCombatContracts();
             TownController.Instance.GenerateDailyAbilityTomes();
             TownController.Instance.GenerateDailyArmouryItems();

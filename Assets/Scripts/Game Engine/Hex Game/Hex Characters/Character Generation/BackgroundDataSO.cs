@@ -25,7 +25,12 @@ namespace HexGameEngine.Characters
 
         [VerticalGroup("Core Data/Stats")]
         [LabelWidth(100)]
+        public bool recruitable = true;
+
+        [VerticalGroup("Core Data/Stats")]
+        [LabelWidth(100)]
         [Range(1,100)]
+        [ShowIf("ShowSpawnChance")]
         public int spawnChance = 25;
 
         [BoxGroup("Level Data", true, true)]
@@ -129,6 +134,13 @@ namespace HexGameEngine.Characters
         [LabelWidth(100)]
         public ModalDotRowBuildData[] passiveEffectDescriptions;
 
+        #region Odin Showifs
+        public bool ShowSpawnChance()
+        {
+            return recruitable;
+        }
+        #endregion
+
     }
     public  class BackgroundData
     {
@@ -136,6 +148,7 @@ namespace HexGameEngine.Characters
         public Sprite backgroundSprite;
         public CharacterBackground backgroundType;
         public string description;
+        public bool recruitable;
         public int spawnChance;
         public int dailyWageMin;
         public int dailyWageMax;
@@ -208,6 +221,7 @@ namespace HexGameEngine.Characters
             backgroundSprite = data.backgroundSprite;
             backgroundType = data.backgroundType;
             description = data.description;
+            recruitable = data.recruitable;
             spawnChance = data.spawnChance;
             dailyWageMin = data.dailyWageMin;
             dailyWageMax = data.dailyWageMax;

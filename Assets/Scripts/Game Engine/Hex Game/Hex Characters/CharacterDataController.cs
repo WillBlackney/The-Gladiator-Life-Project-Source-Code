@@ -693,12 +693,73 @@ namespace HexGameEngine.Characters
             data.currentMaxXP = GetMaxXpCapForLevel(data.currentLevel);
         }
         #endregion
-              
+
         // Recruit Generation + Character Deck Logic
         #region
+        private List<HexCharacterData> GenerateCharacterDeck(int deckSize = 20)
+        {
+            List<HexCharacterData> newCharacterDeck = new List<HexCharacterData>();
+            BackgroundData[] backgrounds = AllCharacterBackgrounds.ShuffledCopy();
+
+            // TO DO IN FUTURE: if anything in the game should increase/decrease the chances of certain
+            // backgrounds appearing, that logic should go here
+
+            int currentIndex = 0;
+            int totalLoops = 0;
+
+            while(newCharacterDeck.Count < deckSize && totalLoops < 1000)
+            {
+                BackgroundData bg = backgrounds[currentIndex];
+                if (bg.recruitable)
+                {
+                    // Roll for character generation, then generate on success
+                    if (RandomGenerator.NumberBetween(1, 100) <= bg.spawnChance)
+                        newCharacterDeck.Add(GenerateRecruitCharacter(bg));
+                }
+
+                if (currentIndex >= backgrounds.Count() - 1)
+                    currentIndex = -1;
+
+                currentIndex++;
+                totalLoops++;
+            }
+
+            Debug.Log("GenerateCharacterDeck() complete, total background iterations: " + totalLoops.ToString());
+
+            /*
+            for (int i = 0; i < backgrounds.Length; i++)
+            {
+                // Skip over non recruitable backgrounds
+                if (backgrounds[i].recruitable)
+                {
+                    // Roll for character generation, then generate on success
+                    if (RandomGenerator.NumberBetween(1, 100) <= backgrounds[i].spawnChance)
+                        newCharacterDeck.Add(GenerateRecruitCharacter(backgrounds[i]));
+
+                    // Cancel if hit character spawn limit
+                    if (newCharacterDeck.Count == deckSize) break;
+
+                    // If completed iterating over backgrounds list but still not filled up character deck, shuffle and restart.
+                    if (i == backgrounds.Length - 1)
+                    {
+                        backgrounds.Shuffle();
+                        i = -1;
+                    }
+                }               
+            }
+            */
+
+            return newCharacterDeck;
+        }
+        public void AutoGenerateAndCacheNewCharacterDeck()
+        {
+            CharacterDeck.Clear();
+            CharacterDeck = GenerateCharacterDeck();
+            CharacterDeck.Shuffle();
+        }
         private HexCharacterData GenerateRecruitCharacter(BackgroundData data)
         {
-            Debug.Log("CharacterDataController.GenerateRecruitCharacter() called...");
+            Debug.Log("CharacterDataController.GenerateRecruitCharacter() called, generating from background: " + data.backgroundType.ToString());
 
             // Setup
             HexCharacterData newCharacter = new HexCharacterData();
@@ -716,13 +777,13 @@ namespace HexGameEngine.Characters
             GenerateRecruitCharacterCoreAttributeRolls(newCharacter.attributeSheet, newCharacter.background);
             GenerateCharacterStarRolls(newCharacter.attributeSheet, 3);
 
-            // Set up health
-            SetCharacterMaxHealth(newCharacter, 0);
-            SetCharacterHealth(newCharacter, StatCalculator.GetTotalMaxHealth(newCharacter));
-
             // Set up perks + quirks
             newCharacter.passiveManager = new PerkManagerModel(newCharacter);
             GetAndApplyRandomQuirksToCharacter(newCharacter);
+
+            // Set up health
+            SetCharacterMaxHealth(newCharacter, 0);
+            SetCharacterHealth(newCharacter, StatCalculator.GetTotalMaxHealth(newCharacter));                       
 
             // Set up starting XP + level
             SetStartingLevelAndXpValues(newCharacter);
@@ -765,13 +826,13 @@ namespace HexGameEngine.Characters
         }       
         private void GenerateRecruitCharacterCoreAttributeRolls(AttributeSheet sheet, BackgroundData background)
         {
-            sheet.might.value += RandomGenerator.NumberBetween(background.mightLower + mightLower, background.mightUpper + mightUpper);
-            sheet.constitution.value += RandomGenerator.NumberBetween(background.constitutionLower + constitutionLower, background.constitutionUpper + constitutionUpper);
-            sheet.accuracy.value += RandomGenerator.NumberBetween(background.accuracyLower + accuracyLower, background.accuracyUpper + accuracyUpper);
-            sheet.dodge.value += RandomGenerator.NumberBetween(background.dodgeLower + dodgeLower, background.dodgeUpper + dodgeUpper);
-            sheet.wits.value += RandomGenerator.NumberBetween(background.witsLower + witsLower, background.witsUpper + witsUpper);
-            sheet.fatigue.value += RandomGenerator.NumberBetween(background.fatigueLower + fatigueLower, background.fatigueUpper + fatigueUpper);
-            sheet.resolve.value += RandomGenerator.NumberBetween(background.resolveLower + resolveLower, background.resolveUpper + resolveUpper);
+            sheet.might.value = RandomGenerator.NumberBetween(background.mightLower + mightLower, background.mightUpper + mightUpper);
+            sheet.constitution.value = RandomGenerator.NumberBetween(background.constitutionLower + constitutionLower, background.constitutionUpper + constitutionUpper);
+            sheet.accuracy.value = RandomGenerator.NumberBetween(background.accuracyLower + accuracyLower, background.accuracyUpper + accuracyUpper);
+            sheet.dodge.value = RandomGenerator.NumberBetween(background.dodgeLower + dodgeLower, background.dodgeUpper + dodgeUpper);
+            sheet.wits.value = RandomGenerator.NumberBetween(background.witsLower + witsLower, background.witsUpper + witsUpper);
+            sheet.fatigue.value = RandomGenerator.NumberBetween(background.fatigueLower + fatigueLower, background.fatigueUpper + fatigueUpper);
+            sheet.resolve.value = RandomGenerator.NumberBetween(background.resolveLower + resolveLower, background.resolveUpper + resolveUpper);
         }
         private List<AbilityData> GenerateRecruitAbilities(HexCharacterData character,  RecruitLoadoutData loadout, int totalAbilities = 1)
         {
@@ -809,7 +870,8 @@ namespace HexGameEngine.Characters
                 CoreAttribute.Dodge,
                 CoreAttribute.Resolve,
                 CoreAttribute.Might,
-                CoreAttribute.Wits
+                CoreAttribute.Wits,
+                CoreAttribute.Fatigue
             };
 
             attributes.Shuffle();
@@ -824,6 +886,7 @@ namespace HexGameEngine.Characters
                 else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.stars = starsGained;
                 else if (attributes[i] == CoreAttribute.Might) sheet.might.stars = starsGained;
                 else if (attributes[i] == CoreAttribute.Wits) sheet.wits.stars = starsGained;
+                else if (attributes[i] == CoreAttribute.Fatigue) sheet.fatigue.stars = starsGained;
             }
         }
         public string GetRandomCharacterName(CharacterRace race)
@@ -876,55 +939,18 @@ namespace HexGameEngine.Characters
         {
             return validRaces[RandomGenerator.NumberBetween(0, validRaces.Count - 1)];
         }
-        private List<HexCharacterData> GenerateCharacterDeck(int deckSize = 20)
-        {
-            Debug.Log("CharacterDataController.GenerateCharacterDeck() called...");
-            List<HexCharacterData> newCharacterDeck = new List<HexCharacterData>();
-            BackgroundData[] backgrounds = AllCharacterBackgrounds.ShuffledCopy();
-
-            // TO DO IN FUTURE: if anything in the game should increase/decrease the chances of certain
-            // backgrounds appearing, that logic should go here
-            foreach (BackgroundData bd in backgrounds)
-            {
-                if(RandomGenerator.NumberBetween(1,100) <= bd.spawnChance)
-                    newCharacterDeck.Add(GenerateRecruitCharacter(bd));
-            }
-
-            for(int i = 0; i < backgrounds.Length; i++)
-            {
-                if (RandomGenerator.NumberBetween(1, 100) <= backgrounds[i].spawnChance)
-                    newCharacterDeck.Add(GenerateRecruitCharacter(backgrounds[i]));
-
-                if (newCharacterDeck.Count == deckSize) break;
-                if (i == backgrounds.Length - 1)
-                {
-                    backgrounds.Shuffle();
-                    i = -1;
-                }
-            }
-
-            return newCharacterDeck;
-        }
-        public void AutoGenerateAndCacheNewCharacterDeck()
-        {
-            Debug.Log("AutoGenerateAndCacheNewCharacterDeck() called, generating new character deck");
-            CharacterDeck.Clear();
-            CharacterDeck = GenerateCharacterDeck();
-            CharacterDeck.Shuffle();
-        }
-        private void GetAndApplyRandomQuirksToCharacter(HexCharacterData character, int tier = 1)
+      
+        private void GetAndApplyRandomQuirksToCharacter(HexCharacterData character)
         {
             for(int i = 0; i < 2; i++)
             {
-                int goodRange = 40;
-                if (tier == 2) goodRange = 50;
-                else if (tier == 3) goodRange = 60;
                 int roll = RandomGenerator.NumberBetween(1, 2);
-                if(roll == 1)
+                if(i == 0 || (i != 0 && roll == 1))
                 {
                     int typeRoll = RandomGenerator.NumberBetween(1, 100);
+
                     // Good perk
-                    if (typeRoll < goodRange) GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.PositiveQuirks);
+                    if (typeRoll < 40) GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.PositiveQuirks);
 
                     // Bad perk
                     else if (typeRoll < 80) GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NegativeQuirks);
