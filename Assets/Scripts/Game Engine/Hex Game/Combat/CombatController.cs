@@ -14,6 +14,7 @@ using HexGameEngine.JourneyLogic;
 using HexGameEngine.UI;
 using HexGameEngine.Persistency;
 using System.Linq;
+using HexGameEngine.Player;
 
 namespace HexGameEngine.Combat
 {
@@ -162,11 +163,6 @@ namespace HexGameEngine.Combat
                 damageModPercentageAdditive += 0.01f * init;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Locomotion perk modifier = " + damageModPercentageAdditive.ToString());
             }
-
-            // Scholar background bonus
-            if (effect != null && attacker != null && damageType == DamageType.Magic &&
-                CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Scholar))
-                damageModPercentageAdditive += 0.1f;
 
             // Calculate core additive multipliers
             // Wrath
@@ -706,15 +702,35 @@ namespace HexGameEngine.Combat
                 if (rangerBonus != 0) ret.details.Add(new HitChanceDetailData("Ranger Talent", rangerBonus));
             }
 
+            // Assassin background bonus
+            if (ability != null &&
+                CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Assassin) &&
+                StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(target) < 50)
+            {
+                int assassinBonus = 5;
+                ret.details.Add(new HitChanceDetailData("Assassin Bonus", assassinBonus));
+            }
+
             // Lumberjack background bonus
             if (ability != null &&
-                ability.abilityType.Contains(AbilityType.MeleeAttack) &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
                 CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Lumberjack) &&
                 ItemController.Instance.IsCharacterUsingWeaponClass(attacker.itemSet, WeaponClass.Axe)
                 )
             {
-                int lumberjackBonus = 10;
-                ret.details.Add(new HitChanceDetailData("Lumberjack Axe Bonus", lumberjackBonus));
+                int lumberjackBonus = 5;
+                ret.details.Add(new HitChanceDetailData("Lumberjack Bonus", lumberjackBonus));
+            }
+
+            // Poacher background bonus
+            if (ability != null &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Poacher) &&
+                ItemController.Instance.IsCharacterUsingWeaponClass(attacker.itemSet, WeaponClass.Bow)
+                )
+            {
+                int lumberjackBonus = 5;
+                ret.details.Add(new HitChanceDetailData("Poacher Bonus", lumberjackBonus));
             }
 
 
@@ -759,11 +775,6 @@ namespace HexGameEngine.Combat
             int hitRoll = RandomGenerator.NumberBetween(1, 100);
             var hitData = GetHitChance(attacker, target, ability);
 
-            // Check turtle aspect => unable to dodge attacks
-            /*
-            if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.TurtleAspect))
-                result = HitRollResult.Hit;*/
-
             if (hitRoll <= hitData.FinalHitChance || hitData.guaranteedHit)
                 result = HitRollResult.Hit;
             else
@@ -797,10 +808,19 @@ namespace HexGameEngine.Combat
             }
             */
 
+            // Check Assssin background
+            if (ability != null &&
+                StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(target) < 50 &&
+                CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Assassin))
+            {
+                critChance += 5;
+            }
+
             // Check Opportunist
-            if (ability != null && 
+            if (ability != null &&
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Opportunist) &&                
-                HexCharacterController.Instance.GetCharacterBackArcTiles(target).Contains(attacker.currentTile))
+                (HexCharacterController.Instance.GetCharacterBackArcTiles(target).Contains(attacker.currentTile) ||
+                 HexCharacterController.Instance.IsCharacterFlanked(target)))
             {
                 critChance += 10;
             }
@@ -1172,15 +1192,15 @@ namespace HexGameEngine.Combat
                     {
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Executioner!"), QueuePosition.Back, 0, 0, attacker.GetLastStackEventParent());
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Executioner!"), QueuePosition.Back, 0, 0.5f, attacker.GetLastStackEventParent());
 
                         HexCharacterController.Instance.ModifyActionPoints(attacker, 4);
                     }
 
-                    // Gladiator background: recover 10 stress on kill
+                    // Gladiator background: recover 5 stress on kill
                     if (CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Gladiator))
                     {
-                        HexCharacterController.Instance.ModifyStress(attacker, -10, true, true);
+                        HexCharacterController.Instance.ModifyStress(attacker, -5, true, true);
                     }
 
                     // Perk Soul Collector: permanently gain 1 constitution
@@ -1189,7 +1209,7 @@ namespace HexGameEngine.Combat
                     {
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Collector!"), QueuePosition.Back, 0, 0, attacker.GetLastStackEventParent());
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Collector!"), QueuePosition.Back, 0, 0.5f, attacker.GetLastStackEventParent());
 
                         // Increment stats
                         attacker.characterData.attributeSheet.constitution.value += 1;
@@ -1205,11 +1225,23 @@ namespace HexGameEngine.Combat
                     {
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Devourer!"), QueuePosition.Back, 0, 0, attacker.GetLastStackEventParent());
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Devourer!"), QueuePosition.Back, 0, 0.5f, attacker.GetLastStackEventParent());
 
                         // Increment stats
                         attacker.characterData.attributeSheet.might.value += 1;
                         attacker.attributeSheet.might.value += 1;
+                    }
+
+                    // Perk Soul Devourer: permanently gain 1 might
+                    if (CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Mercenary) &&
+                        attacker.characterData != null)
+                    {
+                        // Status notification
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Mercenary!"), QueuePosition.Back, 0, 0.5f, attacker.GetLastStackEventParent());
+
+                        // Gain gold
+                        PlayerDataController.Instance.ModifyPlayerGold(10);
                     }
 
                     // Increment kills this turn

@@ -1974,7 +1974,7 @@ namespace HexGameEngine.Characters
             {
                 bonusRet = 10 * (GetTotalFlankingCharactersOnTarget(target) - 1);
 
-                // Bonus is doubled for characters with opportunist perk
+                // +5 characters with opportunist perk
                 if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Opportunist))
                     bonusRet += 5;
 
@@ -1997,7 +1997,8 @@ namespace HexGameEngine.Characters
                 bonusRet += 10;
 
                 // Bonus is doubled for characters with opportunist perk
-                if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Opportunist))
+                if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Opportunist) &&
+                    !IsCharacterFlanked(target)) // prevent doubling of opportunist buff if target is both flanked and backstruck
                     bonusRet += 5;
 
                 // Backstriked characters dont benefit from dodge stat

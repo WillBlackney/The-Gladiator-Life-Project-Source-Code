@@ -41,7 +41,7 @@ namespace HexGameEngine.Player
         #region
         public void BuildMyDataFromSaveFile(SaveGameData saveFile)
         {
-            ModifyPlayerGold(-currentGold + saveFile.currentGold);
+            SetPlayerGold(saveFile.currentGold);
         }
         public void SaveMyDataToSaveFile(SaveGameData saveData)
         {
@@ -54,6 +54,14 @@ namespace HexGameEngine.Player
         public void ModifyPlayerGold(int goldGainedOrLost)
         {
             currentGold += goldGainedOrLost;
+            int vEventValue = currentGold;
+
+            // update food text;
+            VisualEventManager.Instance.CreateVisualEvent(() => TopBarController.Instance.UpdateGoldText(vEventValue.ToString()));
+        }
+        private void SetPlayerGold(int newValue)
+        {
+            currentGold = newValue;
             int vEventValue = currentGold;
 
             // update food text;

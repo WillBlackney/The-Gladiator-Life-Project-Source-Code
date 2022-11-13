@@ -18,6 +18,8 @@ MonoBehaviour:
     to make zealots exceptionally courageous in the face of danger. That same blind
     faith also makes them astonishngly stupid, so best cover these idiots in heavy
     armour before sending them to their god. '
+  recruitable: 1
+  spawnChance: 25
   lowerLevelLimit: 1
   upperLevelLimit: 1
   dailyWageMin: 5
@@ -38,6 +40,35 @@ MonoBehaviour:
   witsLower: 0
   witsUpper: -5
   validRaces: 01000000020000000300000004000000050000000600000007000000
+  loadoutBuckets:
+  - possibleStartingTalents: 020000000300000005000000060000000a000000090000000b0000000d0000000e000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: 90e62be2d401c2f4383195876bbc8ff5, type: 2}
+    - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
+    - {fileID: 11400000, guid: 1d653fb7e4e89d448bae7106e8b49b73, type: 2}
+    - {fileID: 11400000, guid: 993e8338c564e804fb94a571dc1a86c7, type: 2}
+    - {fileID: 11400000, guid: 6b5c6b02a64c9fe4cb91b8ff26213bd2, type: 2}
+    - {fileID: 11400000, guid: d84fc754f00f92b458fef9d08a4c3005, type: 2}
+    - {fileID: 11400000, guid: a0eec0cf113916e40bbb19662454dc56, type: 2}
+    - {fileID: 11400000, guid: e9972b20921e6e7468dbf49561e14ac9, type: 2}
+    - {fileID: 11400000, guid: 72c93eeab72ae0548add04a579d85c5c, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
+      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
+      offhandProspects: []
+    - mainHandProspects:
+      - {fileID: 11400000, guid: 2bd78f6e45f4a9e4e922068412a01b44, type: 2}
+      - {fileID: 11400000, guid: 12b837d9baaf68e4eb55cfab4ef25cbd, type: 2}
+      offhandProspects: []
+    possibleArmourLoadouts:
+    - headProspects: []
+      bodyProspects:
+      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+      - {fileID: 11400000, guid: dd279f6dbf5863d4ea08797aaed6a11f, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

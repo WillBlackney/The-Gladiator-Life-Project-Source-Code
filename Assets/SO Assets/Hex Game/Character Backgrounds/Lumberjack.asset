@@ -17,6 +17,8 @@ MonoBehaviour:
   description: 'Lumberjacks are ok: they sleep all night and work all day. A lifetime
     of swinging an axe makes them strong, fit and great at murdering people with
     axes.'
+  recruitable: 1
+  spawnChance: 25
   lowerLevelLimit: 1
   upperLevelLimit: 2
   dailyWageMin: 12
@@ -37,6 +39,28 @@ MonoBehaviour:
   witsLower: 0
   witsUpper: -5
   validRaces: 01000000020000000500000007000000
+  loadoutBuckets:
+  - possibleStartingTalents: 02000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
+    - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
+    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
+    - {fileID: 11400000, guid: 64ec1fe7f8ba35242a4c0244770ae3d2, type: 2}
+    - {fileID: 11400000, guid: 7438f6132b8f4544aa2ecfd3edf7886c, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 0}
+      - {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}
+      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+      offhandProspects: []
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 11400000, guid: 9ca6f5d5a08816f46902fdf8fcc508d6, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: ee9eb4491b6282f41a09a5257bef4f53, type: 2}
+    - headProspects: []
+      bodyProspects:
+      - {fileID: 11400000, guid: ee9eb4491b6282f41a09a5257bef4f53, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

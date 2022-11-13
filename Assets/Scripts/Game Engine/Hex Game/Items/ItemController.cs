@@ -172,23 +172,25 @@ namespace HexGameEngine.Items
         public ItemData GenerateNewItemWithRandomEffects(ItemData original)
         {
             ItemData ret = CloneItem(original);
+
+            // Generate random effects
             ret.itemEffects = GenerateRandomItemEffects(original);
 
             // Generate armour
             ret.armourAmount = RandomGenerator.NumberBetween(ret.minArmourRoll, ret.maxArmourRoll);
 
-            Debug.Log("GenerateNewItemWithRandomEffects() Granted abilities = " + ret.grantedAbilities.Count());
             return ret;
         }
         public ItemData GenerateNewItemWithRandomEffects(ItemDataSO original)
         {
             ItemData ret = BuildItemDataFromScriptableObjectData(original);
+
+            // Generate random effects
             ret.itemEffects = GenerateRandomItemEffects(ret);
 
             // Generate armour
             ret.armourAmount = RandomGenerator.NumberBetween(ret.minArmourRoll, ret.maxArmourRoll);
 
-            Debug.Log("GenerateNewItemWithRandomEffects() Granted abilities = " + ret.grantedAbilities.Count());
             return ret;
         }
         private List<ItemEffect> GenerateRandomItemEffects(ItemData itemData)

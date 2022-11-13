@@ -357,7 +357,7 @@ namespace HexGameEngine.Characters
             if (data.currentStress > 100)
                 data.currentStress = 100;
             // Zealots can never reach shattered stress state
-            else if (DoesCharacterHaveBackground(data.background, CharacterBackground.Zealot) &&
+            if (DoesCharacterHaveBackground(data.background, CharacterBackground.Zealot) &&
                 data.currentStress > 99) data.currentStress = 99;
             else if (data.currentStress < 0)
                 data.currentStress = 0;
@@ -638,7 +638,7 @@ namespace HexGameEngine.Characters
                     xpGainMod -= 0.25f;
 
                 if (DoesCharacterHaveBackground(data.background, CharacterBackground.Doctor))
-                    xpGainMod += 0.15f;
+                    xpGainMod += 0.10f;
             }         
 
             xpGained = (int)(xpGained * xpGainMod);
@@ -787,7 +787,7 @@ namespace HexGameEngine.Characters
 
             // Set up starting XP + level
             SetStartingLevelAndXpValues(newCharacter);
-            int startingLevelBoosts = RandomGenerator.NumberBetween(data.lowerLevelLimit, data.upperLevelLimit) - 1;
+            int startingLevelBoosts = RandomGenerator.NumberBetween(data.lowerLevelLimit, data.upperLevelLimit) - newCharacter.currentLevel;
             for(int i = 0; i < startingLevelBoosts; i++)
                 HandleLevelUp(newCharacter);
 
@@ -800,15 +800,10 @@ namespace HexGameEngine.Characters
             TalentSchool startingTalent = loadoutData.possibleStartingTalents[RandomGenerator.NumberBetween(0, loadoutData.possibleStartingTalents.Length - 1)];
             newCharacter.talentPairings.Add(new TalentPairing(startingTalent, 1));
 
-            // Determine weapon load out
+            // Determine weapons + head/body load out
             newCharacter.itemSet = new ItemSet();
-            SerializedItemSet weaponLoadout = loadoutData.possibleWeaponLoadouts[RandomGenerator.NumberBetween(0, loadoutData.possibleWeaponLoadouts.Length - 1)];
-            ItemController.Instance.CopySerializedItemManagerIntoStandardItemManager(weaponLoadout, newCharacter.itemSet);
-
-            // Determine head/body gear load out
-            SerializedItemSet armourLoadout = loadoutData.possibleArmourLoadouts[RandomGenerator.NumberBetween(0, loadoutData.possibleArmourLoadouts.Length - 1)];
-            if (armourLoadout.headArmour != null) newCharacter.itemSet.headArmour = ItemController.Instance.GenerateNewItemWithRandomEffects(armourLoadout.headArmour);
-            if (armourLoadout.chestArmour != null) newCharacter.itemSet.bodyArmour = ItemController.Instance.GenerateNewItemWithRandomEffects(armourLoadout.chestArmour);
+            GenerateRecruitWeapons(newCharacter, loadoutData);
+            GenerateRecruitArmour(newCharacter, loadoutData);
 
             // Determine and learn abilities
             newCharacter.abilityBook = new AbilityBook();
@@ -833,6 +828,48 @@ namespace HexGameEngine.Characters
             sheet.wits.value = RandomGenerator.NumberBetween(background.witsLower + witsLower, background.witsUpper + witsUpper);
             sheet.fatigue.value = RandomGenerator.NumberBetween(background.fatigueLower + fatigueLower, background.fatigueUpper + fatigueUpper);
             sheet.resolve.value = RandomGenerator.NumberBetween(background.resolveLower + resolveLower, background.resolveUpper + resolveUpper);
+        }
+        private void GenerateRecruitWeapons(HexCharacterData character, RecruitLoadoutData loadout)
+        {
+            if (loadout.possibleWeaponLoadouts.Length == 0) return;
+            RecruitWeaponLoadout weaponBasket = loadout.possibleWeaponLoadouts[RandomGenerator.NumberBetween(0, loadout.possibleWeaponLoadouts.Length - 1)];
+            ItemDataSO chosenMH = null;
+            ItemDataSO chosenOH = null;
+
+            // Choose random item data  
+            if (weaponBasket.mainHandProspects.Length > 0)
+                chosenMH = weaponBasket.mainHandProspects[RandomGenerator.NumberBetween(0, weaponBasket.mainHandProspects.Length - 1)];
+
+            if (weaponBasket.offhandProspects.Length > 0)
+                chosenOH = weaponBasket.offhandProspects[RandomGenerator.NumberBetween(0, weaponBasket.offhandProspects.Length - 1)];
+
+            // Create and assign items
+            if (chosenMH != null)
+                character.itemSet.mainHandItem = ItemController.Instance.GenerateNewItemWithRandomEffects(chosenMH);
+
+            if (chosenOH != null)
+                character.itemSet.offHandItem = ItemController.Instance.GenerateNewItemWithRandomEffects(chosenOH);
+        }
+        private void GenerateRecruitArmour(HexCharacterData character, RecruitLoadoutData loadout)
+        {
+            if (loadout.possibleArmourLoadouts.Length == 0) return;
+            RecruitArmourLoadout armourBasket = loadout.possibleArmourLoadouts[RandomGenerator.NumberBetween(0, loadout.possibleArmourLoadouts.Length - 1)];
+            ItemDataSO chosenBody = null;
+            ItemDataSO chosenHead = null;
+
+            // Choose random item data
+            if (armourBasket.bodyProspects.Length > 0)
+                chosenBody = armourBasket.bodyProspects[RandomGenerator.NumberBetween(0, armourBasket.bodyProspects.Length - 1)];
+
+            if (armourBasket.headProspects.Length > 0)            
+                chosenHead = armourBasket.headProspects[RandomGenerator.NumberBetween(0, armourBasket.headProspects.Length - 1)];
+                        
+            // Create and assign items
+            if (chosenBody != null)
+                character.itemSet.bodyArmour = ItemController.Instance.GenerateNewItemWithRandomEffects(chosenBody);
+
+            if (chosenHead != null)
+                character.itemSet.headArmour = ItemController.Instance.GenerateNewItemWithRandomEffects(chosenHead);
         }
         private List<AbilityData> GenerateRecruitAbilities(HexCharacterData character,  RecruitLoadoutData loadout, int totalAbilities = 1)
         {

@@ -17,6 +17,8 @@ MonoBehaviour:
   description: Doctors have nerves as steady as their hands, intimate knowledge of
     anatomy, and are well accustomed to seeing blood and guts. What more could you
     ask for in a gladiator?
+  recruitable: 1
+  spawnChance: 25
   lowerLevelLimit: 1
   upperLevelLimit: 2
   dailyWageMin: 23
@@ -37,6 +39,27 @@ MonoBehaviour:
   witsLower: 5
   witsUpper: 0
   validRaces: 01000000030000000400000006000000
+  loadoutBuckets:
+  - possibleStartingTalents: 0b0000000a0000000d000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: e9972b20921e6e7468dbf49561e14ac9, type: 2}
+    - {fileID: 11400000, guid: e9cf250cc1667994fac7ba558332a2d9, type: 2}
+    - {fileID: 11400000, guid: 63b93d8887404354592f0b988319347e, type: 2}
+    - {fileID: 11400000, guid: c1061f44ef3eb3c408eb895d2b7064bb, type: 2}
+    - {fileID: 11400000, guid: fb57f167ec3edab43baad8230d973425, type: 2}
+    - {fileID: 11400000, guid: dcda3a41d9b78dc42bf7f0cb378b7eab, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
+      - {fileID: 11400000, guid: 12b837d9baaf68e4eb55cfab4ef25cbd, type: 2}
+      offhandProspects:
+      - {fileID: 0}
+      - {fileID: 11400000, guid: 86f2685cb0b56c84fb2670dfdaae794f, type: 2}
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 11400000, guid: 9dcc546c6552b9d48bad13301a8f0f53, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: dd279f6dbf5863d4ea08797aaed6a11f, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

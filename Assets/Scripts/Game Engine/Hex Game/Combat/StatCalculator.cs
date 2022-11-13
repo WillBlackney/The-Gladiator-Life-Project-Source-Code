@@ -844,6 +844,9 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brute))
                 pdBonus += 15;
 
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.TournamentKnight))
+                pdBonus += 5;
+
             // Items
             pdBonus += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.PhysicalDamageBonus, c.itemSet);
 
@@ -859,6 +862,9 @@ namespace HexGameEngine
                 pdBonus += 10;
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Brute))
                 pdBonus += 15;
+
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.TournamentKnight))
+                pdBonus += 5;
 
             // Items
             pdBonus += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.PhysicalDamageBonus, c.itemSet);
@@ -876,6 +882,9 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Wise))
                 mdBonus += 10;
 
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Scholar))
+                mdBonus += 10;
+
             // Items
             mdBonus += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicDamageBonus, c.itemSet);
             return mdBonus;
@@ -889,6 +898,9 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Slow))
                 mdBonus -= 10;
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Wise))
+                mdBonus += 10;
+
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Scholar))
                 mdBonus += 10;
 
             // Items
@@ -1355,6 +1367,20 @@ namespace HexGameEngine
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Divinity, 1))
                 sr += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Divinity) * 10;
 
+            // Check Retired Soldier background perk: +5 SR if within an ally's aura
+            foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(c))
+            {
+                if (CharacterDataController.Instance.DoesCharacterHaveBackground(ally.background, CharacterBackground.RetiredWarrior) &&
+                    LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, GetTotalAuraSize(ally)).Contains(c.currentTile))
+                {
+                    sr += 5;
+                }
+            }
+
+            // Inquisitor background
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Inquisitor))
+                sr += 10;
+
             // Items
             sr += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.StressResistance, c.itemSet);
 
@@ -1375,6 +1401,10 @@ namespace HexGameEngine
             // Divinity talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Divinity, 1))
                 sr += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Divinity) * 10;
+
+            // Inquisitor background
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Inquisitor))
+                sr += 10;
 
             // Items
             sr += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.StressResistance, c.itemSet);

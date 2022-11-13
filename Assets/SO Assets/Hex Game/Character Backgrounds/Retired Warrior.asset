@@ -18,6 +18,8 @@ MonoBehaviour:
     anything less than fearsome fighters. Though old age may have worn down their
     health and fitness, retired warriors maintain remarkable technique, discipline
     and courage."
+  recruitable: 1
+  spawnChance: 25
   lowerLevelLimit: 1
   upperLevelLimit: 3
   dailyWageMin: 14
@@ -38,6 +40,7 @@ MonoBehaviour:
   witsLower: 0
   witsUpper: -5
   validRaces: 02000000010000000600000004000000
+  loadoutBuckets: []
   passiveEffectDescriptions:
   - dotStyle: 3
     message:
@@ -60,7 +63,7 @@ MonoBehaviour:
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: Resolve
+      phrase: Stress Resistance
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

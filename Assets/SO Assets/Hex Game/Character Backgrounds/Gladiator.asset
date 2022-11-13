@@ -17,6 +17,8 @@ MonoBehaviour:
   description: "The only thing more awe-inspiring than a gladiator\u2019s martial
     prowess is the size of their ego. A career of combat and showmanship forges them
     into godlike warriors, but they don\u2019t often play well with others\u2026"
+  recruitable: 1
+  spawnChance: 100
   lowerLevelLimit: 2
   upperLevelLimit: 3
   dailyWageMin: 33
@@ -37,6 +39,81 @@ MonoBehaviour:
   witsLower: 0
   witsUpper: 0
   validRaces: 01000000020000000300000004000000050000000600000007000000
+  loadoutBuckets:
+  - possibleStartingTalents: 02000000030000000500000009000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: 1900acc88f1878541b128ad5ff956abd, type: 2}
+    - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
+    - {fileID: 11400000, guid: d84fc754f00f92b458fef9d08a4c3005, type: 2}
+    - {fileID: 11400000, guid: 06f22294614248946a629ab645bc6650, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: 2bd78f6e45f4a9e4e922068412a01b44, type: 2}
+      - {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}
+      - {fileID: 11400000, guid: 130ab6972593ec14d8dda796c434cefb, type: 2}
+      - {fileID: 11400000, guid: bcda3a1ec0dfdfe469dfdd16aabf8736, type: 2}
+      - {fileID: 11400000, guid: c9082de8e300b384685cf1e19f316bfd, type: 2}
+      - {fileID: 11400000, guid: 81f8c44f0c2e3cf4d869ab7120643c8b, type: 2}
+      - {fileID: 11400000, guid: 96617d811d572184a950fe16be2f457d, type: 2}
+      - {fileID: 11400000, guid: a4927df637ac2f244a4eac08c487e83a, type: 2}
+      offhandProspects: []
+    - mainHandProspects:
+      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
+      - {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
+      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
+      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
+      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
+      offhandProspects: []
+    - mainHandProspects:
+      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
+      - {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
+      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
+      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
+      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
+      offhandProspects:
+      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
+      - {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
+      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
+      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
+      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
+    - mainHandProspects:
+      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
+      - {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
+      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
+      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
+      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
+      offhandProspects:
+      - {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
+      - {fileID: 11400000, guid: 0e78e6c34a4351a4f84867ffbc6e2c22, type: 2}
+    - mainHandProspects:
+      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
+      - {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
+      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
+      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
+      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
+      offhandProspects:
+      - {fileID: 11400000, guid: 67933190d00ec95478f7e153f088ddb2, type: 2}
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 11400000, guid: 06428f42647b1b947ba6bf2a54b42f36, type: 2}
+      - {fileID: 0}
+      bodyProspects:
+      - {fileID: 11400000, guid: ae8cf90ad093c0e4682a7455d7737a9e, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

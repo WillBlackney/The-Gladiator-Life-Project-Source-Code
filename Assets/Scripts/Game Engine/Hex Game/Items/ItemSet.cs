@@ -34,4 +34,17 @@ namespace HexGameEngine.Items
         public ItemDataSO trinket;
 
     }
+
+    [System.Serializable]
+    public class RecruitWeaponLoadout
+    {
+        public ItemDataSO[] mainHandProspects;
+        public ItemDataSO[] offhandProspects;
+    }
+    [System.Serializable]
+    public class RecruitArmourLoadout
+    {
+        public ItemDataSO[] headProspects;
+        public ItemDataSO[] bodyProspects;
+    }
 }

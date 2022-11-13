@@ -17,6 +17,8 @@ MonoBehaviour:
   description: Tournament Knights live for the thrill of a joust, the roar of the
     crowd and the swooning of ladies. During the off season, the gladiator pits become
     a perfect fit for them.
+  recruitable: 1
+  spawnChance: 25
   lowerLevelLimit: 2
   upperLevelLimit: 3
   dailyWageMin: 33
@@ -37,6 +39,7 @@ MonoBehaviour:
   witsLower: 0
   witsUpper: -5
   validRaces: 010000000200000006000000
+  loadoutBuckets: []
   passiveEffectDescriptions:
   - dotStyle: 3
     message:
@@ -51,7 +54,7 @@ MonoBehaviour:
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 10%
+      phrase: 5%
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
