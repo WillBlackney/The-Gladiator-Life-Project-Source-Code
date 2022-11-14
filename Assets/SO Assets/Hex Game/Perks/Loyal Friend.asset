@@ -55,7 +55,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Courage
+    phrase: 'Courage '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

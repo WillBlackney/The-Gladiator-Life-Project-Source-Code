@@ -21,7 +21,7 @@ MonoBehaviour:
   recruitable: 1
   spawnChance: 40
   lowerLevelLimit: 1
-  upperLevelLimit: 3
+  upperLevelLimit: 2
   dailyWageMin: 14
   dailyWageMax: 16
   baseRecruitCost: 100
@@ -109,10 +109,10 @@ MonoBehaviour:
       offhandProspects: []
     possibleArmourLoadouts:
     - headProspects:
-      - {fileID: 11400000, guid: b1c6f790bf2e04b4fb0166bc3146d1e6, type: 2}
       - {fileID: 0}
-      bodyProspects:
       - {fileID: 11400000, guid: b1c6f790bf2e04b4fb0166bc3146d1e6, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: 50b6be2028464fd489bda380d5d629fb, type: 2}
     - headProspects:
       - {fileID: 0}
       - {fileID: 11400000, guid: 13d4234ddfbc86a449b8623c8e827f14, type: 2}
@@ -140,10 +140,10 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 0e78e6c34a4351a4f84867ffbc6e2c22, type: 2}
     possibleArmourLoadouts:
     - headProspects:
-      - {fileID: 11400000, guid: b1c6f790bf2e04b4fb0166bc3146d1e6, type: 2}
       - {fileID: 0}
-      bodyProspects:
       - {fileID: 11400000, guid: b1c6f790bf2e04b4fb0166bc3146d1e6, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: 50b6be2028464fd489bda380d5d629fb, type: 2}
     - headProspects:
       - {fileID: 0}
       - {fileID: 11400000, guid: 13d4234ddfbc86a449b8623c8e827f14, type: 2}

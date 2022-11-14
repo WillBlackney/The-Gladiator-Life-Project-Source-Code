@@ -66,11 +66,9 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 37c5a755b3ef9ff4cbea114e6c96a44c, type: 2}
       - {fileID: 0}
     possibleArmourLoadouts:
-    - headProspects: []
-      bodyProspects:
-      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
     - headProspects:
       - {fileID: 11400000, guid: cbad33bd115f28b4aae4409c0675d6c0, type: 2}
+      - {fileID: 0}
       bodyProspects:
       - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
   passiveEffectDescriptions:

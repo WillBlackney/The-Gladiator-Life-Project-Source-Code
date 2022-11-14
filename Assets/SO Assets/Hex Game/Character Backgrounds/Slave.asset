@@ -40,7 +40,7 @@ MonoBehaviour:
   witsUpper: -5
   minStartingAbilities: 1
   maxStartingAbilities: 1
-  validRaces: 0100000005000000060000000700000000000000
+  validRaces: 01000000050000000600000007000000
   loadoutBuckets:
   - possibleStartingTalents: 0200000003000000050000000e000000
     possibleAbilities:
