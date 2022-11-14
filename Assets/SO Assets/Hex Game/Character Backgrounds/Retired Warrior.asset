@@ -19,7 +19,7 @@ MonoBehaviour:
     health and fitness, retired warriors maintain remarkable technique, discipline
     and courage."
   recruitable: 1
-  spawnChance: 25
+  spawnChance: 40
   lowerLevelLimit: 1
   upperLevelLimit: 3
   dailyWageMin: 14
@@ -39,8 +39,116 @@ MonoBehaviour:
   resolveUpper: 7
   witsLower: 0
   witsUpper: -5
+  minStartingAbilities: 1
+  maxStartingAbilities: 2
   validRaces: 02000000010000000600000004000000
-  loadoutBuckets: []
+  loadoutBuckets:
+  - possibleStartingTalents: 02000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
+    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
+    - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
+    - {fileID: 11400000, guid: d7f2a84d3e2517244b6dfd8e1cf54539, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: 2bd78f6e45f4a9e4e922068412a01b44, type: 2}
+      - {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}
+      - {fileID: 11400000, guid: 130ab6972593ec14d8dda796c434cefb, type: 2}
+      - {fileID: 11400000, guid: bcda3a1ec0dfdfe469dfdd16aabf8736, type: 2}
+      - {fileID: 11400000, guid: c9082de8e300b384685cf1e19f316bfd, type: 2}
+      - {fileID: 11400000, guid: 81f8c44f0c2e3cf4d869ab7120643c8b, type: 2}
+      - {fileID: 11400000, guid: 96617d811d572184a950fe16be2f457d, type: 2}
+      - {fileID: 11400000, guid: a4927df637ac2f244a4eac08c487e83a, type: 2}
+      offhandProspects: []
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 0}
+      - {fileID: 11400000, guid: b1c6f790bf2e04b4fb0166bc3146d1e6, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: 50b6be2028464fd489bda380d5d629fb, type: 2}
+    - headProspects:
+      - {fileID: 0}
+      - {fileID: 11400000, guid: 13d4234ddfbc86a449b8623c8e827f14, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: c040ba4a4b12ae749989bf65ed10ec48, type: 2}
+  - possibleStartingTalents: 02000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
+    - {fileID: 11400000, guid: 64ec1fe7f8ba35242a4c0244770ae3d2, type: 2}
+    - {fileID: 11400000, guid: 7438f6132b8f4544aa2ecfd3edf7886c, type: 2}
+    - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
+    - {fileID: 11400000, guid: d7f2a84d3e2517244b6dfd8e1cf54539, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
+      - {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
+      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
+      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
+      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
+      offhandProspects:
+      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
+      - {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
+      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
+      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
+      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
+    - mainHandProspects:
+      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
+      - {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
+      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
+      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
+      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
+      offhandProspects: []
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 11400000, guid: b1c6f790bf2e04b4fb0166bc3146d1e6, type: 2}
+      - {fileID: 0}
+      bodyProspects:
+      - {fileID: 11400000, guid: b1c6f790bf2e04b4fb0166bc3146d1e6, type: 2}
+    - headProspects:
+      - {fileID: 0}
+      - {fileID: 11400000, guid: 13d4234ddfbc86a449b8623c8e827f14, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: c040ba4a4b12ae749989bf65ed10ec48, type: 2}
+  - possibleStartingTalents: 05000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: 6c906fd5c22e64f43adc16680c0264ea, type: 2}
+    - {fileID: 11400000, guid: 507ff3973c3f4a44ea421a51ff989b75, type: 2}
+    - {fileID: 11400000, guid: 7dccc139645f4674f896d6d093471616, type: 2}
+    - {fileID: 11400000, guid: ffea262875283fe4e81b0151039cacfa, type: 2}
+    - {fileID: 11400000, guid: b797b73cc067e4042b5552ae13740736, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
+      - {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
+      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
+      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
+      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
+      offhandProspects:
+      - {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
+      - {fileID: 11400000, guid: 0e78e6c34a4351a4f84867ffbc6e2c22, type: 2}
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 11400000, guid: b1c6f790bf2e04b4fb0166bc3146d1e6, type: 2}
+      - {fileID: 0}
+      bodyProspects:
+      - {fileID: 11400000, guid: b1c6f790bf2e04b4fb0166bc3146d1e6, type: 2}
+    - headProspects:
+      - {fileID: 0}
+      - {fileID: 11400000, guid: 13d4234ddfbc86a449b8623c8e827f14, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: c040ba4a4b12ae749989bf65ed10ec48, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

@@ -19,7 +19,7 @@ MonoBehaviour:
     faith also makes them astonishngly stupid, so best cover these idiots in heavy
     armour before sending them to their god. '
   recruitable: 1
-  spawnChance: 25
+  spawnChance: 80
   lowerLevelLimit: 1
   upperLevelLimit: 1
   dailyWageMin: 5
@@ -39,6 +39,8 @@ MonoBehaviour:
   resolveUpper: 10
   witsLower: 0
   witsUpper: -5
+  minStartingAbilities: 1
+  maxStartingAbilities: 1
   validRaces: 01000000020000000300000004000000050000000600000007000000
   loadoutBuckets:
   - possibleStartingTalents: 020000000300000005000000060000000a000000090000000b0000000d0000000e000000

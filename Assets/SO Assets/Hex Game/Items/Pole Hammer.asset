@@ -31,4 +31,17 @@ MonoBehaviour:
   grantedAbilities:
   - {fileID: 11400000, guid: 2e7f6aa38b27e784db911972707ba0f5, type: 2}
   - {fileID: 11400000, guid: 7ef5a237ac6722e4fa3136dd3e619cb9, type: 2}
-  itemEffectSets: []
+  itemEffectSets:
+  - possibleEffects:
+    - effectType: 1
+      attributeModified: 21
+      modAmount: 25
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+  - possibleEffects: []

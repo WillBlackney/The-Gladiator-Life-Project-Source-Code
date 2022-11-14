@@ -46,6 +46,7 @@ namespace HexGameEngine.TownFeatures
         [Space(20)]
         [SerializeField] private TextMeshProUGUI recruitRightPanelRacialText;
         [SerializeField] private UIRaceIcon recruitRightPanelRacialIcon;
+        [SerializeField] private TextMeshProUGUI recruitRightPanelLevelText;
         [SerializeField] private TextMeshProUGUI recruitRightPanelBackgroundText;
         [SerializeField] private UIBackgroundIcon recruitRightPanelBackgroundIcon;
         [SerializeField] private TextMeshProUGUI recruitRightPanelCostText;
@@ -291,6 +292,7 @@ namespace HexGameEngine.TownFeatures
             int cost = CharacterDataController.Instance.GetCharacterInitialHiringCost(character);
 
             // Texts
+            recruitRightPanelLevelText.text = character.currentLevel.ToString();
             recruitRightPanelNameText.text = "<color=#BC8252>" + character.myName + "<color=#DDC6AB>    The " + character.myClassName;
             if (recruitRightPanelRacialText != null) recruitRightPanelRacialText.text = character.race.ToString();
             if (recruitRightPanelBackgroundText != null) recruitRightPanelBackgroundText.text = TextLogic.SplitByCapitals(character.background.backgroundType.ToString());

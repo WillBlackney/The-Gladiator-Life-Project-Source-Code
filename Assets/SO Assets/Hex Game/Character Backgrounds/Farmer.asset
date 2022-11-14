@@ -18,6 +18,8 @@ MonoBehaviour:
     farmers great vitality and strength. Between cleaning horse shit and making far
     too many babies, they never made time to read, so don\u2019t expect much in the
     way of wit and wisdom from these folk."
+  recruitable: 1
+  spawnChance: 60
   lowerLevelLimit: 1
   upperLevelLimit: 1
   dailyWageMin: 9
@@ -37,7 +39,54 @@ MonoBehaviour:
   resolveUpper: -3
   witsLower: 0
   witsUpper: -5
+  minStartingAbilities: 1
+  maxStartingAbilities: 1
   validRaces: 0100000002000000040000000600000007000000
+  loadoutBuckets:
+  - possibleStartingTalents: 0200000005000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
+    - {fileID: 11400000, guid: 1d653fb7e4e89d448bae7106e8b49b73, type: 2}
+    - {fileID: 11400000, guid: 06f22294614248946a629ab645bc6650, type: 2}
+    - {fileID: 11400000, guid: 16e76af6c245d1b44b45f27ca5118113, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects: []
+      offhandProspects: []
+    - mainHandProspects:
+      - {fileID: 11400000, guid: 2bd78f6e45f4a9e4e922068412a01b44, type: 2}
+      offhandProspects: []
+    - mainHandProspects:
+      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+      - {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
+      offhandProspects: []
+    possibleArmourLoadouts:
+    - headProspects: []
+      bodyProspects:
+      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+  - possibleStartingTalents: 0d0000000e0000000a000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: c1061f44ef3eb3c408eb895d2b7064bb, type: 2}
+    - {fileID: 11400000, guid: 082a91aafafc0bb4eb24a7695c715bdf, type: 2}
+    - {fileID: 11400000, guid: e9972b20921e6e7468dbf49561e14ac9, type: 2}
+    - {fileID: 11400000, guid: fb58bc9b02d9e60418c36237ae9c0d64, type: 2}
+    - {fileID: 11400000, guid: 89975510dc26f8648ae08c4f5b742dea, type: 2}
+    - {fileID: 11400000, guid: 5602763a1054f90458e04f735dfd3a0b, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects: []
+      offhandProspects: []
+    - mainHandProspects:
+      - {fileID: 11400000, guid: 2bd78f6e45f4a9e4e922068412a01b44, type: 2}
+      offhandProspects: []
+    - mainHandProspects:
+      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
+      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+      - {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
+      offhandProspects: []
+    possibleArmourLoadouts:
+    - headProspects: []
+      bodyProspects:
+      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

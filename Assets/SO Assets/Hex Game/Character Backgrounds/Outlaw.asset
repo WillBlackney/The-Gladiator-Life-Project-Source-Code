@@ -19,7 +19,7 @@ MonoBehaviour:
     so when it comes to fighting dirty. Just hope that the local guards don't recognize
     them from the wanted posters.
   recruitable: 1
-  spawnChance: 25
+  spawnChance: 80
   lowerLevelLimit: 1
   upperLevelLimit: 1
   dailyWageMin: 5
@@ -39,17 +39,42 @@ MonoBehaviour:
   resolveUpper: 2
   witsLower: 0
   witsUpper: 0
+  minStartingAbilities: 1
+  maxStartingAbilities: 1
   validRaces: 0100000002000000050000000600000007000000
   loadoutBuckets:
-  - possibleStartingTalents: 0200000005000000030000000600000008000000
-    possibleAbilities: []
+  - possibleStartingTalents: 0200000003000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
+    - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
+    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
+    - {fileID: 11400000, guid: 36a0268a5ac37d742960a07bfe17be42, type: 2}
+    - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
+    - {fileID: 11400000, guid: 2840137d1904dcb4eb8e7a15c992591f, type: 2}
     possibleWeaponLoadouts:
     - mainHandProspects:
       - {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
       - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
       - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
       - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
-      offhandProspects: []
+      offhandProspects:
+      - {fileID: 0}
+      - {fileID: 11400000, guid: 67933190d00ec95478f7e153f088ddb2, type: 2}
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 11400000, guid: 6b36fc9b35cc6824298b0e34fde38c4c, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: 930bb20b3ad25804fb9e8bd9eaad9394, type: 2}
+    - headProspects:
+      - {fileID: 11400000, guid: 6b36fc9b35cc6824298b0e34fde38c4c, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+  - possibleStartingTalents: 05000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: 6c906fd5c22e64f43adc16680c0264ea, type: 2}
+    - {fileID: 11400000, guid: 507ff3973c3f4a44ea421a51ff989b75, type: 2}
+    - {fileID: 11400000, guid: ffea262875283fe4e81b0151039cacfa, type: 2}
+    possibleWeaponLoadouts:
     - mainHandProspects:
       - {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
       - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
@@ -57,16 +82,24 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
       offhandProspects:
       - {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
-      - {fileID: 11400000, guid: 67933190d00ec95478f7e153f088ddb2, type: 2}
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 11400000, guid: 6b36fc9b35cc6824298b0e34fde38c4c, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: 930bb20b3ad25804fb9e8bd9eaad9394, type: 2}
+    - headProspects:
+      - {fileID: 11400000, guid: 6b36fc9b35cc6824298b0e34fde38c4c, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+  - possibleStartingTalents: 08000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: 6c3343bfc6662a742897620834e447ae, type: 2}
+    - {fileID: 11400000, guid: 7226b1084c8524348ac57922965a3699, type: 2}
+    - {fileID: 11400000, guid: 54c98d698a2d4054aac0406f0d58abbc, type: 2}
+    possibleWeaponLoadouts:
     - mainHandProspects:
-      - {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}
-      - {fileID: 11400000, guid: 130ab6972593ec14d8dda796c434cefb, type: 2}
-      - {fileID: 11400000, guid: bcda3a1ec0dfdfe469dfdd16aabf8736, type: 2}
-      - {fileID: 11400000, guid: 2bd78f6e45f4a9e4e922068412a01b44, type: 2}
-      offhandProspects: []
-    - mainHandProspects:
-      - {fileID: 11400000, guid: 55f1648863df14d478cd9f083d4c9f38, type: 2}
       - {fileID: 11400000, guid: c420762d59a4b8f4788afabeee27eb35, type: 2}
+      - {fileID: 11400000, guid: 55f1648863df14d478cd9f083d4c9f38, type: 2}
       offhandProspects: []
     possibleArmourLoadouts:
     - headProspects:

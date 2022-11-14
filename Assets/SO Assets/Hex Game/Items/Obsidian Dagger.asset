@@ -35,10 +35,22 @@ MonoBehaviour:
   - possibleEffects:
     - effectType: 1
       attributeModified: 21
-      modAmount: 10
+      modAmount: 8
       perkGained:
         perkTag: 0
         stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+  - possibleEffects:
+    - effectType: 2
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 191
+        stacks: 1
       gainPerkChance: 50
       effectChance: 0
       perkApplied:

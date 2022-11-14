@@ -18,7 +18,7 @@ MonoBehaviour:
     about everything. Except dying. They\u2019re pretty good at that! They also have
     no fear of death since their lives are so miserable, so there's that too."
   recruitable: 1
-  spawnChance: 25
+  spawnChance: 80
   lowerLevelLimit: 1
   upperLevelLimit: 1
   dailyWageMin: 0
@@ -38,7 +38,9 @@ MonoBehaviour:
   resolveUpper: -5
   witsLower: 0
   witsUpper: -5
-  validRaces: 01000000050000000600000007000000
+  minStartingAbilities: 1
+  maxStartingAbilities: 1
+  validRaces: 0100000005000000060000000700000000000000
   loadoutBuckets:
   - possibleStartingTalents: 0200000003000000050000000e000000
     possibleAbilities:

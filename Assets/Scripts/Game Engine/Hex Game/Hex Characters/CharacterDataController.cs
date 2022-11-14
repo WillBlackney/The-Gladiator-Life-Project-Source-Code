@@ -807,7 +807,7 @@ namespace HexGameEngine.Characters
 
             // Determine and learn abilities
             newCharacter.abilityBook = new AbilityBook();
-            List<AbilityData> abilities = GenerateRecruitAbilities(newCharacter, loadoutData, 1);
+            List<AbilityData> abilities = GenerateRecruitAbilities(newCharacter, loadoutData, RandomGenerator.NumberBetween(data.minStartingAbilities, data.maxStartingAbilities));
             foreach(AbilityData a in abilities)            
                 newCharacter.abilityBook.HandleLearnNewAbility(a);
             
@@ -847,7 +847,7 @@ namespace HexGameEngine.Characters
             if (chosenMH != null)
                 character.itemSet.mainHandItem = ItemController.Instance.GenerateNewItemWithRandomEffects(chosenMH);
 
-            if (chosenOH != null)
+            if (chosenOH != null && (chosenMH == null || (chosenMH != null && chosenMH.handRequirement == HandRequirement.OneHanded)))
                 character.itemSet.offHandItem = ItemController.Instance.GenerateNewItemWithRandomEffects(chosenOH);
         }
         private void GenerateRecruitArmour(HexCharacterData character, RecruitLoadoutData loadout)
@@ -885,8 +885,9 @@ namespace HexGameEngine.Characters
                   (a.talentRequirementData != null &&
                    characterTalents.Contains(a.talentRequirementData.talentSchool)))
                 {
-                    if(AbilityController.Instance.DoesCharacterMeetAbilityWeaponRequirement(character.itemSet, a.weaponRequirement))                    
-                        prospects.Add(a);                   
+                    if(AbilityController.Instance.DoesCharacterMeetAbilityWeaponRequirement(character.itemSet, a.weaponRequirement) ||
+                       (character.itemSet.mainHandItem == null && character.itemSet.offHandItem == null))                    
+                        prospects.Add(a);  
                 }
             }
 

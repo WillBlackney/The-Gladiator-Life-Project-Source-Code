@@ -120,10 +120,17 @@ namespace HexGameEngine.Characters
         [LabelWidth(125)]
         [Range(-30, 30)]
         public int witsUpper;
-        [Space(10)]     
-
+        [Space(10)]
 
         [BoxGroup("Recruit Generation Settings", true, true)]
+        [LabelWidth(125)]
+        [Range(0,3)]
+        public int minStartingAbilities = 1;
+        [BoxGroup("Recruit Generation Settings")]
+        [LabelWidth(125)]
+        [Range(0, 3)]
+        public int maxStartingAbilities = 1;
+        [BoxGroup("Recruit Generation Settings")]
         [LabelWidth(100)]
         public CharacterRace[] validRaces;
         [BoxGroup("Recruit Generation Settings")]
@@ -153,6 +160,8 @@ namespace HexGameEngine.Characters
         public int dailyWageMin;
         public int dailyWageMax;
         public int baseRecruitCost;
+        public int minStartingAbilities;
+        public int maxStartingAbilities;
 
         public int mightLower;
         public int mightUpper;
@@ -228,6 +237,9 @@ namespace HexGameEngine.Characters
             baseRecruitCost = data.baseRecruitCost;
             lowerLevelLimit = data.lowerLevelLimit;
             upperLevelLimit = data.upperLevelLimit;
+            minStartingAbilities = data.minStartingAbilities;
+            maxStartingAbilities = data.maxStartingAbilities;
+
 
             mightLower = data.mightLower;
             mightUpper = data.mightUpper;

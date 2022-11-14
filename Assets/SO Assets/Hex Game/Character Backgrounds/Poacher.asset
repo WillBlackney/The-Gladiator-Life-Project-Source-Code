@@ -17,6 +17,8 @@ MonoBehaviour:
   description: Humble peasants that feed themselves and their families by bow hunting
     animals of the deserts and plains. If you enjoy eating desert snake for breakfast,
     hire a poacher.
+  recruitable: 1
+  spawnChance: 60
   lowerLevelLimit: 1
   upperLevelLimit: 1
   dailyWageMin: 7
@@ -36,7 +38,28 @@ MonoBehaviour:
   resolveUpper: -5
   witsLower: 0
   witsUpper: 0
+  minStartingAbilities: 1
+  maxStartingAbilities: 1
   validRaces: 010000000500000002000000
+  loadoutBuckets:
+  - possibleStartingTalents: 08000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: 54c98d698a2d4054aac0406f0d58abbc, type: 2}
+    - {fileID: 11400000, guid: 6c3343bfc6662a742897620834e447ae, type: 2}
+    - {fileID: 11400000, guid: 7226b1084c8524348ac57922965a3699, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: c420762d59a4b8f4788afabeee27eb35, type: 2}
+      offhandProspects: []
+    possibleArmourLoadouts:
+    - headProspects: []
+      bodyProspects:
+      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+    - headProspects:
+      - {fileID: 11400000, guid: 9ca6f5d5a08816f46902fdf8fcc508d6, type: 2}
+      - {fileID: 0}
+      bodyProspects:
+      - {fileID: 11400000, guid: ee9eb4491b6282f41a09a5257bef4f53, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

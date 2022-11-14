@@ -17,6 +17,8 @@ MonoBehaviour:
   description: This character's background is totally and utterly shrouded in mystery.
     They simply refuse to talk about. Did they do something horrible and flee? Are
     they a wanted criminal? Perhaps they have amnesia? Who knows...
+  recruitable: 0
+  spawnChance: 80
   lowerLevelLimit: 1
   upperLevelLimit: 1
   dailyWageMin: 6
@@ -36,5 +38,8 @@ MonoBehaviour:
   resolveUpper: 10
   witsLower: -10
   witsUpper: 10
+  minStartingAbilities: 1
+  maxStartingAbilities: 1
   validRaces: 01000000020000000300000004000000050000000600000007000000
+  loadoutBuckets: []
   passiveEffectDescriptions: []

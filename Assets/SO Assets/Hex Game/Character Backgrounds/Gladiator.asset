@@ -18,7 +18,7 @@ MonoBehaviour:
     prowess is the size of their ego. A career of combat and showmanship forges them
     into godlike warriors, but they don\u2019t often play well with others\u2026"
   recruitable: 1
-  spawnChance: 100
+  spawnChance: 40
   lowerLevelLimit: 2
   upperLevelLimit: 3
   dailyWageMin: 33
@@ -38,6 +38,8 @@ MonoBehaviour:
   resolveUpper: 10
   witsLower: 0
   witsUpper: 0
+  minStartingAbilities: 2
+  maxStartingAbilities: 2
   validRaces: 01000000020000000300000004000000050000000600000007000000
   loadoutBuckets:
   - possibleStartingTalents: 02000000030000000500000009000000

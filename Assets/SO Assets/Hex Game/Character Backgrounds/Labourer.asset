@@ -17,24 +17,51 @@ MonoBehaviour:
   description: 'No job is too big or small for laborers, as long as it pays well.
     A lifetime spent doing menial ad hoc construction tasks means they are adequately
     experienced in everything, but masters of nothing. '
+  recruitable: 1
+  spawnChance: 80
   lowerLevelLimit: 1
   upperLevelLimit: 1
   dailyWageMin: 5
   dailyWageMax: 7
   baseRecruitCost: 50
-  mightLower: -5
-  mightUpper: 5
-  constitutionLower: -5
-  constitutionUpper: 5
-  accuracyLower: -5
-  accuracyUpper: 5
-  dodgeLower: -5
-  dodgeUpper: 5
+  mightLower: 0
+  mightUpper: 0
+  constitutionLower: 0
+  constitutionUpper: 0
+  accuracyLower: 0
+  accuracyUpper: 0
+  dodgeLower: 0
+  dodgeUpper: 0
   fatigueLower: 0
   fatigueUpper: 0
-  resolveLower: -5
-  resolveUpper: 5
-  witsLower: -5
-  witsUpper: 5
+  resolveLower: 0
+  resolveUpper: 0
+  witsLower: 0
+  witsUpper: 0
+  minStartingAbilities: 1
+  maxStartingAbilities: 1
   validRaces: 0100000002000000050000000600000007000000
+  loadoutBuckets:
+  - possibleStartingTalents: 030000000200000005000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
+    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
+    - {fileID: 11400000, guid: 06f22294614248946a629ab645bc6650, type: 2}
+    - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
+    - {fileID: 11400000, guid: 1d653fb7e4e89d448bae7106e8b49b73, type: 2}
+    - {fileID: 11400000, guid: 1900acc88f1878541b128ad5ff956abd, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects: []
+      offhandProspects: []
+    - mainHandProspects:
+      - {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
+      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+      offhandProspects: []
+    - mainHandProspects:
+      - {fileID: 11400000, guid: 2bd78f6e45f4a9e4e922068412a01b44, type: 2}
+      offhandProspects: []
+    possibleArmourLoadouts:
+    - headProspects: []
+      bodyProspects:
+      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
   passiveEffectDescriptions: []

@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Bill Hook
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
-  rarity: 1
+  rarity: 2
   fatiguePenalty: 7
   baseGoldValue: 50
   canSpawnInShop: 1

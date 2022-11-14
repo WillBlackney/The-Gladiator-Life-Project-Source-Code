@@ -18,7 +18,7 @@ MonoBehaviour:
     crowd and the swooning of ladies. During the off season, the gladiator pits become
     a perfect fit for them.
   recruitable: 1
-  spawnChance: 25
+  spawnChance: 20
   lowerLevelLimit: 2
   upperLevelLimit: 3
   dailyWageMin: 33
@@ -38,8 +38,43 @@ MonoBehaviour:
   resolveUpper: 5
   witsLower: 0
   witsUpper: -5
+  minStartingAbilities: 2
+  maxStartingAbilities: 2
   validRaces: 010000000200000006000000
-  loadoutBuckets: []
+  loadoutBuckets:
+  - possibleStartingTalents: 02000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
+    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
+    - {fileID: 11400000, guid: d7f2a84d3e2517244b6dfd8e1cf54539, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: c9082de8e300b384685cf1e19f316bfd, type: 2}
+      - {fileID: 11400000, guid: 81f8c44f0c2e3cf4d869ab7120643c8b, type: 2}
+      - {fileID: 11400000, guid: 96617d811d572184a950fe16be2f457d, type: 2}
+      offhandProspects: []
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 11400000, guid: 13d4234ddfbc86a449b8623c8e827f14, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: c040ba4a4b12ae749989bf65ed10ec48, type: 2}
+  - possibleStartingTalents: 05000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: 507ff3973c3f4a44ea421a51ff989b75, type: 2}
+    - {fileID: 11400000, guid: ffea262875283fe4e81b0151039cacfa, type: 2}
+    - {fileID: 11400000, guid: 6c906fd5c22e64f43adc16680c0264ea, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
+      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
+      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
+      offhandProspects:
+      - {fileID: 11400000, guid: 0e78e6c34a4351a4f84867ffbc6e2c22, type: 2}
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 11400000, guid: 13d4234ddfbc86a449b8623c8e827f14, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: c040ba4a4b12ae749989bf65ed10ec48, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

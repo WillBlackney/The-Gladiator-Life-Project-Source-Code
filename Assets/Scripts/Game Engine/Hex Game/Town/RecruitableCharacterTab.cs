@@ -40,6 +40,11 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] TextMeshProUGUI recruitCostText;
         [SerializeField] TextMeshProUGUI upkeepCostText;
 
+        [Space(10)]
+
+        [Header("Misc Components")]
+        [SerializeField] TextMeshProUGUI levelText;
+
         // Non-inspector properties
         private HexCharacterData myCharacterData;
         #endregion
@@ -64,6 +69,7 @@ namespace HexGameEngine.TownFeatures
             myCharacterData = data;
 
             // Texts
+            levelText.text = data.currentLevel.ToString();
             nameText.text = "<color=#BC8252>" + data.myName + "<color=#DDC6AB>    The " + data.myClassName;
             if(racialText != null) racialText.text = data.race.ToString();
             racialIcon.BuildFromRacialData(CharacterDataController.Instance.GetRaceData(data.race));

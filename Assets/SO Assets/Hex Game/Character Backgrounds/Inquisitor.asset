@@ -16,6 +16,8 @@ MonoBehaviour:
   backgroundType: 17
   description: "Professional hunters of witches, necromancers and all things foul.
     Not particularly talkative or good drinking buddies\u2026"
+  recruitable: 1
+  spawnChance: 40
   lowerLevelLimit: 1
   upperLevelLimit: 2
   dailyWageMin: 12
@@ -35,7 +37,38 @@ MonoBehaviour:
   resolveUpper: 10
   witsLower: 5
   witsUpper: 0
+  minStartingAbilities: 1
+  maxStartingAbilities: 2
   validRaces: 01000000040000000600000003000000
+  loadoutBuckets:
+  - possibleStartingTalents: 080000000b0000000a000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: 7226b1084c8524348ac57922965a3699, type: 2}
+    - {fileID: 11400000, guid: 54c98d698a2d4054aac0406f0d58abbc, type: 2}
+    - {fileID: 11400000, guid: 0930c66c7d9e14b4e8d35505ac00d180, type: 2}
+    - {fileID: 11400000, guid: a01d97efceeec0949b211610819e5cbb, type: 2}
+    - {fileID: 11400000, guid: cf911e75338237b45a6321623d1f8c84, type: 2}
+    - {fileID: 11400000, guid: c1061f44ef3eb3c408eb895d2b7064bb, type: 2}
+    - {fileID: 11400000, guid: 63b93d8887404354592f0b988319347e, type: 2}
+    - {fileID: 11400000, guid: 9e3e39c959174ff4e9c6a071583dbd4c, type: 2}
+    - {fileID: 11400000, guid: a0eec0cf113916e40bbb19662454dc56, type: 2}
+    - {fileID: 11400000, guid: abb8cd12e082108429c6734cc2c90d87, type: 2}
+    - {fileID: 11400000, guid: d0524e894377b9e47bce3ed475daf53c, type: 2}
+    - {fileID: 11400000, guid: 087c7faa0a547284f9a64fd03b452e7f, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: 0c372fc1765ce114481e7000f7867420, type: 2}
+      - {fileID: 11400000, guid: 55f1648863df14d478cd9f083d4c9f38, type: 2}
+      offhandProspects: []
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 11400000, guid: 9ca6f5d5a08816f46902fdf8fcc508d6, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: ee9eb4491b6282f41a09a5257bef4f53, type: 2}
+    - headProspects:
+      - {fileID: 11400000, guid: 908a58d4176f1d7418f065fb97d9d4df, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: 590fb53249c64b34ab829805e3e57a8a, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

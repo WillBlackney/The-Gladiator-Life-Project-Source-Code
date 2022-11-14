@@ -18,7 +18,7 @@ MonoBehaviour:
     in strength and courage they make up for in cunning and elusiveness. Just remember
     to keep your hands in your pockets when they\u2019re around."
   recruitable: 1
-  spawnChance: 100
+  spawnChance: 80
   lowerLevelLimit: 1
   upperLevelLimit: 1
   dailyWageMin: 9
@@ -38,6 +38,8 @@ MonoBehaviour:
   resolveUpper: 4
   witsLower: 5
   witsUpper: 8
+  minStartingAbilities: 1
+  maxStartingAbilities: 1
   validRaces: 0100000003000000050000000700000006000000
   loadoutBuckets:
   - possibleStartingTalents: 0300000009000000

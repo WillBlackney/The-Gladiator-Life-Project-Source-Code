@@ -44,3 +44,15 @@ MonoBehaviour:
       perkApplied:
         perkTag: 0
         passiveStacks: 1
+  - possibleEffects:
+    - effectType: 2
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 190
+        stacks: 1
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
