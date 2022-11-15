@@ -35,11 +35,19 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
+    phrase: ', '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Blinded '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
     phrase: 'or '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Blinded
+    phrase: Rooted
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

@@ -138,7 +138,8 @@ namespace HexGameEngine.Combat
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Bully) &&
                 target != null &&
                 (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stunned) ||
-                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Blinded)))
+                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Blinded) ||
+                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Rooted)))
             {
                 damageModPercentageAdditive += 0.25f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Bully perk modifier = " + damageModPercentageAdditive.ToString());

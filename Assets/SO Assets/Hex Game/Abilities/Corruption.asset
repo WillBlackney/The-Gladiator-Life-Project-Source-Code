@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Apply 2 Poisoned to an enemy.
   abilitySprite: {fileID: 21300000, guid: fd3ccd8376473244a8b84cf58f511fe2, type: 3}
-  energyCost: 4
+  energyCost: 3
   fatigueCost: 8
   baseCooldown: 1
   abilityType: 05000000

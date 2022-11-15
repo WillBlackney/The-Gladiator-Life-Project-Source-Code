@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fc18e607558964b9506f2b2cdb1260, type: 3}
+  m_Name: Elementalist
+  m_EditorClassIdentifier: 
+  myName: Elementalist
+  myClassName: Elementalist
+  race: 1
+  modelSize: 0
+  attributeSheet:
+    might:
+      value: 5
+      stars: 0
+    constitution:
+      value: 75
+      stars: 0
+    dodge:
+      value: 10
+      stars: 0
+    accuracy:
+      value: 60
+      stars: 0
+    resolve:
+      value: 10
+      stars: 0
+    fatigue:
+      value: 50
+      stars: 0
+    wits:
+      value: 10
+      stars: 0
+    maxHealth: 0
+    apRecovery: 8
+    maxAp: 8
+    initiative: 5
+    fatigueRecovery: 8
+    criticalChance: 5
+    criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
+    auraSize: 1
+    vision: 0
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+    deathResistance: 25
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: e9972b20921e6e7468dbf49561e14ac9, type: 2}
+    - {fileID: 11400000, guid: e9cf250cc1667994fac7ba558332a2d9, type: 2}
+    - {fileID: 11400000, guid: 72c93eeab72ae0548add04a579d85c5c, type: 2}
+  serializedPassiveManager:
+    perks:
+    - perkTag: 18
+      stacks: 1
+  modelParts: []
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
+    offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+    trinket: {fileID: 0}
+  talentPairings:
+  - talentSchool: 13
+    level: 1
+  - talentSchool: 14
+    level: 1
