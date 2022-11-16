@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Initiate Juggernaut
   m_EditorClassIdentifier: 
   myName: Initiate Juggernaut
-  race: 3
+  race: 1
   modelSize: 2
   xpReward: 15
   attributeSheet:
@@ -55,7 +55,7 @@ MonoBehaviour:
     stressResistance: 0
     injuryResistance: 0
     deathResistance: 25
-  baseArmour: 70
+  baseArmour: 80
   randomizeHealth: 1
   lowerHealthLimit: 70
   upperHealthLimit: 75

@@ -14,32 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Riposte
   includeInGame: 1
-  baseAbilityDescription: Deal 100% weapon damage.
-  abilitySprite: {fileID: 21300000, guid: 32e56c9c60dff28419898da655528c3b, type: 3}
-  energyCost: 0
-  fatigueCost: 0
-  baseCooldown: 0
-  abilityType: 0200000004000000
+  baseAbilityDescription: Gain 1 Riposte.
+  abilitySprite: {fileID: 21300000, guid: abd91b2ca06ae144eaacdbb1cc703bd6, type: 3}
+  energyCost: 4
+  fatigueCost: 12
+  baseCooldown: 2
+  abilityType: 01000000
   doesNotBreakStealth: 0
   weaponRequirement: 1
-  derivedFromWeapon: 0
+  derivedFromWeapon: 1
   derivedFromItemLoadout: 0
-  weaponAbilityType: 0
-  weaponClass: 0
-  targetRequirement: 3
+  weaponAbilityType: 2
+  weaponClass: 2
+  targetRequirement: 0
   secondaryTargetRequirement: 0
   rangeFromTarget: 0
   talentRequirementData:
     talentSchool: 0
     level: 0
   abilitySubRequirements: []
-  baseRange: 1
+  baseRange: 0
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
   hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
-  - effectType: 2
+  - effectType: 1
     stressEventData:
       stressAmountMin: 0
       stressAmountMax: 0
@@ -64,37 +64,37 @@ MonoBehaviour:
       cameraShake: 0
       movementAnimation: 0
       soundEffect: 0
-      characterAnimation: 1
+      characterAnimation: 4
       delayDuration: 0
       projectileFired: 0
       projectileStartPosition: 0
       onCharacter: 0
-    visualEventsOnHit:
-    - eventType: 4
+    - eventType: 5
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
       overlayDuration: 0
       overlayFadeOutTime: 0
       particleEffect: 0
-      cameraShake: 1
+      cameraShake: 0
       movementAnimation: 0
-      soundEffect: 0
+      soundEffect: 16
       characterAnimation: 0
       delayDuration: 0
       projectileFired: 0
       projectileStartPosition: 0
       onCharacter: 0
+    visualEventsOnHit: []
     visualEventsOnEffectFinish: []
     aoeType: 0
     includeCentreTile: 1
     aoeSize: 1
     effectsAllies: 0
     effectsEnemies: 0
-    damageType: 1
-    minBaseDamage: 18
-    maxBaseDamage: 22
-    guaranteedHit: 1
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
@@ -105,8 +105,8 @@ MonoBehaviour:
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
     perkPairing:
-      perkTag: 0
-      passiveStacks: 0
+      perkTag: 119
+      passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
@@ -115,5 +115,23 @@ MonoBehaviour:
   onCollisionEffects: []
   chainLoops: 0
   chainedEffects: []
-  dynamicDescription: []
-  keyWords: []
+  dynamicDescription:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Gain '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '1 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Riposte '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
+  keyWords:
+  - kewWordType: 1
+    passiveType: 119

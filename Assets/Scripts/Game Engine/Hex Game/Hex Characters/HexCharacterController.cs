@@ -1036,15 +1036,19 @@ namespace HexGameEngine.Characters
                 // PASSIVE EXPIRIES
                 // Taunt
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Taunt) && character.currentHealth > 0)                
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Taunt, -1, true, 0.5f);                
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Taunt, -1, true, 0.5f);
+
+                // Riposte
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Riposte) && character.currentHealth > 0)
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Riposte, -1, true, 0.5f);
+
+                // Shield Wall
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.ShieldWall) && character.currentHealth > 0)
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.ShieldWall, -1, true, 0.5f);
 
                 // Spear Wall
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SpearWall) && character.currentHealth > 0)                
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.SpearWall, -1, true, 0.5f);                
-
-                // Divine Favour
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.DivineFavour) && character.currentHealth > 0)                
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.DivineFavour, -1, true, 0.5f);
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.SpearWall, -1, true, 0.5f);              
 
                 // Reload
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Reload) && character.currentHealth > 0)
@@ -1237,16 +1241,9 @@ namespace HexGameEngine.Characters
 
                 // Fortified
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fortified) && character.currentHealth > 0)                
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Fortified, -1, true, 0.5f);           
-              
-                // Ignited Weapon
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FlamingWeapon) && character.currentHealth > 0)                
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.FlamingWeapon, -1, true, 0.5f);                
-                
-                // Poisoned Weapon
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.PoisonedWeapon) && character.currentHealth > 0)                
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.PoisonedWeapon, -1, true, 0.5f);
-                
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Fortified, -1, true, 0.5f);          
+                             
+                                
                 #endregion
 
                 // MISC

@@ -370,7 +370,7 @@ namespace HexGameEngine
                 dodge += 30;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ShieldWall))
-                dodge += 15;
+                dodge += 10;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Mirage))
                 dodge += 20;
@@ -386,6 +386,18 @@ namespace HexGameEngine
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ParryMaster))
                 dodge += 10;
+
+            // Shield Wall Passive
+            // Check Inspiring Leader perk: +50% resolve if within an ally's aura
+            foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(c))
+            {
+                if (PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.ShieldWall) &&
+                    LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, GetTotalAuraSize(ally)).Contains(c.currentTile))
+                {
+                    dodge += 5;
+                    break;
+                }
+            }
 
             // Mud tile
             if (c.currentTile.TileData.tileName == "Water") dodge -= 10;
@@ -448,9 +460,6 @@ namespace HexGameEngine
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Evasion))
                 dodge += 30;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ShieldWall))
-                dodge += 15;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Mirage))
                 dodge += 20;

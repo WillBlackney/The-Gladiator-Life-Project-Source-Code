@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Initiate Bruiser
   m_EditorClassIdentifier: 
   myName: Initiate Juggernaut
-  race: 3
+  race: 1
   modelSize: 2
   xpReward: 15
   attributeSheet:
     might:
-      value: 0
+      value: 10
       stars: 0
     constitution:
       value: 0

@@ -345,21 +345,21 @@ namespace HexGameEngine.Abilities
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Blinded, -1);
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Combo))
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Combo, -1);
+
+                // Weapon attack specific
+                if (ability.abilityType.Contains(AbilityType.WeaponAttack))
+                {
+                    if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.PoisonedWeapon))
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.PoisonedWeapon, -1);
+                    if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FlamingWeapon))
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.FlamingWeapon, -1);
+                }
             }
 
             // Check for crossbow usage: apply reload perk
             if((ability.weaponRequirement == WeaponRequirement.Crossbow || ability.weaponRequirement == WeaponRequirement.BowOrCrossbow) &&
                 character.itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow)
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Reload, 1);
-
-
-            if (ability.abilityName == "Riposte")
-            {
-                Debug.Log("Removing riposte");
-                // Remove a riposte stack
-                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Riposte, -1);
-            }
-
         }
         private void TriggerAbilityEffect(AbilityData ability, AbilityEffect abilityEffect, HexCharacterModel caster, HexCharacterModel target, LevelNode tileTarget = null, HexCharacterModel previousChainTarget = null)
         {

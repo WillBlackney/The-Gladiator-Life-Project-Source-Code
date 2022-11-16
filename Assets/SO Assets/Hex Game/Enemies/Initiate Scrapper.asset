@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Initiate Scrapper
   m_EditorClassIdentifier: 
   myName: Initiate Scrapper
-  race: 3
+  race: 1
   modelSize: 0
   xpReward: 10
   attributeSheet:
@@ -33,7 +33,7 @@ MonoBehaviour:
       value: 10
       stars: 0
     fatigue:
-      value: 80
+      value: 70
       stars: 0
     wits:
       value: 5

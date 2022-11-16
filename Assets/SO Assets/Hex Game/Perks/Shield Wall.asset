@@ -12,30 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Shield Wall
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: d3de1c39883d72b46b319c8a5cef9a9b, type: 3}
+  passiveSprite: {fileID: 21300000, guid: ac7fae9736edd5346a53060af8fccbf3, type: 3}
   passiveName: Shield Wall
   perkTag: 12
   passiveDescription:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'This character has '
+    phrase: 'This character gains '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '+15 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Dodge
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '. Allies gain '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '+5 '
+    phrase: '+10 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -43,15 +31,29 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'while within this character''s '
+    phrase: 'until the start of it''s next turn. Allies within their '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Aura
+    phrase: 'Aura '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: .
+    phrase: 'also gain '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '+5 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Dodge
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: . The secondary effect can stack multiple times.
+  passiveItalicDescription: 
+  effectDetailTabs: []
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 0
@@ -61,8 +63,11 @@ MonoBehaviour:
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
   isInjury: 0
+  isPermanentInjury: 0
   severity: 0
   injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 0

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c332a1f403e665468640b734668f781, type: 3}
-  m_Name: Shield Wall
+  m_Name: Raise Shield
   m_EditorClassIdentifier: 
-  abilityName: Shield Wall
+  abilityName: Raise Shield
   includeInGame: 1
-  baseAbilityDescription: Gain 1 Guard.
+  baseAbilityDescription: Gain 1 Shield Wall.
   abilitySprite: {fileID: 21300000, guid: ac7fae9736edd5346a53060af8fccbf3, type: 3}
-  energyCost: 3
+  energyCost: 4
   fatigueCost: 12
   baseCooldown: 1
   abilityType: 01000000
@@ -112,7 +112,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Guard
+    phrase: Shield Wall
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
