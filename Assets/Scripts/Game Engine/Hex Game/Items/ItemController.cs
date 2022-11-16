@@ -86,6 +86,14 @@ namespace HexGameEngine.Items
         {
             return Array.FindAll(allItems, i => i.canSpawnInShop && i.rarity == rarity).ToList();
         }
+        public List<ItemData> GetAllShopSpawnableItems(Rarity rarity, ItemType type)
+        {
+            return Array.FindAll(allItems, i => i.canSpawnInShop && i.rarity == rarity && i.itemType == type).ToList();
+        }
+        public List<ItemData> GetAllShopSpawnableItems(Rarity rarity, WeaponClass weaponClass)
+        {
+            return Array.FindAll(allItems, i => i.canSpawnInShop && i.rarity == rarity && i.weaponClass == weaponClass).ToList();
+        }
         public List<ItemData> GetAllContractRewardableItems(Rarity rarity)
         {
             return Array.FindAll(allItems, i => i.canBeCombatContractReward && i.rarity == rarity).ToList();

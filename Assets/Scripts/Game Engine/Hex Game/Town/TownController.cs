@@ -106,7 +106,9 @@ namespace HexGameEngine.TownFeatures
 
         [Title("Armoury Page Components")]
         [SerializeField] private GameObject armouryPageVisualParent;
-        [SerializeField] private ItemShopSlot[] itemShopSlots;
+        [SerializeField] private List<ItemShopSlot> itemShopSlots;
+        [SerializeField] private GameObject itemShopSlotPrefab;
+        [SerializeField] private Transform itemShopSlotsParent;
 
         [Title("Choose Combat Page Components")]
         [SerializeField] private GameObject chooseCombatPageMainVisualParent;
@@ -606,12 +608,20 @@ namespace HexGameEngine.TownFeatures
             armouryPageVisualParent.SetActive(true);
 
             // Reset item slots
-            for (int i = 0; i < itemShopSlots.Length; i++)
+            for (int i = 0; i < itemShopSlots.Count; i++)
                 itemShopSlots[i].Reset();
 
             // Build items
-            for (int i = 0; i < currentItems.Count && i < itemShopSlots.Length; i++)
+            for (int i = 0; i < currentItems.Count; i++)
+            {
+                if(i >= itemShopSlots.Count)
+                {
+                    ItemShopSlot newSlot = Instantiate(itemShopSlotPrefab, itemShopSlotsParent).GetComponent<ItemShopSlot>();
+                    itemShopSlots.Add(newSlot);
+                }
                 itemShopSlots[i].BuildFromItemShopData(currentItems[i]);
+            }
+                
         }
         public void HandleBuyItemFromArmoury(ItemShopData data)
         {
@@ -630,6 +640,65 @@ namespace HexGameEngine.TownFeatures
         }
         public void GenerateDailyArmouryItems()
         {
+            currentItems.Clear();
+
+            List<ItemData> initialItems = new List<ItemData>();
+
+            // 1 Common Trinket
+            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Trinket).ShuffledCopy()[0]);
+
+            // 2-3 Common Head/Body Items
+            List<ItemData> commonHeadBodyItems = new List<ItemData>();
+            commonHeadBodyItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Body));
+            commonHeadBodyItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Head));
+            commonHeadBodyItems.Shuffle();
+            for(int i = 0; i < RandomGenerator.NumberBetween(2,3); i++)            
+                initialItems.Add(commonHeadBodyItems[i]);
+
+            // 2-3 Common Weapon Items
+            List<ItemData> commonWeaponItems = new List<ItemData>();
+            commonWeaponItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Weapon));
+            commonWeaponItems.Shuffle();
+            for (int i = 0; i < RandomGenerator.NumberBetween(2, 3); i++)
+                initialItems.Add(commonWeaponItems[i]);
+
+            // 0-1 Net
+            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, WeaponClass.ThrowingNet)[0]);
+
+            // 0-1 Common Shield
+            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, WeaponClass.Shield)[0]);
+
+            // 0-1 Offhand Talisman
+            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, WeaponClass.Holdable)[0]);
+
+            // 1 of each rare: Weapon, Trinket, Head and Body
+            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, ItemType.Body).ShuffledCopy()[0]);
+            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, ItemType.Head).ShuffledCopy()[0]);
+            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, ItemType.Trinket).ShuffledCopy()[0]);
+            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, ItemType.Weapon).ShuffledCopy()[0]);
+
+            // 50% chance to add each: epic head, body, trinket and weapon
+            if(RandomGenerator.NumberBetween(0, 2) == 1) 
+                initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Weapon).ShuffledCopy()[0]);
+            if (RandomGenerator.NumberBetween(0, 2) == 1)
+                initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Trinket).ShuffledCopy()[0]);
+            if (RandomGenerator.NumberBetween(0, 2) == 1)
+                initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Head).ShuffledCopy()[0]);
+            if (RandomGenerator.NumberBetween(0, 2) == 1)
+                initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Body).ShuffledCopy()[0]);
+
+            // TO DO IN FUTURE: any town events/effects that modifier item spawning should be applied here
+
+            for (int i = 0; i < initialItems.Count; i++)
+            {
+                ItemData item = ItemController.Instance.GenerateNewItemWithRandomEffects(initialItems[i]);
+                int lower = (int)(item.baseGoldValue * 0.95f);
+                int upper = (int)(item.baseGoldValue * 1.05f);
+                int finalCost = RandomGenerator.NumberBetween(lower, upper);
+                currentItems.Add(new ItemShopData(item, finalCost));
+            }
+
+            /*
             currentItems.Clear();
             List<ItemData> possibleItems = ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare);
             possibleItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic));
@@ -670,6 +739,7 @@ namespace HexGameEngine.TownFeatures
                 int finalCost = RandomGenerator.NumberBetween(lower, upper);
                 currentItems.Add(new ItemShopData(item, finalCost));
             }
+            */
 
         }
         #endregion
@@ -757,7 +827,6 @@ namespace HexGameEngine.TownFeatures
         }      
 
         #endregion
-
 
         // Choose Combat Contract Page Logic
         #region
