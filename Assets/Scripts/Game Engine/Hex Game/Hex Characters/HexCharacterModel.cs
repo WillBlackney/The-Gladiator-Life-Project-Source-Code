@@ -42,16 +42,16 @@ namespace HexGameEngine.Characters
         public LevelNode currentTile;
 
         [Header("Item Data References")]
-        [HideInInspector] public ItemSet itemSet;
+        public ItemSet itemSet;
 
         [Header("View Components Properties ")]
         public HexCharacterView hexCharacterView;
 
         [Header("Model Component References")]
-        [HideInInspector] public PerkManagerModel pManager;
+        public PerkManagerModel pManager;
 
         [Header("Data References")]
-        [HideInInspector] public HexCharacterData characterData;
+        public HexCharacterData characterData;
 
         [Header("Misc")]
         public bool hasMadeTurn;
@@ -59,7 +59,7 @@ namespace HexGameEngine.Characters
         public bool hasRequestedTurnDelay;    
         public bool hasDelayedPreviousTurn;
         public bool wasSummonedThisTurn = false;
-        [HideInInspector] public List<VisualEvent> eventStacks = new List<VisualEvent>();
+        public List<VisualEvent> eventStacks = new List<VisualEvent>();
 
         [Header("Turn Related + Temp Properties")]
         public int tilesMovedThisTurn;
@@ -81,14 +81,20 @@ namespace HexGameEngine.Characters
         public List<Perk> permanentInjuriesGainedThisCombat = new List<Perk>();
 
         // Abilities
-        [HideInInspector] public AbilityBook abilityBook;
+        public AbilityBook abilityBook;
 
-        [HideInInspector] public List<TalentPairing> talentPairings = new List<TalentPairing>();
+        public List<TalentPairing> talentPairings = new List<TalentPairing>();
 
         // Stack Event Logic
         #region
         public VisualEvent GetLastStackEventParent()
         {
+            /*
+            if (eventStacks.Count > 0) return eventStacks[eventStacks.Count - 1];
+            else
+            {
+
+            }*/
             return eventStacks.Count > 0 ? eventStacks[eventStacks.Count - 1] : null;
         }
         #endregion

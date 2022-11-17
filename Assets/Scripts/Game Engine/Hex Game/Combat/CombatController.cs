@@ -978,13 +978,7 @@ namespace HexGameEngine.Combat
                 removedBarrier = true;
             }
 
-            // Reduce health + armour
-            /*
-            HexCharacterController.Instance.ModifyHealth(target, -totalHealthLost);
-            HexCharacterController.Instance.ModifyArmour(target, -totalArmourLost);
-            target.healthLostThisCombat += totalHealthLost;
-            target.healthLostThisTurn += totalHealthLost;*/
-
+            // Set crit result
             bool didCrit = false;
             if (damageResult != null && damageResult.didCrit)
                 didCrit = true;

@@ -145,7 +145,7 @@ namespace HexGameEngine.Items
             float yOffset = rect.rect.height / 2;
 
             rect.position = view.transform.position;
-            rect.localPosition = new Vector3(rect.localPosition.x - xOffset, rect.localPosition.y + yOffset, 0);
+            rect.localPosition = new Vector3(rect.localPosition.x + xOffset, rect.localPosition.y + yOffset, 0);
         }
         private void PlacePanelAtRosterItemSlotPosition(RosterItemSlot view)
         {

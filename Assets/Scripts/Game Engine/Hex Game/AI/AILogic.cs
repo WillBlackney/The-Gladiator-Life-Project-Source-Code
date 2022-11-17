@@ -115,10 +115,26 @@ namespace HexGameEngine.AI
             // Move to Engage in Melee
             else if(directive.action.actionType == AIActionType.MoveToEngageInMelee)
             {
+                List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
+                List<LevelNode> targetMeleeTiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1);
+                Path bestPath = null;
+
+                foreach (Path p in allPossiblePaths)
+                {
+                    if (targetMeleeTiles.Contains(p.Destination) &&
+                        MoveActionController.Instance.GetFreeStrikersAndSpearWallStrikersOnPath(character, p).Count == 0)
+                    {
+                        bestPath = p;
+                        break;
+                    }
+                }
+
                 // Able to move and not already engaged with target
-                if(!HexCharacterController.Instance.IsCharacterAbleToMove(character) || 
+                if (!HexCharacterController.Instance.IsCharacterAbleToMove(character) || 
                     target == null ||
-                    target.currentTile.Distance(character.currentTile) <= 1)
+                    target.currentTile.Distance(character.currentTile) <= 1 ||
+                    bestPath == null
+                    )
                 {
                     return false;
                 }
@@ -133,11 +149,33 @@ namespace HexGameEngine.AI
                 {
                     AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
                     range = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
-                }                
+                }
+
+                //
+
+                // Set up
+                List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
+                List<LevelNode> targetShootRangeTiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, range);
+                int currentClosestDistance = 1000;
+                Path bestPath = null;
+
+                foreach (Path p in allPossiblePaths)
+                {
+                    if (targetShootRangeTiles.Contains(p.Destination) &&
+                        p.HexsOnPath.Count < currentClosestDistance &&
+                        MoveActionController.Instance.GetFreeStrikersAndSpearWallStrikersOnPath(character, p).Count == 0)
+                    {
+                        currentClosestDistance = p.HexsOnPath.Count;
+                        bestPath = p;
+                    }
+                }
+
+                //
 
                 if (target == null || 
                     !HexCharacterController.Instance.IsCharacterAbleToMove(character) ||
-                    target.currentTile.Distance(character.currentTile) <= range)
+                    target.currentTile.Distance(character.currentTile) <= range || 
+                    bestPath == null)
                 {
                     return false;
                 }
@@ -185,7 +223,7 @@ namespace HexGameEngine.AI
                     }
                 }
 
-                if (bestPath != null)
+                if (bestPath == null)
                 {
                     return false;
                 }
@@ -448,7 +486,8 @@ namespace HexGameEngine.AI
 
                 foreach (Path p in allPossiblePaths)
                 {
-                    if (targetMeleeTiles.Contains(p.Destination))
+                    if (targetMeleeTiles.Contains(p.Destination)
+                        )
                     {
                         bestPath = p;
                         break;

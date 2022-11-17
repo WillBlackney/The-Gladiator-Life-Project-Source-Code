@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fc18e607558964b9506f2b2cdb1260, type: 3}
+  m_Name: Testing Character 2
+  m_EditorClassIdentifier: 
+  myName: Testy 2
+  myClassName: The Test Guy 2
+  race: 3
+  modelSize: 0
+  attributeSheet:
+    might:
+      value: 0
+      stars: 0
+    constitution:
+      value: 80
+      stars: 0
+    dodge:
+      value: 50
+      stars: 0
+    accuracy:
+      value: 200
+      stars: 0
+    resolve:
+      value: 5
+      stars: 0
+    fatigue:
+      value: 60
+      stars: 0
+    wits:
+      value: 5
+      stars: 0
+    maxHealth: 0
+    apRecovery: 20
+    maxAp: 20
+    initiative: 100
+    fatigueRecovery: 8
+    criticalChance: 100
+    criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
+    auraSize: 1
+    vision: 5
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+    deathResistance: 25
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: a8709026bde6ab046a0b8aaf6d8b9785, type: 2}
+  serializedPassiveManager:
+    perks:
+    - perkTag: 200
+      stacks: 1
+  modelParts:
+  - Ghoul_Chest
+  - Undead_Face_6
+  - Undead_Head_4
+  - Ghoul_Right_Leg
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 335c81cb722666345aa6c308b1d780f5, type: 2}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  talentPairings: []

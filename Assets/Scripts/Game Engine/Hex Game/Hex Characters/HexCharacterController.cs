@@ -1946,6 +1946,7 @@ namespace HexGameEngine.Characters
             {
                 if (h.myCharacter != null &&
                     !IsTargetFriendly(target, h.myCharacter) &&
+                    IsCharacterAbleToTakeActions(h.myCharacter) &&
                     h.myCharacter.itemSet.mainHandItem != null &&
                     h.myCharacter.itemSet.mainHandItem.IsMeleeWeapon)
                     attackers++;
@@ -1960,12 +1961,12 @@ namespace HexGameEngine.Characters
             if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Footwork))
                 return 0;
 
-            // +10 Accuracy from flanking
+            // +5 Accuracy from flanking, per ally attacker
             if (IsCharacterFlanked(target))
             {
-                bonusRet = 10 * (GetTotalFlankingCharactersOnTarget(target) - 1);
+                bonusRet = 5 * (GetTotalFlankingCharactersOnTarget(target) - 1);
 
-                // +5 characters with opportunist perk
+                // Additonal +5 Accuracy for characters with Opportunist perk
                 if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Opportunist))
                     bonusRet += 5;
 
@@ -1987,13 +1988,10 @@ namespace HexGameEngine.Characters
                 // Add base back strike bonus
                 bonusRet += 10;
 
-                // Bonus is doubled for characters with opportunist perk
+                // Bonus is increased for characters with Opportunist perk
                 if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Opportunist) &&
                     !IsCharacterFlanked(target)) // prevent doubling of opportunist buff if target is both flanked and backstruck
                     bonusRet += 5;
-
-                // Backstriked characters dont benefit from dodge stat
-                bonusRet += StatCalculator.GetTotalDodge(target);
             }
 
             return bonusRet;

@@ -363,7 +363,6 @@ namespace HexGameEngine.Abilities
         }
         private void TriggerAbilityEffect(AbilityData ability, AbilityEffect abilityEffect, HexCharacterModel caster, HexCharacterModel target, LevelNode tileTarget = null, HexCharacterModel previousChainTarget = null)
         {
-
             //bool effectSuccessful = false;
             bool triggerEffectEndEvents = true;
 
@@ -583,23 +582,11 @@ namespace HexGameEngine.Abilities
                 List<HexCharacterModel> charactersHit = new List<HexCharacterModel>();
 
                 // Get Aoe Area
-                if (abilityEffect.aoeType == AoeType.Aura)
-                {
-                    tilesEffected = HexCharacterController.Instance.GetCharacterAura(caster, true);
-                }
-                else if (abilityEffect.aoeType == AoeType.ZoneOfControl)
-                {
-                    tilesEffected = HexCharacterController.Instance.GetCharacterZoneOfControl(caster);
-                }
-                else if (abilityEffect.aoeType == AoeType.AtTarget)
-                {
-                    tilesEffected = LevelController.Instance.GetAllHexsWithinRange(tileTarget, abilityEffect.aoeSize, true);
-                }
-                else if (abilityEffect.aoeType == AoeType.Global)
-                {
-                    tilesEffected.AddRange(LevelController.Instance.AllLevelNodes.ToList());
-                }
-
+                if (abilityEffect.aoeType == AoeType.Aura) tilesEffected = HexCharacterController.Instance.GetCharacterAura(caster, true);                
+                else if (abilityEffect.aoeType == AoeType.ZoneOfControl) tilesEffected = HexCharacterController.Instance.GetCharacterZoneOfControl(caster);                
+                else if (abilityEffect.aoeType == AoeType.AtTarget) tilesEffected = LevelController.Instance.GetAllHexsWithinRange(tileTarget, abilityEffect.aoeSize, true);                
+                else if (abilityEffect.aoeType == AoeType.Global) tilesEffected.AddRange(LevelController.Instance.AllLevelNodes.ToList());
+                
                 // Remove centre point, if needed
                 if (abilityEffect.includeCentreTile == false)
                 {
@@ -631,7 +618,6 @@ namespace HexGameEngine.Abilities
                 // Roll for hits + play on Hit animations or on miss animations
                 foreach (HexCharacterModel character in charactersEffected)
                 {
-                    //character.eventStacks.Add(VisualEventManager.Instance.CreateStackParentVisualEvent(character));
                     VisualEventManager.Instance.CreateStackParentVisualEvent(character);
 
                     // Roll for hit
@@ -661,8 +647,6 @@ namespace HexGameEngine.Abilities
                         {
                             if (character.hexCharacterView != null) pos = character.hexCharacterView.WorldPosition;
                             VisualEffectManager.Instance.CreateStatusEffect(pos, "MISS");
-                            
-
                         }, QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
 
                         // Check Evasion
@@ -675,7 +659,7 @@ namespace HexGameEngine.Abilities
 
                         // Duck animation on miss
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                       HexCharacterController.Instance.PlayDuckAnimation(character.hexCharacterView), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                            HexCharacterController.Instance.PlayDuckAnimation(character.hexCharacterView), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
                     }                    
 
                 }
