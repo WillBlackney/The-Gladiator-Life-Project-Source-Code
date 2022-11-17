@@ -120,7 +120,7 @@ namespace HexGameEngine
             InventoryController.Instance.PopulateInventoryWithMockDataItems(20);
         }
         private void RunSandboxCombat()
-        {
+        {            
             // Set state
             SetGameState(GameState.CombatActive); 
 
@@ -139,33 +139,21 @@ namespace HexGameEngine
             GlobalSettings.Instance.ApplyStartingXPBonus();
 
             // Enable world view
-            bool dayTime = true;
-            if (RandomGenerator.NumberBetween(1, 2) == 1) dayTime = false;
-            if (dayTime)
-            {
-                LightController.Instance.EnableDayTimeGlobalLight();
-                LevelController.Instance.EnableDayTimeArenaScenery();
-            }
-            else
-            {
-                //LightController.Instance.EnableNightTimeGlobalLight();
-                //LevelController.Instance.EnableNightTimeArenaScenery();
-                LightController.Instance.EnableDayTimeGlobalLight();
-                LevelController.Instance.EnableDayTimeArenaScenery();
-            }          
+            LightController.Instance.EnableDayTimeGlobalLight();
+            LevelController.Instance.EnableDayTimeArenaScenery();
             LevelController.Instance.ShowAllNodeViews();
-            LevelController.Instance.SetLevelNodeDayOrNightViewState(dayTime);
+            LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
 
             // Randomize level node elevation and obstructions
-            LevelController.Instance.GenerateLevelNodes();
-            
-
-            // Setup player characters
-            HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
+            RunController.Instance.SetCurrentCombatMapData(LevelController.Instance.GenerateLevelNodes());
 
             // Generate enemy wave + enemies data + save to run controller
             CombatContractData sandboxContractData = TownController.Instance.GenerateSandboxContractData();
             RunController.Instance.SetCurrentContractData(sandboxContractData);
+            PersistencyController.Instance.AutoUpdateSaveFile();
+
+            // Setup player characters
+            HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
 
             // Spawn enemies in world
             HexCharacterController.Instance.SpawnEnemyEncounter(sandboxContractData.enemyEncounterData);            
@@ -203,22 +191,10 @@ namespace HexGameEngine
             GlobalSettings.Instance.ApplyStartingXPBonus();
 
             // Enable world view
-            bool dayTime = true;
-            if (RandomGenerator.NumberBetween(1, 2) == 1) dayTime = false;
-            if (dayTime)
-            {
-                LightController.Instance.EnableDayTimeGlobalLight();
-                LevelController.Instance.EnableDayTimeArenaScenery();
-            }
-            else
-            {
-                //LightController.Instance.EnableNightTimeGlobalLight();
-                // LevelController.Instance.EnableNightTimeArenaScenery();
-                LightController.Instance.EnableDayTimeGlobalLight();
-                LevelController.Instance.EnableDayTimeArenaScenery();
-            }
+            LightController.Instance.EnableDayTimeGlobalLight();
+            LevelController.Instance.EnableDayTimeArenaScenery();
             LevelController.Instance.ShowAllNodeViews();
-            LevelController.Instance.SetLevelNodeDayOrNightViewState(dayTime);
+            LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
 
             // Setup player characters
             HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
@@ -243,7 +219,32 @@ namespace HexGameEngine
             // Set state
             SetGameState(GameState.CombatRewardPhase);
 
-            // wait until v queue count = 0
+            // Determine characters to reward XP to
+            List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();
+            foreach (HexCharacterModel character in HexCharacterController.Instance.AllDefenders)
+            {
+                if (character.livingState == LivingState.Alive && character.currentHealth > 0)
+                    charactersRewarded.Add(character);
+            }
+            foreach (HexCharacterModel character in HexCharacterController.Instance.Graveyard)
+            {
+                if (character.controller == Controller.Player)
+                    charactersRewarded.Add(character);
+            }
+
+            // Reward XP, build and show combat stats screen
+            List<CharacterCombatStatData> combatStats = CombatRewardController.Instance.GenerateCombatStatResultsForCharacters(charactersRewarded, true);
+            CombatRewardController.Instance.CacheStatResult(combatStats);
+            CombatRewardController.Instance.ApplyXpGainFromStatResultsToCharacters(combatStats);           
+
+            // Gain loot
+            CombatRewardController.Instance.HandleGainRewardsOfContract(RunController.Instance.CurrentCombatContractData);
+
+            // Save game
+            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatEnd);
+            PersistencyController.Instance.AutoUpdateSaveFile();
+
+            // Wait until v queue count = 0
             yield return new WaitUntil(() => VisualEventManager.Instance.EventQueue.Count == 0);
 
             // Tear down summoned characters
@@ -278,28 +279,8 @@ namespace HexGameEngine
             AbilityPopupController.Instance.HidePanel();
             MoveActionController.Instance.HidePathCostPopup();
 
-            // Determine characters to reward XP to
-            List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();
-            foreach (HexCharacterModel character in HexCharacterController.Instance.AllDefenders)
-            {
-                if (character.livingState == LivingState.Alive && character.currentHealth > 0)
-                    charactersRewarded.Add(character);
-            }
-            foreach (HexCharacterModel character in HexCharacterController.Instance.Graveyard)
-            {
-                if (character.controller == Controller.Player)
-                    charactersRewarded.Add(character);
-            }
-
-            // Reward XP, build and show combat stats screen
-            List<CharacterCombatStatData> combatStats = CombatRewardController.Instance.GenerateCombatStatResultsForCharacters(charactersRewarded, true);
-            CombatRewardController.Instance.CacheStatResult(combatStats);
-            CombatRewardController.Instance.ApplyXpGainFromStatResultsToCharacters(combatStats);
+            // Show combat screen
             CombatRewardController.Instance.BuildAndShowPostCombatScreen(combatStats, RunController.Instance.CurrentCombatContractData, true);
-
-            // Gain loot
-            CombatRewardController.Instance.HandleGainRewardsOfContract(RunController.Instance.CurrentCombatContractData);
-
         }
         public void StartCombatDefeatSequence()
         {
@@ -420,18 +401,20 @@ namespace HexGameEngine
         }
         private IEnumerator HandlePostCombatToTownTransistionCoroutine()
         {
+            // Prepare town + new day start data + save game
+            RunController.Instance.OnNewDayStart();
+            RunController.Instance.SetCheckPoint(SaveCheckPoint.Town);
+            PersistencyController.Instance.AutoUpdateSaveFile();
+
             // Fade out
             BlackScreenController.Instance.FadeOutScreen(1f);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1f);                        
 
             // Tear down combat views
             HexCharacterController.Instance.HandleTearDownCombatScene();
             LevelController.Instance.HandleTearDownAllCombatViews();
             LightController.Instance.EnableStandardGlobalLight();
-            CombatRewardController.Instance.HidePostCombatRewardScreen();
-
-            // town new day start stuff
-            bool newChapter = RunController.Instance.OnNewDayStart();           
+            CombatRewardController.Instance.HidePostCombatRewardScreen();            
 
             // Show town UI
             TownController.Instance.ShowTownView();
@@ -440,20 +423,11 @@ namespace HexGameEngine
 
             // Reset+ Centre camera
             CameraController.Instance.ResetMainCameraPositionAndZoom();
-
-            // Save game
-            PersistencyController.Instance.AutoUpdateSaveFile();
-
+                        
             // Fade back in views + sound
             yield return new WaitForSeconds(0.5f);
             AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
             BlackScreenController.Instance.FadeInScreen(1f);
-
-            // Show choose rep screen?
-            if (newChapter)
-            {
-                ReputationController.Instance.BuildAndShowReputationRewardScreen();
-            }
         }
         #endregion
 
@@ -578,12 +552,12 @@ namespace HexGameEngine
             // Fade menu music
             if (AudioManager.Instance.IsSoundPlaying(Sound.Music_Main_Menu_Theme_1))
             {
-                AudioManager.Instance.FadeOutSound(Sound.Music_Main_Menu_Theme_1, 2f);
+                AudioManager.Instance.FadeOutSound(Sound.Music_Main_Menu_Theme_1, 1f);
             }
 
             // Fade out menu scren
-            BlackScreenController.Instance.FadeOutScreen(2f);
-            yield return new WaitForSeconds(2f);
+            BlackScreenController.Instance.FadeOutScreen(1f);
+            yield return new WaitForSeconds(1f);
 
             // Build and prepare all session data
             PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();         
@@ -616,26 +590,14 @@ namespace HexGameEngine
                 SetGameState(GameState.CombatActive);
                 LevelController.Instance.GenerateLevelNodes(RunController.Instance.CurrentCombatMapData);
 
-                // Determine if night time or daytime combat
-                bool dayTime = RandomGenerator.NumberBetween(1, 2) == 1;
-                if (dayTime)
-                {
-                    LightController.Instance.EnableDayTimeGlobalLight();
-                    LevelController.Instance.EnableDayTimeArenaScenery();
-                }
-                else
-                {
-                    LightController.Instance.EnableDayTimeGlobalLight();
-                    LevelController.Instance.EnableDayTimeArenaScenery();
-                }
+                // Set up combat level views + lighting
+                LightController.Instance.EnableDayTimeGlobalLight();
+                LevelController.Instance.EnableDayTimeArenaScenery();
                 LevelController.Instance.ShowAllNodeViews();
-                LevelController.Instance.SetLevelNodeDayOrNightViewState(dayTime);
+                LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
 
                 // Setup player characters
-                List<HexCharacterData> spawnedPlayerCharacters = new List<HexCharacterData>();
-                foreach (CharacterWithSpawnData c in RunController.Instance.CurrentDeployedCharacters)
-                    spawnedPlayerCharacters.Add(c.characterData);
-                HexCharacterController.Instance.CreateAllPlayerCombatCharacters(spawnedPlayerCharacters);
+                HexCharacterController.Instance.CreateAllPlayerCombatCharacters(RunController.Instance.CurrentDeployedCharacters);
 
                 // Setup enemy characters
                 HexCharacterController.Instance.SpawnEnemyEncounter(RunController.Instance.CurrentCombatContractData.enemyEncounterData);
@@ -652,9 +614,19 @@ namespace HexGameEngine
             }
             else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatEnd)
             {
+                SetGameState(GameState.CombatRewardPhase);
+                TopBarController.Instance.ShowCombatTopBar();
+                BlackScreenController.Instance.FadeInScreen(1f);
 
+                // Set up combat level views + lighting
+                LightController.Instance.EnableDayTimeGlobalLight();
+                LevelController.Instance.EnableDayTimeArenaScenery();
+                LevelController.Instance.ShowAllNodeViews();
+                LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
+
+                // Show combat screen
+                CombatRewardController.Instance.BuildAndShowPostCombatScreen(CombatRewardController.Instance.CurrentStatResults, RunController.Instance.CurrentCombatContractData, true);
             }
-            // TO DO : FIX ALL THIS!! load into combat not working
         }
         public void OnGameOverScreenMainMenuButtonClicked()
         {
@@ -694,28 +666,17 @@ namespace HexGameEngine
             // Save game data
             PersistencyController.Instance.AutoUpdateSaveFile();
 
-            // Determine if night time or daytime combat
-            bool dayTime = RandomGenerator.NumberBetween(1, 2) == 1;
-            if (dayTime)
-            {
-                LightController.Instance.EnableDayTimeGlobalLight();
-                LevelController.Instance.EnableDayTimeArenaScenery();
-            }
-            else
-            {
-               // LightController.Instance.EnableNightTimeGlobalLight();
-                //LevelController.Instance.EnableNightTimeArenaScenery();
-                LightController.Instance.EnableDayTimeGlobalLight();
-                LevelController.Instance.EnableDayTimeArenaScenery();
-            }
+            // Setup level + lighting
+            LightController.Instance.EnableDayTimeGlobalLight();
+            LevelController.Instance.EnableDayTimeArenaScenery();
             LevelController.Instance.ShowAllNodeViews();
-            LevelController.Instance.SetLevelNodeDayOrNightViewState(dayTime);
+            LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
 
             // Setup player characters
-            List<HexCharacterData> spawnedPlayerCharacters = new List<HexCharacterData>();
-            foreach(CharacterWithSpawnData c in RunController.Instance.CurrentDeployedCharacters)            
-                spawnedPlayerCharacters.Add(c.characterData);            
-            HexCharacterController.Instance.CreateAllPlayerCombatCharacters(spawnedPlayerCharacters);
+           // List<HexCharacterData> spawnedPlayerCharacters = new List<HexCharacterData>();
+           // foreach(CharacterWithSpawnData c in RunController.Instance.CurrentDeployedCharacters)            
+            //    spawnedPlayerCharacters.Add(c.characterData);            
+            HexCharacterController.Instance.CreateAllPlayerCombatCharacters(RunController.Instance.CurrentDeployedCharacters);
 
             // Setup enemy characters
             HexCharacterController.Instance.SpawnEnemyEncounter(RunController.Instance.CurrentCombatContractData.enemyEncounterData);

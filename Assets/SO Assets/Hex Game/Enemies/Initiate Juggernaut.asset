@@ -174,7 +174,7 @@ MonoBehaviour:
         targettingPriority: 02000000
         getRangeFromAbility: 0
         range: 0
-        abilityName: Shield Wall
+        abilityName: Raise Shield
       requirements:
       - requirementType: 3
         range: 0

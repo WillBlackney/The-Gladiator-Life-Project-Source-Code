@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
   m_Name: Initiate Bruiser
   m_EditorClassIdentifier: 
-  myName: Initiate Juggernaut
+  myName: Initiate Bruiser
   race: 1
   modelSize: 2
   xpReward: 15

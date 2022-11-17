@@ -104,23 +104,17 @@ namespace HexGameEngine.Characters
             {
                 if(c.currentHealth > 0)
                 {
-                    LevelNode spawnPos = null;
-                    foreach(CharacterWithSpawnData cw in RunController.Instance.CurrentDeployedCharacters)
-                    {
-                        LevelNode n = LevelController.Instance.GetHexAtGridPosition(cw.spawnPosition);
-                        if (cw != null && 
-                            cw.characterData == c && 
-                            n != null &&
-                            Pathfinder.IsHexSpawnable(n))
-                        {
-                            spawnPos = n;
-                            break;
-                        }
-                    }
-                    if (spawnPos == null)
-                        spawnPos = LevelController.Instance.GetRandomSpawnableLevelNode(LevelController.Instance.GetPlayerSpawnZone());
+                    LevelNode spawnPos = LevelController.Instance.GetRandomSpawnableLevelNode(LevelController.Instance.GetPlayerSpawnZone());
                     CreatePlayerHexCharacter(c, spawnPos);
                 }
+            }
+        }
+        public void CreateAllPlayerCombatCharacters(List<CharacterWithSpawnData> characters)
+        {
+            foreach (CharacterWithSpawnData cw in characters)
+            {
+                if (cw.characterData.currentHealth <= 0 == false)                
+                    CreatePlayerHexCharacter(cw.characterData, LevelController.Instance.GetHexAtGridPosition(cw.spawnPosition));
             }
         }
         public void CreatePlayerHexCharacter(HexCharacterData data, LevelNode startPosition)

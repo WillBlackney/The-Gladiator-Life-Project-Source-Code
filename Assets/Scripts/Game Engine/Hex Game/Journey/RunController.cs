@@ -118,7 +118,7 @@ namespace HexGameEngine.JourneyLogic
             // Generate and apply effect of new random town events 
 
             // Generate new daily recruits
-            TownController.Instance.GenerateDailyRecruits(RandomGenerator.NumberBetween(4,6));
+            TownController.Instance.GenerateDailyRecruits(RandomGenerator.NumberBetween(6,8));
 
             // Generate new combat contracts
             TownController.Instance.GenerateDailyCombatContracts();
