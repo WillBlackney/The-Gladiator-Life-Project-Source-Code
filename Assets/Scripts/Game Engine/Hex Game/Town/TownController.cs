@@ -626,11 +626,10 @@ namespace HexGameEngine.TownFeatures
         public void HandleBuyItemFromArmoury(ItemShopData data)
         {
             // Pay gold cost
-            PlayerDataController.Instance.ModifyPlayerGold(-data.goldCost);
+            PlayerDataController.Instance.ModifyPlayerGold(-data.GoldCost);
 
             // Add tome to inventory
-            InventoryController.Instance.AddItemToInventory(
-                InventoryController.Instance.CreateInventoryItemFromItemData(data.item));
+            InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(data.Item));
 
             // Remove from shop
             currentItems.Remove(data);
@@ -692,9 +691,11 @@ namespace HexGameEngine.TownFeatures
             for (int i = 0; i < initialItems.Count; i++)
             {
                 ItemData item = ItemController.Instance.GenerateNewItemWithRandomEffects(initialItems[i]);
+                Debug.Log("Initial base cost: " + item.baseGoldValue.ToString());
                 int lower = (int)(item.baseGoldValue * 0.95f);
                 int upper = (int)(item.baseGoldValue * 1.05f);
                 int finalCost = RandomGenerator.NumberBetween(lower, upper);
+                Debug.Log("Final cost: " + finalCost.ToString());
                 currentItems.Add(new ItemShopData(item, finalCost));
             }
 

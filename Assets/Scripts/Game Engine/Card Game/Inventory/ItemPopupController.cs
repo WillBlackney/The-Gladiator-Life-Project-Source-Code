@@ -89,7 +89,7 @@ namespace HexGameEngine.Items
         public void OnShopItemMousedOver(ItemShopSlot item)
         {
             FadeInPanel();
-            BuildPanelFromItemData(item.MyData.item);
+            BuildPanelFromItemData(item.MyData.Item);
             PlacePanelAtShopItemSlotPosition(item);
             ForceRebuildLayouts();
         }

@@ -976,8 +976,7 @@ namespace HexGameEngine.Characters
         private CharacterRace GetRandomRace(List<CharacterRace> validRaces)
         {
             return validRaces[RandomGenerator.NumberBetween(0, validRaces.Count - 1)];
-        }
-      
+        }      
         private void GetAndApplyRandomQuirksToCharacter(HexCharacterData character)
         {
             for(int i = 0; i < 2; i++)
