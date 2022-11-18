@@ -25,7 +25,7 @@ namespace HexGameEngine.AI
             bool successfulAction = TryTakeAction(character);
             int loops = 0;
 
-            while (successfulAction && loops < 100)
+            while (successfulAction && loops < 25)
             {
                 successfulAction = TryTakeAction(character);
             }
@@ -39,215 +39,248 @@ namespace HexGameEngine.AI
 
             foreach (AIDirective dir in character.aiTurnRoutine.directives)
             {
+                /*
                 if (IsDirectiveActionable(character, dir))
                 {
                     actionTaken = ExecuteDirective(character, dir);
                     if(actionTaken) break;
                 }
+                */
+                TargetPriorityTuple tpt = IsDirectiveActionable(character, dir);
+                if (tpt != null)
+                {
+                    actionTaken = ExecuteDirective(character, dir, tpt.Target);
+                    if (actionTaken) break;
+                }
             }
 
             return actionTaken;
         }
-        private static bool IsDirectiveActionable(HexCharacterModel character, AIDirective directive)
+        private static TargetPriorityTuple IsDirectiveActionable(HexCharacterModel character, AIDirective directive)
         {
-            // TO DO: add logic: if cant find the specified type of target (GetClosestEnemy,GetMostVulnerable, etc)
-            // the auto targetting should just try get the next best target if possible.
-
-            //bool bRet = true;
-            TargetPriorityTuple tpv = HandleAutoTargetCharacter(character, directive);
-            HexCharacterModel target = tpv.Target;
-            TargettingPriority priority = tpv.Priority;
-
-            // Evaluate default conditions first
-            // Ability usage
-            if (directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
+            // NON TARGETTABLE DIRECTIVES
+            // Delay turn
+            if (directive.action.actionType == AIActionType.DelayTurn)
             {
-                if (target == null && priority != TargettingPriority.None) 
+                // Prevent turn delay if already already delayed, last to act, or if there are no player characters still waiting to take their turn.
+                if (character.hasRequestedTurnDelay ||
+                    TurnController.Instance.ActivationOrder[TurnController.Instance.ActivationOrder.Count - 1] == character ||
+                    !AreAnyPlayerCharactersActivatingAfterMe(character)) return null;
+
+                foreach (AIActionRequirement req in directive.requirements)
                 {
-                    Debug.Log("AILogic.IsDirectiveActionable() returning false: target is null for action type " + directive.action.actionType);
-                    return false; 
-                }
-
-                // Check ability useability
-                AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
-                if (ability == null)
-                    Debug.Log("AILogic.IsDirectiveActionable() could not find the ability '" + directive.action.abilityName +
-                        "' in the AI's spell book...");
-
-                if(!AbilityController.Instance.IsAbilityUseable(character, ability))
-                {
-                    Debug.Log("AILogic.IsDirectiveActionable() ability '" + directive.action.abilityName +
-                       "' is not useable");
-                    return false;
-                }
-
-                // Check target validity
-                if(ability.targetRequirement != TargetRequirement.NoTarget &&
-                   !AbilityController.Instance.IsTargetOfAbilityValid(character, target, ability))
-                {
-                    Debug.Log("AILogic.IsDirectiveActionable() target of ability '" + directive.action.abilityName +
-                      "' is not valid");
-                    return false;
-                }
-            }
-
-            // Summoning ability usage
-            else if (directive.action.actionType == AIActionType.UseCharacterTargettedSummonAbility)
-            {
-                // Check ability useability
-                AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
-                if (ability == null)
-                {
-                    Debug.Log("AILogic.IsDirectiveActionable() could not find the ability '" + directive.action.abilityName +
-                       "' in the AI's spell book...");
-                    return false;
-                }
-                   
-
-                if (!AbilityController.Instance.IsAbilityUseable(character, ability))
-                {
-                    Debug.Log("AILogic.IsDirectiveActionable() ability '" + directive.action.abilityName +
-                       "' is not useable");
-                    return false;
-                }
-            }
-
-            // Move to Engage in Melee
-            else if(directive.action.actionType == AIActionType.MoveToEngageInMelee)
-            {
-                List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
-                List<LevelNode> targetMeleeTiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1);
-                Path bestPath = null;
-
-                foreach (Path p in allPossiblePaths)
-                {
-                    if (targetMeleeTiles.Contains(p.Destination) &&
-                        MoveActionController.Instance.GetFreeStrikersAndSpearWallStrikersOnPath(character, p).Count == 0)
+                    if (!IsActionRequirementMet(character, req, null))
                     {
-                        bestPath = p;
+                        return null;
+                    }
+                }
+
+                // Return empty tpt data to indicate delay turn directive is valid
+                return new TargetPriorityTuple(null, TargettingPriority.None);
+            }
+
+            // TARGETTABLE DIRECTIVES
+            List<TargetPriorityTuple> possibleTargets = GetValidTargetsOrderedByPriority(character, directive);
+            TargetPriorityTuple validDirective = null;
+
+            foreach (TargetPriorityTuple tpt in possibleTargets)
+            {
+                bool passedInitialsReqs = true;
+                foreach (AIActionRequirement req in directive.requirements)
+                {
+                    if (!IsActionRequirementMet(character, req, tpt.Target))
+                    {
+                        passedInitialsReqs = false;
                         break;
                     }
                 }
+                if (passedInitialsReqs == false) continue;
 
-                // Able to move and not already engaged with target
-                if (!HexCharacterController.Instance.IsCharacterAbleToMove(character) || 
-                    target == null ||
-                    target.currentTile.Distance(character.currentTile) <= 1 ||
-                    bestPath == null
-                    )
+                // Ability usage
+                if (directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
                 {
-                    return false;
-                }
-            }
+                    if (tpt.Target == null && tpt.Priority != TargettingPriority.None)
+                    {
+                        Debug.Log("AILogic.IsDirectiveActionable() returning false: target is null for action type " + directive.action.actionType);
+                        continue;
+                    }
 
-            // Move into range of target
-            else if (directive.action.actionType == AIActionType.MoveIntoRangeOfTarget)
-            {
-                // Ablility to move 
-                int range = directive.action.range;
-                if (directive.action.getRangeFromAbility)
-                {
+                    // Check ability useability
                     AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
-                    range = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
-                }
-
-                //
-
-                // Set up
-                List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
-                List<LevelNode> targetShootRangeTiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, range);
-                int currentClosestDistance = 1000;
-                Path bestPath = null;
-
-                foreach (Path p in allPossiblePaths)
-                {
-                    if (targetShootRangeTiles.Contains(p.Destination) &&
-                        p.HexsOnPath.Count < currentClosestDistance &&
-                        MoveActionController.Instance.GetFreeStrikersAndSpearWallStrikersOnPath(character, p).Count == 0)
+                    if (!AbilityController.Instance.IsAbilityUseable(character, ability))
                     {
-                        currentClosestDistance = p.HexsOnPath.Count;
-                        bestPath = p;
+                        Debug.Log("AILogic.IsDirectiveActionable() ability '" + directive.action.abilityName +
+                           "' is not useable");
+                        continue;
                     }
-                }
 
-                //
-
-                if (target == null || 
-                    !HexCharacterController.Instance.IsCharacterAbleToMove(character) ||
-                    target.currentTile.Distance(character.currentTile) <= range || 
-                    bestPath == null)
-                {
-                    return false;
-                }
-            }
-
-            // Move To Elevation Closer To Enemy
-            else if (directive.action.actionType == AIActionType.MoveToElevationCloserToTarget)
-            {
-                // find all tiles that are
-                // 1. closer to the enemy than current position
-                // 2. are elevated
-                // 3. within energy/walk distance
-                // 4. would not subject the AI to free strikes
-                // after getting these positions, pick the one that is closest to the enemy.
-
-                if (target == null ||
-                   !HexCharacterController.Instance.IsCharacterAbleToMove(character))
-                {
-                    return false;
-                }
-
-                int distBetweenCharacters = character.currentTile.Distance(target.currentTile);
-                int bestCurrentDistance = 0;
-                Path bestPath = null;
-                List<LevelNode> possibleDestinations = new List<LevelNode>();
-
-                // Filter for possible destinations that are elevated and actually closer to the enemy than current position
-                foreach (LevelNode node in LevelController.Instance.AllLevelNodes)
-                {
-                    if (node.Elevation == TileElevation.Elevated && distBetweenCharacters > node.Distance(character.currentTile))
-                        possibleDestinations.Add(node);
-                }
-
-                // After filtering for elevated closer tiles, filter again by paths
-                // that wont result in a freestrike, and where the AI has the energy/capacity to move there
-                foreach (LevelNode node in possibleDestinations)
-                {
-                    Path p = Pathfinder.GetValidPath(character, character.currentTile, node, LevelController.Instance.AllLevelNodes.ToList());
-                    if (p != null &&
-                       p.Length > bestCurrentDistance &&
-                       MoveActionController.Instance.GetFreeStrikersAndSpearWallStrikersOnPath(character, p).Count == 0)
+                    // Check target validity
+                    if (ability.targetRequirement != TargetRequirement.NoTarget &&
+                       !AbilityController.Instance.IsTargetOfAbilityValid(character, tpt.Target, ability))
                     {
-                        bestCurrentDistance = p.Length;
-                        bestPath = p;
+                        Debug.Log("AILogic.IsDirectiveActionable() target of ability '" + directive.action.abilityName +
+                          "' is not valid");
+                        continue;
                     }
+
+                    validDirective = tpt;
                 }
 
-                if (bestPath == null)
+                // Summoning ability usage
+                else if (directive.action.actionType == AIActionType.UseCharacterTargettedSummonAbility)
                 {
-                    return false;
+                    // Check ability useability
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
+                    if (ability == null)
+                    {
+                        Debug.Log("AILogic.IsDirectiveActionable() could not find the ability '" + directive.action.abilityName +
+                           "' in the AI's spell book...");
+                        continue;
+                    }
+
+
+                    if (!AbilityController.Instance.IsAbilityUseable(character, ability))
+                    {
+                        Debug.Log("AILogic.IsDirectiveActionable() ability '" + directive.action.abilityName +
+                           "' is not useable");
+                        continue;
+                    }
+
+                    validDirective = tpt;
                 }
-            }
 
-            // Delay turn
-            else if(directive.action.actionType == AIActionType.DelayTurn)
-            {
-                // Prevent turn delay if already already delayed, last to act, or if there are no player characters still waiting to take their turn.
-                if (character.hasRequestedTurnDelay  ||
-                    TurnController.Instance.ActivationOrder[TurnController.Instance.ActivationOrder.Count - 1] == character ||
-                    !AreAnyPlayerCharactersActivatingAfterMe(character)) return false;
-            }
-
-            // Evaluate each user specified condition
-            foreach (AIActionRequirement req in directive.requirements)
-            {
-                if (!IsActionRequirementMet(character, req, target))
+                // Move to Engage in Melee
+                else if (directive.action.actionType == AIActionType.MoveToEngageInMelee)
                 {
-                    return false;
+                    List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
+                    List<LevelNode> targetMeleeTiles = LevelController.Instance.GetAllHexsWithinRange(tpt.Target.currentTile, 1);
+                    Path bestPath = null;
+                    int id = RandomGenerator.NumberBetween(1, 10000);
+                    Debug.LogWarning("IsDirectiveActionable() all possible paths for directive 'MoveToEngageInMelee' = " + allPossiblePaths.Count.ToString() + ", id: " + id.ToString());
+
+                    foreach (Path p in allPossiblePaths)
+                    {
+                        if (targetMeleeTiles.Contains(p.Destination) &&
+                            MoveActionController.Instance.GetFreeStrikersAndSpearWallStrikersOnPath(character, p).Count == 0)
+                        {
+                            Debug.LogWarning("IsDirectiveActionable() found valid path directive 'MoveToEngageInMelee', id: " + id.ToString());
+                            bestPath = p;
+                            break;
+                        }
+                    }
+
+                    // Able to move and not already engaged with target
+                    if (!HexCharacterController.Instance.IsCharacterAbleToMove(character) ||
+                        tpt.Target == null ||
+                        tpt.Target.currentTile.Distance(character.currentTile) <= 1 ||
+                        bestPath == null
+                        )
+                    {
+                        Debug.LogWarning("IsDirectiveActionable() directive 'MoveToEngageInMelee' returning false, id: " + id.ToString());
+                        continue;
+                    }
+
+                    validDirective = tpt;
                 }
+
+                // Move into range of target
+                else if (directive.action.actionType == AIActionType.MoveIntoRangeOfTarget)
+                {
+                    // Ablility to move 
+                    int range = directive.action.range;
+                    if (directive.action.getRangeFromAbility)
+                    {
+                        AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
+                        range = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
+                    }
+
+                    //
+
+                    // Set up
+                    List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
+                    List<LevelNode> targetShootRangeTiles = LevelController.Instance.GetAllHexsWithinRange(tpt.Target.currentTile, range);
+                    int currentClosestDistance = 1000;
+                    Path bestPath = null;
+
+                    foreach (Path p in allPossiblePaths)
+                    {
+                        if (targetShootRangeTiles.Contains(p.Destination) &&
+                            p.HexsOnPath.Count < currentClosestDistance &&
+                            MoveActionController.Instance.GetFreeStrikersAndSpearWallStrikersOnPath(character, p).Count == 0)
+                        {
+                            currentClosestDistance = p.HexsOnPath.Count;
+                            bestPath = p;
+                        }
+                    }
+
+                    //
+
+                    if (tpt.Target == null ||
+                        !HexCharacterController.Instance.IsCharacterAbleToMove(character) ||
+                        tpt.Target.currentTile.Distance(character.currentTile) <= range ||
+                        bestPath == null)
+                    {
+                        continue;
+                    }
+
+                    validDirective = tpt;
+                }
+
+                // Move To Elevation Closer To Enemy
+                else if (directive.action.actionType == AIActionType.MoveToElevationCloserToTarget)
+                {
+                    // find all tiles that are
+                    // 1. closer to the enemy than current position
+                    // 2. are elevated
+                    // 3. within energy/walk distance
+                    // 4. would not subject the AI to free strikes
+                    // after getting these positions, pick the one that is closest to the enemy.
+
+                    if (tpt.Target == null ||
+                       !HexCharacterController.Instance.IsCharacterAbleToMove(character))
+                    {
+                        continue;
+                    }
+
+                    int distBetweenCharacters = character.currentTile.Distance(tpt.Target.currentTile);
+                    int bestCurrentDistance = 0;
+                    Path bestPath = null;
+                    List<LevelNode> possibleDestinations = new List<LevelNode>();
+
+                    // Filter for possible destinations that are elevated and actually closer to the enemy than current position
+                    foreach (LevelNode node in LevelController.Instance.AllLevelNodes)
+                    {
+                        if (node.Elevation == TileElevation.Elevated && distBetweenCharacters > node.Distance(character.currentTile))
+                            possibleDestinations.Add(node);
+                    }
+
+                    // After filtering for elevated closer tiles, filter again by paths
+                    // that wont result in a freestrike, and where the AI has the energy/capacity to move there
+                    foreach (LevelNode node in possibleDestinations)
+                    {
+                        Path p = Pathfinder.GetValidPath(character, character.currentTile, node, LevelController.Instance.AllLevelNodes.ToList());
+                        if (p != null &&
+                           p.Length > bestCurrentDistance &&
+                           MoveActionController.Instance.GetFreeStrikersAndSpearWallStrikersOnPath(character, p).Count == 0)
+                        {
+                            bestCurrentDistance = p.Length;
+                            bestPath = p;
+                        }
+                    }
+
+                    if (bestPath == null)
+                    {
+                        continue;
+                    }
+
+                    validDirective = tpt;
+                }
+
+                // Found a valid directive, no point continuing the search
+                if (validDirective != null) break;
             }
 
-            return true;
+            return validDirective;
         }
         private static bool IsActionRequirementMet(HexCharacterModel character, AIActionRequirement req, HexCharacterModel target = null)
         {
@@ -399,22 +432,47 @@ namespace HexGameEngine.AI
 
         // Execute Directive Logic
         #region
-        private static bool ExecuteDirective(HexCharacterModel character, AIDirective directive)
+        private static bool ExecuteDirective(HexCharacterModel character, AIDirective directive, HexCharacterModel target)
         {
             bool actionTaken = false;
 
+            /*
             // Set up
-            TargetPriorityTuple tpv = HandleAutoTargetCharacter(character, directive);
-            HexCharacterModel target = tpv.Target;
-            TargettingPriority priority = tpv.Priority;
+            //TargetPriorityTuple tpv = HandleAutoTargetCharacter(character, directive);
+            TargetPriorityTuple tpv = null;
+            HexCharacterModel target = null;
+            TargettingPriority priority = TargettingPriority.None;
+            foreach (TargettingPriority tp in directive.action.targettingPriority)
+            {
+                tpv = TryGetTargetOfPriority(character, directive, tp);
+                if (tpv != null && tpv.Target != null)
+                {
+                    target = tpv.Target;
+                    priority = tpv.Priority;
+                    break;
+                }
+            }*/
 
-            if (directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
+            if (directive.action.actionType == AIActionType.DelayTurn)
+            {
+                // Delays status VFX
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "Delay Turn!"), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+
+                // Move character to the end of the turn order.
+                TurnController.Instance.HandleMoveCharacterToEndOfTurnOrder(character);
+                VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+
+                // Trigger character on activation end sequence and events
+                HexCharacterController.Instance.CharacterOnTurnEnd(character, true);
+                actionTaken = true;
+            }
+
+            else if (directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
             {
                 // Set up
                 AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
-
-                if (priority == TargettingPriority.Self)
-                    target = character;
 
                 // Check conditions, then use ability
                 if ( (target != null || (target == null && ability.targetRequirement == TargetRequirement.NoTarget)) && 
@@ -476,7 +534,6 @@ namespace HexGameEngine.AI
                     }
                 }
             }
-
 
             else if(directive.action.actionType == AIActionType.MoveToEngageInMelee)
             {
@@ -642,21 +699,7 @@ namespace HexGameEngine.AI
                 }
             }
 
-            else if(directive.action.actionType == AIActionType.DelayTurn)
-            {
-                // Delays status VFX
-                VisualEventManager.Instance.CreateVisualEvent(()=> 
-                VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "Delay Turn!"), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
-                VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
-
-                // Move character to the end of the turn order.
-                TurnController.Instance.HandleMoveCharacterToEndOfTurnOrder(character);
-                VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
-
-                // Trigger character on activation end sequence and events
-                HexCharacterController.Instance.CharacterOnTurnEnd(character, true);
-                actionTaken = true;
-            }
+           
 
             return actionTaken;
         }
@@ -665,6 +708,213 @@ namespace HexGameEngine.AI
 
         // Shared Misc AI Logic
         #region
+        private static List<TargetPriorityTuple> GetValidTargetsOrderedByPriority(HexCharacterModel attacker, AIDirective directive)
+        {
+            List<TargetPriorityTuple> ret = new List<TargetPriorityTuple>();
+
+            foreach(TargettingPriority tp in directive.action.targettingPriority)
+            {
+                HexCharacterModel target = null;
+
+                if (directive.action.actionType == AIActionType.MoveIntoRangeOfTarget ||
+                directive.action.actionType == AIActionType.MoveToEngageInMelee ||
+                directive.action.actionType == AIActionType.UseCharacterTargettedSummonAbility ||
+                directive.action.actionType == AIActionType.MoveToElevationCloserToTarget)
+                {
+                    if (tp == TargettingPriority.ClosestUnfriendlyTarget)
+                        target = GetClosestUnfriendlyCharacter(attacker);
+
+                    else if (tp == TargettingPriority.ClosestFriendlyTarget)
+                        target = GetClosestFriendlyCharacter(attacker);
+
+                    else if (tp == TargettingPriority.BestValidUnfriendlyTarget)
+                    {
+                        AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                        target = GetBestValidAttackTarget(attacker, ability);
+                    }
+
+                    else if (tp == TargettingPriority.RandomValidUnfriendlyTarget)
+                    {
+                        AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                        target = GetRandomValidAttackTarget(attacker, ability);
+                    }
+                    else if (tp == TargettingPriority.MostEndangeredValidFriendly)
+                    {
+                        AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                        target = GetMostEndangeredValidAlly(attacker, ability);
+                    }
+                }
+
+                // Check for taunted enemies first when using actions that require a target
+                else if (
+                    (tp == TargettingPriority.ClosestUnfriendlyTarget ||
+                    tp == TargettingPriority.BestValidUnfriendlyTarget ||
+                    tp == TargettingPriority.RandomValidUnfriendlyTarget) &&
+                    directive.action.abilityName != "" &&
+                    directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
+                {
+                    List<HexCharacterModel> tauntEnemies = new List<HexCharacterModel>();
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                    foreach (HexCharacterModel enemy in GetAllEnemiesWithinRange(attacker, AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker)))
+                    {
+                        if (AbilityController.Instance.IsTargetOfAbilityValid(attacker, enemy, ability) &&
+                            PerkController.Instance.DoesCharacterHavePerk(enemy.pManager, Perk.Taunt))
+                            tauntEnemies.Add(enemy);
+                    }
+
+                    // Pick a random taunt character
+                    if (tauntEnemies.Count > 1) target = tauntEnemies[RandomGenerator.NumberBetween(0, tauntEnemies.Count - 1)];
+                    else if (tauntEnemies.Count == 1) target = tauntEnemies[0];
+
+                    // No taunt enemies, just determine target normally
+                    else
+                    {
+                        if (tp == TargettingPriority.ClosestUnfriendlyTarget)
+                            target = GetClosestUnfriendlyCharacter(attacker);
+                        else if (tp == TargettingPriority.BestValidUnfriendlyTarget)
+                            target = GetBestValidAttackTarget(attacker, ability);
+                        else if (tp == TargettingPriority.RandomValidUnfriendlyTarget)
+                            target = GetRandomValidAttackTarget(attacker, ability);
+                    }
+                }
+
+                // Targetting allies
+                else if ((tp == TargettingPriority.RandomAlly ||
+                    tp == TargettingPriority.RandomAllyOrSelf ||
+                    tp == TargettingPriority.MostEndangeredValidFriendly) &&
+                    directive.action.abilityName != "" &&
+                    directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
+                {
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+
+                    if (tp == TargettingPriority.MostEndangeredValidFriendly)
+                    {
+                        target = GetMostEndangeredValidAlly(attacker, ability);
+                    }
+                    else
+                    {
+                        bool includeSelf = false;
+                        if (tp == TargettingPriority.RandomAllyOrSelf) includeSelf = true;
+                        List<HexCharacterModel> allies = new List<HexCharacterModel>();
+                        foreach (HexCharacterModel ally in GetAllAlliesWithinRange(attacker, AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker), includeSelf))
+                        {
+                            if (AbilityController.Instance.IsTargetOfAbilityValid(attacker, ally, ability))
+                                allies.Add(ally);
+                        }
+                        target = allies.GetRandomElement();
+                    }
+                }
+
+                else if (tp == TargettingPriority.Self)
+                    target = attacker;
+
+                if (target != null)
+                {
+                    ret.Add(new TargetPriorityTuple(target, tp));
+                }
+            }
+
+            return ret;
+        }
+        private static TargetPriorityTuple TryGetTargetOfPriority(HexCharacterModel attacker, AIDirective directive, TargettingPriority targettingPriority)
+        {
+            HexCharacterModel target = null;
+
+            if (directive.action.actionType == AIActionType.MoveIntoRangeOfTarget ||
+            directive.action.actionType == AIActionType.MoveToEngageInMelee ||
+            directive.action.actionType == AIActionType.UseCharacterTargettedSummonAbility ||
+            directive.action.actionType == AIActionType.MoveToElevationCloserToTarget)
+            {
+                if (targettingPriority == TargettingPriority.ClosestUnfriendlyTarget)
+                    target = GetClosestUnfriendlyCharacter(attacker);
+
+                else if (targettingPriority == TargettingPriority.ClosestFriendlyTarget)
+                    target = GetClosestFriendlyCharacter(attacker);
+
+                else if (targettingPriority == TargettingPriority.BestValidUnfriendlyTarget)
+                {
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                    target = GetBestValidAttackTarget(attacker, ability);
+                }
+
+                else if (targettingPriority == TargettingPriority.RandomValidUnfriendlyTarget)
+                {
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                    target = GetRandomValidAttackTarget(attacker, ability);
+                }
+                else if (targettingPriority == TargettingPriority.MostEndangeredValidFriendly)
+                {
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                    target = GetMostEndangeredValidAlly(attacker, ability);
+                }
+            }
+
+            // Check for taunted enemies first when using actions that require a target
+            else if (
+                (targettingPriority == TargettingPriority.ClosestUnfriendlyTarget ||
+                targettingPriority == TargettingPriority.BestValidUnfriendlyTarget ||
+                targettingPriority == TargettingPriority.RandomValidUnfriendlyTarget) &&
+                directive.action.abilityName != "" &&
+                directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
+            {
+                List<HexCharacterModel> tauntEnemies = new List<HexCharacterModel>();
+                AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                foreach (HexCharacterModel enemy in GetAllEnemiesWithinRange(attacker, AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker)))
+                {
+                    if (AbilityController.Instance.IsTargetOfAbilityValid(attacker, enemy, ability) &&
+                        PerkController.Instance.DoesCharacterHavePerk(enemy.pManager, Perk.Taunt))
+                        tauntEnemies.Add(enemy);
+                }
+
+                // Pick a random taunt character
+                if (tauntEnemies.Count > 1) target = tauntEnemies[RandomGenerator.NumberBetween(0, tauntEnemies.Count - 1)];
+                else if (tauntEnemies.Count == 1) target = tauntEnemies[0];
+
+                // No taunt enemies, just determine target normally
+                else
+                {
+                    if (targettingPriority == TargettingPriority.ClosestUnfriendlyTarget)
+                        target = GetClosestUnfriendlyCharacter(attacker);
+                    else if (targettingPriority == TargettingPriority.BestValidUnfriendlyTarget)
+                        target = GetBestValidAttackTarget(attacker, ability);
+                    else if (targettingPriority == TargettingPriority.RandomValidUnfriendlyTarget)
+                        target = GetRandomValidAttackTarget(attacker, ability);
+                }
+            }
+
+            // Targetting allies
+            else if ((targettingPriority == TargettingPriority.RandomAlly ||
+                targettingPriority == TargettingPriority.RandomAllyOrSelf ||
+                targettingPriority == TargettingPriority.MostEndangeredValidFriendly) &&
+                directive.action.abilityName != "" &&
+                directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
+            {
+                AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+
+                if (targettingPriority == TargettingPriority.MostEndangeredValidFriendly)
+                {
+                    target = GetMostEndangeredValidAlly(attacker, ability);
+                }
+                else
+                {
+                    bool includeSelf = false;
+                    if (targettingPriority == TargettingPriority.RandomAllyOrSelf) includeSelf = true;
+                    List<HexCharacterModel> allies = new List<HexCharacterModel>();
+                    foreach (HexCharacterModel ally in GetAllAlliesWithinRange(attacker, AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker), includeSelf))
+                    {
+                        if (AbilityController.Instance.IsTargetOfAbilityValid(attacker, ally, ability))
+                            allies.Add(ally);
+                    }
+                    target = allies.GetRandomElement();
+                }
+            }
+
+            else if (targettingPriority == TargettingPriority.Self)
+                target = attacker;
+
+            if (target == null) return null;
+            else return new TargetPriorityTuple(target, targettingPriority);
+        }
         private static TargetPriorityTuple HandleAutoTargetCharacter(HexCharacterModel attacker, AIDirective directive)
         {
             HexCharacterModel target = null;
