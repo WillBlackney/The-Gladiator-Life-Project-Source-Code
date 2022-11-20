@@ -175,8 +175,7 @@ namespace HexGameEngine.UI
             characterCurrentlyViewing = data;
             characterNameText.text = data.myName;
             characterClassText.text = data.myClassName;
-            dailyWageText.text = data.dailyWage.ToString();
-            //totalArmourText.text = ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet).ToString();
+            dailyWageText.text = data.dailyWage.ToString();         
             BuildPerkViews(data);
             BuildAttributeSection(data);
             BuildGeneralInfoSection(data);
@@ -331,6 +330,7 @@ namespace HexGameEngine.UI
             BuildStressBar(character);
             racialIcon.BuildFromRacialData(CharacterDataController.Instance.GetRaceData(character.race));
             backgroundIcon.BuildFromBackgroundData(character.background);
+            totalArmourText.text = ItemController.Instance.GetTotalArmourBonusFromItemSet(character.itemSet).ToString();
         }
         private void BuildHealthBar(HexCharacterData character)
         {

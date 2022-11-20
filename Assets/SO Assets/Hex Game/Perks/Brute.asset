@@ -23,7 +23,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '-10 '
+    phrase: '-5 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -35,11 +35,11 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '+15 '
+    phrase: '+10 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Physical Damage
+    phrase: Might
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

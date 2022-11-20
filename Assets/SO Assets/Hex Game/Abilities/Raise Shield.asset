@@ -90,7 +90,7 @@ MonoBehaviour:
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
     perkPairing:
-      perkTag: 74
+      perkTag: 12
       passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0

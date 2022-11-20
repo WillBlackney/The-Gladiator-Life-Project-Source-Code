@@ -80,7 +80,7 @@ MonoBehaviour:
         abilityName: 
     - action:
         actionType: 1
-        targettingPriority: 0500000006000000
+        targettingPriority: 050000000100000006000000
         getRangeFromAbility: 0
         range: 0
         abilityName: Pin Down
@@ -115,9 +115,19 @@ MonoBehaviour:
         energyReq: 0
         alliesAlive: 0
         abilityName: 
+      - requirementType: 6
+        range: 0
+        perkPairing:
+          perkTag: 79
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        alliesAlive: 0
+        abilityName: 
     - action:
         actionType: 1
-        targettingPriority: 0500000006000000
+        targettingPriority: 050000000100000006000000
         getRangeFromAbility: 0
         range: 0
         abilityName: Plink
@@ -134,21 +144,21 @@ MonoBehaviour:
         abilityName: 
     - action:
         actionType: 1
-        targettingPriority: 0500000006000000
+        targettingPriority: 050000000100000006000000
         getRangeFromAbility: 0
         range: 0
         abilityName: Steady Shot
       requirements: []
     - action:
         actionType: 1
-        targettingPriority: 0500000006000000
+        targettingPriority: 050000000100000006000000
         getRangeFromAbility: 0
         range: 0
         abilityName: Plink
       requirements: []
     - action:
         actionType: 6
-        targettingPriority: 0500000006000000
+        targettingPriority: 050000000100000006000000
         getRangeFromAbility: 0
         range: 0
         abilityName: 
@@ -268,4 +278,4 @@ MonoBehaviour:
   - Human_Left_Leg
   - Left_Hand_Simple_Bow
   - Barbarian_Chest_Wear
-  - Archer_Helmet_Head_Wear
+  - Red_Face_Mask_Head_Wear

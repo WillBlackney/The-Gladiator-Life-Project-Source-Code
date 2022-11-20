@@ -355,14 +355,10 @@ namespace HexGameEngine.Characters
             TurnController.Instance.CreateActivationWindow(character);
 
             // Setup abilities
-            //character.abilityBook = new AbilityBook(data.abilityBook);
             AbilityController.Instance.BuildHexCharacterAbilityBookFromData(character, new AbilityBook(data.abilityBook));
-              //  AbilityController.Instance.ConvertSerializedAbilityBookToUnserialized(data.abilityBook));
         }
         public void SpawnEnemyEncounter(EnemyEncounterData encounterData)
         {
-            Debug.Log("SpawnEnemyEncounter() Called....");
-
             List<LevelNode> spawnLocations = LevelController.Instance.GetEnemySpawnZone();
           
             // Create all enemies in wave

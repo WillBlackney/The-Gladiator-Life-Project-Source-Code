@@ -96,7 +96,7 @@ namespace HexGameEngine.Abilities
                     else
                     {
                         CombatUIController.Instance.EnergyBar.UpdateIcons(MyAbilityData.myCharacter.currentEnergy, 0.25f);
-                        CombatUIController.Instance.ResetFatigueCostDemo();
+                        CombatUIController.Instance.ResetFatigueCostPreview();
                     }
 
 

@@ -845,7 +845,7 @@ namespace HexGameEngine.TownFeatures
             // On normal days, generate 2 basics and 1 elite combat
             if (RunController.Instance.CurrentDay != 5)
             {
-                List<int> deploymentLimits = new List<int> { 1, 3, 5 };
+                List<int> deploymentLimits = new List<int> { 1, 2, 3, 5 };
 
                 // On first 2 days, only generate combat with deployment limits of 1 and 3
                 if (RunController.Instance.CurrentChapter == 1 &&

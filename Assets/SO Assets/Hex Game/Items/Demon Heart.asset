@@ -42,6 +42,7 @@ MonoBehaviour:
       perkApplied:
         perkTag: 0
         passiveStacks: 1
+  - possibleEffects:
     - effectType: 1
       attributeModified: 10
       modAmount: -30

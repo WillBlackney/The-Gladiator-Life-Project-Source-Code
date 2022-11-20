@@ -428,6 +428,12 @@ namespace HexGameEngine.HexTiles
                 {
                     if (character.currentHealth > 0 && character.livingState == LivingState.Alive)
                     {
+                        HexCharacterView modelView = c.hexCharacterView;
+                       
+                        // Text notification
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                            VisualEffectManager.Instance.CreateStatusEffect(modelView.WorldPosition, "Free Strike!"), QueuePosition.Back, 0, 0.25f);
+
                         // Start free strike attack
                         AbilityController.Instance.UseAbility(c, AbilityController.Instance.FreeStrikeAbility, character);
                         VisualEventManager.Instance.InsertTimeDelayInQueue(1f);

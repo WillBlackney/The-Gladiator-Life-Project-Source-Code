@@ -87,7 +87,7 @@ MonoBehaviour:
       requirements: []
     - action:
         actionType: 1
-        targettingPriority: 05000000
+        targettingPriority: 0500000001000000
         getRangeFromAbility: 0
         range: 0
         abilityName: Throwing Knife
@@ -109,6 +109,26 @@ MonoBehaviour:
         energyReq: 0
         alliesAlive: 0
         abilityName: 
+      - requirementType: 10
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 6
+        alliesAlive: 0
+        abilityName: 
+      - requirementType: 15
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        alliesAlive: 0
+        abilityName: Throwing Knife
     - action:
         actionType: 3
         targettingPriority: 0500000001000000
@@ -153,6 +173,16 @@ MonoBehaviour:
         energyReq: 3
         alliesAlive: 0
         abilityName: 
+      - requirementType: 15
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        alliesAlive: 0
+        abilityName: Throwing Knife
     - action:
         actionType: 2
         targettingPriority: 0500000001000000

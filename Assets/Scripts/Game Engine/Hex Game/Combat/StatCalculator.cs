@@ -36,6 +36,9 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
                 might += 3;
 
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brute))
+                might += 10;
+
             // Items
             might += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Might, c.itemSet);
             if (mod < 0) mod = 0;
@@ -66,6 +69,9 @@ namespace HexGameEngine
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Polymath))
                 might += 3;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Brute))
+                might += 10;
 
             // Items
             might += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Might, c.itemSet);
@@ -189,7 +195,7 @@ namespace HexGameEngine
                 accuracy += 30;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brute))
-                accuracy -= 10;
+                accuracy -= 5;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Sloppy))
                 accuracy -= 5;
@@ -277,7 +283,7 @@ namespace HexGameEngine
                 accuracy += 30;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Brute))
-                accuracy -= 10;
+                accuracy -= 5;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sloppy))
                 accuracy -= 5;
@@ -850,8 +856,6 @@ namespace HexGameEngine
                 pdBonus -= 10;
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BigMuscles))
                 pdBonus += 10;
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brute))
-                pdBonus += 15;
 
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.TournamentKnight))
                 pdBonus += 5;
@@ -869,8 +873,6 @@ namespace HexGameEngine
                 pdBonus -= 10;
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BigMuscles))
                 pdBonus += 10;
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Brute))
-                pdBonus += 15;
 
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.TournamentKnight))
                 pdBonus += 5;

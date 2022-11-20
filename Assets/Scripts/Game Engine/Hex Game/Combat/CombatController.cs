@@ -807,6 +807,7 @@ namespace HexGameEngine.Combat
             {
                 critChance += 100;
             }
+
             */
 
             // Check Assssin background
@@ -826,12 +827,12 @@ namespace HexGameEngine.Combat
                 critChance += 10;
             }
 
-            // Check Hawk Eye
+            // Check Dead Eye
             if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.DeadEye) &&
                 ability != null &&
                 ability.abilityType.Contains(AbilityType.RangedAttack))
             {
-                critChance += 50;
+                critChance += 5;
             }
 
             // Check Brawny
@@ -839,7 +840,7 @@ namespace HexGameEngine.Combat
                 ability != null &&
                 ability.abilityType.Contains(AbilityType.MeleeAttack))
             {
-                critChance += 50;
+                critChance += 5;
             }
 
             // Check Tiger Aspect
@@ -847,7 +848,7 @@ namespace HexGameEngine.Combat
                 ability != null &&
                 ability.abilityType.Contains(AbilityType.MeleeAttack))
             {
-                critChance += 150;
+                critChance += 15;
             }
 
             if (effect != null)

@@ -769,6 +769,7 @@ namespace HexGameEngine.Characters
 
             // Set up background, race and story data
             newCharacter.race = GetRandomRace(data.validRaces);
+            newCharacter.myClassName = TextLogic.SplitByCapitals(data.backgroundType.ToString());
             newCharacter.myName = GetRandomCharacterName(newCharacter.race);
             newCharacter.dailyWage = RandomGenerator.NumberBetween(newCharacter.background.dailyWageMin, newCharacter.background.dailyWageMax);
                                                

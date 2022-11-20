@@ -147,9 +147,11 @@ namespace HexGameEngine
             // Randomize level node elevation and obstructions
             RunController.Instance.SetCurrentCombatMapData(LevelController.Instance.GenerateLevelNodes());
 
-            // Generate enemy wave + enemies data + save to run controller
+            // Generate enemy wave + enemies data
             CombatContractData sandboxContractData = TownController.Instance.GenerateSandboxContractData();
             RunController.Instance.SetCurrentContractData(sandboxContractData);
+
+            // Save data to persistency
             PersistencyController.Instance.AutoUpdateSaveFile();
 
             // Setup player characters
@@ -651,7 +653,6 @@ namespace HexGameEngine
             TownController.Instance.HideDeploymentPage();
             CharacterScrollPanelController.Instance.HideMainView();
             TopBarController.Instance.ShowCombatTopBar();
-
             SetGameState(GameState.CombatActive);          
 
             // Generate combat map data
@@ -672,10 +673,7 @@ namespace HexGameEngine
             LevelController.Instance.ShowAllNodeViews();
             LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
 
-            // Setup player characters
-           // List<HexCharacterData> spawnedPlayerCharacters = new List<HexCharacterData>();
-           // foreach(CharacterWithSpawnData c in RunController.Instance.CurrentDeployedCharacters)            
-            //    spawnedPlayerCharacters.Add(c.characterData);            
+            // Setup player characters      
             HexCharacterController.Instance.CreateAllPlayerCombatCharacters(RunController.Instance.CurrentDeployedCharacters);
 
             // Setup enemy characters

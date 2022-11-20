@@ -312,7 +312,7 @@ namespace HexGameEngine.Abilities
             if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
             {
                 CombatUIController.Instance.EnergyBar.UpdateIcons(TurnController.Instance.EntityActivated.currentEnergy);
-                CombatUIController.Instance.ResetFatigueCostDemo();
+                CombatUIController.Instance.ResetFatigueCostPreview();
             }                
 
             OnAbilityUsedStart(character, ability, target);

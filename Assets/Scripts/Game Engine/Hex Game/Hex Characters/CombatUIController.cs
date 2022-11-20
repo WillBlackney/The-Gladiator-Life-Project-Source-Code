@@ -256,7 +256,7 @@ namespace HexGameEngine.Characters
             fatigueSubBarUI.DOValue(fatBarFloat, 0.25f);
             Debug.Log("DoFatigueCostDemo() demo value = " + fatBarFloat.ToString() + ", normal value = " + fatigueBarUI.value.ToString());
         }
-        public void ResetFatigueCostDemo()
+        public void ResetFatigueCostPreview()
         {
             fatigueSubBarUI.DOKill();
             fatigueSubBarUI.DOValue(fatigueBarUI.value, 0.25f);
