@@ -19,19 +19,21 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'This character has '
+    phrase: 'This character deals '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '+10 '
+    phrase: '+10% '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Strength
+    phrase: Physical Damage
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: .
+  passiveItalicDescription: 
+  effectDetailTabs: []
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1
@@ -41,8 +43,11 @@ MonoBehaviour:
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
   isInjury: 0
+  isPermanentInjury: 0
   severity: 0
   injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 1

@@ -1,5 +1,6 @@
 ﻿using HexGameEngine.Perks;
 using HexGameEngine.Utilities;
+using Sirenix.Serialization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,25 +37,35 @@ namespace HexGameEngine.Characters
 
         }
     }
+    [System.Serializable]
     public class PerkTreeData
     {
-        private List<PerkIconData> perkChoices;
-        public List<PerkIconData> PerkChoices
+        [OdinSerialize]
+        private bool hasGeneratedTree = false;
+        [OdinSerialize]
+        private List<ActivePerk> perkChoices = new List<ActivePerk>();
+        public List<ActivePerk> PerkChoices
         {
             get
             {
-                if (perkChoices == null || perkChoices.Count == 0)
-                    GeneratePerkChoices();
+                if (!hasGeneratedTree) GenerateTree();               
                 return perkChoices;
             }
         }
-        private void GeneratePerkChoices()
+        private void GenerateTree()
         {
+            if (PerkController.Instance == null || hasGeneratedTree) return;
+            hasGeneratedTree = true;
             List<PerkIconData> choices = PerkController.Instance.GetAllLevelUpPerks();
             choices.Shuffle();
-            perkChoices = new List<PerkIconData>();
-            for (int i = 0; i < 10; i++)
-                perkChoices.Add(choices[i]);
+            perkChoices = new List<ActivePerk>();
+            for (int i = 0; i < 10 && i < choices.Count; i++)
+                perkChoices.Add(new ActivePerk(choices[i].perkTag, 1, choices[i]));
+        }
+
+        public PerkTreeData()
+        {
+            GenerateTree();
         }
     }
     

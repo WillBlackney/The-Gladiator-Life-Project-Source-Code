@@ -781,6 +781,7 @@ namespace HexGameEngine.Characters
             // Set up perks + quirks
             newCharacter.passiveManager = new PerkManagerModel(newCharacter);
             GetAndApplyRandomQuirksToCharacter(newCharacter);
+            newCharacter.perkTree = new PerkTreeData();
 
             // Set up health
             SetCharacterMaxHealth(newCharacter, 0);

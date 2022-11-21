@@ -27,5 +27,11 @@ namespace HexGameEngine.Perks
             this.perkTag = perk;
             this.stacks = stacks;
         }
+        public ActivePerk(Perk perk, int stacks, PerkIconData data)
+        {
+            this.perkTag = perk;
+            this.stacks = stacks;
+            this.data = data;
+        }
     }
 }

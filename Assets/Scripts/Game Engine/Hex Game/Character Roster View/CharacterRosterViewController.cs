@@ -411,7 +411,7 @@ namespace HexGameEngine.UI
         {
             for(int i = 0; i < character.perkTree.PerkChoices.Count; i++)
             {
-                perkLevelUpIcons[i].BuildFromCharacterAndPerkData(character, character.perkTree.PerkChoices[i]);
+                perkLevelUpIcons[i].BuildFromCharacterAndPerkData(character, character.perkTree.PerkChoices[i].Data);
             }
         }
         public void OnPerkTreeIconClicked(UILevelUpPerkIcon icon)

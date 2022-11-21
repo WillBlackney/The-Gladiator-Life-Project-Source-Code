@@ -269,23 +269,28 @@ namespace HexGameEngine.Items
 
                     if (effect.effectType == ItemEffectType.ModifyAttribute)
                     {
-                        if (effect.modAmount < 0)
+                        dotStyle = DotStyle.Green;
+                        string attributeText = TextLogic.SplitByCapitals(effect.attributeModified.ToString());
+                        string modAmountString = "";
+                        if (effect.modAmount >= 0) modAmountString += "+";
+                        else dotStyle = DotStyle.Red;
+                        modAmountString += effect.modAmount.ToString();
+                        if (effect.attributeModified == ItemCoreAttribute.WeaponDamageBonus)
                         {
-                            dotStyle = DotStyle.Red;
-                            row.Build(TextLogic.ReturnColoredText(effect.modAmount.ToString() + " ", TextLogic.blueNumber) + TextLogic.SplitByCapitals(effect.attributeModified.ToString()), dotStyle);
+                            modAmountString += "%";
+                            attributeText = TextLogic.ReturnColoredText("Weapon Ability", TextLogic.neutralYellow) + " damage";
                         }
-                        else
-                        {
-                            dotStyle = DotStyle.Green;
-                            row.Build(TextLogic.ReturnColoredText("+" + effect.modAmount.ToString() + " ", TextLogic.blueNumber) + TextLogic.SplitByCapitals(effect.attributeModified.ToString()), dotStyle);
-                        }
+                        else attributeText = TextLogic.ReturnColoredText(attributeText, TextLogic.neutralYellow);
+
+                        row.Build(TextLogic.ReturnColoredText(modAmountString + " ", TextLogic.blueNumber) + attributeText, dotStyle);
+
                     }
 
                     else if (effect.effectType == ItemEffectType.OnHitEffect)
                     {
                         row.Build("On hit: Apply " + TextLogic.ReturnColoredText(effect.perkApplied.passiveStacks.ToString(), TextLogic.blueNumber) + " " +
                             TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkApplied.perkTag.ToString()), TextLogic.neutralYellow) + " (" +
-                            effect.effectChance.ToString() + "% chance).", dotStyle);
+                            effect.effectChance.ToString() + "% chance).", DotStyle.Green);
                     }
                     else if (item.itemEffects[i].effectType == ItemEffectType.GainPerk)
                     {
@@ -299,12 +304,12 @@ namespace HexGameEngine.Items
                     {
                         row.Build("On turn start, " + TextLogic.ReturnColoredText(effect.gainPerkChance.ToString() + "%", TextLogic.blueNumber) + 
                            " chance to gain " + TextLogic.ReturnColoredText(effect.perkGained.stacks.ToString(), TextLogic.blueNumber) + " " +
-                           TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkGained.perkTag.ToString()), TextLogic.neutralYellow), dotStyle);
+                           TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkGained.perkTag.ToString()), TextLogic.neutralYellow), DotStyle.Green);
                     }
                     else if (item.itemEffects[i].effectType == ItemEffectType.GainPerkCombatStart)
                     {
                         row.Build("On combat start, gain " + TextLogic.ReturnColoredText(effect.perkGained.stacks.ToString(), TextLogic.blueNumber) + " " +
-                           TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkGained.perkTag.ToString()), TextLogic.neutralYellow) + ".", dotStyle);
+                           TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkGained.perkTag.ToString()), TextLogic.neutralYellow) + ".", DotStyle.Green);
                     }
                 }
             }
