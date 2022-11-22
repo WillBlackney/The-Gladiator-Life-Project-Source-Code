@@ -2245,6 +2245,10 @@ namespace HexGameEngine.Characters
 
             else return false;
         }
+        public bool DoesCharacterHaveEnoughFatigue(HexCharacterModel caster, int fatigueCost)
+        {
+            return StatCalculator.GetTotalMaxFatigue(caster) - caster.currentFatigue >= fatigueCost;
+        }
         #endregion
     }
 }

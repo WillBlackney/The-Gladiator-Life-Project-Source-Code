@@ -229,36 +229,14 @@ namespace HexGameEngine.Items
                         }
                     }
 
-                    validEffects.Shuffle();
-                    ret.Add(validEffects[0]);
+                    if(validEffects.Count > 0)
+                    {
+                        validEffects.Shuffle();
+                        ret.Add(validEffects[0]);
+                    }
+                    
                 }
             }
-
-            
-            // Auto generate initiative + vision penalties/bonuses
-            /*
-            if(itemData.itemType == ItemType.Head)
-            {
-                if (itemData.armourClass == ItemArmourClass.Light)
-                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, 1));
-
-                else if (itemData.armourClass == ItemArmourClass.Heavy)
-                {
-                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, -2));
-                    ret.Add(new ItemEffect(ItemCoreAttribute.Vision, -1));
-                }                   
-            }
-            else if (itemData.itemType == ItemType.Body)
-            {
-                if (itemData.armourClass == ItemArmourClass.Light)
-                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, 2));
-
-                else if (itemData.armourClass == ItemArmourClass.Heavy)                
-                    ret.Add(new ItemEffect(ItemCoreAttribute.Initiative, -3));                
-            }*/
-            
-
-
             return ret;
         }
         #endregion

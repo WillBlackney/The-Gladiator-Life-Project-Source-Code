@@ -807,9 +807,8 @@ namespace HexGameEngine.HexTiles
             {
                 if (TurnController.Instance.EntityActivated == null) return;
 
-                if ( // check valid time to for character to use ability
-                    //!EventSystem.current.IsPointerOverGameObject() &&
-                    TurnController.Instance.EntityActivated.controller == Controller.Player &&
+                // check valid time to for character to use ability
+                if (TurnController.Instance.EntityActivated.controller == Controller.Player &&
                     TurnController.Instance.EntityActivated.activationPhase == ActivationPhase.ActivationPhase
                     )
                 {
@@ -817,9 +816,6 @@ namespace HexGameEngine.HexTiles
                     if (AbilityController.Instance.CurrentAbilityAwaiting.secondaryTargetRequirement == SecondaryTargetRequirement.None ||
                         (AbilityController.Instance.CurrentAbilityAwaiting.secondaryTargetRequirement != SecondaryTargetRequirement.None && AbilityController.Instance.CurrentSelectionPhase == AbilitySelectionPhase.None))
                     {
-                        //if (h.myCharacter == null || (h.myCharacter != null && AbilityController.Instance.CurrentAbilityAwaiting.targetRequirement == TargetRequirement.Hex))
-                        //    AbilityController.Instance.HandleTargetSelectionMade(h);
-
                         if (AbilityController.Instance.CurrentAbilityAwaiting.targetRequirement == TargetRequirement.Hex)
                             AbilityController.Instance.HandleTargetSelectionMade(h);
 

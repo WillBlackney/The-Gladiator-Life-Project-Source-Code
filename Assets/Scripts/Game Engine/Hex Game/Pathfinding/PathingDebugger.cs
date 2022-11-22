@@ -88,7 +88,6 @@ namespace HexGameEngine.Pathfinding
             else if (!secondHex && firstHex)
             {
                 ClearFirstHex();
-                Pathfinder.DisconnectCharacterFromTheirHex(testCharacter);
             }
                
 

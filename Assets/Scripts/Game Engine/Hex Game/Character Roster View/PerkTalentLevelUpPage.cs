@@ -101,7 +101,7 @@ namespace HexGameEngine.UI
             if(card.PerkData != null)
             {
                 PerkController.Instance.ModifyPerkOnCharacterData(currentCharacter.passiveManager, card.PerkData.perkTag, 1);
-                currentCharacter.perkPoints--;                
+                currentCharacter.perkPoints -= 1;                
             }
 
             // Talent
@@ -112,17 +112,8 @@ namespace HexGameEngine.UI
             }
 
             mainVisualParent.SetActive(false);
+            // Rebuild character roster views
             CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
-
-            // Update scroll panel views
-            /*
-            if (currentCharacter.attributeRolls.Count == 0 &&
-                currentCharacter.talentRolls.Count == 0 &&
-                currentCharacter.perkPoints == 0)
-            {
-                // Rebuild character scroll roster
-                CharacterScrollPanelController.Instance.RebuildViews();
-            }*/
             CharacterScrollPanelController.Instance.RebuildViews();
         }
         public void UpdateConfirmButtonState()

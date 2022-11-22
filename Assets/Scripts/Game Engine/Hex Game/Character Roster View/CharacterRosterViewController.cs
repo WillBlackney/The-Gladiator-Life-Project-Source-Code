@@ -441,8 +441,9 @@ namespace HexGameEngine.UI
             perkLevelUpConfirmChoiceScreenParent.SetActive(false);
             currentSelectedLevelUpPerkChoice = null;
 
-            // Trigger rebuild roster page to reflect updates
+            // Rebuild character roster views
             HandleRedrawRosterOnCharacterUpdated();
+            CharacterScrollPanelController.Instance.RebuildViews();
         }
         public void OnConfirmLevelUpPerkPageCancelButtonClicked()
         {

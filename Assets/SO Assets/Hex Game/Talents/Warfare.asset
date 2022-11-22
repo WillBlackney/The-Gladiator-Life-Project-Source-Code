@@ -23,14 +23,14 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Warfare '
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'abilities. Gain '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '5 '
+    phrase: '+5 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

@@ -26,7 +26,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: abilities.
+    phrase: 'abilities. '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

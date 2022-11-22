@@ -40,7 +40,7 @@ namespace HexGameEngine.Characters
             int upperGoldReward = (int)(baseGoldReward * 1.1f);
             crd.goldAmount = RandomGenerator.NumberBetween(lowerGoldReward, upperGoldReward);
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
-            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(Rarity.Rare)[0]);
+            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(Rarity.Rare).ShuffledCopy()[0]);
         }
         private void BuildAsBossReward(CombatRewardData crd)
         {
@@ -49,7 +49,7 @@ namespace HexGameEngine.Characters
             int upperGoldReward = (int)(baseGoldReward * 1.1f);
             crd.goldAmount = RandomGenerator.NumberBetween(lowerGoldReward, upperGoldReward);
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
-            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(Rarity.Epic)[0]);
+            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(Rarity.Epic).ShuffledCopy()[0]);
 
         }
         private float GetActsPassedGoldRewardModifier()

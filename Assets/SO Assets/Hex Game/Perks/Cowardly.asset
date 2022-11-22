@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
-  m_Name: Coward
+  m_Name: Cowardly
   m_EditorClassIdentifier: 
   passiveSprite: {fileID: 21300000, guid: b1c86f56d50702645985d9b74474374c, type: 3}
-  passiveName: Coward
+  passiveName: Cowardly
   perkTag: 92
   passiveDescription:
   - color: 1
@@ -32,6 +32,8 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: .
+  passiveItalicDescription: 
+  effectDetailTabs: []
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 0
@@ -41,8 +43,11 @@ MonoBehaviour:
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
   isInjury: 0
+  isPermanentInjury: 0
   severity: 0
   injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 1

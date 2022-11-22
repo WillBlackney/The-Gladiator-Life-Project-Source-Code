@@ -13,7 +13,6 @@ namespace HexGameEngine.HexTiles
         // Components + Properties
         #region
         [Header("Properties")]
-        [HideInInspector] public HexCharacterModel myEntity;
         [SerializeField] Vector2 gridPosition;
         [HideInInspector] public string tileName;
 
@@ -31,13 +30,7 @@ namespace HexGameEngine.HexTiles
 
         [Header("Obstruction Components")]
         [SerializeField] GameObject obstacleParent;
-        [SerializeField] GameObject[] obstacleImages;
-
-        private List<LevelNode> neighbourNodes = null;
-        private TileElevation elevation;
-        private bool obstructed = false;
-        [HideInInspector]public HexCharacterModel myCharacter;
-        private HexDataSO tileData;
+        [SerializeField] GameObject[] obstacleImages;        
 
         [Header("Pillar Sprites")]
         [SerializeField] private Sprite nightTimeCircle;
@@ -50,6 +43,12 @@ namespace HexGameEngine.HexTiles
         [SerializeField] GameObject mudParent;
         [SerializeField] GameObject waterParent;
         [SerializeField] GameObject grassParent;
+
+        private List<LevelNode> neighbourNodes = null;
+        private TileElevation elevation;
+        private bool obstructed = false;
+        [HideInInspector] public HexCharacterModel myCharacter;
+        private HexDataSO tileData;
         #endregion
 
         // Getters + Accessors
@@ -289,7 +288,8 @@ namespace HexGameEngine.HexTiles
             DisableObstructionViews();
             obstructed = false;
             SetHexTileElevation(TileElevation.Ground);
-            elevationPillarImagesParent.SetActive(false);        
+            elevationPillarImagesParent.SetActive(false);
+            myCharacter = null;
         }
         #endregion
     }

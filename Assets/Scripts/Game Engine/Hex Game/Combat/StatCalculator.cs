@@ -506,7 +506,7 @@ namespace HexGameEngine
                     mod -= 0.5f;
             }            
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Coward))
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Cowardly))
                 resolve -= 5;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brave))
@@ -576,7 +576,7 @@ namespace HexGameEngine
                     mod -= 0.5f;
             }
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Coward))
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Cowardly))
                 resolve -= 5;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Brave))

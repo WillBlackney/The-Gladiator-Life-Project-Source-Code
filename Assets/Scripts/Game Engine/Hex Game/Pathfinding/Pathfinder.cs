@@ -247,12 +247,7 @@ namespace HexGameEngine.Pathfinding
 
             hex.myCharacter = character;
             character.currentTile = hex;
-        }
-        public static void DisconnectCharacterFromTheirHex(HexCharacterModel character)
-        {
-            character.currentTile.myCharacter = null;
-            character.currentTile = null;
-        }
+        }      
         #endregion
 
         // Misc

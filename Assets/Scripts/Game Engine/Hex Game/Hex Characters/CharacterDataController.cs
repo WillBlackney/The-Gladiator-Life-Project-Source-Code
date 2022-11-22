@@ -989,10 +989,10 @@ namespace HexGameEngine.Characters
                     int typeRoll = RandomGenerator.NumberBetween(1, 100);
 
                     // Good perk
-                    if (typeRoll < 40) GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.PositiveQuirks);
+                    if (typeRoll < 45) GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.PositiveQuirks);
 
                     // Bad perk
-                    else if (typeRoll < 80) GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NegativeQuirks);
+                    else if (typeRoll < 90) GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NegativeQuirks);
 
                     // Neutral perk
                     else GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NeutralQuirks);

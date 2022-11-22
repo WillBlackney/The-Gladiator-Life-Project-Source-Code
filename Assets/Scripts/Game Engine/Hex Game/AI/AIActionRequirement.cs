@@ -32,6 +32,10 @@ namespace HexGameEngine.AI
         [LabelWidth(100)]
         public int energyReq;
 
+        [ShowIf("ShowFatigueReq")]
+        [LabelWidth(100)]
+        public int fatigueReq;
+
         [ShowIf("ShowAlliesAlive")]
         [LabelWidth(100)]
         public int alliesAlive;
@@ -47,6 +51,14 @@ namespace HexGameEngine.AI
         public bool ShowEnergyReq()
         {
             if (requirementType == AIActionRequirementType.HasMoreEnergyThanX || requirementType == AIActionRequirementType.HasLessEnergyThanX)
+            {
+                return true;
+            }
+            else return false;
+        }
+        public bool ShowFatigueReq()
+        {
+            if (requirementType == AIActionRequirementType.HasMoreFatigueThanX)
             {
                 return true;
             }
@@ -120,5 +132,6 @@ namespace HexGameEngine.AI
         TargetPositionedForKnockBackStun = 20,
         TargetIsElevated = 21,
         TargetIsNotElevated = 22,
+        HasMoreFatigueThanX = 23,
     }
 }

@@ -448,7 +448,7 @@ namespace HexGameEngine
         Combo = 154,
         Contagious = 151,
         Courage = 155,
-        Coward = 92,
+        Cowardly = 92,
         Crippled = 5,
         Cunning = 22,
         DeadHeart = 24,
