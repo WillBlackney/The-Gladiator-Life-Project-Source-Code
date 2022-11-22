@@ -225,9 +225,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
     - {fileID: 11400000, guid: f2990956e456afa46af43accbd061445, type: 2}
   serializedPassiveManager:
-    perks:
-    - perkTag: 162
-      stacks: 1
+    perks: []
   itemSet:
     mainHandItem: {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
     offHandItem: {fileID: 0}

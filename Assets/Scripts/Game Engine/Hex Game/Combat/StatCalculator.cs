@@ -378,9 +378,6 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ShieldWall))
                 dodge += 10;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Mirage))
-                dodge += 20;
-
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.PoorReflexes))
                 dodge -= 5;
                     
@@ -466,9 +463,6 @@ namespace HexGameEngine
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Evasion))
                 dodge += 30;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Mirage))
-                dodge += 20;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.PoorReflexes))
                 dodge -= 5;

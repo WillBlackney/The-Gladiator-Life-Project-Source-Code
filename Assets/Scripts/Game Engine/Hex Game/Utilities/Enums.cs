@@ -453,7 +453,6 @@ namespace HexGameEngine
         Cunning = 22,
         DeadHeart = 24,
         DimWitted = 102,
-        DivineFavour = 10,
         DragonAspect = 145,
         Eager = 19,
 
@@ -490,7 +489,6 @@ namespace HexGameEngine
         Locomotion = 150,
         LoomingPresence = 125,
         Vengeful = 82,
-        Mirage = 52,
         Motivated = 122,
         Nimble = 18,        
         Opportunist = 71,
@@ -526,7 +524,6 @@ namespace HexGameEngine
         Sloppy = 100,
         Slow = 90,
         Sniper = 70,
-        SoulToken = 69,
         Squeamish = 104,
         Stealth = 77,
         StormShield = 148,
@@ -549,7 +546,7 @@ namespace HexGameEngine
         Weakened = 49, 
         Wimp = 88,
         Wise = 89,
-        Wheezy = 159,
+        Wheezy = 203,
         Wrath = 50,
         Volatile = 153,
 
