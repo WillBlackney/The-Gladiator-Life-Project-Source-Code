@@ -564,14 +564,12 @@ namespace HexGameEngine.Combat
                     // Apply the injury
                     if (injuryGained != null)
                     {
-                        int oldMaxHealth = StatCalculator.GetTotalConstitution(character);
                         int injuryStacks = RandomGenerator.NumberBetween(injuryGained.minInjuryDuration + 1, injuryGained.maxInjuryDuration + 1);
                         PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, injuryGained.perkTag, injuryStacks, true, 0.5f);
-                        int newMaxHealth = StatCalculator.GetTotalConstitution(character);
 
-                        // Update current health if constitution/max health was altered by injury.
-                        if(oldMaxHealth > newMaxHealth)                        
-                            HexCharacterController.Instance.ModifyMaxHealth(character, 0);                       
+                        // In case injury affects max health or max fatigue, update current health and current fatigue                   
+                        HexCharacterController.Instance.ModifyMaxHealth(character, 0);
+                        HexCharacterController.Instance.ModifyCurrentFatigue(character, 0);
 
                         // Stress Check events on injury applied
                         CreateStressCheck(character, StressEventType.InjuryGained);

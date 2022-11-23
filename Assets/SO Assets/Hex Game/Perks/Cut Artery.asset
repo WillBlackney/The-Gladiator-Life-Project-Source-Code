@@ -46,7 +46,7 @@ MonoBehaviour:
     phrase: at the start of each turn.
   passiveItalicDescription: 
   effectDetailTabs: []
-  maxAllowedStacks: 1
+  maxAllowedStacks: 99
   showStackCount: 0
   hiddenOnPassivePanel: 0
   isRewardable: 0

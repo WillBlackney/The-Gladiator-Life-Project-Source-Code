@@ -35,7 +35,7 @@ MonoBehaviour:
   abilitySubRequirements:
   - type: 3
     healthRequired: 0
-  baseRange: 1
+  baseRange: 2
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
   hitChanceModifierAgainstAdjacent: 0

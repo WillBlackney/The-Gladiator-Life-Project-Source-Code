@@ -174,6 +174,7 @@ namespace HexGameEngine.JourneyLogic
         }
         public EnemyEncounterSO GetRandomCombatData(int currentAct, CombatDifficulty difficulty)
         {
+            Debug.Log("RunController.GetRandomCombatData() getting random combat for act " + currentAct.ToString() + " and difficulty " + difficulty.ToString());
             EnemyEncounterSO ret = null;
             foreach (EnemyEncounterSet set in allCombatEncounterSets)
             {
@@ -192,7 +193,7 @@ namespace HexGameEngine.JourneyLogic
                     if (validCombats.Count == 0)                        
                         ret = set.possibleEnemyEncounters[RandomGenerator.NumberBetween(0, set.possibleEnemyEncounters.Count - 1)];
 
-                    // If only one valud choice, select it
+                    // If only one valid choice, select it
                     else if(validCombats.Count == 1)
                         ret = validCombats[0];
 

@@ -46,7 +46,7 @@ MonoBehaviour:
     phrase: per tile moved.
   passiveItalicDescription: 
   effectDetailTabs: []
-  maxAllowedStacks: 1
+  maxAllowedStacks: 99
   showStackCount: 0
   hiddenOnPassivePanel: 0
   isRewardable: 0

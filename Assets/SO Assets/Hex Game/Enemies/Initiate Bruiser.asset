@@ -76,11 +76,12 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 2
         energyReq: 0
+        fatigueReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
         actionType: 1
-        targettingPriority: 0500000006000000
+        targettingPriority: 050000000100000006000000
         getRangeFromAbility: 0
         range: 0
         abilityName: Headbutt
@@ -93,6 +94,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 2
         energyReq: 0
+        fatigueReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 6
@@ -103,6 +105,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 2
         energyReq: 0
+        fatigueReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 6
@@ -113,6 +116,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 2
         energyReq: 0
+        fatigueReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 6
@@ -123,11 +127,12 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 2
         energyReq: 0
+        fatigueReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
         actionType: 1
-        targettingPriority: 0500000006000000
+        targettingPriority: 050000000100000006000000
         getRangeFromAbility: 0
         range: 0
         abilityName: Bash
@@ -140,6 +145,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 2
         energyReq: 0
+        fatigueReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 6
@@ -150,6 +156,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 2
         energyReq: 0
+        fatigueReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 6
@@ -160,6 +167,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 2
         energyReq: 0
+        fatigueReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 6
@@ -170,11 +178,12 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 2
         energyReq: 0
+        fatigueReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
         actionType: 1
-        targettingPriority: 0500000006000000
+        targettingPriority: 050000000100000006000000
         getRangeFromAbility: 0
         range: 0
         abilityName: Shatter
@@ -194,6 +203,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 13
@@ -204,6 +214,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
@@ -221,6 +232,7 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 3
+        fatigueReq: 0
         alliesAlive: 0
         abilityName: 
     - action:

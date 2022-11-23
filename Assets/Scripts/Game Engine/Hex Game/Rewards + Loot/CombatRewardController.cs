@@ -241,7 +241,7 @@ namespace HexGameEngine.RewardSystems
             card.SubNameText.text = character.myClassName;
             card.CurrentLevelText.text = character.currentLevel.ToString();
             card.XpText.text = data.xpGained.ToString();
-            card.HealthLostText.text = data.healthLost.ToString();
+            card.HealthLostText.text = Mathf.Abs(data.healthLost).ToString();
             card.StressGainedText.text = data.stressGained.ToString();
             card.KillsText.text = data.totalKills.ToString();
 

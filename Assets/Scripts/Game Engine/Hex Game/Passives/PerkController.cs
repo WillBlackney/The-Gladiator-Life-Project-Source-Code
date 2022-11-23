@@ -477,10 +477,19 @@ namespace HexGameEngine.Perks
                 if (stacksAppliedActual > 0 && showVFX)
                 {
                     // Status Notification
-                    VisualEventManager.Instance.CreateVisualEvent(() =>                    
-                        VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName + " +" + stacksAppliedActual.ToString())
-                    , QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
-
+                    if (perkData.isInjury)
+                    {
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                            VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName + "!"),
+                            QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                    }
+                    else
+                    {
+                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                            VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName + " +" + stacksAppliedActual.ToString()), 
+                            QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                    }                 
+                    
                     // On perk applied VFX go here 
                     if(pManager.myCharacterEntity != null)
                     {
