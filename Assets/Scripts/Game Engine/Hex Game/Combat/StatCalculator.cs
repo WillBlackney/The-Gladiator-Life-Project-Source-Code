@@ -526,6 +526,16 @@ namespace HexGameEngine
                 }
             }
 
+            // Check for Fearsome enemies
+            foreach (HexCharacterModel enemy in HexCharacterController.Instance.GetAllEnemiesOfCharacter(c))
+            {
+                if (PerkController.Instance.DoesCharacterHavePerk(enemy.pManager, Perk.Fearsome) &&
+                    LevelController.Instance.GetAllHexsWithinRange(enemy.currentTile, GetTotalAuraSize(enemy)).Contains(c.currentTile))
+                {
+                    resolve -= 5;
+                }
+            }
+
             // Check fear of undead perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FearOfUndead))
             {
@@ -1380,7 +1390,7 @@ namespace HexGameEngine
                 {
                     sr += 5;
                 }
-            }
+            }            
 
             // Inquisitor background
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Inquisitor))

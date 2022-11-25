@@ -463,6 +463,7 @@ namespace HexGameEngine
         FastLearner = 101,
         Fat = 117,
         FearOfUndead = 108,
+        Fearsome = 204,
         MeleeMastery = 121,
         Fit = 160,
         FieryPresence = 152,

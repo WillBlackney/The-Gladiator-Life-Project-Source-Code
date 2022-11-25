@@ -18,8 +18,8 @@ MonoBehaviour:
   difficulty: 0
   enemyGroups:
   - possibleEnemies:
-    - {fileID: 11400000, guid: e6a0b68d1fa2b594b8d60a261b863ca0, type: 2}
+    - {fileID: 11400000, guid: c821c0b02eb8ba94db4a4d700ceed222, type: 2}
     spawnPosition: {x: 3, y: 0}
   - possibleEnemies:
-    - {fileID: 11400000, guid: e6a0b68d1fa2b594b8d60a261b863ca0, type: 2}
+    - {fileID: 11400000, guid: c821c0b02eb8ba94db4a4d700ceed222, type: 2}
     spawnPosition: {x: 3, y: -1}

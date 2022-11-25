@@ -2218,8 +2218,8 @@ namespace HexGameEngine.Characters
         }
         public bool IsCharacterAbleToMakeFreeStrikes(HexCharacterModel c)
         {
-            if (c.itemSet.mainHandItem != null &&
-                c.itemSet.mainHandItem.IsMeleeWeapon &&
+            if ((c.itemSet.mainHandItem == null ||
+                 (c.itemSet.mainHandItem != null  && !c.itemSet.mainHandItem.IsRangedWeapon)) &&
                 IsCharacterAbleToTakeActions(c))
                 return true;
 

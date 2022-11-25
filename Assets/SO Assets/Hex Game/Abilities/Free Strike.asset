@@ -19,9 +19,9 @@ MonoBehaviour:
   energyCost: 0
   fatigueCost: 0
   baseCooldown: 0
-  abilityType: 0200000004000000
+  abilityType: 02000000
   doesNotBreakStealth: 0
-  weaponRequirement: 1
+  weaponRequirement: 0
   derivedFromWeapon: 0
   derivedFromItemLoadout: 0
   weaponAbilityType: 0
