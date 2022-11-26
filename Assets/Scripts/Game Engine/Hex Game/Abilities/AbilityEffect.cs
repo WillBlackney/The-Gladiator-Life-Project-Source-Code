@@ -460,10 +460,7 @@ namespace HexGameEngine.Abilities
         ExtraCriticalChanceIfTargetHasSpecificPerk = 6,
         ExtraDamageIfCasterHasSpecificPerk = 8,
         ExtraDamageIfTargetHasSpecificPerk = 5,       
-        ExtraDamageAgainstRace = 3,      
-        DamageIgnoresArmour = 7,
-
-
+        ExtraDamageAgainstRace = 3,     
     }
 }
 

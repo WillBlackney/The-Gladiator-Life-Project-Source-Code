@@ -77,9 +77,10 @@ namespace HexGameEngine.AI
         ClosestFriendlyTarget = 8,
         BestValidUnfriendlyTarget = 5,
         RandomValidUnfriendlyTarget = 6,
+        RandomValidFriendlyTarget = 9,
         MostEndangeredValidFriendly = 7,
         RandomAlly = 3,
-        RandomAllyOrSelf = 4,
+        RandomValidFriendlyOrSelf = 4,
         Self = 2,
     }
 }

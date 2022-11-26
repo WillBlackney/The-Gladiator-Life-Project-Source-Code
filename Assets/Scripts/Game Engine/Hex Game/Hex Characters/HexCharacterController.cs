@@ -185,6 +185,45 @@ namespace HexGameEngine.Characters
 
 
         }
+        public HexCharacterModel CreateSummonedHexCharacter(EnemyTemplateSO data, LevelNode startPosition, Allegiance allegiance)
+        {
+            // Create GO + View
+            HexCharacterView vm = CreateCharacterEntityView().GetComponent<HexCharacterView>();
+
+            // Create data object
+            HexCharacterModel model = new HexCharacterModel();
+
+            // Connect model to view
+            model.hexCharacterView = vm;
+            vm.character = model;
+
+            // Set up positioning in world
+            LevelController.Instance.PlaceCharacterOnHex(model, startPosition, true);
+
+            // Face character
+            Facing facing = Facing.Right;
+            if (allegiance == Allegiance.Enemy) facing = Facing.Left;
+            LevelController.Instance.SetCharacterFacing(model, facing);
+
+            // Set type + allegiance
+            model.controller = Controller.AI;
+            model.allegiance = allegiance;
+
+            // Set up view
+            SetCharacterViewStartingState(model);
+
+            // Copy data from character data into new model
+            SetupCharacterFromEnemyData(model, CharacterDataController.Instance.GenerateEnemyDataFromEnemyTemplate(data));
+
+            // Add to persistency
+            if (allegiance == Allegiance.Player) AddSummonedDefenderToPersistency(model);
+            else AddEnemyToPersistency(model);
+
+            // Prevent character taking its turn this turn cycle
+            model.wasSummonedThisTurn = true;
+
+            return model;
+        }
         private GameObject CreateCharacterEntityView()
         {
             return Instantiate(PrefabHolder.Instance.CharacterEntityModel, transform.position, Quaternion.identity);
@@ -314,49 +353,6 @@ namespace HexGameEngine.Characters
             // Setup abilities
             AbilityController.Instance.BuildHexCharacterAbilityBookFromData(character, data.abilityBook);
         }
-        private void SetupCharacterFromEnemyData(HexCharacterModel character, EnemyTemplateSO data)
-        {
-            // Set general info
-            character.myName = data.myName;
-            character.race = data.race;
-            //character.audioProfile = data.audioProfile;
-
-            // Setup stats
-            character.attributeSheet = new AttributeSheet();
-            data.attributeSheet.CopyValuesIntoOther(character.attributeSheet);
-
-            // Set up passive traits
-            PerkController.Instance.BuildEnemyCharacterEntityPassivesFromEnemyData(character, data);
-
-            // Set up items
-            Items.ItemSet itemSet = new Items.ItemSet();
-            Items.ItemController.Instance.CopySerializedItemManagerIntoStandardItemManager(data.itemSet, itemSet);
-            Items.ItemController.Instance.RunItemSetupOnHexCharacterFromItemSet(character, itemSet);
-
-            // Set up randomized health (if marked)           
-            if (data.randomizeHealth)
-                character.attributeSheet.maxHealth = RandomGenerator.NumberBetween(data.lowerHealthLimit, data.upperHealthLimit);
-
-            // Set up health + energy views
-            ModifyBaseMaxActionPoints(character, 0);
-            ModifyMaxHealth(character, 0);
-            ModifyHealth(character, StatCalculator.GetTotalMaxHealth(character));
-
-            // AI Logic
-            character.aiTurnRoutine = data.aiTurnRoutine;
-            if (character.aiTurnRoutine == null)
-                Debug.LogWarning("Routine is null...");
-
-            // Build UCM
-            CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.ucm, data.modelParts);
-            SetCharacterModelSize(character.hexCharacterView, data.modelSize);
-
-            // Build activation window
-            TurnController.Instance.CreateActivationWindow(character);
-
-            // Setup abilities
-            AbilityController.Instance.BuildHexCharacterAbilityBookFromData(character, new AbilityBook(data.abilityBook));
-        }
         public void SpawnEnemyEncounter(EnemyEncounterData encounterData)
         {
             List<LevelNode> spawnLocations = LevelController.Instance.GetEnemySpawnZone();
@@ -370,47 +366,8 @@ namespace HexGameEngine.Characters
                 CreateEnemyHexCharacter(dataSet.characterData, spawnNode);
             }
 
-        }
+        }        
         
-        public HexCharacterModel CreateSummonedHexCharacter(EnemyTemplateSO data, LevelNode startPosition, Allegiance allegiance)
-        {
-            // Create GO + View
-            HexCharacterView vm = CreateCharacterEntityView().GetComponent<HexCharacterView>();
-
-            // Create data object
-            HexCharacterModel model = new HexCharacterModel();
-
-            // Connect model to view
-            model.hexCharacterView = vm;
-            vm.character = model;
-
-            // Set up positioning in world
-            LevelController.Instance.PlaceCharacterOnHex(model, startPosition, true);
-
-            // Face character
-            Facing facing = Facing.Right;
-            if (allegiance == Allegiance.Enemy) facing = Facing.Left;
-            LevelController.Instance.SetCharacterFacing(model, facing);
-
-            // Set type + allegiance
-            model.controller = Controller.AI;
-            model.allegiance = allegiance;
-
-            // Set up view
-            SetCharacterViewStartingState(model);
-
-            // Copy data from character data into new model
-            SetupCharacterFromEnemyData(model, data);
-
-            // Add to persistency
-            AddDefenderToPersistency(model);
-
-            // Prevent character taking its turn this turn cycle
-            model.wasSummonedThisTurn = true;
-
-            return model;
-        }      
-
 
         #endregion
 

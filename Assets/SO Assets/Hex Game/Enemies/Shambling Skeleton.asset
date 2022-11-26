@@ -24,10 +24,10 @@ MonoBehaviour:
       value: 0
       stars: 0
     dodge:
-      value: 0
+      value: -5
       stars: 0
     accuracy:
-      value: 55
+      value: 50
       stars: 0
     resolve:
       value: 5
@@ -93,6 +93,8 @@ MonoBehaviour:
     - perkTag: 24
       stacks: 1
     - perkTag: 204
+      stacks: 1
+    - perkTag: 71
       stacks: 1
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}

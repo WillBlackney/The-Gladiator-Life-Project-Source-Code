@@ -1408,16 +1408,12 @@ namespace HexGameEngine.Combat
                         tile.myCharacter.livingState == LivingState.Alive &&
                         tile.myCharacter.currentHealth > 0)
                     {
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(tile.myCharacter.pManager, Perk.Poisoned,
-                        PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Volatile), true, 0, character.pManager);
-
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(tile.myCharacter.pManager, Perk.Poisoned, 3, true, 0, character.pManager);
                     }
-                }
-                
+                }                
 
                 VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
-            }
-           
+            }           
 
             // Check if the combat defeat event should be triggered
             if (HexCharacterController.Instance.AllDefenders.Count == 0 &&

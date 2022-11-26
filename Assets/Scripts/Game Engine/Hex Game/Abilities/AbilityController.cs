@@ -1873,6 +1873,12 @@ namespace HexGameEngine.Abilities
                         }
                     }
 
+                    else if (ar.type == AbilityRequirementType.TargetHasRace &&
+                       target.race == ar.race)
+                    {
+                        pass = true;
+                    }
+
                     else if (ar.type == AbilityRequirementType.TargetIsTeleportable &&
                         HexCharacterController.Instance.IsCharacterTeleportable(target))
                     {

@@ -236,9 +236,16 @@ namespace HexGameEngine.Abilities
         [ShowIf("ShowHealthRequired")]
         public int healthRequired;
 
+        [ShowIf("ShowRace")]
+        public CharacterRace race;
+
         public bool ShowHealthRequired()
         {
             return type == AbilityRequirementType.CasterHasEnoughHealth;
+        }
+        public bool ShowRace()
+        {
+            return type == AbilityRequirementType.TargetHasRace;
         }
     }
 }

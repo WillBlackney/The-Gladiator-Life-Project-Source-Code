@@ -17,8 +17,8 @@ MonoBehaviour:
   baseAbilityDescription: Summon a shambling skeleton at target location.
   abilitySprite: {fileID: 21300000, guid: 5c66dc369ad3811498e609489d4f52c3, type: 3}
   energyCost: 4
-  fatigueCost: 0
-  baseCooldown: 2
+  fatigueCost: 8
+  baseCooldown: 1
   abilityType: 0100000008000000
   doesNotBreakStealth: 0
   weaponRequirement: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
     talentSchool: 0
     level: 0
   abilitySubRequirements: []
-  baseRange: 2
+  baseRange: 3
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
   hitChanceModifierAgainstAdjacent: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
     bonusArmourDamage: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
-    characterSummoned: {fileID: 11400000, guid: 3ae71699b90b3df4b98656af8b9de968,
+    characterSummoned: {fileID: 11400000, guid: c821c0b02eb8ba94db4a4d700ceed222,
       type: 2}
     modelFadeInSpeed: 0.5
     uiFadeInSpeed: 0.5
@@ -150,7 +150,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Summon a Shambling Skeleton to fight for you at target location.
+    phrase: Summon a Shambling Skeleton at a target location.
   keyWords:
   - kewWordType: 5
     passiveType: 0

@@ -36,6 +36,14 @@ namespace HexGameEngine.AI
         [LabelWidth(100)]
         public int fatigueReq;
 
+        [ShowIf("ShowStressReq")]
+        [LabelWidth(100)]
+        public int stressReq;
+
+        [ShowIf("ShowTurnReq")]
+        [LabelWidth(100)]
+        public int turnReq;
+
         [ShowIf("ShowAlliesAlive")]
         [LabelWidth(100)]
         public int alliesAlive;
@@ -48,6 +56,10 @@ namespace HexGameEngine.AI
         {
             return requirementType == AIActionRequirementType.AbilityIsOffCooldown;
         }
+        public bool ShowTurnReq()
+        {
+            return requirementType == AIActionRequirementType.IsLessThanTurnX || requirementType == AIActionRequirementType.IsMoreThanTurnX;
+        }
         public bool ShowEnergyReq()
         {
             if (requirementType == AIActionRequirementType.HasMoreEnergyThanX || requirementType == AIActionRequirementType.HasLessEnergyThanX)
@@ -55,6 +67,11 @@ namespace HexGameEngine.AI
                 return true;
             }
             else return false;
+        }
+        public bool ShowStressReq()
+        {
+            return requirementType == AIActionRequirementType.TargetHasLessStressThanX ||
+                requirementType == AIActionRequirementType.TargetHasMoreStressThanX;
         }
         public bool ShowFatigueReq()
         {
@@ -133,5 +150,9 @@ namespace HexGameEngine.AI
         TargetIsElevated = 21,
         TargetIsNotElevated = 22,
         HasMoreFatigueThanX = 23,
+        TargetHasLessStressThanX = 24,
+        TargetHasMoreStressThanX = 25,
+        IsLessThanTurnX = 26,
+        IsMoreThanTurnX = 27,
     }
 }

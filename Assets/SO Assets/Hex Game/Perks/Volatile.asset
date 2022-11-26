@@ -23,7 +23,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'X '
+    phrase: '3 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -42,8 +42,8 @@ MonoBehaviour:
     phrase: tile.
   passiveItalicDescription: 
   effectDetailTabs: []
-  maxAllowedStacks: 10
-  showStackCount: 1
+  maxAllowedStacks: 5
+  showStackCount: 0
   hiddenOnPassivePanel: 0
   isRewardable: 0
   resistanceBlocksIncrease: 0

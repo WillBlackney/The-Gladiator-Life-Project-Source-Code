@@ -204,6 +204,7 @@ namespace HexGameEngine
         TargetIsTeleportable = 2,
         CasterIsTeleportable = 3,
         CasterHasEnoughHealth = 4,
+        TargetHasRace = 5,
 
     }
     public enum AbilitySelectionPhase
@@ -474,6 +475,7 @@ namespace HexGameEngine
         Frail = 94,
         FragileBinding = 85,            
         FlamingWeapon = 8,
+        GraveRush = 205,
         HardNoggin = 112,
         HymnOfFellowship = 138,
         HymnOfPurity = 139,

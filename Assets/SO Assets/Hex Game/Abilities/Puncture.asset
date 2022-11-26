@@ -115,12 +115,7 @@ MonoBehaviour:
     ignoresArmour: 1
     bonusArmourDamage: 0
     injuryTypesCaused: 
-    damageEffectModifiers:
-    - type: 7
-      perk: 0
-      targetRace: 0
-      bonusDamageModifier: 0
-      bonusCriticalChance: 0
+    damageEffectModifiers: []
     characterSummoned: {fileID: 0}
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
