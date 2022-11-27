@@ -39,6 +39,50 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brute))
                 might += 10;
 
+            // Check Fear + Hate of X Perks
+            var myAura = LevelController.Instance.GetAllHexsWithinRange(c.currentTile, GetTotalAuraSize(c));
+            bool hasHateOfUndead = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HateOfUndead);
+            bool hasFearOfUndead = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FearOfUndead);
+            bool hasHateOfHumanity = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HateOfHumanity);
+            bool hasFearOfHumanity = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FearOfHumanity);
+            bool hasHateOfGreenskins = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HateOfGreenskins);
+            bool hasFearOfGreenskins = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FearOfGreenskins);
+            if (hasFearOfUndead || hasHateOfUndead)
+            {
+                foreach (HexCharacterModel otherCharacter in HexCharacterController.Instance.AllCharacters)
+                {
+                    if (otherCharacter.race == CharacterRace.Undead && myAura.Contains(otherCharacter.currentTile))
+                    {
+                        if (hasHateOfUndead) might += 5;
+                        else if (hasFearOfUndead) might -= 5;
+                    }
+                }
+            }
+            if(hasHateOfHumanity || hasFearOfHumanity)
+            {
+                foreach (HexCharacterModel otherCharacter in HexCharacterController.Instance.AllCharacters)
+                {
+                    if (otherCharacter.race == CharacterRace.Human && myAura.Contains(otherCharacter.currentTile))
+                    {
+                        if (hasHateOfHumanity) might += 5;
+                        else if (hasFearOfHumanity) might -= 5;
+                    }
+                }
+            }
+            if (hasHateOfGreenskins || hasFearOfGreenskins)
+            {
+                foreach (HexCharacterModel otherCharacter in HexCharacterController.Instance.AllCharacters)
+                {
+                    if ((otherCharacter.race == CharacterRace.Orc || otherCharacter.race == CharacterRace.Goblin) && 
+                        myAura.Contains(otherCharacter.currentTile))
+                    {
+                        if (hasHateOfGreenskins) might += 5;
+                        else if (hasFearOfGreenskins) might -= 5;
+                    }
+                }
+            }
+
+
             // Items
             might += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Might, c.itemSet);
             if (mod < 0) mod = 0;
@@ -242,21 +286,7 @@ namespace HexGameEngine
                       
 
             // Mud tile
-            if (c.currentTile.TileData.tileName == "Water") accuracy -= 10;
-
-            // Check hate of undead perk
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.UndeadHater))
-            {
-                foreach (HexCharacterModel enemy in HexCharacterController.Instance.GetAllEnemiesOfCharacter(c))
-                {
-                    if (enemy.race == CharacterRace.Undead)
-                    {
-                        accuracy += 10;
-                        break;
-                    }
-                }
-            }
-
+            if (c.currentTile.TileData.tileName == "Water") accuracy -= 10;       
 
             // Stress State Modifier
             accuracy += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress), c);
@@ -491,7 +521,7 @@ namespace HexGameEngine
             dodge = (int)(dodge * mod);
             return dodge;
         }
-        public static int GetTotalResolve(HexCharacterModel c)
+        public static int GetTotalResolve(HexCharacterModel c, bool allowRecursion = true)
         {
             int resolve = c.attributeSheet.resolve.value;
             float mod = 1f;
@@ -515,16 +545,19 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
                 resolve += 3;
 
-            // Check Inspiring Leader perk: +50% resolve if within an ally's aura
-            foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(c))
+            // Check Inspiring Leader perk: +25% resolve if within an ally's aura
+            if (allowRecursion)
             {
-                if (PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.InspiringLeader) &&
-                    LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, GetTotalAuraSize(ally)).Contains(c.currentTile))
+                foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(c))
                 {
-                    resolve += (int) (GetTotalResolve(ally) * 0.25f);
-                    break;
+                    if (PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.InspiringLeader) &&
+                        LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, GetTotalAuraSize(ally)).Contains(c.currentTile))
+                    {
+                        resolve += (int)(GetTotalResolve(ally, false) * 0.25f);
+                        break;
+                    }
                 }
-            }
+            }           
 
             // Check for Fearsome enemies
             foreach (HexCharacterModel enemy in HexCharacterController.Instance.GetAllEnemiesOfCharacter(c))
@@ -536,28 +569,45 @@ namespace HexGameEngine
                 }
             }
 
-            // Check fear of undead perk
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FearOfUndead))
+            // Check Fear + Hate of X Perks
+            var myAura = LevelController.Instance.GetAllHexsWithinRange(c.currentTile, GetTotalAuraSize(c));
+            bool hasHateOfUndead = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HateOfUndead);
+            bool hasFearOfUndead = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FearOfUndead);
+            bool hasHateOfHumanity = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HateOfHumanity);
+            bool hasFearOfHumanity = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FearOfHumanity);
+            bool hasHateOfGreenskins = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HateOfGreenskins);
+            bool hasFearOfGreenskins = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FearOfGreenskins);
+            if (hasFearOfUndead || hasHateOfUndead)
             {
-                foreach(HexCharacterModel enemy in HexCharacterController.Instance.GetAllEnemiesOfCharacter(c))
+                foreach (HexCharacterModel otherCharacter in HexCharacterController.Instance.AllCharacters)
                 {
-                    if(enemy.race == CharacterRace.Undead)
+                    if (otherCharacter.race == CharacterRace.Undead && myAura.Contains(otherCharacter.currentTile))
                     {
-                        resolve -= 15;
-                        break;
+                        if (hasHateOfUndead) resolve += 5;
+                        else if (hasFearOfUndead) resolve -= 5;
                     }
                 }
             }
-
-            // Check hate of undead perk
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.UndeadHater))
+            if (hasHateOfHumanity || hasFearOfHumanity)
             {
-                foreach (HexCharacterModel enemy in HexCharacterController.Instance.GetAllEnemiesOfCharacter(c))
+                foreach (HexCharacterModel otherCharacter in HexCharacterController.Instance.AllCharacters)
                 {
-                    if (enemy.race == CharacterRace.Undead)
+                    if (otherCharacter.race == CharacterRace.Human && myAura.Contains(otherCharacter.currentTile))
                     {
-                        resolve += 10;
-                        break;
+                        if (hasHateOfHumanity) resolve += 5;
+                        else if (hasFearOfHumanity) resolve -= 5;
+                    }
+                }
+            }
+            if (hasHateOfGreenskins || hasFearOfGreenskins)
+            {
+                foreach (HexCharacterModel otherCharacter in HexCharacterController.Instance.AllCharacters)
+                {
+                    if ((otherCharacter.race == CharacterRace.Orc || otherCharacter.race == CharacterRace.Goblin) &&
+                        myAura.Contains(otherCharacter.currentTile))
+                    {
+                        if (hasHateOfGreenskins) resolve += 5;
+                        else if (hasFearOfGreenskins) resolve -= 5;
                     }
                 }
             }

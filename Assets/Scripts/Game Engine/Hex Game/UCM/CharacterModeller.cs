@@ -50,13 +50,13 @@ namespace HexGameEngine.UCM
         {
             if (modelClonedFrom == null)
             {
-                Debug.Log("CharacterModelController.BuildModelFromModelClone() was given a null UCM to clone from, returning...");
+                Debug.Log("CharacterModeller.BuildModelFromModelClone() was given a null UCM to clone from, returning...");
                 return;
             }
 
             if (modelToBuild == null)
             {
-                Debug.Log("CharacterModelController.BuildModelFromModelClone() was given a null UCM to build into, returning...");
+                Debug.Log("CharacterModeller.BuildModelFromModelClone() was given a null UCM to build into, returning...");
                 return;
             }
 
@@ -65,7 +65,7 @@ namespace HexGameEngine.UCM
 
             if (modelClonedFrom.allModelElements.Length > 0)
             {
-                for (int index = 0; index < modelClonedFrom.allModelElements.Length - 1; index++)
+                for (int index = 0; index < modelClonedFrom.allModelElements.Length - 1 && index < modelToBuild.allModelElements.Length - 1; index++)
                 {
                     if (modelClonedFrom.allModelElements[index].gameObject.activeSelf)
                     {

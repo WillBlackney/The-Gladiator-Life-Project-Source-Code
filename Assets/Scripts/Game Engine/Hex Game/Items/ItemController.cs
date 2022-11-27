@@ -280,7 +280,9 @@ namespace HexGameEngine.Items
 
             character.itemSet = new ItemSet();
             CopyItemManagerDataIntoOtherItemManager(itemSet, character.itemSet);
-            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.ucm);
+            // Dont apply appearance of weapons to enemies, they get this look directly from their UCM string references
+            if(character.controller != Controller.AI)
+                CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.ucm);
 
         }
         public void CopyItemManagerDataIntoOtherItemManager(ItemSet originalData, ItemSet clone)

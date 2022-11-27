@@ -120,7 +120,7 @@ namespace HexGameEngine.Characters
         public void CreatePlayerHexCharacter(HexCharacterData data, LevelNode startPosition)
         {
             // Create GO + View
-            HexCharacterView vm = CreateCharacterEntityView().GetComponent<HexCharacterView>();            
+            HexCharacterView vm = CreateCharacterEntityView();            
 
             // Create data object
             HexCharacterModel model = new HexCharacterModel();
@@ -151,7 +151,7 @@ namespace HexGameEngine.Characters
         public HexCharacterModel CreateEnemyHexCharacter(HexCharacterData data, LevelNode startPosition)
         {
             // Create GO + View
-            HexCharacterView vm = CreateCharacterEntityView().GetComponent<HexCharacterView>();
+            HexCharacterView vm = CreateCharacterEntityView();
 
             // Create data object
             HexCharacterModel model = new HexCharacterModel();
@@ -188,7 +188,7 @@ namespace HexGameEngine.Characters
         public HexCharacterModel CreateSummonedHexCharacter(EnemyTemplateSO data, LevelNode startPosition, Allegiance allegiance)
         {
             // Create GO + View
-            HexCharacterView vm = CreateCharacterEntityView().GetComponent<HexCharacterView>();
+            HexCharacterView vm = CreateCharacterEntityView();
 
             // Create data object
             HexCharacterModel model = new HexCharacterModel();
@@ -224,9 +224,9 @@ namespace HexGameEngine.Characters
 
             return model;
         }
-        private GameObject CreateCharacterEntityView()
+        private HexCharacterView CreateCharacterEntityView()
         {
-            return Instantiate(PrefabHolder.Instance.CharacterEntityModel, transform.position, Quaternion.identity);
+            return Instantiate(PrefabHolder.Instance.CharacterEntityModel, transform.position, Quaternion.identity).GetComponent<HexCharacterView>();
         }
         private void SetCharacterModelSize(HexCharacterView view, CharacterModelSize size)
         {
@@ -301,8 +301,6 @@ namespace HexGameEngine.Characters
             // Build UCMs
             CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.ucm, data.modelParts);
             CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.ucm);
-            //CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.uiPotraitUCM, data.modelParts);
-            //CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.uiPotraitUCM);
             SetCharacterModelSize(character.hexCharacterView, data.modelSize);
 
             // Build activation window
