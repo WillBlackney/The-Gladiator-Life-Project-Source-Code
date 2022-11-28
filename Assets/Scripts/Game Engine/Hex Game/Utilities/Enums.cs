@@ -340,6 +340,7 @@ namespace HexGameEngine
         //RemoveArmour = 21,
         RemovePassiveTarget = 18,
         StressCheck = 9,
+        StressCheckAoe = 21,
         SummonCharacter = 16,       
         TeleportSelf = 8,
         TeleportTargetToTile = 13,

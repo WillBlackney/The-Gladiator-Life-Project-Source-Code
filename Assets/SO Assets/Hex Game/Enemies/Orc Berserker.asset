@@ -15,10 +15,10 @@ MonoBehaviour:
   myName: Orc Berserker
   race: 2
   modelSize: 2
-  xpReward: 65
+  xpReward: 35
   attributeSheet:
     might:
-      value: 0
+      value: 25
       stars: 0
     constitution:
       value: 0
@@ -27,13 +27,13 @@ MonoBehaviour:
       value: 0
       stars: 0
     accuracy:
-      value: 85
+      value: 75
       stars: 0
     resolve:
-      value: 35
+      value: 25
       stars: 0
     fatigue:
-      value: 80
+      value: 120
       stars: 0
     wits:
       value: 5
@@ -41,7 +41,7 @@ MonoBehaviour:
     maxHealth: 200
     apRecovery: 8
     maxAp: 8
-    initiative: 5
+    initiative: 7
     fatigueRecovery: 8
     criticalChance: 10
     criticalModifier: 50
@@ -49,21 +49,54 @@ MonoBehaviour:
     magicDamageBonus: 0
     auraSize: 1
     vision: 0
-    physicalResistance: 35
+    physicalResistance: 0
     magicResistance: 0
     debuffResistance: 0
     stressResistance: 0
-    injuryResistance: 50
+    injuryResistance: 0
     deathResistance: 0
   baseArmour: 0
-  randomizeHealth: 0
-  lowerHealthLimit: 175
-  upperHealthLimit: 130
+  randomizeHealth: 1
+  lowerHealthLimit: 215
+  upperHealthLimit: 225
   aiTurnRoutine:
     directives:
     - action:
         actionType: 1
-        targettingPriority: 
+        targettingPriority: 02000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Terrifying Roar
+      requirements:
+      - requirementType: 2
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+      - requirementType: 23
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 15
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+    - action:
+        actionType: 1
+        targettingPriority: 02000000
         getRangeFromAbility: 0
         range: 0
         abilityName: Cleave
@@ -72,35 +105,71 @@ MonoBehaviour:
         range: 0
         perkPairing:
           perkTag: 0
-          passiveStacks: 0
+          passiveStacks: 1
         healthPercentage: 0
         enemiesInMeleeRange: 2
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
         actionType: 1
-        targettingPriority: 
+        targettingPriority: 050000000100000006000000
         getRangeFromAbility: 0
         range: 0
-        abilityName: Strike
+        abilityName: Decapitate
+      requirements:
+      - requirementType: 7
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 66
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+      - requirementType: 23
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 22
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+    - action:
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Chop
       requirements: []
     - action:
         actionType: 2
-        targettingPriority: 
+        targettingPriority: 0500000001000000
         getRangeFromAbility: 0
         range: 0
         abilityName: 
       requirements: []
   abilityBook:
     activeAbilities:
-    - {fileID: 11400000, guid: 5da6171d9b5a21b47b2adc4c680a46c2, type: 2}
-    - {fileID: 11400000, guid: b0a84f007fec2134c8e8baa16312f884, type: 2}
+    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
+    - {fileID: 11400000, guid: eb8ff78a81829564f97932425b3fdb84, type: 2}
   serializedPassiveManager:
     perks:
-    - perkTag: 60
-      stacks: 1
     - perkTag: 46
+      stacks: 1
+    - perkTag: 16
       stacks: 1
   itemSet:
     mainHandItem: {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}
@@ -109,14 +178,5 @@ MonoBehaviour:
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
   modelParts:
-  - Orc_Head_1
-  - Orc_Face_7
-  - Orc_Chest
-  - Orc_Right_Arm
-  - Orc_Right_Hand
-  - Orc_Left_Arm
-  - Orc_Left_Hand
-  - Orc_Right_Leg
-  - Orc_Left_Leg
-  - Barbarian_Chest_Wear
+  - Orc_Berserker_Chest
   - Left_Hand_Simple_Battle_Axe

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Cleave
   includeInGame: 1
-  baseAbilityDescription: Deal 100% Weapon damage to all enemies within 1 tile.
+  baseAbilityDescription: Deal 125% Weapon damage to all enemies within 1 tile.
   abilitySprite: {fileID: 21300000, guid: fead2e562e86f7b42b67646529469f30, type: 3}
-  energyCost: 4
+  energyCost: 5
   fatigueCost: 12
   baseCooldown: 2
   abilityType: 0200000004000000

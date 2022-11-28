@@ -412,7 +412,7 @@ namespace HexGameEngine.Abilities
                 HitRoll hitResult = CombatController.Instance.RollForHit(caster, target, ability);
                 bool didCrit = CombatController.Instance.RollForCrit(caster, target, ability, abilityEffect);
 
-               // VisualEventManager.Instance.CreateStackParentVisualEvent(target);
+                // VisualEventManager.Instance.CreateStackParentVisualEvent(target);
 
                 if (hitResult.Result == HitRollResult.Hit)
                 {
@@ -421,18 +421,18 @@ namespace HexGameEngine.Abilities
 
                     DamageResult damageResult = null;
                     damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(caster, target, ability, abilityEffect, didCrit);
-                    damageResult.didCrit = didCrit;       
-                    
+                    damageResult.didCrit = didCrit;
+
                     // Resolve bonus armour damage
-                    if(abilityEffect.bonusArmourDamage > 0)                    
-                        HexCharacterController.Instance.ModifyArmour(target, -abilityEffect.bonusArmourDamage);                    
+                    if (abilityEffect.bonusArmourDamage > 0)
+                        HexCharacterController.Instance.ModifyArmour(target, -abilityEffect.bonusArmourDamage);
 
                     // Do on hit visual effects for this ability
-                    foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)                    
+                    foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                         AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, target.GetLastStackEventParent());
-                    
+
                     // On crit stress check
-                    if (didCrit)                    
+                    if (didCrit)
                         CombatController.Instance.CreateStressCheck(caster, StressEventType.LandedCriticalStrike);
 
                     // Cache hex position, in case target is killed before chain effect triggers
@@ -471,7 +471,7 @@ namespace HexGameEngine.Abilities
                                 TriggerAbilityEffect(ability, e, caster, target, tileTarget);
                             }
                         }
-                       
+
                     }
 
                     // trigger chain effect here?
@@ -555,22 +555,22 @@ namespace HexGameEngine.Abilities
                         ability.abilityType.Contains(AbilityType.MeleeAttack) &&
                         target.currentTile.Distance(caster.currentTile) <= 1 &&
                         // Cant riposte against another riposte, or free strike
-                        ability.abilityName != RiposteAbility.abilityName && 
+                        ability.abilityName != RiposteAbility.abilityName &&
                         ability.abilityName != FreeStrikeAbility.abilityName &&
                          ability.abilityName != SpearWallStrikeAbility.abilityName)
                     {
                         // Riposte notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "Riposte!"), QueuePosition.Back,0.5f);
+                            VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "Riposte!"), QueuePosition.Back, 0.5f);
 
                         // Start free strike attack
                         UseAbility(target, RiposteAbility, caster);
                         VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
 
-                        
-                    }                       
+
+                    }
                 }
-                
+
             }
 
             // Damage Aoe
@@ -582,11 +582,11 @@ namespace HexGameEngine.Abilities
                 List<HexCharacterModel> charactersHit = new List<HexCharacterModel>();
 
                 // Get Aoe Area
-                if (abilityEffect.aoeType == AoeType.Aura) tilesEffected = HexCharacterController.Instance.GetCharacterAura(caster, true);                
-                else if (abilityEffect.aoeType == AoeType.ZoneOfControl) tilesEffected = HexCharacterController.Instance.GetCharacterZoneOfControl(caster);                
-                else if (abilityEffect.aoeType == AoeType.AtTarget) tilesEffected = LevelController.Instance.GetAllHexsWithinRange(tileTarget, abilityEffect.aoeSize, true);                
+                if (abilityEffect.aoeType == AoeType.Aura) tilesEffected = HexCharacterController.Instance.GetCharacterAura(caster, true);
+                else if (abilityEffect.aoeType == AoeType.ZoneOfControl) tilesEffected = HexCharacterController.Instance.GetCharacterZoneOfControl(caster);
+                else if (abilityEffect.aoeType == AoeType.AtTarget) tilesEffected = LevelController.Instance.GetAllHexsWithinRange(tileTarget, abilityEffect.aoeSize, true);
                 else if (abilityEffect.aoeType == AoeType.Global) tilesEffected.AddRange(LevelController.Instance.AllLevelNodes.ToList());
-                
+
                 // Remove centre point, if needed
                 if (abilityEffect.includeCentreTile == false)
                 {
@@ -621,7 +621,7 @@ namespace HexGameEngine.Abilities
                     VisualEventManager.Instance.CreateStackParentVisualEvent(character);
 
                     // Roll for hit
-                    HitRoll hitRoll = CombatController.Instance.RollForHit(caster, character, ability);                   
+                    HitRoll hitRoll = CombatController.Instance.RollForHit(caster, character, ability);
 
                     if (hitRoll.Result == HitRollResult.Hit)
                     {
@@ -660,7 +660,7 @@ namespace HexGameEngine.Abilities
                         // Duck animation on miss
                         VisualEventManager.Instance.CreateVisualEvent(() =>
                             HexCharacterController.Instance.PlayDuckAnimation(character.hexCharacterView), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
-                    }                    
+                    }
 
                 }
 
@@ -703,7 +703,7 @@ namespace HexGameEngine.Abilities
                     // Trigger on hit/crit effects
                     if (didCrit && ability.onCritEffects.Count > 0)
                     {
-                        foreach (AbilityEffect e in ability.onCritEffects )
+                        foreach (AbilityEffect e in ability.onCritEffects)
                         {
                             TriggerAbilityEffect(ability, e, caster, character, tileTarget);
                         }
@@ -725,6 +725,37 @@ namespace HexGameEngine.Abilities
                 CombatController.Instance.CreateStressCheck(target, abilityEffect.stressEventData, true);
             }
 
+            // Stress Check AoE
+            else if (abilityEffect.effectType == AbilityEffectType.StressCheckAoe)
+            {
+                triggerEffectEndEvents = false;
+                List<LevelNode> tilesEffected = new List<LevelNode>();
+                List<HexCharacterModel> charactersEffected = new List<HexCharacterModel>();
+                List<HexCharacterModel> charactersHit = new List<HexCharacterModel>();
+
+                // Get Aoe Area
+                if (abilityEffect.aoeType == AoeType.Aura)                
+                    tilesEffected = HexCharacterController.Instance.GetCharacterAura(caster, true);                
+                else if (abilityEffect.aoeType == AoeType.ZoneOfControl)                
+                    tilesEffected = HexCharacterController.Instance.GetCharacterZoneOfControl(caster);                
+                else if (abilityEffect.aoeType == AoeType.AtTarget)                
+                    tilesEffected = LevelController.Instance.GetAllHexsWithinRange(tileTarget, abilityEffect.aoeSize, true);                
+                else if (abilityEffect.aoeType == AoeType.Global)                
+                    tilesEffected.AddRange(LevelController.Instance.AllLevelNodes.ToList());                
+
+                // Determine targets to roll against.
+                foreach (LevelNode h in tilesEffected)                
+                    if (h.myCharacter != null && h.myCharacter.allegiance != caster.allegiance)                    
+                        charactersEffected.Add(h.myCharacter);                   
+                
+                // Roll for hits + play on Hit animations or on miss animations
+                foreach (HexCharacterModel character in charactersEffected)
+                {
+                    VisualEventManager.Instance.CreateStackParentVisualEvent(character);
+                    CombatController.Instance.CreateStressCheck(character, abilityEffect.stressEventData, true);
+                }                                          
+            }
+
             // Apply passive to target
             else if (abilityEffect.effectType == AbilityEffectType.ApplyPassiveTarget)
             {
@@ -732,8 +763,8 @@ namespace HexGameEngine.Abilities
                 bool roll = RandomGenerator.NumberBetween(1, 100) <= abilityEffect.perkApplicationChance;
                 bool success = false;
 
-                if(roll)
-                success = PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, abilityEffect.perkPairing.perkTag, stacks, true, 0.5f, caster.pManager);
+                if (roll)
+                    success = PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, abilityEffect.perkPairing.perkTag, stacks, true, 0.5f, caster.pManager);
 
                 if (success)
                 {
@@ -850,8 +881,8 @@ namespace HexGameEngine.Abilities
                 // Do probability roll
                 bool roll = RandomGenerator.NumberBetween(1, 100) <= abilityEffect.perkApplicationChance;
 
-                if(roll) PerkController.Instance.ModifyPerkOnCharacterEntity(caster.pManager, abilityEffect.perkPairing.perkTag, stacks, true, 0.5f, caster.pManager);
-              
+                if (roll) PerkController.Instance.ModifyPerkOnCharacterEntity(caster.pManager, abilityEffect.perkPairing.perkTag, stacks, true, 0.5f, caster.pManager);
+
             }
 
             // Apply passive in line
@@ -908,7 +939,7 @@ namespace HexGameEngine.Abilities
                     bool roll = RandomGenerator.NumberBetween(1, 100) <= abilityEffect.perkApplicationChance;
                     bool success = false;
 
-                    if(roll) success = PerkController.Instance.ModifyPerkOnCharacterEntity
+                    if (roll) success = PerkController.Instance.ModifyPerkOnCharacterEntity
                          (character.pManager, abilityEffect.perkPairing.perkTag, abilityEffect.perkPairing.passiveStacks, true, 0f, caster.pManager);
 
                     if (success) charactersHit.Add(character);
@@ -935,7 +966,7 @@ namespace HexGameEngine.Abilities
             else if (abilityEffect.effectType == AbilityEffectType.RemovePassiveTarget)
             {
                 int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(target.pManager, abilityEffect.perkPairing.perkTag);
-                if(stacks > 0)
+                if (stacks > 0)
                     PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, abilityEffect.perkPairing.perkTag, -stacks, true, 0.5f, caster.pManager);
             }
 
@@ -969,8 +1000,8 @@ namespace HexGameEngine.Abilities
                 HexCharacterController.Instance.ModifyHealth(caster, abilityEffect.healthGained);
 
                 // Heal VFX
-                VisualEventManager.Instance.CreateVisualEvent(()=> 
-                { 
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                {
                     VisualEffectManager.Instance.CreateHealEffect(view.WorldPosition);
                     VisualEffectManager.Instance.CreateDamageTextEffect(view.WorldPosition, abilityEffect.healthGained, false, true);
                 });
@@ -1007,7 +1038,7 @@ namespace HexGameEngine.Abilities
                     LevelController.Instance.FaceCharacterTowardsHex(caster, target.currentTile);
                 }
                 */
-                
+
                 LevelNode destination = null;
                 List<LevelNode> targetBackTiles = HexCharacterController.Instance.GetCharacterBackArcTiles(target);
                 List<LevelNode> validTiles = new List<LevelNode>();
@@ -1024,7 +1055,7 @@ namespace HexGameEngine.Abilities
 
                 LevelController.Instance.HandleTeleportCharacter(caster, destination);
                 LevelController.Instance.FaceCharacterTowardsHex(caster, target.currentTile);
-                
+
             }
 
             // Move in line
@@ -1081,15 +1112,15 @@ namespace HexGameEngine.Abilities
 
                 // get knock back tiles
                 for (int i = 0; i < abilityEffect.knockBackDistance; i++)
-                {                    
+                {
                     bool forceBreak = false;
                     foreach (LevelNode h in LevelController.Instance.GetAllHexsWithinRange(previousTile, 1))
                     {
                         if (LevelController.Instance.GetDirectionToTargetHex(previousTile, h) == dir)
                         {
                             // Found next tile in direction
-                            if (Pathfinder.CanHexBeOccupied(h))                            
-                                previousTile = h;                            
+                            if (Pathfinder.CanHexBeOccupied(h))
+                                previousTile = h;
                             else
                             {
                                 forceBreak = true;
@@ -1119,9 +1150,9 @@ namespace HexGameEngine.Abilities
             else if (abilityEffect.effectType == AbilityEffectType.SummonCharacter)
             {
                 // Create character
-                HexCharacterModel newSummon = 
+                HexCharacterModel newSummon =
                     HexCharacterController.Instance.CreateSummonedHexCharacter(abilityEffect.characterSummoned, tileTarget, caster.allegiance);
-                              
+
 
                 // Disable activation window until ready
                 HexCharacterView view = newSummon.hexCharacterView;

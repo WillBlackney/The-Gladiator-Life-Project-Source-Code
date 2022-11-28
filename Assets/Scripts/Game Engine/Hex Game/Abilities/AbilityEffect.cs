@@ -285,7 +285,8 @@ namespace HexGameEngine.Abilities
         public bool ShowAoeSize()
         {
             if ((effectType == AbilityEffectType.ApplyPassiveAoe ||
-               effectType == AbilityEffectType.DamageAoe) &&
+               effectType == AbilityEffectType.DamageAoe || 
+               effectType == AbilityEffectType.StressCheckAoe) &&
                aoeType == AoeType.AtTarget)
                 return true;
             else return false;
@@ -293,7 +294,8 @@ namespace HexGameEngine.Abilities
         public bool ShowAoeType()
         {
             if (effectType == AbilityEffectType.ApplyPassiveAoe ||
-               effectType == AbilityEffectType.DamageAoe)
+               effectType == AbilityEffectType.DamageAoe ||
+               effectType == AbilityEffectType.StressCheckAoe)
                 return true;
             else return false;
         }
@@ -387,7 +389,7 @@ namespace HexGameEngine.Abilities
         #region
         public bool ShowStressEventData()
         {
-            return effectType == AbilityEffectType.StressCheck;
+            return effectType == AbilityEffectType.StressCheck || effectType == AbilityEffectType.StressCheckAoe;
         }
         #endregion
     }
