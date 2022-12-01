@@ -57,7 +57,8 @@ MonoBehaviour:
     deathResistance: 25
   abilityBook:
     activeAbilities:
-    - {fileID: 11400000, guid: a8709026bde6ab046a0b8aaf6d8b9785, type: 2}
+    - {fileID: 11400000, guid: 82b43c0a427979b48946285cd214d509, type: 2}
+    - {fileID: 11400000, guid: 4757d0aecda5c804582287dadf51f8c9, type: 2}
   serializedPassiveManager:
     perks: []
   modelParts:

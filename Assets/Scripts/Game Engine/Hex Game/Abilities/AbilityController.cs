@@ -1149,52 +1149,75 @@ namespace HexGameEngine.Abilities
             // Summon Character
             else if (abilityEffect.effectType == AbilityEffectType.SummonCharacter)
             {
-                // Create character
-                HexCharacterModel newSummon =
-                    HexCharacterController.Instance.CreateSummonedHexCharacter(abilityEffect.characterSummoned, tileTarget, caster.allegiance);
-
-
-                // Disable activation window until ready
-                HexCharacterView view = newSummon.hexCharacterView;
-                view.myActivationWindow.gameObject.SetActive(false);
-                TurnController.Instance.DisablePanelSlotAtIndex(TurnController.Instance.ActivationOrder.IndexOf(newSummon));
-
-                // Hide GUI
-                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null, 0);
-
-                // Hide model
-                HexCharacterController.Instance.FadeOutCharacterModel(view.ucm, 0);
-                HexCharacterController.Instance.FadeOutCharacterShadow(view, 0);
-                //view.blockMouseOver = true;
-
-                // Enable activation window
-                int windowIndex = TurnController.Instance.ActivationOrder.IndexOf(newSummon);
-                VisualEventManager.Instance.CreateVisualEvent(() =>
+                for(int i = 0; i < abilityEffect.amountSummoned; i++)
                 {
-                    view.myActivationWindow.gameObject.SetActive(true);
-                    view.myActivationWindow.Show();
-                    TurnController.Instance.EnablePanelSlotAtIndex(windowIndex);
-                }, QueuePosition.Back, 0f, 0.1f);
+                    LevelNode spawnLocation = tileTarget;
+                    if (spawnLocation == null)
+                    {
+                        // Get a random available tile.
+                        List<LevelNode> possibleTiles = new List<LevelNode>();
+                        foreach (LevelNode h in LevelController.Instance.AllLevelNodes)
+                        {
+                            if (Pathfinder.CanHexBeOccupied(h))                            
+                                possibleTiles.Add(h);                            
+                        }
 
-                // Update all window slot positions + activation pointer arrow
-                HexCharacterModel entityActivated = TurnController.Instance.EntityActivated;
-                VisualEventManager.Instance.CreateVisualEvent(() => TurnController.Instance.UpdateWindowPositions());
-                VisualEventManager.Instance.CreateVisualEvent(() => TurnController.Instance.MoveActivationArrowTowardsEntityWindow(entityActivated), QueuePosition.Back);
+                        if(possibleTiles.Count > 0)
+                        {
+                            possibleTiles.Shuffle();
+                            spawnLocation = possibleTiles[0];
+                        }
+                    }
 
-                // Fade in model + UI
-                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.FadeInCharacterWorldCanvas(view, null, abilityEffect.uiFadeInSpeed));
-                VisualEventManager.Instance.CreateVisualEvent(() =>
-                {
-                    CharacterModeller.FadeInCharacterModel(view.ucm, abilityEffect.modelFadeInSpeed);
-                    // CharacterModeller.FadeInCharacterShadow(view, 1f, () => view.blockMouseOver = false);
-                    CharacterModeller.FadeInCharacterShadow(view, 1f);
-                });
+                    if (!spawnLocation) break;
 
-                // Resolve visual events
-                foreach (AnimationEventData vEvent in abilityEffect.summonedCreatureVisualEvents)
-                {
-                    AnimationEventController.Instance.PlayAnimationEvent(vEvent, newSummon, newSummon);
+                    // Create character
+                    HexCharacterModel newSummon =
+                        HexCharacterController.Instance.CreateSummonedHexCharacter(abilityEffect.characterSummoned, spawnLocation, caster.allegiance);
+
+                    // Disable activation window until ready
+                    HexCharacterView view = newSummon.hexCharacterView;
+                    view.myActivationWindow.gameObject.SetActive(false);
+                    TurnController.Instance.DisablePanelSlotAtIndex(TurnController.Instance.ActivationOrder.IndexOf(newSummon));
+
+                    // Hide GUI
+                    HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null, 0);
+
+                    // Hide model
+                    HexCharacterController.Instance.FadeOutCharacterModel(view.ucm, 0);
+                    HexCharacterController.Instance.FadeOutCharacterShadow(view, 0);
+                    //view.blockMouseOver = true;
+
+                    // Enable activation window
+                    int windowIndex = TurnController.Instance.ActivationOrder.IndexOf(newSummon);
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    {
+                        view.myActivationWindow.gameObject.SetActive(true);
+                        view.myActivationWindow.Show();
+                        TurnController.Instance.EnablePanelSlotAtIndex(windowIndex);
+                    }, QueuePosition.Back, 0f, 0.1f);
+
+                    // Update all window slot positions + activation pointer arrow
+                    HexCharacterModel entityActivated = TurnController.Instance.EntityActivated;
+                    VisualEventManager.Instance.CreateVisualEvent(() => TurnController.Instance.UpdateWindowPositions());
+                    VisualEventManager.Instance.CreateVisualEvent(() => TurnController.Instance.MoveActivationArrowTowardsEntityWindow(entityActivated), QueuePosition.Back);
+
+                    // Fade in model + UI
+                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.FadeInCharacterWorldCanvas(view, null, abilityEffect.uiFadeInSpeed));
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    {
+                        CharacterModeller.FadeInCharacterModel(view.ucm, abilityEffect.modelFadeInSpeed);
+                        // CharacterModeller.FadeInCharacterShadow(view, 1f, () => view.blockMouseOver = false);
+                        CharacterModeller.FadeInCharacterShadow(view, 1f);
+                    });
+
+                    // Resolve visual events
+                    foreach (AnimationEventData vEvent in abilityEffect.summonedCreatureVisualEvents)
+                    {
+                        AnimationEventController.Instance.PlayAnimationEvent(vEvent, newSummon, newSummon);
+                    }
                 }
+                
 
 
             }

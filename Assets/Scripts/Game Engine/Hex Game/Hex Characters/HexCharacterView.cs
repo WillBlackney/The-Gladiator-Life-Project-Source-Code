@@ -80,7 +80,15 @@ namespace HexGameEngine.Characters
         #region
         public Vector3 WorldPosition
         {
-            get { return mainMovementParent.transform.position; }
+            get 
+            { 
+                if(mainMovementParent != null) return mainMovementParent.transform.position; 
+                else
+                {
+                    Debug.LogWarning("HexCharacterView.WorldPosition() mainMovementParent object is null!!!");
+                    return Vector2.zero;
+                }
+            }
         }
 
         #endregion

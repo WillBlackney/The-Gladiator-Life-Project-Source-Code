@@ -178,6 +178,12 @@ namespace HexGameEngine.Abilities
         [BoxGroup("Summon Settings")]
         [ShowIf("ShowSummonProperties")]
         [LabelWidth(150)]
+        public float amountSummoned = 1;
+
+        [Header("Summoning Visual Event Properties")]
+        [BoxGroup("Summon Settings")]
+        [ShowIf("ShowSummonProperties")]
+        [LabelWidth(150)]
         public float modelFadeInSpeed;
 
         [BoxGroup("Summon Settings")]

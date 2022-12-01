@@ -171,6 +171,8 @@ MonoBehaviour:
       stacks: 1
     - perkTag: 16
       stacks: 1
+    - perkTag: 86
+      stacks: 1
   itemSet:
     mainHandItem: {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}
     offHandItem: {fileID: 0}
