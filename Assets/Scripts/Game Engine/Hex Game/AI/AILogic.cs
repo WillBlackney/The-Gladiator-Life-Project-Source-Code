@@ -32,8 +32,6 @@ namespace HexGameEngine.AI
                 successfulAction = await TryTakeAction(character);
                 loops += 1;                
             }
-
-            Debug.LogWarning("AILogic.RunEnemyRoutine() action attempts made: " + loops.ToString());
             /*
             bool successfulAction = await TryTakeAction(character);
             int maximumActionAttempts = 10;
@@ -162,15 +160,12 @@ namespace HexGameEngine.AI
                     List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
                     List<LevelNode> targetMeleeTiles = LevelController.Instance.GetAllHexsWithinRange(tpt.Target.currentTile, 1);
                     Path bestPath = null;
-                    int id = RandomGenerator.NumberBetween(1, 10000);
-                    Debug.LogWarning("IsDirectiveActionable() all possible paths for directive 'MoveToEngageInMelee' = " + allPossiblePaths.Count.ToString() + ", id: " + id.ToString());
-
+                    
                     foreach (Path p in allPossiblePaths)
                     {
                         if (targetMeleeTiles.Contains(p.Destination) &&
                             MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
                         {
-                            Debug.LogWarning("IsDirectiveActionable() found valid path directive 'MoveToEngageInMelee', id: " + id.ToString());
                             bestPath = p;
                             break;
                         }

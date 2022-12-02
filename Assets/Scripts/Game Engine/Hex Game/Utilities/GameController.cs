@@ -155,8 +155,16 @@ namespace HexGameEngine
             PersistencyController.Instance.AutoUpdateSaveFile();
 
             // Setup player characters
-            HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
-
+            if (GlobalSettings.Instance.EnemyVsEnemyMode)
+            {
+                HexCharacterController.Instance.SpawnEnemyEncounterAsPlayerTeam
+                    (RunController.Instance.GenerateEnemyEncounterFromTemplate(GlobalSettings.Instance.PlayerAiCharacters));
+            }
+            else
+            {
+                HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
+            }          
+           
             // Spawn enemies in world
             HexCharacterController.Instance.SpawnEnemyEncounter(sandboxContractData.enemyEncounterData);            
 

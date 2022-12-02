@@ -123,9 +123,6 @@ namespace HexGameEngine.Abilities
                 }
             }
 
-            if (abilityReturned == null)
-                Debug.LogWarning("GetCharacterAbilityByName() could not find an ability on character " + character.myName +" with the name " + name + ", returning null...");
-
             return abilityReturned;
         }
         public AbilityData GetRandomAbilityTomeAbility()

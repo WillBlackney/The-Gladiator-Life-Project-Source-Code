@@ -182,8 +182,39 @@ namespace HexGameEngine.Characters
             AddEnemyToPersistency(model);
 
             return model;
+        }
+        public HexCharacterModel CreateEnemyHexCharacterForPlayer(HexCharacterData data, LevelNode startPosition)
+        {
+            // Create GO + View
+            HexCharacterView vm = CreateCharacterEntityView();
 
+            // Create data object
+            HexCharacterModel model = new HexCharacterModel();
 
+            // Connect model to view
+            model.hexCharacterView = vm;
+            vm.character = model;
+
+            // Set up positioning in world
+            LevelController.Instance.PlaceCharacterOnHex(model, startPosition, true);
+
+            // Face enemies
+            LevelController.Instance.SetCharacterFacing(model, Facing.Right);
+
+            // Set type + allegiance
+            model.controller = Controller.AI;
+            model.allegiance = Allegiance.Player;
+
+            // Set up view
+            SetCharacterViewStartingState(model);
+
+            // Copy data from enemy data into new model
+            SetupCharacterFromEnemyData(model, data);
+
+            // Add to persistency
+            AddDefenderToPersistency(model);
+
+            return model;
         }
         public HexCharacterModel CreateSummonedHexCharacter(EnemyTemplateSO data, LevelNode startPosition, Allegiance allegiance)
         {
@@ -353,18 +384,31 @@ namespace HexGameEngine.Characters
         }
         public void SpawnEnemyEncounter(EnemyEncounterData encounterData)
         {
-            List<LevelNode> spawnLocations = LevelController.Instance.GetEnemySpawnZone();
+            List<LevelNode> backupSpawnLocations = LevelController.Instance.GetEnemySpawnZone();
           
             // Create all enemies in wave
             foreach (CharacterWithSpawnData dataSet in encounterData.enemiesInEncounter)
             {
                 LevelNode spawnNode = LevelController.Instance.GetHexAtGridPosition(dataSet.spawnPosition);
                 if (Pathfinder.IsHexSpawnable(spawnNode) == false) 
-                    spawnNode = LevelController.Instance.GetRandomSpawnableLevelNode(spawnLocations, false);
+                    spawnNode = LevelController.Instance.GetRandomSpawnableLevelNode(backupSpawnLocations, false);
                 CreateEnemyHexCharacter(dataSet.characterData, spawnNode);
             }
 
-        }        
+        }      
+        public void SpawnEnemyEncounterAsPlayerTeam(EnemyEncounterData encounterData)
+        {
+            List<LevelNode> backupSpawnLocations = LevelController.Instance.GetPlayerSpawnZone();
+
+            // Create all enemies in wave
+            foreach (CharacterWithSpawnData dataSet in encounterData.enemiesInEncounter)
+            {
+                LevelNode spawnNode = LevelController.Instance.GetHexAtGridPosition(dataSet.spawnPosition);
+                if (Pathfinder.IsHexSpawnable(spawnNode) == false)
+                    spawnNode = LevelController.Instance.GetRandomSpawnableLevelNode(backupSpawnLocations, false);
+                CreateEnemyHexCharacterForPlayer(dataSet.characterData, spawnNode);
+            }
+        }
         
 
         #endregion
@@ -1090,9 +1134,7 @@ namespace HexGameEngine.Characters
                 // Do AI turn
                 VisualEventManager.Instance.InsertTimeDelayInQueue(1f);
                 SetCharacterActivationPhase(character, ActivationPhase.ActivationPhase);
-                Debug.LogWarning("AILogic.RunEnemyRoutine() STARTED");
                 await AILogic.RunEnemyRoutine(character);
-                Debug.LogWarning("AILogic.RunEnemyRoutine() COMPLETED");
 
                 if(character.livingState == LivingState.Alive &&
                     TurnController.Instance.EntityActivated == character && 
