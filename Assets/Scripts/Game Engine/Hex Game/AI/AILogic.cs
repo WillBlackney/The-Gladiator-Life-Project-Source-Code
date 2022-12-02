@@ -178,7 +178,6 @@ namespace HexGameEngine.AI
                         bestPath == null
                         )
                     {
-                        Debug.LogWarning("IsDirectiveActionable() directive 'MoveToEngageInMelee' returning false, id: " + id.ToString());
                         continue;
                     }
 
