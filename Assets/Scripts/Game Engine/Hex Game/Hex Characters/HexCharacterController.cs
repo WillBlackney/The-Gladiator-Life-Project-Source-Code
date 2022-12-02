@@ -841,7 +841,7 @@ namespace HexGameEngine.Characters
             // ITEMS
             ItemController.Instance.ApplyCombatStartPerkEffectsToCharacterFromItemSet(character);
         }
-        public void CharacterOnTurnStart(HexCharacterModel character)
+        public async void CharacterOnTurnStart(HexCharacterModel character)
         {
             Debug.Log("HexCharacterController.CharacterOnTurnStart() called for " + character.myName);
 
@@ -1090,7 +1090,9 @@ namespace HexGameEngine.Characters
                 // Do AI turn
                 VisualEventManager.Instance.InsertTimeDelayInQueue(1f);
                 SetCharacterActivationPhase(character, ActivationPhase.ActivationPhase);
-                AILogic.RunEnemyRoutine(character);
+                Debug.LogWarning("AILogic.RunEnemyRoutine() STARTED");
+                await AILogic.RunEnemyRoutine(character);
+                Debug.LogWarning("AILogic.RunEnemyRoutine() COMPLETED");
 
                 if(character.livingState == LivingState.Alive &&
                     TurnController.Instance.EntityActivated == character && 

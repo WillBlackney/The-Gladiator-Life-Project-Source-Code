@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace HexGameEngine.AI
@@ -20,17 +21,28 @@ namespace HexGameEngine.AI
 
         // Core Logic
         #region
-        public static void RunEnemyRoutine(HexCharacterModel character)
-        {
-            bool successfulAction = TryTakeAction(character);
+        public static async Task RunEnemyRoutine(HexCharacterModel character)
+        {            
+            bool successfulAction = await TryTakeAction(character);
             int loops = 0;
-
-            while (successfulAction && loops < 25)
+            int maximumActionAttempts = 15;
+            
+            while (successfulAction && loops < maximumActionAttempts)
             {
-                successfulAction = TryTakeAction(character);
+                successfulAction = await TryTakeAction(character);
+                loops += 1;                
             }
+
+            Debug.LogWarning("AILogic.RunEnemyRoutine() action attempts made: " + loops.ToString());
+            /*
+            bool successfulAction = await TryTakeAction(character);
+            int maximumActionAttempts = 10;
+
+            for(int i = 0; i < maximumActionAttempts; i++)            
+                await TryTakeAction(character);     */
+
         }
-        private static bool TryTakeAction(HexCharacterModel character)
+        private static async Task<bool> TryTakeAction(HexCharacterModel character)
         {
             bool actionTaken = false;
 
@@ -39,21 +51,16 @@ namespace HexGameEngine.AI
 
             foreach (AIDirective dir in character.aiTurnRoutine.directives)
             {
-                /*
-                if (IsDirectiveActionable(character, dir))
-                {
-                    actionTaken = ExecuteDirective(character, dir);
-                    if(actionTaken) break;
-                }
-                */
                 TargetPriorityTuple tpt = IsDirectiveActionable(character, dir);
+                //await Task.Yield();
                 if (tpt != null)
                 {
                     actionTaken = ExecuteDirective(character, dir, tpt.Target);
+                    //await Task.Yield();
                     if (actionTaken) break;
                 }
             }
-
+            await Task.Yield();
             return actionTaken;
         }
         private static TargetPriorityTuple IsDirectiveActionable(HexCharacterModel character, AIDirective directive)
@@ -462,23 +469,6 @@ namespace HexGameEngine.AI
         private static bool ExecuteDirective(HexCharacterModel character, AIDirective directive, HexCharacterModel target)
         {
             bool actionTaken = false;
-
-            /*
-            // Set up
-            //TargetPriorityTuple tpv = HandleAutoTargetCharacter(character, directive);
-            TargetPriorityTuple tpv = null;
-            HexCharacterModel target = null;
-            TargettingPriority priority = TargettingPriority.None;
-            foreach (TargettingPriority tp in directive.action.targettingPriority)
-            {
-                tpv = TryGetTargetOfPriority(character, directive, tp);
-                if (tpv != null && tpv.Target != null)
-                {
-                    target = tpv.Target;
-                    priority = tpv.Priority;
-                    break;
-                }
-            }*/
 
             if (directive.action.actionType == AIActionType.DelayTurn)
             {
