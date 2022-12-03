@@ -19,17 +19,31 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'This character is unable to move for '
+    phrase: 'This character suffers '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'X '
+    phrase: '-10 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Dodge '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: turns.
-  maxAllowedStacks: 3
-  showStackCount: 1
+    phrase: 'and is unable to move for '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '1 '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'turn. '
+  passiveItalicDescription: 
+  effectDetailTabs: []
+  maxAllowedStacks: 1
+  showStackCount: 0
   hiddenOnPassivePanel: 0
   isRewardable: 0
   resistanceBlocksIncrease: 1
@@ -37,8 +51,11 @@ MonoBehaviour:
   runeBlocksIncrease: 1
   runeBlocksDecrease: 0
   isInjury: 0
+  isPermanentInjury: 0
   severity: 0
   injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 0

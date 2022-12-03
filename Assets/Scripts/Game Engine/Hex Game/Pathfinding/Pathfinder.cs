@@ -75,7 +75,7 @@ namespace HexGameEngine.Pathfinding
 
             return cost;
         }       
-        public static int GetEnergyCostOfPath(HexCharacterModel character, LevelNode start, List<LevelNode> path)
+        public static int GetActionPointCostOfPath(HexCharacterModel character, LevelNode start, List<LevelNode> path)
         {
             int pathCost = 0;
             if (path.Count == 0)
@@ -161,7 +161,7 @@ namespace HexGameEngine.Pathfinding
                     // Is the path between start/destination actually valid?
                     if (traversable &&
                         CanHexBeOccupied(key) &&
-                    GetEnergyCostOfPath(character, start, hexsOnPath) <= character.currentEnergy)
+                    GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentEnergy)
                     {
                         Debug.Log("GetPath() found a valid path!");
                         pathReturned = new Path(start, hexsOnPath, character);
@@ -221,7 +221,7 @@ namespace HexGameEngine.Pathfinding
                 // Is the path between start/destination actually valid?
                 if (traversable &&
                     CanHexBeOccupied(key) &&
-                    GetEnergyCostOfPath(character, start, hexsOnPath) <= character.currentEnergy)
+                    GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentEnergy)
                 {
                     pathsReturned.Add(new Path(start, hexsOnPath, character));
                 }

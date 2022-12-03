@@ -68,7 +68,7 @@ namespace HexGameEngine.Pathfinding
                 {
                    // SetCurrentPath(p.HexsOnPath);
                     pathCountText.text = "Path Length: " + currentPath.Count;
-                    moveCostText.text = "Energy Cost: " + Pathfinder.GetEnergyCostOfPath(testCharacter, testCharacter.currentTile, p.HexsOnPath);
+                    moveCostText.text = "Energy Cost: " + Pathfinder.GetActionPointCostOfPath(testCharacter, testCharacter.currentTile, p.HexsOnPath);
                 }
                 else
                 {

@@ -33,7 +33,7 @@ MonoBehaviour:
       value: 15
       stars: 0
     fatigue:
-      value: 80
+      value: 90
       stars: 0
     wits:
       value: 5
@@ -77,6 +77,8 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 6
@@ -88,6 +90,8 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 6
@@ -99,6 +103,8 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 6
@@ -110,6 +116,8 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 20
@@ -121,6 +129,8 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
@@ -139,6 +149,8 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
@@ -157,6 +169,8 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
@@ -175,6 +189,8 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         fatigueReq: 16
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
@@ -193,6 +209,8 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
@@ -218,6 +236,8 @@ MonoBehaviour:
         enemiesInMeleeRange: 1
         energyReq: 0
         fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
   abilityBook:

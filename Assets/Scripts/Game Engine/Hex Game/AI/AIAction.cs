@@ -39,7 +39,7 @@ namespace HexGameEngine.AI
         {
             if (actionType == AIActionType.UseAbilityCharacterTarget ||
                 actionType == AIActionType.UseCharacterTargettedSummonAbility ||
-                (actionType == AIActionType.MoveIntoRangeOfTarget && getRangeFromAbility))
+                (actionType == AIActionType.MoveWithinRangeOfTarget && getRangeFromAbility))
             {
                 return true;
             }
@@ -48,13 +48,13 @@ namespace HexGameEngine.AI
 
         public bool ShowRange()
         {
-            if (actionType == AIActionType.MoveIntoRangeOfTarget && !getRangeFromAbility) return true;
+            if (actionType == AIActionType.MoveWithinRangeOfTarget && !getRangeFromAbility) return true;
             else return false;
         }
 
         public bool ShowGetRangeFromAbility()
         {
-            if (actionType == AIActionType.MoveIntoRangeOfTarget) return true;
+            if (actionType == AIActionType.MoveWithinRangeOfTarget) return true;
             else return false;
         }
     }
@@ -65,7 +65,7 @@ namespace HexGameEngine.AI
         UseAbilityCharacterTarget = 1,
         UseCharacterTargettedSummonAbility = 5,
         MoveToEngageInMelee = 2,
-        MoveIntoRangeOfTarget = 3,
+        MoveWithinRangeOfTarget = 3,
         MoveToElevationCloserToTarget = 6,
         DelayTurn = 7,
     }

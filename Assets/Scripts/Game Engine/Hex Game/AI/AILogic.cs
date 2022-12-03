@@ -160,14 +160,16 @@ namespace HexGameEngine.AI
                     List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
                     List<LevelNode> targetMeleeTiles = LevelController.Instance.GetAllHexsWithinRange(tpt.Target.currentTile, 1);
                     Path bestPath = null;
-                    
+                    int shortestDistance = 10000;
+
                     foreach (Path p in allPossiblePaths)
                     {
                         if (targetMeleeTiles.Contains(p.Destination) &&
-                            MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
+                            MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0 &&
+                            p.Length < shortestDistance)
                         {
+                            shortestDistance = p.Length;
                             bestPath = p;
-                            break;
                         }
                     }
 
@@ -184,9 +186,9 @@ namespace HexGameEngine.AI
                     validDirective = tpt;
                 }
 
-                // Move into range of target
-                else if (directive.action.actionType == AIActionType.MoveIntoRangeOfTarget)
-                {
+                // Move within range of target
+                else if (directive.action.actionType == AIActionType.MoveWithinRangeOfTarget)
+                {         
                     // Ablility to move 
                     int range = directive.action.range;
                     if (directive.action.getRangeFromAbility)
@@ -195,21 +197,30 @@ namespace HexGameEngine.AI
                         range = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
                     }
 
-                    //
+                    // Cancel if already within range or unable to move
+                    if (tpt.Target == null ||
+                        !HexCharacterController.Instance.IsCharacterAbleToMove(character) ||
+                        tpt.Target.currentTile.Distance(character.currentTile) <= range)
+                    {
+                        continue;
+                    }
 
                     // Set up
                     List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
                     List<LevelNode> targetShootRangeTiles = LevelController.Instance.GetAllHexsWithinRange(tpt.Target.currentTile, range);
                     int currentClosestDistance = 1000;
+                    int cheapestApCost = 100;
                     Path bestPath = null;
 
+                    // Determine the shortest and most action point efficient path
                     foreach (Path p in allPossiblePaths)
                     {
                         if (targetShootRangeTiles.Contains(p.Destination) &&
-                            p.HexsOnPath.Count < currentClosestDistance &&
+                            p.Length < currentClosestDistance &&
+                            Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath) < cheapestApCost &&
                             MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
                         {
-                            currentClosestDistance = p.HexsOnPath.Count;
+                            currentClosestDistance = p.Length;
                             bestPath = p;
                         }
                     }
@@ -603,23 +614,38 @@ namespace HexGameEngine.AI
                 }
             }
 
-            // Try Move into shoot range
-            else if (directive.action.actionType == AIActionType.MoveIntoRangeOfTarget)
+            // Try Move within specified range
+            else if (directive.action.actionType == AIActionType.MoveWithinRangeOfTarget)
             {
+                // Ablility to move 
+                int range = directive.action.range;
+                if (directive.action.getRangeFromAbility)
+                {
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
+                    range = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
+                }
+
                 // Set up
-                AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
-                int shootRange = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
+                int shootRange = directive.action.range;
+                if (directive.action.getRangeFromAbility)
+                {
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
+                    shootRange = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
+                }
                 List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
                 List<LevelNode> targetShootRangeTiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, shootRange);
                 int currentClosestDistance = 1000;
+                int cheapestApCost = 1000;
                 Path bestPath = null;
 
                 foreach (Path p in allPossiblePaths)
                 {
                     if (targetShootRangeTiles.Contains(p.Destination) &&
-                        p.HexsOnPath.Count < currentClosestDistance)
+                        p.Length < currentClosestDistance &&
+                        Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath) < cheapestApCost &&
+                        MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
                     {
-                        currentClosestDistance = p.HexsOnPath.Count;
+                        currentClosestDistance = p.Length;
                         bestPath = p;
                     }
                 }
@@ -727,7 +753,7 @@ namespace HexGameEngine.AI
             {
                 HexCharacterModel target = null;
 
-                if (directive.action.actionType == AIActionType.MoveIntoRangeOfTarget ||
+                if (directive.action.actionType == AIActionType.MoveWithinRangeOfTarget ||
                 directive.action.actionType == AIActionType.MoveToEngageInMelee ||
                 directive.action.actionType == AIActionType.UseCharacterTargettedSummonAbility ||
                 directive.action.actionType == AIActionType.MoveToElevationCloserToTarget)
@@ -912,7 +938,8 @@ namespace HexGameEngine.AI
         private static HexCharacterModel GetBestValidAttackTarget(HexCharacterModel character, AbilityData ability = null)
         {
             // Used to determine target for attack actions
-           // if (ability == null) return null;
+
+            // TO DO: Determine off more factors than dodge: for example, consider if the target has riposte.
             HexCharacterModel bestTarget = null;
             int currentBestHitChance = 0;
 

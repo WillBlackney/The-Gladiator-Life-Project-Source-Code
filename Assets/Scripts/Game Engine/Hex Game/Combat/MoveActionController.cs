@@ -140,6 +140,7 @@ namespace HexGameEngine.Combat
         }
         public List<HexCharacterModel> GetFreeStrikersOnPath(HexCharacterModel characterMoving, Path p)
         {
+            if (PerkController.Instance.DoesCharacterHavePerk(characterMoving.pManager, Perk.Slippery)) return new List<HexCharacterModel>();
             // Check Free strike opportunities along the path.
             List<LevelNode> tilesMovedFrom = new List<LevelNode>();
             List<HexCharacterModel> freeStrikers = new List<HexCharacterModel>();
@@ -193,7 +194,7 @@ namespace HexGameEngine.Combat
                 CardGameEngine.DottedLine.Instance.DrawPathAlongPoints(points);
 
                 // Show UI indicators
-                int energyCost = Pathfinder.GetEnergyCostOfPath(character, character.currentTile, p.HexsOnPath);
+                int energyCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
                 ShowPathCostPopup(energyCost);
                 CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter(character.currentEnergy, energyCost);
                 CombatUIController.Instance.DoFatigueCostDemo(Pathfinder.GetFatigueCostOfPath(character, character.currentTile, p.HexsOnPath),

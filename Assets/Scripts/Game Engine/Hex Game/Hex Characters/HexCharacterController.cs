@@ -1897,7 +1897,8 @@ namespace HexGameEngine.Characters
                 if(h.myCharacter != null &&
                     h.myCharacter.allegiance != character.allegiance &&
                     h.myCharacter.itemSet.mainHandItem != null &&
-                    h.myCharacter.itemSet.mainHandItem.IsMeleeWeapon)
+                    h.myCharacter.itemSet.mainHandItem.IsMeleeWeapon &&
+                    IsCharacterAbleToTakeActions(h.myCharacter))
                 {
                     bRet = true;
                     break;

@@ -397,7 +397,10 @@ namespace HexGameEngine
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepFaceCut))
                     mod -= 0.25f;
-            }                           
+            }
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Rooted))
+                dodge -= 10;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Crippled))
                 dodge -= 30;

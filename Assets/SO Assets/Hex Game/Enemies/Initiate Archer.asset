@@ -33,7 +33,7 @@ MonoBehaviour:
       value: 10
       stars: 0
     fatigue:
-      value: 70
+      value: 80
       stars: 0
     wits:
       value: 5
@@ -76,6 +76,9 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
@@ -93,6 +96,9 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 6
@@ -103,6 +109,9 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 6
@@ -113,6 +122,9 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 6
@@ -123,6 +135,9 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
@@ -140,6 +155,9 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 7
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
@@ -171,6 +189,9 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 5
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
@@ -188,6 +209,9 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 10
@@ -198,6 +222,9 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 3
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
@@ -215,6 +242,9 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 15
@@ -225,6 +255,9 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: Steady Shot
     - action:
@@ -242,6 +275,9 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 10
@@ -252,6 +288,9 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 5
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
   abilityBook:

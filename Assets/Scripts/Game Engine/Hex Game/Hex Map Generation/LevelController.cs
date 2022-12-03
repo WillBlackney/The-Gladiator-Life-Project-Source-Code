@@ -305,7 +305,7 @@ namespace HexGameEngine.HexTiles
             if (payMovementCosts)
             {
                 // Pay energy + fatigue costs
-                HexCharacterController.Instance.ModifyActionPoints(character, -Pathfinder.GetEnergyCostOfPath(character, character.currentTile, path.HexsOnPath));
+                HexCharacterController.Instance.ModifyActionPoints(character, -Pathfinder.GetActionPointCostOfPath(character, character.currentTile, path.HexsOnPath));
                 HexCharacterController.Instance.ModifyCurrentFatigue(character, Pathfinder.GetFatigueCostOfPath(character, character.currentTile, path.HexsOnPath));
             }
 
