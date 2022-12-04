@@ -204,7 +204,7 @@ MonoBehaviour:
         targettingPriority: 050000000100000006000000
         getRangeFromAbility: 0
         range: 0
-        abilityName: Shatter
+        abilityName: Pound
       requirements: []
     - action:
         actionType: 3

@@ -66,7 +66,7 @@ MonoBehaviour:
         targettingPriority: 050000000800000006000000
         getRangeFromAbility: 0
         range: 0
-        abilityName: Shatter
+        abilityName: Batter
       requirements: []
     - action:
         actionType: 2

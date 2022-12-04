@@ -29,6 +29,6 @@ MonoBehaviour:
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:
-  - {fileID: 11400000, guid: b469a113483952548ba6d2850fa80a02, type: 2}
+  - {fileID: 11400000, guid: ef39c063e255e344e949a69f222bc21d, type: 2}
   - {fileID: 11400000, guid: 2173c4e533a53184f8ac5a14628bf342, type: 2}
   itemEffectSets: []

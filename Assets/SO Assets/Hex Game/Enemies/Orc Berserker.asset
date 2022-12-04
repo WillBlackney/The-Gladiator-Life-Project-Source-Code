@@ -174,11 +174,11 @@ MonoBehaviour:
     - perkTag: 86
       stacks: 1
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}
+    mainHandItem: {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
   modelParts:
   - Orc_Berserker_Chest
-  - Left_Hand_Simple_Battle_Axe
+  - Left_Hand_Simple_Hatchet
