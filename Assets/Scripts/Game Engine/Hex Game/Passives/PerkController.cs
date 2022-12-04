@@ -450,7 +450,7 @@ namespace HexGameEngine.Perks
                     VisualEventManager.Instance.CreateVisualEvent(() =>                   
                         character.hexCharacterView.perkIconsPanel.HandleAddNewIconToPanel(perkData, stacksAppliedActual), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
 
-                    // Update player ovelray UI
+                    // Update player overlay UI
                     if (TurnLogic.TurnController.Instance.EntityActivated == character)
                     {
                         VisualEventManager.Instance.CreateVisualEvent(() =>
@@ -540,6 +540,23 @@ namespace HexGameEngine.Perks
             {
                 if (newFinalStackcount > 0) VisualEventManager.Instance.CreateVisualEvent(() => character.hexCharacterView.vfxManager.PlayStunned());
                 else VisualEventManager.Instance.CreateVisualEvent(() => character.hexCharacterView.vfxManager.StopStunned());
+            }
+            if (perk == Perk.SmashedShield && showVFX)
+            {
+                var myUcm = character.hexCharacterView.ucm;
+
+                if (myUcm != null && newFinalStackcount > 0) VisualEventManager.Instance.CreateVisualEvent(() =>
+                {
+                    if (myUcm != null) myUcm.activeOffHandWeapon.gameObject.SetActive(false);
+                });
+                else if (myUcm != null)
+                {
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    {
+                        if (myUcm != null) myUcm.activeOffHandWeapon.gameObject.SetActive(true);
+                    });
+                }
+                   
             }
 
             return true;

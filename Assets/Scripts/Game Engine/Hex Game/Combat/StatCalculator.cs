@@ -452,6 +452,12 @@ namespace HexGameEngine
 
             // Items
             dodge += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Dodge, c.itemSet);
+
+            // Check Smashed Shield
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.SmashedShield) &&
+                c.itemSet.offHandItem != null && c.itemSet.offHandItem.weaponClass == WeaponClass.Shield)
+                dodge -= ItemController.Instance.GetCharacterDodgeBonusFromShield(c.itemSet);
+
             if (mod < 0) mod = 0;
             dodge = (int)(dodge * mod);
 

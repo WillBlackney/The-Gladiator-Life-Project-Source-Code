@@ -239,6 +239,9 @@ namespace HexGameEngine.Abilities
         [ShowIf("ShowRace")]
         public CharacterRace race;
 
+        [ShowIf("ShowPerk")]
+        public Perk perk;
+
         public bool ShowHealthRequired()
         {
             return type == AbilityRequirementType.CasterHasEnoughHealth;
@@ -246,6 +249,10 @@ namespace HexGameEngine.Abilities
         public bool ShowRace()
         {
             return type == AbilityRequirementType.TargetHasRace;
+        }
+        public bool ShowPerk()
+        {
+            return type == AbilityRequirementType.TargetHasPerk || type == AbilityRequirementType.TargetDoesNotHavePerk;
         }
     }
 }

@@ -144,12 +144,12 @@ namespace HexGameEngine.Abilities
         {
             List <AbilityData> loadOutAbilities = new List<AbilityData>();
 
-            // 2H melee: Heavy Blow
+            // 2H melee: Smash Shield
             if (itemSet.mainHandItem != null &&
                 itemSet.mainHandItem.IsMeleeWeapon &&
                 itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
             {
-                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Heavy Blow"));
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Smash Shield"));
             }
 
             // Dual wielding 1h: Twin Strike

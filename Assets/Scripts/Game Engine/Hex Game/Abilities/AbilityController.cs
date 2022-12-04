@@ -1728,7 +1728,7 @@ namespace HexGameEngine.Abilities
                 }
             }
 
-            // check character is alive
+            // Check character is actually alive
             if (character.currentHealth <= 0 || character.livingState == LivingState.Dead)
             {
                 Debug.Log("IsAbilityUseable() returning false: character is dead or in the death sequence");
@@ -1760,6 +1760,14 @@ namespace HexGameEngine.Abilities
             if (!DoesCharacterMeetAbilityWeaponRequirement(character.itemSet, ability.weaponRequirement))
             {
                 Debug.Log("IsAbilityUseable() returning false: character does not meet the ability's weapon requirement");
+                bRet = false;
+            }
+
+            // Check smashed shield
+            if(ability.weaponRequirement == WeaponRequirement.Shield &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SmashedShield))
+            {
+                Debug.Log("IsAbilityUseable() returning false: character has 'Smashed Shield' perk");
                 bRet = false;
             }
 
@@ -1898,61 +1906,68 @@ namespace HexGameEngine.Abilities
         }
         private bool DoesTargetOfAbilityMeetSubRequirements(HexCharacterModel caster, HexCharacterModel target, AbilityData ability)
         {
-            bool bRet = false;
+            bool bRet = true;
 
-            if(ability.abilitySubRequirements.Count == 0)
+            foreach (AbilityRequirement ar in ability.abilitySubRequirements)
             {
-                Debug.Log("DoesTargetOfAbilityMeetSubRequirements() ability has n sub requirements, auto-passing...");
-                bRet = true;
-            }
-            else
-            {
-                bool pass = false;
-
-                foreach (AbilityRequirement ar in ability.abilitySubRequirements)
+                if (ar.type == AbilityRequirementType.TargetHasUnoccupiedBackTile)
                 {
-                    if (ar.type == AbilityRequirementType.TargetHasUnoccupiedBackTile)
+                    bool shouldContinue = false;
+                    foreach (LevelNode n in HexCharacterController.Instance.GetCharacterBackArcTiles(target))
                     {
-                        foreach (LevelNode n in HexCharacterController.Instance.GetCharacterBackArcTiles(target))
+                        if (Pathfinder.CanHexBeOccupied(n))
                         {
-                            if (Pathfinder.CanHexBeOccupied(n))
-                            {
-                                Debug.Log("DoesTargetOfAbilityMeetSubRequirements() passed 'TargetHasAnUnoccupiedBackTile' check");
-                                pass = true;
-                                break;
-                            }
+                            Debug.Log("DoesTargetOfAbilityMeetSubRequirements() passed 'TargetHasAnUnoccupiedBackTile' check");
+                            shouldContinue = true;
+                            break;
                         }
                     }
-
-                    else if (ar.type == AbilityRequirementType.TargetHasRace &&
-                       target.race == ar.race)
-                    {
-                        pass = true;
-                    }
-
-                    else if (ar.type == AbilityRequirementType.TargetIsTeleportable &&
-                        HexCharacterController.Instance.IsCharacterTeleportable(target))
-                    {
-                        pass = true;
-                    }
-
-                    else if (ar.type == AbilityRequirementType.CasterIsTeleportable &&
-                        HexCharacterController.Instance.IsCharacterTeleportable(caster))
-                    {
-                        pass = true;
-                    }
-                    else if (ar.type == AbilityRequirementType.CasterHasEnoughHealth &&
-                       caster.currentHealth >= ar.healthRequired)
-                    {
-                        pass = true;
-                    }
-
-                    // if failed a check, dont bother checking the other requirements
-                    if (pass == false) break;                    
+                    if (shouldContinue) continue;
                 }
 
-                if (!pass) bRet = false;
-                else if (pass) bRet = true;
+                else if (ar.type == AbilityRequirementType.TargetHasRace &&
+                   target.race == ar.race)
+                {
+                    continue;
+                }
+
+                else if (ar.type == AbilityRequirementType.TargetHasPerk &&
+                  PerkController.Instance.DoesCharacterHavePerk(target.pManager, ar.perk))
+                {
+                    continue;
+                }
+
+                else if (ar.type == AbilityRequirementType.TargetDoesNotHavePerk &&
+                 !PerkController.Instance.DoesCharacterHavePerk(target.pManager, ar.perk))
+                {
+                    continue;
+                }
+
+                else if (ar.type == AbilityRequirementType.TargetHasShield &&
+                   target.itemSet.offHandItem != null && target.itemSet.offHandItem.weaponClass == WeaponClass.Shield)
+                {
+                    continue;
+                }
+
+                else if (ar.type == AbilityRequirementType.TargetIsTeleportable &&
+                    HexCharacterController.Instance.IsCharacterTeleportable(target))
+                {
+                    continue;
+                }
+
+                else if (ar.type == AbilityRequirementType.CasterIsTeleportable &&
+                    HexCharacterController.Instance.IsCharacterTeleportable(caster))
+                {
+                    continue;
+                }
+
+                else if (ar.type == AbilityRequirementType.CasterHasEnoughHealth &&
+                   caster.currentHealth >= ar.healthRequired)
+                {
+                    continue;
+                }
+
+                bRet = false;                   
             }
 
             Debug.Log("AbilityController.DoesTargetOfAbilityMeetSubRequirements() returning " + bRet);

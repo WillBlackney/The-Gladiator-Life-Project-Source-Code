@@ -205,6 +205,9 @@ namespace HexGameEngine
         CasterIsTeleportable = 3,
         CasterHasEnoughHealth = 4,
         TargetHasRace = 5,
+        TargetHasShield = 6,
+        TargetHasPerk = 7,
+        TargetDoesNotHavePerk = 8,
 
     }
     public enum AbilitySelectionPhase
@@ -531,6 +534,7 @@ namespace HexGameEngine
         Slippery = 56,
         Sloppy = 100,
         Slow = 90,
+        SmashedShield = 210,
         Sniper = 70,
         Squeamish = 104,
         Stealth = 77,

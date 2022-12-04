@@ -414,6 +414,10 @@ namespace HexGameEngine.Items
 
         // Item Effects Logic
         #region
+        public int GetCharacterDodgeBonusFromShield(ItemSet set)
+        {
+            return GetTotalAttributeBonusFromItemData(ItemCoreAttribute.Dodge, set.offHandItem);
+        }
         public int GetTotalAttributeBonusFromItemSet(ItemCoreAttribute attribute, ItemSet set)
         {
             if (set == null) return 0;

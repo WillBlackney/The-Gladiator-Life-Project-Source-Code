@@ -56,9 +56,7 @@ MonoBehaviour:
     injuryResistance: 0
     deathResistance: 25
   abilityBook:
-    activeAbilities:
-    - {fileID: 11400000, guid: 82b43c0a427979b48946285cd214d509, type: 2}
-    - {fileID: 11400000, guid: 4757d0aecda5c804582287dadf51f8c9, type: 2}
+    activeAbilities: []
   serializedPassiveManager:
     perks: []
   modelParts:
@@ -67,7 +65,7 @@ MonoBehaviour:
   - Undead_Head_4
   - Ghoul_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: c420762d59a4b8f4788afabeee27eb35, type: 2}
+    mainHandItem: {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: 335c81cb722666345aa6c308b1d780f5, type: 2}
     chestArmour: {fileID: 0}
