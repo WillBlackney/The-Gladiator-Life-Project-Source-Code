@@ -304,7 +304,7 @@ namespace HexGameEngine.Combat
 
         // Stress Events Logic
         #region
-        public void CreateStressCheck(HexCharacterModel character, StressEventType eventType)
+        public void CreateStressCheck(HexCharacterModel character, StressEventType eventType, bool allowRecursiveChecks = true)
         {
             // Non player characters dont use the stress mechanic
             if (character.controller != Controller.Player) return;
@@ -351,7 +351,7 @@ namespace HexGameEngine.Combat
             {
                 Debug.Log("Character rolled below the required roll threshold, applying effects of stress event...");
                 int finalStressAmount = RandomGenerator.NumberBetween(data.StressAmountMin, data.StressAmountMax);
-                HexCharacterController.Instance.ModifyStress(character, finalStressAmount, true, true);
+                HexCharacterController.Instance.ModifyStress(character, finalStressAmount, true, true, allowRecursiveChecks);
             }
 
 
@@ -392,11 +392,11 @@ namespace HexGameEngine.Combat
         }
         public StressState GetStressStateFromStressAmount(int stressAmount)
         {
-            if (stressAmount >= 0 && stressAmount <= 24) return StressState.Confident;
-            else if (stressAmount >= 25 && stressAmount <= 49) return StressState.Nervous;
-            else if (stressAmount >= 50 && stressAmount <= 74) return StressState.Wavering;
-            else if (stressAmount >= 75 && stressAmount <= 99) return StressState.Panicking;
-            else if (stressAmount >= 100) return StressState.Shattered;
+            if (stressAmount >= 0 && stressAmount <= 4) return StressState.Confident;
+            else if (stressAmount >= 5 && stressAmount <= 9) return StressState.Nervous;
+            else if (stressAmount >= 10 && stressAmount <= 14) return StressState.Wavering;
+            else if (stressAmount >= 15 && stressAmount <= 19) return StressState.Panicking;
+            else if (stressAmount >= 20) return StressState.Shattered;
             else return StressState.None;
         }
         public int GetStatMultiplierFromStressState(StressState stressState, HexCharacterData character)
@@ -421,11 +421,11 @@ namespace HexGameEngine.Combat
         }
         public int[] GetStressStateRanges(StressState state)
         {
-            if (state == StressState.Confident) return new int[2] { 0, 24 };
-            else if (state == StressState.Nervous) return new int[2] { 25, 49 };
-            else if (state == StressState.Wavering) return new int[2] { 50, 74 };
-            else if (state == StressState.Panicking) return new int[2] { 75, 99 };
-            else if (state == StressState.Shattered) return new int[2] { 100, 100 };
+            if (state == StressState.Confident) return new int[2] { 0, 4 };
+            else if (state == StressState.Nervous) return new int[2] { 5, 9 };
+            else if (state == StressState.Wavering) return new int[2] { 10, 14 };
+            else if (state == StressState.Panicking) return new int[2] { 15, 19 };
+            else if (state == StressState.Shattered) return new int[2] { 20, 20 };
             else return new int[2] { 0, 0 };
         }
         #endregion
@@ -1147,10 +1147,10 @@ namespace HexGameEngine.Combat
                         HexCharacterController.Instance.ModifyActionPoints(attacker, 4);
                     }
 
-                    // Gladiator background: recover 5 stress on kill
+                    // Gladiator background: recover 2 stress on kill
                     if (CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Gladiator))
                     {
-                        HexCharacterController.Instance.ModifyStress(attacker, -5, true, true);
+                        HexCharacterController.Instance.ModifyStress(attacker, -2, true, true);
                     }
 
                     // Perk Soul Collector: permanently gain 1 constitution

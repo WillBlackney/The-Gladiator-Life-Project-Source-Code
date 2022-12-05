@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Nightmare
   includeInGame: 1
-  baseAbilityDescription: Apply 10-20 Stress to a target.
+  baseAbilityDescription: Apply 2-3 Stress to a target.
   abilitySprite: {fileID: 21300000, guid: 254db86f895cba142ba5fe87e82418f1, type: 3}
   energyCost: 4
   fatigueCost: 8
@@ -41,9 +41,9 @@ MonoBehaviour:
   abilityEffects:
   - effectType: 9
     stressEventData:
-      stressAmountMin: 10
-      stressAmountMax: 20
-      successChance: 100
+      stressAmountMin: 2
+      stressAmountMax: 3
+      successChance: 75
     energyGained: 0
     normalTeleportVFX: 1
     tilesMoved: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '10 - 20 '
+    phrase: 2-3
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

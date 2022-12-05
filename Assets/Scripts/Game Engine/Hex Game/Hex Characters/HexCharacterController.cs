@@ -320,7 +320,7 @@ namespace HexGameEngine.Characters
             ModifyBaseMaxActionPoints(character, 0); // modify by 0 just to update views
             ModifyMaxHealth(character, 0); // modify by 0 just to update views
             ModifyHealth(character, data.currentHealth, false);
-            ModifyStress(character, data.currentStress, false);
+            ModifyStress(character, data.currentStress, false, false, false);
             ModifyArmour(character, ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet));
 
             // Misc UI setup
@@ -551,7 +551,7 @@ namespace HexGameEngine.Characters
 
         // Modify Stress
         #region
-        public void ModifyStress(HexCharacterModel character, int stressGainedOrLost, bool relayToCharacterData = true, bool showVFX = false)
+        public void ModifyStress(HexCharacterModel character, int stressGainedOrLost, bool relayToCharacterData = true, bool showVFX = false, bool allowRecursiveChecks = true)
         {
             Debug.Log("CharacterEntityController.ModifyStress() called for " + character.myName);
 
@@ -577,7 +577,7 @@ namespace HexGameEngine.Characters
             StressState previousStressState = CombatController.Instance.GetStressStateFromStressAmount(character.currentStress);
 
             // Unshakeable perk
-            if (stressGainedOrLost > 0 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Unshakeable))
+            if (stressGainedOrLost > 1 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Unshakeable))
                 stressGainedOrLost = stressGainedOrLost / 2;
 
            finalStress += stressGainedOrLost;            
@@ -633,7 +633,34 @@ namespace HexGameEngine.Characters
                         view.vfxManager.PlayShattered();
                     }, QueuePosition.Back, 0.5f, 0.5f);
 
+                }
             }
+
+            // Ally stress check event: becoming shattered
+            if(allowRecursiveChecks && previousStressState != newStressState && newStressState == StressState.Shattered)
+            {
+                foreach(HexCharacterModel ally in GetAllAlliesOfCharacter(character, false))
+                {
+                    CombatController.Instance.CreateStressCheck(ally, StressEventType.AllyShattered, false);
+                }
+            }
+
+            // Ally stress check event: stress state worsened
+            else if (allowRecursiveChecks && (int) previousStressState < (int) newStressState)
+            {
+                foreach (HexCharacterModel ally in GetAllAlliesOfCharacter(character, false))
+                {
+                    CombatController.Instance.CreateStressCheck(ally, StressEventType.AllyMoraleStateWorsened, false);
+                }
+            }
+
+            // Ally stress check event: stress state improved
+            else if (allowRecursiveChecks && (int)previousStressState > (int)newStressState)
+            {
+                foreach (HexCharacterModel ally in GetAllAlliesOfCharacter(character, false))
+                {
+                    CombatController.Instance.CreateStressCheck(ally, StressEventType.AllyMoraleStateImproved, false);
+                }
             }
         }
         private void UpdateStressGUIElements(HexCharacterModel character, int stress)
@@ -1090,8 +1117,8 @@ namespace HexGameEngine.Characters
                         view.vfxManager.StopShattered();
                     }, QueuePosition.Back, 0, 0.5f);
 
-                    // Recover 10 stress
-                    ModifyStress(character, -10, true, true);
+                    // Recover 2 stress
+                    ModifyStress(character, -2, true, true);
 
                     // End turn
                     CharacterOnTurnEnd(character);
@@ -1252,7 +1279,7 @@ namespace HexGameEngine.Characters
                     List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
                     foreach(HexCharacterModel ally in allies)
                     {
-                        CombatController.Instance.CreateStressCheck(ally, new StressEventData(3, 5, 50), true);
+                        CombatController.Instance.CreateStressCheck(ally, new StressEventData(1, 1, 100), true);
                     }
                     VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
                 }

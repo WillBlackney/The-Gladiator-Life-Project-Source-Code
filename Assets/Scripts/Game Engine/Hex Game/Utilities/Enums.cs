@@ -692,7 +692,6 @@ namespace HexGameEngine
         EnemyKilled = 8,
         EnemyInjured = 9,
         LandedCriticalStrike = 10,
-        DebuffApplied = 11,
     }
     public enum StressState
     {

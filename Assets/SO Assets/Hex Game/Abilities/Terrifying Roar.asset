@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Terrifying Roar
   includeInGame: 1
-  baseAbilityDescription: Apply 10-20 Stress to all enemies within your Aura.
+  baseAbilityDescription: Apply 2-3 Stress to all enemies within your Aura.
   abilitySprite: {fileID: 21300000, guid: 46aa60f2e8fa48c4bb842d6628dee45e, type: 3}
   energyCost: 0
   fatigueCost: 8
@@ -41,9 +41,9 @@ MonoBehaviour:
   abilityEffects:
   - effectType: 21
     stressEventData:
-      stressAmountMin: 10
-      stressAmountMax: 20
-      successChance: 100
+      stressAmountMin: 2
+      stressAmountMax: 3
+      successChance: 75
     energyGained: 0
     normalTeleportVFX: 1
     tilesMoved: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '10-20 '
+    phrase: '2-3 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
