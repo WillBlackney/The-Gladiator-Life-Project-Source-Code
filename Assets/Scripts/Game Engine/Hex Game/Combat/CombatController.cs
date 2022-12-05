@@ -329,29 +329,21 @@ namespace HexGameEngine.Combat
             if (data == null) return;
 
             // Calculate total resolve + roll for 'Irrational' perk.
-            int characterResolve = StatCalculator.GetTotalStressResistance(character);
+            int characterStressResistance = StatCalculator.GetTotalStressResistance(character);
             if (data.NegativeEvent && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Irrational))
             {
                 int irrationalRoll = RandomGenerator.NumberBetween(1, 2);
-                if (irrationalRoll == 1) characterResolve -= 20;
-                else characterResolve += 20;
+                if (irrationalRoll == 1) characterStressResistance -= 20;
+                else characterStressResistance += 20;
             }
 
             // Determine roll required to pass the stress check
-            int requiredRoll = data.SuccessChance;
-            float resolveMod = data.SuccessChance * (characterResolve * 0.01f);
+            int requiredRoll = 0;
             if (data.NegativeEvent)
-                requiredRoll -= (int)resolveMod;
-            else
-                requiredRoll += (int)resolveMod;
+                Mathf.Clamp(data.SuccessChance - characterStressResistance, 5, 95);
+            else Mathf.Clamp(data.SuccessChance + characterStressResistance, 5, 95);
 
-            // Check required roll doesnt exceed 95 or 5
-            if (requiredRoll > 95)
-                requiredRoll = 95;
-            if (requiredRoll < 5)
-                requiredRoll = 5;
-
-            Debug.Log("CreateStressCheck() Stress event stats: Roll = " + roll.ToString() + ", Stress Resistance modifier: " + resolveMod.ToString() +
+            Debug.Log("CreateStressCheck() Stress event stats: Roll = " + roll.ToString() + ", Stress Resistance: " + characterStressResistance.ToString() +
              ", Required roll to pass: " + requiredRoll.ToString());
 
             // Negative event roll failure + positive event roll success
@@ -359,21 +351,6 @@ namespace HexGameEngine.Combat
             {
                 Debug.Log("Character rolled below the required roll threshold, applying effects of stress event...");
                 int finalStressAmount = RandomGenerator.NumberBetween(data.StressAmountMin, data.StressAmountMax);
-
-                // Check Hymn Of Courage perk: reduce stress gained by 50%
-                /*
-                foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(character))
-                {
-                    if (finalStressAmount > 0 &&
-                        PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.HymnOfCourage) &&
-                        LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, StatCalculator.GetTotalAuraSize(ally)).Contains(character.currentTile))
-                    {
-                        finalStressAmount = finalStressAmount / 2;
-                        break;
-                    }
-                }
-                */
-
                 HexCharacterController.Instance.ModifyStress(character, finalStressAmount, true, true);
             }
 
@@ -390,46 +367,25 @@ namespace HexGameEngine.Combat
             int roll = RandomGenerator.NumberBetween(1, 100);
 
             // Calculate total resolve + roll for 'Irrational' perk.
-            int characterResolve = StatCalculator.GetTotalStressResistance(character);
+            int characterStressResistance = StatCalculator.GetTotalStressResistance(character);
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Irrational))
             {
                 int irrationalRoll = RandomGenerator.NumberBetween(1, 2);
-                if (irrationalRoll == 1) characterResolve -= 20;
-                else characterResolve += 20;
+                if (irrationalRoll == 1) characterStressResistance -= 20;
+                else characterStressResistance += 20;
             }
 
             // Determine roll required to pass the stress check
-            int requiredRoll = data.successChance;
-            float resolveMod = data.successChance * (characterResolve * 0.01f);
-            requiredRoll -= (int)resolveMod;
-            Debug.Log("CreateStressCheck() Stress event stats: Roll = " + roll.ToString() + ", Stress Resistance modifier: " + resolveMod.ToString() +
-                ", Required roll to pass: " + requiredRoll.ToString());
+            int requiredRoll = Mathf.Clamp(data.successChance - characterStressResistance, 5, 95);
 
-            // check required roll doesnt exceed 95 or 5
-            if (requiredRoll > 95)
-                requiredRoll = 95;
-            if (requiredRoll < 5)
-                requiredRoll = 5;
+            Debug.Log("CreateStressCheck() Stress event stats: Roll = " + roll.ToString() + ", Stress Resistance: " + characterStressResistance.ToString() +
+                ", Required roll to pass: " + requiredRoll.ToString());
 
             // negative event roll failure + positice event roll success
             if (roll <= requiredRoll)
             {
                 Debug.Log("Character rolled below the required roll threshold, applying effects of stress event...");
                 int finalStressAmount = RandomGenerator.NumberBetween(data.stressAmountMin, data.stressAmountMax);
-
-                // Check Hymn Of Courage perk: reduce stress gained by 50%
-                /*
-                foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(character))
-                {
-                    if (finalStressAmount > 0 &&
-                        PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.HymnOfCourage) &&
-                        LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, StatCalculator.GetTotalAuraSize(ally)).Contains(character.currentTile))
-                    {
-                        finalStressAmount = finalStressAmount / 2;
-                        break;
-                    }
-                }
-                */
                 HexCharacterController.Instance.ModifyStress(character, finalStressAmount, true, showVFX);
             }
 

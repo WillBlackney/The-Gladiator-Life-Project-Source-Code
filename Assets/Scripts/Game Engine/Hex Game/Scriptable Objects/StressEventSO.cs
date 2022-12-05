@@ -10,9 +10,9 @@ namespace HexGameEngine.Combat
         [SerializeField] StressEventType type;
         [SerializeField] bool negativeEvent = true;
 
-        [Range(-20, 20)]
+        [Range(-50, 50)]
         [SerializeField] int stressAmountMin;
-        [Range(-20, 20)]
+        [Range(-50, 50)]
         [SerializeField] int stressAmountMax;
 
         [Range(1,100)]

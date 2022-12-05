@@ -43,7 +43,7 @@ MonoBehaviour:
     stressEventData:
       stressAmountMin: 10
       stressAmountMax: 20
-      successChance: 85
+      successChance: 100
     energyGained: 0
     normalTeleportVFX: 1
     tilesMoved: 0
@@ -116,6 +116,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
