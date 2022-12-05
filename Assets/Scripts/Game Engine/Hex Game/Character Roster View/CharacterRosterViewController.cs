@@ -95,8 +95,8 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI witsText;
         [SerializeField] private GameObject[] witsStars;
         [Space(20)]
-        [SerializeField] private TextMeshProUGUI fatigueText;
-        [SerializeField] private GameObject[] fatigueStars;
+        [SerializeField] private TextMeshProUGUI fitnessText;
+        [SerializeField] private GameObject[] fitnessStars;
         [Space(20)]
 
         [Header("Secondary Attribute Text Components")]
@@ -104,6 +104,7 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI criticalModifierText;
         [SerializeField] private TextMeshProUGUI energyRecoveryText;
         [SerializeField] private TextMeshProUGUI maxEnergyText;
+        [SerializeField] private TextMeshProUGUI maxFatigueText;
         [SerializeField] private TextMeshProUGUI fatigueRecoveryText;
         [SerializeField] private TextMeshProUGUI initiativeText;
         [SerializeField] private TextMeshProUGUI visionText;
@@ -286,13 +287,14 @@ namespace HexGameEngine.UI
             witsText.text = StatCalculator.GetTotalWits(character).ToString();
             BuildStars(witsStars, character.attributeSheet.wits.stars);
 
-            fatigueText.text = StatCalculator.GetTotalMaxFatigue(character).ToString();
-            BuildStars(fatigueStars, character.attributeSheet.fatigue.stars);
+            fitnessText.text = StatCalculator.GetTotalFitness(character).ToString();
+            BuildStars(fitnessStars, character.attributeSheet.fitness.stars);
 
             criticalChanceText.text = StatCalculator.GetTotalCriticalChance(character).ToString() + "%";
             criticalModifierText.text = StatCalculator.GetTotalCriticalModifier(character).ToString() + "%";
             energyRecoveryText.text = StatCalculator.GetTotalActionPointRecovery(character).ToString();
             maxEnergyText.text = StatCalculator.GetTotalMaxActionPoints(character).ToString();
+            maxFatigueText.text = StatCalculator.GetTotalMaxFatigue(character).ToString();
             fatigueRecoveryText.text = StatCalculator.GetTotalFatigueRecovery(character).ToString();
             initiativeText.text = StatCalculator.GetTotalInitiative(character).ToString();
             visionText.text = StatCalculator.GetTotalVision(character).ToString();

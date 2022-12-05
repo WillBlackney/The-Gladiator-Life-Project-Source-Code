@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: accb5c33da2a75e479ff64dac541103c, type: 3}
   m_Name: Fatigue
   m_EditorClassIdentifier: 
-  myPreset: 34
+  myPreset: 37
   mainSprite: {fileID: 21300000, guid: b3ccdeb95d3f345959679dec11c50048, type: 3}
   frameSprite: 0
   headerName: Fatigue
@@ -28,20 +28,26 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Each point increases a character''s '
+      phrase: 'Fatigue '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Maximum Fatigue '
+      phrase: 'accumulates by moving, attacking,  using abilities, dodging attacks
+        and being struck. A character''s '
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'by '
-    - color: 2
+      phrase: 'Initiative '
+    - color: 0
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 1
-    - color: 1
+      phrase: 'is reduced by the amount of '
+    - color: 0
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: .
+      phrase: 'Fatigue '
+    - color: 0
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: a character has generated. Generally speaking, fresh characters will
+        act earlier in the turn cycle than tired characters.

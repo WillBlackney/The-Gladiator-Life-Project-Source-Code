@@ -30,7 +30,7 @@ namespace HexGameEngine.Characters
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public Attribute fatigue = new Attribute(60, 0);
+        public Attribute fitness = new Attribute(60, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
@@ -135,8 +135,8 @@ namespace HexGameEngine.Characters
             other.resolve.stars = resolve.stars;
             other.wits = wits;
             other.wits.stars = wits.stars;
-            other.fatigue = fatigue;
-            other.fatigue.stars = fatigue.stars;
+            other.fitness = fitness;
+            other.fitness.stars = fitness.stars;
 
             other.fatigueRecovery = fatigueRecovery;          
             other.maxHealth = maxHealth;
@@ -165,7 +165,7 @@ namespace HexGameEngine.Characters
                 "accuracy: " + accuracy.value +", " +
                 "dodge: " + dodge.value +", " +
                 "wits: " + wits.value +", " +
-                "fatigue: " + fatigue.value + ", " +
+                "fatigue: " + fitness.value + ", " +
                 "resolve: " + resolve.value);
         }
 

@@ -185,7 +185,6 @@ namespace HexGameEngine.Combat
                 {
                     h.ShowMoveMarker();
                 }
-                //p.Destination.ShowMoveMarker();
 
                 // Draw dotted path
                 List<Vector2> points = new List<Vector2>();

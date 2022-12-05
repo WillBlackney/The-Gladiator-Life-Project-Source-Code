@@ -80,7 +80,7 @@ namespace HexGameEngine.UI
             else if (myAttribute == CoreAttribute.Resolve) rollText.text = "+" + roll.resolveRoll.ToString();
             else if (myAttribute == CoreAttribute.Constitution) rollText.text = "+" + roll.constitutionRoll.ToString();
             else if (myAttribute == CoreAttribute.Wits) rollText.text = "+" + roll.witsRoll.ToString();
-            else if (myAttribute == CoreAttribute.Fatigue) rollText.text = "+" + roll.fatigueRoll.ToString();
+            else if (myAttribute == CoreAttribute.Fitness) rollText.text = "+" + roll.fitnessRoll.ToString();
 
         }
         public void Reset()

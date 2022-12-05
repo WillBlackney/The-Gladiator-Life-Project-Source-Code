@@ -16,7 +16,7 @@ namespace HexGameEngine.Characters
         public int dodgeRoll;
         public int accuracyRoll;
         public int witsRoll;
-        public int fatigueRoll;
+        public int fitnessRoll;
 
         public static AttributeRollResult GenerateRoll(HexCharacterData character)
         {
@@ -31,7 +31,7 @@ namespace HexGameEngine.Characters
             roll.resolveRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.resolve.stars;
             roll.constitutionRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.constitution.stars;
             roll.witsRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.wits.stars;
-            roll.fatigueRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.fatigue.stars;
+            roll.fitnessRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.fitness.stars;
 
             return roll;
 

@@ -429,7 +429,7 @@ namespace HexGameEngine.Items
             ret += GetTotalAttributeBonusFromItemData(attribute, set.trinket);
             return ret;
         }
-        public int GetTotalFatiguePenaltyFromItemSet(ItemSet set)
+        public int GetTotalMaximumFatiguePenaltyFromItemSet(ItemSet set)
         {
             int ret = 0;
             if (set.mainHandItem != null) ret += set.mainHandItem.fatiguePenalty;

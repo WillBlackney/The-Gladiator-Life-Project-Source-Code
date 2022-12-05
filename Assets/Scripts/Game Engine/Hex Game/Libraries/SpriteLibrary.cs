@@ -224,7 +224,7 @@ namespace HexGameEngine.Libraries
             else if (attribute == CoreAttribute.Dodge) return dodge;
             else if (attribute == CoreAttribute.Resolve) return resolve;
             else if (attribute == CoreAttribute.Wits) return wits;
-            else if (attribute == CoreAttribute.Fatigue) return fatigue;
+            else if (attribute == CoreAttribute.Fitness) return fatigue;
             else return null;
         }
         public Sprite GetStressStateSprite(StressState state)

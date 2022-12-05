@@ -828,7 +828,7 @@ namespace HexGameEngine.Characters
             sheet.accuracy.value = RandomGenerator.NumberBetween(background.accuracyLower + accuracyLower, background.accuracyUpper + accuracyUpper);
             sheet.dodge.value = RandomGenerator.NumberBetween(background.dodgeLower + dodgeLower, background.dodgeUpper + dodgeUpper);
             sheet.wits.value = RandomGenerator.NumberBetween(background.witsLower + witsLower, background.witsUpper + witsUpper);
-            sheet.fatigue.value = RandomGenerator.NumberBetween(background.fatigueLower + fatigueLower, background.fatigueUpper + fatigueUpper);
+            sheet.fitness.value = RandomGenerator.NumberBetween(background.fatigueLower + fatigueLower, background.fatigueUpper + fatigueUpper);
             sheet.resolve.value = RandomGenerator.NumberBetween(background.resolveLower + resolveLower, background.resolveUpper + resolveUpper);
         }
         private void GenerateRecruitWeapons(HexCharacterData character, RecruitLoadoutData loadout)
@@ -911,7 +911,7 @@ namespace HexGameEngine.Characters
                 CoreAttribute.Resolve,
                 CoreAttribute.Might,
                 CoreAttribute.Wits,
-                CoreAttribute.Fatigue
+                CoreAttribute.Fitness
             };
 
             attributes.Shuffle();
@@ -926,7 +926,7 @@ namespace HexGameEngine.Characters
                 else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.stars = starsGained;
                 else if (attributes[i] == CoreAttribute.Might) sheet.might.stars = starsGained;
                 else if (attributes[i] == CoreAttribute.Wits) sheet.wits.stars = starsGained;
-                else if (attributes[i] == CoreAttribute.Fatigue) sheet.fatigue.stars = starsGained;
+                else if (attributes[i] == CoreAttribute.Fitness) sheet.fitness.stars = starsGained;
             }
         }
         public string GetRandomCharacterName(CharacterRace race)

@@ -1642,12 +1642,13 @@ namespace HexGameEngine.Characters
         {
             character.currentFatigue += fatigueGainedOrLost;
             HexCharacterView view = character.hexCharacterView;
+            int maxFat = StatCalculator.GetTotalMaxFatigue(character);
 
             if (character.currentFatigue < 0)            
                 character.currentFatigue = 0;            
 
-            else if (character.currentFatigue > StatCalculator.GetTotalMaxFatigue(character))            
-                character.currentFatigue = StatCalculator.GetTotalMaxFatigue(character);            
+            else if (character.currentFatigue > maxFat)            
+                character.currentFatigue = maxFat;            
 
             if (showVFX && view != null)
             {
@@ -1675,7 +1676,6 @@ namespace HexGameEngine.Characters
             if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
             {
                 int currentFat = character.currentFatigue;
-                int maxFat = StatCalculator.GetTotalMaxFatigue(character);
 
                 // Modify Screen UI elements
                 if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)

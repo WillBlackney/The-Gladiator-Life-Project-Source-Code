@@ -468,7 +468,8 @@ namespace HexGameEngine.UI
         Dodge = 6,
         Accuracy = 7,
         Wits = 8,
-        Fatigue = 34,
+        Fitness = 36,
+        MaximumFatigue = 34,
         FatigueRecovery = 35,
 
         CriticalChance = 9,
@@ -499,6 +500,7 @@ namespace HexGameEngine.UI
         
         Armour = 31,
         UnusedLevelUp = 32,
+        Fatigue = 37,
 
        
 

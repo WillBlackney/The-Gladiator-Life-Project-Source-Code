@@ -768,18 +768,18 @@ namespace HexGameEngine
             wits = (int)(wits * mod);
             return wits;
         }
-        public static int GetTotalMaxFatigue(HexCharacterModel c, bool includeItemFatigueModifiers = true)
+        public static int GetTotalFitness(HexCharacterModel c)
         {
-            int maxFat = c.attributeSheet.fatigue.value;
+            int fitness = c.attributeSheet.fitness.value;
             float mod = 1f;
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Ailing))
-                maxFat -= 10;
+                fitness -= 10;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fit))
-                maxFat += 10;
+                fitness += 10;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
-                maxFat += 3;
+                fitness += 3;
 
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
@@ -807,39 +807,34 @@ namespace HexGameEngine
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedGuts))
                     mod -= 0.4f;
-            }                
-
-            // Items
-            if (includeItemFatigueModifiers)
-            {
-                maxFat += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fatigue, c.itemSet);
-                int itemFat = ItemController.Instance.GetTotalFatiguePenaltyFromItemSet(c.itemSet);
-                if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Outfitter) && itemFat > 0)
-                    itemFat = itemFat / 2;
-                maxFat -= itemFat;
             }
 
+            // Items
+            fitness += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fitness, c.itemSet);
+
+            
+
             if (mod < 0) mod = 0;
-            maxFat = (int)(maxFat * mod);
+            fitness = (int)(fitness * mod);
 
             // cant go below
-            if (maxFat < 0) maxFat = 0;
+            if (fitness < 0) fitness = 0;
 
-            return maxFat;
+            return fitness;
         }
-        public static int GetTotalMaxFatigue(HexCharacterData c, bool includeItemFatigueModifiers = true)
+        public static int GetTotalFitness(HexCharacterData c)
         {
-            int maxFat = c.attributeSheet.fatigue.value;
+            int fitness = c.attributeSheet.fitness.value;
             float mod = 1f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Ailing))
-                maxFat -= 10;
+                fitness -= 10;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Polymath))
-                maxFat += 3;
+                fitness += 3;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fit))
-                maxFat += 10;
+                fitness += 10;
 
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
@@ -870,17 +865,42 @@ namespace HexGameEngine
             }
 
             // Items
-            if (includeItemFatigueModifiers)
-            {
-                maxFat += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fatigue, c.itemSet);
-                int itemFat = ItemController.Instance.GetTotalFatiguePenaltyFromItemSet(c.itemSet);
-                if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Outfitter) && itemFat > 0)
-                    itemFat = itemFat / 2;
-                maxFat -= itemFat;
-            }
-
+            fitness += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fitness, c.itemSet);
+           
             if (mod < 0) mod = 0;
-            maxFat = (int)(maxFat * mod);
+            fitness = (int)(fitness * mod);
+
+            // cant go below
+            if (fitness < 0)
+                fitness = 0;
+
+            return fitness;
+
+        }
+        public static int GetTotalMaxFatigue(HexCharacterModel c)
+        {
+            int maxFat = GetTotalFitness(c);
+
+            // Items
+            int itemFat = ItemController.Instance.GetTotalMaximumFatiguePenaltyFromItemSet(c.itemSet);
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Outfitter) && itemFat > 0)
+                itemFat = itemFat / 2;
+            maxFat -= itemFat;
+
+            // cant go below
+            if (maxFat < 0)
+                maxFat = 0;
+            return maxFat;
+        }
+        public static int GetTotalMaxFatigue(HexCharacterData c)
+        {
+            int maxFat = GetTotalFitness(c);
+
+            // Items
+            int itemFat = ItemController.Instance.GetTotalMaximumFatiguePenaltyFromItemSet(c.itemSet);
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Outfitter) && itemFat > 0)
+                itemFat = itemFat / 2;
+            maxFat -= itemFat;
 
             // cant go below
             if (maxFat < 0)
