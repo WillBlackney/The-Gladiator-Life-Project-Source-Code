@@ -89,7 +89,7 @@ namespace HexGameEngine.VisualEvents
                 ve.eventFunction.Invoke();
             }
 
-            // Wait until execution finished finished
+            // Wait until execution finished 
             if (ve.cData != null)
             {
                 yield return new WaitUntil(() => ve.cData.CoroutineCompleted() == true);

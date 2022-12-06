@@ -32,13 +32,13 @@ MonoBehaviour:
     resolve:
       value: 25
       stars: 0
-    fatigue:
-      value: 120
+    fitness:
+      value: 60
       stars: 0
     wits:
       value: 5
       stars: 0
-    maxHealth: 200
+    maxHealth: 250
     apRecovery: 8
     maxAp: 8
     initiative: 7
@@ -56,8 +56,8 @@ MonoBehaviour:
     injuryResistance: 0
     deathResistance: 0
   baseArmour: 0
-  randomizeHealth: 1
-  lowerHealthLimit: 215
+  randomizeHealth: 0
+  lowerHealthLimit: 250
   upperHealthLimit: 225
   aiTurnRoutine:
     directives:
@@ -126,7 +126,7 @@ MonoBehaviour:
         perkPairing:
           perkTag: 0
           passiveStacks: 1
-        healthPercentage: 66
+        healthPercentage: 51
         enemiesInMeleeRange: 1
         energyReq: 0
         fatigueReq: 0
@@ -155,10 +155,10 @@ MonoBehaviour:
         abilityName: Chop
       requirements: []
     - action:
-        actionType: 2
+        actionType: 3
         targettingPriority: 0500000001000000
         getRangeFromAbility: 0
-        range: 0
+        range: 1
         abilityName: 
       requirements: []
   abilityBook:
@@ -181,4 +181,4 @@ MonoBehaviour:
     trinket: {fileID: 0}
   modelParts:
   - Orc_Berserker_Chest
-  - Left_Hand_Simple_Hatchet
+  - Left_Hand_Simple_Axe

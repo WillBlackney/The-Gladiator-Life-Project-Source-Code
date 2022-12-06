@@ -66,7 +66,7 @@ namespace HexGameEngine.AI
         UseCharacterTargettedSummonAbility = 5,
         MoveToEngageInMelee = 2,
         MoveWithinRangeOfTarget = 3,
-        MoveToElevationCloserToTarget = 6,
+        MoveToElevationOrGrassCloserToTarget = 6,
         DelayTurn = 7,
     }
 

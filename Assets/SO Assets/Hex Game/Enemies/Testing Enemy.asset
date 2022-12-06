@@ -32,8 +32,8 @@ MonoBehaviour:
     resolve:
       value: 0
       stars: 0
-    fatigue:
-      value: 80
+    fitness:
+      value: 60
       stars: 0
     wits:
       value: 5
@@ -62,36 +62,23 @@ MonoBehaviour:
   aiTurnRoutine:
     directives:
     - action:
-        actionType: 1
-        targettingPriority: 
-        getRangeFromAbility: 0
-        range: 0
-        abilityName: Strike
-      requirements:
-      - requirementType: 1
-        range: 1
-        perkPairing:
-          perkTag: 0
-          passiveStacks: 0
-        healthPercentage: 0
-        enemiesInMeleeRange: 1
-        energyReq: 0
-        alliesAlive: 0
-        abilityName: 
-    - action:
         actionType: 2
-        targettingPriority: 
+        targettingPriority: 01000000
         getRangeFromAbility: 0
         range: 0
         abilityName: 
       requirements: []
+    - action:
+        actionType: 3
+        targettingPriority: 01000000
+        getRangeFromAbility: 0
+        range: 1
+        abilityName: 
+      requirements: []
   abilityBook:
-    activeAbilities:
-    - {fileID: 11400000, guid: 5da6171d9b5a21b47b2adc4c680a46c2, type: 2}
+    activeAbilities: []
   serializedPassiveManager:
-    perks:
-    - perkTag: 77
-      stacks: 3
+    perks: []
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
     offHandItem: {fileID: 0}

@@ -32,13 +32,13 @@ MonoBehaviour:
     resolve:
       value: 10
       stars: 0
-    fatigue:
-      value: 120
+    fitness:
+      value: 60
       stars: 0
     wits:
       value: 5
       stars: 0
-    maxHealth: 0
+    maxHealth: 125
     apRecovery: 8
     maxAp: 8
     initiative: 7
@@ -56,7 +56,7 @@ MonoBehaviour:
     injuryResistance: 0
     deathResistance: 25
   baseArmour: 20
-  randomizeHealth: 1
+  randomizeHealth: 0
   lowerHealthLimit: 120
   upperHealthLimit: 130
   aiTurnRoutine:

@@ -157,31 +157,47 @@ namespace HexGameEngine.AI
                 // Move to Engage in Melee
                 else if (directive.action.actionType == AIActionType.MoveToEngageInMelee)
                 {
+                    /*
                     List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
                     List<LevelNode> targetMeleeTiles = LevelController.Instance.GetAllHexsWithinRange(tpt.Target.currentTile, 1);
                     Path bestPath = null;
                     int shortestDistance = 10000;
+                    int lowestApCost = 10000;
 
                     foreach (Path p in allPossiblePaths)
                     {
+                        int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
                         if (targetMeleeTiles.Contains(p.Destination) &&
                             MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0 &&
-                            p.Length < shortestDistance)
+                            apCost < lowestApCost &&
+                            p.Length <= shortestDistance)
                         {
+                            lowestApCost = apCost;
                             shortestDistance = p.Length;
                             bestPath = p;
                         }
+                    }*/
+
+                    // Able to move and has a target?
+                    if (!HexCharacterController.Instance.IsCharacterAbleToMove(character) ||
+                        tpt.Target == null)
+                        continue;
+
+                    // Check for at least 1 availble tile near the target.
+                    bool atleastOneFreeMeleeTile = false;
+                    foreach(LevelNode n in LevelController.Instance.GetAllHexsWithinRange(tpt.Target.currentTile, 1))
+                    {
+                        if (Pathfinder.CanHexBeOccupied(n))
+                        {
+                            atleastOneFreeMeleeTile = true;
+                            break;
+                        }
                     }
 
-                    // Able to move and not already engaged with target
-                    if (!HexCharacterController.Instance.IsCharacterAbleToMove(character) ||
-                        tpt.Target == null ||
-                        tpt.Target.currentTile.Distance(character.currentTile) <= 1 ||
-                        bestPath == null
-                        )
-                    {
-                        continue;
-                    }
+                    // Check not already engaged with target + has 1 free melee tile
+                    if (tpt.Target.currentTile.Distance(character.currentTile) <= 1 ||
+                        !atleastOneFreeMeleeTile)                    
+                        continue;                    
 
                     validDirective = tpt;
                 }
@@ -209,17 +225,19 @@ namespace HexGameEngine.AI
                     List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
                     List<LevelNode> targetShootRangeTiles = LevelController.Instance.GetAllHexsWithinRange(tpt.Target.currentTile, range);
                     int currentClosestDistance = 1000;
-                    int cheapestApCost = 100;
+                    int cheapestApCost = 1000;
                     Path bestPath = null;
 
                     // Determine the shortest and most action point efficient path
                     foreach (Path p in allPossiblePaths)
                     {
+                        int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
                         if (targetShootRangeTiles.Contains(p.Destination) &&
-                            p.Length < currentClosestDistance &&
-                            Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath) < cheapestApCost &&
+                            p.Length <= currentClosestDistance &&
+                            apCost < cheapestApCost &&
                             MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
                         {
+                            cheapestApCost = apCost;
                             currentClosestDistance = p.Length;
                             bestPath = p;
                         }
@@ -239,7 +257,7 @@ namespace HexGameEngine.AI
                 }
 
                 // Move To Elevation Closer To Enemy
-                else if (directive.action.actionType == AIActionType.MoveToElevationCloserToTarget)
+                else if (directive.action.actionType == AIActionType.MoveToElevationOrGrassCloserToTarget)
                 {
                     // find all tiles that are
                     // 1. closer to the enemy than current position
@@ -262,7 +280,8 @@ namespace HexGameEngine.AI
                     // Filter for possible destinations that are elevated and actually closer to the enemy than current position
                     foreach (LevelNode node in LevelController.Instance.AllLevelNodes)
                     {
-                        if (node.Elevation == TileElevation.Elevated && distBetweenCharacters > node.Distance(character.currentTile))
+                        if ((node.Elevation == TileElevation.Elevated || node.tileName == "Grass") && 
+                            distBetweenCharacters > node.Distance(tpt.Target.currentTile))
                             possibleDestinations.Add(node);
                     }
 
@@ -272,7 +291,7 @@ namespace HexGameEngine.AI
                     {
                         Path p = Pathfinder.GetValidPath(character, character.currentTile, node, LevelController.Instance.AllLevelNodes.ToList());
                         if (p != null &&
-                           p.Length > bestCurrentDistance &&
+                           p.Length >= bestCurrentDistance &&
                            MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
                         {
                             bestCurrentDistance = p.Length;
@@ -280,10 +299,7 @@ namespace HexGameEngine.AI
                         }
                     }
 
-                    if (bestPath == null)
-                    {
-                        continue;
-                    }
+                    if (bestPath == null) continue;                    
 
                     validDirective = tpt;
                 }
@@ -561,15 +577,22 @@ namespace HexGameEngine.AI
             {
                 List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
                 List<LevelNode> targetMeleeTiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1);               
+               
                 Path bestPath = null;
+                int shortestDistance = 10000;
+                int lowestApCost = 10000;
 
                 foreach (Path p in allPossiblePaths)
                 {
-                    if (targetMeleeTiles.Contains(p.Destination)
-                        )
+                    int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
+                    if (targetMeleeTiles.Contains(p.Destination) &&
+                        MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0 &&
+                        p.Length <= shortestDistance &&
+                        apCost < lowestApCost)
                     {
+                        lowestApCost = apCost;
+                        shortestDistance = p.Length;
                         bestPath = p;
-                        break;
                     }
                 }
 
@@ -640,11 +663,13 @@ namespace HexGameEngine.AI
 
                 foreach (Path p in allPossiblePaths)
                 {
+                    int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
                     if (targetShootRangeTiles.Contains(p.Destination) &&
-                        p.Length < currentClosestDistance &&
-                        Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath) < cheapestApCost &&
+                        p.Length <= currentClosestDistance &&
+                        apCost < cheapestApCost &&
                         MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
                     {
+                        cheapestApCost = apCost;
                         currentClosestDistance = p.Length;
                         bestPath = p;
                     }
@@ -692,11 +717,11 @@ namespace HexGameEngine.AI
             }
 
             // Move closer to enemy via elevation
-            else if (directive.action.actionType == AIActionType.MoveToElevationCloserToTarget)
+            else if (directive.action.actionType == AIActionType.MoveToElevationOrGrassCloserToTarget)
             {
                 // find all tiles that are
                 // 1. closer to the enemy than current position
-                // 2. are elevated
+                // 2. are elevated or grass
                 // 3. within energy/walk distance
                 // 4. would not subject the AI to free strikes
                 // after getting these positions, pick the one that is closest to the enemy.
@@ -709,7 +734,8 @@ namespace HexGameEngine.AI
                 // Filter for possible destinations that are elevated and actually closer to the enemy than current position
                 foreach (LevelNode node in LevelController.Instance.AllLevelNodes)
                 {
-                    if(node.Elevation == TileElevation.Elevated && distBetweenCharacters > node.Distance(character.currentTile))                    
+                    if((node.Elevation == TileElevation.Elevated || node.tileName == "Grass") && 
+                        distBetweenCharacters > node.Distance(character.currentTile))                    
                         possibleDestinations.Add(node);
                     
                 }
@@ -756,7 +782,7 @@ namespace HexGameEngine.AI
                 if (directive.action.actionType == AIActionType.MoveWithinRangeOfTarget ||
                 directive.action.actionType == AIActionType.MoveToEngageInMelee ||
                 directive.action.actionType == AIActionType.UseCharacterTargettedSummonAbility ||
-                directive.action.actionType == AIActionType.MoveToElevationCloserToTarget)
+                directive.action.actionType == AIActionType.MoveToElevationOrGrassCloserToTarget)
                 {
                     if (tp == TargettingPriority.ClosestUnfriendlyTarget)
                         target = GetClosestUnfriendlyCharacter(attacker);

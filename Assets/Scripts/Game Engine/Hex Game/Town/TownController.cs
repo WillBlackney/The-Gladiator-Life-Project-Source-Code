@@ -804,11 +804,11 @@ namespace HexGameEngine.TownFeatures
             currentDailyCombatContracts.Clear();
 
             // On normal days, generate 2 basics and 1 elite combat
-            if (RunController.Instance.CurrentDay != 5)
+            if (RunController.Instance.CurrentDay != 4)
             {
                 List<int> deploymentLimits = new List<int> { 1, 2, 3, 5 };
 
-                // On first 2 days, only generate combat with deployment limits of 1 and 3
+                // On first 2 days, only generate combat with deployment limits of 1,2 and 3
                 if (RunController.Instance.CurrentChapter == 1 &&
                 (RunController.Instance.CurrentDay == 1 || RunController.Instance.CurrentDay == 2))
                 {
@@ -840,7 +840,7 @@ namespace HexGameEngine.TownFeatures
 
             }
 
-            // on 5th day, only offer the boss fight
+            // on 4th day, only offer the boss fight
             else
             {
                 currentDailyCombatContracts.Add(GenerateRandomDailyCombatContract(RunController.Instance.CurrentChapter, CombatDifficulty.Boss));

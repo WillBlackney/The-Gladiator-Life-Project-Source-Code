@@ -131,6 +131,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

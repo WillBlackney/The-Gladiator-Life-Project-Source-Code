@@ -16,27 +16,27 @@ MonoBehaviour:
   passiveName: Fearsome
   perkTag: 204
   passiveDescription:
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Enemies inside this character''s '
-  - color: 0
+  - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Aura '
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'suffer '
-  - color: 0
+  - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: '-5 '
-  - color: 0
+  - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: Resolve
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: . This effect can stack multiple times.

@@ -247,7 +247,7 @@ namespace HexGameEngine.Items
                 iBoost += 1;
                 effectsParent.SetActive(true);
                 ModalDottedRow row = effectRows[iBoost - 1];
-                row.Build(TextLogic.ReturnColoredText("-" + item.fatiguePenalty.ToString(), TextLogic.blueNumber) + " Fatigue", DotStyle.Red);
+                row.Build(TextLogic.ReturnColoredText("-" + item.fatiguePenalty.ToString(), TextLogic.blueNumber) + " Maximum Fatigue", DotStyle.Red);
             }
 
             if (item.weaponClass == WeaponClass.Crossbow)
