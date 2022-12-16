@@ -809,9 +809,9 @@ namespace HexGameEngine.HexTiles
 
                 // check valid time to for character to use ability
                 if (TurnController.Instance.EntityActivated.controller == Controller.Player &&
-                    TurnController.Instance.EntityActivated.activationPhase == ActivationPhase.ActivationPhase
-                    )
+                    TurnController.Instance.EntityActivated.activationPhase == ActivationPhase.ActivationPhase)
                 {
+
                     // Normal Abilities, or 2 target selection abilities in the start phase
                     if (AbilityController.Instance.CurrentAbilityAwaiting.secondaryTargetRequirement == SecondaryTargetRequirement.None ||
                         (AbilityController.Instance.CurrentAbilityAwaiting.secondaryTargetRequirement != SecondaryTargetRequirement.None && AbilityController.Instance.CurrentSelectionPhase == AbilitySelectionPhase.None))

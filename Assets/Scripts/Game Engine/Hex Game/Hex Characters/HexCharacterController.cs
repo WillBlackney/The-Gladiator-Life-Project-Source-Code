@@ -1153,7 +1153,7 @@ namespace HexGameEngine.Characters
             // Was character killed by a DoT or heart attack?
             if (character.currentHealth <= 0) return;
 
-            // ENEMY Start turn 
+            // AI Start turn 
             if (character.controller == Controller.AI)
             {
                 // Redetermine who has the ranged advantage
@@ -1277,7 +1277,7 @@ namespace HexGameEngine.Characters
                     VisualEventManager.Instance.CreateVisualEvent(() =>
                     VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Abusive!"), QueuePosition.Back, 0f, 0.5f);
 
-                    List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
+                    List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
                     foreach(HexCharacterModel ally in allies)                    
                         CombatController.Instance.CreateStressCheck(ally, new StressEventData(1, 1, 75), true);
                     
@@ -1390,7 +1390,7 @@ namespace HexGameEngine.Characters
                 // Savage Leader
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SavageLeader) && character.currentHealth > 0)
                 {
-                    List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
+                    List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
                     HexCharacterModel ally = allies[RandomGenerator.NumberBetween(0, allies.Count - 1)];
 
                     if (ally != null)
@@ -1405,7 +1405,7 @@ namespace HexGameEngine.Characters
                 // Encouraging Leader
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.EncouragingLeader) && character.currentHealth > 0)
                 {
-                    List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
+                    List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
                     HexCharacterModel ally = allies[RandomGenerator.NumberBetween(0, allies.Count - 1)];
 
                     if (ally != null)
@@ -1423,7 +1423,7 @@ namespace HexGameEngine.Characters
                     VisualEventManager.Instance.CreateVisualEvent(() =>
                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Fellowship!"), QueuePosition.Back, 0f, 0.5f);
 
-                    List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
+                    List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
                     foreach(HexCharacterModel ally in allies)
                     {
                         Vector3 pos = ally.hexCharacterView.WorldPosition;
@@ -1441,7 +1441,7 @@ namespace HexGameEngine.Characters
                     VisualEventManager.Instance.CreateVisualEvent(() =>
                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Wrath!"), QueuePosition.Back, 0f, 0.5f);
 
-                    List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
+                    List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
                     foreach (HexCharacterModel ally in allies)
                     {
                         Vector3 pos = ally.hexCharacterView.WorldPosition;
@@ -1459,7 +1459,7 @@ namespace HexGameEngine.Characters
                     VisualEventManager.Instance.CreateVisualEvent(() =>
                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Courage!"), QueuePosition.Back, 0f, 0.5f);
 
-                    List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
+                    List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
                     foreach (HexCharacterModel ally in allies)
                     {
                         Vector3 pos = ally.hexCharacterView.WorldPosition;
@@ -1477,7 +1477,7 @@ namespace HexGameEngine.Characters
                     VisualEventManager.Instance.CreateVisualEvent(() =>
                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Purity!"), QueuePosition.Back, 0f, 0.5f);
 
-                    List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
+                    List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
                     foreach (HexCharacterModel ally in allies)
                     {
                         Vector3 pos = ally.hexCharacterView.WorldPosition;
@@ -1893,7 +1893,7 @@ namespace HexGameEngine.Characters
 
             return characters;
         }
-        public List<HexCharacterModel> GetAlliesWithinMyAura(HexCharacterModel character, bool includeSelf = false)
+        public List<HexCharacterModel> GetAlliesWithinCharacterAura(HexCharacterModel character, bool includeSelf = false)
         {
             List<LevelNode> auraTiles = GetCharacterAura(character, includeSelf);
             List<HexCharacterModel> allies = new List<HexCharacterModel>();

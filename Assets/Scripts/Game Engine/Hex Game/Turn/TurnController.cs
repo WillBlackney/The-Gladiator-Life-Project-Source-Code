@@ -387,21 +387,6 @@ namespace HexGameEngine.TurnLogic
             HexCharacterModel cachedEntityRef = entity;
             entity.hasMadeTurn = true;
 
-            // Player controlled characters
-            if (entity.controller == Controller.Player)
-            {
-                //VisualEventManager.Instance.CreateVisualEvent(() => SetPlayerTurnButtonState());
-
-                if (entity.hasRequestedTurnDelay)
-                {
-                    //DisableDelayTurnButtonInteractions();
-                }
-                else
-                {
-                   // EnableDelayTurnButtonInteractions();
-                }
-            }
-
             // Move arrow to point at activated enemy
             VisualEventManager.Instance.CreateVisualEvent(() => MoveActivationArrowTowardsEntityWindow(cachedEntityRef), QueuePosition.Back);
 

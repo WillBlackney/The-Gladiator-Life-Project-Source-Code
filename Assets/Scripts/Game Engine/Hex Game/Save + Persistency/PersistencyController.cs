@@ -1,6 +1,4 @@
 ﻿using Sirenix.Serialization;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using HexGameEngine.Utilities;
@@ -10,7 +8,6 @@ using HexGameEngine.RewardSystems;
 using HexGameEngine.MainMenu;
 using HexGameEngine.Player;
 using HexGameEngine.TownFeatures;
-using HexGameEngine.DungeonMap;
 using HexGameEngine.Items;
 
 namespace HexGameEngine.Persistency

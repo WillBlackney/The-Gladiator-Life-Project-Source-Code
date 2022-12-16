@@ -29,7 +29,7 @@ namespace HexGameEngine.AI
             
             while (successfulAction && loops < maximumActionAttempts)
             {
-                await Task.Delay((int) ((Time.deltaTime * 0.5f) * 1000));
+                //await Task.Delay((int) ((Time.deltaTime * 0.5f) * 1000));
                 successfulAction = await TryTakeAction(character);
                 loops += 1;                
             }
@@ -417,7 +417,7 @@ namespace HexGameEngine.AI
             else if (req.requirementType == AIActionRequirementType.TargetIsAdjacentToAlly)
             {
                 // TO DO: this will get non adjacent allies if the target has an aura larger than 2, fix in future
-                if (HexCharacterController.Instance.GetAlliesWithinMyAura(target).Count >= 1)
+                if (HexCharacterController.Instance.GetAlliesWithinCharacterAura(target).Count >= 1)
                     bRet = true;
             }
 

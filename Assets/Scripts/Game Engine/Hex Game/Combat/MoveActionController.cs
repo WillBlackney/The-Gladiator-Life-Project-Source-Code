@@ -52,22 +52,22 @@ namespace HexGameEngine.Combat
             Debug.Log("MoveActionController.HandleHexClicked() called on hex: " + h.GridPosition.x.ToString() + ", " + h.GridPosition.y.ToString());
             if (TurnController.Instance.EntityActivated == null) return;
 
-            HexCharacterModel character = TurnController.Instance.EntityActivated;
-            if (character.controller != Controller.Player) return;
+            HexCharacterModel activatedCharacter = TurnController.Instance.EntityActivated;
+            if (activatedCharacter.controller != Controller.Player) return;
 
             // Crippled characters cant move
-            if(!HexCharacterController.Instance.IsCharacterAbleToMove(character))
+            if(!HexCharacterController.Instance.IsCharacterAbleToMove(activatedCharacter))
             {
-                Debug.Log(character.myName + " is unable to move, cancelling move action request");
+                Debug.Log(activatedCharacter.myName + " is unable to move, cancelling move action request");
                 return;
             }
 
             // First hex selection
             if(clickedHex == null)
             {
-                List<LevelNode> validMoveLocations =  Pathfinder.GetAllValidPathableDestinations(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
+                List<LevelNode> validMoveLocations =  Pathfinder.GetAllValidPathableDestinations(activatedCharacter, activatedCharacter.currentTile, LevelController.Instance.AllLevelNodes.ToList());
                 LevelController.Instance.MarkTilesInRange(validMoveLocations);
-                HandleFirstHexSelection(h, character);
+                HandleFirstHexSelection(h, activatedCharacter);
             }     
             
             // Second hex selection
@@ -75,7 +75,7 @@ namespace HexGameEngine.Combat
             {
                 // do move stuff
                 LevelController.Instance.UnmarkAllTiles();
-                LevelController.Instance.HandleMoveDownPath(character, currentPath);
+                LevelController.Instance.HandleMoveDownPath(activatedCharacter, currentPath);
                 ResetSelectionState();
             }
 
@@ -83,7 +83,7 @@ namespace HexGameEngine.Combat
             else if (clickedHex != null && h != clickedHex)
             {
                 ClearPath();
-                HandleFirstHexSelection(h, character);
+                HandleFirstHexSelection(h, activatedCharacter);
             }
         }     
         public List<HexCharacterModel> GetFreeStrikersAndSpearWallStrikersOnPath(HexCharacterModel characterMoving, Path p)

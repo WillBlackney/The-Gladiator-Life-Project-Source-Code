@@ -117,7 +117,7 @@ namespace HexGameEngine.Characters
         public void OnModelRightClick()
         {
             if(character != null && 
-                character.controller != Controller.Player)         
+                character.controller == Controller.AI)         
                 EnemyInfoPanel.Instance.HandleBuildAndShowPanel(character.characterData);            
         }
         #endregion

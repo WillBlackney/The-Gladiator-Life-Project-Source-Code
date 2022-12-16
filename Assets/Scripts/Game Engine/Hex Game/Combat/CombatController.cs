@@ -1199,12 +1199,13 @@ namespace HexGameEngine.Combat
                     attacker.totalKills++;
                 }
 
-                // Check nearby gnoll enemies: gnolls heal when an enemy is killed within 1 of them
+                // Check nearby gnoll enemies: gnolls heal when a character is killed within 1 of them
                 List<HexCharacterModel> enemies = HexCharacterController.Instance.GetAllEnemiesOfCharacter(target);
                 List<LevelNode> tiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1);
                 foreach(HexCharacterModel enemy in enemies)
                 {
-                    if(enemy.race == CharacterRace.Gnoll && enemy.controller == Controller.Player &&
+                    if(enemy.race == CharacterRace.Gnoll && 
+                        !HexCharacterController.Instance.IsTargetFriendly(enemy, attacker) &&
                         tiles.Contains(enemy.currentTile))
                     {
                         // Gain health

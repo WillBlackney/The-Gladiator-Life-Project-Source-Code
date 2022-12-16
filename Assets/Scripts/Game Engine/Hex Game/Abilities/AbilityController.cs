@@ -754,7 +754,8 @@ namespace HexGameEngine.Abilities
 
                 // Determine targets to roll against.
                 foreach (LevelNode h in tilesEffected)                
-                    if (h.myCharacter != null && h.myCharacter.allegiance != caster.allegiance)                    
+                    if (h.myCharacter != null && 
+                        !HexCharacterController.Instance.IsTargetFriendly(h.myCharacter, caster))                    
                         charactersEffected.Add(h.myCharacter);                   
                 
                 // Roll for hits + play on Hit animations or on miss animations
@@ -1285,7 +1286,10 @@ namespace HexGameEngine.Abilities
         }
         private void SetAbilityOnCooldown(AbilityData ability)
         {
+            // Set cooldown count to max
             ability.currentCooldown = ability.baseCooldown;
+
+            // Update ability bar UI if activated player character
             if (ability.myCharacter != null &&
                 TurnController.Instance.EntityActivated == ability.myCharacter &&
                 ability.myCharacter.controller == Controller.Player)
