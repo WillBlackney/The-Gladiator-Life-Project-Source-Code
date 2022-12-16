@@ -122,6 +122,7 @@ MonoBehaviour:
       bonusDamageModifier: 0
       bonusCriticalChance: 0
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -169,6 +170,4 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: you are missing.
-  keyWords:
-  - kewWordType: 3
-    passiveType: 0
+  keyWords: []

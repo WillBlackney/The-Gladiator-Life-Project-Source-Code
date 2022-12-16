@@ -165,5 +165,14 @@ namespace HexGameEngine.TownFeatures
             CameraController.Instance.MainCamera.DOOrthoSize(2.5f, 0f);
             CameraController.Instance.MainCamera.transform.position = new Vector3(cameraZoomToPoint.position.x, cameraZoomToPoint.position.y, -15);
         }
+        public void CloseAndResetAllUiViews()
+        {
+            blockMouseActions = false;
+            pageCg.DOKill();
+            pageMovementParent.DOKill();
+            pageCg.DOFade(0f, 0f);
+            pageMovementParent.DOMove(pageStartPos.position, 0.35f);
+            pageVisualParent.SetActive(false);
+        }
     }
 }

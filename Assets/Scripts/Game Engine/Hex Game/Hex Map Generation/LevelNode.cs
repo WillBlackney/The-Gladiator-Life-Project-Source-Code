@@ -136,7 +136,6 @@ namespace HexGameEngine.HexTiles
             if (tileName == "Grass" && !obstructed) grassParent.SetActive(true);
             else if (tileName == "Mud") mudParent.SetActive(true);
             else if (tileName == "Water") waterParent.SetActive(true);
-            //tileTypeSprite.sprite = data.tileSprite;
         }
         private void Start()
         {

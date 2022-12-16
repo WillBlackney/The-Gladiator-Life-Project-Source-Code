@@ -29,15 +29,10 @@ namespace HexGameEngine.AI
             
             while (successfulAction && loops < maximumActionAttempts)
             {
+                await Task.Delay((int) ((Time.deltaTime * 0.5f) * 1000));
                 successfulAction = await TryTakeAction(character);
                 loops += 1;                
             }
-            /*
-            bool successfulAction = await TryTakeAction(character);
-            int maximumActionAttempts = 10;
-
-            for(int i = 0; i < maximumActionAttempts; i++)            
-                await TryTakeAction(character);     */
 
         }
         private static async Task<bool> TryTakeAction(HexCharacterModel character)
@@ -50,11 +45,9 @@ namespace HexGameEngine.AI
             foreach (AIDirective dir in character.aiTurnRoutine.directives)
             {
                 TargetPriorityTuple tpt = IsDirectiveActionable(character, dir);
-                //await Task.Yield();
                 if (tpt != null)
                 {
                     actionTaken = ExecuteDirective(character, dir, tpt.Target);
-                    //await Task.Yield();
                     if (actionTaken) break;
                 }
             }
@@ -157,27 +150,6 @@ namespace HexGameEngine.AI
                 // Move to Engage in Melee
                 else if (directive.action.actionType == AIActionType.MoveToEngageInMelee)
                 {
-                    /*
-                    List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
-                    List<LevelNode> targetMeleeTiles = LevelController.Instance.GetAllHexsWithinRange(tpt.Target.currentTile, 1);
-                    Path bestPath = null;
-                    int shortestDistance = 10000;
-                    int lowestApCost = 10000;
-
-                    foreach (Path p in allPossiblePaths)
-                    {
-                        int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
-                        if (targetMeleeTiles.Contains(p.Destination) &&
-                            MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0 &&
-                            apCost < lowestApCost &&
-                            p.Length <= shortestDistance)
-                        {
-                            lowestApCost = apCost;
-                            shortestDistance = p.Length;
-                            bestPath = p;
-                        }
-                    }*/
-
                     // Able to move and has a target?
                     if (!HexCharacterController.Instance.IsCharacterAbleToMove(character) ||
                         tpt.Target == null)
@@ -586,6 +558,7 @@ namespace HexGameEngine.AI
                 {
                     int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
                     if (targetMeleeTiles.Contains(p.Destination) &&
+                        target.currentTile.Distance(p.Destination) <= target.currentTile.Distance(character.currentTile) && 
                         MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0 &&
                         p.Length <= shortestDistance &&
                         apCost < lowestApCost)

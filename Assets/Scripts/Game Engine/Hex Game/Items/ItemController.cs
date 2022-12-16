@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using HexGameEngine.UCM;
 using HexGameEngine.Characters;
@@ -9,7 +8,6 @@ using System;
 using System.Linq;
 using HexGameEngine.UI;
 using HexGameEngine.Perks;
-using Spriter2UnityDX.Importing;
 
 namespace HexGameEngine.Items
 {

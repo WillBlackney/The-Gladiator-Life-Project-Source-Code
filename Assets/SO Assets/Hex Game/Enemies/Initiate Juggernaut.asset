@@ -32,8 +32,8 @@ MonoBehaviour:
     resolve:
       value: 15
       stars: 0
-    fatigue:
-      value: 90
+    fitness:
+      value: 60
       stars: 0
     wits:
       value: 5

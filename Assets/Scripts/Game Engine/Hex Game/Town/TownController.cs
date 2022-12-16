@@ -30,6 +30,7 @@ namespace HexGameEngine.TownFeatures
         [Title("Town Page Components")]
         [SerializeField] GameObject mainVisualParent;
         [SerializeField] TownBuildingView arenaBuilding;
+        [SerializeField] TownBuildingView[] allFeatureBuildings; 
         [Space(20)]
 
         [Title("Recruit Page Core Components")]
@@ -1020,6 +1021,8 @@ namespace HexGameEngine.TownFeatures
             }
             HideTownView();
             HideDeploymentPage();
+            foreach(TownBuildingView tbv in allFeatureBuildings)            
+                tbv.CloseAndResetAllUiViews();            
         }
         #endregion
 

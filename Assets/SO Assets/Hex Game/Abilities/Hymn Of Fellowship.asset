@@ -117,6 +117,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -155,9 +156,17 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: . Only one hymn may be active at a time.
+    phrase: '. Only one '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Hymn '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: may be active at a time.
   keyWords:
-  - kewWordType: 1
-    passiveType: 74
   - kewWordType: 6
     passiveType: 0
+  - kewWordType: 1
+    passiveType: 74

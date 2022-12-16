@@ -17,9 +17,9 @@ MonoBehaviour:
   baseAbilityDescription: Deal 75% Magic damage and apply Blinded to all enemies
     within your aura.
   abilitySprite: {fileID: 21300000, guid: 97d478cf1bb73bd4c816ca384b7f6ac9, type: 3}
-  energyCost: 0
+  energyCost: 4
   fatigueCost: 12
-  baseCooldown: 0
+  baseCooldown: 2
   abilityType: 05000000
   doesNotBreakStealth: 0
   weaponRequirement: 0

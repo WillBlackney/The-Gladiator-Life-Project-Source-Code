@@ -16,15 +16,15 @@ MonoBehaviour:
   passiveName: Footwork
   perkTag: 13
   passiveDescription:
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Enemies do not gain an '
-  - color: 0
+  - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Accuracy '
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'bonus from '
@@ -40,11 +40,11 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Back Striking '
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'or '
-  - color: 0
+  - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: Elevation

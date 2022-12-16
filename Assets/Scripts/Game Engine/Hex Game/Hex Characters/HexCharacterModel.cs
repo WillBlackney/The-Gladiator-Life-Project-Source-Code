@@ -89,13 +89,16 @@ namespace HexGameEngine.Characters
         #region
         public VisualEvent GetLastStackEventParent()
         {
-            /*
-            if (eventStacks.Count > 0) return eventStacks[eventStacks.Count - 1];
-            else
+            VisualEvent ret = null;
+            for(int i = 0; i < eventStacks.Count - 1; i++)
             {
-
-            }*/
-            return eventStacks.Count > 0 ? eventStacks[eventStacks.Count - 1] : null;
+                if (eventStacks[i].isClosed == false)
+                {
+                    ret = eventStacks[i];
+                    break;
+                }
+            }
+            return ret;
         }
         #endregion
 

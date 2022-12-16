@@ -32,8 +32,8 @@ MonoBehaviour:
     resolve:
       value: 10
       stars: 0
-    fatigue:
-      value: 80
+    fitness:
+      value: 60
       stars: 0
     wits:
       value: 5
@@ -129,19 +129,25 @@ MonoBehaviour:
         abilityName: Slash
       requirements: []
     - action:
-        actionType: 3
-        targettingPriority: 01000000
-        getRangeFromAbility: 0
-        range: 1
-        abilityName: 
-      requirements: []
-    - action:
         actionType: 2
-        targettingPriority: 01000000
+        targettingPriority: 0500000001000000
         getRangeFromAbility: 0
         range: 0
         abilityName: 
-      requirements: []
+      requirements:
+      - requirementType: 8
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
   abilityBook:
     activeAbilities: []
   serializedPassiveManager:

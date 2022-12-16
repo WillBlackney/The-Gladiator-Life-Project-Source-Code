@@ -12,6 +12,7 @@ namespace HexGameEngine.VisualEvents
         public Action eventFunction;
 
         public bool isPlaying;
+        public bool isClosed;
         public VisualEventType eventType;
         public float startDelay;
         public float endDelay;

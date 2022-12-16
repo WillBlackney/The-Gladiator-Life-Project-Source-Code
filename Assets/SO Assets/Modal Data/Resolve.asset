@@ -28,7 +28,7 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Each point increases a character '
+      phrase: 'Each point increases a character''s '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Each point increases a character '
+      phrase: 'Each point increases a character''s '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

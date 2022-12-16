@@ -62,21 +62,15 @@ MonoBehaviour:
   aiTurnRoutine:
     directives:
     - action:
-        actionType: 2
-        targettingPriority: 01000000
+        actionType: 1
+        targettingPriority: 02000000
         getRangeFromAbility: 0
         range: 0
-        abilityName: 
-      requirements: []
-    - action:
-        actionType: 3
-        targettingPriority: 01000000
-        getRangeFromAbility: 0
-        range: 1
-        abilityName: 
+        abilityName: Consecration
       requirements: []
   abilityBook:
-    activeAbilities: []
+    activeAbilities:
+    - {fileID: 11400000, guid: 6b5c6b02a64c9fe4cb91b8ff26213bd2, type: 2}
   serializedPassiveManager:
     perks: []
   itemSet:

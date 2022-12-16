@@ -67,7 +67,15 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'to an ally, there''s a 35% chance to apply '
+    phrase: 'to an ally, there''s a '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '35% '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'chance to apply '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

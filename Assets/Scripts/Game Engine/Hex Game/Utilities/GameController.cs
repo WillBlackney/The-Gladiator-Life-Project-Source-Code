@@ -530,16 +530,16 @@ namespace HexGameEngine
             TurnController.Instance.DestroyAllActivationWindows();
 
             // Hide combat UI
-            CombatUIController.Instance.HideViewsOnTurnEnd();
-
-            TownController.Instance.TearDownOnExitToMainMenu();
-            CharacterScrollPanelController.Instance.HideMainView();
+            CombatUIController.Instance.HideViewsOnTurnEnd();            
             LevelController.Instance.HandleTearDownAllCombatViews();
             LightController.Instance.EnableStandardGlobalLight();
-
-            // Hide UI + level views
-            CharacterRosterViewController.Instance.HideCharacterRosterScreen();
             LevelController.Instance.DisableArenaView();
+
+            // Hide UI + town views
+            TownController.Instance.TearDownOnExitToMainMenu();
+            CharacterScrollPanelController.Instance.HideMainView();
+            InventoryController.Instance.HideInventoryView();
+            CharacterRosterViewController.Instance.HideCharacterRosterScreen();            
             CombatRewardController.Instance.HideGameOverScreen();
             CombatRewardController.Instance.HidePostCombatRewardScreen();
 
@@ -698,7 +698,6 @@ namespace HexGameEngine
             TurnController.Instance.OnNewCombatEventStarted();
         }
         #endregion              
-
 
         // Misc Logic
         #region

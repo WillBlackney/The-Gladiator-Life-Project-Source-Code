@@ -285,8 +285,8 @@ namespace HexGameEngine
             }
                       
 
-            // Mud tile
-            if (c.currentTile.TileData.tileName == "Water") accuracy -= 10;       
+            // Water tile
+            if (c.currentTile.tileName == "Water") accuracy -= 10;       
 
             // Stress State Modifier
             accuracy += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress), c);
@@ -435,8 +435,8 @@ namespace HexGameEngine
                 }
             }
 
-            // Mud tile
-            if (c.currentTile.TileData.tileName == "Water") dodge -= 10;
+            // Water tile
+            if (c.currentTile.tileName == "Water") dodge -= 10;
 
             // Manipulation talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Manipulation, 1))
@@ -568,6 +568,7 @@ namespace HexGameEngine
                 }
             }           
 
+            /*
             // Check for Fearsome enemies
             foreach (HexCharacterModel enemy in HexCharacterController.Instance.GetAllEnemiesOfCharacter(c))
             {
@@ -577,7 +578,7 @@ namespace HexGameEngine
                     resolve -= 5;
                 }
             }
-
+            */
             // Check Fear + Hate of X Perks
             var myAura = LevelController.Instance.GetAllHexsWithinRange(c.currentTile, GetTotalAuraSize(c));
             bool hasHateOfUndead = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HateOfUndead);

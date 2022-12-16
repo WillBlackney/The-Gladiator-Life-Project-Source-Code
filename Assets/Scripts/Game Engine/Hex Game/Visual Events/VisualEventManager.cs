@@ -280,7 +280,7 @@ namespace HexGameEngine.VisualEvents
         public VisualEvent CreateVisualEvent(Action eventFunction, QueuePosition position = QueuePosition.Back, float startDelay = 0f, float endDelay = 0f, VisualEvent parentEvent = null)
         {
             VisualEvent vEvent = new VisualEvent(eventFunction, null, startDelay, endDelay, VisualEventType.Single);
-            if (parentEvent != null && parentEvent.isPlaying == false) parentEvent.AddEventToStack(vEvent);
+            if (parentEvent != null && parentEvent.isPlaying == false && !parentEvent.isClosed) parentEvent.AddEventToStack(vEvent);
             else if (position == QueuePosition.Front) AddEventToFrontOfQueue(vEvent);
             else AddEventToBackOfQueue(vEvent);
             return vEvent;

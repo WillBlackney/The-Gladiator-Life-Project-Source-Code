@@ -86,6 +86,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -119,4 +120,4 @@ MonoBehaviour:
     phrase: .
   keyWords:
   - kewWordType: 1
-    passiveType: 74
+    passiveType: 12

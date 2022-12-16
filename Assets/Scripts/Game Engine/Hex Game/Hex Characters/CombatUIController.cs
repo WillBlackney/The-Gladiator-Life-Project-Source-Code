@@ -1,5 +1,4 @@
 using CardGameEngine.UCM;
-using Codice.CM.Common;
 using DG.Tweening;
 using HexGameEngine.Abilities;
 using HexGameEngine.Perks;
@@ -7,8 +6,6 @@ using HexGameEngine.UCM;
 using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

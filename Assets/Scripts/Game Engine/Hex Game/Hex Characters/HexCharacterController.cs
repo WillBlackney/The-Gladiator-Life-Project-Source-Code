@@ -604,7 +604,8 @@ namespace HexGameEngine.Characters
             // Stress VFX
             if (stressGainedOrLost > 0 && showVFX)
             {
-                if (character.eventStacks.Count > 0)
+                if (character.GetLastStackEventParent() != null &&
+                    !character.GetLastStackEventParent().isClosed)
                 {
                     VisualEventManager.Instance.CreateVisualEvent(() =>
                         VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost), QueuePosition.Back, 0, 0f, character.GetLastStackEventParent());
@@ -1277,10 +1278,21 @@ namespace HexGameEngine.Characters
                     VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Abusive!"), QueuePosition.Back, 0f, 0.5f);
 
                     List<HexCharacterModel> allies = GetAlliesWithinMyAura(character);
-                    foreach(HexCharacterModel ally in allies)
-                    {
-                        CombatController.Instance.CreateStressCheck(ally, new StressEventData(1, 1, 100), true);
-                    }
+                    foreach(HexCharacterModel ally in allies)                    
+                        CombatController.Instance.CreateStressCheck(ally, new StressEventData(1, 1, 75), true);
+                    
+                    VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                }
+                // Fearsome
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearsome) && character.currentHealth > 0)
+                {
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Fearsome!"), QueuePosition.Back, 0f, 0.5f);
+
+                    List<HexCharacterModel> enemies = GetAllEnemiesWithinMyAura(character);
+                    foreach (HexCharacterModel enemy in enemies)                    
+                        CombatController.Instance.CreateStressCheck(enemy, new StressEventData(1, 1, 50), true);
+                    
                     VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
                 }
 
@@ -1503,7 +1515,7 @@ namespace HexGameEngine.Characters
                 }
 
                 // Grass tile
-                if(character.currentTile.TileData.tileName == "Grass")
+                if(character.currentTile.tileName == "Grass")
                 {
                     // Text Notif
                     VisualEventManager.Instance.CreateVisualEvent(() =>

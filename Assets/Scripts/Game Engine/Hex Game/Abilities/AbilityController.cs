@@ -325,6 +325,7 @@ namespace HexGameEngine.Abilities
                 TriggerAbilityEffect(ability, e, character, target, tileTarget);
             }
 
+            
             OnAbilityUsedFinish(character, ability);
 
             // Check for removal of damage/accuracy related tokens
@@ -357,6 +358,17 @@ namespace HexGameEngine.Abilities
             if((ability.weaponRequirement == WeaponRequirement.Crossbow || ability.weaponRequirement == WeaponRequirement.BowOrCrossbow) &&
                 character.itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow)
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Reload, 1);
+
+            // Tie off and block any stack visual events on all characters
+            foreach(HexCharacterModel c in HexCharacterController.Instance.AllCharacters)
+            {
+                VisualEvent stack = c.GetLastStackEventParent();
+                if (stack != null)
+                {
+                    Debug.Log("Closing stack event parent");
+                    stack.isClosed = true;
+                }
+            }
         }
         private void TriggerAbilityEffect(AbilityData ability, AbilityEffect abilityEffect, HexCharacterModel caster, HexCharacterModel target, LevelNode tileTarget = null, HexCharacterModel previousChainTarget = null)
         {

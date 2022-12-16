@@ -102,6 +102,7 @@ MonoBehaviour:
     injuryTypesCaused: 01000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -145,6 +146,4 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: of target location.
-  keyWords:
-  - kewWordType: 4
-    passiveType: 0
+  keyWords: []

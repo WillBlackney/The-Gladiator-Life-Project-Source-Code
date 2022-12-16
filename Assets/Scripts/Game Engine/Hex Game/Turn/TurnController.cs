@@ -150,12 +150,19 @@ namespace HexGameEngine.TurnLogic
         }
         private void StartNewTurnSequence()
         {
+            // Tie off and block any stack visual events on all characters
+            foreach (HexCharacterModel c in HexCharacterController.Instance.AllCharacters)
+            {
+                VisualEvent stack = c.GetLastStackEventParent();
+                if (stack != null)
+                {
+                    Debug.Log("Closing stack event parent");
+                    stack.isClosed = true;
+                }
+            }
+
             // Disable arrow
             VisualEventManager.Instance.CreateVisualEvent(() => SetPanelArrowViewState(false));
-
-            // Disable End turn + delay turn button
-           // VisualEventManager.Instance.CreateVisualEvent(() => DisableEndTurnButtonView());
-           // VisualEventManager.Instance.CreateVisualEvent(() => DisableDelayTurnButtonView());
 
             // Move windows to start positions if combat has only just started
             if (CurrentTurn == 0)

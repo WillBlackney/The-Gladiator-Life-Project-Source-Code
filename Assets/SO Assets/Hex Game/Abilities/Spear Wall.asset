@@ -101,11 +101,12 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
     perkPairing:
-      perkTag: 162
+      perkTag: 202
       passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
@@ -134,4 +135,4 @@ MonoBehaviour:
     phrase: .
   keyWords:
   - kewWordType: 1
-    passiveType: 162
+    passiveType: 202

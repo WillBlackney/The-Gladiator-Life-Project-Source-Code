@@ -148,6 +148,4 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: to an enemy.
-  keyWords:
-  - kewWordType: 5
-    passiveType: 0
+  keyWords: []

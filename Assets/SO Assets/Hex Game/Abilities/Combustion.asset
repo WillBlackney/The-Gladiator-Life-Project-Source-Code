@@ -137,6 +137,7 @@ MonoBehaviour:
       bonusDamageModifier: 0.1
       bonusCriticalChance: 50
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -185,7 +186,5 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: on the target.
   keyWords:
-  - kewWordType: 5
-    passiveType: 0
   - kewWordType: 1
     passiveType: 1
