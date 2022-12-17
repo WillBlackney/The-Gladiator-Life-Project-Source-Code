@@ -507,6 +507,10 @@ namespace HexGameEngine
             // Wait till its safe to tearn down event queue and scene
             yield return new WaitForSeconds(2f);
 
+            // Save game if in town
+            if(GameState == GameState.Town)            
+                PersistencyController.Instance.AutoUpdateSaveFile();            
+
             // Set menu state
             SetGameState(GameState.MainMenu);
 

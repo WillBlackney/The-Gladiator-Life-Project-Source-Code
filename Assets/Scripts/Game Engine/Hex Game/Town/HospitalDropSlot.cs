@@ -82,11 +82,13 @@ namespace HexGameEngine.TownFeatures
 
         // Logic 
         #region
+       
         private void HandleCancel()
         {
             if (myCharacterData != null)
             {
                 var character = MyCharacterData;
+                MyCharacterData.currentTownActivity = TownActivity.None;
                 myCharacterData = null;
                 PlayerDataController.Instance.ModifyPlayerGold(GetFeatureGoldCost(featureType));
                 BuildViews();
@@ -110,38 +112,12 @@ namespace HexGameEngine.TownFeatures
         public void OnCharacterDragDropSuccess(HexCharacterData character)
         {
             myCharacterData = character;
+            MyCharacterData.currentTownActivity = featureType;
             BuildViews();
-        }
-        public void OnNewDayStart()
-        {
-            if(myCharacterData != null)
-            {
-                if(featureType == TownActivity.BedRest)
-                {
-                    CharacterDataController.Instance.SetCharacterHealth(myCharacterData, StatCalculator.GetTotalMaxHealth(myCharacterData));
-                }
-                else if (featureType == TownActivity.Therapy)
-                {
-                    CharacterDataController.Instance.SetCharacterStress(myCharacterData, 0);
-                }
-                else if (featureType == TownActivity.Surgery)
-                {
-                    List<ActivePerk> allInjuries = PerkController.Instance.GetAllInjuriesOnCharacter(myCharacterData);
-                    foreach(ActivePerk p in allInjuries)
-                    {
-                        PerkController.Instance.ModifyPerkOnCharacterData(myCharacterData.passiveManager, p.perkTag, -p.stacks);
-                    }
-                }
-
-                // to do: rebuild character's panel views to be available
-                var c = myCharacterData;
-                myCharacterData = null;
-                CharacterScrollPanelController.Instance.GetCharacterPanel(c).UpdateActivityIndicator();
-                
-            }
         }
         public void ClearAndReset()
         {
+            if(myCharacterData != null) MyCharacterData.currentTownActivity = TownActivity.None;
             myCharacterData = null;
             portraitVisualParent.SetActive(false);
             cancelButtonParent.SetActive(false);

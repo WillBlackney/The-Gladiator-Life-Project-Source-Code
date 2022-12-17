@@ -432,7 +432,7 @@ namespace HexGameEngine.Characters
         {
             foreach(HexCharacterData c in AllPlayerCharacters)
             {
-                SetCharacterStress(c, c.currentStress - 5);
+                SetCharacterStress(c, c.currentStress - 1);
                 SetCharacterHealth(c, c.currentHealth + (int)(StatCalculator.GetTotalMaxHealth(c) * 0.1f));
             }
         }

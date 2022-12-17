@@ -52,7 +52,7 @@ namespace HexGameEngine.Characters
         [Header("Misc Properties")]
         public Vector2 formationPosition = Vector2.zero;
         public int dailyWage;
-
+        public TownActivity currentTownActivity = TownActivity.None;
         public List<AttributeRollResult> attributeRolls = new List<AttributeRollResult>();
         public PerkTreeData perkTree;
         public int perkPoints = 0;

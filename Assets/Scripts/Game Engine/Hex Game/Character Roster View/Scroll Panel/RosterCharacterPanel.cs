@@ -90,15 +90,14 @@ namespace HexGameEngine.UI
         }
         public void UpdateActivityIndicator()
         {
-            SetIndicatorParentViewStates(false);
-            foreach(HospitalDropSlot slot in TownController.Instance.HospitalSlots)
+            if (myCharacterData.currentTownActivity == TownActivity.None)
             {
-                if(slot.MyCharacterData == myCharacterData)
-                {
-                    SetIndicatorParentViewStates(true);
-                    activityIndicatorImage.sprite = SpriteLibrary.Instance.GetTownActivitySprite(slot.FeatureType);
-                    break;
-                }
+                SetIndicatorParentViewStates(false);
+            }
+            else
+            {
+                SetIndicatorParentViewStates(true);
+                activityIndicatorImage.sprite = SpriteLibrary.Instance.GetTownActivitySprite(myCharacterData.currentTownActivity);
             }
         }
         private void UpdateLevelUpIndicator()

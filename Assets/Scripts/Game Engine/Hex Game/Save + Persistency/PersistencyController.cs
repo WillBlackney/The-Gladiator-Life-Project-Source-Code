@@ -14,7 +14,6 @@ namespace HexGameEngine.Persistency
 {
     public class PersistencyController : Singleton<PersistencyController>
     {
-
         // Properties + Getters
         #region
         private const string SAVE_DIRECTORY = "/SaveFile.json";

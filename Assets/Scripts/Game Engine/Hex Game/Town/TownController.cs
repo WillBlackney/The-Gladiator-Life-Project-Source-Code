@@ -420,11 +420,34 @@ namespace HexGameEngine.TownFeatures
         }
         public void HandleApplyHospitalFeaturesOnNewDayStart()
         {
-            foreach (HospitalDropSlot slot in hospitalSlots)
+            foreach(HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
             {
-                if (slot.MyCharacterData != null)
-                    slot.OnNewDayStart();
+                if (character.currentTownActivity == TownActivity.BedRest)
+                {
+                    CharacterDataController.Instance.SetCharacterHealth(character, StatCalculator.GetTotalMaxHealth(character));
+                }
+                else if (character.currentTownActivity == TownActivity.Therapy)
+                {
+                    CharacterDataController.Instance.SetCharacterStress(character, 0);
+                }
+                else if (character.currentTownActivity == TownActivity.Surgery)
+                {
+                    List<ActivePerk> allInjuries = PerkController.Instance.GetAllInjuriesOnCharacter(character);
+                    foreach (ActivePerk p in allInjuries)
+                    {
+                        PerkController.Instance.ModifyPerkOnCharacterData(character.passiveManager, p.perkTag, -p.stacks);
+                    }
+                }
+
+                // Rebuild character's panel views to be available
+                character.currentTownActivity = TownActivity.None;
+                CharacterScrollPanelController.Instance.GetCharacterPanel(character).UpdateActivityIndicator();
             }
+
+            // Reset hospital drop slot
+            foreach (HospitalDropSlot slot in hospitalSlots)            
+                slot.ClearAndReset();
+            
         }
         #endregion
 
