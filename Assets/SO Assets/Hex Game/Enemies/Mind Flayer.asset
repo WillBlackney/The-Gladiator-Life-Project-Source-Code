@@ -24,7 +24,7 @@ MonoBehaviour:
       value: 0
       stars: 0
     dodge:
-      value: 20
+      value: 15
       stars: 0
     accuracy:
       value: 65
@@ -32,8 +32,8 @@ MonoBehaviour:
     resolve:
       value: 5
       stars: 0
-    fatigue:
-      value: 120
+    fitness:
+      value: 60
       stars: 0
     wits:
       value: 5
@@ -78,6 +78,7 @@ MonoBehaviour:
         energyReq: 0
         fatigueReq: 0
         stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
       - requirementType: 24
@@ -90,6 +91,7 @@ MonoBehaviour:
         energyReq: 0
         fatigueReq: 0
         stressReq: 100
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
     - action:
@@ -116,6 +118,7 @@ MonoBehaviour:
         energyReq: 0
         fatigueReq: 0
         stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
   abilityBook:

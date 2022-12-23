@@ -102,6 +102,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -140,7 +141,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'tiles. Has a '
+    phrase: 'tiles. Suffers a '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

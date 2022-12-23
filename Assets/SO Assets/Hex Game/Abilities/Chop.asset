@@ -117,6 +117,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -173,6 +174,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -229,6 +231,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -270,11 +273,11 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: '. On a '
-  - color: 0
+  - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: Critical Strike
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: ', apply '

@@ -16,7 +16,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Deal 50% Physical damage. If the target is Vulnerable,
     they become Stunned.
-  abilitySprite: {fileID: 21300000, guid: f1a479e622c1a7d468856ba2c0f89a66, type: 3}
+  abilitySprite: {fileID: 21300000, guid: a772742cce745284baabc1d80419c776, type: 3}
   energyCost: 3
   fatigueCost: 8
   baseCooldown: 1
@@ -102,6 +102,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -160,6 +161,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

@@ -137,6 +137,26 @@ namespace HexGameEngine.UI
         {
             get { return mainVisualParent; }
         }
+        public RosterItemSlot MainHandSlot
+        {
+            get { return mainHandSlot; }
+        }
+        public RosterItemSlot OffHandSLot
+        {
+            get { return offHandSlot; }
+        }
+        public RosterItemSlot HeadSlot
+        {
+            get { return headSlot; }
+        }
+        public RosterItemSlot BodySLot
+        {
+            get { return bodySlot; }
+        }
+        public RosterItemSlot TrinketSlot
+        {
+            get { return trinketSlot; }
+        }
         #endregion
 
         // Show + Hide Main View Logic
@@ -360,7 +380,7 @@ namespace HexGameEngine.UI
         private void BuildStressBar(HexCharacterData character)
         {
             // Update slider
-            float maxStress = 100;
+            float maxStress = 20;
             float stress = character.currentStress;
             float stresBarFloat = stress / maxStress;
             stressBar.value = stresBarFloat;
@@ -411,6 +431,8 @@ namespace HexGameEngine.UI
         #region
         private void BuildPerkTreeSection(HexCharacterData character)
         {
+            if (character.perkTree == null) return;
+
             for(int i = 0; i < character.perkTree.PerkChoices.Count; i++)
             {
                 perkLevelUpIcons[i].BuildFromCharacterAndPerkData(character, character.perkTree.PerkChoices[i].Data);

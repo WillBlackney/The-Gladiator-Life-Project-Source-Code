@@ -67,7 +67,63 @@ namespace HexGameEngine.Items
         public void Click()
         {
             Debug.Log("InventoryItemView.Click()");
-            InventoryController.Instance.OnItemViewClicked(this);
+            //InventoryController.Instance.OnItemViewClicked(this);
+        }
+        public void RightClick()
+        {
+            Debug.Log("InventoryItemView.RightClick()");
+            if (itemDragged != null) return;
+            if (MyItemRef.itemData == null) return;
+
+            HexCharacterData character = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
+
+            // Check equipping 2h item with two 1h items already equip without enough inventory space.
+            if (myItemRef.itemData != null &&
+                myItemRef.itemData.handRequirement == HandRequirement.TwoHanded &&
+                character.itemSet.mainHandItem != null &&
+                character.itemSet.offHandItem != null &&
+                !InventoryController.Instance.HasFreeInventorySpace(2))
+            {
+                return;
+            }
+
+            // Get character slot matches item slot
+            // handle add item.
+
+            // Get correct slot
+            ItemType itemType = myItemRef.itemData.itemType;
+
+            List<RosterItemSlot> allSlots = new List<RosterItemSlot>
+            {
+                CharacterRosterViewController.Instance.MainHandSlot,
+                CharacterRosterViewController.Instance.OffHandSLot,
+                CharacterRosterViewController.Instance.BodySLot,
+                CharacterRosterViewController.Instance.HeadSlot,
+                CharacterRosterViewController.Instance.TrinketSlot,
+            };
+
+            RosterItemSlot matchingSlot = null;
+            foreach(RosterItemSlot ris in allSlots)
+            {
+                if(ItemController.Instance.IsItemValidOnSlot(myItemRef.itemData, ris))
+                {
+                    matchingSlot = ris;
+                    break;
+                }
+            }
+
+            if(matchingSlot != null)
+            {
+                // Add item to player
+                ItemController.Instance.HandleGiveItemToCharacterFromInventory(character, MyItemRef, matchingSlot);
+
+                // Rebuild roster, inventory and model views
+                CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
+                InventoryController.Instance.RebuildInventoryView();
+            }
+
+
+
         }
         public void MouseEnter()
         {          
@@ -147,6 +203,7 @@ namespace HexGameEngine.Items
                     }
                     else if(myItemRef.abilityData != null)
                     {
+                        // to do: only run this code if the library page is actually open
                         TownController.Instance.LibraryAbilitySlot.BuildFromAbility(myItemRef.abilityData);
                     }
                 }
@@ -208,12 +265,6 @@ namespace HexGameEngine.Items
             if(MyItemRef.itemData != null && RosterItemSlot.SlotMousedOver != null)
             {
                 var mainHandItem = CharacterRosterViewController.Instance.CharacterCurrentlyViewing.itemSet.mainHandItem;
-
-                /*
-                // Cant equip an off hand if main hand is empty
-                if (RosterItemSlot.SlotMousedOver.SlotType == RosterSlotType.OffHand &&
-                    mainHandItem == null)
-                    return false;*/
 
                 // Cant equip off hand if main hand weapon is 2 handed
                 if (RosterItemSlot.SlotMousedOver.SlotType == RosterSlotType.OffHand &&

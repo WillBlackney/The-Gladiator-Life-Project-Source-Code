@@ -1119,6 +1119,7 @@ namespace HexGameEngine.Abilities
 
                 LevelNode startingTile = target.currentTile;
                 LevelNode previousTile = target.currentTile;
+                bool shouldStun = false;
 
                 // get knock back tiles
                 for (int i = 0; i < abilityEffect.knockBackDistance; i++)
@@ -1134,6 +1135,7 @@ namespace HexGameEngine.Abilities
                             else
                             {
                                 forceBreak = true;
+                                shouldStun = true;
                                 break;
                             }
                         }
@@ -1149,7 +1151,7 @@ namespace HexGameEngine.Abilities
                     LevelController.Instance.HandleKnockBackCharacter(target, previousTile);
                 }
                 // Characters that are knocked into on obstacle/player become stunned.
-                else
+                if(shouldStun)
                 {
                     Debug.Log("TriggerAbilityEffect() detected collision during knock back effect, applying Stunned to target...");
                     PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Stunned, 1, true, 0.5f);

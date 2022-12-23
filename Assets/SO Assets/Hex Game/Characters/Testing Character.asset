@@ -59,6 +59,7 @@ MonoBehaviour:
     activeAbilities:
     - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
     - {fileID: 11400000, guid: 6b5c6b02a64c9fe4cb91b8ff26213bd2, type: 2}
+    - {fileID: 11400000, guid: 3dc85c0a7ccd4904a972e6aa977e23b3, type: 2}
   serializedPassiveManager:
     perks: []
   modelParts:

@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Spear Wall
   includeInGame: 1
   baseAbilityDescription: Gain 1 Spear Wall.
-  abilitySprite: {fileID: 21300000, guid: abd91b2ca06ae144eaacdbb1cc703bd6, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 388e193cc4f44d04b84ede5b1fdf7a11, type: 3}
   energyCost: 4
   fatigueCost: 12
   baseCooldown: 1

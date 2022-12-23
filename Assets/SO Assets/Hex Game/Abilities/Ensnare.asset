@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Ensnare
   includeInGame: 1
   baseAbilityDescription: Apply 1 Rooted to an enemy.
-  abilitySprite: {fileID: 21300000, guid: 6361b558b1419794aaba9dc7e4694951, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 1354f76ca8ec09d438e8c359cc2927bd, type: 3}
   energyCost: 4
   fatigueCost: 15
   baseCooldown: 3
@@ -101,6 +101,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

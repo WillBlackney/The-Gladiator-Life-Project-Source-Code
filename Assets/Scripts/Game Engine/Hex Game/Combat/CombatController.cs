@@ -333,8 +333,8 @@ namespace HexGameEngine.Combat
             if (data.NegativeEvent && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Irrational))
             {
                 int irrationalRoll = RandomGenerator.NumberBetween(1, 2);
-                if (irrationalRoll == 1) characterStressResistance -= 20;
-                else characterStressResistance += 20;
+                if (irrationalRoll == 1) characterStressResistance -= 15;
+                else characterStressResistance += 15;
             }
 
             // Determine roll required to pass the stress check
@@ -371,8 +371,8 @@ namespace HexGameEngine.Combat
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Irrational))
             {
                 int irrationalRoll = RandomGenerator.NumberBetween(1, 2);
-                if (irrationalRoll == 1) characterStressResistance -= 20;
-                else characterStressResistance += 20;
+                if (irrationalRoll == 1) characterStressResistance -= 15;
+                else characterStressResistance += 15;
             }
 
             // Determine roll required to pass the stress check
@@ -948,7 +948,7 @@ namespace HexGameEngine.Combat
                       
 
             // On health lost animations
-            if (totalHealthLost > 0)
+            if ((totalHealthLost > 0 || totalArmourLost > 0) && removedBarrier == false)
             {
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                     HexCharacterController.Instance.PlayHurtAnimation(target.hexCharacterView), QueuePosition.Back, 0, 0, parentEvent);               

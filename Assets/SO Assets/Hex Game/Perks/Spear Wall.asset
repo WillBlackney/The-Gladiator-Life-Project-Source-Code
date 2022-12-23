@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Spear Wall
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 3be4ea1f254dd83408a83577dfdcdd64, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 388e193cc4f44d04b84ede5b1fdf7a11, type: 3}
   passiveName: Spear Wall
   perkTag: 202
   passiveDescription:

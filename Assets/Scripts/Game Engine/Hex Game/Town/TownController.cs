@@ -827,8 +827,8 @@ namespace HexGameEngine.TownFeatures
         {
             currentDailyCombatContracts.Clear();
 
-            // On normal days, generate 2 basics and 1 elite combat
-            if (RunController.Instance.CurrentDay != 4)
+            // On normal days, generate 2 basics and 1 elite combat. On every 4th day, generate only boss fight
+            if (RunController.Instance.CurrentDay % 4 != 0)
             {
                 List<int> deploymentLimits = new List<int> { 1, 2, 3, 5 };
 

@@ -70,7 +70,7 @@ namespace HexGameEngine.UI
 
             // Build bars
             healthBar.value = (float)((float) data.currentHealth / (float) StatCalculator.GetTotalMaxHealth(data));
-            stressBar.value = (float)((float) data.currentStress / 100f);
+            stressBar.value = (float)((float) data.currentStress / 20f);
 
             // Reset perk icons
             foreach (UIPerkIcon b in perkIcons)
