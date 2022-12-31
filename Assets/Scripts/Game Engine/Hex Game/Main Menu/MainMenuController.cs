@@ -910,14 +910,21 @@ namespace HexGameEngine.MainMenu
                     characterBuild.itemSet.mainHandItem = item;
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
                     mainHandItemIcon.BuildFromData(item);
-                }
+
+                    // Remove off hand item when equipping a 2h weapon
+                    if (characterBuild.itemSet.offHandItem != null && item.handRequirement == HandRequirement.TwoHanded)
+                    {
+                        characterBuild.itemSet.offHandItem = null;
+                        CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
+                        offHandItemIcon.BuildFromData(null);
+                    }
+                }                
             }
 
             RebuildItemPanelWeaponAbilityIcons();
         }
         public void OnPreviousMainHandItemClicked()
         {
-            // Not currently wearing a head item
             if (characterBuild.itemSet.mainHandItem == null)
             {
                 ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[allStartingMainHandItems.Length - 1].itemName);
@@ -932,16 +939,6 @@ namespace HexGameEngine.MainMenu
                     offHandItemIcon.BuildFromData(null);
                 }
             }
-            /*
-            else if (characterBuild.itemSet.mainHandItem != null &&
-                Array.IndexOf(allStartingMainHandItems, characterBuild.itemSet.mainHandItem) == 0)
-            {
-                characterBuild.itemSet.mainHandItem = null;
-                CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
-                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                mainHandItemIcon.BuildFromData(null);
-            }
-            */
 
             else
             {
@@ -968,31 +965,15 @@ namespace HexGameEngine.MainMenu
                     characterBuild.itemSet.mainHandItem = mhItem;
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
                     mainHandItemIcon.BuildFromData(mhItem);
-                }
-                /*
-                ItemDataSO currentItem = null;
-                foreach (ItemDataSO weapon in allStartingMainHandItems)
-                {
-                    if (weapon.itemName == characterBuild.itemSet.mainHandItem.itemName)
-                        currentItem = weapon;
-                }
-                int currentIndex = Array.IndexOf(allStartingMainHandItems, currentItem);
-                int nextIndex = currentIndex - 1;
-                if (nextIndex < 0) nextIndex = allStartingMainHandItems.Length - 1;
 
-                ItemData newItem = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[nextIndex].itemName);
-                characterBuild.itemSet.mainHandItem = newItem;
-                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                mainHandItemIcon.BuildFromData(newItem);
-
-                if (characterBuild.itemSet.offHandItem != null && newItem.handRequirement == HandRequirement.TwoHanded)
-                {
-                    characterBuild.itemSet.offHandItem = null;
-                    CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
-                    offHandItemIcon.BuildFromData(null);
+                    // Remove off hand item when equipping a 2h weapon
+                    if (characterBuild.itemSet.offHandItem != null && mhItem.handRequirement == HandRequirement.TwoHanded)
+                    {
+                        characterBuild.itemSet.offHandItem = null;
+                        CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
+                        offHandItemIcon.BuildFromData(null);
+                    }
                 }
-                */
-
             }
             RebuildItemPanelWeaponAbilityIcons();
         }
