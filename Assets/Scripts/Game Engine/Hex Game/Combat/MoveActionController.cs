@@ -174,7 +174,7 @@ namespace HexGameEngine.Combat
         private void HandleFirstHexSelection(LevelNode hexClicked, HexCharacterModel character)
         {
             Path p = Pathfinder.GetValidPath(character, character.currentTile, hexClicked, LevelController.Instance.AllLevelNodes.ToList());
-            if (Pathfinder.IsPathValid(p))
+            if (p != null)
             {
                 clickedHex = hexClicked;
                 currentPath = p;

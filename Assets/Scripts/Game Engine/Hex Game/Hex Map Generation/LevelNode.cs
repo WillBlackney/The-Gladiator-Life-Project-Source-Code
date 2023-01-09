@@ -13,6 +13,8 @@ namespace HexGameEngine.HexTiles
         // Components + Properties
         #region
         [Header("Properties")]
+        [Tooltip("If marked false, this node will be removed from view and game play logic. Use this to shrink/expand the size of the play area.")]
+        [SerializeField] bool exists = true;
         [SerializeField] Vector2 gridPosition;
         [HideInInspector] public string tileName;
 
@@ -53,6 +55,10 @@ namespace HexGameEngine.HexTiles
 
         // Getters + Accessors
         #region
+        public bool Exists
+        {
+            get { return exists; }
+        }
         public bool Obstructed
         {
             get { return obstructed; }
@@ -141,6 +147,7 @@ namespace HexGameEngine.HexTiles
         {
             _offsetCoord = gridPosition;
             HexGridType = HexGridType.odd_q;
+            if (!Exists) gameObject.SetActive(false);
         }
         private void OnEnable()
         {

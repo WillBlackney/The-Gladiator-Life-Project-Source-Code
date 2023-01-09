@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Master's Call
   includeInGame: 1
-  baseAbilityDescription: Summon 3 shambling skeletons at random locations.
+  baseAbilityDescription: Summon 2 shambling skeletons at random locations.
   abilitySprite: {fileID: 21300000, guid: 5c66dc369ad3811498e609489d4f52c3, type: 3}
   energyCost: 5
   fatigueCost: 8
-  baseCooldown: 3
+  baseCooldown: 2
   abilityType: 0100000008000000
   doesNotBreakStealth: 0
   weaponRequirement: 0
@@ -117,7 +117,8 @@ MonoBehaviour:
     damageEffectModifiers: []
     characterSummoned: {fileID: 11400000, guid: c821c0b02eb8ba94db4a4d700ceed222,
       type: 2}
-    amountSummoned: 3
+    characterSummonedName: Shambling Skeleton
+    amountSummoned: 2
     modelFadeInSpeed: 0.5
     uiFadeInSpeed: 0.5
     summonedCreatureVisualEvents:
@@ -155,7 +156,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '3 '
+    phrase: '2 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

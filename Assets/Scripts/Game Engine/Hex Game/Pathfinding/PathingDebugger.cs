@@ -64,11 +64,11 @@ namespace HexGameEngine.Pathfinding
                 SetSecondHex(hex);
 
                 Path p = null;//Pathfinder.GetPath(testCharacter, firstHex, secondHex, LevelController.Instance.CurrentHexMap.Hexs);
-                if (Pathfinder.IsPathValid(p))
+                if (p != null)
                 {
                    // SetCurrentPath(p.HexsOnPath);
                     pathCountText.text = "Path Length: " + currentPath.Count;
-                    moveCostText.text = "Energy Cost: " + Pathfinder.GetActionPointCostOfPath(testCharacter, testCharacter.currentTile, p.HexsOnPath);
+                    moveCostText.text = "AP Cost: " + Pathfinder.GetActionPointCostOfPath(testCharacter, testCharacter.currentTile, p.HexsOnPath);
                 }
                 else
                 {

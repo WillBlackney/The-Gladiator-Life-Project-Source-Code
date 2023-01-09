@@ -16,7 +16,7 @@ namespace HexGameEngine.Pathfinding
         private static DPathfinder dijikstra = new DPathfinder();
         #endregion
 
-        // Energy Cost Logic
+        // Action Point + Fatigue Cost Logic
         #region
         public static int GetFatigueCostBetweenHexs(HexCharacterModel character, LevelNode start, LevelNode destination)
         {
@@ -161,7 +161,8 @@ namespace HexGameEngine.Pathfinding
                     // Is the path between start/destination actually valid?
                     if (traversable &&
                         CanHexBeOccupied(key) &&
-                    GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentEnergy)
+                        GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentEnergy &&
+                        GetFatigueCostOfPath(character, start, hexsOnPath) <= character.currentFatigue)
                     {
                         Debug.Log("GetPath() found a valid path!");
                         pathReturned = new Path(start, hexsOnPath, character);
@@ -221,7 +222,8 @@ namespace HexGameEngine.Pathfinding
                 // Is the path between start/destination actually valid?
                 if (traversable &&
                     CanHexBeOccupied(key) &&
-                    GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentEnergy)
+                    GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentEnergy &&
+                    GetFatigueCostOfPath(character, start, hexsOnPath) <= character.currentFatigue)
                 {
                     pathsReturned.Add(new Path(start, hexsOnPath, character));
                 }

@@ -32,7 +32,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '30% '
+    phrase: '50% '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

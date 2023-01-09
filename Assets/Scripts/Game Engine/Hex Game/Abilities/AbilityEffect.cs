@@ -7,6 +7,7 @@ using HexGameEngine.Perks;
 using HexGameEngine.VisualEvents;
 using HexGameEngine.Characters;
 using HexGameEngine.Combat;
+using Sirenix.Serialization;
 
 namespace HexGameEngine.Abilities
 {
@@ -172,7 +173,15 @@ namespace HexGameEngine.Abilities
         [BoxGroup("Summon Settings", true, true)]
         [ShowIf("ShowSummonProperties")]
         [LabelWidth(200)]
+        [OdinSerialize]
+        [OnValueChanged("OnCharacterSummonedChanged")]
         public EnemyTemplateSO characterSummoned;
+
+        [Header("Summoning Visual Event Properties")]
+        [BoxGroup("Summon Settings")]
+        [ShowIf("ShowSummonProperties")]
+        [LabelWidth(150)]
+        public string characterSummonedName = "ENTER NAME!!!";
 
         [Header("Summoning Visual Event Properties")]
         [BoxGroup("Summon Settings")]
@@ -195,6 +204,27 @@ namespace HexGameEngine.Abilities
         [ShowIf("ShowSummonProperties")]
         [LabelWidth(150)]
         public AnimationEventData[] summonedCreatureVisualEvents;
+        #endregion
+
+        // Getters + Accessors
+        #region
+        public EnemyTemplateSO CharacterSummoned
+        {
+            get
+            {
+                if(characterSummoned == null)                
+                    characterSummoned = CharacterDataController.Instance.FindEnemyTemplateByName(characterSummonedName);
+                return characterSummoned;
+            }
+        }
+        [ExecuteInEditMode]
+        public void OnCharacterSummonedChanged()
+        {
+            Debug.Log("OnCharacterSummonedChanged");
+            if (characterSummoned != null)
+                characterSummonedName = characterSummoned.myName;
+            else characterSummonedName = "";
+        }
         #endregion
 
         // Pasive Properties

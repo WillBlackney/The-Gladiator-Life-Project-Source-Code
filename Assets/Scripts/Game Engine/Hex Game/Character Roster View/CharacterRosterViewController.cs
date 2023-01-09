@@ -321,12 +321,12 @@ namespace HexGameEngine.UI
             physicalDamageText.text = StatCalculator.GetTotalPhysicalDamageBonus(character).ToString() + "%";
             magicDamageText.text = StatCalculator.GetTotalMagicDamageBonus(character).ToString() + "%";
 
-            physicalResistanceText.text = StatCalculator.GetTotalPhysicalResistance(character).ToString();
-            magicResistanceText.text = StatCalculator.GetTotalMagicResistance(character).ToString();
-            stressResistanceText.text = StatCalculator.GetTotalStressResistance(character).ToString();
-            injuryResistanceText.text = StatCalculator.GetTotalInjuryResistance(character).ToString();
-            debuffResistanceText.text = StatCalculator.GetTotalDebuffResistance(character).ToString();
-            deathResistanceText.text = StatCalculator.GetTotalDeathResistance(character).ToString();
+            physicalResistanceText.text = StatCalculator.GetTotalPhysicalResistance(character).ToString() + "%";
+            magicResistanceText.text = StatCalculator.GetTotalMagicResistance(character).ToString() + "%";
+            stressResistanceText.text = StatCalculator.GetTotalStressResistance(character).ToString() + "%";
+            injuryResistanceText.text = StatCalculator.GetTotalInjuryResistance(character).ToString() + "%";
+            debuffResistanceText.text = StatCalculator.GetTotalDebuffResistance(character).ToString() + "%";
+            deathResistanceText.text = StatCalculator.GetTotalDeathResistance(character).ToString() + "%";
 
             if (character.attributeRolls.Count > 0)
                 attributeLevelUpButton.ShowAndAnimate();

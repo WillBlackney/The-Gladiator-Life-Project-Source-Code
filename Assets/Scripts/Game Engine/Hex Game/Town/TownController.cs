@@ -441,13 +441,32 @@ namespace HexGameEngine.TownFeatures
 
                 // Rebuild character's panel views to be available
                 character.currentTownActivity = TownActivity.None;
-                CharacterScrollPanelController.Instance.GetCharacterPanel(character).UpdateActivityIndicator();
+                CharacterScrollPanelController.Instance.GetCharacterPanel(character)?.UpdateActivityIndicator();
             }
 
             // Reset hospital drop slot
             foreach (HospitalDropSlot slot in hospitalSlots)            
                 slot.ClearAndReset();
             
+        }
+        public void HandleAssignCharactersToHospitalSlotsOnGameLoad()
+        {
+            List<HexCharacterData> characters = CharacterDataController.Instance.AllPlayerCharacters;
+
+            foreach(HexCharacterData c in characters)
+            {
+                if (c.currentTownActivity == TownActivity.None) continue;
+
+                foreach(HospitalDropSlot slot in hospitalSlots)
+                {
+                    if(slot.MyCharacterData == null &&
+                       slot.FeatureType == c.currentTownActivity)
+                    {
+                        slot.OnCharacterDragDropSuccess(c);
+                        break;
+                    }
+                }
+            }
         }
         #endregion
 

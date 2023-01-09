@@ -59,6 +59,9 @@ namespace HexGameEngine.HexTiles
         [SerializeField] private CrowdRowAnimator[] crowdRowAnimators;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
+        private LevelNode[] runtimeNodes;
+        bool hasSetupRuntimeNodes = false;
+
         #endregion
 
         // Getters + Accessors
@@ -69,7 +72,16 @@ namespace HexGameEngine.HexTiles
         }
         public LevelNode[] AllLevelNodes
         {
-            get { return allLevelNodes; }
+            get 
+            {
+                if (!hasSetupRuntimeNodes)
+                {
+                    hasSetupRuntimeNodes = true;
+                    runtimeNodes = allLevelNodes.Where(node => node.Exists).ToArray();
+                }
+                return runtimeNodes;
+
+            }
         }
         public static LevelNode HexMousedOver
         {
@@ -109,7 +121,7 @@ namespace HexGameEngine.HexTiles
             if (!seed) return null;
 
             // Reset type, obstacle and elevation on all nodes
-            foreach (LevelNode n in allLevelNodes)
+            foreach (LevelNode n in AllLevelNodes)
                 n.ResetNode();
 
             // Get banned nodes for obstacles
@@ -117,7 +129,7 @@ namespace HexGameEngine.HexTiles
             spawnPositions.AddRange(GetEnemySpawnZone());
 
             // Rebuild
-            foreach (LevelNode n in allLevelNodes)
+            foreach (LevelNode n in AllLevelNodes)
             {
                 int elevationRoll = RandomGenerator.NumberBetween(1, 100);
                 if (elevationRoll >= 1 && elevationRoll <= seed.elevationPercentage)
@@ -155,7 +167,7 @@ namespace HexGameEngine.HexTiles
         }
         public void GenerateLevelNodes(SerializedCombatMapData data)
         {
-            foreach(LevelNode n in allLevelNodes)
+            foreach(LevelNode n in AllLevelNodes)
             {
                 foreach(SerializedLevelNodeData d in data.nodes)
                 {
@@ -172,7 +184,7 @@ namespace HexGameEngine.HexTiles
         }
         public void SetLevelNodeDayOrNightViewState(bool dayTime)
         {
-            foreach (LevelNode n in allLevelNodes)
+            foreach (LevelNode n in AllLevelNodes)
                 n.SetPillarSprites(dayTime);
         }
         #endregion
@@ -184,7 +196,7 @@ namespace HexGameEngine.HexTiles
             List<LevelNode> nodes = new List<LevelNode>();
             foreach(LevelNode n in AllLevelNodes)
             {
-                if(n.GridPosition.x == -2 || n.GridPosition.x == -3)
+                if(n.GridPosition.x == -1 || n.GridPosition.x == -2)
                 {
                     nodes.Add(n);
                 }
@@ -198,7 +210,7 @@ namespace HexGameEngine.HexTiles
             List<LevelNode> nodes = new List<LevelNode>();
             foreach (LevelNode n in AllLevelNodes)
             {
-                if (n.GridPosition.x == 2 || n.GridPosition.x == 3)
+                if (n.GridPosition.x == 1 || n.GridPosition.x == 2)
                 {
                     nodes.Add(n);
                 }
@@ -931,7 +943,7 @@ namespace HexGameEngine.HexTiles
         public LevelNode GetHexAtGridPosition(Vector2 gridPos)
         {
             LevelNode ret = null;
-            foreach(LevelNode n in allLevelNodes)
+            foreach(LevelNode n in AllLevelNodes)
             {
                 if(n.GridPosition == gridPos)
                 {
