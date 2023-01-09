@@ -593,6 +593,9 @@ namespace HexGameEngine
                 TownController.Instance.ShowTownView();
                 CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
+                // Assign hospital slots
+                TownController.Instance.HandleAssignCharactersToHospitalSlotsOnGameLoad();
+
                 // Start music, fade in
                 AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
                 BlackScreenController.Instance.FadeInScreen(2f);

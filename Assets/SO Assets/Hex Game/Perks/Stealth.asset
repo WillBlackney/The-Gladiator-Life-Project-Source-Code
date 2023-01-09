@@ -19,20 +19,27 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'This character cannot be targetted by unfriendly abilities unless within
-      the attacker''s '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'Vision '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '+ '
+    phrase: 'This character cannot be targetted by enemies more than '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 1
+    phrase: '1 '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'tile away. '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Stealth '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'detection range is increased/decreased by the enemy character''s '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Vision
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

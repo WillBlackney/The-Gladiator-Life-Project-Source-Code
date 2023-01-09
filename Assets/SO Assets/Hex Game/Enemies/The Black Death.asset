@@ -32,8 +32,8 @@ MonoBehaviour:
     resolve:
       value: 20
       stars: 0
-    fatigue:
-      value: 150
+    fitness:
+      value: 60
       stars: 0
     wits:
       value: 5
@@ -67,20 +67,7 @@ MonoBehaviour:
         getRangeFromAbility: 0
         range: 0
         abilityName: Master's Call
-      requirements:
-      - requirementType: 12
-        range: 0
-        perkPairing:
-          perkTag: 0
-          passiveStacks: 1
-        healthPercentage: 0
-        enemiesInMeleeRange: 1
-        energyReq: 0
-        fatigueReq: 0
-        stressReq: 0
-        turnReq: 0
-        alliesAlive: 4
-        abilityName: 
+      requirements: []
     - action:
         actionType: 1
         targettingPriority: 02000000

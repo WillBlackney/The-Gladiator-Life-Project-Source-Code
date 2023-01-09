@@ -20,11 +20,11 @@ MonoBehaviour:
   - possibleEnemies:
     - {fileID: 11400000, guid: b9db2fc98a3d02a42adf7e94f742ccbc, type: 2}
     - {fileID: 11400000, guid: e6a0b68d1fa2b594b8d60a261b863ca0, type: 2}
-    spawnPosition: {x: 2, y: 0}
+    spawnPosition: {x: 1, y: 0}
   - possibleEnemies:
     - {fileID: 11400000, guid: 8b8f2e21a8b272a4891e3ff7852deff4, type: 2}
-    spawnPosition: {x: 2, y: -1}
+    spawnPosition: {x: 1, y: 1}
   - possibleEnemies:
     - {fileID: 11400000, guid: 4c661fe5c495bd848909ec99dc14524d, type: 2}
     - {fileID: 11400000, guid: c7143a1af1f26c4498814cba85efbe38, type: 2}
-    spawnPosition: {x: 3, y: 1}
+    spawnPosition: {x: 2, y: 0}

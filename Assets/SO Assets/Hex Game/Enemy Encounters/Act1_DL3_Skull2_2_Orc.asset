@@ -19,4 +19,4 @@ MonoBehaviour:
   enemyGroups:
   - possibleEnemies:
     - {fileID: 11400000, guid: 2290d56261f7d3c49b98168ee4339413, type: 2}
-    spawnPosition: {x: 2, y: 0}
+    spawnPosition: {x: 1, y: 1}

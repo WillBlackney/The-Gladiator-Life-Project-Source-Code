@@ -21,6 +21,7 @@ namespace HexGameEngine.Characters
         [SerializeField] private TalentDataSO[] allTalentData;
         [SerializeField] private RaceDataSO[] allRacialData;
         [SerializeField] private BackgroundDataSO[] allCharacterBackgroundSOs;
+        [SerializeField] private EnemyTemplateSO[] allEnemyTemplateSOs; 
 
         [Header("Recruit Generation")]
         [SerializeField] private List<ClassTemplateSO> allClassTemplateSOs;
@@ -110,7 +111,19 @@ namespace HexGameEngine.Characters
             get { return characterDeck; }
             private set { characterDeck = value; }
         }
-
+        public EnemyTemplateSO FindEnemyTemplateByName(string name)
+        {
+            EnemyTemplateSO ret = null;
+            foreach(EnemyTemplateSO e in allEnemyTemplateSOs)
+            {
+                if(e.myName == name)
+                {
+                    ret = e;
+                    break;
+                }
+            }
+            return ret;
+        }
         #endregion
 
         // Racial Data
