@@ -1291,7 +1291,7 @@ namespace HexGameEngine.Characters
 
                     List<HexCharacterModel> enemies = GetAllEnemiesWithinMyAura(character);
                     foreach (HexCharacterModel enemy in enemies)                    
-                        CombatController.Instance.CreateStressCheck(enemy, new StressEventData(1, 1, 50), true);
+                        CombatController.Instance.CreateStressCheck(enemy, new StressEventData(1, 1, 75), true);
                     
                     VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
                 }

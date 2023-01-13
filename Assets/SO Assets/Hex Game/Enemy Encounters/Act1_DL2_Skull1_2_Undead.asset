@@ -19,13 +19,13 @@ MonoBehaviour:
   enemyGroups:
   - possibleEnemies:
     - {fileID: 11400000, guid: c821c0b02eb8ba94db4a4d700ceed222, type: 2}
-    spawnPosition: {x: 2, y: 0}
+    spawnPosition: {x: 1, y: -1}
   - possibleEnemies:
     - {fileID: 11400000, guid: c821c0b02eb8ba94db4a4d700ceed222, type: 2}
-    spawnPosition: {x: 2, y: 1}
+    spawnPosition: {x: 1, y: 0}
   - possibleEnemies:
     - {fileID: 11400000, guid: c821c0b02eb8ba94db4a4d700ceed222, type: 2}
-    spawnPosition: {x: 2, y: 2}
+    spawnPosition: {x: 1, y: 2}
   - possibleEnemies:
     - {fileID: 11400000, guid: c821c0b02eb8ba94db4a4d700ceed222, type: 2}
-    spawnPosition: {x: 2, y: -1}
+    spawnPosition: {x: 1, y: 3}

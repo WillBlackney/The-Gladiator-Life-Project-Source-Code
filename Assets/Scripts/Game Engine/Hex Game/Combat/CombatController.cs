@@ -169,28 +169,28 @@ namespace HexGameEngine.Combat
             // Wrath
             if (effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Wrath))
             {
-                damageModPercentageAdditive += 0.3f;
+                damageModPercentageAdditive += 0.5f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Wrath modifier = " + damageModPercentageAdditive.ToString());
             }
 
             // Weakened
             if (effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Weakened))
             {
-                damageModPercentageAdditive -= 0.3f;
+                damageModPercentageAdditive -= 0.5f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Weakened modifier = " + damageModPercentageAdditive.ToString());
             }
 
             // Vulnerable
             if (target != null && effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Vulnerable))
             {
-                damageModPercentageAdditive += 0.3f;
+                damageModPercentageAdditive += 0.5f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Vulnerable modifier = " + damageModPercentageAdditive.ToString());
             }
 
             // Block
             if (target != null && effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Guard) && effect.ignoresGuard == false)
             {
-                damageModPercentageAdditive -= 0.3f;
+                damageModPercentageAdditive -= 0.5f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Block modifier = " + damageModPercentageAdditive.ToString());
             }
 
@@ -585,7 +585,7 @@ namespace HexGameEngine.Combat
             // Stress State            
             StressState stressState = GetStressStateFromStressAmount(attacker.currentStress);
             int stressMod = GetStatMultiplierFromStressState(stressState, attacker);
-            ret.details.Add(new HitChanceDetailData(stressState.ToString(), stressMod));
+            if(stressMod != 0) ret.details.Add(new HitChanceDetailData(stressState.ToString(), stressMod));
 
             // Melee modifiers
             if (ability != null && ability.abilityType.Contains(AbilityType.MeleeAttack))

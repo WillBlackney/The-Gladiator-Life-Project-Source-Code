@@ -117,6 +117,7 @@ MonoBehaviour:
     damageEffectModifiers: []
     characterSummoned: {fileID: 11400000, guid: c821c0b02eb8ba94db4a4d700ceed222,
       type: 2}
+    characterSummonedName: Shambling Skeleton
     amountSummoned: 1
     modelFadeInSpeed: 0.5
     uiFadeInSpeed: 0.5
@@ -151,5 +152,5 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Summon a Shambling Skeleton at a target location.
+    phrase: Summon a Shambling Skeleton at target location.
   keyWords: []

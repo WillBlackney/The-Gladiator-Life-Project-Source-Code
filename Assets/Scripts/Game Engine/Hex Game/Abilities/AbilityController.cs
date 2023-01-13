@@ -1185,7 +1185,7 @@ namespace HexGameEngine.Abilities
 
                     // Create character
                     HexCharacterModel newSummon =
-                        HexCharacterController.Instance.CreateSummonedHexCharacter(abilityEffect.characterSummoned, spawnLocation, caster.allegiance);
+                        HexCharacterController.Instance.CreateSummonedHexCharacter(abilityEffect.CharacterSummoned, spawnLocation, caster.allegiance);
 
                     // Disable activation window until ready
                     HexCharacterView view = newSummon.hexCharacterView;
