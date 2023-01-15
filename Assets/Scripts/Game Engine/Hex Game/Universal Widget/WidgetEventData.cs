@@ -306,7 +306,10 @@ namespace HexGameEngine.UWidget
     public enum WidgetEvent
     {
         None = 0,
+        Breathe = 13,
+        CursorSpriteChange = 16,
         EnableGameObject = 1,
+        Enlarge = 11,
         DisableGameObject = 2,
         FadeInCanvasGroup = 5,
         FadeOutCanvasGroup = 6,
@@ -315,11 +318,9 @@ namespace HexGameEngine.UWidget
         InvokeFunction = 3,
         Move = 15,
         PlaySound = 4,
-        TransisitionImageColour = 9,
-        TransistionTextColour = 10,
-        Enlarge = 11,
         Shrink = 12,
-        Breathe = 13,
+        TransisitionImageColour = 9,
+        TransistionTextColour = 10,             
         Wiggle = 14,
     }
     public enum WidgetInputType

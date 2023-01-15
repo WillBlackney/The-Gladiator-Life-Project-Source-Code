@@ -78,15 +78,6 @@ namespace HexGameEngine.UWidget
             }
             else if (wEvent.widgetEventType == WidgetEvent.PlaySound)
             {
-                /*
-                if (wEvent.audioSettings == null)
-                {
-                    Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but no audio model data was found" +
-                        ", did you forget to create this properties in the inspector?");
-                    yield break;
-                }*/
-                //AudioController.Instance.HandlePlayAudio(wEvent.audioSettings);
                 AudioManager.Instance.PlaySoundPooled(wEvent.soundPlayed);
             }
             else if (wEvent.widgetEventType == WidgetEvent.FadeInCanvasGroup)
