@@ -1,3 +1,4 @@
+using HexGameEngine.UI;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -122,7 +123,11 @@ namespace HexGameEngine.UWidget
         {
             if (UWidgetController.Instance != null && inputType == WidgetInputType.IPointer)
             {
-                if (MousedOver == this) MousedOver = null;
+                if (MousedOver == this)
+                {
+                    CursorController.Instance.SetCursor(CursorType.NormalPointer);
+                    MousedOver = null;
+                }
                 UWidgetController.Instance.HandleWidgetEvents(this, MouseExitEvents);
             }
 
@@ -151,7 +156,11 @@ namespace HexGameEngine.UWidget
         {
             if (UWidgetController.Instance != null && inputType == WidgetInputType.Collider)
             {
-                if (MousedOver == this) MousedOver = null;
+                if (MousedOver == this)
+                {
+                    CursorController.Instance.SetCursor(CursorType.NormalPointer);
+                    MousedOver = null;
+                }
                 UWidgetController.Instance.HandleWidgetEvents(this, MouseExitEvents);
             }
         }

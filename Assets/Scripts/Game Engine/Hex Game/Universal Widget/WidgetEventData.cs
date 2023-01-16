@@ -8,6 +8,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
 using HexGameEngine.Audio;
+using HexGameEngine.UI;
 
 namespace HexGameEngine.UWidget
 {
@@ -153,6 +154,9 @@ namespace HexGameEngine.UWidget
             " (E.g. a value of +90 will rotate the transform clockwise to a 90 degree angle. A value of -180 will rotate the transform anti clockwise by 180 degrees, essentially flipping it upside down).")]
         public float rotationDegrees;
 
+        [ShowIf("ShowCursorType")]
+        public CursorType cursorType;
+
         #endregion
 
         // Accessors + Getters
@@ -210,6 +214,10 @@ namespace HexGameEngine.UWidget
 
         // Conditional Inspector View Logic
         #region
+        public bool ShowCursorType()
+        {
+            return widgetEventType == WidgetEvent.CursorSpriteChange;
+        }
         public bool ShowScalingSequence()
         {
             return widgetEventType == WidgetEvent.Breathe;

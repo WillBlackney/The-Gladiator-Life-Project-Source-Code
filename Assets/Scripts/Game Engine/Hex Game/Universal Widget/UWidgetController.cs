@@ -1,5 +1,6 @@
 using DG.Tweening;
 using HexGameEngine.Audio;
+using HexGameEngine.UI;
 using HexGameEngine.Utilities;
 using System.Collections;
 using UnityEngine;
@@ -329,6 +330,11 @@ namespace HexGameEngine.UWidget
                 }
                 WiggleUpAndDown(wEvent);
             }
+            else if (wEvent.widgetEventType == WidgetEvent.CursorSpriteChange)
+            {
+                CursorController.Instance.SetCursor(wEvent.cursorType);
+            }
+
         }
         #endregion
 
