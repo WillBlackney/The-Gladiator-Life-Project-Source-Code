@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using HexGameEngine.CameraSystems;
 using UnityEngine.Events;
+using HexGameEngine.UI;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -55,7 +56,7 @@ namespace HexGameEngine.TownFeatures
         {
             if (blockMouseActions) yield break;
             blockMouseActions = true;
-
+            CursorController.Instance.SetCursor(CursorType.NormalPointer);
             foreach (Image i in buildingImages)
                 i.color = normalColor;
 
@@ -123,7 +124,8 @@ namespace HexGameEngine.TownFeatures
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (blockMouseActions) return; 
+            if (blockMouseActions) return;
+            CursorController.Instance.SetCursor(CursorType.Enter_Door);
 
             foreach(Image i in buildingImages)            
                 i.color = mouseOverColor;
@@ -140,6 +142,7 @@ namespace HexGameEngine.TownFeatures
         public void OnPointerExit(PointerEventData eventData)
         {
             if (blockMouseActions) return;
+            CursorController.Instance.SetCursor(CursorType.NormalPointer);
 
             foreach (Image i in buildingImages)
                 i.color = normalColor;

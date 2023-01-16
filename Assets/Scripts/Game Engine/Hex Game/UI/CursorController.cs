@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HexGameEngine.UI
 {
@@ -15,29 +16,28 @@ namespace HexGameEngine.UI
 
         [Header("Components")]
         [SerializeField] Transform placementParent;
-        [SerializeField] SpriteRenderer cursorSR;
-
+        [SerializeField] Image cursorImage;
+        [SerializeField] Image cursorShadowImage;
         private CursorData currentCursor = null;
      
 
         private void Update()
         {
-            Vector2 mousePos = CameraController.Instance.MainCamera.ScreenToWorldPoint(Input.mousePosition);
-            placementParent.position = mousePos;
+            //Vector2 mousePos = CameraController.Instance.MainCamera.ScreenToWorldPoint(Input.mousePosition);
+            placementParent.position = Input.mousePosition;
         }
 
-        protected override void Awake()
+        private void Start()
         {
-            base.Awake();
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
             SetCursor(CursorType.NormalPointer);
         }
 
         public void SetCursor(CursorType type)
         {
             currentCursor = GetCursorData(type);
-            cursorSR.sprite = currentCursor.sprite;
+            cursorImage.sprite = currentCursor.sprite;
+            cursorShadowImage.sprite = cursorShadowImage.sprite;
         }
 
         private CursorData GetCursorData(CursorType type)
