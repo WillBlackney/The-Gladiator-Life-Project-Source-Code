@@ -26,13 +26,16 @@ namespace HexGameEngine.UI
         {
             get { return fallbackCursor; }
         }
-     
 
+        private void LateUpdate()
+        {
+            placementParent.position = Input.mousePosition;
+        }
         private void Update()
         {
             placementParent.position = Input.mousePosition;
         }
-
+    
         protected override void Awake()
         {
             base.Awake();
