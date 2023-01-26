@@ -125,7 +125,7 @@ namespace HexGameEngine.UWidget
             {
                 if (MousedOver == this)
                 {
-                    CursorController.Instance.SetCursor(CursorType.NormalPointer);
+                    CursorController.Instance.SetCursor(CursorController.Instance.FallbackCursor.typeTag);
                     MousedOver = null;
                 }
                 UWidgetController.Instance.HandleWidgetEvents(this, MouseExitEvents);
@@ -158,7 +158,7 @@ namespace HexGameEngine.UWidget
             {
                 if (MousedOver == this)
                 {
-                    CursorController.Instance.SetCursor(CursorType.NormalPointer);
+                    CursorController.Instance.SetCursor(CursorController.Instance.FallbackCursor.typeTag);
                     MousedOver = null;
                 }
                 UWidgetController.Instance.HandleWidgetEvents(this, MouseExitEvents);

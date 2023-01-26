@@ -14,7 +14,7 @@ namespace HexGameEngine.UI
         public UIPerkIcon perkIcon;
         public GameObject unavailableParent;
         public GameObject alreadyChosenParent;
-        public bool alreadyKnown;
+        [HideInInspector] public bool alreadyKnown;
         public HexCharacterData myCharacter;
 
         public void BuildFromCharacterAndPerkData(HexCharacterData character, PerkIconData perkData)

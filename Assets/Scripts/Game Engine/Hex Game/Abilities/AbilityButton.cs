@@ -109,6 +109,8 @@ namespace HexGameEngine.Abilities
         }
         #endregion
 
+        // Misc
+        #region 
         public void ResetButton()
         {
             myAbilityData = null;
@@ -168,5 +170,6 @@ namespace HexGameEngine.Abilities
                 selectedGlow.DOFade(1f, 0.25f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
             
         }
+        #endregion
     }
 }

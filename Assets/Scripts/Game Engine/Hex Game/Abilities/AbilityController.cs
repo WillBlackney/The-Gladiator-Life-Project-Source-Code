@@ -1352,6 +1352,10 @@ namespace HexGameEngine.Abilities
             currentAbilityAwaiting = b.MyAbilityData;           
             currentSelectionPhase = AbilitySelectionPhase.None;
 
+            // Set cursor
+            CursorController.Instance.SetFallbackCursor(CursorType.TargetClick);
+            CursorController.Instance.SetCursor(CursorType.TargetClick);
+
             // Highlight tiles in range of ability
             if (ability.targetRequirement != TargetRequirement.NoTarget)
             {
@@ -1454,6 +1458,8 @@ namespace HexGameEngine.Abilities
             firstSelectionCharacter = null;
             currentSelectionPhase = AbilitySelectionPhase.None;
             LevelController.Instance.UnmarkAllTiles();
+            CursorController.Instance.SetFallbackCursor(CursorType.NormalPointer);
+            CursorController.Instance.SetCursor(CursorType.NormalPointer);
         }
         private void Update()
         {

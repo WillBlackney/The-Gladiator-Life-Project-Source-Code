@@ -10,6 +10,7 @@ using TMPro;
 using DG.Tweening;
 using HexGameEngine.Utilities;
 using HexGameEngine.Perks;
+using HexGameEngine.UI;
 
 namespace HexGameEngine.Combat
 {
@@ -68,6 +69,8 @@ namespace HexGameEngine.Combat
                 List<LevelNode> validMoveLocations =  Pathfinder.GetAllValidPathableDestinations(activatedCharacter, activatedCharacter.currentTile, LevelController.Instance.AllLevelNodes.ToList());
                 LevelController.Instance.MarkTilesInRange(validMoveLocations);
                 HandleFirstHexSelection(h, activatedCharacter);
+                CursorController.Instance.SetFallbackCursor(CursorType.MoveClick);
+                CursorController.Instance.SetCursor(CursorType.MoveClick);
             }     
             
             // Second hex selection
@@ -77,6 +80,7 @@ namespace HexGameEngine.Combat
                 LevelController.Instance.UnmarkAllTiles();
                 LevelController.Instance.HandleMoveDownPath(activatedCharacter, currentPath);
                 ResetSelectionState();
+                
             }
 
             // New hex selection
@@ -240,6 +244,8 @@ namespace HexGameEngine.Combat
         }
         public void ResetSelectionState(bool resetEnergyBar = true)
         {
+            CursorController.Instance.SetFallbackCursor(CursorType.NormalPointer);
+            CursorController.Instance.SetCursor(CursorType.NormalPointer);
             LevelController.Instance.UnmarkAllTiles();
             HexCharacterController.Instance.HideAllFreeStrikeIndicators();
             ClearPath();

@@ -57,9 +57,6 @@ namespace HexGameEngine.UI
             if(itemDataRef != null && InventoryController.Instance.HasFreeInventorySpace())
             {
                 var character = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
-
-                // Prevent removing main hand if an off hand is equipt
-                //if (slotType == RosterSlotType.MainHand && character.itemSet.offHandItem != null) return;
                 ItemPopupController.Instance.OnInventoryItemMouseExit();
                 ItemController.Instance.HandleSendItemFromCharacterToInventory(character, this);
             }
@@ -75,7 +72,12 @@ namespace HexGameEngine.UI
                 
             }
             // Right click
-            if (Input.GetKeyDown(KeyCode.Mouse1)) HandleRightClick();
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                HandleRightClick();                
+            }
+            CursorController.Instance.SetCursor(CursorType.HandPointer);
+
         }
         public void OnMouseExit()
         {
@@ -83,6 +85,7 @@ namespace HexGameEngine.UI
                 slotMousedOver = null;
 
             ItemPopupController.Instance.OnInventoryItemMouseExit();
+            CursorController.Instance.SetCursor(CursorType.NormalPointer);
 
         }
         #endregion

@@ -15,29 +15,47 @@ namespace HexGameEngine.UI
         [SerializeField] CursorData[] allCursorData;
 
         [Header("Components")]
+        [SerializeField] GameObject visualParent;
         [SerializeField] Transform placementParent;
         [SerializeField] Image cursorImage;
         [SerializeField] Image cursorShadowImage;
         private CursorData currentCursor = null;
+        private CursorData fallbackCursor = null;
+
+        public CursorData FallbackCursor
+        {
+            get { return fallbackCursor; }
+        }
      
 
         private void Update()
         {
-            //Vector2 mousePos = CameraController.Instance.MainCamera.ScreenToWorldPoint(Input.mousePosition);
             placementParent.position = Input.mousePosition;
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            if (!Application.isMobilePlatform && !Application.isConsolePlatform) visualParent.SetActive(true);
         }
 
         private void Start()
         {
             Cursor.visible = false;
             SetCursor(CursorType.NormalPointer);
+            SetFallbackCursor(CursorType.NormalPointer);
         }
 
         public void SetCursor(CursorType type)
         {
             currentCursor = GetCursorData(type);
             cursorImage.sprite = currentCursor.sprite;
-            cursorShadowImage.sprite = cursorShadowImage.sprite;
+            cursorShadowImage.sprite = currentCursor.sprite;
+        }
+        public void SetFallbackCursor(CursorType type)
+        {
+            fallbackCursor = GetCursorData(type);
         }
 
         private CursorData GetCursorData(CursorType type)
@@ -47,7 +65,7 @@ namespace HexGameEngine.UI
 
     }
     [System.Serializable]
-    class CursorData
+    public class CursorData
     {
         public CursorType typeTag;
         [PreviewField(75)]

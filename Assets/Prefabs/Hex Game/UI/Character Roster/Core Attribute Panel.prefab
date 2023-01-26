@@ -707,6 +707,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   - widgetEventType: 4
     scalingSequence: 0
     enableStartDelay: 0
@@ -738,6 +739,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   - widgetEventType: 9
     scalingSequence: 0
     enableStartDelay: 0
@@ -769,6 +771,39 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
+  - widgetEventType: 16
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+    cursorType: 2
   - widgetEventType: 3
     scalingSequence: 0
     enableStartDelay: 0
@@ -812,6 +847,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   mouseExitEvents:
   - widgetEventType: 9
     scalingSequence: 0
@@ -844,6 +880,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   - widgetEventType: 9
     scalingSequence: 0
     enableStartDelay: 0
@@ -875,6 +912,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   - widgetEventType: 3
     scalingSequence: 0
     enableStartDelay: 0
@@ -918,6 +956,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   onDisableEvents:
   - widgetEventType: 9
     scalingSequence: 0
@@ -950,6 +989,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   - widgetEventType: 9
     scalingSequence: 0
     enableStartDelay: 0
@@ -981,6 +1021,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   - widgetEventType: 3
     scalingSequence: 0
     enableStartDelay: 0
@@ -1024,6 +1065,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
 --- !u!1 &8590599969453428685
 GameObject:
   m_ObjectHideFlags: 0
