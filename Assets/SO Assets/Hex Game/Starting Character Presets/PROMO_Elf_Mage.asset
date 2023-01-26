@@ -73,7 +73,7 @@ MonoBehaviour:
   - Blue_Mage_Chest_Wear
   - Left_Hand_Knowledge_Staff
   itemSet:
-    mainHandItem: {fileID: 0}
+    mainHandItem: {fileID: 11400000, guid: d4f86be39e3332a4dab717584601e637, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}

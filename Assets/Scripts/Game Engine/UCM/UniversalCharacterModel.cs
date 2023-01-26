@@ -17,12 +17,8 @@ namespace CardGameEngine.UCM
         [Header("Core Components")]
         public Animator myAnimator;
         public EntityRenderer myEntityRenderer;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [Header("All Model Element References")]
-        public UniversalCharacterModelElement[] allModelElements;
-        public SpriteMask[] allHeadWearSpriteMasks;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [SerializeField] GameObject headMasksParent;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]       
 
         [Header("Active Particle References")]
         [HideInInspector] public UniversalCharacterModelElement activeChestParticles;
@@ -32,15 +28,12 @@ namespace CardGameEngine.UCM
         [HideInInspector] public UniversalCharacterModelElement activeChestLighting;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        [Header("Weapon References")]
-        public List<UniversalCharacterModelElement> allMainHandWeapons;
-        public List<UniversalCharacterModelElement> allOffHandWeapons;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [Header("Armour References")]
-        public UniversalCharacterModelElement[] allChestArmour;
-        public UniversalCharacterModelElement[] allHeadArmour;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        public UniversalCharacterModelElement[] AllModelElements { get; private set; }
+        public SpriteMask[] AllHeadWearSpriteMasks { get; private set; }
+        public UniversalCharacterModelElement[] AllMainHandWeapons { get; private set; }
+        public UniversalCharacterModelElement[] AllOffHandWeapons { get; private set; }
+        public UniversalCharacterModelElement[] AllChestArmour { get; private set; }
+        public UniversalCharacterModelElement[] AllHeadArmour { get; private set; }
 
         [Header("Active Body Part References")]
         [HideInInspector] public UniversalCharacterModelElement activeHead;
@@ -78,17 +71,50 @@ namespace CardGameEngine.UCM
         {
             RunSetup();
         }
-        void RunSetup()
+        public void RunSetup()
         {
             if (!hasRunSetup)
             {
-                UniversalCharacterModelElement[] elements = GetComponentsInChildren<UniversalCharacterModelElement>(true);
-                Debug.LogWarning("Found " + elements.Length.ToString() + " element components");
-                allModelElements = elements;
-                hasRunSetup = true;
+                // Get all elements
+                AllModelElements = GetComponentsInChildren<UniversalCharacterModelElement>(true);
+
+                // Get all head wear sprite masks
+                AllHeadWearSpriteMasks = headMasksParent.GetComponentsInChildren<SpriteMask>(true);
+
+                // setup main hand weapons
+                List<UniversalCharacterModelElement> mhElements = new List<UniversalCharacterModelElement>();
+                List<UniversalCharacterModelElement> ohElements = new List<UniversalCharacterModelElement>();
+                List<UniversalCharacterModelElement> chestElements = new List<UniversalCharacterModelElement>();
+                List<UniversalCharacterModelElement> headElements = new List<UniversalCharacterModelElement>();
+
+                foreach (var element in AllModelElements)
+                {
+                    switch (element.bodyPartType)
+                    {
+                        case BodyPartType.ChestWear:
+                            chestElements.Add(element);
+                            break;
+                        case BodyPartType.HeadWear:
+                            headElements.Add(element);
+                            break;
+                        case BodyPartType.MainHandWeapon:
+                            mhElements.Add(element);
+                            break;
+                        case BodyPartType.OffHandWeapon:
+                            ohElements.Add(element);
+                            break;
+                    }
+                }
+
+                AllChestArmour = chestElements.ToArray();
+                AllMainHandWeapons = mhElements.ToArray();
+                AllOffHandWeapons = ohElements.ToArray();
+                AllHeadArmour = headElements.ToArray();
+
                 HexGameEngine.UCM.CharacterModeller.AutoSetHeadMaskOrderInLayer(this);
+
+                hasRunSetup = true;
             }
-            
         }
         private void OnEnable()
         {

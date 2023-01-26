@@ -63,13 +63,13 @@ namespace HexGameEngine.UCM
             DisableAllActiveModelElementViews(modelToBuild);
             ClearAllActiveModelElementsReferences(modelToBuild);
 
-            if (modelClonedFrom.allModelElements.Length > 0)
+            if (modelClonedFrom.AllModelElements.Length > 0)
             {
-                for (int index = 0; index < modelClonedFrom.allModelElements.Length - 1 && index < modelToBuild.allModelElements.Length - 1; index++)
+                for (int index = 0; index < modelClonedFrom.AllModelElements.Length - 1 && index < modelToBuild.AllModelElements.Length - 1; index++)
                 {
-                    if (modelClonedFrom.allModelElements[index].gameObject.activeSelf)
+                    if (modelClonedFrom.AllModelElements[index].gameObject.activeSelf)
                     {
-                        EnableAndSetElementOnModel(modelToBuild, modelToBuild.allModelElements[index]);
+                        EnableAndSetElementOnModel(modelToBuild, modelToBuild.AllModelElements[index]);
                     }
                 }
             }
@@ -82,7 +82,7 @@ namespace HexGameEngine.UCM
             if (itemSet.mainHandItem != null)
             {
                 bool shouldBreak = false;
-                foreach (UniversalCharacterModelElement ucme in model.allMainHandWeapons)
+                foreach (UniversalCharacterModelElement ucme in model.AllMainHandWeapons)
                 {
                     foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
                     {
@@ -102,7 +102,7 @@ namespace HexGameEngine.UCM
             if (itemSet.offHandItem != null)
             {
                 bool shouldBreak = false;
-                foreach (UniversalCharacterModelElement ucme in model.allOffHandWeapons)
+                foreach (UniversalCharacterModelElement ucme in model.AllOffHandWeapons)
                 {
                     foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
                     {
@@ -122,7 +122,7 @@ namespace HexGameEngine.UCM
             if (itemSet.bodyArmour != null)
             {
                 bool shouldBreak = false;
-                foreach (UniversalCharacterModelElement ucme in model.allChestArmour)
+                foreach (UniversalCharacterModelElement ucme in model.AllChestArmour)
                 {
                     foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
                     {
@@ -143,7 +143,7 @@ namespace HexGameEngine.UCM
             if (itemSet.headArmour != null)
             {
                 bool shouldBreak = false;
-                foreach (UniversalCharacterModelElement ucme in model.allHeadArmour)
+                foreach (UniversalCharacterModelElement ucme in model.AllHeadArmour)
                 {
                     foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
                     {
@@ -281,7 +281,7 @@ namespace HexGameEngine.UCM
         {
             int headSortOrder = model.myEntityRenderer.SortingOrder + 10;
 
-            foreach (SpriteMask mask in model.allHeadWearSpriteMasks)
+            foreach (SpriteMask mask in model.AllHeadWearSpriteMasks)
             {
                 mask.frontSortingOrder = headSortOrder + 1;
                 mask.backSortingOrder = headSortOrder - 1;
@@ -471,7 +471,7 @@ namespace HexGameEngine.UCM
             UniversalCharacterModelElement element = null;
 
             // find element first
-            foreach (UniversalCharacterModelElement modelElement in model.allModelElements)
+            foreach (UniversalCharacterModelElement modelElement in model.AllModelElements)
             {
                 if (modelElement.gameObject.name == elementName)
                 {
