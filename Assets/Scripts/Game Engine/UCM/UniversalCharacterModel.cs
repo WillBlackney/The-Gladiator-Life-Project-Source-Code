@@ -64,14 +64,35 @@ namespace CardGameEngine.UCM
         [HideInInspector] public UniversalCharacterModelElement activeRightHandWear;
         [HideInInspector] public UniversalCharacterModelElement activeMainHandWeapon;
         [HideInInspector] public UniversalCharacterModelElement activeOffHandWeapon;
+
+        private bool hasRunSetup = false;
         #endregion
 
         // Initialization
         #region
+        private void Awake()
+        {
+            RunSetup();
+        }
         private void Start()
         {
-            //CharacterModelController.Instance.AutoSetHeadMaskOrderInLayer(this);
-            HexGameEngine.UCM.CharacterModeller.AutoSetHeadMaskOrderInLayer(this);
+            RunSetup();
+        }
+        void RunSetup()
+        {
+            if (!hasRunSetup)
+            {
+                UniversalCharacterModelElement[] elements = GetComponentsInChildren<UniversalCharacterModelElement>(true);
+                Debug.LogWarning("Found " + elements.Length.ToString() + " element components");
+                allModelElements = elements;
+                hasRunSetup = true;
+                HexGameEngine.UCM.CharacterModeller.AutoSetHeadMaskOrderInLayer(this);
+            }
+            
+        }
+        private void OnEnable()
+        {
+            RunSetup();
         }
         #endregion
 

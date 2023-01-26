@@ -294,7 +294,7 @@ namespace HexGameEngine.UCM
         public static void EnableAndSetElementOnModel(UniversalCharacterModel model, UniversalCharacterModelElement element)
         {
             // Set Active Body Part Reference
-            if (element.bodyPartType == CardGameEngine.BodyPartType.Chest)
+            if (element.bodyPartType == BodyPartType.Chest)
             {
                 if (model.activeChest != null)
                 {
@@ -302,7 +302,7 @@ namespace HexGameEngine.UCM
                 }
                 model.activeChest = element;
             }
-            else if (element.bodyPartType == CardGameEngine.BodyPartType.Head)
+            else if (element.bodyPartType == BodyPartType.Head)
             {
                 if (model.activeHead != null)
                 {
@@ -783,99 +783,6 @@ namespace HexGameEngine.UCM
         }
         #endregion
 
-        // Get View Parts  
-        #region
-        public static UniversalCharacterModelElement GetNextElementInList(List<UniversalCharacterModelElement> list)
-        {
-            // Set up
-            UniversalCharacterModelElement elementReturned = null;
-            int currentIndex = 0;
-            int nextIndex = 0;
-
-            // calculate list size
-            int maxIndex = list.Count - 1;
-
-            // prevent negative index
-            if (maxIndex < 0)
-            {
-                maxIndex = 0;
-            }
-
-            // calculate current index
-            foreach (UniversalCharacterModelElement ele in list)
-            {
-                if (ele.gameObject.activeSelf)
-                {
-                    currentIndex = list.IndexOf(ele);
-                    Debug.Log("CharacterModelController.GetNextElementInList() calculated that " + ele.gameObject.name +
-                        " is at list index " + currentIndex);
-                    break;
-                }
-            }
-
-            // if at end of list, go back to index 0
-            if (currentIndex + 1 > maxIndex)
-            {
-                nextIndex = 0;
-            }
-            else
-            {
-                nextIndex = currentIndex + 1;
-            }
-
-            elementReturned = list[nextIndex];
-
-            Debug.Log("CharacterModelController.GetNextElementInList() returning " +
-                elementReturned.gameObject.name + " as next indexed element");
-
-            return elementReturned;
-        }
-        public static UniversalCharacterModelElement GetPreviousElementInList(List<UniversalCharacterModelElement> list)
-        {
-            // Set up
-            UniversalCharacterModelElement elementReturned = null;
-            int currentIndex = 0;
-            int nextIndex = 0;
-
-            // calculate list size
-            int maxIndex = list.Count - 1;
-
-            // prevent negative index
-            if (maxIndex < 0)
-            {
-                maxIndex = 0;
-            }
-
-            // calculate current index
-            foreach (UniversalCharacterModelElement ele in list)
-            {
-                if (ele.gameObject.activeSelf)
-                {
-                    currentIndex = list.IndexOf(ele);
-                    Debug.Log("CharacterModelController.GetPreviousElementInList() calculated that " + ele.gameObject.name +
-                        " is at list index " + currentIndex);
-                    break;
-                }
-            }
-
-            // if at start of list, go to the last index
-            if (currentIndex - 1 < 0)
-            {
-                nextIndex = maxIndex;
-            }
-            else
-            {
-                nextIndex = currentIndex - 1;
-            }
-
-            elementReturned = list[nextIndex];
-
-            Debug.Log("CharacterModelController.GetPreviousElementInList() returning " +
-                elementReturned.gameObject.name + " as next indexed element");
-
-            return elementReturned;
-        }
-        #endregion
 
         // Fading Logic
         #region
