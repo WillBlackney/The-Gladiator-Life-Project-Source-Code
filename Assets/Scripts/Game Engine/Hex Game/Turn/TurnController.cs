@@ -127,7 +127,12 @@ namespace HexGameEngine.TurnLogic
             AddEntityToActivationOrder(entity);
 
             // Build window UCM
-            CharacterModeller.BuildModelFromModelClone(newWindowScript.myUCM, entity.hexCharacterView.ucm);
+            if(entity.characterData != null)
+            {
+                CharacterModeller.BuildModelFromStringReferences(newWindowScript.myUCM, entity.characterData.modelParts);
+                CharacterModeller.ApplyItemSetToCharacterModelView(entity.characterData.itemSet, newWindowScript.myUCM);
+            }
+            else CharacterModeller.BuildModelFromModelClone(newWindowScript.myUCM, entity.hexCharacterView.ucm);
 
             // play window still anim on ucm
             newWindowScript.myUCM.SetBaseAnim();

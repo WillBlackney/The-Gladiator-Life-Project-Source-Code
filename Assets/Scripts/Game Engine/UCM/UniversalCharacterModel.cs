@@ -17,12 +17,8 @@ namespace CardGameEngine.UCM
         [Header("Core Components")]
         public Animator myAnimator;
         public EntityRenderer myEntityRenderer;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [Header("All Model Element References")]
-        public UniversalCharacterModelElement[] allModelElements;
-        public SpriteMask[] allHeadWearSpriteMasks;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [SerializeField] GameObject headMasksParent;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]       
 
         [Header("Active Particle References")]
         [HideInInspector] public UniversalCharacterModelElement activeChestParticles;
@@ -32,15 +28,67 @@ namespace CardGameEngine.UCM
         [HideInInspector] public UniversalCharacterModelElement activeChestLighting;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        [Header("Weapon References")]
-        public List<UniversalCharacterModelElement> allMainHandWeapons;
-        public List<UniversalCharacterModelElement> allOffHandWeapons;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [Header("Armour References")]
+        public UniversalCharacterModelElement[] allModelElements;
+        public SpriteMask[] allHeadWearSpriteMasks;
+        public UniversalCharacterModelElement[] allMainHandWeapons;
+        public UniversalCharacterModelElement[] allOffHandWeapons;
         public UniversalCharacterModelElement[] allChestArmour;
         public UniversalCharacterModelElement[] allHeadArmour;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+
+        public UniversalCharacterModelElement[] AllModelElements 
+        { 
+            get
+            {
+                if(allModelElements == null || allModelElements.Length == 0) RunSetup(true);                
+                return allModelElements;
+            }
+            private set { allModelElements = value; } 
+        }
+        public SpriteMask[] AllHeadWearSpriteMasks
+        {
+            get
+            {
+                if (allHeadWearSpriteMasks == null || allHeadWearSpriteMasks.Length == 0) RunSetup(true);
+                return allHeadWearSpriteMasks;
+            }
+            private set { allHeadWearSpriteMasks = value; }
+        }
+        public UniversalCharacterModelElement[] AllMainHandWeapons
+        {
+            get
+            {
+                if (allMainHandWeapons == null || allMainHandWeapons.Length == 0) RunSetup(true);
+                return allMainHandWeapons;
+            }
+            private set { allMainHandWeapons = value; }
+        }
+        public UniversalCharacterModelElement[] AllOffHandWeapons
+        {
+            get
+            {
+                if (allOffHandWeapons == null || allOffHandWeapons.Length == 0) RunSetup(true);
+                return allOffHandWeapons;
+            }
+            private set { allOffHandWeapons = value; }
+        }
+        public UniversalCharacterModelElement[] AllChestArmour
+        {
+            get
+            {
+                if (allChestArmour == null || allChestArmour.Length == 0) RunSetup(true);
+                return allChestArmour;
+            }
+            private set { allChestArmour = value; }
+        }
+        public UniversalCharacterModelElement[] AllHeadArmour
+        {
+            get
+            {
+                if (allHeadArmour == null || allHeadArmour.Length == 0) RunSetup(true);
+                return allHeadArmour;
+            }
+            private set { allHeadArmour = value; }
+        }
 
         [Header("Active Body Part References")]
         [HideInInspector] public UniversalCharacterModelElement activeHead;
@@ -64,15 +112,72 @@ namespace CardGameEngine.UCM
         [HideInInspector] public UniversalCharacterModelElement activeRightHandWear;
         [HideInInspector] public UniversalCharacterModelElement activeMainHandWeapon;
         [HideInInspector] public UniversalCharacterModelElement activeOffHandWeapon;
+
+        private bool hasRunSetup = false;
         #endregion
 
         // Initialization
         #region
+        private void Awake()
+        {
+            RunSetup();
+        }
         private void Start()
         {
-            //CharacterModelController.Instance.AutoSetHeadMaskOrderInLayer(this);
-            HexGameEngine.UCM.CharacterModeller.AutoSetHeadMaskOrderInLayer(this);
+            RunSetup();
         }
+        private void OnEnable()
+        {
+            RunSetup();
+        }
+        public void RunSetup(bool allowRerun = false)
+        {
+            if ((!hasRunSetup || (hasRunSetup && allowRerun)) && Application.isPlaying)
+            {
+                Debug.Log("UCM.RunSetup() called and executing setup...");
+                if (hasRunSetup && allowRerun) Debug.Log("UCM.RunSetup() already had previous setup, now rerunning...");
+                // Get all elements
+                AllModelElements = GetComponentsInChildren<UniversalCharacterModelElement>(true);
+
+                // Get all head wear sprite masks
+                AllHeadWearSpriteMasks = headMasksParent.GetComponentsInChildren<SpriteMask>(true);
+
+                // setup main hand weapons
+                List<UniversalCharacterModelElement> mhElements = new List<UniversalCharacterModelElement>();
+                List<UniversalCharacterModelElement> ohElements = new List<UniversalCharacterModelElement>();
+                List<UniversalCharacterModelElement> chestElements = new List<UniversalCharacterModelElement>();
+                List<UniversalCharacterModelElement> headElements = new List<UniversalCharacterModelElement>();
+
+                foreach (var element in AllModelElements)
+                {
+                    switch (element.bodyPartType)
+                    {
+                        case BodyPartType.ChestWear:
+                            chestElements.Add(element);
+                            break;
+                        case BodyPartType.HeadWear:
+                            headElements.Add(element);
+                            break;
+                        case BodyPartType.MainHandWeapon:
+                            mhElements.Add(element);
+                            break;
+                        case BodyPartType.OffHandWeapon:
+                            ohElements.Add(element);
+                            break;
+                    }
+                }
+
+                AllChestArmour = chestElements.ToArray();
+                AllMainHandWeapons = mhElements.ToArray();
+                AllOffHandWeapons = ohElements.ToArray();
+                AllHeadArmour = headElements.ToArray();
+
+                HexGameEngine.UCM.CharacterModeller.AutoSetHeadMaskOrderInLayer(this);
+
+                hasRunSetup = true;
+            }
+        }
+        
         #endregion
 
         // Animation Logic
