@@ -28,12 +28,67 @@ namespace CardGameEngine.UCM
         [HideInInspector] public UniversalCharacterModelElement activeChestLighting;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        public UniversalCharacterModelElement[] AllModelElements { get; private set; }
-        public SpriteMask[] AllHeadWearSpriteMasks { get; private set; }
-        public UniversalCharacterModelElement[] AllMainHandWeapons { get; private set; }
-        public UniversalCharacterModelElement[] AllOffHandWeapons { get; private set; }
-        public UniversalCharacterModelElement[] AllChestArmour { get; private set; }
-        public UniversalCharacterModelElement[] AllHeadArmour { get; private set; }
+        public UniversalCharacterModelElement[] allModelElements;
+        public SpriteMask[] allHeadWearSpriteMasks;
+        public UniversalCharacterModelElement[] allMainHandWeapons;
+        public UniversalCharacterModelElement[] allOffHandWeapons;
+        public UniversalCharacterModelElement[] allChestArmour;
+        public UniversalCharacterModelElement[] allHeadArmour;
+
+        public UniversalCharacterModelElement[] AllModelElements 
+        { 
+            get
+            {
+                if(allModelElements == null || allModelElements.Length == 0) RunSetup(true);                
+                return allModelElements;
+            }
+            private set { allModelElements = value; } 
+        }
+        public SpriteMask[] AllHeadWearSpriteMasks
+        {
+            get
+            {
+                if (allHeadWearSpriteMasks == null || allHeadWearSpriteMasks.Length == 0) RunSetup(true);
+                return allHeadWearSpriteMasks;
+            }
+            private set { allHeadWearSpriteMasks = value; }
+        }
+        public UniversalCharacterModelElement[] AllMainHandWeapons
+        {
+            get
+            {
+                if (allMainHandWeapons == null || allMainHandWeapons.Length == 0) RunSetup(true);
+                return allMainHandWeapons;
+            }
+            private set { allMainHandWeapons = value; }
+        }
+        public UniversalCharacterModelElement[] AllOffHandWeapons
+        {
+            get
+            {
+                if (allOffHandWeapons == null || allOffHandWeapons.Length == 0) RunSetup(true);
+                return allOffHandWeapons;
+            }
+            private set { allOffHandWeapons = value; }
+        }
+        public UniversalCharacterModelElement[] AllChestArmour
+        {
+            get
+            {
+                if (allChestArmour == null || allChestArmour.Length == 0) RunSetup(true);
+                return allChestArmour;
+            }
+            private set { allChestArmour = value; }
+        }
+        public UniversalCharacterModelElement[] AllHeadArmour
+        {
+            get
+            {
+                if (allHeadArmour == null || allHeadArmour.Length == 0) RunSetup(true);
+                return allHeadArmour;
+            }
+            private set { allHeadArmour = value; }
+        }
 
         [Header("Active Body Part References")]
         [HideInInspector] public UniversalCharacterModelElement activeHead;
@@ -71,10 +126,16 @@ namespace CardGameEngine.UCM
         {
             RunSetup();
         }
-        public void RunSetup()
+        private void OnEnable()
         {
-            if (!hasRunSetup)
+            RunSetup();
+        }
+        public void RunSetup(bool allowRerun = false)
+        {
+            if ((!hasRunSetup || (hasRunSetup && allowRerun)) && Application.isPlaying)
             {
+                Debug.Log("UCM.RunSetup() called and executing setup...");
+                if (hasRunSetup && allowRerun) Debug.Log("UCM.RunSetup() already had previous setup, now rerunning...");
                 // Get all elements
                 AllModelElements = GetComponentsInChildren<UniversalCharacterModelElement>(true);
 
@@ -116,10 +177,7 @@ namespace CardGameEngine.UCM
                 hasRunSetup = true;
             }
         }
-        private void OnEnable()
-        {
-            RunSetup();
-        }
+        
         #endregion
 
         // Animation Logic

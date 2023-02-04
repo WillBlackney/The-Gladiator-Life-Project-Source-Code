@@ -245,7 +245,7 @@ namespace HexGameEngine.TownFeatures
 
             int cost = CharacterDataController.Instance.GetCharacterInitialHiringCost(selectedRecruitTab.MyCharacterData);
 
-            // to do: check if player has enough gold and roster space before recruiting + pay gold for recruitment
+            // to do: check if player has roster space before recruiting
             if (// enough space in roster &&
                PlayerDataController.Instance.CurrentGold < cost) return;
 
@@ -254,6 +254,8 @@ namespace HexGameEngine.TownFeatures
 
             // Add character to roster
             CharacterDataController.Instance.AddCharacterToRoster(selectedRecruitTab.MyCharacterData);
+            CharacterDataController.Instance.SetCharacterHealth(selectedRecruitTab.MyCharacterData, RandomGenerator.NumberBetween(20, 60));
+            CharacterDataController.Instance.SetCharacterStress(selectedRecruitTab.MyCharacterData, RandomGenerator.NumberBetween(5, 15));
 
             // Remove from current recruit pool
             currentRecruits.Remove(selectedRecruitTab.MyCharacterData);
