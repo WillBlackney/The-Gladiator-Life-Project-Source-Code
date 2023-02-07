@@ -26,9 +26,13 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 01000000
+  healthDamage: 1.15
+  armourDamage: 0.85
+  armourPenetration: 0.2
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:
   - {fileID: 11400000, guid: 71d939ec6c23d2d4bb0072225d70a748, type: 2}
   - {fileID: 11400000, guid: 1713d32b778f4234395baaab4621feb1, type: 2}
-  itemEffectSets: []
+  itemEffectSets:
+  - possibleEffects: []

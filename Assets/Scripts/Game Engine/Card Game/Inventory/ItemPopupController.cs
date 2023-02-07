@@ -311,6 +311,21 @@ namespace HexGameEngine.Items
                         row.Build("On combat start, gain " + TextLogic.ReturnColoredText(effect.perkGained.stacks.ToString(), TextLogic.blueNumber) + " " +
                            TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkGained.perkTag.ToString()), TextLogic.neutralYellow) + ".", DotStyle.Green);
                     }
+                    else if (item.itemEffects[i].effectType == ItemEffectType.InnateWeaponEffect)
+                    {
+                        if(item.itemEffects[i].innateItemEffectType == InnateItemEffectType.InnateAccuracyModifier)
+                        {
+
+                        }
+                        else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.InnateAccuracyAgainstAdjacentModifier)
+                        {
+
+                        }
+                        else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.InnatePerkGainedOnUse)
+                        {
+
+                        }
+                    }
                 }
             }
         }

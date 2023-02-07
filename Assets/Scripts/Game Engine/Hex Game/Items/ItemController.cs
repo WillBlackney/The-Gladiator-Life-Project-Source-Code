@@ -139,6 +139,10 @@ namespace HexGameEngine.Items
             i.allowedSlot = d.allowedSlot;
             i.injuryTypesCaused = d.injuryTypesCaused;
             i.itemEffectSets = d.itemEffectSets;
+            i.healthDamage = d.healthDamage;
+            i.armourDamage = d.armourDamage;
+            i.armourPenetration = d.armourPenetration;
+
 
             i.fatiguePenalty = d.fatiguePenalty;
             i.minArmourRoll = d.minArmourRoll;
@@ -168,6 +172,9 @@ namespace HexGameEngine.Items
             i.injuryTypesCaused = original.injuryTypesCaused;
             i.itemEffectSets = original.itemEffectSets;
             i.grantedAbilities = original.grantedAbilities;
+            i.healthDamage = original.healthDamage;
+            i.armourDamage = original.armourDamage;
+            i.armourPenetration = original.armourPenetration;
 
             i.armourAmount = original.armourAmount;
             i.fatiguePenalty = original.fatiguePenalty;

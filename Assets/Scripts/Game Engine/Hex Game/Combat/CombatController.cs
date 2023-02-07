@@ -93,11 +93,22 @@ namespace HexGameEngine.Combat
             return ExecuteGetFinalDamageValueAfterAllCalculations(null, target, baseDamage, null, null, null, damageType, false, ignoreBlock);
 
         }
-        private DamageResult ExecuteGetFinalDamageValueAfterAllCalculations(HexCharacterModel attacker, HexCharacterModel target, int baseDamage, AbilityData ability, AbilityEffect effect, Items.ItemData weaponUsed, DamageType damageType, bool didCrit = false, bool ignoreBlock = false)
+        private DamageResult ExecuteGetFinalDamageValueAfterAllCalculations(HexCharacterModel attacker, HexCharacterModel target, int baseDamage, AbilityData ability, AbilityEffect effect, ItemData weaponUsed, DamageType damageType, bool didCrit = false, bool ignoreBlock = false)
         {
             int baseDamageFinal = baseDamage;
             int lowerDamageFinal = baseDamage;
             int upperDamageFinal = baseDamage;
+
+            float healthDamageMod = 1f;
+            float armourDamageMod = 1f;
+            float penetrationMod = 0.25f;
+
+            if(weaponUsed != null)
+            {
+                healthDamageMod = weaponUsed.healthDamage;
+                armourDamageMod = weaponUsed.armourDamage;
+                penetrationMod = weaponUsed.armourPenetration;
+            }
 
             if (effect != null)
             {
@@ -872,56 +883,122 @@ namespace HexGameEngine.Combat
 
         // Handle Damage + Entry Points
         #region       
-        public void HandleDamage(HexCharacterModel attacker, HexCharacterModel target, DamageResult damageResult, AbilityData ability, AbilityEffect effect, bool ignoreArmour = false, VisualEvent parentEvent = null)
+        public void HandleDamage(HexCharacterModel attacker, HexCharacterModel target, DamageResult damageResult, AbilityData ability, AbilityEffect effect, ItemData weaponUsed, bool ignoreArmour = false, VisualEvent parentEvent = null)
         {
             // Normal ability damage entry point
-            ExecuteHandleDamage(attacker, target, damageResult, GetFinalFinalDamageTypeOfAbility(attacker, effect, ability), ability, effect, ignoreArmour, parentEvent);
+            ExecuteHandleDamage(attacker, target, damageResult, ability, effect, weaponUsed, ignoreArmour, parentEvent);
         }
         public void HandleDamage(HexCharacterModel target, DamageResult damageResult, DamageType damageType, bool ignoreArmour)
         {
             // Non ability and attacker damage source entry point
-            ExecuteHandleDamage(null, target, damageResult, damageType, null, null, ignoreArmour);
+            ExecuteHandleDamage(null, target, damageResult, null, null, null, ignoreArmour);
         }
-        private void ExecuteHandleDamage(HexCharacterModel attacker, HexCharacterModel target, DamageResult damageResult, DamageType damageType, AbilityData ability = null, AbilityEffect effect = null, bool ignoreArmour = false, VisualEvent parentEvent = null)
+        private void ExecuteHandleDamage(HexCharacterModel attacker, HexCharacterModel target, DamageResult damageResult, AbilityData ability = null, AbilityEffect effect = null, ItemData weaponUsed = null, bool ignoreArmour = false, VisualEvent parentEvent = null)
         {
             // Final health and armour loss calculations
             int totalDamage = damageResult.totalDamage;
             int totalHealthLost = 0;
             int totalArmourLost = 0;
 
-            // Damage that completely skips armour check
-            if (ignoreArmour || 
-                (effect != null && effect.ignoresArmour) ||
-                (attacker != null && PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.HeartSeeker) && 
-                ability != null && 
-                ability.abilityType.Contains(AbilityType.WeaponAttack)))
+            float healthDamageMod = 1f;
+            float armourDamageMod = 1f;
+            float penetrationMod = 0.25f;
+            int finalPenetration = 0;
+
+            if (ability != null)
             {
-                totalHealthLost = damageResult.totalDamage;
-                damageResult.totalHealthLost = totalHealthLost;
-                damageResult.totalArmourLost = 0;
+                if (weaponUsed != null && ability.abilityType.Contains(AbilityType.WeaponAttack))
+                {
+                    healthDamageMod = weaponUsed.healthDamage;
+                    armourDamageMod = weaponUsed.armourDamage;
+                    penetrationMod = weaponUsed.armourPenetration;
+                }
+
+                Debug.Log("XX ExecuteHandleDamage() Damage modifiers: " +
+               "Health damage = " + (healthDamageMod * 100f).ToString() + "%" +
+               ", Armour Damage = " + (armourDamageMod * 100f).ToString() + "%" +
+               ", Penetration = " + (penetrationMod * 100f).ToString() + "%");
+
+
+                // Target is unarmoured, or attack ignores armour for whatever reason
+                if (target.currentArmour <= 0 || 
+                    ignoreArmour ||
+                    (effect != null && effect.ignoresArmour) ||
+                    (attacker != null && PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.HeartSeeker) &&
+                    ability != null &&
+                    ability.abilityType.Contains(AbilityType.WeaponAttack)))
+                {
+                    totalHealthLost = (int)(damageResult.totalDamage * healthDamageMod); 
+                    totalArmourLost = 0;
+                    totalDamage = totalHealthLost;
+
+                    damageResult.totalHealthLost = totalHealthLost;
+                    damageResult.totalArmourLost = 0;                                                         
+                }
+
+                // Target is armoured
+                else
+                {
+                    // Will damage exceed and destroy armour?
+                    int maxPossibleArmourDamage = (int) (totalDamage * armourDamageMod);
+
+                    // Damage will exceed armour
+                    if(maxPossibleArmourDamage > target.currentArmour)
+                    {
+                        Debug.Log("XX ExecuteHandleDamage() damage will exceed armour...");
+                        int initialDifference = maxPossibleArmourDamage - target.currentArmour;
+                        float adjustedDifference = initialDifference / armourDamageMod;
+                        int overflowHealthDamage = (int) (adjustedDifference * healthDamageMod);
+
+                        totalArmourLost = target.currentArmour;
+                        totalHealthLost = overflowHealthDamage;
+                        damageResult.totalHealthLost = totalHealthLost;
+                        damageResult.totalArmourLost = totalArmourLost;
+
+                        // Calculate penetration damage to health
+                        float x = target.currentArmour / armourDamageMod;
+                        int finalPenetrationHealthDamage = (int)(x * penetrationMod);
+                        if (finalPenetrationHealthDamage < 0) finalPenetrationHealthDamage = 0;
+
+                        damageResult.totalHealthLost += finalPenetrationHealthDamage;
+                        totalHealthLost += finalPenetrationHealthDamage;
+
+                        finalPenetration = finalPenetrationHealthDamage;
+                    }
+
+                    // Damage will NOT exceed armour
+                    else
+                    {
+                        Debug.Log("XX ExecuteHandleDamage() damage will NOT exceed armour...");
+                        totalArmourLost = maxPossibleArmourDamage;
+                        totalHealthLost = 0;
+                        damageResult.totalHealthLost = totalHealthLost;
+                        damageResult.totalArmourLost = totalArmourLost;
+
+                        // Calculate health damage from armour penetration
+                        float armourPenDamage = totalDamage * penetrationMod;
+                        float remainingArmourPenalty = (target.currentArmour - totalArmourLost) * 0.1f;
+                        int finalPenetrationHealthDamage = (int) (armourPenDamage - remainingArmourPenalty);
+                        if (finalPenetrationHealthDamage < 0) finalPenetrationHealthDamage = 0;
+
+                        damageResult.totalHealthLost += finalPenetrationHealthDamage;
+                        totalHealthLost += finalPenetrationHealthDamage;
+
+                        finalPenetration = finalPenetrationHealthDamage;
+                    }
+
+                    totalDamage = totalHealthLost + totalArmourLost;
+
+                }
             }
 
-            // Damaged over armour
-            else if(totalDamage > target.currentArmour)
-            {
-                totalArmourLost = target.currentArmour;
-                totalHealthLost = totalDamage - target.currentArmour;
-                damageResult.totalHealthLost = totalHealthLost;
-                damageResult.totalArmourLost = totalArmourLost;
-            }
-
-            // Armour full blocked damage
-            else
-            {
-                totalArmourLost = totalDamage;
-                totalHealthLost = 0;
-                damageResult.totalHealthLost = totalHealthLost;
-                damageResult.totalArmourLost = totalArmourLost;
-            }
-
-            Debug.Log("ExecuteHandleDamage() results,Total damage = " + totalDamage.ToString() +
+            Debug.Log("XX ExecuteHandleDamage() results: " +
+                "Base damage = " + totalDamage.ToString() +
                 ", Health lost = " + totalHealthLost.ToString() + 
-                ", Armour Lost = " + totalArmourLost.ToString());
+                ", Armour Lost = " + totalArmourLost.ToString() +
+                ", Penetration health damage = " + finalPenetration.ToString() +
+                ", Final total damage dealt = " + (totalHealthLost + totalArmourLost).ToString());
+
             bool removedBarrier = false;
 
             // Check for barrier
@@ -948,7 +1025,7 @@ namespace HexGameEngine.Combat
                       
 
             // On health lost animations
-            if ((totalHealthLost > 0 || totalArmourLost > 0) && removedBarrier == false)
+            if ((totalHealthLost > 0 || totalArmourLost > 0)) //&& removedBarrier == false)
             {
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                     HexCharacterController.Instance.PlayHurtAnimation(target.hexCharacterView), QueuePosition.Back, 0, 0, parentEvent);               
@@ -1465,6 +1542,7 @@ namespace HexGameEngine.Combat
         public bool didCrit;
         public int damageLowerLimit;
         public int damageUpperLimit;
+        public ItemData weaponUsed;
     }
     public class DeathRollResult
     {

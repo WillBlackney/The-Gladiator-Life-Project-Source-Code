@@ -62,6 +62,28 @@ namespace HexGameEngine.Items
         [ShowIf("ShowWeaponField")]
         public InjuryType[] injuryTypesCaused;
 
+        [BoxGroup("Weapon Info")]
+        [LabelWidth(125)]
+        [ShowIf("ShowWeaponDamageFields")]
+        [Header("Weapon Damage Settings")]
+        [Range(0.1f, 3f)]
+        [Tooltip("How much damage the weapon deals to health. A value of 1 means 100% damage to health, so no modification")]
+        public float healthDamage = 1f;
+
+        [BoxGroup("Weapon Info")]
+        [LabelWidth(125)]
+        [ShowIf("ShowWeaponDamageFields")]
+        [Range(0.1f, 3f)]
+        [Tooltip("How much damage the weapon deals to armour. A value of 1 means 100% damage to armour, so no modification")]
+        public float armourDamage = 1f;
+
+        [BoxGroup("Weapon Info")]
+        [LabelWidth(125)]
+        [ShowIf("ShowWeaponDamageFields")]
+        [Range(0f, 1f)]
+        [Tooltip("How much of the weapons damage ignore armour")]
+        public float armourPenetration = 0.25f;
+
         [BoxGroup("Armour Info", true, true)]
         [LabelWidth(100)]
         [Range(0, 100)]
@@ -87,6 +109,14 @@ namespace HexGameEngine.Items
         public bool ShowWeaponField()
         {
             return itemType == ItemType.Weapon;
+        }
+        public bool ShowWeaponDamageFields()
+        {
+            return itemType == ItemType.Weapon &&
+                weaponClass != WeaponClass.ThrowingNet &&
+                weaponClass != WeaponClass.Shield &&
+                weaponClass != WeaponClass.None &&
+                weaponClass != WeaponClass.Holdable;
         }
         public bool ShowArmourFields()
         {

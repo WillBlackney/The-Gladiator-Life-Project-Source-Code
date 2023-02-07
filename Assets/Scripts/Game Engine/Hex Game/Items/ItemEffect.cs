@@ -40,6 +40,23 @@ namespace HexGameEngine.Items
         [LabelWidth(200)]
         [ShowIf("ShowOnHitEffectFields")]
         public PerkPairingData perkApplied;
+
+        // Innate effects
+        [Header("Innate Weapon Effects")]
+        [ShowIf("ShowInnateEffectType")]
+        public InnateItemEffectType innateItemEffectType;
+
+        [ShowIf("ShowInnateAccuracyMod")]
+        [Range(-100, 100)]
+        public int innateAccuracyMod;
+
+        [ShowIf("ShowInnateAccuracyAgainstAdjacentMod")]
+        [Range(-100, 100)]
+        public int innateAccuracyAgainstAdjacentMod;
+
+        [ShowIf("ShowInnatePerkGainedOnUse")]
+        public ActivePerk innatePerkGainedOnUse;
+
         #endregion
 
         #region Constructors
@@ -71,6 +88,22 @@ namespace HexGameEngine.Items
         {
             return effectType == ItemEffectType.GainPerkTurnStart;
         }
+        public bool ShowInnateEffectType()
+        {
+            return effectType == ItemEffectType.InnateWeaponEffect;
+        }
+        public bool ShowInnateAccuracyMod()
+        {
+            return effectType == ItemEffectType.InnateWeaponEffect && innateItemEffectType == InnateItemEffectType.InnateAccuracyModifier;
+        }
+        public bool ShowInnateAccuracyAgainstAdjacentMod()
+        {
+            return effectType == ItemEffectType.InnateWeaponEffect && innateItemEffectType == InnateItemEffectType.InnateAccuracyAgainstAdjacentModifier;
+        }
+        public bool ShowInnatePerkGainedOnUse()
+        {
+            return effectType == ItemEffectType.InnateWeaponEffect && innateItemEffectType == InnateItemEffectType.InnatePerkGainedOnUse;
+        }
         #endregion
     }
 
@@ -82,7 +115,16 @@ namespace HexGameEngine.Items
         GainPerkCombatStart = 4,
         GainPerkTurnStart = 5,
         OnHitEffect = 3,
+        InnateWeaponEffect = 6,
     }
+
+    public enum InnateItemEffectType
+    {
+        None = 0,
+        InnateAccuracyModifier = 1,
+        InnateAccuracyAgainstAdjacentModifier = 2,
+        InnatePerkGainedOnUse = 3,
+}
 
     
 }

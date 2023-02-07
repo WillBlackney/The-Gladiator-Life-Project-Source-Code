@@ -416,7 +416,9 @@ namespace HexGameEngine.Abilities
             if (abilityEffect.effectType == AbilityEffectType.DamageTarget)
             {
                 triggerEffectEndEvents = false;
-                Items.ItemData weaponUsed = caster.itemSet.mainHandItem;
+
+                // to do: detect if using main hand or offhand.
+                ItemData weaponUsed = caster.itemSet.mainHandItem;
 
                 HitRoll hitResult = CombatController.Instance.RollForHit(caster, target, ability);
                 bool didCrit = CombatController.Instance.RollForCrit(caster, target, ability, abilityEffect);
@@ -448,7 +450,7 @@ namespace HexGameEngine.Abilities
                     LevelNode lastChainHex = target.currentTile;
 
                     // Deal damage
-                    CombatController.Instance.HandleDamage(caster, target, damageResult, ability, abilityEffect, false, target.GetLastStackEventParent());
+                    CombatController.Instance.HandleDamage(caster, target, damageResult, ability, abilityEffect, weaponUsed, false, target.GetLastStackEventParent());
 
                     // On ability effect completed VFX
                     if (CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
@@ -676,7 +678,9 @@ namespace HexGameEngine.Abilities
                 // Calcuate and deal damage
                 foreach (HexCharacterModel character in charactersHit)
                 {
-                    Items.ItemData weaponUsed = caster.itemSet.mainHandItem;
+                    // TO DO: determine which weapon was used: main hand or offhand??
+                    ItemData weaponUsed = caster.itemSet.mainHandItem;
+
                     bool didCrit = CombatController.Instance.RollForCrit(caster, character, ability, abilityEffect);
                     DamageResult dResult = null;
                     dResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(caster, character, ability, abilityEffect, didCrit);
@@ -694,7 +698,7 @@ namespace HexGameEngine.Abilities
                         HexCharacterController.Instance.ModifyArmour(target, -abilityEffect.bonusArmourDamage);
 
                     // Deal damage
-                    CombatController.Instance.HandleDamage(caster, character, dResult, ability, abilityEffect, false, character.GetLastStackEventParent());
+                    CombatController.Instance.HandleDamage(caster, character, dResult, ability, abilityEffect, weaponUsed, false, character.GetLastStackEventParent());
 
                     // On ability effect completed VFX
                     if (CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
