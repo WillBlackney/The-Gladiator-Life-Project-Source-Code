@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Slash
   includeInGame: 1
-  baseAbilityDescription: Deal 100% weapon damage. This has a +10 Accuracy.
+  baseAbilityDescription: Deal 100% weapon damage.
   abilitySprite: {fileID: 21300000, guid: 32e56c9c60dff28419898da655528c3b, type: 3}
   energyCost: 4
   fatigueCost: 5
@@ -35,7 +35,7 @@ MonoBehaviour:
   abilitySubRequirements: []
   baseRange: 1
   gainRangeBonusFromVision: 0
-  hitChanceModifier: 10
+  hitChanceModifier: 0
   hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
@@ -98,9 +98,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -131,19 +134,5 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'damage to an enemy. This attack has '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '+10 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Accuracy
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: .
-  keyWords:
-  - kewWordType: 11
-    passiveType: 0
+    phrase: damage to an enemy.
+  keyWords: []

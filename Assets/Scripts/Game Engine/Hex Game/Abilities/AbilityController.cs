@@ -355,9 +355,10 @@ namespace HexGameEngine.Abilities
             }
 
             // Check for crossbow usage: apply reload perk
+            /*
             if((ability.weaponRequirement == WeaponRequirement.Crossbow || ability.weaponRequirement == WeaponRequirement.BowOrCrossbow) &&
                 character.itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow)
-                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Reload, 1);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Reload, 1);*/
 
             // Tie off and block any stack visual events on all characters
             foreach(HexCharacterModel c in HexCharacterController.Instance.AllCharacters)
@@ -417,13 +418,24 @@ namespace HexGameEngine.Abilities
             {
                 triggerEffectEndEvents = false;
 
-                // to do: detect if using main hand or offhand.
-                ItemData weaponUsed = caster.itemSet.mainHandItem;
+                // Determine weapon used
+                ItemData weaponUsed = null;
+                if (abilityEffect.weaponUsed == WeaponSlot.Offhand &&
+                    caster.itemSet.offHandItem != null)/* &&
+                    ((caster.itemSet.offHandItem.IsMeleeWeapon && ability.abilityType.Contains(AbilityType.MeleeAttack)) ||
+                    (caster.itemSet.offHandItem.IsRangedWeapon && ability.abilityType.Contains(AbilityType.RangedAttack))))*/
+                    weaponUsed = caster.itemSet.offHandItem;
 
-                HitRoll hitResult = CombatController.Instance.RollForHit(caster, target, ability);
+                else if (abilityEffect.weaponUsed == WeaponSlot.MainHand &&
+                    caster.itemSet.mainHandItem != null)/* &&
+                    ((caster.itemSet.mainHandItem.IsMeleeWeapon && ability.abilityType.Contains(AbilityType.MeleeAttack)) ||
+                    (caster.itemSet.mainHandItem.IsRangedWeapon && ability.abilityType.Contains(AbilityType.RangedAttack))))*/
+                    weaponUsed = caster.itemSet.mainHandItem;
+
+                Debug.Log(String.Format("Weapon used: {0}", weaponUsed.itemName));
+
+                HitRoll hitResult = CombatController.Instance.RollForHit(caster, target, ability, weaponUsed);
                 bool didCrit = CombatController.Instance.RollForCrit(caster, target, ability, abilityEffect);
-
-                // VisualEventManager.Instance.CreateStackParentVisualEvent(target);
 
                 if (hitResult.Result == HitRollResult.Hit)
                 {
@@ -441,10 +453,6 @@ namespace HexGameEngine.Abilities
                     // Do on hit visual effects for this ability
                     foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                         AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, target.GetLastStackEventParent());
-
-                    // On crit stress check
-                    if (didCrit)
-                        CombatController.Instance.CreateStressCheck(caster, StressEventType.LandedCriticalStrike);
 
                     // Cache hex position, in case target is killed before chain effect triggers
                     LevelNode lastChainHex = target.currentTile;
@@ -464,6 +472,12 @@ namespace HexGameEngine.Abilities
                             }
                         }
                     }
+
+                    // On crit stress check
+                    if (didCrit &&
+                        CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
+                        caster.livingState == LivingState.Alive)
+                        CombatController.Instance.CreateStressCheck(caster, StressEventType.LandedCriticalStrike);
 
                     // Trigger on hit/crit effects
                     if (abilityEffect.chainedEffect == false)
@@ -587,6 +601,20 @@ namespace HexGameEngine.Abilities
             // Damage Aoe
             else if (abilityEffect.effectType == AbilityEffectType.DamageAoe)
             {
+                // Determine weapon used
+                ItemData weaponUsed = null;
+                if (abilityEffect.weaponUsed == WeaponSlot.Offhand &&
+                    caster.itemSet.offHandItem != null) /*&&
+                    ((caster.itemSet.offHandItem.IsMeleeWeapon && ability.abilityType.Contains(AbilityType.MeleeAttack)) ||
+                    (caster.itemSet.offHandItem.IsRangedWeapon && ability.abilityType.Contains(AbilityType.RangedAttack))))*/
+                    weaponUsed = caster.itemSet.offHandItem;
+
+                else if (abilityEffect.weaponUsed == WeaponSlot.MainHand &&
+                    caster.itemSet.mainHandItem != null) /*&&
+                    ((caster.itemSet.mainHandItem.IsMeleeWeapon && ability.abilityType.Contains(AbilityType.MeleeAttack)) ||
+                    (caster.itemSet.mainHandItem.IsRangedWeapon && ability.abilityType.Contains(AbilityType.RangedAttack))))*/
+                    weaponUsed = caster.itemSet.mainHandItem;
+
                 triggerEffectEndEvents = false;
                 List<LevelNode> tilesEffected = new List<LevelNode>();
                 List<HexCharacterModel> charactersEffected = new List<HexCharacterModel>();
@@ -632,7 +660,7 @@ namespace HexGameEngine.Abilities
                     VisualEventManager.Instance.CreateStackParentVisualEvent(character);
 
                     // Roll for hit
-                    HitRoll hitRoll = CombatController.Instance.RollForHit(caster, character, ability);
+                    HitRoll hitRoll = CombatController.Instance.RollForHit(caster, character, ability, weaponUsed);
 
                     if (hitRoll.Result == HitRollResult.Hit)
                     {
@@ -678,20 +706,12 @@ namespace HexGameEngine.Abilities
                 // Calcuate and deal damage
                 foreach (HexCharacterModel character in charactersHit)
                 {
-                    // TO DO: determine which weapon was used: main hand or offhand??
-                    ItemData weaponUsed = caster.itemSet.mainHandItem;
-
                     bool didCrit = CombatController.Instance.RollForCrit(caster, character, ability, abilityEffect);
                     DamageResult dResult = null;
                     dResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(caster, character, ability, abilityEffect, didCrit);
-
                     dResult.didCrit = didCrit;
 
-                    // On crit stress check
-                    if (didCrit)
-                    {
-                        CombatController.Instance.CreateStressCheck(caster, StressEventType.LandedCriticalStrike);
-                    }
+                                      
 
                     // Resolve bonus armour damage
                     if (abilityEffect.bonusArmourDamage > 0)
@@ -712,6 +732,12 @@ namespace HexGameEngine.Abilities
                             }
                         }
                     }
+
+                    // On crit stress check
+                    if (didCrit &&
+                        CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
+                        caster.livingState == LivingState.Alive)
+                        CombatController.Instance.CreateStressCheck(caster, StressEventType.LandedCriticalStrike);
 
                     // Trigger on hit/crit effects
                     if (didCrit && ability.onCritEffects.Count > 0)
@@ -1800,12 +1826,11 @@ namespace HexGameEngine.Abilities
             }
 
             // check unloaded crossbow
-            if((ability.weaponRequirement == WeaponRequirement.Crossbow || ability.weaponRequirement == WeaponRequirement.BowOrCrossbow) &&
-                character.itemSet.mainHandItem != null &&
-                character.itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow && 
+            if(ability.abilityType.Contains(AbilityType.WeaponAttack) && 
+                ability.abilityType.Contains(AbilityType.RangedAttack) &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Reload))
             {
-                Debug.Log("IsAbilityUseable() returning false: character is trying to fire an unloaded crossbow");
+                Debug.Log("IsAbilityUseable() returning false: character trying to use a ranged weapon attack with 'Reload' status...");
                 bRet = false;
             }           
 
@@ -1965,6 +1990,12 @@ namespace HexGameEngine.Abilities
                     continue;
                 }
 
+                else if (ar.type == AbilityRequirementType.CasterHasPerk &&
+                  PerkController.Instance.DoesCharacterHavePerk(caster.pManager, ar.perk))
+                {
+                    continue;
+                }
+
                 else if (ar.type == AbilityRequirementType.TargetDoesNotHavePerk &&
                  !PerkController.Instance.DoesCharacterHavePerk(target.pManager, ar.perk))
                 {
@@ -2009,7 +2040,7 @@ namespace HexGameEngine.Abilities
 
         // Hit Chance Popup Logic
         #region
-        public void ShowHitChancePopup(HexCharacterModel caster, HexCharacterModel target, AbilityData ability)
+        public void ShowHitChancePopup(HexCharacterModel caster, HexCharacterModel target, AbilityData ability, ItemData weaponUsed = null)
         {
             if (target != null &&
                 target.allegiance != caster.allegiance &&
@@ -2021,7 +2052,7 @@ namespace HexGameEngine.Abilities
                 hitChanceCg.alpha = 0;
                 hitChanceVisualParent.SetActive(true);
                 hitChanceCg.DOFade(1, 0.5f);
-                HitChanceDataSet hitChanceData = CombatController.Instance.GetHitChance(caster, target, ability);
+                HitChanceDataSet hitChanceData = CombatController.Instance.GetHitChance(caster, target, ability, weaponUsed);
                 hitChanceData.details = hitChanceData.details.OrderByDescending(x => x.accuracyMod).ToList();
                 BuildHitChancePopup(hitChanceData);
                 foreach(RectTransform t in hitChanceLayouts)

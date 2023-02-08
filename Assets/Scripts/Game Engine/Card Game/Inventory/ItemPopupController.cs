@@ -10,6 +10,7 @@ using HexGameEngine.UI;
 using HexGameEngine.Perks;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.RewardSystems;
+using System;
 
 namespace HexGameEngine.Items
 {
@@ -249,7 +250,7 @@ namespace HexGameEngine.Items
                 ModalDottedRow row = effectRows[iBoost - 1];
                 row.Build(TextLogic.ReturnColoredText("-" + item.fatiguePenalty.ToString(), TextLogic.blueNumber) + " Maximum Fatigue", DotStyle.Red);
             }
-
+            /*
             if (item.weaponClass == WeaponClass.Crossbow)
             {
                 iBoost += 1;
@@ -257,7 +258,7 @@ namespace HexGameEngine.Items
                 ModalDottedRow row = effectRows[iBoost - 1];
                 row.Build("Can only be fired once per turn.", DotStyle.Red);
             }
-
+            */
             if (item.itemEffects.Count > 0)
             {
                 effectsParent.SetActive(true);
@@ -288,9 +289,16 @@ namespace HexGameEngine.Items
 
                     else if (effect.effectType == ItemEffectType.OnHitEffect)
                     {
+                        string zero = TextLogic.ReturnColoredText(effect.perkApplied.passiveStacks.ToString(), TextLogic.blueNumber);
+                        string one = TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkApplied.perkTag.ToString()), TextLogic.neutralYellow);
+                        string two = effect.effectChance.ToString();
+
+                        row.Build(String.Format("On hit: Apply {0} {1} ({2}% chance).", zero, one, two), DotStyle.Green);
+
+                        /*
                         row.Build("On hit: Apply " + TextLogic.ReturnColoredText(effect.perkApplied.passiveStacks.ToString(), TextLogic.blueNumber) + " " +
                             TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkApplied.perkTag.ToString()), TextLogic.neutralYellow) + " (" +
-                            effect.effectChance.ToString() + "% chance).", DotStyle.Green);
+                            effect.effectChance.ToString() + "% chance).", DotStyle.Green);*/
                     }
                     else if (item.itemEffects[i].effectType == ItemEffectType.GainPerk)
                     {
@@ -315,15 +323,48 @@ namespace HexGameEngine.Items
                     {
                         if(item.itemEffects[i].innateItemEffectType == InnateItemEffectType.InnateAccuracyModifier)
                         {
-
+                            // +X Hit Chance with attacks using this weapon.
+                            dotStyle = DotStyle.Green;
+                            string zero = "+";
+                            string one = TextLogic.ReturnColoredText(effect.innateAccuracyMod.ToString(), TextLogic.blueNumber);
+                            string two = TextLogic.ReturnColoredText("Accuracy", TextLogic.neutralYellow);
+                            
+                            if(effect.innateAccuracyMod < 0)
+                            {
+                                dotStyle = DotStyle.Red;
+                                zero = "";
+                            }
+                            row.Build(String.Format("{0}{1} {2} with attacks using this weapon.", zero, one, two), dotStyle);
                         }
                         else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.InnateAccuracyAgainstAdjacentModifier)
                         {
+                            // +X or -X Hit Chance with attacks against adjacent targets using this weapon.
+                            dotStyle = DotStyle.Green;
+                            string zero = "+";
+                            string one = TextLogic.ReturnColoredText(effect.innateAccuracyAgainstAdjacentMod.ToString(), TextLogic.blueNumber);
+                            string two = TextLogic.ReturnColoredText("Accuracy", TextLogic.neutralYellow);
 
+                            if (effect.innateAccuracyAgainstAdjacentMod < 0)
+                            {
+                                dotStyle = DotStyle.Red;
+                                zero = "";
+                            }
+                            row.Build(String.Format("{0}{1} {2} with attacks using this weapon against adjacent targets.", zero, one, two), dotStyle);
                         }
                         else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.InnatePerkGainedOnUse)
                         {
+                            // whenever this weapon is used, apply X Y to self.
+                            dotStyle = DotStyle.Green;
+                            string zero = TextLogic.ReturnColoredText(effect.innatePerkGainedOnUse.stacks.ToString(), TextLogic.blueNumber);
+                            string one = TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.innatePerkGainedOnUse.perkTag.ToString()), TextLogic.neutralYellow);
 
+                            /*
+                            if (effect.innateAccuracyAgainstAdjacentMod < 0)
+                            {
+                                dotStyle = DotStyle.Red;
+                                zero = "";
+                            }*/
+                            row.Build(String.Format("Whenever you attack with this weapon, apply {0} {1} to self.", zero, one), DotStyle.Red);
                         }
                     }
                 }

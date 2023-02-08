@@ -35,4 +35,39 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 71d939ec6c23d2d4bb0072225d70a748, type: 2}
   - {fileID: 11400000, guid: 1713d32b778f4234395baaab4621feb1, type: 2}
   itemEffectSets:
-  - possibleEffects: []
+  - possibleEffects:
+    - effectType: 6
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+      innateItemEffectType: 1
+      innateAccuracyMod: 10
+      innateAccuracyAgainstAdjacentMod: 0
+      innatePerkGainedOnUse:
+        perkTag: 0
+        stacks: 0
+  - possibleEffects:
+    - effectType: 6
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+      innateItemEffectType: 2
+      innateAccuracyMod: 0
+      innateAccuracyAgainstAdjacentMod: -10
+      innatePerkGainedOnUse:
+        perkTag: 0
+        stacks: 0

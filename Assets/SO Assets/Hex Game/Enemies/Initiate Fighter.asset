@@ -154,7 +154,7 @@ MonoBehaviour:
     perks: []
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
-    offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
+    offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
@@ -171,4 +171,3 @@ MonoBehaviour:
   - Left_Hand_Simple_Sword
   - Barbarian_Chest_Wear
   - Red_Face_Mask_Head_Wear
-  - Right_Hand_Simple_Shield

@@ -252,7 +252,7 @@ namespace HexGameEngine.Abilities
         }
         public bool ShowPerk()
         {
-            return type == AbilityRequirementType.TargetHasPerk || type == AbilityRequirementType.TargetDoesNotHavePerk;
+            return type == AbilityRequirementType.TargetHasPerk || type == AbilityRequirementType.TargetDoesNotHavePerk || type == AbilityRequirementType.CasterHasPerk;
         }
     }
 }

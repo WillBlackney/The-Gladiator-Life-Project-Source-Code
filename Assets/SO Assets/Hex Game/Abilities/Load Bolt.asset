@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c332a1f403e665468640b734668f781, type: 3}
+  m_Name: Load Bolt
+  m_EditorClassIdentifier: 
+  abilityName: Load Bolt
+  includeInGame: 1
+  baseAbilityDescription: Remove Reload from self.
+  abilitySprite: {fileID: 21300000, guid: f76844ff2fc718e4394c2b74ecd45537, type: 3}
+  energyCost: 3
+  fatigueCost: 20
+  baseCooldown: 0
+  abilityType: 01000000
+  doesNotBreakStealth: 0
+  weaponRequirement: 8
+  derivedFromWeapon: 1
+  derivedFromItemLoadout: 0
+  weaponAbilityType: 2
+  weaponClass: 14
+  targetRequirement: 0
+  secondaryTargetRequirement: 0
+  rangeFromTarget: 0
+  talentRequirementData:
+    talentSchool: 0
+    level: 1
+  abilitySubRequirements:
+  - type: 9
+    healthRequired: 0
+    race: 0
+    perk: 172
+  baseRange: 0
+  gainRangeBonusFromVision: 0
+  hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
+  accuracyPenaltyFromMelee: 0
+  abilityEffects:
+  - effectType: 1
+    stressEventData:
+      stressAmountMin: 0
+      stressAmountMax: 0
+      successChance: 0
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish: []
+    aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
+    weaponUsed: 0
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 172
+      passiveStacks: -1
+    perkApplicationChance: 100
+    knockBackDistance: 0
+  onHitEffects: []
+  onCritEffects: []
+  onPerkAppliedSuccessEffects: []
+  onCollisionEffects: []
+  chainLoops: 0
+  chainedEffects: []
+  dynamicDescription:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Remove '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Reload '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: from self.
+  keyWords:
+  - kewWordType: 1
+    passiveType: 172

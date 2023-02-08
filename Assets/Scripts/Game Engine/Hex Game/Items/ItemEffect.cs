@@ -44,17 +44,21 @@ namespace HexGameEngine.Items
         // Innate effects
         [Header("Innate Weapon Effects")]
         [ShowIf("ShowInnateEffectType")]
+        [LabelWidth(200)]
         public InnateItemEffectType innateItemEffectType;
 
         [ShowIf("ShowInnateAccuracyMod")]
+        [LabelWidth(200)]
         [Range(-100, 100)]
         public int innateAccuracyMod;
 
         [ShowIf("ShowInnateAccuracyAgainstAdjacentMod")]
+        [LabelWidth(200)]
         [Range(-100, 100)]
         public int innateAccuracyAgainstAdjacentMod;
 
         [ShowIf("ShowInnatePerkGainedOnUse")]
+        [LabelWidth(200)]
         public ActivePerk innatePerkGainedOnUse;
 
         #endregion

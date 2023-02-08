@@ -99,17 +99,6 @@ namespace HexGameEngine.Combat
             int lowerDamageFinal = baseDamage;
             int upperDamageFinal = baseDamage;
 
-            float healthDamageMod = 1f;
-            float armourDamageMod = 1f;
-            float penetrationMod = 0.25f;
-
-            if(weaponUsed != null)
-            {
-                healthDamageMod = weaponUsed.healthDamage;
-                armourDamageMod = weaponUsed.armourDamage;
-                penetrationMod = weaponUsed.armourPenetration;
-            }
-
             if (effect != null)
             {
                 lowerDamageFinal = effect.minBaseDamage;
@@ -410,19 +399,17 @@ namespace HexGameEngine.Combat
             else if (stressAmount >= 20) return StressState.Shattered;
             else return StressState.None;
         }
-        public int GetStatMultiplierFromStressState(StressState stressState, HexCharacterData character)
-        {
-            int multiplier = 0;
-            if (stressState == StressState.Confident && !CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Slave)) multiplier = 5;
-            else if (stressState == StressState.Nervous) multiplier = -5;
-            else if (stressState == StressState.Wavering) multiplier = -15;
-            else if (stressState == StressState.Panicking) multiplier = -25;
-            else if (stressState == StressState.Shattered) multiplier = -35;
-            return multiplier;
-        }
         public int GetStatMultiplierFromStressState(StressState stressState, HexCharacterModel character)
         {
             int multiplier = 0;
+            // Enemies dont interact with stress system
+            if (character.controller == Controller.AI)
+            {
+                Debug.Log(System.String.Format("GetStatMultiplierFromStressState() character {0} does not benefit/suffer from stress state, returning 0...", character.myName));
+                return 0;
+            }
+            
+
             if (stressState == StressState.Confident && !CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Slave)) multiplier = 5;
             else if (stressState == StressState.Nervous) multiplier = -5;
             else if (stressState == StressState.Wavering) multiplier = -15;
@@ -569,7 +556,7 @@ namespace HexGameEngine.Combat
 
         // Rolls + Critical Logic
         #region
-        public HitChanceDataSet GetHitChance(HexCharacterModel attacker, HexCharacterModel target, AbilityData ability = null)
+        public HitChanceDataSet GetHitChance(HexCharacterModel attacker, HexCharacterModel target, AbilityData ability = null, ItemData weaponUsed = null)
         {
             HitChanceDataSet ret = new HitChanceDataSet();
 
@@ -581,21 +568,23 @@ namespace HexGameEngine.Combat
                 return ret;
             }
 
+            // Calculate stress state mod
+            StressState stressState = GetStressStateFromStressAmount(attacker.currentStress);
+            int stressMod = GetStatMultiplierFromStressState(stressState, attacker);
+
             // Base hit chance
             int baseHitMod = GlobalSettings.Instance.BaseHitChance;
             if (baseHitMod != 0) ret.details.Add(new HitChanceDetailData("Base Hit Chance", baseHitMod));
 
-            // Target Dodge
-            int dodgeMod = -StatCalculator.GetTotalDodge(target);
-            if (dodgeMod != 0) ret.details.Add(new HitChanceDetailData("Target Dodge", dodgeMod));
-
             // Attacker Accuracy
-            int accuracyMod = StatCalculator.GetTotalAccuracy(attacker); //+ GlobalSettings.Instance.BaseHitChance;
+            int accuracyMod = StatCalculator.GetTotalAccuracy(attacker) - stressMod;
             if (accuracyMod != 0) ret.details.Add(new HitChanceDetailData("Attacker Accuracy", accuracyMod));
 
+            // Target Dodge
+            int dodgeMod = -StatCalculator.GetTotalDodge(target);
+            if (dodgeMod != 0) ret.details.Add(new HitChanceDetailData("Target Dodge", dodgeMod));            
+
             // Stress State            
-            StressState stressState = GetStressStateFromStressAmount(attacker.currentStress);
-            int stressMod = GetStatMultiplierFromStressState(stressState, attacker);
             if(stressMod != 0) ret.details.Add(new HitChanceDetailData(stressState.ToString(), stressMod));
 
             // Melee modifiers
@@ -639,14 +628,33 @@ namespace HexGameEngine.Combat
             if (ability != null)
             {
                 int innateBonus = ability.hitChanceModifier;
-                if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Ability Innate Bonus", innateBonus));
+                string bOrP = innateBonus > 0 ? "Bonus" : "Penalty";
+                if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Ability " + bOrP, innateBonus));
             }
 
-            // Check ability adjacent bonus/penalty
+            // Check ability + weapon adjacent bonus/penalty
             if (ability != null && attacker.currentTile.Distance(target.currentTile) == 1)
             {
                 int innateBonus = ability.hitChanceModifierAgainstAdjacent;
-                if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Adjacent Target", innateBonus));
+
+                // Check weapon innate accuracy bonus/penalty against adjacent
+                if (weaponUsed != null && ability.abilityType.Contains(AbilityType.WeaponAttack))
+                {
+                    Debug.Log("Innate weapon accuracy against adjacent!");
+                    innateBonus += ItemController.Instance.GetInnateModifierFromWeapon(InnateItemEffectType.InnateAccuracyAgainstAdjacentModifier, weaponUsed);
+                }
+
+                string bOrP = innateBonus > 0 ? "Bonus" : "Penalty";
+                if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Adjacent Target " + bOrP, innateBonus));
+            }
+
+            // Check weapon innate accuracy bonus/penalty
+            if (weaponUsed != null && ability != null && ability.abilityType.Contains(AbilityType.WeaponAttack))
+            {
+                Debug.Log("Innate weapon accuracy!");
+                int innateBonus = ItemController.Instance.GetInnateModifierFromWeapon(InnateItemEffectType.InnateAccuracyModifier, weaponUsed);
+                string bOrP = innateBonus > 0 ? "Bonus" : "Penalty";
+                if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Weapon " + bOrP, innateBonus));
             }
 
             // Warfare talent bonus
@@ -735,11 +743,11 @@ namespace HexGameEngine.Combat
 
             return ret;
         }
-        public HitRoll RollForHit(HexCharacterModel attacker, HexCharacterModel target, AbilityData ability = null)
+        public HitRoll RollForHit(HexCharacterModel attacker, HexCharacterModel target, AbilityData ability = null, ItemData weaponUsed = null)
         {
             HitRollResult result;
             int hitRoll = RandomGenerator.NumberBetween(1, 100);
-            var hitData = GetHitChance(attacker, target, ability);
+            var hitData = GetHitChance(attacker, target, ability, weaponUsed);
 
             if (hitRoll <= hitData.FinalHitChance || hitData.guaranteedHit)
                 result = HitRollResult.Hit;
@@ -1142,18 +1150,18 @@ namespace HexGameEngine.Combat
             }
 
 
-            // Item 'on hit' effects
+            // Item 'on hit' target effects
             if (attacker != null &&
                 attacker.currentHealth > 0 &&
                 attacker.livingState == LivingState.Alive &&
                 target.currentHealth > 0 &&
                 target.livingState == LivingState.Alive &&
                 ability != null &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
                 (ability.weaponRequirement == WeaponRequirement.MeleeWeapon || ability.weaponRequirement == WeaponRequirement.RangedWeapon || ability.weaponRequirement == WeaponRequirement.Bow || ability.weaponRequirement == WeaponRequirement.Crossbow || ability.weaponRequirement == WeaponRequirement.BowOrCrossbow) &&
-                attacker.itemSet.mainHandItem != null)
+                weaponUsed != null)
             {
-                ItemData itemUsed = attacker.itemSet.mainHandItem;
-                foreach(ItemEffect ie in itemUsed.itemEffects)
+                foreach(ItemEffect ie in weaponUsed.itemEffects)
                 {
                     if(ie.effectType == ItemEffectType.OnHitEffect)
                     {
@@ -1166,6 +1174,22 @@ namespace HexGameEngine.Combat
                     }
                 }
             }
+
+            // Item 'on use' apply perk to self effects
+            if (attacker != null &&
+                attacker.currentHealth > 0 &&
+                attacker.livingState == LivingState.Alive &&
+                ability != null &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                weaponUsed != null)
+            {
+                foreach (ActivePerk perk in ItemController.Instance.GetInnateOnUseActivePerksFromItem(weaponUsed))
+                {
+                    Debug.Log("Should apply perk on innate weapon usage");
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(attacker.pManager, perk.perkTag, perk.stacks, true, 0.25f, attacker.pManager);
+                }
+            }
+
             // On health lost events
             if (totalHealthLost > 0 && target.currentHealth > 0 && target.healthLostThisTurn == 0)
             {

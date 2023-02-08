@@ -227,10 +227,11 @@ namespace HexGameEngine.Items
                     {
                         foreach (ItemEffect ie2 in ret)
                         {
-                            if (ie2.attributeModified != ie1.attributeModified)
-                            {
+                            if(ie2.effectType == ItemEffectType.ModifyAttribute &&
+                                ie2.attributeModified == ie1.attributeModified) { }
+                            else
                                 validEffects.Add(ie1);
-                            }
+                            
                         }
                     }
 
@@ -464,6 +465,28 @@ namespace HexGameEngine.Items
 
             return ret;
         }
+        public int GetInnateModifierFromWeapon(InnateItemEffectType innateEffect, ItemData item)
+        {
+            int ret = 0;
+            if (item == null) return 0;
+
+            for (int i = 0; i < item.itemEffects.Count; i++)
+            {
+                ItemEffect effect = item.itemEffects[i];
+                if (effect.effectType == ItemEffectType.InnateWeaponEffect &&
+                    effect.innateItemEffectType == innateEffect)
+                {
+                    if(innateEffect == InnateItemEffectType.InnateAccuracyModifier)
+                        ret += effect.innateAccuracyMod;
+                    else if (innateEffect == InnateItemEffectType.InnateAccuracyAgainstAdjacentModifier)
+                        ret += effect.innateAccuracyAgainstAdjacentMod;
+                }
+            }
+
+            Debug.Log("GetInnateModifierFromWeapon() returning " + ret.ToString() + " for innate effect type: " + innateEffect.ToString());
+
+            return ret;
+        }
         public int GetTotalStacksOfPerkFromItemSet(Perk perk, ItemSet set)
         {
             if (set == null) return 0;
@@ -528,6 +551,39 @@ namespace HexGameEngine.Items
 
                     if (createNew) perks.Add(new ActivePerk(i.perkGained.perkTag, i.perkGained.stacks));
                     else oldPerk.stacks += i.perkGained.stacks;
+                }
+            }
+
+            return perks;
+        }
+        public List<ActivePerk> GetInnateOnUseActivePerksFromItem(ItemData item)
+        {
+            Debug.Log("ItemController.GetInnateOnUseActivePerksFromItem() called");
+
+            List<ActivePerk> perks = new List<ActivePerk>();
+            if (item == null) return perks;
+
+            foreach (ItemEffect i in item.itemEffects)
+            {
+                if (i.effectType == ItemEffectType.InnateWeaponEffect &&
+                    i.innateItemEffectType == InnateItemEffectType.InnatePerkGainedOnUse)
+                {
+                    perks.Add(new ActivePerk(i.innatePerkGainedOnUse.perkTag, i.innatePerkGainedOnUse.stacks));
+                    /*
+                    ActivePerk oldPerk = null;
+                    bool createNew = true;
+                    foreach (ActivePerk ap in perks)
+                    {
+                        if (ap.perkTag == i.perkGained.perkTag)
+                        {
+                            oldPerk = ap;
+                            createNew = false;
+                            break;
+                        }
+                    }
+
+                    if (createNew) perks.Add(new ActivePerk(i.innatePerkGainedOnUse.perkTag, i.innatePerkGainedOnUse.stacks));
+                    else oldPerk.stacks += i.innatePerkGainedOnUse.stacks;*/
                 }
             }
 

@@ -461,6 +461,7 @@ namespace HexGameEngine
             if (mod < 0) mod = 0;
             dodge = (int)(dodge * mod);
 
+            Debug.Log(System.String.Format("Dodge returned for {0}: {1}", c.myName, dodge.ToString()));
             return dodge;
         }
         public static int GetTotalDodge(HexCharacterData c)

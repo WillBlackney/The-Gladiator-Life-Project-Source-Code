@@ -159,6 +159,11 @@ namespace HexGameEngine.Abilities
 
         [BoxGroup("Damage Settings")]
         [LabelWidth(200)]
+        [ShowIf("ShowWeaponUsed")]
+        public WeaponSlot weaponUsed = WeaponSlot.MainHand;
+
+        [BoxGroup("Damage Settings")]
+        [LabelWidth(200)]
         [ShowIf("ShowGuaranteedHit")]
         public InjuryType[] injuryTypesCaused;
 
@@ -270,7 +275,11 @@ namespace HexGameEngine.Abilities
             }
 
             else return false;
-        }       
+        }
+        public bool ShowWeaponUsed()
+        {
+            return effectType == AbilityEffectType.DamageAoe || effectType == AbilityEffectType.DamageTarget;
+        }
         public bool ShowDamageType()
         {
             return effectType == AbilityEffectType.DamageAoe || effectType == AbilityEffectType.DamageTarget;

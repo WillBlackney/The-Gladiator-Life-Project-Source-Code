@@ -208,6 +208,7 @@ namespace HexGameEngine
         TargetHasShield = 6,
         TargetHasPerk = 7,
         TargetDoesNotHavePerk = 8,
+        CasterHasPerk = 9,
 
     }
     public enum AbilitySelectionPhase
@@ -237,6 +238,7 @@ namespace HexGameEngine
     }
     public enum WeaponSlot
     {
+        None = 2,
         MainHand = 0,
         Offhand = 1,
     }
