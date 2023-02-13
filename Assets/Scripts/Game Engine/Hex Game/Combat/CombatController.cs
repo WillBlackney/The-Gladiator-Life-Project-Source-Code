@@ -259,6 +259,14 @@ namespace HexGameEngine.Combat
                         damageModPercentageAdditive += dMod.bonusDamageModifier * perkStacks;
                         Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding 'ExtraDamageIfTargetHasSpecificPerk' modifier = " + damageModPercentageAdditive.ToString());
                     }
+
+                    // Caster perks added to damage
+                    if (dMod.type == DamageEffectModifierType.ExtraCriticalDamage && attacker != null && didCrit == true)
+                    {
+                        damageModPercentageAdditive += dMod.extraCriticalDamage;
+                        Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding 'ExtraCriticalDamage' modifier = " + damageModPercentageAdditive.ToString());
+
+                    }
                 }
             }
 

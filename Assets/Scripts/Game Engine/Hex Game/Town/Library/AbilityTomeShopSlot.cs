@@ -75,7 +75,7 @@ namespace HexGameEngine.TownFeatures
         {
             gameObject.SetActive(true);
             myData = data;
-            abilityNameText.text = data.ability.abilityName;
+            abilityNameText.text = data.ability.displayedName;
             abilityBookImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(data.ability.talentRequirementData.talentSchool);
 
             // Color cost text red if not enough gold

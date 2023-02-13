@@ -190,7 +190,7 @@ namespace HexGameEngine.UI
             BuildAbilityRangeComponents(data);
             BuildTalentRequirementSection(data);
 
-            nameText.text = data.abilityName;
+            nameText.text = data.displayedName;
             cooldownText.text = data.baseCooldown.ToString();
             fatigueCostText.text = data.fatigueCost.ToString();
 

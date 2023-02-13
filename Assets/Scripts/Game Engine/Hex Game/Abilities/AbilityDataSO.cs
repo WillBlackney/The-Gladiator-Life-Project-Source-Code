@@ -16,6 +16,11 @@ namespace HexGameEngine.Abilities
         [LabelWidth(100)]
         public string abilityName;
 
+        [BoxGroup("General Info")]
+        [GUIColor("Blue")]
+        [LabelWidth(100)]
+        public string displayedName;
+
         [GUIColor("Blue")]
         [BoxGroup("General Info")]
         [LabelWidth(100)]

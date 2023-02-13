@@ -178,6 +178,7 @@ namespace HexGameEngine.Abilities
             AbilityData a = new AbilityData();
 
             a.abilityName = d.abilityName;
+            a.displayedName = d.displayedName;
             a.baseAbilityDescription = d.baseAbilityDescription;
 
             a.abilityType = d.abilityType;
@@ -625,6 +626,34 @@ namespace HexGameEngine.Abilities
                 else if (abilityEffect.aoeType == AoeType.ZoneOfControl) tilesEffected = HexCharacterController.Instance.GetCharacterZoneOfControl(caster);
                 else if (abilityEffect.aoeType == AoeType.AtTarget) tilesEffected = LevelController.Instance.GetAllHexsWithinRange(tileTarget, abilityEffect.aoeSize, true);
                 else if (abilityEffect.aoeType == AoeType.Global) tilesEffected.AddRange(LevelController.Instance.AllLevelNodes.ToList());
+                else if (abilityEffect.aoeType == AoeType.Line)
+                {
+                    LevelNode firstHexHit = null;
+                    if (target != null) firstHexHit = target.currentTile;
+                    else if (tileTarget != null) firstHexHit = tileTarget;
+
+                    HexDirection direction = LevelController.Instance.GetDirectionToTargetHex(caster.currentTile, firstHexHit);
+                    List<LevelNode> hexsOnPath = new List<LevelNode>();
+                    LevelNode previousHex = firstHexHit;
+                    LevelNode nextHex = null;
+                    hexsOnPath.Add(firstHexHit);
+
+                    for (int i = 0; i < abilityEffect.aoeSize; i++)
+                    {
+                        nextHex = LevelController.Instance.GetAdjacentHexByDirection(previousHex, direction);
+                        if (nextHex == null)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            // Tile in direction from current tile is valid to move over
+                            hexsOnPath.Add(nextHex);
+                            previousHex = nextHex;
+                            nextHex = null;
+                        }
+                    }
+                }
 
                 // Remove centre point, if needed
                 if (abilityEffect.includeCentreTile == false)
@@ -947,6 +976,7 @@ namespace HexGameEngine.Abilities
                         // Tile in direction from current tile is valid to move over
                         hexsOnPath.Add(nextHex);
                         previousHex = nextHex;
+                        nextHex = null;
                     }
                 }
 
@@ -956,12 +986,6 @@ namespace HexGameEngine.Abilities
                     if (h.myCharacter != null)
                     {
                         charactersEffected.Add(h.myCharacter);
-                        /*
-                        if ((h.myCharacter.allegiance == caster.allegiance && abilityEffect.effectsAllies) ||
-                            (h.myCharacter.allegiance != caster.allegiance && abilityEffect.effectsEnemies))
-                        {
-                            charactersEffected.Add(h.myCharacter);
-                        }*/
                     }
                 }
                 Debug.Log("Characters effected = " + charactersEffected.Count.ToString());
@@ -1122,6 +1146,7 @@ namespace HexGameEngine.Abilities
                         // Tile in direction from current tile is valid to move over
                         hexsOnPath.Add(nextHex);
                         previousHex = nextHex;
+                        nextHex = null;
                     }
                 }
 
@@ -1289,7 +1314,7 @@ namespace HexGameEngine.Abilities
             HexCharacterController.Instance.ModifyCurrentFatigue(character, GetAbilityFatigueCost(character, ability));
 
             // Check shed perk: remove if ability used was an aspect ability
-            if (ability.abilityName.Contains("Aspect") && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
+            if (ability.abilityType.Contains(AbilityType.Aspect) && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Shed, -1);
 
             // Increment skills used this turn
@@ -1511,7 +1536,7 @@ namespace HexGameEngine.Abilities
             int energyCost = ability.energyCost;
 
             // Check shed perk: aspect ability costs 0
-            if (ability.abilityName.Contains("Aspect") && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
+            if (ability.abilityType.Contains(AbilityType.Aspect) && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
                 return 0;
 
             // Gifted Perk

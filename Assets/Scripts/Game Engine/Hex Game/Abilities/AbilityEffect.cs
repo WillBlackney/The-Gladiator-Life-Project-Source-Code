@@ -332,7 +332,7 @@ namespace HexGameEngine.Abilities
             if ((effectType == AbilityEffectType.ApplyPassiveAoe ||
                effectType == AbilityEffectType.DamageAoe || 
                effectType == AbilityEffectType.StressCheckAoe) &&
-               aoeType == AoeType.AtTarget)
+               (aoeType == AoeType.AtTarget || aoeType == AoeType.Line))
                 return true;
             else return false;
         }
@@ -459,7 +459,9 @@ namespace HexGameEngine.Abilities
         [Range(0, 100)]
         public int bonusCriticalChance;
 
-        // to do: fields for perk and race
+        [ShowIf("ShowBonusCriticalDamage")]
+        [Range(0f, 1f)]
+        public float extraCriticalDamage;
 
 
         // Odin Show Ifs
@@ -495,6 +497,10 @@ namespace HexGameEngine.Abilities
                 return true;
             else return false;
         }
+        public bool ShowBonusCriticalDamage()
+        {
+            return type == DamageEffectModifierType.ExtraCriticalDamage;
+        }
         #endregion
     }
     public enum DamageEffectModifierType
@@ -507,7 +513,8 @@ namespace HexGameEngine.Abilities
         ExtraCriticalChanceIfTargetHasSpecificPerk = 6,
         ExtraDamageIfCasterHasSpecificPerk = 8,
         ExtraDamageIfTargetHasSpecificPerk = 5,       
-        ExtraDamageAgainstRace = 3,     
+        ExtraDamageAgainstRace = 3,   
+        ExtraCriticalDamage = 10,
     }
 }
 

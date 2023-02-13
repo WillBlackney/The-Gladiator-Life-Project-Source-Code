@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Overhead Chop
   m_EditorClassIdentifier: 
   abilityName: Overhead Chop
+  displayedName: Overhead Chop
   includeInGame: 1
   baseAbilityDescription: Deal 125% Weapon damage to target and apply 2 Bleeding.
     On a Critical Strike, apply 3 Bleeding.
   abilitySprite: {fileID: 21300000, guid: 355f873af4715a84ca2dcf3874fbf46c, type: 3}
-  energyCost: 5
-  fatigueCost: 12
+  energyCost: 6
+  fatigueCost: 15
   baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -114,9 +115,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -171,9 +174,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -228,9 +233,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0

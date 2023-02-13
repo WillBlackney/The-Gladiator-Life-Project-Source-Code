@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Chop
   includeInGame: 1
-  baseAbilityDescription: Deal 100% Weapon damage to target and apply 1 Bleeding.
-    On a Critical Strike, apply 2 Bleeding.
+  baseAbilityDescription: Deal 100% Weapon damage to an enemy. Critical Strikes deal
+    an additional 50% damage.
   abilitySprite: {fileID: 21300000, guid: 9844dbd8ecfac7746ba3c54b1887b6f1, type: 3}
   energyCost: 4
-  fatigueCost: 8
+  fatigueCost: 12
   baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -114,9 +114,17 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
-    damageEffectModifiers: []
+    damageEffectModifiers:
+    - type: 10
+      perk: 0
+      targetRace: 0
+      bonusDamageModifier: 0
+      bonusCriticalChance: 0
+      extraCriticalDamage: 0.5
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -171,9 +179,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -228,9 +238,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0

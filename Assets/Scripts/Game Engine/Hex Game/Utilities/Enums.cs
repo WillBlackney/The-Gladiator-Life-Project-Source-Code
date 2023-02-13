@@ -325,6 +325,7 @@ namespace HexGameEngine
         ZoneOfControl = 1,
         Aura = 2,
         Global = 3,
+        Line = 4,
     }
     public enum AbilityEffectType
     {
