@@ -1648,6 +1648,11 @@ namespace HexGameEngine.Abilities
                     rangeReturned += 1;
             }
 
+            if(caster.itemSet.mainHandItem != null && ability.abilityType.Contains(AbilityType.WeaponAttack))
+            {
+                rangeReturned += ItemController.Instance.GetInnateModifierFromWeapon(InnateItemEffectType.BonusMeleeRange, caster.itemSet.mainHandItem);
+            }
+
             if (rangeReturned < 1) rangeReturned = 1;
 
             Debug.Log("Final calculated range of '" + ability.abilityName + "' is " + rangeReturned.ToString());

@@ -23,26 +23,36 @@ namespace HexGameEngine.Items
         [SerializeField] RectTransform[] transformsRebuilt;
         [SerializeField] CanvasGroup mainCg;
 
-        [Header("Row 1 Components")]
+        [Header("Name + Icon Row Components")]
         [SerializeField] TextMeshProUGUI nameText;
         [SerializeField] TextMeshProUGUI descriptionText;
         [SerializeField] Image itemImage;
 
-        [Header("Row 2 Components")]
+        [Header("Type + Rarity Row Components")]
         [SerializeField] TextMeshProUGUI itemTypeText;
         [SerializeField] TextMeshProUGUI rarityText;
 
-        [Header("Row 3 Components")]
+        [Header("Damage Modifier Row Components")]
+        [SerializeField] GameObject damageModParent;
+        [SerializeField] TextMeshProUGUI armourDamageText;
+        [SerializeField] TextMeshProUGUI healthDamageText;
+        [SerializeField] TextMeshProUGUI penetrationText;
+
+        [Header("Granted Ability Row Components")]
         [SerializeField] GameObject abilitiesParent;
         [SerializeField] UiAbilityIconRow[] abilityRows;
 
-        [Header("Row 4 Components")]
+        [Header("Effects Row Components")]
         [SerializeField] GameObject effectsParent;
         [SerializeField] ModalDottedRow[] effectRows;
 
         [Header("Armour Components")]
         [SerializeField] GameObject armourParent;
         [SerializeField] TextMeshProUGUI armourText;
+
+        [Header("Fatigue Penalty Components")]
+        [SerializeField] GameObject fatiguePenaltyParent;
+        [SerializeField] TextMeshProUGUI fatiguePenaltyText;
         #endregion
 
         // Getters + Accessors
@@ -182,14 +192,18 @@ namespace HexGameEngine.Items
             itemTypeText.text = GetItemTypeString(item);
             rarityText.text = item.rarity.ToString();
 
-            // Row 3
-            BuildGrantedAbilitiesSection(item);
+            // Damage mods row
+            BuildDamageModRows(item);
 
             // Row 4
+            BuildGrantedAbilitiesSection(item);
+
+            // Row 5
             BuildGrantedEffectsSection(item);
 
-            // Armour Section
+            // Armour + Fatigue Sections
             BuildArmourSection(item);
+            BuildMaxFatigueSection(item);
         }
         private string GetItemTypeString(ItemData item)
         {
@@ -222,8 +236,20 @@ namespace HexGameEngine.Items
                 for(int i = 0; i < item.grantedAbilities.Count; i++)
                 {
                     abilityRows[i].Build(item.grantedAbilities[i]);
-                }
-               
+                }               
+            }
+        }
+
+        private void BuildDamageModRows(ItemData item)
+        {
+            damageModParent.SetActive(false);
+
+            if(item.IsMeleeWeapon || item.IsRangedWeapon)
+            {
+                damageModParent.SetActive(true);
+                healthDamageText.text = ((int)(item.healthDamage * 100f)).ToString() +"%";
+                armourDamageText.text = ((int)(item.armourDamage * 100f)).ToString() + "%";
+                penetrationText.text = ((int)(item.armourPenetration * 100f)).ToString() + "%";
             }
         }
         private void BuildArmourSection(ItemData item)
@@ -243,6 +269,7 @@ namespace HexGameEngine.Items
                 effectRows[i].gameObject.SetActive(false);
 
             int iBoost = 0;
+            /*
             if(item.fatiguePenalty > 0)
             {
                 iBoost += 1;
@@ -250,6 +277,7 @@ namespace HexGameEngine.Items
                 ModalDottedRow row = effectRows[iBoost - 1];
                 row.Build(TextLogic.ReturnColoredText("-" + item.fatiguePenalty.ToString(), TextLogic.blueNumber) + " Maximum Fatigue", DotStyle.Red);
             }
+            */
             /*
             if (item.weaponClass == WeaponClass.Crossbow)
             {
@@ -368,6 +396,16 @@ namespace HexGameEngine.Items
                         }
                     }
                 }
+            }
+        }
+        private void BuildMaxFatigueSection(ItemData item)
+        {
+            fatiguePenaltyParent.SetActive(false);
+
+            if (item.fatiguePenalty > 0)
+            {
+                fatiguePenaltyParent.SetActive(true);
+                fatiguePenaltyText.text = "-" + item.fatiguePenalty.ToString();
             }
         }
         #endregion

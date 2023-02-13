@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Simple Spear
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 021fbf052345f8d4db3804cf0fc0780c, type: 3}
+  itemSprite: {fileID: 21300000, guid: 2a69444b204abcd4180b8d68198d23c7, type: 3}
   itemName: Simple Spear
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
   rarity: 1
-  fatiguePenalty: 3
-  baseGoldValue: 35
+  fatiguePenalty: 8
+  baseGoldValue: 180
   canSpawnInShop: 1
   canBeCombatContractReward: 0
   includeInLibrary: 1
@@ -26,9 +26,32 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 01000000
+  healthDamage: 1
+  armourDamage: 0.65
+  armourPenetration: 0.25
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:
   - {fileID: 11400000, guid: 815f8fd3e896654408478085b7b333b7, type: 2}
   - {fileID: 11400000, guid: 799283da83fcf904e8ccb07550f7bc3c, type: 2}
-  itemEffectSets: []
+  itemEffectSets:
+  - possibleEffects:
+    - effectType: 6
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+      innateItemEffectType: 1
+      innateAccuracyMod: 20
+      innateAccuracyAgainstAdjacentMod: 0
+      innateWeaponRangeBonus: 0
+      innateBackstabPenetrationBonus: 0
+      innatePerkGainedOnUse:
+        perkTag: 0
+        stacks: 0

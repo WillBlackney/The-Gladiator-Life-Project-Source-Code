@@ -57,6 +57,16 @@ namespace HexGameEngine.Items
         [Range(-100, 100)]
         public int innateAccuracyAgainstAdjacentMod;
 
+        [ShowIf("ShowInnateAccuracyAgainstAdjacentMod")]
+        [LabelWidth(200)]
+        [Range(0, 2)]
+        public int innateWeaponRangeBonus = 0;
+
+        [ShowIf("ShowInnateBackstabPenetrationBonus")]
+        [LabelWidth(200)]
+        [Range(0, 100)]
+        public int innateBackstabPenetrationBonus = 0;
+
         [ShowIf("ShowInnatePerkGainedOnUse")]
         [LabelWidth(200)]
         public ActivePerk innatePerkGainedOnUse;
@@ -108,6 +118,14 @@ namespace HexGameEngine.Items
         {
             return effectType == ItemEffectType.InnateWeaponEffect && innateItemEffectType == InnateItemEffectType.InnatePerkGainedOnUse;
         }
+        public bool ShowInnateBackstabPenetrationBonus()
+        {
+            return effectType == ItemEffectType.InnateWeaponEffect && innateItemEffectType == InnateItemEffectType.PenetrationBonusOnBackstab;
+        }
+        public bool ShowInnateWeaponRangeBonus()
+        {
+            return effectType == ItemEffectType.InnateWeaponEffect && innateItemEffectType == InnateItemEffectType.BonusMeleeRange;
+        }
         #endregion
     }
 
@@ -128,6 +146,8 @@ namespace HexGameEngine.Items
         InnateAccuracyModifier = 1,
         InnateAccuracyAgainstAdjacentModifier = 2,
         InnatePerkGainedOnUse = 3,
+        BonusMeleeRange = 4,
+        PenetrationBonusOnBackstab = 5,
 }
 
     

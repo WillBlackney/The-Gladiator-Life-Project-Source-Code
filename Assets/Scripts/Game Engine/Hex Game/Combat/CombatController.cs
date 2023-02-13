@@ -920,6 +920,12 @@ namespace HexGameEngine.Combat
                     healthDamageMod = weaponUsed.healthDamage;
                     armourDamageMod = weaponUsed.armourDamage;
                     penetrationMod = weaponUsed.armourPenetration;
+
+                    // check innate weapon backstab penetration
+                    if(attacker != null && HexCharacterController.Instance.GetCharacterBackArcTiles(target).Contains(attacker.currentTile))
+                    {
+                        penetrationMod += (float) ItemController.Instance.GetInnateModifierFromWeapon(InnateItemEffectType.PenetrationBonusOnBackstab, weaponUsed) / 100f;
+                    }
                 }
 
                 Debug.Log("XX ExecuteHandleDamage() Damage modifiers: " +

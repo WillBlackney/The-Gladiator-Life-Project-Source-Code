@@ -480,6 +480,10 @@ namespace HexGameEngine.Items
                         ret += effect.innateAccuracyMod;
                     else if (innateEffect == InnateItemEffectType.InnateAccuracyAgainstAdjacentModifier)
                         ret += effect.innateAccuracyAgainstAdjacentMod;
+                    else if (innateEffect == InnateItemEffectType.BonusMeleeRange)
+                        ret += effect.innateWeaponRangeBonus;
+                    else if (innateEffect == InnateItemEffectType.PenetrationBonusOnBackstab)
+                        ret += effect.innateBackstabPenetrationBonus;
                 }
             }
 
