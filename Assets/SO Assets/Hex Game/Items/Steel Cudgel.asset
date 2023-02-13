@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
+  m_Name: Steel Cudgel
+  m_EditorClassIdentifier: 
+  itemSprite: {fileID: 21300000, guid: f9369c6d9ca48e0449fdfb11a4905513, type: 3}
+  itemName: Steel Cudgel
+  itemDescription: 'Place holder item description. Place holder item description. '
+  itemType: 3
+  rarity: 2
+  fatiguePenalty: 16
+  baseGoldValue: 1300
+  canSpawnInShop: 1
+  canBeCombatContractReward: 1
+  includeInLibrary: 1
+  weaponClass: 4
+  handRequirement: 1
+  allowedSlot: 0
+  injuryTypesCaused: 02000000
+  healthDamage: 0.85
+  armourDamage: 1.3
+  armourPenetration: 0.5
+  minArmourRoll: 0
+  maxArmourRoll: 0
+  grantedAbilities: []
+  itemEffectSets: []
