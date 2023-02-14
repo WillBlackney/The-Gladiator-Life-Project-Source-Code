@@ -217,12 +217,11 @@ namespace HexGameEngine.Combat
                 foreach (DamageEffectModifier dMod in effect.damageEffectModifiers)
                 {
                     // Health missing self
-                    if (dMod.type == DamageEffectModifierType.AddHealthMissingOnSelfToDamage && attacker != null)
+                    if (dMod.type == DamageEffectModifierType.AddHealthMissingOnSelfToDamage && attacker != null && target != null)
                     {
                         // Get total max health missing percentage
-                        float healthMissing = StatCalculator.GetTotalMaxHealth(attacker) - attacker.currentHealth;
-
-                        damageModPercentageAdditive += healthMissing * 0.01f;
+                        float missingHealthDamageMod = StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(attacker) * dMod.bonusDamageModifier;
+                        damageModPercentageAdditive += missingHealthDamageMod;
                         Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in health missing self modifier = " + damageModPercentageAdditive.ToString());
                     }
 
@@ -230,9 +229,8 @@ namespace HexGameEngine.Combat
                     if (dMod.type == DamageEffectModifierType.AddHealthMissingOnTargetToDamage && attacker != null && target != null)
                     {
                         // Get total max health missing percentage
-                        float healthMissing = StatCalculator.GetTotalMaxHealth(target) - target.currentHealth;
-
-                        damageModPercentageAdditive += healthMissing * 0.01f;
+                        float missingHealthDamageMod = StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(target) * dMod.bonusDamageModifier;
+                        damageModPercentageAdditive += missingHealthDamageMod;
                         Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in health missing target modifier = " + damageModPercentageAdditive.ToString());
                     }
 

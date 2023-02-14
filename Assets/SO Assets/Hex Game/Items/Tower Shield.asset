@@ -10,35 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
-  m_Name: Longsword
+  m_Name: Tower Shield
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: e3864038a58e7ac4186f43c88dfc5d5c, type: 3}
-  itemName: Longsword
+  itemSprite: {fileID: 21300000, guid: 65eb9b0975e71bc499e4ca2dccc4a1a7, type: 3}
+  itemName: Tower Shield
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
-  rarity: 1
-  fatiguePenalty: 10
-  baseGoldValue: 1300
+  rarity: 3
+  fatiguePenalty: 18
+  baseGoldValue: 450
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
-  weaponClass: 2
-  handRequirement: 1
-  allowedSlot: 0
-  injuryTypesCaused: 01000000
-  healthDamage: 1.1
-  armourDamage: 0.85
+  weaponClass: 9
+  handRequirement: 0
+  allowedSlot: 1
+  injuryTypesCaused: 02000000
+  healthDamage: 1
+  armourDamage: 0.65
   armourPenetration: 0.25
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:
-  - {fileID: 11400000, guid: 4c4448007b8681648b3686a2fdc06e0c, type: 2}
-  - {fileID: 11400000, guid: ae446eb81b7855c4e8884492ebc6655a, type: 2}
+  - {fileID: 11400000, guid: b503794611246a24ab47b71e16c0eeba, type: 2}
   itemEffectSets:
   - possibleEffects:
-    - effectType: 6
-      attributeModified: 0
-      modAmount: 0
+    - effectType: 1
+      attributeModified: 3
+      modAmount: 20
       perkGained:
         perkTag: 0
         stacks: 0
@@ -48,7 +47,7 @@ MonoBehaviour:
         perkTag: 0
         passiveStacks: 1
       innateItemEffectType: 1
-      innateAccuracyMod: 5
+      innateAccuracyMod: 20
       innateAccuracyAgainstAdjacentMod: 0
       innateWeaponRangeBonus: 0
       innateBackstabPenetrationBonus: 0

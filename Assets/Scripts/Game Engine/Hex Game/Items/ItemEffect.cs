@@ -57,7 +57,7 @@ namespace HexGameEngine.Items
         [Range(-100, 100)]
         public int innateAccuracyAgainstAdjacentMod;
 
-        [ShowIf("ShowInnateAccuracyAgainstAdjacentMod")]
+        [ShowIf("ShowInnateWeaponRangeBonus")]
         [LabelWidth(200)]
         [Range(0, 2)]
         public int innateWeaponRangeBonus = 0;

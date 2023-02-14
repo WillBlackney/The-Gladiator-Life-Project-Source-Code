@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
-  m_Name: Longsword
+  m_Name: Heavy Crossbow
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: e3864038a58e7ac4186f43c88dfc5d5c, type: 3}
-  itemName: Longsword
+  itemSprite: {fileID: 21300000, guid: 5deeaf493dfa9ec4f8bc74a021555b75, type: 3}
+  itemName: Heavy Crossbow
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
-  rarity: 1
-  fatiguePenalty: 10
-  baseGoldValue: 1300
+  rarity: 2
+  fatiguePenalty: 8
+  baseGoldValue: 750
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
-  weaponClass: 2
+  weaponClass: 14
   handRequirement: 1
   allowedSlot: 0
   injuryTypesCaused: 01000000
-  healthDamage: 1.1
-  armourDamage: 0.85
-  armourPenetration: 0.25
+  healthDamage: 1
+  armourDamage: 1
+  armourPenetration: 0.55
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:
-  - {fileID: 11400000, guid: 4c4448007b8681648b3686a2fdc06e0c, type: 2}
-  - {fileID: 11400000, guid: ae446eb81b7855c4e8884492ebc6655a, type: 2}
+  - {fileID: 11400000, guid: ca711c13493c7694d9c96dfa2ec71911, type: 2}
+  - {fileID: 11400000, guid: 199fecd32442dba4895de7d6615b9b11, type: 2}
   itemEffectSets:
   - possibleEffects:
     - effectType: 6
@@ -48,10 +48,30 @@ MonoBehaviour:
         perkTag: 0
         passiveStacks: 1
       innateItemEffectType: 1
-      innateAccuracyMod: 5
+      innateAccuracyMod: 15
       innateAccuracyAgainstAdjacentMod: 0
       innateWeaponRangeBonus: 0
       innateBackstabPenetrationBonus: 0
       innatePerkGainedOnUse:
         perkTag: 0
         stacks: 0
+  - possibleEffects:
+    - effectType: 6
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+      innateItemEffectType: 3
+      innateAccuracyMod: 0
+      innateAccuracyAgainstAdjacentMod: 0
+      innateWeaponRangeBonus: 0
+      innateBackstabPenetrationBonus: 0
+      innatePerkGainedOnUse:
+        perkTag: 172
+        stacks: 1

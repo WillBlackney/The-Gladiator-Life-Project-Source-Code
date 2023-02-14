@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: Rampage
   m_EditorClassIdentifier: 
   abilityName: Rampage
+  displayedName: 
   includeInGame: 1
   baseAbilityDescription: Deal 125% weapon damage to an enemy. Damage is increased
-    by 1% for each point of health you have lost.
+    by 1% for each 1% of health you are missing.
   abilitySprite: {fileID: 21300000, guid: 9fdb7221a4198b6468f04eac78cdfb71, type: 3}
   energyCost: 4
-  fatigueCost: 12
-  baseCooldown: 2
+  fatigueCost: 20
+  baseCooldown: 1
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
   weaponRequirement: 1
@@ -114,14 +115,17 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers:
     - type: 2
       perk: 0
       targetRace: 0
-      bonusDamageModifier: 0
+      bonusDamageModifier: 0.01
       bonusCriticalChance: 0
+      extraCriticalDamage: 0
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -161,7 +165,15 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'for each point of '
+    phrase: 'for each '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '1% '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'of '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

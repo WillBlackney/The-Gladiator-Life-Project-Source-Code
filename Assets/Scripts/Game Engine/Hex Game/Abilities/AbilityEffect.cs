@@ -470,7 +470,9 @@ namespace HexGameEngine.Abilities
         {
             if (type == DamageEffectModifierType.ExtraDamageAgainstRace ||
                type == DamageEffectModifierType.ExtraDamageIfTargetHasSpecificPerk ||
-               type == DamageEffectModifierType.ExtraDamageIfCasterHasSpecificPerk)
+               type == DamageEffectModifierType.ExtraDamageIfCasterHasSpecificPerk ||
+               type == DamageEffectModifierType.AddHealthMissingOnTargetToDamage ||
+               type == DamageEffectModifierType.AddHealthMissingOnSelfToDamage)
                 return true;
             else return false;
         }        

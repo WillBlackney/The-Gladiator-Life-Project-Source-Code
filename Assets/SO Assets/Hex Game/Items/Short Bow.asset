@@ -10,27 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
-  m_Name: Throwing Net
+  m_Name: Short Bow
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 6361b558b1419794aaba9dc7e4694951, type: 3}
-  itemName: Throwing Net
+  itemSprite: {fileID: 21300000, guid: 8029d865ed14e6849b80be64fac4eead, type: 3}
+  itemName: Short Bow
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
   rarity: 1
-  fatiguePenalty: 2
-  baseGoldValue: 100
+  fatiguePenalty: 6
+  baseGoldValue: 200
   canSpawnInShop: 1
-  canBeCombatContractReward: 0
+  canBeCombatContractReward: 1
   includeInLibrary: 1
-  weaponClass: 13
-  handRequirement: 0
-  allowedSlot: 1
-  injuryTypesCaused: 
+  weaponClass: 11
+  handRequirement: 1
+  allowedSlot: 0
+  injuryTypesCaused: 01000000
   healthDamage: 1
-  armourDamage: 1
+  armourDamage: 0.75
   armourPenetration: 0.25
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:
-  - {fileID: 11400000, guid: 1e5eb0be09430954a90be55e16c1de88, type: 2}
+  - {fileID: 11400000, guid: 3ca86d39f1f8dec4e99b3d3c232d1b49, type: 2}
+  - {fileID: 11400000, guid: 8adbbef4caa30944583cb66a9f0fc4c7, type: 2}
   itemEffectSets: []

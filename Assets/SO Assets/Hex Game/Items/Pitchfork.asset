@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
-  m_Name: Longsword
+  m_Name: Pitchfork
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: e3864038a58e7ac4186f43c88dfc5d5c, type: 3}
-  itemName: Longsword
+  itemSprite: {fileID: 21300000, guid: 389cc75c523d89149a572cd2c93af527, type: 3}
+  itemName: Pitchfork
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
   rarity: 1
-  fatiguePenalty: 10
-  baseGoldValue: 1300
+  fatiguePenalty: 12
+  baseGoldValue: 150
   canSpawnInShop: 1
-  canBeCombatContractReward: 1
+  canBeCombatContractReward: 0
   includeInLibrary: 1
-  weaponClass: 2
+  weaponClass: 7
   handRequirement: 1
   allowedSlot: 0
   injuryTypesCaused: 01000000
-  healthDamage: 1.1
-  armourDamage: 0.85
-  armourPenetration: 0.25
+  healthDamage: 1
+  armourDamage: 0.75
+  armourPenetration: 0.3
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:
-  - {fileID: 11400000, guid: 4c4448007b8681648b3686a2fdc06e0c, type: 2}
-  - {fileID: 11400000, guid: ae446eb81b7855c4e8884492ebc6655a, type: 2}
+  - {fileID: 11400000, guid: 2e7f6aa38b27e784db911972707ba0f5, type: 2}
+  - {fileID: 11400000, guid: cd17d8f49bff2d443916b8d54cb7c704, type: 2}
   itemEffectSets:
   - possibleEffects:
     - effectType: 6
@@ -47,9 +47,29 @@ MonoBehaviour:
       perkApplied:
         perkTag: 0
         passiveStacks: 1
-      innateItemEffectType: 1
-      innateAccuracyMod: 5
+      innateItemEffectType: 4
+      innateAccuracyMod: 0
       innateAccuracyAgainstAdjacentMod: 0
+      innateWeaponRangeBonus: 1
+      innateBackstabPenetrationBonus: 0
+      innatePerkGainedOnUse:
+        perkTag: 0
+        stacks: 0
+  - possibleEffects:
+    - effectType: 6
+      attributeModified: 0
+      modAmount: 0
+      perkGained:
+        perkTag: 0
+        stacks: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+      innateItemEffectType: 2
+      innateAccuracyMod: 0
+      innateAccuracyAgainstAdjacentMod: -15
       innateWeaponRangeBonus: 0
       innateBackstabPenetrationBonus: 0
       innatePerkGainedOnUse:

@@ -1590,6 +1590,11 @@ namespace HexGameEngine
 
         // Misc Calculators
         #region
+        /// <summary>
+        /// Returns a whole number represented as a float. For example, if a character is at 50% health, this will return 50.0, not 0.5
+        /// </summary>
+        /// <param name="character"></param>
+        /// <returns></returns>
         public static float GetCurrentHealthAsPercentageOfMaxHealth(HexCharacterModel character)
         {
             float current = character.currentHealth;

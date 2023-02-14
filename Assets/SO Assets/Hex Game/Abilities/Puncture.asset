@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Puncture
   m_EditorClassIdentifier: 
   abilityName: Puncture
+  displayedName: Puncture
   includeInGame: 1
   baseAbilityDescription: Deal 75% weapon damage. Damage ignores Guard and Armour
     on the target. -10 Accuracy.

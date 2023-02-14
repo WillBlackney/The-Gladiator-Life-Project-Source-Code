@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c332a1f403e665468640b734668f781, type: 3}
-  m_Name: Clobber
+  m_Name: Offbalancing Strike
   m_EditorClassIdentifier: 
-  abilityName: Clobber
-  displayedName: Clobber
+  abilityName: Offbalancing Strike
+  displayedName: Offbalancing Strike
   includeInGame: 1
-  baseAbilityDescription: Deal 125% damage to target. On a Critical Strike, the target
-    is Knocked Back 1 tile.
-  abilitySprite: {fileID: 21300000, guid: 29798da6155f8ca40b07c4f5cefb99d4, type: 3}
-  energyCost: 6
-  fatigueCost: 15
+  baseAbilityDescription: Deal 50% weapon damage to an enemy. Removes Spear Wall,
+    Shield Wall and Riposte from the target.
+  abilitySprite: {fileID: 21300000, guid: 9cacf63bfa17f7f42b672d2f30dc8569, type: 3}
+  energyCost: 4
+  fatigueCost: 20
   baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
   weaponRequirement: 1
   derivedFromWeapon: 1
   derivedFromItemLoadout: 0
-  weaponAbilityType: 1
-  weaponClass: 6
+  weaponAbilityType: 2
+  weaponClass: 7
   targetRequirement: 3
   secondaryTargetRequirement: 0
   rangeFromTarget: 0
@@ -94,8 +94,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 23
-    maxBaseDamage: 27
+    minBaseDamage: 8
+    maxBaseDamage: 12
     guaranteedHit: 0
     ignoresGuard: 0
     ignoresArmour: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
-    characterSummonedName: 
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -113,10 +113,9 @@ MonoBehaviour:
       perkTag: 0
       passiveStacks: 0
     perkApplicationChance: 100
-    knockBackDistance: 2
-  onHitEffects: []
-  onCritEffects:
-  - effectType: 5
+    knockBackDistance: 0
+  onHitEffects:
+  - effectType: 18
     stressEventData:
       stressAmountMin: 0
       stressAmountMax: 0
@@ -155,10 +154,97 @@ MonoBehaviour:
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
     perkPairing:
-      perkTag: 0
-      passiveStacks: 0
+      perkTag: 202
+      passiveStacks: 1
     perkApplicationChance: 100
-    knockBackDistance: 1
+    knockBackDistance: 0
+  - effectType: 18
+    stressEventData:
+      stressAmountMin: 0
+      stressAmountMax: 0
+      successChance: 0
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish: []
+    aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
+    weaponUsed: 0
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 12
+      passiveStacks: 1
+    perkApplicationChance: 100
+    knockBackDistance: 0
+  - effectType: 18
+    stressEventData:
+      stressAmountMin: 0
+      stressAmountMax: 0
+      successChance: 0
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish: []
+    aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
+    weaponUsed: 0
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 119
+      passiveStacks: 1
+    perkApplicationChance: 100
+    knockBackDistance: 0
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -179,29 +265,35 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'damage to an enemy. On a '
+    phrase: 'damage to an enemy. Removes '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Critical Strike
+    phrase: Shield Wall
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: ', the target is '
+    phrase: ', '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Knocked Back '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '1 '
+    phrase: 'Spear Wall '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: tile.
+    phrase: 'and '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Riposte '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: from the target.
   keyWords:
-  - kewWordType: 23
-    passiveType: 0
-  - kewWordType: 20
-    passiveType: 0
+  - kewWordType: 1
+    passiveType: 202
+  - kewWordType: 1
+    passiveType: 12
+  - kewWordType: 1
+    passiveType: 119
