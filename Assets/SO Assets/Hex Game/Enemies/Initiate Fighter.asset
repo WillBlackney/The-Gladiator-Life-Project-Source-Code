@@ -55,10 +55,10 @@ MonoBehaviour:
     stressResistance: 0
     injuryResistance: 0
     deathResistance: 25
-  baseArmour: 35
+  baseArmour: 50
   randomizeHealth: 1
   lowerHealthLimit: 50
-  upperHealthLimit: 55
+  upperHealthLimit: 50
   aiTurnRoutine:
     directives:
     - action:
@@ -153,8 +153,8 @@ MonoBehaviour:
   serializedPassiveManager:
     perks: []
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
-    offHandItem: {fileID: 0}
+    mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    offHandItem: {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
@@ -168,6 +168,5 @@ MonoBehaviour:
   - Human_Left_Hand
   - Human_Right_Leg
   - Human_Left_Leg
-  - Left_Hand_Simple_Sword
   - Barbarian_Chest_Wear
   - Red_Face_Mask_Head_Wear
