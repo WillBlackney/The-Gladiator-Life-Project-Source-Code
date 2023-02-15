@@ -33,7 +33,7 @@ MonoBehaviour:
       value: 10
       stars: 0
     fitness:
-      value: 60
+      value: 100
       stars: 0
     wits:
       value: 5
@@ -170,3 +170,5 @@ MonoBehaviour:
   - Human_Left_Leg
   - Barbarian_Chest_Wear
   - Red_Face_Mask_Head_Wear
+  - Left_Hand_Gladius
+  - Right_Hand_Wooden_Shield

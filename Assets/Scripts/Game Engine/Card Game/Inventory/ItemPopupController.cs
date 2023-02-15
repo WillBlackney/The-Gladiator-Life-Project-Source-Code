@@ -386,13 +386,30 @@ namespace HexGameEngine.Items
                             string zero = TextLogic.ReturnColoredText(effect.innatePerkGainedOnUse.stacks.ToString(), TextLogic.blueNumber);
                             string one = TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.innatePerkGainedOnUse.perkTag.ToString()), TextLogic.neutralYellow);
 
-                            /*
-                            if (effect.innateAccuracyAgainstAdjacentMod < 0)
-                            {
-                                dotStyle = DotStyle.Red;
-                                zero = "";
-                            }*/
                             row.Build(String.Format("Whenever you attack with this weapon, apply {0} {1} to self.", zero, one), DotStyle.Red);
+                        }
+                        else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.BonusMeleeRange)
+                        {
+                            dotStyle = DotStyle.Red;
+                            string symbol = "";
+                            if(effect.innateWeaponRangeBonus > 0)
+                            {
+                                dotStyle = DotStyle.Green;
+                                symbol = "+";
+                            }
+                            string zero = TextLogic.ReturnColoredText(symbol + effect.innateWeaponRangeBonus.ToString(), TextLogic.blueNumber);
+                            row.Build(String.Format("{0} range with attacks using this weapon.", zero), dotStyle);
+
+                        }
+                        else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.PenetrationBonusOnBackstab)
+                        {
+                            // bonus penetration on backstab
+                            dotStyle = DotStyle.Green;
+                            string zero = TextLogic.ReturnColoredText("+" + effect.innateBackstabPenetrationBonus.ToString() +"%", TextLogic.blueNumber);
+                            string one = TextLogic.ReturnColoredText("Penetration", TextLogic.neutralYellow);
+                            string two = TextLogic.ReturnColoredText("Backstabbing" ,TextLogic.neutralYellow);
+                            row.Build(String.Format("{0} {1} when {2} with this weapon.", zero, one, two), dotStyle);
+
                         }
                     }
                 }
