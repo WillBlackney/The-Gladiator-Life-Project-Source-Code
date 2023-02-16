@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bite
   m_EditorClassIdentifier: 
   abilityName: Bite
+  displayedName: Bite
   includeInGame: 1
   baseAbilityDescription: Deal 75% Weapon damage to target and apply 1 Bleeding.
   abilitySprite: {fileID: 21300000, guid: f93551c6d26df93438587be91fd16c0f, type: 3}
@@ -113,9 +114,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -170,9 +173,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0

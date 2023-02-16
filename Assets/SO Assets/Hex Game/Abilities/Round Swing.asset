@@ -32,8 +32,8 @@ MonoBehaviour:
   secondaryTargetRequirement: 0
   rangeFromTarget: 0
   talentRequirementData:
-    talentSchool: 2
-    level: 1
+    talentSchool: 0
+    level: 0
   abilitySubRequirements: []
   baseRange: 0
   gainRangeBonusFromVision: 0

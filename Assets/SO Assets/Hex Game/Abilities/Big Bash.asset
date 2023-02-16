@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Big Bash
   m_EditorClassIdentifier: 
   abilityName: Big Bash
+  displayedName: Big Bash
   includeInGame: 1
   baseAbilityDescription: ' Deal 125% weapon damage. 50% chance to apply Stunned.'
   abilitySprite: {fileID: 21300000, guid: dce8d7b79538a4c4bba83dd71269ebd9, type: 3}
@@ -113,9 +114,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -169,9 +173,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

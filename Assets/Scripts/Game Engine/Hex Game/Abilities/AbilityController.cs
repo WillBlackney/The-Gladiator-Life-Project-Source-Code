@@ -633,10 +633,9 @@ namespace HexGameEngine.Abilities
                     else if (tileTarget != null) firstHexHit = tileTarget;
 
                     HexDirection direction = LevelController.Instance.GetDirectionToTargetHex(caster.currentTile, firstHexHit);
-                    List<LevelNode> hexsOnPath = new List<LevelNode>();
                     LevelNode previousHex = firstHexHit;
                     LevelNode nextHex = null;
-                    hexsOnPath.Add(firstHexHit);
+                    tilesEffected.Add(firstHexHit);
 
                     for (int i = 0; i < abilityEffect.aoeSize; i++)
                     {
@@ -648,7 +647,7 @@ namespace HexGameEngine.Abilities
                         else
                         {
                             // Tile in direction from current tile is valid to move over
-                            hexsOnPath.Add(nextHex);
+                            tilesEffected.Add(nextHex);
                             previousHex = nextHex;
                             nextHex = null;
                         }
@@ -656,7 +655,7 @@ namespace HexGameEngine.Abilities
                 }
 
                 // Remove centre point, if needed
-                if (abilityEffect.includeCentreTile == false)
+                if (abilityEffect.includeCentreTile == false && abilityEffect.aoeType != AoeType.Line)
                 {
                     if ((abilityEffect.aoeType == AoeType.Aura || abilityEffect.aoeType == AoeType.Global) &&
                         tilesEffected.Contains(caster.currentTile))
