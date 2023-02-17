@@ -21,8 +21,8 @@ namespace HexGameEngine.Characters
         public static AttributeRollResult GenerateRoll(HexCharacterData character)
         {
             // to do in future: consider character attribute stars
-            int lower = 2;
-            int upper = 4;
+            int lower = 3;
+            int upper = 5;
 
             AttributeRollResult roll = new AttributeRollResult();
             roll.mightRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.might.stars;

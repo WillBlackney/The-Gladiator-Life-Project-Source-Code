@@ -87,7 +87,7 @@ namespace HexGameEngine.TownFeatures
 
             // Move page to centre
             Sequence s2 = DOTween.Sequence();
-            s2.Append(pageMovementParent.DOMove(pageEndPos.position, 0.35f));
+            s2.Append(pageMovementParent.DOMove(pageEndPos.position, 0.35f)).SetEase(Ease.OutBack);
             s2.OnComplete(() => { blockMouseActions = false; });
         }
 
@@ -104,7 +104,7 @@ namespace HexGameEngine.TownFeatures
             pageCg.DOFade(0f, 0.5f);
 
             // Move page offscreen
-            pageMovementParent.DOMove(pageStartPos.position, 0.35f);
+            pageMovementParent.DOMove(pageStartPos.position, 0.35f).SetEase(Ease.InBack); ;
 
             yield return new WaitForSeconds(0.2f);
             // Move and zoom out camera

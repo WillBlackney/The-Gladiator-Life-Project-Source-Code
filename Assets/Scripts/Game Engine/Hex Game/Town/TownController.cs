@@ -22,7 +22,6 @@ using DG.Tweening;
 
 namespace HexGameEngine.TownFeatures
 {
-
     public class TownController : Singleton<TownController>
     {
         // Properties + Components

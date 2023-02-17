@@ -441,6 +441,12 @@ namespace HexGameEngine.Characters
                 }
             }
         }
+        public int GetTotalRosterDailyWage()
+        {
+            int ret = 0;
+            foreach (HexCharacterData character in AllPlayerCharacters) ret += character.dailyWage;
+            return ret;
+        }
         public void HandlePassiveStressAndHealthRecoveryOnNewDayStart()
         {
             foreach(HexCharacterData c in AllPlayerCharacters)

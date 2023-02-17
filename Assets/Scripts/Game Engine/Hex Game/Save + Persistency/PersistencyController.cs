@@ -64,8 +64,7 @@ namespace HexGameEngine.Persistency
 
                 // Learn abilites from selected items for starting character
                 startingCharacter.abilityBook.HandleLearnAbilitiesFromItemSet(startingCharacter.itemSet);
-            }           
-               
+            }               
             
             CharacterDataController.Instance.AddCharacterToRoster(startingCharacter);
            
@@ -73,7 +72,7 @@ namespace HexGameEngine.Persistency
             CharacterDataController.Instance.AutoGenerateAndCacheNewCharacterDeck();
 
             // Setup town
-            TownController.Instance.GenerateDailyRecruits(RandomGenerator.NumberBetween(6,8));
+            TownController.Instance.GenerateDailyRecruits(RandomGenerator.NumberBetween(3,5));
             TownController.Instance.GenerateDailyCombatContracts();
             TownController.Instance.GenerateDailyAbilityTomes();
             TownController.Instance.GenerateDailyArmouryItems();

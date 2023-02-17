@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using DG.Tweening;
 using HexGameEngine.Utilities;
+using HexGameEngine.Characters;
 
 namespace HexGameEngine.UI
 {
@@ -21,6 +22,7 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI currentGoldText;
         [SerializeField] private TextMeshProUGUI currentChapterText;
         [SerializeField] private TextMeshProUGUI currentDaytext;
+        [SerializeField] private TextMeshProUGUI currentGoldInfoPopupText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         #endregion
@@ -88,5 +90,12 @@ namespace HexGameEngine.UI
         }      
        
         #endregion
+
+        public void OnGoldPanelMouseEnter()
+        {
+            string one = TextLogic.ReturnColoredText(CharacterDataController.Instance.GetTotalRosterDailyWage().ToString(), TextLogic.blueNumber);
+            string two = TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow);
+            currentGoldInfoPopupText.text = System.String.Format("Currently paying {0} {1} each day in wages.", one, two);
+        }
     }
 }
