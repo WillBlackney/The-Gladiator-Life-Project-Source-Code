@@ -19,7 +19,7 @@ MonoBehaviour:
     1 of target location.
   abilitySprite: {fileID: 21300000, guid: 4ac1c0ebf18b3454fa1be04b4da20155, type: 3}
   energyCost: 6
-  fatigueCost: 5
+  fatigueCost: 10
   baseCooldown: 3
   abilityType: 01000000
   doesNotBreakStealth: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
     minBaseDamage: 18
     maxBaseDamage: 22
     guaranteedHit: 1
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
@@ -173,6 +174,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0

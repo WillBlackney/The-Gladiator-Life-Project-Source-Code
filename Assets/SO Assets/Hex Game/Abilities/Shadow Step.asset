@@ -19,7 +19,7 @@ MonoBehaviour:
     them.
   abilitySprite: {fileID: 21300000, guid: d757a6a13730f0b46ae4fc435afa5cb6, type: 3}
   energyCost: 4
-  fatigueCost: 20
+  fatigueCost: 25
   baseCooldown: 2
   abilityType: 0200000004000000
   doesNotBreakStealth: 1
@@ -86,6 +86,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
@@ -159,6 +160,7 @@ MonoBehaviour:
     minBaseDamage: 8
     maxBaseDamage: 12
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0

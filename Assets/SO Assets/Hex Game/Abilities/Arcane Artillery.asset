@@ -19,7 +19,7 @@ MonoBehaviour:
     of target location. '
   abilitySprite: {fileID: 21300000, guid: 3b7eaf822ca80ff4eae6670153104947, type: 3}
   energyCost: 5
-  fatigueCost: 12
+  fatigueCost: 30
   baseCooldown: 3
   abilityType: 0300000005000000
   doesNotBreakStealth: 0
@@ -142,10 +142,11 @@ MonoBehaviour:
     minBaseDamage: 18
     maxBaseDamage: 22
     guaranteedHit: 1
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
-    weaponUsed: 0
+    weaponUsed: 2
     injuryTypesCaused: 02000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}

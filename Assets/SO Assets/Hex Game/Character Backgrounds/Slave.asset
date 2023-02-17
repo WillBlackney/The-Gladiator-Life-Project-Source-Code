@@ -24,20 +24,20 @@ MonoBehaviour:
   dailyWageMin: 0
   dailyWageMax: 0
   baseRecruitCost: 75
-  mightLower: 0
-  mightUpper: -5
+  mightLower: -2
+  mightUpper: -3
   constitutionLower: -10
   constitutionUpper: 0
   accuracyLower: -5
   accuracyUpper: 0
-  dodgeLower: 0
-  dodgeUpper: -5
+  dodgeLower: -2
+  dodgeUpper: -3
   fatigueLower: -10
   fatigueUpper: 0
-  resolveLower: 0
-  resolveUpper: -5
-  witsLower: 0
-  witsUpper: -5
+  resolveLower: -2
+  resolveUpper: -3
+  witsLower: -2
+  witsUpper: -3
   minStartingAbilities: 1
   maxStartingAbilities: 1
   validRaces: 01000000050000000600000007000000

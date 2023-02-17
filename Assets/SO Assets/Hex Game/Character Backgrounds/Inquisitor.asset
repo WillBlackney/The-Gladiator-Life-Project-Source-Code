@@ -23,8 +23,8 @@ MonoBehaviour:
   dailyWageMin: 12
   dailyWageMax: 14
   baseRecruitCost: 75
-  mightLower: 0
-  mightUpper: -5
+  mightLower: -3
+  mightUpper: -2
   constitutionLower: 0
   constitutionUpper: 0
   accuracyLower: 5

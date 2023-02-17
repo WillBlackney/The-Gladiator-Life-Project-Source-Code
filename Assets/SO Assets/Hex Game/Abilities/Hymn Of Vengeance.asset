@@ -19,7 +19,7 @@ MonoBehaviour:
     your Aura. Only one hymn may be active at a time.
   abilitySprite: {fileID: 21300000, guid: 0077f2bbbbcc5d84490035b48dc71f4b, type: 3}
   energyCost: 6
-  fatigueCost: 15
+  fatigueCost: 35
   baseCooldown: 1
   abilityType: 0100000007000000
   doesNotBreakStealth: 0
@@ -34,7 +34,11 @@ MonoBehaviour:
   talentRequirementData:
     talentSchool: 10
     level: 1
-  abilitySubRequirements: []
+  abilitySubRequirements:
+  - type: 10
+    healthRequired: 0
+    race: 0
+    perk: 140
   baseRange: 0
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
@@ -112,6 +116,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0

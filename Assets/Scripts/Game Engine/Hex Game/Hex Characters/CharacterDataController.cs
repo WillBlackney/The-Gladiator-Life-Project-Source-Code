@@ -40,26 +40,26 @@ namespace HexGameEngine.Characters
         [Space(20)]
 
         [Header("Recruit Base Attribute Ranges")]
-        [SerializeField] private int mightLower;
-        [SerializeField] private int mightUpper;
+        [SerializeField] private int mightLower = 5;
+        [SerializeField] private int mightUpper = 10;
         [Space(10)]
-        [SerializeField] private int constitutionLower;
-        [SerializeField] private int constitutionUpper;
+        [SerializeField] private int constitutionLower = 55;
+        [SerializeField] private int constitutionUpper = 65;
         [Space(10)]
-        [SerializeField] private int accuracyLower;
-        [SerializeField] private int accuracyUpper;
+        [SerializeField] private int accuracyLower = 55;
+        [SerializeField] private int accuracyUpper = 65;
         [Space(10)]
-        [SerializeField] private int dodgeLower;
-        [SerializeField] private int dodgeUpper;
+        [SerializeField] private int dodgeLower= 5;
+        [SerializeField] private int dodgeUpper = 10;
         [Space(10)]
-        [SerializeField] private int fatigueLower;
-        [SerializeField] private int fatigueUpper;
+        [SerializeField] private int fatigueLower = 95;
+        [SerializeField] private int fatigueUpper = 105;
         [Space(10)]
-        [SerializeField] private int resolveLower;
-        [SerializeField] private int resolveUpper;
+        [SerializeField] private int resolveLower = 5;
+        [SerializeField] private int resolveUpper = 10;
         [Space(10)]
-        [SerializeField] private int witsLower;
-        [SerializeField] private int witsUpper;
+        [SerializeField] private int witsLower = 5;
+        [SerializeField] private int witsUpper = 10;
         [Space(10)]
         // Non-Inspector 
         private HexCharacterData[] allCustomCharacterTemplates;

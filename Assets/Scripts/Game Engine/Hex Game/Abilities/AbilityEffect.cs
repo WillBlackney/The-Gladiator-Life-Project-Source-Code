@@ -166,7 +166,7 @@ namespace HexGameEngine.Abilities
         [BoxGroup("Damage Settings")]
         [LabelWidth(200)]
         [ShowIf("ShowWeaponUsed")]
-        public WeaponSlot weaponUsed = WeaponSlot.MainHand;
+        public WeaponSlot weaponUsed = WeaponSlot.None;
 
         [BoxGroup("Damage Settings")]
         [LabelWidth(200)]

@@ -18,8 +18,8 @@ MonoBehaviour:
   baseAbilityDescription: Gain 1 Taunt
   abilitySprite: {fileID: 21300000, guid: 637f256bd6160484b89e9eb605128016, type: 3}
   energyCost: 3
-  fatigueCost: 8
-  baseCooldown: 3
+  fatigueCost: 15
+  baseCooldown: 2
   abilityType: 01000000
   doesNotBreakStealth: 0
   weaponRequirement: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0

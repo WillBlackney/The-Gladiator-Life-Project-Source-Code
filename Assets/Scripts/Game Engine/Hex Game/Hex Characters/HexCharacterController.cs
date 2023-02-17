@@ -1644,11 +1644,11 @@ namespace HexGameEngine.Characters
         public void ModifyBaseMaxActionPoints(HexCharacterModel character, int maxEnergyGainedOrLost)
         {
             Debug.Log("CharacterEntityController.ModifyBaseMaxActionPoints() called for " + character.myName);
-            character.attributeSheet.maxAp += maxEnergyGainedOrLost;
+            character.attributeSheet.energyMax += maxEnergyGainedOrLost;
             HexCharacterView view = character.hexCharacterView;
 
-            if (character.attributeSheet.maxAp < 0)            
-                character.attributeSheet.maxAp = 0;      
+            if (character.attributeSheet.energyMax < 0)            
+                character.attributeSheet.energyMax = 0;      
         }
         public void ModifyCurrentFatigue(HexCharacterModel character, int fatigueGainedOrLost, bool showVFX = false)
         {

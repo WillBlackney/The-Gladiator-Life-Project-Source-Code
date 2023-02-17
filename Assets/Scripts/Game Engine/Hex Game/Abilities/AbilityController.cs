@@ -17,6 +17,8 @@ using UnityEngine.UI;
 using System.Linq;
 using System;
 using HexGameEngine.Items;
+using Spriter2UnityDX.Importing;
+using UnityEngine.TextCore.Text;
 
 namespace HexGameEngine.Abilities
 {
@@ -432,7 +434,8 @@ namespace HexGameEngine.Abilities
                 // Dynamic weapon used check: make sure the ability actually belongs to the main hand weapon if directed.
                 if(weaponUsed == caster.itemSet.mainHandItem &&
                     caster.itemSet.offHandItem != null &&
-                    ability.derivedFromWeapon)
+                    ability.derivedFromWeapon &&
+                    ability.weaponRequirement != WeaponRequirement.None)
                 {
                     bool foundMatch = false;
                     foreach(AbilityData weaponAbility in caster.itemSet.mainHandItem.grantedAbilities)
@@ -459,7 +462,7 @@ namespace HexGameEngine.Abilities
                 if (hitResult.Result == HitRollResult.Hit)
                 {
                     // Gain 3 fatigue from being hit.
-                    HexCharacterController.Instance.ModifyCurrentFatigue(target, 3);
+                    HexCharacterController.Instance.ModifyCurrentFatigue(target, 5);
 
                     DamageResult damageResult = null;
                     damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(caster, target, ability, abilityEffect, didCrit);
@@ -575,7 +578,7 @@ namespace HexGameEngine.Abilities
                 else if (hitResult.Result == HitRollResult.Miss)
                 {
                     // Gain 3 fatigue from being hit.
-                    HexCharacterController.Instance.ModifyCurrentFatigue(target, 1);
+                    HexCharacterController.Instance.ModifyCurrentFatigue(target, 2);
 
                     // Miss notification
                     VisualEventManager.Instance.CreateVisualEvent(() =>
@@ -633,7 +636,8 @@ namespace HexGameEngine.Abilities
                 // Dynamic weapon used check: make sure the ability actually belongs to the main hand weapon if directed.
                 if (weaponUsed == caster.itemSet.mainHandItem &&
                     caster.itemSet.offHandItem != null &&
-                    ability.derivedFromWeapon)
+                    ability.derivedFromWeapon &&
+                    ability.weaponRequirement != WeaponRequirement.None)
                 {
                     bool foundMatch = false;
                     foreach (AbilityData weaponAbility in caster.itemSet.mainHandItem.grantedAbilities)
@@ -731,7 +735,7 @@ namespace HexGameEngine.Abilities
                         charactersHit.Add(character);
 
                         // Gain 3 fatigue from being hit.
-                        HexCharacterController.Instance.ModifyCurrentFatigue(character, 3);
+                        HexCharacterController.Instance.ModifyCurrentFatigue(character, 5);
 
                         // Do on hit visual effects for this ability
                         foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
@@ -742,7 +746,7 @@ namespace HexGameEngine.Abilities
                     else if (hitRoll.Result == HitRollResult.Miss)
                     {
                         // Gain 1 fatigue for dodging.
-                        HexCharacterController.Instance.ModifyCurrentFatigue(character, 1);
+                        HexCharacterController.Instance.ModifyCurrentFatigue(character, 2);
 
                         // Miss notification
                         Vector3 pos = character.hexCharacterView.WorldPosition;
@@ -2068,6 +2072,12 @@ namespace HexGameEngine.Abilities
                     continue;
                 }
 
+                else if (ar.type == AbilityRequirementType.CasterDoesNotHavePerk &&
+                    !PerkController.Instance.DoesCharacterHavePerk(caster.pManager, ar.perk))
+                {
+                    continue;
+                }                 
+                
                 else if (ar.type == AbilityRequirementType.TargetDoesNotHavePerk)
                 {
                     if (target == null || (target != null && !PerkController.Instance.DoesCharacterHavePerk(target.pManager, ar.perk))) continue;

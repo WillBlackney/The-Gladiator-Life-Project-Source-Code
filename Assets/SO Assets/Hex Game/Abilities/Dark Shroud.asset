@@ -18,7 +18,7 @@ MonoBehaviour:
   baseAbilityDescription: Apply 1 Stealth to an ally.
   abilitySprite: {fileID: 21300000, guid: c3862236b3ad7b8429d56d4c9b1a2063, type: 3}
   energyCost: 4
-  fatigueCost: 12
+  fatigueCost: 15
   baseCooldown: 3
   abilityType: 05000000
   doesNotBreakStealth: 1
@@ -96,6 +96,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0

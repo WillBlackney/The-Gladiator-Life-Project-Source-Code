@@ -209,6 +209,7 @@ namespace HexGameEngine
         TargetHasPerk = 7,
         TargetDoesNotHavePerk = 8,
         CasterHasPerk = 9,
+        CasterDoesNotHavePerk = 10,
 
     }
     public enum AbilitySelectionPhase

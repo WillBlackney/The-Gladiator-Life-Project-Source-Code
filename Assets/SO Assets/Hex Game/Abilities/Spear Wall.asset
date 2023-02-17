@@ -33,7 +33,11 @@ MonoBehaviour:
   talentRequirementData:
     talentSchool: 0
     level: 0
-  abilitySubRequirements: []
+  abilitySubRequirements:
+  - type: 10
+    healthRequired: 0
+    race: 0
+    perk: 202
   baseRange: 0
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
@@ -96,6 +100,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0

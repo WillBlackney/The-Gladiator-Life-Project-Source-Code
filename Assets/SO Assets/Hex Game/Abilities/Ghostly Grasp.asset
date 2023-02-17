@@ -111,10 +111,11 @@ MonoBehaviour:
     minBaseDamage: 18
     maxBaseDamage: 22
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 1
     bonusArmourDamage: 0
-    weaponUsed: 0
+    weaponUsed: 2
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}

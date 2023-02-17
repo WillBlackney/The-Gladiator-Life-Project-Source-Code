@@ -37,8 +37,8 @@ MonoBehaviour:
   fatigueUpper: 5
   resolveLower: 10
   resolveUpper: 10
-  witsLower: 0
-  witsUpper: -5
+  witsLower: -2
+  witsUpper: -3
   minStartingAbilities: 1
   maxStartingAbilities: 1
   validRaces: 01000000020000000300000004000000050000000600000007000000

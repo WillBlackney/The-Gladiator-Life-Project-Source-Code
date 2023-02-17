@@ -15,10 +15,10 @@ MonoBehaviour:
   abilityName: Shed
   displayedName: Shed
   includeInGame: 1
-  baseAbilityDescription: 'Lose 5 health. Your next aspect ability costs 0 Energy. '
+  baseAbilityDescription: 'Lose 10 health. Your next aspect ability costs 0 Energy. '
   abilitySprite: {fileID: 21300000, guid: c0060084ebe73c348be4d30603aee5a2, type: 3}
   energyCost: 0
-  fatigueCost: 5
+  fatigueCost: 10
   baseCooldown: 3
   abilityType: 01000000
   doesNotBreakStealth: 0
@@ -100,6 +100,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
@@ -127,7 +128,7 @@ MonoBehaviour:
     tilesMoved: 0
     lineLength: 0
     healthGained: 0
-    healthLost: 5
+    healthLost: 10
     requirements: []
     chainedEffect: 0
     triggersChainEffectSequence: 0
@@ -173,6 +174,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
@@ -204,11 +206,19 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '5 '
+    phrase: '10 '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'health. Your next aspect ability costs '
+    phrase: 'health. Your next '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Aspect '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'ability costs '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
