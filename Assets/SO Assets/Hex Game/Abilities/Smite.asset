@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Smite
   m_EditorClassIdentifier: 
   abilityName: Smite
+  displayedName: Smite
   includeInGame: 1
   baseAbilityDescription: Deal 125% Weapon damage and apply 1 Weakened. On a Critical
     Strike, apply 2 Weakened. Gains +25 Critical Chance against undead.
@@ -129,6 +130,7 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers:
     - type: 4
@@ -136,7 +138,10 @@ MonoBehaviour:
       targetRace: 3
       bonusDamageModifier: 0
       bonusCriticalChance: 25
+      extraCriticalDamage: 0
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -190,9 +195,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -246,9 +254,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

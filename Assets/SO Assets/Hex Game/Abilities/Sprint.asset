@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Sprint
   m_EditorClassIdentifier: 
   abilityName: Sprint
+  displayedName: Sprint
   includeInGame: 1
   baseAbilityDescription: Move up to 2 tiles in a straight line.
   abilitySprite: {fileID: 21300000, guid: b60829c8e7f39594f9e6f1660d6c0f34, type: 3}
@@ -68,9 +69,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

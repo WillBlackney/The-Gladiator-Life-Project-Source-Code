@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Shed
   m_EditorClassIdentifier: 
   abilityName: Shed
+  displayedName: Shed
   includeInGame: 1
   baseAbilityDescription: 'Lose 5 health. Your next aspect ability costs 0 Energy. '
   abilitySprite: {fileID: 21300000, guid: c0060084ebe73c348be4d30603aee5a2, type: 3}
@@ -35,6 +36,8 @@ MonoBehaviour:
   abilitySubRequirements:
   - type: 4
     healthRequired: 10
+    race: 0
+    perk: 0
   baseRange: 0
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
@@ -100,9 +103,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -170,9 +176,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

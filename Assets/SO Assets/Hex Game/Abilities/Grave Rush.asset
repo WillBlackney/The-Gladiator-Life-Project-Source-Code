@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Grave Rush
   m_EditorClassIdentifier: 
   abilityName: Grave Rush
+  displayedName: Grave Rush
   includeInGame: 1
   baseAbilityDescription: Give a friendly Undead character +20 Accuracy, Might and
     Critical Chance for 1 turn.
@@ -37,6 +38,7 @@ MonoBehaviour:
   - type: 5
     healthRequired: 0
     race: 3
+    perk: 0
   baseRange: 3
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
@@ -102,9 +104,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

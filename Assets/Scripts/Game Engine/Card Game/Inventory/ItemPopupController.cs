@@ -247,9 +247,9 @@ namespace HexGameEngine.Items
             if(item.IsMeleeWeapon || item.IsRangedWeapon)
             {
                 damageModParent.SetActive(true);
-                healthDamageText.text = ((int)(item.healthDamage * 100f)).ToString() +"%";
-                armourDamageText.text = ((int)(item.armourDamage * 100f)).ToString() + "%";
-                penetrationText.text = ((int)(item.armourPenetration * 100f)).ToString() + "%";
+                healthDamageText.text = Math.Round(item.healthDamage * 100f).ToString() +"%";
+                armourDamageText.text = Math.Round(item.armourDamage * 100f).ToString() + "%";
+                penetrationText.text = Math.Round(item.armourPenetration * 100f).ToString() + "%";
             }
         }
         private void BuildArmourSection(ItemData item)

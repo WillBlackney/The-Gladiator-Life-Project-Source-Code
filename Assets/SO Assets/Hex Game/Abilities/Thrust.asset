@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Thrust
   m_EditorClassIdentifier: 
   abilityName: Thrust
+  displayedName: Thrust
   includeInGame: 1
   baseAbilityDescription: Deal 100% weapon damage.
   abilitySprite: {fileID: 21300000, guid: b730cef812431cd4599afb85b5e25fab, type: 3}

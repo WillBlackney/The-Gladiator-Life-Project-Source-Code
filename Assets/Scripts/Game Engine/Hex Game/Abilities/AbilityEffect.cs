@@ -144,6 +144,12 @@ namespace HexGameEngine.Abilities
 
         [BoxGroup("Damage Settings")]
         [LabelWidth(200)]
+        [ShowIf("ShowBonusCritDamage")]
+        [Range(0,100)]
+        public int bonusCritDamage = 0;
+
+        [BoxGroup("Damage Settings")]
+        [LabelWidth(200)]
         [ShowIf("ShowIgnoreBlock")]
         public bool ignoresGuard;
 
@@ -285,6 +291,10 @@ namespace HexGameEngine.Abilities
             return effectType == AbilityEffectType.DamageAoe || effectType == AbilityEffectType.DamageTarget;
         }
         public bool ShowGuaranteedHit()
+        {
+            return effectType == AbilityEffectType.DamageAoe || effectType == AbilityEffectType.DamageTarget;
+        }
+        public bool ShowBonusCritDamage()
         {
             return effectType == AbilityEffectType.DamageAoe || effectType == AbilityEffectType.DamageTarget;
         }

@@ -18,9 +18,9 @@ MonoBehaviour:
   baseAbilityDescription: Deal 100% weapon damage to an enemy. Damage is increased
     by 1% for each point of health target has lost.
   abilitySprite: {fileID: 21300000, guid: a9dc6980304bfa94798c01c1c961aa49, type: 3}
-  energyCost: 4
+  energyCost: 6
   fatigueCost: 25
-  baseCooldown: 1
+  baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
   weaponRequirement: 1
@@ -112,6 +112,7 @@ MonoBehaviour:
     minBaseDamage: 18
     maxBaseDamage: 22
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
@@ -121,7 +122,7 @@ MonoBehaviour:
     - type: 9
       perk: 0
       targetRace: 0
-      bonusDamageModifier: 0.005
+      bonusDamageModifier: 0.01
       bonusCriticalChance: 0
       extraCriticalDamage: 0
     characterSummoned: {fileID: 0}
@@ -161,7 +162,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '0.5% '
+    phrase: '1% '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

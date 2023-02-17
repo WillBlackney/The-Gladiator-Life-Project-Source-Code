@@ -4,6 +4,7 @@ using UnityEngine;
 using HexGameEngine.Combat;
 using HexGameEngine.Perks;
 using HexGameEngine.Items;
+using HexGameEngine.Abilities;
 
 namespace HexGameEngine
 {
@@ -1234,7 +1235,7 @@ namespace HexGameEngine
            
             return crit;
         }
-        public static int GetTotalCriticalModifier(HexCharacterModel c)
+        public static int GetTotalCriticalModifier(HexCharacterModel c, AbilityEffect effect = null)
         {
             int criticalModifier = c.attributeSheet.criticalModifier;
 
@@ -1249,6 +1250,8 @@ namespace HexGameEngine
             // Scoundrel talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Scoundrel, 1))
                 criticalModifier += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Scoundrel) * 20;
+
+            if (effect != null) criticalModifier += effect.bonusCritDamage;
 
             // Items
             criticalModifier += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.CriticalModifier, c.itemSet);

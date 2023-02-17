@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Overhead Slash
   m_EditorClassIdentifier: 
   abilityName: Overhead Slash
+  displayedName: Overhead Slash
   includeInGame: 1
   baseAbilityDescription: Deal 125% weapon damage. On Critical Strike, apply 1 Bleeding.
   abilitySprite: {fileID: 21300000, guid: 9cacf63bfa17f7f42b672d2f30dc8569, type: 3}

@@ -422,16 +422,34 @@ namespace HexGameEngine.Abilities
                 // Determine weapon used
                 ItemData weaponUsed = null;
                 if (abilityEffect.weaponUsed == WeaponSlot.Offhand &&
-                    caster.itemSet.offHandItem != null)/* &&
-                    ((caster.itemSet.offHandItem.IsMeleeWeapon && ability.abilityType.Contains(AbilityType.MeleeAttack)) ||
-                    (caster.itemSet.offHandItem.IsRangedWeapon && ability.abilityType.Contains(AbilityType.RangedAttack))))*/
+                    caster.itemSet.offHandItem != null)
                     weaponUsed = caster.itemSet.offHandItem;
 
                 else if (abilityEffect.weaponUsed == WeaponSlot.MainHand &&
-                    caster.itemSet.mainHandItem != null)/* &&
-                    ((caster.itemSet.mainHandItem.IsMeleeWeapon && ability.abilityType.Contains(AbilityType.MeleeAttack)) ||
-                    (caster.itemSet.mainHandItem.IsRangedWeapon && ability.abilityType.Contains(AbilityType.RangedAttack))))*/
+                    caster.itemSet.mainHandItem != null)
                     weaponUsed = caster.itemSet.mainHandItem;
+
+                // Dynamic weapon used check: make sure the ability actually belongs to the main hand weapon if directed.
+                if(weaponUsed == caster.itemSet.mainHandItem &&
+                    caster.itemSet.offHandItem != null &&
+                    ability.derivedFromWeapon)
+                {
+                    bool foundMatch = false;
+                    foreach(AbilityData weaponAbility in caster.itemSet.mainHandItem.grantedAbilities)
+                    {
+                        if(weaponAbility.abilityName == ability.abilityName)
+                        {
+                            foundMatch = true;
+                            break;
+                        }
+                    }
+
+                    if (!foundMatch)
+                    {
+                        Debug.Log(String.Format("AbilityController.TriggerAbilityEffect() weapon derived ability '{0}' does not exist on weapon '{1}', using off hand weapon instead", ability.abilityName, caster.itemSet.mainHandItem.itemName));
+                        weaponUsed = caster.itemSet.offHandItem;
+                    }
+                }
 
                 Debug.Log(String.Format("Weapon used: {0}", weaponUsed.itemName));
 
@@ -605,16 +623,34 @@ namespace HexGameEngine.Abilities
                 // Determine weapon used
                 ItemData weaponUsed = null;
                 if (abilityEffect.weaponUsed == WeaponSlot.Offhand &&
-                    caster.itemSet.offHandItem != null) /*&&
-                    ((caster.itemSet.offHandItem.IsMeleeWeapon && ability.abilityType.Contains(AbilityType.MeleeAttack)) ||
-                    (caster.itemSet.offHandItem.IsRangedWeapon && ability.abilityType.Contains(AbilityType.RangedAttack))))*/
+                    caster.itemSet.offHandItem != null)
                     weaponUsed = caster.itemSet.offHandItem;
 
                 else if (abilityEffect.weaponUsed == WeaponSlot.MainHand &&
-                    caster.itemSet.mainHandItem != null) /*&&
-                    ((caster.itemSet.mainHandItem.IsMeleeWeapon && ability.abilityType.Contains(AbilityType.MeleeAttack)) ||
-                    (caster.itemSet.mainHandItem.IsRangedWeapon && ability.abilityType.Contains(AbilityType.RangedAttack))))*/
+                    caster.itemSet.mainHandItem != null)
                     weaponUsed = caster.itemSet.mainHandItem;
+
+                // Dynamic weapon used check: make sure the ability actually belongs to the main hand weapon if directed.
+                if (weaponUsed == caster.itemSet.mainHandItem &&
+                    caster.itemSet.offHandItem != null &&
+                    ability.derivedFromWeapon)
+                {
+                    bool foundMatch = false;
+                    foreach (AbilityData weaponAbility in caster.itemSet.mainHandItem.grantedAbilities)
+                    {
+                        if (weaponAbility.abilityName == ability.abilityName)
+                        {
+                            foundMatch = true;
+                            break;
+                        }
+                    }
+
+                    if (!foundMatch)
+                    {
+                        Debug.Log(String.Format("AbilityController.TriggerAbilityEffect() weapon derived ability '{0}' does not exist on weapon '{1}', using off hand weapon instead", ability.abilityName, caster.itemSet.mainHandItem.itemName));
+                        weaponUsed = caster.itemSet.offHandItem;
+                    }
+                }
 
                 triggerEffectEndEvents = false;
                 List<LevelNode> tilesEffected = new List<LevelNode>();
@@ -1757,7 +1793,7 @@ namespace HexGameEngine.Abilities
             // check target is in range
             if (IsTargetOfAbilityInRange(caster, target, ability) &&
                 DoesTargetOfAbilityMeetAllegianceRequirement(caster, target, ability) &&
-                DoesTargetOfAbilityMeetSubRequirements(caster, target, ability))
+                DoesAbilityMeetSubRequirements(caster, ability, target))
             {
                 bRet = true;
             }
@@ -1823,6 +1859,13 @@ namespace HexGameEngine.Abilities
             {
                 Debug.Log("IsAbilityUseable() returning false: not enough energy");
                 bRet =  false;
+            }
+
+            // Check sub reqs
+            if (!DoesAbilityMeetSubRequirements(character, ability, null))
+            {
+                Debug.Log("IsAbilityUseable() returning false: did not meet sub requirements");
+                bRet = false;
             }
 
             // check has enough fatigue
@@ -1986,7 +2029,7 @@ namespace HexGameEngine.Abilities
             return bRet;
 
         }
-        private bool DoesTargetOfAbilityMeetSubRequirements(HexCharacterModel caster, HexCharacterModel target, AbilityData ability)
+        private bool DoesAbilityMeetSubRequirements(HexCharacterModel caster, AbilityData ability, HexCharacterModel target = null)
         {
             bool bRet = true;
 
@@ -1994,6 +2037,8 @@ namespace HexGameEngine.Abilities
             {
                 if (ar.type == AbilityRequirementType.TargetHasUnoccupiedBackTile)
                 {
+                    if (target == null) continue;
+
                     bool shouldContinue = false;
                     foreach (LevelNode n in HexCharacterController.Instance.GetCharacterBackArcTiles(target))
                     {
@@ -2007,40 +2052,36 @@ namespace HexGameEngine.Abilities
                     if (shouldContinue) continue;
                 }
 
-                else if (ar.type == AbilityRequirementType.TargetHasRace &&
-                   target.race == ar.race)
+                else if (ar.type == AbilityRequirementType.TargetHasRace)
+                {
+                    if (target == null || (target != null && target.race == ar.race)) continue;
+                }
+
+                else if (ar.type == AbilityRequirementType.TargetHasPerk)
+                {
+                    if (target == null || (target != null && PerkController.Instance.DoesCharacterHavePerk(target.pManager, ar.perk))) continue;
+                }
+
+                else if (ar.type == AbilityRequirementType.CasterHasPerk && 
+                    PerkController.Instance.DoesCharacterHavePerk(caster.pManager, ar.perk))
                 {
                     continue;
                 }
 
-                else if (ar.type == AbilityRequirementType.TargetHasPerk &&
-                  PerkController.Instance.DoesCharacterHavePerk(target.pManager, ar.perk))
+                else if (ar.type == AbilityRequirementType.TargetDoesNotHavePerk)
                 {
-                    continue;
+                    if (target == null || (target != null && !PerkController.Instance.DoesCharacterHavePerk(target.pManager, ar.perk))) continue;
                 }
 
-                else if (ar.type == AbilityRequirementType.CasterHasPerk &&
-                  PerkController.Instance.DoesCharacterHavePerk(caster.pManager, ar.perk))
+                else if (ar.type == AbilityRequirementType.TargetHasShield)
                 {
-                    continue;
-                }
-
-                else if (ar.type == AbilityRequirementType.TargetDoesNotHavePerk &&
-                 !PerkController.Instance.DoesCharacterHavePerk(target.pManager, ar.perk))
-                {
-                    continue;
-                }
-
-                else if (ar.type == AbilityRequirementType.TargetHasShield &&
-                   target.itemSet.offHandItem != null && target.itemSet.offHandItem.weaponClass == WeaponClass.Shield)
-                {
-                    continue;
+                    if (target == null || (target != null && target.itemSet.offHandItem != null && target.itemSet.offHandItem.weaponClass == WeaponClass.Shield)) continue;
                 }
 
                 else if (ar.type == AbilityRequirementType.TargetIsTeleportable &&
                     HexCharacterController.Instance.IsCharacterTeleportable(target))
                 {
-                    continue;
+                    if (target == null || (target != null && HexCharacterController.Instance.IsCharacterTeleportable(target))) continue;
                 }
 
                 else if (ar.type == AbilityRequirementType.CasterIsTeleportable &&
@@ -2055,7 +2096,8 @@ namespace HexGameEngine.Abilities
                     continue;
                 }
 
-                bRet = false;                   
+                bRet = false;
+                break;
             }
 
             Debug.Log("AbilityController.DoesTargetOfAbilityMeetSubRequirements() returning " + bRet);

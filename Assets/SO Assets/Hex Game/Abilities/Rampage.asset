@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rampage
   m_EditorClassIdentifier: 
   abilityName: Rampage
-  displayedName: 
+  displayedName: Rampage
   includeInGame: 1
   baseAbilityDescription: Deal 125% weapon damage to an enemy. Damage is increased
     by 1% for each 1% of health you are missing.

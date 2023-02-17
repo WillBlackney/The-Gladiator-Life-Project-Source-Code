@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Summon Skeleton
   m_EditorClassIdentifier: 
   abilityName: Summon Skeleton
+  displayedName: Summon Skeleton
   includeInGame: 1
   baseAbilityDescription: Summon a shambling skeleton at target location.
   abilitySprite: {fileID: 21300000, guid: 5c66dc369ad3811498e609489d4f52c3, type: 3}
@@ -113,6 +114,7 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 11400000, guid: c821c0b02eb8ba94db4a4d700ceed222,

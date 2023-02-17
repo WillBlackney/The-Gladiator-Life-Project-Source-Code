@@ -129,7 +129,7 @@ namespace HexGameEngine.Combat
             // Add critical modifier to damage mod
             if (didCrit && attacker != null)
             {
-                damageModPercentageAdditive += StatCalculator.GetTotalCriticalModifier(attacker) / 100f;
+                damageModPercentageAdditive += StatCalculator.GetTotalCriticalModifier(attacker, effect) / 100f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in critical strike modifier = " + damageModPercentageAdditive.ToString());
             }
 
@@ -220,7 +220,7 @@ namespace HexGameEngine.Combat
                     if (dMod.type == DamageEffectModifierType.AddHealthMissingOnSelfToDamage && attacker != null && target != null)
                     {
                         // Get total max health missing percentage
-                        float missingHealthDamageMod = StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(attacker) * dMod.bonusDamageModifier;
+                        float missingHealthDamageMod = (100 - StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(attacker)) * dMod.bonusDamageModifier;
                         damageModPercentageAdditive += missingHealthDamageMod;
                         Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in health missing self modifier = " + damageModPercentageAdditive.ToString());
                     }
@@ -229,7 +229,7 @@ namespace HexGameEngine.Combat
                     if (dMod.type == DamageEffectModifierType.AddHealthMissingOnTargetToDamage && attacker != null && target != null)
                     {
                         // Get total max health missing percentage
-                        float missingHealthDamageMod = StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(target) * dMod.bonusDamageModifier;
+                        float missingHealthDamageMod = (100 - StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(target)) * dMod.bonusDamageModifier;
                         damageModPercentageAdditive += missingHealthDamageMod;
                         Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in health missing target modifier = " + damageModPercentageAdditive.ToString());
                     }

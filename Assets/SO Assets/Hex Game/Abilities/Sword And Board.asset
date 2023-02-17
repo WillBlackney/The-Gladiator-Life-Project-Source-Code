@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Sword And Board
   m_EditorClassIdentifier: 
   abilityName: Sword And Board
+  displayedName: Sword And Board
   includeInGame: 1
   baseAbilityDescription: Deal 125% Weapon damage to target. On succesful hit, gain
     1 Guard.
@@ -114,9 +115,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -171,9 +174,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0

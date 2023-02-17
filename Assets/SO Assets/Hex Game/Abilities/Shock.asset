@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Shock
   m_EditorClassIdentifier: 
   abilityName: Shock
+  displayedName: Shock
   includeInGame: 1
   baseAbilityDescription: Apply 2 Crippled to an enemy. If not resisted, gain 2 Focus.
   abilitySprite: {fileID: 21300000, guid: ab09f139d75a3fe4e92fa2598454cd93, type: 3}
@@ -98,9 +99,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -156,9 +160,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
