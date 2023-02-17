@@ -27,7 +27,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: abilities that require a weapon until it's next turn.
+    phrase: abilities that require a weapon.
   passiveItalicDescription: 
   effectDetailTabs: []
   maxAllowedStacks: 1

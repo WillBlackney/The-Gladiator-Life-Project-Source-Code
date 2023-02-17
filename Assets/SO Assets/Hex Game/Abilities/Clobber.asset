@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Clobber
   m_EditorClassIdentifier: 
   abilityName: Clobber
+  displayedName: Clobber
   includeInGame: 1
-  baseAbilityDescription: Deal 100% damage to target. On a Critical Strike, the target
+  baseAbilityDescription: Deal 125% damage to target. On a Critical Strike, the target
     is Knocked Back 1 tile.
   abilitySprite: {fileID: 21300000, guid: 29798da6155f8ca40b07c4f5cefb99d4, type: 3}
-  energyCost: 4
-  fatigueCost: 8
+  energyCost: 6
+  fatigueCost: 15
   baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -93,15 +94,18 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 18
-    maxBaseDamage: 22
+    minBaseDamage: 23
+    maxBaseDamage: 27
     guaranteedHit: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: 
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -141,9 +145,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

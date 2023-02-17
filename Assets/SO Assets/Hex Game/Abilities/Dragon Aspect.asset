@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dragon Aspect
   m_EditorClassIdentifier: 
   abilityName: Dragon Aspect
+  displayedName: Dragon Aspect
   includeInGame: 1
   baseAbilityDescription: Gain 1 Flight. While active, apply 1 Burning to enemies
     within your Aura at the end of each turn.
@@ -99,9 +100,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -139,9 +143,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

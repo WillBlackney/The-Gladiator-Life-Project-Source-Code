@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Rip And Tear
   m_EditorClassIdentifier: 
   abilityName: Rip And Tear
+  displayedName: Rip And Tear
   includeInGame: 1
   baseAbilityDescription: Deal 125% Magic damage to target. Damage is increased by
     10% for each stack of Bleeding on the target.
@@ -129,6 +130,7 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 01000000
     damageEffectModifiers:
     - type: 5
@@ -136,7 +138,9 @@ MonoBehaviour:
       targetRace: 0
       bonusDamageModifier: 0.1
       bonusCriticalChance: 50
+      extraCriticalDamage: 0
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0

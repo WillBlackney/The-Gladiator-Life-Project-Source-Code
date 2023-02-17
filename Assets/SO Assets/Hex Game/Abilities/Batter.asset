@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Batter
   m_EditorClassIdentifier: 
   abilityName: Batter
+  displayedName: Batter
   includeInGame: 1
   baseAbilityDescription: Remove 10 Armour from an enemy, then deal 100% Physical
     damage.
   abilitySprite: {fileID: 21300000, guid: 8cf75fabfbdb5ce449677da9b9ca8ff2, type: 3}
   energyCost: 4
-  fatigueCost: 8
+  fatigueCost: 13
   baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -99,9 +100,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 10
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0

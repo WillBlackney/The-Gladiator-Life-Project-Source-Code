@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Arcane Artillery
   m_EditorClassIdentifier: 
   abilityName: Arcane Artillery
+  displayedName: Arcane Artillery
   includeInGame: 1
   baseAbilityDescription: 'Deal 100% Magic damage to all characters within 1 tile
     of target location. '
@@ -144,9 +145,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 02000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

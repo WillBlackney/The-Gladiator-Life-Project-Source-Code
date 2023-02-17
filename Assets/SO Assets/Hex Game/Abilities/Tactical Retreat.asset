@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tactical Retreat
   m_EditorClassIdentifier: 
   abilityName: Tactical Retreat
+  displayedName: Tactical Retreat
   includeInGame: 1
   baseAbilityDescription: Teleport to a tile within 1, then gain 1 Focus
   abilitySprite: {fileID: 21300000, guid: 1d4a4c76798682b4e9a11b9f48db43f3, type: 3}
@@ -35,6 +36,8 @@ MonoBehaviour:
   abilitySubRequirements:
   - type: 3
     healthRequired: 0
+    race: 0
+    perk: 0
   baseRange: 1
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
@@ -70,9 +73,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -110,9 +116,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

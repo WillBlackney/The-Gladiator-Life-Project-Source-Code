@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Force Blast
   m_EditorClassIdentifier: 
   abilityName: Force Blast
+  displayedName: Force Blast
   includeInGame: 1
   baseAbilityDescription: Deal 125% Magic damage and knock a target back 1 tile.
     No Accuracy penalty when used in melee.
@@ -99,9 +100,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 02000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -140,9 +144,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

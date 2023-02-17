@@ -553,7 +553,7 @@ namespace HexGameEngine.TownFeatures
                 {
                     confirmLearnAbilityImage.sprite = validButtonSprite;
                     invalidLibraryActionText.text = "Are you sure you want to teach " +
-                        TextLogic.ReturnColoredText(ability.abilityName, TextLogic.neutralYellow) +
+                        TextLogic.ReturnColoredText(ability.displayedName, TextLogic.neutralYellow) +
                         " to " + TextLogic.ReturnColoredText(character.myName, TextLogic.neutralYellow) + "?";
                 }
             }

@@ -35,7 +35,7 @@ namespace HexGameEngine.Cards
             // disable all components first
 
             // build
-            SetCardViewModelNameText(cardVM, ability.abilityName);
+            SetCardViewModelNameText(cardVM, ability.displayedName);
             AutoUpdateCardViewModelDescriptionTextFromAbilityData(cardVM, ability);
             SetCardViewModelGraphicImage(cardVM, ability.AbilitySprite);
 

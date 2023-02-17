@@ -118,15 +118,29 @@ namespace HexGameEngine.Abilities
                 }
             }
 
-            // build off hand weapon abilities
+            // Get special ability of off hand weapon
             if (itemSet.offHandItem != null)
             {
                 foreach (AbilityData d in itemSet.offHandItem.grantedAbilities)
                 {
                     if (itemSet.mainHandItem != null &&
-                        itemSet.offHandItem.weaponClass != itemSet.mainHandItem.weaponClass && 
-                        d.weaponAbilityType == WeaponAbilityType.Basic)
-                        ret.Add(d);
+                        itemSet.offHandItem.weaponClass != itemSet.mainHandItem.weaponClass)
+                    {
+                        // if weapon, get special ability
+                        if(d.weaponAbilityType == WeaponAbilityType.Special &&
+                            (itemSet.offHandItem.IsRangedWeapon || itemSet.offHandItem.IsMeleeWeapon))
+                        {
+                            ret.Add(d);
+                        }
+
+                        // else if shield, net, holdable, etc, get the basic ability
+                        else if (d.weaponAbilityType == WeaponAbilityType.Basic &&
+                            !itemSet.offHandItem.IsRangedWeapon && !itemSet.offHandItem.IsMeleeWeapon)
+                        {
+                            ret.Add(d);
+                        }
+                    }
+                        
                 }
             }
 
@@ -136,8 +150,9 @@ namespace HexGameEngine.Abilities
                 foreach(var a in loadOutAbilities)                
                     ret.Add(a);
             }
-
-            Debug.Log("AbilityBook.GenerateAbilitiesFromWeapons() generated abilities: " + ret.Count.ToString());
+            string abilityNames = "";
+            ret.ForEach(x => abilityNames += x.abilityName + ", ");
+            Debug.Log("AbilityBook.GenerateAbilitiesFromWeapons() generated abilities: " + abilityNames);
             return ret;
         }
         private List<AbilityData> GetLoadoutAbilitiesFromItemSet(ItemSet itemSet)
@@ -149,7 +164,7 @@ namespace HexGameEngine.Abilities
                 itemSet.mainHandItem.IsMeleeWeapon &&
                 itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
             {
-                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Smash Shield"));
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Smash Shield (Native 2h)"));
             }
 
             // Dual wielding 1h: Twin Strike

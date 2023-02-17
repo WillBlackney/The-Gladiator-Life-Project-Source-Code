@@ -883,7 +883,7 @@ namespace HexGameEngine.HexTiles
             // Hit chance pop up
             else if (AbilityController.Instance.AwaitingAbilityOrder())
             {
-                AbilityController.Instance.ShowHitChancePopup(TurnController.Instance.EntityActivated, h.myCharacter, AbilityController.Instance.CurrentAbilityAwaiting);
+                AbilityController.Instance.ShowHitChancePopup(TurnController.Instance.EntityActivated, h.myCharacter, AbilityController.Instance.CurrentAbilityAwaiting, TurnController.Instance.EntityActivated.itemSet.mainHandItem);
             }
         }
         public void OnHexMouseExit(LevelNode h)

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hook
   m_EditorClassIdentifier: 
   abilityName: Hook
+  displayedName: Hook
   includeInGame: 1
   baseAbilityDescription: Deal 50% Physical damage. If the target is Vulnerable,
     they become Stunned.
@@ -99,9 +100,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -158,9 +161,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Pound
   m_EditorClassIdentifier: 
   abilityName: Pound
+  displayedName: Pound
   includeInGame: 1
-  baseAbilityDescription: Remove 15 Armour from an enemy, then deal 125% Physical
-    damage.
-  abilitySprite: {fileID: 21300000, guid: 8cf75fabfbdb5ce449677da9b9ca8ff2, type: 3}
-  energyCost: 5
-  fatigueCost: 12
+  baseAbilityDescription: Deal 125% weapon damage. On a Critical Hit, apply Stunned.
+  abilitySprite: {fileID: 21300000, guid: dce8d7b79538a4c4bba83dd71269ebd9, type: 3}
+  energyCost: 6
+  fatigueCost: 15
   baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -86,7 +86,22 @@ MonoBehaviour:
       projectileFired: 0
       projectileStartPosition: 0
       onCharacter: 0
-    visualEventsOnEffectFinish: []
+    visualEventsOnEffectFinish:
+    - eventType: 6
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0.5
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
     aoeType: 0
     includeCentreTile: 1
     aoeSize: 1
@@ -98,10 +113,12 @@ MonoBehaviour:
     guaranteedHit: 0
     ignoresGuard: 0
     ignoresArmour: 0
-    bonusArmourDamage: 15
+    bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -112,7 +129,65 @@ MonoBehaviour:
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
-  onCritEffects: []
+  onCritEffects:
+  - effectType: 10
+    stressEventData:
+      stressAmountMin: 0
+      stressAmountMax: 0
+      successChance: 0
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish:
+    - eventType: 6
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0.5
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
+    weaponUsed: 0
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 3
+      passiveStacks: 1
+    perkApplicationChance: 100
+    knockBackDistance: 0
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -121,20 +196,8 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Remove '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '15 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'Armour '
+    phrase: 'Deal '
   - color: 0
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'from an enemy, then deal '
-  - color: 2
     getPhraseFromAbilityValue: 1
     abilityEffectType: 2
     phrase: 
@@ -145,7 +208,33 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: damage.
+    phrase: 'damage to an enemy. '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'On a '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Critical Strike
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'apply '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Stunned
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
   keyWords:
-  - kewWordType: 30
+  - kewWordType: 20
     passiveType: 0
+  - kewWordType: 1
+    passiveType: 3

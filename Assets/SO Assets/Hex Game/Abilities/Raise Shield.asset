@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Raise Shield
   m_EditorClassIdentifier: 
   abilityName: Raise Shield
+  displayedName: Raise Shield
   includeInGame: 1
   baseAbilityDescription: Gain 1 Shield Wall.
   abilitySprite: {fileID: 21300000, guid: ac7fae9736edd5346a53060af8fccbf3, type: 3}
   energyCost: 4
-  fatigueCost: 12
+  fatigueCost: 20
   baseCooldown: 1
   abilityType: 01000000
   doesNotBreakStealth: 0
@@ -83,9 +84,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0

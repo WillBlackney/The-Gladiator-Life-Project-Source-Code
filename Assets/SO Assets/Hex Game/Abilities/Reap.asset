@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: Reap
   m_EditorClassIdentifier: 
   abilityName: Reap
+  displayedName: Reap
   includeInGame: 1
-  baseAbilityDescription: Deal 75% Physical damage to an enemy and a random enemy
-    adjacent to them. Can attack over 2 tiles. -10 Accuracy against adjacent targets.
+  baseAbilityDescription: Deal 100% Physical damage to an enemy and a random enemy
+    adjacent to them. -10 Accuracy
   abilitySprite: {fileID: 21300000, guid: 7d92503d857220443a3e7703b87acc38, type: 3}
-  energyCost: 4
-  fatigueCost: 15
-  baseCooldown: 2
+  energyCost: 6
+  fatigueCost: 25
+  baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
   weaponRequirement: 1
@@ -34,10 +35,10 @@ MonoBehaviour:
     talentSchool: 0
     level: 0
   abilitySubRequirements: []
-  baseRange: 2
+  baseRange: 1
   gainRangeBonusFromVision: 0
-  hitChanceModifier: 0
-  hitChanceModifierAgainstAdjacent: -10
+  hitChanceModifier: -10
+  hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
   - effectType: 2
@@ -114,9 +115,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -191,9 +194,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -219,15 +224,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'damage to an enemy and a random enemy adjacent to them. Can attack over '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '2 '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'tiles. Suffers a '
+    phrase: 'damage to an enemy and a random enemy adjacent to them. '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -235,11 +232,11 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Accuracy '
+    phrase: Accuracy
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: penalty against adjacent targets.
+    phrase: .
   keyWords:
   - kewWordType: 11
     passiveType: 0

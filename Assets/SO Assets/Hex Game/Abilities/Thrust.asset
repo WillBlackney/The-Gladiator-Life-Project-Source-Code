@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Thrust
   m_EditorClassIdentifier: 
   abilityName: Thrust
+  displayedName: Thrust
   includeInGame: 1
-  baseAbilityDescription: Deal 75% weapon damage. This has a +20 Accuracy bonus.
+  baseAbilityDescription: Deal 100% weapon damage.
   abilitySprite: {fileID: 21300000, guid: b730cef812431cd4599afb85b5e25fab, type: 3}
   energyCost: 4
-  fatigueCost: 5
+  fatigueCost: 10
   baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -35,7 +36,7 @@ MonoBehaviour:
   abilitySubRequirements: []
   baseRange: 1
   gainRangeBonusFromVision: 0
-  hitChanceModifier: 20
+  hitChanceModifier: 0
   hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
@@ -92,15 +93,17 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 13
-    maxBaseDamage: 17
+    minBaseDamage: 17
+    maxBaseDamage: 23
     guaranteedHit: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -132,19 +135,5 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'damage to an enemy. This attack has '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '+20 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Accuracy
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: .
-  keyWords:
-  - kewWordType: 11
-    passiveType: 0
+    phrase: damage to an enemy.
+  keyWords: []

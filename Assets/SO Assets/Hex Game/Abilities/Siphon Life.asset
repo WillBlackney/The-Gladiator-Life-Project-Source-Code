@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Siphon Life
   m_EditorClassIdentifier: 
   abilityName: Siphon Life
+  displayedName: Siphon Life
   includeInGame: 1
   baseAbilityDescription: Apply 2 Weakened to target. If not resisted, gain 2 Guard.
   abilitySprite: {fileID: 21300000, guid: e730c287369c38a45874e1bacce979ac, type: 3}
@@ -98,9 +99,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -156,9 +160,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

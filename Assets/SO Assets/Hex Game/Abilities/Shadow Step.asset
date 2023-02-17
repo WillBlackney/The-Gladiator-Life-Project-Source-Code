@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: Shadow Step
   m_EditorClassIdentifier: 
   abilityName: Shadow Step
+  displayedName: Shadow Step
   includeInGame: 1
   baseAbilityDescription: Teleport behind an enemy and deal 50% Physical damage to
     them.
   abilitySprite: {fileID: 21300000, guid: d757a6a13730f0b46ae4fc435afa5cb6, type: 3}
   energyCost: 4
-  fatigueCost: 15
-  baseCooldown: 3
-  abilityType: 0200000001000000
+  fatigueCost: 20
+  baseCooldown: 2
+  abilityType: 0200000004000000
   doesNotBreakStealth: 1
-  weaponRequirement: 0
+  weaponRequirement: 1
   derivedFromWeapon: 0
   derivedFromItemLoadout: 0
   weaponAbilityType: 0
@@ -36,7 +37,9 @@ MonoBehaviour:
   abilitySubRequirements:
   - type: 1
     healthRequired: 0
-  baseRange: 2
+    race: 0
+    perk: 0
+  baseRange: 1
   gainRangeBonusFromVision: 1
   hitChanceModifier: 0
   hitChanceModifierAgainstAdjacent: 0
@@ -86,9 +89,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -156,9 +162,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 01000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

@@ -13,19 +13,20 @@ MonoBehaviour:
   m_Name: Puncture
   m_EditorClassIdentifier: 
   abilityName: Puncture
+  displayedName: Puncture
   includeInGame: 1
   baseAbilityDescription: Deal 75% weapon damage. Damage ignores Guard and Armour
-    on the target.
+    on the target. -10 Accuracy.
   abilitySprite: {fileID: 21300000, guid: aa5ea9abed867414eadcf86d9f71cf74, type: 3}
-  energyCost: 3
-  fatigueCost: 0
+  energyCost: 4
+  fatigueCost: 20
   baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
   weaponRequirement: 1
   derivedFromWeapon: 1
   derivedFromItemLoadout: 0
-  weaponAbilityType: 1
+  weaponAbilityType: 2
   weaponClass: 1
   targetRequirement: 3
   secondaryTargetRequirement: 0
@@ -36,7 +37,7 @@ MonoBehaviour:
   abilitySubRequirements: []
   baseRange: 1
   gainRangeBonusFromVision: 0
-  hitChanceModifier: 0
+  hitChanceModifier: -10
   hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
@@ -114,9 +115,12 @@ MonoBehaviour:
     ignoresGuard: 1
     ignoresArmour: 1
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -163,9 +167,23 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: on the target.
+    phrase: 'on the target. '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '-10 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Accuracy
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
   keyWords:
   - kewWordType: 1
     passiveType: 74
   - kewWordType: 30
+    passiveType: 0
+  - kewWordType: 11
     passiveType: 0

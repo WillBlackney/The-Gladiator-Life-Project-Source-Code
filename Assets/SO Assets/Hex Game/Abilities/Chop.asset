@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Chop
   m_EditorClassIdentifier: 
   abilityName: Chop
+  displayedName: Chop
   includeInGame: 1
-  baseAbilityDescription: Deal 100% Weapon damage to target and apply 1 Bleeding.
-    On a Critical Strike, apply 2 Bleeding.
+  baseAbilityDescription: Deal 100% Weapon damage to an enemy. Critical Strikes deal
+    an additional 50% damage.
   abilitySprite: {fileID: 21300000, guid: 9844dbd8ecfac7746ba3c54b1887b6f1, type: 3}
   energyCost: 4
-  fatigueCost: 8
+  fatigueCost: 12
   baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -111,12 +112,21 @@ MonoBehaviour:
     minBaseDamage: 18
     maxBaseDamage: 22
     guaranteedHit: 0
+    bonusCritDamage: 50
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
-    damageEffectModifiers: []
+    damageEffectModifiers:
+    - type: 10
+      perk: 0
+      targetRace: 0
+      bonusDamageModifier: 0
+      bonusCriticalChance: 0
+      extraCriticalDamage: 0.5
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -126,120 +136,8 @@ MonoBehaviour:
       passiveStacks: 0
     perkApplicationChance: 100
     knockBackDistance: 0
-  onHitEffects:
-  - effectType: 10
-    stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
-      successChance: 0
-    energyGained: 0
-    normalTeleportVFX: 1
-    tilesMoved: 0
-    lineLength: 0
-    healthGained: 0
-    healthLost: 0
-    requirements: []
-    chainedEffect: 0
-    triggersChainEffectSequence: 0
-    visualEventsOnStart:
-    - eventType: 6
-      screenOverlayType: 0
-      overlayColor: 0
-      overlayFadeInTime: 0
-      overlayDuration: 0
-      overlayFadeOutTime: 0
-      particleEffect: 0
-      cameraShake: 0
-      movementAnimation: 0
-      soundEffect: 0
-      characterAnimation: 0
-      delayDuration: 0.5
-      projectileFired: 0
-      projectileStartPosition: 0
-      onCharacter: 0
-    visualEventsOnHit: []
-    visualEventsOnEffectFinish: []
-    aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
-    damageType: 0
-    minBaseDamage: 0
-    maxBaseDamage: 0
-    guaranteedHit: 0
-    ignoresGuard: 0
-    ignoresArmour: 0
-    bonusArmourDamage: 0
-    injuryTypesCaused: 
-    damageEffectModifiers: []
-    characterSummoned: {fileID: 0}
-    amountSummoned: 1
-    modelFadeInSpeed: 0
-    uiFadeInSpeed: 0
-    summonedCreatureVisualEvents: []
-    perkPairing:
-      perkTag: 7
-      passiveStacks: 1
-    perkApplicationChance: 100
-    knockBackDistance: 0
-  onCritEffects:
-  - effectType: 10
-    stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
-      successChance: 0
-    energyGained: 0
-    normalTeleportVFX: 1
-    tilesMoved: 0
-    lineLength: 0
-    healthGained: 0
-    healthLost: 0
-    requirements: []
-    chainedEffect: 0
-    triggersChainEffectSequence: 0
-    visualEventsOnStart:
-    - eventType: 6
-      screenOverlayType: 0
-      overlayColor: 0
-      overlayFadeInTime: 0
-      overlayDuration: 0
-      overlayFadeOutTime: 0
-      particleEffect: 0
-      cameraShake: 0
-      movementAnimation: 0
-      soundEffect: 0
-      characterAnimation: 0
-      delayDuration: 0.5
-      projectileFired: 0
-      projectileStartPosition: 0
-      onCharacter: 0
-    visualEventsOnHit: []
-    visualEventsOnEffectFinish: []
-    aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
-    damageType: 0
-    minBaseDamage: 0
-    maxBaseDamage: 0
-    guaranteedHit: 0
-    ignoresGuard: 0
-    ignoresArmour: 0
-    bonusArmourDamage: 0
-    injuryTypesCaused: 
-    damageEffectModifiers: []
-    characterSummoned: {fileID: 0}
-    amountSummoned: 1
-    modelFadeInSpeed: 0
-    uiFadeInSpeed: 0
-    summonedCreatureVisualEvents: []
-    perkPairing:
-      perkTag: 7
-      passiveStacks: 2
-    perkApplicationChance: 100
-    knockBackDistance: 0
+  onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -260,41 +158,23 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'damage to an enemy and apply '
+    phrase: 'damage to an enemy. A '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Critical Strike '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'deals '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '1 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Bleeding
+    phrase: '+50% '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '. On a '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Critical Strike
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: ', apply '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '2 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Bleeding
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: .
+    phrase: more damage.
   keyWords:
-  - kewWordType: 1
-    passiveType: 7
   - kewWordType: 20
     passiveType: 0

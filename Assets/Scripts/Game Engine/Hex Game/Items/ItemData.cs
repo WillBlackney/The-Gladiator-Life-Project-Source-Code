@@ -1,4 +1,5 @@
 ﻿using HexGameEngine.Abilities;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,9 @@ namespace HexGameEngine.Items
         public HandRequirement handRequirement;
         public WeaponSlot allowedSlot;
         public InjuryType[] injuryTypesCaused;
+        public float healthDamage = 1f;
+        public float armourDamage = 1f;
+        public float armourPenetration = 0.25f;
 
         // Armour Properties
         public int fatiguePenalty;

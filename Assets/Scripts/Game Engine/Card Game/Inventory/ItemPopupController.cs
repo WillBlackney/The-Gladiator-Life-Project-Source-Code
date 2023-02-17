@@ -10,6 +10,7 @@ using HexGameEngine.UI;
 using HexGameEngine.Perks;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.RewardSystems;
+using System;
 
 namespace HexGameEngine.Items
 {
@@ -22,26 +23,36 @@ namespace HexGameEngine.Items
         [SerializeField] RectTransform[] transformsRebuilt;
         [SerializeField] CanvasGroup mainCg;
 
-        [Header("Row 1 Components")]
+        [Header("Name + Icon Row Components")]
         [SerializeField] TextMeshProUGUI nameText;
         [SerializeField] TextMeshProUGUI descriptionText;
         [SerializeField] Image itemImage;
 
-        [Header("Row 2 Components")]
+        [Header("Type + Rarity Row Components")]
         [SerializeField] TextMeshProUGUI itemTypeText;
         [SerializeField] TextMeshProUGUI rarityText;
 
-        [Header("Row 3 Components")]
+        [Header("Damage Modifier Row Components")]
+        [SerializeField] GameObject damageModParent;
+        [SerializeField] TextMeshProUGUI armourDamageText;
+        [SerializeField] TextMeshProUGUI healthDamageText;
+        [SerializeField] TextMeshProUGUI penetrationText;
+
+        [Header("Granted Ability Row Components")]
         [SerializeField] GameObject abilitiesParent;
         [SerializeField] UiAbilityIconRow[] abilityRows;
 
-        [Header("Row 4 Components")]
+        [Header("Effects Row Components")]
         [SerializeField] GameObject effectsParent;
         [SerializeField] ModalDottedRow[] effectRows;
 
         [Header("Armour Components")]
         [SerializeField] GameObject armourParent;
         [SerializeField] TextMeshProUGUI armourText;
+
+        [Header("Fatigue Penalty Components")]
+        [SerializeField] GameObject fatiguePenaltyParent;
+        [SerializeField] TextMeshProUGUI fatiguePenaltyText;
         #endregion
 
         // Getters + Accessors
@@ -181,14 +192,18 @@ namespace HexGameEngine.Items
             itemTypeText.text = GetItemTypeString(item);
             rarityText.text = item.rarity.ToString();
 
-            // Row 3
-            BuildGrantedAbilitiesSection(item);
+            // Damage mods row
+            BuildDamageModRows(item);
 
             // Row 4
+            BuildGrantedAbilitiesSection(item);
+
+            // Row 5
             BuildGrantedEffectsSection(item);
 
-            // Armour Section
+            // Armour + Fatigue Sections
             BuildArmourSection(item);
+            BuildMaxFatigueSection(item);
         }
         private string GetItemTypeString(ItemData item)
         {
@@ -221,8 +236,20 @@ namespace HexGameEngine.Items
                 for(int i = 0; i < item.grantedAbilities.Count; i++)
                 {
                     abilityRows[i].Build(item.grantedAbilities[i]);
-                }
-               
+                }               
+            }
+        }
+
+        private void BuildDamageModRows(ItemData item)
+        {
+            damageModParent.SetActive(false);
+
+            if(item.IsMeleeWeapon || item.IsRangedWeapon)
+            {
+                damageModParent.SetActive(true);
+                healthDamageText.text = Math.Round(item.healthDamage * 100f).ToString() +"%";
+                armourDamageText.text = Math.Round(item.armourDamage * 100f).ToString() + "%";
+                penetrationText.text = Math.Round(item.armourPenetration * 100f).ToString() + "%";
             }
         }
         private void BuildArmourSection(ItemData item)
@@ -242,6 +269,7 @@ namespace HexGameEngine.Items
                 effectRows[i].gameObject.SetActive(false);
 
             int iBoost = 0;
+            /*
             if(item.fatiguePenalty > 0)
             {
                 iBoost += 1;
@@ -249,7 +277,8 @@ namespace HexGameEngine.Items
                 ModalDottedRow row = effectRows[iBoost - 1];
                 row.Build(TextLogic.ReturnColoredText("-" + item.fatiguePenalty.ToString(), TextLogic.blueNumber) + " Maximum Fatigue", DotStyle.Red);
             }
-
+            */
+            /*
             if (item.weaponClass == WeaponClass.Crossbow)
             {
                 iBoost += 1;
@@ -257,7 +286,7 @@ namespace HexGameEngine.Items
                 ModalDottedRow row = effectRows[iBoost - 1];
                 row.Build("Can only be fired once per turn.", DotStyle.Red);
             }
-
+            */
             if (item.itemEffects.Count > 0)
             {
                 effectsParent.SetActive(true);
@@ -288,9 +317,16 @@ namespace HexGameEngine.Items
 
                     else if (effect.effectType == ItemEffectType.OnHitEffect)
                     {
+                        string zero = TextLogic.ReturnColoredText(effect.perkApplied.passiveStacks.ToString(), TextLogic.blueNumber);
+                        string one = TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkApplied.perkTag.ToString()), TextLogic.neutralYellow);
+                        string two = effect.effectChance.ToString();
+
+                        row.Build(String.Format("On hit: Apply {0} {1} ({2}% chance).", zero, one, two), DotStyle.Green);
+
+                        /*
                         row.Build("On hit: Apply " + TextLogic.ReturnColoredText(effect.perkApplied.passiveStacks.ToString(), TextLogic.blueNumber) + " " +
                             TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkApplied.perkTag.ToString()), TextLogic.neutralYellow) + " (" +
-                            effect.effectChance.ToString() + "% chance).", DotStyle.Green);
+                            effect.effectChance.ToString() + "% chance).", DotStyle.Green);*/
                     }
                     else if (item.itemEffects[i].effectType == ItemEffectType.GainPerk)
                     {
@@ -311,7 +347,82 @@ namespace HexGameEngine.Items
                         row.Build("On combat start, gain " + TextLogic.ReturnColoredText(effect.perkGained.stacks.ToString(), TextLogic.blueNumber) + " " +
                            TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkGained.perkTag.ToString()), TextLogic.neutralYellow) + ".", DotStyle.Green);
                     }
+                    else if (item.itemEffects[i].effectType == ItemEffectType.InnateWeaponEffect)
+                    {
+                        if(item.itemEffects[i].innateItemEffectType == InnateItemEffectType.InnateAccuracyModifier)
+                        {
+                            // +X Hit Chance with attacks using this weapon.
+                            dotStyle = DotStyle.Green;
+                            string zero = "+";
+                            string one = TextLogic.ReturnColoredText(effect.innateAccuracyMod.ToString(), TextLogic.blueNumber);
+                            string two = TextLogic.ReturnColoredText("Accuracy", TextLogic.neutralYellow);
+                            
+                            if(effect.innateAccuracyMod < 0)
+                            {
+                                dotStyle = DotStyle.Red;
+                                zero = "";
+                            }
+                            row.Build(String.Format("{0}{1} {2} with attacks using this weapon.", zero, one, two), dotStyle);
+                        }
+                        else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.InnateAccuracyAgainstAdjacentModifier)
+                        {
+                            // +X or -X Hit Chance with attacks against adjacent targets using this weapon.
+                            dotStyle = DotStyle.Green;
+                            string zero = "+";
+                            string one = TextLogic.ReturnColoredText(effect.innateAccuracyAgainstAdjacentMod.ToString(), TextLogic.blueNumber);
+                            string two = TextLogic.ReturnColoredText("Accuracy", TextLogic.neutralYellow);
+
+                            if (effect.innateAccuracyAgainstAdjacentMod < 0)
+                            {
+                                dotStyle = DotStyle.Red;
+                                zero = "";
+                            }
+                            row.Build(String.Format("{0}{1} {2} with attacks using this weapon against adjacent targets.", zero, one, two), dotStyle);
+                        }
+                        else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.InnatePerkGainedOnUse)
+                        {
+                            // whenever this weapon is used, apply X Y to self.
+                            dotStyle = DotStyle.Green;
+                            string zero = TextLogic.ReturnColoredText(effect.innatePerkGainedOnUse.stacks.ToString(), TextLogic.blueNumber);
+                            string one = TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.innatePerkGainedOnUse.perkTag.ToString()), TextLogic.neutralYellow);
+
+                            row.Build(String.Format("Whenever you attack with this weapon, apply {0} {1} to self.", zero, one), DotStyle.Red);
+                        }
+                        else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.BonusMeleeRange)
+                        {
+                            dotStyle = DotStyle.Red;
+                            string symbol = "";
+                            if(effect.innateWeaponRangeBonus > 0)
+                            {
+                                dotStyle = DotStyle.Green;
+                                symbol = "+";
+                            }
+                            string zero = TextLogic.ReturnColoredText(symbol + effect.innateWeaponRangeBonus.ToString(), TextLogic.blueNumber);
+                            row.Build(String.Format("{0} range with attacks using this weapon.", zero), dotStyle);
+
+                        }
+                        else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.PenetrationBonusOnBackstab)
+                        {
+                            // bonus penetration on backstab
+                            dotStyle = DotStyle.Green;
+                            string zero = TextLogic.ReturnColoredText("+" + effect.innateBackstabPenetrationBonus.ToString() +"%", TextLogic.blueNumber);
+                            string one = TextLogic.ReturnColoredText("Penetration", TextLogic.neutralYellow);
+                            string two = TextLogic.ReturnColoredText("Backstabbing" ,TextLogic.neutralYellow);
+                            row.Build(String.Format("{0} {1} when {2} with this weapon.", zero, one, two), dotStyle);
+
+                        }
+                    }
                 }
+            }
+        }
+        private void BuildMaxFatigueSection(ItemData item)
+        {
+            fatiguePenaltyParent.SetActive(false);
+
+            if (item.fatiguePenalty > 0)
+            {
+                fatiguePenaltyParent.SetActive(true);
+                fatiguePenaltyText.text = "-" + item.fatiguePenalty.ToString();
             }
         }
         #endregion

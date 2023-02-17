@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ghostly Grasp
   m_EditorClassIdentifier: 
   abilityName: Ghostly Grasp
+  displayedName: Ghostly Grasp
   includeInGame: 1
   baseAbilityDescription: Deal 100% Magic damage. Damage ignores Armour on the target.
   abilitySprite: {fileID: 21300000, guid: aa5ea9abed867414eadcf86d9f71cf74, type: 3}
@@ -113,9 +114,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 1
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

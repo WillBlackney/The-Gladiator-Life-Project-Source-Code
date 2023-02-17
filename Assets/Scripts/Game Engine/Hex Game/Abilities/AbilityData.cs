@@ -11,6 +11,7 @@ namespace HexGameEngine.Abilities
     {
         public HexCharacterModel myCharacter;
         public string abilityName;
+        public string displayedName;
         public string baseAbilityDescription;
         public WeaponAbilityType weaponAbilityType;
 

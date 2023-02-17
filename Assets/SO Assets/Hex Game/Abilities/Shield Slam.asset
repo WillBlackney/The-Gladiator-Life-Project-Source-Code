@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Shield Slam
   m_EditorClassIdentifier: 
   abilityName: Shield Slam
+  displayedName: Shield Slam
   includeInGame: 1
   baseAbilityDescription: Slam your shield against a target, knocking them back 1
     tile and dealing 125% Physical damage. Damage is increased 10% for each stack
@@ -100,6 +101,7 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers:
     - type: 8
@@ -107,7 +109,10 @@ MonoBehaviour:
       targetRace: 0
       bonusDamageModifier: 0.1
       bonusCriticalChance: 0
+      extraCriticalDamage: 0
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
@@ -146,9 +151,12 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []

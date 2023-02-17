@@ -17,8 +17,8 @@ MonoBehaviour:
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
   rarity: 1
-  fatiguePenalty: 5
-  baseGoldValue: 50
+  fatiguePenalty: 2
+  baseGoldValue: 100
   canSpawnInShop: 1
   canBeCombatContractReward: 0
   includeInLibrary: 1
@@ -26,6 +26,9 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 1
   injuryTypesCaused: 
+  healthDamage: 1
+  armourDamage: 1
+  armourPenetration: 0.25
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

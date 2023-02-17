@@ -4,6 +4,7 @@ using UnityEngine;
 using HexGameEngine.Combat;
 using HexGameEngine.Perks;
 using HexGameEngine.Items;
+using HexGameEngine.Abilities;
 
 namespace HexGameEngine
 {
@@ -461,6 +462,7 @@ namespace HexGameEngine
             if (mod < 0) mod = 0;
             dodge = (int)(dodge * mod);
 
+            Debug.Log(System.String.Format("Dodge returned for {0}: {1}", c.myName, dodge.ToString()));
             return dodge;
         }
         public static int GetTotalDodge(HexCharacterData c)
@@ -1233,7 +1235,7 @@ namespace HexGameEngine
            
             return crit;
         }
-        public static int GetTotalCriticalModifier(HexCharacterModel c)
+        public static int GetTotalCriticalModifier(HexCharacterModel c, AbilityEffect effect = null)
         {
             int criticalModifier = c.attributeSheet.criticalModifier;
 
@@ -1248,6 +1250,8 @@ namespace HexGameEngine
             // Scoundrel talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Scoundrel, 1))
                 criticalModifier += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Scoundrel) * 20;
+
+            if (effect != null) criticalModifier += effect.bonusCritDamage;
 
             // Items
             criticalModifier += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.CriticalModifier, c.itemSet);
@@ -1589,6 +1593,11 @@ namespace HexGameEngine
 
         // Misc Calculators
         #region
+        /// <summary>
+        /// Returns a whole number represented as a float. For example, if a character is at 50% health, this will return 50.0, not 0.5
+        /// </summary>
+        /// <param name="character"></param>
+        /// <returns></returns>
         public static float GetCurrentHealthAsPercentageOfMaxHealth(HexCharacterModel character)
         {
             float current = character.currentHealth;

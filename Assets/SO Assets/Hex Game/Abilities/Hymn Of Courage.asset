@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hymn Of Courage
   m_EditorClassIdentifier: 
   abilityName: Hymn Of Courage
+  displayedName: Hymn Of Courage
   includeInGame: 1
   baseAbilityDescription: At the end of each turn, give 1 Courage to allies within
     your Aura. Only one hymn may be active at a time.
@@ -114,9 +115,11 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
+    weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0

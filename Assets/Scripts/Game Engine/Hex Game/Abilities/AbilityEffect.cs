@@ -144,6 +144,12 @@ namespace HexGameEngine.Abilities
 
         [BoxGroup("Damage Settings")]
         [LabelWidth(200)]
+        [ShowIf("ShowBonusCritDamage")]
+        [Range(0,100)]
+        public int bonusCritDamage = 0;
+
+        [BoxGroup("Damage Settings")]
+        [LabelWidth(200)]
         [ShowIf("ShowIgnoreBlock")]
         public bool ignoresGuard;
 
@@ -156,6 +162,11 @@ namespace HexGameEngine.Abilities
         [LabelWidth(200)]
         [ShowIf("ShowIgnoreBlock")]
         public int bonusArmourDamage;
+
+        [BoxGroup("Damage Settings")]
+        [LabelWidth(200)]
+        [ShowIf("ShowWeaponUsed")]
+        public WeaponSlot weaponUsed = WeaponSlot.MainHand;
 
         [BoxGroup("Damage Settings")]
         [LabelWidth(200)]
@@ -270,12 +281,20 @@ namespace HexGameEngine.Abilities
             }
 
             else return false;
-        }       
+        }
+        public bool ShowWeaponUsed()
+        {
+            return effectType == AbilityEffectType.DamageAoe || effectType == AbilityEffectType.DamageTarget;
+        }
         public bool ShowDamageType()
         {
             return effectType == AbilityEffectType.DamageAoe || effectType == AbilityEffectType.DamageTarget;
         }
         public bool ShowGuaranteedHit()
+        {
+            return effectType == AbilityEffectType.DamageAoe || effectType == AbilityEffectType.DamageTarget;
+        }
+        public bool ShowBonusCritDamage()
         {
             return effectType == AbilityEffectType.DamageAoe || effectType == AbilityEffectType.DamageTarget;
         }
@@ -323,7 +342,7 @@ namespace HexGameEngine.Abilities
             if ((effectType == AbilityEffectType.ApplyPassiveAoe ||
                effectType == AbilityEffectType.DamageAoe || 
                effectType == AbilityEffectType.StressCheckAoe) &&
-               aoeType == AoeType.AtTarget)
+               (aoeType == AoeType.AtTarget || aoeType == AoeType.Line))
                 return true;
             else return false;
         }
@@ -450,7 +469,9 @@ namespace HexGameEngine.Abilities
         [Range(0, 100)]
         public int bonusCriticalChance;
 
-        // to do: fields for perk and race
+        [ShowIf("ShowBonusCriticalDamage")]
+        [Range(0f, 1f)]
+        public float extraCriticalDamage;
 
 
         // Odin Show Ifs
@@ -459,7 +480,9 @@ namespace HexGameEngine.Abilities
         {
             if (type == DamageEffectModifierType.ExtraDamageAgainstRace ||
                type == DamageEffectModifierType.ExtraDamageIfTargetHasSpecificPerk ||
-               type == DamageEffectModifierType.ExtraDamageIfCasterHasSpecificPerk)
+               type == DamageEffectModifierType.ExtraDamageIfCasterHasSpecificPerk ||
+               type == DamageEffectModifierType.AddHealthMissingOnTargetToDamage ||
+               type == DamageEffectModifierType.AddHealthMissingOnSelfToDamage)
                 return true;
             else return false;
         }        
@@ -486,6 +509,10 @@ namespace HexGameEngine.Abilities
                 return true;
             else return false;
         }
+        public bool ShowBonusCriticalDamage()
+        {
+            return type == DamageEffectModifierType.ExtraCriticalDamage;
+        }
         #endregion
     }
     public enum DamageEffectModifierType
@@ -498,7 +525,8 @@ namespace HexGameEngine.Abilities
         ExtraCriticalChanceIfTargetHasSpecificPerk = 6,
         ExtraDamageIfCasterHasSpecificPerk = 8,
         ExtraDamageIfTargetHasSpecificPerk = 5,       
-        ExtraDamageAgainstRace = 3,     
+        ExtraDamageAgainstRace = 3,   
+        ExtraCriticalDamage = 10,
     }
 }
 

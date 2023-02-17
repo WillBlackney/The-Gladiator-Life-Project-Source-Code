@@ -16,6 +16,11 @@ namespace HexGameEngine.Abilities
         [LabelWidth(100)]
         public string abilityName;
 
+        [BoxGroup("General Info")]
+        [GUIColor("Blue")]
+        [LabelWidth(100)]
+        public string displayedName;
+
         [GUIColor("Blue")]
         [BoxGroup("General Info")]
         [LabelWidth(100)]
@@ -252,7 +257,7 @@ namespace HexGameEngine.Abilities
         }
         public bool ShowPerk()
         {
-            return type == AbilityRequirementType.TargetHasPerk || type == AbilityRequirementType.TargetDoesNotHavePerk;
+            return type == AbilityRequirementType.TargetHasPerk || type == AbilityRequirementType.TargetDoesNotHavePerk || type == AbilityRequirementType.CasterHasPerk;
         }
     }
 }
