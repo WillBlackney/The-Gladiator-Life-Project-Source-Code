@@ -35,10 +35,10 @@ MonoBehaviour:
   dodgeUpper: 8
   fatigueLower: 5
   fatigueUpper: 0
-  resolveLower: 0
-  resolveUpper: -5
-  witsLower: 10
-  witsUpper: 5
+  resolveLower: -2
+  resolveUpper: -3
+  witsLower: 8
+  witsUpper: 7
   minStartingAbilities: 2
   maxStartingAbilities: 2
   validRaces: 03000000050000000700000006000000

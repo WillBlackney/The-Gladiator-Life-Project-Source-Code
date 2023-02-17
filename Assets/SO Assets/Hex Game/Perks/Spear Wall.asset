@@ -19,20 +19,20 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'For the next '
+    phrase: 'For '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'X '
+    phrase: '1 '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: turns, whenever an enemy enters this character's melee range, they immediately
-      attack them.
+    phrase: 'turn, whenever an enemy enters this character''s melee range, they immediately
+      attack them. '
   passiveItalicDescription: 
   effectDetailTabs: []
-  maxAllowedStacks: 3
-  showStackCount: 1
+  maxAllowedStacks: 1
+  showStackCount: 0
   hiddenOnPassivePanel: 0
   isRewardable: 0
   resistanceBlocksIncrease: 0

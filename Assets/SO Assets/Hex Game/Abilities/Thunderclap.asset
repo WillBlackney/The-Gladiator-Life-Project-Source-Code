@@ -17,9 +17,9 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Stun all enemies within your Aura.
   abilitySprite: {fileID: 21300000, guid: f426e3ed9a4f1c349a60f72bbabc79e7, type: 3}
-  energyCost: 6
-  fatigueCost: 15
-  baseCooldown: 3
+  energyCost: 5
+  fatigueCost: 35
+  baseCooldown: 2
   abilityType: 01000000
   doesNotBreakStealth: 0
   weaponRequirement: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
     minBaseDamage: 8
     maxBaseDamage: 12
     guaranteedHit: 1
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0

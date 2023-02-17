@@ -813,9 +813,7 @@ namespace HexGameEngine
             }
 
             // Items
-            fitness += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fitness, c.itemSet);
-
-            
+            fitness += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Fitness, c.itemSet);            
 
             if (mod < 0) mod = 0;
             fitness = (int)(fitness * mod);
@@ -1063,26 +1061,26 @@ namespace HexGameEngine
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenNose))
-                    fatRecovery -= 3;
+                    fatRecovery -= 6;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingNose))
-                    fatRecovery -= 2;
+                    fatRecovery -= 3;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CrushedWindpipe))
-                    fatRecovery -= 5;
+                    fatRecovery -= 10;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedCheek))
-                    fatRecovery -= 2;
+                    fatRecovery -= 3;
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Wheezy))
-                fatRecovery -= 2;
+                fatRecovery -= 3;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StrongLungs))
-                fatRecovery += 2;                     
+                fatRecovery += 3;                     
                
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fat))
-                fatRecovery -= 2;
+                fatRecovery -= 3;
 
             // Items
             fatRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.FatigueRecovery, c.itemSet);
@@ -1102,26 +1100,26 @@ namespace HexGameEngine
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenNose))
-                    fatRecovery -= 3;
+                    fatRecovery -= 6;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingNose))
-                    fatRecovery -= 2;
+                    fatRecovery -= 3;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrushedWindpipe))
-                    fatRecovery -= 5;
+                    fatRecovery -= 10;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedCheek))
-                    fatRecovery -= 2;
+                    fatRecovery -= 3;
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Wheezy))
-                fatRecovery -= 2;
+                fatRecovery -= 3;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StrongLungs))
-                fatRecovery += 2;           
+                fatRecovery += 3;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fat))
-                fatRecovery -= 2;
+                fatRecovery -= 3;
 
             // Items
             fatRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.FatigueRecovery, c.itemSet);
@@ -1134,7 +1132,7 @@ namespace HexGameEngine
         }   
         public static int GetTotalActionPointRecovery(HexCharacterModel c)
         {
-            int apRecovery = c.attributeSheet.apRecovery;
+            int apRecovery = c.attributeSheet.energyRecovery;
 
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
@@ -1156,7 +1154,7 @@ namespace HexGameEngine
         }
         public static int GetTotalActionPointRecovery(HexCharacterData c)
         {
-            int apRecovery = c.attributeSheet.apRecovery;
+            int apRecovery = c.attributeSheet.energyRecovery;
 
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
@@ -1177,7 +1175,7 @@ namespace HexGameEngine
         }
         public static int GetTotalMaxActionPoints(HexCharacterModel c)
         {
-            int maxEnergy = c.attributeSheet.maxAp;
+            int maxEnergy = c.attributeSheet.energyMax;
 
             // Items
             maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxActionPoints, c.itemSet);
@@ -1186,7 +1184,7 @@ namespace HexGameEngine
         }
         public static int GetTotalMaxActionPoints(HexCharacterData c)
         {
-            int maxEnergy = c.attributeSheet.maxAp;
+            int maxEnergy = c.attributeSheet.energyMax;
 
             // Items
             maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxActionPoints, c.itemSet);

@@ -97,6 +97,7 @@ MonoBehaviour:
     minBaseDamage: 23
     maxBaseDamage: 27
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
@@ -104,7 +105,7 @@ MonoBehaviour:
     injuryTypesCaused: 01000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
-    characterSummonedName: ENTER NAME!!!
+    characterSummonedName: 
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0

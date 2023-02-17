@@ -18,8 +18,8 @@ MonoBehaviour:
   baseAbilityDescription: Apply 2 Crippled to all enemies within your Aura.
   abilitySprite: {fileID: 21300000, guid: 66727d9d67f61e148a5c1f2a44e7371d, type: 3}
   energyCost: 4
-  fatigueCost: 12
-  baseCooldown: 3
+  fatigueCost: 25
+  baseCooldown: 2
   abilityType: 05000000
   doesNotBreakStealth: 0
   weaponRequirement: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0

@@ -34,8 +34,8 @@ MonoBehaviour:
   dodgeUpper: 0
   fatigueLower: 0
   fatigueUpper: 0
-  resolveLower: 0
-  resolveUpper: -5
+  resolveLower: -2
+  resolveUpper: -3
   witsLower: 0
   witsUpper: 0
   minStartingAbilities: 1

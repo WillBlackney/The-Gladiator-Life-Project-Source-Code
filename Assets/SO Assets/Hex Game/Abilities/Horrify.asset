@@ -18,8 +18,8 @@ MonoBehaviour:
   baseAbilityDescription: Apply 2 Weakened to all enemies within your Aura.
   abilitySprite: {fileID: 21300000, guid: 254db86f895cba142ba5fe87e82418f1, type: 3}
   energyCost: 4
-  fatigueCost: 12
-  baseCooldown: 3
+  fatigueCost: 25
+  baseCooldown: 2
   abilityType: 01000000
   doesNotBreakStealth: 0
   weaponRequirement: 0
@@ -111,6 +111,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0

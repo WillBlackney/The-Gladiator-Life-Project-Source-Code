@@ -130,7 +130,7 @@ MonoBehaviour:
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
-    weaponUsed: 0
+    weaponUsed: 2
     injuryTypesCaused: 0100000002000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}

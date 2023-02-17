@@ -47,7 +47,6 @@ namespace HexGameEngine.Abilities
         [VerticalGroup("Core Data/Stats")]
         [LabelWidth(100)]
         [GUIColor("Blue")]
-        [Header("Costs & Type")]
         public int fatigueCost;
         [VerticalGroup("Core Data/Stats")]
         [LabelWidth(100)]
@@ -257,7 +256,7 @@ namespace HexGameEngine.Abilities
         }
         public bool ShowPerk()
         {
-            return type == AbilityRequirementType.TargetHasPerk || type == AbilityRequirementType.TargetDoesNotHavePerk || type == AbilityRequirementType.CasterHasPerk;
+            return type == AbilityRequirementType.TargetHasPerk || type == AbilityRequirementType.TargetDoesNotHavePerk || type == AbilityRequirementType.CasterHasPerk || type == AbilityRequirementType.CasterDoesNotHavePerk;
         }
     }
 }

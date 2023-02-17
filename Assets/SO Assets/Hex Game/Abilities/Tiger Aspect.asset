@@ -19,8 +19,8 @@ MonoBehaviour:
     have +15 Critical chance and apply 1 Bleeding.
   abilitySprite: {fileID: 21300000, guid: 53f5695e6b485b94983e16c3d9880f79, type: 3}
   energyCost: 6
-  fatigueCost: 15
-  baseCooldown: 2
+  fatigueCost: 30
+  baseCooldown: 1
   abilityType: 0100000006000000
   doesNotBreakStealth: 0
   weaponRequirement: 0
@@ -34,7 +34,11 @@ MonoBehaviour:
   talentRequirementData:
     talentSchool: 14
     level: 1
-  abilitySubRequirements: []
+  abilitySubRequirements:
+  - type: 10
+    healthRequired: 0
+    race: 0
+    perk: 144
   baseRange: 0
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
@@ -112,6 +116,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
@@ -155,6 +160,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0

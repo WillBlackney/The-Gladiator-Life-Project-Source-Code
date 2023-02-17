@@ -18,7 +18,7 @@ MonoBehaviour:
   baseAbilityDescription: Apply 2 Combo to self or an ally.
   abilitySprite: {fileID: 21300000, guid: eb92e429d93ca8c48ba80c543dff0153, type: 3}
   energyCost: 5
-  fatigueCost: 15
+  fatigueCost: 25
   baseCooldown: 4
   abilityType: 01000000
   doesNotBreakStealth: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0
