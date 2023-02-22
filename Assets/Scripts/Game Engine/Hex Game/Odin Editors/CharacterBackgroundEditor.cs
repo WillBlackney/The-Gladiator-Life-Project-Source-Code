@@ -72,7 +72,7 @@ namespace HexGameEngine.Editor
             [Button("Create New Background")]
             public void CreateNewData()
             {
-                AssetDatabase.CreateAsset(dataFile, "Assets/SO Assets/Hex Game/Recruit Class Templates/" + dataFile.backgroundType.ToString() + ".asset");
+                AssetDatabase.CreateAsset(dataFile, "Assets/SO Assets/Hex Game/Character Backgrounds/" + dataFile.backgroundType.ToString() + ".asset");
                 AssetDatabase.SaveAssets();
 
                 // Create the SO 

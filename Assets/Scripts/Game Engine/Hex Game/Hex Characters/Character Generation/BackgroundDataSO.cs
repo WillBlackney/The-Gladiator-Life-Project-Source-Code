@@ -295,6 +295,7 @@ namespace HexGameEngine.Characters
         Assassin = 15,
         Poacher = 16,
         Inquisitor = 17,
+        Militia = 18,
 
 
     }

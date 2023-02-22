@@ -18,7 +18,7 @@ MonoBehaviour:
   itemType: 4
   rarity: 2
   fatiguePenalty: 0
-  baseGoldValue: 250
+  baseGoldValue: 1000
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -26,6 +26,9 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 
+  healthDamage: 1
+  armourDamage: 1
+  armourPenetration: 0.25
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities: []
@@ -42,6 +45,14 @@ MonoBehaviour:
       perkApplied:
         perkTag: 0
         passiveStacks: 1
+      innateItemEffectType: 0
+      innateAccuracyMod: 0
+      innateAccuracyAgainstAdjacentMod: 0
+      innateWeaponRangeBonus: 0
+      innateBackstabPenetrationBonus: 0
+      innatePerkGainedOnUse:
+        perkTag: 0
+        stacks: 0
   - possibleEffects:
     - effectType: 1
       attributeModified: 10
@@ -54,3 +65,11 @@ MonoBehaviour:
       perkApplied:
         perkTag: 0
         passiveStacks: 1
+      innateItemEffectType: 0
+      innateAccuracyMod: 0
+      innateAccuracyAgainstAdjacentMod: 0
+      innateWeaponRangeBonus: 0
+      innateBackstabPenetrationBonus: 0
+      innatePerkGainedOnUse:
+        perkTag: 0
+        stacks: 0
