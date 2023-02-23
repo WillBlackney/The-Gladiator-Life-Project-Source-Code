@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Iron Horn Helmet
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 1
-  rarity: 1
+  rarity: 2
   fatiguePenalty: 5
   baseGoldValue: 300
   canSpawnInShop: 1

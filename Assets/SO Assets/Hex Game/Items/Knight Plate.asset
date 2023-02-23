@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Knight Plate
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 2
-  rarity: 1
+  rarity: 3
   fatiguePenalty: 30
   baseGoldValue: 3000
   canSpawnInShop: 1

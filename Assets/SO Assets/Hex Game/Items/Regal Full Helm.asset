@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Regal Full Helm
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 1
-  rarity: 1
+  rarity: 3
   fatiguePenalty: 12
   baseGoldValue: 1250
   canSpawnInShop: 1

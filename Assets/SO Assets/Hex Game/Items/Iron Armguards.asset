@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Iron Armguards
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 2
-  rarity: 1
+  rarity: 2
   fatiguePenalty: 12
   baseGoldValue: 400
   canSpawnInShop: 1

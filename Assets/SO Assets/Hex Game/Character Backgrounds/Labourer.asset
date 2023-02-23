@@ -45,23 +45,17 @@ MonoBehaviour:
   - possibleStartingTalents: 030000000200000005000000
     possibleAbilities:
     - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
-    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
-    - {fileID: 11400000, guid: 06f22294614248946a629ab645bc6650, type: 2}
     - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
-    - {fileID: 11400000, guid: 1d653fb7e4e89d448bae7106e8b49b73, type: 2}
     - {fileID: 11400000, guid: 1900acc88f1878541b128ad5ff956abd, type: 2}
     possibleWeaponLoadouts:
-    - mainHandProspects: []
-      offhandProspects: []
     - mainHandProspects:
-      - {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
-      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
-      offhandProspects: []
-    - mainHandProspects:
-      - {fileID: 11400000, guid: 2bd78f6e45f4a9e4e922068412a01b44, type: 2}
+      - {fileID: 11400000, guid: 5ea73452997566e4b9f7c15c306b772b, type: 2}
+      - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
+      - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
       offhandProspects: []
     possibleArmourLoadouts:
     - headProspects: []
       bodyProspects:
       - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+      - {fileID: 11400000, guid: ae95f085284e4354f90181106f16a763, type: 2}
   passiveEffectDescriptions: []

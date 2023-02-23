@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Rune Plate Visor
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 1
-  rarity: 1
+  rarity: 2
   fatiguePenalty: 9
   baseGoldValue: 800
   canSpawnInShop: 1

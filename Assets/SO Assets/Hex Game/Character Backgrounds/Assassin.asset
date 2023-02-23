@@ -50,15 +50,18 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
     possibleWeaponLoadouts:
     - mainHandProspects:
-      - {fileID: 11400000, guid: 4570d8c61ccb5d0459f43f3c2be1d49f, type: 2}
+      - {fileID: 11400000, guid: ab6f2b51cf50eaa43bba82ed52ef5342, type: 2}
+      - {fileID: 11400000, guid: 74b057af6b7ca014ebb30ee19bb10460, type: 2}
       offhandProspects:
-      - {fileID: 11400000, guid: 4570d8c61ccb5d0459f43f3c2be1d49f, type: 2}
       - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 11400000, guid: ab6f2b51cf50eaa43bba82ed52ef5342, type: 2}
+      - {fileID: 11400000, guid: 74b057af6b7ca014ebb30ee19bb10460, type: 2}
     possibleArmourLoadouts:
     - headProspects:
-      - {fileID: 11400000, guid: 908a58d4176f1d7418f065fb97d9d4df, type: 2}
+      - {fileID: 11400000, guid: cd0cd6f5705583841a730322c779e99b, type: 2}
       bodyProspects:
-      - {fileID: 11400000, guid: 590fb53249c64b34ab829805e3e57a8a, type: 2}
+      - {fileID: 11400000, guid: 3dc6ceb4fb77c6c4c9496927a1326908, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

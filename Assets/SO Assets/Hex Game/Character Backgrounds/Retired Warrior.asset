@@ -51,104 +51,22 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d7f2a84d3e2517244b6dfd8e1cf54539, type: 2}
     possibleWeaponLoadouts:
     - mainHandProspects:
-      - {fileID: 11400000, guid: 2bd78f6e45f4a9e4e922068412a01b44, type: 2}
-      - {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}
-      - {fileID: 11400000, guid: 130ab6972593ec14d8dda796c434cefb, type: 2}
-      - {fileID: 11400000, guid: bcda3a1ec0dfdfe469dfdd16aabf8736, type: 2}
-      - {fileID: 11400000, guid: c9082de8e300b384685cf1e19f316bfd, type: 2}
-      - {fileID: 11400000, guid: 81f8c44f0c2e3cf4d869ab7120643c8b, type: 2}
-      - {fileID: 11400000, guid: 96617d811d572184a950fe16be2f457d, type: 2}
-      - {fileID: 11400000, guid: a4927df637ac2f244a4eac08c487e83a, type: 2}
+      - {fileID: 11400000, guid: 6a78f7a4320bb5f4889c39e138776a4f, type: 2}
+      - {fileID: 11400000, guid: 112fa67cd3343dc4f9e3ce2c9f31ad8c, type: 2}
+      - {fileID: 11400000, guid: 4bcfa30ac0a47b945b2c2af6d1eeab42, type: 2}
       offhandProspects: []
     possibleArmourLoadouts:
     - headProspects:
-      - {fileID: 0}
-      - {fileID: 11400000, guid: b1c6f790bf2e04b4fb0166bc3146d1e6, type: 2}
+      - {fileID: 11400000, guid: eb2b4dc7ace074444a4c2a4c78aaadb7, type: 2}
+      - {fileID: 11400000, guid: d59ff56574bd40d449959fd58947eda5, type: 2}
+      - {fileID: 11400000, guid: 0c2183f61ac32a34ab074906266768c7, type: 2}
+      - {fileID: 11400000, guid: 4f71d88b58dfd4d45af2b0c3ba8f52ea, type: 2}
       bodyProspects:
-      - {fileID: 11400000, guid: 50b6be2028464fd489bda380d5d629fb, type: 2}
-    - headProspects:
-      - {fileID: 0}
-      - {fileID: 11400000, guid: 13d4234ddfbc86a449b8623c8e827f14, type: 2}
-      bodyProspects:
-      - {fileID: 11400000, guid: c040ba4a4b12ae749989bf65ed10ec48, type: 2}
-  - possibleStartingTalents: 02000000
-    possibleAbilities:
-    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
-    - {fileID: 11400000, guid: 64ec1fe7f8ba35242a4c0244770ae3d2, type: 2}
-    - {fileID: 11400000, guid: 7438f6132b8f4544aa2ecfd3edf7886c, type: 2}
-    - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
-    - {fileID: 11400000, guid: d7f2a84d3e2517244b6dfd8e1cf54539, type: 2}
-    possibleWeaponLoadouts:
-    - mainHandProspects:
-      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
-      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
-      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
-      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
-      - {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
-      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
-      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
-      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
-      offhandProspects:
-      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
-      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
-      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
-      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
-      - {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
-      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
-      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
-      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
-    - mainHandProspects:
-      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
-      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
-      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
-      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
-      - {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
-      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
-      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
-      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
-      offhandProspects: []
-    possibleArmourLoadouts:
-    - headProspects:
-      - {fileID: 0}
-      - {fileID: 11400000, guid: b1c6f790bf2e04b4fb0166bc3146d1e6, type: 2}
-      bodyProspects:
-      - {fileID: 11400000, guid: 50b6be2028464fd489bda380d5d629fb, type: 2}
-    - headProspects:
-      - {fileID: 0}
-      - {fileID: 11400000, guid: 13d4234ddfbc86a449b8623c8e827f14, type: 2}
-      bodyProspects:
-      - {fileID: 11400000, guid: c040ba4a4b12ae749989bf65ed10ec48, type: 2}
-  - possibleStartingTalents: 05000000
-    possibleAbilities:
-    - {fileID: 11400000, guid: 6c906fd5c22e64f43adc16680c0264ea, type: 2}
-    - {fileID: 11400000, guid: 507ff3973c3f4a44ea421a51ff989b75, type: 2}
-    - {fileID: 11400000, guid: 7dccc139645f4674f896d6d093471616, type: 2}
-    - {fileID: 11400000, guid: ffea262875283fe4e81b0151039cacfa, type: 2}
-    - {fileID: 11400000, guid: b797b73cc067e4042b5552ae13740736, type: 2}
-    possibleWeaponLoadouts:
-    - mainHandProspects:
-      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
-      - {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
-      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
-      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
-      - {fileID: 11400000, guid: 9f93f9ab0459240429ddfd4f20afa263, type: 2}
-      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
-      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
-      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
-      offhandProspects:
-      - {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
-      - {fileID: 11400000, guid: 0e78e6c34a4351a4f84867ffbc6e2c22, type: 2}
-    possibleArmourLoadouts:
-    - headProspects:
-      - {fileID: 0}
-      - {fileID: 11400000, guid: b1c6f790bf2e04b4fb0166bc3146d1e6, type: 2}
-      bodyProspects:
-      - {fileID: 11400000, guid: 50b6be2028464fd489bda380d5d629fb, type: 2}
-    - headProspects:
-      - {fileID: 0}
-      - {fileID: 11400000, guid: 13d4234ddfbc86a449b8623c8e827f14, type: 2}
-      bodyProspects:
-      - {fileID: 11400000, guid: c040ba4a4b12ae749989bf65ed10ec48, type: 2}
+      - {fileID: 11400000, guid: a607139243f4b2a4b89ea760b67d1c97, type: 2}
+      - {fileID: 11400000, guid: 2cce4423c9ed57d42b7c9d7736934204, type: 2}
+      - {fileID: 11400000, guid: 5b1d9d0e175c37a4884e2e191db9b4db, type: 2}
+      - {fileID: 11400000, guid: 0f2c5c657dde0ad4596b1498a0cbc5d0, type: 2}
+      - {fileID: 11400000, guid: f1bfa5a00b3962d4d9a26e37d3d0343d, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

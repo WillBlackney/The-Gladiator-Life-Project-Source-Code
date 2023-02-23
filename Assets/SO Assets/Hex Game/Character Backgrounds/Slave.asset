@@ -44,7 +44,6 @@ MonoBehaviour:
   loadoutBuckets:
   - possibleStartingTalents: 0200000003000000050000000e000000
     possibleAbilities:
-    - {fileID: 11400000, guid: 06f22294614248946a629ab645bc6650, type: 2}
     - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
     - {fileID: 11400000, guid: 1900acc88f1878541b128ad5ff956abd, type: 2}
     - {fileID: 11400000, guid: b797b73cc067e4042b5552ae13740736, type: 2}
@@ -53,7 +52,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 385eb82f67d124d4abc1d1f902f08086, type: 2}
     - {fileID: 11400000, guid: 93cee488ab4e9164293b4bc8942276cd, type: 2}
     possibleWeaponLoadouts: []
-    possibleArmourLoadouts: []
+    possibleArmourLoadouts:
+    - headProspects: []
+      bodyProspects:
+      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

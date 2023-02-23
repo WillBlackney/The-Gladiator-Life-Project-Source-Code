@@ -16,11 +16,11 @@ MonoBehaviour:
   itemName: Gladiator Helmet
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 1
-  rarity: 1
+  rarity: 3
   fatiguePenalty: 13
   baseGoldValue: 2200
   canSpawnInShop: 0
-  canBeCombatContractReward: 0
+  canBeCombatContractReward: 1
   includeInLibrary: 1
   weaponClass: 0
   handRequirement: 0

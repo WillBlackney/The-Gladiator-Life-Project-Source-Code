@@ -41,5 +41,12 @@ MonoBehaviour:
   minStartingAbilities: 1
   maxStartingAbilities: 1
   validRaces: 01000000020000000300000004000000050000000600000007000000
-  loadoutBuckets: []
+  loadoutBuckets:
+  - possibleStartingTalents: 
+    possibleAbilities: []
+    possibleWeaponLoadouts: []
+    possibleArmourLoadouts:
+    - headProspects: []
+      bodyProspects:
+      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
   passiveEffectDescriptions: []

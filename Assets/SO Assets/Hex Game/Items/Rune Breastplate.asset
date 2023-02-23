@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Rune Breastplate
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 2
-  rarity: 1
+  rarity: 2
   fatiguePenalty: 25
   baseGoldValue: 1800
   canSpawnInShop: 1

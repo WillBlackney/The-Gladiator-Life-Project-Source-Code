@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Assassin Tunic
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 2
-  rarity: 1
+  rarity: 2
   fatiguePenalty: 9
   baseGoldValue: 1400
   canSpawnInShop: 0

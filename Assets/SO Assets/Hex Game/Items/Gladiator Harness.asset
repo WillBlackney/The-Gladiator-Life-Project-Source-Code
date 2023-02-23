@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Gladiator Harness
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 2
-  rarity: 0
+  rarity: 2
   fatiguePenalty: 8
   baseGoldValue: 800
   canSpawnInShop: 0

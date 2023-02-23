@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Gladiator Chest Guard
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 2
-  rarity: 1
+  rarity: 3
   fatiguePenalty: 14
   baseGoldValue: 2000
   canSpawnInShop: 0

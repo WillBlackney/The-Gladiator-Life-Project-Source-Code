@@ -76,21 +76,31 @@ namespace HexGameEngine.Items
 
             return itemReturned;
         }
+        public List<ItemData> GetArmourySpawnableItems()
+        {
+            List<ItemData> ret = new List<ItemData>();
+            return ret;
+        }
         public List<ItemData> GetAllShopSpawnableItems()
         {
             return Array.FindAll(allItems, i => i.canSpawnInShop).ToList();
-        }
-        public List<ItemData> GetAllShopSpawnableItems(Rarity rarity)
-        {
-            return Array.FindAll(allItems, i => i.canSpawnInShop && i.rarity == rarity).ToList();
         }
         public List<ItemData> GetAllShopSpawnableItems(Rarity rarity, ItemType type)
         {
             return Array.FindAll(allItems, i => i.canSpawnInShop && i.rarity == rarity && i.itemType == type).ToList();
         }
+        public List<ItemData> GetAllShopSpawnableItems(ItemType type, int goldLower, int goldUpper)
+        {
+            return Array.FindAll(allItems, i => i.canSpawnInShop && i.baseGoldValue >= goldLower && i.baseGoldValue <= goldUpper && i.itemType == type).ToList();
+        }
+
         public List<ItemData> GetAllShopSpawnableItems(Rarity rarity, WeaponClass weaponClass)
         {
             return Array.FindAll(allItems, i => i.canSpawnInShop && i.rarity == rarity && i.weaponClass == weaponClass).ToList();
+        }
+        public List<ItemData> GetAllShopSpawnableItems(ItemType type, WeaponClass weaponClass, int goldLower, int goldUpper)
+        {
+            return Array.FindAll(allItems, i => i.canSpawnInShop && i.weaponClass == weaponClass && i.baseGoldValue >= goldLower && i.baseGoldValue <= goldUpper && i.itemType == type).ToList();
         }
         public List<ItemData> GetAllContractRewardableItems(Rarity rarity)
         {

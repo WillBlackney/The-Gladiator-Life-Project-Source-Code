@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: Knight Barbute
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 1
-  rarity: 1
+  rarity: 3
   fatiguePenalty: 11
   baseGoldValue: 1100
   canSpawnInShop: 1

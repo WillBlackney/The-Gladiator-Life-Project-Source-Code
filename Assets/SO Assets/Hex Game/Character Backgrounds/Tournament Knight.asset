@@ -49,32 +49,22 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d7f2a84d3e2517244b6dfd8e1cf54539, type: 2}
     possibleWeaponLoadouts:
     - mainHandProspects:
-      - {fileID: 11400000, guid: c9082de8e300b384685cf1e19f316bfd, type: 2}
-      - {fileID: 11400000, guid: 81f8c44f0c2e3cf4d869ab7120643c8b, type: 2}
-      - {fileID: 11400000, guid: 96617d811d572184a950fe16be2f457d, type: 2}
+      - {fileID: 11400000, guid: 6a78f7a4320bb5f4889c39e138776a4f, type: 2}
+      - {fileID: 11400000, guid: 112fa67cd3343dc4f9e3ce2c9f31ad8c, type: 2}
+      - {fileID: 11400000, guid: 4bcfa30ac0a47b945b2c2af6d1eeab42, type: 2}
+      - {fileID: 11400000, guid: ba0e65043e4539546905c0450495135c, type: 2}
+      - {fileID: 11400000, guid: ba3bf6c1ec00e724aa46d0af91e5f011, type: 2}
+      - {fileID: 11400000, guid: 2aa4f343b2e4d0c4cab0f2de0c477c14, type: 2}
       offhandProspects: []
     possibleArmourLoadouts:
     - headProspects:
-      - {fileID: 11400000, guid: 13d4234ddfbc86a449b8623c8e827f14, type: 2}
+      - {fileID: 11400000, guid: 4f71d88b58dfd4d45af2b0c3ba8f52ea, type: 2}
+      - {fileID: 11400000, guid: 78c60a0987ed615438f512b8e10ea6aa, type: 2}
+      - {fileID: 11400000, guid: 1101b12a630b9c24db59b213b57425dc, type: 2}
       bodyProspects:
-      - {fileID: 11400000, guid: c040ba4a4b12ae749989bf65ed10ec48, type: 2}
-  - possibleStartingTalents: 05000000
-    possibleAbilities:
-    - {fileID: 11400000, guid: 507ff3973c3f4a44ea421a51ff989b75, type: 2}
-    - {fileID: 11400000, guid: ffea262875283fe4e81b0151039cacfa, type: 2}
-    - {fileID: 11400000, guid: 6c906fd5c22e64f43adc16680c0264ea, type: 2}
-    possibleWeaponLoadouts:
-    - mainHandProspects:
-      - {fileID: 11400000, guid: b73511b81ee77a943b01bd3c905a7b1a, type: 2}
-      - {fileID: 11400000, guid: 0cdd1fa7f56df874fa1f4dbaf1ea4022, type: 2}
-      - {fileID: 11400000, guid: ac755f761f1694447939e50efeb77d08, type: 2}
-      offhandProspects:
-      - {fileID: 11400000, guid: 0e78e6c34a4351a4f84867ffbc6e2c22, type: 2}
-    possibleArmourLoadouts:
-    - headProspects:
-      - {fileID: 11400000, guid: 13d4234ddfbc86a449b8623c8e827f14, type: 2}
-      bodyProspects:
-      - {fileID: 11400000, guid: c040ba4a4b12ae749989bf65ed10ec48, type: 2}
+      - {fileID: 11400000, guid: b120371936fc1334b927f94d3602b160, type: 2}
+      - {fileID: 11400000, guid: a1fe3290d4534334eabf9ba2ff5ab62a, type: 2}
+      - {fileID: 11400000, guid: c89d7d867b89eda42bd96838671cfe77, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:
