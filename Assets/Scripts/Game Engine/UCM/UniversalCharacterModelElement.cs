@@ -9,7 +9,7 @@ namespace CardGameEngine.UCM
         [Header("Core Properties + Components")]
         public int sortingOrderBonus;
         public BodyPartType bodyPartType;
-        public List<ItemDataSO> itemsWithMyView;
+        [HideInInspector] public List<ItemDataSO> itemsWithMyView;
         public HexGameEngine.Items.ItemDataSO[] hexItemsWithMyView;
         public List<UniversalCharacterModelElement> connectedElements;
 
