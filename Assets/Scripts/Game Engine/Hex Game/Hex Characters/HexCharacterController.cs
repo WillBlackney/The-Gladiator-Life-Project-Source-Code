@@ -362,22 +362,26 @@ namespace HexGameEngine.Characters
             ModifyBaseMaxActionPoints(character, 0);
             ModifyMaxHealth(character, 0);
             ModifyHealth(character, StatCalculator.GetTotalMaxHealth(character));
-            ModifyArmour(character, data.baseArmour);
-
+            
             // AI Logic
             character.aiTurnRoutine = data.aiTurnRoutine;
             if (character.aiTurnRoutine == null)
                 Debug.LogWarning("Routine is null...");
 
             // Build UCM
-            CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.ucm, data.modelParts);
+            CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.ucm, data.modelParts);            
+
             SetCharacterModelSize(character.hexCharacterView, data.modelSize);
 
             // Build activation window
             TurnController.Instance.CreateActivationWindow(character);
 
-            // Set up items
+            // Set up items + armour and stats from items
             ItemController.Instance.RunItemSetupOnHexCharacterFromItemSet(character, data.itemSet);
+            ModifyArmour(character, data.baseArmour + ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet));
+
+            // to do: change this => not every enemy will want to have its look reflect its gear => sometimes we want to override this
+            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.ucm);
 
             // Setup abilities
             AbilityController.Instance.BuildHexCharacterAbilityBookFromData(character, data.abilityBook);
@@ -2293,6 +2297,16 @@ namespace HexGameEngine.Characters
         public bool DoesCharacterHaveEnoughFatigue(HexCharacterModel caster, int fatigueCost)
         {
             return StatCalculator.GetTotalMaxFatigue(caster) - caster.currentFatigue >= fatigueCost;
+        }
+        public bool CanCharacterBeStunnedNow(HexCharacterModel c)
+        {
+            if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Stunned) &&
+                !PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.RecentlyStunned) &&
+                !PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StunImmunity) &&
+                !PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Implaccable))
+                return true;
+
+            else return false;
         }
         #endregion
     }

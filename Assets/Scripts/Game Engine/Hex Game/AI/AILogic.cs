@@ -105,7 +105,7 @@ namespace HexGameEngine.AI
 
                     // Check ability useability
                     AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
-                    if (!AbilityController.Instance.IsAbilityUseable(character, ability))
+                    if (ability == null || !AbilityController.Instance.IsAbilityUseable(character, ability))
                     {
                         Debug.Log("AILogic.IsDirectiveActionable() ability '" + directive.action.abilityName +
                            "' is not useable");
@@ -114,7 +114,8 @@ namespace HexGameEngine.AI
 
                     // Check target validity
                     if (ability.targetRequirement != TargetRequirement.NoTarget &&
-                       !AbilityController.Instance.IsTargetOfAbilityValid(character, tpt.Target, ability))
+                        (ability == null ||
+                       !AbilityController.Instance.IsTargetOfAbilityValid(character, tpt.Target, ability)))
                     {
                         Debug.Log("AILogic.IsDirectiveActionable() target of ability '" + directive.action.abilityName +
                           "' is not valid");
@@ -182,7 +183,7 @@ namespace HexGameEngine.AI
                     if (directive.action.getRangeFromAbility)
                     {
                         AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
-                        range = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
+                        if(ability != null) range = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
                     }
 
                     // Cancel if already within range or unable to move
@@ -350,9 +351,14 @@ namespace HexGameEngine.AI
                 target.currentStress > req.stressReq)
                 bRet = true;
 
-            // Check already engaged in melee
-            else if (req.requirementType == AIActionRequirementType.EngagedInMelee &&
+            // Check self engaged in melee
+            else if (req.requirementType == AIActionRequirementType.SelfEngagedInMelee &&
                 GetAllEnemiesWithinRange(character, 1).Count >= req.enemiesInMeleeRange)
+                bRet = true;
+
+            // Check target engaged in melee
+            else if (req.requirementType == AIActionRequirementType.TargetEngagedInMelee &&
+                target != null && GetAllEnemiesWithinRange(target, 1).Count >= req.enemiesInMeleeRange)
                 bRet = true;
 
             // Check NOT engaged in melee
@@ -395,7 +401,7 @@ namespace HexGameEngine.AI
             else if (req.requirementType == AIActionRequirementType.AbilityIsOffCooldown)
             {
                 AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, req.abilityName);
-                if(ability != null && ability.currentCooldown == 0)
+                if (ability != null && ability.currentCooldown == 0)
                     bRet = true;
             }
 
@@ -419,6 +425,43 @@ namespace HexGameEngine.AI
                 // TO DO: this will get non adjacent allies if the target has an aura larger than 2, fix in future
                 if (HexCharacterController.Instance.GetAlliesWithinCharacterAura(target).Count >= 1)
                     bRet = true;
+            }
+
+            // Target has more armor than X
+            else if (req.requirementType == AIActionRequirementType.TargetHasMoreArmorThanX &&
+                target.currentArmour > req.armourReq)
+            {
+                bRet = true;
+            }
+
+            // Target has less armor than X
+            else if (req.requirementType == AIActionRequirementType.TargetHasLessArmorThanX &&
+                target.currentArmour < req.armourReq)
+            {
+                bRet = true;
+            }
+
+            // Target is stunnable
+            else if (req.requirementType == AIActionRequirementType.TargetIsStunnable &&
+                HexCharacterController.Instance.CanCharacterBeStunnedNow(target))
+            {
+                bRet = true;
+            }
+
+            // Target has shield
+            else if (req.requirementType == AIActionRequirementType.TargetHasShield &&
+                (target != null && target.itemSet.offHandItem != null && target.itemSet.offHandItem.weaponClass == WeaponClass.Shield))
+            {
+                bRet = true;
+            }
+
+            // Target does not have shield
+            else if (req.requirementType == AIActionRequirementType.TargetDoesNotHaveShield &&
+                (target == null ||
+                target.itemSet.offHandItem == null || 
+                (target.itemSet.offHandItem == null && target.itemSet.offHandItem.weaponClass != WeaponClass.Shield)))
+            {
+                bRet = true;
             }
 
             // Target is elevated
@@ -618,7 +661,7 @@ namespace HexGameEngine.AI
                 if (directive.action.getRangeFromAbility)
                 {
                     AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
-                    range = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
+                    if(ability != null) range = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
                 }
 
                 // Set up
@@ -626,7 +669,7 @@ namespace HexGameEngine.AI
                 if (directive.action.getRangeFromAbility)
                 {
                     AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
-                    shootRange = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
+                    if(ability != null) shootRange = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, character);
                 }
                 List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
                 List<LevelNode> targetShootRangeTiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, shootRange);
@@ -757,30 +800,28 @@ namespace HexGameEngine.AI
                 directive.action.actionType == AIActionType.UseCharacterTargettedSummonAbility ||
                 directive.action.actionType == AIActionType.MoveToElevationOrGrassCloserToTarget)
                 {
+                    AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+
                     if (tp == TargettingPriority.ClosestUnfriendlyTarget)
                         target = GetClosestUnfriendlyCharacter(attacker);
 
                     else if (tp == TargettingPriority.ClosestFriendlyTarget)
                         target = GetClosestFriendlyCharacter(attacker);
 
-                    else if (tp == TargettingPriority.BestValidUnfriendlyTarget)
+                    else if (tp == TargettingPriority.BestValidUnfriendlyTarget && ability != null)
                     {
-                        AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
                         target = GetBestValidAttackTarget(attacker, ability);
                     }
-                    else if (tp == TargettingPriority.RandomValidUnfriendlyTarget)
+                    else if (tp == TargettingPriority.RandomValidUnfriendlyTarget && ability != null)
                     {
-                        AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
                         target = GetRandomValidAttackTarget(attacker, ability);
                     }
-                    else if (tp == TargettingPriority.RandomValidFriendlyTarget)
+                    else if (tp == TargettingPriority.RandomValidFriendlyTarget && ability != null)
                     {
-                        AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
                         target = GetRandomValidFriendlyTarget(attacker, ability);
                     }
-                    else if (tp == TargettingPriority.MostEndangeredValidFriendly)
+                    else if (tp == TargettingPriority.MostEndangeredValidFriendly && ability != null)
                     {
-                        AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
                         target = GetMostEndangeredValidAlly(attacker, ability);
                     }
                 }
@@ -795,6 +836,8 @@ namespace HexGameEngine.AI
                 {
                     List<HexCharacterModel> tauntEnemies = new List<HexCharacterModel>();
                     AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
+                    if (ability == null) continue;
+
                     foreach (HexCharacterModel enemy in GetAllEnemiesWithinRange(attacker, AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker)))
                     {
                         if (AbilityController.Instance.IsTargetOfAbilityValid(attacker, enemy, ability) &&
@@ -827,7 +870,7 @@ namespace HexGameEngine.AI
                     directive.action.actionType == AIActionType.UseAbilityCharacterTarget)
                 {
                     AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(attacker, directive.action.abilityName);
-
+                    if (ability == null) continue;
                     if (tp == TargettingPriority.MostEndangeredValidFriendly)
                     {
                         target = GetMostEndangeredValidAlly(attacker, ability);

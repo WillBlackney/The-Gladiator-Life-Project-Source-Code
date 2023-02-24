@@ -67,11 +67,23 @@ namespace HexGameEngine.Characters
         // Passive Traits
         [BoxGroup("Abilities + Perks", centerLabel: true)]
         [LabelWidth(100)]
-        public SerializedPerkManagerModel serializedPassiveManager;     
+        public SerializedPerkManagerModel serializedPassiveManager;
 
         [BoxGroup("Items + Weapons", centerLabel: true)]
         [Header("Item Properties")]
+        public bool randomizeItemSet = false;
+
+        [BoxGroup("Items + Weapons")]
+        [ShowIf("ShowItemSet")]
         public SerializedItemSet itemSet;
+
+        [BoxGroup("Items + Weapons")]
+        [ShowIf("ShowItemLoadouts")]
+        public RecruitArmourLoadout[] possibleArmourLoadouts;
+
+        [BoxGroup("Items + Weapons")]
+        [ShowIf("ShowItemLoadouts")]
+        public RecruitWeaponLoadout[] recruitWeaponLoadouts;
 
         [BoxGroup("Misc", centerLabel: true)]
         [Header("Model Properties")]
@@ -86,6 +98,14 @@ namespace HexGameEngine.Characters
 
         // Odin Show Ifs
         #region
+        public bool ShowItemSet()
+        {
+            return !randomizeItemSet;
+        }
+        public bool ShowItemLoadouts()
+        {
+            return randomizeItemSet;
+        }
         public bool ShowMaxHealth()
         {
             return randomizeHealth == false;

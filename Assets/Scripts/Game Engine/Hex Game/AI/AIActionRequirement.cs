@@ -52,6 +52,15 @@ namespace HexGameEngine.AI
         [LabelWidth(100)]
         public string abilityName;
 
+        [ShowIf("ShowArmourReq")]
+        [LabelWidth(100)]
+        public int armourReq;
+
+        public bool ShowArmourReq()
+        {
+            return requirementType == AIActionRequirementType.TargetHasMoreArmorThanX ||
+                requirementType == AIActionRequirementType.TargetHasLessArmorThanX;
+        }
         public bool ShowAbilityName()
         {
             return requirementType == AIActionRequirementType.AbilityIsOffCooldown;
@@ -83,7 +92,8 @@ namespace HexGameEngine.AI
         }
         public bool ShowEnemiesInMeleeRange()
         {
-            if (requirementType == AIActionRequirementType.EngagedInMelee)
+            if (requirementType == AIActionRequirementType.SelfEngagedInMelee ||
+                requirementType == AIActionRequirementType.TargetEngagedInMelee)
             {
                 return true;
             }
@@ -128,7 +138,7 @@ namespace HexGameEngine.AI
     {
         None = 0,
         TargetIsWithinRange = 1,
-        EngagedInMelee = 2,
+        SelfEngagedInMelee = 2,
         NotEngagedInMelee = 8,
         HasMoreEnergyThanX = 10,
         HasLessEnergyThanX = 18,
@@ -154,5 +164,10 @@ namespace HexGameEngine.AI
         TargetHasMoreStressThanX = 25,
         IsLessThanTurnX = 26,
         IsMoreThanTurnX = 27,
+        TargetHasMoreArmorThanX = 28,
+        TargetHasLessArmorThanX = 29,
+        TargetIsStunnable = 30,
+        TargetHasShield = 31,
+        TargetDoesNotHaveShield = 32,
     }
 }
