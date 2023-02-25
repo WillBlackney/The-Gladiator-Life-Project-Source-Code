@@ -116,8 +116,11 @@ namespace HexGameEngine.HexTiles
         {
             SerializedCombatMapData ret = new SerializedCombatMapData();
 
-            // Get random seed
+            // Get seed
             CombatMapSeedDataSO seed = allCombatMapSeeds.GetRandomElement();
+            if (GlobalSettings.Instance.GameMode == GameMode.CombatSandbox &&
+                GlobalSettings.Instance.SandboxCombatMapSeed != null) seed = GlobalSettings.Instance.SandboxCombatMapSeed;
+
             if (!seed) return null;
 
             // Reset type, obstacle and elevation on all nodes
@@ -128,12 +131,19 @@ namespace HexGameEngine.HexTiles
             List<LevelNode> spawnPositions = GetPlayerSpawnZone();
             spawnPositions.AddRange(GetEnemySpawnZone());
 
+            int elevations = 0;
+            int obstructions = 0;
+
             // Rebuild
             foreach (LevelNode n in AllLevelNodes)
             {
                 int elevationRoll = RandomGenerator.NumberBetween(1, 100);
-                if (elevationRoll >= 1 && elevationRoll <= seed.elevationPercentage)
+                if (elevationRoll >= 1 && elevationRoll <= seed.elevationPercentage &&
+                    elevations < seed.maximumElevations)
+                {
                     n.SetHexTileElevation(TileElevation.Elevated);
+                    elevations += 1;
+                }                    
 
                 // Set up tile type + data
                 int tileTypeRoll = RandomGenerator.NumberBetween(1, 100);
@@ -152,11 +162,15 @@ namespace HexGameEngine.HexTiles
 
                 // To do: randomize and set obstacle
                 int obstructionRoll = RandomGenerator.NumberBetween(1, 100);
-                if (obstructionRoll >= 1 && obstructionRoll <= seed.obstructionPercentage &&
+                if (obstructions < seed.maximumObstructions &&
+                    obstructionRoll >= 1 && obstructionRoll <= seed.obstructionPercentage &&
                     Pathfinder.IsHexSpawnable(n) &&
                     !spawnPositions.Contains(n) &&
-                    (n.Elevation == TileElevation.Ground || (seed.allowObstaclesOnElevation && n.Elevation == TileElevation.Elevated)))        
+                    (n.Elevation == TileElevation.Ground || (seed.allowObstaclesOnElevation && n.Elevation == TileElevation.Elevated)))
+                {
                     n.SetHexObstruction(true);
+                    obstructions += 1;
+                }                    
 
                 SerializedLevelNodeData saveableNode = new SerializedLevelNodeData(n);
                 ret.nodes.Add(saveableNode);
@@ -203,6 +217,31 @@ namespace HexGameEngine.HexTiles
             }
 
             nodes.OrderBy(n => n.GridPosition.x);
+            return nodes;
+        }
+        public List<LevelNode> GetSanboxOrderPlayerSpawnZone()
+        {
+            List<LevelNode> nodes = new List<LevelNode>();
+            List<LevelNode> frontRank = new List<LevelNode>();
+            List<LevelNode> backRank = new List<LevelNode>();
+            List<LevelNode> remaining = new List<LevelNode>();
+
+            foreach (LevelNode n in AllLevelNodes)
+            {
+                if (n.GridPosition.x == -1 && (n.GridPosition.y == 0 || n.GridPosition.y == 1))
+                {
+                    frontRank.Add(n);
+                }
+                else if (n.GridPosition.x == -2 && (n.GridPosition.y == 0 || n.GridPosition.y == 1))
+                {
+                    backRank.Add(n);
+                }
+                else remaining.Add(n);
+            }
+            nodes.AddRange(frontRank);
+            nodes.AddRange(backRank);
+            nodes.AddRange(remaining);
+
             return nodes;
         }
         public List<LevelNode> GetEnemySpawnZone()

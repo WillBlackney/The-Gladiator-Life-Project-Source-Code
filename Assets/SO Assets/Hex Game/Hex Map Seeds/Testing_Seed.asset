@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ed7726fb042edc40a84b635e994d1eb, type: 3}
+  m_Name: Testing_Seed
+  m_EditorClassIdentifier: 
+  shape: 0
+  mapRadius: 5
+  width: 12
+  height: 7
+  elevationPercentage: 15
+  tilingConfigs:
+  - hexData: {fileID: 11400000, guid: e07bc2df6adb63543bb5a0a4ce6891da, type: 2}
+    lowerProbability: 1
+    upperProbability: 20
+  - hexData: {fileID: 11400000, guid: d9a12c9bbebc9ca46a208837c764a48c, type: 2}
+    lowerProbability: 21
+    upperProbability: 100
+  obstructionPercentage: 5
+  allowObstaclesOnElevation: 0

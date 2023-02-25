@@ -40,25 +40,22 @@ namespace HexGameEngine.Utilities
         // Single Combat Scene Properties
         [Title("Combat Sandbox Settings")]      
         [ShowIf("ShowSandBoxLevelSeed")]
-        [SerializeField] private HexMapSeedDataSO sandboxLevelSeed;
+        [SerializeField] private CombatMapSeedDataSO sandboxCombatMapSeed;
 
-        [ShowIf("ShowEnemyVsEnemyMode")]
-        [SerializeField] private bool enemyVsEnemyMode = false;
+        [ShowIf("ShowPlayerCharacterSpawnSetting")]
+        [SerializeField] private PlayerCharacterSpawnSetting playerCharacterSpawnSetting;
 
-        [ShowIf("ShowRandomizeCharacters")]
-        [SerializeField] private bool randomizePlayerCharacters = false;
+        [ShowIf("ShowRandomizePlayerCharacters")]
+        [SerializeField] private bool randomizePlayerCharacters;
+
+        [ShowIf("ShowTotalRandomCharacters")]
+        [SerializeField] private int totalRandomCharacters;
 
         [ShowIf("ShowPlayerAiCharacters")]
         [SerializeField] private EnemyEncounterSO playerAiCharacters;
 
-        [ShowIf("ShowChosenCharacterTemplates")]
-        [SerializeField] private HexCharacterTemplateSO[] chosenCharacterTemplates;
-
-        [ShowIf("ShowPossibleRandomCharacters")]
-        [SerializeField] private HexCharacterTemplateSO[] possibleRandomCharacters;
-
-        [ShowIf("ShowTotalCharacters")]
-        [SerializeField] private int totalCharacters;
+        [ShowIf("ShowStartingPlayerCharacters")]
+        [SerializeField] private PlayerGroup[] startingPlayerCharacters;         
 
         [ShowIf("ShowSandboxEnemyEncounter")]
         [SerializeField] private EnemyEncounterSO[] sandboxEnemyEncounters;
@@ -84,9 +81,9 @@ namespace HexGameEngine.Utilities
         {
             get { return startingChapter; }
         }
-        public HexMapSeedDataSO SandboxLevelSeed
+        public CombatMapSeedDataSO SandboxCombatMapSeed
         {
-            get { return sandboxLevelSeed; }
+            get { return sandboxCombatMapSeed; }
         }      
         public EnemyEncounterSO[] SandboxEnemyEncounters
         {
@@ -96,17 +93,17 @@ namespace HexGameEngine.Utilities
         {
             get { return playerAiCharacters; }
         }
+        public PlayerCharacterSpawnSetting PlayerCharacterSpawnSetting
+        {
+            get { return playerCharacterSpawnSetting; }
+        }
         public bool RandomizePlayerCharacters
         {
             get { return randomizePlayerCharacters; }
         }
-        public int TotalCharacters
+        public int TotalRandomCharacters
         {
-            get { return totalCharacters; }
-        }
-        public bool EnemyVsEnemyMode
-        {
-            get { return enemyVsEnemyMode; }
+            get { return totalRandomCharacters; }
         }
         public int CampActivityPointRegen
         {
@@ -120,14 +117,10 @@ namespace HexGameEngine.Utilities
         {
             get { return startingDeploymentLimit; }
         }
-        public HexCharacterTemplateSO[] ChosenCharacterTemplates
+        public PlayerGroup[] StartingPlayerCharacters
         {
-            get { return chosenCharacterTemplates; }
-        }
-        public HexCharacterTemplateSO[] PossibleRandomCharacters
-        {
-            get { return possibleRandomCharacters; }
-        }
+            get { return startingPlayerCharacters; }
+        }        
         public int BaseHitChance
         {
             get { return baseHitChance; }
@@ -164,31 +157,27 @@ namespace HexGameEngine.Utilities
         {
             return gameMode == GameMode.CombatSandbox;
         }       
-        public bool ShowRandomizeCharacters()
+        public bool ShowPlayerCharacterSpawnSetting()
         {
-            return (gameMode == GameMode.CombatSandbox && !enemyVsEnemyMode) || gameMode == GameMode.TownSandbox;
+            return gameMode == GameMode.CombatSandbox || gameMode == GameMode.TownSandbox;
         }
-        public bool ShowChosenCharacterTemplates()
+        public bool ShowStartingPlayerCharacters()
         {
-            return ((gameMode == GameMode.CombatSandbox && !enemyVsEnemyMode)|| gameMode == GameMode.TownSandbox) && randomizePlayerCharacters == false;
+            return (gameMode == GameMode.CombatSandbox || gameMode == GameMode.TownSandbox) && playerCharacterSpawnSetting == PlayerCharacterSpawnSetting.Normal;
+        }       
+        public bool ShowPlayerAiCharacters()
+        {
+            return gameMode == GameMode.CombatSandbox && playerCharacterSpawnSetting == PlayerCharacterSpawnSetting.EnemyVsEnemy == true;
         }
-        public bool ShowEnemyVsEnemyMode()
+        public bool ShowTotalRandomCharacters()
+        {
+            return (gameMode == GameMode.CombatSandbox || gameMode == GameMode.TownSandbox) && playerCharacterSpawnSetting == PlayerCharacterSpawnSetting.Normal && randomizePlayerCharacters;
+        }
+        public bool ShowSandboxEnemyEncounter()
         {
             return gameMode == GameMode.CombatSandbox;
         }
-        public bool ShowPlayerAiCharacters()
-        {
-            return gameMode == GameMode.CombatSandbox && enemyVsEnemyMode == true;
-        }
-        public bool ShowTotalCharacters()
-        {
-            return gameMode == GameMode.CombatSandbox && randomizePlayerCharacters == true && enemyVsEnemyMode == false;
-        }
-        public bool ShowPossibleRandomCharacters()
-        {
-            return gameMode == GameMode.CombatSandbox && randomizePlayerCharacters == true && enemyVsEnemyMode == false;
-        }
-        public bool ShowSandboxEnemyEncounter()
+        public bool ShowRandomizePlayerCharacters()
         {
             return gameMode == GameMode.CombatSandbox;
         }
@@ -202,5 +191,10 @@ namespace HexGameEngine.Utilities
         CombatSandbox = 1,
         TownSandbox = 5,
         PostCombatReward = 2,
+    }
+    public enum PlayerCharacterSpawnSetting
+    {
+        Normal = 0,
+        EnemyVsEnemy = 1,
     }
 }

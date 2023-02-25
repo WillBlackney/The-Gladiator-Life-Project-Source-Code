@@ -786,7 +786,7 @@ namespace HexGameEngine.Characters
             CharacterDeck = GenerateCharacterDeck();
             CharacterDeck.Shuffle();
         }
-        private HexCharacterData GenerateRecruitCharacter(BackgroundData data)
+        public HexCharacterData GenerateRecruitCharacter(BackgroundData data)
         {
             Debug.Log("CharacterDataController.GenerateRecruitCharacter() called, generating from background: " + data.backgroundType.ToString());
 

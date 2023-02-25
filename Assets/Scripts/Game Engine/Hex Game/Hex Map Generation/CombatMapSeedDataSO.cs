@@ -11,6 +11,8 @@ namespace HexGameEngine.HexTiles
         [Header("Elevation Settings")]
         [Range(0, 100)]
         public int elevationPercentage;
+        public int maximumElevations = 5;
+
         [Space(10)]
         [Header("Tile Type Settings")]
         public HexDataSO defaultTile;
@@ -20,6 +22,7 @@ namespace HexGameEngine.HexTiles
         [Range(0, 100)]
         public int obstructionPercentage;
         public bool allowObstaclesOnElevation = true;
+        public int maximumObstructions = 5;
 
     }
 

@@ -20,6 +20,7 @@ using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -98,7 +99,7 @@ namespace HexGameEngine
             TopBarController.Instance.ShowMainTopBar();
 
             // Set up new save file 
-            PersistencyController.Instance.BuildNewSaveFileOnNewGameStarted(CreateSandboxCharacterDataFiles()[0]);
+            PersistencyController.Instance.BuildNewSaveFileOnNewGameStarted(CreateSandboxCharacterDataFiles()[0].characterData);
 
             // Build and prepare all session data
             PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();
@@ -132,7 +133,9 @@ namespace HexGameEngine
             RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);           
 
             // Build character roster + mock data
-            List<HexCharacterData> characters = CreateSandboxCharacterDataFiles();
+            List<CharacterWithSpawnData> charactersWithSpawnPos = CreateSandboxCharacterDataFiles();
+            List<HexCharacterData> characters = new List<HexCharacterData>();
+            charactersWithSpawnPos.ForEach(x => characters.Add(x.characterData));
             CharacterDataController.Instance.BuildCharacterRoster(characters);
 
             // Apply global settings
@@ -155,14 +158,14 @@ namespace HexGameEngine
             PersistencyController.Instance.AutoUpdateSaveFile();
 
             // Setup player characters
-            if (GlobalSettings.Instance.EnemyVsEnemyMode)
+            if (GlobalSettings.Instance.PlayerCharacterSpawnSetting == PlayerCharacterSpawnSetting.EnemyVsEnemy)
             {
                 HexCharacterController.Instance.SpawnEnemyEncounterAsPlayerTeam
                     (RunController.Instance.GenerateEnemyEncounterFromTemplate(GlobalSettings.Instance.PlayerAiCharacters));
             }
             else
             {
-                HexCharacterController.Instance.CreateAllPlayerCombatCharacters(CharacterDataController.Instance.AllPlayerCharacters);
+                HexCharacterController.Instance.CreateAllPlayerCombatCharacters(charactersWithSpawnPos);
             }          
            
             // Spawn enemies in world
@@ -194,7 +197,10 @@ namespace HexGameEngine
             LevelController.Instance.GenerateLevelNodes();
 
             // Build character roster + mock data
-            List<HexCharacterData> characters = CreateSandboxCharacterDataFiles();
+            List<CharacterWithSpawnData> charactersWithSpawnPos = CreateSandboxCharacterDataFiles();
+            List<HexCharacterData> characters = new List<HexCharacterData>();
+            charactersWithSpawnPos.ForEach(x => characters.Add(x.characterData));
+
             CharacterDataController.Instance.BuildCharacterRoster(characters);
 
             // Apply global settings
@@ -708,47 +714,32 @@ namespace HexGameEngine
 
         // Misc Logic
         #region
-        private List<HexCharacterData> CreateSandboxCharacterDataFiles()
+        private List<CharacterWithSpawnData> CreateSandboxCharacterDataFiles()
         {
-            List<HexCharacterData> characters = new List<HexCharacterData>();
+            List<CharacterWithSpawnData> characters = new List<CharacterWithSpawnData>();
 
+            // Random player characters
             if (GlobalSettings.Instance.RandomizePlayerCharacters)
             {
-                List<HexCharacterTemplateSO> randomCharacters = GetRandomSandboxCharacters(GlobalSettings.Instance.TotalCharacters);
-                foreach (HexCharacterTemplateSO c in randomCharacters)
+                List<PlayerGroup> possibleRandoms = new List<PlayerGroup>();
+                possibleRandoms = GlobalSettings.Instance.StartingPlayerCharacters.ToList();
+                possibleRandoms.Shuffle();
+
+                for(int i = 0; i < GlobalSettings.Instance.TotalRandomCharacters && i < possibleRandoms.Count; i++)
                 {
-                    HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(c);
-                    //CharacterDataController.Instance.HandleGainXP(character, 300);
-                    characters.Add(character);
+                    characters.Add(possibleRandoms[i].GenerateCharacterWithSpawnData());
                 }
             }
             else
             {
-                foreach (HexCharacterTemplateSO dataSO in GlobalSettings.Instance.ChosenCharacterTemplates)
+                foreach(PlayerGroup pg in GlobalSettings.Instance.StartingPlayerCharacters)
                 {
-                    HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(dataSO);
-                    //CharacterDataController.Instance.HandleGainXP(character, 300);
-                    characters.Add(character);
+                    characters.Add(pg.GenerateCharacterWithSpawnData());
                 }
             }
 
-
             return characters;
-        }
-        private List<HexCharacterTemplateSO> GetRandomSandboxCharacters(int characters)
-        {
-            List<HexCharacterTemplateSO> listReturned = new List<HexCharacterTemplateSO>();
-            List<HexCharacterTemplateSO> shuffleList = new List<HexCharacterTemplateSO>();
-            shuffleList.AddRange(GlobalSettings.Instance.PossibleRandomCharacters);
-            shuffleList.Shuffle();
-
-            for (int i = 0; i < characters; i++)
-            {
-                listReturned.Add(shuffleList[i]);
-            }
-            return listReturned;
-
-        }
+        }      
         #endregion     
 
         // Act Notification Logic

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
+using UnityEngine.TextCore.Text;
+using HexGameEngine.Utilities;
 
 namespace HexGameEngine.Characters
 {
@@ -31,11 +33,59 @@ namespace HexGameEngine.Characters
 
     }
 
-    [System.Serializable]
+    [Serializable]
     public class EnemyGroup
     {
         public List<EnemyTemplateSO> possibleEnemies;
         public Vector2 spawnPosition;
+    }
+    [Serializable]
+    public class PlayerGroup
+    {
+        [Header("Settings")]
+        public CharacterDataSource characterDataType;    
+        [PropertySpace(0, 10)]
+        public Vector2 spawnPosition;
+
+        [ShowIf("ShowPossibleCharacters")]
+        [PropertySpace(10,10)]
+        public HexCharacterTemplateSO[] possibleCharacters;
+        [ShowIf("ShowBackgrounds")]
+        [PropertySpace(10, 10)]
+        public BackgroundDataSO[] possibleBackgrounds;
+       
+
+        public bool ShowPossibleCharacters()
+        {
+            return characterDataType == CharacterDataSource.UseTemplates;
+        }
+        public bool ShowBackgrounds()
+        {
+            return characterDataType == CharacterDataSource.UseBackgrounds;
+        }
+        public CharacterWithSpawnData GenerateCharacterWithSpawnData()
+        {
+            Vector2 pos = spawnPosition;
+            if (characterDataType == CharacterDataSource.UseBackgrounds)
+            {
+                BackgroundDataSO background = possibleBackgrounds[RandomGenerator.NumberBetween(0, possibleBackgrounds.Length - 1)];
+                HexCharacterData character = CharacterDataController.Instance.GenerateRecruitCharacter(new BackgroundData(background));
+                return new CharacterWithSpawnData(character, pos);
+            }
+            else
+            {
+                HexCharacterTemplateSO data = possibleCharacters[RandomGenerator.NumberBetween(0, possibleCharacters.Length - 1)];
+                HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(data);
+                return new CharacterWithSpawnData(character, pos);
+            }
+        }
+
+        public enum CharacterDataSource
+        {
+            UseTemplates = 0,
+            UseBackgrounds = 1,
+        }
+
     }
     public class CharacterWithSpawnData
     {
