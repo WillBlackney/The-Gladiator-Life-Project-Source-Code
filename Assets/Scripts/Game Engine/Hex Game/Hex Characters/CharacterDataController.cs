@@ -243,6 +243,7 @@ namespace HexGameEngine.Characters
             newCharacter.modelSize = template.modelSize;
             newCharacter.xpReward = template.xpReward;
             newCharacter.baseArmour = template.baseArmour;
+            newCharacter.ignoreStress = template.ignoreStress;
 
             // Setup stats
             newCharacter.attributeSheet = new AttributeSheet();
@@ -302,6 +303,7 @@ namespace HexGameEngine.Characters
             newCharacter.modelSize = original.modelSize;
             newCharacter.xpReward = original.xpReward;
             newCharacter.baseArmour = original.baseArmour;
+            newCharacter.ignoreStress = original.ignoreStress;
 
             // Set Xp + Level
             newCharacter.currentLevel = original.currentLevel;

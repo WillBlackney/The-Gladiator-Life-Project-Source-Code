@@ -323,7 +323,7 @@ namespace HexGameEngine.Combat
         public void CreateStressCheck(HexCharacterModel character, StressEventType eventType, bool allowRecursiveChecks = true)
         {
             // Non player characters dont use the stress mechanic
-            if (character.controller != Controller.Player) return;
+            if (character.characterData.ignoreStress) return;
 
             Debug.Log("CombatController.CreateStressCheck() called, character = " + character.myName + ", type = " + TextLogic.SplitByCapitals(eventType.ToString()));
             StressEventSO data = null;
@@ -377,7 +377,7 @@ namespace HexGameEngine.Combat
             Debug.Log("CombatController.CreateStressCheck() called, character = " + character.myName);
 
             // Non player characters dont use the stress mechanic
-            if (character.controller != Controller.Player) return;
+            if (character.characterData.ignoreStress) return;
 
             // Generate a roll
             int roll = RandomGenerator.NumberBetween(1, 100);
@@ -419,7 +419,7 @@ namespace HexGameEngine.Combat
         {
             int multiplier = 0;
             // Enemies dont interact with stress system
-            if (character.controller == Controller.AI)
+            if (character.characterData.ignoreStress)
             {
                 Debug.Log(System.String.Format("GetStatMultiplierFromStressState() character {0} does not benefit/suffer from stress state, returning 0...", character.myName));
                 return 0;

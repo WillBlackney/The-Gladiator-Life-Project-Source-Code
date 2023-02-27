@@ -401,26 +401,23 @@ namespace HexGameEngine.HexTiles
             }
 
             // Handle stress event: Enemy moved into my melee range + moved into back arc (on destination only)
-            if (character.allegiance == Allegiance.Enemy)
+            List<LevelNode> tiles = GetAllHexsWithinRange(character.currentTile, 1);
+            List<HexCharacterModel> enemies = HexCharacterController.Instance.GetAllEnemiesOfCharacter(character);
+            foreach (HexCharacterModel enemy in enemies)
             {
-                List<LevelNode> tiles = GetAllHexsWithinRange(character.currentTile, 1);
-                List<HexCharacterModel> enemies = HexCharacterController.Instance.GetAllEnemiesOfCharacter(character);
-                foreach (HexCharacterModel enemy in enemies)
+                if (tiles.Contains(enemy.currentTile))
                 {
-                    if (tiles.Contains(enemy.currentTile))
+                    // Moved into back arc 
+                    if (HexCharacterController.Instance.GetCharacterBackArcTiles(enemy).Contains(character.currentTile))
                     {
-                        // Moved into back arc 
-                        if (HexCharacterController.Instance.GetCharacterBackArcTiles(enemy).Contains(character.currentTile))
-                        {
-                            CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedBehindMe);
-                        }
-                        // Moved into a non back arc tile
-                        else
-                        {
-                            CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedIntoMelee);
-                        }
-
+                        CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedBehindMe);
                     }
+                    // Moved into a non back arc tile
+                    else
+                    {
+                        CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedIntoMelee);
+                    }
+
                 }
             }
 
@@ -671,26 +668,23 @@ namespace HexGameEngine.HexTiles
             });
 
             // Handle stress event: Enemy moved into my melee range + moved into back arc (on destination only)
-            if (character.allegiance == Allegiance.Enemy)
+            List<LevelNode> tiles = GetAllHexsWithinRange(character.currentTile, 1);
+            List<HexCharacterModel> enemies = HexCharacterController.Instance.GetAllEnemiesOfCharacter(character);
+            foreach (HexCharacterModel enemy in enemies)
             {
-                List<LevelNode> tiles = GetAllHexsWithinRange(character.currentTile, 1);
-                List<HexCharacterModel> enemies = HexCharacterController.Instance.GetAllEnemiesOfCharacter(character);
-                foreach (HexCharacterModel enemy in enemies)
+                if (tiles.Contains(enemy.currentTile))
                 {
-                    if (tiles.Contains(enemy.currentTile))
+                    // Moved into back arc 
+                    if (HexCharacterController.Instance.GetCharacterBackArcTiles(enemy).Contains(character.currentTile))
                     {
-                        // Moved into back arc 
-                        if (HexCharacterController.Instance.GetCharacterBackArcTiles(enemy).Contains(character.currentTile))
-                        {
-                            CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedBehindMe);
-                        }
-                        // Moved into a non back arc tile
-                        else
-                        {
-                            CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedIntoMelee);
-                        }
-
+                        CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedBehindMe);
                     }
+                    // Moved into a non back arc tile
+                    else
+                    {
+                        CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedIntoMelee);
+                    }
+
                 }
             }
         }

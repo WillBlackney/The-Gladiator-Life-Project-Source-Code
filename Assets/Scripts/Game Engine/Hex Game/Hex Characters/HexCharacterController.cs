@@ -125,9 +125,10 @@ namespace HexGameEngine.Characters
             // Create data object
             HexCharacterModel model = new HexCharacterModel();
 
-            // Connect model to view
+            // Connect model to view and data
             model.hexCharacterView = vm;
             vm.character = model;
+            model.characterData = data;
 
             // Set up positioning in world
             LevelController.Instance.PlaceCharacterOnHex(model, startPosition, true);
@@ -156,9 +157,10 @@ namespace HexGameEngine.Characters
             // Create data object
             HexCharacterModel model = new HexCharacterModel();
 
-            // Connect model to view
+            // Connect model to view and data
             model.hexCharacterView = vm;
             vm.character = model;
+            model.characterData = data;
 
             // Set up positioning in world
             LevelController.Instance.PlaceCharacterOnHex(model, startPosition, true);
@@ -171,6 +173,7 @@ namespace HexGameEngine.Characters
             model.allegiance = Allegiance.Enemy;
 
             // set enemy view model size
+            SetCharacterModelSize(vm, data.modelSize);
 
             // Set up view
             SetCharacterViewStartingState(model);
@@ -191,9 +194,10 @@ namespace HexGameEngine.Characters
             // Create data object
             HexCharacterModel model = new HexCharacterModel();
 
-            // Connect model to view
+            // Connect model to view and data
             model.hexCharacterView = vm;
             vm.character = model;
+            model.characterData = data;
 
             // Set up positioning in world
             LevelController.Instance.PlaceCharacterOnHex(model, startPosition, true);
@@ -223,10 +227,12 @@ namespace HexGameEngine.Characters
 
             // Create data object
             HexCharacterModel model = new HexCharacterModel();
+            HexCharacterData characterData = CharacterDataController.Instance.GenerateEnemyDataFromEnemyTemplate(data);
 
             // Connect model to view
             model.hexCharacterView = vm;
             vm.character = model;
+            model.characterData = characterData;
 
             // Set up positioning in world
             LevelController.Instance.PlaceCharacterOnHex(model, startPosition, true);
@@ -244,7 +250,7 @@ namespace HexGameEngine.Characters
             SetCharacterViewStartingState(model);
 
             // Copy data from character data into new model
-            SetupCharacterFromEnemyData(model, CharacterDataController.Instance.GenerateEnemyDataFromEnemyTemplate(data));
+            SetupCharacterFromEnemyData(model, characterData);
 
             // Add to persistency
             if (allegiance == Allegiance.Player) AddSummonedDefenderToPersistency(model);
@@ -297,7 +303,7 @@ namespace HexGameEngine.Characters
         private void SetCharacterViewStartingState(HexCharacterModel character)
         {
             HexCharacterView view = character.hexCharacterView;
-            if (character.controller == Controller.Player) view.stressBarWorld.transform.parent.gameObject.SetActive(true);
+            if (!character.characterData.ignoreStress) view.stressBarWorld.transform.parent.gameObject.SetActive(true);
             else view.stressBarWorld.transform.parent.gameObject.SetActive(false);
         }
         private void SetupCharacterFromCharacterData(HexCharacterModel character, HexCharacterData data)
@@ -362,7 +368,8 @@ namespace HexGameEngine.Characters
             ModifyBaseMaxActionPoints(character, 0);
             ModifyMaxHealth(character, 0);
             ModifyHealth(character, StatCalculator.GetTotalMaxHealth(character));
-            
+            ModifyStress(character, data.currentStress, false, false, false);
+
             // AI Logic
             character.aiTurnRoutine = data.aiTurnRoutine;
             if (character.aiTurnRoutine == null)
@@ -565,7 +572,7 @@ namespace HexGameEngine.Characters
                 character.currentStress >= 99 && stressGainedOrLost > 0) return;   
               
             // Enemy characters do not suffer from stress
-            if (character.allegiance == Allegiance.Enemy) return;
+            if (character.characterData.ignoreStress) return;
 
             // Check courage token
             if (stressGainedOrLost > 0 &&
@@ -684,7 +691,7 @@ namespace HexGameEngine.Characters
             character.hexCharacterView.stressTextWorld.text = stress.ToString();
 
             // Modify UI elements
-            if(TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)            
+            if(TurnController.Instance.EntityActivated == character && !character.characterData.ignoreStress)            
                 CombatUIController.Instance.UpdateStressComponents(stress, character);            
 
         }

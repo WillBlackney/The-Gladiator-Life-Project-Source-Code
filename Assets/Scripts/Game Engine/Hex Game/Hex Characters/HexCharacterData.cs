@@ -18,6 +18,7 @@ namespace HexGameEngine.Characters
         public BackgroundData background;
         public int xpReward;
         public int baseArmour;
+        public bool ignoreStress = false;
 
         [Header("Passive Properties")]
         public PerkManagerModel passiveManager;

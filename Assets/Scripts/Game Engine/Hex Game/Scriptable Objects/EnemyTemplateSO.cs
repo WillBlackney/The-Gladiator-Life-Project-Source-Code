@@ -30,8 +30,12 @@ namespace HexGameEngine.Characters
         [LabelWidth(100)]
         [GUIColor("Yellow")]
         public int xpReward;
+        [BoxGroup("General Info")]
+        [LabelWidth(100)]
+        [GUIColor("Yellow")]
+        public bool ignoreStress = false;
 
-     
+
 
         [BoxGroup("Attributes", centerLabel: true)]
         [LabelWidth(100)]
