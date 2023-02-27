@@ -21,16 +21,16 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 0
+      value: 55
       stars: 0
     dodge:
-      value: 0
+      value: 5
       stars: 0
     accuracy:
       value: 60
       stars: 0
     resolve:
-      value: 10
+      value: 5
       stars: 0
     fitness:
       value: 100
@@ -41,8 +41,8 @@ MonoBehaviour:
     maxHealth: 0
     energyRecovery: 8
     energyMax: 8
-    initiative: 5
-    fatigueRecovery: 8
+    initiative: 15
+    fatigueRecovery: 15
     criticalChance: 5
     criticalModifier: 50
     physicalDamageBonus: 0
@@ -55,10 +55,10 @@ MonoBehaviour:
     stressResistance: 0
     injuryResistance: 0
     deathResistance: 25
-  baseArmour: 25
-  randomizeHealth: 1
-  lowerHealthLimit: 45
-  upperHealthLimit: 50
+  baseArmour: 0
+  randomizeHealth: 0
+  lowerHealthLimit: 50
+  upperHealthLimit: 60
   aiTurnRoutine:
     directives:
     - action:

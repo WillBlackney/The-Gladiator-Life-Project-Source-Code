@@ -45,15 +45,15 @@ namespace HexGameEngine.Characters
         [BoxGroup("Secondary Attributes")]
         [LabelWidth(100)]
         [GUIColor("Blue")]
-        public int energyRecovery = 8;
+        public int apRecovery = 8;
         [BoxGroup("Secondary Attributes")]
         [LabelWidth(100)]
         [GUIColor("Blue")]
-        public int energyMax = 8;
+        public int apMaximum = 8;
         [BoxGroup("Secondary Attributes")]
         [LabelWidth(100)]
         [GUIColor("Blue")]
-        public int initiative = 5;
+        public int initiative = 15;
         [BoxGroup("Secondary Attributes")]
         [LabelWidth(100)]
         [GUIColor("Blue")]
@@ -140,8 +140,8 @@ namespace HexGameEngine.Characters
 
             other.fatigueRecovery = fatigueRecovery;          
             other.maxHealth = maxHealth;
-            other.energyRecovery = energyRecovery;
-            other.energyMax = energyMax;
+            other.apRecovery = apRecovery;
+            other.apMaximum = apMaximum;
             other.initiative = initiative;
             other.criticalChance = criticalChance;
             other.criticalModifier = criticalModifier;

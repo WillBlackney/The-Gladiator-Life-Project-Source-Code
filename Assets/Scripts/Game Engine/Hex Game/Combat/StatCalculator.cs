@@ -1132,7 +1132,7 @@ namespace HexGameEngine
         }   
         public static int GetTotalActionPointRecovery(HexCharacterModel c)
         {
-            int apRecovery = c.attributeSheet.energyRecovery;
+            int apRecovery = c.attributeSheet.apRecovery;
 
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
@@ -1154,7 +1154,7 @@ namespace HexGameEngine
         }
         public static int GetTotalActionPointRecovery(HexCharacterData c)
         {
-            int apRecovery = c.attributeSheet.energyRecovery;
+            int apRecovery = c.attributeSheet.apRecovery;
 
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
@@ -1175,7 +1175,7 @@ namespace HexGameEngine
         }
         public static int GetTotalMaxActionPoints(HexCharacterModel c)
         {
-            int maxEnergy = c.attributeSheet.energyMax;
+            int maxEnergy = c.attributeSheet.apMaximum;
 
             // Items
             maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxActionPoints, c.itemSet);
@@ -1184,7 +1184,7 @@ namespace HexGameEngine
         }
         public static int GetTotalMaxActionPoints(HexCharacterData c)
         {
-            int maxEnergy = c.attributeSheet.energyMax;
+            int maxEnergy = c.attributeSheet.apMaximum;
 
             // Items
             maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxActionPoints, c.itemSet);

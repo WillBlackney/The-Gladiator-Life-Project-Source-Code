@@ -494,6 +494,23 @@ namespace HexGameEngine.AI
                 }
             }
 
+            // Target has ally directly behind them
+            else if (req.requirementType == AIActionRequirementType.TargetHasAllyDirectyBehindThem)
+            {
+                HexDirection dir = LevelController.Instance.GetDirectionToTargetHex(character.currentTile, target.currentTile);
+
+                foreach (LevelNode h in LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1))
+                {
+                    if (LevelController.Instance.GetDirectionToTargetHex(target.currentTile, h) == dir &&
+                        h.myCharacter != null &&
+                        !HexCharacterController.Instance.IsTargetFriendly(character, h.myCharacter))
+                    {
+                        bRet = true;
+                        break;
+                    }
+                }
+            }
+
 
             return bRet;
         }

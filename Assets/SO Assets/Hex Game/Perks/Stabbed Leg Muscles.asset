@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Stabbed Leg Muscles
   m_EditorClassIdentifier: 
   passiveSprite: {fileID: 21300000, guid: cc66d0ed4ef44cf45a2e48fb61eb5a73, type: 3}
-  passiveName: Stabbed Cheek
-  perkTag: 162
+  passiveName: Stabbed Leg Muscles
+  perkTag: 163
   passiveDescription:
   - color: 1
     getPhraseFromAbilityValue: 0

@@ -293,6 +293,14 @@ namespace HexGameEngine.Combat
                 upperDamageFinal -= reduction;
             }
 
+            // For testing: remove later
+            if (ability != null)
+            {
+                baseDamageFinal = (int)(baseDamageFinal * 1.5f);
+                lowerDamageFinal = (int)(lowerDamageFinal * 1.5f);
+                upperDamageFinal = (int)(upperDamageFinal * 1.5f);
+            }
+
             // Prevent damage gong negative
             if (baseDamageFinal < 0) baseDamageFinal = 0;
             if (lowerDamageFinal < 0) lowerDamageFinal = 0;
@@ -301,6 +309,8 @@ namespace HexGameEngine.Combat
             resultReturned.totalDamage = baseDamageFinal;
             resultReturned.damageLowerLimit = lowerDamageFinal;
             resultReturned.damageUpperLimit = upperDamageFinal;
+
+           
 
             Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Final health damage = " + resultReturned.totalDamage.ToString());
 

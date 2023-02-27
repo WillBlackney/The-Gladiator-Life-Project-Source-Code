@@ -32,9 +32,11 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: .
+  passiveItalicDescription: 
+  effectDetailTabs: []
   maxAllowedStacks: 1
   showStackCount: 0
-  hiddenOnPassivePanel: 0
+  hiddenOnPassivePanel: 1
   isRewardable: 0
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0

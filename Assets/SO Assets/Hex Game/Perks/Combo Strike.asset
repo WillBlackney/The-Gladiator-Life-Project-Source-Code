@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Combo Strike
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: b61b433ad55184e4bbe417b341836a93, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 5ee04f427cf7acd46baed8d463807d0c, type: 3}
   passiveName: Combo Strike
   perkTag: 195
   passiveDescription:

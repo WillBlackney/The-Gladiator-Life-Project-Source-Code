@@ -51,8 +51,6 @@ namespace HexGameEngine.HexTiles
     {
         public HexDataSO hexData;
         [Range(1, 100)]
-        public int lowerProbability;
-        [Range(1, 100)]
-        public int upperProbability;
+        public int spawnChance;
     }
 }

@@ -36,7 +36,7 @@ MonoBehaviour:
   effectDetailTabs: []
   maxAllowedStacks: 1
   showStackCount: 0
-  hiddenOnPassivePanel: 0
+  hiddenOnPassivePanel: 1
   isRewardable: 1
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0

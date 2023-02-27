@@ -169,5 +169,6 @@ namespace HexGameEngine.AI
         TargetIsStunnable = 30,
         TargetHasShield = 31,
         TargetDoesNotHaveShield = 32,
+        TargetHasAllyDirectyBehindThem = 33,
     }
 }

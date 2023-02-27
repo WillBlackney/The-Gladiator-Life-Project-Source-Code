@@ -134,6 +134,32 @@ namespace HexGameEngine.HexTiles
             int elevations = 0;
             int obstructions = 0;
 
+            // Determine tiling probabilities
+            List<TileProbability> tileSpawnData = new List<TileProbability>();
+            TileProbability previous = null;
+            for(int i = 0; i < seed.tilingConfigs.Length; i++)
+            {
+                int lower = 0;
+                int upper = 0;
+                HexMapTilingConfig data = seed.tilingConfigs[i];
+
+                if(previous == null)
+                {
+                    lower = 1;
+                    upper = data.spawnChance;
+                }
+               
+                else if(previous != null)
+                {
+                    lower = previous.upperLimit + 1;
+                    upper = lower + data.spawnChance - 1;
+                }
+
+                TileProbability newData = new TileProbability(lower, upper, data.hexData);
+                previous = newData;
+                tileSpawnData.Add(newData);
+            }
+
             // Rebuild
             foreach (LevelNode n in AllLevelNodes)
             {
@@ -148,13 +174,13 @@ namespace HexGameEngine.HexTiles
                 // Set up tile type + data
                 int tileTypeRoll = RandomGenerator.NumberBetween(1, 100);
                 HexDataSO randomHexType = seed.defaultTile;
-                foreach (HexMapTilingConfig c in seed.tilingConfigs)
+                foreach (TileProbability c in tileSpawnData)
                 {
-                    if (tileTypeRoll >= c.lowerProbability && 
-                        tileTypeRoll <= c.upperProbability &&
-                        (n.Elevation == TileElevation.Ground || (n.Elevation == TileElevation.Elevated && c.hexData.allowElevation)))
+                    if (tileTypeRoll >= c.lowerLimit && 
+                        tileTypeRoll <= c.upperLimit &&
+                        (n.Elevation == TileElevation.Ground || (n.Elevation == TileElevation.Elevated && c.tileData.allowElevation)))
                     {
-                        randomHexType = c.hexData;
+                        randomHexType = c.tileData;
                         break;
                     }
                 }
@@ -1255,6 +1281,20 @@ namespace HexGameEngine.HexTiles
 
         #endregion
 
+    }
+
+    class TileProbability
+    {
+        public HexDataSO tileData;
+        public int lowerLimit;
+        public int upperLimit;
+
+        public TileProbability(int lowerLimit, int upperLimit, HexDataSO tileData)
+        {
+            this.lowerLimit = lowerLimit;
+            this.upperLimit = upperLimit;
+            this.tileData = tileData;
+        }
     }
 
 
