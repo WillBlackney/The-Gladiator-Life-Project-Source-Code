@@ -1943,9 +1943,10 @@ namespace HexGameEngine.Characters
 
             return bRet;
         }
-        public bool IsCharacterEngagedInMelee(HexCharacterModel character)
+        public bool IsCharacterEngagedInMelee(HexCharacterModel character, int engagingEnemies = 1)
         {
             bool bRet = false;
+            int engagedEnemies = 0;
             List<LevelNode> meleeTiles = LevelController.Instance.GetAllHexsWithinRange(character.currentTile, 1);
 
             foreach(LevelNode h in meleeTiles)
@@ -1956,11 +1957,12 @@ namespace HexGameEngine.Characters
                     h.myCharacter.itemSet.mainHandItem.IsMeleeWeapon &&
                     IsCharacterAbleToTakeActions(h.myCharacter))
                 {
-                    bRet = true;
-                    break;
+                    engagedEnemies += 1;
                 }
             }
-
+            if (engagedEnemies == 0) bRet = false;
+            if (engagedEnemies >= engagingEnemies) bRet = true;
+            else bRet = false;
             return bRet;
         }
         public bool IsCharacterTeleportable(HexCharacterModel character)

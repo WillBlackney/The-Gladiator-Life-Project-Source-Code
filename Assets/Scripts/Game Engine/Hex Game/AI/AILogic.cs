@@ -353,16 +353,16 @@ namespace HexGameEngine.AI
 
             // Check self engaged in melee
             else if (req.requirementType == AIActionRequirementType.SelfEngagedInMelee &&
-                GetAllEnemiesWithinRange(character, 1).Count >= req.enemiesInMeleeRange)
+                HexCharacterController.Instance.IsCharacterEngagedInMelee(character, req.enemiesInMeleeRange))
                 bRet = true;
 
             // Check target engaged in melee
             else if (req.requirementType == AIActionRequirementType.TargetEngagedInMelee &&
-                target != null && GetAllEnemiesWithinRange(target, 1).Count >= req.enemiesInMeleeRange)
-                bRet = true;
+                target != null && HexCharacterController.Instance.IsCharacterEngagedInMelee(target, req.enemiesInMeleeRange))
+                bRet = true; 
 
             // Check NOT engaged in melee
-            else if (req.requirementType == AIActionRequirementType.NotEngagedInMelee &&
+            else if (req.requirementType == AIActionRequirementType.SelfNotEngagedInMelee &&
                 !HexCharacterController.Instance.IsCharacterEngagedInMelee(character))
                 bRet = true;
 
@@ -409,13 +409,6 @@ namespace HexGameEngine.AI
             else if (req.requirementType == AIActionRequirementType.TargetNotEngagedInMelee)
             {
                 if (!HexCharacterController.Instance.IsCharacterEngagedInMelee(target))
-                    bRet = true;
-            }
-
-            // Target is engaged
-            else if (req.requirementType == AIActionRequirementType.TargetEngagedInMelee)
-            {
-                if (HexCharacterController.Instance.IsCharacterEngagedInMelee(target))
                     bRet = true;
             }
 

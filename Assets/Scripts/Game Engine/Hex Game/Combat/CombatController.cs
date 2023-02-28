@@ -127,7 +127,7 @@ namespace HexGameEngine.Combat
                 damageModPercentageAdditive += StatCalculator.GetTotalMagicDamageBonus(attacker) * 0.01f;
 
             // Add critical modifier to damage mod
-            if (didCrit && attacker != null)
+            if (didCrit && attacker != null && effect != null)
             {
                 damageModPercentageAdditive += StatCalculator.GetTotalCriticalModifier(attacker, effect) / 100f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in critical strike modifier = " + damageModPercentageAdditive.ToString());
@@ -294,7 +294,7 @@ namespace HexGameEngine.Combat
             }
 
             // For testing: remove later
-            if (ability != null)
+            if (effect != null)
             {
                 baseDamageFinal = (int)(baseDamageFinal * 1.5f);
                 lowerDamageFinal = (int)(lowerDamageFinal * 1.5f);
@@ -312,7 +312,7 @@ namespace HexGameEngine.Combat
 
            
 
-            Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Final health damage = " + resultReturned.totalDamage.ToString());
+            Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Final damage = " + resultReturned.totalDamage.ToString());
 
             return resultReturned;
         }
@@ -355,9 +355,8 @@ namespace HexGameEngine.Combat
 
             // Determine roll required to pass the stress check
             int requiredRoll = 0;
-            if (data.NegativeEvent)
-                Mathf.Clamp(data.SuccessChance - characterStressResistance, 5, 95);
-            else Mathf.Clamp(data.SuccessChance + characterStressResistance, 5, 95);
+            if (data.NegativeEvent) requiredRoll = Mathf.Clamp(data.SuccessChance - characterStressResistance, 5, 95);
+            else requiredRoll = Mathf.Clamp(data.SuccessChance + characterStressResistance, 5, 95);
 
             Debug.Log("CreateStressCheck() Stress event stats: Roll = " + roll.ToString() + ", Stress Resistance: " + characterStressResistance.ToString() +
              ", Required roll to pass: " + requiredRoll.ToString());
@@ -585,23 +584,26 @@ namespace HexGameEngine.Combat
             }
 
             // Calculate stress state mod
-            StressState stressState = GetStressStateFromStressAmount(attacker.currentStress);
-            int stressMod = GetStatMultiplierFromStressState(stressState, attacker);
+            StressState attackerStressState = GetStressStateFromStressAmount(attacker.currentStress);
+            int attackerStressMod = GetStatMultiplierFromStressState(attackerStressState, attacker);
+            StressState targetStressState = GetStressStateFromStressAmount(target.currentStress);
+            int targetStressMod = GetStatMultiplierFromStressState(targetStressState, target);
 
             // Base hit chance
             int baseHitMod = GlobalSettings.Instance.BaseHitChance;
             if (baseHitMod != 0) ret.details.Add(new HitChanceDetailData("Base Hit Chance", baseHitMod));
 
             // Attacker Accuracy
-            int accuracyMod = StatCalculator.GetTotalAccuracy(attacker) - stressMod;
+            int accuracyMod = StatCalculator.GetTotalAccuracy(attacker) - attackerStressMod;
             if (accuracyMod != 0) ret.details.Add(new HitChanceDetailData("Attacker Accuracy", accuracyMod));
 
             // Target Dodge
-            int dodgeMod = -StatCalculator.GetTotalDodge(target);
+            int dodgeMod = -(StatCalculator.GetTotalDodge(target) - targetStressMod);
             if (dodgeMod != 0) ret.details.Add(new HitChanceDetailData("Target Dodge", dodgeMod));            
 
             // Stress State            
-            if(stressMod != 0) ret.details.Add(new HitChanceDetailData(stressState.ToString(), stressMod));
+            if (attackerStressMod != 0) ret.details.Add(new HitChanceDetailData("Attacker " + attackerStressState.ToString(), attackerStressMod));
+            if (targetStressMod != 0) ret.details.Add(new HitChanceDetailData("Target " + targetStressState.ToString(), targetStressMod));
 
             // Melee modifiers
             if (ability != null && ability.abilityType.Contains(AbilityType.MeleeAttack))
@@ -938,9 +940,9 @@ namespace HexGameEngine.Combat
                     penetrationMod = weaponUsed.armourPenetration;
 
                     // check innate weapon backstab penetration
-                    if(attacker != null && HexCharacterController.Instance.GetCharacterBackArcTiles(target).Contains(attacker.currentTile))
+                    if (attacker != null && HexCharacterController.Instance.GetCharacterBackArcTiles(target).Contains(attacker.currentTile))
                     {
-                        penetrationMod += (float) ItemController.Instance.GetInnateModifierFromWeapon(InnateItemEffectType.PenetrationBonusOnBackstab, weaponUsed) / 100f;
+                        penetrationMod += (float)ItemController.Instance.GetInnateModifierFromWeapon(InnateItemEffectType.PenetrationBonusOnBackstab, weaponUsed) / 100f;
                     }
                 }
 
@@ -951,34 +953,34 @@ namespace HexGameEngine.Combat
 
 
                 // Target is unarmoured, or attack ignores armour for whatever reason
-                if (target.currentArmour <= 0 || 
+                if (target.currentArmour <= 0 ||
                     ignoreArmour ||
                     (effect != null && effect.ignoresArmour) ||
                     (attacker != null && PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.HeartSeeker) &&
                     ability != null &&
                     ability.abilityType.Contains(AbilityType.WeaponAttack)))
                 {
-                    totalHealthLost = (int)(damageResult.totalDamage * healthDamageMod); 
+                    totalHealthLost = (int)(damageResult.totalDamage * healthDamageMod);
                     totalArmourLost = 0;
                     totalDamage = totalHealthLost;
 
                     damageResult.totalHealthLost = totalHealthLost;
-                    damageResult.totalArmourLost = 0;                                                         
+                    damageResult.totalArmourLost = 0;
                 }
 
                 // Target is armoured
                 else
                 {
                     // Will damage exceed and destroy armour?
-                    int maxPossibleArmourDamage = (int) (totalDamage * armourDamageMod);
+                    int maxPossibleArmourDamage = (int)(totalDamage * armourDamageMod);
 
                     // Damage will exceed armour
-                    if(maxPossibleArmourDamage > target.currentArmour)
+                    if (maxPossibleArmourDamage > target.currentArmour)
                     {
                         Debug.Log("XX ExecuteHandleDamage() damage will exceed armour...");
                         int initialDifference = maxPossibleArmourDamage - target.currentArmour;
                         float adjustedDifference = initialDifference / armourDamageMod;
-                        int overflowHealthDamage = (int) (adjustedDifference * healthDamageMod);
+                        int overflowHealthDamage = (int)(adjustedDifference * healthDamageMod);
 
                         totalArmourLost = target.currentArmour;
                         totalHealthLost = overflowHealthDamage;
@@ -1008,7 +1010,7 @@ namespace HexGameEngine.Combat
                         // Calculate health damage from armour penetration
                         float armourPenDamage = totalDamage * penetrationMod;
                         float remainingArmourPenalty = (target.currentArmour - totalArmourLost) * 0.1f;
-                        int finalPenetrationHealthDamage = (int) (armourPenDamage - remainingArmourPenalty);
+                        int finalPenetrationHealthDamage = (int)(armourPenDamage - remainingArmourPenalty);
                         if (finalPenetrationHealthDamage < 0) finalPenetrationHealthDamage = 0;
 
                         damageResult.totalHealthLost += finalPenetrationHealthDamage;
@@ -1019,6 +1021,35 @@ namespace HexGameEngine.Combat
 
                     totalDamage = totalHealthLost + totalArmourLost;
 
+                }
+            }
+
+            // Non ability damage ignoring armour (bleeding, poisoned, etc)
+            else if (ignoreArmour)
+            {
+                damageResult.totalHealthLost = totalDamage;
+                damageResult.totalArmourLost = 0;
+            }
+
+            // Non abiity damage that damages armour
+            else
+            {
+                // Damage will exceed armour
+                if (totalDamage > target.currentArmour)
+                {
+                    damageResult.totalHealthLost = totalDamage - target.currentArmour;
+                    totalHealthLost = totalDamage - target.currentArmour;
+
+                    damageResult.totalArmourLost = target.currentArmour;
+                    totalArmourLost = target.currentArmour;
+                }
+                else
+                {
+                    damageResult.totalHealthLost = 0;
+                    totalHealthLost = 0;
+
+                    damageResult.totalArmourLost = totalDamage;
+                    totalArmourLost = totalDamage;
                 }
             }
 
@@ -1194,21 +1225,6 @@ namespace HexGameEngine.Combat
                             PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, ie.perkApplied.perkTag, ie.perkApplied.passiveStacks, true, 0.25f, attacker.pManager);
                         }
                     }
-                }
-            }
-
-            // Item 'on use' apply perk to self effects
-            if (attacker != null &&
-                attacker.currentHealth > 0 &&
-                attacker.livingState == LivingState.Alive &&
-                ability != null &&
-                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
-                weaponUsed != null)
-            {
-                foreach (ActivePerk perk in ItemController.Instance.GetInnateOnUseActivePerksFromItem(weaponUsed))
-                {
-                    Debug.Log("Should apply perk on innate weapon usage");
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(attacker.pManager, perk.perkTag, perk.stacks, true, 0.25f, attacker.pManager);
                 }
             }
 

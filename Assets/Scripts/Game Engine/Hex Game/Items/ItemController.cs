@@ -583,21 +583,6 @@ namespace HexGameEngine.Items
                     i.innateItemEffectType == InnateItemEffectType.InnatePerkGainedOnUse)
                 {
                     perks.Add(new ActivePerk(i.innatePerkGainedOnUse.perkTag, i.innatePerkGainedOnUse.stacks));
-                    /*
-                    ActivePerk oldPerk = null;
-                    bool createNew = true;
-                    foreach (ActivePerk ap in perks)
-                    {
-                        if (ap.perkTag == i.perkGained.perkTag)
-                        {
-                            oldPerk = ap;
-                            createNew = false;
-                            break;
-                        }
-                    }
-
-                    if (createNew) perks.Add(new ActivePerk(i.innatePerkGainedOnUse.perkTag, i.innatePerkGainedOnUse.stacks));
-                    else oldPerk.stacks += i.innatePerkGainedOnUse.stacks;*/
                 }
             }
 

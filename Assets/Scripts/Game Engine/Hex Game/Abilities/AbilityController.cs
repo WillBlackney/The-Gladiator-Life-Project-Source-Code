@@ -19,6 +19,7 @@ using System;
 using HexGameEngine.Items;
 using Spriter2UnityDX.Importing;
 using UnityEngine.TextCore.Text;
+using UnityEditor.Experimental.GraphView;
 
 namespace HexGameEngine.Abilities
 {
@@ -357,14 +358,20 @@ namespace HexGameEngine.Abilities
                 }
             }
 
-            // Check for crossbow usage: apply reload perk
-            /*
-            if((ability.weaponRequirement == WeaponRequirement.Crossbow || ability.weaponRequirement == WeaponRequirement.BowOrCrossbow) &&
-                character.itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow)
-                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Reload, 1);*/
+            // Item 'on use' apply perk to self effects
+            if (ability != null &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                character.itemSet.mainHandItem != null)
+            {
+                foreach (ActivePerk perk in ItemController.Instance.GetInnateOnUseActivePerksFromItem(character.itemSet.mainHandItem))
+                {
+                    Debug.Log("Should apply perk on innate weapon usage");
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, perk.perkTag, perk.stacks);
+                }
+            }
 
             // Tie off and block any stack visual events on all characters
-            foreach(HexCharacterModel c in HexCharacterController.Instance.AllCharacters)
+            foreach (HexCharacterModel c in HexCharacterController.Instance.AllCharacters)
             {
                 VisualEvent stack = c.GetLastStackEventParent();
                 if (stack != null)
@@ -432,7 +439,8 @@ namespace HexGameEngine.Abilities
                     weaponUsed = caster.itemSet.mainHandItem;
 
                 // Dynamic weapon used check: make sure the ability actually belongs to the main hand weapon if directed.
-                if(weaponUsed == caster.itemSet.mainHandItem &&
+                if(ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                    weaponUsed == caster.itemSet.mainHandItem &&
                     caster.itemSet.offHandItem != null &&
                     ability.derivedFromWeapon &&
                     ability.weaponRequirement != WeaponRequirement.None)

@@ -16,6 +16,7 @@ MonoBehaviour:
   race: 1
   modelSize: 0
   xpReward: 10
+  ignoreStress: 0
   attributeSheet:
     might:
       value: 0
@@ -39,8 +40,8 @@ MonoBehaviour:
       value: 5
       stars: 0
     maxHealth: 0
-    energyRecovery: 8
-    energyMax: 8
+    apRecovery: 8
+    apMaximum: 8
     initiative: 15
     fatigueRecovery: 15
     criticalChance: 5
@@ -306,7 +307,6 @@ MonoBehaviour:
   recruitWeaponLoadouts:
   - mainHandProspects:
     - {fileID: 11400000, guid: 623ec2e1eab053346b93e30e2d91c862, type: 2}
-    - {fileID: 11400000, guid: e8567b630dd37c042a06a339a93e409e, type: 2}
     offhandProspects: []
   modelParts:
   - Human_Chest

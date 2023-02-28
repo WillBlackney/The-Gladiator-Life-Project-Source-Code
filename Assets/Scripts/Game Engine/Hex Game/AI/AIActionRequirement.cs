@@ -139,7 +139,7 @@ namespace HexGameEngine.AI
         None = 0,
         TargetIsWithinRange = 1,
         SelfEngagedInMelee = 2,
-        NotEngagedInMelee = 8,
+        SelfNotEngagedInMelee = 8,
         HasMoreEnergyThanX = 10,
         HasLessEnergyThanX = 18,
         HasLessThanPerkStacksSelf = 3,
