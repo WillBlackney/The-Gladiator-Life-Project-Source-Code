@@ -603,7 +603,7 @@ namespace HexGameEngine.Combat
 
             // Stress State            
             if (attackerStressMod != 0) ret.details.Add(new HitChanceDetailData("Attacker " + attackerStressState.ToString(), attackerStressMod));
-            if (targetStressMod != 0) ret.details.Add(new HitChanceDetailData("Target " + targetStressState.ToString(), targetStressMod));
+            if (targetStressMod != 0) ret.details.Add(new HitChanceDetailData("Target " + targetStressState.ToString(), -targetStressMod));
 
             // Melee modifiers
             if (ability != null && ability.abilityType.Contains(AbilityType.MeleeAttack))

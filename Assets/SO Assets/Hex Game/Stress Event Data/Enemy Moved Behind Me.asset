@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   negativeEvent: 1
-  stressAmountMin: 8
-  stressAmountMax: 12
-  successChance: 80
+  stressAmountMin: 2
+  stressAmountMax: 3
+  successChance: 70

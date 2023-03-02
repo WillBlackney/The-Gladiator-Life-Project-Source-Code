@@ -220,13 +220,13 @@ namespace HexGameEngine.Characters
         public void UpdateStressComponents(int stress, HexCharacterModel character)
         {
             float currentStressFloat = stress;
-            float currentMaxHealthFloat = 100f;
-            float stressBarFloat = currentStressFloat / currentMaxHealthFloat;
+            float currentMaxStressFloat = 20f;
+            float stressBarFloat = currentStressFloat / currentMaxStressFloat;
 
             // Modify UI elements
             stressBarUI.value = stressBarFloat;
             stressText.text = stress.ToString();
-            maxStressText.text = "100";
+            maxStressText.text = "20";
 
             stressPanel.BuildPanelViews(character);
         }

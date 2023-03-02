@@ -683,8 +683,8 @@ namespace HexGameEngine.Characters
 
             // Convert health int values to floats
             float currentStressFloat = stress;
-            float currentMaxHealthFloat = 100f;
-            float stressBarFloat = currentStressFloat / currentMaxHealthFloat;
+            float currentMaxStressFloat = 20f;
+            float stressBarFloat = currentStressFloat / currentMaxStressFloat;
 
             // Modify WORLD space ui
             character.hexCharacterView.stressBarWorld.value = stressBarFloat;
