@@ -8,7 +8,6 @@ namespace HexGameEngine.Characters
 {
     public class EnemyEncounterData
     {
-        public string encounterName;
         public int baseXpReward;
         public int deploymentLimit;
         public List<CharacterWithSpawnData> enemiesInEncounter = new List<CharacterWithSpawnData>();

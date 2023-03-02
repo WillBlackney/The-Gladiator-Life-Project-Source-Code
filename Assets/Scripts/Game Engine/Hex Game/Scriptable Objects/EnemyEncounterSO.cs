@@ -13,9 +13,6 @@ namespace HexGameEngine.Characters
     {
         [BoxGroup("General Info", centerLabel: true)]
         [LabelWidth(100)]
-        public string encounterName;
-        [BoxGroup("General Info")]
-        [LabelWidth(100)]
         public int baseXpReward;
         [BoxGroup("General Info")]
         [LabelWidth(100)]

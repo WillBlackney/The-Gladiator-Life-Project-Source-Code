@@ -217,8 +217,6 @@ namespace HexGameEngine.JourneyLogic
                     currentAct <= set.actRangeUpper &&
                     set.combatDifficulty == difficulty)
                 {
-                    //for (int i = 0; i < amount; i++)
-                    //    ret.Add(set.possibleEnemyEncounters[i]);
                     foreach(EnemyEncounterSO e in set.possibleEnemyEncounters)
                     {
                         ret.Add(e);
@@ -235,7 +233,6 @@ namespace HexGameEngine.JourneyLogic
             ret.baseXpReward = template.baseXpReward;
             ret.difficulty = template.difficulty;
             ret.deploymentLimit = template.deploymentLimit;
-            ret.encounterName = template.encounterName;
             ret.enemiesInEncounter = new List<CharacterWithSpawnData>();
 
             // Create all enemies in wave
@@ -281,9 +278,6 @@ namespace HexGameEngine.JourneyLogic
             updateTimer = false;
         }
         #endregion
-
-
-
 
     }
 }

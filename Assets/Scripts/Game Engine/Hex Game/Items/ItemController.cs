@@ -106,6 +106,10 @@ namespace HexGameEngine.Items
         {
             return Array.FindAll(allItems, i => i.canBeCombatContractReward && i.rarity == rarity).ToList();
         }
+        public List<ItemData> GetAllContractRewardableItems(int lowerGoldLimit, int upperGoldLimit)
+        {
+            return Array.FindAll(allItems, i => i.canBeCombatContractReward && i.baseGoldValue >= lowerGoldLimit && i.baseGoldValue <= upperGoldLimit).ToList();
+        }
         public List<ItemData> GetAllNonShopAndContractItems()
         {
             return Array.FindAll(allItems, i => i.canSpawnInShop == false && i.canBeCombatContractReward == false).ToList();

@@ -10,17 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad8ad5d7c5edf914b8061f29d31b419f, type: 3}
-  m_Name: Act1_DL3_Skull1_3_Humans
+  m_Name: Outlaws_DP3_1Skull 9
   m_EditorClassIdentifier: 
-  encounterName: 
   baseXpReward: 100
-  deploymentLimit: 3
+  deploymentLimit: 5
   difficulty: 0
   enemyGroups:
   - possibleEnemies:
-    - {fileID: 11400000, guid: b9db2fc98a3d02a42adf7e94f742ccbc, type: 2}
-    - {fileID: 11400000, guid: e6a0b68d1fa2b594b8d60a261b863ca0, type: 2}
+    - {fileID: 11400000, guid: 2034f1598dc716249b750cf98ddefc70, type: 2}
+    spawnPosition: {x: 1, y: 0}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: 2034f1598dc716249b750cf98ddefc70, type: 2}
     spawnPosition: {x: 1, y: 1}
   - possibleEnemies:
-    - {fileID: 11400000, guid: 4c661fe5c495bd848909ec99dc14524d, type: 2}
+    - {fileID: 11400000, guid: 7532af1fcfea8b14fb36c206ca3a55ac, type: 2}
+    spawnPosition: {x: 2, y: 0}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: 7532af1fcfea8b14fb36c206ca3a55ac, type: 2}
     spawnPosition: {x: 2, y: 1}

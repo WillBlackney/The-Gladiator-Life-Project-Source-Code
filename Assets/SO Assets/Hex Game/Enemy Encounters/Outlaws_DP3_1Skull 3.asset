@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad8ad5d7c5edf914b8061f29d31b419f, type: 3}
-  m_Name: Act1_DL1_Skull1_1_Humans
+  m_Name: Outlaws_DP3_1Skull 3
   m_EditorClassIdentifier: 
-  encounterName: 
   baseXpReward: 100
-  deploymentLimit: 1
+  deploymentLimit: 3
   difficulty: 0
   enemyGroups:
   - possibleEnemies:
-    - {fileID: 11400000, guid: 8b8f2e21a8b272a4891e3ff7852deff4, type: 2}
-    - {fileID: 11400000, guid: c7143a1af1f26c4498814cba85efbe38, type: 2}
+    - {fileID: 11400000, guid: 2034f1598dc716249b750cf98ddefc70, type: 2}
     spawnPosition: {x: 1, y: 1}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: 2034f1598dc716249b750cf98ddefc70, type: 2}
+    spawnPosition: {x: 1, y: 2}
