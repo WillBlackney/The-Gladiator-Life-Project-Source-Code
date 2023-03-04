@@ -1146,12 +1146,7 @@ namespace HexGameEngine.HexTiles
                 tileEffectDotRows[i + 1 + extraDotRows].Build(destination.TileData.effectDescriptions[i]);
             }
 
-            // Rebuild fitters
-            for(int i = 0; i < 2; i++)
-            {
-                foreach(RectTransform rt in tileInfoPopUpLayoutRebuilds)                
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(rt);                
-            }
+            TransformUtils.RebuildLayouts(tileInfoPopUpLayoutRebuilds);
         }
         public void HideTileInfoPopup()
         {

@@ -81,21 +81,9 @@ namespace HexGameEngine.UI
                 }
                 allCharacterPanels[i].Show();
                 allCharacterPanels[i].BuildFromCharacterData(characters[i]);
-            }              
-
-            RebuildFitters();
-        }
-        private void RebuildFitters()
-        {
-            for(int j = 0; j < 2; j++)
-            {
-                for (int i = 0; i < dynamicContentFitters.Length; i++)
-                {
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(dynamicContentFitters[i]);
-                }
-
             }
-            
+
+            TransformUtils.RebuildLayouts(dynamicContentFitters);
         }
         #endregion
     }

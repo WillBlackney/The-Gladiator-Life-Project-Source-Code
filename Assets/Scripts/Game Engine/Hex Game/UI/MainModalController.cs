@@ -69,7 +69,7 @@ namespace HexGameEngine.UI
                 if (shouldRebuild)
                 {
                     shouldRebuild = false;
-                    UpdateFitters();
+                    TransformUtils.RebuildLayouts(fitters);
                 }
             }
         }       
@@ -195,9 +195,9 @@ namespace HexGameEngine.UI
                     mainCg.alpha = 0.01f;
                     mainCg.DOFade(1f, 0.25f);
                     Reset();
-                    UpdateFitters();
+                    TransformUtils.RebuildLayouts(fitters);
                     BuildModalContent(w.headerMessage, w.descriptionMessage, w.headerSprite, w.frameSprite);
-                    UpdateFitters();
+                    TransformUtils.RebuildLayouts(fitters);
                     shouldRebuild = true;
                 }
                 else
@@ -208,9 +208,9 @@ namespace HexGameEngine.UI
                     mainCg.alpha = 0.01f;
                     mainCg.DOFade(1f, 0.25f);
                     Reset();
-                    UpdateFitters();
+                    TransformUtils.RebuildLayouts(fitters);
                     BuildModalContent(data);
-                    UpdateFitters();
+                    TransformUtils.RebuildLayouts(fitters);
                     shouldRebuild = true;
                 }
             }
@@ -224,9 +224,9 @@ namespace HexGameEngine.UI
             mainCg.alpha = 0.01f;
             mainCg.DOFade(1f, 0.25f);
             Reset();
-            UpdateFitters();
+            TransformUtils.RebuildLayouts(fitters);
             BuildModalContent(race);
-            UpdateFitters();
+            TransformUtils.RebuildLayouts(fitters);
             shouldRebuild = true;
         }
         public void BuildAndShowModal(BackgroundData background)
@@ -237,9 +237,9 @@ namespace HexGameEngine.UI
             mainCg.alpha = 0.01f;
             mainCg.DOFade(1f, 0.25f);
             Reset();
-            UpdateFitters();
+            TransformUtils.RebuildLayouts(fitters);
             BuildModalContent(background);
-            UpdateFitters();
+            TransformUtils.RebuildLayouts(fitters);
             shouldRebuild = true;
         }
         public void BuildAndShowModal(ActivePerk perk)
@@ -250,9 +250,9 @@ namespace HexGameEngine.UI
             mainCg.alpha = 0.01f;
             mainCg.DOFade(1f, 0.25f);
             Reset();
-            UpdateFitters();
+            TransformUtils.RebuildLayouts(fitters);
             BuildModalContent(perk);
-            UpdateFitters();
+            TransformUtils.RebuildLayouts(fitters);
             shouldRebuild = true;
         }
         public void BuildAndShowModal(TalentPairing tp)
@@ -263,9 +263,9 @@ namespace HexGameEngine.UI
             mainCg.alpha = 0.01f;
             mainCg.DOFade(1f, 0.25f);
             Reset();
-            UpdateFitters();
+            TransformUtils.RebuildLayouts(fitters);
             BuildModalContent(tp);
-            UpdateFitters();
+            TransformUtils.RebuildLayouts(fitters);
             shouldRebuild = true;
         }
         
@@ -437,12 +437,7 @@ namespace HexGameEngine.UI
 
             foreach (ModalDottedRow row in dottedRows)            
                 row.gameObject.SetActive(false);            
-        }
-        private void UpdateFitters()
-        {
-            for (int i = 0; i < fitters.Length; i++)
-                LayoutRebuilder.ForceRebuildLayoutImmediate(fitters[i]);
-        }
+        }       
         #endregion
 
         // Input

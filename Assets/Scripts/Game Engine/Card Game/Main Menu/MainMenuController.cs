@@ -7,6 +7,7 @@ using DG.Tweening;
 using System;
 using Sirenix.OdinInspector;
 using CardGameEngine.UCM;
+using HexGameEngine.Utilities;
 
 namespace CardGameEngine
 {
@@ -350,7 +351,7 @@ namespace CardGameEngine
             BuildCardInfoPanels(data);
 
             // Rebuild layout
-            LayoutRebuilder.ForceRebuildLayoutImmediate(characterInfoRect);
+            TransformUtils.RebuildLayout(characterInfoRect);
         }
         private void BuildCardInfoPanels(CharacterData data)
         {

@@ -67,42 +67,42 @@ namespace HexGameEngine.Items
             FadeInPanel();
             BuildPanelFromItemData(icon.ItemReward);
             PlacePanelAboveTransform(icon.transform);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt);
         }
         public void OnCombatContractItemIconMousedOver(CombatContractCard card)
         {
             FadeInPanel();
             BuildPanelFromItemData(card.MyContractData.combatRewardData.item);
             PlacePanelAboveTransform(card.ItemImage.transform);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt); 
         }
         public void OnInventoryItemMousedOver(InventoryItemView item)
         {
             FadeInPanel();
             BuildPanelFromItemData(item.MyItemRef.itemData);
             PlacePanelAtInventoryItemPosition(item);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt);
         }
         public void OnRosterItemSlotMousedOver(RosterItemSlot item)
         {
             FadeInPanel();
             BuildPanelFromItemData(item.ItemDataRef);
             PlacePanelAtRosterItemSlotPosition(item);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt);
         }
         public void OnCustomCharacterItemSlotMousedOver(CustomItemIcon item)
         {
             FadeInPanel();
             BuildPanelFromItemData(item.ItemDataRef);
             PlacePanelAtCustomCharacterScreenItemSlotPosition(item);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt);
         }
         public void OnShopItemMousedOver(ItemShopSlot item)
         {
             FadeInPanel();
             BuildPanelFromItemData(item.MyData.Item);
             PlacePanelAtShopItemSlotPosition(item);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt);
         }
         public void OnInventoryItemMouseExit()
         {
@@ -427,14 +427,5 @@ namespace HexGameEngine.Items
         }
         #endregion
 
-        // Misc
-        #region
-        private void ForceRebuildLayouts()
-        {
-            for (int i = 0; i < 2; i++)
-                foreach (RectTransform t in transformsRebuilt)
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(t);
-        }
-        #endregion
     }
 }

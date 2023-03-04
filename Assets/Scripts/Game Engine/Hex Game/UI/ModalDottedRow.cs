@@ -19,11 +19,6 @@ namespace HexGameEngine.UI
         [SerializeField] Color red;
         [SerializeField] Color green;
 
-        private void RebuildFitters()
-        {
-            for(int i = 0; i < fitters.Length; i++)            
-                LayoutRebuilder.ForceRebuildLayoutImmediate(fitters[i]);            
-        }
         public void Build(ModalDotRowBuildData data)
         {
             gameObject.SetActive(true);
@@ -31,7 +26,7 @@ namespace HexGameEngine.UI
             if (data.dotStyle == DotStyle.Neutral) dotImage.color = neutral;
             else if (data.dotStyle == DotStyle.Red) dotImage.color = red;
             else if (data.dotStyle == DotStyle.Green) dotImage.color = green;
-            RebuildFitters();
+            TransformUtils.RebuildLayouts(fitters);
         }
         public void Build(string message, DotStyle style)
         {
@@ -40,7 +35,7 @@ namespace HexGameEngine.UI
             if (style == DotStyle.Neutral) dotImage.color = neutral;
             else if (style == DotStyle.Red) dotImage.color = red;
             else if (style == DotStyle.Green) dotImage.color = green;
-            RebuildFitters();
+            TransformUtils.RebuildLayouts(fitters);
         }
     }
 }

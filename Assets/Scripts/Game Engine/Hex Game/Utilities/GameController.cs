@@ -5,6 +5,7 @@ using HexGameEngine.CameraSystems;
 using HexGameEngine.Camping;
 using HexGameEngine.Characters;
 using HexGameEngine.Combat;
+using HexGameEngine.GameIntroEvent;
 using HexGameEngine.HexTiles;
 using HexGameEngine.Items;
 using HexGameEngine.JourneyLogic;
@@ -118,7 +119,10 @@ namespace HexGameEngine
             BlackScreenController.Instance.FadeInScreen(1f);
 
             // Testing
-            InventoryController.Instance.PopulateInventoryWithMockDataItems(20);
+            //InventoryController.Instance.PopulateInventoryWithMockDataItems(20);
+
+            DOVirtual.DelayedCall(3f, () => GameIntroController.Instance.StartIntroEvent());
+            //GameIntroController.Instance.StartIntroEvent();
         }
         private void RunSandboxCombat()
         {            

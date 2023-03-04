@@ -1114,7 +1114,7 @@ namespace HexGameEngine.MainMenu
             CloseAllCustomCharacterScreenPanels();
             ccsAbilityPanel.SetActive(true);
             BuildChooseAbilitiesPanel();
-            RebuildChooseAbilitiesPanelLayouts();
+            TransformUtils.RebuildLayouts(chooseAbilityPanelLayouts);
         }
         public void OnAbilitySectionConfirmButtonClicked()
         {
@@ -1189,16 +1189,6 @@ namespace HexGameEngine.MainMenu
             }
 
             UpdateChosenAbilitiesText();
-        }
-        private void RebuildChooseAbilitiesPanelLayouts()
-        {
-            for(int i = 0; i < 2; i++)
-            {
-                foreach(RectTransform r in chooseAbilityPanelLayouts)
-                {
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(r);
-                }
-            }
         }
         public List<ChooseAbilityButton> GetSelectedAbilities()
         {

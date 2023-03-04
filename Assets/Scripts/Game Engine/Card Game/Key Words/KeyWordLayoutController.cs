@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using HexGameEngine.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -61,7 +62,8 @@ namespace CardGameEngine
             }
 
             // Rebuild entire GUI
-            RebuildEntireLayout();
+            TransformUtils.RebuildLayout(mainGridRect);
+            TransformUtils.RebuildLayouts(mainColumnRects);           
         }
         public void BuildAllViewsFromPassiveString(string passiveName)
         {
@@ -82,7 +84,8 @@ namespace CardGameEngine
 
             // Rebuild the panel, then rebuild the entire GUI
             panel.RebuildLayout();
-            RebuildEntireLayout();
+            TransformUtils.RebuildLayout(mainGridRect);
+            TransformUtils.RebuildLayouts(mainColumnRects);
         }
         private void BuildKeywordPanelFromModel(KeyWordPanel panel, KeyWordModel model)
         {
@@ -186,16 +189,7 @@ namespace CardGameEngine
             {
                 panel.gameObject.SetActive(false);
             }
-        }
-        private void RebuildEntireLayout()
-        {
-            LayoutRebuilder.ForceRebuildLayoutImmediate(mainGridRect);
-
-            for (int i = 0; i < mainColumnRects.Length; i++)
-            {
-                LayoutRebuilder.ForceRebuildLayoutImmediate(mainColumnRects[i]);
-            }
-        }
+        }       
         private void EnableMainView()
         {
             visualParent.SetActive(true);

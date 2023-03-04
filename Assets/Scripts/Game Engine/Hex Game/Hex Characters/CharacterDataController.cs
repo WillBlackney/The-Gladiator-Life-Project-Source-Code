@@ -423,7 +423,7 @@ namespace HexGameEngine.Characters
         }
         public void AddCharacterToRoster(HexCharacterData character)
         {
-            AllPlayerCharacters.Add(character);
+            if(AllPlayerCharacters.Contains(character) == false) AllPlayerCharacters.Add(character);
             
         }
         public void ClearCharacterRoster()
@@ -756,29 +756,6 @@ namespace HexGameEngine.Characters
             }
 
             Debug.Log("GenerateCharacterDeck() complete, total background iterations: " + totalLoops.ToString());
-
-            /*
-            for (int i = 0; i < backgrounds.Length; i++)
-            {
-                // Skip over non recruitable backgrounds
-                if (backgrounds[i].recruitable)
-                {
-                    // Roll for character generation, then generate on success
-                    if (RandomGenerator.NumberBetween(1, 100) <= backgrounds[i].spawnChance)
-                        newCharacterDeck.Add(GenerateRecruitCharacter(backgrounds[i]));
-
-                    // Cancel if hit character spawn limit
-                    if (newCharacterDeck.Count == deckSize) break;
-
-                    // If completed iterating over backgrounds list but still not filled up character deck, shuffle and restart.
-                    if (i == backgrounds.Length - 1)
-                    {
-                        backgrounds.Shuffle();
-                        i = -1;
-                    }
-                }               
-            }
-            */
 
             return newCharacterDeck;
         }

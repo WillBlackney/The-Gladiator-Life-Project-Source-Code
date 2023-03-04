@@ -2144,24 +2144,8 @@ namespace HexGameEngine.Abilities
                 HitChanceDataSet hitChanceData = CombatController.Instance.GetHitChance(caster, target, ability, weaponUsed);
                 hitChanceData.details = hitChanceData.details.OrderByDescending(x => x.accuracyMod).ToList();
                 BuildHitChancePopup(hitChanceData);
-                foreach(RectTransform t in hitChanceLayouts)
-                {
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(t);
-                }
-                // Obstruction Indicator Logic
-                /*
-                if(ability.abilityType == AbilityType.RangedAttack)
-                {
-                    Hex obstructionHex = LevelController.Instance.IsTargetObstructed(caster, target);
-                    if(obstructionHex != null)
-                    {
-                        LevelController.Instance.ShowObstructionIndicator(target.myCurrentHex, obstructionHex);
-                    }
-                }
-                */
-            }
-
-          
+                TransformUtils.RebuildLayouts(hitChanceLayouts);
+            }          
         }
         private void BuildHitChancePopup(HitChanceDataSet data)
         {

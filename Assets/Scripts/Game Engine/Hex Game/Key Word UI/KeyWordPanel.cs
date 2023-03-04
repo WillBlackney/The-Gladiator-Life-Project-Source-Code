@@ -19,9 +19,5 @@ namespace HexGameEngine.UI
         [Header("Transform + Layout Components")]
         public RectTransform rootLayoutRect;
 
-        public void RebuildLayout()
-        {
-            LayoutRebuilder.ForceRebuildLayoutImmediate(rootLayoutRect);
-        }
     }
 }

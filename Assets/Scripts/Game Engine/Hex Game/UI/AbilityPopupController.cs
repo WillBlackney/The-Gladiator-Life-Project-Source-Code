@@ -56,52 +56,52 @@ namespace HexGameEngine.UI
             FadeInPanel();
             BuildPanelFromAbilityData(b.AbilityReward);
             PlacePanelAboveTransform(b.transform);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt);
         }
         public void OnCombatContractAbilityIconMousedOver(CombatContractCard b)
         {
             FadeInPanel();
             BuildPanelFromAbilityData(b.MyContractData.combatRewardData.abilityAwarded);
             PlacePanelAboveTransform(b.AbilityTomeImage.transform);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt);
         }
         public void OnAbilityButtonMousedOver(AbilityButton b)
         {
             FadeInPanel();
             BuildPanelFromAbilityData(b.MyAbilityData);
             PlacePanelOnAbilityBarButton(b);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt);
         }
         public void OnRosterAbilityButtonMousedOver(UIAbilityIcon b, bool above = true)
         {
             FadeInPanel();
             BuildPanelFromAbilityData(b.MyDataRef);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt);
             if (above)
                 PlacePanelAboveAbilityIcon(b);
             else PlacePanelWestOfAbilityIcon(b);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt);
         }
         public void OnAbilityBookItemMousedOver(InventoryItemView item)
         {
             FadeInPanel();
             BuildPanelFromAbilityData(item.MyItemRef.abilityData);
             PlacePanelOnInventoryItemPosition(item);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt);
         }
         public void OnAbilityShopTomeMousedOver(AbilityTomeShopSlot slot)
         {
             FadeInPanel();
             BuildPanelFromAbilityData(slot.MyData.ability);
             PlacePanelOnAbilityTomeShopSlotPosition(slot);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt);
         }
         public void OnLibraryAbilityDropSlotMousedOver(LibraryAbilityDropSlot slot)
         {
             FadeInPanel();
             BuildPanelFromAbilityData(slot.MyAbilityData);
             PlacePanelOnLibraryAbilityDropSlotPosition(slot);
-            ForceRebuildLayouts();
+            TransformUtils.RebuildLayouts(transformsRebuilt);
         }
         
         public void OnAbilityButtonMousedExit()
@@ -320,18 +320,7 @@ namespace HexGameEngine.UI
                 i.sprite = s;
         }
         #endregion
-
-        // Misc
-        #region
-        private void ForceRebuildLayouts()
-        {
-            for(int i = 0; i < 2; i++)
-            foreach (RectTransform t in transformsRebuilt)
-                LayoutRebuilder.ForceRebuildLayoutImmediate(t);
-        }
-        #endregion
-
-         
+                 
     }
 
     public enum PopupPositon

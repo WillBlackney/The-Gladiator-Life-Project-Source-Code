@@ -61,11 +61,11 @@ namespace HexGameEngine.UI
                 }
 
                 // Rebuild content on panel
-                panel.RebuildLayout();
+                TransformUtils.RebuildLayout(panel.rootLayoutRect);
             }
 
             // Rebuild entire GUI
-            RebuildEntireLayout();
+            TransformUtils.RebuildLayout(panelFitterParent);
         }
         public void BuildAllViewsFromPassiveTag(Perk tag)
         {
@@ -85,8 +85,8 @@ namespace HexGameEngine.UI
             BuildKeywordPanelFromPerkData(panel, data);
 
             // Rebuild the panel, then rebuild the entire GUI
-            panel.RebuildLayout();
-            RebuildEntireLayout();
+            TransformUtils.RebuildLayout(panel.rootLayoutRect);
+            TransformUtils.RebuildLayout(panelFitterParent);
         }
         private void BuildKeywordPanelFromModel(KeyWordPanel panel, KeyWordModel model)
         {
@@ -175,11 +175,6 @@ namespace HexGameEngine.UI
             {
                 panel.gameObject.SetActive(false);
             }
-        }
-        private void RebuildEntireLayout()
-        {
-            for(int i = 0; i < 2; i++)
-                LayoutRebuilder.ForceRebuildLayoutImmediate(panelFitterParent);
         }
         private void EnableMainView()
         {
