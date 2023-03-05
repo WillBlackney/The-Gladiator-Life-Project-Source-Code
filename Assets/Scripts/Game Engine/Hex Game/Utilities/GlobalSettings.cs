@@ -17,6 +17,7 @@ namespace HexGameEngine.Utilities
         [SerializeField] private bool enableDebugLogs;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
         [SerializeField] private bool preventAudioProfiles = true;
+        [SerializeField] private bool includeGameIntroEvent = true;
 
         [Title("Character Settings")]
         [SerializeField] private int startingXpBonus;
@@ -36,7 +37,8 @@ namespace HexGameEngine.Utilities
         [Range(1, 5)]
         [ShowIf("ShowStartingTimeSettings")]
         [SerializeField] private int startingChapter = 1;
-        
+       
+
         // Single Combat Scene Properties
         [Title("Combat Sandbox Settings")]      
         [ShowIf("ShowSandBoxLevelSeed")]
@@ -69,6 +71,7 @@ namespace HexGameEngine.Utilities
         {
             get { return gameMode; }
         }
+        public bool IncludeGameIntroEvent => includeGameIntroEvent;
         public int StartingDay
         {
             get { return startingDay; }
@@ -148,7 +151,7 @@ namespace HexGameEngine.Utilities
         #endregion
 
         // Odin Showifs
-        #region
+        #region        
         public bool ShowStartingTimeSettings()
         {
             return gameMode != GameMode.Standard;

@@ -88,6 +88,7 @@ namespace HexGameEngine.Items
         #region
         public void OnInventoryTopBarButtonClicked()
         {
+            if (GameController.Instance.GameState == GameState.StoryEvent) return;
             if (!mainVisualParent.activeSelf)
                 BuildAndShowInventoryView();
             else HideInventoryView();

@@ -13,9 +13,10 @@ namespace HexGameEngine.GameIntroEvent
         private Action onClickCallback;
 
 
-        public void Hide()
+        public void HideAndReset()
         {
             visualParent.SetActive(false);
+            onClickCallback = null;
         }
         public void BuildAndShow(string text, Action onClick)
         {

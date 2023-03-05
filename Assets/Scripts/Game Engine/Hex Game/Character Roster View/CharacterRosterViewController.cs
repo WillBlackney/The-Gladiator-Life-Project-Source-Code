@@ -163,6 +163,8 @@ namespace HexGameEngine.UI
         #region
         public void OnCharacterRosterTopbarButtonClicked()
         {
+            if (GameController.Instance.GameState == GameState.StoryEvent) return;
+
             if (mainVisualParent.activeSelf)
                 HideCharacterRosterScreen();
             else

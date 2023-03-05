@@ -321,18 +321,6 @@ namespace HexGameEngine.RewardSystems
 
         #endregion
 
-        // Game Over Screen Logic
-        #region
-        public void BuildAndShowGameOverScreen()
-        {
-            gameOverVisualParent.SetActive(true);
-        }
-        public void HideGameOverScreen()
-        {
-            gameOverVisualParent.SetActive(false);
-        }
-        #endregion
-
     }
 
     public class CharacterCombatStatData

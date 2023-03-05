@@ -7,6 +7,7 @@ using Sirenix.OdinInspector;
 using DG.Tweening;
 using HexGameEngine.Utilities;
 using HexGameEngine.Characters;
+using HexGameEngine.MainMenu;
 
 namespace HexGameEngine.UI
 {
@@ -72,18 +73,15 @@ namespace HexGameEngine.UI
         private void Update()
         {
             // Handle key board input
-            if (mainTopBarVisualParent.activeSelf == true)
-            {
-               // if (Input.GetKeyDown(KeyCode.C)) CharacterRosterViewController.Instance.OnCharacterRosterButtonClicked();
-                //else if (Input.GetKeyDown(KeyCode.M)) MapSystem.MapView.Instance.OnWorldMapButtonClicked();
-              //  else if (Input.GetKeyDown(KeyCode.Escape)) MainMenuController.Instance.OnTopBarSettingsButtonClicked();
-            }
+            if (mainTopBarVisualParent.activeSelf == true && Input.GetKeyDown(KeyCode.C)) CharacterRosterViewController.Instance?.OnCharacterRosterTopbarButtonClicked();
+            else if ((mainTopBarVisualParent.activeSelf == true || combatTopBarVisualParent.activeSelf == true) && Input.GetKeyDown(KeyCode.Escape)) MainMenuController.Instance.OnTopBarSettingsButtonClicked();
+
         }
         #endregion
 
         // Update Texts
         #region
-        
+
         public void UpdateGoldText(string value)
         {
             currentGoldText.text = value;

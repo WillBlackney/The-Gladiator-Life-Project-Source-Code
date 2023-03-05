@@ -118,11 +118,12 @@ namespace HexGameEngine
             AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
             BlackScreenController.Instance.FadeInScreen(1f);
 
-            // Testing
-            //InventoryController.Instance.PopulateInventoryWithMockDataItems(20);
-
-            DOVirtual.DelayedCall(3f, () => GameIntroController.Instance.StartIntroEvent());
-            //GameIntroController.Instance.StartIntroEvent();
+            // Game Intro event
+            if (GlobalSettings.Instance.IncludeGameIntroEvent)
+            {
+                SetGameState(GameState.StoryEvent);
+                GameIntroController.Instance.StartEvent();
+            }
         }
         private void RunSandboxCombat()
         {            
@@ -411,7 +412,7 @@ namespace HexGameEngine
             CombatUIController.Instance.HideViewsOnTurnEnd();
 
             // Show Game over screen
-            CombatRewardController.Instance.BuildAndShowGameOverScreen();
+            //CombatRewardController.Instance.BuildAndShowGameOverScreen();
 
         }
 
@@ -466,7 +467,7 @@ namespace HexGameEngine
             yield return new WaitForSeconds(2f);
 
             // Set state
-            SetGameState(GameState.Town);
+            SetGameState(GlobalSettings.Instance.IncludeGameIntroEvent ? GameState.StoryEvent : GameState.Town);
 
             // Enable GUI
             TopBarController.Instance.ShowMainTopBar();
@@ -489,8 +490,11 @@ namespace HexGameEngine
 
             // Start music, fade in
             yield return new WaitForSeconds(0.5f);
-            AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
-            BlackScreenController.Instance.FadeInScreen(2f);
+            //AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
+
+            if (GlobalSettings.Instance.IncludeGameIntroEvent)            
+                BlackScreenController.Instance.FadeInScreen(2f, () => GameIntroController.Instance.StartEvent());            
+                
         }       
         public void HandleQuitToMainMenuFromInGame()
         {
@@ -553,8 +557,9 @@ namespace HexGameEngine
             TownController.Instance.TearDownOnExitToMainMenu();
             CharacterScrollPanelController.Instance.HideMainView();
             InventoryController.Instance.HideInventoryView();
-            CharacterRosterViewController.Instance.HideCharacterRosterScreen();            
-            CombatRewardController.Instance.HideGameOverScreen();
+            CharacterRosterViewController.Instance.HideCharacterRosterScreen();
+            GameIntroController.Instance.HideAllViews();
+            //CombatRewardController.Instance.HideGameOverScreen();
             CombatRewardController.Instance.HidePostCombatRewardScreen();
 
             // Fade in menu music
@@ -609,6 +614,20 @@ namespace HexGameEngine
                 // Start music, fade in
                 AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
                 BlackScreenController.Instance.FadeInScreen(2f);
+            }
+            if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.GameIntroEvent)
+            {
+                // Set state
+                SetGameState(GameState.StoryEvent);
+
+                // Enable GUI
+                TopBarController.Instance.ShowMainTopBar();
+                TownController.Instance.ShowTownView();
+                CharacterScrollPanelController.Instance.BuildAndShowPanel();
+
+                // Start music, fade in
+                AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
+                BlackScreenController.Instance.FadeInScreen(2f, ()=> GameIntroController.Instance.StartEvent());
             }
             else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatStart)
             {
@@ -808,7 +827,7 @@ namespace HexGameEngine
         MainMenu = 0,
         CombatActive = 1,
         CombatRewardPhase = 2,
-        NonCombatEvent = 3,
+        StoryEvent = 3,
         Town = 4
     }
 }
