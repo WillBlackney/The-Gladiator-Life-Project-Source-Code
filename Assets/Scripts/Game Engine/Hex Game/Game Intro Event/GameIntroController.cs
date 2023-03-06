@@ -46,6 +46,11 @@ namespace HexGameEngine.GameIntroEvent
         [SerializeField] string pageTwoBodyText;
         [SerializeField] Sprite pageTwoSprite;
 
+        [Header("Page Three Settings")]
+        [TextArea]
+        [SerializeField] string pageThreeBodyText;
+        [SerializeField] Sprite pageThreeSprite;
+
         private List<HexCharacterData> offeredRecruits = new List<HexCharacterData>();
 
       
