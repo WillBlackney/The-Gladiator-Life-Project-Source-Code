@@ -24,5 +24,17 @@ namespace HexGameEngine.Utilities
                 LayoutRebuilder.ForceRebuildLayoutImmediate(layout);
             }
         }
+        public static IEnumerator RebuildLayoutsNextFrame(RectTransform[] layouts)
+        {
+            yield return null;
+            for (int i = 0; i < 2; i++)
+            {
+                for (int j = 0; j < layouts.Length; j++)
+                {
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(layouts[j]);
+                }
+                yield return null;
+            }
+        }
     }
 }

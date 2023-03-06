@@ -765,7 +765,7 @@ namespace HexGameEngine.Characters
             CharacterDeck = GenerateCharacterDeck();
             CharacterDeck.Shuffle();
         }
-        public HexCharacterData GenerateRecruitCharacter(BackgroundData data)
+        public HexCharacterData GenerateRecruitCharacter(BackgroundData data, bool allowLevelBoosts = true)
         {
             Debug.Log("CharacterDataController.GenerateRecruitCharacter() called, generating from background: " + data.backgroundType.ToString());
 
@@ -797,9 +797,13 @@ namespace HexGameEngine.Characters
 
             // Set up starting XP + level
             SetStartingLevelAndXpValues(newCharacter);
-            int startingLevelBoosts = RandomGenerator.NumberBetween(data.lowerLevelLimit, data.upperLevelLimit) - newCharacter.currentLevel;
-            for(int i = 0; i < startingLevelBoosts; i++)
-                HandleLevelUp(newCharacter);
+            if (allowLevelBoosts)
+            {
+                int startingLevelBoosts = RandomGenerator.NumberBetween(data.lowerLevelLimit, data.upperLevelLimit) - newCharacter.currentLevel;
+                for (int i = 0; i < startingLevelBoosts; i++)
+                    HandleLevelUp(newCharacter);
+            }
+           
 
             // Randomize character appearance 
             newCharacter.modelParts = new List<string>();

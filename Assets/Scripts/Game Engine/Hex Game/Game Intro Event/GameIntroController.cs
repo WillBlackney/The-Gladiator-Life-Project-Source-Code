@@ -37,42 +37,41 @@ namespace HexGameEngine.GameIntroEvent
         
         [Header("Page One Settings")]
         [SerializeField] string pageOneHeaderText;
+        [SerializeField] Sprite pageOneSprite;
         [TextArea]
         [SerializeField] string pageOneBodyText;
-        [SerializeField] Sprite pageOneSprite;
+     
 
         [Header("Page Two Settings")]
+        [SerializeField] Sprite pageTwoSprite;
         [TextArea]
         [SerializeField] string pageTwoBodyText;
-        [SerializeField] Sprite pageTwoSprite;
+     
 
         [Header("Page Three Settings")]
+        [SerializeField] Sprite pageThreeSprite;
         [TextArea]
         [SerializeField] string pageThreeBodyText;
-        [SerializeField] Sprite pageThreeSprite;
+   
 
         private List<HexCharacterData> offeredRecruits = new List<HexCharacterData>();
 
-      
 
         #region Start + End Event Logic
         public void StartEvent()
         {
             offeredRecruits = GenerateRecruits();
 
-            // Reset
-            ResetPageBeforeNextPageBuilt();
+            // Reset            
             mainVisualParent.SetActive(false);
             pageMovementParent.DOKill();
             pageMovementParent.DOMove(pageOffscreenPos.position, 0f);
             blackUnderlay.DOKill();
             blackUnderlay.DOFade(0f, 0f);
-            ResetChoiceButtons();
 
             // Build first page content
             mainVisualParent.SetActive(true);
             BuildViewsAsPageOne();
-            TransformUtils.RebuildLayouts(allFitters);
 
             // Fade in and move page down
             blackUnderlay.DOFade(0.5f, 0.75f);
@@ -80,16 +79,17 @@ namespace HexGameEngine.GameIntroEvent
         }
         private void FinishEvent()
         {
+            RunController.Instance.SetCheckPoint(SaveCheckPoint.Town);
+            GameController.Instance.SetGameState(GameState.Town);
+            PersistencyController.Instance.AutoUpdateSaveFile();
+
             ResetChoiceButtons();
             pageMovementParent.DOKill();
             pageMovementParent.DOMove(pageOffscreenPos.position, 0.5f).SetEase(Ease.InBack);
             blackUnderlay.DOKill();
-            blackUnderlay.DOFade(0f, 0.55f).OnComplete(() =>
+            blackUnderlay.DOFade(0f, 1).SetEase(Ease.InBack).OnComplete(() =>
             {
-                mainVisualParent.SetActive(false);
-                RunController.Instance.SetCheckPoint(SaveCheckPoint.Town);
-                GameController.Instance.SetGameState(GameState.Town);
-                PersistencyController.Instance.AutoUpdateSaveFile();
+                mainVisualParent.SetActive(false);                
             });
         }
         #endregion       
@@ -99,17 +99,15 @@ namespace HexGameEngine.GameIntroEvent
         private void BuildViewsAsPageOne()
         {
             ResetPageBeforeNextPageBuilt();
+            BuildPageTextBodies(pageOneBodyText);
             headerPanelText.text = pageOneHeaderText;
-            bodyText2.gameObject.SetActive(true);
-            bodyText.text = pageOneBodyText;
-            if (bodyText2.text == "") bodyText2.gameObject.SetActive(false);
             eventImage.sprite = pageOneSprite;
             choiceButtons[0].BuildAndShow("This had better be worth it...", () =>
             {
                 BuildViewsAsPageTwo();
             });
 
-            TransformUtils.RebuildLayouts(allFitters);
+            StartCoroutine(TransformUtils.RebuildLayoutsNextFrame(allFitters));
         }
         private void BuildViewsAsPageTwo()
         {
@@ -121,21 +119,29 @@ namespace HexGameEngine.GameIntroEvent
                 BuildViewsAsPageThree();
             });
 
+            mainVisualParent.SetActive(false);
             TransformUtils.RebuildLayouts(allFitters);
+
+            mainVisualParent.SetActive(true);
+            StartCoroutine(TransformUtils.RebuildLayoutsNextFrame(allFitters));
+
         }
         private void BuildViewsAsPageThree()
         {
             ResetPageBeforeNextPageBuilt();
-            //eventImage.sprite = pageTwoSprite;
+            eventImage.sprite = pageThreeSprite;
 
             HexCharacterData characterOne = offeredRecruits[0];
             HexCharacterData characterTwo = offeredRecruits[1];
-            string initialSpeechText = "You make a speech blah blah blah. Two members of the crowd step forward eagerly: ";
-            string characterOneDetails = GenerateCharacterIntroString(characterOne);
-            string characterTwoDetails = GenerateCharacterIntroString(characterTwo);
 
-            string finalText = System.String.Format("{0}{1}, and {2}.", initialSpeechText, characterOneDetails, characterTwoDetails);
-            BuildPageTextBodies(finalText);
+            string initialSpeechText = pageThreeBodyText;           
+            string characterOneDetails = GenerateCharacterIntroString(characterOne, "by the name of");
+            string characterTwoDetails = GenerateCharacterIntroString(characterTwo);
+            initialSpeechText.Replace("AAA", characterOneDetails);
+            initialSpeechText.Replace("BBB", characterTwoDetails);
+            initialSpeechText.Replace("CCC", characterOne.myName);
+
+            BuildPageTextBodies(initialSpeechText);
 
             string buttonOneText = System.String.Format("{0} the {1} {2} seems like a good pick.", characterOne.myName, characterOne.race.ToString(), TextLogic.SplitByCapitals(characterOne.background.backgroundType.ToString()));
             string buttonTwoText = System.String.Format("{0} the {1} {2} would fit right in us.", characterTwo.myName, characterTwo.race.ToString(), TextLogic.SplitByCapitals(characterTwo.background.backgroundType.ToString()));
@@ -155,7 +161,7 @@ namespace HexGameEngine.GameIntroEvent
                 BuildViewsAsPageFour();
             });
 
-            TransformUtils.RebuildLayouts(allFitters);
+            StartCoroutine(TransformUtils.RebuildLayoutsNextFrame(allFitters));
         }
         private void BuildViewsAsPageFour()
         {
@@ -167,7 +173,7 @@ namespace HexGameEngine.GameIntroEvent
             HexCharacterData characterOne = offeredRecruits[2];
             HexCharacterData characterTwo = offeredRecruits[3];
             string initialSpeechText = "The next round of prospects step up. They are ";
-            string characterOneDetails = GenerateCharacterIntroString(characterOne);
+            string characterOneDetails = GenerateCharacterIntroString(characterOne, "by the name of");
             string characterTwoDetails = GenerateCharacterIntroString(characterTwo);
 
             string finalText = System.String.Format("{0}{1}, and {2}.", initialSpeechText, characterOneDetails, characterTwoDetails);
@@ -191,7 +197,7 @@ namespace HexGameEngine.GameIntroEvent
                 BuildViewsAsPageFive();
             });
 
-            TransformUtils.RebuildLayouts(allFitters);
+            StartCoroutine(TransformUtils.RebuildLayoutsNextFrame(allFitters));
         }
         private void BuildViewsAsPageFive()
         {
@@ -207,6 +213,7 @@ namespace HexGameEngine.GameIntroEvent
                 FinishEvent();
             });
 
+            StartCoroutine(TransformUtils.RebuildLayoutsNextFrame(allFitters));
         }
         #endregion
 
@@ -225,29 +232,30 @@ namespace HexGameEngine.GameIntroEvent
             for (int i = 0; i < 2 && i < possibleCharacterPoolOne.Length; i++)
             {
                 BackgroundData data = CharacterDataController.Instance.GetBackgroundData(possibleCharacterPoolOne[i]);
-                ret.Add(CharacterDataController.Instance.GenerateRecruitCharacter(data));
+                ret.Add(CharacterDataController.Instance.GenerateRecruitCharacter(data, false));
             }
 
             // Second pool
             for (int i = 0; i < 2 && i < possibleCharacterPoolTwo.Length; i++)
             {
                 BackgroundData data = CharacterDataController.Instance.GetBackgroundData(possibleCharacterPoolTwo[i]);
-                ret.Add(CharacterDataController.Instance.GenerateRecruitCharacter(data));
+                ret.Add(CharacterDataController.Instance.GenerateRecruitCharacter(data, false));
             }
 
             return ret;
         }
-        private string GenerateCharacterIntroString(HexCharacterData character)
+        private string GenerateCharacterIntroString(HexCharacterData character, string joiner = "called")
         {
             string ret = "";
 
             string prefix = "a";
             if (character.race == CharacterRace.Undead || character.race == CharacterRace.Orc || character.race == CharacterRace.Elf) prefix = "an";
 
-            ret = System.String.Format("{0} {1} {2} called {3}", 
+            ret = System.String.Format("{0} {1} {2} {3} {4}", 
                 prefix, 
                 character.race.ToString(), 
                 TextLogic.SplitByCapitals(character.background.backgroundType.ToString()),
+                joiner,
                 character.myName);
 
             return ret;
@@ -263,9 +271,9 @@ namespace HexGameEngine.GameIntroEvent
         }
         private void BuildPageTextBodies(string text)
         {
-            bodyText2.gameObject.SetActive(true);
             bodyText.text = text;
-            if (bodyText2.text == "") bodyText2.gameObject.SetActive(false);
+            TransformUtils.RebuildLayout(bodyText2.transform as RectTransform);
+            //if (bodyText2.text == "") bodyText2.gameObject.SetActive(false);
         }
         #endregion
     }
