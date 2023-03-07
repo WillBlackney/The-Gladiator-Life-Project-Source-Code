@@ -408,8 +408,8 @@ namespace HexGameEngine.Combat
         public StressState GetStressStateFromStressAmount(int stressAmount)
         {
             if (stressAmount >= 0 && stressAmount <= 4) return StressState.Confident;
-            else if (stressAmount >= 5 && stressAmount <= 9) return StressState.Nervous;
-            else if (stressAmount >= 10 && stressAmount <= 14) return StressState.Wavering;
+            else if (stressAmount >= 5 && stressAmount <= 9) return StressState.Steady;
+            else if (stressAmount >= 10 && stressAmount <= 14) return StressState.Nervous;
             else if (stressAmount >= 15 && stressAmount <= 19) return StressState.Panicking;
             else if (stressAmount >= 20) return StressState.Shattered;
             else return StressState.None;
@@ -426,17 +426,17 @@ namespace HexGameEngine.Combat
             
 
             if (stressState == StressState.Confident && !CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Slave)) multiplier = 5;
+            else if (stressState == StressState.Steady) multiplier = 0;
             else if (stressState == StressState.Nervous) multiplier = -5;
-            else if (stressState == StressState.Wavering) multiplier = -15;
-            else if (stressState == StressState.Panicking) multiplier = -25;
-            else if (stressState == StressState.Shattered) multiplier = -35;
+            else if (stressState == StressState.Panicking) multiplier = -10;
+            else if (stressState == StressState.Shattered) multiplier = -15;
             return multiplier;
         }
         public int[] GetStressStateRanges(StressState state)
         {
             if (state == StressState.Confident) return new int[2] { 0, 4 };
-            else if (state == StressState.Nervous) return new int[2] { 5, 9 };
-            else if (state == StressState.Wavering) return new int[2] { 10, 14 };
+            else if (state == StressState.Steady) return new int[2] { 5, 9 };
+            else if (state == StressState.Nervous) return new int[2] { 10, 14 };
             else if (state == StressState.Panicking) return new int[2] { 15, 19 };
             else if (state == StressState.Shattered) return new int[2] { 20, 20 };
             else return new int[2] { 0, 0 };

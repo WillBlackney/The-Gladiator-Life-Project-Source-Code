@@ -23,11 +23,11 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '-3 '
+    phrase: '-20 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Fatigue Recovery '
+    phrase: 'Fitness '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

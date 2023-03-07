@@ -235,11 +235,11 @@ namespace HexGameEngine.Libraries
             {
                 spriteReturned = confident;
             }
-            else if (state == StressState.Nervous)
+            else if (state == StressState.Steady)
             {
                 spriteReturned = nervous;
             }
-            else if (state == StressState.Wavering)
+            else if (state == StressState.Nervous)
             {
                 spriteReturned = wavering;
             }

@@ -118,16 +118,23 @@ namespace HexGameEngine.Abilities
                 }
             }
 
-            // Get special ability of off hand weapon
+            // Get basic ability of off hand weapon
             if (itemSet.offHandItem != null)
             {
                 foreach (AbilityData d in itemSet.offHandItem.grantedAbilities)
                 {
-                    if (itemSet.mainHandItem != null &&
-                        itemSet.offHandItem.weaponClass != itemSet.mainHandItem.weaponClass)
+                    if (itemSet.mainHandItem == null ||
+                        (itemSet.mainHandItem != null &&
+                        itemSet.offHandItem.weaponClass != itemSet.mainHandItem.weaponClass))
                     {
+                        if (d.weaponAbilityType == WeaponAbilityType.Basic)
+                        {
+                            ret.Add(d);
+                        }
+
+                        /*
                         // if weapon, get special ability
-                        if(d.weaponAbilityType == WeaponAbilityType.Special &&
+                        if (d.weaponAbilityType == WeaponAbilityType.Basic &&
                             (itemSet.offHandItem.IsRangedWeapon || itemSet.offHandItem.IsMeleeWeapon))
                         {
                             ret.Add(d);
@@ -138,7 +145,7 @@ namespace HexGameEngine.Abilities
                             !itemSet.offHandItem.IsRangedWeapon && !itemSet.offHandItem.IsMeleeWeapon)
                         {
                             ret.Add(d);
-                        }
+                        }*/
                     }
                         
                 }

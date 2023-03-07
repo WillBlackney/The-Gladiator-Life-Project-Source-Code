@@ -701,8 +701,8 @@ namespace HexGameEngine
     {
         None = 0,
         Confident = 1,
-        Nervous = 2,
-        Wavering = 3,
+        Steady = 2,
+        Nervous = 3,
         Panicking = 4,
         Shattered = 5,
     }

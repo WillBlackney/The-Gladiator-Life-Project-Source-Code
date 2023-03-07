@@ -446,7 +446,7 @@ namespace HexGameEngine
             // Goblin racial perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Cunning) ||
                 (c.race == CharacterRace.Goblin && c.controller == Controller.Player))
-                dodge += GetTotalInitiative(c);
+                dodge += (int) (GetTotalInitiative(c) * 0.5f);
 
             // Stress State Modifier
             dodge += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress), c);
@@ -524,7 +524,7 @@ namespace HexGameEngine
             // Goblin racial perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Cunning) ||
                     c.race == CharacterRace.Goblin)
-                dodge += GetTotalInitiative(c);
+                dodge += (int)(GetTotalInitiative(c) * 0.5f);
 
             // Items
             dodge += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Dodge, c.itemSet);
@@ -784,6 +784,9 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
                 fitness += 3;
 
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fat))
+                fitness -= 20;
+
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
@@ -836,6 +839,9 @@ namespace HexGameEngine
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fit))
                 fitness += 10;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fat))
+                fitness -= 20;
 
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
@@ -1010,7 +1016,7 @@ namespace HexGameEngine
         {
             return c.attributeSheet.maxHealth + GetTotalConstitution(c);
         }
-        public static int GetTotalInitiative(HexCharacterModel c)
+        public static int GetTotalInitiative(HexCharacterModel c, bool includePenalties = true)
         {
             int intitiative = c.attributeSheet.initiative;
 
@@ -1021,7 +1027,7 @@ namespace HexGameEngine
             intitiative += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Initiative, c.itemSet);
 
             // Reduce initiative by accumulated fatigue 
-            if(!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Relentless))
+            if(!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Relentless) && includePenalties)
             {
                 float fatiguePercentage = GetPercentage(c.currentFatigue, GetTotalMaxFatigue(c));
                 if (fatiguePercentage > 0) mod -= (fatiguePercentage / 2f) / 100f;
@@ -1053,6 +1059,22 @@ namespace HexGameEngine
 
             return intitiative;
         }
+        public static int GetFatiguePenaltyToInitiative(HexCharacterModel c)
+        {
+            int initiative = GetTotalInitiative(c, false);           
+            float fatiguePercentage = GetPercentage(c.currentFatigue, GetTotalMaxFatigue(c));
+            float penalty = 0f;
+            if (fatiguePercentage > 0) penalty = initiative * ((fatiguePercentage / 2f) / 100f);
+            return (int) penalty;
+        }
+        public static int GetTurnDelayPenaltyToInitiative(HexCharacterModel c)
+        {
+            int initiative = GetTotalInitiative(c, false);
+            float penalty = 0f;
+            if ((c.hasRequestedTurnDelay || c.hasDelayedPreviousTurn) && initiative > 0) penalty = initiative * 0.25f;
+            return (int) penalty;
+
+        }
         public static int GetTotalFatigueRecovery(HexCharacterModel c)
         {
             int fatRecovery = c.attributeSheet.fatigueRecovery;
@@ -1077,10 +1099,8 @@ namespace HexGameEngine
                 fatRecovery -= 3;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StrongLungs))
-                fatRecovery += 3;                     
-               
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fat))
-                fatRecovery -= 3;
+                fatRecovery += 3;                   
+                          
 
             // Items
             fatRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.FatigueRecovery, c.itemSet);
@@ -1117,9 +1137,6 @@ namespace HexGameEngine
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StrongLungs))
                 fatRecovery += 3;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fat))
-                fatRecovery -= 3;
 
             // Items
             fatRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.FatigueRecovery, c.itemSet);

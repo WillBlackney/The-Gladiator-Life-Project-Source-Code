@@ -2,10 +2,13 @@ using CardGameEngine.UCM;
 using DG.Tweening;
 using HexGameEngine.Abilities;
 using HexGameEngine.Perks;
+using HexGameEngine.TurnLogic;
 using HexGameEngine.UCM;
+using HexGameEngine.UI;
 using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,6 +48,11 @@ namespace HexGameEngine.Characters
         [SerializeField] private StressPanelView stressPanel;
         [SerializeField] private TextMeshProUGUI currentArmourText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+
+        [Header("Current Initiative Components")]
+        [SerializeField] TextMeshProUGUI currentInitiativePanelText;
+        [SerializeField] ModalDottedRow[] initiativeModalRows;
+        [SerializeField] RectTransform[] initiativeModalLayouts;
 
         [Header("Health Bar UI References")]
         [SerializeField] private Slider healthBarUI;
@@ -136,6 +144,9 @@ namespace HexGameEngine.Characters
             // Fatigue 
             UpdateFatigueComponents(character.currentFatigue, StatCalculator.GetTotalMaxFatigue(character));
 
+            // Initiative
+            UpdateCurrentInitiativeComponents(character);
+
             // Armour
             currentArmourText.text = character.currentArmour.ToString();
 
@@ -205,6 +216,36 @@ namespace HexGameEngine.Characters
         #endregion
 
         #region Update Health / Stress Sliders
+        private void BuildCurrentInitiativeModal(HexCharacterModel character)
+        {
+            int baseInitiative = StatCalculator.GetTotalInitiative(character, false);
+            int fatPenalty = StatCalculator.GetFatiguePenaltyToInitiative(character);
+            int delayPenalty = StatCalculator.GetTurnDelayPenaltyToInitiative(character);
+            initiativeModalRows.ForEach(x => x.gameObject.SetActive(false));
+
+            initiativeModalRows[0].Build("Base Initiative: " + TextLogic.ReturnColoredText(baseInitiative.ToString(), TextLogic.blueNumber), DotStyle.Green);
+            if(fatPenalty != 0)
+            {
+                initiativeModalRows[1].Build("Fatigue Penalty: " + TextLogic.ReturnColoredText("-" + fatPenalty.ToString(), TextLogic.redText), DotStyle.Red);
+            }
+            if (delayPenalty != 0)
+            {
+                initiativeModalRows[2].Build("Delay Turn Penalty: " + TextLogic.ReturnColoredText("-" + delayPenalty.ToString(), TextLogic.redText), DotStyle.Red);
+            }
+
+            TransformUtils.RebuildLayouts(initiativeModalLayouts);
+        }
+        public void UpdateCurrentInitiativeComponents(HexCharacterModel character)
+        {
+            if (character != null && 
+                TurnController.Instance.EntityActivated == character && 
+                character.controller == Controller.Player)
+            {
+                BuildCurrentInitiativeModal(character);
+                currentInitiativePanelText.text = StatCalculator.GetTotalInitiative(character).ToString();
+            }
+                
+        }
         public void UpdateHealthComponents(int health, int maxHealth)
         {
             // Convert health int values to floats

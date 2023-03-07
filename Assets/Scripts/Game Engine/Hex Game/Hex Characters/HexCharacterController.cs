@@ -1701,9 +1701,9 @@ namespace HexGameEngine.Characters
                 int currentFat = character.currentFatigue;
 
                 // Modify Screen UI elements
-                if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
-                    VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.UpdateFatigueComponents(currentFat, maxFat));
-
+                VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.UpdateFatigueComponents(currentFat, maxFat));
+                VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.UpdateCurrentInitiativeComponents(character));
+                
                 // Update ability button validity overlays
                 foreach (AbilityButton b in CombatUIController.Instance.AbilityButtons)
                     b.UpdateAbilityButtonUnusableOverlay();

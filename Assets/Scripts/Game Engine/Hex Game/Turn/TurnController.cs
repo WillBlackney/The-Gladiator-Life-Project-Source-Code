@@ -287,10 +287,9 @@ namespace HexGameEngine.TurnLogic
         #region
         private int CalculateInitiativeRoll(HexCharacterModel entity)
         {
-            //return EntityLogic.GetTotalInitiative(entity) + RandomGenerator.NumberBetween(1, 3);
             int roll = StatCalculator.GetTotalInitiative(entity);
             if (roll < 0) roll = 0;
-            return roll + RandomGenerator.NumberBetween(1, 5);
+            return roll + RandomGenerator.NumberBetween(1, 3);
         }
         private void GenerateInitiativeRolls()
         {

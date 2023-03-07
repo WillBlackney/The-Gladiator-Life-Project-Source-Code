@@ -462,8 +462,6 @@ namespace HexGameEngine.Abilities
                     }
                 }
 
-                Debug.Log(String.Format("Weapon used: {0}", weaponUsed.itemName));
-
                 HitRoll hitResult = CombatController.Instance.RollForHit(caster, target, ability, weaponUsed);
                 bool didCrit = CombatController.Instance.RollForCrit(caster, target, ability, abilityEffect);
 
