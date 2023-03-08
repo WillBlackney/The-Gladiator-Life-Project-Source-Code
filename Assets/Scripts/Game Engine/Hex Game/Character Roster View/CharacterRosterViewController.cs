@@ -120,6 +120,15 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI deathResistanceText;
         [Space(20)]
 
+        [Header("New Components")]
+        [SerializeField] CharacterRosterPageButton perkPageButton;
+        [SerializeField] CharacterRosterPageButton talentPageButton;
+        [SerializeField] CharacterRosterPageButton abilityPageButton;
+
+        [SerializeField] GameObject perkPageParent;
+        [SerializeField] GameObject talentPageParent;
+        [SerializeField] GameObject abilityPageParent;
+
         private HexCharacterData characterCurrentlyViewing;
         #endregion
 
@@ -207,6 +216,8 @@ namespace HexGameEngine.UI
             BuildAbilitiesSection(data);
             BuildTalentsSection(data);
             BuildPerkTreeSection(data);
+
+            OnPerksPageButtonClicked();
             
         }
         public void HideCharacterRosterScreen()
@@ -558,7 +569,33 @@ namespace HexGameEngine.UI
 
         #endregion
 
-       
+
+        // NEW LOGIC
+        public void OnPerksPageButtonClicked()
+        {
+            perkPageParent.SetActive(true);
+            talentPageParent.SetActive(false);
+            abilityPageParent.SetActive(false);
+
+            perkPageButton.SetSelectedViewState(0.25f);
+        }
+        public void OnTalentsPageButtonClicked()
+        {
+            perkPageParent.SetActive(false);
+            talentPageParent.SetActive(true);
+            abilityPageParent.SetActive(false);
+
+            talentPageButton.SetSelectedViewState(0.25f);
+        }
+        public void OnAbilitiesPageButtonClicked()
+        {
+            perkPageParent.SetActive(false);
+            talentPageParent.SetActive(false);
+            abilityPageParent.SetActive(true);
+
+            abilityPageButton.SetSelectedViewState(0.25f);
+        }
+
 
 
 
