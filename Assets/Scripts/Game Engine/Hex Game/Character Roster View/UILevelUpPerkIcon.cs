@@ -16,13 +16,15 @@ namespace HexGameEngine.UI
         public GameObject alreadyChosenParent;
         [HideInInspector] public bool alreadyKnown;
         public HexCharacterData myCharacter;
+        public PerkTreePerk myPerkData;
 
-        public void BuildFromCharacterAndPerkData(HexCharacterData character, PerkIconData perkData)
+        public void BuildFromCharacterAndPerkData(HexCharacterData character, PerkTreePerk perkData)
         {
-            perkIcon.BuildFromActivePerk(new ActivePerk(perkData.perkTag, 1));
+            myPerkData = perkData;
+            perkIcon.BuildFromActivePerk(myPerkData.perk);
             myCharacter = character;
 
-            alreadyKnown = PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, perkData.perkTag);
+            alreadyKnown = PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, myPerkData.perk.perkTag);
 
             alreadyChosenParent.SetActive(false);
             unavailableParent.SetActive(false);
@@ -31,7 +33,9 @@ namespace HexGameEngine.UI
             {
                 alreadyChosenParent.SetActive(true);
             }
-            else if(character.perkPoints == 0)
+            else if(character.perkPoints == 0 || 
+                character.currentLevel - 1 < myPerkData.tier ||
+                myPerkData.tier != character.PerkTree.nextAvailableTier)
             {
                 unavailableParent.SetActive(true);
             }

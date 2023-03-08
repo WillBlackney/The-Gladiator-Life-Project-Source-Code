@@ -55,8 +55,18 @@ namespace HexGameEngine.Characters
         public int dailyWage;
         public TownActivity currentTownActivity = TownActivity.None;
         public List<AttributeRollResult> attributeRolls = new List<AttributeRollResult>();
-        public PerkTreeData perkTree;
+        private PerkTreeData perkTree;
         public int perkPoints = 0;
         public List<TalentRollResult> talentRolls = new List<TalentRollResult>();
+
+        public PerkTreeData PerkTree
+        {
+            get
+            {
+                if (perkTree == null && PerkController.Instance != null) perkTree = new PerkTreeData();
+                return perkTree;
+            }
+            set { perkTree = value; }
+        }
     }
 }

@@ -12,6 +12,7 @@ using HexGameEngine.Abilities;
 using HexGameEngine.Cards;
 using DG.Tweening;
 using CardGameEngine.UCM;
+using UnityEngine.TextCore.Text;
 
 namespace HexGameEngine.UI
 {
@@ -213,9 +214,9 @@ namespace HexGameEngine.UI
             BuildGeneralInfoSection(data);
             BuildItemSlots(data);
             BuildCharacterViewPanelModel(data);
-            BuildAbilitiesSection(data);
-            BuildTalentsSection(data);
-            BuildPerkTreeSection(data);
+            BuildAbilitiesPage(data);
+            BuildTalentsPage(data);
+            BuildPerkPage(data);
 
             OnPerksPageButtonClicked();
             
@@ -442,18 +443,21 @@ namespace HexGameEngine.UI
 
         // Perk Tree Section Logic
         #region
-        private void BuildPerkTreeSection(HexCharacterData character)
+        private void BuildPerkPage(HexCharacterData character)
         {
-            if (character.perkTree == null) return;
+            if (character.PerkTree == null) return;
 
-            for(int i = 0; i < character.perkTree.PerkChoices.Count; i++)
+            for(int i = 0; i < character.PerkTree.PerkChoices.Count; i++)
             {
-                perkLevelUpIcons[i].BuildFromCharacterAndPerkData(character, character.perkTree.PerkChoices[i].Data);
+                perkLevelUpIcons[i].BuildFromCharacterAndPerkData(character, character.PerkTree.PerkChoices[i]);
             }
         }
         public void OnPerkTreeIconClicked(UILevelUpPerkIcon icon)
         {
-            if (icon.alreadyKnown || icon.myCharacter.perkPoints == 0) return;
+            if (icon.alreadyKnown || 
+                icon.myCharacter.perkPoints == 0 || 
+                icon.myCharacter.currentLevel - 1 < icon.myPerkData.tier ||
+                icon.myPerkData.tier != icon.myCharacter.PerkTree.nextAvailableTier) return;
 
             currentSelectedLevelUpPerkChoice = icon;
 
@@ -468,11 +472,14 @@ namespace HexGameEngine.UI
         }
         public void OnConfirmLevelUpPerkPageConfirmButtonClicked()
         {
-            // Pay perk point
-            currentSelectedLevelUpPerkChoice.myCharacter.perkPoints--;
+            HexCharacterData character = currentSelectedLevelUpPerkChoice.myCharacter;
+
+            // Pay perk point + increment perk tree tier
+            character.perkPoints--;
+            character.PerkTree.nextAvailableTier += 1;
 
             // Learn new perk
-            PerkController.Instance.ModifyPerkOnCharacterData(currentSelectedLevelUpPerkChoice.myCharacter.passiveManager, currentSelectedLevelUpPerkChoice.perkIcon.ActivePerk.perkTag, 1);
+            PerkController.Instance.ModifyPerkOnCharacterData(character.passiveManager, currentSelectedLevelUpPerkChoice.perkIcon.ActivePerk.perkTag, 1);
             
             // Close views
             perkLevelUpConfirmChoiceScreenParent.SetActive(false);
@@ -491,7 +498,7 @@ namespace HexGameEngine.UI
 
         // Build Abilities Section
         #region
-        private void BuildAbilitiesSection(HexCharacterData character)
+        private void BuildAbilitiesPage(HexCharacterData character)
         {
             Debug.Log("CharacterRosterViewController.BuildAbilitiesSection() called...");
 
@@ -549,7 +556,7 @@ namespace HexGameEngine.UI
 
         // Build Talent Section Parent
         #region       
-        private void BuildTalentsSection(HexCharacterData character)
+        private void BuildTalentsPage(HexCharacterData character)
         {
             // reset buttons
             foreach(UITalentIcon b in talentButtons)

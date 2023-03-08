@@ -43,8 +43,8 @@ namespace HexGameEngine.Characters
         [OdinSerialize]
         private bool hasGeneratedTree = false;
         [OdinSerialize]
-        private List<ActivePerk> perkChoices = new List<ActivePerk>();
-        public List<ActivePerk> PerkChoices
+        private List<PerkTreePerk> perkChoices = new List<PerkTreePerk>();
+        public List<PerkTreePerk> PerkChoices
         {
             get
             {
@@ -57,15 +57,37 @@ namespace HexGameEngine.Characters
             if (PerkController.Instance == null || hasGeneratedTree) return;
             hasGeneratedTree = true;
             List<PerkIconData> choices = PerkController.Instance.GetAllLevelUpPerks();
+            // TO DO: Filter out already known perks
+
             choices.Shuffle();
-            perkChoices = new List<ActivePerk>();
-            for (int i = 0; i < 10 && i < choices.Count; i++)
-                perkChoices.Add(new ActivePerk(choices[i].perkTag, 1, choices[i]));
+            perkChoices = new List<PerkTreePerk>();
+            int tier = 1;
+            for (int i = 0; i < 15 && i < choices.Count; i++)
+            {
+                perkChoices.Add(new PerkTreePerk(new ActivePerk(choices[i].perkTag, 1, choices[i]), tier));
+                if ((i + 1) % 3 == 0) tier += 1;
+            }
+                
         }
 
         public PerkTreeData()
         {
             GenerateTree();
+        }
+        public int nextAvailableTier = 1;
+
+       
+    }
+
+    public class PerkTreePerk
+    {
+        public ActivePerk perk;
+        public int tier = 1;
+
+        public PerkTreePerk(ActivePerk perk, int tier)
+        {
+            this.perk = perk;
+            this.tier = tier;
         }
     }
     

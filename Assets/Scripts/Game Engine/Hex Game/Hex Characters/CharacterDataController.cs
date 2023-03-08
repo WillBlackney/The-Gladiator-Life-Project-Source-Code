@@ -311,7 +311,7 @@ namespace HexGameEngine.Characters
             newCharacter.currentXP = original.currentXP;
             newCharacter.dailyWage = original.dailyWage;
             newCharacter.perkPoints = original.perkPoints;
-            newCharacter.perkTree = original.perkTree;
+            newCharacter.PerkTree = original.PerkTree;
 
             // Set stress
             newCharacter.currentStress = original.currentStress;
@@ -789,7 +789,7 @@ namespace HexGameEngine.Characters
             // Set up perks + quirks
             newCharacter.passiveManager = new PerkManagerModel(newCharacter);
             GetAndApplyRandomQuirksToCharacter(newCharacter);
-            newCharacter.perkTree = new PerkTreeData();
+            newCharacter.PerkTree = new PerkTreeData();
 
             // Set up health
             SetCharacterMaxHealth(newCharacter, 0);
