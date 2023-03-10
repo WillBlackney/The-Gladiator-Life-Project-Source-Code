@@ -30,16 +30,19 @@ namespace HexGameEngine.Characters
 
         [Header("Health Bar World References")]
         public Slider healthBarWorld;
+        public Slider healthBarWorldUnder;
         public TextMeshProUGUI healthTextWorld;
-        public TextMeshProUGUI maxHealthTextWorld;
-        public GameObject armourParentWorldUI;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+
+        [Header("Armour Bar World References")]
+        public Slider armourBarWorld;
+        public Slider armourBarWorldUnder;
         public TextMeshProUGUI armourTextWorld;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]       
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Stress Bar World References")]
         public Slider stressBarWorld;
         public TextMeshProUGUI stressTextWorld;
-        public TextMeshProUGUI maxStressTextWorld;
         public Image stressBarShatteredGlowWorld;
         [PropertySpace(SpaceBefore = 50, SpaceAfter = 0)]    
 
@@ -97,22 +100,37 @@ namespace HexGameEngine.Characters
         #region
         public void OnAnyWorldUiMouseEnter()
         {
+            armourTextWorld.gameObject.SetActive(true);
+            healthTextWorld.gameObject.SetActive(true);
             mouseOverWorldUI = true;
             if(UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
                 HexCharacterController.Instance.FadeInCharacterWorldCanvas(this, null, 0.25f);
         }
         public void OnAnyWorldUiMouseExit()
         {
+            armourTextWorld.gameObject.SetActive(false);
+            healthTextWorld.gameObject.SetActive(false);
             mouseOverWorldUI = false;
             StartCoroutine(OnAnyWorldUiMouseExitCoroutine());
 
         }
         private IEnumerator OnAnyWorldUiMouseExitCoroutine()
         {
-            yield return new WaitForSeconds(0.15f);
+            if(UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.Always)
+            {
+                armourTextWorld.gameObject.SetActive(false);
+                healthTextWorld.gameObject.SetActive(false);
+            }
+
+            yield return new WaitForSeconds(0.25f);
             if (!mouseOverWorldUI && !mouseOverModel &&
-                UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)            
-                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(this, null, 0.25f, 0.25f);            
+                UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
+            {
+                armourTextWorld.gameObject.SetActive(false);
+                healthTextWorld.gameObject.SetActive(false);
+                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(this, null, 0.25f, 0.25f);
+            }        
+                           
         }
         public void OnModelRightClick()
         {

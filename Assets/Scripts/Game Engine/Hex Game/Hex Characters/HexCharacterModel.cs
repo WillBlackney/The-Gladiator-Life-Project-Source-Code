@@ -79,6 +79,7 @@ namespace HexGameEngine.Characters
         public int stressGainedThisCombat;
         public List<Perk> injuriesGainedThisCombat = new List<Perk>();
         public List<Perk> permanentInjuriesGainedThisCombat = new List<Perk>();
+        public int startingArmour;
 
         // Abilities
         public AbilityBook abilityBook;

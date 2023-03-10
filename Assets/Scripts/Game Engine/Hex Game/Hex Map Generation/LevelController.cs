@@ -926,10 +926,13 @@ namespace HexGameEngine.HexTiles
                 h.myCharacter.hexCharacterView.myActivationWindow != null) h.myCharacter.hexCharacterView.myActivationWindow.MouseEnter();
 
             // Show the world space UI of the character on the tile
-            if (h.myCharacter != null && UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
+            if (h.myCharacter != null)
             {
+                h.myCharacter.hexCharacterView.armourTextWorld.gameObject.SetActive(true);
+                h.myCharacter.hexCharacterView.healthTextWorld.gameObject.SetActive(true);
                 h.myCharacter.hexCharacterView.mouseOverModel = true;
-                HexCharacterController.Instance.FadeInCharacterWorldCanvas(h.myCharacter.hexCharacterView, null, 0.25f);
+                if(UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
+                    HexCharacterController.Instance.FadeInCharacterWorldCanvas(h.myCharacter.hexCharacterView, null, 0.25f);
             }
 
 
@@ -954,6 +957,8 @@ namespace HexGameEngine.HexTiles
                 // Hide the world space UI of the character on the tile
                 if (HexMousedOver.myCharacter != null && UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
                 {
+                    h.myCharacter.hexCharacterView.armourTextWorld.gameObject.SetActive(false);
+                    h.myCharacter.hexCharacterView.healthTextWorld.gameObject.SetActive(false);
                     h.myCharacter.hexCharacterView.mouseOverModel = false;
                     if (h.myCharacter.hexCharacterView.mouseOverModel == false &&
                          h.myCharacter.hexCharacterView.mouseOverWorldUI == false)

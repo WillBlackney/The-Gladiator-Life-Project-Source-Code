@@ -302,9 +302,12 @@ namespace HexGameEngine.Characters
         }
         private void SetCharacterViewStartingState(HexCharacterModel character)
         {
+            // TO DO: Uncomment when we want stres bars back
+            /*
             HexCharacterView view = character.hexCharacterView;
             if (!character.characterData.ignoreStress) view.stressBarWorld.transform.parent.gameObject.SetActive(true);
             else view.stressBarWorld.transform.parent.gameObject.SetActive(false);
+            */
         }
         private void SetupCharacterFromCharacterData(HexCharacterModel character, HexCharacterData data)
         {
@@ -327,7 +330,9 @@ namespace HexGameEngine.Characters
             ModifyMaxHealth(character, 0); // modify by 0 just to update views
             ModifyHealth(character, data.currentHealth, false);
             ModifyStress(character, data.currentStress, false, false, false);
-            ModifyArmour(character, ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet));
+            int armour = ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet);
+            character.startingArmour = armour;
+            ModifyArmour(character, armour);
 
             // Misc UI setup
             //character.hexCharacterView.characterNameTextUI.text = character.myName;
@@ -385,7 +390,9 @@ namespace HexGameEngine.Characters
 
             // Set up items + armour and stats from items
             ItemController.Instance.RunItemSetupOnHexCharacterFromItemSet(character, data.itemSet);
-            ModifyArmour(character, data.baseArmour + ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet));
+            int armour = data.baseArmour + ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet);
+            character.startingArmour = armour;
+            ModifyArmour(character, armour);
 
             // to do: change this => not every enemy will want to have its look reflect its gear => sometimes we want to override this
             CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.ucm);
@@ -512,6 +519,8 @@ namespace HexGameEngine.Characters
             float healthBarFloat = currentHealthFloat / currentMaxHealthFloat;
 
             // Modify WORLD space ui
+            character.hexCharacterView.healthBarWorldUnder.DOKill();
+            character.hexCharacterView.healthBarWorldUnder.DOValue(healthBarFloat, 0.75f).SetEase(Ease.InQuart);
             character.hexCharacterView.healthBarWorld.value = healthBarFloat;
             character.hexCharacterView.healthTextWorld.text = health.ToString();
             //character.hexCharacterView.maxHealthTextWorld.text = maxHealth.ToString();
@@ -530,6 +539,7 @@ namespace HexGameEngine.Characters
             Debug.Log("CharacterEntityController.ModifyArmour() called for " + character.myName);
 
             int finalBlockValue = character.currentArmour;
+            int maxArmour = character.startingArmour;
             finalBlockValue += armourGainedOrLost;
 
             // Prevent armour going less then 0
@@ -543,18 +553,36 @@ namespace HexGameEngine.Characters
 
             Debug.Log(character.myName + " armour value = " + character.currentArmour.ToString());
 
-            VisualEventManager.Instance.CreateVisualEvent(() => UpdateArmourGUIElements(character, finalBlockValue), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+            VisualEventManager.Instance.CreateVisualEvent(() => UpdateArmourGUIElements(character, finalBlockValue, maxArmour), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
         }
-        private void UpdateArmourGUIElements(HexCharacterModel character, int armour)
+        private void UpdateArmourGUIElements(HexCharacterModel character, int armour, int maxArmour)
         {
+            /*
             Debug.Log("CharacterEntityController.UpdateArmourGUIElements() called, armour = " + armour.ToString());
 
             if (character.hexCharacterView == null) return;
             if (armour > 0) character.hexCharacterView.armourParentWorldUI.SetActive(true);
             else character.hexCharacterView.armourParentWorldUI.SetActive(false);
             character.hexCharacterView.armourTextWorld.text = armour.ToString();
+            */
 
-            if(TurnController.Instance.EntityActivated == character)
+            Debug.Log("CharacterEntityController.UpdateArmourGUIElements() called, health = " + armour.ToString() + ", maxHealth = " + maxArmour.ToString());
+
+            if (character.hexCharacterView == null) return;
+
+            // Convert health int values to floats
+            float currentArmourFloat = armour;
+            float currentMaxArmourFloat = maxArmour;
+            float armourBarFloat = currentArmourFloat / currentMaxArmourFloat;
+
+            // Modify WORLD space ui
+            character.hexCharacterView.armourBarWorldUnder.DOKill();
+            character.hexCharacterView.armourBarWorldUnder.DOValue(armourBarFloat, 0.75f).SetEase(Ease.InQuart);
+            character.hexCharacterView.armourBarWorld.value = armourBarFloat;
+            character.hexCharacterView.armourTextWorld.text = armour.ToString();
+
+
+            if (TurnController.Instance.EntityActivated == character)
                 CombatUIController.Instance.CurrentArmourText.text = armour.ToString();
 
         }
@@ -1722,6 +1750,8 @@ namespace HexGameEngine.Characters
                 if (cData != null) cData.MarkAsCompleted();
                 return;
             }
+
+            
             view.worldSpaceCanvasParent.DOKill();
             view.worldSpaceCanvasParent.gameObject.SetActive(true);
             //view.worldSpaceCG.alpha = 1;

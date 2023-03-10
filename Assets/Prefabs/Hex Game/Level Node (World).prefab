@@ -1427,6 +1427,7 @@ MonoBehaviour:
   IsTaken: 0
   MovementCost: 2
   HexGridType: 0
+  exists: 1
   gridPosition: {x: -3, y: -1}
   tileName: 
   mouseOverParent: {fileID: 8944885819890159452}
@@ -1476,7 +1477,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.45}
+  m_Size: {x: 1.1, y: 0.55}
   m_EdgeRadius: 0
 --- !u!1 &8944885819292419964
 GameObject:
