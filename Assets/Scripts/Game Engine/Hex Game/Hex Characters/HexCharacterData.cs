@@ -57,8 +57,8 @@ namespace HexGameEngine.Characters
         public List<AttributeRollResult> attributeRolls = new List<AttributeRollResult>();
         private PerkTreeData perkTree;
         public int perkPoints = 0;
-        public List<TalentRollResult> talentRolls = new List<TalentRollResult>();
-
+        //public List<TalentRollResult> talentRolls = new List<TalentRollResult>();
+        public int talentPoints = 0;
         public PerkTreeData PerkTree
         {
             get

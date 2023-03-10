@@ -8,7 +8,6 @@ using HexGameEngine.Characters;
 
 namespace HexGameEngine.UI
 {
-
     public class UILevelUpPerkIcon : MonoBehaviour
     {
         public UIPerkIcon perkIcon;

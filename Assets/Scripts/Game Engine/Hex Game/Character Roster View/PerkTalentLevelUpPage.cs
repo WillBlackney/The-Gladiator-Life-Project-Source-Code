@@ -50,23 +50,8 @@ namespace HexGameEngine.UI
         #endregion
 
         // Logic
-        #region       
-        public void ShowAndBuildForTalentReward(HexCharacterData character)
-        {
-            currentCharacter = character;
-            mainVisualParent.SetActive(true);
-            confirmButtonImage.sprite = notReadyImage;
-            headerText.text = "Choose a new talent!";
-
-            for (int i = 0; i < 3; i++)
-            {
-                allLevelUpCards[i].Reset();
-                allLevelUpCards[i].BuildFromTalentData(character.talentRolls[0].talentChoices[i]);
-            }
-
-            UpdateConfirmButtonState();
-
-        }
+        #region     
+       
         private bool HasMadeSelection()
         {
             bool ret = false;
@@ -108,7 +93,7 @@ namespace HexGameEngine.UI
             else if (card.TalentData != null)
             {
                 CharacterDataController.Instance.HandleLearnNewTalent(currentCharacter, card.TalentData.talentSchool);
-                currentCharacter.talentRolls.RemoveAt(0);
+                currentCharacter.talentPoints -= 1;
             }
 
             mainVisualParent.SetActive(false);

@@ -39,29 +39,33 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI xpBarText;
         [SerializeField] private Slider xpbar;
         [Space(20)]
+
         [Header("Level Up Components")]
         [SerializeField] private LevelUpButton attributeLevelUpButton;
         [SerializeField] private AttributeLevelUpPage attributeLevelUpPageComponent;
-        [SerializeField] private LevelUpButton perkLevelUpButton;
-        [SerializeField] private LevelUpButton talentLevelUpButton;
-        [SerializeField] private PerkTalentLevelUpPage talentLevelUpPage;
         [SerializeField] private UILevelUpPerkIcon[] perkLevelUpIcons;
         [SerializeField] private UICard perkLevelUpScreenUICard;
         [SerializeField] private GameObject perkLevelUpConfirmChoiceScreenParent;
+        [SerializeField] private TextMeshProUGUI perkLevelUpConfirmChoiceScreenHeaderText;
         private UILevelUpPerkIcon currentSelectedLevelUpPerkChoice;
+        private UILevelUpTalentIcon currentSelectedLevelUpTalentChoice;
         [Space(20)]
+
         [Header("Abilities Section Components")]
         [SerializeField] private List<UIAbilityIconSelectable> selectableAbilityButtons;
         [SerializeField] private GameObject selectableAbilityButtonPrefab;
         [SerializeField] private TextMeshProUGUI activeAbilitiesText;
         [SerializeField] private Transform selectableAbilityButtonsParent;
         [Space(20)]
+
         [Header("Talent Section Components")]
-        [SerializeField] private UITalentIcon[] talentButtons;
+        [SerializeField] private UILevelUpTalentIcon[] talentLevelUpIcons;
         [Space(20)]
+
         [Header("Perk Section Components")]
         [SerializeField] private UIPerkIcon[] perkButtons;
         [Space(20)]
+
         [Header("Character View Panel Components")]
         [SerializeField] private UniversalCharacterModel characterPanelUcm;
         [SerializeField] private RosterItemSlot mainHandSlot;
@@ -129,6 +133,9 @@ namespace HexGameEngine.UI
         [SerializeField] GameObject perkPageParent;
         [SerializeField] GameObject talentPageParent;
         [SerializeField] GameObject abilityPageParent;
+
+        [SerializeField] TextMeshProUGUI perkPointsText;
+        [SerializeField] TextMeshProUGUI talentsPointsText;
 
         private HexCharacterData characterCurrentlyViewing;
         #endregion
@@ -209,7 +216,7 @@ namespace HexGameEngine.UI
             characterNameText.text = data.myName;
             characterClassText.text = data.myClassName;
             dailyWageText.text = data.dailyWage.ToString();         
-            BuildPerkViews(data);
+            BuildActivePerksSection(data);
             BuildAttributeSection(data);
             BuildGeneralInfoSection(data);
             BuildItemSlots(data);
@@ -262,15 +269,12 @@ namespace HexGameEngine.UI
         {
             attributeLevelUpPageComponent.ShowAndBuildPage(characterCurrentlyViewing);
         }       
-        public void OnLevelUpTalentButtonClicked()
-        {
-            talentLevelUpPage.ShowAndBuildForTalentReward(characterCurrentlyViewing);
-        }
+        
         #endregion              
 
         // Build Perk Section
         #region      
-        private void BuildPerkViews(HexCharacterData character)
+        private void BuildActivePerksSection(HexCharacterData character)
         {
             foreach (UIPerkIcon b in perkButtons)            
                 b.HideAndReset();            
@@ -291,9 +295,6 @@ namespace HexGameEngine.UI
 
             Debug.Log("Active perk icons = " + allPerks.Count.ToString());           
 
-            if (character.perkPoints > 0)
-                perkLevelUpButton.ShowAndAnimate();
-            else perkLevelUpButton.Hide();
 
         }
        
@@ -443,6 +444,14 @@ namespace HexGameEngine.UI
 
         // Perk Tree Section Logic
         #region
+        public void OnPerksPageButtonClicked()
+        {
+            perkPageParent.SetActive(true);
+            talentPageParent.SetActive(false);
+            abilityPageParent.SetActive(false);
+
+            perkPageButton.SetSelectedViewState(0.25f);
+        }
         private void BuildPerkPage(HexCharacterData character)
         {
             if (character.PerkTree == null) return;
@@ -451,6 +460,9 @@ namespace HexGameEngine.UI
             {
                 perkLevelUpIcons[i].BuildFromCharacterAndPerkData(character, character.PerkTree.PerkChoices[i]);
             }
+
+            perkPageButton.ShowLevelUpIcon(character.perkPoints > 0);
+            perkPointsText.text = character.perkPoints.ToString();
         }
         public void OnPerkTreeIconClicked(UILevelUpPerkIcon icon)
         {
@@ -460,9 +472,11 @@ namespace HexGameEngine.UI
                 icon.myPerkData.tier != icon.myCharacter.PerkTree.nextAvailableTier) return;
 
             currentSelectedLevelUpPerkChoice = icon;
+            currentSelectedLevelUpTalentChoice = null;
 
             // Build and show confirm perk choice
             perkLevelUpConfirmChoiceScreenParent.SetActive(true);
+            perkLevelUpConfirmChoiceScreenHeaderText.text = "Are you sure you want to learn this perk?";
 
             // Build page card
             perkLevelUpScreenUICard.BuildCard(
@@ -472,18 +486,42 @@ namespace HexGameEngine.UI
         }
         public void OnConfirmLevelUpPerkPageConfirmButtonClicked()
         {
-            HexCharacterData character = currentSelectedLevelUpPerkChoice.myCharacter;
+            HexCharacterData character = null;
+            UILevelUpPerkIcon perk = null;
+            UILevelUpTalentIcon talent = null;
+            if (currentSelectedLevelUpPerkChoice != null)
+            {
+                perk = currentSelectedLevelUpPerkChoice;
+                character = currentSelectedLevelUpPerkChoice.myCharacter;
+            }
+            else if (currentSelectedLevelUpTalentChoice != null)
+            {
+                talent = currentSelectedLevelUpTalentChoice;
+                character = currentSelectedLevelUpTalentChoice.myCharacter;
+            }
 
-            // Pay perk point + increment perk tree tier
-            character.perkPoints--;
-            character.PerkTree.nextAvailableTier += 1;
+            // Gain perk 
+            if(perk != null)
+            {
+                // Pay perk point + increment perk tree tier
+                character.perkPoints--;
+                character.PerkTree.nextAvailableTier += 1;
 
-            // Learn new perk
-            PerkController.Instance.ModifyPerkOnCharacterData(character.passiveManager, currentSelectedLevelUpPerkChoice.perkIcon.ActivePerk.perkTag, 1);
-            
+                // Learn new perk
+                PerkController.Instance.ModifyPerkOnCharacterData(character.passiveManager, currentSelectedLevelUpPerkChoice.perkIcon.ActivePerk.perkTag, 1);
+            }
+
+            // Learn talent
+            if (talent != null)
+            {
+                character.talentPoints--;
+                CharacterDataController.Instance.HandleLearnNewTalent(character, talent.myTalentData.talentSchool);   
+            }
+
             // Close views
             perkLevelUpConfirmChoiceScreenParent.SetActive(false);
             currentSelectedLevelUpPerkChoice = null;
+            currentSelectedLevelUpTalentChoice = null;
 
             // Rebuild character roster views
             HandleRedrawRosterOnCharacterUpdated();
@@ -493,11 +531,20 @@ namespace HexGameEngine.UI
         {
             perkLevelUpConfirmChoiceScreenParent.SetActive(false);
             currentSelectedLevelUpPerkChoice = null;
+            currentSelectedLevelUpTalentChoice = null;
         }
         #endregion
 
         // Build Abilities Section
         #region
+        public void OnAbilitiesPageButtonClicked()
+        {
+            perkPageParent.SetActive(false);
+            talentPageParent.SetActive(false);
+            abilityPageParent.SetActive(true);
+
+            abilityPageButton.SetSelectedViewState(0.25f);
+        }
         private void BuildAbilitiesPage(HexCharacterData character)
         {
             Debug.Log("CharacterRosterViewController.BuildAbilitiesSection() called...");
@@ -505,10 +552,6 @@ namespace HexGameEngine.UI
             // reset ability buttons
             foreach (UIAbilityIconSelectable b in selectableAbilityButtons)            
                 b.Hide();            
-
-            // build an icon for each known ability
-            // set selected state of icons by comparing against active abilities
-            // update selected abilities text
 
             for(int i = 0; i < character.abilityBook.knownAbilities.Count; i++)
             {
@@ -559,33 +602,41 @@ namespace HexGameEngine.UI
         private void BuildTalentsPage(HexCharacterData character)
         {
             // reset buttons
-            foreach(UITalentIcon b in talentButtons)
-            {
+            foreach(UILevelUpTalentIcon b in talentLevelUpIcons)            
                 b.HideAndReset();
-            }
+            
 
-            for(int i = 0; i < character.talentPairings.Count; i++)
+            for (int i = 0; i < CharacterDataController.Instance.AllTalentData.Length && i < talentLevelUpIcons.Length; i++)
             {
-                talentButtons[i].BuildFromTalentPairing(character.talentPairings[i]);
+                talentLevelUpIcons[i].BuildFromCharacterAndTalentData(character, CharacterDataController.Instance.AllTalentData[i]);
             }
 
-            if (character.talentRolls.Count > 0)
-                talentLevelUpButton.ShowAndAnimate();
-            else talentLevelUpButton.Hide();
+            talentPageButton.ShowLevelUpIcon(character.talentPoints > 0);
+            talentsPointsText.text = character.talentPoints.ToString();
         }
+        public void OnLevelUpTalentIconClicked(UILevelUpTalentIcon icon)
+        {
+            if (icon.alreadyKnown ||
+                icon.myCharacter.talentPoints == 0) return;
 
+            currentSelectedLevelUpTalentChoice = icon;
+            currentSelectedLevelUpPerkChoice = null;
+
+            // Build and show confirm perk choice
+            perkLevelUpConfirmChoiceScreenParent.SetActive(true);
+            perkLevelUpConfirmChoiceScreenHeaderText.text = "Are you sure you want to learn this talent?";
+
+            // Build page card
+            perkLevelUpScreenUICard.BuildCard(
+                TextLogic.SplitByCapitals(icon.myTalentData.talentSchool.ToString()),
+                TextLogic.ConvertCustomStringListToString(icon.myTalentData.talentDescription),
+                icon.myTalentData.talentSprite);
+        }
         #endregion
 
 
         // NEW LOGIC
-        public void OnPerksPageButtonClicked()
-        {
-            perkPageParent.SetActive(true);
-            talentPageParent.SetActive(false);
-            abilityPageParent.SetActive(false);
 
-            perkPageButton.SetSelectedViewState(0.25f);
-        }
         public void OnTalentsPageButtonClicked()
         {
             perkPageParent.SetActive(false);
@@ -594,14 +645,7 @@ namespace HexGameEngine.UI
 
             talentPageButton.SetSelectedViewState(0.25f);
         }
-        public void OnAbilitiesPageButtonClicked()
-        {
-            perkPageParent.SetActive(false);
-            talentPageParent.SetActive(false);
-            abilityPageParent.SetActive(true);
-
-            abilityPageButton.SetSelectedViewState(0.25f);
-        }
+        
 
 
 

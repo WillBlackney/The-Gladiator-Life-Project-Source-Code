@@ -12,6 +12,7 @@ namespace HexGameEngine.UI
         [SerializeField] Color selectedColor;
         [SerializeField] Image buttonBgImage;
         [SerializeField] Transform scalingParent;
+        [SerializeField] LevelUpButton levelUpButton;
 
         public static CharacterRosterPageButton selectedButton { get; private set; }
 
@@ -33,6 +34,11 @@ namespace HexGameEngine.UI
 
             scalingParent.DOScale(1f, speed);
             buttonBgImage.DOColor(normalColor, speed);
+        }
+        public void ShowLevelUpIcon(bool onOrOff)
+        {
+            if (onOrOff) levelUpButton.ShowAndAnimate();
+            else levelUpButton.Hide();
         }
     }
 }

@@ -105,7 +105,7 @@ namespace HexGameEngine.UI
             if (myCharacterData == null) return;
             levelUpIndicator.Hide();
             if (myCharacterData.attributeRolls.Count > 0 ||
-                myCharacterData.talentRolls.Count > 0 ||
+                myCharacterData.talentPoints > 0 ||
                 myCharacterData.perkPoints > 0)
             {
                 Debug.Log("Showing indicator!");

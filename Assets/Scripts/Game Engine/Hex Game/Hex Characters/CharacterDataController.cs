@@ -557,6 +557,7 @@ namespace HexGameEngine.Characters
         public List<TalentPairing> GetValidLevelUpTalents(HexCharacterData character)
         {
             List<TalentPairing> ret = new List<TalentPairing>();
+            /*
             List<TalentSchool> talentSchools = new List<TalentSchool> { TalentSchool.Divinity, TalentSchool.Guardian, TalentSchool.Manipulation,
             TalentSchool.Naturalism, TalentSchool.Pyromania, TalentSchool.Ranger, TalentSchool.Scoundrel, TalentSchool.Shadowcraft, TalentSchool.Warfare, TalentSchool.Metamorph };
 
@@ -605,8 +606,8 @@ namespace HexGameEngine.Characters
                     }
                 }
             }
+            
             */
-
             return ret;
         }
         #endregion
@@ -715,7 +716,7 @@ namespace HexGameEngine.Characters
 
             // Gain talent level up
             if ((data.currentLevel == 3 || data.currentLevel == 5) && data.talentPairings.Count < 3)
-                data.talentRolls.Add(TalentRollResult.GenerateRoll(data));
+                data.talentPoints += 1;
 
             // Reset current xp
             data.currentXP = 0;
