@@ -5,6 +5,7 @@ using System;
 using Spriter2UnityDX;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 
 namespace CardGameEngine.UCM
 {
@@ -18,6 +19,9 @@ namespace CardGameEngine.UCM
         public Animator myAnimator;
         public EntityRenderer myEntityRenderer;
         [SerializeField] GameObject headMasksParent;
+        [SerializeField] GameObject[] oneHandAnimationBones;
+        [SerializeField] GameObject[] twoHandAnimationBones;
+
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]       
 
         [Header("Active Particle References")]
@@ -173,6 +177,7 @@ namespace CardGameEngine.UCM
                 AllHeadArmour = headElements.ToArray();
 
                 HexGameEngine.UCM.CharacterModeller.AutoSetHeadMaskOrderInLayer(this);
+                SetMode(UcmMode.Standard);
 
                 hasRunSetup = true;
             }
@@ -194,5 +199,36 @@ namespace CardGameEngine.UCM
 
         #endregion
 
+        // Mode Logic
+        #region
+
+        public UcmMode UcmMode
+        {
+            get; private set;
+        }
+        public void SetMode(UcmMode mode)
+        {
+            UcmMode = mode;
+            if(mode == UcmMode.Standard)
+            {
+                oneHandAnimationBones.ForEach(x => x.SetActive(true));
+                twoHandAnimationBones.ForEach(x => x.SetActive(false));
+            }
+            else if (mode == UcmMode.TwoHandMelee)
+            {
+                oneHandAnimationBones.ForEach(x => x.SetActive(false));
+                twoHandAnimationBones.ForEach(x => x.SetActive(true));
+            }
+        }
+
+        
+        #endregion
+
+    }
+
+    public enum UcmMode
+    {
+        Standard = 0,
+        TwoHandMelee = 1,
     }
 }

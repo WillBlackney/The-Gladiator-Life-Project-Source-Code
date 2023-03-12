@@ -7,14 +7,38 @@ using HexGameEngine.CameraSystems;
 using HexGameEngine.HexTiles;
 using HexGameEngine.Utilities;
 using HexGameEngine.Audio;
+using HexGameEngine.Items;
 
 namespace HexGameEngine.VisualEvents
 {
     public class AnimationEventController : Singleton<AnimationEventController>
     {
+        #region Constants
+        public const string MAIN_HAND_MELEE_ATTACK_OVERHEAD = "MAIN_HAND_MELEE_ATTACK_OVERHEAD";
+        public const string MAIN_HAND_MELEE_ATTACK_THRUST = "MAIN_HAND_MELEE_ATTACK_THRUST";
+        public const string OFF_HAND_MELEE_ATTACK_OVERHEAD = "OFF_HAND_MELEE_ATTACK_OVERHEAD";
+        public const string OFF_HAND_MELEE_ATTACK_THRUST = "OFF_HAND_MELEE_ATTACK_THRUST";
+        public const string TWO_HAND_MELEE_ATTACK_OVERHEAD = "TWO_HAND_MELEE_ATTACK_OVERHEAD";
+        public const string TWO_HAND_MELEE_ATTACK_THRUST = "TWO_HAND_MELEE_ATTACK_THRUST";
+        public const string TWO_HAND_MELEE_ATTACK_CLEAVE = "TWO_HAND_MELEE_ATTACK_CLEAVE";
+        public const string RAISE_SHIELD = "RAISE_SHIELD";
+        public const string SHIELD_BASH = "SHIELD_BASH";
+        public const string OFF_HAND_PUSH = "OFF_HAND_PUSH";
+        public const string CHARGE = "CHARGE";
+        public const string DUCK = "Duck";
+        public const string IDLE = "Idle";
+        public const string SKILL_TWO = "Skill Two";
+        public const string SHOOT_BOW = "Shoot Bow";
+        public const string SHOOT_CROSSBOW = "Shoot Crossbow";
+        public const string RUN = "Move";
+        public const string HURT = "Hurt";
+        public const string DIE = "Die";
+        public const string RESSURECT = "Ressurect";
+
+        #endregion
         // Core Functions
         #region
-        public void PlayAnimationEvent(AnimationEventData vEvent, HexCharacterModel user = null, HexCharacterModel targetCharacter = null, LevelNode targetTile = null, VisualEvent stackEvent = null)
+        public void PlayAnimationEvent(AnimationEventData vEvent, HexCharacterModel user = null, HexCharacterModel targetCharacter = null, LevelNode targetTile = null, ItemData weaponUsed = null, VisualEvent stackEvent = null)
         {
             if (vEvent.eventType == AnimationEventType.CameraShake)
             {
@@ -28,7 +52,7 @@ namespace HexGameEngine.VisualEvents
 
             else if (vEvent.eventType == AnimationEventType.CharacterAnimation)
             {
-                ResolveCharacterAnimation(vEvent, user, targetCharacter, targetTile, stackEvent);
+                ResolveCharacterAnimation(vEvent, user, targetCharacter, targetTile, weaponUsed, stackEvent);
             }
 
             else if (vEvent.eventType == AnimationEventType.ParticleEffect)
@@ -59,7 +83,7 @@ namespace HexGameEngine.VisualEvents
         {
             VisualEventManager.Instance.InsertTimeDelayInQueue(vEvent.delayDuration, QueuePosition.Back, stackEvent);
         }
-        private void ResolveCharacterAnimation(AnimationEventData vEvent, HexCharacterModel user, HexCharacterModel targetCharacter, LevelNode targetTile, VisualEvent stackEvent)
+        private void ResolveCharacterAnimation(AnimationEventData vEvent, HexCharacterModel user, HexCharacterModel targetCharacter, LevelNode targetTile, ItemData weaponUsed, VisualEvent stackEvent)
         {
             // Melee Attack 
             if (vEvent.characterAnimation == CharacterAnimation.MeleeAttack)
@@ -67,7 +91,23 @@ namespace HexGameEngine.VisualEvents
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 CoroutineData cData = new CoroutineData();
                 VisualEventManager.Instance.CreateVisualEvent(() => 
-                HexCharacterController.Instance.TriggerMeleeAttackAnimation(user.hexCharacterView, targetView.WorldPosition, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+                HexCharacterController.Instance.TriggerMeleeAttackAnimation(user.hexCharacterView, targetView.WorldPosition, weaponUsed, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+            }
+            // Offhand Push
+            else if (vEvent.characterAnimation == CharacterAnimation.OffHandPush)
+            {
+                HexCharacterView targetView = targetCharacter.hexCharacterView;
+                CoroutineData cData = new CoroutineData();
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                HexCharacterController.Instance.TriggerOffhandPushAnimation(user.hexCharacterView, targetView.WorldPosition, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+            }
+            // Shield Bash
+            else if (vEvent.characterAnimation == CharacterAnimation.ShieldBash)
+            {
+                HexCharacterView targetView = targetCharacter.hexCharacterView;
+                CoroutineData cData = new CoroutineData();
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                HexCharacterController.Instance.TriggerShieldBashAnimation(user.hexCharacterView, targetView.WorldPosition, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
             }
             // AoE Melee Attack 
             else if (vEvent.characterAnimation == CharacterAnimation.AoeMeleeAttack)
@@ -78,6 +118,11 @@ namespace HexGameEngine.VisualEvents
             else if (vEvent.characterAnimation == CharacterAnimation.Skill)
             {
                 VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlaySkillAnimation(user.hexCharacterView), QueuePosition.Back, 0, 0, stackEvent);
+            }
+            // Raise Shield
+            else if (vEvent.characterAnimation == CharacterAnimation.RaiseShield)
+            {
+                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayRaiseShieldAnimation(user.hexCharacterView), QueuePosition.Back, 0, 0, stackEvent);
             }
             // Resurrect
             else if (vEvent.characterAnimation == CharacterAnimation.Resurrect)

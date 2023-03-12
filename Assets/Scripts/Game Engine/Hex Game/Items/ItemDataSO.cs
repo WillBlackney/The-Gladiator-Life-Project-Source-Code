@@ -61,6 +61,10 @@ namespace HexGameEngine.Items
         [LabelWidth(100)]
         [ShowIf("ShowWeaponField")]
         public InjuryType[] injuryTypesCaused;
+        [BoxGroup("Weapon Info")]
+        [LabelWidth(100)]
+        [ShowIf("ShowWeaponField")]
+        public WeaponAttackAnimationType weaponAttackAnimationType;
 
         [BoxGroup("Weapon Info")]
         [LabelWidth(125)]
@@ -140,5 +144,11 @@ namespace HexGameEngine.Items
             return (itemType == ItemType.Weapon && weaponClass == WeaponClass.Shield) || itemType == ItemType.Head || itemType == ItemType.Body;
         }
         #endregion
+    }
+
+    public enum WeaponAttackAnimationType
+    {
+        Overhead = 0,
+        Thrust = 1,
     }
 }

@@ -409,6 +409,40 @@ namespace HexGameEngine.Abilities
             // Check effect sub requirements
             if (!DoesAbilityEffectMeetAllRequirements(ability, abilityEffect, caster, target, tileTarget)) return;
 
+            // Determine weapon used
+            ItemData weaponUsed = null;
+            if (abilityEffect.weaponUsed == WeaponSlot.Offhand &&
+                caster.itemSet.offHandItem != null)
+                weaponUsed = caster.itemSet.offHandItem;
+
+            else if (abilityEffect.weaponUsed == WeaponSlot.MainHand &&
+                caster.itemSet.mainHandItem != null)
+                weaponUsed = caster.itemSet.mainHandItem;
+
+            // Dynamic weapon used check: make sure the ability actually belongs to the main hand weapon if directed.
+            if (ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                weaponUsed == caster.itemSet.mainHandItem &&
+                caster.itemSet.offHandItem != null &&
+                ability.derivedFromWeapon &&
+                ability.weaponRequirement != WeaponRequirement.None)
+            {
+                bool foundMatch = false;
+                foreach (AbilityData weaponAbility in caster.itemSet.mainHandItem.grantedAbilities)
+                {
+                    if (weaponAbility.abilityName == ability.abilityName)
+                    {
+                        foundMatch = true;
+                        break;
+                    }
+                }
+
+                if (!foundMatch)
+                {
+                    Debug.Log(String.Format("AbilityController.TriggerAbilityEffect() weapon derived ability '{0}' does not exist on weapon '{1}', using off hand weapon instead", ability.abilityName, caster.itemSet.mainHandItem.itemName));
+                    weaponUsed = caster.itemSet.offHandItem;
+                }
+            }
+
             // Queue starting anims and particles
             foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnStart)
             {
@@ -428,6 +462,7 @@ namespace HexGameEngine.Abilities
             {
                 triggerEffectEndEvents = false;
 
+                /*
                 // Determine weapon used
                 ItemData weaponUsed = null;
                 if (abilityEffect.weaponUsed == WeaponSlot.Offhand &&
@@ -460,7 +495,7 @@ namespace HexGameEngine.Abilities
                         Debug.Log(String.Format("AbilityController.TriggerAbilityEffect() weapon derived ability '{0}' does not exist on weapon '{1}', using off hand weapon instead", ability.abilityName, caster.itemSet.mainHandItem.itemName));
                         weaponUsed = caster.itemSet.offHandItem;
                     }
-                }
+                }*/
 
                 HitRoll hitResult = CombatController.Instance.RollForHit(caster, target, ability, weaponUsed);
                 bool didCrit = CombatController.Instance.RollForCrit(caster, target, ability, abilityEffect);
@@ -480,7 +515,7 @@ namespace HexGameEngine.Abilities
 
                     // Do on hit visual effects for this ability
                     foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
-                        AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, target.GetLastStackEventParent());
+                        AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, weaponUsed, target.GetLastStackEventParent());
 
                     // Cache hex position, in case target is killed before chain effect triggers
                     LevelNode lastChainHex = target.currentTile;
@@ -496,7 +531,7 @@ namespace HexGameEngine.Abilities
                         {
                             foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnEffectFinish)
                             {
-                                AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, target.GetLastStackEventParent());
+                                AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, weaponUsed, target.GetLastStackEventParent());
                             }
                         }
                     }
@@ -629,6 +664,7 @@ namespace HexGameEngine.Abilities
             // Damage Aoe
             else if (abilityEffect.effectType == AbilityEffectType.DamageAoe)
             {
+                /*
                 // Determine weapon used
                 ItemData weaponUsed = null;
                 if (abilityEffect.weaponUsed == WeaponSlot.Offhand &&
@@ -661,6 +697,7 @@ namespace HexGameEngine.Abilities
                         weaponUsed = caster.itemSet.offHandItem;
                     }
                 }
+                */
 
                 triggerEffectEndEvents = false;
                 List<LevelNode> tilesEffected = new List<LevelNode>();
@@ -746,7 +783,7 @@ namespace HexGameEngine.Abilities
                         // Do on hit visual effects for this ability
                         foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                         {
-                            AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, character.GetLastStackEventParent());
+                            AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, weaponUsed, character.GetLastStackEventParent());
                         }
                     }
                     else if (hitRoll.Result == HitRollResult.Miss)
@@ -802,7 +839,7 @@ namespace HexGameEngine.Abilities
                         {
                             foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnEffectFinish)
                             {
-                                AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, character.GetLastStackEventParent());
+                                AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, weaponUsed, character.GetLastStackEventParent());
                             }
                         }
                     }
@@ -974,7 +1011,7 @@ namespace HexGameEngine.Abilities
                         {
                             foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                             {
-                                AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, character.GetLastStackEventParent());
+                                AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, weaponUsed, character.GetLastStackEventParent());
                             }
                         }
                     }
@@ -1064,7 +1101,7 @@ namespace HexGameEngine.Abilities
                         {
                             foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                             {
-                                AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, character.GetLastStackEventParent());
+                                AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, weaponUsed, character.GetLastStackEventParent());
                             }
                         }
                     }
@@ -1345,7 +1382,7 @@ namespace HexGameEngine.Abilities
                     {
                         foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnEffectFinish)
                         {
-                            AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, target.GetLastStackEventParent());
+                            AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, weaponUsed, target.GetLastStackEventParent());
                         }
                     }
                 }

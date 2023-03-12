@@ -777,6 +777,9 @@ namespace HexGameEngine
         ShootProjectile = 7,
         Skill = 4,
         Resurrect = 6,
+        OffHandPush = 8,
+        RaiseShield = 9,
+        ShieldBash = 10,
     }
     public enum ParticleEffect
     {

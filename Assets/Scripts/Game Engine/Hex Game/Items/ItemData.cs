@@ -28,6 +28,7 @@ namespace HexGameEngine.Items
         public float healthDamage = 1f;
         public float armourDamage = 1f;
         public float armourPenetration = 0.25f;
+        public WeaponAttackAnimationType weaponAttackAnimationType;
 
         // Armour Properties
         public int fatiguePenalty;

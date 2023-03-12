@@ -156,7 +156,7 @@ namespace HexGameEngine.Items
             i.healthDamage = d.healthDamage;
             i.armourDamage = d.armourDamage;
             i.armourPenetration = d.armourPenetration;
-
+            i.weaponAttackAnimationType = d.weaponAttackAnimationType;
 
             i.fatiguePenalty = d.fatiguePenalty;
             i.minArmourRoll = d.minArmourRoll;
@@ -189,6 +189,7 @@ namespace HexGameEngine.Items
             i.healthDamage = original.healthDamage;
             i.armourDamage = original.armourDamage;
             i.armourPenetration = original.armourPenetration;
+            i.weaponAttackAnimationType = original.weaponAttackAnimationType;
 
             i.armourAmount = original.armourAmount;
             i.fatiguePenalty = original.fatiguePenalty;

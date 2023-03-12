@@ -768,36 +768,111 @@ namespace HexGameEngine.Characters
 
         // Trigger Animations
         #region
-        public void TriggerMeleeAttackAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        public void TriggerMeleeAttackAnimation(HexCharacterView view, Vector2 targetPos, ItemData weaponUsed, CoroutineData cData)
         {
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-            StartCoroutine(TriggerMeleeAttackAnimationCoroutine(view, targetPos, cData));
+            StartCoroutine(TriggerMeleeAttackAnimationCoroutine(view, targetPos, weaponUsed, cData));
         }
-        private IEnumerator TriggerMeleeAttackAnimationCoroutine(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        private IEnumerator TriggerMeleeAttackAnimationCoroutine(HexCharacterView view, Vector2 targetPos, ItemData weaponUsed, CoroutineData cData)
         {
-            view.ucmAnimator.SetTrigger("Melee Attack");
+            HexCharacterModel model = view.character;
+            if (model == null)
+            {
+                if (cData != null) cData.MarkAsCompleted();
+                yield break;
+            }
+
+            string animationString = DetermineWeaponAttackAnimationString(model, weaponUsed);
+
+            view.ucmAnimator.SetTrigger(animationString);
             Vector2 startPos = view.WorldPosition;
             Vector2 forwardPos = (startPos + targetPos) / 2;
             float moveSpeedTime = 0.25f;
 
-            HexCharacterModel model = view.character;
-            if (model != null)
+            // slight movement forward
+            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutCubic);
+            yield return new WaitForSeconds(moveSpeedTime / 2);
+
+            if (cData != null)
             {
-                // slight movement forward
-                view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime);
-                yield return new WaitForSeconds(moveSpeedTime / 2);
-
-                if (cData != null)
-                {
-                    cData.MarkAsCompleted();
-                }
-
-                yield return new WaitForSeconds(moveSpeedTime / 2);
-
-                // move back to start pos
-                view.ucmMovementParent.transform.DOMove(startPos, moveSpeedTime);
-                yield return new WaitForSeconds(moveSpeedTime);
+                cData.MarkAsCompleted();
             }
+
+            yield return new WaitForSeconds(moveSpeedTime / 2);
+
+            // move back to start pos
+            view.ucmMovementParent.transform.DOMove(startPos, moveSpeedTime);
+            yield return new WaitForSeconds(moveSpeedTime);
+
+        }
+        public void TriggerOffhandPushAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        {
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+            StartCoroutine(TriggerOffhandPushAnimationCoroutine(view, targetPos, cData));
+        }
+        private IEnumerator TriggerOffhandPushAnimationCoroutine(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        {
+            HexCharacterModel model = view.character;
+            if (model == null)
+            {
+                if (cData != null) cData.MarkAsCompleted();
+                yield break;
+            }
+
+            view.ucmAnimator.SetTrigger(AnimationEventController.OFF_HAND_PUSH);
+            Vector2 startPos = view.WorldPosition;
+            Vector2 forwardPos = (startPos + targetPos) / 2;
+            float moveSpeedTime = 0.25f;
+
+            // slight movement forward
+            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutCubic);
+            yield return new WaitForSeconds(moveSpeedTime / 2);
+
+            if (cData != null)
+            {
+                cData.MarkAsCompleted();
+            }
+
+            yield return new WaitForSeconds(moveSpeedTime / 2);
+
+            // move back to start pos
+            view.ucmMovementParent.transform.DOMove(startPos, moveSpeedTime);
+            yield return new WaitForSeconds(moveSpeedTime);
+
+        }
+        public void TriggerShieldBashAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        {
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+            StartCoroutine(TriggerShieldBashAnimationCoroutine(view, targetPos, cData));
+        }
+        private IEnumerator TriggerShieldBashAnimationCoroutine(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        {
+            HexCharacterModel model = view.character;
+            if (model == null)
+            {
+                if (cData != null) cData.MarkAsCompleted();
+                yield break;
+            }
+
+            view.ucmAnimator.SetTrigger(AnimationEventController.SHIELD_BASH);
+            Vector2 startPos = view.WorldPosition;
+            Vector2 forwardPos = (startPos + targetPos) / 2;
+            float moveSpeedTime = 0.25f;
+
+            // slight movement forward
+            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutCubic);
+            yield return new WaitForSeconds(moveSpeedTime / 2);
+
+            if (cData != null)
+            {
+                cData.MarkAsCompleted();
+            }
+
+            yield return new WaitForSeconds(moveSpeedTime / 2);
+
+            // move back to start pos
+            view.ucmMovementParent.transform.DOMove(startPos, moveSpeedTime);
+            yield return new WaitForSeconds(moveSpeedTime);
 
         }
         public void PlayShootCrossbowAnimation(HexCharacterView view, CoroutineData cData)
@@ -809,7 +884,7 @@ namespace HexGameEngine.Characters
         }
         private IEnumerator PlayShootCrossbowAnimationCoroutine(HexCharacterView view, CoroutineData cData)
         {
-            view.ucmAnimator.SetTrigger("Shoot Crossbow");
+            view.ucmAnimator.SetTrigger(AnimationEventController.SHOOT_CROSSBOW);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             yield return new WaitForSeconds(0.5f);
 
@@ -828,7 +903,7 @@ namespace HexGameEngine.Characters
         }
         private IEnumerator PlayShootBowAnimationCoroutine(HexCharacterView view, CoroutineData cData)
         {
-            view.ucmAnimator.SetTrigger("Shoot Bow");
+            view.ucmAnimator.SetTrigger(AnimationEventController.SHOOT_BOW);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             yield return new WaitForSeconds(0.5f);
 
@@ -842,56 +917,61 @@ namespace HexGameEngine.Characters
         {
             if (view == null) return;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-            view.ucmAnimator.SetTrigger("Melee Attack");
+            view.ucmAnimator.SetTrigger(AnimationEventController.MAIN_HAND_MELEE_ATTACK_OVERHEAD);
         }
         public void TriggerAoeMeleeAttackAnimation(HexCharacterView view)
         {
             if (view == null) return;
-            view.ucmAnimator.SetTrigger("Melee Attack");
+            view.ucmAnimator.SetTrigger(AnimationEventController.MAIN_HAND_MELEE_ATTACK_OVERHEAD);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
         }
         public void PlayIdleAnimation(HexCharacterView view)
         {
             if (view == null) return;
-            view.ucmAnimator.SetTrigger("Idle");
+            view.ucmAnimator.SetTrigger(AnimationEventController.IDLE);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
         }
         public void PlaySkillAnimation(HexCharacterView view)
         {
             if (view == null) return;
-            view.ucmAnimator.SetTrigger("Skill Two");
+            view.ucmAnimator.SetTrigger(AnimationEventController.SKILL_TWO);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-
+        }
+        public void PlayRaiseShieldAnimation(HexCharacterView view)
+        {
+            if (view == null) return;
+            view.ucmAnimator.SetTrigger(AnimationEventController.RAISE_SHIELD);
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
         }
         public void PlayMoveAnimation(HexCharacterView view)
         {
             if (view == null) return;
             AudioManager.Instance.PlaySound(Sound.Character_Footsteps);
-            view.ucmAnimator.SetTrigger("Move");
+            view.ucmAnimator.SetTrigger(AnimationEventController.RUN);
         }
         public void PlayHurtAnimation(HexCharacterView view)
         {
             if (view == null) return;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-            view.ucmAnimator.SetTrigger("Hurt");
+            view.ucmAnimator.SetTrigger(AnimationEventController.HURT);
         }
         public void PlayDuckAnimation(HexCharacterView view)
         {
             Debug.Log("PlayDuckAnimation() called...");
             if (view == null) return;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-            view.ucmAnimator.SetTrigger("Duck");
+            view.ucmAnimator.SetTrigger(AnimationEventController.DUCK);
         }
         public void PlayDeathAnimation(HexCharacterView view)
         {
             if (view == null) return;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-            view.ucmAnimator.SetTrigger("Die");
+            view.ucmAnimator.SetTrigger(AnimationEventController.DIE);
         }
         public void PlayResurrectAnimation(HexCharacterView view)
         {
             if (view == null) return;
-            view.ucmAnimator.SetTrigger("Resurrect");
+            view.ucmAnimator.SetTrigger(AnimationEventController.RESSURECT);
         }
         #endregion
 
@@ -2348,5 +2428,46 @@ namespace HexGameEngine.Characters
             else return false;
         }
         #endregion
+
+        public string DetermineWeaponAttackAnimationString(HexCharacterModel character, ItemData weaponUsed)
+        {
+            string ret = AnimationEventController.MAIN_HAND_MELEE_ATTACK_OVERHEAD;
+
+            // 1H 
+            if (weaponUsed.IsMeleeWeapon && weaponUsed.handRequirement == HandRequirement.OneHanded)
+            {
+                // Main hand overhead
+                if(weaponUsed == character.itemSet.mainHandItem && weaponUsed.weaponAttackAnimationType == WeaponAttackAnimationType.Overhead)                
+                    ret = AnimationEventController.MAIN_HAND_MELEE_ATTACK_OVERHEAD;
+
+                // Main hand thrust
+                else if (weaponUsed == character.itemSet.mainHandItem && weaponUsed.weaponAttackAnimationType == WeaponAttackAnimationType.Thrust)
+                    ret = AnimationEventController.MAIN_HAND_MELEE_ATTACK_THRUST;
+
+                // Off hand overhead
+                if (weaponUsed == character.itemSet.offHandItem && weaponUsed.weaponAttackAnimationType == WeaponAttackAnimationType.Overhead)
+                    ret = AnimationEventController.OFF_HAND_MELEE_ATTACK_OVERHEAD;
+
+                // Off hand thrust
+                else if (weaponUsed == character.itemSet.offHandItem && weaponUsed.weaponAttackAnimationType == WeaponAttackAnimationType.Thrust)
+                    ret = AnimationEventController.OFF_HAND_MELEE_ATTACK_THRUST;
+            }
+
+            // 2h
+            else if (weaponUsed == character.itemSet.mainHandItem && 
+                weaponUsed.IsMeleeWeapon && 
+                weaponUsed.handRequirement == HandRequirement.TwoHanded)
+            {
+                // Overhead
+                if (weaponUsed.weaponAttackAnimationType == WeaponAttackAnimationType.Overhead)
+                    ret = AnimationEventController.TWO_HAND_MELEE_ATTACK_OVERHEAD;
+
+                // Off hand thrust
+                else if (weaponUsed == character.itemSet.offHandItem && weaponUsed.weaponAttackAnimationType == WeaponAttackAnimationType.Thrust)
+                    ret = AnimationEventController.TWO_HAND_MELEE_ATTACK_THRUST;
+            }
+
+            return ret;
+        }
     }
 }
