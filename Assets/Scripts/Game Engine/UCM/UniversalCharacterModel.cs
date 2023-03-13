@@ -100,8 +100,10 @@ namespace CardGameEngine.UCM
         [HideInInspector] public UniversalCharacterModelElement activeLeftLeg;
         [HideInInspector] public UniversalCharacterModelElement activeRightLeg;
         [HideInInspector] public UniversalCharacterModelElement activeRightHand;
+        [HideInInspector] public UniversalCharacterModelElement activeRightHand2H;
         [HideInInspector] public UniversalCharacterModelElement activeRightArm;
         [HideInInspector] public UniversalCharacterModelElement activeLeftHand;
+        [HideInInspector] public UniversalCharacterModelElement activeLeftHand2H;
         [HideInInspector] public UniversalCharacterModelElement activeLeftArm;
         [HideInInspector] public UniversalCharacterModelElement activeChest;
 
@@ -113,7 +115,9 @@ namespace CardGameEngine.UCM
         [HideInInspector] public UniversalCharacterModelElement activeLeftArmWear;
         [HideInInspector] public UniversalCharacterModelElement activeRightArmWear;
         [HideInInspector] public UniversalCharacterModelElement activeLeftHandWear;
+        [HideInInspector] public UniversalCharacterModelElement activeLeftHandWear2H;
         [HideInInspector] public UniversalCharacterModelElement activeRightHandWear;
+        [HideInInspector] public UniversalCharacterModelElement activeRightHandWear2H;
         [HideInInspector] public UniversalCharacterModelElement activeMainHandWeapon;
         [HideInInspector] public UniversalCharacterModelElement activeOffHandWeapon;
 

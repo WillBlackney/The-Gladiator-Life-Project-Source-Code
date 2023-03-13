@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 1
   allowedSlot: 0
   injuryTypesCaused: 01000000
+  weaponAttackAnimationType: 1
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.55

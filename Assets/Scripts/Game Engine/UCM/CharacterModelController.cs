@@ -262,6 +262,14 @@ namespace CardGameEngine
                 }
                 model.activeRightHand = element;
             }
+            else if (element.bodyPartType == BodyPartType.RightHand2h)
+            {
+                if (model.activeRightHand2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeRightHand2H);
+                }
+                model.activeRightHand2H = element;
+            }
             else if (element.bodyPartType == BodyPartType.LeftArm)
             {
                 if (model.activeLeftArm != null)
@@ -277,6 +285,14 @@ namespace CardGameEngine
                     DisableAndClearElementOnModel(model, model.activeLeftHand);
                 }
                 model.activeLeftHand = element;
+            }
+            else if (element.bodyPartType == BodyPartType.LeftHand2h)
+            {
+                if (model.activeLeftHand2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeLeftHand2H);
+                }
+                model.activeLeftHand2H = element;
             }
             else if (element.bodyPartType == BodyPartType.RightLeg)
             {
@@ -352,6 +368,14 @@ namespace CardGameEngine
                 }
                 model.activeLeftHandWear = element;
             }
+            else if (element.bodyPartType == BodyPartType.LeftHandWear2h)
+            {
+                if (model.activeLeftHandWear2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeLeftHandWear2H);
+                }
+                model.activeLeftHandWear2H = element;
+            }
             else if (element.bodyPartType == BodyPartType.RightHandWear)
             {
                 if (model.activeRightHandWear != null)
@@ -359,6 +383,14 @@ namespace CardGameEngine
                     DisableAndClearElementOnModel(model, model.activeRightHandWear);
                 }
                 model.activeRightHandWear = element;
+            }
+            else if (element.bodyPartType == BodyPartType.RightHandWear2h)
+            {
+                if (model.activeRightHandWear2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeRightHandWear2H);
+                }
+                model.activeRightHandWear2H = element;
             }
             else if (element.bodyPartType == BodyPartType.MainHandWeapon)
             {
@@ -456,6 +488,14 @@ namespace CardGameEngine
                 }
                 model.activeRightHand = element;
             }
+            else if (element.bodyPartType == BodyPartType.RightHand2h)
+            {
+                if (model.activeRightHand2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeRightHand2H);
+                }
+                model.activeRightHand2H = element;
+            }
             else if (element.bodyPartType == BodyPartType.LeftArm)
             {
                 if (model.activeLeftArm != null)
@@ -471,6 +511,14 @@ namespace CardGameEngine
                     DisableAndClearElementOnModel(model, model.activeLeftHand);
                 }
                 model.activeLeftHand = element;
+            }
+            else if (element.bodyPartType == BodyPartType.LeftHand2h)
+            {
+                if (model.activeLeftHand2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeLeftHand2H);
+                }
+                model.activeLeftHand2H = element;
             }
             else if (element.bodyPartType == BodyPartType.RightLeg)
             {
@@ -546,6 +594,14 @@ namespace CardGameEngine
                 }
                 model.activeLeftHandWear = element;
             }
+            else if (element.bodyPartType == BodyPartType.LeftHandWear2h)
+            {
+                if (model.activeLeftHandWear2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeLeftHandWear2H);
+                }
+                model.activeLeftHandWear2H = element;
+            }
             else if (element.bodyPartType == BodyPartType.RightHandWear)
             {
                 if (model.activeRightHandWear != null)
@@ -553,6 +609,14 @@ namespace CardGameEngine
                     DisableAndClearElementOnModel(model, model.activeRightHandWear);
                 }
                 model.activeRightHandWear = element;
+            }
+            else if (element.bodyPartType == BodyPartType.RightHandWear2h)
+            {
+                if (model.activeRightHandWear2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeRightHandWear2H);
+                }
+                model.activeRightHandWear2H = element;
             }
             else if (element.bodyPartType == BodyPartType.MainHandWeapon)
             {
@@ -630,6 +694,10 @@ namespace CardGameEngine
             {
                 model.activeRightHand = null;
             }
+            else if (element.bodyPartType == BodyPartType.RightHand2h)
+            {
+                model.activeRightHand2H = null;
+            }
             else if (element.bodyPartType == BodyPartType.LeftArm)
             {
                 model.activeLeftArm = null;
@@ -637,6 +705,10 @@ namespace CardGameEngine
             else if (element.bodyPartType == BodyPartType.LeftHand)
             {
                 model.activeLeftHand = null;
+            }
+            else if (element.bodyPartType == BodyPartType.LeftHand2h)
+            {
+                model.activeLeftHand2H = null;
             }
             else if (element.bodyPartType == BodyPartType.RightLeg)
             {
@@ -676,9 +748,17 @@ namespace CardGameEngine
             {
                 model.activeLeftHandWear = null;
             }
+            else if (element.bodyPartType == BodyPartType.LeftHandWear2h)
+            {
+                model.activeLeftHandWear2H = null;
+            }
             else if (element.bodyPartType == BodyPartType.RightHandWear)
             {
                 model.activeRightHandWear = null;
+            }
+            else if (element.bodyPartType == BodyPartType.RightHandWear2h)
+            {
+                model.activeRightHandWear2H = null;
             }
             else if (element.bodyPartType == BodyPartType.MainHandWeapon)
             {

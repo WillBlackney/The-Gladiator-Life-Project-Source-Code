@@ -320,7 +320,7 @@ namespace HexGameEngine.UCM
                 }
                 model.activeFace = element;
             }
-            else if (element.bodyPartType == CardGameEngine.BodyPartType.RightArm)
+            else if (element.bodyPartType == BodyPartType.RightArm)
             {
                 if (model.activeRightArm != null)
                 {
@@ -328,13 +328,21 @@ namespace HexGameEngine.UCM
                 }
                 model.activeRightArm = element;
             }
-            else if (element.bodyPartType == CardGameEngine.BodyPartType.RightHand)
+            else if (element.bodyPartType == BodyPartType.RightHand)
             {
                 if (model.activeRightHand != null)
                 {
                     DisableAndClearElementOnModel(model, model.activeRightHand);
                 }
                 model.activeRightHand = element;
+            }
+            else if (element.bodyPartType == BodyPartType.RightHand2h)
+            {
+                if (model.activeRightHand2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeRightHand2H);
+                }
+                model.activeRightHand2H = element;
             }
             else if (element.bodyPartType == CardGameEngine.BodyPartType.LeftArm)
             {
@@ -351,6 +359,14 @@ namespace HexGameEngine.UCM
                     DisableAndClearElementOnModel(model, model.activeLeftHand);
                 }
                 model.activeLeftHand = element;
+            }
+            else if (element.bodyPartType == CardGameEngine.BodyPartType.LeftHand2h)
+            {
+                if (model.activeLeftHand2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeLeftHand2H);
+                }
+                model.activeLeftHand2H = element;
             }
             else if (element.bodyPartType == BodyPartType.RightLeg)
             {
@@ -426,6 +442,14 @@ namespace HexGameEngine.UCM
                 }
                 model.activeLeftHandWear = element;
             }
+            else if (element.bodyPartType == BodyPartType.LeftHandWear2h)
+            {
+                if (model.activeLeftHandWear2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeLeftHandWear2H);
+                }
+                model.activeLeftHandWear2H = element;
+            }
             else if (element.bodyPartType == BodyPartType.RightHandWear)
             {
                 if (model.activeRightHandWear != null)
@@ -433,6 +457,14 @@ namespace HexGameEngine.UCM
                     DisableAndClearElementOnModel(model, model.activeRightHandWear);
                 }
                 model.activeRightHandWear = element;
+            }
+            else if (element.bodyPartType == BodyPartType.RightHandWear2h)
+            {
+                if (model.activeRightHandWear2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeRightHandWear2H);
+                }
+                model.activeRightHandWear2H = element;
             }
             else if (element.bodyPartType == BodyPartType.MainHandWeapon)
             {
@@ -530,6 +562,14 @@ namespace HexGameEngine.UCM
                 }
                 model.activeRightHand = element;
             }
+            else if (element.bodyPartType == BodyPartType.RightHand2h)
+            {
+                if (model.activeRightHand2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeRightHand2H);
+                }
+                model.activeRightHand2H = element;
+            }
             else if (element.bodyPartType == BodyPartType.LeftArm)
             {
                 if (model.activeLeftArm != null)
@@ -545,6 +585,14 @@ namespace HexGameEngine.UCM
                     DisableAndClearElementOnModel(model, model.activeLeftHand);
                 }
                 model.activeLeftHand = element;
+            }
+            else if (element.bodyPartType == BodyPartType.LeftHand2h)
+            {
+                if (model.activeLeftHand2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeLeftHand2H);
+                }
+                model.activeLeftHand2H = element;
             }
             else if (element.bodyPartType == BodyPartType.RightLeg)
             {
@@ -619,6 +667,22 @@ namespace HexGameEngine.UCM
                     DisableAndClearElementOnModel(model, model.activeLeftHandWear);
                 }
                 model.activeLeftHandWear = element;
+            }
+            else if (element.bodyPartType == BodyPartType.LeftHandWear2h)
+            {
+                if (model.activeLeftHandWear2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeLeftHandWear2H);
+                }
+                model.activeLeftHandWear2H = element;
+            }
+            else if (element.bodyPartType == BodyPartType.RightHandWear2h)
+            {
+                if (model.activeRightHandWear2H != null)
+                {
+                    DisableAndClearElementOnModel(model, model.activeRightHandWear2H);
+                }
+                model.activeRightHandWear2H = element;
             }
             else if (element.bodyPartType == BodyPartType.RightHandWear)
             {
@@ -705,6 +769,10 @@ namespace HexGameEngine.UCM
             {
                 model.activeRightHand = null;
             }
+            else if (element.bodyPartType == BodyPartType.RightHand2h)
+            {
+                model.activeRightHand2H = null;
+            }
             else if (element.bodyPartType == BodyPartType.LeftArm)
             {
                 model.activeLeftArm = null;
@@ -712,6 +780,10 @@ namespace HexGameEngine.UCM
             else if (element.bodyPartType == BodyPartType.LeftHand)
             {
                 model.activeLeftHand = null;
+            }
+            else if (element.bodyPartType == BodyPartType.LeftHand2h)
+            {
+                model.activeLeftHand2H = null;
             }
             else if (element.bodyPartType == BodyPartType.RightLeg)
             {
@@ -751,9 +823,17 @@ namespace HexGameEngine.UCM
             {
                 model.activeLeftHandWear = null;
             }
+            else if (element.bodyPartType == BodyPartType.LeftHandWear2h)
+            {
+                model.activeLeftHandWear2H = null;
+            }
             else if (element.bodyPartType == BodyPartType.RightHandWear)
             {
                 model.activeRightHandWear = null;
+            }
+            else if (element.bodyPartType == BodyPartType.RightHandWear2h)
+            {
+                model.activeRightHandWear2H = null;
             }
             else if (element.bodyPartType == BodyPartType.MainHandWeapon)
             {

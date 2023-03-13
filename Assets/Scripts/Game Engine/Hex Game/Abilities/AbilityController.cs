@@ -448,11 +448,11 @@ namespace HexGameEngine.Abilities
             {
                 // if effect is not chained
                 if (abilityEffect.chainedEffect == false)
-                    AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, tileTarget);
+                    AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, tileTarget, weaponUsed);
 
                 // if effect is chained, the effect starts from previous chain target
                 else if (abilityEffect.chainedEffect == true)
-                    AnimationEventController.Instance.PlayAnimationEvent(vEvent, previousChainTarget, target, tileTarget);
+                    AnimationEventController.Instance.PlayAnimationEvent(vEvent, previousChainTarget, target, tileTarget, weaponUsed);
             }
 
             // RESOLVE EFFECT LOGIC START!
