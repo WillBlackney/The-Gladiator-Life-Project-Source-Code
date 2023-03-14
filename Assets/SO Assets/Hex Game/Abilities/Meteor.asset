@@ -81,7 +81,7 @@ MonoBehaviour:
       cameraShake: 0
       movementAnimation: 0
       soundEffect: 0
-      characterAnimation: 3
+      characterAnimation: 11
       delayDuration: 0
       projectileFired: 9
       projectileStartPosition: 2

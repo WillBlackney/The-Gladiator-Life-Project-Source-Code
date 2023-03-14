@@ -55,6 +55,21 @@ MonoBehaviour:
     chainedEffect: 0
     triggersChainEffectSequence: 0
     visualEventsOnStart:
+    - eventType: 2
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 11
+      delayDuration: 0
+      projectileFired: 4
+      projectileStartPosition: 0
+      onCharacter: 0
     - eventType: 3
       screenOverlayType: 0
       overlayColor: 0
@@ -111,6 +126,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0

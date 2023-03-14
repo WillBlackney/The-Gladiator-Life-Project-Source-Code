@@ -27,23 +27,23 @@ MonoBehaviour:
       value: 0
       stars: 0
     accuracy:
-      value: 5
+      value: 100
       stars: 0
     resolve:
       value: 5
       stars: 0
     fitness:
-      value: 200
+      value: 500
       stars: 0
     wits:
       value: 5
       stars: 0
     maxHealth: 0
-    apRecovery: 30
-    apMaximum: 30
-    initiative: 30
+    apRecovery: 100
+    apMaximum: 100
+    initiative: 100
     fatigueRecovery: 8
-    criticalChance: 100
+    criticalChance: 0
     criticalModifier: 50
     physicalDamageBonus: 0
     magicDamageBonus: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   - Undead_Head_4
   - Ghoul_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 6a78f7a4320bb5f4889c39e138776a4f, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: c40c9e4ca934ded4e8c27cbeb88cb759, type: 2}
     chestArmour: {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}

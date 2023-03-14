@@ -38,6 +38,7 @@ namespace HexGameEngine.VisualEvents
         public const string LEFT_HAND_SHOOT_MAGIC = "LEFT_HAND_SHOOT_MAGIC";
         public const string TWO_HAND_SHOOT_MAGIC = "TWO_HAND_SHOOT_MAGIC";
         #endregion
+
         // Core Functions
         #region
         public void PlayAnimationEvent(AnimationEventData vEvent, HexCharacterModel user = null, HexCharacterModel targetCharacter = null, LevelNode targetTile = null, ItemData weaponUsed = null, VisualEvent stackEvent = null)
@@ -116,6 +117,11 @@ namespace HexGameEngine.VisualEvents
             {
                 VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerAoeMeleeAttackAnimation(user.hexCharacterView, weaponUsed), QueuePosition.Back, 0, 0, stackEvent);
             }
+            // Charge
+            else if (vEvent.characterAnimation == CharacterAnimation.AoeMeleeAttack)
+            {
+                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeAnimation(user.hexCharacterView), QueuePosition.Back, 0, 0, stackEvent);
+            }            
             // Skill
             else if (vEvent.characterAnimation == CharacterAnimation.Skill)
             {

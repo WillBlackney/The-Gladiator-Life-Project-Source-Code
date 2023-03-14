@@ -786,10 +786,11 @@ namespace HexGameEngine.Characters
 
             view.ucmAnimator.SetTrigger(animationString);
             Vector2 startPos = view.WorldPosition;
-            Vector2 forwardPos = (startPos + targetPos) / 2;
-            float moveSpeedTime = 0.25f;
 
-            // slight movement forward
+            // Move 66% of the way towards the target position
+            Vector2 forwardPos = (startPos + targetPos) / 1.8f;
+            float moveSpeedTime = 0.375f;
+
             view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutCubic);
             yield return new WaitForSeconds(moveSpeedTime / 2);
 
@@ -822,7 +823,7 @@ namespace HexGameEngine.Characters
             view.ucmAnimator.SetTrigger(AnimationEventController.OFF_HAND_PUSH);
             Vector2 startPos = view.WorldPosition;
             Vector2 forwardPos = (startPos + targetPos) / 2;
-            float moveSpeedTime = 0.25f;
+            float moveSpeedTime = 0.3325f;
 
             // slight movement forward
             view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutCubic);
@@ -857,7 +858,7 @@ namespace HexGameEngine.Characters
             view.ucmAnimator.SetTrigger(AnimationEventController.SHIELD_BASH);
             Vector2 startPos = view.WorldPosition;
             Vector2 forwardPos = (startPos + targetPos) / 2;
-            float moveSpeedTime = 0.25f;
+            float moveSpeedTime = 0.3325f;
 
             // slight movement forward
             view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutCubic);
@@ -932,6 +933,12 @@ namespace HexGameEngine.Characters
             string animationString = DetermineAoeWeaponAttackAnimationString(model, weaponUsed);
             view.ucmAnimator.SetTrigger(animationString);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);    
+        }
+        public void PlayChargeAnimation(HexCharacterView view)
+        {
+            if (view == null) return;
+            view.ucmAnimator.SetTrigger(AnimationEventController.CHARGE);
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
         }
         public void PlayIdleAnimation(HexCharacterView view)
         {

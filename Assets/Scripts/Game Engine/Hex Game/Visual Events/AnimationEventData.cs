@@ -129,7 +129,7 @@ namespace HexGameEngine.VisualEvents
         public bool ShowProjectileStartPosition()
         {
             if ((characterAnimation == CharacterAnimation.ShootMagic || characterAnimation == CharacterAnimation.ShootProjectile) &&
-                projectileFired != ProjectileFired.Arrow)
+                projectileFired != ProjectileFired.Arrow && projectileFired != ProjectileFired.None)
             {
                 return true;
             }

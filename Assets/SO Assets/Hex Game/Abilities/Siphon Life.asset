@@ -65,9 +65,9 @@ MonoBehaviour:
       cameraShake: 0
       movementAnimation: 0
       soundEffect: 0
-      characterAnimation: 4
+      characterAnimation: 11
       delayDuration: 0
-      projectileFired: 0
+      projectileFired: 4
       projectileStartPosition: 0
       onCharacter: 0
     - eventType: 3

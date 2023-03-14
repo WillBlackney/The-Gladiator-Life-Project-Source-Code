@@ -780,6 +780,7 @@ namespace HexGameEngine
         OffHandPush = 8,
         RaiseShield = 9,
         ShieldBash = 10,
+        Charge = 12,
     }
     public enum ParticleEffect
     {
