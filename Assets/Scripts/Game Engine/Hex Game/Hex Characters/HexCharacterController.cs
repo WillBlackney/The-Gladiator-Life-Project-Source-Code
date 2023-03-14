@@ -789,9 +789,9 @@ namespace HexGameEngine.Characters
 
             // Move 66% of the way towards the target position
             Vector2 forwardPos = (startPos + targetPos) / 1.8f;
-            float moveSpeedTime = 0.375f;
+            float moveSpeedTime = 0.5f;
 
-            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutCubic);
+            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutSine);
             yield return new WaitForSeconds(moveSpeedTime / 2);
 
             if (cData != null)

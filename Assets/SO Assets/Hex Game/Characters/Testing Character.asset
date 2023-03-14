@@ -65,7 +65,7 @@ MonoBehaviour:
   - Undead_Head_4
   - Ghoul_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 6a78f7a4320bb5f4889c39e138776a4f, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: c40c9e4ca934ded4e8c27cbeb88cb759, type: 2}
     chestArmour: {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
