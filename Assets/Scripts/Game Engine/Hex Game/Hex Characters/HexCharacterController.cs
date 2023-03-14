@@ -913,17 +913,25 @@ namespace HexGameEngine.Characters
                 cData.MarkAsCompleted();
             }
         }
-        public void TriggerShootProjectileAnimation(HexCharacterView view)
+        public void TriggerShootMagicAnimation(HexCharacterView view, ItemData weaponUsed)
         {
             if (view == null) return;
+            HexCharacterModel model = view.character;
+            if (model == null) return;
+
+            string animationString = DetermineShootMagicAnimationString(model, weaponUsed);
+            view.ucmAnimator.SetTrigger(animationString);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-            view.ucmAnimator.SetTrigger(AnimationEventController.MAIN_HAND_MELEE_ATTACK_OVERHEAD);
         }
-        public void TriggerAoeMeleeAttackAnimation(HexCharacterView view)
+        public void TriggerAoeMeleeAttackAnimation(HexCharacterView view, ItemData weaponUsed)
         {
             if (view == null) return;
-            view.ucmAnimator.SetTrigger(AnimationEventController.MAIN_HAND_MELEE_ATTACK_OVERHEAD);
-            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+            HexCharacterModel model = view.character;
+            if (model == null) return;
+
+            string animationString = DetermineAoeWeaponAttackAnimationString(model, weaponUsed);
+            view.ucmAnimator.SetTrigger(animationString);
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);    
         }
         public void PlayIdleAnimation(HexCharacterView view)
         {
@@ -2469,6 +2477,36 @@ namespace HexGameEngine.Characters
                     ret = AnimationEventController.TWO_HAND_MELEE_ATTACK_THRUST;
             }
             Debug.Log("HexCharacterController.DetermineWeaponAttackAnimationString() returning: " + ret);
+            return ret;
+        }
+        public string DetermineAoeWeaponAttackAnimationString(HexCharacterModel character, ItemData weaponUsed)
+        {
+            string ret = AnimationEventController.MAIN_HAND_MELEE_ATTACK_CLEAVE;
+
+            // 2h
+            if (weaponUsed != null &&
+                weaponUsed.IsMeleeWeapon &&
+                weaponUsed.handRequirement == HandRequirement.TwoHanded)
+            {
+                ret = AnimationEventController.TWO_HAND_MELEE_ATTACK_CLEAVE;
+            }
+
+            Debug.Log("HexCharacterController.DetermineAoeWeaponAttackAnimationString() returning: " + ret);
+            return ret;
+        }
+        public string DetermineShootMagicAnimationString(HexCharacterModel character, ItemData weaponUsed)
+        {
+            string ret = AnimationEventController.LEFT_HAND_SHOOT_MAGIC;
+
+            // 2h
+            if (weaponUsed != null &&
+                weaponUsed.IsMeleeWeapon &&
+                weaponUsed.handRequirement == HandRequirement.TwoHanded)
+            {
+                ret = AnimationEventController.TWO_HAND_SHOOT_MAGIC;
+            }
+
+            Debug.Log("HexCharacterController.DetermineAoeWeaponAttackAnimationString() returning: " + ret);
             return ret;
         }
     }

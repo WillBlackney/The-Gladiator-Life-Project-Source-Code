@@ -773,7 +773,7 @@ namespace HexGameEngine
         MeleeAttack = 1,
         AoeMeleeAttack = 5,
         ShootBow = 2,
-        ShootProjectileWithAttackAnim = 3,
+        ShootMagic = 11,
         ShootProjectile = 7,
         Skill = 4,
         Resurrect = 6,

@@ -124,11 +124,11 @@ namespace HexGameEngine.VisualEvents
         }
         public bool ShowProjectileFired()
         {
-            return characterAnimation == CharacterAnimation.ShootProjectileWithAttackAnim || characterAnimation == CharacterAnimation.ShootProjectile;
+            return characterAnimation == CharacterAnimation.ShootMagic || characterAnimation == CharacterAnimation.ShootProjectile;
         }
         public bool ShowProjectileStartPosition()
         {
-            if ((characterAnimation == CharacterAnimation.ShootProjectileWithAttackAnim || characterAnimation == CharacterAnimation.ShootProjectile) &&
+            if ((characterAnimation == CharacterAnimation.ShootMagic || characterAnimation == CharacterAnimation.ShootProjectile) &&
                 projectileFired != ProjectileFired.Arrow)
             {
                 return true;
