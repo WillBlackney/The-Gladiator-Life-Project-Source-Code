@@ -789,7 +789,7 @@ namespace HexGameEngine.Characters
 
             // Move 66% of the way towards the target position
             Vector2 forwardPos = (startPos + targetPos) / 1.8f;
-            float moveSpeedTime = 0.5f;
+            float moveSpeedTime = 0.375f;
 
             view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutSine);
             yield return new WaitForSeconds(moveSpeedTime / 2);
@@ -2451,7 +2451,6 @@ namespace HexGameEngine.Characters
             // 1H 
             if (weaponUsed != null && weaponUsed.IsMeleeWeapon && weaponUsed.handRequirement == HandRequirement.OneHanded)
             {
-                Debug.Log("HIT 1H");
                 // Main hand overhead
                 if(weaponUsed == character.itemSet.mainHandItem && weaponUsed.weaponAttackAnimationType == WeaponAttackAnimationType.Overhead)                
                     ret = AnimationEventController.MAIN_HAND_MELEE_ATTACK_OVERHEAD;
@@ -2474,13 +2473,12 @@ namespace HexGameEngine.Characters
                 weaponUsed.IsMeleeWeapon && 
                 weaponUsed.handRequirement == HandRequirement.TwoHanded)
             {
-                Debug.Log("HIT 2H");
                 // Overhead
                 if (weaponUsed.weaponAttackAnimationType == WeaponAttackAnimationType.Overhead)
                     ret = AnimationEventController.TWO_HAND_MELEE_ATTACK_OVERHEAD;
 
-                // Off hand thrust
-                else if (weaponUsed == character.itemSet.offHandItem && weaponUsed.weaponAttackAnimationType == WeaponAttackAnimationType.Thrust)
+                // Thrust
+                else if (weaponUsed.weaponAttackAnimationType == WeaponAttackAnimationType.Thrust)
                     ret = AnimationEventController.TWO_HAND_MELEE_ATTACK_THRUST;
             }
             Debug.Log("HexCharacterController.DetermineWeaponAttackAnimationString() returning: " + ret);
