@@ -20,8 +20,8 @@ MonoBehaviour:
   abilitySprite: {fileID: 21300000, guid: 90027acf32782a942bf4a69fc22aedd3, type: 3}
   energyCost: 4
   fatigueCost: 30
-  baseCooldown: 4
-  abilityType: 0200000001000000
+  baseCooldown: 0
+  abilityType: 01000000
   doesNotBreakStealth: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
@@ -55,22 +55,7 @@ MonoBehaviour:
     requirements: []
     chainedEffect: 0
     triggersChainEffectSequence: 0
-    visualEventsOnStart:
-    - eventType: 2
-      screenOverlayType: 0
-      overlayColor: 0
-      overlayFadeInTime: 0
-      overlayDuration: 0
-      overlayFadeOutTime: 0
-      particleEffect: 0
-      cameraShake: 0
-      movementAnimation: 0
-      soundEffect: 0
-      characterAnimation: 12
-      delayDuration: 0
-      projectileFired: 0
-      projectileStartPosition: 0
-      onCharacter: 0
+    visualEventsOnStart: []
     visualEventsOnHit: []
     visualEventsOnEffectFinish: []
     aoeType: 0
@@ -118,7 +103,22 @@ MonoBehaviour:
     requirements: []
     chainedEffect: 0
     triggersChainEffectSequence: 0
-    visualEventsOnStart: []
+    visualEventsOnStart:
+    - eventType: 2
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 13
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
     visualEventsOnHit: []
     visualEventsOnEffectFinish: []
     aoeType: 0

@@ -22,6 +22,7 @@ using HexGameEngine.Pathfinding;
 using HexGameEngine.UI;
 using HexGameEngine.Items;
 using static UnityEngine.GraphicsBuffer;
+using UnityEngine.TextCore.Text;
 
 namespace HexGameEngine.Characters
 {
@@ -782,22 +783,20 @@ namespace HexGameEngine.Characters
                 yield break;
             }
 
+            float moveSpeedTime = 0.375f;
             string animationString = DetermineWeaponAttackAnimationString(model, weaponUsed);
+            if (animationString.Contains("THRUST")) moveSpeedTime = 0.5f;
 
             view.ucmAnimator.SetTrigger(animationString);
             Vector2 startPos = view.WorldPosition;
 
             // Move 66% of the way towards the target position
             Vector2 forwardPos = (startPos + targetPos) / 1.8f;
-            float moveSpeedTime = 0.375f;
 
             view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutSine);
             yield return new WaitForSeconds(moveSpeedTime / 2);
 
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
+            if (cData != null) cData.MarkAsCompleted();            
 
             yield return new WaitForSeconds(moveSpeedTime / 2);
 
@@ -806,6 +805,39 @@ namespace HexGameEngine.Characters
             yield return new WaitForSeconds(moveSpeedTime);
 
         }
+        public void TriggerTackleAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        {
+            StartCoroutine(TriggerTackleAnimationCoroutine(view, targetPos, cData));
+        }
+        private IEnumerator TriggerTackleAnimationCoroutine(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        {
+            HexCharacterModel model = view.character;
+            if (model == null)
+            {
+                if (cData != null) cData.MarkAsCompleted();
+                yield break;
+            }
+
+            float moveSpeedTime = 0.175f;
+            view.ucmAnimator.SetTrigger(AnimationEventController.TACKLE);
+            Vector2 startPos = view.WorldPosition;
+
+            // Move 66% of the way towards the target position
+            Vector2 forwardPos = (startPos + targetPos) / 1.8f;
+
+            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime);
+            yield return new WaitForSeconds(moveSpeedTime / 2);
+
+            if (cData != null) cData.MarkAsCompleted();
+
+            yield return new WaitForSeconds(moveSpeedTime / 2);
+
+            // move back to start pos
+            view.ucmMovementParent.transform.DOMove(startPos, moveSpeedTime);
+            yield return new WaitForSeconds(moveSpeedTime);
+
+        }
+
         public void TriggerOffhandPushAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
         {
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
@@ -822,11 +854,11 @@ namespace HexGameEngine.Characters
 
             view.ucmAnimator.SetTrigger(AnimationEventController.OFF_HAND_PUSH);
             Vector2 startPos = view.WorldPosition;
-            Vector2 forwardPos = (startPos + targetPos) / 2;
-            float moveSpeedTime = 0.3325f;
+            Vector2 forwardPos = (startPos + targetPos) / 1.8f;
+            float moveSpeedTime = 0.375f;
 
             // slight movement forward
-            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutCubic);
+            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutSine);
             yield return new WaitForSeconds(moveSpeedTime / 2);
 
             if (cData != null)
@@ -857,11 +889,11 @@ namespace HexGameEngine.Characters
 
             view.ucmAnimator.SetTrigger(AnimationEventController.SHIELD_BASH);
             Vector2 startPos = view.WorldPosition;
-            Vector2 forwardPos = (startPos + targetPos) / 2;
-            float moveSpeedTime = 0.3325f;
+            Vector2 forwardPos = (startPos + targetPos) / 1.8f;
+            float moveSpeedTime = 0.375f;
 
             // slight movement forward
-            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutCubic);
+            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutSine);
             yield return new WaitForSeconds(moveSpeedTime / 2);
 
             if (cData != null)
@@ -890,10 +922,7 @@ namespace HexGameEngine.Characters
             yield return new WaitForSeconds(0.5f);
 
             // Resolve
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
+            if (cData != null) cData.MarkAsCompleted();            
         }
         public void PlayShootBowAnimation(HexCharacterView view, CoroutineData cData)
         {
@@ -914,23 +943,20 @@ namespace HexGameEngine.Characters
                 cData.MarkAsCompleted();
             }
         }
-        public void TriggerShootMagicAnimation(HexCharacterView view, ItemData weaponUsed)
+        public void TriggerShootMagicHandGestureAnimation(HexCharacterView view)
         {
             if (view == null) return;
             HexCharacterModel model = view.character;
             if (model == null) return;
 
-            string animationString = DetermineShootMagicAnimationString(model, weaponUsed);
+            string animationString = DetermineShootMagicHandGestureAnimationString(model);
             view.ucmAnimator.SetTrigger(animationString);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
         }
         public void TriggerAoeMeleeAttackAnimation(HexCharacterView view, ItemData weaponUsed)
         {
             if (view == null) return;
-            HexCharacterModel model = view.character;
-            if (model == null) return;
-
-            string animationString = DetermineAoeWeaponAttackAnimationString(model, weaponUsed);
+            string animationString = DetermineAoeWeaponAttackAnimationString(weaponUsed);
             view.ucmAnimator.SetTrigger(animationString);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);    
         }
@@ -949,7 +975,7 @@ namespace HexGameEngine.Characters
         public void PlaySkillAnimation(HexCharacterView view)
         {
             if (view == null) return;
-            view.ucmAnimator.SetTrigger(AnimationEventController.SKILL_TWO);
+            view.ucmAnimator.SetTrigger(AnimationEventController.GENERIC_SKILL_1);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
         }
         public void PlayRaiseShieldAnimation(HexCharacterView view)
@@ -2484,7 +2510,7 @@ namespace HexGameEngine.Characters
             Debug.Log("HexCharacterController.DetermineWeaponAttackAnimationString() returning: " + ret);
             return ret;
         }
-        public string DetermineAoeWeaponAttackAnimationString(HexCharacterModel character, ItemData weaponUsed)
+        public string DetermineAoeWeaponAttackAnimationString(ItemData weaponUsed)
         {
             string ret = AnimationEventController.MAIN_HAND_MELEE_ATTACK_CLEAVE;
 
@@ -2499,19 +2525,19 @@ namespace HexGameEngine.Characters
             Debug.Log("HexCharacterController.DetermineAoeWeaponAttackAnimationString() returning: " + ret);
             return ret;
         }
-        public string DetermineShootMagicAnimationString(HexCharacterModel character, ItemData weaponUsed)
+        public string DetermineShootMagicHandGestureAnimationString(HexCharacterModel character)
         {
             string ret = AnimationEventController.LEFT_HAND_SHOOT_MAGIC;
 
             // 2h
-            if (weaponUsed != null &&
-                weaponUsed.IsMeleeWeapon &&
-                weaponUsed.handRequirement == HandRequirement.TwoHanded)
+            if (character.itemSet.mainHandItem != null &&
+                character.itemSet.mainHandItem.IsMeleeWeapon &&
+                character.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
             {
                 ret = AnimationEventController.TWO_HAND_SHOOT_MAGIC;
             }
 
-            Debug.Log("HexCharacterController.DetermineAoeWeaponAttackAnimationString() returning: " + ret);
+            Debug.Log("HexCharacterController.DetermineShootMagicAnimationString() returning: " + ret);
             return ret;
         }
     }

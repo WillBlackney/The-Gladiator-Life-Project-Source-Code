@@ -183,6 +183,9 @@ namespace CardGameEngine.UCM
                 HexGameEngine.UCM.CharacterModeller.AutoSetHeadMaskOrderInLayer(this);
                 SetMode(UcmMode.Standard);
 
+                // Turn everything off to start
+                AllModelElements.ForEach(x => x.gameObject.SetActive(false));
+
                 hasRunSetup = true;
             }
         }

@@ -773,7 +773,7 @@ namespace HexGameEngine
         MeleeAttack = 1,
         AoeMeleeAttack = 5,
         ShootBow = 2,
-        ShootMagic = 11,
+        ShootMagicWithHandGesture = 11,
         ShootProjectile = 7,
         Skill = 4,
         Resurrect = 6,
@@ -781,6 +781,7 @@ namespace HexGameEngine
         RaiseShield = 9,
         ShieldBash = 10,
         Charge = 12,
+        Tackle = 13,
     }
     public enum ParticleEffect
     {

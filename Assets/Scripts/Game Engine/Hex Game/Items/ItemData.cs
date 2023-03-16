@@ -84,9 +84,9 @@ namespace HexGameEngine.Items
             get
             {
                 return
-                weaponClass != WeaponClass.Holdable &&
-                weaponClass != WeaponClass.ThrowingNet &&
                 weaponClass != WeaponClass.None &&
+                weaponClass != WeaponClass.Holdable &&
+                weaponClass != WeaponClass.ThrowingNet &&                
                 weaponClass != WeaponClass.Shield &&
                 weaponClass != WeaponClass.Bow &&
                 weaponClass != WeaponClass.Crossbow;
@@ -98,8 +98,7 @@ namespace HexGameEngine.Items
             {
                 return
                 weaponClass == WeaponClass.Bow ||
-                weaponClass == WeaponClass.Crossbow ||
-                weaponClass == WeaponClass.Staff;
+                weaponClass == WeaponClass.Crossbow;
             }
         }
         #endregion

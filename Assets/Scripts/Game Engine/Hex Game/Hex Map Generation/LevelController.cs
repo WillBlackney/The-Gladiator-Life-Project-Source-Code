@@ -425,19 +425,19 @@ namespace HexGameEngine.HexTiles
             VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayIdleAnimation(character.hexCharacterView));
 
         }
-        public void HandleMoveDownPath(HexCharacterModel character, List<LevelNode> path)
+        public void ChargeDownPath(HexCharacterModel character, List<LevelNode> path)
         {
             // Play movement animation
-            VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayMoveAnimation(character.hexCharacterView));
+            VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeAnimation(character.hexCharacterView));
 
             // Move to first hex
-            HandleMoveToHex(character, path[0]);
+            HandleMoveToHex(character, path[0], 10f);
 
             if (path.Count > 1)
             {
                 for (int i = 0; i < path.Count - 1; i++)
                 {
-                    HandleMoveToHex(character, path[i + 1]);
+                    HandleMoveToHex(character, path[i + 1], 10f);
                 }
             }
 
@@ -469,7 +469,7 @@ namespace HexGameEngine.HexTiles
             VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayIdleAnimation(character.hexCharacterView));
 
         }
-        private void HandleMoveToHex(HexCharacterModel character, LevelNode destination, bool connectCharacterWithHex = true)
+        private void HandleMoveToHex(HexCharacterModel character, LevelNode destination, float moveSpeed = 5f, bool runAnimation = true)
         {
             // Check and resolve free strikes + spear wall attacks before moving
             List<HexCharacterModel> allEnemies = HexCharacterController.Instance.GetAllEnemiesOfCharacter(character);
@@ -524,9 +524,12 @@ namespace HexGameEngine.HexTiles
             }
 
             // Resume movement anim if it stopped previously during free strike sequence
-            if (didPauseMoveAnim)            
-                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayMoveAnimation(character.hexCharacterView));
-            
+            if (didPauseMoveAnim)
+            {
+                if(runAnimation) VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayMoveAnimation(character.hexCharacterView));
+                else VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeAnimation(character.hexCharacterView));
+            }
+
             // Face towards destination hex
             FaceCharacterTowardsHex(character, destination);
 
@@ -538,7 +541,7 @@ namespace HexGameEngine.HexTiles
             // Move animation
             CoroutineData cData = new CoroutineData();
             VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEvent
-                (character.hexCharacterView, destination, cData), cData, QueuePosition.Back);
+                (character.hexCharacterView, destination, cData, moveSpeed), cData, QueuePosition.Back);
 
             // TO DO: events that trigger when the character steps onto a new tile go here (maybe?)...
             character.tilesMovedThisTurn++;
@@ -583,21 +586,21 @@ namespace HexGameEngine.HexTiles
                 return;
             }
 
+            // TO DO: Need to update this as it will remove flight when using an ability like charge or sprint which is not good.
             // Remove flight
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Flight))
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Flight, -1);
 
         }
-        public void DoCharacterMoveVisualEvent(HexCharacterView view, LevelNode hex, CoroutineData cData, Action onCompleteCallback = null)
+        public void DoCharacterMoveVisualEvent(HexCharacterView view, LevelNode hex, CoroutineData cData, float moveSpeed = 5f, Action onCompleteCallback = null)
         {
-            StartCoroutine(DoCharacterMoveVisualEventCoroutine(view, hex, cData, onCompleteCallback));
+            StartCoroutine(DoCharacterMoveVisualEventCoroutine(view, hex, cData, moveSpeed, onCompleteCallback));
         }
-        private IEnumerator DoCharacterMoveVisualEventCoroutine(HexCharacterView view, LevelNode hex, CoroutineData cData, Action onCompleteCallback = null)
+        private IEnumerator DoCharacterMoveVisualEventCoroutine(HexCharacterView view, LevelNode hex, CoroutineData cData, float moveSpeed = 5f, Action onCompleteCallback = null)
         {
             // Set up
             bool reachedDestination = false;
             Vector3 destination = new Vector3(hex.WorldPosition.x, hex.WorldPosition.y, 0);
-            float moveSpeed = 5;
 
             // Move
             while (reachedDestination == false)

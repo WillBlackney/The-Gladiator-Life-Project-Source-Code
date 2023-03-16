@@ -28,7 +28,6 @@ namespace HexGameEngine.VisualEvents
         public const string CHARGE = "CHARGE";
         public const string DUCK = "Duck";
         public const string IDLE = "Idle";
-        public const string SKILL_TWO = "Skill Two";
         public const string SHOOT_BOW = "Shoot Bow";
         public const string SHOOT_CROSSBOW = "Shoot Crossbow";
         public const string RUN = "Move";
@@ -37,6 +36,8 @@ namespace HexGameEngine.VisualEvents
         public const string RESSURECT = "Ressurect";
         public const string LEFT_HAND_SHOOT_MAGIC = "LEFT_HAND_SHOOT_MAGIC";
         public const string TWO_HAND_SHOOT_MAGIC = "TWO_HAND_SHOOT_MAGIC";
+        public const string GENERIC_SKILL_1 = "GENERIC_SKILL_1";
+        public const string TACKLE = "TACKLE";
         #endregion
 
         // Core Functions
@@ -95,6 +96,14 @@ namespace HexGameEngine.VisualEvents
                 CoroutineData cData = new CoroutineData();
                 VisualEventManager.Instance.CreateVisualEvent(() => 
                 HexCharacterController.Instance.TriggerMeleeAttackAnimation(user.hexCharacterView, targetView.WorldPosition, weaponUsed, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+            }
+            // Tackle
+            if (vEvent.characterAnimation == CharacterAnimation.Tackle)
+            {
+                HexCharacterView targetView = targetCharacter.hexCharacterView;
+                CoroutineData cData = new CoroutineData();
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                HexCharacterController.Instance.TriggerTackleAnimation(user.hexCharacterView, targetView.WorldPosition, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
             }
             // Offhand Push
             else if (vEvent.characterAnimation == CharacterAnimation.OffHandPush)
@@ -161,12 +170,13 @@ namespace HexGameEngine.VisualEvents
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 VisualEffectManager.Instance.ShootArrow(user.hexCharacterView.WorldPosition, targetView.WorldPosition, cData2), cData2, QueuePosition.Back, 0, 0, stackEvent);
             }
+
             // Shoot Magic + Shoot Projectile 
-            else if (vEvent.characterAnimation == CharacterAnimation.ShootMagic || vEvent.characterAnimation == CharacterAnimation.ShootProjectile)
+            else if (vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture || vEvent.characterAnimation == CharacterAnimation.ShootProjectile)
             {
                 // Play character shoot anim
-                if(vEvent.characterAnimation == CharacterAnimation.ShootMagic)
-                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerShootMagicAnimation(user.hexCharacterView, weaponUsed), QueuePosition.Back, 0, 0, stackEvent);
+                if(vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture)
+                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerShootMagicHandGestureAnimation(user.hexCharacterView), QueuePosition.Back, 0, 0, stackEvent);
 
                 // Destination is a character or hex tile target?
                 Vector3 targetPos = new Vector3(0, 0, 0);
@@ -192,7 +202,7 @@ namespace HexGameEngine.VisualEvents
                         }
                             
                         VisualEffectManager.Instance.ShootProjectileAtLocation(vEvent.projectileFired, projectileStartPos, targetPos, cData2);
-                    }, cData2, QueuePosition.Back, 0, 0, stackEvent);
+                    }, cData2, QueuePosition.Back, 0.2f, 0, stackEvent);
                     return;
 
                 }

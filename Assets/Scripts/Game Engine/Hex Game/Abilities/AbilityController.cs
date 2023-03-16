@@ -1212,12 +1212,24 @@ namespace HexGameEngine.Abilities
                 List<LevelNode> hexsOnPath = new List<LevelNode>();
                 LevelNode previousHex = caster.currentTile;
                 LevelNode nextHex = null;
-                //Hex finalDestination = null;
+                bool enemyObstruction = false;
 
                 for (int i = 0; i < abilityEffect.tilesMoved; i++)
                 {
                     nextHex = LevelController.Instance.GetAdjacentHexByDirection(previousHex, direction);
-                    if (nextHex != null && !Pathfinder.CanHexBeOccupied(nextHex))
+
+                    // Hitting an enemy
+                    if (nextHex != null && 
+                        nextHex.myCharacter != null && 
+                        !HexCharacterController.Instance.IsTargetFriendly(nextHex.myCharacter, caster))
+                    {
+                        // Collision end point found
+                        obstructionHex = nextHex;
+                        enemyObstruction = true;
+                        break;
+                    }
+                    // Hitting an friendly character or obstruction
+                    else if (nextHex != null && !Pathfinder.CanHexBeOccupied(nextHex))
                     {
                         // Collision end point found
                         obstructionHex = nextHex;
@@ -1234,7 +1246,11 @@ namespace HexGameEngine.Abilities
 
                 // Move down path
                 if (hexsOnPath.Count > 0)
-                    LevelController.Instance.HandleMoveDownPath(caster, hexsOnPath);
+                {
+                    // to do: animation type and speed (charge, dash, run, etc, and speed)
+                    LevelController.Instance.ChargeDownPath(caster, hexsOnPath);
+                }
+                    
 
                 // Trigger on collision effects
                 if (abilityEffect.chainedEffect == false && obstructionHex != null)
