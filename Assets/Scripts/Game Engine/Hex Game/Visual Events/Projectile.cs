@@ -69,7 +69,8 @@ namespace HexGameEngine.VisualEvents
         }
         private void DestroySelf()
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            Destroy(gameObject, 0.1f);
         }
         #endregion
 

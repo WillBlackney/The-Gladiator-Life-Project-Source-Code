@@ -786,7 +786,7 @@ namespace HexGameEngine.Characters
             float moveSpeedTime = 0.375f;
             string animationString = DetermineWeaponAttackAnimationString(model, weaponUsed);
             if (animationString.Contains("THRUST")) moveSpeedTime = 0.5f;
-
+            view.currentAnimation = animationString;
             view.ucmAnimator.SetTrigger(animationString);
             Vector2 startPos = view.WorldPosition;
 
@@ -820,6 +820,7 @@ namespace HexGameEngine.Characters
 
             float moveSpeedTime = 0.175f;
             view.ucmAnimator.SetTrigger(AnimationEventController.TACKLE);
+            view.currentAnimation = AnimationEventController.TACKLE;
             Vector2 startPos = view.WorldPosition;
 
             // Move 66% of the way towards the target position
@@ -827,17 +828,19 @@ namespace HexGameEngine.Characters
 
             view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime);
             yield return new WaitForSeconds(moveSpeedTime / 2);
-
+            
             if (cData != null) cData.MarkAsCompleted();
+
+            if (view.currentAnimation == AnimationEventController.TACKLE)
+                view.ucmAnimator.SetTrigger(AnimationEventController.TACKLE_END);
 
             yield return new WaitForSeconds(moveSpeedTime / 2);
 
             // move back to start pos
             view.ucmMovementParent.transform.DOMove(startPos, moveSpeedTime);
-            yield return new WaitForSeconds(moveSpeedTime);
+            yield return new WaitForSeconds(moveSpeedTime * 1.5f);
 
         }
-
         public void TriggerOffhandPushAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
         {
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
@@ -851,7 +854,7 @@ namespace HexGameEngine.Characters
                 if (cData != null) cData.MarkAsCompleted();
                 yield break;
             }
-
+            view.currentAnimation = AnimationEventController.OFF_HAND_PUSH;
             view.ucmAnimator.SetTrigger(AnimationEventController.OFF_HAND_PUSH);
             Vector2 startPos = view.WorldPosition;
             Vector2 forwardPos = (startPos + targetPos) / 1.8f;
@@ -886,7 +889,7 @@ namespace HexGameEngine.Characters
                 if (cData != null) cData.MarkAsCompleted();
                 yield break;
             }
-
+            view.currentAnimation = AnimationEventController.SHIELD_BASH;
             view.ucmAnimator.SetTrigger(AnimationEventController.SHIELD_BASH);
             Vector2 startPos = view.WorldPosition;
             Vector2 forwardPos = (startPos + targetPos) / 1.8f;
@@ -917,6 +920,7 @@ namespace HexGameEngine.Characters
         }
         private IEnumerator PlayShootCrossbowAnimationCoroutine(HexCharacterView view, CoroutineData cData)
         {
+            view.currentAnimation = AnimationEventController.SHOOT_CROSSBOW;
             view.ucmAnimator.SetTrigger(AnimationEventController.SHOOT_CROSSBOW);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             yield return new WaitForSeconds(0.5f);
@@ -933,6 +937,7 @@ namespace HexGameEngine.Characters
         }
         private IEnumerator PlayShootBowAnimationCoroutine(HexCharacterView view, CoroutineData cData)
         {
+            view.currentAnimation = AnimationEventController.SHOOT_BOW;
             view.ucmAnimator.SetTrigger(AnimationEventController.SHOOT_BOW);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             yield return new WaitForSeconds(0.5f);
@@ -943,6 +948,45 @@ namespace HexGameEngine.Characters
                 cData.MarkAsCompleted();
             }
         }
+        public void TriggerKnockedBackIntoObstructionAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        {
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+            StartCoroutine(TriggerKnockedBackIntoObstructionAnimationCoroutine(view, targetPos, cData));
+        }
+        private IEnumerator TriggerKnockedBackIntoObstructionAnimationCoroutine(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        {
+            HexCharacterModel model = view.character;
+            if (model == null)
+            {
+                if (cData != null) cData.MarkAsCompleted();
+                yield break;
+            }
+
+            float moveSpeedTime = 0.375f;
+            if(view.currentAnimation != AnimationEventController.HURT)
+            {
+                view.currentAnimation = AnimationEventController.HURT;
+                view.ucmAnimator.SetTrigger(AnimationEventController.HURT);
+            }
+            
+            Vector2 startPos = view.WorldPosition;
+
+            // Move 66% of the way towards the target position
+            Vector2 forwardPos = (startPos + targetPos) / 1.8f;
+
+            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutSine);
+            yield return new WaitForSeconds(moveSpeedTime / 2);
+
+            if (cData != null) cData.MarkAsCompleted();
+
+            yield return new WaitForSeconds(moveSpeedTime / 2);
+
+            // move back to start pos
+            view.ucmMovementParent.transform.DOMove(startPos, moveSpeedTime);
+            yield return new WaitForSeconds(moveSpeedTime);
+
+        }
+
         public void TriggerShootMagicHandGestureAnimation(HexCharacterView view)
         {
             if (view == null) return;
@@ -950,6 +994,7 @@ namespace HexGameEngine.Characters
             if (model == null) return;
 
             string animationString = DetermineShootMagicHandGestureAnimationString(model);
+            view.currentAnimation = animationString;
             view.ucmAnimator.SetTrigger(animationString);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
         }
@@ -957,31 +1002,43 @@ namespace HexGameEngine.Characters
         {
             if (view == null) return;
             string animationString = DetermineAoeWeaponAttackAnimationString(weaponUsed);
+            view.currentAnimation = animationString;
             view.ucmAnimator.SetTrigger(animationString);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);    
         }
         public void PlayChargeAnimation(HexCharacterView view)
         {
             if (view == null) return;
-            view.ucmAnimator.SetTrigger(AnimationEventController.CHARGE);
+            view.currentAnimation = AnimationEventController.CHARGE;
+            view.ucmAnimator.SetTrigger(AnimationEventController.CHARGE);            
+        }
+        public void PlayChargeEndAnimation(HexCharacterView view)
+        {
+            if (view == null) return;
+            if (view.currentAnimation != AnimationEventController.CHARGE) return;
+            view.ucmAnimator.SetTrigger(AnimationEventController.CHARGE_END);
+            view.currentAnimation = AnimationEventController.CHARGE_END;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
         }
         public void PlayIdleAnimation(HexCharacterView view)
         {
             if (view == null) return;
             view.ucmAnimator.SetTrigger(AnimationEventController.IDLE);
+            view.currentAnimation = AnimationEventController.IDLE;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
         }
         public void PlaySkillAnimation(HexCharacterView view)
         {
             if (view == null) return;
             view.ucmAnimator.SetTrigger(AnimationEventController.GENERIC_SKILL_1);
+            view.currentAnimation = AnimationEventController.GENERIC_SKILL_1;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
         }
         public void PlayRaiseShieldAnimation(HexCharacterView view)
         {
             if (view == null) return;
             view.ucmAnimator.SetTrigger(AnimationEventController.RAISE_SHIELD);
+            view.currentAnimation = AnimationEventController.RAISE_SHIELD;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
         }
         public void PlayMoveAnimation(HexCharacterView view)
@@ -989,12 +1046,14 @@ namespace HexGameEngine.Characters
             if (view == null) return;
             AudioManager.Instance.PlaySound(Sound.Character_Footsteps);
             view.ucmAnimator.SetTrigger(AnimationEventController.RUN);
+            view.currentAnimation = AnimationEventController.RUN;
         }
         public void PlayHurtAnimation(HexCharacterView view)
         {
             if (view == null) return;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             view.ucmAnimator.SetTrigger(AnimationEventController.HURT);
+            view.currentAnimation = AnimationEventController.HURT;
         }
         public void PlayDuckAnimation(HexCharacterView view)
         {
@@ -1002,17 +1061,20 @@ namespace HexGameEngine.Characters
             if (view == null) return;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             view.ucmAnimator.SetTrigger(AnimationEventController.DUCK);
+            view.currentAnimation = AnimationEventController.DUCK;
         }
         public void PlayDeathAnimation(HexCharacterView view)
         {
             if (view == null) return;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             view.ucmAnimator.SetTrigger(AnimationEventController.DIE);
+            view.currentAnimation = AnimationEventController.DIE;
         }
         public void PlayResurrectAnimation(HexCharacterView view)
         {
             if (view == null) return;
             view.ucmAnimator.SetTrigger(AnimationEventController.RESSURECT);
+            view.currentAnimation = AnimationEventController.RESSURECT;
         }
         #endregion
 

@@ -74,7 +74,7 @@ namespace HexGameEngine.UCM
                 }
             }
         }
-        public static void ApplyItemSetToCharacterModelView(ItemSet itemSet, UniversalCharacterModel model)
+        public static void ApplyItemSetToCharacterModelView(ItemSet itemSet, UniversalCharacterModel model, bool includeWeapons = true)
         {
             // Do weapons first
             if (itemSet.mainHandItem != null &&
@@ -83,7 +83,7 @@ namespace HexGameEngine.UCM
                 model.SetMode(UcmMode.TwoHandMelee);
 
             // MH
-            if (itemSet.mainHandItem != null)
+            if (itemSet.mainHandItem != null && includeWeapons)
             {
                 bool shouldBreak = false;
                 foreach (UniversalCharacterModelElement ucme in model.AllMainHandWeapons)
@@ -103,7 +103,7 @@ namespace HexGameEngine.UCM
             }
 
             // Off hand
-            if (itemSet.offHandItem != null)
+            if (itemSet.offHandItem != null && includeWeapons)
             {
                 bool shouldBreak = false;
                 foreach (UniversalCharacterModelElement ucme in model.AllOffHandWeapons)

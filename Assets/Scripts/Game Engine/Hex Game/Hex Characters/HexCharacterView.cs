@@ -76,6 +76,7 @@ namespace HexGameEngine.Characters
 
         public bool mouseOverModel = false;
         public bool mouseOverWorldUI = false;
+        [HideInInspector] public string currentAnimation;
 
         #endregion
 

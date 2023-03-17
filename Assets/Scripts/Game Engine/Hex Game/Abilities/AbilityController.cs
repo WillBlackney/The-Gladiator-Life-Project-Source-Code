@@ -461,42 +461,6 @@ namespace HexGameEngine.Abilities
             if (abilityEffect.effectType == AbilityEffectType.DamageTarget)
             {
                 triggerEffectEndEvents = false;
-
-                /*
-                // Determine weapon used
-                ItemData weaponUsed = null;
-                if (abilityEffect.weaponUsed == WeaponSlot.Offhand &&
-                    caster.itemSet.offHandItem != null)
-                    weaponUsed = caster.itemSet.offHandItem;
-
-                else if (abilityEffect.weaponUsed == WeaponSlot.MainHand &&
-                    caster.itemSet.mainHandItem != null)
-                    weaponUsed = caster.itemSet.mainHandItem;
-
-                // Dynamic weapon used check: make sure the ability actually belongs to the main hand weapon if directed.
-                if(ability.abilityType.Contains(AbilityType.WeaponAttack) &&
-                    weaponUsed == caster.itemSet.mainHandItem &&
-                    caster.itemSet.offHandItem != null &&
-                    ability.derivedFromWeapon &&
-                    ability.weaponRequirement != WeaponRequirement.None)
-                {
-                    bool foundMatch = false;
-                    foreach(AbilityData weaponAbility in caster.itemSet.mainHandItem.grantedAbilities)
-                    {
-                        if(weaponAbility.abilityName == ability.abilityName)
-                        {
-                            foundMatch = true;
-                            break;
-                        }
-                    }
-
-                    if (!foundMatch)
-                    {
-                        Debug.Log(String.Format("AbilityController.TriggerAbilityEffect() weapon derived ability '{0}' does not exist on weapon '{1}', using off hand weapon instead", ability.abilityName, caster.itemSet.mainHandItem.itemName));
-                        weaponUsed = caster.itemSet.offHandItem;
-                    }
-                }*/
-
                 HitRoll hitResult = CombatController.Instance.RollForHit(caster, target, ability, weaponUsed);
                 bool didCrit = CombatController.Instance.RollForCrit(caster, target, ability, abilityEffect);
 
@@ -664,41 +628,6 @@ namespace HexGameEngine.Abilities
             // Damage Aoe
             else if (abilityEffect.effectType == AbilityEffectType.DamageAoe)
             {
-                /*
-                // Determine weapon used
-                ItemData weaponUsed = null;
-                if (abilityEffect.weaponUsed == WeaponSlot.Offhand &&
-                    caster.itemSet.offHandItem != null)
-                    weaponUsed = caster.itemSet.offHandItem;
-
-                else if (abilityEffect.weaponUsed == WeaponSlot.MainHand &&
-                    caster.itemSet.mainHandItem != null)
-                    weaponUsed = caster.itemSet.mainHandItem;
-
-                // Dynamic weapon used check: make sure the ability actually belongs to the main hand weapon if directed.
-                if (weaponUsed == caster.itemSet.mainHandItem &&
-                    caster.itemSet.offHandItem != null &&
-                    ability.derivedFromWeapon &&
-                    ability.weaponRequirement != WeaponRequirement.None)
-                {
-                    bool foundMatch = false;
-                    foreach (AbilityData weaponAbility in caster.itemSet.mainHandItem.grantedAbilities)
-                    {
-                        if (weaponAbility.abilityName == ability.abilityName)
-                        {
-                            foundMatch = true;
-                            break;
-                        }
-                    }
-
-                    if (!foundMatch)
-                    {
-                        Debug.Log(String.Format("AbilityController.TriggerAbilityEffect() weapon derived ability '{0}' does not exist on weapon '{1}', using off hand weapon instead", ability.abilityName, caster.itemSet.mainHandItem.itemName));
-                        weaponUsed = caster.itemSet.offHandItem;
-                    }
-                }
-                */
-
                 triggerEffectEndEvents = false;
                 List<LevelNode> tilesEffected = new List<LevelNode>();
                 List<HexCharacterModel> charactersEffected = new List<HexCharacterModel>();
@@ -1133,7 +1062,6 @@ namespace HexGameEngine.Abilities
             {
                 DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(caster, abilityEffect.healthLost, DamageType.None);
                 CombatController.Instance.HandleDamage(caster, damageResult, DamageType.None, true);
-                //CombatController.Instance.HandleDamage(caster, target, damageResult, null, abilityEffect, caster.myCurrentEventStack);
             }
 
             // Heal Self
@@ -1175,16 +1103,6 @@ namespace HexGameEngine.Abilities
             // Teleport Behind Target
             else if (abilityEffect.effectType == AbilityEffectType.TeleportSelfBehindTarget)
             {
-                // Try find a valid back arc tile to teleport to
-                /*
-                LevelNode destination = HexCharacterController.Instance.GetCharacterBackTile(target);
-                if (destination)
-                {
-                    LevelController.Instance.HandleTeleportCharacter(caster, destination);
-                    LevelController.Instance.FaceCharacterTowardsHex(caster, target.currentTile);
-                }
-                */
-
                 LevelNode destination = null;
                 List<LevelNode> targetBackTiles = HexCharacterController.Instance.GetCharacterBackArcTiles(target);
                 List<LevelNode> validTiles = new List<LevelNode>();
@@ -1212,7 +1130,6 @@ namespace HexGameEngine.Abilities
                 List<LevelNode> hexsOnPath = new List<LevelNode>();
                 LevelNode previousHex = caster.currentTile;
                 LevelNode nextHex = null;
-                bool enemyObstruction = false;
 
                 for (int i = 0; i < abilityEffect.tilesMoved; i++)
                 {
@@ -1225,14 +1142,13 @@ namespace HexGameEngine.Abilities
                     {
                         // Collision end point found
                         obstructionHex = nextHex;
-                        enemyObstruction = true;
                         break;
                     }
                     // Hitting an friendly character or obstruction
                     else if (nextHex != null && !Pathfinder.CanHexBeOccupied(nextHex))
                     {
                         // Collision end point found
-                        obstructionHex = nextHex;
+                        //obstructionHex = nextHex;
                         break;
                     }
                     else if (nextHex != null)
@@ -1272,6 +1188,7 @@ namespace HexGameEngine.Abilities
 
                 LevelNode startingTile = target.currentTile;
                 LevelNode previousTile = target.currentTile;
+                LevelNode obstruction = null;
                 bool shouldStun = false;
 
                 // get knock back tiles
@@ -1283,10 +1200,10 @@ namespace HexGameEngine.Abilities
                         if (LevelController.Instance.GetDirectionToTargetHex(previousTile, h) == dir)
                         {
                             // Found next tile in direction
-                            if (Pathfinder.CanHexBeOccupied(h))
-                                previousTile = h;
+                            if (Pathfinder.CanHexBeOccupied(h)) previousTile = h;
                             else
                             {
+                                obstruction = h;
                                 forceBreak = true;
                                 shouldStun = true;
                                 break;
@@ -1303,10 +1220,18 @@ namespace HexGameEngine.Abilities
                 {
                     LevelController.Instance.HandleKnockBackCharacter(target, previousTile);
                 }
+
                 // Characters that are knocked into on obstacle/player become stunned.
                 if(shouldStun)
                 {
-                    Debug.Log("TriggerAbilityEffect() detected collision during knock back effect, applying Stunned to target...");
+                    // Knock back and forth towards obstruction
+                    if(obstruction != null)
+                    {
+                        CoroutineData cData = new CoroutineData();
+                        VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerKnockedBackIntoObstructionAnimation
+                            (target.hexCharacterView, obstruction.WorldPosition, cData), cData, QueuePosition.Back);
+
+                    }
                     PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Stunned, 1, true, 0.5f);
                 }
             }
@@ -1386,7 +1311,6 @@ namespace HexGameEngine.Abilities
 
 
             }
-
 
             if (triggerEffectEndEvents)
             {

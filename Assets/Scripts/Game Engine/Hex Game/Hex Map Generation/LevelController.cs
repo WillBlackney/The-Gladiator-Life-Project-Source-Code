@@ -466,8 +466,13 @@ namespace HexGameEngine.HexTiles
             }
 
             // Finished movement, go idle animation
-            VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayIdleAnimation(character.hexCharacterView));
-
+            if(character.hexCharacterView != null)
+            {
+                if(character.hexCharacterView.currentAnimation == AnimationEventController.CHARGE)
+                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeEndAnimation(character.hexCharacterView));
+                else
+                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayIdleAnimation(character.hexCharacterView));
+            }
         }
         private void HandleMoveToHex(HexCharacterModel character, LevelNode destination, float moveSpeed = 5f, bool runAnimation = true)
         {
@@ -540,7 +545,7 @@ namespace HexGameEngine.HexTiles
 
             // Move animation
             CoroutineData cData = new CoroutineData();
-            VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEvent
+            VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
                 (character.hexCharacterView, destination, cData, moveSpeed), cData, QueuePosition.Back);
 
             // TO DO: events that trigger when the character steps onto a new tile go here (maybe?)...
@@ -625,6 +630,25 @@ namespace HexGameEngine.HexTiles
             {
                 onCompleteCallback.Invoke();
             }
+        }
+        public void DoCharacterMoveVisualEventDOTWEEN(HexCharacterView view, LevelNode hex, CoroutineData cData, float moveSpeed = 5f, Ease ease = Ease.Linear, Action onCompleteCallback = null)
+        {
+            // Set up
+            Vector3 destination = new Vector3(hex.WorldPosition.x, hex.WorldPosition.y, 0);
+            float finalMoveSpeed = moveSpeed * 0.1f;
+            view.mainMovementParent.transform.DOMove(destination, finalMoveSpeed).OnComplete(() =>
+            {
+                // Resolve event
+                if (cData != null)
+                {
+                    cData.MarkAsCompleted();
+                }
+
+                if (onCompleteCallback != null)
+                {
+                    onCompleteCallback.Invoke();
+                }
+            });            
         }
         private void SnapCharacterViewToHex(HexCharacterView view, LevelNode hex)
         {
@@ -757,10 +781,10 @@ namespace HexGameEngine.HexTiles
             }
             else
             {
-                VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEvent
+                VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
                 (viewA, aDestination, null), QueuePosition.Back);
 
-                VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEvent
+                VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
                 (viewB, bDestination, null), QueuePosition.Back);
 
                 VisualEventManager.Instance.InsertTimeDelayInQueue(0.25f);
@@ -864,8 +888,8 @@ namespace HexGameEngine.HexTiles
                 HexCharacterView view = character.hexCharacterView;
 
                 CoroutineData cData = new CoroutineData();
-                VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEvent
-                    (character.hexCharacterView, destination, cData), cData, QueuePosition.Back);
+                VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
+                    (character.hexCharacterView, destination, cData, 5f, Ease.OutBack), cData, QueuePosition.Back);
             }       
         }
         #endregion

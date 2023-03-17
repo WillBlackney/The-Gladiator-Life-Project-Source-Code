@@ -781,6 +781,7 @@ namespace HexGameEngine
         RaiseShield = 9,
         ShieldBash = 10,
         Charge = 12,
+        ChargeEnd = 14,
         Tackle = 13,
     }
     public enum ParticleEffect

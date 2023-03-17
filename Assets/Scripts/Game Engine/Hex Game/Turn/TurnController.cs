@@ -130,7 +130,7 @@ namespace HexGameEngine.TurnLogic
             if(entity.characterData != null)
             {
                 CharacterModeller.BuildModelFromStringReferences(newWindowScript.myUCM, entity.characterData.modelParts);
-                CharacterModeller.ApplyItemSetToCharacterModelView(entity.characterData.itemSet, newWindowScript.myUCM);
+                CharacterModeller.ApplyItemSetToCharacterModelView(entity.characterData.itemSet, newWindowScript.myUCM, false);
             }
             else CharacterModeller.BuildModelFromModelClone(newWindowScript.myUCM, entity.hexCharacterView.ucm);
 

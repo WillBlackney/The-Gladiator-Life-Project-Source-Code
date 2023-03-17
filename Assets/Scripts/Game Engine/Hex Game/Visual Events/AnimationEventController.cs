@@ -25,7 +25,8 @@ namespace HexGameEngine.VisualEvents
         public const string RAISE_SHIELD = "RAISE_SHIELD";
         public const string SHIELD_BASH = "SHIELD_BASH";
         public const string OFF_HAND_PUSH = "OFF_HAND_PUSH";
-        public const string CHARGE = "CHARGE";
+        public const string CHARGE = "CHARGE"; 
+        public const string CHARGE_END = "CHARGE_END";
         public const string DUCK = "Duck";
         public const string IDLE = "Idle";
         public const string SHOOT_BOW = "Shoot Bow";
@@ -38,6 +39,7 @@ namespace HexGameEngine.VisualEvents
         public const string TWO_HAND_SHOOT_MAGIC = "TWO_HAND_SHOOT_MAGIC";
         public const string GENERIC_SKILL_1 = "GENERIC_SKILL_1";
         public const string TACKLE = "TACKLE";
+        public const string TACKLE_END = "TACKLE_END";
         #endregion
 
         // Core Functions
@@ -127,10 +129,15 @@ namespace HexGameEngine.VisualEvents
                 VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerAoeMeleeAttackAnimation(user.hexCharacterView, weaponUsed), QueuePosition.Back, 0, 0, stackEvent);
             }
             // Charge
-            else if (vEvent.characterAnimation == CharacterAnimation.AoeMeleeAttack)
+            else if (vEvent.characterAnimation == CharacterAnimation.Charge)
             {
                 VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeAnimation(user.hexCharacterView), QueuePosition.Back, 0, 0, stackEvent);
-            }            
+            }
+            // Charge End
+            else if (vEvent.characterAnimation == CharacterAnimation.ChargeEnd)
+            {
+                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeEndAnimation(user.hexCharacterView), QueuePosition.Back, 0, 0, stackEvent);
+            }
             // Skill
             else if (vEvent.characterAnimation == CharacterAnimation.Skill)
             {

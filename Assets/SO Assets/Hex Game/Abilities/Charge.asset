@@ -20,7 +20,7 @@ MonoBehaviour:
   abilitySprite: {fileID: 21300000, guid: 90027acf32782a942bf4a69fc22aedd3, type: 3}
   energyCost: 4
   fatigueCost: 30
-  baseCooldown: 0
+  baseCooldown: 2
   abilityType: 01000000
   doesNotBreakStealth: 0
   weaponRequirement: 0
