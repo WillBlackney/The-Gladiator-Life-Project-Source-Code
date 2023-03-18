@@ -40,6 +40,7 @@ namespace HexGameEngine.VisualEvents
         public const string GENERIC_SKILL_1 = "GENERIC_SKILL_1";
         public const string TACKLE = "TACKLE";
         public const string TACKLE_END = "TACKLE_END";
+        public const string RELOAD_CROSSBOW = "RELOAD_CROSSBOW";
         #endregion
 
         // Core Functions
@@ -100,7 +101,7 @@ namespace HexGameEngine.VisualEvents
                 HexCharacterController.Instance.TriggerMeleeAttackAnimation(user.hexCharacterView, targetView.WorldPosition, weaponUsed, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
             }
             // Tackle
-            if (vEvent.characterAnimation == CharacterAnimation.Tackle)
+            else if (vEvent.characterAnimation == CharacterAnimation.Tackle)
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 CoroutineData cData = new CoroutineData();
@@ -127,6 +128,11 @@ namespace HexGameEngine.VisualEvents
             else if (vEvent.characterAnimation == CharacterAnimation.AoeMeleeAttack)
             {
                 VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerAoeMeleeAttackAnimation(user.hexCharacterView, weaponUsed), QueuePosition.Back, 0, 0, stackEvent);
+            }
+            // Reload Crossbow
+            else if (vEvent.characterAnimation == CharacterAnimation.ReloadCrossbow)
+            {
+                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayReloadCrossbowAnimation(user.hexCharacterView), QueuePosition.Back, 0, 0, stackEvent);
             }
             // Charge
             else if (vEvent.characterAnimation == CharacterAnimation.Charge)

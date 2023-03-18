@@ -1012,6 +1012,12 @@ namespace HexGameEngine.Characters
             view.currentAnimation = AnimationEventController.CHARGE;
             view.ucmAnimator.SetTrigger(AnimationEventController.CHARGE);            
         }
+        public void PlayReloadCrossbowAnimation(HexCharacterView view)
+        {
+            if (view == null) return;
+            view.currentAnimation = AnimationEventController.RELOAD_CROSSBOW;
+            view.ucmAnimator.SetTrigger(AnimationEventController.RELOAD_CROSSBOW);
+        }
         public void PlayChargeEndAnimation(HexCharacterView view)
         {
             if (view == null) return;
