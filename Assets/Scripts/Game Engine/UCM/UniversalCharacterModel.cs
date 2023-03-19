@@ -6,6 +6,8 @@ using Spriter2UnityDX;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
+using HexGameEngine.Items;
+using HexGameEngine;
 
 namespace CardGameEngine.UCM
 {
@@ -32,12 +34,12 @@ namespace CardGameEngine.UCM
         [HideInInspector] public UniversalCharacterModelElement activeChestLighting;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        public UniversalCharacterModelElement[] allModelElements;
-        public SpriteMask[] allHeadWearSpriteMasks;
-        public UniversalCharacterModelElement[] allMainHandWeapons;
-        public UniversalCharacterModelElement[] allOffHandWeapons;
-        public UniversalCharacterModelElement[] allChestArmour;
-        public UniversalCharacterModelElement[] allHeadArmour;
+        [HideInInspector] public UniversalCharacterModelElement[] allModelElements;
+        [HideInInspector] public SpriteMask[] allHeadWearSpriteMasks;
+        [HideInInspector] public UniversalCharacterModelElement[] allMainHandWeapons;
+        [HideInInspector] public UniversalCharacterModelElement[] allOffHandWeapons;
+        [HideInInspector] public UniversalCharacterModelElement[] allChestArmour;
+        [HideInInspector] public UniversalCharacterModelElement[] allHeadArmour;
 
         public UniversalCharacterModelElement[] AllModelElements 
         { 
@@ -212,6 +214,16 @@ namespace CardGameEngine.UCM
         public UcmMode UcmMode
         {
             get; private set;
+        }
+        public void SetModeFromItemSet(ItemSet itemSet)
+        {
+            // Do weapons first
+            if (itemSet.mainHandItem != null &&
+            itemSet.mainHandItem.IsMeleeWeapon &&
+                itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+                SetMode(UcmMode.TwoHandMelee);
+
+            else SetMode(UcmMode.Standard);
         }
         public void SetMode(UcmMode mode)
         {

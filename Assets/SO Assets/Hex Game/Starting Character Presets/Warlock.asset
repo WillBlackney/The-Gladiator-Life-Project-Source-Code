@@ -21,13 +21,13 @@ MonoBehaviour:
       value: 5
       stars: 0
     constitution:
-      value: 75
+      value: 60
       stars: 0
     dodge:
-      value: 10
+      value: 5
       stars: 0
     accuracy:
-      value: 60
+      value: 65
       stars: 0
     resolve:
       value: 10
@@ -66,7 +66,7 @@ MonoBehaviour:
       stacks: 1
   modelParts: []
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 12b837d9baaf68e4eb55cfab4ef25cbd, type: 2}
+    mainHandItem: {fileID: 11400000, guid: aa1a47e725a62694ba9484249adb7fe8, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}

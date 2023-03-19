@@ -367,6 +367,8 @@ namespace HexGameEngine.MainMenu
             for (int i = 0; i < characterBuild.talentPairings.Count && i < originPanelTalentRows.Length; i++)
                 originPanelTalentRows[i].BuildFromTalentPairing(characterBuild.talentPairings[i]);
 
+            customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
+
         }
         public void OnNextClassPresetButtonClicked()
         {
@@ -920,7 +922,7 @@ namespace HexGameEngine.MainMenu
                     }
                 }                
             }
-
+            customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
             RebuildItemPanelWeaponAbilityIcons();
         }
         public void OnPreviousMainHandItemClicked()
@@ -975,6 +977,7 @@ namespace HexGameEngine.MainMenu
                     }
                 }
             }
+            customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
             RebuildItemPanelWeaponAbilityIcons();
         }
         public void OnNextOffHandItemClicked()
@@ -1035,7 +1038,7 @@ namespace HexGameEngine.MainMenu
                 }
 
             }
-
+            customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
             RebuildItemPanelWeaponAbilityIcons();
         }
         public void OnPreviousOffHandItemClicked()
@@ -1095,6 +1098,7 @@ namespace HexGameEngine.MainMenu
                 }
 
             }
+            customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
             RebuildItemPanelWeaponAbilityIcons();
         }
         public void OnNextRacialModelButtonClicked()

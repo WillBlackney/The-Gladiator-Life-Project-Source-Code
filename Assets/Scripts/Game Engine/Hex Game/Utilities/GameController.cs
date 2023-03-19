@@ -492,8 +492,12 @@ namespace HexGameEngine
             yield return new WaitForSeconds(0.5f);
             //AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
 
-            if (GlobalSettings.Instance.IncludeGameIntroEvent)            
-                BlackScreenController.Instance.FadeInScreen(2f, () => GameIntroController.Instance.StartEvent());            
+            BlackScreenController.Instance.FadeInScreen(2f);
+            DOVirtual.DelayedCall(1.5f, () =>
+            {
+                if (GlobalSettings.Instance.IncludeGameIntroEvent)
+                    GameIntroController.Instance.StartEvent();
+            });  
                 
         }       
         public void HandleQuitToMainMenuFromInGame()

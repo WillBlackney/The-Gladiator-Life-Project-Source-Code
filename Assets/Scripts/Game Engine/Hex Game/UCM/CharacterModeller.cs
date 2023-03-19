@@ -76,11 +76,8 @@ namespace HexGameEngine.UCM
         }
         public static void ApplyItemSetToCharacterModelView(ItemSet itemSet, UniversalCharacterModel model, bool includeWeapons = true)
         {
-            // Do weapons first
-            if (itemSet.mainHandItem != null &&
-                itemSet.mainHandItem.IsMeleeWeapon && 
-                itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
-                model.SetMode(UcmMode.TwoHandMelee);
+            // Set 2h or 1h model mode
+            model.SetModeFromItemSet(itemSet);
 
             // MH
             if (itemSet.mainHandItem != null && includeWeapons)

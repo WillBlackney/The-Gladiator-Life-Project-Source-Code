@@ -21,7 +21,7 @@ MonoBehaviour:
       value: 5
       stars: 0
     constitution:
-      value: 75
+      value: 60
       stars: 0
     dodge:
       value: 10
@@ -66,8 +66,8 @@ MonoBehaviour:
       stacks: 1
   modelParts: []
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
-    offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
+    offHandItem: {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
     trinket: {fileID: 0}

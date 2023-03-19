@@ -74,8 +74,8 @@ namespace HexGameEngine.GameIntroEvent
             BuildViewsAsPageOne();
 
             // Fade in and move page down
-            blackUnderlay.DOFade(0.5f, 0.75f);
-            pageMovementParent.DOMove(pageOnscreenPos.position, 0.75f).SetEase(Ease.OutBack);
+            blackUnderlay.DOFade(0.5f, 1f);
+            pageMovementParent.DOMove(pageOnscreenPos.position, 1f).SetEase(Ease.OutBack);
         }
         private void FinishEvent()
         {
@@ -85,7 +85,7 @@ namespace HexGameEngine.GameIntroEvent
 
             ResetChoiceButtons();
             pageMovementParent.DOKill();
-            pageMovementParent.DOMove(pageOffscreenPos.position, 0.5f).SetEase(Ease.InBack);
+            pageMovementParent.DOMove(pageOffscreenPos.position, 1f).SetEase(Ease.InBack);
             blackUnderlay.DOKill();
             blackUnderlay.DOFade(0f, 1).SetEase(Ease.InBack).OnComplete(() =>
             {
