@@ -7,6 +7,7 @@ using HexGameEngine.Characters;
 using UnityEngine.UI;
 using UnityEngine.TextCore.Text;
 using System.IO;
+using DG.Tweening;
 
 namespace HexGameEngine.UI
 {
@@ -15,8 +16,11 @@ namespace HexGameEngine.UI
         #region Components
         [Header("Core")]
         [SerializeField] private GameObject visualParent;
+        [SerializeField] private CanvasGroup mainCg;
+        [SerializeField] private Transform positionParent;
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI turnOrderText;
+        [SerializeField] private RectTransform[] layouts;
         [Space(20)]
 
         [Header("Stress State")]
@@ -42,7 +46,7 @@ namespace HexGameEngine.UI
         [Header("Perks")]
         [SerializeField] private GameObject perksParent;
         [SerializeField] private EnemyInfoModalStatRow perkRowPrefab;
-        [SerializeField] private EnemyInfoModalStatRow[] perkRows;
+        [SerializeField] private List<EnemyInfoModalStatRow> perkRows;
        
         #endregion
 
@@ -50,18 +54,28 @@ namespace HexGameEngine.UI
 
         public void BuildAndShowModal(HexCharacterModel character)
         {
-            visualParent.SetActive(true);
+            // Reset
+            mainCg.DOKill();
+            mainCg.alpha = 0f;
 
-            // build view elements
+            // Show
+            visualParent.SetActive(true);
+            mainCg.DOFade(1f, 0.25f);
+
+            // Build view elements
             nameText.text = character.myName;
             BuildStatSection(character);
 
 
-            // position correctly
-            // fade in and show
+            // Position and resize
+            TransformUtils.RebuildLayouts(layouts);
+            positionParent.position = character.currentTile.WorldPosition;
         }
         public void HideModal()
         {
+            visualParent.SetActive(false);
+            mainCg.DOKill();
+            mainCg.alpha = 0f;
         }
 
         private void BuildStatSection(HexCharacterModel character)

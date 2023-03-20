@@ -966,7 +966,8 @@ namespace HexGameEngine.HexTiles
 
 
             // Hex Pop up info
-            if(!AbilityController.Instance.AwaitingAbilityOrder() &&
+            if(h.myCharacter == null &&
+                !AbilityController.Instance.AwaitingAbilityOrder() &&
                 TurnController.Instance.EntityActivated != null)
                 StartCoroutine(ShowTileInfoPopup(h, TurnController.Instance.EntityActivated.currentTile));
 
