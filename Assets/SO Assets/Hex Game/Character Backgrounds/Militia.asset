@@ -58,10 +58,8 @@ MonoBehaviour:
     - headProspects:
       - {fileID: 11400000, guid: 8a1afb36a69ef25409f162114b5ed721, type: 2}
       - {fileID: 11400000, guid: b6dab0ab10c2ce347be31423a2fcd865, type: 2}
-      - {fileID: 11400000, guid: eb2b4dc7ace074444a4c2a4c78aaadb7, type: 2}
       bodyProspects:
       - {fileID: 11400000, guid: 39e6763cac1ab444aae987cd45525c72, type: 2}
       - {fileID: 11400000, guid: a607139243f4b2a4b89ea760b67d1c97, type: 2}
       - {fileID: 11400000, guid: 2cce4423c9ed57d42b7c9d7736934204, type: 2}
-      - {fileID: 11400000, guid: 5b1d9d0e175c37a4884e2e191db9b4db, type: 2}
   passiveEffectDescriptions: []

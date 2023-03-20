@@ -1428,6 +1428,7 @@ namespace HexGameEngine.Characters
                 AbilityController.Instance.HideHitChancePopup();
                 KeyWordLayoutController.Instance.FadeOutMainView();
                 MainModalController.Instance.HideModal();
+                EnemyInfoModalController.Instance.HideModal();
             }
 
             // Stop if combat has ended

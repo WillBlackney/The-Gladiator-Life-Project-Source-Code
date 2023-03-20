@@ -16,6 +16,7 @@ MonoBehaviour:
   race: 1
   modelSize: 0
   xpReward: 20
+  ignoreStress: 1
   attributeSheet:
     might:
       value: 5

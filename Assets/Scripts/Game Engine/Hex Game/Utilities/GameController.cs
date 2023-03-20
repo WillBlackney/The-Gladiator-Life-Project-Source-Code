@@ -299,6 +299,7 @@ namespace HexGameEngine
             AbilityController.Instance.HideHitChancePopup();
             AbilityPopupController.Instance.HidePanel();
             MoveActionController.Instance.HidePathCostPopup();
+            EnemyInfoModalController.Instance.HideModal();
 
             // Show combat screen
             CombatRewardController.Instance.BuildAndShowPostCombatScreen(combatStats, RunController.Instance.CurrentCombatContractData, true);

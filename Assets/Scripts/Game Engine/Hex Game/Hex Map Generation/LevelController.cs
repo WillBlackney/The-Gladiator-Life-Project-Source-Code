@@ -16,6 +16,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 namespace HexGameEngine.HexTiles
 {
@@ -105,6 +106,7 @@ namespace HexGameEngine.HexTiles
         public void HandleTearDownAllCombatViews()
         {
             AbilityController.Instance.HideHitChancePopup();
+            EnemyInfoModalController.Instance.HideModal();
             AbilityPopupController.Instance.HidePanel();
             MoveActionController.Instance.HidePathCostPopup();
             DisableAllArenas();
@@ -636,7 +638,7 @@ namespace HexGameEngine.HexTiles
             // Set up
             Vector3 destination = new Vector3(hex.WorldPosition.x, hex.WorldPosition.y, 0);
             float finalMoveSpeed = moveSpeed * 0.1f;
-            view.mainMovementParent.transform.DOMove(destination, finalMoveSpeed).OnComplete(() =>
+            view.mainMovementParent.transform.DOMove(destination, finalMoveSpeed).SetEase(ease).OnComplete(() =>
             {
                 // Resolve event
                 if (cData != null)
@@ -965,7 +967,6 @@ namespace HexGameEngine.HexTiles
 
             // Hex Pop up info
             if(!AbilityController.Instance.AwaitingAbilityOrder() &&
-                //Pathfinder.CanHexBeOccupied(h) &&
                 TurnController.Instance.EntityActivated != null)
                 StartCoroutine(ShowTileInfoPopup(h, TurnController.Instance.EntityActivated.currentTile));
 
@@ -973,6 +974,13 @@ namespace HexGameEngine.HexTiles
             else if (AbilityController.Instance.AwaitingAbilityOrder())
             {
                 AbilityController.Instance.ShowHitChancePopup(TurnController.Instance.EntityActivated, h.myCharacter, AbilityController.Instance.CurrentAbilityAwaiting, TurnController.Instance.EntityActivated.itemSet.mainHandItem);
+            }
+
+            // show enemy info modal
+            else if(h.myCharacter != null &&
+                h.myCharacter.allegiance != Allegiance.Player)
+            {
+                EnemyInfoModalController.Instance.BuildAndShowModal(h.myCharacter);
             }
         }
         public void OnHexMouseExit(LevelNode h)
@@ -1001,6 +1009,7 @@ namespace HexGameEngine.HexTiles
 
             HideTileInfoPopup();
             AbilityController.Instance.HideHitChancePopup();
+            EnemyInfoModalController.Instance.HideModal();
         }
         #endregion
 
