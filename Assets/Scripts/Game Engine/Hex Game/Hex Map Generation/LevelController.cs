@@ -254,11 +254,11 @@ namespace HexGameEngine.HexTiles
 
             foreach (LevelNode n in AllLevelNodes)
             {
-                if (n.GridPosition.x == -1 && (n.GridPosition.y == 0 || n.GridPosition.y == 1))
+                if (n.GridPosition.x == -2 && (n.GridPosition.y == 0 || n.GridPosition.y == 1))
                 {
                     frontRank.Add(n);
                 }
-                else if (n.GridPosition.x == -2 && (n.GridPosition.y == 0 || n.GridPosition.y == 1))
+                else if (n.GridPosition.x == -3 && (n.GridPosition.y == 0 || n.GridPosition.y == 1))
                 {
                     backRank.Add(n);
                 }
@@ -275,7 +275,7 @@ namespace HexGameEngine.HexTiles
             List<LevelNode> nodes = new List<LevelNode>();
             foreach (LevelNode n in AllLevelNodes)
             {
-                if (n.GridPosition.x == 1 || n.GridPosition.x == 2)
+                if (n.GridPosition.x == 2 || n.GridPosition.x == 3)
                 {
                     nodes.Add(n);
                 }
