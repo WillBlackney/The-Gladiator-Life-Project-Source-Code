@@ -1,14 +1,12 @@
 ﻿using HexGameEngine.UI;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using HexGameEngine.Audio;
 using DG.Tweening;
-using HexGameEngine.UCM;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.Characters;
+using TMPro;
 
 namespace HexGameEngine.Items
 {
@@ -25,6 +23,11 @@ namespace HexGameEngine.Items
         [SerializeField] private Image weaponImage;
         [SerializeField] private Image rarityOutline;
 
+        [Header("Cost Components")]
+        [SerializeField] private GameObject goldCostParent;
+        [SerializeField] private TextMeshProUGUI goldCostText;
+
+
         private InventoryItem myItemRef;
         public static InventoryItemView itemDragged { get; private set; }
 
@@ -36,6 +39,14 @@ namespace HexGameEngine.Items
 
         // Getters + Accessors
         #region
+        public GameObject GoldCostParent
+        {
+            get { return goldCostParent; }
+        }
+        public TextMeshProUGUI GoldCostText
+        {
+            get { return goldCostText; }
+        }
         public GameObject BookVisualParent
         {
             get { return bookVisualParent; }
@@ -63,18 +74,21 @@ namespace HexGameEngine.Items
         #endregion
 
         // Input
-        #region
-        public void Click()
-        {
-            Debug.Log("InventoryItemView.Click()");
-            //InventoryController.Instance.OnItemViewClicked(this);
-        }
+        #region        
         public void RightClick()
         {
             Debug.Log("InventoryItemView.RightClick()");
             if (itemDragged != null) return;
-            if (MyItemRef.itemData == null) return;
 
+            // TRY SELL
+            if (TownController.Instance.ArmouryViewIsActive)
+            {
+                ItemController.Instance.HandleSellItemToArmoury(myItemRef);
+                return;
+            }
+
+            // TRY EQUIP
+            if (MyItemRef.itemData == null) return;            
             HexCharacterData character = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
 
             // Check equipping 2h item with two 1h items already equip without enough inventory space.
@@ -87,12 +101,7 @@ namespace HexGameEngine.Items
                 return;
             }
 
-            // Get character slot matches item slot
-            // handle add item.
-
             // Get correct slot
-            ItemType itemType = myItemRef.itemData.itemType;
-
             List<RosterItemSlot> allSlots = new List<RosterItemSlot>
             {
                 CharacterRosterViewController.Instance.MainHandSlot,
@@ -121,8 +130,6 @@ namespace HexGameEngine.Items
                 CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
                 InventoryController.Instance.RebuildInventoryView();
             }
-
-
 
         }
         public void MouseEnter()
@@ -290,7 +297,6 @@ namespace HexGameEngine.Items
         }
         #endregion
 
-
         // Misc
         #region
         public void Reset()
@@ -298,6 +304,7 @@ namespace HexGameEngine.Items
             gameObject.SetActive(false);
             bookVisualParent.SetActive(false);
             weaponVisualParent.SetActive(false);
+            goldCostParent.SetActive(false);
             myItemRef = null;
         }
         public void SetMyItemRef(InventoryItem item)

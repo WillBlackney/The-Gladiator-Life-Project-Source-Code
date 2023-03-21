@@ -80,6 +80,9 @@ namespace HexGameEngine.UI
                     scrollBarResets[i].value = 1;
             mainVisualParent.SetActive(true);
             BuildPanelForEnemy(data);
+
+            AbilityController.Instance.HideHitChancePopup();
+            EnemyInfoModalController.Instance.HideModal();
         }
         private void BuildPanelForEnemy(HexCharacterData data)
         {

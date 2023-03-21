@@ -9,6 +9,7 @@ using HexGameEngine.Abilities;
 using HexGameEngine.UI;
 using HexGameEngine.Characters;
 using HexGameEngine.Cards;
+using HexGameEngine.TownFeatures;
 
 namespace HexGameEngine.Items
 {
@@ -146,6 +147,12 @@ namespace HexGameEngine.Items
                 view.RarityOutline.color = ColorLibrary.Instance.GetRarityColor(item.itemData.rarity);
             }
 
+            if (TownController.Instance.ArmouryViewIsActive)
+            {
+                view.GoldCostParent.SetActive(true);
+                view.GoldCostText.text = item.GetSellPrice().ToString();
+            }
+
         }
         private void UpdateMaxSlotsTexts()
         {
@@ -231,7 +238,7 @@ namespace HexGameEngine.Items
         {
             for (int i = 0; i < totalItemsGenerated; i++)
             {
-                AddItemToInventory(GenerateRandomNonEquipableItem());
+                AddItemToInventory(GenerateRandomEquipableItem());
             }
         }
         public void PopulateInventoryWithMockAbilityBooks(int totalItemsGenerated)

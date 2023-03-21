@@ -8,6 +8,8 @@ using System;
 using System.Linq;
 using HexGameEngine.UI;
 using HexGameEngine.Perks;
+using UnityEditorInternal.Profiling.Memory.Experimental;
+using HexGameEngine.Player;
 
 namespace HexGameEngine.Items
 {
@@ -410,6 +412,12 @@ namespace HexGameEngine.Items
 
             // Update item abilities
             character.abilityBook.OnItemSetChanged(character.itemSet);
+        }
+        public void HandleSellItemToArmoury(InventoryItem item)
+        {
+            InventoryController.Instance.RemoveItemFromInventory(item);
+            PlayerDataController.Instance.ModifyPlayerGold(item.GetSellPrice());
+            InventoryController.Instance.RebuildInventoryView();
         }
         public int GetCharacterItemsGoldValue(ItemSet itemSet)
         {

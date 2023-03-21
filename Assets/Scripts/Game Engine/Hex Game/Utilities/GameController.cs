@@ -124,6 +124,8 @@ namespace HexGameEngine
                 SetGameState(GameState.StoryEvent);
                 GameIntroController.Instance.StartEvent();
             }
+
+            InventoryController.Instance.PopulateInventoryWithMockDataItems(30);
         }
         private void RunSandboxCombat()
         {            

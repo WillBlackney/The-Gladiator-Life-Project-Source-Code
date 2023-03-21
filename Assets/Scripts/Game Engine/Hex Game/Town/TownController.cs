@@ -119,6 +119,10 @@ namespace HexGameEngine.TownFeatures
 
         // Getters + Accessors
         #region
+        public bool ArmouryViewIsActive
+        {
+            get { return armouryPageVisualParent.activeSelf; }
+        }
         public HospitalDropSlot[] HospitalSlots
         {
             get { return hospitalSlots; }
@@ -623,7 +627,11 @@ namespace HexGameEngine.TownFeatures
                 }
                 itemShopSlots[i].BuildFromItemShopData(currentItems[i]);
             }
-                
+
+            // Show player item sell prices
+            if (InventoryController.Instance.MainVisualParent.activeSelf)
+                InventoryController.Instance.RebuildInventoryView();
+
         }
         public void HandleBuyItemFromArmoury(ItemShopData data)
         {
@@ -694,9 +702,10 @@ namespace HexGameEngine.TownFeatures
             {
                 ItemData item = ItemController.Instance.GenerateNewItemWithRandomEffects(initialItems[i]);
                 Debug.Log("Initial base cost: " + item.baseGoldValue.ToString());
-                int lower = (int)(item.baseGoldValue * 0.95f);
+                /* int lower = (int)(item.baseGoldValue * 0.95f);
                 int upper = (int)(item.baseGoldValue * 1.05f);
-                int finalCost = RandomGenerator.NumberBetween(lower, upper);
+                int finalCost = RandomGenerator.NumberBetween(lower, upper);*/
+                int finalCost = item.baseGoldValue;
                 Debug.Log("Final cost: " + finalCost.ToString());
                 currentItems.Add(new ItemShopData(item, finalCost));
             }
@@ -752,6 +761,8 @@ namespace HexGameEngine.TownFeatures
         public void OnArmouryPageLeaveButtonClicked()
         {
             armouryPageVisualParent.SetActive(false);
+            if(InventoryController.Instance.MainVisualParent.activeSelf)
+                InventoryController.Instance.RebuildInventoryView();
         }
         public void OnArmouryPageButtonClicked()
         {
