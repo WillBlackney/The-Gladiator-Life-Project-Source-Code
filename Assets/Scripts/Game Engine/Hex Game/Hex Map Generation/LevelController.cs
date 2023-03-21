@@ -49,7 +49,7 @@ namespace HexGameEngine.HexTiles
         [SerializeField] ModalDottedRow[] tileEffectDotRows;
         [SerializeField] RectTransform[] tileInfoPopUpLayoutRebuilds;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-        private float popupDelay = 0.5f;
+        private float popupDelay = 0.25f;
 
         private List<LevelNode> markedTiles = new List<LevelNode>();
 
@@ -965,21 +965,20 @@ namespace HexGameEngine.HexTiles
             }
 
 
-            // Hex Pop up info
+            // Tile modal
             if(h.myCharacter == null &&
                 !AbilityController.Instance.AwaitingAbilityOrder() &&
                 TurnController.Instance.EntityActivated != null)
                 StartCoroutine(ShowTileInfoPopup(h, TurnController.Instance.EntityActivated.currentTile));
 
-            // Hit chance pop up
+            // Hit chance modal
             else if (AbilityController.Instance.AwaitingAbilityOrder())
             {
                 AbilityController.Instance.ShowHitChancePopup(TurnController.Instance.EntityActivated, h.myCharacter, AbilityController.Instance.CurrentAbilityAwaiting, TurnController.Instance.EntityActivated.itemSet.mainHandItem);
             }
 
-            // show enemy info modal
-            else if(h.myCharacter != null &&
-                h.myCharacter.allegiance != Allegiance.Player)
+            // Character info modal
+            else if(h.myCharacter != null)
             {
                 EnemyInfoModalController.Instance.BuildAndShowModal(h.myCharacter);
             }

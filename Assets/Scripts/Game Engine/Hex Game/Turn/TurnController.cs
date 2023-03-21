@@ -100,6 +100,11 @@ namespace HexGameEngine.TurnLogic
         {
             panelSlots[index].SetActive(true);
         }
+        public int GetCharacterTurnsUntilTheirTurn(HexCharacterModel character)
+        {
+            if (!activationOrder.Contains(character)) return 0;
+            else return activationOrder.IndexOf(character) - activationOrder.IndexOf(entityActivated);            
+        }
         #endregion
 
         // Setup + Initializaton
