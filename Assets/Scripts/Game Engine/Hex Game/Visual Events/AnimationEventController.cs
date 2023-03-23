@@ -191,6 +191,8 @@ namespace HexGameEngine.VisualEvents
                 if(vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture)
                     VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerShootMagicHandGestureAnimation(user.hexCharacterView), QueuePosition.Back, 0, 0, stackEvent);
 
+                if (vEvent.projectileFired == ProjectileFired.None) return;
+
                 // Destination is a character or hex tile target?
                 Vector3 targetPos = new Vector3(0, 0, 0);
                 Vector3 projectileStartPos = new Vector3(0, 0, 0);

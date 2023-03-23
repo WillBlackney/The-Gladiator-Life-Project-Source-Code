@@ -2071,8 +2071,7 @@ namespace HexGameEngine.Abilities
                     if (target == null || (target != null && target.itemSet.offHandItem != null && target.itemSet.offHandItem.weaponClass == WeaponClass.Shield)) continue;
                 }
 
-                else if (ar.type == AbilityRequirementType.TargetIsTeleportable &&
-                    HexCharacterController.Instance.IsCharacterTeleportable(target))
+                else if (ar.type == AbilityRequirementType.TargetIsTeleportable)
                 {
                     if (target == null || (target != null && HexCharacterController.Instance.IsCharacterTeleportable(target))) continue;
                 }
