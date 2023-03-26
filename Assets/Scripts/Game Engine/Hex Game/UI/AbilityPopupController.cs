@@ -22,8 +22,6 @@ namespace HexGameEngine.UI
         [Header("Core Panel Components")]
         [SerializeField] GameObject visualParent;
         [SerializeField] RectTransform mainPositioningRect;
-        [SerializeField] RectTransform characterRosterPosition;
-        [SerializeField] RectTransform draftCharacterPosition;
         [SerializeField] RectTransform[] transformsRebuilt;
         [SerializeField] CanvasGroup mainCg;
         [SerializeField] TextMeshProUGUI nameText;
@@ -57,6 +55,7 @@ namespace HexGameEngine.UI
             BuildPanelFromAbilityData(b.AbilityReward);
             PlacePanelAboveTransform(b.transform);
             TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelAboveTransform(b.transform);
         }
         public void OnCombatContractAbilityIconMousedOver(CombatContractCard b)
         {
@@ -64,6 +63,7 @@ namespace HexGameEngine.UI
             BuildPanelFromAbilityData(b.MyContractData.combatRewardData.abilityAwarded);
             PlacePanelAboveTransform(b.AbilityTomeImage.transform);
             TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelAboveTransform(b.AbilityTomeImage.transform);
         }
         public void OnAbilityButtonMousedOver(AbilityButton b)
         {
@@ -71,6 +71,7 @@ namespace HexGameEngine.UI
             BuildPanelFromAbilityData(b.MyAbilityData);
             PlacePanelOnAbilityBarButton(b);
             TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelOnAbilityBarButton(b);
         }
         public void OnRosterAbilityButtonMousedOver(UIAbilityIcon b, bool above = true)
         {
@@ -81,6 +82,9 @@ namespace HexGameEngine.UI
                 PlacePanelAboveAbilityIcon(b);
             else PlacePanelWestOfAbilityIcon(b);
             TransformUtils.RebuildLayouts(transformsRebuilt);
+            if (above)
+                PlacePanelAboveAbilityIcon(b);
+            else PlacePanelWestOfAbilityIcon(b);
         }
         public void OnAbilityBookItemMousedOver(InventoryItemView item)
         {
@@ -88,6 +92,7 @@ namespace HexGameEngine.UI
             BuildPanelFromAbilityData(item.MyItemRef.abilityData);
             PlacePanelOnInventoryItemPosition(item);
             TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelOnInventoryItemPosition(item);
         }
         public void OnAbilityShopTomeMousedOver(AbilityTomeShopSlot slot)
         {
@@ -95,6 +100,7 @@ namespace HexGameEngine.UI
             BuildPanelFromAbilityData(slot.MyData.ability);
             PlacePanelOnAbilityTomeShopSlotPosition(slot);
             TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelOnAbilityTomeShopSlotPosition(slot);
         }
         public void OnLibraryAbilityDropSlotMousedOver(LibraryAbilityDropSlot slot)
         {
@@ -102,6 +108,7 @@ namespace HexGameEngine.UI
             BuildPanelFromAbilityData(slot.MyAbilityData);
             PlacePanelOnLibraryAbilityDropSlotPosition(slot);
             TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelOnLibraryAbilityDropSlotPosition(slot);
         }
         
         public void OnAbilityButtonMousedExit()

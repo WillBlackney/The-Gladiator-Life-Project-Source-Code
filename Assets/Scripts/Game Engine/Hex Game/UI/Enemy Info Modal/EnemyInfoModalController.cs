@@ -136,8 +136,9 @@ namespace HexGameEngine.UI
         private void BuildTurnSection(HexCharacterModel character)
         {
             int turnsUntilMyTurn = TurnController.Instance.GetCharacterTurnsUntilTheirTurn(character);
-            if (turnsUntilMyTurn == 0) turnOrderText.text = "Acting now";
-            else turnOrderText.text = "Acts in " + turnsUntilMyTurn.ToString() + " turns";
+            if (turnsUntilMyTurn == 0) turnOrderText.text = "Acting now.";
+            else if (turnsUntilMyTurn < 0) turnOrderText.text = "Turn done.";
+            else turnOrderText.text = "Acts in " + turnsUntilMyTurn.ToString() + " turns.";
         }
         private void BuildStressStateSection(HexCharacterModel character)
         {

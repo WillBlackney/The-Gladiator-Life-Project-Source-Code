@@ -296,6 +296,7 @@ namespace HexGameEngine.Characters
         Poacher = 16,
         Inquisitor = 17,
         Militia = 18,
+        Companion = 19,
 
 
     }

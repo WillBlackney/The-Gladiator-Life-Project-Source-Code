@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fc18e607558964b9506f2b2cdb1260, type: 3}
+  m_Name: PROMO_Undead_Soldier
+  m_EditorClassIdentifier: 
+  myName: Ragnar
+  myClassName: The Wanderer
+  race: 3
+  modelSize: 0
+  attributeSheet:
+    might:
+      value: 10
+      stars: 0
+    constitution:
+      value: 75
+      stars: 0
+    dodge:
+      value: 10
+      stars: 0
+    accuracy:
+      value: 100
+      stars: 0
+    resolve:
+      value: 5
+      stars: 0
+    fitness:
+      value: 100
+      stars: 0
+    wits:
+      value: 5
+      stars: 0
+    maxHealth: 0
+    apRecovery: 10
+    apMaximum: 10
+    initiative: 25
+    fatigueRecovery: 25
+    criticalChance: 5
+    criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
+    auraSize: 1
+    vision: 0
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+    deathResistance: 25
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
+    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
+    - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
+    - {fileID: 11400000, guid: abb8cd12e082108429c6734cc2c90d87, type: 2}
+    - {fileID: 11400000, guid: 087c7faa0a547284f9a64fd03b452e7f, type: 2}
+  serializedPassiveManager:
+    perks: []
+  modelParts:
+  - Undead_Chest
+  - Undead_Head_1
+  - Undead_Face_1
+  - Undead_Right_Hand
+  - Undead_Right_Arm
+  - Undead_Right_Leg
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 6a78f7a4320bb5f4889c39e138776a4f, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 0c2183f61ac32a34ab074906266768c7, type: 2}
+    chestArmour: {fileID: 11400000, guid: f1bfa5a00b3962d4d9a26e37d3d0343d, type: 2}
+    trinket: {fileID: 0}
+  talentPairings:
+  - talentSchool: 2
+    level: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PROMO_Orc_Berserker
   m_EditorClassIdentifier: 
   myName: Grum
-  myClassName: Berserker
+  myClassName: The Savage
   race: 1
   modelSize: 0
   attributeSheet:
@@ -27,22 +27,22 @@ MonoBehaviour:
       value: 5
       stars: 0
     accuracy:
-      value: 65
+      value: 100
       stars: 0
     resolve:
       value: 5
       stars: 0
     fitness:
-      value: 60
+      value: 100
       stars: 0
     wits:
       value: 5
       stars: 0
     maxHealth: 0
-    apRecovery: 8
-    apMaximum: 8
-    initiative: 15
-    fatigueRecovery: 15
+    apRecovery: 10
+    apMaximum: 10
+    initiative: 25
+    fatigueRecovery: 25
     criticalChance: 5
     criticalModifier: 50
     physicalDamageBonus: 0
@@ -60,6 +60,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f88e54fc2981d7d42b1fea3cfd686011, type: 2}
     - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
     - {fileID: 11400000, guid: a02ebfe8b4a47c742ab43f030a771ce1, type: 2}
+    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
   serializedPassiveManager:
     perks: []
   modelParts:
@@ -69,11 +70,8 @@ MonoBehaviour:
   - Orc_Right_Hand
   - Orc_Right_Arm
   - Orc_Right_Leg
-  - Barbarian_Chest_Wear
-  - Barbarian_Left_Arm_Wear
-  - Barbarian_Right_Arm_Wear
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: e98054c0b014f3c4283274cfb6571148, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 2aa4f343b2e4d0c4cab0f2de0c477c14, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}

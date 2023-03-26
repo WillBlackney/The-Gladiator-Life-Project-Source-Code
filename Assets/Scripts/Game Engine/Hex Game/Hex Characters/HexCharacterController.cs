@@ -783,7 +783,7 @@ namespace HexGameEngine.Characters
                 yield break;
             }
 
-            float moveSpeedTime = 0.375f;
+            float moveSpeedTime = 0.25f;
             string animationString = DetermineWeaponAttackAnimationString(model, weaponUsed);
             if (animationString.Contains("THRUST")) moveSpeedTime = 0.5f;
             view.currentAnimation = animationString;

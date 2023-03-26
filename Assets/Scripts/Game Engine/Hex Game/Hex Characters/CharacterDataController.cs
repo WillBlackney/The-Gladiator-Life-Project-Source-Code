@@ -655,23 +655,10 @@ namespace HexGameEngine.Characters
         {
             data.currentLevel = newLevelValue;
         }
-        public void HandleGainXP(HexCharacterData data, int xpGained)
+        public void HandleGainXP(HexCharacterData data, int xpGained, bool applyXpMods = true)
         {
             float xpGainMod = 1f;
-            if(xpGained > 0)
-            {
-                if (PerkController.Instance.DoesCharacterHavePerk(data.passiveManager, Perk.FastLearner))                
-                    xpGainMod += 0.25f;
-                
-                if (PerkController.Instance.DoesCharacterHavePerk(data.passiveManager, Perk.DimWitted))                
-                    xpGainMod -= 0.25f;
-
-                if (PerkController.Instance.DoesCharacterHavePerk(data.passiveManager, Perk.PermanentlyConcussed))
-                    xpGainMod -= 0.25f;
-
-                if (DoesCharacterHaveBackground(data.background, CharacterBackground.Doctor))
-                    xpGainMod += 0.10f;
-            }         
+            if(applyXpMods) xpGainMod = StatCalculator.GetCharacterXpGainRate(data);        
 
             xpGained = (int)(xpGained * xpGainMod);
 
@@ -685,7 +672,7 @@ namespace HexGameEngine.Characters
                 HandleLevelUp(data);
 
                 // Restart the xp gain procces with the spill over amount
-                HandleGainXP(data, spillOver);
+                HandleGainXP(data, spillOver, false);
 
             }
 

@@ -31,6 +31,7 @@ namespace HexGameEngine.Items
         [Header("Type + Rarity Row Components")]
         [SerializeField] TextMeshProUGUI itemTypeText;
         [SerializeField] TextMeshProUGUI rarityText;
+        [SerializeField] TextMeshProUGUI goldValueText;
 
         [Header("Damage Modifier Row Components")]
         [SerializeField] GameObject damageModParent;
@@ -68,13 +69,15 @@ namespace HexGameEngine.Items
             BuildPanelFromItemData(icon.ItemReward);
             PlacePanelAboveTransform(icon.transform);
             TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelAboveTransform(icon.transform);
         }
         public void OnCombatContractItemIconMousedOver(CombatContractCard card)
         {
             FadeInPanel();
             BuildPanelFromItemData(card.MyContractData.combatRewardData.item);
             PlacePanelAboveTransform(card.ItemImage.transform);
-            TransformUtils.RebuildLayouts(transformsRebuilt); 
+            TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelAboveTransform(card.ItemImage.transform);
         }
         public void OnInventoryItemMousedOver(InventoryItemView item)
         {
@@ -82,6 +85,7 @@ namespace HexGameEngine.Items
             BuildPanelFromItemData(item.MyItemRef.itemData);
             PlacePanelAtInventoryItemPosition(item);
             TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelAtInventoryItemPosition(item);
         }
         public void OnRosterItemSlotMousedOver(RosterItemSlot item)
         {
@@ -89,6 +93,7 @@ namespace HexGameEngine.Items
             BuildPanelFromItemData(item.ItemDataRef);
             PlacePanelAtRosterItemSlotPosition(item);
             TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelAtRosterItemSlotPosition(item);
         }
         public void OnCustomCharacterItemSlotMousedOver(CustomItemIcon item)
         {
@@ -96,6 +101,7 @@ namespace HexGameEngine.Items
             BuildPanelFromItemData(item.ItemDataRef);
             PlacePanelAtCustomCharacterScreenItemSlotPosition(item);
             TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelAtCustomCharacterScreenItemSlotPosition(item);
         }
         public void OnShopItemMousedOver(ItemShopSlot item)
         {
@@ -103,6 +109,7 @@ namespace HexGameEngine.Items
             BuildPanelFromItemData(item.MyData.Item);
             PlacePanelAtShopItemSlotPosition(item);
             TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelAtShopItemSlotPosition(item);
         }
         public void OnInventoryItemMouseExit()
         {
@@ -191,6 +198,7 @@ namespace HexGameEngine.Items
             // Row 2
             itemTypeText.text = GetItemTypeString(item);
             rarityText.text = item.rarity.ToString();
+            goldValueText.text = item.baseGoldValue.ToString();
 
             // Damage mods row
             BuildDamageModRows(item);

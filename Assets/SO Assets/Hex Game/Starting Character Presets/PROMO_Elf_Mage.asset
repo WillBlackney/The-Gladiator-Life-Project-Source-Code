@@ -27,22 +27,22 @@ MonoBehaviour:
       value: 5
       stars: 0
     accuracy:
-      value: 70
+      value: 100
       stars: 0
     resolve:
       value: 5
       stars: 0
     fitness:
-      value: 60
+      value: 100
       stars: 0
     wits:
       value: 10
       stars: 0
     maxHealth: 0
-    apRecovery: 8
-    apMaximum: 8
-    initiative: 15
-    fatigueRecovery: 15
+    apRecovery: 10
+    apMaximum: 10
+    initiative: 25
+    fatigueRecovery: 25
     criticalChance: 5
     criticalModifier: 50
     physicalDamageBonus: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
-    - {fileID: 11400000, guid: 4e4bf822749dff044b3b1112dba35a22, type: 2}
+    - {fileID: 11400000, guid: a8709026bde6ab046a0b8aaf6d8b9785, type: 2}
     - {fileID: 11400000, guid: d84fc754f00f92b458fef9d08a4c3005, type: 2}
   serializedPassiveManager:
     perks: []
@@ -69,14 +69,11 @@ MonoBehaviour:
   - Elf_Right_Hand
   - Elf_Right_Arm
   - Elf_Right_Leg
-  - Blue_Mage_Head_Wear
-  - Blue_Mage_Chest_Wear
-  - Left_Hand_Knowledge_Staff
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: d4f86be39e3332a4dab717584601e637, type: 2}
+    mainHandItem: {fileID: 11400000, guid: b0a743e98585a814ea612ed22c49e1c8, type: 2}
     offHandItem: {fileID: 0}
-    headArmour: {fileID: 0}
-    chestArmour: {fileID: 0}
+    headArmour: {fileID: 11400000, guid: 314ad7b94ea3d4c4090f132d38030f2d, type: 2}
+    chestArmour: {fileID: 11400000, guid: 07f3a9915c41cdd4a8424456811da0ed, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 6

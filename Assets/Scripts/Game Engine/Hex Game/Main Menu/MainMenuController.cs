@@ -233,7 +233,7 @@ namespace HexGameEngine.MainMenu
             characterBuild.attributeSheet = new AttributeSheet();
             characterBuild.PerkTree = new PerkTreeData();
             baselineAttributes.CopyValuesIntoOther(characterBuild.attributeSheet);
-            characterBuild.background = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.Unknown);
+            characterBuild.background = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.Companion);
             HandleChangeClassPreset(startingClassTemplate);
 
             // Set to template 1 

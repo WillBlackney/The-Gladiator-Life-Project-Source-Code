@@ -446,7 +446,10 @@ namespace HexGameEngine
             // Goblin racial perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Cunning) ||
                 (c.race == CharacterRace.Goblin && c.controller == Controller.Player))
-                dodge += (int) (GetTotalInitiative(c) * 0.5f);
+            {
+                int bonus = (int)(GetTotalInitiative(c) * 0.25f);
+                if (bonus > 0) dodge += bonus;
+            }
 
             // Stress State Modifier
             dodge += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress), c);
@@ -524,7 +527,10 @@ namespace HexGameEngine
             // Goblin racial perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Cunning) ||
                     c.race == CharacterRace.Goblin)
-                dodge += (int)(GetTotalInitiative(c) * 0.5f);
+            {
+                int bonus = (int)(GetTotalInitiative(c) * 0.25f);
+                if (bonus > 0) dodge += bonus;
+            }
 
             // Items
             dodge += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Dodge, c.itemSet);
@@ -920,6 +926,42 @@ namespace HexGameEngine
 
         // Secondary Attributes
         #region
+        public static float GetCharacterXpGainRate(HexCharacterModel character)
+        {
+            float ret = 1;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FastLearner))
+                ret += 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.DimWitted))
+                ret -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.PermanentlyConcussed))
+                ret -= 0.25f;
+
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Doctor))
+                ret += 0.10f;
+
+            return ret;
+        }
+        public static float GetCharacterXpGainRate(HexCharacterData character)
+        {
+            float ret = 1;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, Perk.FastLearner))
+                ret += 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, Perk.DimWitted))
+                ret -= 0.25f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, Perk.PermanentlyConcussed))
+                ret -= 0.25f;
+
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Doctor))
+                ret += 0.10f;
+
+            return ret;
+        }
         public static int GetTotalWeaponDamageBonus(HexCharacterModel c)
         {
             int weaponDamageBonus = 0;

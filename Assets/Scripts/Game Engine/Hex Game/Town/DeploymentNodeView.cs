@@ -60,7 +60,13 @@ namespace HexGameEngine.TownFeatures
             {
                 SetUnoccupiedState();
                 TownController.Instance.UpdateCharactersDeployedText();
-            }        
+            }
+            else if (myCharacterData != null && 
+                allowedCharacter == Allegiance.Enemy &&
+                !EnemyInfoPanel.Instance.PanelIsActive)
+            {
+                EnemyInfoPanel.Instance.HandleBuildAndShowPanel(myCharacterData);
+            }
         }
         public void OnLeftClick()
         {

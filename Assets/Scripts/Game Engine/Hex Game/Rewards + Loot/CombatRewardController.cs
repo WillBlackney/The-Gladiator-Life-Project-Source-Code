@@ -120,7 +120,7 @@ namespace HexGameEngine.RewardSystems
 
                 // Apply xp gain + level up
                 int xpGained = baseXp + (killXpSlice * character.totalKills);
-                if (character.characterData.currentXP + xpGained >= character.characterData.currentMaxXP)                
+                if (character.characterData.currentXP + (xpGained * StatCalculator.GetCharacterXpGainRate(character))>= character.characterData.currentMaxXP)                
                     result.didLevelUp = true;                
                 result.xpGained = xpGained;
             }
@@ -218,6 +218,7 @@ namespace HexGameEngine.RewardSystems
             card.DeathIndicatorParent.SetActive(false);
             card.KnockDownIndicatorParent.SetActive(false);
             card.PortraitDeathIcon.SetActive(false);
+            card.LevelUpParent.SetActive(false);
 
             // show card
             card.gameObject.SetActive(true);

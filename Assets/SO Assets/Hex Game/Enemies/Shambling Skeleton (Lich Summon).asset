@@ -16,33 +16,34 @@ MonoBehaviour:
   race: 3
   modelSize: 0
   xpReward: 0
+  ignoreStress: 0
   attributeSheet:
     might:
       value: 0
       stars: 0
     constitution:
-      value: 0
+      value: 80
       stars: 0
     dodge:
-      value: 0
+      value: 5
       stars: 0
     accuracy:
-      value: 65
+      value: 60
       stars: 0
     resolve:
       value: 5
       stars: 0
-    fatigue:
-      value: 80
+    fitness:
+      value: 100
       stars: 0
     wits:
       value: 5
       stars: 0
     maxHealth: 0
     apRecovery: 8
-    maxAp: 8
-    initiative: 2
-    fatigueRecovery: 8
+    apMaximum: 8
+    initiative: 15
+    fatigueRecovery: 15
     criticalChance: 5
     criticalModifier: 50
     physicalDamageBonus: 0
@@ -56,50 +57,483 @@ MonoBehaviour:
     injuryResistance: 0
     deathResistance: 25
   baseArmour: 0
-  randomizeHealth: 1
+  randomizeHealth: 0
   lowerHealthLimit: 60
   upperHealthLimit: 65
   aiTurnRoutine:
     directives:
     - action:
+        actionType: 3
+        targettingPriority: 01000000
+        getRangeFromAbility: 0
+        range: 2
+        abilityName: 
+      requirements: []
+    - action:
         actionType: 1
-        targettingPriority: 
+        targettingPriority: 050000000100000006000000
         getRangeFromAbility: 0
         range: 0
-        abilityName: Strike
+        abilityName: Shove
       requirements:
-      - requirementType: 1
-        range: 1
+      - requirementType: 20
+        range: 0
         perkPairing:
           perkTag: 0
-          passiveStacks: 0
+          passiveStacks: 1
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
-        actionType: 2
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Ensnare
+      requirements:
+      - requirementType: 6
+        range: 0
+        perkPairing:
+          perkTag: 79
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 30
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+    - action:
+        actionType: 1
+        targettingPriority: 02000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Riposte
+      requirements:
+      - requirementType: 2
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 2
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 23
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 34
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+    - action:
+        actionType: 1
+        targettingPriority: 02000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Raise Shield
+      requirements:
+      - requirementType: 23
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 29
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+    - action:
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Slash
+      requirements: []
+    - action:
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Puncture
+      requirements:
+      - requirementType: 28
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 29
+    - action:
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Quick Shank
+      requirements: []
+    - action:
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Bash
+      requirements:
+      - requirementType: 30
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+    - action:
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Batter
+      requirements: []
+    - action:
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Smash Shield (Axe 1h)
+      requirements:
+      - requirementType: 31
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 6
+        range: 0
+        perkPairing:
+          perkTag: 210
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 23
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 31
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+    - action:
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Chop
+      requirements: []
+    - action:
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Thrust
+      requirements: []
+    - action:
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Smash Shield (Native 2h)
+      requirements:
+      - requirementType: 31
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 6
+        range: 0
+        perkPairing:
+          perkTag: 210
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 19
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 2
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 26
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 4
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+    - action:
+        actionType: 1
+        targettingPriority: 02000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Round Swing
+      requirements:
+      - requirementType: 2
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 2
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+    - action:
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Pound
+      requirements: []
+    - action:
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Decapitate
+      requirements:
+      - requirementType: 7
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 51
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+    - action:
+        actionType: 1
+        targettingPriority: 050000000100000006000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Overhead Chop
+      requirements: []
+    - action:
+        actionType: 7
         targettingPriority: 
         getRangeFromAbility: 0
         range: 0
         abilityName: 
-      requirements: []
+      requirements:
+      - requirementType: 10
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 3
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 23
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 14
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 13
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+    - action:
+        actionType: 2
+        targettingPriority: 01000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: 
+      requirements:
+      - requirementType: 8
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
   abilityBook:
-    activeAbilities:
-    - {fileID: 11400000, guid: 5da6171d9b5a21b47b2adc4c680a46c2, type: 2}
+    activeAbilities: []
   serializedPassiveManager:
     perks:
     - perkTag: 24
       stacks: 1
     - perkTag: 85
       stacks: 1
+  randomizeItemSet: 1
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
+  possibleArmourLoadouts: []
+  recruitWeaponLoadouts:
+  - mainHandProspects:
+    - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
+    - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
+    - {fileID: 11400000, guid: 5ea73452997566e4b9f7c15c306b772b, type: 2}
+    - {fileID: 11400000, guid: e724601a8b1fda642824cbf7fc3faea9, type: 2}
+    offhandProspects:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 67933190d00ec95478f7e153f088ddb2, type: 2}
+  - mainHandProspects:
+    - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
+    - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
+    - {fileID: 11400000, guid: 5ea73452997566e4b9f7c15c306b772b, type: 2}
+    - {fileID: 11400000, guid: e724601a8b1fda642824cbf7fc3faea9, type: 2}
+    offhandProspects:
+    - {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
+  - mainHandProspects:
+    - {fileID: 11400000, guid: 9b8e828332b12524ea8077dc9f45ad24, type: 2}
+    - {fileID: 11400000, guid: eb90f828c8b2d7349b3e2ab18a132000, type: 2}
+    offhandProspects: []
   modelParts:
   - Undead_Head_1
   - Undead_Face_2
@@ -110,4 +544,3 @@ MonoBehaviour:
   - Undead_Left_Hand
   - Undead_Right_Leg
   - Undead_Left_Leg
-  - Left_Hand_Simple_Axe

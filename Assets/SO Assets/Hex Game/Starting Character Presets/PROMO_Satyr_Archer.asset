@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fc18e607558964b9506f2b2cdb1260, type: 3}
+  m_Name: PROMO_Satyr_Archer
+  m_EditorClassIdentifier: 
+  myName: Knok
+  myClassName: The Slippery
+  race: 6
+  modelSize: 0
+  attributeSheet:
+    might:
+      value: 10
+      stars: 0
+    constitution:
+      value: 75
+      stars: 0
+    dodge:
+      value: 10
+      stars: 0
+    accuracy:
+      value: 100
+      stars: 0
+    resolve:
+      value: 5
+      stars: 0
+    fitness:
+      value: 100
+      stars: 0
+    wits:
+      value: 5
+      stars: 0
+    maxHealth: 0
+    apRecovery: 10
+    apMaximum: 10
+    initiative: 25
+    fatigueRecovery: 25
+    criticalChance: 5
+    criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
+    auraSize: 1
+    vision: 0
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+    deathResistance: 25
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: 6c3343bfc6662a742897620834e447ae, type: 2}
+    - {fileID: 11400000, guid: a01d97efceeec0949b211610819e5cbb, type: 2}
+  serializedPassiveManager:
+    perks: []
+  modelParts:
+  - Satyr_Chest
+  - Satyr_Head_1
+  - Satyr_Face_1
+  - Satyr_Right_Hand
+  - Satyr_Right_Arm
+  - Satyr_Right_Leg
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 11bc6066b51a32244bf3030185789aa5, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 11400000, guid: 8949fc1582e2d5e4ca3a600894a46196, type: 2}
+    trinket: {fileID: 0}
+  talentPairings:
+  - talentSchool: 8
+    level: 1

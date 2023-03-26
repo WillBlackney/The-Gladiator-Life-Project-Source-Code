@@ -27,22 +27,22 @@ MonoBehaviour:
       value: 10
       stars: 0
     accuracy:
-      value: 65
+      value: 100
       stars: 0
     resolve:
       value: 5
       stars: 0
     fitness:
-      value: 60
+      value: 100
       stars: 0
     wits:
       value: 5
       stars: 0
     maxHealth: 0
-    apRecovery: 8
-    apMaximum: 8
-    initiative: 15
-    fatigueRecovery: 15
+    apRecovery: 10
+    apMaximum: 10
+    initiative: 25
+    fatigueRecovery: 25
     criticalChance: 5
     criticalModifier: 50
     physicalDamageBonus: 0
@@ -72,10 +72,10 @@ MonoBehaviour:
   - Human_Right_Arm
   - Human_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
-    offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
-    headArmour: {fileID: 11400000, guid: 06428f42647b1b947ba6bf2a54b42f36, type: 2}
-    chestArmour: {fileID: 11400000, guid: ae8cf90ad093c0e4682a7455d7737a9e, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    offHandItem: {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
+    headArmour: {fileID: 11400000, guid: 591bcc1f007305a4bb755fdca405dd06, type: 2}
+    chestArmour: {fileID: 11400000, guid: b8bd3aad07953c44b9392bebbf9c6720, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 2

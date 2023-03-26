@@ -64,9 +64,12 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI magicResistanceText;
         [SerializeField] private TextMeshProUGUI injuryResistanceText;
         [SerializeField] private TextMeshProUGUI debuffResistanceText;
-        [Space(20)]
 
-        private HexCharacterData characterCurrentlyViewing;
+        public bool PanelIsActive
+        {
+            get { return mainVisualParent.activeSelf; }
+        }
+
         #endregion
 
         // Show, Hide and Build
@@ -74,7 +77,6 @@ namespace HexGameEngine.UI
         
         public void HandleBuildAndShowPanel(HexCharacterData data)
         {
-            characterCurrentlyViewing = data;
             if (!mainVisualParent.activeInHierarchy)
                 for (int i = 0; i < scrollBarResets.Length; i++)
                     scrollBarResets[i].value = 1;
@@ -87,7 +89,6 @@ namespace HexGameEngine.UI
         private void BuildPanelForEnemy(HexCharacterData data)
         {
             // Build all sections
-            characterCurrentlyViewing = data;
             characterNameText.text = data.myName;
             totalArmourText.text = data.baseArmour.ToString();
             xpRewardValueText.text = data.xpReward.ToString();
@@ -99,7 +100,6 @@ namespace HexGameEngine.UI
         }
         public void HidePanel()
         {
-            characterCurrentlyViewing = null;
             mainVisualParent.SetActive(false);
         }
         #endregion

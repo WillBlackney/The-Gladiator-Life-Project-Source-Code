@@ -145,7 +145,7 @@ namespace HexGameEngine.Utilities
         {
             foreach(HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
             {
-                CharacterDataController.Instance.HandleGainXP(character, StartingXpBonus);
+                CharacterDataController.Instance.HandleGainXP(character, StartingXpBonus, false);
             }
         }
         #endregion

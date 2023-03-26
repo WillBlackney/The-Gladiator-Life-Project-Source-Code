@@ -25,10 +25,6 @@ namespace HexGameEngine.UI
         private HexCharacterData currentCharacter;
         #endregion
 
-        // Getters + Accessors
-        #region
-        #endregion
-
         // Input
         #region
         public void OnConfirmButtonClicked()
@@ -55,7 +51,7 @@ namespace HexGameEngine.UI
 
             foreach (AttributeLevelUpWidget w in attributeRows)
             {
-                w.Reset();
+                w.ResetViews();
                 w.BuildViews(character);
             }
 
