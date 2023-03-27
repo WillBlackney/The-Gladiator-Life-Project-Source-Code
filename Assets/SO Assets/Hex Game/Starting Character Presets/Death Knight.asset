@@ -66,8 +66,8 @@ MonoBehaviour:
       stacks: 1
   modelParts: []
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: eb90f828c8b2d7349b3e2ab18a132000, type: 2}
-    offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
+    mainHandItem: {fileID: 11400000, guid: e724601a8b1fda642824cbf7fc3faea9, type: 2}
+    offHandItem: {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
     trinket: {fileID: 0}

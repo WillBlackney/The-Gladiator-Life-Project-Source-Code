@@ -234,6 +234,7 @@ namespace HexGameEngine.MainMenu
             characterBuild.PerkTree = new PerkTreeData();
             baselineAttributes.CopyValuesIntoOther(characterBuild.attributeSheet);
             characterBuild.background = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.Companion);
+            characterBuild.dailyWage = RandomGenerator.NumberBetween(characterBuild.background.dailyWageMin, characterBuild.background.dailyWageMax);
             HandleChangeClassPreset(startingClassTemplate);
 
             // Set to template 1 
@@ -1414,9 +1415,7 @@ namespace HexGameEngine.MainMenu
         }
 
         #endregion
-
       
-
         // Front Screen Logic
         #region
         public void RenderMenuButtons()

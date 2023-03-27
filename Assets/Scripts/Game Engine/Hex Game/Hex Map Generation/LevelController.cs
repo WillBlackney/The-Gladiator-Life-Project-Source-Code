@@ -433,13 +433,13 @@ namespace HexGameEngine.HexTiles
             VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeAnimation(character.hexCharacterView));
 
             // Move to first hex
-            HandleMoveToHex(character, path[0], 10f);
+            HandleMoveToHex(character, path[0], 2.5f);
 
             if (path.Count > 1)
             {
                 for (int i = 0; i < path.Count - 1; i++)
                 {
-                    HandleMoveToHex(character, path[i + 1], 10f);
+                    HandleMoveToHex(character, path[i + 1], 2.5f);
                 }
             }
 

@@ -12,6 +12,7 @@ using HexGameEngine.TurnLogic;
 using HexGameEngine.Combat;
 using HexGameEngine.Libraries;
 using System.Linq;
+using HexGameEngine.HexTiles;
 
 namespace HexGameEngine.UI
 {
@@ -66,6 +67,7 @@ namespace HexGameEngine.UI
         private IEnumerator BuildAndShowModalCoroutine(HexCharacterModel character)
         {
             // Reveal delay
+            LevelNode cachedTile = character.currentTile;
             QueuedShow thisQueuedShow = new QueuedShow();
             queuedShow = thisQueuedShow;
             yield return new WaitForSeconds(0.25f);
@@ -88,7 +90,8 @@ namespace HexGameEngine.UI
 
             // Position and resize
             TransformUtils.RebuildLayouts(layouts);
-            positionParent.position = character.currentTile.WorldPosition;
+            if (character.currentTile != null) cachedTile = character.currentTile;
+            positionParent.position = cachedTile.WorldPosition;
         }
         public void HideModal()
         {

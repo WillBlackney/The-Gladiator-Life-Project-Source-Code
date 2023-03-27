@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad8ad5d7c5edf914b8061f29d31b419f, type: 3}
-  m_Name: Outlaws_DP3_1Skull 5
+  m_Name: Outlaws_DP3_2Skull 5
   m_EditorClassIdentifier: 
-  baseXpReward: 100
+  baseXpReward: 125
   deploymentLimit: 3
   difficulty: 1
   enemyGroups:

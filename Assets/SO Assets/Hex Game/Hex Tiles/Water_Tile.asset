@@ -15,7 +15,7 @@ MonoBehaviour:
   tileSprite: {fileID: 21300000, guid: 6ec7b82ef1ba04f42b9ac43a78e318ec, type: 3}
   tileName: Water
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: Pooled water forming a slippery surface that is almost impossible to

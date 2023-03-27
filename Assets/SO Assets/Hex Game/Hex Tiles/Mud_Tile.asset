@@ -15,7 +15,7 @@ MonoBehaviour:
   tileSprite: {fileID: 21300000, guid: 4a8667685c4f1bb42bcb8c7a325dde39, type: 3}
   tileName: Mud
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Wet, sticky dirt that is difficult to move on. '

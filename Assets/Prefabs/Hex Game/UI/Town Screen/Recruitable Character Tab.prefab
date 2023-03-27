@@ -1413,7 +1413,7 @@ RectTransform:
   m_GameObject: {fileID: 7122946799711554143}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 33, y: 4, z: 1}
+  m_LocalScale: {x: 33, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7122946799722613061}
@@ -1421,7 +1421,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.1, y: -21.99}
+  m_AnchoredPosition: {x: 0.1, y: -26.04}
   m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!331 &7122946799711554137
@@ -1471,7 +1471,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -1611,7 +1611,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -1699,7 +1699,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -1923,7 +1923,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -1994,7 +1994,7 @@ RectTransform:
   m_GameObject: {fileID: 7122946800352002616}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 33, z: 1}
+  m_LocalScale: {x: 10, y: 33, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7122946799722613061}
@@ -2002,7 +2002,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 22.41, y: 3.9}
+  m_AnchoredPosition: {x: 29.53, y: 3.9}
   m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!331 &7122946800352002618
@@ -2052,7 +2052,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -2140,7 +2140,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -2228,7 +2228,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -2355,7 +2355,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -2385,7 +2385,7 @@ RectTransform:
   m_GameObject: {fileID: 7122946800585164062}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 33, z: 1}
+  m_LocalScale: {x: 10, y: 33, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7122946799722613061}
@@ -2393,7 +2393,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -22.77, y: 3.9}
+  m_AnchoredPosition: {x: -30, y: 3.9}
   m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!331 &7122946800585164056
@@ -2443,7 +2443,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -2667,7 +2667,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -2755,7 +2755,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -2843,7 +2843,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -2931,7 +2931,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -3019,7 +3019,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -3534,7 +3534,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -4053,7 +4053,7 @@ SpriteMask:
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 650
+  m_FrontSortingOrder: 660
   m_BackSortingOrder: 631
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
@@ -5067,7 +5067,7 @@ PrefabInstance:
     - target: {fileID: 168837867047057339, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 168837867047057339, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -5177,7 +5177,7 @@ PrefabInstance:
     - target: {fileID: 323235814062670907, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 323235814062670907, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -5517,7 +5517,7 @@ PrefabInstance:
     - target: {fileID: 642234025047690419, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 642234025047690419, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -5687,7 +5687,7 @@ PrefabInstance:
     - target: {fileID: 805577115925338852, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 805577115925338852, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -6547,7 +6547,7 @@ PrefabInstance:
     - target: {fileID: 1908848873047388814, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 1908848873047388814, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -6697,7 +6697,7 @@ PrefabInstance:
     - target: {fileID: 2106600124611250562, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 2106600124611250562, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -7857,7 +7857,7 @@ PrefabInstance:
     - target: {fileID: 3502538702640792906, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 3502538702640792906, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -8047,7 +8047,7 @@ PrefabInstance:
     - target: {fileID: 3654218018532827984, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 3654218018532827984, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -8277,7 +8277,7 @@ PrefabInstance:
     - target: {fileID: 3930533325720950353, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 3930533325720950353, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -8907,7 +8907,7 @@ PrefabInstance:
     - target: {fileID: 4833558050814169661, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 4833558050814169661, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -9477,7 +9477,7 @@ PrefabInstance:
     - target: {fileID: 5638485346064189171, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 5638485346064189171, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -9987,7 +9987,7 @@ PrefabInstance:
     - target: {fileID: 6320874151108941641, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 6320874151108941641, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -11917,7 +11917,7 @@ PrefabInstance:
     - target: {fileID: 8626915847887327030, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 8626915847887327030, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -12007,7 +12007,7 @@ PrefabInstance:
     - target: {fileID: 8755462891465978129, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 8755462891465978129, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -12067,7 +12067,7 @@ PrefabInstance:
     - target: {fileID: 8800731990915059189, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 8800731990915059189, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
@@ -12197,7 +12197,7 @@ PrefabInstance:
     - target: {fileID: 8897162749357284655, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 646
+      value: 648
       objectReference: {fileID: 0}
     - target: {fileID: 8897162749357284655, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9,
         type: 3}

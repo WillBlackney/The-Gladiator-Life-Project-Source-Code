@@ -15,7 +15,7 @@ MonoBehaviour:
   tileSprite: {fileID: 21300000, guid: 33913e129ab88644e891c5170ba069d6, type: 3}
   tileName: Grass
   description:
-  - color: 1
+  - color: 0
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: Thick, shruby grass that is tall enough to hide in.

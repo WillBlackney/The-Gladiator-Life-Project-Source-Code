@@ -15,7 +15,7 @@ MonoBehaviour:
   myName: Outlaw Initiate
   race: 1
   modelSize: 0
-  xpReward: 10
+  xpReward: 15
   ignoreStress: 1
   attributeSheet:
     might:

@@ -15,7 +15,7 @@ MonoBehaviour:
   myName: Outlaw Veteran
   race: 1
   modelSize: 0
-  xpReward: 20
+  xpReward: 25
   ignoreStress: 1
   attributeSheet:
     might:
