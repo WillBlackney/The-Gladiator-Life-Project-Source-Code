@@ -12,27 +12,33 @@ namespace EpicToonFX
         private Light li;
         private float initIntensity;
 
+        public Light Li
+        {
+            get 
+            { 
+                if (li == null) li = GetComponent<Light>();
+                return li;
+            }
+            private set { li = value; }
+        }
+
         // Use this for initialization
         void Start()
         {
-            if (gameObject.GetComponent<Light>())
-            {
-                li = gameObject.GetComponent<Light>();
-                initIntensity = li.intensity;
-            }
-            else
-                print("No light object found on " + gameObject.name);
+            if (Li != null) initIntensity = Li.intensity;            
         }
-
+        
         // Update is called once per frame
         void Update()
         {
-            if (gameObject.GetComponent<Light>())
+            if (Li != null)
             {
-                li.intensity -= initIntensity * (Time.deltaTime / life);
+                Li.intensity -= initIntensity * (Time.deltaTime / life);
+                /*
                 if (killAfterLife && li.intensity <= 0)
                     //Destroy(gameObject);
 					Destroy(gameObject.GetComponent<Light>());
+                */
             }
         }
     }
