@@ -47,6 +47,31 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &-8665765009799569384
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: MAIN_HAND_MELEE_ATTACK_CLEAVE
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 492992444585044621}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 0
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-8503240777802769358
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -528,6 +553,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &-5453605220172625996
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: OFF_HAND_PUSH
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -2433500526654818921}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: cbc657d849b963a4a969ee90cd246042, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &-5294901826998768280
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -609,7 +661,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OFF_HAND_PUSH
+  m_Name: MAIN_HAND_PUSH
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -744,7 +796,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 460cd1b5f20150448acd1d8dcf14f8ae, type: 2}
+  m_Motion: {fileID: 7400000, guid: ca6ce5989d9d39c4db340979a1608a62, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -926,6 +978,28 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1101 &-2433500526654818921
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 1102384177700088874}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.53125
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-2412603651662165173
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1029,6 +1103,53 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1101 &-1953761836534299487
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: OFF_HAND_PUSH
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -5453605220172625996}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 0
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-1802236156306025794
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 1102384177700088874}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.99
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &-1643031823043316651
 AnimatorState:
   serializedVersion: 6
@@ -1287,6 +1408,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: MAIN_HAND_MELEE_ATTACK_CLEAVE
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   - m_Name: OFF_HAND_MELEE_ATTACK_OVERHEAD
     m_Type: 9
     m_DefaultFloat: 0
@@ -1294,6 +1421,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: OFF_HAND_MELEE_ATTACK_THRUST
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: OFF_HAND_MELEE_ATTACK_CLEAVE
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -1330,12 +1463,6 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: OFF_HAND_PUSH
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: MAIN_HAND_MELEE_ATTACK_CLEAVE
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -1384,6 +1511,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: RELOAD_CROSSBOW
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: MAIN_HAND_PUSH
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -1449,6 +1582,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &492992444585044621
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MAIN_HAND_MELEE_ATTACK_CLEAVE
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -1802236156306025794}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 4eff26a7b6479e24881dbcda9a5aad65, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &624648065725331627
 AnimatorState:
   serializedVersion: 6
@@ -1470,7 +1630,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b65a896ac2f304f4e9922d9f9f1b6ab6, type: 2}
+  m_Motion: {fileID: 7400000, guid: f97b5d6a159fa8047bd8f6357424139e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1497,7 +1657,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f97b5d6a159fa8047bd8f6357424139e, type: 2}
+  m_Motion: {fileID: 7400000, guid: b65a896ac2f304f4e9922d9f9f1b6ab6, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2036,10 +2196,10 @@ AnimatorStateMachine:
     m_Position: {x: 800, y: -540, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 624648065725331627}
-    m_Position: {x: -300, y: -550, z: 0}
+    m_Position: {x: -330, y: -590, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2168768563114342565}
-    m_Position: {x: -420, y: -490, z: 0}
+    m_Position: {x: -330, y: -540, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1058221449571588639}
     m_Position: {x: -440, y: -410, z: 0}
@@ -2066,7 +2226,7 @@ AnimatorStateMachine:
     m_Position: {x: -470, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7254174807744134459}
-    m_Position: {x: -180, y: -610, z: 0}
+    m_Position: {x: -440, y: -460, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6187687933931117445}
     m_Position: {x: 870, y: -350, z: 0}
@@ -2091,6 +2251,12 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -8352009217261234441}
     m_Position: {x: 800, y: -480, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -5453605220172625996}
+    m_Position: {x: -470, y: 120, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 492992444585044621}
+    m_Position: {x: -330, y: -640, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -3244648030320528217}
@@ -2126,6 +2292,8 @@ AnimatorStateMachine:
   - {fileID: 5439558003270998141}
   - {fileID: -2825638038647097602}
   - {fileID: 1114153266097287351}
+  - {fileID: -1953761836534299487}
+  - {fileID: -8665765009799569384}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
@@ -2168,7 +2336,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: OFF_HAND_PUSH
+    m_ConditionEvent: MAIN_HAND_PUSH
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5110237090321935132}
@@ -2329,7 +2497,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ca6ce5989d9d39c4db340979a1608a62, type: 2}
+  m_Motion: {fileID: 7400000, guid: 460cd1b5f20150448acd1d8dcf14f8ae, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2470,7 +2638,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: MAIN_HAND_MELEE_ATTACK_CLEAVE
+    m_ConditionEvent: OFF_HAND_MELEE_ATTACK_CLEAVE
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7254174807744134459}
@@ -2836,7 +3004,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAIN_HAND_MELEE_ATTACK_CLEAVE
+  m_Name: OFF_HAND_MELEE_ATTACK_CLEAVE
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
