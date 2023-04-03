@@ -32,15 +32,15 @@ MonoBehaviour:
     resolve:
       value: 5
       stars: 0
-    fatigue:
-      value: 60
+    fitness:
+      value: 100
       stars: 0
     wits:
       value: 5
       stars: 0
     maxHealth: 0
     apRecovery: 20
-    maxAp: 20
+    apMaximum: 8
     initiative: 100
     fatigueRecovery: 8
     criticalChance: 100
@@ -60,15 +60,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a8709026bde6ab046a0b8aaf6d8b9785, type: 2}
   serializedPassiveManager:
     perks:
-    - perkTag: 200
-      stacks: 1
+    - perkTag: 80
+      stacks: 2
   modelParts:
   - Ghoul_Chest
   - Undead_Face_6
   - Undead_Head_4
   - Ghoul_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 623ec2e1eab053346b93e30e2d91c862, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: 335c81cb722666345aa6c308b1d780f5, type: 2}
     chestArmour: {fileID: 0}

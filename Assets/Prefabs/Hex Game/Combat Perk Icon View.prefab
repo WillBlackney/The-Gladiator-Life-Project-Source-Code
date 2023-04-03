@@ -31,7 +31,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5216248128835084879}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.525, y: 0.525}
   m_AnchorMax: {x: 1.275, y: 1.275}
@@ -243,7 +243,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5216248128835084879}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -271,14 +271,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.003921569}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.007843138}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c0ba86de494a17a46a15615ed92b7a30, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -565,8 +565,8 @@ RectTransform:
   - {fileID: 1958136578419381841}
   - {fileID: 5216248127962114888}
   - {fileID: 5216248128702112466}
-  - {fileID: 3817351995523422858}
   - {fileID: 2454263198645430302}
+  - {fileID: 3817351995523422858}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -604,6 +604,7 @@ MonoBehaviour:
   inputType: 0
   killPreviousTweensOnNewSequenceStart: 1
   onClickEvents: []
+  onRightClickEvents: []
   mouseEnterEvents:
   - widgetEventType: 9
     scalingSequence: 0
@@ -636,6 +637,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   - widgetEventType: 9
     scalingSequence: 0
     enableStartDelay: 0
@@ -667,6 +669,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   - widgetEventType: 4
     scalingSequence: 0
     enableStartDelay: 0
@@ -698,6 +701,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   - widgetEventType: 3
     scalingSequence: 0
     enableStartDelay: 0
@@ -741,6 +745,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   mouseExitEvents:
   - widgetEventType: 9
     scalingSequence: 0
@@ -773,6 +778,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   - widgetEventType: 9
     scalingSequence: 0
     enableStartDelay: 0
@@ -804,6 +810,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   - widgetEventType: 3
     scalingSequence: 0
     enableStartDelay: 0
@@ -847,6 +854,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   onDisableEvents:
   - widgetEventType: 9
     scalingSequence: 0
@@ -879,6 +887,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   - widgetEventType: 9
     scalingSequence: 0
     enableStartDelay: 0
@@ -910,6 +919,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
   - widgetEventType: 3
     scalingSequence: 0
     enableStartDelay: 0
@@ -953,6 +963,7 @@ MonoBehaviour:
     wiggleInfinetly: 0
     wiggleLoops: 0
     rotationDegrees: 0
+    cursorType: 0
 --- !u!1 &7642336328683992279
 GameObject:
   m_ObjectHideFlags: 0

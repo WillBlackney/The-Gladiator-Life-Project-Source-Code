@@ -13,7 +13,8 @@ namespace HexGameEngine.Perks
     public class PerkLayoutPanel : MonoBehaviour
     {
         private List<PerkIconView> perkIcons = new List<PerkIconView>();
-
+        [SerializeField] Transform stressBarActivePos;
+        [SerializeField] Transform stressBarInactivePos;
         public List<PerkIconView> PerkIcons
         {
             get { return perkIcons; }
@@ -91,5 +92,17 @@ namespace HexGameEngine.Perks
             }
         }
         #endregion
+
+        public void SetPosition(bool activeStressBar)
+        {
+            if (activeStressBar)
+            {
+                gameObject.transform.position = stressBarActivePos.position;
+            }
+            else
+            {
+                gameObject.transform.position = stressBarInactivePos.position;
+            }
+        }
     }
 }

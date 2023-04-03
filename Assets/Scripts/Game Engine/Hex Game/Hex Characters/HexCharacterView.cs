@@ -41,6 +41,7 @@ namespace HexGameEngine.Characters
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Stress Bar World References")]
+        public GameObject stressBarVisualParent;
         public Slider stressBarWorld;
         public TextMeshProUGUI stressTextWorld;
         public Image stressBarShatteredGlowWorld;
@@ -103,6 +104,7 @@ namespace HexGameEngine.Characters
         {
             armourTextWorld.gameObject.SetActive(true);
             healthTextWorld.gameObject.SetActive(true);
+            stressTextWorld.gameObject.SetActive(true);
             mouseOverWorldUI = true;
             if(UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
                 HexCharacterController.Instance.FadeInCharacterWorldCanvas(this, null, 0.25f);
@@ -111,6 +113,7 @@ namespace HexGameEngine.Characters
         {
             armourTextWorld.gameObject.SetActive(false);
             healthTextWorld.gameObject.SetActive(false);
+            stressTextWorld.gameObject.SetActive(false);
             mouseOverWorldUI = false;
             StartCoroutine(OnAnyWorldUiMouseExitCoroutine());
 
@@ -121,6 +124,7 @@ namespace HexGameEngine.Characters
             {
                 armourTextWorld.gameObject.SetActive(false);
                 healthTextWorld.gameObject.SetActive(false);
+                stressTextWorld.gameObject.SetActive(false);
             }
 
             yield return new WaitForSeconds(0.25f);
@@ -129,6 +133,7 @@ namespace HexGameEngine.Characters
             {
                 armourTextWorld.gameObject.SetActive(false);
                 healthTextWorld.gameObject.SetActive(false);
+                stressTextWorld.gameObject.SetActive(false);
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(this, null, 0.25f, 0.25f);
             }        
                            

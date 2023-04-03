@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 19273
+  controlID: 98554
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 19274
+  controlID: 98555
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 19275
+  controlID: 98556
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -226,9 +226,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: c4260000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 24fbffff
+      m_ExpandedIDs: b433c6ffc033c6ffc633c6ffae65c7ffba65c7ffc065c7ff082bc8ff122bc8ff1e2bc8ff242bc8ff24fbffff88750000ba7f000000920000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -560,9 +560,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 8.370001, y: 0.99999934, z: -8.23045}
+    m_Target: {x: 3.261417, y: -0.065800466, z: -0.0031251712}
     speed: 2
-    m_Value: {x: 8.370001, y: 0.99999934, z: -8.23045}
+    m_Value: {x: 3.261417, y: -0.065800466, z: -0.0031251712}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -613,9 +613,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 0.000018309753
+    m_Target: 1.178541
     speed: 2
-    m_Value: 0.000018309753
+    m_Value: 1.178541
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -698,7 +698,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
   m_SearchFilter:
-    m_NameFilter: univers
+    m_NameFilter: hex chara
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -710,22 +710,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Animations/Universal Character Model/Prefabs
+    - Assets/Prefabs/New Prefabs/Passives
     m_Globs: []
-    m_OriginalText: univers
+    m_OriginalText: hex chara
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Animations/Universal Character Model/Prefabs
-  m_LastFoldersGridSize: 16
+  - Assets/Prefabs/New Prefabs/Passives
+  m_LastFoldersGridSize: 88
   m_LastProjectPath: C:\Users\WB\Documents\GitHub\Arena-RPG-Roguelike
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 239}
-    m_SelectedIDs: 2aec0200
-    m_LastClickedID: 191530
-    m_ExpandedIDs: 00000000982c0200c02c02001c2d020000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 463}
+    m_SelectedIDs: 9a112100
+    m_LastClickedID: 2167194
+    m_ExpandedIDs: 00000000982c0200d02c02009c11210000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -778,10 +778,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: c4260000
-    m_LastClickedInstanceID: 9924
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c623000084fc000094fd010002ff01008cfc000018d20100eefe0000b0000200c6fe0000c6fc01005422010050090100c65b030064d000000000000078db0100d4100100280d0100ca0e0100045f3900a0d43900802f02001200020010000200f2190100
+    m_ExpandedInstanceIDs: c623000084fc000094fd010002ff01008cfc000018d20100eefe0000b0000200c6fe0000c6fc01005422010050090100c65b030064d000000000000078db0100d4100100280d0100ca0e0100045f3900a0d43900802f02001200020010000200f2190100b8140100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1034,4 +1034,4 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 142638
+  m_LastSelectedObjectID: 3210948

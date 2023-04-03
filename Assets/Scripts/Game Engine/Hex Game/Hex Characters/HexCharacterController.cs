@@ -595,13 +595,28 @@ namespace HexGameEngine.Characters
         {
             Debug.Log("CharacterEntityController.ModifyStress() called for " + character.myName);
 
+            HexCharacterView view = character.hexCharacterView;           
+
+            // Check + Update views first
+            if (character.characterData.ignoreStress)
+            {
+                if (view != null)
+                {
+                    view.stressBarVisualParent.SetActive(false);
+                    view.perkIconsPanel.SetPosition(false);
+                }
+                return;
+            }
+            else if (!character.characterData.ignoreStress && view != null)
+            {
+                view.stressBarVisualParent.SetActive(true);
+                view.perkIconsPanel.SetPosition(true);
+            }
+
             if (character.currentStress >= 100 && stressGainedOrLost > 0) return;
             // Zealots can never reach shattered stress state
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Zealot) &&
-                character.currentStress >= 99 && stressGainedOrLost > 0) return;   
-              
-            // Enemy characters do not suffer from stress
-            if (character.characterData.ignoreStress) return;
+                character.currentStress >= 99 && stressGainedOrLost > 0) return;
 
             // Check courage token
             if (stressGainedOrLost > 0 &&
@@ -611,7 +626,6 @@ namespace HexGameEngine.Characters
                 return;
             }
 
-            HexCharacterView view = character.hexCharacterView;
             int originalStress = character.currentStress;
             int finalStress = character.currentStress;
             StressState previousStressState = CombatController.Instance.GetStressStateFromStressAmount(character.currentStress);

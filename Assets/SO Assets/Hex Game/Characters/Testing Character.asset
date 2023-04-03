@@ -69,7 +69,7 @@ MonoBehaviour:
   - Elf_Head_1
   - Elf_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: b0a743e98585a814ea612ed22c49e1c8, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 623ec2e1eab053346b93e30e2d91c862, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: 314ad7b94ea3d4c4090f132d38030f2d, type: 2}
     chestArmour: {fileID: 11400000, guid: 07f3a9915c41cdd4a8424456811da0ed, type: 2}
