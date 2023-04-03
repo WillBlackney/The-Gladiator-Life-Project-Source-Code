@@ -276,6 +276,7 @@ namespace HexGameEngine.Combat
                 damageModPercentageAdditive -= StatCalculator.GetTotalMagicResistance(target) * 0.01f;
 
             // Apply additive damage modifier to base damage (+min and max limits for ability description panels)
+            if (damageModPercentageAdditive < 0f) damageModPercentageAdditive = 0f;
             baseDamageFinal = (int)(baseDamageFinal * damageModPercentageAdditive);
             lowerDamageFinal = (int)(lowerDamageFinal * damageModPercentageAdditive);
             upperDamageFinal = (int)(upperDamageFinal * damageModPercentageAdditive);           
@@ -294,12 +295,13 @@ namespace HexGameEngine.Combat
             }
 
             // For testing: remove later
+            /*
             if (effect != null)
             {
                 baseDamageFinal = (int)(baseDamageFinal * 1.5f);
                 lowerDamageFinal = (int)(lowerDamageFinal * 1.5f);
                 upperDamageFinal = (int)(upperDamageFinal * 1.5f);
-            }
+            } */
 
             // Prevent damage gong negative
             if (baseDamageFinal < 0) baseDamageFinal = 0;
@@ -308,9 +310,7 @@ namespace HexGameEngine.Combat
 
             resultReturned.totalDamage = baseDamageFinal;
             resultReturned.damageLowerLimit = lowerDamageFinal;
-            resultReturned.damageUpperLimit = upperDamageFinal;
-
-           
+            resultReturned.damageUpperLimit = upperDamageFinal;           
 
             Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Final damage = " + resultReturned.totalDamage.ToString());
 
@@ -1036,7 +1036,9 @@ namespace HexGameEngine.Combat
             else if (ignoreArmour)
             {
                 damageResult.totalHealthLost = totalDamage;
+                totalHealthLost = totalDamage;
                 damageResult.totalArmourLost = 0;
+                totalArmourLost = 0;
             }
 
             // Non abiity damage that damages armour

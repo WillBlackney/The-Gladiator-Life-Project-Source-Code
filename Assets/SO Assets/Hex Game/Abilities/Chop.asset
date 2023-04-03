@@ -109,8 +109,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 18
-    maxBaseDamage: 22
+    minBaseDamage: 28
+    maxBaseDamage: 32
     guaranteedHit: 0
     bonusCritDamage: 50
     ignoresGuard: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
       bonusCriticalChance: 0
       extraCriticalDamage: 0.5
     characterSummoned: {fileID: 0}
-    characterSummonedName: ENTER NAME!!!
+    characterSummonedName: 
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0

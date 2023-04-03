@@ -124,8 +124,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 2
-    minBaseDamage: 23
-    maxBaseDamage: 27
+    minBaseDamage: 36
+    maxBaseDamage: 40
     guaranteedHit: 1
     bonusCritDamage: 0
     ignoresGuard: 0
