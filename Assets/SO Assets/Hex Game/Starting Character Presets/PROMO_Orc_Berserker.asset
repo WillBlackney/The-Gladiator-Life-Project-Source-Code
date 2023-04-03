@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PROMO_Orc_Berserker
   m_EditorClassIdentifier: 
   myName: Grum
-  myClassName: The Savage
+  myClassName: Savage
   race: 1
   modelSize: 0
   attributeSheet:

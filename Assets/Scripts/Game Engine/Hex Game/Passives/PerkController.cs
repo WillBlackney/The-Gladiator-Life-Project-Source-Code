@@ -779,7 +779,7 @@ namespace HexGameEngine.Perks
 
         // Injury Logic
         #region
-        private List<PerkIconData> GetValidInjuries(HexCharacterModel character, InjurySeverity severity, InjuryType injuryType)
+        private List<PerkIconData> GetValidInjuries(PerkManagerModel character, InjurySeverity severity, InjuryType injuryType)
         {
             List<PerkIconData> matchingInjuries = new List<PerkIconData>();
 
@@ -788,7 +788,7 @@ namespace HexGameEngine.Perks
                 if (d.isInjury &&
                     d.severity == severity &&
                     d.injuryType == injuryType &&
-                    !DoesCharacterHavePerk(character.pManager, d.perkTag))
+                    !DoesCharacterHavePerk(character, d.perkTag))
                 {
                     matchingInjuries.Add(d);
                 }
@@ -797,7 +797,7 @@ namespace HexGameEngine.Perks
             return matchingInjuries;
 
         }
-        public PerkIconData GetRandomValidInjury(HexCharacterModel character, InjurySeverity severity, InjuryType injuryType)
+        public PerkIconData GetRandomValidInjury(PerkManagerModel character, InjurySeverity severity, InjuryType injuryType)
         {
             PerkIconData iRet = null;
             List<PerkIconData> injuries = GetValidInjuries(character, severity, injuryType);

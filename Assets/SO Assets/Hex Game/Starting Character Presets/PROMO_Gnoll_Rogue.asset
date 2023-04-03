@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PROMO_Gnoll_Rogue
   m_EditorClassIdentifier: 
   myName: Nibbles
-  myClassName: The Lil' Monster
+  myClassName: Lil' Monster
   race: 7
   modelSize: 0
   attributeSheet:

@@ -536,7 +536,7 @@ namespace HexGameEngine.Combat
                 if (severity != InjurySeverity.None && injuryType != InjuryType.None)
                 {
                     // Get a random viable injury
-                    PerkIconData injuryGained = PerkController.Instance.GetRandomValidInjury(character, severity, injuryType);
+                    PerkIconData injuryGained = PerkController.Instance.GetRandomValidInjury(character.pManager, severity, injuryType);
 
                     // Apply the injury
                     if (injuryGained != null)

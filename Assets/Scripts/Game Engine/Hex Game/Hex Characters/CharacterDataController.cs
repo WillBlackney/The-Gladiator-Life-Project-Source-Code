@@ -424,7 +424,6 @@ namespace HexGameEngine.Characters
         public void AddCharacterToRoster(HexCharacterData character)
         {
             if(AllPlayerCharacters.Contains(character) == false) AllPlayerCharacters.Add(character);
-            
         }
         public void ClearCharacterRoster()
         {
