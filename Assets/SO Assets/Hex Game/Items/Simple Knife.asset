@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Simple Knife
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 3a8580f8e6c056942a0b4e60616620fd, type: 3}
+  itemSprite: {fileID: 21300000, guid: 499e257210912a04fb4fa7b9f0642ab6, type: 3}
   itemName: Simple Knife
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3

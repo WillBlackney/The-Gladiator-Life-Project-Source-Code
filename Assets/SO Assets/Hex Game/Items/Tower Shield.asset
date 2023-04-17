@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Tower Shield
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 65eb9b0975e71bc499e4ca2dccc4a1a7, type: 3}
+  itemSprite: {fileID: 21300000, guid: 125d5483daa16de48b2282f4242e5440, type: 3}
   itemName: Tower Shield
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 1
   injuryTypesCaused: 02000000
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 0.65
   armourPenetration: 0.25

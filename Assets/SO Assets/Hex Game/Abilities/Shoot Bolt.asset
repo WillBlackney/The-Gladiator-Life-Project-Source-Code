@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Shoot Bolt
   includeInGame: 1
   baseAbilityDescription: 'Deal 100% weapon damage. '
-  abilitySprite: {fileID: 21300000, guid: f76844ff2fc718e4394c2b74ecd45537, type: 3}
+  abilitySprite: {fileID: 21300000, guid: d2cd749dbc575ba4d917e426389df1ed, type: 3}
   energyCost: 3
   fatigueCost: 5
   baseCooldown: 0

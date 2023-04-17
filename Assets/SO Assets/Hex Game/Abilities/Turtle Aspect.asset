@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: 'Gain 1 Guard. While active, all damage taken is reduced
     by 15%, but you cannot move or dodge attacks. '
-  abilitySprite: {fileID: 21300000, guid: be2008cd09bd2d3458d2cf0511d72a34, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 9c1e5d9ffd326ca45a0106cff9ec3518, type: 3}
   energyCost: 6
   fatigueCost: 30
   baseCooldown: 1

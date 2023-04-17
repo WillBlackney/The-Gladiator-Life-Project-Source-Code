@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Simple Spear
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 2a69444b204abcd4180b8d68198d23c7, type: 3}
+  itemSprite: {fileID: 21300000, guid: b8189f7e63edfe94e835870b870b4b89, type: 3}
   itemName: Simple Spear
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3

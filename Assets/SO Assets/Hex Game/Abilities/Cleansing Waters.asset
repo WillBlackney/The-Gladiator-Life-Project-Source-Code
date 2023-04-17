@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Cleansing Waters
   includeInGame: 1
   baseAbilityDescription: Give an ally 1 Block and remove Burning, Bleeding and Poisoned.
-  abilitySprite: {fileID: 21300000, guid: 4131713cd1d11d54aa11c32344e1c8d8, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 5b7e6444540282f4d99f1602e005891e, type: 3}
   energyCost: 3
   fatigueCost: 15
   baseCooldown: 1

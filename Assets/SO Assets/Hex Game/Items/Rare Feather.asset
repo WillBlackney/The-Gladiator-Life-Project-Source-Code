@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Rare Feather
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 1e3b60be9dac5c147b633e80a5685780, type: 3}
+  itemSprite: {fileID: 21300000, guid: e311b2f99acf14749900d44ea2bdf5a8, type: 3}
   itemName: Rare Feather
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

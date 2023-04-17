@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Action Point Recovery
   m_EditorClassIdentifier: 
   myPreset: 13
-  mainSprite: {fileID: 21300000, guid: 5b789f3e7b59e4e4a85f5dc3ddc07c4d, type: 3}
+  mainSprite: {fileID: 21300000, guid: d7a26d9544920b94fa3f0dfe9bf01892, type: 3}
   frameSprite: 1
   headerName: Action Point Recovery
   italicDescription: 1

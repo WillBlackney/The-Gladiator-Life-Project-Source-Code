@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Deal 125% Weapon damage. If Stealthed, Backstriking, or
     a Critical Strike, apply Stunned.
-  abilitySprite: {fileID: 21300000, guid: 3f035379405e8a745883020a212bda26, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 839859de67d43a649ae5bebb1e5c6714, type: 3}
   energyCost: 4
   fatigueCost: 20
   baseCooldown: 2

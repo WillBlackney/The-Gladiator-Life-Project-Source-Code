@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Unknown
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: c359661e98a82ba4db1393090f4fdeac, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: d68472edf4c48c14691dd023b309a901, type: 3}
   backgroundType: 11
   description: This character's background is totally and utterly shrouded in mystery.
     They simply refuse to talk about. Did they do something horrible and flee? Are

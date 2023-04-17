@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Enrage
   includeInGame: 1
   baseAbilityDescription: Gain 2 Wrath, but gain 2 Vulnerable.
-  abilitySprite: {fileID: 21300000, guid: 3f35b0e5b580e174f9321085e285cfcd, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 62eca44edea54cc468767da9503183f3, type: 3}
   energyCost: 3
   fatigueCost: 10
   baseCooldown: 2

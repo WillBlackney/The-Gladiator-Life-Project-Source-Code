@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Kite Shield
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: a5242c2e2458d6446ae895db4d0217b1, type: 3}
+  itemSprite: {fileID: 21300000, guid: 5bbe597376456e94789b93658f6954e9, type: 3}
   itemName: Kite Shield
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 1
   injuryTypesCaused: 02000000
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 0.65
   armourPenetration: 0.25

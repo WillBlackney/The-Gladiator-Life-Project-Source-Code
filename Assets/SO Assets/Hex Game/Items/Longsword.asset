@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Longsword
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: e3864038a58e7ac4186f43c88dfc5d5c, type: 3}
+  itemSprite: {fileID: 21300000, guid: ccd92b388efd8cf4288d765aa5f69fd1, type: 3}
   itemName: Longsword
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 1
   allowedSlot: 0
   injuryTypesCaused: 0100000002000000
+  weaponAttackAnimationType: 0
   healthDamage: 1.1
   armourDamage: 0.85
   armourPenetration: 0.25

@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Sprint
   includeInGame: 1
   baseAbilityDescription: Move up to 2 tiles in a straight line.
-  abilitySprite: {fileID: 21300000, guid: b60829c8e7f39594f9e6f1660d6c0f34, type: 3}
+  abilitySprite: {fileID: 21300000, guid: a3a819e545abd7a45ad403d14071b644, type: 3}
   energyCost: 0
   fatigueCost: 25
   baseCooldown: 1

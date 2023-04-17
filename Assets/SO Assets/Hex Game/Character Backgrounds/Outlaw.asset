@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Outlaw
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: a68a816db347d91448de636e7dd57150, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: ffb8a40af02876d4b8921da65555d952, type: 3}
   backgroundType: 8
   description: Banished from society upon pain of death, a life or ambushing travelers
     and militias in the wilds has given them some decent martial experience, certainly

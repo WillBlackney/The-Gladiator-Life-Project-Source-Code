@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Gain 1 Wrath. While active, your Melee Attack abilities
     have +15 Critical chance and apply 1 Bleeding.
-  abilitySprite: {fileID: 21300000, guid: 53f5695e6b485b94983e16c3d9880f79, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 2e8b98c452c1e4d4da5703c654f2aa96, type: 3}
   energyCost: 6
   fatigueCost: 30
   baseCooldown: 1

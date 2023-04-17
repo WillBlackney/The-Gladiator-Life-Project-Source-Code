@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Tactical Retreat
   includeInGame: 1
   baseAbilityDescription: Teleport to a tile within 1, then gain 1 Focus
-  abilitySprite: {fileID: 21300000, guid: 1d4a4c76798682b4e9a11b9f48db43f3, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 4b17d062f1aa62d48971d866476a93cd, type: 3}
   energyCost: 4
   fatigueCost: 20
   baseCooldown: 2

@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using HexGameEngine.Utilities;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 namespace HexGameEngine.UI
 {
@@ -11,6 +12,7 @@ namespace HexGameEngine.UI
     public class ModalBuildDataSO : ScriptableObject
     {        
         public ModalBuildPreset myPreset;
+        [PreviewField(75)]
         public Sprite mainSprite;
         public bool frameSprite = true;
         public string headerName;

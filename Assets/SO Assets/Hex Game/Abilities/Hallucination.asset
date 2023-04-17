@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Hallucination
   includeInGame: 1
   baseAbilityDescription: Deal 50% Magic damage and apply Stunned to an enemy.
-  abilitySprite: {fileID: 21300000, guid: fbcd6eebda6e0524baf7238501cbb61a, type: 3}
+  abilitySprite: {fileID: 21300000, guid: f390b1948b8668d43a29e467697dd9f6, type: 3}
   energyCost: 4
   fatigueCost: 25
   baseCooldown: 3

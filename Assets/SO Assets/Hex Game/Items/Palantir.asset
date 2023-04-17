@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Palantir
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 653b95c93a6ee8041bb3a35367beef50, type: 3}
+  itemSprite: {fileID: 21300000, guid: af7baaec3d9c3fb49b7fb9c2605579ee, type: 3}
   itemName: Palantir
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

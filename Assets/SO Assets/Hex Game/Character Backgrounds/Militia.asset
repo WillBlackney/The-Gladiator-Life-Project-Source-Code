@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Militia
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: f72b0309edeccd944bffdc943ccdf2db, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: 867a1fcaa3a446045a0ab28b235c188a, type: 3}
   backgroundType: 18
   description: Local levied folk with basic training in weapons and formation. They
     fight well against wolves and wild animals, but tend to soil themselves when

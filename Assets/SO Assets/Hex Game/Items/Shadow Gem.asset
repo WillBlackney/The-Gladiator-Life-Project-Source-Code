@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Shadow Gem
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 65e8b64fe7a1d8d45ad7a59118d5273b, type: 3}
+  itemSprite: {fileID: 21300000, guid: c4f116b5b67598b4ab2abc175995be1c, type: 3}
   itemName: Shadow Gem
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

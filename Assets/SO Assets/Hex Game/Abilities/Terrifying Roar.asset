@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Terrifying Roar
   includeInGame: 1
   baseAbilityDescription: Apply 2-3 Stress to all enemies within your Aura.
-  abilitySprite: {fileID: 21300000, guid: 46aa60f2e8fa48c4bb842d6628dee45e, type: 3}
+  abilitySprite: {fileID: 21300000, guid: a1e6e39b271d2ad47b0f080c2cd18f61, type: 3}
   energyCost: 0
   fatigueCost: 8
   baseCooldown: 2
@@ -96,6 +96,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0

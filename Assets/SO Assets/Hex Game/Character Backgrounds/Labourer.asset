@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Labourer
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: 1df2cdf4fbe2fe0499b79254c75a27ad, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: 4593a9d8bb2b67d4fa997ff73703b5c3, type: 3}
   backgroundType: 10
   description: 'No job is too big or small for laborers, as long as it pays well.
     A lifetime spent doing menial ad hoc construction tasks means they are adequately

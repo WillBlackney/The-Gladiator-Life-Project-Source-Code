@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Deal 125% Weapon damage and apply 1 Vulnerable. On a Critical
     Strike, apply 2 Vulnerable.
-  abilitySprite: {fileID: 21300000, guid: 588b3237e388f3e489098b5d6ad6a5ab, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 53d2e051740509542b7faa6df4b03f52, type: 3}
   energyCost: 4
   fatigueCost: 15
   baseCooldown: 2

@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Deal 100% Weapon damage to all enemies within 1 tile. -10
     Accuracy
-  abilitySprite: {fileID: 21300000, guid: 7d92503d857220443a3e7703b87acc38, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 99beaeab45b6a2043a7450448ca79d0e, type: 3}
   energyCost: 6
   fatigueCost: 30
   baseCooldown: 0

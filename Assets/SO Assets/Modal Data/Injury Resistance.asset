@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Injury Resistance
   m_EditorClassIdentifier: 
   myPreset: 19
-  mainSprite: {fileID: 21300000, guid: b8cc3ee699d6879408f7a38764df073c, type: 3}
+  mainSprite: {fileID: 21300000, guid: 6103b050a61ccf948a8048a2fbece5c2, type: 3}
   frameSprite: 1
   headerName: Injury Resistance
   italicDescription: 1

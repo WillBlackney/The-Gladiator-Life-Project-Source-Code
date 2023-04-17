@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Kick Dirt
   includeInGame: 1
   baseAbilityDescription: Apply 2 Blinded to an enemy.
-  abilitySprite: {fileID: 21300000, guid: 44958d7cc1c9422488a488f1ebda25cf, type: 3}
+  abilitySprite: {fileID: 21300000, guid: e92533acd1945234b92e59ffb7f347ae, type: 3}
   energyCost: 3
   fatigueCost: 10
   baseCooldown: 2

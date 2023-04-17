@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Inquisitor
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: c359661e98a82ba4db1393090f4fdeac, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: c75a6b87a3b6b75428adbb16e68e870b, type: 3}
   backgroundType: 17
   description: "Professional hunters of witches, necromancers and all things foul.
     Not particularly talkative or good drinking buddies\u2026"

@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Riposte Attack
   includeInGame: 1
   baseAbilityDescription: Deal 100% weapon damage.
-  abilitySprite: {fileID: 21300000, guid: 32e56c9c60dff28419898da655528c3b, type: 3}
+  abilitySprite: {fileID: 21300000, guid: d34e8083227c3dc458461c2d377b1176, type: 3}
   energyCost: 0
   fatigueCost: 0
   baseCooldown: 0

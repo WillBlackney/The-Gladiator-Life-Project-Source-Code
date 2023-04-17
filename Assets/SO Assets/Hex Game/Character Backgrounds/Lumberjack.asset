@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Lumberjack
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: f72b0309edeccd944bffdc943ccdf2db, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: fe56fff85b3b2494683c48bccc00e961, type: 3}
   backgroundType: 3
   description: 'Lumberjacks are ok: they sleep all night and work all day. A lifetime
     of swinging an axe makes them strong, fit and great at murdering people with

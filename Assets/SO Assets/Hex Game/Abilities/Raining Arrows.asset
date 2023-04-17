@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: 'Deal 100% Physical damage to all characters within 1 tile
     of target location. '
-  abilitySprite: {fileID: 21300000, guid: 1fc0f3de37d57bc45af84b4d417f6236, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 05ca0dd50ff15454295e98f20cdc90c2, type: 3}
   energyCost: 5
   fatigueCost: 30
   baseCooldown: 2

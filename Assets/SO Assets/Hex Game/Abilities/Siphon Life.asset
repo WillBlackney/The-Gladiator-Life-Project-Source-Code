@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Siphon Life
   includeInGame: 1
   baseAbilityDescription: Apply 2 Weakened to target. If not resisted, gain 2 Guard.
-  abilitySprite: {fileID: 21300000, guid: e730c287369c38a45874e1bacce979ac, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 2b0614ad489d9504e90c7245b19c2b4c, type: 3}
   energyCost: 4
   fatigueCost: 25
   baseCooldown: 3

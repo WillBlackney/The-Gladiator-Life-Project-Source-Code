@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Gladiator Chest Guard
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 957519235ca8e494ab7133bff1a02203, type: 3}
+  itemSprite: {fileID: 21300000, guid: dca60ee260d0ee84095351ff40ce898d, type: 3}
   itemName: Gladiator Chest Guard
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 2
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

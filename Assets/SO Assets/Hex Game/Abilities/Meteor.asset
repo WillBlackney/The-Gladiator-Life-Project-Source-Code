@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: 'Deal 100% Magic damage and apply 1 Burning to all characters
     within 1 tile of target location. '
-  abilitySprite: {fileID: 21300000, guid: c5a0d9f988aeb08479b0bc34a711628d, type: 3}
+  abilitySprite: {fileID: 21300000, guid: b666f68f6fe94cc469268e6402a33e26, type: 3}
   energyCost: 6
   fatigueCost: 35
   baseCooldown: 2

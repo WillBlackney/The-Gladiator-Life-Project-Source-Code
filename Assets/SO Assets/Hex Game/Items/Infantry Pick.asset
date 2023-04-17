@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Infantry Pick
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 1a6c732e216b44c43a2c03e0ccc1f297, type: 3}
+  itemSprite: {fileID: 21300000, guid: 3ecec5d15e6e5af47a5928d7ab91524e, type: 3}
   itemName: Infantry Pick
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 02000000
+  weaponAttackAnimationType: 0
   healthDamage: 0.8
   armourDamage: 1.4
   armourPenetration: 0.5

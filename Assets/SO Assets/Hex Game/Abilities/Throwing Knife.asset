@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Deal 125% weapon damage to an enemy and apply 1 Bleeding.
     No Accuracy penalty when used in melee.
-  abilitySprite: {fileID: 21300000, guid: c0dc47eec4b755941a3b7abef52cd326, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 45f11623c3ca80145a6c6a97f782f469, type: 3}
   energyCost: 4
   fatigueCost: 15
   baseCooldown: 1

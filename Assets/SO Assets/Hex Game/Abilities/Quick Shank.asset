@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Quick Shank
   includeInGame: 1
   baseAbilityDescription: Deal 75% weapon damage to an enemy.
-  abilitySprite: {fileID: 21300000, guid: 05f596f3b21792e489afe0f73ab53428, type: 3}
+  abilitySprite: {fileID: 21300000, guid: c5853472285867445b40f6be7e7b4920, type: 3}
   energyCost: 3
   fatigueCost: 7
   baseCooldown: 0

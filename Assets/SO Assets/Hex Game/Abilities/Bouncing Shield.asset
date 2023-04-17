@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: 'Deal 75% Physical damage to an enemy and a random enemy
     adjacent to them. '
-  abilitySprite: {fileID: 21300000, guid: db36f981e95040b4da4f833d503af39d, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 17d68839983a9bd40b76defbbe4de7de, type: 3}
   energyCost: 4
   fatigueCost: 20
   baseCooldown: 2

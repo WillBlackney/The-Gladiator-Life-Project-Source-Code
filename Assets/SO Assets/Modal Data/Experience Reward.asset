@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Experience Reward
   m_EditorClassIdentifier: 
   myPreset: 33
-  mainSprite: {fileID: 21300000, guid: f9ac8d656993046c2bae8b1627b0d145, type: 3}
+  mainSprite: {fileID: 21300000, guid: 0a739688c3e5b724abc58accad9b9baf, type: 3}
   frameSprite: 0
   headerName: Experience Reward
   italicDescription: 0

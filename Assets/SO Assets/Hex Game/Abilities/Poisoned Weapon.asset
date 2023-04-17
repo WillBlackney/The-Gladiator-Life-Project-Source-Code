@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Poisoned Weapon
   includeInGame: 1
   baseAbilityDescription: Gain 3 Poisoned Weapon.
-  abilitySprite: {fileID: 21300000, guid: 5d29f911880432d48848b57a30eadb96, type: 3}
+  abilitySprite: {fileID: 21300000, guid: bfbf2636fc2231b4fa2d28d5a4822fd7, type: 3}
   energyCost: 3
   fatigueCost: 10
   baseCooldown: 1

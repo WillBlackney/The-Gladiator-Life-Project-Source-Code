@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wits
   m_EditorClassIdentifier: 
   myPreset: 8
-  mainSprite: {fileID: 21300000, guid: 92e7fd5e4eb79486fbcff490b15f7238, type: 3}
+  mainSprite: {fileID: 21300000, guid: e5709ac28034c424fabd85cca72070a9, type: 3}
   frameSprite: 0
   headerName: Wits
   italicDescription: 1

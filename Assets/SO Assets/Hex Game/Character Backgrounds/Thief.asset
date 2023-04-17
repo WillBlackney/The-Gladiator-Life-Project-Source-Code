@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Thief
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: 241ef8b89b3521c489dbd86719bc4492, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: 00cca0104484a3a48bd085cc0b72053f, type: 3}
   backgroundType: 7
   description: "Thieves are as slippery as they are desperate, and what they lack
     in strength and courage they make up for in cunning and elusiveness. Just remember

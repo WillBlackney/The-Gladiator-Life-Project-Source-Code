@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Funky Goggles
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: f01dbcc4c5db9b445b66dc4f448afa36, type: 3}
+  itemSprite: {fileID: 21300000, guid: bd4e8e10f5062a24687813536a16752b, type: 3}
   itemName: Funky Goggles
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

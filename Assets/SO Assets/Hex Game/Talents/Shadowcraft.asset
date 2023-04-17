@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a319fe98d9e9648b913f7499b146c6, type: 3}
   m_Name: Shadowcraft
   m_EditorClassIdentifier: 
-  talentSprite: {fileID: 21300000, guid: 0f7917a49e45165419d44037fbaa3d13, type: 3}
+  talentSprite: {fileID: 21300000, guid: 4410b9dd386f0b34ca94ecb094ea1a86, type: 3}
   talentSchool: 11
   talentDescription:
   - color: 1

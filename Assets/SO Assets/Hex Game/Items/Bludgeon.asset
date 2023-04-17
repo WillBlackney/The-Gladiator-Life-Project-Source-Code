@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Bludgeon
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 80c1bd08824aada41896deff72242e44, type: 3}
+  itemSprite: {fileID: 21300000, guid: 620ea668d2758374ca62993665b147c1, type: 3}
   itemName: Bludgeon
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 02000000
+  weaponAttackAnimationType: 0
   healthDamage: 0.75
   armourDamage: 1.25
   armourPenetration: 0.4

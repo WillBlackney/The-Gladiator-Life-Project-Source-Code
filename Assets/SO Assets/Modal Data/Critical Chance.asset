@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Critical Chance
   m_EditorClassIdentifier: 
   myPreset: 9
-  mainSprite: {fileID: 21300000, guid: 944cad79318280044b38336516cc4c2f, type: 3}
+  mainSprite: {fileID: 21300000, guid: 5ccfac7d18b2f1f44b4c0f71d8961309, type: 3}
   frameSprite: 1
   headerName: Critical Chance
   italicDescription: 1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Farmer
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: afaf0aaf275d19549b3c033917779c2f, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: b3553f443190d6f42ae83017923430e3, type: 3}
   backgroundType: 2
   description: "Tolling the land and fighting off wild beasts is hard work that gives
     farmers great vitality and strength. Between cleaning horse shit and making far

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Doctor
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: 1886607cdf482494480f936d8caa21fe, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: f8bbe62520d3f874bb860ccec6991189, type: 3}
   backgroundType: 9
   description: Doctors have nerves as steady as their hands, intimate knowledge of
     anatomy, and are well accustomed to seeing blood and guts. What more could you

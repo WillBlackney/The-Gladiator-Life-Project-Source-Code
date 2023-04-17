@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Remove 10 Armour from an enemy, then deal 100% Physical
     damage.
-  abilitySprite: {fileID: 21300000, guid: 8cf75fabfbdb5ce449677da9b9ca8ff2, type: 3}
+  abilitySprite: {fileID: 21300000, guid: a7ecdb9bedba448469e639d27a14e2de, type: 3}
   energyCost: 4
   fatigueCost: 13
   baseCooldown: 0

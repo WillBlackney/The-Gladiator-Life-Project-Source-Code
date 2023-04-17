@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fitness
   m_EditorClassIdentifier: 
   myPreset: 36
-  mainSprite: {fileID: 21300000, guid: b3ccdeb95d3f345959679dec11c50048, type: 3}
+  mainSprite: {fileID: 21300000, guid: 9417f96dcfc544b48aec28daaf36a0dc, type: 3}
   frameSprite: 0
   headerName: Fitness
   italicDescription: 1

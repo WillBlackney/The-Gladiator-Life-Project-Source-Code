@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Walking Stick
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: ec6ab2441a6af234d80a4b1d49dbe4e2, type: 3}
+  itemSprite: {fileID: 21300000, guid: 3eebd776a024f5b429cd8d6129f28dc5, type: 3}
   itemName: Walking Stick
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 1
   allowedSlot: 0
   injuryTypesCaused: 02000000
+  weaponAttackAnimationType: 0
   healthDamage: 0.8
   armourDamage: 0.8
   armourPenetration: 0.4

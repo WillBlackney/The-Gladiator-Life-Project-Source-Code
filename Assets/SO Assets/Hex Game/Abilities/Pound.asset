@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Pound
   includeInGame: 1
   baseAbilityDescription: Deal 125% weapon damage. On a Critical Hit, apply Stunned.
-  abilitySprite: {fileID: 21300000, guid: dce8d7b79538a4c4bba83dd71269ebd9, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 66ef4f802b1e958438b65201faf3022f, type: 3}
   energyCost: 6
   fatigueCost: 15
   baseCooldown: 0

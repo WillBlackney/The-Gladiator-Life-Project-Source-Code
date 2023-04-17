@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Ward
   includeInGame: 1
   baseAbilityDescription: Give 1 Guard to self or ally.
-  abilitySprite: {fileID: 21300000, guid: b61b433ad55184e4bbe417b341836a93, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 8fd107582141d434289cf20b7290b2db, type: 3}
   energyCost: 4
   fatigueCost: 0
   baseCooldown: 1
@@ -96,6 +96,7 @@ MonoBehaviour:
     minBaseDamage: 0
     maxBaseDamage: 0
     guaranteedHit: 0
+    bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
     bonusArmourDamage: 0

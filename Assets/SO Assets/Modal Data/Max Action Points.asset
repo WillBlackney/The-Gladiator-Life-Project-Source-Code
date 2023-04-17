@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Max Action Points
   m_EditorClassIdentifier: 
   myPreset: 14
-  mainSprite: {fileID: 21300000, guid: 9d4b9ca0646768c4db76622e15798d66, type: 3}
+  mainSprite: {fileID: 21300000, guid: cbc4f58758cfef24f9b813bcb82462ec, type: 3}
   frameSprite: 1
   headerName: Max Action Points
   italicDescription: 1

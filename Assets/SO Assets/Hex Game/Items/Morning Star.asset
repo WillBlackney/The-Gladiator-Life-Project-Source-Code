@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Morning Star
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 882452c2c2045f845956c3723d5b0b92, type: 3}
+  itemSprite: {fileID: 21300000, guid: 6af6950b357aabb47b6e50782dba8a73, type: 3}
   itemName: Morning Star
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 02000000
+  weaponAttackAnimationType: 0
   healthDamage: 0.8
   armourDamage: 1.25
   armourPenetration: 0.5

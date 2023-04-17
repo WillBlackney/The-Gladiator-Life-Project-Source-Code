@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Deal 125% Magic damage to target. Damage is increased by
     10% for each stack of Bleeding on the target.
-  abilitySprite: {fileID: 21300000, guid: 29f3ead2ecfdd0b429d80a8e4bc47b4e, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 12d169050aeea624c85b0d3dfe2af067, type: 3}
   energyCost: 4
   fatigueCost: 30
   baseCooldown: 3

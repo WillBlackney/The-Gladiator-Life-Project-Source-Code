@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Infantry Helmet
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: ce092dbf1c497754aac95e044be523e5, type: 3}
+  itemSprite: {fileID: 21300000, guid: bb2251da1c4f5574c8209ffc2fce9cd2, type: 3}
   itemName: Infantry Helmet
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 1
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

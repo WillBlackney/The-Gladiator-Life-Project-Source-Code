@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Teleport any character anywhere within 1 tile of its current
     position.
-  abilitySprite: {fileID: 21300000, guid: 49bc5f6f7a4d370449b6056374d86e10, type: 3}
+  abilitySprite: {fileID: 21300000, guid: ff5c7ba7bfa2cc5478fed2691a6b5f28, type: 3}
   energyCost: 3
   fatigueCost: 15
   baseCooldown: 1

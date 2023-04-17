@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Throwing Net
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 6361b558b1419794aaba9dc7e4694951, type: 3}
+  itemSprite: {fileID: 21300000, guid: 200d533c5bbb72843be2ba3b102d9243, type: 3}
   itemName: Throwing Net
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 1
   injuryTypesCaused: 
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Death Resistance
   m_EditorClassIdentifier: 
   myPreset: 20
-  mainSprite: {fileID: 21300000, guid: bee301886ad4b6142a2c5b5d338e9b3b, type: 3}
+  mainSprite: {fileID: 21300000, guid: aa8b5ed6c9191274385fe79a505a81d7, type: 3}
   frameSprite: 1
   headerName: Death Resistance
   italicDescription: 1

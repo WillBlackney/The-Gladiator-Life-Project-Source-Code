@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Retired Warrior
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: c359661e98a82ba4db1393090f4fdeac, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: 84e0f673780022d4f85705c6985bc625, type: 3}
   backgroundType: 12
   description: "Warriors don't survive to become old, dusty farts if they\u2019re
     anything less than fearsome fighters. Though old age may have worn down their

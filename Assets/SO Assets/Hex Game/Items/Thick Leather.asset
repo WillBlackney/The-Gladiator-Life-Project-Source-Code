@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Thick Leather
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: ca9553940aaa20f4b80dc6f1385c44b1, type: 3}
+  itemSprite: {fileID: 21300000, guid: aedb695d12ebd374ca0d76d2c10694fd, type: 3}
   itemName: Thick Leather
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 2
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

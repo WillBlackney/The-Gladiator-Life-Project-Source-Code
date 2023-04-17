@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Zweihander
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: aa88bf3ff82315b47b037134c6977147, type: 3}
+  itemSprite: {fileID: 21300000, guid: b819f0cc88e9cb6498257a76fb20b4ab, type: 3}
   itemName: Zweihander
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 1
   allowedSlot: 0
   injuryTypesCaused: 0100000002000000
+  weaponAttackAnimationType: 0
   healthDamage: 1.25
   armourDamage: 1
   armourPenetration: 0.25

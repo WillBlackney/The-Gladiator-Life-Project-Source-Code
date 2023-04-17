@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Slash
   includeInGame: 1
   baseAbilityDescription: Deal 100% weapon damage.
-  abilitySprite: {fileID: 21300000, guid: 32e56c9c60dff28419898da655528c3b, type: 3}
+  abilitySprite: {fileID: 21300000, guid: dd1f8ad8a604b404a9c2f41a747f629c, type: 3}
   energyCost: 4
   fatigueCost: 10
   baseCooldown: 0

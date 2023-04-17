@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Padded Leather
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 3a484a2db251a5441a229c221006cdb0, type: 3}
+  itemSprite: {fileID: 21300000, guid: c89f6346a844d5141bb8e6dd6c7f5740, type: 3}
   itemName: Padded Leather
   itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
   itemType: 2
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

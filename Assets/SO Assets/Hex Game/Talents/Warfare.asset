@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a319fe98d9e9648b913f7499b146c6, type: 3}
   m_Name: Warfare
   m_EditorClassIdentifier: 
-  talentSprite: {fileID: 21300000, guid: 6b4eafe465d1a2443a7a6a68362860ea, type: 3}
+  talentSprite: {fileID: 21300000, guid: 7085525585391b4439ee243026c9f253, type: 3}
   talentSchool: 2
   talentDescription:
   - color: 1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Scholar
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: 1c6903ee824c3b14eb4d5cc2d5365041, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: 5c52f99bfe3f1244988d398d5c9fa92d, type: 3}
   backgroundType: 5
   description: "Scholars are fast learners, magically gifted, and willing to endanger
     themselves in the pursuit of knowledge. However, learning about warfare in books

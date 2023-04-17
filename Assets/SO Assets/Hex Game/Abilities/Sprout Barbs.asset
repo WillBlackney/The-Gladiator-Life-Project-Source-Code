@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Target self or ally. The next 3 times targetis hit in melee,
     deal 10 Physical damage back to the attacker.
-  abilitySprite: {fileID: 21300000, guid: b5c4b0e59987cab41ad25f23bac86cdf, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 8e7b87c6ae9d1a0418357c2df08ea769, type: 3}
   energyCost: 3
   fatigueCost: 15
   baseCooldown: 2

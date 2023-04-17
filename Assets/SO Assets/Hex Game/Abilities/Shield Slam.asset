@@ -18,7 +18,7 @@ MonoBehaviour:
   baseAbilityDescription: Slam your shield against a target, knocking them back 1
     tile and dealing 125% Physical damage. Damage is increased 10% for each stack
     of Guard on self.
-  abilitySprite: {fileID: 21300000, guid: e70d073abde6860498c58ff485c21a96, type: 3}
+  abilitySprite: {fileID: 21300000, guid: d77b80a6308d6244e967ecd3b6d08914, type: 3}
   energyCost: 4
   fatigueCost: 30
   baseCooldown: 2

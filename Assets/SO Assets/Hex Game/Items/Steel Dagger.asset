@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Steel Dagger
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 43ac53249862bc640b2e14ae5ab67e1d, type: 3}
+  itemSprite: {fileID: 21300000, guid: 1c84b923941727f4dbda12636d26632b, type: 3}
   itemName: Steel Dagger
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3

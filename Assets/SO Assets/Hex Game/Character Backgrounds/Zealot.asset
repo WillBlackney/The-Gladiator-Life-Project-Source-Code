@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Zealot
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: c14e70742140d494d84710de7e06fe99, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: 2ad628108330f2b47a15290e8b4d4b01, type: 3}
   backgroundType: 6
   description: 'An unwavering belief of being acquainted with God upon death tends
     to make zealots exceptionally courageous in the face of danger. That same blind

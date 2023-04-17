@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Assassin Dagger
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: f89d76f6a80732c4095b214c16b0306d, type: 3}
+  itemSprite: {fileID: 21300000, guid: 7407f41f53431f140af71c4c4ad1f49c, type: 3}
   itemName: Assassin Dagger
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3

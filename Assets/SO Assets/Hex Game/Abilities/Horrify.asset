@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Horrify
   includeInGame: 1
   baseAbilityDescription: Apply 2 Weakened to all enemies within your Aura.
-  abilitySprite: {fileID: 21300000, guid: 254db86f895cba142ba5fe87e82418f1, type: 3}
+  abilitySprite: {fileID: 21300000, guid: d7d24a12e1a62db4193b41c08150ca02, type: 3}
   energyCost: 4
   fatigueCost: 25
   baseCooldown: 2

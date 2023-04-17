@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Mercenary
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: c359661e98a82ba4db1393090f4fdeac, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: 61d437a2fa31fcb40be69d70f8ef9cac, type: 3}
   backgroundType: 14
   description: "Doesn\u2019t matter whether it\u2019s caravan raiding, gladiator
     pit fights, or fighting local lords, if there\u2019s blood to be spilled and

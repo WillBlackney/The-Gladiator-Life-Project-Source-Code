@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Tournament Knight
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: c359661e98a82ba4db1393090f4fdeac, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: 2e95362c4cf84a24ba8183efc3f23d34, type: 3}
   backgroundType: 13
   description: Tournament Knights live for the thrill of a joust, the roar of the
     crowd and the swooning of ladies. During the off season, the gladiator pits become

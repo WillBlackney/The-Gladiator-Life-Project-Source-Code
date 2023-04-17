@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Battle Hammer
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 1f12b22a50428da40828a9071f7e84a6, type: 3}
+  itemSprite: {fileID: 21300000, guid: e6712c858117a74489a5a46f2e4f4a04, type: 3}
   itemName: Battle Hammer
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 1
   allowedSlot: 0
   injuryTypesCaused: 02000000
+  weaponAttackAnimationType: 0
   healthDamage: 0.85
   armourDamage: 1.45
   armourPenetration: 0.5

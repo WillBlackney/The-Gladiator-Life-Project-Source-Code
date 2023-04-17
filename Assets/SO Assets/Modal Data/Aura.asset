@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Aura
   m_EditorClassIdentifier: 
   myPreset: 11
-  mainSprite: {fileID: 21300000, guid: 23bc0e2715503ec49b686000057efcd1, type: 3}
+  mainSprite: {fileID: 21300000, guid: 71f0c93ca1083c9408b83b834ed6944b, type: 3}
   frameSprite: 1
   headerName: Aura
   italicDescription: 1

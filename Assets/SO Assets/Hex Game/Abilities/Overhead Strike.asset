@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Overhead Strike
   includeInGame: 1
   baseAbilityDescription: Deal 125% weapon damage to an enemy. +10 Accuracy.
-  abilitySprite: {fileID: 21300000, guid: 32e56c9c60dff28419898da655528c3b, type: 3}
+  abilitySprite: {fileID: 21300000, guid: f621acd693640524f8e89df6c93d5df5, type: 3}
   energyCost: 6
   fatigueCost: 15
   baseCooldown: 0

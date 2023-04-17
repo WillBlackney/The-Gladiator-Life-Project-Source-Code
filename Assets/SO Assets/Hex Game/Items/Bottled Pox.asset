@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Bottled Pox
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: d4934e1bfccc1814a9b2a7d1a099e6b5, type: 3}
+  itemSprite: {fileID: 21300000, guid: c2fd076111497a644a97a4bb1e5da45e, type: 3}
   itemName: Bottled Pox
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

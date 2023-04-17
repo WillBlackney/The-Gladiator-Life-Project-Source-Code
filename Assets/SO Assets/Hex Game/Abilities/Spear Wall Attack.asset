@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Spear Wall Attack
   includeInGame: 0
   baseAbilityDescription: Deal 100% weapon damage to an enemy within melee range.
-  abilitySprite: {fileID: 21300000, guid: b730cef812431cd4599afb85b5e25fab, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 62a7f157a394b114392a4151ba48cc28, type: 3}
   energyCost: 0
   fatigueCost: 0
   baseCooldown: 0

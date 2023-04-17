@@ -17,7 +17,7 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: 'Deal 75% Magic damage to an enemy and a random enemy adjacent
     to them. '
-  abilitySprite: {fileID: 21300000, guid: 20f3b6df4fdeb274da928f35ee3ddde2, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 24e2cbd2ed09a21449f658cee8bb4b5c, type: 3}
   energyCost: 4
   fatigueCost: 20
   baseCooldown: 2

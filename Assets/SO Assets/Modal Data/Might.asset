@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Might
   m_EditorClassIdentifier: 
   myPreset: 1
-  mainSprite: {fileID: 21300000, guid: d0e9695c0153948809694226675d9b29, type: 3}
+  mainSprite: {fileID: 21300000, guid: 23b044ac4c2d51a4489ac42f2c60b152, type: 3}
   frameSprite: 0
   headerName: Might
   italicDescription: 1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Magus Staff
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: fe02037bbf937164b96ca4dbe981dcd1, type: 3}
+  itemSprite: {fileID: 21300000, guid: 0bf6a8d5e6279204e9505ad9391ee6c3, type: 3}
   itemName: Magus Staff
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 1
   allowedSlot: 0
   injuryTypesCaused: 02000000
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 0.9
   armourPenetration: 0.5

@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Vanish
   includeInGame: 1
   baseAbilityDescription: Gain 2 Stealth.
-  abilitySprite: {fileID: 21300000, guid: d0311d9693fe4114a9ce35e231bac878, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 5fab17ac5c9e59c45a459e84ea224544, type: 3}
   energyCost: 4
   fatigueCost: 30
   baseCooldown: 2

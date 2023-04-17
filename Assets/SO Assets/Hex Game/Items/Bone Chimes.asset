@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Bone Chimes
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: 70c2496ded2228c49a6296b4cb2a6d37, type: 3}
+  itemSprite: {fileID: 21300000, guid: 592f5078b6105154ca32af445bda9c28, type: 3}
   itemName: Bone Chimes
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 4
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 
+  weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

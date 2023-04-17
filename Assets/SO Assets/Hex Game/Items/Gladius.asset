@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Gladius
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: e111bea7db8db1d4f9f76e265dd42369, type: 3}
+  itemSprite: {fileID: 21300000, guid: 550b2323f7d5e12499e09843d9112e96, type: 3}
   itemName: Gladius
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3
@@ -26,6 +26,7 @@ MonoBehaviour:
   handRequirement: 0
   allowedSlot: 0
   injuryTypesCaused: 01000000
+  weaponAttackAnimationType: 0
   healthDamage: 1.1
   armourDamage: 0.75
   armourPenetration: 0.2
