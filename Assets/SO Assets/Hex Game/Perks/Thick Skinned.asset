@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Thick Skinned
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: d87c49cc6b4ac324e94b3a5c04d7ea4f, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 585040b0afb629c408bd7d646c145e51, type: 3}
   passiveName: Thick Skinned
   perkTag: 81
   passiveDescription:

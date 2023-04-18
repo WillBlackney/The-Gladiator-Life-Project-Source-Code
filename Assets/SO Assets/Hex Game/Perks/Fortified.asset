@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Fortified
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: fbb60405ce962734fb1fedb95d7b99ec, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 525cbb77c9388e846a885d77a6084548, type: 3}
   passiveName: Fortified
   perkTag: 156
   passiveDescription:

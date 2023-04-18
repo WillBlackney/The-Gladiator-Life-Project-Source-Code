@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Eyeless Sight
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 9975ae6ee3594a744abda0ad6f91c1ae, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 66dd0b9ad64015a4a92e7b7a87723faa, type: 3}
   passiveName: Eyeless Sight
   perkTag: 198
   passiveDescription:

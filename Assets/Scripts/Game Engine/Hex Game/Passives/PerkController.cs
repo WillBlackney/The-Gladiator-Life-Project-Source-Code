@@ -60,7 +60,7 @@ namespace HexGameEngine.Perks
 
             foreach (PerkIconDataSO dataSO in allIconScriptableObjects)
             {
-                tempList.Add(BuildIconDataFromScriptableObjectData(dataSO));
+                if(dataSO != null) tempList.Add(BuildIconDataFromScriptableObjectData(dataSO));
             }
 
             AllPerks = tempList.ToArray();

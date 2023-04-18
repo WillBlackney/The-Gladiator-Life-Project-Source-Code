@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Fragile Binding
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 827501c13da9a1a40a9a8036f5592b0c, type: 3}
+  passiveSprite: {fileID: 21300000, guid: de9f24be8f537b64f8246a1fc95b4838, type: 3}
   passiveName: Fragile Binding
   perkTag: 85
   passiveDescription:

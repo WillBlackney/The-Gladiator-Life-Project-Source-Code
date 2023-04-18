@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Brave
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 90d93e1f874f741438eaba2bb85c3ed8, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 172adba2b6662404a82a00b14fa2857c, type: 3}
   passiveName: Brave
   perkTag: 91
   passiveDescription:

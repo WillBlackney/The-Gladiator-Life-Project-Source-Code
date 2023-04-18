@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Savage Leader
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: f4403c8b18d66a94493f1a47f6687289, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 2b580f278ce56424789168f1ccee4897, type: 3}
   passiveName: Savage Leader
   perkTag: 127
   passiveDescription:
@@ -40,6 +40,8 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: .
+  passiveItalicDescription: 
+  effectDetailTabs: []
   maxAllowedStacks: 1
   showStackCount: 1
   hiddenOnPassivePanel: 1
@@ -49,8 +51,11 @@ MonoBehaviour:
   runeBlocksIncrease: 0
   runeBlocksDecrease: 1
   isInjury: 0
+  isPermanentInjury: 0
   severity: 0
   injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 0

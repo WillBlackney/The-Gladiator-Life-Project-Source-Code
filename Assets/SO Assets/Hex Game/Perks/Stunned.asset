@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Stunned
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 3f68a87baa510b14793876d6476f0b3b, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 7915bf7e25b98b7469f572d144390271, type: 3}
   passiveName: Stunned
   perkTag: 3
   passiveDescription:

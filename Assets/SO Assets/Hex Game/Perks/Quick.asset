@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Quick
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 0236b51a5175378439cc60baa115b8cf, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 316906ebb3eb5c14bb4706aadc58e58c, type: 3}
   passiveName: Quick
   perkTag: 97
   passiveDescription:

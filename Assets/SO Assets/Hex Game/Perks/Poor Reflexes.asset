@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Poor Reflexes
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 316f7c0a1b7fee74c859a961ebe1f2da, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 2e90f4dd2b6ce1f4bbf98adcd3610111, type: 3}
   passiveName: Poor Reflexes
   perkTag: 98
   passiveDescription:

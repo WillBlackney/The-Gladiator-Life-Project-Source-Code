@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Dead Eye
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 694e4a21c13d4c246940b60694db47f4, type: 3}
+  passiveSprite: {fileID: 21300000, guid: b5bfeacffe1f2a34aa91f656e32c924e, type: 3}
   passiveName: Dead Eye
   perkTag: 109
   passiveDescription:

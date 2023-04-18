@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Weakened
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: b07cc59dd4a956a4cb38b26da7c62d23, type: 3}
+  passiveSprite: {fileID: 21300000, guid: b992103565e3fae4f8d46b0a99d7cb86, type: 3}
   passiveName: Weakened
   perkTag: 49
   passiveDescription:

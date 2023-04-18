@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Relentless
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 0c3aa3f543170794ab8dd9ddb4ef611a, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 3c6d56f05b2840a4eb995598745435aa, type: 3}
   passiveName: Relentless
   perkTag: 176
   passiveDescription:

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Stun Immunity
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: f1e1f99f17626a14cb03bf94d5c8e279, type: 3}
+  passiveSprite: {fileID: 21300000, guid: b16fe1e5acb909049ac3c5cdd593d5e0, type: 3}
   passiveName: Stun Immunity
   perkTag: 86
   passiveDescription:

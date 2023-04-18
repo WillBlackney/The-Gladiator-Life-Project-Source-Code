@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Blood Thirsty
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 3c53cb53400dbda469ca53e4f919bd9c, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 9b9f1a21d63914647a2934871d8dff7c, type: 3}
   passiveName: Blood Thirsty
   perkTag: 63
   passiveDescription:

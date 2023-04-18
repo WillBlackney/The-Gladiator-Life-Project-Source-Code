@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Poisoned
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: d3584dc9f96b3fe468f7276db5d03d62, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 97c4568e2010450479749897c9e62605, type: 3}
   passiveName: Poisoned
   perkTag: 80
   passiveDescription:

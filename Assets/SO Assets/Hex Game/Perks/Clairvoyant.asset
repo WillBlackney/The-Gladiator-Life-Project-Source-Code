@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Clairvoyant
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 0ff73e32b0d90af4498a528fd6e39d75, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 17e7d792b7138e04a934606529d7ac0c, type: 3}
   passiveName: Clairvoyant
   perkTag: 65
   passiveDescription:

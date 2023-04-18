@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Spell Sight
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 0ff73e32b0d90af4498a528fd6e39d75, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 5a5a0bef384f4034284ca3bcac9191db, type: 3}
   passiveName: Spell Sight
   perkTag: 197
   passiveDescription:

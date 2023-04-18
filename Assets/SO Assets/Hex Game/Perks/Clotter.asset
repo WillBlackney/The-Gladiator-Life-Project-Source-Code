@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Clotter
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 09f2483000d18be4ca587ba2256b4dbe, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 33015e799ef927d4cb3303c23edc6bf6, type: 3}
   passiveName: Clotter
   perkTag: 113
   passiveDescription:

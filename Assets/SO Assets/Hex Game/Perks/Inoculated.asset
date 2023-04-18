@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Inoculated
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: a05ed53300c3ccd429bfdecb0fd1c056, type: 3}
+  passiveSprite: {fileID: 21300000, guid: acf6c5ab8a3737d43b48117de37f588b, type: 3}
   passiveName: Inoculated
   perkTag: 118
   passiveDescription:

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Slow
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: b4989b0e33544714c8e4dea35ef378f0, type: 3}
+  passiveSprite: {fileID: 21300000, guid: fd2cd5799c35a4b4cafcf5a776150225, type: 3}
   passiveName: Slow
   perkTag: 90
   passiveDescription:

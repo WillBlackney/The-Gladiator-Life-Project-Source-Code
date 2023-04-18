@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Frail
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 79c16c8a304f27c46b29b7708525c916, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 80d8531feef93a24fbf10a2f64d2b7f6, type: 3}
   passiveName: Frail
   perkTag: 94
   passiveDescription:

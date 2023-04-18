@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Fit
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 3099393d607e65c43b8048f2e80fd203, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 025d4b9c38612c84eb6663e1489b8134, type: 3}
   passiveName: Fit
   perkTag: 160
   passiveDescription:

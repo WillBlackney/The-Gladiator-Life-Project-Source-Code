@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Striking Presence
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: b08f740c231c1c64db3c34990eebaa97, type: 3}
+  passiveSprite: {fileID: 21300000, guid: fed9645135235cd4b9d18fbb284529fd, type: 3}
   passiveName: Striking Presence
   perkTag: 57
   passiveDescription:

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Melee Mastery
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 8cdd2b14c349b77499ed2e37fbf4be66, type: 3}
+  passiveSprite: {fileID: 21300000, guid: dde6cfbe82fe13c4fbdc92174a179dd6, type: 3}
   passiveName: Melee Mastery
   perkTag: 121
   passiveDescription:

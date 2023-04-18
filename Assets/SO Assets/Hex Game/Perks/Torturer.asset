@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Torturer
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 7cd9dd5d85eca2e47b92a66acf09847a, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 0231028b51a07aa48af7a29816d7f58a, type: 3}
   passiveName: Torturer
   perkTag: 83
   passiveDescription:

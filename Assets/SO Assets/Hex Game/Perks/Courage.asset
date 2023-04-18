@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Courage
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 1897f12596f913a41a938bbe6fa7d9eb, type: 3}
+  passiveSprite: {fileID: 21300000, guid: af6eb078fdfad2745a1240a6aede04df, type: 3}
   passiveName: Courage
   perkTag: 155
   passiveDescription:

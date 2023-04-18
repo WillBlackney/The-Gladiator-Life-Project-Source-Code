@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Irrational
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 431c8cca9789242468e0c09facf5fb66, type: 3}
+  passiveSprite: {fileID: 21300000, guid: a8bcba9a902baba4b9bef99b4c21dde9, type: 3}
   passiveName: Irrational
   perkTag: 116
   passiveDescription:

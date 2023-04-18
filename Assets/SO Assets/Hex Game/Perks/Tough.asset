@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Tough
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 7d25eec94ccc383428124ebfd5dae80b, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 08dbe057d96ab964e863e0efd7de6e29, type: 3}
   passiveName: Tough
   perkTag: 68
   passiveDescription:

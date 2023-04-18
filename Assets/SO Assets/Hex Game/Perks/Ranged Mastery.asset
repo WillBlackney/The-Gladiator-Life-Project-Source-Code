@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Ranged Mastery
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 39817b2659473cf449245aa04bf4b1f6, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 16e972a6768f59649ac773dd337b6222, type: 3}
   passiveName: Ranged Mastery
   perkTag: 181
   passiveDescription:

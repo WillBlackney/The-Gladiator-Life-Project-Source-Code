@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Fat
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 5087986735e105b439787594957875ca, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 6e714bf4ae4373f46ba00d95fd61d024, type: 3}
   passiveName: Fat
   perkTag: 117
   passiveDescription:

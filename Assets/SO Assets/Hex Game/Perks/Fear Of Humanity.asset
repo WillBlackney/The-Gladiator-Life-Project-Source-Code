@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Fear Of Humanity
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: cabd4598eb9a2ed41acab0c6f3fd2f77, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 5f4cc441542aaf7499bb4a08b41e705b, type: 3}
   passiveName: Fear Of Humanity
   perkTag: 209
   passiveDescription:

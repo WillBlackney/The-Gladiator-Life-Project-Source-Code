@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Thrill Of The Hunt
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 68ad5970ba9a85847b431a58ee831895, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 5d31a92ca34316d4584f1d19b0c82b12, type: 3}
   passiveName: Thrill Of The Hunt
   perkTag: 20
   passiveDescription:

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Footwork
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 7ed698ffe1539b94394d474f74b854b0, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 89d99e756b4e6234fafeec26842ab2c9, type: 3}
   passiveName: Footwork
   perkTag: 13
   passiveDescription:

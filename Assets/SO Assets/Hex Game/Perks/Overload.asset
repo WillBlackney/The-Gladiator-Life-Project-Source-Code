@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Overload
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 39d05b7705e56c34495b4dd60cbd4177, type: 3}
+  passiveSprite: {fileID: 21300000, guid: fcdd8d2420bd57743a49a6a2d8d07698, type: 3}
   passiveName: Overload
   perkTag: 73
   passiveDescription:

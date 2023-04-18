@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Hard Noggin
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 51dc7c02ec34d4e43a92f481ff5d2161, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 30457b09990b29f4398af45b214a5d35, type: 3}
   passiveName: Hard Noggin
   perkTag: 112
   passiveDescription:

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Hate Of Humanity
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 47af8a981e303b14d9060a487a657081, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 22ad90a1068d7944eab3e87afa43993d, type: 3}
   passiveName: Hate Of Humanity
   perkTag: 208
   passiveDescription:

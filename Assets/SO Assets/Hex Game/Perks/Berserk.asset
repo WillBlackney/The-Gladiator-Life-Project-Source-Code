@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Berserk
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 3f35b0e5b580e174f9321085e285cfcd, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 98b25e645f2a74d45ba317e96e24e4fa, type: 3}
   passiveName: Berserk
   perkTag: 46
   passiveDescription:

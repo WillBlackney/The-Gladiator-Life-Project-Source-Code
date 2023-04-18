@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Riposte
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 3be4ea1f254dd83408a83577dfdcdd64, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 372659180d4cdc149b5ec2a787982d49, type: 3}
   passiveName: Riposte
   perkTag: 119
   passiveDescription:
@@ -36,6 +36,8 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: ', it immediately counter attacks it''s attacker.'
+  passiveItalicDescription: 
+  effectDetailTabs: []
   maxAllowedStacks: 3
   showStackCount: 1
   hiddenOnPassivePanel: 0
@@ -45,8 +47,11 @@ MonoBehaviour:
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
   isInjury: 0
+  isPermanentInjury: 0
   severity: 0
   injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 0

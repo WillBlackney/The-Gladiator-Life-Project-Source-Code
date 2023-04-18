@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Stealth
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 2dd7a9aebc980974aa5a9ebcb4194044, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 3d64ad4a8616e7f43bf464ab7c0d99be, type: 3}
   passiveName: Stealth
   perkTag: 77
   passiveDescription:

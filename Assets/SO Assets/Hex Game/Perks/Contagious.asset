@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Contagious
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: f589a4deb7b158149b1c6c7eaa5e013c, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 700c7954b71408445a435ac05cdd3ca6, type: 3}
   passiveName: Contagious
   perkTag: 151
   passiveDescription:

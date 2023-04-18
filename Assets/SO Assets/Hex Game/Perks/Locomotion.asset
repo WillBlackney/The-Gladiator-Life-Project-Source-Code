@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Locomotion
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 7ed698ffe1539b94394d474f74b854b0, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 91f8591556e3e744ebf0f78196e2b6bd, type: 3}
   passiveName: Locomotion
   perkTag: 150
   passiveDescription:

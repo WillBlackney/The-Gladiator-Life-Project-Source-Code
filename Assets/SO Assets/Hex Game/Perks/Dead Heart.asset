@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Dead Heart
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 5f5b7bc129079384b9f95367a1639f6e, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 98ad6a9b296330140a9385164268e382, type: 3}
   passiveName: Dead Heart
   perkTag: 24
   passiveDescription:

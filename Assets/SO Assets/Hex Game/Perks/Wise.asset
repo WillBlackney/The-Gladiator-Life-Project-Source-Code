@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Wise
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 4f4bb8e9a93d26c42a3a599df23ca760, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 754c96309cd3a1a4fab92751ada91084, type: 3}
   passiveName: Wise
   perkTag: 89
   passiveDescription:

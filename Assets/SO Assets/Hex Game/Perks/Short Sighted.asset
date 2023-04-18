@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Short Sighted
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: f35e750edb6f0e2488f9ab04cdde2c60, type: 3}
+  passiveSprite: {fileID: 21300000, guid: abd7e1974a7c3d545bc49f29c30438f5, type: 3}
   passiveName: Short Sighted
   perkTag: 105
   passiveDescription:

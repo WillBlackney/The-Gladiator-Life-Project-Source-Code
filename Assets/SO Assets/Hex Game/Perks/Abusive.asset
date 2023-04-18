@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Abusive
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 1496699438e47b74fa228f499eea6ed9, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 136d57776e8f0464f951aefce539b911, type: 3}
   passiveName: Abusive
   perkTag: 107
   passiveDescription:

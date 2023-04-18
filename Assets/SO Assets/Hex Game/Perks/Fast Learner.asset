@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Fast Learner
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 8436d2f7ecb534e4989e36d7e4897084, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 41d3d2acb322d7b49bb5ac123f47ab64, type: 3}
   passiveName: Fast Learner
   perkTag: 101
   passiveDescription:

@@ -98,7 +98,7 @@ namespace HexGameEngine.Abilities
 
             foreach (AbilityDataSO dataSO in allAbilityDataSOs)
             {
-                if (dataSO.includeInGame)
+                if (dataSO != null && dataSO.includeInGame)
                     tempList.Add(BuildAbilityDataFromScriptableObjectData(dataSO));
             }
 

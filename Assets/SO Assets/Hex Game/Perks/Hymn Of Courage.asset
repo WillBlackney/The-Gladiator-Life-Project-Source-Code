@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Hymn Of Courage
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 312c01fedda28d245886da5f6545c6f3, type: 3}
+  passiveSprite: {fileID: 21300000, guid: f2376b123fdf78d42aa434f5f6fa3e7d, type: 3}
   passiveName: Hymn Of Courage
   perkTag: 141
   passiveDescription:

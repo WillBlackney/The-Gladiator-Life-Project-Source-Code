@@ -315,7 +315,7 @@ namespace HexGameEngine.Abilities
         public AbilityBook(SerializedAbilityBook original)
         {
             foreach (AbilityDataSO a in original.activeAbilities)
-                 HandleLearnNewAbility(AbilityController.Instance.BuildAbilityDataFromScriptableObjectData(a));
+                if(a != null) HandleLearnNewAbility(AbilityController.Instance.BuildAbilityDataFromScriptableObjectData(a));
         }
         #endregion
     }

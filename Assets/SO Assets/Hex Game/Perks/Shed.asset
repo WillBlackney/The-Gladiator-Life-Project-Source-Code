@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Shed
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: f4403c8b18d66a94493f1a47f6687289, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 478f957e02fc85a48a95b371ce2a6b4a, type: 3}
   passiveName: Shed
   perkTag: 146
   passiveDescription:
