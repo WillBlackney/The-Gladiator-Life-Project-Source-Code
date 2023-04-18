@@ -353,13 +353,6 @@ namespace HexGameEngine.TownFeatures
             foreach (HospitalDropSlot slot in hospitalSlots)
                 slot.BuildViews();
             UpdateHospitalFeatureCostTexts();
-            BuildHospitalActivityIcons();
-        }
-        private void BuildHospitalActivityIcons()
-        {
-            bedrestIcon.sprite = SpriteLibrary.Instance.GetTownActivitySprite(TownActivity.BedRest);
-            surgeryIcon.sprite = SpriteLibrary.Instance.GetTownActivitySprite(TownActivity.Surgery);
-            therapyIcon.sprite = SpriteLibrary.Instance.GetTownActivitySprite(TownActivity.Therapy);
         }
         public bool IsCharacterPlacedInHospital(HexCharacterData character)
         {

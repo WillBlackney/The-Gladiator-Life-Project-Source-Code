@@ -458,7 +458,7 @@ namespace HexGameEngine.Characters
                 character.healthLostThisCombat += healthGainedOrLost;
             }
 
-            // relay changes to character data
+            // Relay changes to character data
             if (character.characterData != null && relayToCharacterData)            
                 CharacterDataController.Instance.SetCharacterHealth(character.characterData, character.currentHealth);            
 
