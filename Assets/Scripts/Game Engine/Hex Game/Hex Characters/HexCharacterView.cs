@@ -45,6 +45,7 @@ namespace HexGameEngine.Characters
         public Slider stressBarWorld;
         public TextMeshProUGUI stressTextWorld;
         public Image stressBarShatteredGlowWorld;
+        public Image stressStateIconWorld;
         [PropertySpace(SpaceBefore = 50, SpaceAfter = 0)]    
 
         [Header("Custom Components")]

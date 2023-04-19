@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using HexGameEngine.Abilities;
-using HexGameEngine.CameraSystems;
 using HexGameEngine.Combat;
 using HexGameEngine.HexTiles;
 using HexGameEngine.Perks;
@@ -17,12 +16,10 @@ using CardGameEngine.UCM;
 using HexGameEngine.AI;
 using System.Linq;
 using System;
-using HexGameEngine.JourneyLogic;
 using HexGameEngine.Pathfinding;
 using HexGameEngine.UI;
 using HexGameEngine.Items;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.TextCore.Text;
+using HexGameEngine.Libraries;
 
 namespace HexGameEngine.Characters
 {
@@ -602,15 +599,17 @@ namespace HexGameEngine.Characters
             {
                 if (view != null)
                 {
+                    view.stressStateIconWorld.gameObject.SetActive(false);
                     view.stressBarVisualParent.SetActive(false);
-                    view.perkIconsPanel.SetPosition(false);
+                    //view.perkIconsPanel.SetPosition(false);
                 }
                 return;
             }
             else if (!character.characterData.ignoreStress && view != null)
             {
+                view.stressStateIconWorld.gameObject.SetActive(true);
                 view.stressBarVisualParent.SetActive(true);
-                view.perkIconsPanel.SetPosition(true);
+                //view.perkIconsPanel.SetPosition(true);
             }
 
             if (character.currentStress >= 100 && stressGainedOrLost > 0) return;
@@ -733,8 +732,13 @@ namespace HexGameEngine.Characters
             character.hexCharacterView.stressBarWorld.value = stressBarFloat;
             character.hexCharacterView.stressTextWorld.text = stress.ToString();
 
+            // Update stres state image
+            StressState stressState = CombatController.Instance.GetStressStateFromStressAmount((int)stressBarFloat);
+            Sprite stressSprite = SpriteLibrary.Instance.GetStressStateSprite(stressState);
+            character.hexCharacterView.stressStateIconWorld.sprite = stressSprite;
+
             // Modify UI elements
-            if(TurnController.Instance.EntityActivated == character && !character.characterData.ignoreStress)            
+            if (TurnController.Instance.EntityActivated == character && !character.characterData.ignoreStress)            
                 CombatUIController.Instance.UpdateStressComponents(stress, character);            
 
         }

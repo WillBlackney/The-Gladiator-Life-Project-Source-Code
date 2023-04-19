@@ -95,6 +95,8 @@ namespace HexGameEngine.Perks
 
         public void SetPosition(bool activeStressBar)
         {
+            //gameObject.transform.position = stressBarInactivePos.position;
+            /*
             if (activeStressBar)
             {
                 gameObject.transform.position = stressBarActivePos.position;
@@ -102,7 +104,7 @@ namespace HexGameEngine.Perks
             else
             {
                 gameObject.transform.position = stressBarInactivePos.position;
-            }
+            }*/
         }
     }
 }
