@@ -555,16 +555,7 @@ namespace HexGameEngine.Characters
         }
         private void UpdateArmourGUIElements(HexCharacterModel character, int armour, int maxArmour)
         {
-            /*
-            Debug.Log("CharacterEntityController.UpdateArmourGUIElements() called, armour = " + armour.ToString());
-
-            if (character.hexCharacterView == null) return;
-            if (armour > 0) character.hexCharacterView.armourParentWorldUI.SetActive(true);
-            else character.hexCharacterView.armourParentWorldUI.SetActive(false);
-            character.hexCharacterView.armourTextWorld.text = armour.ToString();
-            */
-
-            Debug.Log("CharacterEntityController.UpdateArmourGUIElements() called, health = " + armour.ToString() + ", maxHealth = " + maxArmour.ToString());
+            Debug.Log("CharacterEntityController.UpdateArmourGUIElements() called, armour = " + armour.ToString() + ", maxArmour = " + maxArmour.ToString());
 
             if (character.hexCharacterView == null) return;
 
@@ -579,9 +570,9 @@ namespace HexGameEngine.Characters
             character.hexCharacterView.armourBarWorld.value = armourBarFloat;
             character.hexCharacterView.armourTextWorld.text = armour.ToString();
 
-
-            if (TurnController.Instance.EntityActivated == character)
-                CombatUIController.Instance.CurrentArmourText.text = armour.ToString();
+            // Modify Screen UI elements
+            if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
+                CombatUIController.Instance.UpdateArmourComponents((int)currentArmourFloat, (int) currentMaxArmourFloat);
 
         }
         #endregion
@@ -600,7 +591,7 @@ namespace HexGameEngine.Characters
                 if (view != null)
                 {
                     view.stressStateIconWorld.gameObject.SetActive(false);
-                    view.stressBarVisualParent.SetActive(false);
+                    //view.stressBarVisualParent.SetActive(false);
                     //view.perkIconsPanel.SetPosition(false);
                 }
                 return;
@@ -608,7 +599,7 @@ namespace HexGameEngine.Characters
             else if (!character.characterData.ignoreStress && view != null)
             {
                 view.stressStateIconWorld.gameObject.SetActive(true);
-                view.stressBarVisualParent.SetActive(true);
+                //view.stressBarVisualParent.SetActive(true);
                 //view.perkIconsPanel.SetPosition(true);
             }
 

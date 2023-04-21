@@ -46,7 +46,6 @@ namespace HexGameEngine.Characters
         [SerializeField] private UniversalCharacterModel uiPotraitUCM;
         [SerializeField] private TextMeshProUGUI characterNameTextUI;
         [SerializeField] private StressPanelView stressPanel;
-        [SerializeField] private TextMeshProUGUI currentArmourText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Current Initiative Components")]
@@ -57,20 +56,22 @@ namespace HexGameEngine.Characters
         [Header("Health Bar UI References")]
         [SerializeField] private Slider healthBarUI;
         [SerializeField] private TextMeshProUGUI currentHealthText;
-        [SerializeField] private TextMeshProUGUI maxHealthText;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+
+        [Header("Armour Bar UI References")]
+        [SerializeField] private Slider armourBarUI;
+        [SerializeField] private TextMeshProUGUI currentArmourText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Stress Bar UI References")]
         [SerializeField] private Slider stressBarUI;
         [SerializeField] private TextMeshProUGUI stressText;
-        [SerializeField] private TextMeshProUGUI maxStressText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Fatigue Bar UI References")]
         [SerializeField] private Slider fatigueBarUI;
         [SerializeField] private Slider fatigueSubBarUI;
         [SerializeField] private TextMeshProUGUI fatigueText;
-        [SerializeField] private TextMeshProUGUI maxFatigueText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("End + Delay Turn Button Components")]
@@ -135,8 +136,9 @@ namespace HexGameEngine.Characters
             CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, uiPotraitUCM);
             uiPotraitUCM.SetIdleAnim();
 
-            // Health 
+            // Health + Armour
             UpdateHealthComponents(character.currentHealth, StatCalculator.GetTotalMaxHealth(character));
+            UpdateArmourComponents(character.currentArmour, character.startingArmour);
 
             // Stress Components
             UpdateStressComponents(character.currentStress, character);
@@ -255,8 +257,18 @@ namespace HexGameEngine.Characters
 
             // Modify UI elements
             healthBarUI.value = healthBarFloat;
-            currentHealthText.text = health.ToString();
-            maxHealthText.text = maxHealth.ToString();
+            currentHealthText.text = currentHealthFloat.ToString() + "/" + currentMaxHealthFloat.ToString();
+        }
+        public void UpdateArmourComponents(int armour, int maxArmour)
+        {
+            // Convert health int values to floats
+            float currentArmourFloat = armour;
+            float currentMaxArmourFloat = maxArmour;
+            float armourBarFloat = currentArmourFloat / currentMaxArmourFloat;
+
+            // Modify UI elements
+            armourBarUI.value = armourBarFloat;
+            currentArmourText.text = currentArmourFloat.ToString() + "/" + currentMaxArmourFloat.ToString();
         }
         public void UpdateStressComponents(int stress, HexCharacterModel character)
         {
@@ -266,8 +278,7 @@ namespace HexGameEngine.Characters
 
             // Modify UI elements
             stressBarUI.value = stressBarFloat;
-            stressText.text = stress.ToString();
-            maxStressText.text = "20";
+            stressText.text = currentStressFloat.ToString() + "/" + currentMaxStressFloat.ToString();
 
             stressPanel.BuildPanelViews(character);
         }
@@ -282,8 +293,7 @@ namespace HexGameEngine.Characters
             fatigueBarUI.DOKill();
             fatigueSubBarUI.DOValue(fatBarFloat, speed);
             fatigueBarUI.DOValue(fatBarFloat, speed);
-            fatigueText.text = currentFat.ToString();
-            maxFatigueText.text = maxFatigue.ToString();
+            fatigueText.text = currentFat.ToString() + "/" + maxFatFloat.ToString();
         }
         public void DoFatigueCostDemo(int fatCost, int currentFat, int maxFat)
         {
