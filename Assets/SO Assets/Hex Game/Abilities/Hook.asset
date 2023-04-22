@@ -26,8 +26,8 @@ MonoBehaviour:
   weaponRequirement: 0
   derivedFromWeapon: 0
   derivedFromItemLoadout: 1
-  weaponAbilityType: 0
-  weaponClass: 0
+  weaponAbilityType: 1
+  weaponClass: 15
   targetRequirement: 3
   secondaryTargetRequirement: 0
   rangeFromTarget: 0

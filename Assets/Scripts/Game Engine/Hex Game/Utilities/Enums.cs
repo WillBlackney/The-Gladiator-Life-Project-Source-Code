@@ -273,7 +273,9 @@ namespace HexGameEngine
         Staff = 6,
         Sword = 2,     
         ThrowingNet = 13,
-      
+        Unarmed = 15,
+        TwoHanded = 16,
+        DualWielding = 17,
       
     }
     public enum WeaponRequirement

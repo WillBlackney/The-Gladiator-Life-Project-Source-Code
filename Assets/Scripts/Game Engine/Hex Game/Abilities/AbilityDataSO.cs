@@ -193,7 +193,7 @@ namespace HexGameEngine.Abilities
         }
         public bool ShowWeaponAbilityType()
         {
-            if (derivedFromWeapon)
+            if (derivedFromWeapon || derivedFromItemLoadout)
             {
                 return true;
             }

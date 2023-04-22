@@ -310,16 +310,15 @@ namespace HexGameEngine.UI
             {
                 talentReqRowParent.SetActive(true);
                 SetTalentRequirementImages(SpriteLibrary.Instance.GetTalentSchoolSprite(data.talentRequirementData.talentSchool));
-                talentReqRowText.text = data.talentRequirementData.talentSchool.ToString();
+                talentReqRowText.text = TextLogic.SplitByCapitals(data.talentRequirementData.talentSchool.ToString());
             }
-            else if (data.derivedFromWeapon)
+            else if (data.derivedFromWeapon || data.derivedFromItemLoadout)
             {
                 talentReqRowParent.SetActive(true);
                 SetTalentRequirementImages(SpriteLibrary.Instance.GetWeaponSprite(data.weaponClass));
-                talentReqRowText.text = data.weaponClass.ToString();
+                talentReqRowText.text = TextLogic.SplitByCapitals(data.weaponClass.ToString());
             }
 
-            // TO DO: build talent req row for weapon load out derived abilities (e.g. Two Handed, Dual Wield, One Handed)
         }
         private void SetTalentRequirementImages(Sprite s)
         {

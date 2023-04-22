@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
   m_Name: Entwood Staff
   m_EditorClassIdentifier: 
-  itemSprite: {fileID: 21300000, guid: e8ae30be5336a26408bf519ac3b2f5f8, type: 3}
+  itemSprite: {fileID: 21300000, guid: 0b709ed723344c746bbf36d2bb5fb0b4, type: 3}
   itemName: Entwood Staff
   itemDescription: 'Place holder item description. Place holder item description. '
   itemType: 3

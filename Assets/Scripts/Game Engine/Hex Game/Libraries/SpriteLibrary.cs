@@ -129,6 +129,15 @@ namespace HexGameEngine.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite holdableIcon;
+        [PreviewField(75)]
+        [SerializeField]
+        private Sprite unarmedIcon;
+        [PreviewField(75)]
+        [SerializeField]
+        private Sprite twoHandedIcon;
+        [PreviewField(75)]
+        [SerializeField]
+        private Sprite dualWieldingIcon;
         #endregion
 
         // Skill Book Images
@@ -373,7 +382,18 @@ namespace HexGameEngine.Libraries
             {
                 spriteReturned = holdableIcon;
             }
-
+            else if (weaponClass == WeaponClass.Unarmed)
+            {
+                spriteReturned = unarmedIcon;
+            }
+            else if (weaponClass == WeaponClass.TwoHanded)
+            {
+                spriteReturned = twoHandedIcon;
+            }
+            else if (weaponClass == WeaponClass.DualWielding)
+            {
+                spriteReturned = dualWieldingIcon;
+            }
             return spriteReturned;
         }
         public Sprite GetTalentSchoolBookSprite(TalentSchool ts)
