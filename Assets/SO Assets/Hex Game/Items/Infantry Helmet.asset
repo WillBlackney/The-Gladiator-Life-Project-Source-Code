@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: bb2251da1c4f5574c8209ffc2fce9cd2, type: 3}
   itemName: Infantry Helmet
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A simple and functional helmet made of metal or leather, often
+    worn by soldiers and footmen in battle. Its design is utilitarian and practical,
+    providing adequate protection without being overly bulky or heavy.
   itemType: 1
   rarity: 1
   fatiguePenalty: 4

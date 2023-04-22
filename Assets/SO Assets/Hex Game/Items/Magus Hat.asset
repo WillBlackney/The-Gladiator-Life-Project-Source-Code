@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: ad6764f28eb792f4f9732636f84b1c88, type: 3}
   itemName: Magus Hat
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A pointed hat made of silk worn by practitioners of the magical
+    arts.
   itemType: 1
   rarity: 1
   fatiguePenalty: 0

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 574204359b2e0bb4488e5f677e08e22d, type: 3}
   itemName: Wood Chopper
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A heavy two-handed axe used to cut down large trees, and sometimes
+    people.
   itemType: 3
   rarity: 1
   fatiguePenalty: 14

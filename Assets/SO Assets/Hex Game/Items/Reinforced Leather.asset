@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: f30cfcd4bb481a24abf67cd5cbd7b1c9, type: 3}
   itemName: Reinforced Leather
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: Armor made of thick, reinforced leather that provides excellent
+    protection against slashing and piercing attacks.
   itemType: 2
   rarity: 1
   fatiguePenalty: 8

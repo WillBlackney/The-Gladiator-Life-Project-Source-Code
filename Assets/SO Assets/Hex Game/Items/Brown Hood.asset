@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: c429d3d332c798a4d922dbca2d7bdf59, type: 3}
   itemName: Brown Hood
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A simple hood made of brown material, designed to provide basic
+    protection and warmth. Often worn by travelers and adventurers in need of a quick
+    and easy means of protection.
   itemType: 1
   rarity: 1
   fatiguePenalty: 0

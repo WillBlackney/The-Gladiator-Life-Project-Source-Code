@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 6ffb7715409c3ac42a9aabe82403777a, type: 3}
   itemName: Pocket Watch
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A small and ornate timepiece, often passed down through generations
+    and treasured as a family heirloom.
   itemType: 4
   rarity: 3
   fatiguePenalty: 0

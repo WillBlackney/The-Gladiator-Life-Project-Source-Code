@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 6af6950b357aabb47b6e50782dba8a73, type: 3}
   itemName: Morning Star
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A wooden shaft with a spiked metal head used to deliver a combination
+    of blunt-force and puncturing blows.
   itemType: 3
   rarity: 2
   fatiguePenalty: 8

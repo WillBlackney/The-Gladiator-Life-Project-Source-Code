@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: dca60ee260d0ee84095351ff40ce898d, type: 3}
   itemName: Gladiator Chest Guard
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A chest piece made of sturdy light metals, designed to protect
+    the vital organs while allowing the wearer to move freely. Often worn by fighters
+    and warriors who prefer speed and agility in combat.
   itemType: 2
   rarity: 3
   fatiguePenalty: 14

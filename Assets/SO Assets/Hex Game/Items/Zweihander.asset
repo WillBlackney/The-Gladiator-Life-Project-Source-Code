@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: b819f0cc88e9cb6498257a76fb20b4ab, type: 3}
   itemName: Zweihander
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A long, heavy two-handed blade as good at crushing as it is at
+    slashing.
   itemType: 3
   rarity: 3
   fatiguePenalty: 10

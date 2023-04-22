@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: ea23ffa3f6cabe24ebfc6b79b1fc1dc4, type: 3}
   itemName: Knight Plate
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A full suit of heavy plate armor, polished to a shine.
   itemType: 2
   rarity: 3
   fatiguePenalty: 30

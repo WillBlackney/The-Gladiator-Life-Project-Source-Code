@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 2112ebf192896f14c93f400845f32279, type: 3}
   itemName: Assassin Hood
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A dark and lightweight hood that covers the head and face, often
+    worn by stealthy and secretive individuals. Its material is designed to muffle
+    sound and hide the wearer's features, allowing them to blend into the shadows.
   itemType: 1
   rarity: 1
   fatiguePenalty: 0

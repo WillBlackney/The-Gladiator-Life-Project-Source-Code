@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 9fac14cbe7d103c45b31324a61825a4f, type: 3}
   itemName: Regal Full Helm
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A beautifully crafted helmet made of polished steel, with a visor
+    that can be raised or lowered.
   itemType: 1
   rarity: 3
   fatiguePenalty: 12

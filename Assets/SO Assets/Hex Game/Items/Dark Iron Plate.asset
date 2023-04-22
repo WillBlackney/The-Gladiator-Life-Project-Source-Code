@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: ba6020794f4e1394f80665f7fccf1df2, type: 3}
   itemName: Dark Iron Plate
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A set of dark iron plates, forged together to form a full-body
+    suit of armor. Its weight and thickness provide formidable defense, but its inflexibility
+    and bulkiness can slow the wearer down and limit mobility.
   itemType: 2
   rarity: 2
   fatiguePenalty: 18

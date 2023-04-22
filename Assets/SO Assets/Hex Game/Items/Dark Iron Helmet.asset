@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 10cf5b7d880222e4f860e2f262ce484b, type: 3}
   itemName: Dark Iron Helmet
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A menacing and heavy helmet made of dark iron, often worn by powerful
+    and brutal warriors. Its weight and bulkiness provide significant protection
+    against blows and strikes, but may also impede movement and vision.
   itemType: 1
   rarity: 2
   fatiguePenalty: 7

@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 4b126ef6e15c42048993543bf328b989, type: 3}
   itemName: Wooden Crossbow
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A lighter variant of a pull-lever crossbow that can propel bolts
+    over medium distances. Effective even in the hands of laymen, but requires almost
+    a full turn to reload.
   itemType: 3
   rarity: 1
   fatiguePenalty: 8

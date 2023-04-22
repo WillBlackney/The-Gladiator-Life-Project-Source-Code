@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 0b709ed723344c746bbf36d2bb5fb0b4, type: 3}
   itemName: Entwood Staff
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A staff made of living wood from an ancient tree, imbued with
+    the power of nature and used by druids and other nature-based spellcasters.
   itemType: 3
   rarity: 2
   fatiguePenalty: 12

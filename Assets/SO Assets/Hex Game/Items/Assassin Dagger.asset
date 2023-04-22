@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 7407f41f53431f140af71c4c4ad1f49c, type: 3}
   itemName: Assassin Dagger
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A curved blade commonly used by professional assassins.
   itemType: 3
   rarity: 3
   fatiguePenalty: 0

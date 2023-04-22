@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 7660b2a6c6016b641bfb122c74322ce0, type: 3}
   itemName: Flaming Skull
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A skull that is wreathed in constant flames, said to be the remains
+    of an undead creature or cursed individual.
   itemType: 4
   rarity: 3
   fatiguePenalty: 0

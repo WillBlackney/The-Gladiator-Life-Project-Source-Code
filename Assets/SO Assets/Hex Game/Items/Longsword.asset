@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: ccd92b388efd8cf4288d765aa5f69fd1, type: 3}
   itemName: Longsword
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A long and thin blade used both for quick slashes and sweeping
+    strikes.
   itemType: 3
   rarity: 1
   fatiguePenalty: 10

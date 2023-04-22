@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 5e02b73a34d607946bcdd883eaa27d9b, type: 3}
   itemName: Gladiator Helmet
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A distinctive helmet made of metal, designed to protect the head
+    while also allowing for maximum visibility and ventilation. Often adorned with
+    decorative elements and designs.
   itemType: 1
   rarity: 3
   fatiguePenalty: 13

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 9fced7578a7615a4b890887a7e3f33b3, type: 3}
   itemName: Leather Arm Guards
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: Simple but sturdy arm guards made of thick leather, with straps
+    to secure them in place.
   itemType: 2
   rarity: 1
   fatiguePenalty: 0

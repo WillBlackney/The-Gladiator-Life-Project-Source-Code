@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: b818b625005f9a245b372435f7e54fed, type: 3}
   itemName: Ancient Dice
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A set of weathered and worn dice, rumored to have been used in
+    games of chance by powerful wizards of old.
   itemType: 4
   rarity: 3
   fatiguePenalty: 0

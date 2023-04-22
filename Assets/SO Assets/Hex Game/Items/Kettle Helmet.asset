@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 818c32af1b252704abb7a4359fd21bff, type: 3}
   itemName: Kettle Helmet
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A helmet with a rounded dome shape, resembling the shape of a
+    kettle or cauldron. Often worn by archers for its visibility and modest protection.
   itemType: 1
   rarity: 1
   fatiguePenalty: 2

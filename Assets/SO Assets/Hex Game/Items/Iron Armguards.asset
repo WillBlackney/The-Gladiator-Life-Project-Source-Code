@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 47da29ae83c55854c813c7305b657477, type: 3}
   itemName: Iron Armguards
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A set of metal or leather guards worn around the forearms, designed
+    to protect against slashing and piercing attacks. Often worn by warriors and
+    soldiers in conjunction with other armor pieces.
   itemType: 2
   rarity: 2
   fatiguePenalty: 12

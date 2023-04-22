@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: a06a393a521e8694da9272d2c5aac822, type: 3}
   itemName: Studded Leather
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: Armor made of leather studded with small metal studs, providing
+    both protection and a menacing appearance.
   itemType: 2
   rarity: 1
   fatiguePenalty: 10

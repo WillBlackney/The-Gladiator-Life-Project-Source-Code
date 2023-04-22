@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 0bf6a8d5e6279204e9505ad9391ee6c3, type: 3}
   itemName: Magus Staff
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A staff made of polished ebony mana stone, used by powerful spellcasters
+    to channel devastating magical energy upon their enemies.
   itemType: 3
   rarity: 3
   fatiguePenalty: 12

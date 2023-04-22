@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 2a685eb6abad67444afd446039f86e06, type: 3}
   itemName: Curved Axe
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A one-handed axe with a medium long shaft and a broad head.
   itemType: 3
   rarity: 2
   fatiguePenalty: 10

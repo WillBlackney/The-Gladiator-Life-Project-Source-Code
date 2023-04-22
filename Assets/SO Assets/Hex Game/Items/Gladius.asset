@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 550b2323f7d5e12499e09843d9112e96, type: 3}
   itemName: Gladius
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A short raw iron sword with some dents and notches, easy to wield
+    in one hand.
   itemType: 3
   rarity: 1
   fatiguePenalty: 6

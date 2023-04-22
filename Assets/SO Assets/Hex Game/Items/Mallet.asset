@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: c3816a2054e5cb246b01ae3d20c4c8c9, type: 3}
   itemName: Mallet
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A large wooden mallet held with both hands. Effective against
+    heavily armoured foes.
   itemType: 3
   rarity: 1
   fatiguePenalty: 16

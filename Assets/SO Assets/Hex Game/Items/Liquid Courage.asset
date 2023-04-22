@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: ae9b50cc8e5718b4fa0954b8723afc80, type: 3}
   itemName: Liquid Courage
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: 'A small vial filled with a dark and potent liquid, said to grant
+    the drinker bravery and fearlessness. '
   itemType: 4
   rarity: 3
   fatiguePenalty: 0

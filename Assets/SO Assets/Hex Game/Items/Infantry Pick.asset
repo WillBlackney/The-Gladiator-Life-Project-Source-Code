@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 3ecec5d15e6e5af47a5928d7ab91524e, type: 3}
   itemName: Infantry Pick
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A wooden shaft with a long and pointy metal head designed to puncture
+    the sturdiest of armors.
   itemType: 3
   rarity: 3
   fatiguePenalty: 8

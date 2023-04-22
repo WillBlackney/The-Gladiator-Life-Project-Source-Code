@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 637c698809ad3d1469e847465d04e9cb, type: 3}
   itemName: Knight Barbute
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: 'With a distinctive ''T'' shape over the face, it is often worn
+    by tournament knights. Proves significant protectionm but is difficult to see
+    and breath in. '
   itemType: 1
   rarity: 3
   fatiguePenalty: 11

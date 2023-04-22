@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 36ab14e47c22c27458228bb2b51731b7, type: 3}
   itemName: Steel Cudgel
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A large and heavy winged mace held with both hands. Receiving
+    a blow from this weapon will leave anyone dazed and gasping for air, no matter
+    their armor.
   itemType: 3
   rarity: 2
   fatiguePenalty: 16

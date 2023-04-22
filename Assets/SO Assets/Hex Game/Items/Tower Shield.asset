@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 125d5483daa16de48b2282f4242e5440, type: 3}
   itemName: Tower Shield
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A massive shield made of metal and wood, commonly used by heavily
+    armored soldiers and knights.
   itemType: 3
   rarity: 3
   fatiguePenalty: 18

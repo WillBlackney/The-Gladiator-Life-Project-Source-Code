@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: b7289a672d92fe547b0b3ff408f6a467, type: 3}
   itemName: Hunting Spear
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A short and heavy spear with two wings behind the bladed tip.
   itemType: 3
   rarity: 2
   fatiguePenalty: 8

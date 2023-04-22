@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 2414c3b094caa874cb65bc8353defc24, type: 3}
   itemName: Green Hood
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A hood made of green material, often worn by those seeking to
+    blend in with forest environments. Its color and texture help the wearer to remain
+    unseen and undetected by others.
   itemType: 1
   rarity: 1
   fatiguePenalty: 0

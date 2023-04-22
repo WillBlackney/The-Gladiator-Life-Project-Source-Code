@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 464c351b3945b99428dc58f6c4a05dbb, type: 3}
   itemName: Short Bow
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A simple wooden short bow with decent range.
   itemType: 3
   rarity: 1
   fatiguePenalty: 6

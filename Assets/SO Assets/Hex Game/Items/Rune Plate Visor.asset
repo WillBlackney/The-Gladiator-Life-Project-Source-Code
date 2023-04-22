@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 007ca9a5e325259459fbaa8d8e6778de, type: 3}
   itemName: Rune Plate Visor
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A sturdy helmet with a visor that is decorated with glowing runes,
+    imbuing the wearer with magical power.
   itemType: 1
   rarity: 2
   fatiguePenalty: 9

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 1d890456a35d0c444870a6adc4b5f94e, type: 3}
   itemName: Iron Horn Helmet
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A distinctive helmet made of iron, adorned with two large horns
+    protruding from the top. Often worn by fierce and intimidating warriors or barbarians.
   itemType: 1
   rarity: 2
   fatiguePenalty: 5

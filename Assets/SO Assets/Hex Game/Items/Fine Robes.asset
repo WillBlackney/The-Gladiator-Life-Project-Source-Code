@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: e544f5890c84afb4ca79ff9fcc06c4fb, type: 3}
   itemName: Fine Robes
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A set of ornate and expensive robes made of luxurious materials,
+    often worn by wealthy or influential individuals. While not providing much physical
+    protection, its visual grandeur can intimidate and impress others.
   itemType: 2
   rarity: 1
   fatiguePenalty: 0

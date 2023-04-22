@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 5c4e8d50b8e1cb046aec6d43421fa97b, type: 3}
   itemName: Dragon Claw
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A sharp and jagged dragon's claw, rumored to be imbued with the
+    fiery power of dragons.
   itemType: 4
   rarity: 2
   fatiguePenalty: 0

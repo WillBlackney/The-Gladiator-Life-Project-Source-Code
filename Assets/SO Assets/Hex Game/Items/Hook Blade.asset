@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 616c1957b8eecab4ab31b4b527dab3f5, type: 3}
   itemName: Hook Blade
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A modest polearm with a hooked blade for striking over some long
+    distances.
   itemType: 3
   rarity: 2
   fatiguePenalty: 12

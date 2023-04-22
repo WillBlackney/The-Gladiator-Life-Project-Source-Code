@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: bb2251da1c4f5574c8209ffc2fce9cd2, type: 3}
   itemName: Simple Spear
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A long and sturdy spear built for battle.
   itemType: 3
   rarity: 3
   fatiguePenalty: 8

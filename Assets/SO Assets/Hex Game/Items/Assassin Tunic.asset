@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 6a21f01572842594cae85e2b3497d430, type: 3}
   itemName: Assassin Tunic
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A form-fitting tunic made of thin and flexible material, designed
+    to allow ease of movement and silence while sneaking. Often worn in conjunction
+    with the assassin hood, the tunic is lightweight and unencumbering, making it
+    ideal for agile and stealthy characters.
   itemType: 2
   rarity: 2
   fatiguePenalty: 9

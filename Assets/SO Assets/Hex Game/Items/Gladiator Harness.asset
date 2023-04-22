@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: f583ad69837d6cd4f889685a47a0df82, type: 3}
   itemName: Gladiator Harness
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: 'A set of straps and buckles worn over the arms, designed to protect
+    the shoulders while leaving the torso unencumbered. '
   itemType: 2
   rarity: 2
   fatiguePenalty: 8

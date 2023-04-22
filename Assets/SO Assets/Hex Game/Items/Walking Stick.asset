@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 3eebd776a024f5b429cd8d6129f28dc5, type: 3}
   itemName: Walking Stick
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A simple staff used for support during long journeys or hikes,
+    often adorned with intricate carvings.
   itemType: 3
   rarity: 1
   fatiguePenalty: 12

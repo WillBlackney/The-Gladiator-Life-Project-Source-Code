@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 6c85c0c056c1b644aabd263d4c17c699, type: 3}
   itemName: Pitchfork
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A common farming tool held with both hands, capable of long range
+    thrusts and controlling enemies.
   itemType: 3
   rarity: 1
   fatiguePenalty: 12

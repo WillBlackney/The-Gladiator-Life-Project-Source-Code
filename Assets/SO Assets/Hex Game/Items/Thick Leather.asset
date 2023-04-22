@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: aedb695d12ebd374ca0d76d2c10694fd, type: 3}
   itemName: Thick Leather
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: Armor made of multiple layers of thick, heavy leather, providing
+    reliable protection against blunt force attacks.
   itemType: 2
   rarity: 0
   fatiguePenalty: 6

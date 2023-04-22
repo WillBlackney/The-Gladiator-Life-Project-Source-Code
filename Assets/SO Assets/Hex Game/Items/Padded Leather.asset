@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: c89f6346a844d5141bb8e6dd6c7f5740, type: 3}
   itemName: Padded Leather
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: Armor made of layers of quilted leather, providing protection
+    while remaining flexible and comfortable.
   itemType: 2
   rarity: 1
   fatiguePenalty: 4

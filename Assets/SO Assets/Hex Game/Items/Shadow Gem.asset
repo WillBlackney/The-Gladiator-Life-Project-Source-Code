@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: c4f116b5b67598b4ab2abc175995be1c, type: 3}
   itemName: Shadow Gem
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A dark and gleaming gemstone, said to have been created by the
+    shadows themselves and imbued with their power.
   itemType: 4
   rarity: 3
   fatiguePenalty: 0

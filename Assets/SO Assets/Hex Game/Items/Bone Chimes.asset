@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 592f5078b6105154ca32af445bda9c28, type: 3}
   itemName: Bone Chimes
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A necklace made of bleached white bones that clatter together,
+    said to ward off evil spirits.
   itemType: 4
   rarity: 2
   fatiguePenalty: 0

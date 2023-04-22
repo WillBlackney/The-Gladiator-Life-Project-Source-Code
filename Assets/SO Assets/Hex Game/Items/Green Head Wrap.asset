@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 2414c3b094caa874cb65bc8353defc24, type: 3}
   itemName: Green Head Wrap
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A simple and lightweight head wrap made of green material, often
+    worn by travelers and adventurers in hot and dry environments to protect against
+    the sun and sand.
   itemType: 1
   rarity: 1
   fatiguePenalty: 0

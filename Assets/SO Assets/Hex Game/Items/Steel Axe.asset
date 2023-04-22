@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 89e3a78b491929443b31b7906dae8ad4, type: 3}
   itemName: Steel Axe
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: An axe explicitly designed for fighting armored opponents. Quite
+    sturdy.
   itemType: 3
   rarity: 3
   fatiguePenalty: 10

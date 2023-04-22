@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: c2fd076111497a644a97a4bb1e5da45e, type: 3}
   itemName: Bottled Pox
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A small glass bottle filled with a murky and viscous liquid, rumored
+    to contain an exceptionally deadly disease.
   itemType: 4
   rarity: 2
   fatiguePenalty: 0

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 9983125928a7ce5408fd8cfbea5d1c7c, type: 3}
   itemName: Magus Robes
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: Flowing robes made of lightweight fabric worn by practitioners
+    of the magical arts.
   itemType: 2
   rarity: 1
   fatiguePenalty: 0

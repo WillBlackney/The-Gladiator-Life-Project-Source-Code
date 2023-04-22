@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 499e257210912a04fb4fa7b9f0642ab6, type: 3}
   itemName: Simple Knife
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: 'A short knife for chopping vegetables and daily ad hoc tasks. '
   itemType: 3
   rarity: 1
   fatiguePenalty: 0

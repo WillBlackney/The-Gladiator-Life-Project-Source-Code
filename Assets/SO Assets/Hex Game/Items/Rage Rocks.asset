@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: d33a2cbb75de54247b051d27e0490836, type: 3}
   itemName: Rage Rocks
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A bag of small and fiery stones, said to have been formed from
+    the molten rage of a volcano or angry spirit.
   itemType: 4
   rarity: 1
   fatiguePenalty: 0

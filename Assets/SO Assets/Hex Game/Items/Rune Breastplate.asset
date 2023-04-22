@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 8b6d808c28b3ddd4b9ee62a6a48da796, type: 3}
   itemName: Rune Breastplate
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A breastplate adorned with ancient runes, said to provide protection
+    against magical attacks.
   itemType: 2
   rarity: 2
   fatiguePenalty: 25

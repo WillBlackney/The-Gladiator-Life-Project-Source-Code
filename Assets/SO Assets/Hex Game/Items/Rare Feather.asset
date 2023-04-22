@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: e311b2f99acf14749900d44ea2bdf5a8, type: 3}
   itemName: Rare Feather
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A brightly colored and exotic feather, rumored to have been plucked
+    from a rare and magical bird.
   itemType: 4
   rarity: 2
   fatiguePenalty: 0

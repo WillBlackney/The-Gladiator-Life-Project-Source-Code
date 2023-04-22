@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 200d533c5bbb72843be2ba3b102d9243, type: 3}
   itemName: Throwing Net
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A weighted net used for trapping and incapacitating foes, often
+    used by hunters and trappers.
   itemType: 3
   rarity: 1
   fatiguePenalty: 2

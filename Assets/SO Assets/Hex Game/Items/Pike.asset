@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: e19354ee274cc474882e833669397945, type: 3}
   itemName: Pike
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A long pike used for thrusting over some distance and keeping
+    the enemy at bay.
   itemType: 3
   rarity: 2
   fatiguePenalty: 12

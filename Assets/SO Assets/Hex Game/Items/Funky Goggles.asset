@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: bd4e8e10f5062a24687813536a16752b, type: 3}
   itemName: Funky Goggles
-  itemDescription: 'Place holder item description. Place holder item description. '
+  itemDescription: A pair of goggles with mismatched lenses and quirky designs, rumored
+    to have been invented by a mad scientist or eccentric inventor.
   itemType: 4
   rarity: 3
   fatiguePenalty: 0

@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 15e382485f21e434ca0ba37d7359f0d1, type: 3}
   itemName: Forest Tunic
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A sturdy and earthy tunic made of rough and durable material,
+    designed to provide protection against natural hazards and weather conditions.
+    Often worn by hunters and woodsmen.
   itemType: 2
   rarity: 1
   fatiguePenalty: 3

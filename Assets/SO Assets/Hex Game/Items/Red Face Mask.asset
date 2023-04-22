@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 2f8db68b3b3a03240a56eea93906a61a, type: 3}
   itemName: Red Face Mask
-  itemDescription: 'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum '
+  itemDescription: A cloth mask worn over the mouth and nose, often used by bandits
+    and thieves to hide their identity.
   itemType: 1
   rarity: 1
   fatiguePenalty: 0
