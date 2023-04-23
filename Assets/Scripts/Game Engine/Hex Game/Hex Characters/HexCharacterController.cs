@@ -20,6 +20,7 @@ using HexGameEngine.Pathfinding;
 using HexGameEngine.UI;
 using HexGameEngine.Items;
 using HexGameEngine.Libraries;
+using System.Threading.Tasks;
 
 namespace HexGameEngine.Characters
 {
@@ -780,9 +781,54 @@ namespace HexGameEngine.Characters
         #region
         public void TriggerMeleeAttackAnimation(HexCharacterView view, Vector2 targetPos, ItemData weaponUsed, CoroutineData cData)
         {
-            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+            //AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+            //StartCoroutine(TriggerMeleeAttackAnimationCoroutine(view, targetPos, weaponUsed, cData));
             StartCoroutine(TriggerMeleeAttackAnimationCoroutine(view, targetPos, weaponUsed, cData));
         }
+        
+        /*
+        private async Task TriggerMeleeAttackAnimationCoroutine(HexCharacterView view, Vector2 targetPos, ItemData weaponUsed, CoroutineData cData)
+        {
+            HexCharacterModel model = view.character;
+            if (model == null)
+            {
+                if (cData != null) cData.MarkAsCompleted();
+            }
+
+            string animationString = DetermineWeaponAttackAnimationString(model, weaponUsed);
+            if(animationString == AnimationEventController.MAIN_HAND_MELEE_ATTACK_OVERHEAD)
+            {
+                // 60 sample rate
+                float frameToMilliseconds = 0.016667f;
+                float framesBeforeInitialMove = 12f * frameToMilliseconds;
+                float initialMoveTime = 8f * frameToMilliseconds;
+                float postImpactPause = 36f * frameToMilliseconds;
+                float moveBackTime = 30f * frameToMilliseconds;
+                view.currentAnimation = animationString;
+
+                // Start attack animation
+                view.ucmAnimator.SetTrigger(animationString);
+                await Task.Delay((int)(framesBeforeInitialMove * 1000f));
+
+                // Move 50% of the way towards the target position
+                Vector2 startPos = view.WorldPosition;
+                Vector2 forwardPos = (startPos + targetPos) / 2f;
+                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime);
+                await Task.Delay((int)(initialMoveTime * 1000f));
+
+                // Pause at impact point
+                if (cData != null) cData.MarkAsCompleted();
+                await Task.Delay((int) (postImpactPause * 1000f));
+
+                // Move back to start point
+                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime);
+                await Task.Delay((int) (moveBackTime * 1000f));
+            }            
+
+        }
+        
+        */
+        
         private IEnumerator TriggerMeleeAttackAnimationCoroutine(HexCharacterView view, Vector2 targetPos, ItemData weaponUsed, CoroutineData cData)
         {
             HexCharacterModel model = view.character;
@@ -794,26 +840,61 @@ namespace HexGameEngine.Characters
 
             float moveSpeedTime = 0.25f;
             string animationString = DetermineWeaponAttackAnimationString(model, weaponUsed);
-            if (animationString.Contains("THRUST")) moveSpeedTime = 0.5f;
-            view.currentAnimation = animationString;
-            view.ucmAnimator.SetTrigger(animationString);
-            Vector2 startPos = view.WorldPosition;
+            if (animationString == AnimationEventController.MAIN_HAND_MELEE_ATTACK_OVERHEAD)
+            {
+                // 60 sample rate
+                float frameToMilliseconds = 0.016667f;
+                float pauseTimeBeforeInitialMove = 8f * frameToMilliseconds;
+                float initialMoveTime = 12f * frameToMilliseconds;
+                float postImpactPause = 30f * frameToMilliseconds;
+                float moveBackTime = 30f * frameToMilliseconds;
+                view.currentAnimation = animationString;
 
-            // Move 66% of the way towards the target position
-            Vector2 forwardPos = (startPos + targetPos) / 1.8f;
+                // Start attack animation
+                view.ucmAnimator.SetTrigger(animationString);
+                yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
 
-            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutSine);
-            yield return new WaitForSeconds(moveSpeedTime / 2);
+                // Move 50% of the way towards the target position
+                Vector2 startPos = view.WorldPosition;
+                Vector2 forwardPos = (startPos + targetPos) / 2f;
+                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime);
+                yield return new WaitForSeconds(initialMoveTime);
 
-            if (cData != null) cData.MarkAsCompleted();            
+                // Pause at impact point
+                if (cData != null) cData.MarkAsCompleted();
+                yield return new WaitForSeconds(postImpactPause);
 
-            yield return new WaitForSeconds(moveSpeedTime / 2);
+                // Move back to start point
+                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime);
+            }
+            else
+            {
+                if (animationString.Contains("THRUST")) moveSpeedTime = 0.5f;
+                view.currentAnimation = animationString;
+                view.ucmAnimator.SetTrigger(animationString);
+                Vector2 startPos = view.WorldPosition;
 
-            // move back to start pos
-            view.ucmMovementParent.transform.DOMove(startPos, moveSpeedTime);
-            yield return new WaitForSeconds(moveSpeedTime);
+                // Move 66% of the way towards the target position
+                //Vector2 forwardPos = (startPos + targetPos) / 1.8f;
+
+                // Move 50% of the way towards the target position
+                Vector2 forwardPos = (startPos + targetPos) / 2f;
+
+                view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutSine);
+                yield return new WaitForSeconds(moveSpeedTime / 2);
+
+                if (cData != null) cData.MarkAsCompleted();
+
+                yield return new WaitForSeconds(moveSpeedTime / 2);
+
+                // move back to start pos
+                view.ucmMovementParent.transform.DOMove(startPos, moveSpeedTime);
+                yield return new WaitForSeconds(moveSpeedTime);
+            }
+
 
         }
+        
         public void TriggerTackleAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
         {
             StartCoroutine(TriggerTackleAnimationCoroutine(view, targetPos, cData));
