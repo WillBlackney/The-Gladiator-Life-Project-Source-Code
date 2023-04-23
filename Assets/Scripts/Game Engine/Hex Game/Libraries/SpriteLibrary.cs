@@ -110,6 +110,9 @@ namespace HexGameEngine.Libraries
         private Sprite daggerIcon;
         [PreviewField(75)]
         [SerializeField]
+        private Sprite spearIcon;
+        [PreviewField(75)]
+        [SerializeField]
         private Sprite staffIcon;
         [PreviewField(75)]
         [SerializeField]
@@ -357,6 +360,10 @@ namespace HexGameEngine.Libraries
             else if (weaponClass == WeaponClass.Dagger)
             {
                 spriteReturned = daggerIcon;
+            }
+            else if (weaponClass == WeaponClass.Spear)
+            {
+                spriteReturned = spearIcon;
             }
             else if (weaponClass == WeaponClass.Bow)
             {

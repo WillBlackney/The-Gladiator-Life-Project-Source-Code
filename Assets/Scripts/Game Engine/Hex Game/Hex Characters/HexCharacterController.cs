@@ -854,6 +854,37 @@ namespace HexGameEngine.Characters
                 view.ucmAnimator.SetTrigger(animationString);
                 yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
 
+                // to do: trigger SFX weapon swing
+
+                // Move 50% of the way towards the target position
+                Vector2 startPos = view.WorldPosition;
+                Vector2 forwardPos = (startPos + targetPos) / 2f;
+                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime);
+                yield return new WaitForSeconds(initialMoveTime);
+
+                // Pause at impact point
+                if (cData != null) cData.MarkAsCompleted();
+                yield return new WaitForSeconds(postImpactPause);
+
+                // Move back to start point
+                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime);
+            }
+            else if (animationString == AnimationEventController.MAIN_HAND_MELEE_ATTACK_THRUST)
+            {
+                // 60 sample rate
+                float frameToMilliseconds = 0.016667f;
+                float pauseTimeBeforeInitialMove = 12f * frameToMilliseconds;
+                float initialMoveTime = 11f * frameToMilliseconds;
+                float postImpactPause = 19f * frameToMilliseconds;
+                float moveBackTime = 20f * frameToMilliseconds;
+                view.currentAnimation = animationString;
+
+                // Start attack animation
+                view.ucmAnimator.SetTrigger(animationString);
+                yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
+
+                // to do: trigger SFX weapon swing
+
                 // Move 50% of the way towards the target position
                 Vector2 startPos = view.WorldPosition;
                 Vector2 forwardPos = (startPos + targetPos) / 2f;
