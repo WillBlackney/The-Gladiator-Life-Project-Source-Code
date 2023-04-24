@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
 using HexGameEngine.Abilities;
+using HexGameEngine.Audio;
 
 namespace HexGameEngine.Items
 {
@@ -107,9 +108,24 @@ namespace HexGameEngine.Items
         [BoxGroup("Effects Info", true, true)]
         [LabelWidth(100)]
         public ItemEffectSet[] itemEffectSets;
+
+
+        [BoxGroup("Audio Info", true, true)]
+        [ShowIf("ShowAudioFields")]
+        [LabelWidth(100)]
+        public Sound swingSFX = Sound.None;
+
+        [BoxGroup("Audio Info")]
+        [ShowIf("ShowAudioFields")]
+        [LabelWidth(100)]
+        public Sound hitSFX = Sound.None;
         #endregion
 
         #region Odin Showifs
+        public bool ShowAudioFields()
+        {
+            return itemType == ItemType.Weapon;
+        }
         public bool ShowWeaponField()
         {
             return itemType == ItemType.Weapon;

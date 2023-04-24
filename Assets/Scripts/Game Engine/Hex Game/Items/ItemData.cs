@@ -1,4 +1,5 @@
 ﻿using HexGameEngine.Abilities;
+using HexGameEngine.Audio;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,6 +40,9 @@ namespace HexGameEngine.Items
         public List<AbilityData> grantedAbilities = new List<AbilityData>();
         public List<ItemEffect> itemEffects = new List<ItemEffect>();
         public ItemEffectSet[] itemEffectSets;
+
+        public Sound swingSFX = Sound.None;
+        public Sound hitSFX = Sound.None;
         #endregion
 
         #region Getters + Accessors

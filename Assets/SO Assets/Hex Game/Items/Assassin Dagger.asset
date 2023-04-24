@@ -56,3 +56,5 @@ MonoBehaviour:
       innatePerkGainedOnUse:
         perkTag: 0
         stacks: 0
+  swingSFX: 67
+  hitSFX: 61

@@ -748,6 +748,7 @@ namespace HexGameEngine
         SoundEffect = 5,
         ScreenOverlay = 7,
         Delay = 6,
+        WeaponHitSound = 8,
 
     }
     public enum ScreenOverlayType

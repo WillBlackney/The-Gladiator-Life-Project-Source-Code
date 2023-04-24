@@ -164,6 +164,9 @@ namespace HexGameEngine.Items
             i.minArmourRoll = d.minArmourRoll;
             i.maxArmourRoll = d.maxArmourRoll;
 
+            i.swingSFX = d.swingSFX;
+            i.hitSFX = d.hitSFX;
+
             foreach (AbilityDataSO ability in d.grantedAbilities)
             {
                 i.grantedAbilities.Add(AbilityController.Instance.BuildAbilityDataFromScriptableObjectData(ability));
@@ -197,6 +200,9 @@ namespace HexGameEngine.Items
             i.fatiguePenalty = original.fatiguePenalty;
             i.minArmourRoll = original.minArmourRoll;
             i.maxArmourRoll = original.maxArmourRoll;
+
+            i.swingSFX = original.swingSFX;
+            i.hitSFX = original.hitSFX;
 
             return i;
         }

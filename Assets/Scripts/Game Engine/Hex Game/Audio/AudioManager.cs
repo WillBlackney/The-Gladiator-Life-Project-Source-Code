@@ -32,6 +32,9 @@ namespace HexGameEngine.Audio
         [Header("Ability SFX")]
         [SerializeField] private AudioModel[] allAbilitySFX;
 
+        [Header("Weapon SFX")]
+        [SerializeField] private AudioModel[] allWeaponSFX;
+
         [Header("Character SFX")]
         [SerializeField] private AudioModel[] allCharacterSFX;
 
@@ -69,6 +72,7 @@ namespace HexGameEngine.Audio
             allAudioModelsList.AddRange(allMusic);
             allAudioModelsList.AddRange(allCardSFX);
             allAudioModelsList.AddRange(allAbilitySFX);
+            allAudioModelsList.AddRange(allWeaponSFX);
             allAudioModelsList.AddRange(allCharacterSFX);
             allAudioModelsList.AddRange(allProjectileSFX);
             allAudioModelsList.AddRange(allExplosionSFX);
@@ -510,6 +514,15 @@ namespace HexGameEngine.Audio
         Music_Victory_Fanfare = 50,
         Music_Defeat_Fanfare = 59,
         Music_Main_Menu_Theme_1 = 36,
+
+        Weapon_Impact_Bloody_1 = 60,
+        Weapon_Impact_Bloody_Metallic_1 = 61,
+        Weapon_Impact_Blunt_Heavy_1 = 62,
+        Weapon_Impact_Heavy_Metallic_1 = 63,
+        Weapon_Impact_Light_Metallic_1 = 64,
+        Weapon_Impact_Light_Blunt_1 = 65,
+        Weapon_Swing_High_1 = 66,
+        Weapon_Swing_Medium_1 = 67,
 
 
 
