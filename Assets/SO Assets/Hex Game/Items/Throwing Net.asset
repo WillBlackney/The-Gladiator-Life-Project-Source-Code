@@ -36,3 +36,5 @@ MonoBehaviour:
   grantedAbilities:
   - {fileID: 11400000, guid: 1e5eb0be09430954a90be55e16c1de88, type: 2}
   itemEffectSets: []
+  swingSFX: 86
+  hitSFX: 8

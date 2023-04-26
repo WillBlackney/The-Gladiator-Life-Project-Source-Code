@@ -72,21 +72,6 @@ MonoBehaviour:
       projectileStartPosition: 0
       onCharacter: 0
     visualEventsOnHit:
-    - eventType: 3
-      screenOverlayType: 0
-      overlayColor: 0
-      overlayFadeInTime: 0
-      overlayDuration: 0
-      overlayFadeOutTime: 0
-      particleEffect: 2
-      cameraShake: 0
-      movementAnimation: 0
-      soundEffect: 0
-      characterAnimation: 0
-      delayDuration: 0
-      projectileFired: 0
-      projectileStartPosition: 0
-      onCharacter: 2
     - eventType: 4
       screenOverlayType: 0
       overlayColor: 0
@@ -95,6 +80,21 @@ MonoBehaviour:
       overlayFadeOutTime: 0
       particleEffect: 0
       cameraShake: 1
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    - eventType: 8
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
       movementAnimation: 0
       soundEffect: 0
       characterAnimation: 0

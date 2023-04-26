@@ -12,7 +12,17 @@ namespace HexGameEngine.Audio
         [HorizontalGroup("General Properties", 75)]
         [HideLabel]
         [PreviewField(75)]
-        public AudioClip audioClip;
+        [ShowIf("ShowAudioClip")]
+        public AudioClip audioClip;       
+
+        [VerticalGroup("General Properties/Stats")]
+        [LabelWidth(100)]
+        public bool randomizeClip;
+
+        [VerticalGroup("General Properties/Stats")]
+        [HideLabel]
+        [ShowIf("ShowAudioClips")]
+        public AudioClip[] audioClips;
 
         [VerticalGroup("General Properties/Stats")]
         [LabelWidth(100)]
@@ -74,6 +84,14 @@ namespace HexGameEngine.Audio
         [HideInInspector] public bool fadingOut;
 
 
+        public bool ShowAudioClip()
+        {
+            return !randomizeClip;
+        }
+        public bool ShowAudioClips()
+        {
+            return randomizeClip;
+        }
         public bool ShowVolume()
         {
             return randomizeVolume == false;

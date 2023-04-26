@@ -37,8 +37,7 @@ namespace HexGameEngine.VisualEvents
         private void PlayEventFromQueue(VisualEvent ve)
         {
             ve.isPlaying = true;
-            //StartCoroutine(PlayEventFromQueueCoroutine(ve));
-            PlayEventFromQueueCoroutine(ve).GetAwaiter();
+            PlayEventFromQueueCoroutine(ve);
         }
         private void PlayNextEventFromQueue()
         {
@@ -96,7 +95,8 @@ namespace HexGameEngine.VisualEvents
             // Wait until execution finished 
             if (ve.cData != null)
             {
-                while (ve.cData.CoroutineCompleted() == false) await Task.Delay((int)(Time.deltaTime * 1000));
+                //while (ve.cData.CoroutineCompleted() == false) await Task.Delay((int)(Time.deltaTime * 1000));
+                while (ve.cData.CoroutineCompleted() == false) await Task.Delay(10);
                 //yield return new WaitUntil(() => ve.cData.CoroutineCompleted() == true);
             }
 

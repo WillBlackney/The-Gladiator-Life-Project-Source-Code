@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
 using HexGameEngine.Utilities;
+using DG.Tweening;
 
 namespace HexGameEngine.Audio
 {
@@ -234,27 +235,18 @@ namespace HexGameEngine.Audio
         }
         private void BuildAudioPlayerFromAudioModelData(AudioModel data, AudioPlayer player)
         {
-            player.source.clip = data.audioClip;
+            // Randomize clip
+            if (data.randomizeClip) player.source.clip = data.audioClips[RandomGenerator.NumberBetween(0, data.audioClips.Length - 1)];
+            else player.source.clip = data.audioClip;
 
             // Randomize pitch if marked to do so
-            if (data.randomizePitch)
-            {
-                player.source.pitch = RandomGenerator.NumberBetween(data.randomPitchLowerLimit, data.randomPitchUpperLimit);
-            }
-            else
-            {
-                player.source.pitch = data.pitch;
-            }
+            if (data.randomizePitch) player.source.pitch = RandomGenerator.NumberBetween(data.randomPitchLowerLimit, data.randomPitchUpperLimit);            
+            else player.source.pitch = data.pitch;            
 
             // Randomize volume if marked to do so
-            if (data.randomizeVolume)
-            {
-                player.source.volume = RandomGenerator.NumberBetween(data.randomVolumeLowerLimit, data.randomVolumeUpperLimit);
-            }
-            else
-            {
-                player.source.volume = data.volume;
-            }
+            if (data.randomizeVolume) player.source.volume = RandomGenerator.NumberBetween(data.randomVolumeLowerLimit, data.randomVolumeUpperLimit);            
+            else player.source.volume = data.volume;
+            
         }
         public void StopSound(Sound s)
         {
@@ -519,19 +511,34 @@ namespace HexGameEngine.Audio
         Music_Defeat_Fanfare = 59,
         Music_Main_Menu_Theme_1 = 36,
 
-        Weapon_Impact_Bloody_1 = 60,
-        Weapon_Impact_Bloody_Metallic_1 = 61,
-        Weapon_Impact_Blunt_Heavy_1 = 62,
-        Weapon_Impact_Heavy_Metallic_1 = 63,
-        Weapon_Impact_Light_Metallic_1 = 64,
-        Weapon_Impact_Light_Blunt_1 = 65,
-        Weapon_Swing_High_1 = 66,
-        Weapon_Swing_Medium_1 = 67,
-
-        Crowd_Ooh_Short_1 = 68,
-        Crowd_Cheer_Short_1 = 69,
-        Crowd_Boo_Long_1 = 70,
-
+        Weapon_Aoe_Swing = 60,
+        Weapon_Axe_1H_Swing = 61,
+        Weapon_Axe_1H_Hit = 62,
+        Weapon_Axe_2H_Swing = 63,
+        Weapon_Axe_2H_Hit = 64,
+        Weapon_Crossbow_Swing = 65,
+        Weapon_Crossbow_Hit = 66,
+        Weapon_Dagger_Swing = 67,
+        Weapon_Dagger_Hit = 68,
+        Weapon_Hammer_2H_Swing = 69,
+        Weapon_Hammer_2H_Hit = 70,
+        Weapon_Hammer_1H_Swing = 71,
+        Weapon_Hammer_1H_Hit = 72,
+        Weapon_Polearm_Swipe_Swing = 73,
+        Weapon_Polearm_Swipe_Hit = 74,
+        Weapon_Polearm_Thrust_Swing = 75,
+        Weapon_Polearm_Thrust_Hit = 76,
+        Weapon_Shield_Slam = 77,
+        Weapon_Spear_Swing = 78,
+        Weapon_Spear_Hit = 79,
+        Weapon_Staff_Swing = 80,
+        Weapon_Staff_Hit = 81,
+        Weapon_Sword_2H_Swing = 82,
+        Weapon_Sword_2H_Hit = 83,
+        Weapon_Sword_1H_Swing = 84,
+        Weapon_Sword_1H_Hit = 85,
+        Weapon_Throw_Net = 86,
+        Weapon_Split_Shield = 87,
 
     }
 }
@@ -547,7 +554,16 @@ namespace UnityEngine
         }
         public static void FadeOut(this AudioSource a, float duration, HexGameEngine.Audio.AudioModel data)
         {
-            a.GetComponent<MonoBehaviour>().StartCoroutine(FadeOutCore(a, duration, data));
+            a.DOKill();
+            data.fadingIn = false;
+            data.fadingOut = true;
+            a.DOFade(0f, duration).OnComplete(() =>
+            {
+                a.Stop();
+                a.volume = data.volume; 
+                data.fadingOut = false;
+            });
+            //a.GetComponent<MonoBehaviour>().StartCoroutine(FadeOutCore(a, duration, data));
         }
 
         private static IEnumerator FadeOutCore(AudioSource a, float duration, CardGameEngine.AudioModel data)
@@ -596,7 +612,15 @@ namespace UnityEngine
         }
         public static void FadeIn(this AudioSource a, float duration, HexGameEngine.Audio.AudioModel data)
         {
-            a.GetComponent<MonoBehaviour>().StartCoroutine(FadeInCore(a, duration, data));
+            a.DOKill();
+            data.fadingOut = false;
+            data.fadingIn = true;
+            a.volume = 0f;
+            a.Play();
+            a.DOFade(data.volume, duration).OnComplete(() =>
+            {
+                data.fadingIn = false;
+            });
         }
         private static IEnumerator FadeInCore(AudioSource a, float duration, CardGameEngine.AudioModel data)
         {

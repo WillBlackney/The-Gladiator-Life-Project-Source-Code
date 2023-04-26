@@ -1434,7 +1434,7 @@ namespace HexGameEngine.Combat
             // Fade out world space GUI
             VisualEventManager.Instance.CreateVisualEvent(() => 
             {
-                AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Boo_Long_1);
+                //AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Boo_Long_1);
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null);
                 view.vfxManager.StopAllEffects();
             }, QueuePosition.Back, 0, 0, parentEvent);

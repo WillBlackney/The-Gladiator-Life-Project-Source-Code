@@ -38,5 +38,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9da3618beca425642bd91a3160d9a7d0, type: 2}
   - {fileID: 11400000, guid: 859b76629648b014d8f13ba424ded82b, type: 2}
   itemEffectSets: []
-  swingSFX: 67
-  hitSFX: 61
+  swingSFX: 69
+  hitSFX: 70
