@@ -44,6 +44,9 @@ namespace HexGameEngine.Audio
         [Header("Explosion SFX")]
         [SerializeField] private AudioModel[] allExplosionSFX;
 
+        [Header("Crowd SFX")]
+        [SerializeField] private AudioModel[] allCrowdSFX;
+
         [Header("Passive SFX")]
         [SerializeField] private AudioModel[] allPassiveSFX;
 
@@ -81,6 +84,7 @@ namespace HexGameEngine.Audio
             allAudioModelsList.AddRange(allEventsSFX);
             allAudioModelsList.AddRange(allEnvironmentsSFX);
             allAudioModelsList.AddRange(allAmbienceSFX);
+            allAudioModelsList.AddRange(allCrowdSFX);
 
             // Convert list to array
             allAudioModels = allAudioModelsList.ToArray();
@@ -524,6 +528,9 @@ namespace HexGameEngine.Audio
         Weapon_Swing_High_1 = 66,
         Weapon_Swing_Medium_1 = 67,
 
+        Crowd_Ooh_Short_1 = 68,
+        Crowd_Cheer_Short_1 = 69,
+        Crowd_Boo_Long_1 = 70,
 
 
     }

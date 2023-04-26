@@ -173,7 +173,10 @@ namespace HexGameEngine
             else
             {
                 HexCharacterController.Instance.CreateAllPlayerCombatCharacters(charactersWithSpawnPos);
-            }          
+            }
+
+            // Combat Music
+            AudioManager.Instance.FadeInSound(Sound.Music_Basic_1, 1f);
            
             // Spawn enemies in world
             HexCharacterController.Instance.SpawnEnemyEncounter(sandboxContractData.enemyEncounterData);            
