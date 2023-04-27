@@ -30,6 +30,10 @@ namespace HexGameEngine.Audio
 
         [VerticalGroup("General Properties/Stats")]
         [LabelWidth(100)]
+        public CombatMusicCategory combatCategory = CombatMusicCategory.None;
+
+        [VerticalGroup("General Properties/Stats")]
+        [LabelWidth(100)]
         public bool randomizeVolume;
 
         [VerticalGroup("General Properties/Stats")]

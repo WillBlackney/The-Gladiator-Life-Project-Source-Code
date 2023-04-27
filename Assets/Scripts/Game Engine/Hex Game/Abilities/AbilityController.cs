@@ -480,7 +480,7 @@ namespace HexGameEngine.Abilities
                         HexCharacterController.Instance.ModifyArmour(target, -abilityEffect.bonusArmourDamage);
 
                     // Do on hit visual effects for this ability
-                    //VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_Short_1), QueuePosition.Back, 0, 0, target.GetLastStackEventParent());
+                    VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1), QueuePosition.Back, 0, 0, target.GetLastStackEventParent());
                     foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                         AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, weaponUsed, target.GetLastStackEventParent());
 
@@ -592,7 +592,7 @@ namespace HexGameEngine.Abilities
                     VisualEventManager.Instance.CreateVisualEvent(() =>
                     {
                         VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "MISS");
-                        //AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Ooh_Short_1);
+                        AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Ooh_1);
                     }, QueuePosition.Back, 0, 0, target.GetLastStackEventParent());
 
                     // Check Evasion
@@ -715,7 +715,7 @@ namespace HexGameEngine.Abilities
                         HexCharacterController.Instance.ModifyCurrentFatigue(character, 5);
 
                         // Do on hit visual effects for this ability
-                       // VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_Short_1), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                        VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
                         foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                         {
                             AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, weaponUsed, character.GetLastStackEventParent());
@@ -732,7 +732,7 @@ namespace HexGameEngine.Abilities
                         {
                             if (character.hexCharacterView != null) pos = character.hexCharacterView.WorldPosition;
                             VisualEffectManager.Instance.CreateStatusEffect(pos, "MISS");
-                            //AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Ooh_Short_1);
+                            AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Ooh_1);
                         }, QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
 
                         // Check Evasion

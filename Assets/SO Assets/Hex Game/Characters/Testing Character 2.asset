@@ -27,7 +27,7 @@ MonoBehaviour:
       value: 50
       stars: 0
     accuracy:
-      value: 200
+      value: 60
       stars: 0
     resolve:
       value: 5
@@ -68,7 +68,7 @@ MonoBehaviour:
   - Undead_Head_4
   - Ghoul_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 9b8e828332b12524ea8077dc9f45ad24, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 6a78f7a4320bb5f4889c39e138776a4f, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: 335c81cb722666345aa6c308b1d780f5, type: 2}
     chestArmour: {fileID: 0}

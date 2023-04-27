@@ -176,7 +176,8 @@ namespace HexGameEngine
             }
 
             // Combat Music
-            AudioManager.Instance.FadeInSound(Sound.Music_Basic_1, 1f);
+            AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
+            AudioManager.Instance.FadeInSound(Sound.Ambience_Crowd_1, 1f);
            
             // Spawn enemies in world
             HexCharacterController.Instance.SpawnEnemyEncounter(sandboxContractData.enemyEncounterData);            

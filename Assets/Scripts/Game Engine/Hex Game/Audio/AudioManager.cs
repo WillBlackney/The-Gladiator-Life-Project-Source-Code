@@ -5,6 +5,7 @@ using System;
 using Sirenix.OdinInspector;
 using HexGameEngine.Utilities;
 using DG.Tweening;
+using TbsFramework.Players;
 
 namespace HexGameEngine.Audio
 {
@@ -158,25 +159,17 @@ namespace HexGameEngine.Audio
                 a.fadingIn = false;
                 a.fadingOut = false;
 
+                // Randomize clip
+                if (a.randomizeClip) a.source.clip = a.audioClips[RandomGenerator.NumberBetween(0, a.audioClips.Length - 1)];
+                else a.source.clip = a.audioClip;
+
                 // Randomize pitch if marked to do so
-                if (a.randomizePitch)
-                {
-                    a.source.pitch = RandomGenerator.NumberBetween(a.randomPitchLowerLimit, a.randomPitchUpperLimit);
-                }
-                else
-                {
-                    a.source.pitch = a.pitch;
-                }
+                if (a.randomizePitch) a.source.pitch = RandomGenerator.NumberBetween(a.randomPitchLowerLimit, a.randomPitchUpperLimit);
+                else a.source.pitch = a.pitch;                
 
                 // Randomize volume if marked to do so
-                if (a.randomizeVolume)
-                {
-                    a.source.volume = RandomGenerator.NumberBetween(a.randomVolumeLowerLimit, a.randomVolumeUpperLimit);
-                }
-                else
-                {
-                    a.source.volume = a.volume;
-                }
+                if (a.randomizeVolume) a.source.volume = RandomGenerator.NumberBetween(a.randomVolumeLowerLimit, a.randomVolumeUpperLimit);                
+                else a.source.volume = a.volume;                
 
                 a.source.Play();
             }
@@ -350,10 +343,9 @@ namespace HexGameEngine.Audio
         }
         public void AutoPlayBasicCombatMusic(float fadeDuration)
         {
-            /*
             // Find all basic combat music
             AudioModel[] basicCombatMusic = Array.FindAll(allAudioModels, sound => sound.combatCategory == CombatMusicCategory.Basic && sound != previousCombatTrack);
-
+           
             // Choose one track randomly
             AudioModel musicSelected = basicCombatMusic[RandomGenerator.NumberBetween(0, basicCombatMusic.Length - 1)];
 
@@ -362,7 +354,7 @@ namespace HexGameEngine.Audio
 
             // Cache track so it cant be played twice in a row
             previousCombatTrack = musicSelected;
-            */
+            
         }
         public void AutoPlayEliteCombatMusic(float fadeDuration)
         {
@@ -458,6 +450,7 @@ namespace HexGameEngine.Audio
 
         Ambience_Outdoor_Spooky = 39,
         Ambience_Crypt = 40,
+        Ambience_Crowd_1 = 88,
 
         Card_Draw = 0,
         Card_Moused_Over = 1,
@@ -539,6 +532,10 @@ namespace HexGameEngine.Audio
         Weapon_Sword_1H_Hit = 85,
         Weapon_Throw_Net = 86,
         Weapon_Split_Shield = 87,
+
+        Crowd_Cheer_1 = 89,
+        Crowd_Ooh_1 = 90,
+        Crowd_Applause_1 = 91,
 
     }
 }

@@ -224,24 +224,14 @@ namespace CardGameEngine
             player.source.clip = data.audioClip;
 
             // Randomize pitch if marked to do so
-            if (data.randomizePitch)
-            {
-                player.source.pitch = RandomGenerator.NumberBetween(data.randomPitchLowerLimit, data.randomPitchUpperLimit);
-            }
-            else
-            {
-                player.source.pitch = data.pitch;
-            }
+            if (data.randomizePitch) player.source.pitch = RandomGenerator.NumberBetween(data.randomPitchLowerLimit, data.randomPitchUpperLimit);            
+            else player.source.pitch = data.pitch;
+            
 
             // Randomize volume if marked to do so
-            if (data.randomizeVolume)
-            {
-                player.source.volume = RandomGenerator.NumberBetween(data.randomVolumeLowerLimit, data.randomVolumeUpperLimit);
-            }
-            else
-            {
-                player.source.volume = data.volume;
-            }
+            if (data.randomizeVolume) player.source.volume = RandomGenerator.NumberBetween(data.randomVolumeLowerLimit, data.randomVolumeUpperLimit);            
+            else player.source.volume = data.volume;
+            
         }
         public void StopSound(Sound s)
         {

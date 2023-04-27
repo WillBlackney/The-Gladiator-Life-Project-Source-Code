@@ -794,12 +794,13 @@ namespace HexGameEngine.Characters
                 yield break;
             }
 
-            float moveSpeedTime = 0.25f;
-            Ease ease = Ease.InExpo;
+            Ease moveTowardsEase = Ease.InExpo;
+            Ease moveBackEase = Ease.OutSine;
             string animationString = DetermineWeaponAttackAnimationString(model, weaponUsed);
             if (animationString == AnimationEventController.MAIN_HAND_MELEE_ATTACK_OVERHEAD)
             {
                 // 60 sample rate
+                float offset = -0.04f;
                 float frameToMilliseconds = 0.016667f;
                 float pauseTimeBeforeInitialMove = 8f * frameToMilliseconds;
                 float initialMoveTime = 12f * frameToMilliseconds;
@@ -817,20 +818,20 @@ namespace HexGameEngine.Characters
                 // Move 50% of the way towards the target position
                 Vector2 startPos = view.WorldPosition;
                 Vector2 forwardPos = (startPos + targetPos) / 2f;
-                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(ease).OnComplete(() =>
-                { if (cData != null) cData.MarkAsCompleted(); });
-                yield return new WaitForSeconds(initialMoveTime);
+                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(moveTowardsEase);
+                yield return new WaitForSeconds(initialMoveTime + offset);
 
                 // Pause at impact point
                 if (cData != null) cData.MarkAsCompleted();
                 yield return new WaitForSeconds(postImpactPause);
 
                 // Move back to start point
-                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime);
+                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
             }
             else if (animationString == AnimationEventController.MAIN_HAND_MELEE_ATTACK_THRUST)
             {
                 // 60 sample rate
+                float offset = -0.04f;
                 float frameToMilliseconds = 0.016667f;
                 float pauseTimeBeforeInitialMove = 12f * frameToMilliseconds;
                 float initialMoveTime = 11f * frameToMilliseconds;
@@ -848,79 +849,17 @@ namespace HexGameEngine.Characters
                 // Move 50% of the way towards the target position
                 Vector2 startPos = view.WorldPosition;
                 Vector2 forwardPos = (startPos + targetPos) / 2f;
-                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(ease).OnComplete(() =>
-                { if (cData != null) cData.MarkAsCompleted(); });
-                yield return new WaitForSeconds(initialMoveTime);
+                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(moveTowardsEase);
+                yield return new WaitForSeconds(initialMoveTime + offset);
 
                 // Pause at impact point
                 if (cData != null) cData.MarkAsCompleted();
                 yield return new WaitForSeconds(postImpactPause);
 
                 // Move back to start point
-                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime);
+                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
             }
             else if (animationString == AnimationEventController.OFF_HAND_MELEE_ATTACK_OVERHEAD)
-            {
-                // 60 sample rate
-                float frameToMilliseconds = 0.016667f;
-                float pauseTimeBeforeInitialMove = 8f * frameToMilliseconds;
-                float initialMoveTime = 12f * frameToMilliseconds;
-                float postImpactPause = 30f * frameToMilliseconds;
-                float moveBackTime = 30f * frameToMilliseconds;
-                view.currentAnimation = animationString;
-
-                // Start attack animation
-                view.ucmAnimator.SetTrigger(animationString);
-                yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
-
-                // to do: trigger SFX weapon swing
-                if (weaponUsed != null) AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
-
-                // Move 50% of the way towards the target position
-                Vector2 startPos = view.WorldPosition;
-                Vector2 forwardPos = (startPos + targetPos) / 2f;
-                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(ease).OnComplete(() => 
-                    { if (cData != null) cData.MarkAsCompleted(); });
-                yield return new WaitForSeconds(initialMoveTime);
-
-                // Pause at impact point
-                yield return new WaitForSeconds(postImpactPause);
-
-                // Move back to start point
-                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime);
-            }
-            else if (animationString == AnimationEventController.OFF_HAND_MELEE_ATTACK_THRUST)
-            {
-                // 60 sample rate
-                float frameToMilliseconds = 0.016667f;
-                float pauseTimeBeforeInitialMove = 12f * frameToMilliseconds;
-                float initialMoveTime = 11f * frameToMilliseconds;
-                float postImpactPause = 19f * frameToMilliseconds;
-                float moveBackTime = 20f * frameToMilliseconds;
-                view.currentAnimation = animationString;
-
-                // Start attack animation
-                view.ucmAnimator.SetTrigger(animationString);
-                yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
-
-                // Trigger SFX weapon swing
-                if (weaponUsed != null) AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
-
-                // Move 50% of the way towards the target position
-                Vector2 startPos = view.WorldPosition;
-                Vector2 forwardPos = (startPos + targetPos) / 2f;
-                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(ease).OnComplete(() =>
-                { if (cData != null) cData.MarkAsCompleted(); });
-                yield return new WaitForSeconds(initialMoveTime);
-
-                // Pause at impact point
-                if (cData != null) cData.MarkAsCompleted();
-                yield return new WaitForSeconds(postImpactPause);
-
-                // Move back to start point
-                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime);
-            }
-            else if (animationString == AnimationEventController.TWO_HAND_MELEE_ATTACK_OVERHEAD)
             {
                 // 60 sample rate
                 float offset = -0.04f;
@@ -941,7 +880,7 @@ namespace HexGameEngine.Characters
                 // Move 50% of the way towards the target position
                 Vector2 startPos = view.WorldPosition;
                 Vector2 forwardPos = (startPos + targetPos) / 2f;
-                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(ease);
+                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(moveTowardsEase);
                 yield return new WaitForSeconds(initialMoveTime + offset);
 
                 // Pause at impact point
@@ -949,11 +888,12 @@ namespace HexGameEngine.Characters
                 yield return new WaitForSeconds(postImpactPause);
 
                 // Move back to start point
-                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime);
+                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
             }
-            else if (animationString == AnimationEventController.TWO_HAND_MELEE_ATTACK_THRUST)
+            else if (animationString == AnimationEventController.OFF_HAND_MELEE_ATTACK_THRUST)
             {
                 // 60 sample rate
+                float offset = -0.04f;
                 float frameToMilliseconds = 0.016667f;
                 float pauseTimeBeforeInitialMove = 12f * frameToMilliseconds;
                 float initialMoveTime = 11f * frameToMilliseconds;
@@ -971,41 +911,79 @@ namespace HexGameEngine.Characters
                 // Move 50% of the way towards the target position
                 Vector2 startPos = view.WorldPosition;
                 Vector2 forwardPos = (startPos + targetPos) / 2f;
-                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(ease).OnComplete(() =>
-                { if (cData != null) cData.MarkAsCompleted(); });
-                yield return new WaitForSeconds(initialMoveTime);
+                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(moveTowardsEase);
+                yield return new WaitForSeconds(initialMoveTime + offset);
 
                 // Pause at impact point
                 if (cData != null) cData.MarkAsCompleted();
                 yield return new WaitForSeconds(postImpactPause);
 
                 // Move back to start point
-                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime);
+                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
             }
-            else
+            else if (animationString == AnimationEventController.TWO_HAND_MELEE_ATTACK_OVERHEAD)
             {
-                if (animationString.Contains("THRUST")) moveSpeedTime = 0.5f;
+                // 60 sample rate
+                float offset = -0.04f;
+                float frameToMilliseconds = 0.016667f;
+                float pauseTimeBeforeInitialMove = 8f * frameToMilliseconds;
+                float initialMoveTime = 12f * frameToMilliseconds;
+                float postImpactPause = 30f * frameToMilliseconds;
+                float moveBackTime = 30f * frameToMilliseconds;
                 view.currentAnimation = animationString;
-                view.ucmAnimator.SetTrigger(animationString);
-                Vector2 startPos = view.WorldPosition;
 
-                // Move 66% of the way towards the target position
-                //Vector2 forwardPos = (startPos + targetPos) / 1.8f;
+                // Start attack animation
+                view.ucmAnimator.SetTrigger(animationString);
+                yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
+
+                // Trigger SFX weapon swing
+                if (weaponUsed != null) AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
 
                 // Move 50% of the way towards the target position
+                Vector2 startPos = view.WorldPosition;
                 Vector2 forwardPos = (startPos + targetPos) / 2f;
+                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(moveTowardsEase);
+                yield return new WaitForSeconds(initialMoveTime + offset);
 
-                view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutSine);
-                yield return new WaitForSeconds(moveSpeedTime / 2);
-
+                // Pause at impact point
                 if (cData != null) cData.MarkAsCompleted();
+                yield return new WaitForSeconds(postImpactPause);
 
-                yield return new WaitForSeconds(moveSpeedTime / 2);
-
-                // move back to start pos
-                view.ucmMovementParent.transform.DOMove(startPos, moveSpeedTime);
-                yield return new WaitForSeconds(moveSpeedTime);
+                // Move back to start point
+                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
             }
+            else if (animationString == AnimationEventController.TWO_HAND_MELEE_ATTACK_THRUST)
+            {
+                // 60 sample rate
+                float offset = -0.04f;
+                float frameToMilliseconds = 0.016667f;
+                float pauseTimeBeforeInitialMove = 12f * frameToMilliseconds;
+                float initialMoveTime = 11f * frameToMilliseconds;
+                float postImpactPause = 19f * frameToMilliseconds;
+                float moveBackTime = 20f * frameToMilliseconds;
+                view.currentAnimation = animationString;
+
+                // Start attack animation
+                view.ucmAnimator.SetTrigger(animationString);
+                yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
+
+                // Trigger SFX weapon swing
+                if (weaponUsed != null) AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
+
+                // Move 50% of the way towards the target position
+                Vector2 startPos = view.WorldPosition;
+                Vector2 forwardPos = (startPos + targetPos) / 2f;
+                view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(moveTowardsEase);
+                yield return new WaitForSeconds(initialMoveTime + offset);
+
+                // Pause at impact point
+                if (cData != null) cData.MarkAsCompleted();
+                yield return new WaitForSeconds(postImpactPause);
+
+                // Move back to start point
+                view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
+            }
+            
 
 
         }
@@ -2744,7 +2722,7 @@ namespace HexGameEngine.Characters
         }
         #endregion
 
-        public string DetermineWeaponAttackAnimationString(HexCharacterModel character, ItemData weaponUsed)
+        private string DetermineWeaponAttackAnimationString(HexCharacterModel character, ItemData weaponUsed)
         {
             string ret = AnimationEventController.MAIN_HAND_MELEE_ATTACK_OVERHEAD;
 
