@@ -390,7 +390,7 @@ namespace HexGameEngine.VisualEvents
         #region
 
         // Shoot Arrow
-        public void ShootArrow(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 15)
+        public void ShootArrow(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10)
         {
             Debug.Log("VisualEffectManager.ShootArrow() called...");
             StartCoroutine(ShootArrowCoroutine(startPos, endPos, cData, speed));
@@ -406,7 +406,7 @@ namespace HexGameEngine.VisualEvents
         }
 
         // Shoot Arrow
-        public void ShootJavelin(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 20)
+        public void ShootJavelin(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 15)
         {
             Debug.Log("VisualEffectManager.ShootJavelin() called...");
             StartCoroutine(ShootJavelinCoroutine(startPos, endPos, cData, speed));

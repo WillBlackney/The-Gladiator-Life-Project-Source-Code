@@ -1094,42 +1094,40 @@ namespace HexGameEngine.Characters
             yield return new WaitForSeconds(moveSpeedTime);
 
         }
-        public void PlayShootCrossbowAnimation(HexCharacterView view, CoroutineData cData)
+        public void PlayShootCrossbowAnimation(HexCharacterView view, ItemData weaponUsed, CoroutineData cData)
         {
-            Debug.Log("CharacterEntityController.PlayRangedAttackAnimation() called...");
-            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-            AudioManager.Instance.PlaySoundPooled(Sound.Character_Draw_Bow);
-            StartCoroutine(PlayShootCrossbowAnimationCoroutine(view, cData));
+            StartCoroutine(PlayShootCrossbowAnimationCoroutine(view, weaponUsed, cData));
         }
-        private IEnumerator PlayShootCrossbowAnimationCoroutine(HexCharacterView view, CoroutineData cData)
+        private IEnumerator PlayShootCrossbowAnimationCoroutine(HexCharacterView view, ItemData weaponUsed, CoroutineData cData)
         {
+            float frameToMilliseconds = 0.016667f;
+            float shootFrame = 35f * frameToMilliseconds;
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             view.currentAnimation = AnimationEventController.SHOOT_CROSSBOW;
+
+            // Start anim
             view.ucmAnimator.SetTrigger(AnimationEventController.SHOOT_CROSSBOW);
-            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-            yield return new WaitForSeconds(0.5f);
-
-            // Resolve
-            if (cData != null) cData.MarkAsCompleted();            
+            yield return new WaitForSeconds(shootFrame);
+            AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
+            if (cData != null) cData.MarkAsCompleted();
         }
-        public void PlayShootBowAnimation(HexCharacterView view, CoroutineData cData)
+        public void PlayShootBowAnimation(HexCharacterView view, ItemData weaponUsed, CoroutineData cData)
         {
-            Debug.Log("CharacterEntityController.PlayRangedAttackAnimation() called...");
-            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-            AudioManager.Instance.PlaySoundPooled(Sound.Character_Draw_Bow);
-            StartCoroutine(PlayShootBowAnimationCoroutine(view, cData));
+            StartCoroutine(PlayShootBowAnimationCoroutine(view, weaponUsed, cData));
         }
-        private IEnumerator PlayShootBowAnimationCoroutine(HexCharacterView view, CoroutineData cData)
+        private IEnumerator PlayShootBowAnimationCoroutine(HexCharacterView view, ItemData weaponUsed, CoroutineData cData)
         {
+            float frameToMilliseconds = 0.016667f;
+            float shootFrame = 35f * frameToMilliseconds;
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             view.currentAnimation = AnimationEventController.SHOOT_BOW;
-            view.ucmAnimator.SetTrigger(AnimationEventController.SHOOT_BOW);
-            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-            yield return new WaitForSeconds(0.5f);
 
-            // Resolve
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
+            // Start anim
+            AudioManager.Instance.PlaySoundPooled(Sound.Character_Draw_Bow);
+            view.ucmAnimator.SetTrigger(AnimationEventController.SHOOT_BOW);
+            yield return new WaitForSeconds(shootFrame);
+            AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
+            if (cData != null) cData.MarkAsCompleted();
         }
         public void TriggerKnockedBackIntoObstructionAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
         {

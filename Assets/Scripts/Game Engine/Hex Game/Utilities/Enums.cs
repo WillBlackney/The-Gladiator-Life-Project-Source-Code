@@ -775,7 +775,7 @@ namespace HexGameEngine
         None = 0,
         MeleeAttack = 1,
         AoeMeleeAttack = 5,
-        ShootBow = 2,
+        ShootBowOrCrossbow = 2,
         ShootMagicWithHandGesture = 11,
         ShootProjectile = 7,
         Skill = 4,

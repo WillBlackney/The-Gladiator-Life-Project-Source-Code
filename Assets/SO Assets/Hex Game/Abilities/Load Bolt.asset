@@ -83,7 +83,7 @@ MonoBehaviour:
       particleEffect: 0
       cameraShake: 0
       movementAnimation: 0
-      soundEffect: 10
+      soundEffect: 94
       characterAnimation: 0
       delayDuration: 0
       projectileFired: 0

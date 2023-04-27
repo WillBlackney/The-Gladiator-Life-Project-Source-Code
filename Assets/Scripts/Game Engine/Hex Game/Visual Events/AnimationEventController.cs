@@ -164,22 +164,22 @@ namespace HexGameEngine.VisualEvents
                 VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayResurrectAnimation(user.hexCharacterView), QueuePosition.Back, 0, 0, stackEvent);
             }
             // Shoot Bow 
-            else if (vEvent.characterAnimation == CharacterAnimation.ShootBow)
+            else if (vEvent.characterAnimation == CharacterAnimation.ShootBowOrCrossbow)
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 CoroutineData cData = new CoroutineData();
                 // Crossbow
-                if (user.itemSet.mainHandItem != null && user.itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow)
+                if (weaponUsed != null && weaponUsed.weaponClass == WeaponClass.Crossbow)
                 {
                     // Character shoot bow animation
-                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootCrossbowAnimation(user.hexCharacterView, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootCrossbowAnimation(user.hexCharacterView, weaponUsed, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
 
                 }
                 // Normal Bow
                 else
                 {
                     // Character shoot bow animation
-                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootBowAnimation(user.hexCharacterView, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootBowAnimation(user.hexCharacterView, weaponUsed, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
                 }
 
                 // Create and launch arrow projectile
