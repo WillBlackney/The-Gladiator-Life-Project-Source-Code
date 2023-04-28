@@ -22,6 +22,7 @@ using UnityEngine.TextCore.Text;
 using UnityEditor.Experimental.GraphView;
 using CodiceApp.EventTracking.Plastic;
 using HexGameEngine.Audio;
+using Mono.Cecil.Cil;
 
 namespace HexGameEngine.Abilities
 {
@@ -1137,6 +1138,8 @@ namespace HexGameEngine.Abilities
                 List<LevelNode> hexsOnPath = new List<LevelNode>();
                 LevelNode previousHex = caster.currentTile;
                 LevelNode nextHex = null;
+                LevelNode knockbackHex = null;
+                HexCharacterModel knockedBackTarget = null;
 
                 for (int i = 0; i < abilityEffect.tilesMoved; i++)
                 {
@@ -1148,7 +1151,9 @@ namespace HexGameEngine.Abilities
                         !HexCharacterController.Instance.IsTargetFriendly(nextHex.myCharacter, caster))
                     {
                         // Collision end point found
+                        knockedBackTarget = nextHex.myCharacter;
                         obstructionHex = nextHex;
+                        knockbackHex = LevelController.Instance.GetAdjacentHexByDirection(obstructionHex, direction);
                         break;
                     }
                     // Hitting an friendly character or obstruction
@@ -1172,8 +1177,7 @@ namespace HexGameEngine.Abilities
                 {
                     // to do: animation type and speed (charge, dash, run, etc, and speed)
                     LevelController.Instance.ChargeDownPath(caster, hexsOnPath);
-                }
-                    
+                }                    
 
                 // Trigger on collision effects
                 if (abilityEffect.chainedEffect == false && obstructionHex != null)
@@ -1181,7 +1185,8 @@ namespace HexGameEngine.Abilities
                     foreach (AbilityEffect e in ability.onCollisionEffects)
                     {
                         TriggerAbilityEffect(ability, e, caster, obstructionHex.myCharacter, obstructionHex);
-                    }
+                    }                                     
+                                        
                 }
 
 

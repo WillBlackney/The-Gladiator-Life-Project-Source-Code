@@ -447,6 +447,8 @@ namespace HexGameEngine.Audio
         Ability_Dispell_Twang = 55,
         Ability_Enrage_Short = 56,
         Ability_Enrage_Long = 57,
+        Ability_Charge_Movement = 95,
+        Ability_Charge_Impact = 96,
 
         Ambience_Outdoor_Spooky = 39,
         Ambience_Crypt = 40,

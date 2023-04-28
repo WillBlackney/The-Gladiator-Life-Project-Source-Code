@@ -5,7 +5,6 @@ namespace HexGameEngine.VisualEvents
     public class Projectile : MonoBehaviour
     {
         // This script is for NON PARTICLE FX based projectiles
-
         // Properties + Component References
         #region
         [Header("Properties")]
@@ -20,7 +19,7 @@ namespace HexGameEngine.VisualEvents
         float nextX;
         float baseY;
         float height;
-        float maxParabolaY = 0.35f;
+        float maxParabolaY = 0.3f;
 
         public bool DestinationReached
         {
@@ -54,29 +53,18 @@ namespace HexGameEngine.VisualEvents
             if (destinationReached) return;
             distance = destination.x - start.x;
             nextX = Mathf.MoveTowards(transform.position.x, destination.x, travelSpeed * Time.deltaTime);
-            baseY = Mathf.Lerp(start.y, destination.y, (nextX - destination.x) / distance);
+            baseY = Mathf.Lerp(start.y, destination.y, (nextX - start.x) / distance);
             height = maxParabolaY * (nextX - start.x) * (nextX - destination.x) / (-0.25f * distance * distance);
 
             Vector3 movePosition = new Vector3(nextX, baseY + height, transform.position.z);
+            transform.rotation = FaceDestination2(movePosition - transform.position);
             transform.position = movePosition;
-            FaceDestination(movePosition);
 
-            if (transform.position == destination)
+            if (transform.position == destination || distance < 0.1f)
             {
                 destinationReached = true;
                 DestroySelf();
             }
-
-            /*
-            if (transform.position != destination)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, destination, travelSpeed * Time.deltaTime);
-                if (transform.position == destination)
-                {
-                    destinationReached = true;
-                    DestroySelf();
-                }
-            }*/
         }
         #endregion
 
@@ -88,6 +76,10 @@ namespace HexGameEngine.VisualEvents
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 10000f);
+        }
+        private Quaternion FaceDestination2(Vector2 rotation)
+        {
+            return Quaternion.Euler(0, 0, Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg);
         }
         private void DestroySelf()
         {

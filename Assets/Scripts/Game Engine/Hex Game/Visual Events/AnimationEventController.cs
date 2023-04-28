@@ -8,6 +8,7 @@ using HexGameEngine.HexTiles;
 using HexGameEngine.Utilities;
 using HexGameEngine.Audio;
 using HexGameEngine.Items;
+using DG.Tweening;
 
 namespace HexGameEngine.VisualEvents
 {
@@ -101,16 +102,28 @@ namespace HexGameEngine.VisualEvents
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 CoroutineData cData = new CoroutineData();
-                VisualEventManager.Instance.CreateVisualEvent(() => 
+                VisualEventManager.Instance.CreateVisualEvent(() =>
                 HexCharacterController.Instance.TriggerMeleeAttackAnimation(user.hexCharacterView, targetView.WorldPosition, weaponUsed, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
             }
+
             // Tackle
             else if (vEvent.characterAnimation == CharacterAnimation.Tackle)
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 CoroutineData cData = new CoroutineData();
+                HexDirection direction = LevelController.Instance.GetDirectionToTargetHex(user.currentTile, targetCharacter.currentTile);
+                LevelNode knockbackNode = LevelController.Instance.GetAdjacentHexByDirection(targetCharacter.currentTile, direction);
+                if (knockbackNode != null) knockbackNode = targetCharacter.currentTile;
+
                 VisualEventManager.Instance.CreateVisualEvent(() =>
-                HexCharacterController.Instance.TriggerTackleAnimation(user.hexCharacterView, targetView.WorldPosition, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+                {
+                    HexCharacterController.Instance.TriggerTackleAnimation(user.hexCharacterView, targetView.WorldPosition, cData);
+                    DOVirtual.DelayedCall(0.1f, () =>
+                    {
+                        HexCharacterController.Instance.TriggerKnockedBackIntoObstructionAnimation(targetView, knockbackNode.WorldPosition, null);
+                    });
+                }, cData, QueuePosition.Back, 0, 0, stackEvent);
+
             }
             // Offhand Push
             else if (vEvent.characterAnimation == CharacterAnimation.OffHandPush)
