@@ -71,7 +71,7 @@ MonoBehaviour:
   - Undead_Right_Arm
   - Undead_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 6a78f7a4320bb5f4889c39e138776a4f, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: 1101b12a630b9c24db59b213b57425dc, type: 2}
     chestArmour: {fileID: 11400000, guid: c89d7d867b89eda42bd96838671cfe77, type: 2}

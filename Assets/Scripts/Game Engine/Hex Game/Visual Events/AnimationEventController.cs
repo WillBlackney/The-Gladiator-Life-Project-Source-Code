@@ -214,10 +214,8 @@ namespace HexGameEngine.VisualEvents
                 // Destination is a character or hex tile target?
                 Vector3 targetPos = new Vector3(0, 0, 0);
                 Vector3 projectileStartPos = new Vector3(0, 0, 0);
-                if (targetTile != null)
-                    targetPos = targetTile.WorldPosition;
-                else
-                    targetPos = targetCharacter.hexCharacterView.WorldPosition;
+                if (targetTile != null) targetPos = targetTile.WorldPosition;
+                else targetPos = targetCharacter.hexCharacterView.WorldPosition;
 
                 // Where does the projectile start from?              
                 if (vEvent.projectileStartPosition == ProjectileStartPosition.Shooter)
@@ -235,7 +233,7 @@ namespace HexGameEngine.VisualEvents
                         }
                             
                         VisualEffectManager.Instance.ShootProjectileAtLocation(vEvent.projectileFired, projectileStartPos, targetPos, cData2);
-                    }, cData2, QueuePosition.Back, 0.2f, 0, stackEvent);
+                    }, cData2, QueuePosition.Back, 0.3f, 0, stackEvent);
                     return;
 
                 }
