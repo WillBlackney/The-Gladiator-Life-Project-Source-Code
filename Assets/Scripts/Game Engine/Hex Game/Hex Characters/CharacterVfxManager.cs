@@ -9,6 +9,10 @@ namespace HexGameEngine.Characters
         [Header("Refs")]
         [SerializeField] private HexCharacterView myView;
         [SerializeField] private ParticleSystem stunnedParticles;
+
+        [SerializeField] private ParticleSystem movementPoofParticles;
+        [SerializeField] private float timeBetweenMovementPoofs = 0.1f;
+
         private bool playStunned = false;
         [SerializeField] private Animator shatteredAnimator;
 
@@ -43,6 +47,14 @@ namespace HexGameEngine.Characters
             playStunned = false;
             stunnedParticles.Stop(true);
             stunnedParticles.gameObject.SetActive(false);
+        }
+        public void PlayMovementDirtPoofs()
+        {
+            movementPoofParticles.Play();
+        }
+        public void StopMovementDirtPoofs()
+        {
+            movementPoofParticles.Stop();
         }
         #endregion
 

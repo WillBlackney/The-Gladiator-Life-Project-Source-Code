@@ -31,6 +31,8 @@ namespace HexGameEngine.VisualEvents
         public GameObject HealEffectPrefab;
         public GameObject AoeMeleeAttackEffectPrefab;
         public GameObject TeleportEffectPrefab;
+        public GameObject BloodSpatterGroundPrefab;
+        public Sprite[] BloodSpatterGroundSprites;
 
         [Header("Projectile Prefabs")]
         public GameObject arrow;
@@ -339,7 +341,6 @@ namespace HexGameEngine.VisualEvents
         {
             GameObject damageEffect = Instantiate(DamageEffectPrefab, location, Quaternion.identity);
             damageEffect.GetComponent<DamageEffect>().InitializeSetup(damageAmount, crit, heal);
-
         }
         public void CreateStressGainedEffect(Vector3 location, int stressAmount)
         {
@@ -347,7 +348,24 @@ namespace HexGameEngine.VisualEvents
             GameObject damageEffect = Instantiate(StressEffectPrefab, location, Quaternion.identity);
             damageEffect.GetComponent<StressEffect>().InitializeSetup(stressAmount);
         }
+        public void CreateGroundBloodSpatter(Vector3 location)
+        {
+            GameObject bloodSpatterEffect = Instantiate(BloodSpatterGroundPrefab, location, Quaternion.identity);
+            Sprite s = BloodSpatterGroundSprites[RandomGenerator.NumberBetween(0, BloodSpatterGroundSprites.Length - 1)];
+            SpriteRenderer sr = bloodSpatterEffect.GetComponent<SpriteRenderer>();
 
+            // Randomize position
+            float randY = RandomGenerator.NumberBetween(1, 35) / 100f;
+            float randX = RandomGenerator.NumberBetween(1, 85) / 100f;
+            if (RandomGenerator.NumberBetween(0, 1) == 0) randY = -randY;
+            if (RandomGenerator.NumberBetween(0, 1) == 0) randX = -randX;
+            sr.transform.position = new Vector3(sr.transform.position.x + randX, sr.transform.position.y + randY, sr.transform.position.z);
+            sr.sprite = s;
+
+            // Fade in
+            sr.DOFade(0, 0);
+            sr.DOFade(0.75f, 1);
+        }
 
 
         // Status Text Effect

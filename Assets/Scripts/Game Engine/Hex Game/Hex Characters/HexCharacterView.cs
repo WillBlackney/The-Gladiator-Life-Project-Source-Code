@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using HexGameEngine.UI;
+using HexGameEngine.VisualEvents;
 
 namespace HexGameEngine.Characters
 {
@@ -78,7 +79,19 @@ namespace HexGameEngine.Characters
 
         public bool mouseOverModel = false;
         public bool mouseOverWorldUI = false;
-        [HideInInspector] public string currentAnimation;
+
+        private string currentAnimation;
+        public string CurrentAnimation
+        {
+            get { return currentAnimation; }
+            set
+            {
+                currentAnimation = value;
+                if (currentAnimation == AnimationEventController.RUN &&
+                    vfxManager != null) vfxManager.PlayMovementDirtPoofs();
+                else if (vfxManager != null) vfxManager.StopMovementDirtPoofs();
+            }
+        }
 
         #endregion
 

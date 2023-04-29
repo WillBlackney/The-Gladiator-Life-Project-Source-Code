@@ -1107,8 +1107,15 @@ namespace HexGameEngine.Combat
             VisualEventManager.Instance.CreateVisualEvent(() =>
                 VisualEffectManager.Instance.CreateDamageTextEffect(target.hexCharacterView.WorldPosition, totalDamage, didCrit), QueuePosition.Back, 0, 0, parentEvent);
 
+            // Create blood in ground VFX  
+            if (totalHealthLost > 0) 
+            {
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                    VisualEffectManager.Instance.CreateGroundBloodSpatter(target.hexCharacterView.WorldPosition), QueuePosition.Back, 0, 0, parentEvent);
+            }
+
             // Reduce health + armour
-            if(totalHealthLost != 0) HexCharacterController.Instance.ModifyHealth(target, -totalHealthLost);
+            if (totalHealthLost != 0) HexCharacterController.Instance.ModifyHealth(target, -totalHealthLost);
             if(totalArmourLost != 0) HexCharacterController.Instance.ModifyArmour(target, -totalArmourLost);
 
             // Check for barrier

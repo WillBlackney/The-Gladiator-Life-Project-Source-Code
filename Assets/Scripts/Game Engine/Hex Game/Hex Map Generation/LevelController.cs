@@ -470,7 +470,7 @@ namespace HexGameEngine.HexTiles
             // Finished movement, go idle animation
             if(character.hexCharacterView != null)
             {
-                if(character.hexCharacterView.currentAnimation == AnimationEventController.CHARGE)
+                if(character.hexCharacterView.CurrentAnimation == AnimationEventController.CHARGE)
                     VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeEndAnimation(character.hexCharacterView));
                 else
                     VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayIdleAnimation(character.hexCharacterView));
