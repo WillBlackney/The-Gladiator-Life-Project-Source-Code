@@ -921,7 +921,8 @@ namespace HexGameEngine.Characters
                 // Move back to start point
                 view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
             }
-            else if (animationString == AnimationEventController.TWO_HAND_MELEE_ATTACK_OVERHEAD)
+            else if (animationString == AnimationEventController.TWO_HAND_MELEE_ATTACK_OVERHEAD_1 ||
+                animationString == AnimationEventController.TWO_HAND_MELEE_ATTACK_OVERHEAD_2)
             {
                 // 60 sample rate
                 float offset = -0.04f;
@@ -1072,26 +1073,38 @@ namespace HexGameEngine.Characters
                 if (cData != null) cData.MarkAsCompleted();
                 yield break;
             }
+
+            Ease moveTowardsEase = Ease.InExpo;
+            Ease moveBackEase = Ease.OutSine;
+
+            // 60 sample rate
+            float offset = -0.04f;
+            float frameToMilliseconds = 0.016667f;
+            float pauseTimeBeforeInitialMove = 12f * frameToMilliseconds;
+            float initialMoveTime = 11f * frameToMilliseconds;
+            float postImpactPause = 19f * frameToMilliseconds;
+            float moveBackTime = 20f * frameToMilliseconds;
+
+            // Start attack animation
             view.currentAnimation = AnimationEventController.SHIELD_BASH;
             view.ucmAnimator.SetTrigger(AnimationEventController.SHIELD_BASH);
+            yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
+
+            // Trigger SFX weapon swing
+            AudioManager.Instance.PlaySoundPooled(Sound.Weapon_Staff_Swing);
+
+            // Move 50% of the way towards the target position
             Vector2 startPos = view.WorldPosition;
-            Vector2 forwardPos = (startPos + targetPos) / 1.8f;
-            float moveSpeedTime = 0.375f;
+            Vector2 forwardPos = (startPos + targetPos) / 2f;
+            view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(moveTowardsEase);
+            yield return new WaitForSeconds(initialMoveTime + offset);
 
-            // slight movement forward
-            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutSine);
-            yield return new WaitForSeconds(moveSpeedTime / 2);
+            // Pause at impact point
+            if (cData != null) cData.MarkAsCompleted();
+            yield return new WaitForSeconds(postImpactPause);
 
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
-
-            yield return new WaitForSeconds(moveSpeedTime / 2);
-
-            // move back to start pos
-            view.ucmMovementParent.transform.DOMove(startPos, moveSpeedTime);
-            yield return new WaitForSeconds(moveSpeedTime);
+            // Move back to start point
+            view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
 
         }
         public void PlayShootCrossbowAnimation(HexCharacterView view, ItemData weaponUsed, CoroutineData cData)
@@ -2720,6 +2733,7 @@ namespace HexGameEngine.Characters
         }
         #endregion
 
+        // Determine 
         private string DetermineWeaponAttackAnimationString(HexCharacterModel character, ItemData weaponUsed)
         {
             string ret = AnimationEventController.MAIN_HAND_MELEE_ATTACK_OVERHEAD;
@@ -2751,13 +2765,17 @@ namespace HexGameEngine.Characters
             {
                 // Overhead
                 if (weaponUsed.weaponAttackAnimationType == WeaponAttackAnimationType.Overhead)
-                    ret = AnimationEventController.TWO_HAND_MELEE_ATTACK_OVERHEAD;
+                {
+                    int random = RandomGenerator.NumberBetween(0, 2);
+                    if (random == 0) ret = AnimationEventController.TWO_HAND_MELEE_ATTACK_OVERHEAD_2;
+                    else ret = AnimationEventController.TWO_HAND_MELEE_ATTACK_OVERHEAD_1;
+                }
 
                 // Thrust
                 else if (weaponUsed.weaponAttackAnimationType == WeaponAttackAnimationType.Thrust)
                     ret = AnimationEventController.TWO_HAND_MELEE_ATTACK_THRUST;
             }
-            Debug.Log("HexCharacterController.DetermineWeaponAttackAnimationString() returning: " + ret);
+
             return ret;
         }
         public string DetermineAoeWeaponAttackAnimationString(ItemData weaponUsed)

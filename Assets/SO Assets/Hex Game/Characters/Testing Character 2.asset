@@ -57,12 +57,12 @@ MonoBehaviour:
     deathResistance: 25
   abilityBook:
     activeAbilities:
+    - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
+    - {fileID: 11400000, guid: 507ff3973c3f4a44ea421a51ff989b75, type: 2}
     - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
     - {fileID: 11400000, guid: a02ebfe8b4a47c742ab43f030a771ce1, type: 2}
   serializedPassiveManager:
-    perks:
-    - perkTag: 80
-      stacks: 2
+    perks: []
   modelParts:
   - Undead_Chest
   - Undead_Head_1

@@ -527,6 +527,7 @@ namespace HexGameEngine.Audio
         Weapon_Polearm_Thrust_Swing = 75,
         Weapon_Polearm_Thrust_Hit = 76,
         Weapon_Shield_Slam = 77,
+        Weapon_Shield_Wall = 97,
         Weapon_Spear_Swing = 78,
         Weapon_Spear_Hit = 79,
         Weapon_Staff_Swing = 80,
