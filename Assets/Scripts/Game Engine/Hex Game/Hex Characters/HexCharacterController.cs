@@ -1038,27 +1038,38 @@ namespace HexGameEngine.Characters
                 if (cData != null) cData.MarkAsCompleted();
                 yield break;
             }
+
+            Ease moveTowardsEase = Ease.InBack;
+            Ease moveBackEase = Ease.OutSine;
+
+            // 60 sample rate
+            float offset = -0.04f;
+            float frameToMilliseconds = 0.016667f;
+            float pauseTimeBeforeInitialMove = 6f * frameToMilliseconds;
+            float initialMoveTime = 17f * frameToMilliseconds;
+            float postImpactPause = 19f * frameToMilliseconds;
+            float moveBackTime = 20f * frameToMilliseconds;
             view.CurrentAnimation = AnimationEventController.OFF_HAND_PUSH;
+
+            // Start attack animation
             view.ucmAnimator.SetTrigger(AnimationEventController.OFF_HAND_PUSH);
+            yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
+
+            // Trigger SFX weapon swing
+            AudioManager.Instance.PlaySoundPooled(Sound.Weapon_Axe_1H_Swing);
+
+            // Move 66% of the way towards the target position
             Vector2 startPos = view.WorldPosition;
             Vector2 forwardPos = (startPos + targetPos) / 1.8f;
-            float moveSpeedTime = 0.375f;
+            view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(moveTowardsEase);
+            yield return new WaitForSeconds(initialMoveTime + offset);
 
-            // slight movement forward
-            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutSine);
-            yield return new WaitForSeconds(moveSpeedTime / 2);
+            // Pause at impact point
+            if (cData != null) cData.MarkAsCompleted();
+            yield return new WaitForSeconds(postImpactPause);
 
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
-
-            yield return new WaitForSeconds(moveSpeedTime / 2);
-
-            // move back to start pos
-            view.ucmMovementParent.transform.DOMove(startPos, moveSpeedTime);
-            yield return new WaitForSeconds(moveSpeedTime);
-
+            // Move back to start point
+            view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
         }
         public void TriggerShieldBashAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
         {
@@ -1168,7 +1179,7 @@ namespace HexGameEngine.Characters
             // Move 66% of the way towards the target position
             Vector2 forwardPos = (startPos + targetPos) / 1.8f;
 
-            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutSine);
+            view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutBack);
             yield return new WaitForSeconds(moveSpeedTime / 2);
 
             if (cData != null) cData.MarkAsCompleted();

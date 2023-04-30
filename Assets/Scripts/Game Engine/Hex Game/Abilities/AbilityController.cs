@@ -856,6 +856,9 @@ namespace HexGameEngine.Abilities
 
                 if (success)
                 {
+                    foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
+                        AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, null, target.GetLastStackEventParent());
+
                     foreach (AbilityEffect e in ability.onPerkAppliedSuccessEffects)
                     {
                         triggerEffectEndEvents = false;

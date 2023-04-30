@@ -203,7 +203,7 @@ namespace HexGameEngine.VisualEvents
             }
 
             // Shoot Magic + Shoot Projectile 
-            else if (vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture || vEvent.characterAnimation == CharacterAnimation.ShootProjectile)
+            else if (vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture || vEvent.characterAnimation == CharacterAnimation.ShootProjectileUnanimated)
             {
                 // Play character shoot anim
                 if(vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture)

@@ -888,10 +888,13 @@ namespace HexGameEngine.HexTiles
                 PlaceCharacterOnHex(character, destination);
 
                 HexCharacterView view = character.hexCharacterView;
-
+                
                 CoroutineData cData = new CoroutineData();
-                VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
-                    (character.hexCharacterView, destination, cData, 5f, Ease.OutBack), cData, QueuePosition.Back);
+                VisualEventManager.Instance.CreateVisualEvent(() => 
+                {
+                    HexCharacterController.Instance.PlayHurtAnimation(character.hexCharacterView);
+                    DoCharacterMoveVisualEventDOTWEEN(character.hexCharacterView, destination, cData, 5f, Ease.OutBack);
+                }, cData, QueuePosition.Back);
             }       
         }
         #endregion
