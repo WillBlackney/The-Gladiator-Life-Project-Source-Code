@@ -36,6 +36,7 @@ namespace HexGameEngine.VisualEvents
 
         [Header("Projectile Prefabs")]
         public GameObject arrow;
+        public GameObject throwingNet;
         public GameObject javelin;
         public GameObject fireBall;
         public GameObject poisonBall;
@@ -227,7 +228,11 @@ namespace HexGameEngine.VisualEvents
             {
                 ShootFireball(start, end, cData);
             }
-            if (projectileFired == ProjectileFired.Javelin)
+            else if (projectileFired == ProjectileFired.ThrowingNet)
+            {
+                ShootThrowingNet(start, end, cData);
+            }
+            else if (projectileFired == ProjectileFired.Javelin)
             {
                 ShootJavelin(start, end, cData);
             }
@@ -436,6 +441,23 @@ namespace HexGameEngine.VisualEvents
             Projectile projectileScript = go.GetComponent<Projectile>();
             projectileScript.InitializeSetup(startPos, endPos, speed);
             yield return new WaitUntil(() => projectileScript.DestinationReached == true);
+            cData.MarkAsCompleted();
+        }
+
+        // Shoot Javelin
+        public void ShootThrowingNet(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 15)
+        {
+            Debug.Log("VisualEffectManager.ShootThrowingNet() called...");
+            StartCoroutine(ShootThrowingNetCoroutine(startPos, endPos, cData, speed));
+        }
+        private IEnumerator ShootThrowingNetCoroutine(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed)
+        {
+            //AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Arrow_Fired);
+            // to do: throwing net thrown SFX maybe
+            GameObject go = Instantiate(throwingNet, startPos, Quaternion.identity);
+            ThrowingNet tn = go.GetComponent<ThrowingNet>();
+            tn.MoveToTarget(startPos, endPos, 0.75f);
+            yield return new WaitUntil(() => tn.DestinatedReached == true);
             cData.MarkAsCompleted();
         }
 

@@ -831,6 +831,7 @@ namespace HexGameEngine
         HolyBall1 = 8,
         FireMeteor = 9,
         Javelin = 10,
+        ThrowingNet = 11,
 
     }
     public enum ProjectileStartPosition
