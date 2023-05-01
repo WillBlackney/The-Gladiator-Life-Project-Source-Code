@@ -647,6 +647,7 @@ namespace HexGameEngine.Characters
                 CharacterDataController.Instance.SetCharacterStress(character.characterData, finalStress);            
 
             // Stress VFX
+            /* Un comment to reenable stress gained VFX
             if (stressGainedOrLost > 0 && showVFX)
             {
                 if (character.GetLastStackEventParent() != null &&
@@ -661,7 +662,7 @@ namespace HexGameEngine.Characters
                     VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost), QueuePosition.Back, 0, 0);
                 }
 
-            }
+            }*/
 
             // Update stress related GUI
             VisualEventManager.Instance.CreateVisualEvent(() => UpdateStressGUIElements(character, finalStress), QueuePosition.Back, 0, 0);
@@ -1070,6 +1071,53 @@ namespace HexGameEngine.Characters
 
             // Move back to start point
             view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
+        }
+        public void TriggerOffhandThrowNetAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        {
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+            StartCoroutine(TriggerOffhandThrowNetAnimationCoroutine(view, targetPos, cData));
+        }
+        private IEnumerator TriggerOffhandThrowNetAnimationCoroutine(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        {
+            HexCharacterModel model = view.character;
+            if (model == null)
+            {
+                if (cData != null) cData.MarkAsCompleted();
+                yield break;
+            }
+
+            Ease moveTowardsEase = Ease.InBack;
+            Ease moveBackEase = Ease.OutSine;
+
+            // 60 sample rate
+            float offset = -0.04f;
+            float frameToMilliseconds = 0.016667f;
+            float pauseTimeBeforeInitialMove = 6f * frameToMilliseconds;
+            float initialMoveTime = 17f * frameToMilliseconds;
+            float postImpactPause = 19f * frameToMilliseconds;
+            float moveBackTime = 20f * frameToMilliseconds;
+            view.CurrentAnimation = AnimationEventController.OFF_HAND_THROW_NET;
+
+            // Start attack animation
+            view.ucmAnimator.SetTrigger(AnimationEventController.OFF_HAND_THROW_NET);
+            yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
+
+            // Trigger SFX weapon swing
+            AudioManager.Instance.PlaySoundPooled(Sound.Weapon_Axe_1H_Swing);
+            if (cData != null) cData.MarkAsCompleted();
+
+            // Move 66% of the way towards the target position
+            //Vector2 startPos = view.WorldPosition;
+            //Vector2 forwardPos = (startPos + targetPos) / 2f;
+            //view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(moveTowardsEase);
+            //yield return new WaitForSeconds(initialMoveTime + offset);
+
+            // Pause at impact point
+            //if (cData != null) cData.MarkAsCompleted();
+            //yield return new WaitForSeconds(postImpactPause);
+
+            // Move back to start point
+            //view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
         }
         public void TriggerShieldBashAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
         {

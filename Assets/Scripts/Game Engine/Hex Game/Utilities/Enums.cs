@@ -787,6 +787,7 @@ namespace HexGameEngine
         ChargeEnd = 14,
         Tackle = 13,
         ReloadCrossbow = 15,
+        ThrowNetOffhand = 16,
     }
     public enum ParticleEffect
     {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CardGameEngine.UCM
@@ -13,6 +14,14 @@ namespace CardGameEngine.UCM
         public HexGameEngine.Items.ItemDataSO[] hexItemsWithMyView;
         public List<UniversalCharacterModelElement> connectedElements;
 
+        [ShowIf("ShowHurtFace")]
+        public Sprite hurtFace;
+
+
+        public bool ShowHurtFace()
+        {
+            return bodyPartType == BodyPartType.Face;
+        }
 
 
     }

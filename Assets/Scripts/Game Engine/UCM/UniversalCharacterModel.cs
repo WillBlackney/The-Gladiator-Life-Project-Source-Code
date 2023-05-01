@@ -124,6 +124,8 @@ namespace CardGameEngine.UCM
         [HideInInspector] public UniversalCharacterModelElement activeOffHandWeapon;
 
         private bool hasRunSetup = false;
+
+        private Sprite normalFaceSprite;
         #endregion
 
         // Initialization
@@ -204,6 +206,24 @@ namespace CardGameEngine.UCM
         {
             myAnimator.SetTrigger("Idle");
 
+        }
+        public void ShowHurtFace()
+        {
+            Debug.LogWarning("ShowHurtFace");
+            if(activeFace != null)
+            {
+                SpriteRenderer sr = activeFace.GetComponent<SpriteRenderer>();
+                normalFaceSprite = sr.sprite;
+                sr.sprite = activeFace.hurtFace;
+            }
+        }
+        public void ShowNormalFace()
+        {
+            Debug.LogWarning("ShowNormalFace");
+            if (activeFace != null)
+            {
+                activeFace.GetComponent<SpriteRenderer>().sprite = normalFaceSprite;
+            }
         }
 
         #endregion

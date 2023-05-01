@@ -87,9 +87,18 @@ namespace HexGameEngine.Characters
             set
             {
                 currentAnimation = value;
-                if (currentAnimation == AnimationEventController.RUN &&
-                    vfxManager != null) vfxManager.PlayMovementDirtPoofs();
+                if (vfxManager != null && 
+                    (currentAnimation == AnimationEventController.RUN ||
+                    currentAnimation == AnimationEventController.CHARGE ||
+                    currentAnimation == AnimationEventController.CHARGE_END ||
+                    currentAnimation == AnimationEventController.TACKLE ||
+                    currentAnimation == AnimationEventController.TACKLE_END)) vfxManager.PlayMovementDirtPoofs();               
                 else if (vfxManager != null) vfxManager.StopMovementDirtPoofs();
+
+                if (vfxManager != null &&
+                   (currentAnimation == AnimationEventController.CHARGE ||
+                   currentAnimation == AnimationEventController.TACKLE)) vfxManager.PlayDashTrail();
+                else if (vfxManager != null) vfxManager.StopDashTrail();
             }
         }
 

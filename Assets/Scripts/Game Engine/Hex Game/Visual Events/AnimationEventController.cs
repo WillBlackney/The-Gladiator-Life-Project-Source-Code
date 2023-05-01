@@ -20,6 +20,7 @@ namespace HexGameEngine.VisualEvents
         public const string MAIN_HAND_MELEE_ATTACK_CLEAVE = "MAIN_HAND_MELEE_ATTACK_CLEAVE";
         public const string OFF_HAND_MELEE_ATTACK_OVERHEAD = "OFF_HAND_MELEE_ATTACK_OVERHEAD";
         public const string OFF_HAND_MELEE_ATTACK_THRUST = "OFF_HAND_MELEE_ATTACK_THRUST";
+        public const string OFF_HAND_THROW_NET = "OFF_HAND_THROW_NET";
         public const string TWO_HAND_MELEE_ATTACK_OVERHEAD_1 = "TWO_HAND_MELEE_ATTACK_OVERHEAD_1";
         public const string TWO_HAND_MELEE_ATTACK_OVERHEAD_2 = "TWO_HAND_MELEE_ATTACK_OVERHEAD_2";
         public const string TWO_HAND_MELEE_ATTACK_THRUST = "TWO_HAND_MELEE_ATTACK_THRUST";
@@ -133,6 +134,14 @@ namespace HexGameEngine.VisualEvents
                 CoroutineData cData = new CoroutineData();
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 HexCharacterController.Instance.TriggerOffhandPushAnimation(user.hexCharacterView, targetView.WorldPosition, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+            }
+            // Offhand Push
+            else if (vEvent.characterAnimation == CharacterAnimation.ThrowNetOffhand)
+            {
+                HexCharacterView targetView = targetCharacter.hexCharacterView;
+                CoroutineData cData = new CoroutineData();
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                HexCharacterController.Instance.TriggerOffhandThrowNetAnimation(user.hexCharacterView, targetView.WorldPosition, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
             }
             // Shield Bash
             else if (vEvent.characterAnimation == CharacterAnimation.ShieldBash)

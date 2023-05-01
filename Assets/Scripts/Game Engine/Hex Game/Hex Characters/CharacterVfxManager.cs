@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sirenix.Utilities;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,12 +10,14 @@ namespace HexGameEngine.Characters
         [Header("Refs")]
         [SerializeField] private HexCharacterView myView;
         [SerializeField] private ParticleSystem stunnedParticles;
-
+        [SerializeField] private ParticleSystem[] dashTrailParticles;
         [SerializeField] private ParticleSystem movementPoofParticles;
-        [SerializeField] private float timeBetweenMovementPoofs = 0.1f;
 
         private bool playStunned = false;
         [SerializeField] private Animator shatteredAnimator;
+
+        private bool playingDashTrail = false;
+        private bool playingRunPoofs = false;
 
         // Core Logic
         #region
@@ -50,11 +53,25 @@ namespace HexGameEngine.Characters
         }
         public void PlayMovementDirtPoofs()
         {
+            if (playingRunPoofs) return;
+            playingRunPoofs = true;
             movementPoofParticles.Play();
         }
         public void StopMovementDirtPoofs()
         {
+            playingRunPoofs = false;
             movementPoofParticles.Stop();
+        }
+        public void PlayDashTrail()
+        {
+            if (playingDashTrail) return;
+            playingDashTrail = true;
+            dashTrailParticles.ForEach(x => x.Play());
+        }
+        public void StopDashTrail()
+        {
+            playingDashTrail = false;
+            dashTrailParticles.ForEach(x => x.Stop());
         }
         #endregion
 
