@@ -1326,8 +1326,19 @@ namespace HexGameEngine.Characters
         {
             if (view == null) return;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-            view.ucmAnimator.SetTrigger(AnimationEventController.DIE);
-            view.CurrentAnimation = AnimationEventController.DIE;
+            string deathAnim = "DIE_";
+            deathAnim = deathAnim + RandomGenerator.NumberBetween(1, 3).ToString();
+            view.ucmAnimator.SetTrigger(deathAnim);
+            view.CurrentAnimation = deathAnim;
+        }
+        public void PlayDecapitateAnimation(HexCharacterView view)
+        {
+            if (view == null) return;
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+            string decapitateAnim = "DECAPITATE_";
+            decapitateAnim = decapitateAnim + RandomGenerator.NumberBetween(1, 1).ToString();
+            view.ucmAnimator.SetTrigger(decapitateAnim);
+            view.CurrentAnimation = decapitateAnim;
         }
         public void PlayResurrectAnimation(HexCharacterView view)
         {

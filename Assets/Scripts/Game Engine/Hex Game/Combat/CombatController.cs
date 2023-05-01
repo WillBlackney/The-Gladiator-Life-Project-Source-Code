@@ -1448,13 +1448,13 @@ namespace HexGameEngine.Combat
 
             // Play death animation
             // VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySound(entity.audioProfile, AudioSet.Die));
-            VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayDeathAnimation(view), QueuePosition.Back, 0f, 1f, parentEvent);
+            VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayDecapitateAnimation(view), QueuePosition.Back, 0f, 1f, parentEvent);
 
             // Smokey disapear effect
             VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateExpendEffect(view.WorldPosition, 15, 0.2f, false), QueuePosition.Back, 0, 0, parentEvent);
 
             // Fade out UCM
-            VisualEventManager.Instance.CreateVisualEvent(() => CharacterModeller.FadeOutCharacterModel(view.ucm, 1), QueuePosition.Back, 0, 0, parentEvent);
+            //VisualEventManager.Instance.CreateVisualEvent(() => CharacterModeller.FadeOutCharacterModel(view.ucm, 1), QueuePosition.Back, 0, 0, parentEvent);
             VisualEventManager.Instance.CreateVisualEvent(() => CharacterModeller.FadeOutCharacterShadow(view, 0.5f), QueuePosition.Back, 0, 1, parentEvent);
            
             // Destroy characters activation window and update other window positions
@@ -1488,7 +1488,7 @@ namespace HexGameEngine.Combat
             {
                 // Destroy view gameobject
                 HexCharacterController.Instance.DisconnectModelFromView(character);
-                HexCharacterController.Instance.DestroyCharacterView(view);
+                //HexCharacterController.Instance.DestroyCharacterView(view);
             }, QueuePosition.Back, 0, 0, parentEvent);
 
             // Lich death, kill all summoned skeletons

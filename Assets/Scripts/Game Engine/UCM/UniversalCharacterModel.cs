@@ -23,7 +23,8 @@ namespace CardGameEngine.UCM
         [SerializeField] GameObject headMasksParent;
         [SerializeField] GameObject[] oneHandAnimationBones;
         [SerializeField] GameObject[] twoHandAnimationBones;
-
+        [SerializeField] GameObject headBone;
+        [SerializeField] Transform decapitatedHeadParent;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]       
 
         [Header("Active Particle References")]
@@ -224,6 +225,17 @@ namespace CardGameEngine.UCM
             {
                 activeFace.GetComponent<SpriteRenderer>().sprite = normalFaceSprite;
             }
+        }
+        public void DisconnectHeadBone()
+        {
+            Vector3 localPos = headBone.transform.localPosition;
+            headBone.transform.SetParent(decapitatedHeadParent, true);
+            headBone.transform.localPosition = localPos;
+        }
+
+        public void StopAnimController()
+        {
+            myAnimator.enabled = false;
         }
 
         #endregion
