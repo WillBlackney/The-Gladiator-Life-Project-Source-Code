@@ -24,6 +24,7 @@ namespace CardGameEngine.UCM
         [SerializeField] GameObject headMasksParent;
         [SerializeField] GameObject[] oneHandAnimationBones;
         [SerializeField] GameObject[] twoHandAnimationBones;
+        //[SerializeField] SortingGroup rootSortingGroup;
         [SerializeField] SortingGroup headSortingGroup;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]       
 
@@ -42,6 +43,7 @@ namespace CardGameEngine.UCM
         [HideInInspector] public UniversalCharacterModelElement[] allChestArmour;
         [HideInInspector] public UniversalCharacterModelElement[] allHeadArmour;
 
+        //public SortingGroup RootSortingGroup => rootSortingGroup;
         public SortingGroup HeadSortingGroup => headSortingGroup;
         public UniversalCharacterModelElement[] AllModelElements 
         { 
@@ -186,7 +188,7 @@ namespace CardGameEngine.UCM
                 AllOffHandWeapons = ohElements.ToArray();
                 AllHeadArmour = headElements.ToArray();
 
-                HexGameEngine.UCM.CharacterModeller.AutoSetHeadMaskOrderInLayer(this);
+                HexGameEngine.UCM.CharacterModeller.AutoSetSortingOrderValues(this);
                 SetMode(UcmMode.Standard);
 
                 // Turn everything off to start

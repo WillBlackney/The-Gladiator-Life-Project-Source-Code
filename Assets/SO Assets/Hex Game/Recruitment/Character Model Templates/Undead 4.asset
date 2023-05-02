@@ -15,6 +15,6 @@ MonoBehaviour:
   race: 3
   bodyParts:
   - Ghoul_Chest
-  - Undead_Face_6
+  - Undead_Face_4
   - Undead_Head_4
   - Ghoul_Right_Leg

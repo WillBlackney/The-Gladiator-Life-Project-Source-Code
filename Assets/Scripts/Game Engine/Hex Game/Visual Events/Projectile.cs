@@ -6,20 +6,28 @@ namespace HexGameEngine.VisualEvents
     {
         // This script is for NON PARTICLE FX based projectiles
         // Properties + Component References
-        #region
-        [Header("Properties")]
-        private Vector3 start;
-        private Vector3 destination;
-        private bool readyToMove;
-        private bool destinationReached;
-        private float travelSpeed;
+        #region       
+
+        // Inspector Fields
+        [Header("Settings")]
+        [Tooltip("Adjusts the starting position of the projectile.")]
         [SerializeField] private float yOffset;
 
+        [Tooltip("Determines the amount of parabola effect on the projectile. " +
+            "A value of 0 means the projectile will travel in absolutely straight line from starting point to target.")]
+        [Range(0, 0.5f)]
+        [SerializeField] float maxParabolaY = 0.3f;
+
+        // Fields
+        Vector3 start;
+        Vector3 destination;
+        bool readyToMove;
+        bool destinationReached;
+        float travelSpeed;      
         float distance;
         float nextX;
         float baseY;
-        float height;
-        float maxParabolaY = 0.3f;
+        float height;        
 
         public bool DestinationReached
         {

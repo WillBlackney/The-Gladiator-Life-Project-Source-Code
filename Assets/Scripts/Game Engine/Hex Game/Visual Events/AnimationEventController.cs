@@ -194,32 +194,28 @@ namespace HexGameEngine.VisualEvents
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 CoroutineData cData = new CoroutineData();
+
                 // Crossbow
-                if (weaponUsed != null && weaponUsed.weaponClass == WeaponClass.Crossbow)
-                {
-                    // Character shoot bow animation
+                if (weaponUsed != null && weaponUsed.weaponClass == WeaponClass.Crossbow)                
                     VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootCrossbowAnimation(user.hexCharacterView, weaponUsed, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
-
-                }
+                                
                 // Normal Bow
-                else
-                {
-                    // Character shoot bow animation
+                else                
                     VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootBowAnimation(user.hexCharacterView, weaponUsed, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
-                }
-
+                
                 // Create and launch arrow projectile
-                CoroutineData cData2 = new CoroutineData();
-                VisualEventManager.Instance.CreateVisualEvent(() =>
-                VisualEffectManager.Instance.ShootArrow(user.hexCharacterView.WorldPosition, targetView.WorldPosition, cData2), cData2, QueuePosition.Back, 0, 0, stackEvent);
+                //CoroutineData cData2 = new CoroutineData();
+                //VisualEventManager.Instance.CreateVisualEvent(() =>
+                //VisualEffectManager.Instance.ShootArrow(user.hexCharacterView.WorldPosition, targetView.WorldPosition, cData2), cData2, QueuePosition.Back, 0, 0, stackEvent);
             }
 
             // Shoot Magic + Shoot Projectile 
             else if (vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture || vEvent.characterAnimation == CharacterAnimation.ShootProjectileUnanimated)
             {
                 // Play character shoot anim
+                CoroutineData animCdata = new CoroutineData();
                 if(vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture)
-                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerShootMagicHandGestureAnimation(user.hexCharacterView), QueuePosition.Back, 0, 0, stackEvent);
+                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerShootMagicHandGestureAnimation(user.hexCharacterView, animCdata), QueuePosition.Back, 0, 0, stackEvent);
 
                 if (vEvent.projectileFired == ProjectileFired.None) return;
 
@@ -243,9 +239,17 @@ namespace HexGameEngine.VisualEvents
                         {
                             projectileStartPos = user.hexCharacterView.WorldPosition;
                         }
+
+                        ProjectileFired dynamicProjectile = vEvent.projectileFired;
+                        // Dynamic arrow or bolt, depending on if the weapon was a bow or a crossbow
+                        if (weaponUsed != null && vEvent.projectileFired == ProjectileFired.ArrowOrBolt)
+                        {
+                            if (weaponUsed.weaponClass == WeaponClass.Crossbow) dynamicProjectile = ProjectileFired.CrossbowBolt;
+                            else dynamicProjectile = ProjectileFired.Arrow;
+                        }
                             
-                        VisualEffectManager.Instance.ShootProjectileAtLocation(vEvent.projectileFired, projectileStartPos, targetPos, cData2);
-                    }, cData2, QueuePosition.Back, 0.3f, 0, stackEvent);
+                        VisualEffectManager.Instance.ShootProjectileAtLocation(dynamicProjectile, projectileStartPos, targetPos, cData2);
+                    }, cData2, QueuePosition.Back, 0f, 0f, stackEvent);
                     return;
 
                 }

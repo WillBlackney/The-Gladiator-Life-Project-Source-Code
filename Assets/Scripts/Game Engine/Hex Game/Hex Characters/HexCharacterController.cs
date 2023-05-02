@@ -1221,16 +1221,33 @@ namespace HexGameEngine.Characters
 
         }
 
-        public void TriggerShootMagicHandGestureAnimation(HexCharacterView view)
+        public void TriggerShootMagicHandGestureAnimation(HexCharacterView view, CoroutineData cData)
         {
-            if (view == null) return;
+            StartCoroutine(TriggerShootMagicHandGestureAnimationCoroutine(view, cData));
+        }
+        private IEnumerator TriggerShootMagicHandGestureAnimationCoroutine(HexCharacterView view, CoroutineData cData)
+        {
+            if (view == null)
+            {
+                if (cData != null) cData.MarkAsCompleted();
+                yield break;
+            }
             HexCharacterModel model = view.character;
-            if (model == null) return;
+            if (model == null)
+            {
+                if (cData != null) cData.MarkAsCompleted();
+                yield break;
+            }
 
+            float frameToMilliseconds = 0.016667f;
+            float framesTillShoot = 16f * frameToMilliseconds;
             string animationString = DetermineShootMagicHandGestureAnimationString(model);
             view.CurrentAnimation = animationString;
             view.ucmAnimator.SetTrigger(animationString);
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+            yield return new WaitForSeconds(framesTillShoot);
+            cData.MarkAsCompleted();
+
         }
         public void TriggerAoeMeleeAttackAnimation(HexCharacterView view, ItemData weaponUsed)
         {

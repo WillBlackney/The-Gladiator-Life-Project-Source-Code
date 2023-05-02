@@ -278,8 +278,10 @@ namespace HexGameEngine.UCM
                 model.activeOffHandWeapon.gameObject.SetActive(false);
             }
         }
-        public static void AutoSetHeadMaskOrderInLayer(UniversalCharacterModel model)
+        public static void AutoSetSortingOrderValues(UniversalCharacterModel model)
         {
+            //int rootModelSortOrder = model.myEntityRenderer.SortingOrder;
+           // model.RootSortingGroup.sortingOrder = rootModelSortOrder;
             int headSortOrder = model.myEntityRenderer.SortingOrder + 10;
             model.HeadSortingGroup.sortingOrder = model.myEntityRenderer.SortingOrder + 10;
 

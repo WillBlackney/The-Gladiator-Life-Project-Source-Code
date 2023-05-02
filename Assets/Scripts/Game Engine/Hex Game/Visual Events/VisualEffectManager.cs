@@ -36,6 +36,7 @@ namespace HexGameEngine.VisualEvents
 
         [Header("Projectile Prefabs")]
         public GameObject arrow;
+        public GameObject crossbowBolt;
         public GameObject throwingNet;
         public GameObject javelin;
         public GameObject fireBall;
@@ -260,6 +261,14 @@ namespace HexGameEngine.VisualEvents
             {
                 ShootFireMeteor(start, end, cData);
             }
+            else if (projectileFired == ProjectileFired.Arrow)
+            {
+                ShootArrow(start, end, cData);
+            }
+            else if (projectileFired == ProjectileFired.CrossbowBolt)
+            {
+                ShootCrossbowBolt(start, end, cData);
+            }
         }
         #endregion
 
@@ -407,13 +416,13 @@ namespace HexGameEngine.VisualEvents
         }
         #endregion
 
-       
+
 
         // PROJECTILES
         #region
 
         // Shoot Arrow
-        public void ShootArrow(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f)
+        private void ShootArrow(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f)
         {
             Debug.Log("VisualEffectManager.ShootArrow() called...");
             StartCoroutine(ShootArrowCoroutine(startPos, endPos, cData, speed));
@@ -428,8 +437,23 @@ namespace HexGameEngine.VisualEvents
             cData.MarkAsCompleted();
         }
 
+        // Shoot Bolt
+        private void ShootCrossbowBolt(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 15f)
+        {
+            Debug.Log("VisualEffectManager.ShootBolt() called...");
+            StartCoroutine(ShootBoltCoroutine(startPos, endPos, cData, speed));
+        }
+        private IEnumerator ShootBoltCoroutine(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed)
+        {
+            GameObject go = Instantiate(crossbowBolt, startPos, Quaternion.identity);
+            Projectile projectileScript = go.GetComponent<Projectile>();
+            projectileScript.InitializeSetup(startPos, endPos, speed);
+            yield return new WaitUntil(() => projectileScript.DestinationReached == true);
+            cData.MarkAsCompleted();
+        }
+
         // Shoot Javelin
-        public void ShootJavelin(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 15)
+        private void ShootJavelin(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 15)
         {
             Debug.Log("VisualEffectManager.ShootJavelin() called...");
             StartCoroutine(ShootJavelinCoroutine(startPos, endPos, cData, speed));
@@ -445,7 +469,7 @@ namespace HexGameEngine.VisualEvents
         }
 
         // Shoot Javelin
-        public void ShootThrowingNet(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 15)
+        private void ShootThrowingNet(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 15)
         {
             Debug.Log("VisualEffectManager.ShootThrowingNet() called...");
             StartCoroutine(ShootThrowingNetCoroutine(startPos, endPos, cData, speed));
@@ -462,7 +486,7 @@ namespace HexGameEngine.VisualEvents
         }
 
         // Fire Ball
-        public void ShootFireball(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootFireball(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             Debug.Log("VisualEffectManager.ShootToonFireball() called...");
             StartCoroutine(ShootFireballCoroutine(startPos, endPos, cData, speed, sortingOrderBonus, scaleModifier));
@@ -515,7 +539,7 @@ namespace HexGameEngine.VisualEvents
         }
 
         // Shadow Ball
-        public void ShootShadowBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootShadowBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             Debug.Log("VisualEffectManager.ShootShadowBall() called...");
             StartCoroutine(ShootShadowBallCoroutine(startPos, endPos, cData, speed, sortingOrderBonus, scaleModifier));
@@ -568,7 +592,7 @@ namespace HexGameEngine.VisualEvents
         }
 
         // Poison Ball
-        public void ShootPoisonBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootPoisonBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             Debug.Log("VisualEffectManager.ShootPoisonBallCoroutine() called...");
             StartCoroutine(ShootPoisonBallCoroutine(startPos, endPos, cData, speed, sortingOrderBonus, scaleModifier));

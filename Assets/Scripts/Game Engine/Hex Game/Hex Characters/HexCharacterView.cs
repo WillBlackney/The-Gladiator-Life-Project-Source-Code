@@ -164,7 +164,8 @@ namespace HexGameEngine.Characters
         public void OnModelRightClick()
         {
             if(character != null && 
-                character.controller == Controller.AI)         
+                character.controller == Controller.AI &&
+                !AbilityController.Instance.AwaitingAbilityOrder())         
                 EnemyInfoPanel.Instance.HandleBuildAndShowPanel(character.characterData);            
         }
         #endregion

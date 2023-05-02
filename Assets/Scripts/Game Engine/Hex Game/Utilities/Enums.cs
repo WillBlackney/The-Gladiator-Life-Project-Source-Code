@@ -824,6 +824,8 @@ namespace HexGameEngine
     {
         None = 4,
         Arrow = 0,
+        CrossbowBolt = 12,
+        ArrowOrBolt = 13,
         FireBall1 = 1,
         ShadowBall1 = 2,
         PoisonBall1 = 3,
@@ -833,7 +835,6 @@ namespace HexGameEngine
         FireMeteor = 9,
         Javelin = 10,
         ThrowingNet = 11,
-
     }
     public enum ProjectileStartPosition
     {

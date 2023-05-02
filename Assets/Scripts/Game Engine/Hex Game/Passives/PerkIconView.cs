@@ -19,8 +19,11 @@ namespace HexGameEngine.Perks
         private int statusStacks;        
 
         [Header("Component References")]
-        public TextMeshProUGUI statusStacksText;
-        public Image passiveImage;
+        [SerializeField] private TextMeshProUGUI statusStacksText;
+        [SerializeField] private Image passiveImage;
+        [SerializeField] private Image frameImage;
+        [SerializeField] private Sprite normalFrame;
+        [SerializeField] private Sprite injuryFrame;
 
         private static PerkIconView mousedOver;
 
@@ -70,16 +73,22 @@ namespace HexGameEngine.Perks
             passiveImage.sprite = PerkController.Instance.GetPassiveSpriteByName(iconData.passiveName);
 
             statusName = iconData.passiveName;
-            if (iconData.showStackCount)
+            if (iconData.showStackCount && iconData.isInjury == false)
             {
                 statusStacksText.gameObject.SetActive(true);
             }
+            else statusStacksText.gameObject.SetActive(false);
+
             if (iconData.hiddenOnPassivePanel)
             {
                 gameObject.SetActive(false);
             }
 
             statusStacksText.text = statusStacks.ToString();
+
+            // Build frame
+            frameImage.sprite = normalFrame;
+            if (iconData.isInjury) frameImage.sprite = injuryFrame;
 
         }
         public void ModifyIconViewStacks(int stacksGainedOrLost)
