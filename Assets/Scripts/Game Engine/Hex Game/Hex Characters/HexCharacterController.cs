@@ -21,6 +21,7 @@ using HexGameEngine.UI;
 using HexGameEngine.Items;
 using HexGameEngine.Libraries;
 using System.Threading.Tasks;
+using Sirenix.Utilities;
 
 namespace HexGameEngine.Characters
 {
@@ -1086,16 +1087,9 @@ namespace HexGameEngine.Characters
                 yield break;
             }
 
-            Ease moveTowardsEase = Ease.InBack;
-            Ease moveBackEase = Ease.OutSine;
-
             // 60 sample rate
-            float offset = -0.04f;
             float frameToMilliseconds = 0.016667f;
             float pauseTimeBeforeInitialMove = 6f * frameToMilliseconds;
-            float initialMoveTime = 17f * frameToMilliseconds;
-            float postImpactPause = 19f * frameToMilliseconds;
-            float moveBackTime = 20f * frameToMilliseconds;
             view.CurrentAnimation = AnimationEventController.OFF_HAND_THROW_NET;
 
             // Start attack animation
@@ -1105,19 +1099,6 @@ namespace HexGameEngine.Characters
             // Trigger SFX weapon swing
             AudioManager.Instance.PlaySoundPooled(Sound.Weapon_Axe_1H_Swing);
             if (cData != null) cData.MarkAsCompleted();
-
-            // Move 66% of the way towards the target position
-            //Vector2 startPos = view.WorldPosition;
-            //Vector2 forwardPos = (startPos + targetPos) / 2f;
-            //view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(moveTowardsEase);
-            //yield return new WaitForSeconds(initialMoveTime + offset);
-
-            // Pause at impact point
-            //if (cData != null) cData.MarkAsCompleted();
-            //yield return new WaitForSeconds(postImpactPause);
-
-            // Move back to start point
-            //view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
         }
         public void TriggerShieldBashAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
         {
@@ -2713,10 +2694,15 @@ namespace HexGameEngine.Characters
             character.hexCharacterView.character = null;
             character.hexCharacterView = null;
         }
-        public void DestroyCharacterView(HexCharacterView view)
+        public void DestroyCharacterView(HexCharacterView view, bool disconnectUCM = false)
         {
             Debug.Log("CharacterEntityController.DestroyCharacterView() called...");
-            Destroy(view.gameObject);
+            if (disconnectUCM)
+            {
+                view.ucm.gameObject.AddComponent<DestroyOnSceneChange>();
+                view.ucm.transform.SetParent(null, true);
+            }
+            Destroy(view.gameObject,0.1f);
         }
         public void HandleTearDownCombatScene()
         {
@@ -2730,6 +2716,9 @@ namespace HexGameEngine.Characters
             AllSummonedDefenders.Clear();
             AllDefenders.Clear();
             Graveyard.Clear();
+
+            var destroyables = FindObjectsOfType<DestroyOnSceneChange>();
+            destroyables.ForEach(x => Destroy(x.gameObject));
 
 
         }

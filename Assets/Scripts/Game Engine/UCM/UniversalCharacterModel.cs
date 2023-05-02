@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using HexGameEngine.Items;
 using HexGameEngine;
+using UnityEngine.Rendering;
 
 namespace CardGameEngine.UCM
 {
@@ -23,8 +24,7 @@ namespace CardGameEngine.UCM
         [SerializeField] GameObject headMasksParent;
         [SerializeField] GameObject[] oneHandAnimationBones;
         [SerializeField] GameObject[] twoHandAnimationBones;
-        [SerializeField] GameObject headBone;
-        [SerializeField] Transform decapitatedHeadParent;
+        [SerializeField] SortingGroup headSortingGroup;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]       
 
         [Header("Active Particle References")]
@@ -42,6 +42,7 @@ namespace CardGameEngine.UCM
         [HideInInspector] public UniversalCharacterModelElement[] allChestArmour;
         [HideInInspector] public UniversalCharacterModelElement[] allHeadArmour;
 
+        public SortingGroup HeadSortingGroup => headSortingGroup;
         public UniversalCharacterModelElement[] AllModelElements 
         { 
             get
@@ -228,9 +229,7 @@ namespace CardGameEngine.UCM
         }
         public void DisconnectHeadBone()
         {
-            Vector3 localPos = headBone.transform.localPosition;
-            headBone.transform.SetParent(decapitatedHeadParent, true);
-            headBone.transform.localPosition = localPos;
+            //headBone.transform.SetParent(decapitatedHeadParent, true);
         }
 
         public void StopAnimController()

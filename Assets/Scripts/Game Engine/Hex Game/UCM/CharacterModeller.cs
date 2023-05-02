@@ -281,6 +281,7 @@ namespace HexGameEngine.UCM
         public static void AutoSetHeadMaskOrderInLayer(UniversalCharacterModel model)
         {
             int headSortOrder = model.myEntityRenderer.SortingOrder + 10;
+            model.HeadSortingGroup.sortingOrder = model.myEntityRenderer.SortingOrder + 10;
 
             foreach (SpriteMask mask in model.AllHeadWearSpriteMasks)
             {

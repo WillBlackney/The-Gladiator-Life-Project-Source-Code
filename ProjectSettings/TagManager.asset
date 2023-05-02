@@ -52,3 +52,6 @@ TagManager:
   - name: Level Tiles
     uniqueID: 4217088403
     locked: 0
+  - name: Character 1
+    uniqueID: 2039444059
+    locked: 0

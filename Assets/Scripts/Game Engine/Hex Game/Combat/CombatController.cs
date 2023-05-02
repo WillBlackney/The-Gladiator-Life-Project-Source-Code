@@ -1447,11 +1447,32 @@ namespace HexGameEngine.Combat
             }, QueuePosition.Back, 0, 0, parentEvent);
 
             // Play death animation
+
             // VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySound(entity.audioProfile, AudioSet.Die));
-            VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayDecapitateAnimation(view), QueuePosition.Back, 0f, 1f, parentEvent);
+            int randomDeathAnim = RandomGenerator.NumberBetween(0, 1);
+            // Normal death
+            if(randomDeathAnim == 0)            
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                {
+                    HexCharacterController.Instance.PlayDeathAnimation(view);
+                    for (int i = 0; i < 2; i++)
+                        VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
+                }, QueuePosition.Back, 0f, 1f, parentEvent);
+                        
+            // Decapitation
+            else
+            {
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                {
+                    VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
+                    HexCharacterController.Instance.PlayDecapitateAnimation(view);
+                    for(int i = 0; i < 3; i++)
+                        VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
+                }, QueuePosition.Back, 0f, 1f, parentEvent);
+            }
 
             // Smokey disapear effect
-            VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateExpendEffect(view.WorldPosition, 15, 0.2f, false), QueuePosition.Back, 0, 0, parentEvent);
+            //VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateExpendEffect(view.WorldPosition, 15, 0.2f, false), QueuePosition.Back, 0, 0, parentEvent);
 
             // Fade out UCM
             //VisualEventManager.Instance.CreateVisualEvent(() => CharacterModeller.FadeOutCharacterModel(view.ucm, 1), QueuePosition.Back, 0, 0, parentEvent);
@@ -1488,7 +1509,7 @@ namespace HexGameEngine.Combat
             {
                 // Destroy view gameobject
                 HexCharacterController.Instance.DisconnectModelFromView(character);
-                //HexCharacterController.Instance.DestroyCharacterView(view);
+                HexCharacterController.Instance.DestroyCharacterView(view, true);
             }, QueuePosition.Back, 0, 0, parentEvent);
 
             // Lich death, kill all summoned skeletons
