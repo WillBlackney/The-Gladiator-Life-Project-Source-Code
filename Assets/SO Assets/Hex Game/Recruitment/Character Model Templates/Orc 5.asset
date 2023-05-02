@@ -15,7 +15,7 @@ MonoBehaviour:
   race: 2
   bodyParts:
   - Orc_Head_1
-  - Orc_Face_7
+  - Orc_Face_5
   - Orc_Chest
   - Orc_Right_Arm
   - Orc_Right_Hand

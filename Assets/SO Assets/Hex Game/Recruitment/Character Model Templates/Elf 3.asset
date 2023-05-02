@@ -15,8 +15,8 @@ MonoBehaviour:
   race: 4
   bodyParts:
   - Human_Chest
-  - Elf_Face_1
-  - Elf_Head_5
+  - Elf_Face_3
+  - Elf_Head_3
   - Dark_Elf_Right_Arm
   - Dark_Elf_Right_Hand
   - Dark_Elf_Right_Leg

@@ -15,7 +15,7 @@ MonoBehaviour:
   race: 3
   bodyParts:
   - Undead_Chest
-  - Undead_Face_2
+  - Undead_Face_1
   - Undead_Head_1
   - Undead_Right_Arm
   - Undead_Right_Hand

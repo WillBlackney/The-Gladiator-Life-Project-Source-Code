@@ -15,7 +15,7 @@ MonoBehaviour:
   race: 1
   bodyParts:
   - Human_Chest
-  - Human_Face_4
+  - Human_Face_2
   - Human_Head_2
   - Human_Right_Arm
   - Human_Right_Hand

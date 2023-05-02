@@ -15,8 +15,8 @@ MonoBehaviour:
   race: 5
   bodyParts:
   - Goblin_Chest_2
-  - Goblin_Face_3
-  - Goblin_Head_2
+  - Goblin_Face_2
+  - Goblin_Head_3
   - Goblin_Right_Arm_2
   - Goblin_Right_Hand_2
   - Goblin_Right_Leg_2
