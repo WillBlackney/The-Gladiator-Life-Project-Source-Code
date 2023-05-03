@@ -7,6 +7,9 @@ using HexGameEngine.Utilities;
 using HexGameEngine.Persistency;
 using HexGameEngine.Player;
 using System.Linq;
+using UnityEngine.TextCore.Text;
+using static UnityEngine.UI.Image;
+using HexGameEngine.Audio;
 
 namespace HexGameEngine.Characters
 {
@@ -195,6 +198,7 @@ namespace HexGameEngine.Characters
             newCharacter.myName = template.myName;
             newCharacter.myClassName = template.myClassName;
             newCharacter.race = template.race;
+            newCharacter.audioProfile = GetAudioProfileForRace(template.race);
             newCharacter.modelSize = template.modelSize;
             SetStartingLevelAndXpValues(newCharacter);
             newCharacter.background = GetBackgroundData(CharacterBackground.Unknown);
@@ -240,6 +244,7 @@ namespace HexGameEngine.Characters
             // Set up background + story data
             newCharacter.myName = template.myName;
             newCharacter.race = template.race;
+            newCharacter.audioProfile = template.audioProfile;
             newCharacter.modelSize = template.modelSize;
             newCharacter.xpReward = template.xpReward;
             newCharacter.baseArmour = template.baseArmour;
@@ -299,6 +304,7 @@ namespace HexGameEngine.Characters
             newCharacter.myName = original.myName;
             newCharacter.myClassName = original.myClassName;
             newCharacter.race = original.race;
+            newCharacter.audioProfile = original.audioProfile;
             newCharacter.background = original.background;
             newCharacter.modelSize = original.modelSize;
             newCharacter.xpReward = original.xpReward;
@@ -1044,6 +1050,34 @@ namespace HexGameEngine.Characters
             // round to the nearest 10 gold
             cost = Mathf.RoundToInt(cost / 10) * 10;
             return cost;
+        }
+        private AudioProfileType GetAudioProfileForRace(CharacterRace race)
+        {
+            if (race == CharacterRace.Human)
+                return AudioProfileType.HumanMale;
+
+            else if (race == CharacterRace.Elf)
+                return AudioProfileType.HumanFemale;
+
+            else if (race == CharacterRace.Undead ||
+                race == CharacterRace.Demon ||
+                race == CharacterRace.Ent)
+                return AudioProfileType.Undead;
+
+            else if (race == CharacterRace.Satyr)
+                return AudioProfileType.Satyr;
+
+            else if (race == CharacterRace.Orc)
+                return AudioProfileType.Orc;
+
+            else if (race == CharacterRace.Goblin)
+                return AudioProfileType.Goblin;
+
+            else if (race == CharacterRace.Gnoll)
+                return AudioProfileType.Gnoll;
+
+            else
+                return AudioProfileType.None;
         }
         #endregion
 

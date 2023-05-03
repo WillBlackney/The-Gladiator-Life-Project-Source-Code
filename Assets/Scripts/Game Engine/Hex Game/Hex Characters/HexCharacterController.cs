@@ -316,7 +316,7 @@ namespace HexGameEngine.Characters
             character.myName = data.myName;
             character.race = data.race;
             character.background = data.background;
-            //character.audioProfile = data.audioProfile;
+            character.audioProfile = data.audioProfile;
 
             // Setup stats
             character.attributeSheet = new AttributeSheet();
@@ -360,7 +360,7 @@ namespace HexGameEngine.Characters
             character.myName = data.myName;
             character.race = data.race;
             character.characterData = data;
-            //character.audioProfile = data.audioProfile;
+            character.audioProfile = data.audioProfile;
 
             // Setup stats
             character.attributeSheet = new AttributeSheet();

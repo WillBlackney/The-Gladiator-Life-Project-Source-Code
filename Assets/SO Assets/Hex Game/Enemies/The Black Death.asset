@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: The Black Death
   race: 3
+  audioProfile: 4
   modelSize: 2
   xpReward: 50
   ignoreStress: 0

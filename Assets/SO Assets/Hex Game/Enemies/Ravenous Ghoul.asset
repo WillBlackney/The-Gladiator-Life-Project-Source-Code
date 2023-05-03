@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Ravenous Ghoul
   race: 3
+  audioProfile: 4
   modelSize: 0
   xpReward: 15
+  ignoreStress: 0
   attributeSheet:
     might:
       value: 0
@@ -32,15 +34,15 @@ MonoBehaviour:
     resolve:
       value: 10
       stars: 0
-    fatigue:
-      value: 80
+    fitness:
+      value: 100
       stars: 0
     wits:
       value: 5
       stars: 0
     maxHealth: 0
     apRecovery: 8
-    maxAp: 8
+    apMaximum: 8
     initiative: 7
     fatigueRecovery: 8
     criticalChance: 5
@@ -82,12 +84,15 @@ MonoBehaviour:
     perks:
     - perkTag: 71
       stacks: 1
+  randomizeItemSet: 0
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 3a500198396fb49449c175b9490a8009, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
+  possibleArmourLoadouts: []
+  recruitWeaponLoadouts: []
   modelParts:
   - Undead_Head_4
   - Undead_Face_6

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Shambling Skeleton
   race: 3
+  audioProfile: 4
   modelSize: 0
   xpReward: 0
   ignoreStress: 0

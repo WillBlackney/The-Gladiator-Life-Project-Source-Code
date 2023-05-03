@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Initiate Bruiser
   race: 1
+  audioProfile: 1
   modelSize: 2
   xpReward: 15
+  ignoreStress: 0
   attributeSheet:
     might:
       value: 10
@@ -40,7 +42,7 @@ MonoBehaviour:
       stars: 0
     maxHealth: 0
     apRecovery: 8
-    maxAp: 8
+    apMaximum: 8
     initiative: 5
     fatigueRecovery: 8
     criticalChance: 5
@@ -81,6 +83,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 050000000100000006000000
@@ -101,6 +104,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 6
         range: 0
         perkPairing:
@@ -114,6 +118,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 6
         range: 0
         perkPairing:
@@ -127,6 +132,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 6
         range: 0
         perkPairing:
@@ -140,6 +146,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 050000000100000006000000
@@ -160,6 +167,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 6
         range: 0
         perkPairing:
@@ -173,6 +181,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 6
         range: 0
         perkPairing:
@@ -186,6 +195,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 6
         range: 0
         perkPairing:
@@ -199,6 +209,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 050000000100000006000000
@@ -226,6 +237,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 13
         range: 0
         perkPairing:
@@ -239,6 +251,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 7
         targettingPriority: 
@@ -259,6 +272,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 2
         targettingPriority: 0500000001000000
@@ -279,18 +293,22 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
     - {fileID: 11400000, guid: 06f22294614248946a629ab645bc6650, type: 2}
   serializedPassiveManager:
     perks: []
+  randomizeItemSet: 0
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 130ab6972593ec14d8dda796c434cefb, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
+  possibleArmourLoadouts: []
+  recruitWeaponLoadouts: []
   modelParts:
   - Human_Chest
   - Human_Face_9

@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Mind Flayer
   race: 3
+  audioProfile: 4
   modelSize: 0
   xpReward: 10
+  ignoreStress: 0
   attributeSheet:
     might:
       value: 0
@@ -40,7 +42,7 @@ MonoBehaviour:
       stars: 0
     maxHealth: 0
     apRecovery: 8
-    maxAp: 8
+    apMaximum: 8
     initiative: 8
     fatigueRecovery: 8
     criticalChance: 5
@@ -81,6 +83,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 24
         range: 0
         perkPairing:
@@ -94,6 +97,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 050000000100000006000000
@@ -121,6 +125,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: e7bbef8e195ca0a429df7f1da90b09ec, type: 2}
@@ -131,12 +136,15 @@ MonoBehaviour:
       stacks: 1
     - perkTag: 204
       stacks: 1
+  randomizeItemSet: 0
   itemSet:
     mainHandItem: {fileID: 0}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
+  possibleArmourLoadouts: []
+  recruitWeaponLoadouts: []
   modelParts:
   - Mind_Flayer_Chest_Wear
   - Mind_Flayer_Head_Wear

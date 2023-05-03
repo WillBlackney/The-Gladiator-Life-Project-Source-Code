@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Outlaw Initiate
   race: 1
+  audioProfile: 1
   modelSize: 0
   xpReward: 15
   ignoreStress: 1

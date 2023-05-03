@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Necromancer
   race: 1
+  audioProfile: 1
   modelSize: 0
   xpReward: 25
+  ignoreStress: 0
   attributeSheet:
     might:
       value: 0
@@ -40,7 +42,7 @@ MonoBehaviour:
       stars: 0
     maxHealth: 125
     apRecovery: 8
-    maxAp: 8
+    apMaximum: 8
     initiative: 7
     fatigueRecovery: 8
     criticalChance: 5
@@ -88,6 +90,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 8
         range: 0
         perkPairing:
@@ -101,6 +104,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 27
         range: 0
         perkPairing:
@@ -114,6 +118,7 @@ MonoBehaviour:
         turnReq: 1
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 0900000001000000
@@ -134,6 +139,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 27
         range: 0
         perkPairing:
@@ -147,6 +153,7 @@ MonoBehaviour:
         turnReq: 1
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 050000000100000006000000
@@ -169,12 +176,15 @@ MonoBehaviour:
     perks:
     - perkTag: 86
       stacks: 1
+  randomizeItemSet: 0
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 12b837d9baaf68e4eb55cfab4ef25cbd, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
+  possibleArmourLoadouts: []
+  recruitWeaponLoadouts: []
   modelParts:
   - Human_Face_3
   - Human_Head_3

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Outlaw Veteran
   race: 1
+  audioProfile: 1
   modelSize: 0
   xpReward: 25
   ignoreStress: 1

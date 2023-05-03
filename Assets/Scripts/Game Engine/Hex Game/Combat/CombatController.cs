@@ -16,6 +16,7 @@ using HexGameEngine.Persistency;
 using System.Linq;
 using HexGameEngine.Player;
 using HexGameEngine.Audio;
+using static UnityEngine.GraphicsBuffer;
 
 namespace HexGameEngine.Combat
 {
@@ -1097,10 +1098,14 @@ namespace HexGameEngine.Combat
                       
 
             // On health lost animations
-            if ((totalHealthLost > 0 || totalArmourLost > 0)) //&& removedBarrier == false)
+            if ((totalHealthLost > 0 || totalArmourLost > 0) &&
+                target.currentHealth - totalHealthLost > 0)
             {
                 VisualEventManager.Instance.CreateVisualEvent(() =>
-                    HexCharacterController.Instance.PlayHurtAnimation(target.hexCharacterView), QueuePosition.Back, 0, 0, parentEvent);               
+                {
+                    HexCharacterController.Instance.PlayHurtAnimation(target.hexCharacterView);
+                    AudioManager.Instance.PlaySound(target.audioProfile, AudioSet.Hurt);
+                }, QueuePosition.Back, 0, 0, parentEvent);               
             }
 
             // Create damage text effect            
@@ -1116,7 +1121,7 @@ namespace HexGameEngine.Combat
 
             // Reduce health + armour
             if (totalHealthLost != 0) HexCharacterController.Instance.ModifyHealth(target, -totalHealthLost);
-            if(totalArmourLost != 0) HexCharacterController.Instance.ModifyArmour(target, -totalArmourLost);
+            if (totalArmourLost != 0) HexCharacterController.Instance.ModifyArmour(target, -totalArmourLost);
 
             // Check for barrier
             if (removedBarrier) PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Barrier, -1, true, 0.5f);            
@@ -1441,7 +1446,7 @@ namespace HexGameEngine.Combat
             // Fade out world space GUI
             VisualEventManager.Instance.CreateVisualEvent(() => 
             {
-                //AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Boo_Long_1);
+                // to do: big crowd cheer SFX
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null);
                 view.vfxManager.StopAllEffects();
             }, QueuePosition.Back, 0, 0, parentEvent);
@@ -1454,6 +1459,7 @@ namespace HexGameEngine.Combat
             if(randomDeathAnim == 0)            
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 {
+                    AudioManager.Instance.PlaySound(character.audioProfile, AudioSet.Die);
                     HexCharacterController.Instance.PlayDeathAnimation(view);
                     for (int i = 0; i < 2; i++)
                         VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
@@ -1464,6 +1470,7 @@ namespace HexGameEngine.Combat
             {
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 {
+                    AudioManager.Instance.PlaySound(character.audioProfile, AudioSet.Die);
                     VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
                     HexCharacterController.Instance.PlayDecapitateAnimation(view);
                     for(int i = 0; i < 3; i++)

@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Shambling Skeleton
   race: 3
+  audioProfile: 4
   modelSize: 0
   xpReward: 5
+  ignoreStress: 0
   attributeSheet:
     might:
       value: 0
@@ -40,7 +42,7 @@ MonoBehaviour:
       stars: 0
     maxHealth: 20
     apRecovery: 8
-    maxAp: 8
+    apMaximum: 8
     initiative: 1
     fatigueRecovery: 8
     criticalChance: 5
@@ -73,12 +75,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 6b5c6b02a64c9fe4cb91b8ff26213bd2, type: 2}
   serializedPassiveManager:
     perks: []
+  randomizeItemSet: 0
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
+  possibleArmourLoadouts: []
+  recruitWeaponLoadouts: []
   modelParts:
   - Undead_Head_1
   - Undead_Face_2

@@ -1,5 +1,6 @@
 ﻿using HexGameEngine.Abilities;
 using HexGameEngine.AI;
+using HexGameEngine.Audio;
 using HexGameEngine.HexTiles;
 using HexGameEngine.Items;
 using HexGameEngine.Perks;
@@ -21,6 +22,7 @@ namespace HexGameEngine.Characters
         public LivingState livingState;
         public ActivationPhase activationPhase = ActivationPhase.NotActivated;
         public CharacterRace race;
+        public AudioProfileType audioProfile;
         public BackgroundData background;
 
         [Header("Active Properties")]

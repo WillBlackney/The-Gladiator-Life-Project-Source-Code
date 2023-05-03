@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Shambling Footman
   race: 3
+  audioProfile: 4
   modelSize: 0
   xpReward: 20
+  ignoreStress: 0
   attributeSheet:
     might:
       value: 0
@@ -32,15 +34,15 @@ MonoBehaviour:
     resolve:
       value: 15
       stars: 0
-    fatigue:
-      value: 80
+    fitness:
+      value: 100
       stars: 0
     wits:
       value: 5
       stars: 0
     maxHealth: 0
     apRecovery: 8
-    maxAp: 8
+    apMaximum: 8
     initiative: 1
     fatigueRecovery: 8
     criticalChance: 5
@@ -76,8 +78,12 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 3
         range: 0
         perkPairing:
@@ -86,8 +92,12 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 10
         range: 0
         perkPairing:
@@ -96,8 +106,12 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 7
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 
@@ -113,8 +127,12 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 
@@ -138,12 +156,15 @@ MonoBehaviour:
     perks:
     - perkTag: 24
       stacks: 1
+  randomizeItemSet: 0
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 8b09ca22a216b884e99c2b162c2b5e01, type: 2}
     offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
+  possibleArmourLoadouts: []
+  recruitWeaponLoadouts: []
   modelParts:
   - Undead_Head_1
   - Undead_Face_2

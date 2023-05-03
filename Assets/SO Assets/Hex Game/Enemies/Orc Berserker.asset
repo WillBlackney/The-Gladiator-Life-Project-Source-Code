@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Orc Berserker
   race: 2
+  audioProfile: 3
   modelSize: 2
   xpReward: 35
+  ignoreStress: 0
   attributeSheet:
     might:
       value: 25
@@ -40,7 +42,7 @@ MonoBehaviour:
       stars: 0
     maxHealth: 250
     apRecovery: 8
-    maxAp: 8
+    apMaximum: 8
     initiative: 7
     fatigueRecovery: 8
     criticalChance: 10
@@ -81,6 +83,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 23
         range: 0
         perkPairing:
@@ -94,6 +97,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 02000000
@@ -114,6 +118,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 050000000100000006000000
@@ -134,6 +139,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 23
         range: 0
         perkPairing:
@@ -147,6 +153,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 050000000100000006000000
@@ -174,6 +181,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
@@ -186,12 +194,15 @@ MonoBehaviour:
       stacks: 1
     - perkTag: 86
       stacks: 1
+  randomizeItemSet: 0
   itemSet:
     mainHandItem: {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
+  possibleArmourLoadouts: []
+  recruitWeaponLoadouts: []
   modelParts:
   - Orc_Berserker_Chest
   - Left_Hand_Simple_Axe

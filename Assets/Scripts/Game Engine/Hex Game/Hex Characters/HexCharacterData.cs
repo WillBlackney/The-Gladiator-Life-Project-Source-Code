@@ -1,5 +1,6 @@
 ﻿using HexGameEngine.Abilities;
 using HexGameEngine.AI;
+using HexGameEngine.Audio;
 using HexGameEngine.Items;
 using HexGameEngine.Perks;
 using System.Collections;
@@ -14,6 +15,7 @@ namespace HexGameEngine.Characters
         public string myName;
         public string myClassName;
         public CharacterRace race;
+        public AudioProfileType audioProfile;
         public CharacterModelSize modelSize;
         public BackgroundData background;
         public int xpReward;

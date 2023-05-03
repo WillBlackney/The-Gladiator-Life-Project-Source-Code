@@ -7,6 +7,7 @@ using HexGameEngine.Items;
 using HexGameEngine.Abilities;
 using HexGameEngine.Perks;
 using HexGameEngine.AI;
+using HexGameEngine.Audio;
 
 namespace HexGameEngine.Characters
 {
@@ -22,6 +23,10 @@ namespace HexGameEngine.Characters
         [LabelWidth(100)]
         [GUIColor("Yellow")]
         public CharacterRace race;
+        [BoxGroup("General Info")]
+        [LabelWidth(100)]
+        [GUIColor("Yellow")]
+        public AudioProfileType audioProfile;
         [BoxGroup("General Info")]
         [LabelWidth(100)]
         [GUIColor("Yellow")]

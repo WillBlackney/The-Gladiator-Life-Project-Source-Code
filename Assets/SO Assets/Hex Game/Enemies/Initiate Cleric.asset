@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Initiate Cleric
   race: 1
+  audioProfile: 1
   modelSize: 0
   xpReward: 10
+  ignoreStress: 0
   attributeSheet:
     might:
       value: 0
@@ -40,7 +42,7 @@ MonoBehaviour:
       stars: 0
     maxHealth: 0
     apRecovery: 8
-    maxAp: 8
+    apMaximum: 8
     initiative: 5
     fatigueRecovery: 8
     criticalChance: 5
@@ -81,6 +83,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 03000000
@@ -101,6 +104,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 8
         range: 0
         perkPairing:
@@ -114,6 +118,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 19
         range: 0
         perkPairing:
@@ -127,6 +132,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 02000000
@@ -147,6 +153,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 2
         range: 0
         perkPairing:
@@ -160,6 +167,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 0500000006000000
@@ -194,6 +202,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 8
         range: 0
         perkPairing:
@@ -207,6 +216,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 3
         targettingPriority: 08000000
@@ -227,6 +237,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 8
         range: 0
         perkPairing:
@@ -240,6 +251,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 7
         targettingPriority: 
@@ -260,6 +272,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 10
         range: 0
         perkPairing:
@@ -273,6 +286,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 6
         targettingPriority: 070000000800000001000000
@@ -293,6 +307,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 8
         range: 0
         perkPairing:
@@ -306,6 +321,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 3
         targettingPriority: 0700000008000000
@@ -326,6 +342,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 3
         targettingPriority: 0500000001000000
@@ -346,6 +363,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 2
         targettingPriority: 0500000001000000
@@ -366,6 +384,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 14
         range: 0
         perkPairing:
@@ -379,6 +398,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
       - requirementType: 8
         range: 0
         perkPairing:
@@ -392,6 +412,7 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 02000000
@@ -412,17 +433,21 @@ MonoBehaviour:
         turnReq: 0
         alliesAlive: 0
         abilityName: 
+        armourReq: 0
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: e4c3809e590e8a441aff1363602ac9cd, type: 2}
   serializedPassiveManager:
     perks: []
+  randomizeItemSet: 0
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 12b837d9baaf68e4eb55cfab4ef25cbd, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
+  possibleArmourLoadouts: []
+  recruitWeaponLoadouts: []
   modelParts:
   - Human_Chest
   - Human_Face_5

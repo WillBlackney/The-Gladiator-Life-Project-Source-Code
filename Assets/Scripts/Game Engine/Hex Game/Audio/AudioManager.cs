@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 using HexGameEngine.Utilities;
 using DG.Tweening;
 using TbsFramework.Players;
+using MapSystem;
 
 namespace HexGameEngine.Audio
 {
@@ -175,49 +176,31 @@ namespace HexGameEngine.Audio
             }
         }
         public void PlaySound(AudioProfileType type, AudioSet set)
-        {
-            /*
-            if (GlobalSettings.Instance.preventAudioProfiles)
-            {
-                return;
-            }
-            */
-
+        {            
+            if (GlobalSettings.Instance.PreventAudioProfiles) return;           
+            
             // Find the matching profile
             AudioProfileData apd = Array.Find(allProfiles, a => a.audioProfileType == type);
 
             if (apd == null)
             {
                 Debug.LogWarning("PlaySound() could not find an AudioProfileData that matches the type '" + type.ToString() + "'.");
+                return;
             }
 
             // Get the correct sounds
             List<AudioModel> validSounds = new List<AudioModel>();
-            if (set == AudioSet.Die)
-            {
-                validSounds.AddRange(apd.dieSounds);
-            }
-            else if (set == AudioSet.Hurt)
-            {
-                validSounds.AddRange(apd.hurtSounds);
-            }
-            else if (set == AudioSet.MeleeAttack)
-            {
-                validSounds.AddRange(apd.meleeAttackSounds);
-            }
-            else if (set == AudioSet.Buff)
-            {
-                validSounds.AddRange(apd.buffSounds);
-            }
+            AudioModel soundPlayed = null;
+            if (set == AudioSet.Die) soundPlayed = apd.dieSounds[RandomGenerator.NumberBetween(0, apd.dieSounds.Length - 1)];
+            else if (set == AudioSet.Hurt) soundPlayed = apd.hurtSounds[RandomGenerator.NumberBetween(0, apd.hurtSounds.Length - 1)];            
+            else if (set == AudioSet.MeleeAttack) soundPlayed = apd.meleeAttackSounds[RandomGenerator.NumberBetween(0, apd.meleeAttackSounds.Length - 1)];            
+            else if (set == AudioSet.Buff) soundPlayed = apd.buffSounds[RandomGenerator.NumberBetween(0, apd.buffSounds.Length - 1)];            
 
-            if (validSounds.Count == 0)
+            if (soundPlayed == null)
             {
                 Debug.LogWarning("PlaySound() did not find any valid sounds within the set '" + set.ToString() + "', returning...");
                 return;
             }
-
-            // Randomly pick a sound
-            AudioModel soundPlayed = validSounds[RandomGenerator.NumberBetween(0, validSounds.Count - 1)];
 
             // Set up audio player
             AudioPlayer player = GetNextAvailableAudioPlayer();

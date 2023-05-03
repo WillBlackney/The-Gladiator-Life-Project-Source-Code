@@ -71,6 +71,7 @@ namespace HexGameEngine.Utilities
         {
             get { return gameMode; }
         }
+        public bool PreventAudioProfiles => preventAudioProfiles;
         public bool IncludeGameIntroEvent => includeGameIntroEvent;
         public int StartingDay
         {
