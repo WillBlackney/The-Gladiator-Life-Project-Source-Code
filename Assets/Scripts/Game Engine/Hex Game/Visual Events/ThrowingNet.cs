@@ -1,5 +1,6 @@
 using Codice.Client.Common;
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,11 @@ namespace HexGameEngine.VisualEvents
     public class ThrowingNet : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer sr;
-        private bool destinationReached = false;
-        public bool DestinatedReached => destinationReached;
-        public void MoveToTarget(Vector3 start, Vector3 destination, float speed = 0.75f)
+        public void MoveToTarget(Vector3 start, Vector3 destination, float speed = 0.75f, Action onImpactCallback = null)
         {
             Transform trans = gameObject.transform;
             trans.position = start;
+            this.
             sr.DOFade(0.5f, 0f);
             trans.DOScale(0.25f, 0f);
 
@@ -25,8 +25,8 @@ namespace HexGameEngine.VisualEvents
             {
                 sr.DOFade(0f, speed / 2f);
                 trans.DOScale(0.5f, speed / 2f);
-                destinationReached = true;
                 Destroy(gameObject, 1f);
+                onImpactCallback.Invoke();
             });
 
         }

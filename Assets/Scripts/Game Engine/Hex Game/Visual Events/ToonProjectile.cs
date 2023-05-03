@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Codice.CM.Common;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,34 +9,55 @@ namespace HexGameEngine.VisualEvents
     public class ToonProjectile : MonoBehaviour
     {
         [Header("View Properties")]
-        public float myScaleModifier;
-        public int mySortingOrder;
-        public float projectileDestroyDelay;
+        [SerializeField] private float myScaleModifier;
+        [SerializeField] private int mySortingOrder;
+        [SerializeField] private float projectileDestroyDelay;
+        [Tooltip("Determines the amount of parabola effect on the projectile. " +
+            "A value of 0 means the projectile will travel in absolutely straight line from starting point to target.")]
+        [Range(0, 0.5f)]
+        [SerializeField] float maxParabolaY = 0.2f;
 
         [Header("Component References")]
-        public Rigidbody myRigidBody;
-        public SphereCollider mySphereCollider;
+        [SerializeField] private Rigidbody myRigidBody;
+        [SerializeField] private SphereCollider mySphereCollider;
 
         [Header("Prefab References")]
-        public GameObject impactParticle; // Effect spawned when projectile hits a collider
-        public GameObject projectileParticle; // Effect attached to the gameobject as child
-        public GameObject muzzleParticle; // Effect instantly spawned when gameobject is spawned
+        [SerializeField] private GameObject impactParticle; // Effect spawned when projectile hits a collider
+        [SerializeField] private GameObject projectileParticle; // Effect attached to the gameobject as child
+        [SerializeField] private GameObject muzzleParticle; // Effect instantly spawned when gameobject is spawned
 
         [Header("Misc Properties")]
-        public float colliderRadius = 1f;
+        [SerializeField] private float colliderRadius = 1f;
         [Range(0f, 1f)] // This is an offset that moves the impact effect slightly away from the point of impact to reduce clipping of the impact effect
-        public float collideOffset = 0.15f;
+        [SerializeField] private float collideOffset = 0.15f;
 
+        Vector3 start;
+        Vector3 destination;
+        bool readyToMove = false;
+        bool destinationReached = false;
+        float travelSpeed;
+        float distance;
+        float nextX;
+        float nextY;
+        float baseY;
+        float height;
+        Action onImpactCallback;
 
         // Setup + Initialization
         #region
 
-        public void InitializeSetup(int sortingOrder, float scaleModifier)
+        public void Initialize(int sortingOrder, float scaleModifier, Vector3 startPos, Vector3 endPos, float speed, Action onImpactCallback)
         {
             Debug.Log("TOON PROJECTILE InitializeSetup");
 
             // Get core components (rigid body, colliders, etc)
             GetMyComponents();
+
+            // Set values
+            start = startPos;
+            destination = endPos;
+            travelSpeed = speed;
+            this.onImpactCallback = onImpactCallback;
 
             // Set parent scale + sorting order
             myScaleModifier = scaleModifier;
@@ -55,22 +78,15 @@ namespace HexGameEngine.VisualEvents
                 Destroy(muzzleParticle, 1.5f); // 2nd parameter is lifetime of effect in seconds
             }
 
-        }
-        public void GetMyComponents()
-        {
-            // get rigid body if we dont have it
-            if (myRigidBody == null)
-            {
-                myRigidBody = GetComponent<Rigidbody>();
-            }
+            readyToMove = true;
 
-            // get rigid body if we dont have it
-            if (mySphereCollider == null)
-            {
-                mySphereCollider = transform.GetComponent<SphereCollider>();
-            }
         }
-        public void SetSortingOrder(GameObject parent, int sortingOrder)
+        private void GetMyComponents()
+        {
+            if (myRigidBody == null) myRigidBody = GetComponent<Rigidbody>();
+            if (mySphereCollider == null) mySphereCollider = transform.GetComponent<SphereCollider>();            
+        }
+        private void SetSortingOrder(GameObject parent, int sortingOrder)
         {
             Debug.Log("SetSortingOrder() called on " + parent.name);
 
@@ -97,7 +113,7 @@ namespace HexGameEngine.VisualEvents
                 psr.sortingOrder += sortingOrder;
             }
         }
-        public void SetScale(GameObject parent, float scalePercentage)
+        private void SetScale(GameObject parent, float scalePercentage)
         {
             Debug.Log("SetScale() called for " + parent.name + ", scaling by " + scalePercentage.ToString());
 
@@ -114,10 +130,37 @@ namespace HexGameEngine.VisualEvents
         }
         #endregion
 
-        public void OnDestinationReached()
+        // Travel Logic
+        #region
+       
+        private void Update()
         {
-            Debug.Log("TOON PROJECTILE OnDestinationReached");
+            if (readyToMove) MoveTowardsTarget();
+        }
+        private void MoveTowardsTarget()
+        {
+            if (destinationReached) return;
+            distance = destination.x - start.x;
+            nextX = Mathf.MoveTowards(transform.position.x, destination.x, travelSpeed * Time.deltaTime);
+            if(maxParabolaY > 0f)
+            {
+                baseY = Mathf.Lerp(start.y, destination.y, (nextX - start.x) / distance);
+                height = maxParabolaY * (nextX - start.x) * (nextX - destination.x) / (-0.25f * distance * distance);
+                nextY = baseY + height;
+            }
+            else nextY = Mathf.MoveTowards(transform.position.y, destination.y, travelSpeed * Time.deltaTime);
 
+            Vector3 movePosition = new Vector3(nextX, nextY, transform.position.z);
+            transform.position = movePosition;
+
+            if (transform.position == destination || distance < 0.05f)
+            {
+                destinationReached = true;
+                OnDestinationReached();
+            }
+        }
+        private void OnDestinationReached()
+        {
             // Create impact / explosion
             GameObject impactP = Instantiate(impactParticle, transform.position, Quaternion.identity) as GameObject;
             SetSortingOrder(impactP, mySortingOrder);
@@ -141,6 +184,8 @@ namespace HexGameEngine.VisualEvents
             Destroy(impactP, 3.5f); // Destroy impact / explosion effect
             Destroy(gameObject, 10); // Destroy this script + gameobject
 
+            if (onImpactCallback != null) onImpactCallback.Invoke();
         }
+        #endregion
     }
 }

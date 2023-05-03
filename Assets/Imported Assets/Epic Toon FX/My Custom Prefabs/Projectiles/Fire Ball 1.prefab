@@ -49,6 +49,7 @@ MonoBehaviour:
   myScaleModifier: 0
   mySortingOrder: 0
   projectileDestroyDelay: 0
+  maxParabolaY: 0
   myRigidBody: {fileID: 0}
   mySphereCollider: {fileID: 0}
   impactParticle: {fileID: 130848, guid: d16221e794fe16e4e8994a7f8c770561, type: 3}

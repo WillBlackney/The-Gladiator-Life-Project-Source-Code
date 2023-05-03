@@ -421,439 +421,94 @@ namespace HexGameEngine.VisualEvents
         // PROJECTILES
         #region
 
-        // Shoot Arrow
         private void ShootArrow(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f)
         {
-            Debug.Log("VisualEffectManager.ShootArrow() called...");
-            StartCoroutine(ShootArrowCoroutine(startPos, endPos, cData, speed));
-        }
-        private IEnumerator ShootArrowCoroutine(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed)
-        {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Arrow_Fired);
-            GameObject go = Instantiate(arrow, startPos, Quaternion.identity);
-            Projectile projectileScript = go.GetComponent<Projectile>();
-            projectileScript.InitializeSetup(startPos, endPos, speed);
-            yield return new WaitUntil(() => projectileScript.DestinationReached == true);
-            cData.MarkAsCompleted();
+            Projectile projectileScript = Instantiate(arrow, startPos, Quaternion.identity).GetComponent<Projectile>();
+            projectileScript.Initialize(startPos, endPos, speed, () => cData.MarkAsCompleted());
         }
-
-        // Shoot Bolt
         private void ShootCrossbowBolt(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 15f)
         {
-            Debug.Log("VisualEffectManager.ShootBolt() called...");
-            StartCoroutine(ShootBoltCoroutine(startPos, endPos, cData, speed));
-        }
-        private IEnumerator ShootBoltCoroutine(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed)
-        {
-            GameObject go = Instantiate(crossbowBolt, startPos, Quaternion.identity);
-            Projectile projectileScript = go.GetComponent<Projectile>();
-            projectileScript.InitializeSetup(startPos, endPos, speed);
-            yield return new WaitUntil(() => projectileScript.DestinationReached == true);
-            cData.MarkAsCompleted();
-        }
-
-        // Shoot Javelin
+            Projectile projectileScript = Instantiate(crossbowBolt, startPos, Quaternion.identity).GetComponent<Projectile>();
+            projectileScript.Initialize(startPos, endPos, speed, () => cData.MarkAsCompleted());
+        } 
         private void ShootJavelin(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 15)
         {
-            Debug.Log("VisualEffectManager.ShootJavelin() called...");
-            StartCoroutine(ShootJavelinCoroutine(startPos, endPos, cData, speed));
+            Projectile projectileScript = Instantiate(javelin, startPos, Quaternion.identity).GetComponent<Projectile>();
+            projectileScript.Initialize(startPos, endPos, speed, () => cData.MarkAsCompleted());
         }
-        private IEnumerator ShootJavelinCoroutine(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed)
+        private void ShootThrowingNet(Vector3 startPos, Vector3 endPos, CoroutineData cData)
         {
-            //AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Arrow_Fired);
-            GameObject go = Instantiate(javelin, startPos, Quaternion.identity);
-            Projectile projectileScript = go.GetComponent<Projectile>();
-            projectileScript.InitializeSetup(startPos, endPos, speed);
-            yield return new WaitUntil(() => projectileScript.DestinationReached == true);
-            cData.MarkAsCompleted();
-        }
-
-        // Shoot Javelin
-        private void ShootThrowingNet(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 15)
-        {
-            Debug.Log("VisualEffectManager.ShootThrowingNet() called...");
-            StartCoroutine(ShootThrowingNetCoroutine(startPos, endPos, cData, speed));
-        }
-        private IEnumerator ShootThrowingNetCoroutine(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed)
-        {
-            //AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Arrow_Fired);
-            // to do: throwing net thrown SFX maybe
             GameObject go = Instantiate(throwingNet, startPos, Quaternion.identity);
             ThrowingNet tn = go.GetComponent<ThrowingNet>();
-            tn.MoveToTarget(startPos, endPos, 0.75f);
-            yield return new WaitUntil(() => tn.DestinatedReached == true);
-            cData.MarkAsCompleted();
+            tn.MoveToTarget(startPos, endPos, 0.75f, () => cData.MarkAsCompleted());
         }
-
-        // Fire Ball
-        private void ShootFireball(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
-        {
-            Debug.Log("VisualEffectManager.ShootToonFireball() called...");
-            StartCoroutine(ShootFireballCoroutine(startPos, endPos, cData, speed, sortingOrderBonus, scaleModifier));
-        }
-        private IEnumerator ShootFireballCoroutine(Vector3 startPosition, Vector3 endPosition, CoroutineData cData, float speed, int sortingOrderBonus, float scaleModifier)
+        private void ShootFireball(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Fireball_Fired);
-            GameObject go = Instantiate(fireBall, startPosition, fireBall.transform.rotation);
-            ToonProjectile tsScript = go.GetComponent<ToonProjectile>();
-            tsScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            bool destinationReached = false;
-
-            // insta explode if created at destination
-            if (go.transform.position.x == endPosition.x &&
-                go.transform.position.y == endPosition.y &&
-                destinationReached == false)
+            ToonProjectile tsScript = Instantiate(fireBall, startPos, fireBall.transform.rotation).GetComponent<ToonProjectile>();
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
             {
-                destinationReached = true;
-                tsScript.OnDestinationReached();
                 AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Fire_1);
-
-                // Resolve early
-                if (cData != null)
-                {
-                    cData.MarkAsCompleted();
-                }
-            }
-
-            while (go.transform.position != endPosition &&
-                   destinationReached == false)
-            {
-                go.transform.position = Vector2.MoveTowards(go.transform.position, endPosition, speed * Time.deltaTime);
-
-                if (go.transform.position.x == endPosition.x &&
-                    go.transform.position.y == endPosition.y)
-                {
-                    tsScript.OnDestinationReached();
-                    AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Fire_1);
-                    destinationReached = true;
-                }
-                yield return null;
-            }
-
-            // Resolve
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
-
+                if (cData != null) cData.MarkAsCompleted();
+            });
         }
-
-        // Shadow Ball
-        private void ShootShadowBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
-        {
-            Debug.Log("VisualEffectManager.ShootShadowBall() called...");
-            StartCoroutine(ShootShadowBallCoroutine(startPos, endPos, cData, speed, sortingOrderBonus, scaleModifier));
-        }
-        private IEnumerator ShootShadowBallCoroutine(Vector3 startPosition, Vector3 endPosition, CoroutineData cData, float speed, int sortingOrderBonus, float scaleModifier)
+        private void ShootShadowBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Shadowball_Fired);
-            GameObject go = Instantiate(shadowBall, startPosition, shadowBall.transform.rotation);
-            ToonProjectile tsScript = go.GetComponent<ToonProjectile>();
-            tsScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            bool destinationReached = false;
-
-            // insta explode if created at destination
-            if (go.transform.position.x == endPosition.x &&
-                go.transform.position.y == endPosition.y &&
-                destinationReached == false)
+            ToonProjectile tsScript = Instantiate(shadowBall, startPos, shadowBall.transform.rotation).GetComponent<ToonProjectile>();
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
             {
-                destinationReached = true;
-                tsScript.OnDestinationReached();
                 AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Shadow_1);
-
-                // Resolve early
-                if (cData != null)
-                {
-                    cData.MarkAsCompleted();
-                }
-            }
-
-            while (go.transform.position != endPosition &&
-                   destinationReached == false)
-            {
-                go.transform.position = Vector2.MoveTowards(go.transform.position, endPosition, speed * Time.deltaTime);
-
-                if (go.transform.position.x == endPosition.x &&
-                    go.transform.position.y == endPosition.y)
-                {
-                    tsScript.OnDestinationReached();
-                    AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Shadow_1);
-                    destinationReached = true;
-                }
-                yield return null;
-            }
-
-            // Resolve
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
-
+                if (cData != null) cData.MarkAsCompleted();
+            });
         }
-
-        // Poison Ball
-        private void ShootPoisonBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
-        {
-            Debug.Log("VisualEffectManager.ShootPoisonBallCoroutine() called...");
-            StartCoroutine(ShootPoisonBallCoroutine(startPos, endPos, cData, speed, sortingOrderBonus, scaleModifier));
-        }
-        private IEnumerator ShootPoisonBallCoroutine(Vector3 startPosition, Vector3 endPosition, CoroutineData cData, float speed, int sortingOrderBonus, float scaleModifier)
+        private void ShootPoisonBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Poison_Fired);
-            GameObject go = Instantiate(poisonBall, startPosition, poisonBall.transform.rotation);
-            ToonProjectile tsScript = go.GetComponent<ToonProjectile>();
-            tsScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            bool destinationReached = false;
-
-            // insta explode if created at destination
-            if (go.transform.position.x == endPosition.x &&
-                go.transform.position.y == endPosition.y &&
-                destinationReached == false)
+            ToonProjectile tsScript = Instantiate(poisonBall, startPos, poisonBall.transform.rotation).GetComponent<ToonProjectile>();
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
             {
-                destinationReached = true;
-
-                tsScript.OnDestinationReached();
                 AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Poison_1);
-
-                // Resolve early
-                if (cData != null)
-                {
-                    cData.MarkAsCompleted();
-                }
-            }
-
-            while (go.transform.position != endPosition &&
-                   destinationReached == false)
-            {
-                go.transform.position = Vector2.MoveTowards(go.transform.position, endPosition, speed * Time.deltaTime);
-
-                if (go.transform.position.x == endPosition.x &&
-                    go.transform.position.y == endPosition.y)
-                {
-                    tsScript.OnDestinationReached();
-                    AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Poison_1);
-                    destinationReached = true;
-                }
-                yield return null;
-            }
-
-            // Resolve
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
-
+                if (cData != null) cData.MarkAsCompleted();
+            });
         }
-
-        // Lightning Ball
-        public void ShootLightningBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
-        {
-            Debug.Log("VisualEffectManager.ShootLightningBallCoroutine() called...");
-            StartCoroutine(ShootLightningBallCoroutine(startPos, endPos, cData, speed, sortingOrderBonus, scaleModifier));
-        }
-        private IEnumerator ShootLightningBallCoroutine(Vector3 startPosition, Vector3 endPosition, CoroutineData cData, float speed, int sortingOrderBonus, float scaleModifier)
+        public void ShootLightningBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Lightning_Fired);
-            GameObject go = Instantiate(lightningBall, startPosition, lightningBall.transform.rotation);
-            ToonProjectile tsScript = go.GetComponent<ToonProjectile>();
-            tsScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            bool destinationReached = false;
-
-            // insta explode if created at destination
-            if (go.transform.position.x == endPosition.x &&
-                go.transform.position.y == endPosition.y &&
-                destinationReached == false)
+            ToonProjectile tsScript = Instantiate(lightningBall, startPos, lightningBall.transform.rotation).GetComponent<ToonProjectile>();
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
             {
-                destinationReached = true;
-
-                tsScript.OnDestinationReached();
                 AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Lightning_1);
-
-                // Resolve early
-                if (cData != null)
-                {
-                    cData.MarkAsCompleted();
-                }
-            }
-
-            while (go.transform.position != endPosition &&
-                   destinationReached == false)
-            {
-                go.transform.position = Vector2.MoveTowards(go.transform.position, endPosition, speed * Time.deltaTime);
-
-                if (go.transform.position.x == endPosition.x &&
-                    go.transform.position.y == endPosition.y)
-                {
-                    tsScript.OnDestinationReached();
-                    AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Lightning_1);
-                    destinationReached = true;
-                }
-                yield return null;
-            }
-
-            // Resolve
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
-
+                if (cData != null) cData.MarkAsCompleted();
+            });
         }
-
-        // Holy Ball
-        public void ShootHolyBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        public void ShootHolyBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
-            Debug.Log("VisualEffectManager.ShootHolyBallCoroutine() called...");
-            StartCoroutine(ShootHolyBallCoroutine(startPos, endPos, cData, speed, sortingOrderBonus, scaleModifier));
-        }
-        private IEnumerator ShootHolyBallCoroutine(Vector3 startPosition, Vector3 endPosition, CoroutineData cData, float speed, int sortingOrderBonus, float scaleModifier)
+            ToonProjectile tsScript = Instantiate(holyBall, startPos, holyBall.transform.rotation).GetComponent<ToonProjectile>();
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
+            {
+                if (cData != null) cData.MarkAsCompleted();
+            });
+        }       
+        public void ShootFrostBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
-            GameObject go = Instantiate(holyBall, startPosition, holyBall.transform.rotation);
-            ToonProjectile tsScript = go.GetComponent<ToonProjectile>();
-            tsScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            bool destinationReached = false;
-
-            // insta explode if created at destination
-            if (go.transform.position.x == endPosition.x &&
-                go.transform.position.y == endPosition.y &&
-                destinationReached == false)
+            ToonProjectile tsScript = Instantiate(frostBall, startPos, frostBall.transform.rotation).GetComponent<ToonProjectile>();
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
             {
-                destinationReached = true;
-
-                tsScript.OnDestinationReached();
-
-                // Resolve early
-                if (cData != null)
-                {
-                    cData.MarkAsCompleted();
-                }
-            }
-
-            while (go.transform.position != endPosition &&
-                   destinationReached == false)
-            {
-                go.transform.position = Vector2.MoveTowards(go.transform.position, endPosition, speed * Time.deltaTime);
-
-                if (go.transform.position.x == endPosition.x &&
-                    go.transform.position.y == endPosition.y)
-                {
-                    tsScript.OnDestinationReached();
-                    destinationReached = true;
-                }
-                yield return null;
-            }
-
-            // Resolve
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
-
+                if (cData != null) cData.MarkAsCompleted();
+            });
         }
-
-        // Holy Ball
-        public void ShootFrostBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
-        {
-            Debug.Log("VisualEffectManager.ShootFrostBallCoroutine() called...");
-            StartCoroutine(ShootFrostBallCoroutine(startPos, endPos, cData, speed, sortingOrderBonus, scaleModifier));
-        }
-        private IEnumerator ShootFrostBallCoroutine(Vector3 startPosition, Vector3 endPosition, CoroutineData cData, float speed, int sortingOrderBonus, float scaleModifier)
-        {
-            GameObject go = Instantiate(frostBall, startPosition, frostBall.transform.rotation);
-            ToonProjectile tsScript = go.GetComponent<ToonProjectile>();
-            tsScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            bool destinationReached = false;
-
-            // insta explode if created at destination
-            if (go.transform.position.x == endPosition.x &&
-                go.transform.position.y == endPosition.y &&
-                destinationReached == false)
-            {
-                destinationReached = true;
-
-                tsScript.OnDestinationReached();
-
-                // Resolve early
-                if (cData != null)
-                {
-                    cData.MarkAsCompleted();
-                }
-            }
-
-            while (go.transform.position != endPosition &&
-                   destinationReached == false)
-            {
-                go.transform.position = Vector2.MoveTowards(go.transform.position, endPosition, speed * Time.deltaTime);
-
-                if (go.transform.position.x == endPosition.x &&
-                    go.transform.position.y == endPosition.y)
-                {
-                    tsScript.OnDestinationReached();
-                    destinationReached = true;
-                }
-                yield return null;
-            }
-
-            // Resolve
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
-
-        }
-
-        // Fire Meteor
-        public void ShootFireMeteor(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f, int sortingOrderBonus = 15, float scaleModifier = 3f)
-        {
-            Debug.Log("VisualEffectManager.ShootFireMeteor() called...");
-            StartCoroutine(ShootFireMeteorCoroutine(startPos, endPos, cData, speed, sortingOrderBonus, scaleModifier));
-        }
-        private IEnumerator ShootFireMeteorCoroutine(Vector3 startPosition, Vector3 endPosition, CoroutineData cData, float speed, int sortingOrderBonus, float scaleModifier)
+        public void ShootFireMeteor(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 3f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Fireball_Fired);
-            GameObject go = Instantiate(fireMeteor, startPosition, fireMeteor.transform.rotation);
-            ToonProjectile tsScript = go.GetComponent<ToonProjectile>();
-            tsScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            bool destinationReached = false;
-
-            // insta explode if created at destination
-            if (go.transform.position.x == endPosition.x &&
-                go.transform.position.y == endPosition.y &&
-                destinationReached == false)
+            ToonProjectile tsScript = Instantiate(fireMeteor, startPos, fireMeteor.transform.rotation).GetComponent<ToonProjectile>();
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
             {
-                destinationReached = true;
-                tsScript.OnDestinationReached();
                 AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Fire_1);
-
-                // Resolve early
-                if (cData != null)
-                {
-                    cData.MarkAsCompleted();
-                }
-            }
-
-            while (go.transform.position != endPosition &&
-                   destinationReached == false)
-            {
-                go.transform.position = Vector2.MoveTowards(go.transform.position, endPosition, speed * Time.deltaTime);
-
-                if (go.transform.position.x == endPosition.x &&
-                    go.transform.position.y == endPosition.y)
-                {
-                    tsScript.OnDestinationReached();
-                    AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Fire_1);
-                    destinationReached = true;
-                }
-                yield return null;
-            }
-
-            // Resolve
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
-
+                if (cData != null) cData.MarkAsCompleted();
+            });
         }
-
         #endregion
 
         // APPLY BUFF + DEBUFF FX

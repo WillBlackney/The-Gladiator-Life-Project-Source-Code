@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace HexGameEngine.VisualEvents
 {
@@ -21,13 +22,14 @@ namespace HexGameEngine.VisualEvents
         // Fields
         Vector3 start;
         Vector3 destination;
-        bool readyToMove;
-        bool destinationReached;
+        bool readyToMove = false;
+        bool destinationReached = false;
         float travelSpeed;      
         float distance;
         float nextX;
         float baseY;
-        float height;        
+        float height;
+        Action onImpactCallback;
 
         public bool DestinationReached
         {
@@ -39,12 +41,13 @@ namespace HexGameEngine.VisualEvents
         // Initialization 
         #region
 
-        public void InitializeSetup(Vector3 startPos, Vector3 endPos, float speed)
+        public void Initialize(Vector3 startPos, Vector3 endPos, float speed, Action onImpactCallback = null)
         {
             transform.position = new Vector3(startPos.x, startPos.y + yOffset, startPos.z);
             start = transform.position;
             destination = endPos;
             travelSpeed = speed;
+            this.onImpactCallback = onImpactCallback;
             FaceDestination(destination);
             readyToMove = true;
         }
@@ -65,12 +68,13 @@ namespace HexGameEngine.VisualEvents
             height = maxParabolaY * (nextX - start.x) * (nextX - destination.x) / (-0.25f * distance * distance);
 
             Vector3 movePosition = new Vector3(nextX, baseY + height, transform.position.z);
-            transform.rotation = FaceDestination2(movePosition - transform.position);
+            transform.rotation = RotateTowardsDestination(movePosition - transform.position);
             transform.position = movePosition;
 
-            if (transform.position == destination || distance < 0.1f)
+            if (transform.position == destination || distance < 0.05f)
             {
                 destinationReached = true;
+                if(onImpactCallback != null) onImpactCallback.Invoke();
                 DestroySelf();
             }
         }
@@ -85,7 +89,7 @@ namespace HexGameEngine.VisualEvents
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 10000f);
         }
-        private Quaternion FaceDestination2(Vector2 rotation)
+        private Quaternion RotateTowardsDestination(Vector2 rotation)
         {
             return Quaternion.Euler(0, 0, Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg);
         }
