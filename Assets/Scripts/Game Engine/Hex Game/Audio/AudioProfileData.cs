@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 namespace HexGameEngine.Audio
 {
-    [Serializable]
-    public class AudioProfileData
+    [CreateAssetMenu(fileName = "New AudioProfileData", menuName = "Audio Profile Data")]
+    public class AudioProfileData : ScriptableObject
     {
         [Header("General Properties")]
         public AudioProfileType audioProfileType;
@@ -15,30 +12,30 @@ namespace HexGameEngine.Audio
 
         [Header("SFX Buckets")]
         public AudioModel[] meleeAttackSounds;
-        public AudioModel[] hurtSounds;
         public AudioModel[] dieSounds;
-        public AudioModel[] buffSounds;
-
+        public AudioModel[] hurtSounds;       
+        public AudioModel[] turnStartSounds;
     }
 
     public enum AudioProfileType
     {
         None = 0,
-        HumanMale = 1,
-        HumanFemale = 2,
-        Orc = 3,
-        Undead = 4,
-        Goblin = 5,
-        Gnoll = 6,
-        Satyr = 7,
+        Human_1 = 1,
+        Elf_1 = 2,
+        Orc_1 = 3,
+        Undead_1 = 4,
+        Goblin_1 = 5,
+        Gnoll_1 = 6,
+        Satyr_1 = 7,
     }
 
     public enum AudioSet
     {
         None = 0,
-        MeleeAttack = 1,
+        Attack = 1,
         Hurt = 2,
         Die = 3,
         Buff = 4,
+        TurnStart = 5,
     }
 }

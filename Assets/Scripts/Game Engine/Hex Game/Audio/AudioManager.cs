@@ -193,8 +193,8 @@ namespace HexGameEngine.Audio
             AudioModel soundPlayed = null;
             if (set == AudioSet.Die) soundPlayed = apd.dieSounds[RandomGenerator.NumberBetween(0, apd.dieSounds.Length - 1)];
             else if (set == AudioSet.Hurt) soundPlayed = apd.hurtSounds[RandomGenerator.NumberBetween(0, apd.hurtSounds.Length - 1)];            
-            else if (set == AudioSet.MeleeAttack) soundPlayed = apd.meleeAttackSounds[RandomGenerator.NumberBetween(0, apd.meleeAttackSounds.Length - 1)];            
-            else if (set == AudioSet.Buff) soundPlayed = apd.buffSounds[RandomGenerator.NumberBetween(0, apd.buffSounds.Length - 1)];            
+            else if (set == AudioSet.Attack) soundPlayed = apd.meleeAttackSounds[RandomGenerator.NumberBetween(0, apd.meleeAttackSounds.Length - 1)];            
+            else if (set == AudioSet.TurnStart) soundPlayed = apd.turnStartSounds[RandomGenerator.NumberBetween(0, apd.turnStartSounds.Length - 1)];            
 
             if (soundPlayed == null)
             {

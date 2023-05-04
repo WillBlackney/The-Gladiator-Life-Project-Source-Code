@@ -16,6 +16,7 @@ namespace HexGameEngine.VisualEvents
             "A value of 0 means the projectile will travel in absolutely straight line from starting point to target.")]
         [Range(0, 0.5f)]
         [SerializeField] float maxParabolaY = 0.2f;
+        [SerializeField] AnimationCurve curve;
 
         [Header("Component References")]
         [SerializeField] private Rigidbody myRigidBody;
@@ -36,6 +37,7 @@ namespace HexGameEngine.VisualEvents
         bool readyToMove = false;
         bool destinationReached = false;
         float travelSpeed;
+        float initialDistance;
         float distance;
         float nextX;
         float nextY;
@@ -142,13 +144,15 @@ namespace HexGameEngine.VisualEvents
             if (destinationReached) return;
             distance = destination.x - start.x;
             nextX = Mathf.MoveTowards(transform.position.x, destination.x, travelSpeed * Time.deltaTime);
+
+            /*
             if(maxParabolaY > 0f)
             {
                 baseY = Mathf.Lerp(start.y, destination.y, (nextX - start.x) / distance);
                 height = maxParabolaY * (nextX - start.x) * (nextX - destination.x) / (-0.25f * distance * distance);
                 nextY = baseY + height;
             }
-            else nextY = Mathf.MoveTowards(transform.position.y, destination.y, travelSpeed * Time.deltaTime);
+            else nextY = Mathf.MoveTowards(transform.position.y, destination.y, travelSpeed * Time.deltaTime);*/
 
             Vector3 movePosition = new Vector3(nextX, nextY, transform.position.z);
             transform.position = movePosition;

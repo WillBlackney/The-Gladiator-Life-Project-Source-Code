@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Testy 2
   myClassName: The Test Guy 2
-  race: 3
+  race: 1
   modelSize: 0
   attributeSheet:
     might:
@@ -70,7 +70,7 @@ MonoBehaviour:
   - Undead_Right_Arm
   - Undead_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 11bc6066b51a32244bf3030185789aa5, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}

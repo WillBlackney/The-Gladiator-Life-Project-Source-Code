@@ -7,9 +7,8 @@ using UnityEngine.EventSystems;
 
 namespace HexGameEngine.UWidget
 {
-    public class UWidget : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class UWidget : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
     {
-
         // Variables + Component References
         #region
         [Header("Core Properties")]
@@ -50,6 +49,7 @@ namespace HexGameEngine.UWidget
         private bool hasRunSetup = false;
 
         private static UWidget mousedOver;
+        private bool didMouseDown = false;
         #endregion
 
         //  Properties + Accessors
@@ -94,11 +94,11 @@ namespace HexGameEngine.UWidget
 
         // Input Listeners
         #region
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (UWidgetController.Instance != null && inputType == WidgetInputType.IPointer)
+        public void OnPointerUp(PointerEventData eventData)
+        {            
+            if (UWidgetController.Instance != null && inputType == WidgetInputType.IPointer && didMouseDown)
             {
-                if(eventData.button == PointerEventData.InputButton.Right)
+                if (eventData.button == PointerEventData.InputButton.Right)
                 {
                     UWidgetController.Instance.HandleWidgetEvents(this, OnRightClickEvents);
                 }
@@ -106,11 +106,15 @@ namespace HexGameEngine.UWidget
                 {
                     UWidgetController.Instance.HandleWidgetEvents(this, OnClickEvents);
                 }
-               
             }
+        }
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            didMouseDown = true;
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
+            didMouseDown = false;
             if (MousedOver != this && UWidgetController.Instance != null && inputType == WidgetInputType.IPointer)
             {
                 MousedOver = this;
@@ -121,6 +125,7 @@ namespace HexGameEngine.UWidget
         }
         public void OnPointerExit(PointerEventData eventData)
         {
+            didMouseDown = false;
             if (UWidgetController.Instance != null && inputType == WidgetInputType.IPointer)
             {
                 if (MousedOver == this)
@@ -132,19 +137,24 @@ namespace HexGameEngine.UWidget
             }
 
         }
+        void OnMouseDown()
+        {
+            didMouseDown = true;
+        }
 
         public void OnMouseOver()
         {
-            if (UWidgetController.Instance != null && inputType == WidgetInputType.Collider)
+            if (UWidgetController.Instance != null && inputType == WidgetInputType.Collider && didMouseDown)
             {
-                if(Input.GetKeyDown(KeyCode.Mouse1))
+                if(Input.GetKeyUp(KeyCode.Mouse1))
                     UWidgetController.Instance.HandleWidgetEvents(this, OnRightClickEvents);
-                else if (Input.GetKeyDown(KeyCode.Mouse0))
+                else if (Input.GetKeyUp(KeyCode.Mouse0))
                     UWidgetController.Instance.HandleWidgetEvents(this, OnClickEvents);
             }
         }
         public void OnMouseEnter()
         {
+            didMouseDown = false;
             if (MousedOver != this && UWidgetController.Instance != null && inputType == WidgetInputType.Collider)
             {
                 MousedOver = this;
@@ -154,6 +164,7 @@ namespace HexGameEngine.UWidget
         }
         public void OnMouseExit()
         {
+            didMouseDown = false;
             if (UWidgetController.Instance != null && inputType == WidgetInputType.Collider)
             {
                 if (MousedOver == this)
@@ -166,6 +177,7 @@ namespace HexGameEngine.UWidget
         }
         void OnDisable()
         {
+            didMouseDown = false;
             if (UWidgetController.Instance != null)
                 UWidgetController.Instance.HandleWidgetEvents(this, OnDisableEvents);
         }

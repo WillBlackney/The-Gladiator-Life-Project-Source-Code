@@ -19,6 +19,7 @@ using HexGameEngine.Perks;
 using HexGameEngine.Items;
 using HexGameEngine.CameraSystems;
 using DG.Tweening;
+using HexGameEngine.Audio;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -236,7 +237,11 @@ namespace HexGameEngine.TownFeatures
         public void OnCharacterRecruitTabClicked(RecruitableCharacterTab tab)
         {
             if (tab.MyCharacterData == null) return;
-            if (selectedRecruitTab != null) selectedRecruitTab.SelectedParent.SetActive(false);
+            if (selectedRecruitTab != null)
+            {
+                AudioManager.Instance.PlaySound(tab.MyCharacterData.audioProfile, AudioSet.TurnStart);
+                selectedRecruitTab.SelectedParent.SetActive(false);
+            }
             selectedRecruitTab = tab;
             selectedRecruitTab.SelectedParent.SetActive(true);
             BuildRecruitPageRightPanel(tab.MyCharacterData);
@@ -257,6 +262,7 @@ namespace HexGameEngine.TownFeatures
 
             // Add character to roster
             CharacterDataController.Instance.AddCharacterToRoster(selectedRecruitTab.MyCharacterData);
+
             // Remove from current recruit pool
             currentRecruits.Remove(selectedRecruitTab.MyCharacterData);
 

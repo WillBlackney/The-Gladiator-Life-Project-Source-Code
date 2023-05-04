@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0143ea8370e98b44b8a53bc93da6fa7, type: 3}
+  m_Name: Human_1
+  m_EditorClassIdentifier: 
+  audioProfileType: 1
+  meleeAttackSounds:
+  - audioClip: {fileID: 0}
+    randomizeClip: 1
+    audioClips:
+    - {fileID: 8300000, guid: 7f2f08e6dd5a28047b2db81462735030, type: 3}
+    - {fileID: 8300000, guid: 5623cb67aa155a341bc0a7c9d9b7835e, type: 3}
+    - {fileID: 8300000, guid: beac2c12974f7f5469a76dad7fa1df41, type: 3}
+    - {fileID: 8300000, guid: 2f6f259dd8d6f36419e18be8e61a2989, type: 3}
+    - {fileID: 8300000, guid: 29ae0697b28d64b49998e971de417ba9, type: 3}
+    - {fileID: 8300000, guid: 357e04b18f06cae4c9625407f6e7d298, type: 3}
+    soundType: 0
+    combatCategory: 0
+    randomizeVolume: 0
+    randomVolumeLowerLimit: 0.3
+    randomVolumeUpperLimit: 0.4
+    volume: 0.3
+    randomizePitch: 0
+    randomPitchLowerLimit: 0.8
+    randomPitchUpperLimit: 1.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    fadingIn: 0
+    fadingOut: 0
+  hurtSounds:
+  - audioClip: {fileID: 0}
+    randomizeClip: 1
+    audioClips:
+    - {fileID: 8300000, guid: 87ac53324e04c4c44a477720129d1df5, type: 3}
+    - {fileID: 8300000, guid: fe422bde851f75a44af759bc7bde5e22, type: 3}
+    - {fileID: 8300000, guid: de1225cdd9b3f0a4cb0f838962464dec, type: 3}
+    - {fileID: 8300000, guid: b8446389ffdbe944ca46c8d6f05f0097, type: 3}
+    - {fileID: 8300000, guid: a82187ddd6a5f554682ffbdc8ce58cd1, type: 3}
+    - {fileID: 8300000, guid: 0a644d13d6108504d824e3b66d410f4a, type: 3}
+    soundType: 0
+    combatCategory: 0
+    randomizeVolume: 0
+    randomVolumeLowerLimit: 0.3
+    randomVolumeUpperLimit: 0.4
+    volume: 0.3
+    randomizePitch: 0
+    randomPitchLowerLimit: 0.8
+    randomPitchUpperLimit: 1.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    fadingIn: 0
+    fadingOut: 0
+  dieSounds:
+  - audioClip: {fileID: 0}
+    randomizeClip: 1
+    audioClips:
+    - {fileID: 8300000, guid: 3da0f3fcea947ae4290a73d4edb6c1cc, type: 3}
+    - {fileID: 8300000, guid: 1580c3ba31c10b140bd52d55482b76d9, type: 3}
+    - {fileID: 8300000, guid: 2b410b3ba6967c14393f8dabebad933b, type: 3}
+    - {fileID: 8300000, guid: 3a7d825a39f5d3c4897cdf7912afedfe, type: 3}
+    - {fileID: 8300000, guid: ae60c804a8774c545af7ed309b01a308, type: 3}
+    - {fileID: 8300000, guid: d5dcc15b79f5c5c45a1a6c751cc7d39c, type: 3}
+    soundType: 0
+    combatCategory: 0
+    randomizeVolume: 0
+    randomVolumeLowerLimit: 0.3
+    randomVolumeUpperLimit: 0.4
+    volume: 0.3
+    randomizePitch: 0
+    randomPitchLowerLimit: 0.8
+    randomPitchUpperLimit: 1.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    fadingIn: 0
+    fadingOut: 0
+  turnStartSounds:
+  - audioClip: {fileID: 0}
+    randomizeClip: 1
+    audioClips:
+    - {fileID: 8300000, guid: b76bfaf88c44cb2408ab66d3817f8b94, type: 3}
+    - {fileID: 8300000, guid: 98fda598c2673ac4cb862c9c5df5a56d, type: 3}
+    - {fileID: 8300000, guid: c770348ef23c861409515179b96946ab, type: 3}
+    - {fileID: 8300000, guid: 45eeb157fa1f3ce4fb1bdd3b425d9b2c, type: 3}
+    - {fileID: 8300000, guid: 40f53e8541273fc42ad5182f6074dd48, type: 3}
+    soundType: 0
+    combatCategory: 0
+    randomizeVolume: 0
+    randomVolumeLowerLimit: 0.3
+    randomVolumeUpperLimit: 0.4
+    volume: 0.3
+    randomizePitch: 0
+    randomPitchLowerLimit: 0.8
+    randomPitchUpperLimit: 1.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    fadingIn: 0
+    fadingOut: 0

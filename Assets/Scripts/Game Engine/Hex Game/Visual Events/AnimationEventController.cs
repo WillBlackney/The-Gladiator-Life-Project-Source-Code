@@ -108,7 +108,11 @@ namespace HexGameEngine.VisualEvents
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 CoroutineData cData = new CoroutineData();
                 VisualEventManager.Instance.CreateVisualEvent(() =>
-                HexCharacterController.Instance.TriggerMeleeAttackAnimation(user.hexCharacterView, targetView.WorldPosition, weaponUsed, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+                {
+                    AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
+                    HexCharacterController.Instance.TriggerMeleeAttackAnimation(user.hexCharacterView, targetView.WorldPosition, weaponUsed, cData);
+                }, cData, QueuePosition.Back, 0, 0, stackEvent);
+            
             }
 
             // Tackle
@@ -136,9 +140,12 @@ namespace HexGameEngine.VisualEvents
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 CoroutineData cData = new CoroutineData();
                 VisualEventManager.Instance.CreateVisualEvent(() =>
-                HexCharacterController.Instance.TriggerOffhandPushAnimation(user.hexCharacterView, targetView.WorldPosition, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+                {
+                    AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
+                    HexCharacterController.Instance.TriggerOffhandPushAnimation(user.hexCharacterView, targetView.WorldPosition, cData);
+                }, cData, QueuePosition.Back, 0, 0, stackEvent);
             }
-            // Offhand Push
+            // Throw net
             else if (vEvent.characterAnimation == CharacterAnimation.ThrowNetOffhand)
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
@@ -152,12 +159,19 @@ namespace HexGameEngine.VisualEvents
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 CoroutineData cData = new CoroutineData();
                 VisualEventManager.Instance.CreateVisualEvent(() =>
-                HexCharacterController.Instance.TriggerShieldBashAnimation(user.hexCharacterView, targetView.WorldPosition, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
+                {
+                    AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
+                    HexCharacterController.Instance.TriggerShieldBashAnimation(user.hexCharacterView, targetView.WorldPosition, cData); 
+                }, cData, QueuePosition.Back, 0, 0, stackEvent);
             }
             // AoE Melee Attack 
             else if (vEvent.characterAnimation == CharacterAnimation.AoeMeleeAttack)
             {
-                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerAoeMeleeAttackAnimation(user.hexCharacterView, weaponUsed), QueuePosition.Back, 0, 0, stackEvent);
+                VisualEventManager.Instance.CreateVisualEvent(() =>
+                {
+                    AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
+                    HexCharacterController.Instance.TriggerAoeMeleeAttackAnimation(user.hexCharacterView, weaponUsed);
+                }, QueuePosition.Back, 0, 0, stackEvent);
             }
             // Reload Crossbow
             else if (vEvent.characterAnimation == CharacterAnimation.ReloadCrossbow)
@@ -202,12 +216,7 @@ namespace HexGameEngine.VisualEvents
                 // Normal Bow
                 else                
                     VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootBowAnimation(user.hexCharacterView, weaponUsed, cData), cData, QueuePosition.Back, 0, 0, stackEvent);
-                
-                // Create and launch arrow projectile
-                //CoroutineData cData2 = new CoroutineData();
-                //VisualEventManager.Instance.CreateVisualEvent(() =>
-                //VisualEffectManager.Instance.ShootArrow(user.hexCharacterView.WorldPosition, targetView.WorldPosition, cData2), cData2, QueuePosition.Back, 0, 0, stackEvent);
-            }
+             }
 
             // Shoot Magic + Shoot Projectile 
             else if (vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture || vEvent.characterAnimation == CharacterAnimation.ShootProjectileUnanimated)

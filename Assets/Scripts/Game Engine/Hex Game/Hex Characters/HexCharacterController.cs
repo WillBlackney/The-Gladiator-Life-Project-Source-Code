@@ -22,6 +22,7 @@ using HexGameEngine.Items;
 using HexGameEngine.Libraries;
 using System.Threading.Tasks;
 using Sirenix.Utilities;
+using UnityEditor;
 
 namespace HexGameEngine.Characters
 {
@@ -1407,8 +1408,8 @@ namespace HexGameEngine.Characters
         {
             Debug.Log("HexCharacterController.CharacterOnTurnStart() called for " + character.myName);
 
-            // Brief delay on start
-            VisualEventManager.Instance.InsertTimeDelayInQueue(0.25f);
+            // Brief delay on start 
+            VisualEventManager.Instance.InsertTimeDelayInQueue(0.25f);            
 
             // Set Phase
             SetCharacterActivationPhase(character, ActivationPhase.StartPhase);
@@ -1436,7 +1437,14 @@ namespace HexGameEngine.Characters
                 // Recover fatigue+ update fatigue views
                 int fatigueRecovered = StatCalculator.GetTotalFatigueRecovery(character);
                 ModifyCurrentFatigue(character, -fatigueRecovered, false);
-            }              
+            }
+
+            // Turn start SFX + turn highlight activation
+            if (IsCharacterAbleToTakeActions(character))
+            {
+                VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySound(character.audioProfile, AudioSet.TurnStart));
+                VisualEventManager.Instance.InsertTimeDelayInQueue(0.25f);
+            }
 
             // Check effects that are triggered on the first turn only
             if (TurnController.Instance.CurrentTurn == 1 && !character.hasRequestedTurnDelay)

@@ -1054,27 +1054,27 @@ namespace HexGameEngine.Characters
         private AudioProfileType GetAudioProfileForRace(CharacterRace race)
         {
             if (race == CharacterRace.Human)
-                return AudioProfileType.HumanMale;
+                return AudioProfileType.Human_1;
 
             else if (race == CharacterRace.Elf)
-                return AudioProfileType.HumanFemale;
+                return AudioProfileType.Elf_1;
 
             else if (race == CharacterRace.Undead ||
                 race == CharacterRace.Demon ||
                 race == CharacterRace.Ent)
-                return AudioProfileType.Undead;
+                return AudioProfileType.Undead_1;
 
             else if (race == CharacterRace.Satyr)
-                return AudioProfileType.Satyr;
+                return AudioProfileType.Satyr_1;
 
             else if (race == CharacterRace.Orc)
-                return AudioProfileType.Orc;
+                return AudioProfileType.Orc_1;
 
             else if (race == CharacterRace.Goblin)
-                return AudioProfileType.Goblin;
+                return AudioProfileType.Goblin_1;
 
             else if (race == CharacterRace.Gnoll)
-                return AudioProfileType.Gnoll;
+                return AudioProfileType.Gnoll_1;
 
             else
                 return AudioProfileType.None;
