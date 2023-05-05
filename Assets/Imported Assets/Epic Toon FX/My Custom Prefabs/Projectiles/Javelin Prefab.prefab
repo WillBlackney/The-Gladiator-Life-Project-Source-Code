@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: 0.1
+  movementSpeed: 12.5
+  moveAsParabola: 1
+  maxParabolaY: 0.5
 --- !u!1 &1129745320912528202
 GameObject:
   m_ObjectHideFlags: 0

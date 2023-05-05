@@ -421,21 +421,21 @@ namespace HexGameEngine.VisualEvents
         // PROJECTILES
         #region
 
-        private void ShootArrow(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 12.5f)
+        private void ShootArrow(Vector3 startPos, Vector3 endPos, CoroutineData cData)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Arrow_Fired);
             Projectile projectileScript = Instantiate(arrow, startPos, Quaternion.identity).GetComponent<Projectile>();
-            projectileScript.Initialize(startPos, endPos, speed, () => cData.MarkAsCompleted());
+            projectileScript.Initialize(startPos, endPos, () => cData.MarkAsCompleted());
         }
-        private void ShootCrossbowBolt(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 15f)
+        private void ShootCrossbowBolt(Vector3 startPos, Vector3 endPos, CoroutineData cData)
         {
             Projectile projectileScript = Instantiate(crossbowBolt, startPos, Quaternion.identity).GetComponent<Projectile>();
-            projectileScript.Initialize(startPos, endPos, speed, () => cData.MarkAsCompleted());
+            projectileScript.Initialize(startPos, endPos, () => cData.MarkAsCompleted());
         } 
-        private void ShootJavelin(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 15)
+        private void ShootJavelin(Vector3 startPos, Vector3 endPos, CoroutineData cData)
         {
             Projectile projectileScript = Instantiate(javelin, startPos, Quaternion.identity).GetComponent<Projectile>();
-            projectileScript.Initialize(startPos, endPos, speed, () => cData.MarkAsCompleted());
+            projectileScript.Initialize(startPos, endPos, () => cData.MarkAsCompleted());
         }
         private void ShootThrowingNet(Vector3 startPos, Vector3 endPos, CoroutineData cData)
         {
@@ -443,67 +443,67 @@ namespace HexGameEngine.VisualEvents
             ThrowingNet tn = go.GetComponent<ThrowingNet>();
             tn.MoveToTarget(startPos, endPos, 0.75f, () => cData.MarkAsCompleted());
         }
-        private void ShootFireball(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootFireball(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Fireball_Fired);
             ToonProjectile tsScript = Instantiate(fireBall, startPos, fireBall.transform.rotation).GetComponent<ToonProjectile>();
-            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
                 AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Fire_1);
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
-        private void ShootShadowBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootShadowBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Shadowball_Fired);
             ToonProjectile tsScript = Instantiate(shadowBall, startPos, shadowBall.transform.rotation).GetComponent<ToonProjectile>();
-            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
                 AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Shadow_1);
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
-        private void ShootPoisonBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootPoisonBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Poison_Fired);
             ToonProjectile tsScript = Instantiate(poisonBall, startPos, poisonBall.transform.rotation).GetComponent<ToonProjectile>();
-            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
                 AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Poison_1);
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
-        public void ShootLightningBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootLightningBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Lightning_Fired);
             ToonProjectile tsScript = Instantiate(lightningBall, startPos, lightningBall.transform.rotation).GetComponent<ToonProjectile>();
-            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
                 AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Lightning_1);
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
-        public void ShootHolyBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootHolyBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             ToonProjectile tsScript = Instantiate(holyBall, startPos, holyBall.transform.rotation).GetComponent<ToonProjectile>();
-            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
-            {
-                if (cData != null) cData.MarkAsCompleted();
-            });
-        }       
-        public void ShootFrostBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
-        {
-            ToonProjectile tsScript = Instantiate(frostBall, startPos, frostBall.transform.rotation).GetComponent<ToonProjectile>();
-            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
-        public void ShootFireMeteor(Vector3 startPos, Vector3 endPos, CoroutineData cData, float speed = 10f, int sortingOrderBonus = 15, float scaleModifier = 3f)
+        private void ShootFrostBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        {
+            ToonProjectile tsScript = Instantiate(frostBall, startPos, frostBall.transform.rotation).GetComponent<ToonProjectile>();
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
+            {
+                if (cData != null) cData.MarkAsCompleted();
+            });
+        }
+        private void ShootFireMeteor(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 3f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Fireball_Fired);
             ToonProjectile tsScript = Instantiate(fireMeteor, startPos, fireMeteor.transform.rotation).GetComponent<ToonProjectile>();
-            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, speed, () =>
+            tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
                 AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Fire_1);
                 if (cData != null) cData.MarkAsCompleted();

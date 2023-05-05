@@ -1,4 +1,5 @@
 ﻿using Codice.CM.Common;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,11 +13,15 @@ namespace HexGameEngine.VisualEvents
         [SerializeField] private float myScaleModifier;
         [SerializeField] private int mySortingOrder;
         [SerializeField] private float projectileDestroyDelay;
+
+        [Header("Movement Settings")]
+        [SerializeField] float movementSpeed = 10f;
+        [SerializeField] bool moveAsParabola = true;
         [Tooltip("Determines the amount of parabola effect on the projectile. " +
             "A value of 0 means the projectile will travel in absolutely straight line from starting point to target.")]
         [Range(0, 0.5f)]
-        [SerializeField] float maxParabolaY = 0.2f;
-        [SerializeField] AnimationCurve curve;
+        [ShowIf("ShowMaxParabolaY")]
+        [SerializeField] float maxParabolaY = 0.25f;
 
         [Header("Component References")]
         [SerializeField] private Rigidbody myRigidBody;
@@ -36,11 +41,8 @@ namespace HexGameEngine.VisualEvents
         Vector3 destination;
         bool readyToMove = false;
         bool destinationReached = false;
-        float travelSpeed;
-        float initialDistance;
-        float distance;
+        float initialDistanceX;
         float nextX;
-        float nextY;
         float baseY;
         float height;
         Action onImpactCallback;
@@ -48,17 +50,17 @@ namespace HexGameEngine.VisualEvents
         // Setup + Initialization
         #region
 
-        public void Initialize(int sortingOrder, float scaleModifier, Vector3 startPos, Vector3 endPos, float speed, Action onImpactCallback)
+        public void Initialize(int sortingOrder, float scaleModifier, Vector3 startPos, Vector3 endPos, Action onImpactCallback)
         {
-            Debug.Log("TOON PROJECTILE InitializeSetup");
-
             // Get core components (rigid body, colliders, etc)
             GetMyComponents();
 
             // Set values
+            transform.position = startPos;
             start = startPos;
             destination = endPos;
-            travelSpeed = speed;
+            initialDistanceX = destination.x - start.x;
+            if (initialDistanceX <= 0f) initialDistanceX = 0.01f;
             this.onImpactCallback = onImpactCallback;
 
             // Set parent scale + sorting order
@@ -142,26 +144,33 @@ namespace HexGameEngine.VisualEvents
         private void MoveTowardsTarget()
         {
             if (destinationReached) return;
-            distance = destination.x - start.x;
-            nextX = Mathf.MoveTowards(transform.position.x, destination.x, travelSpeed * Time.deltaTime);
 
-            /*
-            if(maxParabolaY > 0f)
-            {
-                baseY = Mathf.Lerp(start.y, destination.y, (nextX - start.x) / distance);
-                height = maxParabolaY * (nextX - start.x) * (nextX - destination.x) / (-0.25f * distance * distance);
-                nextY = baseY + height;
-            }
-            else nextY = Mathf.MoveTowards(transform.position.y, destination.y, travelSpeed * Time.deltaTime);*/
+            if (moveAsParabola) MoveParabola();
+            else MoveNormally();
 
-            Vector3 movePosition = new Vector3(nextX, nextY, transform.position.z);
-            transform.position = movePosition;
-
-            if (transform.position == destination || distance < 0.05f)
+            float vectorDistance = Vector2.Distance(transform.position, destination);
+            if (transform.position == destination || vectorDistance <= 0.05f)
             {
                 destinationReached = true;
                 OnDestinationReached();
             }
+        }
+        private void MoveParabola()
+        {
+            nextX = Mathf.MoveTowards(transform.position.x, destination.x, movementSpeed * Time.deltaTime);
+            baseY = Mathf.Lerp(start.y, destination.y, (nextX - start.x) / initialDistanceX);
+            height = maxParabolaY * (nextX - start.x) * (nextX - destination.x) / (-0.25f * initialDistanceX * initialDistanceX);
+
+            Vector3 movePosition = new Vector3(nextX, baseY + height, transform.position.z);
+            transform.rotation = Projectile.LookAtTarget(movePosition - transform.position);
+            transform.position = movePosition;
+            
+        }
+        private void MoveNormally()
+        {
+            Vector3 movePosition = Vector3.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
+            transform.rotation = Projectile.LookAtTarget(movePosition - transform.position);
+            transform.position = movePosition;
         }
         private void OnDestinationReached()
         {
@@ -191,5 +200,10 @@ namespace HexGameEngine.VisualEvents
             if (onImpactCallback != null) onImpactCallback.Invoke();
         }
         #endregion
+
+        public bool ShowMaxParabolaY()
+        {
+            return moveAsParabola;
+        }
     }
 }

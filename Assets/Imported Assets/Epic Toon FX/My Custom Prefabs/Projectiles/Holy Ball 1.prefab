@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3755333235594938142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.313633, y: 5.892903, z: -13.319157}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78,6 +78,13 @@ MonoBehaviour:
   myScaleModifier: 0
   mySortingOrder: 0
   projectileDestroyDelay: 0
+  maxParabolaY: 0.25
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   myRigidBody: {fileID: 0}
   mySphereCollider: {fileID: 0}
   impactParticle: {fileID: 1438902432858508, guid: 70d6dfe08ec8a1447b4822e95e56918e,
