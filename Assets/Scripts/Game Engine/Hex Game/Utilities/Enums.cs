@@ -727,12 +727,7 @@ namespace HexGameEngine
         LightRed = 10,
         LightGreen = 12,
         RareTextBlue = 11,
-    }
-    public enum QueuePosition
-    {
-        Front = 0,
-        Back = 1,
-    }
+    }    
 
     #endregion
 

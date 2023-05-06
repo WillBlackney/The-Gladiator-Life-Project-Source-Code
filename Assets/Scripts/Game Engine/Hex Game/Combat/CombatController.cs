@@ -1094,7 +1094,7 @@ namespace HexGameEngine.Combat
             {
                 if (target.hexCharacterView != null) pos = target.hexCharacterView.WorldPosition;
                 VisualEffectManager.Instance.CreateSmallMeleeImpact(pos);
-            }, QueuePosition.Back, 0, 0, parentEvent);
+            }, parentEvent);
                       
 
             // On health lost animations
@@ -1105,18 +1105,18 @@ namespace HexGameEngine.Combat
                 {
                     HexCharacterController.Instance.PlayHurtAnimation(target.hexCharacterView);
                     AudioManager.Instance.PlaySound(target.audioProfile, AudioSet.Hurt);
-                }, QueuePosition.Back, 0, 0, parentEvent);               
+                }, parentEvent);               
             }
 
             // Create damage text effect            
             VisualEventManager.Instance.CreateVisualEvent(() =>
-                VisualEffectManager.Instance.CreateDamageTextEffect(target.hexCharacterView.WorldPosition, totalDamage, didCrit), QueuePosition.Back, 0, 0, parentEvent);
+                VisualEffectManager.Instance.CreateDamageTextEffect(target.hexCharacterView.WorldPosition, totalDamage, didCrit), parentEvent);
 
             // Create blood in ground VFX  
             if (totalHealthLost > 0) 
             {
                 VisualEventManager.Instance.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateGroundBloodSpatter(target.hexCharacterView.WorldPosition), QueuePosition.Back, 0, 0, parentEvent);
+                    VisualEffectManager.Instance.CreateGroundBloodSpatter(target.hexCharacterView.WorldPosition), parentEvent);
             }
 
             // Reduce health + armour
@@ -1304,7 +1304,7 @@ namespace HexGameEngine.Combat
                     {
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Executioner!"), QueuePosition.Back, 0, 0.5f, attacker.GetLastStackEventParent());
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Executioner!"), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
 
                         HexCharacterController.Instance.ModifyActionPoints(attacker, 4);
                     }
@@ -1321,7 +1321,7 @@ namespace HexGameEngine.Combat
                     {
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Collector!"), QueuePosition.Back, 0, 0.5f, attacker.GetLastStackEventParent());
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Collector!"), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
 
                         // Increment stats
                         attacker.characterData.attributeSheet.constitution.value += 1;
@@ -1337,7 +1337,7 @@ namespace HexGameEngine.Combat
                     {
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Devourer!"), QueuePosition.Back, 0, 0.5f, attacker.GetLastStackEventParent());
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Devourer!"), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
 
                         // Increment stats
                         attacker.characterData.attributeSheet.might.value += 1;
@@ -1350,7 +1350,7 @@ namespace HexGameEngine.Combat
                     {
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Mercenary!"), QueuePosition.Back, 0, 0.5f, attacker.GetLastStackEventParent());
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Mercenary!"), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
 
                         // Gain gold
                         PlayerDataController.Instance.ModifyPlayerGold(10);
@@ -1375,7 +1375,7 @@ namespace HexGameEngine.Combat
 
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(enemy.hexCharacterView.WorldPosition, "Cannibalism!"), QueuePosition.Back, 0, 0, enemy.GetLastStackEventParent());
+                        VisualEffectManager.Instance.CreateStatusEffect(enemy.hexCharacterView.WorldPosition, "Cannibalism!"), enemy.GetLastStackEventParent()).SetEndDelay(0.5f);
                                               
                     }
                 }
@@ -1449,21 +1449,20 @@ namespace HexGameEngine.Combat
                 // to do: big crowd cheer SFX
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null);
                 view.vfxManager.StopAllEffects();
-            }, QueuePosition.Back, 0, 0, parentEvent);
+            }, parentEvent);
 
             // Play death animation
 
-            // VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySound(entity.audioProfile, AudioSet.Die));
-            int randomDeathAnim = RandomGenerator.NumberBetween(0, 1);
             // Normal death
-            if(randomDeathAnim == 0)            
+            int randomDeathAnim = RandomGenerator.NumberBetween(0, 1);
+            if (randomDeathAnim == 0)            
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 {
                     AudioManager.Instance.PlaySound(character.audioProfile, AudioSet.Die);
                     HexCharacterController.Instance.PlayDeathAnimation(view);
                     for (int i = 0; i < 2; i++)
                         VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
-                }, QueuePosition.Back, 0f, 1f, parentEvent);
+                }, parentEvent).SetEndDelay(1f);
                         
             // Decapitation
             else
@@ -1475,19 +1474,17 @@ namespace HexGameEngine.Combat
                     HexCharacterController.Instance.PlayDecapitateAnimation(view);
                     for(int i = 0; i < 3; i++)
                         VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
-                }, QueuePosition.Back, 0f, 1f, parentEvent);
+                }, parentEvent).SetEndDelay(1f);
             }
 
-            // Smokey disapear effect
-            //VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateExpendEffect(view.WorldPosition, 15, 0.2f, false), QueuePosition.Back, 0, 0, parentEvent);
-
             // Fade out UCM
-            //VisualEventManager.Instance.CreateVisualEvent(() => CharacterModeller.FadeOutCharacterModel(view.ucm, 1), QueuePosition.Back, 0, 0, parentEvent);
-            VisualEventManager.Instance.CreateVisualEvent(() => CharacterModeller.FadeOutCharacterShadow(view, 0.5f), QueuePosition.Back, 0, 1, parentEvent);
+            VisualEventManager.Instance.CreateVisualEvent(() => 
+                CharacterModeller.FadeOutCharacterShadow(view, 0.5f), parentEvent).SetEndDelay(1f);
            
             // Destroy characters activation window and update other window positions
             HexCharacterModel currentlyActivatedEntity = TurnController.Instance.EntityActivated;
-            VisualEventManager.Instance.CreateVisualEvent(() => TurnController.Instance.OnCharacterKilledVisualEvent(window, currentlyActivatedEntity, null), QueuePosition.Back, 0, 1f, parentEvent);
+            VisualEventManager.Instance.CreateVisualEvent(() => 
+                TurnController.Instance.OnCharacterKilledVisualEvent(window, currentlyActivatedEntity, null), parentEvent).SetEndDelay(1f);
 
             // Roll for death or knock down on player characters
             if(character.controller == Controller.Player)
@@ -1517,7 +1514,7 @@ namespace HexGameEngine.Combat
                 // Destroy view gameobject
                 HexCharacterController.Instance.DisconnectModelFromView(character);
                 HexCharacterController.Instance.DestroyCharacterView(view, true);
-            }, QueuePosition.Back, 0, 0, parentEvent);
+            }, parentEvent);
 
             // Lich death, kill all summoned skeletons
             if(character.myName == "Lich")
@@ -1529,7 +1526,6 @@ namespace HexGameEngine.Combat
                     {
                         HandleDeathBlow(c, c.GetLastStackEventParent());
                     }
-
                 }
             }
 
@@ -1542,7 +1538,7 @@ namespace HexGameEngine.Combat
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 {
                     VisualEffectManager.Instance.CreatePoisonNova(view.WorldPosition);
-                }, QueuePosition.Back, 0, 0, parentEvent);
+                }, parentEvent);
 
                 // Poison all nearby characters
                 foreach(var tile in LevelController.Instance.GetAllHexsWithinRange(hex, 1))

@@ -201,7 +201,7 @@ namespace HexGameEngine.VisualEvents
 
         // Create Events
         #region
-        public VisualEvent CreateVisualEvent(Action eventFunction, CoroutineData cData, QueuePosition position = QueuePosition.Back, float startDelay = 0f, float endDelay = 0f, VisualEvent parentEvent = null)
+        public VisualEvent CreateVisualEvent(Action eventFunction, CoroutineData cData, VisualEvent parentEvent = null)
         {
             // NOTE: This method requires on argument of 'CoroutineData'.
             // this function is only for visual events that have their sequence
@@ -209,21 +209,19 @@ namespace HexGameEngine.VisualEvents
             // if a visual event has no coroutine and resolves instantly when played from the queue,
             // it should be called using the overload function below this function
 
-            VisualEvent vEvent = new VisualEvent(eventFunction, cData, startDelay, endDelay, VisualEventType.Single);
+            VisualEvent vEvent = new VisualEvent(eventFunction, cData, 0, 0, VisualEventType.Single);
             if (parentEvent != null && !parentEvent.isClosed) parentEvent.AddEventToStack(vEvent);
-            else if (position == QueuePosition.Front) AddEventToFrontOfQueue(vEvent);
             else AddEventToBackOfQueue(vEvent);
             return vEvent;
         }
-        public VisualEvent CreateVisualEvent(Action eventFunction, QueuePosition position = QueuePosition.Back, float startDelay = 0f, float endDelay = 0f, VisualEvent parentEvent = null)
+        public VisualEvent CreateVisualEvent(Action eventFunction, VisualEvent parentEvent = null)
         {
-            VisualEvent vEvent = new VisualEvent(eventFunction, null, startDelay, endDelay, VisualEventType.Single);
+            VisualEvent vEvent = new VisualEvent(eventFunction, null, 0, 0, VisualEventType.Single);
             if (parentEvent != null && !parentEvent.isClosed) parentEvent.AddEventToStack(vEvent);
-            else if (position == QueuePosition.Front) AddEventToFrontOfQueue(vEvent);
             else AddEventToBackOfQueue(vEvent);
             return vEvent;
         }
-        public VisualEvent CreateStackParentVisualEvent(Characters.HexCharacterModel character, QueuePosition position = QueuePosition.Back, float startDelay = 0f, float endDelay = 0f)
+        public VisualEvent CreateStackParentVisualEvent(Characters.HexCharacterModel character)
         {
             // NOTE: This method requires on argument of 'CoroutineData'.
             // this function is only for visual events that have their sequence
@@ -231,22 +229,20 @@ namespace HexGameEngine.VisualEvents
             // if a visual event has no coroutine and resolves instantly when played from the queue,
             // it should be called using the overload function below this function
 
-            VisualEvent vEvent = new VisualEvent(null, null, startDelay, endDelay, VisualEventType.StackParent);
+            VisualEvent vEvent = new VisualEvent(null, null, 0f, 0f, VisualEventType.StackParent);
             vEvent.myCharacter = character;
             character.eventStacks.Add(vEvent);
-            if (position == QueuePosition.Back) AddEventToBackOfQueue(vEvent);            
-            else if (position == QueuePosition.Front) AddEventToFrontOfQueue(vEvent);   
+            AddEventToBackOfQueue(vEvent);             
             return vEvent;
         }
         #endregion
 
         // Custom Events
         #region
-        public VisualEvent InsertTimeDelayInQueue(float delayDuration, QueuePosition position = QueuePosition.Back, VisualEvent parentEvent = null)
+        public VisualEvent InsertTimeDelayInQueue(float delayDuration,VisualEvent parentEvent = null)
         {
             VisualEvent vEvent = new VisualEvent(null, null, 0, delayDuration, VisualEventType.Single);
-            if (parentEvent != null && !parentEvent.isClosed) parentEvent.AddEventToStack(vEvent);               
-            else if (position == QueuePosition.Front) AddEventToFrontOfQueue(vEvent);              
+            if (parentEvent != null && !parentEvent.isClosed) parentEvent.AddEventToStack(vEvent);           
             else AddEventToBackOfQueue(vEvent);      
             return vEvent;
         }

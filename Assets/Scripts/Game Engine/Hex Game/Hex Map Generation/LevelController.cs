@@ -510,10 +510,10 @@ namespace HexGameEngine.HexTiles
                     if (character.currentHealth > 0 && character.livingState == LivingState.Alive)
                     {
                         HexCharacterView modelView = c.hexCharacterView;
-                       
+
                         // Text notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateStatusEffect(modelView.WorldPosition, "Free Strike!"), QueuePosition.Back, 0, 0.25f);
+                            VisualEffectManager.Instance.CreateStatusEffect(modelView.WorldPosition, "Free Strike!")).SetEndDelay(0.25f);
 
                         // Start free strike attack
                         AbilityController.Instance.UseAbility(c, AbilityController.Instance.FreeStrikeAbility, character);
@@ -548,7 +548,7 @@ namespace HexGameEngine.HexTiles
             // Move animation
             CoroutineData cData = new CoroutineData();
             VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
-                (character.hexCharacterView, destination, cData, moveSpeed), cData, QueuePosition.Back);
+                (character.hexCharacterView, destination, cData, moveSpeed), cData);
 
             // TO DO: events that trigger when the character steps onto a new tile go here (maybe?)...
             character.tilesMovedThisTurn++;
@@ -684,7 +684,7 @@ namespace HexGameEngine.HexTiles
                 HexCharacterController.Instance.FadeOutCharacterShadow(view, 0.2f);
             });
           
-            VisualEventManager.Instance.InsertTimeDelayInQueue(0.2f, QueuePosition.Back);
+            VisualEventManager.Instance.InsertTimeDelayInQueue(0.2f);
             VisualEventManager.Instance.CreateVisualEvent(() => SnapCharacterViewToHex(view, destination));
             // Create teleport VFX at character's destination
 
@@ -760,7 +760,7 @@ namespace HexGameEngine.HexTiles
                 });
 
                 // Brief Delay
-                VisualEventManager.Instance.InsertTimeDelayInQueue(0.2f, QueuePosition.Back);
+                VisualEventManager.Instance.InsertTimeDelayInQueue(0.2f);
 
                 // Snap characters to new positions visually
                 VisualEventManager.Instance.CreateVisualEvent(() => SnapCharacterViewToHex(viewA, aDestination));
@@ -784,10 +784,10 @@ namespace HexGameEngine.HexTiles
             else
             {
                 VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
-                (viewA, aDestination, null), QueuePosition.Back);
+                (viewA, aDestination, null));
 
                 VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
-                (viewB, bDestination, null), QueuePosition.Back);
+                (viewB, bDestination, null));
 
                 VisualEventManager.Instance.InsertTimeDelayInQueue(0.25f);
             }
@@ -894,7 +894,7 @@ namespace HexGameEngine.HexTiles
                 {
                     HexCharacterController.Instance.PlayHurtAnimation(character.hexCharacterView);
                     DoCharacterMoveVisualEventDOTWEEN(character.hexCharacterView, destination, cData, 5f, Ease.OutBack);
-                }, cData, QueuePosition.Back);
+                }, cData);
             }       
         }
         #endregion

@@ -358,7 +358,7 @@ namespace HexGameEngine.Perks
                 {
                     Debug.Log("ModifyPerkOnCharacterEntity() cancelling application of " + perkName +" as it is blocked by " + TextLogic.SplitByCapitals(ptag.ToString()));
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "IMMUNE!"), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                    VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "IMMUNE!"), character.GetLastStackEventParent());
                     return false;
                 }
             }
@@ -371,7 +371,7 @@ namespace HexGameEngine.Perks
                 perk == Perk.Bleeding)
             {
                 VisualEventManager.Instance.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "IMMUNE!"), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                    VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "IMMUNE!"), character.GetLastStackEventParent());
                 return false;
             }
 
@@ -382,7 +382,7 @@ namespace HexGameEngine.Perks
                 Debug.Log("ModifyPerkOnCharacterEntity() cancelling application of " + perkName + " as character is protected by Rune.");                
                 ModifyPerkOnCharacterEntity(pManager, Perk.Rune, -1, showVFX, vfxDelay, applier);
                 VisualEventManager.Instance.CreateVisualEvent(() =>
-                  VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "BLOCKED!"), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                  VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "BLOCKED!"), character.GetLastStackEventParent());
 
                 return false; 
             }
@@ -399,7 +399,7 @@ namespace HexGameEngine.Perks
                     if (showVFX)
                     {
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "RESISTED!"), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                        VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "RESISTED!"), character.GetLastStackEventParent());
                         return false;
                     }
                 }
@@ -448,7 +448,7 @@ namespace HexGameEngine.Perks
                 {
                     // Update character world UI
                     VisualEventManager.Instance.CreateVisualEvent(() =>                   
-                        character.hexCharacterView.perkIconsPanel.HandleAddNewIconToPanel(perkData, stacksAppliedActual), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                        character.hexCharacterView.perkIconsPanel.HandleAddNewIconToPanel(perkData, stacksAppliedActual), character.GetLastStackEventParent());
 
                     // Update player overlay UI
                     if (TurnLogic.TurnController.Instance.EntityActivated == character)
@@ -457,7 +457,7 @@ namespace HexGameEngine.Perks
                         {
                             CombatUIController.Instance.PerkPanel.ResetPanel();
                             CombatUIController.Instance.PerkPanel.BuildFromPerkManager(pManager);
-                        },QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                        }, character.GetLastStackEventParent());
                     }
                 }
                 else
@@ -480,14 +480,12 @@ namespace HexGameEngine.Perks
                     if (perkData.isInjury)
                     {
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName + "!"),
-                            QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                            VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName + "!"), character.GetLastStackEventParent());
                     }
                     else
                     {
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName + " +" + stacksAppliedActual.ToString()), 
-                            QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                            VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName + " +" + stacksAppliedActual.ToString()), character.GetLastStackEventParent());
                     }                 
                     
                     // On perk applied VFX go here 
@@ -502,7 +500,7 @@ namespace HexGameEngine.Perks
 
                 // Create brief delay
                 if (showVFX)                
-                    VisualEventManager.Instance.InsertTimeDelayInQueue(vfxDelay, QueuePosition.Back, character.GetLastStackEventParent());                
+                    VisualEventManager.Instance.InsertTimeDelayInQueue(vfxDelay, character.GetLastStackEventParent());                
             }
 
 

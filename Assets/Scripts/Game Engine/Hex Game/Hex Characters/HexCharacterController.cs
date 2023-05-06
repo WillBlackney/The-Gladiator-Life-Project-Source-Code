@@ -463,7 +463,7 @@ namespace HexGameEngine.Characters
                 CharacterDataController.Instance.SetCharacterHealth(character.characterData, character.currentHealth);            
 
             Debug.Log(character.myName + " health value = " + character.currentHealth.ToString());
-            VisualEventManager.Instance.CreateVisualEvent(() => UpdateHealthGUIElements(character, finalHealthValue, StatCalculator.GetTotalMaxHealth(character)), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+            VisualEventManager.Instance.CreateVisualEvent(() => UpdateHealthGUIElements(character, finalHealthValue, StatCalculator.GetTotalMaxHealth(character)), character.GetLastStackEventParent());
         
             // Check 'Second Wind'
             if(StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(character) < 50 &&
@@ -477,7 +477,9 @@ namespace HexGameEngine.Characters
                 {
                     VisualEffectManager.Instance.CreateStatusEffect(pos, "Second Wind!");
                     VisualEffectManager.Instance.CreateGeneralBuffEffect(pos);
-                }, QueuePosition.Back, 0.5f, 0.5f, character.GetLastStackEventParent());
+                }, character.GetLastStackEventParent()).
+                SetStartDelay(0.5f).
+                SetEndDelay(0.5f);
                 
                 // Gain 2 guard
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Guard, 2, true, 0.5f);
@@ -500,7 +502,7 @@ namespace HexGameEngine.Characters
 
             int currentHealth = character.currentHealth;
             VisualEventManager.Instance.CreateVisualEvent(() => UpdateHealthGUIElements
-                (character, currentHealth, StatCalculator.GetTotalMaxHealth(character)), QueuePosition.Back, 0, 0);
+                (character, currentHealth, StatCalculator.GetTotalMaxHealth(character)));
 
             // Update health if it now excedes max health
             if (character.currentHealth > StatCalculator.GetTotalMaxHealth(character))
@@ -554,7 +556,7 @@ namespace HexGameEngine.Characters
 
             Debug.Log(character.myName + " armour value = " + character.currentArmour.ToString());
 
-            VisualEventManager.Instance.CreateVisualEvent(() => UpdateArmourGUIElements(character, finalBlockValue, maxArmour), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+            VisualEventManager.Instance.CreateVisualEvent(() => UpdateArmourGUIElements(character, finalBlockValue, maxArmour), character.GetLastStackEventParent());
         }
         private void UpdateArmourGUIElements(HexCharacterModel character, int armour, int maxArmour)
         {
@@ -667,7 +669,7 @@ namespace HexGameEngine.Characters
             }*/
 
             // Update stress related GUI
-            VisualEventManager.Instance.CreateVisualEvent(() => UpdateStressGUIElements(character, finalStress), QueuePosition.Back, 0, 0);
+            VisualEventManager.Instance.CreateVisualEvent(() => UpdateStressGUIElements(character, finalStress));
 
             // Check if there was a change of stress state, up or down
             if(previousStressState != newStressState)
@@ -680,7 +682,7 @@ namespace HexGameEngine.Characters
                     {
                         VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "SHATTERED!");
                         view.vfxManager.PlayShattered();
-                    }, QueuePosition.Back, 0.5f, 0.5f);
+                    }).SetStartDelay(0.5f).SetEndDelay(0.5f);
 
                 }
             }
@@ -1425,7 +1427,7 @@ namespace HexGameEngine.Characters
             if (character.controller == Controller.Player && IsCharacterAbleToTakeActions(character))
             {
                 // Build combat GUI
-                VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.BuildAndShowViewsOnTurnStart(character), QueuePosition.Back);
+                VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.BuildAndShowViewsOnTurnStart(character));
             }              
 
             if (!character.hasRequestedTurnDelay)
@@ -1470,7 +1472,7 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Poisoned) && character.currentHealth > 0)
                 {
                     // Notification event
-                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Poisoned!"), QueuePosition.Back, 0, 0.5f);
+                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Poisoned!")).SetEndDelay(0.5f);
 
                     // Calculate and deal Physical damage
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Poisoned), DamageType.Physical);
@@ -1488,7 +1490,7 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Burning) && character.currentHealth > 0)
                 {
                     // Notification event
-                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Burning!"), QueuePosition.Back, 0, 0.5f);
+                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Burning!")).SetEndDelay(0.5f);
 
                     // Calculate and deal Magic damage
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Burning), DamageType.Magic);
@@ -1506,7 +1508,7 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.CutArtery) && character.currentHealth > 0)
                 {
                     // Notification event
-                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Cut Artery!"), QueuePosition.Back, 0, 0.5f);
+                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Cut Artery!")).SetEndDelay(0.5f);
 
                     // Calculate and deal Magic damage
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 2, DamageType.Physical);
@@ -1519,7 +1521,7 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.CutNeckVein) && character.currentHealth > 0)
                 {
                     // Notification event
-                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Cut Neck Vein!"), QueuePosition.Back, 0, 0.5f);
+                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Cut Neck Vein!")).SetEndDelay(0.5f);
 
                     // Calculate and deal Magic damage
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 4, DamageType.Physical);
@@ -1532,7 +1534,7 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Bleeding) && character.currentHealth > 0)
                 {
                     // Notification event
-                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Bleeding!"), QueuePosition.Back, 0, 0.5f);
+                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Bleeding!")).SetEndDelay(0.5f);
 
                     // Calculate and deal Magic damage
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Bleeding), DamageType.Physical);
@@ -1614,7 +1616,7 @@ namespace HexGameEngine.Characters
                     {
                         VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Rallied!");
                         view.vfxManager.StopShattered();
-                    }, QueuePosition.Back, 0, 0.5f);
+                    }).SetEndDelay(0.5f);
 
                     // Recover 2 stress
                     ModifyStress(character, -2, true, true);
@@ -1630,11 +1632,12 @@ namespace HexGameEngine.Characters
                 {
                      Debug.Log("HexCharacterController.OnTurnStart() character had a heart attack from being shattered");
 
-                // Rally notification
-                VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "HEART ATTACK!"), QueuePosition.Back, 0, 0.25f);
+                    // Rally notification
+                    VisualEventManager.Instance.CreateVisualEvent(() => 
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "HEART ATTACK!")).SetEndDelay(0.5f);
 
-                // Die
-                CombatController.Instance.HandleDeathBlow(character, null, true);
+                    // Die
+                    CombatController.Instance.HandleDeathBlow(character, null, true);
                 }
 
                 // Pass
@@ -1643,7 +1646,7 @@ namespace HexGameEngine.Characters
                     Debug.Log("HexCharacterController.OnTurnStart() character passing turn due to shattered stress state");
 
                     // Notification
-                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Frozen by Fear..."), QueuePosition.Back, 0, 0.5f);
+                    VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Frozen by Fear...")).SetEndDelay(0.5f);
                 }
                 
             }
@@ -1774,7 +1777,7 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Abusive) && character.currentHealth > 0)
                 {
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Abusive!"), QueuePosition.Back, 0f, 0.5f);
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Abusive!")).SetEndDelay(0.5f);
 
                     List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
                     foreach(HexCharacterModel ally in allies)                    
@@ -1786,7 +1789,7 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearsome) && character.currentHealth > 0)
                 {
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Fearsome!"), QueuePosition.Back, 0f, 0.5f);
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Fearsome!")).SetEndDelay(0.5f);
 
                     List<HexCharacterModel> enemies = GetAllEnemiesWithinMyAura(character);
                     foreach (HexCharacterModel enemy in enemies)                    
@@ -1799,7 +1802,7 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.LoomingPresence) && character.currentHealth > 0)
                 {
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Looming Presence!"), QueuePosition.Back, 0f, 0.5f);
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Looming Presence!")).SetEndDelay(0.5f);
                     int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.LoomingPresence);
                     List<HexCharacterModel> enemies = GetAllEnemiesWithinMyAura(character);
                     foreach (HexCharacterModel enemy in enemies)                    
@@ -1813,11 +1816,11 @@ namespace HexGameEngine.Characters
                 {
                     // Status Notif 
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Dragon Aspect!"), QueuePosition.Back, 0f, 0.5f);
+                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Dragon Aspect!")).SetEndDelay(0.5f);
 
                     // Fire nova VFX
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateFireNova(view.WorldPosition), QueuePosition.Back);
+                        VisualEffectManager.Instance.CreateFireNova(view.WorldPosition));
 
                     // Apply 1 burning to all enemies in aura
                     List<HexCharacterModel> enemies = GetAllEnemiesWithinMyAura(character);
@@ -1826,7 +1829,7 @@ namespace HexGameEngine.Characters
                         // Burning VFX
                         HexCharacterView enemyView = enemy.hexCharacterView;
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateApplyBurningEffect(enemyView.WorldPosition), QueuePosition.Back);
+                            VisualEffectManager.Instance.CreateApplyBurningEffect(enemyView.WorldPosition));
                         PerkController.Instance.ModifyPerkOnCharacterEntity(enemy.pManager, Perk.Burning, 1, true, 0, character.pManager);
 
                     }
@@ -1839,11 +1842,11 @@ namespace HexGameEngine.Characters
                 {
                     // Status Notif 
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Flaming Aspect!"), QueuePosition.Back, 0f, 0.5f);
+                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Flaming Aspect!")).SetEndDelay(0.5f);
 
                     // Fire nova VFX
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateFireNova(view.WorldPosition), QueuePosition.Back);
+                        VisualEffectManager.Instance.CreateFireNova(view.WorldPosition));
 
                     // Apply 1 burning to all enemies in aura
                     List<HexCharacterModel> enemies = GetAllEnemiesWithinMyAura(character);
@@ -1852,7 +1855,7 @@ namespace HexGameEngine.Characters
                         // Burning VFX
                         HexCharacterView enemyView = enemy.hexCharacterView;
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateApplyBurningEffect(enemyView.WorldPosition), QueuePosition.Back);
+                            VisualEffectManager.Instance.CreateApplyBurningEffect(enemyView.WorldPosition));
                         PerkController.Instance.ModifyPerkOnCharacterEntity(enemy.pManager, Perk.Burning, 1, true, 0, character.pManager);
 
                     }
@@ -1865,11 +1868,11 @@ namespace HexGameEngine.Characters
                 {
                     // Status Notif 
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Contagious!"), QueuePosition.Back, 0f, 0.5f);
+                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Contagious!")).SetEndDelay(0.5f);
 
                     // Fire nova VFX
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreatePoisonNova(view.WorldPosition), QueuePosition.Back);
+                        VisualEffectManager.Instance.CreatePoisonNova(view.WorldPosition));
 
                     // Apply 1 poisoned to all enemies in aura
                     List<HexCharacterModel> enemies = GetAllEnemiesWithinMyAura(character);
@@ -1878,7 +1881,7 @@ namespace HexGameEngine.Characters
                         // Poisoned VFX
                         HexCharacterView enemyView = enemy.hexCharacterView;
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateApplyPoisonedEffect(enemyView.WorldPosition), QueuePosition.Back);
+                            VisualEffectManager.Instance.CreateApplyPoisonedEffect(enemyView.WorldPosition));
                         PerkController.Instance.ModifyPerkOnCharacterEntity(enemy.pManager, Perk.Poisoned, 1, true, 0, character.pManager);
 
                     }
@@ -1895,7 +1898,7 @@ namespace HexGameEngine.Characters
                     if (ally != null)
                     {
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Savage Leader!"), QueuePosition.Back, 0f, 0.5f);
+                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Savage Leader!")).SetEndDelay(0.5f);
                         PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Wrath, 1, true, 0, character.pManager);
                         VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
                     }                  
@@ -1910,7 +1913,7 @@ namespace HexGameEngine.Characters
                     if (ally != null)
                     {
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Encouraging Leader!"), QueuePosition.Back, 0f, 0.5f);
+                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Encouraging Leader!")).SetEndDelay(0.5f);
                         PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Wrath, 1, true, 0, character.pManager);
                         VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
                     }
@@ -1920,7 +1923,7 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.HymnOfFellowship) && character.currentHealth > 0)
                 {
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                       VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Fellowship!"), QueuePosition.Back, 0f, 0.5f);
+                       VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Fellowship!")).SetEndDelay(0.5f);
 
                     List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
                     foreach(HexCharacterModel ally in allies)
@@ -1938,7 +1941,7 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.HymnOfVengeance) && character.currentHealth > 0)
                 {
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                       VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Wrath!"), QueuePosition.Back, 0f, 0.5f);
+                       VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Wrath!")).SetEndDelay(0.5f);
 
                     List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
                     foreach (HexCharacterModel ally in allies)
@@ -1956,7 +1959,7 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.HymnOfCourage) && character.currentHealth > 0)
                 {
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                       VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Courage!"), QueuePosition.Back, 0f, 0.5f);
+                       VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Courage!")).SetEndDelay(0.5f);
 
                     List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
                     foreach (HexCharacterModel ally in allies)
@@ -1974,7 +1977,7 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.HymnOfPurity) && character.currentHealth > 0)
                 {
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                       VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Purity!"), QueuePosition.Back, 0f, 0.5f);
+                       VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Purity!")).SetEndDelay(0.5f);
 
                     List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
                     foreach (HexCharacterModel ally in allies)
@@ -2004,7 +2007,7 @@ namespace HexGameEngine.Characters
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Regeneration) && character.currentHealth > 0)
                 {
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Regeneration!"), QueuePosition.Back, 0f, 0.5f);
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Regeneration!")).SetEndDelay(0.5f);
 
                     int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Regeneration);
                     VisualEventManager.Instance.CreateVisualEvent(() =>
@@ -2018,7 +2021,7 @@ namespace HexGameEngine.Characters
                 {
                     // Text Notif
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hiding in Grass!"), QueuePosition.Back, 0f, 0.5f);
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hiding in Grass!")).SetEndDelay(0.5f);
 
                     // Gain stealth
                     PerkController.Instance.ModifyPerkOnCharacterEntity
@@ -2037,7 +2040,7 @@ namespace HexGameEngine.Characters
                 {
                     // Text Notif
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Rapid Cloaking"), QueuePosition.Back, 0f, 0.5f);
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Rapid Cloaking")).SetEndDelay(0.5f);
 
                     // Gain stealth
                     PerkController.Instance.ModifyPerkOnCharacterEntity

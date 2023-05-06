@@ -204,7 +204,7 @@ namespace HexGameEngine.TurnLogic
 
                 // Play window move anims
                 HexCharacterModel[] characters1 = activationOrder.ToArray();
-                VisualEventManager.Instance.CreateVisualEvent(() => MoveAllWindowsToStartPositions(characters1), QueuePosition.Back, 0f, 0.5f);
+                VisualEventManager.Instance.CreateVisualEvent(() => MoveAllWindowsToStartPositions(characters1)).SetEndDelay(0.5f);
             }
 
             // Increment turn count
@@ -239,7 +239,7 @@ namespace HexGameEngine.TurnLogic
             VisualEventManager.Instance.CreateVisualEvent(() => PlayActivationRollSequence(characters2, rollsCoroutine), rollsCoroutine);
 
             // Move windows to new positions
-            VisualEventManager.Instance.CreateVisualEvent(() => UpdateWindowPositions(), QueuePosition.Back, 0, 1);
+            VisualEventManager.Instance.CreateVisualEvent(() => UpdateWindowPositions()).SetEndDelay(1);
 
             // Play turn change notification
             CoroutineData turnNotificationCoroutine = new CoroutineData();
@@ -327,7 +327,7 @@ namespace HexGameEngine.TurnLogic
         {
             activationOrder.Remove(character);
             activationOrder.Add(character);
-            VisualEventManager.Instance.CreateVisualEvent(() => UpdateWindowPositions(), QueuePosition.Back);
+            VisualEventManager.Instance.CreateVisualEvent(() => UpdateWindowPositions());
         }
         #endregion
 
@@ -397,7 +397,7 @@ namespace HexGameEngine.TurnLogic
             entity.hasMadeTurn = true;
 
             // Move arrow to point at activated enemy
-            VisualEventManager.Instance.CreateVisualEvent(() => MoveActivationArrowTowardsEntityWindow(cachedEntityRef), QueuePosition.Back);
+            VisualEventManager.Instance.CreateVisualEvent(() => MoveActivationArrowTowardsEntityWindow(cachedEntityRef));
 
             // Start character activation
             HexCharacterController.Instance.CharacterOnTurnStart(entity);

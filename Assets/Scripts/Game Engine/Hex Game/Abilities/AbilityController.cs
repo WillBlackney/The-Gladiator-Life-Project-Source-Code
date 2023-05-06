@@ -306,7 +306,7 @@ namespace HexGameEngine.Abilities
             {
                 HexCharacterView view = character.hexCharacterView;
                 VisualEventManager.Instance.CreateVisualEvent(() =>
-                VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, ability.abilityName), QueuePosition.Back, 0, 0.5f);
+                VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, ability.abilityName)).SetEndDelay(0.5f);
             }
 
             // Hide pop up
@@ -481,7 +481,7 @@ namespace HexGameEngine.Abilities
                         HexCharacterController.Instance.ModifyArmour(target, -abilityEffect.bonusArmourDamage);
 
                     // Do on hit visual effects for this ability
-                    VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1), QueuePosition.Back, 0, 0, target.GetLastStackEventParent());
+                    VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1), target.GetLastStackEventParent());
                     foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                         AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, weaponUsed, target.GetLastStackEventParent());
 
@@ -594,7 +594,7 @@ namespace HexGameEngine.Abilities
                     {
                         VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "MISS");
                         AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Ooh_1);
-                    }, QueuePosition.Back, 0, 0, target.GetLastStackEventParent());
+                    }, target.GetLastStackEventParent());
 
                     // Check Evasion
                     if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Evasion))
@@ -606,7 +606,7 @@ namespace HexGameEngine.Abilities
 
                     // Duck animation on miss
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                    HexCharacterController.Instance.PlayDuckAnimation(target.hexCharacterView), QueuePosition.Back, 0f, 0.5f, target.GetLastStackEventParent());
+                    HexCharacterController.Instance.PlayDuckAnimation(target.hexCharacterView), target.GetLastStackEventParent()).SetEndDelay(0.5f);
 
                     if (!PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.Slippery) &&
                         HexCharacterController.Instance.IsCharacterAbleToMakeRiposteAttack(target) &&
@@ -619,7 +619,7 @@ namespace HexGameEngine.Abilities
                     {
                         // Riposte notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "Riposte!"), QueuePosition.Back, 0.5f);
+                            VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "Riposte!")).SetStartDelay(0.5f);
 
                         // Start free strike attack
                         UseAbility(target, RiposteAbility, caster);
@@ -716,7 +716,7 @@ namespace HexGameEngine.Abilities
                         HexCharacterController.Instance.ModifyCurrentFatigue(character, 5);
 
                         // Do on hit visual effects for this ability
-                        VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                        VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1), character.GetLastStackEventParent());
                         foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                         {
                             AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, weaponUsed, character.GetLastStackEventParent());
@@ -734,7 +734,7 @@ namespace HexGameEngine.Abilities
                             if (character.hexCharacterView != null) pos = character.hexCharacterView.WorldPosition;
                             VisualEffectManager.Instance.CreateStatusEffect(pos, "MISS");
                             AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Ooh_1);
-                        }, QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                        }, character.GetLastStackEventParent());
 
                         // Check Evasion
                         if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Evasion))
@@ -746,7 +746,7 @@ namespace HexGameEngine.Abilities
 
                         // Duck animation on miss
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                            HexCharacterController.Instance.PlayDuckAnimation(character.hexCharacterView), QueuePosition.Back, 0, 0, character.GetLastStackEventParent());
+                            HexCharacterController.Instance.PlayDuckAnimation(character.hexCharacterView), character.GetLastStackEventParent());
                     }
 
                 }
@@ -1242,7 +1242,7 @@ namespace HexGameEngine.Abilities
                     {
                         CoroutineData cData = new CoroutineData();
                         VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerKnockedBackIntoObstructionAnimation
-                            (target.hexCharacterView, obstruction.WorldPosition, cData), cData, QueuePosition.Back);
+                            (target.hexCharacterView, obstruction.WorldPosition, cData), cData);
 
                     }
                     PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Stunned, 1, true, 0.5f);
@@ -1298,12 +1298,12 @@ namespace HexGameEngine.Abilities
                         view.myActivationWindow.gameObject.SetActive(true);
                         view.myActivationWindow.Show();
                         TurnController.Instance.EnablePanelSlotAtIndex(windowIndex);
-                    }, QueuePosition.Back, 0f, 0.1f);
+                    }).SetEndDelay(0.1f);
 
                     // Update all window slot positions + activation pointer arrow
                     HexCharacterModel entityActivated = TurnController.Instance.EntityActivated;
                     VisualEventManager.Instance.CreateVisualEvent(() => TurnController.Instance.UpdateWindowPositions());
-                    VisualEventManager.Instance.CreateVisualEvent(() => TurnController.Instance.MoveActivationArrowTowardsEntityWindow(entityActivated), QueuePosition.Back);
+                    VisualEventManager.Instance.CreateVisualEvent(() => TurnController.Instance.MoveActivationArrowTowardsEntityWindow(entityActivated));
 
                     // Fade in model + UI
                     VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.FadeInCharacterWorldCanvas(view, null, abilityEffect.uiFadeInSpeed));
