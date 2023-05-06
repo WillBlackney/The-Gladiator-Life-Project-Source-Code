@@ -757,9 +757,7 @@ namespace HexGameEngine.Abilities
                     bool didCrit = CombatController.Instance.RollForCrit(caster, character, ability, abilityEffect);
                     DamageResult dResult = null;
                     dResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(caster, character, ability, abilityEffect, didCrit);
-                    dResult.didCrit = didCrit;
-
-                                      
+                    dResult.didCrit = didCrit;                                      
 
                     // Resolve bonus armour damage
                     if (abilityEffect.bonusArmourDamage > 0)

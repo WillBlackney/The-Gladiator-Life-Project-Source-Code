@@ -27,13 +27,13 @@ MonoBehaviour:
       value: 50
       stars: 0
     accuracy:
-      value: 100
+      value: 200
       stars: 0
     resolve:
       value: 5
       stars: 0
     fitness:
-      value: 500
+      value: 1000
       stars: 0
     wits:
       value: 5
@@ -57,9 +57,7 @@ MonoBehaviour:
     deathResistance: 25
   abilityBook:
     activeAbilities:
-    - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
-    - {fileID: 11400000, guid: abb8cd12e082108429c6734cc2c90d87, type: 2}
-    - {fileID: 11400000, guid: a8709026bde6ab046a0b8aaf6d8b9785, type: 2}
+    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
   serializedPassiveManager:
     perks: []
   modelParts:
@@ -70,7 +68,7 @@ MonoBehaviour:
   - Undead_Right_Arm
   - Undead_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 11bc6066b51a32244bf3030185789aa5, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 9b8e828332b12524ea8077dc9f45ad24, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}

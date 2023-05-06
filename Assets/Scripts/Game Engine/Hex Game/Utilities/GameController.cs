@@ -243,6 +243,8 @@ namespace HexGameEngine
         }
         private IEnumerator StartCombatVictorySequenceCoroutine()
         {
+            Debug.Log("GameController.StartCombatVictorySequenceCoroutine() called");
+
             // Set state
             SetGameState(GameState.CombatRewardPhase);
 

@@ -93,7 +93,9 @@ namespace HexGameEngine.Characters
         public VisualEvent GetLastStackEventParent()
         {
             VisualEvent ret = null;
-            for(int i = 0; i < eventStacks.Count - 1; i++)
+            if (eventStacks.Count == 1) return eventStacks[0];
+
+            for (int i = eventStacks.Count - 1; i > -1; i--)
             {
                 if (eventStacks[i].isClosed == false)
                 {
@@ -102,6 +104,16 @@ namespace HexGameEngine.Characters
                 }
             }
             return ret;
+        }
+        public void HandlePopStackEvent(VisualEvent stackEvent)
+        {
+            Debug.Log("HexCharacterModel.HandlePopStackEvent() called...");
+            if(eventStacks.Contains(stackEvent) == false)
+            {
+                Debug.Log("HandlePopStackEvent() attempting to pop event that is not in the character's stack, cancelling...");
+                return;
+            }
+            eventStacks.Remove(stackEvent);
         }
         #endregion
 

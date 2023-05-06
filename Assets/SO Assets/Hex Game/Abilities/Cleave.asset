@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Cleave
   displayedName: Cleave
   includeInGame: 1
-  baseAbilityDescription: Deal 125% Weapon damage to all enemies within 1 tile.
+  baseAbilityDescription: Deal 100% Weapon damage to all enemies within 1 tile.
   abilitySprite: {fileID: 21300000, guid: b7c207f35a0e4684b8d50c3f06e1cdce, type: 3}
   energyCost: 5
   fatigueCost: 30
@@ -116,30 +116,15 @@ MonoBehaviour:
       projectileStartPosition: 0
       onCharacter: 0
     visualEventsOnHit: []
-    visualEventsOnEffectFinish:
-    - eventType: 6
-      screenOverlayType: 0
-      overlayColor: 0
-      overlayFadeInTime: 0
-      overlayDuration: 0
-      overlayFadeOutTime: 0
-      particleEffect: 0
-      cameraShake: 0
-      movementAnimation: 0
-      soundEffect: 0
-      characterAnimation: 0
-      delayDuration: 0.5
-      projectileFired: 0
-      projectileStartPosition: 0
-      onCharacter: 0
+    visualEventsOnEffectFinish: []
     aoeType: 1
     includeCentreTile: 0
     aoeSize: 1
     effectsAllies: 0
     effectsEnemies: 1
     damageType: 1
-    minBaseDamage: 36
-    maxBaseDamage: 40
+    minBaseDamage: 27
+    maxBaseDamage: 33
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0

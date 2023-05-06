@@ -42,6 +42,16 @@ namespace HexGameEngine.VisualEvents
             if (eventStack.Contains(visualEvent))
                 eventStack.Remove(visualEvent);
         }
+        public VisualEvent SetStartDelay(float delay)
+        {
+            startDelay = delay;
+            return this;
+        }
+        public VisualEvent SetEndDelay(float delay)
+        {
+            endDelay = delay;
+            return this;
+        }
     }
     public enum VisualEventType
     {

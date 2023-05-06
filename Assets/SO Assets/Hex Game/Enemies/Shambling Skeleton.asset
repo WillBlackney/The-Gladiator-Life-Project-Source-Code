@@ -23,7 +23,7 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 1
+      value: 10
       stars: 0
     dodge:
       value: 5
@@ -40,7 +40,7 @@ MonoBehaviour:
     wits:
       value: 5
       stars: 0
-    maxHealth: 1
+    maxHealth: 0
     apRecovery: 8
     apMaximum: 8
     initiative: 15

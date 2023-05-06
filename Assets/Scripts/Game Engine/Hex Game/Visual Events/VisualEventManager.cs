@@ -34,10 +34,31 @@ namespace HexGameEngine.VisualEvents
 
         // Trigger Visual Events
         #region
-        private void PlayEventFromQueue(VisualEvent ve)
+        private async void PlayEventFromQueue(VisualEvent ve)
         {
+            // Mark as active
             ve.isPlaying = true;
-            PlayEventFromQueueCoroutine(ve);
+            currentEventPlaying = true;
+
+            // Start Delay    
+            if (ve.startDelay > 0) await Task.Delay((int)((ve.startDelay + startDelayExtra) * 1000));
+
+            // Execute function 
+            if (ve.eventFunction != null) ve.eventFunction.Invoke();            
+
+            // Wait until execution finished 
+            if (ve.cData != null) while (ve.cData.CoroutineCompleted() == false) await Task.Delay(10);            
+
+            // End delay
+            if (ve.endDelay > 0) await Task.Delay((int)((ve.endDelay + endDelayExtra) * 1000));            
+
+            // Remove from queue
+            RemoveEventFromQueue(ve);
+            currentEventPlaying = false;
+
+            // Start next event
+            PlayNextEventFromQueue();
+
         }
         private void PlayNextEventFromQueue()
         {
@@ -74,66 +95,18 @@ namespace HexGameEngine.VisualEvents
 
             }
 
-        }
-        private async Task PlayEventFromQueueCoroutine(VisualEvent ve)
-        {
-            currentEventPlaying = true;
-
-            // Start Delay    
-            if (ve.startDelay > 0)
-            {
-                await Task.Delay((int) ((ve.startDelay + startDelayExtra) * 1000));
-                //yield return new WaitForSeconds(ve.startDelay + startDelayExtra);
-            }
-
-            // Execute function 
-            if (ve.eventFunction != null)
-            {
-                ve.eventFunction.Invoke();
-            }
-
-            // Wait until execution finished 
-            if (ve.cData != null)
-            {
-                //while (ve.cData.CoroutineCompleted() == false) await Task.Delay((int)(Time.deltaTime * 1000));
-                while (ve.cData.CoroutineCompleted() == false) await Task.Delay(10);
-                //yield return new WaitUntil(() => ve.cData.CoroutineCompleted() == true);
-            }
-
-            // End delay
-            if (ve.endDelay > 0)
-            {
-                await Task.Delay((int)((ve.endDelay + endDelayExtra) * 1000));
-                //yield return new WaitForSeconds(ve.endDelay + endDelayExtra);
-            }
-
-            // Remove from queue
-            RemoveEventFromQueue(ve);
-            currentEventPlaying = false;
-
-            // Start next event
-            PlayNextEventFromQueue();
-
-        }
-
+        }    
         private void StartEventStackPlaying(VisualEvent parentEvent)
         {
             parentEvent.isPlaying = true;
-            Debug.Log("Events in this stack event: " + parentEvent.EventStack.Count);
-            if (parentEvent.EventStack.Count > 0)
-                //StartCoroutine(PlayEventFromStackEvent(parentEvent.EventStack[0], parentEvent));
-                PlayEventFromStackEvent(parentEvent.EventStack[0], parentEvent);
-            else
-            {
-                //StartCoroutine(HandleEmptyStackEventAddedToQueue(parentEvent));
-                HandleEmptyStackEventAddedToQueue(parentEvent);
-            }
+            if (parentEvent.EventStack.Count > 0) PlayEventFromStackEvent(parentEvent.EventStack[0], parentEvent);
+            else HandleEmptyStackEventAddedToQueue(parentEvent);            
         }
-        private async Task HandleEmptyStackEventAddedToQueue(VisualEvent parentEvent)
+        private async void HandleEmptyStackEventAddedToQueue(VisualEvent parentEvent)
         {
             Debug.Log("HandleEmptyStackEventAddedToQueue() called");
             //yield return null;
-            await Task.Delay((int)(Time.deltaTime * 1000f));
+            await Task.Delay((int)(Time.deltaTime * 2000f));
 
             if (parentEvent.EventStack.Count > 0)
             {
@@ -148,52 +121,30 @@ namespace HexGameEngine.VisualEvents
                 RemoveEventFromQueue(parentEvent);
             }
         }
-        private async Task PlayEventFromStackEvent(VisualEvent childEvent, VisualEvent parentEvent)
+        private async void PlayEventFromStackEvent(VisualEvent childEvent, VisualEvent parentEvent)
         {
             // Start Delay    
-            if (childEvent.startDelay > 0)
-            {
-                await Task.Delay((int)((childEvent.startDelay + startDelayExtra) * 1000));
-                //yield return new WaitForSeconds(childEvent.startDelay + startDelayExtra);
-            }
+            if (childEvent.startDelay > 0) await Task.Delay((int)((childEvent.startDelay + startDelayExtra) * 1000));            
 
             // Execute function 
-            if (childEvent.eventFunction != null)
-            {
-                childEvent.eventFunction.Invoke();
-            }
+            if (childEvent.eventFunction != null) childEvent.eventFunction.Invoke();            
 
             // Wait until execution finished 
-            if (childEvent.cData != null)
-            {
-                while (childEvent.cData.CoroutineCompleted() == false) await Task.Delay((int)(Time.deltaTime * 1000));
-                //yield return new WaitUntil(() => childEvent.cData.CoroutineCompleted() == true);
-            }
+            if (childEvent.cData != null) 
+                while (childEvent.cData.CoroutineCompleted() == false) await Task.Delay((int)(Time.deltaTime * 1000));            
 
             // End delay
-            if (childEvent.endDelay > 0)
-            {
-                await Task.Delay((int)((childEvent.endDelay + endDelayExtra) * 1000));
-                //yield return new WaitForSeconds(childEvent.endDelay + endDelayExtra);
-            }
+            if (childEvent.endDelay > 0) await Task.Delay((int)((childEvent.endDelay + endDelayExtra) * 1000));            
 
             // Remove from stack's list of events
             RemoveEventFromStackEvent(childEvent, parentEvent);
 
             // Start next event in list
-            if (parentEvent.EventStack.Count > 0)
-                PlayEventFromStackEvent(parentEvent.EventStack[0], parentEvent);
-            else if (parentEvent.EventStack.Count == 0 && EventQueue.Contains(parentEvent))
+            if (parentEvent.EventStack.Count > 0) PlayEventFromStackEvent(parentEvent.EventStack[0], parentEvent);
+            else if (parentEvent.EventStack.Count == 0)
             {
-                await Task.Delay((int)(Time.deltaTime * 1000));
-                //yield return null;
-                if (parentEvent.EventStack.Count > 0)
-                    PlayEventFromStackEvent(parentEvent.EventStack[0], parentEvent);
-                else if (parentEvent.EventStack.Count == 0 && EventQueue.Contains(parentEvent))
-                {
-                    parentEvent.myCharacter.eventStacks.Remove(parentEvent);
-                    RemoveEventFromQueue(parentEvent);
-                }             
+                parentEvent.myCharacter.HandlePopStackEvent(parentEvent);
+                RemoveEventFromQueue(parentEvent);
             }
         }
         #endregion
@@ -202,30 +153,16 @@ namespace HexGameEngine.VisualEvents
         #region
         private void RemoveEventFromStackEvent(VisualEvent childEvent, VisualEvent parentEvent)
         {
-            if (parentEvent.EventStack.Contains(childEvent))
-            {
-                parentEvent.RemoveEventFromStack(childEvent);
-            }
-
+            if (parentEvent.EventStack.Contains(childEvent)) parentEvent.RemoveEventFromStack(childEvent);
         }
         private void RemoveEventFromQueue(VisualEvent ve)
         {
-            if (EventQueue.Contains(ve))
-            {
-                EventQueue.Remove(ve);
-            }
-
+            if (EventQueue.Contains(ve)) EventQueue.Remove(ve);
         }
         private void AddEventToFrontOfQueue(VisualEvent ve)
         {
-            if (EventQueue.Count > 0)
-            {
-                EventQueue.Insert(1, ve);
-            }
-            else
-            {
-                EventQueue.Insert(0, ve);
-            }
+            if (EventQueue.Count > 0) EventQueue.Insert(1, ve);            
+            else EventQueue.Insert(0, ve);            
         }
         private void AddEventToBackOfQueue(VisualEvent ve)
         {
@@ -254,16 +191,10 @@ namespace HexGameEngine.VisualEvents
             // coroutines that arent tracked dont last longer then 2 seconds.
 
             VisualEvent handleReturned = null;
-
             PauseQueue();
-            if (EventQueue.Count > 0 && currentEventPlaying == true)
-            {
-                handleReturned = EventQueue[0];
-            }
-
+            if (EventQueue.Count > 0 && currentEventPlaying == true) handleReturned = EventQueue[0];
             ClearEventQueue();
             EnableQueue();
-
             return handleReturned;
         }
         #endregion
@@ -279,26 +210,18 @@ namespace HexGameEngine.VisualEvents
             // it should be called using the overload function below this function
 
             VisualEvent vEvent = new VisualEvent(eventFunction, cData, startDelay, endDelay, VisualEventType.Single);
-
-            if (parentEvent != null && parentEvent.isPlaying == false)
-                parentEvent.AddEventToStack(vEvent);
-
-            else if (position == QueuePosition.Front)
-                AddEventToFrontOfQueue(vEvent);
-
-            else
-                AddEventToBackOfQueue(vEvent);
-
+            if (parentEvent != null && !parentEvent.isClosed) parentEvent.AddEventToStack(vEvent);
+            else if (position == QueuePosition.Front) AddEventToFrontOfQueue(vEvent);
+            else AddEventToBackOfQueue(vEvent);
             return vEvent;
         }
         public VisualEvent CreateVisualEvent(Action eventFunction, QueuePosition position = QueuePosition.Back, float startDelay = 0f, float endDelay = 0f, VisualEvent parentEvent = null)
         {
             VisualEvent vEvent = new VisualEvent(eventFunction, null, startDelay, endDelay, VisualEventType.Single);
-            if (parentEvent != null && parentEvent.isPlaying == false && !parentEvent.isClosed) parentEvent.AddEventToStack(vEvent);
+            if (parentEvent != null && !parentEvent.isClosed) parentEvent.AddEventToStack(vEvent);
             else if (position == QueuePosition.Front) AddEventToFrontOfQueue(vEvent);
             else AddEventToBackOfQueue(vEvent);
             return vEvent;
-
         }
         public VisualEvent CreateStackParentVisualEvent(Characters.HexCharacterModel character, QueuePosition position = QueuePosition.Back, float startDelay = 0f, float endDelay = 0f)
         {
@@ -311,11 +234,8 @@ namespace HexGameEngine.VisualEvents
             VisualEvent vEvent = new VisualEvent(null, null, startDelay, endDelay, VisualEventType.StackParent);
             vEvent.myCharacter = character;
             character.eventStacks.Add(vEvent);
-
             if (position == QueuePosition.Back) AddEventToBackOfQueue(vEvent);            
-            else if (position == QueuePosition.Front) AddEventToFrontOfQueue(vEvent);
-            
-
+            else if (position == QueuePosition.Front) AddEventToFrontOfQueue(vEvent);   
             return vEvent;
         }
         #endregion
@@ -325,16 +245,9 @@ namespace HexGameEngine.VisualEvents
         public VisualEvent InsertTimeDelayInQueue(float delayDuration, QueuePosition position = QueuePosition.Back, VisualEvent parentEvent = null)
         {
             VisualEvent vEvent = new VisualEvent(null, null, 0, delayDuration, VisualEventType.Single);
-
-            if (parentEvent != null && parentEvent.isPlaying == false)            
-                parentEvent.AddEventToStack(vEvent);    
-            
-            else if (position == QueuePosition.Front)            
-                AddEventToFrontOfQueue(vEvent);   
-            
-            else            
-                AddEventToBackOfQueue(vEvent);            
-
+            if (parentEvent != null && !parentEvent.isClosed) parentEvent.AddEventToStack(vEvent);               
+            else if (position == QueuePosition.Front) AddEventToFrontOfQueue(vEvent);              
+            else AddEventToBackOfQueue(vEvent);      
             return vEvent;
         }
         #endregion
