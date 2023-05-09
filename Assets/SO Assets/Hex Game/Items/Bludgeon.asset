@@ -30,7 +30,7 @@ MonoBehaviour:
   weaponAttackAnimationType: 0
   healthDamage: 0.75
   armourDamage: 1.25
-  armourPenetration: 0.4
+  armourPenetration: 0.5
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

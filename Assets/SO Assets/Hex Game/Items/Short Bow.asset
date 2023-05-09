@@ -28,7 +28,7 @@ MonoBehaviour:
   injuryTypesCaused: 01000000
   weaponAttackAnimationType: 0
   healthDamage: 1
-  armourDamage: 0.75
+  armourDamage: 0.85
   armourPenetration: 0.25
   minArmourRoll: 0
   maxArmourRoll: 0

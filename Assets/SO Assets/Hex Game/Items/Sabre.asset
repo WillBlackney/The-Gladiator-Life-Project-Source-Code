@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sabre
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: f31202f3008c64a4f923853cd6f08c1a, type: 3}
-  itemName: Broadsword
+  itemName: Sabre
   itemDescription: A long curved sword with a one sided blade used for slashing,
     hacking and stabbing at weak spots.
   itemType: 3
@@ -28,9 +28,9 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 01000000
   weaponAttackAnimationType: 0
-  healthDamage: 1.15
-  armourDamage: 0.75
-  armourPenetration: 0.2
+  healthDamage: 1.35
+  armourDamage: 0.85
+  armourPenetration: 0.25
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

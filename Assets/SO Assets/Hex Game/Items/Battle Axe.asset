@@ -28,8 +28,8 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 0100000002000000
   weaponAttackAnimationType: 0
-  healthDamage: 1.1
-  armourDamage: 1.1
+  healthDamage: 1.2
+  armourDamage: 1
   armourPenetration: 0.45
   minArmourRoll: 0
   maxArmourRoll: 0
