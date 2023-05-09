@@ -17,7 +17,7 @@ MonoBehaviour:
   audioProfile: 4
   modelSize: 2
   xpReward: 50
-  ignoreStress: 0
+  ignoreStress: 1
   attributeSheet:
     might:
       value: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
       value: 100
       stars: 0
     wits:
-      value: 5
+      value: 1000
       stars: 0
     maxHealth: 0
     apRecovery: 8

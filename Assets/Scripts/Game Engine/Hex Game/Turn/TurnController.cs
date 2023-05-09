@@ -244,16 +244,7 @@ namespace HexGameEngine.TurnLogic
             // Play turn change notification
             TaskTracker turnNotificationCoroutine = new TaskTracker();
             VisualEventManager.Instance.CreateVisualEvent(() => DisplayTurnChangeNotification(turnNotificationCoroutine)).SetCoroutineData(turnNotificationCoroutine);
-            ;
-
-            // Enable end turn + delay button visual event
-            /*
-            VisualEventManager.Instance.CreateVisualEvent(() => 
-            { 
-                EnableEndTurnButtonView();
-                EnableDelayTurnButtonView();
-            });
-            */
+            
             // Activate the first character in the turn cycle
             ActivateEntity(activationOrder[0]);
         }
@@ -375,9 +366,11 @@ namespace HexGameEngine.TurnLogic
 
                     // Move this character to the end of the turn order.
                     HandleMoveCharacterToEndOfTurnOrder(EntityActivated);
+                    UpdateWindowPositions();
 
                     // Trigger character on activation end sequence and events
                     HexCharacterController.Instance.CharacterOnTurnEnd(EntityActivated, true);
+
                 }
             }
         }
@@ -565,12 +558,25 @@ namespace HexGameEngine.TurnLogic
 
         // Destroy activation window visual events
         #region
-        private void FadeOutAndDestroyActivationWindow(TurnWindow window, TaskTracker cData)
+        private void FadeOutAndDestroyActivationWindow(TurnWindow window, TaskTracker tracker)
         {
-            StartCoroutine(FadeOutAndDestroyActivationWindowCoroutine(window, cData));
+            GameObject slotDestroyed = panelSlots[panelSlots.Count - 1];
+            if (activationOrder.Contains(window.myCharacter)) RemoveEntityFromActivationOrder(window.myCharacter);            
+
+            // Remove slot from list and destroy
+            panelSlots.Remove(slotDestroyed);
+            Destroy(slotDestroyed);
+
+            // Destroy window GO
+            DestroyActivationWindow(window);
+
+            // Resolve
+            if (tracker != null) tracker.MarkAsCompleted();            
         }
-        private IEnumerator FadeOutAndDestroyActivationWindowCoroutine(TurnWindow window, TaskTracker cData)
+        private IEnumerator FadeOutAndDestroyActivationWindowCoroutine(TurnWindow window, TaskTracker tracker)
         {
+            yield return null;
+            /*
             while (window.myCanvasGroup.alpha > 0)
             {
                 window.myCanvasGroup.alpha -= 0.05f;
@@ -594,10 +600,10 @@ namespace HexGameEngine.TurnLogic
             DestroyActivationWindow(window);
 
             // Resolve
-            if (cData != null)
+            if (tracker != null)
             {
-                cData.MarkAsCompleted();
-            }
+                tracker.MarkAsCompleted();
+            }*/
 
         }
         private void DestroyActivationWindow(TurnWindow window)
@@ -614,8 +620,8 @@ namespace HexGameEngine.TurnLogic
         private IEnumerator OnCharacterKilledVisualEventCoroutine(TurnWindow window, HexCharacterModel currentlyActivated, TaskTracker cData)
         {
             FadeOutAndDestroyActivationWindow(window, null);
-            yield return new WaitForSeconds(0.5f);
-
+            //yield return new WaitForSeconds(0.5f);
+            yield return null;
             UpdateWindowPositions();
 
             // If the entity that just died wasn't killed during its activation, do this
@@ -641,43 +647,28 @@ namespace HexGameEngine.TurnLogic
         #region
         public void UpdateWindowPositions()
         {
-            foreach (HexCharacterModel character in activationOrder)
-            {
-                MoveWindowTowardsSlotPositionCoroutine(character);
-            }
+            activationOrder.ForEach(x => MoveWindowTowardsSlotPosition(x));      
         }
-        private void MoveWindowTowardsSlotPositionCoroutine(HexCharacterModel character)
+        private void MoveWindowTowardsSlotPosition(HexCharacterModel character)
         {
-            Debug.Log("ActivationWindow.MoveWindowTowardsSlotPositionCoroutine() called for character: " + character.myName);
-
             // Get panel slot
             GameObject panelSlot = panelSlots[activationOrder.IndexOf(character)];
 
-            // cache window
+            // Cache window
             TurnWindow window = character.hexCharacterView.myActivationWindow;
 
-            // do we have everything needed to move?
+            // Do we have everything needed to move?
             if (panelSlot && window)
             {
-                // move the window
-                Sequence s = DOTween.Sequence();
-                s.Append(window.transform.DOMoveX(panelSlot.transform.position.x, 0.3f));
+                // Move the window
+                window.transform.DOKill();
+                window.transform.DOMoveX(panelSlot.transform.position.x, 0.25f);
             }
         }
         private void MoveAllWindowsToStartPositions(HexCharacterModel[] characters)
         {
-            StartCoroutine(MoveAllWindowsToStartPositionsCoroutine(characters));
-        }
-        private IEnumerator MoveAllWindowsToStartPositionsCoroutine(HexCharacterModel[] characters)
-        {
-            yield return null;
-
             for (int i = 0; i < characters.Length; i++)
-            {
-                // move the window
-                Sequence s = DOTween.Sequence();
-                s.Append(characters[i].hexCharacterView.myActivationWindow.transform.DOMoveX(panelSlots[i].transform.position.x, 0.3f));
-            }
+                characters[i].hexCharacterView.myActivationWindow.transform.DOMoveX(panelSlots[i].transform.position.x, 0.25f);
         }
         #endregion
 
@@ -751,10 +742,7 @@ namespace HexGameEngine.TurnLogic
             blackBarImageRect.DOScaleY(0.1f, 0.5f);
 
             // Resolve
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
+            if (cData != null) cData.MarkAsCompleted();            
         }
         private void DisplayCombatStartNotification(TaskTracker cData)
         {

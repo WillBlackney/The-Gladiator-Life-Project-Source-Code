@@ -79,6 +79,7 @@ namespace HexGameEngine.Characters
         #region
         public void PlayShattered()
         {
+            if (shatteredAnimator == null) return;
             shatteredAnimator.gameObject.SetActive(true);
             shatteredAnimator.SetTrigger("Play Normal");
             if (myView != null) myView.DoShatteredGlow();
