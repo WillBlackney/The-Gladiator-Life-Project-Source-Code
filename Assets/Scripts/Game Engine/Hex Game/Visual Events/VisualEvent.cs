@@ -8,7 +8,7 @@ namespace HexGameEngine.VisualEvents
 {
     public class VisualEvent
     {
-        public CoroutineData cData;
+        public TaskTracker cData;
         public Action eventFunction;
 
         public bool isPlaying;
@@ -25,10 +25,9 @@ namespace HexGameEngine.VisualEvents
             get { return eventStack; }
         }
 
-        public VisualEvent(Action _eventFunction, CoroutineData _cData, float _startDelay, float _endDelay, VisualEventType _eventType)
+        public VisualEvent(Action _eventFunction, float _startDelay, float _endDelay, VisualEventType _eventType)
         {
             eventFunction = _eventFunction;
-            cData = _cData;
             startDelay = _startDelay;
             endDelay = _endDelay;
             eventType = _eventType;
@@ -50,6 +49,11 @@ namespace HexGameEngine.VisualEvents
         public VisualEvent SetEndDelay(float delay)
         {
             endDelay = delay;
+            return this;
+        }
+        public VisualEvent SetCoroutineData(TaskTracker cData)
+        {
+            this.cData = cData;
             return this;
         }
     }

@@ -47,7 +47,7 @@ namespace HexGameEngine.VisualEvents
             if (ve.eventFunction != null) ve.eventFunction.Invoke();            
 
             // Wait until execution finished 
-            if (ve.cData != null) while (ve.cData.CoroutineCompleted() == false) await Task.Delay(10);            
+            if (ve.cData != null) while (ve.cData.Complete() == false) await Task.Delay(10);            
 
             // End delay
             if (ve.endDelay > 0) await Task.Delay((int)((ve.endDelay + endDelayExtra) * 1000));            
@@ -131,7 +131,7 @@ namespace HexGameEngine.VisualEvents
 
             // Wait until execution finished 
             if (childEvent.cData != null) 
-                while (childEvent.cData.CoroutineCompleted() == false) await Task.Delay((int)(Time.deltaTime * 1000));            
+                while (childEvent.cData.Complete() == false) await Task.Delay((int)(Time.deltaTime * 1000));            
 
             // End delay
             if (childEvent.endDelay > 0) await Task.Delay((int)((childEvent.endDelay + endDelayExtra) * 1000));            
@@ -158,11 +158,6 @@ namespace HexGameEngine.VisualEvents
         private void RemoveEventFromQueue(VisualEvent ve)
         {
             if (EventQueue.Contains(ve)) EventQueue.Remove(ve);
-        }
-        private void AddEventToFrontOfQueue(VisualEvent ve)
-        {
-            if (EventQueue.Count > 0) EventQueue.Insert(1, ve);            
-            else EventQueue.Insert(0, ve);            
         }
         private void AddEventToBackOfQueue(VisualEvent ve)
         {
@@ -201,22 +196,9 @@ namespace HexGameEngine.VisualEvents
 
         // Create Events
         #region
-        public VisualEvent CreateVisualEvent(Action eventFunction, CoroutineData cData, VisualEvent parentEvent = null)
-        {
-            // NOTE: This method requires on argument of 'CoroutineData'.
-            // this function is only for visual events that have their sequence
-            // triggered over time by way of coroutine.
-            // if a visual event has no coroutine and resolves instantly when played from the queue,
-            // it should be called using the overload function below this function
-
-            VisualEvent vEvent = new VisualEvent(eventFunction, cData, 0, 0, VisualEventType.Single);
-            if (parentEvent != null && !parentEvent.isClosed) parentEvent.AddEventToStack(vEvent);
-            else AddEventToBackOfQueue(vEvent);
-            return vEvent;
-        }
         public VisualEvent CreateVisualEvent(Action eventFunction, VisualEvent parentEvent = null)
         {
-            VisualEvent vEvent = new VisualEvent(eventFunction, null, 0, 0, VisualEventType.Single);
+            VisualEvent vEvent = new VisualEvent(eventFunction, 0, 0, VisualEventType.Single);
             if (parentEvent != null && !parentEvent.isClosed) parentEvent.AddEventToStack(vEvent);
             else AddEventToBackOfQueue(vEvent);
             return vEvent;
@@ -229,7 +211,7 @@ namespace HexGameEngine.VisualEvents
             // if a visual event has no coroutine and resolves instantly when played from the queue,
             // it should be called using the overload function below this function
 
-            VisualEvent vEvent = new VisualEvent(null, null, 0f, 0f, VisualEventType.StackParent);
+            VisualEvent vEvent = new VisualEvent(null, 0f, 0f, VisualEventType.StackParent);
             vEvent.myCharacter = character;
             character.eventStacks.Add(vEvent);
             AddEventToBackOfQueue(vEvent);             
@@ -241,7 +223,7 @@ namespace HexGameEngine.VisualEvents
         #region
         public VisualEvent InsertTimeDelayInQueue(float delayDuration,VisualEvent parentEvent = null)
         {
-            VisualEvent vEvent = new VisualEvent(null, null, 0, delayDuration, VisualEventType.Single);
+            VisualEvent vEvent = new VisualEvent(null, 0, delayDuration, VisualEventType.Single);
             if (parentEvent != null && !parentEvent.isClosed) parentEvent.AddEventToStack(vEvent);           
             else AddEventToBackOfQueue(vEvent);      
             return vEvent;

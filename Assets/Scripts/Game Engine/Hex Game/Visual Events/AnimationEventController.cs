@@ -106,12 +106,12 @@ namespace HexGameEngine.VisualEvents
             if (vEvent.characterAnimation == CharacterAnimation.MeleeAttack)
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
-                CoroutineData cData = new CoroutineData();
+                TaskTracker cData = new TaskTracker();
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 {
                     AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerMeleeAttackAnimation(user.hexCharacterView, targetView.WorldPosition, weaponUsed, cData);
-                }, cData, stackEvent);
+                }, stackEvent).SetCoroutineData(cData);
             
             }
 
@@ -119,7 +119,7 @@ namespace HexGameEngine.VisualEvents
             else if (vEvent.characterAnimation == CharacterAnimation.Tackle)
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
-                CoroutineData cData = new CoroutineData();
+                TaskTracker cData = new TaskTracker();
                 HexDirection direction = LevelController.Instance.GetDirectionToTargetHex(user.currentTile, targetCharacter.currentTile);
                 LevelNode knockbackNode = LevelController.Instance.GetAdjacentHexByDirection(targetCharacter.currentTile, direction);
                 if (knockbackNode != null) knockbackNode = targetCharacter.currentTile;
@@ -131,47 +131,48 @@ namespace HexGameEngine.VisualEvents
                     {
                         HexCharacterController.Instance.TriggerKnockedBackIntoObstructionAnimation(targetView, knockbackNode.WorldPosition, null);
                     });
-                }, cData, stackEvent);
+                }, stackEvent).SetCoroutineData(cData);
 
             }
             // Offhand Push
             else if (vEvent.characterAnimation == CharacterAnimation.OffHandPush)
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
-                CoroutineData cData = new CoroutineData();
+                TaskTracker cData = new TaskTracker();
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 {
                     AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerOffhandPushAnimation(user.hexCharacterView, targetView.WorldPosition, cData);
-                }, cData, stackEvent);
+                }, stackEvent).SetCoroutineData(cData);
             }
             // Throw net
             else if (vEvent.characterAnimation == CharacterAnimation.ThrowNetOffhand)
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
-                CoroutineData cData = new CoroutineData();
+                TaskTracker cData = new TaskTracker();
                 VisualEventManager.Instance.CreateVisualEvent(() =>
-                HexCharacterController.Instance.TriggerOffhandThrowNetAnimation(user.hexCharacterView, targetView.WorldPosition, cData), cData, stackEvent);
+                HexCharacterController.Instance.TriggerOffhandThrowNetAnimation(user.hexCharacterView, targetView.WorldPosition, cData), stackEvent).SetCoroutineData(cData);
             }
             // Shield Bash
             else if (vEvent.characterAnimation == CharacterAnimation.ShieldBash)
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
-                CoroutineData cData = new CoroutineData();
+                TaskTracker cData = new TaskTracker();
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 {
                     AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerShieldBashAnimation(user.hexCharacterView, targetView.WorldPosition, cData); 
-                }, cData, stackEvent);
+                }, stackEvent).SetCoroutineData(cData);
             }
             // AoE Melee Attack 
             else if (vEvent.characterAnimation == CharacterAnimation.AoeMeleeAttack)
             {
+                TaskTracker cData = new TaskTracker();
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 {
                     AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
-                    HexCharacterController.Instance.TriggerAoeMeleeAttackAnimation(user.hexCharacterView, weaponUsed);
-                }, stackEvent);
+                    HexCharacterController.Instance.TriggerAoeMeleeAttackAnimation(user.hexCharacterView, weaponUsed, cData);
+                }, stackEvent).SetCoroutineData(cData);
             }
             // Reload Crossbow
             else if (vEvent.characterAnimation == CharacterAnimation.ReloadCrossbow)
@@ -207,22 +208,22 @@ namespace HexGameEngine.VisualEvents
             else if (vEvent.characterAnimation == CharacterAnimation.ShootBowOrCrossbow)
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
-                CoroutineData cData = new CoroutineData();
+                TaskTracker cData = new TaskTracker();
 
                 // Crossbow
                 if (weaponUsed != null && weaponUsed.weaponClass == WeaponClass.Crossbow)                
-                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootCrossbowAnimation(user.hexCharacterView, weaponUsed, cData), cData, stackEvent);
+                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootCrossbowAnimation(user.hexCharacterView, weaponUsed, cData), stackEvent).SetCoroutineData(cData);
                                 
                 // Normal Bow
                 else                
-                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootBowAnimation(user.hexCharacterView, weaponUsed, cData), cData, stackEvent);
+                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootBowAnimation(user.hexCharacterView, weaponUsed, cData), stackEvent).SetCoroutineData(cData);
              }
 
             // Shoot Magic + Shoot Projectile 
             else if (vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture || vEvent.characterAnimation == CharacterAnimation.ShootProjectileUnanimated)
             {
                 // Play character shoot anim
-                CoroutineData animCdata = new CoroutineData();
+                TaskTracker animCdata = new TaskTracker();
                 if(vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture)
                     VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerShootMagicHandGestureAnimation(user.hexCharacterView, animCdata), stackEvent);
 
@@ -240,7 +241,7 @@ namespace HexGameEngine.VisualEvents
                     projectileStartPos = user.hexCharacterView.WorldPosition;
 
                     // Create projectile
-                    CoroutineData cData2 = new CoroutineData();
+                    TaskTracker cData2 = new TaskTracker();
                     VisualEventManager.Instance.CreateVisualEvent(() => 
                     {
                         if(user != null &&
@@ -258,7 +259,7 @@ namespace HexGameEngine.VisualEvents
                         }
                             
                         VisualEffectManager.Instance.ShootProjectileAtLocation(dynamicProjectile, projectileStartPos, targetPos, cData2);
-                    }, cData2, stackEvent);
+                    }, stackEvent).SetCoroutineData(cData2);
                     return;
 
                 }
@@ -272,9 +273,9 @@ namespace HexGameEngine.VisualEvents
                 }
 
                 // Create projectile
-                CoroutineData cData = new CoroutineData();
+                TaskTracker cData = new TaskTracker();
                 VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.ShootProjectileAtLocation
-                (vEvent.projectileFired, projectileStartPos, targetPos, cData), cData, stackEvent);
+                (vEvent.projectileFired, projectileStartPos, targetPos, cData), stackEvent).SetCoroutineData(cData);
             }
         }
         private void ResolveParticleEffect(AnimationEventData vEvent, HexCharacterModel user, HexCharacterModel characterTarget = null, LevelNode tileTarget = null, VisualEvent stackEvent = null)

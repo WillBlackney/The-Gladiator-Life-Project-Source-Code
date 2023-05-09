@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace HexGameEngine.VisualEvents
 {
-    public class CoroutineData
+    public class TaskTracker
     {
-        private bool coroutineCompleted;
-        public bool CoroutineCompleted()
+        private bool complete;
+        public bool Complete()
         {
-            return coroutineCompleted;
+            return complete;
         }
 
         public void MarkAsCompleted()
         {
-            coroutineCompleted = true;
+            complete = true;
         }
 
 

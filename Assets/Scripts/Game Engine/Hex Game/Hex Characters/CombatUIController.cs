@@ -165,12 +165,10 @@ namespace HexGameEngine.Characters
             // Animate on screen
             MovePanelsOnScreen(speed);
         }
-        public void HideViewsOnTurnEnd(CoroutineData cData = null, float speed = 1.5f)
+        public void HideViewsOnTurnEnd(TaskTracker tracker = null, float speed = 1.5f)
         {
             SetInteractability(false);
             mainCanvasCg.DOKill();
-           // mainCanvasCg.interactable = false;
-           // mainCanvasCg.blocksRaycasts = false;
 
             middlePanelTransform.localPosition = middlePanelOnScreenPos.localPosition;
             rightPanelTransform.localPosition = rightPanelOnScreenPos.localPosition;
@@ -185,7 +183,7 @@ namespace HexGameEngine.Characters
             s.OnComplete(() =>
             {
                 mainVisualParent.SetActive(false);
-                if (cData != null) cData.MarkAsCompleted();
+                if (tracker != null) tracker.MarkAsCompleted();
             });
         }
         private void MovePanelsOnScreen(float moveSpeed = 0.5f)

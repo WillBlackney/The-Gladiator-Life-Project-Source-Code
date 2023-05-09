@@ -186,7 +186,7 @@ namespace HexGameEngine
             HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();
 
             // Move characters towards start nodes
-            CoroutineData cData = new CoroutineData();
+            TaskTracker cData = new TaskTracker();
             VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
 
             // Start a new combat event
@@ -553,7 +553,7 @@ namespace HexGameEngine
 
             if (handle != null && handle.cData != null)
             {
-                yield return new WaitUntil(() => handle.cData.CoroutineCompleted() == true);
+                yield return new WaitUntil(() => handle.cData.Complete() == true);
             }
 
             // Destroy combat + town scenes
@@ -665,7 +665,7 @@ namespace HexGameEngine
                 HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();               
 
                 // Move characters towards start nodes
-                CoroutineData cData = new CoroutineData();
+                TaskTracker cData = new TaskTracker();
                 VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
 
                 // Start a new combat event
@@ -740,7 +740,7 @@ namespace HexGameEngine
             HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();
 
             // Move characters towards start nodes
-            CoroutineData cData = new CoroutineData();
+            TaskTracker cData = new TaskTracker();
             VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
 
             // Start a new combat event

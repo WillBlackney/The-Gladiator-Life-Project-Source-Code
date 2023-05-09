@@ -546,9 +546,9 @@ namespace HexGameEngine.HexTiles
                 PlaceCharacterOnHex(character, destination);
 
             // Move animation
-            CoroutineData cData = new CoroutineData();
+            TaskTracker cData = new TaskTracker();
             VisualEventManager.Instance.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
-                (character.hexCharacterView, destination, cData, moveSpeed), cData);
+                (character.hexCharacterView, destination, cData, moveSpeed)).SetCoroutineData(cData);
 
             // TO DO: events that trigger when the character steps onto a new tile go here (maybe?)...
             character.tilesMovedThisTurn++;
@@ -599,11 +599,11 @@ namespace HexGameEngine.HexTiles
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Flight, -1);
 
         }
-        public void DoCharacterMoveVisualEvent(HexCharacterView view, LevelNode hex, CoroutineData cData, float moveSpeed = 5f, Action onCompleteCallback = null)
+        public void DoCharacterMoveVisualEvent(HexCharacterView view, LevelNode hex, TaskTracker cData, float moveSpeed = 5f, Action onCompleteCallback = null)
         {
             StartCoroutine(DoCharacterMoveVisualEventCoroutine(view, hex, cData, moveSpeed, onCompleteCallback));
         }
-        private IEnumerator DoCharacterMoveVisualEventCoroutine(HexCharacterView view, LevelNode hex, CoroutineData cData, float moveSpeed = 5f, Action onCompleteCallback = null)
+        private IEnumerator DoCharacterMoveVisualEventCoroutine(HexCharacterView view, LevelNode hex, TaskTracker cData, float moveSpeed = 5f, Action onCompleteCallback = null)
         {
             // Set up
             bool reachedDestination = false;
@@ -633,7 +633,7 @@ namespace HexGameEngine.HexTiles
                 onCompleteCallback.Invoke();
             }
         }
-        public void DoCharacterMoveVisualEventDOTWEEN(HexCharacterView view, LevelNode hex, CoroutineData cData, float moveSpeed = 5f, Ease ease = Ease.Linear, Action onCompleteCallback = null)
+        public void DoCharacterMoveVisualEventDOTWEEN(HexCharacterView view, LevelNode hex, TaskTracker cData, float moveSpeed = 5f, Ease ease = Ease.Linear, Action onCompleteCallback = null)
         {
             // Set up
             Vector3 destination = new Vector3(hex.WorldPosition.x, hex.WorldPosition.y, 0);
@@ -889,12 +889,12 @@ namespace HexGameEngine.HexTiles
 
                 HexCharacterView view = character.hexCharacterView;
                 
-                CoroutineData cData = new CoroutineData();
+                TaskTracker cData = new TaskTracker();
                 VisualEventManager.Instance.CreateVisualEvent(() => 
                 {
                     HexCharacterController.Instance.PlayHurtAnimation(character.hexCharacterView);
                     DoCharacterMoveVisualEventDOTWEEN(character.hexCharacterView, destination, cData, 5f, Ease.OutBack);
-                }, cData);
+                }).SetCoroutineData(cData);
             }       
         }
         #endregion

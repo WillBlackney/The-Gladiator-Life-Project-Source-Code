@@ -217,7 +217,7 @@ namespace HexGameEngine.VisualEvents
                 CreateToxicRain();
             }
         }
-        public void ShootProjectileAtLocation(ProjectileFired projectileFired, Vector3 start, Vector3 end, CoroutineData cData)
+        public void ShootProjectileAtLocation(ProjectileFired projectileFired, Vector3 start, Vector3 end, TaskTracker cData)
         {
             if (projectileFired == ProjectileFired.None)
             {
@@ -421,29 +421,29 @@ namespace HexGameEngine.VisualEvents
         // PROJECTILES
         #region
 
-        private void ShootArrow(Vector3 startPos, Vector3 endPos, CoroutineData cData)
+        private void ShootArrow(Vector3 startPos, Vector3 endPos, TaskTracker cData)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Arrow_Fired);
             Projectile projectileScript = Instantiate(arrow, startPos, Quaternion.identity).GetComponent<Projectile>();
             projectileScript.Initialize(startPos, endPos, () => cData.MarkAsCompleted());
         }
-        private void ShootCrossbowBolt(Vector3 startPos, Vector3 endPos, CoroutineData cData)
+        private void ShootCrossbowBolt(Vector3 startPos, Vector3 endPos, TaskTracker cData)
         {
             Projectile projectileScript = Instantiate(crossbowBolt, startPos, Quaternion.identity).GetComponent<Projectile>();
             projectileScript.Initialize(startPos, endPos, () => cData.MarkAsCompleted());
         } 
-        private void ShootJavelin(Vector3 startPos, Vector3 endPos, CoroutineData cData)
+        private void ShootJavelin(Vector3 startPos, Vector3 endPos, TaskTracker cData)
         {
             Projectile projectileScript = Instantiate(javelin, startPos, Quaternion.identity).GetComponent<Projectile>();
             projectileScript.Initialize(startPos, endPos, () => cData.MarkAsCompleted());
         }
-        private void ShootThrowingNet(Vector3 startPos, Vector3 endPos, CoroutineData cData)
+        private void ShootThrowingNet(Vector3 startPos, Vector3 endPos, TaskTracker cData)
         {
             GameObject go = Instantiate(throwingNet, startPos, Quaternion.identity);
             ThrowingNet tn = go.GetComponent<ThrowingNet>();
             tn.MoveToTarget(startPos, endPos, 0.75f, () => cData.MarkAsCompleted());
         }
-        private void ShootFireball(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootFireball(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Fireball_Fired);
             ToonProjectile tsScript = Instantiate(fireBall, startPos, fireBall.transform.rotation).GetComponent<ToonProjectile>();
@@ -453,7 +453,7 @@ namespace HexGameEngine.VisualEvents
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
-        private void ShootShadowBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootShadowBall(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Shadowball_Fired);
             ToonProjectile tsScript = Instantiate(shadowBall, startPos, shadowBall.transform.rotation).GetComponent<ToonProjectile>();
@@ -463,7 +463,7 @@ namespace HexGameEngine.VisualEvents
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
-        private void ShootPoisonBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootPoisonBall(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Poison_Fired);
             ToonProjectile tsScript = Instantiate(poisonBall, startPos, poisonBall.transform.rotation).GetComponent<ToonProjectile>();
@@ -473,7 +473,7 @@ namespace HexGameEngine.VisualEvents
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
-        private void ShootLightningBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootLightningBall(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Lightning_Fired);
             ToonProjectile tsScript = Instantiate(lightningBall, startPos, lightningBall.transform.rotation).GetComponent<ToonProjectile>();
@@ -483,7 +483,7 @@ namespace HexGameEngine.VisualEvents
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
-        private void ShootHolyBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootHolyBall(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             ToonProjectile tsScript = Instantiate(holyBall, startPos, holyBall.transform.rotation).GetComponent<ToonProjectile>();
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
@@ -491,7 +491,7 @@ namespace HexGameEngine.VisualEvents
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
-        private void ShootFrostBall(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
+        private void ShootFrostBall(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
             ToonProjectile tsScript = Instantiate(frostBall, startPos, frostBall.transform.rotation).GetComponent<ToonProjectile>();
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
@@ -499,7 +499,7 @@ namespace HexGameEngine.VisualEvents
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
-        private void ShootFireMeteor(Vector3 startPos, Vector3 endPos, CoroutineData cData, int sortingOrderBonus = 15, float scaleModifier = 3f)
+        private void ShootFireMeteor(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 3f)
         {
             AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Fireball_Fired);
             ToonProjectile tsScript = Instantiate(fireMeteor, startPos, fireMeteor.transform.rotation).GetComponent<ToonProjectile>();

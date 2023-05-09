@@ -186,8 +186,8 @@ namespace HexGameEngine.TurnLogic
                 // Wait for character move on screen animations to finish
                 VisualEventManager.Instance.InsertTimeDelayInQueue(1.5f);
 
-                CoroutineData combatStartNotif = new CoroutineData();
-                VisualEventManager.Instance.CreateVisualEvent(() => DisplayCombatStartNotification(combatStartNotif), combatStartNotif);
+                TaskTracker combatStartNotif = new TaskTracker();
+                VisualEventManager.Instance.CreateVisualEvent(() => DisplayCombatStartNotification(combatStartNotif)).SetCoroutineData(combatStartNotif);
 
                 // Enable activation window visibility
                 VisualEventManager.Instance.CreateVisualEvent(() =>
@@ -235,15 +235,16 @@ namespace HexGameEngine.TurnLogic
 
             // Play roll animation sequence
             HexCharacterModel[] characters2 = activationOrder.ToArray();
-            CoroutineData rollsCoroutine = new CoroutineData();
-            VisualEventManager.Instance.CreateVisualEvent(() => PlayActivationRollSequence(characters2, rollsCoroutine), rollsCoroutine);
+            TaskTracker rollsCoroutine = new TaskTracker();
+            VisualEventManager.Instance.CreateVisualEvent(() => PlayActivationRollSequence(characters2, rollsCoroutine)).SetCoroutineData(rollsCoroutine);
 
             // Move windows to new positions
             VisualEventManager.Instance.CreateVisualEvent(() => UpdateWindowPositions()).SetEndDelay(1);
 
             // Play turn change notification
-            CoroutineData turnNotificationCoroutine = new CoroutineData();
-            VisualEventManager.Instance.CreateVisualEvent(() => DisplayTurnChangeNotification(turnNotificationCoroutine), turnNotificationCoroutine);
+            TaskTracker turnNotificationCoroutine = new TaskTracker();
+            VisualEventManager.Instance.CreateVisualEvent(() => DisplayTurnChangeNotification(turnNotificationCoroutine)).SetCoroutineData(turnNotificationCoroutine);
+            ;
 
             // Enable end turn + delay button visual event
             /*
@@ -474,11 +475,11 @@ namespace HexGameEngine.TurnLogic
 
         // Number roll sequence visual events
         #region
-        private void PlayActivationRollSequence(HexCharacterModel[] characters, CoroutineData cData)
+        private void PlayActivationRollSequence(HexCharacterModel[] characters, TaskTracker cData)
         {
             StartCoroutine(PlayActivationRollSequenceCoroutine(characters, cData));
         }
-        private IEnumerator PlayActivationRollSequenceCoroutine(HexCharacterModel[] characters, CoroutineData cData)
+        private IEnumerator PlayActivationRollSequenceCoroutine(HexCharacterModel[] characters, TaskTracker cData)
         {
             // Disable arrow to prevtn blocking numbers
             //panelArrow.SetActive(false);
@@ -564,11 +565,11 @@ namespace HexGameEngine.TurnLogic
 
         // Destroy activation window visual events
         #region
-        private void FadeOutAndDestroyActivationWindow(TurnWindow window, CoroutineData cData)
+        private void FadeOutAndDestroyActivationWindow(TurnWindow window, TaskTracker cData)
         {
             StartCoroutine(FadeOutAndDestroyActivationWindowCoroutine(window, cData));
         }
-        private IEnumerator FadeOutAndDestroyActivationWindowCoroutine(TurnWindow window, CoroutineData cData)
+        private IEnumerator FadeOutAndDestroyActivationWindowCoroutine(TurnWindow window, TaskTracker cData)
         {
             while (window.myCanvasGroup.alpha > 0)
             {
@@ -603,14 +604,14 @@ namespace HexGameEngine.TurnLogic
         {
             Destroy(window.gameObject);
         }
-        public void OnCharacterKilledVisualEvent(TurnWindow window, HexCharacterModel currentlyActivated, CoroutineData cData)
+        public void OnCharacterKilledVisualEvent(TurnWindow window, HexCharacterModel currentlyActivated, TaskTracker cData)
         {
             // Need to cache the currently activated entity in a new variable called 'currentlyActivated'.
             // this makes sure the arrow points to the window of the character that is VISUALLY activated,
             // but not activated in the logic side.
             StartCoroutine(OnCharacterKilledVisualEventCoroutine(window, currentlyActivated, cData));
         }
-        private IEnumerator OnCharacterKilledVisualEventCoroutine(TurnWindow window, HexCharacterModel currentlyActivated, CoroutineData cData)
+        private IEnumerator OnCharacterKilledVisualEventCoroutine(TurnWindow window, HexCharacterModel currentlyActivated, TaskTracker cData)
         {
             FadeOutAndDestroyActivationWindow(window, null);
             yield return new WaitForSeconds(0.5f);
@@ -718,11 +719,11 @@ namespace HexGameEngine.TurnLogic
 
         // Turn Change Notification visual events
         #region
-        private void DisplayTurnChangeNotification(CoroutineData cData)
+        private void DisplayTurnChangeNotification(TaskTracker cData)
         {
             StartCoroutine(DisplayTurnChangeNotificationCoroutine(cData));
         }
-        private IEnumerator DisplayTurnChangeNotificationCoroutine(CoroutineData cData)
+        private IEnumerator DisplayTurnChangeNotificationCoroutine(TaskTracker cData)
         {
             // Get transforms
             RectTransform mainParent = visualParentCG.gameObject.GetComponent<RectTransform>();
@@ -755,11 +756,11 @@ namespace HexGameEngine.TurnLogic
                 cData.MarkAsCompleted();
             }
         }
-        private void DisplayCombatStartNotification(CoroutineData cData)
+        private void DisplayCombatStartNotification(TaskTracker cData)
         {
             StartCoroutine(DisplayCombatStartNotificationCoroutine(cData));
         }
-        private IEnumerator DisplayCombatStartNotificationCoroutine(CoroutineData cData)
+        private IEnumerator DisplayCombatStartNotificationCoroutine(TaskTracker cData)
         {
             // Get transforms
             RectTransform mainParent = visualParentCG.gameObject.GetComponent<RectTransform>();
@@ -816,11 +817,11 @@ namespace HexGameEngine.TurnLogic
                 cData.MarkAsCompleted();
             }
         }
-        public void DisplayCustomNotification(CoroutineData cData, string customMessage)
+        public void DisplayCustomNotification(TaskTracker cData, string customMessage)
         {
             StartCoroutine(DisplayCustomNotificationCoroutine(cData, customMessage));
         }
-        private IEnumerator DisplayCustomNotificationCoroutine(CoroutineData cData, string customMessage)
+        private IEnumerator DisplayCustomNotificationCoroutine(TaskTracker cData, string customMessage)
         {
             // Get transforms
             RectTransform mainParent = visualParentCG.gameObject.GetComponent<RectTransform>();

@@ -190,11 +190,11 @@ namespace HexGameEngine.DraftEvent
                 AudioManager.Instance.FadeOutSound(Sound.Character_Footsteps, 0.25f);
             });
         }
-        private void DoRecruitModelsMoveToMeetingSequence(CoroutineData cData = null)
+        private void DoRecruitModelsMoveToMeetingSequence(TaskTracker tracker = null)
         {
-            StartCoroutine(DoRecruitModelsMoveToMeetingSequenceCoroutine(cData));
+            StartCoroutine(DoRecruitModelsMoveToMeetingSequenceCoroutine(tracker));
         }
-        private IEnumerator DoRecruitModelsMoveToMeetingSequenceCoroutine(CoroutineData cData = null)
+        private IEnumerator DoRecruitModelsMoveToMeetingSequenceCoroutine(TaskTracker tracker = null)
         {           
             for (int i = 0; i < draftCharactersChosen.Count; i++)
             {
@@ -223,7 +223,7 @@ namespace HexGameEngine.DraftEvent
             yield return new WaitForSeconds(0.75f);
             AudioManager.Instance.FadeOutSound(Sound.Character_Footsteps, 0.25f);
 
-            if (cData != null) cData.MarkAsCompleted();
+            if (tracker != null) tracker.MarkAsCompleted();
 
         }
         public void DoDoorOpeningSequence()
@@ -349,8 +349,8 @@ namespace HexGameEngine.DraftEvent
             MapPlayerTracker.Instance.UnlockMap();
 
             // Move the new characters on screen
-            CoroutineData cData = new CoroutineData();
-            VisualEventManager.Instance.CreateVisualEvent(()=> DoRecruitModelsMoveToMeetingSequence(cData), cData);
+            TaskTracker tracker = new TaskTracker();
+            VisualEventManager.Instance.CreateVisualEvent(()=> DoRecruitModelsMoveToMeetingSequence(tracker)).SetCoroutineData(tracker);
             VisualEventManager.Instance.CreateVisualEvent(() => ShowContinueButton());
         }
         private void HandleRecruitSelectionConfirmed()

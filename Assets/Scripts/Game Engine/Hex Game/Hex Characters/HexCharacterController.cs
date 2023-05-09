@@ -784,18 +784,18 @@ namespace HexGameEngine.Characters
 
         // Trigger Animations
         #region
-        public void TriggerMeleeAttackAnimation(HexCharacterView view, Vector2 targetPos, ItemData weaponUsed, CoroutineData cData)
+        public void TriggerMeleeAttackAnimation(HexCharacterView view, Vector2 targetPos, ItemData weaponUsed, TaskTracker tracker)
         {
             //AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-            StartCoroutine(TriggerMeleeAttackAnimationCoroutine(view, targetPos, weaponUsed, cData));
+            StartCoroutine(TriggerMeleeAttackAnimationCoroutine(view, targetPos, weaponUsed, tracker));
         }
         
-        private IEnumerator TriggerMeleeAttackAnimationCoroutine(HexCharacterView view, Vector2 targetPos, ItemData weaponUsed, CoroutineData cData)
+        private IEnumerator TriggerMeleeAttackAnimationCoroutine(HexCharacterView view, Vector2 targetPos, ItemData weaponUsed, TaskTracker tracker)
         {
             HexCharacterModel model = view.character;
             if (model == null)
             {
-                if (cData != null) cData.MarkAsCompleted();
+                if (tracker != null) tracker.MarkAsCompleted();
                 yield break;
             }
 
@@ -827,7 +827,7 @@ namespace HexGameEngine.Characters
                 yield return new WaitForSeconds(initialMoveTime + offset);
 
                 // Pause at impact point
-                if (cData != null) cData.MarkAsCompleted();
+                if (tracker != null) tracker.MarkAsCompleted();
                 yield return new WaitForSeconds(postImpactPause);
 
                 // Move back to start point
@@ -858,7 +858,7 @@ namespace HexGameEngine.Characters
                 yield return new WaitForSeconds(initialMoveTime + offset);
 
                 // Pause at impact point
-                if (cData != null) cData.MarkAsCompleted();
+                if (tracker != null) tracker.MarkAsCompleted();
                 yield return new WaitForSeconds(postImpactPause);
 
                 // Move back to start point
@@ -889,7 +889,7 @@ namespace HexGameEngine.Characters
                 yield return new WaitForSeconds(initialMoveTime + offset);
 
                 // Pause at impact point
-                if (cData != null) cData.MarkAsCompleted();
+                if (tracker != null) tracker.MarkAsCompleted();
                 yield return new WaitForSeconds(postImpactPause);
 
                 // Move back to start point
@@ -920,7 +920,7 @@ namespace HexGameEngine.Characters
                 yield return new WaitForSeconds(initialMoveTime + offset);
 
                 // Pause at impact point
-                if (cData != null) cData.MarkAsCompleted();
+                if (tracker != null) tracker.MarkAsCompleted();
                 yield return new WaitForSeconds(postImpactPause);
 
                 // Move back to start point
@@ -952,7 +952,7 @@ namespace HexGameEngine.Characters
                 yield return new WaitForSeconds(initialMoveTime + offset);
 
                 // Pause at impact point
-                if (cData != null) cData.MarkAsCompleted();
+                if (tracker != null) tracker.MarkAsCompleted();
                 yield return new WaitForSeconds(postImpactPause);
 
                 // Move back to start point
@@ -983,7 +983,7 @@ namespace HexGameEngine.Characters
                 yield return new WaitForSeconds(initialMoveTime + offset);
 
                 // Pause at impact point
-                if (cData != null) cData.MarkAsCompleted();
+                if (tracker != null) tracker.MarkAsCompleted();
                 yield return new WaitForSeconds(postImpactPause);
 
                 // Move back to start point
@@ -994,11 +994,11 @@ namespace HexGameEngine.Characters
 
         }
         
-        public void TriggerTackleAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        public void TriggerTackleAnimation(HexCharacterView view, Vector2 targetPos, TaskTracker tracker)
         {
-            StartCoroutine(TriggerTackleAnimationCoroutine(view, targetPos, cData));
+            StartCoroutine(TriggerTackleAnimationCoroutine(view, targetPos, tracker));
         }
-        private IEnumerator TriggerTackleAnimationCoroutine(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        private IEnumerator TriggerTackleAnimationCoroutine(HexCharacterView view, Vector2 targetPos, TaskTracker cData)
         {
             HexCharacterModel model = view.character;
             if (model == null)
@@ -1030,12 +1030,12 @@ namespace HexGameEngine.Characters
             yield return new WaitForSeconds(moveSpeedTime * 1.5f);
 
         }
-        public void TriggerOffhandPushAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        public void TriggerOffhandPushAnimation(HexCharacterView view, Vector2 targetPos, TaskTracker tracker)
         {
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
-            StartCoroutine(TriggerOffhandPushAnimationCoroutine(view, targetPos, cData));
+            StartCoroutine(TriggerOffhandPushAnimationCoroutine(view, targetPos, tracker));
         }
-        private IEnumerator TriggerOffhandPushAnimationCoroutine(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        private IEnumerator TriggerOffhandPushAnimationCoroutine(HexCharacterView view, Vector2 targetPos, TaskTracker cData)
         {
             HexCharacterModel model = view.character;
             if (model == null)
@@ -1076,12 +1076,12 @@ namespace HexGameEngine.Characters
             // Move back to start point
             view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
         }
-        public void TriggerOffhandThrowNetAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        public void TriggerOffhandThrowNetAnimation(HexCharacterView view, Vector2 targetPos, TaskTracker cData)
         {
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             StartCoroutine(TriggerOffhandThrowNetAnimationCoroutine(view, targetPos, cData));
         }
-        private IEnumerator TriggerOffhandThrowNetAnimationCoroutine(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        private IEnumerator TriggerOffhandThrowNetAnimationCoroutine(HexCharacterView view, Vector2 targetPos, TaskTracker cData)
         {
             HexCharacterModel model = view.character;
             if (model == null)
@@ -1103,12 +1103,12 @@ namespace HexGameEngine.Characters
             AudioManager.Instance.PlaySoundPooled(Sound.Weapon_Axe_1H_Swing);
             if (cData != null) cData.MarkAsCompleted();
         }
-        public void TriggerShieldBashAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        public void TriggerShieldBashAnimation(HexCharacterView view, Vector2 targetPos, TaskTracker cData)
         {
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             StartCoroutine(TriggerShieldBashAnimationCoroutine(view, targetPos, cData));
         }
-        private IEnumerator TriggerShieldBashAnimationCoroutine(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        private IEnumerator TriggerShieldBashAnimationCoroutine(HexCharacterView view, Vector2 targetPos, TaskTracker cData)
         {
             HexCharacterModel model = view.character;
             if (model == null)
@@ -1150,11 +1150,11 @@ namespace HexGameEngine.Characters
             view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
 
         }
-        public void PlayShootCrossbowAnimation(HexCharacterView view, ItemData weaponUsed, CoroutineData cData)
+        public void PlayShootCrossbowAnimation(HexCharacterView view, ItemData weaponUsed, TaskTracker cData)
         {
             StartCoroutine(PlayShootCrossbowAnimationCoroutine(view, weaponUsed, cData));
         }
-        private IEnumerator PlayShootCrossbowAnimationCoroutine(HexCharacterView view, ItemData weaponUsed, CoroutineData cData)
+        private IEnumerator PlayShootCrossbowAnimationCoroutine(HexCharacterView view, ItemData weaponUsed, TaskTracker cData)
         {
             float frameToMilliseconds = 0.016667f;
             float shootFrame = 35f * frameToMilliseconds;
@@ -1167,11 +1167,11 @@ namespace HexGameEngine.Characters
             AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
             if (cData != null) cData.MarkAsCompleted();
         }
-        public void PlayShootBowAnimation(HexCharacterView view, ItemData weaponUsed, CoroutineData cData)
+        public void PlayShootBowAnimation(HexCharacterView view, ItemData weaponUsed, TaskTracker cData)
         {
             StartCoroutine(PlayShootBowAnimationCoroutine(view, weaponUsed, cData));
         }
-        private IEnumerator PlayShootBowAnimationCoroutine(HexCharacterView view, ItemData weaponUsed, CoroutineData cData)
+        private IEnumerator PlayShootBowAnimationCoroutine(HexCharacterView view, ItemData weaponUsed, TaskTracker cData)
         {
             float frameToMilliseconds = 0.016667f;
             float shootFrame = 35f * frameToMilliseconds;
@@ -1185,12 +1185,12 @@ namespace HexGameEngine.Characters
             AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
             if (cData != null) cData.MarkAsCompleted();
         }
-        public void TriggerKnockedBackIntoObstructionAnimation(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        public void TriggerKnockedBackIntoObstructionAnimation(HexCharacterView view, Vector2 targetPos, TaskTracker cData)
         {
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             StartCoroutine(TriggerKnockedBackIntoObstructionAnimationCoroutine(view, targetPos, cData));
         }
-        private IEnumerator TriggerKnockedBackIntoObstructionAnimationCoroutine(HexCharacterView view, Vector2 targetPos, CoroutineData cData)
+        private IEnumerator TriggerKnockedBackIntoObstructionAnimationCoroutine(HexCharacterView view, Vector2 targetPos, TaskTracker cData)
         {
             HexCharacterModel model = view.character;
             if (model == null)
@@ -1224,11 +1224,11 @@ namespace HexGameEngine.Characters
 
         }
 
-        public void TriggerShootMagicHandGestureAnimation(HexCharacterView view, CoroutineData cData)
+        public void TriggerShootMagicHandGestureAnimation(HexCharacterView view, TaskTracker cData)
         {
             StartCoroutine(TriggerShootMagicHandGestureAnimationCoroutine(view, cData));
         }
-        private IEnumerator TriggerShootMagicHandGestureAnimationCoroutine(HexCharacterView view, CoroutineData cData)
+        private IEnumerator TriggerShootMagicHandGestureAnimationCoroutine(HexCharacterView view, TaskTracker cData)
         {
             if (view == null)
             {
@@ -1252,13 +1252,54 @@ namespace HexGameEngine.Characters
             cData.MarkAsCompleted();
 
         }
-        public void TriggerAoeMeleeAttackAnimation(HexCharacterView view, ItemData weaponUsed)
+        public void TriggerAoeMeleeAttackAnimation(HexCharacterView view, ItemData weaponUsed, TaskTracker cData)
         {
-            if (view == null) return;
+            StartCoroutine(TriggerAoeMeleeAttackAnimationCoroutine(view, weaponUsed, cData));
+        }
+        public IEnumerator TriggerAoeMeleeAttackAnimationCoroutine(HexCharacterView view, ItemData weaponUsed, TaskTracker cData)
+        {
+            if (view == null)
+            {
+                if (cData != null) cData.MarkAsCompleted();
+                yield break;
+            }
+
+            Ease moveTowardsEase = Ease.InExpo;
+            Ease moveBackEase = Ease.OutSine;
             string animationString = DetermineAoeWeaponAttackAnimationString(weaponUsed);
             view.CurrentAnimation = animationString;
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+
+            // 60 sample rate
+            float offset = -0.04f;
+            float frameToMilliseconds = 0.016667f;
+            float pauseTimeBeforeInitialMove = 8f * frameToMilliseconds;
+            float initialMoveTime = 12f * frameToMilliseconds;
+            float postImpactPause = 30f * frameToMilliseconds;
+            float moveBackTime = 30f * frameToMilliseconds;
+            view.CurrentAnimation = animationString;
+
+            // Start attack animation
             view.ucmAnimator.SetTrigger(animationString);
-            AudioManager.Instance.StopSound(Sound.Character_Footsteps);    
+            yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
+
+            // Trigger SFX weapon swing
+            if (weaponUsed != null) AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
+
+            // Move a bit foward
+            Vector2 startPos = view.WorldPosition;
+            float xMod = 0.75f;
+            if (view.character.currentFacing == Facing.Left) xMod = -xMod;
+            Vector2 forwardPos = new Vector2(startPos.x + xMod, startPos.y);
+            view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(moveTowardsEase);
+            yield return new WaitForSeconds(initialMoveTime + offset);
+
+            // Pause at impact point
+            if (cData != null) cData.MarkAsCompleted();
+            yield return new WaitForSeconds(postImpactPause);
+
+            // Move back to start point
+            view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
         }
         public void PlayChargeAnimation(HexCharacterView view)
         {
@@ -1716,8 +1757,9 @@ namespace HexGameEngine.Characters
             {
                 // Disable and hide player combat UI
                 CombatUIController.Instance.SetInteractability(false);
-                CoroutineData fadeOutEvent = new CoroutineData();
-                VisualEventManager.Instance.CreateVisualEvent(() => CombatUIController.Instance.HideViewsOnTurnEnd(fadeOutEvent), fadeOutEvent);
+                TaskTracker fadeOutEvent = new TaskTracker();
+                VisualEventManager.Instance.CreateVisualEvent(() => 
+                    CombatUIController.Instance.HideViewsOnTurnEnd(fadeOutEvent)).SetCoroutineData(fadeOutEvent);
             }
 
             if (!character.hasRequestedTurnDelay)
@@ -2206,7 +2248,7 @@ namespace HexGameEngine.Characters
         // UI Visual Events
         #region
 
-        public void FadeOutCharacterWorldCanvas(HexCharacterView view, CoroutineData cData, float fadeSpeed = 1f, float endAlpha = 0f)
+        public void FadeOutCharacterWorldCanvas(HexCharacterView view, TaskTracker cData, float fadeSpeed = 1f, float endAlpha = 0f)
         {
             if (view == null)
             {
@@ -2226,7 +2268,7 @@ namespace HexGameEngine.Characters
                 if (cData != null) cData.MarkAsCompleted();
             });
         }       
-        public void FadeInCharacterWorldCanvas(HexCharacterView view, CoroutineData cData = null, float fadeSpeed = 1f)
+        public void FadeInCharacterWorldCanvas(HexCharacterView view, TaskTracker cData = null, float fadeSpeed = 1f)
         {
             if (view == null)
             {
@@ -2569,12 +2611,12 @@ namespace HexGameEngine.Characters
 
         // Move Character Visual Events
         #region
-        public void MoveEntityToNodeCentre(HexCharacterView view, LevelNode node, CoroutineData data, Action onCompleteCallback = null, float startDelay = 0.25f)
+        public void MoveEntityToNodeCentre(HexCharacterView view, LevelNode node, TaskTracker data, Action onCompleteCallback = null, float startDelay = 0.25f)
         {
             Debug.Log("CharacterEntityController.MoveEntityToNodeCentre() called...");
             StartCoroutine(MoveEntityToNodeCentreCoroutine(view, node, data, onCompleteCallback, startDelay));
         }
-        private IEnumerator MoveEntityToNodeCentreCoroutine(HexCharacterView view, LevelNode node, CoroutineData cData, Action onCompleteCallback, float startDelay)
+        private IEnumerator MoveEntityToNodeCentreCoroutine(HexCharacterView view, LevelNode node, TaskTracker cData, Action onCompleteCallback, float startDelay)
         {
             // Brief yield here (incase melee attack anim played and character hasn't returned to attack pos )
             yield return new WaitForSeconds(startDelay);
@@ -2625,17 +2667,17 @@ namespace HexGameEngine.Characters
                 entity.hexCharacterView.ucmMovementParent.transform.position = LevelController.Instance.EnemyOffScreenNode.transform.position;
             
         }
-        public void MoveAllCharactersToStartingNodes(CoroutineData data)
+        public void MoveAllCharactersToStartingNodes(TaskTracker data)
         {
             Debug.Log("HexCharacterController.MoveAllCharactersToStartingNodes() called...");
             StartCoroutine(MoveAllCharactersToStartingNodesCoroutine(data));
         }
-        private IEnumerator MoveAllCharactersToStartingNodesCoroutine(CoroutineData data)
+        private IEnumerator MoveAllCharactersToStartingNodesCoroutine(TaskTracker data)
         {
-            List<CoroutineData> events = new List<CoroutineData>();
+            List<TaskTracker> events = new List<TaskTracker>();
             foreach (HexCharacterModel character in AllCharacters)
             {
-                CoroutineData cData = new CoroutineData();
+                TaskTracker cData = new TaskTracker();
                 events.Add(cData);
                 MoveEntityToNodeCentre(character.hexCharacterView, character.currentTile, cData, () => { events.Remove(cData); });
             }
@@ -2644,16 +2686,16 @@ namespace HexGameEngine.Characters
 
             if (data != null) data.MarkAsCompleted();
         }
-        public void MoveCharactersToOffScreenRight(List<HexCharacterModel> characters, CoroutineData cData)
+        public void MoveCharactersToOffScreenRight(List<HexCharacterModel> characters, TaskTracker cData)
         {
             StartCoroutine(MoveCharactersToOffScreenRightCoroutine(characters, cData));
         }
-        private IEnumerator MoveCharactersToOffScreenRightCoroutine(List<HexCharacterModel> characters, CoroutineData cData)
+        private IEnumerator MoveCharactersToOffScreenRightCoroutine(List<HexCharacterModel> characters, TaskTracker cData)
         {
-            List<CoroutineData> events = new List<CoroutineData>();
+            List<TaskTracker> events = new List<TaskTracker>();
             foreach (HexCharacterModel character in characters)
             {
-                CoroutineData cd = new CoroutineData();
+                TaskTracker cd = new TaskTracker();
                 events.Add(cd);
                 MoveEntityToNodeCentre(character.hexCharacterView, LevelController.Instance.EnemyOffScreenNode, cd, () => { events.Remove(cd); });
             }
@@ -2865,7 +2907,7 @@ namespace HexGameEngine.Characters
 
             return ret;
         }
-        public string DetermineAoeWeaponAttackAnimationString(ItemData weaponUsed)
+        private string DetermineAoeWeaponAttackAnimationString(ItemData weaponUsed)
         {
             string ret = AnimationEventController.MAIN_HAND_MELEE_ATTACK_CLEAVE;
 

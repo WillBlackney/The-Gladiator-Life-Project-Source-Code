@@ -1240,9 +1240,9 @@ namespace HexGameEngine.Abilities
                     // Knock back and forth towards obstruction
                     if(obstruction != null)
                     {
-                        CoroutineData cData = new CoroutineData();
+                        TaskTracker tracker = new TaskTracker();
                         VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerKnockedBackIntoObstructionAnimation
-                            (target.hexCharacterView, obstruction.WorldPosition, cData), cData);
+                            (target.hexCharacterView, obstruction.WorldPosition, tracker)).SetCoroutineData(tracker);
 
                     }
                     PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Stunned, 1, true, 0.5f);
