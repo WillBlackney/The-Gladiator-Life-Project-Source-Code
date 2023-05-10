@@ -1502,8 +1502,9 @@ namespace HexGameEngine.Combat
            
             // Destroy characters activation window and update other window positions
             HexCharacterModel currentlyActivatedEntity = TurnController.Instance.EntityActivated;
+            var cachedOrder = TurnController.Instance.ActivationOrder.ToList();
             VisualEventManager.Instance.CreateVisualEvent(() => 
-                TurnController.Instance.OnCharacterKilledVisualEvent(window, currentlyActivatedEntity, null), parentEvent).SetEndDelay(1f);
+                TurnController.Instance.OnCharacterKilledVisualEvent(window, currentlyActivatedEntity, cachedOrder), parentEvent).SetEndDelay(1f);
 
             // Roll for death or knock down on player characters
             if(character.controller == Controller.Player)

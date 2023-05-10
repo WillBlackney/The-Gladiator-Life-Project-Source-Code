@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
@@ -381,6 +382,9 @@ namespace HexGameEngine.HexTiles
         }
         public void HandleMoveDownPath(HexCharacterModel character, Path path, bool payMovementCosts = true)
         {
+            LevelNode hex1 = LevelNode.CurrentActivationNode;
+            if(hex1 != null) VisualEventManager.Instance.CreateVisualEvent(() => hex1.HideActivationMarker());
+
             if (payMovementCosts)
             {
                 // Pay energy + fatigue costs
@@ -389,14 +393,14 @@ namespace HexGameEngine.HexTiles
             }
 
             // Play movement animation
-            VisualEventManager.Instance.CreateVisualEvent(()=> HexCharacterController.Instance.PlayMoveAnimation(character.hexCharacterView));
+            VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayMoveAnimation(character.hexCharacterView));
 
             // Move to first hex           
             HandleMoveToHex(character, path.HexsOnPath[0]);
 
             if (path.HexsOnPath.Count > 1)
             {
-                for(int i = 0; i < path.HexsOnPath.Count - 1; i++)
+                for (int i = 0; i < path.HexsOnPath.Count - 1; i++)
                 {
                     HandleMoveToHex(character, path.HexsOnPath[i + 1]);
                 }
@@ -424,12 +428,19 @@ namespace HexGameEngine.HexTiles
             }
 
             // Finished movement, go idle animation
-            VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayIdleAnimation(character.hexCharacterView));
+            LevelNode hex2 = character.currentTile;
+            VisualEventManager.Instance.CreateVisualEvent(() =>
+            {
+                if (hex2 != null) hex2.ShowActivationMarker();
+                HexCharacterController.Instance.PlayIdleAnimation(character.hexCharacterView);
+            });        
 
         }
         public void ChargeDownPath(HexCharacterModel character, List<LevelNode> path)
         {
-            // Play movement animation
+            // Play movement animationLevelNode hex1 = LevelNode.CurrentActivationNode;
+            LevelNode hex1 = LevelNode.CurrentActivationNode;
+            if (hex1 != null) VisualEventManager.Instance.CreateVisualEvent(() => hex1.HideActivationMarker());
             VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeAnimation(character.hexCharacterView));
 
             // Move to first hex
@@ -470,10 +481,23 @@ namespace HexGameEngine.HexTiles
             // Finished movement, go idle animation
             if(character.hexCharacterView != null)
             {
-                if(character.hexCharacterView.CurrentAnimation == AnimationEventController.CHARGE)
-                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeEndAnimation(character.hexCharacterView));
+                LevelNode hex2 = character.currentTile;
+                if (character.hexCharacterView.CurrentAnimation == AnimationEventController.CHARGE)
+                {
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    {
+                        if (hex2 != null) hex2.ShowActivationMarker();
+                        HexCharacterController.Instance.PlayChargeEndAnimation(character.hexCharacterView);
+                    });
+                }
                 else
-                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayIdleAnimation(character.hexCharacterView));
+                {
+                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    {
+                        if (hex2 != null) hex2.ShowActivationMarker();
+                        HexCharacterController.Instance.PlayIdleAnimation(character.hexCharacterView);
+                    });
+                }                   
             }
         }
         private void HandleMoveToHex(HexCharacterModel character, LevelNode destination, float moveSpeed = 5f, bool runAnimation = true)
@@ -599,40 +623,6 @@ namespace HexGameEngine.HexTiles
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Flight, -1);
 
         }
-        public void DoCharacterMoveVisualEvent(HexCharacterView view, LevelNode hex, TaskTracker cData, float moveSpeed = 5f, Action onCompleteCallback = null)
-        {
-            StartCoroutine(DoCharacterMoveVisualEventCoroutine(view, hex, cData, moveSpeed, onCompleteCallback));
-        }
-        private IEnumerator DoCharacterMoveVisualEventCoroutine(HexCharacterView view, LevelNode hex, TaskTracker cData, float moveSpeed = 5f, Action onCompleteCallback = null)
-        {
-            // Set up
-            bool reachedDestination = false;
-            Vector3 destination = new Vector3(hex.WorldPosition.x, hex.WorldPosition.y, 0);
-
-            // Move
-            while (reachedDestination == false)
-            {
-                view.mainMovementParent.transform.position = Vector2.MoveTowards(view.WorldPosition, destination, moveSpeed * Time.deltaTime);
-
-                if (view.WorldPosition == destination)
-                {
-                    Debug.Log("CharacterEntityController.MoveEntityToNodeCentreCoroutine() detected destination was reached...");
-                    reachedDestination = true;
-                }
-                yield return null;
-            }
-
-            // Resolve event
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }
-
-            if (onCompleteCallback != null)
-            {
-                onCompleteCallback.Invoke();
-            }
-        }
         public void DoCharacterMoveVisualEventDOTWEEN(HexCharacterView view, LevelNode hex, TaskTracker cData, float moveSpeed = 5f, Ease ease = Ease.Linear, Action onCompleteCallback = null)
         {
             // Set up
@@ -641,15 +631,9 @@ namespace HexGameEngine.HexTiles
             view.mainMovementParent.transform.DOMove(destination, finalMoveSpeed).SetEase(ease).OnComplete(() =>
             {
                 // Resolve event
-                if (cData != null)
-                {
-                    cData.MarkAsCompleted();
-                }
-
-                if (onCompleteCallback != null)
-                {
-                    onCompleteCallback.Invoke();
-                }
+                if (cData != null) cData.MarkAsCompleted();
+                if (onCompleteCallback != null) onCompleteCallback.Invoke();
+                
             });            
         }
         private void SnapCharacterViewToHex(HexCharacterView view, LevelNode hex)
@@ -689,11 +673,13 @@ namespace HexGameEngine.HexTiles
             // Create teleport VFX at character's destination
 
             // Make character model + world space UI reappear
+            bool updateActivationHex = TurnController.Instance.EntityActivated == character;
             VisualEventManager.Instance.CreateVisualEvent(() => {
                 VisualEffectManager.Instance.CreateTeleportEffect(view.WorldPosition);
                 HexCharacterController.Instance.FadeInCharacterWorldCanvas(view, null, 0.2f);
                 HexCharacterController.Instance.FadeInCharacterModel(view.ucm, 0.2f);
                 HexCharacterController.Instance.FadeInCharacterShadow(view, 0.2f);
+                if (updateActivationHex) character.currentTile.ShowActivationMarker();
             });
 
             // Handle stress event: Enemy moved into my melee range + moved into back arc (on destination only)
@@ -764,8 +750,9 @@ namespace HexGameEngine.HexTiles
 
                 // Snap characters to new positions visually
                 VisualEventManager.Instance.CreateVisualEvent(() => SnapCharacterViewToHex(viewA, aDestination));
-                VisualEventManager.Instance.CreateVisualEvent(() => SnapCharacterViewToHex(viewB, bDestination
-                    ));
+                VisualEventManager.Instance.CreateVisualEvent(() => SnapCharacterViewToHex(viewB, bDestination));
+                LevelNode activationHex = TurnController.Instance.EntityActivated.currentTile;
+                VisualEventManager.Instance.CreateVisualEvent(() => activationHex.ShowActivationMarker());
 
                 // Create teleport VFX at character's destination, fade back in views
                 VisualEventManager.Instance.CreateVisualEvent(() => {
@@ -790,6 +777,9 @@ namespace HexGameEngine.HexTiles
                 (viewB, bDestination, null));
 
                 VisualEventManager.Instance.InsertTimeDelayInQueue(0.25f);
+
+                LevelNode activationHex = TurnController.Instance.EntityActivated.currentTile;
+                VisualEventManager.Instance.CreateVisualEvent(() => activationHex.ShowActivationMarker());
             }
            
 

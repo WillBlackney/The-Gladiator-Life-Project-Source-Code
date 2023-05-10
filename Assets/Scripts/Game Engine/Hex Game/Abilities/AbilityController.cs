@@ -1302,9 +1302,10 @@ namespace HexGameEngine.Abilities
 
                     // Update all window slot positions + activation pointer arrow
                     HexCharacterModel entityActivated = TurnController.Instance.EntityActivated;
+                    var cachedOrder = TurnController.Instance.ActivationOrder.ToList();
                     VisualEventManager.Instance.CreateVisualEvent(() =>
                     {
-                        TurnController.Instance.UpdateWindowPositions();
+                        TurnController.Instance.UpdateWindowPositions(cachedOrder);
                         TurnController.Instance.MoveActivationArrowTowardsEntityWindow(entityActivated);
                         HexCharacterController.Instance.FadeInCharacterWorldCanvas(view, null, abilityEffect.uiFadeInSpeed);
                         CharacterModeller.FadeInCharacterModel(view.ucm, abilityEffect.modelFadeInSpeed);

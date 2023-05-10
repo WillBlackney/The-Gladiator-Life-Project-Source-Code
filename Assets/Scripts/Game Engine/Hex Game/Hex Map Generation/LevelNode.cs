@@ -1,5 +1,6 @@
 ﻿using HexGameEngine.Abilities;
 using HexGameEngine.Characters;
+using Sirenix.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace HexGameEngine.HexTiles
         [Header("Marker Components")]
         [SerializeField] GameObject inRangeMarkerNeutral;
         [SerializeField] GameObject inRangeMarkerEnemy;
+        [SerializeField] GameObject activationMarker;
         [SerializeField] GameObject moveMarker;
 
         [Header("Obstruction Components")]
@@ -220,6 +222,22 @@ namespace HexGameEngine.HexTiles
         {
             inRangeMarkerNeutral.SetActive(false);
             inRangeMarkerEnemy.SetActive(false);
+        }
+        public void ShowActivationMarker()
+        {
+            activationMarker.SetActive(true);
+            LevelController.Instance.AllLevelNodes.ForEach(x => x.HideActivationMarker());
+            CurrentActivationNode = this;
+        }
+        public void HideActivationMarker()
+        {
+            activationMarker.SetActive(false);
+            CurrentActivationNode = null;
+        }
+
+        public static LevelNode CurrentActivationNode
+        {
+            get; private set;
         }
 
         #endregion

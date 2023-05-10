@@ -1449,15 +1449,16 @@ namespace HexGameEngine.Characters
         }
         public async void CharacterOnTurnStart(HexCharacterModel character)
         {
-            Debug.Log("HexCharacterController.CharacterOnTurnStart() called for " + character.myName);
-
-            // Brief delay on start 
-            VisualEventManager.Instance.InsertTimeDelayInQueue(0.25f);            
+            Debug.Log("HexCharacterController.CharacterOnTurnStart() called for " + character.myName);         
 
             // Set Phase
             SetCharacterActivationPhase(character, ActivationPhase.StartPhase);
             LevelNode hex = character.currentTile;
             HexCharacterView view = character.hexCharacterView;
+            VisualEventManager.Instance.CreateVisualEvent(() => hex.ShowActivationMarker());
+
+            // Brief delay on start 
+            VisualEventManager.Instance.InsertTimeDelayInQueue(0.25f);
 
             if (character.hasRequestedTurnDelay) character.hasMadeDelayedTurn = true;
 
@@ -1733,10 +1734,11 @@ namespace HexGameEngine.Characters
             // Cache refs for visual events
             LevelNode hex = character.currentTile;
             HexCharacterView view = character.hexCharacterView;
+            if (hex != null) VisualEventManager.Instance.CreateVisualEvent(() => hex.HideActivationMarker());
 
             // TO DO: start new hide UI logic here
             // Disable info windows
-            if(character.controller == Controller.Player)
+            if (character.controller == Controller.Player)
             {
                 AbilityPopupController.Instance.HidePanel();
                 AbilityController.Instance.HideHitChancePopup();

@@ -41,7 +41,7 @@ MonoBehaviour:
     maxHealth: 0
     apRecovery: 100
     apMaximum: 100
-    initiative: 100
+    initiative: 200
     fatigueRecovery: 8
     criticalChance: 100
     criticalModifier: 50
@@ -56,11 +56,7 @@ MonoBehaviour:
     injuryResistance: 0
     deathResistance: 25
   abilityBook:
-    activeAbilities:
-    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
-    - {fileID: 11400000, guid: 859b76629648b014d8f13ba424ded82b, type: 2}
-    - {fileID: 11400000, guid: ae446eb81b7855c4e8884492ebc6655a, type: 2}
-    - {fileID: 11400000, guid: a8709026bde6ab046a0b8aaf6d8b9785, type: 2}
+    activeAbilities: []
   serializedPassiveManager:
     perks: []
   modelParts:
@@ -71,7 +67,7 @@ MonoBehaviour:
   - Undead_Right_Arm
   - Undead_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 6a78f7a4320bb5f4889c39e138776a4f, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 623ec2e1eab053346b93e30e2d91c862, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}

@@ -239,7 +239,8 @@ namespace HexGameEngine.TurnLogic
             VisualEventManager.Instance.CreateVisualEvent(() => PlayActivationRollSequence(characters2, rollsCoroutine)).SetCoroutineData(rollsCoroutine);
 
             // Move windows to new positions
-            VisualEventManager.Instance.CreateVisualEvent(() => UpdateWindowPositions()).SetEndDelay(1);
+            var cachedOrder = ActivationOrder.ToList();
+            VisualEventManager.Instance.CreateVisualEvent(() => UpdateWindowPositions(cachedOrder)).SetEndDelay(1);
 
             // Play turn change notification
             TaskTracker turnNotificationCoroutine = new TaskTracker();
@@ -319,7 +320,8 @@ namespace HexGameEngine.TurnLogic
         {
             activationOrder.Remove(character);
             activationOrder.Add(character);
-            VisualEventManager.Instance.CreateVisualEvent(() => UpdateWindowPositions());
+            var cachedOrder = ActivationOrder.ToList();
+            VisualEventManager.Instance.CreateVisualEvent(() => UpdateWindowPositions(cachedOrder));
         }
         #endregion
 
@@ -366,7 +368,8 @@ namespace HexGameEngine.TurnLogic
 
                     // Move this character to the end of the turn order.
                     HandleMoveCharacterToEndOfTurnOrder(EntityActivated);
-                    UpdateWindowPositions();
+                    var cachedOrder = ActivationOrder.ToList();
+                    VisualEventManager.Instance.CreateVisualEvent(()=> UpdateWindowPositions(cachedOrder));
 
                     // Trigger character on activation end sequence and events
                     HexCharacterController.Instance.CharacterOnTurnEnd(EntityActivated, true);
@@ -433,7 +436,8 @@ namespace HexGameEngine.TurnLogic
                 if (nextEntityToActivate != null)
                 {
                     // Update all window slot positions + activation pointer arrow
-                    VisualEventManager.Instance.CreateVisualEvent(() => UpdateWindowPositions());
+                    var cachedOrder = ActivationOrder.ToList();
+                    VisualEventManager.Instance.CreateVisualEvent(() => UpdateWindowPositions(cachedOrder));
                     VisualEventManager.Instance.CreateVisualEvent(() => MoveActivationArrowTowardsEntityWindow(nextEntityToActivate));
 
                     // Activate!
@@ -558,7 +562,7 @@ namespace HexGameEngine.TurnLogic
 
         // Destroy activation window visual events
         #region
-        private void FadeOutAndDestroyActivationWindow(TurnWindow window, TaskTracker tracker)
+        private void FadeOutAndDestroyActivationWindow(TurnWindow window)
         {
             GameObject slotDestroyed = panelSlots[panelSlots.Count - 1];
             if (activationOrder.Contains(window.myCharacter)) RemoveEntityFromActivationOrder(window.myCharacter);            
@@ -568,61 +572,39 @@ namespace HexGameEngine.TurnLogic
             Destroy(slotDestroyed);
 
             // Destroy window GO
-            DestroyActivationWindow(window);
-
-            // Resolve
-            if (tracker != null) tracker.MarkAsCompleted();            
-        }
-        private IEnumerator FadeOutAndDestroyActivationWindowCoroutine(TurnWindow window, TaskTracker tracker)
-        {
-            yield return null;
-            /*
-            while (window.myCanvasGroup.alpha > 0)
-            {
-                window.myCanvasGroup.alpha -= 0.05f;
-                if (window.myCanvasGroup.alpha == 0)
-                {
-                    // Make sure the slot is found and destroyed if it exists still
-                    GameObject slotDestroyed = panelSlots[panelSlots.Count - 1];
-                    if (activationOrder.Contains(window.myCharacter))
-                    {
-                        RemoveEntityFromActivationOrder(window.myCharacter);
-                    }
-
-                    // Remove slot from list and destroy
-                    panelSlots.Remove(slotDestroyed);
-                    Destroy(slotDestroyed);
-                }
-                yield return new WaitForEndOfFrame();
-            }
-
-            // Destroy window GO
-            DestroyActivationWindow(window);
-
-            // Resolve
-            if (tracker != null)
-            {
-                tracker.MarkAsCompleted();
-            }*/
-
+            DestroyActivationWindow(window);         
         }
         private void DestroyActivationWindow(TurnWindow window)
         {
             Destroy(window.gameObject);
         }
-        public void OnCharacterKilledVisualEvent(TurnWindow window, HexCharacterModel currentlyActivated, TaskTracker cData)
+        public void OnCharacterKilledVisualEvent(TurnWindow window, HexCharacterModel currentlyActivated, List<HexCharacterModel> cachedOrder)
         {
             // Need to cache the currently activated entity in a new variable called 'currentlyActivated'.
             // this makes sure the arrow points to the window of the character that is VISUALLY activated,
             // but not activated in the logic side.
-            StartCoroutine(OnCharacterKilledVisualEventCoroutine(window, currentlyActivated, cData));
+            //StartCoroutine(OnCharacterKilledVisualEventCoroutine(window, currentlyActivated, cData));
+
+            FadeOutAndDestroyActivationWindow(window);
+            UpdateWindowPositions(cachedOrder);
+
+            // If the entity that just died wasn't killed during its activation, do this
+            if (cachedOrder.Contains(currentlyActivated))
+                MoveActivationArrowTowardsEntityWindow(cachedOrder[cachedOrder.IndexOf(currentlyActivated)]);
+
+            else if (cachedOrder.Contains(EntityActivated))
+                MoveActivationArrowTowardsEntityWindow(cachedOrder[cachedOrder.IndexOf(EntityActivated)]);
+
         }
         private IEnumerator OnCharacterKilledVisualEventCoroutine(TurnWindow window, HexCharacterModel currentlyActivated, TaskTracker cData)
         {
+            yield return null;
+            /*
             FadeOutAndDestroyActivationWindow(window, null);
             //yield return new WaitForSeconds(0.5f);
             yield return null;
-            UpdateWindowPositions();
+            var cachedOrder = ActivationOrder.ToList();
+            UpdateWindowPositions(cachedOrder);
 
             // If the entity that just died wasn't killed during its activation, do this
             if (activationOrder.Contains(currentlyActivated))
@@ -638,21 +620,22 @@ namespace HexGameEngine.TurnLogic
             if (cData != null)
             {
                 cData.MarkAsCompleted();
-            }
+            }*/
 
         }
         #endregion
 
         // Update window position visual events
         #region
-        public void UpdateWindowPositions()
+        public void UpdateWindowPositions(List<HexCharacterModel> cachedOrder = null)
         {
-            activationOrder.ForEach(x => MoveWindowTowardsSlotPosition(x));      
+            if (cachedOrder == null) cachedOrder = activationOrder;
+            cachedOrder.ForEach(x => MoveWindowTowardsSlotPosition(x, cachedOrder));      
         }
-        private void MoveWindowTowardsSlotPosition(HexCharacterModel character)
+        private void MoveWindowTowardsSlotPosition(HexCharacterModel character, List<HexCharacterModel> cachedActivationOrder)
         {
             // Get panel slot
-            GameObject panelSlot = panelSlots[activationOrder.IndexOf(character)];
+            GameObject panelSlot = panelSlots[cachedActivationOrder.IndexOf(character)];
 
             // Cache window
             TurnWindow window = character.hexCharacterView.myActivationWindow;
