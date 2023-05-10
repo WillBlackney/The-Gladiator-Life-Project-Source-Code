@@ -17,6 +17,7 @@ using System.Linq;
 using HexGameEngine.Player;
 using HexGameEngine.Audio;
 using static UnityEngine.GraphicsBuffer;
+using DG.Tweening;
 
 namespace HexGameEngine.Combat
 {
@@ -1452,14 +1453,27 @@ namespace HexGameEngine.Combat
             }, parentEvent);
 
             // Play death animation
-
-            // Normal death
+            // Randomize animation 
             int randomDeathAnim = RandomGenerator.NumberBetween(0, 1);
+
+            // Randomize final rotation
+            int randomDeathRotation = RandomGenerator.NumberBetween(1, 15);
+            if (RandomGenerator.NumberBetween(0, 1) == 1) randomDeathRotation = -randomDeathRotation;
+
+            // Randomize death position
+            float randY = RandomGenerator.NumberBetween(1, 15) / 100f;
+            float randX = RandomGenerator.NumberBetween(1, 22) / 100f;
+            if (RandomGenerator.NumberBetween(0, 1) == 0) randY = -randY;
+            if (RandomGenerator.NumberBetween(0, 1) == 0) randX = -randX;
+
             if (randomDeathAnim == 0)            
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 {
                     AudioManager.Instance.PlaySound(character.audioProfile, AudioSet.Die);
-                    HexCharacterController.Instance.PlayDeathAnimation(view);
+                    HexCharacterController.Instance.PlayDeathAnimation(view);                    
+                    Vector3 finalPos = new Vector3(view.ucmMovementParent.transform.position.x + randX, view.ucmMovementParent.transform.position.y + randY, view.ucmMovementParent.transform.position.z);
+                    view.ucmMovementParent.transform.DOMove(finalPos, 0.5f);
+                    view.ucm.transform.DORotate(new Vector3(0, 0, randomDeathRotation), 0.5f);
                     for (int i = 0; i < 2; i++)
                         VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
                 }, parentEvent).SetEndDelay(1f);
@@ -1472,7 +1486,10 @@ namespace HexGameEngine.Combat
                     AudioManager.Instance.PlaySound(character.audioProfile, AudioSet.Die);
                     VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
                     HexCharacterController.Instance.PlayDecapitateAnimation(view);
-                    for(int i = 0; i < 3; i++)
+                    Vector3 finalPos = new Vector3(view.ucmMovementParent.transform.position.x + randX, view.ucmMovementParent.transform.position.y + randY, view.ucmMovementParent.transform.position.z);
+                    view.ucmMovementParent.transform.DOMove(finalPos, 0.5f);
+                    view.ucm.transform.DORotate(new Vector3(0, 0, randomDeathRotation), 0.5f);
+                    for (int i = 0; i < 3; i++)
                         VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
                 }, parentEvent).SetEndDelay(1f);
             }

@@ -280,10 +280,9 @@ namespace HexGameEngine.UCM
         }
         public static void AutoSetSortingOrderValues(UniversalCharacterModel model)
         {
-            //int rootModelSortOrder = model.myEntityRenderer.SortingOrder;
-           // model.RootSortingGroup.sortingOrder = rootModelSortOrder;
             int headSortOrder = model.myEntityRenderer.SortingOrder + 10;
-            model.HeadSortingGroup.sortingOrder = model.myEntityRenderer.SortingOrder + 10;
+            if (model.HeadSortingGroup != null) model.HeadSortingGroup.sortingOrder = headSortOrder;
+            if (model.RootSortingGroup != null) model.RootSortingGroup.sortingOrder = model.myEntityRenderer.SortingOrder;
 
             foreach (SpriteMask mask in model.AllHeadWearSpriteMasks)
             {

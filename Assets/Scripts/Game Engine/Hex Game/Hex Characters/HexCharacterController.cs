@@ -1378,7 +1378,7 @@ namespace HexGameEngine.Characters
             if (view == null) return;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             string decapitateAnim = "DECAPITATE_";
-            decapitateAnim = decapitateAnim + RandomGenerator.NumberBetween(1, 1).ToString();
+            decapitateAnim = decapitateAnim + RandomGenerator.NumberBetween(1, 2).ToString();
             view.ucmAnimator.SetTrigger(decapitateAnim);
             view.CurrentAnimation = decapitateAnim;
         }
