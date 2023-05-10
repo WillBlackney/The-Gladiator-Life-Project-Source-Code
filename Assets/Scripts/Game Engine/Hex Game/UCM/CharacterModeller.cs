@@ -282,7 +282,21 @@ namespace HexGameEngine.UCM
         {
             int headSortOrder = model.myEntityRenderer.SortingOrder + 10;
             if (model.HeadSortingGroup != null) model.HeadSortingGroup.sortingOrder = headSortOrder;
-            if (model.RootSortingGroup != null) model.RootSortingGroup.sortingOrder = model.myEntityRenderer.SortingOrder;
+            if (model.RootSortingGroup != null)
+            {
+                if (model.AllowAutoSorting)
+                {
+                    model.RootSortingGroup.enabled = true;
+                    model.HeadSortingGroup.enabled = true;
+                }
+
+                else
+                {
+                    model.RootSortingGroup.enabled = false;
+                    model.HeadSortingGroup.enabled = false;
+                }
+                model.RootSortingGroup.sortingOrder = model.myEntityRenderer.SortingOrder;
+            }
 
             foreach (SpriteMask mask in model.AllHeadWearSpriteMasks)
             {

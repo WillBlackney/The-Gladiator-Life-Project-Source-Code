@@ -1469,6 +1469,7 @@ namespace HexGameEngine.Combat
             if (randomDeathAnim == 0)            
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 {
+                    character.hexCharacterView.ucm.RootSortingGroup.sortingOrder = character.hexCharacterView.ucm.RootSortingGroup.sortingOrder - 1;
                     AudioManager.Instance.PlaySound(character.audioProfile, AudioSet.Die);
                     HexCharacterController.Instance.PlayDeathAnimation(view);                    
                     Vector3 finalPos = new Vector3(view.ucmMovementParent.transform.position.x + randX, view.ucmMovementParent.transform.position.y + randY, view.ucmMovementParent.transform.position.z);
@@ -1483,6 +1484,7 @@ namespace HexGameEngine.Combat
             {
                 VisualEventManager.Instance.CreateVisualEvent(() =>
                 {
+                    character.hexCharacterView.ucm.RootSortingGroup.sortingOrder = character.hexCharacterView.ucm.RootSortingGroup.sortingOrder - 1;
                     AudioManager.Instance.PlaySound(character.audioProfile, AudioSet.Die);
                     VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
                     HexCharacterController.Instance.PlayDecapitateAnimation(view);

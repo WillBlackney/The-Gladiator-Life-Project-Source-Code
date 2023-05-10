@@ -24,7 +24,11 @@ namespace CardGameEngine.UCM
         [SerializeField] GameObject headMasksParent;
         [SerializeField] GameObject[] oneHandAnimationBones;
         [SerializeField] GameObject[] twoHandAnimationBones;
+        [Tooltip("Leave this unticked if you need this UCM to be masked by masks that are not childed to this game object (e.g. scroll character roster).")]
+        [SerializeField] bool allowAutoSorting = true;
+        [ShowIf("ShowRootSorting")]
         [SerializeField] SortingGroup rootSortingGroup;
+        [ShowIf("ShowRootSorting")]
         [SerializeField] SortingGroup headSortingGroup;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]       
 
@@ -43,6 +47,7 @@ namespace CardGameEngine.UCM
         [HideInInspector] public UniversalCharacterModelElement[] allChestArmour;
         [HideInInspector] public UniversalCharacterModelElement[] allHeadArmour;
 
+        public bool AllowAutoSorting => allowAutoSorting;
         public SortingGroup RootSortingGroup => rootSortingGroup;
         public SortingGroup HeadSortingGroup => headSortingGroup;
         public UniversalCharacterModelElement[] AllModelElements 
@@ -275,6 +280,11 @@ namespace CardGameEngine.UCM
 
         
         #endregion
+
+        public bool ShowRootSorting()
+        {
+            return allowAutoSorting;
+        }
 
     }
 
