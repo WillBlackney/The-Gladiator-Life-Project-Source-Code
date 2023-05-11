@@ -8,25 +8,60 @@ namespace HexGameEngine.VisualEvents
 {
     public class StatusEffect : MonoBehaviour
     {
-        [Header("Component References")]
-        public TextMeshProUGUI statusText;
-        public CanvasGroup myCg;
-        public GameObject iconImageParent;
-        public Image iconImage;
-        public RectTransform textFitter;
+        [Header("Core Components")]
+        [SerializeField] private TextMeshProUGUI statusText;
+        [SerializeField] private CanvasGroup myCg;
+        [SerializeField] private RectTransform textFitter;
 
-        public void InitializeSetup(string statusName, Sprite sprite = null)
+        [Header("Circular Icon Components")]
+        [SerializeField] private GameObject circleIconParent;
+        [SerializeField] private Image circleIconFrame;
+        [SerializeField] private Image circleIconImage;
+
+        [Header("Square Icon Components")]
+        [SerializeField] private GameObject squareIconParent;
+        [SerializeField] private Image squareIconImage;
+
+        [Header("Sprites")]
+        [SerializeField] Sprite brownCircleFrame;
+        [SerializeField] Sprite redCircleFrame;
+        
+        public void InitializeSetup(string statusName, Sprite sprite = null, StatusFrameType frameType = StatusFrameType.None)
         {
             statusText.text = TextLogic.ReturnColoredText(statusName, TextLogic.white);
             TransformUtils.RebuildLayout(textFitter);
-            iconImageParent.SetActive(false);
+            circleIconParent.SetActive(false);
+            squareIconParent.SetActive(false);
             if (sprite != null)
             {
-                iconImageParent.SetActive(true);
-                iconImage.sprite = sprite;
-                float offset = iconImageParent.GetComponent<RectTransform>().rect.width * 0.6f;
-                float newIconX = statusText.transform.position.x - ((statusText.GetComponent<RectTransform>().rect.width * 0.016f) * 0.5f) - offset;
-                iconImageParent.transform.position = new Vector3(newIconX, iconImageParent.transform.position.y, iconImageParent.transform.position.z);
+                float textScaleLocal = 0.016f;
+                if(frameType == StatusFrameType.CircularBrown || frameType == StatusFrameType.CircularRed)
+                {
+                    circleIconParent.SetActive(true);
+                    circleIconImage.sprite = sprite;
+                    circleIconFrame.sprite = brownCircleFrame;
+                    if (frameType == StatusFrameType.CircularRed) circleIconFrame.sprite = redCircleFrame;
+                    float iconWidth = circleIconParent.GetComponent<RectTransform>().rect.width;
+                    float recenteringOffset = iconWidth * 0.5f;
+                    float iconOffset = iconWidth * 0.75f;
+                    float newIconX = statusText.transform.position.x - ((statusText.GetComponent<RectTransform>().rect.width * textScaleLocal) * 0.5f) - iconOffset + recenteringOffset;
+                    circleIconParent.transform.position = new Vector3(newIconX, circleIconParent.transform.position.y, circleIconParent.transform.position.z);
+                    statusText.transform.position = new Vector3(statusText.transform.position.x + (recenteringOffset), statusText.transform.position.y, statusText.transform.position.z);
+
+                }
+                else if(frameType == StatusFrameType.SquareBrown)
+                {
+                    squareIconParent.SetActive(true);
+                    squareIconImage.sprite = sprite;
+                    float iconWidth = squareIconParent.GetComponent<RectTransform>().rect.width;
+                    float recenteringOffset = iconWidth * 0.5f;
+                    float iconOffset = iconWidth * 0.75f;
+                    float newIconX = statusText.transform.position.x - ((statusText.GetComponent<RectTransform>().rect.width * textScaleLocal) * 0.5f) - iconOffset + recenteringOffset;
+                    squareIconParent.transform.position = new Vector3(newIconX, squareIconParent.transform.position.y, squareIconParent.transform.position.z);
+                    statusText.transform.position = new Vector3(statusText.transform.position.x + (recenteringOffset ), statusText.transform.position.y, statusText.transform.position.z);
+
+
+                }
             }
             PlayAnimation();
         }
@@ -48,5 +83,13 @@ namespace HexGameEngine.VisualEvents
             });
 
         }
+    }
+
+    public enum StatusFrameType
+    {
+        None = 0,
+        CircularBrown = 1,
+        CircularRed = 2,
+        SquareBrown = 3,
     }
 }

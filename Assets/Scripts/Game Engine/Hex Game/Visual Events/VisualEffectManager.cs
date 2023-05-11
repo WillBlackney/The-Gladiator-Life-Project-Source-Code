@@ -383,10 +383,10 @@ namespace HexGameEngine.VisualEvents
 
 
         // Status Text Effect
-        public void CreateStatusEffect(Vector3 location, string statusEffectName, Sprite iconSprite = null)
+        public void CreateStatusEffect(Vector3 location, string statusEffectName, Sprite iconSprite = null, StatusFrameType frameType = StatusFrameType.None)
         {
             GameObject damageEffect = Instantiate(StatusEffectPrefab, location, Quaternion.identity);
-            damageEffect.GetComponent<StatusEffect>().InitializeSetup(statusEffectName, iconSprite);
+            damageEffect.GetComponent<StatusEffect>().InitializeSetup(statusEffectName, iconSprite, frameType);
         }
 
         // General Debuff

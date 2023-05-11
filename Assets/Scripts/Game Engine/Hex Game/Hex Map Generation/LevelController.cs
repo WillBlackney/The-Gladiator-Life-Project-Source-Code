@@ -382,9 +382,6 @@ namespace HexGameEngine.HexTiles
         }
         public void HandleMoveDownPath(HexCharacterModel character, Path path, bool payMovementCosts = true)
         {
-            LevelNode hex1 = LevelNode.CurrentActivationNode;
-            if(hex1 != null) VisualEventManager.Instance.CreateVisualEvent(() => hex1.HideActivationMarker());
-
             if (payMovementCosts)
             {
                 // Pay energy + fatigue costs
@@ -392,7 +389,8 @@ namespace HexGameEngine.HexTiles
                 HexCharacterController.Instance.ModifyCurrentFatigue(character, Pathfinder.GetFatigueCostOfPath(character, character.currentTile, path.HexsOnPath));
             }
 
-            // Play movement animation
+            // Play movement animation, hide activation node marker before moving
+            VisualEventManager.Instance.CreateVisualEvent(() => LevelNode.HideActivationMarkers());
             VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayMoveAnimation(character.hexCharacterView));
 
             // Move to first hex           
@@ -438,9 +436,8 @@ namespace HexGameEngine.HexTiles
         }
         public void ChargeDownPath(HexCharacterModel character, List<LevelNode> path)
         {
-            // Play movement animationLevelNode hex1 = LevelNode.CurrentActivationNode;
-            LevelNode hex1 = LevelNode.CurrentActivationNode;
-            if (hex1 != null) VisualEventManager.Instance.CreateVisualEvent(() => hex1.HideActivationMarker());
+            // Play movement animation
+            VisualEventManager.Instance.CreateVisualEvent(() => LevelNode.HideActivationMarkers());
             VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeAnimation(character.hexCharacterView));
 
             // Move to first hex

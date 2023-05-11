@@ -224,14 +224,14 @@ namespace HexGameEngine.HexTiles
             inRangeMarkerEnemy.SetActive(false);
         }
         public void ShowActivationMarker()
-        {            
-            LevelController.Instance.AllLevelNodes.ForEach(x => x.HideActivationMarker());
+        {
+            HideActivationMarkers();
             activationMarker.Play();
             CurrentActivationNode = this;
         }
-        public void HideActivationMarker()
+        public static void HideActivationMarkers()
         {
-            activationMarker.Stop();
+            LevelController.Instance.AllLevelNodes.ForEach(x => x.activationMarker.Stop());
             CurrentActivationNode = null;
         }
 

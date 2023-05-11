@@ -97,7 +97,18 @@ namespace HexGameEngine.Characters
 
                 if (vfxManager != null &&
                    (currentAnimation == AnimationEventController.CHARGE ||
-                   currentAnimation == AnimationEventController.TACKLE)) vfxManager.PlayDashTrail();
+                   currentAnimation == AnimationEventController.TACKLE)) 
+                {
+                    vfxManager.PlayDashTrail();
+                    DOVirtual.DelayedCall(2f, () =>
+                    {
+                        if (currentAnimation != AnimationEventController.CHARGE &&
+                         currentAnimation != AnimationEventController.TACKLE)
+                        {
+                            vfxManager.StopDashTrail();
+                        }
+                    });
+                }
                 else if (vfxManager != null) vfxManager.StopDashTrail();
             }
         }
