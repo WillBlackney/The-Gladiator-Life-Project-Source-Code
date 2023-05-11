@@ -825,5 +825,6 @@ namespace HexGameEngine.TurnLogic
         #endregion
 
         #endregion
+
     }
 }

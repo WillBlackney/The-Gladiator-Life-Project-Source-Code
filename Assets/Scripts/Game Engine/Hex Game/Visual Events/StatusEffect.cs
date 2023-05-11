@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using HexGameEngine.Utilities;
+using UnityEngine.UI;
 
 namespace HexGameEngine.VisualEvents
 {
@@ -12,10 +11,23 @@ namespace HexGameEngine.VisualEvents
         [Header("Component References")]
         public TextMeshProUGUI statusText;
         public CanvasGroup myCg;
+        public GameObject iconImageParent;
+        public Image iconImage;
+        public RectTransform textFitter;
 
-        public void InitializeSetup(string statusName, string textColor)
+        public void InitializeSetup(string statusName, Sprite sprite = null)
         {
-            statusText.text = TextLogic.ReturnColoredText(statusName, textColor);
+            statusText.text = TextLogic.ReturnColoredText(statusName, TextLogic.white);
+            TransformUtils.RebuildLayout(textFitter);
+            iconImageParent.SetActive(false);
+            if (sprite != null)
+            {
+                iconImageParent.SetActive(true);
+                iconImage.sprite = sprite;
+                float offset = iconImageParent.GetComponent<RectTransform>().rect.width * 0.6f;
+                float newIconX = statusText.transform.position.x - ((statusText.GetComponent<RectTransform>().rect.width * 0.016f) * 0.5f) - offset;
+                iconImageParent.transform.position = new Vector3(newIconX, iconImageParent.transform.position.y, iconImageParent.transform.position.z);
+            }
             PlayAnimation();
         }
         public void DestroyThis()

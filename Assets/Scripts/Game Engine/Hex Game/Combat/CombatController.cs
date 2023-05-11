@@ -18,6 +18,7 @@ using HexGameEngine.Player;
 using HexGameEngine.Audio;
 using static UnityEngine.GraphicsBuffer;
 using DG.Tweening;
+using HexGameEngine.Libraries;
 
 namespace HexGameEngine.Combat
 {
@@ -1305,7 +1306,8 @@ namespace HexGameEngine.Combat
                     {
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Executioner!"), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Executioner!", 
+                        PerkController.Instance.GetPerkIconDataByTag(Perk.Executioner).passiveSprite), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
 
                         HexCharacterController.Instance.ModifyActionPoints(attacker, 4);
                     }
@@ -1322,7 +1324,7 @@ namespace HexGameEngine.Combat
                     {
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Collector!"), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Collector!", PerkController.Instance.GetPerkIconDataByTag(Perk.SoulCollector).passiveSprite), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
 
                         // Increment stats
                         attacker.characterData.attributeSheet.constitution.value += 1;
@@ -1338,20 +1340,20 @@ namespace HexGameEngine.Combat
                     {
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Devourer!"), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Soul Devourer!", PerkController.Instance.GetPerkIconDataByTag(Perk.SoulDevourer).passiveSprite), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
 
                         // Increment stats
                         attacker.characterData.attributeSheet.might.value += 1;
                         attacker.attributeSheet.might.value += 1;
                     }
 
-                    // Perk Soul Devourer: permanently gain 1 might
+                    // Mercenary background
                     if (CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Mercenary) &&
                         attacker.characterData != null)
                     {
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Mercenary!"), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
+                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Mercenary!", CharacterDataController.Instance.GetBackgroundData(CharacterBackground.Mercenary).BackgroundSprite), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
 
                         // Gain gold
                         PlayerDataController.Instance.ModifyPlayerGold(10);
@@ -1376,7 +1378,7 @@ namespace HexGameEngine.Combat
 
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(enemy.hexCharacterView.WorldPosition, "Cannibalism!"), enemy.GetLastStackEventParent()).SetEndDelay(0.5f);
+                        VisualEffectManager.Instance.CreateStatusEffect(enemy.hexCharacterView.WorldPosition, "Cannibalism!", CharacterDataController.Instance.GetRaceData(CharacterRace.Gnoll).racialSprite), enemy.GetLastStackEventParent()).SetEndDelay(0.5f);
                                               
                     }
                 }

@@ -306,7 +306,7 @@ namespace HexGameEngine.Abilities
             {
                 HexCharacterView view = character.hexCharacterView;
                 VisualEventManager.Instance.CreateVisualEvent(() =>
-                VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, ability.abilityName)).SetEndDelay(0.5f);
+                VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, ability.abilityName, ability.AbilitySprite)).SetEndDelay(0.5f);
             }
 
             // Hide pop up
