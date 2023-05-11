@@ -19,12 +19,17 @@ namespace HexGameEngine.UWidget
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Event Data")]
-        [Tooltip("Events that will be triggered when the Widget is clicked using the left mouse button")]
+        [Tooltip("Events that will be triggered when the Widget is clicked down and up using the left mouse button")]
         [SerializeField] WidgetEventData[] onClickEvents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        [Tooltip("Events that will be triggered when the Widget is clicked using the right mouse button")]
+        [Tooltip("Events that will be triggered when the Widget is clicked down and up using the right mouse button")]
         [SerializeField] WidgetEventData[] onRightClickEvents;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+
+        [Tooltip("Events that will be triggered during the first frame in which the user left/right clicks down while their mouse " +
+            "is within the volume of the Widget's Rect Transform or Collider component.")]
+        [SerializeField] WidgetEventData[] mouseDownEvents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Tooltip("Events that will be triggered during the first frame in which the user moves their mouse " +
