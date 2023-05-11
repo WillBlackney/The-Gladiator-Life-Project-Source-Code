@@ -17,7 +17,7 @@ MonoBehaviour:
   audioProfile: 1
   modelSize: 0
   xpReward: 25
-  ignoreStress: 1
+  ignoreStress: 0
   attributeSheet:
     might:
       value: 5

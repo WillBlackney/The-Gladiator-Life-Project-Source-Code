@@ -595,17 +595,13 @@ namespace HexGameEngine.Characters
             {
                 if (view != null)
                 {
-                    view.stressStateIconWorld.gameObject.SetActive(false);
-                    //view.stressBarVisualParent.SetActive(false);
-                    //view.perkIconsPanel.SetPosition(false);
+                    view.stressBarVisualParent.SetActive(false);
                 }
                 return;
             }
             else if (!character.characterData.ignoreStress && view != null)
             {
-                view.stressStateIconWorld.gameObject.SetActive(true);
-                //view.stressBarVisualParent.SetActive(true);
-                //view.perkIconsPanel.SetPosition(true);
+                view.stressBarVisualParent.SetActive(true);
             }
 
             if (character.currentStress >= 100 && stressGainedOrLost > 0) return;
@@ -727,7 +723,6 @@ namespace HexGameEngine.Characters
 
             // Modify WORLD space ui
             character.hexCharacterView.stressBarWorld.value = stressBarFloat;
-            character.hexCharacterView.stressTextWorld.text = stress.ToString();
 
             // Update stres state image
             StressState stressState = CombatController.Instance.GetStressStateFromStressAmount((int)stressBarFloat);
