@@ -109,7 +109,7 @@ namespace HexGameEngine.TurnLogic
 
         // Setup + Initializaton
         #region 
-        public void CreateActivationWindow(HexCharacterModel entity)
+        public void CreateTurnWindow(HexCharacterModel entity)
         {
             // Create slot
             GameObject newSlot = Instantiate(PrefabHolder.Instance.PanelSlotPrefab, activationSlotContentParent.transform);
@@ -667,10 +667,7 @@ namespace HexGameEngine.TurnLogic
 
             GameObject panelSlot = null;
 
-            if (activationOrder.Contains(character))
-            {
-                panelSlot = panelSlots[activationOrder.IndexOf(character)];
-            }
+            if (activationOrder.Contains(character)) panelSlot = panelSlots[activationOrder.IndexOf(character)];            
 
             if (panelSlot != null)
             {

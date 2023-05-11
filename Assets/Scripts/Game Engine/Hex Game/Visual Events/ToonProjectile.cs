@@ -59,7 +59,7 @@ namespace HexGameEngine.VisualEvents
             transform.position = startPos;
             start = startPos;
             destination = endPos;
-            initialDistanceX = destination.x - start.x;
+            initialDistanceX = Mathf.Abs(destination.x - start.x);
             if (initialDistanceX <= 0f) initialDistanceX = 0.01f;
             this.onImpactCallback = onImpactCallback;
 
@@ -158,13 +158,16 @@ namespace HexGameEngine.VisualEvents
         private void MoveParabola()
         {
             nextX = Mathf.MoveTowards(transform.position.x, destination.x, movementSpeed * Time.deltaTime);
-            baseY = Mathf.Lerp(start.y, destination.y, (nextX - start.x) / initialDistanceX);
-            height = maxParabolaY * (nextX - start.x) * (nextX - destination.x) / (-0.25f * initialDistanceX * initialDistanceX);
+            float lerpX = Mathf.Abs(nextX - start.x);
+            float lerpY = nextX - destination.x;
+            float dirMod = -0.25f;
+            baseY = Mathf.Lerp(start.y, destination.y, lerpX / initialDistanceX);
+            height = Mathf.Abs(maxParabolaY * lerpX * lerpY / (dirMod * initialDistanceX * initialDistanceX));
 
             Vector3 movePosition = new Vector3(nextX, baseY + height, transform.position.z);
-            transform.rotation = Projectile.LookAtTarget(movePosition - transform.position);
+            //transform.rotation = Projectile.LookAtTarget(movePosition - transform.position);
             transform.position = movePosition;
-            
+
         }
         private void MoveNormally()
         {

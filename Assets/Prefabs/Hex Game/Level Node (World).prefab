@@ -706,7 +706,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &473861884861342362
 Transform:
   m_ObjectHideFlags: 0
@@ -721,7 +721,7 @@ Transform:
   m_Children:
   - {fileID: 4957294442352968246}
   m_Father: {fileID: 8944885819292419967}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3729918664455042293
 GameObject:
@@ -837,7 +837,7 @@ Transform:
   m_Children:
   - {fileID: 653745969655195757}
   m_Father: {fileID: 8944885819292419967}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4451119987074574147
 GameObject:
@@ -1373,7 +1373,7 @@ Transform:
   m_Children:
   - {fileID: 686173698796208042}
   m_Father: {fileID: 8944885819292419967}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7625018288449504636
 GameObject:
@@ -1472,7 +1472,7 @@ MonoBehaviour:
   - {fileID: 5361543183046550189}
   inRangeMarkerNeutral: {fileID: 7474744146746794331}
   inRangeMarkerEnemy: {fileID: 3998632921989006095}
-  activationMarker: {fileID: 2027458936626632559}
+  activationMarker: {fileID: 4957294442334606974}
   moveMarker: {fileID: 914168588135670749}
   obstacleParent: {fileID: 1089604167021973704}
   obstacleImages:
@@ -1542,9 +1542,9 @@ Transform:
   m_Children:
   - {fileID: 6733530778077353084}
   - {fileID: 8944885819890159455}
+  - {fileID: 473861884861342362}
   - {fileID: 4977167831707747545}
   - {fileID: 6667006227971228049}
-  - {fileID: 473861884861342362}
   - {fileID: 8790398778795649362}
   - {fileID: 2399658892121667652}
   - {fileID: 8998456695217020053}
@@ -1623,6 +1623,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8244828299047911102, guid: 6867c7217b32fa14b991aed884b55b46,
         type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244828299047911102, guid: 6867c7217b32fa14b991aed884b55b46,
+        type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.9604539
       objectReference: {fileID: 0}
@@ -1678,7 +1683,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8244828299047987478, guid: 6867c7217b32fa14b991aed884b55b46,
         type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244828299047987478, guid: 6867c7217b32fa14b991aed884b55b46,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244828299047987478, guid: 6867c7217b32fa14b991aed884b55b46,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244828299047987478, guid: 6867c7217b32fa14b991aed884b55b46,
+        type: 3}
+      propertyPath: simulationSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244828299047987478, guid: 6867c7217b32fa14b991aed884b55b46,
+        type: 3}
       propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244828299047987478, guid: 6867c7217b32fa14b991aed884b55b46,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8244828299047987478, guid: 6867c7217b32fa14b991aed884b55b46,
@@ -1733,6 +1763,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8244828299047989746, guid: 6867c7217b32fa14b991aed884b55b46,
         type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244828299047989746, guid: 6867c7217b32fa14b991aed884b55b46,
+        type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 1
       objectReference: {fileID: 0}
@@ -1784,7 +1819,7 @@ PrefabInstance:
     - target: {fileID: 8244828299067075502, guid: 6867c7217b32fa14b991aed884b55b46,
         type: 3}
       propertyPath: m_Name
-      value: Mouse Over Indicator Glow
+      value: Activation Glow Ring
       objectReference: {fileID: 0}
     - target: {fileID: 8244828299067111648, guid: 6867c7217b32fa14b991aed884b55b46,
         type: 3}
@@ -1848,6 +1883,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6867c7217b32fa14b991aed884b55b46, type: 3}
+--- !u!198 &4957294442334606974 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8244828299047987478, guid: 6867c7217b32fa14b991aed884b55b46,
+    type: 3}
+  m_PrefabInstance: {fileID: 3936245719249764200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4957294442352968246 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8244828299067342174, guid: 6867c7217b32fa14b991aed884b55b46,

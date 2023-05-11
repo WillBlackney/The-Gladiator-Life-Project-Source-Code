@@ -29,7 +29,7 @@ namespace HexGameEngine.HexTiles
         [Header("Marker Components")]
         [SerializeField] GameObject inRangeMarkerNeutral;
         [SerializeField] GameObject inRangeMarkerEnemy;
-        [SerializeField] GameObject activationMarker;
+        [SerializeField] ParticleSystem activationMarker;
         [SerializeField] GameObject moveMarker;
 
         [Header("Obstruction Components")]
@@ -224,14 +224,14 @@ namespace HexGameEngine.HexTiles
             inRangeMarkerEnemy.SetActive(false);
         }
         public void ShowActivationMarker()
-        {
-            activationMarker.SetActive(true);
+        {            
             LevelController.Instance.AllLevelNodes.ForEach(x => x.HideActivationMarker());
+            activationMarker.Play();
             CurrentActivationNode = this;
         }
         public void HideActivationMarker()
         {
-            activationMarker.SetActive(false);
+            activationMarker.Stop();
             CurrentActivationNode = null;
         }
 

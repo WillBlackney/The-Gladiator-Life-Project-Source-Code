@@ -347,7 +347,7 @@ namespace HexGameEngine.Characters
             SetCharacterModelSize(character.hexCharacterView, data.modelSize);
 
             // Build activation window
-            TurnController.Instance.CreateActivationWindow(character);           
+            TurnController.Instance.CreateTurnWindow(character);           
 
             // Setup abilities
             AbilityController.Instance.BuildHexCharacterAbilityBookFromData(character, data.abilityBook);
@@ -387,7 +387,7 @@ namespace HexGameEngine.Characters
             SetCharacterModelSize(character.hexCharacterView, data.modelSize);
 
             // Build activation window
-            TurnController.Instance.CreateActivationWindow(character);
+            TurnController.Instance.CreateTurnWindow(character);
 
             // Set up items + armour and stats from items
             ItemController.Instance.RunItemSetupOnHexCharacterFromItemSet(character, data.itemSet);

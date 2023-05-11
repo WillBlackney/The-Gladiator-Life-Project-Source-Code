@@ -20,10 +20,9 @@ namespace HexGameEngine.TurnLogic
         [Header("Component References")]
         [SerializeField] private GameObject visualParent;
         public TextMeshProUGUI rollText;
-        public Slider myHealthBar;
-        public GameObject myGlowOutline;
         public CanvasGroup myCanvasGroup;
         public UniversalCharacterModel myUCM;
+
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Properties")]
@@ -71,7 +70,6 @@ namespace HexGameEngine.TurnLogic
             frameImage.color = normalColor;
             visualParent.SetActive(true);
         }
-
         #endregion
 
     }
