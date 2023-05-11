@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 namespace HexGameEngine.UWidget
 {
-    public class UWidget : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
+    public class UWidget : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
     {
         // Variables + Component References
         #region
@@ -98,25 +98,20 @@ namespace HexGameEngine.UWidget
         {            
             if (UWidgetController.Instance != null && inputType == WidgetInputType.IPointer && didMouseDown)
             {
-                if (eventData.button == PointerEventData.InputButton.Right)
-                {
-                    UWidgetController.Instance.HandleWidgetEvents(this, OnRightClickEvents);
-                }
-                else if (eventData.button == PointerEventData.InputButton.Left)
-                {
-                    UWidgetController.Instance.HandleWidgetEvents(this, OnClickEvents);
-                }
+                if (eventData.button == PointerEventData.InputButton.Right) UWidgetController.Instance.HandleWidgetEvents(this, OnRightClickEvents);                
+                else if (eventData.button == PointerEventData.InputButton.Left) UWidgetController.Instance.HandleWidgetEvents(this, OnClickEvents);
+                didMouseDown = false;
             }
         }
-        public void OnPointerClick(PointerEventData eventData)
+        public void OnPointerDown(PointerEventData eventData)
         {
-            didMouseDown = true;
+            if(inputType == WidgetInputType.IPointer) didMouseDown = true;
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
-            didMouseDown = false;
             if (MousedOver != this && UWidgetController.Instance != null && inputType == WidgetInputType.IPointer)
             {
+                didMouseDown = false;
                 MousedOver = this;
                 TimeSinceLastPointerEnter = Time.realtimeSinceStartup;
                 UWidgetController.Instance.HandleWidgetEvents(this, MouseEnterEvents);
@@ -125,9 +120,9 @@ namespace HexGameEngine.UWidget
         }
         public void OnPointerExit(PointerEventData eventData)
         {
-            didMouseDown = false;
             if (UWidgetController.Instance != null && inputType == WidgetInputType.IPointer)
             {
+                didMouseDown = false;
                 if (MousedOver == this)
                 {
                     CursorController.Instance.SetCursor(CursorController.Instance.FallbackCursor.typeTag);
@@ -139,34 +134,39 @@ namespace HexGameEngine.UWidget
         }
         void OnMouseDown()
         {
-            didMouseDown = true;
+            if(inputType == WidgetInputType.Collider) didMouseDown = true;
         }
 
         public void OnMouseOver()
         {
+            if (inputType == WidgetInputType.Collider &&
+                (Input.GetKeyUp(KeyCode.Mouse1) || Input.GetKeyUp(KeyCode.Mouse0))) didMouseDown = true;
+
             if (UWidgetController.Instance != null && inputType == WidgetInputType.Collider && didMouseDown)
             {
                 if(Input.GetKeyUp(KeyCode.Mouse1))
                     UWidgetController.Instance.HandleWidgetEvents(this, OnRightClickEvents);
                 else if (Input.GetKeyUp(KeyCode.Mouse0))
                     UWidgetController.Instance.HandleWidgetEvents(this, OnClickEvents);
+
+                didMouseDown = false;
             }
         }
         public void OnMouseEnter()
         {
-            didMouseDown = false;
             if (MousedOver != this && UWidgetController.Instance != null && inputType == WidgetInputType.Collider)
             {
+                didMouseDown = false;
                 MousedOver = this;
                 TimeSinceLastPointerEnter = Time.realtimeSinceStartup;
                 UWidgetController.Instance.HandleWidgetEvents(this, MouseEnterEvents);
             }
         }
         public void OnMouseExit()
-        {
-            didMouseDown = false;
+        {           
             if (UWidgetController.Instance != null && inputType == WidgetInputType.Collider)
             {
+                didMouseDown = false;
                 if (MousedOver == this)
                 {
                     CursorController.Instance.SetCursor(CursorController.Instance.FallbackCursor.typeTag);
