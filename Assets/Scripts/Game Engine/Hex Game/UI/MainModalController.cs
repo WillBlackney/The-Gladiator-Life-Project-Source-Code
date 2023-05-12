@@ -17,7 +17,8 @@ namespace HexGameEngine.UI
         #region
         [Header("Properties")]
         [SerializeField] ModalBuildDataSO[] buildDataFiles;
-        [SerializeField] private float baseMouseOffset = 10f;
+        [SerializeField] private float mouseOffsetX = 50f;
+        [SerializeField] private float mouseOffsetY = 10f;
 
         [Header("Components")]
         [SerializeField] Canvas mainCanvas;
@@ -32,6 +33,10 @@ namespace HexGameEngine.UI
         [SerializeField] GameObject framedImageParent;
         [SerializeField] Image unframedImage;
         [SerializeField] GameObject unframedImageParent;
+
+        [Header("Background Components")]
+        [SerializeField] GameObject backgroundStatRangeSectionParent;
+        [SerializeField] TextMeshProUGUI accuracyText, dodgeText, mightText, fitnessText, constitutionText, resolveText, witsTexts;
 
         // Non inspector values
         private ModalDirection currentDir = ModalDirection.SouthWest;
@@ -76,7 +81,7 @@ namespace HexGameEngine.UI
         void UpdateDynamicDirection()
         {
             Vector2 mousePos = Input.mousePosition;
-            currentDir = ModalDirection.NorthEast;
+            currentDir = ModalDirection.SouthEast;
             float xLimit = Screen.width / 5f;
             float yLimit = Screen.height / 4f;
 
@@ -128,6 +133,20 @@ namespace HexGameEngine.UI
                 Debug.Log("Too far east");
                 currentDir = ModalDirection.SouthWest;
             }
+
+            // too far north
+            else if (mousePos.y > (Screen.height - yLimit))
+            {
+                Debug.Log("Too far north");
+                currentDir = ModalDirection.SouthEast;
+            }
+
+            // too far south
+            else if (mousePos.y < yLimit)
+            {
+                Debug.Log("Too far south");
+                currentDir = ModalDirection.NorthEast;
+            }
         }
         private Vector2 GetMouseOffset(ModalDirection dir)
         {
@@ -137,23 +156,23 @@ namespace HexGameEngine.UI
 
             if (dir == ModalDirection.SouthEast)
             {
-                x = ((positionParent.rect.width / 2) + baseMouseOffset);
-                y = -((positionParent.rect.height / 2) + baseMouseOffset);               
+                x = ((positionParent.rect.width / 2) + mouseOffsetX);
+                y = -((positionParent.rect.height / 2) - mouseOffsetY);               
             }
             else if (dir == ModalDirection.SouthWest)
             {
-                x = -((positionParent.rect.width / 2)+ baseMouseOffset);
-                y = -((positionParent.rect.height / 2) + baseMouseOffset);
+                x = -((positionParent.rect.width / 2)+ mouseOffsetX);
+                y = -((positionParent.rect.height / 2) - mouseOffsetY);
             }
             else if (dir == ModalDirection.NorthEast)
             {
-                x = ((positionParent.rect.width / 2) + baseMouseOffset);
-                y = ((positionParent.rect.height / 2) + baseMouseOffset);
+                x = ((positionParent.rect.width / 2) + mouseOffsetX);
+                y = ((positionParent.rect.height / 2) + mouseOffsetY);
             }
             else if (dir == ModalDirection.NorthWest)
             {
-                x = -((positionParent.rect.width / 2) + baseMouseOffset);
-                y = ((positionParent.rect.height / 2) + baseMouseOffset);
+                x = -((positionParent.rect.width / 2) + mouseOffsetX);
+                y = ((positionParent.rect.height / 2) + mouseOffsetY);
             }
 
 
@@ -412,6 +431,17 @@ namespace HexGameEngine.UI
             // Build dot points
             for (int i = 0; i < data.passiveEffectDescriptions.Count; i++)
                 dottedRows[i].Build(data.passiveEffectDescriptions[i]);
+
+            // stat sections
+            var source = CharacterDataController.Instance;
+            backgroundStatRangeSectionParent.SetActive(true);
+            accuracyText.text = (data.accuracyLower + source.AccuracyLower).ToString() + " - " + (data.accuracyUpper + source.AccuracyUpper).ToString();
+            dodgeText.text = (data.dodgeLower + source.DodgeLower).ToString() + " - " + (data.dodgeUpper + source.DodgeUpper).ToString();
+            mightText.text = (data.mightLower + source.MightLower).ToString() + " - " + (data.mightUpper + source.MightUpper).ToString();
+            fitnessText.text = (data.fatigueLower + source.FitnessLower).ToString() + " - " + (data.fatigueUpper + source.FitnessUpper).ToString();
+            constitutionText.text = (data.constitutionLower + source.ConstitutionLower).ToString() + " - " + (data.constitutionUpper + source.ConstitutionUpper).ToString();
+            resolveText.text = (data.resolveLower + source.ResolveLower).ToString() + " - " + (data.resolveUpper + source.ResolveUpper).ToString();
+            witsTexts.text = (data.witsLower + source.WitsLower).ToString() + " - " + (data.witsUpper + source.WitsUpper).ToString();
         }
         private void BuildModalContent(RaceDataSO data)
         {
@@ -433,6 +463,7 @@ namespace HexGameEngine.UI
         private void Reset()
         {
             framedImageParent.SetActive(false);
+            backgroundStatRangeSectionParent.SetActive(false);
             unframedImageParent.gameObject.SetActive(false);
 
             foreach (ModalDottedRow row in dottedRows)            

@@ -32,7 +32,9 @@ MonoBehaviour:
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 40
-  maxArmourRoll: 40
+  minArmourRoll: 20
+  maxArmourRoll: 20
   grantedAbilities: []
   itemEffectSets: []
+  swingSFX: 8
+  hitSFX: 8

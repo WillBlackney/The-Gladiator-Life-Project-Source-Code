@@ -55,15 +55,31 @@ namespace HexGameEngine.Characters
         [SerializeField] private int dodgeLower= 5;
         [SerializeField] private int dodgeUpper = 10;
         [Space(10)]
-        [SerializeField] private int fatigueLower = 95;
-        [SerializeField] private int fatigueUpper = 105;
+        [SerializeField] private int fitnessLower = 95;
+        [SerializeField] private int fitnessUpper = 105;
         [Space(10)]
         [SerializeField] private int resolveLower = 5;
         [SerializeField] private int resolveUpper = 10;
         [Space(10)]
         [SerializeField] private int witsLower = 5;
         [SerializeField] private int witsUpper = 10;
-        [Space(10)]
+
+        public int MightLower => mightLower;
+        public int MightUpper => mightUpper;
+        public int AccuracyLower => accuracyLower;
+        public int AccuracyUpper => accuracyUpper;
+        public int DodgeLower => dodgeLower;
+        public int DodgeUpper => dodgeUpper;
+        public int FitnessLower => fitnessLower;
+        public int FitnessUpper => fitnessUpper;
+        public int ConstitutionLower => constitutionLower;
+        public int ConstitutionUpper => constitutionUpper;
+        public int ResolveLower => resolveLower;
+        public int ResolveUpper => resolveUpper;
+        public int WitsLower => witsLower;
+        public int WitsUpper => witsUpper;
+
+
         // Non-Inspector 
         private HexCharacterData[] allCustomCharacterTemplates;
         private BackgroundData[] allCharacterBackgrounds;
@@ -833,7 +849,7 @@ namespace HexGameEngine.Characters
             sheet.accuracy.value = RandomGenerator.NumberBetween(background.accuracyLower + accuracyLower, background.accuracyUpper + accuracyUpper);
             sheet.dodge.value = RandomGenerator.NumberBetween(background.dodgeLower + dodgeLower, background.dodgeUpper + dodgeUpper);
             sheet.wits.value = RandomGenerator.NumberBetween(background.witsLower + witsLower, background.witsUpper + witsUpper);
-            sheet.fitness.value = RandomGenerator.NumberBetween(background.fatigueLower + fatigueLower, background.fatigueUpper + fatigueUpper);
+            sheet.fitness.value = RandomGenerator.NumberBetween(background.fatigueLower + fitnessLower, background.fatigueUpper + fitnessUpper);
             sheet.resolve.value = RandomGenerator.NumberBetween(background.resolveLower + resolveLower, background.resolveUpper + resolveUpper);
         }
         private void GenerateCharacterWeapons(HexCharacterData character, RecruitWeaponLoadout[] loadout)

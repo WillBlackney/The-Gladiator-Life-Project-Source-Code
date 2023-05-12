@@ -8,7 +8,6 @@ using HexGameEngine.Characters;
 
 namespace HexGameEngine.UI
 {
-
     public class UIBackgroundIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         // Properties + Components
