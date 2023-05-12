@@ -1543,7 +1543,7 @@ namespace HexGameEngine.MainMenu
             frontScreenBgParent.transform.DOScale(1.25f, 0f);
             yield return new WaitForSeconds(1);
 
-            AudioManager.Instance.FadeInSound(Sound.Music_Main_Menu_Theme_1, 3f);
+            AudioManager.Instance.FadeInSound(Sound.Music_Main_Menu_Theme_1, 1.5f);
             BlackScreenController.Instance.FadeInScreen(2f);
             yield return new WaitForSeconds(2);
 

@@ -69,7 +69,11 @@ namespace HexGameEngine.UWidget
             get { return timeSinceLastPointerEnter; }
             private set { timeSinceLastPointerEnter = value; }
         }
-
+        public WidgetEventData[] MouseDownEvents
+        {
+            get { return mouseDownEvents; }
+            private set { mouseDownEvents = value; }
+        }
         public WidgetEventData[] MouseEnterEvents
         {
             get { return mouseEnterEvents; }
@@ -110,7 +114,11 @@ namespace HexGameEngine.UWidget
         }
         public void OnPointerDown(PointerEventData eventData)
         {
-            if(inputType == WidgetInputType.IPointer) didMouseDown = true;
+            if (UWidgetController.Instance != null && inputType == WidgetInputType.IPointer)
+            {
+                didMouseDown = true;
+                UWidgetController.Instance.HandleWidgetEvents(this, MouseDownEvents);
+            }
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -139,7 +147,11 @@ namespace HexGameEngine.UWidget
         }
         void OnMouseDown()
         {
-            if(inputType == WidgetInputType.Collider) didMouseDown = true;
+            if (UWidgetController.Instance != null && inputType == WidgetInputType.Collider)
+            {
+                didMouseDown = true;
+                UWidgetController.Instance.HandleWidgetEvents(this, MouseDownEvents);
+            }
         }
 
         public void OnMouseOver()
@@ -259,6 +271,27 @@ namespace HexGameEngine.UWidget
                     OnRightClickEvents[i].SetOriginalPosition(OnRightClickEvents[i].transformToMove.localPosition);
                 }
 
+            }
+
+            // Set up on mouse down events
+            for (int i = 0; i < MouseDownEvents.Length; i++)
+            {
+                if (MouseDownEvents[i].transformToScale != null && !MouseDownEvents[i].OriginalScaleIsSet)
+                {
+                    MouseDownEvents[i].SetOriginalScale(MouseDownEvents[i].transformToScale.localScale);
+                }
+                if (MouseDownEvents[i].transformToWiggle != null && !MouseDownEvents[i].OriginalPositionIsSet)
+                {
+                    MouseDownEvents[i].SetOriginalPosition(MouseDownEvents[i].transformToWiggle.localPosition);
+                }
+                if (MouseDownEvents[i].transformToWiggle != null && !MouseDownEvents[i].OriginalRotationIsSet)
+                {
+                    MouseDownEvents[i].SetOriginalRotation(MouseDownEvents[i].transformToWiggle.localRotation.eulerAngles);
+                }
+                if (MouseDownEvents[i].transformToMove != null && !MouseDownEvents[i].OriginalPositionIsSet)
+                {
+                    MouseDownEvents[i].SetOriginalPosition(MouseDownEvents[i].transformToMove.localPosition);
+                }
             }
 
             // Set up on mouse enter events

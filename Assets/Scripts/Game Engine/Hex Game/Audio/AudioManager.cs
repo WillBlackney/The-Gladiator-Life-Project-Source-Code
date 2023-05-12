@@ -263,67 +263,55 @@ namespace HexGameEngine.Audio
                 Debug.LogWarning("AudioManager.FadeInSound() did not find an audio model with the name " + name);
             }
         }
-        public void DisableAllAmbience()
-        {
-            StopSound(Sound.Ambience_Outdoor_Spooky);
-            StopSound(Sound.Ambience_Crypt);
-        }
         public void FadeOutAllAmbience(float fadeDuration)
         {
-            if (IsSoundPlaying(Sound.Ambience_Outdoor_Spooky))
-            {
-                FadeOutSound(Sound.Ambience_Outdoor_Spooky, fadeDuration);
-            }
-            if (IsSoundPlaying(Sound.Ambience_Crypt))
-            {
-                FadeOutSound(Sound.Ambience_Crypt, fadeDuration);
-            }
-            if (IsSoundPlaying(Sound.Environment_Camp_Fire))
-            {
-                FadeOutSound(Sound.Environment_Camp_Fire, fadeDuration);
-            }
+            if (IsSoundPlaying(Sound.Ambience_Outdoor_Spooky)) FadeOutSound(Sound.Ambience_Outdoor_Spooky, fadeDuration);
+            if (IsSoundPlaying(Sound.Ambience_Town_1)) FadeOutSound(Sound.Ambience_Town_1, fadeDuration);
+            if (IsSoundPlaying(Sound.Ambience_Crypt)) FadeOutSound(Sound.Ambience_Crypt, fadeDuration);            
+            if (IsSoundPlaying(Sound.Environment_Camp_Fire)) FadeOutSound(Sound.Environment_Camp_Fire, fadeDuration);            
+            if (IsSoundPlaying(Sound.Ambience_Crowd_1)) FadeOutSound(Sound.Ambience_Crowd_1, fadeDuration);
         }
         public void FadeOutAllCombatMusic(float fadeDuration)
         {
             Debug.LogWarning("FadeOutAllCombatMusic()");
-            if (IsSoundPlaying(Sound.Music_Basic_1))
+            if (IsSoundPlaying(Sound.Music_Basic_Combat_1))
             {
-                FadeOutSound(Sound.Music_Basic_1, fadeDuration);
+                FadeOutSound(Sound.Music_Basic_Combat_1, fadeDuration);
             }
-            if (IsSoundPlaying(Sound.Music_Basic_2))
+            if (IsSoundPlaying(Sound.Music_Basic_Combat_2))
             {
-                FadeOutSound(Sound.Music_Basic_2, fadeDuration);
+                FadeOutSound(Sound.Music_Basic_Combat_2, fadeDuration);
             }
-            if (IsSoundPlaying(Sound.Music_Basic_3))
+            if (IsSoundPlaying(Sound.Music_Basic_Combat_3))
             {
-                FadeOutSound(Sound.Music_Basic_3, fadeDuration);
+                FadeOutSound(Sound.Music_Basic_Combat_3, fadeDuration);
             }
-            if (IsSoundPlaying(Sound.Music_Elite_1))
+            if (IsSoundPlaying(Sound.Music_Elite_Combat_1))
             {
-                FadeOutSound(Sound.Music_Elite_1, fadeDuration);
+                FadeOutSound(Sound.Music_Elite_Combat_1, fadeDuration);
             }
-            if (IsSoundPlaying(Sound.Music_Elite_2))
+            if (IsSoundPlaying(Sound.Music_Elite_Combat_2))
             {
-                FadeOutSound(Sound.Music_Elite_2, fadeDuration);
+                FadeOutSound(Sound.Music_Elite_Combat_2, fadeDuration);
             }
-            if (IsSoundPlaying(Sound.Music_Boss_1))
+            if (IsSoundPlaying(Sound.Music_Boss_Combat_1))
             {
-                FadeOutSound(Sound.Music_Boss_1, fadeDuration);
+                FadeOutSound(Sound.Music_Boss_Combat_1, fadeDuration);
             }
-            if (IsSoundPlaying(Sound.Music_Boss_2))
+            if (IsSoundPlaying(Sound.Music_Boss_Combat_2))
             {
-                FadeOutSound(Sound.Music_Boss_2, fadeDuration);
+                FadeOutSound(Sound.Music_Boss_Combat_2, fadeDuration);
             }
         }
         public void ForceStopAllCombatMusic()
         {
             Debug.LogWarning("ForceStopAllCombatMusic()");
-            StopSound(Sound.Music_Basic_1);
-            StopSound(Sound.Music_Basic_2);
-            StopSound(Sound.Music_Basic_3);
-            StopSound(Sound.Music_Elite_1);
-            StopSound(Sound.Music_Basic_2);
-            StopSound(Sound.Music_Basic_3);
+            StopSound(Sound.Music_Basic_Combat_1);
+            StopSound(Sound.Music_Basic_Combat_2);
+            StopSound(Sound.Music_Basic_Combat_3);
+            StopSound(Sound.Music_Elite_Combat_1);
+            StopSound(Sound.Music_Basic_Combat_2);
+            StopSound(Sound.Music_Basic_Combat_3);
         }
         public void AutoPlayBasicCombatMusic(float fadeDuration)
         {
@@ -435,8 +423,9 @@ namespace HexGameEngine.Audio
         Ability_Charge_Impact = 96,
 
         Ambience_Outdoor_Spooky = 39,
+        Ambience_Town_1 = 99,
         Ambience_Crypt = 40,
-        Ambience_Crowd_1 = 88,
+        Ambience_Crowd_1 = 88,       
 
         Card_Draw = 0,
         Card_Moused_Over = 1,
@@ -450,6 +439,11 @@ namespace HexGameEngine.Audio
 
         Environment_Gate_Open = 38,
         Environment_Camp_Fire = 49,
+        Environment_Arena_Sting_1 = 100,
+        Environment_Tavern_Sting_1 = 101,
+        Environment_Armoury_Sting_1 = 102,
+        Environment_Hospital_Sting_1 = 103,
+        Environment_Library_Sting_1 = 104,
 
         Events_New_Game_Started = 35,
         Events_New_Turn_Notification = 41,
@@ -479,16 +473,17 @@ namespace HexGameEngine.Audio
         Projectile_Poison_Fired = 29,
         Projectile_Shadowball_Fired = 30,
 
-        Music_Basic_1 = 7,
-        Music_Basic_2 = 42,
-        Music_Basic_3 = 43,
-        Music_Elite_1 = 44,
-        Music_Elite_2 = 45,
-        Music_Boss_1 = 47,
-        Music_Boss_2 = 48,
+        Music_Basic_Combat_1 = 7,
+        Music_Basic_Combat_2 = 42,
+        Music_Basic_Combat_3 = 43,
+        Music_Elite_Combat_1 = 44,
+        Music_Elite_Combat_2 = 45,
+        Music_Boss_Combat_1 = 47,
+        Music_Boss_Combat_2 = 48,
         Music_Victory_Fanfare = 50,
         Music_Defeat_Fanfare = 59,
         Music_Main_Menu_Theme_1 = 36,
+        Music_Town_Theme_1 = 98,
 
         Weapon_Aoe_Swing = 60,
         Weapon_Axe_1H_Swing = 61,

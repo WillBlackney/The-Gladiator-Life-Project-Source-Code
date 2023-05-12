@@ -115,7 +115,8 @@ namespace HexGameEngine
             TownController.Instance.ShowTownView();
             CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
-            AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
+            DOVirtual.DelayedCall(2f, ()=> AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
+            AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
             BlackScreenController.Instance.FadeInScreen(1f);
 
             // Game Intro event
@@ -276,6 +277,9 @@ namespace HexGameEngine
             // Wait until v queue count = 0
             yield return new WaitUntil(() => VisualEventManager.Instance.EventQueue.Count == 0);
 
+            AudioManager.Instance.FadeOutAllCombatMusic(1f);
+            // to do: play victory fanfare
+
             // Tear down summoned characters
             foreach (HexCharacterModel model in HexCharacterController.Instance.AllSummonedDefenders)
             {
@@ -322,8 +326,10 @@ namespace HexGameEngine
             // Set state
             SetGameState(GameState.CombatRewardPhase);
 
-            // wait until v queue count = 0
+            // Wait for lingering visual events
             yield return new WaitUntil(() => VisualEventManager.Instance.EventQueue.Count == 0);
+            AudioManager.Instance.FadeOutAllCombatMusic(1f);
+            // to do: play victory fanfare
 
             // Tear down summoned characters + enemies
             List<HexCharacterModel> destCharacters = new List<HexCharacterModel>();
@@ -438,6 +444,7 @@ namespace HexGameEngine
 
             // Fade out
             BlackScreenController.Instance.FadeOutScreen(1f);
+            AudioManager.Instance.FadeOutAllAmbience(1f);
             yield return new WaitForSeconds(1f);                        
 
             // Tear down combat views
@@ -456,7 +463,8 @@ namespace HexGameEngine
                         
             // Fade back in views + sound
             yield return new WaitForSeconds(0.5f);
-            AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
+            DOVirtual.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
+            AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
             BlackScreenController.Instance.FadeInScreen(1f);
         }
         #endregion
@@ -499,7 +507,8 @@ namespace HexGameEngine
 
             // Start music, fade in
             yield return new WaitForSeconds(0.5f);
-            //AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
+            DOVirtual.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
+            AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
 
             BlackScreenController.Instance.FadeInScreen(2f);
             DOVirtual.DelayedCall(1.5f, () =>
@@ -523,6 +532,7 @@ namespace HexGameEngine
 
             // Fade out battle music + ambience
             AudioManager.Instance.FadeOutAllCombatMusic(2f);
+            AudioManager.Instance.FadeOutSound(Sound.Music_Town_Theme_1, 2f);
             AudioManager.Instance.FadeOutAllAmbience(2f);          
 
             // Do black screen fade out
@@ -572,7 +582,6 @@ namespace HexGameEngine
             InventoryController.Instance.HideInventoryView();
             CharacterRosterViewController.Instance.HideCharacterRosterScreen();
             GameIntroController.Instance.HideAllViews();
-            //CombatRewardController.Instance.HideGameOverScreen();
             CombatRewardController.Instance.HidePostCombatRewardScreen();
 
             // Fade in menu music
@@ -599,7 +608,7 @@ namespace HexGameEngine
 
             // Fade out menu scren
             BlackScreenController.Instance.FadeOutScreen(1f);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
 
             // Build and prepare all session data
             PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();         
@@ -625,7 +634,8 @@ namespace HexGameEngine
                 TownController.Instance.HandleAssignCharactersToHospitalSlotsOnGameLoad();
 
                 // Start music, fade in
-                AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
+                DOVirtual.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
+                AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
                 BlackScreenController.Instance.FadeInScreen(2f);
             }
             if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.GameIntroEvent)
@@ -639,14 +649,15 @@ namespace HexGameEngine
                 CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
                 // Start music, fade in
-                AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
+                DOVirtual.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
+                AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
                 BlackScreenController.Instance.FadeInScreen(2f, ()=> GameIntroController.Instance.StartEvent());
             }
             else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatStart)
             {
                 TopBarController.Instance.ShowCombatTopBar();
                 BlackScreenController.Instance.FadeInScreen(1f);
-                SetGameState(GameState.CombatActive);
+                SetGameState(GameState.CombatActive);                
                 LevelController.Instance.GenerateLevelNodes(RunController.Instance.CurrentCombatMapData);
 
                 // Set up combat level views + lighting
@@ -654,6 +665,10 @@ namespace HexGameEngine
                 LevelController.Instance.EnableDayTimeArenaScenery();
                 LevelController.Instance.ShowAllNodeViews();
                 LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
+
+                // Combat Music
+                AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
+                AudioManager.Instance.FadeInSound(Sound.Ambience_Crowd_1, 1f);
 
                 // Setup player characters
                 HexCharacterController.Instance.CreateAllPlayerCombatCharacters(RunController.Instance.CurrentDeployedCharacters);
@@ -701,8 +716,14 @@ namespace HexGameEngine
         }
         private IEnumerator HandleLoadIntoCombatFromDeploymentScreenCoroutine()
         {
+            AudioManager.Instance.FadeOutAllAmbience(1f);
+            AudioManager.Instance.FadeOutSound(Sound.Music_Town_Theme_1, 1f);
             BlackScreenController.Instance.FadeOutScreen(1f);          
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
+
+            // Combat Music
+            AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
+            AudioManager.Instance.FadeInSound(Sound.Ambience_Crowd_1, 1f);
 
             // Hide down town views
             BlackScreenController.Instance.FadeInScreen(1f);
@@ -777,62 +798,7 @@ namespace HexGameEngine
             return characters;
         }      
         #endregion     
-
-        // Act Notification Logic
-        #region
-        public void PlayActNotificationVisualEvent()
-        {
-            StartCoroutine(PlayActNotificationVisualEventCoroutine());
-        }
-        private IEnumerator PlayActNotificationVisualEventCoroutine()
-        {
-            // Enable ambience if not playing
-            if (!AudioManager.Instance.IsSoundPlaying(Sound.Ambience_Outdoor_Spooky))
-            {
-                AudioManager.Instance.FadeInSound(Sound.Ambience_Outdoor_Spooky, 1f);
-            }
-
-            // Set up
-            ResetActNotificationViews();
-            actNotifCountText.text = "Act One";
-            actNotifNameText.text = "Into The Crypt...";
-            actNotifVisualParent.SetActive(true);
-            actNotifCg.alpha = 1;
-            actNotifTextParentCg.alpha = 1;
-
-            // Fade in act count text
-            actNotifCountText.gameObject.SetActive(true);
-            actNotifCountText.DOFade(1, 1);
-
-            // Wait for player to read
-            yield return new WaitForSeconds(1.5f);
-
-            // Fade in act NAME text
-            actNotifNameText.gameObject.SetActive(true);
-            actNotifNameText.DOFade(1, 1);
-
-            // Wait for player to read
-            yield return new WaitForSeconds(1.5f);
-
-            // Fade out text quickly
-            actNotifTextParentCg.DOFade(0, 0.5f);
-            yield return new WaitForSeconds(0.5f);
-
-            // Fade out entire view
-            actNotifCg.DOFade(0, 1f);
-            yield return new WaitForSeconds(1);
-            ResetActNotificationViews();
-        }
-        private void ResetActNotificationViews()
-        {
-            actNotifCountText.DOFade(0, 0);
-            actNotifNameText.DOFade(0, 0);
-            actNotifNameText.gameObject.SetActive(false);
-            actNotifCountText.gameObject.SetActive(false);
-            actNotifVisualParent.SetActive(false);
-
-        }
-        #endregion
+        
     }
 
     public enum GameState

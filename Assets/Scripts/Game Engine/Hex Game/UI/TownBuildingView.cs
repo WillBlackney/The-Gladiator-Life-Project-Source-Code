@@ -8,6 +8,7 @@ using DG.Tweening;
 using HexGameEngine.CameraSystems;
 using UnityEngine.Events;
 using HexGameEngine.UI;
+using HexGameEngine.Audio;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -24,6 +25,7 @@ namespace HexGameEngine.TownFeatures
         [SerializeField] CanvasGroup popUpCg;       
         [SerializeField] CanvasGroup outlineCg;
         [SerializeField] RectTransform cameraZoomToPoint;
+        [SerializeField] Sound entranceSound;
 
         private static bool blockMouseActions = false;
 
@@ -76,19 +78,22 @@ namespace HexGameEngine.TownFeatures
             pageBuildFunction.Invoke();
             pageMovementParent.position = pageStartPos.position;
 
+            // Play entrance sound
+            AudioManager.Instance.PlaySoundPooled(entranceSound);
+
             // Fade in screen
             pageCg.DOFade(1f, 0.5f);
 
             // Move + zoom camera towards building
             var cam = CameraController.Instance.MainCamera;
-            cam.DOOrthoSize(2.5f, 0.6f).SetEase(Ease.OutCubic);
+            cam.DOOrthoSize(2.5f, 0.75f).SetEase(Ease.OutCubic);
             cam.transform.DOMove(new Vector3(cameraZoomToPoint.position.x, cameraZoomToPoint.position.y, -15), 0.6f).SetEase(Ease.OutCubic);
-            yield return new WaitForSeconds(0.61f);
+            yield return new WaitForSeconds(0.76f);                      
 
             // Move page to centre
-            Sequence s2 = DOTween.Sequence();
-            s2.Append(pageMovementParent.DOMove(pageEndPos.position, 0.35f)).SetEase(Ease.OutBack);
-            s2.OnComplete(() => { blockMouseActions = false; });
+            pageMovementParent.DOMove(pageEndPos.position, 0.75f)
+                .SetEase(Ease.OutBack)
+                .OnComplete(()=> blockMouseActions = false);
         }
 
         private IEnumerator LeaveCoroutine()
@@ -101,18 +106,16 @@ namespace HexGameEngine.TownFeatures
             pageMovementParent.DOKill();
 
             // Fade out screen
-            pageCg.DOFade(0f, 0.5f);
+            pageCg.DOFade(0f, 1.25f);
 
             // Move page offscreen
-            pageMovementParent.DOMove(pageStartPos.position, 0.35f).SetEase(Ease.InBack); ;
+            pageMovementParent.DOMove(pageStartPos.position, 0.75f).SetEase(Ease.InBack); 
 
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.75f);
             // Move and zoom out camera
             var c = CameraController.Instance.MainCamera;
-            c.DOOrthoSize(5, 0.6f);
-            Sequence seq = DOTween.Sequence();
-            seq.Append(c.transform.DOMove(new Vector3(0, 0, -15), 0.6f));
-            seq.OnComplete(() =>
+            c.DOOrthoSize(5, 0.75f);
+            c.transform.DOMove(new Vector3(0, 0, -15), 0.76f).OnComplete(() =>
             {
                 blockMouseActions = false;
                 pageVisualParent.SetActive(false);
