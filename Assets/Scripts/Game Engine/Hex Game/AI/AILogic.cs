@@ -520,7 +520,7 @@ namespace HexGameEngine.AI
             {
                 // Delays status VFX
                 VisualEventManager.Instance.CreateVisualEvent(() =>
-                VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "Delay Turn!"), character.GetLastStackEventParent());
+                VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "Delay Turn")/*, character.GetLastStackEventParent()*/);
                 VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
 
                 // Move character to the end of the turn order.

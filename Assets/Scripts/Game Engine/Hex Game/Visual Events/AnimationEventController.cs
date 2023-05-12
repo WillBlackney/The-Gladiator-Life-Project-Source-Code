@@ -48,6 +48,7 @@ namespace HexGameEngine.VisualEvents
         public const string TACKLE = "TACKLE";
         public const string TACKLE_END = "TACKLE_END";
         public const string RELOAD_CROSSBOW = "RELOAD_CROSSBOW";
+        public const string SHATTERED = "SHATTERED";
         #endregion
 
         // Core Functions

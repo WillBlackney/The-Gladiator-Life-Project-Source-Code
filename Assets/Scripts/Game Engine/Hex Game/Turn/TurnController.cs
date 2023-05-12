@@ -83,10 +83,8 @@ namespace HexGameEngine.TurnLogic
         }
         public void RemoveEntityFromActivationOrder(HexCharacterModel entity)
         {
-            if (activationOrder.Contains(entity))
-            {
-                activationOrder.Remove(entity);
-            }
+            if (activationOrder.Contains(entity)) activationOrder.Remove(entity);
+            
         }
         public void AddEntityToActivationOrder(HexCharacterModel entity)
         {
@@ -565,7 +563,7 @@ namespace HexGameEngine.TurnLogic
         private void FadeOutAndDestroyActivationWindow(TurnWindow window)
         {
             GameObject slotDestroyed = panelSlots[panelSlots.Count - 1];
-            if (activationOrder.Contains(window.myCharacter)) RemoveEntityFromActivationOrder(window.myCharacter);            
+            RemoveEntityFromActivationOrder(window.myCharacter);            
 
             // Remove slot from list and destroy
             panelSlots.Remove(slotDestroyed);
@@ -594,33 +592,6 @@ namespace HexGameEngine.TurnLogic
 
             else if (cachedOrder.Contains(EntityActivated))
                 MoveActivationArrowTowardsEntityWindow(cachedOrder[cachedOrder.IndexOf(EntityActivated)]);
-
-        }
-        private IEnumerator OnCharacterKilledVisualEventCoroutine(TurnWindow window, HexCharacterModel currentlyActivated, TaskTracker cData)
-        {
-            yield return null;
-            /*
-            FadeOutAndDestroyActivationWindow(window, null);
-            //yield return new WaitForSeconds(0.5f);
-            yield return null;
-            var cachedOrder = ActivationOrder.ToList();
-            UpdateWindowPositions(cachedOrder);
-
-            // If the entity that just died wasn't killed during its activation, do this
-            if (activationOrder.Contains(currentlyActivated))
-            {
-                MoveActivationArrowTowardsEntityWindow(activationOrder[activationOrder.IndexOf(currentlyActivated)]);
-            }
-            else if (activationOrder.Contains(EntityActivated))
-            {
-                MoveActivationArrowTowardsEntityWindow(activationOrder[activationOrder.IndexOf(EntityActivated)]);
-            }
-
-            // Resolve
-            if (cData != null)
-            {
-                cData.MarkAsCompleted();
-            }*/
 
         }
         #endregion

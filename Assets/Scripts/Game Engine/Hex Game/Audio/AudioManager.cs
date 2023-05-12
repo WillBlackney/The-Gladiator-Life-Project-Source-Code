@@ -96,6 +96,7 @@ namespace HexGameEngine.Audio
             foreach (AudioModel a in allAudioModels)
             {
                 a.source = gameObject.AddComponent<AudioSource>();
+                a.source.playOnAwake = false;
                 a.source.clip = a.audioClip;
                 a.source.volume = a.volume;
                 a.source.pitch = a.pitch;

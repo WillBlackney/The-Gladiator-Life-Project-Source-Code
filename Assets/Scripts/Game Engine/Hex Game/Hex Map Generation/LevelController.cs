@@ -532,10 +532,6 @@ namespace HexGameEngine.HexTiles
                     {
                         HexCharacterView modelView = c.hexCharacterView;
 
-                        // Text notification
-                        VisualEventManager.Instance.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateStatusEffect(modelView.WorldPosition, "Free Strike!")).SetEndDelay(0.25f);
-
                         // Start free strike attack
                         AbilityController.Instance.UseAbility(c, AbilityController.Instance.FreeStrikeAbility, character);
                         VisualEventManager.Instance.InsertTimeDelayInQueue(1f);

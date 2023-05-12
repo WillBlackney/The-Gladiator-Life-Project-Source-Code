@@ -58,9 +58,6 @@ namespace HexGameEngine.Libraries
         private Sprite might;
         [PreviewField(75)]
         [SerializeField]
-        private Sprite intelligence;
-        [PreviewField(75)]
-        [SerializeField]
         private Sprite constitution;
         [PreviewField(75)]
         [SerializeField]
@@ -76,7 +73,7 @@ namespace HexGameEngine.Libraries
         private Sprite resolve;
         [PreviewField(75)]
         [SerializeField]
-        private Sprite fatigue;
+        private Sprite fitness;
         #endregion
 
         // Ability Type Images
@@ -186,10 +183,10 @@ namespace HexGameEngine.Libraries
         private Sprite confident;
         [PreviewField(75)]
         [SerializeField]
-        private Sprite nervous;
+        private Sprite steady;
         [PreviewField(75)]
         [SerializeField]
-        private Sprite wavering;
+        private Sprite nervous;
         [PreviewField(75)]
         [SerializeField]
         private Sprite panicking;
@@ -236,7 +233,7 @@ namespace HexGameEngine.Libraries
             else if (attribute == CoreAttribute.Dodge) return dodge;
             else if (attribute == CoreAttribute.Resolve) return resolve;
             else if (attribute == CoreAttribute.Wits) return wits;
-            else if (attribute == CoreAttribute.Fitness) return fatigue;
+            else if (attribute == CoreAttribute.Fitness) return fitness;
             else return null;
         }
         public Sprite GetStressStateSprite(StressState state)
@@ -249,11 +246,11 @@ namespace HexGameEngine.Libraries
             }
             else if (state == StressState.Steady)
             {
-                spriteReturned = nervous;
+                spriteReturned = steady;
             }
             else if (state == StressState.Nervous)
             {
-                spriteReturned = wavering;
+                spriteReturned = nervous;
             }
             else if (state == StressState.Panicking)
             {

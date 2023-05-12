@@ -112,6 +112,7 @@ MonoBehaviour:
   killPreviousTweensOnNewSequenceStart: 1
   onClickEvents: []
   onRightClickEvents: []
+  mouseDownEvents: []
   mouseEnterEvents:
   - widgetEventType: 3
     scalingSequence: 0
@@ -559,7 +560,7 @@ GameObject:
   - component: {fileID: 3090273160963608646}
   - component: {fileID: 3090273160963608645}
   m_Layer: 5
-  m_Name: Fill_Yellow
+  m_Name: Fill_Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

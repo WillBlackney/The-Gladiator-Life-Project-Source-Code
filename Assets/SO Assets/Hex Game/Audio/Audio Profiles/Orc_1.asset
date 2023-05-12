@@ -35,15 +35,14 @@ MonoBehaviour:
     source: {fileID: 0}
     fadingIn: 0
     fadingOut: 0
-  hurtSounds:
+  dieSounds:
   - audioClip: {fileID: 0}
     randomizeClip: 1
     audioClips:
-    - {fileID: 8300000, guid: 498c850b7a312f741b764337a498b704, type: 3}
-    - {fileID: 8300000, guid: 15cccb841c3830442bdeb6f2ff7b6ee0, type: 3}
-    - {fileID: 8300000, guid: c61a969c20c6d4042983b56bd5e224cc, type: 3}
-    - {fileID: 8300000, guid: 53f2ced2455c0b84daa0c9dc34960499, type: 3}
-    - {fileID: 8300000, guid: af1e8185d0274c7409f732e6825bf62b, type: 3}
+    - {fileID: 8300000, guid: 75e24c33c4263d040b542b0c9bd0a53c, type: 3}
+    - {fileID: 8300000, guid: 6858228df25cfc94db8d49adfde4007e, type: 3}
+    - {fileID: 8300000, guid: 67ca87c959cc7604ab151b795d921962, type: 3}
+    - {fileID: 8300000, guid: 4162a0ae052ae304a91bdb04806ea37e, type: 3}
     soundType: 0
     combatCategory: 0
     randomizeVolume: 0
@@ -58,14 +57,15 @@ MonoBehaviour:
     source: {fileID: 0}
     fadingIn: 0
     fadingOut: 0
-  dieSounds:
+  hurtSounds:
   - audioClip: {fileID: 0}
     randomizeClip: 1
     audioClips:
-    - {fileID: 8300000, guid: 75e24c33c4263d040b542b0c9bd0a53c, type: 3}
-    - {fileID: 8300000, guid: 6858228df25cfc94db8d49adfde4007e, type: 3}
-    - {fileID: 8300000, guid: 67ca87c959cc7604ab151b795d921962, type: 3}
-    - {fileID: 8300000, guid: 4162a0ae052ae304a91bdb04806ea37e, type: 3}
+    - {fileID: 8300000, guid: 498c850b7a312f741b764337a498b704, type: 3}
+    - {fileID: 8300000, guid: 15cccb841c3830442bdeb6f2ff7b6ee0, type: 3}
+    - {fileID: 8300000, guid: c61a969c20c6d4042983b56bd5e224cc, type: 3}
+    - {fileID: 8300000, guid: 53f2ced2455c0b84daa0c9dc34960499, type: 3}
+    - {fileID: 8300000, guid: af1e8185d0274c7409f732e6825bf62b, type: 3}
     soundType: 0
     combatCategory: 0
     randomizeVolume: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
     randomizeVolume: 0
     randomVolumeLowerLimit: 0.3
     randomVolumeUpperLimit: 0.4
-    volume: 0.3
+    volume: 0.4
     randomizePitch: 0
     randomPitchLowerLimit: 0.8
     randomPitchUpperLimit: 1.2

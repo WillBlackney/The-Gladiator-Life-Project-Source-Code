@@ -604,10 +604,10 @@ namespace HexGameEngine.Characters
                 view.stressBarVisualParent.SetActive(true);
             }
 
-            if (character.currentStress >= 100 && stressGainedOrLost > 0) return;
+            if (character.currentStress >= 20 && stressGainedOrLost > 0) return;
             // Zealots can never reach shattered stress state
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Zealot) &&
-                character.currentStress >= 99 && stressGainedOrLost > 0) return;
+                character.currentStress >= 19 && stressGainedOrLost > 0) return;
 
             // Check courage token
             if (stressGainedOrLost > 0 &&
@@ -628,8 +628,8 @@ namespace HexGameEngine.Characters
            finalStress += stressGainedOrLost;            
 
             // prevent stress increasing over maximum
-            if (finalStress > 100)            
-                finalStress = 100;            
+            if (finalStress > 20)            
+                finalStress = 20;            
 
             // prevent stress going less then 0
             if (finalStress < 0)            
@@ -647,22 +647,22 @@ namespace HexGameEngine.Characters
                 CharacterDataController.Instance.SetCharacterStress(character.characterData, finalStress);            
 
             // Stress VFX
-            /* Un comment to reenable stress gained VFX
+            // Un comment to reenable stress gained VFX
             if (stressGainedOrLost > 0 && showVFX)
             {
                 if (character.GetLastStackEventParent() != null &&
                     !character.GetLastStackEventParent().isClosed)
                 {
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost), QueuePosition.Back, 0, 0f, character.GetLastStackEventParent());
+                        VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost), character.GetLastStackEventParent());
                 }
                 else
                 {
                     VisualEventManager.Instance.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost), QueuePosition.Back, 0, 0);
+                    VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost));
                 }
 
-            }*/
+            }
 
             // Update stress related GUI
             VisualEventManager.Instance.CreateVisualEvent(() => UpdateStressGUIElements(character, finalStress));
@@ -678,6 +678,7 @@ namespace HexGameEngine.Characters
                     {
                         VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "SHATTERED!");
                         view.vfxManager.PlayShattered();
+                        PlayShatteredAnimation(view);
                     }).SetStartDelay(0.5f).SetEndDelay(0.5f);
 
                 }
@@ -725,7 +726,7 @@ namespace HexGameEngine.Characters
             character.hexCharacterView.stressBarWorld.value = stressBarFloat;
 
             // Update stres state image
-            StressState stressState = CombatController.Instance.GetStressStateFromStressAmount((int)stressBarFloat);
+            StressState stressState = CombatController.Instance.GetStressStateFromStressAmount(stress);
             Sprite stressSprite = SpriteLibrary.Instance.GetStressStateSprite(stressState);
             character.hexCharacterView.stressStateIconWorld.sprite = stressSprite;
 
@@ -1323,6 +1324,13 @@ namespace HexGameEngine.Characters
             view.CurrentAnimation = AnimationEventController.IDLE;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
         }
+        public void PlayShatteredAnimation(HexCharacterView view)
+        {
+            if (view == null) return;
+            view.ucmAnimator.SetTrigger(AnimationEventController.SHATTERED);
+            view.CurrentAnimation = AnimationEventController.SHATTERED;
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+        }
         public void PlaySkillAnimation(HexCharacterView view)
         {
             if (view == null) return;
@@ -1653,10 +1661,12 @@ namespace HexGameEngine.Characters
                     {
                         VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Rallied!");
                         view.vfxManager.StopShattered();
+                        PlayIdleAnimation(view);
+                        view.ucm.ShowNormalFace();
                     }).SetEndDelay(0.5f);
 
                     // Recover 2 stress
-                    ModifyStress(character, -2, true, true);
+                    ModifyStress(character, -4, true, true);
 
                     // End turn
                     CharacterOnTurnEnd(character);

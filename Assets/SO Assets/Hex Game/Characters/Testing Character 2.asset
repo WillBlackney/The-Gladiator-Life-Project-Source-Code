@@ -18,7 +18,7 @@ MonoBehaviour:
   modelSize: 0
   attributeSheet:
     might:
-      value: 0
+      value: 400
       stars: 0
     constitution:
       value: 80
@@ -67,7 +67,7 @@ MonoBehaviour:
   - Undead_Right_Arm
   - Undead_Right_Leg
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 623ec2e1eab053346b93e30e2d91c862, type: 2}
+    mainHandItem: {fileID: 11400000, guid: cfee4a2308420914785497fd0724d558, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}

@@ -113,9 +113,7 @@ namespace HexGameEngine.Characters
         {
             SetInteractability(true);
             mainVisualParent.SetActive(true);
-
-            float speed = 0.75f;
-
+                        
             middlePanelTransform.localPosition = middlePanelOffScreenPos.localPosition;
             rightPanelTransform.localPosition = rightPanelOffScreenPos.localPosition;
             leftPanelTransform.localPosition = leftPanelOffScreenPos.localPosition;
@@ -156,16 +154,17 @@ namespace HexGameEngine.Characters
             BuildTurnButtons(character);
 
             // Fade in views
+            float speed = 1f;
             CharacterModeller.FadeOutCharacterModel(uiPotraitUCM, 0);
-            CharacterModeller.FadeInCharacterModel(uiPotraitUCM, speed);
+            CharacterModeller.FadeInCharacterModel(uiPotraitUCM, speed * 0.5f);
             mainCanvasCg.DOKill();
             mainCanvasCg.alpha = 0.001f;
-            mainCanvasCg.DOFade(1f, speed);
+            mainCanvasCg.DOFade(1f, speed * 0.5f);
 
             // Animate on screen
             MovePanelsOnScreen(speed);
         }
-        public void HideViewsOnTurnEnd(TaskTracker tracker = null, float speed = 1.5f)
+        public void HideViewsOnTurnEnd(TaskTracker tracker = null, float speed = 1.25f)
         {
             SetInteractability(false);
             mainCanvasCg.DOKill();
@@ -177,13 +176,15 @@ namespace HexGameEngine.Characters
             MovePanelsOffScreen(speed);
             
             // Fade out views
-            CharacterModeller.FadeOutCharacterModel(uiPotraitUCM, speed);            
-            Sequence s = DOTween.Sequence();
-            s.Append(mainCanvasCg.DOFade(0f, speed));
-            s.OnComplete(() =>
+            CharacterModeller.FadeOutCharacterModel(uiPotraitUCM, speed);   
+            DOVirtual.DelayedCall(speed * 0.5f, () =>
             {
-                mainVisualParent.SetActive(false);
-                if (tracker != null) tracker.MarkAsCompleted();
+                mainCanvasCg.DOFade(0f, speed * 0.5f).OnComplete(() =>
+                {
+                    mainVisualParent.SetActive(false);
+                    if (tracker != null) tracker.MarkAsCompleted();
+                });
+
             });
         }
         private void MovePanelsOnScreen(float moveSpeed = 0.5f)
@@ -193,9 +194,9 @@ namespace HexGameEngine.Characters
             rightPanelTransform.DOKill();
             leftPanelTransform.DOKill();
 
-            middlePanelTransform.DOMove(middlePanelOnScreenPos.position, moveSpeed);
-            rightPanelTransform.DOMove(rightPanelOnScreenPos.position, moveSpeed);
-            leftPanelTransform.DOMove(leftPanelOnScreenPos.position, moveSpeed);
+            middlePanelTransform.DOMove(middlePanelOnScreenPos.position, moveSpeed).SetEase(Ease.OutBack);
+            rightPanelTransform.DOMove(rightPanelOnScreenPos.position, moveSpeed).SetEase(Ease.OutBack);
+            leftPanelTransform.DOMove(leftPanelOnScreenPos.position, moveSpeed).SetEase(Ease.OutBack);
         }
         private void MovePanelsOffScreen(float moveSpeed = 0.5f)
         {
@@ -204,9 +205,9 @@ namespace HexGameEngine.Characters
             rightPanelTransform.DOKill();
             leftPanelTransform.DOKill();
 
-            middlePanelTransform.DOMove(middlePanelOffScreenPos.position, moveSpeed);
-            rightPanelTransform.DOMove(rightPanelOffScreenPos.position, moveSpeed);
-            leftPanelTransform.DOMove(leftPanelOffScreenPos.position, moveSpeed);
+            middlePanelTransform.DOMove(middlePanelOffScreenPos.position, moveSpeed).SetEase(Ease.InOutSine);
+            rightPanelTransform.DOMove(rightPanelOffScreenPos.position, moveSpeed).SetEase(Ease.InOutSine);
+            leftPanelTransform.DOMove(leftPanelOffScreenPos.position, moveSpeed).SetEase(Ease.InOutSine);
         }
         public void SetInteractability(bool onOrOff)
         {

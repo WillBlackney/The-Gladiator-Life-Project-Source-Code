@@ -1275,7 +1275,7 @@ namespace HexGameEngine.Combat
             }
 
             // Stress Events on health lost
-            if (totalHealthLost > 0)
+            if (totalHealthLost > 0 && target.currentHealth > 0 && target.livingState == LivingState.Alive)
             {
                 CreateStressCheck(target, StressEventType.HealthLost);
 
@@ -1286,7 +1286,7 @@ namespace HexGameEngine.Combat
                 }
             }
 
-            // To do: check and roll for injury + handle stress check from injury
+            // Check and roll for injury + handle stress check from injury
             if (target.currentHealth > 0 && target.livingState == LivingState.Alive)
             {
                 // Handle injury
