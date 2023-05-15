@@ -14,12 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   race: 6
   bodyParts:
-  - Satyr_Head_2
+  - Satyr_Chest_1
   - Satyr_Face_2
-  - Satyr_Right_Hand
-  - Satyr_Right_Arm
-  - Satyr_Left_Hand
-  - Satyr_Left_Arm
-  - Satyr_Chest
-  - Satyr_Right_Leg
-  - Satyr_Left_Leg
+  - Satyr_Head_2
+  - Satyr_Right_Hand_1
+  - Satyr_Right_Leg_1
