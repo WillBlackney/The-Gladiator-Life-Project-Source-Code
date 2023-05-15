@@ -16,7 +16,6 @@ MonoBehaviour:
   bodyParts:
   - Gnoll_Head_1
   - Gnoll_Face_1
-  - Gnoll_Right_Hand
-  - Gnoll_Right_Arm
-  - Gnoll_Chest
-  - Gnoll_Right_Leg
+  - Gnoll_Right_Hand_1
+  - Gnoll_Chest_1
+  - Gnoll_Right_Leg_1

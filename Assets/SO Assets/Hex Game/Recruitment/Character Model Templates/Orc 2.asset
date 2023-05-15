@@ -16,7 +16,6 @@ MonoBehaviour:
   bodyParts:
   - Orc_Head_2
   - Orc_Face_2
-  - Orc_Chest
-  - Orc_Right_Arm
-  - Orc_Right_Hand
-  - Orc_Right_Leg
+  - Orc_Chest_1
+  - Orc_Right_Hand_1
+  - Orc_Right_Leg_1
