@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   race: 3
   bodyParts:
-  - Undead_Chest
+  - Undead_Chest_3
   - Undead_Face_3
   - Undead_Head_3
-  - Undead_Right_Arm
-  - Undead_Right_Hand
-  - Undead_Right_Leg
+  - Undead_Right_Hand_3
+  - Undead_Right_Leg_3
