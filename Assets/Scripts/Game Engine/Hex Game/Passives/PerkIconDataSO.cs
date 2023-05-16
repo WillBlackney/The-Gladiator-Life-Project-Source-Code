@@ -31,6 +31,9 @@ namespace HexGameEngine.Perks
         [VerticalGroup("Modal Data")]
         [LabelWidth(200)]
         public ModalDotRowBuildData[] effectDetailTabs;
+        [VerticalGroup("Modal Data")]
+        [LabelWidth(200)]
+        public KeyWordModel[] keyWords;
 
         [VerticalGroup("Core Data/Properties")]
         [LabelWidth(200)]

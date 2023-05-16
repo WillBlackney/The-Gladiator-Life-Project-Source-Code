@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPreset: 14
   mainSprite: {fileID: 21300000, guid: cbc4f58758cfef24f9b813bcb82462ec, type: 3}
-  frameSprite: 1
+  frameSprite: 0
   headerName: Max Action Points
   italicDescription: 1
   description:

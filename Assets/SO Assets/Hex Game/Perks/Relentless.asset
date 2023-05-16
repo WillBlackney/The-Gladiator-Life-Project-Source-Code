@@ -38,6 +38,11 @@ MonoBehaviour:
     phrase: and delaying a turn.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 24
+    passiveType: 0
+  - kewWordType: 36
+    passiveType: 0
   maxAllowedStacks: 10
   showStackCount: 0
   hiddenOnPassivePanel: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPreset: 18
   mainSprite: {fileID: 21300000, guid: aaccaf67adffc6f47851c55f557bed3a, type: 3}
-  frameSprite: 1
+  frameSprite: 0
   headerName: Stress Resistance
   italicDescription: 1
   description:

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPreset: 21
   mainSprite: {fileID: 21300000, guid: 659dd7702f48dcc449cbffa1ebad351b, type: 3}
-  frameSprite: 1
+  frameSprite: 0
   headerName: Debuff Resistance
   italicDescription: 1
   description:

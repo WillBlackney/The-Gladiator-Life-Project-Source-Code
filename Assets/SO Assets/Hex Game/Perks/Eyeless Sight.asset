@@ -30,6 +30,9 @@ MonoBehaviour:
     phrase: when targetting enemies.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 1
+    passiveType: 77
   maxAllowedStacks: 3
   showStackCount: 0
   hiddenOnPassivePanel: 1

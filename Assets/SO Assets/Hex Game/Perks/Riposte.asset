@@ -38,6 +38,9 @@ MonoBehaviour:
     phrase: ', it immediately counter attacks it''s attacker.'
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 3
+    passiveType: 0
   maxAllowedStacks: 3
   showStackCount: 1
   hiddenOnPassivePanel: 0

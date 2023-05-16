@@ -38,6 +38,11 @@ MonoBehaviour:
     phrase: penalty from distance.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 1
+    passiveType: 77
+  - kewWordType: 11
+    passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1

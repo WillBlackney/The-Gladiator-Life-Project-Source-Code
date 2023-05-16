@@ -46,6 +46,11 @@ MonoBehaviour:
     phrase: as a bonus to their own. This effect cannot stack.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 6
+    passiveType: 0
+  - kewWordType: 14
+    passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1

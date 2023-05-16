@@ -38,6 +38,9 @@ MonoBehaviour:
     phrase: ', ignore it.'
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 32
+    passiveType: 0
   maxAllowedStacks: 3
   showStackCount: 1
   hiddenOnPassivePanel: 1

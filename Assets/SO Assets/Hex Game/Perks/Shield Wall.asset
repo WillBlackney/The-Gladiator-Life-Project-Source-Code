@@ -54,6 +54,11 @@ MonoBehaviour:
     phrase: . The secondary effect can stack multiple times.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 12
+    passiveType: 0
+  - kewWordType: 6
+    passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 0

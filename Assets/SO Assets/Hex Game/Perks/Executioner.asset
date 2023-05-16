@@ -34,6 +34,9 @@ MonoBehaviour:
     phrase: . Can only trigger once per turn.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 2
+    passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1

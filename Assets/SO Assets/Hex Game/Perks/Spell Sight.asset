@@ -42,6 +42,11 @@ MonoBehaviour:
     phrase: abilities.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 21
+    passiveType: 0
+  - kewWordType: 37
+    passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1

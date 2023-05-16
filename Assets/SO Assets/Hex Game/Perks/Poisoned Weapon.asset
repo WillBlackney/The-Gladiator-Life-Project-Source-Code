@@ -46,6 +46,9 @@ MonoBehaviour:
     phrase: .
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 1
+    passiveType: 80
   maxAllowedStacks: 5
   showStackCount: 1
   hiddenOnPassivePanel: 0

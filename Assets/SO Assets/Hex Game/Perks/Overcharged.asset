@@ -30,6 +30,9 @@ MonoBehaviour:
     phrase: at the end of it's turn.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 1
+    passiveType: 3
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 0

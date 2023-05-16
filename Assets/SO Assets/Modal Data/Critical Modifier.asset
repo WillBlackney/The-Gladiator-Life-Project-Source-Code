@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPreset: 15
   mainSprite: {fileID: 21300000, guid: e5028c2c105926341ba6633db31e8a9e, type: 3}
-  frameSprite: 1
+  frameSprite: 0
   headerName: Critical Damage
   italicDescription: 1
   description:

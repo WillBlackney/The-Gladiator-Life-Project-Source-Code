@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using HexGameEngine.Audio;
 using HexGameEngine.UI;
+using System.Linq;
 
 namespace HexGameEngine.Perks
 {
@@ -56,11 +57,16 @@ namespace HexGameEngine.Perks
         {
             if(myIconData != null && 
                 GameController.Instance.GameState == GameState.CombatActive && 
-                (MousedOver == null || MousedOver != this))            
-                KeyWordLayoutController.Instance.BuildAllViewsFromPassiveTag(myIconData.perkTag);            
+                (MousedOver == null || MousedOver != this))
+            {
+                MainModalController.Instance.BuildAndShowModal(new ActivePerk(myIconData.perkTag, 1));
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(myIconData.keywords.ToList());
+            }
+               // KeyWordLayoutController.Instance.BuildAllViewsFromPassiveTag(myIconData.perkTag);            
         }
         public void MouseExit()
         {
+            MainModalController.Instance.HideModal();
             KeyWordLayoutController.Instance.FadeOutMainView();
         }
         #endregion

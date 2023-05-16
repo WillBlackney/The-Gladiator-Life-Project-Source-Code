@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPreset: 17
   mainSprite: {fileID: 21300000, guid: dc7309b72abdc9045831d02aa25c41c3, type: 3}
-  frameSprite: 1
+  frameSprite: 0
   headerName: Magic Resistance
   italicDescription: 1
   description:

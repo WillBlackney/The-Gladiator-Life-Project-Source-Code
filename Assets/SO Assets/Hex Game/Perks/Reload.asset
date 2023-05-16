@@ -30,6 +30,9 @@ MonoBehaviour:
     phrase: abilities that require a weapon.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 4
+    passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 0

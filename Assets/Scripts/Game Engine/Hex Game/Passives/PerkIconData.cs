@@ -15,6 +15,7 @@ namespace HexGameEngine.Perks
         public List<CustomString> passiveDescription;
         public string passiveItalicDescription;
         public ModalDotRowBuildData[] effectDetailTabs;
+        public KeyWordModel[] keywords;
         public bool showStackCount;
         public bool hiddenOnPassivePanel;
         public bool isRewardable;
@@ -41,6 +42,7 @@ namespace HexGameEngine.Perks
         public List<Perk> perksThatBlockThis = new List<Perk>();
 
         public List<AnimationEventData> visualEventsOnApplication = new List<AnimationEventData>();
+
 
     }
 }

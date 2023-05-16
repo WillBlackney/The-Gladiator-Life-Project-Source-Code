@@ -19,11 +19,11 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'This character suffers a '
+    phrase: 'This character gains '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Stress Check '
+    phrase: 'Stress '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -38,6 +38,9 @@ MonoBehaviour:
     phrase: .
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 32
+    passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPreset: 10
   mainSprite: {fileID: 21300000, guid: 6303f5a7fd68ac24cb7a6cbfeb03af2c, type: 3}
-  frameSprite: 1
+  frameSprite: 0
   headerName: Initiative
   italicDescription: 1
   description:

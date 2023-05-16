@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 namespace HexGameEngine.UI
 {
@@ -61,12 +62,17 @@ namespace HexGameEngine.UI
         #region
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if(activePerk != null)            
-                MainModalController.Instance.BuildAndShowModal(activePerk);            
+            if(activePerk != null)
+            {
+                MainModalController.Instance.BuildAndShowModal(activePerk);
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(activePerk.Data.keywords.ToList());
+            }
+                          
         }
         public void OnPointerExit(PointerEventData eventData)
         {
-            MainModalController.Instance.HideModal();            
+            MainModalController.Instance.HideModal();
+            KeyWordLayoutController.Instance.FadeOutMainView();
         }
         #endregion
 

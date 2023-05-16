@@ -46,6 +46,11 @@ MonoBehaviour:
     phrase: turns.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 1
+    passiveType: 3
+  - kewWordType: 1
+    passiveType: 79
   maxAllowedStacks: 3
   showStackCount: 1
   hiddenOnPassivePanel: 0

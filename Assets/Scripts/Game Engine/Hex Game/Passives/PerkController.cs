@@ -91,6 +91,7 @@ namespace HexGameEngine.Perks
             p.passiveDescription = data.passiveDescription;
             p.passiveItalicDescription = data.passiveItalicDescription;
             p.effectDetailTabs = data.effectDetailTabs;
+            p.keywords = data.keyWords;
             p.passiveSprite = data.passiveSprite;// GetPassiveSpriteByName(data.passiveName);
             p.showStackCount = data.showStackCount;
             p.maxAllowedStacks = data.maxAllowedStacks;

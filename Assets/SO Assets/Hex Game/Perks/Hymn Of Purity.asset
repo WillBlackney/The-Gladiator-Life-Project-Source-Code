@@ -54,6 +54,15 @@ MonoBehaviour:
     phrase: . Only one hymn can be active at a time.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 1
+    passiveType: 1
+  - kewWordType: 1
+    passiveType: 80
+  - kewWordType: 1
+    passiveType: 7
+  - kewWordType: 6
+    passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 0

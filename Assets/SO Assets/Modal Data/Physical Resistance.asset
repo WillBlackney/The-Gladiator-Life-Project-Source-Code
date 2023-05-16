@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPreset: 16
   mainSprite: {fileID: 21300000, guid: 95e2d7fadb257b3478cf252c5f55b999, type: 3}
-  frameSprite: 1
+  frameSprite: 0
   headerName: Physical Resistance
   italicDescription: 1
   description:

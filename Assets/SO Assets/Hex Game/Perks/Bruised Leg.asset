@@ -46,6 +46,9 @@ MonoBehaviour:
     phrase: per tile moved.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 29
+    passiveType: 0
   maxAllowedStacks: 99
   showStackCount: 0
   hiddenOnPassivePanel: 0

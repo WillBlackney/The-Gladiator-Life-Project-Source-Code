@@ -60,16 +60,16 @@ namespace HexGameEngine.UI
         }
         #endregion
 
-        // Logic
+        // Misc Logic
         #region
-        void Update()
-        {           
+        private void Update()
+        {
             if (visualParent.activeSelf)
             {
                 Vector2 pos;
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(mainCanvas.transform as RectTransform, Input.mousePosition, mainCanvas.worldCamera, out pos);
                 positionParent.position = mainCanvas.transform.TransformPoint(pos);
-                positionParent.localPosition += (Vector3) GetMouseOffset(currentDir);
+                positionParent.localPosition += (Vector3)GetMouseOffset(currentDir);
 
                 if (shouldRebuild)
                 {
@@ -77,8 +77,8 @@ namespace HexGameEngine.UI
                     TransformUtils.RebuildLayouts(fitters);
                 }
             }
-        }       
-        void UpdateDynamicDirection()
+        }
+        private void UpdateDynamicDirection()
         {
             Vector2 mousePos = Input.mousePosition;
             currentDir = ModalDirection.SouthEast;
@@ -92,7 +92,7 @@ namespace HexGameEngine.UI
                 Debug.Log("Too far north east");
                 currentDir = ModalDirection.SouthWest;
             }
-                
+
 
             // too far north west
             else if (mousePos.x < xLimit &&
@@ -157,11 +157,11 @@ namespace HexGameEngine.UI
             if (dir == ModalDirection.SouthEast)
             {
                 x = ((positionParent.rect.width / 2) + mouseOffsetX);
-                y = -((positionParent.rect.height / 2) - mouseOffsetY);               
+                y = -((positionParent.rect.height / 2) - mouseOffsetY);
             }
             else if (dir == ModalDirection.SouthWest)
             {
-                x = -((positionParent.rect.width / 2)+ mouseOffsetX);
+                x = -((positionParent.rect.width / 2) + mouseOffsetX);
                 y = -((positionParent.rect.height / 2) - mouseOffsetY);
             }
             else if (dir == ModalDirection.NorthEast)
@@ -178,13 +178,33 @@ namespace HexGameEngine.UI
 
             ret = new Vector2(x, y);
             return ret;
-        }       
+        }
         public void HideModal()
         {
             mainCg.DOKill();
             mainCg.alpha = 0.01f;
             visualParent.SetActive(false);
         }
+        private void ResetContent()
+        {
+            framedImageParent.SetActive(false);
+            backgroundStatRangeSectionParent.SetActive(false);
+            unframedImageParent.gameObject.SetActive(false);
+
+            foreach (ModalDottedRow row in dottedRows)
+                row.gameObject.SetActive(false);
+        }
+        private void FadeInModal()
+        {
+            visualParent.SetActive(true);
+            mainCg.DOKill();
+            mainCg.alpha = 0.01f;
+            mainCg.DOFade(1f, 0.25f);
+        }
+        #endregion
+        
+        // Build + Show Modal
+        #region
         public void BuildAndShowModal(ModalSceneWidget w)
         {
             StartCoroutine(BuildAndShowModalCoroutine(w));
@@ -209,11 +229,8 @@ namespace HexGameEngine.UI
                 if (w.customData)
                 {
                     UpdateDynamicDirection();
-                    visualParent.SetActive(true);
-                    mainCg.DOKill();
-                    mainCg.alpha = 0.01f;
-                    mainCg.DOFade(1f, 0.25f);
-                    Reset();
+                    FadeInModal();
+                    ResetContent();
                     TransformUtils.RebuildLayouts(fitters);
                     BuildModalContent(w.headerMessage, w.descriptionMessage, w.headerSprite, w.frameSprite);
                     TransformUtils.RebuildLayouts(fitters);
@@ -222,11 +239,8 @@ namespace HexGameEngine.UI
                 else
                 {
                     UpdateDynamicDirection();
-                    visualParent.SetActive(true);
-                    mainCg.DOKill();
-                    mainCg.alpha = 0.01f;
-                    mainCg.DOFade(1f, 0.25f);
-                    Reset();
+                    FadeInModal();
+                    ResetContent();
                     TransformUtils.RebuildLayouts(fitters);
                     BuildModalContent(data);
                     TransformUtils.RebuildLayouts(fitters);
@@ -238,11 +252,8 @@ namespace HexGameEngine.UI
         public void BuildAndShowModal(RaceDataSO race)
         {
             UpdateDynamicDirection();
-            visualParent.SetActive(true);
-            mainCg.DOKill();
-            mainCg.alpha = 0.01f;
-            mainCg.DOFade(1f, 0.25f);
-            Reset();
+            FadeInModal();
+            ResetContent();
             TransformUtils.RebuildLayouts(fitters);
             BuildModalContent(race);
             TransformUtils.RebuildLayouts(fitters);
@@ -251,11 +262,8 @@ namespace HexGameEngine.UI
         public void BuildAndShowModal(BackgroundData background)
         {
             UpdateDynamicDirection();
-            visualParent.SetActive(true);
-            mainCg.DOKill();
-            mainCg.alpha = 0.01f;
-            mainCg.DOFade(1f, 0.25f);
-            Reset();
+            FadeInModal();
+            ResetContent();
             TransformUtils.RebuildLayouts(fitters);
             BuildModalContent(background);
             TransformUtils.RebuildLayouts(fitters);
@@ -264,11 +272,8 @@ namespace HexGameEngine.UI
         public void BuildAndShowModal(ActivePerk perk)
         {
             UpdateDynamicDirection();
-            visualParent.SetActive(true);
-            mainCg.DOKill();
-            mainCg.alpha = 0.01f;
-            mainCg.DOFade(1f, 0.25f);
-            Reset();
+            FadeInModal();
+            ResetContent();
             TransformUtils.RebuildLayouts(fitters);
             BuildModalContent(perk);
             TransformUtils.RebuildLayouts(fitters);
@@ -277,17 +282,17 @@ namespace HexGameEngine.UI
         public void BuildAndShowModal(TalentPairing tp)
         {
             UpdateDynamicDirection();
-            visualParent.SetActive(true);
-            mainCg.DOKill();
-            mainCg.alpha = 0.01f;
-            mainCg.DOFade(1f, 0.25f);
-            Reset();
+            FadeInModal();
+            ResetContent();
             TransformUtils.RebuildLayouts(fitters);
             BuildModalContent(tp);
             TransformUtils.RebuildLayouts(fitters);
             shouldRebuild = true;
         }
-        
+        #endregion
+
+        // Build From Content
+        #region
         private void BuildModalContent(ModalBuildDataSO data)
         {           
             headerText.text = data.headerName;
@@ -460,16 +465,7 @@ namespace HexGameEngine.UI
             for (int i = 0; i < data.racialPassiveDotRows.Length; i++)
                 dottedRows[i].Build(data.racialPassiveDotRows[i]);
         }
-        private void Reset()
-        {
-            framedImageParent.SetActive(false);
-            backgroundStatRangeSectionParent.SetActive(false);
-            unframedImageParent.gameObject.SetActive(false);
-
-            foreach (ModalDottedRow row in dottedRows)            
-                row.gameObject.SetActive(false);            
-        }       
-        #endregion
+        #endregion      
 
         // Input
         #region

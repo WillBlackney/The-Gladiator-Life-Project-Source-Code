@@ -54,6 +54,13 @@ MonoBehaviour:
     phrase: extra stack.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 1
+    passiveType: 1
+  - kewWordType: 1
+    passiveType: 80
+  - kewWordType: 1
+    passiveType: 7
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1

@@ -30,6 +30,9 @@ MonoBehaviour:
     phrase: . Expires on hit or miss.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 20
+    passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 0

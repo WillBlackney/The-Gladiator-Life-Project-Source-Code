@@ -39,11 +39,16 @@ namespace HexGameEngine.UI
         public void MouseEnter()
         {
             if (perkIcon.ActivePerk != null)
-                MainModalController.Instance.BuildAndShowModal(perkIcon.ActivePerk);
+            {
+                perkIcon.OnPointerEnter(null);
+            }
+               // MainModalController.Instance.BuildAndShowModal(perkIcon.ActivePerk);
         }
         public void MouseExit()
         {
-            MainModalController.Instance.HideModal();
+            if (perkIcon.ActivePerk != null)
+                perkIcon.OnPointerExit(null);
+            // MainModalController.Instance.HideModal();
         }
         public void MouseClick()
         {

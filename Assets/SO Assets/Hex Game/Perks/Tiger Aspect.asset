@@ -54,6 +54,13 @@ MonoBehaviour:
     phrase: . Only one aspect may be active at a time.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 3
+    passiveType: 0
+  - kewWordType: 19
+    passiveType: 0
+  - kewWordType: 1
+    passiveType: 7
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 0

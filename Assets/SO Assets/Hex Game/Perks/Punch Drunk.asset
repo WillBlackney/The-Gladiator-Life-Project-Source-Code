@@ -38,6 +38,9 @@ MonoBehaviour:
     phrase: when it loses health from an attack.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords:
+  - kewWordType: 1
+    passiveType: 3
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1
