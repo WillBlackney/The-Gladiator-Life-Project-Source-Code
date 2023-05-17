@@ -16,9 +16,8 @@ using HexGameEngine.Persistency;
 using System.Linq;
 using HexGameEngine.Player;
 using HexGameEngine.Audio;
-using static UnityEngine.GraphicsBuffer;
 using DG.Tweening;
-using HexGameEngine.Libraries;
+using HexGameEngine.CameraSystems;
 
 namespace HexGameEngine.Combat
 {
@@ -1090,13 +1089,22 @@ namespace HexGameEngine.Combat
             if (damageResult != null && damageResult.didCrit)
                 didCrit = true;
 
-            // Create impact effect
+            // Create impact effect 
             Vector3 pos = target.hexCharacterView.WorldPosition;
             VisualEventManager.Instance.CreateVisualEvent(() => 
             {
                 if (target.hexCharacterView != null) pos = target.hexCharacterView.WorldPosition;
                 VisualEffectManager.Instance.CreateSmallMeleeImpact(pos);
             }, parentEvent);
+
+            // Create screen shake
+            if(totalHealthLost > 0 && attacker != null)
+            {
+                if (totalHealthLost < 20)
+                    VisualEventManager.Instance.CreateVisualEvent(() => CameraController.Instance.CreateCameraShake(CameraShakeType.Small), parentEvent);
+                else if (totalHealthLost >= 20)
+                    VisualEventManager.Instance.CreateVisualEvent(() => CameraController.Instance.CreateCameraShake(CameraShakeType.Medium), parentEvent);
+            }
                       
 
             // On health lost animations
@@ -1365,20 +1373,19 @@ namespace HexGameEngine.Combat
                 }
 
                 // Check nearby gnoll enemies: gnolls heal when a character is killed within 1 of them
-                List<HexCharacterModel> enemies = HexCharacterController.Instance.GetAllEnemiesOfCharacter(target);
+                List<HexCharacterModel> characters = HexCharacterController.Instance.AllCharacters;
                 List<LevelNode> tiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1);
-                foreach(HexCharacterModel enemy in enemies)
+                foreach(HexCharacterModel possibleGnoll in characters)
                 {
-                    if(enemy.race == CharacterRace.Gnoll && 
-                        !HexCharacterController.Instance.IsTargetFriendly(enemy, attacker) &&
-                        tiles.Contains(enemy.currentTile))
+                    if(possibleGnoll.race == CharacterRace.Gnoll && 
+                        tiles.Contains(possibleGnoll.currentTile))
                     {
                         // Gain health
-                        HexCharacterController.Instance.ModifyHealth(enemy, 3);
+                        HexCharacterController.Instance.ModifyHealth(possibleGnoll, 5);
 
                         // Status notification
                         VisualEventManager.Instance.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(enemy.hexCharacterView.WorldPosition, "Cannibalism!", CharacterDataController.Instance.GetRaceData(CharacterRace.Gnoll).racialSprite, StatusFrameType.CircularBrown), enemy.GetLastStackEventParent()).SetEndDelay(0.5f);
+                        VisualEffectManager.Instance.CreateStatusEffect(possibleGnoll.hexCharacterView.WorldPosition, "Cannibalism!", CharacterDataController.Instance.GetRaceData(CharacterRace.Gnoll).racialSprite, StatusFrameType.CircularBrown), possibleGnoll.GetLastStackEventParent()).SetEndDelay(0.5f);
                                               
                     }
                 }

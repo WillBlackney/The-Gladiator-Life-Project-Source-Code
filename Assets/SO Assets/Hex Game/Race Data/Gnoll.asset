@@ -23,11 +23,11 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Immediately recover '
+      phrase: 'Recover '
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: '3 '
+      phrase: '5 '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'whenever a character dies within '
+      phrase: 'whenever any character dies within '
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
@@ -43,4 +43,4 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: .
+      phrase: tile.

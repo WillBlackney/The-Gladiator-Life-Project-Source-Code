@@ -55,6 +55,7 @@ namespace HexGameEngine.CameraSystems
 
         // Camera Shake Logic
         #region
+               
         public void CreateCameraShake(CameraShakeType shakeType)
         {
             if (shakeType == CameraShakeType.Small)

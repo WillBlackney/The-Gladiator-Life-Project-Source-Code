@@ -108,7 +108,7 @@ MonoBehaviour:
       overlayDuration: 0
       overlayFadeOutTime: 0
       particleEffect: 0
-      cameraShake: 1
+      cameraShake: 3
       movementAnimation: 0
       soundEffect: 0
       characterAnimation: 0
