@@ -12,9 +12,13 @@ namespace HexGameEngine.UI
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI descriptionText;
 
-        [Header("Image Icon Components")]
-        public Image panelImage;
-        public GameObject panelImageParent;
+        [Header("Framed Image Components")]
+        public Image framedImage;
+        public GameObject framedImageParent;
+
+        [Header("Unframed Image Components")]
+        public Image unframedImage;
+        public GameObject unframedImageParent;
 
         [Header("Transform + Layout Components")]
         public RectTransform rootLayoutRect;

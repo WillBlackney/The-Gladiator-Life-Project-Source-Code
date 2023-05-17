@@ -19,7 +19,7 @@ namespace HexGameEngine.UI
         [SerializeField] private RectTransform combatPos;
 
         [Header("Canvas Components")]
-        [SerializeField] private CanvasGroup mainCg;
+        [SerializeField] private CanvasGroup mainCg; 
 
         [Header("Keyword Panel Components")]
         [SerializeField] private KeyWordPanel[] allKeyWordPanels;       
@@ -42,7 +42,8 @@ namespace HexGameEngine.UI
                 KeyWordModel data = keyWords[i];
 
                 // Disable panel image icon
-                panel.panelImageParent.SetActive(false);
+                panel.framedImageParent.SetActive(false);
+                panel.unframedImageParent.SetActive(false);
 
                 // Enable panel parent
                 panel.gameObject.SetActive(true);
@@ -98,8 +99,9 @@ namespace HexGameEngine.UI
             panel.descriptionText.text = GetKeyWordDescriptionString(data);
             if (data.useSprite && data.sprite != null)
             {
-                panel.panelImageParent.SetActive(true);
-                panel.panelImage.sprite = data.sprite;
+                panel.framedImageParent.SetActive(false);
+                panel.unframedImageParent.SetActive(true);
+                panel.unframedImage.sprite = data.sprite;
             }
 
         }
@@ -110,8 +112,9 @@ namespace HexGameEngine.UI
             panel.descriptionText.text = TextLogic.ConvertCustomStringListToString(data.passiveDescription);
 
             // Enable image component if it has sprite data
-            panel.panelImageParent.SetActive(true);
-            panel.panelImage.sprite = data.passiveSprite;
+            panel.framedImageParent.SetActive(true);
+            panel.unframedImageParent.SetActive(false);
+            panel.framedImage.sprite = data.passiveSprite;
         }
         #endregion
 
