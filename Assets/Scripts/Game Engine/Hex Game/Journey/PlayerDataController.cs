@@ -57,7 +57,7 @@ namespace HexGameEngine.Player
             int vEventValue = currentGold;
 
             // update food text;
-            VisualEventManager.Instance.CreateVisualEvent(() => TopBarController.Instance.UpdateGoldText(vEventValue.ToString()));
+            VisualEventManager.CreateVisualEvent(() => TopBarController.Instance.UpdateGoldText(vEventValue.ToString()));
         }
         private void SetPlayerGold(int newValue)
         {
@@ -65,7 +65,7 @@ namespace HexGameEngine.Player
             int vEventValue = currentGold;
 
             // update food text;
-            VisualEventManager.Instance.CreateVisualEvent(() => TopBarController.Instance.UpdateGoldText(vEventValue.ToString()));
+            VisualEventManager.CreateVisualEvent(() => TopBarController.Instance.UpdateGoldText(vEventValue.ToString()));
         }
         #endregion
 

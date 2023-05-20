@@ -519,13 +519,13 @@ namespace HexGameEngine.AI
             if (directive.action.actionType == AIActionType.DelayTurn)
             {
                 // Delays status VFX
-                VisualEventManager.Instance.CreateVisualEvent(() =>
+                VisualEventManager.CreateVisualEvent(() =>
                 VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "Delay Turn")/*, character.GetLastStackEventParent()*/);
-                VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                VisualEventManager.InsertTimeDelayInQueue(1f);
 
                 // Move character to the end of the turn order.
                 TurnController.Instance.HandleMoveCharacterToEndOfTurnOrder(character);
-                VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
+                VisualEventManager.InsertTimeDelayInQueue(0.5f);
 
                 // Trigger character on activation end sequence and events
                 HexCharacterController.Instance.CharacterOnTurnEnd(character, true);
@@ -544,7 +544,7 @@ namespace HexGameEngine.AI
                     AbilityController.Instance.IsTargetOfAbilityValid(character, target, ability))
                 {
                     AbilityController.Instance.UseAbility(character, ability, target);
-                    VisualEventManager.Instance.InsertTimeDelayInQueue(1);
+                    VisualEventManager.InsertTimeDelayInQueue(1.5f);
                     actionTaken = true;
                 }                
             }
@@ -592,7 +592,7 @@ namespace HexGameEngine.AI
                     {
                         // Summon the character
                         AbilityController.Instance.UseAbility(character, ability, null, spawnHex);
-                        VisualEventManager.Instance.InsertTimeDelayInQueue(1);
+                        VisualEventManager.InsertTimeDelayInQueue(1.5f);
                         actionTaken = true;
                     }
                 }
@@ -626,7 +626,7 @@ namespace HexGameEngine.AI
                 if (bestPath != null)
                 {
                     LevelController.Instance.HandleMoveDownPath(character, bestPath);
-                    VisualEventManager.Instance.InsertTimeDelayInQueue(1);
+                    VisualEventManager.InsertTimeDelayInQueue(1);
                     actionTaken = true;
                 }
 
@@ -656,7 +656,7 @@ namespace HexGameEngine.AI
                     if (currentBestPath != null)
                     {
                         LevelController.Instance.HandleMoveDownPath(character, currentBestPath);
-                        VisualEventManager.Instance.InsertTimeDelayInQueue(1);
+                        VisualEventManager.InsertTimeDelayInQueue(1);
                         actionTaken = true;
                     }
 
@@ -705,7 +705,7 @@ namespace HexGameEngine.AI
                 if (bestPath != null)
                 {
                     LevelController.Instance.HandleMoveDownPath(character, bestPath);
-                    VisualEventManager.Instance.InsertTimeDelayInQueue(1);
+                    VisualEventManager.InsertTimeDelayInQueue(1);
                     actionTaken = true;
                 }
 
@@ -735,7 +735,7 @@ namespace HexGameEngine.AI
                     if (currentBestPath != null)
                     {
                         LevelController.Instance.HandleMoveDownPath(character, currentBestPath);
-                        VisualEventManager.Instance.InsertTimeDelayInQueue(1);
+                        VisualEventManager.InsertTimeDelayInQueue(1);
                         actionTaken = true;
                     }
                 }
@@ -783,7 +783,7 @@ namespace HexGameEngine.AI
                 if (bestPath != null)
                 {
                     LevelController.Instance.HandleMoveDownPath(character, bestPath);
-                    VisualEventManager.Instance.InsertTimeDelayInQueue(1);
+                    VisualEventManager.InsertTimeDelayInQueue(1);
                     actionTaken = true;
                 }
             }

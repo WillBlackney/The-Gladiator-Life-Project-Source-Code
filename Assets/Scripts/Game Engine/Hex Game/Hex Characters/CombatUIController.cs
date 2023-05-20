@@ -147,9 +147,6 @@ namespace HexGameEngine.Characters
             // Initiative
             UpdateCurrentInitiativeComponents(character);
 
-            // Armour
-            currentArmourText.text = character.currentArmour.ToString();
-
             // End + Delay Turn Buttons
             BuildTurnButtons(character);
 

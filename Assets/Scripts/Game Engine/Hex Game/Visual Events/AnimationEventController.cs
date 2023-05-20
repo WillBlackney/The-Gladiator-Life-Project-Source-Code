@@ -77,11 +77,11 @@ namespace HexGameEngine.VisualEvents
 
             else if (vEvent.eventType == AnimationEventType.SoundEffect)
             {
-                VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(vEvent.soundEffect), stackEvent);
+                VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(vEvent.soundEffect), stackEvent);
             }
             else if (vEvent.eventType == AnimationEventType.WeaponHitSound)
             {
-                VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(weaponUsed.hitSFX), stackEvent);
+                VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(weaponUsed.hitSFX), stackEvent);
             }
 
             else if (vEvent.eventType == AnimationEventType.ScreenOverlay)
@@ -95,12 +95,12 @@ namespace HexGameEngine.VisualEvents
         #region
         private void ResolveCameraShake(AnimationEventData vEvent, VisualEvent stackEvent)
         {
-            VisualEventManager.Instance.CreateVisualEvent(() => 
+            VisualEventManager.CreateVisualEvent(() => 
                 CameraController.Instance.CreateCameraShake(vEvent.cameraShake), stackEvent);
         }
         private void ResolveDelay(AnimationEventData vEvent, VisualEvent stackEvent)
         {
-            VisualEventManager.Instance.InsertTimeDelayInQueue(vEvent.delayDuration, stackEvent);
+            VisualEventManager.InsertTimeDelayInQueue(vEvent.delayDuration, stackEvent);
         }
         private void ResolveCharacterAnimation(AnimationEventData vEvent, HexCharacterModel user, HexCharacterModel targetCharacter, LevelNode targetTile, ItemData weaponUsed, VisualEvent stackEvent)
         {
@@ -109,7 +109,7 @@ namespace HexGameEngine.VisualEvents
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 TaskTracker cData = new TaskTracker();
-                VisualEventManager.Instance.CreateVisualEvent(() =>
+                VisualEventManager.CreateVisualEvent(() =>
                 {
                     AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerMeleeAttackAnimation(user.hexCharacterView, targetView.WorldPosition, weaponUsed, cData);
@@ -126,7 +126,7 @@ namespace HexGameEngine.VisualEvents
                 LevelNode knockbackNode = LevelController.Instance.GetAdjacentHexByDirection(targetCharacter.currentTile, direction);
                 if (knockbackNode != null) knockbackNode = targetCharacter.currentTile;
 
-                VisualEventManager.Instance.CreateVisualEvent(() =>
+                VisualEventManager.CreateVisualEvent(() =>
                 {
                     HexCharacterController.Instance.TriggerTackleAnimation(user.hexCharacterView, targetView.WorldPosition, cData);
                     DOVirtual.DelayedCall(0.1f, () =>
@@ -141,7 +141,7 @@ namespace HexGameEngine.VisualEvents
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 TaskTracker cData = new TaskTracker();
-                VisualEventManager.Instance.CreateVisualEvent(() =>
+                VisualEventManager.CreateVisualEvent(() =>
                 {
                     AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerOffhandPushAnimation(user.hexCharacterView, targetView.WorldPosition, cData);
@@ -152,7 +152,7 @@ namespace HexGameEngine.VisualEvents
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 TaskTracker cData = new TaskTracker();
-                VisualEventManager.Instance.CreateVisualEvent(() =>
+                VisualEventManager.CreateVisualEvent(() =>
                 HexCharacterController.Instance.TriggerOffhandThrowNetAnimation(user.hexCharacterView, targetView.WorldPosition, cData), stackEvent).SetCoroutineData(cData);
             }
             // Shield Bash
@@ -160,7 +160,7 @@ namespace HexGameEngine.VisualEvents
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 TaskTracker cData = new TaskTracker();
-                VisualEventManager.Instance.CreateVisualEvent(() =>
+                VisualEventManager.CreateVisualEvent(() =>
                 {
                     AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerShieldBashAnimation(user.hexCharacterView, targetView.WorldPosition, cData); 
@@ -170,7 +170,7 @@ namespace HexGameEngine.VisualEvents
             else if (vEvent.characterAnimation == CharacterAnimation.AoeMeleeAttack)
             {
                 TaskTracker cData = new TaskTracker();
-                VisualEventManager.Instance.CreateVisualEvent(() =>
+                VisualEventManager.CreateVisualEvent(() =>
                 {
                     AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerAoeMeleeAttackAnimation(user.hexCharacterView, weaponUsed, cData);
@@ -179,32 +179,32 @@ namespace HexGameEngine.VisualEvents
             // Reload Crossbow
             else if (vEvent.characterAnimation == CharacterAnimation.ReloadCrossbow)
             {
-                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayReloadCrossbowAnimation(user.hexCharacterView), stackEvent);
+                VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayReloadCrossbowAnimation(user.hexCharacterView), stackEvent);
             }
             // Charge
             else if (vEvent.characterAnimation == CharacterAnimation.Charge)
             {
-                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeAnimation(user.hexCharacterView), stackEvent);
+                VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeAnimation(user.hexCharacterView), stackEvent);
             }
             // Charge End
             else if (vEvent.characterAnimation == CharacterAnimation.ChargeEnd)
             {
-                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeEndAnimation(user.hexCharacterView), stackEvent);
+                VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeEndAnimation(user.hexCharacterView), stackEvent);
             }
             // Skill
             else if (vEvent.characterAnimation == CharacterAnimation.Skill)
             {
-                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlaySkillAnimation(user.hexCharacterView), stackEvent);
+                VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlaySkillAnimation(user.hexCharacterView), stackEvent);
             }
             // Raise Shield
             else if (vEvent.characterAnimation == CharacterAnimation.RaiseShield)
             {
-                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayRaiseShieldAnimation(user.hexCharacterView), stackEvent);
+                VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayRaiseShieldAnimation(user.hexCharacterView), stackEvent);
             }
             // Resurrect
             else if (vEvent.characterAnimation == CharacterAnimation.Resurrect)
             {
-                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayResurrectAnimation(user.hexCharacterView), stackEvent);
+                VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayResurrectAnimation(user.hexCharacterView), stackEvent);
             }
             // Shoot Bow 
             else if (vEvent.characterAnimation == CharacterAnimation.ShootBowOrCrossbow)
@@ -214,11 +214,11 @@ namespace HexGameEngine.VisualEvents
 
                 // Crossbow
                 if (weaponUsed != null && weaponUsed.weaponClass == WeaponClass.Crossbow)                
-                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootCrossbowAnimation(user.hexCharacterView, weaponUsed, cData), stackEvent).SetCoroutineData(cData);
+                    VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootCrossbowAnimation(user.hexCharacterView, weaponUsed, cData), stackEvent).SetCoroutineData(cData);
                                 
                 // Normal Bow
                 else                
-                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootBowAnimation(user.hexCharacterView, weaponUsed, cData), stackEvent).SetCoroutineData(cData);
+                    VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootBowAnimation(user.hexCharacterView, weaponUsed, cData), stackEvent).SetCoroutineData(cData);
              }
 
             // Shoot Magic + Shoot Projectile 
@@ -227,7 +227,7 @@ namespace HexGameEngine.VisualEvents
                 // Play character shoot anim
                 TaskTracker animCdata = new TaskTracker();
                 if(vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture)
-                    VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerShootMagicHandGestureAnimation(user.hexCharacterView, animCdata), stackEvent);
+                    VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.TriggerShootMagicHandGestureAnimation(user.hexCharacterView, animCdata), stackEvent);
 
                 if (vEvent.projectileFired == ProjectileFired.None) return;
 
@@ -244,7 +244,7 @@ namespace HexGameEngine.VisualEvents
 
                     // Create projectile
                     TaskTracker cData2 = new TaskTracker();
-                    VisualEventManager.Instance.CreateVisualEvent(() => 
+                    VisualEventManager.CreateVisualEvent(() => 
                     {
                         if(user != null &&
                            user.hexCharacterView != null)
@@ -276,7 +276,7 @@ namespace HexGameEngine.VisualEvents
 
                 // Create projectile
                 TaskTracker cData = new TaskTracker();
-                VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.ShootProjectileAtLocation
+                VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.ShootProjectileAtLocation
                 (vEvent.projectileFired, projectileStartPos, targetPos, cData), stackEvent).SetCoroutineData(cData);
             }
         }
@@ -292,20 +292,20 @@ namespace HexGameEngine.VisualEvents
                 if (user.hexCharacterView != null)
                 {
                     HexCharacterView view = user.hexCharacterView;
-                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    VisualEventManager.CreateVisualEvent(() =>
                        VisualEffectManager.Instance.CreateEffectAtLocation(vEvent.particleEffect, view.WorldPosition), stackEvent);
                 }
             }
             else if (vEvent.onCharacter == CreateOnCharacter.Target && characterTarget != null)
             {
                 HexCharacterView view = characterTarget.hexCharacterView;
-                VisualEventManager.Instance.CreateVisualEvent(() =>
+                VisualEventManager.CreateVisualEvent(() =>
                 VisualEffectManager.Instance.CreateEffectAtLocation(vEvent.particleEffect, view.WorldPosition), stackEvent);
             }
 
             else if (vEvent.onCharacter == CreateOnCharacter.None)
             {
-                VisualEventManager.Instance.CreateVisualEvent(() =>
+                VisualEventManager.CreateVisualEvent(() =>
                    VisualEffectManager.Instance.CreateEffectAtLocation(vEvent.particleEffect, new Vector3(0,0,0)), stackEvent);
 
             }
@@ -313,7 +313,7 @@ namespace HexGameEngine.VisualEvents
         }
         private void ResolveScreenOverlay(AnimationEventData vEvent, VisualEvent stackEvent)
         {
-            VisualEventManager.Instance.CreateVisualEvent(() => VisualEffectManager.Instance.DoScreenOverlayEffect
+            VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.DoScreenOverlayEffect
                 (vEvent.screenOverlayType, vEvent.overlayColor, vEvent.overlayDuration, vEvent.overlayFadeInTime, vEvent.overlayFadeOutTime), stackEvent);
         }
 

@@ -63,12 +63,11 @@ MonoBehaviour:
   serializedPassiveManager:
     perks: []
   modelParts:
-  - Elf_Chest
+  - Elf_Chest_1
   - Elf_Head_1
   - Elf_Face_4
-  - Elf_Right_Hand
-  - Elf_Right_Arm
-  - Elf_Right_Leg
+  - Elf_Right_Hand_1
+  - Elf_Right_Leg_1
   itemSet:
     mainHandItem: {fileID: 11400000, guid: b0a743e98585a814ea612ed22c49e1c8, type: 2}
     offHandItem: {fileID: 0}

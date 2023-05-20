@@ -65,12 +65,11 @@ MonoBehaviour:
   serializedPassiveManager:
     perks: []
   modelParts:
-  - Undead_Chest
+  - Undead_Chest_1
   - Undead_Head_1
   - Undead_Face_1
-  - Undead_Right_Hand
-  - Undead_Right_Arm
-  - Undead_Right_Leg
+  - Undead_Right_Hand_1
+  - Undead_Right_Leg_1
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 6a78f7a4320bb5f4889c39e138776a4f, type: 2}
     offHandItem: {fileID: 0}

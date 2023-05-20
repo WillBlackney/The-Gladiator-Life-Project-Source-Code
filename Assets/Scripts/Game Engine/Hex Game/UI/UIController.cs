@@ -41,7 +41,7 @@ namespace HexGameEngine.UI
                 // hide all character world UI's
                 foreach (HexCharacterModel c in HexCharacterController.Instance.AllCharacters)
                 {
-                    HexCharacterController.Instance.FadeOutCharacterWorldCanvas(c.hexCharacterView, null, 0.25f, 0.25f);
+                    HexCharacterController.Instance.FadeOutCharacterWorldCanvas(c.hexCharacterView, null, 0.25f, 0.001f);
                 }
             }
             else if(characterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)

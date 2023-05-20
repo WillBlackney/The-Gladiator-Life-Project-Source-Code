@@ -358,7 +358,7 @@ namespace HexGameEngine.Perks
                 if(DoesCharacterHavePerk(pManager, ptag) && stacks > 0)
                 {
                     Debug.Log("ModifyPerkOnCharacterEntity() cancelling application of " + perkName +" as it is blocked by " + TextLogic.SplitByCapitals(ptag.ToString()));
-                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    VisualEventManager.CreateVisualEvent(() =>
                     VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "IMMUNE!", perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
                     return false;
                 }
@@ -371,7 +371,7 @@ namespace HexGameEngine.Perks
                 character.controller == Controller.Player &&
                 perk == Perk.Bleeding)
             {
-                VisualEventManager.Instance.CreateVisualEvent(() =>
+                VisualEventManager.CreateVisualEvent(() =>
                     VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "IMMUNE!", perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
                 return false;
             }
@@ -382,7 +382,7 @@ namespace HexGameEngine.Perks
                 // Character is protected by rune: Cancel this status application, remove a rune, then return.
                 Debug.Log("ModifyPerkOnCharacterEntity() cancelling application of " + perkName + " as character is protected by Rune.");                
                 ModifyPerkOnCharacterEntity(pManager, Perk.Rune, -1, showVFX, vfxDelay, applier);
-                VisualEventManager.Instance.CreateVisualEvent(() =>
+                VisualEventManager.CreateVisualEvent(() =>
                   VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "BLOCKED!", perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
 
                 return false; 
@@ -399,7 +399,7 @@ namespace HexGameEngine.Perks
                     // Character resisted the debuff, cancel the rest of this function and do resist VFX
                     if (showVFX)
                     {
-                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEventManager.CreateVisualEvent(() =>
                         VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "RESISTED!", perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
                         return false;
                     }
@@ -448,13 +448,13 @@ namespace HexGameEngine.Perks
                 if (showVFX)
                 {
                     // Update character world UI
-                    VisualEventManager.Instance.CreateVisualEvent(() =>                   
+                    VisualEventManager.CreateVisualEvent(() =>                   
                         character.hexCharacterView.perkIconsPanel.HandleAddNewIconToPanel(perkData, stacksAppliedActual), character.GetLastStackEventParent());
 
                     // Update player overlay UI
                     if (TurnLogic.TurnController.Instance.EntityActivated == character)
                     {
-                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEventManager.CreateVisualEvent(() =>
                         {
                             CombatUIController.Instance.PerkPanel.ResetPanel();
                             CombatUIController.Instance.PerkPanel.BuildFromPerkManager(pManager);
@@ -480,7 +480,7 @@ namespace HexGameEngine.Perks
                     // Status Notification
                     if (perkData.isInjury)
                     {
-                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEventManager.CreateVisualEvent(() =>
                             VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName, perkData.passiveSprite, StatusFrameType.CircularRed), character.GetLastStackEventParent());
                     }
                     else
@@ -488,7 +488,7 @@ namespace HexGameEngine.Perks
                         string stackText = "";
                         if (stacksAppliedActual > 1) stackText = " +" + stacksAppliedActual.ToString();
 
-                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEventManager.CreateVisualEvent(() =>
                             VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName + stackText, perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
                     }                 
                     
@@ -504,7 +504,7 @@ namespace HexGameEngine.Perks
 
                 // Create brief delay
                 if (showVFX)                
-                    VisualEventManager.Instance.InsertTimeDelayInQueue(vfxDelay, character.GetLastStackEventParent());                
+                    VisualEventManager.InsertTimeDelayInQueue(vfxDelay, character.GetLastStackEventParent());                
             }
 
 
@@ -540,20 +540,20 @@ namespace HexGameEngine.Perks
 
             if(perk == Perk.Stunned && showVFX)
             {
-                if (newFinalStackcount > 0) VisualEventManager.Instance.CreateVisualEvent(() => character.hexCharacterView.vfxManager.PlayStunned());
-                else VisualEventManager.Instance.CreateVisualEvent(() => character.hexCharacterView.vfxManager.StopStunned());
+                if (newFinalStackcount > 0) VisualEventManager.CreateVisualEvent(() => character.hexCharacterView.vfxManager.PlayStunned());
+                else VisualEventManager.CreateVisualEvent(() => character.hexCharacterView.vfxManager.StopStunned());
             }
             if (perk == Perk.SmashedShield && showVFX)
             {
                 var myUcm = character.hexCharacterView.ucm;
 
-                if (myUcm != null && newFinalStackcount > 0) VisualEventManager.Instance.CreateVisualEvent(() =>
+                if (myUcm != null && newFinalStackcount > 0) VisualEventManager.CreateVisualEvent(() =>
                 {
                     if (myUcm != null) myUcm.activeOffHandWeapon.gameObject.SetActive(false);
                 });
                 else if (myUcm != null)
                 {
-                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    VisualEventManager.CreateVisualEvent(() =>
                     {
                         if (myUcm != null) myUcm.activeOffHandWeapon.gameObject.SetActive(true);
                     });

@@ -64,12 +64,11 @@ MonoBehaviour:
   serializedPassiveManager:
     perks: []
   modelParts:
-  - Orc_Chest
+  - Orc_Chest_1
   - Orc_Head_1
   - Orc_Face_1
-  - Orc_Right_Hand
-  - Orc_Right_Arm
-  - Orc_Right_Leg
+  - Orc_Right_Hand_1
+  - Orc_Right_Leg_1
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 2aa4f343b2e4d0c4cab0f2de0c477c14, type: 2}
     offHandItem: {fileID: 0}

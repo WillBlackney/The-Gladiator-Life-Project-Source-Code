@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   race: 7
   bodyParts:
+  - Gnoll_Chest_1
   - Gnoll_Head_1
   - Gnoll_Face_1
   - Gnoll_Right_Hand_1
-  - Gnoll_Chest_1
   - Gnoll_Right_Leg_1

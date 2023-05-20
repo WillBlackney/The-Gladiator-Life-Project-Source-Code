@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   race: 4
   bodyParts:
+  - Elf_Chest_2
   - Elf_Face_3
   - Elf_Head_3
-  - Elf_Chest_2
   - Elf_Right_Hand_2
   - Elf_Right_Leg_2

@@ -305,8 +305,8 @@ namespace HexGameEngine.Abilities
             if(character.controller == Controller.AI)
             {
                 HexCharacterView view = character.hexCharacterView;
-                VisualEventManager.Instance.CreateVisualEvent(() =>
-                VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, ability.abilityName, ability.AbilitySprite, StatusFrameType.SquareBrown)).SetEndDelay(0.5f);
+                VisualEventManager.CreateVisualEvent(() =>
+                VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, ability.abilityName, ability.AbilitySprite, StatusFrameType.SquareBrown)).SetEndDelay(1f);
             }
 
             // Hide pop up
@@ -481,7 +481,7 @@ namespace HexGameEngine.Abilities
                         HexCharacterController.Instance.ModifyArmour(target, -abilityEffect.bonusArmourDamage);
 
                     // Do on hit visual effects for this ability
-                    VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1), target.GetLastStackEventParent());
+                    VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1), target.GetLastStackEventParent());
                     foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                         AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, weaponUsed, target.GetLastStackEventParent());
 
@@ -530,7 +530,7 @@ namespace HexGameEngine.Abilities
 
                     }
 
-                    // trigger chain effect here?
+                    // Trigger chain effect here
                     if (ability.chainedEffects.Count > 0 && abilityEffect.chainedEffect == false && abilityEffect.triggersChainEffectSequence == true)
                     {
                         Allegiance targetAllegiance = Allegiance.Player;
@@ -590,7 +590,7 @@ namespace HexGameEngine.Abilities
                     HexCharacterController.Instance.ModifyCurrentFatigue(target, 2);
 
                     // Miss notification
-                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    VisualEventManager.CreateVisualEvent(() =>
                     {
                         VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "MISS");
                         AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Ooh_1);
@@ -605,7 +605,7 @@ namespace HexGameEngine.Abilities
                         PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Crippled, -1);
 
                     // Duck animation on miss
-                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    VisualEventManager.CreateVisualEvent(() =>
                     HexCharacterController.Instance.PlayDuckAnimation(target.hexCharacterView), target.GetLastStackEventParent()).SetEndDelay(0.5f);
 
                     if (!PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.Slippery) &&
@@ -617,15 +617,9 @@ namespace HexGameEngine.Abilities
                         ability.abilityName != FreeStrikeAbility.abilityName &&
                          ability.abilityName != SpearWallStrikeAbility.abilityName)
                     {
-                        // Riposte notification
-                        VisualEventManager.Instance.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "Riposte!")).SetStartDelay(0.5f);
-
                         // Start free strike attack
                         UseAbility(target, RiposteAbility, caster);
-                        VisualEventManager.Instance.InsertTimeDelayInQueue(0.5f);
-
-
+                        VisualEventManager.InsertTimeDelayInQueue(0.5f);
                     }
                 }
 
@@ -703,7 +697,7 @@ namespace HexGameEngine.Abilities
                 // Roll for hits + play on Hit animations or on miss animations
                 foreach (HexCharacterModel character in charactersEffected)
                 {
-                    VisualEventManager.Instance.CreateStackParentVisualEvent(character);
+                    VisualEventManager.CreateStackParentVisualEvent(character);
 
                     // Roll for hit
                     HitRoll hitRoll = CombatController.Instance.RollForHit(caster, character, ability, weaponUsed);
@@ -716,7 +710,7 @@ namespace HexGameEngine.Abilities
                         HexCharacterController.Instance.ModifyCurrentFatigue(character, 5);
 
                         // Do on hit visual effects for this ability
-                        VisualEventManager.Instance.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1), character.GetLastStackEventParent());
+                        VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1), character.GetLastStackEventParent());
                         foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                         {
                             AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, weaponUsed, character.GetLastStackEventParent());
@@ -729,7 +723,7 @@ namespace HexGameEngine.Abilities
 
                         // Miss notification
                         Vector3 pos = character.hexCharacterView.WorldPosition;
-                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEventManager.CreateVisualEvent(() =>
                         {
                             if (character.hexCharacterView != null) pos = character.hexCharacterView.WorldPosition;
                             VisualEffectManager.Instance.CreateStatusEffect(pos, "MISS");
@@ -745,7 +739,7 @@ namespace HexGameEngine.Abilities
                             PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Crippled, -1);
 
                         // Duck animation on miss
-                        VisualEventManager.Instance.CreateVisualEvent(() =>
+                        VisualEventManager.CreateVisualEvent(() =>
                             HexCharacterController.Instance.PlayDuckAnimation(character.hexCharacterView), character.GetLastStackEventParent());
                     }
 
@@ -837,7 +831,7 @@ namespace HexGameEngine.Abilities
                 // Roll for hits + play on Hit animations or on miss animations
                 foreach (HexCharacterModel character in charactersEffected)
                 {
-                    VisualEventManager.Instance.CreateStackParentVisualEvent(character);
+                    VisualEventManager.CreateStackParentVisualEvent(character);
                     CombatController.Instance.CreateStressCheck(character, abilityEffect.stressEventData, true);
                 }                                          
             }
@@ -923,7 +917,7 @@ namespace HexGameEngine.Abilities
                 foreach (HexCharacterModel character in charactersEffected)
                 {
                     //character.eventStacks.Add(VisualEventManager.Instance.CreateStackParentVisualEvent(character));
-                    VisualEventManager.Instance.CreateStackParentVisualEvent(character);
+                    VisualEventManager.CreateStackParentVisualEvent(character);
                 }
 
                 // Apply Passive
@@ -1014,7 +1008,7 @@ namespace HexGameEngine.Abilities
                 foreach (HexCharacterModel character in charactersEffected)
                 {
                     //character.eventStacks.Add(VisualEventManager.Instance.CreateStackParentVisualEvent(character));
-                    VisualEventManager.Instance.CreateStackParentVisualEvent(character);
+                    VisualEventManager.CreateStackParentVisualEvent(character);
                 }
 
                 // Apply Passive
@@ -1083,7 +1077,7 @@ namespace HexGameEngine.Abilities
                 HexCharacterController.Instance.ModifyHealth(caster, abilityEffect.healthGained);
 
                 // Heal VFX
-                VisualEventManager.Instance.CreateVisualEvent(() =>
+                VisualEventManager.CreateVisualEvent(() =>
                 {
                     VisualEffectManager.Instance.CreateHealEffect(view.WorldPosition);
                     VisualEffectManager.Instance.CreateDamageTextEffect(view.WorldPosition, abilityEffect.healthGained, false, true);
@@ -1241,7 +1235,7 @@ namespace HexGameEngine.Abilities
                     if(obstruction != null)
                     {
                         TaskTracker tracker = new TaskTracker();
-                        VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.TriggerKnockedBackIntoObstructionAnimation
+                        VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.TriggerKnockedBackIntoObstructionAnimation
                             (target.hexCharacterView, obstruction.WorldPosition, tracker)).SetCoroutineData(tracker);
 
                     }
@@ -1293,7 +1287,7 @@ namespace HexGameEngine.Abilities
 
                     // Enable activation window
                     int windowIndex = TurnController.Instance.ActivationOrder.IndexOf(newSummon);
-                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    VisualEventManager.CreateVisualEvent(() =>
                     {
                         view.myActivationWindow.gameObject.SetActive(true);
                         view.myActivationWindow.Show();
@@ -1303,7 +1297,7 @@ namespace HexGameEngine.Abilities
                     // Update all window slot positions + activation pointer arrow
                     HexCharacterModel entityActivated = TurnController.Instance.EntityActivated;
                     var cachedOrder = TurnController.Instance.ActivationOrder.ToList();
-                    VisualEventManager.Instance.CreateVisualEvent(() =>
+                    VisualEventManager.CreateVisualEvent(() =>
                     {
                         TurnController.Instance.UpdateWindowPositions(cachedOrder);
                         TurnController.Instance.MoveActivationArrowTowardsEntityWindow(entityActivated);

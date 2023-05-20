@@ -85,6 +85,7 @@ namespace HexGameEngine.Characters
             get { return currentAnimation; }
             set
             {
+                // Show or stop movement dust poofs
                 currentAnimation = value;
                 if (vfxManager != null && 
                     (currentAnimation == AnimationEventController.RUN ||
@@ -94,6 +95,7 @@ namespace HexGameEngine.Characters
                     currentAnimation == AnimationEventController.TACKLE_END)) vfxManager.PlayMovementDirtPoofs();               
                 else if (vfxManager != null) vfxManager.StopMovementDirtPoofs();
 
+                // Show or stop dash trail
                 if (vfxManager != null &&
                    (currentAnimation == AnimationEventController.CHARGE ||
                    currentAnimation == AnimationEventController.TACKLE)) 
@@ -109,6 +111,9 @@ namespace HexGameEngine.Characters
                     });
                 }
                 else if (vfxManager != null) vfxManager.StopDashTrail();
+
+                // Show normal face on idle
+                if (currentAnimation == AnimationEventController.IDLE) ucm.ShowNormalFace();
             }
         }
 
@@ -163,7 +168,7 @@ namespace HexGameEngine.Characters
             {
                 armourTextWorld.gameObject.SetActive(false);
                 healthTextWorld.gameObject.SetActive(false);
-                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(this, null, 0.25f, 0.25f);
+                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(this, null, 0.25f, 0.001f);
             }        
                            
         }

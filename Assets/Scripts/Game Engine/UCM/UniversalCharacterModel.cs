@@ -229,14 +229,10 @@ namespace CardGameEngine.UCM
         public void ShowNormalFace()
         {
             Debug.LogWarning("ShowNormalFace");
-            if (activeFace != null)
+            if (activeFace != null && normalFaceSprite != null)
             {
                 activeFace.GetComponent<SpriteRenderer>().sprite = normalFaceSprite;
             }
-        }
-        public void DisconnectHeadBone()
-        {
-            //headBone.transform.SetParent(decapitatedHeadParent, true);
         }
 
         public void StopAnimController()

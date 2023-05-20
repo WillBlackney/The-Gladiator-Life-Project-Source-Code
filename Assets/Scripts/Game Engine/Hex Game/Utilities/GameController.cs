@@ -54,6 +54,11 @@ namespace HexGameEngine
 
         // Initialization + Setup
         #region
+        protected override void Awake()
+        {
+            base.Awake();
+            VisualEventManager.Initialize();
+        }
         private void Start()
         {
             RunApplication();
@@ -188,7 +193,7 @@ namespace HexGameEngine
 
             // Move characters towards start nodes
             TaskTracker cData = new TaskTracker();
-            VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
+            VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
 
             // Start a new combat event
             TurnController.Instance.OnNewCombatEventStarted();
@@ -275,7 +280,7 @@ namespace HexGameEngine
             PersistencyController.Instance.AutoUpdateSaveFile();
 
             // Wait until v queue count = 0
-            yield return new WaitUntil(() => VisualEventManager.Instance.EventQueue.Count == 0);
+            yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);
 
             AudioManager.Instance.FadeOutAllCombatMusic(1f);
             // to do: play victory fanfare
@@ -327,7 +332,7 @@ namespace HexGameEngine
             SetGameState(GameState.CombatRewardPhase);
 
             // Wait for lingering visual events
-            yield return new WaitUntil(() => VisualEventManager.Instance.EventQueue.Count == 0);
+            yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);
             AudioManager.Instance.FadeOutAllCombatMusic(1f);
             // to do: play victory fanfare
 
@@ -393,7 +398,7 @@ namespace HexGameEngine
             SetGameState(GameState.CombatRewardPhase);
 
             // wait until v queue count = 0
-            yield return new WaitUntil(() => VisualEventManager.Instance.EventQueue.Count == 0);
+            yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);
 
             // Tear down summoned characters + enemies
             List<HexCharacterModel> destCharacters = new List<HexCharacterModel>();
@@ -539,7 +544,7 @@ namespace HexGameEngine
             BlackScreenController.Instance.FadeOutScreen(2f);
 
             // Wait for the current visual event to finish playing
-            VisualEvent handle = VisualEventManager.Instance.HandleEventQueueTearDown();
+            VisualEvent handle = VisualEventManager.HandleEventQueueTearDown();
 
             // Wait till its safe to tearn down event queue and scene
             yield return new WaitForSeconds(2f);
@@ -681,7 +686,7 @@ namespace HexGameEngine
 
                 // Move characters towards start nodes
                 TaskTracker cData = new TaskTracker();
-                VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
+                VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
 
                 // Start a new combat event
                 TurnController.Instance.OnNewCombatEventStarted();
@@ -762,7 +767,7 @@ namespace HexGameEngine
 
             // Move characters towards start nodes
             TaskTracker cData = new TaskTracker();
-            VisualEventManager.Instance.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
+            VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
 
             // Start a new combat event
             TurnController.Instance.OnNewCombatEventStarted();

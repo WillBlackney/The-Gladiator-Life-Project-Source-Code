@@ -65,12 +65,11 @@ MonoBehaviour:
     - perkTag: 16
       stacks: 1
   modelParts:
-  - Human_Chest
+  - Human_Chest_1
   - Human_Head_1
   - Human_Face_1
-  - Human_Right_Hand
-  - Human_Right_Arm
-  - Human_Right_Leg
+  - Human_Right_Hand_1
+  - Human_Right_Leg_1
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
     offHandItem: {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}

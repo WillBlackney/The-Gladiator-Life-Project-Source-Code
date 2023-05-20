@@ -60,7 +60,7 @@ namespace HexGameEngine.VisualEvents
         private void MoveTowardsTarget()
         {
             if (destinationReached) return;
-
+            if (transform.position.x == destination.x) moveAsParabola = false;
             if (moveAsParabola) MoveParabola();
             else MoveNormally();
 

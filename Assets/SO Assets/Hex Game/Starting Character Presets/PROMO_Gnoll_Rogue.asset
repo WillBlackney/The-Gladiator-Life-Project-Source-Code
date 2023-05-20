@@ -62,12 +62,11 @@ MonoBehaviour:
   serializedPassiveManager:
     perks: []
   modelParts:
-  - Gnoll_Chest
+  - Gnoll_Chest_1
   - Gnoll_Head_1
   - Gnoll_Face_1
-  - Gnoll_Right_Hand
-  - Gnoll_Right_Arm
-  - Gnoll_Right_Leg
+  - Gnoll_Right_Hand_1
+  - Gnoll_Right_Leg_1
   itemSet:
     mainHandItem: {fileID: 11400000, guid: ab6f2b51cf50eaa43bba82ed52ef5342, type: 2}
     offHandItem: {fileID: 11400000, guid: ab6f2b51cf50eaa43bba82ed52ef5342, type: 2}

@@ -350,8 +350,8 @@ namespace HexGameEngine.DraftEvent
 
             // Move the new characters on screen
             TaskTracker tracker = new TaskTracker();
-            VisualEventManager.Instance.CreateVisualEvent(()=> DoRecruitModelsMoveToMeetingSequence(tracker)).SetCoroutineData(tracker);
-            VisualEventManager.Instance.CreateVisualEvent(() => ShowContinueButton());
+            VisualEventManager.CreateVisualEvent(()=> DoRecruitModelsMoveToMeetingSequence(tracker)).SetCoroutineData(tracker);
+            VisualEventManager.CreateVisualEvent(() => ShowContinueButton());
         }
         private void HandleRecruitSelectionConfirmed()
         {

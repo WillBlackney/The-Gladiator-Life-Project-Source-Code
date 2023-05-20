@@ -145,6 +145,8 @@ namespace HexGameEngine.VisualEvents
         {
             if (destinationReached) return;
 
+            if (transform.position.x == destination.x) moveAsParabola = false;
+
             if (moveAsParabola) MoveParabola();
             else MoveNormally();
 
@@ -165,7 +167,6 @@ namespace HexGameEngine.VisualEvents
             height = Mathf.Abs(maxParabolaY * lerpX * lerpY / (dirMod * initialDistanceX * initialDistanceX));
 
             Vector3 movePosition = new Vector3(nextX, baseY + height, transform.position.z);
-            //transform.rotation = Projectile.LookAtTarget(movePosition - transform.position);
             transform.position = movePosition;
 
         }

@@ -983,7 +983,7 @@ namespace HexGameEngine.Characters
 
             return nameReturned;
         }
-        private CharacterModelTemplateSO GetRandomModelTemplate(CharacterRace race)
+        public CharacterModelTemplateSO GetRandomModelTemplate(CharacterRace race)
         {
             List<CharacterModelTemplateSO> validTemplates = new List<CharacterModelTemplateSO>();
 
@@ -996,7 +996,7 @@ namespace HexGameEngine.Characters
             return validTemplates[RandomGenerator.NumberBetween(0, validTemplates.Count - 1)];
 
         }
-        private CharacterRace GetRandomRace(List<CharacterRace> validRaces)
+        public CharacterRace GetRandomRace(List<CharacterRace> validRaces)
         {
             return validRaces[RandomGenerator.NumberBetween(0, validRaces.Count - 1)];
         }      

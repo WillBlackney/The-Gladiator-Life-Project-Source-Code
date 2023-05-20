@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   race: 1
   bodyParts:
-  - Human_Chest
+  - Human_Chest_1
   - Human_Face_1
   - Human_Head_1
-  - Human_Right_Arm
-  - Human_Right_Hand
-  - Human_Right_Leg
+  - Human_Right_Hand_1
+  - Human_Right_Leg_1

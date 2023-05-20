@@ -19,7 +19,7 @@ MonoBehaviour:
     On a Critical Strike, apply 2 Burning.
   abilitySprite: {fileID: 21300000, guid: 1d619aecf64f54a4cadebb2c42c9e359, type: 3}
   energyCost: 4
-  fatigueCost: 15
+  fatigueCost: 20
   baseCooldown: 2
   abilityType: 0300000005000000
   doesNotBreakStealth: 0

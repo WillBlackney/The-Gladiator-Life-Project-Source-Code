@@ -78,13 +78,9 @@ MonoBehaviour:
   myScaleModifier: 0
   mySortingOrder: 0
   projectileDestroyDelay: 0
+  movementSpeed: 10
+  moveAsParabola: 1
   maxParabolaY: 0.25
-  curve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   myRigidBody: {fileID: 0}
   mySphereCollider: {fileID: 0}
   impactParticle: {fileID: 121496, guid: 5e8a137808d7d374487f34e236c723db, type: 3}

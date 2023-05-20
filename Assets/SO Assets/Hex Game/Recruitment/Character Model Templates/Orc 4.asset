@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   race: 2
   bodyParts:
+  - Orc_Chest_2
   - Orc_Head_3
   - Orc_Face_4
-  - Orc_Chest_2
   - Orc_Right_Hand_2
   - Orc_Right_Leg_2
