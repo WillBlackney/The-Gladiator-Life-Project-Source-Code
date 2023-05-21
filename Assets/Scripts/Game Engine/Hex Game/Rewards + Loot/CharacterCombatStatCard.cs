@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using HexGameEngine.UCM;
+﻿using UnityEngine;
 using CardGameEngine.UCM;
 using TMPro;
 using HexGameEngine.UI;
+using DG.Tweening;
 
 namespace HexGameEngine.RewardSystems
 {
@@ -14,6 +12,7 @@ namespace HexGameEngine.RewardSystems
         #region
         [Header("Core Components")]
         [SerializeField] private GameObject levelUpParent;
+        [SerializeField] private CanvasGroup levelUpParentCg;
         [SerializeField] private UIPerkIcon[] injuryIcons;
         [SerializeField] private GameObject knockDownIndicatorParent;
         [SerializeField] private GameObject deathIndicatorParent;
@@ -30,7 +29,8 @@ namespace HexGameEngine.RewardSystems
         [SerializeField] private TextMeshProUGUI healthLostText;
         [SerializeField] private TextMeshProUGUI stressGainedText;
         [SerializeField] private TextMeshProUGUI killsText;
-
+        [SerializeField] private TextMeshProUGUI armourLostText;
+        [SerializeField] private TextMeshProUGUI damageDealtText;
         #endregion
 
         // Getters + Accessors
@@ -89,6 +89,31 @@ namespace HexGameEngine.RewardSystems
         {
             get { return killsText; }
         }
+        public TextMeshProUGUI ArmourLostText
+        {
+            get { return armourLostText; }
+        }
+        public TextMeshProUGUI DamageDealtText
+        {
+            get { return damageDealtText; }
+        }
         #endregion
+
+        public void ShowLevelUpIndicator()
+        {
+            LevelUpParent.SetActive(true);
+            LevelUpParent.transform.DOKill();
+            LevelUpParent.transform.DOScale(new Vector3(2, 2, 2), 0f);
+            LevelUpParent.transform.DOScale(new Vector3(2.5f, 2.5f, 2.5f), 0.5f).SetLoops(-1, LoopType.Yoyo);
+            LevelUpParent.transform.DOLocalRotate(new Vector3(0.0f, 0.0f, 360), 1.0f)
+                .SetLoops(-1, LoopType.Incremental)
+                .SetEase(Ease.Linear)
+                .SetRelative();
+
+            levelUpParentCg.DOKill();
+            levelUpParentCg.DOFade(0.35f, 0f);
+            levelUpParentCg.DOFade(0.75f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+
+        }
     }
 }

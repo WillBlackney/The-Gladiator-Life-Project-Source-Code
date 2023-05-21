@@ -548,10 +548,8 @@ namespace HexGameEngine.Characters
             finalBlockValue += armourGainedOrLost;
 
             // Prevent armour going less then 0
-            if (finalBlockValue < 0)
-            {
-                finalBlockValue = 0;
-            }
+            if (finalBlockValue < 0) finalBlockValue = 0;
+            if (armourGainedOrLost < 0) character.armourLostThisCombat += armourGainedOrLost;            
 
             // Set health after calculation
             character.currentArmour = finalBlockValue;

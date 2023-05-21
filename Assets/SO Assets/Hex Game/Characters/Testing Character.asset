@@ -64,10 +64,11 @@ MonoBehaviour:
     - perkTag: 1
       stacks: 3
   modelParts:
-  - Elf_Chest
+  - Elf_Chest_1
   - Elf_Face_2
   - Elf_Head_1
-  - Elf_Right_Leg
+  - Elf_Right_Leg_1
+  - Elf_Right_Hand_1
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 623ec2e1eab053346b93e30e2d91c862, type: 2}
     offHandItem: {fileID: 0}

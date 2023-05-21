@@ -1133,6 +1133,9 @@ namespace HexGameEngine.Combat
             if (totalHealthLost != 0) HexCharacterController.Instance.ModifyHealth(target, -totalHealthLost);
             if (totalArmourLost != 0) HexCharacterController.Instance.ModifyArmour(target, -totalArmourLost);
 
+            // Increment damage dealt tracking
+            if(attacker != null) attacker.damageDealtThisCombat += totalHealthLost + totalArmourLost;            
+
             // Check for barrier
             if (removedBarrier) PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Barrier, -1, true, 0.5f);            
 

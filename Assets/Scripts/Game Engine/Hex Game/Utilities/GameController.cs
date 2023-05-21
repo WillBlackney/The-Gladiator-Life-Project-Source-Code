@@ -282,8 +282,7 @@ namespace HexGameEngine
             // Wait until v queue count = 0
             yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);
 
-            AudioManager.Instance.FadeOutAllCombatMusic(1f);
-            // to do: play victory fanfare
+            AudioManager.Instance.FadeOutAllCombatMusic(0.25f);
 
             // Tear down summoned characters
             foreach (HexCharacterModel model in HexCharacterController.Instance.AllSummonedDefenders)
@@ -292,17 +291,17 @@ namespace HexGameEngine
                 VisualEffectManager.Instance.CreateExpendEffect(model.hexCharacterView.WorldPosition, 15, 0.2f, false);
 
                 // Fade out character model
-                CharacterModeller.FadeOutCharacterModel(model.hexCharacterView.ucm, 1f);
+                CharacterModeller.FadeOutCharacterModel(model.hexCharacterView.ucm, 0.5f);
 
                 // Fade out UI elements
-                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
+                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null, 0.5f);
             }
 
             // Disable any player character gui's if they're still active
             foreach (HexCharacterModel model in HexCharacterController.Instance.AllDefenders)
             {
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
-            }
+            }           
 
             // Hide level nodes
             LevelController.Instance.HideAllNodeViews();
@@ -318,8 +317,19 @@ namespace HexGameEngine
             MoveActionController.Instance.HidePathCostPopup();
             EnemyInfoModalController.Instance.HideModal();
 
+            // Crowd combat end applause SFX and animations
+            AudioManager.Instance.PlaySound(Sound.Crowd_Big_Cheer_1);
+            CameraController.Instance.DoCameraZoom(5, 5.5f, 1f);
+            // to do: animate crowd with more intensity
+
+            yield return new WaitForSeconds(2f);
+            DOVirtual.DelayedCall(1f, ()=> AudioManager.Instance.FadeOutSound(Sound.Crowd_Big_Cheer_1, 3f));
+
             // Show combat screen
             CombatRewardController.Instance.BuildAndShowPostCombatScreen(combatStats, RunController.Instance.CurrentCombatContractData, true);
+
+           
+
         }
         public void StartCombatDefeatSequence()
         {
@@ -442,15 +452,15 @@ namespace HexGameEngine
         }
         private IEnumerator HandlePostCombatToTownTransistionCoroutine()
         {
+            // Fade out
+            BlackScreenController.Instance.FadeOutScreen(1f);
+            AudioManager.Instance.FadeOutAllAmbience(1f);
+            yield return new WaitForSeconds(1f);
+
             // Prepare town + new day start data + save game
             RunController.Instance.OnNewDayStart();
             RunController.Instance.SetCheckPoint(SaveCheckPoint.Town);
             PersistencyController.Instance.AutoUpdateSaveFile();
-
-            // Fade out
-            BlackScreenController.Instance.FadeOutScreen(1f);
-            AudioManager.Instance.FadeOutAllAmbience(1f);
-            yield return new WaitForSeconds(1f);                        
 
             // Tear down combat views
             HexCharacterController.Instance.HandleTearDownCombatScene();

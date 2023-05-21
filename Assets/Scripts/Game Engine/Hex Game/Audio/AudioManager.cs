@@ -521,7 +521,7 @@ namespace HexGameEngine.Audio
         Crowd_Cheer_1 = 89,
         Crowd_Ooh_1 = 90,
         Crowd_Applause_1 = 91,
-
+        Crowd_Big_Cheer_1 = 105,
     }
 }
 

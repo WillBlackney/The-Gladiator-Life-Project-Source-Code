@@ -77,7 +77,9 @@ namespace HexGameEngine.Characters
 
         [Header("Combat Statistics Properties")]
         public int totalKills;
+        public int damageDealtThisCombat;
         public int healthLostThisCombat;
+        public int armourLostThisCombat;
         public int stressGainedThisCombat;
         public List<Perk> injuriesGainedThisCombat = new List<Perk>();
         public List<Perk> permanentInjuriesGainedThisCombat = new List<Perk>();

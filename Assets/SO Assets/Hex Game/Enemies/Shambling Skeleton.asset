@@ -23,7 +23,7 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 1000
+      value: 1
       stars: 0
     dodge:
       value: 5

@@ -20,14 +20,22 @@ using HexGameEngine.Items;
 using TMPro;
 using HexGameEngine.UI;
 using UnityEngine.UI;
+using HexGameEngine.Audio;
+
 namespace HexGameEngine.RewardSystems
 {
     public class CombatRewardController : Singleton<CombatRewardController>
     {
         // Properties + Components
         #region
-        [Header("Stat Screen Components")]
+        [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
+        [SerializeField] private RectTransform contentRect;
+        [SerializeField] private RectTransform contentOffScreenRect;
+        [SerializeField] private RectTransform contentOnScreenRect;
+        [SerializeField] private Image blackUnderlay;
+
+        [Header("Page UI Components")]
         [SerializeField] private TextMeshProUGUI headerText;
         [SerializeField] private GameObject characterStatPageVisualParent;
         [SerializeField] private GameObject lootPageVisualParent;
@@ -104,7 +112,7 @@ namespace HexGameEngine.RewardSystems
             }
 
             // Is there experience from an enemy death that has gone unrewarded?
-            if(totalKillingBlowXp < encounterData.TotalEnemyXP)
+            if (totalKillingBlowXp < encounterData.TotalEnemyXP)
             {
                 baseXp += (encounterData.TotalEnemyXP - totalKillingBlowXp) / characters.Count;
             }
@@ -120,8 +128,8 @@ namespace HexGameEngine.RewardSystems
 
                 // Apply xp gain + level up
                 int xpGained = baseXp + (killXpSlice * character.totalKills);
-                if (character.characterData.currentXP + (xpGained * StatCalculator.GetCharacterXpGainRate(character))>= character.characterData.currentMaxXP)                
-                    result.didLevelUp = true;                
+                if (character.characterData.currentXP + (xpGained * StatCalculator.GetCharacterXpGainRate(character)) >= character.characterData.currentMaxXP)
+                    result.didLevelUp = true;
                 result.xpGained = xpGained;
             }
 
@@ -143,6 +151,8 @@ namespace HexGameEngine.RewardSystems
             result.totalKills = character.totalKills;
             result.healthLost = character.healthLostThisCombat;
             result.stressGained = character.stressGainedThisCombat;
+            result.armourLost = character.armourLostThisCombat;
+            result.damageDealt = character.damageDealtThisCombat;
             result.injuriesGained.AddRange(character.injuriesGainedThisCombat);
             result.permanentInjuriesGained.AddRange(character.permanentInjuriesGainedThisCombat);
             if (character.characterData.currentHealth <= 0) result.died = true;
@@ -169,27 +179,36 @@ namespace HexGameEngine.RewardSystems
         }
         public void BuildAndShowPostCombatScreen(List<CharacterCombatStatData> data, CombatContractData contractData, bool victory)
         {
-            mainVisualParent.SetActive(true);            
-            characterStatPageVisualParent.SetActive(true);
-            currentWindowViewing = WindowState.CharactersPage;
-            lootPageVisualParent.SetActive(false);
-            statsHeaderButtonImage.sprite = selectedButtonSprite;
-            lootHeaderButtonImage.sprite = unselectedButtonSprite;
+            SetContentDefaultViewState();           
             BuildCharacterStatCardPage(data);
+            MoveContentOnScreen();
             if (victory)
             {
+                // to do: play victory fanfare sfx
+                AudioManager.Instance.PlaySound(Sound.Music_Victory_Fanfare);
                 headerText.text = "VICTORY!";
                 BuildLootPageFromContractLootData(contractData);
             }
             else
             {
+                AudioManager.Instance.PlaySound(Sound.Music_Defeat_Fanfare);
                 // Hide Loot Icons
                 for (int i = 0; i < lootIcons.Count; i++)
                     lootIcons[i].Reset();
 
+                // to do: play defeat fanfare sfx
                 headerText.text = "DEFEAT!";
             }
 
+        }
+        private void SetContentDefaultViewState()
+        {
+            mainVisualParent.SetActive(true);
+            characterStatPageVisualParent.SetActive(true);
+            currentWindowViewing = WindowState.CharactersPage;
+            lootPageVisualParent.SetActive(false);
+            statsHeaderButtonImage.sprite = selectedButtonSprite;
+            lootHeaderButtonImage.sprite = unselectedButtonSprite;
         }
         private void BuildCharacterStatCardPage(List<CharacterCombatStatData> data)
         {
@@ -200,7 +219,7 @@ namespace HexGameEngine.RewardSystems
             // Build a card for each character
             for (int i = 0; i < data.Count; i++)
             {
-                if(allCharacterStatCards.Count <= i)
+                if (allCharacterStatCards.Count <= i)
                 {
                     CharacterCombatStatCard newCard = Instantiate(characterStatCardPrefab, characterStatCardParent).GetComponent<CharacterCombatStatCard>();
                     allCharacterStatCards.Add(newCard);
@@ -224,10 +243,10 @@ namespace HexGameEngine.RewardSystems
             card.gameObject.SetActive(true);
 
             // ucm 
-            CharacterModeller.BuildModelFromStringReferencesAsMugshot(card.Ucm, character.modelParts);            
+            CharacterModeller.BuildModelFromStringReferencesAsMugshot(card.Ucm, character.modelParts);
 
             // Knock down views setup
-            if (data.permanentInjuriesGained.Count > 0)            
+            if (data.permanentInjuriesGained.Count > 0)
                 card.KnockDownIndicatorParent.SetActive(true);
 
             // Death views setup
@@ -238,16 +257,18 @@ namespace HexGameEngine.RewardSystems
             }
 
             // text fields
-            card.NameText.text = character.myName; 
+            card.NameText.text = character.myName;
             card.SubNameText.text = character.myClassName;
             card.CurrentLevelText.text = character.currentLevel.ToString();
             card.XpText.text = data.xpGained.ToString();
             card.HealthLostText.text = Mathf.Abs(data.healthLost).ToString();
+            card.ArmourLostText.text = Mathf.Abs(data.armourLost).ToString();
+            card.DamageDealtText.text = data.damageDealt.ToString();
             card.StressGainedText.text = data.stressGained.ToString();
             card.KillsText.text = data.totalKills.ToString();
 
             // level up indicator
-            if (data.didLevelUp) card.LevelUpParent.SetActive(true);
+            if (data.didLevelUp) card.ShowLevelUpIndicator();
             else card.LevelUpParent.SetActive(false);
 
             // build injury icons
@@ -263,11 +284,11 @@ namespace HexGameEngine.RewardSystems
         }
         private void BuildLootPageFromContractLootData(CombatContractData contract)
         {
-            for(int i = 0; i < lootIcons.Count;i++)            
+            for (int i = 0; i < lootIcons.Count; i++)
                 lootIcons[i].Reset();
 
             int iconIndex = 0;
-            if(contract.combatRewardData.item != null)
+            if (contract.combatRewardData.item != null)
             {
                 lootIcons[iconIndex].BuildAsItemReward(contract.combatRewardData.item);
                 iconIndex++;
@@ -290,7 +311,7 @@ namespace HexGameEngine.RewardSystems
         #region
         public void OnStatsButtonClicked()
         {
-            if(currentWindowViewing != WindowState.CharactersPage)
+            if (currentWindowViewing != WindowState.CharactersPage)
             {
                 currentWindowViewing = WindowState.CharactersPage;
                 characterStatPageVisualParent.SetActive(true);
@@ -317,7 +338,22 @@ namespace HexGameEngine.RewardSystems
         public void OnContinueButtonClicked()
         {
             if (currentWindowViewing == WindowState.CharactersPage) OnLootButtonClicked();
-            else GameController.Instance.HandlePostCombatToTownTransistion();            
+            else GameController.Instance.HandlePostCombatToTownTransistion();
+        }
+
+        #endregion
+
+        #region Movement + Anims
+        private void MoveContentOnScreen()
+        {
+            blackUnderlay.DOKill();
+            blackUnderlay.DOFade(0, 0);
+            blackUnderlay.DOFade(0.5f, 0.5f);
+
+            contentRect.DOKill();
+            contentRect.position = contentOffScreenRect.position;
+            contentRect.DOMove(contentOnScreenRect.position, 1f).SetEase(Ease.OutBack);
+
         }
 
         #endregion
@@ -333,6 +369,8 @@ namespace HexGameEngine.RewardSystems
         public int totalKills;
         public int healthLost;
         public int stressGained;
+        public int armourLost;
+        public int damageDealt;
         public List<Perk> injuriesGained = new List<Perk>();
         public List<Perk> permanentInjuriesGained = new List<Perk>();
         public bool died = false;
