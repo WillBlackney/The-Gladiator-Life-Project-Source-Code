@@ -5,8 +5,6 @@ using System;
 using Sirenix.OdinInspector;
 using HexGameEngine.Utilities;
 using DG.Tweening;
-using TbsFramework.Players;
-using MapSystem;
 
 namespace HexGameEngine.Audio
 {
@@ -482,7 +480,8 @@ namespace HexGameEngine.Audio
         Music_Boss_Combat_2 = 48,
         Music_Victory_Fanfare = 50,
         Music_Defeat_Fanfare = 59,
-        Music_Main_Menu_Theme_1 = 36,
+        Music_Main_Menu_Theme_Looped_1 = 36,
+        Music_Main_Menu_Theme_Unlooped_1 = 106,
         Music_Town_Theme_1 = 98,
 
         Weapon_Aoe_Swing = 60,

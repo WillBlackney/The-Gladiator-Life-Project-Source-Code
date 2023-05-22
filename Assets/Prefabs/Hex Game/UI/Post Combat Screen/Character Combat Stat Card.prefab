@@ -7332,19 +7332,19 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'The total amount of '
-  - color: 0
+  - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Health '
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'and '
-  - color: 0
+  - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Armour '
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: damage dealt to enemies this combat.

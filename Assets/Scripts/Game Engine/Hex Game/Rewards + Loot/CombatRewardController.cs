@@ -184,7 +184,6 @@ namespace HexGameEngine.RewardSystems
             MoveContentOnScreen();
             if (victory)
             {
-                // to do: play victory fanfare sfx
                 AudioManager.Instance.PlaySound(Sound.Music_Victory_Fanfare);
                 headerText.text = "VICTORY!";
                 BuildLootPageFromContractLootData(contractData);
@@ -192,12 +191,10 @@ namespace HexGameEngine.RewardSystems
             else
             {
                 AudioManager.Instance.PlaySound(Sound.Music_Defeat_Fanfare);
+                headerText.text = "DEFEAT!";
                 // Hide Loot Icons
                 for (int i = 0; i < lootIcons.Count; i++)
-                    lootIcons[i].Reset();
-
-                // to do: play defeat fanfare sfx
-                headerText.text = "DEFEAT!";
+                    lootIcons[i].Reset();                
             }
 
         }

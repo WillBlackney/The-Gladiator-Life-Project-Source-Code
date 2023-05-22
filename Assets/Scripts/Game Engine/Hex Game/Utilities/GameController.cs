@@ -319,11 +319,11 @@ namespace HexGameEngine
 
             // Crowd combat end applause SFX and animations
             AudioManager.Instance.PlaySound(Sound.Crowd_Big_Cheer_1);
-            CameraController.Instance.DoCameraZoom(5, 5.5f, 1f);
+            CameraController.Instance.DoCameraZoom(5, 5.75f, 1f);
             // to do: animate crowd with more intensity
 
             yield return new WaitForSeconds(2f);
-            DOVirtual.DelayedCall(1f, ()=> AudioManager.Instance.FadeOutSound(Sound.Crowd_Big_Cheer_1, 3f));
+            DOVirtual.DelayedCall(2f, ()=> AudioManager.Instance.FadeOutSound(Sound.Crowd_Big_Cheer_1, 3f));
 
             // Show combat screen
             CombatRewardController.Instance.BuildAndShowPostCombatScreen(combatStats, RunController.Instance.CurrentCombatContractData, true);
@@ -494,7 +494,7 @@ namespace HexGameEngine
         {
             // Fade out screen + audio
             AudioManager.Instance.PlaySound(Sound.Events_New_Game_Started);
-            AudioManager.Instance.FadeOutSound(Sound.Music_Main_Menu_Theme_1, 2f);
+            AudioManager.Instance.FadeOutSound(Sound.Music_Main_Menu_Theme_Unlooped_1, 2f);
             BlackScreenController.Instance.FadeOutScreen(2f);
             yield return new WaitForSeconds(2f);
 
@@ -600,7 +600,7 @@ namespace HexGameEngine
             CombatRewardController.Instance.HidePostCombatRewardScreen();
 
             // Fade in menu music
-            AudioManager.Instance.FadeInSound(Sound.Music_Main_Menu_Theme_1, 1f);
+            AudioManager.Instance.FadeInSound(Sound.Music_Main_Menu_Theme_Unlooped_1, 1f);
 
             // Show menu screen
             MainMenuController.Instance.ShowFrontScreen();
@@ -616,9 +616,9 @@ namespace HexGameEngine
         private IEnumerator HandleLoadSavedGameFromMainMenuEventCoroutine()
         {
             // Fade menu music
-            if (AudioManager.Instance.IsSoundPlaying(Sound.Music_Main_Menu_Theme_1))
+            if (AudioManager.Instance.IsSoundPlaying(Sound.Music_Main_Menu_Theme_Unlooped_1))
             {
-                AudioManager.Instance.FadeOutSound(Sound.Music_Main_Menu_Theme_1, 1f);
+                AudioManager.Instance.FadeOutSound(Sound.Music_Main_Menu_Theme_Unlooped_1, 1f);
             }
 
             // Fade out menu scren
