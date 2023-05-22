@@ -13,6 +13,7 @@ using HexGameEngine.Cards;
 using DG.Tweening;
 using CardGameEngine.UCM;
 using UnityEngine.TextCore.Text;
+using HexGameEngine.Persistency;
 
 namespace HexGameEngine.UI
 {
@@ -136,6 +137,11 @@ namespace HexGameEngine.UI
 
         [SerializeField] TextMeshProUGUI perkPointsText;
         [SerializeField] TextMeshProUGUI talentsPointsText;
+
+        [Header("Dismiss Character Page Components")]
+        [SerializeField] GameObject dismissVisualParent;
+        [SerializeField] UniversalCharacterModel dismissUcm;
+        [SerializeField] TextMeshProUGUI dismissPageHeaderText;
 
         private HexCharacterData characterCurrentlyViewing;
         #endregion
@@ -634,6 +640,48 @@ namespace HexGameEngine.UI
         }
         #endregion
 
+        #region Dismiss Character Modal Logic
+        public void OnDismissButtonClicked()
+        {
+            if(CharacterDataController.Instance.AllPlayerCharacters.Count > 1)
+                BuildAndShowDismissPage(CharacterCurrentlyViewing);
+        }
+        private void BuildAndShowDismissPage(HexCharacterData character)
+        {
+            dismissVisualParent.SetActive(true);
+
+            // Set header text
+            dismissPageHeaderText.text = "Are you sure you want to dismiss " + character.myName + " " + character.myClassName + "?";
+           
+            // Build model
+            CharacterModeller.BuildModelFromStringReferences(dismissUcm, character.modelParts);
+            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, dismissUcm);
+            dismissUcm.SetIdleAnim();            
+        }
+        public void OnConfirmDismissButtonClicked()
+        {
+            dismissVisualParent.SetActive(false);
+
+            // Strip items and send to inventory
+            if (CharacterCurrentlyViewing.itemSet.headArmour != null) InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(CharacterCurrentlyViewing.itemSet.headArmour));
+            if (CharacterCurrentlyViewing.itemSet.bodyArmour != null) InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(CharacterCurrentlyViewing.itemSet.bodyArmour));
+            if (CharacterCurrentlyViewing.itemSet.mainHandItem != null) InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(CharacterCurrentlyViewing.itemSet.mainHandItem));
+            if (CharacterCurrentlyViewing.itemSet.offHandItem != null) InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(CharacterCurrentlyViewing.itemSet.offHandItem));
+            if (CharacterCurrentlyViewing.itemSet.trinket != null) InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(CharacterCurrentlyViewing.itemSet.trinket));
+            
+            // Add character to roster
+            CharacterDataController.Instance.RemoveCharacterFromRoster(CharacterCurrentlyViewing);
+
+            // Rebuild character scroll roster + normal roster
+            CharacterScrollPanelController.Instance.RebuildViews();
+            HandleBuildAndShowCharacterRoster();
+        }
+        public void OnCancelDismissButtonClicked()
+        {
+            dismissVisualParent.SetActive(false);
+        }
+
+        #endregion
 
         // NEW LOGIC
 

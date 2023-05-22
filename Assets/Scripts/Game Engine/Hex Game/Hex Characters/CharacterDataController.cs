@@ -447,6 +447,10 @@ namespace HexGameEngine.Characters
         {
             if(AllPlayerCharacters.Contains(character) == false) AllPlayerCharacters.Add(character);
         }
+        public void RemoveCharacterFromRoster(HexCharacterData character)
+        {
+            if (AllPlayerCharacters.Contains(character)) AllPlayerCharacters.Remove(character);
+        }
         public void ClearCharacterRoster()
         {
             AllPlayerCharacters.Clear();
