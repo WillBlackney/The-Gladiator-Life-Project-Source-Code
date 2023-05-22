@@ -1129,6 +1129,9 @@ namespace HexGameEngine.Combat
                     VisualEffectManager.Instance.CreateGroundBloodSpatter(target.hexCharacterView.WorldPosition), parentEvent);
             }
 
+            // Animate crowd
+            if (attacker != null) VisualEventManager.CreateVisualEvent(() => CrowdMember.AnimateCrowdOnHit(), parentEvent);
+
             // Reduce health + armour
             if (totalHealthLost != 0) HexCharacterController.Instance.ModifyHealth(target, -totalHealthLost);
             if (totalArmourLost != 0) HexCharacterController.Instance.ModifyArmour(target, -totalArmourLost);

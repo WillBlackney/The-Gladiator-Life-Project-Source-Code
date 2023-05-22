@@ -13,6 +13,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using HexGameEngine.UI;
 using HexGameEngine.VisualEvents;
+using HexGameEngine.Utilities;
 
 namespace HexGameEngine.Characters
 {
@@ -101,7 +102,7 @@ namespace HexGameEngine.Characters
                    currentAnimation == AnimationEventController.TACKLE)) 
                 {
                     vfxManager.PlayDashTrail();
-                    DOVirtual.DelayedCall(2f, () =>
+                    DelayUtils.DelayedCall(2f, () =>
                     {
                         if (currentAnimation != AnimationEventController.CHARGE &&
                          currentAnimation != AnimationEventController.TACKLE)

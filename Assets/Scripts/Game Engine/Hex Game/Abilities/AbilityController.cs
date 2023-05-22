@@ -594,6 +594,7 @@ namespace HexGameEngine.Abilities
                     {
                         VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "MISS");
                         AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Ooh_1);
+                        CrowdMember.AnimateCrowdOnMiss();
                     }, target.GetLastStackEventParent());
 
                     // Check Evasion
@@ -728,6 +729,7 @@ namespace HexGameEngine.Abilities
                             if (character.hexCharacterView != null) pos = character.hexCharacterView.WorldPosition;
                             VisualEffectManager.Instance.CreateStatusEffect(pos, "MISS");
                             AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Ooh_1);
+                            CrowdMember.AnimateCrowdOnMiss();
                         }, character.GetLastStackEventParent());
 
                         // Check Evasion

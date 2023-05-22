@@ -120,7 +120,7 @@ namespace HexGameEngine
             TownController.Instance.ShowTownView();
             CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
-            DOVirtual.DelayedCall(2f, ()=> AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
+            DelayUtils.DelayedCall(2f, ()=> AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
             AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
             BlackScreenController.Instance.FadeInScreen(1f);
 
@@ -180,6 +180,9 @@ namespace HexGameEngine
             {
                 HexCharacterController.Instance.CreateAllPlayerCombatCharacters(charactersWithSpawnPos);
             }
+
+            // Animate Crowd
+            CrowdMember.StopAllCrowdMembers(true);
 
             // Combat Music
             AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
@@ -319,11 +322,11 @@ namespace HexGameEngine
 
             // Crowd combat end applause SFX and animations
             AudioManager.Instance.PlaySound(Sound.Crowd_Big_Cheer_1);
-            CameraController.Instance.DoCameraZoom(5, 5.75f, 1f);
-            // to do: animate crowd with more intensity
+            CrowdMember.AnimateCrowdOnCombatVictory();
+            CameraController.Instance.DoCameraZoom(5, 5.75f, 1f);            
 
             yield return new WaitForSeconds(2f);
-            DOVirtual.DelayedCall(2f, ()=> AudioManager.Instance.FadeOutSound(Sound.Crowd_Big_Cheer_1, 3f));
+            DelayUtils.DelayedCall(2f, ()=> AudioManager.Instance.FadeOutSound(Sound.Crowd_Big_Cheer_1, 3f));
 
             // Show combat screen
             CombatRewardController.Instance.BuildAndShowPostCombatScreen(combatStats, RunController.Instance.CurrentCombatContractData, true);
@@ -463,10 +466,11 @@ namespace HexGameEngine
             PersistencyController.Instance.AutoUpdateSaveFile();
 
             // Tear down combat views
+            CrowdMember.StopAllCrowdMembers();
             HexCharacterController.Instance.HandleTearDownCombatScene();
             LevelController.Instance.HandleTearDownAllCombatViews();
             LightController.Instance.EnableStandardGlobalLight();
-            CombatRewardController.Instance.HidePostCombatRewardScreen();            
+            CombatRewardController.Instance.HidePostCombatRewardScreen();
 
             // Show town UI
             TownController.Instance.ShowTownView();
@@ -478,7 +482,7 @@ namespace HexGameEngine
                         
             // Fade back in views + sound
             yield return new WaitForSeconds(0.5f);
-            DOVirtual.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
+            DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
             AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
             BlackScreenController.Instance.FadeInScreen(1f);
         }
@@ -522,11 +526,11 @@ namespace HexGameEngine
 
             // Start music, fade in
             yield return new WaitForSeconds(0.5f);
-            DOVirtual.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
+            DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
             AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
 
             BlackScreenController.Instance.FadeInScreen(2f);
-            DOVirtual.DelayedCall(1.5f, () =>
+            DelayUtils.DelayedCall(1.5f, () =>
             {
                 if (GlobalSettings.Instance.IncludeGameIntroEvent)
                     GameIntroController.Instance.StartEvent();
@@ -582,6 +586,7 @@ namespace HexGameEngine
             }
 
             // Destroy combat + town scenes
+            CrowdMember.StopAllCrowdMembers();
             HexCharacterController.Instance.HandleTearDownCombatScene();
             TurnController.Instance.DestroyAllActivationWindows();
 
@@ -649,7 +654,7 @@ namespace HexGameEngine
                 TownController.Instance.HandleAssignCharactersToHospitalSlotsOnGameLoad();
 
                 // Start music, fade in
-                DOVirtual.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
+                DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
                 AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
                 BlackScreenController.Instance.FadeInScreen(2f);
             }
@@ -664,7 +669,7 @@ namespace HexGameEngine
                 CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
                 // Start music, fade in
-                DOVirtual.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
+                DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
                 AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
                 BlackScreenController.Instance.FadeInScreen(2f, ()=> GameIntroController.Instance.StartEvent());
             }
@@ -680,6 +685,9 @@ namespace HexGameEngine
                 LevelController.Instance.EnableDayTimeArenaScenery();
                 LevelController.Instance.ShowAllNodeViews();
                 LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
+
+                // Animate Crowd
+                CrowdMember.StopAllCrowdMembers(true);
 
                 // Combat Music
                 AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
@@ -735,6 +743,9 @@ namespace HexGameEngine
             AudioManager.Instance.FadeOutSound(Sound.Music_Town_Theme_1, 1f);
             BlackScreenController.Instance.FadeOutScreen(1f);          
             yield return new WaitForSeconds(1.5f);
+
+            // Animate Crowd
+            CrowdMember.StopAllCrowdMembers(true);
 
             // Combat Music
             AudioManager.Instance.AutoPlayBasicCombatMusic(1f);

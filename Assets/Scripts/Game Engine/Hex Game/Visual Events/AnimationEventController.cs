@@ -129,7 +129,7 @@ namespace HexGameEngine.VisualEvents
                 VisualEventManager.CreateVisualEvent(() =>
                 {
                     HexCharacterController.Instance.TriggerTackleAnimation(user.hexCharacterView, targetView.WorldPosition, cData);
-                    DOVirtual.DelayedCall(0.1f, () =>
+                    DelayUtils.DelayedCall(0.1f, () =>
                     {
                         HexCharacterController.Instance.TriggerKnockedBackIntoObstructionAnimation(targetView, knockbackNode.WorldPosition, null);
                     });

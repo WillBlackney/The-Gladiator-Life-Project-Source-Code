@@ -349,7 +349,7 @@ namespace HexGameEngine.RewardSystems
 
             contentRect.DOKill();
             contentRect.position = contentOffScreenRect.position;
-            contentRect.DOMove(contentOnScreenRect.position, 1f).SetEase(Ease.OutBack);
+            contentRect.DOMove(contentOnScreenRect.position, 1.5f).SetEase(Ease.OutBack);
 
         }
 

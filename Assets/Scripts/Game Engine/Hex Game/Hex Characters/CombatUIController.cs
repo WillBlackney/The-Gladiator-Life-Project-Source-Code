@@ -173,8 +173,8 @@ namespace HexGameEngine.Characters
             MovePanelsOffScreen(speed);
             
             // Fade out views
-            CharacterModeller.FadeOutCharacterModel(uiPotraitUCM, speed);   
-            DOVirtual.DelayedCall(speed * 0.5f, () =>
+            CharacterModeller.FadeOutCharacterModel(uiPotraitUCM, speed);
+            DelayUtils.DelayedCall(speed * 0.5f, () =>
             {
                 mainCanvasCg.DOFade(0f, speed * 0.5f).OnComplete(() =>
                 {
