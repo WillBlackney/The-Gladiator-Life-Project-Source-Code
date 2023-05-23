@@ -90,7 +90,7 @@ namespace HexGameEngine.CameraSystems
         public void DoCameraZoom(float startOrthoSize, float endOrthoSize, float duration)
         {
             MainCamera.orthographicSize = startOrthoSize;
-            MainCamera.DOOrthoSize(endOrthoSize, duration);
+            MainCamera.DOOrthoSize(endOrthoSize, duration).SetEase(Ease.OutQuad);
         }
         public void DoCameraMove(float x, float y, float duration)
         {

@@ -323,7 +323,7 @@ namespace HexGameEngine
             // Crowd combat end applause SFX and animations
             AudioManager.Instance.PlaySound(Sound.Crowd_Big_Cheer_1);
             CrowdMember.AnimateCrowdOnCombatVictory();
-            CameraController.Instance.DoCameraZoom(5, 5.75f, 1f);            
+            CameraController.Instance.DoCameraZoom(5, 6f, 1f);            
 
             yield return new WaitForSeconds(2f);
             DelayUtils.DelayedCall(2f, ()=> AudioManager.Instance.FadeOutSound(Sound.Crowd_Big_Cheer_1, 3f));
