@@ -23,7 +23,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '-35% '
+    phrase: '-20% '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -77,8 +77,8 @@ MonoBehaviour:
   isPermanentInjury: 0
   severity: 2
   injuryType: 1
-  minInjuryDuration: 4
-  maxInjuryDuration: 5
+  minInjuryDuration: 2
+  maxInjuryDuration: 3
   isRacial: 0
   race: 0
   isBackground: 0

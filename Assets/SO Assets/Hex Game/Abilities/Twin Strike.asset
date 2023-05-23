@@ -98,7 +98,7 @@ MonoBehaviour:
       movementAnimation: 0
       soundEffect: 0
       characterAnimation: 0
-      delayDuration: 0.25
+      delayDuration: 0.5
       projectileFired: 0
       projectileStartPosition: 0
       onCharacter: 0

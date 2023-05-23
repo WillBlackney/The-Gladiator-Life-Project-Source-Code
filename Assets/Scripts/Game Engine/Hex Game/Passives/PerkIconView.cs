@@ -59,14 +59,15 @@ namespace HexGameEngine.Perks
                 GameController.Instance.GameState == GameState.CombatActive && 
                 (MousedOver == null || MousedOver != this))
             {
-                MainModalController.Instance.BuildAndShowModal(new ActivePerk(myIconData.perkTag, 1));
-                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(myIconData.keywords.ToList());
+                //MainModalController.Instance.BuildAndShowModal(new ActivePerk(myIconData.perkTag, 1));
+                //KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(myIconData.keywords.ToList());
+                KeyWordLayoutController.Instance.BuildAllViewsFromPassiveTag(myIconData.perkTag);   
             }
-               // KeyWordLayoutController.Instance.BuildAllViewsFromPassiveTag(myIconData.perkTag);            
+
         }
         public void MouseExit()
         {
-            MainModalController.Instance.HideModal();
+           // MainModalController.Instance.HideModal();
             KeyWordLayoutController.Instance.FadeOutMainView();
         }
         #endregion

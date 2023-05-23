@@ -90,7 +90,22 @@ MonoBehaviour:
       projectileStartPosition: 0
       onCharacter: 1
     visualEventsOnHit: []
-    visualEventsOnEffectFinish: []
+    visualEventsOnEffectFinish:
+    - eventType: 6
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0.5
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
     aoeType: 0
     includeCentreTile: 1
     aoeSize: 1
@@ -108,7 +123,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
-    characterSummonedName: ENTER NAME!!!
+    characterSummonedName: 
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -164,7 +179,22 @@ MonoBehaviour:
       projectileStartPosition: 0
       onCharacter: 1
     visualEventsOnHit: []
-    visualEventsOnEffectFinish: []
+    visualEventsOnEffectFinish:
+    - eventType: 6
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0.5
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
     aoeType: 0
     includeCentreTile: 1
     aoeSize: 1
@@ -182,7 +212,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
-    characterSummonedName: ENTER NAME!!!
+    characterSummonedName: 
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0

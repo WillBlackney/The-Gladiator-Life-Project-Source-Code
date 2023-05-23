@@ -241,6 +241,7 @@ namespace HexGameEngine.RewardSystems
 
             // ucm 
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(card.Ucm, character.modelParts);
+            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, card.Ucm);
 
             // Knock down views setup
             if (data.permanentInjuriesGained.Count > 0)

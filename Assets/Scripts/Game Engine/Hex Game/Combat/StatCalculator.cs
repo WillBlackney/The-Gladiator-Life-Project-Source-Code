@@ -144,28 +144,28 @@ namespace HexGameEngine
             if(!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedKidney))
-                    mod -= 0.6f;
+                    mod -= 0.3f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutArtery))
-                    mod -= 0.35f;
+                    mod -= 0.2f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedGuts))
-                    mod -= 0.4f;
+                    mod -= 0.2f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutNeckVein))
-                    mod -= 0.50f;
-
-                if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepAbdominalCut))
                     mod -= 0.25f;
 
+                if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepAbdominalCut))
+                    mod -= 0.15f;
+
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepChestCut))
-                    mod -= 0.35f;
+                    mod -= 0.20f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ExposedRibs))
-                    mod -= 0.35f;
+                    mod -= 0.20f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CompromisedLiver))
-                    mod -= 0.4f;
+                    mod -= 0.3f;
             }            
 
             // Items
@@ -195,28 +195,28 @@ namespace HexGameEngine
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedKidney))
-                    mod -= 0.6f;
+                    mod -= 0.3f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutArtery))
-                    mod -= 0.35f;
+                    mod -= 0.2f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedGuts))
-                    mod -= 0.4f;
+                    mod -= 0.2f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutNeckVein))
-                    mod -= 0.50f;
-
-                if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepAbdominalCut))
                     mod -= 0.25f;
 
+                if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepAbdominalCut))
+                    mod -= 0.15f;
+
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepChestCut))
-                    mod -= 0.35f;
+                    mod -= 0.20f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ExposedRibs))
-                    mod -= 0.35f;
+                    mod -= 0.20f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CompromisedLiver))
-                    mod -= 0.4f;
+                    mod -= 0.3f;
             }
 
             // Items
