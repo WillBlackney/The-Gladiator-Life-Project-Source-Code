@@ -578,12 +578,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: cfee4a2308420914785497fd0724d558, type: 2}
     offhandProspects: []
   modelParts:
-  - Human_Chest
+  - Human_Chest_1
   - Human_Face_2
   - Human_Head_9
-  - Human_Right_Arm
-  - Human_Right_Hand
-  - Human_Left_Arm
-  - Human_Left_Hand
-  - Human_Right_Leg
-  - Human_Left_Leg
+  - Human_Right_Hand_1
+  - Human_Right_Leg_1

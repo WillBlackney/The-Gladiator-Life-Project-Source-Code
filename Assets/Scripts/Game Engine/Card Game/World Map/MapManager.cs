@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using UnityEngine;
-using Newtonsoft.Json;
 using CardGameEngine;
 
 namespace MapSystem
@@ -98,7 +97,7 @@ namespace MapSystem
         }
         public void BuildMyDataFromSaveFile(SaveGameData saveFile)
         {
-            CurrentMap = JsonConvert.DeserializeObject<Map>(saveFile.map);
+            //CurrentMap = JsonConvert.DeserializeObject<Map>(saveFile.map);
         }
         #endregion
     }

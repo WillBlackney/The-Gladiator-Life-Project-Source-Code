@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CardGameEngine;
-using Newtonsoft.Json;
 
 namespace MapSystem
 {
@@ -42,7 +41,8 @@ namespace MapSystem
 
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            //return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return null;
         }
     }
 }

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using HexGameEngine.HexTiles;
 using HexGameEngine.Utilities;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,38 +28,30 @@ namespace HexGameEngine.UI
         #endregion
 
         #region Initialization + Setup + Reset        
-        private void StartSelfMove()
+        public void StartSelfMove()
         {
             startingLocalPos = movementParent.transform.localPosition;
             allowSelfMove = true;
             selfMoveSpeed = RandomGenerator.NumberBetween(15, 30);
             moveDown = RandomGenerator.NumberBetween(1, 2) == 1;
         }
-        public static void StopAllCrowdMembers(bool reset = false)
+        public void ResetSelf()
         {
-            AllCrowdMembers.ForEach(x =>
-            {
-                x.allowSelfMove = false;
-                x.dissapointing = false;
-                x.cheering = false;
-                x.movementParent.transform.localPosition = x.startingLocalPos;
+            allowSelfMove = false;
+            dissapointing = false;
+            cheering = false;
+            movementParent.transform.localPosition = startingLocalPos;
 
-                x.dissapointedArmsParent.transform.DOKill();
-                x.dissapointedArmsParent.SetActive(false);
-                x.dissapointedArmsParent.transform.localPosition = Vector3.zero;
+            dissapointedArmsParent.transform.DOKill();
+            dissapointedArmsParent.SetActive(false);
+            dissapointedArmsParent.transform.localPosition = Vector3.zero;
 
-                x.cheeringArmsParent.transform.DOKill();
-                x.cheeringArmsParent.SetActive(false);
-                x.cheeringArmsParent.transform.localPosition = Vector3.zero;
+            cheeringArmsParent.transform.DOKill();
+            cheeringArmsParent.SetActive(false);
+            cheeringArmsParent.transform.localPosition = Vector3.zero;
 
-                x.reactionMovementParent.transform.DOKill();
-                x.reactionMovementParent.transform.localPosition = Vector3.zero;
-
-                if (reset == true)
-                {
-                    x.StartSelfMove();
-                }
-            });
+            reactionMovementParent.transform.DOKill();
+            reactionMovementParent.transform.localPosition = Vector3.zero;
         }
         #endregion
 
@@ -67,12 +60,14 @@ namespace HexGameEngine.UI
         {
             SelfMove();
         }
-        private void DoCheerAnimation()
+        public void DoCheerAnimation()
         {
             if (cheering || dissapointing) return;
 
-            float speed = RandomGenerator.NumberBetween(80, 120) * 0.01f;
-            float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
+            //float speed = RandomGenerator.NumberBetween(80, 120) * 0.01f;
+            //float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
+            float speed = 1f;
+            float startDelay = 0.1f;
 
             DelayUtils.DelayedCall(startDelay, () =>
             {
@@ -100,12 +95,15 @@ namespace HexGameEngine.UI
             });             
 
         }
-        private void DoDissapointedAnimation()
-        {
+        public void DoDissapointedAnimation()
+        {            
             if (cheering || dissapointing) return;
 
-            float speed = RandomGenerator.NumberBetween(85, 115) * 0.01f;
-            float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
+            //float speed = RandomGenerator.NumberBetween(85, 115) * 0.01f;
+            //float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
+
+            float speed = 1f;
+            float startDelay = 0.1f;
 
             DelayUtils.DelayedCall(startDelay, () =>
             {
@@ -128,12 +126,14 @@ namespace HexGameEngine.UI
             });            
 
         }
-        private void DoCombatFinishedAnimation()
+        public void DoCombatFinishedAnimation()
         {
             if (cheering || dissapointing) return;
 
-            float speed = RandomGenerator.NumberBetween(80, 120) * 0.01f;
-            float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
+            // float speed = RandomGenerator.NumberBetween(80, 120) * 0.01f;
+            // float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
+            float speed = 1f;
+            float startDelay = 0.1f;
 
             DelayUtils.DelayedCall(startDelay, () =>
             {
@@ -170,39 +170,5 @@ namespace HexGameEngine.UI
         }
         #endregion
 
-        #region Static Logic
-        private static List<CrowdMember> allCrowdMembers;
-        public static List<CrowdMember> AllCrowdMembers
-        {
-            get
-            {
-                if (allCrowdMembers == null) allCrowdMembers = FindObjectsOfType<CrowdMember>().ToList();
-                return allCrowdMembers;
-            }
-        }
-        public static void AnimateCrowdOnHit()
-        {
-            List<CrowdMember> animatedMembers = AllCrowdMembers.ShuffledCopy();
-            int minAnims = (int) (animatedMembers.Count * 0.2f);
-            int maxAnims = (int) (animatedMembers.Count * 0.3f);
-            int totalAnims = RandomGenerator.NumberBetween(minAnims, maxAnims);
-            for (int i = 0; i < totalAnims; i++) animatedMembers[i].DoCheerAnimation();
-        }
-        public static void AnimateCrowdOnMiss()
-        {
-            List<CrowdMember> animatedMembers = AllCrowdMembers.ShuffledCopy();
-            int minAnims = (int)(animatedMembers.Count * 0.2f);
-            int maxAnims = (int)(animatedMembers.Count * 0.3f);
-            int totalAnims = RandomGenerator.NumberBetween(minAnims, maxAnims);
-            for (int i = 0; i < totalAnims; i++) animatedMembers[i].DoDissapointedAnimation();
-        }
-        public static void AnimateCrowdOnCombatVictory()
-        {
-            List<CrowdMember> animatedMembers = AllCrowdMembers.ShuffledCopy();
-            int totalAnims = (int)(animatedMembers.Count * 0.7f);
-            for (int i = 0; i < totalAnims; i++) animatedMembers[i].DoCombatFinishedAnimation();
-        }
-       
-        #endregion
     }
 }

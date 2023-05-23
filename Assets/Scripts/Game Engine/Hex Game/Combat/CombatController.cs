@@ -1130,7 +1130,7 @@ namespace HexGameEngine.Combat
             }
 
             // Animate crowd
-            if (attacker != null) VisualEventManager.CreateVisualEvent(() => CrowdMember.AnimateCrowdOnHit(), parentEvent);
+            if (attacker != null) VisualEventManager.CreateVisualEvent(() => LevelController.Instance.AnimateCrowdOnHit(), parentEvent);
 
             // Reduce health + armour
             if (totalHealthLost != 0) HexCharacterController.Instance.ModifyHealth(target, -totalHealthLost);

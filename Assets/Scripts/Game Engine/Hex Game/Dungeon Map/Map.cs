@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 
 namespace HexGameEngine.DungeonMap
 {
@@ -41,7 +40,8 @@ namespace HexGameEngine.DungeonMap
 
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            //return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return null;
         }
     }
 }

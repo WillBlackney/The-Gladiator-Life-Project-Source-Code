@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Sirenix.Serialization;
+﻿using Sirenix.Serialization;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;

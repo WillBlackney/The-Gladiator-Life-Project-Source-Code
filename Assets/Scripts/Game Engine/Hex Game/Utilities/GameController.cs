@@ -182,7 +182,7 @@ namespace HexGameEngine
             }
 
             // Animate Crowd
-            CrowdMember.StopAllCrowdMembers(true);
+            LevelController.Instance.StopAllCrowdMembers(true);
 
             // Combat Music
             AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
@@ -322,7 +322,7 @@ namespace HexGameEngine
 
             // Crowd combat end applause SFX and animations
             AudioManager.Instance.PlaySound(Sound.Crowd_Big_Cheer_1);
-            CrowdMember.AnimateCrowdOnCombatVictory();
+            LevelController.Instance.AnimateCrowdOnCombatVictory();
             CameraController.Instance.DoCameraZoom(5, 6f, 1f);            
 
             yield return new WaitForSeconds(2f);
@@ -466,7 +466,7 @@ namespace HexGameEngine
             PersistencyController.Instance.AutoUpdateSaveFile();
 
             // Tear down combat views
-            CrowdMember.StopAllCrowdMembers();
+            LevelController.Instance.StopAllCrowdMembers();
             HexCharacterController.Instance.HandleTearDownCombatScene();
             LevelController.Instance.HandleTearDownAllCombatViews();
             LightController.Instance.EnableStandardGlobalLight();
@@ -586,7 +586,7 @@ namespace HexGameEngine
             }
 
             // Destroy combat + town scenes
-            CrowdMember.StopAllCrowdMembers();
+            LevelController.Instance.StopAllCrowdMembers();
             HexCharacterController.Instance.HandleTearDownCombatScene();
             TurnController.Instance.DestroyAllActivationWindows();
 
@@ -687,7 +687,7 @@ namespace HexGameEngine
                 LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
 
                 // Animate Crowd
-                CrowdMember.StopAllCrowdMembers(true);
+                LevelController.Instance.StopAllCrowdMembers(true);
 
                 // Combat Music
                 AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
@@ -745,7 +745,7 @@ namespace HexGameEngine
             yield return new WaitForSeconds(1.5f);
 
             // Animate Crowd
-            CrowdMember.StopAllCrowdMembers(true);
+            LevelController.Instance.StopAllCrowdMembers(true);
 
             // Combat Music
             AudioManager.Instance.AutoPlayBasicCombatMusic(1f);

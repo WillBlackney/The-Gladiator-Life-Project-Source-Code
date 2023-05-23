@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using UnityEngine;
 
 namespace HexGameEngine.DungeonMap
@@ -11,7 +9,6 @@ namespace HexGameEngine.DungeonMap
         public readonly Point point;
         public readonly List<Point> incoming = new List<Point>();
         public readonly List<Point> outgoing = new List<Point>();
-        [JsonConverter(typeof(StringEnumConverter))]
         private EncounterType nodeType;
         private string blueprintName;        
         public Vector2 position;

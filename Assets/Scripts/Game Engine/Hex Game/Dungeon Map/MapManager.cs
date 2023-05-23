@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using UnityEngine;
-using Newtonsoft.Json;
 using HexGameEngine.Utilities;
 using HexGameEngine.Persistency;
 

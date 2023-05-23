@@ -13,16 +13,10 @@ using HexGameEngine.Utilities;
 using HexGameEngine.UI;
 using HexGameEngine.VisualEvents;
 using HexGameEngine.UCM;
-using UnityEngine.UI;
 using System.Linq;
 using System;
 using HexGameEngine.Items;
-using Spriter2UnityDX.Importing;
-using UnityEngine.TextCore.Text;
-using UnityEditor.Experimental.GraphView;
-using CodiceApp.EventTracking.Plastic;
 using HexGameEngine.Audio;
-using Mono.Cecil.Cil;
 
 namespace HexGameEngine.Abilities
 {
@@ -594,7 +588,7 @@ namespace HexGameEngine.Abilities
                     {
                         VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "MISS");
                         AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Ooh_1);
-                        CrowdMember.AnimateCrowdOnMiss();
+                        LevelController.Instance.AnimateCrowdOnMiss();
                     }, target.GetLastStackEventParent());
 
                     // Check Evasion
@@ -729,7 +723,7 @@ namespace HexGameEngine.Abilities
                             if (character.hexCharacterView != null) pos = character.hexCharacterView.WorldPosition;
                             VisualEffectManager.Instance.CreateStatusEffect(pos, "MISS");
                             AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Ooh_1);
-                            CrowdMember.AnimateCrowdOnMiss();
+                            LevelController.Instance.AnimateCrowdOnMiss();
                         }, character.GetLastStackEventParent());
 
                         // Check Evasion

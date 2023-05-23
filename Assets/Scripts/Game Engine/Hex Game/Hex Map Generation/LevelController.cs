@@ -8,6 +8,7 @@ using HexGameEngine.TurnLogic;
 using HexGameEngine.UI;
 using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
+using MapSystem;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
@@ -59,6 +60,7 @@ namespace HexGameEngine.HexTiles
         [SerializeField] private GameObject[] allNightTimeArenaParents;
         [SerializeField] private GameObject[] allDayTimeArenaParents;
         [SerializeField] private CrowdRowAnimator[] crowdRowAnimators;
+        [SerializeField] private List<CrowdMember> allCrowdMembers = new List<CrowdMember>();
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         private LevelNode[] runtimeNodes;
@@ -68,6 +70,13 @@ namespace HexGameEngine.HexTiles
 
         // Getters + Accessors
         #region
+        public List<CrowdMember> AllCrowdMembers
+        {
+            get
+            {
+                return allCrowdMembers;
+            }
+        }
         public HexDataSO[] AllHexTileData
         {
             get { return allHexTileData; }
@@ -1284,6 +1293,11 @@ namespace HexGameEngine.HexTiles
                 allDayTimeArenaParents[i].SetActive(false);
             }
         }
+
+
+        #endregion
+
+        #region Crowd Animation Logic
         private void PlayCrowdAnims()
         {
             foreach (CrowdRowAnimator cra in crowdRowAnimators)
@@ -1294,7 +1308,37 @@ namespace HexGameEngine.HexTiles
             foreach (CrowdRowAnimator cra in crowdRowAnimators)
                 cra.StopAnimation();
         }
-
+        public void AnimateCrowdOnHit()
+        {                   
+            int minAnims = (int)(AllCrowdMembers.Count * 0.15f);
+            int maxAnims = (int)(AllCrowdMembers.Count * 0.25f);
+            int totalAnims = RandomGenerator.NumberBetween(minAnims, maxAnims);
+            List<CrowdMember> animatedMembers = AllCrowdMembers.GetRandomElements(totalAnims);
+            for (int i = 0; i < totalAnims; i++) animatedMembers[i].DoCheerAnimation();
+        }
+        public void AnimateCrowdOnMiss()
+        {
+            int minAnims = (int)(AllCrowdMembers.Count * 0.15f);
+            int maxAnims = (int)(AllCrowdMembers.Count * 0.25f);
+            int totalAnims = RandomGenerator.NumberBetween(minAnims, maxAnims);
+            List<CrowdMember> animatedMembers = AllCrowdMembers.GetRandomElements(totalAnims);
+            for (int i = 0; i < totalAnims; i++) animatedMembers[i].DoDissapointedAnimation();
+        }
+        public void AnimateCrowdOnCombatVictory()
+        {
+            int totalAnims = (int)(AllCrowdMembers.Count * 0.7f);
+            List<CrowdMember> animatedMembers = AllCrowdMembers.GetRandomElements(totalAnims);
+            for (int i = 0; i < totalAnims; i++) animatedMembers[i].DoCombatFinishedAnimation();
+        }
+        public void StopAllCrowdMembers(bool reset = false)
+        {
+            for (int i = 0; i < AllCrowdMembers.Count; i++)
+            {
+                CrowdMember x = AllCrowdMembers[i];
+                x.ResetSelf();
+                if (reset == true) x.StartSelfMove();
+            }
+        }
         #endregion
 
     }
