@@ -360,6 +360,21 @@ namespace HexGameEngine.Audio
         }
         #endregion
 
+        private bool playingMainMenuMusic = false;
+        public void PlayMainMenuMusic()
+        {
+            if (playingMainMenuMusic) return;
+            playingMainMenuMusic = true;
+            PlaySound(Sound.Music_Main_Menu_Theme_Unlooped_1);
+            DelayUtils.DelayedCall(52, () => FadeInSound(Sound.Music_Main_Menu_Theme_Looped_1, 1f));
+        }
+        public void StopMainMenuMusic(float fadeSpeed = 1f)
+        {
+            playingMainMenuMusic = false;
+            if (IsSoundPlaying(Sound.Music_Main_Menu_Theme_Unlooped_1)) FadeOutSound(Sound.Music_Main_Menu_Theme_Unlooped_1, fadeSpeed);
+            if (IsSoundPlaying(Sound.Music_Main_Menu_Theme_Looped_1)) FadeOutSound(Sound.Music_Main_Menu_Theme_Looped_1, fadeSpeed);
+        }
+
         // Audio Player + Pooling Logic
         #region
         private AudioPlayer GetNextAvailableAudioPlayer()

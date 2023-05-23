@@ -507,7 +507,7 @@ namespace HexGameEngine
         {
             // Fade out screen + audio
             AudioManager.Instance.PlaySound(Sound.Events_New_Game_Started);
-            AudioManager.Instance.FadeOutSound(Sound.Music_Main_Menu_Theme_Unlooped_1, 2f);
+            AudioManager.Instance.StopMainMenuMusic(2f);
             BlackScreenController.Instance.FadeOutScreen(2f);
             yield return new WaitForSeconds(2f);
 
@@ -614,7 +614,7 @@ namespace HexGameEngine
             CombatRewardController.Instance.HidePostCombatRewardScreen();
 
             // Fade in menu music
-            AudioManager.Instance.FadeInSound(Sound.Music_Main_Menu_Theme_Unlooped_1, 1f);
+            AudioManager.Instance.PlayMainMenuMusic();
 
             // Show menu screen
             MainMenuController.Instance.ShowFrontScreen();
@@ -630,10 +630,7 @@ namespace HexGameEngine
         private IEnumerator HandleLoadSavedGameFromMainMenuEventCoroutine()
         {
             // Fade menu music
-            if (AudioManager.Instance.IsSoundPlaying(Sound.Music_Main_Menu_Theme_Unlooped_1))
-            {
-                AudioManager.Instance.FadeOutSound(Sound.Music_Main_Menu_Theme_Unlooped_1, 1f);
-            }
+            AudioManager.Instance.StopMainMenuMusic();
 
             // Fade out menu scren
             BlackScreenController.Instance.FadeOutScreen(1f);
