@@ -20,6 +20,7 @@ using HexGameEngine.Items;
 using HexGameEngine.CameraSystems;
 using DG.Tweening;
 using HexGameEngine.Audio;
+using UnityEngine.TextCore.Text;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -392,6 +393,37 @@ namespace HexGameEngine.TownFeatures
 
                 // todo in future: error messages above for the player, explaing why they cant drop player on slot (not stress, not enough old, etc)
 
+                // INSTANT HOSPITAL FEATURE EFFECT
+
+                // Pay gold price
+                PlayerDataController.Instance.ModifyPlayerGold(-HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType));
+
+                // Update page text views
+                UpdateHospitalFeatureCostTexts();
+
+                if (slot.FeatureType == TownActivity.BedRest)                
+                    CharacterDataController.Instance.SetCharacterHealth(draggedCharacter, StatCalculator.GetTotalMaxHealth(draggedCharacter));
+                
+                else if (slot.FeatureType == TownActivity.Therapy)                
+                    CharacterDataController.Instance.SetCharacterStress(draggedCharacter, 0);
+                
+                else if (slot.FeatureType == TownActivity.Surgery)
+                {
+                    List<ActivePerk> allInjuries = PerkController.Instance.GetAllInjuriesOnCharacter(draggedCharacter);
+                    foreach (ActivePerk p in allInjuries)
+                    {
+                        PerkController.Instance.ModifyPerkOnCharacterData(draggedCharacter.passiveManager, p.perkTag, -p.stacks);
+                    }
+                }
+
+                // Rebuild croll roster to reflect changes to character
+                CharacterScrollPanelController.Instance.RebuildViews();
+
+
+
+
+                // UNCOMMENT TO GO BACK TO TIMED HOSPITAL FEATURES
+                /*
                 // Attach character to slot
                 slot.OnCharacterDragDropSuccess(draggedCharacter);
 
@@ -403,6 +435,7 @@ namespace HexGameEngine.TownFeatures
 
                 // Update character's scroll panel activity indicator
                 CharacterScrollPanelController.Instance.GetCharacterPanel(draggedCharacter).UpdateActivityIndicator();
+                */
             }
 
         }

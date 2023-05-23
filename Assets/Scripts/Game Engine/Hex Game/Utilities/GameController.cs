@@ -10,6 +10,7 @@ using HexGameEngine.HexTiles;
 using HexGameEngine.Items;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.MainMenu;
+using HexGameEngine.Perks;
 using HexGameEngine.Persistency;
 using HexGameEngine.Reputations;
 using HexGameEngine.RewardSystems;
@@ -112,6 +113,14 @@ namespace HexGameEngine
 
             // Apply global settings
             GlobalSettings.Instance.ApplyStartingXPBonus();
+
+            // testing injures + stress + health
+            /*
+            HexCharacterData character = CharacterDataController.Instance.AllPlayerCharacters[0];
+            CharacterDataController.Instance.SetCharacterHealth(character, character.currentHealth - 20);
+            CharacterDataController.Instance.SetCharacterStress(character, 10);
+            var injury = PerkController.Instance.GetRandomValidInjury(character.passiveManager, InjurySeverity.Severe, InjuryType.Blunt);
+            PerkController.Instance.ModifyPerkOnCharacterData(character.passiveManager, injury.perkTag, 3);*/
 
             // Reset+ Centre camera
             CameraController.Instance.ResetMainCameraPositionAndZoom();
