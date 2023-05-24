@@ -23,7 +23,6 @@ namespace HexGameEngine.UI
         [Header("Components")]
         [SerializeField] Canvas mainCanvas;
         [SerializeField] CanvasGroup mainCg;
-        [SerializeField] GameObject visualParent;
         [SerializeField] RectTransform positionParent;
         [SerializeField] RectTransform[] fitters;
         [SerializeField] ModalDottedRow[] dottedRows;
@@ -64,7 +63,7 @@ namespace HexGameEngine.UI
         #region
         private void Update()
         {
-            if (visualParent.activeSelf)
+            if (mainCanvas.isActiveAndEnabled)
             {
                 Vector2 pos;
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(mainCanvas.transform as RectTransform, Input.mousePosition, mainCanvas.worldCamera, out pos);
@@ -183,7 +182,7 @@ namespace HexGameEngine.UI
         {
             mainCg.DOKill();
             mainCg.alpha = 0.01f;
-            visualParent.SetActive(false);
+            mainCanvas.enabled = false;
         }
         private void ResetContent()
         {
@@ -196,7 +195,7 @@ namespace HexGameEngine.UI
         }
         private void FadeInModal()
         {
-            visualParent.SetActive(true);
+            mainCanvas.enabled = true;
             mainCg.DOKill();
             mainCg.alpha = 0.01f;
             mainCg.DOFade(1f, 0.25f);

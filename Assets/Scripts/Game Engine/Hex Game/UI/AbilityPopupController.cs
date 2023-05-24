@@ -20,7 +20,7 @@ namespace HexGameEngine.UI
         // Components + Properties
         #region
         [Header("Core Panel Components")]
-        [SerializeField] GameObject visualParent;
+        [SerializeField] Canvas rootCanvas;
         [SerializeField] RectTransform mainPositioningRect;
         [SerializeField] RectTransform[] transformsRebuilt;
         [SerializeField] CanvasGroup mainCg;
@@ -122,19 +122,17 @@ namespace HexGameEngine.UI
         #region
         private void FadeInPanel()
         {
-            visualParent.transform.DOKill();
             mainCg.DOKill();
-            visualParent.SetActive(true);
+            rootCanvas.enabled = true;
             mainCg.alpha = 0.0001f;
             mainCg.DOFade(1, 0.25f);
 
         }
         public void HidePanel()
         {
-            visualParent.transform.DOKill();
             mainCg.DOKill();
             mainCg.alpha = 0f;
-            visualParent.SetActive(false);
+            rootCanvas.enabled = false;
         }
         private void PlacePanelOnAbilityBarButton(AbilityButton b)
         {

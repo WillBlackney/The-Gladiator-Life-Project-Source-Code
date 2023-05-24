@@ -13,7 +13,7 @@ namespace HexGameEngine.UI
         // Properties + Component References
         #region
         [Header("Transform + Parent Component")]
-        [SerializeField] private GameObject visualParent;
+        [SerializeField] private Canvas rootCanvas;
         [SerializeField] private RectTransform panelFitterParent;
         [SerializeField] private RectTransform normalPos;
         [SerializeField] private RectTransform combatPos;
@@ -181,7 +181,7 @@ namespace HexGameEngine.UI
         }
         private void EnableMainView()
         {
-            visualParent.SetActive(true);
+            rootCanvas.enabled = true;
             if (GameController.Instance.GameState == GameState.CombatActive ||
                 GameController.Instance.GameState == GameState.MainMenu)
                 panelFitterParent.position = combatPos.position;
@@ -189,7 +189,7 @@ namespace HexGameEngine.UI
         }
         private void DisableMainView()
         {
-            visualParent.SetActive(false);
+            rootCanvas.enabled = false;
         }
         private void FadeInMainView()
         {

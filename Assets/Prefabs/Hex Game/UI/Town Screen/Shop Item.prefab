@@ -224,6 +224,7 @@ MonoBehaviour:
     rotationDegrees: 0
     cursorType: 0
   onRightClickEvents: []
+  mouseDownEvents: []
   mouseEnterEvents:
   - widgetEventType: 4
     scalingSequence: 0

@@ -23,7 +23,7 @@ namespace HexGameEngine.Combat
         private Path currentPath;
 
         [Header("Path Cost Pop Up Components")]
-        [SerializeField] GameObject pathCostVisualParent;
+        [SerializeField] Canvas pathCostRootCanvas;
         [SerializeField] GameObject pathCostPositionParent;
         [SerializeField] CanvasGroup pathCostCg;
         [SerializeField] TextMeshProUGUI pathCostText;
@@ -44,7 +44,7 @@ namespace HexGameEngine.Combat
             }
 
             // Move path cost panel if the screen moves
-            if (clickedHex && pathCostVisualParent.activeSelf == true &&
+            if (clickedHex && pathCostRootCanvas.isActiveAndEnabled == true &&
                 pathCostPositionParent.transform.position != clickedHex.WorldPosition)
                 pathCostPositionParent.transform.position = clickedHex.WorldPosition;
         }
@@ -264,15 +264,15 @@ namespace HexGameEngine.Combat
         #region
         public void ShowPathCostPopup(int cost)
         {
-            pathCostVisualParent.SetActive(true);
+            pathCostRootCanvas.enabled = true;
             pathCostText.text = cost.ToString();
-            pathCostCg.alpha = 0;
-            pathCostCg.DOFade(1, 0.5f);
+            pathCostCg.DOKill();
+            pathCostCg.DOFade(1, 0.25f);
         }
         public void HidePathCostPopup()
         {
-            pathCostCg.alpha = 1;
-            pathCostVisualParent.SetActive(false);
+            pathCostCg.DOKill();
+            pathCostRootCanvas.enabled = false;
             pathCostCg.alpha = 0;
         }
         #endregion

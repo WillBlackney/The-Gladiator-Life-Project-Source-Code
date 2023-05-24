@@ -33,10 +33,10 @@ RectTransform:
   m_Father: {fileID: 3586308604529715896}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40.000004, y: -0.00000047684}
-  m_SizeDelta: {x: 280, y: 35}
+  m_AnchorMin: {x: 0.18055555, y: 0}
+  m_AnchorMax: {x: 0.9583333, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3586308603981351990
 CanvasRenderer:
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -196,6 +196,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3586308604529715896}
     m_Modifications:
+    - target: {fileID: 3257372288624898400, guid: e83a5265c258a9e4ebc29d90ce059ed2,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257372289282850318, guid: e83a5265c258a9e4ebc29d90ce059ed2,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3257372290189548265, guid: e83a5265c258a9e4ebc29d90ce059ed2,
         type: 3}
       propertyPath: m_Name
@@ -219,32 +229,32 @@ PrefabInstance:
     - target: {fileID: 3257372290189548266, guid: e83a5265c258a9e4ebc29d90ce059ed2,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0.14583333
       objectReference: {fileID: 0}
     - target: {fileID: 3257372290189548266, guid: e83a5265c258a9e4ebc29d90ce059ed2,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3257372290189548266, guid: e83a5265c258a9e4ebc29d90ce059ed2,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0.048611112
       objectReference: {fileID: 0}
     - target: {fileID: 3257372290189548266, guid: e83a5265c258a9e4ebc29d90ce059ed2,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3257372290189548266, guid: e83a5265c258a9e4ebc29d90ce059ed2,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3257372290189548266, guid: e83a5265c258a9e4ebc29d90ce059ed2,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3257372290189548266, guid: e83a5265c258a9e4ebc29d90ce059ed2,
         type: 3}
@@ -284,7 +294,7 @@ PrefabInstance:
     - target: {fileID: 3257372290189548266, guid: e83a5265c258a9e4ebc29d90ce059ed2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -135
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3257372290189548266, guid: e83a5265c258a9e4ebc29d90ce059ed2,
         type: 3}
@@ -306,7 +316,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4881077181425838844, guid: e83a5265c258a9e4ebc29d90ce059ed2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5597521261175375272, guid: e83a5265c258a9e4ebc29d90ce059ed2,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673297457094960893, guid: e83a5265c258a9e4ebc29d90ce059ed2,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 365474482618397743, guid: e83a5265c258a9e4ebc29d90ce059ed2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e83a5265c258a9e4ebc29d90ce059ed2, type: 3}
 --- !u!114 &1412506720295786096 stripped
 MonoBehaviour:

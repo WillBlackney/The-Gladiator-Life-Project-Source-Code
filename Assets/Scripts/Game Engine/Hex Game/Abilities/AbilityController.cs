@@ -32,7 +32,7 @@ namespace HexGameEngine.Abilities
         private AbilityData[] allAbilities;
 
         [Header("Hit Chance Pop Up Components")]
-        [SerializeField] GameObject hitChanceVisualParent;
+        [SerializeField] Canvas hitChanceRootCanvas;
         [SerializeField] GameObject hitChancePositionParent;
         [SerializeField] CanvasGroup hitChanceCg;
         [SerializeField] TextMeshProUGUI hitChanceText;
@@ -1546,7 +1546,7 @@ namespace HexGameEngine.Abilities
             if (Input.GetKeyDown(KeyCode.Mouse1))
                 HandleCancelCurrentAbilityOrder();
 
-            if (hitChanceVisualParent.activeSelf == true &&
+            if (hitChanceRootCanvas.isActiveAndEnabled == true &&
                hitChancePositionParent.transform.position != LevelController.HexMousedOver.WorldPosition)
                 hitChancePositionParent.transform.position = LevelController.HexMousedOver.WorldPosition;
         }
@@ -2114,7 +2114,7 @@ namespace HexGameEngine.Abilities
                 (ability.abilityType.Contains(AbilityType.MeleeAttack) || ability.abilityType.Contains(AbilityType.RangedAttack) || ability.abilityType.Contains(AbilityType.WeaponAttack)))
             {
                 hitChanceCg.alpha = 0;
-                hitChanceVisualParent.SetActive(true);
+                hitChanceRootCanvas.enabled = true;
                 hitChanceCg.DOFade(1, 0.5f);
                 HitChanceDataSet hitChanceData = CombatController.Instance.GetHitChance(caster, target, ability, weaponUsed);
                 hitChanceData.details = hitChanceData.details.OrderByDescending(x => x.accuracyMod).ToList();
@@ -2144,7 +2144,7 @@ namespace HexGameEngine.Abilities
         public void HideHitChancePopup()
         {
             hitChanceCg.alpha = 1;
-            hitChanceVisualParent.SetActive(false);
+            hitChanceRootCanvas.enabled = false;
             hitChanceCg.alpha = 0;
         }
         #endregion

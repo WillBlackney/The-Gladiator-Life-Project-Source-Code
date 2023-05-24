@@ -27,6 +27,7 @@ namespace HexGameEngine.Perks
         [SerializeField] private Sprite injuryFrame;
 
         private static PerkIconView mousedOver;
+        private bool showBothModals = false;
 
         public static PerkIconView MousedOver
         {
@@ -59,24 +60,28 @@ namespace HexGameEngine.Perks
                 GameController.Instance.GameState == GameState.CombatActive && 
                 (MousedOver == null || MousedOver != this))
             {
-                //MainModalController.Instance.BuildAndShowModal(new ActivePerk(myIconData.perkTag, 1));
-                //KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(myIconData.keywords.ToList());
-                KeyWordLayoutController.Instance.BuildAllViewsFromPassiveTag(myIconData.perkTag);   
+                if (showBothModals)
+                {
+                    MainModalController.Instance.BuildAndShowModal(new ActivePerk(myIconData.perkTag, 1));
+                    KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(myIconData.keywords.ToList());
+                }
+                else KeyWordLayoutController.Instance.BuildAllViewsFromPassiveTag(myIconData.perkTag);   
             }
 
         }
         public void MouseExit()
         {
-           // MainModalController.Instance.HideModal();
+            if(showBothModals) MainModalController.Instance.HideModal();
             KeyWordLayoutController.Instance.FadeOutMainView();
         }
         #endregion
 
         // Logic
         #region
-        public void Build(PerkIconData iconData)
+        public void Build(PerkIconData iconData, bool showBothModals = false)
         {
             myIconData = iconData;
+            this.showBothModals = showBothModals;
             passiveImage.sprite = PerkController.Instance.GetPassiveSpriteByName(iconData.passiveName);
 
             statusName = iconData.passiveName;

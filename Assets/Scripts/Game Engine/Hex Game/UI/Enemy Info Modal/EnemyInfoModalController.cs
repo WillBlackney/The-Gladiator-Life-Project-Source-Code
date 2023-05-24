@@ -20,7 +20,7 @@ namespace HexGameEngine.UI
     {
         #region Components
         [Header("Core")]
-        [SerializeField] private GameObject visualParent;
+        [SerializeField] private Canvas rootCanvas;
         [SerializeField] private CanvasGroup mainCg;
         [SerializeField] private Transform positionParent;
         [SerializeField] private TextMeshProUGUI nameText;
@@ -78,7 +78,7 @@ namespace HexGameEngine.UI
             mainCg.alpha = 0f;
 
             // Show
-            visualParent.SetActive(true);
+            rootCanvas.enabled = true;
             mainCg.DOFade(1f, 0.25f);
 
             // Build view elements
@@ -96,7 +96,7 @@ namespace HexGameEngine.UI
         public void HideModal()
         {
             queuedShow = null;
-            visualParent.SetActive(false);
+            rootCanvas.enabled = false;
             mainCg.DOKill();
             mainCg.alpha = 0f;
         }

@@ -43,7 +43,7 @@ namespace HexGameEngine.HexTiles
 
         [Header("Tile Info Pop Up Components")]
         [SerializeField] GameObject obstructionIndicator;
-        [SerializeField] GameObject tileInfoVisualParent;
+        [SerializeField] Canvas tileInfoRootCanvas;
         [SerializeField] GameObject tileInfoPositionParent;
         [SerializeField] CanvasGroup tileInfoCg;
         [SerializeField] TextMeshProUGUI tileInfoNameText;
@@ -1117,7 +1117,7 @@ namespace HexGameEngine.HexTiles
             HexDataSO data = destination.TileData;
             if (!data) yield break;
 
-            tileInfoVisualParent.SetActive(true);
+            tileInfoRootCanvas.enabled = true;
             tileInfoPositionParent.transform.position = destination.WorldPosition;
             tileInfoCg.alpha = 0;
             tileInfoCg.DOFade(1, 0.5f);
@@ -1194,7 +1194,7 @@ namespace HexGameEngine.HexTiles
         public void HideTileInfoPopup()
         {
             tileInfoCg.alpha = 1;
-            tileInfoVisualParent.SetActive(false);
+            tileInfoRootCanvas.enabled = false;
             tileInfoCg.alpha = 0;
         }
         #endregion

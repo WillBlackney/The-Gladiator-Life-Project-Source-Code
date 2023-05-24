@@ -13,8 +13,7 @@ namespace HexGameEngine.Perks
     public class PerkLayoutPanel : MonoBehaviour
     {
         private List<PerkIconView> perkIcons = new List<PerkIconView>();
-        [SerializeField] Transform stressBarActivePos;
-        [SerializeField] Transform stressBarInactivePos;
+        [SerializeField] bool showBothModals = false;
         public List<PerkIconView> PerkIcons
         {
             get { return perkIcons; }
@@ -56,7 +55,7 @@ namespace HexGameEngine.Perks
             {
                 GameObject newIconGO = Instantiate(PrefabHolder.Instance.PassiveIconViewPrefab, gameObject.transform);
                 PerkIconView newIcon = newIconGO.GetComponent<PerkIconView>();
-                newIcon.Build(iconData);
+                newIcon.Build(iconData, showBothModals);
                 newIcon.ModifyIconViewStacks(stacksGained);
                 perkIcons.Add(newIcon);
             }
@@ -93,18 +92,5 @@ namespace HexGameEngine.Perks
         }
         #endregion
 
-        public void SetPosition(bool activeStressBar)
-        {
-            //gameObject.transform.position = stressBarInactivePos.position;
-            /*
-            if (activeStressBar)
-            {
-                gameObject.transform.position = stressBarActivePos.position;
-            }
-            else
-            {
-                gameObject.transform.position = stressBarInactivePos.position;
-            }*/
-        }
     }
 }
