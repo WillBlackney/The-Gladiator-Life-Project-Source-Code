@@ -18,7 +18,7 @@ namespace HexGameEngine.Items
         // Properties + Components
         #region
         [Header("Core Components")]
-        [SerializeField] private GameObject mainVisualParent;
+        [SerializeField] private Canvas rootCanvas;
         [SerializeField] private List<InventorySlot> allInventorySlots = new List<InventorySlot>();
         [SerializeField] private List<InventoryItemView> allInventoryItemViews = new List<InventoryItemView>();
         [SerializeField] private TextMeshProUGUI slotsMaxCountText;
@@ -41,9 +41,9 @@ namespace HexGameEngine.Items
 
         // Getters + Accessors
         #region
-        public GameObject MainVisualParent
+        public Canvas RootCanvas
         {
-            get { return mainVisualParent; }
+            get { return rootCanvas; }
         }
         public Transform DragParent
         {
@@ -75,13 +75,13 @@ namespace HexGameEngine.Items
         #region
         public void BuildAndShowInventoryView()
         {
-            mainVisualParent.SetActive(true);
+            rootCanvas.enabled = true;
             BuildInventoryView();
             UpdateMaxSlotsTexts();
         }
         public void HideInventoryView()
         {
-            mainVisualParent.SetActive(false);
+            rootCanvas.enabled = false;
         }
         #endregion
 
@@ -90,7 +90,7 @@ namespace HexGameEngine.Items
         public void OnInventoryTopBarButtonClicked()
         {
             if (GameController.Instance.GameState == GameState.StoryEvent) return;
-            if (!mainVisualParent.activeSelf)
+            if (!rootCanvas.isActiveAndEnabled)
                 BuildAndShowInventoryView();
             else HideInventoryView();
         }

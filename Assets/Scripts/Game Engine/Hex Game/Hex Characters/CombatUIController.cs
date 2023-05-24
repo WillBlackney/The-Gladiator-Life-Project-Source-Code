@@ -18,7 +18,7 @@ namespace HexGameEngine.Characters
     public class CombatUIController : Singleton<CombatUIController>
     {
         [Header("Core Canvas Components")]
-        [SerializeField] private GameObject mainVisualParent;
+        [SerializeField] private Canvas canvasRoot;
         [SerializeField] private CanvasGroup mainCanvasCg;     
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
@@ -103,7 +103,7 @@ namespace HexGameEngine.Characters
         {
             get 
             { 
-                return mainVisualParent.activeSelf; 
+                return canvasRoot.isActiveAndEnabled; 
             } 
         }
         #endregion
@@ -112,7 +112,7 @@ namespace HexGameEngine.Characters
         public void BuildAndShowViewsOnTurnStart(HexCharacterModel character)
         {
             SetInteractability(true);
-            mainVisualParent.SetActive(true);
+            canvasRoot.enabled = true;
                         
             middlePanelTransform.localPosition = middlePanelOffScreenPos.localPosition;
             rightPanelTransform.localPosition = rightPanelOffScreenPos.localPosition;
@@ -178,7 +178,7 @@ namespace HexGameEngine.Characters
             {
                 mainCanvasCg.DOFade(0f, speed * 0.5f).OnComplete(() =>
                 {
-                    mainVisualParent.SetActive(false);
+                    canvasRoot.enabled = false;
                     if (tracker != null) tracker.MarkAsCompleted();
                 });
 
@@ -191,9 +191,9 @@ namespace HexGameEngine.Characters
             rightPanelTransform.DOKill();
             leftPanelTransform.DOKill();
 
-            middlePanelTransform.DOMove(middlePanelOnScreenPos.position, moveSpeed).SetEase(Ease.OutBack);
-            rightPanelTransform.DOMove(rightPanelOnScreenPos.position, moveSpeed).SetEase(Ease.OutBack);
-            leftPanelTransform.DOMove(leftPanelOnScreenPos.position, moveSpeed).SetEase(Ease.OutBack);
+            middlePanelTransform.DOMove(middlePanelOnScreenPos.position, moveSpeed).SetEase(Ease.OutQuad);
+            rightPanelTransform.DOMove(rightPanelOnScreenPos.position, moveSpeed).SetEase(Ease.OutQuad);
+            leftPanelTransform.DOMove(leftPanelOnScreenPos.position, moveSpeed).SetEase(Ease.OutQuad);
         }
         private void MovePanelsOffScreen(float moveSpeed = 0.5f)
         {

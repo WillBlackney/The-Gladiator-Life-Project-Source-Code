@@ -16,12 +16,11 @@ namespace HexGameEngine.UI
         // Properties + Components
         #region
         [Header("Core Components")]
-        [SerializeField] private GameObject mainTopBarVisualParent;
-        [SerializeField] private GameObject combatTopBarVisualParent;
+        [SerializeField] private Canvas mainTopBarRootCanvas;
+        [SerializeField] private Canvas combatTopBarRootCanvas;
 
         [Header("Text Components")]
         [SerializeField] private TextMeshProUGUI currentGoldText;
-        [SerializeField] private TextMeshProUGUI currentChapterText;
         [SerializeField] private TextMeshProUGUI currentDaytext;
         [SerializeField] private TextMeshProUGUI currentGoldInfoPopupText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
@@ -38,10 +37,6 @@ namespace HexGameEngine.UI
         {
             get { return currentDaytext; }
         }
-        public TextMeshProUGUI CurrentChapterText
-        {
-            get { return currentChapterText; }
-        }
        
         #endregion
 
@@ -49,21 +44,21 @@ namespace HexGameEngine.UI
         #region
         public void ShowMainTopBar()
         {
-            mainTopBarVisualParent.SetActive(true);
+            mainTopBarRootCanvas.enabled = true;
             HideCombatTopBar();
         }
         public void HideMainTopBar()
         {
-            mainTopBarVisualParent.SetActive(false);
+            mainTopBarRootCanvas.enabled = false;
         }
         public void ShowCombatTopBar()
         {
-            combatTopBarVisualParent.SetActive(true);
+            combatTopBarRootCanvas.enabled = true;
             HideMainTopBar();
         }
         public void HideCombatTopBar()
         {
-            combatTopBarVisualParent.SetActive(false);
+            combatTopBarRootCanvas.enabled = false;
         }
 
         #endregion
@@ -73,8 +68,8 @@ namespace HexGameEngine.UI
         private void Update()
         {
             // Handle key board input
-            if (mainTopBarVisualParent.activeSelf == true && Input.GetKeyDown(KeyCode.C)) CharacterRosterViewController.Instance?.OnCharacterRosterTopbarButtonClicked();
-            else if ((mainTopBarVisualParent.activeSelf == true || combatTopBarVisualParent.activeSelf == true) && Input.GetKeyDown(KeyCode.Escape)) MainMenuController.Instance.OnTopBarSettingsButtonClicked();
+            if (mainTopBarRootCanvas.isActiveAndEnabled == true && Input.GetKeyDown(KeyCode.C)) CharacterRosterViewController.Instance?.OnCharacterRosterTopbarButtonClicked();
+            else if ((mainTopBarRootCanvas.isActiveAndEnabled == true || combatTopBarRootCanvas.isActiveAndEnabled == true) && Input.GetKeyDown(KeyCode.Escape)) MainMenuController.Instance.OnTopBarSettingsButtonClicked();
 
         }
         #endregion
