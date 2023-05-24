@@ -277,4 +277,11 @@ namespace HexGameEngine.Combat
         }
         #endregion
     }
+
+    public enum PointOnPath
+    {
+        Middle = 0,
+        First = 1,
+        Last = 2,
+    }
 }

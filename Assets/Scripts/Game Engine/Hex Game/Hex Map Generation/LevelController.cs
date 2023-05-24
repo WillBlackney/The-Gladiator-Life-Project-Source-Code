@@ -403,13 +403,15 @@ namespace HexGameEngine.HexTiles
             VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayMoveAnimation(character.hexCharacterView));
 
             // Move to first hex           
-            HandleMoveToHex(character, path.HexsOnPath[0]);
+            HandleMoveToHex(character, path.HexsOnPath[0], 5, true, PointOnPath.First);
 
             if (path.HexsOnPath.Count > 1)
             {
                 for (int i = 0; i < path.HexsOnPath.Count - 1; i++)
                 {
-                    HandleMoveToHex(character, path.HexsOnPath[i + 1]);
+                    PointOnPath pop = PointOnPath.Middle;
+                    if (path.HexsOnPath[i] == path.Destination) pop = PointOnPath.Last;
+                    HandleMoveToHex(character, path.HexsOnPath[i + 1], 5, true, pop);
                 }
             }
 
@@ -450,7 +452,7 @@ namespace HexGameEngine.HexTiles
             VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayChargeAnimation(character.hexCharacterView));
 
             // Move to first hex
-            HandleMoveToHex(character, path[0], 2.5f);
+            HandleMoveToHex(character, path[0], 2.5f, true, PointOnPath.First);
 
             if (path.Count > 1)
             {
@@ -506,7 +508,9 @@ namespace HexGameEngine.HexTiles
                 }                   
             }
         }
-        private void HandleMoveToHex(HexCharacterModel character, LevelNode destination, float moveSpeed = 5f, bool runAnimation = true)
+
+        
+        private void HandleMoveToHex(HexCharacterModel character, LevelNode destination, float moveSpeed = 5f, bool runAnimation = true, PointOnPath pop = PointOnPath.Middle)
         {
             // Check and resolve free strikes + spear wall attacks before moving
             List<HexCharacterModel> allEnemies = HexCharacterController.Instance.GetAllEnemiesOfCharacter(character);
@@ -572,9 +576,12 @@ namespace HexGameEngine.HexTiles
                 PlaceCharacterOnHex(character, destination);
 
             // Move animation
+            Ease ease = Ease.Linear;
+            if (pop == PointOnPath.First) ease = Ease.InQuad;
+            else if (pop == PointOnPath.Last) ease = Ease.OutQuad;
             TaskTracker cData = new TaskTracker();
             VisualEventManager.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
-                (character.hexCharacterView, destination, cData, moveSpeed)).SetCoroutineData(cData);
+                (character.hexCharacterView, destination, cData, moveSpeed, ease)).SetCoroutineData(cData);
 
             // TO DO: events that trigger when the character steps onto a new tile go here (maybe?)...
             character.tilesMovedThisTurn++;
@@ -1310,16 +1317,16 @@ namespace HexGameEngine.HexTiles
         }
         public void AnimateCrowdOnHit()
         {                   
-            int minAnims = (int)(AllCrowdMembers.Count * 0.15f);
-            int maxAnims = (int)(AllCrowdMembers.Count * 0.25f);
+            int minAnims = (int)(AllCrowdMembers.Count * 0.2f);
+            int maxAnims = (int)(AllCrowdMembers.Count * 0.3f);
             int totalAnims = RandomGenerator.NumberBetween(minAnims, maxAnims);
             List<CrowdMember> animatedMembers = AllCrowdMembers.GetRandomElements(totalAnims);
             for (int i = 0; i < totalAnims; i++) animatedMembers[i].DoCheerAnimation();
         }
         public void AnimateCrowdOnMiss()
         {
-            int minAnims = (int)(AllCrowdMembers.Count * 0.15f);
-            int maxAnims = (int)(AllCrowdMembers.Count * 0.25f);
+            int minAnims = (int)(AllCrowdMembers.Count * 0.2f);
+            int maxAnims = (int)(AllCrowdMembers.Count * 0.3f);
             int totalAnims = RandomGenerator.NumberBetween(minAnims, maxAnims);
             List<CrowdMember> animatedMembers = AllCrowdMembers.GetRandomElements(totalAnims);
             for (int i = 0; i < totalAnims; i++) animatedMembers[i].DoDissapointedAnimation();

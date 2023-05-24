@@ -2691,24 +2691,6 @@ namespace HexGameEngine.Characters
 
             if (data != null) data.MarkAsCompleted();
         }
-        public void MoveCharactersToOffScreenRight(List<HexCharacterModel> characters, TaskTracker cData)
-        {
-            StartCoroutine(MoveCharactersToOffScreenRightCoroutine(characters, cData));
-        }
-        private IEnumerator MoveCharactersToOffScreenRightCoroutine(List<HexCharacterModel> characters, TaskTracker cData)
-        {
-            List<TaskTracker> events = new List<TaskTracker>();
-            foreach (HexCharacterModel character in characters)
-            {
-                TaskTracker cd = new TaskTracker();
-                events.Add(cd);
-                MoveEntityToNodeCentre(character.hexCharacterView, LevelController.Instance.EnemyOffScreenNode, cd, () => { events.Remove(cd); });
-            }
-
-            yield return new WaitUntil(() => events.Count == 0);
-
-            if (cData != null) cData.MarkAsCompleted();   
-        }
         #endregion
 
         // Determine a Character's Allies and Enemies Logic

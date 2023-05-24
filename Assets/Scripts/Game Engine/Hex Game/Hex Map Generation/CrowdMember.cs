@@ -15,9 +15,15 @@ namespace HexGameEngine.UI
         [SerializeField] GameObject movementParent;
         [SerializeField] GameObject reactionMovementParent;
 
-        [Header("Arm Components")]
+        [Header("Cheering Components")]
         [SerializeField] GameObject cheeringArmsParent;
+        [SerializeField] GameObject cheeringRightArmParent;
+        [SerializeField] GameObject cheeringLeftArmParent;
+
+        [Header("Dissapointed Components")]
         [SerializeField] GameObject dissapointedArmsParent;
+        [SerializeField] GameObject dissapointedRightArmParent;
+        [SerializeField] GameObject dissapointedLeftArmParent;
 
         bool allowSelfMove = false;
         float selfMoveSpeed = 22.5f;
@@ -64,13 +70,24 @@ namespace HexGameEngine.UI
         {
             if (cheering || dissapointing) return;
 
-            //float speed = RandomGenerator.NumberBetween(80, 120) * 0.01f;
-            //float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
-            float speed = 1f;
-            float startDelay = 0.1f;
+            float speed = RandomGenerator.NumberBetween(80, 120) * 0.01f;
+            float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
+
+            cheeringRightArmParent.SetActive(false);
+            cheeringLeftArmParent.SetActive(false);
 
             DelayUtils.DelayedCall(startDelay, () =>
             {
+                // Randomize anim / arms
+                int anim = RandomGenerator.NumberBetween(1, 3);
+                if (anim == 1) cheeringRightArmParent.SetActive(true);
+                else if (anim == 2) cheeringLeftArmParent.SetActive(true);
+                else
+                {
+                    cheeringRightArmParent.SetActive(true);
+                    cheeringLeftArmParent.SetActive(true);
+                }
+
                 dissapointedArmsParent.SetActive(false);
                 cheeringArmsParent.SetActive(true);
                 cheeringArmsParent.transform.DOKill();
@@ -92,6 +109,7 @@ namespace HexGameEngine.UI
                         cheering = false;
                     })
                 );
+
             });             
 
         }
@@ -99,14 +117,23 @@ namespace HexGameEngine.UI
         {            
             if (cheering || dissapointing) return;
 
-            //float speed = RandomGenerator.NumberBetween(85, 115) * 0.01f;
-            //float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
+            float speed = RandomGenerator.NumberBetween(85, 115) * 0.01f;
+            float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
 
-            float speed = 1f;
-            float startDelay = 0.1f;
+            dissapointedRightArmParent.SetActive(false);
+            dissapointedLeftArmParent.SetActive(false);
 
             DelayUtils.DelayedCall(startDelay, () =>
             {
+                // Randomize anim / arms
+                int anim = RandomGenerator.NumberBetween(1, 3);
+                if (anim == 1) dissapointedLeftArmParent.SetActive(true);
+                else if (anim == 2) dissapointedRightArmParent.SetActive(true);
+                else
+                {
+                    dissapointedRightArmParent.SetActive(true);
+                    dissapointedLeftArmParent.SetActive(true);
+                }
                 cheeringArmsParent.SetActive(false);
                 dissapointedArmsParent.SetActive(true);
                 dissapointedArmsParent.transform.DOKill();
@@ -130,10 +157,10 @@ namespace HexGameEngine.UI
         {
             if (cheering || dissapointing) return;
 
-            // float speed = RandomGenerator.NumberBetween(80, 120) * 0.01f;
-            // float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
-            float speed = 1f;
-            float startDelay = 0.1f;
+            float speed = RandomGenerator.NumberBetween(80, 120) * 0.01f;
+            float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
+            //float speed = 1f;
+            //float startDelay = 0.1f;
 
             DelayUtils.DelayedCall(startDelay, () =>
             {
