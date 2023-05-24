@@ -131,8 +131,8 @@ namespace HexGameEngine.UI
         }
         private void SetIndicatorParentViewStates(bool onOrOff)
         {
-            foreach (GameObject g in activityIndicatorParents)
-                g.SetActive(onOrOff);
+            //foreach (GameObject g in activityIndicatorParents)
+            //    g.SetActive(onOrOff);
         }
 
         public void OnPointerClick(PointerEventData eventData)

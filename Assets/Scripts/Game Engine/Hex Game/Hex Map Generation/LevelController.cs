@@ -42,7 +42,6 @@ namespace HexGameEngine.HexTiles
         [SerializeField] private LevelNode defenderOffScreenNode;
 
         [Header("Tile Info Pop Up Components")]
-        [SerializeField] GameObject obstructionIndicator;
         [SerializeField] Canvas tileInfoRootCanvas;
         [SerializeField] GameObject tileInfoPositionParent;
         [SerializeField] CanvasGroup tileInfoCg;
@@ -948,7 +947,6 @@ namespace HexGameEngine.HexTiles
         {
             if (GameController.Instance.GameState != GameState.CombatActive) return;
 
-            obstructionIndicator.SetActive(false);
             HexMousedOver = h;
             h.mouseOverParent.SetActive(true);
 
@@ -1234,14 +1232,7 @@ namespace HexGameEngine.HexTiles
             return hRet;
 
         }
-        public void ShowObstructionIndicator(Hex target, Hex obstructedTile)
-        {
-            Vector3 pos = target.WorldPosition + obstructedTile.WorldPosition;
-            pos /= 2;
-
-            obstructionIndicator.SetActive(true);
-            obstructionIndicator.transform.position = pos;
-        }
+       
         #endregion
 
         // Level Node View Logic
@@ -1259,18 +1250,7 @@ namespace HexGameEngine.HexTiles
         // Scenery Logic
         #region        
 
-        // Arena
-        public void EnableNightTimeArenaScenery()
-        {
-            DisableAllArenas();
-            mainArenaViewParent.SetActive(true);
-            EnableRandomNightTimeArena();
-        }
-        private void EnableRandomNightTimeArena()
-        {
-            allNightTimeArenaParents[RandomGenerator.NumberBetween(0, allNightTimeArenaParents.Length - 1)].SetActive(true);
-
-        }
+        // Arena            
         public void EnableDayTimeArenaScenery()
         {
             DisableAllArenas();
@@ -1281,7 +1261,6 @@ namespace HexGameEngine.HexTiles
         private void EnableRandomDayTimeArena()
         {
             allDayTimeArenaParents[RandomGenerator.NumberBetween(0, allDayTimeArenaParents.Length - 1)].SetActive(true);
-
         }
         public void DisableArenaView()
         {
@@ -1291,14 +1270,8 @@ namespace HexGameEngine.HexTiles
         }
         private void DisableAllArenas()
         {
-            for (int i = 0; i < allNightTimeArenaParents.Length; i++)
-            {
-                allNightTimeArenaParents[i].SetActive(false);
-            }
-            for (int i = 0; i < allDayTimeArenaParents.Length; i++)
-            {
-                allDayTimeArenaParents[i].SetActive(false);
-            }
+            for (int i = 0; i < allDayTimeArenaParents.Length; i++)            
+                allDayTimeArenaParents[i].SetActive(false);            
         }
 
 
