@@ -9,7 +9,6 @@ using HexGameEngine.UCM;
 using HexGameEngine.UI;
 using System;
 using TMPro;
-using CardGameEngine.UCM;
 using HexGameEngine.Abilities;
 
 namespace HexGameEngine.TownFeatures

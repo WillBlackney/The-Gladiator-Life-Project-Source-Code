@@ -5,7 +5,6 @@ using HexGameEngine.Utilities;
 using DG.Tweening;
 using TMPro;
 using Sirenix.OdinInspector;
-using CardGameEngine.UCM;
 using HexGameEngine.Characters;
 using HexGameEngine.UCM;
 using HexGameEngine.Audio;

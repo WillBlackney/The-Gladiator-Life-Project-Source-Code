@@ -53,7 +53,6 @@ namespace HexGameEngine.Cards
 
         public bool OverCollider { get; set; }
 
-        private bool touchFingerIsOverMe = false;
         #endregion
 
         // Life cycle

@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using HexGameEngine.Characters;
 using HexGameEngine.UCM;
-using CardGameEngine.UCM;
 using HexGameEngine.HexTiles;
 using DG.Tweening;
 

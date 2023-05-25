@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using HexGameEngine.Utilities;
-using CardGameEngine.UCM;
-using UnityEngine.UI;
 using HexGameEngine.UCM;
+using UnityEngine.UI;
 using HexGameEngine.Characters;
 using HexGameEngine.TownFeatures;
 

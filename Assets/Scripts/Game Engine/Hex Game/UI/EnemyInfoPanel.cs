@@ -11,7 +11,6 @@ using HexGameEngine.UCM;
 using HexGameEngine.Abilities;
 using HexGameEngine.Cards;
 using DG.Tweening;
-using CardGameEngine.UCM;
 
 namespace HexGameEngine.UI
 {

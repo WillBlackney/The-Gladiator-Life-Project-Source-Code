@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using CardGameEngine.UCM;
+using HexGameEngine.UCM;
 using HexGameEngine.Characters;
 
 namespace HexGameEngine.TownFeatures

@@ -36,10 +36,6 @@ namespace HexGameEngine.Cards
             private set { da = value; }
         }
 
-        // Mobile properties
-        private bool initialTouchSet = false;
-        private Vector3 initialTouchPos;
-        private bool touchFingerIsOverMe = false;
         #endregion
 
         // Follow Mouse Logic

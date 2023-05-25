@@ -8,7 +8,6 @@ using HexGameEngine.TurnLogic;
 using HexGameEngine.UI;
 using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
-using MapSystem;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;

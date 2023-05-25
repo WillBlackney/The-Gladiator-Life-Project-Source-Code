@@ -7,11 +7,10 @@ using HexGameEngine.Perks;
 using TMPro;
 using UnityEngine.UI;
 using HexGameEngine.Items;
-using HexGameEngine.UCM;
 using HexGameEngine.Abilities;
 using HexGameEngine.Cards;
 using DG.Tweening;
-using CardGameEngine.UCM;
+using HexGameEngine.UCM;
 using UnityEngine.TextCore.Text;
 using HexGameEngine.Persistency;
 

@@ -38,7 +38,6 @@ namespace HexGameEngine.Abilities
         [SerializeField] TextMeshProUGUI hitChanceText;
         [SerializeField] ModalDottedRow[] hitChanceBoxes;
         [SerializeField] RectTransform[] hitChanceLayouts;
-        private float popupDelay = 0.5f;
 
         // Ability caching properties
         private AbilityData currentAbilityAwaiting;

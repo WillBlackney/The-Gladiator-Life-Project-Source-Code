@@ -194,7 +194,7 @@ namespace HexGameEngine.Combat
                 List<Vector2> points = new List<Vector2>();
                 points.Add(p.Start.WorldPosition);
                 for (int i = 0; i < p.HexsOnPath.Count; i++) points.Add(p.HexsOnPath[i].ElevationPositioningParent.transform.position);
-                CardGameEngine.DottedLine.Instance.DrawPathAlongPoints(points);
+                DottedLine.Instance.DrawPathAlongPoints(points);
 
                 // Show UI indicators
                 int energyCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
@@ -240,7 +240,7 @@ namespace HexGameEngine.Combat
                 h.HideMoveMarker();
             }
             currentPath = null;
-            CardGameEngine.DottedLine.Instance.DestroyAllPaths();
+            DottedLine.Instance.DestroyAllPaths();
         }
         public void ResetSelectionState(bool resetEnergyBar = true)
         {

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using HexGameEngine.UCM;
-using CardGameEngine.UCM;
 
 namespace Spriter2UnityDX {
 	[DisallowMultipleComponent, ExecuteInEditMode, AddComponentMenu("")]

@@ -871,6 +871,35 @@ namespace HexGameEngine
         Large = 2,
         Massive = 3,
     }
+    public enum BodyPartType
+    {
+        None = 0,
+        Head = 1,
+        Face = 2,
+        Chest = 3,
+        RightLeg = 4,
+        LeftLeg = 5,
+        RightArm = 6,
+        RightHand = 7,
+        RightHand2h = 25,
+        LeftArm = 8,
+        LeftHand = 9,
+        LeftHand2h = 22,
+        HeadWear = 10,
+        ChestWear = 11,
+        RightLegWear = 12,
+        LeftLegWear = 13,
+        RightArmWear = 14,
+        RightHandWear = 15,
+        RightHandWear2h = 23,
+        LeftArmWear = 16,
+        LeftHandWear = 17,
+        LeftHandWear2h = 24,
+        MainHandWeapon = 18,
+        OffHandWeapon = 19,
+        BodyParticles = 20,
+        BodyLighting = 21,
+    };
     #endregion
 
     // Journey + Encounter Related

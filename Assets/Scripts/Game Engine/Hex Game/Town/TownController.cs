@@ -8,7 +8,6 @@ using Sirenix.OdinInspector;
 using HexGameEngine.UI;
 using TMPro;
 using UnityEngine.UI;
-using CardGameEngine.UCM;
 using HexGameEngine.UCM;
 using System;
 using HexGameEngine.Abilities;

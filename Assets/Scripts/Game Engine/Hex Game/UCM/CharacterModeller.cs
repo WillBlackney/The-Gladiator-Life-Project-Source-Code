@@ -5,8 +5,6 @@ using Spriter2UnityDX;
 using DG.Tweening;
 using HexGameEngine.Items;
 using HexGameEngine.Characters;
-using CardGameEngine.UCM;
-using CardGameEngine;
 
 
 namespace HexGameEngine.UCM
@@ -327,7 +325,7 @@ namespace HexGameEngine.UCM
                 }
                 model.activeHead = element;
             }
-            else if (element.bodyPartType == CardGameEngine.BodyPartType.Face)
+            else if (element.bodyPartType == BodyPartType.Face)
             {
                 if (model.activeFace != null)
                 {
@@ -359,7 +357,7 @@ namespace HexGameEngine.UCM
                 }
                 model.activeRightHand2H = element;
             }
-            else if (element.bodyPartType == CardGameEngine.BodyPartType.LeftArm)
+            else if (element.bodyPartType == BodyPartType.LeftArm)
             {
                 if (model.activeLeftArm != null)
                 {
@@ -367,7 +365,7 @@ namespace HexGameEngine.UCM
                 }
                 model.activeLeftArm = element;
             }
-            else if (element.bodyPartType == CardGameEngine.BodyPartType.LeftHand)
+            else if (element.bodyPartType == BodyPartType.LeftHand)
             {
                 if (model.activeLeftHand != null)
                 {
@@ -375,7 +373,7 @@ namespace HexGameEngine.UCM
                 }
                 model.activeLeftHand = element;
             }
-            else if (element.bodyPartType == CardGameEngine.BodyPartType.LeftHand2h)
+            else if (element.bodyPartType == BodyPartType.LeftHand2h)
             {
                 if (model.activeLeftHand2H != null)
                 {

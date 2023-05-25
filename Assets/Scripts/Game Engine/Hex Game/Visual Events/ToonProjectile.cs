@@ -32,11 +32,6 @@ namespace HexGameEngine.VisualEvents
         [SerializeField] private GameObject projectileParticle; // Effect attached to the gameobject as child
         [SerializeField] private GameObject muzzleParticle; // Effect instantly spawned when gameobject is spawned
 
-        [Header("Misc Properties")]
-        [SerializeField] private float colliderRadius = 1f;
-        [Range(0f, 1f)] // This is an offset that moves the impact effect slightly away from the point of impact to reduce clipping of the impact effect
-        [SerializeField] private float collideOffset = 0.15f;
-
         Vector3 start;
         Vector3 destination;
         bool readyToMove = false;

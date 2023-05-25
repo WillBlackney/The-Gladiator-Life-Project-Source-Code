@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
-using CustomOdinGUI;
+using HexGameEngine.CustomOdinGUI;
 using HexGameEngine.Characters;
 using HexGameEngine.Abilities;
 using HexGameEngine.Items;
@@ -15,7 +15,6 @@ using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
 using HexGameEngine.Audio;
 using HexGameEngine.Libraries;
-using HexGameEngine.DungeonMap;
 
 namespace HexGameEngine.Editor
 {

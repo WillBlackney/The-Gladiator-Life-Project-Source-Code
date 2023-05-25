@@ -548,10 +548,6 @@ namespace UnityEngine
 {
     public static class AudioSourceExtensions
     {
-        public static void FadeOut(this AudioSource a, float duration, CardGameEngine.AudioModel data)
-        {
-            a.GetComponent<MonoBehaviour>().StartCoroutine(FadeOutCore(a, duration, data));
-        }
         public static void FadeOut(this AudioSource a, float duration, HexGameEngine.Audio.AudioModel data)
         {
             a.DOKill();
@@ -566,26 +562,6 @@ namespace UnityEngine
             //a.GetComponent<MonoBehaviour>().StartCoroutine(FadeOutCore(a, duration, data));
         }
 
-        private static IEnumerator FadeOutCore(AudioSource a, float duration, CardGameEngine.AudioModel data)
-        {
-            data.fadingIn = false;
-            data.fadingOut = true;
-            float startVolume = data.volume;
-
-            while (a.volume > 0 && data.fadingOut)
-            {
-                a.volume -= startVolume * Time.deltaTime / duration;
-                if (a.volume <= 0)
-                {
-                    a.Stop();
-                    a.volume = startVolume;
-                    data.fadingOut = false;
-                }
-                yield return new WaitForEndOfFrame();
-            }
-
-
-        }
         private static IEnumerator FadeOutCore(AudioSource a, float duration, HexGameEngine.Audio.AudioModel data)
         {
             data.fadingIn = false;
@@ -606,10 +582,6 @@ namespace UnityEngine
 
 
         }
-        public static void FadeIn(this AudioSource a, float duration, CardGameEngine.AudioModel data)
-        {
-            a.GetComponent<MonoBehaviour>().StartCoroutine(FadeInCore(a, duration, data));
-        }
         public static void FadeIn(this AudioSource a, float duration, HexGameEngine.Audio.AudioModel data)
         {
             a.DOKill();
@@ -621,28 +593,6 @@ namespace UnityEngine
             {
                 data.fadingIn = false;
             });
-        }
-        private static IEnumerator FadeInCore(AudioSource a, float duration, CardGameEngine.AudioModel data)
-        {
-            data.fadingOut = false;
-            data.fadingIn = true;
-
-            float endVolume = data.volume;
-            a.volume = 0f;
-            a.Play();
-
-            while (a.volume < endVolume && data.fadingIn)
-            {
-                a.volume += endVolume * Time.deltaTime / duration;
-
-                if (a.volume >= endVolume)
-                {
-                    a.volume = endVolume;
-                    data.fadingIn = false;
-                }
-
-                yield return new WaitForEndOfFrame();
-            }
         }
         private static IEnumerator FadeInCore(AudioSource a, float duration, HexGameEngine.Audio.AudioModel data)
         {
