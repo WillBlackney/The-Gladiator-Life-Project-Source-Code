@@ -306,7 +306,7 @@ namespace HexGameEngine.Perks
 
         // Apply Perks
         #region
-        public void ModifyPerkOnCharacterData(PerkManagerModel pManager, Perk p, int stacks)
+        public ActivePerk ModifyPerkOnCharacterData(PerkManagerModel pManager, Perk p, int stacks)
         {
             Debug.Log("PassiveController.ModifyPerkOnCharacterData() called...");
 
@@ -319,7 +319,7 @@ namespace HexGameEngine.Perks
                 if (DoesCharacterHavePerk(pManager, ptag) && stacks > 0)
                 {
                     Debug.Log("ModifyPerkOnCharacterData() cancelling application of " + perkName + " as it is blocked by " + TextLogic.SplitByCapitals(ptag.ToString()));
-                    return;
+                    return null;
                 }
             }
 
@@ -334,7 +334,7 @@ namespace HexGameEngine.Perks
             }
 
             // Add the new perk to the perk manager model's perk list, or increment stack count if it is already contained ithin the list.
-            HandleApplyActivePerk(pManager, p, stacksAppliedActual);
+            return HandleApplyActivePerk(pManager, p, stacksAppliedActual);
         }
         public bool ModifyPerkOnCharacterEntity(PerkManagerModel pManager, Perk perk, int stacks, bool showVFX = true, float vfxDelay = 0f, PerkManagerModel applier = null, bool ignoreResistance = false)
         {
@@ -533,8 +533,12 @@ namespace HexGameEngine.Perks
             if ((perkData.isInjury || perkData.isPermanentInjury) && character != null && character.characterData != null &&
                 DoesCharacterHavePerk(character.characterData.passiveManager, perk) == false)
             {
-                ModifyPerkOnCharacterData(character.characterData.passiveManager, perk, stacks);
-                if (perkData.isInjury) character.injuriesGainedThisCombat.Add(perk);
+                ActivePerk ap = ModifyPerkOnCharacterData(character.characterData.passiveManager, perk, stacks);
+                if (perkData.isInjury)
+                {
+                    ap.freshInjury = true;
+                    character.injuriesGainedThisCombat.Add(perk);
+                }
                 else if (perkData.isPermanentInjury) character.permanentInjuriesGainedThisCombat.Add(perk);
             }
 
@@ -564,7 +568,7 @@ namespace HexGameEngine.Perks
             return true;
 
         }
-        private void HandleApplyActivePerk(PerkManagerModel perkManager, Perk perk, int stacks)
+        private ActivePerk HandleApplyActivePerk(PerkManagerModel perkManager, Perk perk, int stacks)
         {
             ActivePerk activePerk = null;
 
@@ -597,6 +601,8 @@ namespace HexGameEngine.Perks
                 activePerk = new ActivePerk(perk, stacks);
                 perkManager.perks.Add(activePerk);
             }
+
+            return activePerk;
         }
         #endregion
 
@@ -870,7 +876,9 @@ namespace HexGameEngine.Perks
 
                 foreach(ActivePerk p in injuries)
                 {
-                    ModifyPerkOnCharacterData(c.passiveManager, p.perkTag, -1);
+                    // Injuries gained from the previous combat do not tick down until the next day.
+                    if (p.freshInjury) p.freshInjury = false;
+                    else ModifyPerkOnCharacterData(c.passiveManager, p.perkTag, -1);
                 }
 
             }

@@ -27,8 +27,8 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: bonus granted by it's shield, and cannot use shield abilities until the
-      end of it's next turn.
+    phrase: bonus granted by it's shield, and cannot use shield abilities for the
+      rest of combat.
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:

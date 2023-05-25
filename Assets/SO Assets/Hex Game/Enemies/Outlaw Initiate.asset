@@ -64,12 +64,89 @@ MonoBehaviour:
   aiTurnRoutine:
     directives:
     - action:
+        actionType: 1
+        targettingPriority: 02000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: Raise Shield
+      requirements:
+      - requirementType: 23
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 23
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 14
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 8
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+    - action:
         actionType: 3
         targettingPriority: 01000000
         getRangeFromAbility: 0
         range: 2
         abilityName: 
-      requirements: []
+      requirements:
+      - requirementType: 13
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 34
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
     - action:
         actionType: 1
         targettingPriority: 050000000100000006000000
@@ -176,7 +253,21 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
-        fatigueReq: 29
+        fatigueReq: 32
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 2
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 2
+        energyReq: 0
+        fatigueReq: 0
         stressReq: 0
         turnReq: 0
         alliesAlive: 0

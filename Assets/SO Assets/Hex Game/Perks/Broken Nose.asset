@@ -49,7 +49,7 @@ MonoBehaviour:
   isPermanentInjury: 0
   severity: 1
   injuryType: 2
-  minInjuryDuration: 1
+  minInjuryDuration: 2
   maxInjuryDuration: 2
   isRacial: 0
   race: 0

@@ -1773,11 +1773,12 @@ namespace HexGameEngine.Characters
                 #region
 
                 // Smashed Shield
+                /*
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SmashedShield) && character.currentHealth > 0)
                 {
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.SmashedShield, -1, true, 0.5f);
 
-                }
+                }*/
                 // Rooted
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Rooted) && character.currentHealth > 0)
                 {

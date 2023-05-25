@@ -448,6 +448,13 @@ namespace HexGameEngine.AI
                 bRet = true;
             }
 
+            // Self has shield
+            else if (req.requirementType == AIActionRequirementType.SelfHasShield &&
+                (character.itemSet.offHandItem != null && character.itemSet.offHandItem.weaponClass == WeaponClass.Shield))
+            {
+                bRet = true;
+            }
+
             // Target does not have shield
             else if (req.requirementType == AIActionRequirementType.TargetDoesNotHaveShield &&
                 (target == null ||

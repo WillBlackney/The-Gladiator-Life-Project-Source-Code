@@ -64,7 +64,7 @@ MonoBehaviour:
   severity: 2
   injuryType: 2
   minInjuryDuration: 2
-  maxInjuryDuration: 3
+  maxInjuryDuration: 2
   isRacial: 0
   race: 0
   isBackground: 0
