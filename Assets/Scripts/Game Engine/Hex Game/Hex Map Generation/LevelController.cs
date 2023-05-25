@@ -576,8 +576,11 @@ namespace HexGameEngine.HexTiles
 
             // Move animation
             Ease ease = Ease.Linear;
-            if (pop == PointOnPath.First) ease = Ease.InQuad;
-            else if (pop == PointOnPath.Last) ease = Ease.OutQuad;
+
+            // uncomment when ready to do dynamic movement easing
+            //if (pop == PointOnPath.First) ease = Ease.InQuad;
+            //else if (pop == PointOnPath.Last) ease = Ease.OutQuad;
+
             TaskTracker cData = new TaskTracker();
             VisualEventManager.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
                 (character.hexCharacterView, destination, cData, moveSpeed, ease)).SetCoroutineData(cData);

@@ -21,7 +21,7 @@ MonoBehaviour:
       value: 5
       stars: 0
     constitution:
-      value: 70
+      value: 69
       stars: 0
     dodge:
       value: 5
@@ -64,12 +64,13 @@ MonoBehaviour:
     perks:
     - perkTag: 81
       stacks: 1
+      freshInjury: 0
   modelParts: []
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
     offHandItem: {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
     headArmour: {fileID: 0}
-    chestArmour: {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+    chestArmour: {fileID: 11400000, guid: 76156de02b9f69740a893940dd21742b, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 6

@@ -64,12 +64,13 @@ MonoBehaviour:
     perks:
     - perkTag: 60
       stacks: 1
+      freshInjury: 0
   modelParts: []
   itemSet:
     mainHandItem: {fileID: 11400000, guid: e724601a8b1fda642824cbf7fc3faea9, type: 2}
     offHandItem: {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
     headArmour: {fileID: 0}
-    chestArmour: {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+    chestArmour: {fileID: 11400000, guid: 76156de02b9f69740a893940dd21742b, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 11
