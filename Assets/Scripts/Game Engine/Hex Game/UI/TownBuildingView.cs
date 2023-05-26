@@ -78,17 +78,20 @@ namespace HexGameEngine.TownFeatures
             pageBuildFunction.Invoke();
             pageMovementParent.position = pageStartPos.position;
 
-            // Play entrance sound
-            AudioManager.Instance.PlaySoundPooled(entranceSound);
+            // Play entrance sounds
+            AudioManager.Instance.PlaySound(Sound.UI_Door_Open);
 
-            // Fade in screen
+            // Fade in screen + SFX
             pageCg.DOFade(1f, 0.5f);
 
             // Move + zoom camera towards building
             var cam = CameraController.Instance.MainCamera;
             cam.DOOrthoSize(2.5f, 0.75f).SetEase(Ease.OutCubic);
             cam.transform.DOMove(new Vector3(cameraZoomToPoint.position.x, cameraZoomToPoint.position.y, -15), 0.6f).SetEase(Ease.OutCubic);
-            yield return new WaitForSeconds(0.76f);                      
+            yield return new WaitForSeconds(0.76f);
+
+            // Feature specific entrance SFX
+            AudioManager.Instance.PlaySoundPooled(entranceSound);
 
             // Move page to centre
             pageMovementParent.DOMove(pageEndPos.position, 0.75f)
@@ -104,6 +107,9 @@ namespace HexGameEngine.TownFeatures
             // Move canvas to start pos + setup
             pageCg.DOKill();
             pageMovementParent.DOKill();
+
+            // Leave SFX
+            AudioManager.Instance.PlaySound(Sound.UI_Door_Open);
 
             // Fade out screen
             pageCg.DOFade(0f, 1.25f);
