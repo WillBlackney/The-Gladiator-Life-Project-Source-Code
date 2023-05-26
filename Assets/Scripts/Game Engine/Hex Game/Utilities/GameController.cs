@@ -508,7 +508,7 @@ namespace HexGameEngine
             // Fade out screen + audio
             AudioManager.Instance.PlaySound(Sound.Events_New_Game_Started);
             AudioManager.Instance.StopMainMenuMusic(2f);
-            BlackScreenController.Instance.FadeOutScreen(2f);
+            BlackScreenController.Instance.FadeOutScreen(2f, null, false);
             yield return new WaitForSeconds(2f);
 
             // Set state

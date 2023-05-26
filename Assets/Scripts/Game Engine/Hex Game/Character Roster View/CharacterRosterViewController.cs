@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using HexGameEngine.Utilities;
 using HexGameEngine.Characters;
@@ -8,11 +7,7 @@ using TMPro;
 using UnityEngine.UI;
 using HexGameEngine.Items;
 using HexGameEngine.Abilities;
-using HexGameEngine.Cards;
-using DG.Tweening;
 using HexGameEngine.UCM;
-using UnityEngine.TextCore.Text;
-using HexGameEngine.Persistency;
 
 namespace HexGameEngine.UI
 {

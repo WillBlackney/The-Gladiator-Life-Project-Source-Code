@@ -189,7 +189,7 @@ namespace HexGameEngine.Items
                 if (DragSuccessful())
                 {
                     // Card added SFX
-                    AudioManager.Instance.PlaySound(Sound.GUI_Chime_1);
+                    AudioManager.Instance.PlaySound(Sound.UI_Chime_1);
 
                     // Snap drag item view back to inventory slot position
                     InventorySlot slot = InventoryController.Instance.AllInventorySlots[InventoryController.Instance.Inventory.IndexOf(MyItemRef)];

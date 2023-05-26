@@ -143,7 +143,7 @@ namespace HexGameEngine.UI
         }
         private void PlacePanelAboveAbilityIcon(UIAbilityIcon b)
         {
-            float yOffSet = 30f;
+            float yOffSet = 50f;
 
             mainPositioningRect.position = b.transform.position;
             mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x, mainPositioningRect.localPosition.y + yOffSet, 0);

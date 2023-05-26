@@ -10,6 +10,7 @@ using HexGameEngine.UI;
 using HexGameEngine.Perks;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using HexGameEngine.Player;
+using HexGameEngine.Audio;
 
 namespace HexGameEngine.Items
 {
@@ -166,6 +167,7 @@ namespace HexGameEngine.Items
 
             i.swingSFX = d.swingSFX;
             i.hitSFX = d.hitSFX;
+            i.equipSFX = d.equipSFX;
 
             foreach (AbilityDataSO ability in d.grantedAbilities)
             {
@@ -366,6 +368,8 @@ namespace HexGameEngine.Items
             // Update item abilities
             character.abilityBook.OnItemSetChanged(character.itemSet);
 
+            AudioManager.Instance.PlaySound(Sound.Item_General_Unequip);
+
             // Redraw Inventory and Character roster views
             CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
             InventoryController.Instance.RebuildInventoryView();
@@ -412,9 +416,11 @@ namespace HexGameEngine.Items
             else if (slot.SlotType == RosterSlotType.Head)
                 character.itemSet.headArmour = newItem.itemData;
 
-            // Trinket
+            // Body
             else if (slot.SlotType == RosterSlotType.Body)
                 character.itemSet.bodyArmour = newItem.itemData;
+
+            AudioManager.Instance.PlaySound(newItem.itemData.equipSFX);
 
             // Update item abilities
             character.abilityBook.OnItemSetChanged(character.itemSet);

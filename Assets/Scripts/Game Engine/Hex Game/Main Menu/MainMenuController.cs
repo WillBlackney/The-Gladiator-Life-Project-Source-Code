@@ -27,6 +27,7 @@ namespace HexGameEngine.MainMenu
         [SerializeField] private GameObject frontScreenParent;
         [SerializeField] private GameObject frontScreenBgParent;
         [SerializeField] private CanvasGroup frontScreenGuiCg;
+        [SerializeField] private GameObject mainMenuButtonsParent;
         [SerializeField] private GameObject newGameButtonParent;
         [SerializeField] private GameObject continueButtonParent;
         [SerializeField] private GameObject abandonRunButtonParent;
@@ -106,8 +107,6 @@ namespace HexGameEngine.MainMenu
         [SerializeField] private ItemDataSO[] allStartingMainHandItems;
         [SerializeField] private ItemDataSO[] allStartingOffHandItems;
         [SerializeField] private UIAbilityIcon[] itemsPanelAbilityIcons;
-        [SerializeField] private CustomItemIcon headItemIcon;
-        [SerializeField] private CustomItemIcon bodyItemIcon;
         [SerializeField] private CustomItemIcon mainHandItemIcon;
         [SerializeField] private CustomItemIcon offHandItemIcon;
 
@@ -145,7 +144,7 @@ namespace HexGameEngine.MainMenu
         }
         public void OnBackToMainMenuButtonClicked()
         {
-            BlackScreenController.Instance.FadeOutAndBackIn(0.5f, 0f, 0.5f, () =>
+            BlackScreenController.Instance.FadeOutAndBackIn(0.5f, 0.25f, 0.5f, () =>
             {
                 HideChooseCharacterScreen();
                 ShowFrontScreen();
@@ -155,7 +154,7 @@ namespace HexGameEngine.MainMenu
         {
             // disable button highlight
             EventSystem.current.SetSelectedGameObject(null);
-            BlackScreenController.Instance.FadeOutAndBackIn(0.5f, 0f, 0.5f, () =>
+            BlackScreenController.Instance.FadeOutAndBackIn(0.5f, 0.25f, 0.5f, () =>
             {
                 ShowChooseCharacterScreen();
                 HideFrontScreen();
@@ -686,9 +685,9 @@ namespace HexGameEngine.MainMenu
         }
         private void UpdateItemSlotViews()
         {
-            headItemIcon.BuildFromData(characterBuild.itemSet.headArmour);
+            //headItemIcon.BuildFromData(characterBuild.itemSet.headArmour);
             if (characterBuild.itemSet.headArmour == null) CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeHeadWear);
-            bodyItemIcon.BuildFromData(characterBuild.itemSet.bodyArmour);
+            //bodyItemIcon.BuildFromData(characterBuild.itemSet.bodyArmour);
             mainHandItemIcon.BuildFromData(characterBuild.itemSet.mainHandItem);
             offHandItemIcon.BuildFromData(characterBuild.itemSet.offHandItem);
             if (characterBuild.itemSet.offHandItem == null) CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
@@ -702,7 +701,7 @@ namespace HexGameEngine.MainMenu
                 ItemData headItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingHeadItems[0].itemName));
                 characterBuild.itemSet.headArmour = headItem;
                 CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                headItemIcon.BuildFromData(headItem);
+               // headItemIcon.BuildFromData(headItem);
             }
 
             else
@@ -724,7 +723,7 @@ namespace HexGameEngine.MainMenu
                     characterBuild.itemSet.headArmour = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeHeadWear);
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                    headItemIcon.BuildFromData(null);
+                    //headItemIcon.BuildFromData(null);
                 }
 
                 // Set next item
@@ -733,7 +732,7 @@ namespace HexGameEngine.MainMenu
                     ItemData headItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingHeadItems[currentIndex + 1].itemName));
                     characterBuild.itemSet.headArmour = headItem;
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                    headItemIcon.BuildFromData(headItem);
+                    //headItemIcon.BuildFromData(headItem);
                 }
 
             }
@@ -748,7 +747,7 @@ namespace HexGameEngine.MainMenu
                 ItemData headItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingHeadItems[allStartingHeadItems.Length - 1].itemName));
                 characterBuild.itemSet.headArmour = headItem;
                 CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                headItemIcon.BuildFromData(headItem);
+                //headItemIcon.BuildFromData(headItem);
             }
 
             else
@@ -769,7 +768,7 @@ namespace HexGameEngine.MainMenu
                     characterBuild.itemSet.headArmour = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeHeadWear);
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                    headItemIcon.BuildFromData(null);
+                    //headItemIcon.BuildFromData(null);
                 }
                 // Set previous item
                 else
@@ -777,7 +776,7 @@ namespace HexGameEngine.MainMenu
                     ItemData headItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingHeadItems[currentIndex - 1].itemName));
                     characterBuild.itemSet.headArmour = headItem;
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                    headItemIcon.BuildFromData(headItem);
+                    //headItemIcon.BuildFromData(headItem);
                 }
 
             }
@@ -791,7 +790,7 @@ namespace HexGameEngine.MainMenu
                 ItemData bodyItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingBodyItems[0].itemName));
                 characterBuild.itemSet.bodyArmour = bodyItem;
                 CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                bodyItemIcon.BuildFromData(bodyItem);
+                //bodyItemIcon.BuildFromData(bodyItem);
             }
 
             else
@@ -811,7 +810,7 @@ namespace HexGameEngine.MainMenu
                     characterBuild.itemSet.bodyArmour = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeChestWear);
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                    bodyItemIcon.BuildFromData(null);
+                    //bodyItemIcon.BuildFromData(null);
                 }
 
                 // Set next item
@@ -820,7 +819,7 @@ namespace HexGameEngine.MainMenu
                     ItemData bodyItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingBodyItems[currentIndex + 1].itemName));
                     characterBuild.itemSet.bodyArmour = bodyItem;
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                    bodyItemIcon.BuildFromData(bodyItem);
+                    //bodyItemIcon.BuildFromData(bodyItem);
                 }
 
             }
@@ -835,7 +834,7 @@ namespace HexGameEngine.MainMenu
                 ItemData bodyItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingBodyItems[allStartingBodyItems.Length - 1].itemName));
                 characterBuild.itemSet.bodyArmour = bodyItem;
                 CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                bodyItemIcon.BuildFromData(bodyItem);
+                //bodyItemIcon.BuildFromData(bodyItem);
             }
 
             else
@@ -854,7 +853,7 @@ namespace HexGameEngine.MainMenu
                     characterBuild.itemSet.bodyArmour = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeChestWear);
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                    bodyItemIcon.BuildFromData(null);
+                    //bodyItemIcon.BuildFromData(null);
                 }
                 // Set previous item
                 else
@@ -862,7 +861,7 @@ namespace HexGameEngine.MainMenu
                     ItemData bodyItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingBodyItems[currentIndex - 1].itemName));
                     characterBuild.itemSet.bodyArmour = bodyItem;
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                    bodyItemIcon.BuildFromData(bodyItem);
+                    //bodyItemIcon.BuildFromData(bodyItem);
                 }
 
             }
@@ -924,6 +923,9 @@ namespace HexGameEngine.MainMenu
             }
             customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
             RebuildItemPanelWeaponAbilityIcons();
+
+            // On equip SFX
+            if (characterBuild.itemSet.mainHandItem != null) AudioManager.Instance.PlaySound(characterBuild.itemSet.mainHandItem.equipSFX);
         }
         public void OnPreviousMainHandItemClicked()
         {
@@ -979,6 +981,9 @@ namespace HexGameEngine.MainMenu
             }
             customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
             RebuildItemPanelWeaponAbilityIcons();
+
+            // On equip SFX
+            if (characterBuild.itemSet.mainHandItem != null) AudioManager.Instance.PlaySound(characterBuild.itemSet.mainHandItem.equipSFX);
         }
         public void OnNextOffHandItemClicked()
         {
@@ -1040,6 +1045,9 @@ namespace HexGameEngine.MainMenu
             }
             customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
             RebuildItemPanelWeaponAbilityIcons();
+
+            // On equip SFX
+            if (characterBuild.itemSet.offHandItem != null) AudioManager.Instance.PlaySound(characterBuild.itemSet.offHandItem.equipSFX);
         }
         public void OnPreviousOffHandItemClicked()
         {
@@ -1100,6 +1108,9 @@ namespace HexGameEngine.MainMenu
             }
             customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
             RebuildItemPanelWeaponAbilityIcons();
+
+            // On equip SFX
+            if (characterBuild.itemSet.offHandItem != null) AudioManager.Instance.PlaySound(characterBuild.itemSet.offHandItem.equipSFX);
         }
         public void OnNextRacialModelButtonClicked()
         {
@@ -1536,7 +1547,9 @@ namespace HexGameEngine.MainMenu
         }
         private IEnumerator DoGameStartMainMenuRevealSequenceCoroutine()
         {
+            mainMenuButtonsParent.SetActive(false);
             ShowFrontScreen();
+            
 
             frontScreenGuiCg.alpha = 0;
             frontScreenBgParent.transform.DOScale(1.25f, 0f);
@@ -1547,9 +1560,10 @@ namespace HexGameEngine.MainMenu
             yield return new WaitForSeconds(2);
 
             frontScreenBgParent.transform.DOKill();
-            frontScreenBgParent.transform.DOScale(1f, 1.5f).SetEase(Ease.Linear);
+            frontScreenBgParent.transform.DOScale(1f, 1.5f).SetEase(Ease.InOutQuad);
             yield return new WaitForSeconds(1f);
 
+            mainMenuButtonsParent.SetActive(true);
             frontScreenGuiCg.DOFade(1f, 1f).SetEase(Ease.OutCubic);
         }
         #endregion

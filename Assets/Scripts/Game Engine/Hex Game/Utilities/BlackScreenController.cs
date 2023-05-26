@@ -19,27 +19,6 @@ namespace HexGameEngine.Utilities
             private set { fadeInProgess = value; }
         }
 
-        public void FadeOutAndBackIn(float outDuration, float middlePause, float inDuration)
-        {
-            StartCoroutine(FadeOutAndBackInCoroutine(outDuration, middlePause, inDuration));
-        }
-        private IEnumerator FadeOutAndBackInCoroutine(float outDuration, float middlePause, float inDuration)
-        {
-            // Fade out and wait
-            visualParent.SetActive(true);
-            FadeInProgress = true;
-            FadeOutScreen(outDuration);
-            yield return new WaitForSeconds(outDuration);
-
-            // Middle pause
-            yield return new WaitForSeconds(middlePause);
-
-            // Fade back in
-            FadeInScreen(inDuration);
-            yield return new WaitForSeconds(inDuration);
-            FadeInProgress = false;
-            visualParent.SetActive(false);
-        }
         public void FadeOutAndBackIn(float outDuration, float middlePause, float inDuration, Action onPauseReachedCallBack)
         {
             StartCoroutine(FadeOutAndBackInCoroutine(outDuration, middlePause, inDuration, onPauseReachedCallBack));
@@ -49,23 +28,18 @@ namespace HexGameEngine.Utilities
             // Fade out and wait
             DisableClickThrough();
             FadeInProgress = true;
-            FadeOutScreen(outDuration);
+            FadeOutScreen(outDuration, null, false);
             yield return new WaitForSeconds(outDuration);
 
             // Middle pause + run callback
-            if (onPauseReachedCallBack != null)
-            {
-                onPauseReachedCallBack.Invoke();
-            }
+            if (onPauseReachedCallBack != null) onPauseReachedCallBack.Invoke();
             yield return new WaitForSeconds(middlePause);
 
             // Fade back in
             FadeInScreen(inDuration);
             yield return new WaitForSeconds(inDuration);
-            FadeInProgress = false;
-            EnableClickThrough();
         }
-        public void FadeOutScreen(float duration, Action onCompleteCallBack = null)
+        public void FadeOutScreen(float duration, Action onCompleteCallBack = null, bool enableClickOnComplete = true)
         {
             fadeInProgess = true;
             cg.alpha = 0;
@@ -74,13 +48,17 @@ namespace HexGameEngine.Utilities
             s.Append(cg.DOFade(1, duration));
 
             s.OnComplete(() =>
-            {
-                EnableClickThrough();
-                fadeInProgess = false;
+            {                
+                if (enableClickOnComplete)
+                {
+                    EnableClickThrough();
+                    fadeInProgess = false;
+                }
+                
                 if (onCompleteCallBack != null) onCompleteCallBack.Invoke();
             });
         }
-        public void FadeInScreen(float duration, Action onCompleteCallBack = null)
+        public void FadeInScreen(float duration, Action onCompleteCallBack = null, bool enableClickOnComplete = true)
         {
             // Reset alpha / set transparent
             fadeInProgess = true;
@@ -91,8 +69,11 @@ namespace HexGameEngine.Utilities
 
             s.OnComplete(() =>
             {
-                EnableClickThrough();
-                fadeInProgess = false; 
+                if (enableClickOnComplete)
+                {
+                    EnableClickThrough();
+                    fadeInProgess = false;
+                }
                 if (onCompleteCallBack != null) onCompleteCallBack.Invoke();
             });
         }

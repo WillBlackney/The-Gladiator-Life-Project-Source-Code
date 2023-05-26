@@ -42,6 +42,7 @@ MonoBehaviour:
       perkGained:
         perkTag: 83
         stacks: 1
+        freshInjury: 0
       gainPerkChance: 50
       effectChance: 0
       perkApplied:
@@ -55,3 +56,7 @@ MonoBehaviour:
       innatePerkGainedOnUse:
         perkTag: 0
         stacks: 0
+        freshInjury: 0
+  equipSFX: 124
+  swingSFX: 8
+  hitSFX: 8

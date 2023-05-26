@@ -1,5 +1,6 @@
 using HexGameEngine.Abilities;
 using HexGameEngine.MainMenu;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace HexGameEngine.UI
     {
         #region Properties + Components
         [SerializeField] UIAbilityIcon abilityIcon;
-        [SerializeField] GameObject selectedVisualParent;
+        [SerializeField] GameObject[] selectedStateObjects;
         private bool selected = false;
         #endregion
 
@@ -19,9 +20,9 @@ namespace HexGameEngine.UI
         {
             get { return abilityIcon; }
         }
-        public GameObject SelectedVisualParent
+        public GameObject[] SelectedStateObjects
         {
-            get { return selectedVisualParent; }
+            get { return selectedStateObjects; }
         }
         public bool Selected
         {
@@ -45,12 +46,12 @@ namespace HexGameEngine.UI
             if (selection)
             {
                 selected = true;
-                selectedVisualParent.SetActive(true);
+                Array.ForEach(selectedStateObjects, x => x.SetActive(true));
             }
             else
             {
                 selected = false;
-                selectedVisualParent.SetActive(false);
+                Array.ForEach(selectedStateObjects, x => x.SetActive(false));
             }
         }
         public void OnClick()

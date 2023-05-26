@@ -54,6 +54,9 @@ namespace HexGameEngine.Audio
         [Header("GUI SFX")]
         [SerializeField] private AudioModel[] allGuiSFX;
 
+        [Header("Item SFX")]
+        [SerializeField] private AudioModel[] allItemSFX;
+
         [Header("Events SFX")]
         [SerializeField] private AudioModel[] allEventsSFX;
 
@@ -86,6 +89,7 @@ namespace HexGameEngine.Audio
             allAudioModelsList.AddRange(allEnvironmentsSFX);
             allAudioModelsList.AddRange(allAmbienceSFX);
             allAudioModelsList.AddRange(allCrowdSFX);
+            allAudioModelsList.AddRange(allItemSFX);
 
             // Convert list to array
             allAudioModels = allAudioModelsList.ToArray();
@@ -366,7 +370,7 @@ namespace HexGameEngine.Audio
             if (playingMainMenuMusic) return;
             playingMainMenuMusic = true;
             PlaySound(Sound.Music_Main_Menu_Theme_Unlooped_1);
-            DelayUtils.DelayedCall(52, () => 
+            DelayUtils.DelayedCall(57, () => 
             { 
                 if (playingMainMenuMusic && !IsSoundPlaying(Sound.Music_Main_Menu_Theme_Looped_1)) 
                     FadeInSound(Sound.Music_Main_Menu_Theme_Looped_1, 1f); 
@@ -474,11 +478,37 @@ namespace HexGameEngine.Audio
         Gold_Gain = 51,
         Gold_Dropping = 52,
 
-        GUI_Chime_1 = 31,
-        GUI_Rolling_Bells = 32,
-        GUI_Button_Mouse_Over = 33,
-        GUI_Button_Clicked = 34,
+        UI_Chime_1 = 31,
+        UI_Rolling_Bells = 32,
 
+        UI_Button_Click = 116,
+        UI_Button_Enter = 117,
+        UI_Heavy_Click = 115,
+        UI_Non_Button_Enter = 130,
+        UI_Buy_Item = 107,
+        UI_Sell_Item = 119,
+        UI_Confirm_Click = 110,
+        UI_Cancel_Click = 108,
+        UI_Increase_Click = 111,
+        UI_Decrease_Click = 112,
+        UI_Open_Inventory = 109,
+        UI_Close_Inventory = 118,    
+        UI_Door_Open = 113,
+        UI_Dragging_Constant = 114,  
+        UI_Drag_Drop_End = 129,
+
+        
+        Item_Wooden_Weapon_Equip = 120,
+        Item_Metal_Weapon_Equip = 121,
+        Item_Bow_Equip = 122,
+        Item_Shield_Equip = 123,
+        Item_Trinket_Equip = 124,
+        Item_Cloth_Armour_Equip = 125,
+        Item_Mail_Armour_Equip = 126,
+        Item_Plate_Armour_Equip = 127,
+        Item_General_Unequip = 128,      
+              
+            
         Passive_General_Buff = 5,
         Passive_General_Debuff = 6,
         Passive_Overload_Gained = 24,

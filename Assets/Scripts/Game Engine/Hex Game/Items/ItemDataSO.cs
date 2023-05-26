@@ -109,20 +109,25 @@ namespace HexGameEngine.Items
         [LabelWidth(100)]
         public ItemEffectSet[] itemEffectSets;
 
-
         [BoxGroup("Audio Info", true, true)]
-        [ShowIf("ShowAudioFields")]
+        [LabelWidth(100)]
+        public Sound equipSFX = Sound.None;
+
+        [BoxGroup("Audio Info")]
+        [ShowIf("ShowAudioWeaponFields")]
         [LabelWidth(100)]
         public Sound swingSFX = Sound.None;
 
         [BoxGroup("Audio Info")]
-        [ShowIf("ShowAudioFields")]
+        [ShowIf("ShowAudioWeaponFields")]
         [LabelWidth(100)]
         public Sound hitSFX = Sound.None;
+
+     
         #endregion
 
         #region Odin Showifs
-        public bool ShowAudioFields()
+        public bool ShowAudioWeaponFields()
         {
             return itemType == ItemType.Weapon;
         }

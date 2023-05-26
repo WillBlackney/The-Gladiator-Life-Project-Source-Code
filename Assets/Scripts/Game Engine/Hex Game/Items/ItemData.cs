@@ -42,7 +42,8 @@ namespace HexGameEngine.Items
         public ItemEffectSet[] itemEffectSets;
 
         public Sound swingSFX = Sound.None;
-        public Sound hitSFX = Sound.None;
+        public Sound hitSFX = Sound.None; 
+        public Sound equipSFX = Sound.None;
         #endregion
 
         #region Getters + Accessors

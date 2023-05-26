@@ -339,7 +339,7 @@ namespace HexGameEngine.TurnLogic
                 CombatUIController.Instance.SetEndTurnButtonInteractions(false);
 
                 // Mouse click SFX
-                AudioManager.Instance.PlaySoundPooled(Sound.GUI_Button_Clicked);
+                //AudioManager.Instance.PlaySoundPooled(Sound.GUI_Button_Clicked);
 
                 // Trigger character on activation end sequence and events
                 HexCharacterController.Instance.CharacterOnTurnEnd(EntityActivated);
@@ -362,7 +362,7 @@ namespace HexGameEngine.TurnLogic
                     EntityActivated.hasRequestedTurnDelay = true;
 
                     // Mouse click SFX
-                    AudioManager.Instance.PlaySoundPooled(Sound.GUI_Button_Clicked);
+                    //AudioManager.Instance.PlaySoundPooled(Sound.GUI_Button_Clicked);
 
                     // Move this character to the end of the turn order.
                     HandleMoveCharacterToEndOfTurnOrder(EntityActivated);
@@ -481,7 +481,7 @@ namespace HexGameEngine.TurnLogic
             SetPanelArrowViewState(false);
 
             // start number rolling sfx
-            AudioManager.Instance.PlaySound(Sound.GUI_Rolling_Bells);
+            AudioManager.Instance.PlaySound(Sound.UI_Rolling_Bells);
 
             foreach (HexCharacterModel entity in characters)
             {
@@ -503,7 +503,7 @@ namespace HexGameEngine.TurnLogic
                 window.rollText.text = entity.currentInitiativeRoll.ToString();
 
                 // chime ping SFX
-                AudioManager.Instance.PlaySoundPooled(Sound.GUI_Chime_1);
+                AudioManager.Instance.PlaySoundPooled(Sound.UI_Chime_1);
 
                 // do breath effect on window
                 float currentScale = window.rollText.transform.localScale.x;
@@ -518,7 +518,7 @@ namespace HexGameEngine.TurnLogic
             }
 
             // stop rolling sfx
-            AudioManager.Instance.StopSound(Sound.GUI_Rolling_Bells);
+            AudioManager.Instance.StopSound(Sound.UI_Rolling_Bells);
 
             // brief yield
             yield return new WaitForSeconds(1f);

@@ -34,5 +34,6 @@ MonoBehaviour:
   maxArmourRoll: 170
   grantedAbilities: []
   itemEffectSets: []
+  equipSFX: 127
   swingSFX: 8
   hitSFX: 8

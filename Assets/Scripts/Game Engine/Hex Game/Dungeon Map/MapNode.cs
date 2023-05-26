@@ -117,7 +117,7 @@ namespace HexGameEngine.DungeonMap
             }
 
                
-            AudioManager.Instance.PlaySoundPooled(Sound.GUI_Button_Mouse_Over);
+            //AudioManager.Instance.PlaySoundPooled(Sound.GUI_Button_Mouse_Over);
         }
 
         private void OnMouseExit()

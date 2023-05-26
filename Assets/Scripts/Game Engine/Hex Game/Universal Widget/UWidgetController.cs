@@ -12,10 +12,10 @@ namespace HexGameEngine.UWidget
 
         // Core Logic for Handling Widget Events
         #region
-        public void HandleWidgetEvents(UWidget widget, WidgetEventData[] wEvents)
+        public void HandleWidgetEvents(UWidget widget, WidgetEventData[] wEvents, string eventType)
         {
             Debug.Log("WidgetController.HandleWidgetEvents() called on game object '" + widget.gameObject.name +
-                "', executing all widget events");
+                "', executing all widget events for input event '" + eventType + "'.");
 
             // Stop + Kill any animations from previous events
             KillAllAnimationsOnWidget(widget);
@@ -342,7 +342,7 @@ namespace HexGameEngine.UWidget
         #region
         private void KillAllAnimationsOnWidget(UWidget widget)
         {
-            Debug.Log("WidgetController.KillAllAnimationsOnWidget() called on game object: " + widget.gameObject.name);
+            //Debug.Log("WidgetController.KillAllAnimationsOnWidget() called on game object: " + widget.gameObject.name);
 
             if (widget.killPreviousTweensOnNewSequenceStart == false)
                 return;

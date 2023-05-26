@@ -1,3 +1,4 @@
+using HexGameEngine.Audio;
 using HexGameEngine.Characters;
 using HexGameEngine.MainMenu;
 using System.Collections;
@@ -57,6 +58,8 @@ namespace HexGameEngine.UI
                 selected = false;
                 unselectedVisualParent.SetActive(true);
             }
+
+            AudioManager.Instance.PlaySound(Sound.UI_Button_Click);
         }
         public void OnClick()
         {
