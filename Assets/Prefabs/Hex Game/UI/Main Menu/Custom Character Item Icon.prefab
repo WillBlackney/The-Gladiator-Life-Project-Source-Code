@@ -153,18 +153,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 8525485816887178081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9db09d9cca6141a47a3c991340f1f29f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d2c16d7d3f7add43ac8fd7d93abe631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputType: 0
+  killPreviousTweensOnNewSequenceStart: 1
   onClickEvents: []
+  onRightClickEvents: []
+  mouseDownEvents: []
   mouseEnterEvents:
-  - widgetEvent: 3
+  - widgetEventType: 3
+    scalingSequence: 0
     enableStartDelay: 0
     startDelay: 0
     onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
     functionInvoked:
       m_PersistentCalls:
         m_Calls:
@@ -185,14 +189,31 @@ MonoBehaviour:
     image: {fileID: 0}
     text: {fileID: 0}
     endColour: {r: 0, g: 0, b: 0, a: 0}
-    fadeSpeed: 0
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+    cursorType: 0
   mouseExitEvents:
-  - widgetEvent: 3
+  - widgetEventType: 3
+    scalingSequence: 0
     enableStartDelay: 0
     startDelay: 0
     onlyIfMouseIsStillOverMe: 0
-    objectDisabled: {fileID: 0}
-    objectEnabled: {fileID: 0}
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
     functionInvoked:
       m_PersistentCalls:
         m_Calls:
@@ -213,10 +234,24 @@ MonoBehaviour:
     image: {fileID: 0}
     text: {fileID: 0}
     endColour: {r: 0, g: 0, b: 0, a: 0}
-    fadeSpeed: 0
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+    cursorType: 0
   onDisableEvents: []
-  pointerIsOverMe: 0
-  timeSinceLastPointerEnter: 0
 --- !u!1 &8525485817946873600
 GameObject:
   m_ObjectHideFlags: 0
