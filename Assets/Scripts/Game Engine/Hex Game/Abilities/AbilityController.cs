@@ -1421,6 +1421,7 @@ namespace HexGameEngine.Abilities
             {
                 // player clicked a different ability, handle new selection
                 LevelController.Instance.UnmarkAllTiles();
+                LevelController.Instance.UnmarkAllSubTargetMarkers();
                 var selectedButton = CombatUIController.Instance.FindAbilityButton(currentAbilityAwaiting);
                 if (selectedButton != null) selectedButton.SetSelectedGlow(false);
             }
@@ -1476,6 +1477,7 @@ namespace HexGameEngine.Abilities
                             // Get ready for second selection
                             currentSelectionPhase = AbilitySelectionPhase.First;
                             LevelController.Instance.UnmarkAllTiles();
+                            LevelController.Instance.UnmarkAllSubTargetMarkers();
                             bool neutral = true;
                             if (currentAbilityAwaiting.targetRequirement == TargetRequirement.Enemy) neutral = false;
                             LevelController.Instance.MarkTilesInRange(validHexs, neutral);
@@ -1534,6 +1536,7 @@ namespace HexGameEngine.Abilities
             currentAbilityAwaiting = null;
             firstSelectionCharacter = null;
             currentSelectionPhase = AbilitySelectionPhase.None;
+            LevelController.Instance.UnmarkAllSubTargetMarkers();
             LevelController.Instance.UnmarkAllTiles();
             CursorController.Instance.SetFallbackCursor(CursorType.NormalPointer);
             CursorController.Instance.SetCursor(CursorType.NormalPointer);

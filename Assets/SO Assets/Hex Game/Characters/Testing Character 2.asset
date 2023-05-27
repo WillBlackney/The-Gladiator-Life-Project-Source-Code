@@ -18,16 +18,16 @@ MonoBehaviour:
   modelSize: 0
   attributeSheet:
     might:
-      value: 400
+      value: 0
       stars: 0
     constitution:
-      value: 80
+      value: 500
       stars: 0
     dodge:
       value: 50
       stars: 0
     accuracy:
-      value: 70
+      value: 80
       stars: 0
     resolve:
       value: 5

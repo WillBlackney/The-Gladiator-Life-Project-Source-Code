@@ -1,4 +1,5 @@
-﻿using HexGameEngine.Abilities;
+﻿using DG.Tweening;
+using HexGameEngine.Abilities;
 using HexGameEngine.Characters;
 using Sirenix.Utilities;
 using System.Collections;
@@ -47,6 +48,14 @@ namespace HexGameEngine.HexTiles
         [SerializeField] GameObject mudParent;
         [SerializeField] GameObject waterParent;
         [SerializeField] GameObject grassParent;
+
+        [Header("Sub Target Marker Components")]
+        [SerializeField] GameObject subTargettingMarker;
+        [SerializeField] Transform subTargettingMarkerFrameParent;
+        [SerializeField] SpriteRenderer[] subTargettingMarkerFrameSprites;
+        [SerializeField] Color subTargetWhite;
+        [SerializeField] Color subTargetRed;
+
 
         private List<LevelNode> neighbourNodes = null;
         private TileElevation elevation;
@@ -303,6 +312,40 @@ namespace HexGameEngine.HexTiles
         }
         #endregion
 
+        // Sub Targetting Logic
+        #region
+        public void ShowSubTargettingMarker(LevelNodeColor frameColor)
+        {
+            subTargettingMarker.SetActive(true);
+            subTargettingMarkerFrameParent.DOKill();
+            subTargettingMarkerFrameParent.DOScale(1, 0);
+            subTargettingMarkerFrameParent.DOScale(1.2f, 0.25f).SetLoops(-1, LoopType.Yoyo);
+            subTargettingMarkerFrameSprites.ForEach(x =>
+            {
+                x.color = GetSubTargetColor(frameColor);
+                x.DOKill();
+                x.DOFade(0.6f,0f);
+                x.DOFade(1f, 0.25f).SetLoops(-1, LoopType.Yoyo);
+            });
+        }
+        public void HideSubTargettingMarker()
+        {
+            subTargettingMarker.SetActive(false);
+            subTargettingMarkerFrameParent.DOKill();
+            subTargettingMarkerFrameParent.DOScale(1, 0);
+            subTargettingMarkerFrameSprites.ForEach(x =>
+            {
+                x.DOKill();
+                x.DOFade(0.5f, 0f);
+            });
+        }
+        private Color GetSubTargetColor(LevelNodeColor c)
+        {
+            if (c == LevelNodeColor.Red) return subTargetRed;
+            else return subTargetWhite;
+        }
+        #endregion
+
         // Misc
         #region
         public string PrintGridPosition()
@@ -374,6 +417,12 @@ namespace HexGameEngine.HexTiles
             obstructed = node.Obstructed;
             tileName = node.TileData.tileName;
         }
+    }
+
+    public enum LevelNodeColor
+    {
+        White = 0,
+        Red = 1,
     }
 
 }

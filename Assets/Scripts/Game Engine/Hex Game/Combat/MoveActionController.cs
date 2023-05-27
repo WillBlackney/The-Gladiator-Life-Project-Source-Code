@@ -78,6 +78,7 @@ namespace HexGameEngine.Combat
             {
                 // do move stuff
                 LevelController.Instance.UnmarkAllTiles();
+                LevelController.Instance.UnmarkAllSubTargetMarkers();
                 LevelController.Instance.HandleMoveDownPath(activatedCharacter, currentPath);
                 ResetSelectionState();
                 

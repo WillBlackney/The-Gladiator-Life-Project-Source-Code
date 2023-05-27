@@ -9,6 +9,7 @@ using HexGameEngine.UI;
 using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -977,6 +978,8 @@ namespace HexGameEngine.HexTiles
             else if (AbilityController.Instance.AwaitingAbilityOrder())
             {
                 AbilityController.Instance.ShowHitChancePopup(TurnController.Instance.EntityActivated, h.myCharacter, AbilityController.Instance.CurrentAbilityAwaiting, TurnController.Instance.EntityActivated.itemSet.mainHandItem);
+                // TO DO: sub targetting logic
+                HandleSubTargettingOnTileMouseEnter(AbilityController.Instance.CurrentAbilityAwaiting, TurnController.Instance.EntityActivated, h);
             }
 
             // Character info modal
@@ -1010,13 +1013,25 @@ namespace HexGameEngine.HexTiles
                h.myCharacter.hexCharacterView.myActivationWindow != null) h.myCharacter.hexCharacterView.myActivationWindow.MouseExit();
 
             HideTileInfoPopup();
-            AbilityController.Instance.HideHitChancePopup();
+            UnmarkAllSubTargetMarkers();
+            AbilityController.Instance.HideHitChancePopup();         
             EnemyInfoModalController.Instance.HideModal();
         }
         #endregion
 
         // Tile Marking
         #region
+        private void HandleSubTargettingOnTileMouseEnter(AbilityData ability, HexCharacterModel caster, LevelNode mousedOverTile)
+        {
+            if(ability.targetRequirement == TargetRequirement.Enemy && mousedOverTile && mousedOverTile.myCharacter != null)
+            {
+                mousedOverTile.ShowSubTargettingMarker(LevelNodeColor.Red);
+            }
+        }
+        public void UnmarkAllSubTargetMarkers()
+        {
+            AllLevelNodes.ForEach(x => x.HideSubTargettingMarker());
+        }
         public void MarkTilesInRange(List<LevelNode> tiles, bool neutral = true)
         {
             Debug.Log("LevelController.MarkTilesInRange(), marking " + tiles.Count.ToString() + " tiles...");
@@ -1038,6 +1053,7 @@ namespace HexGameEngine.HexTiles
             }
             markedTiles.Clear();
         }
+       
         #endregion
 
         // Get Hexs Logic
