@@ -978,7 +978,6 @@ namespace HexGameEngine.HexTiles
             else if (AbilityController.Instance.AwaitingAbilityOrder())
             {
                 AbilityController.Instance.ShowHitChancePopup(TurnController.Instance.EntityActivated, h.myCharacter, AbilityController.Instance.CurrentAbilityAwaiting, TurnController.Instance.EntityActivated.itemSet.mainHandItem);
-                // TO DO: sub targetting logic
                 HandleSubTargettingOnTileMouseEnter(AbilityController.Instance.CurrentAbilityAwaiting, TurnController.Instance.EntityActivated, h);
             }
 

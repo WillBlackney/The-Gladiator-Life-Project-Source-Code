@@ -35,9 +35,20 @@ namespace HexGameEngine.Abilities
         [SerializeField] Canvas hitChanceRootCanvas;
         [SerializeField] GameObject hitChancePositionParent;
         [SerializeField] CanvasGroup hitChanceCg;
-        [SerializeField] TextMeshProUGUI hitChanceText;
-        [SerializeField] ModalDottedRow[] hitChanceBoxes;
         [SerializeField] RectTransform[] hitChanceLayouts;
+        [Space(10)]
+        [SerializeField] GameObject hitChanceHeaderParent;
+        [SerializeField] TextMeshProUGUI hitChanceText;
+        [SerializeField] GameObject hitChanceBoxesParent;
+        [SerializeField] ModalDottedRow[] hitChanceBoxes;
+        [Space(10)]
+        [SerializeField] GameObject applyPassiveHeaderParent;
+        [SerializeField] TextMeshProUGUI applyPassiveText;
+        [SerializeField] UIPerkIcon applyPassiveIcon;
+        [SerializeField] GameObject applyPassiveBoxesParent;
+        [SerializeField] ModalDottedRow[] applyPassiveBoxes;
+
+        
 
         // Ability caching properties
         private AbilityData currentAbilityAwaiting;
@@ -2119,28 +2130,47 @@ namespace HexGameEngine.Abilities
                 target.allegiance != caster.allegiance &&
                 caster.activationPhase == ActivationPhase.ActivationPhase &&
                 ability != null &&
-                ability.targetRequirement == TargetRequirement.Enemy &&
-                (ability.abilityType.Contains(AbilityType.MeleeAttack) || ability.abilityType.Contains(AbilityType.RangedAttack) || ability.abilityType.Contains(AbilityType.WeaponAttack)))
+                ability.targetRequirement == TargetRequirement.Enemy)
             {
-                hitChanceCg.alpha = 0;
-                hitChanceRootCanvas.enabled = true;
-                hitChanceCg.DOFade(1, 0.5f);
-                HitChanceDataSet hitChanceData = CombatController.Instance.GetHitChance(caster, target, ability, weaponUsed);
-                hitChanceData.details = hitChanceData.details.OrderByDescending(x => x.accuracyMod).ToList();
-                BuildHitChancePopup(hitChanceData);
-                TransformUtils.RebuildLayouts(hitChanceLayouts);
+                if (ability.abilityType.Contains(AbilityType.MeleeAttack) || ability.abilityType.Contains(AbilityType.RangedAttack) || ability.abilityType.Contains(AbilityType.WeaponAttack))
+                {
+                    hitChanceCg.alpha = 0;
+                    hitChanceRootCanvas.enabled = true;
+                    hitChanceCg.DOFade(1, 0.5f);
+                    HitChanceDataSet hitChanceData = CombatController.Instance.GetHitChance(caster, target, ability, weaponUsed);
+                    hitChanceData.details = hitChanceData.details.OrderByDescending(x => x.accuracyMod).ToList();
+
+                    // to do: try find passive apply effect and add to hit chance modal display
+
+                    BuildHitChancePopup(hitChanceData);
+                    TransformUtils.RebuildLayouts(hitChanceLayouts);
+                }
+                
+                else if(ability.abilityType.Contains(AbilityType.Spell) || ability.abilityType.Contains(AbilityType.Skill))
+                { 
+                    AbilityEffect effect = FindDebuffEffect(ability);
+                    if (effect == null) return;
+
+                    HitChanceDataSet applyDebuffData = CombatController.Instance.GetDebuffChance(caster, target, ability, effect);
+                    BuildApplyPassiveChancePopup(applyDebuffData);
+                    TransformUtils.RebuildLayouts(hitChanceLayouts);
+                }
             }          
         }
         private void BuildHitChancePopup(HitChanceDataSet data)
         {
+            applyPassiveBoxesParent.SetActive(false);
+            applyPassiveHeaderParent.SetActive(false);
+            hitChanceBoxesParent.SetActive(true);
+            hitChanceHeaderParent.SetActive(true);
+
             // Header text
             hitChanceText.text = TextLogic.ReturnColoredText(data.FinalHitChance.ToString() + "%", TextLogic.neutralYellow) + " chance to hit";
 
             // Reset tabs
-            for(int i = 0; i < hitChanceBoxes.Length; i++)
-            {
+            for(int i = 0; i < hitChanceBoxes.Length; i++)            
                 hitChanceBoxes[i].gameObject.SetActive(false);
-            }
+            
             for(int i = 0; i < data.details.Count; i++)
             {
                 string extra = data.details[i].accuracyMod > 0 ? "+" : "";
@@ -2150,11 +2180,49 @@ namespace HexGameEngine.Abilities
                     TextLogic.neutralYellow), data.details[i].accuracyMod > 0 ? DotStyle.Green : DotStyle.Red);
             }
         }
+        private void BuildApplyPassiveChancePopup(HitChanceDataSet data)
+        {
+            hitChanceBoxesParent.SetActive(false);
+            hitChanceHeaderParent.SetActive(false);
+            applyPassiveBoxesParent.SetActive(true);
+            applyPassiveHeaderParent.SetActive(true);
+
+            // Header text
+            applyPassiveText.text = TextLogic.ReturnColoredText(data.FinalHitChance.ToString() + "%", TextLogic.neutralYellow) + " chance";
+
+            // Reset tabs
+            for (int i = 0; i < applyPassiveBoxes.Length; i++)            
+                applyPassiveBoxes[i].gameObject.SetActive(false);
+            
+            for (int i = 0; i < data.details.Count; i++)
+            {
+                string extra = data.details[i].accuracyMod > 0 ? "+" : "";
+                if (i == applyPassiveBoxes.Length - 1) break;
+                applyPassiveBoxes[i].Build(data.details[i].reason + ": " +
+                    TextLogic.ReturnColoredText(extra + data.details[i].accuracyMod.ToString(),
+                    TextLogic.neutralYellow), data.details[i].accuracyMod > 0 ? DotStyle.Green : DotStyle.Red);
+            }
+        }
         public void HideHitChancePopup()
         {
             hitChanceCg.alpha = 1;
             hitChanceRootCanvas.enabled = false;
             hitChanceCg.alpha = 0;
+        }
+        private AbilityEffect FindDebuffEffect(AbilityData ability)
+        {
+            AbilityEffect ret = null;
+
+            foreach(AbilityEffect e in ability.abilityEffects)
+            {
+                if(e.effectType == AbilityEffectType.ApplyPassiveTarget)
+                {
+                    ret = e;
+                    break;
+                }
+            }
+
+            return ret;
         }
         #endregion
 

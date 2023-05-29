@@ -583,6 +583,12 @@ namespace HexGameEngine.Combat
 
         // Rolls + Critical Logic
         #region
+        public HitChanceDataSet GetDebuffChance(HexCharacterModel attacker, HexCharacterModel target, AbilityData abilityUsed, AbilityEffect effect)
+        {
+            HitChanceDataSet ret = new HitChanceDataSet();
+
+            return ret;
+        }
         public HitChanceDataSet GetHitChance(HexCharacterModel attacker, HexCharacterModel target, AbilityData ability = null, ItemData weaponUsed = null)
         {
             HitChanceDataSet ret = new HitChanceDataSet();
