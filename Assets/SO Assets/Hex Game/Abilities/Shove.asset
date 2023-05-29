@@ -15,19 +15,21 @@ MonoBehaviour:
   abilityName: Shove
   displayedName: Shove
   includeInGame: 1
-  baseAbilityDescription: Knock Back an enemy 1 tile.
+  baseAbilityDescription: Knock Back an enemy or ally 1 tile.
   abilitySprite: {fileID: 21300000, guid: 01e98af614fe7004aa61c939455bd1bd, type: 3}
   energyCost: 3
   fatigueCost: 25
   baseCooldown: 0
   abilityType: 01000000
   doesNotBreakStealth: 0
+  guidanceInstruction: 4
+  guidanceInstructionTwo: 0
   weaponRequirement: 6
   derivedFromWeapon: 0
   derivedFromItemLoadout: 1
   weaponAbilityType: 1
   weaponClass: 15
-  targetRequirement: 3
+  targetRequirement: 6
   secondaryTargetRequirement: 0
   rangeFromTarget: 0
   talentRequirementData:
@@ -128,7 +130,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'an enemy '
+    phrase: 'an enemy or ally '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

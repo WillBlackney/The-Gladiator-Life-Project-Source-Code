@@ -61,6 +61,15 @@ namespace HexGameEngine.Abilities
         [LabelWidth(150)]
         [GUIColor("Blue")]
         public bool doesNotBreakStealth = false;
+        [VerticalGroup("Core Data/Stats")]
+        [LabelWidth(150)]
+        [GUIColor("Blue")]
+        public GuidanceInstruction guidanceInstruction;
+        [VerticalGroup("Core Data/Stats")]
+        [LabelWidth(150)]
+        [GUIColor("Blue")]
+        [Tooltip("For abilities that have multiple targetting sequences (for exampe, Telekinesis, which targets a character first, then a destination ile second.)")]
+        public GuidanceInstruction guidanceInstructionTwo;
 
         [VerticalGroup("Requirements")]
         [LabelWidth(150)]

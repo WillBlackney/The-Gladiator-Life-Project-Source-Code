@@ -68,6 +68,7 @@ namespace HexGameEngine.Combat
             {
                 List<LevelNode> validMoveLocations =  Pathfinder.GetAllValidPathableDestinations(activatedCharacter, activatedCharacter.currentTile, LevelController.Instance.AllLevelNodes.ToList());
                 LevelController.Instance.MarkTilesInRange(validMoveLocations);
+                TargetGuidanceController.Instance.BuildAndShow(GuidanceInstruction.SelectDestination, 0.5f);
                 HandleFirstHexSelection(h, activatedCharacter);
                 CursorController.Instance.SetFallbackCursor(CursorType.MoveClick);
                 CursorController.Instance.SetCursor(CursorType.MoveClick);
@@ -76,9 +77,7 @@ namespace HexGameEngine.Combat
             // Second hex selection
             else if(clickedHex != null && h == clickedHex && currentPath != null)
             {
-                // do move stuff
-                LevelController.Instance.UnmarkAllTiles();
-                LevelController.Instance.UnmarkAllSubTargetMarkers();
+                // Move + hide targeting/helper UI
                 LevelController.Instance.HandleMoveDownPath(activatedCharacter, currentPath);
                 ResetSelectionState();
                 
@@ -248,7 +247,10 @@ namespace HexGameEngine.Combat
             CursorController.Instance.SetFallbackCursor(CursorType.NormalPointer);
             CursorController.Instance.SetCursor(CursorType.NormalPointer);
             LevelController.Instance.UnmarkAllTiles();
+            LevelController.Instance.UnmarkAllSubTargetMarkers();
+            TargetGuidanceController.Instance.Hide();
             HexCharacterController.Instance.HideAllFreeStrikeIndicators();
+            TargetGuidanceController.Instance.Hide();
             ClearPath();
             HidePathCostPopup();
             if(TurnController.Instance.EntityActivated != null && resetEnergyBar)

@@ -22,6 +22,8 @@ MonoBehaviour:
   baseCooldown: 1
   abilityType: 01000000
   doesNotBreakStealth: 0
+  guidanceInstruction: 6
+  guidanceInstructionTwo: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
   derivedFromItemLoadout: 0

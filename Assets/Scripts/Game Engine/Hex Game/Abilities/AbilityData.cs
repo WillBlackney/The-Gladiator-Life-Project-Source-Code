@@ -17,6 +17,8 @@ namespace HexGameEngine.Abilities
 
         public AbilityType[] abilityType;
         public bool doesNotBreakStealth;
+        public GuidanceInstruction guidanceInstruction;
+        public GuidanceInstruction guidanceInstructionTwo;
         public TargetRequirement targetRequirement;
         public WeaponRequirement weaponRequirement;
         public bool derivedFromWeapon = false;

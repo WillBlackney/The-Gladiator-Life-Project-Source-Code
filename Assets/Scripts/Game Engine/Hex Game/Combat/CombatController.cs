@@ -601,12 +601,97 @@ namespace HexGameEngine.Combat
             StressState targetStressState = GetStressStateFromStressAmount(target.currentStress);
             int targetStressMod = GetStatMultiplierFromStressState(targetStressState, target);
 
+            // Warfare talent bonus
+            int warfareBonus = 0;
+            if (ability != null &&
+                ability.abilityType.Contains(AbilityType.MeleeAttack) &&
+                CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Warfare, 1))
+            {
+                warfareBonus = CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Warfare) * 5;
+                //if (warfareBonus != 0) ret.details.Add(new HitChanceDetailData("Warfare Talent", warfareBonus));
+            }
+
+            // ranger talent bonus
+            int rangerBonus = 0;
+            if (ability != null &&
+                ability.abilityType.Contains(AbilityType.RangedAttack) &&
+                CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Ranger, 1))
+            {
+                rangerBonus = CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Ranger) * 5;
+                //if (rangerBonus != 0) ret.details.Add(new HitChanceDetailData("Ranger Talent", rangerBonus));
+            }
+
+            // Assassin background bonus
+            int assassinBonus = 0;
+            if (ability != null &&
+                CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Assassin) &&
+                StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(target) < 50)
+            {
+                assassinBonus = 5;
+                //ret.details.Add(new HitChanceDetailData("Assassin Bonus", assassinBonus));
+            }
+
+            // Lumberjack background bonus
+            int lumberjackBonus = 0;
+            if (ability != null &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Lumberjack) &&
+                ItemController.Instance.IsCharacterUsingWeaponClass(attacker.itemSet, WeaponClass.Axe)
+                )
+            {
+                lumberjackBonus = 5;
+                //ret.details.Add(new HitChanceDetailData("Lumberjack Bonus", lumberjackBonus));
+            }
+
+            // Poacher background bonus
+            int poacherBonus = 0;
+            if (ability != null &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Poacher) &&
+                ItemController.Instance.IsCharacterUsingWeaponClass(attacker.itemSet, WeaponClass.Bow)
+                )
+            {
+                poacherBonus = 5;
+                //ret.details.Add(new HitChanceDetailData("Poacher Bonus", lumberjackBonus));
+            }
+
+
+            // Dead Eye
+            int deadEyeBonus = 0;
+            if (ability != null &&
+                ability.abilityType.Contains(AbilityType.RangedAttack) &&
+                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.DeadEye))
+            {
+                deadEyeBonus = 5;
+                //if (deadEyeBonus != 0) ret.details.Add(new HitChanceDetailData("Dead Eye Perk", deadEyeBonus));
+            }
+
+            // Brawny
+            int brawnyBonus = 0;
+            if (ability != null &&
+                ability.abilityType.Contains(AbilityType.MeleeAttack) &&
+                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Brawny))
+            {
+                brawnyBonus = 5;
+                //if (brawnyBonus != 0) ret.details.Add(new HitChanceDetailData("Brawny Perk", brawnyBonus));
+            }
+
+
+
             // Base hit chance
             int baseHitMod = GlobalSettings.Instance.BaseHitChance;
             if (baseHitMod != 0) ret.details.Add(new HitChanceDetailData("Base Hit Chance", baseHitMod));
 
             // Attacker Accuracy
             int accuracyMod = StatCalculator.GetTotalAccuracy(attacker) - attackerStressMod;
+            accuracyMod += brawnyBonus;
+            accuracyMod += deadEyeBonus;
+            accuracyMod += poacherBonus;
+            accuracyMod += lumberjackBonus;
+            accuracyMod += assassinBonus;
+            accuracyMod += rangerBonus;
+            accuracyMod += warfareBonus;
+
             if (accuracyMod != 0) ret.details.Add(new HitChanceDetailData("Attacker Accuracy", accuracyMod));
 
             // Target Dodge
@@ -687,74 +772,7 @@ namespace HexGameEngine.Combat
                 if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Weapon " + bOrP, innateBonus));
             }
 
-            // Warfare talent bonus
-            if (ability != null &&
-                ability.abilityType.Contains(AbilityType.MeleeAttack) &&
-                CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Warfare, 1))
-            {
-                int warfareBonus = CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Warfare) * 5;
-                if (warfareBonus != 0) ret.details.Add(new HitChanceDetailData("Warfare Talent", warfareBonus));
-            }
-
-
-            // ranger talent bonus
-            if (ability != null &&
-                ability.abilityType.Contains(AbilityType.RangedAttack) &&
-                CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Ranger, 1))
-            {
-                int rangerBonus = CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Ranger) * 5;
-                if (rangerBonus != 0) ret.details.Add(new HitChanceDetailData("Ranger Talent", rangerBonus));
-            }
-
-            // Assassin background bonus
-            if (ability != null &&
-                CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Assassin) &&
-                StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(target) < 50)
-            {
-                int assassinBonus = 5;
-                ret.details.Add(new HitChanceDetailData("Assassin Bonus", assassinBonus));
-            }
-
-            // Lumberjack background bonus
-            if (ability != null &&
-                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
-                CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Lumberjack) &&
-                ItemController.Instance.IsCharacterUsingWeaponClass(attacker.itemSet, WeaponClass.Axe)
-                )
-            {
-                int lumberjackBonus = 5;
-                ret.details.Add(new HitChanceDetailData("Lumberjack Bonus", lumberjackBonus));
-            }
-
-            // Poacher background bonus
-            if (ability != null &&
-                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
-                CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Poacher) &&
-                ItemController.Instance.IsCharacterUsingWeaponClass(attacker.itemSet, WeaponClass.Bow)
-                )
-            {
-                int lumberjackBonus = 5;
-                ret.details.Add(new HitChanceDetailData("Poacher Bonus", lumberjackBonus));
-            }
-
-
-            // Dead Eye
-            if (ability != null &&
-                ability.abilityType.Contains(AbilityType.RangedAttack) &&
-                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.DeadEye))
-            {
-                int deadEyeBonus = 5;
-                if (deadEyeBonus != 0) ret.details.Add(new HitChanceDetailData("Dead Eye Perk", deadEyeBonus));
-            }
-
-            // Brawny
-            if (ability != null &&
-                ability.abilityType.Contains(AbilityType.MeleeAttack) &&
-                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Brawny))
-            {
-                int brawnyBonus = 5;
-                if (brawnyBonus != 0) ret.details.Add(new HitChanceDetailData("Brawny Perk", brawnyBonus));
-            }
+            
 
             // Ranged attack distance penalty
             if (!PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Sniper) &&

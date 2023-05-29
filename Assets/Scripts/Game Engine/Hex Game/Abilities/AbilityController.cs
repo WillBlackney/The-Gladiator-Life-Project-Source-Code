@@ -182,6 +182,8 @@ namespace HexGameEngine.Abilities
 
             a.abilityType = d.abilityType;
             a.doesNotBreakStealth = d.doesNotBreakStealth;
+            a.guidanceInstruction = d.guidanceInstruction;
+            a.guidanceInstructionTwo = d.guidanceInstructionTwo;
             a.weaponAbilityType = d.weaponAbilityType;
             a.derivedFromWeapon = d.derivedFromWeapon;
             a.derivedFromItemLoadout = d.derivedFromItemLoadout;
@@ -1420,6 +1422,7 @@ namespace HexGameEngine.Abilities
             if (currentAbilityAwaiting != null || ability.targetRequirement == TargetRequirement.NoTarget)
             {
                 // player clicked a different ability, handle new selection
+                TargetGuidanceController.Instance.Hide(0);
                 LevelController.Instance.UnmarkAllTiles();
                 LevelController.Instance.UnmarkAllSubTargetMarkers();
                 var selectedButton = CombatUIController.Instance.FindAbilityButton(currentAbilityAwaiting);
@@ -1441,6 +1444,7 @@ namespace HexGameEngine.Abilities
                 if (ability.targetRequirement == TargetRequirement.Enemy) neutral = false;
                 CombatUIController.Instance.FindAbilityButton(currentAbilityAwaiting).SetSelectedGlow(true);
                 LevelController.Instance.MarkTilesInRange(GetTargettableTilesOfAbility(ability, caster), neutral);
+                TargetGuidanceController.Instance.BuildAndShow(ability.guidanceInstruction, 0.5f);
             }
             else if (ability.targetRequirement == TargetRequirement.NoTarget)
             {
@@ -1478,9 +1482,11 @@ namespace HexGameEngine.Abilities
                             currentSelectionPhase = AbilitySelectionPhase.First;
                             LevelController.Instance.UnmarkAllTiles();
                             LevelController.Instance.UnmarkAllSubTargetMarkers();
+                            TargetGuidanceController.Instance.Hide(0);
                             bool neutral = true;
                             if (currentAbilityAwaiting.targetRequirement == TargetRequirement.Enemy) neutral = false;
                             LevelController.Instance.MarkTilesInRange(validHexs, neutral);
+                            TargetGuidanceController.Instance.BuildAndShow(currentAbilityAwaiting.guidanceInstructionTwo);
                             firstSelectionCharacter = target;
                         }
                     }
@@ -1538,6 +1544,7 @@ namespace HexGameEngine.Abilities
             currentSelectionPhase = AbilitySelectionPhase.None;
             LevelController.Instance.UnmarkAllSubTargetMarkers();
             LevelController.Instance.UnmarkAllTiles();
+            TargetGuidanceController.Instance.Hide();
             CursorController.Instance.SetFallbackCursor(CursorType.NormalPointer);
             CursorController.Instance.SetCursor(CursorType.NormalPointer);
         }

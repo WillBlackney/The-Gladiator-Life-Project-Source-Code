@@ -57,8 +57,12 @@ MonoBehaviour:
     deathResistance: 25
   abilityBook:
     activeAbilities:
-    - {fileID: 11400000, guid: 6c3343bfc6662a742897620834e447ae, type: 2}
-    - {fileID: 11400000, guid: 30fba2b2b3154994f91264dd96a76258, type: 2}
+    - {fileID: 11400000, guid: e4c3809e590e8a441aff1363602ac9cd, type: 2}
+    - {fileID: 11400000, guid: 15c355d9805c4ee48bba2bda2936c513, type: 2}
+    - {fileID: 11400000, guid: a02ebfe8b4a47c742ab43f030a771ce1, type: 2}
+    - {fileID: 11400000, guid: a8709026bde6ab046a0b8aaf6d8b9785, type: 2}
+    - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
+    - {fileID: 11400000, guid: d84fc754f00f92b458fef9d08a4c3005, type: 2}
   serializedPassiveManager:
     perks: []
   modelParts:
@@ -68,7 +72,7 @@ MonoBehaviour:
   - Undead_Right_Hand_1
   - Undead_Right_Leg_1
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: da504c3a0a3a39b48918b6c6d687cc53, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
