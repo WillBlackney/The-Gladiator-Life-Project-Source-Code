@@ -940,6 +940,7 @@ namespace HexGameEngine.Combat
             HitChanceDataSet ret = new HitChanceDataSet();
             ret.clampResult = false;
             PerkIconData perkApplied = PerkController.Instance.GetPerkIconDataByTag(effect.perkPairing.perkTag);
+            ret.perk = perkApplied;
 
             int totalResistance = StatCalculator.GetTotalDebuffResistance(target);
             int baseChance = effect.perkApplicationChance;

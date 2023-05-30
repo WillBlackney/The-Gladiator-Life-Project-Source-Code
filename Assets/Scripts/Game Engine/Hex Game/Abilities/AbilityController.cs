@@ -17,6 +17,7 @@ using System.Linq;
 using System;
 using HexGameEngine.Items;
 using HexGameEngine.Audio;
+using UnityEngine.TextCore.Text;
 
 namespace HexGameEngine.Abilities
 {
@@ -1824,6 +1825,10 @@ namespace HexGameEngine.Abilities
             {
                 bRet = true;
             }
+            else
+            {
+                ActionErrorGuidanceController.Instance.ShowErrorMessage("Target is out of range");
+            }
 
             Debug.Log("AbilityController.IsTargetOfAbilityValid() returning " + bRet.ToString());
             return bRet;
@@ -1840,6 +1845,7 @@ namespace HexGameEngine.Abilities
                 (TurnController.Instance.EntityActivated == character && character.activationPhase != ActivationPhase.ActivationPhase))
             {
                 Debug.Log("IsAbilityUseable() returning false: cannot use abilities when it is not your turn");
+                ActionErrorGuidanceController.Instance.ShowErrorMessage("It is not this character's turn");
                 bRet = false;
             }
 
@@ -1851,6 +1857,7 @@ namespace HexGameEngine.Abilities
                    !HexCharacterController.Instance.IsCharacterAbleToMove(character))
                 {
                     Debug.Log("IsAbilityUseable() returning false: cannot take movement actions while rooted");
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage("Character is unable to move right now");
                     bRet = false;
                 }
             }
@@ -1863,9 +1870,10 @@ namespace HexGameEngine.Abilities
             }
 
             // check has enough energy
-            if (!DoesCharacterHaveEnoughEnergy(character, ability))
+            if (!DoesCharacterHaveEnoughActionPoints(character, ability))
             {
                 Debug.Log("IsAbilityUseable() returning false: not enough energy");
+                ActionErrorGuidanceController.Instance.ShowErrorMessage("Not enough Action Points");
                 bRet =  false;
             }
 
@@ -1880,6 +1888,7 @@ namespace HexGameEngine.Abilities
             if (!DoesCharacterHaveEnoughFatigue(character, ability))
             {
                 Debug.Log("IsAbilityUseable() returning false: not enough fatigue");
+                ActionErrorGuidanceController.Instance.ShowErrorMessage("Character is too fatigued");
                 bRet = false;
             }
 
@@ -1887,6 +1896,7 @@ namespace HexGameEngine.Abilities
             if (ability.currentCooldown != 0 )
             {
                 Debug.Log("IsAbilityUseable() returning false: ability is on cooldown");
+                ActionErrorGuidanceController.Instance.ShowErrorMessage("Ability is on cooldown");
                 bRet = false;
             }
 
@@ -1911,6 +1921,7 @@ namespace HexGameEngine.Abilities
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Reload))
             {
                 Debug.Log("IsAbilityUseable() returning false: character trying to use a ranged weapon attack with 'Reload' status...");
+                ActionErrorGuidanceController.Instance.ShowErrorMessage("Character needs to reload first");
                 bRet = false;
             }           
 
@@ -1964,7 +1975,7 @@ namespace HexGameEngine.Abilities
 
             return bRet;
         }
-        private bool DoesCharacterHaveEnoughEnergy(HexCharacterModel caster, AbilityData ability)
+        private bool DoesCharacterHaveEnoughActionPoints(HexCharacterModel caster, AbilityData ability)
         {
             return caster.currentEnergy >= GetAbilityEnergyCost(caster, ability);
         }
@@ -1976,6 +1987,16 @@ namespace HexGameEngine.Abilities
         {
             bool bRet = false;
             bRet = GetTargettableTilesOfAbility(ability, caster).Contains(target.currentTile);
+            bool showErrorPanel = false;
+            if (TurnController.Instance.EntityActivated != null && 
+                TurnController.Instance.EntityActivated.controller == Controller.Player) 
+                showErrorPanel = true;
+
+            if (!bRet)
+            {
+                if (showErrorPanel) ActionErrorGuidanceController.Instance.ShowErrorMessage("Target is out of range");
+                return false;
+            }
 
             int stealthDistance = StatCalculator.GetTotalVision(caster) + 1;
             bool ignoreStealth = PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.TrueSight) ||
@@ -1987,9 +2008,12 @@ namespace HexGameEngine.Abilities
             // Check stealth + true eye / sniper (ignores stealth)
             if (caster.currentTile.Distance(target.currentTile) > stealthDistance &&
                 HexCharacterController.Instance.IsTargetFriendly(caster, target) == false &&
-                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stealth) &&                
+                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stealth) &&
                 !ignoreStealth)
+            {
+                if (showErrorPanel) ActionErrorGuidanceController.Instance.ShowErrorMessage("Character needs to reload first");
                 bRet = false;
+            }
 
             return bRet;
         }
@@ -2033,6 +2057,13 @@ namespace HexGameEngine.Abilities
                 bRet = true;
             }
 
+            if (bRet == false &&
+                TurnController.Instance.EntityActivated != null &&
+                TurnController.Instance.EntityActivated.controller == Controller.Player)
+            {
+                ActionErrorGuidanceController.Instance.ShowErrorMessage("Invalid target for this ability");
+            }
+
             Debug.Log("AbilityController.DoesTargetOfAbilityMeetAllegianceRequirement() returning " + bRet);
             return bRet;
 
@@ -2040,6 +2071,15 @@ namespace HexGameEngine.Abilities
         private bool DoesAbilityMeetSubRequirements(HexCharacterModel caster, AbilityData ability, HexCharacterModel target = null)
         {
             bool bRet = true;
+
+            // check its actually characters turn
+            if (TurnController.Instance.EntityActivated != caster ||
+                (TurnController.Instance.EntityActivated == caster && caster.activationPhase != ActivationPhase.ActivationPhase))
+            {
+                Debug.Log("IsAbilityUseable() returning false: cannot use abilities when it is not your turn");
+                ActionErrorGuidanceController.Instance.ShowErrorMessage("It is not this character's turn");
+                bRet = false;
+            }
 
             foreach (AbilityRequirement ar in ability.abilitySubRequirements)
             {
@@ -2058,6 +2098,10 @@ namespace HexGameEngine.Abilities
                         }
                     }
                     if (shouldContinue) continue;
+                    else
+                    {
+                        ActionErrorGuidanceController.Instance.ShowErrorMessage("Target's back tiles are obstructed.");
+                    }
                 }
 
                 else if (ar.type == AbilityRequirementType.TargetHasRace)
@@ -2090,11 +2134,13 @@ namespace HexGameEngine.Abilities
                 else if (ar.type == AbilityRequirementType.TargetHasShield)
                 {
                     if (target == null || (target != null && target.itemSet.offHandItem != null && target.itemSet.offHandItem.weaponClass == WeaponClass.Shield)) continue;
+                    else ActionErrorGuidanceController.Instance.ShowErrorMessage("Target does not have a shield");
                 }
 
                 else if (ar.type == AbilityRequirementType.TargetIsTeleportable)
                 {
                     if (target == null || (target != null && HexCharacterController.Instance.IsCharacterTeleportable(target))) continue;
+                    else ActionErrorGuidanceController.Instance.ShowErrorMessage("Target cannot be teleported");
                 }
 
                 else if (ar.type == AbilityRequirementType.CasterIsTeleportable &&
@@ -2150,7 +2196,7 @@ namespace HexGameEngine.Abilities
                     {
                         HitChanceDataSet applyDebuffData = CombatController.Instance.GetDebuffChance(caster, target, ability, effect);
                         applyDebuffData.details = applyDebuffData.details.OrderByDescending(x => x.accuracyMod).ToList();
-                        BuildApplyPassiveChancePopup(applyDebuffData);
+                        BuildApplyPassiveChancePopup(applyDebuffData, applyDebuffData.perk.passiveSprite);
                     }
 
                     hitChanceCg.alpha = 0;
@@ -2172,7 +2218,7 @@ namespace HexGameEngine.Abilities
 
                     HitChanceDataSet applyDebuffData = CombatController.Instance.GetDebuffChance(caster, target, ability, effect);
                     applyDebuffData.details = applyDebuffData.details.OrderByDescending(x => x.accuracyMod).ToList();
-                    BuildApplyPassiveChancePopup(applyDebuffData);
+                    BuildApplyPassiveChancePopup(applyDebuffData, applyDebuffData.perk.passiveSprite);
                     TransformUtils.RebuildLayouts(hitChanceLayouts);
                 }
             }          
@@ -2198,13 +2244,14 @@ namespace HexGameEngine.Abilities
                     TextLogic.neutralYellow), data.details[i].accuracyMod > 0 ? DotStyle.Green : DotStyle.Red);
             }
         }
-        private void BuildApplyPassiveChancePopup(HitChanceDataSet data)
+        private void BuildApplyPassiveChancePopup(HitChanceDataSet data, Sprite iconSprite)
         {
             applyPassiveBoxesParent.SetActive(true);
             applyPassiveHeaderParent.SetActive(true);
 
             // Header text
             applyPassiveText.text = TextLogic.ReturnColoredText(data.FinalHitChance.ToString() + "%", TextLogic.neutralYellow) + " chance";
+            applyPassiveIcon.PerkImage.sprite = iconSprite;
 
             // Reset tabs
             for (int i = 0; i < applyPassiveBoxes.Length; i++)            

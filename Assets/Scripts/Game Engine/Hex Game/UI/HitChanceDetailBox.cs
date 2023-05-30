@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using HexGameEngine.Utilities;
 using System.Linq;
+using HexGameEngine.Perks;
 
 namespace HexGameEngine.UI
 {
@@ -58,6 +59,7 @@ namespace HexGameEngine.UI
         public List<HitChanceDetailData> details = new List<HitChanceDetailData>();
         public bool guaranteedHit = false;
         public bool clampResult = true;
+        public PerkIconData perk;
 
         public int FinalHitChance
         {
