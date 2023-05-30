@@ -205,6 +205,7 @@ namespace HexGameEngine.Items
 
             i.swingSFX = original.swingSFX;
             i.hitSFX = original.hitSFX;
+            i.equipSFX = original.equipSFX;
 
             return i;
         }
@@ -381,10 +382,14 @@ namespace HexGameEngine.Items
                 character.myName + ", item = " + newItem.itemData.itemName + ", slot = " + slot.SlotType.ToString());
 
             ItemData previousItem = slot.ItemDataRef;
+            Sound equipSound = newItem.itemData.equipSFX;
+            Debug.LogWarning("SOUND: " + equipSound.ToString());
 
             // remove new item from inventory
             int index = InventoryController.Instance.Inventory.IndexOf(newItem);
             InventoryController.Instance.RemoveItemFromInventory(newItem);
+
+            
 
             if (previousItem != null)
             {
@@ -420,7 +425,7 @@ namespace HexGameEngine.Items
             else if (slot.SlotType == RosterSlotType.Body)
                 character.itemSet.bodyArmour = newItem.itemData;
 
-            AudioManager.Instance.PlaySound(newItem.itemData.equipSFX);
+            AudioManager.Instance.PlaySoundPooled(equipSound);
 
             // Update item abilities
             character.abilityBook.OnItemSetChanged(character.itemSet);

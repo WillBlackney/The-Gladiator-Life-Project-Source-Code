@@ -6,6 +6,7 @@ using HexGameEngine.Characters;
 using HexGameEngine.UI;
 using HexGameEngine.Player;
 using HexGameEngine.Perks;
+using HexGameEngine.Audio;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -63,6 +64,7 @@ namespace HexGameEngine.TownFeatures
             portraitVisualParent.SetActive(true);
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(portraitModel, myCharacterData.modelParts);
             TownController.Instance.EvaluateLibrarySlots();
+            AudioManager.Instance.PlaySoundPooled(Sound.UI_Drag_Drop_End);
         }
         public void ClearCharacter()
         {

@@ -39,7 +39,7 @@ namespace HexGameEngine.Cards
 
 
             // play sfx
-            AudioManager.Instance.FadeInSound(Sound.Card_Dragging, 0.2f);
+            AudioManager.Instance.FadeInSound(Sound.UI_Dragging_Constant, 0.2f);
         }
         public override void OnEndDrag(bool forceFailure = false)
         {

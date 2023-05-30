@@ -8,7 +8,6 @@ using HexGameEngine.Libraries;
 using HexGameEngine.Abilities;
 using HexGameEngine.UI;
 using HexGameEngine.Characters;
-using HexGameEngine.Cards;
 using HexGameEngine.TownFeatures;
 
 namespace HexGameEngine.Items

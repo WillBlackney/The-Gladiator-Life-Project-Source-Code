@@ -1419,6 +1419,8 @@ namespace HexGameEngine.Abilities
             if (b.MyAbilityData == null) return;
             if (IsAbilityUseable(b.MyAbilityData.myCharacter, b.MyAbilityData))
             {
+                AudioManager.Instance.PlaySound(Sound.UI_Button_Click);
+
                 // clear move selection state + views
                 MoveActionController.Instance.ResetSelectionState(false);
 

@@ -339,7 +339,7 @@ namespace HexGameEngine.TurnLogic
                 CombatUIController.Instance.SetEndTurnButtonInteractions(false);
 
                 // Mouse click SFX
-                AudioManager.Instance.PlaySoundPooled(Sound.UI_Button_Click);
+                AudioManager.Instance.PlaySoundPooled(Sound.UI_Heavy_Click);
 
                 // Trigger character on activation end sequence and events
                 HexCharacterController.Instance.CharacterOnTurnEnd(EntityActivated);
@@ -362,7 +362,7 @@ namespace HexGameEngine.TurnLogic
                     EntityActivated.hasRequestedTurnDelay = true;
 
                     // Mouse click SFX
-                    AudioManager.Instance.PlaySoundPooled(Sound.UI_Button_Click);
+                    AudioManager.Instance.PlaySoundPooled(Sound.UI_Heavy_Click);
 
                     // Move this character to the end of the turn order.
                     HandleMoveCharacterToEndOfTurnOrder(EntityActivated);

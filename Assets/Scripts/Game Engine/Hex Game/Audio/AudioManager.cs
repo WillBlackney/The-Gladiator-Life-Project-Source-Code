@@ -139,6 +139,8 @@ namespace HexGameEngine.Audio
                 return;
             }
 
+            Debug.LogWarning("Playing sound: " + s.ToString());
+
             AudioModel a = Array.Find(allAudioModels, sound => sound.soundType == s);
             if (a != null)
             {

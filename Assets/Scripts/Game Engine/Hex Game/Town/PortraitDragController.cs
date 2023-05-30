@@ -6,6 +6,7 @@ using HexGameEngine.UCM;
 using UnityEngine.UI;
 using HexGameEngine.Characters;
 using HexGameEngine.TownFeatures;
+using HexGameEngine.Audio;
 
 namespace HexGameEngine.UI
 {
@@ -49,10 +50,12 @@ namespace HexGameEngine.UI
         {
             Debug.Log("PortraitDragController.HandleEndDrag");
             followMouseParent.SetActive(false);
+            AudioManager.Instance.FadeOutSound(Sound.UI_Dragging_Constant, 0.2f);
 
             // Character Deployment logic
             if (DeploymentNodeView.NodeMousedOver != null)
             {
+                AudioManager.Instance.PlaySoundPooled(Sound.UI_Drag_Drop_End);
                 if (DeploymentNodeView.NodeMousedOver.AllowedCharacter == Allegiance.Player)                
                     TownController.Instance.HandleDropCharacterOnDeploymentNode(DeploymentNodeView.NodeMousedOver, draggedCharacterData);
                 
@@ -92,11 +95,13 @@ namespace HexGameEngine.UI
             if (!TownController.Instance.IsCharacterDraggableFromRosterToDeploymentNode(panel.MyCharacterData) ||
                 TownController.Instance.IsCharacterPlacedInHospital(panel.MyCharacterData)) return;
 
+            AudioManager.Instance.FadeInSound(Sound.UI_Dragging_Constant, 0.2f);
             BuildAndShowPortrait(panel.MyCharacterData);
             draggedCharacterData = panel.MyCharacterData;
         }
         public void OnDeploymentNodeDragStart(DeploymentNodeView node)
         {
+            AudioManager.Instance.FadeInSound(Sound.UI_Dragging_Constant, 0.2f);
             if (node.MyCharacterData == null) return;
             BuildAndShowPortrait(node.MyCharacterData);
             draggedCharacterData = node.MyCharacterData;

@@ -163,7 +163,7 @@ namespace HexGameEngine.Items
                 HexCharacterData character = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
 
                 // Stop dragging SFX
-                AudioManager.Instance.FadeOutSound(Sound.Card_Dragging, 0.2f);
+                AudioManager.Instance.FadeOutSound(Sound.UI_Dragging_Constant, 0.2f);
 
                 // Check equipping 2h item with two 1h items already equip without enough inventory space.
                 if(myItemRef.itemData != null &&
@@ -188,9 +188,6 @@ namespace HexGameEngine.Items
                 // Was the drag succesful?
                 if (DragSuccessful())
                 {
-                    // Card added SFX
-                    AudioManager.Instance.PlaySound(Sound.UI_Chime_1);
-
                     // Snap drag item view back to inventory slot position
                     InventorySlot slot = InventoryController.Instance.AllInventorySlots[InventoryController.Instance.Inventory.IndexOf(MyItemRef)];
 
@@ -211,6 +208,7 @@ namespace HexGameEngine.Items
                     else if(myItemRef.abilityData != null)
                     {
                         // to do: only run this code if the library page is actually open
+                        AudioManager.Instance.PlaySoundPooled(Sound.UI_Drag_Drop_End);
                         TownController.Instance.LibraryAbilitySlot.BuildFromAbility(myItemRef.abilityData);
                     }
                 }
@@ -240,7 +238,7 @@ namespace HexGameEngine.Items
                 itemDragged = this;
 
                 // Play dragging SFX
-                AudioManager.Instance.FadeInSound(Sound.Card_Dragging, 0.2f);
+                AudioManager.Instance.FadeInSound(Sound.UI_Dragging_Constant, 0.2f);
 
                 // Hide pop up window
                 ItemPopupController.Instance.HidePanel();

@@ -31,7 +31,7 @@ namespace HexGameEngine.Cards
             cardVM.mySlotHelper.ResetAngles();
 
             // play sfx
-            AudioManager.Instance.FadeInSound(Sound.Card_Dragging, 0.2f);
+            AudioManager.Instance.FadeInSound(Sound.UI_Dragging_Constant, 0.2f);
         }
 
         public override void OnDraggingInUpdate()
@@ -44,7 +44,7 @@ namespace HexGameEngine.Cards
             Debug.Log("DragSpellNoTarget.OnEndDrag() called...");
 
             // Stop dragging SFX
-            AudioManager.Instance.FadeOutSound(Sound.Card_Dragging, 0.2f);
+            AudioManager.Instance.FadeOutSound(Sound.UI_Dragging_Constant, 0.2f);
 
             // Check if we are holding a card over the table
             if (DragSuccessful() && forceFailure == false)
