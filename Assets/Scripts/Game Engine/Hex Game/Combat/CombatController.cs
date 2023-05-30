@@ -583,12 +583,7 @@ namespace HexGameEngine.Combat
 
         // Rolls + Critical Logic
         #region
-        public HitChanceDataSet GetDebuffChance(HexCharacterModel attacker, HexCharacterModel target, AbilityData abilityUsed, AbilityEffect effect)
-        {
-            HitChanceDataSet ret = new HitChanceDataSet();
-
-            return ret;
-        }
+       
         public HitChanceDataSet GetHitChance(HexCharacterModel attacker, HexCharacterModel target, AbilityData ability = null, ItemData weaponUsed = null)
         {
             HitChanceDataSet ret = new HitChanceDataSet();
@@ -686,7 +681,7 @@ namespace HexGameEngine.Combat
 
             // Base hit chance
             int baseHitMod = GlobalSettings.Instance.BaseHitChance;
-            if (baseHitMod != 0) ret.details.Add(new HitChanceDetailData("Base Hit Chance", baseHitMod));
+            if (baseHitMod != 0) ret.details.Add(new HitChanceDetailData("Base hit chance", baseHitMod));
 
             // Attacker Accuracy
             int accuracyMod = StatCalculator.GetTotalAccuracy(attacker) - attackerStressMod;
@@ -698,11 +693,11 @@ namespace HexGameEngine.Combat
             accuracyMod += rangerBonus;
             accuracyMod += warfareBonus;
 
-            if (accuracyMod != 0) ret.details.Add(new HitChanceDetailData("Attacker Accuracy", accuracyMod));
+            if (accuracyMod != 0) ret.details.Add(new HitChanceDetailData("Attacker accuracy", accuracyMod));
 
             // Target Dodge
             int dodgeMod = -(StatCalculator.GetTotalDodge(target) - targetStressMod);
-            if (dodgeMod != 0) ret.details.Add(new HitChanceDetailData("Target Dodge", dodgeMod));            
+            if (dodgeMod != 0) ret.details.Add(new HitChanceDetailData("Target dodge", dodgeMod));            
 
             // Stress State            
             if (attackerStressMod != 0) ret.details.Add(new HitChanceDetailData("Attacker " + attackerStressState.ToString(), attackerStressMod));
@@ -713,11 +708,11 @@ namespace HexGameEngine.Combat
             {
                 // Check back strike bonus
                 int backStrikeMod = HexCharacterController.Instance.CalculateBackStrikeHitChanceModifier(attacker, target);
-                if (backStrikeMod != 0) ret.details.Add(new HitChanceDetailData("Backstrike Bonus", backStrikeMod));
+                if (backStrikeMod != 0) ret.details.Add(new HitChanceDetailData("Backstrike bonus", backStrikeMod));
 
                 // Check flanking bonus
                 int flankingMod = HexCharacterController.Instance.CalculateFlankingHitChanceModifier(attacker, target);
-                if (flankingMod != 0) ret.details.Add(new HitChanceDetailData("Flanking Bonus", flankingMod));
+                if (flankingMod != 0) ret.details.Add(new HitChanceDetailData("Flanking bonus", flankingMod));
             }
 
             // Check elevation bonus
@@ -726,11 +721,11 @@ namespace HexGameEngine.Combat
             {
                 if (elevationMod < 0)
                 {
-                    ret.details.Add(new HitChanceDetailData("Elevation Penalty", elevationMod));
+                    ret.details.Add(new HitChanceDetailData("Elevation penalty", elevationMod));
                 }
                 else if (elevationMod > 0)
                 {
-                    ret.details.Add(new HitChanceDetailData("Elevation Bonus", elevationMod));
+                    ret.details.Add(new HitChanceDetailData("Elevation bonus", elevationMod));
                 }
             }
 
@@ -739,17 +734,17 @@ namespace HexGameEngine.Combat
                 !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.PointBlank))
             {
                 if (HexCharacterController.Instance.IsCharacterEngagedInMelee(attacker))
-                    ret.details.Add(new HitChanceDetailData("Shooting From Melee", -10));
+                    ret.details.Add(new HitChanceDetailData("Shooting from melee", -10));
 
                 if (HexCharacterController.Instance.IsCharacterEngagedInMelee(target))
-                    ret.details.Add(new HitChanceDetailData("Shooting Into Melee", -10));
+                    ret.details.Add(new HitChanceDetailData("Shooting into melee", -10));
             }
 
             // Check ability innate hit bonus
             if (ability != null)
             {
                 int innateBonus = ability.hitChanceModifier;
-                string bOrP = innateBonus > 0 ? "Bonus" : "Penalty";
+                string bOrP = innateBonus > 0 ? "bonus" : "penalty";
                 if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Ability " + bOrP, innateBonus));
             }
 
@@ -766,7 +761,7 @@ namespace HexGameEngine.Combat
                 }
 
                 string bOrP = innateBonus > 0 ? "Bonus" : "Penalty";
-                if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Adjacent Target " + bOrP, innateBonus));
+                if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Adjacent target " + bOrP, innateBonus));
             }
 
             // Check weapon innate accuracy bonus/penalty
@@ -785,7 +780,7 @@ namespace HexGameEngine.Combat
                 ability != null && ability.abilityType.Contains(AbilityType.RangedAttack))
             {
                 int distanceMod = -(attacker.currentTile.Distance(target.currentTile) - 1) * 5;
-                if (distanceMod != 0) ret.details.Add(new HitChanceDetailData("Distance Penalty", distanceMod));
+                if (distanceMod != 0) ret.details.Add(new HitChanceDetailData("Distance penalty", distanceMod));
             }
 
             // Check guaranteed hit effect for abilities
@@ -940,7 +935,56 @@ namespace HexGameEngine.Combat
             Debug.Log("Target rolled " + roll.ToString() + " and needed " + totalResistance.ToString() + " or less. Resisted = " + didResist.ToString());
             return didResist;
         }
+        public HitChanceDataSet GetDebuffChance(HexCharacterModel attacker, HexCharacterModel target, AbilityData abilityUsed, AbilityEffect effect)
+        {
+            HitChanceDataSet ret = new HitChanceDataSet();
+            ret.clampResult = false;
+            PerkIconData perkApplied = PerkController.Instance.GetPerkIconDataByTag(effect.perkPairing.perkTag);
 
+            int totalResistance = StatCalculator.GetTotalDebuffResistance(target);
+            int baseChance = effect.perkApplicationChance;
+            
+            // Check for rune
+            if(perkApplied.runeBlocksIncrease && PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Rune))
+            {
+                ret.details.Add(new HitChanceDetailData("Blocked by Rune", -100, true));
+                return ret;
+            }           
+
+            // Check for immunity from 'perksThatBlockThis'
+            foreach(Perk blocker in perkApplied.perksThatBlockThis)
+            {
+                if(PerkController.Instance.DoesCharacterHavePerk(target.pManager, blocker))
+                {
+                    ret.details.Add(new HitChanceDetailData("Blocked by " + TextLogic.SplitByCapitals(blocker.ToString()), -100, true));
+                    return ret;
+                }
+            }
+
+            // Check Clotter perk
+            if (perkApplied.perkTag == Perk.Bleeding &&
+                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Clotter))
+                ret.details.Add(new HitChanceDetailData("Target Clotter", -50));
+
+            // Check Innoculated perk
+            if (perkApplied.perkTag == Perk.Poisoned &&
+                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Inoculated))
+                ret.details.Add(new HitChanceDetailData("Target Inoculated", -50));
+
+            // Check for shadowcraft passive
+            if (CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Shadowcraft, 1))            
+                ret.details.Add(new HitChanceDetailData("Shadowcraft bonus", 15));
+            
+
+            // Check base application chance from ability
+            ret.details.Add(new HitChanceDetailData("Base chance", baseChance));
+
+            // check target debuff resistance
+            ret.details.Add(new HitChanceDetailData("Target Debuff Resistance", -totalResistance));
+
+
+            return ret;
+        }
         #endregion
 
         // Handle Damage + Entry Points
@@ -1642,7 +1686,7 @@ namespace HexGameEngine.Combat
         }       
         #endregion
 
-        // Combat Vuctory, Defeat + Game Over Logic
+        // Combat Victory, Defeat + Game Over Logic
         #region      
         private void HandleOnCombatVictoryEffects()
         {

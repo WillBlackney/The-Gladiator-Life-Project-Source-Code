@@ -2126,6 +2126,11 @@ namespace HexGameEngine.Abilities
         #region
         public void ShowHitChancePopup(HexCharacterModel caster, HexCharacterModel target, AbilityData ability, ItemData weaponUsed = null)
         {
+            hitChanceBoxesParent.SetActive(false);
+            hitChanceHeaderParent.SetActive(false);
+            applyPassiveBoxesParent.SetActive(false);
+            applyPassiveHeaderParent.SetActive(false);
+
             if (target != null &&
                 target.allegiance != caster.allegiance &&
                 caster.activationPhase == ActivationPhase.ActivationPhase &&
@@ -2134,15 +2139,23 @@ namespace HexGameEngine.Abilities
             {
                 if (ability.abilityType.Contains(AbilityType.MeleeAttack) || ability.abilityType.Contains(AbilityType.RangedAttack) || ability.abilityType.Contains(AbilityType.WeaponAttack))
                 {
-                    hitChanceCg.alpha = 0;
-                    hitChanceRootCanvas.enabled = true;
-                    hitChanceCg.DOFade(1, 0.5f);
                     HitChanceDataSet hitChanceData = CombatController.Instance.GetHitChance(caster, target, ability, weaponUsed);
                     hitChanceData.details = hitChanceData.details.OrderByDescending(x => x.accuracyMod).ToList();
 
                     // to do: try find passive apply effect and add to hit chance modal display
+                    AbilityEffect effect = FindDebuffEffect(ability);                    
+                    BuildHitChancePopup(hitChanceData);                       
+                    
+                    if(effect != null)
+                    {
+                        HitChanceDataSet applyDebuffData = CombatController.Instance.GetDebuffChance(caster, target, ability, effect);
+                        applyDebuffData.details = applyDebuffData.details.OrderByDescending(x => x.accuracyMod).ToList();
+                        BuildApplyPassiveChancePopup(applyDebuffData);
+                    }
 
-                    BuildHitChancePopup(hitChanceData);
+                    hitChanceCg.alpha = 0;
+                    hitChanceRootCanvas.enabled = true;
+                    hitChanceCg.DOFade(1, 0.5f);
                     TransformUtils.RebuildLayouts(hitChanceLayouts);
                 }
                 
@@ -2151,7 +2164,14 @@ namespace HexGameEngine.Abilities
                     AbilityEffect effect = FindDebuffEffect(ability);
                     if (effect == null) return;
 
+                    applyPassiveBoxesParent.SetActive(true);
+                    applyPassiveHeaderParent.SetActive(true);
+                    hitChanceCg.alpha = 0;
+                    hitChanceRootCanvas.enabled = true;
+                    hitChanceCg.DOFade(1, 0.5f);
+
                     HitChanceDataSet applyDebuffData = CombatController.Instance.GetDebuffChance(caster, target, ability, effect);
+                    applyDebuffData.details = applyDebuffData.details.OrderByDescending(x => x.accuracyMod).ToList();
                     BuildApplyPassiveChancePopup(applyDebuffData);
                     TransformUtils.RebuildLayouts(hitChanceLayouts);
                 }
@@ -2159,8 +2179,6 @@ namespace HexGameEngine.Abilities
         }
         private void BuildHitChancePopup(HitChanceDataSet data)
         {
-            applyPassiveBoxesParent.SetActive(false);
-            applyPassiveHeaderParent.SetActive(false);
             hitChanceBoxesParent.SetActive(true);
             hitChanceHeaderParent.SetActive(true);
 
@@ -2182,8 +2200,6 @@ namespace HexGameEngine.Abilities
         }
         private void BuildApplyPassiveChancePopup(HitChanceDataSet data)
         {
-            hitChanceBoxesParent.SetActive(false);
-            hitChanceHeaderParent.SetActive(false);
             applyPassiveBoxesParent.SetActive(true);
             applyPassiveHeaderParent.SetActive(true);
 
@@ -2198,9 +2214,10 @@ namespace HexGameEngine.Abilities
             {
                 string extra = data.details[i].accuracyMod > 0 ? "+" : "";
                 if (i == applyPassiveBoxes.Length - 1) break;
-                applyPassiveBoxes[i].Build(data.details[i].reason + ": " +
-                    TextLogic.ReturnColoredText(extra + data.details[i].accuracyMod.ToString(),
-                    TextLogic.neutralYellow), data.details[i].accuracyMod > 0 ? DotStyle.Green : DotStyle.Red);
+
+                string accuracyModText = ": " + TextLogic.ReturnColoredText(extra + data.details[i].accuracyMod.ToString(), TextLogic.neutralYellow);
+                if (data.details[i].hideAccuracyMod) accuracyModText = "";
+                applyPassiveBoxes[i].Build(data.details[i].reason + accuracyModText, data.details[i].accuracyMod > 0 ? DotStyle.Green : DotStyle.Red);
             }
         }
         public void HideHitChancePopup()
@@ -2216,6 +2233,38 @@ namespace HexGameEngine.Abilities
             foreach(AbilityEffect e in ability.abilityEffects)
             {
                 if(e.effectType == AbilityEffectType.ApplyPassiveTarget)
+                {
+                    ret = e;
+                    break;
+                }
+            }
+            foreach (AbilityEffect e in ability.onHitEffects)
+            {
+                if (e.effectType == AbilityEffectType.ApplyPassiveTarget)
+                {
+                    ret = e;
+                    break;
+                }
+            }
+            foreach (AbilityEffect e in ability.onCritEffects)
+            {
+                if (e.effectType == AbilityEffectType.ApplyPassiveTarget)
+                {
+                    ret = e;
+                    break;
+                }
+            }
+            foreach (AbilityEffect e in ability.onPerkAppliedSuccessEffects)
+            {
+                if (e.effectType == AbilityEffectType.ApplyPassiveTarget)
+                {
+                    ret = e;
+                    break;
+                }
+            }
+            foreach (AbilityEffect e in ability.onCollisionEffects)
+            {
+                if (e.effectType == AbilityEffectType.ApplyPassiveTarget)
                 {
                     ret = e;
                     break;

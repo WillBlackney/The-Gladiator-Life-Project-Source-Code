@@ -57,6 +57,7 @@ namespace HexGameEngine.UI
     {
         public List<HitChanceDetailData> details = new List<HitChanceDetailData>();
         public bool guaranteedHit = false;
+        public bool clampResult = true;
 
         public int FinalHitChance
         {
@@ -70,7 +71,9 @@ namespace HexGameEngine.UI
                     ret += detail.accuracyMod;
                 }
 
-                return Mathf.Clamp(ret, 5, 95);
+                if (clampResult)
+                    return Mathf.Clamp(ret, 5, 95);
+                else return Mathf.Clamp(ret, 0, 100);
             }
 
         }
@@ -80,11 +83,13 @@ namespace HexGameEngine.UI
     {
         public string reason;
         public int accuracyMod;
+        public bool hideAccuracyMod = false;
 
-        public HitChanceDetailData(string reason, int accuracyMod)
+        public HitChanceDetailData(string reason, int accuracyMod, bool hideAccuracyMod = false)
         {
             this.accuracyMod = accuracyMod;
             this.reason = reason;
+            this.hideAccuracyMod = hideAccuracyMod;
         }
     }
 }
