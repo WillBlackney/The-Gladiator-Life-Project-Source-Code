@@ -14,6 +14,10 @@ namespace HexGameEngine.StoryEvents
 
         [BoxGroup("General Data")]
         [LabelWidth(100)]
+        public bool excludeFromGame = false;
+
+        [BoxGroup("General Data")]
+        [LabelWidth(100)]
         public StoryEventPageSO firstPage;
 
         [BoxGroup("General Data")]

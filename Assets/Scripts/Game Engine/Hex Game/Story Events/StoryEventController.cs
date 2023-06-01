@@ -1,9 +1,8 @@
-﻿using DG.Tweening;
-using HexGameEngine.Audio;
+﻿using HexGameEngine.Audio;
+using HexGameEngine.Boons;
 using HexGameEngine.Persistency;
 using HexGameEngine.Utilities;
 using Sirenix.Utilities;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -28,6 +27,13 @@ namespace HexGameEngine.StoryEvents
 
         [Space(10)]
 
+        [Header("Result Item Components")]
+        [SerializeField] Transform resultItemsParent;
+        [SerializeField] GameObject resultItemRowPrefab;
+        [SerializeField] List<StoryEventResultItemRow> resultItemRows;
+
+        [Space(10)]
+
         [Header("Movement Components")]
         [SerializeField] RectTransform movementParent;
         [SerializeField] RectTransform onScreenPosition;
@@ -35,6 +41,7 @@ namespace HexGameEngine.StoryEvents
 
         // Hidden fields
         private List<string> eventsAlreadyEncountered = new List<string>();
+        private List<StoryEventResultItem> currentResultItems = new List<StoryEventResultItem>();
 
         #endregion
 
@@ -68,11 +75,12 @@ namespace HexGameEngine.StoryEvents
         #endregion
 
         #region Start Events
-        public void StartEvent(StoryEventDataSO storyEvent)
+        public void StartNextEvent()
         {
-            if (storyEvent == null) storyEvent = CurrentStoryEvent;
-            eventHeaderText.text = storyEvent.storyEventName;
-            BuildAllViewsFromPage(storyEvent.firstPage);
+            currentResultItems.Clear();
+            eventHeaderText.text = CurrentStoryEvent.storyEventName;
+            CurrentStoryEvent.onStartEffects.ForEach(i => TriggerChoiceEffect(i));
+            BuildAllViewsFromPage(CurrentStoryEvent.firstPage);
             ShowUI();
         }
         #endregion
@@ -91,9 +99,15 @@ namespace HexGameEngine.StoryEvents
 
             // set up buttons and their views
             BuildChoiceButtonsFromPageData(page);
-            
+
+            // Build current result items section
+            BuildResultItemsSection();
+
             // Set event image
             if (page.pageSprite != null) eventImage.sprite = page.pageSprite;
+
+            // Flush result items from previous page
+            currentResultItems.Clear();
 
         }
         private void BuildChoiceButtonsFromPageData(StoryEventPageSO page)
@@ -103,11 +117,31 @@ namespace HexGameEngine.StoryEvents
             // Build a button for each choice
             for (int i = 0; i < page.allChoices.Length; i++) choiceButtons[i].BuildAndShow(page.allChoices[i]);
         }
+        private void BuildResultItemsSection()
+        {
+            resultItemRows.ForEach(i => i.Hide());
+            for(int i = 0; i < currentResultItems.Count; i++)
+            {
+                if(i >= resultItemRows.Count)
+                {
+                    StoryEventResultItemRow newRow = Instantiate(resultItemRowPrefab, resultItemsParent).GetComponent<StoryEventResultItemRow>();
+                    resultItemRows.Add(newRow);
+                }
+
+                resultItemRows[i].BuildAndShow(currentResultItems[i]);
+            }
+        }
         #endregion
 
         #region Determine Next Event Logic
         public StoryEventDataSO DetermineAndCacheNextStoryEvent()
         {
+            if(GlobalSettings.Instance.GameMode == GameMode.StoryEventSandbox)
+            {
+                CurrentStoryEvent = GlobalSettings.Instance.SandboxStoryEvent;
+                return CurrentStoryEvent;
+            }
+
             List<StoryEventDataSO> validEvents = GetValidStoryEvents();
             if (validEvents.Count == 0)
             {
@@ -138,6 +172,7 @@ namespace HexGameEngine.StoryEvents
         private bool IsStoryEventValid(StoryEventDataSO storyEvent)
         {
             if (eventsAlreadyEncountered.Contains(storyEvent.storyEventName) == false &&
+                !storyEvent.excludeFromGame &&
                 DoesStoryEventMeetAllRequirements(storyEvent))            
                 return true;            
             else return false;
@@ -184,9 +219,29 @@ namespace HexGameEngine.StoryEvents
         #region Handle Choices
         private void HandleChoiceEffects(StoryEventChoiceSO choice)
         {
+            // to do: need to return a list of things that happened so that we can show the player
             foreach (StoryChoiceEffect s in choice.effects)
             {
-                //TriggerChoiceEffect(s, selectedCharacterButton.myCharacter);
+                TriggerChoiceEffect(s);
+            }
+        }
+        private void TriggerChoiceEffect(StoryChoiceEffect effect)
+        {
+            if (effect.effectType == StoryChoiceEffectType.FinishEvent)
+            {
+
+            }
+            else if (effect.effectType == StoryChoiceEffectType.LoadPage)
+            {
+
+            }
+            else if(effect.effectType == StoryChoiceEffectType.GainBoon)
+            {
+                BoonData boonGained = new BoonData(BoonController.Instance.GetBoonDataByTag(effect.boonGained));
+                BoonController.Instance.HandleGainBoon(boonGained);
+                StoryEventResultItem newResultItem = new StoryEventResultItem();
+                newResultItem.message = "Gained boon: " + boonGained.boonDisplayName;
+                currentResultItems.Add(newResultItem);
             }
         }
         #endregion

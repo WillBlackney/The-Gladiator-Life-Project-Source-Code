@@ -131,9 +131,8 @@ namespace HexGameEngine
             BlackScreenController.Instance.FadeInScreen(1f);
 
             // Determine and start next story event
-            StoryEventDataSO nextEvent = GlobalSettings.Instance.SandboxStoryEvent;
-            if(nextEvent == null) StoryEventController.Instance.DetermineAndCacheNextStoryEvent();
-            StoryEventController.Instance.StartEvent(nextEvent);
+            StoryEventController.Instance.DetermineAndCacheNextStoryEvent();
+            StoryEventController.Instance.StartNextEvent();
         }
         private void RunSandboxTown()
         {
@@ -730,7 +729,7 @@ namespace HexGameEngine
                 // Start music, fade in
                 DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
                 AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
-                BlackScreenController.Instance.FadeInScreen(2f, () => StoryEventController.Instance.StartEvent(null));
+                BlackScreenController.Instance.FadeInScreen(2f, () => StoryEventController.Instance.StartNextEvent());
             }
             else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatStart)
             {

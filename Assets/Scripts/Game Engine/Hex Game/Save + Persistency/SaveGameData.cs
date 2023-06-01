@@ -8,6 +8,7 @@ using HexGameEngine.DungeonMap;
 using HexGameEngine.Items;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.HexTiles;
+using HexGameEngine.Boons;
 
 namespace HexGameEngine.Persistency
 {
@@ -22,6 +23,7 @@ namespace HexGameEngine.Persistency
         public int currentChapter;
         public SaveCheckPoint saveCheckPoint;
         public float runTimer;
+        public List<BoonData> activePlayerBoons = new List<BoonData>();
 
         public CombatContractData currentCombatContractData;
         public SerializedCombatMapData currentCombatMapData;

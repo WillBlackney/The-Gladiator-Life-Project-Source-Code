@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storyEventName: A Suprise Surplus of Supplies
   firstPage: {fileID: 11400000, guid: fc07fe6e43db7934fabca4e7f6bdd2f4, type: 2}
-  stageOne: 0
-  stageTwo: 0
-  stageThree: 0
+  onStartEffects:
+  - effectType: 4
+    pageToLoad: {fileID: 0}
+    boonGained: 1
+  requirements: []
