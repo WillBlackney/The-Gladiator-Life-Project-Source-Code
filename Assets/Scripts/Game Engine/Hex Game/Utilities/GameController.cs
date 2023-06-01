@@ -14,6 +14,7 @@ using HexGameEngine.Perks;
 using HexGameEngine.Persistency;
 using HexGameEngine.Reputations;
 using HexGameEngine.RewardSystems;
+using HexGameEngine.StoryEvents;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.TurnLogic;
 using HexGameEngine.UCM;
@@ -77,6 +78,9 @@ namespace HexGameEngine
             else if (GlobalSettings.Instance.GameMode == GameMode.TownSandbox)
                 RunSandboxTown();
 
+            else if (GlobalSettings.Instance.GameMode == GameMode.StoryEventSandbox)
+                RunSandboxStoryEvent();
+
             else if (GlobalSettings.Instance.GameMode == GameMode.PostCombatReward)
                 RunPostCombatRewardTestEventSetup();
         }
@@ -96,6 +100,40 @@ namespace HexGameEngine
             MainMenuController.Instance.DoGameStartMainMenuRevealSequence();
 
             yield return null;
+        }
+        private void RunSandboxStoryEvent()
+        {
+            // Set state
+            SetGameState(GameState.StoryEvent);
+
+            // Show UI
+            TopBarController.Instance.ShowMainTopBar();
+
+            // Set up new save file 
+            PersistencyController.Instance.BuildNewSaveFileOnNewGameStarted(CreateSandboxCharacterDataFiles()[0].characterData);
+
+            // Build and prepare all session data
+            PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();
+
+            // Apply global settings
+            GlobalSettings.Instance.ApplyStartingXPBonus();
+
+            // Reset + Centre camera
+            CameraController.Instance.ResetMainCameraPositionAndZoom();
+
+            // Build town views here
+            TownController.Instance.ShowTownView();
+            CharacterScrollPanelController.Instance.BuildAndShowPanel();
+
+            // Fade in sound + views
+            DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
+            AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
+            BlackScreenController.Instance.FadeInScreen(1f);
+
+            // Determine and start next story event
+            StoryEventDataSO nextEvent = GlobalSettings.Instance.SandboxStoryEvent;
+            if(nextEvent == null) StoryEventController.Instance.DetermineAndCacheNextStoryEvent();
+            StoryEventController.Instance.StartEvent(nextEvent);
         }
         private void RunSandboxTown()
         {
@@ -664,7 +702,7 @@ namespace HexGameEngine
                 AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
                 BlackScreenController.Instance.FadeInScreen(2f);
             }
-            if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.GameIntroEvent)
+            else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.GameIntroEvent)
             {
                 // Set state
                 SetGameState(GameState.StoryEvent);
@@ -678,6 +716,21 @@ namespace HexGameEngine
                 DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
                 AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
                 BlackScreenController.Instance.FadeInScreen(2f, ()=> GameIntroController.Instance.StartEvent());
+            }
+            else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.StoryEvent)
+            {
+                // Set state
+                SetGameState(GameState.StoryEvent);
+
+                // Enable GUI
+                TopBarController.Instance.ShowMainTopBar();
+                TownController.Instance.ShowTownView();
+                CharacterScrollPanelController.Instance.BuildAndShowPanel();
+
+                // Start music, fade in
+                DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
+                AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
+                BlackScreenController.Instance.FadeInScreen(2f, () => StoryEventController.Instance.StartEvent(null));
             }
             else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatStart)
             {

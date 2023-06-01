@@ -380,8 +380,6 @@ namespace HexGameEngine.TownFeatures
             // check slot available and player has enough gold
             if (slot.Available && PlayerDataController.Instance.CurrentGold >= HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType))
             {
-                AudioManager.Instance.PlaySoundPooled(Sound.UI_Buy_Item);
-
                 // Validation
                 // Cant heal characters already at full health
                 if (slot.FeatureType == TownActivity.BedRest && draggedCharacter.currentHealth >= StatCalculator.GetTotalMaxHealth(draggedCharacter)) return;
@@ -391,6 +389,8 @@ namespace HexGameEngine.TownFeatures
 
                 // Cant remove injuries if character has none
                 if (slot.FeatureType == TownActivity.Surgery && !PerkController.Instance.IsCharacteInjured(draggedCharacter.passiveManager)) return;
+
+                AudioManager.Instance.PlaySoundPooled(Sound.UI_Buy_Item);
 
                 // todo in future: error messages above for the player, explaing why they cant drop player on slot (not stress, not enough old, etc)
 

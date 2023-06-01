@@ -931,6 +931,7 @@ namespace HexGameEngine
         CombatEnd = 2,
         Town = 3,
         GameIntroEvent = 4,
+        StoryEvent = 5,
     }
     #endregion
 

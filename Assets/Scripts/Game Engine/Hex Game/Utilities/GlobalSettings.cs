@@ -4,6 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using HexGameEngine.HexTiles;
 using HexGameEngine.Characters;
+using HexGameEngine.StoryEvents;
 
 namespace HexGameEngine.Utilities
 {
@@ -21,14 +22,15 @@ namespace HexGameEngine.Utilities
 
         [Title("Character Settings")]
         [SerializeField] private int startingXpBonus;
+        [Space(10)]
 
         [Title("Combat Settings")]
         [SerializeField] private int baseHitChance;
-        [SerializeField] private int startingDeploymentLimit = 3;
+        [Space(10)]
 
         [Title("Resource Settings")]
         [SerializeField] private int baseStartingGold;
-        [SerializeField] private int campActivityPointRegen;
+        [Space(10)]
 
         [Title("Starting Timeline Settings")]
         [Range(1,5)]
@@ -37,12 +39,15 @@ namespace HexGameEngine.Utilities
         [Range(1, 5)]
         [ShowIf("ShowStartingTimeSettings")]
         [SerializeField] private int startingChapter = 1;
-       
+        [Space(10)]
 
         // Single Combat Scene Properties
-        [Title("Combat Sandbox Settings")]      
+        [Title("Sandbox Settings")]      
         [ShowIf("ShowSandBoxLevelSeed")]
         [SerializeField] private CombatMapSeedDataSO sandboxCombatMapSeed;
+
+        [ShowIf("ShowSandBoxStoryEvent")]
+        [SerializeField] private StoryEventDataSO sandboxStoryEvent;
 
         [ShowIf("ShowPlayerCharacterSpawnSetting")]
         [SerializeField] private PlayerCharacterSpawnSetting playerCharacterSpawnSetting;
@@ -81,6 +86,10 @@ namespace HexGameEngine.Utilities
         {
             get { return startingXpBonus; }
         }
+        public StoryEventDataSO SandboxStoryEvent
+        {
+            get { return sandboxStoryEvent; }
+        }
         public int StartingChapter
         {
             get { return startingChapter; }
@@ -108,18 +117,10 @@ namespace HexGameEngine.Utilities
         public int TotalRandomCharacters
         {
             get { return totalRandomCharacters; }
-        }
-        public int CampActivityPointRegen
-        {
-            get { return campActivityPointRegen; }
-        }
+        }        
         public int BaseStartingGold
         {
             get { return baseStartingGold; }
-        }
-        public int StartingDeploymentLimit
-        {
-            get { return startingDeploymentLimit; }
         }
         public PlayerGroup[] StartingPlayerCharacters
         {
@@ -152,7 +153,11 @@ namespace HexGameEngine.Utilities
         #endregion
 
         // Odin Showifs
-        #region        
+        #region         
+        public bool ShowSandBoxStoryEvent()
+        {
+            return gameMode == GameMode.StoryEventSandbox;
+        }
         public bool ShowStartingTimeSettings()
         {
             return gameMode != GameMode.Standard;
@@ -195,6 +200,7 @@ namespace HexGameEngine.Utilities
         CombatSandbox = 1,
         TownSandbox = 5,
         PostCombatReward = 2,
+        StoryEventSandbox = 4,
     }
     public enum PlayerCharacterSpawnSetting
     {

@@ -9,6 +9,7 @@ using HexGameEngine.MainMenu;
 using HexGameEngine.Player;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.Items;
+using HexGameEngine.StoryEvents;
 
 namespace HexGameEngine.Persistency
 {
@@ -99,6 +100,7 @@ namespace HexGameEngine.Persistency
             PlayerDataController.Instance.SaveMyDataToSaveFile(newSave);
             CombatRewardController.Instance.SaveMyDataToSaveFile(newSave);
             InventoryController.Instance.SaveMyDataToSaveFile(newSave);
+            StoryEventController.Instance.SaveMyDataToSaveFile(newSave);
 
             // START SAVE!        
             SaveGameToDisk(newSave);
@@ -119,6 +121,7 @@ namespace HexGameEngine.Persistency
             PlayerDataController.Instance.BuildMyDataFromSaveFile(newLoad);
             CombatRewardController.Instance.BuildMyDataFromSaveFile(newLoad);
             InventoryController.Instance.BuildMyDataFromSaveFile(newLoad);
+            StoryEventController.Instance.BuildMyDataFromSaveFile(newLoad);
         }
         #endregion
 

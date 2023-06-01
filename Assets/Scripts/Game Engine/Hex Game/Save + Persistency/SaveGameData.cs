@@ -25,9 +25,9 @@ namespace HexGameEngine.Persistency
 
         public CombatContractData currentCombatContractData;
         public SerializedCombatMapData currentCombatMapData;
-        public List<CharacterWithSpawnData> playerCombatCharacters = new List<CharacterWithSpawnData>();
-        public string currentStoryEvent;
+        public List<CharacterWithSpawnData> playerCombatCharacters = new List<CharacterWithSpawnData>();       
         public List<EnemyEncounterData> encounteredCombats = new List<EnemyEncounterData>();
+        public string currentStoryEvent;
         public List<string> encounteredStoryEvents = new List<string>();
         public List<CharacterCombatStatData> currentCombatStatResult = new List<CharacterCombatStatData>();
 
