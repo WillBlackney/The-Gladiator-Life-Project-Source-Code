@@ -16,6 +16,9 @@ namespace HexGameEngine.StoryEvents
         [Space(10)]
         [SerializeField] Image framedIconImage;
         [SerializeField] GameObject framedIconImageParent;
+
+        [Header("Sprites")]
+        [SerializeField] Sprite star;
         public void Hide()
         {
             visualParent.SetActive(false);
@@ -49,9 +52,8 @@ namespace HexGameEngine.StoryEvents
         FramedSprite = 1,
         UnframedSprite = 2,
         Skull = 3,
-        RedPlus = 4,
-        UserIcon = 5,
-        Star = 6,
+        UserIcon = 4,
+        Star = 5,
 
         // XP, character leaving, attribute boosts, healing, stress modified, character died
 

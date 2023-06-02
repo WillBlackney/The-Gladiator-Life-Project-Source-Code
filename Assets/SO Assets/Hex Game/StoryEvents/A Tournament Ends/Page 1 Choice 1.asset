@@ -13,12 +13,17 @@ MonoBehaviour:
   m_Name: Page 1 Choice 1
   m_EditorClassIdentifier: 
   choiceTextOnButton:
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: Continue
-  effects:
-  - effectType: 2
-    pageToLoad: {fileID: 0}
-    boonGained: 0
+  effectSets:
+  - lowerProbability: 0
+    upperProbability: 100
+    effects:
+    - effectType: 2
+      pageToLoad: {fileID: 0}
+      boonGained: 0
+      backgroundAddedToTavern: 0
+      totalCharactersAddedToTavern: 0
   requirements: []

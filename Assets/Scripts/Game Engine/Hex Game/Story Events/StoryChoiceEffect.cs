@@ -52,4 +52,14 @@ namespace HexGameEngine.StoryEvents
         #endregion
 
     }
+
+    [System.Serializable]
+    public class StoryChoiceEffectSet
+    {
+        [Range(0,100)]
+        public int lowerProbability = 0;
+        [Range(0, 100)]
+        public int upperProbability = 100;
+        public StoryChoiceEffect[] effects;
+    }
 }

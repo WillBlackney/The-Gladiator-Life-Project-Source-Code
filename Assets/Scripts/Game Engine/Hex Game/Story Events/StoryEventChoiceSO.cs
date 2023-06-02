@@ -11,7 +11,7 @@ namespace HexGameEngine.StoryEvents
     {
         [Header("Descriptions")]
         public List<CustomString> choiceTextOnButton;
-        public StoryChoiceEffect[] effects;
+        public StoryChoiceEffectSet[] effectSets;
         public StoryChoiceRequirement[] requirements;        
     }
 

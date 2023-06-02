@@ -126,6 +126,9 @@ namespace HexGameEngine.StoryEvents
         }
         private void BuildAllViewsFromPage(StoryEventPageSO page)
         {
+            // Trigger effects on load page
+            page.onPageLoadEffects.ForEach(i => TriggerChoiceEffect(i));
+
             // Set description text
             eventDescriptionText.text = page.pageDescription;
 
@@ -293,8 +296,23 @@ namespace HexGameEngine.StoryEvents
         #region Handle Choices
         private void HandleChoiceEffects(StoryEventChoiceSO choice)
         {
-            // to do: need to return a list of things that happened so that we can show the player
-            foreach (StoryChoiceEffect s in choice.effects)
+            // Determine set
+            StoryChoiceEffectSet set = null;
+            if (choice.effectSets.Length == 1) set = choice.effectSets[0];
+            else
+            {
+                int roll = RandomGenerator.NumberBetween(1, 100);
+                foreach(StoryChoiceEffectSet s in choice.effectSets)
+                {
+                    if(roll >= s.lowerProbability && roll <= s.upperProbability)
+                    {
+                        set = s;
+                        break;
+                    }
+                }
+            }
+
+            foreach (StoryChoiceEffect s in set.effects)
             {
                 TriggerChoiceEffect(s);
             }
@@ -312,7 +330,7 @@ namespace HexGameEngine.StoryEvents
             }
             else if (effect.effectType == StoryChoiceEffectType.LoadPage)
             {
-
+                BuildAllViewsFromPage(effect.pageToLoad);
             }
             else if(effect.effectType == StoryChoiceEffectType.GainBoon)
             {

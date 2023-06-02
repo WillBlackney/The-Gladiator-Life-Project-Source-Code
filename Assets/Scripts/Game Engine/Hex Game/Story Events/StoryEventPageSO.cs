@@ -11,6 +11,7 @@ namespace HexGameEngine.StoryEvents
         public StoryEventChoiceSO[] allChoices;
         [PreviewField(75)]
         public Sprite pageSprite;
+        public StoryChoiceEffect[] onPageLoadEffects;
 
     }
 }
