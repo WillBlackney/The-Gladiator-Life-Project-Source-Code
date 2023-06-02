@@ -1,8 +1,10 @@
 ﻿using DG.Tweening;
 using HexGameEngine.Audio;
 using HexGameEngine.Boons;
+using HexGameEngine.Characters;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.Persistency;
+using HexGameEngine.TownFeatures;
 using HexGameEngine.Utilities;
 using Sirenix.Utilities;
 using System;
@@ -318,6 +320,18 @@ namespace HexGameEngine.StoryEvents
                 BoonController.Instance.HandleGainBoon(boonGained);
                 StoryEventResultItem newResultItem = new StoryEventResultItem("Gained boon: " + boonGained.boonDisplayName, ResultRowIcon.FramedSprite, boonGained.BoonSprite);
                 currentResultItems.Add(newResultItem);
+            }
+            else if (effect.effectType == StoryChoiceEffectType.AddRecruitsToTavern)
+            {
+                BackgroundData bgData = CharacterDataController.Instance.GetBackgroundData(effect.backgroundAddedToTavern);
+                for(int i = 0; i < effect.totalCharactersAddedToTavern; i++)
+                {
+                    HexCharacterData newCharacter = CharacterDataController.Instance.GenerateRecruitCharacter(bgData);
+                    TownController.Instance.HandleAddNewRecruitToTavernFromStoryEvent(newCharacter);
+                    string message = newCharacter.myName + " " + newCharacter.myClassName + " added to the tavern.";
+                    StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.FramedSprite, bgData.backgroundSprite);
+                    currentResultItems.Add(newResultItem);
+                }
             }
         }
         #endregion

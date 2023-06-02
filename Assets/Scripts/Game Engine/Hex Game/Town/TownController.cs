@@ -20,6 +20,7 @@ using HexGameEngine.CameraSystems;
 using DG.Tweening;
 using HexGameEngine.Audio;
 using UnityEngine.TextCore.Text;
+using HexGameEngine.Boons;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -189,6 +190,18 @@ namespace HexGameEngine.TownFeatures
             currentRecruits.Clear();
             for (int i = 0; i < amount; i++)
                 HandleAddNewRecruitFromCharacterDeck();
+
+            if (BoonController.Instance.DoesPlayerHaveBoon(BoonTag.UnemployedKnights))
+            {
+                BackgroundData bgData = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.TournamentKnight);
+                for (int i = 0; i < 2; i++)
+                {
+                    HexCharacterData newCharacter = CharacterDataController.Instance.GenerateRecruitCharacter(bgData);
+                    currentRecruits.Insert(0, newCharacter);
+                }
+            }
+
+           
         }
         private void HandleAddNewRecruitFromCharacterDeck()
         {
@@ -196,7 +209,10 @@ namespace HexGameEngine.TownFeatures
                 CharacterDataController.Instance.AutoGenerateAndCacheNewCharacterDeck();
             currentRecruits.Add(CharacterDataController.Instance.CharacterDeck[0]);
             CharacterDataController.Instance.CharacterDeck.RemoveAt(0);
-
+        }
+        public void HandleAddNewRecruitToTavernFromStoryEvent(HexCharacterData character)
+        {
+            currentRecruits.Insert(0, character);
         }
         public void BuildAndShowRecruitPage()
         {

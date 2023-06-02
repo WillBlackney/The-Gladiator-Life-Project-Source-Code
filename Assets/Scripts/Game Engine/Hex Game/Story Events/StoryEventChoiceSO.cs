@@ -51,5 +51,6 @@ namespace HexGameEngine.StoryEvents
         FinishEvent = 2,
         ModifyGold = 3,
         GainBoon = 4,
+        AddRecruitsToTavern = 6,
     }
 }

@@ -10,6 +10,7 @@ using System.Linq;
 using UnityEngine.TextCore.Text;
 using static UnityEngine.UI.Image;
 using HexGameEngine.Audio;
+using HexGameEngine.Boons;
 
 namespace HexGameEngine.Characters
 {
@@ -1066,6 +1067,11 @@ namespace HexGameEngine.Characters
             cost += levelMod + itemsCost;
 
             // TO DO IN FUTURE: any special modifiers from boons and world events should be accounte for here
+            if(character.background.backgroundType == CharacterBackground.TournamentKnight &&
+                BoonController.Instance.DoesPlayerHaveBoon(BoonTag.UnemployedKnights))
+            {
+                cost = (int) (cost * 0.5f);
+            }
 
             // round to the nearest 10 gold
             cost = Mathf.RoundToInt(cost / 10) * 10;
