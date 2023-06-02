@@ -14,30 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boonSprite: {fileID: 21300000, guid: 1df2cdf4fbe2fe0499b79254c75a27ad, type: 3}
   boonTag: 1
-  boonDisplayName: Armour Surplus
+  boonDisplayName: Armoury Surplus
+  italicDescription: An abundance of supplies to the armoury have driven down prices.
   includeInGame: 1
   durationType: 1
-  minDuration: 2
-  maxDuration: 2
+  minDuration: 1
+  maxDuration: 1
   keyWordModels: []
-  customDescription:
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'All items in the armoury cost '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '50% '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'less '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Gold
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: .
+  boonEffectDescriptions:
+  - dotStyle: 3
+    message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Items in the armoury cost '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '50% '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'less '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Gold
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: .

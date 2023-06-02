@@ -13,8 +13,9 @@ namespace HexGameEngine.Boons
         public BoonDurationType durationType;
         public int minDuration = 1;
         public int maxDuration = 1;
-        public List<KeyWordModel> keyWordModels;
-        public List<CustomString> customDescription;
+        public string italicDescription;
+        public List<KeyWordModel> keyWordModels;       
+        public List<ModalDotRowBuildData> boonEffectDescriptions;
         public int currentTimerStacks;
 
         public Sprite BoonSprite
@@ -49,17 +50,18 @@ namespace HexGameEngine.Boons
             durationType = data.durationType;
             minDuration = data.minDuration;
             maxDuration = data.maxDuration;
+            italicDescription = data.italicDescription;
             this.currentTimerStacks = currentTimerStacks;
 
             // Keyword Model Data
             keyWordModels = new List<KeyWordModel>();
             foreach (KeyWordModel kwdm in data.keyWordModels)            
-                keyWordModels.Add(ObjectCloner.CloneJSON(kwdm));            
+                keyWordModels.Add(ObjectCloner.CloneJSON(kwdm));
 
-            // Custom string Data
-            customDescription = new List<CustomString>();
-            foreach (CustomString cs in data.customDescription)            
-                customDescription.Add(ObjectCloner.CloneJSON(cs));            
+            // Effect descriptions
+            boonEffectDescriptions = new List<ModalDotRowBuildData>();
+            foreach (ModalDotRowBuildData cs in data.boonEffectDescriptions)
+                boonEffectDescriptions.Add(ObjectCloner.CloneJSON(cs));
         }
 
         /// <summary>
@@ -75,16 +77,17 @@ namespace HexGameEngine.Boons
             minDuration = original.minDuration;
             maxDuration = original.maxDuration;
             currentTimerStacks = original.currentTimerStacks;
+            italicDescription = original.italicDescription;
 
             // Keyword Model Data
             keyWordModels = new List<KeyWordModel>();
             foreach (KeyWordModel kwdm in original.keyWordModels)
                 keyWordModels.Add(ObjectCloner.CloneJSON(kwdm));
 
-            // Custom string Data
-            customDescription = new List<CustomString>();
-            foreach (CustomString cs in original.customDescription)
-                customDescription.Add(ObjectCloner.CloneJSON(cs));
+            // Effect descriptions
+            boonEffectDescriptions = new List<ModalDotRowBuildData>();
+            foreach (ModalDotRowBuildData cs in original.boonEffectDescriptions)
+                boonEffectDescriptions.Add(ObjectCloner.CloneJSON(cs));
         }
 
         /// <summary>

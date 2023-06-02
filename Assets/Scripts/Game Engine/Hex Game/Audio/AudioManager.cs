@@ -460,6 +460,9 @@ namespace HexGameEngine.Audio
         Character_Draw_Bow = 10,
         Character_Undead_Growl = 58,
 
+        Effects_Story_Event_Start = 131,
+        Effects_End_Deployment = 132,
+
         Environment_Gate_Open = 38,
         Environment_Camp_Fire = 49,
         Environment_Arena_Sting_1 = 100,

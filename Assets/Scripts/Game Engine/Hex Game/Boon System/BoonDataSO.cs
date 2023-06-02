@@ -25,6 +25,11 @@ namespace HexGameEngine.Boons
 
         [VerticalGroup("Info/Stats")]
         [LabelWidth(100)]
+        [TextArea]
+        public string italicDescription;
+
+        [VerticalGroup("Info/Stats")]
+        [LabelWidth(100)]
         public bool includeInGame = true;
 
         [Header("Stacking Data")]
@@ -50,7 +55,7 @@ namespace HexGameEngine.Boons
 
         [VerticalGroup("List Groups")]
         [LabelWidth(200)]
-        public List<CustomString> customDescription;        
+        public ModalDotRowBuildData[] boonEffectDescriptions;
 
         public bool ShowDayDurationFields()
         {

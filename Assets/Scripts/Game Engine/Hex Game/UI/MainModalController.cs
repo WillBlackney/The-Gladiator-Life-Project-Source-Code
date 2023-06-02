@@ -8,6 +8,7 @@ using HexGameEngine.CameraSystems;
 using TMPro;
 using HexGameEngine.Perks;
 using HexGameEngine.Characters;
+using HexGameEngine.Boons;
 
 namespace HexGameEngine.UI
 {
@@ -248,6 +249,16 @@ namespace HexGameEngine.UI
             }
 
         }
+        public void BuildAndShowModal(BoonData boon)
+        {
+            UpdateDynamicDirection();
+            FadeInModal();
+            ResetContent();
+            TransformUtils.RebuildLayouts(fitters);
+            BuildModalContent(boon);
+            TransformUtils.RebuildLayouts(fitters);
+            shouldRebuild = true;
+        }
         public void BuildAndShowModal(RaceDataSO race)
         {
             UpdateDynamicDirection();
@@ -292,6 +303,34 @@ namespace HexGameEngine.UI
 
         // Build From Content
         #region
+        private void BuildModalContent(BoonData data)
+        {
+            headerText.text = data.boonDisplayName; 
+
+            // Main Image
+            framedImageParent.SetActive(true);
+            framedImage.sprite = data.BoonSprite;
+
+            // Lore text
+            descriptionText.fontStyle = FontStyles.Italic;
+            descriptionText.gameObject.SetActive(true);
+            descriptionText.text = data.italicDescription;
+
+            // Build dot points
+            int durationIndex = 1;
+            for (int i = 0; i < data.boonEffectDescriptions.Count; i++)
+            {
+                dottedRows[i].Build(data.boonEffectDescriptions[i]);
+                durationIndex++;
+            }
+
+            // Expiration message
+            string expirationMessage = "Permanent";
+            string daysText = data.currentTimerStacks > 1 ? " days." : " day.";
+            if (data.durationType == BoonDurationType.DayTimer)            
+                expirationMessage = "Expires in " + TextLogic.ReturnColoredText(data.currentTimerStacks.ToString(), TextLogic.blueNumber) + daysText;            
+            dottedRows[durationIndex].Build(expirationMessage, DotStyle.Neutral);
+        }
         private void BuildModalContent(ModalBuildDataSO data)
         {           
             headerText.text = data.headerName;

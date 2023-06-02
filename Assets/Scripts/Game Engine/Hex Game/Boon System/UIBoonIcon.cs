@@ -1,3 +1,4 @@
+using HexGameEngine.UI;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,15 @@ namespace HexGameEngine.Boons
             MyBoonData = data;
             visualParent.SetActive(true);
             boonImage.sprite = data.BoonSprite;
+        }
+        public void MouseEnter()
+        {
+            if (MyBoonData != null)
+                MainModalController.Instance.BuildAndShowModal(MyBoonData);
+        }
+        public void MouseExit()
+        {
+            MainModalController.Instance.HideModal();
         }
     }
 }

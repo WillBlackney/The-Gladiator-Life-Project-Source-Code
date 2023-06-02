@@ -11,6 +11,7 @@ using HexGameEngine.UI;
 using HexGameEngine.Items;
 using DG.Tweening;
 using Sirenix.Serialization;
+using HexGameEngine.Boons;
 
 namespace HexGameEngine.TownFeatures
 {
@@ -73,9 +74,10 @@ namespace HexGameEngine.TownFeatures
             itemNameText.text = data.Item.itemName;
             itemImage.sprite = data.Item.ItemSprite;
 
-            // Color cost text red if not enough gold
+            // Color cost text red if not enough gold, or green if selling at a discount
             string col = "<color=#FFFFFF>";
             if (PlayerDataController.Instance.CurrentGold < data.GoldCost) col = TextLogic.lightRed;
+            else if (data.GoldCost < data.Item.baseGoldValue) col = TextLogic.lightGreen;
             goldCostText.text = TextLogic.ReturnColoredText(data.GoldCost.ToString(), col);
         }
         public void Reset()
@@ -115,13 +117,20 @@ namespace HexGameEngine.TownFeatures
         {
             this.item = item;
             this.baseGoldCost = baseGoldCost;
-            Debug.Log("ItemShopData() base gold cost: " + baseGoldCost.ToString());
         }
 
         public int GoldCost
         {
-            // to do in future: town events and modifiers that effect an items price should be considered here.
-            get { return baseGoldCost; }
+            get 
+            {
+                float priceMod = 1f;
+                if(BoonController.Instance != null)
+                {
+                    if (BoonController.Instance.DoesPlayerHaveBoon(BoonTag.ArmourSurplus)) priceMod -= 0.5f;
+                }
+
+                return (int) (baseGoldCost * priceMod); 
+            }
         }
         public ItemData Item
         {

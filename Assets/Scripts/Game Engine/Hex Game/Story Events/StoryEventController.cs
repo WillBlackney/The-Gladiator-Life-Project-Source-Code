@@ -1,8 +1,11 @@
-﻿using HexGameEngine.Audio;
+﻿using DG.Tweening;
+using HexGameEngine.Audio;
 using HexGameEngine.Boons;
+using HexGameEngine.JourneyLogic;
 using HexGameEngine.Persistency;
 using HexGameEngine.Utilities;
 using Sirenix.Utilities;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -20,10 +23,15 @@ namespace HexGameEngine.StoryEvents
 
         [Header("Core UI Components")]
         [SerializeField] Canvas rootCanvas;
-        [SerializeField] StoryEventChoiceButton[] choiceButtons;
+        [SerializeField] CanvasGroup rootCg;
+        [SerializeField] Image blackUnderlay;       
         [SerializeField] TextMeshProUGUI eventHeaderText;
         [SerializeField] TextMeshProUGUI eventDescriptionText;
         [SerializeField] Image eventImage;
+        [SerializeField] Scrollbar verticalContentScrollbar;
+        [SerializeField] StoryEventChoiceButton[] fittedChoiceButtons;
+        [SerializeField] StoryEventChoiceButton[] unfittedChoiceButtons;
+        [SerializeField] RectTransform[] layoutsRebuilt;
 
         [Space(10)]
 
@@ -38,6 +46,11 @@ namespace HexGameEngine.StoryEvents
         [SerializeField] RectTransform movementParent;
         [SerializeField] RectTransform onScreenPosition;
         [SerializeField] RectTransform offScreenPosition;
+
+        [Header("Button Auto Fitting")]
+        [SerializeField] RectTransform content;
+        [SerializeField] Transform unfittedButtonsParent;
+        [SerializeField] Transform fittedButtonsParent;
 
         // Hidden fields
         private List<string> eventsAlreadyEncountered = new List<string>();
@@ -82,22 +95,39 @@ namespace HexGameEngine.StoryEvents
             CurrentStoryEvent.onStartEffects.ForEach(i => TriggerChoiceEffect(i));
             BuildAllViewsFromPage(CurrentStoryEvent.firstPage);
             ShowUI();
+            AudioManager.Instance.PlaySoundPooled(Sound.Effects_Story_Event_Start);
         }
         #endregion
 
         #region UI + View Logic
         private void ShowUI()
         {
+            rootCg.interactable = true;
             rootCanvas.enabled = true;
+            movementParent.DOKill();
+            blackUnderlay.DOKill();
+            blackUnderlay.DOFade(0.5f, 0f);
+            movementParent.DOMove(onScreenPosition.position, 0f);
+            TransformUtils.RebuildLayouts(layoutsRebuilt);
+        }
+        private void HideUI(float speed = 0.75f, Action onComplete = null)
+        {
+            rootCg.interactable = false;
+            movementParent.DOKill();
+            blackUnderlay.DOKill();
+            blackUnderlay.DOFade(0f, speed * 0.66f);
+            movementParent.DOMove(offScreenPosition.position, speed).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                rootCanvas.enabled = false;
+                if (onComplete != null) onComplete.Invoke();
+            });
         }
         private void BuildAllViewsFromPage(StoryEventPageSO page)
         {
             // Set description text
             eventDescriptionText.text = page.pageDescription;
 
-            // TO DO: Reset scroll rect to top
-
-            // set up buttons and their views
+            // Set up buttons and their views
             BuildChoiceButtonsFromPageData(page);
 
             // Build current result items section
@@ -109,13 +139,28 @@ namespace HexGameEngine.StoryEvents
             // Flush result items from previous page
             currentResultItems.Clear();
 
+            // Rebuild layouts
+            TransformUtils.RebuildLayouts(layoutsRebuilt);
+            AutoSetButtonFitting();
+
+            // Reset scroll rect to top
+            verticalContentScrollbar.value = 1;
+
         }
         private void BuildChoiceButtonsFromPageData(StoryEventPageSO page)
         {
             // Reset each button
-            choiceButtons.ForEach(i => i.HideAndReset());
+            fittedChoiceButtons.ForEach(i => i.HideAndReset());
+            unfittedChoiceButtons.ForEach(i => i.HideAndReset());
+
+            fittedButtonsParent.gameObject.SetActive(true);
+
             // Build a button for each choice
-            for (int i = 0; i < page.allChoices.Length; i++) choiceButtons[i].BuildAndShow(page.allChoices[i]);
+            for (int i = 0; i < page.allChoices.Length; i++)
+            {
+                unfittedChoiceButtons[i].BuildAndShow(page.allChoices[i]);
+                fittedChoiceButtons[i].BuildAndShow(page.allChoices[i]);
+            }
         }
         private void BuildResultItemsSection()
         {
@@ -131,6 +176,33 @@ namespace HexGameEngine.StoryEvents
                 resultItemRows[i].BuildAndShow(currentResultItems[i]);
             }
         }
+        private void AutoSetButtonFitting()
+        {
+            fittedButtonsParent.gameObject.SetActive(true);
+            TransformUtils.RebuildLayouts(layoutsRebuilt);
+
+            float scrollBounds = 700f;
+            float contentHeight = content.rect.height;
+            Debug.Log("Content height: " + contentHeight.ToString());
+
+            // Use fitted buttons
+            if(contentHeight > scrollBounds)
+            {
+                unfittedButtonsParent.gameObject.SetActive(false);
+                fittedButtonsParent.gameObject.SetActive(true);
+            }
+
+            // Use unfitted buttons
+            else
+            {
+                unfittedButtonsParent.gameObject.SetActive(true);
+                fittedButtonsParent.gameObject.SetActive(false);
+            }
+
+            TransformUtils.RebuildLayout(content);
+
+        }
+       
         #endregion
 
         #region Determine Next Event Logic
@@ -229,7 +301,12 @@ namespace HexGameEngine.StoryEvents
         {
             if (effect.effectType == StoryChoiceEffectType.FinishEvent)
             {
-
+                HideUI(0.75f, () =>
+                {
+                    RunController.Instance.SetCheckPoint(SaveCheckPoint.Town);
+                    GameController.Instance.SetGameState(GameState.Town);
+                    PersistencyController.Instance.AutoUpdateSaveFile();
+                });
             }
             else if (effect.effectType == StoryChoiceEffectType.LoadPage)
             {
@@ -239,8 +316,7 @@ namespace HexGameEngine.StoryEvents
             {
                 BoonData boonGained = new BoonData(BoonController.Instance.GetBoonDataByTag(effect.boonGained));
                 BoonController.Instance.HandleGainBoon(boonGained);
-                StoryEventResultItem newResultItem = new StoryEventResultItem();
-                newResultItem.message = "Gained boon: " + boonGained.boonDisplayName;
+                StoryEventResultItem newResultItem = new StoryEventResultItem("Gained boon: " + boonGained.boonDisplayName, ResultRowIcon.FramedSprite, boonGained.BoonSprite);
                 currentResultItems.Add(newResultItem);
             }
         }

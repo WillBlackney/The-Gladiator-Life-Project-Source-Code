@@ -100,10 +100,30 @@ namespace HexGameEngine.Boons
         {
             Debug.Log("BoonController.HandleGainBoon() called, gaining boon: " + newBoon.boonDisplayName);
             activePlayerBoons.Add(newBoon);
+            newBoon.currentTimerStacks = RandomGenerator.NumberBetween(newBoon.minDuration, newBoon.maxDuration);
             BuildAndShowBoonIconsPanel();
         }
-      
+
         #endregion
 
+        #region Conditional Checks + Bools
+        public bool DoesPlayerHaveBoon(BoonTag tag)
+        {
+            bool ret = false;
+
+            foreach(BoonData b in activePlayerBoons)
+            {
+                if(b.boonTag == tag)
+                {
+                    ret = true;
+                    break;
+                }
+            }
+
+            return ret;
+
+        }
+
+        #endregion
     }
 }

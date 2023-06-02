@@ -67,9 +67,8 @@ namespace HexGameEngine.UI
             int maxCharacters = 10; // TO DO: get the actual max character limit
             totalCharactersText.text = characters.Count.ToString() + " / " + maxCharacters.ToString();
 
-            // Reset all tabs
-            foreach (RosterCharacterPanel tab in allCharacterPanels)
-                tab.ResetAndHide();
+            // Reset all
+            allCharacterPanels.ForEach(i => i.ResetAndHide());
 
             // Build a tab for each character
             for (int i = 0; i < characters.Count; i++)

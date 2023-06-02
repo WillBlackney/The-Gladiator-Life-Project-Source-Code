@@ -16,6 +16,9 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Ok
+    phrase: Continue...
+  effects:
+  - effectType: 2
+    pageToLoad: {fileID: 0}
+    boonGained: 0
   requirements: []
-  effects: []

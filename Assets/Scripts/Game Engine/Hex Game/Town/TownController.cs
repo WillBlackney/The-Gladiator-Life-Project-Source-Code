@@ -742,50 +742,6 @@ namespace HexGameEngine.TownFeatures
                 Debug.Log("Final cost: " + finalCost.ToString());
                 currentItems.Add(new ItemShopData(item, finalCost));
             }
-
-            /*
-            currentItems.Clear();
-            List<ItemData> possibleItems = ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare);
-            possibleItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic));
-            possibleItems.Shuffle();
-
-            List<ItemData> finalItems = new List<ItemData>();
-            int trinkets = 0;
-            int weapons = 0;
-            int armour = 0;
-
-            // Filter for 3 weapons, 3 armour pieces and 2 trinkets
-            for (int i = 0; finalItems.Count < 8; i++)
-            {
-                if (possibleItems[i].itemType == ItemType.Trinket && trinkets < 2)
-                {
-                    finalItems.Add(possibleItems[i]);
-                    trinkets++;
-                }                    
-
-                else if (possibleItems[i].itemType == ItemType.Weapon && weapons < 3)
-                {
-                    finalItems.Add(possibleItems[i]);
-                    weapons++;
-                }
-
-                else if ((possibleItems[i].itemType == ItemType.Head || possibleItems[i].itemType == ItemType.Body) && armour < 3)
-                {
-                    finalItems.Add(possibleItems[i]);
-                    armour++;
-                }
-            }
-
-            for (int i = 0; i < finalItems.Count; i++)
-            {
-                ItemData item = ItemController.Instance.GenerateNewItemWithRandomEffects(finalItems[i]);
-                int lower = (int) (item.baseGoldValue * 0.9f);
-                int upper = (int)(item.baseGoldValue * 1.1f);
-                int finalCost = RandomGenerator.NumberBetween(lower, upper);
-                currentItems.Add(new ItemShopData(item, finalCost));
-            }
-            */
-
         }
         #endregion
 
@@ -1073,6 +1029,7 @@ namespace HexGameEngine.TownFeatures
             }
             else
             {
+                AudioManager.Instance.PlaySoundPooled(Sound.Effects_End_Deployment);
                 GameController.Instance.HandleLoadIntoCombatFromDeploymentScreen();
             }
         }
