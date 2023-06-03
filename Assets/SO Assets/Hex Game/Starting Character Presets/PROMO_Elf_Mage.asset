@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Mira
   myClassName: Sorcerer
-  race: 0
+  race: 4
   modelSize: 0
   attributeSheet:
     might:

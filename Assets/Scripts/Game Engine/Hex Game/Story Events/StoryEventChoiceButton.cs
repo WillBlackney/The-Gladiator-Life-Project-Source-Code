@@ -21,7 +21,7 @@ namespace HexGameEngine.StoryEvents
         public void BuildAndShow(StoryEventChoiceSO choiceData)
         {
             visualParent.SetActive(true);
-            buttonText.text = TextLogic.ConvertCustomStringListToString(choiceData.choiceTextOnButton);
+            buttonText.text = StoryEventController.Instance.GetDynamicValueString(TextLogic.ConvertCustomStringListToString(choiceData.choiceTextOnButton));
             myChoiceData = choiceData;
         }
 

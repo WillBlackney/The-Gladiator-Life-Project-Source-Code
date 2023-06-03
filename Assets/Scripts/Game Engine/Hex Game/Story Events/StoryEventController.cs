@@ -5,6 +5,7 @@ using HexGameEngine.Characters;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.Persistency;
 using HexGameEngine.TownFeatures;
+using HexGameEngine.UI;
 using HexGameEngine.Utilities;
 using Sirenix.Utilities;
 using System;
@@ -26,7 +27,7 @@ namespace HexGameEngine.StoryEvents
         [Header("Core UI Components")]
         [SerializeField] Canvas rootCanvas;
         [SerializeField] CanvasGroup rootCg;
-        [SerializeField] Image blackUnderlay;       
+        [SerializeField] Image blackUnderlay;
         [SerializeField] TextMeshProUGUI eventHeaderText;
         [SerializeField] TextMeshProUGUI eventDescriptionText;
         [SerializeField] Image eventImage;
@@ -57,6 +58,10 @@ namespace HexGameEngine.StoryEvents
         // Hidden fields
         private List<string> eventsAlreadyEncountered = new List<string>();
         private List<StoryEventResultItem> currentResultItems = new List<StoryEventResultItem>();
+        private List<HexCharacterData> characterTargets = new List<HexCharacterData>();
+
+        private const string CHARACTER_1_NAME_KEY = "{CHARACTER_1_NAME}";
+        private const string CHARACTER_1_SUB_NAME_KEY = "{CHARACTER_1_SUB_NAME}";
 
         #endregion
 
@@ -93,8 +98,9 @@ namespace HexGameEngine.StoryEvents
         public void StartNextEvent()
         {
             currentResultItems.Clear();
+            DetermineAndCacheCharacterTargetsOnEventStart(CurrentStoryEvent);
             eventHeaderText.text = CurrentStoryEvent.storyEventName;
-            CurrentStoryEvent.onStartEffects.ForEach(i => TriggerChoiceEffect(i));
+            CurrentStoryEvent.onStartEffects.ForEach(i => ResolveChoiceEffect(i));
             BuildAllViewsFromPage(CurrentStoryEvent.firstPage);
             ShowUI();
             AudioManager.Instance.PlaySoundPooled(Sound.Effects_Story_Event_Start);
@@ -127,10 +133,10 @@ namespace HexGameEngine.StoryEvents
         private void BuildAllViewsFromPage(StoryEventPageSO page)
         {
             // Trigger effects on load page
-            page.onPageLoadEffects.ForEach(i => TriggerChoiceEffect(i));
+            page.onPageLoadEffects.ForEach(i => ResolveChoiceEffect(i));
 
             // Set description text
-            eventDescriptionText.text = page.pageDescription;
+            eventDescriptionText.text = GetDynamicValueString(page.pageDescription);
 
             // Set up buttons and their views
             BuildChoiceButtonsFromPageData(page);
@@ -170,9 +176,9 @@ namespace HexGameEngine.StoryEvents
         private void BuildResultItemsSection()
         {
             resultItemRows.ForEach(i => i.Hide());
-            for(int i = 0; i < currentResultItems.Count; i++)
+            for (int i = 0; i < currentResultItems.Count; i++)
             {
-                if(i >= resultItemRows.Count)
+                if (i >= resultItemRows.Count)
                 {
                     StoryEventResultItemRow newRow = Instantiate(resultItemRowPrefab, resultItemsParent).GetComponent<StoryEventResultItemRow>();
                     resultItemRows.Add(newRow);
@@ -191,7 +197,7 @@ namespace HexGameEngine.StoryEvents
             Debug.Log("Content height: " + contentHeight.ToString());
 
             // Use fitted buttons
-            if(contentHeight > scrollBounds)
+            if (contentHeight > scrollBounds)
             {
                 unfittedButtonsParent.gameObject.SetActive(false);
                 fittedButtonsParent.gameObject.SetActive(true);
@@ -207,13 +213,19 @@ namespace HexGameEngine.StoryEvents
             TransformUtils.RebuildLayout(content);
 
         }
-       
+        public string GetDynamicValueString(string original)
+        {
+            string ret = original.Replace(CHARACTER_1_NAME_KEY, characterTargets[0].myName);
+            ret = ret.Replace(CHARACTER_1_SUB_NAME_KEY, characterTargets[0].myClassName);
+            return ret;
+        }
+
         #endregion
 
         #region Determine Next Event Logic
         public StoryEventDataSO DetermineAndCacheNextStoryEvent()
         {
-            if(GlobalSettings.Instance.GameMode == GameMode.StoryEventSandbox)
+            if (GlobalSettings.Instance.GameMode == GameMode.StoryEventSandbox)
             {
                 CurrentStoryEvent = GlobalSettings.Instance.SandboxStoryEvent;
                 return CurrentStoryEvent;
@@ -227,7 +239,7 @@ namespace HexGameEngine.StoryEvents
             }
 
             CurrentStoryEvent = validEvents[RandomGenerator.NumberBetween(0, validEvents.Count - 1)];
-            if(eventsAlreadyEncountered.Contains(CurrentStoryEvent.storyEventName) == false)
+            if (eventsAlreadyEncountered.Contains(CurrentStoryEvent.storyEventName) == false)
                 eventsAlreadyEncountered.Add(CurrentStoryEvent.storyEventName);
 
             return CurrentStoryEvent;
@@ -245,25 +257,23 @@ namespace HexGameEngine.StoryEvents
         }
         #endregion
 
-        #region Story Event Validity Checking
+        #region Story Event Requirements + Validity Checking
         private bool IsStoryEventValid(StoryEventDataSO storyEvent)
         {
             if (eventsAlreadyEncountered.Contains(storyEvent.storyEventName) == false &&
                 !storyEvent.excludeFromGame &&
-                DoesStoryEventMeetAllRequirements(storyEvent))            
-                return true;            
+                DoesStoryEventMeetBaseRequirements(storyEvent) &&
+                DoesStoryEventMeetCharacterTargetRequirements(storyEvent))
+                return true;
             else return false;
         }
-        private bool DoesStoryEventMeetAllRequirements(StoryEventDataSO storyEvent)
+        private bool DoesStoryEventMeetBaseRequirements(StoryEventDataSO storyEvent)
         {
             bool ret = true;
 
-            // TO DO: some events will require non stage related things, for example
-            // at least 1 character with 30+ health, or player must have 100+ gold, etc
-
-            foreach(StoryEventRequirement req in storyEvent.requirements)
+            foreach (StoryEventRequirement req in storyEvent.requirements)
             {
-                if(!IsStoryEventRequirementMet(storyEvent, req))
+                if (!IsStoryEventRequirementMet(storyEvent, req))
                 {
                     ret = false;
                     break;
@@ -276,7 +286,83 @@ namespace HexGameEngine.StoryEvents
         {
             bool ret = true;
 
+            if (requirement.reqType == StoryEventRequirementType.XorMoreCharactersInRoster)
+            {
+                int characterCount = CharacterDataController.Instance.AllPlayerCharacters.Count;
+                if (requirement.includeTheKid == false && TheKidIsAlive()) characterCount = characterCount - 1;
+                ret = characterCount < requirement.requiredCharactersInRosterCount;
+            }
+            else if (requirement.reqType == StoryEventRequirementType.XorLessCharactersInRoster)
+            {
+                int characterCount = CharacterDataController.Instance.AllPlayerCharacters.Count;
+                if (requirement.includeTheKid == false && TheKidIsAlive()) characterCount = characterCount - 1;
+                ret = characterCount > requirement.requiredCharactersInRosterCount;
+            }
             return ret;
+        }
+        private bool TheKidIsAlive()
+        {
+            bool ret = false;
+
+            foreach (HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
+            {
+                if (character.background.backgroundType == CharacterBackground.Companion)
+                {
+                    ret = true;
+                    break;
+                }
+            }
+
+            return ret;
+        }
+        private bool DoesStoryEventMeetCharacterTargetRequirements(StoryEventDataSO storyEvent)
+        {
+            bool ret = true;
+            List<HexCharacterData> chosenCharacterProspects = new List<HexCharacterData>();
+
+            foreach (StoryEventCharacterTarget req in storyEvent.characterRequirements)
+            {
+                HexCharacterData character = TryFindSuitableCharacterTarget(req, chosenCharacterProspects);
+                if (character == null)
+                {
+                    ret = false;
+                    break;
+                }
+                else chosenCharacterProspects.Add(character);
+            }
+
+            return ret;
+        }
+        private bool DoesCharacterMeetStoryEventCharacterTargetRequirement(HexCharacterData character, StoryEventCharacterTargetRequirement req)
+        {
+            bool ret = false;
+            if (req.reqType == StoryEventCharacterTargetRequirementType.HasBackground)
+            {
+                foreach(CharacterBackground cbg in req.requiredBackgrounds)
+                {
+                    if(character.background.backgroundType == cbg)
+                    {
+                        ret = true;
+                        break;
+                    }
+                }
+            }
+            else if (req.reqType == StoryEventCharacterTargetRequirementType.DoesNotHaveBackground)
+            {
+                bool pass = true;
+                foreach (CharacterBackground cbg in req.requiredBackgrounds)
+                {
+                    if (character.background.backgroundType == cbg)
+                    {
+                        pass = false;
+                        break;
+                    }
+                }
+                ret = pass;
+            }
+
+            return ret;
+                    
         }
         #endregion
 
@@ -312,12 +398,12 @@ namespace HexGameEngine.StoryEvents
                 }
             }
 
-            foreach (StoryChoiceEffect s in set.effects)
-            {
-                TriggerChoiceEffect(s);
-            }
+            set.effects.ForEach(i => ResolveChoiceEffect(i));
+
+            // UI Updates
+            CharacterScrollPanelController.Instance.RebuildViews();
         }
-        private void TriggerChoiceEffect(StoryChoiceEffect effect)
+        private void ResolveChoiceEffect(StoryChoiceEffect effect)
         {
             if (effect.effectType == StoryChoiceEffectType.FinishEvent)
             {
@@ -351,6 +437,71 @@ namespace HexGameEngine.StoryEvents
                     currentResultItems.Add(newResultItem);
                 }
             }
+            else if(effect.effectType == StoryChoiceEffectType.CharacterKilled)
+            {
+                // todo: determine target correctly
+                HexCharacterData target = characterTargets[0];
+
+                CharacterDataController.Instance.RemoveCharacterFromRoster(target);
+
+                string message = target.myName + " " + target.myClassName + " died.";
+                StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.Skull);
+                currentResultItems.Add(newResultItem);
+
+            }
+        }
+        #endregion
+
+        #region Character Targeting Logic
+        private HexCharacterData TryFindSuitableCharacterTarget(StoryEventCharacterTarget reqSet, List<HexCharacterData> excludedCharacters = null)
+        {
+            HexCharacterData ret = null;
+            List<HexCharacterData> allProspects = new List<HexCharacterData>();
+            List<HexCharacterData> validProspects = new List<HexCharacterData>();
+
+            // Get all player characters not explicitly excluded
+            foreach (HexCharacterData c in CharacterDataController.Instance.AllPlayerCharacters)
+                if (excludedCharacters.Contains(c) == false) allProspects.Add(c);
+
+            foreach (HexCharacterData prospect in allProspects)
+            {
+                bool passed = true;
+                foreach (StoryEventCharacterTargetRequirement req in reqSet.requirements)
+                {
+                    if (!DoesCharacterMeetStoryEventCharacterTargetRequirement(prospect, req))
+                    {
+                        passed = false;
+                        break;
+                    }
+                }
+
+                if (passed) validProspects.Add(prospect);
+            }
+
+            // If multiple valid characters, choose one randomly
+            if (validProspects.Count > 1) ret = validProspects[RandomGenerator.NumberBetween(0, validProspects.Count - 1)];            
+            else if (validProspects.Count == 1) ret = validProspects[0];
+
+            return ret;
+        }
+        private void DetermineAndCacheCharacterTargetsOnEventStart(StoryEventDataSO storyEvent)
+        {
+            characterTargets.Clear();
+            int requiredCharacters = storyEvent.characterRequirements.Length;
+
+            // Fuck it. I'm not in the mood to write a well engineered solution. I'm brute forcing this shit and moving onto the next feature.            
+            for(int i = 0; i < 500; i++)
+            {
+                characterTargets.Clear();
+                foreach (StoryEventCharacterTarget c in storyEvent.characterRequirements)
+                {
+                    HexCharacterData target = TryFindSuitableCharacterTarget(c, characterTargets);
+                    if (target != null) characterTargets.Add(target);
+                }
+                if (characterTargets.Count == requiredCharacters) break;
+            }
+
+
         }
         #endregion
 

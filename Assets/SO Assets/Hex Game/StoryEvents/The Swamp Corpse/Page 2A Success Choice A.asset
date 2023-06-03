@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd1c4ef615955b4fae69eb7d4fc8459, type: 3}
+  m_Name: Page 2A Success Choice A
+  m_EditorClassIdentifier: 
+  choiceTextOnButton:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '"Grab the axe while your there"'
+  effectSets:
+  - lowerProbability: 1
+    upperProbability: 50
+    effects:
+    - effectType: 3
+      pageToLoad: {fileID: 0}
+      boonGained: 0
+      backgroundAddedToTavern: 0
+      totalCharactersAddedToTavern: 0
+    - effectType: 1
+      pageToLoad: {fileID: 11400000, guid: 986d3cb31539cd44d9629fb68a109282, type: 2}
+      boonGained: 0
+      backgroundAddedToTavern: 0
+      totalCharactersAddedToTavern: 0
+  - lowerProbability: 51
+    upperProbability: 100
+    effects:
+    - effectType: 7
+      pageToLoad: {fileID: 0}
+      boonGained: 0
+      backgroundAddedToTavern: 0
+      totalCharactersAddedToTavern: 0
+    - effectType: 1
+      pageToLoad: {fileID: 11400000, guid: baf5557467bd6844a82106bcf88d4c48, type: 2}
+      boonGained: 0
+      backgroundAddedToTavern: 0
+      totalCharactersAddedToTavern: 0
+  requirements: []

@@ -16,4 +16,11 @@ MonoBehaviour:
   excludeFromGame: 0
   firstPage: {fileID: 11400000, guid: fc0c37dc0a163ce42be4d5a4cd117a47, type: 2}
   onStartEffects: []
-  requirements: []
+  requirements:
+  - reqType: 1
+    requiredCharactersInRosterCount: 1
+    includeTheKid: 0
+  characterRequirements:
+  - requirements:
+    - reqType: 2
+      requiredBackgrounds: 13000000

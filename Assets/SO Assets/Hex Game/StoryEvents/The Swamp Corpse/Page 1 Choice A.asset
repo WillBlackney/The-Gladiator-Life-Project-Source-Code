@@ -16,13 +16,31 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '"Go on {CHARACTER_NAME}, take his stuff."'
+    phrase: '"Go on {CHARACTER_1_NAME}, take his stuff."'
   effectSets:
   - lowerProbability: 1
-    upperProbability: 25
+    upperProbability: 100
     effects:
-    - effectType: 0
+    - effectType: 7
       pageToLoad: {fileID: 0}
+      boonGained: 0
+      backgroundAddedToTavern: 0
+      totalCharactersAddedToTavern: 0
+    - effectType: 1
+      pageToLoad: {fileID: 11400000, guid: baf5557467bd6844a82106bcf88d4c48, type: 2}
+      boonGained: 0
+      backgroundAddedToTavern: 0
+      totalCharactersAddedToTavern: 0
+  - lowerProbability: 26
+    upperProbability: 100
+    effects:
+    - effectType: 3
+      pageToLoad: {fileID: 0}
+      boonGained: 0
+      backgroundAddedToTavern: 0
+      totalCharactersAddedToTavern: 0
+    - effectType: 1
+      pageToLoad: {fileID: 11400000, guid: 6e8f428e88858b24d863d1bbc2e429a3, type: 2}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0

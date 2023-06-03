@@ -28,5 +28,9 @@ namespace HexGameEngine.StoryEvents
         [LabelWidth(100)]
         public StoryEventRequirement[] requirements;
 
+        [BoxGroup("Requirements")]
+        [LabelWidth(100)]
+        public StoryEventCharacterTarget[] characterRequirements;
+
     }
 }

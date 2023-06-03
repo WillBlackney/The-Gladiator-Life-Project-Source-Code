@@ -70,7 +70,7 @@ namespace HexGameEngine
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
             if (GlobalSettings.Instance.GameMode == GameMode.Standard)
-                StartCoroutine(RunStandardGameModeSetup());
+                RunStandardGameModeSetup();
 
             else if (GlobalSettings.Instance.GameMode == GameMode.CombatSandbox)
                 RunSandboxCombat();
@@ -88,7 +88,7 @@ namespace HexGameEngine
 
         // Specific Game Mode Setups
         #region
-        private IEnumerator RunStandardGameModeSetup()
+        private void RunStandardGameModeSetup()
         {
             SetGameState(GameState.MainMenu);
             LightController.Instance.EnableStandardGlobalLight();
@@ -98,19 +98,17 @@ namespace HexGameEngine
             BlackScreenController.Instance.FadeInScreen(2f);
             MainMenuController.Instance.SetCustomCharacterDataDefaultState();
             MainMenuController.Instance.DoGameStartMainMenuRevealSequence();
-
-            yield return null;
         }
         private void RunSandboxStoryEvent()
         {
+            // Set up new save file
+            BuildNewSaveFileForSandboxEnvironment();
+
             // Set state
             SetGameState(GameState.StoryEvent);
 
             // Show UI
             TopBarController.Instance.ShowMainTopBar();
-
-            // Set up new save file 
-            PersistencyController.Instance.BuildNewSaveFileOnNewGameStarted(CreateSandboxCharacterDataFiles()[0].characterData);
 
             // Build and prepare all session data
             PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();
@@ -136,14 +134,13 @@ namespace HexGameEngine
         }
         private void RunSandboxTown()
         {
+            BuildNewSaveFileForSandboxEnvironment();
+
             // Set state
             SetGameState(GameState.Town);
 
             // Show UI
             TopBarController.Instance.ShowMainTopBar();
-
-            // Set up new save file 
-            PersistencyController.Instance.BuildNewSaveFileOnNewGameStarted(CreateSandboxCharacterDataFiles()[0].characterData);
 
             // Build and prepare all session data
             PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();
@@ -180,7 +177,9 @@ namespace HexGameEngine
             InventoryController.Instance.PopulateInventoryWithMockDataItems(30);
         }
         private void RunSandboxCombat()
-        {            
+        {
+            var charactersWithSpawnPos = BuildNewSaveFileForSandboxEnvironment();
+
             // Set state
             SetGameState(GameState.CombatActive); 
 
@@ -188,14 +187,7 @@ namespace HexGameEngine
             TopBarController.Instance.ShowCombatTopBar();
 
             // Build mock save file + journey data
-            RunController.Instance.SetGameStartValues();
-            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);           
-
-            // Build character roster + mock data
-            List<CharacterWithSpawnData> charactersWithSpawnPos = CreateSandboxCharacterDataFiles();
-            List<HexCharacterData> characters = new List<HexCharacterData>();
-            charactersWithSpawnPos.ForEach(x => characters.Add(x.characterData));
-            CharacterDataController.Instance.BuildCharacterRoster(characters);
+            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
 
             // Apply global settings
             GlobalSettings.Instance.ApplyStartingXPBonus();
@@ -249,25 +241,20 @@ namespace HexGameEngine
         }
         private void RunPostCombatRewardTestEventSetup()
         {
+            // Set up new save file
+            BuildNewSaveFileForSandboxEnvironment();
+
+            // Build mock save file + journey data
+            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
+
             // Set state
             SetGameState(GameState.CombatActive);
 
             // Show UI
-            TopBarController.Instance.ShowCombatTopBar();
-
-            // Build mock save file + journey data
-            RunController.Instance.SetGameStartValues();
-            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
+            TopBarController.Instance.ShowCombatTopBar();            
 
             // Randomize level node elevation and obstructions
             LevelController.Instance.GenerateLevelNodes();
-
-            // Build character roster + mock data
-            List<CharacterWithSpawnData> charactersWithSpawnPos = CreateSandboxCharacterDataFiles();
-            List<HexCharacterData> characters = new List<HexCharacterData>();
-            charactersWithSpawnPos.ForEach(x => characters.Add(x.characterData));
-
-            CharacterDataController.Instance.BuildCharacterRoster(characters);
 
             // Apply global settings
             GlobalSettings.Instance.ApplyStartingXPBonus();
@@ -881,6 +868,16 @@ namespace HexGameEngine
 
             return characters;
         }      
+        private List<CharacterWithSpawnData> BuildNewSaveFileForSandboxEnvironment()
+        {
+            List<CharacterWithSpawnData> charactersWithSpawnPos = CreateSandboxCharacterDataFiles();
+            PersistencyController.Instance.BuildNewSaveFileOnNewGameStarted(charactersWithSpawnPos[0].characterData);
+            List<HexCharacterData> characters = new List<HexCharacterData>();
+            charactersWithSpawnPos.ForEach(x => characters.Add(x.characterData));
+            for (int i = 1; i < characters.Count; i++) CharacterDataController.Instance.AddCharacterToRoster(characters[i]);
+            PersistencyController.Instance.AutoUpdateSaveFile();
+            return charactersWithSpawnPos;
+        }
        
         #endregion     
         

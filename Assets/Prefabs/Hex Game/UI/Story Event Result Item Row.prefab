@@ -572,6 +572,8 @@ MonoBehaviour:
   unframedIconImage: {fileID: 4843282158116572985}
   framedIconImage: {fileID: 5425554847665972986}
   framedIconImageParent: {fileID: 8909765944495856795}
+  star: {fileID: 21300000, guid: 4ba32932c5e95473085578d10429742c, type: 3}
+  skull: {fileID: 21300000, guid: 945c94fa95e16461b814ba86437b2f71, type: 3}
 --- !u!114 &4843282158992260746
 MonoBehaviour:
   m_ObjectHideFlags: 0

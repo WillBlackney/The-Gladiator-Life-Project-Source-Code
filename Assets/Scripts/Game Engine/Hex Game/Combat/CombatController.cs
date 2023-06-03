@@ -1605,7 +1605,7 @@ namespace HexGameEngine.Combat
                 }
                 else
                 {
-                    CharacterDataController.Instance.AllPlayerCharacters.Remove(character.characterData);
+                    CharacterDataController.Instance.RemoveCharacterFromRoster(character.characterData);
                 }
             }
 

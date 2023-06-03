@@ -19,6 +19,7 @@ namespace HexGameEngine.StoryEvents
 
         [Header("Sprites")]
         [SerializeField] Sprite star;
+        [SerializeField] Sprite skull;        
         public void Hide()
         {
             visualParent.SetActive(false);
@@ -40,6 +41,11 @@ namespace HexGameEngine.StoryEvents
             {
                 unframedIconImage.gameObject.SetActive(true);
                 unframedIconImage.sprite = data.iconSprite;
+            }
+            else if(data.iconType == ResultRowIcon.Skull)
+            {
+                unframedIconImage.gameObject.SetActive(true);
+                unframedIconImage.sprite = skull;
             }
             
 

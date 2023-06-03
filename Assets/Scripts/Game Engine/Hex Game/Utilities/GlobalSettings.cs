@@ -168,19 +168,19 @@ namespace HexGameEngine.Utilities
         }       
         public bool ShowPlayerCharacterSpawnSetting()
         {
-            return gameMode == GameMode.CombatSandbox || gameMode == GameMode.TownSandbox;
+            return gameMode != GameMode.Standard;
         }
         public bool ShowStartingPlayerCharacters()
         {
-            return (gameMode == GameMode.CombatSandbox || gameMode == GameMode.TownSandbox) && playerCharacterSpawnSetting == PlayerCharacterSpawnSetting.Normal;
+            return gameMode != GameMode.Standard && playerCharacterSpawnSetting == PlayerCharacterSpawnSetting.Normal;
         }       
         public bool ShowPlayerAiCharacters()
         {
-            return gameMode == GameMode.CombatSandbox && playerCharacterSpawnSetting == PlayerCharacterSpawnSetting.EnemyVsEnemy == true;
+            return gameMode != GameMode.Standard && playerCharacterSpawnSetting == PlayerCharacterSpawnSetting.EnemyVsEnemy == true;
         }
         public bool ShowTotalRandomCharacters()
         {
-            return (gameMode == GameMode.CombatSandbox || gameMode == GameMode.TownSandbox) && playerCharacterSpawnSetting == PlayerCharacterSpawnSetting.Normal && randomizePlayerCharacters;
+            return gameMode != GameMode.Standard && playerCharacterSpawnSetting == PlayerCharacterSpawnSetting.Normal && randomizePlayerCharacters;
         }
         public bool ShowSandboxEnemyEncounter()
         {
@@ -188,7 +188,7 @@ namespace HexGameEngine.Utilities
         }
         public bool ShowRandomizePlayerCharacters()
         {
-            return gameMode == GameMode.CombatSandbox;
+            return gameMode != GameMode.Standard;
         }
         #endregion
 

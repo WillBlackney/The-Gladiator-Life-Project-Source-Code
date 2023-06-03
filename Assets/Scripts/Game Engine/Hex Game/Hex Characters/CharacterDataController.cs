@@ -440,7 +440,7 @@ namespace HexGameEngine.Characters
         #region
         public void BuildCharacterRoster(List<HexCharacterData> characters)
         {
-            allPlayerCharacters.Clear();
+            AllPlayerCharacters.Clear();
             foreach (HexCharacterData c in characters)
                 AddCharacterToRoster(c);
         }
@@ -448,9 +448,13 @@ namespace HexGameEngine.Characters
         {
             if(AllPlayerCharacters.Contains(character) == false) AllPlayerCharacters.Add(character);
         }
-        public void RemoveCharacterFromRoster(HexCharacterData character)
+        public void RemoveCharacterFromRoster(HexCharacterData character, bool death = true)
         {
             if (AllPlayerCharacters.Contains(character)) AllPlayerCharacters.Remove(character);
+            if (death) 
+            { 
+                // to do: add character info to orbituary, apply character death to score, etc
+            }
         }
         public void ClearCharacterRoster()
         {
