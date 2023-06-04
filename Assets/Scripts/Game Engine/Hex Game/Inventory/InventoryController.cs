@@ -196,7 +196,7 @@ namespace HexGameEngine.Items
 
             for(int i = 0; i < amount; i++)
             {
-                AddItemToInventory(CreateInventoryItemAbilityData(abilities[i]));
+                AddItemToInventory(abilities[i]);
             }
            
         }
@@ -215,6 +215,30 @@ namespace HexGameEngine.Items
             }
                 
         }
+        public void AddItemToInventory(ItemData item, bool ignoreSpaceRequirement = false, int inventoryIndex = -1)
+        {
+            if (HasFreeInventorySpace() ||
+               (!HasFreeInventorySpace() && ignoreSpaceRequirement == true))
+            {
+                var inventoryItem = CreateInventoryItemFromItemData(item);
+                if (inventoryIndex >= 0) inventory.Insert(inventoryIndex, inventoryItem);
+                else inventory.Add(inventoryItem);
+            }
+
+        }
+        public void AddItemToInventory(AbilityData ability, bool ignoreSpaceRequirement = false, int inventoryIndex = -1)
+        {
+            if (HasFreeInventorySpace() ||
+               (!HasFreeInventorySpace() && ignoreSpaceRequirement == true))
+            {
+                var inventoryItem = CreateInventoryItemAbilityData(ability);
+                if (inventoryIndex >= 0) inventory.Insert(inventoryIndex, inventoryItem);
+                else inventory.Add(inventoryItem);
+            }
+
+        }
+
+        
         public void RemoveItemFromInventory(InventoryItem item)
         {
             if (inventory.Contains(item))

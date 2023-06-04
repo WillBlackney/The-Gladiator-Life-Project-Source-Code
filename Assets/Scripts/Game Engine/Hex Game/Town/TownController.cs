@@ -560,8 +560,7 @@ namespace HexGameEngine.TownFeatures
             PlayerDataController.Instance.ModifyPlayerGold(-data.goldCost);
 
             // Add tome to inventory
-            InventoryController.Instance.AddItemToInventory(
-                InventoryController.Instance.CreateInventoryItemAbilityData(data.ability));
+            InventoryController.Instance.AddItemToInventory(data.ability);
 
             // Remove from shop
             currentLibraryTomes.Remove(data);
@@ -688,7 +687,7 @@ namespace HexGameEngine.TownFeatures
             PlayerDataController.Instance.ModifyPlayerGold(-data.GoldCost);
 
             // Add tome to inventory
-            InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(data.Item));
+            InventoryController.Instance.AddItemToInventory(data.Item);
 
             // Remove from shop
             currentItems.Remove(data);

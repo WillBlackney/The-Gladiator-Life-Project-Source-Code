@@ -166,8 +166,8 @@ namespace HexGameEngine.RewardSystems
         public void HandleGainRewardsOfContract(CombatContractData contract)
         {
             PlayerDataController.Instance.ModifyPlayerGold(contract.combatRewardData.goldAmount);
-            InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(contract.combatRewardData.item));
-            InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemAbilityData(contract.combatRewardData.abilityAwarded));
+            InventoryController.Instance.AddItemToInventory(contract.combatRewardData.item);
+            InventoryController.Instance.AddItemToInventory(contract.combatRewardData.abilityAwarded);
         }
         #endregion
 

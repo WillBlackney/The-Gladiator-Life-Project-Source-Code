@@ -657,11 +657,11 @@ namespace HexGameEngine.UI
             dismissVisualParent.SetActive(false);
 
             // Strip items and send to inventory
-            if (CharacterCurrentlyViewing.itemSet.headArmour != null) InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(CharacterCurrentlyViewing.itemSet.headArmour));
-            if (CharacterCurrentlyViewing.itemSet.bodyArmour != null) InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(CharacterCurrentlyViewing.itemSet.bodyArmour));
-            if (CharacterCurrentlyViewing.itemSet.mainHandItem != null) InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(CharacterCurrentlyViewing.itemSet.mainHandItem));
-            if (CharacterCurrentlyViewing.itemSet.offHandItem != null) InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(CharacterCurrentlyViewing.itemSet.offHandItem));
-            if (CharacterCurrentlyViewing.itemSet.trinket != null) InventoryController.Instance.AddItemToInventory(InventoryController.Instance.CreateInventoryItemFromItemData(CharacterCurrentlyViewing.itemSet.trinket));
+            if (CharacterCurrentlyViewing.itemSet.headArmour != null) InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.headArmour);
+            if (CharacterCurrentlyViewing.itemSet.bodyArmour != null) InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.bodyArmour);
+            if (CharacterCurrentlyViewing.itemSet.mainHandItem != null) InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.mainHandItem);
+            if (CharacterCurrentlyViewing.itemSet.offHandItem != null) InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.offHandItem);
+            if (CharacterCurrentlyViewing.itemSet.trinket != null) InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.trinket);
             
             // Add character to roster
             CharacterDataController.Instance.RemoveCharacterFromRoster(CharacterCurrentlyViewing);

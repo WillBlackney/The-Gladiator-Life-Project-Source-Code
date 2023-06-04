@@ -37,7 +37,23 @@ namespace HexGameEngine.StoryEvents
         [LabelWidth(200)]
         public int totalCharactersAddedToTavern;
 
+        [ShowIf("ShowItemGained")]
+        [LabelWidth(100)]
+        public ItemDataSO itemGained;
+
+        [ShowIf("ShowGoldGained")]
+        [LabelWidth(100)]
+        public int goldGained;
+
         #region Odin Show Ifs  
+        public bool ShowGoldGained()
+        {
+            return effectType == StoryChoiceEffectType.GainGold;
+        }
+        public bool ShowItemGained()
+        {
+            return effectType == StoryChoiceEffectType.GainItem;
+        }
         public bool ShowPageToLoad()
         {
             return effectType == StoryChoiceEffectType.LoadPage;

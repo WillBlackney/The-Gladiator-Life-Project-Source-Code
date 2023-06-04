@@ -19,18 +19,22 @@ MonoBehaviour:
     phrase: '"Go on {CHARACTER_1_NAME}, take his stuff."'
   effectSets:
   - lowerProbability: 1
-    upperProbability: 100
+    upperProbability: 25
     effects:
     - effectType: 7
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
+      itemGained: {fileID: 0}
+      goldGained: 0
     - effectType: 1
       pageToLoad: {fileID: 11400000, guid: baf5557467bd6844a82106bcf88d4c48, type: 2}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
+      itemGained: {fileID: 0}
+      goldGained: 0
   - lowerProbability: 26
     upperProbability: 100
     effects:
@@ -39,9 +43,13 @@ MonoBehaviour:
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
+      itemGained: {fileID: 0}
+      goldGained: 100
     - effectType: 1
       pageToLoad: {fileID: 11400000, guid: 6e8f428e88858b24d863d1bbc2e429a3, type: 2}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
+      itemGained: {fileID: 0}
+      goldGained: 0
   requirements: []

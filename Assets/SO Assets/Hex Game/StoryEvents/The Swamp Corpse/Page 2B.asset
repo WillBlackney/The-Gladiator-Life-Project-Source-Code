@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Page 2B
   m_EditorClassIdentifier: 
   pageDescription: You decide it's not worth the risk of becoming the monster's next
-    meal and hurry back to town with {CHARACTER_1_NAME} {CHARACTER_1_SUBNAME}.
+    meal and hurry back to town with {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME}.
   allChoices:
-  - {fileID: 11400000, guid: 7da565b6b9199d94cba9bfc8a476f555, type: 2}
+  - {fileID: 11400000, guid: 104cc4ff1967b4240bd9d972e49ee823, type: 2}
   pageSprite: {fileID: 0}
   onPageLoadEffects: []

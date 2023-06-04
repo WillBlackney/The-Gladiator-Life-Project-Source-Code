@@ -343,7 +343,7 @@ namespace HexGameEngine.Items
         public void HandleSendItemFromCharacterToInventory(HexCharacterData character, RosterItemSlot slot)
         {
             // Add item back to inventory
-            InventoryController.Instance.AddItemToInventory(new InventoryItem(slot.ItemDataRef), false);
+            InventoryController.Instance.AddItemToInventory(slot.ItemDataRef, false);
 
             // Remove item from character
             // Main hand
@@ -387,21 +387,19 @@ namespace HexGameEngine.Items
 
             // remove new item from inventory
             int index = InventoryController.Instance.Inventory.IndexOf(newItem);
-            InventoryController.Instance.RemoveItemFromInventory(newItem);
-
-            
+            InventoryController.Instance.RemoveItemFromInventory(newItem);                       
 
             if (previousItem != null)
             {
                 Debug.LogWarning("Item " + previousItem.itemName + " already in slot: " + slot.SlotType.ToString() + ", returning it to inventory...");
-                InventoryController.Instance.AddItemToInventory(new InventoryItem(previousItem), false, index);
+                InventoryController.Instance.AddItemToInventory(previousItem, false, index);
             }
 
             // Check if equipping 2H item while using two 1h items: send off hand to inventory too
             if(newItem.itemData.handRequirement == HandRequirement.TwoHanded &&
                 character.itemSet.offHandItem != null)
             {
-                InventoryController.Instance.AddItemToInventory(new InventoryItem(character.itemSet.offHandItem), false, index);
+                InventoryController.Instance.AddItemToInventory(character.itemSet.offHandItem, false, index);
                 character.itemSet.offHandItem = null;
             }
 

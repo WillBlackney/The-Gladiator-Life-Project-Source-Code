@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
   m_Name: Page 2A Success
   m_EditorClassIdentifier: 
-  pageDescription: 'After a quick glance around, {CHARACTER_1_NAME} {CHARACTER_1_SUBNAME}
+  pageDescription: 'After a quick glance around, {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME}
     tip toes through the shallow swampy waters over to the dead guard. After rummaging
     through the corpse''s pockets, he turns to you with a wicked smile and hoists
     up a small bag, shaking it up and down so you can hear the ''clink clink clink''
     of the gold inside.
 
 
-    As {CHARACTER_1_NAME} {CHARACTER_1_SUBNAME} pockets
+    As {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME} pockets
     the gold, you notice the dead guard''s steel axe lodged in the nearby tree.
 
 

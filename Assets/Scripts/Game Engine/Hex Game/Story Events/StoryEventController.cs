@@ -2,8 +2,11 @@
 using HexGameEngine.Audio;
 using HexGameEngine.Boons;
 using HexGameEngine.Characters;
+using HexGameEngine.Items;
 using HexGameEngine.JourneyLogic;
+using HexGameEngine.Libraries;
 using HexGameEngine.Persistency;
+using HexGameEngine.Player;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.UI;
 using HexGameEngine.Utilities;
@@ -418,11 +421,27 @@ namespace HexGameEngine.StoryEvents
             {
                 BuildAllViewsFromPage(effect.pageToLoad);
             }
+            else if (effect.effectType == StoryChoiceEffectType.GainGold)
+            {
+                PlayerDataController.Instance.ModifyPlayerGold(effect.goldGained);
+                StoryEventResultItem newResultItem = new StoryEventResultItem("Gained " + TextLogic.ReturnColoredText
+                    (effect.goldGained.ToString(), TextLogic.blueNumber) +" gold.", ResultRowIcon.GoldCoins);
+                currentResultItems.Add(newResultItem);
+            }
             else if(effect.effectType == StoryChoiceEffectType.GainBoon)
             {
                 BoonData boonGained = new BoonData(BoonController.Instance.GetBoonDataByTag(effect.boonGained));
                 BoonController.Instance.HandleGainBoon(boonGained);
                 StoryEventResultItem newResultItem = new StoryEventResultItem("Gained boon: " + boonGained.boonDisplayName, ResultRowIcon.FramedSprite, boonGained.BoonSprite);
+                currentResultItems.Add(newResultItem);
+            }
+            else if (effect.effectType == StoryChoiceEffectType.GainItem)
+            {
+                var ic = ItemController.Instance;
+                ItemData item = ic.GenerateNewItemWithRandomEffects(ic.GetItemDataByName(effect.itemGained.itemName));
+                InventoryController.Instance.AddItemToInventory(item);
+
+                StoryEventResultItem newResultItem = new StoryEventResultItem("Gained item: " + item.itemName, ResultRowIcon.FramedSprite, item.ItemSprite);
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.AddRecruitsToTavern)

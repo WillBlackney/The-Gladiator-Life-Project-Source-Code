@@ -19,7 +19,8 @@ namespace HexGameEngine.StoryEvents
 
         [Header("Sprites")]
         [SerializeField] Sprite star;
-        [SerializeField] Sprite skull;        
+        [SerializeField] Sprite skull;
+        [SerializeField] Sprite goldCoins;
         public void Hide()
         {
             visualParent.SetActive(false);
@@ -47,8 +48,11 @@ namespace HexGameEngine.StoryEvents
                 unframedIconImage.gameObject.SetActive(true);
                 unframedIconImage.sprite = skull;
             }
-            
-
+            else if (data.iconType == ResultRowIcon.GoldCoins)
+            {
+                unframedIconImage.gameObject.SetActive(true);
+                unframedIconImage.sprite = goldCoins;
+            }
         }
     }
 
@@ -60,6 +64,7 @@ namespace HexGameEngine.StoryEvents
         Skull = 3,
         UserIcon = 4,
         Star = 5,
+        GoldCoins = 7,
 
         // XP, character leaving, attribute boosts, healing, stress modified, character died
 

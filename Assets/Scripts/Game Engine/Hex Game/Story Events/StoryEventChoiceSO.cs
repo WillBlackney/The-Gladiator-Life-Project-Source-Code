@@ -49,8 +49,9 @@ namespace HexGameEngine.StoryEvents
         None = 0,
         LoadPage = 1,
         FinishEvent = 2,
-        ModifyGold = 3,
+        GainGold = 3,
         GainBoon = 4,
+        GainItem = 8,
         AddRecruitsToTavern = 6,
         CharacterKilled = 7,
     }

@@ -16,21 +16,25 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '"Grab the axe while your there"'
+    phrase: '"Grab the axe while you''re there"'
   effectSets:
   - lowerProbability: 1
     upperProbability: 50
     effects:
-    - effectType: 3
+    - effectType: 8
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
+      itemGained: {fileID: 11400000, guid: d9bb0e9c9791abc4e9e1803e40457da3, type: 2}
+      goldGained: 0
     - effectType: 1
       pageToLoad: {fileID: 11400000, guid: 986d3cb31539cd44d9629fb68a109282, type: 2}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
+      itemGained: {fileID: 0}
+      goldGained: 0
   - lowerProbability: 51
     upperProbability: 100
     effects:
@@ -39,9 +43,13 @@ MonoBehaviour:
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
+      itemGained: {fileID: 0}
+      goldGained: 0
     - effectType: 1
       pageToLoad: {fileID: 11400000, guid: baf5557467bd6844a82106bcf88d4c48, type: 2}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
+      itemGained: {fileID: 0}
+      goldGained: 0
   requirements: []
