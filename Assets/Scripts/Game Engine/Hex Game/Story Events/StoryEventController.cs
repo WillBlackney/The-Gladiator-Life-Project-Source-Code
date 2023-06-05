@@ -218,8 +218,12 @@ namespace HexGameEngine.StoryEvents
         }
         public string GetDynamicValueString(string original)
         {
-            string ret = original.Replace(CHARACTER_1_NAME_KEY, characterTargets[0].myName);
-            ret = ret.Replace(CHARACTER_1_SUB_NAME_KEY, characterTargets[0].myClassName);
+            string ret = original;
+            if(characterTargets.Count > 1)
+            {
+                ret = original.Replace(CHARACTER_1_NAME_KEY, characterTargets[0].myName);
+                ret = ret.Replace(CHARACTER_1_SUB_NAME_KEY, characterTargets[0].myClassName);
+            }           
             return ret;
         }
 
@@ -300,6 +304,14 @@ namespace HexGameEngine.StoryEvents
                 int characterCount = CharacterDataController.Instance.AllPlayerCharacters.Count;
                 if (requirement.includeTheKid == false && TheKidIsAlive()) characterCount = characterCount - 1;
                 ret = characterCount > requirement.requiredCharactersInRosterCount;
+            }
+            else if (requirement.reqType == StoryEventRequirementType.HasXorLessGold)
+            {
+                ret = PlayerDataController.Instance.CurrentGold <= requirement.goldRequired;
+            }
+            else if (requirement.reqType == StoryEventRequirementType.HasXorMoreGold)
+            {
+                ret = PlayerDataController.Instance.CurrentGold >= requirement.goldRequired;
             }
             return ret;
         }
@@ -426,6 +438,14 @@ namespace HexGameEngine.StoryEvents
                 PlayerDataController.Instance.ModifyPlayerGold(effect.goldGained);
                 StoryEventResultItem newResultItem = new StoryEventResultItem("Gained " + TextLogic.ReturnColoredText
                     (effect.goldGained.ToString(), TextLogic.blueNumber) +" gold.", ResultRowIcon.GoldCoins);
+                currentResultItems.Add(newResultItem);
+            }
+            else if (effect.effectType == StoryChoiceEffectType.LoseAllGold)
+            {
+                int goldLost = PlayerDataController.Instance.CurrentGold;
+                PlayerDataController.Instance.ModifyPlayerGold(-PlayerDataController.Instance.CurrentGold);
+                StoryEventResultItem newResultItem = new StoryEventResultItem("Lost " + TextLogic.ReturnColoredText
+                    (goldLost.ToString(), TextLogic.blueNumber) + " gold.", ResultRowIcon.GoldCoins);
                 currentResultItems.Add(newResultItem);
             }
             else if(effect.effectType == StoryChoiceEffectType.GainBoon)

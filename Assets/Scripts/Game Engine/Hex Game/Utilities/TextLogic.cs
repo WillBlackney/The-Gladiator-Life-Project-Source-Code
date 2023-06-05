@@ -7,7 +7,7 @@ namespace HexGameEngine.Utilities
 {
     public static class TextLogic
     {
-        // Properties + Color Codes
+        // Properties + Color Codes  </color>   
         #region
         [Header("RGBA Colour Codes")]
         public static string white = "<color=#FFFFFF>";

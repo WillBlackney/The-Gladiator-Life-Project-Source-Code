@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 801e62e2667447d4d8ae71b300de9dce, type: 3}
+  m_Name: The Hooded Purveyor
+  m_EditorClassIdentifier: 
+  storyEventName: The Hooded Purveyor
+  excludeFromGame: 0
+  firstPage: {fileID: 11400000, guid: e9e2085d0de633743b32116dde52e396, type: 2}
+  onStartEffects: []
+  requirements:
+  - reqType: 3
+    requiredCharactersInRosterCount: 0
+    includeTheKid: 0
+    goldRequired: 500
+  characterRequirements: []

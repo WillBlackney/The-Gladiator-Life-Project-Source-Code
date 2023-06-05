@@ -21,7 +21,16 @@ namespace HexGameEngine.StoryEvents
         [LabelWidth(100)]
         public bool includeTheKid = false;
 
+        [ShowIf("ShowGoldRequired")]
+        [LabelWidth(100)]
+        public int goldRequired;
+
         #region Odin Showifs
+        public bool ShowGoldRequired()
+        {
+            return reqType == StoryEventRequirementType.HasXorLessGold ||
+                reqType == StoryEventRequirementType.HasXorMoreGold;
+        }
         public bool ShowRequiredCharactersInRosterCount()
         {
             return reqType == StoryEventRequirementType.XorMoreCharactersInRoster ||
@@ -40,5 +49,7 @@ namespace HexGameEngine.StoryEvents
         None = 0,
         XorMoreCharactersInRoster = 1,
         XorLessCharactersInRoster = 2,
+        HasXorMoreGold = 3,
+        HasXorLessGold = 4,
     }
 }

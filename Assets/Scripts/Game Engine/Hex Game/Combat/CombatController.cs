@@ -169,6 +169,12 @@ namespace HexGameEngine.Combat
             }
 
             // Calculate core additive multipliers
+            // Lover's Scorn
+            if (effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.LoversScorn))
+            {
+                damageModPercentageAdditive += 0.20f;
+                Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Lovers Rage modifier = " + damageModPercentageAdditive.ToString());
+            }
             // Wrath
             if (effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Wrath))
             {
@@ -195,6 +201,13 @@ namespace HexGameEngine.Combat
             {
                 damageModPercentageAdditive -= 0.5f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Block modifier = " + damageModPercentageAdditive.ToString());
+            }
+
+            // Stoneskin
+            if (target != null && effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.StoneSkin))
+            {
+                damageModPercentageAdditive -= 0.2f;
+                Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Stone Skin modifier = " + damageModPercentageAdditive.ToString());
             }
 
             // Turtle Aspect

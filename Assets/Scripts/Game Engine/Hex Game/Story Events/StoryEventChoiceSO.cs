@@ -50,6 +50,7 @@ namespace HexGameEngine.StoryEvents
         LoadPage = 1,
         FinishEvent = 2,
         GainGold = 3,
+        LoseAllGold = 9,
         GainBoon = 4,
         GainItem = 8,
         AddRecruitsToTavern = 6,
