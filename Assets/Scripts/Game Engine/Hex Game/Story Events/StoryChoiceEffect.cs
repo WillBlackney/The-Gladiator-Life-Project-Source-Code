@@ -45,6 +45,10 @@ namespace HexGameEngine.StoryEvents
         [LabelWidth(100)]
         public int goldGained;
 
+        [ShowIf("ShowGoldLost")]
+        [LabelWidth(100)]
+        public int goldLost;
+
         [Header("Perk Settings")]
         [ShowIf("ShowPerkGained")]
         [LabelWidth(100)]
@@ -55,7 +59,19 @@ namespace HexGameEngine.StoryEvents
         [Range(0, 100)]
         public int gainPerkChance = 100;
 
+        [ShowIf("ShowCharacterJoining")]
+        [LabelWidth(100)]
+        public HexCharacterTemplateSO characterJoining;
+
         #region Odin Show Ifs  
+        public bool ShowCharacterJoining()  
+        {
+            return effectType == StoryChoiceEffectType.CharacterJoinsRoster;
+        }
+        public bool ShowGoldLost()
+        {
+            return effectType == StoryChoiceEffectType.LoseGold;
+        }
         public bool ShowPerkGained()
         {
             return effectType == StoryChoiceEffectType.GainPerk || effectType == StoryChoiceEffectType.GainPerkAll;

@@ -22,10 +22,10 @@ MonoBehaviour:
     evaporates from the robes to form an arm once more, revealing a fairly unremarkable
     looking rock.\n\n<color=#FFFFFF>\"No exciting mystery to go along with this one
     i'm afraid, 'tis simply a petrified wyrm egg. So well documented are it's properites
-    that even that insufferable child running the library will tell you the same
-    as I: standing near this egg will harden one's flesh to cuts\".</color>\n\nThe
-    hooded figure pauses, slowly redirects it's maniacal gaze back towards you and
-    leans inward with a tilted head.\n\n<color=#FFFFFF>\"Choose\".</color>"
+    that even that insufferable simpleton at the library will tell you the same as
+    I: standing near this egg will harden one's flesh to cuts\".</color>\n\nThe hooded
+    figure pauses, slowly redirects it's maniacal gaze back towards you and leans
+    inward with a tilted head.\n\n<color=#FFFFFF>\"Choose\".</color>"
   allChoices:
   - {fileID: 11400000, guid: d84965c184ec2284fa54d5fc6a7f0a2d, type: 2}
   - {fileID: 11400000, guid: dedc83ad568a6cc40950b71547e985ae, type: 2}

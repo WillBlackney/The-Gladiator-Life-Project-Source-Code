@@ -450,6 +450,13 @@ namespace HexGameEngine.StoryEvents
                     (effect.goldGained.ToString(), TextLogic.blueNumber) +" gold.", ResultRowIcon.GoldCoins);
                 currentResultItems.Add(newResultItem);
             }
+            else if (effect.effectType == StoryChoiceEffectType.LoseGold)
+            {
+                PlayerDataController.Instance.ModifyPlayerGold(-effect.goldLost);
+                StoryEventResultItem newResultItem = new StoryEventResultItem("Lost " + TextLogic.ReturnColoredText
+                    (effect.goldLost.ToString(), TextLogic.blueNumber) + " gold.", ResultRowIcon.GoldCoins);
+                currentResultItems.Add(newResultItem);
+            }
             else if (effect.effectType == StoryChoiceEffectType.LoseAllGold)
             {
                 int goldLost = PlayerDataController.Instance.CurrentGold;
@@ -508,7 +515,7 @@ namespace HexGameEngine.StoryEvents
                 PerkController.Instance.ModifyPerkOnCharacterData(target.passiveManager, perkData.perkTag, stacks);
 
                 StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    target.myName + " " + target.mySubName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
+                    target.myName + " " + target.mySubName + " gained passive: " + perkData.passiveName + ".", ResultRowIcon.FramedSprite, perkData.passiveSprite);
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.GainPerkAll)
@@ -542,6 +549,14 @@ namespace HexGameEngine.StoryEvents
                     prospects[0].myName + " " + prospects[0].mySubName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
                     currentResultItems.Add(newResultItem);
                 }
+            }
+            else if(effect.effectType == StoryChoiceEffectType.CharacterJoinsRoster)
+            {
+                HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(effect.characterJoining);
+                CharacterDataController.Instance.AddCharacterToRoster(character);                
+                string message = character.myName + " " + character.mySubName + " joins.";
+                StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.Skull);
+                currentResultItems.Add(newResultItem);
             }
         }
         #endregion

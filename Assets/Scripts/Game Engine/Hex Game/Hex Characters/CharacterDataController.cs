@@ -218,7 +218,8 @@ namespace HexGameEngine.Characters
             newCharacter.audioProfile = GetAudioProfileForRace(template.race);
             newCharacter.modelSize = template.modelSize;
             SetStartingLevelAndXpValues(newCharacter);
-            newCharacter.background = GetBackgroundData(CharacterBackground.Unknown);
+            if (template.background == CharacterBackground.None) newCharacter.background = GetBackgroundData(CharacterBackground.Unknown);
+            else newCharacter.background = GetBackgroundData(template.background);
 
             // Setup stats
             newCharacter.attributeSheet = new AttributeSheet();

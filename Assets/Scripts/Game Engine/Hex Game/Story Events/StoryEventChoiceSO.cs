@@ -50,6 +50,7 @@ namespace HexGameEngine.StoryEvents
         LoadPage = 1,
         FinishEvent = 2,
         GainGold = 3,
+        LoseGold = 12,
         LoseAllGold = 9,
         GainBoon = 4,
         GainItem = 8,
@@ -57,5 +58,6 @@ namespace HexGameEngine.StoryEvents
         CharacterKilled = 7,
         GainPerk = 10,
         GainPerkAll = 11,
+        CharacterJoinsRoster = 13,
     }
 }

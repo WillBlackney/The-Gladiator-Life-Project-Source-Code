@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fc18e607558964b9506f2b2cdb1260, type: 3}
+  m_Name: Gormak The Great
+  m_EditorClassIdentifier: 
+  myName: Gormak
+  mySubName: The Great
+  race: 2
+  modelSize: 0
+  attributeSheet:
+    might:
+      value: 10
+      stars: 2
+    constitution:
+      value: 70
+      stars: 0
+    dodge:
+      value: 10
+      stars: 2
+    accuracy:
+      value: 70
+      stars: 2
+    resolve:
+      value: 10
+      stars: 0
+    fitness:
+      value: 110
+      stars: 0
+    wits:
+      value: 10
+      stars: 0
+    maxHealth: 0
+    apRecovery: 8
+    apMaximum: 8
+    initiative: 15
+    fatigueRecovery: 15
+    criticalChance: 5
+    criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
+    auraSize: 1
+    vision: 1
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+    deathResistance: 25
+  abilityBook:
+    activeAbilities: []
+  serializedPassiveManager:
+    perks: []
+  modelParts:
+  - Orc_Chest_1
+  - Orc_Head_1
+  - Orc_Face_4
+  - Orc_Right_Hand_1
+  - Orc_Right_Leg_1
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 2aa4f343b2e4d0c4cab0f2de0c477c14, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 11400000, guid: c89d7d867b89eda42bd96838671cfe77, type: 2}
+    trinket: {fileID: 0}
+  talentPairings:
+  - talentSchool: 2
+    level: 1

@@ -28,6 +28,10 @@ namespace HexGameEngine.Characters
         [BoxGroup("General Info")]
         [LabelWidth(100)]
         [GUIColor("Yellow")]
+        public CharacterBackground background;
+        [BoxGroup("General Info")]
+        [LabelWidth(100)]
+        [GUIColor("Yellow")]
         public CharacterModelSize modelSize;
 
         public SerializedAttrbuteSheet attributeSheet;
