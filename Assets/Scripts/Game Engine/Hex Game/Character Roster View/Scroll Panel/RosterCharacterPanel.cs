@@ -58,7 +58,7 @@ namespace HexGameEngine.UI
             UpdateActivityIndicator();
 
             // Texts
-            nameText.text = "<color=#BC8252>" + data.myName + "<color=#DDC6AB>    The " + data.myClassName;
+            nameText.text = "<color=#BC8252>" + data.myName + "<color=#DDC6AB>    " + data.mySubName;
             healthText.text = data.currentHealth.ToString();
             //stressText.text = data.currentStress.ToString();
 

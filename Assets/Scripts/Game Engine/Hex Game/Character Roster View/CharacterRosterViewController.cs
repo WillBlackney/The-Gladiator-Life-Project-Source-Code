@@ -214,7 +214,7 @@ namespace HexGameEngine.UI
             // Build all sections
             characterCurrentlyViewing = data;
             characterNameText.text = data.myName;
-            characterClassText.text = data.myClassName;
+            characterClassText.text = data.mySubName;
             dailyWageText.text = data.dailyWage.ToString();         
             BuildActivePerksSection(data);
             BuildAttributeSection(data);
@@ -645,7 +645,7 @@ namespace HexGameEngine.UI
             dismissVisualParent.SetActive(true);
 
             // Set header text
-            dismissPageHeaderText.text = "Are you sure you want to dismiss " + character.myName + " " + character.myClassName + "?";
+            dismissPageHeaderText.text = "Are you sure you want to dismiss " + character.myName + " " + character.mySubName + "?";
            
             // Build model
             CharacterModeller.BuildModelFromStringReferences(dismissUcm, character.modelParts);

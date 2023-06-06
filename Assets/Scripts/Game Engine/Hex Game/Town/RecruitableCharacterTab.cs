@@ -69,7 +69,7 @@ namespace HexGameEngine.TownFeatures
 
             // Texts
             levelText.text = data.currentLevel.ToString();
-            nameText.text = "<color=#BC8252>" + data.myName + "<color=#DDC6AB>    The " + data.myClassName;
+            nameText.text = "<color=#BC8252>" + data.myName + "<color=#DDC6AB>    " + data.mySubName;
             if(racialText != null) racialText.text = data.race.ToString();
             racialIcon.BuildFromRacialData(CharacterDataController.Instance.GetRaceData(data.race));
             if (backgroundText != null) backgroundText.text = TextLogic.SplitByCapitals(data.background.backgroundType.ToString());

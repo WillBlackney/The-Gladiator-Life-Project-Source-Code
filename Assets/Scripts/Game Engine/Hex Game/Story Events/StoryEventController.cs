@@ -224,7 +224,7 @@ namespace HexGameEngine.StoryEvents
             if(characterTargets.Count > 1)
             {
                 ret = original.Replace(CHARACTER_1_NAME_KEY, characterTargets[0].myName);
-                ret = ret.Replace(CHARACTER_1_SUB_NAME_KEY, characterTargets[0].myClassName);
+                ret = ret.Replace(CHARACTER_1_SUB_NAME_KEY, characterTargets[0].mySubName);
             }           
             return ret;
         }
@@ -481,7 +481,7 @@ namespace HexGameEngine.StoryEvents
                 {
                     HexCharacterData newCharacter = CharacterDataController.Instance.GenerateRecruitCharacter(bgData);
                     TownController.Instance.HandleAddNewRecruitToTavernFromStoryEvent(newCharacter);
-                    string message = newCharacter.myName + " " + newCharacter.myClassName + " added to the tavern.";
+                    string message = newCharacter.myName + " " + newCharacter.mySubName + " added to the tavern.";
                     StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.FramedSprite, bgData.backgroundSprite);
                     currentResultItems.Add(newResultItem);
                 }
@@ -491,7 +491,7 @@ namespace HexGameEngine.StoryEvents
                 // todo: determine target correctly
                 HexCharacterData target = characterTargets[0];
                 CharacterDataController.Instance.RemoveCharacterFromRoster(target);
-                string message = target.myName + " " + target.myClassName + " died.";
+                string message = target.myName + " " + target.mySubName + " died.";
                 StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.Skull);
                 currentResultItems.Add(newResultItem);
             }
@@ -508,7 +508,7 @@ namespace HexGameEngine.StoryEvents
                 PerkController.Instance.ModifyPerkOnCharacterData(target.passiveManager, perkData.perkTag, stacks);
 
                 StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    target.myName + " " + target.myClassName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
+                    target.myName + " " + target.mySubName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.GainPerkAll)
@@ -529,7 +529,7 @@ namespace HexGameEngine.StoryEvents
                     charactersEffectedActualCount++;
 
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    prospects[i].myName + " " + prospects[i].myClassName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
+                    prospects[i].myName + " " + prospects[i].mySubName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
                     currentResultItems.Add(newResultItem);
 
                 }
@@ -539,7 +539,7 @@ namespace HexGameEngine.StoryEvents
                 {
                     PerkController.Instance.ModifyPerkOnCharacterData(prospects[0].passiveManager, perkData.perkTag, 1);
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    prospects[0].myName + " " + prospects[0].myClassName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
+                    prospects[0].myName + " " + prospects[0].mySubName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
                     currentResultItems.Add(newResultItem);
                 }
             }

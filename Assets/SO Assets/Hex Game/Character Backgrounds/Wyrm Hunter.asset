@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
+  m_Name: Wyrm Hunter
+  m_EditorClassIdentifier: 
+  backgroundSprite: {fileID: 21300000, guid: 5570d46be4d6e7644a8d460af14b336e, type: 3}
+  backgroundType: 21
+  description: 
+  recruitable: 1
+  spawnChance: 20
+  lowerLevelLimit: 2
+  upperLevelLimit: 3
+  dailyWageMin: 33
+  dailyWageMax: 37
+  baseRecruitCost: 150
+  mightLower: 7
+  mightUpper: 8
+  constitutionLower: 12
+  constitutionUpper: 13
+  accuracyLower: 13
+  accuracyUpper: 10
+  dodgeLower: 5
+  dodgeUpper: 5
+  fatigueLower: 15
+  fatigueUpper: 10
+  resolveLower: 7
+  resolveUpper: 5
+  witsLower: -2
+  witsUpper: -3
+  minStartingAbilities: 2
+  maxStartingAbilities: 2
+  validRaces: 010000000200000006000000
+  loadoutBuckets:
+  - possibleStartingTalents: 02000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
+    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
+    - {fileID: 11400000, guid: d7f2a84d3e2517244b6dfd8e1cf54539, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: 6a78f7a4320bb5f4889c39e138776a4f, type: 2}
+      - {fileID: 11400000, guid: 112fa67cd3343dc4f9e3ce2c9f31ad8c, type: 2}
+      - {fileID: 11400000, guid: 4bcfa30ac0a47b945b2c2af6d1eeab42, type: 2}
+      - {fileID: 11400000, guid: ba0e65043e4539546905c0450495135c, type: 2}
+      - {fileID: 11400000, guid: ba3bf6c1ec00e724aa46d0af91e5f011, type: 2}
+      - {fileID: 11400000, guid: 2aa4f343b2e4d0c4cab0f2de0c477c14, type: 2}
+      offhandProspects: []
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 11400000, guid: 4f71d88b58dfd4d45af2b0c3ba8f52ea, type: 2}
+      - {fileID: 11400000, guid: 78c60a0987ed615438f512b8e10ea6aa, type: 2}
+      - {fileID: 11400000, guid: 1101b12a630b9c24db59b213b57425dc, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: b120371936fc1334b927f94d3602b160, type: 2}
+      - {fileID: 11400000, guid: a1fe3290d4534334eabf9ba2ff5ab62a, type: 2}
+      - {fileID: 11400000, guid: c89d7d867b89eda42bd96838671cfe77, type: 2}
+  passiveEffectDescriptions:
+  - dotStyle: 3
+    message:
+    - color: 4
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Physical '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'damage dealt is increased by '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 5%
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: .

@@ -387,7 +387,7 @@ namespace HexGameEngine.DraftEvent
         {
             box.myCharacterData = data;
             box.NameText.text = data.myName;
-            box.ClassNameText.text = data.race.ToString() + " " + data.myClassName;
+            box.ClassNameText.text = data.race.ToString() + " " + data.mySubName;
 
             CharacterModeller.BuildModelFromStringReferences(box.MyUCM, data.modelParts);
             CharacterModeller.ApplyItemSetToCharacterModelView(data.itemSet, box.MyUCM);
@@ -400,7 +400,7 @@ namespace HexGameEngine.DraftEvent
         private void BuildRightPanelFromCharacterData(HexCharacterData character)
         {
             characterNameText.text = character.myName;
-            characterSubNameText.text = character.myClassName;
+            characterSubNameText.text = character.mySubName;
             BuildRightPanelAbilitiesSection(character);
             BuildRightPanelPerksSection(character);
             BuildRightPanelTalentsSection(character);

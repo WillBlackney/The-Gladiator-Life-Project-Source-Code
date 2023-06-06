@@ -256,7 +256,7 @@ namespace HexGameEngine.RewardSystems
 
             // text fields
             card.NameText.text = character.myName;
-            card.SubNameText.text = character.myClassName;
+            card.SubNameText.text = character.mySubName;
             card.CurrentLevelText.text = character.currentLevel.ToString();
             card.XpText.text = data.xpGained.ToString();
             card.HealthLostText.text = Mathf.Abs(data.healthLost).ToString();

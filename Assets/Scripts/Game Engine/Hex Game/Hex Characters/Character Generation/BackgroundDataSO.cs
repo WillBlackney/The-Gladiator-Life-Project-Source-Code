@@ -298,6 +298,7 @@ namespace HexGameEngine.Characters
         Inquisitor = 17,
         Militia = 18,
         Companion = 19,
+        WyrmHunter = 21,
 
 
     }

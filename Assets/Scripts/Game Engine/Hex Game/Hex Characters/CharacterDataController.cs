@@ -213,7 +213,7 @@ namespace HexGameEngine.Characters
 
             // Set up background + story data
             newCharacter.myName = template.myName;
-            newCharacter.myClassName = template.myClassName;
+            newCharacter.mySubName = template.mySubName;
             newCharacter.race = template.race;
             newCharacter.audioProfile = GetAudioProfileForRace(template.race);
             newCharacter.modelSize = template.modelSize;
@@ -319,7 +319,7 @@ namespace HexGameEngine.Characters
 
             // Set up background + story data
             newCharacter.myName = original.myName;
-            newCharacter.myClassName = original.myClassName;
+            newCharacter.mySubName = original.mySubName;
             newCharacter.race = original.race;
             newCharacter.audioProfile = original.audioProfile;
             newCharacter.background = original.background;
@@ -795,7 +795,7 @@ namespace HexGameEngine.Characters
 
             // Set up background, race and story data
             newCharacter.race = GetRandomRace(data.validRaces);
-            newCharacter.myClassName = TextLogic.SplitByCapitals(data.backgroundType.ToString());
+            newCharacter.mySubName = TextLogic.SplitByCapitals("The " + data.backgroundType.ToString());
             newCharacter.myName = GetRandomCharacterName(newCharacter.race);
             newCharacter.dailyWage = RandomGenerator.NumberBetween(newCharacter.background.dailyWageMin, newCharacter.background.dailyWageMax);
                                                

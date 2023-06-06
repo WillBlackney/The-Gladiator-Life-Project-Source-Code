@@ -13,7 +13,7 @@ namespace HexGameEngine.Characters
     {
         [Header("Story Properties")]
         public string myName;
-        public string myClassName;
+        public string mySubName;
         public CharacterRace race;
         public AudioProfileType audioProfile;
         public CharacterModelSize modelSize;

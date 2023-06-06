@@ -20,7 +20,7 @@ namespace HexGameEngine.Characters
         [BoxGroup("General Info")]
         [LabelWidth(100)]
         [GUIColor("Yellow")]
-        public string myClassName;
+        public string mySubName;
         [BoxGroup("General Info")]
         [LabelWidth(100)]
         [GUIColor("Yellow")]

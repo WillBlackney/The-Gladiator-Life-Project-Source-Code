@@ -313,7 +313,7 @@ namespace HexGameEngine.TownFeatures
 
             // Texts
             recruitRightPanelLevelText.text = character.currentLevel.ToString();
-            recruitRightPanelNameText.text = "<color=#BC8252>" + character.myName + "<color=#DDC6AB>    The " + character.myClassName;
+            recruitRightPanelNameText.text = "<color=#BC8252>" + character.myName + "<color=#DDC6AB>    The " + character.mySubName;
              string col = "<color=#DDC6AB>";
             if (PlayerDataController.Instance.CurrentGold < cost) col = TextLogic.lightRed;
             recruitRightPanelUpkeepText.text = character.dailyWage.ToString();

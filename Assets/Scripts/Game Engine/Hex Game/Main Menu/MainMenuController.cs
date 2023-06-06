@@ -231,6 +231,7 @@ namespace HexGameEngine.MainMenu
             characterBuild.attributeSheet = new AttributeSheet();
             characterBuild.PerkTree = new PerkTreeData();
             baselineAttributes.CopyValuesIntoOther(characterBuild.attributeSheet);
+            characterBuild.mySubName = "The Kid";
             characterBuild.background = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.TheKid);
             characterBuild.dailyWage = RandomGenerator.NumberBetween(characterBuild.background.dailyWageMin, characterBuild.background.dailyWageMax);
             HandleChangeClassPreset(startingClassTemplate);
@@ -351,7 +352,7 @@ namespace HexGameEngine.MainMenu
             ccsOriginPanel.SetActive(true);
 
             // Set name text
-            originPanelPresetNameText.text = currentPreset.myClassName.ToString();
+            originPanelPresetNameText.text = currentPreset.mySubName.ToString();
 
             // Reset and build ability icons
             var nonItemAbilities = characterBuild.abilityBook.GetAllKnownNonItemSetAbilities();
@@ -399,7 +400,7 @@ namespace HexGameEngine.MainMenu
         public void OnNameInputFieldValueChanged()
         {
             characterBuild.myName = characterNameInputField.text;
-            characterBuild.myClassName = "Captain";
+            characterBuild.mySubName = "The Kid";
         }
 
         #endregion
