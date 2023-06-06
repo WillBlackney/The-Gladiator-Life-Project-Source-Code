@@ -5,6 +5,7 @@ using HexGameEngine.Characters;
 using HexGameEngine.Items;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.Libraries;
+using HexGameEngine.Perks;
 using HexGameEngine.Persistency;
 using HexGameEngine.Player;
 using HexGameEngine.TownFeatures;
@@ -16,6 +17,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 namespace HexGameEngine.StoryEvents
 {
@@ -480,13 +482,58 @@ namespace HexGameEngine.StoryEvents
             {
                 // todo: determine target correctly
                 HexCharacterData target = characterTargets[0];
-
                 CharacterDataController.Instance.RemoveCharacterFromRoster(target);
-
                 string message = target.myName + " " + target.myClassName + " died.";
                 StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.Skull);
                 currentResultItems.Add(newResultItem);
+            }
+            else if (effect.effectType == StoryChoiceEffectType.GainPerk)
+            {
+                // todo: determine target correctly
+                int roll = RandomGenerator.NumberBetween(1, 100);
+                if (roll > effect.gainPerkChance) return;
 
+                int stacks = 1;
+                HexCharacterData target = characterTargets[0];
+                PerkIconData perkData = PerkController.Instance.GetPerkIconDataByTag(effect.perkGained);
+                if (perkData.isInjury) stacks = RandomGenerator.NumberBetween(perkData.minInjuryDuration, perkData.maxInjuryDuration);                
+                PerkController.Instance.ModifyPerkOnCharacterData(target.passiveManager, perkData.perkTag, stacks);
+
+                StoryEventResultItem newResultItem = new StoryEventResultItem(
+                    target.myName + " " + target.myClassName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
+                currentResultItems.Add(newResultItem);
+            }
+            else if (effect.effectType == StoryChoiceEffectType.GainPerkAll)
+            {
+                // Get targets
+                List<HexCharacterData> prospects = new List<HexCharacterData>();
+                prospects.AddRange(CharacterDataController.Instance.AllPlayerCharacters);
+                int charactersEffectedActualCount = 0;
+                int stacks = 1;
+                PerkIconData perkData = PerkController.Instance.GetPerkIconDataByTag(effect.perkGained);
+                if (perkData.isInjury) stacks = RandomGenerator.NumberBetween(perkData.minInjuryDuration, perkData.maxInjuryDuration);
+
+                for (int i = 0; i < prospects.Count; i++)
+                {
+                    int roll = RandomGenerator.NumberBetween(1, 100);
+                    if (roll > effect.gainPerkChance) continue;
+                    PerkController.Instance.ModifyPerkOnCharacterData(prospects[i].passiveManager, perkData.perkTag, stacks);
+                    charactersEffectedActualCount++;
+
+                    StoryEventResultItem newResultItem = new StoryEventResultItem(
+                    prospects[i].myName + " " + prospects[i].myClassName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
+                    currentResultItems.Add(newResultItem);
+
+                }
+
+                // Make sure atleast 1 character was affected
+                if(charactersEffectedActualCount == 0 && prospects.Count > 0)
+                {
+                    PerkController.Instance.ModifyPerkOnCharacterData(prospects[0].passiveManager, perkData.perkTag, 1);
+                    StoryEventResultItem newResultItem = new StoryEventResultItem(
+                    prospects[0].myName + " " + prospects[0].myClassName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
+                    currentResultItems.Add(newResultItem);
+                }
             }
         }
         #endregion

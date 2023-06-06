@@ -19,7 +19,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: This character's deals
+    phrase: 'This character''s deals '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

@@ -557,7 +557,7 @@ namespace HexGameEngine.Combat
                     // Apply the injury
                     if (injuryGained != null)
                     {
-                        int injuryStacks = RandomGenerator.NumberBetween(injuryGained.minInjuryDuration + 1, injuryGained.maxInjuryDuration + 1);
+                        int injuryStacks = RandomGenerator.NumberBetween(injuryGained.minInjuryDuration, injuryGained.maxInjuryDuration);
                         PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, injuryGained.perkTag, injuryStacks, true, 1f);
                         VisualEventManager.InsertTimeDelayInQueue(0.5f, character.GetLastStackEventParent());
 

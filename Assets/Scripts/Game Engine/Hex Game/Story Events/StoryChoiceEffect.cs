@@ -45,7 +45,21 @@ namespace HexGameEngine.StoryEvents
         [LabelWidth(100)]
         public int goldGained;
 
+        [Header("Perk Settings")]
+        [ShowIf("ShowPerkGained")]
+        [LabelWidth(100)]
+        public Perk perkGained;
+
+        [ShowIf("ShowPerkGained")]
+        [LabelWidth(100)]
+        [Range(0, 100)]
+        public int gainPerkChance = 100;
+
         #region Odin Show Ifs  
+        public bool ShowPerkGained()
+        {
+            return effectType == StoryChoiceEffectType.GainPerk || effectType == StoryChoiceEffectType.GainPerkAll;
+        }
         public bool ShowGoldGained()
         {
             return effectType == StoryChoiceEffectType.GainGold;

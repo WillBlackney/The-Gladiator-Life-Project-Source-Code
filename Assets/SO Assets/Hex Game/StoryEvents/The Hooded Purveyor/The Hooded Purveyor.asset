@@ -16,9 +16,5 @@ MonoBehaviour:
   excludeFromGame: 0
   firstPage: {fileID: 11400000, guid: e9e2085d0de633743b32116dde52e396, type: 2}
   onStartEffects: []
-  requirements:
-  - reqType: 3
-    requiredCharactersInRosterCount: 0
-    includeTheKid: 0
-    goldRequired: 500
+  requirements: []
   characterRequirements: []

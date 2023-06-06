@@ -55,5 +55,7 @@ namespace HexGameEngine.StoryEvents
         GainItem = 8,
         AddRecruitsToTavern = 6,
         CharacterKilled = 7,
+        GainPerk = 10,
+        GainPerkAll = 11,
     }
 }

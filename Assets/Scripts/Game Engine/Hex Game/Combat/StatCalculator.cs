@@ -110,6 +110,9 @@ namespace HexGameEngine
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrippledShoulder))
                     mod -= 0.3f;
+
+                if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sick))
+                    mod -= 0.25f;
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Polymath))
@@ -217,6 +220,9 @@ namespace HexGameEngine
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CompromisedLiver))
                     mod -= 0.3f;
+
+                if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sick))
+                    mod -= 0.25f;
             }
 
             // Items
@@ -652,6 +658,9 @@ namespace HexGameEngine
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeeplyDisturbed))
                     mod -= 0.5f;
+
+                if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sick))
+                    mod -= 0.25f;
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Cowardly))
@@ -757,6 +766,9 @@ namespace HexGameEngine
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingNose))
                     mod -= 0.5f;
+
+                if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sick))
+                    mod -= 0.25f;
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Indecisive))
@@ -875,6 +887,9 @@ namespace HexGameEngine
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedGuts))
                     mod -= 0.4f;
+
+                if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sick))
+                    mod -= 0.25f;
             }
 
             // Items

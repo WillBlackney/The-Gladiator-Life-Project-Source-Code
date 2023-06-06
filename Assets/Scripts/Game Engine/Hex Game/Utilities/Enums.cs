@@ -545,6 +545,7 @@ namespace HexGameEngine
         ShieldWall = 12,
         SpearWall = 202,
         ShortSighted = 105,
+        Sick = 213,
         Slippery = 56,
         Sloppy = 100,
         Slow = 90,
