@@ -20,7 +20,7 @@ namespace HexGameEngine.Persistency
         #region
         private const string SAVE_DIRECTORY = "/SaveFile.json";
         private const string TEST_SAVE_DIRECTORY = "/TestSaveFile.json";
-        public string GetSaveFileDirectory()
+        private string GetSaveFileDirectory()
         {
             if (GlobalSettings.Instance == null)
                 return Application.persistentDataPath + SAVE_DIRECTORY;

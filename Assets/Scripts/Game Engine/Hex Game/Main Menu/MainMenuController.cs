@@ -231,7 +231,7 @@ namespace HexGameEngine.MainMenu
             characterBuild.attributeSheet = new AttributeSheet();
             characterBuild.PerkTree = new PerkTreeData();
             baselineAttributes.CopyValuesIntoOther(characterBuild.attributeSheet);
-            characterBuild.background = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.Companion);
+            characterBuild.background = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.TheKid);
             characterBuild.dailyWage = RandomGenerator.NumberBetween(characterBuild.background.dailyWageMin, characterBuild.background.dailyWageMax);
             HandleChangeClassPreset(startingClassTemplate);
 
@@ -1323,7 +1323,7 @@ namespace HexGameEngine.MainMenu
             originPanelRacialIcon.BuildFromRacialData(currentCustomCharacterRace);
 
             // Build racial texts
-            originPanelRacialDescriptionText.text = currentCustomCharacterRace.loreDescription;
+            //originPanelRacialDescriptionText.text = currentCustomCharacterRace.loreDescription;
             originPanelRacialNameText.text = currentCustomCharacterRace.racialTag.ToString();
 
             // Rebuild UCM as default model of race

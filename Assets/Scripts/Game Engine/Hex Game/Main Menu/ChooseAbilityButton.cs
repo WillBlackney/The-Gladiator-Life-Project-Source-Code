@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace HexGameEngine.UI
 {
@@ -65,6 +66,24 @@ namespace HexGameEngine.UI
             MainMenuController.Instance.UpdateChosenAbilitiesText();
 
 
+        }
+
+        public void MouseEnter()
+        {
+            if (abilityIcon.MyDataRef != null)
+            {
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(abilityIcon.MyDataRef.keyWords);
+                AbilityPopupController.Instance.OnRosterAbilityButtonMousedOver(abilityIcon);
+            }
+        }
+
+        public void MouseExit()
+        {
+            if (abilityIcon.MyDataRef != null)
+            {
+                KeyWordLayoutController.Instance.FadeOutMainView();
+                AbilityPopupController.Instance.OnAbilityButtonMousedExit();
+            }
         }
         #endregion
     }

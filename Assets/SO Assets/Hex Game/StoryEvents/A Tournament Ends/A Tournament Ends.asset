@@ -21,9 +21,23 @@ MonoBehaviour:
     boonGained: 2
     backgroundAddedToTavern: 0
     totalCharactersAddedToTavern: 0
+    itemGained: {fileID: 0}
+    goldGained: 0
+    perkGained: 0
+    gainPerkChance: 100
   - effectType: 6
     pageToLoad: {fileID: 0}
     boonGained: 0
     backgroundAddedToTavern: 13
     totalCharactersAddedToTavern: 2
-  requirements: []
+    itemGained: {fileID: 0}
+    goldGained: 0
+    perkGained: 0
+    gainPerkChance: 100
+  requirements:
+  - reqType: 5
+    requiredCharactersInRosterCount: 0
+    includeTheKid: 0
+    goldRequired: 0
+    requiredBoon: 3
+  characterRequirements: []

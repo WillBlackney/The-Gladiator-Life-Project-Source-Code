@@ -86,6 +86,7 @@ namespace HexGameEngine.UI
                 PlacePanelAboveAbilityIcon(b);
             else PlacePanelWestOfAbilityIcon(b);
         }
+       
         public void OnAbilityBookItemMousedOver(InventoryItemView item)
         {
             FadeInPanel();

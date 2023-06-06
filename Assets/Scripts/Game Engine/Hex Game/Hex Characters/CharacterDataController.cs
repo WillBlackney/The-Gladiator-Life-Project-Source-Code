@@ -1077,6 +1077,12 @@ namespace HexGameEngine.Characters
                 cost = (int) (cost * 0.5f);
             }
 
+            if (character.background.backgroundType == CharacterBackground.Inquisitor &&
+               BoonController.Instance.DoesPlayerHaveBoon(BoonTag.UnemployedInquisitors))
+            {
+                cost = (int)(cost * 0.5f);
+            }
+
             // round to the nearest 10 gold
             cost = Mathf.RoundToInt(cost / 10) * 10;
             return cost;

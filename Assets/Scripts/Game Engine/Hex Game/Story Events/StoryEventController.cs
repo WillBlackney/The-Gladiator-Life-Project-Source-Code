@@ -315,6 +315,14 @@ namespace HexGameEngine.StoryEvents
             {
                 ret = PlayerDataController.Instance.CurrentGold >= requirement.goldRequired;
             }
+            else if (requirement.reqType == StoryEventRequirementType.HasBoon)
+            {
+                ret = BoonController.Instance.DoesPlayerHaveBoon(requirement.requiredBoon);
+            }
+            else if (requirement.reqType == StoryEventRequirementType.DoesNotHaveBoon)
+            {
+                ret = !BoonController.Instance.DoesPlayerHaveBoon(requirement.requiredBoon);
+            }
             return ret;
         }
         private bool TheKidIsAlive()
@@ -323,7 +331,7 @@ namespace HexGameEngine.StoryEvents
 
             foreach (HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
             {
-                if (character.background.backgroundType == CharacterBackground.Companion)
+                if (character.background.backgroundType == CharacterBackground.TheKid)
                 {
                     ret = true;
                     break;

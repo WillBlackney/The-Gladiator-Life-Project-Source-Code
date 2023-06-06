@@ -200,8 +200,17 @@ namespace HexGameEngine.TownFeatures
                     currentRecruits.Insert(0, newCharacter);
                 }
             }
+            if (BoonController.Instance.DoesPlayerHaveBoon(BoonTag.UnemployedInquisitors))
+            {
+                BackgroundData bgData = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.Inquisitor);
+                for (int i = 0; i < 2; i++)
+                {
+                    HexCharacterData newCharacter = CharacterDataController.Instance.GenerateRecruitCharacter(bgData);
+                    currentRecruits.Insert(0, newCharacter);
+                }
+            }
 
-           
+
         }
         private void HandleAddNewRecruitFromCharacterDeck()
         {

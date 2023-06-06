@@ -1,3 +1,4 @@
+using HexGameEngine.Boons;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ namespace HexGameEngine.StoryEvents
     [System.Serializable]
     public class StoryEventRequirement
     {
+        [LabelWidth(100)]
         public StoryEventRequirementType reqType;
 
         [Space(10)]
@@ -25,7 +27,16 @@ namespace HexGameEngine.StoryEvents
         [LabelWidth(100)]
         public int goldRequired;
 
+        [ShowIf("ShowRequiredBoon")]
+        [LabelWidth(100)]
+        public BoonTag requiredBoon;
+
         #region Odin Showifs
+        public bool ShowRequiredBoon()
+        {
+            return reqType == StoryEventRequirementType.HasBoon ||
+                reqType == StoryEventRequirementType.DoesNotHaveBoon;
+        }
         public bool ShowGoldRequired()
         {
             return reqType == StoryEventRequirementType.HasXorLessGold ||
@@ -51,5 +62,7 @@ namespace HexGameEngine.StoryEvents
         XorLessCharactersInRoster = 2,
         HasXorMoreGold = 3,
         HasXorLessGold = 4,
+        DoesNotHaveBoon = 5,
+        HasBoon = 6,
     }
 }

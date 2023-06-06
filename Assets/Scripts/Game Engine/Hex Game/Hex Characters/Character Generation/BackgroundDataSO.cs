@@ -278,6 +278,7 @@ namespace HexGameEngine.Characters
     public enum CharacterBackground
     {
         None = 0,
+        TheKid = 20,
         Gladiator = 1,
         Farmer = 2,
         Lumberjack = 3,

@@ -70,6 +70,7 @@ namespace HexGameEngine.Boons
         None = 0,
         ArmourSurplus = 1,
         UnemployedKnights = 2,
+        UnemployedInquisitors = 3,
 
     }
 
