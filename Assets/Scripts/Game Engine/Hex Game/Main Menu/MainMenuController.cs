@@ -16,6 +16,7 @@ using HexGameEngine.UCM;
 using HexGameEngine.Abilities;
 using HexGameEngine.Items;
 using HexGameEngine.Perks;
+using Sirenix.Utilities;
 
 namespace HexGameEngine.MainMenu
 {
@@ -110,6 +111,16 @@ namespace HexGameEngine.MainMenu
         [SerializeField] private CustomItemIcon mainHandItemIcon;
         [SerializeField] private CustomItemIcon offHandItemIcon;
 
+        [Space(20)]
+        [Header("Character Validty Components")]
+        [SerializeField] GameObject validityModalParent;
+        [SerializeField] GameObject[] reasonRows;
+        [SerializeField] GameObject invalidNameRow;
+        [SerializeField] GameObject unusedPerkRow;
+        [SerializeField] GameObject unusedTalentsRow;
+        [SerializeField] GameObject unusedAbilitiesRow;
+        [SerializeField] GameObject unusedAttributesRow;
+
         // Non inspector proerties
         private HexCharacterData characterBuild;
         private HexCharacterData currentPreset;
@@ -133,14 +144,49 @@ namespace HexGameEngine.MainMenu
         }
         #endregion
 
+        // Custom Character Validity Logic
+        #region
+        private void BuildAndShowValidityModal(List<string> validationErrors)
+        {
+            validityModalParent.SetActive(true);
+            reasonRows.ForEach(i => i.gameObject.SetActive(false));
+            if (validationErrors.Contains("Name")) invalidNameRow.SetActive(true);
+            if (validationErrors.Contains("Perk")) unusedPerkRow.SetActive(true);
+            if (validationErrors.Contains("Talents")) unusedTalentsRow.SetActive(true);
+            if (validationErrors.Contains("Abilities")) unusedAbilitiesRow.SetActive(true);
+            if (validationErrors.Contains("Attributes")) unusedAttributesRow.SetActive(true);
+        }
+        private void HideValidityModal()
+        {
+            validityModalParent.SetActive(false);
+        }
+        public void OnValidityModalBackButtonClicked()
+        {
+            HideValidityModal();
+        }
+        private List<string> GetValidationErrors()
+        {
+            List<string> validationErrors = new List<string>();
+            if (characterNameInputField.text.Length < 2) validationErrors.Add("Name");
+            if (availableChoosePerkPoints > 0) validationErrors.Add("Perk");
+            if (characterBuild.talentPairings.Count < 2) validationErrors.Add("Talents");
+            if (characterBuild.abilityBook.GetAllKnownNonItemSetAbilities().Count < 3) validationErrors.Add("Abilities");
+            if (GetTotalAttributePointsSpent() < maxAllowedAttributePoints) validationErrors.Add("Attributes");
+            return validationErrors;
+        }
+        #endregion
+
         // On Button Click Events
         #region
+
         public void OnStartGameButtonClicked()
         {
             // TO DO: validate selections
+            var errors = GetValidationErrors();
 
             // Start process
-            GameController.Instance.HandleStartNewGameFromMainMenuEvent();
+            if (errors.Count == 0) GameController.Instance.HandleStartNewGameFromMainMenuEvent();
+            else BuildAndShowValidityModal(errors);
         }
         public void OnBackToMainMenuButtonClicked()
         {
@@ -352,7 +398,7 @@ namespace HexGameEngine.MainMenu
             ccsOriginPanel.SetActive(true);
 
             // Set name text
-            originPanelPresetNameText.text = currentPreset.mySubName.ToString();
+            originPanelPresetNameText.text = currentPreset.myName.ToString();
 
             // Reset and build ability icons
             var nonItemAbilities = characterBuild.abilityBook.GetAllKnownNonItemSetAbilities();
@@ -1126,9 +1172,7 @@ namespace HexGameEngine.MainMenu
         // Custom Character Screen Logic : Choose Abilities Sub Screeb
         #region
         public void OnAbilitySectionEditButtonClicked()
-        {
-            CloseAllCustomCharacterScreenPanels();
-            ccsAbilityPanel.SetActive(true);
+        {           
             BuildChooseAbilitiesPanel();
             TransformUtils.RebuildLayouts(chooseAbilityPanelLayouts);
         }
@@ -1150,6 +1194,10 @@ namespace HexGameEngine.MainMenu
         }       
         private void BuildChooseAbilitiesPanel()
         {
+            if (characterBuild.talentPairings.Count == 0) return;
+
+            CloseAllCustomCharacterScreenPanels();
+            ccsAbilityPanel.SetActive(true);
             TalentSchool talentSchoolOne = characterBuild.talentPairings[0].talentSchool;
             chooseAbilityButtonsHeaderTextOne.text = talentSchoolOne.ToString() + " Abilities";
             List<AbilityData> allTalentOneAbilities = AbilityController.Instance.GetAllAbilitiesOfTalent(talentSchoolOne);
@@ -1179,6 +1227,7 @@ namespace HexGameEngine.MainMenu
             if(characterBuild.talentPairings.Count > 1)
             {
                 TalentSchool talentSchoolTwo = characterBuild.talentPairings[1].talentSchool;
+                chooseAbilityButtonsHeaderTextTwo.gameObject.SetActive(true);
                 chooseAbilityButtonsHeaderTextTwo.text = talentSchoolTwo.ToString() + " Abilities";
                 List<AbilityData> allTalentTwoAbilities = AbilityController.Instance.GetAllAbilitiesOfTalent(talentSchoolTwo);
 
@@ -1202,6 +1251,13 @@ namespace HexGameEngine.MainMenu
                         }
                     }
                 }
+            }
+            else
+            {
+                // Reset all 
+                chooseAbilityButtonsHeaderTextTwo.gameObject.SetActive(false);
+                for (int i = 0; i < chooseAbilityButtonsSectionTwo.Length; i++)
+                    chooseAbilityButtonsSectionTwo[i].ResetAndHide();
             }
 
             UpdateChosenAbilitiesText();
