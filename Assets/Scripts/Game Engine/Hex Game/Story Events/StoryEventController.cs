@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 namespace HexGameEngine.StoryEvents
 {
@@ -67,7 +66,8 @@ namespace HexGameEngine.StoryEvents
 
         private const string CHARACTER_1_NAME_KEY = "{CHARACTER_1_NAME}";
         private const string CHARACTER_1_SUB_NAME_KEY = "{CHARACTER_1_SUB_NAME}";
-
+        private const string CHARACTER_2_NAME_KEY = "{CHARACTER_2_NAME}";
+        private const string CHARACTER_2_SUB_NAME_KEY = "{CHARACTER_2_SUB_NAME}";
         #endregion
 
         #region Getters + Accessors
@@ -221,11 +221,16 @@ namespace HexGameEngine.StoryEvents
         public string GetDynamicValueString(string original)
         {
             string ret = original;
-            if(characterTargets.Count > 1)
+            if(characterTargets.Count >= 1)
             {
                 ret = original.Replace(CHARACTER_1_NAME_KEY, characterTargets[0].myName);
                 ret = ret.Replace(CHARACTER_1_SUB_NAME_KEY, characterTargets[0].mySubName);
-            }           
+            }
+            if (characterTargets.Count >= 2)
+            {
+                ret = ret.Replace(CHARACTER_2_NAME_KEY, characterTargets[1].myName);
+                ret = ret.Replace(CHARACTER_2_SUB_NAME_KEY, characterTargets[1].mySubName);
+            }
             return ret;
         }
 
@@ -447,14 +452,14 @@ namespace HexGameEngine.StoryEvents
             {
                 PlayerDataController.Instance.ModifyPlayerGold(effect.goldGained);
                 StoryEventResultItem newResultItem = new StoryEventResultItem("Gained " + TextLogic.ReturnColoredText
-                    (effect.goldGained.ToString(), TextLogic.blueNumber) +" gold.", ResultRowIcon.GoldCoins);
+                    (effect.goldGained.ToString(), TextLogic.blueNumber) + " " + TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow) + ".", ResultRowIcon.GoldCoins);
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.LoseGold)
             {
                 PlayerDataController.Instance.ModifyPlayerGold(-effect.goldLost);
                 StoryEventResultItem newResultItem = new StoryEventResultItem("Lost " + TextLogic.ReturnColoredText
-                    (effect.goldLost.ToString(), TextLogic.blueNumber) + " gold.", ResultRowIcon.GoldCoins);
+                    (effect.goldLost.ToString(), TextLogic.blueNumber) + " " + TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow) + ".", ResultRowIcon.GoldCoins);
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.LoseAllGold)
@@ -462,14 +467,14 @@ namespace HexGameEngine.StoryEvents
                 int goldLost = PlayerDataController.Instance.CurrentGold;
                 PlayerDataController.Instance.ModifyPlayerGold(-PlayerDataController.Instance.CurrentGold);
                 StoryEventResultItem newResultItem = new StoryEventResultItem("Lost " + TextLogic.ReturnColoredText
-                    (goldLost.ToString(), TextLogic.blueNumber) + " gold.", ResultRowIcon.GoldCoins);
+                    (goldLost.ToString(), TextLogic.blueNumber) + " " + TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow) + ".", ResultRowIcon.GoldCoins);
                 currentResultItems.Add(newResultItem);
             }
             else if(effect.effectType == StoryChoiceEffectType.GainBoon)
             {
                 BoonData boonGained = new BoonData(BoonController.Instance.GetBoonDataByTag(effect.boonGained));
                 BoonController.Instance.HandleGainBoon(boonGained);
-                StoryEventResultItem newResultItem = new StoryEventResultItem("Gained boon: " + boonGained.boonDisplayName, ResultRowIcon.FramedSprite, boonGained.BoonSprite);
+                StoryEventResultItem newResultItem = new StoryEventResultItem("Gained boon: " + TextLogic.ReturnColoredText(boonGained.boonDisplayName, TextLogic.neutralYellow) + ".", ResultRowIcon.FramedSprite, boonGained.BoonSprite);
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.GainItem)
@@ -478,7 +483,7 @@ namespace HexGameEngine.StoryEvents
                 ItemData item = ic.GenerateNewItemWithRandomEffects(ic.GetItemDataByName(effect.itemGained.itemName));
                 InventoryController.Instance.AddItemToInventory(item);
 
-                StoryEventResultItem newResultItem = new StoryEventResultItem("Gained item: " + item.itemName, ResultRowIcon.FramedSprite, item.ItemSprite);
+                StoryEventResultItem newResultItem = new StoryEventResultItem("Gained item: " + TextLogic.ReturnColoredText(item.itemName, TextLogic.neutralYellow) +".", ResultRowIcon.FramedSprite, item.ItemSprite);
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.AddRecruitsToTavern)
@@ -496,26 +501,60 @@ namespace HexGameEngine.StoryEvents
             else if(effect.effectType == StoryChoiceEffectType.CharacterKilled)
             {
                 // todo: determine target correctly
-                HexCharacterData target = characterTargets[0];
+                HexCharacterData target = characterTargets[effect.characterTargetIndex];
                 CharacterDataController.Instance.RemoveCharacterFromRoster(target);
-                string message = target.myName + " " + target.mySubName + " died.";
+                string message = target.myName + " " + target.mySubName + " has died.";
                 StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.Skull);
+                currentResultItems.Add(newResultItem);
+            }
+            else if (effect.effectType == StoryChoiceEffectType.GainExperience)
+            {
+                HexCharacterData target = characterTargets[effect.characterTargetIndex];
+                int xpGainedActual = CharacterDataController.Instance.HandleGainXP(target, effect.experienceGained, true);
+                StoryEventResultItem newResultItem = new StoryEventResultItem(
+                    target.myName + " " + target.mySubName + " gained " + 
+                    TextLogic.ReturnColoredText(xpGainedActual.ToString(), TextLogic.blueNumber) + " " + TextLogic.ReturnColoredText("Experience", TextLogic.neutralYellow) + ".", ResultRowIcon.Star);
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.GainPerk)
             {
-                // todo: determine target correctly
                 int roll = RandomGenerator.NumberBetween(1, 100);
                 if (roll > effect.gainPerkChance) return;
 
                 int stacks = 1;
-                HexCharacterData target = characterTargets[0];
+                HexCharacterData target = characterTargets[effect.characterTargetIndex];
                 PerkIconData perkData = PerkController.Instance.GetPerkIconDataByTag(effect.perkGained);
                 if (perkData.isInjury) stacks = RandomGenerator.NumberBetween(perkData.minInjuryDuration, perkData.maxInjuryDuration);                
                 PerkController.Instance.ModifyPerkOnCharacterData(target.passiveManager, perkData.perkTag, stacks);
 
                 StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    target.myName + " " + target.mySubName + " gained passive: " + perkData.passiveName + ".", ResultRowIcon.FramedSprite, perkData.passiveSprite);
+                    target.myName + " " + target.mySubName + " gained passive: " + TextLogic.ReturnColoredText(perkData.passiveName, TextLogic.neutralYellow) + ".", ResultRowIcon.FramedSprite, perkData.passiveSprite);
+                currentResultItems.Add(newResultItem);
+            }
+            else if (effect.effectType == StoryChoiceEffectType.GainRandomInjury)
+            {
+                int roll = RandomGenerator.NumberBetween(1, 100);
+                if (roll > effect.gainPerkChance) return;
+
+                HexCharacterData target = characterTargets[effect.characterTargetIndex];
+                PerkIconData injuryData = PerkController.Instance.GetRandomValidInjury(target.passiveManager, effect.injurySeverity, effect.injuryType);
+
+                int injuryStacks = RandomGenerator.NumberBetween(injuryData.minInjuryDuration, injuryData.maxInjuryDuration);
+                PerkController.Instance.ModifyPerkOnCharacterData(target.passiveManager, injuryData.perkTag, injuryStacks);
+
+                StoryEventResultItem newResultItem = new StoryEventResultItem(
+                    target.myName + " " + target.mySubName + " gained injury: " + TextLogic.ReturnColoredText(injuryData.passiveName, TextLogic.neutralYellow) + ".", ResultRowIcon.FramedSprite, injuryData.passiveSprite);
+                currentResultItems.Add(newResultItem);
+            }
+            else if (effect.effectType == StoryChoiceEffectType.LoseHealth)
+            {
+                HexCharacterData target = characterTargets[effect.characterTargetIndex];
+                float healthLostFlatFloat = target.currentHealth * effect.healthLostPercentage;
+                int healthLostFlatInt = (int) healthLostFlatFloat;
+                CharacterDataController.Instance.SetCharacterHealth(target, target.currentHealth - healthLostFlatInt);
+                StoryEventResultItem newResultItem = new StoryEventResultItem(
+                    target.myName + " " + target.mySubName + " lost " + TextLogic.ReturnColoredText(healthLostFlatInt.ToString(), TextLogic.blueNumber)
+                    + " " + TextLogic.ReturnColoredText("Health", TextLogic.neutralYellow) + ".", ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetAttributeSprite(CoreAttribute.Constitution));
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.GainPerkAll)
@@ -550,12 +589,52 @@ namespace HexGameEngine.StoryEvents
                     currentResultItems.Add(newResultItem);
                 }
             }
+            else if (effect.effectType == StoryChoiceEffectType.RecoverStressAll)
+            {
+                // Get targets
+                List<HexCharacterData> prospects = new List<HexCharacterData>();
+                prospects.AddRange(CharacterDataController.Instance.AllPlayerCharacters);
+
+                for (int i = 0; i < prospects.Count; i++)
+                {
+                    int roll = RandomGenerator.NumberBetween(1, 100);
+                    if (roll > effect.stressRecoveryChance) continue;
+
+                    int stressRecovered = RandomGenerator.NumberBetween(effect.stressRecoveredMin, effect.stressRecoveredMax);
+                    CharacterDataController.Instance.SetCharacterStress(prospects[i], prospects[i].currentStress - stressRecovered);
+
+                    StoryEventResultItem newResultItem = new StoryEventResultItem(
+                    prospects[i].myName + " " + prospects[i].mySubName + " reduced " + TextLogic.ReturnColoredText("Stress", TextLogic.neutralYellow) + " by " + 
+                    TextLogic.ReturnColoredText(stressRecovered.ToString(), TextLogic.blueNumber), ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetStressStateSprite(StressState.Confident));
+                    currentResultItems.Add(newResultItem);
+                }
+            }
+            else if (effect.effectType == StoryChoiceEffectType.GainStressAll)
+            {
+                // Get targets
+                List<HexCharacterData> prospects = new List<HexCharacterData>();
+                prospects.AddRange(CharacterDataController.Instance.AllPlayerCharacters);
+
+                for (int i = 0; i < prospects.Count; i++)
+                {
+                    int roll = RandomGenerator.NumberBetween(1, 100);
+                    if (roll > effect.stressRecoveryChance) continue;
+
+                    int stressGained = RandomGenerator.NumberBetween(effect.stressRecoveredMin, effect.stressRecoveredMax);
+                    CharacterDataController.Instance.SetCharacterStress(prospects[i], prospects[i].currentStress + stressGained);
+
+                    StoryEventResultItem newResultItem = new StoryEventResultItem(
+                    prospects[i].myName + " " + prospects[i].mySubName + " increased " + TextLogic.ReturnColoredText("Stress", TextLogic.neutralYellow) + " by " +
+                    TextLogic.ReturnColoredText(stressGained.ToString(), TextLogic.blueNumber), ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetStressStateSprite(StressState.Nervous));
+                    currentResultItems.Add(newResultItem);
+                }
+            }
             else if(effect.effectType == StoryChoiceEffectType.CharacterJoinsRoster)
             {
                 HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(effect.characterJoining);
                 CharacterDataController.Instance.AddCharacterToRoster(character);                
-                string message = character.myName + " " + character.mySubName + " joins.";
-                StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.Skull);
+                string message = character.myName + " " + character.mySubName + " joined the company.";
+                StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.Star);
                 currentResultItems.Add(newResultItem);
             }
         }
@@ -591,6 +670,11 @@ namespace HexGameEngine.StoryEvents
             if (validProspects.Count > 1) ret = validProspects[RandomGenerator.NumberBetween(0, validProspects.Count - 1)];            
             else if (validProspects.Count == 1) ret = validProspects[0];
 
+            for(int i = 0; i < validProspects.Count; i++)
+            {
+                Debug.Log("TryFindSuitableCharacterTarget() propective target " + (i + 1).ToString() + ": " + validProspects[i].myName + " " + validProspects[i].mySubName);
+            }
+
             return ret;
         }
         private void DetermineAndCacheCharacterTargetsOnEventStart(StoryEventDataSO storyEvent)
@@ -610,7 +694,10 @@ namespace HexGameEngine.StoryEvents
                 if (characterTargets.Count == requiredCharacters) break;
             }
 
-
+            for (int i = 0; i < characterTargets.Count; i++)
+            {
+                Debug.Log("DetermineAndCacheCharacterTargetsOnEventStart() selected target " + (i + 1).ToString() + ": " + characterTargets[i].myName + " " + characterTargets[i].mySubName);
+            }
         }
         #endregion
 

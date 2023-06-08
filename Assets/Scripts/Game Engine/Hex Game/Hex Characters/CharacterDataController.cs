@@ -403,11 +403,11 @@ namespace HexGameEngine.Characters
             data.currentStress = newValue;
 
             // prevent stress exceeding limits
-            if (data.currentStress > 100)
-                data.currentStress = 100;
+            if (data.currentStress > 20)
+                data.currentStress = 20;
             // Zealots can never reach shattered stress state
             if (DoesCharacterHaveBackground(data.background, CharacterBackground.Zealot) &&
-                data.currentStress > 99) data.currentStress = 99;
+                data.currentStress > 19) data.currentStress = 19;
             else if (data.currentStress < 0)
                 data.currentStress = 0;
         }
@@ -686,12 +686,14 @@ namespace HexGameEngine.Characters
         {
             data.currentLevel = newLevelValue;
         }
-        public void HandleGainXP(HexCharacterData data, int xpGained, bool applyXpMods = true)
+        public int HandleGainXP(HexCharacterData data, int xpGained, bool applyXpMods = true)
         {
+            int ret = 0;
             float xpGainMod = 1f;
             if(applyXpMods) xpGainMod = StatCalculator.GetCharacterXpGainRate(data);        
 
             xpGained = (int)(xpGained * xpGainMod);
+            ret = xpGained;
 
             // check spill over + level up first
             int spillOver = (data.currentXP + xpGained) - data.currentMaxXP;
@@ -719,6 +721,8 @@ namespace HexGameEngine.Characters
             {
                 data.currentXP += xpGained;
             }
+
+            return ret;
         }
         private void HandleLevelUp(HexCharacterData data)
         {
@@ -796,7 +800,7 @@ namespace HexGameEngine.Characters
 
             // Set up background, race and story data
             newCharacter.race = GetRandomRace(data.validRaces);
-            newCharacter.mySubName = TextLogic.SplitByCapitals("The " + data.backgroundType.ToString());
+            newCharacter.mySubName = "The " + TextLogic.SplitByCapitals(data.backgroundType.ToString());
             newCharacter.myName = GetRandomCharacterName(newCharacter.race);
             newCharacter.dailyWage = RandomGenerator.NumberBetween(newCharacter.background.dailyWageMin, newCharacter.background.dailyWageMax);
                                                

@@ -43,21 +43,5 @@ namespace HexGameEngine.StoryEvents
         GoldAmount = 4,
         TalentLevel = 5,
         Race = 6,
-    }
-    public enum StoryChoiceEffectType
-    {
-        None = 0,
-        LoadPage = 1,
-        FinishEvent = 2,
-        GainGold = 3,
-        LoseGold = 12,
-        LoseAllGold = 9,
-        GainBoon = 4,
-        GainItem = 8,
-        AddRecruitsToTavern = 6,
-        CharacterKilled = 7,
-        GainPerk = 10,
-        GainPerkAll = 11,
-        CharacterJoinsRoster = 13,
-    }
+    }   
 }

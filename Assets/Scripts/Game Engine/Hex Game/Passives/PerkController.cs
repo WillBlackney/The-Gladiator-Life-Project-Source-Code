@@ -794,8 +794,8 @@ namespace HexGameEngine.Perks
             foreach (PerkIconData d in allPerks)
             {
                 if (d.isInjury &&
-                    d.severity == severity &&
-                    d.injuryType == injuryType &&
+                    (d.severity == severity || severity == InjurySeverity.None) &&
+                    (d.injuryType == injuryType || injuryType == InjuryType.None) &&
                     !DoesCharacterHavePerk(character, d.perkTag))
                 {
                     matchingInjuries.Add(d);

@@ -48,6 +48,11 @@ namespace HexGameEngine.StoryEvents
                 unframedIconImage.gameObject.SetActive(true);
                 unframedIconImage.sprite = skull;
             }
+            else if (data.iconType == ResultRowIcon.Star)
+            {
+                unframedIconImage.gameObject.SetActive(true);
+                unframedIconImage.sprite = star;
+            }
             else if (data.iconType == ResultRowIcon.GoldCoins)
             {
                 unframedIconImage.gameObject.SetActive(true);

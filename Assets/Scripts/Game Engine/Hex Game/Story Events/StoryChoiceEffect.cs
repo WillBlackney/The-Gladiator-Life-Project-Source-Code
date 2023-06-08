@@ -13,18 +13,26 @@ namespace HexGameEngine.StoryEvents
     {
         // General Fields
         [Header("General Settings")]
-        [LabelWidth(100)]
+        [LabelWidth(150)]
         public StoryChoiceEffectType effectType;
+        [Space(10)]
+
+        [Header("Target Settings")]
+        [ShowIf("ShowCharacterTargetIndex")]
+        [LabelWidth(150)]
+        [Range(0, 9)]
+        public int characterTargetIndex = 0;
+        [Space(10)]
 
         // Load page fields
         [ShowIf("ShowPageToLoad")]
         [Header("Page Settings")]
-        [LabelWidth(100)]
+        [LabelWidth(150)]
         public StoryEventPageSO pageToLoad;
 
         [ShowIf("ShowBoonTag")]
         [Header("Boon Settings")]
-        [LabelWidth(100)]
+        [LabelWidth(150)]
         public BoonTag boonGained;
 
         [ShowIf("ShowRecruitFields")]
@@ -38,32 +46,92 @@ namespace HexGameEngine.StoryEvents
         public int totalCharactersAddedToTavern;
 
         [ShowIf("ShowItemGained")]
-        [LabelWidth(100)]
+        [LabelWidth(150)]
         public ItemDataSO itemGained;
 
         [ShowIf("ShowGoldGained")]
-        [LabelWidth(100)]
+        [LabelWidth(150)]
         public int goldGained;
 
         [ShowIf("ShowGoldLost")]
-        [LabelWidth(100)]
+        [LabelWidth(150)]
         public int goldLost;
 
         [Header("Perk Settings")]
         [ShowIf("ShowPerkGained")]
-        [LabelWidth(100)]
+        [LabelWidth(150)]
         public Perk perkGained;
 
-        [ShowIf("ShowPerkGained")]
-        [LabelWidth(100)]
+        [ShowIf("ShowPerkGainedChance")]
+        [LabelWidth(150)]
         [Range(0, 100)]
         public int gainPerkChance = 100;
 
+        [Header("Injury Settings")]
+        [ShowIf("ShowInjurySeverity")]
+        [LabelWidth(150)]
+        public InjurySeverity injurySeverity = InjurySeverity.None;
+
+        [ShowIf("ShowInjuryType")]
+        [LabelWidth(150)]
+        public InjuryType injuryType = InjuryType.None;
+
+        [ShowIf("ShowExperienceGained")]
+        [LabelWidth(150)]
+        public int experienceGained = 0;
+
         [ShowIf("ShowCharacterJoining")]
-        [LabelWidth(100)]
+        [LabelWidth(150)]
         public HexCharacterTemplateSO characterJoining;
 
+        [Header("Stress Recovery Settings")]
+        [ShowIf("ShowStressRecoverySettings")]
+        [LabelWidth(150)]
+        [Range(0, 100)]
+        public int stressRecoveryChance = 100;
+
+        [ShowIf("ShowStressRecoverySettings")]
+        [LabelWidth(150)]
+        public int stressRecoveredMin = 0;
+
+        [ShowIf("ShowStressRecoverySettings")]
+        [LabelWidth(150)]
+        public int stressRecoveredMax = 0;
+
+        [ShowIf("ShowHealthLost")]
+        [LabelWidth(150)]
+        [Range(0.01f,1f)]
+        public float healthLostPercentage = 0.5f;
+
         #region Odin Show Ifs  
+        public bool ShowHealthLost()
+        {
+            return effectType == StoryChoiceEffectType.LoseHealth;
+        }
+        public bool ShowStressRecoverySettings()
+        {
+            return effectType == StoryChoiceEffectType.RecoverStressAll || effectType == StoryChoiceEffectType.GainStressAll;
+        }
+        public bool ShowInjuryType()
+        {
+            return effectType == StoryChoiceEffectType.GainRandomInjury;
+        }
+        public bool ShowInjurySeverity()
+        {
+            return effectType == StoryChoiceEffectType.GainRandomInjury;
+        }
+        public bool ShowCharacterTargetIndex()
+        {
+            return effectType == StoryChoiceEffectType.CharacterKilled || 
+                effectType == StoryChoiceEffectType.GainPerk ||
+                effectType == StoryChoiceEffectType.GainRandomInjury ||
+                effectType == StoryChoiceEffectType.GainExperience ||
+                effectType == StoryChoiceEffectType.LoseHealth;
+        }
+        public bool ShowExperienceGained()
+        {
+            return effectType == StoryChoiceEffectType.GainExperience;
+        }
         public bool ShowCharacterJoining()  
         {
             return effectType == StoryChoiceEffectType.CharacterJoinsRoster;
@@ -74,7 +142,14 @@ namespace HexGameEngine.StoryEvents
         }
         public bool ShowPerkGained()
         {
-            return effectType == StoryChoiceEffectType.GainPerk || effectType == StoryChoiceEffectType.GainPerkAll;
+            return effectType == StoryChoiceEffectType.GainPerk ||
+                effectType == StoryChoiceEffectType.GainPerkAll;
+        }
+        public bool ShowPerkGainedChance()
+        {
+            return effectType == StoryChoiceEffectType.GainPerk ||
+                effectType == StoryChoiceEffectType.GainPerkAll ||
+                effectType == StoryChoiceEffectType.GainRandomInjury;
         }
         public bool ShowGoldGained()
         {
@@ -108,5 +183,27 @@ namespace HexGameEngine.StoryEvents
         [Range(0, 100)]
         public int upperProbability = 100;
         public StoryChoiceEffect[] effects;
+    }
+
+    public enum StoryChoiceEffectType
+    {
+        None = 0,
+        LoadPage = 1,
+        FinishEvent = 2,
+        GainGold = 3,
+        LoseGold = 12,
+        LoseAllGold = 9,
+        GainBoon = 4,
+        GainItem = 8,
+        AddRecruitsToTavern = 6,
+        CharacterKilled = 7,
+        GainPerk = 10,
+        GainPerkAll = 11,
+        CharacterJoinsRoster = 13,
+        GainExperience = 14,
+        GainRandomInjury = 15,
+        LoseHealth = 16,
+        RecoverStressAll = 17,
+        GainStressAll = 18,
     }
 }

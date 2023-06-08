@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Testing Character 2
   m_EditorClassIdentifier: 
   myName: Testy 2
-  myClassName: The Test Guy 2
+  mySubName: Test Sub Name
   race: 1
+  background: 1
   modelSize: 0
   attributeSheet:
     might:
