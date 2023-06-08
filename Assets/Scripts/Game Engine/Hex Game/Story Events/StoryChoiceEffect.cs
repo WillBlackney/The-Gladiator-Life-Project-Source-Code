@@ -103,7 +103,25 @@ namespace HexGameEngine.StoryEvents
         [Range(0.01f,1f)]
         public float healthLostPercentage = 0.5f;
 
+        [ShowIf("ShowWageIncreasePercentage")]
+        [LabelWidth(150)]
+        [Range(0.1f, 1f)]
+        public float wageIncreasePercentage = 0.1f;
+
+        [ShowIf("ShowCharacterLeaveProbability")]
+        [LabelWidth(150)]
+        [Range(0, 100)]
+        public int characterLeaveProbability = 50;
+
         #region Odin Show Ifs  
+        public bool ShowCharacterLeaveProbability()
+        {
+            return effectType == StoryChoiceEffectType.CharactersLeave;
+        }
+        public bool ShowWageIncreasePercentage()
+        {
+            return effectType == StoryChoiceEffectType.IncreaseDailyWageAll;
+        }
         public bool ShowHealthLost()
         {
             return effectType == StoryChoiceEffectType.LoseHealth;
@@ -205,5 +223,7 @@ namespace HexGameEngine.StoryEvents
         LoseHealth = 16,
         RecoverStressAll = 17,
         GainStressAll = 18,
+        IncreaseDailyWageAll = 19,
+        CharactersLeave = 20,
     }
 }

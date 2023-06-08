@@ -557,11 +557,58 @@ namespace HexGameEngine.StoryEvents
                     + " " + TextLogic.ReturnColoredText("Health", TextLogic.neutralYellow) + ".", ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetAttributeSprite(CoreAttribute.Constitution));
                 currentResultItems.Add(newResultItem);
             }
-            else if (effect.effectType == StoryChoiceEffectType.GainPerkAll)
+            else if (effect.effectType == StoryChoiceEffectType.IncreaseDailyWageAll)
+            {
+                List<HexCharacterData> characters = new List<HexCharacterData>();
+                characters.AddRange(CharacterDataController.Instance.AllPlayerCharacters);
+
+                for (int i = 0; i < characters.Count; i++)
+                {
+                    int currentWage = characters[i].dailyWage;
+                    int newWage = (int)(characters[i].dailyWage * (effect.wageIncreasePercentage + 1f));
+                    characters[i].dailyWage = newWage;
+                    StoryEventResultItem newResultItem = new StoryEventResultItem(
+                    characters[i].myName + " " + characters[i].mySubName + " daily wage increased from " + TextLogic.ReturnColoredText(currentWage.ToString(), TextLogic.blueNumber)
+                    + " to " + TextLogic.ReturnColoredText(newWage.ToString(), TextLogic.blueNumber) + ".", ResultRowIcon.GoldCoins);
+                    currentResultItems.Add(newResultItem);
+                }
+            }
+            else if (effect.effectType == StoryChoiceEffectType.CharactersLeave)
             {
                 // Get targets
                 List<HexCharacterData> prospects = new List<HexCharacterData>();
                 prospects.AddRange(CharacterDataController.Instance.AllPlayerCharacters);
+                prospects.Shuffle();
+                int charactersEffectedActualCount = 0;
+
+                for (int i = 0; i < prospects.Count; i++)
+                {
+                    int roll = RandomGenerator.NumberBetween(1, 100);
+                    if (roll > effect.characterLeaveProbability) continue;
+                    CharacterDataController.Instance.RemoveCharacterFromRoster(prospects[i]);
+
+                    StoryEventResultItem newResultItem = new StoryEventResultItem(
+                    prospects[i].myName + " " + prospects[i].mySubName + " left the company.", ResultRowIcon.Skull);
+                    currentResultItems.Add(newResultItem);
+                    charactersEffectedActualCount += 1;
+                }
+
+                // Make sure atleast 1 character was affected
+                if (charactersEffectedActualCount == 0 && prospects.Count > 0)
+                {
+                    CharacterDataController.Instance.RemoveCharacterFromRoster(prospects[0]);
+                    StoryEventResultItem newResultItem = new StoryEventResultItem(
+                    prospects[0].myName + " " + prospects[0].mySubName + " left the company.", ResultRowIcon.Skull);
+                    currentResultItems.Add(newResultItem);
+                }
+            }
+            else if (effect.effectType == StoryChoiceEffectType.GainPerkAll)
+            {
+                // Get targets
+                List<HexCharacterData> prospects = new List<HexCharacterData>();
+                prospects.AddRange(CharacterDataController.Instance.AllPlayerCharacters); 
+                prospects.Shuffle();
+
                 int charactersEffectedActualCount = 0;
                 int stacks = 1;
                 PerkIconData perkData = PerkController.Instance.GetPerkIconDataByTag(effect.perkGained);
@@ -577,7 +624,6 @@ namespace HexGameEngine.StoryEvents
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
                     prospects[i].myName + " " + prospects[i].mySubName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
                     currentResultItems.Add(newResultItem);
-
                 }
 
                 // Make sure atleast 1 character was affected
