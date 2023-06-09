@@ -19,7 +19,7 @@ MonoBehaviour:
   recruitable: 0
   spawnChance: 20
   lowerLevelLimit: 2
-  upperLevelLimit: 3
+  upperLevelLimit: 2
   dailyWageMin: 33
   dailyWageMax: 37
   baseRecruitCost: 150

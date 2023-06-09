@@ -21,5 +21,5 @@ MonoBehaviour:
     and plenty of high fives and cheers make their rounds through the comapny.'
   allChoices:
   - {fileID: 11400000, guid: 38f56ba1109bbe64e8330a10124ca38c, type: 2}
-  pageSprite: {fileID: 0}
+  pageSprite: {fileID: 21300000, guid: 464e22458ddfdc7488065520038ff98e, type: 3}
   onPageLoadEffects: []

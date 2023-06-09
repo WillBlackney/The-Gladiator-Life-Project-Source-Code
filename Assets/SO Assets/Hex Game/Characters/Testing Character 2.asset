@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fc18e607558964b9506f2b2cdb1260, type: 3}
   m_Name: Testing Character 2
   m_EditorClassIdentifier: 
-  myName: Testy 2
-  mySubName: Test Sub Name
+  myName: Test
+  mySubName: The Testy
   race: 1
   background: 1
   modelSize: 0

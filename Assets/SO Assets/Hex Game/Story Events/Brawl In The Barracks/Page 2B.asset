@@ -18,5 +18,5 @@ MonoBehaviour:
     some even mutter about you under their breath...'
   allChoices:
   - {fileID: 11400000, guid: a825bf4619b1e62438c8c30ac10d74d4, type: 2}
-  pageSprite: {fileID: 0}
+  pageSprite: {fileID: 21300000, guid: 8ef3aedbb859aea41acf2efc087b11e5, type: 3}
   onPageLoadEffects: []

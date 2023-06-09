@@ -19,13 +19,13 @@ MonoBehaviour:
     of the gold inside.
 
 
-    As {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME} pockets
-    the gold, you notice the dead guard''s steel axe lodged in the nearby tree.
+    As {CHARACTER_1_NAME} pockets the gold, you notice
+    the dead guard''s steel axe lodged in the nearby tree.
 
 
 '
   allChoices:
   - {fileID: 11400000, guid: 236b117a104695040a70f2dad248dd85, type: 2}
   - {fileID: 11400000, guid: d171899469e833244b75ac6256a643e7, type: 2}
-  pageSprite: {fileID: 0}
+  pageSprite: {fileID: 21300000, guid: a6a2f38b7fc748c418cbcad1a7ffbf8e, type: 3}
   onPageLoadEffects: []

@@ -15,27 +15,26 @@ MonoBehaviour:
   pageDescription: "Being careful not to make any noise, you point towards the axe
     in the tree and soundlessly mouth out at {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME}
     <color=#FFFFFF>\"Get, the, axe... get, the, axe...\".</color> {CHARACTER_1_NAME}
-    {CHARACTER_1_SUB_NAME} stares at you with blankly for a few moments, glances
-    over his shoulder towards where you're pointing, then looks back at you with
-    the same glazed look of stupidity. After a pause, the message finally gets through.
-    A grin washes over his face and he silently mouthes back at you <color=#FFFFFF>\"Oooooh,
-    the axe!\".</color>\r\n\r\n{CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME} tiptoes
-    over to the tree, places both hands firmly on the handle of the axe, and begins
-    tugging away to no effect. He places a foot against the base of the tree, and
-    with a few more tugs the axe comes loose, sending {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME}
+    stares at you with blankly for a few moments, glances over his shoulder towards
+    where you're pointing, then looks back at you with the same glazed look of stupidity.
+    After a pause, the message finally gets through. A grin washes over his face
+    and he silently mouthes back at you <color=#FFFFFF>\"Oooooh, the axe!\".</color>\r\n\r\n{CHARACTER_1_NAME}
+    tiptoes over to the tree, places both hands firmly on the handle of the axe,
+    and begins tugging away to no effect. He places a foot against the base of the
+    tree, and with a few more tugs the axe comes loose, sending {CHARACTER_1_NAME}
     flying over and backwards onto the ground with a loud thud and groan. \r\n\r\nA
     low, guttural growl reverberates through the forest. Instinctively, you both
     freeze, eyes darting around to locate the source of the sound. After a tense
     silence, {CHARACTER_1_NAME} lets out a sigh of relief, when suddenly\u2026\r\n\r\nA
-    huge, scaley, bipedal swamp monster emerges from the tree line with a roar. The
-    beast sprints towards {CHARACTER_1_NAME} at lightning speed and tackles him to
-    the ground. After a furious flurry of claws and bites, {CHARACTER_1_NAME} is
-    a bloody mess, indistinguishable from the corpse he just looted. Perhaps content
-    with it\u2019s previous meal, the blood drenched beast ends its mauling prematurely,
+    huge, scaley swamp leviathan emerges from the tree line with a roar. The beast
+    sprints towards {CHARACTER_1_NAME} at lightning speed and tackles him to the
+    ground. After a furious flurry of claws and bites, {CHARACTER_1_NAME} is a bloody
+    mess, indistinguishable from the corpse he just looted. Perhaps content with
+    it\u2019s previous meal, the blood drenched beast ends its mauling prematurely,
     grabs {CHARACTER_1_NAME}'s lifeless corpse by the feet, then turns and walks
     away into the depths of the forest trees dragging {CHARACTER_1_NAME} behind him,
     never to be seen again\u2026\r"
   allChoices:
   - {fileID: 11400000, guid: 2ede1bcbd6120b64e89f1fce5314d49e, type: 2}
-  pageSprite: {fileID: 0}
+  pageSprite: {fileID: 21300000, guid: 80f28ce60dfd50d4c98d3ffc6d109e20, type: 3}
   onPageLoadEffects: []

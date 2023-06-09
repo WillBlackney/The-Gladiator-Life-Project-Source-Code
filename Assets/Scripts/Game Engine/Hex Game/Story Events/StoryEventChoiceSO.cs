@@ -9,39 +9,20 @@ namespace HexGameEngine.StoryEvents
     [CreateAssetMenu(fileName = "New StoryEventChoiceSO", menuName = "StoryEventChoice", order = 52)]
     public class StoryEventChoiceSO : ScriptableObject
     {
-        [Header("Descriptions")]
+        #region Components + Variables
+        [Header("UI Settings")]
         public List<CustomString> choiceTextOnButton;
+
+        [Space(10)]
+
+        [Header("Effects and Requirements")]
         public StoryChoiceEffectSet[] effectSets;
-        public StoryChoiceRequirement[] requirements;        
+        public StoryChoiceRequirement[] requirements;
+        #endregion
     }
-
-    public enum ChoiceEffectTarget
-    {
-        None = 0,
-        SelectedCharacter = 1,
-        AllCharacters = 2,
-    }
-    public enum HealType
-    {
-        None = 0,
-        HealFlatAmount = 1,
-        HealPercentage = 2,
-        HealMaximum = 3,
-    }
-    public enum ItemRewardType
-    {
-        RandomItem = 0,
-        SpecificItem = 1,
-    }
-
     public enum StoryChoiceReqType
     {
         None = 0,
-        AtleastXHealthFlat = 1,
-        AtleastXHealthPercent = 2,
-        AttributeLevel = 3,
-        GoldAmount = 4,
-        TalentLevel = 5,
-        Race = 6,
+        CharacterWithBackground = 1,
     }   
 }

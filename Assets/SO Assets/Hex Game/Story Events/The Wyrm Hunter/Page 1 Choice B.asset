@@ -16,12 +16,13 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '"Fuck off"'
+    phrase: '"Get lost"'
   effectSets:
   - lowerProbability: 0
     upperProbability: 100
     effects:
     - effectType: 2
+      characterTargetIndex: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
@@ -31,5 +32,14 @@ MonoBehaviour:
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
+      injurySeverity: 0
+      injuryType: 0
+      experienceGained: 0
       characterJoining: {fileID: 0}
+      stressRecoveryChance: 100
+      stressRecoveredMin: 0
+      stressRecoveredMax: 0
+      healthLostPercentage: 0.5
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
   requirements: []

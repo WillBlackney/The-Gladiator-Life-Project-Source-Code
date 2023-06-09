@@ -30,5 +30,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d84965c184ec2284fa54d5fc6a7f0a2d, type: 2}
   - {fileID: 11400000, guid: dedc83ad568a6cc40950b71547e985ae, type: 2}
   - {fileID: 11400000, guid: 4418dfc7d93078844963c795ba299cf1, type: 2}
+  - {fileID: 11400000, guid: b71662cb17d76c34a927438520c53399, type: 2}
   pageSprite: {fileID: 0}
   onPageLoadEffects: []

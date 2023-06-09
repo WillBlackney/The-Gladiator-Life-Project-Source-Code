@@ -16,5 +16,5 @@ MonoBehaviour:
     a few of the men announce they're leaving to go fight for someone with more coin...
   allChoices:
   - {fileID: 11400000, guid: c8c8a1a07bfed3d4584270c2c37e7438, type: 2}
-  pageSprite: {fileID: 0}
+  pageSprite: {fileID: 21300000, guid: f51175772dcc3a645aca35f8bfc39f79, type: 3}
   onPageLoadEffects: []

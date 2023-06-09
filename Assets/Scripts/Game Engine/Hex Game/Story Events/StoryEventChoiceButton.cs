@@ -9,11 +9,19 @@ namespace HexGameEngine.StoryEvents
 {
     public class StoryEventChoiceButton : MonoBehaviour
     {
+        #region Components + Variables
+        [Header("Components")]
         [SerializeField] GameObject visualParent;
         [SerializeField] TextMeshProUGUI buttonText;
-        private StoryEventChoiceSO myChoiceData;
-        public StoryEventChoiceSO MyChoiceData { get { return myChoiceData; } }
 
+        private StoryEventChoiceSO myChoiceData;
+        #endregion
+
+        #region Getters + Accessors
+        public StoryEventChoiceSO MyChoiceData { get { return myChoiceData; } }
+        #endregion
+
+        #region Logic
         public void HideAndReset()
         {
             visualParent.SetActive(false);
@@ -24,10 +32,10 @@ namespace HexGameEngine.StoryEvents
             buttonText.text = StoryEventController.Instance.GetDynamicValueString(TextLogic.ConvertCustomStringListToString(choiceData.choiceTextOnButton));
             myChoiceData = choiceData;
         }
-
         public void OnClick()
         {
             StoryEventController.Instance.HandleChoiceButtonClicked(this);
         }
+        #endregion
     }
 }

@@ -3,12 +3,14 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace HexGameEngine.StoryEvents
 {
-    [System.Serializable]
+    [Serializable]
     public class StoryEventCharacterTargetRequirement
     {
+        #region Components + Variables
         [Header("Core Requirements")]
         public StoryEventCharacterTargetRequirementType reqType;
         [Space(10)]
@@ -16,6 +18,7 @@ namespace HexGameEngine.StoryEvents
         [Header("Background Requirements")]
         [ShowIf("ShowRequiredBackgrounds")]
         public CharacterBackground[] requiredBackgrounds;
+        #endregion
 
         #region Odin Showifs
         public bool ShowRequiredBackgrounds()
@@ -28,6 +31,12 @@ namespace HexGameEngine.StoryEvents
         #endregion
     }
 
+    [Serializable]
+    public class StoryEventCharacterTarget
+    {
+        public StoryEventCharacterTargetRequirement[] requirements;
+    }
+
     public enum StoryEventCharacterTargetRequirementType
     {
         None = 0,
@@ -37,9 +46,5 @@ namespace HexGameEngine.StoryEvents
         XorLessHealth = 4,
 
     }
-    [System.Serializable]
-    public class StoryEventCharacterTarget
-    {
-        public StoryEventCharacterTargetRequirement[] requirements;
-    }
+    
 }

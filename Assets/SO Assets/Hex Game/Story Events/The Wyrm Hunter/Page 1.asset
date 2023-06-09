@@ -21,18 +21,18 @@ MonoBehaviour:
 
     The euphoria comes to an abrupt pause as the tavern
     door screeches open quickly and bangs loudly against the wall at the end of it''s
-    opening swing. An intimidatingly large Orc covered from shoulder to to toe in
-    exotic plate armour stands boldly at the door frame, his gaze slowly moving across
-    the room in search of something or someone. Eventually the orc''s gaze meets
-    your own, and his tusked frown grows into a wide eyed smile. His armour clinks
-    loudly as he stomps over to your table and takes a seat across from you.
+    opening swing. An intimidatingly large Orc stands boldly at the door frame, his
+    gaze slowly moving across the room in search of something or someone. Eventually
+    the orc''s gaze meets your own, and his tusked frown grows into a wide eyed smile.
+    His floor groans loudly as he stomps over to your table and takes a seat across
+    from you.
 
 
-    <color=#FFFFFF>"I,
-    am Gromak The Great!"</color>, he declares with a prideful smile and bouncing
-    eyebrows, clearly expecting you to know who that is and be impressed.'
+    <color=#FFFFFF>"I, am Gromak The Great!"</color>, he declares
+    with a prideful smile and bouncing eyebrows, clearly expecting you to know who
+    that is and be impressed.'
   allChoices:
   - {fileID: 11400000, guid: 4bbec703fdb91944298d725a8975ba75, type: 2}
   - {fileID: 11400000, guid: 3526449eb56101640a7045f7eba9c3cd, type: 2}
-  pageSprite: {fileID: 0}
+  pageSprite: {fileID: 21300000, guid: 6c055dd1f4e06a040ab4a54d29afe23e, type: 3}
   onPageLoadEffects: []

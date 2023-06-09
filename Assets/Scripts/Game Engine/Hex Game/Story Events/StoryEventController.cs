@@ -63,11 +63,15 @@ namespace HexGameEngine.StoryEvents
         private List<string> eventsAlreadyEncountered = new List<string>();
         private List<StoryEventResultItem> currentResultItems = new List<StoryEventResultItem>();
         private List<HexCharacterData> characterTargets = new List<HexCharacterData>();
+        private HexCharacterData choiceCharacterTarget;
 
         private const string CHARACTER_1_NAME_KEY = "{CHARACTER_1_NAME}";
         private const string CHARACTER_1_SUB_NAME_KEY = "{CHARACTER_1_SUB_NAME}";
         private const string CHARACTER_2_NAME_KEY = "{CHARACTER_2_NAME}";
         private const string CHARACTER_2_SUB_NAME_KEY = "{CHARACTER_2_SUB_NAME}";
+
+        private const string CHOICE_CHARACTER_NAME_KEY = "{CHOICE_CHARACTER_NAME}";
+        private const string CHOICE_CHARACTER_SUB_NAME_KEY = "{CHOICE_CHARACTER_SUB_NAME}";
         #endregion
 
         #region Getters + Accessors
@@ -81,11 +85,13 @@ namespace HexGameEngine.StoryEvents
         {
             if (CurrentStoryEvent != null)
                 saveFile.currentStoryEvent = CurrentStoryEvent.storyEventName;
+            else saveFile.currentStoryEvent = "";
 
             saveFile.encounteredStoryEvents = eventsAlreadyEncountered;
         }
         public void BuildMyDataFromSaveFile(SaveGameData saveFile)
         {
+            CurrentStoryEvent = null;
             foreach (StoryEventDataSO s in AllStoryEvents)
             {
                 if (s.name == saveFile.currentStoryEvent)
@@ -102,12 +108,22 @@ namespace HexGameEngine.StoryEvents
         #region Start Events
         public void StartNextEvent()
         {
+            // Flush old data
+            choiceCharacterTarget = null;
             currentResultItems.Clear();
+
+            // Get new targets (if event requires it)
             DetermineAndCacheCharacterTargetsOnEventStart(CurrentStoryEvent);
-            eventHeaderText.text = CurrentStoryEvent.storyEventName;
+           
+            // Trigger on event start effects
             CurrentStoryEvent.onStartEffects.ForEach(i => ResolveChoiceEffect(i));
+
+            // Build UI for first page
+            eventHeaderText.text = CurrentStoryEvent.storyEventName;
             BuildAllViewsFromPage(CurrentStoryEvent.firstPage);
             ShowUI();
+
+            // Play event start fanfare SFX
             AudioManager.Instance.PlaySoundPooled(Sound.Effects_Story_Event_Start);
         }
         #endregion
@@ -115,19 +131,29 @@ namespace HexGameEngine.StoryEvents
         #region UI + View Logic
         private void ShowUI()
         {
+            // Make UI clickable
             rootCg.interactable = true;
             rootCanvas.enabled = true;
+
+            // Reset tweens
             movementParent.DOKill();
             blackUnderlay.DOKill();
+
+            // Move on screen
             blackUnderlay.DOFade(0.5f, 0f);
             movementParent.DOMove(onScreenPosition.position, 0f);
             TransformUtils.RebuildLayouts(layoutsRebuilt);
         }
         private void HideUI(float speed = 0.75f, Action onComplete = null)
         {
+            // Disable interactions
             rootCg.interactable = false;
+
+            // Kill any running tweens
             movementParent.DOKill();
             blackUnderlay.DOKill();
+
+            // Fade out and move panel off screen north
             blackUnderlay.DOFade(0f, speed * 0.66f);
             movementParent.DOMove(offScreenPosition.position, speed).SetEase(Ease.InBack).OnComplete(() =>
             {
@@ -168,21 +194,63 @@ namespace HexGameEngine.StoryEvents
             // Reset each button
             fittedChoiceButtons.ForEach(i => i.HideAndReset());
             unfittedChoiceButtons.ForEach(i => i.HideAndReset());
-
             fittedButtonsParent.gameObject.SetActive(true);
 
             // Build a button for each choice
             for (int i = 0; i < page.allChoices.Length; i++)
             {
-                unfittedChoiceButtons[i].BuildAndShow(page.allChoices[i]);
-                fittedChoiceButtons[i].BuildAndShow(page.allChoices[i]);
+                // Check each choice is valid within the current context
+                if (DoesChoiceMeetAllRequirements(page.allChoices[i]))
+                {
+                    unfittedChoiceButtons[i].BuildAndShow(page.allChoices[i]);
+                    fittedChoiceButtons[i].BuildAndShow(page.allChoices[i]);
+                }               
             }
+        }
+        private bool DoesChoiceMeetAllRequirements(StoryEventChoiceSO choice)
+        {
+            bool ret = true;
+
+            foreach(StoryChoiceRequirement req in choice.requirements)
+            {
+                bool pass = IsStoryChoiceRequirementMet(req);
+                if (!pass)
+                {
+                    ret = false;
+                    break;
+                }
+            }
+
+            return ret;
+        }
+        private bool IsStoryChoiceRequirementMet(StoryChoiceRequirement req)
+        {
+            bool ret = true;
+            if(req.requirementType == StoryChoiceReqType.CharacterWithBackground)
+            {
+                bool foundMatch = false;
+                foreach(HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
+                {
+                    if(character.background.backgroundType == req.requiredBackground)
+                    {
+                        foundMatch = true;
+                        choiceCharacterTarget = character;
+                        break;
+                    }
+                }
+                ret = foundMatch;
+            }
+            return ret;
         }
         private void BuildResultItemsSection()
         {
+            // Reset all tabs
             resultItemRows.ForEach(i => i.Hide());
+
+            // Build a tab row for each result element
             for (int i = 0; i < currentResultItems.Count; i++)
             {
+                // If not enough UI rows for each element, create new ones
                 if (i >= resultItemRows.Count)
                 {
                     StoryEventResultItemRow newRow = Instantiate(resultItemRowPrefab, resultItemsParent).GetComponent<StoryEventResultItemRow>();
@@ -194,42 +262,52 @@ namespace HexGameEngine.StoryEvents
         }
         private void AutoSetButtonFitting()
         {
+            // Build default fitted button state first to accurately check if
+            // content exceeds the fitted view setting bounds
             fittedButtonsParent.gameObject.SetActive(true);
             TransformUtils.RebuildLayouts(layoutsRebuilt);
 
+            // Determine current boundary of fitted button content
             float scrollBounds = 700f;
             float contentHeight = content.rect.height;
-            Debug.Log("Content height: " + contentHeight.ToString());
 
-            // Use fitted buttons
+            // Content exceeds the page size => use fitted buttons
             if (contentHeight > scrollBounds)
             {
                 unfittedButtonsParent.gameObject.SetActive(false);
                 fittedButtonsParent.gameObject.SetActive(true);
             }
 
-            // Use unfitted buttons
+            // Content does not exceed the page size => use unfitted buttons
             else
             {
                 unfittedButtonsParent.gameObject.SetActive(true);
                 fittedButtonsParent.gameObject.SetActive(false);
             }
 
+            // Rebuild all content fitters again for good measure
             TransformUtils.RebuildLayout(content);
-
         }
         public string GetDynamicValueString(string original)
         {
+            // Function is used to inject dynamic values (like character names) into 
+            // page descriptions and choice button text fields
+
             string ret = original;
             if(characterTargets.Count >= 1)
             {
-                ret = original.Replace(CHARACTER_1_NAME_KEY, characterTargets[0].myName);
+                ret = ret.Replace(CHARACTER_1_NAME_KEY, characterTargets[0].myName);
                 ret = ret.Replace(CHARACTER_1_SUB_NAME_KEY, characterTargets[0].mySubName);
             }
             if (characterTargets.Count >= 2)
             {
                 ret = ret.Replace(CHARACTER_2_NAME_KEY, characterTargets[1].myName);
                 ret = ret.Replace(CHARACTER_2_SUB_NAME_KEY, characterTargets[1].mySubName);
+            }
+            if (choiceCharacterTarget != null)
+            {
+                ret = ret.Replace(CHOICE_CHARACTER_NAME_KEY, choiceCharacterTarget.myName);
+                ret = ret.Replace(CHOICE_CHARACTER_SUB_NAME_KEY, choiceCharacterTarget.mySubName);
             }
             return ret;
         }
@@ -239,12 +317,14 @@ namespace HexGameEngine.StoryEvents
         #region Determine Next Event Logic
         public StoryEventDataSO DetermineAndCacheNextStoryEvent()
         {
+            // If sandbox mode, use the global settings predetermined event
             if (GlobalSettings.Instance.GameMode == GameMode.StoryEventSandbox)
             {
                 CurrentStoryEvent = GlobalSettings.Instance.SandboxStoryEvent;
                 return CurrentStoryEvent;
             }
 
+            // Cancel if no valid story events for the current state of the game
             List<StoryEventDataSO> validEvents = GetValidStoryEvents();
             if (validEvents.Count == 0)
             {
@@ -252,7 +332,10 @@ namespace HexGameEngine.StoryEvents
                 return null;
             }
 
+            // Choose a valid event randomly if multiple events are valid.
             CurrentStoryEvent = validEvents[RandomGenerator.NumberBetween(0, validEvents.Count - 1)];
+
+            // Add chosen event to list of events all experienced (so that it isn't show twice)
             if (eventsAlreadyEncountered.Contains(CurrentStoryEvent.storyEventName) == false)
                 eventsAlreadyEncountered.Add(CurrentStoryEvent.storyEventName);
 
@@ -332,6 +415,7 @@ namespace HexGameEngine.StoryEvents
         }
         private bool TheKidIsAlive()
         {
+            // TO DO: This function belongs somewhere else, like CharacterDataController, GameController or RunController
             bool ret = false;
 
             foreach (HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
@@ -402,7 +486,7 @@ namespace HexGameEngine.StoryEvents
             if (button.MyChoiceData != null)
             {
                 AudioManager.Instance.PlaySoundPooled(Sound.UI_Button_Click);
-                HandleChoiceEffects(button.MyChoiceData);
+                HandleAllChoiceEffects(button.MyChoiceData);
             }
 
         }
@@ -410,7 +494,7 @@ namespace HexGameEngine.StoryEvents
         #endregion
 
         #region Handle Choices
-        private void HandleChoiceEffects(StoryEventChoiceSO choice)
+        private void HandleAllChoiceEffects(StoryEventChoiceSO choice)
         {
             // Determine set
             StoryChoiceEffectSet set = null;
@@ -441,6 +525,7 @@ namespace HexGameEngine.StoryEvents
                 {
                     RunController.Instance.SetCheckPoint(SaveCheckPoint.Town);
                     GameController.Instance.SetGameState(GameState.Town);
+                    CurrentStoryEvent = null;
                     PersistencyController.Instance.AutoUpdateSaveFile();
                 });
             }
@@ -678,6 +763,14 @@ namespace HexGameEngine.StoryEvents
             else if(effect.effectType == StoryChoiceEffectType.CharacterJoinsRoster)
             {
                 HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(effect.characterJoining);
+                BackgroundData bgData = CharacterDataController.Instance.GetBackgroundData(character.background.backgroundType);
+                if(bgData != null)
+                {
+                    int startingLevelBoosts = RandomGenerator.NumberBetween(bgData.lowerLevelLimit, bgData.upperLevelLimit) - character.currentLevel;
+                    for (int i = 0; i < startingLevelBoosts; i++)
+                        CharacterDataController.Instance.HandleLevelUp(character);
+                }
+                
                 CharacterDataController.Instance.AddCharacterToRoster(character);                
                 string message = character.myName + " " + character.mySubName + " joined the company.";
                 StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.Star);
@@ -725,6 +818,7 @@ namespace HexGameEngine.StoryEvents
         }
         private void DetermineAndCacheCharacterTargetsOnEventStart(StoryEventDataSO storyEvent)
         {
+            choiceCharacterTarget = null;
             characterTargets.Clear();
             int requiredCharacters = storyEvent.characterRequirements.Length;
 
@@ -738,11 +832,6 @@ namespace HexGameEngine.StoryEvents
                     if (target != null) characterTargets.Add(target);
                 }
                 if (characterTargets.Count == requiredCharacters) break;
-            }
-
-            for (int i = 0; i < characterTargets.Count; i++)
-            {
-                Debug.Log("DetermineAndCacheCharacterTargetsOnEventStart() selected target " + (i + 1).ToString() + ": " + characterTargets[i].myName + " " + characterTargets[i].mySubName);
             }
         }
         #endregion

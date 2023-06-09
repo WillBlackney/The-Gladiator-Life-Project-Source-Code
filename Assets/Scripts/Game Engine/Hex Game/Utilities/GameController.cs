@@ -1,8 +1,6 @@
-﻿using DG.Tweening;
-using HexGameEngine.Abilities;
+﻿using HexGameEngine.Abilities;
 using HexGameEngine.Audio;
 using HexGameEngine.CameraSystems;
-using HexGameEngine.Camping;
 using HexGameEngine.Characters;
 using HexGameEngine.Combat;
 using HexGameEngine.GameIntroEvent;
@@ -10,9 +8,7 @@ using HexGameEngine.HexTiles;
 using HexGameEngine.Items;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.MainMenu;
-using HexGameEngine.Perks;
 using HexGameEngine.Persistency;
-using HexGameEngine.Reputations;
 using HexGameEngine.RewardSystems;
 using HexGameEngine.StoryEvents;
 using HexGameEngine.TownFeatures;
@@ -481,7 +477,6 @@ namespace HexGameEngine
             //CombatRewardController.Instance.BuildAndShowGameOverScreen();
 
         }
-
         public void HandlePostCombatToTownTransistion()
         {
             StartCoroutine(HandlePostCombatToTownTransistionCoroutine());
@@ -495,7 +490,18 @@ namespace HexGameEngine
 
             // Prepare town + new day start data + save game
             RunController.Instance.OnNewDayStart();
+            SetGameState(GameState.Town);
             RunController.Instance.SetCheckPoint(SaveCheckPoint.Town);
+
+            // Determine and start next story event
+            StoryEventDataSO nextEvent = StoryEventController.Instance.DetermineAndCacheNextStoryEvent();
+            if (nextEvent != null && RunController.Instance.CurrentDay != 1)
+            {
+                SetGameState(GameState.StoryEvent);
+                RunController.Instance.SetCheckPoint(SaveCheckPoint.StoryEvent);
+            }
+
+            // Save changes
             PersistencyController.Instance.AutoUpdateSaveFile();
 
             // Tear down combat views
@@ -510,14 +516,18 @@ namespace HexGameEngine
             CharacterScrollPanelController.Instance.BuildAndShowPanel();
             TopBarController.Instance.ShowMainTopBar();
 
-            // Reset+ Centre camera
-            CameraController.Instance.ResetMainCameraPositionAndZoom();
-                        
+            // Reset + Centre camera
+            CameraController.Instance.ResetMainCameraPositionAndZoom();            
+
             // Fade back in views + sound
             yield return new WaitForSeconds(0.5f);
             DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
             AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
             BlackScreenController.Instance.FadeInScreen(1f);
+
+            // Show next story event
+            if (nextEvent != null && RunController.Instance.CurrentDay != 1)
+                StoryEventController.Instance.StartNextEvent();
         }
         #endregion
 
@@ -701,7 +711,7 @@ namespace HexGameEngine
                 // Start music, fade in
                 DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
                 AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
-                BlackScreenController.Instance.FadeInScreen(2f, ()=> GameIntroController.Instance.StartEvent());
+                BlackScreenController.Instance.FadeInScreen(1f, ()=> GameIntroController.Instance.StartEvent());
             }
             else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.StoryEvent)
             {
@@ -716,7 +726,8 @@ namespace HexGameEngine
                 // Start music, fade in
                 DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
                 AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
-                BlackScreenController.Instance.FadeInScreen(2f, () => StoryEventController.Instance.StartNextEvent());
+                StoryEventController.Instance.StartNextEvent();
+                BlackScreenController.Instance.FadeInScreen(1f);
             }
             else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatStart)
             {

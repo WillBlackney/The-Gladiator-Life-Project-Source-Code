@@ -17,5 +17,5 @@ MonoBehaviour:
     are without a job to do...
   allChoices:
   - {fileID: 11400000, guid: f02418534cefa4a448eef9dedced43f3, type: 2}
-  pageSprite: {fileID: 21300000, guid: ffb8a40af02876d4b8921da65555d952, type: 3}
+  pageSprite: {fileID: 21300000, guid: 00adfc874f82e974f98d6613e8dbdd8c, type: 3}
   onPageLoadEffects: []

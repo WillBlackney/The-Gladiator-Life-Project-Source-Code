@@ -20,11 +20,11 @@ MonoBehaviour:
     dots for eyes and a wide, wicked grin. \n\nYou grab the blade from underneath
     your bed to ready yourself, but as soon as you do, the hooded figure outstrecthes
     his hand, and suddenly the handle of the blade burns so hot you're forced to
-    drop it, wincing in pain. \n\n<color=#FFFFFF>\"Steady on, captain. If I wanted
-    you dead, i'd have just waited for you to fall asleep, then eaten your liver.
-    Besides, i simply came to make you an offer on behalf of my...employer, for lack
+    drop it, wincing in pain. \n\n<color=#FFFFFF>\"Fear me not, delicate fleshling.
+    If I wanted you dead, i'd have simply waited for you to fall asleep, then eaten
+    your liver. I came to make you an offer on behalf of my...employer, for lack
     of a better term\".</color>"
   allChoices:
   - {fileID: 11400000, guid: 68e380dcfbc7b2f40b0439959286cb1c, type: 2}
-  pageSprite: {fileID: 0}
+  pageSprite: {fileID: 21300000, guid: 9997e2aecdcba91479ab085cfe5f61f5, type: 3}
   onPageLoadEffects: []

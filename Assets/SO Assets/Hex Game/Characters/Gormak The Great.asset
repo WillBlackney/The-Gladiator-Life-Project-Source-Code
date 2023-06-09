@@ -15,6 +15,7 @@ MonoBehaviour:
   myName: Gormak
   mySubName: The Great
   race: 2
+  background: 21
   modelSize: 0
   attributeSheet:
     might:

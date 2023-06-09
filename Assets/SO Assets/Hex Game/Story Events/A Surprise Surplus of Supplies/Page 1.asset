@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
   m_Name: Page 1
   m_EditorClassIdentifier: 
-  pageDescription: Instead of being ambushed and swallowed whole by lizard men of
-    the swamp, more caravans and traders than usual have reached Ulfwe with their
-    goods intact. As such, the overwhelming supply of new goods has driven down prices
-    temporarily.
+  pageDescription: Instead of being ambushed and swallowed whole by swamp leviathans,
+    more caravans and traders than usual have reached Ulfwe with their goods intact.
+    As such, the overwhelming supply of new goods has driven down prices temporarily.
   allChoices:
   - {fileID: 11400000, guid: 1c0e35671dfe16545a12ca58f8c121da, type: 2}
-  pageSprite: {fileID: 21300000, guid: b7503a720be30194a9cf278fc86b3b87, type: 3}
+  pageSprite: {fileID: 21300000, guid: 67d035548215e3f428b70f5b66eb3976, type: 3}
   onPageLoadEffects: []

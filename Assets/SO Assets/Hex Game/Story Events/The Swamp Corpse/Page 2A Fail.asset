@@ -18,8 +18,8 @@ MonoBehaviour:
     eerie swamp silence with a definitive crunch. A low, guttural growl reverberates
     through the forest. Instinctively, you both freeze, eyes darting around to locate
     the source of the sound. After a tense silence, {CHARACTER_1_NAME} lets out a
-    sigh of relief, when suddenly\u2026\r\n\r\nA huge, scaley, bipedal swamp monster
-    emerges from the tree line with a roar. The beast sprints towards {CHARACTER_1_NAME}
+    sigh of relief, when suddenly\u2026\r\n\r\nA huge, scaley swamp leviathan emerges
+    from the tree line with a roar. The beast sprints towards {CHARACTER_1_NAME}
     at lightning speed and tackles him to the ground. After a furious flurry of claws
     and bites, {CHARACTER_1_NAME} is a bloody mess, indistinguishable from the corpse
     he just looted. Perhaps content with it\u2019s previous meal, the blood drenched
@@ -28,5 +28,5 @@ MonoBehaviour:
     {CHARACTER_1_NAME} behind him, never to be seen again\u2026\r\n"
   allChoices:
   - {fileID: 11400000, guid: 2ede1bcbd6120b64e89f1fce5314d49e, type: 2}
-  pageSprite: {fileID: 0}
+  pageSprite: {fileID: 21300000, guid: 80f28ce60dfd50d4c98d3ffc6d109e20, type: 3}
   onPageLoadEffects: []

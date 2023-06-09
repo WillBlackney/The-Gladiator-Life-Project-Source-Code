@@ -6,12 +6,18 @@ namespace HexGameEngine.StoryEvents
     [CreateAssetMenu(fileName = "New StoryEventPageSO", menuName = "StoryEventPage", order = 52)]
     public class StoryEventPageSO : ScriptableObject
     {
-        [TextArea(20, 20)]
-        public string pageDescription;
-        public StoryEventChoiceSO[] allChoices;
+        [Header("Display Settings")]
         [PreviewField(75)]
         public Sprite pageSprite;
+        [TextArea(20, 20)]
+        public string pageDescription;
+
+        [Space(10)]
+
+        [Header("Choices + Effects")]
         public StoryChoiceEffect[] onPageLoadEffects;
+        public StoryEventChoiceSO[] allChoices;       
+        
 
     }
 }

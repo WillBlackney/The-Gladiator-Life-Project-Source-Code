@@ -9,16 +9,16 @@ namespace HexGameEngine.StoryEvents
     public class StoryEventDataSO : ScriptableObject
     {
         [BoxGroup("General Data", true, true)]
-        [LabelWidth(100)]
-        public string storyEventName;
+        [LabelWidth(125)]
+        public string storyEventName;               
 
         [BoxGroup("General Data")]
-        [LabelWidth(100)]
-        public bool excludeFromGame = false;
-
-        [BoxGroup("General Data")]
-        [LabelWidth(100)]
+        [LabelWidth(125)]
         public StoryEventPageSO firstPage;
+
+        [BoxGroup("General Data")]
+        [LabelWidth(125)]
+        public bool excludeFromGame = false;
 
         [BoxGroup("General Data")]
         [LabelWidth(100)]

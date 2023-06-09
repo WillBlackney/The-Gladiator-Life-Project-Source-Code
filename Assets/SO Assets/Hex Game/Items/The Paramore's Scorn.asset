@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: The Paramore's Scorn
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: b0f5e7d0f44d2864aa6006212ef89866, type: 3}
-  itemName: The Paramore's Scorn
+  itemName: Paramore's Scorn
   itemDescription: The crystallized remains of a bitter lover killed in an act of
     violent rage.
   itemType: 4

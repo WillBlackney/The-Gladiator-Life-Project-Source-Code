@@ -8,14 +8,18 @@ namespace HexGameEngine.StoryEvents
 {
     public class StoryEventResultItemRow : MonoBehaviour
     {
-        [Header("Components")]
+        [Header("Core Components")]
         [SerializeField] GameObject visualParent;
         [SerializeField] TextMeshProUGUI messageText;
         [SerializeField] Image unframedIconImage;
 
         [Space(10)]
+
+        [Header("Framed Image Components")]
         [SerializeField] Image framedIconImage;
         [SerializeField] GameObject framedIconImageParent;
+
+        [Space(10)]
 
         [Header("Sprites")]
         [SerializeField] Sprite star;
@@ -70,9 +74,5 @@ namespace HexGameEngine.StoryEvents
         UserIcon = 4,
         Star = 5,
         GoldCoins = 7,
-
-        // XP, character leaving, attribute boosts, healing, stress modified, character died
-
-
     }
 }

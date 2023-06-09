@@ -18,17 +18,17 @@ MonoBehaviour:
     to a stop and chugs it down quickly, ale spilling all down his face and armour.
     He lets out a long <color=#FFFFFF>\"Ahhhhh\"</color> as he slams the empty mug
     onto the table.\n\n<color=#FFFFFF>\"Lok' narosh, captain. Lok' narosh! Now, let's
-    establish proper etiquette, eh? First, you and your men shall address me as 'Gormak
-    the Great' or 'Sir Gormak', and only ever these two, espicially when discussing
-    my great deeds with others. 'Gormak the God' is also acceptable. \n\nSecond,
-    who is the one that shall clean my armour at the end of each day? Will it be
-    you? Actually nevermind, I'll just get the squire you assign to me to do it.
-    Third, i require a foot massage at the end of each day, performed by a female
-    satyr no older than 21 summers. I'll also require someone to carry my baggage.
+    establish protocol, eh? First, you and your men shall address me as 'Gormak the
+    Great' or 'Sir Gormak', and only ever these two, espicially when discussing my
+    great deeds with others. 'Gormak the God' is also acceptable. \n\nSecond, who
+    is the one that shall clean my armour at the end of each day? Will it be you?
+    Actually nevermind, I'll just get the squire you assign to me to do it. Third,
+    i require a foot massage at the end of each day, performed by a female satyr
+    no older than twenty one summers. I'll also require someone to carry my baggage.
     Fourth...\".</color>\n\nOne by one, you and the men stop paying attention and
     go back to drinking and joking. Gormak, clearly in love with the sound of his
     own voice, doesn't even notice."
   allChoices:
   - {fileID: 11400000, guid: 075cbda146fd89343afd1ece1ab0a0d4, type: 2}
-  pageSprite: {fileID: 0}
+  pageSprite: {fileID: 21300000, guid: 6fa3d433ce9df87428649786b6a8caef, type: 3}
   onPageLoadEffects: []

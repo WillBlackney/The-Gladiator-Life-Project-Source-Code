@@ -31,5 +31,5 @@ MonoBehaviour:
   allChoices:
   - {fileID: 11400000, guid: 926045a42f9f72345a1974d36f0117a4, type: 2}
   - {fileID: 11400000, guid: ce96519152ab2a649b96b19eb96b5f51, type: 2}
-  pageSprite: {fileID: 0}
+  pageSprite: {fileID: 21300000, guid: 6dbcb1f11d8b4e147b6fe411a9f97540, type: 3}
   onPageLoadEffects: []

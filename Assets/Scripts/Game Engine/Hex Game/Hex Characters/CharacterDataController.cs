@@ -724,7 +724,7 @@ namespace HexGameEngine.Characters
 
             return ret;
         }
-        private void HandleLevelUp(HexCharacterData data)
+        public void HandleLevelUp(HexCharacterData data)
         {
             // Gain level
             SetCharacterLevel(data, data.currentLevel + 1);
