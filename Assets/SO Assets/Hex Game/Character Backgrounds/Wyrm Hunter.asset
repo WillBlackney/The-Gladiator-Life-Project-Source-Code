@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundSprite: {fileID: 21300000, guid: 5570d46be4d6e7644a8d460af14b336e, type: 3}
   backgroundType: 21
-  description: 
-  recruitable: 1
+  description: Only the brave and stupid go looking for dragons to hunt. After a
+    career of wyrm hunting, there's nothing in the arena that could scare these folk.
+  recruitable: 0
   spawnChance: 20
   lowerLevelLimit: 2
   upperLevelLimit: 3
@@ -38,7 +39,7 @@ MonoBehaviour:
   witsUpper: -3
   minStartingAbilities: 2
   maxStartingAbilities: 2
-  validRaces: 010000000200000006000000
+  validRaces: 0100000002000000
   loadoutBuckets:
   - possibleStartingTalents: 02000000
     possibleAbilities:

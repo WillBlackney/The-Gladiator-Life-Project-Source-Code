@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
+  m_Name: Page 3A Success
+  m_EditorClassIdentifier: 
+  pageDescription: "Being careful not to make any noise, you point towards the axe
+    in the tree and soundlessly mouth out at {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME}
+    <color=#FFFFFF>\"Get, the, axe... get, the, axe...\".</color> {CHARACTER_1_NAME}
+    {CHARACTER_1_SUB_NAME} stares at you with blankly for a few moments, glances
+    over his shoulder towards where you're pointing, then looks back at you with
+    the same glazed look of stupidity. After a pause, the message finally gets through.
+    A grin washes over his face and he silently mouthes back at you <color=#FFFFFF>\"Oooooh,
+    the axe!\".</color>\n\n{CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME} tiptoes over
+    to the tree, places both hands firmly on the handle of the axe, and begins tugging
+    away to no effect. He places a foot against the base of the tree, and with a
+    few more tugs the axe comes loose, sending {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME}
+    flying over and backwards onto the ground with a loud thud and groan. \n\nA deep,
+    rumbling roar resonates out from the trees. The ground begins to quake and tremble
+    to the pace of foot steps approaching. \n\nThe corpse's body armour is chewed
+    up good and proper, but the helmet looks to be intact. You could try and take
+    it quickly, but something wicked this way comes..."
+  allChoices:
+  - {fileID: 11400000, guid: 807beff55428a5248a366878262e0d26, type: 2}
+  - {fileID: 11400000, guid: d171899469e833244b75ac6256a643e7, type: 2}
+  pageSprite: {fileID: 0}
+  onPageLoadEffects: []

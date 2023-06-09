@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
+  m_Name: Page 2A
+  m_EditorClassIdentifier: 
+  pageDescription: "Delighted by your expression of interest, the hooded figure's
+    impossibly wide grin grows even wider. More dark smoke billows out from his robe
+    to form his left hand stretching out towards you. Smoky fingers uncurl to reveal
+    a perfectly cut red gem with a gently oscilating glow. \n\n<color=#FFFFFF>\"The
+    crystallized spirit of a king's jealous concubine that lived long before the
+    rise of the Imperium. Perhaps, even before my time.  He who posseses this shall
+    have their sword arm fueled by the envious rage of a lover's scorn.\"</color>\n\nSmoke
+    evaporates from the robes to form an arm once more, revealing a fairly unremarkable
+    looking rock.\n\n<color=#FFFFFF>\"No exciting mystery to go along with this one
+    i'm afraid, 'tis simply a petrified wyrm egg. So well documented are it's properites
+    that even that insufferable simpleton at the library will tell you the same as
+    I: standing near this egg will harden one's flesh to cuts\".</color>\n\nThe hooded
+    figure slowly redirects it's maniacal gaze back towards you, then leans inward
+    with a tilted head.\n\n<color=#FFFFFF>\"Choose\".</color>"
+  allChoices:
+  - {fileID: 11400000, guid: d84965c184ec2284fa54d5fc6a7f0a2d, type: 2}
+  - {fileID: 11400000, guid: dedc83ad568a6cc40950b71547e985ae, type: 2}
+  - {fileID: 11400000, guid: 4418dfc7d93078844963c795ba299cf1, type: 2}
+  pageSprite: {fileID: 0}
+  onPageLoadEffects: []

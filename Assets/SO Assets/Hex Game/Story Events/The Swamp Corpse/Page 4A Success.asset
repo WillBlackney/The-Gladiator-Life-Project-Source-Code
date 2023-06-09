@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
+  m_Name: Page 4A Success
+  m_EditorClassIdentifier: 
+  pageDescription: "With no longer any need to be quiet, you yell out to {CHARACTER_1_NAME}
+    {CHARACTER_1_SUB_NAME} to quickly snatch the helmet and run like the wind. Still
+    flat on his back from the fall, {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME} rolls
+    over and crawls through the mud to the corpse. As he fumbles with getting the
+    chin strap undone, the ground quakes harder and harder, and the terrifying roars
+    become so loud you wonder if they'll hear it all the way back at Ulwfe. \n\nAfter
+    an excrutiatingly long time, {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME} finally
+    relieves the dead man of his helmet, jumps to his feet, and runs back towards
+    you through the swamp, nearly slipping and falling with every step. From dry
+    ground, you grab his hand and yank him out faster, then turn and run without
+    looking back. You don't know what was coming after you, and you don't need to
+    know. What you do know is that you got the gold, the axe, and the helmet, and
+    that's what matters...apparently...\n"
+  allChoices:
+  - {fileID: 11400000, guid: 104cc4ff1967b4240bd9d972e49ee823, type: 2}
+  pageSprite: {fileID: 0}
+  onPageLoadEffects: []

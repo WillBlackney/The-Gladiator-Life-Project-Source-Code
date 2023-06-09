@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
+  m_Name: Page 4A Fail
+  m_EditorClassIdentifier: 
+  pageDescription: "With no longer any need to be quiet, you yell out to {CHARACTER_1_NAME}
+    {CHARACTER_1_SUB_NAME} to quickly snatch the helmet and run like the wind. Still
+    flat on his back from the fall, {CHARACTER_1_NAME} rolls over and crawls through
+    the mud to the corpse. As he fumbles with getting the chin strap undone, the
+    ground quakes harder and harder, and the terrifying roars become so loud you
+    wonder if they'll hear it all the way back at Ulwfe. The suddenly\u2026\r\n\r\nA
+    huge, scaley, bipedal swamp monster emerges from the tree line with a roar. The
+    beast sprints towards {CHARACTER_1_NAME} at lightning speed and tackles him to
+    the ground. After a furious flurry of claws and bites, {CHARACTER_1_NAME} is
+    a bloody mess, indistinguishable from the corpse he just looted. Perhaps content
+    with it\u2019s previous meal, the blood drenched beast ends its mauling prematurely,
+    grabs {CHARACTER_1_NAME}'s lifeless corpse by the feet, then turns and walks
+    away into the depths of the forest trees dragging {CHARACTER_1_NAME} behind him,
+    never to be seen again\u2026\r"
+  allChoices:
+  - {fileID: 11400000, guid: 2ede1bcbd6120b64e89f1fce5314d49e, type: 2}
+  pageSprite: {fileID: 0}
+  onPageLoadEffects: []

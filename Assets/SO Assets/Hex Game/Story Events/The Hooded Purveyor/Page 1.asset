@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
+  m_Name: Page 1
+  m_EditorClassIdentifier: 
+  pageDescription: "While laying down in the bed of your tavern room after a long
+    day of sending people to their deaths, a horrid smell wafts over you, and a cold
+    chill fills the air. Sitting up, you notice plumes of thick black smoke pooling
+    in from the walls around you, and watch as it coalesces in the center of the
+    room to form of hooded and cloaked figure. From under it's hood you see two red
+    dots for eyes and a wide, wicked grin. \n\nYou grab the blade from underneath
+    your bed to ready yourself, but as soon as you do, the hooded figure outstrecthes
+    his hand, and suddenly the handle of the blade burns so hot you're forced to
+    drop it, wincing in pain. \n\n<color=#FFFFFF>\"Steady on, captain. If I wanted
+    you dead, i'd have just waited for you to fall asleep, then eaten your liver.
+    Besides, i simply came to make you an offer on behalf of my...employer, for lack
+    of a better term\".</color>"
+  allChoices:
+  - {fileID: 11400000, guid: 68e380dcfbc7b2f40b0439959286cb1c, type: 2}
+  pageSprite: {fileID: 0}
+  onPageLoadEffects: []
