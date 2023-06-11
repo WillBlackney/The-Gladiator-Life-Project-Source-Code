@@ -102,11 +102,24 @@ namespace HexGameEngine.Combat
 
             // Determine which characters are able to free strike the tile.
             //HexCharacterController.Instance.HideAllFreeStrikeIndicators();
+            bool allowNimbleCheck = true;
             foreach (LevelNode h in tilesMovedFrom)
             {
                 // Enemies dont free strike when a character moves through an ally
                 if (h.myCharacter != null && h.myCharacter != characterMoving)
                     continue;
+
+                // Not free strikes if first Nimble move
+                if (h == p.HexsOnPath[0] &&
+                    allowNimbleCheck &&
+                    characterMoving.tilesMovedThisTurn == 0 &&
+                    PerkController.Instance.DoesCharacterHavePerk(characterMoving.pManager, Perk.Nimble))
+                {
+                    allowNimbleCheck = false;
+                    continue;
+                }
+
+                allowNimbleCheck = false;
 
                 List<LevelNode> meleeTiles = LevelController.Instance.GetAllHexsWithinRange(h, 1);
                 foreach (LevelNode meleeHex in meleeTiles)
@@ -145,7 +158,8 @@ namespace HexGameEngine.Combat
         }
         public List<HexCharacterModel> GetFreeStrikersOnPath(HexCharacterModel characterMoving, Path p)
         {
-            if (PerkController.Instance.DoesCharacterHavePerk(characterMoving.pManager, Perk.Slippery)) return new List<HexCharacterModel>();
+            if (PerkController.Instance.DoesCharacterHavePerk(characterMoving.pManager, Perk.Slippery)) 
+                return new List<HexCharacterModel>();
             // Check Free strike opportunities along the path.
             List<LevelNode> tilesMovedFrom = new List<LevelNode>();
             List<HexCharacterModel> freeStrikers = new List<HexCharacterModel>();
@@ -154,11 +168,24 @@ namespace HexGameEngine.Combat
             tilesMovedFrom.Remove(p.Destination);
 
             // Determine which characters are able to free strike the tile.
+            bool allowNimbleCheck = true;
             foreach (LevelNode h in tilesMovedFrom)
             {
                 // Enemies dont free strike when a character moves through an ally
                 if (h.myCharacter != null && h.myCharacter != characterMoving)
                     continue;
+
+                // Not free strikes if first Nimble move
+                if (h == p.HexsOnPath[0] &&
+                    allowNimbleCheck &&
+                    characterMoving.tilesMovedThisTurn == 0 &&
+                    PerkController.Instance.DoesCharacterHavePerk(characterMoving.pManager, Perk.Nimble))
+                {
+                    allowNimbleCheck = false;
+                    continue;
+                }
+
+                allowNimbleCheck = false;
 
                 List<LevelNode> meleeTiles = LevelController.Instance.GetAllHexsWithinRange(h, 1);
                 foreach (LevelNode meleeHex in meleeTiles)
@@ -217,7 +244,6 @@ namespace HexGameEngine.Combat
                     // Show the character's free strike indicator
                     HexCharacterController.Instance.ShowFreeStrikeIndicator(enemy.hexCharacterView);
                 }
-
             }
             else
             {

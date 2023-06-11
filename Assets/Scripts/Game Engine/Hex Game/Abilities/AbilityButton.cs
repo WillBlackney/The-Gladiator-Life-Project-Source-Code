@@ -64,7 +64,7 @@ namespace HexGameEngine.Abilities
                 KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyAbilityData.keyWords);
                 AbilityPopupController.Instance.OnAbilityButtonMousedOver(this);
                 CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter
-                              (MyAbilityData.myCharacter.currentEnergy, AbilityController.Instance.GetAbilityEnergyCost(MyAbilityData.myCharacter, MyAbilityData));
+                              (MyAbilityData.myCharacter.currentEnergy, AbilityController.Instance.GetAbilityActionPointCost(MyAbilityData.myCharacter, MyAbilityData));
 
                 // Update fatigue gui on left panel for mouse over
                 CombatUIController.Instance.DoFatigueCostDemo(AbilityController.Instance.GetAbilityFatigueCost(MyAbilityData.myCharacter, MyAbilityData),
@@ -85,7 +85,7 @@ namespace HexGameEngine.Abilities
                         AbilityData a = AbilityController.Instance.CurrentAbilityAwaiting;
                         CombatUIController.Instance.EnergyBar.UpdateIcons(a.myCharacter.currentEnergy);
                         CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter
-                          (a.myCharacter.currentEnergy, AbilityController.Instance.GetAbilityEnergyCost(a.myCharacter, a));
+                          (a.myCharacter.currentEnergy, AbilityController.Instance.GetAbilityActionPointCost(a.myCharacter, a));
 
                         // Update fatigue gui on left panel for mouse over
                         CombatUIController.Instance.DoFatigueCostDemo(AbilityController.Instance.GetAbilityFatigueCost(a.myCharacter, MyAbilityData),
@@ -138,7 +138,7 @@ namespace HexGameEngine.Abilities
             CooldownText.text = myAbilityData.currentCooldown.ToString();
             if(myAbilityData.myCharacter != null &&
                 myAbilityData.currentCooldown == 0 && 
-                myAbilityData.myCharacter.currentEnergy >= AbilityController.Instance.GetAbilityEnergyCost(myAbilityData.myCharacter, myAbilityData) &&
+                myAbilityData.myCharacter.currentEnergy >= AbilityController.Instance.GetAbilityActionPointCost(myAbilityData.myCharacter, myAbilityData) &&
                 (StatCalculator.GetTotalMaxFatigue(myAbilityData.myCharacter) - myAbilityData.myCharacter.currentFatigue >= AbilityController.Instance.GetAbilityFatigueCost(myAbilityData.myCharacter, myAbilityData)) &&
                 AbilityController.Instance.IsAbilityUseable(myAbilityData.myCharacter, myAbilityData))
             {

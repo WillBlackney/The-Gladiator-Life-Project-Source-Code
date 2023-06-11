@@ -366,6 +366,10 @@ namespace HexGameEngine.Abilities
                     if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FlamingWeapon))
                         PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.FlamingWeapon, -1);
                 }
+
+                // Check and apply furiously assault to target
+                if(target != null && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FuriousAssault))                
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.FuriouslyAssaulted, 1);                
             }
 
             // Item 'on use' apply perk to self effects
@@ -1346,7 +1350,7 @@ namespace HexGameEngine.Abilities
         private void OnAbilityUsedStart(HexCharacterModel character, AbilityData ability, HexCharacterModel target = null)
         {
             // Pay Energy Cost
-            HexCharacterController.Instance.ModifyActionPoints(character, -GetAbilityEnergyCost(character, ability));
+            HexCharacterController.Instance.ModifyActionPoints(character, -GetAbilityActionPointCost(character, ability));
             HexCharacterController.Instance.ModifyCurrentFatigue(character, GetAbilityFatigueCost(character, ability));
 
             // Check shed perk: remove if ability used was an aspect ability
@@ -1577,9 +1581,9 @@ namespace HexGameEngine.Abilities
 
         // Get Ability Calculations
         #region
-        public int GetAbilityEnergyCost(HexCharacterModel character, AbilityData ability)
+        public int GetAbilityActionPointCost(HexCharacterModel character, AbilityData ability)
         {
-            int energyCost = ability.energyCost;
+            int apCost = ability.energyCost;
 
             // Check shed perk: aspect ability costs 0
             if (ability.abilityType.Contains(AbilityType.Aspect) && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
@@ -1590,26 +1594,34 @@ namespace HexGameEngine.Abilities
                 character.abilitiesUsedThisCombat == 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Gifted))
             {
-                energyCost -= 3;
+                apCost -= 3;
             }
 
             // MASTERY PERKS
+            // Master of Archer
+            if (character != null &&
+                (ability.abilityName == "Load Bolt" || ability.abilityName == "Plink") && 
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.MasterOfArchery))
+            {
+                apCost -= 1;
+            }
+
             // Weapon mastery 
             if (character != null &&
                 ability.abilityType.Contains(AbilityType.WeaponAttack) &&
                 character.weaponAbilitiesUsedThisTurn == 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.WeaponMastery))
             {
-                energyCost -= 1;
+                apCost -= 1;
             }
 
             // Skill Mastery
             if (character != null &&
                 ability.abilityType.Contains(AbilityType.Skill) &&
                 character.skillAbilitiesUsedThisTurn == 0 &&
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SkillMastery))
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Resourceful))
             {
-                energyCost -= 1;
+                apCost -= 1;
             }
 
             // Ranged Mastery 
@@ -1618,7 +1630,7 @@ namespace HexGameEngine.Abilities
                 character.rangedAttackAbilitiesUsedThisTurn == 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.RangedMastery))
             {
-                energyCost -= 1;
+                apCost -= 1;
             }
 
             // Melee Mastery
@@ -1627,7 +1639,16 @@ namespace HexGameEngine.Abilities
                 character.meleeAttackAbilitiesUsedThisTurn == 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.MeleeMastery))
             {
-                energyCost -= 1;
+                apCost -= 1;
+            }
+
+            // Arcane Mastery
+            if (character != null &&
+                ability.abilityType.Contains(AbilityType.Spell) &&
+                character.spellAbilitiesUsedThisTurn == 0 &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.ArcaneMastery))
+            {
+                apCost -= 1;
             }
 
             // Spell Mastery
@@ -1636,26 +1657,66 @@ namespace HexGameEngine.Abilities
                 character.spellAbilitiesUsedThisTurn == 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SpellMastery))
             {
-                energyCost -= 1;
+                apCost -= 1;
             }
 
             // prevent cost going negative
-            if (energyCost < 0)
-                energyCost = 0;
+            if (apCost < 0)
+                apCost = 0;
 
-            return energyCost;
+            return apCost;
         }
         public int GetAbilityFatigueCost(HexCharacterModel character, AbilityData ability)
         {
             int fatigueCost = ability.fatigueCost;
+            float mod = 1f;
 
+            // Muscles memories perk
             if (fatigueCost > 0 &&
                 ability.abilityType.Contains(AbilityType.WeaponAttack) &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.MusclesMemories))
                 return 0;
 
+            // Well Drilled perk
             if (fatigueCost > 0 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.WellDrilled))
-                fatigueCost = fatigueCost / 2;
+                mod -= 0.5f;
+
+            // WEAPON SPECIALIZATIONS
+            // Shield specialist perk
+            if (ability.abilityName == "Raise Shield" &&
+                fatigueCost > 0 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.ShieldSpecialist))
+                mod -= 0.25f;
+
+            // Dual wield finesse
+            if (character.itemSet.IsDualWieldingMeleeWeapons() &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.DualWieldFinesse))
+                mod -= 0.25f;
+
+            // Two hand dominance
+            if (character.itemSet.IsWieldingTwoHandMeleeWeapon() &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.TwoHandedDominance))
+                mod -= 0.25f;
+
+            // Master of Archery
+            if (character.itemSet.IsWieldingBowOrCrossbow() &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.MasterOfArchery))
+                mod -= 0.25f;
+
+            // One hand expertise
+            if (character.itemSet.IsWieldingOneHandMeleeWeaponWithEmptyOffhand() &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.OneHandedExpertise))
+                mod -= 0.25f;
+
+            // Arcane Mastery
+            if (ability.abilityType.Contains(AbilityType.Spell) &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.ArcaneMastery))
+                mod -= 0.25f;
+
+            fatigueCost = (int) (fatigueCost * mod);
 
             // prevent cost going negative
             if (fatigueCost < 0)
@@ -1979,7 +2040,7 @@ namespace HexGameEngine.Abilities
         }
         private bool DoesCharacterHaveEnoughActionPoints(HexCharacterModel caster, AbilityData ability)
         {
-            return caster.currentEnergy >= GetAbilityEnergyCost(caster, ability);
+            return caster.currentEnergy >= GetAbilityActionPointCost(caster, ability);
         }
         private bool DoesCharacterHaveEnoughFatigue(HexCharacterModel caster, AbilityData ability)
         {
@@ -2002,8 +2063,7 @@ namespace HexGameEngine.Abilities
 
             int stealthDistance = StatCalculator.GetTotalVision(caster) + 1;
             bool ignoreStealth = PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.TrueSight) ||
-                PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.EyelessSight) ||
-                PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.Sniper);
+                PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.EyelessSight);
 
             if (stealthDistance < 1) stealthDistance = 1;
 

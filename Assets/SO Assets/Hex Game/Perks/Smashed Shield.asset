@@ -54,5 +54,5 @@ MonoBehaviour:
   backgroundPerkQuality: 0
   perksRemovedOnThisApplication: 0c000000
   perksGainedOnThisExpiry: 
-  perksThatBlockThis: 
+  perksThatBlockThis: dd000000
   visualEventsOnApplication: []

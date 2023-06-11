@@ -24,7 +24,7 @@ namespace HexGameEngine.Pathfinding
             if (start.Elevation != destination.Elevation)
                 cost += 2;
 
-            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.PathFinder))
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Pathfinder))
                 cost = 0;
 
             return cost;
@@ -70,8 +70,8 @@ namespace HexGameEngine.Pathfinding
                     cost += 1;
             }            
 
-            if (cost > 2 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.PathFinder))
-                cost -= 1;
+            if (cost > 2 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Pathfinder))
+                cost = 2;
 
             return cost;
         }       

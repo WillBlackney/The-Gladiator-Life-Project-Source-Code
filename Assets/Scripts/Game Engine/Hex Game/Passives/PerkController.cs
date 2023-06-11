@@ -412,6 +412,7 @@ namespace HexGameEngine.Perks
             // Check 'Torturer' perk for bleeding/poisoned/burning
             if((perk == Perk.Burning || perk == Perk.Bleeding || perk == Perk.Poisoned) &&
                 applier != null &&
+                stacksAppliedActual > 0 && 
                 DoesCharacterHavePerk(applier, Perk.Torturer))
             {
                 stacksAppliedActual += 1;
@@ -419,7 +420,7 @@ namespace HexGameEngine.Perks
 
             // Check 'Best Friend' perk for extra stack of buff
             if (stacks > 0 &&
-                RandomGenerator.NumberBetween(1,100) <= 35 &&
+                RandomGenerator.NumberBetween(1,10) <= 5 &&
                 (perk == Perk.Focus || perk == Perk.Wrath || perk == Perk.Guard 
                 || perk == Perk.Evasion || perk == Perk.Courage || perk == Perk.Combo) &&
                 applier != null &&
@@ -530,8 +531,7 @@ namespace HexGameEngine.Perks
             }
 
             // Add perk to linked character data for perks that should persist (e.g. injuries gained in combat should persist)
-            if ((perkData.isInjury || perkData.isPermanentInjury) && character != null && character.characterData != null &&
-                DoesCharacterHavePerk(character.characterData.passiveManager, perk) == false)
+            if ((perkData.isInjury || perkData.isPermanentInjury) && character != null && character.characterData != null)
             {
                 ActivePerk ap = ModifyPerkOnCharacterData(character.characterData.passiveManager, perk, stacks);
                 if (perkData.isInjury)

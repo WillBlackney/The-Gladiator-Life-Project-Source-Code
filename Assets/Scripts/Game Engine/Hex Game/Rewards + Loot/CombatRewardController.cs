@@ -128,7 +128,7 @@ namespace HexGameEngine.RewardSystems
 
                 // Apply xp gain + level up
                 int xpGained = baseXp + (killXpSlice * character.totalKills);
-                if (character.characterData.currentXP + (xpGained * StatCalculator.GetCharacterXpGainRate(character)) >= character.characterData.currentMaxXP)
+                if (character.characterData.currentXP + (xpGained * StatCalculator.GetCharacterXpGainRate(character.characterData)) >= character.characterData.currentMaxXP)
                     result.didLevelUp = true;
                 result.xpGained = xpGained;
             }

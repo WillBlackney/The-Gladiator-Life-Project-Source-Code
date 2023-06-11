@@ -5,6 +5,7 @@ using HexGameEngine.Combat;
 using HexGameEngine.Perks;
 using HexGameEngine.Items;
 using HexGameEngine.Abilities;
+using UnityEngine.Rendering.VirtualTexturing;
 
 namespace HexGameEngine
 {
@@ -39,6 +40,9 @@ namespace HexGameEngine
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brute))
                 might += 10;
+
+            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.WhatDoesntKillMeStacks);
+            might += wdkmStacks * 3;
 
             // Check Fear + Hate of X Perks
             var myAura = LevelController.Instance.GetAllHexsWithinRange(c.currentTile, GetTotalAuraSize(c));
@@ -121,6 +125,9 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Brute))
                 might += 10;
 
+            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.passiveManager, Perk.WhatDoesntKillMeStacks);
+            might += wdkmStacks * 3;
+
             // Items
             might += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Might, c.itemSet);
             if (mod < 0) mod = 0;
@@ -144,7 +151,10 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fat))
                 constitution += 20;
 
-            if(!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
+            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.WhatDoesntKillMeStacks);
+            constitution += wdkmStacks * 3;
+
+            if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedKidney))
                     mod -= 0.3f;
@@ -169,7 +179,12 @@ namespace HexGameEngine
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CompromisedLiver))
                     mod -= 0.3f;
-            }            
+            }
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Tenacious))
+                mod += 0.25f;
+
+            
 
             // Items
             constitution += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Constituition, c.itemSet);
@@ -194,6 +209,12 @@ namespace HexGameEngine
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fat))
                 constitution += 20;
+
+            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.passiveManager, Perk.WhatDoesntKillMeStacks);
+            constitution += wdkmStacks * 3;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Tenacious))
+                mod += 0.25f;
 
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
             {
@@ -431,14 +452,15 @@ namespace HexGameEngine
                 dodge += 10;
 
             // Shield Wall Passive
-            // Check Inspiring Leader perk: +50% resolve if within an ally's aura
             foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(c))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.ShieldWall) &&
                     LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, GetTotalAuraSize(ally)).Contains(c.currentTile))
                 {
                     dodge += 5;
-                    break;
+                    if (PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.ShieldSpecialist))
+                        dodge += 5;
+                    //break;
                 }
             }
 
@@ -568,6 +590,9 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
                 resolve += 3;
 
+            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.WhatDoesntKillMeStacks);
+            resolve += wdkmStacks * 3;
+
             // Check Inspiring Leader perk: +25% resolve if within an ally's aura
             if (allowRecursion)
             {
@@ -576,7 +601,7 @@ namespace HexGameEngine
                     if (PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.InspiringLeader) &&
                         LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, GetTotalAuraSize(ally)).Contains(c.currentTile))
                     {
-                        resolve += (int)(GetTotalResolve(ally, false) * 0.25f);
+                        resolve += (int)(GetTotalResolve(ally, false) * 0.35f);
                         break;
                     }
                 }
@@ -671,6 +696,9 @@ namespace HexGameEngine
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Polymath))
                 resolve += 3;
+
+            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.passiveManager, Perk.WhatDoesntKillMeStacks);
+            resolve += wdkmStacks * 3;
 
             // Items
             resolve += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Resolve, c.itemSet);
@@ -911,8 +939,8 @@ namespace HexGameEngine
 
             // Items
             int itemFat = ItemController.Instance.GetTotalMaximumFatiguePenaltyFromItemSet(c.itemSet);
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Outfitter) && itemFat > 0)
-                itemFat = itemFat / 2;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Dexterous) && itemFat > 0)
+                itemFat = (int) (itemFat * 0.5f);
             maxFat -= itemFat;
 
             // cant go below
@@ -926,8 +954,8 @@ namespace HexGameEngine
 
             // Items
             int itemFat = ItemController.Instance.GetTotalMaximumFatiguePenaltyFromItemSet(c.itemSet);
-            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Outfitter) && itemFat > 0)
-                itemFat = itemFat / 2;
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Dexterous) && itemFat > 0)
+                itemFat = (int)(itemFat * 0.5f);
             maxFat -= itemFat;
 
             // cant go below
@@ -940,25 +968,7 @@ namespace HexGameEngine
         #endregion
 
         // Secondary Attributes
-        #region
-        public static float GetCharacterXpGainRate(HexCharacterModel character)
-        {
-            float ret = 1;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FastLearner))
-                ret += 0.25f;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.DimWitted))
-                ret -= 0.25f;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.PermanentlyConcussed))
-                ret -= 0.25f;
-
-            if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Doctor))
-                ret += 0.10f;
-
-            return ret;
-        }
+        #region       
         public static float GetCharacterXpGainRate(HexCharacterData character)
         {
             float ret = 1;
@@ -974,6 +984,9 @@ namespace HexGameEngine
 
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Doctor))
                 ret += 0.10f;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, Perk.Apprenctice))
+                ret += 0.5f;
 
             return ret;
         }
@@ -1585,6 +1598,7 @@ namespace HexGameEngine
         public static int GetTotalInjuryResistance(HexCharacterModel c)
         {
             int resistanceReturned = 0;//c.attributeSheet.injuryResistance + GetTotalResolve(c);
+            float mod = 1f;
 
             // Undead Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeadHeart))
@@ -1600,14 +1614,22 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HardNoggin))
                 resistanceReturned += 10;
 
+            // Multiplicare modifiers
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Tenacious))
+                mod += 0.25f;
+
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.InjuryResistance, c.itemSet);
+
+            // Apply modifiers
+            resistanceReturned = (int)(resistanceReturned * mod);
 
             return resistanceReturned;
         }
         public static int GetTotalInjuryResistance(HexCharacterData c)
         {
             int resistanceReturned = 0;//c.attributeSheet.injuryResistance + GetTotalResolve(c);
+            float mod = 1f;
 
             // Undead Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeadHeart))
@@ -1624,9 +1646,14 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.HardNoggin))
                 resistanceReturned += 10;
 
+
+            // Multiplicare modifiers
+            if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Tenacious))
+                mod += 0.25f;
+
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.InjuryResistance, c.itemSet);
-
+            resistanceReturned = (int)(resistanceReturned * mod);
             return resistanceReturned;
         }
         public static int GetTotalDeathResistance(HexCharacterModel c)

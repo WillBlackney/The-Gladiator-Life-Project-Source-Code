@@ -131,21 +131,6 @@ namespace HexGameEngine.Abilities
                         {
                             ret.Add(d);
                         }
-
-                        /*
-                        // if weapon, get special ability
-                        if (d.weaponAbilityType == WeaponAbilityType.Basic &&
-                            (itemSet.offHandItem.IsRangedWeapon || itemSet.offHandItem.IsMeleeWeapon))
-                        {
-                            ret.Add(d);
-                        }
-
-                        // else if shield, net, holdable, etc, get the basic ability
-                        else if (d.weaponAbilityType == WeaponAbilityType.Basic &&
-                            !itemSet.offHandItem.IsRangedWeapon && !itemSet.offHandItem.IsMeleeWeapon)
-                        {
-                            ret.Add(d);
-                        }*/
                     }
                         
                 }
@@ -167,32 +152,16 @@ namespace HexGameEngine.Abilities
             List <AbilityData> loadOutAbilities = new List<AbilityData>();
 
             // 2H melee: Smash Shield
-            if (itemSet.mainHandItem != null &&
-                itemSet.mainHandItem.IsMeleeWeapon &&
-                itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
-            {
-                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Smash Shield (Native 2h)"));
-            }
+            if (itemSet.IsWieldingTwoHandMeleeWeapon())            
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Smash Shield (Native 2h)"));            
 
             // Dual wielding 1h: Twin Strike
-            else if (itemSet.mainHandItem != null &&
-                itemSet.mainHandItem.IsMeleeWeapon &&
-                itemSet.mainHandItem.handRequirement == HandRequirement.OneHanded &&
-                itemSet.offHandItem != null &&
-                itemSet.offHandItem.IsMeleeWeapon &&
-                itemSet.offHandItem.handRequirement == HandRequirement.OneHanded)
-            {
-                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Twin Strike"));
-            }
+            else if (itemSet.IsDualWieldingMeleeWeapons())
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Twin Strike"));            
 
             // 1h melee weapon: shove
-            else if (itemSet.mainHandItem != null &&
-                itemSet.mainHandItem.IsMeleeWeapon &&
-                itemSet.mainHandItem.handRequirement == HandRequirement.OneHanded &&
-                itemSet.offHandItem == null)
-            {
-                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Shove"));
-            }
+            else if (itemSet.IsWieldingOneHandMeleeWeaponWithEmptyOffhand())            
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Shove"));            
 
             // Main hand empty: Jab + Shove
             else if (itemSet.mainHandItem == null &&

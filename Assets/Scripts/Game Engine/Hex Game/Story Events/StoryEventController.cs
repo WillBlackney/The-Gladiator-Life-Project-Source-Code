@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 namespace HexGameEngine.StoryEvents
@@ -627,6 +628,10 @@ namespace HexGameEngine.StoryEvents
                 int injuryStacks = RandomGenerator.NumberBetween(injuryData.minInjuryDuration, injuryData.maxInjuryDuration);
                 PerkController.Instance.ModifyPerkOnCharacterData(target.passiveManager, injuryData.perkTag, injuryStacks);
 
+                // Check 'What Doesn't Kill Me Perk': gain permanent stats
+                if (PerkController.Instance.DoesCharacterHavePerk(target.passiveManager, Perk.WhatDoesntKillMe))                
+                    PerkController.Instance.ModifyPerkOnCharacterData(target.passiveManager, Perk.WhatDoesntKillMe, 1);
+                
                 StoryEventResultItem newResultItem = new StoryEventResultItem(
                     target.myName + " " + target.mySubName + " gained injury: " + TextLogic.ReturnColoredText(injuryData.passiveName, TextLogic.neutralYellow) + ".", ResultRowIcon.FramedSprite, injuryData.passiveSprite);
                 currentResultItems.Add(newResultItem);

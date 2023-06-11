@@ -259,7 +259,7 @@ namespace HexGameEngine.UI
             {
                 string col = TextLogic.white;
                 int baseCost = data.energyCost;
-                int dynamicCost = AbilityController.Instance.GetAbilityEnergyCost(data.myCharacter, data);
+                int dynamicCost = AbilityController.Instance.GetAbilityActionPointCost(data.myCharacter, data);
                 if (baseCost > dynamicCost) col = TextLogic.lightGreen;
                 else if (baseCost < dynamicCost) col = TextLogic.lightRed;
                 energyCostText.text = TextLogic.ReturnColoredText(dynamicCost.ToString(), col);

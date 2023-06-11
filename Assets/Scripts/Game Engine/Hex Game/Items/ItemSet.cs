@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Codice.Client.Common;
+using HexGameEngine.Abilities;
 
 namespace HexGameEngine.Items
 {
@@ -12,6 +14,34 @@ namespace HexGameEngine.Items
         public ItemData bodyArmour;
         public ItemData headArmour;
         public ItemData trinket;
+
+        public bool IsDualWieldingMeleeWeapons()
+        {
+            return mainHandItem != null &&
+                mainHandItem.IsMeleeWeapon &&
+                mainHandItem.handRequirement == HandRequirement.OneHanded &&
+                offHandItem != null &&
+                offHandItem.IsMeleeWeapon &&
+                offHandItem.handRequirement == HandRequirement.OneHanded;          
+        }
+        public bool IsWieldingTwoHandMeleeWeapon()
+        {
+            return mainHandItem != null &&
+                mainHandItem.IsMeleeWeapon &&
+                mainHandItem.handRequirement == HandRequirement.TwoHanded;
+        }
+        public bool IsWieldingBowOrCrossbow()
+        {
+            return mainHandItem != null &&
+                (mainHandItem.weaponClass == WeaponClass.Bow || mainHandItem.weaponClass == WeaponClass.Crossbow);
+        }
+        public bool IsWieldingOneHandMeleeWeaponWithEmptyOffhand()
+        {
+            return mainHandItem != null &&
+               mainHandItem.IsMeleeWeapon &&
+               mainHandItem.handRequirement == HandRequirement.OneHanded &&
+               offHandItem == null;
+        }
     }
 
     [System.Serializable]

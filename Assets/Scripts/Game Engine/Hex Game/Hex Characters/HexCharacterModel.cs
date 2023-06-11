@@ -74,6 +74,7 @@ namespace HexGameEngine.Characters
         public int abilitiesUsedThisCombat = 0;
         public int healthLostThisTurn = 0;
         public bool hasTriggeredSecondWind = false;
+        public bool hasTriggeredBringItOn = false;
 
         [Header("Combat Statistics Properties")]
         public int totalKills;

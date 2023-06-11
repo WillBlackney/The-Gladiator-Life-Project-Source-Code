@@ -44,6 +44,10 @@ MonoBehaviour:
     healthRequired: 0
     race: 0
     perk: 210
+  - type: 8
+    healthRequired: 0
+    race: 0
+    perk: 221
   baseRange: 1
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0

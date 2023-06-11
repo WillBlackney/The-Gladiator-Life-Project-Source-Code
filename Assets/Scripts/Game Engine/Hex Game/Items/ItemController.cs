@@ -475,6 +475,15 @@ namespace HexGameEngine.Items
             Debug.Log("ItemController.GetTotalArmourBonusFromItemSet() returning: " + ret.ToString());
             return ret;
         }
+        public int GetTotalMaximumFatiguePenaltyFromHeadAndBodyItems(ItemSet set)
+        {
+            int ret = 0;
+            if (set.headArmour != null) ret += set.headArmour.fatiguePenalty;
+            if (set.bodyArmour != null) ret += set.bodyArmour.fatiguePenalty;
+
+            Debug.Log("ItemController.GetTotalMaximumFatiguePenaltyFromHeadAndBodyItems() returning: " + ret.ToString());
+            return ret;
+        }
         public int GetTotalArmourBonusFromItemSet(ItemSet set)
         {
             int ret = 0;

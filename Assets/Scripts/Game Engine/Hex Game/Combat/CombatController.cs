@@ -18,6 +18,8 @@ using HexGameEngine.Player;
 using HexGameEngine.Audio;
 using DG.Tweening;
 using HexGameEngine.CameraSystems;
+using UnityEngine.TextCore.Text;
+using Spriter2UnityDX.Importing;
 
 namespace HexGameEngine.Combat
 {
@@ -142,9 +144,9 @@ namespace HexGameEngine.Combat
                 target != null &&
                 (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stunned) ||
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Blinded) ||
-                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Rooted)))
+                PerkController.Instance.IsCharacteInjured(target.pManager)))
             {
-                damageModPercentageAdditive += 0.25f;
+                damageModPercentageAdditive += 0.20f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Bully perk modifier = " + damageModPercentageAdditive.ToString());
             }
 
@@ -295,7 +297,7 @@ namespace HexGameEngine.Combat
             if (damageModPercentageAdditive < 0f) damageModPercentageAdditive = 0f;
             baseDamageFinal = (int)(baseDamageFinal * damageModPercentageAdditive);
             lowerDamageFinal = (int)(lowerDamageFinal * damageModPercentageAdditive);
-            upperDamageFinal = (int)(upperDamageFinal * damageModPercentageAdditive);           
+            upperDamageFinal = (int)(upperDamageFinal * damageModPercentageAdditive);
 
 
             Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Base damage AFTER applying final multiplicative modifiers + resistance: " + baseDamageFinal.ToString());
@@ -326,7 +328,7 @@ namespace HexGameEngine.Combat
 
             resultReturned.totalDamage = baseDamageFinal;
             resultReturned.damageLowerLimit = lowerDamageFinal;
-            resultReturned.damageUpperLimit = upperDamageFinal;           
+            resultReturned.damageUpperLimit = upperDamageFinal;
 
             Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Final damage = " + resultReturned.totalDamage.ToString());
 
@@ -439,7 +441,7 @@ namespace HexGameEngine.Combat
                 Debug.Log(System.String.Format("GetStatMultiplierFromStressState() character {0} does not benefit/suffer from stress state, returning 0...", character.myName));
                 return 0;
             }
-            
+
 
             if (stressState == StressState.Confident && !CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Slave)) multiplier = 5;
             else if (stressState == StressState.Steady) multiplier = 0;
@@ -585,6 +587,14 @@ namespace HexGameEngine.Combat
                             else CreateStressCheck(c, StressEventType.EnemyInjured);
                         }
 
+                        // Check 'What Doesn't Kill Me Perk': gain permanent stats
+                        if (character.characterData != null &&
+                            character.controller == Controller.Player &&
+                            PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.WhatDoesntKillMe))
+                        {
+                            PerkController.Instance.ModifyPerkOnCharacterData(character.pManager, Perk.WhatDoesntKillMe, 1);
+                        }
+
                     }
                 }
 
@@ -596,7 +606,7 @@ namespace HexGameEngine.Combat
 
         // Rolls + Critical Logic
         #region
-       
+
         public HitChanceDataSet GetHitChance(HexCharacterModel attacker, HexCharacterModel target, AbilityData ability = null, ItemData weaponUsed = null)
         {
             HitChanceDataSet ret = new HitChanceDataSet();
@@ -670,6 +680,15 @@ namespace HexGameEngine.Combat
             }
 
 
+            // Brawny
+            int onehandedFinesseBonus = 0;
+            if (ability != null &&
+                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
+                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.OneHandedExpertise))
+            {
+                onehandedFinesseBonus = 10;
+            }
+
             // Dead Eye
             int deadEyeBonus = 0;
             if (ability != null &&
@@ -690,8 +709,6 @@ namespace HexGameEngine.Combat
                 //if (brawnyBonus != 0) ret.details.Add(new HitChanceDetailData("Brawny Perk", brawnyBonus));
             }
 
-
-
             // Base hit chance
             int baseHitMod = GlobalSettings.Instance.BaseHitChance;
             if (baseHitMod != 0) ret.details.Add(new HitChanceDetailData("Base hit chance", baseHitMod));
@@ -705,16 +722,35 @@ namespace HexGameEngine.Combat
             accuracyMod += assassinBonus;
             accuracyMod += rangerBonus;
             accuracyMod += warfareBonus;
+            accuracyMod += onehandedFinesseBonus;
 
             if (accuracyMod != 0) ret.details.Add(new HitChanceDetailData("Attacker accuracy", accuracyMod));
 
+            // Target dual wield finesse
+            int dualWieldMod = 0;
+            if (ability != null && ability.abilityType.Contains(AbilityType.MeleeAttack) &&
+                target.itemSet.IsDualWieldingMeleeWeapons() &&
+                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.DualWieldFinesse))
+                dualWieldMod = 10;
+
             // Target Dodge
-            int dodgeMod = -(StatCalculator.GetTotalDodge(target) - targetStressMod);
-            if (dodgeMod != 0) ret.details.Add(new HitChanceDetailData("Target dodge", dodgeMod));            
+            int dodgeMod = -(StatCalculator.GetTotalDodge(target) + dualWieldMod - targetStressMod);
+            if (dodgeMod != 0) ret.details.Add(new HitChanceDetailData("Target dodge", dodgeMod));
 
             // Stress State            
             if (attackerStressMod != 0) ret.details.Add(new HitChanceDetailData("Attacker " + attackerStressState.ToString(), attackerStressMod));
             if (targetStressMod != 0) ret.details.Add(new HitChanceDetailData("Target " + targetStressState.ToString(), -targetStressMod));
+
+            // Strong Starter perk
+            if (TurnController.Instance.CurrentTurn == 1 &&
+                (ability.abilityType.Contains(AbilityType.WeaponAttack) || ability.abilityType.Contains(AbilityType.RangedAttack) || ability.abilityType.Contains(AbilityType.MeleeAttack)) &&
+                attacker.weaponAbilitiesUsedThisTurn == 0 &&
+                attacker.rangedAttackAbilitiesUsedThisTurn == 0 &&
+                attacker.meleeAttackAbilitiesUsedThisTurn == 0 &&
+                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.StrongStarter))
+            {
+                ret.details.Add(new HitChanceDetailData("Strong Starter", 35));
+            }
 
             // Melee modifiers
             if (ability != null && ability.abilityType.Contains(AbilityType.MeleeAttack))
@@ -744,7 +780,7 @@ namespace HexGameEngine.Combat
 
             // Check shooting at engaged target or shooting from melee
             if (ability != null && ability.abilityType.Contains(AbilityType.RangedAttack) &&
-                !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.PointBlank))
+                !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.MeticulousAim))
             {
                 if (HexCharacterController.Instance.IsCharacterEngagedInMelee(attacker))
                     ret.details.Add(new HitChanceDetailData("Shooting from melee", -10));
@@ -786,10 +822,8 @@ namespace HexGameEngine.Combat
                 if (innateBonus != 0) ret.details.Add(new HitChanceDetailData("Weapon " + bOrP, innateBonus));
             }
 
-            
-
             // Ranged attack distance penalty
-            if (!PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Sniper) &&
+            if (!PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.MeticulousAim) &&
                 ability != null && ability.abilityType.Contains(AbilityType.RangedAttack))
             {
                 int distanceMod = -(attacker.currentTile.Distance(target.currentTile) - 1) * 5;
@@ -833,17 +867,25 @@ namespace HexGameEngine.Combat
                 return true;
             }
 
-            // Check Point Blank bonus
-            /*
-            if(PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.PointBlank) &&
-                ability != null &&
-                ability.abilityType == AbilityType.RangedAttack &&
-                LevelController.Instance.GetAllHexsWithinRange(attacker.myCurrentHex, 1).Contains(target.myCurrentHex))
+            // Check Point Blank bonus            
+            if (ability != null &&
+               ability.abilityType.Contains(AbilityType.RangedAttack) &&
+               PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.PointBlank) &&
+               LevelController.Instance.GetAllHexsWithinRange(attacker.currentTile, 1).Contains(target.currentTile))
             {
-                critChance += 100;
+                critChance += 25;
             }
 
-            */
+            // Check Strong Starter perk
+            if (TurnController.Instance.CurrentTurn == 1 &&
+                (ability.abilityType.Contains(AbilityType.WeaponAttack) || ability.abilityType.Contains(AbilityType.RangedAttack) || ability.abilityType.Contains(AbilityType.MeleeAttack)) &&
+                attacker.weaponAbilitiesUsedThisTurn == 0 &&
+                attacker.rangedAttackAbilitiesUsedThisTurn == 0 &&
+                attacker.meleeAttackAbilitiesUsedThisTurn == 0 &&
+                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.StrongStarter))
+            {
+                critChance += 35;
+            }
 
             // Check Assssin background
             if (ability != null &&
@@ -855,7 +897,7 @@ namespace HexGameEngine.Combat
 
             // Check Opportunist
             if (ability != null &&
-                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Opportunist) &&                
+                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Opportunist) &&
                 (HexCharacterController.Instance.GetCharacterBackArcTiles(target).Contains(attacker.currentTile) ||
                  HexCharacterController.Instance.IsCharacterFlanked(target)))
             {
@@ -957,18 +999,18 @@ namespace HexGameEngine.Combat
 
             int totalResistance = StatCalculator.GetTotalDebuffResistance(target);
             int baseChance = effect.perkApplicationChance;
-            
+
             // Check for rune
-            if(perkApplied.runeBlocksIncrease && PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Rune))
+            if (perkApplied.runeBlocksIncrease && PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Rune))
             {
                 ret.details.Add(new HitChanceDetailData("Blocked by Rune", -100, true));
                 return ret;
-            }           
+            }
 
             // Check for immunity from 'perksThatBlockThis'
-            foreach(Perk blocker in perkApplied.perksThatBlockThis)
+            foreach (Perk blocker in perkApplied.perksThatBlockThis)
             {
-                if(PerkController.Instance.DoesCharacterHavePerk(target.pManager, blocker))
+                if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, blocker))
                 {
                     ret.details.Add(new HitChanceDetailData("Blocked by " + TextLogic.SplitByCapitals(blocker.ToString()), -100, true));
                     return ret;
@@ -986,9 +1028,9 @@ namespace HexGameEngine.Combat
                 ret.details.Add(new HitChanceDetailData("Target Inoculated", -50));
 
             // Check for shadowcraft passive
-            if (CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Shadowcraft, 1))            
+            if (CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Shadowcraft, 1))
                 ret.details.Add(new HitChanceDetailData("Shadowcraft bonus", 15));
-            
+
 
             // Check base application chance from ability
             ret.details.Add(new HitChanceDetailData("Base chance", baseChance));
@@ -1033,11 +1075,27 @@ namespace HexGameEngine.Combat
                     armourDamageMod = weaponUsed.armourDamage;
                     penetrationMod = weaponUsed.armourPenetration;
 
-                    // check innate weapon backstab penetration
+                    // Check innate weapon effect: Backstab Penetration
                     if (attacker != null && HexCharacterController.Instance.GetCharacterBackArcTiles(target).Contains(attacker.currentTile))
                     {
-                        penetrationMod += (float)ItemController.Instance.GetInnateModifierFromWeapon(InnateItemEffectType.PenetrationBonusOnBackstab, weaponUsed) / 100f;
+                        penetrationMod += ItemController.Instance.GetInnateModifierFromWeapon(InnateItemEffectType.PenetrationBonusOnBackstab, weaponUsed) * 0.01f;
                     }
+
+                    // Check two handed dominance perk: bonus penetration
+                    if (attacker != null &&
+                        attacker.itemSet.IsWieldingTwoHandMeleeWeapon() &&
+                        PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.TwoHandedDominance))
+                    {
+                        penetrationMod += 0.15f;
+                    }
+                }
+
+                // Check Point Blank bonus            
+                if (ability.abilityType.Contains(AbilityType.RangedAttack) &&
+                   PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.PointBlank) &&
+                   LevelController.Instance.GetAllHexsWithinRange(attacker.currentTile, 1).Contains(target.currentTile))
+                {
+                    penetrationMod += 0.25f;
                 }
 
                 Debug.Log("XX ExecuteHandleDamage() Damage modifiers: " +
@@ -1149,14 +1207,51 @@ namespace HexGameEngine.Combat
                 }
             }
 
+            // Check Sturdy Defense
+            if(ability != null && 
+                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.SturdyDefense))
+            {
+                damageResult.totalArmourLost = (int) (damageResult.totalArmourLost * 0.75f);
+                totalArmourLost = (int)(damageResult.totalArmourLost * 0.75f);
+            }
+
+            // Check Agile Defense
+            if (ability != null && 
+                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.AgileDefense))
+            {
+                float adMod = 0.25f;
+                float itemFatPenaltyMod = ItemController.Instance.GetTotalMaximumFatiguePenaltyFromHeadAndBodyItems(target.itemSet) * 0.01f;
+                adMod = 1f - (adMod - itemFatPenaltyMod);
+                damageResult.totalHealthLost = (int)(damageResult.totalHealthLost * adMod);
+                totalHealthLost = (int)(damageResult.totalHealthLost * adMod);
+            }
+
             Debug.Log("XX ExecuteHandleDamage() results: " +
                 "Base damage = " + totalDamage.ToString() +
-                ", Health lost = " + totalHealthLost.ToString() + 
+                ", Health lost = " + totalHealthLost.ToString() +
                 ", Armour Lost = " + totalArmourLost.ToString() +
                 ", Penetration health damage = " + finalPenetration.ToString() +
                 ", Final total damage dealt = " + (totalHealthLost + totalArmourLost).ToString());
 
             bool removedBarrier = false;
+
+            // Check for Bring It On perk
+            if (target.hasTriggeredBringItOn == false &&
+                (totalHealthLost > 0  || totalArmourLost > 0) &&
+                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.BringItOn))
+            {
+                totalHealthLost = 0;
+                totalArmourLost = 0;
+                damageResult.totalHealthLost = 0;
+                damageResult.totalArmourLost = 0;
+                damageResult.totalDamage = 0;
+                target.hasTriggeredBringItOn = true;
+
+                // Status notification
+                VisualEventManager.CreateVisualEvent(() =>
+                VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Bring It On!",
+                PerkController.Instance.GetPerkIconDataByTag(Perk.BringItOn).passiveSprite, StatusFrameType.CircularBrown), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
+            }
 
             // Check for barrier
             if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Barrier) &&
@@ -1350,7 +1445,7 @@ namespace HexGameEngine.Combat
             }
 
             // On health lost events
-            if (totalHealthLost > 0 && target.currentHealth > 0 && target.healthLostThisTurn == 0)
+            if (totalHealthLost > 0 && target.currentHealth > 0)
             {
                 // Vengeful perk
                 if(target != null &&
@@ -1397,7 +1492,7 @@ namespace HexGameEngine.Combat
                     attacker.currentHealth > 0 &&
                     attacker.livingState == LivingState.Alive)
                 {
-                    // Exectioner perk: attacker gains 4 energy on kill
+                    // Exectioner perk: attacker gains 6 energy on kill
                     if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Executioner) && attacker.charactersKilledThisTurn == 0)
                     {
                         // Status notification
@@ -1405,7 +1500,7 @@ namespace HexGameEngine.Combat
                         VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Executioner!", 
                         PerkController.Instance.GetPerkIconDataByTag(Perk.Executioner).passiveSprite, StatusFrameType.CircularBrown), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
 
-                        HexCharacterController.Instance.ModifyActionPoints(attacker, 4);
+                        HexCharacterController.Instance.ModifyActionPoints(attacker, 6);
                     }
 
                     // Gladiator background: recover 2 stress on kill
