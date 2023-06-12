@@ -19,7 +19,15 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Whenever this character loses health, they gain '
+    phrase: 'Whenever this character loses '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Health
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', they gain '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -35,6 +43,8 @@ MonoBehaviour:
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
+  - kewWordType: 41
+    passiveType: 0
   - kewWordType: 1
     passiveType: 154
   maxAllowedStacks: 1
@@ -44,17 +54,18 @@ MonoBehaviour:
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
+  isOnPerkTree: 1
+  perkTreeTier: 2
   isInjury: 0
   isPermanentInjury: 0
-  severity: 0
-  injuryType: 0
-  minInjuryDuration: 0
-  maxInjuryDuration: 0
-  isOnPerkTree: 1
   isRacial: 0
   race: 0
   isBackground: 0
   backgroundPerkQuality: 0
+  severity: 0
+  injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 

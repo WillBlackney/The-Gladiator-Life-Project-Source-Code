@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Juggernaut
   m_EditorClassIdentifier: 
   myName: Juggernaut
-  myClassName: Juggernaut
+  mySubName: 
   race: 1
+  background: 0
   modelSize: 0
   attributeSheet:
     might:
@@ -62,7 +63,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 1d653fb7e4e89d448bae7106e8b49b73, type: 2}
   serializedPassiveManager:
     perks:
-    - perkTag: 200
+    - perkTag: 215
       stacks: 1
       freshInjury: 0
   modelParts: []

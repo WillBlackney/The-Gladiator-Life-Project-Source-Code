@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Paladin
   m_EditorClassIdentifier: 
   myName: Paladin
-  myClassName: Paladin
+  mySubName: 
   race: 1
+  background: 0
   modelSize: 0
   attributeSheet:
     might:
@@ -62,7 +63,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9e3e39c959174ff4e9c6a071583dbd4c, type: 2}
   serializedPassiveManager:
     perks:
-    - perkTag: 72
+    - perkTag: 174
       stacks: 1
       freshInjury: 0
   modelParts: []

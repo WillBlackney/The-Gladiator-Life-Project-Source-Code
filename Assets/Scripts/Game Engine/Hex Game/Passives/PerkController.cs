@@ -6,6 +6,8 @@ using UnityEngine;
 using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
 using HexGameEngine.Items;
+using System.Linq;
+using DG.Tweening;
 
 namespace HexGameEngine.Perks
 {
@@ -20,6 +22,8 @@ namespace HexGameEngine.Perks
         private PerkIconData[] negativeQuirks;
         private PerkIconData[] positiveQuirks;
         private PerkIconData[] neutralQuirks;
+
+        private List<PerkIconData> perkTreePerks;
 
         // Getters
         public PerkIconData[] AllPerks
@@ -96,7 +100,8 @@ namespace HexGameEngine.Perks
             p.showStackCount = data.showStackCount;
             p.maxAllowedStacks = data.maxAllowedStacks;
             p.hiddenOnPassivePanel = data.hiddenOnPassivePanel;
-            p.isRewardable = data.isOnPerkTree;
+            p.isOnPerkTree = data.isOnPerkTree;
+            p.perkTreeTier = data.perkTreeTier;
             p.isBackground = data.isBackground;
             p.backgroundPerkQuality = data.backgroundPerkQuality;
             p.resistanceBlocksDecrease = data.resistanceBlocksDecrease;
@@ -204,19 +209,45 @@ namespace HexGameEngine.Perks
             }
             return rp;
         }
-        public List<PerkIconData> GetAllLevelUpPerks()
+        public List<PerkIconData> GetAllPerkTreePerks()
         {
-            List<PerkIconData> perks = new List<PerkIconData>();
-            foreach(PerkIconData p in allPerks)            
-                if (p.isRewardable) perks.Add(p); 
-            return perks;
+            if(perkTreePerks == null || perkTreePerks.Count == 0)
+            {
+                perkTreePerks = new List<PerkIconData>();
+                foreach (PerkIconData p in allPerks) if (p.isOnPerkTree) perkTreePerks.Add(p);
+                Debug.Log("PerkController.GetAllPerkTreePerks() found " + perkTreePerks.Count.ToString() + " total perk tree perks");
+
+                int t1 = 0;
+                int t2 = 0;
+                int t3 = 0;
+                int t4 = 0;
+                int t5 = 0;
+
+                foreach (PerkIconData p in perkTreePerks)
+                {
+                    if (p.perkTreeTier == 1) t1++;
+                    else if (p.perkTreeTier == 2) t2++;
+                    else if (p.perkTreeTier == 3) t3++;
+                    else if (p.perkTreeTier == 4) t4++;
+                    else if (p.perkTreeTier == 5) t5++;
+                }
+
+                Debug.Log("PerkController.GetAllPerkTreePerks() " +
+                "tier 1 perks = " + t1.ToString() + ", " +
+                "tier 2 perks = " + t2.ToString() + ", " +
+                "tier 3 perks = " + t3.ToString() + ", " +
+                "tier 4 perks = " + t4.ToString() + ", " +
+                "tier 5 perks = " + t5.ToString());
+            } 
+            
+            return perkTreePerks;           
         }
         public List<ActivePerk> GetAllLevelUpPerksOnCharacter(HexCharacterData character)
         {
             List<ActivePerk> perks = new List<ActivePerk>();
             foreach (ActivePerk ap in character.passiveManager.perks)
             {
-                if (ap.Data.isRewardable)
+                if (ap.Data.isOnPerkTree)
                     perks.Add(ap);
             }
             return perks;

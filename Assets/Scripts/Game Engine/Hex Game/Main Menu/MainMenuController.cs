@@ -17,6 +17,7 @@ using HexGameEngine.Abilities;
 using HexGameEngine.Items;
 using HexGameEngine.Perks;
 using Sirenix.Utilities;
+using System.Linq;
 
 namespace HexGameEngine.MainMenu
 {
@@ -126,7 +127,7 @@ namespace HexGameEngine.MainMenu
         private HexCharacterData currentPreset;
         private RaceDataSO currentCustomCharacterRace;
         private CharacterModelTemplateSO currentModelTemplate;
-        private List<PerkIconData> allLevelUpPerks = new List<PerkIconData>();
+        private List<PerkIconData> starterLevelUpPerks = new List<PerkIconData>();
         private int availableChoosePerkPoints = 0;
         private const int totalAllowedPerkChoices = 1;
 
@@ -281,6 +282,10 @@ namespace HexGameEngine.MainMenu
             characterBuild.background = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.TheKid);
             characterBuild.dailyWage = RandomGenerator.NumberBetween(characterBuild.background.dailyWageMin, characterBuild.background.dailyWageMax);
             HandleChangeClassPreset(startingClassTemplate);
+
+            // Start at level 2
+            characterBuild.currentLevel = 2;
+            characterBuild.currentMaxXP = CharacterDataController.Instance.GetMaxXpCapForLevel(2);
 
             // Set to template 1 
             RebuildAndShowOriginPageView();
@@ -640,15 +645,23 @@ namespace HexGameEngine.MainMenu
             SetAvailableChoosePerkPoints(totalAllowedPerkChoices);
 
             // Get and cache all level up perks if havent already
-            if (allLevelUpPerks.Count == 0)            
-               allLevelUpPerks =  PerkController.Instance.GetAllLevelUpPerks();
+            if (starterLevelUpPerks.Count == 0)
+            {
+                foreach(var p in PerkController.Instance.GetAllPerkTreePerks())
+                {
+                    if(p.perkTreeTier == 1)
+                    {
+                        starterLevelUpPerks.Add(p);
+                    }
+                }
+            }     
 
             // Reset all perk panels to default state
             for(int i = 0; i < allChoosePerkPanels.Count; i++)            
                 allChoosePerkPanels[i].Reset();
             
             // Build a choose perk panel for each level up perk option
-            for(int i = 0; i < allLevelUpPerks.Count; i++)
+            for(int i = 0; i < starterLevelUpPerks.Count; i++)
             {
                 // Create new panels in list if there arent enough to show all the perks
                 if(allChoosePerkPanels.Count <= i)
@@ -659,10 +672,10 @@ namespace HexGameEngine.MainMenu
 
                 // Build the panel from perk
                 var panel = allChoosePerkPanels[i];
-                panel.Build(new ActivePerk(allLevelUpPerks[i].perkTag, 1));
+                panel.Build(new ActivePerk(starterLevelUpPerks[i].perkTag, 1));
 
                 // If already has the perk, set that perk as selected and deduct a perk choice point.
-                if(PerkController.Instance.DoesCharacterHavePerk(characterBuild.passiveManager, allLevelUpPerks[i].perkTag))
+                if(PerkController.Instance.DoesCharacterHavePerk(characterBuild.passiveManager, starterLevelUpPerks[i].perkTag))
                 {
                     SetAvailableChoosePerkPoints(availableChoosePerkPoints - 1);
                     panel.SetSelectedViewState(true);

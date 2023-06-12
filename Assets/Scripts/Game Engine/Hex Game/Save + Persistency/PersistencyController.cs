@@ -64,6 +64,9 @@ namespace HexGameEngine.Persistency
                 // Get player custom made character data
                 startingCharacter = MainMenuController.Instance.CharacterBuild;
 
+                // Adjust perk tree to accomodate starting perk choice
+                startingCharacter.PerkTree.HandleAdjustTreeIfStartingPerkChoiceAlreadyMade(startingCharacter);
+
                 // Learn abilites from selected items for starting character
                 startingCharacter.abilityBook.HandleLearnAbilitiesFromItemSet(startingCharacter.itemSet);
             }               

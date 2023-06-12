@@ -61,42 +61,30 @@ namespace HexGameEngine.Perks
         public bool runeBlocksIncrease;
         [VerticalGroup("Resistance Interactions")]
         [LabelWidth(200)]
-        public bool runeBlocksDecrease;
-
-        [Header("Injury Properties")]
-        [VerticalGroup("Injury Interactions")]
-        [LabelWidth(200)]
-        [ShowIf("ShowInjury")]
-        public bool isInjury;
-        [VerticalGroup("Injury Interactions")]
-        [ShowIf("ShowPermanentInjury")]
-        [LabelWidth(200)]
-        public bool isPermanentInjury;
-        [VerticalGroup("Injury Interactions")]
-        [ShowIf("ShowInjuryFields")]
-        [LabelWidth(200)]
-        public InjurySeverity severity;
-        [VerticalGroup("Injury Interactions")]
-        [ShowIf("ShowInjuryFields")]
-        [LabelWidth(200)]
-        public InjuryType injuryType;
-        [VerticalGroup("Injury Interactions")]
-        [ShowIf("ShowInjuryFields")]
-        [LabelWidth(200)]
-        [Range(1,12)]
-        public int minInjuryDuration;
-        [VerticalGroup("Injury Interactions")]
-        [ShowIf("ShowInjuryFields")]
-        [LabelWidth(200)]
-        [Range(1, 12)]
-        public int maxInjuryDuration;
-
+        public bool runeBlocksDecrease;              
+       
         [Space(10)]
 
         [Header("Subtype Properties")]
         [VerticalGroup("Subtype Interactions")]
         [LabelWidth(200)]
         public bool isOnPerkTree;
+
+        [VerticalGroup("Subtype Interactions")]
+        [ShowIf("ShowPerkTreeTier")]
+        [LabelWidth(200)]
+        [Range(1,5)]
+        public int perkTreeTier;
+
+        [VerticalGroup("Subtype Properties")]
+        [LabelWidth(200)]
+        [ShowIf("ShowInjury")]
+        public bool isInjury;
+
+        [VerticalGroup("Subtype Properties")]
+        [ShowIf("ShowPermanentInjury")]
+        [LabelWidth(200)]
+        public bool isPermanentInjury;
 
         [VerticalGroup("Subtype Interactions")]
         [LabelWidth(200)]
@@ -116,6 +104,28 @@ namespace HexGameEngine.Perks
         [LabelWidth(200)]
         public PerkQuality backgroundPerkQuality;
 
+       
+
+        [Header("Injury Properties")]
+        [VerticalGroup("Injury Interactions")]
+        [ShowIf("ShowInjuryFields")]
+        [LabelWidth(200)]
+        public InjurySeverity severity;
+        [VerticalGroup("Injury Interactions")]
+        [ShowIf("ShowInjuryFields")]
+        [LabelWidth(200)]
+        public InjuryType injuryType;
+        [VerticalGroup("Injury Interactions")]
+        [ShowIf("ShowInjuryFields")]
+        [LabelWidth(200)]
+        [Range(1, 12)]
+        public int minInjuryDuration;
+        [VerticalGroup("Injury Interactions")]
+        [ShowIf("ShowInjuryFields")]
+        [LabelWidth(200)]
+        [Range(1, 12)]
+        public int maxInjuryDuration;
+
         [Header("Interactions with Other Perks")]
         [VerticalGroup("Linked Interactions")]
         [LabelWidth(200)]
@@ -133,22 +143,26 @@ namespace HexGameEngine.Perks
         [Header("Visual Events")]
         public List<AnimationEventData> visualEventsOnApplication;
 
+        public bool ShowPerkTreeTier()
+        {
+            return isOnPerkTree;
+        }
         public bool ShowInjuryFields()
         {
             return isInjury;
         }
         public bool ShowInjury()
         {
-            return !isPermanentInjury;
+            return !isPermanentInjury && !isOnPerkTree && !isRacial && !isBackground;
         }
         public bool ShowPermanentInjury()
         {
-            return !isInjury;
+            return !isInjury && !isOnPerkTree && !isRacial && !isBackground;
         }
 
         public bool ShowRace()
         {
-            return isRacial;
+            return isRacial && !isInjury && !isOnPerkTree && !isBackground;
         }
         public bool ShowBackgroundPerkQuality()
         {

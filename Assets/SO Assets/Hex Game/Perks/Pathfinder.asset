@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
-  m_Name: Path Finder
+  m_Name: Pathfinder
   m_EditorClassIdentifier: 
   passiveSprite: {fileID: 21300000, guid: 5ca7fb9ea0c2db5418b11de52be8b5a2, type: 3}
   passiveName: Pathfinder
@@ -54,17 +54,18 @@ MonoBehaviour:
   resistanceBlocksDecrease: 1
   runeBlocksIncrease: 0
   runeBlocksDecrease: 1
+  isOnPerkTree: 1
+  perkTreeTier: 4
   isInjury: 0
   isPermanentInjury: 0
-  severity: 0
-  injuryType: 0
-  minInjuryDuration: 0
-  maxInjuryDuration: 0
-  isOnPerkTree: 1
   isRacial: 0
   race: 0
   isBackground: 0
   backgroundPerkQuality: 0
+  severity: 0
+  injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 

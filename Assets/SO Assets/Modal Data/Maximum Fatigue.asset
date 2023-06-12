@@ -36,4 +36,13 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: a character can accumulate before becoming unable to take actions.
+      phrase: 'a character can accumulate before becoming unable to take actions.
+        Increased by leveling up '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Fitness '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: and reduced by equipped items.

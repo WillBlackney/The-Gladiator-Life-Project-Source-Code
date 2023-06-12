@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Brawler
   m_EditorClassIdentifier: 
   myName: Brawler
-  myClassName: Brawler
+  mySubName: 
   race: 1
+  background: 0
   modelSize: 0
   attributeSheet:
     might:
@@ -62,7 +63,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
   serializedPassiveManager:
     perks:
-    - perkTag: 67
+    - perkTag: 218
       stacks: 1
       freshInjury: 0
   modelParts: []

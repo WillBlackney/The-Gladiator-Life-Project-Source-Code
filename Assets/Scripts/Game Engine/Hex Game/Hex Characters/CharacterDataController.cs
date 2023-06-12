@@ -676,7 +676,7 @@ namespace HexGameEngine.Characters
             character.currentMaxXP = 50;
             SetCharacterLevel(character, 1);
         }
-        private int GetMaxXpCapForLevel(int level)
+        public int GetMaxXpCapForLevel(int level)
         {
             // each level requires 50 more XP than the previous.
             if (level == 1) return 50;
@@ -812,7 +812,7 @@ namespace HexGameEngine.Characters
             // Set up perks + quirks
             newCharacter.passiveManager = new PerkManagerModel(newCharacter);
             GetAndApplyRandomQuirksToCharacter(newCharacter);
-            newCharacter.PerkTree = new PerkTreeData();
+            newCharacter.PerkTree = new PerkTreeData(newCharacter);
 
             // Set up health
             SetCharacterMaxHealth(newCharacter, 0);

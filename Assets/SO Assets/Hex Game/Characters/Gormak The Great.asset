@@ -59,7 +59,10 @@ MonoBehaviour:
   abilityBook:
     activeAbilities: []
   serializedPassiveManager:
-    perks: []
+    perks:
+    - perkTag: 87
+      stacks: 1
+      freshInjury: 0
   modelParts:
   - Orc_Chest_1
   - Orc_Head_1

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Marksman
   m_EditorClassIdentifier: 
   myName: Marksman
-  myClassName: Marksman
+  mySubName: 
   race: 1
+  background: 0
   modelSize: 0
   attributeSheet:
     might:
@@ -62,7 +63,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a01d97efceeec0949b211610819e5cbb, type: 2}
   serializedPassiveManager:
     perks:
-    - perkTag: 70
+    - perkTag: 218
       stacks: 1
       freshInjury: 0
   modelParts: []

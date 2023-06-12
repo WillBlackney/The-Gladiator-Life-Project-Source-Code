@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Death Knight
   m_EditorClassIdentifier: 
   myName: Death Knight
-  myClassName: Death Knight
+  mySubName: 
   race: 1
+  background: 0
   modelSize: 0
   attributeSheet:
     might:
@@ -62,7 +63,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 507ff3973c3f4a44ea421a51ff989b75, type: 2}
   serializedPassiveManager:
     perks:
-    - perkTag: 60
+    - perkTag: 217
       stacks: 1
       freshInjury: 0
   modelParts: []

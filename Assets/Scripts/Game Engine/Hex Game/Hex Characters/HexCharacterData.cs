@@ -65,7 +65,7 @@ namespace HexGameEngine.Characters
         {
             get
             {
-                if (perkTree == null && PerkController.Instance != null) perkTree = new PerkTreeData();
+                if (perkTree == null && PerkController.Instance != null) perkTree = new PerkTreeData(this);
                 return perkTree;
             }
             set { perkTree = value; }

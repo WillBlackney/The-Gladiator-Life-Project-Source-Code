@@ -22,6 +22,8 @@ MonoBehaviour:
   baseCooldown: 3
   abilityType: 01000000
   doesNotBreakStealth: 0
+  guidanceInstruction: 0
+  guidanceInstructionTwo: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
   derivedFromItemLoadout: 0
@@ -237,10 +239,14 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: '10 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Health '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'health. Gain '
+    phrase: '. Gain '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -254,5 +260,7 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: .
   keyWords:
+  - kewWordType: 41
+    passiveType: 0
   - kewWordType: 2
     passiveType: 0

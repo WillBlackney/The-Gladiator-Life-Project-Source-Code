@@ -18,7 +18,8 @@ namespace HexGameEngine.Perks
         public KeyWordModel[] keywords;
         public bool showStackCount;
         public bool hiddenOnPassivePanel;
-        public bool isRewardable;
+        public bool isOnPerkTree;
+        public int perkTreeTier;
         public bool isBackground;
         public PerkQuality backgroundPerkQuality;
         public bool resistanceBlocksIncrease;

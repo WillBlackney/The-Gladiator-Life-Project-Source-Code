@@ -342,7 +342,7 @@ namespace HexGameEngine.StoryEvents
 
             return CurrentStoryEvent;
         }
-        private List<StoryEventDataSO> GetValidStoryEvents()
+        private List<StoryEventDataSO> GetValidStoryEvents(bool shuffled = true)
         {
             List<StoryEventDataSO> listReturned = new List<StoryEventDataSO>();
             foreach (StoryEventDataSO s in AllStoryEvents)
@@ -350,8 +350,8 @@ namespace HexGameEngine.StoryEvents
                 if (IsStoryEventValid(s))
                     listReturned.Add(s);
             }
-
-            return listReturned;
+            if (shuffled) return listReturned.ShuffledCopy();
+            else return listReturned;
         }
         #endregion
 

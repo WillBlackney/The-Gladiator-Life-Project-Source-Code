@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Champion
   m_EditorClassIdentifier: 
   myName: Champion
-  myClassName: Champion
+  mySubName: 
   race: 1
+  background: 0
   modelSize: 0
   attributeSheet:
     might:
@@ -62,7 +63,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
   serializedPassiveManager:
     perks:
-    - perkTag: 16
+    - perkTag: 218
       stacks: 1
       freshInjury: 0
   modelParts: []

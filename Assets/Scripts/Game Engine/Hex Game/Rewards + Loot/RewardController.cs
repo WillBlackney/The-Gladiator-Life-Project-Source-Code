@@ -148,7 +148,7 @@ namespace HexGameEngine.RewardSystems
 
             foreach (PerkIconData p in PerkController.Instance.AllPerks)
             {
-                if (p.isRewardable && !PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, p.perkTag))
+                if (p.isOnPerkTree && !PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, p.perkTag))
                 {
                     validPerks.Add(p.perkTag);
                 }

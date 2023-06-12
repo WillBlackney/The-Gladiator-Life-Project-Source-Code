@@ -3,6 +3,8 @@ using HexGameEngine.Utilities;
 using Sirenix.Serialization;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
 namespace HexGameEngine.Characters
@@ -56,25 +58,72 @@ namespace HexGameEngine.Characters
         {
             if (PerkController.Instance == null || hasGeneratedTree) return;
             hasGeneratedTree = true;
-            List<PerkIconData> choices = PerkController.Instance.GetAllLevelUpPerks();
-            // TO DO: Filter out already known perks
+            List<PerkIconData> prospects = new List<PerkIconData>();
+            prospects.AddRange(PerkController.Instance.GetAllPerkTreePerks());
+            prospects.Shuffle();
 
-            choices.Shuffle();
-            perkChoices = new List<PerkTreePerk>();
-            int tier = 1;
-            for (int i = 0; i < 15 && i < choices.Count; i++)
+            List<PerkTreePerk> t1 = new List<PerkTreePerk>();
+            List<PerkTreePerk> t2 = new List<PerkTreePerk>();
+            List<PerkTreePerk> t3 = new List<PerkTreePerk>();
+            List<PerkTreePerk> t4 = new List<PerkTreePerk>();
+            List<PerkTreePerk> t5 = new List<PerkTreePerk>();
+
+            for (int i = 0; i < prospects.Count; i++)
             {
-                perkChoices.Add(new PerkTreePerk(new ActivePerk(choices[i].perkTag, 1, choices[i]), tier));
-                if ((i + 1) % 3 == 0) tier += 1;
+                PerkIconData perk = prospects[i];
+
+                if((perk.perkTreeTier == 1 && t1.Count < 3) ||
+                    (perk.perkTreeTier == 2 && t2.Count < 3) ||
+                    (perk.perkTreeTier == 3 && t3.Count < 3) ||
+                    (perk.perkTreeTier == 4 && t4.Count < 3) ||
+                    (perk.perkTreeTier == 5 && t5.Count < 3))
+                {
+                    PerkTreePerk newPerk = new PerkTreePerk(new ActivePerk(perk.perkTag, 1, perk), perk.perkTreeTier);
+
+                    if (perk.perkTreeTier == 1) t1.Add(newPerk);
+                    else if (perk.perkTreeTier == 2) t2.Add(newPerk);
+                    else if (perk.perkTreeTier == 3) t3.Add(newPerk);
+                    else if (perk.perkTreeTier == 4) t4.Add(newPerk);
+                    else if (perk.perkTreeTier == 5) t5.Add(newPerk);
+                }
             }
-                
+
+            perkChoices.AddRange(t1);
+            perkChoices.AddRange(t2);
+            perkChoices.AddRange(t3);
+            perkChoices.AddRange(t4);
+            perkChoices.AddRange(t5);
         }
 
         public PerkTreeData()
         {
             GenerateTree();
         }
+        public PerkTreeData(HexCharacterData character)
+        {
+            GenerateTree();
+            HandleAdjustTreeIfStartingPerkChoiceAlreadyMade(character);
+        }
         public int nextAvailableTier = 1;
+
+        public void HandleAdjustTreeIfStartingPerkChoiceAlreadyMade(HexCharacterData myCharacter)
+        {
+            List<Perk> tierOnePerks = new List<Perk>();
+            foreach(PerkTreePerk pt in perkChoices)
+            {
+                if (pt.perk.Data.perkTreeTier == 1) tierOnePerks.Add(pt.perk.perkTag);
+            }
+            foreach(ActivePerk p in myCharacter.passiveManager.perks)
+            {
+                if(p.Data.isOnPerkTree && p.Data.perkTreeTier == 1 &&
+                    tierOnePerks.Contains(p.perkTag) == false)
+                {
+                    perkChoices[0] = new PerkTreePerk(p, 1);
+                    nextAvailableTier += 1;
+                    break;
+                }
+            }
+        }
 
        
     }

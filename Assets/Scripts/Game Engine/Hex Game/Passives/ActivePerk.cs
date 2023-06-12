@@ -9,7 +9,7 @@ namespace HexGameEngine.Perks
     {
         public Perk perkTag;
         public int stacks;
-        public bool freshInjury = false;
+        [HideInInspector] public bool freshInjury = false;
         private PerkIconData data;
         public PerkIconData Data
         {
