@@ -507,7 +507,7 @@ namespace HexGameEngine
         Indecisive = 96,
         Inattentive = 103,
         Inoculated = 118,
-        InspiringLeader = 72,
+        InspiringPresence = 72,
         IronWill = 128,
         Irrational = 116,
         Locomotion = 150,
@@ -625,7 +625,7 @@ namespace HexGameEngine
 
         Apprenctice = 214,
         WhatDoesntKillMe = 215,
-        WhatDoesntKillMeStacks = 216,
+        WhatHasntKilledMe = 216,
         Tenacious = 217,
         StrongStarter = 218,
         FuriousAssault = 219,

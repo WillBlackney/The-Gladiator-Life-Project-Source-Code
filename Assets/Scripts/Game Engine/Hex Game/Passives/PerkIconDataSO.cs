@@ -44,10 +44,7 @@ namespace HexGameEngine.Perks
         public bool showStackCount;
         [VerticalGroup("Core Data/Properties")]
         [LabelWidth(200)]
-        public bool hiddenOnPassivePanel;
-        [VerticalGroup("Core Data/Properties")]
-        [LabelWidth(200)]
-        public bool isRewardable;
+        public bool hiddenOnPassivePanel;      
       
 
         [Header("Resistance Interactions")]
@@ -67,61 +64,68 @@ namespace HexGameEngine.Perks
         public bool runeBlocksDecrease;
 
         [Header("Injury Properties")]
-        [VerticalGroup("Resistance Interactions")]
+        [VerticalGroup("Injury Interactions")]
         [LabelWidth(200)]
         [ShowIf("ShowInjury")]
         public bool isInjury;
-        [VerticalGroup("Resistance Interactions")]
+        [VerticalGroup("Injury Interactions")]
         [ShowIf("ShowPermanentInjury")]
         [LabelWidth(200)]
         public bool isPermanentInjury;
-        [VerticalGroup("Resistance Interactions")]
+        [VerticalGroup("Injury Interactions")]
         [ShowIf("ShowInjuryFields")]
         [LabelWidth(200)]
         public InjurySeverity severity;
-        [VerticalGroup("Resistance Interactions")]
+        [VerticalGroup("Injury Interactions")]
         [ShowIf("ShowInjuryFields")]
         [LabelWidth(200)]
         public InjuryType injuryType;
-        [VerticalGroup("Resistance Interactions")]
+        [VerticalGroup("Injury Interactions")]
         [ShowIf("ShowInjuryFields")]
         [LabelWidth(200)]
         [Range(1,12)]
         public int minInjuryDuration;
-        [VerticalGroup("Resistance Interactions")]
+        [VerticalGroup("Injury Interactions")]
         [ShowIf("ShowInjuryFields")]
         [LabelWidth(200)]
         [Range(1, 12)]
         public int maxInjuryDuration;
 
-        [VerticalGroup("Resistance Interactions")]
+        [Space(10)]
+
+        [Header("Subtype Properties")]
+        [VerticalGroup("Subtype Interactions")]
+        [LabelWidth(200)]
+        public bool isOnPerkTree;
+
+        [VerticalGroup("Subtype Interactions")]
         [LabelWidth(200)]
         public bool isRacial;
      
-        [VerticalGroup("Resistance Interactions")]
+        [VerticalGroup("Subtype Interactions")]
         [ShowIf("ShowRace")]
         [LabelWidth(200)]
         public CharacterRace race;
 
-        [VerticalGroup("Resistance Interactions")]
+        [VerticalGroup("Subtype Interactions")]
         [LabelWidth(200)]
         public bool isBackground;
 
-        [VerticalGroup("Resistance Interactions")]
+        [VerticalGroup("Subtype Interactions")]
         [ShowIf("ShowBackgroundPerkQuality")]
         [LabelWidth(200)]
         public PerkQuality backgroundPerkQuality;
 
         [Header("Interactions with Other Perks")]
-        [VerticalGroup("Resistance Interactions")]
+        [VerticalGroup("Linked Interactions")]
         [LabelWidth(200)]
         [Tooltip("Perks that are removed from the character if this perk is applied (e.g. Stun Immunity perk removes Stunned perk hen applied")]
         public List<Perk> perksRemovedOnThisApplication;
-        [VerticalGroup("Resistance Interactions")]
+        [VerticalGroup("Linked Interactions")]
         [LabelWidth(200)]
         [Tooltip("Perks that are gained when this perk expires(e.g. Stun Immunity perk is gained when Stunned perk expires")]
         public List<Perk> perksGainedOnThisExpiry;
-        [VerticalGroup("Resistance Interactions")]
+        [VerticalGroup("Linked Interactions")]
         [LabelWidth(200)]
         [Tooltip("Perks that cannot be gained if a character has this perk (e.g. cannot be Blinded if affected by Eagle Eyes")]
         public List<Perk> perksThatBlockThis;

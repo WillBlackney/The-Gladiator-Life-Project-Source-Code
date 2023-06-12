@@ -10,45 +10,74 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
-  m_Name: Rapid Cloaking
+  m_Name: Dual Wield Finesse
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: a33e3d7cb2cf23648a55c16062b1baf5, type: 3}
-  passiveName: Rapid Cloaking
-  perkTag: 173
+  passiveSprite: {fileID: 21300000, guid: 02ec0d292e2bc684db99be82ee4d597a, type: 3}
+  passiveName: Dual Wield Finesse
+  perkTag: 224
   passiveDescription:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'On turn end, if you don''t have '
+    phrase: 'While dual wielding melee weapons, this character''s '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Stealth
+    phrase: 'Weapon Attack '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: ', gain '
+    phrase: 'abilities generate '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '1 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Stealth
+    phrase: '25% '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: .
+    phrase: 'less '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Fatigue '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and they gain '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '+10 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Dodge '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'against '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Melee Attack '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: abilities.
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
-  - kewWordType: 1
-    passiveType: 77
-  maxAllowedStacks: 10
+  - kewWordType: 38
+    passiveType: 0
+  - kewWordType: 36
+    passiveType: 0
+  - kewWordType: 12
+    passiveType: 0
+  - kewWordType: 3
+    passiveType: 0
+  maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1
-  isRewardable: 1
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0
@@ -59,6 +88,7 @@ MonoBehaviour:
   injuryType: 0
   minInjuryDuration: 0
   maxInjuryDuration: 0
+  isOnPerkTree: 1
   isRacial: 0
   race: 0
   isBackground: 0

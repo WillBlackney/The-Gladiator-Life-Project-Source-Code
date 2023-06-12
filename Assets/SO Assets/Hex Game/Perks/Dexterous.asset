@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
+  m_Name: Dexterous
+  m_EditorClassIdentifier: 
+  passiveSprite: {fileID: 21300000, guid: 7d8a93fcdb4c1ed48a32ebe25d7b898e, type: 3}
+  passiveName: Dexterous
+  perkTag: 196
+  passiveDescription:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'The penalty to '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Maximum Fatigue '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'caused by equipped items is reduced by '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 50%
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: for this character.
+  passiveItalicDescription: 
+  effectDetailTabs: []
+  keyWords:
+  - kewWordType: 36
+    passiveType: 0
+  maxAllowedStacks: 1
+  showStackCount: 0
+  hiddenOnPassivePanel: 1
+  resistanceBlocksIncrease: 0
+  resistanceBlocksDecrease: 0
+  runeBlocksIncrease: 0
+  runeBlocksDecrease: 0
+  isInjury: 0
+  isPermanentInjury: 0
+  severity: 0
+  injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
+  isOnPerkTree: 1
+  isRacial: 0
+  race: 0
+  isBackground: 0
+  backgroundPerkQuality: 0
+  perksRemovedOnThisApplication: 
+  perksGainedOnThisExpiry: 
+  perksThatBlockThis: 
+  visualEventsOnApplication: []

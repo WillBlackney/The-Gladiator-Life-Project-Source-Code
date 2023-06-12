@@ -10,51 +10,72 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
-  m_Name: Inspiring Leader
+  m_Name: What Doesn't Kill Me
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: cde56b32d026f0044aa3802ce054d4e5, type: 3}
-  passiveName: Inspiring Leader
-  perkTag: 72
+  passiveSprite: {fileID: 21300000, guid: 3bf1d0ef057a59a49bbab0df8dd0fc8f, type: 3}
+  passiveName: What Doesn't Kill Me
+  perkTag: 215
   passiveDescription:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Allies within this character''s '
+    phrase: 'Whenever this character suffers an '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Aura '
+    phrase: Injury
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'gain '
+    phrase: ', it permanently gains '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '25% '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'of this character''s total '
+    phrase: '3 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Resolve '
+    phrase: Might
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: as a bonus to their own. This effect cannot stack.
+    phrase: ', '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Constitution '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Resolve
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '. Maximum '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '5 '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: stacks.
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
-  - kewWordType: 6
+  - kewWordType: 31
+    passiveType: 0
+  - kewWordType: 13
     passiveType: 0
   - kewWordType: 14
     passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1
-  isRewardable: 1
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0
@@ -65,6 +86,7 @@ MonoBehaviour:
   injuryType: 0
   minInjuryDuration: 0
   maxInjuryDuration: 0
+  isOnPerkTree: 1
   isRacial: 0
   race: 0
   isBackground: 0

@@ -10,28 +10,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
-  m_Name: Skill Mastery
+  m_Name: Two Handed Dominance
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 6c3923b74e90da34a8c6c99fa1351e2e, type: 3}
-  passiveName: Skill Mastery
-  perkTag: 17
+  passiveSprite: {fileID: 21300000, guid: 81bd9dddf7e568344b8c41dd588bdf54, type: 3}
+  passiveName: Two Handed Dominance
+  perkTag: 222
   passiveDescription:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'This character''s first '
+    phrase: 'While wielding a two handed melee weapon, this character''s '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Skill '
+    phrase: 'Weapon Attack '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'ability each turn costs '
+    phrase: 'abilities gain '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '1 '
+    phrase: '+15% '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Armour Penetration '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and generate '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '25% '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -39,7 +51,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Action Point
+    phrase: Fatigue
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -47,14 +59,13 @@ MonoBehaviour:
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
-  - kewWordType: 5
+  - kewWordType: 38
     passiveType: 0
-  - kewWordType: 2
+  - kewWordType: 36
     passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1
-  isRewardable: 1
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0
@@ -65,6 +76,7 @@ MonoBehaviour:
   injuryType: 0
   minInjuryDuration: 0
   maxInjuryDuration: 0
+  isOnPerkTree: 1
   isRacial: 0
   race: 0
   isBackground: 0

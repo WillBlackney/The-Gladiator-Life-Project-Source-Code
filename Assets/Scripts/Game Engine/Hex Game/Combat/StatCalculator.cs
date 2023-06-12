@@ -41,7 +41,7 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brute))
                 might += 10;
 
-            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.WhatDoesntKillMeStacks);
+            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.WhatHasntKilledMe);
             might += wdkmStacks * 3;
 
             // Check Fear + Hate of X Perks
@@ -125,7 +125,7 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Brute))
                 might += 10;
 
-            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.passiveManager, Perk.WhatDoesntKillMeStacks);
+            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.passiveManager, Perk.WhatHasntKilledMe);
             might += wdkmStacks * 3;
 
             // Items
@@ -151,7 +151,7 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fat))
                 constitution += 20;
 
-            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.WhatDoesntKillMeStacks);
+            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.WhatHasntKilledMe);
             constitution += wdkmStacks * 3;
 
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
@@ -210,7 +210,7 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fat))
                 constitution += 20;
 
-            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.passiveManager, Perk.WhatDoesntKillMeStacks);
+            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.passiveManager, Perk.WhatHasntKilledMe);
             constitution += wdkmStacks * 3;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Tenacious))
@@ -590,7 +590,7 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
                 resolve += 3;
 
-            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.WhatDoesntKillMeStacks);
+            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.WhatHasntKilledMe);
             resolve += wdkmStacks * 3;
 
             // Check Inspiring Leader perk: +25% resolve if within an ally's aura
@@ -598,7 +598,7 @@ namespace HexGameEngine
             {
                 foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(c))
                 {
-                    if (PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.InspiringLeader) &&
+                    if (PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.InspiringPresence) &&
                         LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, GetTotalAuraSize(ally)).Contains(c.currentTile))
                     {
                         resolve += (int)(GetTotalResolve(ally, false) * 0.35f);
@@ -697,7 +697,7 @@ namespace HexGameEngine
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Polymath))
                 resolve += 3;
 
-            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.passiveManager, Perk.WhatDoesntKillMeStacks);
+            int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.passiveManager, Perk.WhatHasntKilledMe);
             resolve += wdkmStacks * 3;
 
             // Items

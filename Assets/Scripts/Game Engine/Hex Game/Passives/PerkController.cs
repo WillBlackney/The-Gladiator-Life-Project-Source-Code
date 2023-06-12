@@ -96,7 +96,7 @@ namespace HexGameEngine.Perks
             p.showStackCount = data.showStackCount;
             p.maxAllowedStacks = data.maxAllowedStacks;
             p.hiddenOnPassivePanel = data.hiddenOnPassivePanel;
-            p.isRewardable = data.isRewardable;
+            p.isRewardable = data.isOnPerkTree;
             p.isBackground = data.isBackground;
             p.backgroundPerkQuality = data.backgroundPerkQuality;
             p.resistanceBlocksDecrease = data.resistanceBlocksDecrease;

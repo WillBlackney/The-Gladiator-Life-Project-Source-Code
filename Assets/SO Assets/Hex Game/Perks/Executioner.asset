@@ -23,7 +23,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '4 '
+    phrase: '6 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -40,7 +40,6 @@ MonoBehaviour:
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1
-  isRewardable: 1
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0
@@ -51,6 +50,7 @@ MonoBehaviour:
   injuryType: 0
   minInjuryDuration: 0
   maxInjuryDuration: 0
+  isOnPerkTree: 1
   isRacial: 0
   race: 0
   isBackground: 0

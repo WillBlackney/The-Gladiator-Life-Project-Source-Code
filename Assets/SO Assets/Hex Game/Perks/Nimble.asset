@@ -31,16 +31,25 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
+    phrase: 'and does not trigger '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Free Strikes
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
     phrase: .
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
   - kewWordType: 2
     passiveType: 0
+  - kewWordType: 25
+    passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1
-  isRewardable: 1
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0
@@ -51,6 +60,7 @@ MonoBehaviour:
   injuryType: 0
   minInjuryDuration: 0
   maxInjuryDuration: 0
+  isOnPerkTree: 1
   isRacial: 0
   race: 0
   isBackground: 0
