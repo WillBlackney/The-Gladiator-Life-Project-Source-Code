@@ -104,15 +104,15 @@ namespace HexGameEngine.RewardSystems
             LevelUpParent.SetActive(true);
             LevelUpParent.transform.DOKill();
             LevelUpParent.transform.DOScale(new Vector3(2, 2, 2), 0f);
-            LevelUpParent.transform.DOScale(new Vector3(2.5f, 2.5f, 2.5f), 0.5f).SetLoops(-1, LoopType.Yoyo);
-            LevelUpParent.transform.DOLocalRotate(new Vector3(0.0f, 0.0f, 360), 1.0f)
+            LevelUpParent.transform.DOScale(new Vector3(2.25f, 2.25f, 2.25f), 1f).SetLoops(-1, LoopType.Yoyo);
+            LevelUpParent.transform.DOLocalRotate(new Vector3(0.0f, 0.0f, 360), 2f)
                 .SetLoops(-1, LoopType.Incremental)
                 .SetEase(Ease.Linear)
                 .SetRelative();
 
             levelUpParentCg.DOKill();
-            levelUpParentCg.DOFade(0.35f, 0f);
-            levelUpParentCg.DOFade(0.75f, 0.5f).SetLoops(-1, LoopType.Yoyo);
+            levelUpParentCg.DOFade(0.65f, 0f);
+            levelUpParentCg.DOFade(1f, 1f).SetLoops(-1, LoopType.Yoyo);
 
         }
     }

@@ -19,27 +19,29 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: This character is guarantted to act last every turn.
+    phrase: This character is guaranteed to act last every turn.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords: []
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1
-  isRewardable: 0
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
+  isOnPerkTree: 0
+  perkTreeTier: 0
   isInjury: 0
   isPermanentInjury: 0
-  severity: 0
-  injuryType: 0
-  minInjuryDuration: 0
-  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 1
   backgroundPerkQuality: 0
+  severity: 0
+  injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 

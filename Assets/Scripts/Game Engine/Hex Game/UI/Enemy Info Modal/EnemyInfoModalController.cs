@@ -13,6 +13,7 @@ using HexGameEngine.Combat;
 using HexGameEngine.Libraries;
 using System.Linq;
 using HexGameEngine.HexTiles;
+using HexGameEngine.Abilities;
 
 namespace HexGameEngine.UI
 {
@@ -71,7 +72,10 @@ namespace HexGameEngine.UI
             QueuedShow thisQueuedShow = new QueuedShow();
             queuedShow = thisQueuedShow;
             yield return new WaitForSeconds(0.25f);
-            if (queuedShow == null || queuedShow != thisQueuedShow) yield break;
+            if (queuedShow == null || 
+                queuedShow != thisQueuedShow || 
+                CombatController.Instance.CurrentCombatState == CombatGameState.CombatInactive ||
+                AbilityController.Instance.AwaitingAbilityOrder()) yield break;
 
             // Reset
             mainCg.DOKill();

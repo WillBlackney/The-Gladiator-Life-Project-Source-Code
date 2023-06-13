@@ -2239,6 +2239,8 @@ namespace HexGameEngine.Abilities
             applyPassiveBoxesParent.SetActive(false);
             applyPassiveHeaderParent.SetActive(false);
 
+            EnemyInfoModalController.Instance.HideModal();
+
             if (target != null &&
                 target.allegiance != caster.allegiance &&
                 caster.activationPhase == ActivationPhase.ActivationPhase &&

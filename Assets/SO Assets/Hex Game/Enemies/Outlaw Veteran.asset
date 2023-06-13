@@ -601,7 +601,7 @@ MonoBehaviour:
     trinket: {fileID: 0}
   possibleArmourLoadouts:
   - headProspects:
-    - {fileID: 11400000, guid: c40c9e4ca934ded4e8c27cbeb88cb759, type: 2}
+    - {fileID: 11400000, guid: 1536a62939bd59148a8e2589bb7cc9a9, type: 2}
     bodyProspects:
     - {fileID: 11400000, guid: a607139243f4b2a4b89ea760b67d1c97, type: 2}
     - {fileID: 11400000, guid: 2cce4423c9ed57d42b7c9d7736934204, type: 2}
@@ -642,7 +642,7 @@ MonoBehaviour:
     offhandProspects: []
   modelParts:
   - Human_Chest_1
-  - Human_Face_2
-  - Human_Head_9
+  - Human_Face_8
+  - Human_Head_10
   - Human_Right_Hand_1
   - Human_Right_Leg_1

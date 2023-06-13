@@ -9,6 +9,7 @@ using HexGameEngine.Characters;
 using HexGameEngine.UI;
 using HexGameEngine.Persistency;
 using HexGameEngine.JourneyLogic;
+using HexGameEngine.Audio;
 
 namespace HexGameEngine.GameIntroEvent
 {
@@ -88,8 +89,13 @@ namespace HexGameEngine.GameIntroEvent
             BuildViewsAsPageOne();
 
             // Fade in and move page down
-            blackUnderlay.DOFade(0.5f, 1f);
-            pageMovementParent.DOMove(pageOnscreenPos.position, 1f).SetEase(Ease.OutBack);
+            blackUnderlay.DOFade(0.5f, 0.5f).OnComplete(() =>
+            {
+                AudioManager.Instance.PlaySound(Sound.Effects_Story_Event_Start);
+                pageMovementParent.DOMove(pageOffscreenPos.position, 0f);
+                pageMovementParent.DOMove(pageOnscreenPos.position, 1f).SetEase(Ease.OutBack);
+            });
+            
         }
         private void FinishEvent()
         {

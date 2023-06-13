@@ -1,5 +1,6 @@
 ﻿using HexGameEngine.Abilities;
 using HexGameEngine.Audio;
+using HexGameEngine.Boons;
 using HexGameEngine.CameraSystems;
 using HexGameEngine.Characters;
 using HexGameEngine.Combat;
@@ -285,6 +286,7 @@ namespace HexGameEngine
 
             // Set state
             SetGameState(GameState.CombatRewardPhase);
+            EnemyInfoModalController.Instance.HideModal();
 
             // Determine characters to reward XP to
             List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();
@@ -372,7 +374,8 @@ namespace HexGameEngine
             Debug.Log("GameController.StartCombatDefeatSequence() called");
             // Set state
             SetGameState(GameState.CombatRewardPhase);
-
+            EnemyInfoModalController.Instance.HideModal();
+            
             // Wait for lingering visual events
             yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);
             AudioManager.Instance.FadeOutAllCombatMusic(1f);
@@ -642,6 +645,7 @@ namespace HexGameEngine
             CharacterRosterViewController.Instance.HideCharacterRosterScreen();
             GameIntroController.Instance.HideAllViews();
             CombatRewardController.Instance.HidePostCombatRewardScreen();
+            BoonController.Instance.HideBoonIconsPanel();
 
             // Fade in menu music
             AudioManager.Instance.PlayMainMenuMusic();
@@ -809,6 +813,7 @@ namespace HexGameEngine
             TownController.Instance.HideDeploymentPage();
             CharacterScrollPanelController.Instance.HideMainView();
             TopBarController.Instance.ShowCombatTopBar();
+            BoonController.Instance.HideBoonIconsPanel();
             SetGameState(GameState.CombatActive);          
 
             // Generate combat map data
