@@ -15,10 +15,10 @@ MonoBehaviour:
   abilityName: Masochism
   displayedName: Masochism
   includeInGame: 1
-  baseAbilityDescription: Lose 10 health. Gain 3 Action Points.
+  baseAbilityDescription: Lose 15 health. Gain 4 Action Points.
   abilitySprite: {fileID: 21300000, guid: 0056712a26a1ad6499060b6db1fee538, type: 3}
   energyCost: 0
-  fatigueCost: 10
+  fatigueCost: 0
   baseCooldown: 3
   abilityType: 01000000
   doesNotBreakStealth: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
       stressAmountMin: 0
       stressAmountMax: 0
       successChance: 0
-    energyGained: 3
+    energyGained: 4
     normalTeleportVFX: 1
     tilesMoved: 0
     lineLength: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
     tilesMoved: 0
     lineLength: 0
     healthGained: 0
-    healthLost: 10
+    healthLost: 15
     requirements: []
     chainedEffect: 0
     triggersChainEffectSequence: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '10 '
+    phrase: '15 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -250,7 +250,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '3 '
+    phrase: '4 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

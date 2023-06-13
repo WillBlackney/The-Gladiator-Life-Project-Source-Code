@@ -10,22 +10,16 @@ namespace HexGameEngine.UI
         [SerializeField] float moveSpeed;
         [SerializeField] float moveDistance;
         private Vector3 startPos;
-
         private bool hasCachedStart = false;
 
         private void Awake()
         {
-            startPos = gameObject.transform.localPosition;
-            hasCachedStart = true;
+            CacheStartPosition();
         }
 
         private void OnEnable()
         {
-            if(!hasCachedStart)
-            {
-                startPos = gameObject.transform.localPosition;
-                hasCachedStart = true;
-            }
+            CacheStartPosition();
         }
 
         public void PlayAnimation()
@@ -38,6 +32,14 @@ namespace HexGameEngine.UI
         {
             gameObject.transform.DOKill();
             gameObject.transform.DOLocalMove(startPos, 0f);
+        }
+        private void CacheStartPosition()
+        {
+            if (!hasCachedStart)
+            {
+                startPos = gameObject.transform.localPosition;
+                hasCachedStart = true;
+            }
         }
     }
 }

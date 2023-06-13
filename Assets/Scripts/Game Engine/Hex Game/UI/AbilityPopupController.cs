@@ -75,6 +75,7 @@ namespace HexGameEngine.UI
         }
         public void OnRosterAbilityButtonMousedOver(UIAbilityIcon b, bool above = true)
         {
+            Debug.Log("AbilityPopupController.OnRosterAbilityButtonMousedOver()");
             FadeInPanel();
             BuildPanelFromAbilityData(b.MyDataRef);
             TransformUtils.RebuildLayouts(transformsRebuilt);

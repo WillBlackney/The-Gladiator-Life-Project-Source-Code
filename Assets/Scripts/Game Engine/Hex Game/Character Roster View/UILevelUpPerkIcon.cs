@@ -33,7 +33,7 @@ namespace HexGameEngine.UI
                 alreadyChosenParent.SetActive(true);
             }
             else if(character.perkPoints == 0 || 
-                character.currentLevel - 1 < myPerkData.tier ||
+                character.currentLevel < myPerkData.tier ||
                 myPerkData.tier != character.PerkTree.nextAvailableTier)
             {
                 unavailableParent.SetActive(true);

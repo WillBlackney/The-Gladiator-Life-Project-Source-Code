@@ -72,8 +72,9 @@ namespace HexGameEngine.UI
         {
             if (abilityIcon.MyDataRef != null)
             {
-                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(abilityIcon.MyDataRef.keyWords);
-                AbilityPopupController.Instance.OnRosterAbilityButtonMousedOver(abilityIcon);
+                abilityIcon.OnPointerEnter(null);
+               // KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(abilityIcon.MyDataRef.keyWords);
+                //AbilityPopupController.Instance.OnRosterAbilityButtonMousedOver(abilityIcon);
             }
         }
 
@@ -81,8 +82,9 @@ namespace HexGameEngine.UI
         {
             if (abilityIcon.MyDataRef != null)
             {
-                KeyWordLayoutController.Instance.FadeOutMainView();
-                AbilityPopupController.Instance.OnAbilityButtonMousedExit();
+                abilityIcon.OnPointerExit(null);
+                // KeyWordLayoutController.Instance.FadeOutMainView();
+                // AbilityPopupController.Instance.OnAbilityButtonMousedExit();
             }
         }
         #endregion

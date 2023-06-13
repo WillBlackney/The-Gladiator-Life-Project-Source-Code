@@ -84,7 +84,7 @@ namespace HexGameEngine.JourneyLogic
                 CurrentDay = GlobalSettings.Instance.StartingDay;
                 CurrentChapter = GlobalSettings.Instance.StartingChapter;
             }
-            SetCheckPoint(GlobalSettings.Instance.IncludeGameIntroEvent ? SaveCheckPoint.GameIntroEvent : SaveCheckPoint.Town);
+            SetCheckPoint(SaveCheckPoint.GameIntroEvent);
             StartTimer();
             CurrentCombatContractData = null;
         }

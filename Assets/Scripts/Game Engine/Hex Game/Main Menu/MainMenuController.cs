@@ -687,15 +687,34 @@ namespace HexGameEngine.MainMenu
         {
             bool hasPerk = PerkController.Instance.DoesCharacterHavePerk(characterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag);
 
+            // Already selected: unselect
             if (hasPerk)
             {
                 SetAvailableChoosePerkPoints(availableChoosePerkPoints + 1);
                 panel.SetSelectedViewState(false);
                 PerkController.Instance.ModifyPerkOnCharacterData(characterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag, -panel.PerkIcon.ActivePerk.stacks);
             }
+            // No current selection: make this the new selection.
             else if(!hasPerk && availableChoosePerkPoints > 0)
             {
                 SetAvailableChoosePerkPoints(availableChoosePerkPoints - 1);
+                panel.SetSelectedViewState(true);
+                PerkController.Instance.ModifyPerkOnCharacterData(characterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag, panel.PerkIcon.ActivePerk.stacks);
+
+            }
+            // Already made a selection: unselect current and make this the current selection
+            else if (!hasPerk && availableChoosePerkPoints == 0)
+            {
+                foreach(CustomCharacterChoosePerkPanel pPanel in allChoosePerkPanels)
+                {
+                    if (PerkController.Instance.DoesCharacterHavePerk(characterBuild.passiveManager, pPanel.PerkIcon.ActivePerk.perkTag))
+                    {
+                        PerkController.Instance.ModifyPerkOnCharacterData(characterBuild.passiveManager, pPanel.PerkIcon.ActivePerk.perkTag, -pPanel.PerkIcon.ActivePerk.stacks);
+                        pPanel.SetSelectedViewState(false);
+                        break;
+                    }
+                }
+
                 panel.SetSelectedViewState(true);
                 PerkController.Instance.ModifyPerkOnCharacterData(characterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag, panel.PerkIcon.ActivePerk.stacks);
 

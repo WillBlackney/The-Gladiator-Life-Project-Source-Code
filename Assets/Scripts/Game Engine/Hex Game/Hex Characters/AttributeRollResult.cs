@@ -46,6 +46,9 @@ namespace HexGameEngine.Characters
         private bool hasGeneratedTree = false;
         [OdinSerialize]
         private List<PerkTreePerk> perkChoices = new List<PerkTreePerk>();
+        [OdinSerialize]
+        public int nextAvailableTier = 1;
+
         public List<PerkTreePerk> PerkChoices
         {
             get
@@ -104,7 +107,7 @@ namespace HexGameEngine.Characters
             GenerateTree();
             HandleAdjustTreeIfStartingPerkChoiceAlreadyMade(character);
         }
-        public int nextAvailableTier = 1;
+       
 
         public void HandleAdjustTreeIfStartingPerkChoiceAlreadyMade(HexCharacterData myCharacter)
         {

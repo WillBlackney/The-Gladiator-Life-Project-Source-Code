@@ -546,7 +546,7 @@ namespace HexGameEngine
             yield return new WaitForSeconds(2f);
 
             // Set state
-            SetGameState(GlobalSettings.Instance.IncludeGameIntroEvent ? GameState.StoryEvent : GameState.Town);
+            SetGameState(GameState.StoryEvent);
 
             // Enable GUI
             TopBarController.Instance.ShowMainTopBar();
@@ -573,11 +573,7 @@ namespace HexGameEngine
             AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
 
             BlackScreenController.Instance.FadeInScreen(2f);
-            DelayUtils.DelayedCall(1.5f, () =>
-            {
-                if (GlobalSettings.Instance.IncludeGameIntroEvent)
-                    GameIntroController.Instance.StartEvent();
-            });  
+            DelayUtils.DelayedCall(1.5f, () => GameIntroController.Instance.StartEvent());
                 
         }       
         public void HandleQuitToMainMenuFromInGame()

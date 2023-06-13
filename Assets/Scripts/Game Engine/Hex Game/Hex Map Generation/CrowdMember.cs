@@ -70,6 +70,7 @@ namespace HexGameEngine.UI
         {
             if (cheering || dissapointing) return;
 
+            cheering = true;
             float speed = RandomGenerator.NumberBetween(80, 120) * 0.01f;
             float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
 
@@ -116,7 +117,7 @@ namespace HexGameEngine.UI
         public void DoDissapointedAnimation()
         {            
             if (cheering || dissapointing) return;
-
+            dissapointing = true;
             float speed = RandomGenerator.NumberBetween(85, 115) * 0.01f;
             float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
 
@@ -184,13 +185,11 @@ namespace HexGameEngine.UI
 
             if (moveDown)
             {
-                Debug.Log("XX Moving Down");
                 movementParent.transform.localPosition = Vector2.MoveTowards(movementParent.transform.localPosition, new Vector2(0, -10), selfMoveSpeed * Time.deltaTime);
                 if (movementParent.transform.localPosition.y <= -10) moveDown = false;
             }
             else
             {
-                Debug.Log("XX Moving Up");
                 movementParent.transform.localPosition = Vector2.MoveTowards(movementParent.transform.localPosition, new Vector2(0, 10), selfMoveSpeed * Time.deltaTime);
                 if (movementParent.transform.localPosition.y >= 10) moveDown = true;
             }

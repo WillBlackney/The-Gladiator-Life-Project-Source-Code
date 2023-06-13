@@ -122,7 +122,7 @@ namespace HexGameEngine.Audio
 
             if (a == null)
             {
-                Debug.LogWarning("IsSoundPlaying() couln't find the sound...");
+                Debug.Log("AudioManager.IsSoundPlaying() couln't find the sound: " + s.ToString());
             }
 
             if (a != null && a.source.isPlaying)
@@ -134,12 +134,7 @@ namespace HexGameEngine.Audio
         }
         public void PlaySoundPooled(Sound s)
         {
-            if (s == Sound.None)
-            {
-                return;
-            }
-
-            Debug.LogWarning("Playing sound: " + s.ToString());
+            if (s == Sound.None) return;           
 
             AudioModel a = Array.Find(allAudioModels, sound => sound.soundType == s);
             if (a != null)
