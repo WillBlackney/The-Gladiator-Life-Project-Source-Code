@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Shield Slam
   includeInGame: 1
   baseAbilityDescription: Slam your shield against a target, knocking them back 1
-    tile and dealing 125% Physical damage. Damage is increased 10% for each stack
+    tile and dealing 125% Physical damage. Damage is increased 20% for each stack
     of Guard on self.
   abilitySprite: {fileID: 21300000, guid: d77b80a6308d6244e967ecd3b6d08914, type: 3}
   energyCost: 4
@@ -110,7 +110,7 @@ MonoBehaviour:
     - type: 8
       perk: 74
       targetRace: 0
-      bonusDamageModifier: 0.1
+      bonusDamageModifier: 0.2
       bonusCriticalChance: 0
       extraCriticalDamage: 0
     characterSummoned: {fileID: 0}
@@ -206,7 +206,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '10% '
+    phrase: '20% '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
+  m_Name: Zealot OLD
+  m_EditorClassIdentifier: 
+  backgroundSprite: {fileID: 21300000, guid: 2ad628108330f2b47a15290e8b4d4b01, type: 3}
+  backgroundType: 6
+  description: 'An unwavering belief of being acquainted with God upon death tends
+    to make zealots exceptionally courageous in the face of danger. That same blind
+    faith also makes them astonishngly stupid, so best cover these idiots in heavy
+    armour before sending them to their god. '
+  recruitable: 1
+  spawnChance: 80
+  lowerLevelLimit: 1
+  upperLevelLimit: 1
+  dailyWageMin: 5
+  dailyWageMax: 7
+  baseRecruitCost: 50
+  mightLower: 0
+  mightUpper: 0
+  constitutionLower: -5
+  constitutionUpper: 5
+  accuracyLower: 0
+  accuracyUpper: 0
+  dodgeLower: 0
+  dodgeUpper: 0
+  fatigueLower: 5
+  fatigueUpper: 5
+  resolveLower: 10
+  resolveUpper: 10
+  witsLower: 2
+  witsUpper: 4
+  minStartingAbilities: 1
+  maxStartingAbilities: 1
+  validRaces: 01000000020000000300000004000000050000000600000007000000
+  loadoutBuckets:
+  - possibleStartingTalents: 020000000300000005000000060000000a000000090000000d000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: 90e62be2d401c2f4383195876bbc8ff5, type: 2}
+    - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
+    - {fileID: 11400000, guid: 1d653fb7e4e89d448bae7106e8b49b73, type: 2}
+    - {fileID: 11400000, guid: 993e8338c564e804fb94a571dc1a86c7, type: 2}
+    - {fileID: 11400000, guid: 6b5c6b02a64c9fe4cb91b8ff26213bd2, type: 2}
+    - {fileID: 11400000, guid: d84fc754f00f92b458fef9d08a4c3005, type: 2}
+    - {fileID: 11400000, guid: a0eec0cf113916e40bbb19662454dc56, type: 2}
+    - {fileID: 11400000, guid: e9972b20921e6e7468dbf49561e14ac9, type: 2}
+    - {fileID: 11400000, guid: 72c93eeab72ae0548add04a579d85c5c, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: aa1a47e725a62694ba9484249adb7fe8, type: 2}
+      - {fileID: 11400000, guid: 5ea73452997566e4b9f7c15c306b772b, type: 2}
+      - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+      - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
+      offhandProspects: []
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 11400000, guid: b6dab0ab10c2ce347be31423a2fcd865, type: 2}
+      - {fileID: 0}
+      bodyProspects:
+      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+  passiveEffectDescriptions:
+  - dotStyle: 3
+    message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Will never reach the '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Shattered '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: stress state.

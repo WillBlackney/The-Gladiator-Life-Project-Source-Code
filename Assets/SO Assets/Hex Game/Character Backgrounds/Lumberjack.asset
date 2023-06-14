@@ -24,10 +24,10 @@ MonoBehaviour:
   dailyWageMin: 12
   dailyWageMax: 14
   baseRecruitCost: 75
-  mightLower: 5
-  mightUpper: 2
-  constitutionLower: 5
-  constitutionUpper: 10
+  mightLower: 10
+  mightUpper: 12
+  constitutionLower: 0
+  constitutionUpper: 0
   accuracyLower: 0
   accuracyUpper: 5
   dodgeLower: 0
@@ -45,19 +45,13 @@ MonoBehaviour:
   - possibleStartingTalents: 02000000
     possibleAbilities:
     - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
-    - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
     - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
-    - {fileID: 11400000, guid: 64ec1fe7f8ba35242a4c0244770ae3d2, type: 2}
-    - {fileID: 11400000, guid: 7438f6132b8f4544aa2ecfd3edf7886c, type: 2}
     possibleWeaponLoadouts:
     - mainHandProspects:
-      - {fileID: 11400000, guid: e724601a8b1fda642824cbf7fc3faea9, type: 2}
       - {fileID: 11400000, guid: eb90f828c8b2d7349b3e2ab18a132000, type: 2}
       offhandProspects: []
     possibleArmourLoadouts:
-    - headProspects:
-      - {fileID: 11400000, guid: 8a1afb36a69ef25409f162114b5ed721, type: 2}
-      - {fileID: 0}
+    - headProspects: []
       bodyProspects:
       - {fileID: 11400000, guid: 8949fc1582e2d5e4ca3a600894a46196, type: 2}
   passiveEffectDescriptions:

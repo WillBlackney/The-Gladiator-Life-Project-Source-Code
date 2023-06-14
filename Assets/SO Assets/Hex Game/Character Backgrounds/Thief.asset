@@ -25,13 +25,13 @@ MonoBehaviour:
   dailyWageMax: 11
   baseRecruitCost: 75
   mightLower: 0
-  mightUpper: 0
+  mightUpper: -5
   constitutionLower: 0
-  constitutionUpper: 0
+  constitutionUpper: -5
   accuracyLower: 0
   accuracyUpper: 0
-  dodgeLower: 5
-  dodgeUpper: 8
+  dodgeLower: 6
+  dodgeUpper: 10
   fatigueLower: 0
   fatigueUpper: 0
   resolveLower: 2
@@ -42,13 +42,10 @@ MonoBehaviour:
   maxStartingAbilities: 1
   validRaces: 0100000003000000050000000700000006000000
   loadoutBuckets:
-  - possibleStartingTalents: 0300000009000000
+  - possibleStartingTalents: 03000000
     possibleAbilities:
     - {fileID: 11400000, guid: 36a0268a5ac37d742960a07bfe17be42, type: 2}
-    - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
-    - {fileID: 11400000, guid: f2990956e456afa46af43accbd061445, type: 2}
-    - {fileID: 11400000, guid: 43ea47fa523c20a46991726e98d06d04, type: 2}
-    - {fileID: 11400000, guid: dbf70824a5994e0449938fd3bee091ad, type: 2}
+    - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
     possibleWeaponLoadouts:
     - mainHandProspects:
       - {fileID: 11400000, guid: 5ea73452997566e4b9f7c15c306b772b, type: 2}
@@ -56,24 +53,21 @@ MonoBehaviour:
       offhandProspects: []
     possibleArmourLoadouts:
     - headProspects:
-      - {fileID: 11400000, guid: 8a1afb36a69ef25409f162114b5ed721, type: 2}
-      - {fileID: 11400000, guid: b6dab0ab10c2ce347be31423a2fcd865, type: 2}
+      - {fileID: 11400000, guid: 2d62eada9f99dc54daff346d26593e31, type: 2}
       bodyProspects:
-      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
-      - {fileID: 11400000, guid: ae95f085284e4354f90181106f16a763, type: 2}
       - {fileID: 11400000, guid: 8949fc1582e2d5e4ca3a600894a46196, type: 2}
       - {fileID: 11400000, guid: 39e6763cac1ab444aae987cd45525c72, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:
-    - color: 2
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: '50% '
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'chance to start combat with '
+      phrase: 'Start combat with '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '1 '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

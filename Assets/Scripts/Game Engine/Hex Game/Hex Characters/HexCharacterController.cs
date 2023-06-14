@@ -1416,8 +1416,7 @@ namespace HexGameEngine.Characters
             }
 
             // Thief background (gain 1 stealth)
-            if (RandomGenerator.NumberBetween(1, 2) == 1 &&
-                CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Thief))
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Thief))
             {
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Stealth, 1, false);
             }

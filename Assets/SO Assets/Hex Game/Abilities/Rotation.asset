@@ -15,11 +15,11 @@ MonoBehaviour:
   abilityName: Rotation
   displayedName: Rotation
   includeInGame: 1
-  baseAbilityDescription: Switch places with an ally.
+  baseAbilityDescription: Switch places with an ally, then gain 1 Guard.
   abilitySprite: {fileID: 21300000, guid: 242ff9e6194ff3d448408ddc4790ddb3, type: 3}
   energyCost: 3
-  fatigueCost: 10
-  baseCooldown: 0
+  fatigueCost: 15
+  baseCooldown: 1
   abilityType: 01000000
   doesNotBreakStealth: 0
   guidanceInstruction: 2
@@ -86,6 +86,50 @@ MonoBehaviour:
       passiveStacks: 0
     perkApplicationChance: 100
     knockBackDistance: 0
+  - effectType: 1
+    stressEventData:
+      stressAmountMin: 0
+      stressAmountMax: 0
+      successChance: 0
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish: []
+    aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    bonusCritDamage: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
+    weaponUsed: 2
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 74
+      passiveStacks: 1
+    perkApplicationChance: 100
+    knockBackDistance: 0
   onHitEffects: []
   onCritEffects: []
   onPerkAppliedSuccessEffects: []
@@ -96,5 +140,19 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Switch places with an ally. '
-  keyWords: []
+    phrase: 'Switch places with an ally, then gain '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '1 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Guard
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
+  keyWords:
+  - kewWordType: 1
+    passiveType: 74
