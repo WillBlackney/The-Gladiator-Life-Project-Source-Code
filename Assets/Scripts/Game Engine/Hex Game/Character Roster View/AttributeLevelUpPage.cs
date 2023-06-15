@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using HexGameEngine.Characters;
 using UnityEngine.UI;
+using HexGameEngine.Audio;
 
 namespace HexGameEngine.UI
 {
@@ -105,6 +106,7 @@ namespace HexGameEngine.UI
             mainVisualParent.SetActive(false);
 
             // Rebuild character roster views
+            AudioManager.Instance.PlaySound(Sound.Effects_Confirm_Level_Up);
             CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
             CharacterScrollPanelController.Instance.RebuildViews();
         }

@@ -170,6 +170,9 @@ namespace HexGameEngine.AI
         TargetHasShield = 31,
         TargetDoesNotHaveShield = 32,
         SelfHasShield = 34,
+        SelfDoesNotHaveShield = 38,
         TargetHasAllyDirectyBehindThem = 33,
+        MeleeHasStarted = 36,
+        MeleeHasNotStarted = 37,
     }
 }

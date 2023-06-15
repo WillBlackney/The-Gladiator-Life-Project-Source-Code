@@ -87,6 +87,8 @@ namespace HexGameEngine.UI
 
             // Build view elements
             nameText.text = character.myName;
+            if (character.characterData != null) nameText.text += " " + character.characterData.mySubName;
+
             BuildStatSection(character);
             BuildTurnSection(character);
             BuildStressStateSection(character);

@@ -524,10 +524,16 @@ namespace HexGameEngine.Characters
 
             // Modify WORLD space ui
             character.hexCharacterView.healthBarWorldUnder.DOKill();
-            character.hexCharacterView.healthBarWorldUnder.DOValue(healthBarFloat, 0.75f).SetEase(Ease.InQuart);
+            character.hexCharacterView.healthBarWorldUnderSliderImage.DOKill();
+            character.hexCharacterView.healthBarWorldUnderSliderImage.DOFade(1, 0f);
+            character.hexCharacterView.healthBarWorldUnderSliderImage.color = character.hexCharacterView.healthBarNormalColor;
+
+            character.hexCharacterView.healthBarWorldUnderSliderImage.DOColor(character.hexCharacterView.healthBarDamageColor, 0.35f);
+            character.hexCharacterView.healthBarWorldUnderSliderImage.DOFade(0f, 0.7f).SetEase(Ease.InQuint).OnComplete(() =>
+                    character.hexCharacterView.healthBarWorldUnder.DOValue(healthBarFloat, 0f));
+
             character.hexCharacterView.healthBarWorld.value = healthBarFloat;
             character.hexCharacterView.healthTextWorld.text = health.ToString();
-            //character.hexCharacterView.maxHealthTextWorld.text = maxHealth.ToString();
 
             // Modify Screen UI elements
             if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
@@ -570,9 +576,17 @@ namespace HexGameEngine.Characters
 
             // Modify WORLD space ui
             character.hexCharacterView.armourBarWorldUnder.DOKill();
-            character.hexCharacterView.armourBarWorldUnder.DOValue(armourBarFloat, 0.75f).SetEase(Ease.InQuart);
+            character.hexCharacterView.armourBarWorldUnderSliderImage.DOKill();
+            character.hexCharacterView.armourBarWorldUnderSliderImage.DOFade(1, 0f);
+            character.hexCharacterView.armourBarWorldUnderSliderImage.color = character.hexCharacterView.armourBarNormalColor;
+
+            character.hexCharacterView.armourBarWorldUnderSliderImage.DOColor(character.hexCharacterView.armourBarDamageColor, 0.35f);
+            character.hexCharacterView.armourBarWorldUnderSliderImage.DOFade(0f, 0.7f).SetEase(Ease.InQuint).OnComplete(() =>
+                    character.hexCharacterView.armourBarWorldUnder.DOValue(armourBarFloat, 0f));
+
             character.hexCharacterView.armourBarWorld.value = armourBarFloat;
             character.hexCharacterView.armourTextWorld.text = armour.ToString();
+
 
             // Modify Screen UI elements
             if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
@@ -604,6 +618,7 @@ namespace HexGameEngine.Characters
             }
 
             if (character.currentStress >= 20 && stressGainedOrLost > 0) return;
+
             // Zealots can never reach shattered stress state
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Zealot) &&
                 character.currentStress >= 19 && stressGainedOrLost > 0) return;
@@ -649,6 +664,7 @@ namespace HexGameEngine.Characters
             // Un comment to reenable stress gained VFX
             if (stressGainedOrLost > 0 && showVFX)
             {
+                /*
                 if (character.GetLastStackEventParent() != null &&
                     !character.GetLastStackEventParent().isClosed)
                 {
@@ -659,7 +675,7 @@ namespace HexGameEngine.Characters
                 {
                     VisualEventManager.CreateVisualEvent(() =>
                     VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost)).SetStartDelay(0.5f);
-                }
+                }*/
 
             }
 

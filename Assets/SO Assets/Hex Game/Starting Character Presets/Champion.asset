@@ -19,25 +19,25 @@ MonoBehaviour:
   modelSize: 0
   attributeSheet:
     might:
-      value: 5
+      value: 10
       stars: 0
     constitution:
       value: 60
       stars: 0
     dodge:
-      value: 5
+      value: 10
       stars: 0
     accuracy:
       value: 70
       stars: 0
     resolve:
-      value: 10
+      value: 15
       stars: 0
     fitness:
       value: 100
       stars: 0
     wits:
-      value: 5
+      value: 10
       stars: 0
     maxHealth: 0
     apRecovery: 8

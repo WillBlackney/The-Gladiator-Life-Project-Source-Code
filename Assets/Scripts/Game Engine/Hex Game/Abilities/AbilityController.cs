@@ -59,6 +59,10 @@ namespace HexGameEngine.Abilities
 
         // Getters + Accessors
         #region
+        public bool HitChanceModalIsVisible
+        {
+            get { return hitChanceRootCanvas.isActiveAndEnabled; }
+        }
         public AbilityData SpearWallStrikeAbility
         {
             get; private set;
@@ -393,6 +397,14 @@ namespace HexGameEngine.Abilities
                     Debug.Log("Closing stack event parent");
                     stack.isClosed = true;
                 }
+            }
+
+            // Update Ability buttons: show/hide if useable or unuseable
+            if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
+            {
+                // Update ability button validity overlays
+                foreach (AbilityButton b in CombatUIController.Instance.AbilityButtons)
+                    b.UpdateAbilityButtonUnusableOverlay();
             }
         }
         private void TriggerAbilityEffect(AbilityData ability, AbilityEffect abilityEffect, HexCharacterModel caster, HexCharacterModel target, LevelNode tileTarget = null, HexCharacterModel previousChainTarget = null)
@@ -1565,6 +1577,7 @@ namespace HexGameEngine.Abilities
             TargetGuidanceController.Instance.Hide();
             CursorController.Instance.SetFallbackCursor(CursorType.NormalPointer);
             CursorController.Instance.SetCursor(CursorType.NormalPointer);
+            HideHitChancePopup();
         }
         private void Update()
         {
@@ -2233,7 +2246,7 @@ namespace HexGameEngine.Abilities
         // Hit Chance Popup Logic
         #region
         public void ShowHitChancePopup(HexCharacterModel caster, HexCharacterModel target, AbilityData ability, ItemData weaponUsed = null)
-        {
+        {            
             hitChanceBoxesParent.SetActive(false);
             hitChanceHeaderParent.SetActive(false);
             applyPassiveBoxesParent.SetActive(false);
@@ -2262,7 +2275,7 @@ namespace HexGameEngine.Abilities
                         applyDebuffData.details = applyDebuffData.details.OrderByDescending(x => x.accuracyMod).ToList();
                         BuildApplyPassiveChancePopup(applyDebuffData, applyDebuffData.perk.passiveSprite);
                     }
-
+                    hitChanceCg.DOKill();
                     hitChanceCg.alpha = 0;
                     hitChanceRootCanvas.enabled = true;
                     hitChanceCg.DOFade(1, 0.5f);
@@ -2276,6 +2289,7 @@ namespace HexGameEngine.Abilities
 
                     applyPassiveBoxesParent.SetActive(true);
                     applyPassiveHeaderParent.SetActive(true);
+                    hitChanceCg.DOKill();
                     hitChanceCg.alpha = 0;
                     hitChanceRootCanvas.enabled = true;
                     hitChanceCg.DOFade(1, 0.5f);
@@ -2334,8 +2348,10 @@ namespace HexGameEngine.Abilities
         public void HideHitChancePopup()
         {
             hitChanceCg.alpha = 1;
-            hitChanceRootCanvas.enabled = false;
-            hitChanceCg.alpha = 0;
+            hitChanceCg.DOKill();
+            hitChanceCg.DOFade(0f, 0.15f).OnComplete(() => hitChanceRootCanvas.enabled = false);
+            //hitChanceRootCanvas.enabled = false;
+           // hitChanceCg.alpha = 0;
         }
         private AbilityEffect FindDebuffEffect(AbilityData ability)
         {

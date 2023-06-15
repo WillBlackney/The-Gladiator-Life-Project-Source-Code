@@ -247,7 +247,7 @@ namespace HexGameEngine.HexTiles
             List<LevelNode> nodes = new List<LevelNode>();
             foreach(LevelNode n in AllLevelNodes)
             {
-                if(n.GridPosition.x == -1 || n.GridPosition.x == -2)
+                if(n.GridPosition.x == -3 || n.GridPosition.x == -2)
                 {
                     nodes.Add(n);
                 }
@@ -951,7 +951,7 @@ namespace HexGameEngine.HexTiles
             if (GameController.Instance.GameState != GameState.CombatActive) return;
 
             HexMousedOver = h;
-            h.mouseOverParent.SetActive(true);
+            if(!h.Obstructed) h.mouseOverParent.SetActive(true);
 
             // Glow activation window
             if (h.myCharacter != null && h.myCharacter.hexCharacterView != null &&

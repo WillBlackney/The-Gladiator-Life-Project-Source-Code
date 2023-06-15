@@ -153,7 +153,7 @@ namespace HexGameEngine.JourneyLogic
         }       
         private void UpdateDayAndChapterTopbarText()
         {
-            TopBarController.Instance.CurrentDaytext.text = "Day: " + CurrentDay.ToString();
+            TopBarController.Instance.CurrentDaytext.text = "Day: " + CurrentDay.ToString() +" of 5";
         }
         #endregion
 

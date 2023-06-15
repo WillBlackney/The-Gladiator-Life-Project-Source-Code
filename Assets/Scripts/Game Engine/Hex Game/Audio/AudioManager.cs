@@ -457,6 +457,7 @@ namespace HexGameEngine.Audio
 
         Effects_Story_Event_Start = 131,
         Effects_End_Deployment = 132,
+        Effects_Confirm_Level_Up = 133,
 
         Environment_Gate_Open = 38,
         Environment_Camp_Fire = 49,

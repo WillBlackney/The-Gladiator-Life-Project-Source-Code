@@ -33,12 +33,18 @@ namespace HexGameEngine.Characters
         [Header("Health Bar World References")]
         public Slider healthBarWorld;
         public Slider healthBarWorldUnder;
+        public Image healthBarWorldUnderSliderImage;
+        public Color healthBarNormalColor;
+        public Color healthBarDamageColor;
         public TextMeshProUGUI healthTextWorld;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
         [Header("Armour Bar World References")]
         public Slider armourBarWorld;
         public Slider armourBarWorldUnder;
+        public Image armourBarWorldUnderSliderImage;
+        public Color armourBarNormalColor;
+        public Color armourBarDamageColor;
         public TextMeshProUGUI armourTextWorld;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
@@ -177,7 +183,8 @@ namespace HexGameEngine.Characters
         {
             if(character != null && 
                 character.controller == Controller.AI &&
-                !AbilityController.Instance.AwaitingAbilityOrder())         
+                !AbilityController.Instance.AwaitingAbilityOrder() &&
+                !AbilityController.Instance.HitChanceModalIsVisible)         
                 EnemyInfoPanel.Instance.HandleBuildAndShowPanel(character.characterData);            
         }
         #endregion

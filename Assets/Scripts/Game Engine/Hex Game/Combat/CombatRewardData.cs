@@ -39,7 +39,7 @@ namespace HexGameEngine.Characters
         }
         private void BuildAsEliteReward(CombatRewardData crd)
         {
-            int maxGoldSum = 1000;
+            int maxGoldSum = 1250;
             int baseGoldReward = (int)(maxGoldSum * GetActsPassedGoldRewardModifier());
             int lowerGoldReward = (int)(baseGoldReward * 0.9f);
             int upperGoldReward = (int)(baseGoldReward * 1.1f);

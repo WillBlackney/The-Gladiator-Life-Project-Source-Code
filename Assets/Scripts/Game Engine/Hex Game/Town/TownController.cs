@@ -125,6 +125,18 @@ namespace HexGameEngine.TownFeatures
         {
             get { return armouryPageVisualParent.activeSelf; }
         }
+        public bool HospitalViewIsActive
+        {
+            get { return hospitalPageVisualParent.activeSelf; }
+        }
+        public bool LibraryViewIsActive
+        {
+            get { return libraryPageVisualParent.activeSelf; }
+        }
+        public bool DeploymentViewIsActive
+        {
+            get { return deploymentPageMainVisualParent.activeSelf; }
+        }
         public HospitalDropSlot[] HospitalSlots
         {
             get { return hospitalSlots; }
@@ -619,6 +631,8 @@ namespace HexGameEngine.TownFeatures
         {
             if (!IsTeachAbilityActionValidAndReady()) return;
 
+            AudioManager.Instance.PlaySound(Sound.Effects_Confirm_Level_Up);
+
             // Teach ability to character
             LibraryCharacterSlot.MyCharacterData.abilityBook.HandleLearnNewAbility(LibraryAbilitySlot.MyAbilityData);
 
@@ -869,7 +883,7 @@ namespace HexGameEngine.TownFeatures
             currentDailyCombatContracts.Clear();
 
             // On normal days, generate 2 basics and 1 elite combat. On every 4th day, generate only boss fight
-            if (RunController.Instance.CurrentDay % 4 != 0)
+            if (RunController.Instance.CurrentDay % 5 != 0)
             {
                 List<int> deploymentLimits = new List<int> { 1, 2, 3, 5 };
 

@@ -10,15 +10,15 @@ namespace HexGameEngine.Characters
         [BoxGroup("Core Attributes", centerLabel: true)]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public Attribute might = new Attribute(0, 0);
+        public Attribute might = new Attribute(5, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public Attribute constitution = new Attribute(75, 0);
+        public Attribute constitution = new Attribute(60, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public Attribute dodge = new Attribute(0, 0);
+        public Attribute dodge = new Attribute(5, 0);
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]

@@ -37,7 +37,7 @@ MonoBehaviour:
     level: 1
   abilitySubRequirements:
   - type: 4
-    healthRequired: 10
+    healthRequired: 15
     race: 0
     perk: 0
   baseRange: 0

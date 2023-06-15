@@ -455,6 +455,13 @@ namespace HexGameEngine.AI
                 bRet = true;
             }
 
+            // Self does not have shield
+            else if (req.requirementType == AIActionRequirementType.SelfDoesNotHaveShield &&
+                (character.itemSet.offHandItem == null || character.itemSet.offHandItem.weaponClass != WeaponClass.Shield))
+            {
+                bRet = true;
+            }
+
             // Target does not have shield
             else if (req.requirementType == AIActionRequirementType.TargetDoesNotHaveShield &&
                 (target == null ||
@@ -462,6 +469,34 @@ namespace HexGameEngine.AI
                 (target.itemSet.offHandItem == null && target.itemSet.offHandItem.weaponClass != WeaponClass.Shield)))
             {
                 bRet = true;
+            }
+
+            // Melee has started
+            else if (req.requirementType == AIActionRequirementType.MeleeHasStarted)
+            {
+                var allies = HexCharacterController.Instance.GetAllAlliesOfCharacter(character);
+                foreach(var ally in allies)
+                {
+                    if (HexCharacterController.Instance.IsCharacterEngagedInMelee(ally))
+                    {
+                        bRet = true;
+                        break;
+                    }
+                }
+            }
+
+            // Melee has NOT started
+            else if (req.requirementType == AIActionRequirementType.MeleeHasNotStarted)
+            {
+                var allies = HexCharacterController.Instance.GetAllAlliesOfCharacter(character);
+                foreach (var ally in allies)
+                {
+                    if (HexCharacterController.Instance.IsCharacterEngagedInMelee(ally))
+                    {
+                        bRet = false;
+                        break;
+                    }
+                }
             }
 
             // Target is elevated

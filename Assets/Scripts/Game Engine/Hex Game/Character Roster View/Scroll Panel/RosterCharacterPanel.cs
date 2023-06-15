@@ -122,7 +122,13 @@ namespace HexGameEngine.UI
         }
         public void OnClickAndDragStart()
         {
-            PortraitDragController.Instance.OnRosterCharacterPanelDragStart(this);
+            if (TownController.Instance.HospitalViewIsActive ||
+                 TownController.Instance.LibraryViewIsActive ||
+                 TownController.Instance.DeploymentViewIsActive)
+            {
+                PortraitDragController.Instance.OnRosterCharacterPanelDragStart(this);
+            }
+           
         }
         public void OnLevelButtonClicked()
         {
@@ -136,10 +142,8 @@ namespace HexGameEngine.UI
 
         public void OnPointerClick(PointerEventData eventData)
         {
-
             if(eventData.button == PointerEventData.InputButton.Right)
             {
-                Debug.Log("RIGHT CLICK!!");
                 CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
             }
         }

@@ -365,7 +365,13 @@ namespace HexGameEngine.Perks
             }
 
             // Add the new perk to the perk manager model's perk list, or increment stack count if it is already contained ithin the list.
-            return HandleApplyActivePerk(pManager, p, stacksAppliedActual);
+            int previousMaxHealth = StatCalculator.GetTotalMaxHealth(pManager.myCharacterData);
+            var newPerk =  HandleApplyActivePerk(pManager, p, stacksAppliedActual);
+            int newMaxHealth = StatCalculator.GetTotalMaxHealth(pManager.myCharacterData);
+            CharacterDataController.Instance.OnConstitutionOrMaxHealthChanged(pManager.myCharacterData, newMaxHealth);
+            int maxHealthDif = newMaxHealth - previousMaxHealth;
+            if(maxHealthDif > 0) CharacterDataController.Instance.SetCharacterHealth(pManager.myCharacterData, pManager.myCharacterData.currentHealth + maxHealthDif);
+            return newPerk;
         }
         public bool ModifyPerkOnCharacterEntity(PerkManagerModel pManager, Perk perk, int stacks, bool showVFX = true, float vfxDelay = 0f, PerkManagerModel applier = null, bool ignoreResistance = false)
         {

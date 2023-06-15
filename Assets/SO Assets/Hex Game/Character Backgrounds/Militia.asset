@@ -54,7 +54,7 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
     possibleArmourLoadouts:
     - headProspects:
-      - {fileID: 11400000, guid: b6dab0ab10c2ce347be31423a2fcd865, type: 2}
+      - {fileID: 11400000, guid: 1a1a6451514e39a4a9bb3258a55d41c7, type: 2}
       bodyProspects:
       - {fileID: 11400000, guid: a607139243f4b2a4b89ea760b67d1c97, type: 2}
       - {fileID: 11400000, guid: 2cce4423c9ed57d42b7c9d7736934204, type: 2}

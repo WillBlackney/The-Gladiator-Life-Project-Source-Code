@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using HexGameEngine.Items;
 using HexGameEngine.Abilities;
 using HexGameEngine.UCM;
+using HexGameEngine.Audio;
 
 namespace HexGameEngine.UI
 {
@@ -524,6 +525,7 @@ namespace HexGameEngine.UI
             currentSelectedLevelUpTalentChoice = null;
 
             // Rebuild character roster views
+            AudioManager.Instance.PlaySound(Sound.Effects_Confirm_Level_Up);
             HandleRedrawRosterOnCharacterUpdated();
             CharacterScrollPanelController.Instance.RebuildViews();
         }

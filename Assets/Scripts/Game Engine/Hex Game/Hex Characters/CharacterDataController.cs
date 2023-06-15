@@ -7,8 +7,6 @@ using HexGameEngine.Utilities;
 using HexGameEngine.Persistency;
 using HexGameEngine.Player;
 using System.Linq;
-using UnityEngine.TextCore.Text;
-using static UnityEngine.UI.Image;
 using HexGameEngine.Audio;
 using HexGameEngine.Boons;
 
@@ -419,8 +417,9 @@ namespace HexGameEngine.Characters
             data.currentHealth = newValue;
 
             // prevent current health exceeding max health
-            if (data.currentHealth > StatCalculator.GetTotalMaxHealth(data))
-                data.currentHealth = StatCalculator.GetTotalMaxHealth(data);
+            int maxHealth = StatCalculator.GetTotalMaxHealth(data);
+            if (data.currentHealth > maxHealth)
+                data.currentHealth = maxHealth;
             else if (data.currentHealth < 0) data.currentHealth = 0;
         }
         public void SetCharacterMaxHealth(HexCharacterData data, int newValue)
@@ -429,12 +428,19 @@ namespace HexGameEngine.Characters
                 data.myName + "', new max health value = " + newValue.ToString());
 
             data.attributeSheet.maxHealth = newValue;
+            int totalMaxHealth = StatCalculator.GetTotalMaxHealth(data);
 
             // prevent current health exceeding max health
-            if (data.currentHealth > StatCalculator.GetTotalMaxHealth(data))
-                data.currentHealth = StatCalculator.GetTotalMaxHealth(data);
+            OnConstitutionOrMaxHealthChanged(data, totalMaxHealth);
         }
-        
+        public void OnConstitutionOrMaxHealthChanged(HexCharacterData character, int newTotalMaxHealth)
+        {
+            // prevent current health exceeding max health
+            if (character.currentHealth > newTotalMaxHealth)
+                character.currentHealth = newTotalMaxHealth;
+
+        }
+
         #endregion
 
         // Build Character Roster
@@ -726,6 +732,8 @@ namespace HexGameEngine.Characters
         }
         public void HandleLevelUp(HexCharacterData data)
         {
+            if (data.currentLevel == 6) return;
+
             // Gain level
             SetCharacterLevel(data, data.currentLevel + 1);
 

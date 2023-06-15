@@ -1704,6 +1704,13 @@ namespace HexGameEngine
             float sum = (current / max) * 100f;
             return sum;
         }
+        public static float GetCurrentHealthAsPercentageOfMaxHealth(HexCharacterData character)
+        {
+            float current = character.currentHealth;
+            float max = GetTotalMaxHealth(character);
+            float sum = (current / max) * 100f;
+            return sum;
+        }
         public static float GetPercentage(float numerator, float denominator)
         {
             return (numerator / denominator) * 100f;

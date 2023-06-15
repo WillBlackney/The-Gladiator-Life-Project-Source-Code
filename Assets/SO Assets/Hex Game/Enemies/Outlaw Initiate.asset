@@ -84,20 +84,6 @@ MonoBehaviour:
         alliesAlive: 0
         abilityName: 
         armourReq: 0
-      - requirementType: 14
-        range: 0
-        perkPairing:
-          perkTag: 0
-          passiveStacks: 1
-        healthPercentage: 0
-        enemiesInMeleeRange: 1
-        energyReq: 0
-        fatigueReq: 0
-        stressReq: 0
-        turnReq: 0
-        alliesAlive: 0
-        abilityName: 
-        armourReq: 0
       - requirementType: 8
         range: 0
         perkPairing:
@@ -119,21 +105,7 @@ MonoBehaviour:
         range: 2
         abilityName: 
       requirements:
-      - requirementType: 13
-        range: 0
-        perkPairing:
-          perkTag: 0
-          passiveStacks: 1
-        healthPercentage: 0
-        enemiesInMeleeRange: 1
-        energyReq: 0
-        fatigueReq: 0
-        stressReq: 0
-        turnReq: 0
-        alliesAlive: 0
-        abilityName: 
-        armourReq: 0
-      - requirementType: 34
+      - requirementType: 8
         range: 0
         perkPairing:
           perkTag: 0
@@ -547,13 +519,41 @@ MonoBehaviour:
         healthPercentage: 0
         enemiesInMeleeRange: 1
         energyReq: 0
-        fatigueReq: 14
+        fatigueReq: 11
         stressReq: 0
         turnReq: 0
         alliesAlive: 0
         abilityName: 
         armourReq: 0
-      - requirementType: 13
+      - requirementType: 8
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 37
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 38
         range: 0
         perkPairing:
           perkTag: 0
@@ -585,6 +585,55 @@ MonoBehaviour:
         fatigueReq: 0
         stressReq: 0
         turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 27
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 1
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+    - action:
+        actionType: 2
+        targettingPriority: 01000000
+        getRangeFromAbility: 0
+        range: 0
+        abilityName: 
+      requirements:
+      - requirementType: 8
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 0
+        alliesAlive: 0
+        abilityName: 
+        armourReq: 0
+      - requirementType: 36
+        range: 0
+        perkPairing:
+          perkTag: 0
+          passiveStacks: 1
+        healthPercentage: 0
+        enemiesInMeleeRange: 1
+        energyReq: 0
+        fatigueReq: 0
+        stressReq: 0
+        turnReq: 1
         alliesAlive: 0
         abilityName: 
         armourReq: 0
