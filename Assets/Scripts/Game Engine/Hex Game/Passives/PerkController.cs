@@ -590,6 +590,8 @@ namespace HexGameEngine.Perks
 
                 if (myUcm != null && newFinalStackcount > 0) VisualEventManager.CreateVisualEvent(() =>
                 {
+                    HexCharacterController.Instance.PlayHurtAnimation(character.hexCharacterView);
+                    // to do: shield snapping and flying off VFX
                     if (myUcm != null) myUcm.activeOffHandWeapon.gameObject.SetActive(false);
                 });
                 else if (myUcm != null)

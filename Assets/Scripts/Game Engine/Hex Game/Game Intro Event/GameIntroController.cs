@@ -78,21 +78,19 @@ namespace HexGameEngine.GameIntroEvent
             offeredRecruits = GenerateRecruits();
 
             // Reset            
-            mainVisualParent.SetActive(false);
+            mainVisualParent.SetActive(true);
             pageMovementParent.DOKill();
-            pageMovementParent.DOMove(pageOffscreenPos.position, 0f);
-            blackUnderlay.DOKill();
+            blackUnderlay.DOKill();           
             blackUnderlay.DOFade(0f, 0f);
 
             // Build first page content
-            mainVisualParent.SetActive(true);
             BuildViewsAsPageOne();
 
             // Fade in and move page down
+            pageMovementParent.DOMove(pageOffscreenPos.position, 0f);
             blackUnderlay.DOFade(0.5f, 0.5f).OnComplete(() =>
             {
                 AudioManager.Instance.PlaySound(Sound.Effects_Story_Event_Start);
-                pageMovementParent.DOMove(pageOffscreenPos.position, 0f);
                 pageMovementParent.DOMove(pageOnscreenPos.position, 1f).SetEase(Ease.OutBack);
             });
             

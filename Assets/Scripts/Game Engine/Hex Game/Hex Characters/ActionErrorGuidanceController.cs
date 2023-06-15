@@ -5,6 +5,7 @@ using HexGameEngine.Utilities;
 using DG.Tweening;
 using TMPro;
 using HexGameEngine.TurnLogic;
+using HexGameEngine.Characters;
 
 namespace HexGameEngine.UI
 {
@@ -34,9 +35,9 @@ namespace HexGameEngine.UI
 
         #endregion
 
-        public void ShowErrorMessage(string message, float showSpeed = 0.15f)
+        public void ShowErrorMessage(HexCharacterModel user, string message, float showSpeed = 0.15f)
         {
-            if (!ShouldShowErrorMessage()) return;
+            if (!ShouldShowErrorMessage(user)) return;
 
             ErrorMessageEventHandle handle = new ErrorMessageEventHandle();
             currentHandle = handle;
@@ -74,15 +75,12 @@ namespace HexGameEngine.UI
                 rootCanvas.enabled = false;
             });
         }
-        public bool ShouldShowErrorMessage()
+        private bool ShouldShowErrorMessage(HexCharacterModel user)
         {
-            return TurnController.Instance.EntityActivated != null &&
-                TurnController.Instance.EntityActivated.controller == Controller.Player;
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.T)) ShowErrorMessage("Not enough energy!");
+            return user != null &&
+                user == TurnController.Instance.EntityActivated &&
+                user.controller == Controller.Player &&
+                 user.activationPhase == ActivationPhase.ActivationPhase;
         }
     }
 

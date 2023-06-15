@@ -60,7 +60,7 @@ namespace HexGameEngine.Combat
             if(!HexCharacterController.Instance.IsCharacterAbleToMove(activatedCharacter))
             {
                 Debug.Log(activatedCharacter.myName + " is unable to move, cancelling move action request");
-                ActionErrorGuidanceController.Instance.ShowErrorMessage("Character is unable to move");
+                ActionErrorGuidanceController.Instance.ShowErrorMessage(activatedCharacter, "Character is unable to move");
                 return;
             }
 

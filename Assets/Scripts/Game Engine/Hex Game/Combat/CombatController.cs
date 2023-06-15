@@ -469,7 +469,7 @@ namespace HexGameEngine.Combat
             // 25% Chance to be injured (base chance).
             // Injury chance REDUCED by 1% for each point of injury resistance.
             // Injury chance INCREASED by 1% for each 1% of health lost from max health in the attack
-            // (e.g. if the character lost 17% of their health, the injury chance is increased by 17%.
+            // (e.g. if the character lost 17% of their health, the injury chance is increased by 17% to 42%.
 
             // Can only be injured by ability based attacks (e.g. cant be injured from Bleeding, Poisoned, etc)
             if (ability == null || effect == null) return;
@@ -477,21 +477,16 @@ namespace HexGameEngine.Combat
             int roll = RandomGenerator.NumberBetween(1, 1000);
             float baseInjuryChance = 25;
             float healthLostModifier = StatCalculator.GetPercentage(damageResult.totalHealthLost, StatCalculator.GetTotalMaxHealth(character));
-            // float injuryResistanceMod = StatCalculator.GetTotalInjuryResistance(character) / 100f;
             float injuryResistanceMod = StatCalculator.GetTotalInjuryResistance(character);
-            //float injuryChanceActual = (healthLostInjuryChanceModifier * (1 - injuryResistanceMod) * 10);
             float injuryChanceActual = (baseInjuryChance + healthLostModifier - injuryResistanceMod) * 10;
-            int mildThreshold = 0;
+            int mildThreshold = (int)(StatCalculator.GetTotalMaxHealth(character) * 0.1f);
             int severeThreshold = (int)(StatCalculator.GetTotalMaxHealth(character) * 0.25f);
 
             Debug.Log("CheckAndHandleInjuryOnHealthLost() called on character " + character.myName +
                ", Rolled = : " + roll.ToString() + "/1000" +
                ", injury probability = " + (injuryChanceActual / 10).ToString() + "%" +
                ", health lost = " + damageResult.totalHealthLost +
-               ", injury thresholds: Mild = " + mildThreshold.ToString() + " or more, Severe = " + severeThreshold.ToString() + " or more.");
-
-            // TO DO IN FUTURE: if the character is immune to being injured for whatever reason, check it here and return
-            //
+               ", injury thresholds: Mild = " + mildThreshold.ToString() + " health or more, Severe = " + severeThreshold.ToString() + " health or more.");
 
             // Did character lose enough health to trigger an injury?
             if (damageResult.totalHealthLost < mildThreshold) return;
