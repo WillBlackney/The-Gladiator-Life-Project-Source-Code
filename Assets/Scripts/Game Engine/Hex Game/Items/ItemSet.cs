@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using Codice.Client.Common;
-using HexGameEngine.Abilities;
 
 namespace HexGameEngine.Items
 {

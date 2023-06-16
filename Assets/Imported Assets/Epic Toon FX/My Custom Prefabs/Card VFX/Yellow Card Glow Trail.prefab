@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8792633887478687378}
   - component: {fileID: 8792633887477231882}
   - component: {fileID: 8792633887469682416}
-  - component: {fileID: 1213170833940579111}
   - component: {fileID: 1852977469748609863}
   - component: {fileID: 6915553717728640799}
   m_Layer: 0
@@ -4717,7 +4716,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e7912d15146fcf145afaaedec646b781, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4830,20 +4828,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &1213170833940579111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8792633887459523478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e2e99ff9d8676940b0e98ae5c293b8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myScaleModifier: 0
-  mySortingOrder: 0
 --- !u!114 &1852977469748609863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14333,7 +14317,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e653836c30661fe419b8992e230ca189, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

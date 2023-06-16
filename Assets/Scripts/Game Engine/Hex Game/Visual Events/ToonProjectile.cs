@@ -1,5 +1,4 @@
-﻿using Codice.CM.Common;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;

@@ -19,7 +19,6 @@ using HexGameEngine.Audio;
 using DG.Tweening;
 using HexGameEngine.CameraSystems;
 using UnityEngine.TextCore.Text;
-using Spriter2UnityDX.Importing;
 
 namespace HexGameEngine.Combat
 {
