@@ -359,8 +359,10 @@ namespace HexGameEngine.VisualEvents
         public void CreateStressGainedEffect(Vector3 location, int stressAmount)
         {
             Debug.Log("VisualEffectManager.CreateStressGainedEffect() called...");
-            GameObject damageEffect = Instantiate(StressEffectPrefab, location, Quaternion.identity);
-            damageEffect.GetComponent<StressEffect>().InitializeSetup(stressAmount);
+            GameObject stressEffect = Instantiate(StressEffectPrefab, location, Quaternion.identity);
+            bool increase = true;
+            if (stressAmount < 0) increase = false;
+            stressEffect.GetComponent<StressEffect>().InitializeSetup(increase);
         }
         public void CreateGroundBloodSpatter(Vector3 location)
         {

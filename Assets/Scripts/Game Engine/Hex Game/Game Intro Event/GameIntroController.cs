@@ -22,6 +22,7 @@ namespace HexGameEngine.GameIntroEvent
         [SerializeField] Image eventImage;
         [SerializeField] TextMeshProUGUI bodyText;
         [SerializeField] TextMeshProUGUI bodyText2;
+        [SerializeField] ScrollRect mainContentScrollView;
         [SerializeField] Scrollbar contentScrollbar;
         [SerializeField] GameIntroButton[] choiceButtons;
         [SerializeField] RectTransform[] allFitters;
@@ -292,6 +293,7 @@ namespace HexGameEngine.GameIntroEvent
         private void ResetPageBeforeNextPageBuilt()
         {
             ResetChoiceButtons();
+            mainContentScrollView.verticalNormalizedPosition = 1;
             contentScrollbar.value = 1f;
         }
         public void HideAllViews()

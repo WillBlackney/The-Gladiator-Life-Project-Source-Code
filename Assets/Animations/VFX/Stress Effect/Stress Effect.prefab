@@ -163,6 +163,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountText: {fileID: 3005248309099774072}
   myAnim: {fileID: 7748690253897150701}
+  stressIncreaseSprite: {fileID: 21300000, guid: f02d849214708e648aa999931bb9b13f,
+    type: 3}
+  stressDecreaseSprite: {fileID: 21300000, guid: bd36875c14bffe54c89c03e0b6d515bf,
+    type: 3}
+  iconImage: {fileID: 6368846271950379599}
 --- !u!95 &7748690253897150701
 Animator:
   serializedVersion: 5
@@ -183,6 +188,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5620667182041830405
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5539449438367512471
 RectTransform:
   m_ObjectHideFlags: 0
@@ -259,7 +265,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

@@ -662,20 +662,21 @@ namespace HexGameEngine.Characters
 
             // Stress VFX
             // Un comment to reenable stress gained VFX
-            if (stressGainedOrLost > 0 && showVFX)
+            if (stressGainedOrLost != 0 && showVFX)
             {
-                /*
+                
                 if (character.GetLastStackEventParent() != null &&
                     !character.GetLastStackEventParent().isClosed)
                 {
                     VisualEventManager.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost), character.GetLastStackEventParent()).SetStartDelay(0.5f);
+                        VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost), character.GetLastStackEventParent()).SetStartDelay(0.25f);
                 }
                 else
                 {
                     VisualEventManager.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost)).SetStartDelay(0.5f);
-                }*/
+                    //VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost)).SetStartDelay(0.25f);
+                    VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost));
+                }
 
             }
 

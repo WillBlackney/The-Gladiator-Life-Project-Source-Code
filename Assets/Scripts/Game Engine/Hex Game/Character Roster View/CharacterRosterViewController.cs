@@ -16,7 +16,7 @@ namespace HexGameEngine.UI
     {
         // Properties + Components
         #region
-        [Header("Core Components")]
+        [Header("Core Components")]      
         [SerializeField] private GameObject mainVisualParent;
         [SerializeField] private Scrollbar[] scrollBarResets;
         [Space(20)]
@@ -72,8 +72,8 @@ namespace HexGameEngine.UI
         [SerializeField] private TextMeshProUGUI totalArmourText;
         [Space(20)]
         [Header("Overview Panel Components")]
-        [SerializeField] private TextMeshProUGUI characterNameText;
-        [SerializeField] private TextMeshProUGUI characterClassText;
+        [SerializeField] private TMP_InputField characterNameInputField;
+        [SerializeField] private TMP_InputField characterSubNameInputField;
         [SerializeField] private TextMeshProUGUI dailyWageText;
         [Space(20)]
 
@@ -214,8 +214,8 @@ namespace HexGameEngine.UI
         {
             // Build all sections
             characterCurrentlyViewing = data;
-            characterNameText.text = data.myName;
-            characterClassText.text = data.mySubName;
+            characterNameInputField.text = data.myName;
+            characterSubNameInputField.text = data.mySubName;
             dailyWageText.text = data.dailyWage.ToString();         
             BuildActivePerksSection(data);
             BuildAttributeSection(data);
@@ -269,9 +269,19 @@ namespace HexGameEngine.UI
         public void OnLevelUpAttributeButtonClicked()
         {
             attributeLevelUpPageComponent.ShowAndBuildPage(characterCurrentlyViewing);
-        }       
-        
-        #endregion              
+        }
+        public void OnNameInputFieldValueChanged()
+        {
+            characterCurrentlyViewing.myName = characterNameInputField.text;
+            CharacterScrollPanelController.Instance.RebuildViews();
+        }
+        public void OnSubInputFieldValueChanged()
+        {
+            characterCurrentlyViewing.mySubName = characterSubNameInputField.text;
+            CharacterScrollPanelController.Instance.RebuildViews();
+        }
+
+        #endregion
 
         // Build Perk Section
         #region      

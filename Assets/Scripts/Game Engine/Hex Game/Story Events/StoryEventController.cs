@@ -36,6 +36,7 @@ namespace HexGameEngine.StoryEvents
         [SerializeField] TextMeshProUGUI eventHeaderText;
         [SerializeField] TextMeshProUGUI eventDescriptionText;
         [SerializeField] Image eventImage;
+        [SerializeField] ScrollRect mainContentScrollView;
         [SerializeField] Scrollbar verticalContentScrollbar;
         [SerializeField] StoryEventChoiceButton[] fittedChoiceButtons;
         [SerializeField] StoryEventChoiceButton[] unfittedChoiceButtons;
@@ -187,6 +188,7 @@ namespace HexGameEngine.StoryEvents
             AutoSetButtonFitting();
 
             // Reset scroll rect to top
+            mainContentScrollView.verticalNormalizedPosition = 1;
             verticalContentScrollbar.value = 1;
 
         }

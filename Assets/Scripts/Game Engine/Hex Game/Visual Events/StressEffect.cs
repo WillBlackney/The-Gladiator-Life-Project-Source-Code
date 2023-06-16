@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using HexGameEngine.Utilities;
+using UnityEngine.UI;
 
 namespace HexGameEngine.VisualEvents
 {
@@ -13,6 +14,9 @@ namespace HexGameEngine.VisualEvents
         [Header("Component References")]
         [SerializeField] private TextMeshProUGUI amountText;
         [SerializeField] private Animator myAnim;
+        [SerializeField] private Sprite stressIncreaseSprite;
+        [SerializeField] private Sprite stressDecreaseSprite;
+        [SerializeField] private Image iconImage;
         #endregion
 
         // Getters + Accessors
@@ -57,6 +61,14 @@ namespace HexGameEngine.VisualEvents
         {
             transform.position = new Vector2(transform.position.x - 0.2f, transform.position.y);
             amountText.text = damage.ToString();
+            PlayUpAnim();
+
+        }
+        public void InitializeSetup(bool increase)
+        {
+            transform.position = new Vector2(transform.position.x - 0.2f, transform.position.y);
+            if (increase) iconImage.sprite = stressIncreaseSprite;
+            else iconImage.sprite = stressDecreaseSprite;
             PlayUpAnim();
 
         }

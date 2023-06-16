@@ -1312,37 +1312,45 @@ namespace HexGameEngine.Combat
             if(attacker != null) attacker.damageDealtThisCombat += totalHealthLost + totalArmourLost;            
 
             // Check for barrier
-            if (removedBarrier) PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Barrier, -1, true, 0.5f);            
+            if (removedBarrier) PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Barrier, -1, true, 0.5f);
+
+            // Check and handle death
+            LevelNode targetTile = target.currentTile;
+            if (target.currentHealth <= 0 && target.livingState == LivingState.Alive)
+                HandleDeathBlow(target, parentEvent);
 
             // Combat Token Expiries >>
-            // Check Block
-            if (ability != null &&
-                !removedBarrier && 
-                totalDamage > 0 &&
-                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Guard))
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Guard, -1);
+            if(target.livingState == LivingState.Alive)
+            {
+                // Check Block
+                if (ability != null &&
+                    !removedBarrier &&
+                    totalDamage > 0 &&
+                    PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Guard))
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Guard, -1);
 
-            // Check Vulnerable
-            if (ability != null &&
-                !removedBarrier &&
-                totalDamage > 0 &&
-                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Vulnerable))
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Vulnerable, -1);
+                // Check Vulnerable
+                if (ability != null &&
+                    !removedBarrier &&
+                    totalDamage > 0 &&
+                    PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Vulnerable))
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Vulnerable, -1);
 
-            // Check Evasion
-            if (ability != null &&
-                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Evasion))
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Evasion, -1);
+                // Check Evasion
+                if (ability != null &&
+                    PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Evasion))
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Evasion, -1);
 
-            // Check Crippled
-            if (ability != null &&
-                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Crippled))
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Crippled, -1);
+                // Check Crippled
+                if (ability != null &&
+                    PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Crippled))
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Crippled, -1);
 
-            // Check Stealth
-            if (ability != null &&
-                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stealth))
-                PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Stealth, -1);
+                // Check Stealth
+                if (ability != null &&
+                    PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stealth))
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Stealth, -1);
+            }           
 
             // On hit effects
             // Flaming weapon => apply burning
@@ -1383,7 +1391,8 @@ namespace HexGameEngine.Combat
             }
 
             // Thorns
-            if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Thorns) &&
+            if (target.livingState == LivingState.Alive &&
+                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Thorns) &&
                 attacker != null &&
                 attacker.currentHealth > 0 &&
                 attacker.livingState == LivingState.Alive &&
@@ -1399,7 +1408,8 @@ namespace HexGameEngine.Combat
             }
 
             // Storm Shield
-            if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.StormShield) &&
+            if (target.livingState == LivingState.Alive &&
+                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.StormShield) &&
                 attacker != null &&
                 attacker.currentHealth > 0 &&
                 attacker.livingState == LivingState.Alive &&
@@ -1443,14 +1453,14 @@ namespace HexGameEngine.Combat
             if (totalHealthLost > 0 && target.currentHealth > 0)
             {
                 // Vengeful perk
-                if(target != null &&
+                if(target.livingState == LivingState.Alive &&
                     PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Vengeful))
                 {
                     PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Combo, 1, true, 0.5f);
                 }
 
                 // Punch drunk perk (25% chance to become stunned)
-                if (target != null &&
+                if (target.livingState == LivingState.Alive &&
                     ability != null &&
                     attacker != target &&
                     PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.PunchDrunk))
@@ -1463,10 +1473,11 @@ namespace HexGameEngine.Combat
             // Stress Events on health lost
             if (totalHealthLost > 0 && target.currentHealth > 0 && target.livingState == LivingState.Alive)
             {
+                // Target 'On Health Lost' stress check
                 CreateStressCheck(target, StressEventType.HealthLost);
 
-                // Check ally health stress check
-                foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(target))
+                // ALlies' 'On Ally Health Lost' stress check
+                foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(target, false))
                 {
                     CreateStressCheck(c, StressEventType.AllyLosesHealth);
                 }
@@ -1480,10 +1491,12 @@ namespace HexGameEngine.Combat
             }
 
             // Check and handle death
-            if (target.currentHealth <= 0 && target.livingState == LivingState.Alive)
+            if (target.currentHealth <= 0 && target.livingState == LivingState.Dead)
             {
+                //HandleDeathBlow(target, parentEvent);
+
                 // Attacker 'on killed an enemy' events
-                if(attacker != null &&
+                if (attacker != null &&
                     attacker.currentHealth > 0 &&
                     attacker.livingState == LivingState.Alive)
                 {
@@ -1498,10 +1511,10 @@ namespace HexGameEngine.Combat
                         HexCharacterController.Instance.ModifyActionPoints(attacker, 6);
                     }
 
-                    // Gladiator background: recover 2 stress on kill
+                    // Gladiator background: recover 3 stress on kill
                     if (CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Gladiator))
                     {
-                        HexCharacterController.Instance.ModifyStress(attacker, -2, true, true);
+                        HexCharacterController.Instance.ModifyStress(attacker, -3, true, true);
                     }
 
                     // Perk Soul Collector: permanently gain 1 constitution
@@ -1552,7 +1565,7 @@ namespace HexGameEngine.Combat
 
                 // Check nearby gnoll enemies: gnolls heal when a character is killed within 1 of them
                 List<HexCharacterModel> characters = HexCharacterController.Instance.AllCharacters;
-                List<LevelNode> tiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1);
+                List<LevelNode> tiles = LevelController.Instance.GetAllHexsWithinRange(targetTile, 1);
                 foreach(HexCharacterModel possibleGnoll in characters)
                 {
                     if(possibleGnoll.race == CharacterRace.Gnoll && 
@@ -1570,18 +1583,15 @@ namespace HexGameEngine.Combat
 
                 // Stress Events on death
                 // Enemy Killed (Positive)
-                foreach(HexCharacterModel c in HexCharacterController.Instance.GetAllEnemiesOfCharacter(target))
-                {
+                foreach(HexCharacterModel c in HexCharacterController.Instance.GetAllEnemiesOfCharacter(target))                
                     CreateStressCheck(c, StressEventType.EnemyKilled);                    
-                }
+                
 
                 // Ally Killed (Negative)
-                foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(target))
-                {
-                    CreateStressCheck(c, StressEventType.AllyKilled);
-                }
+                foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(target, false))                
+                    CreateStressCheck(c, StressEventType.AllyKilled);                
 
-                HandleDeathBlow(target, parentEvent);
+                //HandleDeathBlow(target, parentEvent);
             }
 
         }
@@ -1635,7 +1645,7 @@ namespace HexGameEngine.Combat
             VisualEventManager.CreateVisualEvent(() => 
             {
                 // to do: big crowd cheer SFX
-                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null);
+                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null, 0.5f);
                 view.vfxManager.StopAllEffects();
             }, parentEvent);
 
@@ -1653,39 +1663,35 @@ namespace HexGameEngine.Combat
             if (RandomGenerator.NumberBetween(0, 1) == 0) randY = -randY;
             if (RandomGenerator.NumberBetween(0, 1) == 0) randX = -randX;
 
-            if (randomDeathAnim == 0)            
-                VisualEventManager.CreateVisualEvent(() =>
-                {
-                    character.hexCharacterView.ucm.RootSortingGroup.sortingOrder = character.hexCharacterView.ucm.RootSortingGroup.sortingOrder - 1;
-                    AudioManager.Instance.PlaySound(character.audioProfile, AudioSet.Die);
-                    HexCharacterController.Instance.PlayDeathAnimation(view);                    
-                    Vector3 finalPos = new Vector3(view.ucmMovementParent.transform.position.x + randX, view.ucmMovementParent.transform.position.y + randY, view.ucmMovementParent.transform.position.z);
-                    view.ucmMovementParent.transform.DOMove(finalPos, 0.5f);
-                    view.ucm.transform.DORotate(new Vector3(0, 0, randomDeathRotation), 0.5f);
-                    for (int i = 0; i < 2; i++)
-                        VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
-                }, parentEvent).SetEndDelay(1f);
-                        
-            // Decapitation
-            else
+            // Fade out UCM
+            VisualEventManager.CreateVisualEvent(() => CharacterModeller.FadeOutCharacterShadow(view, 1f), parentEvent);
+
+            // UCM die animation + blood effects
+            VisualEventManager.CreateVisualEvent(() =>
             {
-                VisualEventManager.CreateVisualEvent(() =>
+                int spatters = 2;
+                character.hexCharacterView.ucm.RootSortingGroup.sortingOrder = character.hexCharacterView.ucm.RootSortingGroup.sortingOrder - 1;
+                AudioManager.Instance.PlaySound(character.audioProfile, AudioSet.Die);
+               
+                Vector3 finalPos = new Vector3(view.ucmMovementParent.transform.position.x + randX, view.ucmMovementParent.transform.position.y + randY, view.ucmMovementParent.transform.position.z);
+                view.ucmMovementParent.transform.DOMove(finalPos, 0.5f);
+                view.ucm.transform.DORotate(new Vector3(0, 0, randomDeathRotation), 0.5f);
+
+                if (randomDeathAnim == 0) HexCharacterController.Instance.PlayDeathAnimation(view);
+                else
                 {
-                    character.hexCharacterView.ucm.RootSortingGroup.sortingOrder = character.hexCharacterView.ucm.RootSortingGroup.sortingOrder - 1;
-                    AudioManager.Instance.PlaySound(character.audioProfile, AudioSet.Die);
+                    spatters = 3;
                     VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
                     HexCharacterController.Instance.PlayDecapitateAnimation(view);
-                    Vector3 finalPos = new Vector3(view.ucmMovementParent.transform.position.x + randX, view.ucmMovementParent.transform.position.y + randY, view.ucmMovementParent.transform.position.z);
-                    view.ucmMovementParent.transform.DOMove(finalPos, 0.5f);
-                    view.ucm.transform.DORotate(new Vector3(0, 0, randomDeathRotation), 0.5f);
-                    for (int i = 0; i < 3; i++)
-                        VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
-                }, parentEvent).SetEndDelay(1f);
-            }
+                }
+
+                for (int i = 0; i < spatters; i++)
+                    VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
+            }, parentEvent).SetEndDelay(1f);
 
             // Fade out UCM
-            VisualEventManager.CreateVisualEvent(() => 
-                CharacterModeller.FadeOutCharacterShadow(view, 0.5f), parentEvent).SetEndDelay(1f);
+            //VisualEventManager.CreateVisualEvent(() => 
+            //    CharacterModeller.FadeOutCharacterShadow(view, 0.5f), parentEvent).SetEndDelay(1f);
            
             // Destroy characters activation window and update other window positions
             HexCharacterModel currentlyActivatedEntity = TurnController.Instance.EntityActivated;
