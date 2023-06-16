@@ -49,7 +49,6 @@ MonoBehaviour:
     possibleWeaponLoadouts:
     - mainHandProspects:
       - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
-      - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
       offhandProspects:
       - {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
     possibleArmourLoadouts:

@@ -248,7 +248,8 @@ namespace HexGameEngine.Characters
             // Convert health int values to floats
             float currentHealthFloat = health;
             float currentMaxHealthFloat = maxHealth;
-            float healthBarFloat = currentHealthFloat / currentMaxHealthFloat;
+            float healthBarFloat = 0f;
+            if (maxHealth > 0) healthBarFloat = currentHealthFloat / currentMaxHealthFloat;
 
             // Modify UI elements
             healthBarUI.value = healthBarFloat;
@@ -259,7 +260,8 @@ namespace HexGameEngine.Characters
             // Convert health int values to floats
             float currentArmourFloat = armour;
             float currentMaxArmourFloat = maxArmour;
-            float armourBarFloat = currentArmourFloat / currentMaxArmourFloat;
+            float armourBarFloat = 0f;
+            if (maxArmour > 0) armourBarFloat = currentArmourFloat / currentMaxArmourFloat;
 
             // Modify UI elements
             armourBarUI.value = armourBarFloat;
@@ -281,7 +283,8 @@ namespace HexGameEngine.Characters
         {
             float currentFat = fatigue;
             float maxFatFloat = maxFatigue;
-            float fatBarFloat = currentFat / maxFatFloat;
+            float fatBarFloat = 0f;
+            if (maxFatigue > 0) fatBarFloat = currentFat / maxFatFloat;
 
             // Modify UI elements
             fatigueSubBarUI.DOKill();

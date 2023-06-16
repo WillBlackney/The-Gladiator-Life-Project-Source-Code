@@ -1007,7 +1007,7 @@ namespace HexGameEngine.TownFeatures
         }
         public void HandleDropCharacterOnDeploymentNode(DeploymentNodeView node, HexCharacterData draggedCharacter)
         {
-            Debug.Log("HandleDropCharacterOnDeploymentNode()");
+            Debug.Log("HandleDropCharacterOnDeploymentNode(), node = " + node.gameObject.name + ", character: " + draggedCharacter.myName);
             if (CombatContractCard.SelectectedCombatCard != null &&
                 node.IsUnoccupied() && 
                 GetDeployedCharacters().Count >= CombatContractCard.SelectectedCombatCard.MyContractData.enemyEncounterData.deploymentLimit) return;

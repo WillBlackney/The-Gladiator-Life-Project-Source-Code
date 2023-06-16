@@ -195,6 +195,7 @@ namespace HexGameEngine.UI
                 scrollBarResets[i].value = 1;
             mainVisualParent.SetActive(true);
             BuildRosterForCharacter(data);
+            characterPanelUcm.SetIdleAnim();
         }
         private void HandleBuildAndShowCharacterRoster()
         {
@@ -205,6 +206,7 @@ namespace HexGameEngine.UI
             mainVisualParent.SetActive(true);
             HexCharacterData data = CharacterDataController.Instance.AllPlayerCharacters[0];
             BuildRosterForCharacter(data);
+            characterPanelUcm.SetIdleAnim();
         }
         public void HandleRedrawRosterOnCharacterUpdated()
         {
@@ -422,7 +424,7 @@ namespace HexGameEngine.UI
         {
             CharacterModeller.BuildModelFromStringReferences(characterPanelUcm, character.modelParts);
             CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, characterPanelUcm);
-            characterPanelUcm.SetIdleAnim();
+            //characterPanelUcm.SetIdleAnim();
         }
         private void BuildItemSlots(HexCharacterData character)
         {

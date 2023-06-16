@@ -381,12 +381,6 @@ namespace HexGameEngine.UI
                 unframedImageParent.SetActive(true);
                 unframedImage.sprite = headerSprite;
             }
-
-            /*
-            // Build dot points
-            for (int i = 0; i < data.infoRows.Length; i++)
-                dottedRows[i].Build(data.infoRows[i]);
-            */
         }
         private void BuildModalContent(ActivePerk ap)
         {

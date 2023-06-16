@@ -455,6 +455,22 @@ namespace HexGameEngine.AI
                 bRet = true;
             }
 
+            // Self has 2h melee weapon
+            else if (req.requirementType == AIActionRequirementType.SelfHas2hMeleeWeapon &&
+                character.itemSet.IsWieldingTwoHandMeleeWeapon())
+            {
+                bRet = true;
+            }
+
+            // Self has 1h melee weapon
+            else if (req.requirementType == AIActionRequirementType.SelfHas1hMeleeWeapon &&
+                    character.itemSet.mainHandItem != null &&
+                    character.itemSet.mainHandItem.IsMeleeWeapon &&
+                    character.itemSet.mainHandItem.handRequirement == HandRequirement.OneHanded)
+            {
+                bRet = true;
+            }
+
             // Self does not have shield
             else if (req.requirementType == AIActionRequirementType.SelfDoesNotHaveShield &&
                 (character.itemSet.offHandItem == null || character.itemSet.offHandItem.weaponClass != WeaponClass.Shield))

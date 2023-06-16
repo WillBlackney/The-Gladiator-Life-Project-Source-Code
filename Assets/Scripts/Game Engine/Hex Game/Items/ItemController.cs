@@ -372,6 +372,7 @@ namespace HexGameEngine.Items
 
             // Redraw Inventory and Character roster views
             CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
+            CharacterScrollPanelController.Instance.RebuildViews();
             InventoryController.Instance.RebuildInventoryView();
 
         }

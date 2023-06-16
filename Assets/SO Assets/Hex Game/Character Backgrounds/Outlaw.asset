@@ -47,10 +47,7 @@ MonoBehaviour:
     possibleAbilities:
     - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
     - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
-    - {fileID: 11400000, guid: ec0c89a7911d0d343995665d55eacb97, type: 2}
-    - {fileID: 11400000, guid: 36a0268a5ac37d742960a07bfe17be42, type: 2}
     - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
-    - {fileID: 11400000, guid: 2840137d1904dcb4eb8e7a15c992591f, type: 2}
     possibleWeaponLoadouts:
     - mainHandProspects:
       - {fileID: 11400000, guid: 5ea73452997566e4b9f7c15c306b772b, type: 2}
@@ -60,9 +57,7 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
       offhandProspects:
       - {fileID: 0}
-      - {fileID: 0}
       - {fileID: 11400000, guid: 67933190d00ec95478f7e153f088ddb2, type: 2}
-      - {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
     possibleArmourLoadouts:
     - headProspects:
       - {fileID: 11400000, guid: c40c9e4ca934ded4e8c27cbeb88cb759, type: 2}
@@ -78,21 +73,20 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ffea262875283fe4e81b0151039cacfa, type: 2}
     possibleWeaponLoadouts:
     - mainHandProspects:
-      - {fileID: 11400000, guid: 4291957fc42919a4989883c5a722bd38, type: 2}
-      - {fileID: 11400000, guid: eb560eafa975232419c0859378ea055b, type: 2}
-      - {fileID: 11400000, guid: 70b6a6540d39ad1499a30ea651c30df2, type: 2}
-      - {fileID: 11400000, guid: 0daeed5ab3b92be498f81d9e2e6f0c38, type: 2}
+      - {fileID: 11400000, guid: 5ea73452997566e4b9f7c15c306b772b, type: 2}
+      - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+      - {fileID: 11400000, guid: e724601a8b1fda642824cbf7fc3faea9, type: 2}
+      - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
       offhandProspects:
-      - {fileID: 11400000, guid: 34e98f56c89758140b31fdcef7c50032, type: 2}
+      - {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
     possibleArmourLoadouts:
     - headProspects:
-      - {fileID: 11400000, guid: 6b36fc9b35cc6824298b0e34fde38c4c, type: 2}
+      - {fileID: 11400000, guid: c40c9e4ca934ded4e8c27cbeb88cb759, type: 2}
       bodyProspects:
-      - {fileID: 11400000, guid: 930bb20b3ad25804fb9e8bd9eaad9394, type: 2}
-    - headProspects:
-      - {fileID: 11400000, guid: 6b36fc9b35cc6824298b0e34fde38c4c, type: 2}
-      bodyProspects:
-      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+      - {fileID: 11400000, guid: ae95f085284e4354f90181106f16a763, type: 2}
+      - {fileID: 11400000, guid: 8949fc1582e2d5e4ca3a600894a46196, type: 2}
+      - {fileID: 11400000, guid: a607139243f4b2a4b89ea760b67d1c97, type: 2}
+      - {fileID: 11400000, guid: 2cce4423c9ed57d42b7c9d7736934204, type: 2}
   - possibleStartingTalents: 08000000
     possibleAbilities:
     - {fileID: 11400000, guid: 6c3343bfc6662a742897620834e447ae, type: 2}
@@ -100,18 +94,17 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 54c98d698a2d4054aac0406f0d58abbc, type: 2}
     possibleWeaponLoadouts:
     - mainHandProspects:
-      - {fileID: 11400000, guid: c420762d59a4b8f4788afabeee27eb35, type: 2}
-      - {fileID: 11400000, guid: 55f1648863df14d478cd9f083d4c9f38, type: 2}
+      - {fileID: 11400000, guid: 623ec2e1eab053346b93e30e2d91c862, type: 2}
+      - {fileID: 11400000, guid: e8567b630dd37c042a06a339a93e409e, type: 2}
       offhandProspects: []
     possibleArmourLoadouts:
     - headProspects:
-      - {fileID: 11400000, guid: 6b36fc9b35cc6824298b0e34fde38c4c, type: 2}
+      - {fileID: 11400000, guid: c40c9e4ca934ded4e8c27cbeb88cb759, type: 2}
       bodyProspects:
-      - {fileID: 11400000, guid: 930bb20b3ad25804fb9e8bd9eaad9394, type: 2}
-    - headProspects:
-      - {fileID: 11400000, guid: 6b36fc9b35cc6824298b0e34fde38c4c, type: 2}
-      bodyProspects:
-      - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+      - {fileID: 11400000, guid: ae95f085284e4354f90181106f16a763, type: 2}
+      - {fileID: 11400000, guid: 8949fc1582e2d5e4ca3a600894a46196, type: 2}
+      - {fileID: 11400000, guid: a607139243f4b2a4b89ea760b67d1c97, type: 2}
+      - {fileID: 11400000, guid: 2cce4423c9ed57d42b7c9d7736934204, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

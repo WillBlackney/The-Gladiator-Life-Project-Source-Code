@@ -218,9 +218,15 @@ namespace HexGameEngine.Items
             string ret = "";
 
             // If weapon
-            if(item.itemType == ItemType.Weapon)
+            if (item.itemType == ItemType.Weapon)
             {
-                ret = TextLogic.SplitByCapitals(item.handRequirement.ToString());
+                if (item.weaponClass == WeaponClass.ThrowingNet &&
+                    item.weaponClass == WeaponClass.Shield &&
+                    item.weaponClass == WeaponClass.Holdable)
+                {
+                    ret = "Offhand";
+                }
+                else ret = TextLogic.SplitByCapitals(item.handRequirement.ToString());
                 ret += " " + item.weaponClass.ToString();
             }        
             else if (item.itemType == ItemType.Trinket)

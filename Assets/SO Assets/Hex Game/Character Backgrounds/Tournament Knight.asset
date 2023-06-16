@@ -59,11 +59,15 @@ MonoBehaviour:
     possibleArmourLoadouts:
     - headProspects:
       - {fileID: 11400000, guid: 4f71d88b58dfd4d45af2b0c3ba8f52ea, type: 2}
-      - {fileID: 11400000, guid: 78c60a0987ed615438f512b8e10ea6aa, type: 2}
-      - {fileID: 11400000, guid: 1101b12a630b9c24db59b213b57425dc, type: 2}
       bodyProspects:
       - {fileID: 11400000, guid: b120371936fc1334b927f94d3602b160, type: 2}
+    - headProspects:
+      - {fileID: 11400000, guid: 78c60a0987ed615438f512b8e10ea6aa, type: 2}
+      bodyProspects:
       - {fileID: 11400000, guid: a1fe3290d4534334eabf9ba2ff5ab62a, type: 2}
+    - headProspects:
+      - {fileID: 11400000, guid: 1101b12a630b9c24db59b213b57425dc, type: 2}
+      bodyProspects:
       - {fileID: 11400000, guid: c89d7d867b89eda42bd96838671cfe77, type: 2}
   passiveEffectDescriptions:
   - dotStyle: 3

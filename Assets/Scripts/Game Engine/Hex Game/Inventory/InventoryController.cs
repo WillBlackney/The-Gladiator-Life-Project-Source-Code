@@ -74,13 +74,15 @@ namespace HexGameEngine.Items
         #region
         public void BuildAndShowInventoryView()
         {
-            rootCanvas.enabled = true;
+            rootCanvas.gameObject.SetActive(true);
+            //rootCanvas.enabled = true;
             BuildInventoryView();
             UpdateMaxSlotsTexts();
         }
         public void HideInventoryView()
         {
-            rootCanvas.enabled = false;
+            //rootCanvas.enabled = false;
+            rootCanvas.gameObject.SetActive(false);
         }
         #endregion
 

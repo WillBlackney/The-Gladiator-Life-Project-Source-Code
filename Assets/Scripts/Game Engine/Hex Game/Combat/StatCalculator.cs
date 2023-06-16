@@ -943,7 +943,7 @@ namespace HexGameEngine
                 itemFat = (int) (itemFat * 0.5f);
             maxFat -= itemFat;
 
-            // cant go below
+            // cant go negative
             if (maxFat < 0)
                 maxFat = 0;
             return maxFat;
@@ -958,7 +958,7 @@ namespace HexGameEngine
                 itemFat = (int)(itemFat * 0.5f);
             maxFat -= itemFat;
 
-            // cant go below
+            // cant go negative
             if (maxFat < 0)
                 maxFat = 0;
 
@@ -1282,11 +1282,15 @@ namespace HexGameEngine
         {
             float crit = c.attributeSheet.criticalChance;
 
-            crit += (float) GetTotalWits(c) / 2f;
+            crit += GetTotalWits(c) / 2f;
 
             // Satyr perk
             if (c.race == CharacterRace.Satyr && c.controller == Controller.Player)
                 crit += 5;
+
+            // Stealth
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Stealth))
+                crit += 25;
 
             // Items
             crit += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.CriticalChance, c.itemSet);

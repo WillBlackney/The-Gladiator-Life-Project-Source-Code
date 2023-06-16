@@ -714,7 +714,7 @@ namespace HexGameEngine.StoryEvents
                     charactersEffectedActualCount++;
 
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    prospects[i].myName + " " + prospects[i].mySubName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
+                    prospects[i].myName + " " + prospects[i].mySubName + " gained passive: " + TextLogic.ReturnColoredText(perkData.passiveName, TextLogic.neutralYellow), ResultRowIcon.FramedSprite, perkData.passiveSprite);
                     currentResultItems.Add(newResultItem);
                 }
 
@@ -723,7 +723,7 @@ namespace HexGameEngine.StoryEvents
                 {
                     PerkController.Instance.ModifyPerkOnCharacterData(prospects[0].passiveManager, perkData.perkTag, 1);
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    prospects[0].myName + " " + prospects[0].mySubName + " gained passive: " + perkData.passiveName, ResultRowIcon.FramedSprite, perkData.passiveSprite);
+                    prospects[0].myName + " " + prospects[0].mySubName + " gained passive: " + TextLogic.ReturnColoredText(perkData.passiveName, TextLogic.neutralYellow), ResultRowIcon.FramedSprite, perkData.passiveSprite);
                     currentResultItems.Add(newResultItem);
                 }
             }

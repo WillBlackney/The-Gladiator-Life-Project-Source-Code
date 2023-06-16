@@ -128,6 +128,7 @@ namespace HexGameEngine.Items
 
                 // Rebuild roster, inventory and model views
                 CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
+                CharacterScrollPanelController.Instance.RebuildViews();
                 InventoryController.Instance.RebuildInventoryView();
             }
 
@@ -203,6 +204,7 @@ namespace HexGameEngine.Items
 
                         // re build roster, inventory and model views
                         CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
+                        CharacterScrollPanelController.Instance.RebuildViews();
                         InventoryController.Instance.RebuildInventoryView();
                     }
                     else if(myItemRef.abilityData != null)

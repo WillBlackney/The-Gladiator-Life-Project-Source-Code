@@ -429,7 +429,7 @@ namespace HexGameEngine.Perks
             if (!ignoreResistance)
             {
                 if (character != null &&                    
-                    ShouldResistanceBlockThisPassiveApplication(pManager, perkData, stacks) &&
+                    ShouldResistanceBlockThisPassiveApplication(perkData, stacks) &&
                     CombatController.Instance.RollForDebuffResist(applyingCharacter, character, perkData) == true
                     )
                 {
@@ -553,7 +553,7 @@ namespace HexGameEngine.Perks
                 {
                     if(DoesCharacterHavePerk(pManager, pt))
                     {
-                        ModifyPerkOnCharacterEntity(pManager, pt, -GetStackCountOfPerkOnCharacter(pManager, pt));
+                        ModifyPerkOnCharacterEntity(pManager, pt, -GetStackCountOfPerkOnCharacter(pManager, pt), false);
                     }
                 }
             }
@@ -798,9 +798,9 @@ namespace HexGameEngine.Perks
             }
             return bRet;
         }
-        private bool ShouldResistanceBlockThisPassiveApplication(PerkManagerModel pManager, PerkIconData iconData, int stacks)
+        private bool ShouldResistanceBlockThisPassiveApplication(PerkIconData iconData, int stacks)
         {
-            if ( (iconData.resistanceBlocksIncrease && stacks > 0) || (iconData.resistanceBlocksDecrease && stacks < 0))
+            if ((iconData.resistanceBlocksIncrease && stacks > 0) || (iconData.resistanceBlocksDecrease && stacks < 0))
             {
                 return true;
             }

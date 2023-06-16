@@ -8,6 +8,8 @@ using HexGameEngine.Characters;
 using HexGameEngine.TownFeatures;
 using HexGameEngine.Libraries;
 using UnityEngine.EventSystems;
+using HexGameEngine.Items;
+
 namespace HexGameEngine.UI
 {
     public class RosterCharacterPanel : MonoBehaviour, IPointerClickHandler
@@ -122,9 +124,10 @@ namespace HexGameEngine.UI
         }
         public void OnClickAndDragStart()
         {
-            if (TownController.Instance.HospitalViewIsActive ||
+            if ((TownController.Instance.HospitalViewIsActive ||
                  TownController.Instance.LibraryViewIsActive ||
-                 TownController.Instance.DeploymentViewIsActive)
+                 TownController.Instance.DeploymentViewIsActive) &&
+                 !InventoryController.Instance.RootCanvas.isActiveAndEnabled)
             {
                 PortraitDragController.Instance.OnRosterCharacterPanelDragStart(this);
             }
@@ -132,7 +135,8 @@ namespace HexGameEngine.UI
         }
         public void OnLevelButtonClicked()
         {
-            CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
+            if(!InventoryController.Instance.RootCanvas.isActiveAndEnabled)
+                CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
         }
         private void SetIndicatorParentViewStates(bool onOrOff)
         {
@@ -142,7 +146,8 @@ namespace HexGameEngine.UI
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if(eventData.button == PointerEventData.InputButton.Right)
+            if(eventData.button == PointerEventData.InputButton.Right &&
+                !InventoryController.Instance.RootCanvas.isActiveAndEnabled)
             {
                 CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
             }

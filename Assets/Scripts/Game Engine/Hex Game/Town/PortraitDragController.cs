@@ -52,29 +52,40 @@ namespace HexGameEngine.UI
             followMouseParent.SetActive(false);
             AudioManager.Instance.FadeOutSound(Sound.UI_Dragging_Constant, 0.2f);
 
+            // Handle drag and swap two character positions
+            if (DeploymentNodeView.NodeMousedOver != null &&
+                DeploymentNodeView.NodeMousedOver.MyCharacterData != null &&
+                draggedNode != null &&
+                draggedCharacterData != null)
+            {
+                var draggedCharacter = draggedCharacterData;
+                var dragNode = draggedNode;
+                var swapCharacter = DeploymentNodeView.NodeMousedOver.MyCharacterData;               
+                var swapNode = DeploymentNodeView.NodeMousedOver;
+
+                AudioManager.Instance.PlaySoundPooled(Sound.UI_Drag_Drop_End);
+                TownController.Instance.HandleDropCharacterOnDeploymentNode(swapNode, draggedCharacter);
+                TownController.Instance.HandleDropCharacterOnDeploymentNode(dragNode, swapCharacter);
+            }
+
             // Character Deployment logic
-            if (DeploymentNodeView.NodeMousedOver != null)
+            else if (DeploymentNodeView.NodeMousedOver != null)
             {
                 AudioManager.Instance.PlaySoundPooled(Sound.UI_Drag_Drop_End);
-                if (DeploymentNodeView.NodeMousedOver.AllowedCharacter == Allegiance.Player)                
-                    TownController.Instance.HandleDropCharacterOnDeploymentNode(DeploymentNodeView.NodeMousedOver, draggedCharacterData);
-                
-                else if(draggedNode != null)               
-                    TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);            
-            }
+                if (DeploymentNodeView.NodeMousedOver.AllowedCharacter == Allegiance.Player)
+                    TownController.Instance.HandleDropCharacterOnDeploymentNode(DeploymentNodeView.NodeMousedOver, draggedCharacterData);      
+                else if(draggedNode != null)
+                    TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);                    
+            }            
 
             // Handle dragging a node (not character panel) and drag did not end on a new node: rebuild old node position
-            else if (DeploymentNodeView.NodeMousedOver == null &&
-                draggedNode != null )            
-                TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);    
-
-            // Handle drag and swap two character positions
+            else if (DeploymentNodeView.NodeMousedOver == null && draggedNode != null )            
+                TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);                                   
             
             // Handle drag on to hospital feature slot
-            else if(HospitalDropSlot.SlotMousedOver != null)
-            {
+            else if(HospitalDropSlot.SlotMousedOver != null)            
                 TownController.Instance.HandleDropCharacterOnHospitalSlot(HospitalDropSlot.SlotMousedOver, draggedCharacterData);
-            }
+            
             // Handle drag on library learn ability slot
             else if (LibraryCharacterDropSlot.MousedOver)
             {
@@ -100,9 +111,9 @@ namespace HexGameEngine.UI
             draggedCharacterData = panel.MyCharacterData;
         }
         public void OnDeploymentNodeDragStart(DeploymentNodeView node)
-        {
-            AudioManager.Instance.FadeInSound(Sound.UI_Dragging_Constant, 0.2f);
+        {            
             if (node.MyCharacterData == null) return;
+            AudioManager.Instance.FadeInSound(Sound.UI_Dragging_Constant, 0.2f);
             BuildAndShowPortrait(node.MyCharacterData);
             draggedCharacterData = node.MyCharacterData;
             draggedNode = node;
