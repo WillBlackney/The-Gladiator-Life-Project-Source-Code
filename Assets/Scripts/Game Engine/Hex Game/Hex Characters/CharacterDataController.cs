@@ -214,6 +214,7 @@ namespace HexGameEngine.Characters
             newCharacter.mySubName = template.mySubName;
             newCharacter.race = template.race;
             newCharacter.audioProfile = GetAudioProfileForRace(template.race);
+            if (newCharacter.audioProfile == AudioProfileType.None) newCharacter.audioProfile = GetAudioProfileForRace(newCharacter.race);
             newCharacter.modelSize = template.modelSize;
             SetStartingLevelAndXpValues(newCharacter);
             if (template.background == CharacterBackground.None) newCharacter.background = GetBackgroundData(CharacterBackground.Unknown);
@@ -261,6 +262,7 @@ namespace HexGameEngine.Characters
             newCharacter.myName = template.myName;
             newCharacter.race = template.race;
             newCharacter.audioProfile = template.audioProfile;
+            if (newCharacter.audioProfile == AudioProfileType.None) newCharacter.audioProfile = GetAudioProfileForRace(newCharacter.race);
             newCharacter.modelSize = template.modelSize;
             newCharacter.xpReward = template.xpReward;
             newCharacter.baseArmour = template.baseArmour;
@@ -321,6 +323,7 @@ namespace HexGameEngine.Characters
             newCharacter.mySubName = original.mySubName;
             newCharacter.race = original.race;
             newCharacter.audioProfile = original.audioProfile;
+            if(newCharacter.audioProfile == AudioProfileType.None) newCharacter.audioProfile = GetAudioProfileForRace(newCharacter.race);
             newCharacter.background = original.background;
             newCharacter.modelSize = original.modelSize;
             newCharacter.xpReward = original.xpReward;

@@ -66,6 +66,8 @@ namespace HexGameEngine.Audio
         [Header("Ambience SFX")]
         [SerializeField] private AudioModel[] allAmbienceSFX;
 
+       
+
         // Initialization 
         #region
         protected override void Awake()
@@ -134,7 +136,7 @@ namespace HexGameEngine.Audio
         }
         public void PlaySoundPooled(Sound s)
         {
-            if (s == Sound.None) return;           
+            if (s == Sound.None) return;
 
             AudioModel a = Array.Find(allAudioModels, sound => sound.soundType == s);
             if (a != null)
@@ -166,19 +168,19 @@ namespace HexGameEngine.Audio
 
                 // Randomize pitch if marked to do so
                 if (a.randomizePitch) a.source.pitch = RandomGenerator.NumberBetween(a.randomPitchLowerLimit, a.randomPitchUpperLimit);
-                else a.source.pitch = a.pitch;                
+                else a.source.pitch = a.pitch;
 
                 // Randomize volume if marked to do so
-                if (a.randomizeVolume) a.source.volume = RandomGenerator.NumberBetween(a.randomVolumeLowerLimit, a.randomVolumeUpperLimit);                
-                else a.source.volume = a.volume;                
+                if (a.randomizeVolume) a.source.volume = RandomGenerator.NumberBetween(a.randomVolumeLowerLimit, a.randomVolumeUpperLimit);
+                else a.source.volume = a.volume;
 
                 a.source.Play();
             }
         }
         public void PlaySound(AudioProfileType type, AudioSet set)
-        {            
-            if (GlobalSettings.Instance.PreventAudioProfiles) return;           
-            
+        {
+            if (GlobalSettings.Instance.PreventAudioProfiles) return;
+
             // Find the matching profile
             AudioProfileData apd = Array.Find(allProfiles, a => a.audioProfileType == type);
 
@@ -192,9 +194,9 @@ namespace HexGameEngine.Audio
             List<AudioModel> validSounds = new List<AudioModel>();
             AudioModel soundPlayed = null;
             if (set == AudioSet.Die) soundPlayed = apd.dieSounds[RandomGenerator.NumberBetween(0, apd.dieSounds.Length - 1)];
-            else if (set == AudioSet.Hurt) soundPlayed = apd.hurtSounds[RandomGenerator.NumberBetween(0, apd.hurtSounds.Length - 1)];            
-            else if (set == AudioSet.Attack) soundPlayed = apd.meleeAttackSounds[RandomGenerator.NumberBetween(0, apd.meleeAttackSounds.Length - 1)];            
-            else if (set == AudioSet.TurnStart) soundPlayed = apd.turnStartSounds[RandomGenerator.NumberBetween(0, apd.turnStartSounds.Length - 1)];            
+            else if (set == AudioSet.Hurt) soundPlayed = apd.hurtSounds[RandomGenerator.NumberBetween(0, apd.hurtSounds.Length - 1)];
+            else if (set == AudioSet.Attack) soundPlayed = apd.meleeAttackSounds[RandomGenerator.NumberBetween(0, apd.meleeAttackSounds.Length - 1)];
+            else if (set == AudioSet.TurnStart) soundPlayed = apd.turnStartSounds[RandomGenerator.NumberBetween(0, apd.turnStartSounds.Length - 1)];
 
             if (soundPlayed == null)
             {
@@ -216,13 +218,13 @@ namespace HexGameEngine.Audio
             else player.source.clip = data.audioClip;
 
             // Randomize pitch if marked to do so
-            if (data.randomizePitch) player.source.pitch = RandomGenerator.NumberBetween(data.randomPitchLowerLimit, data.randomPitchUpperLimit);            
-            else player.source.pitch = data.pitch;            
+            if (data.randomizePitch) player.source.pitch = RandomGenerator.NumberBetween(data.randomPitchLowerLimit, data.randomPitchUpperLimit);
+            else player.source.pitch = data.pitch;
 
             // Randomize volume if marked to do so
-            if (data.randomizeVolume) player.source.volume = RandomGenerator.NumberBetween(data.randomVolumeLowerLimit, data.randomVolumeUpperLimit);            
+            if (data.randomizeVolume) player.source.volume = RandomGenerator.NumberBetween(data.randomVolumeLowerLimit, data.randomVolumeUpperLimit);
             else player.source.volume = data.volume;
-            
+
         }
         public void StopSound(Sound s)
         {
@@ -266,8 +268,8 @@ namespace HexGameEngine.Audio
         {
             if (IsSoundPlaying(Sound.Ambience_Outdoor_Spooky)) FadeOutSound(Sound.Ambience_Outdoor_Spooky, fadeDuration);
             if (IsSoundPlaying(Sound.Ambience_Town_1)) FadeOutSound(Sound.Ambience_Town_1, fadeDuration);
-            if (IsSoundPlaying(Sound.Ambience_Crypt)) FadeOutSound(Sound.Ambience_Crypt, fadeDuration);            
-            if (IsSoundPlaying(Sound.Environment_Camp_Fire)) FadeOutSound(Sound.Environment_Camp_Fire, fadeDuration);            
+            if (IsSoundPlaying(Sound.Ambience_Crypt)) FadeOutSound(Sound.Ambience_Crypt, fadeDuration);
+            if (IsSoundPlaying(Sound.Environment_Camp_Fire)) FadeOutSound(Sound.Environment_Camp_Fire, fadeDuration);
             if (IsSoundPlaying(Sound.Ambience_Crowd_1)) FadeOutSound(Sound.Ambience_Crowd_1, fadeDuration);
         }
         public void FadeOutAllCombatMusic(float fadeDuration)
@@ -316,7 +318,7 @@ namespace HexGameEngine.Audio
         {
             // Find all basic combat music
             AudioModel[] basicCombatMusic = Array.FindAll(allAudioModels, sound => sound.combatCategory == CombatMusicCategory.Basic && sound != previousCombatTrack);
-           
+
             // Choose one track randomly
             AudioModel musicSelected = basicCombatMusic[RandomGenerator.NumberBetween(0, basicCombatMusic.Length - 1)];
 
@@ -325,7 +327,7 @@ namespace HexGameEngine.Audio
 
             // Cache track so it cant be played twice in a row
             previousCombatTrack = musicSelected;
-            
+
         }
         public void AutoPlayEliteCombatMusic(float fadeDuration)
         {
@@ -361,21 +363,23 @@ namespace HexGameEngine.Audio
         }
         #endregion
 
-        private bool playingMainMenuMusic = false;
+        private MusicSession currentMusicSession;
         public void PlayMainMenuMusic()
         {
-            if (playingMainMenuMusic) return;
-            playingMainMenuMusic = true;
+            if (currentMusicSession != null) return;
+            MusicSession thisSession = new MusicSession();
+            currentMusicSession = thisSession;
+
             PlaySound(Sound.Music_Main_Menu_Theme_Unlooped_1);
-            DelayUtils.DelayedCall(57, () => 
-            { 
-                if (playingMainMenuMusic && !IsSoundPlaying(Sound.Music_Main_Menu_Theme_Looped_1)) 
-                    FadeInSound(Sound.Music_Main_Menu_Theme_Looped_1, 1f); 
+            DelayUtils.DelayedCall(55, () =>
+            {
+                if (currentMusicSession == thisSession)
+                    FadeInSound(Sound.Music_Main_Menu_Theme_Looped_1, 1f);
             });
         }
         public void StopMainMenuMusic(float fadeSpeed = 1f)
         {
-            playingMainMenuMusic = false;
+            currentMusicSession = null;
             if (IsSoundPlaying(Sound.Music_Main_Menu_Theme_Unlooped_1)) FadeOutSound(Sound.Music_Main_Menu_Theme_Unlooped_1, fadeSpeed);
             if (IsSoundPlaying(Sound.Music_Main_Menu_Theme_Looped_1)) FadeOutSound(Sound.Music_Main_Menu_Theme_Looped_1, fadeSpeed);
         }
@@ -416,6 +420,8 @@ namespace HexGameEngine.Audio
 
         #endregion
     }
+
+    public class MusicSession{}
 
 
 

@@ -782,10 +782,10 @@ namespace HexGameEngine.HexTiles
             else
             {
                 VisualEventManager.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
-                (viewA, aDestination, null));
+                (viewA, aDestination, null, 5f, Ease.OutBack));
 
                 VisualEventManager.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
-                (viewB, bDestination, null));
+                (viewB, bDestination, null, 5f, Ease.OutBack));
 
                 VisualEventManager.InsertTimeDelayInQueue(0.25f);
 
@@ -1304,6 +1304,14 @@ namespace HexGameEngine.HexTiles
         {
             foreach (CrowdRowAnimator cra in crowdRowAnimators)
                 cra.StopAnimation();
+        }
+        public void AnimateCrowdOnCombatStart()
+        {
+            int minAnims = (int)(AllCrowdMembers.Count * 0.65f);
+            int maxAnims = (int)(AllCrowdMembers.Count * 0.75f);
+            int totalAnims = RandomGenerator.NumberBetween(minAnims, maxAnims);
+            List<CrowdMember> animatedMembers = AllCrowdMembers.GetRandomElements(totalAnims);
+            for (int i = 0; i < totalAnims; i++) animatedMembers[i].DoCheerAnimation();
         }
         public void AnimateCrowdOnHit()
         {                   

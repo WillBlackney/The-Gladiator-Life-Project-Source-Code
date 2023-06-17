@@ -2765,6 +2765,10 @@ namespace HexGameEngine.Characters
                 MoveEntityToNodeCentre(character.hexCharacterView, character.currentTile, cData, () => { events.Remove(cData); });
             }
 
+            // Animate crowd + starting cheer
+            AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1);
+            LevelController.Instance.AnimateCrowdOnCombatStart();
+
             yield return new WaitUntil(() => events.Count == 0);
 
             if (data != null) data.MarkAsCompleted();

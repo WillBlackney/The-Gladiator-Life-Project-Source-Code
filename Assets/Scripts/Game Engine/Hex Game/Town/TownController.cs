@@ -844,12 +844,13 @@ namespace HexGameEngine.TownFeatures
             cam.DOOrthoSize(0.5f, 0.65f).SetEase(Ease.OutCubic);
             BlackScreenController.Instance.FadeOutScreen(0.65f, () =>
             {
+                cam.DOKill();
                 HideCombatContractPage();
                 HideTownView();
                 BuildAndShowDeploymentPage();
-                cam.DOOrthoSize(5f, 0);
-                BlackScreenController.Instance.FadeInScreen(0.5f);
+                cam.DOOrthoSize(5f, 0);               
                 cam.transform.position = new Vector3(0, 0, -15);
+                BlackScreenController.Instance.FadeInScreen(0.65f);
             });
         }
         public void OnDeploymentPageBackToTownButtonClicked()

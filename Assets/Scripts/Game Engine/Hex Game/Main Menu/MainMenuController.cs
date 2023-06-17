@@ -718,9 +718,10 @@ namespace HexGameEngine.MainMenu
                 }
 
                 panel.SetSelectedViewState(true);
-                PerkController.Instance.ModifyPerkOnCharacterData(characterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag, panel.PerkIcon.ActivePerk.stacks);
-
+                PerkController.Instance.ModifyPerkOnCharacterData(characterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag, panel.PerkIcon.ActivePerk.stacks);               
             }
+            int newMaxHealth = StatCalculator.GetTotalMaxHealth(characterBuild);
+            CharacterDataController.Instance.SetCharacterHealth(characterBuild, newMaxHealth);
         }
         private void SetAvailableChoosePerkPoints(int amount)
         {

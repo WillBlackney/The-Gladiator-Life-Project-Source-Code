@@ -352,7 +352,7 @@ MonoBehaviour:
     functionInvoked:
       m_PersistentCalls:
         m_Calls: []
-    soundPlayed: 34
+    soundPlayed: 116
     canvasGroup: {fileID: 0}
     image: {fileID: 0}
     text: {fileID: 0}
@@ -407,6 +407,7 @@ MonoBehaviour:
     rotationDegrees: 0
     cursorType: 0
   onRightClickEvents: []
+  mouseDownEvents: []
   mouseEnterEvents:
   - widgetEventType: 9
     scalingSequence: 0
@@ -450,7 +451,7 @@ MonoBehaviour:
     functionInvoked:
       m_PersistentCalls:
         m_Calls: []
-    soundPlayed: 33
+    soundPlayed: 117
     canvasGroup: {fileID: 0}
     image: {fileID: 0}
     text: {fileID: 0}

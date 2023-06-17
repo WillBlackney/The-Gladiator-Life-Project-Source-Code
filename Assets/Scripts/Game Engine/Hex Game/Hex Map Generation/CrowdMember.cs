@@ -30,13 +30,14 @@ namespace HexGameEngine.UI
         private bool cheering = false;
         private bool dissapointing = false;
         bool moveDown = false;
-        Vector3 startingLocalPos;
+        Vector3 startingLocalPos = Vector3.zero;
         #endregion
 
         #region Initialization + Setup + Reset        
         public void StartSelfMove()
         {
-            startingLocalPos = movementParent.transform.localPosition;
+            // startingLocalPos = movementParent.transform.localPosition;
+            movementParent.transform.DOLocalMove(startingLocalPos, 0f);
             allowSelfMove = true;
             selfMoveSpeed = RandomGenerator.NumberBetween(15, 30);
             moveDown = RandomGenerator.NumberBetween(1, 2) == 1;
@@ -46,7 +47,7 @@ namespace HexGameEngine.UI
             allowSelfMove = false;
             dissapointing = false;
             cheering = false;
-            movementParent.transform.localPosition = startingLocalPos;
+            movementParent.transform.DOLocalMove(startingLocalPos, 0f);
 
             dissapointedArmsParent.transform.DOKill();
             dissapointedArmsParent.SetActive(false);
