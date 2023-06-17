@@ -8,6 +8,7 @@ using HexGameEngine.GameIntroEvent;
 using HexGameEngine.HexTiles;
 using HexGameEngine.Items;
 using HexGameEngine.JourneyLogic;
+using HexGameEngine.LoadingScreen;
 using HexGameEngine.MainMenu;
 using HexGameEngine.Persistency;
 using HexGameEngine.RewardSystems;
@@ -18,6 +19,7 @@ using HexGameEngine.UCM;
 using HexGameEngine.UI;
 using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -482,55 +484,51 @@ namespace HexGameEngine
         }
         public void HandlePostCombatToTownTransistion()
         {
-            StartCoroutine(HandlePostCombatToTownTransistionCoroutine());
-        }
-        private IEnumerator HandlePostCombatToTownTransistionCoroutine()
-        {
-            // Fade out
-            BlackScreenController.Instance.FadeOutScreen(1f);
             AudioManager.Instance.FadeOutAllAmbience(1f);
-            yield return new WaitForSeconds(1f);
-
-            // Prepare town + new day start data + save game
-            RunController.Instance.OnNewDayStart();
-            SetGameState(GameState.Town);
-            RunController.Instance.SetCheckPoint(SaveCheckPoint.Town);
-
-            // Determine and start next story event
-            StoryEventDataSO nextEvent = StoryEventController.Instance.DetermineAndCacheNextStoryEvent();
-            if (nextEvent != null && RunController.Instance.CurrentDay != 1)
+            LoadingScreenController.Instance.ShowLoadingScreen(1.5f, 1f, null, () =>
             {
-                SetGameState(GameState.StoryEvent);
-                RunController.Instance.SetCheckPoint(SaveCheckPoint.StoryEvent);
-            }
+                // Prepare town + new day start data + save game
+                RunController.Instance.OnNewDayStart();
+                SetGameState(GameState.Town);
+                RunController.Instance.SetCheckPoint(SaveCheckPoint.Town);
 
-            // Save changes
-            PersistencyController.Instance.AutoUpdateSaveFile();
+                // Determine and start next story event
+                StoryEventDataSO nextEvent = StoryEventController.Instance.DetermineAndCacheNextStoryEvent();
+                if (nextEvent != null && RunController.Instance.CurrentDay != 1)
+                {
+                    SetGameState(GameState.StoryEvent);
+                    RunController.Instance.SetCheckPoint(SaveCheckPoint.StoryEvent);
+                }
 
-            // Tear down combat views
-            LevelController.Instance.StopAllCrowdMembers();
-            HexCharacterController.Instance.HandleTearDownCombatScene();
-            LevelController.Instance.HandleTearDownAllCombatViews();
-            LightController.Instance.EnableStandardGlobalLight();
-            CombatRewardController.Instance.HidePostCombatRewardScreen();
+                // Save changes
+                PersistencyController.Instance.AutoUpdateSaveFile();
 
-            // Show town UI
-            TownController.Instance.ShowTownView();
-            CharacterScrollPanelController.Instance.BuildAndShowPanel();
-            TopBarController.Instance.ShowMainTopBar();
+                // Tear down combat views
+                LevelController.Instance.StopAllCrowdMembers();
+                HexCharacterController.Instance.HandleTearDownCombatScene();
+                LevelController.Instance.HandleTearDownAllCombatViews();
+                LightController.Instance.EnableStandardGlobalLight();
+                CombatRewardController.Instance.HidePostCombatRewardScreen();
 
-            // Reset + Centre camera
-            CameraController.Instance.ResetMainCameraPositionAndZoom();            
+                // Show town UI
+                TownController.Instance.ShowTownView();
+                CharacterScrollPanelController.Instance.BuildAndShowPanel();
+                TopBarController.Instance.ShowMainTopBar();
 
-            // Fade back in views + sound
-            yield return new WaitForSeconds(0.5f);
-            DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
-            AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
-            BlackScreenController.Instance.FadeInScreen(1f);
+                // Reset + Centre camera
+                CameraController.Instance.ResetMainCameraPositionAndZoom();
 
-            // Show next story event
-            if (nextEvent != null && RunController.Instance.CurrentDay != 1)
-                StoryEventController.Instance.StartNextEvent();
+                // Fade back in views + sound
+                AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
+                DelayUtils.DelayedCall(1f, () =>
+                {
+                    AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f);
+
+                    // Show next story event
+                    if (nextEvent != null && RunController.Instance.CurrentDay != 1)
+                        StoryEventController.Instance.StartNextEvent();
+                });
+            });
         }
         #endregion
 
@@ -538,249 +536,234 @@ namespace HexGameEngine
         #region
         public void HandleStartNewGameFromMainMenuEvent()
         {
-            StartCoroutine(HandleStartNewGameFromMainMenuEventCoroutine());
-        }
-        public IEnumerator HandleStartNewGameFromMainMenuEventCoroutine()
-        {
-            // Fade out screen + audio
             AudioManager.Instance.PlaySound(Sound.Events_New_Game_Started);
             AudioManager.Instance.StopMainMenuMusic(2f);
-            BlackScreenController.Instance.FadeOutScreen(2f, null, false);
-            yield return new WaitForSeconds(2f);
 
-            // Set state
-            SetGameState(GameState.StoryEvent);
+            LoadingScreenController.Instance.ShowLoadingScreen(1.5f, 1f,
+            () =>
+            {
+                // Set state
+                SetGameState(GameState.StoryEvent);
 
-            // Enable GUI
-            TopBarController.Instance.ShowMainTopBar();
+                // Enable GUI
+                TopBarController.Instance.ShowMainTopBar();
 
-            // Set up new save file 
-            PersistencyController.Instance.BuildNewSaveFileOnNewGameStarted();
+                // Set up new save file 
+                PersistencyController.Instance.BuildNewSaveFileOnNewGameStarted();
 
-            // Build and prepare all session data
-            PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();
+                // Build and prepare all session data
+                PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();
 
-            // Reset+ Centre camera
-            CameraController.Instance.ResetMainCameraPositionAndZoom();
+                // Reset+ Centre camera
+                CameraController.Instance.ResetMainCameraPositionAndZoom();
 
-            // Hide Main Menu
-            MainMenuController.Instance.HideChooseCharacterScreen();
+                // Hide Main Menu
+                MainMenuController.Instance.HideChooseCharacterScreen();
 
-            // Build town views 
-            TownController.Instance.ShowTownView();
-            CharacterScrollPanelController.Instance.BuildAndShowPanel();
+                // Build town views 
+                TownController.Instance.ShowTownView();
+                CharacterScrollPanelController.Instance.BuildAndShowPanel();
+            },
+            () =>
+            {
+                // Start music, fade in
+                AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 1f);
+                DelayUtils.DelayedCall(1f, () =>
+                {
+                    AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f);
+                    GameIntroController.Instance.StartEvent();
+                });
 
-            // Start music, fade in
-            yield return new WaitForSeconds(0.5f);
-            DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
-            AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
-
-            BlackScreenController.Instance.FadeInScreen(2f);
-            DelayUtils.DelayedCall(1.5f, () => GameIntroController.Instance.StartEvent());
-                
-        }       
+            });
+        }
         public void HandleQuitToMainMenuFromInGame()
         {
-            StartCoroutine(HandleQuitToMainMenuFromInGameCoroutine());
-        }
-        private IEnumerator HandleQuitToMainMenuFromInGameCoroutine()
-        {
-            Debug.LogWarning("HandleQuitToMainMenuFromInGameCoroutine");
+            Debug.Log("HandleQuitToMainMenuFromInGameCoroutine");
 
             // Hide menus + GUI + misc annoying stuff
             MainMenuController.Instance.HideInGameMenuView();
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
 
             // Fade out battle music + ambience
-            AudioManager.Instance.FadeOutAllCombatMusic(2f);
-            AudioManager.Instance.FadeOutSound(Sound.Music_Town_Theme_1, 2f);
-            AudioManager.Instance.FadeOutAllAmbience(2f);          
-
-            // Do black screen fade out
-            BlackScreenController.Instance.FadeOutScreen(2f);
-
-            // Wait for the current visual event to finish playing
+            AudioManager.Instance.FadeOutAllCombatMusic(1f);
+            AudioManager.Instance.FadeOutSound(Sound.Music_Town_Theme_1, 1f);
+            AudioManager.Instance.FadeOutAllAmbience(1f);
             VisualEvent handle = VisualEventManager.HandleEventQueueTearDown();
+            Func<bool> awaitCondition = null;
+            if (handle != null && handle.cData != null) awaitCondition = () => handle.cData.Complete() == true;
 
-            // Wait till its safe to tearn down event queue and scene
-            yield return new WaitForSeconds(2f);
-
-            // Save game if in town
-            if(GameState == GameState.Town)            
-                PersistencyController.Instance.AutoUpdateSaveFile();            
-
-            // Set menu state
-            SetGameState(GameState.MainMenu);
-
-            // Pause run timer
-            RunController.Instance.PauseTimer();
-
-            // Hide top bars
-            TopBarController.Instance.HideMainTopBar();
-            TopBarController.Instance.HideCombatTopBar();
-
-            // Brute force stop all game music
-            AudioManager.Instance.ForceStopAllCombatMusic();
-
-            if (handle != null && handle.cData != null)
+            LoadingScreenController.Instance.ShowLoadingScreen(1.5f, 1f, () =>
             {
-                yield return new WaitUntil(() => handle.cData.Complete() == true);
-            }
+                // Save game if in town
+                if (GameState == GameState.Town)
+                    PersistencyController.Instance.AutoUpdateSaveFile();
 
-            // Destroy combat + town scenes
-            LevelController.Instance.StopAllCrowdMembers();
-            HexCharacterController.Instance.HandleTearDownCombatScene();
-            TurnController.Instance.DestroyAllActivationWindows();
+                // Set menu state
+                SetGameState(GameState.MainMenu);
 
-            // Hide combat UI
-            CombatUIController.Instance.HideViewsOnTurnEnd();            
-            LevelController.Instance.HandleTearDownAllCombatViews();
-            LightController.Instance.EnableStandardGlobalLight();
-            LevelController.Instance.DisableArenaView();
+                // Pause run timer
+                RunController.Instance.PauseTimer();
 
-            // Hide UI + town views
-            TownController.Instance.TearDownOnExitToMainMenu();
-            CharacterScrollPanelController.Instance.HideMainView();
-            InventoryController.Instance.HideInventoryView();
-            CharacterRosterViewController.Instance.HideCharacterRosterScreen();
-            GameIntroController.Instance.HideAllViews();
-            CombatRewardController.Instance.HidePostCombatRewardScreen();
-            BoonController.Instance.HideBoonIconsPanel();
+                // Hide top bars
+                TopBarController.Instance.HideMainTopBar();
+                TopBarController.Instance.HideCombatTopBar();
 
-            // Fade in menu music
-            AudioManager.Instance.PlayMainMenuMusic();
+                // Brute force stop all game music
+                AudioManager.Instance.ForceStopAllCombatMusic();
 
-            // Show menu screen
-            MainMenuController.Instance.ShowFrontScreen();
-            MainMenuController.Instance.RenderMenuButtons();
+                // Destroy combat + town scenes
+                LevelController.Instance.StopAllCrowdMembers();
+                HexCharacterController.Instance.HandleTearDownCombatScene();
+                TurnController.Instance.DestroyAllActivationWindows();
 
-            // Do black screen fade in
-            BlackScreenController.Instance.FadeInScreen(2f);
+                // Hide combat UI
+                CombatUIController.Instance.HideViewsOnTurnEnd();
+                LevelController.Instance.HandleTearDownAllCombatViews();
+                LightController.Instance.EnableStandardGlobalLight();
+                LevelController.Instance.DisableArenaView();
+
+                // Hide UI + town views
+                TownController.Instance.TearDownOnExitToMainMenu();
+                CharacterScrollPanelController.Instance.HideMainView();
+                InventoryController.Instance.HideInventoryView();
+                CharacterRosterViewController.Instance.HideCharacterRosterScreen();
+                GameIntroController.Instance.HideAllViews();
+                CombatRewardController.Instance.HidePostCombatRewardScreen();
+                BoonController.Instance.HideBoonIconsPanel();
+            },
+            () =>
+            {
+                // Fade in menu music
+                AudioManager.Instance.PlayMainMenuMusic();
+
+                // Show menu screen
+                MainMenuController.Instance.ShowFrontScreen();
+                MainMenuController.Instance.RenderMenuButtons();
+            },
+            awaitCondition);
         }
         public void HandleLoadSavedGameFromMainMenuEvent()
-        {
-            StartCoroutine(HandleLoadSavedGameFromMainMenuEventCoroutine());
-        }
-        private IEnumerator HandleLoadSavedGameFromMainMenuEventCoroutine()
         {
             // Fade menu music
             AudioManager.Instance.StopMainMenuMusic();
 
-            // Fade out menu scren
-            BlackScreenController.Instance.FadeOutScreen(1f);
-            yield return new WaitForSeconds(1.5f);
-
-            // Build and prepare all session data
-            PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();         
-
-            // Reset Camera
-            CameraController.Instance.ResetMainCameraPositionAndZoom();
-
-            // Hide Main Menu
-            MainMenuController.Instance.HideFrontScreen();
-
-            // Build town views 
-            if(RunController.Instance.SaveCheckPoint == SaveCheckPoint.Town)
+            LoadingScreenController.Instance.ShowLoadingScreen(1.5f, 1f, null, () =>
             {
-                // Set state
-                SetGameState(GameState.Town);
+                // Build and prepare all session data
+                PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();
 
-                // Enable GUI
-                TopBarController.Instance.ShowMainTopBar();
-                TownController.Instance.ShowTownView();
-                CharacterScrollPanelController.Instance.BuildAndShowPanel();
+                // Reset Camera
+                CameraController.Instance.ResetMainCameraPositionAndZoom();
 
-                // Assign hospital slots
-                TownController.Instance.HandleAssignCharactersToHospitalSlotsOnGameLoad();
+                // Hide Main Menu
+                MainMenuController.Instance.HideFrontScreen();
 
-                // Start music, fade in
-                DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
-                AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
-                BlackScreenController.Instance.FadeInScreen(2f);
-            }
-            else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.GameIntroEvent)
-            {
-                // Set state
-                SetGameState(GameState.StoryEvent);
+                // Build town views 
+                if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.Town)
+                {
+                    // Set state
+                    SetGameState(GameState.Town);
 
-                // Enable GUI
-                TopBarController.Instance.ShowMainTopBar();
-                TownController.Instance.ShowTownView();
-                CharacterScrollPanelController.Instance.BuildAndShowPanel();
+                    // Enable GUI
+                    TopBarController.Instance.ShowMainTopBar();
+                    TownController.Instance.ShowTownView();
+                    CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
-                // Start music, fade in
-                DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
-                AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
-                BlackScreenController.Instance.FadeInScreen(1f, ()=> GameIntroController.Instance.StartEvent());
-            }
-            else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.StoryEvent)
-            {
-                // Set state
-                SetGameState(GameState.StoryEvent);
+                    // Assign hospital slots
+                    TownController.Instance.HandleAssignCharactersToHospitalSlotsOnGameLoad();
 
-                // Enable GUI
-                TopBarController.Instance.ShowMainTopBar();
-                TownController.Instance.ShowTownView();
-                CharacterScrollPanelController.Instance.BuildAndShowPanel();
+                    // Start music, fade in
+                    DelayUtils.DelayedCall(1f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
+                    AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 1f);
+                }
+                else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.GameIntroEvent)
+                {
+                    // Set state
+                    SetGameState(GameState.StoryEvent);
 
-                // Start music, fade in
-                DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
-                AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 2f);
-                StoryEventController.Instance.StartNextEvent();
-                BlackScreenController.Instance.FadeInScreen(1f);
-            }
-            else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatStart)
-            {
-                TopBarController.Instance.ShowCombatTopBar();
-                BlackScreenController.Instance.FadeInScreen(1f);
-                SetGameState(GameState.CombatActive);                
-                LevelController.Instance.GenerateLevelNodes(RunController.Instance.CurrentCombatMapData);
+                    // Enable GUI
+                    TopBarController.Instance.ShowMainTopBar();
+                    TownController.Instance.ShowTownView();
+                    CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
-                // Set up combat level views + lighting
-                LightController.Instance.EnableDayTimeGlobalLight();
-                LevelController.Instance.EnableDayTimeArenaScenery();
-                LevelController.Instance.ShowAllNodeViews();
-                LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
+                    // Start music, fade in
+                    AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 1f);
+                    DelayUtils.DelayedCall(1f, () =>
+                    {
+                        AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f);
+                        GameIntroController.Instance.StartEvent();
+                    });
+                }
+                else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.StoryEvent)
+                {
+                    // Set state
+                    SetGameState(GameState.StoryEvent);
 
-                // Animate Crowd
-                LevelController.Instance.StopAllCrowdMembers(true);
+                    // Enable GUI
+                    TopBarController.Instance.ShowMainTopBar();
+                    TownController.Instance.ShowTownView();
+                    CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
-                // Combat Music
-                AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
-                AudioManager.Instance.FadeInSound(Sound.Ambience_Crowd_1, 1f);
+                    // Start music, fade in
+                    AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 1f);
+                    DelayUtils.DelayedCall(1f, () =>
+                    {
+                        AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f);
+                        StoryEventController.Instance.StartNextEvent();
+                    });
 
-                // Setup player characters
-                HexCharacterController.Instance.CreateAllPlayerCombatCharacters(RunController.Instance.CurrentDeployedCharacters);
+                }
+                else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatStart)
+                {
+                    TopBarController.Instance.ShowCombatTopBar();
+                    SetGameState(GameState.CombatActive);
+                    LevelController.Instance.GenerateLevelNodes(RunController.Instance.CurrentCombatMapData);
 
-                // Setup enemy characters
-                HexCharacterController.Instance.SpawnEnemyEncounter(RunController.Instance.CurrentCombatContractData.enemyEncounterData);
+                    // Set up combat level views + lighting
+                    LightController.Instance.EnableDayTimeGlobalLight();
+                    LevelController.Instance.EnableDayTimeArenaScenery();
+                    LevelController.Instance.ShowAllNodeViews();
+                    LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
 
-                // Place characters off screen
-                HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();               
+                    // Animate Crowd
+                    LevelController.Instance.StopAllCrowdMembers(true);
 
-                // Move characters towards start nodes
-                TaskTracker cData = new TaskTracker();
-                VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
+                    // Combat Music
+                    AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
+                    AudioManager.Instance.FadeInSound(Sound.Ambience_Crowd_1, 1f);
 
-                // Start a new combat event
-                TurnController.Instance.OnNewCombatEventStarted();
-            }
-            else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatEnd)
-            {
-                SetGameState(GameState.CombatRewardPhase);
-                TopBarController.Instance.ShowCombatTopBar();
-                BlackScreenController.Instance.FadeInScreen(1f);
+                    // Setup player characters
+                    HexCharacterController.Instance.CreateAllPlayerCombatCharacters(RunController.Instance.CurrentDeployedCharacters);
 
-                // Set up combat level views + lighting
-                LightController.Instance.EnableDayTimeGlobalLight();
-                LevelController.Instance.EnableDayTimeArenaScenery();
-                LevelController.Instance.ShowAllNodeViews();
-                LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
+                    // Setup enemy characters
+                    HexCharacterController.Instance.SpawnEnemyEncounter(RunController.Instance.CurrentCombatContractData.enemyEncounterData);
 
-                // Show combat screen
-                CombatRewardController.Instance.BuildAndShowPostCombatScreen(CombatRewardController.Instance.CurrentStatResults, RunController.Instance.CurrentCombatContractData, true);
-            }
-        }
+                    // Place characters off screen
+                    HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();
+
+                    // Move characters towards start nodes
+                    TaskTracker cData = new TaskTracker();
+                    VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
+
+                    // Start a new combat event
+                    TurnController.Instance.OnNewCombatEventStarted();
+                }
+                else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatEnd)
+                {
+                    SetGameState(GameState.CombatRewardPhase);
+                    TopBarController.Instance.ShowCombatTopBar();
+
+                    // Set up combat level views + lighting
+                    LightController.Instance.EnableDayTimeGlobalLight();
+                    LevelController.Instance.EnableDayTimeArenaScenery();
+                    LevelController.Instance.ShowAllNodeViews();
+                    LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
+
+                    // Show combat screen
+                    CombatRewardController.Instance.BuildAndShowPostCombatScreen(CombatRewardController.Instance.CurrentStatResults, RunController.Instance.CurrentCombatContractData, true);
+                }
+            });
+        }       
         public void OnGameOverScreenMainMenuButtonClicked()
         {
             HandleQuitToMainMenuFromInGame();
@@ -791,65 +774,62 @@ namespace HexGameEngine
         #region
         public void HandleLoadIntoCombatFromDeploymentScreen()
         {
-            StartCoroutine(HandleLoadIntoCombatFromDeploymentScreenCoroutine());
-        }
-        private IEnumerator HandleLoadIntoCombatFromDeploymentScreenCoroutine()
-        {
             AudioManager.Instance.FadeOutAllAmbience(1f);
             AudioManager.Instance.FadeOutSound(Sound.Music_Town_Theme_1, 1f);
-            BlackScreenController.Instance.FadeOutScreen(1f);          
-            yield return new WaitForSeconds(1.5f);
+            LoadingScreenController.Instance.ShowLoadingScreen(1.5f, 1f, null, () =>
+            {
 
-            // Animate Crowd
-            LevelController.Instance.StopAllCrowdMembers(true);
+                // Animate Crowd
+                LevelController.Instance.StopAllCrowdMembers(true);
 
-            // Combat Music
-            AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
-            AudioManager.Instance.FadeInSound(Sound.Ambience_Crowd_1, 1f);
+                // Combat Music
+                AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
+                AudioManager.Instance.FadeInSound(Sound.Ambience_Crowd_1, 1f);
 
-            // Hide down town views
-            BlackScreenController.Instance.FadeInScreen(1f);
-            TownController.Instance.HideTownView();
-            TownController.Instance.HideDeploymentPage();
-            CharacterScrollPanelController.Instance.HideMainView();
-            TopBarController.Instance.ShowCombatTopBar();
-            BoonController.Instance.HideBoonIconsPanel();
-            SetGameState(GameState.CombatActive);          
+                // Hide down town views
+                BlackScreenController.Instance.FadeInScreen(1f);
+                TownController.Instance.HideTownView();
+                TownController.Instance.HideDeploymentPage();
+                CharacterScrollPanelController.Instance.HideMainView();
+                TopBarController.Instance.ShowCombatTopBar();
+                BoonController.Instance.HideBoonIconsPanel();
+                SetGameState(GameState.CombatActive);
 
-            // Generate combat map data
-            SerializedCombatMapData combatMapData =  LevelController.Instance.GenerateLevelNodes();
+                // Generate combat map data
+                SerializedCombatMapData combatMapData = LevelController.Instance.GenerateLevelNodes();
 
-            // Setup combat data for persistency
-            RunController.Instance.SetCurrentContractData(CombatContractCard.SelectectedCombatCard.MyContractData);
-            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
-            RunController.Instance.SetPlayerDeployedCharacters(TownController.Instance.GetDeployedCharacters());
-            RunController.Instance.SetCurrentCombatMapData(combatMapData);
+                // Setup combat data for persistency
+                RunController.Instance.SetCurrentContractData(CombatContractCard.SelectectedCombatCard.MyContractData);
+                RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
+                RunController.Instance.SetPlayerDeployedCharacters(TownController.Instance.GetDeployedCharacters());
+                RunController.Instance.SetCurrentCombatMapData(combatMapData);
 
-            // Save game data
-            PersistencyController.Instance.AutoUpdateSaveFile();
+                // Save game data
+                PersistencyController.Instance.AutoUpdateSaveFile();
 
-            // Setup level + lighting
-            LightController.Instance.EnableDayTimeGlobalLight();
-            LevelController.Instance.EnableDayTimeArenaScenery();
-            LevelController.Instance.ShowAllNodeViews();
-            LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
+                // Setup level + lighting
+                LightController.Instance.EnableDayTimeGlobalLight();
+                LevelController.Instance.EnableDayTimeArenaScenery();
+                LevelController.Instance.ShowAllNodeViews();
+                LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
 
-            // Setup player characters      
-            HexCharacterController.Instance.CreateAllPlayerCombatCharacters(RunController.Instance.CurrentDeployedCharacters);
+                // Setup player characters      
+                HexCharacterController.Instance.CreateAllPlayerCombatCharacters(RunController.Instance.CurrentDeployedCharacters);
 
-            // Setup enemy characters
-            HexCharacterController.Instance.SpawnEnemyEncounter(RunController.Instance.CurrentCombatContractData.enemyEncounterData);
+                // Setup enemy characters
+                HexCharacterController.Instance.SpawnEnemyEncounter(RunController.Instance.CurrentCombatContractData.enemyEncounterData);
 
-            // Place characters off screen
-            HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();
+                // Place characters off screen
+                HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();
 
-            // Move characters towards start nodes
-            TaskTracker cData = new TaskTracker();
-            VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
+                // Move characters towards start nodes
+                TaskTracker cData = new TaskTracker();
+                VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
 
-            // Start a new combat event
-            TurnController.Instance.OnNewCombatEventStarted();
-        }
+                // Start a new combat event
+                TurnController.Instance.OnNewCombatEventStarted();
+            });
+        }       
         #endregion              
 
         // Misc Logic

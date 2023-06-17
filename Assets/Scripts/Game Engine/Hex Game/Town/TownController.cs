@@ -21,6 +21,7 @@ using DG.Tweening;
 using HexGameEngine.Audio;
 using UnityEngine.TextCore.Text;
 using HexGameEngine.Boons;
+using HexGameEngine.LoadingScreen;
 
 namespace HexGameEngine.TownFeatures
 {

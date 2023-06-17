@@ -18,6 +18,7 @@ using HexGameEngine.Items;
 using HexGameEngine.Perks;
 using Sirenix.Utilities;
 using System.Linq;
+using HexGameEngine.LoadingScreen;
 
 namespace HexGameEngine.MainMenu
 {
@@ -191,6 +192,7 @@ namespace HexGameEngine.MainMenu
         }
         public void OnBackToMainMenuButtonClicked()
         {
+            
             BlackScreenController.Instance.FadeOutAndBackIn(0.5f, 0.25f, 0.5f, () =>
             {
                 HideChooseCharacterScreen();
