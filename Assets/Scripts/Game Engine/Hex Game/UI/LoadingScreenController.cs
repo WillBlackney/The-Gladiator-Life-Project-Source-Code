@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace HexGameEngine.LoadingScreen
 {
@@ -15,6 +16,7 @@ namespace HexGameEngine.LoadingScreen
         [SerializeField] GameObject visualParent;
         [SerializeField] CanvasGroup mainCg;
         [SerializeField] TextMeshProUGUI tipsText;
+        [SerializeField] TextMeshProUGUI loadText;
         [SerializeField] Image mainImage;
 
         [Header("Images + Tips Data")]
@@ -22,7 +24,22 @@ namespace HexGameEngine.LoadingScreen
         private List<Sprite> sessionSpriteQueue = new List<Sprite>();
 
         [SerializeField] List<string> allTips;
-        private List<string> sessionTipsQueue = new List<string>();      
+        private List<string> sessionTipsQueue = new List<string>();
+
+        protected override void Awake()
+        {
+            base.Awake();
+            DOVirtual.DelayedCall(4f, () =>
+            {
+                if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
+                {
+                    // Starting from the preloader scene
+                    Debug.LogWarning("LoadingScreenController.Preloader!");
+                    StartCoroutine(StartPreloaderSequence());
+                }
+            });
+            
+        }
 
         public void ShowLoadingScreen(float showInSpeed = 1.5f, float hideOutSpeed = 1f, Action onPauseReached = null, Action onPauseFinished = null, Func<bool> awaitCondition = null)
         {
@@ -34,7 +51,7 @@ namespace HexGameEngine.LoadingScreen
 
             // Reset + setup
             mainCg.DOKill();
-            mainCg.interactable = false;
+            mainCg.blocksRaycasts = true;
             mainCg.alpha = 0;
             visualParent.SetActive(true);
 
@@ -55,7 +72,7 @@ namespace HexGameEngine.LoadingScreen
             // Start hide views
             mainCg.DOFade(0f, hideOutSpeed).OnComplete(() =>
             {
-                mainCg.interactable = true;
+                mainCg.blocksRaycasts = false;
                 visualParent.SetActive(false);
             });
         }
@@ -93,6 +110,46 @@ namespace HexGameEngine.LoadingScreen
             sessionTipsQueue.RemoveAt(0);
             return ret;
         }
+        #endregion
+
+        #region Preloader logic
+        IEnumerator StartPreloaderSequence()
+        {
+            // Reset + setup
+            mainCg.blocksRaycasts = true;
+            mainCg.alpha = 0f;
+
+            // Build content
+            loadText.gameObject.SetActive(true);
+            mainImage.sprite = GetNextBackgroundImage();
+            tipsText.text = GetNextTip();
+            visualParent.SetActive(true);
+            yield return null;
+
+            // Fade in
+            mainCg.DOFade(1f, 1f);
+            yield return new WaitForSeconds(1f);
+
+            // Load main game scene
+            AsyncOperation operation = SceneManager.LoadSceneAsync(1);
+            while (!operation.isDone)
+            {
+                float progress = Mathf.Clamp01(operation.progress / .9f);
+                Debug.Log("Load progress = " + progress);
+                loadText.text = "Loading " + ((int)(progress * 100f)).ToString() + "%";
+                yield return null;
+            }
+
+            loadText.gameObject.SetActive(false);
+
+            // Start hide views
+            mainCg.DOFade(0f, 1f).OnComplete(() =>
+            {
+                mainCg.blocksRaycasts = false;
+                visualParent.SetActive(false);
+            });
+        }
+
         #endregion
     }
 
