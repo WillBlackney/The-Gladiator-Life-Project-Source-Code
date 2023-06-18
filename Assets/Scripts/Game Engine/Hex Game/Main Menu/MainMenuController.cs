@@ -313,6 +313,10 @@ namespace HexGameEngine.MainMenu
             // Update perks
             PerkController.Instance.BuildPassiveManagerFromOtherPassiveManager(preset.passiveManager, characterBuild.passiveManager);
 
+            int maxHealth = StatCalculator.GetTotalMaxHealth(characterBuild);
+            CharacterDataController.Instance.OnConstitutionOrMaxHealthChanged(characterBuild, maxHealth);
+            CharacterDataController.Instance.SetCharacterHealth(characterBuild, maxHealth);
+
             // Update weapons + clothing items
             HandleSetItemsFromPreset(preset);
 
@@ -1640,14 +1644,13 @@ namespace HexGameEngine.MainMenu
         private IEnumerator DoGameStartMainMenuRevealSequenceCoroutine()
         {
             mainMenuButtonsParent.SetActive(false);
-            ShowFrontScreen();
-            
+            ShowFrontScreen();            
 
             frontScreenGuiCg.alpha = 0;
             frontScreenBgParent.transform.DOScale(1.25f, 0f);
+            AudioManager.Instance.PlayMainMenuMusic();
             yield return new WaitForSeconds(1);
 
-            AudioManager.Instance.PlayMainMenuMusic();
             BlackScreenController.Instance.FadeInScreen(2f);
             yield return new WaitForSeconds(2);
 

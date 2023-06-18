@@ -258,7 +258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2983523401148706876
 RectTransform:
   m_ObjectHideFlags: 0
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 714a9e5cb3cee9f40b5816c457366d87, type: 2}
-  m_Color: {r: 0.85882354, g: 0.85882354, b: 0.85882354, a: 1}
+  m_Color: {r: 0.85882354, g: 0.85882354, b: 0.85882354, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -329,12 +329,12 @@ GameObject:
   - component: {fileID: 2144486475507444147}
   - component: {fileID: 1970292057595775544}
   m_Layer: 0
-  m_Name: Dark Overlay
+  m_Name: Unuseable Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6216486983880593131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.49019608}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -455,9 +455,8 @@ MonoBehaviour:
   - {fileID: 8271236360305255444}
   - {fileID: 6520776951671170613}
   abilityImageParent: {fileID: 8271236360440068217}
-  unusableOverlays:
-  - {fileID: 4852623931803377537}
-  - {fileID: 6142411083037471969}
+  greyScaleImage: {fileID: 6520776951671170613}
+  unuseableOverlay: {fileID: 1970292057595775544}
   cooldownOverlay: {fileID: 3874652609062614516}
   cooldownText: {fileID: 8271236361299491339}
   selectedGlow: {fileID: 5379716681908495839}

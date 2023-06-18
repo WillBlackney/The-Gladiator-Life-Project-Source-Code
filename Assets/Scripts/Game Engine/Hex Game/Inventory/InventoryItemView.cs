@@ -251,10 +251,10 @@ namespace HexGameEngine.Items
 
             // Get the needed components, if we dont have them already
             if (dragCanvas == null)
-                dragCanvas = InventoryController.Instance.RootCanvas.GetComponent<Canvas>();
+                dragCanvas = InventoryController.Instance.VisualParent.GetComponent<Canvas>();
 
             if (dragTransform == null)
-                dragTransform = InventoryController.Instance.RootCanvas.transform as RectTransform;
+                dragTransform = InventoryController.Instance.VisualParent.transform as RectTransform;
 
             // Weird hoki poki magic for dragging in local space on a non screen overlay canvas
             Vector2 pos;

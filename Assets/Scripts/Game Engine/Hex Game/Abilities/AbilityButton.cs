@@ -17,7 +17,8 @@ namespace HexGameEngine.Abilities
         private AbilityData myAbilityData;
         [SerializeField] Image[] abilityImages;
         [SerializeField] GameObject abilityImageParent;
-        [SerializeField] GameObject[] unusableOverlays;
+        [SerializeField] Image greyScaleImage;
+        [SerializeField] Image unuseableOverlay;
         [SerializeField] GameObject cooldownOverlay;
         [SerializeField] TextMeshProUGUI cooldownText;
         [SerializeField] CanvasGroup selectedGlow;
@@ -33,10 +34,6 @@ namespace HexGameEngine.Abilities
         public GameObject CooldownOverlay
         {
             get { return cooldownOverlay; }
-        }
-        public GameObject[] UnusableOverlays
-        {
-            get { return unusableOverlays; }
         }
         public TextMeshProUGUI CooldownText
         {
@@ -114,8 +111,11 @@ namespace HexGameEngine.Abilities
         public void ResetButton()
         {
             myAbilityData = null;
-            for(int i = 0; i < unusableOverlays.Length; i++)
-                unusableOverlays[i].SetActive(false);
+            greyScaleImage.DOKill();
+            greyScaleImage.DOFade(0, 0.2f);
+            unuseableOverlay.DOKill();
+            unuseableOverlay.DOFade(0, 0.2f);
+
             abilityImageParent.SetActive(false);
             cooldownText.gameObject.SetActive(false);
         }
@@ -142,22 +142,30 @@ namespace HexGameEngine.Abilities
                 (StatCalculator.GetTotalMaxFatigue(myAbilityData.myCharacter) - myAbilityData.myCharacter.currentFatigue >= AbilityController.Instance.GetAbilityFatigueCost(myAbilityData.myCharacter, myAbilityData)) &&
                 AbilityController.Instance.IsAbilityUseable(myAbilityData.myCharacter, myAbilityData))
             {
-                for (int i = 0; i < unusableOverlays.Length; i++)
-                    unusableOverlays[i].SetActive(false);
+                greyScaleImage.DOKill();
+                greyScaleImage.DOFade(0, 0.2f);
+                unuseableOverlay.DOKill();
+                unuseableOverlay.DOFade(0, 0.2f);
+
                 CooldownText.gameObject.SetActive(false);
                 cooldownOverlay.gameObject.SetActive(false);
             }
             else if (myAbilityData.currentCooldown > 0)
             {
-                for (int i = 0; i < unusableOverlays.Length; i++)
-                    unusableOverlays[i].SetActive(true);
+                greyScaleImage.DOKill();
+                greyScaleImage.DOFade(1, 0.2f);
+                unuseableOverlay.DOKill();
+                unuseableOverlay.DOFade(0.5f, 0.2f);
+
                 CooldownText.gameObject.SetActive(true);
                 cooldownOverlay.gameObject.SetActive(true);
             }
             else
             {
-                for (int i = 0; i < unusableOverlays.Length; i++)
-                    unusableOverlays[i].SetActive(true);
+                greyScaleImage.DOKill();
+                greyScaleImage.DOFade(1, 0.2f);
+                unuseableOverlay.DOKill();
+                unuseableOverlay.DOFade(0.5f, 0.2f);
                 CooldownText.gameObject.SetActive(false);
                 cooldownOverlay.gameObject.SetActive(false);
             }

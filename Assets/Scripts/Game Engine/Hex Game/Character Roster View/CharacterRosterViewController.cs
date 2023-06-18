@@ -16,7 +16,7 @@ namespace HexGameEngine.UI
     {
         // Properties + Components
         #region
-        [Header("Core Components")]      
+        [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
         [SerializeField] private Scrollbar[] scrollBarResets;
         [Space(20)]
@@ -139,6 +139,7 @@ namespace HexGameEngine.UI
         [SerializeField] TextMeshProUGUI dismissPageHeaderText;
 
         private HexCharacterData characterCurrentlyViewing;
+        private bool currentlyEditingName;
         #endregion
 
         // Getters + Accessors
@@ -181,7 +182,8 @@ namespace HexGameEngine.UI
         #region
         public void OnCharacterRosterTopbarButtonClicked()
         {
-            if (GameController.Instance.GameState == GameState.StoryEvent) return;
+            if (GameController.Instance.GameState == GameState.StoryEvent ||
+                currentlyEditingName) return;
 
             if (mainVisualParent.activeSelf)
                 HideCharacterRosterScreen();
@@ -274,6 +276,7 @@ namespace HexGameEngine.UI
         }
         public void OnNameInputFieldValueChanged()
         {
+            currentlyEditingName = false;
             characterCurrentlyViewing.myName = characterNameInputField.text;
             CharacterScrollPanelController.Instance.RebuildViews();
         }
@@ -281,6 +284,11 @@ namespace HexGameEngine.UI
         {
             characterCurrentlyViewing.mySubName = characterSubNameInputField.text;
             CharacterScrollPanelController.Instance.RebuildViews();
+            currentlyEditingName = false;
+        }
+        public void OnAnyNameInputFieldEditStart()
+        {
+            currentlyEditingName = true;
         }
 
         #endregion

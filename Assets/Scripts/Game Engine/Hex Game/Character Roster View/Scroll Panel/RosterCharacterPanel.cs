@@ -127,7 +127,7 @@ namespace HexGameEngine.UI
             if ((TownController.Instance.HospitalViewIsActive ||
                  TownController.Instance.LibraryViewIsActive ||
                  TownController.Instance.DeploymentViewIsActive) &&
-                 !InventoryController.Instance.RootCanvas.isActiveAndEnabled)
+                 !InventoryController.Instance.VisualParent.activeSelf)
             {
                 PortraitDragController.Instance.OnRosterCharacterPanelDragStart(this);
             }
@@ -135,7 +135,7 @@ namespace HexGameEngine.UI
         }
         public void OnLevelButtonClicked()
         {
-            if(!InventoryController.Instance.RootCanvas.isActiveAndEnabled)
+            if(!InventoryController.Instance.VisualParent.activeSelf)
                 CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
         }
         private void SetIndicatorParentViewStates(bool onOrOff)
@@ -147,7 +147,7 @@ namespace HexGameEngine.UI
         public void OnPointerClick(PointerEventData eventData)
         {
             if(eventData.button == PointerEventData.InputButton.Right &&
-                !InventoryController.Instance.RootCanvas.isActiveAndEnabled)
+                !InventoryController.Instance.VisualParent.activeSelf)
             {
                 CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
             }

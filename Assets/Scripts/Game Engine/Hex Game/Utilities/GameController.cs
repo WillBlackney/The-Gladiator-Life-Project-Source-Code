@@ -568,11 +568,8 @@ namespace HexGameEngine
             {
                 // Start music, fade in
                 AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 1f);
-                DelayUtils.DelayedCall(1f, () =>
-                {
-                    AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f);
-                    GameIntroController.Instance.StartEvent();
-                });
+                AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f);
+                GameIntroController.Instance.StartEvent();
 
             });
         }
@@ -688,11 +685,8 @@ namespace HexGameEngine
 
                     // Start music, fade in
                     AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 1f);
-                    DelayUtils.DelayedCall(1f, () =>
-                    {
-                        AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f);
-                        GameIntroController.Instance.StartEvent();
-                    });
+                    AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f);
+                    GameIntroController.Instance.StartEvent();
                 }
                 else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.StoryEvent)
                 {

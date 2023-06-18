@@ -30,7 +30,7 @@ namespace HexGameEngine.StoryEvents
         [Space(10)]
 
         [Header("Core UI Components")]
-        [SerializeField] Canvas rootCanvas;
+        [SerializeField] GameObject visualParent;
         [SerializeField] CanvasGroup rootCg;
         [SerializeField] Image blackUnderlay;
         [SerializeField] TextMeshProUGUI eventHeaderText;
@@ -135,18 +135,23 @@ namespace HexGameEngine.StoryEvents
         {
             // Make UI clickable
             rootCg.interactable = true;
-            rootCanvas.enabled = true;
+            visualParent.SetActive(true);
+            blackUnderlay.DOFade(0, 0);
 
             // Reset tweens
             movementParent.DOKill();
             blackUnderlay.DOKill();
+            movementParent.DOMove(offScreenPosition.position, 0f);
 
             // Move on screen
-            blackUnderlay.DOFade(0.5f, 0f);
-            movementParent.DOMove(onScreenPosition.position, 0f);
-            TransformUtils.RebuildLayouts(layoutsRebuilt);
+            blackUnderlay.DOFade(0.5f, 0.75f).OnComplete(() =>
+            {
+                movementParent.DOMove(onScreenPosition.position, 1f).SetEase(Ease.OutBack);
+                TransformUtils.RebuildLayouts(layoutsRebuilt);
+            });
+            
         }
-        private void HideUI(float speed = 0.75f, Action onComplete = null)
+        private void HideUI(float speed = 1f, Action onComplete = null)
         {
             // Disable interactions
             rootCg.interactable = false;
@@ -159,7 +164,7 @@ namespace HexGameEngine.StoryEvents
             blackUnderlay.DOFade(0f, speed * 0.66f);
             movementParent.DOMove(offScreenPosition.position, speed).SetEase(Ease.InBack).OnComplete(() =>
             {
-                rootCanvas.enabled = false;
+                visualParent.SetActive(false);
                 if (onComplete != null) onComplete.Invoke();
             });
         }

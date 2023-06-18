@@ -1481,6 +1481,16 @@ namespace HexGameEngine.Abilities
                 UseAbility(caster, currentAbilityAwaiting);
                 HandleCancelCurrentAbilityOrder();
             }
+
+            // Handle keyboard pressed to trigger ability click, and hit chance
+            // modal is open while moused over the previous target
+            if (AwaitingAbilityOrder() && currentAbilityAwaiting.targetRequirement == TargetRequirement.Enemy &&
+                LevelController.HexMousedOver != null && LevelController.HexMousedOver.myCharacter != null)
+            {
+                ShowHitChancePopup(TurnController.Instance.EntityActivated, LevelController.HexMousedOver.myCharacter,
+                    CurrentAbilityAwaiting, TurnController.Instance.EntityActivated.itemSet.mainHandItem);
+            }
+            else HideHitChancePopup();
         }
         public void HandleTargetSelectionMade(HexCharacterModel target)
         {
@@ -1587,6 +1597,7 @@ namespace HexGameEngine.Abilities
                 HandleCancelCurrentAbilityOrder();
 
             if (hitChanceRootCanvas.isActiveAndEnabled == true &&
+                LevelController.HexMousedOver != null &&
                hitChancePositionParent.transform.position != LevelController.HexMousedOver.WorldPosition)
                 hitChancePositionParent.transform.position = LevelController.HexMousedOver.WorldPosition;
         }

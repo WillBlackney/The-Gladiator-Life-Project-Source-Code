@@ -56,6 +56,15 @@ namespace HexGameEngine.AI
         [LabelWidth(100)]
         public int armourReq;
 
+        [ShowIf("ShowOpponentsUnactivated")]
+        [LabelWidth(100)]
+        [Range(0, 10)]
+        public int opponentsUnactivated;
+
+        public bool ShowOpponentsUnactivated()
+        {
+            return requirementType == AIActionRequirementType.XorMoreOpponentsUnactivated;
+        }
         public bool ShowArmourReq()
         {
             return requirementType == AIActionRequirementType.TargetHasMoreArmorThanX ||
@@ -176,5 +185,6 @@ namespace HexGameEngine.AI
         TargetHasAllyDirectyBehindThem = 33,
         MeleeHasStarted = 36,
         MeleeHasNotStarted = 37,
+        XorMoreOpponentsUnactivated = 41,
     }
 }

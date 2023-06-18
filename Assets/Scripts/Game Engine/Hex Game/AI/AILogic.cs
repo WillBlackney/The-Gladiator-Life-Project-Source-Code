@@ -7,12 +7,14 @@ using HexGameEngine.Perks;
 using HexGameEngine.TurnLogic;
 using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
+using Spriter2UnityDX.Importing;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace HexGameEngine.AI
 {
@@ -543,6 +545,23 @@ namespace HexGameEngine.AI
                         break;
                     }
                 }
+            }
+
+            // X or More Opponents Unactivated
+            else if (req.requirementType == AIActionRequirementType.XorMoreOpponentsUnactivated)
+            {
+                int enemiesUnactivated = 0;
+
+                foreach (HexCharacterModel enemy in HexCharacterController.Instance.GetAllEnemiesOfCharacter(character))
+                {
+                    if (enemy.hasMadeTurn == false || (enemy.hasMadeTurn == true && enemy.hasRequestedTurnDelay == true && enemy.hasMadeDelayedTurn == false))
+                    {
+                        enemiesUnactivated += 1;
+                    }
+                }
+
+                Debug.Log("ENEMIES UNACTIVATED = " + enemiesUnactivated.ToString());
+                if (enemiesUnactivated >= req.opponentsUnactivated) bRet = true;
             }
 
             // Target has ally directly behind them

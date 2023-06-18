@@ -649,7 +649,7 @@ namespace HexGameEngine.TownFeatures
             }
 
             // Rebuild inventory view, if open
-            if (InventoryController.Instance.RootCanvas.isActiveAndEnabled)
+            if (InventoryController.Instance.VisualParent.activeSelf)
                 InventoryController.Instance.BuildAndShowInventoryView();
 
             // Clear slots
@@ -701,7 +701,7 @@ namespace HexGameEngine.TownFeatures
             }
 
             // Show player item sell prices
-            if (InventoryController.Instance.RootCanvas.isActiveAndEnabled)
+            if (InventoryController.Instance.VisualParent.activeSelf)
                 InventoryController.Instance.RebuildInventoryView();
 
         }
@@ -789,7 +789,7 @@ namespace HexGameEngine.TownFeatures
         public void OnArmouryPageLeaveButtonClicked()
         {
             armouryPageVisualParent.SetActive(false);
-            if(InventoryController.Instance.RootCanvas.isActiveAndEnabled)
+            if(InventoryController.Instance.VisualParent.activeSelf)
                 InventoryController.Instance.RebuildInventoryView();
         }
         public void OnArmouryPageButtonClicked()

@@ -374,7 +374,7 @@ namespace HexGameEngine.Audio
             DelayUtils.DelayedCall(55, () =>
             {
                 if (currentMusicSession == thisSession)
-                    FadeInSound(Sound.Music_Main_Menu_Theme_Looped_1, 1f);
+                    PlaySound(Sound.Music_Main_Menu_Theme_Looped_1);
             });
         }
         public void StopMainMenuMusic(float fadeSpeed = 1f)

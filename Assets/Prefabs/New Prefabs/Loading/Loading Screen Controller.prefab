@@ -873,7 +873,6 @@ MonoBehaviour:
   mainImage: {fileID: 5335863795943007312}
   allBackgroundSprites:
   - {fileID: 21300000, guid: e0083b5e72f879943b27e305f5238dc7, type: 3}
-  - {fileID: 21300000, guid: e1b3fa7adf090274aaacbb8babd412dd, type: 3}
   - {fileID: 21300000, guid: 56b52cec1c7c1084984a842f2c8a6454, type: 3}
   - {fileID: 21300000, guid: 3099028d3c9ecfb4c8611f151b5cf10e, type: 3}
   - {fileID: 21300000, guid: 854dce5ec5e182c49ba0dd7a813f3a53, type: 3}
@@ -1672,7 +1671,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Loading 12%
+  m_text: Loading 0%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 162f7f16c4bec41ff98f811bd90e7b6e, type: 2}
   m_sharedMaterial: {fileID: 6447333859754382329, guid: 162f7f16c4bec41ff98f811bd90e7b6e,

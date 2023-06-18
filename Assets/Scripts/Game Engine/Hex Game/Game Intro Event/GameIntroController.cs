@@ -89,7 +89,7 @@ namespace HexGameEngine.GameIntroEvent
 
             // Fade in and move page down
             pageMovementParent.DOMove(pageOffscreenPos.position, 0f);
-            blackUnderlay.DOFade(0.5f, 0.5f).OnComplete(() =>
+            blackUnderlay.DOFade(0.5f, 1f).OnComplete(() =>
             {
                 AudioManager.Instance.PlaySound(Sound.Effects_Story_Event_Start);
                 pageMovementParent.DOMove(pageOnscreenPos.position, 1f).SetEase(Ease.OutBack);
