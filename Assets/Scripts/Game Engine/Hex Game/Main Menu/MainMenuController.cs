@@ -19,6 +19,7 @@ using HexGameEngine.Perks;
 using Sirenix.Utilities;
 using System.Linq;
 using HexGameEngine.LoadingScreen;
+using HexGameEngine.GameOrigin;
 
 namespace HexGameEngine.MainMenu
 {
@@ -203,11 +204,13 @@ namespace HexGameEngine.MainMenu
         {
             // disable button highlight
             EventSystem.current.SetSelectedGameObject(null);
+            GameOriginController.Instance.ShowOriginScreen();
+            /*
             BlackScreenController.Instance.FadeOutAndBackIn(0.5f, 0.25f, 0.5f, () =>
             {
                 ShowChooseCharacterScreen();
                 HideFrontScreen();
-            });
+            });*/
         }
         public void OnMenuContinueButtonClicked()
         {
@@ -264,7 +267,7 @@ namespace HexGameEngine.MainMenu
 
         // Custom Character Screen Logic : General
         #region
-        private void ShowChooseCharacterScreen()
+        public void ShowChooseCharacterScreen()
         {
             chooseCharacterScreenVisualParent.SetActive(true);
         }
