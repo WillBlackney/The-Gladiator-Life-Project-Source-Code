@@ -7,14 +7,11 @@ using HexGameEngine.Perks;
 using HexGameEngine.TurnLogic;
 using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
-using Spriter2UnityDX.Importing;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace HexGameEngine.AI
 {
@@ -31,7 +28,6 @@ namespace HexGameEngine.AI
             
             while (successfulAction && loops < maximumActionAttempts)
             {
-                //await Task.Delay((int) ((Time.deltaTime * 0.5f) * 1000));
                 successfulAction = await TryTakeAction(character);
                 loops += 1;                
             }
