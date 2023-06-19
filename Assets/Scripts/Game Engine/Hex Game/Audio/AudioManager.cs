@@ -371,7 +371,7 @@ namespace HexGameEngine.Audio
             currentMusicSession = thisSession;
 
             PlaySound(Sound.Music_Main_Menu_Theme_Unlooped_1);
-            DelayUtils.DelayedCall(55, () =>
+            DelayUtils.DelayedCall(58, () =>
             {
                 if (currentMusicSession == thisSession)
                     PlaySound(Sound.Music_Main_Menu_Theme_Looped_1);
