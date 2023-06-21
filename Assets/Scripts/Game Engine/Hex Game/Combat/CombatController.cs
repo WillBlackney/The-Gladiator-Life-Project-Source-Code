@@ -1011,6 +1011,13 @@ namespace HexGameEngine.Combat
                 }
             }
 
+            // Check for racial immunity
+            if (perkApplied.racesThatBlockThis.Contains(target.race))
+            {
+                ret.details.Add(new HitChanceDetailData(("Racial Immunity"), -100, true));
+                return ret;
+            }
+
             // Check Clotter perk
             if (perkApplied.perkTag == Perk.Bleeding &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Clotter))

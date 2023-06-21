@@ -41,7 +41,7 @@ namespace HexGameEngine.Perks
         public List<Perk> perksRemovedOnThisApplication = new List<Perk>();
         public List<Perk> perksGainedOnThisExpiry = new List<Perk>();
         public List<Perk> perksThatBlockThis = new List<Perk>();
-
+        public List<CharacterRace> racesThatBlockThis = new List<CharacterRace>();
         public List<AnimationEventData> visualEventsOnApplication = new List<AnimationEventData>();
 
 

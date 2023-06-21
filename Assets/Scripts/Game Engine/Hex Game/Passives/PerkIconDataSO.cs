@@ -139,6 +139,10 @@ namespace HexGameEngine.Perks
         [LabelWidth(200)]
         [Tooltip("Perks that cannot be gained if a character has this perk (e.g. cannot be Blinded if affected by Eagle Eyes")]
         public List<Perk> perksThatBlockThis;
+        [VerticalGroup("Linked Interactions")]
+        [LabelWidth(200)]
+        [Tooltip("Perks that cannot be gained if a character is of one of these races (e.g. Undead can't have 'Fear of Undead')")]
+        public List<CharacterRace> racesThatBlockThis;
 
         [Header("Visual Events")]
         public List<AnimationEventData> visualEventsOnApplication;

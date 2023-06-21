@@ -1057,7 +1057,7 @@ namespace HexGameEngine.Characters
                 // Check character does not already have the perk
                 if (!PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, possiblePerk.perkTag))
                 {
-                    // Check character does not have a perk that is incompatible with the prospect perk
+                    // Check character does not have a perk/race that is incompatible with the prospect perk
                     bool pass = true;
                     foreach (Perk p in possiblePerk.perksThatBlockThis)
                     {
@@ -1067,6 +1067,9 @@ namespace HexGameEngine.Characters
                             break;
                         }
                     }
+
+                    // Check race
+                    if (possiblePerk.racesThatBlockThis.Contains(character.race)) pass = false;
 
                     if (pass)
                     {

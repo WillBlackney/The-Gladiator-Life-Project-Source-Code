@@ -20,6 +20,7 @@ using Sirenix.Utilities;
 using System.Linq;
 using HexGameEngine.LoadingScreen;
 using HexGameEngine.GameOrigin;
+using static UnityEditor.Progress;
 
 namespace HexGameEngine.MainMenu
 {
@@ -961,6 +962,7 @@ namespace HexGameEngine.MainMenu
             if (characterBuild.itemSet.mainHandItem == null)
             {
                 ItemData item = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[0].itemName);
+                if (item != null) item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
                 characterBuild.itemSet.mainHandItem = item;
                 CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
                 mainHandItemIcon.BuildFromData(item);
@@ -997,6 +999,7 @@ namespace HexGameEngine.MainMenu
                 else
                 {
                     ItemData item = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[currentIndex + 1].itemName);
+                    if (item != null) item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
                     characterBuild.itemSet.mainHandItem = item;
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
                     mainHandItemIcon.BuildFromData(item);
@@ -1020,12 +1023,13 @@ namespace HexGameEngine.MainMenu
         {
             if (characterBuild.itemSet.mainHandItem == null)
             {
-                ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[allStartingMainHandItems.Length - 1].itemName);
-                characterBuild.itemSet.mainHandItem = bodyItem;
+                ItemData item = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[allStartingMainHandItems.Length - 1].itemName);
+                if (item != null) item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
+                characterBuild.itemSet.mainHandItem = item;
                 CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                mainHandItemIcon.BuildFromData(bodyItem);
+                mainHandItemIcon.BuildFromData(item);
 
-                if (characterBuild.itemSet.offHandItem != null && bodyItem.handRequirement == HandRequirement.TwoHanded)
+                if (characterBuild.itemSet.offHandItem != null && item.handRequirement == HandRequirement.TwoHanded)
                 {
                     characterBuild.itemSet.offHandItem = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
@@ -1036,10 +1040,10 @@ namespace HexGameEngine.MainMenu
             else
             {
                 ItemDataSO currentMH = null;
-                foreach (ItemDataSO bodyData in allStartingMainHandItems)
+                foreach (ItemDataSO mhData in allStartingMainHandItems)
                 {
-                    if (bodyData.itemName == characterBuild.itemSet.mainHandItem.itemName)
-                        currentMH = bodyData;
+                    if (mhData.itemName == characterBuild.itemSet.mainHandItem.itemName)
+                        currentMH = mhData;
                 }
                 int currentIndex = Array.IndexOf(allStartingMainHandItems, currentMH);
 
@@ -1055,6 +1059,7 @@ namespace HexGameEngine.MainMenu
                 else
                 {
                     ItemData mhItem = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[currentIndex - 1].itemName);
+                    if (mhItem != null) mhItem = ItemController.Instance.GenerateNewItemWithRandomEffects(mhItem);
                     characterBuild.itemSet.mainHandItem = mhItem;
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
                     mainHandItemIcon.BuildFromData(mhItem);
@@ -1083,6 +1088,7 @@ namespace HexGameEngine.MainMenu
             if (characterBuild.itemSet.offHandItem == null)
             {
                 ItemData item = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[0].itemName);
+                if (item != null) item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
                 characterBuild.itemSet.offHandItem = item;
                 CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
                 offHandItemIcon.BuildFromData(item);
@@ -1119,6 +1125,7 @@ namespace HexGameEngine.MainMenu
                 else
                 {
                     ItemData item = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[currentIndex + 1].itemName);
+                    if (item != null) item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
                     characterBuild.itemSet.offHandItem = item;
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
                     offHandItemIcon.BuildFromData(item);
@@ -1147,10 +1154,11 @@ namespace HexGameEngine.MainMenu
             // Not currently using an off hand item
             if (characterBuild.itemSet.offHandItem == null)
             {
-                ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[allStartingOffHandItems.Length - 1].itemName);
-                characterBuild.itemSet.offHandItem = bodyItem;
+                ItemData ohItem = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[allStartingOffHandItems.Length - 1].itemName);
+                if (ohItem != null) ohItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ohItem);
+                characterBuild.itemSet.offHandItem = ohItem;
                 CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                offHandItemIcon.BuildFromData(bodyItem);
+                offHandItemIcon.BuildFromData(ohItem);
 
                 if (characterBuild.itemSet.mainHandItem != null && characterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
                 {
@@ -1181,10 +1189,11 @@ namespace HexGameEngine.MainMenu
                 // Set previous item
                 else
                 {
-                    ItemData bodyItem = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[currentIndex - 1].itemName);
-                    characterBuild.itemSet.offHandItem = bodyItem;
+                    ItemData ohItem = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[currentIndex - 1].itemName);
+                    if (ohItem != null) ohItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ohItem);
+                    characterBuild.itemSet.offHandItem = ohItem;
                     CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-                    offHandItemIcon.BuildFromData(bodyItem);
+                    offHandItemIcon.BuildFromData(ohItem);
 
                     if (characterBuild.itemSet.mainHandItem != null && characterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
                     {

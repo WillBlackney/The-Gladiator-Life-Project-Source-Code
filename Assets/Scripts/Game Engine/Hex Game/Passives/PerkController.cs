@@ -128,7 +128,10 @@ namespace HexGameEngine.Perks
             foreach (Perk pt in data.perksThatBlockThis)
                 p.perksThatBlockThis.Add(pt);
 
-            foreach(AnimationEventData a in data.visualEventsOnApplication)
+            foreach (CharacterRace race in data.racesThatBlockThis)
+                p.racesThatBlockThis.Add(race);
+
+            foreach (AnimationEventData a in data.visualEventsOnApplication)
             {
                 // p.visualEventsOnApplication.Add(ObjectCloner.CloneJSON<AnimationEventData>(a));
                 p.visualEventsOnApplication.Add(a);
@@ -354,6 +357,13 @@ namespace HexGameEngine.Perks
                 }
             }
 
+            if(pManager.myCharacterData != null &&
+                perkData.racesThatBlockThis.Contains(pManager.myCharacterData.race))
+            {
+                Debug.Log("ModifyPerkOnCharacterData() cancelling application of " + perkName + " as character is racially immune to it.");
+                return null;
+            }
+
             // Calculate stacks to apply + prevent applying stacks over the passives limit
             int stacksAppliedActual = stacks;
             int maxAllowedStacks = perkData.maxAllowedStacks;
@@ -399,6 +409,13 @@ namespace HexGameEngine.Perks
                     VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "IMMUNE!", perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
                     return false;
                 }
+            }
+
+            if (pManager.myCharacterEntity != null &&
+                perkData.racesThatBlockThis.Contains(pManager.myCharacterEntity.race))
+            {
+                Debug.Log("ModifyPerkOnCharacterEntity() cancelling application of " + perkName + " as character is racially immune to it.");
+                return false;
             }
 
             // Check specific resistances

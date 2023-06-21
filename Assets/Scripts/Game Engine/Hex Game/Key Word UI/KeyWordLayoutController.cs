@@ -183,6 +183,7 @@ namespace HexGameEngine.UI
         {
             rootCanvas.enabled = true;
             if (GameController.Instance.GameState == GameState.CombatActive ||
+                GameController.Instance.GameState == GameState.CombatRewardPhase ||
                 GameController.Instance.GameState == GameState.MainMenu)
                 panelFitterParent.position = combatPos.position;
             else panelFitterParent.position = normalPos.position;

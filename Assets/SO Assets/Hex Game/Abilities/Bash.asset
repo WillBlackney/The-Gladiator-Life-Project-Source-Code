@@ -15,12 +15,12 @@ MonoBehaviour:
   abilityName: Bash
   displayedName: Bash
   includeInGame: 1
-  baseAbilityDescription: Deal 75% weapon damage. 50% chance to apply Stunned. On
-    a Critical Hit, 100% chance to apply Stunned.
-  abilitySprite: {fileID: 21300000, guid: 2d92a8b6224c2f148ac17bb9627a8d08, type: 3}
+  baseAbilityDescription: Remove 10 Armour from an enemy, then deal 100% Physical
+    damage.
+  abilitySprite: {fileID: 21300000, guid: a7ecdb9bedba448469e639d27a14e2de, type: 3}
   energyCost: 4
-  fatigueCost: 25
-  baseCooldown: 1
+  fatigueCost: 13
+  baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
   guidanceInstruction: 1
@@ -28,7 +28,7 @@ MonoBehaviour:
   weaponRequirement: 1
   derivedFromWeapon: 1
   derivedFromItemLoadout: 0
-  weaponAbilityType: 2
+  weaponAbilityType: 1
   weaponClass: 4
   targetRequirement: 3
   secondaryTargetRequirement: 0
@@ -111,13 +111,13 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 21
-    maxBaseDamage: 24
+    minBaseDamage: 28
+    maxBaseDamage: 32
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0
     ignoresArmour: 0
-    bonusArmourDamage: 0
+    bonusArmourDamage: 10
     weaponUsed: 0
     injuryTypesCaused: 
     damageEffectModifiers: []
@@ -132,126 +132,8 @@ MonoBehaviour:
       passiveStacks: 0
     perkApplicationChance: 100
     knockBackDistance: 0
-  onHitEffects:
-  - effectType: 10
-    stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
-      successChance: 0
-    energyGained: 0
-    normalTeleportVFX: 1
-    tilesMoved: 0
-    lineLength: 0
-    healthGained: 0
-    healthLost: 0
-    requirements: []
-    chainedEffect: 0
-    triggersChainEffectSequence: 0
-    visualEventsOnStart: []
-    visualEventsOnHit: []
-    visualEventsOnEffectFinish:
-    - eventType: 6
-      screenOverlayType: 0
-      overlayColor: 0
-      overlayFadeInTime: 0
-      overlayDuration: 0
-      overlayFadeOutTime: 0
-      particleEffect: 0
-      cameraShake: 0
-      movementAnimation: 0
-      soundEffect: 0
-      characterAnimation: 0
-      delayDuration: 0.5
-      projectileFired: 0
-      projectileStartPosition: 0
-      onCharacter: 0
-    aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
-    damageType: 0
-    minBaseDamage: 0
-    maxBaseDamage: 0
-    guaranteedHit: 0
-    bonusCritDamage: 0
-    ignoresGuard: 0
-    ignoresArmour: 0
-    bonusArmourDamage: 0
-    weaponUsed: 0
-    injuryTypesCaused: 
-    damageEffectModifiers: []
-    characterSummoned: {fileID: 0}
-    characterSummonedName: ENTER NAME!!!
-    amountSummoned: 1
-    modelFadeInSpeed: 0
-    uiFadeInSpeed: 0
-    summonedCreatureVisualEvents: []
-    perkPairing:
-      perkTag: 3
-      passiveStacks: 1
-    perkApplicationChance: 50
-    knockBackDistance: 0
-  onCritEffects:
-  - effectType: 10
-    stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
-      successChance: 0
-    energyGained: 0
-    normalTeleportVFX: 1
-    tilesMoved: 0
-    lineLength: 0
-    healthGained: 0
-    healthLost: 0
-    requirements: []
-    chainedEffect: 0
-    triggersChainEffectSequence: 0
-    visualEventsOnStart: []
-    visualEventsOnHit: []
-    visualEventsOnEffectFinish:
-    - eventType: 6
-      screenOverlayType: 0
-      overlayColor: 0
-      overlayFadeInTime: 0
-      overlayDuration: 0
-      overlayFadeOutTime: 0
-      particleEffect: 0
-      cameraShake: 0
-      movementAnimation: 0
-      soundEffect: 0
-      characterAnimation: 0
-      delayDuration: 0.5
-      projectileFired: 0
-      projectileStartPosition: 0
-      onCharacter: 0
-    aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
-    damageType: 0
-    minBaseDamage: 0
-    maxBaseDamage: 0
-    guaranteedHit: 0
-    bonusCritDamage: 0
-    ignoresGuard: 0
-    ignoresArmour: 0
-    bonusArmourDamage: 0
-    weaponUsed: 0
-    injuryTypesCaused: 
-    damageEffectModifiers: []
-    characterSummoned: {fileID: 0}
-    characterSummonedName: ENTER NAME!!!
-    amountSummoned: 1
-    modelFadeInSpeed: 0
-    uiFadeInSpeed: 0
-    summonedCreatureVisualEvents: []
-    perkPairing:
-      perkTag: 3
-      passiveStacks: 1
-    perkApplicationChance: 100
-    knockBackDistance: 0
+  onHitEffects: []
+  onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
@@ -260,8 +142,20 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Deal '
+    phrase: 'Remove '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '10 '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Armour '
   - color: 0
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'from an enemy, then deal '
+  - color: 2
     getPhraseFromAbilityValue: 1
     abilityEffectType: 2
     phrase: 
@@ -272,49 +166,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'damage to an enemy. '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '50% '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'chance to apply '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Stunned
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '. On a '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Critical Strike
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: ', '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '100% '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'chance to apply '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Stunned
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: .
+    phrase: damage.
   keyWords:
-  - kewWordType: 1
-    passiveType: 3
-  - kewWordType: 20
+  - kewWordType: 30
     passiveType: 0

@@ -15,13 +15,15 @@ MonoBehaviour:
   abilityName: Stone Form
   displayedName: Stone Form
   includeInGame: 1
-  baseAbilityDescription: Gain 2 Guard and 2 Crippled.
+  baseAbilityDescription: Gain 2 Guard , but also  1 Crippled.
   abilitySprite: {fileID: 21300000, guid: b1ba2eb8b08e7e1498bfe5e7bfbb546e, type: 3}
   energyCost: 3
   fatigueCost: 10
   baseCooldown: 2
   abilityType: 05000000
   doesNotBreakStealth: 0
+  guidanceInstruction: 0
+  guidanceInstructionTwo: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
   derivedFromItemLoadout: 0
@@ -155,7 +157,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 5
-      passiveStacks: 2
+      passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
@@ -180,11 +182,11 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: ', but gain '
+    phrase: ', but also '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '2 '
+    phrase: '1 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

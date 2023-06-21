@@ -200,18 +200,20 @@ namespace HexGameEngine.Items
             rarityText.text = item.rarity.ToString();
             goldValueText.text = item.baseGoldValue.ToString();
 
-            // Damage mods row
-            BuildDamageModRows(item);
-
-            // Row 4
-            BuildGrantedAbilitiesSection(item);
-
-            // Row 5
-            BuildGrantedEffectsSection(item);
-
-            // Armour + Fatigue Sections
+            // Row 3
             BuildArmourSection(item);
             BuildMaxFatigueSection(item);
+
+            // Row 4
+            BuildDamageModRows(item);
+
+            // Row 5
+            BuildGrantedAbilitiesSection(item);
+
+            // Row 6
+            BuildGrantedEffectsSection(item);
+
+          
         }
         private string GetItemTypeString(ItemData item)
         {
@@ -277,30 +279,12 @@ namespace HexGameEngine.Items
         }
         private void BuildGrantedEffectsSection(ItemData item)
         {
+            // Reset
             effectsParent.SetActive(false);
-
             for (int i = 0; i < effectRows.Length; i++)
                 effectRows[i].gameObject.SetActive(false);
 
             int iBoost = 0;
-            /*
-            if(item.fatiguePenalty > 0)
-            {
-                iBoost += 1;
-                effectsParent.SetActive(true);
-                ModalDottedRow row = effectRows[iBoost - 1];
-                row.Build(TextLogic.ReturnColoredText("-" + item.fatiguePenalty.ToString(), TextLogic.blueNumber) + " Maximum Fatigue", DotStyle.Red);
-            }
-            */
-            /*
-            if (item.weaponClass == WeaponClass.Crossbow)
-            {
-                iBoost += 1;
-                effectsParent.SetActive(true);
-                ModalDottedRow row = effectRows[iBoost - 1];
-                row.Build("Can only be fired once per turn.", DotStyle.Red);
-            }
-            */
             if (item.itemEffects.Count > 0)
             {
                 effectsParent.SetActive(true);
@@ -337,10 +321,6 @@ namespace HexGameEngine.Items
 
                         row.Build(String.Format("On hit: Apply {0} {1} ({2}% chance).", zero, one, two), DotStyle.Green);
 
-                        /*
-                        row.Build("On hit: Apply " + TextLogic.ReturnColoredText(effect.perkApplied.passiveStacks.ToString(), TextLogic.blueNumber) + " " +
-                            TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkApplied.perkTag.ToString()), TextLogic.neutralYellow) + " (" +
-                            effect.effectChance.ToString() + "% chance).", DotStyle.Green);*/
                     }
                     else if (item.itemEffects[i].effectType == ItemEffectType.GainPerk)
                     {

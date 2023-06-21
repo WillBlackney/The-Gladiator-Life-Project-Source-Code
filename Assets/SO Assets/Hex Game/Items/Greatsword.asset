@@ -27,7 +27,7 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 0100000002000000
   weaponAttackAnimationType: 0
-  healthDamage: 1.25
+  healthDamage: 1.2
   armourDamage: 0.8
   armourPenetration: 0.25
   minArmourRoll: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
         perkTag: 0
         passiveStacks: 1
       innateItemEffectType: 1
-      innateAccuracyMod: 5
+      innateAccuracyMod: 10
       innateAccuracyAgainstAdjacentMod: 0
       innateWeaponRangeBonus: 0
       innateBackstabPenetrationBonus: 0

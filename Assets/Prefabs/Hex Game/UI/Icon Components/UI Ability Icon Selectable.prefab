@@ -462,6 +462,11 @@ PrefabInstance:
       propertyPath: onClickEvents.Array.data[1].functionInvoked.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2476728883442569468, guid: e83a5265c258a9e4ebc29d90ce059ed2,
+        type: 3}
+      propertyPath: placeModalAbove
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3257372290189548265, guid: e83a5265c258a9e4ebc29d90ce059ed2,
         type: 3}
       propertyPath: m_Name

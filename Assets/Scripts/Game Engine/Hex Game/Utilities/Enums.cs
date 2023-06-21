@@ -678,8 +678,7 @@ namespace HexGameEngine
         None = 0,
         Sharp = 1,
         Blunt = 2,
-        Magical = 3,
-        Mental = 4,
+        Misc = 3,
     }
     public enum HitRollResult
     {
