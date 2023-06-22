@@ -430,6 +430,7 @@ namespace HexGameEngine.Items
         }
         public void HandleSellItemToArmoury(InventoryItem item)
         {
+            AudioManager.Instance.PlaySoundPooled(Sound.Gold_Cha_Ching);
             InventoryController.Instance.RemoveItemFromInventory(item);
             PlayerDataController.Instance.ModifyPlayerGold(item.GetSellPrice());
             InventoryController.Instance.RebuildInventoryView();

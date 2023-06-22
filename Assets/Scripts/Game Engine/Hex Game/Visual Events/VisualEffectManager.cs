@@ -397,7 +397,7 @@ namespace HexGameEngine.VisualEvents
             GameObject hn = Instantiate(redPillarBuff, location, redPillarBuff.transform.rotation);
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Debuff);
+            //AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Debuff);
         }
 
         // General Buff
@@ -406,12 +406,13 @@ namespace HexGameEngine.VisualEvents
             GameObject hn = Instantiate(yellowPillarBuff, location, yellowPillarBuff.transform.rotation);
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Buff);
+            //AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Buff);
         }
         // AoE Melee Arc
         public void CreateTeleportEffect(Vector3 location, int sortingOrderBonus = 15)
         {
             Debug.Log("VisualEffectManager.CreateTeleportEffect() called...");
+            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Teleport);
             GameObject hn = Instantiate(TeleportEffectPrefab, location, TeleportEffectPrefab.transform.rotation);
             BuffEffect teScript = hn.GetComponent<BuffEffect>();
             teScript.InitializeSetup(location, sortingOrderBonus);
@@ -447,7 +448,7 @@ namespace HexGameEngine.VisualEvents
         }
         private void ShootFireball(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
-            AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Fireball_Fired);
+            //AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Fireball_Fired);
             ToonProjectile tsScript = Instantiate(fireBall, startPos, fireBall.transform.rotation).GetComponent<ToonProjectile>();
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
@@ -457,31 +458,31 @@ namespace HexGameEngine.VisualEvents
         }
         private void ShootShadowBall(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
-            AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Shadowball_Fired);
+            //AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Shadowball_Fired);
             ToonProjectile tsScript = Instantiate(shadowBall, startPos, shadowBall.transform.rotation).GetComponent<ToonProjectile>();
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
-                AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Shadow_1);
+                //AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Shadow_1);
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
         private void ShootPoisonBall(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
-            AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Poison_Fired);
+            //AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Poison_Fired);
             ToonProjectile tsScript = Instantiate(poisonBall, startPos, poisonBall.transform.rotation).GetComponent<ToonProjectile>();
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
-                AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Poison_1);
+               // AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Poison_1);
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
         private void ShootLightningBall(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
         {
-            AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Lightning_Fired);
+            //AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Lightning_Fired);
             ToonProjectile tsScript = Instantiate(lightningBall, startPos, lightningBall.transform.rotation).GetComponent<ToonProjectile>();
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
-                AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Lightning_1);
+                //AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Lightning_1);
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
@@ -503,7 +504,7 @@ namespace HexGameEngine.VisualEvents
         }
         private void ShootFireMeteor(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 3f)
         {
-            AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Fireball_Fired);
+           // AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Fireball_Fired);
             ToonProjectile tsScript = Instantiate(fireMeteor, startPos, fireMeteor.transform.rotation).GetComponent<ToonProjectile>();
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
@@ -546,7 +547,7 @@ namespace HexGameEngine.VisualEvents
         // Apply Overload Effect    
         public void CreateGainOverloadEffect(Vector3 location, int sortingOrderBonus = 15, float scaleModifier = 1f)
         {
-            AudioManager.Instance.PlaySoundPooled(Sound.Passive_Overload_Gained);
+            //AudioManager.Instance.PlaySoundPooled(Sound.Passive_Overload_Gained);
             GameObject hn = Instantiate(gainOverload, location, gainOverload.transform.rotation);
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
@@ -598,7 +599,7 @@ namespace HexGameEngine.VisualEvents
             GameObject hn = Instantiate(smallLightningExplosion, location, smallLightningExplosion.transform.rotation);
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Lightning_1);
+            //AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Lightning_1);
         }
 
         // Fire Explosion
@@ -616,7 +617,7 @@ namespace HexGameEngine.VisualEvents
             GameObject hn = Instantiate(smallPoisonExplosion, location, smallPoisonExplosion.transform.rotation);
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Poison_1);
+            //AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Poison_1);
         }
 
         // Frost Explosion
@@ -633,7 +634,7 @@ namespace HexGameEngine.VisualEvents
             GameObject hn = Instantiate(smallShadowExplosion, location, smallShadowExplosion.transform.rotation);
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Shadow_1);
+            //AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Shadow_1);
         }
         // Ghost Explosion Purple
         public void CreateGhostExplosionPurple(Vector3 location, int sortingOrderBonus = 15, float scaleModifier = 1f)
@@ -641,7 +642,7 @@ namespace HexGameEngine.VisualEvents
             GameObject hn = Instantiate(ghostExplosionPurple, location, ghostExplosionPurple.transform.rotation);
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Debuff);
+            //AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Debuff);
         }
         // Confetti Explosion Rainbow
         public void CreateConfettiExplosionRainbow(Vector3 location, int sortingOrderBonus = 15, float scaleModifier = 1f)

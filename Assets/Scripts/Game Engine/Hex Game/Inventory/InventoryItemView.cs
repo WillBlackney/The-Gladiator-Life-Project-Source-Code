@@ -81,7 +81,7 @@ namespace HexGameEngine.Items
             if (itemDragged != null) return;
 
             // TRY SELL
-            if (TownController.Instance.ArmouryViewIsActive)
+            if (TownController.Instance.ArmouryViewIsActive && !CharacterRosterViewController.Instance.MainVisualParent.activeSelf)
             {
                 ItemController.Instance.HandleSellItemToArmoury(myItemRef);
                 return;

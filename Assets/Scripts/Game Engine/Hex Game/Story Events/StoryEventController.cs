@@ -395,13 +395,13 @@ namespace HexGameEngine.StoryEvents
             {
                 int characterCount = CharacterDataController.Instance.AllPlayerCharacters.Count;
                 if (requirement.includeTheKid == false && TheKidIsAlive()) characterCount = characterCount - 1;
-                ret = characterCount < requirement.requiredCharactersInRosterCount;
+                ret = characterCount > requirement.requiredCharactersInRosterCount;
             }
             else if (requirement.reqType == StoryEventRequirementType.XorLessCharactersInRoster)
             {
                 int characterCount = CharacterDataController.Instance.AllPlayerCharacters.Count;
                 if (requirement.includeTheKid == false && TheKidIsAlive()) characterCount = characterCount - 1;
-                ret = characterCount > requirement.requiredCharactersInRosterCount;
+                ret = characterCount < requirement.requiredCharactersInRosterCount;
             }
             else if (requirement.reqType == StoryEventRequirementType.HasXorLessGold)
             {

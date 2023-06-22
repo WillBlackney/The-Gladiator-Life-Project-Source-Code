@@ -478,6 +478,7 @@ namespace HexGameEngine.Characters
                 {
                     VisualEffectManager.Instance.CreateStatusEffect(pos, "Second Wind!", PerkController.Instance.GetPerkIconDataByTag(Perk.SecondWind).passiveSprite, StatusFrameType.CircularBrown);
                     VisualEffectManager.Instance.CreateGeneralBuffEffect(pos);
+                    AudioManager.Instance.PlaySoundPooled(Sound.Ability_Heroic_Buff);
                 }, character.GetLastStackEventParent()).
                 SetStartDelay(0.5f).
                 SetEndDelay(0.5f);
@@ -1388,7 +1389,7 @@ namespace HexGameEngine.Characters
             if (view == null) return;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             string deathAnim = "DIE_";
-            deathAnim = deathAnim + RandomGenerator.NumberBetween(1, 3).ToString();
+            deathAnim = deathAnim + RandomGenerator.NumberBetween(1, 4).ToString();
             view.ucmAnimator.SetTrigger(deathAnim);
             view.CurrentAnimation = deathAnim;
         }
@@ -1536,7 +1537,11 @@ namespace HexGameEngine.Characters
 
                     // Calculate and deal Physical damage
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Poisoned), DamageType.Physical);
-                    VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.ApplyPoisoned, view.WorldPosition));
+                    VisualEventManager.CreateVisualEvent(() => 
+                    {
+                        AudioManager.Instance.PlaySoundPooled(Sound.Ability_Poison_Debuff);
+                        VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.ApplyPoisoned, view.WorldPosition); 
+                    });
                     CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
                     VisualEventManager.InsertTimeDelayInQueue(0.5f);
 
@@ -1572,7 +1577,11 @@ namespace HexGameEngine.Characters
 
                     // Calculate and deal Magic damage
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 2, DamageType.Physical);
-                    VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition));
+                    VisualEventManager.CreateVisualEvent(() =>
+                    {
+                        AudioManager.Instance.PlaySoundPooled(Sound.Ability_Bloody_Stab);
+                        VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
+                    });
                     CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
                     VisualEventManager.InsertTimeDelayInQueue(0.5f);
                 }
@@ -1585,7 +1594,11 @@ namespace HexGameEngine.Characters
 
                     // Calculate and deal Magic damage
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 4, DamageType.Physical);
-                    VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition));
+                    VisualEventManager.CreateVisualEvent(() =>
+                    {
+                        AudioManager.Instance.PlaySoundPooled(Sound.Ability_Bloody_Stab);
+                        VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
+                    }); 
                     CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
                     VisualEventManager.InsertTimeDelayInQueue(0.5f);
                 }
@@ -1598,7 +1611,11 @@ namespace HexGameEngine.Characters
 
                     // Calculate and deal Magic damage
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Bleeding), DamageType.Physical);
-                    VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition));
+                    VisualEventManager.CreateVisualEvent(() =>
+                    {
+                        AudioManager.Instance.PlaySoundPooled(Sound.Ability_Bloody_Stab);
+                        VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
+                    }); 
                     CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
                     VisualEventManager.InsertTimeDelayInQueue(0.5f);
 
@@ -1815,6 +1832,7 @@ namespace HexGameEngine.Characters
                 // Overcharged
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Overcharged) && character.currentHealth > 0)
                 {
+                    AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Debuff);
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Overcharged, -1, false);
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Stunned, 1, true, 0.5f);
                 }
@@ -1846,7 +1864,7 @@ namespace HexGameEngine.Characters
                             VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Abusive!", PerkController.Instance.GetPerkIconDataByTag(Perk.Abusive).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
 
                         foreach (HexCharacterModel ally in allies)
-                            CombatController.Instance.CreateStressCheck(ally, new StressEventData(1, 1, 75), true);
+                            CombatController.Instance.CreateStressCheck(ally, new StressEventData(2, 3, 75), true);
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
                     }                  
@@ -1859,7 +1877,10 @@ namespace HexGameEngine.Characters
                     if(enemies.Count > 0)
                     {
                         VisualEventManager.CreateVisualEvent(() =>
-                                           VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Fearsome!", PerkController.Instance.GetPerkIconDataByTag(Perk.Fearsome).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
+                        {
+                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Dark_Debuff);
+                            VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Fearsome!", PerkController.Instance.GetPerkIconDataByTag(Perk.Fearsome).passiveSprite, StatusFrameType.CircularBrown);
+                        }).SetEndDelay(0.5f);
 
 
                         foreach (HexCharacterModel enemy in enemies)
@@ -1876,7 +1897,11 @@ namespace HexGameEngine.Characters
                     if(enemies.Count > 0)
                     {
                         VisualEventManager.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Looming Presence!", PerkController.Instance.GetPerkIconDataByTag(Perk.LoomingPresence).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
+                        {
+                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Dark_Debuff);
+                            VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Looming Presence!", PerkController.Instance.GetPerkIconDataByTag(Perk.LoomingPresence).passiveSprite, StatusFrameType.CircularBrown);
+                        }).SetEndDelay(0.5f);
+
                         int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.LoomingPresence);
 
                         foreach (HexCharacterModel enemy in enemies)
@@ -1957,9 +1982,12 @@ namespace HexGameEngine.Characters
                         VisualEventManager.CreateVisualEvent(() =>
                             VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Contagious!", PerkController.Instance.GetPerkIconDataByTag(Perk.Contagious).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
 
-                        // Fire nova VFX
+                        // Poison nova VFX
                         VisualEventManager.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreatePoisonNova(view.WorldPosition));
+                        {
+                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Poison_Debuff);
+                            VisualEffectManager.Instance.CreatePoisonNova(view.WorldPosition);
+                        });
 
                         // Apply 1 poisoned to all enemies in aura
 
@@ -1968,9 +1996,11 @@ namespace HexGameEngine.Characters
                             // Poisoned VFX
                             HexCharacterView enemyView = enemy.hexCharacterView;
                             VisualEventManager.CreateVisualEvent(() =>
-                                VisualEffectManager.Instance.CreateApplyPoisonedEffect(enemyView.WorldPosition));
+                            {
+                                VisualEffectManager.Instance.CreateApplyPoisonedEffect(enemyView.WorldPosition);
+                            }); 
+                        
                             PerkController.Instance.ModifyPerkOnCharacterEntity(enemy.pManager, Perk.Poisoned, 1, true, 0, character.pManager);
-
                         }
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
@@ -2002,7 +2032,10 @@ namespace HexGameEngine.Characters
                     if (ally != null)
                     {
                         VisualEventManager.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Encouraging Leader!", PerkController.Instance.GetPerkIconDataByTag(Perk.EncouragingLeader).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
+                        {
+                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Heroic_Buff);
+                            VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Encouraging Leader!", PerkController.Instance.GetPerkIconDataByTag(Perk.EncouragingLeader).passiveSprite, StatusFrameType.CircularBrown);
+                        }).SetEndDelay(0.5f);
                         PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Wrath, 1, true, 0, character.pManager);
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
                     }
@@ -2016,21 +2049,27 @@ namespace HexGameEngine.Characters
                     if(allies.Count > 0)
                     {
                         VisualEventManager.CreateVisualEvent(() =>
-                                              VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Fellowship!", PerkController.Instance.GetPerkIconDataByTag(Perk.HymnOfFellowship).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
+                        {
+                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Hymn);
+                            VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Fellowship!", PerkController.Instance.GetPerkIconDataByTag(Perk.HymnOfFellowship).passiveSprite, StatusFrameType.CircularBrown);
+                        }).SetEndDelay(0.5f);
 
                         foreach (HexCharacterModel ally in allies)
                         {
                             Vector3 pos = ally.hexCharacterView.WorldPosition;
                             PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Guard, 1, true, 0, character.pManager);
                             VisualEventManager.CreateVisualEvent(() =>
-                                VisualEffectManager.Instance.CreateGeneralBuffEffect(pos));
+                            {
+                                AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Buff);
+                                VisualEffectManager.Instance.CreateGeneralBuffEffect(pos);
+                            });
                         }
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
                     }                   
                 }
 
-                // Hymn of Wrath
+                // Hymn of Vengeance
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.HymnOfVengeance) && character.currentHealth > 0)
                 {
                     List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
@@ -2038,14 +2077,20 @@ namespace HexGameEngine.Characters
                     if(allies.Count > 0)
                     {
                         VisualEventManager.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Vengeance!", PerkController.Instance.GetPerkIconDataByTag(Perk.HymnOfVengeance).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
+                        {
+                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Hymn);
+                            VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Vengeance!", PerkController.Instance.GetPerkIconDataByTag(Perk.HymnOfFellowship).passiveSprite, StatusFrameType.CircularBrown);
+                        }).SetEndDelay(0.5f);
 
                         foreach (HexCharacterModel ally in allies)
                         {
                             Vector3 pos = ally.hexCharacterView.WorldPosition;
                             PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Wrath, 1, true, 0, character.pManager);
                             VisualEventManager.CreateVisualEvent(() =>
-                                VisualEffectManager.Instance.CreateGeneralBuffEffect(pos));
+                            {
+                                AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Buff);
+                                VisualEffectManager.Instance.CreateGeneralBuffEffect(pos);
+                            });
                         }
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
@@ -2061,15 +2106,20 @@ namespace HexGameEngine.Characters
                     if(allies.Count > 0)
                     {
                         VisualEventManager.CreateVisualEvent(() =>
-                       VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Courage!", PerkController.Instance.GetPerkIconDataByTag(Perk.HymnOfCourage).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
-
+                        {
+                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Hymn);
+                            VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Courage!", PerkController.Instance.GetPerkIconDataByTag(Perk.HymnOfFellowship).passiveSprite, StatusFrameType.CircularBrown);
+                        }).SetEndDelay(0.5f);
 
                         foreach (HexCharacterModel ally in allies)
                         {
                             Vector3 pos = ally.hexCharacterView.WorldPosition;
                             PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Courage, 1, true, 0, character.pManager);
                             VisualEventManager.CreateVisualEvent(() =>
-                                VisualEffectManager.Instance.CreateGeneralBuffEffect(pos));
+                            {
+                                AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Buff);
+                                VisualEffectManager.Instance.CreateGeneralBuffEffect(pos);
+                            });
                         }
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
@@ -2083,7 +2133,10 @@ namespace HexGameEngine.Characters
                     if(allies.Count > 0)
                     {
                         VisualEventManager.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Purity!", PerkController.Instance.GetPerkIconDataByTag(Perk.HymnOfPurity).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
+                        {
+                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Hymn);
+                            VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Purity!", PerkController.Instance.GetPerkIconDataByTag(Perk.HymnOfFellowship).passiveSprite, StatusFrameType.CircularBrown);
+                        }).SetEndDelay(0.5f);
 
                         foreach (HexCharacterModel ally in allies)
                         {
@@ -2102,7 +2155,10 @@ namespace HexGameEngine.Characters
                                 (ally.pManager, Perk.Bleeding, -PerkController.Instance.GetStackCountOfPerkOnCharacter(ally.pManager, Perk.Bleeding), false, 0, character.pManager);
 
                             VisualEventManager.CreateVisualEvent(() =>
-                                VisualEffectManager.Instance.CreateGeneralBuffEffect(pos));
+                            {
+                                AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Buff);
+                                VisualEffectManager.Instance.CreateGeneralBuffEffect(pos);
+                            });
                         }
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
@@ -2116,11 +2172,17 @@ namespace HexGameEngine.Characters
                     List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
                     if(allies.Count > 0)
                     {
-                        VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Formation Leader!", PerkController.Instance.GetPerkIconDataByTag(Perk.FormationLeader).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
+                        VisualEventManager.CreateVisualEvent(() =>
+                        {
+                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Heroic_Buff);
+                            VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Formation Leader!", PerkController.Instance.GetPerkIconDataByTag(Perk.FormationLeader).
+                                passiveSprite, StatusFrameType.CircularBrown);
+                        }).SetEndDelay(0.5f);
 
                         foreach (HexCharacterModel ally in allies)
                         {
                             ModifyCurrentFatigue(ally, -5, true);
+                            VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Buff));
                         }
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
@@ -2154,7 +2216,10 @@ namespace HexGameEngine.Characters
 
                     // Poof VFX
                     VisualEventManager.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateExpendEffect(view.WorldPosition, 15, 0.2f));
+                    {
+                        AudioManager.Instance.PlaySound(Sound.Ability_Go_Invisble);
+                        VisualEffectManager.Instance.CreateExpendEffect(view.WorldPosition, 15, 0.2f);
+                    });
 
                 }
 
@@ -2173,7 +2238,10 @@ namespace HexGameEngine.Characters
 
                     // Poof VFX
                     VisualEventManager.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateExpendEffect(view.WorldPosition, 15, 0.2f));
+                    {
+                        AudioManager.Instance.PlaySound(Sound.Ability_Go_Invisble);
+                        VisualEffectManager.Instance.CreateExpendEffect(view.WorldPosition, 15, 0.2f);
+                    });
 
                 }
                 #endregion

@@ -39,6 +39,7 @@ namespace HexGameEngine.VisualEvents
         public const string DIE_1 = "DIE_1";
         public const string DIE_2 = "DIE_2";
         public const string DIE_3 = "DIE_3";
+        public const string DIE_4 = "DIE_4";
         public const string DECAPITATION_1 = "DECAPITATION_1";
         public const string DECAPITATION_2 = "DECAPITATION_2";
         public const string RESSURECT = "Ressurect";

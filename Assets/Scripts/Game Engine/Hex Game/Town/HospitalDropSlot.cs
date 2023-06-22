@@ -30,9 +30,9 @@ namespace HexGameEngine.TownFeatures
         {
             // to do: probably should find a better place for this function
             // the costs of features should probably be determined by GlobalSettings
-            if (feature == TownActivity.BedRest) return 100;
-            else if (feature == TownActivity.Therapy) return 125;
-            else if (feature == TownActivity.Surgery) return 150;
+            if (feature == TownActivity.BedRest) return 125;
+            else if (feature == TownActivity.Therapy) return 150;
+            else if (feature == TownActivity.Surgery) return 200;
             else return 0;
         }
         public static HospitalDropSlot SlotMousedOver

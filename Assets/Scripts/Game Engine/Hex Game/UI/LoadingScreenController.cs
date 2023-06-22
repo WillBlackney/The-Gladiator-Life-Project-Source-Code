@@ -23,8 +23,8 @@ namespace HexGameEngine.LoadingScreen
         [SerializeField] List<Sprite> allBackgroundSprites;
         private List<Sprite> sessionSpriteQueue = new List<Sprite>();
 
-        [SerializeField] List<string> allTips;
-        private List<string> sessionTipsQueue = new List<string>();
+        [SerializeField] List<LoadingScreenTip> allTips;
+        private List<LoadingScreenTip> sessionTipsQueue = new List<LoadingScreenTip>();
 
         protected override void Awake()
         {
@@ -104,9 +104,9 @@ namespace HexGameEngine.LoadingScreen
         }
         private string GetNextTip()
         {
-            string ret = null;
+            string ret = "";
             if (sessionTipsQueue.Count == 0) PopulateAndShuffleSessionTipsQueue();
-            ret = sessionTipsQueue[0];
+            ret = TextLogic.ConvertCustomStringListToString(sessionTipsQueue[0].message);
             sessionTipsQueue.RemoveAt(0);
             return ret;
         }
@@ -158,5 +158,11 @@ namespace HexGameEngine.LoadingScreen
         public bool finishedFadeIn = false;
         public bool startedFadeOut = false;
         public bool finished = false;
+    }
+
+    [System.Serializable]
+    public class LoadingScreenTip
+    {
+        public List<CustomString> message;
     }
 }

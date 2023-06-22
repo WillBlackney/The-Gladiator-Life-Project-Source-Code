@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: The Strike
   m_EditorClassIdentifier: 
   storyEventName: The Strike
-  excludeFromGame: 0
   firstPage: {fileID: 11400000, guid: 88f5b2d718f7e664fb3d98e86c995d7a, type: 2}
+  excludeFromGame: 0
   onStartEffects: []
   requirements:
   - reqType: 1
-    requiredCharactersInRosterCount: 4
-    includeTheKid: 0
+    requiredCharactersInRosterCount: 5
+    includeTheKid: 1
     goldRequired: 0
     requiredBoon: 0
   characterRequirements:

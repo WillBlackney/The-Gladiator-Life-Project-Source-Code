@@ -52,6 +52,12 @@ namespace HexGameEngine.UI
             followMouseParent.SetActive(false);
             AudioManager.Instance.FadeOutSound(Sound.UI_Dragging_Constant, 0.2f);
 
+            // Handle drag on library learn ability slot
+            if (LibraryCharacterDropSlot.MousedOver && draggedCharacterData != null)
+            {
+                TownController.Instance.LibraryCharacterSlot.BuildFromCharacter(draggedCharacterData);
+            }
+
             // Handle drag and swap two character positions
             if (DeploymentNodeView.NodeMousedOver != null &&
                 DeploymentNodeView.NodeMousedOver.MyCharacterData != null &&
@@ -84,14 +90,8 @@ namespace HexGameEngine.UI
             
             // Handle drag on to hospital feature slot
             else if(HospitalDropSlot.SlotMousedOver != null)            
-                TownController.Instance.HandleDropCharacterOnHospitalSlot(HospitalDropSlot.SlotMousedOver, draggedCharacterData);
+                TownController.Instance.HandleDropCharacterOnHospitalSlot(HospitalDropSlot.SlotMousedOver, draggedCharacterData);           
             
-            // Handle drag on library learn ability slot
-            else if (LibraryCharacterDropSlot.MousedOver)
-            {
-                TownController.Instance.LibraryCharacterSlot.BuildFromCharacter(draggedCharacterData);
-            }
-
             draggedCharacterData = null;
             draggedNode = null;
         }

@@ -1250,8 +1250,11 @@ namespace HexGameEngine.Combat
 
                 // Status notification
                 VisualEventManager.CreateVisualEvent(() =>
-                VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Bring It On!",
-                PerkController.Instance.GetPerkIconDataByTag(Perk.BringItOn).passiveSprite, StatusFrameType.CircularBrown), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
+                {
+                    AudioManager.Instance.PlaySound(Sound.Ability_Cheeky_Laugh);
+                    VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Bring It On!",
+                    PerkController.Instance.GetPerkIconDataByTag(Perk.BringItOn).passiveSprite, StatusFrameType.CircularBrown);
+                }, attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
             }
 
             // Check for barrier
@@ -1380,6 +1383,7 @@ namespace HexGameEngine.Combat
                 (ability.weaponRequirement == WeaponRequirement.MeleeWeapon || ability.weaponRequirement == WeaponRequirement.RangedWeapon || ability.weaponRequirement == WeaponRequirement.Bow || ability.weaponRequirement == WeaponRequirement.Crossbow || ability.weaponRequirement == WeaponRequirement.BowOrCrossbow))
             {
                 Debug.Log("ExecuteHandleDamage() attacker has poisoned weapon, applying poisoned on target");
+                VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySound(Sound.Ability_Poison_Debuff), target.GetLastStackEventParent());
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Poisoned, 1, true, 0.5f, attacker.pManager);
             }
 
@@ -1393,6 +1397,7 @@ namespace HexGameEngine.Combat
                 ability.abilityType.Contains(AbilityType.MeleeAttack))
             {
                 Debug.Log("ExecuteHandleDamage() attacker has Tiger Aspect, applying bleeding on target");
+                VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySound(Sound.Ability_Bloody_Stab), target.GetLastStackEventParent());
                 PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Bleeding, 1, true, 0.5f, attacker.pManager);
             }
 
@@ -1449,7 +1454,7 @@ namespace HexGameEngine.Combat
                         int roll = RandomGenerator.NumberBetween(1, 100);
                         if (roll <= ie.effectChance)
                         {
-                            PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, ie.perkApplied.perkTag, ie.perkApplied.passiveStacks, true, 0.25f, attacker.pManager);
+                            PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, ie.perkApplied.perkTag, ie.perkApplied.passiveStacks, true, 0.5f, attacker.pManager);
                         }
                     }
                 }
@@ -1462,6 +1467,7 @@ namespace HexGameEngine.Combat
                 if(target.livingState == LivingState.Alive &&
                     PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Vengeful))
                 {
+                    VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySound(Sound.Ability_Enrage), target.GetLastStackEventParent());
                     PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Combo, 1, true, 0.5f);
                 }
 
@@ -1511,8 +1517,11 @@ namespace HexGameEngine.Combat
                     {
                         // Status notification
                         VisualEventManager.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Executioner!", 
-                        PerkController.Instance.GetPerkIconDataByTag(Perk.Executioner).passiveSprite, StatusFrameType.CircularBrown), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
+                        {
+                            AudioManager.Instance.PlaySound(Sound.Ability_Enrage);
+                            VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Executioner!",
+                            PerkController.Instance.GetPerkIconDataByTag(Perk.Executioner).passiveSprite, StatusFrameType.CircularBrown);
+                        }, attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
 
                         HexCharacterController.Instance.ModifyActionPoints(attacker, 6);
                     }
@@ -1582,7 +1591,11 @@ namespace HexGameEngine.Combat
 
                         // Status notification
                         VisualEventManager.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(possibleGnoll.hexCharacterView.WorldPosition, "Cannibalism!", CharacterDataController.Instance.GetRaceData(CharacterRace.Gnoll).racialSprite, StatusFrameType.CircularBrown), possibleGnoll.GetLastStackEventParent()).SetEndDelay(0.5f);
+                        {
+                            // to do: chewing SFX
+                            // AudioManager.Instance.PlaySoundPooled(Sound.)
+                            VisualEffectManager.Instance.CreateStatusEffect(possibleGnoll.hexCharacterView.WorldPosition, "Cannibalism!", CharacterDataController.Instance.GetRaceData(CharacterRace.Gnoll).racialSprite, StatusFrameType.CircularBrown);
+                        }, possibleGnoll.GetLastStackEventParent()).SetEndDelay(0.5f);
                                               
                     }
                 }

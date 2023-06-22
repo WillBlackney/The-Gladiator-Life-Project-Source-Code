@@ -23,6 +23,8 @@ MonoBehaviour:
   baseCooldown: 1
   abilityType: 0100000007000000
   doesNotBreakStealth: 0
+  guidanceInstruction: 0
+  guidanceInstructionTwo: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
   derivedFromItemLoadout: 0
@@ -84,7 +86,7 @@ MonoBehaviour:
       particleEffect: 0
       cameraShake: 0
       movementAnimation: 0
-      soundEffect: 18
+      soundEffect: 141
       characterAnimation: 0
       delayDuration: 0
       projectileFired: 0
