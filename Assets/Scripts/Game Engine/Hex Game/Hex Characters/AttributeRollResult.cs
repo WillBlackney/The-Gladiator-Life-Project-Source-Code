@@ -107,7 +107,16 @@ namespace HexGameEngine.Characters
             GenerateTree();
             HandleAdjustTreeIfStartingPerkChoiceAlreadyMade(character);
         }
-       
+        public PerkTreeData(PerkTreeData original)
+        {
+            hasGeneratedTree = true;
+            foreach (PerkTreePerk pt in original.PerkChoices)
+            {
+                perkChoices.Add(new PerkTreePerk(pt.perk, pt.tier));
+            }
+            nextAvailableTier = original.nextAvailableTier;
+        }
+
 
         public void HandleAdjustTreeIfStartingPerkChoiceAlreadyMade(HexCharacterData myCharacter)
         {

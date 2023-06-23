@@ -20,7 +20,6 @@ using Sirenix.Utilities;
 using System.Linq;
 using HexGameEngine.LoadingScreen;
 using HexGameEngine.GameOrigin;
-using static UnityEditor.Progress;
 
 namespace HexGameEngine.MainMenu
 {

@@ -8,6 +8,7 @@ using DG.Tweening;
 using HexGameEngine.Utilities;
 using HexGameEngine.Characters;
 using HexGameEngine.MainMenu;
+using HexGameEngine.Items;
 
 namespace HexGameEngine.UI
 {
@@ -68,7 +69,8 @@ namespace HexGameEngine.UI
         private void Update()
         {
             // Handle key board input
-            if (mainTopBarRootCanvas.isActiveAndEnabled == true && Input.GetKeyDown(KeyCode.C)) CharacterRosterViewController.Instance?.OnCharacterRosterTopbarButtonClicked();
+            if ((mainTopBarRootCanvas.isActiveAndEnabled == true || combatTopBarRootCanvas.isActiveAndEnabled == true) && Input.GetKeyDown(KeyCode.C)) CharacterRosterViewController.Instance?.OnCharacterRosterTopbarButtonClicked();
+            else if (mainTopBarRootCanvas.isActiveAndEnabled == true && Input.GetKeyDown(KeyCode.I)) InventoryController.Instance?.OnInventoryTopBarButtonClicked();
             else if ((mainTopBarRootCanvas.isActiveAndEnabled == true || combatTopBarRootCanvas.isActiveAndEnabled == true) && Input.GetKeyDown(KeyCode.Escape)) MainMenuController.Instance.OnTopBarSettingsButtonClicked();
 
         }

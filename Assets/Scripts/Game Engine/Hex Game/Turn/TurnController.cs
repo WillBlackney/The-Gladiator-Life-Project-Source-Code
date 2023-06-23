@@ -349,30 +349,25 @@ namespace HexGameEngine.TurnLogic
         {
             Debug.Log("TurnController.OnDelayTurnButtonClicked() called...");
             if (CombatUIController.Instance.delayTurnButton.interactable == true &&
-                EntityActivated != activationOrder[activationOrder.Count - 1])
+                EntityActivated != activationOrder[activationOrder.Count - 1] &&
+                CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
+                EntityActivated.controller == Controller.Player &&
+                EntityActivated.activationPhase == ActivationPhase.ActivationPhase &&
+                EntityActivated.hasRequestedTurnDelay == false)
             {
                 CombatUIController.Instance.SetEndDelayTurnButtonInteractions(false);
+                EntityActivated.hasRequestedTurnDelay = true;
 
-                // prevent function if game over sequence triggered
-                if (CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
-                     EntityActivated.controller == Controller.Player &&
-                     EntityActivated.activationPhase == ActivationPhase.ActivationPhase &&
-                     EntityActivated.hasRequestedTurnDelay == false)
-                {
-                    EntityActivated.hasRequestedTurnDelay = true;
+                // Mouse click SFX
+                AudioManager.Instance.PlaySoundPooled(Sound.UI_Heavy_Click);
 
-                    // Mouse click SFX
-                    AudioManager.Instance.PlaySoundPooled(Sound.UI_Heavy_Click);
+                // Move this character to the end of the turn order.
+                HandleMoveCharacterToEndOfTurnOrder(EntityActivated);
+                var cachedOrder = ActivationOrder.ToList();
+                VisualEventManager.CreateVisualEvent(() => UpdateWindowPositions(cachedOrder));
 
-                    // Move this character to the end of the turn order.
-                    HandleMoveCharacterToEndOfTurnOrder(EntityActivated);
-                    var cachedOrder = ActivationOrder.ToList();
-                    VisualEventManager.CreateVisualEvent(()=> UpdateWindowPositions(cachedOrder));
-
-                    // Trigger character on activation end sequence and events
-                    HexCharacterController.Instance.CharacterOnTurnEnd(EntityActivated, true);
-
-                }
+                // Trigger character on activation end sequence and events
+                HexCharacterController.Instance.CharacterOnTurnEnd(EntityActivated, true);
             }
         }
         private void SetActivationWindowsParentViewState(bool onOrOff)

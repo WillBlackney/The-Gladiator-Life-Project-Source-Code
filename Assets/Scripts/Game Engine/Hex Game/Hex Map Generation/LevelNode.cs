@@ -34,6 +34,7 @@ namespace HexGameEngine.HexTiles
         [SerializeField] GameObject moveMarker;
 
         [Header("Obstruction Components")]
+        [SerializeField] private GameObject nodeBaseRing;
         [SerializeField] GameObject obstacleParent;
         [SerializeField] GameObject[] obstacleImages;        
 
@@ -273,8 +274,10 @@ namespace HexGameEngine.HexTiles
         {
             DisableObstructionViews();
             this.obstructed = obstructed;
+            nodeBaseRing.SetActive(true);
             if (obstructed)
             {
+                nodeBaseRing.SetActive(false);
                 obstacleParent.SetActive(true);
                 obstacleImages.GetRandomElement().SetActive(true);
                 grassParent.SetActive(false);
@@ -286,6 +289,7 @@ namespace HexGameEngine.HexTiles
                 g.SetActive(false);
 
             obstacleParent.SetActive(false);
+            nodeBaseRing.SetActive(true);
         }
         #endregion
 

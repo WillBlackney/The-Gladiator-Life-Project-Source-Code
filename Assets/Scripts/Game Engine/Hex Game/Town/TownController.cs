@@ -877,7 +877,7 @@ namespace HexGameEngine.TownFeatures
         {
             CombatContractData ret = new CombatContractData();
             ret.enemyEncounterData = RunController.Instance.GenerateEnemyEncounterFromTemplate(GlobalSettings.Instance.SandboxEnemyEncounters.GetRandomElement());
-            ret.combatRewardData = new CombatRewardData(ret.enemyEncounterData.difficulty);
+            ret.combatRewardData = new CombatRewardData(ret.enemyEncounterData.difficulty, ret.enemyEncounterData.deploymentLimit);
             return ret;
         }
         public void GenerateDailyCombatContracts()
@@ -890,21 +890,22 @@ namespace HexGameEngine.TownFeatures
                 List<int> deploymentLimits = new List<int> { 1, 2, 3, 5 };
 
                 // On first 2 days, only generate combat with deployment limits of 1,2 and 3
+                /*
                 if (RunController.Instance.CurrentChapter == 1 &&
                 (RunController.Instance.CurrentDay == 1 || RunController.Instance.CurrentDay == 2))
                 {
                     deploymentLimits.Remove(5);
-                }
+                }*/
 
                 // Get all basic combats that match the day + act conditions
                 List<EnemyEncounterSO> filteredBasics = new List<EnemyEncounterSO>();
                 List<EnemyEncounterSO> allValidBasics = RunController.Instance.GetCombatData(RunController.Instance.CurrentChapter, CombatDifficulty.Basic).ShuffledCopy();
 
                 allValidBasics.Shuffle();
-                for (int i = 0; i < 2; i++) filteredBasics.Add(allValidBasics[i]);
+                //for (int i = 0; i < 2; i++) filteredBasics.Add(allValidBasics[i]);
 
                 // Filter for 2 combats with different deployment limits
-                /*
+                
                 foreach(var encounter in allValidBasics)
                 {
                     if (deploymentLimits.Contains(encounter.deploymentLimit))
@@ -916,7 +917,7 @@ namespace HexGameEngine.TownFeatures
                     // Break once 2 combats have been determined
                     if (filteredBasics.Count == 2) break;
                 }
-                */
+                
 
                 foreach(var encounter in filteredBasics)                
                     currentDailyCombatContracts.Add(GenerateCombatContractFromData(encounter));
@@ -936,14 +937,14 @@ namespace HexGameEngine.TownFeatures
         {
             CombatContractData ret = new CombatContractData();
             ret.enemyEncounterData = RunController.Instance.GenerateEnemyEncounterFromTemplate(data);
-            ret.combatRewardData = new CombatRewardData(data.difficulty);
+            ret.combatRewardData = new CombatRewardData(data.difficulty, ret.enemyEncounterData.deploymentLimit);
             return ret;
         }
         private CombatContractData GenerateRandomDailyCombatContract(int currentAct, CombatDifficulty difficulty)
         {
             CombatContractData ret = new CombatContractData();
             ret.enemyEncounterData = RunController.Instance.GenerateEnemyEncounterFromTemplate(RunController.Instance.GetRandomCombatData(currentAct, difficulty));
-            ret.combatRewardData = new CombatRewardData(difficulty);
+            ret.combatRewardData = new CombatRewardData(difficulty, ret.enemyEncounterData.deploymentLimit);
             return ret;
         }
         public void BuildAndShowCombatContractPage()

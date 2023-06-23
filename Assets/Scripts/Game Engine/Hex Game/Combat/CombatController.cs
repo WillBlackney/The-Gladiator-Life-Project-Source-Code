@@ -1592,8 +1592,7 @@ namespace HexGameEngine.Combat
                         // Status notification
                         VisualEventManager.CreateVisualEvent(() =>
                         {
-                            // to do: chewing SFX
-                            // AudioManager.Instance.PlaySoundPooled(Sound.)
+                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Feast);
                             VisualEffectManager.Instance.CreateStatusEffect(possibleGnoll.hexCharacterView.WorldPosition, "Cannibalism!", CharacterDataController.Instance.GetRaceData(CharacterRace.Gnoll).racialSprite, StatusFrameType.CircularBrown);
                         }, possibleGnoll.GetLastStackEventParent()).SetEndDelay(0.5f);
                                               

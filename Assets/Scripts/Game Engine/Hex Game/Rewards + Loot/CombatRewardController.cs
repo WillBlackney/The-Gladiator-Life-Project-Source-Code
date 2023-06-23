@@ -232,6 +232,7 @@ namespace HexGameEngine.RewardSystems
             foreach (UIPerkIcon p in card.InjuryIcons)
                 p.HideAndReset();
             card.DeathIndicatorParent.SetActive(false);
+            card.Ucm.gameObject.SetActive(true);
             card.KnockDownIndicatorParent.SetActive(false);
             card.PortraitDeathIcon.SetActive(false);
             card.LevelUpParent.SetActive(false);
@@ -250,6 +251,7 @@ namespace HexGameEngine.RewardSystems
             // Death views setup
             else if (data.died)
             {
+                card.Ucm.gameObject.SetActive(false);
                 card.PortraitDeathIcon.SetActive(true);
                 card.DeathIndicatorParent.SetActive(true);
             }

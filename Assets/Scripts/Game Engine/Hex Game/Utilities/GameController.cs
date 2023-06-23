@@ -197,12 +197,17 @@ namespace HexGameEngine
             LevelController.Instance.ShowAllNodeViews();
             LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
 
-            // Randomize level node elevation and obstructions
-            RunController.Instance.SetCurrentCombatMapData(LevelController.Instance.GenerateLevelNodes());
-
             // Generate enemy wave + enemies data
             CombatContractData sandboxContractData = TownController.Instance.GenerateSandboxContractData();
             RunController.Instance.SetCurrentContractData(sandboxContractData);
+
+            // Generate combat map data
+            List<LevelNode> spawnPositions = LevelController.Instance.GetCharacterStartPositions(
+                RunController.Instance.CurrentCombatContractData.enemyEncounterData.enemiesInEncounter,
+                charactersWithSpawnPos);
+
+            // Randomize level node elevation and obstructions
+            RunController.Instance.SetCurrentCombatMapData(LevelController.Instance.GenerateLevelNodes(spawnPositions));           
 
             // Save data to persistency
             PersistencyController.Instance.AutoUpdateSaveFile();
@@ -789,13 +794,18 @@ namespace HexGameEngine
                 BoonController.Instance.HideBoonIconsPanel();
                 SetGameState(GameState.CombatActive);
 
-                // Generate combat map data
-                SerializedCombatMapData combatMapData = LevelController.Instance.GenerateLevelNodes();
-
                 // Setup combat data for persistency
                 RunController.Instance.SetCurrentContractData(CombatContractCard.SelectectedCombatCard.MyContractData);
                 RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
                 RunController.Instance.SetPlayerDeployedCharacters(TownController.Instance.GetDeployedCharacters());
+
+                // Generate combat map data
+                List<LevelNode> spawnPositions = LevelController.Instance.GetCharacterStartPositions(
+                    RunController.Instance.CurrentCombatContractData.enemyEncounterData.enemiesInEncounter,
+                    RunController.Instance.CurrentDeployedCharacters);
+
+                // Generate combat map 
+                SerializedCombatMapData combatMapData = LevelController.Instance.GenerateLevelNodes(spawnPositions);               
                 RunController.Instance.SetCurrentCombatMapData(combatMapData);
 
                 // Save game data

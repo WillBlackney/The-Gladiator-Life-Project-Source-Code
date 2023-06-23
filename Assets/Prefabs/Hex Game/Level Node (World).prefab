@@ -1877,6 +1877,7 @@ MonoBehaviour:
   inRangeMarkerEnemy: {fileID: 3998632921989006095}
   activationMarker: {fileID: 4957294442334606974}
   moveMarker: {fileID: 914168588135670749}
+  nodeBaseRing: {fileID: 1947381904229583573}
   obstacleParent: {fileID: 1089604167021973704}
   obstacleImages:
   - {fileID: 5378591750786922047}

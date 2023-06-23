@@ -93,6 +93,10 @@ namespace HexGameEngine.Utilities
                 // End turn with E
                 if (TurnController.Instance != null && Input.GetKeyDown(KeyCode.E))
                     TurnController.Instance.OnEndTurnButtonClicked();
+
+                // Delay turn with SPACE
+                if (TurnController.Instance != null && Input.GetKeyDown(KeyCode.Space))
+                    TurnController.Instance.OnDelayTurnButtonClicked();
             }           
 
         }

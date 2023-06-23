@@ -110,6 +110,8 @@ namespace HexGameEngine.StoryEvents
         #region Start Events
         public void StartNextEvent()
         {
+            visualParent.SetActive(true);
+
             // Flush old data
             choiceCharacterTarget = null;
             currentResultItems.Clear();
@@ -135,11 +137,11 @@ namespace HexGameEngine.StoryEvents
         {
             // Make UI clickable
             rootCg.interactable = true;
-            visualParent.SetActive(true);
-            blackUnderlay.DOFade(0, 0);
+            visualParent.SetActive(true);            
 
             // Reset tweens
             movementParent.DOKill();
+            blackUnderlay.DOFade(0.01f, 0);
             blackUnderlay.DOKill();
             movementParent.DOMove(offScreenPosition.position, 0f);
 
@@ -189,6 +191,8 @@ namespace HexGameEngine.StoryEvents
             currentResultItems.Clear();
 
             // Rebuild layouts
+            TransformUtils.RebuildLayouts(layoutsRebuilt);
+            AutoSetButtonFitting();
             TransformUtils.RebuildLayouts(layoutsRebuilt);
             AutoSetButtonFitting();
 

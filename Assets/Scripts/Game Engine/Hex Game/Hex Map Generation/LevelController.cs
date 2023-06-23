@@ -122,8 +122,26 @@ namespace HexGameEngine.HexTiles
             HideTileInfoPopup();
             HideAllNodeViews();
         }
+        public List<LevelNode> GetCharacterStartPositions(List<CharacterWithSpawnData> enemyPositions, List<CharacterWithSpawnData> playerPositions)
+        {
+            List<LevelNode> ret = new List<LevelNode>();
 
-        public SerializedCombatMapData GenerateLevelNodes()
+            foreach(CharacterWithSpawnData playerPos in playerPositions)
+            {
+                LevelNode node = GetHexAtGridPosition(playerPos.spawnPosition);
+                if(node != null) ret.Add(node);
+            }
+
+            foreach (CharacterWithSpawnData enemyPosition in enemyPositions)
+            {
+                LevelNode node = GetHexAtGridPosition(enemyPosition.spawnPosition);
+                if (node != null) ret.Add(node);
+            }
+
+            return ret;
+        }
+
+        public SerializedCombatMapData GenerateLevelNodes(List<LevelNode> characterSpawnPositions = null)
         {
             SerializedCombatMapData ret = new SerializedCombatMapData();
 
@@ -139,8 +157,13 @@ namespace HexGameEngine.HexTiles
                 n.ResetNode();
 
             // Get banned nodes for obstacles
-            List<LevelNode> spawnPositions = GetPlayerSpawnZone();
-            spawnPositions.AddRange(GetEnemySpawnZone());
+            List<LevelNode> spawnPositions = characterSpawnPositions;
+            if(characterSpawnPositions == null ||
+                characterSpawnPositions.Count == 0)
+            {
+                spawnPositions = GetPlayerSpawnZone();
+                spawnPositions.AddRange(GetEnemySpawnZone());
+            }
 
             int elevations = 0;
             int obstructions = 0;
@@ -197,7 +220,7 @@ namespace HexGameEngine.HexTiles
                 }
                 n.BuildFromData(randomHexType);
 
-                // To do: randomize and set obstacle
+                // Randomize and set obstacle
                 int obstructionRoll = RandomGenerator.NumberBetween(1, 100);
                 if (obstructions < seed.maximumObstructions &&
                     obstructionRoll >= 1 && obstructionRoll <= seed.obstructionPercentage &&

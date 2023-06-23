@@ -465,7 +465,8 @@ namespace HexGameEngine.Audio
         Ability_Teleport = 149, 
         Ability_Water_Buff = 150,
         Ability_Twangy_Buff = 151,
-        Ability_Cheeky_Laugh = 152,
+        Ability_Cheeky_Laugh = 153,
+        Ability_Feast = 154,
 
         Ambience_Outdoor_Spooky = 39,
         Ambience_Town_1 = 99,

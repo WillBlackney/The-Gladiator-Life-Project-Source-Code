@@ -3,6 +3,7 @@ using HexGameEngine.AI;
 using HexGameEngine.Audio;
 using HexGameEngine.Items;
 using HexGameEngine.Perks;
+using Sirenix.Serialization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,6 +58,7 @@ namespace HexGameEngine.Characters
         public int dailyWage;
         public TownActivity currentTownActivity = TownActivity.None;
         public List<AttributeRollResult> attributeRolls = new List<AttributeRollResult>();
+        [OdinSerialize]
         private PerkTreeData perkTree;
         public int perkPoints = 0;
         //public List<TalentRollResult> talentRolls = new List<TalentRollResult>();
@@ -70,5 +72,7 @@ namespace HexGameEngine.Characters
             }
             set { perkTree = value; }
         }
+
+       
     }
 }

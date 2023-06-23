@@ -163,9 +163,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountText: {fileID: 3005248309099774072}
   myAnim: {fileID: 7748690253897150701}
-  stressIncreaseSprite: {fileID: 21300000, guid: f02d849214708e648aa999931bb9b13f,
+  stressIncreaseSprite: {fileID: 96114488, guid: 02076d6c5d7bf3a46a96790a396a49e8,
     type: 3}
-  stressDecreaseSprite: {fileID: 21300000, guid: bd36875c14bffe54c89c03e0b6d515bf,
+  stressDecreaseSprite: {fileID: -547721705, guid: 02076d6c5d7bf3a46a96790a396a49e8,
     type: 3}
   iconImage: {fileID: 6368846271950379599}
 --- !u!95 &7748690253897150701
@@ -437,7 +437,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bd36875c14bffe54c89c03e0b6d515bf, type: 3}
+  m_Sprite: {fileID: -547721705, guid: 02076d6c5d7bf3a46a96790a396a49e8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

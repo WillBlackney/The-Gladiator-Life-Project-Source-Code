@@ -223,6 +223,7 @@ namespace HexGameEngine.UI
                 yield break;
             }
 
+            headerText.margin = new Vector4(38, 0, 0, 0);
             // If user still moused over widget after delay, build + show modal.
             if (ModalSceneWidget.MousedOver == w)
             {
@@ -367,7 +368,8 @@ namespace HexGameEngine.UI
             headerText.text = headerMessage;
             descriptionText.fontStyle = FontStyles.Normal;
             descriptionText.gameObject.SetActive(true);
-            descriptionText.text = TextLogic.ConvertCustomStringListToString(descriptionMessage); 
+            descriptionText.text = TextLogic.ConvertCustomStringListToString(descriptionMessage);
+            headerText.margin = new Vector4(38, 0, 0, 0);
 
             if (headerSprite != null && frameImage)
             {
@@ -380,6 +382,10 @@ namespace HexGameEngine.UI
                 framedImageParent.SetActive(false);
                 unframedImageParent.SetActive(true);
                 unframedImage.sprite = headerSprite;
+            }
+            else
+            {
+                headerText.margin = new Vector4(0, 0, 0, 0);
             }
         }
         private void BuildModalContent(ActivePerk ap)

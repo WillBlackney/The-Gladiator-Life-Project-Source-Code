@@ -1,0 +1,4095 @@
+fileFormatVersion: 2
+guid: 02076d6c5d7bf3a46a96790a396a49e8
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1024
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: smileys-emotion-00_0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 660
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dbdc49f6a05b8f479d7e034e12db9a3
+      internalID: -547721705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_1
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 660
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcc240a49ec0c44468b5583290285951
+      internalID: 392000455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_2
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 660
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40dd97fe36e4e6d43a0262d9d3904da2
+      internalID: 1469251477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_3
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 660
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 111bf210c952b8b4cac0e3981e47a7f7
+      internalID: -266291956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_4
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 660
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31534491dc7819941b0d8edc02db5a8e
+      internalID: -1737338297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_5
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 660
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdeeea507999fd347b58e6d9bd0d7607
+      internalID: 1111315827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_6
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 659
+        width: 59
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa0333a69ac913b4db8e996fa9be58f2
+      internalID: -1936262935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_7
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 660
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c9784844b364ae4dbc4031b64988c63
+      internalID: -132590246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_8
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 660
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c973da98b0433146af4ecb68a9a501d
+      internalID: -464064498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_9
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 660
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fb14b5577e9b674f94cfd3185c6adbe
+      internalID: 1645132521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_10
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 660
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9cc10812fc71794dbed295cc71b8049
+      internalID: 1341916440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_11
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 660
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85c9a682d5166524282631fbf59f4917
+      internalID: 1947079000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_12
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 660
+        width: 54
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87118011e8afccb409b3370cc511d9bd
+      internalID: 1819264746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_13
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 652
+        width: 63
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa88e79092fe66c4b8b4b7f64ff0811b
+      internalID: -1004777023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_14
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 660
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3737e829988cf4c49a308c257c14a035
+      internalID: 220635492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_15
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 660
+        width: 54
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c256e487cdad2614c9cab00e480d50dd
+      internalID: 1571885128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_16
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 588
+        width: 52
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b4cb33d3c6afbf47a7285395b311eb6
+      internalID: -296564909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_17
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 588
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa173e6ad39400545bdd67b2eb4d27a3
+      internalID: -860241840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_18
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 588
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 271bc704eeddd40468165da60788dce5
+      internalID: 156583258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_19
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 588
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c9a976e36336ec448e178058c47f74a
+      internalID: -593665883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_20
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 588
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fa9988b2ec90474dab1a2a081ee5b1b
+      internalID: -887757921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_21
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 588
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5b521726fbac0d45ad843e46e9c3350
+      internalID: 1227380626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_22
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 588
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eeaddce0468478c4485ff69abf6ce66e
+      internalID: -674644979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_23
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 588
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35469b428668b3c4488f3296b8a2318c
+      internalID: -1496928416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_24
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 588
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0387b97511fe5ad489268a85c3e4b438
+      internalID: -975177011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_25
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 588
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 534cc19e1fef88347a7d55cef90ef6e5
+      internalID: -1988158172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_26
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 588
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 851703ceef206874cb7853a0e23a8eee
+      internalID: -518284572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_27
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 585
+        width: 48
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fbb41cd6772406419ab73b23b4c929c
+      internalID: -430130595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_28
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 580
+        width: 64
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00db1d066c63c3e4d8a408426e766775
+      internalID: -1081536319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_29
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 579
+        width: 48
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37c559ddf040bdf46bb9d4fac9ce495d
+      internalID: 646160618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_30
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 583
+        width: 48
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ce9951dc0b2ea24f91eb29f00f85a42
+      internalID: 1536484650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_31
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 580
+        width: 48
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a07931b93b12b2448af41294becd6ea
+      internalID: 1486788759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_32
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 516
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ce3a307ae4ca1a4199b7f283927cfc9
+      internalID: 1403141963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_33
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 516
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac468869d6fc96c4298644acfa3a1e9e
+      internalID: 1611993746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_34
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 516
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e23a09c827deb14da81cfaef4651ece
+      internalID: 1385079438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_35
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 516
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84f14678984df0d4a9f051d0271e6287
+      internalID: -362430279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_36
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 516
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6528bb5394f712a4f8cd38797ab2913b
+      internalID: 2025398643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_37
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 516
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fd83b60dd53df8458f5c0785348df14
+      internalID: 1980872140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_38
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 516
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fd22efab81229f499eb70031ab98ce6
+      internalID: -1564889755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_39
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 516
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8d159373fffb974cadaabc0df171f5c
+      internalID: -909724709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_40
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 516
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c31347e115187c4284010451545b0c7
+      internalID: 96114488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_41
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 516
+        width: 50
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d81ff8a4ff1d254a89019afad21d88f
+      internalID: -346669039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_42
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 516
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f00edf5652a091f419aa92dd1d690052
+      internalID: -1475250206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_43
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 516
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e3cbfc50fcbc79428b9a0ce92d88678
+      internalID: -1082428242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_44
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 516
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3591de5bc761bb419a7221bf1b060a5
+      internalID: -1820665238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_45
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 513
+        width: 48
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 193a1b7eb47ced1428e1aa3e54b7dceb
+      internalID: 503214633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_46
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 516
+        width: 49
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 067091fc8ead8bd4d9e2b755073cebe7
+      internalID: 1333440897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_47
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 516
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51aecd65828c0704b9b7e60d245748b6
+      internalID: 1653462820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_48
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 444
+        width: 50
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22c132f0679ce8043b681d113fd383f4
+      internalID: 480288848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_49
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 444
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c24580e79748d24294f486e8fe0feee
+      internalID: 421527389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_50
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 444
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d74cfd6ae0e00184797af63625c7d3e7
+      internalID: 1533249950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_51
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 439
+        width: 48
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8bdb82805c85004eba6ac3f0c2251b5
+      internalID: 1569000506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_52
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 438
+        width: 58
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e5a63923899c9c40b3f3477b0b9f367
+      internalID: 1152914714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_53
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 444
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c14961c78a4f38c469dd62d6d0b29d7b
+      internalID: 1916118519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_54
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 440
+        width: 53
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de40d231184151f4daa97894af01a295
+      internalID: 863865467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_55
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 444
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f6b0203170d9ea48ba08cc3e44d45c5
+      internalID: -1904098598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_56
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 444
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12d6915b152f19646a610be4fb192e28
+      internalID: -1304913059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_57
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 444
+        width: 51
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98dd1eb7edf95f640b19500f8aab5d6a
+      internalID: -1722725829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_58
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 442
+        width: 56
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c19d82192029ed4db396a47c0a872db
+      internalID: 2089828295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_59
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 444
+        width: 49
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b6b21cedb8a48141bd8eb6f0ad32351
+      internalID: 442708311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_60
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 487
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: def3eb5b9e88cdf459f797a7d9fb655e
+      internalID: 726095340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_61
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 444
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27c71132d1deaf54da2d6137546bb6a2
+      internalID: -409928373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_62
+      rect:
+        serializedVersion: 2
+        x: 947
+        y: 443
+        width: 49
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a752dc40d189ef543afa2961067d1477
+      internalID: 968859424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_63
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 444
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b98d54269b06eb4d9557f857c9e52e7
+      internalID: 1782014120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_64
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 444
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4849c4f5077c124badb895bd7825101
+      internalID: 127098646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_65
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 478
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e95cc6ed455f1274f9251bd853639016
+      internalID: -1473820028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_66
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 459
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a112f7e8caf286c46ab6739d0077bab5
+      internalID: 516064320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_67
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 453
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4292955d89b71d4eb3e0676402d36c5
+      internalID: -773851767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_68
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 437
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b9a9271db238f848842b05a1eee8305
+      internalID: -1736532015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_69
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 439
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 531b8649605fe47449c93cb27e34ca05
+      internalID: -1084114124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_70
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 440
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5e8b95f05b9cbb478b9c9929c2276ca
+      internalID: 394894819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_71
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7d4d98a490dc7f44bd0ef2c1610964d
+      internalID: 1209403682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_72
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a22f98639c4c9c545855169816c29920
+      internalID: 782495875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_73
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3132a133d03f0344ad4a351ad2cfa96
+      internalID: -374213551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_74
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 278d09ae4efd6034193067934093afc7
+      internalID: 1127114911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_75
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e10d1b14de1f304faaff0be3359ad08
+      internalID: 338299567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_76
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3baf9bd59a6691141bc7567ff04bf388
+      internalID: 378311460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_77
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc54cc96520e042489f1a9cc5796c12a
+      internalID: -1140739513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_78
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b53155c85a80c24fa11f78bc5bca629
+      internalID: -336780508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_79
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31f4180093fe7db43a80ff6aabdd5924
+      internalID: 897550187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_80
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf294b56b76fa3a48b708dd36cbcf258
+      internalID: 139926170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_81
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e94418371067a5445bf4e1b3b4781fa8
+      internalID: 860574685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_82
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 119e2f8d81d342e45871e8ebc2613489
+      internalID: -1763872616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_83
+      rect:
+        serializedVersion: 2
+        x: 872
+        y: 372
+        width: 52
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d823e49b0515bf48a25a5f337c9250c
+      internalID: -1853078180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_84
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83b476c0ac2cfe548bcd936f807c7394
+      internalID: 1242154530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_85
+      rect:
+        serializedVersion: 2
+        x: 1020
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dc14d64a6d425c4c8b5fe44ed27bd9c
+      internalID: -1888109051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_86
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 372
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bcded6a00568254cb9ff5f55acd10af
+      internalID: -1725433124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_87
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 294
+        width: 48
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69b39a6cafc7f814b9657082706a6a0e
+      internalID: -1705590844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_88
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 300
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e95c50b69436714a886e9b7dd8a4c28
+      internalID: -586607881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_89
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 300
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4d3b8fd1a797964499ddb22ab642622
+      internalID: 751436524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_90
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 300
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e54874df23f80740afb6d28dc2ee632
+      internalID: 1279203751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_91
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 300
+        width: 48
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 075dc3094d1f6b04d8414a65f755f8fc
+      internalID: 218004026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_92
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 300
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cfeca7447c77804d8c4ccf33c17d3e1
+      internalID: -420600618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_93
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 300
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5871266a1acd0024a9739034eb70c66d
+      internalID: -366701300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_94
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 291
+        width: 48
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f8ca8a6c0f9c044ea5899764b965d1d
+      internalID: 907425155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_95
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 300
+        width: 60
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ac4c58e515db5844a791ffe9e0eba14
+      internalID: 2127481533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_96
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 300
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83e2baea9ebcc20468c55314eb678062
+      internalID: -143710719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_97
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 300
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7aed3d4212dc214783d8bf348fa71e2
+      internalID: -736370945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_98
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 300
+        width: 48
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4a9bb6b1d0baba408e98988c437ba2a
+      internalID: -374789138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_99
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 335
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b357a4f71446dd49a77c2364d9dcaba
+      internalID: -373128202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_100
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 300
+        width: 48
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b495c9b194ae6b74daedcabed55e849e
+      internalID: -1115077798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_101
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 300
+        width: 48
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fc5b738dfc70a240af09dfc1ca87594
+      internalID: -1350919712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_102
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 298
+        width: 42
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c6c3183a62d4964da9a386edc8616a5
+      internalID: -955865612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_103
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 300
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca779beb7d807e548be606b910d0c1d8
+      internalID: -254854166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_104
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 231
+        width: 49
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 488bc5dd5a8d4824c8cd7c38e0316ad7
+      internalID: 1761355027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_105
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 228
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f098b0bfb470404d90462537efbff9e
+      internalID: -1167807736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_106
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 221
+        width: 60
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1336591446c7777469a0fd12c744ba31
+      internalID: 2061219915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_107
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 224
+        width: 53
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c60b4a8a40d7c9746a02740e38afcc93
+      internalID: 742606885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_108
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 226
+        width: 49
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db769127b7f890e40adf86c1d73385b7
+      internalID: -2047437329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_109
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 224
+        width: 44
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9681bdd75cc2ada478e6c5d01ab3866d
+      internalID: -1648614070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_110
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 230
+        width: 54
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52fec63cb8e31c44d91d161f6cfe1d45
+      internalID: 709368373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_111
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 231
+        width: 52
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 783bf0eeccc063445bc57ca4b5b4396a
+      internalID: -1775082403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_112
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 223
+        width: 54
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 831a42786058adc47bb25b8e21ec0241
+      internalID: -220901201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_113
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 224
+        width: 54
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f86e435e76e21cd488e8ba499d5be281
+      internalID: -1735702539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_114
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 224
+        width: 66
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9af690293ba7871418dbfb453d20b101
+      internalID: 1532899696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_115
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 224
+        width: 54
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb9eb93ecbde35748b63cf24ee997950
+      internalID: 1555498065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_116
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 224
+        width: 54
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64bed595ec4498d43a3833184026be5a
+      internalID: 111719171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_117
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 224
+        width: 54
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ee67aaacdbf5f64cbdc7fdcc6db2faa
+      internalID: -1296662476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_118
+      rect:
+        serializedVersion: 2
+        x: 1017
+        y: 222
+        width: 54
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75519d16d7e670b45b751a50fa722504
+      internalID: 1344828160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_119
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 224
+        width: 54
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fce10507b82c91418545a80e7b307e0
+      internalID: -971902403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_120
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 152
+        width: 54
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c32967cf872fc94a9d462752c17fc65
+      internalID: 37036674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_121
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 156
+        width: 58
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 165da7ebca0454a4f99e80b9a9be4c58
+      internalID: -1100242128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_122
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 155
+        width: 60
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de3871d572529e44dbeb58d8e782f521
+      internalID: -1187848303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_123
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 151
+        width: 58
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e04bb917038e71a4e85d0485bee3d5b2
+      internalID: 1716057771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_124
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 158
+        width: 50
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d89226ae495a2d4bb6e6b36cc54cdd2
+      internalID: 1874532493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_125
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 159
+        width: 66
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d5f708ebed6d614daa247aacd95327f
+      internalID: 654026806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_126
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 150
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e45c66bf773128e4bb0091293e7b9831
+      internalID: 1109920733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_127
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 156
+        width: 54
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62c1d445ff3e35d49a1a00dd95dfb9f1
+      internalID: -1074523843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_128
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 156
+        width: 52
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e74235985adce34e8aa408ac53e8134
+      internalID: -1281572621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_129
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 156
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41d996125c0785140ba79e191d42af63
+      internalID: -1937188472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_130
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 193
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 476f48fee57119644940c4afb4c742a2
+      internalID: -1363698971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_131
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 156
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7824d33208a76dd4d855ccfb7e4098b4
+      internalID: 1606875149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_132
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 193
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 561c81f9f6c950e4bac9fa6ea6bc21f0
+      internalID: -125412909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_133
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 193
+        width: 22
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62b708ed88c769947b911f7cdf6441a4
+      internalID: -533021256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_134
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 185
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 171e6a03006385f45b788b1a6d125e30
+      internalID: -1727414550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_135
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 185
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea61db40801aaba448cee50257396e0f
+      internalID: -1313015377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_136
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 154
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14f2ddd9c63f1ee4c89a46dea91602df
+      internalID: 1022768823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_137
+      rect:
+        serializedVersion: 2
+        x: 1027
+        y: 171
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c3454b1dd77f0647bb9f7ab7a28bde5
+      internalID: -871252954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_138
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 154
+        width: 54
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ae45def955f03d4eaf98090cc3f3394
+      internalID: -1558219708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_139
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 156
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1f7fcdcaeb35fa459bd6b406e6949e3
+      internalID: -1254192462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_140
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 164
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8657c35b4a6759e4f9515599a06be20c
+      internalID: -859919475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_141
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 156
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9f36957d3eaba740bc2bd7f228a20ff
+      internalID: -1340130804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_142
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 155
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 994e7a7b2dd021d4f8a1f2fe2969c0c0
+      internalID: 1861942470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_143
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 84
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0b2e7ba6ead78f4e8af0a292d00fc31
+      internalID: 686628941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_144
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 84
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed993469be5db274296a3e5b667b4e3b
+      internalID: 556436217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_145
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 84
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e46f8d571e47ac04489775a30b7ab584
+      internalID: 84187987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_146
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 84
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd50d8482e8a05647b692d6ad9878aa1
+      internalID: -1046603243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_147
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 84
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2341b121ea1e5374b8a6529712a1091e
+      internalID: -1637292430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_148
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 84
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7512832fcba395c44ae42a807f6f73c8
+      internalID: 66248052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_149
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 84
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ede6dd533edac74b8677dc9a9eced34
+      internalID: 1078666355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_150
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 84
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: accf31051d4f7da419a7cdc861376133
+      internalID: -56966344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_151
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 84
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0444c1a05c9d3964394ba86b921e250e
+      internalID: -1326230397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_152
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 104
+        width: 12
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2aa8ba04161f15c4d8410e81884ef972
+      internalID: 1672847330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_153
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 104
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0b4c8164a4b321429f99bd5640ab341
+      internalID: 1158348382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_154
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 104
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 677a29d7911f8c74492f23eec7976d28
+      internalID: 1423452703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_155
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 89
+        width: 14
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 280349acb98f02d4abdb18147dd68129
+      internalID: 1843675548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_156
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 119
+        width: 38
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 825ea86422a4bd64d9cae44082080cb6
+      internalID: -1016328677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_157
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 89
+        width: 14
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 196971d444e050f45b2fa5cc8f50a33a
+      internalID: 1827705544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_158
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 80
+        width: 55
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d37776abd6cab2545b96f696d2431faf
+      internalID: -748873168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_159
+      rect:
+        serializedVersion: 2
+        x: 877
+        y: 82
+        width: 49
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51dc0da1ccac87540b62a78b8864c2d8
+      internalID: 391034877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_160
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 88
+        width: 29
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58eeaae11c65bca44adb026f1bf13454
+      internalID: -89759899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_161
+      rect:
+        serializedVersion: 2
+        x: 967
+        y: 108
+        width: 30
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d9b305bbbb7c0647ac29881b8951dc9
+      internalID: 363051833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_162
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 82
+        width: 65
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c34f07bfba5f1e4ba794ef7a6297fb9
+      internalID: 866820842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_163
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 93
+        width: 68
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32289c8e857f5e44495399ebb23f1b4c
+      internalID: -759290768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_164
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 95
+        width: 51
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57abe018936bbc440b4a19312be66656
+      internalID: -537558134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_165
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 83
+        width: 38
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05dae5f4b5b45d142a8bcf7991769b5b
+      internalID: -640336240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_166
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 84
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdbd4501581182c4997db615ecb43559
+      internalID: -763673902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_167
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 87
+        width: 51
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e42f0ef1894ae1349a90f9591302b43e
+      internalID: -907321726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_168
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 7
+        width: 52
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f11783529bf13c54bb0dc25a4b0aae79
+      internalID: -1407446159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_169
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 54
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7a49c772e1703f4fa4f9afdc09ec7d7
+      internalID: -5228900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_170
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 11
+        width: 48
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50cdd090a078b8742bab8806f4dac021
+      internalID: -2057045866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_171
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 8
+        width: 60
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4ef32ec033c2f546a962f9adcde2f15
+      internalID: -1065973153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_172
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 10
+        width: 48
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cbf9b5eb70b55c478ac22442f3a0019
+      internalID: 1878509776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_173
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 8
+        width: 56
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4e33860ef90e88489c1ac9f21b36bac
+      internalID: -1115644449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_174
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 9
+        width: 56
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb6f475fee19f644d901dca584edae81
+      internalID: -68971277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_175
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 38
+        width: 20
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fbb9eca2adf051488d2c80e40b90b92
+      internalID: 1690855549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_176
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 5
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 585597ac797fe57478d8231de9c7a616
+      internalID: -769102693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_177
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 19
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2fc79e5e15ab024da4eb85e52471aa5
+      internalID: 735037739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_178
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 5
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77b6c045981534c419c705d32325b3cc
+      internalID: -1407163715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smileys-emotion-00_179
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 5
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90e7c273a5f5fa84397d85eef411e9ac
+      internalID: -259886721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: b949ec1f2f4a09f41859135dd8271149
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      smileys-emotion-00_0: -547721705
+      smileys-emotion-00_1: 392000455
+      smileys-emotion-00_10: 1341916440
+      smileys-emotion-00_100: -1115077798
+      smileys-emotion-00_101: -1350919712
+      smileys-emotion-00_102: -955865612
+      smileys-emotion-00_103: -254854166
+      smileys-emotion-00_104: 1761355027
+      smileys-emotion-00_105: -1167807736
+      smileys-emotion-00_106: 2061219915
+      smileys-emotion-00_107: 742606885
+      smileys-emotion-00_108: -2047437329
+      smileys-emotion-00_109: -1648614070
+      smileys-emotion-00_11: 1947079000
+      smileys-emotion-00_110: 709368373
+      smileys-emotion-00_111: -1775082403
+      smileys-emotion-00_112: -220901201
+      smileys-emotion-00_113: -1735702539
+      smileys-emotion-00_114: 1532899696
+      smileys-emotion-00_115: 1555498065
+      smileys-emotion-00_116: 111719171
+      smileys-emotion-00_117: -1296662476
+      smileys-emotion-00_118: 1344828160
+      smileys-emotion-00_119: -971902403
+      smileys-emotion-00_12: 1819264746
+      smileys-emotion-00_120: 37036674
+      smileys-emotion-00_121: -1100242128
+      smileys-emotion-00_122: -1187848303
+      smileys-emotion-00_123: 1716057771
+      smileys-emotion-00_124: 1874532493
+      smileys-emotion-00_125: 654026806
+      smileys-emotion-00_126: 1109920733
+      smileys-emotion-00_127: -1074523843
+      smileys-emotion-00_128: -1281572621
+      smileys-emotion-00_129: -1937188472
+      smileys-emotion-00_13: -1004777023
+      smileys-emotion-00_130: -1363698971
+      smileys-emotion-00_131: 1606875149
+      smileys-emotion-00_132: -125412909
+      smileys-emotion-00_133: -533021256
+      smileys-emotion-00_134: -1727414550
+      smileys-emotion-00_135: -1313015377
+      smileys-emotion-00_136: 1022768823
+      smileys-emotion-00_137: -871252954
+      smileys-emotion-00_138: -1558219708
+      smileys-emotion-00_139: -1254192462
+      smileys-emotion-00_14: 220635492
+      smileys-emotion-00_140: -859919475
+      smileys-emotion-00_141: -1340130804
+      smileys-emotion-00_142: 1861942470
+      smileys-emotion-00_143: 686628941
+      smileys-emotion-00_144: 556436217
+      smileys-emotion-00_145: 84187987
+      smileys-emotion-00_146: -1046603243
+      smileys-emotion-00_147: -1637292430
+      smileys-emotion-00_148: 66248052
+      smileys-emotion-00_149: 1078666355
+      smileys-emotion-00_15: 1571885128
+      smileys-emotion-00_150: -56966344
+      smileys-emotion-00_151: -1326230397
+      smileys-emotion-00_152: 1672847330
+      smileys-emotion-00_153: 1158348382
+      smileys-emotion-00_154: 1423452703
+      smileys-emotion-00_155: 1843675548
+      smileys-emotion-00_156: -1016328677
+      smileys-emotion-00_157: 1827705544
+      smileys-emotion-00_158: -748873168
+      smileys-emotion-00_159: 391034877
+      smileys-emotion-00_16: -296564909
+      smileys-emotion-00_160: -89759899
+      smileys-emotion-00_161: 363051833
+      smileys-emotion-00_162: 866820842
+      smileys-emotion-00_163: -759290768
+      smileys-emotion-00_164: -537558134
+      smileys-emotion-00_165: -640336240
+      smileys-emotion-00_166: -763673902
+      smileys-emotion-00_167: -907321726
+      smileys-emotion-00_168: -1407446159
+      smileys-emotion-00_169: -5228900
+      smileys-emotion-00_17: -860241840
+      smileys-emotion-00_170: -2057045866
+      smileys-emotion-00_171: -1065973153
+      smileys-emotion-00_172: 1878509776
+      smileys-emotion-00_173: -1115644449
+      smileys-emotion-00_174: -68971277
+      smileys-emotion-00_175: 1690855549
+      smileys-emotion-00_176: -769102693
+      smileys-emotion-00_177: 735037739
+      smileys-emotion-00_178: -1407163715
+      smileys-emotion-00_179: -259886721
+      smileys-emotion-00_18: 156583258
+      smileys-emotion-00_19: -593665883
+      smileys-emotion-00_2: 1469251477
+      smileys-emotion-00_20: -887757921
+      smileys-emotion-00_21: 1227380626
+      smileys-emotion-00_22: -674644979
+      smileys-emotion-00_23: -1496928416
+      smileys-emotion-00_24: -975177011
+      smileys-emotion-00_25: -1988158172
+      smileys-emotion-00_26: -518284572
+      smileys-emotion-00_27: -430130595
+      smileys-emotion-00_28: -1081536319
+      smileys-emotion-00_29: 646160618
+      smileys-emotion-00_3: -266291956
+      smileys-emotion-00_30: 1536484650
+      smileys-emotion-00_31: 1486788759
+      smileys-emotion-00_32: 1403141963
+      smileys-emotion-00_33: 1611993746
+      smileys-emotion-00_34: 1385079438
+      smileys-emotion-00_35: -362430279
+      smileys-emotion-00_36: 2025398643
+      smileys-emotion-00_37: 1980872140
+      smileys-emotion-00_38: -1564889755
+      smileys-emotion-00_39: -909724709
+      smileys-emotion-00_4: -1737338297
+      smileys-emotion-00_40: 96114488
+      smileys-emotion-00_41: -346669039
+      smileys-emotion-00_42: -1475250206
+      smileys-emotion-00_43: -1082428242
+      smileys-emotion-00_44: -1820665238
+      smileys-emotion-00_45: 503214633
+      smileys-emotion-00_46: 1333440897
+      smileys-emotion-00_47: 1653462820
+      smileys-emotion-00_48: 480288848
+      smileys-emotion-00_49: 421527389
+      smileys-emotion-00_5: 1111315827
+      smileys-emotion-00_50: 1533249950
+      smileys-emotion-00_51: 1569000506
+      smileys-emotion-00_52: 1152914714
+      smileys-emotion-00_53: 1916118519
+      smileys-emotion-00_54: 863865467
+      smileys-emotion-00_55: -1904098598
+      smileys-emotion-00_56: -1304913059
+      smileys-emotion-00_57: -1722725829
+      smileys-emotion-00_58: 2089828295
+      smileys-emotion-00_59: 442708311
+      smileys-emotion-00_6: -1936262935
+      smileys-emotion-00_60: 726095340
+      smileys-emotion-00_61: -409928373
+      smileys-emotion-00_62: 968859424
+      smileys-emotion-00_63: 1782014120
+      smileys-emotion-00_64: 127098646
+      smileys-emotion-00_65: -1473820028
+      smileys-emotion-00_66: 516064320
+      smileys-emotion-00_67: -773851767
+      smileys-emotion-00_68: -1736532015
+      smileys-emotion-00_69: -1084114124
+      smileys-emotion-00_7: -132590246
+      smileys-emotion-00_70: 394894819
+      smileys-emotion-00_71: 1209403682
+      smileys-emotion-00_72: 782495875
+      smileys-emotion-00_73: -374213551
+      smileys-emotion-00_74: 1127114911
+      smileys-emotion-00_75: 338299567
+      smileys-emotion-00_76: 378311460
+      smileys-emotion-00_77: -1140739513
+      smileys-emotion-00_78: -336780508
+      smileys-emotion-00_79: 897550187
+      smileys-emotion-00_8: -464064498
+      smileys-emotion-00_80: 139926170
+      smileys-emotion-00_81: 860574685
+      smileys-emotion-00_82: -1763872616
+      smileys-emotion-00_83: -1853078180
+      smileys-emotion-00_84: 1242154530
+      smileys-emotion-00_85: -1888109051
+      smileys-emotion-00_86: -1725433124
+      smileys-emotion-00_87: -1705590844
+      smileys-emotion-00_88: -586607881
+      smileys-emotion-00_89: 751436524
+      smileys-emotion-00_9: 1645132521
+      smileys-emotion-00_90: 1279203751
+      smileys-emotion-00_91: 218004026
+      smileys-emotion-00_92: -420600618
+      smileys-emotion-00_93: -366701300
+      smileys-emotion-00_94: 907425155
+      smileys-emotion-00_95: 2127481533
+      smileys-emotion-00_96: -143710719
+      smileys-emotion-00_97: -736370945
+      smileys-emotion-00_98: -374789138
+      smileys-emotion-00_99: -373128202
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

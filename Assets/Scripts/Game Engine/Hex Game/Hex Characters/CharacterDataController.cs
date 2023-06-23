@@ -336,7 +336,7 @@ namespace HexGameEngine.Characters
             newCharacter.currentXP = original.currentXP;
             newCharacter.dailyWage = original.dailyWage;
             newCharacter.perkPoints = original.perkPoints;
-            newCharacter.PerkTree = original.PerkTree;
+            newCharacter.PerkTree = new PerkTreeData(original);
 
             // Set stress
             newCharacter.currentStress = original.currentStress;
@@ -503,7 +503,7 @@ namespace HexGameEngine.Characters
         {
             foreach(HexCharacterData c in AllPlayerCharacters)
             {
-                SetCharacterStress(c, c.currentStress - 1);
+                //SetCharacterStress(c, c.currentStress - 1);
                 SetCharacterHealth(c, c.currentHealth + (int)(StatCalculator.GetTotalMaxHealth(c) * 0.1f));
             }
         }

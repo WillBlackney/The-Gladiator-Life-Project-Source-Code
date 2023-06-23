@@ -14,19 +14,19 @@ namespace HexGameEngine.Characters
         public ItemData item;
         public AbilityData abilityAwarded;
 
-        public CombatRewardData(CombatDifficulty difficulty)
+        public CombatRewardData(CombatDifficulty difficulty, int deploymentLimit)
         {
             if (difficulty == CombatDifficulty.Basic)
-                BuildAsBasicReward(this);
+                BuildAsBasicReward(this, deploymentLimit);
             else if (difficulty == CombatDifficulty.Elite)
-                BuildAsEliteReward(this);
+                BuildAsEliteReward(this, deploymentLimit);
             else if (difficulty == CombatDifficulty.Boss)
                 BuildAsBossReward(this);
         }
 
-        private void BuildAsBasicReward(CombatRewardData crd)
+        private void BuildAsBasicReward(CombatRewardData crd, int deploymentLimit)
         {
-            int maxGoldSum = 650;
+            int maxGoldSum = 250 * deploymentLimit;
             int baseGoldReward = (int) (maxGoldSum * GetActsPassedGoldRewardModifier());
             int lowerGoldReward = (int) (baseGoldReward * 0.9f);
             int upperGoldReward = (int)(baseGoldReward * 1.1f);
@@ -37,9 +37,9 @@ namespace HexGameEngine.Characters
             crd.goldAmount = baseGoldReward - crd.item.baseGoldValue;
             if (crd.goldAmount < 50) crd.goldAmount = 50;
         }
-        private void BuildAsEliteReward(CombatRewardData crd)
+        private void BuildAsEliteReward(CombatRewardData crd, int deploymentLimit)
         {
-            int maxGoldSum = 1250;
+            int maxGoldSum = 400 * deploymentLimit;
             int baseGoldReward = (int)(maxGoldSum * GetActsPassedGoldRewardModifier());
             int lowerGoldReward = (int)(baseGoldReward * 0.9f);
             int upperGoldReward = (int)(baseGoldReward * 1.1f);
@@ -52,7 +52,7 @@ namespace HexGameEngine.Characters
         }
         private void BuildAsBossReward(CombatRewardData crd)
         {
-            int maxGoldSum = 2000;
+            int maxGoldSum = 2500;
             int baseGoldReward = (int)(maxGoldSum * GetActsPassedGoldRewardModifier());
             int lowerGoldReward = (int)(baseGoldReward * 0.9f);
             int upperGoldReward = (int)(baseGoldReward * 1.1f);

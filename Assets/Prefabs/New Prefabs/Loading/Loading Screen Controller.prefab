@@ -888,10 +888,128 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0ecad5bea01447140ab0405c5c2ecd87, type: 3}
   - {fileID: 21300000, guid: 02a65e9c37bb03a4e8ea679661a99647, type: 3}
   allTips:
-  - Tip 1 lorem ipsum lorem ipsum lorem ipsum
-  - Tip 2 lorem ipsum lorem ipsum lorem ipsum
-  - Tip 3 lorem ipsum lorem ipsum lorem ipsum
-  - Tip 4 lorem ipsum lorem ipsum lorem ipsum
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Roses are '
+    - color: 10
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: red
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: ', violets are '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: blue
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: ', most poems rhyme, but this one doesn''t...'
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Occasionly it is advantageous to bring a weapon into combat.
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: "If you're not sure what to do, consider doing something. It's better
+        than doing nothing, but not always\u2026"
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Action Points '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'are required to do things that require '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Action Points
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: .
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'The more damage you deal, the less '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Health '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: your target will have.
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Positioning your units strategically can sometimes make a difference
+        in battles. Or not.
+  - message:
+    - color: 0
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Make sure to read the descriptions of your abilities. Sometimes they
+        contain useful information.
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Use '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Bows '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: "for when you want to stab someone, but don\u2019t feel like walking
+        over to them."
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Only pussies wear '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Armour '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: "in the arena. Are you a pussy? Didn\u2019t think so\u2026"
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'At the start of each day, characters passively recover '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '10% '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'of their '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Health
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: .
 --- !u!1 &5335863795943007318
 GameObject:
   m_ObjectHideFlags: 0
