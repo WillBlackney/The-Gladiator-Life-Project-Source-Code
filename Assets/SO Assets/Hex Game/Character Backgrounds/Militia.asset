@@ -23,7 +23,7 @@ MonoBehaviour:
   upperLevelLimit: 1
   dailyWageMin: 9
   dailyWageMax: 11
-  baseRecruitCost: 75
+  baseRecruitCost: 50
   mightLower: 0
   mightUpper: 0
   constitutionLower: 0

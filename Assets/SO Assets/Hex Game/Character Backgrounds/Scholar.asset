@@ -29,15 +29,15 @@ MonoBehaviour:
   constitutionLower: -5
   constitutionUpper: 0
   accuracyLower: 5
-  accuracyUpper: 0
-  dodgeLower: 0
-  dodgeUpper: 0
+  accuracyUpper: 2
+  dodgeLower: 2
+  dodgeUpper: 2
   fatigueLower: 0
   fatigueUpper: 0
   resolveLower: -2
   resolveUpper: -3
-  witsLower: 3
-  witsUpper: 5
+  witsLower: 5
+  witsUpper: 7
   minStartingAbilities: 1
   maxStartingAbilities: 2
   validRaces: 0100000003000000040000000600000005000000

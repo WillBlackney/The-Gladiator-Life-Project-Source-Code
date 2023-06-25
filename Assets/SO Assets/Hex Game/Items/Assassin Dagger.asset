@@ -18,7 +18,7 @@ MonoBehaviour:
   itemType: 3
   rarity: 3
   fatiguePenalty: 0
-  baseGoldValue: 400
+  baseGoldValue: 600
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -54,6 +54,28 @@ MonoBehaviour:
       innateAccuracyAgainstAdjacentMod: 0
       innateWeaponRangeBonus: 0
       innateBackstabPenetrationBonus: 25
+      innatePerkGainedOnUse:
+        perkTag: 0
+        stacks: 0
+        freshInjury: 0
+  - possibleEffects:
+    - effectType: 1
+      attributeModified: 21
+      modAmount: 10
+      perkGained:
+        perkTag: 0
+        stacks: 0
+        freshInjury: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+      innateItemEffectType: 0
+      innateAccuracyMod: 0
+      innateAccuracyAgainstAdjacentMod: 0
+      innateWeaponRangeBonus: 0
+      innateBackstabPenetrationBonus: 0
       innatePerkGainedOnUse:
         perkTag: 0
         stacks: 0

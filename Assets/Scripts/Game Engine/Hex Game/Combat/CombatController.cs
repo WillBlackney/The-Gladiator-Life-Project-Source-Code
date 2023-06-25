@@ -130,6 +130,10 @@ namespace HexGameEngine.Combat
             else if (effect != null && damageType == DamageType.Magic)
                 damageModPercentageAdditive += StatCalculator.GetTotalMagicDamageBonus(attacker) * 0.01f;
 
+            if (effect != null && weaponUsed != null && ability != null && ability.abilityType.Contains(AbilityType.WeaponAttack))
+                damageModPercentageAdditive += StatCalculator.GetTotalWeaponDamageBonus(attacker) * 0.01f;
+                        
+
             // Add critical modifier to damage mod
             if (didCrit && attacker != null && effect != null)
             {
@@ -310,15 +314,6 @@ namespace HexGameEngine.Combat
                 lowerDamageFinal -= reduction;
                 upperDamageFinal -= reduction;
             }
-
-            // For testing: remove later
-            /*
-            if (effect != null)
-            {
-                baseDamageFinal = (int)(baseDamageFinal * 1.5f);
-                lowerDamageFinal = (int)(lowerDamageFinal * 1.5f);
-                upperDamageFinal = (int)(upperDamageFinal * 1.5f);
-            } */
 
             // Prevent damage gong negative
             if (baseDamageFinal < 0) baseDamageFinal = 0;

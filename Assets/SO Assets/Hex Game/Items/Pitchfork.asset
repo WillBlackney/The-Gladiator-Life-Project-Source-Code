@@ -19,8 +19,8 @@ MonoBehaviour:
   itemType: 3
   rarity: 1
   fatiguePenalty: 12
-  baseGoldValue: 150
-  canSpawnInShop: 1
+  baseGoldValue: 75
+  canSpawnInShop: 0
   canBeCombatContractReward: 0
   includeInLibrary: 1
   weaponClass: 7
@@ -29,8 +29,8 @@ MonoBehaviour:
   injuryTypesCaused: 01000000
   weaponAttackAnimationType: 1
   healthDamage: 1
-  armourDamage: 0.75
-  armourPenetration: 0.3
+  armourDamage: 0.65
+  armourPenetration: 0.25
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

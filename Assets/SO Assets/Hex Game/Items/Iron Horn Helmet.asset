@@ -19,7 +19,7 @@ MonoBehaviour:
   itemType: 1
   rarity: 2
   fatiguePenalty: 5
-  baseGoldValue: 300
+  baseGoldValue: 250
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1

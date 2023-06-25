@@ -23,7 +23,7 @@ MonoBehaviour:
   upperLevelLimit: 2
   dailyWageMin: 23
   dailyWageMax: 27
-  baseRecruitCost: 100
+  baseRecruitCost: 75
   mightLower: -3
   mightUpper: -2
   constitutionLower: -5
@@ -53,7 +53,6 @@ MonoBehaviour:
     possibleWeaponLoadouts:
     - mainHandProspects:
       - {fileID: 11400000, guid: aa1a47e725a62694ba9484249adb7fe8, type: 2}
-      - {fileID: 11400000, guid: ab6f2b51cf50eaa43bba82ed52ef5342, type: 2}
       offhandProspects: []
     possibleArmourLoadouts:
     - headProspects: []

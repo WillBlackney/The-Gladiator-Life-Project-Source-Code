@@ -18,12 +18,12 @@ MonoBehaviour:
     about everything. Except dying. They\u2019re pretty good at that! They also have
     no fear of death since their lives are so miserable, so there's that too."
   recruitable: 1
-  spawnChance: 80
+  spawnChance: 60
   lowerLevelLimit: 1
   upperLevelLimit: 1
   dailyWageMin: 0
   dailyWageMax: 0
-  baseRecruitCost: 75
+  baseRecruitCost: 25
   mightLower: -2
   mightUpper: -3
   constitutionLower: -10
@@ -42,16 +42,17 @@ MonoBehaviour:
   maxStartingAbilities: 1
   validRaces: 01000000050000000600000007000000
   loadoutBuckets:
-  - possibleStartingTalents: 0200000003000000050000000e000000
+  - possibleStartingTalents: 020000000300000005000000
     possibleAbilities:
     - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
     - {fileID: 11400000, guid: 1900acc88f1878541b128ad5ff956abd, type: 2}
-    - {fileID: 11400000, guid: b797b73cc067e4042b5552ae13740736, type: 2}
     - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
-    - {fileID: 11400000, guid: f2990956e456afa46af43accbd061445, type: 2}
-    - {fileID: 11400000, guid: 385eb82f67d124d4abc1d1f902f08086, type: 2}
-    - {fileID: 11400000, guid: 93cee488ab4e9164293b4bc8942276cd, type: 2}
-    possibleWeaponLoadouts: []
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: 847d00f4966178c4abee14ecc0368bdf, type: 2}
+      - {fileID: 11400000, guid: 0a8d9a141bbfe1c40854bc4a6ae1dc73, type: 2}
+      - {fileID: 11400000, guid: 005acd1971ac4a441b18a990b77c5206, type: 2}
+      offhandProspects: []
     possibleArmourLoadouts:
     - headProspects: []
       bodyProspects:

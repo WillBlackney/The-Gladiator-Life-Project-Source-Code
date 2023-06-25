@@ -17,9 +17,9 @@ MonoBehaviour:
   itemDescription: A modest polearm with a hooked blade for striking over some long
     distances.
   itemType: 3
-  rarity: 2
+  rarity: 1
   fatiguePenalty: 12
-  baseGoldValue: 700
+  baseGoldValue: 250
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -30,7 +30,7 @@ MonoBehaviour:
   weaponAttackAnimationType: 0
   healthDamage: 1
   armourDamage: 1
-  armourPenetration: 0.3
+  armourPenetration: 0.25
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:
