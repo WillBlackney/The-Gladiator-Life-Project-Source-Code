@@ -317,7 +317,6 @@ namespace HexGameEngine.Characters
             character.race = data.race;
             character.background = data.background;
             character.audioProfile = data.audioProfile;
-
             // Setup stats
             character.attributeSheet = new AttributeSheet();
             data.attributeSheet.CopyValuesIntoOther(character.attributeSheet);      
@@ -361,7 +360,6 @@ namespace HexGameEngine.Characters
             character.race = data.race;
             character.characterData = data;
             character.audioProfile = data.audioProfile;
-
             // Setup stats
             character.attributeSheet = new AttributeSheet();
             data.attributeSheet.CopyValuesIntoOther(character.attributeSheet);
@@ -1506,7 +1504,7 @@ namespace HexGameEngine.Characters
             if (IsCharacterAbleToTakeActions(character))
             {
                 VisualEventManager.CreateVisualEvent(() => 
-                    AudioManager.Instance.PlaySound(character.audioProfile, AudioSet.TurnStart)).SetEndDelay(0.25f);
+                    AudioManager.Instance.PlaySound(character.AudioProfile, AudioSet.TurnStart)).SetEndDelay(0.25f);
             }
 
             // Check effects that are triggered on the first turn only

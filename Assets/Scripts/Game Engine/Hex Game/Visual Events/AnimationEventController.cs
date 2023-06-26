@@ -112,7 +112,7 @@ namespace HexGameEngine.VisualEvents
                 TaskTracker cData = new TaskTracker();
                 VisualEventManager.CreateVisualEvent(() =>
                 {
-                    AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
+                    AudioManager.Instance.PlaySound(user.AudioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerMeleeAttackAnimation(user.hexCharacterView, targetView.WorldPosition, weaponUsed, cData);
                 }, stackEvent).SetCoroutineData(cData);
             
@@ -144,7 +144,7 @@ namespace HexGameEngine.VisualEvents
                 TaskTracker cData = new TaskTracker();
                 VisualEventManager.CreateVisualEvent(() =>
                 {
-                    AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
+                    AudioManager.Instance.PlaySound(user.AudioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerOffhandPushAnimation(user.hexCharacterView, targetView.WorldPosition, cData);
                 }, stackEvent).SetCoroutineData(cData);
             }
@@ -163,7 +163,7 @@ namespace HexGameEngine.VisualEvents
                 TaskTracker cData = new TaskTracker();
                 VisualEventManager.CreateVisualEvent(() =>
                 {
-                    AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
+                    AudioManager.Instance.PlaySound(user.AudioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerShieldBashAnimation(user.hexCharacterView, targetView.WorldPosition, cData); 
                 }, stackEvent).SetCoroutineData(cData);
             }
@@ -173,7 +173,7 @@ namespace HexGameEngine.VisualEvents
                 TaskTracker cData = new TaskTracker();
                 VisualEventManager.CreateVisualEvent(() =>
                 {
-                    AudioManager.Instance.PlaySound(user.audioProfile, AudioSet.Attack);
+                    AudioManager.Instance.PlaySound(user.AudioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerAoeMeleeAttackAnimation(user.hexCharacterView, weaponUsed, cData);
                 }, stackEvent).SetCoroutineData(cData);
             }

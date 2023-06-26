@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Test
   mySubName: The Testy
-  race: 1
+  race: 3
   background: 1
   modelSize: 0
   attributeSheet:

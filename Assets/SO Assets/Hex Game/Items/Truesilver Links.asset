@@ -22,7 +22,7 @@ MonoBehaviour:
   baseGoldValue: 2000
   canSpawnInShop: 1
   canBeCombatContractReward: 1
-  includeInLibrary: 1
+  includeInLibrary: 0
   weaponClass: 0
   handRequirement: 0
   allowedSlot: 0

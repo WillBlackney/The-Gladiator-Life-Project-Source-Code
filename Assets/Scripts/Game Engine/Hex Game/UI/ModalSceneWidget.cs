@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using HexGameEngine.CameraSystems;
 using TMPro;
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 
 namespace HexGameEngine.UI
 {
@@ -20,6 +21,7 @@ namespace HexGameEngine.UI
         [ShowIf("ShowCustomDataFields")]
         public string headerMessage;
         [ShowIf("ShowCustomDataFields")]
+        [OdinSerialize]
         public List<CustomString> descriptionMessage;
         [ShowIf("ShowCustomDataFields")]
         public Sprite headerSprite;

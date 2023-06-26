@@ -73,6 +73,20 @@ namespace HexGameEngine.Characters
             set { perkTree = value; }
         }
 
-       
+        public AudioProfileType AudioProfile
+        {
+            get
+            {
+                if(audioProfile == AudioProfileType.None &&
+                    CharacterDataController.Instance != null)
+                {
+                    audioProfile = CharacterDataController.Instance.GetAudioProfileForRace(race);
+                }
+                return audioProfile;
+            }
+        }
+
+
+
     }
 }

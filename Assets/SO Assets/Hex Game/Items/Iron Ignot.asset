@@ -17,11 +17,11 @@ MonoBehaviour:
   itemDescription: A heavy and solid block of iron, used by blacksmiths and craftsmen
     to create sturdy and durable objects.
   itemType: 4
-  rarity: 1
+  rarity: 2
   fatiguePenalty: 0
   baseGoldValue: 500
   canSpawnInShop: 1
-  canBeCombatContractReward: 0
+  canBeCombatContractReward: 1
   includeInLibrary: 1
   weaponClass: 0
   handRequirement: 0

@@ -37,30 +37,6 @@ MonoBehaviour:
     source: {fileID: 0}
     fadingIn: 0
     fadingOut: 0
-  hurtSounds:
-  - audioClip: {fileID: 0}
-    randomizeClip: 1
-    audioClips:
-    - {fileID: 8300000, guid: 87ac53324e04c4c44a477720129d1df5, type: 3}
-    - {fileID: 8300000, guid: fe422bde851f75a44af759bc7bde5e22, type: 3}
-    - {fileID: 8300000, guid: de1225cdd9b3f0a4cb0f838962464dec, type: 3}
-    - {fileID: 8300000, guid: b8446389ffdbe944ca46c8d6f05f0097, type: 3}
-    - {fileID: 8300000, guid: a82187ddd6a5f554682ffbdc8ce58cd1, type: 3}
-    - {fileID: 8300000, guid: 0a644d13d6108504d824e3b66d410f4a, type: 3}
-    soundType: 0
-    combatCategory: 0
-    randomizeVolume: 0
-    randomVolumeLowerLimit: 0.3
-    randomVolumeUpperLimit: 0.4
-    volume: 0.3
-    randomizePitch: 0
-    randomPitchLowerLimit: 0.8
-    randomPitchUpperLimit: 1.2
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-    fadingIn: 0
-    fadingOut: 0
   dieSounds:
   - audioClip: {fileID: 0}
     randomizeClip: 1
@@ -85,15 +61,40 @@ MonoBehaviour:
     source: {fileID: 0}
     fadingIn: 0
     fadingOut: 0
+  hurtSounds:
+  - audioClip: {fileID: 0}
+    randomizeClip: 1
+    audioClips:
+    - {fileID: 8300000, guid: 87ac53324e04c4c44a477720129d1df5, type: 3}
+    - {fileID: 8300000, guid: fe422bde851f75a44af759bc7bde5e22, type: 3}
+    - {fileID: 8300000, guid: de1225cdd9b3f0a4cb0f838962464dec, type: 3}
+    - {fileID: 8300000, guid: b8446389ffdbe944ca46c8d6f05f0097, type: 3}
+    - {fileID: 8300000, guid: a82187ddd6a5f554682ffbdc8ce58cd1, type: 3}
+    - {fileID: 8300000, guid: 0a644d13d6108504d824e3b66d410f4a, type: 3}
+    soundType: 0
+    combatCategory: 0
+    randomizeVolume: 0
+    randomVolumeLowerLimit: 0.3
+    randomVolumeUpperLimit: 0.4
+    volume: 0.3
+    randomizePitch: 0
+    randomPitchLowerLimit: 0.8
+    randomPitchUpperLimit: 1.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    fadingIn: 0
+    fadingOut: 0
   turnStartSounds:
   - audioClip: {fileID: 0}
     randomizeClip: 1
     audioClips:
-    - {fileID: 8300000, guid: b76bfaf88c44cb2408ab66d3817f8b94, type: 3}
-    - {fileID: 8300000, guid: 98fda598c2673ac4cb862c9c5df5a56d, type: 3}
-    - {fileID: 8300000, guid: c770348ef23c861409515179b96946ab, type: 3}
-    - {fileID: 8300000, guid: 45eeb157fa1f3ce4fb1bdd3b425d9b2c, type: 3}
-    - {fileID: 8300000, guid: 40f53e8541273fc42ad5182f6074dd48, type: 3}
+    - {fileID: 8300000, guid: a6819ad4639a5874192a38c66290f2a0, type: 3}
+    - {fileID: 8300000, guid: 8a5a885e603720142b5df6339bc897e4, type: 3}
+    - {fileID: 8300000, guid: a3e76e7654a18ec4d909bdffaed2e2fa, type: 3}
+    - {fileID: 8300000, guid: 4de3934aba2b85f42bc199b9d674ea83, type: 3}
+    - {fileID: 8300000, guid: a59af77b27c1bbc42af8f4a6e202d559, type: 3}
+    - {fileID: 8300000, guid: c2381e3b88c15a24493ae2695c567318, type: 3}
     soundType: 0
     combatCategory: 0
     randomizeVolume: 0

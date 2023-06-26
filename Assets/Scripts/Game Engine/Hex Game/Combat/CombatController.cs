@@ -3,7 +3,6 @@ using HexGameEngine.HexTiles;
 using HexGameEngine.TurnLogic;
 using HexGameEngine.UCM;
 using HexGameEngine.Items;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using HexGameEngine.Abilities;
@@ -12,13 +11,11 @@ using HexGameEngine.Utilities;
 using HexGameEngine.VisualEvents;
 using HexGameEngine.JourneyLogic;
 using HexGameEngine.UI;
-using HexGameEngine.Persistency;
 using System.Linq;
 using HexGameEngine.Player;
 using HexGameEngine.Audio;
 using DG.Tweening;
 using HexGameEngine.CameraSystems;
-using UnityEngine.TextCore.Text;
 
 namespace HexGameEngine.Combat
 {
@@ -1290,7 +1287,7 @@ namespace HexGameEngine.Combat
                 VisualEventManager.CreateVisualEvent(() =>
                 {
                     HexCharacterController.Instance.PlayHurtAnimation(target.hexCharacterView);
-                    AudioManager.Instance.PlaySound(target.audioProfile, AudioSet.Hurt);
+                    AudioManager.Instance.PlaySound(target.AudioProfile, AudioSet.Hurt);
                 }, parentEvent);               
             }
 
@@ -1684,7 +1681,7 @@ namespace HexGameEngine.Combat
             {
                 int spatters = 2;
                 character.hexCharacterView.ucm.RootSortingGroup.sortingOrder = character.hexCharacterView.ucm.RootSortingGroup.sortingOrder - 1;
-                AudioManager.Instance.PlaySound(character.audioProfile, AudioSet.Die);
+                AudioManager.Instance.PlaySound(character.AudioProfile, AudioSet.Die);
                
                 Vector3 finalPos = new Vector3(view.ucmMovementParent.transform.position.x + randX, view.ucmMovementParent.transform.position.y + randY, view.ucmMovementParent.transform.position.z);
                 view.ucmMovementParent.transform.DOMove(finalPos, 0.5f);

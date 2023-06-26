@@ -91,6 +91,19 @@ namespace HexGameEngine.Characters
 
         public List<TalentPairing> talentPairings = new List<TalentPairing>();
 
+        public AudioProfileType AudioProfile
+        {
+            get
+            {
+                if (audioProfile == AudioProfileType.None &&
+                    CharacterDataController.Instance != null)
+                {
+                    audioProfile = CharacterDataController.Instance.GetAudioProfileForRace(race);
+                }
+                return audioProfile;
+            }
+        }
+
         // Stack Event Logic
         #region
         public VisualEvent GetLastStackEventParent()

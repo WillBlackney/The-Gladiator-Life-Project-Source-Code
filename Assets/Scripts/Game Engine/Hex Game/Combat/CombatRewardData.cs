@@ -17,46 +17,52 @@ namespace HexGameEngine.Characters
         public CombatRewardData(CombatDifficulty difficulty, int deploymentLimit)
         {
             if (difficulty == CombatDifficulty.Basic)
-                BuildAsBasicReward(this, deploymentLimit);
+                BuildAsOneSkullReward(this, deploymentLimit);
             else if (difficulty == CombatDifficulty.Elite)
-                BuildAsEliteReward(this, deploymentLimit);
+                BuildAsTwoSkullReward(this, deploymentLimit);
             else if (difficulty == CombatDifficulty.Boss)
-                BuildAsBossReward(this);
+                BuildAsThreeSkullReward(this);
         }
 
-        private void BuildAsBasicReward(CombatRewardData crd, int deploymentLimit)
+        private void BuildAsOneSkullReward(CombatRewardData crd, int deploymentLimit)
         {
-            int maxGoldSum = 250 * deploymentLimit;
+            int maxGoldSum = 750;
+            int deploymentBonus = (deploymentLimit - 3) * 150;
+            if (deploymentBonus > 0) maxGoldSum += deploymentBonus;
+
             int baseGoldReward = (int) (maxGoldSum * GetActsPassedGoldRewardModifier());
-            int lowerGoldReward = (int) (baseGoldReward * 0.9f);
-            int upperGoldReward = (int)(baseGoldReward * 1.1f);
+            int lowerGoldReward = (int) (baseGoldReward * 0.95f);
+            int upperGoldReward = (int)(baseGoldReward * 1.05f);
             baseGoldReward = RandomGenerator.NumberBetween(lowerGoldReward, upperGoldReward);
 
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
-            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems((int)(baseGoldReward * 0.25f), (int)(baseGoldReward * 0.85f)).ShuffledCopy()[0]);
+            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(375, 525).ShuffledCopy()[0]);
             crd.goldAmount = baseGoldReward - crd.item.baseGoldValue;
             if (crd.goldAmount < 50) crd.goldAmount = 50;
         }
-        private void BuildAsEliteReward(CombatRewardData crd, int deploymentLimit)
+        private void BuildAsTwoSkullReward(CombatRewardData crd, int deploymentLimit)
         {
-            int maxGoldSum = 400 * deploymentLimit;
+            int maxGoldSum = 1250;
+            int deploymentBonus = (deploymentLimit - 3) * 150;
+            if (deploymentBonus > 0) maxGoldSum += deploymentBonus;
+
             int baseGoldReward = (int)(maxGoldSum * GetActsPassedGoldRewardModifier());
-            int lowerGoldReward = (int)(baseGoldReward * 0.9f);
-            int upperGoldReward = (int)(baseGoldReward * 1.1f);
+            int lowerGoldReward = (int)(baseGoldReward * 0.95f);
+            int upperGoldReward = (int)(baseGoldReward * 1.05f);
             baseGoldReward = RandomGenerator.NumberBetween(lowerGoldReward, upperGoldReward);
 
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
-            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems((int) (baseGoldReward * 0.25f), (int)(baseGoldReward * 0.85f)).ShuffledCopy()[0]);
+            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(550, 1025).ShuffledCopy()[0]);
             crd.goldAmount = baseGoldReward - crd.item.baseGoldValue;
             if (crd.goldAmount < 50) crd.goldAmount = 50;
         }
-        private void BuildAsBossReward(CombatRewardData crd)
+        private void BuildAsThreeSkullReward(CombatRewardData crd)
         {
             int maxGoldSum = 2500;
             int baseGoldReward = (int)(maxGoldSum * GetActsPassedGoldRewardModifier());
-            int lowerGoldReward = (int)(baseGoldReward * 0.9f);
-            int upperGoldReward = (int)(baseGoldReward * 1.1f);
-            baseGoldReward = RandomGenerator.NumberBetween(lowerGoldReward, upperGoldReward);
+            //int lowerGoldReward = (int)(baseGoldReward * 0.9f);
+           // int upperGoldReward = (int)(baseGoldReward * 1.1f);
+            //baseGoldReward = RandomGenerator.NumberBetween(lowerGoldReward, upperGoldReward);
 
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
             crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems((int)(baseGoldReward * 0.25f), (int)(baseGoldReward * 0.85f)).ShuffledCopy()[0]);

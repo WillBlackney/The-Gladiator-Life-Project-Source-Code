@@ -12,34 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0143ea8370e98b44b8a53bc93da6fa7, type: 3}
   m_Name: Undead_1
   m_EditorClassIdentifier: 
-  audioProfileType: 1
+  audioProfileType: 4
   meleeAttackSounds:
   - audioClip: {fileID: 0}
     randomizeClip: 1
     audioClips:
     - {fileID: 8300000, guid: f671578fb01b254469c6540d2ce7e080, type: 3}
     - {fileID: 8300000, guid: aef675a69cf0d2a47b88383c13281efd, type: 3}
-    soundType: 0
-    combatCategory: 0
-    randomizeVolume: 0
-    randomVolumeLowerLimit: 0.3
-    randomVolumeUpperLimit: 0.4
-    volume: 0.3
-    randomizePitch: 0
-    randomPitchLowerLimit: 0.8
-    randomPitchUpperLimit: 1.2
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-    fadingIn: 0
-    fadingOut: 0
-  hurtSounds:
-  - audioClip: {fileID: 0}
-    randomizeClip: 1
-    audioClips:
-    - {fileID: 8300000, guid: 57920bcea92ce0041b2435ed13b49b23, type: 3}
-    - {fileID: 8300000, guid: 0ef264df449a3ce4087ae8b529312a24, type: 3}
-    - {fileID: 8300000, guid: 329e5584aadba5a46a84bee0a0d78534, type: 3}
     soundType: 0
     combatCategory: 0
     randomizeVolume: 0
@@ -63,6 +42,27 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 89fd91d26a709fa45a2434cbc82a4e28, type: 3}
     - {fileID: 8300000, guid: 0d9624bbeffb2f544950c087595c6b52, type: 3}
     - {fileID: 8300000, guid: 8a13c8956418db44da39cf68a3aada01, type: 3}
+    soundType: 0
+    combatCategory: 0
+    randomizeVolume: 0
+    randomVolumeLowerLimit: 0.3
+    randomVolumeUpperLimit: 0.4
+    volume: 0.3
+    randomizePitch: 0
+    randomPitchLowerLimit: 0.8
+    randomPitchUpperLimit: 1.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    fadingIn: 0
+    fadingOut: 0
+  hurtSounds:
+  - audioClip: {fileID: 0}
+    randomizeClip: 1
+    audioClips:
+    - {fileID: 8300000, guid: 57920bcea92ce0041b2435ed13b49b23, type: 3}
+    - {fileID: 8300000, guid: 0ef264df449a3ce4087ae8b529312a24, type: 3}
+    - {fileID: 8300000, guid: 329e5584aadba5a46a84bee0a0d78534, type: 3}
     soundType: 0
     combatCategory: 0
     randomizeVolume: 0

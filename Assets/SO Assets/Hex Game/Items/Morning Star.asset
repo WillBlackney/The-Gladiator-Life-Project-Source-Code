@@ -36,7 +36,29 @@ MonoBehaviour:
   grantedAbilities:
   - {fileID: 11400000, guid: ba24d48ee36272141ba5f17b68d432dd, type: 2}
   - {fileID: 11400000, guid: 559f58196d604614ba752161e53b302c, type: 2}
-  itemEffectSets: []
+  itemEffectSets:
+  - possibleEffects:
+    - effectType: 1
+      attributeModified: 21
+      modAmount: 5
+      perkGained:
+        perkTag: 0
+        stacks: 0
+        freshInjury: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+      innateItemEffectType: 0
+      innateAccuracyMod: 0
+      innateAccuracyAgainstAdjacentMod: 0
+      innateWeaponRangeBonus: 0
+      innateBackstabPenetrationBonus: 0
+      innatePerkGainedOnUse:
+        perkTag: 0
+        stacks: 0
+        freshInjury: 0
   equipSFX: 121
   swingSFX: 71
   hitSFX: 72

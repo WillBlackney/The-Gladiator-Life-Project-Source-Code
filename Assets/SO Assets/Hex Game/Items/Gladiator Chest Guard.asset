@@ -22,7 +22,7 @@ MonoBehaviour:
   fatiguePenalty: 14
   baseGoldValue: 575
   canSpawnInShop: 0
-  canBeCombatContractReward: 0
+  canBeCombatContractReward: 1
   includeInLibrary: 1
   weaponClass: 0
   handRequirement: 0

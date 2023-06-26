@@ -200,8 +200,6 @@ namespace HexGameEngine.TownFeatures
         #region
         public void GenerateDailyRecruits(int amount)
         {
-            // testing, remove later
-            amount = 50;
             currentRecruits.Clear();
             for (int i = 0; i < amount; i++)
                 HandleAddNewRecruitFromCharacterDeck();
@@ -279,7 +277,7 @@ namespace HexGameEngine.TownFeatures
             if (tab.MyCharacterData == null) return;
             if (selectedRecruitTab != null)
             {
-                AudioManager.Instance.PlaySound(tab.MyCharacterData.audioProfile, AudioSet.TurnStart);
+                AudioManager.Instance.PlaySound(tab.MyCharacterData.AudioProfile, AudioSet.TurnStart);
                 selectedRecruitTab.SelectedParent.SetActive(false);
             }
             selectedRecruitTab = tab;

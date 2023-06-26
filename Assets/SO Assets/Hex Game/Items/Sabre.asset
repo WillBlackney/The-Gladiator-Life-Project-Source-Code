@@ -38,6 +38,28 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1713d32b778f4234395baaab4621feb1, type: 2}
   itemEffectSets:
   - possibleEffects:
+    - effectType: 1
+      attributeModified: 21
+      modAmount: 10
+      perkGained:
+        perkTag: 0
+        stacks: 0
+        freshInjury: 0
+      gainPerkChance: 50
+      effectChance: 0
+      perkApplied:
+        perkTag: 0
+        passiveStacks: 1
+      innateItemEffectType: 0
+      innateAccuracyMod: 0
+      innateAccuracyAgainstAdjacentMod: 0
+      innateWeaponRangeBonus: 0
+      innateBackstabPenetrationBonus: 0
+      innatePerkGainedOnUse:
+        perkTag: 0
+        stacks: 0
+        freshInjury: 0
+  - possibleEffects:
     - effectType: 6
       attributeModified: 0
       modAmount: 0

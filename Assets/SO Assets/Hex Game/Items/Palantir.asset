@@ -17,9 +17,9 @@ MonoBehaviour:
   itemDescription: A smooth and polished crystal ball, rumored to have been used
     by seers and fortune tellers to divine the future.
   itemType: 4
-  rarity: 2
+  rarity: 3
   fatiguePenalty: 0
-  baseGoldValue: 1000
+  baseGoldValue: 1500
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -60,7 +60,7 @@ MonoBehaviour:
   - possibleEffects:
     - effectType: 1
       attributeModified: 11
-      modAmount: -30
+      modAmount: -15
       perkGained:
         perkTag: 0
         stacks: 0
