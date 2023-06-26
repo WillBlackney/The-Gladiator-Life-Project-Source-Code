@@ -14,6 +14,7 @@ using HexGameEngine.VisualEvents;
 using HexGameEngine.UCM;
 using HexGameEngine.Audio;
 using HexGameEngine.Perks;
+using UnityEngine.TextCore.Text;
 
 namespace HexGameEngine.TurnLogic
 {
@@ -387,7 +388,8 @@ namespace HexGameEngine.TurnLogic
             entity.hasMadeTurn = true;
 
             // Move arrow to point at activated enemy
-            VisualEventManager.CreateVisualEvent(() => MoveActivationArrowTowardsEntityWindow(cachedEntityRef));
+            GameObject panelSlot = panelSlots[activationOrder.IndexOf(cachedEntityRef)];
+            VisualEventManager.CreateVisualEvent(() => MoveActivationArrowTowardsEntityWindow(cachedEntityRef, panelSlot));
 
             // Start character activation
             HexCharacterController.Instance.CharacterOnTurnStart(entity);
@@ -429,9 +431,11 @@ namespace HexGameEngine.TurnLogic
                 if (nextEntityToActivate != null)
                 {
                     // Update all window slot positions + activation pointer arrow
+
                     var cachedOrder = ActivationOrder.ToList();
+                    GameObject panelSlot = panelSlots[activationOrder.IndexOf(nextEntityToActivate)];
                     VisualEventManager.CreateVisualEvent(() => UpdateWindowPositions(cachedOrder));
-                    VisualEventManager.CreateVisualEvent(() => MoveActivationArrowTowardsEntityWindow(nextEntityToActivate));
+                    VisualEventManager.CreateVisualEvent(() => MoveActivationArrowTowardsEntityWindow(nextEntityToActivate, panelSlot));
 
                     // Activate!
                     ActivateEntity(nextEntityToActivate);
@@ -627,13 +631,11 @@ namespace HexGameEngine.TurnLogic
         {
             panelArrow.SetActive(onOrOff);
         }
-        public void MoveActivationArrowTowardsEntityWindow(HexCharacterModel character)
+        public void MoveActivationArrowTowardsEntityWindow(HexCharacterModel character, GameObject panelSlot = null)
         {
             Debug.Log("ActivationManager.MoveActivationArrowTowardsPosition() called...");
 
-            GameObject panelSlot = null;
-
-            if (activationOrder.Contains(character)) panelSlot = panelSlots[activationOrder.IndexOf(character)];            
+            if (panelSlot == null && activationOrder.Contains(character)) panelSlot = panelSlots[activationOrder.IndexOf(character)];            
 
             if (panelSlot != null)
             {

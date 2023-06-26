@@ -1070,7 +1070,6 @@ namespace HexGameEngine.TownFeatures
             }
             else
             {
-                AudioManager.Instance.PlaySoundPooled(Sound.Effects_End_Deployment);
                 GameController.Instance.HandleLoadIntoCombatFromDeploymentScreen();
             }
         }
