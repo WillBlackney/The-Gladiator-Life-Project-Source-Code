@@ -217,6 +217,7 @@ namespace HexGameEngine.UI
         private void BuildRosterForCharacter(HexCharacterData data)
         {
             // Build all sections
+            if(characterCurrentlyViewing != data) AudioManager.Instance.PlaySound(data.AudioProfile, AudioSet.TurnStart);
             characterCurrentlyViewing = data;
             characterNameInputField.text = data.myName;
             characterSubNameInputField.text = data.mySubName;

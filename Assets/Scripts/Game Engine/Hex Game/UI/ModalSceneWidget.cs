@@ -1,16 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 using HexGameEngine.Utilities;
-using UnityEngine.UI;
-using HexGameEngine.CameraSystems;
-using TMPro;
 using Sirenix.OdinInspector;
-using Sirenix.Serialization;
+using System;
 
 namespace HexGameEngine.UI
 {
+    [Serializable]
     public class ModalSceneWidget : MonoBehaviour
     {
         #region Properties + Components
@@ -21,7 +17,6 @@ namespace HexGameEngine.UI
         [ShowIf("ShowCustomDataFields")]
         public string headerMessage;
         [ShowIf("ShowCustomDataFields")]
-        [OdinSerialize]
         public List<CustomString> descriptionMessage;
         [ShowIf("ShowCustomDataFields")]
         public Sprite headerSprite;

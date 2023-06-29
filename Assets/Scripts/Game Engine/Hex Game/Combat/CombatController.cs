@@ -180,28 +180,28 @@ namespace HexGameEngine.Combat
             // Wrath
             if (effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Wrath))
             {
-                damageModPercentageAdditive += 0.5f;
+                damageModPercentageAdditive += 0.3f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Wrath modifier = " + damageModPercentageAdditive.ToString());
             }
 
             // Weakened
             if (effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Weakened))
             {
-                damageModPercentageAdditive -= 0.5f;
+                damageModPercentageAdditive -= 0.3f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Weakened modifier = " + damageModPercentageAdditive.ToString());
             }
 
             // Vulnerable
             if (target != null && effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Vulnerable))
             {
-                damageModPercentageAdditive += 0.5f;
+                damageModPercentageAdditive += 0.3f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Vulnerable modifier = " + damageModPercentageAdditive.ToString());
             }
 
             // Block
             if (target != null && effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Guard) && effect.ignoresGuard == false)
             {
-                damageModPercentageAdditive -= 0.5f;
+                damageModPercentageAdditive -= 0.3f;
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Block modifier = " + damageModPercentageAdditive.ToString());
             }
 

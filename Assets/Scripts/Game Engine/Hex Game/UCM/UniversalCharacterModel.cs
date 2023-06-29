@@ -9,6 +9,7 @@ using Sirenix.Utilities;
 using HexGameEngine.Items;
 using HexGameEngine;
 using UnityEngine.Rendering;
+using HexGameEngine.Utilities;
 
 namespace HexGameEngine.UCM
 {
@@ -207,6 +208,15 @@ namespace HexGameEngine.UCM
 
         // Animation Logic
         #region 
+        public void ResetAnimationSpeed()
+        {
+            myAnimator.speed = 1;
+        }
+        public void RandomizeAnimationSpeed()
+        {
+            float newSpeed = RandomGenerator.NumberBetween(85, 115) * 0.01f;
+            myAnimator.speed = newSpeed;
+        }
         public void SetBaseAnim()
         {
             myAnimator.SetTrigger("Base");

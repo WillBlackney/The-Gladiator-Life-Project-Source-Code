@@ -980,15 +980,8 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Only pussies wear '
-    - color: 3
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: 'Armour '
-    - color: 1
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: "in the arena. Are you a pussy? Didn\u2019t think so\u2026"
+      phrase: "Only pussies wear armour in the arena. Are you a pussy? Didnt think
+        so\u2026"
   - message:
     - color: 1
       getPhraseFromAbilityValue: 0

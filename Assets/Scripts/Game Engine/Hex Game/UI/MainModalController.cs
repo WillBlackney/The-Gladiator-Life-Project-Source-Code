@@ -562,6 +562,18 @@ namespace HexGameEngine.UI
         UnusedLevelUp = 32,
         Fatigue = 37,
 
+        DelpoymentLimit = 39,
+        EndTurn = 40,
+        DelayTurn = 41,
+
+        // Combat stat card
+        HealthLost = 42,
+        ArmourLost = 43,
+        StressGained = 44,
+        XpGained = 45,
+        DamageDealt = 46,
+        KillingBlows = 47,
+
        
 
     }
