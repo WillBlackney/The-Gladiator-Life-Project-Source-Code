@@ -372,7 +372,9 @@ namespace HexGameEngine.Abilities
                 }
 
                 // Check and apply furiously assault to target
-                if(target != null && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FuriousAssault))                
+                if(target != null &&
+                    target.livingState == LivingState.Alive && 
+                    PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FuriousAssault))                
                     PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.FuriouslyAssaulted, 1);                
             }
 

@@ -1809,6 +1809,13 @@ namespace HexGameEngine.Characters
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.SmashedShield, -1, true, 0.5f);
 
                 }*/
+                // Furiously Assaulted
+                int assaultStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.FuriouslyAssaulted);
+                if (assaultStacks > 0 && character.currentHealth > 0)
+                {
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.FuriouslyAssaulted, -assaultStacks, true, 0.5f);
+                }
+
                 // Rooted
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Rooted) && character.currentHealth > 0)
                 {
