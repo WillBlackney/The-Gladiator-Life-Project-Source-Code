@@ -227,7 +227,7 @@ namespace HexGameEngine.Combat
                 // Show UI indicators
                 int energyCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
                 ShowPathCostPopup(energyCost);
-                CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter(character.currentEnergy, energyCost);
+                CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter(character.currentActionPoints, energyCost);
                 CombatUIController.Instance.DoFatigueCostDemo(Pathfinder.GetFatigueCostOfPath(character, character.currentTile, p.HexsOnPath),
                     character.currentFatigue, StatCalculator.GetTotalMaxFatigue(character));
 
@@ -248,7 +248,7 @@ namespace HexGameEngine.Combat
             else
             {
                 HidePathCostPopup();
-                CombatUIController.Instance.EnergyBar.UpdateIcons(character.currentEnergy, 0.25f);
+                CombatUIController.Instance.EnergyBar.UpdateIcons(character.currentActionPoints, 0.25f);
                 CombatUIController.Instance.ResetFatigueCostPreview();
             }
 
@@ -282,7 +282,7 @@ namespace HexGameEngine.Combat
             HidePathCostPopup();
             if(TurnController.Instance.EntityActivated != null && resetEnergyBar)
             {
-                CombatUIController.Instance.EnergyBar.UpdateIcons(TurnController.Instance.EntityActivated.currentEnergy, 0.25f);
+                CombatUIController.Instance.EnergyBar.UpdateIcons(TurnController.Instance.EntityActivated.currentActionPoints, 0.25f);
                 CombatUIController.Instance.ResetFatigueCostPreview();
             }
                

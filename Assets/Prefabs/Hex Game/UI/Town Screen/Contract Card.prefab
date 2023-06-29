@@ -4630,8 +4630,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a82a397184a19541bfd93e7de2c7f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preset: 0
-  customData: 1
+  preset: 39
+  customData: 0
   headerMessage: Deployment Limit
   descriptionMessage:
   - color: 1

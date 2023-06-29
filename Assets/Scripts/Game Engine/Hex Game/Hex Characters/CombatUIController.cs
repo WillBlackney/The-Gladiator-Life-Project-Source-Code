@@ -121,7 +121,7 @@ namespace HexGameEngine.Characters
             BuildHexCharacterAbilityBar(character);
 
             // Energy Bar
-            energyBar.UpdateIcons(character.currentEnergy);
+            energyBar.UpdateIcons(character.currentActionPoints);
 
             // Perk Panel
             perkPanel.ResetPanel();

@@ -78,7 +78,15 @@ namespace HexGameEngine.Utilities
 
                     if (didPress && CombatUIController.Instance.AbilityButtons[key - 1] != null)
                     {
-                        AbilityController.Instance.OnAbilityButtonClicked(CombatUIController.Instance.AbilityButtons[key - 1]);
+                        var uiCharacter = TurnController.Instance.EntityActivated;
+                        if(uiCharacter.controller == Controller.Player)
+                        {
+                            AbilityData ab = CombatUIController.Instance.AbilityButtons[key - 1].MyAbilityData;
+                            int cost = AbilityController.Instance.GetAbilityActionPointCost(uiCharacter, ab);
+                            CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter(uiCharacter.currentActionPoints, cost);
+                            AbilityController.Instance.OnAbilityButtonClicked(CombatUIController.Instance.AbilityButtons[key - 1]);
+                        }
+                       
 
                     }
 

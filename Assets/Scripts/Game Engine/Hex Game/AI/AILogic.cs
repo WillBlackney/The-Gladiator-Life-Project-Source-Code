@@ -302,12 +302,12 @@ namespace HexGameEngine.AI
 
             // Check has MORE energy than X 
             else if (req.requirementType == AIActionRequirementType.HasMoreEnergyThanX &&
-                character.currentEnergy > req.energyReq)
+                character.currentActionPoints > req.energyReq)
                 bRet = true;
 
             // Check has LESS energy than X 
             else if (req.requirementType == AIActionRequirementType.HasLessEnergyThanX &&
-                character.currentEnergy < req.energyReq)
+                character.currentActionPoints < req.energyReq)
                 bRet = true;
 
             // Check has MORE fatigue than X 

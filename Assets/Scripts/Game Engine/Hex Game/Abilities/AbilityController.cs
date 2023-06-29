@@ -326,7 +326,7 @@ namespace HexGameEngine.Abilities
             // Update UI energy bar
             if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
             {
-                CombatUIController.Instance.EnergyBar.UpdateIcons(TurnController.Instance.EntityActivated.currentEnergy);
+                CombatUIController.Instance.EnergyBar.UpdateIcons(TurnController.Instance.EntityActivated.currentActionPoints);
                 CombatUIController.Instance.ResetFatigueCostPreview();
             }                
 
@@ -2066,7 +2066,7 @@ namespace HexGameEngine.Abilities
         }
         private bool DoesCharacterHaveEnoughActionPoints(HexCharacterModel caster, AbilityData ability)
         {
-            return caster.currentEnergy >= GetAbilityActionPointCost(caster, ability);
+            return caster.currentActionPoints >= GetAbilityActionPointCost(caster, ability);
         }
         private bool DoesCharacterHaveEnoughFatigue(HexCharacterModel caster, AbilityData ability)
         {

@@ -26,7 +26,7 @@ namespace HexGameEngine.Characters
         public BackgroundData background;
 
         [Header("Active Properties")]
-        public int currentEnergy;
+        public int currentActionPoints;
         public int currentFatigue;
         public int currentHealth;
         public Facing currentFacing;

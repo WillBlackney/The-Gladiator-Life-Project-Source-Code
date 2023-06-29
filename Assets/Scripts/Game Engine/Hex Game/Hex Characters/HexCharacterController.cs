@@ -2291,17 +2291,17 @@ namespace HexGameEngine.Characters
         public void ModifyActionPoints(HexCharacterModel character, int energyGainedOrLost, bool showVFX = false, bool updateEnergyGuiInstantly = true)
         {
             Debug.Log("CharacterEntityController.ModifyActionPoints() called for " + character.myName);
-            character.currentEnergy += energyGainedOrLost;
+            character.currentActionPoints += energyGainedOrLost;
             HexCharacterView view = character.hexCharacterView;
 
-            if (character.currentEnergy < 0)
+            if (character.currentActionPoints < 0)
             {
-                character.currentEnergy = 0;
+                character.currentActionPoints = 0;
             }
 
-            else if (character.currentEnergy > StatCalculator.GetTotalMaxActionPoints(character))
+            else if (character.currentActionPoints > StatCalculator.GetTotalMaxActionPoints(character))
             {
-                character.currentEnergy = StatCalculator.GetTotalMaxActionPoints(character);
+                character.currentActionPoints = StatCalculator.GetTotalMaxActionPoints(character);
             }
 
             if (showVFX && view != null)
@@ -2331,7 +2331,7 @@ namespace HexGameEngine.Characters
             if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
             {
                 // Update energy bar GUI
-                int energyVFX = character.currentEnergy;
+                int energyVFX = character.currentActionPoints;
                 VisualEventManager.CreateVisualEvent(() => CombatUIController.Instance.EnergyBar.UpdateIcons(energyVFX));
 
                 // Update ability button validity overlays

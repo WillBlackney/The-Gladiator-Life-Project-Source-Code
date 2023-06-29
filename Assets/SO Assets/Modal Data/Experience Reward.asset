@@ -15,11 +15,19 @@ MonoBehaviour:
   myPreset: 33
   mainSprite: {fileID: 21300000, guid: 0a739688c3e5b724abc58accad9b9baf, type: 3}
   frameSprite: 0
-  headerName: Experience Reward
+  headerName: Experience Gained
   italicDescription: 0
   description:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: The amount of experience this character gives when killed.
+    phrase: 'The total amount of '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Experience '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: this character gained during this combat.
   infoRows: []

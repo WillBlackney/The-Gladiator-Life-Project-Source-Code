@@ -61,7 +61,7 @@ namespace HexGameEngine.Abilities
                 KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyAbilityData.keyWords);
                 AbilityPopupController.Instance.OnAbilityButtonMousedOver(this);
                 CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter
-                              (MyAbilityData.myCharacter.currentEnergy, AbilityController.Instance.GetAbilityActionPointCost(MyAbilityData.myCharacter, MyAbilityData));
+                              (MyAbilityData.myCharacter.currentActionPoints, AbilityController.Instance.GetAbilityActionPointCost(MyAbilityData.myCharacter, MyAbilityData));
 
                 // Update fatigue gui on left panel for mouse over
                 CombatUIController.Instance.DoFatigueCostDemo(AbilityController.Instance.GetAbilityFatigueCost(MyAbilityData.myCharacter, MyAbilityData),
@@ -80,9 +80,9 @@ namespace HexGameEngine.Abilities
                     if (AbilityController.Instance.CurrentAbilityAwaiting != null)
                     {
                         AbilityData a = AbilityController.Instance.CurrentAbilityAwaiting;
-                        CombatUIController.Instance.EnergyBar.UpdateIcons(a.myCharacter.currentEnergy);
+                        CombatUIController.Instance.EnergyBar.UpdateIcons(a.myCharacter.currentActionPoints);
                         CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter
-                          (a.myCharacter.currentEnergy, AbilityController.Instance.GetAbilityActionPointCost(a.myCharacter, a));
+                          (a.myCharacter.currentActionPoints, AbilityController.Instance.GetAbilityActionPointCost(a.myCharacter, a));
 
                         // Update fatigue gui on left panel for mouse over
                         CombatUIController.Instance.DoFatigueCostDemo(AbilityController.Instance.GetAbilityFatigueCost(a.myCharacter, MyAbilityData),
@@ -92,7 +92,7 @@ namespace HexGameEngine.Abilities
                     }
                     else
                     {
-                        CombatUIController.Instance.EnergyBar.UpdateIcons(MyAbilityData.myCharacter.currentEnergy, 0.25f);
+                        CombatUIController.Instance.EnergyBar.UpdateIcons(MyAbilityData.myCharacter.currentActionPoints, 0.25f);
                         CombatUIController.Instance.ResetFatigueCostPreview();
                     }
 
@@ -138,7 +138,7 @@ namespace HexGameEngine.Abilities
             CooldownText.text = myAbilityData.currentCooldown.ToString();
             if(myAbilityData.myCharacter != null &&
                 myAbilityData.currentCooldown == 0 && 
-                myAbilityData.myCharacter.currentEnergy >= AbilityController.Instance.GetAbilityActionPointCost(myAbilityData.myCharacter, myAbilityData) &&
+                myAbilityData.myCharacter.currentActionPoints >= AbilityController.Instance.GetAbilityActionPointCost(myAbilityData.myCharacter, myAbilityData) &&
                 (StatCalculator.GetTotalMaxFatigue(myAbilityData.myCharacter) - myAbilityData.myCharacter.currentFatigue >= AbilityController.Instance.GetAbilityFatigueCost(myAbilityData.myCharacter, myAbilityData)) &&
                 AbilityController.Instance.IsAbilityUseable(myAbilityData.myCharacter, myAbilityData))
             {

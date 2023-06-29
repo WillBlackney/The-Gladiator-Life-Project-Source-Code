@@ -40,10 +40,10 @@ MonoBehaviour:
       value: 5
       stars: 0
     maxHealth: 0
-    apRecovery: 100
-    apMaximum: 100
+    apRecovery: 8
+    apMaximum: 8
     initiative: 200
-    fatigueRecovery: 8
+    fatigueRecovery: 15
     criticalChance: 100
     criticalModifier: 50
     physicalDamageBonus: 0

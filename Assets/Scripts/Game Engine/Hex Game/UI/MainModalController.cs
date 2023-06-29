@@ -337,7 +337,11 @@ namespace HexGameEngine.UI
             headerText.text = data.headerName;
 
             // Main Image
-            if (data.frameSprite)
+            if(data.mainSprite == null)
+            {
+                headerText.margin = new Vector4(0, 0, 0, 0);
+            }
+            else if (data.frameSprite)
             {
                 framedImageParent.SetActive(true);
                 framedImage.sprite = data.mainSprite;
@@ -562,7 +566,7 @@ namespace HexGameEngine.UI
         UnusedLevelUp = 32,
         Fatigue = 37,
 
-        DelpoymentLimit = 39,
+        DeploymentLimit = 39,
         EndTurn = 40,
         DelayTurn = 41,
 
@@ -573,6 +577,12 @@ namespace HexGameEngine.UI
         XpGained = 45,
         DamageDealt = 46,
         KillingBlows = 47,
+
+        // top bar
+        CharacterRoster = 48,
+        Inventory = 49,
+        ShowHideUI = 50,
+        Settings = 51,
 
        
 

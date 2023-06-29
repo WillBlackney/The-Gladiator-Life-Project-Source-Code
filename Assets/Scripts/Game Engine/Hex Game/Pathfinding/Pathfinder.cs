@@ -161,7 +161,7 @@ namespace HexGameEngine.Pathfinding
                     // Is the path between start/destination actually valid?
                     if (traversable &&
                         CanHexBeOccupied(key) &&
-                        GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentEnergy &&
+                        GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentActionPoints &&
                         GetFatigueCostOfPath(character, start, hexsOnPath) <= StatCalculator.GetTotalMaxFatigue(character) - character.currentFatigue)
                     {
                         Debug.Log("GetPath() found a valid path!");
@@ -222,7 +222,7 @@ namespace HexGameEngine.Pathfinding
                 // Is the path between start/destination actually valid?
                 if (traversable &&
                     CanHexBeOccupied(key) &&
-                    GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentEnergy &&
+                    GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentActionPoints &&
                     GetFatigueCostOfPath(character, start, hexsOnPath) <= StatCalculator.GetTotalMaxFatigue(character) - character.currentFatigue)
                 {
                     pathsReturned.Add(new Path(start, hexsOnPath, character));
