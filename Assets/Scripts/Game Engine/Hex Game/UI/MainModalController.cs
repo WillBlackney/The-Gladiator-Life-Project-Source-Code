@@ -187,6 +187,7 @@ namespace HexGameEngine.UI
         }
         private void ResetContent()
         {
+            headerText.margin = new Vector4(38, 0, 0, 0);
             framedImageParent.SetActive(false);
             backgroundStatRangeSectionParent.SetActive(false);
             unframedImageParent.gameObject.SetActive(false);

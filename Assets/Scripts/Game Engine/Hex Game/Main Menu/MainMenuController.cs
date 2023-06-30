@@ -17,8 +17,6 @@ using HexGameEngine.Abilities;
 using HexGameEngine.Items;
 using HexGameEngine.Perks;
 using Sirenix.Utilities;
-using System.Linq;
-using HexGameEngine.LoadingScreen;
 using HexGameEngine.GameOrigin;
 
 namespace HexGameEngine.MainMenu
