@@ -126,7 +126,7 @@ namespace HexGameEngine.TownFeatures
                 float priceMod = 1f;
                 if(BoonController.Instance != null)
                 {
-                    if (BoonController.Instance.DoesPlayerHaveBoon(BoonTag.ArmourSurplus)) priceMod -= 0.5f;
+                    if (BoonController.Instance.DoesPlayerHaveBoon(BoonTag.ArmourySurplus)) priceMod -= 0.5f;
                 }
 
                 return (int) (baseGoldCost * priceMod); 

@@ -40,7 +40,7 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 0.5
-      wageIncreasePercentage: 0.25
+      wageIncreasePercentage: 0.5
       characterLeaveProbability: 50
     - effectType: 17
       characterTargetIndex: 0

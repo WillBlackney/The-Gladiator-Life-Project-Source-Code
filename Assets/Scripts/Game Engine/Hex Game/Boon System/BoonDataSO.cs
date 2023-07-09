@@ -68,7 +68,7 @@ namespace HexGameEngine.Boons
     public enum BoonTag
     {
         None = 0,
-        ArmourSurplus = 1,
+        ArmourySurplus = 1,
         UnemployedKnights = 2,
         UnemployedInquisitors = 3,
 

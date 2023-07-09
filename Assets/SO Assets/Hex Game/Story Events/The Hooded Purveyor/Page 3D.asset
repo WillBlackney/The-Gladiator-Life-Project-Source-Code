@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
   m_Name: Page 3D
   m_EditorClassIdentifier: 
+  pageSprite: {fileID: 0}
   pageDescription: "Just as the figure finishes it's pitch, {CHOICE_CHARACTER_NAME}
     {CHOICE_CHARACTER_SUB_NAME} jumps out of bed and points defiantly at the hooded
     figure.\n\n<color=#FFFFFF>\"GO BACK TO THE ABYSS, FOUL BEAST!\"</color>\n\nThe
@@ -24,7 +25,6 @@ MonoBehaviour:
     the hooded figure writhes in agony faster and faster until it finally explodes
     into a plume of black smoke, leaving behind only the two baubbles it brought
     to offer you."
+  onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: 10c6cfda366066d4ea89f70542420545, type: 2}
-  pageSprite: {fileID: 0}
-  onPageLoadEffects: []

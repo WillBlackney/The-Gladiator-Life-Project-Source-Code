@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: The Swamp Corpse
   m_EditorClassIdentifier: 
   storyEventName: The Swamp Corpse
-  excludeFromGame: 0
   firstPage: {fileID: 11400000, guid: fc0c37dc0a163ce42be4d5a4cd117a47, type: 2}
+  excludeFromGame: 0
   onStartEffects: []
   requirements:
   - reqType: 1
     requiredCharactersInRosterCount: 1
     includeTheKid: 0
+    goldRequired: 0
+    requiredBoon: 0
   characterRequirements:
   - requirements:
     - reqType: 2
-      requiredBackgrounds: 13000000
+      requiredBackgrounds: 14000000

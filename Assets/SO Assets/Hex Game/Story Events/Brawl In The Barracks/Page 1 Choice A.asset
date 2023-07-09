@@ -40,6 +40,8 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 14
       characterTargetIndex: 0
       pageToLoad: {fileID: 0}
@@ -59,6 +61,8 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 16
       characterTargetIndex: 0
       pageToLoad: {fileID: 0}
@@ -78,6 +82,8 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 0.5
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 15
       characterTargetIndex: 0
       pageToLoad: {fileID: 0}
@@ -97,6 +103,8 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 17
       characterTargetIndex: 0
       pageToLoad: {fileID: 0}
@@ -116,6 +124,8 @@ MonoBehaviour:
       stressRecoveredMin: 2
       stressRecoveredMax: 4
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 1
       characterTargetIndex: 0
       pageToLoad: {fileID: 11400000, guid: 83edec7daca68a3449ac5ad9dec94630, type: 2}
@@ -135,6 +145,8 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
   - lowerProbability: 34
     upperProbability: 66
     effects:
@@ -157,6 +169,8 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 14
       characterTargetIndex: 1
       pageToLoad: {fileID: 0}
@@ -176,6 +190,8 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 16
       characterTargetIndex: 1
       pageToLoad: {fileID: 0}
@@ -195,6 +211,8 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 0.5
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 15
       characterTargetIndex: 1
       pageToLoad: {fileID: 0}
@@ -214,6 +232,8 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 17
       characterTargetIndex: 0
       pageToLoad: {fileID: 0}
@@ -233,6 +253,8 @@ MonoBehaviour:
       stressRecoveredMin: 2
       stressRecoveredMax: 4
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 1
       characterTargetIndex: 0
       pageToLoad: {fileID: 11400000, guid: 0c6117883f39565489298874a156a655, type: 2}
@@ -252,6 +274,8 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
   - lowerProbability: 67
     upperProbability: 100
     effects:
@@ -274,6 +298,8 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 16
       characterTargetIndex: 0
       pageToLoad: {fileID: 0}
@@ -293,6 +319,29 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 0.5
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
+    - effectType: 14
+      characterTargetIndex: 0
+      pageToLoad: {fileID: 0}
+      boonGained: 0
+      backgroundAddedToTavern: 0
+      totalCharactersAddedToTavern: 0
+      itemGained: {fileID: 0}
+      goldGained: 0
+      goldLost: 0
+      perkGained: 0
+      gainPerkChance: 100
+      injurySeverity: 0
+      injuryType: 0
+      experienceGained: 150
+      characterJoining: {fileID: 0}
+      stressRecoveryChance: 100
+      stressRecoveredMin: 0
+      stressRecoveredMax: 0
+      healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 15
       characterTargetIndex: 1
       pageToLoad: {fileID: 0}
@@ -312,6 +361,8 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 16
       characterTargetIndex: 1
       pageToLoad: {fileID: 0}
@@ -331,6 +382,29 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 0.5
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
+    - effectType: 14
+      characterTargetIndex: 1
+      pageToLoad: {fileID: 0}
+      boonGained: 0
+      backgroundAddedToTavern: 0
+      totalCharactersAddedToTavern: 0
+      itemGained: {fileID: 0}
+      goldGained: 0
+      goldLost: 0
+      perkGained: 0
+      gainPerkChance: 100
+      injurySeverity: 0
+      injuryType: 0
+      experienceGained: 150
+      characterJoining: {fileID: 0}
+      stressRecoveryChance: 100
+      stressRecoveredMin: 0
+      stressRecoveredMax: 0
+      healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 17
       characterTargetIndex: 0
       pageToLoad: {fileID: 0}
@@ -350,9 +424,11 @@ MonoBehaviour:
       stressRecoveredMin: 2
       stressRecoveredMax: 4
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 1
       characterTargetIndex: 0
-      pageToLoad: {fileID: 11400000, guid: fa2a530e15ad97c4faf8fd281e003133, type: 2}
+      pageToLoad: {fileID: 11400000, guid: cac4c8873b21ca043bab1fc00627cce7, type: 2}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
@@ -369,4 +445,6 @@ MonoBehaviour:
       stressRecoveredMin: 0
       stressRecoveredMax: 0
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
   requirements: []
