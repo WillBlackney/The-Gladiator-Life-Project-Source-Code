@@ -2,15 +2,12 @@
 using System.Collections;
 using DG.Tweening;
 using HexGameEngine.Audio;
-using HexGameEngine.Camping;
 
 namespace HexGameEngine.Cards
 {
     public class DragSpellNoTarget : DraggingActions
     {
-
         private int savedHandSlot;
-
         public override bool CanDrag
         {
             get

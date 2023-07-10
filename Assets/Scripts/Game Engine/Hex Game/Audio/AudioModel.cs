@@ -8,10 +8,9 @@ namespace HexGameEngine.Audio
     [Serializable]
     public class AudioModel
     {
-
-        [HorizontalGroup("General Properties", 75)]
+        [HorizontalGroup("General Properties/Stats", 75)]
         [HideLabel]
-        [PreviewField(75)]
+        //[PreviewField(75)]
         [ShowIf("ShowAudioClip")]
         public AudioClip audioClip;       
 

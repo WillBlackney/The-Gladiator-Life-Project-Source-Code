@@ -26,7 +26,6 @@ namespace HexGameEngine.Characters
         [SerializeField] private EnemyTemplateSO[] allEnemyTemplateSOs; 
 
         [Header("Recruit Generation")]
-        [SerializeField] private List<ClassTemplateSO> allClassTemplateSOs;
         [SerializeField] private List<CharacterModelTemplateSO> allModelTemplateSOs;  
 
         [Header("Character Name Buckets")]

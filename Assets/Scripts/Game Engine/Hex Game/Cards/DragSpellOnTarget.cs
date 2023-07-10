@@ -3,7 +3,6 @@ using System.Collections;
 using DG.Tweening;
 using HexGameEngine.Audio;
 using HexGameEngine.CameraSystems;
-using HexGameEngine.Camping;
 
 namespace HexGameEngine.Cards
 {

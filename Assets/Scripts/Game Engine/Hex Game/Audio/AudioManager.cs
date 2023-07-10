@@ -5,6 +5,8 @@ using System;
 using Sirenix.OdinInspector;
 using HexGameEngine.Utilities;
 using DG.Tweening;
+using UnityEditor;
+using Sirenix.Utilities;
 
 namespace HexGameEngine.Audio
 {
@@ -106,7 +108,39 @@ namespace HexGameEngine.Audio
                 a.source.pitch = a.pitch;
                 a.source.loop = a.loop;
             }
+
+            //CreateDataBoxes();
         }
+        public void CreateDataBoxes()
+        {
+            Debug.LogWarning("AudioManager.CreateDataBoxes()");
+            foreach (AudioModel model in allAudioModels)
+            {
+                AudioDataBox data = AudioDataBox.CreateInstance<AudioDataBox>();
+
+                data.audioClip = model.audioClip;
+                data.randomizeClip = model.randomizeClip;
+                data.audioClips = model.audioClips;
+                data.soundType = model.soundType;
+                data.combatCategory = model.combatCategory;
+                data.randomizeVolume = model.randomizeVolume;
+                data.randomVolumeLowerLimit = model.randomVolumeLowerLimit;
+                data.randomVolumeUpperLimit = model.randomVolumeUpperLimit;
+                data.volume = model.volume;
+                data.randomizePitch = model.randomizePitch;
+                data.randomPitchLowerLimit = model.randomPitchLowerLimit;
+                data.randomPitchUpperLimit = model.randomPitchUpperLimit;
+                data.pitch = model.pitch;
+                data.loop = model.loop;
+
+
+                AssetDatabase.CreateAsset(data, "Assets/SO Assets/Hex Game/Audio/Audio Data/" + model.soundType.ToString() + ".asset");
+            }
+            AssetDatabase.SaveAssets();
+        }
+
+
+
         #endregion
 
         // Trigger Sounds
