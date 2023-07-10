@@ -35,7 +35,7 @@ namespace HexGameEngine.Editor
 
             createNewEnemyData = new CreateNewEnemyData();
             tree.Add("Create New", new CreateNewEnemyData());
-            tree.AddAllAssetsAtPath("All Abilities", "Assets/SO Assets/Hex Game/Enemies", typeof(EnemyTemplateSO));
+            tree.AddAllAssetsAtPath("All Abilities", "Assets/SO Assets/Enemies", typeof(EnemyTemplateSO));
             tree.SortMenuItemsByName();
             return tree;
         }
@@ -74,7 +74,7 @@ namespace HexGameEngine.Editor
             [Button("Add New Enemy Data")]
             public void CreateNewData()
             {
-                AssetDatabase.CreateAsset(enemyDataSO, "Assets/SO Assets/Hex Game/Enemies/" + enemyDataSO.myName + ".asset");
+                AssetDatabase.CreateAsset(enemyDataSO, "Assets/SO Assets/Enemies/" + enemyDataSO.myName + ".asset");
                 AssetDatabase.SaveAssets();
 
                 // Create the SO 

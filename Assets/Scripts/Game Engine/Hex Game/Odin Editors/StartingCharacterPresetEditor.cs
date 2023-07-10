@@ -34,7 +34,7 @@ namespace HexGameEngine.Editor
 
             createNewCharacterTemplateData = new CreateNewCharacterTemplateData();
             tree.Add("Create New", new CreateNewCharacterTemplateData());
-            tree.AddAllAssetsAtPath("Starting Character Templates", "Assets/SO Assets/Hex Game/Starting Character Presets/", typeof(HexCharacterTemplateSO));
+            tree.AddAllAssetsAtPath("Starting Character Templates", "Assets/SO Assets/Starting Character Presets/", typeof(HexCharacterTemplateSO));
             tree.SortMenuItemsByName();
             return tree;
         }
@@ -73,7 +73,7 @@ namespace HexGameEngine.Editor
             [Button("Add New Starting Character Template")]
             public void CreateNewData()
             {
-                AssetDatabase.CreateAsset(templateDataSO, "Assets/SO Assets/Hex Game/Starting Character Presets/" + templateDataSO.myName + ".asset");
+                AssetDatabase.CreateAsset(templateDataSO, "Assets/SO Assets/Starting Character Presets/" + templateDataSO.myName + ".asset");
                 AssetDatabase.SaveAssets();
 
                 // Create the SO 

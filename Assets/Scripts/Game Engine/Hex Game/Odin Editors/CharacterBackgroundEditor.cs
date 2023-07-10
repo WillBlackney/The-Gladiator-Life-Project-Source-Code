@@ -34,7 +34,7 @@ namespace HexGameEngine.Editor
 
             createNewBackgroundData = new CreateNewBackgroundData();
             tree.Add("Create New", new CreateNewBackgroundData());
-            tree.AddAllAssetsAtPath("Background Data", "Assets/SO Assets/Hex Game/Character Backgrounds", typeof(BackgroundDataSO));
+            tree.AddAllAssetsAtPath("Background Data", "Assets/SO Assets/Character Backgrounds", typeof(BackgroundDataSO));
             tree.SortMenuItemsByName();
             return tree;
         }
@@ -72,7 +72,7 @@ namespace HexGameEngine.Editor
             [Button("Create New Background")]
             public void CreateNewData()
             {
-                AssetDatabase.CreateAsset(dataFile, "Assets/SO Assets/Hex Game/Character Backgrounds/" + dataFile.backgroundType.ToString() + ".asset");
+                AssetDatabase.CreateAsset(dataFile, "Assets/SO Assets/Character Backgrounds/" + dataFile.backgroundType.ToString() + ".asset");
                 AssetDatabase.SaveAssets();
 
                 // Create the SO 

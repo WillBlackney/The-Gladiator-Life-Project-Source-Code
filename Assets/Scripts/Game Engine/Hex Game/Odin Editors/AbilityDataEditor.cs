@@ -34,7 +34,7 @@ namespace HexGameEngine.Editor
 
             createNewAbilityData = new CreateNewAbilityData();
             tree.Add("Create New", new CreateNewAbilityData());
-            tree.AddAllAssetsAtPath("All Abilities", "Assets/SO Assets/Hex Game/Abilities", typeof(AbilityDataSO));
+            tree.AddAllAssetsAtPath("All Abilities", "Assets/SO Assets/Abilities", typeof(AbilityDataSO));
             tree.SortMenuItemsByName();
             return tree;
         }
@@ -73,7 +73,7 @@ namespace HexGameEngine.Editor
             [Button("Add New Ability Data")]
             public void CreateNewData()
             {
-                AssetDatabase.CreateAsset(abilityDataSO, "Assets/SO Assets/Hex Game/Abilities/" + abilityDataSO.abilityName + ".asset");
+                AssetDatabase.CreateAsset(abilityDataSO, "Assets/SO Assets/Abilities/" + abilityDataSO.abilityName + ".asset");
                 AssetDatabase.SaveAssets();
 
                 // Create the SO 

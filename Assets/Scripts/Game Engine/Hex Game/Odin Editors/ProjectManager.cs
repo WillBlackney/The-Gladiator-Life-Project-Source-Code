@@ -43,17 +43,16 @@ namespace HexGameEngine.Editor
         private DrawSelected<BackgroundDataSO> drawCharacterBackgrounds = new DrawSelected<BackgroundDataSO>();
 
         // Hard coded file directory paths to specific SO's
-        private string abilityPath = "Assets/SO Assets/Hex Game/Abilities";
-        private string characterTemplatePath = "Assets/SO Assets/Hex Game/Characters";
-        private string perkPath = "Assets/SO Assets/Hex Game/Perks";
-        private string itemPath = "Assets/SO Assets/Hex Game/Items";
-        private string enemyPath = "Assets/SO Assets/Hex Game/Enemies";
-        private string enemyEncounterPath = "Assets/SO Assets/Hex Game/Enemy Encounters";
-        private string mapSeedPath = "Assets/SO Assets/Hex Game/Hex Map Seeds";
-        private string recruitClassTemplatesPath = "Assets/SO Assets/Hex Game/Recruitment/Recruit Class Templates";
-        private string startingCharacterPresetsPath = "Assets/SO Assets/Hex Game/Starting Character Presets";
-        private string characterModelTemplatesPath = "Assets/SO Assets/Hex Game/Recruitment/Character Model Templates";
-        private string characterBackgroundsPath = "Assets/SO Assets/Hex Game/Character Backgrounds";
+        private string abilityPath = "Assets/SO Assets/Abilities";
+        private string characterTemplatePath = "Assets/SO Assets/Characters";
+        private string perkPath = "Assets/SO Assets/Perks";
+        private string itemPath = "Assets/SO Assets/Items";
+        private string enemyPath = "Assets/SO Assets/Enemies";
+        private string enemyEncounterPath = "Assets/SO Assets/Enemy Encounters";
+        private string mapSeedPath = "Assets/SO Assets/Hex Map Seeds";
+        private string startingCharacterPresetsPath = "Assets/SO Assets/Starting Character Presets";
+        private string characterModelTemplatesPath = "Assets/SO Assets/Character Model Templates";
+        private string characterBackgroundsPath = "Assets/SO Assets/Character Backgrounds";
 
         // Create field for each type of manager object in project to be drawn       
         private DrawGlobalSettings drawGlobalSettings = new DrawGlobalSettings();

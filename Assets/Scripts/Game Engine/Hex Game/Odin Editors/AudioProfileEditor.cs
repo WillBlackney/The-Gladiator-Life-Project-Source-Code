@@ -36,7 +36,7 @@ namespace HexGameEngine.Editor
 
             createNewAudioProfile = new CreateNewAudioProfile();
             tree.Add("Create New", new CreateNewAudioProfile());
-            tree.AddAllAssetsAtPath("Audio Profies", "Assets/SO Assets/Hex Game/Audio/Audio Profiles/", typeof(AudioProfileData));
+            tree.AddAllAssetsAtPath("Audio Profies", "Assets/SO Assets/Audio/Audio Profiles/", typeof(AudioProfileData));
             tree.SortMenuItemsByName();
             return tree;
         }
@@ -74,7 +74,7 @@ namespace HexGameEngine.Editor
             [Button("Add New Profile")]
             public void CreateNewData()
             {
-                AssetDatabase.CreateAsset(data, "Assets/SO Assets/Hex Game/Audio/Audio Profiles/" + data.audioProfileType.ToString() + ".asset");
+                AssetDatabase.CreateAsset(data, "Assets/SO Assets/Audio/Audio Profiles/" + data.audioProfileType.ToString() + ".asset");
                 AssetDatabase.SaveAssets();
 
                 // Create the SO 

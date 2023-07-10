@@ -11,9 +11,6 @@ namespace HexGameEngine.VisualEvents
     {
         [Header("Component References")]
         public TextMeshProUGUI amountText;
-        public GameObject myImageParent;
-        public Image heartImage;
-        public Image shieldImage;
         public Animator myAnim;
 
         // Initialization + Setup
@@ -36,7 +33,7 @@ namespace HexGameEngine.VisualEvents
             Destroy(gameObject);
         }
 
-        public void ChooseRandomDirection()
+        private void ChooseRandomDirection()
         {
             int randomNumber = Random.Range(0, 1);
             if (randomNumber == 0) myAnim.SetTrigger("Right");            

@@ -33,7 +33,7 @@ namespace HexGameEngine.Editor
 
             createNewPerkData = new CreatePerkData();
             tree.Add("Create New", new CreatePerkData());
-            tree.AddAllAssetsAtPath("All Perks", "Assets/SO Assets/Hex Game/Perks/", typeof(PerkIconDataSO));
+            tree.AddAllAssetsAtPath("All Perks", "Assets/SO Assets/Perks/", typeof(PerkIconDataSO));
             tree.SortMenuItemsByName();
             return tree;
         }
@@ -72,7 +72,7 @@ namespace HexGameEngine.Editor
             [Button("Add New Perk Data")]
             public void CreateNewData()
             {
-                AssetDatabase.CreateAsset(perkDataSO, "Assets/SO Assets/Hex Game/Perks/" + perkDataSO.passiveName + ".asset");
+                AssetDatabase.CreateAsset(perkDataSO, "Assets/SO Assets/Perks/" + perkDataSO.passiveName + ".asset");
                 AssetDatabase.SaveAssets();
 
                 // Create the SO 
