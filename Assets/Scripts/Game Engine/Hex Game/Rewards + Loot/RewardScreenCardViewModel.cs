@@ -33,7 +33,7 @@ namespace HexGameEngine.RewardSystems
         public void OnPointerEnter(PointerEventData eventData)
         {
             cardViewModel.movementParent.DOScale(endScale, scaleSpeed).SetEase(Ease.OutQuint);
-            AudioManager.Instance.PlaySoundPooled(Sound.Card_Discarded);
+            AudioManager.Instance.PlaySound(Sound.Card_Discarded);
 
             if (myRewardDataRef != null)
             {

@@ -79,7 +79,7 @@ namespace HexGameEngine.UWidget
             }
             else if (wEvent.widgetEventType == WidgetEvent.PlaySound)
             {
-                AudioManager.Instance.PlaySoundPooled(wEvent.soundPlayed);
+                AudioManager.Instance.PlaySound(wEvent.soundPlayed);
             }
             else if (wEvent.widgetEventType == WidgetEvent.FadeInCanvasGroup)
             {

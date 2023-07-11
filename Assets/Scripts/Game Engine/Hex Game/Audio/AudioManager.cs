@@ -14,104 +14,22 @@ namespace HexGameEngine.Audio
 {
     public class AudioManager : Singleton<AudioManager>
     {
+        #region Data + Scene Components
         [Header("Components + Pooling")]
         [SerializeField] private GameObject audioPlayerPrefab;
         [SerializeField] private Transform audioPlayerPoolParent;
         [SerializeField] private List<AudioPlayer> audioPlayerPool;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        [Header("Properties")]
-        private AudioModel[] allAudioModels;
-        private AudioModel previousCombatTrack = null;
+        [Space(10)]
 
-        [Header("Audio Profiles")]
+        [Header("Data")]
+        [SerializeField] private AudioDataBox[] allAudioModels;
         [SerializeField] private AudioProfileData[] allProfiles;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        [Header("Music")]
-        [SerializeField] private AudioModel[] allMusic;
+        private AudioDataBox previousCombatTrack = null;
+        #endregion
 
-        [Header("Card SFX")]
-        [SerializeField] private AudioModel[] allCardSFX;
-
-        [Header("Ability SFX")]
-        [SerializeField] private AudioModel[] allAbilitySFX;
-
-        [Header("Weapon SFX")]
-        [SerializeField] private AudioModel[] allWeaponSFX;
-
-        [Header("Character SFX")]
-        [SerializeField] private AudioModel[] allCharacterSFX;
-
-        [Header("Projectile SFX")]
-        [SerializeField] private AudioModel[] allProjectileSFX;
-
-        [Header("Explosion SFX")]
-        [SerializeField] private AudioModel[] allExplosionSFX;
-
-        [Header("Crowd SFX")]
-        [SerializeField] private AudioModel[] allCrowdSFX;
-
-        [Header("Passive SFX")]
-        [SerializeField] private AudioModel[] allPassiveSFX;
-
-        [Header("GUI SFX")]
-        [SerializeField] private AudioModel[] allGuiSFX;
-
-        [Header("Item SFX")]
-        [SerializeField] private AudioModel[] allItemSFX;
-
-        [Header("Events SFX")]
-        [SerializeField] private AudioModel[] allEventsSFX;
-
-        [Header("Environments SFX")]
-        [SerializeField] private AudioModel[] allEnvironmentsSFX;
-
-        [Header("Ambience SFX")]
-        [SerializeField] private AudioModel[] allAmbienceSFX;
-
-       
-
-        // Initialization 
-        #region
-        protected override void Awake()
-        {
-            base.Awake();
-
-            // Add all audio effects to persistency
-            List<AudioModel> allAudioModelsList = new List<AudioModel>();
-
-            // Add individual arrays
-            allAudioModelsList.AddRange(allMusic);
-            allAudioModelsList.AddRange(allCardSFX);
-            allAudioModelsList.AddRange(allAbilitySFX);
-            allAudioModelsList.AddRange(allWeaponSFX);
-            allAudioModelsList.AddRange(allCharacterSFX);
-            allAudioModelsList.AddRange(allProjectileSFX);
-            allAudioModelsList.AddRange(allExplosionSFX);
-            allAudioModelsList.AddRange(allPassiveSFX);
-            allAudioModelsList.AddRange(allGuiSFX);
-            allAudioModelsList.AddRange(allEventsSFX);
-            allAudioModelsList.AddRange(allEnvironmentsSFX);
-            allAudioModelsList.AddRange(allAmbienceSFX);
-            allAudioModelsList.AddRange(allCrowdSFX);
-            allAudioModelsList.AddRange(allItemSFX);
-
-            // Convert list to array
-            allAudioModels = allAudioModelsList.ToArray();
-
-            // Create an audio source for each audio model
-            foreach (AudioModel a in allAudioModels)
-            {
-                a.source = gameObject.AddComponent<AudioSource>();
-                a.source.playOnAwake = false;
-                a.source.clip = a.audioClip;
-                a.source.volume = a.volume;
-                a.source.pitch = a.pitch;
-                a.source.loop = a.loop;
-            }
-            //Convert();
-        }
+        #region Initialization + Misc
         public void Convert()
         {
             /*
@@ -141,77 +59,57 @@ namespace HexGameEngine.Audio
             AssetDatabase.SaveAssets();*/
 
         }
+        
+        #endregion
 
+        #region Audio Player + Pooling Logic
+        private AudioPlayer GetNextAvailableAudioPlayer()
+        {
+            // Find an available player
+            AudioPlayer availablePlayer = audioPlayerPool.Find(i => !i.Source.isPlaying);
 
+            // If there arent any available, create new one, add it to pool, then use it
+            if (availablePlayer == null) availablePlayer = CreateAndAddAudioPlayerToPool();
+
+            return availablePlayer;
+        }
+        private AudioPlayer CreateAndAddAudioPlayerToPool()
+        {
+            AudioPlayer newAP = Instantiate(audioPlayerPrefab, audioPlayerPoolParent).GetComponent<AudioPlayer>();
+            audioPlayerPool.Add(newAP);
+            return newAP;
+        }
 
         #endregion
 
-        // Trigger Sounds
-        #region
-        public AudioModel GetAudioModel(Sound s)
-        {
-            AudioModel a = Array.Find(allAudioModels, sound => sound.soundType == s);
-            return a;
-        }
+        #region Checks and Bools   
         public bool IsSoundPlaying(Sound s)
         {
-            bool bReturned = false;
-
-            AudioModel a = Array.Find(allAudioModels, sound => sound.soundType == s);
-
-            if (a == null)
-            {
-                Debug.Log("AudioManager.IsSoundPlaying() couln't find the sound: " + s.ToString());
-            }
-
-            if (a != null && a.source.isPlaying)
-            {
-                bReturned = true;
-            }
-
-            return bReturned;
+            return GetActivePlayerForSound(s) != null;
         }
-        public void PlaySoundPooled(Sound s)
+        private AudioPlayer GetActivePlayerForSound(Sound s)
+        {
+            return audioPlayerPool.Find(player => player.MyCurrentData != null && player.MyCurrentData.soundType == s && player.Source.isPlaying);
+        }
+        #endregion
+
+        #region Play, Fade and Stop Sounds Logic    
+        public void PlaySound(Sound s)
         {
             if (s == Sound.None) return;
 
-            AudioModel a = Array.Find(allAudioModels, sound => sound.soundType == s);
+            AudioDataBox a = Array.Find(allAudioModels, sound => sound.soundType == s);
             if (a != null)
             {
+                // Prevent duplicate sound playing, if marked to do so
+                if (!a.allowDuplicates && IsSoundPlaying(s)) return;
+
                 // Set up audio player
                 AudioPlayer player = GetNextAvailableAudioPlayer();
-                BuildAudioPlayerFromAudioModelData(a, player);
+                player.BuildFromData(a);
 
                 // Play the sound!
-                player.source.Play();
-            }
-        }
-        public void PlaySound(Sound s)
-        {
-            if (s == Sound.None)
-            {
-                return;
-            }
-
-            AudioModel a = Array.Find(allAudioModels, sound => sound.soundType == s);
-            if (a != null)
-            {
-                a.fadingIn = false;
-                a.fadingOut = false;
-
-                // Randomize clip
-                if (a.randomizeClip) a.source.clip = a.audioClips[RandomGenerator.NumberBetween(0, a.audioClips.Length - 1)];
-                else a.source.clip = a.audioClip;
-
-                // Randomize pitch if marked to do so
-                if (a.randomizePitch) a.source.pitch = RandomGenerator.NumberBetween(a.randomPitchLowerLimit, a.randomPitchUpperLimit);
-                else a.source.pitch = a.pitch;
-
-                // Randomize volume if marked to do so
-                if (a.randomizeVolume) a.source.volume = RandomGenerator.NumberBetween(a.randomVolumeLowerLimit, a.randomVolumeUpperLimit);
-                else a.source.volume = a.volume;
-
-                a.source.Play();
+                player.Source.Play();
             }
         }
         public void PlaySound(AudioProfileType type, AudioSet set)
@@ -246,61 +144,62 @@ namespace HexGameEngine.Audio
             BuildAudioPlayerFromAudioModelData(soundPlayed, player);
 
             // Play the sound!
-            player.source.Play();
-        }
-        private void BuildAudioPlayerFromAudioModelData(AudioModel data, AudioPlayer player)
-        {
-            // Randomize clip
-            if (data.randomizeClip) player.source.clip = data.audioClips[RandomGenerator.NumberBetween(0, data.audioClips.Length - 1)];
-            else player.source.clip = data.audioClip;
-
-            // Randomize pitch if marked to do so
-            if (data.randomizePitch) player.source.pitch = RandomGenerator.NumberBetween(data.randomPitchLowerLimit, data.randomPitchUpperLimit);
-            else player.source.pitch = data.pitch;
-
-            // Randomize volume if marked to do so
-            if (data.randomizeVolume) player.source.volume = RandomGenerator.NumberBetween(data.randomVolumeLowerLimit, data.randomVolumeUpperLimit);
-            else player.source.volume = data.volume;
-
+            player.Source.Play();
         }
         public void StopSound(Sound s)
         {
-            AudioModel a = Array.Find(allAudioModels, sound => sound.soundType == s);
-            if (a != null)
+            List<AudioPlayer> a = audioPlayerPool.FindAll(player => player.MyCurrentData != null && player.MyCurrentData.soundType == s);
+            a.ForEach(i =>
             {
-                a.fadingIn = false;
-                a.fadingOut = false;
-                a.source.Stop();
-            }
-            else
-            {
-                Debug.LogWarning("AudioManager.StopSound() did not find an audio model with the name " + name);
-            }
+                i.Source.volume = 0f;
+                i.Source.Stop();
+            });
         }
         public void FadeOutSound(Sound s, float duration)
         {
-            AudioModel a = Array.Find(allAudioModels, sound => sound.soundType == s);
+            AudioPlayer a = GetActivePlayerForSound(s);
             if (a != null)
             {
-                a.source.FadeOut(duration, a);
-            }
-            else
-            {
-                Debug.LogWarning("AudioManager.FadeOutSound() did not find an audio model with the name " + name);
+                a.Source.DOKill();
+                a.Source.DOFade(0f, duration).OnComplete(() =>
+                {
+                    a.Source.volume = 0f;
+                    a.Source.Stop();
+                });
             }
         }
         public void FadeInSound(Sound s, float duration)
         {
-            AudioModel a = Array.Find(allAudioModels, sound => sound.soundType == s);
+            AudioDataBox a = Array.Find(allAudioModels, sound => sound.soundType == s);
             if (a != null)
             {
-                a.source.FadeIn(duration, a);
-            }
-            else
-            {
-                Debug.LogWarning("AudioManager.FadeInSound() did not find an audio model with the name " + name);
+                if (!a.allowDuplicates && IsSoundPlaying(s)) return;
+                AudioPlayer player = GetNextAvailableAudioPlayer();
+                player.BuildFromData(a);
+                player.Source.DOKill();
+                player.Source.volume = 0f;
+                player.Source.Play();
+                player.Source.DOFade(a.volume, duration);
             }
         }
+        #endregion
+        
+        #region Misc Logic              
+        private void BuildAudioPlayerFromAudioModelData(AudioModel data, AudioPlayer player)
+        {
+            // Randomize clip
+            if (data.randomizeClip) player.Source.clip = data.audioClips[RandomGenerator.NumberBetween(0, data.audioClips.Length - 1)];
+            else player.Source.clip = data.audioClip;
+
+            // Randomize pitch if marked to do so
+            if (data.randomizePitch) player.Source.pitch = RandomGenerator.NumberBetween(data.randomPitchLowerLimit, data.randomPitchUpperLimit);
+            else player.Source.pitch = data.pitch;
+
+            // Randomize volume if marked to do so
+            if (data.randomizeVolume) player.Source.volume = RandomGenerator.NumberBetween(data.randomVolumeLowerLimit, data.randomVolumeUpperLimit);
+            else player.Source.volume = data.volume;
+
+        }      
         public void FadeOutAllAmbience(float fadeDuration)
         {
             if (IsSoundPlaying(Sound.Ambience_Outdoor_Spooky)) FadeOutSound(Sound.Ambience_Outdoor_Spooky, fadeDuration);
@@ -312,34 +211,13 @@ namespace HexGameEngine.Audio
         public void FadeOutAllCombatMusic(float fadeDuration)
         {
             Debug.LogWarning("FadeOutAllCombatMusic()");
-            if (IsSoundPlaying(Sound.Music_Basic_Combat_1))
-            {
-                FadeOutSound(Sound.Music_Basic_Combat_1, fadeDuration);
-            }
-            if (IsSoundPlaying(Sound.Music_Basic_Combat_2))
-            {
-                FadeOutSound(Sound.Music_Basic_Combat_2, fadeDuration);
-            }
-            if (IsSoundPlaying(Sound.Music_Basic_Combat_3))
-            {
-                FadeOutSound(Sound.Music_Basic_Combat_3, fadeDuration);
-            }
-            if (IsSoundPlaying(Sound.Music_Elite_Combat_1))
-            {
-                FadeOutSound(Sound.Music_Elite_Combat_1, fadeDuration);
-            }
-            if (IsSoundPlaying(Sound.Music_Elite_Combat_2))
-            {
-                FadeOutSound(Sound.Music_Elite_Combat_2, fadeDuration);
-            }
-            if (IsSoundPlaying(Sound.Music_Boss_Combat_1))
-            {
-                FadeOutSound(Sound.Music_Boss_Combat_1, fadeDuration);
-            }
-            if (IsSoundPlaying(Sound.Music_Boss_Combat_2))
-            {
-                FadeOutSound(Sound.Music_Boss_Combat_2, fadeDuration);
-            }
+            if (IsSoundPlaying(Sound.Music_Basic_Combat_1)) FadeOutSound(Sound.Music_Basic_Combat_1, fadeDuration);            
+            if (IsSoundPlaying(Sound.Music_Basic_Combat_2)) FadeOutSound(Sound.Music_Basic_Combat_2, fadeDuration);            
+            if (IsSoundPlaying(Sound.Music_Basic_Combat_3)) FadeOutSound(Sound.Music_Basic_Combat_3, fadeDuration);            
+            if (IsSoundPlaying(Sound.Music_Elite_Combat_1)) FadeOutSound(Sound.Music_Elite_Combat_1, fadeDuration);            
+            if (IsSoundPlaying(Sound.Music_Elite_Combat_2)) FadeOutSound(Sound.Music_Elite_Combat_2, fadeDuration);            
+            if (IsSoundPlaying(Sound.Music_Boss_Combat_1)) FadeOutSound(Sound.Music_Boss_Combat_1, fadeDuration);            
+            if (IsSoundPlaying(Sound.Music_Boss_Combat_2)) FadeOutSound(Sound.Music_Boss_Combat_2, fadeDuration);            
         }
         public void ForceStopAllCombatMusic()
         {
@@ -354,52 +232,21 @@ namespace HexGameEngine.Audio
         public void AutoPlayBasicCombatMusic(float fadeDuration)
         {
             // Find all basic combat music
-            AudioModel[] basicCombatMusic = Array.FindAll(allAudioModels, sound => sound.combatCategory == CombatMusicCategory.Basic && sound != previousCombatTrack);
+            AudioDataBox[] basicCombatMusic = Array.FindAll(allAudioModels, sound => sound.combatCategory == CombatMusicCategory.Basic && sound != previousCombatTrack);
 
             // Choose one track randomly
-            AudioModel musicSelected = basicCombatMusic[RandomGenerator.NumberBetween(0, basicCombatMusic.Length - 1)];
+            AudioDataBox musicSelected = basicCombatMusic[RandomGenerator.NumberBetween(0, basicCombatMusic.Length - 1)];
 
             // Start music fade in
-            musicSelected.source.FadeIn(fadeDuration, musicSelected);
+            FadeInSound(musicSelected.soundType, fadeDuration);
 
             // Cache track so it cant be played twice in a row
             previousCombatTrack = musicSelected;
 
-        }
-        public void AutoPlayEliteCombatMusic(float fadeDuration)
-        {
-            /*
-            // Find all basic combat music
-            AudioModel[] eliteCombatMusic = Array.FindAll(allAudioModels, sound => sound.combatCategory == CombatMusicCategory.Elite && sound != previousCombatTrack);
-
-            // Choose one track randomly
-            AudioModel musicSelected = eliteCombatMusic[RandomGenerator.NumberBetween(0, eliteCombatMusic.Length - 1)];
-
-            // Start music fade in
-            musicSelected.source.FadeIn(fadeDuration, musicSelected);
-
-            // Cache track so it cant be played twice in a row
-            previousCombatTrack = musicSelected;
-            */
-        }
-        public void AutoPlayBossCombatMusic(float fadeDuration)
-        {
-            /*
-            // Find all basic combat music
-            AudioModel[] bossCombatMusic = Array.FindAll(allAudioModels, sound => sound.combatCategory == CombatMusicCategory.Boss && sound != previousCombatTrack);
-
-            // Choose one track randomly
-            AudioModel musicSelected = bossCombatMusic[RandomGenerator.NumberBetween(0, bossCombatMusic.Length - 1)];
-
-            // Start music fade in
-            musicSelected.source.FadeIn(fadeDuration, musicSelected);
-
-            // Cache track so it cant be played twice in a row
-            previousCombatTrack = musicSelected;
-            */
         }
         #endregion
 
+        #region Main Menu Music Logic
         private MusicSession currentMusicSession;
         public void PlayMainMenuMusic()
         {
@@ -420,47 +267,11 @@ namespace HexGameEngine.Audio
             if (IsSoundPlaying(Sound.Music_Main_Menu_Theme_Unlooped_1)) FadeOutSound(Sound.Music_Main_Menu_Theme_Unlooped_1, fadeSpeed);
             if (IsSoundPlaying(Sound.Music_Main_Menu_Theme_Looped_1)) FadeOutSound(Sound.Music_Main_Menu_Theme_Looped_1, fadeSpeed);
         }
-
-        // Audio Player + Pooling Logic
-        #region
-        private AudioPlayer GetNextAvailableAudioPlayer()
-        {
-            AudioPlayer availablePlayer = null;
-
-            // Find an available player
-            foreach (AudioPlayer ap in audioPlayerPool)
-            {
-                if (ap.source.isPlaying == false)
-                {
-                    availablePlayer = ap;
-                    break;
-                }
-            }
-
-            // If there arent any available, create new one, add it to pool, then use it
-            if (availablePlayer == null)
-            {
-                Debug.LogWarning("GetNextAvailableAudioPlayer() couldn't find an available player, creating a new one");
-                availablePlayer = CreateAndAddAudioPlayerToPool();
-            }
-
-            return availablePlayer;
-        }
-
-        private AudioPlayer CreateAndAddAudioPlayerToPool()
-        {
-            AudioPlayer newAP = Instantiate(audioPlayerPrefab, audioPlayerPoolParent).GetComponent<AudioPlayer>();
-            audioPlayerPool.Add(newAP);
-            // Debug.LogWarning("AudioManager total player pool count = " + audioPlayerPool.Count.ToString());
-            return newAP;
-        }
-
         #endregion
+
     }
 
     public class MusicSession{}
-
-
 
     public enum Sound
     {
@@ -639,78 +450,3 @@ namespace HexGameEngine.Audio
     }
 }
 
-// AUDIO SOURCE EXTENSIONS!!
-namespace UnityEngine
-{
-    public static class AudioSourceExtensions
-    {
-        public static void FadeOut(this AudioSource a, float duration, HexGameEngine.Audio.AudioModel data)
-        {
-            a.DOKill();
-            data.fadingIn = false;
-            data.fadingOut = true;
-            a.DOFade(0f, duration).OnComplete(() =>
-            {
-                a.Stop();
-                a.volume = data.volume; 
-                data.fadingOut = false;
-            });
-            //a.GetComponent<MonoBehaviour>().StartCoroutine(FadeOutCore(a, duration, data));
-        }
-
-        private static IEnumerator FadeOutCore(AudioSource a, float duration, HexGameEngine.Audio.AudioModel data)
-        {
-            data.fadingIn = false;
-            data.fadingOut = true;
-            float startVolume = data.volume;
-
-            while (a.volume > 0 && data.fadingOut)
-            {
-                a.volume -= startVolume * Time.deltaTime / duration;
-                if (a.volume <= 0)
-                {
-                    a.Stop();
-                    a.volume = startVolume;
-                    data.fadingOut = false;
-                }
-                yield return new WaitForEndOfFrame();
-            }
-
-
-        }
-        public static void FadeIn(this AudioSource a, float duration, HexGameEngine.Audio.AudioModel data)
-        {
-            a.DOKill();
-            data.fadingOut = false;
-            data.fadingIn = true;
-            a.volume = 0f;
-            a.Play();
-            a.DOFade(data.volume, duration).OnComplete(() =>
-            {
-                data.fadingIn = false;
-            });
-        }
-        private static IEnumerator FadeInCore(AudioSource a, float duration, HexGameEngine.Audio.AudioModel data)
-        {
-            data.fadingOut = false;
-            data.fadingIn = true;
-
-            float endVolume = data.volume;
-            a.volume = 0f;
-            a.Play();
-
-            while (a.volume < endVolume && data.fadingIn)
-            {
-                a.volume += endVolume * Time.deltaTime / duration;
-
-                if (a.volume >= endVolume)
-                {
-                    a.volume = endVolume;
-                    data.fadingIn = false;
-                }
-
-                yield return new WaitForEndOfFrame();
-            }
-        }
-    }
-}

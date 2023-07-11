@@ -340,7 +340,7 @@ namespace HexGameEngine.TurnLogic
                 CombatUIController.Instance.SetEndTurnButtonInteractions(false);
 
                 // Mouse click SFX
-                AudioManager.Instance.PlaySoundPooled(Sound.UI_Heavy_Click);
+                AudioManager.Instance.PlaySound(Sound.UI_Heavy_Click);
 
                 // Trigger character on activation end sequence and events
                 HexCharacterController.Instance.CharacterOnTurnEnd(EntityActivated);
@@ -360,7 +360,7 @@ namespace HexGameEngine.TurnLogic
                 EntityActivated.hasRequestedTurnDelay = true;
 
                 // Mouse click SFX
-                AudioManager.Instance.PlaySoundPooled(Sound.UI_Heavy_Click);
+                AudioManager.Instance.PlaySound(Sound.UI_Heavy_Click);
 
                 // Move this character to the end of the turn order.
                 HandleMoveCharacterToEndOfTurnOrder(EntityActivated);
@@ -502,7 +502,7 @@ namespace HexGameEngine.TurnLogic
                 window.rollText.text = entity.currentInitiativeRoll.ToString();
 
                 // chime ping SFX
-                AudioManager.Instance.PlaySoundPooled(Sound.UI_Chime_1);
+                AudioManager.Instance.PlaySound(Sound.UI_Chime_1);
 
                 // do breath effect on window
                 float currentScale = window.rollText.transform.localScale.x;

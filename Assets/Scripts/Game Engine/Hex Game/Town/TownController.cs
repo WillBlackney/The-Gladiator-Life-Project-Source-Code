@@ -428,7 +428,7 @@ namespace HexGameEngine.TownFeatures
                 // Cant remove injuries if character has none
                 if (slot.FeatureType == TownActivity.Surgery && !PerkController.Instance.IsCharacteInjured(draggedCharacter.passiveManager)) return;
 
-                AudioManager.Instance.PlaySoundPooled(Sound.UI_Buy_Item);
+                AudioManager.Instance.PlaySound(Sound.UI_Buy_Item);
 
                 // todo in future: error messages above for the player, explaing why they cant drop player on slot (not stress, not enough old, etc)
 

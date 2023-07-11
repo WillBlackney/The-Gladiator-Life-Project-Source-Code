@@ -341,7 +341,7 @@ namespace HexGameEngine.VisualEvents
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
             if (playSFX)
             {
-                AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Fire_1);
+                AudioManager.Instance.PlaySound(Sound.Explosion_Fire_1);
             }
         }
         #endregion
@@ -412,7 +412,7 @@ namespace HexGameEngine.VisualEvents
         public void CreateTeleportEffect(Vector3 location, int sortingOrderBonus = 15)
         {
             Debug.Log("VisualEffectManager.CreateTeleportEffect() called...");
-            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Teleport);
+            AudioManager.Instance.PlaySound(Sound.Ability_Teleport);
             GameObject hn = Instantiate(TeleportEffectPrefab, location, TeleportEffectPrefab.transform.rotation);
             BuffEffect teScript = hn.GetComponent<BuffEffect>();
             teScript.InitializeSetup(location, sortingOrderBonus);
@@ -426,7 +426,7 @@ namespace HexGameEngine.VisualEvents
 
         private void ShootArrow(Vector3 startPos, Vector3 endPos, TaskTracker cData)
         {
-            AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Arrow_Fired);
+            AudioManager.Instance.PlaySound(Sound.Projectile_Arrow_Fired);
             Projectile projectileScript = Instantiate(arrow, startPos, Quaternion.identity).GetComponent<Projectile>();
             projectileScript.Initialize(startPos, endPos, () => cData.MarkAsCompleted());
         }
@@ -452,7 +452,7 @@ namespace HexGameEngine.VisualEvents
             ToonProjectile tsScript = Instantiate(fireBall, startPos, fireBall.transform.rotation).GetComponent<ToonProjectile>();
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
-                AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Fire_1);
+                AudioManager.Instance.PlaySound(Sound.Explosion_Fire_1);
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
@@ -508,7 +508,7 @@ namespace HexGameEngine.VisualEvents
             ToonProjectile tsScript = Instantiate(fireMeteor, startPos, fireMeteor.transform.rotation).GetComponent<ToonProjectile>();
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
-                AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Fire_1);
+                AudioManager.Instance.PlaySound(Sound.Explosion_Fire_1);
                 if (cData != null) cData.MarkAsCompleted();
             });
         }
@@ -537,7 +537,7 @@ namespace HexGameEngine.VisualEvents
         // Apply Burning Effect
         public void CreateApplyBurningEffect(Vector3 location, int sortingOrderBonus = 15, float scaleModifier = 1f)
         {
-            AudioManager.Instance.PlaySoundPooled(Sound.Passive_Burning_Gained);
+            AudioManager.Instance.PlaySound(Sound.Passive_Burning_Gained);
             GameObject hn = Instantiate(gainBurning, location, gainBurning.transform.rotation);
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
@@ -608,7 +608,7 @@ namespace HexGameEngine.VisualEvents
             GameObject hn = Instantiate(smallFireExplosion, location, smallFireExplosion.transform.rotation);
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Fire_1);
+            AudioManager.Instance.PlaySound(Sound.Explosion_Fire_1);
         }
 
         // Poison Explosion

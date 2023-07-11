@@ -506,7 +506,7 @@ namespace HexGameEngine.Abilities
                         HexCharacterController.Instance.ModifyArmour(target, -abilityEffect.bonusArmourDamage);
 
                     // Do on hit visual effects for this ability
-                    VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1), target.GetLastStackEventParent());
+                    VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySound(Sound.Crowd_Cheer_1), target.GetLastStackEventParent());
                     foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                         AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, weaponUsed, target.GetLastStackEventParent());
 
@@ -618,7 +618,7 @@ namespace HexGameEngine.Abilities
                     VisualEventManager.CreateVisualEvent(() =>
                     {
                         VisualEffectManager.Instance.CreateStatusEffect(target.hexCharacterView.WorldPosition, "MISS");
-                        AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Ooh_1);
+                        AudioManager.Instance.PlaySound(Sound.Crowd_Ooh_1);
                         LevelController.Instance.AnimateCrowdOnMiss();
                     }, target.GetLastStackEventParent());
 
@@ -736,7 +736,7 @@ namespace HexGameEngine.Abilities
                         HexCharacterController.Instance.ModifyCurrentFatigue(character, 5);
 
                         // Do on hit visual effects for this ability
-                        VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1), character.GetLastStackEventParent());
+                        VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySound(Sound.Crowd_Cheer_1), character.GetLastStackEventParent());
                         foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
                         {
                             AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, weaponUsed, character.GetLastStackEventParent());
@@ -753,7 +753,7 @@ namespace HexGameEngine.Abilities
                         {
                             if (character.hexCharacterView != null) pos = character.hexCharacterView.WorldPosition;
                             VisualEffectManager.Instance.CreateStatusEffect(pos, "MISS");
-                            AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Ooh_1);
+                            AudioManager.Instance.PlaySound(Sound.Crowd_Ooh_1);
                             LevelController.Instance.AnimateCrowdOnMiss();
                         }, character.GetLastStackEventParent());
 

@@ -476,7 +476,7 @@ namespace HexGameEngine.Characters
                 {
                     VisualEffectManager.Instance.CreateStatusEffect(pos, "Second Wind!", PerkController.Instance.GetPerkIconDataByTag(Perk.SecondWind).passiveSprite, StatusFrameType.CircularBrown);
                     VisualEffectManager.Instance.CreateGeneralBuffEffect(pos);
-                    AudioManager.Instance.PlaySoundPooled(Sound.Ability_Heroic_Buff);
+                    AudioManager.Instance.PlaySound(Sound.Ability_Heroic_Buff);
                 }, character.GetLastStackEventParent()).
                 SetStartDelay(0.5f).
                 SetEndDelay(0.5f);
@@ -829,7 +829,7 @@ namespace HexGameEngine.Characters
                 yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
 
                 // Trigger SFX weapon swing
-                if(weaponUsed != null) AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
+                if(weaponUsed != null) AudioManager.Instance.PlaySound(weaponUsed.swingSFX);
 
                 // Move 50% of the way towards the target position
                 Vector2 startPos = view.WorldPosition;
@@ -860,7 +860,7 @@ namespace HexGameEngine.Characters
                 yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
 
                 // Trigger SFX weapon swing
-                if (weaponUsed != null) AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
+                if (weaponUsed != null) AudioManager.Instance.PlaySound(weaponUsed.swingSFX);
 
                 // Move 50% of the way towards the target position
                 Vector2 startPos = view.WorldPosition;
@@ -891,7 +891,7 @@ namespace HexGameEngine.Characters
                 yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
 
                 // to do: trigger SFX weapon swing
-                if (weaponUsed != null) AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
+                if (weaponUsed != null) AudioManager.Instance.PlaySound(weaponUsed.swingSFX);
 
                 // Move 50% of the way towards the target position
                 Vector2 startPos = view.WorldPosition;
@@ -922,7 +922,7 @@ namespace HexGameEngine.Characters
                 yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
 
                 // Trigger SFX weapon swing
-                if (weaponUsed != null) AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
+                if (weaponUsed != null) AudioManager.Instance.PlaySound(weaponUsed.swingSFX);
 
                 // Move 50% of the way towards the target position
                 Vector2 startPos = view.WorldPosition;
@@ -954,7 +954,7 @@ namespace HexGameEngine.Characters
                 yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
 
                 // Trigger SFX weapon swing
-                if (weaponUsed != null) AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
+                if (weaponUsed != null) AudioManager.Instance.PlaySound(weaponUsed.swingSFX);
 
                 // Move 50% of the way towards the target position
                 Vector2 startPos = view.WorldPosition;
@@ -985,7 +985,7 @@ namespace HexGameEngine.Characters
                 yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
 
                 // Trigger SFX weapon swing
-                if (weaponUsed != null) AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
+                if (weaponUsed != null) AudioManager.Instance.PlaySound(weaponUsed.swingSFX);
 
                 // Move 50% of the way towards the target position
                 Vector2 startPos = view.WorldPosition;
@@ -1072,7 +1072,7 @@ namespace HexGameEngine.Characters
             yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
 
             // Trigger SFX weapon swing
-            AudioManager.Instance.PlaySoundPooled(Sound.Weapon_Axe_1H_Swing);
+            AudioManager.Instance.PlaySound(Sound.Weapon_Axe_1H_Swing);
 
             // Move 66% of the way towards the target position
             Vector2 startPos = view.WorldPosition;
@@ -1111,7 +1111,7 @@ namespace HexGameEngine.Characters
             yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
 
             // Trigger SFX weapon swing
-            AudioManager.Instance.PlaySoundPooled(Sound.Weapon_Axe_1H_Swing);
+            AudioManager.Instance.PlaySound(Sound.Weapon_Axe_1H_Swing);
             if (cData != null) cData.MarkAsCompleted();
         }
         public void TriggerShieldBashAnimation(HexCharacterView view, Vector2 targetPos, TaskTracker cData)
@@ -1145,7 +1145,7 @@ namespace HexGameEngine.Characters
             yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
 
             // Trigger SFX weapon swing
-            AudioManager.Instance.PlaySoundPooled(Sound.Weapon_Staff_Swing);
+            AudioManager.Instance.PlaySound(Sound.Weapon_Staff_Swing);
 
             // Move 50% of the way towards the target position
             Vector2 startPos = view.WorldPosition;
@@ -1175,7 +1175,7 @@ namespace HexGameEngine.Characters
             // Start anim
             view.ucmAnimator.SetTrigger(AnimationEventController.SHOOT_CROSSBOW);
             yield return new WaitForSeconds(shootFrame);
-            AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
+            AudioManager.Instance.PlaySound(weaponUsed.swingSFX);
             if (cData != null) cData.MarkAsCompleted();
         }
         public void PlayShootBowAnimation(HexCharacterView view, ItemData weaponUsed, TaskTracker cData)
@@ -1190,10 +1190,10 @@ namespace HexGameEngine.Characters
             view.CurrentAnimation = AnimationEventController.SHOOT_BOW;
 
             // Start anim
-            AudioManager.Instance.PlaySoundPooled(Sound.Character_Draw_Bow);
+            AudioManager.Instance.PlaySound(Sound.Character_Draw_Bow);
             view.ucmAnimator.SetTrigger(AnimationEventController.SHOOT_BOW);
             yield return new WaitForSeconds(shootFrame);
-            AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
+            AudioManager.Instance.PlaySound(weaponUsed.swingSFX);
             if (cData != null) cData.MarkAsCompleted();
         }
         public void TriggerKnockedBackIntoObstructionAnimation(HexCharacterView view, Vector2 targetPos, TaskTracker cData)
@@ -1295,7 +1295,7 @@ namespace HexGameEngine.Characters
             yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
 
             // Trigger SFX weapon swing
-            if (weaponUsed != null) AudioManager.Instance.PlaySoundPooled(weaponUsed.swingSFX);
+            if (weaponUsed != null) AudioManager.Instance.PlaySound(weaponUsed.swingSFX);
 
             // Move a bit foward
             Vector2 startPos = view.WorldPosition;
@@ -1537,7 +1537,7 @@ namespace HexGameEngine.Characters
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Poisoned), DamageType.Physical);
                     VisualEventManager.CreateVisualEvent(() => 
                     {
-                        AudioManager.Instance.PlaySoundPooled(Sound.Ability_Poison_Debuff);
+                        AudioManager.Instance.PlaySound(Sound.Ability_Poison_Debuff);
                         VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.ApplyPoisoned, view.WorldPosition); 
                     });
                     CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
@@ -1577,7 +1577,7 @@ namespace HexGameEngine.Characters
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 2, DamageType.Physical);
                     VisualEventManager.CreateVisualEvent(() =>
                     {
-                        AudioManager.Instance.PlaySoundPooled(Sound.Ability_Bloody_Stab);
+                        AudioManager.Instance.PlaySound(Sound.Ability_Bloody_Stab);
                         VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
                     });
                     CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
@@ -1594,7 +1594,7 @@ namespace HexGameEngine.Characters
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 4, DamageType.Physical);
                     VisualEventManager.CreateVisualEvent(() =>
                     {
-                        AudioManager.Instance.PlaySoundPooled(Sound.Ability_Bloody_Stab);
+                        AudioManager.Instance.PlaySound(Sound.Ability_Bloody_Stab);
                         VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
                     }); 
                     CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
@@ -1611,7 +1611,7 @@ namespace HexGameEngine.Characters
                     DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Bleeding), DamageType.Physical);
                     VisualEventManager.CreateVisualEvent(() =>
                     {
-                        AudioManager.Instance.PlaySoundPooled(Sound.Ability_Bloody_Stab);
+                        AudioManager.Instance.PlaySound(Sound.Ability_Bloody_Stab);
                         VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
                     }); 
                     CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
@@ -1837,7 +1837,7 @@ namespace HexGameEngine.Characters
                 // Overcharged
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Overcharged) && character.currentHealth > 0)
                 {
-                    AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Debuff);
+                    AudioManager.Instance.PlaySound(Sound.Passive_General_Debuff);
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Overcharged, -1, false);
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Stunned, 1, true, 0.5f);
                 }
@@ -1883,7 +1883,7 @@ namespace HexGameEngine.Characters
                     {
                         VisualEventManager.CreateVisualEvent(() =>
                         {
-                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Dark_Debuff);
+                            AudioManager.Instance.PlaySound(Sound.Ability_Dark_Debuff);
                             VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Fearsome!", PerkController.Instance.GetPerkIconDataByTag(Perk.Fearsome).passiveSprite, StatusFrameType.CircularBrown);
                         }).SetEndDelay(0.5f);
 
@@ -1903,7 +1903,7 @@ namespace HexGameEngine.Characters
                     {
                         VisualEventManager.CreateVisualEvent(() =>
                         {
-                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Dark_Debuff);
+                            AudioManager.Instance.PlaySound(Sound.Ability_Dark_Debuff);
                             VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Looming Presence!", PerkController.Instance.GetPerkIconDataByTag(Perk.LoomingPresence).passiveSprite, StatusFrameType.CircularBrown);
                         }).SetEndDelay(0.5f);
 
@@ -1990,7 +1990,7 @@ namespace HexGameEngine.Characters
                         // Poison nova VFX
                         VisualEventManager.CreateVisualEvent(() =>
                         {
-                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Poison_Debuff);
+                            AudioManager.Instance.PlaySound(Sound.Ability_Poison_Debuff);
                             VisualEffectManager.Instance.CreatePoisonNova(view.WorldPosition);
                         });
 
@@ -2038,7 +2038,7 @@ namespace HexGameEngine.Characters
                     {
                         VisualEventManager.CreateVisualEvent(() =>
                         {
-                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Heroic_Buff);
+                            AudioManager.Instance.PlaySound(Sound.Ability_Heroic_Buff);
                             VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Encouraging Leader!", PerkController.Instance.GetPerkIconDataByTag(Perk.EncouragingLeader).passiveSprite, StatusFrameType.CircularBrown);
                         }).SetEndDelay(0.5f);
                         PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Wrath, 1, true, 0, character.pManager);
@@ -2055,7 +2055,7 @@ namespace HexGameEngine.Characters
                     {
                         VisualEventManager.CreateVisualEvent(() =>
                         {
-                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Hymn);
+                            AudioManager.Instance.PlaySound(Sound.Ability_Hymn);
                             VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Fellowship!", PerkController.Instance.GetPerkIconDataByTag(Perk.HymnOfFellowship).passiveSprite, StatusFrameType.CircularBrown);
                         }).SetEndDelay(0.5f);
 
@@ -2065,7 +2065,7 @@ namespace HexGameEngine.Characters
                             PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Guard, 1, true, 0, character.pManager);
                             VisualEventManager.CreateVisualEvent(() =>
                             {
-                                AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Buff);
+                                AudioManager.Instance.PlaySound(Sound.Passive_General_Buff);
                                 VisualEffectManager.Instance.CreateGeneralBuffEffect(pos);
                             });
                         }
@@ -2083,7 +2083,7 @@ namespace HexGameEngine.Characters
                     {
                         VisualEventManager.CreateVisualEvent(() =>
                         {
-                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Hymn);
+                            AudioManager.Instance.PlaySound(Sound.Ability_Hymn);
                             VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Vengeance!", PerkController.Instance.GetPerkIconDataByTag(Perk.HymnOfFellowship).passiveSprite, StatusFrameType.CircularBrown);
                         }).SetEndDelay(0.5f);
 
@@ -2093,7 +2093,7 @@ namespace HexGameEngine.Characters
                             PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Wrath, 1, true, 0, character.pManager);
                             VisualEventManager.CreateVisualEvent(() =>
                             {
-                                AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Buff);
+                                AudioManager.Instance.PlaySound(Sound.Passive_General_Buff);
                                 VisualEffectManager.Instance.CreateGeneralBuffEffect(pos);
                             });
                         }
@@ -2112,7 +2112,7 @@ namespace HexGameEngine.Characters
                     {
                         VisualEventManager.CreateVisualEvent(() =>
                         {
-                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Hymn);
+                            AudioManager.Instance.PlaySound(Sound.Ability_Hymn);
                             VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Courage!", PerkController.Instance.GetPerkIconDataByTag(Perk.HymnOfFellowship).passiveSprite, StatusFrameType.CircularBrown);
                         }).SetEndDelay(0.5f);
 
@@ -2122,7 +2122,7 @@ namespace HexGameEngine.Characters
                             PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Courage, 1, true, 0, character.pManager);
                             VisualEventManager.CreateVisualEvent(() =>
                             {
-                                AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Buff);
+                                AudioManager.Instance.PlaySound(Sound.Passive_General_Buff);
                                 VisualEffectManager.Instance.CreateGeneralBuffEffect(pos);
                             });
                         }
@@ -2139,7 +2139,7 @@ namespace HexGameEngine.Characters
                     {
                         VisualEventManager.CreateVisualEvent(() =>
                         {
-                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Hymn);
+                            AudioManager.Instance.PlaySound(Sound.Ability_Hymn);
                             VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Hymn of Purity!", PerkController.Instance.GetPerkIconDataByTag(Perk.HymnOfFellowship).passiveSprite, StatusFrameType.CircularBrown);
                         }).SetEndDelay(0.5f);
 
@@ -2161,7 +2161,7 @@ namespace HexGameEngine.Characters
 
                             VisualEventManager.CreateVisualEvent(() =>
                             {
-                                AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Buff);
+                                AudioManager.Instance.PlaySound(Sound.Passive_General_Buff);
                                 VisualEffectManager.Instance.CreateGeneralBuffEffect(pos);
                             });
                         }
@@ -2179,7 +2179,7 @@ namespace HexGameEngine.Characters
                     {
                         VisualEventManager.CreateVisualEvent(() =>
                         {
-                            AudioManager.Instance.PlaySoundPooled(Sound.Ability_Heroic_Buff);
+                            AudioManager.Instance.PlaySound(Sound.Ability_Heroic_Buff);
                             VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Formation Leader!", PerkController.Instance.GetPerkIconDataByTag(Perk.FormationLeader).
                                 passiveSprite, StatusFrameType.CircularBrown);
                         }).SetEndDelay(0.5f);
@@ -2187,7 +2187,7 @@ namespace HexGameEngine.Characters
                         foreach (HexCharacterModel ally in allies)
                         {
                             ModifyCurrentFatigue(ally, -5, true);
-                            VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(Sound.Passive_General_Buff));
+                            VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySound(Sound.Passive_General_Buff));
                         }
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
@@ -2839,7 +2839,7 @@ namespace HexGameEngine.Characters
             }
 
             // Animate crowd + starting cheer
-            AudioManager.Instance.PlaySoundPooled(Sound.Crowd_Cheer_1);
+            AudioManager.Instance.PlaySound(Sound.Crowd_Cheer_1);
             LevelController.Instance.AnimateCrowdOnCombatStart();
 
             yield return new WaitUntil(() => events.Count == 0);

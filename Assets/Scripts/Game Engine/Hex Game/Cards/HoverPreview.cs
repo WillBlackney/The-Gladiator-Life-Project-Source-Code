@@ -232,7 +232,7 @@ namespace HexGameEngine.Cards
             DisableNonPreviewObjects();
 
             // Play sfx
-            AudioManager.Instance.PlaySoundPooled(Sound.Card_Moused_Over);
+            AudioManager.Instance.PlaySound(Sound.Card_Moused_Over);
 
             // Move to target position
             previewGameObject.transform.localPosition = Vector3.zero;

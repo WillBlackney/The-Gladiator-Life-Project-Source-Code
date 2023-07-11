@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Music_Town_Theme_1
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 8677fd577e6989a4ba5bf8523da83b59, type: 3}
+  allowDuplicates: 0
   randomizeClip: 1
   audioClips:
   - {fileID: 8300000, guid: 2c017667f6f6481429d8ba0540cf9762, type: 3}
@@ -29,6 +30,3 @@ MonoBehaviour:
   randomPitchUpperLimit: 1.2
   pitch: 1
   loop: 1
-  source: {fileID: 0}
-  fadingIn: 0
-  fadingOut: 0

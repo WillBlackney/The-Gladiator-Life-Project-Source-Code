@@ -69,7 +69,7 @@ namespace HexGameEngine.UI
                 var swapCharacter = DeploymentNodeView.NodeMousedOver.MyCharacterData;               
                 var swapNode = DeploymentNodeView.NodeMousedOver;
 
-                AudioManager.Instance.PlaySoundPooled(Sound.UI_Drag_Drop_End);
+                AudioManager.Instance.PlaySound(Sound.UI_Drag_Drop_End);
                 TownController.Instance.HandleDropCharacterOnDeploymentNode(swapNode, draggedCharacter);
                 TownController.Instance.HandleDropCharacterOnDeploymentNode(dragNode, swapCharacter);
             }
@@ -77,7 +77,7 @@ namespace HexGameEngine.UI
             // Character Deployment logic
             else if (DeploymentNodeView.NodeMousedOver != null)
             {
-                AudioManager.Instance.PlaySoundPooled(Sound.UI_Drag_Drop_End);
+                AudioManager.Instance.PlaySound(Sound.UI_Drag_Drop_End);
                 if (DeploymentNodeView.NodeMousedOver.AllowedCharacter == Allegiance.Player)
                     TownController.Instance.HandleDropCharacterOnDeploymentNode(DeploymentNodeView.NodeMousedOver, draggedCharacterData);      
                 else if(draggedNode != null)

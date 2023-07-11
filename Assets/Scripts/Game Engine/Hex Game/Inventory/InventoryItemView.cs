@@ -210,7 +210,7 @@ namespace HexGameEngine.Items
                     else if(myItemRef.abilityData != null)
                     {
                         // to do: only run this code if the library page is actually open
-                        AudioManager.Instance.PlaySoundPooled(Sound.UI_Drag_Drop_End);
+                        AudioManager.Instance.PlaySound(Sound.UI_Drag_Drop_End);
                         TownController.Instance.LibraryAbilitySlot.BuildFromAbility(myItemRef.abilityData);
                     }
                 }

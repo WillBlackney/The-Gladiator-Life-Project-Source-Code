@@ -91,7 +91,7 @@ namespace HexGameEngine.TownFeatures
             yield return new WaitForSeconds(0.76f);
 
             // Feature specific entrance SFX
-            AudioManager.Instance.PlaySoundPooled(entranceSound);
+            AudioManager.Instance.PlaySound(entranceSound);
 
             // Move page to centre
             pageMovementParent.DOMove(pageEndPos.position, 0.75f)

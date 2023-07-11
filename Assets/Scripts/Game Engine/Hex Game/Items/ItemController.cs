@@ -427,14 +427,14 @@ namespace HexGameEngine.Items
             else if (slot.SlotType == RosterSlotType.Body)
                 character.itemSet.bodyArmour = newItem.itemData;
 
-            AudioManager.Instance.PlaySoundPooled(equipSound);
+            AudioManager.Instance.PlaySound(equipSound);
 
             // Update item abilities
             character.abilityBook.OnItemSetChanged(character.itemSet);
         }
         public void HandleSellItemToArmoury(InventoryItem item)
         {
-            AudioManager.Instance.PlaySoundPooled(Sound.Gold_Cha_Ching);
+            AudioManager.Instance.PlaySound(Sound.Gold_Cha_Ching);
             InventoryController.Instance.RemoveItemFromInventory(item);
             PlayerDataController.Instance.ModifyPlayerGold(item.GetSellPrice());
             InventoryController.Instance.RebuildInventoryView();

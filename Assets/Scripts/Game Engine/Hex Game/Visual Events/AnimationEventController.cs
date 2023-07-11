@@ -78,11 +78,11 @@ namespace HexGameEngine.VisualEvents
 
             else if (vEvent.eventType == AnimationEventType.SoundEffect)
             {
-                VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(vEvent.soundEffect), stackEvent);
+                VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySound(vEvent.soundEffect), stackEvent);
             }
             else if (vEvent.eventType == AnimationEventType.WeaponHitSound)
             {
-                VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySoundPooled(weaponUsed.hitSFX), stackEvent);
+                VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySound(weaponUsed.hitSFX), stackEvent);
             }
 
             else if (vEvent.eventType == AnimationEventType.ScreenOverlay)

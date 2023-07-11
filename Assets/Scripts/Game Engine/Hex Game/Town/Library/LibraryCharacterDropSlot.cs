@@ -65,7 +65,7 @@ namespace HexGameEngine.TownFeatures
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(portraitModel, myCharacterData.modelParts);
             CharacterModeller.ApplyItemSetToCharacterModelView(myCharacterData.itemSet, portraitModel);
             TownController.Instance.EvaluateLibrarySlots();
-            AudioManager.Instance.PlaySoundPooled(Sound.UI_Drag_Drop_End);
+            AudioManager.Instance.PlaySound(Sound.UI_Drag_Drop_End);
         }
         public void ClearCharacter()
         {

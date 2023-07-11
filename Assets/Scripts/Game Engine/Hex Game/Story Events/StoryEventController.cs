@@ -128,7 +128,7 @@ namespace HexGameEngine.StoryEvents
             ShowUI();
 
             // Play event start fanfare SFX
-            AudioManager.Instance.PlaySoundPooled(Sound.Effects_Story_Event_Start);
+            AudioManager.Instance.PlaySound(Sound.Effects_Story_Event_Start);
         }
         #endregion
 
@@ -497,7 +497,7 @@ namespace HexGameEngine.StoryEvents
         {
             if (button.MyChoiceData != null)
             {
-                AudioManager.Instance.PlaySoundPooled(Sound.UI_Button_Click);
+                AudioManager.Instance.PlaySound(Sound.UI_Button_Click);
                 HandleAllChoiceEffects(button.MyChoiceData);
             }
 

@@ -16,6 +16,10 @@ namespace HexGameEngine.Audio
 
         [VerticalGroup("General Properties/Stats")]
         [LabelWidth(100)]
+        public bool allowDuplicates = true;
+
+        [VerticalGroup("General Properties/Stats")]
+        [LabelWidth(100)]
         public bool randomizeClip;
 
         [VerticalGroup("General Properties/Stats")]
@@ -79,13 +83,6 @@ namespace HexGameEngine.Audio
         [LabelWidth(100)]
         public bool loop;
 
-        [HideInInspector]
-        public AudioSource source;
-
-        // Misc
-        [HideInInspector] public bool fadingIn;
-        [HideInInspector] public bool fadingOut;
-
 
         public bool ShowAudioClip()
         {
@@ -103,7 +100,6 @@ namespace HexGameEngine.Audio
         {
             return randomizeVolume == true;
         }
-
         public bool ShowPitch()
         {
             return randomizePitch == false;

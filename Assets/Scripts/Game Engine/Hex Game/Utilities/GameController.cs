@@ -773,7 +773,7 @@ namespace HexGameEngine
         #region
         public void HandleLoadIntoCombatFromDeploymentScreen()
         {
-            AudioManager.Instance.PlaySoundPooled(Sound.Effects_End_Deployment);
+            AudioManager.Instance.PlaySound(Sound.Effects_End_Deployment);
             AudioManager.Instance.FadeOutAllAmbience(1f);
             AudioManager.Instance.FadeOutSound(Sound.Music_Town_Theme_1, 1f);
             LoadingScreenController.Instance.ShowLoadingScreen(1.5f, 1f, null, () =>

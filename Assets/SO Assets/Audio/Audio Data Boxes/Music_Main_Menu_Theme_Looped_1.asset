@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Music_Main_Menu_Theme_Looped_1
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: d7dafe618f2214f4ab341f26ee842484, type: 3}
+  allowDuplicates: 0
   randomizeClip: 0
   audioClips: []
   soundType: 36
@@ -26,6 +27,3 @@ MonoBehaviour:
   randomPitchUpperLimit: 1.2
   pitch: 1
   loop: 1
-  source: {fileID: 0}
-  fadingIn: 0
-  fadingOut: 0
