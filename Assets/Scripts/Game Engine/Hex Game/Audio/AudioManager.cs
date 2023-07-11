@@ -5,8 +5,10 @@ using System;
 using Sirenix.OdinInspector;
 using HexGameEngine.Utilities;
 using DG.Tweening;
+using HexGameEngine.Abilities;
 using UnityEditor;
 using Sirenix.Utilities;
+using System.Linq;
 
 namespace HexGameEngine.Audio
 {
@@ -108,6 +110,36 @@ namespace HexGameEngine.Audio
                 a.source.pitch = a.pitch;
                 a.source.loop = a.loop;
             }
+            //Convert();
+        }
+        public void Convert()
+        {
+            /*
+            foreach(AudioModel am in allAudioModels)
+            {
+                AudioDataBox data = ScriptableObject.CreateInstance<AudioDataBox>();
+                data.name = am.soundType.ToString();
+
+                data.audioClip = am.audioClip;
+                data.randomizeClip = am.randomizeClip;
+                data.audioClips = am.audioClips.ToList().ToArray();
+                data.soundType = am.soundType;
+                data.combatCategory = am.combatCategory;
+                data.randomizeVolume = am.randomizeVolume;
+                data.randomVolumeLowerLimit = am.randomVolumeLowerLimit;
+                data.randomVolumeUpperLimit = am.randomVolumeUpperLimit;
+                data.volume = am.volume;
+                data.randomizePitch = am.randomizePitch;
+                data.randomPitchLowerLimit = am.randomPitchLowerLimit;
+                data.randomPitchUpperLimit = am.randomPitchUpperLimit;
+                data.pitch = am.pitch;
+                data.loop = am.loop;
+
+
+                AssetDatabase.CreateAsset(data, "Assets/SO Assets/Audio/Audio Data Boxes/" + data.name + ".asset");
+            }
+            AssetDatabase.SaveAssets();*/
+
         }
 
 
