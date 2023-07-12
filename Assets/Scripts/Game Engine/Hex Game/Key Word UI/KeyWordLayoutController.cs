@@ -12,15 +12,19 @@ namespace HexGameEngine.UI
     {
         // Properties + Component References
         #region
+        [Header("Data")]
+        [SerializeField] private KeyWordDataBox[] allKeyWordData;
+        [Space(10)]
+
         [Header("Transform + Parent Component")]
         [SerializeField] private Canvas rootCanvas;
         [SerializeField] private RectTransform panelFitterParent;
         [SerializeField] private RectTransform normalPos;
         [SerializeField] private RectTransform combatPos;
-
+        [Space(10)]
         [Header("Canvas Components")]
-        [SerializeField] private CanvasGroup mainCg; 
-
+        [SerializeField] private CanvasGroup mainCg;
+        [Space(10)]
         [Header("Keyword Panel Components")]
         [SerializeField] private KeyWordPanel[] allKeyWordPanels;       
         #endregion
@@ -92,7 +96,7 @@ namespace HexGameEngine.UI
         private void BuildKeywordPanelFromModel(KeyWordPanel panel, KeyWordModel model)
         {
             // Find data
-            KeyWordData data = GetMatchingKeyWordData(model);
+            KeyWordDataBox data = GetMatchingKeyWordData(model);
 
             // Set text values
             panel.nameText.text = GetKeyWordNameString(data);
@@ -120,11 +124,11 @@ namespace HexGameEngine.UI
 
         // Get data
         #region
-        private KeyWordData GetMatchingKeyWordData(KeyWordModel model)
+        private KeyWordDataBox GetMatchingKeyWordData(KeyWordModel model)
         {
-            KeyWordData dataReturned = null;
+            KeyWordDataBox dataReturned = null;
 
-            foreach (KeyWordData data in KeywordLibrary.Instance.allKeyWordData)
+            foreach (KeyWordDataBox data in allKeyWordData)
             {
                 if (model.kewWordType == data.kewWordType)
                 {
@@ -141,7 +145,7 @@ namespace HexGameEngine.UI
 
             return dataReturned;
         }
-        private string GetKeyWordDescriptionString(KeyWordData data)
+        private string GetKeyWordDescriptionString(KeyWordDataBox data)
         {
             string stringReturned = "empty";
 
@@ -152,7 +156,7 @@ namespace HexGameEngine.UI
 
             return stringReturned;
         }
-        private string GetKeyWordNameString(KeyWordData data)
+        private string GetKeyWordNameString(KeyWordDataBox data)
         {
             string stringReturned = "empty";
 

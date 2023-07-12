@@ -64,8 +64,7 @@ namespace HexGameEngine.Editor
         private DrawItemController drawItemController = new DrawItemController();
         private DrawAbilityController drawAbilityController = new DrawAbilityController();
         private DrawPerkController drawPerkController = new DrawPerkController();
-        private DrawColorLibrary drawColorLibrary = new DrawColorLibrary();
-        private DrawKeywordLibrary drawKeywordLibrary = new DrawKeywordLibrary();        
+        private DrawColorLibrary drawColorLibrary = new DrawColorLibrary();       
 
 
         [MenuItem("Tools/Hex Game Tools/PROJECT MANAGER")]
@@ -106,7 +105,6 @@ namespace HexGameEngine.Editor
             drawAbilityController.FindMyObject();
             drawPerkController.FindMyObject();
             drawColorLibrary.FindMyObject();
-            drawKeywordLibrary.FindMyObject();
         }
         protected override void OnGUI()
         {
@@ -191,11 +189,7 @@ namespace HexGameEngine.Editor
 
                 case ManagerState.ColorLibrary:
                     DrawEditor(enumIndex);
-                    break;
-
-                case ManagerState.KeywordLibrary:
-                    DrawEditor(enumIndex);
-                    break;               
+                    break;           
 
                 case ManagerState.EnemyTemplateData:
                     drawEnemies.SetSelected(MenuTree.Selection.SelectedValue);
@@ -275,7 +269,6 @@ namespace HexGameEngine.Editor
             targets.Add(drawAbilityController);
             targets.Add(drawPerkController);
             targets.Add(drawColorLibrary);
-            targets.Add(drawKeywordLibrary);
 
             targets.Add(base.GetTarget());
 
@@ -388,7 +381,6 @@ namespace HexGameEngine.Editor
             AbilityController,
             PerkController,
             ColorLibrary,
-            KeywordLibrary
 
         };
 
@@ -435,10 +427,6 @@ namespace HexGameEngine.Editor
 
     }
     public class DrawColorLibrary : DrawSceneObject<ColorLibrary>
-    {
-
-    }
-    public class DrawKeywordLibrary : DrawSceneObject<KeywordLibrary>
     {
 
     }
