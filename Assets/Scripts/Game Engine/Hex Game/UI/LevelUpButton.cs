@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class LevelUpButton : MonoBehaviour
     {

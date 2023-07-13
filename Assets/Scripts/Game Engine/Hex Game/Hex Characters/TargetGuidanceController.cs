@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.UI;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class TargetGuidanceController : Singleton<TargetGuidanceController>
     {

@@ -1,15 +1,15 @@
 ﻿using DG.Tweening;
-using HexGameEngine.Audio;
-using HexGameEngine.Cards;
-using HexGameEngine.Perks;
-using HexGameEngine.UI;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Cards;
+using WeAreGladiators.Perks;
+using WeAreGladiators.UI;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace HexGameEngine.RewardSystems
+namespace WeAreGladiators.RewardSystems
 {
     public class RewardScreenCardViewModel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {

@@ -1,5 +1,5 @@
-using HexGameEngine.CameraSystems;
-using HexGameEngine.Utilities;
+using WeAreGladiators.CameraSystems;
+using WeAreGladiators.Utilities;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class CursorController : Singleton<CursorController>
     {

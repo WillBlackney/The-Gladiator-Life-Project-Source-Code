@@ -1,11 +1,11 @@
-using HexGameEngine.Audio;
-using HexGameEngine.Characters;
-using HexGameEngine.MainMenu;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Characters;
+using WeAreGladiators.MainMenu;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class ChooseTalentButton : MonoBehaviour
     {

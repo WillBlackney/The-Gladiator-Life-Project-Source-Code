@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using HexGameEngine.Utilities;
-using HexGameEngine.Perks;
-using HexGameEngine.Libraries;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Libraries;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class KeyWordLayoutController : Singleton<KeyWordLayoutController>
     {

@@ -1,17 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Abilities;
+using WeAreGladiators.Abilities;
 using TMPro;
 using UnityEngine.UI;
-using HexGameEngine.Libraries;
-using HexGameEngine.Player;
-using HexGameEngine.Utilities;
-using HexGameEngine.UI;
-using HexGameEngine.Items;
+using WeAreGladiators.Libraries;
+using WeAreGladiators.Player;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.UI;
+using WeAreGladiators.Items;
 using DG.Tweening;
 
-namespace HexGameEngine.TownFeatures
+namespace WeAreGladiators.TownFeatures
 {
     public class AbilityTomeShopSlot : MonoBehaviour
     {

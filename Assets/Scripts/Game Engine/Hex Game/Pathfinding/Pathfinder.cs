@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TbsFramework.Pathfinding.Algorithms;
 using TbsFramework.Pathfinding.DataStructs;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Characters;
-using HexGameEngine.Perks;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Perks;
 
-namespace HexGameEngine.Pathfinding
+namespace WeAreGladiators.Pathfinding
 {
     public static class Pathfinder
     {

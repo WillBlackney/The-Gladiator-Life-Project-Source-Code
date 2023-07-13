@@ -1,28 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.Characters;
-using HexGameEngine.Abilities;
-using HexGameEngine.Perks;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Perks;
 using DG.Tweening;
 using System;
 using Sirenix.OdinInspector;
-using HexGameEngine.Cards;
-using HexGameEngine.Persistency;
-using HexGameEngine.JourneyLogic;
-using HexGameEngine.UCM;
-using HexGameEngine.Combat;
-using HexGameEngine.DungeonMap;
-using HexGameEngine.TownFeatures;
-using HexGameEngine.Player;
-using HexGameEngine.Items;
+using WeAreGladiators.Cards;
+using WeAreGladiators.Persistency;
+using WeAreGladiators.JourneyLogic;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Combat;
+using WeAreGladiators.DungeonMap;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.Player;
+using WeAreGladiators.Items;
 using TMPro;
-using HexGameEngine.UI;
+using WeAreGladiators.UI;
 using UnityEngine.UI;
-using HexGameEngine.Audio;
+using WeAreGladiators.Audio;
 
-namespace HexGameEngine.RewardSystems
+namespace WeAreGladiators.RewardSystems
 {
     public class CombatRewardController : Singleton<CombatRewardController>
     {

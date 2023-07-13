@@ -1,8 +1,8 @@
 ﻿using DG.Tweening;
-using HexGameEngine.CameraSystems;
+using WeAreGladiators.CameraSystems;
 using UnityEngine;
 
-namespace HexGameEngine.DungeonMap
+namespace WeAreGladiators.DungeonMap
 {
     public class ScrollNonUI : MonoBehaviour
     {

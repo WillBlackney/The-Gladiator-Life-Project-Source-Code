@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Pathfinding;
-using HexGameEngine.TurnLogic;
-using HexGameEngine.Characters;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Pathfinding;
+using WeAreGladiators.TurnLogic;
+using WeAreGladiators.Characters;
 using TMPro;
 using DG.Tweening;
-using HexGameEngine.Utilities;
-using HexGameEngine.Perks;
-using HexGameEngine.UI;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Perks;
+using WeAreGladiators.UI;
 
-namespace HexGameEngine.Combat
+namespace WeAreGladiators.Combat
 {
     public class MoveActionController : Singleton<MoveActionController>
     {

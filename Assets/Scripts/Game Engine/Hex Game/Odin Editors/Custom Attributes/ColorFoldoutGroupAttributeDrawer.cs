@@ -3,7 +3,7 @@ using UnityEngine;
 using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
 
-namespace HexGameEngine.CustomOdinGUI
+namespace WeAreGladiators.CustomOdinGUI
 {
     public class ColorFoldoutGroupAttributeDrawer : OdinGroupDrawer<ColorFoldoutGroupAttribute>
     {

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using UnityEngine.UI;
 using TMPro;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class ModalDottedRow : MonoBehaviour
     {

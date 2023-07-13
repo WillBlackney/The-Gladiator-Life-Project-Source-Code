@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using HexGameEngine.MainMenu;
+using WeAreGladiators.MainMenu;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class CustomCharacterAttributeRow : MonoBehaviour
     {

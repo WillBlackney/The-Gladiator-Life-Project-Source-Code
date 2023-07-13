@@ -1,10 +1,10 @@
-using HexGameEngine.UI;
+using WeAreGladiators.UI;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     [CreateAssetMenu(fileName = "New BackgroundDataSO", menuName = "Background Data")]
     public class BackgroundDataSO : ScriptableObject

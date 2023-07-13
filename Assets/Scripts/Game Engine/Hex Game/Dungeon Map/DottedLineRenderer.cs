@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace HexGameEngine.DungeonMap
+namespace WeAreGladiators.DungeonMap
 {
     public class DottedLineRenderer : MonoBehaviour
     {

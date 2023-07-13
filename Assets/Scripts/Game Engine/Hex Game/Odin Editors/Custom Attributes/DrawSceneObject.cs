@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using Sirenix.OdinInspector;
 
-namespace HexGameEngine.CustomOdinGUI
+namespace WeAreGladiators.CustomOdinGUI
 {
     public class DrawSceneObject<T> where T : MonoBehaviour
     {

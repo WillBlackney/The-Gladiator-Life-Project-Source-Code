@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.Persistency;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Persistency;
 
-namespace HexGameEngine.DungeonMap
+namespace WeAreGladiators.DungeonMap
 {
     public class MapManager : Singleton<MapManager>
     {

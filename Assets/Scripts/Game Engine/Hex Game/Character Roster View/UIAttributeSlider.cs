@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class UIAttributeSlider : MonoBehaviour
     {

@@ -1,9 +1,9 @@
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.VisualEvents
+namespace WeAreGladiators.VisualEvents
 {
     public class VisualEventUpdater : Singleton<VisualEventUpdater>
     {

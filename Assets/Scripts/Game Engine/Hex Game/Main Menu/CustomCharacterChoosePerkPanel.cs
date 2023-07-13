@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using HexGameEngine.MainMenu;
-using HexGameEngine.Perks;
-using HexGameEngine.Utilities;
+using WeAreGladiators.MainMenu;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Utilities;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class CustomCharacterChoosePerkPanel : MonoBehaviour
     {

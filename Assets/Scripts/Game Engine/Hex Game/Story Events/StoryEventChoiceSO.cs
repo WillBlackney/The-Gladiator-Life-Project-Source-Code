@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 
-namespace HexGameEngine.StoryEvents
+namespace WeAreGladiators.StoryEvents
 {
     [CreateAssetMenu(fileName = "New StoryEventChoiceSO", menuName = "StoryEventChoice", order = 52)]
     public class StoryEventChoiceSO : ScriptableObject

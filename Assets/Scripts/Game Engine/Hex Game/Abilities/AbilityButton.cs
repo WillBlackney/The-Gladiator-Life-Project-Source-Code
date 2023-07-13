@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
-using HexGameEngine.UI;
-using HexGameEngine.Characters;
+using WeAreGladiators.UI;
+using WeAreGladiators.Characters;
 using DG.Tweening;
 
-namespace HexGameEngine.Abilities
+namespace WeAreGladiators.Abilities
 {
     public class AbilityButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using UnityEngine.UI;
 
-namespace HexGameEngine.VisualEvents
+namespace WeAreGladiators.VisualEvents
 {
     public class StressEffect : MonoBehaviour
     {

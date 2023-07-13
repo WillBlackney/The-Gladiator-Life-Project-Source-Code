@@ -3,7 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 
-namespace HexGameEngine.Utilities
+namespace WeAreGladiators.Utilities
 {
     public class BlackScreenController : Singleton<BlackScreenController>
     {

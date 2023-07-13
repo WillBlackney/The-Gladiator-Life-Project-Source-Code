@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace HexGameEngine.Items
+namespace WeAreGladiators.Items
 {
     public class ItemSet
     {

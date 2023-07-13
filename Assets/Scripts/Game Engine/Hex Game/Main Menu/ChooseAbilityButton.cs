@@ -1,12 +1,12 @@
-using HexGameEngine.Abilities;
-using HexGameEngine.MainMenu;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.MainMenu;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class ChooseAbilityButton : MonoBehaviour
     {

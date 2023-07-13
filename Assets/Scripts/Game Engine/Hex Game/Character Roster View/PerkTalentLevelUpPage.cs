@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using HexGameEngine.Characters;
+using WeAreGladiators.Characters;
 using UnityEngine.UI;
-using HexGameEngine.Perks;
+using WeAreGladiators.Perks;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class PerkTalentLevelUpPage : MonoBehaviour
     {

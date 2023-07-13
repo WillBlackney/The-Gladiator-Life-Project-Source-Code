@@ -1,15 +1,15 @@
-﻿using HexGameEngine.Characters;
-using HexGameEngine.Combat;
+﻿using WeAreGladiators.Characters;
+using WeAreGladiators.Combat;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.VisualEvents;
-using HexGameEngine.Items;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
+using WeAreGladiators.Items;
 using System.Linq;
 using DG.Tweening;
 
-namespace HexGameEngine.Perks
+namespace WeAreGladiators.Perks
 {
     public class PerkController : Singleton<PerkController>
     {

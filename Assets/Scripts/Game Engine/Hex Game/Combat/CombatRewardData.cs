@@ -1,12 +1,12 @@
-﻿using HexGameEngine.Abilities;
-using HexGameEngine.Items;
-using HexGameEngine.JourneyLogic;
-using HexGameEngine.Utilities;
+﻿using WeAreGladiators.Abilities;
+using WeAreGladiators.Items;
+using WeAreGladiators.JourneyLogic;
+using WeAreGladiators.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     public class CombatRewardData
     {

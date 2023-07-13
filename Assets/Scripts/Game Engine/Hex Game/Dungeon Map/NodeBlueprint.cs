@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-namespace HexGameEngine.DungeonMap
+namespace WeAreGladiators.DungeonMap
 {
     [CreateAssetMenu]
     public class NodeBlueprint : ScriptableObject

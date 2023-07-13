@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using Sirenix.OdinInspector;
 using System;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     [Serializable]
     public class ModalSceneWidget : MonoBehaviour

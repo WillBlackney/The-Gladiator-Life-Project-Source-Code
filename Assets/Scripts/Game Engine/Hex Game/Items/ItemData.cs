@@ -1,11 +1,11 @@
-﻿using HexGameEngine.Abilities;
-using HexGameEngine.Audio;
+﻿using WeAreGladiators.Abilities;
+using WeAreGladiators.Audio;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Items
+namespace WeAreGladiators.Items
 {
     public class ItemData
     {

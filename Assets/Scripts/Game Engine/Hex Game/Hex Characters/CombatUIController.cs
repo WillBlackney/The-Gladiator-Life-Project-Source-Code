@@ -1,18 +1,18 @@
-using HexGameEngine.UCM;
+using WeAreGladiators.UCM;
 using DG.Tweening;
-using HexGameEngine.Abilities;
-using HexGameEngine.Perks;
-using HexGameEngine.TurnLogic;
-using HexGameEngine.UI;
-using HexGameEngine.Utilities;
-using HexGameEngine.VisualEvents;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Perks;
+using WeAreGladiators.TurnLogic;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     public class CombatUIController : Singleton<CombatUIController>
     {

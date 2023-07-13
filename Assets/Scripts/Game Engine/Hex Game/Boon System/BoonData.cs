@@ -1,9 +1,9 @@
-using HexGameEngine.UI;
-using HexGameEngine.Utilities;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Boons
+namespace WeAreGladiators.Boons
 {
     public class BoonData
     {

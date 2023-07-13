@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     [System.Serializable]
     public class TalentPairing

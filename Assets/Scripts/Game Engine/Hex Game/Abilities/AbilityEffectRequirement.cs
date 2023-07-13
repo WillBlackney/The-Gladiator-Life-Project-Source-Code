@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Abilities
+namespace WeAreGladiators.Abilities
 {
     [System.Serializable]
     public class AbilityEffectRequirement

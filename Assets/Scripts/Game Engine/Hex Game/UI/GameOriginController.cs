@@ -1,12 +1,12 @@
 using DG.Tweening;
-using HexGameEngine.MainMenu;
-using HexGameEngine.Utilities;
+using WeAreGladiators.MainMenu;
+using WeAreGladiators.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HexGameEngine.GameOrigin
+namespace WeAreGladiators.GameOrigin
 {
     public class GameOriginController : Singleton<GameOriginController>
     {

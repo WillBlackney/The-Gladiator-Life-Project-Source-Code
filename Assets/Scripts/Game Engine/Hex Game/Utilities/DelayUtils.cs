@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Utilities
+namespace WeAreGladiators.Utilities
 {
     /// <summary>
     /// Replaces DOTweems DOVirtual.DelayedCall. DOVirtual causes null reference errors betweem scene loads. This class implements 

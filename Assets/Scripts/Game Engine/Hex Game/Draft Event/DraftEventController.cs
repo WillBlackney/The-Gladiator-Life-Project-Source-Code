@@ -1,22 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using DG.Tweening;
 using TMPro;
 using Sirenix.OdinInspector;
-using HexGameEngine.Characters;
-using HexGameEngine.UCM;
-using HexGameEngine.Audio;
-using HexGameEngine.CameraSystems;
-using HexGameEngine.UI;
-using HexGameEngine.Abilities;
-using HexGameEngine.HexTiles;
-using HexGameEngine.VisualEvents;
-using HexGameEngine.DungeonMap;
+using WeAreGladiators.Characters;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Audio;
+using WeAreGladiators.CameraSystems;
+using WeAreGladiators.UI;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.VisualEvents;
+using WeAreGladiators.DungeonMap;
 using System;
 
-namespace HexGameEngine.DraftEvent
+namespace WeAreGladiators.DraftEvent
 {
 
     public class DraftEventController : Singleton<DraftEventController>

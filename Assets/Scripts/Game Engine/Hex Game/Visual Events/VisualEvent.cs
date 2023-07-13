@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using HexGameEngine.Characters;
+using WeAreGladiators.Characters;
 
-namespace HexGameEngine.VisualEvents
+namespace WeAreGladiators.VisualEvents
 {
     public class VisualEvent
     {

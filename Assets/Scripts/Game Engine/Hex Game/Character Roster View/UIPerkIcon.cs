@@ -1,4 +1,4 @@
-﻿using HexGameEngine.Perks;
+﻿using WeAreGladiators.Perks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Linq;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
 
     public class UIPerkIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler

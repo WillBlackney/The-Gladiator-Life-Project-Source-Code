@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace HexGameEngine.DungeonMap
+namespace WeAreGladiators.DungeonMap
 {
     [System.Serializable]
     public class FloatMinMax
@@ -15,7 +15,7 @@ namespace HexGameEngine.DungeonMap
     }
 }
 
-namespace HexGameEngine.DungeonMap
+namespace WeAreGladiators.DungeonMap
 {
     [System.Serializable]
     public class IntMinMax

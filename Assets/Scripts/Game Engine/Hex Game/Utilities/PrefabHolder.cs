@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Utilities
+namespace WeAreGladiators.Utilities
 {
     public class PrefabHolder : Singleton<PrefabHolder>
     {

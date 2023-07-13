@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Characters;
-using HexGameEngine.UCM;
-using HexGameEngine.UI;
-using HexGameEngine.Player;
-using HexGameEngine.Perks;
+using WeAreGladiators.Characters;
+using WeAreGladiators.UCM;
+using WeAreGladiators.UI;
+using WeAreGladiators.Player;
+using WeAreGladiators.Perks;
 
-namespace HexGameEngine.TownFeatures
+namespace WeAreGladiators.TownFeatures
 {
     public class HospitalDropSlot : MonoBehaviour
     {

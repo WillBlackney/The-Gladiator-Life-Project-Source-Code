@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.RewardSystems;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.RewardSystems;
 using DG.Tweening;
 using System;
-using HexGameEngine.Abilities;
-using HexGameEngine.Libraries;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Libraries;
 using UnityEngine.UI;
-using HexGameEngine.Perks;
-using HexGameEngine.Characters;
-using HexGameEngine.Items;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Items;
 
-namespace HexGameEngine.Cards
+namespace WeAreGladiators.Cards
 {
     public class CardController : Singleton<CardController>
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class KeyWordPanel : MonoBehaviour
     {

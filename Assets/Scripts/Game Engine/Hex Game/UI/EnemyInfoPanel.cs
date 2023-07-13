@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.Characters;
-using HexGameEngine.Perks;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Perks;
 using TMPro;
 using UnityEngine.UI;
-using HexGameEngine.Items;
-using HexGameEngine.UCM;
-using HexGameEngine.Abilities;
-using HexGameEngine.Cards;
+using WeAreGladiators.Items;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Cards;
 using DG.Tweening;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class EnemyInfoPanel : Singleton<EnemyInfoPanel>
     {

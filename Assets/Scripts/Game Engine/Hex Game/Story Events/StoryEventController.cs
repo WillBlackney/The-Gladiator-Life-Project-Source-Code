@@ -1,16 +1,16 @@
 ﻿using DG.Tweening;
-using HexGameEngine.Audio;
-using HexGameEngine.Boons;
-using HexGameEngine.Characters;
-using HexGameEngine.Items;
-using HexGameEngine.JourneyLogic;
-using HexGameEngine.Libraries;
-using HexGameEngine.Perks;
-using HexGameEngine.Persistency;
-using HexGameEngine.Player;
-using HexGameEngine.TownFeatures;
-using HexGameEngine.UI;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Boons;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Items;
+using WeAreGladiators.JourneyLogic;
+using WeAreGladiators.Libraries;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Persistency;
+using WeAreGladiators.Player;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
-namespace HexGameEngine.StoryEvents
+namespace WeAreGladiators.StoryEvents
 {
     public class StoryEventController : Singleton<StoryEventController>
     {

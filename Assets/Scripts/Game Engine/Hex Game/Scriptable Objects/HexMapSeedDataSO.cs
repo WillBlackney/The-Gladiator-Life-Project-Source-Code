@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace HexGameEngine.HexTiles
+namespace WeAreGladiators.HexTiles
 {
     [CreateAssetMenu(fileName = "New Hex Map Seed", menuName = "Hex Map Seed", order = 52)]
     public class HexMapSeedDataSO : ScriptableObject

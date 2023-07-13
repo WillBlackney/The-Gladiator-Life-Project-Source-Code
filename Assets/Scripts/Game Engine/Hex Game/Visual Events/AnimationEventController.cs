@@ -1,16 +1,16 @@
-﻿using HexGameEngine.Characters;
+﻿using WeAreGladiators.Characters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine;
-using HexGameEngine.CameraSystems;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Utilities;
-using HexGameEngine.Audio;
-using HexGameEngine.Items;
+using WeAreGladiators;
+using WeAreGladiators.CameraSystems;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Items;
 using DG.Tweening;
 
-namespace HexGameEngine.VisualEvents
+namespace WeAreGladiators.VisualEvents
 {
     public class AnimationEventController : Singleton<AnimationEventController>
     {

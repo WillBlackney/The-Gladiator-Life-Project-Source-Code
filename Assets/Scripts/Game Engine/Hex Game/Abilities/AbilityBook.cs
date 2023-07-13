@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Items;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Items;
+using WeAreGladiators.Utilities;
 
-namespace HexGameEngine.Abilities
+namespace WeAreGladiators.Abilities
 {
     public class AbilityBook
     {

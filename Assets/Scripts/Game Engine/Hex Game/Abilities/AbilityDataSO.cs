@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using HexGameEngine.Utilities;
-using HexGameEngine.UI;
-using HexGameEngine.Characters;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.UI;
+using WeAreGladiators.Characters;
 using System.Linq;
 
-namespace HexGameEngine.Abilities
+namespace WeAreGladiators.Abilities
 {
     [CreateAssetMenu(fileName = "New Ability Data", menuName = "Ability Data", order = 52)]
     public class AbilityDataSO : ScriptableObject

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TbsFramework.Units;
 
-namespace HexGameEngine
+namespace WeAreGladiators
 {
     public class PlayerUnit : Unit
     {

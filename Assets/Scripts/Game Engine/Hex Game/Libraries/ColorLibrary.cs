@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 
-namespace HexGameEngine.Libraries
+namespace WeAreGladiators.Libraries
 {
     public class ColorLibrary : Singleton<ColorLibrary>
     {

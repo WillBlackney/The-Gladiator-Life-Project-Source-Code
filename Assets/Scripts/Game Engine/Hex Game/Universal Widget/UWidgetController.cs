@@ -1,11 +1,11 @@
 using DG.Tweening;
-using HexGameEngine.Audio;
-using HexGameEngine.UI;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Audio;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 using System.Collections;
 using UnityEngine;
 
-namespace HexGameEngine.UWidget
+namespace WeAreGladiators.UWidget
 {
     public class UWidgetController : Singleton<UWidgetController>
     {

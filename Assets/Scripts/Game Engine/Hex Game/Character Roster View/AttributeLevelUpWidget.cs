@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using HexGameEngine.Characters;
-using HexGameEngine.Libraries;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Libraries;
 using Sirenix.Utilities;
 using DG.Tweening;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class AttributeLevelUpWidget : MonoBehaviour
     {

@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using DG.Tweening;
 using TMPro;
-using HexGameEngine.TurnLogic;
-using HexGameEngine.Characters;
+using WeAreGladiators.TurnLogic;
+using WeAreGladiators.Characters;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class ActionErrorGuidanceController : Singleton<ActionErrorGuidanceController>
     {

@@ -1,11 +1,11 @@
-﻿using HexGameEngine.Characters;
+﻿using WeAreGladiators.Characters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.UI;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.UI;
 
-namespace HexGameEngine.Abilities
+namespace WeAreGladiators.Abilities
 {
     public class AbilityData 
     {

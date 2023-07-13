@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace HexGameEngine.Utilities
+namespace WeAreGladiators.Utilities
 {
     public static class ObjectCloner
     {

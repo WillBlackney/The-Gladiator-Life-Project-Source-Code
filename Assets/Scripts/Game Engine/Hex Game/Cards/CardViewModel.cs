@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
 
-namespace HexGameEngine.Cards
+namespace WeAreGladiators.Cards
 {
     public class CardViewModel : MonoBehaviour
     {

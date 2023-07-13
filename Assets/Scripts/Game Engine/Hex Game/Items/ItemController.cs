@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.UCM;
-using HexGameEngine.Characters;
-using HexGameEngine.Abilities;
-using HexGameEngine.Utilities;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Utilities;
 using System;
 using System.Linq;
-using HexGameEngine.UI;
-using HexGameEngine.Perks;
-using HexGameEngine.Player;
-using HexGameEngine.Audio;
+using WeAreGladiators.UI;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Player;
+using WeAreGladiators.Audio;
 
-namespace HexGameEngine.Items
+namespace WeAreGladiators.Items
 {
     public class ItemController : Singleton<ItemController>
     {

@@ -1,10 +1,10 @@
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     [CreateAssetMenu]
     public class KeyWordDataBox : ScriptableObject

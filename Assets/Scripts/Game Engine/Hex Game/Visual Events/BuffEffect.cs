@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace HexGameEngine.VisualEvents
+namespace WeAreGladiators.VisualEvents
 {
     public class BuffEffect : MonoBehaviour
     {

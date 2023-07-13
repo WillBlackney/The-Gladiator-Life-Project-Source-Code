@@ -1,29 +1,29 @@
 ﻿using DG.Tweening;
-using HexGameEngine.Abilities;
-using HexGameEngine.Combat;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Perks;
-using HexGameEngine.TurnLogic;
-using HexGameEngine.UCM;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Combat;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Perks;
+using WeAreGladiators.TurnLogic;
+using WeAreGladiators.UCM;
 using Spriter2UnityDX;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.VisualEvents;
-using HexGameEngine.Audio;
-using HexGameEngine.AI;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
+using WeAreGladiators.Audio;
+using WeAreGladiators.AI;
 using System.Linq;
 using System;
-using HexGameEngine.Pathfinding;
-using HexGameEngine.UI;
-using HexGameEngine.Items;
-using HexGameEngine.Libraries;
+using WeAreGladiators.Pathfinding;
+using WeAreGladiators.UI;
+using WeAreGladiators.Items;
+using WeAreGladiators.Libraries;
 using System.Threading.Tasks;
 using Sirenix.Utilities;
 using UnityEditor;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     public class HexCharacterController : Singleton<HexCharacterController>
     {

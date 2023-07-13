@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-namespace HexGameEngine.Cards
+namespace WeAreGladiators.Cards
 {
     public class CardSlotHelper : MonoBehaviour
     {

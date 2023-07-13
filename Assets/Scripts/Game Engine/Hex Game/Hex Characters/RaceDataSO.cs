@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using DG.Tweening;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using UnityEngine.UI;
-using HexGameEngine.UI;
+using WeAreGladiators.UI;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     [CreateAssetMenu(fileName = "New Race Data", menuName = "Race Data", order = 52)]
     public class RaceDataSO : ScriptableObject

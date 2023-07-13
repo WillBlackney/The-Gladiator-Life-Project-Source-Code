@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using DG.Tweening;
-using HexGameEngine.Abilities;
+using WeAreGladiators.Abilities;
 using UnityEditor;
 using Sirenix.Utilities;
 using System.Linq;
 
-namespace HexGameEngine.Audio
+namespace WeAreGladiators.Audio
 {
     public class AudioManager : Singleton<AudioManager>
     {

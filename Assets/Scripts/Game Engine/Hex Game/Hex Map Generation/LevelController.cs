@@ -1,13 +1,13 @@
 ﻿using DG.Tweening;
-using HexGameEngine.Abilities;
-using HexGameEngine.Characters;
-using HexGameEngine.Combat;
-using HexGameEngine.Pathfinding;
-using HexGameEngine.Perks;
-using HexGameEngine.TurnLogic;
-using HexGameEngine.UI;
-using HexGameEngine.Utilities;
-using HexGameEngine.VisualEvents;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Combat;
+using WeAreGladiators.Pathfinding;
+using WeAreGladiators.Perks;
+using WeAreGladiators.TurnLogic;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System;
@@ -20,7 +20,7 @@ using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
-namespace HexGameEngine.HexTiles
+namespace WeAreGladiators.HexTiles
 {
     public class LevelController : Singleton<LevelController>
     {

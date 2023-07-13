@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using HexGameEngine.UCM;
-using HexGameEngine.Characters;
-using HexGameEngine.TownFeatures;
-using HexGameEngine.Libraries;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Characters;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.Libraries;
 using UnityEngine.EventSystems;
-using HexGameEngine.Items;
+using WeAreGladiators.Items;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class RosterCharacterPanel : MonoBehaviour, IPointerClickHandler
     {

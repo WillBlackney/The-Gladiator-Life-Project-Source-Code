@@ -4,11 +4,11 @@ using UnityEditor;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
-using HexGameEngine.Characters;
+using WeAreGladiators.Characters;
 using UnityEngine.Audio;
-using HexGameEngine.Audio;
+using WeAreGladiators.Audio;
 
-namespace HexGameEngine.Editor
+namespace WeAreGladiators.Editor
 {
 
     public class AudioProfileEditor : OdinMenuEditorWindow

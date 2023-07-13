@@ -1,16 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.Persistency;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Persistency;
 using TMPro;
-using HexGameEngine.Libraries;
-using HexGameEngine.Abilities;
-using HexGameEngine.UI;
-using HexGameEngine.Characters;
-using HexGameEngine.TownFeatures;
+using WeAreGladiators.Libraries;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.UI;
+using WeAreGladiators.Characters;
+using WeAreGladiators.TownFeatures;
 
-namespace HexGameEngine.Items
+namespace WeAreGladiators.Items
 {
     public class InventoryController : Singleton<InventoryController>
     {

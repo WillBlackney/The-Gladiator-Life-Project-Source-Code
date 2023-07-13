@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using HexGameEngine.Characters;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Utilities;
 using UnityEngine.UI;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class CharacterScrollPanelController : Singleton<CharacterScrollPanelController>
     {

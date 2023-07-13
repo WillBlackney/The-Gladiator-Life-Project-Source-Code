@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HexGameEngine.RewardSystems
+namespace WeAreGladiators.RewardSystems
 {
     public class RewardTab : MonoBehaviour
     {

@@ -1,11 +1,11 @@
-﻿using HexGameEngine.UI;
-using HexGameEngine.Utilities;
-using HexGameEngine.VisualEvents;
+﻿using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Perks
+namespace WeAreGladiators.Perks
 {
     public class PerkIconData
     {

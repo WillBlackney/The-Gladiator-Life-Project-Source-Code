@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     [CreateAssetMenu(fileName = "New Modal Build Data", menuName = "Modal Build Data", order = 52)]
     public class ModalBuildDataSO : ScriptableObject

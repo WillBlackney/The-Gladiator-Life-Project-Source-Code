@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using HexGameEngine.Characters;
-using HexGameEngine.Libraries;
-using HexGameEngine.Items;
-using HexGameEngine.Abilities;
-using HexGameEngine.UI;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Libraries;
+using WeAreGladiators.Items;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.UI;
 using DG.Tweening;
 
-namespace HexGameEngine.TownFeatures
+namespace WeAreGladiators.TownFeatures
 {
     public class CombatContractCard : MonoBehaviour
     {

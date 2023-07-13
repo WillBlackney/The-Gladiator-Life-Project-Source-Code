@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using HexGameEngine.Characters;
-using HexGameEngine.RewardSystems;
-using HexGameEngine.DungeonMap;
-using HexGameEngine.Items;
-using HexGameEngine.TownFeatures;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Boons;
+using WeAreGladiators.Characters;
+using WeAreGladiators.RewardSystems;
+using WeAreGladiators.DungeonMap;
+using WeAreGladiators.Items;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Boons;
 
-namespace HexGameEngine.Persistency
+namespace WeAreGladiators.Persistency
 {
     [Serializable]
     public class SaveGameData

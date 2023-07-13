@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 
 // This is the more complex version
-namespace HexGameEngine.Utilities
+namespace WeAreGladiators.Utilities
 {
     public static class RandomGenerator
     {

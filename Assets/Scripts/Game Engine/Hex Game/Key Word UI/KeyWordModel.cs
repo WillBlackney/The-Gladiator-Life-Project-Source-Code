@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     [Serializable]
     public class KeyWordModel

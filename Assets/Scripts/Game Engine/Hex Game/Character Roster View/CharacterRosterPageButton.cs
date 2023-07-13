@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class CharacterRosterPageButton : MonoBehaviour
     {

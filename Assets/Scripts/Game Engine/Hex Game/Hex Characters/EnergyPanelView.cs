@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using HexGameEngine.Combat;
-using HexGameEngine.Libraries;
-using HexGameEngine.Utilities;
-using HexGameEngine.UI;
+using WeAreGladiators.Combat;
+using WeAreGladiators.Libraries;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.UI;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     public class EnergyPanelView : MonoBehaviour
     {

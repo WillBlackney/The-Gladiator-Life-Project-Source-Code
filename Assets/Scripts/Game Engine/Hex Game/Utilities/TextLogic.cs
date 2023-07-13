@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace HexGameEngine.Utilities
+namespace WeAreGladiators.Utilities
 {
     public static class TextLogic
     {

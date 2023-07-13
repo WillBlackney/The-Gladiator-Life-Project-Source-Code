@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using System.Threading.Tasks;
 
-namespace HexGameEngine.VisualEvents
+namespace WeAreGladiators.VisualEvents
 {
     public static class VisualEventManager
     {

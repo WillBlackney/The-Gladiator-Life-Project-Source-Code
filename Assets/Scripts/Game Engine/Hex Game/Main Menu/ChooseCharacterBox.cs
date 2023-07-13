@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using HexGameEngine.Characters;
+using WeAreGladiators.Characters;
 
-namespace HexGameEngine.MainMenu
+namespace WeAreGladiators.MainMenu
 {
     public class ChooseCharacterBox : MonoBehaviour
     {

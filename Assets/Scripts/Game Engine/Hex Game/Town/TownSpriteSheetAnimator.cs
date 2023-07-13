@@ -1,10 +1,10 @@
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HexGameEngine.TownFeatures
+namespace WeAreGladiators.TownFeatures
 {
     public class TownSpriteSheetAnimator : MonoBehaviour
     {

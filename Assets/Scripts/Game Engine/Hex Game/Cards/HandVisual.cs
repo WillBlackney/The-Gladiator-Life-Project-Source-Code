@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using System;
 
-namespace HexGameEngine.Cards
+namespace WeAreGladiators.Cards
 {
     public class HandVisual : MonoBehaviour
     {

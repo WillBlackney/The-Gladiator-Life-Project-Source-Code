@@ -1,24 +1,24 @@
-﻿using HexGameEngine.Abilities;
-using HexGameEngine.Audio;
-using HexGameEngine.Boons;
-using HexGameEngine.CameraSystems;
-using HexGameEngine.Characters;
-using HexGameEngine.Combat;
-using HexGameEngine.GameIntroEvent;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Items;
-using HexGameEngine.JourneyLogic;
-using HexGameEngine.LoadingScreen;
-using HexGameEngine.MainMenu;
-using HexGameEngine.Persistency;
-using HexGameEngine.RewardSystems;
-using HexGameEngine.StoryEvents;
-using HexGameEngine.TownFeatures;
-using HexGameEngine.TurnLogic;
-using HexGameEngine.UCM;
-using HexGameEngine.UI;
-using HexGameEngine.Utilities;
-using HexGameEngine.VisualEvents;
+﻿using WeAreGladiators.Abilities;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Boons;
+using WeAreGladiators.CameraSystems;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Combat;
+using WeAreGladiators.GameIntroEvent;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Items;
+using WeAreGladiators.JourneyLogic;
+using WeAreGladiators.LoadingScreen;
+using WeAreGladiators.MainMenu;
+using WeAreGladiators.Persistency;
+using WeAreGladiators.RewardSystems;
+using WeAreGladiators.StoryEvents;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.TurnLogic;
+using WeAreGladiators.UCM;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-namespace HexGameEngine
+namespace WeAreGladiators
 {
     public class GameController : Singleton<GameController>
     {

@@ -1,10 +1,10 @@
-﻿using HexGameEngine.Abilities;
+﻿using WeAreGladiators.Abilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Characters;
+using WeAreGladiators.Characters;
 
-namespace HexGameEngine.RewardSystems
+namespace WeAreGladiators.RewardSystems
 {
     public class SingleRewardContainer
     {

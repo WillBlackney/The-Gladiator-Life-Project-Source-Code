@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using HexGameEngine.UCM;
+using WeAreGladiators.UCM;
 using TMPro;
-using HexGameEngine.UI;
+using WeAreGladiators.UI;
 using DG.Tweening;
 
-namespace HexGameEngine.RewardSystems
+namespace WeAreGladiators.RewardSystems
 {
     public class CharacterCombatStatCard : MonoBehaviour
     {

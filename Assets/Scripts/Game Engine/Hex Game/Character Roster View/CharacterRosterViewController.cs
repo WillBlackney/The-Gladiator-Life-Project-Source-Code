@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.Characters;
-using HexGameEngine.Perks;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Perks;
 using TMPro;
 using UnityEngine.UI;
-using HexGameEngine.Items;
-using HexGameEngine.Abilities;
-using HexGameEngine.UCM;
-using HexGameEngine.Audio;
+using WeAreGladiators.Items;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Audio;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class CharacterRosterViewController : Singleton<CharacterRosterViewController>
     {

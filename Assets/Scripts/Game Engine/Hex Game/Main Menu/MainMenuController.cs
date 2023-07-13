@@ -1,25 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.Characters;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Characters;
 using System;
 using Sirenix.OdinInspector;
-using HexGameEngine.Persistency;
+using WeAreGladiators.Persistency;
 using DG.Tweening;
 using UnityEngine.EventSystems;
-using HexGameEngine.Audio;
+using WeAreGladiators.Audio;
 using UnityEngine.UI;
 using TMPro;
-using HexGameEngine.UI;
-using HexGameEngine.UCM;
-using HexGameEngine.Abilities;
-using HexGameEngine.Items;
-using HexGameEngine.Perks;
+using WeAreGladiators.UI;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Items;
+using WeAreGladiators.Perks;
 using Sirenix.Utilities;
-using HexGameEngine.GameOrigin;
+using WeAreGladiators.GameOrigin;
 
-namespace HexGameEngine.MainMenu
+namespace WeAreGladiators.MainMenu
 {
     public class MainMenuController : Singleton<MainMenuController>
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.StoryEvents
+namespace WeAreGladiators.StoryEvents
 {
     public class StoryEventResultItem
     {

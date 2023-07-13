@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using HexGameEngine.Characters;
-using HexGameEngine.UCM;
-using HexGameEngine.Libraries;
-using HexGameEngine.Player;
-using HexGameEngine.Utilities;
-using HexGameEngine.UI;
+using WeAreGladiators.Characters;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Libraries;
+using WeAreGladiators.Player;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.UI;
 
-namespace HexGameEngine.TownFeatures
+namespace WeAreGladiators.TownFeatures
 {
     public class RecruitableCharacterTab : MonoBehaviour
     {

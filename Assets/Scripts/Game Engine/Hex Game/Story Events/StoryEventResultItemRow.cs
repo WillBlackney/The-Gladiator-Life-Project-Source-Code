@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HexGameEngine.StoryEvents
+namespace WeAreGladiators.StoryEvents
 {
     public class StoryEventResultItemRow : MonoBehaviour
     {

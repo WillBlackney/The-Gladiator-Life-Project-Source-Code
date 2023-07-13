@@ -1,11 +1,11 @@
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace HexGameEngine.StoryEvents
+namespace WeAreGladiators.StoryEvents
 {
     public class StoryEventChoiceButton : MonoBehaviour
     {

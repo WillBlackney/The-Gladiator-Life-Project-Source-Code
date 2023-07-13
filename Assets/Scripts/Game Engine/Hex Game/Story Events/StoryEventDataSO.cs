@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace HexGameEngine.StoryEvents
+namespace WeAreGladiators.StoryEvents
 {
     [CreateAssetMenu(fileName = "New StoryEventDataSO", menuName = "StoryEventData", order = 52)]
     public class StoryEventDataSO : ScriptableObject

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace HexGameEngine.Cards
+namespace WeAreGladiators.Cards
 {
     // an enum to store the info about where this object is
     public enum VisualStates

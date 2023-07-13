@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.Persistency;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Persistency;
 
-namespace HexGameEngine.Boons
+namespace WeAreGladiators.Boons
 {
     public class BoonController : Singleton<BoonController>
     {

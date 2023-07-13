@@ -2,9 +2,9 @@
 using System.Linq;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 
-namespace HexGameEngine.DungeonMap
+namespace WeAreGladiators.DungeonMap
 {
     public class MapGenerator: Singleton<MapGenerator>
     {

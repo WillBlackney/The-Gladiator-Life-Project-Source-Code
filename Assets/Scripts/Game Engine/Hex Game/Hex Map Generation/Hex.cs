@@ -4,10 +4,10 @@ using UnityEngine;
 using TbsFramework.Cells;
 using TbsFramework.Pathfinding.DataStructs;
 using TMPro;
-using HexGameEngine.Characters;
-using HexGameEngine.Abilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Abilities;
 
-namespace HexGameEngine.HexTiles
+namespace WeAreGladiators.HexTiles
 {   
     public class Hex : Hexagon
     {

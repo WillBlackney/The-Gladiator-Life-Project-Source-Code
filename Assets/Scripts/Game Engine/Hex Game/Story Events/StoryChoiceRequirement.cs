@@ -1,12 +1,12 @@
-using HexGameEngine.StoryEvents;
-using HexGameEngine;
+using WeAreGladiators.StoryEvents;
+using WeAreGladiators;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Characters;
+using WeAreGladiators.Characters;
 
-namespace HexGameEngine.StoryEvents
+namespace WeAreGladiators.StoryEvents
 {
     [System.Serializable]
     public class StoryChoiceRequirement

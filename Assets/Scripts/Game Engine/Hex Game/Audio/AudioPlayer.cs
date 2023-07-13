@@ -1,10 +1,10 @@
-﻿using HexGameEngine.Utilities;
+﻿using WeAreGladiators.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using TbsFramework.Players;
 using UnityEngine;
 
-namespace HexGameEngine.Audio
+namespace WeAreGladiators.Audio
 {
     public class AudioPlayer : MonoBehaviour
     {

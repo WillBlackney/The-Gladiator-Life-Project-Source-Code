@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using DG.Tweening;
-using HexGameEngine.Audio;
+using WeAreGladiators.Audio;
 
-namespace HexGameEngine.Cards
+namespace WeAreGladiators.Cards
 {
     public class DragSpellNoTarget : DraggingActions
     {

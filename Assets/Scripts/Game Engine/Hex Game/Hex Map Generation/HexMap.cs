@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TbsFramework.Cells;
 using UnityEngine;
 
-namespace HexGameEngine.HexTiles
+namespace WeAreGladiators.HexTiles
 {
     public class HexMap
     {

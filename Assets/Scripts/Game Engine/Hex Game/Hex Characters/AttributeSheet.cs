@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     public class AttributeSheet
     {

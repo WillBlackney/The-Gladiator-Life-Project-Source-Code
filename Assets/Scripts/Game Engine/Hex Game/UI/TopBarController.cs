@@ -5,12 +5,12 @@ using TMPro;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using DG.Tweening;
-using HexGameEngine.Utilities;
-using HexGameEngine.Characters;
-using HexGameEngine.MainMenu;
-using HexGameEngine.Items;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.MainMenu;
+using WeAreGladiators.Items;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class TopBarController : Singleton<TopBarController>
     {

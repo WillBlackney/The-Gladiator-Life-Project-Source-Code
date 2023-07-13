@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class CommunityTab : MonoBehaviour
     {

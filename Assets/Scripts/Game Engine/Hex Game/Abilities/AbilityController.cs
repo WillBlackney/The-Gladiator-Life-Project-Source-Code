@@ -1,25 +1,25 @@
-﻿using HexGameEngine.Characters;
-using HexGameEngine.Combat;
-using HexGameEngine.HexTiles;
-using HexGameEngine.TurnLogic;
+﻿using WeAreGladiators.Characters;
+using WeAreGladiators.Combat;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.TurnLogic;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
-using HexGameEngine.Perks;
-using HexGameEngine.Pathfinding;
-using HexGameEngine.Utilities;
-using HexGameEngine.UI;
-using HexGameEngine.VisualEvents;
-using HexGameEngine.UCM;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Pathfinding;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.UI;
+using WeAreGladiators.VisualEvents;
+using WeAreGladiators.UCM;
 using System.Linq;
 using System;
-using HexGameEngine.Items;
-using HexGameEngine.Audio;
+using WeAreGladiators.Items;
+using WeAreGladiators.Audio;
 using UnityEngine.TextCore.Text;
 
-namespace HexGameEngine.Abilities
+namespace WeAreGladiators.Abilities
 {
     public class AbilityController : Singleton<AbilityController>
     {

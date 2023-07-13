@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Items
+namespace WeAreGladiators.Items
 {
     [System.Serializable]
     public class ItemEffectSet 

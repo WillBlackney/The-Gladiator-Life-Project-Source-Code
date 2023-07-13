@@ -1,12 +1,12 @@
 using DG.Tweening;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Utilities;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class CrowdMember : MonoBehaviour
     {

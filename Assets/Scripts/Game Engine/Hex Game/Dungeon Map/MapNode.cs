@@ -2,9 +2,9 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using HexGameEngine.Audio;
+using WeAreGladiators.Audio;
 
-namespace HexGameEngine.DungeonMap
+namespace WeAreGladiators.DungeonMap
 {
     public class MapNode : MonoBehaviour
     {

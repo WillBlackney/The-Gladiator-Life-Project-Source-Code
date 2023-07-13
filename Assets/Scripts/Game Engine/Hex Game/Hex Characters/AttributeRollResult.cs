@@ -1,5 +1,5 @@
-﻿using HexGameEngine.Perks;
-using HexGameEngine.Utilities;
+﻿using WeAreGladiators.Perks;
+using WeAreGladiators.Utilities;
 using Sirenix.Serialization;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     public class AttributeRollResult
     {

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using HexGameEngine.UI;
-using HexGameEngine.Utilities;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 
-namespace HexGameEngine.Boons
+namespace WeAreGladiators.Boons
 {
 
     [CreateAssetMenu(fileName = "New BoonDataSO", menuName = "BoonDataSO", order = 52)]

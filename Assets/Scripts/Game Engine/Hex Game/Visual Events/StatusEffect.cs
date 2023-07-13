@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using TMPro;
 using DG.Tweening;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using UnityEngine.UI;
 
-namespace HexGameEngine.VisualEvents
+namespace WeAreGladiators.VisualEvents
 {
     public class StatusEffect : MonoBehaviour
     {

@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 
 #if UNITY_EDITOR
 using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
 #endif
 
-namespace HexGameEngine.Libraries
+namespace WeAreGladiators.Libraries
 {
     public class SpriteLibrary : Singleton<SpriteLibrary>
     {

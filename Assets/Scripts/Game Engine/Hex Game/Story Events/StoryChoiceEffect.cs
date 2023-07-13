@@ -1,12 +1,12 @@
-using HexGameEngine.Boons;
-using HexGameEngine.Characters;
-using HexGameEngine.Items;
+using WeAreGladiators.Boons;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Items;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.StoryEvents
+namespace WeAreGladiators.StoryEvents
 {
     [System.Serializable]
     public class StoryChoiceEffect

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Audio
+namespace WeAreGladiators.Audio
 {
     [CreateAssetMenu]
     public class AudioDataBox : ScriptableObject

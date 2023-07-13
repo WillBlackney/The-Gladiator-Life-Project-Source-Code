@@ -4,10 +4,10 @@ using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using EZCameraShake;
-using HexGameEngine.Utilities;
-using HexGameEngine.HexTiles;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.HexTiles;
 
-namespace HexGameEngine.CameraSystems
+namespace WeAreGladiators.CameraSystems
 {
     public class CameraController : Singleton<CameraController>
     {

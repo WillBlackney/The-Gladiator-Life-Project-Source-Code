@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace HexGameEngine.Utilities
+namespace WeAreGladiators.Utilities
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {

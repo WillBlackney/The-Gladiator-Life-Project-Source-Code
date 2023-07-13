@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Perks
+namespace WeAreGladiators.Perks
 {
     [System.Serializable]
     public class ActivePerk

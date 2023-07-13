@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using DG.Tweening;
-using HexGameEngine.UI;
-using HexGameEngine.Audio;
-using HexGameEngine.Utilities;
+using WeAreGladiators.UI;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Utilities;
 
-namespace HexGameEngine.Cards
+namespace WeAreGladiators.Cards
 {
     public class HoverPreview : MonoBehaviour
     {

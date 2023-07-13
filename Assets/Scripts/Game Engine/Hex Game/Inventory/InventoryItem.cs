@@ -1,9 +1,9 @@
-﻿using HexGameEngine.Abilities;
+﻿using WeAreGladiators.Abilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Items
+namespace WeAreGladiators.Items
 {
     public class InventoryItem
     {

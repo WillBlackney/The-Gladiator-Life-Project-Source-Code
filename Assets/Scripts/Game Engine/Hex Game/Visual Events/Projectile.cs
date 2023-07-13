@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace HexGameEngine.VisualEvents
+namespace WeAreGladiators.VisualEvents
 {
     public class Projectile : MonoBehaviour
     {

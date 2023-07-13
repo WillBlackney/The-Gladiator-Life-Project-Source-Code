@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
 
-namespace HexGameEngine.Audio
+namespace WeAreGladiators.Audio
 {
     [Serializable]
     public class AudioModel

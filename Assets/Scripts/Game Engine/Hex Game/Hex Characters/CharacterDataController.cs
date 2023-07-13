@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Items;
-using HexGameEngine.Abilities;
-using HexGameEngine.Perks;
-using HexGameEngine.Utilities;
-using HexGameEngine.Persistency;
-using HexGameEngine.Player;
+using WeAreGladiators.Items;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Persistency;
+using WeAreGladiators.Player;
 using System.Linq;
-using HexGameEngine.Audio;
-using HexGameEngine.Boons;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Boons;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     public class CharacterDataController : Singleton<CharacterDataController>
     {

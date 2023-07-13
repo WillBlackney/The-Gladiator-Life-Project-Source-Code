@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 
-namespace HexGameEngine.Perks
+namespace WeAreGladiators.Perks
 {
     [Serializable]
     public class SerializedPerkManagerModel

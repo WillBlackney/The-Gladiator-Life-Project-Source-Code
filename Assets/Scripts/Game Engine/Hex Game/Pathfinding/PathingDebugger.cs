@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Characters;
-using HexGameEngine.Utilities;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Utilities;
 
-namespace HexGameEngine.Pathfinding
+namespace WeAreGladiators.Pathfinding
 {
     public class PathingDebugger : Singleton<PathingDebugger>
     {

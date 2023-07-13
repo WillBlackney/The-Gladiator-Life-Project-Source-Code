@@ -1,11 +1,11 @@
-﻿using HexGameEngine.UCM;
-using HexGameEngine.Characters;
+﻿using WeAreGladiators.UCM;
+using WeAreGladiators.Characters;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace HexGameEngine.DraftEvent
+namespace WeAreGladiators.DraftEvent
 {
     public class DraftCharacterBox : MonoBehaviour
     {

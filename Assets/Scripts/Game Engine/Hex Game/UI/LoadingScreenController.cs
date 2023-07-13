@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using UnityEngine.SceneManagement;
 
-namespace HexGameEngine.LoadingScreen
+namespace WeAreGladiators.LoadingScreen
 {
     public class LoadingScreenController : Singleton<LoadingScreenController>
     {

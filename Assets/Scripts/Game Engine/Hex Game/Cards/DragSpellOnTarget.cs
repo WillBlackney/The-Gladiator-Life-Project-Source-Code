@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using DG.Tweening;
-using HexGameEngine.Audio;
-using HexGameEngine.CameraSystems;
+using WeAreGladiators.Audio;
+using WeAreGladiators.CameraSystems;
 
-namespace HexGameEngine.Cards
+namespace WeAreGladiators.Cards
 {
     public class DragSpellOnTarget : DraggingActions
     {

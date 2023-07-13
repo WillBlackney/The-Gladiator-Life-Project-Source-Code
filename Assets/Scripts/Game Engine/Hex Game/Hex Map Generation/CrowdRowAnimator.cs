@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class CrowdRowAnimator : MonoBehaviour
     {

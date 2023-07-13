@@ -3,7 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
-namespace HexGameEngine.LoadingScreen
+namespace WeAreGladiators.LoadingScreen
 {
     public class LoadingAnimation : MonoBehaviour
     {

@@ -1,17 +1,17 @@
-﻿using HexGameEngine.Abilities;
-using HexGameEngine.AI;
-using HexGameEngine.Audio;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Items;
-using HexGameEngine.Perks;
-using HexGameEngine.VisualEvents;
+﻿using WeAreGladiators.Abilities;
+using WeAreGladiators.AI;
+using WeAreGladiators.Audio;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Items;
+using WeAreGladiators.Perks;
+using WeAreGladiators.VisualEvents;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TbsFramework.Pathfinding.Algorithms;
 using UnityEngine;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     public class HexCharacterModel
     {

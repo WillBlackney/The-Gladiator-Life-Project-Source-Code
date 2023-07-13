@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine
+namespace WeAreGladiators
 {
     public class Enums 
     {

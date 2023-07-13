@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class UICard : MonoBehaviour
     {

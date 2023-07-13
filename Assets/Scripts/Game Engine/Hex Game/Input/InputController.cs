@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.TurnLogic;
-using HexGameEngine.Characters;
-using HexGameEngine.Abilities;
-using HexGameEngine.UI;
+using WeAreGladiators.TurnLogic;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.UI;
 
-namespace HexGameEngine.Utilities
+namespace WeAreGladiators.Utilities
 {
     public class InputController : Singleton<InputController>
     {

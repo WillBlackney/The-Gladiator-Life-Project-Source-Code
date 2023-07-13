@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
-using HexGameEngine.Abilities;
-using HexGameEngine.Audio;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Audio;
 
-namespace HexGameEngine.Items
+namespace WeAreGladiators.Items
 {
     [CreateAssetMenu(fileName = "New Item Data", menuName = "Item Data", order = 52)]
     public class ItemDataSO: ScriptableObject

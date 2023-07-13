@@ -1,14 +1,14 @@
 ﻿using DG.Tweening;
-using HexGameEngine.CameraSystems;
-using HexGameEngine.JourneyLogic;
-using HexGameEngine.Utilities;
+using WeAreGladiators.CameraSystems;
+using WeAreGladiators.JourneyLogic;
+using WeAreGladiators.Utilities;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace HexGameEngine.DungeonMap
+namespace WeAreGladiators.DungeonMap
 {
     public class MapView : Singleton<MapView>
     {     

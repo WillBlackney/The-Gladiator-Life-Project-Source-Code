@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Combat
+namespace WeAreGladiators.Combat
 {
     [CreateAssetMenu(fileName = "New Stress Event Data", menuName = "Stress Event Data", order = 52)]
     public class StressEventSO : ScriptableObject

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using HexGameEngine.Utilities;
-using HexGameEngine.Audio;
-using HexGameEngine.Libraries;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Libraries;
 
-namespace HexGameEngine.VisualEvents
+namespace WeAreGladiators.VisualEvents
 {
     public class VisualEffectManager : Singleton<VisualEffectManager>
     {

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using HexGameEngine.Abilities;
-using HexGameEngine.Items;
-using HexGameEngine.Libraries;
-using HexGameEngine.UI;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Items;
+using WeAreGladiators.Libraries;
+using WeAreGladiators.UI;
 
-namespace HexGameEngine.RewardSystems
+namespace WeAreGladiators.RewardSystems
 {
     public class CombatLootIcon : MonoBehaviour
     {

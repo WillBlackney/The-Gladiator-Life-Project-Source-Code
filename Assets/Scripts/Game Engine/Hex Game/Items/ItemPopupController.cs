@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
-using HexGameEngine.Abilities;
-using HexGameEngine.UI;
-using HexGameEngine.Perks;
-using HexGameEngine.TownFeatures;
-using HexGameEngine.RewardSystems;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.UI;
+using WeAreGladiators.Perks;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.RewardSystems;
 using System;
 
-namespace HexGameEngine.Items
+namespace WeAreGladiators.Items
 {
     public class ItemPopupController : Singleton<ItemPopupController>
     {

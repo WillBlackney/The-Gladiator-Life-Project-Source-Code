@@ -6,17 +6,17 @@ using DG.Tweening;
 using TMPro;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
-using HexGameEngine.Characters;
-using HexGameEngine.Combat;
-using HexGameEngine.Utilities;
-using HexGameEngine.CameraSystems;
-using HexGameEngine.VisualEvents;
-using HexGameEngine.UCM;
-using HexGameEngine.Audio;
-using HexGameEngine.Perks;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Combat;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.CameraSystems;
+using WeAreGladiators.VisualEvents;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Perks;
 using UnityEngine.TextCore.Text;
 
-namespace HexGameEngine.TurnLogic
+namespace WeAreGladiators.TurnLogic
 {
     public class TurnController : Singleton<TurnController>
     {

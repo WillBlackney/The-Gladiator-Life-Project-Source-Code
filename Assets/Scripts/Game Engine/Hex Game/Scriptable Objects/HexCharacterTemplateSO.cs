@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
-using HexGameEngine.Items;
-using HexGameEngine.Abilities;
-using HexGameEngine.Perks;
+using WeAreGladiators.Items;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Perks;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     [CreateAssetMenu(fileName = "New Starting Character Template", menuName = "Starting Character Template", order = 52)]
     public class HexCharacterTemplateSO : ScriptableObject

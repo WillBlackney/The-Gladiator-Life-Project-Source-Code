@@ -4,9 +4,9 @@ using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine.TextCore.Text;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     [CreateAssetMenu(fileName = "New Enemy Encounter", menuName = "Enemy Encounter", order = 51)]
     public class EnemyEncounterSO : ScriptableObject

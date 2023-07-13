@@ -1,4 +1,4 @@
-using HexGameEngine.UI;
+using WeAreGladiators.UI;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HexGameEngine.Boons
+namespace WeAreGladiators.Boons
 {
     public class UIBoonIcon : MonoBehaviour
     {

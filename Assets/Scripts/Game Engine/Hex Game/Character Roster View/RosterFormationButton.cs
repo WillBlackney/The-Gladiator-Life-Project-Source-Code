@@ -1,10 +1,10 @@
-﻿using HexGameEngine.UCM;
-using HexGameEngine.Characters;
+﻿using WeAreGladiators.UCM;
+using WeAreGladiators.Characters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class RosterFormationButton : MonoBehaviour
     {

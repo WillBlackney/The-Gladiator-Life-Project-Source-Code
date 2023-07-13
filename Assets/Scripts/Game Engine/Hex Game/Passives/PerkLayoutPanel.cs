@@ -4,11 +4,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
-using HexGameEngine.Audio;
-using HexGameEngine.UI;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Audio;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 
-namespace HexGameEngine.Perks
+namespace WeAreGladiators.Perks
 {
     public class PerkLayoutPanel : MonoBehaviour
     {

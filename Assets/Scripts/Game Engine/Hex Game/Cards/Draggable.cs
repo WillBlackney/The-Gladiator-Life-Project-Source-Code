@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using DG.Tweening;
-using HexGameEngine.RewardSystems;
-using HexGameEngine.CameraSystems;
+using WeAreGladiators.RewardSystems;
+using WeAreGladiators.CameraSystems;
 
-namespace HexGameEngine.Cards
+namespace WeAreGladiators.Cards
 {
     public class Draggable : MonoBehaviour
     {

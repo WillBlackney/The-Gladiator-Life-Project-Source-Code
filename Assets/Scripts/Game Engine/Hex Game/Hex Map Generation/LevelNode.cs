@@ -1,6 +1,6 @@
 ﻿using DG.Tweening;
-using HexGameEngine.Abilities;
-using HexGameEngine.Characters;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Characters;
 using Sirenix.Utilities;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using TbsFramework.Cells;
 using UnityEngine;
 
-namespace HexGameEngine.HexTiles
+namespace WeAreGladiators.HexTiles
 {
     public class LevelNode : Hexagon
     {

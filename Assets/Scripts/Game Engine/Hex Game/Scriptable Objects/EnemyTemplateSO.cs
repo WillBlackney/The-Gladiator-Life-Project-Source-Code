@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
-using HexGameEngine.Items;
-using HexGameEngine.Abilities;
-using HexGameEngine.Perks;
-using HexGameEngine.AI;
-using HexGameEngine.Audio;
+using WeAreGladiators.Items;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Perks;
+using WeAreGladiators.AI;
+using WeAreGladiators.Audio;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     [CreateAssetMenu(fileName = "New Enemy Template", menuName = "Enemy Template", order = 51)]
     public class EnemyTemplateSO : ScriptableObject

@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     public class EnemyEncounterData
     {

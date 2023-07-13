@@ -1,13 +1,13 @@
-﻿using HexGameEngine.Characters;
-using HexGameEngine.HexTiles;
+﻿using WeAreGladiators.Characters;
+using WeAreGladiators.HexTiles;
 using UnityEngine;
-using HexGameEngine.Combat;
-using HexGameEngine.Perks;
-using HexGameEngine.Items;
-using HexGameEngine.Abilities;
+using WeAreGladiators.Combat;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Items;
+using WeAreGladiators.Abilities;
 using UnityEngine.Rendering.VirtualTexturing;
 
-namespace HexGameEngine
+namespace WeAreGladiators
 {
     public static class StatCalculator 
     {

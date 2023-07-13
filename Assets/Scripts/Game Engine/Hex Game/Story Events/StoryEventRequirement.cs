@@ -1,10 +1,10 @@
-using HexGameEngine.Boons;
+using WeAreGladiators.Boons;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.StoryEvents
+namespace WeAreGladiators.StoryEvents
 {
     [System.Serializable]
     public class StoryEventRequirement

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using DG.Tweening;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using UnityEngine;
 
-namespace HexGameEngine.DungeonMap
+namespace WeAreGladiators.DungeonMap
 {
     public class MapPlayerTracker : Singleton<MapPlayerTracker>
     {

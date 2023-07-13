@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.UCM;
-using HexGameEngine.Characters;
-using HexGameEngine.UI;
-using HexGameEngine.Player;
-using HexGameEngine.Perks;
-using HexGameEngine.Audio;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Characters;
+using WeAreGladiators.UI;
+using WeAreGladiators.Player;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Audio;
 
-namespace HexGameEngine.TownFeatures
+namespace WeAreGladiators.TownFeatures
 {
     public class LibraryCharacterDropSlot : MonoBehaviour
     {

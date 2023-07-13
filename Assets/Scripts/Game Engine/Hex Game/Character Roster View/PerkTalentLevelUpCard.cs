@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using HexGameEngine.Characters;
-using HexGameEngine.Libraries;
-using HexGameEngine.Perks;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Libraries;
+using WeAreGladiators.Perks;
 using DG.Tweening;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class PerkTalentLevelUpCard : MonoBehaviour
     {

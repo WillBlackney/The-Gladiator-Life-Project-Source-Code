@@ -6,12 +6,12 @@ using Spriter2UnityDX;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
-using HexGameEngine.Items;
-using HexGameEngine;
+using WeAreGladiators.Items;
+using WeAreGladiators;
 using UnityEngine.Rendering;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 
-namespace HexGameEngine.UCM
+namespace WeAreGladiators.UCM
 {
     public class UniversalCharacterModel : MonoBehaviour
     {
@@ -194,7 +194,7 @@ namespace HexGameEngine.UCM
                 AllOffHandWeapons = ohElements.ToArray();
                 AllHeadArmour = headElements.ToArray();
 
-                HexGameEngine.UCM.CharacterModeller.AutoSetSortingOrderValues(this);
+                WeAreGladiators.UCM.CharacterModeller.AutoSetSortingOrderValues(this);
                 SetMode(UcmMode.Standard);
 
                 // Turn everything off to start

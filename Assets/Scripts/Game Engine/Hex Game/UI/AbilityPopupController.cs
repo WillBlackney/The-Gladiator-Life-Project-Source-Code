@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.UI;
-using HexGameEngine.Abilities;
-using HexGameEngine.Characters;
-using HexGameEngine.Libraries;
-using HexGameEngine.Items;
-using HexGameEngine.TownFeatures;
-using HexGameEngine.RewardSystems;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Libraries;
+using WeAreGladiators.Items;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.RewardSystems;
 using System.Linq;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class AbilityPopupController : Singleton<AbilityPopupController>
     {

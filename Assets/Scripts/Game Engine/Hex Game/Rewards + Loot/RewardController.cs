@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.Characters;
-using HexGameEngine.Abilities;
-using HexGameEngine.Perks;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Perks;
 using DG.Tweening;
 using System;
 using Sirenix.OdinInspector;
-using HexGameEngine.Cards;
-using HexGameEngine.Persistency;
+using WeAreGladiators.Cards;
+using WeAreGladiators.Persistency;
 
 // free to delete this class in future as its not longer used
-namespace HexGameEngine.RewardSystems
+namespace WeAreGladiators.RewardSystems
 {
     public class RewardController : Singleton<RewardController>
     {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spriter2UnityDX;
 using DG.Tweening;
-using HexGameEngine.Items;
-using HexGameEngine.Characters;
+using WeAreGladiators.Items;
+using WeAreGladiators.Characters;
 
 
-namespace HexGameEngine.UCM
+namespace WeAreGladiators.UCM
 {
     public static class CharacterModeller
     {

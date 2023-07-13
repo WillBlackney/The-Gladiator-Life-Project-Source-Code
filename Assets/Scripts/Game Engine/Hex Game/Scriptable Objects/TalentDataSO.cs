@@ -1,11 +1,11 @@
-﻿using HexGameEngine.UI;
-using HexGameEngine.Utilities;
+﻿using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
 
     [CreateAssetMenu(fileName = "New Talent Data", menuName = "Talent Data", order = 52)]

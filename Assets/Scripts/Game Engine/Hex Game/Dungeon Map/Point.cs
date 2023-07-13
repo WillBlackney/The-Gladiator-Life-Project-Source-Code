@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HexGameEngine.DungeonMap
+namespace WeAreGladiators.DungeonMap
 {
     public class Point : IEquatable<Point>
     {

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using HexGameEngine.Characters;
-using HexGameEngine.Utilities;
-using HexGameEngine.Cards;
-using HexGameEngine.Perks;
-using HexGameEngine.Items;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Cards;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Items;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class UIController : Singleton<UIController>
     {

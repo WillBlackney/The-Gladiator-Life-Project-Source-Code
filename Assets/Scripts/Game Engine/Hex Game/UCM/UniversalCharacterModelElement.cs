@@ -1,9 +1,9 @@
-﻿using HexGameEngine.Items;
+﻿using WeAreGladiators.Items;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.UCM
+namespace WeAreGladiators.UCM
 {
 
     public class UniversalCharacterModelElement : MonoBehaviour

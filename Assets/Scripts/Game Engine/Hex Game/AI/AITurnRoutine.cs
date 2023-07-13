@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.AI
+namespace WeAreGladiators.AI
 {
     [System.Serializable]
     public class AITurnRoutine 

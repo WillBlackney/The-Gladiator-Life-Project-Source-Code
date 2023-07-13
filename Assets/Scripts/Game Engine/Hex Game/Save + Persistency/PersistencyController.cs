@@ -1,18 +1,18 @@
 ﻿using Sirenix.Serialization;
 using System.IO;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.Characters;
-using HexGameEngine.JourneyLogic;
-using HexGameEngine.RewardSystems;
-using HexGameEngine.MainMenu;
-using HexGameEngine.Player;
-using HexGameEngine.TownFeatures;
-using HexGameEngine.Items;
-using HexGameEngine.StoryEvents;
-using HexGameEngine.Boons;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.JourneyLogic;
+using WeAreGladiators.RewardSystems;
+using WeAreGladiators.MainMenu;
+using WeAreGladiators.Player;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.Items;
+using WeAreGladiators.StoryEvents;
+using WeAreGladiators.Boons;
 
-namespace HexGameEngine.Persistency
+namespace WeAreGladiators.Persistency
 {
     public class PersistencyController : Singleton<PersistencyController>
     {

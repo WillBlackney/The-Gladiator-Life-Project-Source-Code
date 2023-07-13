@@ -1,14 +1,14 @@
-﻿using HexGameEngine.Abilities;
-using HexGameEngine.AI;
-using HexGameEngine.Audio;
-using HexGameEngine.Items;
-using HexGameEngine.Perks;
+﻿using WeAreGladiators.Abilities;
+using WeAreGladiators.AI;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Items;
+using WeAreGladiators.Perks;
 using Sirenix.Serialization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     public class HexCharacterData
     {

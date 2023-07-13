@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using UnityEngine.UI;
-using HexGameEngine.CameraSystems;
+using WeAreGladiators.CameraSystems;
 using TMPro;
-using HexGameEngine.Perks;
-using HexGameEngine.Characters;
-using HexGameEngine.Boons;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Boons;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class MainModalController : Singleton<MainModalController>
     {

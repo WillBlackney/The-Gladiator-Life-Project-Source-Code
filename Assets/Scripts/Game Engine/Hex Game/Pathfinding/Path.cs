@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Characters;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Characters;
 
-namespace HexGameEngine.Pathfinding
+namespace WeAreGladiators.Pathfinding
 {
     public class Path
     {

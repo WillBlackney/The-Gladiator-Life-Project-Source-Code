@@ -1,9 +1,9 @@
-using HexGameEngine.Perks;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Utilities;
 using TMPro;
 using UnityEngine;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class EnemyInfoModalStatRow : MonoBehaviour
     {

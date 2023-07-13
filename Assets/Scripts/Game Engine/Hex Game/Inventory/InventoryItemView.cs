@@ -1,14 +1,14 @@
-﻿using HexGameEngine.UI;
+﻿using WeAreGladiators.UI;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using HexGameEngine.Audio;
+using WeAreGladiators.Audio;
 using DG.Tweening;
-using HexGameEngine.TownFeatures;
-using HexGameEngine.Characters;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.Characters;
 using TMPro;
 
-namespace HexGameEngine.Items
+namespace WeAreGladiators.Items
 {
     public class InventoryItemView : MonoBehaviour
     {

@@ -1,19 +1,19 @@
-﻿using HexGameEngine.Abilities;
-using HexGameEngine.Characters;
-using HexGameEngine.Combat;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Pathfinding;
-using HexGameEngine.Perks;
-using HexGameEngine.TurnLogic;
-using HexGameEngine.Utilities;
-using HexGameEngine.VisualEvents;
+﻿using WeAreGladiators.Abilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Combat;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Pathfinding;
+using WeAreGladiators.Perks;
+using WeAreGladiators.TurnLogic;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace HexGameEngine.AI
+namespace WeAreGladiators.AI
 {
     public static class AILogic 
     {

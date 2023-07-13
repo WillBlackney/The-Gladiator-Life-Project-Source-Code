@@ -1,11 +1,11 @@
-using HexGameEngine.UI;
+using WeAreGladiators.UI;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace HexGameEngine.UWidget
+namespace WeAreGladiators.UWidget
 {
     public class UWidget : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
     {

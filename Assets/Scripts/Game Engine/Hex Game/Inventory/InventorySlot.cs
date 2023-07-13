@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace HexGameEngine.Items
+namespace WeAreGladiators.Items
 {
     public class InventorySlot : MonoBehaviour
     {

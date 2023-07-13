@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
-using HexGameEngine.Perks;
-using HexGameEngine.VisualEvents;
-using HexGameEngine.Characters;
-using HexGameEngine.Combat;
+using WeAreGladiators.Perks;
+using WeAreGladiators.VisualEvents;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Combat;
 using Sirenix.Serialization;
 
-namespace HexGameEngine.Abilities
+namespace WeAreGladiators.Abilities
 {
     [Serializable]
     public class AbilityEffect

@@ -4,9 +4,9 @@ using UnityEditor;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
-using HexGameEngine.Items;
+using WeAreGladiators.Items;
 
-namespace HexGameEngine.Editor
+namespace WeAreGladiators.Editor
 {
 
     public class ItemDataEditor : OdinMenuEditorWindow

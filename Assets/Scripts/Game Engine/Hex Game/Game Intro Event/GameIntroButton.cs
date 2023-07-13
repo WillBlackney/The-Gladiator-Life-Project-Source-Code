@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace HexGameEngine.GameIntroEvent
+namespace WeAreGladiators.GameIntroEvent
 {
     public class GameIntroButton : MonoBehaviour
     {

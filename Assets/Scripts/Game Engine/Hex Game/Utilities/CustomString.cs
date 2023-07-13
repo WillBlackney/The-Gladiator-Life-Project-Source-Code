@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
 
-namespace HexGameEngine.Utilities
+namespace WeAreGladiators.Utilities
 {
     [Serializable]
     public class CustomString

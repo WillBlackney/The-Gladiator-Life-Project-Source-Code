@@ -1,11 +1,11 @@
-﻿using HexGameEngine.UI;
-using HexGameEngine.Utilities;
+﻿using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.HexTiles
+namespace WeAreGladiators.HexTiles
 {
     [CreateAssetMenu(fileName = "New Hex Data", menuName = "Hex Data", order = 52)]
     public class HexDataSO : ScriptableObject

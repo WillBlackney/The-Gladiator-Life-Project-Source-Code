@@ -1,23 +1,23 @@
-﻿using HexGameEngine.Characters;
-using HexGameEngine.HexTiles;
-using HexGameEngine.TurnLogic;
-using HexGameEngine.UCM;
-using HexGameEngine.Items;
+﻿using WeAreGladiators.Characters;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.TurnLogic;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Items;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Abilities;
-using HexGameEngine.Perks;
-using HexGameEngine.Utilities;
-using HexGameEngine.VisualEvents;
-using HexGameEngine.JourneyLogic;
-using HexGameEngine.UI;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
+using WeAreGladiators.JourneyLogic;
+using WeAreGladiators.UI;
 using System.Linq;
-using HexGameEngine.Player;
-using HexGameEngine.Audio;
+using WeAreGladiators.Player;
+using WeAreGladiators.Audio;
 using DG.Tweening;
-using HexGameEngine.CameraSystems;
+using WeAreGladiators.CameraSystems;
 
-namespace HexGameEngine.Combat
+namespace WeAreGladiators.Combat
 {
     public class CombatController : Singleton<CombatController>
     {

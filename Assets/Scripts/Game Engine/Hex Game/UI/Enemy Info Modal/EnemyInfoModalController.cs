@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using HexGameEngine.Utilities;
-using HexGameEngine.Characters;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Characters;
 using UnityEngine.UI;
 using UnityEngine.TextCore.Text;
 using System.IO;
 using DG.Tweening;
-using HexGameEngine.TurnLogic;
-using HexGameEngine.Combat;
-using HexGameEngine.Libraries;
+using WeAreGladiators.TurnLogic;
+using WeAreGladiators.Combat;
+using WeAreGladiators.Libraries;
 using System.Linq;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Abilities;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Abilities;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class EnemyInfoModalController : Singleton<EnemyInfoModalController>
     {

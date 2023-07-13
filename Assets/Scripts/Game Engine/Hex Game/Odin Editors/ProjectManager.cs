@@ -5,18 +5,18 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
-using HexGameEngine.CustomOdinGUI;
-using HexGameEngine.Characters;
-using HexGameEngine.Abilities;
-using HexGameEngine.Items;
-using HexGameEngine.Perks;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Utilities;
-using HexGameEngine.VisualEvents;
-using HexGameEngine.Audio;
-using HexGameEngine.Libraries;
+using WeAreGladiators.CustomOdinGUI;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Items;
+using WeAreGladiators.Perks;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Libraries;
 
-namespace HexGameEngine.Editor
+namespace WeAreGladiators.Editor
 {
 
     public class ProjectManager : OdinMenuEditorWindow

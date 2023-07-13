@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using HexGameEngine.UCM;
+using WeAreGladiators.UCM;
 
 namespace Spriter2UnityDX {
 	[DisallowMultipleComponent, ExecuteInEditMode, AddComponentMenu("")]

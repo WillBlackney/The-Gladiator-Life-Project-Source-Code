@@ -4,10 +4,10 @@ using UnityEditor;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
-using HexGameEngine.Abilities;
-using HexGameEngine.Characters;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Characters;
 
-namespace HexGameEngine.Editor
+namespace WeAreGladiators.Editor
 {
 
     public class EnemyDataEditor : OdinMenuEditorWindow

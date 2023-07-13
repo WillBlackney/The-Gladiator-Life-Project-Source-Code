@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.UCM;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.UCM;
 using UnityEngine.UI;
-using HexGameEngine.Characters;
-using HexGameEngine.TownFeatures;
-using HexGameEngine.Audio;
+using WeAreGladiators.Characters;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.Audio;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class PortraitDragController : Singleton<PortraitDragController>
     {

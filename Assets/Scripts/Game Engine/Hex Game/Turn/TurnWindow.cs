@@ -5,12 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
-using HexGameEngine.Characters;
-using HexGameEngine.UCM;
-using HexGameEngine.HexTiles;
+using WeAreGladiators.Characters;
+using WeAreGladiators.UCM;
+using WeAreGladiators.HexTiles;
 using DG.Tweening;
 
-namespace HexGameEngine.TurnLogic
+namespace WeAreGladiators.TurnLogic
 {
     public class TurnWindow : MonoBehaviour
     {

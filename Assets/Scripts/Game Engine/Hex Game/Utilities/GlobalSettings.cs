@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using HexGameEngine.HexTiles;
-using HexGameEngine.Characters;
-using HexGameEngine.StoryEvents;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Characters;
+using WeAreGladiators.StoryEvents;
 
-namespace HexGameEngine.Utilities
+namespace WeAreGladiators.Utilities
 {
     public class GlobalSettings : Singleton<GlobalSettings>
     {
@@ -33,7 +33,7 @@ namespace HexGameEngine.Utilities
         [Space(10)]
 
         [Title("Starting Timeline Settings")]
-        [Range(1,5)]
+        [Range(1, 5)]
         [ShowIf("ShowStartingTimeSettings")]
         [SerializeField] private int startingDay = 1;
         [Range(1, 5)]
@@ -42,7 +42,7 @@ namespace HexGameEngine.Utilities
         [Space(10)]
 
         // Single Combat Scene Properties
-        [Title("Sandbox Settings")]      
+        [Title("Sandbox Settings")]
         [ShowIf("ShowSandBoxLevelSeed")]
         [SerializeField] private CombatMapSeedDataSO sandboxCombatMapSeed;
 
@@ -62,12 +62,12 @@ namespace HexGameEngine.Utilities
         [SerializeField] private EnemyEncounterSO playerAiCharacters;
 
         [ShowIf("ShowStartingPlayerCharacters")]
-        [SerializeField] private PlayerGroup[] startingPlayerCharacters;         
+        [SerializeField] private PlayerGroup[] startingPlayerCharacters;
 
         [ShowIf("ShowSandboxEnemyEncounter")]
         [SerializeField] private EnemyEncounterSO[] sandboxEnemyEncounters;
 
-       
+
         #endregion
 
         // Getters + Accessors
@@ -97,7 +97,7 @@ namespace HexGameEngine.Utilities
         public CombatMapSeedDataSO SandboxCombatMapSeed
         {
             get { return sandboxCombatMapSeed; }
-        }      
+        }
         public EnemyEncounterSO[] SandboxEnemyEncounters
         {
             get { return sandboxEnemyEncounters; }
@@ -117,7 +117,7 @@ namespace HexGameEngine.Utilities
         public int TotalRandomCharacters
         {
             get { return totalRandomCharacters; }
-        }        
+        }
         public int BaseStartingGold
         {
             get { return baseStartingGold; }
@@ -125,7 +125,7 @@ namespace HexGameEngine.Utilities
         public PlayerGroup[] StartingPlayerCharacters
         {
             get { return startingPlayerCharacters; }
-        }        
+        }
         public int BaseHitChance
         {
             get { return baseHitChance; }
@@ -145,10 +145,14 @@ namespace HexGameEngine.Utilities
         }
         public void ApplyStartingXPBonus()
         {
-            foreach(HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
+            foreach (HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
             {
                 CharacterDataController.Instance.HandleGainXP(character, StartingXpBonus, false);
             }
+        }
+        public void SetTestEnvironment()
+        {
+            gameMode = GameMode.IntegrationTesting;
         }
         #endregion
 
@@ -201,6 +205,7 @@ namespace HexGameEngine.Utilities
         TownSandbox = 5,
         PostCombatReward = 2,
         StoryEventSandbox = 4,
+        IntegrationTesting = 6,
     }
     public enum PlayerCharacterSpawnSetting
     {

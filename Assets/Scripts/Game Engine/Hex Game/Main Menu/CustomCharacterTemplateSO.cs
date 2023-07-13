@@ -1,10 +1,10 @@
-using HexGameEngine.Abilities;
-using HexGameEngine.Items;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     [CreateAssetMenu(fileName = "New Custom Character Template", menuName = "Custom Character Template", order = 52)]
     public class CustomCharacterTemplateSO : ScriptableObject

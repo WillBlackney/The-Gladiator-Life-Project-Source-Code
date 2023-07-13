@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
-using HexGameEngine.Characters;
-using HexGameEngine.UI;
-using HexGameEngine.Persistency;
-using HexGameEngine.JourneyLogic;
-using HexGameEngine.Audio;
+using WeAreGladiators.Characters;
+using WeAreGladiators.UI;
+using WeAreGladiators.Persistency;
+using WeAreGladiators.JourneyLogic;
+using WeAreGladiators.Audio;
 
-namespace HexGameEngine.GameIntroEvent
+namespace WeAreGladiators.GameIntroEvent
 {
     public class GameIntroController : Singleton<GameIntroController>
     {

@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Characters;
-using HexGameEngine.UCM;
-using HexGameEngine.UI;
+using WeAreGladiators.Characters;
+using WeAreGladiators.UCM;
+using WeAreGladiators.UI;
 
-namespace HexGameEngine.TownFeatures
+namespace WeAreGladiators.TownFeatures
 {
     public class DeploymentNodeView : MonoBehaviour
     {

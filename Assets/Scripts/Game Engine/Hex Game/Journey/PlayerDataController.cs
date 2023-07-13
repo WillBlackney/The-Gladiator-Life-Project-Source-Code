@@ -1,12 +1,12 @@
-﻿using HexGameEngine.UI;
-using HexGameEngine.VisualEvents;
+﻿using WeAreGladiators.UI;
+using WeAreGladiators.VisualEvents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.Persistency;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Persistency;
 
-namespace HexGameEngine.Player
+namespace WeAreGladiators.Player
 {
     public class PlayerDataController : Singleton<PlayerDataController>
     {

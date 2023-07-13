@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using System.Text;
 
-namespace HexGameEngine.Perks
+namespace WeAreGladiators.Perks
 {
     [Serializable]
     public class PerkPairingData

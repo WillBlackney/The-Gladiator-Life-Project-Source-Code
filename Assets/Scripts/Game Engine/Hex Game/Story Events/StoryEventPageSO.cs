@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace HexGameEngine.StoryEvents
+namespace WeAreGladiators.StoryEvents
 {
     [CreateAssetMenu(fileName = "New StoryEventPageSO", menuName = "StoryEventPage", order = 52)]
     public class StoryEventPageSO : ScriptableObject

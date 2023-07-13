@@ -1,9 +1,9 @@
-﻿using HexGameEngine.Items;
+﻿using WeAreGladiators.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.RewardSystems
+namespace WeAreGladiators.RewardSystems
 {
     public class LootSet
     {

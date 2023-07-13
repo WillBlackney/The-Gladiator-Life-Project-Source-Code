@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.CameraSystems;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.CameraSystems;
 
-namespace HexGameEngine.Cards
+namespace WeAreGladiators.Cards
 {
     public class TargettingArrowController : Singleton<TargettingArrowController>
     {

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using HexGameEngine.Characters;
+using WeAreGladiators.Characters;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class UITalentRow : MonoBehaviour
     {

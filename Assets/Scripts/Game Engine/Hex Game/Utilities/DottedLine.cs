@@ -1,10 +1,10 @@
-﻿using HexGameEngine;
+﻿using WeAreGladiators;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.Utilities
+namespace WeAreGladiators.Utilities
 {
     public class DottedLine : Singleton<DottedLine>
     {

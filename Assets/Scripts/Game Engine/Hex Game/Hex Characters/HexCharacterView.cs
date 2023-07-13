@@ -1,8 +1,8 @@
-﻿using HexGameEngine.UCM;
-using HexGameEngine.Abilities;
-using HexGameEngine.Combat;
-using HexGameEngine.Perks;
-using HexGameEngine.TurnLogic;
+﻿using WeAreGladiators.UCM;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Combat;
+using WeAreGladiators.Perks;
+using WeAreGladiators.TurnLogic;
 using Sirenix.OdinInspector;
 using Spriter2UnityDX;
 using System.Collections;
@@ -11,11 +11,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using HexGameEngine.UI;
-using HexGameEngine.VisualEvents;
-using HexGameEngine.Utilities;
+using WeAreGladiators.UI;
+using WeAreGladiators.VisualEvents;
+using WeAreGladiators.Utilities;
 
-namespace HexGameEngine.Characters
+namespace WeAreGladiators.Characters
 {
     public class HexCharacterView : MonoBehaviour
     {

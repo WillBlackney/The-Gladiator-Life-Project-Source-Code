@@ -1,29 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HexGameEngine.Utilities;
-using HexGameEngine.Persistency;
-using HexGameEngine.Characters;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Persistency;
+using WeAreGladiators.Characters;
 using Sirenix.OdinInspector;
-using HexGameEngine.UI;
+using WeAreGladiators.UI;
 using TMPro;
 using UnityEngine.UI;
-using HexGameEngine.UCM;
+using WeAreGladiators.UCM;
 using System;
-using HexGameEngine.Abilities;
-using HexGameEngine.Libraries;
-using HexGameEngine.Player;
-using HexGameEngine.JourneyLogic;
-using HexGameEngine.Perks;
-using HexGameEngine.Items;
-using HexGameEngine.CameraSystems;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Libraries;
+using WeAreGladiators.Player;
+using WeAreGladiators.JourneyLogic;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Items;
+using WeAreGladiators.CameraSystems;
 using DG.Tweening;
-using HexGameEngine.Audio;
+using WeAreGladiators.Audio;
 using UnityEngine.TextCore.Text;
-using HexGameEngine.Boons;
-using HexGameEngine.LoadingScreen;
+using WeAreGladiators.Boons;
+using WeAreGladiators.LoadingScreen;
 
-namespace HexGameEngine.TownFeatures
+namespace WeAreGladiators.TownFeatures
 {
     public class TownController : Singleton<TownController>
     {

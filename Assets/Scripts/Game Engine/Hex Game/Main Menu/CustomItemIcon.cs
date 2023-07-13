@@ -1,10 +1,10 @@
-using HexGameEngine.Items;
+using WeAreGladiators.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class CustomItemIcon : MonoBehaviour
     {

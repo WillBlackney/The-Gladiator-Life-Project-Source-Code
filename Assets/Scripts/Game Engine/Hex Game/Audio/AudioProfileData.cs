@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace HexGameEngine.Audio
+namespace WeAreGladiators.Audio
 {
     [CreateAssetMenu(fileName = "New AudioProfileData", menuName = "Audio Profile Data")]
     public class AudioProfileData : ScriptableObject

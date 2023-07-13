@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace HexGameEngine.Cards
+namespace WeAreGladiators.Cards
 {
     public abstract class DraggingActions : MonoBehaviour
     {

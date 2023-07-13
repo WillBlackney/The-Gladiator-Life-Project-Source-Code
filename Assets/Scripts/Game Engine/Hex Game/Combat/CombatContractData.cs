@@ -1,9 +1,9 @@
-﻿using HexGameEngine.Characters;
+﻿using WeAreGladiators.Characters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HexGameEngine.TownFeatures
+namespace WeAreGladiators.TownFeatures
 {
     public class CombatContractData
     {

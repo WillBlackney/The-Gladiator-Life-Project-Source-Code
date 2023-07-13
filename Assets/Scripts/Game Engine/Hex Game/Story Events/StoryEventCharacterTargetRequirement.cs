@@ -1,11 +1,11 @@
-using HexGameEngine.Characters;
+using WeAreGladiators.Characters;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace HexGameEngine.StoryEvents
+namespace WeAreGladiators.StoryEvents
 {
     [Serializable]
     public class StoryEventCharacterTargetRequirement

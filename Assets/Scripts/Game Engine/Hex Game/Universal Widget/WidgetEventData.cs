@@ -7,10 +7,10 @@ using UnityEngine.Events;
 using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
-using HexGameEngine.Audio;
-using HexGameEngine.UI;
+using WeAreGladiators.Audio;
+using WeAreGladiators.UI;
 
-namespace HexGameEngine.UWidget
+namespace WeAreGladiators.UWidget
 {
     [Serializable]
     public class WidgetEventData

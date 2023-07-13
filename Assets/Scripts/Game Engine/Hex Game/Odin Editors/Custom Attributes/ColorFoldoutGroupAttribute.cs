@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace HexGameEngine.CustomOdinGUI
+namespace WeAreGladiators.CustomOdinGUI
 {
     public class ColorFoldoutGroupAttribute : PropertyGroupAttribute
     {

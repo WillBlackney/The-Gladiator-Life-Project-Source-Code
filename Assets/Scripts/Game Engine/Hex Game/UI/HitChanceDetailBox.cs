@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using HexGameEngine.Utilities;
+using WeAreGladiators.Utilities;
 using System.Linq;
-using HexGameEngine.Perks;
+using WeAreGladiators.Perks;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class HitChanceDetailBox : MonoBehaviour
     {

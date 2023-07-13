@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using HexGameEngine.Utilities;
-using HexGameEngine.VisualEvents;
-using HexGameEngine.UI;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
+using WeAreGladiators.UI;
 
-namespace HexGameEngine.Perks
+namespace WeAreGladiators.Perks
 {
     [CreateAssetMenu(fileName = "New Perk Data", menuName = "Perk Data", order = 52)]
     public class PerkIconDataSO : ScriptableObject

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
-using HexGameEngine.Utilities;
-using HexGameEngine.Characters;
-using HexGameEngine.Persistency;
-using HexGameEngine.UI;
-using HexGameEngine.TownFeatures;
-using HexGameEngine.Perks;
-using HexGameEngine.HexTiles;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Persistency;
+using WeAreGladiators.UI;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.Perks;
+using WeAreGladiators.HexTiles;
 
-namespace HexGameEngine.JourneyLogic
+namespace WeAreGladiators.JourneyLogic
 {
 
     public class RunController : Singleton<RunController>

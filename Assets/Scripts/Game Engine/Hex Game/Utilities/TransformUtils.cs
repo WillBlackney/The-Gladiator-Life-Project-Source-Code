@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HexGameEngine.Utilities
+namespace WeAreGladiators.Utilities
 {
     public static class TransformUtils
     {

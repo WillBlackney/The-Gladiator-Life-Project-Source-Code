@@ -5,12 +5,12 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
-using HexGameEngine.CameraSystems;
+using WeAreGladiators.CameraSystems;
 using UnityEngine.Events;
-using HexGameEngine.UI;
-using HexGameEngine.Audio;
+using WeAreGladiators.UI;
+using WeAreGladiators.Audio;
 
-namespace HexGameEngine.TownFeatures
+namespace WeAreGladiators.TownFeatures
 {
     public class TownBuildingView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {

@@ -1,12 +1,12 @@
-using HexGameEngine.Perks;
+using WeAreGladiators.Perks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using HexGameEngine.Characters;
+using WeAreGladiators.Characters;
 
-namespace HexGameEngine.UI
+namespace WeAreGladiators.UI
 {
     public class UIBackgroundIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
