@@ -1184,7 +1184,7 @@ namespace WeAreGladiators.AI
             float cooldownTotal = 0;
             float score = 0;
 
-            if (team == Allegiance.Player) characters.AddRange(HexCharacterController.Instance.AllDefenders);
+            if (team == Allegiance.Player) characters.AddRange(HexCharacterController.Instance.AllPlayerCharacters);
             else characters.AddRange(HexCharacterController.Instance.AllEnemies);
 
             foreach(HexCharacterModel c in characters)

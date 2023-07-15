@@ -22,6 +22,8 @@ using WeAreGladiators.Libraries;
 using System.Threading.Tasks;
 using Sirenix.Utilities;
 using UnityEditor;
+using UnityEditor.PackageManager;
+using UnityEngine.TextCore.Text;
 
 namespace WeAreGladiators.Characters
 {
@@ -31,10 +33,10 @@ namespace WeAreGladiators.Characters
         #region
         [Header("Active Characters")]
         private List<HexCharacterModel> allCharacters = new List<HexCharacterModel>();
-        private List<HexCharacterModel> allDefenders = new List<HexCharacterModel>();
+        private List<HexCharacterModel> allPlayerCharacters = new List<HexCharacterModel>();
         private List<HexCharacterModel> graveyard = new List<HexCharacterModel>();
         private List<HexCharacterModel> allEnemies = new List<HexCharacterModel>();
-        private List<HexCharacterModel> allSummonedDefenders = new List<HexCharacterModel>();
+        private List<HexCharacterModel> allSummonedPlayerCharacters = new List<HexCharacterModel>();
         #endregion
 
         // Getters + Accessors
@@ -50,26 +52,26 @@ namespace WeAreGladiators.Characters
                 allCharacters = value;
             }
         }
-        public List<HexCharacterModel> AllDefenders
+        public List<HexCharacterModel> AllPlayerCharacters
         {
             get
             {
-                return allDefenders;
+                return allPlayerCharacters;
             }
             private set
             {
-                allDefenders = value;
+                allPlayerCharacters = value;
             }
         }
-        public List<HexCharacterModel> AllSummonedDefenders
+        public List<HexCharacterModel> AllSummonedPlayerCharacters
         {
             get
             {
-                return allSummonedDefenders;
+                return allSummonedPlayerCharacters;
             }
             private set
             {
-                allSummonedDefenders = value;
+                allSummonedPlayerCharacters = value;
             }
         }
         public List<HexCharacterModel> AllEnemies
@@ -227,7 +229,7 @@ namespace WeAreGladiators.Characters
 
             // Create data object
             HexCharacterModel model = new HexCharacterModel();
-            HexCharacterData characterData = CharacterDataController.Instance.GenerateEnemyDataFromEnemyTemplate(data);
+            HexCharacterData characterData = CharacterDataController.Instance.GenerateCharacterDataFromEnemyTemplate(data);
 
             // Connect model to view
             model.hexCharacterView = vm;
@@ -759,13 +761,13 @@ namespace WeAreGladiators.Characters
         {
             Debug.Log("CharacterEntityController.AddDefenderPersistency() called, adding: " + character.myName);
             AllCharacters.Add(character);
-            AllDefenders.Add(character);
+            AllPlayerCharacters.Add(character);
         }
         public void AddSummonedDefenderToPersistency(HexCharacterModel character)
         {
             Debug.Log("CharacterEntityController.AddDefenderPersistency() called, adding: " + character.myName);
             AllCharacters.Add(character);
-            AllSummonedDefenders.Add(character);
+            AllSummonedPlayerCharacters.Add(character);
         }      
         public void AddEnemyToPersistency(HexCharacterModel character)
         {
@@ -783,13 +785,13 @@ namespace WeAreGladiators.Characters
         {
             Debug.Log("CharacterEntityController.RemoveDefenderFromPersistency() called, removing: " + character.myName);
             AllCharacters.Remove(character);
-            AllDefenders.Remove(character);
+            AllPlayerCharacters.Remove(character);
         }
         public void RemoveSummonedDefenderFromPersistency(HexCharacterModel character)
         {
             Debug.Log("CharacterEntityController.RemoveDefenderFromPersistency() called, removing: " + character.myName);
             AllCharacters.Remove(character);
-            AllSummonedDefenders.Remove(character);
+            AllSummonedPlayerCharacters.Remove(character);
         }
         #endregion
 
@@ -2830,6 +2832,7 @@ namespace WeAreGladiators.Characters
         }
         private IEnumerator MoveAllCharactersToStartingNodesCoroutine(TaskTracker data)
         {
+
             List<TaskTracker> events = new List<TaskTracker>();
             foreach (HexCharacterModel character in AllCharacters)
             {
@@ -2842,9 +2845,11 @@ namespace WeAreGladiators.Characters
             AudioManager.Instance.PlaySound(Sound.Crowd_Cheer_1);
             LevelController.Instance.AnimateCrowdOnCombatStart();
 
-            yield return new WaitUntil(() => events.Count == 0);
-
-            if (data != null) data.MarkAsCompleted();
+            if (data != null) 
+            {
+                yield return new WaitUntil(() => events.Count == 0);
+                data.MarkAsCompleted();
+            }            
         }
         #endregion
 
@@ -2925,8 +2930,8 @@ namespace WeAreGladiators.Characters
 
             AllCharacters.Clear();
             AllEnemies.Clear();
-            AllSummonedDefenders.Clear();
-            AllDefenders.Clear();
+            AllSummonedPlayerCharacters.Clear();
+            AllPlayerCharacters.Clear();
             Graveyard.Clear();
 
             var destroyables = FindObjectsOfType<DestroyOnSceneChange>();

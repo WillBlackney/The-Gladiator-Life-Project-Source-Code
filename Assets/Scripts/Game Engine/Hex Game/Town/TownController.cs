@@ -873,10 +873,11 @@ namespace WeAreGladiators.TownFeatures
 
         // Choose Combat Contract Page Logic
         #region
-        public CombatContractData GenerateSandboxContractData()
+        public CombatContractData GenerateSandboxContractData(EnemyEncounterSO enemyData = null)
         {
             CombatContractData ret = new CombatContractData();
-            ret.enemyEncounterData = RunController.Instance.GenerateEnemyEncounterFromTemplate(GlobalSettings.Instance.SandboxEnemyEncounters.GetRandomElement());
+            if (enemyData == null) enemyData = GlobalSettings.Instance.SandboxEnemyEncounters.GetRandomElement();
+            ret.enemyEncounterData = RunController.Instance.GenerateEnemyEncounterFromTemplate(enemyData);
             ret.combatRewardData = new CombatRewardData(ret.enemyEncounterData.difficulty, ret.enemyEncounterData.deploymentLimit);
             return ret;
         }

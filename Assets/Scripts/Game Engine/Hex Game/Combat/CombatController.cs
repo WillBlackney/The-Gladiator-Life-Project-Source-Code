@@ -1642,7 +1642,7 @@ namespace WeAreGladiators.Combat
             if (character.allegiance == Allegiance.Enemy)
                 HexCharacterController.Instance.RemoveEnemyFromPersistency(character);
 
-            else if (character.allegiance == Allegiance.Player && HexCharacterController.Instance.AllSummonedDefenders.Contains(character))
+            else if (character.allegiance == Allegiance.Player && HexCharacterController.Instance.AllSummonedPlayerCharacters.Contains(character))
                 HexCharacterController.Instance.RemoveSummonedDefenderFromPersistency(character);
 
             else if (character.allegiance == Allegiance.Player)
@@ -1778,7 +1778,7 @@ namespace WeAreGladiators.Combat
             }           
 
             // Check if the combat defeat event should be triggered
-            if (HexCharacterController.Instance.AllDefenders.Count == 0 &&
+            if (HexCharacterController.Instance.AllPlayerCharacters.Count == 0 &&
                 currentCombatState == CombatGameState.CombatActive)
             {
                 currentCombatState = CombatGameState.CombatInactive;

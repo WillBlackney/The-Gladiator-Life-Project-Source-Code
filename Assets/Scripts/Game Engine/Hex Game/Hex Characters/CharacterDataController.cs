@@ -251,7 +251,7 @@ namespace WeAreGladiators.Characters
 
             return newCharacter;
         }
-        public HexCharacterData GenerateEnemyDataFromEnemyTemplate(EnemyTemplateSO template)
+        public HexCharacterData GenerateCharacterDataFromEnemyTemplate(EnemyTemplateSO template)
         {
             Debug.Log("CharacterDataController.GenerateEnemyDataFromEnemyTemplate() called...");
             HexCharacterData newCharacter = new HexCharacterData();
@@ -284,8 +284,6 @@ namespace WeAreGladiators.Characters
 
             // Ai Routine
             newCharacter.aiTurnRoutine = template.aiTurnRoutine;
-            if (newCharacter.aiTurnRoutine == null)
-                Debug.LogWarning("Routine is null...");
 
             // Item Data
             newCharacter.itemSet = new ItemSet();

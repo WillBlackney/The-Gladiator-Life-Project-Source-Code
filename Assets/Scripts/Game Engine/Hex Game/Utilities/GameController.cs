@@ -175,6 +175,62 @@ namespace WeAreGladiators
 
             InventoryController.Instance.PopulateInventoryWithMockDataItems(30);
         }
+        public void RunTestEnvironmentCombat(List<HexCharacterTemplateSO> playerCharacters, EnemyEncounterSO enemyEncounter)
+        {
+            var charactersWithSpawnPos = BuildNewSaveFileForTestingEnvironment(playerCharacters);
+
+            // Set state
+            SetGameState(GameState.CombatActive);
+
+            // Show UI
+            TopBarController.Instance.ShowCombatTopBar();
+
+            // Build mock save file + journey data
+            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
+
+            // Enable world view
+            LightController.Instance.EnableDayTimeGlobalLight();
+            LevelController.Instance.EnableDayTimeArenaScenery();
+            LevelController.Instance.ShowAllNodeViews();
+            LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
+
+            // Generate enemy wave + enemies data
+            CombatContractData sandboxContractData = TownController.Instance.GenerateSandboxContractData(enemyEncounter);
+            RunController.Instance.SetCurrentContractData(sandboxContractData);
+
+            // Generate combat map data
+            List<LevelNode> spawnPositions = LevelController.Instance.GetCharacterStartPositions(
+                RunController.Instance.CurrentCombatContractData.enemyEncounterData.enemiesInEncounter,
+                charactersWithSpawnPos);
+
+            // Randomize level node elevation and obstructions
+            RunController.Instance.SetCurrentCombatMapData(LevelController.Instance.GenerateLevelNodes(spawnPositions));
+
+            // Save data to persistency
+            PersistencyController.Instance.AutoUpdateSaveFile();
+
+            // Setup player characters
+            HexCharacterController.Instance.CreateAllPlayerCombatCharacters(charactersWithSpawnPos);
+
+            // Animate Crowd
+            LevelController.Instance.StopAllCrowdMembers(true);
+
+            // Combat Music
+            AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
+            AudioManager.Instance.FadeInSound(Sound.Ambience_Crowd_1, 1f);
+
+            // Spawn enemies in world
+            HexCharacterController.Instance.SpawnEnemyEncounter(sandboxContractData.enemyEncounterData);
+
+            // Place characters off screen
+            HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();
+
+            // Move characters towards start nodes
+            VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(null));
+
+            // Start a new combat event
+            //TurnController.Instance.OnNewCombatEventStarted();
+        }
         private void RunSandboxCombat()
         {
             var charactersWithSpawnPos = BuildNewSaveFileForSandboxEnvironment();
@@ -297,7 +353,7 @@ namespace WeAreGladiators
 
             // Determine characters to reward XP to
             List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();
-            foreach (HexCharacterModel character in HexCharacterController.Instance.AllDefenders)
+            foreach (HexCharacterModel character in HexCharacterController.Instance.AllPlayerCharacters)
             {
                 if (character.livingState == LivingState.Alive && character.currentHealth > 0)
                     charactersRewarded.Add(character);
@@ -326,7 +382,7 @@ namespace WeAreGladiators
             AudioManager.Instance.FadeOutAllCombatMusic(0.25f);
 
             // Tear down summoned characters
-            foreach (HexCharacterModel model in HexCharacterController.Instance.AllSummonedDefenders)
+            foreach (HexCharacterModel model in HexCharacterController.Instance.AllSummonedPlayerCharacters)
             {
                 // Smokey vanish effect
                 VisualEffectManager.Instance.CreateExpendEffect(model.hexCharacterView.WorldPosition, 15, 0.2f, false);
@@ -339,7 +395,7 @@ namespace WeAreGladiators
             }
 
             // Disable any player character gui's if they're still active
-            foreach (HexCharacterModel model in HexCharacterController.Instance.AllDefenders)
+            foreach (HexCharacterModel model in HexCharacterController.Instance.AllPlayerCharacters)
             {
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
             }           
@@ -390,7 +446,7 @@ namespace WeAreGladiators
 
             // Tear down summoned characters + enemies
             List<HexCharacterModel> destCharacters = new List<HexCharacterModel>();
-            destCharacters.AddRange(HexCharacterController.Instance.AllSummonedDefenders);
+            destCharacters.AddRange(HexCharacterController.Instance.AllSummonedPlayerCharacters);
             destCharacters.AddRange(HexCharacterController.Instance.AllEnemies);
             foreach (HexCharacterModel model in destCharacters)
             {
@@ -405,7 +461,7 @@ namespace WeAreGladiators
             }
 
             // Disable any player character gui's if they're still active
-            foreach (HexCharacterModel model in HexCharacterController.Instance.AllDefenders)
+            foreach (HexCharacterModel model in HexCharacterController.Instance.AllPlayerCharacters)
             {
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
             }
@@ -421,7 +477,7 @@ namespace WeAreGladiators
 
             // Determine characters to reward XP to
             List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();
-            foreach (HexCharacterModel character in HexCharacterController.Instance.AllDefenders)
+            foreach (HexCharacterModel character in HexCharacterController.Instance.AllPlayerCharacters)
             {
                 if (character.livingState == LivingState.Alive && character.currentHealth > 0)
                     charactersRewarded.Add(character);
@@ -454,7 +510,7 @@ namespace WeAreGladiators
 
             // Tear down summoned characters + enemies
             List<HexCharacterModel> destCharacters = new List<HexCharacterModel>();
-            destCharacters.AddRange(HexCharacterController.Instance.AllSummonedDefenders);
+            destCharacters.AddRange(HexCharacterController.Instance.AllSummonedPlayerCharacters);
             destCharacters.AddRange(HexCharacterController.Instance.AllEnemies);
             foreach (HexCharacterModel model in destCharacters)
             {
@@ -469,7 +525,7 @@ namespace WeAreGladiators
             }
 
             // Disable any player character gui's if they're still active
-            foreach (HexCharacterModel model in HexCharacterController.Instance.AllDefenders)
+            foreach (HexCharacterModel model in HexCharacterController.Instance.AllPlayerCharacters)
             {
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
             }
@@ -875,9 +931,37 @@ namespace WeAreGladiators
             PersistencyController.Instance.AutoUpdateSaveFile();
             return charactersWithSpawnPos;
         }
-       
-        #endregion     
-        
+        private List<CharacterWithSpawnData> BuildNewSaveFileForTestingEnvironment(List<HexCharacterTemplateSO> playerCharacters)
+        {
+            List<CharacterWithSpawnData> charactersWithSpawnPos = new List<CharacterWithSpawnData>();
+
+            int ySpawn = 1;
+            int xSpawn = -2;
+
+            playerCharacters.ForEach(i => 
+            {
+                var character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(i);
+                charactersWithSpawnPos.Add(new CharacterWithSpawnData(character, new Vector2(xSpawn, ySpawn)));
+                
+                // Deployed 3 characters? start deploying one rank back.
+                if(ySpawn == -1)
+                {
+                    ySpawn = 1;
+                    xSpawn = -3;
+                }
+                else ySpawn -= 1;
+            });
+
+            PersistencyController.Instance.BuildNewSaveFileOnNewGameStarted(charactersWithSpawnPos[0].characterData);
+            List<HexCharacterData> characters = new List<HexCharacterData>();
+            charactersWithSpawnPos.ForEach(x => characters.Add(x.characterData));
+            for (int i = 1; i < characters.Count; i++) CharacterDataController.Instance.AddCharacterToRoster(characters[i]);
+            PersistencyController.Instance.AutoUpdateSaveFile();
+            return charactersWithSpawnPos;
+        }
+
+        #endregion
+
     }
 
     public enum GameState

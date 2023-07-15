@@ -16,9 +16,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
-using UnityEngine.UI;
-using static UnityEngine.GraphicsBuffer;
 
 namespace WeAreGladiators.HexTiles
 {
@@ -129,7 +126,7 @@ namespace WeAreGladiators.HexTiles
             foreach(CharacterWithSpawnData playerPos in playerPositions)
             {
                 LevelNode node = GetHexAtGridPosition(playerPos.spawnPosition);
-                if(node != null) ret.Add(node);
+                if (node != null) ret.Add(node);
             }
 
             foreach (CharacterWithSpawnData enemyPosition in enemyPositions)

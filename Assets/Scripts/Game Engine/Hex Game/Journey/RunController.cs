@@ -240,7 +240,7 @@ namespace WeAreGladiators.JourneyLogic
                 // Random choose enemy data
                 int randomIndex = Random.Range(0, enemyGroup.possibleEnemies.Count);
                 EnemyTemplateSO data = enemyGroup.possibleEnemies[randomIndex];
-                HexCharacterData enemy = CharacterDataController.Instance.GenerateEnemyDataFromEnemyTemplate(data);
+                HexCharacterData enemy = CharacterDataController.Instance.GenerateCharacterDataFromEnemyTemplate(data);
                 ret.enemiesInEncounter.Add(new CharacterWithSpawnData(enemy, enemyGroup.spawnPosition));
             }
 
