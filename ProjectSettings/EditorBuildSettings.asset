@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Preloader Scene.unity
     guid: a646b4932f2f71e4596101fe12ce58bc
   - enabled: 1
-    path: Assets/Scenes/HexGame.unity
+    path: Assets/Scenes/Main_Game_Scene.unity
     guid: 3eca0b4da8b9ea449b0f3e4fb394cd70
   m_configObjects: {}

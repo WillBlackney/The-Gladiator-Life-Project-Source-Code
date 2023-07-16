@@ -119,7 +119,7 @@ namespace WeAreGladiators.Characters
                     CreatePlayerHexCharacter(cw.characterData, LevelController.Instance.GetHexAtGridPosition(cw.spawnPosition));
             }
         }
-        public void CreatePlayerHexCharacter(HexCharacterData data, LevelNode startPosition)
+        public HexCharacterModel CreatePlayerHexCharacter(HexCharacterData data, LevelNode startPosition)
         {
             // Create GO + View
             HexCharacterView vm = CreateCharacterEntityView();            
@@ -150,6 +150,8 @@ namespace WeAreGladiators.Characters
 
             // Add to persistency
             AddDefenderToPersistency(model);
+
+            return model;
         }
         public HexCharacterModel CreateEnemyHexCharacter(HexCharacterData data, LevelNode startPosition)
         {

@@ -546,6 +546,7 @@ namespace WeAreGladiators.Combat
                     if (injuryGained != null)
                     {
                         int injuryStacks = RandomGenerator.NumberBetween(injuryGained.minInjuryDuration, injuryGained.maxInjuryDuration);
+                        VisualEventManager.InsertTimeDelayInQueue(0.5f, character.GetLastStackEventParent());
                         PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, injuryGained.perkTag, injuryStacks, true, 1f);
                         VisualEventManager.InsertTimeDelayInQueue(0.5f, character.GetLastStackEventParent());
 
@@ -1698,11 +1699,7 @@ namespace WeAreGladiators.Combat
                 for (int i = 0; i < spatters; i++)
                     VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
             }, parentEvent).SetEndDelay(1f);
-
-            // Fade out UCM
-            //VisualEventManager.CreateVisualEvent(() => 
-            //    CharacterModeller.FadeOutCharacterShadow(view, 0.5f), parentEvent).SetEndDelay(1f);
-           
+                       
             // Destroy characters activation window and update other window positions
             HexCharacterModel currentlyActivatedEntity = TurnController.Instance.EntityActivated;
             var cachedOrder = TurnController.Instance.ActivationOrder.ToList();
@@ -1781,7 +1778,7 @@ namespace WeAreGladiators.Combat
             if (HexCharacterController.Instance.AllPlayerCharacters.Count == 0 &&
                 currentCombatState == CombatGameState.CombatActive)
             {
-                currentCombatState = CombatGameState.CombatInactive;
+                SetCombatState(CombatGameState.CombatInactive);
                 // Game over? or just normal defeat?
                 if (RunController.Instance.CurrentCombatContractData.enemyEncounterData.difficulty == CombatDifficulty.Boss)                
                     GameController.Instance.StartGameOverSequenceFromCombat();            
@@ -1792,7 +1789,7 @@ namespace WeAreGladiators.Combat
             else if (HexCharacterController.Instance.AllEnemies.Count == 0 &&
                 currentCombatState == CombatGameState.CombatActive)
             {
-                currentCombatState = CombatGameState.CombatInactive;
+                SetCombatState(CombatGameState.CombatInactive);
                 HandleOnCombatVictoryEffects();
                 GameController.Instance.StartCombatVictorySequence();               
             }            

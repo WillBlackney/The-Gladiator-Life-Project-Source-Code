@@ -192,6 +192,7 @@ namespace WeAreGladiators.UI
         }
         public void BuildAndShowFromCharacterData(HexCharacterData data)
         {
+            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0) return;
             if (!mainVisualParent.activeInHierarchy)
                 for (int i = 0; i < scrollBarResets.Length; i++)
                 scrollBarResets[i].value = 1;
@@ -200,8 +201,9 @@ namespace WeAreGladiators.UI
             characterPanelUcm.SetIdleAnim();
         }
         private void HandleBuildAndShowCharacterRoster()
-        {
+        {            
             Debug.Log("ShowCharacterRosterScreen()");
+            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0) return;
             if (!mainVisualParent.activeInHierarchy)
                 for (int i = 0; i < scrollBarResets.Length; i++)
                     scrollBarResets[i].value = 1;
@@ -216,8 +218,9 @@ namespace WeAreGladiators.UI
         }
         private void BuildRosterForCharacter(HexCharacterData data)
         {
+            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0) return;
             // Build all sections
-            if(characterCurrentlyViewing != data) AudioManager.Instance.PlaySound(data.AudioProfile, AudioSet.TurnStart);
+            if (characterCurrentlyViewing != data) AudioManager.Instance.PlaySound(data.AudioProfile, AudioSet.TurnStart);
             characterCurrentlyViewing = data;
             characterNameInputField.text = data.myName;
             characterSubNameInputField.text = data.mySubName;

@@ -435,53 +435,13 @@ namespace WeAreGladiators
         private IEnumerator StartCombatDefeatSequenceCoroutine()
         {
             Debug.Log("GameController.StartCombatDefeatSequence() called");
+
             // Set state
             SetGameState(GameState.CombatRewardPhase);
             EnemyInfoModalController.Instance.HideModal();
-            
-            // Wait for lingering visual events
-            yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);
-            AudioManager.Instance.FadeOutAllCombatMusic(1f);
-            // to do: play victory fanfare
 
-            // Tear down summoned characters + enemies
-            List<HexCharacterModel> destCharacters = new List<HexCharacterModel>();
-            destCharacters.AddRange(HexCharacterController.Instance.AllSummonedPlayerCharacters);
-            destCharacters.AddRange(HexCharacterController.Instance.AllEnemies);
-            foreach (HexCharacterModel model in destCharacters)
-            {
-                // Smokey vanish effect
-                VisualEffectManager.Instance.CreateExpendEffect(model.hexCharacterView.WorldPosition, 15, 0.2f, false);
-
-                // Fade out character model
-                CharacterModeller.FadeOutCharacterModel(model.hexCharacterView.ucm, 1f);
-
-                // Fade out UI elements
-                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);               
-            }
-
-            // Disable any player character gui's if they're still active
-            foreach (HexCharacterModel model in HexCharacterController.Instance.AllPlayerCharacters)
-            {
-                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
-            }
-
-            // Hide level nodes
-            LevelController.Instance.HideAllNodeViews();
-
-            // Destroy Activation windows
-            TurnController.Instance.DestroyAllActivationWindows();
-
-            // Hide combat UI
-            CombatUIController.Instance.HideViewsOnTurnEnd();
-
-            // Determine characters to reward XP to
-            List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();
-            foreach (HexCharacterModel character in HexCharacterController.Instance.AllPlayerCharacters)
-            {
-                if (character.livingState == LivingState.Alive && character.currentHealth > 0)
-                    charactersRewarded.Add(character);
-            }
+            // Determine characters to reward XP to   
+            List<HexCharacterModel> charactersRewarded = new List<HexCharacterModel>();            
             foreach (HexCharacterModel character in HexCharacterController.Instance.Graveyard)
             {
                 if (character.controller == Controller.Player)
@@ -489,43 +449,21 @@ namespace WeAreGladiators
             }
 
             // Reward XP, build and show combat stats screen
-            List<CharacterCombatStatData> combatStats = CombatRewardController.Instance.GenerateCombatStatResultsForCharacters(charactersRewarded, false);
+            List<CharacterCombatStatData> combatStats = CombatRewardController.Instance.GenerateCombatStatResultsForCharacters(charactersRewarded, true);
             CombatRewardController.Instance.CacheStatResult(combatStats);
-            CombatRewardController.Instance.BuildAndShowPostCombatScreen(combatStats, RunController.Instance.CurrentCombatContractData, false);
-        }
-        public void StartGameOverSequenceFromCombat()
-        {
-            StartCoroutine(StartGameOverSequenceFromCombatCoroutine());
-        }
-        private IEnumerator StartGameOverSequenceFromCombatCoroutine()
-        {
-            // Delete save file
-            PersistencyController.Instance.DeleteSaveFileOnDisk();
+            CombatRewardController.Instance.ApplyXpGainFromStatResultsToCharacters(combatStats);
 
-            // Set state
-            SetGameState(GameState.CombatRewardPhase);
+            // Save game
+            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatEnd);
+            PersistencyController.Instance.AutoUpdateSaveFile();
 
-            // wait until v queue count = 0
+            // Wait until v queue count = 0
             yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);
 
-            // Tear down summoned characters + enemies
-            List<HexCharacterModel> destCharacters = new List<HexCharacterModel>();
-            destCharacters.AddRange(HexCharacterController.Instance.AllSummonedPlayerCharacters);
-            destCharacters.AddRange(HexCharacterController.Instance.AllEnemies);
-            foreach (HexCharacterModel model in destCharacters)
-            {
-                // Smokey vanish effect
-                VisualEffectManager.Instance.CreateExpendEffect(model.hexCharacterView.WorldPosition, 15, 0.2f, false);
+            AudioManager.Instance.FadeOutAllCombatMusic(0.25f);
 
-                // Fade out character model
-                CharacterModeller.FadeOutCharacterModel(model.hexCharacterView.ucm, 1f);
-
-                // Fade out UI elements
-                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
-            }
-
-            // Disable any player character gui's if they're still active
-            foreach (HexCharacterModel model in HexCharacterController.Instance.AllPlayerCharacters)
+            // Disable any enemy character gui's if they're still active
+            foreach (HexCharacterModel model in HexCharacterController.Instance.AllEnemies)
             {
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null);
             }
@@ -536,12 +474,33 @@ namespace WeAreGladiators
             // Destroy Activation windows
             TurnController.Instance.DestroyAllActivationWindows();
 
-            // Hide combat UI
+            // Hide combat UI + Popup Modals
             CombatUIController.Instance.HideViewsOnTurnEnd();
+            LevelController.Instance.HideTileInfoPopup();
+            AbilityController.Instance.HideHitChancePopup();
+            AbilityPopupController.Instance.HidePanel();
+            MoveActionController.Instance.HidePathCostPopup();
+            EnemyInfoModalController.Instance.HideModal();
 
-            // Show Game over screen
-            //CombatRewardController.Instance.BuildAndShowGameOverScreen();
+            // Crowd combat end applause SFX and animations
+            AudioManager.Instance.PlaySound(Sound.Crowd_Big_Cheer_1); // to do: should be a boo'ing sound
+            LevelController.Instance.AnimateCrowdOnCombatVictory(); // to do: defeat animations
+            CameraController.Instance.DoCameraZoom(5, 6f, 1f);
 
+            yield return new WaitForSeconds(2f);
+            DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeOutSound(Sound.Crowd_Big_Cheer_1, 3f));
+
+            // Show combat screen
+            CombatRewardController.Instance.BuildAndShowPostCombatScreen(combatStats, RunController.Instance.CurrentCombatContractData, false);
+
+        }
+        public void StartGameOverSequenceFromCombat()
+        {
+            StartCoroutine(StartGameOverSequenceFromCombatCoroutine());
+        }
+        private IEnumerator StartGameOverSequenceFromCombatCoroutine()
+        {
+            yield return null;
         }
         public void HandlePostCombatToTownTransistion()
         {

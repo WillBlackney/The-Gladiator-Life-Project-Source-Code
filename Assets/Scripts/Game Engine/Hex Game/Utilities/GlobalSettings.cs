@@ -140,8 +140,7 @@ namespace WeAreGladiators.Utilities
             base.Awake();
             if (enableDebugLogs)
                 Debug.unityLogger.logEnabled = true;
-            else if (!enableDebugLogs)
-                Debug.unityLogger.logEnabled = false;
+            else Debug.unityLogger.logEnabled = false;
         }
         public void ApplyStartingXPBonus()
         {
@@ -153,6 +152,7 @@ namespace WeAreGladiators.Utilities
         public void SetTestEnvironment()
         {
             gameMode = GameMode.IntegrationTesting;
+            Debug.unityLogger.logEnabled = false;
         }
         #endregion
 
