@@ -19,12 +19,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 1920
-    height: 939
+    width: 2560
+    height: 1307
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 2599
+  controlID: 76353
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -46,10 +46,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 791
+    x: 1335
     y: 73
-    width: 491
-    height: 440
+    width: 445
+    height: 621
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 491, y: 276}
+  m_TargetSize: {x: 445, y: 250}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -76,10 +76,10 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -245.5
-    m_HBaseRangeMax: 245.5
-    m_VBaseRangeMin: -138
-    m_VBaseRangeMax: 138
+    m_HBaseRangeMin: -222.5
+    m_HBaseRangeMax: 222.5
+    m_VBaseRangeMin: -125
+    m_VBaseRangeMax: 125
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -88,7 +88,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -97,23 +97,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 491
-      height: 419
+      width: 445
+      height: 600
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 245.5, y: 209.5}
+    m_Translation: {x: 222.5, y: 300}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -245.5
-      y: -209.5
-      width: 491
-      height: 419
+      x: -222.5
+      y: -300
+      width: 445
+      height: 600
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 491, y: 440}
+  m_LastWindowPixelSize: {x: 445, y: 621}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -138,12 +138,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1284
-    height: 939
+    width: 1782
+    height: 1307
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 2600
+  controlID: 76354
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,12 +164,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1284
-    height: 461
+    width: 1782
+    height: 642
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 2601
+  controlID: 76355
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -187,8 +187,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 446
-    height: 461
+    width: 619
+    height: 642
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 6}
@@ -219,8 +219,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 445
-    height: 440
+    width: 618
+    height: 621
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -229,9 +229,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 08280000
-      m_LastClickedID: 0
-      m_ExpandedIDs: 28fbffff
+      m_SelectedIDs: deedf8ff04e4f8ff42e2f8ff08ccf8ff06ccf8ff04ccf8ff
+      m_LastClickedID: -472060
+      m_ExpandedIDs: 8cf1f8ff3419f9ff488cf9ff5490f9ffceb0f9ff50b1f9ffc0b4f9ff10b5f9ff20b6f9ff0c26ffff5e2fffff98e200005ae5000072f000006e0a0100840c01005018010088390100403b0100ac4301003c4601004a4c0100f24f0100985001007e540100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -247,7 +247,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 0}
+        m_ClientGUIView: {fileID: 5}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -270,10 +270,10 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 446
+    x: 619
     y: 0
-    width: 345
-    height: 461
+    width: 716
+    height: 642
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 8}
@@ -302,10 +302,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 446
+    x: 619
     y: 73
-    width: 343
-    height: 440
+    width: 714
+    height: 621
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -501,7 +501,7 @@ MonoBehaviour:
       containerId: overlay-container--right
       floating: 0
       collapsed: 0
-      displayed: 0
+      displayed: 1
       snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
@@ -554,18 +554,18 @@ MonoBehaviour:
       layout: 4
     m_OverlaysVisible: 1
   m_WindowGUID: 23a444d71e53b594d9751d8f71822c11
-  m_Gizmos: 0
+  m_Gizmos: 1
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
   m_SceneLighting: 1
-  m_2DMode: 1
+  m_2DMode: 0
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.9899561, y: -2.691373, z: 0.012065164}
+    m_Target: {x: 2.9931598, y: 4.2351213, z: 0.0007160008}
     speed: 2
-    m_Value: {x: -1.9899561, y: -2.691373, z: 0.012065164}
+    m_Value: {x: 2.9931598, y: 4.2351213, z: 0.0007160008}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -594,17 +594,17 @@ MonoBehaviour:
       m_Size: {x: 0, y: 0}
     yGrid:
       m_Fade:
-        m_Target: 0
+        m_Target: 1
         speed: 2
-        m_Value: 0
+        m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
     zGrid:
       m_Fade:
-        m_Target: 1
+        m_Target: 0
         speed: 2
-        m_Value: 1
+        m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
@@ -612,17 +612,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0, y: 0, z: 0, w: 1}
+    m_Target: {x: -0.1451947, y: -0.036502656, z: 0.0053605335, w: -0.9887156}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0, w: 1}
+    m_Value: {x: -0.14519468, y: -0.036502656, z: 0.0053605335, w: -0.9887155}
   m_Size:
-    m_Target: 8.793477
+    m_Target: 12.387128
     speed: 2
-    m_Value: 8.793477
+    m_Value: 12.387128
   m_Ortho:
-    m_Target: 1
+    m_Target: 0
     speed: 2
-    m_Value: 1
+    m_Value: 0
   m_CameraSettings:
     m_Speed: 1
     m_SpeedNormalized: 0.5
@@ -658,10 +658,10 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 791
+    x: 1335
     y: 0
-    width: 493
-    height: 461
+    width: 447
+    height: 642
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 2}
@@ -670,7 +670,7 @@ MonoBehaviour:
   - {fileID: 10}
   - {fileID: 11}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -703,7 +703,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 163038
+  m_LastSelectedObjectID: -489490
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -788,9 +788,9 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 461
-    width: 1284
-    height: 478
+    y: 642
+    width: 1782
+    height: 665
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
@@ -821,9 +821,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 534
-    width: 1283
-    height: 457
+    y: 715
+    width: 1781
+    height: 644
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -851,9 +851,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 534
-    width: 1283
-    height: 457
+    y: 715
+    width: 1781
+    height: 644
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -872,22 +872,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Tests/Play Mode
+    - Assets/Sprites/World/Town/Slimeholm
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 81
   m_LastFolders:
-  - Assets/Tests/Play Mode
+  - Assets/Sprites/World/Town/Slimeholm
   m_LastFoldersGridSize: 81
-  m_LastProjectPath: C:\Users\willi\Desktop\Unity Projects\The-Gladiator-Life-Project-Source-Code
+  m_LastProjectPath: C:\Users\WB\Documents\GitHub\Arena-RPG-Roguelike
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 219}
-    m_SelectedIDs: 763b0200
-    m_LastClickedID: 146294
-    m_ExpandedIDs: 00000000d43a0200d63a0200d83a0200da3a0200dc3a0200de3a020000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 400}
+    m_SelectedIDs: 90e10000
+    m_LastClickedID: 57744
+    m_ExpandedIDs: 0000000052df000054df000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -915,7 +915,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d43a0200d63a0200d83a0200da3a0200dc3a0200de3a020000ca9a3bffffff7f
+    m_ExpandedIDs: 0000000052df000054df000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -940,8 +940,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 08280000
-    m_LastClickedInstanceID: 10248
+    m_SelectedInstanceIDs: deedf8ff04e4f8ff42e2f8ff08ccf8ff06ccf8ff04ccf8ff
+    m_LastClickedInstanceID: -463394
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c623000026650600c6c90000
     m_RenameOverlay:
@@ -959,7 +959,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 15}
+      m_ClientGUIView: {fileID: 12}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -981,23 +981,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: TestRunnerWindow
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1284
+    x: 1782
     y: 0
-    width: 636
-    height: 939
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 17}
+    width: 778
+    height: 1307
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1019,10 +1019,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1458
+    x: 1782
     y: 73
-    width: 461
-    height: 918
+    width: 777
+    height: 1286
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1034,7 +1034,7 @@ MonoBehaviour:
     m_CachedPref: 160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 10248
+  m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
@@ -1061,22 +1061,22 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1284
+    x: 1712
     y: 73
-    width: 635
-    height: 918
+    width: 847
+    height: 1286
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
   m_Spl:
-    ID: 2636
+    ID: 139
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes:
-    - 636
-    - 212
+    - 912
+    - 304
     relativeSizes:
     - 0.75
     - 0.25
@@ -1086,7 +1086,7 @@ MonoBehaviour:
     maxSizes:
     - 0
     - 0
-    lastTotalSize: 848
+    lastTotalSize: 1216
     splitSize: 6
     xOffset: 0
     m_Version: 1
@@ -1102,9 +1102,9 @@ MonoBehaviour:
       uniqueId: '[We Are Gladiators][suite]'
       name: We Are Gladiators
       fullName: We Are Gladiators
-      resultStatus: 2
-      duration: 9.395318
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 26.537144
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1118,9 +1118,9 @@ MonoBehaviour:
       uniqueId: '[PlayMode.dll][suite]'
       name: PlayMode.dll
       fullName: C:/Users/willi/Desktop/Unity Projects/The-Gladiator-Life-Project-Source-Code/Library/ScriptAssemblies/PlayMode.dll
-      resultStatus: 2
-      duration: 9.116258
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 26.251425
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1134,9 +1134,9 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/[PlayMode][Tests][suite]
       name: Tests
       fullName: Tests
-      resultStatus: 2
-      duration: 9.100828
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 26.236454
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1150,9 +1150,9 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Combat_Controller_Tests][suite]
       name: Combat_Controller_Tests
       fullName: Tests.Combat_Controller_Tests
-      resultStatus: 2
-      duration: 9.094241
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 26.230951
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1162,13 +1162,13 @@ MonoBehaviour:
       categories: []
       parentId: 1004
       parentUniqueId: PlayMode.dll/[PlayMode][Tests][suite]
-    - id: 1002
-      uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Handle_Damage_Correctly_Sets_Death_State_When_Health_Reaches_0]
-      name: Handle_Damage_Correctly_Sets_Death_State_When_Health_Reaches_0
-      fullName: Tests.Combat_Controller_Tests.Handle_Damage_Correctly_Sets_Death_State_When_Health_Reaches_0
-      resultStatus: 2
-      duration: 9.074837
-      messages: "  Expected: True\r\n  But was:  False\r\n"
+    - id: 1005
+      uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Enemy_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character]
+      name: Enemy_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character
+      fullName: Tests.Combat_Controller_Tests.Enemy_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character
+      resultStatus: 1
+      duration: 10.953918
+      messages: 
       output: 'The referenced script (Unknown) on this Behaviour is missing!
 
         The
@@ -1220,11 +1220,7 @@ MonoBehaviour:
         Running setup on Armour Bar
 
 '
-      stacktrace: 'at Tests.Combat_Controller_Tests.Handle_Damage_Correctly_Sets_Death_State_When_Health_Reaches_0
-        () [0x00034] in C:\Users\willi\Desktop\Unity Projects\The-Gladiator-Life-Project-Source-Code\Assets\Tests\Play
-        Mode\Combat_Controller_Tests.cs:62
-
-'
+      stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1233,12 +1229,92 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1001
       parentUniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Combat_Controller_Tests][suite]
-    m_ResultText: 'Combat_Controller_Tests (9.094s)
-
-      ---
-
-      One or more
-      child tests had errors'
+    - id: 1002
+      uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Handle_Damage_Correctly_Sets_Death_State_When_Health_Reaches_0]
+      name: Handle_Damage_Correctly_Sets_Death_State_When_Health_Reaches_0
+      fullName: Tests.Combat_Controller_Tests.Handle_Damage_Correctly_Sets_Death_State_When_Health_Reaches_0
+      resultStatus: 1
+      duration: 3.1889348
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Combat_Controller_Tests][suite]
+    - id: 1004
+      uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Last_Enemy_Character_Death_Does_Trigger_Victory_Event]
+      name: Last_Enemy_Character_Death_Does_Trigger_Victory_Event
+      fullName: Tests.Combat_Controller_Tests.Last_Enemy_Character_Death_Does_Trigger_Victory_Event
+      resultStatus: 1
+      duration: 3.388557
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Combat_Controller_Tests][suite]
+    - id: 1003
+      uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Last_Player_Character_Death_Does_Trigger_Defeat_Event]
+      name: Last_Player_Character_Death_Does_Trigger_Defeat_Event
+      fullName: Tests.Combat_Controller_Tests.Last_Player_Character_Death_Does_Trigger_Defeat_Event
+      resultStatus: 1
+      duration: 2.9224992
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Combat_Controller_Tests][suite]
+    - id: 1007
+      uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Player_Character_Death_During_Turn_Does_Activate_Next_Character]
+      name: Player_Character_Death_During_Turn_Does_Activate_Next_Character
+      fullName: Tests.Combat_Controller_Tests.Player_Character_Death_During_Turn_Does_Activate_Next_Character
+      resultStatus: 1
+      duration: 2.868985
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Combat_Controller_Tests][suite]
+    - id: 1006
+      uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Player_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character]
+      name: Player_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character
+      fullName: Tests.Combat_Controller_Tests.Player_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character
+      resultStatus: 1
+      duration: 2.891309
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Combat_Controller_Tests][suite]
+    m_ResultText: Combat_Controller_Tests (26.231s)
     m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
