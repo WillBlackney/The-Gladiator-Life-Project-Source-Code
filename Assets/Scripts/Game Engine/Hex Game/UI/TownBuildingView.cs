@@ -24,6 +24,7 @@ namespace WeAreGladiators.TownFeatures
         [Space(10)]
         [SerializeField] CanvasGroup popUpCg;
         //[SerializeField] CanvasGroup outlineCg;
+        [SerializeField] GameObject outlineSprite;
         [SerializeField] RectTransform cameraZoomToPoint;
         [SerializeField] Sound entranceSound;
 
@@ -162,11 +163,10 @@ namespace WeAreGladiators.TownFeatures
             foreach (SpriteRenderer i in buildingSprites)
                 i.color = mouseOverColor;
 
-          //  outlineCg.DOKill();
             popUpRect.DOKill();
             popUpCg.DOKill();
 
-           // outlineCg.DOFade(1, 0.1f);
+            outlineSprite.SetActive(true);
             popUpRect.DOMove(endPos.position, 0.25f);
             popUpCg.DOFade(1f, 0.15f);
         }
@@ -178,11 +178,10 @@ namespace WeAreGladiators.TownFeatures
             foreach (SpriteRenderer i in buildingSprites)
                 i.color = normalColor;
 
-           // outlineCg.DOKill();
             popUpRect.DOKill();
             popUpCg.DOKill();
 
-           // outlineCg.DOFade(0, 0.1f);
+            outlineSprite.SetActive(false);
             popUpRect.DOMove(startPos.position, 0.25f);
             popUpCg.DOFade(0f, 0.15f);
         }
@@ -199,11 +198,10 @@ namespace WeAreGladiators.TownFeatures
             foreach (SpriteRenderer i in buildingSprites)
                 i.color = normalColor;
 
-           // outlineCg.DOKill();
             popUpRect.DOKill();
             popUpCg.DOKill();
 
-            //outlineCg.DOFade(0, 0.1f);
+            outlineSprite.SetActive(false);
             popUpRect.DOMove(startPos.position, 0.25f);
             popUpCg.DOFade(0f, 0.15f);
 
