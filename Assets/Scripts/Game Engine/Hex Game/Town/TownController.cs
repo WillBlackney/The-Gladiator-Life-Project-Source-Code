@@ -32,7 +32,7 @@ namespace WeAreGladiators.TownFeatures
         [Title("Town Page Components")]
         [SerializeField] GameObject mainVisualParent;
         [SerializeField] TownBuildingView arenaBuilding;
-        [SerializeField] TownBuildingView[] allFeatureBuildings; 
+        [SerializeField] TownBuildingView[] allFeatureBuildings;
         [Space(20)]
 
         [Title("Recruit Page Core Components")]
@@ -149,6 +149,22 @@ namespace WeAreGladiators.TownFeatures
         public LibraryCharacterDropSlot LibraryCharacterSlot
         {
             get { return libraryCharacterSlot; }
+        }
+        public bool AnyFeaturePageIsActive
+        {
+            get
+            {
+                bool ret = false;
+                foreach(TownBuildingView page in allFeatureBuildings)
+                {
+                    if (page.PageVisualParent.activeSelf)
+                    {
+                        return true;
+                    }
+                }
+
+                return ret;
+            }
         }
         #endregion
 

@@ -173,13 +173,15 @@ namespace WeAreGladiators.Audio
             AudioDataBox a = Array.Find(allAudioModels, sound => sound.soundType == s);
             if (a != null)
             {
+                // Prevent duplicate sound playing, if marked to do so
                 if (!a.allowDuplicates && IsSoundPlaying(s)) return;
                 AudioPlayer player = GetNextAvailableAudioPlayer();
                 player.BuildFromData(a);
                 player.Source.DOKill();
                 player.Source.volume = 0f;
+                float targetVolume = a.volume;
                 player.Source.Play();
-                player.Source.DOFade(a.volume, duration);
+                player.Source.DOFade(targetVolume, duration);
             }
         }
         #endregion
