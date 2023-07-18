@@ -308,18 +308,18 @@ namespace WeAreGladiators.StoryEvents
             string ret = original;
             if(characterTargets.Count >= 1)
             {
-                ret = ret.Replace(CHARACTER_1_NAME_KEY, characterTargets[0].myName);
-                ret = ret.Replace(CHARACTER_1_SUB_NAME_KEY, characterTargets[0].mySubName);
+                ret = ret.Replace(CHARACTER_1_NAME_KEY, TextLogic.ReturnColoredText(characterTargets[0].myName, TextLogic.neutralYellow));
+                ret = ret.Replace(CHARACTER_1_SUB_NAME_KEY, TextLogic.ReturnColoredText(characterTargets[0].mySubName, TextLogic.neutralYellow));
             }
             if (characterTargets.Count >= 2)
             {
-                ret = ret.Replace(CHARACTER_2_NAME_KEY, characterTargets[1].myName);
-                ret = ret.Replace(CHARACTER_2_SUB_NAME_KEY, characterTargets[1].mySubName);
+                ret = ret.Replace(CHARACTER_2_NAME_KEY, TextLogic.ReturnColoredText(characterTargets[1].myName, TextLogic.neutralYellow));
+                ret = ret.Replace(CHARACTER_2_SUB_NAME_KEY, TextLogic.ReturnColoredText(characterTargets[1].mySubName, TextLogic.neutralYellow));
             }
             if (choiceCharacterTarget != null)
             {
-                ret = ret.Replace(CHOICE_CHARACTER_NAME_KEY, choiceCharacterTarget.myName);
-                ret = ret.Replace(CHOICE_CHARACTER_SUB_NAME_KEY, choiceCharacterTarget.mySubName);
+                ret = ret.Replace(CHOICE_CHARACTER_NAME_KEY, TextLogic.ReturnColoredText(choiceCharacterTarget.myName, TextLogic.neutralYellow));
+                ret = ret.Replace(CHOICE_CHARACTER_SUB_NAME_KEY, TextLogic.ReturnColoredText(choiceCharacterTarget.mySubName, TextLogic.neutralYellow));
             }
             return ret;
         }
@@ -684,6 +684,10 @@ namespace WeAreGladiators.StoryEvents
 
                 for (int i = 0; i < prospects.Count; i++)
                 {
+                    // Prevent non deserters from leaving
+                    if (prospects[i].background.backgroundType == CharacterBackground.TheKid ||
+                        prospects[i].background.backgroundType == CharacterBackground.Slave) continue;
+
                     int roll = RandomGenerator.NumberBetween(1, 100);
                     if (roll > effect.characterLeaveProbability) continue;
                     CharacterDataController.Instance.RemoveCharacterFromRoster(prospects[i]);

@@ -22,6 +22,7 @@ using WeAreGladiators.Audio;
 using UnityEngine.TextCore.Text;
 using WeAreGladiators.Boons;
 using WeAreGladiators.LoadingScreen;
+using System.Linq;
 
 namespace WeAreGladiators.TownFeatures
 {
@@ -746,17 +747,17 @@ namespace WeAreGladiators.TownFeatures
 
             // 2-3 Common Head/Body Items
             List<ItemData> commonHeadBodyItems = new List<ItemData>();
-            commonHeadBodyItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Body));
-            commonHeadBodyItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Head));
+            commonHeadBodyItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Body).Where(i => i.baseGoldValue >= 225));
+            commonHeadBodyItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Head).Where(i => i.baseGoldValue >= 125));
             commonHeadBodyItems.Shuffle();
-            for(int i = 0; i < RandomGenerator.NumberBetween(2,3); i++)            
+            for(int i = 0; i < RandomGenerator.NumberBetween(2,3) && i < commonHeadBodyItems.Count; i++)            
                 initialItems.Add(commonHeadBodyItems[i]);
 
             // 2-3 Common Weapon Items
             List<ItemData> commonWeaponItems = new List<ItemData>();
-            commonWeaponItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Weapon));
+            commonWeaponItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Weapon).Where(i => i.baseGoldValue >= 150));
             commonWeaponItems.Shuffle();
-            for (int i = 0; i < RandomGenerator.NumberBetween(2, 3); i++)
+            for (int i = 0; i < RandomGenerator.NumberBetween(2, 3) && i < commonWeaponItems.Count; i++)
                 initialItems.Add(commonWeaponItems[i]);
 
             // 0-1 Net
@@ -774,7 +775,7 @@ namespace WeAreGladiators.TownFeatures
             initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, ItemType.Trinket).ShuffledCopy()[0]);
             initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, ItemType.Weapon).ShuffledCopy()[0]);
 
-            // 50% chance to add each: epic head, body, trinket and weapon
+            // 33% chance to add each: epic head, body, trinket and weapon
             if(RandomGenerator.NumberBetween(0, 2) == 1) 
                 initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Weapon).ShuffledCopy()[0]);
             if (RandomGenerator.NumberBetween(0, 2) == 1)
@@ -790,9 +791,6 @@ namespace WeAreGladiators.TownFeatures
             {
                 ItemData item = ItemController.Instance.GenerateNewItemWithRandomEffects(initialItems[i]);
                 Debug.Log("Initial base cost: " + item.baseGoldValue.ToString());
-                /* int lower = (int)(item.baseGoldValue * 0.95f);
-                int upper = (int)(item.baseGoldValue * 1.05f);
-                int finalCost = RandomGenerator.NumberBetween(lower, upper);*/
                 int finalCost = item.baseGoldValue;
                 Debug.Log("Final cost: " + finalCost.ToString());
                 currentItems.Add(new ItemShopData(item, finalCost));

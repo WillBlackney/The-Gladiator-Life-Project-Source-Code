@@ -15,7 +15,7 @@ MonoBehaviour:
   myName: Test
   mySubName: The Testy
   race: 7
-  background: 0
+  background: 20
   modelSize: 0
   attributeSheet:
     might:

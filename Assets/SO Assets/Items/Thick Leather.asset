@@ -17,7 +17,7 @@ MonoBehaviour:
   itemDescription: Armor made of multiple layers of thick, heavy leather, providing
     reliable protection against blunt force attacks.
   itemType: 2
-  rarity: 0
+  rarity: 1
   fatiguePenalty: 6
   baseGoldValue: 225
   canSpawnInShop: 1
