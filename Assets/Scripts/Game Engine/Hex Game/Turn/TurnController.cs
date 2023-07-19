@@ -21,8 +21,7 @@ namespace WeAreGladiators.TurnLogic
     public class TurnController : Singleton<TurnController>
     {
 
-        // Properties + Component References
-        #region
+        #region Properties + Component References
         [Header("Component References")]
         [SerializeField] private GameObject windowStartPos;
         [SerializeField] private GameObject activationPanelParent;
@@ -60,8 +59,7 @@ namespace WeAreGladiators.TurnLogic
         private int currentTurn;
         #endregion
 
-        // Getters + Accessors
-        #region
+        #region Getters + Accessors
         public HexCharacterModel EntityActivated
         {
             get
@@ -105,9 +103,8 @@ namespace WeAreGladiators.TurnLogic
             else return activationOrder.IndexOf(character) - activationOrder.IndexOf(entityActivated);            
         }
         #endregion
-
-        // Setup + Initializaton
-        #region 
+        
+        #region Setup + Initializaton
         public void CreateTurnWindow(HexCharacterModel entity)
         {
             // Create slot
@@ -143,9 +140,8 @@ namespace WeAreGladiators.TurnLogic
 
         }
         #endregion
-
-        // Turn Events
-        #region
+        
+        #region Turn Events
         public void OnNewCombatEventStarted()
         {
             CurrentTurn = 0;
@@ -280,8 +276,7 @@ namespace WeAreGladiators.TurnLogic
         }
         #endregion
 
-        // Logic + Calculations
-        #region
+        #region Logic + Calculations
         private int CalculateInitiativeRoll(HexCharacterModel entity)
         {
             int roll = StatCalculator.GetTotalInitiative(entity);
@@ -324,8 +319,7 @@ namespace WeAreGladiators.TurnLogic
         }
         #endregion
 
-        // Player Input + UI interactions
-        #region
+        #region Player Input + UI interactions
         public void OnEndTurnButtonClicked()
         {
             Debug.Log("TurnController.OnEndTurnButtonClicked() called...");
@@ -378,8 +372,7 @@ namespace WeAreGladiators.TurnLogic
         }
         #endregion
 
-        // Entity / Activation related
-        #region   
+        #region Entity / Activation related
         private void ActivateEntity(HexCharacterModel entity)
         {
             Debug.Log("Activating entity: " + entity.myName);
@@ -462,7 +455,6 @@ namespace WeAreGladiators.TurnLogic
             return boolReturned;
         }
         #endregion
-
 
         // Visual Events
         #region

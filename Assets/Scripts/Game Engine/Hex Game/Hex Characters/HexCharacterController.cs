@@ -652,6 +652,10 @@ namespace WeAreGladiators.Characters
             if (finalStress < 0)            
                 finalStress = 0;
 
+            // Zealots cant exceed 19
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Zealot) && finalStress > 19)
+                finalStress = 19;
+
             // Determine new stress state
             StressState newStressState = CombatController.Instance.GetStressStateFromStressAmount(finalStress);
             
@@ -677,8 +681,7 @@ namespace WeAreGladiators.Characters
                 else
                 {
                     VisualEventManager.CreateVisualEvent(() =>
-                    //VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost)).SetStartDelay(0.25f);
-                    VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost));
+                        VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, stressGainedOrLost));
                 }
 
             }
@@ -1682,11 +1685,11 @@ namespace WeAreGladiators.Characters
             // If shattered, determine result
             if(CombatController.Instance.GetStressStateFromStressAmount(character.currentStress) == StressState.Shattered)
             {
-                int roll = RandomGenerator.NumberBetween(1, 4);
+                int roll = RandomGenerator.NumberBetween(1, 5);
                 Debug.Log("HexCharacterController.OnTurnStart() resolving shattered stress state event...");
                 
                 // Rally
-                if (roll == 1)
+                if (roll <= 2)
                 {
                     Debug.Log("HexCharacterController.OnTurnStart() character rallied from shattered");
 
@@ -1699,7 +1702,7 @@ namespace WeAreGladiators.Characters
                         view.ucm.ShowNormalFace();
                     }).SetEndDelay(0.5f);
 
-                    // Recover 2 stress
+                    // Recover 4 stress
                     ModifyStress(character, -4, true, true);
 
                     // End turn
@@ -1709,7 +1712,7 @@ namespace WeAreGladiators.Characters
                 }
 
                 // Heart atack => Death
-                else if(roll == 2)
+                else if(roll == 3)
                 {
                      Debug.Log("HexCharacterController.OnTurnStart() character had a heart attack from being shattered");
 

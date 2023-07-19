@@ -228,8 +228,6 @@ namespace WeAreGladiators
             // Move characters towards start nodes
             VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(null));
 
-            // Start a new combat event
-            //TurnController.Instance.OnNewCombatEventStarted();
         }
         private void RunSandboxCombat()
         {
