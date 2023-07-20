@@ -60,7 +60,7 @@ namespace WeAreGladiators.AI
             {
                 // Prevent turn delay if already already delayed, last to act, or if there are no player characters still waiting to take their turn.
                 if (character.hasRequestedTurnDelay ||
-                    TurnController.Instance.ActivationOrder[TurnController.Instance.ActivationOrder.Count - 1] == character ||
+                    TurnController.Instance.LastToActivate == character ||
                     !AreAnyPlayerCharactersActivatingAfterMe(character)) return null;
 
                 foreach (AIActionRequirement req in directive.requirements)

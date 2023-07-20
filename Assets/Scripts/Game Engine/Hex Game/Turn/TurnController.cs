@@ -102,6 +102,13 @@ namespace WeAreGladiators.TurnLogic
             if (!activationOrder.Contains(character)) return 0;
             else return activationOrder.IndexOf(character) - activationOrder.IndexOf(entityActivated);            
         }
+        public HexCharacterModel LastToActivate
+        {
+            get
+            {
+                return ActivationOrder[ActivationOrder.Count - 1];
+            }
+        }
         #endregion
         
         #region Setup + Initializaton

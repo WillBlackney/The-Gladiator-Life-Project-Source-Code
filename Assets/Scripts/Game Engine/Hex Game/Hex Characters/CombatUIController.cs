@@ -348,7 +348,7 @@ namespace WeAreGladiators.Characters
         private void BuildTurnButtons(HexCharacterModel character)
         {
             SetEndTurnButtonInteractions(true);
-            if (character.hasRequestedTurnDelay)
+            if (character.hasRequestedTurnDelay || TurnController.Instance.LastToActivate == character)
             {
                 SetEndDelayTurnButtonInteractions(false);
                 delayTurnButtonImage.sprite = delayTurnButtonNotReadySprite;

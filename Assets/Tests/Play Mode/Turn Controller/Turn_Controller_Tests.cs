@@ -162,9 +162,33 @@ namespace Tests
             Assert.AreEqual(expectedTurnNumber, TurnController.Instance.CurrentTurn);
         }
 
-        [Test]
-        public void Cant_Delay_Turn_Twice()
+        [UnityTest]
+        public IEnumerator Cant_Delay_Turn_Twice()
         {
+            // Arrange           
+            int expectedTurnNumber = 1;
+            HexCharacterModel playerCharacter = HexCharacterController.Instance.AllPlayerCharacters[0];
+            HexCharacterModel enemyCharacter = HexCharacterController.Instance.AllEnemies[0];
+            HexCharacterData playerCharacterTwoData = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(playerData);
+            HexCharacterModel playerCharacterTwo = HexCharacterController.Instance.CreateEnemyHexCharacter(playerCharacterTwoData, LevelController.Instance.GetRandomSpawnableLevelNode(LevelController.Instance.AllLevelNodes.ToList()));
+
+            playerCharacter.attributeSheet.initiative = 200;
+            playerCharacterTwo.attributeSheet.initiative = 150;
+            enemyCharacter.attributeSheet.initiative = 100;
+
+            // Act
+            TurnController.Instance.OnNewCombatEventStarted();
+            yield return null;
+            TurnController.Instance.OnEndTurnButtonClicked();
+            yield return null;
+            TurnController.Instance.OnDelayTurnButtonClicked();
+            yield return new WaitForSeconds(1);
+            TurnController.Instance.OnDelayTurnButtonClicked();
+            yield return null;
+
+            // Assert
+            Assert.AreEqual(TurnController.Instance.EntityActivated, playerCharacterTwo);
+            Assert.AreEqual(expectedTurnNumber, TurnController.Instance.CurrentTurn);
         }
 
         [UnityTest]
@@ -178,11 +202,9 @@ namespace Tests
             enemyCharacter.attributeSheet.initiative = 200;
 
             // Act
-            Stopwatch stopwatch = Stopwatch.StartNew();
             TurnController.Instance.OnNewCombatEventStarted();
             TurnController.Instance.OnDelayTurnButtonClicked();
-            yield return new WaitUntil(() => stopwatch.Elapsed.Seconds >= 2);
-            stopwatch.Stop();
+            yield return new WaitForSeconds(2);
 
             // Assert
             Assert.AreEqual(TurnController.Instance.EntityActivated, playerCharacter);
@@ -192,17 +214,61 @@ namespace Tests
         [Test]
         public void Entity_Does_Gain_On_Combat_Start_Perks()
         {
+            // Arrange           
+            HexCharacterModel playerCharacter = HexCharacterController.Instance.AllPlayerCharacters[0];
+            HexCharacterModel enemyCharacter = HexCharacterController.Instance.AllEnemies[0];
+            PerkController.Instance.ModifyPerkOnCharacterEntity(playerCharacter.pManager, Perk.Tough, 1);
+
+            playerCharacter.attributeSheet.initiative = 300;
+            enemyCharacter.attributeSheet.initiative = 200;
+
+            // Act
+            TurnController.Instance.OnNewCombatEventStarted();
+            int stacksActual = PerkController.Instance.GetStackCountOfPerkOnCharacter(playerCharacter.pManager, Perk.Guard);
+
+            // Assert
+            Assert.AreEqual(stacksActual, 1);
         }
 
         [Test]
         public void Delay_Turn_Action_Correctly_Moves_Entity_To_The_End_Of_Turn_Order()
         {
+            // Arrange
+            HexCharacterModel playerCharacter = HexCharacterController.Instance.AllPlayerCharacters[0];
+            HexCharacterModel enemyCharacter = HexCharacterController.Instance.AllEnemies[0];
+            HexCharacterData playerCharacterTwoData = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(playerData);
+            HexCharacterModel playerCharacterTwo = HexCharacterController.Instance.CreatePlayerHexCharacter(playerCharacterTwoData, LevelController.Instance.GetRandomSpawnableLevelNode(LevelController.Instance.AllLevelNodes.ToList()));
+          
+            playerCharacter.attributeSheet.initiative = 300;
+            enemyCharacter.attributeSheet.initiative = 100;
+            playerCharacterTwo.attributeSheet.initiative = 200;
+
+            // Act
+            TurnController.Instance.OnNewCombatEventStarted();
+            TurnController.Instance.OnDelayTurnButtonClicked();
+
+            // Assert
+            Assert.AreEqual(TurnController.Instance.ActivationOrder[2], playerCharacter);
         }
 
-        [Test]
-        public void Entity_Cant_Delay_Turn_If_It_Is_The_Last_Character_In_The_Activation_Order()
+        [UnityTest]
+        public IEnumerator Entity_Cant_Delay_Turn_If_It_Is_The_Last_Character_In_The_Activation_Order()
         {
+            // Arrange
+            int expectedTurnNumber = 1;
+            HexCharacterModel playerCharacter = HexCharacterController.Instance.AllPlayerCharacters[0];
+            HexCharacterModel enemyCharacter = HexCharacterController.Instance.AllEnemies[0];
+            playerCharacter.attributeSheet.initiative = 200;
+            enemyCharacter.attributeSheet.initiative = 300;
 
+            // Act
+            TurnController.Instance.OnNewCombatEventStarted();
+            yield return new WaitForSeconds(1);
+            TurnController.Instance.OnDelayTurnButtonClicked();
+
+            // Assert
+            Assert.AreEqual(playerCharacter, TurnController.Instance.EntityActivated);
+            Assert.AreEqual(expectedTurnNumber, TurnController.Instance.CurrentTurn);
         }
         #endregion
     }
