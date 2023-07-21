@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using WeAreGladiators.Characters;
+using System.Linq;
 
 namespace WeAreGladiators.UI
 {
@@ -14,7 +15,7 @@ namespace WeAreGladiators.UI
         // Properties + Components
         #region
         [SerializeField] private Image raceImage;
-        private RaceDataSO raceData;
+        [SerializeField] [HideInInspector] private RaceDataSO raceData;
         #endregion
 
         // Getters + Accessors
@@ -41,7 +42,7 @@ namespace WeAreGladiators.UI
             raceImage.sprite = p.racialSprite;
         }
 
-        public void HideAndReset()
+        private void HideAndReset()
         {
             gameObject.SetActive(false);
             raceData = null;
@@ -53,11 +54,18 @@ namespace WeAreGladiators.UI
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (raceData != null)
+            {
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(raceData.racialPassiveKeyWords.ToList());
                 MainModalController.Instance.BuildAndShowModal(raceData);
+            }                
         }
         public void OnPointerExit(PointerEventData eventData)
         {
-            MainModalController.Instance.HideModal();
+            if (raceData != null)
+            {
+                MainModalController.Instance.HideModal();
+                KeyWordLayoutController.Instance.FadeOutMainView();
+            }
         }
         #endregion
 

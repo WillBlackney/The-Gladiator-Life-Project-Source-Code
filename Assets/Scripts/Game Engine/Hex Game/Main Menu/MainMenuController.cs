@@ -1421,15 +1421,15 @@ namespace WeAreGladiators.MainMenu
         private void HandleChangeRace(CharacterRace race)
         {
             // Get + cache race data
-            currentCustomCharacterRace = CharacterDataController.Instance.GetRaceData(race);
-            characterBuild.race = currentCustomCharacterRace.racialTag;
+            var racialData = CharacterDataController.Instance.GetRaceData(race);
+            currentCustomCharacterRace = racialData;
+            characterBuild.race = racialData.racialTag;
 
             // Build race icon image
-            originPanelRacialIcon.BuildFromRacialData(currentCustomCharacterRace);
+            originPanelRacialIcon.BuildFromRacialData(racialData);
 
             // Build racial texts
-            //originPanelRacialDescriptionText.text = currentCustomCharacterRace.loreDescription;
-            originPanelRacialNameText.text = currentCustomCharacterRace.racialTag.ToString();
+            originPanelRacialNameText.text = racialData.racialTag.ToString();
 
             // Rebuild UCM as default model of race
             HandleChangeRacialModel(GetRacialModelBasket(characterBuild.race).templates[0]);

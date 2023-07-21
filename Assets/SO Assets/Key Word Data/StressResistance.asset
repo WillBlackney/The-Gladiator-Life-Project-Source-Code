@@ -18,7 +18,8 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Each point increases a character's chance to pass both negative and positive
+    phrase: 'Each point increases a character''s chance to pass both negative and
+      positive '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

@@ -44,3 +44,6 @@ MonoBehaviour:
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
       phrase: tile.
+  racialPassiveKeyWords:
+  - kewWordType: 41
+    passiveType: 0

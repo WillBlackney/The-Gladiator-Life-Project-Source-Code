@@ -36,3 +36,6 @@ MonoBehaviour:
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
       phrase: .
+  racialPassiveKeyWords:
+  - kewWordType: 1
+    passiveType: 154

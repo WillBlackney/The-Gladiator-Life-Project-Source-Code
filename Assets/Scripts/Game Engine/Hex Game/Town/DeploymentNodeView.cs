@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
 using WeAreGladiators.UCM;
 using WeAreGladiators.UI;
@@ -45,32 +46,31 @@ namespace WeAreGladiators.TownFeatures
 
         // Input
         #region
-        void Update()
-        {
-            if(NodeMousedOver == this && Input.GetKeyDown(KeyCode.Mouse1))            
-                OnRightClick();
-            else if (NodeMousedOver == this && Input.GetKeyDown(KeyCode.Mouse0))
-                OnLeftClick();
-        }
         public void OnRightClick()
         {
-            Debug.Log("OnRightClick");
             if (myCharacterData != null && allowedCharacter == Allegiance.Player)
             {
+                AudioManager.Instance.PlaySound(Sound.UI_Drag_Drop_End);
                 SetUnoccupiedState();
                 TownController.Instance.UpdateCharactersDeployedText();
-            }
-            else if (myCharacterData != null && 
-                allowedCharacter == Allegiance.Enemy &&
-                !EnemyInfoPanel.Instance.PanelIsActive)
-            {
-                EnemyInfoPanel.Instance.HandleBuildAndShowPanel(myCharacterData);
             }
         }
         public void OnLeftClick()
         {
-            if(allowedCharacter == Allegiance.Player)
+            if (myCharacterData != null &&
+                allowedCharacter == Allegiance.Enemy &&
+                !EnemyInfoPanel.Instance.PanelIsActive)
+            {
+                AudioManager.Instance.PlaySound(Sound.UI_Button_Click);
+                EnemyInfoPanel.Instance.HandleBuildAndShowPanel(myCharacterData);
+            }
+        }
+        public void LeftMouseDown()
+        {
+            if (allowedCharacter == Allegiance.Player)
+            {
                 PortraitDragController.Instance.OnDeploymentNodeDragStart(this);
+            }
         }
         public void MouseEnter()
         {
@@ -94,7 +94,7 @@ namespace WeAreGladiators.TownFeatures
 
             // Build model mugshot
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(portraitModel, character.modelParts);
-            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, portraitModel);
+            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, portraitModel);            
         }
         public void SetUnoccupiedState()
         {

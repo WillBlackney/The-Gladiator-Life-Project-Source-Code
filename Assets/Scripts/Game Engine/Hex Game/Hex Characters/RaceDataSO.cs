@@ -3,6 +3,7 @@ using DG.Tweening;
 using WeAreGladiators.Utilities;
 using UnityEngine.UI;
 using WeAreGladiators.UI;
+using System.Collections.Generic;
 
 namespace WeAreGladiators.Characters
 {
@@ -14,5 +15,6 @@ namespace WeAreGladiators.Characters
         [TextArea]
         public string loreDescription;
         public ModalDotRowBuildData[] racialPassiveDotRows;
+        public KeyWordModel[] racialPassiveKeyWords;
     }
 }

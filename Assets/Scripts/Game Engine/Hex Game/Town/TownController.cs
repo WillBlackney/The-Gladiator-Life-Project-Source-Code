@@ -1033,6 +1033,7 @@ namespace WeAreGladiators.TownFeatures
             // Handle dropped on empty slot
             if (node.AllowedCharacter == Allegiance.Player)
             {
+                AudioManager.Instance.PlaySound(Sound.UI_Drag_Drop_End);
                 node.BuildFromCharacterData(draggedCharacter);
                 UpdateCharactersDeployedText();
             }

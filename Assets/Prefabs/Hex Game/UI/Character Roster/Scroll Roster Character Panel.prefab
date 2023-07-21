@@ -3120,8 +3120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputType: 1
   killPreviousTweensOnNewSequenceStart: 1
-  onClickEvents: []
-  onRightClickEvents:
+  onClickEvents:
   - widgetEventType: 4
     scalingSequence: 0
     enableStartDelay: 0
@@ -3198,6 +3197,7 @@ MonoBehaviour:
     wiggleLoops: 0
     rotationDegrees: 0
     cursorType: 0
+  onRightClickEvents: []
   mouseDownEvents:
   - widgetEventType: 3
     scalingSequence: 0
