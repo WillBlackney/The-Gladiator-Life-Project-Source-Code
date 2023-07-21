@@ -18,6 +18,7 @@ namespace WeAreGladiators.Utilities
         [SerializeField] private bool enableDebugLogs;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
         [SerializeField] private bool preventAudioProfiles = true;
+        [SerializeField] private bool showAlphaWarning = true;
         [SerializeField] private bool includeGameIntroEvent = true;
 
         [Title("Character Settings")]
@@ -78,6 +79,10 @@ namespace WeAreGladiators.Utilities
         }
         public bool PreventAudioProfiles => preventAudioProfiles;
         public bool IncludeGameIntroEvent => includeGameIntroEvent;
+        public bool ShowAlphaWarning
+        {
+            get { return showAlphaWarning && GameMode == GameMode.Standard; }
+        }
         public int StartingDay
         {
             get { return startingDay; }

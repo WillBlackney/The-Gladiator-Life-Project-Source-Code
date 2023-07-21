@@ -102,7 +102,10 @@ namespace WeAreGladiators.Audio
             if (a != null)
             {
                 // Prevent duplicate sound playing, if marked to do so
-                if (!a.allowDuplicates && IsSoundPlaying(s)) return;
+                if (!a.allowDuplicates)
+                {
+                    if (IsSoundPlaying(s)) return;
+                }
 
                 // Set up audio player
                 AudioPlayer player = GetNextAvailableAudioPlayer();
@@ -174,7 +177,10 @@ namespace WeAreGladiators.Audio
             if (a != null)
             {
                 // Prevent duplicate sound playing, if marked to do so
-                if (!a.allowDuplicates && IsSoundPlaying(s)) return;
+                if (!a.allowDuplicates)
+                {
+                    if (IsSoundPlaying(s)) return;
+                }
                 AudioPlayer player = GetNextAvailableAudioPlayer();
                 player.BuildFromData(a);
                 player.Source.DOKill();

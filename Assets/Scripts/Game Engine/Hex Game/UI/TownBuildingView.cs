@@ -78,8 +78,11 @@ namespace WeAreGladiators.TownFeatures
 
             // Move page offscreen
             pageMovementParent.DOMove(pageStartPos.position, 0.75f).SetEase(Ease.InBack);
-
             yield return new WaitForSeconds(0.75f);
+
+            // Stop feature ambience SFX
+            AudioManager.Instance.FadeOutSound(entranceSound, 0.75f);
+
             // Move and zoom out camera
             var c = CameraController.Instance.MainCamera;
             c.DOOrthoSize(5, 0.75f);

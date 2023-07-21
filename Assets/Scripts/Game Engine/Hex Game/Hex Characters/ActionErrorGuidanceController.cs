@@ -47,7 +47,7 @@ namespace WeAreGladiators.UI
             messageText.color = textStartColor;
             cg.DOKill();
             cg.alpha = 0;
-            movementParent.DOMove(offScreenPosition.position, 0f);
+            movementParent.position = offScreenPosition.position;
 
 
             // Initial animation

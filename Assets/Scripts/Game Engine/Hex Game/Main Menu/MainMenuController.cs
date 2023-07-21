@@ -1658,17 +1658,26 @@ namespace WeAreGladiators.MainMenu
             frontScreenGuiCg.alpha = 0;
             frontScreenBgParent.transform.DOScale(1.25f, 0f);
             AudioManager.Instance.PlayMainMenuMusic();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
 
-            BlackScreenController.Instance.FadeInScreen(2f);
-            yield return new WaitForSeconds(2);
+            BlackScreenController.Instance.FadeInScreen(1.5f);
+            yield return new WaitForSeconds(1.5f);
 
-            frontScreenBgParent.transform.DOKill();
-            frontScreenBgParent.transform.DOScale(1f, 1.5f).SetEase(Ease.InOutQuad);
-            yield return new WaitForSeconds(1f);
+            Action showMenu = () =>
+            {
+                frontScreenBgParent.transform.DOKill();
+                frontScreenBgParent.transform.DOScale(1f, 1.5f).SetEase(Ease.InOutQuad);
+                DelayUtils.DelayedCall(1f, () =>
+                {
+                    mainMenuButtonsParent.SetActive(true);
+                    frontScreenGuiCg.DOFade(1f, 1f).SetEase(Ease.OutCubic);
+                });               
+            };
 
-            mainMenuButtonsParent.SetActive(true);
-            frontScreenGuiCg.DOFade(1f, 1f).SetEase(Ease.OutCubic);
+            // Alpha warning
+            if (!AlphaWarningController.Instance.HasShownWarningThisSession && GlobalSettings.Instance.ShowAlphaWarning) 
+                AlphaWarningController.Instance.ShowWarningPage(showMenu);
+            else showMenu.Invoke();
         }
         #endregion
 

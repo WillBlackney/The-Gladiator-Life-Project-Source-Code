@@ -80,15 +80,13 @@ namespace WeAreGladiators.GameIntroEvent
 
             // Reset            
             mainVisualParent.SetActive(true);
-            pageMovementParent.DOKill();
-            blackUnderlay.DOKill();           
+            pageMovementParent.position = pageOffscreenPos.position;
             blackUnderlay.DOFade(0f, 0f);
 
             // Build first page content
             BuildViewsAsPageOne();
 
             // Fade in and move page down
-            pageMovementParent.DOMove(pageOffscreenPos.position, 0f);
             blackUnderlay.DOFade(0.5f, 1f).OnComplete(() =>
             {
                 AudioManager.Instance.PlaySound(Sound.Effects_Story_Event_Start);

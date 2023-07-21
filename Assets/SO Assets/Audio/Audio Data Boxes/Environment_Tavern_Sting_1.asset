@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Environment_Tavern_Sting_1
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 4f9f1c6649c29cd4194048af3573ef3d, type: 3}
+  allowDuplicates: 0
   randomizeClip: 0
   audioClips: []
   soundType: 101
@@ -26,6 +27,3 @@ MonoBehaviour:
   randomPitchUpperLimit: 1.2
   pitch: 1
   loop: 0
-  source: {fileID: 0}
-  fadingIn: 0
-  fadingOut: 0

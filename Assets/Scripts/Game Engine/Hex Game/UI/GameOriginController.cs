@@ -32,7 +32,7 @@ namespace WeAreGladiators.GameOrigin
             blackUnderlay.DOKill();
             blackUnderlay.DOFade(0f, 0f);
             movementParent.DOKill();
-            movementParent.DOMove(offScreenPosition.position, 0f);
+            movementParent.position = offScreenPosition.position;
 
             // to do: build content to default state
 

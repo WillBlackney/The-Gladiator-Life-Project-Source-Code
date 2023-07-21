@@ -170,7 +170,7 @@ namespace Tests
             HexCharacterModel playerCharacter = HexCharacterController.Instance.AllPlayerCharacters[0];
             HexCharacterModel enemyCharacter = HexCharacterController.Instance.AllEnemies[0];
             HexCharacterData playerCharacterTwoData = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(playerData);
-            HexCharacterModel playerCharacterTwo = HexCharacterController.Instance.CreateEnemyHexCharacter(playerCharacterTwoData, LevelController.Instance.GetRandomSpawnableLevelNode(LevelController.Instance.AllLevelNodes.ToList()));
+            HexCharacterModel playerCharacterTwo = HexCharacterController.Instance.CreatePlayerHexCharacter(playerCharacterTwoData, LevelController.Instance.GetRandomSpawnableLevelNode(LevelController.Instance.AllLevelNodes.ToList()));
 
             playerCharacter.attributeSheet.initiative = 200;
             playerCharacterTwo.attributeSheet.initiative = 150;

@@ -189,7 +189,11 @@ namespace WeAreGladiators.Characters
             middlePanelTransform.DOKill();
             rightPanelTransform.DOKill();
             leftPanelTransform.DOKill();
+            middlePanelTransform.position = middlePanelOffScreenPos.position;
+            rightPanelTransform.position = rightPanelOffScreenPos.position;
+            leftPanelTransform.position = leftPanelOffScreenPos.position;
 
+            // Move on screen
             middlePanelTransform.DOMove(middlePanelOnScreenPos.position, moveSpeed).SetEase(Ease.OutQuad);
             rightPanelTransform.DOMove(rightPanelOnScreenPos.position, moveSpeed).SetEase(Ease.OutQuad);
             leftPanelTransform.DOMove(leftPanelOnScreenPos.position, moveSpeed).SetEase(Ease.OutQuad);

@@ -143,7 +143,7 @@ namespace WeAreGladiators.StoryEvents
             movementParent.DOKill();
             blackUnderlay.DOFade(0.01f, 0);
             blackUnderlay.DOKill();
-            movementParent.DOMove(offScreenPosition.position, 0f);
+            movementParent.position = offScreenPosition.position;
 
             // Move on screen
             blackUnderlay.DOFade(0.5f, 0.75f).OnComplete(() =>

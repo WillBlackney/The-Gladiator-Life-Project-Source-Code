@@ -17,8 +17,6 @@ MonoBehaviour:
   randomizeClip: 1
   audioClips:
   - {fileID: 8300000, guid: 2c017667f6f6481429d8ba0540cf9762, type: 3}
-  - {fileID: 8300000, guid: 8677fd577e6989a4ba5bf8523da83b59, type: 3}
-  - {fileID: 8300000, guid: 46cdf5a83c9d65346a303257f833165a, type: 3}
   soundType: 98
   combatCategory: 0
   randomizeVolume: 0
