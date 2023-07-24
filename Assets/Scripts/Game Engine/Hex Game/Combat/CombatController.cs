@@ -1781,7 +1781,7 @@ namespace WeAreGladiators.Combat
                 SetCombatState(CombatGameState.CombatInactive);
                 // Game over? or just normal defeat?
                 if (RunController.Instance.CurrentCombatContractData.enemyEncounterData.difficulty == CombatDifficulty.Boss)                
-                    GameController.Instance.StartGameOverSequenceFromCombat();            
+                    GameController.Instance.HandleGameOverBossCombatDefeat();            
                 else GameController.Instance.StartCombatDefeatSequence();
             }
 
@@ -1791,7 +1791,9 @@ namespace WeAreGladiators.Combat
             {
                 SetCombatState(CombatGameState.CombatInactive);
                 HandleOnCombatVictoryEffects();
-                GameController.Instance.StartCombatVictorySequence();               
+                if (RunController.Instance.CurrentCombatContractData.enemyEncounterData.difficulty == CombatDifficulty.Boss)
+                    GameController.Instance.HandleGameOverBossCombatVictory();
+                else GameController.Instance.StartCombatVictorySequence();               
             }            
 
             // If this character died during their turn (but no during end turn phase), 

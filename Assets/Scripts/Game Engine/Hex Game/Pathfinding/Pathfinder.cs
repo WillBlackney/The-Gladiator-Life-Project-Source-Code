@@ -143,7 +143,6 @@ namespace WeAreGladiators.Pathfinding
                 // Found the path with matching destination and start
                 if (key == destination)
                 {
-                    Debug.Log("GetPath() found a path that connects start to destination");
                     List<LevelNode> hexsOnPath = paths[key];
                     hexsOnPath.Reverse();
 
@@ -164,14 +163,10 @@ namespace WeAreGladiators.Pathfinding
                         GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentActionPoints &&
                         GetFatigueCostOfPath(character, start, hexsOnPath) <= StatCalculator.GetTotalMaxFatigue(character) - character.currentFatigue)
                     {
-                        Debug.Log("GetPath() found a valid path!");
                         pathReturned = new Path(start, hexsOnPath, character);
                         possiblePaths.Add(pathReturned);
                     }
-                    //break;
                 }
-
-
             }
 
             Debug.Log("PathFinder.GetPath() valid paths between " + start.PrintGridPosition() + " and " + destination.PrintGridPosition() + " = " + possiblePaths.Count.ToString());

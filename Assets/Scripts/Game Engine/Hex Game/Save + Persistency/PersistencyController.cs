@@ -11,6 +11,7 @@ using WeAreGladiators.TownFeatures;
 using WeAreGladiators.Items;
 using WeAreGladiators.StoryEvents;
 using WeAreGladiators.Boons;
+using WeAreGladiators.Scoring;
 
 namespace WeAreGladiators.Persistency
 {
@@ -88,6 +89,9 @@ namespace WeAreGladiators.Persistency
             // Inventory
             InventoryController.Instance.Inventory.Clear();
 
+            // Score data
+            ScoreController.Instance.GenerateGameStartValues();
+
             // START SAVE!        
             AutoUpdateSaveFile();
         }
@@ -106,6 +110,7 @@ namespace WeAreGladiators.Persistency
             InventoryController.Instance.SaveMyDataToSaveFile(newSave);
             StoryEventController.Instance.SaveMyDataToSaveFile(newSave);
             BoonController.Instance.SaveMyDataToSaveFile(newSave);
+            ScoreController.Instance.SaveMyDataToSaveFile(newSave);
 
             // START SAVE!        
             SaveGameToDisk(newSave);
@@ -128,6 +133,7 @@ namespace WeAreGladiators.Persistency
             InventoryController.Instance.BuildMyDataFromSaveFile(newLoad);
             StoryEventController.Instance.BuildMyDataFromSaveFile(newLoad);
             BoonController.Instance.BuildMyDataFromSaveFile(newLoad);
+            ScoreController.Instance.BuildMyDataFromSaveFile(newLoad);
         }
         #endregion
 

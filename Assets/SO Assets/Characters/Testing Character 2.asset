@@ -22,13 +22,13 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 5
+      value: 1
       stars: 0
     dodge:
       value: 0
       stars: 0
     accuracy:
-      value: 80
+      value: 100
       stars: 0
     resolve:
       value: 5
@@ -40,8 +40,8 @@ MonoBehaviour:
       value: 5
       stars: 0
     maxHealth: 0
-    apRecovery: 8
-    apMaximum: 8
+    apRecovery: 100
+    apMaximum: 100
     initiative: 200
     fatigueRecovery: 15
     criticalChance: 100
@@ -57,11 +57,7 @@ MonoBehaviour:
     injuryResistance: 0
     deathResistance: 25
   abilityBook:
-    activeAbilities:
-    - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
-    - {fileID: 11400000, guid: d84fc754f00f92b458fef9d08a4c3005, type: 2}
-    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
-    - {fileID: 11400000, guid: c1061f44ef3eb3c408eb895d2b7064bb, type: 2}
+    activeAbilities: []
   serializedPassiveManager:
     perks: []
   modelParts:

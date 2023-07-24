@@ -56,7 +56,7 @@ namespace WeAreGladiators.Combat
             HexCharacterModel activatedCharacter = TurnController.Instance.EntityActivated;
             if (activatedCharacter.controller != Controller.Player) return;
 
-            // Crippled characters cant move
+            // Return if character is immobile
             if(!HexCharacterController.Instance.IsCharacterAbleToMove(activatedCharacter))
             {
                 Debug.Log(activatedCharacter.myName + " is unable to move, cancelling move action request");
@@ -69,7 +69,7 @@ namespace WeAreGladiators.Combat
             {
                 List<LevelNode> validMoveLocations =  Pathfinder.GetAllValidPathableDestinations(activatedCharacter, activatedCharacter.currentTile, LevelController.Instance.AllLevelNodes.ToList());
                 LevelController.Instance.MarkTilesInRange(validMoveLocations);
-                TargetGuidanceController.Instance.BuildAndShow(GuidanceInstruction.SelectDestination, 0.5f);
+                //TargetGuidanceController.Instance.BuildAndShow(GuidanceInstruction.SelectDestination, 0.5f);
                 HandleFirstHexSelection(h, activatedCharacter);
                 CursorController.Instance.SetFallbackCursor(CursorType.MoveClick);
                 CursorController.Instance.SetCursor(CursorType.MoveClick);
@@ -207,13 +207,15 @@ namespace WeAreGladiators.Combat
         {
             Path p = Pathfinder.GetValidPath(character, character.currentTile, hexClicked, LevelController.Instance.AllLevelNodes.ToList());
             if (p != null)
-            {
+            {                
                 clickedHex = hexClicked;
                 currentPath = p;
 
-                // Show move markers for each tile on the path
-                
-                foreach(LevelNode h in currentPath.HexsOnPath)
+                // Show guidance modal
+                TargetGuidanceController.Instance.BuildAndShow(GuidanceInstruction.SelectDestination, 0.5f);
+
+                // Show move markers for each tile on the path                
+                foreach (LevelNode h in currentPath.HexsOnPath)
                 {
                     h.ShowMoveMarker();
                 }
@@ -248,6 +250,7 @@ namespace WeAreGladiators.Combat
             else
             {
                 HidePathCostPopup();
+                CursorController.Instance.SetCursor(CursorType.NormalPointer);
                 CombatUIController.Instance.EnergyBar.UpdateIcons(character.currentActionPoints, 0.25f);
                 CombatUIController.Instance.ResetFatigueCostPreview();
             }

@@ -9,6 +9,7 @@ using WeAreGladiators.Items;
 using WeAreGladiators.TownFeatures;
 using WeAreGladiators.HexTiles;
 using WeAreGladiators.Boons;
+using WeAreGladiators.Scoring;
 
 namespace WeAreGladiators.Persistency
 {
@@ -24,6 +25,7 @@ namespace WeAreGladiators.Persistency
         public SaveCheckPoint saveCheckPoint;
         public float runTimer;
         public List<BoonData> activePlayerBoons = new List<BoonData>();
+        public PlayerScoreTracker scoreData;
 
         public CombatContractData currentCombatContractData;
         public SerializedCombatMapData currentCombatMapData;
