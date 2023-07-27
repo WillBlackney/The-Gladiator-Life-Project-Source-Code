@@ -8,6 +8,7 @@ using WeAreGladiators.VisualEvents;
 using WeAreGladiators.Items;
 using System.Linq;
 using DG.Tweening;
+using WeAreGladiators.Scoring;
 
 namespace WeAreGladiators.Perks
 {
@@ -374,6 +375,13 @@ namespace WeAreGladiators.Perks
                 stacksAppliedActual -= overflowStacks;
             }
 
+            // Score penalty for getting injured
+            if(perkData.isInjury && CharacterDataController.Instance.AllPlayerCharacters.Contains(pManager.myCharacterData))
+            {
+                ScoreController.Instance.CurrentScoreData.playerCharactersKilled += 1;
+            }
+
+
             // Add the new perk to the perk manager model's perk list, or increment stack count if it is already contained ithin the list.
             int previousMaxHealth = StatCalculator.GetTotalMaxHealth(pManager.myCharacterData);
             var newPerk =  HandleApplyActivePerk(pManager, p, stacksAppliedActual);
@@ -585,7 +593,7 @@ namespace WeAreGladiators.Perks
             }
 
             // Add perk to linked character data for perks that should persist (e.g. injuries gained in combat should persist)
-            if ((perkData.isInjury || perkData.isPermanentInjury) && character != null && character.characterData != null)
+            if ((perkData.isInjury || perkData.isPermanentInjury) && character != null && character.characterData != null && character.allegiance == Allegiance.Player && character.controller == Controller.Player)
             {
                 ActivePerk ap = ModifyPerkOnCharacterData(character.characterData.passiveManager, perk, stacks);
                 if (perkData.isInjury)

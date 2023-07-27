@@ -16,6 +16,7 @@ using WeAreGladiators.Player;
 using WeAreGladiators.Audio;
 using DG.Tweening;
 using WeAreGladiators.CameraSystems;
+using WeAreGladiators.Scoring;
 
 namespace WeAreGladiators.Combat
 {
@@ -129,7 +130,7 @@ namespace WeAreGladiators.Combat
 
             if (effect != null && weaponUsed != null && ability != null && ability.abilityType.Contains(AbilityType.WeaponAttack))
                 damageModPercentageAdditive += StatCalculator.GetTotalWeaponDamageBonus(attacker) * 0.01f;
-                        
+
 
             // Add critical modifier to damage mod
             if (didCrit && attacker != null && effect != null)
@@ -1202,15 +1203,15 @@ namespace WeAreGladiators.Combat
             }
 
             // Check Sturdy Defense
-            if(ability != null && 
+            if (ability != null &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.SturdyDefense))
             {
-                damageResult.totalArmourLost = (int) (damageResult.totalArmourLost * 0.75f);
+                damageResult.totalArmourLost = (int)(damageResult.totalArmourLost * 0.75f);
                 totalArmourLost = (int)(damageResult.totalArmourLost * 0.75f);
             }
 
             // Check Agile Defense
-            if (ability != null && 
+            if (ability != null &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.AgileDefense))
             {
                 float adMod = 0.25f;
@@ -1231,7 +1232,7 @@ namespace WeAreGladiators.Combat
 
             // Check for Bring It On perk
             if (target.hasTriggeredBringItOn == false &&
-                (totalHealthLost > 0  || totalArmourLost > 0) &&
+                (totalHealthLost > 0 || totalArmourLost > 0) &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.BringItOn))
             {
                 totalHealthLost = 0;
@@ -1266,20 +1267,20 @@ namespace WeAreGladiators.Combat
 
             // Create impact effect 
             Vector3 pos = target.hexCharacterView.WorldPosition;
-            VisualEventManager.CreateVisualEvent(() => 
+            VisualEventManager.CreateVisualEvent(() =>
             {
                 if (target.hexCharacterView != null) pos = target.hexCharacterView.WorldPosition;
                 VisualEffectManager.Instance.CreateSmallMeleeImpact(pos);
             }, parentEvent);
 
             // Create screen shake
-            if(totalHealthLost > 0 && attacker != null)
+            if (totalHealthLost > 0 && attacker != null)
             {
                 if (totalHealthLost < 35)
                     VisualEventManager.CreateVisualEvent(() => CameraController.Instance.CreateCameraShake(CameraShakeType.Small), parentEvent);
                 else if (totalHealthLost >= 35)
                     VisualEventManager.CreateVisualEvent(() => CameraController.Instance.CreateCameraShake(CameraShakeType.Medium), parentEvent);
-            }                      
+            }
 
             // On health lost animations
             if ((totalHealthLost > 0 || totalArmourLost > 0) &&
@@ -1289,7 +1290,7 @@ namespace WeAreGladiators.Combat
                 {
                     HexCharacterController.Instance.PlayHurtAnimation(target.hexCharacterView);
                     AudioManager.Instance.PlaySound(target.AudioProfile, AudioSet.Hurt);
-                }, parentEvent);               
+                }, parentEvent);
             }
 
             // Create damage text effect            
@@ -1297,7 +1298,7 @@ namespace WeAreGladiators.Combat
                 VisualEffectManager.Instance.CreateDamageTextEffect(target.hexCharacterView.WorldPosition, totalDamage, didCrit), parentEvent);
 
             // Create blood in ground VFX  
-            if (totalHealthLost > 0) 
+            if (totalHealthLost > 0)
             {
                 VisualEventManager.CreateVisualEvent(() =>
                     VisualEffectManager.Instance.CreateGroundBloodSpatter(target.hexCharacterView.WorldPosition), parentEvent);
@@ -1311,7 +1312,7 @@ namespace WeAreGladiators.Combat
             if (totalArmourLost != 0) HexCharacterController.Instance.ModifyArmour(target, -totalArmourLost);
 
             // Increment damage dealt tracking
-            if(attacker != null) attacker.damageDealtThisCombat += totalHealthLost + totalArmourLost;            
+            if (attacker != null) attacker.damageDealtThisCombat += totalHealthLost + totalArmourLost;
 
             // Check for barrier
             if (removedBarrier) PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Barrier, -1, true, 0.5f);
@@ -1322,7 +1323,7 @@ namespace WeAreGladiators.Combat
                 HandleDeathBlow(target, parentEvent);
 
             // Combat Token Expiries >>
-            if(target.livingState == LivingState.Alive)
+            if (target.livingState == LivingState.Alive)
             {
                 // Check Block
                 if (ability != null &&
@@ -1352,11 +1353,11 @@ namespace WeAreGladiators.Combat
                 if (ability != null &&
                     PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stealth))
                     PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Stealth, -1);
-            }           
+            }
 
             // On hit effects
             // Flaming weapon => apply burning
-            if (target.currentHealth > 0 && 
+            if (target.currentHealth > 0 &&
                 target.livingState == LivingState.Alive &&
                 attacker != null &&
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.FlamingWeapon) &&
@@ -1381,7 +1382,7 @@ namespace WeAreGladiators.Combat
             }
 
             // Tiger Aspect => apply bleeding
-            
+
             if (target.currentHealth > 0 &&
                 target.livingState == LivingState.Alive &&
                 attacker != null &&
@@ -1439,9 +1440,9 @@ namespace WeAreGladiators.Combat
                 (ability.weaponRequirement == WeaponRequirement.MeleeWeapon || ability.weaponRequirement == WeaponRequirement.RangedWeapon || ability.weaponRequirement == WeaponRequirement.Bow || ability.weaponRequirement == WeaponRequirement.Crossbow || ability.weaponRequirement == WeaponRequirement.BowOrCrossbow) &&
                 weaponUsed != null)
             {
-                foreach(ItemEffect ie in weaponUsed.itemEffects)
+                foreach (ItemEffect ie in weaponUsed.itemEffects)
                 {
-                    if(ie.effectType == ItemEffectType.OnHitEffect)
+                    if (ie.effectType == ItemEffectType.OnHitEffect)
                     {
                         // roll for success chance
                         int roll = RandomGenerator.NumberBetween(1, 100);
@@ -1457,7 +1458,7 @@ namespace WeAreGladiators.Combat
             if (totalHealthLost > 0 && target.currentHealth > 0)
             {
                 // Vengeful perk
-                if(target.livingState == LivingState.Alive &&
+                if (target.livingState == LivingState.Alive &&
                     PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Vengeful))
                 {
                     VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySound(Sound.Ability_Enrage), target.GetLastStackEventParent());
@@ -1470,8 +1471,8 @@ namespace WeAreGladiators.Combat
                     attacker != target &&
                     PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.PunchDrunk))
                 {
-                    if(RandomGenerator.NumberBetween(1, 100) <= 25)                    
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Stunned, 1, true, 0.5f);         
+                    if (RandomGenerator.NumberBetween(1, 100) <= 25)
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Stunned, 1, true, 0.5f);
                 }
             }
 
@@ -1574,9 +1575,9 @@ namespace WeAreGladiators.Combat
                 // Check nearby gnoll enemies: gnolls heal when a character is killed within 1 of them
                 List<HexCharacterModel> characters = HexCharacterController.Instance.AllCharacters;
                 List<LevelNode> tiles = LevelController.Instance.GetAllHexsWithinRange(targetTile, 1);
-                foreach(HexCharacterModel possibleGnoll in characters)
+                foreach (HexCharacterModel possibleGnoll in characters)
                 {
-                    if(possibleGnoll.race == CharacterRace.Gnoll && 
+                    if (possibleGnoll.race == CharacterRace.Gnoll &&
                         tiles.Contains(possibleGnoll.currentTile))
                     {
                         // Gain health
@@ -1588,19 +1589,19 @@ namespace WeAreGladiators.Combat
                             AudioManager.Instance.PlaySound(Sound.Ability_Feast);
                             VisualEffectManager.Instance.CreateStatusEffect(possibleGnoll.hexCharacterView.WorldPosition, "Cannibalism!", CharacterDataController.Instance.GetRaceData(CharacterRace.Gnoll).racialSprite, StatusFrameType.CircularBrown);
                         }, possibleGnoll.GetLastStackEventParent()).SetEndDelay(0.5f);
-                                              
+
                     }
                 }
 
                 // Stress Events on death
                 // Enemy Killed (Positive)
-                foreach(HexCharacterModel c in HexCharacterController.Instance.GetAllEnemiesOfCharacter(target))                
-                    CreateStressCheck(c, StressEventType.EnemyKilled);                    
-                
+                foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllEnemiesOfCharacter(target))
+                    CreateStressCheck(c, StressEventType.EnemyKilled);
+
 
                 // Ally Killed (Negative)
-                foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(target, false))                
-                    CreateStressCheck(c, StressEventType.AllyKilled);                
+                foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(target, false))
+                    CreateStressCheck(c, StressEventType.AllyKilled);
 
                 //HandleDeathBlow(target, parentEvent);
             }
@@ -1616,7 +1617,7 @@ namespace WeAreGladiators.Combat
 
             // Catch check: in the extremely rare circumstance where a character has every single permanent injury, kill them
             // automatically to prevent bugs
-            if (PerkController.Instance.GetAllPermanentInjuriesOnCharacter(c.characterData).Count >= 
+            if (PerkController.Instance.GetAllPermanentInjuriesOnCharacter(c.characterData).Count >=
                 PerkController.Instance.GetAllPermanentInjuries().Count)
                 ret.pass = false;
             return ret;
@@ -1653,7 +1654,7 @@ namespace WeAreGladiators.Combat
             TurnController.Instance.RemoveEntityFromActivationOrder(character);
 
             // Fade out world space GUI
-            VisualEventManager.CreateVisualEvent(() => 
+            VisualEventManager.CreateVisualEvent(() =>
             {
                 // to do: big crowd cheer SFX
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null, 0.5f);
@@ -1683,7 +1684,7 @@ namespace WeAreGladiators.Combat
                 int spatters = 2;
                 character.hexCharacterView.ucm.RootSortingGroup.sortingOrder = character.hexCharacterView.ucm.RootSortingGroup.sortingOrder - 1;
                 AudioManager.Instance.PlaySound(character.AudioProfile, AudioSet.Die);
-               
+
                 Vector3 finalPos = new Vector3(view.ucmMovementParent.transform.position.x + randX, view.ucmMovementParent.transform.position.y + randY, view.ucmMovementParent.transform.position.z);
                 view.ucmMovementParent.transform.DOMove(finalPos, 0.5f);
                 view.ucm.transform.DORotate(new Vector3(0, 0, randomDeathRotation), 0.5f);
@@ -1699,15 +1700,15 @@ namespace WeAreGladiators.Combat
                 for (int i = 0; i < spatters; i++)
                     VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
             }, parentEvent).SetEndDelay(1f);
-                       
+
             // Destroy characters activation window and update other window positions
             HexCharacterModel currentlyActivatedEntity = TurnController.Instance.EntityActivated;
             var cachedOrder = TurnController.Instance.ActivationOrder.ToList();
-            VisualEventManager.CreateVisualEvent(() => 
+            VisualEventManager.CreateVisualEvent(() =>
                 TurnController.Instance.OnCharacterKilledVisualEvent(window, currentlyActivatedEntity, cachedOrder), parentEvent).SetEndDelay(1f);
 
             // Roll for death or knock down on player characters
-            if(character.controller == Controller.Player)
+            if (character.controller == Controller.Player)
             {
                 DeathRollResult result = RollForDeathResist(character);
                 if (result.pass && !guaranteedDeath)
@@ -1737,7 +1738,7 @@ namespace WeAreGladiators.Combat
             }, parentEvent);
 
             // Lich death, kill all summoned skeletons
-            if(character.myName == "Lich")
+            if (character.myName == "Lich")
             {
                 List<HexCharacterModel> skeletons = new List<HexCharacterModel>();
                 foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(character, false))
@@ -1750,7 +1751,7 @@ namespace WeAreGladiators.Combat
             }
 
             // Volatile (explode on death)
-            if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Volatile))
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Volatile))
             {
                 Debug.Log("CombatLogic.HandleDeathBlow() character killed has Volatile perk, applying Poisoned to nearby characters...");
 
@@ -1761,18 +1762,18 @@ namespace WeAreGladiators.Combat
                 }, parentEvent);
 
                 // Poison all nearby characters
-                foreach(var tile in LevelController.Instance.GetAllHexsWithinRange(hex, 1))
+                foreach (var tile in LevelController.Instance.GetAllHexsWithinRange(hex, 1))
                 {
-                    if(tile.myCharacter != null &&
+                    if (tile.myCharacter != null &&
                         tile.myCharacter.livingState == LivingState.Alive &&
                         tile.myCharacter.currentHealth > 0)
                     {
                         PerkController.Instance.ModifyPerkOnCharacterEntity(tile.myCharacter.pManager, Perk.Poisoned, 3, true, 0, character.pManager);
                     }
-                }                
+                }
 
                 VisualEventManager.InsertTimeDelayInQueue(0.5f);
-            }           
+            }
 
             // Check if the combat defeat event should be triggered
             if (HexCharacterController.Instance.AllPlayerCharacters.Count == 0 &&
@@ -1780,8 +1781,8 @@ namespace WeAreGladiators.Combat
             {
                 SetCombatState(CombatGameState.CombatInactive);
                 // Game over? or just normal defeat?
-                if (RunController.Instance.CurrentCombatContractData.enemyEncounterData.difficulty == CombatDifficulty.Boss)                
-                    GameController.Instance.HandleGameOverBossCombatDefeat();            
+                if (RunController.Instance.CurrentCombatContractData.enemyEncounterData.difficulty == CombatDifficulty.Boss)
+                    GameController.Instance.HandleGameOverBossCombatDefeat();
                 else GameController.Instance.StartCombatDefeatSequence();
             }
 
@@ -1793,8 +1794,8 @@ namespace WeAreGladiators.Combat
                 HandleOnCombatVictoryEffects();
                 if (RunController.Instance.CurrentCombatContractData.enemyEncounterData.difficulty == CombatDifficulty.Boss)
                     GameController.Instance.HandleGameOverBossCombatVictory();
-                else GameController.Instance.StartCombatVictorySequence();               
-            }            
+                else GameController.Instance.StartCombatVictorySequence();
+            }
 
             // If this character died during their turn (but no during end turn phase), 
             // resolve the transition to next character activation
@@ -1802,23 +1803,44 @@ namespace WeAreGladiators.Combat
             {
                 TurnController.Instance.ActivateNextEntity();
             }
-        }       
+        }
         #endregion
 
         // Combat Victory, Defeat + Game Over Logic
         #region      
         private void HandleOnCombatVictoryEffects()
         {
-            // Orc passive
-            /*
-            foreach(HexCharacterModel character in HexCharacterController.Instance.AllDefenders)
+
+        }
+        public void UpdateScoreDataPostCombat(bool victory = true)
+        {
+            PlayerScoreTracker scoreData = ScoreController.Instance.CurrentScoreData;
+            EnemyEncounterData encounterData = RunController.Instance.CurrentCombatContractData.enemyEncounterData;
+            List<HexCharacterModel> charactersKilled = HexCharacterController.Instance.Graveyard.FindAll(
+                c => c.allegiance == Allegiance.Player && 
+                c.controller == Controller.Player && 
+                c.characterData != null &&
+                c.characterData.currentHealth <= 0);
+
+            scoreData.playerCharactersKilled += charactersKilled.Count;
+
+            if (!victory) scoreData.combatDefeats += 1;            
+
+            if (encounterData.difficulty == CombatDifficulty.Basic)
             {
-                if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.ThrillOfTheHunt))
-                {
-                    HexCharacterController.Instance.ModifyStress(character, -10);
-                }
+                if (victory) scoreData.oneSkullContractsCompleted += 1;
+                if (victory && charactersKilled.Count == 0) scoreData.oneSkullContractsCompletedWithoutDeath += 1;
             }
-            */
+            else if (encounterData.difficulty == CombatDifficulty.Elite)
+            {
+                if (victory) scoreData.twoSkullContractsCompleted += 1;
+                if (victory && charactersKilled.Count == 0) scoreData.twoSkullContractsCompletedWithoutDeath += 1;
+            }
+            else if (encounterData.difficulty == CombatDifficulty.Boss)
+            {
+                if (victory) scoreData.threeSkullContractsCompleted += 1;
+                if (victory && charactersKilled.Count == 0) scoreData.threeSkullContractsCompletedWithoutDeath += 1;
+            }
         }
         #endregion
     }

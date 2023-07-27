@@ -15,11 +15,6 @@ namespace WeAreGladiators.Scoring
         public int twoSkullContractsCompletedWithoutDeath;
         public int threeSkullContractsCompletedWithoutDeath;
 
-        // Calculated at end of run
-        public int tierThreeWeaponsCollected;
-        public int onefiftyPlusArmourPiecesCollected;
-
-
         // Penalties
         public int playerCharactersKilled;
         public int injuriesGained;
@@ -29,20 +24,20 @@ namespace WeAreGladiators.Scoring
 
     public enum ScoreElementType
     {
-        None = 0,
-        DaysPassed = 1,
+        None = 0,        
         BasicCombatVictories = 2,
         EliteCombatVictories = 3,
         BossCombatVictories = 4,
         Panache = 5,
         GiantSlayer = 6,
         Godlike = 7,
-        WellArmed = 8,
-        WellArmoured = 9,
-
-        GladiatorsKilled = 10,
+        PlayerCharactersKilled = 10,
         InjuriesGained = 11,
         CombatDefeats = 12,
+
+        DaysPassed = 1,
+        WellArmed = 8,
+        WellArmoured = 9,
         FatherOfTheYear = 13,
 
 

@@ -1080,6 +1080,10 @@ namespace WeAreGladiators.TownFeatures
                 ShowNoCharactersDeployedPopup();
                 return;
             }
+            else if (CombatContractCard.SelectectedCombatCard.MyContractData.enemyEncounterData.difficulty == CombatDifficulty.Boss)
+            {
+                ShowBossWarning();
+            }
             else if(characters.Count > 0 && characters.Count < CombatContractCard.SelectectedCombatCard.MyContractData.enemyEncounterData.deploymentLimit)
             {
                 ShowLessThanMaxCharactersDeployedPopup();
@@ -1088,6 +1092,12 @@ namespace WeAreGladiators.TownFeatures
             {
                 GameController.Instance.HandleLoadIntoCombatFromDeploymentScreen();
             }
+        }
+        private void ShowBossWarning()
+        {
+            deploymentWarningPopupVisualParent.SetActive(true);
+            deploymentWarningPopupContinueButton.SetActive(false);
+            deploymentWarningPopupText.text = "This is a boss fight: if you lose this fight, your game is over. Are you certain you're ready to proceed?";
         }
         private void ShowNoCharactersDeployedPopup()
         {

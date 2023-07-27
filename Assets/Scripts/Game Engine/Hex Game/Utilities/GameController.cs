@@ -331,8 +331,9 @@ namespace WeAreGladiators
             CombatContractData sandboxContractData = TownController.Instance.GenerateSandboxContractData();
             RunController.Instance.SetCurrentContractData(sandboxContractData);
 
-            // Start a new combat event
-            StartCombatVictorySequence();
+            // Start combat end process
+            if(RunController.Instance.CurrentCombatContractData.enemyEncounterData.difficulty == CombatDifficulty.Boss) HandleGameOverBossCombatVictory();
+            else StartCombatVictorySequence();
         }      
         #endregion
 
@@ -366,10 +367,13 @@ namespace WeAreGladiators
             // Reward XP, build and show combat stats screen
             List<CharacterCombatStatData> combatStats = CombatRewardController.Instance.GenerateCombatStatResultsForCharacters(charactersRewarded, true);
             CombatRewardController.Instance.CacheStatResult(combatStats);
-            CombatRewardController.Instance.ApplyXpGainFromStatResultsToCharacters(combatStats);           
+            CombatRewardController.Instance.ApplyXpGainFromStatResultsToCharacters(combatStats);
 
             // Gain loot
             CombatRewardController.Instance.HandleGainRewardsOfContract(RunController.Instance.CurrentCombatContractData);
+
+            // Determine combat results (for scoring)
+            CombatController.Instance.UpdateScoreDataPostCombat();
 
             // Save game
             RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatEnd);
@@ -452,6 +456,9 @@ namespace WeAreGladiators
             CombatRewardController.Instance.CacheStatResult(combatStats);
             CombatRewardController.Instance.ApplyXpGainFromStatResultsToCharacters(combatStats);
 
+            // Determine combat results (for scoring)
+            CombatController.Instance.UpdateScoreDataPostCombat(false);
+
             // Save game
             RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatEnd);
             PersistencyController.Instance.AutoUpdateSaveFile();
@@ -509,6 +516,7 @@ namespace WeAreGladiators
             yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);
 
             // Calculate score and delete save file
+            CombatController.Instance.UpdateScoreDataPostCombat(false);
             PlayerScoreTracker scoreSet = ScoreController.Instance.CurrentScoreData;
             PersistencyController.Instance.DeleteSaveFileOnDisk();
 
@@ -582,6 +590,7 @@ namespace WeAreGladiators
             yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);
 
             // Calculate score and delete save file
+            CombatController.Instance.UpdateScoreDataPostCombat();
             PlayerScoreTracker scoreSet = ScoreController.Instance.CurrentScoreData;
             PersistencyController.Instance.DeleteSaveFileOnDisk();
 

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
 using WeAreGladiators.Items;
+using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Persistency;
 using WeAreGladiators.Utilities;
 
@@ -155,10 +156,6 @@ namespace WeAreGladiators.Scoring
         {
             List<ScoreElementData> scoreElements = new List<ScoreElementData>();
 
-            // Rooms cleared
-            if (scoreData.daysPassed > 0)
-                scoreElements.Add(new ScoreElementData(scoreData.daysPassed * 5, ScoreElementType.DaysPassed));
-
             // basics defeated
             if (scoreData.oneSkullContractsCompleted > 0)
                 scoreElements.Add(new ScoreElementData(scoreData.oneSkullContractsCompleted * 5, ScoreElementType.BasicCombatVictories));
@@ -184,13 +181,13 @@ namespace WeAreGladiators.Scoring
                 scoreElements.Add(new ScoreElementData(scoreData.threeSkullContractsCompletedWithoutDeath * 40, ScoreElementType.Godlike));
 
 
-            // gold gained
-            //if (scoreData.totalGoldGained > 500)
-            //    scoreElements.Add(new ScoreElementData(scoreData.totalGoldGained / 500 * 25, ScoreElementType.Riches));
-
-
-
             // CALCULATE SCORING ELEMENTS THAT ONLY OCCUR AT RUN END!
+
+
+            // Days passed
+            ScoreElementData dp = CalculateDaysPassedScore();
+            if (dp.totalScore > 0)
+                scoreElements.Add(dp);
 
             // Father of the Year
             ScoreElementData foty = CalculateFatherOfTheYear();
@@ -201,6 +198,11 @@ namespace WeAreGladiators.Scoring
             ScoreElementData wellArmed = CalculateWellArmedScore();
             if (wellArmed.totalScore > 0)
                 scoreElements.Add(wellArmed);
+
+            // Well Armoured
+            ScoreElementData wellArmoured = CalculateWellArmouredScore();
+            if (wellArmoured.totalScore > 0)
+                scoreElements.Add(wellArmoured);
 
             return scoreElements;
         }
@@ -216,7 +218,7 @@ namespace WeAreGladiators.Scoring
 
 
         #region Specific Score Calculators
-        public ScoreElementData CalculateWellArmedScore()
+        private ScoreElementData CalculateWellArmedScore()
         {
             // Gain +5 score for each tier 3 weapon collected
             int score = 0;
@@ -239,7 +241,38 @@ namespace WeAreGladiators.Scoring
 
             return new ScoreElementData(score, ScoreElementType.WellArmed);
         }
-        public ScoreElementData CalculateFatherOfTheYear()
+        private ScoreElementData CalculateWellArmouredScore()
+        {
+            // Gain +5 score for head/body piece with 150 or more armour
+            int score = 0;
+
+            foreach (InventoryItem i in InventoryController.Instance.Inventory)
+            {
+                if (i.itemData != null &&
+                    i.itemData.armourAmount >= 150 &&
+                    (i.itemData.itemType == ItemType.Head || i.itemData.itemType == ItemType.Body))
+                {
+                    score += 5;
+                }
+            }
+
+            foreach (HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
+            {
+                if (character.itemSet.headArmour != null &&
+                    character.itemSet.headArmour.armourAmount >= 150)
+                {
+                    score += 5;
+                }
+                if (character.itemSet.bodyArmour != null &&
+                   character.itemSet.bodyArmour.armourAmount >= 150)
+                {
+                    score += 5;
+                }
+            }
+
+            return new ScoreElementData(score, ScoreElementType.WellArmed);
+        }
+        private ScoreElementData CalculateFatherOfTheYear()
         {
             // Gain +20 score if the kid is still alive.
             int score = 0;
@@ -254,6 +287,13 @@ namespace WeAreGladiators.Scoring
             }
 
             return new ScoreElementData(score, ScoreElementType.FatherOfTheYear);
+        }
+        private ScoreElementData CalculateDaysPassedScore()
+        {
+            // Gain +5 score for each day passed
+            int score = RunController.Instance.CurrentDay * 5;           
+
+            return new ScoreElementData(score, ScoreElementType.DaysPassed);
         }
         #endregion
     }

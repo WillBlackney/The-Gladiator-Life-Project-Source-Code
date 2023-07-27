@@ -18,6 +18,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
+using WeAreGladiators.Scoring;
 
 namespace WeAreGladiators.StoryEvents
 {
@@ -603,6 +604,11 @@ namespace WeAreGladiators.StoryEvents
                 string message = target.myName + " " + target.mySubName + " has died.";
                 StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.Skull);
                 currentResultItems.Add(newResultItem);
+
+                // to do: add to orbituary
+
+                // Update score data
+                ScoreController.Instance.CurrentScoreData.playerCharactersKilled += 1;
             }
             else if (effect.effectType == StoryChoiceEffectType.GainExperience)
             {
@@ -646,6 +652,8 @@ namespace WeAreGladiators.StoryEvents
                 StoryEventResultItem newResultItem = new StoryEventResultItem(
                     target.myName + " " + target.mySubName + " gained injury: " + TextLogic.ReturnColoredText(injuryData.passiveName, TextLogic.neutralYellow) + ".", ResultRowIcon.FramedSprite, injuryData.passiveSprite);
                 currentResultItems.Add(newResultItem);
+
+                ScoreController.Instance.CurrentScoreData.injuriesGained += 1;
             }
             else if (effect.effectType == StoryChoiceEffectType.LoseHealth)
             {
