@@ -71,6 +71,7 @@ namespace WeAreGladiators.GameOrigin
             BlackScreenController.Instance.FadeOutAndBackIn(0.75f, 0.25f, 0.75f, () =>
             {
                 HideOriginScreen(0f);
+                MainMenuController.Instance.SetCustomCharacterDataDefaultState();
                 MainMenuController.Instance.ShowChooseCharacterScreen();
                 MainMenuController.Instance.HideFrontScreen();
             });

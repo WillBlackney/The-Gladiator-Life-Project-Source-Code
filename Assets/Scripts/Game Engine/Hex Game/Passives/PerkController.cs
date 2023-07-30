@@ -376,11 +376,8 @@ namespace WeAreGladiators.Perks
             }
 
             // Score penalty for getting injured
-            if(perkData.isInjury && CharacterDataController.Instance.AllPlayerCharacters.Contains(pManager.myCharacterData))
-            {
-                ScoreController.Instance.CurrentScoreData.playerCharactersKilled += 1;
-            }
-
+            if(perkData.isInjury && CharacterDataController.Instance.AllPlayerCharacters.Contains(pManager.myCharacterData))            
+                ScoreController.Instance.CurrentScoreData.injuriesGained += 1;           
 
             // Add the new perk to the perk manager model's perk list, or increment stack count if it is already contained ithin the list.
             int previousMaxHealth = StatCalculator.GetTotalMaxHealth(pManager.myCharacterData);

@@ -652,8 +652,6 @@ namespace WeAreGladiators.StoryEvents
                 StoryEventResultItem newResultItem = new StoryEventResultItem(
                     target.myName + " " + target.mySubName + " gained injury: " + TextLogic.ReturnColoredText(injuryData.passiveName, TextLogic.neutralYellow) + ".", ResultRowIcon.FramedSprite, injuryData.passiveSprite);
                 currentResultItems.Add(newResultItem);
-
-                ScoreController.Instance.CurrentScoreData.injuriesGained += 1;
             }
             else if (effect.effectType == StoryChoiceEffectType.LoseHealth)
             {

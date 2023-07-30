@@ -203,9 +203,22 @@ namespace WeAreGladiators.UI
             mainCg.DOFade(1f, 0.25f);
         }
         #endregion
-        
+
         // Build + Show Modal
         #region
+        public void BuildAndShowModal(string headerText, string descriptionText)
+        {
+            UpdateDynamicDirection();
+            FadeInModal();
+            ResetContent();
+            TransformUtils.RebuildLayouts(fitters);
+            CustomString cs = new CustomString();
+            cs.phrase = descriptionText;
+            cs.color = TextColor.White;
+            BuildModalContent(headerText, new List<CustomString> { cs }, null, false);
+            TransformUtils.RebuildLayouts(fitters);
+            shouldRebuild = true;
+        }
         public void BuildAndShowModal(ModalSceneWidget w)
         {
             StartCoroutine(BuildAndShowModalCoroutine(w));

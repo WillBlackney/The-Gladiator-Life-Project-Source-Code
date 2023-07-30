@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 3599035482624117755}
   - component: {fileID: 2436977701604858208}
   - component: {fileID: 1841353016278064715}
+  - component: {fileID: 8321735786893662093}
   m_Layer: 0
   m_Name: Score Element Panel
   m_TagString: Untagged
@@ -326,6 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 3599035481541371489}
   valueText: {fileID: 3599035480918922739}
+  descriptionText: {fileID: 0}
   myCg: {fileID: 1841353016278064715}
 --- !u!225 &1841353016278064715
 CanvasGroup:
@@ -339,3 +341,175 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &8321735786893662093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3599035482624117754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2c16d7d3f7add43ac8fd7d93abe631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputType: 0
+  killPreviousTweensOnNewSequenceStart: 1
+  onClickEvents: []
+  onRightClickEvents: []
+  mouseDownEvents: []
+  mouseEnterEvents:
+  - widgetEventType: 16
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+    cursorType: 2
+  - widgetEventType: 3
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2436977701604858208}
+          m_TargetAssemblyTypeName: WeAreGladiators.Scoring.ScoreElementPanel, Main
+          m_MethodName: ShowInfoPanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+    cursorType: 0
+  mouseExitEvents:
+  - widgetEventType: 16
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls: []
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+    cursorType: 0
+  - widgetEventType: 3
+    scalingSequence: 0
+    enableStartDelay: 0
+    startDelay: 0
+    onlyIfMouseIsStillOverMe: 0
+    objectToDisable: {fileID: 0}
+    objectToEnable: {fileID: 0}
+    functionInvoked:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2436977701604858208}
+          m_TargetAssemblyTypeName: WeAreGladiators.Scoring.ScoreElementPanel, Main
+          m_MethodName: HideInfoPanel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    soundPlayed: 0
+    canvasGroup: {fileID: 0}
+    image: {fileID: 0}
+    text: {fileID: 0}
+    endColour: {r: 0, g: 0, b: 0, a: 0}
+    movementType: 0
+    transformToMove: {fileID: 0}
+    moveDistance: 0
+    transistionSpeed: 0
+    transformToScale: {fileID: 0}
+    percentageSizeIncrease: 1
+    enlargeSpeed: 0.5
+    percentageSizeDecrease: 1
+    shrinkSpeed: 0
+    wiggleType: 0
+    transformToWiggle: {fileID: 0}
+    wiggleDistance: 0
+    wiggleSpeed: 0
+    wiggleInfinetly: 0
+    wiggleLoops: 0
+    rotationDegrees: 0
+    cursorType: 0
+  onDisableEvents: []

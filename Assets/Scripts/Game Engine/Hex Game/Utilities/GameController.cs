@@ -297,6 +297,21 @@ namespace WeAreGladiators
 
             // Start a new combat event
             TurnController.Instance.OnNewCombatEventStarted();
+
+            // Create mock scoring data
+            PlayerScoreTracker scoreData = ScoreController.Instance.CurrentScoreData;
+            scoreData.oneSkullContractsCompleted += 2;
+            scoreData.oneSkullContractsCompletedWithoutDeath += 2;
+            scoreData.twoSkullContractsCompleted += 2;
+            scoreData.twoSkullContractsCompletedWithoutDeath += 2;
+            scoreData.threeSkullContractsCompleted += 2;
+            scoreData.threeSkullContractsCompletedWithoutDeath += 2;
+            scoreData.playerCharactersKilled += 2;
+            scoreData.injuriesGained += 2;
+            scoreData.combatDefeats += 2;
+
+            ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Weapon).ForEach(i => 
+                InventoryController.Instance.AddItemToInventory(i));
         }
         private void RunPostCombatRewardTestEventSetup()
         {
