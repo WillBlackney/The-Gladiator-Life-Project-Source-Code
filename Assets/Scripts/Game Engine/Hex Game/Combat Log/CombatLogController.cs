@@ -15,15 +15,14 @@ namespace WeAreGladiators.CombatLog
         [SerializeField] CombatLogEntryView logEntryViewPrefab;
         [SerializeField] Transform logEntryViewParent;
         [SerializeField] GameObject logContentParent;
-        [SerializeField] Slider logSlider;
+        [SerializeField] Scrollbar logSlider;
         [SerializeField] List<CombatLogEntryView> allEntryViews = new List<CombatLogEntryView>();
 
         [Space(10)]
 
         [Header("Maximize/Minimize Log Button")]
         [SerializeField] Button minMaxButton;
-        [SerializeField] GameObject maximizedIcon;
-        [SerializeField] GameObject minimizedIcon;
+        [SerializeField] Image minMaxButtonImage;
 
         [Space(10)]
 
@@ -103,11 +102,13 @@ namespace WeAreGladiators.CombatLog
         {
             maximized = true;
             logContentParent.SetActive(true);
+            minMaxButtonImage.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
             RenderEntries();
         }
         private void MinimizeLog()
         {
             maximized = false;
+            minMaxButtonImage.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
             logContentParent.SetActive(false);
         }
         #endregion
