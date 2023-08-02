@@ -11,7 +11,11 @@ namespace WeAreGladiators.CombatLog
         [SerializeField] Image icon;
         [SerializeField] TextMeshProUGUI descriptionText;
 
-        public Image Icon => icon;
-        public TextMeshProUGUI DescriptionText => descriptionText;
+        public void Build(CombatLogEntryData data)
+        {
+            gameObject.SetActive(true);
+            icon.sprite = data.Icon;
+            descriptionText.text = data.Description;
+        }
     }
 }

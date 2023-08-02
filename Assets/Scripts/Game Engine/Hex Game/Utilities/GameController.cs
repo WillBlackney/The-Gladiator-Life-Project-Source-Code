@@ -26,6 +26,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using WeAreGladiators.Scoring;
+using WeAreGladiators.CombatLog;
 
 namespace WeAreGladiators
 {
@@ -185,6 +186,7 @@ namespace WeAreGladiators
 
             // Show UI
             TopBarController.Instance.ShowCombatTopBar();
+            CombatLogController.Instance.ShowLog();
 
             // Build mock save file + journey data
             RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
@@ -239,6 +241,7 @@ namespace WeAreGladiators
 
             // Show UI
             TopBarController.Instance.ShowCombatTopBar();
+            CombatLogController.Instance.ShowLog();
 
             // Build mock save file + journey data
             RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
@@ -325,7 +328,8 @@ namespace WeAreGladiators
             SetGameState(GameState.CombatActive);
 
             // Show UI
-            TopBarController.Instance.ShowCombatTopBar();            
+            TopBarController.Instance.ShowCombatTopBar();
+            CombatLogController.Instance.ShowLog();
 
             // Randomize level node elevation and obstructions
             LevelController.Instance.GenerateLevelNodes();
@@ -425,6 +429,7 @@ namespace WeAreGladiators
             TurnController.Instance.DestroyAllActivationWindows();
 
             // Hide combat UI + Popup Modals
+            CombatLogController.Instance.HideLog();
             CombatUIController.Instance.HideViewsOnTurnEnd();
             LevelController.Instance.HideTileInfoPopup();
             AbilityController.Instance.HideHitChancePopup();
@@ -496,6 +501,7 @@ namespace WeAreGladiators
             TurnController.Instance.DestroyAllActivationWindows();
 
             // Hide combat UI + Popup Modals
+            CombatLogController.Instance.HideLog();
             CombatUIController.Instance.HideViewsOnTurnEnd();
             LevelController.Instance.HideTileInfoPopup();
             AbilityController.Instance.HideHitChancePopup();
@@ -549,6 +555,7 @@ namespace WeAreGladiators
 
             // Hide combat UI + Popup Modals
             TopBarController.Instance.HideCombatTopBar();
+            CombatLogController.Instance.HideLog();
             CombatUIController.Instance.HideViewsOnTurnEnd();
             LevelController.Instance.HideTileInfoPopup();
             AbilityController.Instance.HideHitChancePopup();
@@ -637,6 +644,7 @@ namespace WeAreGladiators
             TurnController.Instance.DestroyAllActivationWindows();
 
             // Hide combat UI + Popup Modals
+            CombatLogController.Instance.HideLog();
             TopBarController.Instance.HideCombatTopBar();
             CombatUIController.Instance.HideViewsOnTurnEnd();
             LevelController.Instance.HideTileInfoPopup();
@@ -789,6 +797,7 @@ namespace WeAreGladiators
                 TurnController.Instance.DestroyAllActivationWindows();
 
                 // Hide combat UI
+                CombatLogController.Instance.HideLog();
                 CombatUIController.Instance.HideViewsOnTurnEnd();
                 LevelController.Instance.HandleTearDownAllCombatViews();
                 LightController.Instance.EnableStandardGlobalLight();
@@ -886,6 +895,7 @@ namespace WeAreGladiators
                 else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatStart)
                 {
                     TopBarController.Instance.ShowCombatTopBar();
+                    CombatLogController.Instance.ShowLog();
                     SetGameState(GameState.CombatActive);
                     LevelController.Instance.GenerateLevelNodes(RunController.Instance.CurrentCombatMapData);
 
@@ -922,6 +932,7 @@ namespace WeAreGladiators
                 {
                     SetGameState(GameState.CombatRewardPhase);
                     TopBarController.Instance.ShowCombatTopBar();
+                    CombatLogController.Instance.HideLog();
 
                     // Set up combat level views + lighting
                     LightController.Instance.EnableDayTimeGlobalLight();
@@ -957,12 +968,13 @@ namespace WeAreGladiators
                 AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
                 AudioManager.Instance.FadeInSound(Sound.Ambience_Crowd_1, 1f);
 
-                // Hide down town views
+                // Hide town views
                 BlackScreenController.Instance.FadeInScreen(1f);
                 TownController.Instance.HideTownView();
                 TownController.Instance.HideDeploymentPage();
                 CharacterScrollPanelController.Instance.HideMainView();
                 TopBarController.Instance.ShowCombatTopBar();
+                CombatLogController.Instance.ShowLog();
                 BoonController.Instance.HideBoonIconsPanel();
                 SetGameState(GameState.CombatActive);
 

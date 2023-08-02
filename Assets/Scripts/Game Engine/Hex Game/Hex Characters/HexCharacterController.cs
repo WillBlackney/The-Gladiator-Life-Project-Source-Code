@@ -24,6 +24,7 @@ using Sirenix.Utilities;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine.TextCore.Text;
+using WeAreGladiators.CombatLog;
 
 namespace WeAreGladiators.Characters
 {
@@ -1776,6 +1777,10 @@ namespace WeAreGladiators.Characters
             // Cache refs for visual events
             HexCharacterView view = character.hexCharacterView;
             VisualEventManager.CreateVisualEvent(() => LevelNode.HideActivationMarkers());
+
+            // Update combat log
+            if (firstTimeDelay) CombatLogController.Instance.CreateCharacterTurnDelayEntry(character);
+            else CombatLogController.Instance.CreateCharacterTurnEndEntry(character);
 
             // Disable info windows
             if (character.controller == Controller.Player)

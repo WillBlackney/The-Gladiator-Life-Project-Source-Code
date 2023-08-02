@@ -17,6 +17,7 @@ using WeAreGladiators.Audio;
 using DG.Tweening;
 using WeAreGladiators.CameraSystems;
 using WeAreGladiators.Scoring;
+using WeAreGladiators.CombatLog;
 
 namespace WeAreGladiators.Combat
 {
@@ -832,13 +833,15 @@ namespace WeAreGladiators.Combat
             HitRollResult result;
             int hitRoll = RandomGenerator.NumberBetween(1, 100);
             var hitData = GetHitChance(attacker, target, ability, weaponUsed);
+            int requiredRoll = hitData.FinalHitChance;
+            if (hitData.guaranteedHit) requiredRoll = 100;
 
-            if (hitRoll <= hitData.FinalHitChance || hitData.guaranteedHit)
+            if (hitRoll <= requiredRoll)
                 result = HitRollResult.Hit;
             else
                 result = HitRollResult.Miss;
 
-            HitRoll rollReturned = new HitRoll(hitRoll, result, attacker, target);
+            HitRoll rollReturned = new HitRoll(hitRoll, requiredRoll, result, attacker, target);
 
             return rollReturned;
         }
@@ -1259,6 +1262,9 @@ namespace WeAreGladiators.Combat
                 damageResult.totalHealthLost = 0;
                 removedBarrier = true;
             }
+
+            // Combat log entry for damage result
+            if(totalArmourLost > 0 || totalHealthLost > 0) CombatLogController.Instance.CreateCharacterDamageEntry(target, totalHealthLost, totalArmourLost);
 
             // Set crit result
             bool didCrit = false;
@@ -1848,18 +1854,21 @@ namespace WeAreGladiators.Combat
     public class HitRoll
     {
         int roll;
+        int requiredRoll;
         HitRollResult result;
         HexCharacterModel attacker;
         HexCharacterModel target;
 
         public int Roll { get { return roll; } }
+        public int RequiredRoll { get { return requiredRoll; } }
         public HitRollResult Result { get { return result; } }
         public HexCharacterModel Attacker { get { return attacker; } }
         public HexCharacterModel Target { get { return target; } }
 
-        public HitRoll(int roll, HitRollResult result, HexCharacterModel attacker, HexCharacterModel target)
+        public HitRoll(int roll, int required, HitRollResult result, HexCharacterModel attacker, HexCharacterModel target)
         {
             this.roll = roll;
+            this.requiredRoll = required;
             this.result = result;
             this.attacker = attacker;
             this.target = target;

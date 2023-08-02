@@ -18,6 +18,7 @@ using System;
 using WeAreGladiators.Items;
 using WeAreGladiators.Audio;
 using UnityEngine.TextCore.Text;
+using WeAreGladiators.CombatLog;
 
 namespace WeAreGladiators.Abilities
 {
@@ -312,9 +313,11 @@ namespace WeAreGladiators.Abilities
         #region     
         public void UseAbility(HexCharacterModel character, AbilityData ability, HexCharacterModel target = null, LevelNode tileTarget = null)
         {
+            CombatLogController.Instance.CreateCharacterUsedAbilityEntry(character, ability, target);
+
             // Status effect for enemies + AI characters
-            if(character.controller == Controller.AI)
-            {
+            if (character.controller == Controller.AI)
+            {                
                 HexCharacterView view = character.hexCharacterView;
                 VisualEventManager.CreateVisualEvent(() =>
                 VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, ability.abilityName, ability.AbilitySprite, StatusFrameType.SquareBrown)).SetEndDelay(1f);
@@ -492,6 +495,8 @@ namespace WeAreGladiators.Abilities
                 HitRoll hitResult = CombatController.Instance.RollForHit(caster, target, ability, weaponUsed);
                 bool didCrit = CombatController.Instance.RollForCrit(caster, target, ability, abilityEffect);
 
+                CombatLogController.Instance.CreateCharacterHitResultEntry(caster, target, hitResult, didCrit);
+
                 if (hitResult.Result == HitRollResult.Hit)
                 {
                     // Gain 5 fatigue from being hit.
@@ -657,7 +662,7 @@ namespace WeAreGladiators.Abilities
                 triggerEffectEndEvents = false;
                 List<LevelNode> tilesEffected = new List<LevelNode>();
                 List<HexCharacterModel> charactersEffected = new List<HexCharacterModel>();
-                List<HexCharacterModel> charactersHit = new List<HexCharacterModel>();
+                Dictionary<HexCharacterModel, HitRoll> charactersHit = new Dictionary<HexCharacterModel, HitRoll>();
 
                 // Get Aoe Area
                 if (abilityEffect.aoeType == AoeType.Aura) tilesEffected = HexCharacterController.Instance.GetCharacterAura(caster, true);
@@ -730,7 +735,7 @@ namespace WeAreGladiators.Abilities
 
                     if (hitRoll.Result == HitRollResult.Hit)
                     {
-                        charactersHit.Add(character);
+                        charactersHit.Add(character, hitRoll);
 
                         // Gain 5 fatigue from being hit.
                         HexCharacterController.Instance.ModifyCurrentFatigue(character, 5);
@@ -744,6 +749,8 @@ namespace WeAreGladiators.Abilities
                     }
                     else if (hitRoll.Result == HitRollResult.Miss)
                     {
+                        CombatLogController.Instance.CreateCharacterHitResultEntry(caster, character, hitRoll);
+
                         // Gain 1 fatigue for dodging.
                         HexCharacterController.Instance.ModifyCurrentFatigue(character, 2);
 
@@ -773,29 +780,31 @@ namespace WeAreGladiators.Abilities
                 }
 
                 // Calcuate and deal damage
-                foreach (HexCharacterModel character in charactersHit)
+                foreach (var character in charactersHit)
                 {
-                    bool didCrit = CombatController.Instance.RollForCrit(caster, character, ability, abilityEffect);
+                    bool didCrit = CombatController.Instance.RollForCrit(caster, character.Key, ability, abilityEffect);
                     DamageResult dResult = null;
-                    dResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(caster, character, ability, abilityEffect, didCrit);
-                    dResult.didCrit = didCrit;                                      
+                    dResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(caster, character.Key, ability, abilityEffect, didCrit);
+                    dResult.didCrit = didCrit;
+
+                    CombatLogController.Instance.CreateCharacterHitResultEntry(caster, character.Key, character.Value, didCrit);
 
                     // Resolve bonus armour damage
                     if (abilityEffect.bonusArmourDamage > 0)
                         HexCharacterController.Instance.ModifyArmour(target, -abilityEffect.bonusArmourDamage);
 
                     // Deal damage
-                    CombatController.Instance.HandleDamage(caster, character, dResult, ability, abilityEffect, weaponUsed, false, character.GetLastStackEventParent());
+                    CombatController.Instance.HandleDamage(caster, character.Key, dResult, ability, abilityEffect, weaponUsed, false, character.Key.GetLastStackEventParent());
 
                     // On ability effect completed VFX
                     if (CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
                         caster.livingState == LivingState.Alive)
                     {
-                        if (character != null && character.livingState == LivingState.Alive)
+                        if (character.Key != null && character.Key.livingState == LivingState.Alive)
                         {
                             foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnEffectFinish)
                             {
-                                AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, weaponUsed, character.GetLastStackEventParent());
+                                AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character.Key, null, weaponUsed, character.Key.GetLastStackEventParent());
                             }
                         }
                     }
@@ -811,14 +820,14 @@ namespace WeAreGladiators.Abilities
                     {
                         foreach (AbilityEffect e in ability.onCritEffects)
                         {
-                            TriggerAbilityEffect(ability, e, caster, character, tileTarget);
+                            TriggerAbilityEffect(ability, e, caster, character.Key, tileTarget);
                         }
                     }
                     else
                     {
                         foreach (AbilityEffect e in ability.onHitEffects)
                         {
-                            TriggerAbilityEffect(ability, e, caster, character, tileTarget);
+                            TriggerAbilityEffect(ability, e, caster, character.Key, tileTarget);
                         }
                     }
                 }

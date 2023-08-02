@@ -15,12 +15,12 @@ using WeAreGladiators.UCM;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Perks;
 using UnityEngine.TextCore.Text;
+using WeAreGladiators.CombatLog;
 
 namespace WeAreGladiators.TurnLogic
 {
     public class TurnController : Singleton<TurnController>
     {
-
         #region Properties + Component References
         [Header("Component References")]
         [SerializeField] private GameObject windowStartPos;
@@ -245,6 +245,7 @@ namespace WeAreGladiators.TurnLogic
             VisualEventManager.CreateVisualEvent(() => UpdateWindowPositions(cachedOrder)).SetEndDelay(1);
 
             // Play turn change notification
+            CombatLogController.Instance.CreateTurnCycleStartEntry();
             TaskTracker turnNotificationCoroutine = new TaskTracker();
             VisualEventManager.CreateVisualEvent(() => DisplayTurnChangeNotification(turnNotificationCoroutine)).SetCoroutineData(turnNotificationCoroutine);
             
@@ -389,6 +390,7 @@ namespace WeAreGladiators.TurnLogic
 
             // Move arrow to point at activated enemy
             GameObject panelSlot = panelSlots[activationOrder.IndexOf(cachedEntityRef)];
+            CombatLogController.Instance.CreateCharacterTurnStartEntry(cachedEntityRef);
             VisualEventManager.CreateVisualEvent(() => MoveActivationArrowTowardsEntityWindow(cachedEntityRef, panelSlot));
 
             // Start character activation
@@ -463,8 +465,7 @@ namespace WeAreGladiators.TurnLogic
         }
         #endregion
 
-        // Visual Events
-        #region
+        #region Visual Events
 
         // Number roll sequence visual events
         #region
@@ -791,7 +792,7 @@ namespace WeAreGladiators.TurnLogic
         }
         #endregion
 
-        #endregion
+        #endregion Visual Events
 
     }
 }
