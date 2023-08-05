@@ -302,8 +302,7 @@ namespace WeAreGladiators
             TurnController.Instance.OnNewCombatEventStarted();
 
             // Create mock scoring data
-            PlayerScoreTracker scoreData = ScoreController.Instance.CurrentScoreData;
-            ScoreController.Instance.GenerateMockScoreData();
+            //ScoreController.Instance.GenerateMockScoreData();
 
             ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Weapon).ForEach(i => 
                 InventoryController.Instance.AddItemToInventory(i));

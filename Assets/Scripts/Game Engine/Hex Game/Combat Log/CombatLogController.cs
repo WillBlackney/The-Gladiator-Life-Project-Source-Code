@@ -213,6 +213,75 @@ namespace WeAreGladiators.CombatLog
             string armourText = TextLogic.ReturnColoredText(armourDamage.ToString(), TextLogic.blueNumber);
             CreateNewEntry(tookDamage, casterNameText + " took " + totalDamageText + " damage (" + healthText + " to " + healthNameText + ", " + armourText + " to " + armourNameText + ").");
         }
+        public void CreateCharacterDiedEntry(HexCharacterModel character, DeathRollResult result)
+        {
+            string col = TextLogic.lightGreen;
+            if (character.allegiance == Allegiance.Enemy) col = TextLogic.lightRed;
+            string nameText = TextLogic.ReturnColoredText(character.myName, col);
+
+            if(result != null)
+            {
+                string rollText = TextLogic.ReturnColoredText(result.roll.ToString(), TextLogic.blueNumber);
+                string requiredText = TextLogic.ReturnColoredText(result.required.ToString(), TextLogic.blueNumber);
+                CreateNewEntry(death, nameText + " was killed (rolled " + rollText + ", required " + requiredText + " or less to survive).");
+
+            }
+            else CreateNewEntry(death, nameText + " was killed.");
+        }
+        public void CreatePermanentInjuryEntry(HexCharacterModel character, DeathRollResult result, string injuryName)
+        {
+            string col = TextLogic.lightGreen;
+            if (character.allegiance == Allegiance.Enemy) col = TextLogic.lightRed;
+            string nameText = TextLogic.ReturnColoredText(character.myName, col);
+            string injuryText = TextLogic.ReturnColoredText(injuryName, TextLogic.neutralYellow);
+
+            if (result != null)
+            {
+                string rollText = TextLogic.ReturnColoredText(result.roll.ToString(), TextLogic.blueNumber);
+                string requiredText = TextLogic.ReturnColoredText(result.required.ToString(), TextLogic.blueNumber);
+                CreateNewEntry(death, nameText + " survived a killing blow and suffered a permanent injury: " + injuryText + " (rolled " + rollText + ", required " + requiredText + " or less to survive).");
+
+            }
+            else CreateNewEntry(death, nameText + " was killed.");
+        }
+        public void CreateInjuryEntry(HexCharacterModel character, string injuryName, int roll, int required)
+        {
+            string col = TextLogic.lightGreen;
+            if (character.allegiance == Allegiance.Enemy) col = TextLogic.lightRed;
+            string nameText = TextLogic.ReturnColoredText(character.myName, col);
+            string injuryText = TextLogic.ReturnColoredText(injuryName, TextLogic.neutralYellow);
+            string rollText = TextLogic.ReturnColoredText(roll.ToString(), TextLogic.blueNumber);
+            string requiredText = TextLogic.ReturnColoredText(required.ToString(), TextLogic.blueNumber);
+            CreateNewEntry(gainedInjury, nameText + " suffered an injury: " + injuryText + " (rolled " + rollText + ", required more than " + requiredText + " to resist).");
+
+        }
+        public void CreateStressStateChangedEntry(HexCharacterModel character, string stressStateName)
+        {
+            string col = TextLogic.lightGreen;
+            if (character.allegiance == Allegiance.Enemy) col = TextLogic.lightRed;
+            string nameText = TextLogic.ReturnColoredText(character.myName, col);
+            string stressText = TextLogic.ReturnColoredText(stressStateName, TextLogic.neutralYellow);
+            CreateNewEntry(stressStateChanged, nameText + " is now " + stressStateName + ".");
+        }
+        public void CreateCharacterGainedPassive(HexCharacterModel target, HexCharacterModel applier, int stacks, string passiveName)
+        {
+            string stacksText = TextLogic.ReturnColoredText(stacks.ToString(), TextLogic.blueNumber);
+            string tCol = TextLogic.lightGreen;
+            if (target.allegiance == Allegiance.Enemy) tCol = TextLogic.lightRed;
+            string tNameText = TextLogic.ReturnColoredText(target.myName, tCol);
+
+            string applCol = TextLogic.lightGreen;
+            string appNameText = "";
+            if (applier != null)
+            {
+                if (applier.allegiance == Allegiance.Enemy) applCol = TextLogic.lightRed;
+                appNameText = TextLogic.ReturnColoredText(applier.myName, applCol);
+            }
+
+            string passiveNameText = TextLogic.ReturnColoredText(passiveName, TextLogic.neutralYellow);
+            if (applier == null) CreateNewEntry(gainedPositivePassive, tNameText + " gained " + stacksText + " " + passiveNameText + ".");
+            else CreateNewEntry(gainedPositivePassive, tNameText + " gained " + stacksText + " " + passiveNameText + " from " + appNameText + ".");
+        }
         #endregion
 
 

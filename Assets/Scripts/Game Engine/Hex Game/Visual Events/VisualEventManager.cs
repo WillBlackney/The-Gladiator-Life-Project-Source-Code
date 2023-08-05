@@ -212,6 +212,7 @@ namespace WeAreGladiators.VisualEvents
         {
             if (VisualEventUpdater.Instance != null) return;
             GameObject go = new GameObject();
+            go.name = "Visual Event Updater";
             go.AddComponent<VisualEventUpdater>();
             GameObject.DontDestroyOnLoad(go);
         }

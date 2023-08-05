@@ -552,6 +552,8 @@ namespace WeAreGladiators.Combat
                         PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, injuryGained.perkTag, injuryStacks, true, 1f);
                         VisualEventManager.InsertTimeDelayInQueue(0.5f, character.GetLastStackEventParent());
 
+                        CombatLogController.Instance.CreateInjuryEntry(character, injuryGained.passiveName, (int) (roll * 0.1f), (int) (injuryChanceActual * 0.1f));
+
                         // In case injury affects max health or max fatigue, update current health and current fatigue                   
                         HexCharacterController.Instance.ModifyMaxHealth(character, 0);
                         HexCharacterController.Instance.ModifyCurrentFatigue(character, 0);
@@ -1618,6 +1620,7 @@ namespace WeAreGladiators.Combat
             DeathRollResult ret = new DeathRollResult();
             int resistance = StatCalculator.GetTotalDeathResistance(c);
             ret.roll = RandomGenerator.NumberBetween(1, 100);
+            ret.required = resistance;
             if (ret.roll <= resistance) ret.pass = true;
             else ret.pass = false;
 
@@ -1725,11 +1728,17 @@ namespace WeAreGladiators.Combat
 
                     // Move health to 1 (since 0 is invalid and they're not dead)
                     CharacterDataController.Instance.SetCharacterHealth(character.characterData, 1);
+                    CombatLogController.Instance.CreatePermanentInjuryEntry(character, result, TextLogic.SplitByCapitals(permInjury.passiveName));
                 }
                 else
                 {
                     CharacterDataController.Instance.RemoveCharacterFromRoster(character.characterData);
+                    CombatLogController.Instance.CreateCharacterDiedEntry(character, result);
                 }
+            }
+            else
+            {
+                CombatLogController.Instance.CreateCharacterDiedEntry(character, null);
             }
 
             // Break references
@@ -1906,6 +1915,7 @@ namespace WeAreGladiators.Combat
     {
         public int roll;
         public bool pass;
+        public int required;
     }
     
 }

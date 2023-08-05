@@ -29,7 +29,7 @@ namespace WeAreGladiators.LoadingScreen
         protected override void Awake()
         {
             base.Awake();
-            DOVirtual.DelayedCall(4f, () =>
+            DelayUtils.DelayedCall(4f, () =>
             {
                 if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
                 {

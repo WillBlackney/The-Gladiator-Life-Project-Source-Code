@@ -9,6 +9,7 @@ using WeAreGladiators.Items;
 using System.Linq;
 using DG.Tweening;
 using WeAreGladiators.Scoring;
+using WeAreGladiators.CombatLog;
 
 namespace WeAreGladiators.Perks
 {
@@ -409,7 +410,7 @@ namespace WeAreGladiators.Perks
             {
                 if(DoesCharacterHavePerk(pManager, ptag) && stacks > 0)
                 {
-                    Debug.Log("ModifyPerkOnCharacterEntity() cancelling application of " + perkName +" as it is blocked by " + TextLogic.SplitByCapitals(ptag.ToString()));
+                    Debug.Log("ModifyPerkOnCharacterEntity() cancelling application of " + perkName + " as it is blocked by " + TextLogic.SplitByCapitals(ptag.ToString()));
                     VisualEventManager.CreateVisualEvent(() =>
                     VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "IMMUNE!", perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
                     return false;
@@ -452,12 +453,13 @@ namespace WeAreGladiators.Perks
             {
                 if (character != null &&                    
                     ShouldResistanceBlockThisPassiveApplication(perkData, stacks) &&
-                    CombatController.Instance.RollForDebuffResist(applyingCharacter, character, perkData) == true
-                    )
+                    CombatController.Instance.RollForDebuffResist(applyingCharacter, character, perkData) == true)
                 {
+                    
                     // Character resisted the debuff, cancel the rest of this function and do resist VFX
                     if (showVFX)
                     {
+                        // Combat log: resist!
                         VisualEventManager.CreateVisualEvent(() =>
                         VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "RESISTED!", perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
                         return false;
@@ -492,14 +494,13 @@ namespace WeAreGladiators.Perks
             int maxAllowedStacks = perkData.maxAllowedStacks;
             int currentStacks = GetStackCountOfPerkOnCharacter(pManager, perk);
             int overflowStacks = (currentStacks + stacksAppliedActual) - maxAllowedStacks;
-            if (overflowStacks > 0)
-            {
-                stacksAppliedActual -= overflowStacks;
-            }
+            if (overflowStacks > 0) stacksAppliedActual -= overflowStacks;            
 
             // Add the new perk to the perk manager model's perk list, or increment stack count if it is already contained ithin the list.
             HandleApplyActivePerk(pManager, perk, stacksAppliedActual);
-            int newFinalStackcount = GetStackCountOfPerkOnCharacter(pManager, perk); 
+            int newFinalStackcount = GetStackCountOfPerkOnCharacter(pManager, perk);
+
+            if(showVFX && !perkData.isInjury && !perkData.isPermanentInjury) CombatLogController.Instance.CreateCharacterGainedPassive(pManager.myCharacterEntity, applier?.myCharacterEntity, stacksAppliedActual, perkName);
 
             // Visual Events
             if (character != null)

@@ -53,7 +53,7 @@ namespace WeAreGladiators.UI
             // Initial animation
             messageText.text = message;
             messageText.DOColor(textEndColor, 0.15f).SetLoops(6, LoopType.Yoyo);
-            movementParent.DOMove(onScreenPosition.position, showSpeed);
+            movementParent.DOMove(onScreenPosition.position, showSpeed).SetEase(showEase);
             cg.DOFade(1f, showSpeed * 0.75f);
 
             // Pause for a bit

@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Console
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 110
+  controlID: 6605
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,12 +139,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1278
+    width: 1328
     height: 939
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 111
+  controlID: 6606
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,12 +165,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1278
-    height: 590
+    width: 1328
+    height: 496
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 112
+  controlID: 6607
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -188,8 +188,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 249
-    height: 590
+    width: 417
+    height: 496
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
@@ -212,10 +212,10 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 249
+    x: 417
     y: 0
-    width: 786
-    height: 590
+    width: 538
+    height: 496
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
@@ -238,10 +238,10 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1035
+    x: 955
     y: 0
-    width: 243
-    height: 590
+    width: 373
+    height: 496
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
@@ -250,7 +250,7 @@ MonoBehaviour:
   - {fileID: 16}
   - {fileID: 17}
   m_Selected: 0
-  m_LastSelected: 1
+  m_LastSelected: 2
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -261,24 +261,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 590
-    width: 1278
-    height: 349
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 19}
+    y: 496
+    width: 1328
+    height: 443
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
   - {fileID: 19}
   - {fileID: 20}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -289,23 +289,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: TestRunnerWindow
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1278
+    x: 1328
     y: 0
-    width: 642
+    width: 592
     height: 939
-  m_MinSize: {x: 100, y: 100}
+  m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 22}
+  m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
   - {fileID: 22}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -327,10 +327,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1035
+    x: 955
     y: 73
-    width: 241
-    height: 569
+    width: 371
+    height: 475
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 241, y: 136}
+  m_TargetSize: {x: 371, y: 209}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -357,10 +357,10 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -120.5
-    m_HBaseRangeMax: 120.5
-    m_VBaseRangeMin: -68
-    m_VBaseRangeMax: 68
+    m_HBaseRangeMin: -185.5
+    m_HBaseRangeMax: 185.5
+    m_VBaseRangeMin: -104.5
+    m_VBaseRangeMax: 104.5
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -378,23 +378,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 241
-      height: 548
+      width: 371
+      height: 454
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 120.5, y: 274}
+    m_Translation: {x: 185.5, y: 227}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -120.5
-      y: -274
-      width: 241
-      height: 548
+      x: -185.5
+      y: -227
+      width: 371
+      height: 454
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 241, y: 569}
+  m_LastWindowPixelSize: {x: 371, y: 475}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -423,8 +423,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 248
-    height: 569
+    width: 416
+    height: 475
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -433,9 +433,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: dcb093ff80b193ff42ae99ffa2239fff46249fff36f0dbff3266e1ffd666e1ff5884faff28fbffff
+      m_SelectedIDs: 04007bff
+      m_LastClickedID: -8716284
+      m_ExpandedIDs: c6ff7affe2ff7afffeff7aff04007bfffe3080ffa23180ffe07cfaff28fbfffff4ffffff96db0a00b6e40a00
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -480,10 +480,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 249
+    x: 417
     y: 73
-    width: 784
-    height: 569
+    width: 536
+    height: 475
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -853,7 +853,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 346658
+  m_LastSelectedObjectID: -8716284
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -944,9 +944,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 663
-    width: 1479
-    height: 328
+    y: 569
+    width: 1327
+    height: 422
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -974,16 +974,16 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 663
-    width: 1277
-    height: 328
+    y: 519
+    width: 1327
+    height: 472
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
   m_SearchFilter:
-    m_NameFilter: init
+    m_NameFilter: visual ev
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -995,22 +995,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Game Engine/Hex Game/Scoring
+    - Assets/Tests/Play Mode
     m_Globs: []
-    m_OriginalText: init
+    m_OriginalText: visual ev
   m_ViewMode: 1
   m_StartGridSize: 88
   m_LastFolders:
-  - Assets/Scripts/Game Engine/Hex Game/Scoring
+  - Assets/Tests/Play Mode
   m_LastFoldersGridSize: 88
   m_LastProjectPath: C:\Users\willi\Desktop\Unity Projects\The-Gladiator-Life-Project-Source-Code
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 495}
-    m_SelectedIDs: 8e830400
-    m_LastClickedID: 295822
-    m_ExpandedIDs: 000000001628020082830400908304009283040000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 202f0200
+    m_LastClickedID: 143136
+    m_ExpandedIDs: 000000001628020000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1038,7 +1038,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000016280200
+    m_ExpandedIDs: 000000001628020000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c623000026650600c6c9000072630000ea250100f02501005c2801006e630000626300008c2602000000000000110100e8d990008ed80100d6120100720f0100f2120100de110100ec110100801301003631020076130100ca0f010046130100c8110100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1144,9 +1144,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1480
+    x: 1328
     y: 73
-    width: 439
+    width: 591
     height: 918
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1186,9 +1186,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1278
+    x: 1328
     y: 73
-    width: 641
+    width: 591
     height: 918
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1196,7 +1196,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_Spl:
-    ID: 414
+    ID: 155
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes:
@@ -1227,9 +1227,9 @@ MonoBehaviour:
       uniqueId: '[We Are Gladiators][suite]'
       name: We Are Gladiators
       fullName: We Are Gladiators
-      resultStatus: 2
-      duration: 9.0671625
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 61.736042
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1243,9 +1243,9 @@ MonoBehaviour:
       uniqueId: '[PlayMode.dll][suite]'
       name: PlayMode.dll
       fullName: C:/Users/willi/Desktop/Unity Projects/The-Gladiator-Life-Project-Source-Code/Library/ScriptAssemblies/PlayMode.dll
-      resultStatus: 2
-      duration: 8.505637
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 61.450172
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1259,9 +1259,9 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/[PlayMode][Tests][suite]
       name: Tests
       fullName: Tests
-      resultStatus: 2
-      duration: 8.48371
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 61.429214
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1276,7 +1276,7 @@ MonoBehaviour:
       name: Combat_Controller_Tests
       fullName: Tests.Combat_Controller_Tests
       resultStatus: 1
-      duration: 45.873005
+      duration: 18.498255
       messages: 
       output: 
       stacktrace: 
@@ -1292,7 +1292,7 @@ MonoBehaviour:
       name: Enemy_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character
       fullName: Tests.Combat_Controller_Tests.Enemy_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character
       resultStatus: 1
-      duration: 14.30772
+      duration: 4.5569887
       messages: 
       output: 'The referenced script (Unknown) on this Behaviour is missing!
 
@@ -1319,7 +1319,7 @@ MonoBehaviour:
       name: Handle_Damage_Correctly_Sets_Death_State_When_Health_Reaches_0
       fullName: Tests.Combat_Controller_Tests.Handle_Damage_Correctly_Sets_Death_State_When_Health_Reaches_0
       resultStatus: 1
-      duration: 7.6840696
+      duration: 2.7606196
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1341,7 +1341,7 @@ MonoBehaviour:
       name: Last_Enemy_Character_Death_Does_Trigger_Victory_Event
       fullName: Tests.Combat_Controller_Tests.Last_Enemy_Character_Death_Does_Trigger_Victory_Event
       resultStatus: 1
-      duration: 7.0001073
+      duration: 2.9838767
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1363,7 +1363,7 @@ MonoBehaviour:
       name: Last_Player_Character_Death_Does_Trigger_Defeat_Event
       fullName: Tests.Combat_Controller_Tests.Last_Player_Character_Death_Does_Trigger_Defeat_Event
       resultStatus: 1
-      duration: 5.7464232
+      duration: 2.780918
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1385,7 +1385,7 @@ MonoBehaviour:
       name: Player_Character_Death_During_Turn_Does_Activate_Next_Character
       fullName: Tests.Combat_Controller_Tests.Player_Character_Death_During_Turn_Does_Activate_Next_Character
       resultStatus: 1
-      duration: 5.575522
+      duration: 2.668342
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1407,7 +1407,7 @@ MonoBehaviour:
       name: Player_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character
       fullName: Tests.Combat_Controller_Tests.Player_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character
       resultStatus: 1
-      duration: 5.5093226
+      duration: 2.7127848
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1429,7 +1429,7 @@ MonoBehaviour:
       name: Hex_Character_Controller_Tests
       fullName: Tests.Hex_Character_Controller_Tests
       resultStatus: 1
-      duration: 19.218426
+      duration: 10.973611
       messages: 
       output: 
       stacktrace: 
@@ -1445,17 +1445,12 @@ MonoBehaviour:
       name: Create_Character_Functions_Correctly_Add_Characters_To_Persistency
       fullName: Tests.Hex_Character_Controller_Tests.Create_Character_Functions_Correctly_Add_Characters_To_Persistency
       resultStatus: 1
-      duration: 6.52155
+      duration: 2.744547
       messages: 
-      output: 'The referenced script (Unknown) on this Behaviour is missing!
-
-        The
-        referenced script on this Behaviour (Game Object ''<null>'') is missing!
-
-        You
-        are trying to create a MonoBehaviour using the ''new'' keyword.  This is
-        not allowed.  MonoBehaviours can only be added using AddComponent(). Alternatively,
-        your script can inherit from ScriptableObject or no base class at all
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
 
 '
       stacktrace: 
@@ -1472,7 +1467,7 @@ MonoBehaviour:
       name: Modify_Health_Cant_Set_Health_Above_Maximum
       fullName: Tests.Hex_Character_Controller_Tests.Modify_Health_Cant_Set_Health_Above_Maximum
       resultStatus: 1
-      duration: 4.4494143
+      duration: 2.740204
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1494,7 +1489,7 @@ MonoBehaviour:
       name: Modify_Health_Cant_Set_Health_Below_Zero
       fullName: Tests.Hex_Character_Controller_Tests.Modify_Health_Cant_Set_Health_Below_Zero
       resultStatus: 1
-      duration: 4.0551357
+      duration: 2.7467244
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1516,7 +1511,7 @@ MonoBehaviour:
       name: Modify_Max_Health_Adjusts_Current_Health_Below_Maximum_If_Maximum_Is_Exceeded
       fullName: Tests.Hex_Character_Controller_Tests.Modify_Max_Health_Adjusts_Current_Health_Below_Maximum_If_Maximum_Is_Exceeded
       resultStatus: 1
-      duration: 4.1626043
+      duration: 2.7108595
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1537,9 +1532,9 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Turn_Controller_Tests][suite]
       name: Turn_Controller_Tests
       fullName: Tests.Turn_Controller_Tests
-      resultStatus: 2
-      duration: 8.472797
-      messages: One or more child tests had errors
+      resultStatus: 1
+      duration: 31.94904
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1554,17 +1549,12 @@ MonoBehaviour:
       name: Cant_Delay_Turn_Twice
       fullName: Tests.Turn_Controller_Tests.Cant_Delay_Turn_Twice
       resultStatus: 1
-      duration: 6.37814
+      duration: 3.830559
       messages: 
-      output: 'The referenced script (Unknown) on this Behaviour is missing!
-
-        The
-        referenced script on this Behaviour (Game Object ''<null>'') is missing!
-
-        You
-        are trying to create a MonoBehaviour using the ''new'' keyword.  This is
-        not allowed.  MonoBehaviours can only be added using AddComponent(). Alternatively,
-        your script can inherit from ScriptableObject or no base class at all
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
 
 '
       stacktrace: 
@@ -1581,7 +1571,7 @@ MonoBehaviour:
       name: Delay_Turn_Action_Correctly_Moves_Entity_To_The_End_Of_Turn_Order
       fullName: Tests.Turn_Controller_Tests.Delay_Turn_Action_Correctly_Moves_Entity_To_The_End_Of_Turn_Order
       resultStatus: 1
-      duration: 4.5369377
+      duration: 2.7956674
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1603,7 +1593,7 @@ MonoBehaviour:
       name: Entity_Can_Take_Delayed_Turn_Later
       fullName: Tests.Turn_Controller_Tests.Entity_Can_Take_Delayed_Turn_Later
       resultStatus: 1
-      duration: 5.8280563
+      duration: 4.766479
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1624,29 +1614,16 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Turn_Controller_Tests/[PlayMode][Tests.Turn_Controller_Tests.Entity_Cant_Delay_Turn_If_It_Is_The_Last_Character_In_The_Activation_Order]
       name: Entity_Cant_Delay_Turn_If_It_Is_The_Last_Character_In_The_Activation_Order
       fullName: Tests.Turn_Controller_Tests.Entity_Cant_Delay_Turn_If_It_Is_The_Last_Character_In_The_Activation_Order
-      resultStatus: 2
-      duration: 8.436402
-      messages: "  Expected: <WeAreGladiators.Characters.HexCharacterModel>\r\n 
-        But was:  <WeAreGladiators.Characters.HexCharacterModel>\r\n"
-      output: 'The referenced script (Unknown) on this Behaviour is missing!
-
-        The
-        referenced script on this Behaviour (Game Object ''<null>'') is missing!
-
-        You
-        are trying to create a MonoBehaviour using the ''new'' keyword.  This is
-        not allowed.  MonoBehaviours can only be added using AddComponent(). Alternatively,
-        your script can inherit from ScriptableObject or no base class at all
+      resultStatus: 1
+      duration: 3.7097056
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
 
 '
-      stacktrace: 'at Tests.Turn_Controller_Tests+<Entity_Cant_Delay_Turn_If_It_Is_The_Last_Character_In_The_Activation_Order>d__17.MoveNext
-        () [0x000b6] in C:\Users\willi\Desktop\Unity Projects\The-Gladiator-Life-Project-Source-Code\Assets\Tests\Play
-        Mode\Turn Controller\Turn_Controller_Tests.cs:283
-
-        at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext
-        () [0x0004e] in C:\Users\willi\Desktop\Unity Projects\The-Gladiator-Life-Project-Source-Code\Library\PackageCache\com.unity.test-framework@1.1.31\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:46
-
-'
+      stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1660,7 +1637,7 @@ MonoBehaviour:
       name: Entity_Does_Gain_On_Combat_Start_Perks
       fullName: Tests.Turn_Controller_Tests.Entity_Does_Gain_On_Combat_Start_Perks
       resultStatus: 1
-      duration: 3.8155575
+      duration: 2.7104619
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1682,7 +1659,7 @@ MonoBehaviour:
       name: Entity_Ending_Turn_Activates_Next_Character_In_Initiative_Queue
       fullName: Tests.Turn_Controller_Tests.Entity_Ending_Turn_Activates_Next_Character_In_Initiative_Queue
       resultStatus: 1
-      duration: 3.7969398
+      duration: 2.7371743
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1704,7 +1681,7 @@ MonoBehaviour:
       name: Entity_Ending_Turn_Cycles_Back_To_First_Character_After_Last_Character_Ends_Turn
       fullName: Tests.Turn_Controller_Tests.Entity_Ending_Turn_Cycles_Back_To_First_Character_After_Last_Character_Ends_Turn
       resultStatus: 1
-      duration: 4.044065
+      duration: 2.8073473
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1726,7 +1703,7 @@ MonoBehaviour:
       name: On_New_Combat_Event_Started_Function_Activates_First_Character_In_Initiative_Queue
       fullName: Tests.Turn_Controller_Tests.On_New_Combat_Event_Started_Function_Activates_First_Character_In_Initiative_Queue
       resultStatus: 1
-      duration: 3.7683554
+      duration: 2.7540298
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1748,7 +1725,7 @@ MonoBehaviour:
       name: Shattered_Characters_Skip_Their_Turn
       fullName: Tests.Turn_Controller_Tests.Shattered_Characters_Skip_Their_Turn
       resultStatus: 1
-      duration: 4.058247
+      duration: 2.948028
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1770,7 +1747,7 @@ MonoBehaviour:
       name: Stunned_Characters_Skip_Their_Turn
       fullName: Tests.Turn_Controller_Tests.Stunned_Characters_Skip_Their_Turn
       resultStatus: 1
-      duration: 4.0145335
+      duration: 2.8617404
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1787,29 +1764,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1008
       parentUniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Turn_Controller_Tests][suite]
-    m_ResultText: "Entity_Cant_Delay_Turn_If_It_Is_The_Last_Character_In_The_Activation_Order
-      (8.436s)\n---\nExpected: <WeAreGladiators.Characters.HexCharacterModel>\r\n 
-      But was:  <WeAreGladiators.Characters.HexCharacterModel>\n---\nat Tests.Turn_Controller_Tests+<Entity_Cant_Delay_Turn_If_It_Is_The_Last_Character_In_The_Activation_Order>d__17.MoveNext
-      () [0x000b6] in C:\\Users\\willi\\Desktop\\Unity Projects\\The-Gladiator-Life-Project-Source-Code\\Assets\\Tests\\Play
-      Mode\\Turn Controller\\Turn_Controller_Tests.cs:283\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext
-      () [0x0004e] in C:\\Users\\willi\\Desktop\\Unity Projects\\The-Gladiator-Life-Project-Source-Code\\Library\\PackageCache\\com.unity.test-framework@1.1.31\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:46\n---\nThe
-      referenced script (Unknown) on this Behaviour is missing!\r\nThe referenced
-      script on this Behaviour (Game Object '<null>') is missing!\r\nYou are trying
-      to create a MonoBehaviour using the 'new' keyword.  This is not allowed.  MonoBehaviours
-      can only be added using AddComponent(). Alternatively, your script can inherit
-      from ScriptableObject or no base class at all"
-    m_ResultStacktrace: 'at Tests.Turn_Controller_Tests+<Entity_Cant_Delay_Turn_If_It_Is_The_Last_Character_In_The_Activation_Order>d__17.MoveNext
-      () [0x000b6] in C:\Users\willi\Desktop\Unity Projects\The-Gladiator-Life-Project-Source-Code\Assets\Tests\Play
-      Mode\Turn Controller\Turn_Controller_Tests.cs:283
-
-      at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext
-      () [0x0004e] in C:\Users\willi\Desktop\Unity Projects\The-Gladiator-Life-Project-Source-Code\Library\PackageCache\com.unity.test-framework@1.1.31\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:46
-
-'
+    m_ResultText: Tests (61.429s)
+    m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 3391ae92
-      m_LastClickedID: -1834053325
+      m_SelectedIDs: bc805a6d
+      m_LastClickedID: 1834647740
       m_ExpandedIDs: 9f5c62b6ee9192d7e234d20cce9d721b4f140c2fbc805a6dffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0

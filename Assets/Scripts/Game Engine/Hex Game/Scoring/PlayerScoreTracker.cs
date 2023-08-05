@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace WeAreGladiators.Scoring
 {
-    public class PlayerScoreTracker : MonoBehaviour
+    public class PlayerScoreTracker
     {
         public int daysPassed;
         public int basicCombatsCompleted;

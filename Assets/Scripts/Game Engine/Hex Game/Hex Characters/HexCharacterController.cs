@@ -693,9 +693,11 @@ namespace WeAreGladiators.Characters
             // Check if there was a change of stress state, up or down
             if(previousStressState != newStressState)
             {
+                CombatLogController.Instance.CreateStressStateChangedEntry(character, newStressState.ToString());
+
                 // Check if shattered
-                if(newStressState == StressState.Shattered && showVFX)
-                {
+                if (newStressState == StressState.Shattered && showVFX)
+                {                    
                     // Notification event
                     VisualEventManager.CreateVisualEvent(() =>
                     {
@@ -703,7 +705,6 @@ namespace WeAreGladiators.Characters
                         view.vfxManager.PlayShattered();
                         PlayShatteredAnimation(view);
                     }).SetStartDelay(0.5f).SetEndDelay(0.5f);
-
                 }
             }
 
