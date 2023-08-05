@@ -13,6 +13,7 @@ namespace WeAreGladiators.Utilities
     /// </summary>
     public static class DelayUtils
     {
+        private class MonoHook : MonoBehaviour { }
         public static void DelayedCall(float delay, Action callback)
         {
             GameObject callerHook = new GameObject();
@@ -22,6 +23,20 @@ namespace WeAreGladiators.Utilities
                 if (callerHook != null) callback.Invoke();
                 GameObject.Destroy(callerHook);
             });
+        }
+        public static void DoNextFrame(Action callback)
+        {
+            GameObject callerHook = new GameObject();
+            callerHook.name = "Next Frame Call Hook";
+            MonoHook mono = callerHook.AddComponent<MonoHook>();
+            mono.StartCoroutine(DoNextFrameCoroutine(callback, callerHook));
+
+        }
+        private static IEnumerator DoNextFrameCoroutine(Action callback, GameObject callerHook)
+        {
+            yield return null;
+            callback.Invoke();
+            GameObject.Destroy(callerHook);
         }
     }
 }

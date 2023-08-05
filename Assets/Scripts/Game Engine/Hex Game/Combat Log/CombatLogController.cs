@@ -19,6 +19,7 @@ namespace WeAreGladiators.CombatLog
         [SerializeField] CombatLogEntryView logEntryViewPrefab;
         [SerializeField] Transform logEntryViewParent;
         [SerializeField] GameObject logContentParent;
+        [SerializeField] ScrollRect logScrollRect;
         [SerializeField] Scrollbar logSlider;
         [SerializeField] List<CombatLogEntryView> allEntryViews = new List<CombatLogEntryView>();
 
@@ -90,9 +91,12 @@ namespace WeAreGladiators.CombatLog
                     if (i >= allEntryViews.Count) CreateNewEntryView();
                     allEntryViews[i].Build(source[i + dataStartIndex]);
                 }
-                logSlider.value = 0f;
-                TransformUtils.RebuildLayout(logEntryViewParent.GetComponent<RectTransform>());
-                logSlider.value = 0f;
+
+                DelayUtils.DoNextFrame(() =>
+                {
+                    TransformUtils.RebuildLayout(logEntryViewParent.GetComponent<RectTransform>());
+                    logScrollRect.verticalNormalizedPosition = 0f;
+                });
             });
             
         }
@@ -279,7 +283,7 @@ namespace WeAreGladiators.CombatLog
             }
 
             string passiveNameText = TextLogic.ReturnColoredText(passiveName, TextLogic.neutralYellow);
-            if (applier == null) CreateNewEntry(gainedPositivePassive, tNameText + " gained " + stacksText + " " + passiveNameText + ".");
+            if (applier == null || applier == target) CreateNewEntry(gainedPositivePassive, tNameText + " gained " + stacksText + " " + passiveNameText + ".");
             else CreateNewEntry(gainedPositivePassive, tNameText + " gained " + stacksText + " " + passiveNameText + " from " + appNameText + ".");
         }
         #endregion
