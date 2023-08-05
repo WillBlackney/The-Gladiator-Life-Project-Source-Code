@@ -23,9 +23,6 @@ namespace Tests
     {
         #region Setup + Data
 
-        // Scene ref
-        private const string SCENE_NAME = "Main_Game_Scene";
-
         // Data
         EnemyEncounterSO enemyEncounterData;
         HexCharacterTemplateSO playerData;
@@ -43,16 +40,20 @@ namespace Tests
         [UnitySetUp]
         public IEnumerator Setup()
         {
-            // Load Scene, wait until completed
-            AsyncOperation loading = SceneManager.LoadSceneAsync(SCENE_NAME);
-            yield return new WaitUntil(() => loading.isDone);
+            TestUtils.CreateGlobalSettings();
 
-            // Setup global settings
-            WeAreGladiators.Utilities.GlobalSettings gs = GameObject.FindObjectOfType<WeAreGladiators.Utilities.GlobalSettings>();
-            gs.SetTestEnvironment();
+            // Load Scene, wait until completed
+            AsyncOperation loading = SceneManager.LoadSceneAsync(TestUtils.SCENE_NAME);
+            yield return new WaitUntil(() => loading.isDone);
 
             // Run!
             GameController.Instance.RunTestEnvironmentCombat(new List<HexCharacterTemplateSO> { playerData }, enemyEncounterData);
+        }
+        [UnityTearDown]
+        public IEnumerator Teardown()
+        {
+            yield return null;
+            TestUtils.TearDownAfterTest();
         }
         #endregion
 

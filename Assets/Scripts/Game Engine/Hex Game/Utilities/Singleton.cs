@@ -27,6 +27,7 @@ namespace WeAreGladiators.Utilities
                 Instance = GetComponent<T>();
                 if (dontDestroyOnLoad)
                 {
+                    transform.SetParent(null);
                     DontDestroyOnLoad(Instance);
                 }
             }

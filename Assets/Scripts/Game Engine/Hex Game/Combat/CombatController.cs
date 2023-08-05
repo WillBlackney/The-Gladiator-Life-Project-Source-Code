@@ -1834,18 +1834,18 @@ namespace WeAreGladiators.Combat
 
             if (encounterData.difficulty == CombatDifficulty.Basic)
             {
-                if (victory) scoreData.oneSkullContractsCompleted += 1;
-                if (victory && charactersKilled.Count == 0) scoreData.oneSkullContractsCompletedWithoutDeath += 1;
+                if (victory) scoreData.basicCombatsCompleted += 1;
+                if (victory && charactersKilled.Count == 0) scoreData.basicCombatsCompletedWithoutDeath += 1;
             }
             else if (encounterData.difficulty == CombatDifficulty.Elite)
             {
-                if (victory) scoreData.twoSkullContractsCompleted += 1;
-                if (victory && charactersKilled.Count == 0) scoreData.twoSkullContractsCompletedWithoutDeath += 1;
+                if (victory) scoreData.eliteCombatsCompleted += 1;
+                if (victory && charactersKilled.Count == 0) scoreData.eliteCombatsCompletedWithoutDeath += 1;
             }
             else if (encounterData.difficulty == CombatDifficulty.Boss)
             {
-                if (victory) scoreData.threeSkullContractsCompleted += 1;
-                if (victory && charactersKilled.Count == 0) scoreData.threeSkullContractsCompletedWithoutDeath += 1;
+                if (victory) scoreData.bossCombatsCompleted += 1;
+                if (victory && charactersKilled.Count == 0) scoreData.bossCombatsCompletedWithoutDeath += 1;
             }
         }
         #endregion

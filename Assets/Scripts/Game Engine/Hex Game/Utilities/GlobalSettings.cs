@@ -143,7 +143,11 @@ namespace WeAreGladiators.Utilities
         protected override void Awake()
         {
             base.Awake();
-            if (enableDebugLogs)
+            SetLogging();
+        }
+        private void SetLogging()
+        {
+            if (enableDebugLogs && Application.isEditor)
                 Debug.unityLogger.logEnabled = true;
             else Debug.unityLogger.logEnabled = false;
         }

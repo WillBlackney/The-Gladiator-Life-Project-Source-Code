@@ -21,8 +21,7 @@ namespace Tests
     public class Turn_Controller_Tests
     {
         #region Setup + Data
-        private const int TEST_TIME_OUT_LIMIT = 10;
-        private const string SCENE_NAME = "Main_Game_Scene";
+        private const int TEST_TIME_OUT_LIMIT = 10;        
         private EnemyEncounterSO enemyEncounterData;
         private HexCharacterTemplateSO playerData;
         private EnemyTemplateSO enemyTemplate;
@@ -38,16 +37,21 @@ namespace Tests
         [UnitySetUp]
         public IEnumerator Setup()
         {
-            // Load Scene, wait until completed
-            AsyncOperation loading = SceneManager.LoadSceneAsync(SCENE_NAME);
-            yield return new WaitUntil(() => loading.isDone);
+            TestUtils.CreateGlobalSettings();
 
-            // Setup global settings
-            WeAreGladiators.Utilities.GlobalSettings gs = GameObject.FindObjectOfType<WeAreGladiators.Utilities.GlobalSettings>();
-            gs.SetTestEnvironment();
+            // Load Scene, wait until completed
+            AsyncOperation loading = SceneManager.LoadSceneAsync(TestUtils.SCENE_NAME);
+            yield return new WaitUntil(() => loading.isDone);
 
             // Run!
             GameController.Instance.RunTestEnvironmentCombat(new List<HexCharacterTemplateSO> { playerData }, enemyEncounterData);
+        }
+
+        [UnityTearDown]
+        public IEnumerator Teardown()
+        {
+            yield return null;
+            TestUtils.TearDownAfterTest();
         }
         #endregion
 

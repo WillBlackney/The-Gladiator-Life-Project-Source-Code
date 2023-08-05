@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -27,6 +26,25 @@ namespace WeAreGladiators.Scoring
         [SerializeField] GameObject contentCompleteWindow;
 
         private PlayerScoreTracker currentScoreData;
+        #endregion
+
+        #region Score Value Constants
+
+        public const int DAYS_PASSED_SCORE = 5;
+        public const int BASIC_COMBAT_VICTORY_SCORE = 5;
+        public const int ELITE_COMBAT_VICTORY_SCORE = 10;
+        public const int BOSS_COMBAT_VICTORY_SCORE = 20;
+        public const int PANACHE_SCORE = 10;
+        public const int GIANT_SLAYER_SCORE = 20;
+        public const int GODLIKE_SCORE = 40;
+        public const int PLAYER_CHARACTERS_KILLED_SCORE = 5;
+        public const int INJURIES_GAINED_SCORE = 2;
+        public const int COMBAT_DEFEATS_SCORE = 10;
+        public const int WELL_ARMED_SCORE = 5;
+        public const int WELL_ARMOURED_SCORE = 5;
+        public const int FATHER_OF_THE_YEAR_SCORE = 20;
+
+
         #endregion
 
         #region Getters + Accessors
@@ -162,59 +180,59 @@ namespace WeAreGladiators.Scoring
 
             if (element == ScoreElementType.DaysPassed)
             {
-                return "Gain " + TextLogic.ReturnColoredText("5", TextLogic.blueNumber) + " for each day passed.";
+                return "Gain " + TextLogic.ReturnColoredText(DAYS_PASSED_SCORE.ToString(), TextLogic.blueNumber) + " for each day passed.";
             }           
             else if (element == ScoreElementType.BasicCombatVictories)
             {
-                return "Gain " + TextLogic.ReturnColoredText("5", TextLogic.blueNumber) + " points for each successfully completed basic arena fight.";
+                return "Gain " + TextLogic.ReturnColoredText(BASIC_COMBAT_VICTORY_SCORE.ToString(), TextLogic.blueNumber) + " points for each successfully completed basic arena fight.";
             }
             else if (element == ScoreElementType.EliteCombatVictories)
             {
-                return "Gain " + TextLogic.ReturnColoredText("10", TextLogic.blueNumber) + " points for each successfully completed elite arena fight.";
+                return "Gain " + TextLogic.ReturnColoredText(ELITE_COMBAT_VICTORY_SCORE.ToString(), TextLogic.blueNumber) + " points for each successfully completed elite arena fight.";
             }
             else if (element == ScoreElementType.BossCombatVictories)
             {
-                return "Gain " + TextLogic.ReturnColoredText("20", TextLogic.blueNumber) + " points for each successfully completed boss arena fight.";
+                return "Gain " + TextLogic.ReturnColoredText(BOSS_COMBAT_VICTORY_SCORE.ToString(), TextLogic.blueNumber) + " points for each successfully completed boss arena fight.";
             }
             else if (element == ScoreElementType.Panache)
             {
-                return "Gain " + TextLogic.ReturnColoredText("10", TextLogic.blueNumber) + " points for each basic arena fight completed without losing a character.";
+                return "Gain " + TextLogic.ReturnColoredText(PANACHE_SCORE.ToString(), TextLogic.blueNumber) + " points for each basic arena fight completed without losing a character.";
             }
             else if (element == ScoreElementType.GiantSlayer)
             {
-                return "Gain " + TextLogic.ReturnColoredText("20", TextLogic.blueNumber) + " points for each elite arena fight completed without losing a character.";
+                return "Gain " + TextLogic.ReturnColoredText(GIANT_SLAYER_SCORE.ToString(), TextLogic.blueNumber) + " points for each elite arena fight completed without losing a character.";
             }
             else if (element == ScoreElementType.Godlike)
             {
-                return "Gain " + TextLogic.ReturnColoredText("40", TextLogic.blueNumber) + " points for each boss arena fight completed without losing a character.";
+                return "Gain " + TextLogic.ReturnColoredText(GODLIKE_SCORE.ToString(), TextLogic.blueNumber) + " points for each boss arena fight completed without losing a character.";
             }
             else if (element == ScoreElementType.WellArmoured)
             {
-                return "Gain " + TextLogic.ReturnColoredText("5", TextLogic.blueNumber) + " points for each item collected with " + TextLogic.ReturnColoredText("150", TextLogic.blueNumber) + " or more " +
+                return "Gain " + TextLogic.ReturnColoredText(WELL_ARMOURED_SCORE.ToString(), TextLogic.blueNumber) + " points for each item collected with " + TextLogic.ReturnColoredText("150", TextLogic.blueNumber) + " or more " +
                     TextLogic.ReturnColoredText("Armour", TextLogic.neutralYellow) + ".";
             }
             else if (element == ScoreElementType.WellArmed)
             {
-                return "Gain " + TextLogic.ReturnColoredText("5", TextLogic.blueNumber) + " points for each epic weapon collected.";
+                return "Gain " + TextLogic.ReturnColoredText(WELL_ARMED_SCORE.ToString(), TextLogic.blueNumber) + " points for each epic weapon collected.";
             }
             else if (element == ScoreElementType.FatherOfTheYear)
             {
-                return "Gain " + TextLogic.ReturnColoredText("20", TextLogic.blueNumber) + " points if 'The Kid' was not killed.";
+                return "Gain " + TextLogic.ReturnColoredText(FATHER_OF_THE_YEAR_SCORE.ToString(), TextLogic.blueNumber) + " points if 'The Kid' was not killed.";
             }
 
             // Penalties
             else if (element == ScoreElementType.InjuriesGained)
             {
-                return "Lose " + TextLogic.ReturnColoredText("2", TextLogic.blueNumber) + " points for every " +
+                return "Lose " + TextLogic.ReturnColoredText(INJURIES_GAINED_SCORE.ToString(), TextLogic.blueNumber) + " points for every " +
                     TextLogic.ReturnColoredText("Injury", TextLogic.neutralYellow) + " gained.";
             }
             else if (element == ScoreElementType.PlayerCharactersKilled)
             {
-                return "Lose " + TextLogic.ReturnColoredText("5", TextLogic.blueNumber) + " points for each of your characters that was killed.";
+                return "Lose " + TextLogic.ReturnColoredText(PLAYER_CHARACTERS_KILLED_SCORE.ToString(), TextLogic.blueNumber) + " points for each of your characters that was killed.";
             }
             else if (element == ScoreElementType.CombatDefeats)
             {
-                return "Lose " + TextLogic.ReturnColoredText("10", TextLogic.blueNumber) + " points for each time you were defeated in combat.";
+                return "Lose " + TextLogic.ReturnColoredText(COMBAT_DEFEATS_SCORE.ToString(), TextLogic.blueNumber) + " points for each time you were defeated in combat.";
             }
 
             return "";
@@ -231,41 +249,41 @@ namespace WeAreGladiators.Scoring
             List<ScoreElementData> scoreElements = new List<ScoreElementData>();
 
             // basics defeated
-            if (scoreData.oneSkullContractsCompleted > 0)
-                scoreElements.Add(new ScoreElementData(scoreData.oneSkullContractsCompleted * 5, ScoreElementType.BasicCombatVictories));
+            if (scoreData.basicCombatsCompleted > 0)
+                scoreElements.Add(new ScoreElementData(scoreData.basicCombatsCompleted * BASIC_COMBAT_VICTORY_SCORE, ScoreElementType.BasicCombatVictories));
 
             // elites defeated
-            if (scoreData.twoSkullContractsCompleted > 0)
-                scoreElements.Add(new ScoreElementData(scoreData.twoSkullContractsCompleted * 10, ScoreElementType.EliteCombatVictories));
+            if (scoreData.eliteCombatsCompleted > 0)
+                scoreElements.Add(new ScoreElementData(scoreData.eliteCombatsCompleted * ELITE_COMBAT_VICTORY_SCORE, ScoreElementType.EliteCombatVictories));
 
             // bosses defeated
-            if (scoreData.threeSkullContractsCompleted > 0)
-                scoreElements.Add(new ScoreElementData(scoreData.threeSkullContractsCompleted * 20, ScoreElementType.BossCombatVictories));
+            if (scoreData.bossCombatsCompleted > 0)
+                scoreElements.Add(new ScoreElementData(scoreData.bossCombatsCompleted * BOSS_COMBAT_VICTORY_SCORE, ScoreElementType.BossCombatVictories));
 
             // basic defeated without losing a character
-            if (scoreData.oneSkullContractsCompletedWithoutDeath > 0)
-                scoreElements.Add(new ScoreElementData(scoreData.oneSkullContractsCompletedWithoutDeath * 10, ScoreElementType.Panache));
+            if (scoreData.basicCombatsCompletedWithoutDeath > 0)
+                scoreElements.Add(new ScoreElementData(scoreData.basicCombatsCompletedWithoutDeath * PANACHE_SCORE, ScoreElementType.Panache));
 
             // elites defeated without losing a character
-            if (scoreData.twoSkullContractsCompletedWithoutDeath > 0)
-                scoreElements.Add(new ScoreElementData(scoreData.twoSkullContractsCompletedWithoutDeath * 20, ScoreElementType.GiantSlayer));
+            if (scoreData.eliteCombatsCompletedWithoutDeath > 0)
+                scoreElements.Add(new ScoreElementData(scoreData.eliteCombatsCompletedWithoutDeath * GIANT_SLAYER_SCORE, ScoreElementType.GiantSlayer));
 
             // bosses defeated without losing a character
-            if (scoreData.threeSkullContractsCompletedWithoutDeath > 0)
-                scoreElements.Add(new ScoreElementData(scoreData.threeSkullContractsCompletedWithoutDeath * 40, ScoreElementType.Godlike));
+            if (scoreData.bossCombatsCompletedWithoutDeath > 0)
+                scoreElements.Add(new ScoreElementData(scoreData.bossCombatsCompletedWithoutDeath * GODLIKE_SCORE, ScoreElementType.Godlike));
 
             // Penalties
             // Injuries
             if (scoreData.injuriesGained > 0)
-                scoreElements.Add(new ScoreElementData(-scoreData.injuriesGained * 2, ScoreElementType.InjuriesGained));
+                scoreElements.Add(new ScoreElementData(-scoreData.injuriesGained * INJURIES_GAINED_SCORE, ScoreElementType.InjuriesGained));
 
             // Characters KIA
             if (scoreData.playerCharactersKilled > 0)
-                scoreElements.Add(new ScoreElementData(-scoreData.playerCharactersKilled * 5, ScoreElementType.PlayerCharactersKilled));
+                scoreElements.Add(new ScoreElementData(-scoreData.playerCharactersKilled * PLAYER_CHARACTERS_KILLED_SCORE, ScoreElementType.PlayerCharactersKilled));
 
             // Combats Lost
             if (scoreData.combatDefeats > 0)
-                scoreElements.Add(new ScoreElementData(-scoreData.combatDefeats * 10, ScoreElementType.CombatDefeats));
+                scoreElements.Add(new ScoreElementData(-scoreData.combatDefeats * COMBAT_DEFEATS_SCORE, ScoreElementType.CombatDefeats));
 
             // CALCULATE SCORING ELEMENTS THAT ONLY OCCUR AT RUN END!
 
@@ -302,7 +320,6 @@ namespace WeAreGladiators.Scoring
         }
         #endregion
 
-
         #region Specific Score Calculators
         private ScoreElementData CalculateWellArmedScore()
         {
@@ -321,8 +338,8 @@ namespace WeAreGladiators.Scoring
 
             foreach(HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
             {
-                if (character.itemSet.mainHandItem != null && character.itemSet.mainHandItem.rarity == Rarity.Epic) score += 5;
-                if (character.itemSet.offHandItem != null && character.itemSet.offHandItem.rarity == Rarity.Epic) score += 5;
+                if (character.itemSet.mainHandItem != null && character.itemSet.mainHandItem.rarity == Rarity.Epic) score += WELL_ARMED_SCORE;
+                if (character.itemSet.offHandItem != null && character.itemSet.offHandItem.rarity == Rarity.Epic) score += WELL_ARMED_SCORE;
             }
 
             return new ScoreElementData(score, ScoreElementType.WellArmed);
@@ -338,7 +355,7 @@ namespace WeAreGladiators.Scoring
                     i.itemData.armourAmount >= 150 &&
                     (i.itemData.itemType == ItemType.Head || i.itemData.itemType == ItemType.Body))
                 {
-                    score += 5;
+                    score += WELL_ARMOURED_SCORE;
                 }
             }
 
@@ -347,12 +364,12 @@ namespace WeAreGladiators.Scoring
                 if (character.itemSet.headArmour != null &&
                     character.itemSet.headArmour.armourAmount >= 150)
                 {
-                    score += 5;
+                    score += WELL_ARMOURED_SCORE;
                 }
                 if (character.itemSet.bodyArmour != null &&
                    character.itemSet.bodyArmour.armourAmount >= 150)
                 {
-                    score += 5;
+                    score += WELL_ARMOURED_SCORE;
                 }
             }
 
@@ -367,7 +384,7 @@ namespace WeAreGladiators.Scoring
             {
                 if(character.background.backgroundType == CharacterBackground.TheKid)
                 {
-                    score += 20;
+                    score += FATHER_OF_THE_YEAR_SCORE;
                     break;
                 }
             }
@@ -377,9 +394,25 @@ namespace WeAreGladiators.Scoring
         private ScoreElementData CalculateDaysPassedScore()
         {
             // Gain +5 score for each day passed
-            int score = RunController.Instance.CurrentDay * 5;           
+            int score = RunController.Instance.CurrentDay * DAYS_PASSED_SCORE;           
 
             return new ScoreElementData(score, ScoreElementType.DaysPassed);
+        }
+        #endregion
+
+        #region Misc Logic
+
+        public void GenerateMockScoreData()
+        {
+            currentScoreData.basicCombatsCompleted += 2;
+            currentScoreData.basicCombatsCompletedWithoutDeath += 2;
+            currentScoreData.eliteCombatsCompleted += 2;
+            currentScoreData.eliteCombatsCompletedWithoutDeath += 2;
+            currentScoreData.bossCombatsCompleted += 2;
+            currentScoreData.bossCombatsCompletedWithoutDeath += 2;
+            currentScoreData.playerCharactersKilled += 2;
+            currentScoreData.injuriesGained += 2;
+            currentScoreData.combatDefeats += 2;
         }
         #endregion
     }

@@ -7,13 +7,13 @@ namespace WeAreGladiators.Scoring
     public class PlayerScoreTracker : MonoBehaviour
     {
         public int daysPassed;
-        public int oneSkullContractsCompleted;
-        public int twoSkullContractsCompleted;
-        public int threeSkullContractsCompleted;
+        public int basicCombatsCompleted;
+        public int eliteCombatsCompleted;
+        public int bossCombatsCompleted;
 
-        public int oneSkullContractsCompletedWithoutDeath;
-        public int twoSkullContractsCompletedWithoutDeath;
-        public int threeSkullContractsCompletedWithoutDeath;
+        public int basicCombatsCompletedWithoutDeath;
+        public int eliteCombatsCompletedWithoutDeath;
+        public int bossCombatsCompletedWithoutDeath;
 
         // Penalties
         public int playerCharactersKilled;
