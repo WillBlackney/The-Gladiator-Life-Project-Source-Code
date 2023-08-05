@@ -11,6 +11,8 @@ namespace WeAreGladiators.Utilities
         #region
         [Header("RGBA Colour Codes")]
         public static string white = "<color=#FFFFFF>";
+        public static string brownBodyText = "<color=#DDC6AB>";
+        public static string orangeHeaderText = "<color=#BC8252>";
         public static string yellow = "<color=#FFF91C>";
         public static string blueNumber = "<color=#92E0FF>";
         public static string neutralYellow = "<color=#F8FF00>";
@@ -68,6 +70,14 @@ namespace WeAreGladiators.Utilities
             else if (color == TextColor.BlueNumber)
             {
                 colorCodeReturned = blueNumber;
+            }
+            else if (color == TextColor.BrownBodyText)
+            {
+                colorCodeReturned = brownBodyText;
+            }
+            else if (color == TextColor.OrangeHeaderText)
+            {
+                colorCodeReturned = orangeHeaderText;
             }
             else if (color == TextColor.White)
             {

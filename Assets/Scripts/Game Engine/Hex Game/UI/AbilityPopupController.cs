@@ -203,7 +203,7 @@ namespace WeAreGladiators.UI
 
             if (data.myCharacter != null)
             {
-                string col = TextLogic.white;
+                string col = TextLogic.brownBodyText;
                 int baseCost = data.fatigueCost;
                 int dynamicCost = AbilityController.Instance.GetAbilityFatigueCost(data.myCharacter, data);
                 if (baseCost > dynamicCost) col = TextLogic.lightGreen;
@@ -258,7 +258,7 @@ namespace WeAreGladiators.UI
             energyCostText.text = data.energyCost.ToString();
             if(data.myCharacter != null)
             {
-                string col = TextLogic.white;
+                string col = TextLogic.brownBodyText;
                 int baseCost = data.energyCost;
                 int dynamicCost = AbilityController.Instance.GetAbilityActionPointCost(data.myCharacter, data);
                 if (baseCost > dynamicCost) col = TextLogic.lightGreen;

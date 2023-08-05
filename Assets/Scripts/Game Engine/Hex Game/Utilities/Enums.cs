@@ -719,7 +719,9 @@ namespace WeAreGladiators
     public enum TextColor
     {
         None = 0,
-        White = 1,
+        White = 13,
+        BrownBodyText = 1,
+        OrangeHeaderText = 14,
         BlueNumber = 2,
         KeyWordYellow = 3,
         PhysicalBrown = 4,

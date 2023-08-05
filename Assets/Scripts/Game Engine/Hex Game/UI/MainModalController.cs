@@ -214,7 +214,7 @@ namespace WeAreGladiators.UI
             TransformUtils.RebuildLayouts(fitters);
             CustomString cs = new CustomString();
             cs.phrase = descriptionText;
-            cs.color = TextColor.White;
+            cs.color = TextColor.BrownBodyText;
             BuildModalContent(headerText, new List<CustomString> { cs }, null, false);
             TransformUtils.RebuildLayouts(fitters);
             shouldRebuild = true;
