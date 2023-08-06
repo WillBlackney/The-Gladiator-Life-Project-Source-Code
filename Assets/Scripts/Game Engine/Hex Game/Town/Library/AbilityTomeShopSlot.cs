@@ -79,8 +79,8 @@ namespace WeAreGladiators.TownFeatures
             abilityBookImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(data.ability.talentRequirementData.talentSchool);
 
             // Color cost text red if not enough gold
-            string col = "<color=#FFFFFF>";
-            if (PlayerDataController.Instance.CurrentGold < data.goldCost) col = TextLogic.lightRed;
+            string col = TextLogic.brownBodyText;
+            if (PlayerDataController.Instance.CurrentGold < data.goldCost) col = TextLogic.redText;
             goldCostText.text = TextLogic.ReturnColoredText(data.goldCost.ToString(), col);
         }
         public void Reset()

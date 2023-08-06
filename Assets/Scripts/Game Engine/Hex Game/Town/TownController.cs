@@ -498,15 +498,12 @@ namespace WeAreGladiators.TownFeatures
         private void UpdateHospitalFeatureCostTexts()
         {
             int playerGold = PlayerDataController.Instance.CurrentGold;
-            bedrestCostText.color = Color.white;
-            surgeryCostText.color = Color.white;
-            therapyCostText.color = Color.white;
-            bedrestCostText.text = HospitalDropSlot.GetFeatureGoldCost(TownActivity.BedRest).ToString();
-            surgeryCostText.text = HospitalDropSlot.GetFeatureGoldCost(TownActivity.Surgery).ToString();
-            therapyCostText.text = HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy).ToString();
-            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.BedRest)) bedrestCostText.color = Color.red;
-            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.Surgery)) surgeryCostText.color = Color.red;
-            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy)) therapyCostText.color = Color.red;
+            bedrestCostText.text = TextLogic.ReturnColoredText(TextLogic.brownBodyText, HospitalDropSlot.GetFeatureGoldCost(TownActivity.BedRest).ToString());
+            surgeryCostText.text = TextLogic.ReturnColoredText(TextLogic.brownBodyText, HospitalDropSlot.GetFeatureGoldCost(TownActivity.Surgery).ToString());
+            therapyCostText.text = TextLogic.ReturnColoredText(TextLogic.brownBodyText, HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy).ToString());
+            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.BedRest)) bedrestCostText.text = TextLogic.ReturnColoredText(TextLogic.redText, HospitalDropSlot.GetFeatureGoldCost(TownActivity.BedRest).ToString());
+            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.Surgery)) surgeryCostText.text = TextLogic.ReturnColoredText(TextLogic.redText, HospitalDropSlot.GetFeatureGoldCost(TownActivity.Surgery).ToString());
+            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy)) therapyCostText.text = TextLogic.ReturnColoredText(TextLogic.redText, HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy).ToString());
         }
         public void HandleApplyHospitalFeaturesOnNewDayStart()
         {
