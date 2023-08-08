@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
+  m_Name: Page 1
+  m_EditorClassIdentifier: 
+  pageSprite: {fileID: 21300000, guid: c75a6b87a3b6b75428adbb16e68e870b, type: 3}
+  pageDescription: "An Inquisition drives through Breedmarsh.\r This time, no Witches
+    are found. Every clue leads to a dead end, but the inquisition continues. Their
+    search eventually leads them outside the walls of Breedmarsh, knee deep in the
+    surrounding swampland. \r\n\r\nAnd thats when the Inquisitors hear the chanting
+    of a cabal of Witches. The swamp begins to bubble around them. Untold, eldritch
+    horrors emerge. Every citizen in Breedmarsh hears the final screams of those
+    inquisitors."
+  onPageLoadEffects: []
+  allChoices:
+  - {fileID: 11400000, guid: e1bf2e58f5eb25e4a86404aed6c74c8b, type: 2}

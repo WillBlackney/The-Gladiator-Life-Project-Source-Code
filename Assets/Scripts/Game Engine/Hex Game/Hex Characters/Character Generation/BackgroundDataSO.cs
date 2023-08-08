@@ -284,7 +284,7 @@ namespace WeAreGladiators.Characters
         Lumberjack = 3,
         Slave = 4,
         Scholar = 5,
-        Zealot = 6,
+        Witch = 6,
         Thief = 7,
         Outlaw = 8,
         Doctor = 9,

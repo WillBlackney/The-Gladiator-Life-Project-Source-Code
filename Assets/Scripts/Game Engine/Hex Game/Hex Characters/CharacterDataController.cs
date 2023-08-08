@@ -402,7 +402,7 @@ namespace WeAreGladiators.Characters
             if (data.currentStress > 20)
                 data.currentStress = 20;
             // Zealots can never reach shattered stress state
-            if (DoesCharacterHaveBackground(data.background, CharacterBackground.Zealot) &&
+            if (DoesCharacterHaveBackground(data.background, CharacterBackground.Witch) &&
                 data.currentStress > 19) data.currentStress = 19;
             else if (data.currentStress < 0)
                 data.currentStress = 0;
@@ -1084,15 +1084,21 @@ namespace WeAreGladiators.Characters
             int itemsCost = ItemController.Instance.GetCharacterItemsGoldValue(character.itemSet);
             cost += levelMod + itemsCost;
 
-            // TO DO IN FUTURE: any special modifiers from boons and world events should be accounte for here
-            if(character.background.backgroundType == CharacterBackground.TournamentKnight &&
-                BoonController.Instance.DoesPlayerHaveBoon(BoonTag.UnemployedKnights))
+            // Check boons
+            if(character.background.backgroundType == CharacterBackground.Gladiator &&
+                BoonController.Instance.DoesPlayerHaveBoon(BoonTag.UnemployedGladiators))
             {
                 cost = (int) (cost * 0.5f);
             }
 
-            if (character.background.backgroundType == CharacterBackground.Inquisitor &&
+            else if (character.background.backgroundType == CharacterBackground.Inquisitor &&
                BoonController.Instance.DoesPlayerHaveBoon(BoonTag.UnemployedInquisitors))
+            {
+                cost = (int)(cost * 0.5f);
+            }
+
+            else if (character.background.backgroundType == CharacterBackground.Witch &&
+              BoonController.Instance.DoesPlayerHaveBoon(BoonTag.WitchAccession))
             {
                 cost = (int)(cost * 0.5f);
             }

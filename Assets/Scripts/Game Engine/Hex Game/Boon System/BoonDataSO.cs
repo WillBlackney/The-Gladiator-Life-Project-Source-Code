@@ -69,8 +69,9 @@ namespace WeAreGladiators.Boons
     {
         None = 0,
         ArmourySurplus = 1,
-        UnemployedKnights = 2,
+        UnemployedGladiators = 2,
         UnemployedInquisitors = 3,
+        WitchAccession = 4,
 
     }
 

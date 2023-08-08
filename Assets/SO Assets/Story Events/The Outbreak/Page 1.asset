@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
   m_Name: Page 1
   m_EditorClassIdentifier: 
-  pageDescription: With the Ulwfe tournament well under way, a rapid rise of visitors
-    to the town has brought with it a cocktail of new germs and diseases, the transmition
-    of which is accelerated most certainly by densely packing together hundreds of
-    people into a small arena. As strong as your gladiators are, they're not immune
-    to the recent outbreaks, and several will require a few days off to recover from
-    their illnesses...
+  pageSprite: {fileID: 21300000, guid: 49d8191d4d61dcb45999dc39469c45de, type: 3}
+  pageDescription: 'The Breedmarsh tournament is well under way. A rapid rise in
+    visitors to the town has brought with it a cocktail of new germs and diseases.
+    The transmition of which is accelerated by thronging multitudes; cheering, spitting,
+    swearing, and embracing.
+
+
+    As strong as your gladiators are, they''re not
+    immune to the new microbes, and several will require a few days off to recover
+    from their illnesses...'
+  onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: 883ff794bff6d284cab011bcc0244b7a, type: 2}
-  pageSprite: {fileID: 21300000, guid: 49d8191d4d61dcb45999dc39469c45de, type: 3}
-  onPageLoadEffects: []

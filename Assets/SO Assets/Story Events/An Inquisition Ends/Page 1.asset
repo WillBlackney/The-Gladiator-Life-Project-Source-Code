@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Page 1
   m_EditorClassIdentifier: 
   pageSprite: {fileID: 21300000, guid: 00adfc874f82e974f98d6613e8dbdd8c, type: 3}
-  pageDescription: A local inquisition into demonic activity has at last reached
-    it's dramatic conclusion. Without any witches left to burn, the local inquisitors
-    are without a job to do...
+  pageDescription: 'A local inquisition into demonic activity has reached it''s dramatic
+    conclusion. All the witches that could be found were taken outside the town walls
+    and tied to trees. The scaled lunkers ate well last night.
+
+
+    Without any
+    witches left to burn, the local inquisitors are without a job to do...'
   onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: f02418534cefa4a448eef9dedced43f3, type: 2}

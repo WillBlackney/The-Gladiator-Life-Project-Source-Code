@@ -12,19 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
   m_Name: Page 2A
   m_EditorClassIdentifier: 
-  pageDescription: "<color=#FFFFFF>\"I want to hunt down and slay wyrms.\"</color>
-    Gormak The Great replies.\n\nYou tell Gormak that he is destined to be dissapointed:
-    the wyrms are all extinct. Without skipping a beat, Gormak jumps to his feet,
-    raises his hands above his head, and flexes his biceps.\n\n<color=#FFFFFF>\"BECAUSE
-    MY BROTHER AND I KILLED THEM ALL! Ha ha HA!\"</color> Gormak proclaims to the
-    jeers and snorts of everyone else in the tavern. \n\n<color=#FFFFFF>\"And so
-    now, without beasts to butcher, I find myself in search of a new challenge. I
-    have heard of you and your feats, and although they are only one millioneth as
-    impressive as my own, they <i>are</i> impressive, espicially for someone as old,
-    poor and stupid as you. Let's join forces together in the arena, eh? For 1000
-    gold, my axe is yours\".</color>"
+  pageSprite: {fileID: 21300000, guid: 8248f8c53e9011a4790795613533c041, type: 3}
+  pageDescription: '<color=#FFFFFF>"I want to hunt down and slay wyrms."</color>
+    Gormak The Great replies.
+
+
+    You tell Gormak that he is destined to be dissapointed:
+    the wyrms are all extinct. Gormak jumps to his feet, raises his hands above his
+    head, and flexes his biceps.
+
+
+    <color=#FFFFFF>"BECAUSE MY BROTHER AND I KILLED
+    THEM ALL! Ha ha HA!"</color> Gormak proclaims to the jeers and snorts of everyone
+    else in the tavern.
+
+
+    <color=#FFFFFF>"And now, without beasts to butcher,
+    I find myself in search of a new challenge. I hear pray tell of your impressive
+    feet...feats. Although they are only one millioneth as impressive as my own,
+    your reputation doth make rumbles. Especially for someone as old, poor, and stupid
+    as you. Let''s join forces together in the arena, eh? For 1000 gold, my axe is
+    yours".</color>'
+  onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: fca7d4a8181d590478005a4cb0f54394, type: 2}
   - {fileID: 11400000, guid: bc4f1e7c67faf2d499526706ed3202ec, type: 2}
-  pageSprite: {fileID: 21300000, guid: 8248f8c53e9011a4790795613533c041, type: 3}
-  onPageLoadEffects: []

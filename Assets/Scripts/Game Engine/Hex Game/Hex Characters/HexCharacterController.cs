@@ -624,7 +624,7 @@ namespace WeAreGladiators.Characters
             if (character.currentStress >= 20 && stressGainedOrLost > 0) return;
 
             // Zealots can never reach shattered stress state
-            if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Zealot) &&
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Witch) &&
                 character.currentStress >= 19 && stressGainedOrLost > 0) return;
 
             // Check courage token
@@ -654,7 +654,7 @@ namespace WeAreGladiators.Characters
                 finalStress = 0;
 
             // Zealots cant exceed 19
-            if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Zealot) && finalStress > 19)
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Witch) && finalStress > 19)
                 finalStress = 19;
 
             // Determine new stress state

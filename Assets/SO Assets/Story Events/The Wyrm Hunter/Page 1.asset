@@ -14,24 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pageSprite: {fileID: 21300000, guid: 6c055dd1f4e06a040ab4a54d29afe23e, type: 3}
   pageDescription: 'Fresh off the heels of an arena victory, you head to the tavern
-    with the men to celebrate and relax. The atmosphere in the tavern is euphoric
-    and wild. The locals are thrilled from the day''s gladiatorial extravaganza,
-    and your men joke and jest in good spirits with patrons who toast them by buying
-    them round after round.
+    with your gladiators to celebrate and relax. The atmosphere in the tavern is
+    euphoric and wild. Your men drink and jest with patrons who toast them while
+    buying them round after round.
 
 
-    The euphoria comes to an abrupt pause as the tavern
-    door screeches open quickly and bangs loudly against the wall at the end of it''s
-    opening swing. An intimidatingly large Orc stands boldly at the door frame, his
-    gaze slowly moving across the room in search of something or someone. Eventually
-    the orc''s gaze meets your own, and his tusked frown grows into a wide eyed smile.
-    The floor groans loudly as he stomps over to your table and takes a seat across
-    from you.
+    he euphoria comes to an abrupt halt as the
+    tavern door screeches open. An intimidatingly large Orc stands in the doorway,
+    his hulking mass fills out the entire frame., His eyes, a killers eyes, survey
+    the room.
 
 
-    <color=#FFFFFF>"I, am Gormak The Great!"</color>, he declares
-    with a prideful smile and bouncing eyebrows, clearly expecting you to know who
-    that is and be impressed.'
+    <color=#FFFFFF>"Hail! It is I: Gormak The Great!"</color>, he
+    declares with a prideful smile and bouncing eyebrows. It seems he expects you
+    to know who he is...'
   onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: 4bbec703fdb91944298d725a8975ba75, type: 2}

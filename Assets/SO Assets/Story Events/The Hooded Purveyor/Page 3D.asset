@@ -13,18 +13,27 @@ MonoBehaviour:
   m_Name: Page 3D
   m_EditorClassIdentifier: 
   pageSprite: {fileID: 0}
-  pageDescription: "Just as the figure finishes it's pitch, {CHOICE_CHARACTER_NAME}
+  pageDescription: 'Just as the figure finishes it''s pitch, {CHOICE_CHARACTER_NAME}
     {CHOICE_CHARACTER_SUB_NAME} jumps out of bed and points defiantly at the hooded
-    figure.\n\n<color=#FFFFFF>\"GO BACK TO THE ABYSS, FOUL BEAST!\"</color>\n\nThe
+    figure.
+
+
+    <color=#FFFFFF>"GO BACK TO THE ABYSS, FOUL BEAST!"</color>
+
+
+    The
     hooded figure lets out an unnerving, hysterical laugh that echoes around the
     room. Without a moment of hesitation, {CHOICE_CHARACTER_NAME} lunges forward
-    triumphantly and grabs the hooded figure by the head with both hands, uttering
-    a prayer that rapidly crescendos into a yell. The hooded figure's laughter stops,
-    and it begins screeching so loud and horrifcally that you buckle to your knees
-    with ear pain. \n\nAs {CHOICE_CHARACTER_NAME} continues to yell out the prayer,
-    the hooded figure writhes in agony faster and faster until it finally explodes
-    into a plume of black smoke, leaving behind only the two baubbles it brought
-    to offer you."
+    triumphantly and grabs the hooded figure by the head with both hands. {CHOICE_CHARACTER_NAME}
+    starts uttering a prayer that rapidly rises to a screaming crescendo. The hooded
+    figure''s laughter turns to screaching that grows so loud you are forced to your
+    knees.
+
+
+    As {CHOICE_CHARACTER_NAME} continues to yell out the prayer, the
+    hooded figure writhes in agony faster and faster until it finally explodes into
+    a plume of black smoke which evaporates instantly. Left behind are the two baubbles
+    it brought to offer you.'
   onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: 10c6cfda366066d4ea89f70542420545, type: 2}

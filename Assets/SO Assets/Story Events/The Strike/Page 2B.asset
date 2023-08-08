@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
   m_Name: Page 2B
   m_EditorClassIdentifier: 
+  pageSprite: {fileID: 21300000, guid: 464e22458ddfdc7488065520038ff98e, type: 3}
   pageDescription: 'Sensing the growing content, you announce a company wide raise,
     effective immediately. After all, why not? Most of them could be dead before
     you need to pay them anyway.
 
 
-    The men''s face light up with joy and relief,
-    and plenty of high fives and cheers make their rounds through the comapny.'
+    The men''s face light up with joy and relief.
+    {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME} leads the troops in a bawdy song about
+    how amazing you are.'
+  onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: 38f56ba1109bbe64e8330a10124ca38c, type: 2}
-  pageSprite: {fileID: 21300000, guid: 464e22458ddfdc7488065520038ff98e, type: 3}
-  onPageLoadEffects: []

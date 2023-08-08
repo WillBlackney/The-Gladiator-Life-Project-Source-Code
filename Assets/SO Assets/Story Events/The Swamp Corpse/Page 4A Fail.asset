@@ -12,21 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
   m_Name: Page 4A Fail
   m_EditorClassIdentifier: 
-  pageDescription: "With no longer any need to be quiet, you yell out to {CHARACTER_1_NAME}
-    {CHARACTER_1_SUB_NAME} to quickly snatch the helmet and run like the wind. Still
-    flat on his back from the fall, {CHARACTER_1_NAME} rolls over and crawls through
-    the mud to the corpse. As he fumbles with getting the chin strap undone, the
-    ground quakes harder and harder, and the terrifying roars become so loud you
-    wonder if they'll hear it all the way back at Ulwfe. The suddenly\u2026\r\n\r\nA
-    huge, scaley swamp leviathan emerges from the tree line with a roar. The beast
-    sprints towards {CHARACTER_1_NAME} at lightning speed and tackles him to the
-    ground. After a furious flurry of claws and bites, {CHARACTER_1_NAME} is a bloody
-    mess, indistinguishable from the corpse he just looted. Perhaps content with
-    it\u2019s previous meal, the blood drenched beast ends its mauling prematurely,
-    grabs {CHARACTER_1_NAME}'s lifeless corpse by the feet, then turns and walks
-    away into the depths of the forest trees dragging {CHARACTER_1_NAME} behind him,
-    never to be seen again\u2026\r"
+  pageSprite: {fileID: 21300000, guid: 80f28ce60dfd50d4c98d3ffc6d109e20, type: 3}
+  pageDescription: 'There''s no more need to be quiet. The beast knows where you
+    are. You yell out to {CHARACTER_1_NAME} to quickly snatch the helmet and run
+    like the wind. Still flat on his back from the fall, {CHARACTER_1_NAME} rolls
+    over and crawls through the mud to the corpse. As he fumbles with the helmet''s
+    chin strap, brackish marsh water begins to churn and roil.
+
+
+    A huge, scaley
+    fingorn emerges from the water with a roar. Powerful jaws clamp down on {CHARACTER_1_NAME}.
+    A furious mauling follows. When it has ended, the beast slinks below the surface
+    of the water leaving {CHARACTER_1_NAME} a bloody mess, indistinguishable from
+    the corpse he just looted. '
+  onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: 2ede1bcbd6120b64e89f1fce5314d49e, type: 2}
-  pageSprite: {fileID: 21300000, guid: 80f28ce60dfd50d4c98d3ffc6d109e20, type: 3}
-  onPageLoadEffects: []

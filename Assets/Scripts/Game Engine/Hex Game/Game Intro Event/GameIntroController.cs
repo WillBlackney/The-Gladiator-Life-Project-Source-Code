@@ -312,7 +312,7 @@ namespace WeAreGladiators.GameIntroEvent
             {
                 ret = ", whose blue robes sparkle with magic and whose staff is primed for action";
             }
-            else if (bg == CharacterBackground.Zealot)
+            else if (bg == CharacterBackground.Witch)
             {
                 ret = " covered from head to toe in grim tattoos and religious markings";
             }

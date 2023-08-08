@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
   m_Name: Page 3B
   m_EditorClassIdentifier: 
+  pageSprite: {fileID: 0}
   pageDescription: "Keen to be rid of your uninvited guest, you point to the object
     in the hooded figure's right hand without dwelling too much on the decision.
     \n\n<color=#FFFFFF>\"Very well, mortal. A fair trade.\"</color> says the hooded
-    figure, leaning back and placing the other object back inside his cloak.\n\n<color=#FFFFFF>\"Trade?\"</color>
-    you ask suspiciously with an eye brow raised.\n\nThe hooded figure tilts its
-    head back and cackles menancingly for a moment before rapidly evaporating into
-    black smoke so thick it fills the room, preventing you from seeing anything beyond
-    your nose. After the smoke clears enough, you see the object lying on the floor,
-    right were the hooded figure once stood. You also notice your knap sack open
-    with a big empty space were all your gold used to be...Demonic bastard stole
-    all the money!"
+    figure, placing the other object back inside his cloak.\n\n<color=#FFFFFF>\"Trade?\"</color>
+    you ask with an eye brow raised.\n\nThe hooded figure tilts its head back and
+    cackles. Suddenly the figure collapses into a pool of black smoke so thick it
+    fills the room. The metallic taste of iron fills your mouth. The taste grows
+    stronger and stronger until...it is gone, and so too is the smoke. \n\nYou see
+    the wyrm egg on the floor, the only evidence the hooded figure was ever in this
+    room. You also notice your coin purse open with a big empty space were all your
+    gold used to be...Demonic bastard stole all the money!"
+  onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: 8aab558bb36f6ce4cb660e0396d7e32b, type: 2}
-  pageSprite: {fileID: 0}
-  onPageLoadEffects: []

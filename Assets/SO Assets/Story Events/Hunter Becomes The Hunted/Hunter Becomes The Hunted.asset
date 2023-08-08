@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 801e62e2667447d4d8ae71b300de9dce, type: 3}
+  m_Name: Hunter Becomes The Hunted
+  m_EditorClassIdentifier: 
+  storyEventName: Hunter Becomes The Hunted
+  firstPage: {fileID: 11400000, guid: 0dbe583dd7d043144972c4924464a3cf, type: 2}
+  excludeFromGame: 0
+  onStartEffects:
+  - effectType: 4
+    characterTargetIndex: 0
+    pageToLoad: {fileID: 0}
+    boonGained: 4
+    backgroundAddedToTavern: 0
+    totalCharactersAddedToTavern: 0
+    itemGained: {fileID: 0}
+    goldGained: 0
+    goldLost: 0
+    perkGained: 0
+    gainPerkChance: 100
+    injurySeverity: 0
+    injuryType: 0
+    experienceGained: 0
+    characterJoining: {fileID: 0}
+    stressRecoveryChance: 100
+    stressRecoveredMin: 0
+    stressRecoveredMax: 0
+    healthLostPercentage: 0.5
+    wageIncreasePercentage: 0.1
+    characterLeaveProbability: 50
+  - effectType: 6
+    characterTargetIndex: 0
+    pageToLoad: {fileID: 0}
+    boonGained: 0
+    backgroundAddedToTavern: 6
+    totalCharactersAddedToTavern: 2
+    itemGained: {fileID: 0}
+    goldGained: 0
+    goldLost: 0
+    perkGained: 0
+    gainPerkChance: 100
+    injurySeverity: 0
+    injuryType: 0
+    experienceGained: 0
+    characterJoining: {fileID: 0}
+    stressRecoveryChance: 100
+    stressRecoveredMin: 0
+    stressRecoveredMax: 0
+    healthLostPercentage: 0.5
+    wageIncreasePercentage: 0.1
+    characterLeaveProbability: 50
+  requirements:
+  - reqType: 5
+    requiredCharactersInRosterCount: 0
+    includeTheKid: 0
+    goldRequired: 0
+    requiredBoon: 3
+  characterRequirements: []

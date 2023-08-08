@@ -16,7 +16,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '"Maybe you two should hug and kiss?"'
+    phrase: '"Maybe you two should kiss and make up?"'
   effectSets:
   - lowerProbability: 0
     upperProbability: 100
@@ -39,4 +39,7 @@ MonoBehaviour:
       stressRecoveryChance: 100
       stressRecoveredMin: 0
       stressRecoveredMax: 0
+      healthLostPercentage: 0.5
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
   requirements: []

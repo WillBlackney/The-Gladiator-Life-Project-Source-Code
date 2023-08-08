@@ -221,9 +221,9 @@ namespace WeAreGladiators.TownFeatures
             for (int i = 0; i < amount; i++)
                 HandleAddNewRecruitFromCharacterDeck();
 
-            if (BoonController.Instance.DoesPlayerHaveBoon(BoonTag.UnemployedKnights))
+            if (BoonController.Instance.DoesPlayerHaveBoon(BoonTag.UnemployedGladiators))
             {
-                BackgroundData bgData = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.TournamentKnight);
+                BackgroundData bgData = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.Gladiator);
                 for (int i = 0; i < 2; i++)
                 {
                     HexCharacterData newCharacter = CharacterDataController.Instance.GenerateRecruitCharacter(bgData);
@@ -239,7 +239,15 @@ namespace WeAreGladiators.TownFeatures
                     currentRecruits.Insert(0, newCharacter);
                 }
             }
-
+            if (BoonController.Instance.DoesPlayerHaveBoon(BoonTag.WitchAccession))
+            {
+                BackgroundData bgData = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.Witch);
+                for (int i = 0; i < 2; i++)
+                {
+                    HexCharacterData newCharacter = CharacterDataController.Instance.GenerateRecruitCharacter(bgData);
+                    currentRecruits.Insert(0, newCharacter);
+                }
+            }
 
         }
         private void HandleAddNewRecruitFromCharacterDeck()

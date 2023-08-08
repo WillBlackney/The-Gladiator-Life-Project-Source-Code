@@ -16,7 +16,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '"Grab the axe while you''re there"'
+    phrase: '"Get the axe"'
   effectSets:
   - lowerProbability: 1
     upperProbability: 50

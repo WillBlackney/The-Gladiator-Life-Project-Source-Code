@@ -13,18 +13,23 @@ MonoBehaviour:
   m_Name: Page 1
   m_EditorClassIdentifier: 
   pageSprite: {fileID: 21300000, guid: 9997e2aecdcba91479ab085cfe5f61f5, type: 3}
-  pageDescription: "While laying down in the bed of your tavern room after a long
-    day of sending people to their deaths, a horrid smell wafts over you, and a cold
-    chill fills the air. Sitting up, you notice plumes of thick black smoke pooling
-    in from the walls around you, and watch as it coalesces in the center of the
-    room to form a hooded and cloaked figure. From under it's hood you see two red
-    dots for eyes and a wide, wicked grin. \n\nYou grab the blade from underneath
-    your bed to ready yourself, but as soon as you do, the hooded figure outstrecthes
-    his hand, and suddenly the handle of the blade burns so hot you're forced to
-    drop it, wincing in pain. \n\n<color=#FFFFFF>\"Fear me not, delicate fleshling.
-    If I wanted you dead, i'd have simply waited for you to fall asleep, then eaten
-    your liver. I came to make you an offer on behalf of my...employer, for lack
-    of a better term\".</color>"
+  pageDescription: 'You are laying in bed after a long day of sending people to their
+    deaths, when a metallic taste begins to fill your mouth. You shiver as a cold
+    chill fills the air. Sitting up, you notice plumes of thick black smoke pouring
+    out of the very walls. You watch as it coalesces in the center of the room to
+    form a cloaked figure. Two glowing, red eyes twinkle dangerously under it''s
+    hood.
+
+
+    You grab a blade from underneath your bed to defend yourself. The
+    hooded figure strecthes out its hand. Suddenly the handle of the blade burns
+    so hot you''re forced to drop it, wincing in pain.
+
+
+    <color=#FFFFFF>"Fear
+    me not, delicate fleshling. If I wanted you dead, I''d have simply waited for
+    you to fall asleep, and then eaten your liver. I came to make you an offer on
+    behalf of my...employer".</color>'
   onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: 68e380dcfbc7b2f40b0439959286cb1c, type: 2}

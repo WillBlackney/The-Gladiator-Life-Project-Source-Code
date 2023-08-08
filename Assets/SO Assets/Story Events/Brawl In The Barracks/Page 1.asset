@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: Page 1
   m_EditorClassIdentifier: 
   pageSprite: {fileID: 21300000, guid: ddebe2a8222a4e44ba614be338f0ff30, type: 3}
-  pageDescription: While taking count of inventory, you hear a commotion slowly grow
-    louder and louder from within the barracks. You go to investigate and see {CHARACTER_1_NAME}
-    {CHARACTER_1_SUB_NAME} and {CHARACTER_2_NAME} {CHARACTER_2_SUB_NAME} gripping
-    each other by their collars with both hands, foreheads touching with locked eyes
-    exchanging profanities and insults. The rest of the men, clearly entertained
-    by the commotion, stand all around jeering enthusiaically in an attempt to egg
-    the two on to exchange blows. Eventually the men notice you've entered the room
-    and grow quiet, awaiting you're approval or intervention...
+  pageDescription: 'While taking a count of inventory, you hear a commotion errupt
+    from within the barracks. You enter and see {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME}
+    and {CHARACTER_2_NAME} {CHARACTER_2_SUB_NAME} gripping each other by their throats,
+    exchanging profanaties and insults. The rest of the men, clearly entertained
+    by the commotion, stand all around jeering enthusiaically.
+
+
+    You clear your
+    throat. The men notice you''ve entered the room and grow quiet, awaiting you''re
+    intervention...or approval?'
   onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: 5d6bdba6584b92b46aed7aa2266ca60c, type: 2}
