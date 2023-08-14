@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
   m_Name: Page 1
   m_EditorClassIdentifier: 
-  pageSprite: {fileID: 21300000, guid: adb32facc51ebf844998f50c8eb3dc00, type: 3}
+  pageSprite: {fileID: 21300000, guid: 950e40cf22cbd5f44b9beb30bcf368f8, type: 3}
   pageDescription: "A couple of seasoned gladiators take up residence in the tavern.\r
     Rumours quickly begin circulating about why such prized fighters would have left
     their gladatorial stable.\r\n\r\n<color=#FFFFFF>\"They mutinied and killed their

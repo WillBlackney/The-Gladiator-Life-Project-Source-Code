@@ -119,7 +119,7 @@ namespace WeAreGladiators.GameIntroEvent
             BuildPageTextBodies(pageOneBodyText);
             headerPanelText.text = pageOneHeaderText;
             eventImage.sprite = pageOneSprite;
-            choiceButtons[0].BuildAndShow("This had better be worth it...", () =>
+            choiceButtons[0].BuildAndShow("Here goes nothing...", () =>
             {
                 BuildViewsAsPageTwo();
             });

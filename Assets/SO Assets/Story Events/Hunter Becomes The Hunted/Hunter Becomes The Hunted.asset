@@ -64,4 +64,9 @@ MonoBehaviour:
     includeTheKid: 0
     goldRequired: 0
     requiredBoon: 3
+  - reqType: 6
+    requiredCharactersInRosterCount: 0
+    includeTheKid: 0
+    goldRequired: 0
+    requiredBoon: 2
   characterRequirements: []
