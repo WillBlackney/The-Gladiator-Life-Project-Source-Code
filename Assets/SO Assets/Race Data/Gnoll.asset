@@ -47,3 +47,11 @@ MonoBehaviour:
   racialPassiveKeyWords:
   - kewWordType: 41
     passiveType: 0
+  possibleSubNames:
+  - Big Bite
+  - Little Fang
+  - Rip And Tear
+  - The Cuddly
+  - The Bear
+  - The Hungry
+  - Tree Chomper

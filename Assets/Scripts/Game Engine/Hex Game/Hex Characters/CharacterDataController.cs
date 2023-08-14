@@ -9,6 +9,7 @@ using WeAreGladiators.Player;
 using System.Linq;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Boons;
+using System.Globalization;
 
 namespace WeAreGladiators.Characters
 {
@@ -794,19 +795,18 @@ namespace WeAreGladiators.Characters
             CharacterDeck = GenerateCharacterDeck();
             CharacterDeck.Shuffle();
         }
-        public HexCharacterData GenerateRecruitCharacter(BackgroundData data, bool allowLevelBoosts = true)
+        public HexCharacterData GenerateRecruitCharacter(BackgroundData bgData, bool allowLevelBoosts = true)
         {
-            Debug.Log("CharacterDataController.GenerateRecruitCharacter() called, generating from background: " + data.backgroundType.ToString());
+            Debug.Log("CharacterDataController.GenerateRecruitCharacter() called, generating from background: " + bgData.backgroundType.ToString());
 
             // Setup
             HexCharacterData newCharacter = new HexCharacterData();
-            newCharacter.background = data;
-            RecruitLoadoutData loadoutData = data.loadoutBuckets[RandomGenerator.NumberBetween(0, data.loadoutBuckets.Count - 1)];
+            newCharacter.background = bgData;
+            RecruitLoadoutData loadoutData = bgData.loadoutBuckets[RandomGenerator.NumberBetween(0, bgData.loadoutBuckets.Count - 1)];
             newCharacter.modelSize = CharacterModelSize.Normal;
 
             // Set up background, race and story data
-            newCharacter.race = GetRandomRace(data.validRaces);
-            newCharacter.mySubName = "The " + TextLogic.SplitByCapitals(data.backgroundType.ToString());
+            newCharacter.race = GetRandomRace(bgData.validRaces);
             newCharacter.myName = GetRandomCharacterName(newCharacter.race);
             newCharacter.dailyWage = RandomGenerator.NumberBetween(newCharacter.background.dailyWageMin, newCharacter.background.dailyWageMax);
                                                
@@ -817,8 +817,11 @@ namespace WeAreGladiators.Characters
 
             // Set up perks + quirks
             newCharacter.passiveManager = new PerkManagerModel(newCharacter);
-            GetAndApplyRandomQuirksToCharacter(newCharacter);
+            var quirks = GetAndApplyRandomQuirksToCharacter(newCharacter);
             newCharacter.PerkTree = new PerkTreeData(newCharacter);
+
+            // Generate Subname
+            newCharacter.mySubName = GetRandomCharacterSubName(quirks, bgData, newCharacter.race);
 
             // Set up health
             SetCharacterMaxHealth(newCharacter, 0);
@@ -828,7 +831,7 @@ namespace WeAreGladiators.Characters
             SetStartingLevelAndXpValues(newCharacter);
             if (allowLevelBoosts)
             {
-                int startingLevelBoosts = RandomGenerator.NumberBetween(data.lowerLevelLimit, data.upperLevelLimit) - newCharacter.currentLevel;
+                int startingLevelBoosts = RandomGenerator.NumberBetween(bgData.lowerLevelLimit, bgData.upperLevelLimit) - newCharacter.currentLevel;
                 for (int i = 0; i < startingLevelBoosts; i++)
                     HandleLevelUp(newCharacter);
             }
@@ -850,7 +853,7 @@ namespace WeAreGladiators.Characters
 
             // Determine and learn abilities
             newCharacter.abilityBook = new AbilityBook();
-            List<AbilityData> abilities = GenerateRecruitAbilities(newCharacter, loadoutData, RandomGenerator.NumberBetween(data.minStartingAbilities, data.maxStartingAbilities));
+            List<AbilityData> abilities = GenerateRecruitAbilities(newCharacter, loadoutData, RandomGenerator.NumberBetween(bgData.minStartingAbilities, bgData.maxStartingAbilities));
             foreach(AbilityData a in abilities)            
                 newCharacter.abilityBook.HandleLearnNewAbility(a);
             
@@ -970,7 +973,7 @@ namespace WeAreGladiators.Characters
                 else if (attributes[i] == CoreAttribute.Fitness) sheet.fitness.stars = starsGained;
             }
         }
-        public string GetRandomCharacterName(CharacterRace race)
+        private string GetRandomCharacterName(CharacterRace race)
         {
             string nameReturned = "";
             if (race == CharacterRace.Demon)
@@ -1003,6 +1006,23 @@ namespace WeAreGladiators.Characters
 
             return nameReturned;
         }
+        private string GetRandomCharacterSubName(List<PerkIconData> quirks, BackgroundData bgData, CharacterRace race)
+        {
+            string ret = "";
+            List<string> possibleSubNames = new List<string>();
+
+            for (int i = 0; i < quirks.Count; i++) possibleSubNames.AddRange(quirks[i].possibleSubNames);
+            possibleSubNames.AddRange(bgData.possibleSubNames);
+            possibleSubNames.AddRange(GetRaceData(race).possibleSubNames);
+            if(possibleSubNames.Count > 0)
+            {
+                possibleSubNames.Shuffle();
+                ret = possibleSubNames[0];
+            }
+
+            return ret;
+
+        }
         public CharacterModelTemplateSO GetRandomModelTemplate(CharacterRace race)
         {
             List<CharacterModelTemplateSO> validTemplates = new List<CharacterModelTemplateSO>();
@@ -1020,9 +1040,10 @@ namespace WeAreGladiators.Characters
         {
             return validRaces[RandomGenerator.NumberBetween(0, validRaces.Count - 1)];
         }      
-        private void GetAndApplyRandomQuirksToCharacter(HexCharacterData character)
+        private List<PerkIconData> GetAndApplyRandomQuirksToCharacter(HexCharacterData character)
         {
-            for(int i = 0; i < 2; i++)
+            List<PerkIconData> ret = new List<PerkIconData>();
+            for (int i = 0; i < 2; i++)
             {
                 int roll = RandomGenerator.NumberBetween(1, 2);
                 if(i == 0 || (i != 0 && roll == 1))
@@ -1030,15 +1051,16 @@ namespace WeAreGladiators.Characters
                     int typeRoll = RandomGenerator.NumberBetween(1, 100);
 
                     // Good perk
-                    if (typeRoll < 45) GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.PositiveQuirks);
+                    if (typeRoll < 45) ret.Add(GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.PositiveQuirks));
 
                     // Bad perk
-                    else if (typeRoll < 90) GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NegativeQuirks);
+                    else if (typeRoll < 90) ret.Add(GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NegativeQuirks));
 
                     // Neutral perk
-                    else GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NeutralQuirks);
+                    else ret.Add(GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NeutralQuirks));
                 }          
             }
+            return ret;
         }
         private PerkIconData GetAndApplyRandomQuirkToCharacter(HexCharacterData character, PerkIconData[] possibleQuirks)
         {

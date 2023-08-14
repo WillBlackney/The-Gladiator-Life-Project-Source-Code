@@ -51,3 +51,12 @@ MonoBehaviour:
     passiveType: 7
   - kewWordType: 17
     passiveType: 0
+  possibleSubNames:
+  - The Lost
+  - The Wanderer
+  - The Nameless
+  - Blight Heart
+  - The Forsaken
+  - Heart Breaker
+  - The Forsaken
+  - Chain Breaker

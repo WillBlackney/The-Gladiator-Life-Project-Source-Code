@@ -133,6 +133,9 @@ namespace WeAreGladiators.Perks
             foreach (CharacterRace race in data.racesThatBlockThis)
                 p.racesThatBlockThis.Add(race);
 
+            foreach (string subname in data.possibleSubNames)
+                p.possibleSubNames.Add(subname);
+
             foreach (AnimationEventData a in data.visualEventsOnApplication)
             {
                 // p.visualEventsOnApplication.Add(ObjectCloner.CloneJSON<AnimationEventData>(a));

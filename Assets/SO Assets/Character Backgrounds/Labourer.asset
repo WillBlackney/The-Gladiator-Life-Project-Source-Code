@@ -57,4 +57,7 @@ MonoBehaviour:
       bodyProspects:
       - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
       - {fileID: 11400000, guid: ae95f085284e4354f90181106f16a763, type: 2}
+  possibleSubNames:
+  - The Tradey
+  - The Helpful
   passiveEffectDescriptions: []

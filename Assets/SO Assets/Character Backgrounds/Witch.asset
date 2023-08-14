@@ -60,6 +60,12 @@ MonoBehaviour:
       - {fileID: 11400000, guid: cd162f05e1609124bb190e25d7de5556, type: 2}
       bodyProspects:
       - {fileID: 11400000, guid: 6c6b97aead9a7ef4d99484da99194276, type: 2}
+  possibleSubNames:
+  - Of The Swamps
+  - The Cretin
+  - Dead Finger
+  - Black Heart
+  - The Soulless
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

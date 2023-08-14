@@ -39,3 +39,10 @@ MonoBehaviour:
   racialPassiveKeyWords:
   - kewWordType: 1
     passiveType: 155
+  possibleSubNames:
+  - Iron Fist
+  - Wyrm Heart
+  - White Wolf
+  - Broken Tusk
+  - Of The Badlands
+  - Fallen Moon

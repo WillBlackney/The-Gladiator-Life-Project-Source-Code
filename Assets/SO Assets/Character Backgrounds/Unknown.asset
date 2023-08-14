@@ -49,4 +49,8 @@ MonoBehaviour:
     - headProspects: []
       bodyProspects:
       - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+  possibleSubNames:
+  - The Nameless
+  - The Engima
+  - The Stranger
   passiveEffectDescriptions: []

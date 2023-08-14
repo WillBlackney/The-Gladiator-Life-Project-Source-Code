@@ -16,5 +16,6 @@ namespace WeAreGladiators.Characters
         public string loreDescription;
         public ModalDotRowBuildData[] racialPassiveDotRows;
         public KeyWordModel[] racialPassiveKeyWords;
+        public List<string> possibleSubNames;
     }
 }

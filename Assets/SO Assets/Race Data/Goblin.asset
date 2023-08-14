@@ -53,3 +53,11 @@ MonoBehaviour:
     passiveType: 0
   - kewWordType: 12
     passiveType: 0
+  possibleSubNames:
+  - The Slippery
+  - The Vicious
+  - The Crafty
+  - The Nosey
+  - The Knife
+  - The Giant
+  - The Rat

@@ -55,6 +55,9 @@ MonoBehaviour:
     - headProspects: []
       bodyProspects:
       - {fileID: 11400000, guid: 8949fc1582e2d5e4ca3a600894a46196, type: 2}
+  possibleSubNames:
+  - Tree Chopper
+  - Big Beard
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

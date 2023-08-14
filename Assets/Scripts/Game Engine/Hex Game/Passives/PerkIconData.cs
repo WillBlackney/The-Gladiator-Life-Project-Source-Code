@@ -38,6 +38,7 @@ namespace WeAreGladiators.Perks
         public bool isRacial;
         public CharacterRace race;
 
+        public List<string> possibleSubNames = new List<string>();
         public List<Perk> perksRemovedOnThisApplication = new List<Perk>();
         public List<Perk> perksGainedOnThisExpiry = new List<Perk>();
         public List<Perk> perksThatBlockThis = new List<Perk>();

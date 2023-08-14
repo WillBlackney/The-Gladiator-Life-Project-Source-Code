@@ -69,6 +69,11 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 1101b12a630b9c24db59b213b57425dc, type: 2}
       bodyProspects:
       - {fileID: 11400000, guid: c89d7d867b89eda42bd96838671cfe77, type: 2}
+  possibleSubNames:
+  - The Stallion
+  - Hammer Hand
+  - Skull Crusher
+  - The White Knight
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

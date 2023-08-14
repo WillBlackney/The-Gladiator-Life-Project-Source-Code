@@ -55,6 +55,10 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 8a1afb36a69ef25409f162114b5ed721, type: 2}
       bodyProspects:
       - {fileID: 11400000, guid: 8949fc1582e2d5e4ca3a600894a46196, type: 2}
+  possibleSubNames:
+  - Dead Eye
+  - The Free
+  - The Whistling Arrow
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

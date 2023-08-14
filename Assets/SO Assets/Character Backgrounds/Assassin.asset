@@ -62,6 +62,9 @@ MonoBehaviour:
       - {fileID: 11400000, guid: cd0cd6f5705583841a730322c779e99b, type: 2}
       bodyProspects:
       - {fileID: 11400000, guid: 3dc6ceb4fb77c6c4c9496927a1326908, type: 2}
+  possibleSubNames:
+  - The Shadow
+  - The Blade
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

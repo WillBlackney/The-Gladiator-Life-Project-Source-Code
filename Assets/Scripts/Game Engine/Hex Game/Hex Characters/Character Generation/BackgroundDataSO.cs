@@ -136,6 +136,9 @@ namespace WeAreGladiators.Characters
         [BoxGroup("Recruit Generation Settings")]
         [LabelWidth(100)]
         public RecruitLoadoutData[] loadoutBuckets;
+        [BoxGroup("Recruit Generation Settings")]
+        [LabelWidth(100)]
+        public List<string> possibleSubNames;
 
         [BoxGroup("Misc Data", true, true)]
         [LabelWidth(100)]
@@ -181,6 +184,7 @@ namespace WeAreGladiators.Characters
         public int lowerLevelLimit;
         public int upperLevelLimit;
 
+        public List<string> possibleSubNames = new List<string>();
         public List<RecruitLoadoutData> loadoutBuckets = new List<RecruitLoadoutData>();
         public List<CharacterRace> validRaces = new List<CharacterRace>();
         public List<ModalDotRowBuildData> passiveEffectDescriptions = new List<ModalDotRowBuildData>();
@@ -261,6 +265,9 @@ namespace WeAreGladiators.Characters
 
             witsLower = data.witsLower;
             witsUpper = data.witsUpper;
+
+            foreach (string subname in data.possibleSubNames)
+                possibleSubNames.Add(subname);
 
             foreach (RecruitLoadoutData ld in data.loadoutBuckets)
                 loadoutBuckets.Add(ld);

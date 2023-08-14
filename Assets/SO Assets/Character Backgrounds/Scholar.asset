@@ -59,6 +59,9 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 314ad7b94ea3d4c4090f132d38030f2d, type: 2}
       bodyProspects:
       - {fileID: 11400000, guid: 07f3a9915c41cdd4a8424456811da0ed, type: 2}
+  possibleSubNames:
+  - The Wise
+  - The Fool
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

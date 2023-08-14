@@ -143,6 +143,9 @@ namespace WeAreGladiators.Perks
         [LabelWidth(200)]
         [Tooltip("Perks that cannot be gained if a character is of one of these races (e.g. Undead can't have 'Fear of Undead')")]
         public List<CharacterRace> racesThatBlockThis;
+        [VerticalGroup("Linked Interactions")]
+        [LabelWidth(200)]
+        public List<string> possibleSubNames;
 
         [Header("Visual Events")]
         public List<AnimationEventData> visualEventsOnApplication;

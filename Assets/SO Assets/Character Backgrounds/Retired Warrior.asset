@@ -67,6 +67,11 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 5b1d9d0e175c37a4884e2e191db9b4db, type: 2}
       - {fileID: 11400000, guid: 0f2c5c657dde0ad4596b1498a0cbc5d0, type: 2}
       - {fileID: 11400000, guid: f1bfa5a00b3962d4d9a26e37d3d0343d, type: 2}
+  possibleSubNames:
+  - The Veteran
+  - Hero Of Old
+  - The Seargent
+  - The Chief
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

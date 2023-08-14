@@ -85,6 +85,11 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 0f2c5c657dde0ad4596b1498a0cbc5d0, type: 2}
       - {fileID: 11400000, guid: f1bfa5a00b3962d4d9a26e37d3d0343d, type: 2}
       - {fileID: 11400000, guid: b120371936fc1334b927f94d3602b160, type: 2}
+  possibleSubNames:
+  - The Upstart
+  - The Greedy
+  - Heart Breaker
+  - The Sellsword
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

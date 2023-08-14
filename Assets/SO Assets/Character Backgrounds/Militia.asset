@@ -57,4 +57,7 @@ MonoBehaviour:
       bodyProspects:
       - {fileID: 11400000, guid: a607139243f4b2a4b89ea760b67d1c97, type: 2}
       - {fileID: 11400000, guid: 2cce4423c9ed57d42b7c9d7736934204, type: 2}
+  possibleSubNames:
+  - Stout Heart
+  - The Sheriff
   passiveEffectDescriptions: []

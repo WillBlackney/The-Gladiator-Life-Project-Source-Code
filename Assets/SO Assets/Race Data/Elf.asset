@@ -39,3 +39,9 @@ MonoBehaviour:
   racialPassiveKeyWords:
   - kewWordType: 1
     passiveType: 26
+  possibleSubNames:
+  - Moonwalker
+  - The Graceful
+  - Of The Forest
+  - Of The Light
+  - Solemn Swan

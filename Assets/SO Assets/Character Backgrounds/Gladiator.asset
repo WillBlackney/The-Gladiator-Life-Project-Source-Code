@@ -67,6 +67,11 @@ MonoBehaviour:
       bodyProspects:
       - {fileID: 11400000, guid: b8bd3aad07953c44b9392bebbf9c6720, type: 2}
       - {fileID: 11400000, guid: 76156de02b9f69740a893940dd21742b, type: 2}
+  possibleSubNames:
+  - The Destroyer
+  - The Champ
+  - The Lion
+  - The Crowd Pleaser
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

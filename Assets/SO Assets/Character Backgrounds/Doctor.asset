@@ -58,6 +58,10 @@ MonoBehaviour:
     - headProspects: []
       bodyProspects:
       - {fileID: 11400000, guid: aacd45bc0072ed74088a1c15a0f051b6, type: 2}
+  possibleSubNames:
+  - The Healer
+  - The Scalpel
+  - The Surgeon
   passiveEffectDescriptions:
   - dotStyle: 3
     message:

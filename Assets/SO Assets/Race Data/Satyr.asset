@@ -51,3 +51,11 @@ MonoBehaviour:
     passiveType: 0
   - kewWordType: 15
     passiveType: 0
+  possibleSubNames:
+  - The Wild
+  - Sharp Horn
+  - Ale King
+  - The Playful
+  - The Guzzler
+  - The Bard
+  - The Lover

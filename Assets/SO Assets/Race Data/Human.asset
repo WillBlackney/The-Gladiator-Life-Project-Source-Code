@@ -39,3 +39,8 @@ MonoBehaviour:
   racialPassiveKeyWords:
   - kewWordType: 1
     passiveType: 154
+  possibleSubNames:
+  - From Southland
+  - Underhill
+  - The Bastard
+  - Kingswood
