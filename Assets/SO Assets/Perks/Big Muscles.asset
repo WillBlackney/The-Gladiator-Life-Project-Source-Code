@@ -58,4 +58,8 @@ MonoBehaviour:
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 58000000
   racesThatBlockThis: 
+  possibleSubNames:
+  - The Giant
+  - Giants Bane
+  - The Strong
   visualEventsOnApplication: []

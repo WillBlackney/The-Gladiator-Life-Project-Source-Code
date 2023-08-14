@@ -45,4 +45,8 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames:
+  - The Thoughtless
+  - The Oblivious
   visualEventsOnApplication: []

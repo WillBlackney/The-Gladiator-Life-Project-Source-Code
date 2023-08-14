@@ -88,4 +88,7 @@ MonoBehaviour:
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
   racesThatBlockThis: 01000000
+  possibleSubNames:
+  - Scourge of Humanity
+  - Human Hunter
   visualEventsOnApplication: []

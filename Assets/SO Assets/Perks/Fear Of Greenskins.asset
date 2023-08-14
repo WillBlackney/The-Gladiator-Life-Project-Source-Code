@@ -96,4 +96,6 @@ MonoBehaviour:
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
   racesThatBlockThis: 0200000005000000
+  possibleSubNames:
+  - The Traumatized
   visualEventsOnApplication: []

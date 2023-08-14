@@ -96,4 +96,7 @@ MonoBehaviour:
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
   racesThatBlockThis: 0200000005000000
+  possibleSubNames:
+  - Orcbane
+  - Orc Slayer
   visualEventsOnApplication: []

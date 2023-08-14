@@ -88,4 +88,6 @@ MonoBehaviour:
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
   racesThatBlockThis: 03000000
+  possibleSubNames:
+  - The Skelly Smasher
   visualEventsOnApplication: []
