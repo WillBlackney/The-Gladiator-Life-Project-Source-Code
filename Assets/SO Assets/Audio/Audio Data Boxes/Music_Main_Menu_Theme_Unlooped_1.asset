@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Music_Main_Menu_Theme_Unlooped_1
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 8c3d7714f42c45142b11dff167715e7d, type: 3}
+  bus: 1
   allowDuplicates: 0
   randomizeClip: 0
   audioClips: []

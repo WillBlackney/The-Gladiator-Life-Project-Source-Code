@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Music_Basic_Combat_1
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: a354ae787b70805459b6c03c0428bb19, type: 3}
+  bus: 1
   allowDuplicates: 0
   randomizeClip: 0
   audioClips: []

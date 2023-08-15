@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Music_Boss_Combat_1
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 6ce4b1e4f52436f42bebed4b98972321, type: 3}
+  bus: 1
   allowDuplicates: 0
   randomizeClip: 0
   audioClips: []

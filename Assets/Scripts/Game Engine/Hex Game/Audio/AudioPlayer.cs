@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TbsFramework.Players;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace WeAreGladiators.Audio
 {
@@ -18,6 +19,7 @@ namespace WeAreGladiators.Audio
         {
             myCurrentData = data;
             source.loop = data.loop;
+            source.outputAudioMixerGroup = AudioManager.Instance.GetBus(data.bus);
 
             // Randomize clip
             if (data.randomizeClip) Source.clip = data.audioClips[RandomGenerator.NumberBetween(0, data.audioClips.Length - 1)];

@@ -27,7 +27,18 @@ namespace WeAreGladiators.Audio
         [SerializeField] private AudioDataBox[] allAudioModels;
         [SerializeField] private AudioProfileData[] allProfiles;
 
+        [Space(10)]
+
+        [Header("Audio Mixer")]
+        [SerializeField] private AudioMixer audioMixer;
+        [SerializeField] private AudioMixerGroup musicBus;
+        [SerializeField] private AudioMixerGroup effectsBus;       
+
         private AudioDataBox previousCombatTrack = null;
+
+        public AudioMixer AudioMixer => audioMixer;
+        public AudioMixerGroup MusicBus => musicBus;
+        public AudioMixerGroup EffectsBus => effectsBus;
         #endregion
 
         #region Initialization + Misc
@@ -279,12 +290,24 @@ namespace WeAreGladiators.Audio
         #endregion
 
         #region Audio Mixer
-        public AudioMixer audioMixer;
+
         public void SetMasterVolume(float volume)
         {
             audioMixer.SetFloat("master_volume", volume);
         }
-
+        public void SetMusicVolume(float volume)
+        {
+            audioMixer.SetFloat("music_volume", volume);
+        }
+        public void SetEffectsVolume(float volume)
+        {
+            audioMixer.SetFloat("effects_volume", volume);
+        }
+        public AudioMixerGroup GetBus(MixerBus bus)
+        {
+            if (bus == MixerBus.Music) return musicBus;
+            else return effectsBus;
+        }
         #endregion
 
     }
@@ -465,6 +488,11 @@ namespace WeAreGladiators.Audio
         Crowd_Ooh_1 = 90,
         Crowd_Applause_1 = 91,
         Crowd_Big_Cheer_1 = 105,
+    }
+    public enum MixerBus
+    {
+        Effects = 0,
+        Music = 1,        
     }
 }
 

@@ -16,6 +16,10 @@ namespace WeAreGladiators.Audio
 
         [VerticalGroup("General Properties/Stats")]
         [LabelWidth(100)]
+        public MixerBus bus;
+
+        [VerticalGroup("General Properties/Stats")]
+        [LabelWidth(100)]
         public bool allowDuplicates = true;
 
         [VerticalGroup("General Properties/Stats")]
