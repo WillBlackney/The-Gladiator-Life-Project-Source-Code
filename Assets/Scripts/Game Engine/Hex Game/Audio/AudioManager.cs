@@ -9,6 +9,7 @@ using WeAreGladiators.Abilities;
 using UnityEditor;
 using Sirenix.Utilities;
 using System.Linq;
+using UnityEngine.Audio;
 
 namespace WeAreGladiators.Audio
 {
@@ -275,6 +276,15 @@ namespace WeAreGladiators.Audio
             if (IsSoundPlaying(Sound.Music_Main_Menu_Theme_Unlooped_1)) FadeOutSound(Sound.Music_Main_Menu_Theme_Unlooped_1, fadeSpeed);
             if (IsSoundPlaying(Sound.Music_Main_Menu_Theme_Looped_1)) FadeOutSound(Sound.Music_Main_Menu_Theme_Looped_1, fadeSpeed);
         }
+        #endregion
+
+        #region Audio Mixer
+        public AudioMixer audioMixer;
+        public void SetMasterVolume(float volume)
+        {
+            audioMixer.SetFloat("master_volume", volume);
+        }
+
         #endregion
 
     }

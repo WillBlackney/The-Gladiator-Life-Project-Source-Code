@@ -37,6 +37,14 @@ namespace WeAreGladiators.MainMenu
         [SerializeField] private CrowdRowAnimator[] frontScreenCrowdRows;
         [Space(20)]
 
+        [Header("Settings Screen Components")]
+        [SerializeField] GameObject settingsScreenVisualParent;
+        [SerializeField] CanvasGroup settingsScreenContentCg;
+        [SerializeField] Image settingsScreenBlackUnderlay;
+        [SerializeField] RectTransform settingsScreenOnScreenPosition;
+        [SerializeField] RectTransform settingsScreenOffScreenPosition;
+        [SerializeField] RectTransform settingsScreenMovementParent;
+
         [Header("In Game Menu Components")]
         [SerializeField] private GameObject inGameMenuScreenParent;
         [SerializeField] private CanvasGroup inGameMenuScreenCg;
@@ -190,8 +198,7 @@ namespace WeAreGladiators.MainMenu
             else BuildAndShowValidityModal(errors);
         }
         public void OnBackToMainMenuButtonClicked()
-        {
-            
+        {            
             BlackScreenController.Instance.FadeOutAndBackIn(0.5f, 0.25f, 0.5f, () =>
             {
                 HideChooseCharacterScreen();
@@ -200,26 +207,19 @@ namespace WeAreGladiators.MainMenu
         }
         public void OnMenuNewGameButtonClicked()
         {
-            // disable button highlight
             EventSystem.current.SetSelectedGameObject(null);
             GameOriginController.Instance.ShowOriginScreen();
-            /*
-            BlackScreenController.Instance.FadeOutAndBackIn(0.5f, 0.25f, 0.5f, () =>
-            {
-                ShowChooseCharacterScreen();
-                HideFrontScreen();
-            });*/
         }
         public void OnMenuContinueButtonClicked()
         {
-            // disable button highlight
             EventSystem.current.SetSelectedGameObject(null);
             GameController.Instance.HandleLoadSavedGameFromMainMenuEvent();
         }
         public void OnMenuSettingsButtonClicked()
         {
-            // disable button highlight
             EventSystem.current.SetSelectedGameObject(null);
+            ShowSettingsScreen();
+
         }
         public void OnMenuQuitButtonClicked()
         {
@@ -1626,6 +1626,48 @@ namespace WeAreGladiators.MainMenu
         private void HideAbandonRunPopup()
         {
             abandonRunPopupParent.SetActive(false);
+        }
+        #endregion
+
+        // Settings Screen Logic
+        #region
+        public void ShowSettingsScreen()
+        {
+            settingsScreenVisualParent.SetActive(true);
+            settingsScreenContentCg.DOKill();
+            settingsScreenContentCg.interactable = false;
+            settingsScreenBlackUnderlay.DOKill();
+            settingsScreenBlackUnderlay.DOFade(0f, 0f);
+            settingsScreenMovementParent.DOKill();
+            settingsScreenMovementParent.position = settingsScreenOffScreenPosition.position;
+
+            // to do: build content to default state
+
+            settingsScreenBlackUnderlay.DOFade(0.5f, 0.75f);
+            settingsScreenMovementParent.DOMove(settingsScreenOnScreenPosition.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+            {
+                settingsScreenContentCg.interactable = true;
+            });
+        }
+        private void HideSettingsScreen(float speed = 0f)
+        {
+            settingsScreenVisualParent.SetActive(true);
+            settingsScreenContentCg.DOKill();
+            settingsScreenContentCg.interactable = false;
+            settingsScreenBlackUnderlay.DOKill();
+            settingsScreenMovementParent.DOKill();
+
+            // to do: build content to default state
+
+            settingsScreenBlackUnderlay.DOFade(0f, speed * 0.75f);
+            settingsScreenMovementParent.DOMove(settingsScreenOffScreenPosition.position, speed).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                settingsScreenVisualParent.SetActive(false);
+            });
+        }
+        public void OnSettingsPageCloseButtonClicked()
+        {
+            HideSettingsScreen(1f);
         }
         #endregion
 
