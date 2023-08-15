@@ -36,13 +36,13 @@ namespace WeAreGladiators.GameOrigin
 
             // to do: build content to default state
 
-            blackUnderlay.DOFade(0.5f, 0.75f);
-            movementParent.DOMove(onScreenPosition.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+            blackUnderlay.DOFade(0.5f, 0.5f);
+            movementParent.DOMove(onScreenPosition.position, 0.65f).SetEase(Ease.OutBack).OnComplete(() =>
             {
                 contentCg.interactable = true;
             });
         }
-        private void HideOriginScreen(float speed = 1f)
+        private void HideOriginScreen(float speed = 0.65f)
         {
             visualParent.SetActive(true);
             contentCg.DOKill();

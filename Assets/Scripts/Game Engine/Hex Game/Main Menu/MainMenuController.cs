@@ -41,6 +41,7 @@ namespace WeAreGladiators.MainMenu
         [SerializeField] GameObject settingsScreenVisualParent;
         [SerializeField] CanvasGroup settingsScreenContentCg;
         [SerializeField] Image settingsScreenBlackUnderlay;
+        [SerializeField] TMP_Dropdown resolutionDropdown;
         [SerializeField] RectTransform settingsScreenOnScreenPosition;
         [SerializeField] RectTransform settingsScreenOffScreenPosition;
         [SerializeField] RectTransform settingsScreenMovementParent;
@@ -142,6 +143,16 @@ namespace WeAreGladiators.MainMenu
         private void Start()
         {
             RenderMenuButtons();
+        }
+        #endregion
+
+        // Init
+        #region
+        Resolution[] resolutions;
+        protected override void Awake()
+        {
+            base.Awake();
+            BuildResolutionsDropdown();
         }
         #endregion
 
@@ -255,6 +266,11 @@ namespace WeAreGladiators.MainMenu
         {
             EventSystem.current.SetSelectedGameObject(null);
             HideInGameMenuView();
+        }
+        public void OnInGameSettingsButtonClicked()
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            ShowSettingsScreen();
         }
         public void OnInGameSaveAndQuitClicked()
         {
@@ -1643,8 +1659,8 @@ namespace WeAreGladiators.MainMenu
 
             // to do: build content to default state
 
-            settingsScreenBlackUnderlay.DOFade(0.5f, 0.75f);
-            settingsScreenMovementParent.DOMove(settingsScreenOnScreenPosition.position, 1f).SetEase(Ease.OutBack).OnComplete(() =>
+            settingsScreenBlackUnderlay.DOFade(0.5f, 0.5f);
+            settingsScreenMovementParent.DOMove(settingsScreenOnScreenPosition.position, 0.65f).SetEase(Ease.OutBack).OnComplete(() =>
             {
                 settingsScreenContentCg.interactable = true;
             });
@@ -1667,7 +1683,41 @@ namespace WeAreGladiators.MainMenu
         }
         public void OnSettingsPageCloseButtonClicked()
         {
-            HideSettingsScreen(1f);
+            HideSettingsScreen(0.65f);
+        }
+        public void SetQuality(int quality)
+        {
+            QualitySettings.SetQualityLevel(quality);
+        }
+        public void SetFullscreen(bool isFullscreen)
+        {
+            Screen.fullScreen = isFullscreen;
+        }
+        public void SetResolution(int resolutionIndex)
+        {
+            Resolution resolution = resolutions[resolutionIndex];
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        }
+        private void BuildResolutionsDropdown()
+        {
+            resolutions = Screen.resolutions;
+            resolutionDropdown.ClearOptions();
+            List<string> options = new List<string>();
+            int currentResolutionIndex = 0;
+            for (int i = 0; i < resolutions.Length; i++)
+            {
+                string option = resolutions[i].width + " x " + resolutions[i].height;
+                options.Add(option);
+
+                if (resolutions[i].width == Screen.currentResolution.width &&
+                    resolutions[i].height == Screen.currentResolution.height)
+                {
+                    currentResolutionIndex = i;
+                }
+            }
+            resolutionDropdown.AddOptions(options);
+            resolutionDropdown.value = currentResolutionIndex;
+            resolutionDropdown.RefreshShownValue();
         }
         #endregion
 

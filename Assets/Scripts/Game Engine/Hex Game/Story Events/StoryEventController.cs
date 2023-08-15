@@ -147,9 +147,9 @@ namespace WeAreGladiators.StoryEvents
             movementParent.position = offScreenPosition.position;
 
             // Move on screen
-            blackUnderlay.DOFade(0.5f, 0.75f).OnComplete(() =>
+            blackUnderlay.DOFade(0.5f, 0.5f).OnComplete(() =>
             {
-                movementParent.DOMove(onScreenPosition.position, 1f).SetEase(Ease.OutBack);
+                movementParent.DOMove(onScreenPosition.position, 0.65f).SetEase(Ease.OutBack);
                 TransformUtils.RebuildLayouts(layoutsRebuilt);
             });
             
@@ -534,7 +534,7 @@ namespace WeAreGladiators.StoryEvents
         {
             if (effect.effectType == StoryChoiceEffectType.FinishEvent)
             {
-                HideUI(0.75f, () =>
+                HideUI(0.65f, () =>
                 {
                     RunController.Instance.SetCheckPoint(SaveCheckPoint.Town);
                     GameController.Instance.SetGameState(GameState.Town);

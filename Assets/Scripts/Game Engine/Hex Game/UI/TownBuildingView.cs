@@ -12,7 +12,7 @@ using WeAreGladiators.Audio;
 
 namespace WeAreGladiators.TownFeatures
 {
-    public class TownBuildingView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+    public class TownBuildingView : MonoBehaviour
     {
         [Header("World Building Components")]
         [SerializeField] Color normalColor;
@@ -23,7 +23,6 @@ namespace WeAreGladiators.TownFeatures
         [SerializeField] RectTransform endPos;
         [Space(10)]
         [SerializeField] CanvasGroup popUpCg;
-        //[SerializeField] CanvasGroup outlineCg;
         [SerializeField] GameObject outlineSprite;
         [SerializeField] RectTransform cameraZoomToPoint;
         [SerializeField] Sound entranceSound;
@@ -55,12 +54,6 @@ namespace WeAreGladiators.TownFeatures
             get { return pageCg; }
         }
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            //StartCoroutine(ClickCoroutine());
-        }
-        
-
         private IEnumerator LeaveCoroutine()
         {
             if (blockMouseActions) yield break;
@@ -74,19 +67,19 @@ namespace WeAreGladiators.TownFeatures
             AudioManager.Instance.PlaySound(Sound.UI_Door_Open);
 
             // Fade out screen
-            pageCg.DOFade(0f, 1.25f);
+            pageCg.DOFade(0f, 1f);
 
             // Move page offscreen
-            pageMovementParent.DOMove(pageStartPos.position, 0.75f).SetEase(Ease.InBack);
-            yield return new WaitForSeconds(0.75f);
+            pageMovementParent.DOMove(pageStartPos.position, 0.65f).SetEase(Ease.InBack);
+            yield return new WaitForSeconds(0.65f);
 
             // Stop feature ambience SFX
             AudioManager.Instance.FadeOutSound(entranceSound, 0.75f);
 
             // Move and zoom out camera
             var c = CameraController.Instance.MainCamera;
-            c.DOOrthoSize(5, 0.75f);
-            c.transform.DOMove(new Vector3(0, 0, -15), 0.76f).OnComplete(() =>
+            c.DOOrthoSize(5, 0.65f);
+            c.transform.DOMove(new Vector3(0, 0, -15), 0.66f).OnComplete(() =>
             {
                 blockMouseActions = false;
                 pageVisualParent.SetActive(false);
@@ -95,44 +88,7 @@ namespace WeAreGladiators.TownFeatures
         public void OnLeaveFeatureButtonClicked()
         {
             StartCoroutine(LeaveCoroutine());
-        }
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            /*
-            if (blockMouseActions) return;
-            CursorController.Instance.SetCursor(CursorType.Enter_Door);
-
-            foreach(SpriteRenderer i in buildingSprites)            
-                i.color = mouseOverColor;
-            
-            outlineCg.DOKill();
-            popUpRect.DOKill();
-            popUpCg.DOKill();
-
-            outlineCg.DOFade(1, 0.1f);
-            popUpRect.DOMove(endPos.position, 0.25f);
-            popUpCg.DOFade(1f, 0.15f);*/
-
-        }
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            /*
-            if (blockMouseActions) return;
-            CursorController.Instance.SetCursor(CursorType.NormalPointer);
-
-            foreach (SpriteRenderer i in buildingSprites)
-                i.color = normalColor;
-
-            outlineCg.DOKill();
-            popUpRect.DOKill();
-            popUpCg.DOKill();
-
-            outlineCg.DOFade(0, 0.1f);
-            popUpRect.DOMove(startPos.position, 0.25f);
-            popUpCg.DOFade(0f, 0.15f);
-            */
-        }
-
+        }     
         public void SnapToArenaViewSettings()
         {
             // Move canvas to start pos + setup
@@ -224,15 +180,15 @@ namespace WeAreGladiators.TownFeatures
 
             // Move + zoom camera towards building
             var cam = CameraController.Instance.MainCamera;
-            cam.DOOrthoSize(2.5f, 0.75f).SetEase(Ease.OutCubic);
-            cam.transform.DOMove(new Vector3(cameraZoomToPoint.position.x, cameraZoomToPoint.position.y, -15), 0.6f).SetEase(Ease.OutCubic);
-            yield return new WaitForSeconds(0.76f);
+            cam.DOOrthoSize(2.5f, 0.65f).SetEase(Ease.OutCubic);
+            cam.transform.DOMove(new Vector3(cameraZoomToPoint.position.x, cameraZoomToPoint.position.y, -15), 0.5f).SetEase(Ease.OutCubic);
+            yield return new WaitForSeconds(0.66f);
 
             // Feature specific entrance SFX
             AudioManager.Instance.PlaySound(entranceSound);
 
             // Move page to centre
-            pageMovementParent.DOMove(pageEndPos.position, 0.75f)
+            pageMovementParent.DOMove(pageEndPos.position, 0.65f)
                 .SetEase(Ease.OutBack)
                 .OnComplete(() => blockMouseActions = false);
         }
