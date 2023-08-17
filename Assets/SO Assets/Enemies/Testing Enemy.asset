@@ -61,15 +61,7 @@ MonoBehaviour:
   randomizeHealth: 1
   lowerHealthLimit: 100
   upperHealthLimit: 100
-  aiTurnRoutine:
-    directives:
-    - action:
-        actionType: 1
-        targettingPriority: 02000000
-        getRangeFromAbility: 0
-        range: 0
-        abilityName: Consecration
-      requirements: []
+  behaviour: {fileID: 11400000, guid: 920cb29b9f9ccb64187ed0aaa13de3f5, type: 2}
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 6b5c6b02a64c9fe4cb91b8ff26213bd2, type: 2}

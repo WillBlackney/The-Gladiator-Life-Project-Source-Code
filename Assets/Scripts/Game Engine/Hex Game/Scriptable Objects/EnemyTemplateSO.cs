@@ -66,7 +66,7 @@ namespace WeAreGladiators.Characters
 
         [BoxGroup("AI Logic", centerLabel: true)]
         [LabelWidth(100)]
-        public AITurnRoutine aiTurnRoutine;
+        public AIBehaviour behaviour;
 
         [BoxGroup("Abilities + Perks", centerLabel: true)]
         [LabelWidth(100)]

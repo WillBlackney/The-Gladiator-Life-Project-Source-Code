@@ -40,7 +40,7 @@ namespace WeAreGladiators.AI
             if (!HexCharacterController.Instance.IsCharacterAbleToTakeActions(character) ||
                 character.activationPhase != ActivationPhase.ActivationPhase) return false;
 
-            foreach (AIDirective dir in character.aiTurnRoutine.directives)
+            foreach (AIDirective dir in character.behaviour.directives)
             {
                 TargetPriorityTuple tpt = IsDirectiveActionable(character, dir);
                 if (tpt != null)

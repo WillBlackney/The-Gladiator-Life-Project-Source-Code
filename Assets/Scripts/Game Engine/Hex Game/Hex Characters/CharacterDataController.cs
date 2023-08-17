@@ -284,7 +284,7 @@ namespace WeAreGladiators.Characters
             newCharacter.modelParts.AddRange(template.modelParts);
 
             // Ai Routine
-            newCharacter.aiTurnRoutine = template.aiTurnRoutine;
+            newCharacter.behaviour = template.behaviour;
 
             // Item Data
             newCharacter.itemSet = new ItemSet();

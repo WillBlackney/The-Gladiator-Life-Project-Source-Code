@@ -44,7 +44,7 @@ namespace WeAreGladiators.Characters
         public List<string> modelParts;
 
         [Header("AI Logic")]
-        public AITurnRoutine aiTurnRoutine;
+        public AIBehaviour behaviour;
 
         [Header("Item Properties")]
         public ItemSet itemSet = new ItemSet();

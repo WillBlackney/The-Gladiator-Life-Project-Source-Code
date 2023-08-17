@@ -35,7 +35,7 @@ namespace WeAreGladiators.Characters
         public int currentArmour;
 
         [Header("AI Logic")]
-        public AITurnRoutine aiTurnRoutine;
+        public AIBehaviour behaviour;
 
         [Header("Attributes")]
         public AttributeSheet attributeSheet;

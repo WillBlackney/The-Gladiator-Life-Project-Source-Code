@@ -379,8 +379,8 @@ namespace WeAreGladiators.Characters
             ModifyStress(character, data.currentStress, false, false, false);
 
             // AI Logic
-            character.aiTurnRoutine = data.aiTurnRoutine;
-            if (character.aiTurnRoutine == null)
+            character.behaviour = data.behaviour;
+            if (character.behaviour == null)
                 Debug.LogWarning("Routine is null...");
 
             // Build UCM
