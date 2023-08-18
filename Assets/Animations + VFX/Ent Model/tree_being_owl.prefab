@@ -622,7 +622,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5509303036382045276}
   - component: {fileID: 8109768718515899055}
-  - component: {fileID: 6658892677490590178}
+  - component: {fileID: 4466163319235514574}
   m_Layer: 0
   m_Name: back_hand_closed
   m_TagString: Untagged
@@ -697,7 +697,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6658892677490590178
+--- !u!114 &4466163319235514574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1090,7 +1090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 287289640713988004}
   - component: {fileID: 6134168346057289424}
-  - component: {fileID: 5606707135551102667}
+  - component: {fileID: 145984936996620572}
   m_Layer: 0
   m_Name: 000_000
   m_TagString: Untagged
@@ -1165,7 +1165,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5606707135551102667
+--- !u!114 &145984936996620572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1283,7 +1283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 531093268678954373}
   - component: {fileID: 1287336452700470617}
-  - component: {fileID: 2665855829801790083}
+  - component: {fileID: 2057329256539378874}
   m_Layer: 0
   m_Name: top_hand_closed
   m_TagString: Untagged
@@ -1358,7 +1358,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2665855829801790083
+--- !u!114 &2057329256539378874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1584,7 +1584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2994214858630715568}
   - component: {fileID: 2211905314362777001}
-  - component: {fileID: 6751039538334733046}
+  - component: {fileID: 1706336269709549568}
   m_Layer: 0
   m_Name: owl_eeye_open_002
   m_TagString: Untagged
@@ -1659,7 +1659,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6751039538334733046
+--- !u!114 &1706336269709549568
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2637,7 +2637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8929026334904953005}
   - component: {fileID: 2827007208841818518}
-  - component: {fileID: 2944733393968776771}
+  - component: {fileID: 7522048098576051398}
   m_Layer: 0
   m_Name: owl_eeye_open_001
   m_TagString: Untagged
@@ -2712,7 +2712,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2944733393968776771
+--- !u!114 &7522048098576051398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
