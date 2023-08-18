@@ -7,6 +7,7 @@ using Sirenix.Serialization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WeAreGladiators.UCM;
 
 namespace WeAreGladiators.Characters
 {
@@ -42,6 +43,7 @@ namespace WeAreGladiators.Characters
 
         [Header("Model Properties")]
         public List<string> modelParts;
+        public CharacterModel modelPrefab;
 
         [Header("AI Logic")]
         public AIBehaviour behaviour;

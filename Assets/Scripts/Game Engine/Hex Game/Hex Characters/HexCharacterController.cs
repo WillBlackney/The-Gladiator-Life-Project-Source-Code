@@ -338,15 +338,17 @@ namespace WeAreGladiators.Characters
             character.startingArmour = armour;
             ModifyArmour(character, armour);
 
-            // Misc UI setup
-            //character.hexCharacterView.characterNameTextUI.text = character.myName;
-
             // Set up items
             ItemController.Instance.RunItemSetupOnHexCharacterFromItemSet(character, data.itemSet);
 
             // Build UCMs
-            CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.ucm, data.modelParts);
-            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.ucm);
+            if(character.hexCharacterView.model is UniversalCharacterModel)
+            {
+                UniversalCharacterModel m = character.hexCharacterView.model.GetComponent<UniversalCharacterModel>();
+                CharacterModeller.BuildModelFromStringReferences(m, data.modelParts);
+                CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, m);
+            }
+            
             SetCharacterModelSize(character.hexCharacterView, data.modelSize);
 
             // Build activation window
@@ -384,9 +386,25 @@ namespace WeAreGladiators.Characters
                 Debug.LogWarning("Routine is null...");
 
             // Build UCM
-           // CharacterRace randomRace = CharacterDataController.Instance.GetRandomRace(CharacterDataController.Instance.PlayableRaces);
-           // CharacterModelTemplateSO randomTemplate = CharacterDataController.Instance.GetRandomModelTemplate(randomRace);
-            CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.ucm, data.modelParts);            
+            if(data.modelPrefab == null)
+            {
+                CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.model.GetComponent<UniversalCharacterModel>(), data.modelParts);
+            }
+            else if (data.modelPrefab != null)
+            {
+                // to do: setup a fixed model?? how??
+
+                Transform parent = character.hexCharacterView.ucmVisualParent.transform;
+                Destroy(character.hexCharacterView.model);
+
+                CharacterModel newModel = Instantiate(data.modelPrefab, parent);
+
+                // Assign animator, model and ER from new prefab
+                character.hexCharacterView.entityRenderer = newModel.myEntityRenderer;
+                character.hexCharacterView.model = newModel;
+                character.hexCharacterView.ucmAnimator = newModel.myAnimator;
+                newModel.transform.localScale = new Vector3(newModel.CombatScale, newModel.CombatScale, newModel.CombatScale);
+            }                      
 
             SetCharacterModelSize(character.hexCharacterView, data.modelSize);
 
@@ -400,7 +418,10 @@ namespace WeAreGladiators.Characters
             ModifyArmour(character, armour);
 
             // to do: change this => not every enemy will want to have its look reflect its gear => sometimes we want to override this
-            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.ucm);
+            if (character.hexCharacterView.model is UniversalCharacterModel)
+            {
+                CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.model.GetComponent<UniversalCharacterModel>());
+            }
 
             // Setup abilities
             AbilityController.Instance.BuildHexCharacterAbilityBookFromData(character, data.abilityBook);
@@ -1701,7 +1722,8 @@ namespace WeAreGladiators.Characters
                         VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Rallied!");
                         view.vfxManager.StopShattered();
                         PlayIdleAnimation(view);
-                        view.ucm.ShowNormalFace();
+                        if(view.model is UniversalCharacterModel)
+                        view.model.GetComponent<UniversalCharacterModel>().ShowNormalFace();
                     }).SetEndDelay(0.5f);
 
                     // Recover 4 stress
@@ -2455,7 +2477,7 @@ namespace WeAreGladiators.Characters
                 if (cData != null) cData.MarkAsCompleted();
             });
         }       
-        public void FadeOutCharacterModel(UniversalCharacterModel model, float speed = 1f)
+        public void FadeOutCharacterModel(CharacterModel model, float speed = 1f)
         {
             EntityRenderer view = model.myEntityRenderer;
             foreach (SpriteRenderer sr in view.renderers)
@@ -2464,6 +2486,7 @@ namespace WeAreGladiators.Characters
                     sr.DOFade(0, speed);
             }
 
+            /*
             // Stop particles
             if (model.activeChestParticles != null)
             {
@@ -2472,10 +2495,10 @@ namespace WeAreGladiators.Characters
                 {
                     p.Stop();
                 }
-            }
+            }*/
 
         }
-        public void FadeInCharacterModel(UniversalCharacterModel model, float speed = 1f)
+        public void FadeInCharacterModel(CharacterModel model, float speed = 1f)
         {
             EntityRenderer view = model.myEntityRenderer;
             foreach (SpriteRenderer sr in view.renderers)
@@ -2485,6 +2508,7 @@ namespace WeAreGladiators.Characters
                 sr.DOFade(1, speed);
             }
 
+            /*
             // Restart particles
             if (model.activeChestParticles != null)
             {
@@ -2494,7 +2518,7 @@ namespace WeAreGladiators.Characters
                     p.Clear();
                     p.Play();
                 }
-            }
+            }*/
         }
         public void FadeInCharacterShadow(HexCharacterView view, float speed, System.Action onCompleteCallBack = null)
         {
@@ -2927,8 +2951,8 @@ namespace WeAreGladiators.Characters
             Debug.Log("CharacterEntityController.DestroyCharacterView() called...");
             if (disconnectUCM)
             {
-                view.ucm.gameObject.AddComponent<DestroyOnSceneChange>();
-                view.ucm.transform.SetParent(null, true);
+                view.model.gameObject.AddComponent<DestroyOnSceneChange>();
+                view.model.transform.SetParent(null, true);
             }
             Destroy(view.gameObject,0.1f);
         }

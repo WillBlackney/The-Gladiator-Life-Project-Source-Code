@@ -1317,7 +1317,7 @@ namespace WeAreGladiators.Abilities
                     HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null, 0);
 
                     // Hide model
-                    HexCharacterController.Instance.FadeOutCharacterModel(view.ucm, 0);
+                    HexCharacterController.Instance.FadeOutCharacterModel(view.model, 0);
                     HexCharacterController.Instance.FadeOutCharacterShadow(view, 0);
                     //view.blockMouseOver = true;
 
@@ -1338,7 +1338,7 @@ namespace WeAreGladiators.Abilities
                         TurnController.Instance.UpdateWindowPositions(cachedOrder);
                         TurnController.Instance.MoveActivationArrowTowardsEntityWindow(entityActivated);
                         HexCharacterController.Instance.FadeInCharacterWorldCanvas(view, null, abilityEffect.uiFadeInSpeed);
-                        CharacterModeller.FadeInCharacterModel(view.ucm, abilityEffect.modelFadeInSpeed);
+                        CharacterModeller.FadeInCharacterModel(view.model, abilityEffect.modelFadeInSpeed);
                         CharacterModeller.FadeInCharacterShadow(view, 1f);
                     });                    
 

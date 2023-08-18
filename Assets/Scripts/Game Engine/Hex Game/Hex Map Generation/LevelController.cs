@@ -695,7 +695,7 @@ namespace WeAreGladiators.HexTiles
             VisualEventManager.CreateVisualEvent(() => {
                 VisualEffectManager.Instance.CreateTeleportEffect(view.WorldPosition);
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null, 0.2f);
-                HexCharacterController.Instance.FadeOutCharacterModel(view.ucm, 0.2f);
+                HexCharacterController.Instance.FadeOutCharacterModel(view.model, 0.2f);
                 HexCharacterController.Instance.FadeOutCharacterShadow(view, 0.2f);
             });
           
@@ -708,7 +708,7 @@ namespace WeAreGladiators.HexTiles
             VisualEventManager.CreateVisualEvent(() => {
                 VisualEffectManager.Instance.CreateTeleportEffect(view.WorldPosition);
                 HexCharacterController.Instance.FadeInCharacterWorldCanvas(view, null, 0.2f);
-                HexCharacterController.Instance.FadeInCharacterModel(view.ucm, 0.2f);
+                HexCharacterController.Instance.FadeInCharacterModel(view.model, 0.2f);
                 HexCharacterController.Instance.FadeInCharacterShadow(view, 0.2f);
                 if (updateActivationHex) character.currentTile.ShowActivationMarker();
             });
@@ -764,7 +764,7 @@ namespace WeAreGladiators.HexTiles
                 VisualEventManager.CreateVisualEvent(() => {
                     VisualEffectManager.Instance.CreateTeleportEffect(viewA.WorldPosition);
                     HexCharacterController.Instance.FadeOutCharacterWorldCanvas(viewA, null, 0.2f);
-                    HexCharacterController.Instance.FadeOutCharacterModel(viewA.ucm, 0.2f);
+                    HexCharacterController.Instance.FadeOutCharacterModel(viewA.model, 0.2f);
                     HexCharacterController.Instance.FadeOutCharacterShadow(viewA, 0.2f);
                 });
 
@@ -772,7 +772,7 @@ namespace WeAreGladiators.HexTiles
                 VisualEventManager.CreateVisualEvent(() => {
                     VisualEffectManager.Instance.CreateTeleportEffect(viewB.WorldPosition);
                     HexCharacterController.Instance.FadeOutCharacterWorldCanvas(viewB, null, 0.2f);
-                    HexCharacterController.Instance.FadeOutCharacterModel(viewB.ucm, 0.2f);
+                    HexCharacterController.Instance.FadeOutCharacterModel(viewB.model, 0.2f);
                     HexCharacterController.Instance.FadeOutCharacterShadow(viewB, 0.2f);
                 });
 
@@ -789,13 +789,13 @@ namespace WeAreGladiators.HexTiles
                 VisualEventManager.CreateVisualEvent(() => {
                     VisualEffectManager.Instance.CreateTeleportEffect(viewA.WorldPosition);
                     HexCharacterController.Instance.FadeInCharacterWorldCanvas(viewA, null, 0.2f);
-                    HexCharacterController.Instance.FadeInCharacterModel(viewA.ucm, 0.2f);
+                    HexCharacterController.Instance.FadeInCharacterModel(viewA.model, 0.2f);
                     HexCharacterController.Instance.FadeInCharacterShadow(viewA, 0.2f);
                 });
                 VisualEventManager.CreateVisualEvent(() => {
                     VisualEffectManager.Instance.CreateTeleportEffect(viewB.WorldPosition);
                     HexCharacterController.Instance.FadeInCharacterWorldCanvas(viewB, null, 0.2f);
-                    HexCharacterController.Instance.FadeInCharacterModel(viewB.ucm, 0.2f);
+                    HexCharacterController.Instance.FadeInCharacterModel(viewB.model, 0.2f);
                     HexCharacterController.Instance.FadeInCharacterShadow(viewB, 0.2f);
                 });
             }

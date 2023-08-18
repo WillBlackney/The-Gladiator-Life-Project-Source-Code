@@ -8,6 +8,7 @@ using WeAreGladiators.Abilities;
 using WeAreGladiators.Perks;
 using WeAreGladiators.AI;
 using WeAreGladiators.Audio;
+using WeAreGladiators.UCM;
 
 namespace WeAreGladiators.Characters
 {
@@ -94,9 +95,17 @@ namespace WeAreGladiators.Characters
         [ShowIf("ShowItemLoadouts")]
         public RecruitWeaponLoadout[] recruitWeaponLoadouts;
 
-        [BoxGroup("Misc", centerLabel: true)]
+        [BoxGroup("Model Settings", centerLabel: true)]
         [Header("Model Properties")]
+        public bool useUCM;
+
+        [BoxGroup("Model Settings")]
+        [ShowIf("ShowModelParts")]
         public List<string> modelParts;
+
+        [BoxGroup("Model Settings")]
+        [ShowIf("ShowModelPrefab")]
+        public CharacterModel modelPrefab;
 
         // GUI Colours
         #region
@@ -107,6 +116,14 @@ namespace WeAreGladiators.Characters
 
         // Odin Show Ifs
         #region
+        public bool ShowModelParts()
+        {
+            return useUCM;
+        }
+        public bool ShowModelPrefab()
+        {
+            return !useUCM;
+        }
         public bool ShowItemSet()
         {
             return !randomizeItemSet;

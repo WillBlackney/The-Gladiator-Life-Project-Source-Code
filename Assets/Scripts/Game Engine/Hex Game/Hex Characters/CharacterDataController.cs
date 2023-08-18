@@ -279,9 +279,10 @@ namespace WeAreGladiators.Characters
                 SetCharacterMaxHealth(newCharacter, RandomGenerator.NumberBetween(template.lowerHealthLimit, template.upperHealthLimit));
             SetCharacterHealth(newCharacter, StatCalculator.GetTotalMaxHealth(newCharacter));
 
-            // UCM Data
+            // Model Data
             newCharacter.modelParts = new List<string>();
             newCharacter.modelParts.AddRange(template.modelParts);
+            newCharacter.modelPrefab = template.modelPrefab;
 
             // Ai Routine
             newCharacter.behaviour = template.behaviour;
@@ -351,6 +352,7 @@ namespace WeAreGladiators.Characters
             // UCM Data
             newCharacter.modelParts = new List<string>();
             newCharacter.modelParts.AddRange(original.modelParts);
+            newCharacter.modelPrefab = original.modelPrefab;
 
             // Item Data
             newCharacter.itemSet = new ItemSet();

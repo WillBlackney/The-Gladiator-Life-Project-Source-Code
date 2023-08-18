@@ -13,22 +13,15 @@ using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UCM
 {
-    public class UniversalCharacterModel : MonoBehaviour
+    public class UniversalCharacterModel : CharacterModel
     {
         // Properties + Component References
         #region
-        [HideInInspector] public bool activelyFading = false;
-
-        [Header("Core Components")]
-        public Animator myAnimator;
-        public EntityRenderer myEntityRenderer;
         [SerializeField] GameObject headMasksParent;
         [SerializeField] GameObject[] oneHandAnimationBones;
         [SerializeField] GameObject[] twoHandAnimationBones;
-        [Tooltip("Leave this unticked if you need this UCM to be masked by masks that are not childed to this game object (e.g. scroll character roster).")]
-        [SerializeField] bool allowAutoSorting = true;
-        [ShowIf("ShowRootSorting")]
-        [SerializeField] SortingGroup rootSortingGroup;
+      
+       
         [ShowIf("ShowRootSorting")]
         [SerializeField] SortingGroup headSortingGroup;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]       
@@ -48,8 +41,7 @@ namespace WeAreGladiators.UCM
         [HideInInspector] public UniversalCharacterModelElement[] allChestArmour;
         [HideInInspector] public UniversalCharacterModelElement[] allHeadArmour;
 
-        public bool AllowAutoSorting => allowAutoSorting;
-        public SortingGroup RootSortingGroup => rootSortingGroup;
+             
         public SortingGroup HeadSortingGroup => headSortingGroup;
         public UniversalCharacterModelElement[] AllModelElements 
         { 
@@ -158,6 +150,7 @@ namespace WeAreGladiators.UCM
             {
                 Debug.Log("UCM.RunSetup() called and executing setup...");
                 if (hasRunSetup && allowRerun) Debug.Log("UCM.RunSetup() already had previous setup, now rerunning...");
+
                 // Get all elements
                 AllModelElements = GetComponentsInChildren<UniversalCharacterModelElement>(true);
 
@@ -194,7 +187,7 @@ namespace WeAreGladiators.UCM
                 AllOffHandWeapons = ohElements.ToArray();
                 AllHeadArmour = headElements.ToArray();
 
-                WeAreGladiators.UCM.CharacterModeller.AutoSetSortingOrderValues(this);
+                CharacterModeller.AutoSetSortingOrderValues(this);
                 SetMode(UcmMode.Standard);
 
                 // Turn everything off to start
@@ -228,7 +221,6 @@ namespace WeAreGladiators.UCM
         }
         public void ShowHurtFace()
         {
-            Debug.LogWarning("ShowHurtFace");
             if(activeFace != null)
             {
                 SpriteRenderer sr = activeFace.GetComponent<SpriteRenderer>();
@@ -238,7 +230,6 @@ namespace WeAreGladiators.UCM
         }
         public void ShowNormalFace()
         {
-            Debug.LogWarning("ShowNormalFace");
             if (activeFace != null && normalFaceSprite != null)
             {
                 activeFace.GetComponent<SpriteRenderer>().sprite = normalFaceSprite;
@@ -287,10 +278,7 @@ namespace WeAreGladiators.UCM
         
         #endregion
 
-        public bool ShowRootSorting()
-        {
-            return allowAutoSorting;
-        }
+      
 
     }
 

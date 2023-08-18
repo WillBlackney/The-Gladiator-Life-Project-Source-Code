@@ -401,7 +401,7 @@ namespace WeAreGladiators
                 VisualEffectManager.Instance.CreateExpendEffect(model.hexCharacterView.WorldPosition, 15, 0.2f, false);
 
                 // Fade out character model
-                CharacterModeller.FadeOutCharacterModel(model.hexCharacterView.ucm, 0.5f);
+                CharacterModeller.FadeOutCharacterModel(model.hexCharacterView.model, 0.5f);
 
                 // Fade out UI elements
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null, 0.5f);
@@ -616,7 +616,7 @@ namespace WeAreGladiators
                 VisualEffectManager.Instance.CreateExpendEffect(model.hexCharacterView.WorldPosition, 15, 0.2f, false);
 
                 // Fade out character model
-                CharacterModeller.FadeOutCharacterModel(model.hexCharacterView.ucm, 0.5f);
+                CharacterModeller.FadeOutCharacterModel(model.hexCharacterView.model, 0.5f);
 
                 // Fade out UI elements
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(model.hexCharacterView, null, 0.5f);

@@ -61,71 +61,7 @@ MonoBehaviour:
   randomizeHealth: 1
   lowerHealthLimit: 35
   upperHealthLimit: 40
-  aiTurnRoutine:
-    directives:
-    - action:
-        actionType: 1
-        targettingPriority: 0100000006000000
-        getRangeFromAbility: 0
-        range: 0
-        abilityName: Nightmare
-      requirements:
-      - requirementType: 8
-        range: 0
-        perkPairing:
-          perkTag: 0
-          passiveStacks: 1
-        healthPercentage: 0
-        enemiesInMeleeRange: 1
-        energyReq: 0
-        fatigueReq: 0
-        stressReq: 0
-        turnReq: 0
-        alliesAlive: 0
-        abilityName: 
-        armourReq: 0
-      - requirementType: 24
-        range: 0
-        perkPairing:
-          perkTag: 0
-          passiveStacks: 1
-        healthPercentage: 0
-        enemiesInMeleeRange: 1
-        energyReq: 0
-        fatigueReq: 0
-        stressReq: 100
-        turnReq: 0
-        alliesAlive: 0
-        abilityName: 
-        armourReq: 0
-    - action:
-        actionType: 1
-        targettingPriority: 050000000100000006000000
-        getRangeFromAbility: 0
-        range: 0
-        abilityName: Ghostly Grasp
-      requirements: []
-    - action:
-        actionType: 3
-        targettingPriority: 0100000006000000
-        getRangeFromAbility: 1
-        range: 0
-        abilityName: Nightmare
-      requirements:
-      - requirementType: 8
-        range: 0
-        perkPairing:
-          perkTag: 0
-          passiveStacks: 0
-        healthPercentage: 0
-        enemiesInMeleeRange: 1
-        energyReq: 0
-        fatigueReq: 0
-        stressReq: 0
-        turnReq: 0
-        alliesAlive: 0
-        abilityName: 
-        armourReq: 0
+  behaviour: {fileID: 0}
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: e7bbef8e195ca0a429df7f1da90b09ec, type: 2}
@@ -134,8 +70,10 @@ MonoBehaviour:
     perks:
     - perkTag: 24
       stacks: 1
+      freshInjury: 0
     - perkTag: 204
       stacks: 1
+      freshInjury: 0
   randomizeItemSet: 0
   itemSet:
     mainHandItem: {fileID: 0}
@@ -145,6 +83,8 @@ MonoBehaviour:
     trinket: {fileID: 0}
   possibleArmourLoadouts: []
   recruitWeaponLoadouts: []
+  useUCM: 0
   modelParts:
   - Mind_Flayer_Chest_Wear
   - Mind_Flayer_Head_Wear
+  modelPrefab: {fileID: 0}

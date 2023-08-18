@@ -881,7 +881,7 @@ namespace WeAreGladiators.UCM
 
         // Fading Logic
         #region
-        public static void FadeOutCharacterModel(UniversalCharacterModel model, float speed = 1f)
+        public static void FadeOutCharacterModel(CharacterModel model, float speed = 1f)
         {
             EntityRenderer view = model.myEntityRenderer;
             foreach (SpriteRenderer sr in view.renderers)
@@ -890,6 +890,7 @@ namespace WeAreGladiators.UCM
                     sr.DOFade(0, speed);
             }
 
+            /*
             // Stop particles
             if (model.activeChestParticles != null)
             {
@@ -898,10 +899,10 @@ namespace WeAreGladiators.UCM
                 {
                     p.Stop();
                 }
-            }
+            }*/
 
         }
-        public static void FadeInCharacterModel(UniversalCharacterModel model, float speed = 1f)
+        public static void FadeInCharacterModel(CharacterModel model, float speed = 1f)
         {
             EntityRenderer view = model.myEntityRenderer;
             foreach (SpriteRenderer sr in view.renderers)
@@ -911,6 +912,7 @@ namespace WeAreGladiators.UCM
                 sr.DOFade(1, speed);
             }
 
+            /*
             // Restart particles
             if (model.activeChestParticles != null)
             {
@@ -920,7 +922,7 @@ namespace WeAreGladiators.UCM
                     p.Clear();
                     p.Play();
                 }
-            }
+            }*/
         }
         public static void FadeInCharacterShadow(HexCharacterView view, float speed, System.Action onCompleteCallBack = null)
         {

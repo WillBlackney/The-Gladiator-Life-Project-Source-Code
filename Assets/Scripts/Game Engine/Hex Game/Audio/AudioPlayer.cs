@@ -22,16 +22,16 @@ namespace WeAreGladiators.Audio
             source.outputAudioMixerGroup = AudioManager.Instance.GetBus(data.bus);
 
             // Randomize clip
-            if (data.randomizeClip) Source.clip = data.audioClips[RandomGenerator.NumberBetween(0, data.audioClips.Length - 1)];
-            else Source.clip = data.audioClip;
+            if (data.randomizeClip) source.clip = data.audioClips[RandomGenerator.NumberBetween(0, data.audioClips.Length - 1)];
+            else source.clip = data.audioClip;
 
             // Randomize pitch if marked to do so
-            if (data.randomizePitch) Source.pitch = RandomGenerator.NumberBetween(data.randomPitchLowerLimit, data.randomPitchUpperLimit);
-            else Source.pitch = data.pitch;
+            if (data.randomizePitch) source.pitch = RandomGenerator.NumberBetween(data.randomPitchLowerLimit, data.randomPitchUpperLimit);
+            else source.pitch = data.pitch;
 
             // Randomize volume if marked to do so
-            if (data.randomizeVolume) Source.volume = RandomGenerator.NumberBetween(data.randomVolumeLowerLimit, data.randomVolumeUpperLimit);
-            else Source.volume = data.volume;
+            if (data.randomizeVolume) source.volume = RandomGenerator.NumberBetween(data.randomVolumeLowerLimit, data.randomVolumeUpperLimit);
+            else source.volume = data.volume;
         }
     }
 }

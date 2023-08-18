@@ -102,9 +102,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9b8e828332b12524ea8077dc9f45ad24, type: 2}
     - {fileID: 11400000, guid: eb90f828c8b2d7349b3e2ab18a132000, type: 2}
     offhandProspects: []
+  useUCM: 1
   modelParts:
   - Human_Chest_1
   - Human_Face_8
   - Human_Head_10
   - Human_Right_Hand_1
   - Human_Right_Leg_1
+  modelPrefab: {fileID: 0}

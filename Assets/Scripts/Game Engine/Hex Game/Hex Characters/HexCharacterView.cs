@@ -68,12 +68,12 @@ namespace WeAreGladiators.Characters
         public GameObject freeStrikeVisualParent;
         public Transform freeStrikeSizingParent;
 
-        [Header("UCM References")]
+        [Header("Model References")]
         public GameObject ucmVisualParent;
         public GameObject ucmSizingParent;
         public GameObject ucmShadowParent;
         public CanvasGroup ucmShadowCg;     
-        public UniversalCharacterModel ucm;
+        public CharacterModel model;
         public Animator ucmAnimator;
         public EntityRenderer entityRenderer;
         public CharacterVfxManager vfxManager;
@@ -120,7 +120,7 @@ namespace WeAreGladiators.Characters
                 else if (vfxManager != null) vfxManager.StopDashTrail();
 
                 // Show normal face on idle
-                if (currentAnimation == AnimationEventController.IDLE) ucm.ShowNormalFace();
+                if (currentAnimation == AnimationEventController.IDLE && model is UniversalCharacterModel) model.GetComponent<UniversalCharacterModel>().ShowNormalFace();
             }
         }
 

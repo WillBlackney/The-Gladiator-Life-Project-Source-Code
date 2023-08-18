@@ -1691,12 +1691,12 @@ namespace WeAreGladiators.Combat
             VisualEventManager.CreateVisualEvent(() =>
             {
                 int spatters = 2;
-                character.hexCharacterView.ucm.RootSortingGroup.sortingOrder = character.hexCharacterView.ucm.RootSortingGroup.sortingOrder - 1;
+                character.hexCharacterView.model.RootSortingGroup.sortingOrder = character.hexCharacterView.model.RootSortingGroup.sortingOrder - 1;
                 AudioManager.Instance.PlaySound(character.AudioProfile, AudioSet.Die);
 
                 Vector3 finalPos = new Vector3(view.ucmMovementParent.transform.position.x + randX, view.ucmMovementParent.transform.position.y + randY, view.ucmMovementParent.transform.position.z);
                 view.ucmMovementParent.transform.DOMove(finalPos, 0.5f);
-                view.ucm.transform.DORotate(new Vector3(0, 0, randomDeathRotation), 0.5f);
+                view.model.transform.DORotate(new Vector3(0, 0, randomDeathRotation), 0.5f);
 
                 if (randomDeathAnim == 0) HexCharacterController.Instance.PlayDeathAnimation(view);
                 else

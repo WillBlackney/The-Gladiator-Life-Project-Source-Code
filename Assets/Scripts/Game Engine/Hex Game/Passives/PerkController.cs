@@ -10,6 +10,7 @@ using System.Linq;
 using DG.Tweening;
 using WeAreGladiators.Scoring;
 using WeAreGladiators.CombatLog;
+using WeAreGladiators.UCM;
 
 namespace WeAreGladiators.Perks
 {
@@ -612,7 +613,7 @@ namespace WeAreGladiators.Perks
             }
             if (perk == Perk.SmashedShield && showVFX)
             {
-                var myUcm = character.hexCharacterView.ucm;
+                var myUcm = character.hexCharacterView.model.GetComponent<UniversalCharacterModel>();
 
                 if (myUcm != null && newFinalStackcount > 0) VisualEventManager.CreateVisualEvent(() =>
                 {

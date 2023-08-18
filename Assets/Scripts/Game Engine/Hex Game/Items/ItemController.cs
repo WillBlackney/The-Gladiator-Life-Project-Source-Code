@@ -317,8 +317,9 @@ namespace WeAreGladiators.Items
             character.itemSet = new ItemSet();
             CopyItemManagerDataIntoOtherItemManager(itemSet, character.itemSet);
             // Dont apply appearance of weapons to enemies, they get this look directly from their UCM string references
-            if(character.controller != Controller.AI)
-                CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, character.hexCharacterView.ucm);
+            UniversalCharacterModel ucm = character.hexCharacterView.model.GetComponent<UniversalCharacterModel>();
+            if (ucm != null && character.controller != Controller.AI)
+                CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, ucm);
 
         }
         public void CopyItemManagerDataIntoOtherItemManager(ItemSet originalData, ItemSet clone)

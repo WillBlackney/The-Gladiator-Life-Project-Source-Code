@@ -135,13 +135,16 @@ namespace WeAreGladiators.TurnLogic
             AddEntityToActivationOrder(entity);
 
             // Build window UCM
-            if(entity.characterData != null)
+            if (entity.characterData != null)
             {
                 CharacterModeller.BuildModelFromStringReferences(newWindowScript.myUCM, entity.characterData.modelParts);
                 CharacterModeller.ApplyItemSetToCharacterModelView(entity.characterData.itemSet, newWindowScript.myUCM);
             }
-            else CharacterModeller.BuildModelFromModelClone(newWindowScript.myUCM, entity.hexCharacterView.ucm);
-
+            else
+            {
+                if(entity.hexCharacterView.model is UniversalCharacterModel)
+                    CharacterModeller.BuildModelFromModelClone(newWindowScript.myUCM, entity.hexCharacterView.model.GetComponent<UniversalCharacterModel>());
+            }
             // play window still anim on ucm
             newWindowScript.myUCM.SetBaseAnim();
 
