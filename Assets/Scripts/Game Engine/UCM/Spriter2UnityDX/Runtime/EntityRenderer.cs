@@ -53,8 +53,8 @@ namespace Spriter2UnityDX {
                     if (ucm)
                     {
 						DoForAll(x => x.sortingOrder = value + x.GetComponent<UniversalCharacterModelElement>().sortingOrderBonus);
-						UniversalCharacterModel myUCM = GetComponent<UniversalCharacterModel>();
-						CharacterModeller.AutoSetSortingOrderValues(myUCM);
+						CharacterModel model = GetComponent<CharacterModel>();
+						CharacterModeller.AutoSetSortingOrderValues(model);
 					}
 				
 				}

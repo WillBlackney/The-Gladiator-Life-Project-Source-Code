@@ -31,10 +31,10 @@ namespace WeAreGladiators.VisualEvents
         public const string CHARGE = "CHARGE"; 
         public const string CHARGE_END = "CHARGE_END";
         public const string DUCK = "Duck";
-        public const string IDLE = "Idle";
+        public const string IDLE = "IDLE";
         public const string SHOOT_BOW = "Shoot Bow";
         public const string SHOOT_CROSSBOW = "Shoot Crossbow";
-        public const string RUN = "Move";
+        public const string RUN = "RUN";
         public const string HURT = "Hurt";
         public const string DIE_1 = "DIE_1";
         public const string DIE_2 = "DIE_2";
@@ -50,6 +50,7 @@ namespace WeAreGladiators.VisualEvents
         public const string TACKLE_END = "TACKLE_END";
         public const string RELOAD_CROSSBOW = "RELOAD_CROSSBOW";
         public const string SHATTERED = "SHATTERED";
+        public const string BITE = "BITE";
         #endregion
 
         // Core Functions

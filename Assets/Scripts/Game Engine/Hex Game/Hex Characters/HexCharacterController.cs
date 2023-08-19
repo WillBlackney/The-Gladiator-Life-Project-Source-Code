@@ -168,10 +168,7 @@ namespace WeAreGladiators.Characters
             model.characterData = data;
 
             // Set up positioning in world
-            LevelController.Instance.PlaceCharacterOnHex(model, startPosition, true);
-
-            // Face enemies
-            LevelController.Instance.SetCharacterFacing(model, Facing.Left);
+            LevelController.Instance.PlaceCharacterOnHex(model, startPosition, true);           
 
             // Set type + allegiance
             model.controller = Controller.AI;
@@ -185,6 +182,9 @@ namespace WeAreGladiators.Characters
 
             // Copy data from enemy data into new model
             SetupCharacterFromEnemyData(model, data);
+
+            // Face enemies
+            LevelController.Instance.SetCharacterFacing(model, Facing.Left);
 
             // Add to persistency
             AddEnemyToPersistency(model);
@@ -2823,7 +2823,7 @@ namespace WeAreGladiators.Characters
 
             // Move
             Sequence s = DOTween.Sequence();
-            s.Append(view.ucmMovementParent.transform.DOMove(view.WorldPosition, 1.5f * (distance * 0.1f)));
+            s.Append(view.ucmMovementParent.transform.DOMove(view.WorldPosition, 1.5f * (distance * 0.1f)).SetEase(Ease.OutCubic));
             s.OnComplete(() =>
             {
                 // Reset facing, depending on living entity type

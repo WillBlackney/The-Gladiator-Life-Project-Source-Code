@@ -373,6 +373,7 @@ namespace WeAreGladiators.HexTiles
             {
                 if (character.ucmVisualParent != null)
                 {
+                    if (!character.model.BaseFacingIsRight) scale = -scale;
                     VisualEventManager.CreateVisualEvent(()=> character.ucmVisualParent.transform.localScale = new Vector3(scale, Mathf.Abs(scale)));
                 }
             }
@@ -381,7 +382,9 @@ namespace WeAreGladiators.HexTiles
             {
                 if (character.ucmVisualParent != null)
                 {
-                    VisualEventManager.CreateVisualEvent(() => character.ucmVisualParent.transform.localScale = new Vector3(-scale, Mathf.Abs(scale)));
+                    float final = -scale;
+                    if (!character.model.BaseFacingIsRight) final = scale;
+                    VisualEventManager.CreateVisualEvent(() => character.ucmVisualParent.transform.localScale = new Vector3(final, Mathf.Abs(scale)));
                 }
             }
 

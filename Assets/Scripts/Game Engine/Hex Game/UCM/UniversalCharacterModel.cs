@@ -34,7 +34,6 @@ namespace WeAreGladiators.UCM
         [HideInInspector] public UniversalCharacterModelElement activeChestLighting;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        [HideInInspector] public UniversalCharacterModelElement[] allModelElements;
         [HideInInspector] public SpriteMask[] allHeadWearSpriteMasks;
         [HideInInspector] public UniversalCharacterModelElement[] allMainHandWeapons;
         [HideInInspector] public UniversalCharacterModelElement[] allOffHandWeapons;
@@ -43,15 +42,7 @@ namespace WeAreGladiators.UCM
 
              
         public SortingGroup HeadSortingGroup => headSortingGroup;
-        public UniversalCharacterModelElement[] AllModelElements 
-        { 
-            get
-            {
-                if(allModelElements == null || allModelElements.Length == 0) RunSetup(true);                
-                return allModelElements;
-            }
-            private set { allModelElements = value; } 
-        }
+       
         public SpriteMask[] AllHeadWearSpriteMasks
         {
             get
@@ -125,26 +116,24 @@ namespace WeAreGladiators.UCM
         [HideInInspector] public UniversalCharacterModelElement activeMainHandWeapon;
         [HideInInspector] public UniversalCharacterModelElement activeOffHandWeapon;
 
-        private bool hasRunSetup = false;
-
         private Sprite normalFaceSprite;
         #endregion
 
         // Initialization
         #region
-        private void Awake()
+        protected override void Awake()
         {
             RunSetup();
         }
-        private void Start()
+        protected override void Start()
         {
             RunSetup();
         }
-        private void OnEnable()
+        protected override void OnEnable()
         {
             RunSetup();
         }
-        public void RunSetup(bool allowRerun = false)
+        protected override void RunSetup(bool allowRerun = false)
         {
             if ((!hasRunSetup || (hasRunSetup && allowRerun)) && Application.isPlaying)
             {

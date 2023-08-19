@@ -276,31 +276,52 @@ namespace WeAreGladiators.UCM
                 model.activeOffHandWeapon.gameObject.SetActive(false);
             }
         }
-        public static void AutoSetSortingOrderValues(UniversalCharacterModel model)
+        public static void AutoSetSortingOrderValues(CharacterModel model)
         {
-            int headSortOrder = model.myEntityRenderer.SortingOrder + 10;
-            if (model.HeadSortingGroup != null) model.HeadSortingGroup.sortingOrder = headSortOrder;
-            if (model.RootSortingGroup != null)
+            if(model is UniversalCharacterModel)
             {
-                if (model.AllowAutoSorting)
+                UniversalCharacterModel ucm = (UniversalCharacterModel)model;
+                int headSortOrder = ucm.myEntityRenderer.SortingOrder + 10;
+                if (ucm.HeadSortingGroup != null) ucm.HeadSortingGroup.sortingOrder = headSortOrder;
+                if (ucm.RootSortingGroup != null)
                 {
-                    model.RootSortingGroup.enabled = true;
-                    model.HeadSortingGroup.enabled = true;
+                    if (ucm.AllowAutoSorting)
+                    {
+                        ucm.RootSortingGroup.enabled = true;
+                        ucm.HeadSortingGroup.enabled = true;
+                    }
+
+                    else
+                    {
+                        ucm.RootSortingGroup.enabled = false;
+                        ucm.HeadSortingGroup.enabled = false;
+                    }
+                    ucm.RootSortingGroup.sortingOrder = ucm.myEntityRenderer.SortingOrder;
                 }
 
-                else
+                foreach (SpriteMask mask in ucm.AllHeadWearSpriteMasks)
                 {
-                    model.RootSortingGroup.enabled = false;
-                    model.HeadSortingGroup.enabled = false;
+                    mask.frontSortingOrder = headSortOrder + 1;
+                    mask.backSortingOrder = headSortOrder - 1;
                 }
-                model.RootSortingGroup.sortingOrder = model.myEntityRenderer.SortingOrder;
             }
-
-            foreach (SpriteMask mask in model.AllHeadWearSpriteMasks)
+            else
             {
-                mask.frontSortingOrder = headSortOrder + 1;
-                mask.backSortingOrder = headSortOrder - 1;
+                if (model.RootSortingGroup != null)
+                {
+                    if (model.AllowAutoSorting)
+                    {
+                        model.RootSortingGroup.enabled = true;
+                    }
+
+                    else
+                    {
+                        model.RootSortingGroup.enabled = false;
+                    }
+                    model.RootSortingGroup.sortingOrder = model.myEntityRenderer.SortingOrder;
+                }
             }
+            
         }
         #endregion
 
