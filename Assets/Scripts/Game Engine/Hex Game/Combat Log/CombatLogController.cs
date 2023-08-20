@@ -85,7 +85,7 @@ namespace WeAreGladiators.CombatLog
                 int dataStartIndex = source.Count - 1 - maxEntriesShown;
                 if(dataStartIndex < 0) dataStartIndex = 0;
 
-                allEntryViews.ForEach(v => v.gameObject.SetActive(false));
+                allEntryViews.ForEach(v => v?.gameObject.SetActive(false));
                 for (int i = 0; i < source.Count && i < maxEntriesShown; i++)
                 {
                     if (i >= allEntryViews.Count) CreateNewEntryView();

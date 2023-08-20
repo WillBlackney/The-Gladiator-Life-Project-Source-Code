@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Lunker Youngling
   race: 0
-  audioProfile: 1
+  audioProfile: 8
   modelSize: 0
   xpReward: 15
   ignoreStress: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 80
+      value: 200
       stars: 0
     dodge:
       value: 10
@@ -41,8 +41,8 @@ MonoBehaviour:
       value: 10
       stars: 0
     maxHealth: 0
-    apRecovery: 8
-    apMaximum: 8
+    apRecovery: 20
+    apMaximum: 20
     initiative: 15
     fatigueRecovery: 15
     criticalChance: 5
@@ -61,9 +61,10 @@ MonoBehaviour:
   randomizeHealth: 0
   lowerHealthLimit: 50
   upperHealthLimit: 60
-  behaviour: {fileID: 11400000, guid: 0e79202b5a0692a4e8c1a2e08077a9c7, type: 2}
+  behaviour: {fileID: 11400000, guid: d7c66fe9534b31942b3a36d85aa6a2ae, type: 2}
   abilityBook:
-    activeAbilities: []
+    activeAbilities:
+    - {fileID: 11400000, guid: e3485f3770f42714f9f7ca5a647d25e5, type: 2}
   serializedPassiveManager:
     perks: []
   randomizeItemSet: 0

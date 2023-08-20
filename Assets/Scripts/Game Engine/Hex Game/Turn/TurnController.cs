@@ -135,19 +135,29 @@ namespace WeAreGladiators.TurnLogic
             AddEntityToActivationOrder(entity);
 
             // Build window UCM
-            if (entity.characterData != null)
+            if (entity.characterData != null && entity.hexCharacterView.model is UniversalCharacterModel)
             {
+                newWindowScript.portraitImage.gameObject.SetActive(false);
                 CharacterModeller.BuildModelFromStringReferences(newWindowScript.myUCM, entity.characterData.modelParts);
                 CharacterModeller.ApplyItemSetToCharacterModelView(entity.characterData.itemSet, newWindowScript.myUCM);
+                newWindowScript.myUCM.SetBaseAnim();
             }
             else
             {
                 if(entity.hexCharacterView.model is UniversalCharacterModel)
+                {
+                    newWindowScript.portraitImage.gameObject.SetActive(false);
                     CharacterModeller.BuildModelFromModelClone(newWindowScript.myUCM, entity.hexCharacterView.model.GetComponent<UniversalCharacterModel>());
-            }
-            // play window still anim on ucm
-            newWindowScript.myUCM.SetBaseAnim();
+                    newWindowScript.myUCM.SetBaseAnim();
+                }                   
 
+                else
+                {
+                    newWindowScript.myUCM.gameObject.SetActive(false);
+                    newWindowScript.portraitImage.gameObject.SetActive(true);
+                    newWindowScript.portraitImage.sprite = entity.hexCharacterView.model.PortraitSprite;
+                }
+            }
         }
         #endregion
         

@@ -56,7 +56,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Duck
+    m_ConditionEvent: DUCK
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7930841598112545015}
@@ -889,7 +889,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Hurt
+    m_ConditionEvent: HURT
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102813761142054402}
@@ -1524,12 +1524,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Hurt
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: Skill One
     m_Type: 9
     m_DefaultFloat: 0
@@ -1573,12 +1567,6 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: Lay Dead
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: Duck
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -1746,6 +1734,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: DIE_4
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   - m_Name: DECAPITATE_1
     m_Type: 9
     m_DefaultFloat: 0
@@ -1764,12 +1758,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: DIE_4
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: RUN
     m_Type: 9
     m_DefaultFloat: 0
@@ -1777,6 +1765,18 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: IDLE
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: HURT
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: DUCK
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -2499,7 +2499,7 @@ AnimatorStateMachine:
     m_Position: {x: 725, y: 975, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102813761142054402}
-    m_Position: {x: 0, y: 0, z: 0}
+    m_Position: {x: 0, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102817754054487422}
     m_Position: {x: 480, y: 60, z: 0}

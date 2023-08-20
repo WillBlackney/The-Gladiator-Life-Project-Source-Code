@@ -18,6 +18,8 @@ namespace WeAreGladiators.UCM
         [Header("Core Components")]
         public Animator myAnimator;
         public EntityRenderer myEntityRenderer;
+        [ShowIf("ShowPortraitSprite")]
+        [SerializeField] Sprite portraitSprite;
         [SerializeField] bool baseFacingIsRight = true;
         [Tooltip("Leave this unticked if you need this UCM to be masked by masks that are not childed to this game object (e.g. scroll character roster).")]
         [SerializeField] bool allowAutoSorting = true;
@@ -25,13 +27,22 @@ namespace WeAreGladiators.UCM
         [ShowIf("ShowRootSorting")]
         [SerializeField] SortingGroup rootSortingGroup;
         [SerializeField] float combatScale = 1f;
-        
+
+        [Header("Animation Specifics")]
+        [SerializeField]
+        [Range(0, 5)] int totalDeathAnims = 1;
+        [SerializeField]
+        [Range(0, 5)] int totalDecapitationAnims = 1;
+
         [HideInInspector] public UniversalCharacterModelElement[] allModelElements;
 
         public SortingGroup RootSortingGroup => rootSortingGroup;
         public bool AllowAutoSorting => allowAutoSorting;
+        public Sprite PortraitSprite => portraitSprite;
         public bool BaseFacingIsRight => baseFacingIsRight;
         public float CombatScale => combatScale;
+        public int TotalDeathAnims => totalDeathAnims;
+        public int TotalDecapitationAnims => totalDecapitationAnims;
         public UniversalCharacterModelElement[] AllModelElements
         {
             get
@@ -41,10 +52,7 @@ namespace WeAreGladiators.UCM
             }
             protected set { allModelElements = value; }
         }
-        public bool ShowRootSorting()
-        {
-            return allowAutoSorting;
-        }
+       
 
         #region Lifecycle + Init
 
@@ -76,6 +84,19 @@ namespace WeAreGladiators.UCM
                 hasRunSetup = true;
             }
         }
+        #endregion
+
+        #region Odin ShowIfs
+
+        public bool ShowRootSorting()
+        {
+            return allowAutoSorting;
+        }
+        public bool ShowPortraitSprite()
+        {
+            return this is UniversalCharacterModel == false;
+        }
+
         #endregion
 
     }

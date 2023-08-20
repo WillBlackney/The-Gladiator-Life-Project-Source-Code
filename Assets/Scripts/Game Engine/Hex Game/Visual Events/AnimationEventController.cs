@@ -30,12 +30,12 @@ namespace WeAreGladiators.VisualEvents
         public const string OFF_HAND_PUSH = "OFF_HAND_PUSH";
         public const string CHARGE = "CHARGE"; 
         public const string CHARGE_END = "CHARGE_END";
-        public const string DUCK = "Duck";
+        public const string DUCK = "DUCK";
         public const string IDLE = "IDLE";
         public const string SHOOT_BOW = "Shoot Bow";
         public const string SHOOT_CROSSBOW = "Shoot Crossbow";
         public const string RUN = "RUN";
-        public const string HURT = "Hurt";
+        public const string HURT = "HURT";
         public const string DIE_1 = "DIE_1";
         public const string DIE_2 = "DIE_2";
         public const string DIE_3 = "DIE_3";
@@ -115,8 +115,19 @@ namespace WeAreGladiators.VisualEvents
                 {
                     AudioManager.Instance.PlaySound(user.AudioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerMeleeAttackAnimation(user.hexCharacterView, targetView.WorldPosition, weaponUsed, cData);
+                }, stackEvent).SetCoroutineData(cData);            
+            }
+
+            // Bite
+            else if (vEvent.characterAnimation == CharacterAnimation.Bite)
+            {
+                HexCharacterView targetView = targetCharacter.hexCharacterView;
+                TaskTracker cData = new TaskTracker();
+                VisualEventManager.CreateVisualEvent(() =>
+                {
+                    AudioManager.Instance.PlaySound(user.AudioProfile, AudioSet.Attack);
+                    HexCharacterController.Instance.TriggerBiteAttackAnimation(user.hexCharacterView, targetView.WorldPosition, cData);
                 }, stackEvent).SetCoroutineData(cData);
-            
             }
 
             // Tackle

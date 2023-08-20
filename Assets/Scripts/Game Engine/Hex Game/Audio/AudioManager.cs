@@ -207,6 +207,8 @@ namespace WeAreGladiators.Audio
         #region Misc Logic              
         private void BuildAudioPlayerFromAudioModelData(AudioModel data, AudioPlayer player)
         {
+            player.Source.loop = false;
+
             // Randomize clip
             if (data.randomizeClip) player.Source.clip = data.audioClips[RandomGenerator.NumberBetween(0, data.audioClips.Length - 1)];
             else player.Source.clip = data.audioClip;
@@ -356,6 +358,8 @@ namespace WeAreGladiators.Audio
         Ability_Twangy_Buff = 151,
         Ability_Cheeky_Laugh = 153,
         Ability_Feast = 154,
+        Ability_Bite_Light = 155,
+        Ability_Bite_Heavy = 156,
 
         Ambience_Outdoor_Spooky = 39,
         Ambience_Town_1 = 99,

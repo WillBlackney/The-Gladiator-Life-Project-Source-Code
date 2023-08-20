@@ -22,13 +22,13 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 1
+      value: 1000
       stars: 0
     dodge:
       value: 0
       stars: 0
     accuracy:
-      value: 100
+      value: 0
       stars: 0
     resolve:
       value: 5

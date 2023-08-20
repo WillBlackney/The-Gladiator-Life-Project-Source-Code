@@ -395,7 +395,7 @@ namespace WeAreGladiators.Characters
                 // to do: setup a fixed model?? how??
 
                 Transform parent = character.hexCharacterView.ucmVisualParent.transform;
-                Destroy(character.hexCharacterView.model);
+                Destroy(character.hexCharacterView.model.gameObject);
 
                 CharacterModel newModel = Instantiate(data.modelPrefab, parent);
 
@@ -827,10 +827,8 @@ namespace WeAreGladiators.Characters
         #region
         public void TriggerMeleeAttackAnimation(HexCharacterView view, Vector2 targetPos, ItemData weaponUsed, TaskTracker tracker)
         {
-            //AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             StartCoroutine(TriggerMeleeAttackAnimationCoroutine(view, targetPos, weaponUsed, tracker));
-        }
-        
+        }        
         private IEnumerator TriggerMeleeAttackAnimationCoroutine(HexCharacterView view, Vector2 targetPos, ItemData weaponUsed, TaskTracker tracker)
         {
             HexCharacterModel model = view.character;
@@ -1035,6 +1033,52 @@ namespace WeAreGladiators.Characters
 
         }
         
+
+        public void TriggerBiteAttackAnimation(HexCharacterView view, Vector2 targetPos, TaskTracker tracker)
+        {
+            StartCoroutine(TriggerBiteAttackAnimationCoroutine(view, targetPos, tracker));
+        }
+        private IEnumerator TriggerBiteAttackAnimationCoroutine(HexCharacterView view, Vector2 targetPos, TaskTracker tracker)
+        {
+            HexCharacterModel model = view.character;
+            if (model == null)
+            {
+                if (tracker != null) tracker.MarkAsCompleted();
+                yield break;
+            }
+
+            Ease moveTowardsEase = Ease.InExpo;
+            Ease moveBackEase = Ease.OutSine;
+
+            // 60 sample rate
+            float offset = -0.04f;
+            float frameToMilliseconds = 0.016667f;
+            float pauseTimeBeforeInitialMove = 13f * frameToMilliseconds;
+            float initialMoveTime = 17f * frameToMilliseconds;
+            float postImpactPause = 15f * frameToMilliseconds;
+            float moveBackTime = 15f * frameToMilliseconds;
+            view.CurrentAnimation = AnimationEventController.BITE;
+
+            // Start attack animation
+            view.ucmAnimator.SetTrigger(AnimationEventController.BITE);
+            yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
+
+            // Move 50% of the way towards the target position
+            Vector2 startPos = view.WorldPosition;
+            Vector2 forwardPos = (startPos + targetPos) / 2f;
+            view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(moveTowardsEase);
+            yield return new WaitForSeconds(initialMoveTime + offset);
+
+            // Pause at impact point
+            if (tracker != null) tracker.MarkAsCompleted();
+            yield return new WaitForSeconds(postImpactPause);
+
+            // Move back to start point
+            view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
+
+
+
+        }
         public void TriggerTackleAnimation(HexCharacterView view, Vector2 targetPos, TaskTracker tracker)
         {
             StartCoroutine(TriggerTackleAnimationCoroutine(view, targetPos, tracker));
@@ -1417,7 +1461,7 @@ namespace WeAreGladiators.Characters
             if (view == null) return;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             string deathAnim = "DIE_";
-            deathAnim = deathAnim + RandomGenerator.NumberBetween(1, 4).ToString();
+            deathAnim = deathAnim + RandomGenerator.NumberBetween(1, view.model.TotalDeathAnims).ToString();
             view.ucmAnimator.SetTrigger(deathAnim);
             view.CurrentAnimation = deathAnim;
         }
@@ -1426,7 +1470,7 @@ namespace WeAreGladiators.Characters
             if (view == null) return;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
             string decapitateAnim = "DECAPITATE_";
-            decapitateAnim = decapitateAnim + RandomGenerator.NumberBetween(1, 2).ToString();
+            decapitateAnim = decapitateAnim + RandomGenerator.NumberBetween(1, view.model.TotalDecapitationAnims).ToString();
             view.ucmAnimator.SetTrigger(decapitateAnim);
             view.CurrentAnimation = decapitateAnim;
         }
@@ -3001,8 +3045,8 @@ namespace WeAreGladiators.Characters
         }
         public bool IsCharacterAbleToMakeFreeStrikes(HexCharacterModel c)
         {
-            if ((c.itemSet.mainHandItem == null ||
-                 (c.itemSet.mainHandItem != null  && !c.itemSet.mainHandItem.IsRangedWeapon)) &&
+            if (c.itemSet.mainHandItem != null && 
+                c.itemSet.mainHandItem.IsMeleeWeapon &&
                 IsCharacterAbleToTakeActions(c))
                 return true;
 

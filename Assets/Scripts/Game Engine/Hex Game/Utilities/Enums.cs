@@ -789,6 +789,7 @@ namespace WeAreGladiators
         Tackle = 13,
         ReloadCrossbow = 15,
         ThrowNetOffhand = 16,
+        Bite = 17,
     }
     public enum ParticleEffect
     {

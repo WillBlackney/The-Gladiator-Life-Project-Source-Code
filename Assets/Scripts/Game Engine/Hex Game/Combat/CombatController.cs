@@ -1698,7 +1698,12 @@ namespace WeAreGladiators.Combat
                 view.ucmMovementParent.transform.DOMove(finalPos, 0.5f);
                 view.model.transform.DORotate(new Vector3(0, 0, randomDeathRotation), 0.5f);
 
-                if (randomDeathAnim == 0) HexCharacterController.Instance.PlayDeathAnimation(view);
+                // Normal Death anim
+                if (view.model.TotalDecapitationAnims == 0 || randomDeathAnim == 0)
+                {
+                    HexCharacterController.Instance.PlayDeathAnimation(view);
+                }
+                // Decapitation anim
                 else
                 {
                     spatters = 3;
@@ -1706,8 +1711,9 @@ namespace WeAreGladiators.Combat
                     HexCharacterController.Instance.PlayDecapitateAnimation(view);
                 }
 
-                for (int i = 0; i < spatters; i++)
-                    VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
+                // Create random blood spatters
+                for (int i = 0; i < spatters; i++) VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
+
             }, parentEvent).SetEndDelay(1f);
 
             // Destroy characters activation window and update other window positions

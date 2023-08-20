@@ -21,6 +21,7 @@ namespace WeAreGladiators.TurnLogic
         public TextMeshProUGUI rollText;
         public CanvasGroup myCanvasGroup;
         public UniversalCharacterModel myUCM;
+        public Image portraitImage;
 
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 

@@ -27,6 +27,7 @@ namespace WeAreGladiators.Audio
         Goblin_1 = 5,
         Gnoll_1 = 6,
         Satyr_1 = 7,
+        Lunker_Youngling = 8,
     }
 
     public enum AudioSet
