@@ -10,6 +10,7 @@ using WeAreGladiators.UI;
 using WeAreGladiators.Persistency;
 using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Audio;
+using System;
 
 namespace WeAreGladiators.GameIntroEvent
 {
@@ -26,8 +27,9 @@ namespace WeAreGladiators.GameIntroEvent
         [SerializeField] Scrollbar contentScrollbar;
         [SerializeField] GameIntroButton[] choiceButtons;
         [SerializeField] RectTransform[] allFitters;
-        [SerializeField] CharacterBackground[] possibleCharacterPoolOne;
-        [SerializeField] CharacterBackground[] possibleCharacterPoolTwo;
+        [SerializeField] HexCharacterTemplateSO[] possibleCharacterPoolOne;
+        [SerializeField] HexCharacterTemplateSO[] possibleCharacterPoolTwo;
+        [SerializeField] GameIntroPageData[] allPages;
 
         [Header("Page Animation Components")]
         [SerializeField] RectTransform pageMovementParent;
@@ -121,12 +123,29 @@ namespace WeAreGladiators.GameIntroEvent
             eventImage.sprite = pageOneSprite;
             choiceButtons[0].BuildAndShow("Here goes nothing...", () =>
             {
-                BuildViewsAsPageTwo();
+                int rand = RandomGenerator.NumberBetween(1, 3);
+                if (rand == 1) BuildPageFromTag(PageTag.TwoA);
+                else if (rand == 2) BuildPageFromTag(PageTag.TwoB);
+                else BuildPageFromTag(PageTag.TwoC);
             });
 
             StartCoroutine(TransformUtils.RebuildLayoutsNextFrame(allFitters));
         }
-        private void BuildViewsAsPageTwo()
+        private void BuildPageFromTag(PageTag tag)
+        {
+            GameIntroPageData pageData = GetPage(tag);
+            ResetPageBeforeNextPageBuilt();
+            BuildPageTextBodies(pageData.BodyText);
+            headerPanelText.text = pageData.HeaderText;
+            eventImage.sprite = pageData.PageSprite;
+            choiceButtons[0].BuildAndShow("Here goes nothing...", () =>
+            {
+
+            });
+
+            StartCoroutine(TransformUtils.RebuildLayoutsNextFrame(allFitters));
+        }
+        private void BuildViewsAsPageTwoA()
         {
             ResetPageBeforeNextPageBuilt();
             BuildPageTextBodies(pageTwoBodyText);
@@ -259,15 +278,15 @@ namespace WeAreGladiators.GameIntroEvent
             // First pool
             for (int i = 0; i < 2 && i < possibleCharacterPoolOne.Length; i++)
             {
-                BackgroundData data = CharacterDataController.Instance.GetBackgroundData(possibleCharacterPoolOne[i]);
-                ret.Add(CharacterDataController.Instance.GenerateRecruitCharacter(data, false));
+                HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(possibleCharacterPoolOne[i]);
+                ret.Add(character);
             }
 
             // Second pool
             for (int i = 0; i < 2 && i < possibleCharacterPoolTwo.Length; i++)
             {
-                BackgroundData data = CharacterDataController.Instance.GetBackgroundData(possibleCharacterPoolTwo[i]);
-                ret.Add(CharacterDataController.Instance.GenerateRecruitCharacter(data, false));
+                HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(possibleCharacterPoolTwo[i]);
+                ret.Add(character);
             }
 
             return ret;
@@ -323,6 +342,23 @@ namespace WeAreGladiators.GameIntroEvent
 
             return ret;
         }
+        #endregion
+
+        #region Page Specific On Click Events
+        private GameIntroPageData GetPage(PageTag tag)
+        {
+            return Array.Find(allPages, p => p.PageTag == tag);
+        }
+
+        public void Page2bChoice1()
+        {
+
+        }
+        public void Page2bChoice2()
+        {
+
+        }
+
         #endregion
     }
 }

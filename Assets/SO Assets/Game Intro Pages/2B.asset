@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e504bf1d3e9b845987986c9a2bd883, type: 3}
+  m_Name: 2B
+  m_EditorClassIdentifier: 
+  headerText: Header
+  pageSprite: {fileID: 0}
+  bodyText: "Breedmarsh is as grim as the name suggests. An awesome and disgusting
+    network of intestine-like walkways, cobbled together from roots and vines. The
+    buildings drip with mire from the marsh below. Yet despite the muck, there's
+    an elusive charm to the place.\r\n\r\nWhen you arrive at the tavern, you don\u2019t
+    get a chance to enter before a pair of bodies tumble out the door. One fighter's
+    tooth bounces past your shoe and into the murky bog water below. The grappling
+    duo unclinch and scramble to their feet. One of them, an orc from the local militia,
+    the other, a monstrously large human lumberjack. \r\n\r\nUpon your arrival at
+    the tavern, you're halted in your tracks by a peculiar spectacle. A lively commotion
+    spills out the tavern door, and two figures tumble into view. A tooth from one
+    of the fighters bounces carelessly past your shoe, landing in the murky bog water.
+    The grappling pair disentangle themselves and swiftly regain their footing. One
+    of them, a monstrously large human lumberjack, stands imposingly over the other,
+    an orc from the local militia. \n\n<color=#FFFFFF>\u201CThought you'd scull my
+    drink and i wouldn't notice?! Apologize, then go buy me another!\u201D</color>
+    the orc huffs and puffs as he points his finger up at the lumberjacks face. \r\n\r\n<color=#FFFFFF>
+    \u201COk. I'll apologize. I'm sorry you're a traitorous, imperial bootlicker.\u201D</color>
+    the lumberjack retorts back in a manner that makes you think this may be a little
+    more personal to him than a random bar brawl ought to be. \r\n\r\nThe two widen
+    their bases and prime themselves to re-engage. You sense an opportunity to intervene
+    before the two fools kill each other."
+  choices:
+  - buttonText:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Offer to replace the militiaman's drink.
+    pageLoaded: 6
+  - buttonText:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Give the lumberjack the nearby broom as a weapon.
+    pageLoaded: 7
