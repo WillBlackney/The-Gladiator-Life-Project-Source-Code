@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e504bf1d3e9b845987986c9a2bd883, type: 3}
+  m_Name: 4C
+  m_EditorClassIdentifier: 
+  pageTag: 12
+  headerText: Header
+  pageSprite: {fileID: 0}
+  bodyText: "Inside the tavern is crowded, and warm. The bouncer, a Satyr, uses an
+    arcane spell to eject a trio of rowdy patrons, an Orc beats out a breakneck rhythm
+    on a collection of skulls, logs, and skin drums, and an elf dazzles a table with
+    magic card tricks. The enchanted cards race around the room, multiplying, disappearing,
+    and instilling awe in all who look on. \r\n\r\nAs you survey the room, you notice
+    two patrons sitting quietly in the corner of the room. One of them, an elf scholar
+    in blue robes, nurses a drink while staring intently at a board game infront
+    of her. The other, a skeletal witch shrouded in black robes, beckons you over
+    with a curling bony finger gesture. As you approach the table, the skeleton grins
+    and pulls out a chair for you.\r\n\r\n<color=#FFFFFF>\"I've no interest in small
+    talk human. I heard you and the morons out front talk of forming a team. We want
+    in. I'm more than capable of wielding dark magic when it suits it me. And this
+    seductive sorceress here? Well...let's just say that IF she wasn't so skilled
+    in pyrokinetics, i'd still have my skin.\"</color>\n\r\nA tempting proposal indeed,
+    but you've enough room in the budget for one of them..."
+  choices:
+  - buttonText: Recruit the Witch
+    possiblePagesLoaded: 0e000000
+    characterGained: {fileID: 11400000, guid: eda7dbe4ac0fda94e9480460b6ee6d3b, type: 2}
+  - buttonText: Recruit the Scholar
+    possiblePagesLoaded: 0e000000
+    characterGained: {fileID: 11400000, guid: 91ef4fc683847e94fa52eddf8a9addc9, type: 2}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e504bf1d3e9b845987986c9a2bd883, type: 3}
   m_Name: 2B
   m_EditorClassIdentifier: 
+  pageTag: 2
   headerText: Header
   pageSprite: {fileID: 0}
   bodyText: "Breedmarsh is as grim as the name suggests. An awesome and disgusting
@@ -36,15 +37,9 @@ MonoBehaviour:
     their bases and prime themselves to re-engage. You sense an opportunity to intervene
     before the two fools kill each other."
   choices:
-  - buttonText:
-    - color: 1
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: Offer to replace the militiaman's drink.
-    pageLoaded: 6
-  - buttonText:
-    - color: 1
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: Give the lumberjack the nearby broom as a weapon.
-    pageLoaded: 7
+  - buttonText: Offer to replace the militiaman's drink.
+    possiblePagesLoaded: 06000000
+    characterGained: {fileID: 0}
+  - buttonText: Give the lumberjack the nearby broom as a weapon.
+    possiblePagesLoaded: 07000000
+    characterGained: {fileID: 0}

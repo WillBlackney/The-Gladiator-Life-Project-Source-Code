@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e504bf1d3e9b845987986c9a2bd883, type: 3}
+  m_Name: Final (Militiaman)
+  m_EditorClassIdentifier: 
+  pageTag: 14
+  headerText: Header
+  pageSprite: {fileID: 0}
+  bodyText: "You quickly grab another fighter to add to your roster, then realize
+    The Kid is nowhere to be seen. After a moment of panic, you hear the sound of
+    something smash outside. You grab your newest recruit and leave the tavern. You
+    see The Kid lying in the mud stunned with a shield, and the orc militiaman standing
+    over him. The militiaman calmly kneels down and helps the kid back up his feet,
+    then dusts him off gently. \r\n\r\n<color=#FFFFFF>\"Not bad, kid. Remember to
+    keep your shield up next time, eh?\"</color> the orc says gently. The kid, still
+    a bit disoriented, smiles and nods enthusiastically."
+  choices:
+  - buttonText: '"The Kid has always been an incredibly fast learner."'
+    possiblePagesLoaded: 
+    characterGained: {fileID: 0}

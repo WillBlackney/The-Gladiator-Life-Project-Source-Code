@@ -20,16 +20,16 @@ MonoBehaviour:
   attributeSheet:
     might:
       value: 0
-      stars: 2
+      stars: 0
     constitution:
       value: 65
       stars: 0
     dodge:
       value: 10
-      stars: 2
+      stars: 0
     accuracy:
       value: 65
-      stars: 2
+      stars: 0
     resolve:
       value: 10
       stars: 0
@@ -57,7 +57,9 @@ MonoBehaviour:
     injuryResistance: 0
     deathResistance: 25
   abilityBook:
-    activeAbilities: []
+    activeAbilities:
+    - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
+    - {fileID: 11400000, guid: 36a0268a5ac37d742960a07bfe17be42, type: 2}
   serializedPassiveManager:
     perks:
     - perkTag: 95

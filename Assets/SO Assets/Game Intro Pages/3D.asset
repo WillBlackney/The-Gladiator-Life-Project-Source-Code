@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e504bf1d3e9b845987986c9a2bd883, type: 3}
+  m_Name: 3D
+  m_EditorClassIdentifier: 
+  pageTag: 7
+  headerText: Header
+  pageSprite: {fileID: 0}
+  bodyText: "You've something of a score to settle with the imperium yourself, so
+    you decide to throw a nearby broom towards the lumberjack to hit the militiaman
+    with. Unfortunately your aim is a bit off, and the militiaman snaps up the broom
+    mid air, then brings it down hard on the lumberjack's head, knocking him down
+    and out in a one swift movement. The miltiaman drops the broken broom and dusts
+    off his hands.\r\n\r\n<color=#FFFFFF>\u201CThanks, old timer. You're looking
+    for arena fighters, aren't you?\u201D</color> He asks."
+  choices:
+  - buttonText: '"Welcome to the company!"'
+    possiblePagesLoaded: 0a0000000b0000000c000000
+    characterGained: {fileID: 11400000, guid: 66e0633436926db4d917573cf2503c3b, type: 2}
+  - buttonText: '"No thanks..."'
+    possiblePagesLoaded: 0a0000000b0000000c000000
+    characterGained: {fileID: 0}
