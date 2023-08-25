@@ -20,11 +20,9 @@ namespace WeAreGladiators.GameIntroEvent
     {
         [Header("Core Components")]
         [SerializeField] GameObject mainVisualParent;
-        [SerializeField] GameObject topSectionParent;
         [SerializeField] TextMeshProUGUI headerPanelText;
         [SerializeField] Image eventImage;
         [SerializeField] TextMeshProUGUI bodyText;
-        [SerializeField] TextMeshProUGUI bodyText2;
         [SerializeField] ScrollRect mainContentScrollView;
         [SerializeField] Scrollbar contentScrollbar;
         [SerializeField] GameIntroButton[] choiceButtons;
@@ -94,38 +92,7 @@ namespace WeAreGladiators.GameIntroEvent
        
         #region Build Specific Pages
 
-        private void BuildViewsAsPageOne()
-        {
-            ResetPageBeforeNextPageBuilt();
-            BuildPageTextBodies(pageOneBodyText);
-            headerPanelText.text = pageOneHeaderText;
-            eventImage.sprite = pageOneSprite;
-            choiceButtons[0].BuildAndShow("Here goes nothing...", () =>
-            {
-                int rand = RandomGenerator.NumberBetween(1, 3);
-                if (rand == 1) BuildPageFromTag(PageTag.TwoA);
-                else if (rand == 2) BuildPageFromTag(PageTag.TwoB);
-                else BuildPageFromTag(PageTag.TwoC);
-            });
-
-            StartCoroutine(TransformUtils.RebuildLayoutsNextFrame(allFitters));
-        }
-        public void HandleChoiceButtonClicked(GameIntroButton button)
-        {
-            if(button.ChoiceData == null) return;
-            if(button.ChoiceData.characterGained != null)
-            {
-                HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(button.ChoiceData.characterGained);
-                CharacterDataController.Instance.AddCharacterToRoster(character);
-                CharacterScrollPanelController.Instance.RebuildViews();
-                chosenCharacters.Add(character);
-            }
-
-            List<PageTag> possiblePages = button.ChoiceData.possiblePagesLoaded.ToList();
-            possiblePages.Shuffle();
-            BuildPageFromTag(possiblePages[0]);
-
-        }
+       
         private void BuildPageFromTag(PageTag tag)
         {
             if (tag == PageTag.Final)
@@ -139,34 +106,38 @@ namespace WeAreGladiators.GameIntroEvent
             BuildPageTextBodies(pageData.BodyText);
             headerPanelText.text = pageData.HeaderText;
             eventImage.sprite = pageData.PageSprite;
+
             for(int i = 0; i < pageData.Choices.Length; i++)
             {
                 choiceButtons[i].Build(pageData.Choices[i]);
             }
 
-            StartCoroutine(TransformUtils.RebuildLayoutsNextFrame(allFitters));
+            if (tag.ToString().Contains("Four") && chosenCharacters.Count > 0)
+            {
+                choiceButtons[2].HideAndReset();
+                bodyText.text += "\n \nA tempting proposal indeed, but you've only enough room in the budget for one of them...";
+            }
+
+            TransformUtils.RebuildLayouts(allFitters);
         }
         private void BuildFinalPage()
         {
             GameIntroPageData pageData = null;
-            if(chosenCharacters.Count <= 1)
+            if (chosenCharacters[0].background.backgroundType == CharacterBackground.Thief)
             {
-                pageData = noChoicePage;
+                pageData = nipplePincherPage;
+            }
+            else if (chosenCharacters[0].background.backgroundType == CharacterBackground.Lumberjack)
+            {
+                pageData = broomWielderPage;
+            }
+            else if (chosenCharacters[0].background.backgroundType == CharacterBackground.Militia)
+            {
+                pageData = militiamanPage;
             }
             else
             {
-                if (chosenCharacters[0].background.backgroundType == CharacterBackground.Thief)
-                {
-                    pageData = nipplePincherPage;
-                }
-                else if (chosenCharacters[0].background.backgroundType == CharacterBackground.Lumberjack)
-                {
-                    pageData = broomWielderPage;
-                }
-                else if (chosenCharacters[0].background.backgroundType == CharacterBackground.Militia)
-                {
-                    pageData = militiamanPage;
-                }
+                pageData = noChoicePage;
             }
 
             ResetPageBeforeNextPageBuilt();
@@ -174,12 +145,31 @@ namespace WeAreGladiators.GameIntroEvent
             headerPanelText.text = pageData.HeaderText;
             eventImage.sprite = pageData.PageSprite;
             choiceButtons[0].BuildAndShow(pageData.Choices[0].buttonText, FinishEvent);
-
-            StartCoroutine(TransformUtils.RebuildLayoutsNextFrame(allFitters));
+            TransformUtils.RebuildLayouts(allFitters);
         }
         #endregion
 
         #region Misc Logic
+        public void HandleChoiceButtonClicked(GameIntroButton button)
+        {
+            if (button.ChoiceData == null) return;
+            if (button.ChoiceData.charactersGained != null)
+            {
+                button.ChoiceData.charactersGained.ForEach((c) =>
+                {
+                    HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(c);
+                    CharacterDataController.Instance.RandomizeOpeningEventCharacter(character);
+                    CharacterDataController.Instance.AddCharacterToRoster(character);
+                    CharacterScrollPanelController.Instance.RebuildViews();
+                    chosenCharacters.Add(character);
+                });
+            }
+
+            List<PageTag> possiblePages = button.ChoiceData.possiblePagesLoaded.ToList();
+            possiblePages.Shuffle();
+            BuildPageFromTag(possiblePages[0]);
+
+        }
         private void ResetChoiceButtons()
         {
             foreach (GameIntroButton b in choiceButtons) b.HideAndReset();
@@ -197,8 +187,6 @@ namespace WeAreGladiators.GameIntroEvent
         private void BuildPageTextBodies(string text)
         {
             bodyText.text = text;
-            TransformUtils.RebuildLayout(bodyText2.transform as RectTransform);
-            //if (bodyText2.text == "") bodyText2.gameObject.SetActive(false);
         }
         #endregion
 

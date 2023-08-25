@@ -28,12 +28,18 @@ MonoBehaviour:
     talk human. I heard you and the morons out front talk of forming a team. We want
     in. I'm more than capable of wielding dark magic when it suits it me. And this
     seductive sorceress here? Well...let's just say that IF she wasn't so skilled
-    in pyrokinetics, i'd still have my skin.\"</color>\n\r\nA tempting proposal indeed,
-    but you've enough room in the budget for one of them..."
+    in pyrokinetics, i'd still have my skin.\"</color>"
   choices:
   - buttonText: Recruit the Witch
     possiblePagesLoaded: 0e000000
-    characterGained: {fileID: 11400000, guid: eda7dbe4ac0fda94e9480460b6ee6d3b, type: 2}
+    charactersGained:
+    - {fileID: 11400000, guid: eda7dbe4ac0fda94e9480460b6ee6d3b, type: 2}
   - buttonText: Recruit the Scholar
     possiblePagesLoaded: 0e000000
-    characterGained: {fileID: 11400000, guid: 91ef4fc683847e94fa52eddf8a9addc9, type: 2}
+    charactersGained:
+    - {fileID: 11400000, guid: 91ef4fc683847e94fa52eddf8a9addc9, type: 2}
+  - buttonText: Recruit Both
+    possiblePagesLoaded: 0e000000
+    charactersGained:
+    - {fileID: 11400000, guid: eda7dbe4ac0fda94e9480460b6ee6d3b, type: 2}
+    - {fileID: 11400000, guid: 91ef4fc683847e94fa52eddf8a9addc9, type: 2}

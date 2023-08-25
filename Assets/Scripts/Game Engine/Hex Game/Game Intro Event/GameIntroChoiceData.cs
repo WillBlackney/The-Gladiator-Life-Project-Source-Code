@@ -12,7 +12,7 @@ namespace WeAreGladiators.GameIntroEvent
     {
         public string buttonText;
         public PageTag[] possiblePagesLoaded;
-        public HexCharacterTemplateSO characterGained;
+        public HexCharacterTemplateSO[] charactersGained;
 
     }
 }

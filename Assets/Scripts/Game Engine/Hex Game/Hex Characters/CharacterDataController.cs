@@ -10,6 +10,7 @@ using System.Linq;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Boons;
 using System.Globalization;
+using Sirenix.Utilities;
 
 namespace WeAreGladiators.Characters
 {
@@ -797,6 +798,48 @@ namespace WeAreGladiators.Characters
             CharacterDeck = GenerateCharacterDeck();
             CharacterDeck.Shuffle();
         }
+        public void RandomizeOpeningEventCharacter(HexCharacterData data)
+        {
+            // Randomzie stats and stars
+            data.attributeSheet = new AttributeSheet();
+            GenerateRecruitCharacterCoreAttributeRolls(data.attributeSheet, data.background);
+            GenerateCharacterStarRolls(data.attributeSheet, 3);
+
+            // Randomize starting perk
+            var possiblePerks = new List<ActivePerk>();
+            possiblePerks.AddRange(data.passiveManager.perks);
+            data.passiveManager.perks.Shuffle();
+            var chosenPerk = data.passiveManager.perks[0];
+            data.passiveManager.perks.Clear();
+            PerkController.Instance.ModifyPerkOnCharacterData(data.passiveManager, chosenPerk.perkTag, 1);
+
+            // Randomize talent
+            TalentSchool chosenTalent = data.talentPairings[0].talentSchool;
+            if(data.talentPairings.Count > 0)
+            {
+                List<TalentSchool> possibleTalents = new List<TalentSchool>();
+                data.talentPairings.ForEach(t => possibleTalents.Add(t.talentSchool));
+                possibleTalents.Shuffle();
+                chosenTalent = possibleTalents[0];
+                data.talentPairings.Clear();
+                HandleLearnNewTalent(data, chosenTalent);
+            }         
+
+            // Learn random ability
+            List<AbilityData> possibleAbilities = new List<AbilityData>();
+            possibleAbilities.AddRange(data.abilityBook.GetAllKnownNonItemSetAbilities());
+            possibleAbilities.Shuffle();
+            data.abilityBook.ForgetAllAbilities();
+            data.abilityBook.HandleLearnAbilitiesFromItemSet(data.itemSet);
+            foreach(AbilityData ability in possibleAbilities)
+            {
+                if (DoesCharacterHaveTalent(data.talentPairings, ability.talentRequirementData.talentSchool, 1))
+                {
+                    data.abilityBook.HandleLearnNewAbility(ability);
+                    break;
+                }
+            }
+        }
         public HexCharacterData GenerateRecruitCharacter(BackgroundData bgData, bool allowLevelBoosts = true)
         {
             Debug.Log("CharacterDataController.GenerateRecruitCharacter() called, generating from background: " + bgData.backgroundType.ToString());
@@ -959,6 +1002,15 @@ namespace WeAreGladiators.Characters
                 CoreAttribute.Wits,
                 CoreAttribute.Fitness
             };
+
+            // Reset
+            sheet.accuracy.stars = 0;
+            sheet.constitution.stars = 0;
+            sheet.dodge.stars = 0;
+            sheet.resolve.stars = 0;
+            sheet.might.stars = 0;
+            sheet.wits.stars = 0;
+            sheet.fitness.stars = 0;
 
             attributes.Shuffle();
 

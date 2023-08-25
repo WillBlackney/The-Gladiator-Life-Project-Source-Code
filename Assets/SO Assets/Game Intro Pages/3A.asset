@@ -28,7 +28,8 @@ MonoBehaviour:
   choices:
   - buttonText: "\u201CStay away from my nipples, and I think we can make this work.\u201D"
     possiblePagesLoaded: 0a0000000b0000000c000000
-    characterGained: {fileID: 11400000, guid: 677dd367dd92cb548906a8dd9f2c062f, type: 2}
+    charactersGained:
+    - {fileID: 11400000, guid: 677dd367dd92cb548906a8dd9f2c062f, type: 2}
   - buttonText: '"No thanks..."'
     possiblePagesLoaded: 0a0000000b0000000c000000
-    characterGained: {fileID: 0}
+    charactersGained: []

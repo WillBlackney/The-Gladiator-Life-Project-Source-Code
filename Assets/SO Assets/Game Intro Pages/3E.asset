@@ -23,7 +23,8 @@ MonoBehaviour:
   choices:
   - buttonText: '"Welcome to the company!"'
     possiblePagesLoaded: 0a0000000b0000000c000000
-    characterGained: {fileID: 11400000, guid: 66e0633436926db4d917573cf2503c3b, type: 2}
+    charactersGained:
+    - {fileID: 11400000, guid: 66e0633436926db4d917573cf2503c3b, type: 2}
   - buttonText: '"No thanks..."'
     possiblePagesLoaded: 0a0000000b0000000c000000
-    characterGained: {fileID: 0}
+    charactersGained: []

@@ -65,6 +65,9 @@ MonoBehaviour:
     - perkTag: 101
       stacks: 1
       freshInjury: 0
+    - perkTag: 89
+      stacks: 1
+      freshInjury: 0
   modelParts:
   - Elf_Chest_1
   - Elf_Head_1

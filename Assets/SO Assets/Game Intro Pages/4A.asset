@@ -28,12 +28,18 @@ MonoBehaviour:
     in small talk human. I heard you and the morons out front talk of forming a team.
     We want in. I'm more than capable of wielding dark magic when it suits it me.
     And this handsome archer here? Well...let's just say that IF he was a bad shot,
-    i'd still have my skin.\"</color>\n \r\nA tempting proposal indeed, but you've
-    enough room in the budget for one of them..."
+    i'd still have my skin.\"</color>"
   choices:
   - buttonText: Recruit the Witch
     possiblePagesLoaded: 0e000000
-    characterGained: {fileID: 11400000, guid: eda7dbe4ac0fda94e9480460b6ee6d3b, type: 2}
+    charactersGained:
+    - {fileID: 11400000, guid: eda7dbe4ac0fda94e9480460b6ee6d3b, type: 2}
   - buttonText: Recruit the Poacher
     possiblePagesLoaded: 0e000000
-    characterGained: {fileID: 11400000, guid: 13abcd40133fa0e48860b82ff93aec55, type: 2}
+    charactersGained:
+    - {fileID: 11400000, guid: 13abcd40133fa0e48860b82ff93aec55, type: 2}
+  - buttonText: Recruit Both
+    possiblePagesLoaded: 0e000000
+    charactersGained:
+    - {fileID: 11400000, guid: eda7dbe4ac0fda94e9480460b6ee6d3b, type: 2}
+    - {fileID: 11400000, guid: 13abcd40133fa0e48860b82ff93aec55, type: 2}

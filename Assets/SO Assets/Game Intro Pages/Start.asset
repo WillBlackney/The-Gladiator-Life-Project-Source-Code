@@ -31,4 +31,4 @@ MonoBehaviour:
   choices:
   - buttonText: '"Here goes nothing..."'
     possiblePagesLoaded: 010000000200000003000000
-    characterGained: {fileID: 0}
+    charactersGained: []

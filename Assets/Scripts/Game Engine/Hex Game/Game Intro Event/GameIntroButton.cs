@@ -10,7 +10,7 @@ namespace WeAreGladiators.GameIntroEvent
     {
         [SerializeField] GameObject visualParent;
         [SerializeField] TextMeshProUGUI buttonText;
-        [SerializeField] GameIntroChoiceData choiceData;
+        GameIntroChoiceData choiceData;
         private Action onClickCallback;
 
         bool dynamicCallback = false;

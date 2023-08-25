@@ -21,22 +21,22 @@ MonoBehaviour:
     an elusive charm to the place.\r\n\r\nWhen you arrive at the tavern, you don\u2019t
     get a chance to enter before a pair of bodies tumble out the door. One fighter's
     tooth bounces past your shoe and into the murky bog water below. The grappling
-    duo unclinch and scramble to their feet. One of them, a monsterously large human
+    duo unclinch and scramble to their feet. One of them, an monsterously large human
     lumberjack, picks up a nearby broom and stands menacingly over his opponent:
     a tiny, but vicious looking goblin thief. \r\n\r\n<color=#FFFFFF>\u201CHey! No
     fair.\u201D</color> Says the goblin. <color=#FFFFFF>\u201CThis is a friendly
-    brawl, no weapons allowed.\u201D</color> \r\n\r\n<color=#FFFFFF>\u201CYou pinched
-    my nipple, you green little RAT!\u201D</color> the red-faced broom wielder bellows
-    back. You swear you see his iron grip begin to splinter the wood.\r\n\r\n<color=#FFFFFF>\u201CAnd
-    i would again, fatty! Come at me once more, and that nipple will belong to me!\u201D</color>
-    \r\n\r\nAs the goblin eyes dart around looking for something sharp or heavy to
-    use as a weapon, he notices you and the kid staring.\r\n\r\nThe Nipple Pincher
-    turns to you and The Kid. <color=#FFFFFF>\u201COi, you two! What do you reckon?
-    Should we be allowed weapons or not?\u201D</color>"
+    brawl, no weapons allowed.\u201D</color>\n\r\n<color=#FFFFFF> \u201CYou pinched
+    my nipple, you green little RAT!\u201D</color> the red-faced lumberjack bellows
+    back. You swear you see his iron grip begin to splinter the wood of the broom.\n\r\n<color=#FFFFFF>\u201CAnd
+    i would again, you fatty! Come at me once more, and that nipple will belong to
+    me!\u201D</color> \r\n\r\nAs the goblin eyes dart around looking for something
+    sharp or heavy to use as a weapon, he notices you and the kid staring.\r\n\r\nThe
+    Nipple Pincher turns to you and The Kid. <color=#FFFFFF>\u201COi, you two! What
+    do you reckon? Should we be allowed weapons or not?\u201D</color>"
   choices:
   - buttonText: "\"All\u2019s fair in love and war.\u201D"
     possiblePagesLoaded: 04000000
-    characterGained: {fileID: 0}
-  - buttonText: "\"I usually leave weapons out of my \u2018friendly brawls.\""
+    charactersGained: []
+  - buttonText: "\"I usually leave weapons out of my\u2018friendly brawls.\""
     possiblePagesLoaded: 05000000
-    characterGained: {fileID: 0}
+    charactersGained: []

@@ -30,8 +30,8 @@ MonoBehaviour:
     of them, a monstrously large human lumberjack, stands imposingly over the other,
     an orc from the local militia. \n\n<color=#FFFFFF>\u201CThought you'd scull my
     drink and i wouldn't notice?! Apologize, then go buy me another!\u201D</color>
-    the orc huffs and puffs as he points his finger up at the lumberjacks face. \r\n\r\n<color=#FFFFFF>
-    \u201COk. I'll apologize. I'm sorry you're a traitorous, imperial bootlicker.\u201D</color>
+    the orc huffs and puffs as he points his finger up at the lumberjacks face. \r\n\r\n<color=#FFFFFF>\u201COk.
+    I'll apologize. I'm sorry you're a traitorous, imperial bootlicker.\u201D</color>
     the lumberjack retorts back in a manner that makes you think this may be a little
     more personal to him than a random bar brawl ought to be. \r\n\r\nThe two widen
     their bases and prime themselves to re-engage. You sense an opportunity to intervene
@@ -39,7 +39,7 @@ MonoBehaviour:
   choices:
   - buttonText: Offer to replace the militiaman's drink.
     possiblePagesLoaded: 06000000
-    characterGained: {fileID: 0}
+    charactersGained: []
   - buttonText: Give the lumberjack the nearby broom as a weapon.
     possiblePagesLoaded: 07000000
-    characterGained: {fileID: 0}
+    charactersGained: []

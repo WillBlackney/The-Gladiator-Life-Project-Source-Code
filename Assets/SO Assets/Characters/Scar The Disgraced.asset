@@ -22,22 +22,22 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 65
+      value: 60
       stars: 0
     dodge:
-      value: 10
+      value: 8
       stars: 0
     accuracy:
-      value: 65
+      value: 58
       stars: 0
     resolve:
-      value: 10
+      value: 18
       stars: 0
     fitness:
       value: 100
       stars: 0
     wits:
-      value: 10
+      value: 18
       stars: 0
     maxHealth: 0
     apRecovery: 8
@@ -59,12 +59,14 @@ MonoBehaviour:
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: d84fc754f00f92b458fef9d08a4c3005, type: 2}
+    - {fileID: 11400000, guid: a0eec0cf113916e40bbb19662454dc56, type: 2}
+    - {fileID: 11400000, guid: 087c7faa0a547284f9a64fd03b452e7f, type: 2}
   serializedPassiveManager:
     perks:
     - perkTag: 208
       stacks: 1
       freshInjury: 0
-    - perkTag: 112
+    - perkTag: 160
       stacks: 1
       freshInjury: 0
   modelParts:
@@ -82,3 +84,5 @@ MonoBehaviour:
   talentPairings:
   - talentSchool: 9
     level: 1
+  - talentSchool: 11
+    level: 0

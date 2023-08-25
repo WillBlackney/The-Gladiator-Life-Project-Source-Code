@@ -22,22 +22,22 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 65
+      value: 60
       stars: 0
     dodge:
-      value: 10
+      value: 9
       stars: 0
     accuracy:
-      value: 65
+      value: 61
       stars: 0
     resolve:
-      value: 10
+      value: 8
       stars: 0
     fitness:
-      value: 100
+      value: 110
       stars: 0
     wits:
-      value: 10
+      value: 5
       stars: 0
     maxHealth: 0
     apRecovery: 8
@@ -66,6 +66,9 @@ MonoBehaviour:
       stacks: 1
       freshInjury: 0
     - perkTag: 117
+      stacks: 1
+      freshInjury: 0
+    - perkTag: 115
       stacks: 1
       freshInjury: 0
   modelParts:

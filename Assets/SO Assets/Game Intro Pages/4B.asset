@@ -36,12 +36,18 @@ MonoBehaviour:
     we want in. I perfected a brand new spell the other day, I'll have you know.
     Almost turned a gnoll completely inside out with it! And Fuz here, he's the best
     archer in all the empire. I once saw him shoot the hair off a spider's ass while
-    drunk! \"</color>\n\r\nA tempting proposal indeed, but you've enough room in
-    the budget for one of them..."
+    drunk! \"</color>"
   choices:
   - buttonText: Recruit the Scholar
     possiblePagesLoaded: 0e000000
-    characterGained: {fileID: 11400000, guid: 91ef4fc683847e94fa52eddf8a9addc9, type: 2}
+    charactersGained:
+    - {fileID: 11400000, guid: 91ef4fc683847e94fa52eddf8a9addc9, type: 2}
   - buttonText: Recruit the Poacher
     possiblePagesLoaded: 0e000000
-    characterGained: {fileID: 11400000, guid: 13abcd40133fa0e48860b82ff93aec55, type: 2}
+    charactersGained:
+    - {fileID: 11400000, guid: 13abcd40133fa0e48860b82ff93aec55, type: 2}
+  - buttonText: Recruit Both
+    possiblePagesLoaded: 0e000000
+    charactersGained:
+    - {fileID: 11400000, guid: 91ef4fc683847e94fa52eddf8a9addc9, type: 2}
+    - {fileID: 11400000, guid: 13abcd40133fa0e48860b82ff93aec55, type: 2}

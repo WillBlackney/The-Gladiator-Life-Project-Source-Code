@@ -21,9 +21,9 @@ MonoBehaviour:
     an elusive charm to the place.\r\n\r\nWhen you arrive at the tavern, you don\u2019t
     get a chance to enter before a pair of bodies tumble out the door. One fighter's
     tooth bounces past your shoe and into the murky bog water below. The grappling
-    duo unclinch and scramble to their feet. One of them, an orc from the local militia,
-    picks up a nearby bottle and stands menacingly over his opponent: a tiny, but
-    vicious looking goblin thief. \r\n\r\n<color=#FFFFFF>\u201CHey! No fair.\u201D</color>
+    duo unclinch and scramble to their feet. One of them, an orc militiaman, picks
+    up a nearby bottle and stands menacingly over his opponent: a tiny, but vicious
+    looking goblin thief. \r\n\r\n<color=#FFFFFF>\u201CHey! No fair.\u201D</color>
     Says the goblin. <color=#FFFFFF>\u201CThis is a friendly brawl, no weapons allowed.\u201D</color>\n\r\n<color=#FFFFFF>
     \u201CYou pinched my nipple, you green little RAT!\u201D</color> the orc bellows
     back.\r\n\r\n<color=#FFFFFF>\u201CAnd i would again, you big oaf! Come at me
@@ -35,7 +35,7 @@ MonoBehaviour:
   choices:
   - buttonText: "\"All\u2019s fair in love and war.\u201D"
     possiblePagesLoaded: 08000000
-    characterGained: {fileID: 0}
-  - buttonText: "\"I usually leave weapons out of my \u2018friendly brawls.\""
+    charactersGained: []
+  - buttonText: '"I usually leave weapons out of my friendly brawls."'
     possiblePagesLoaded: 09000000
-    characterGained: {fileID: 0}
+    charactersGained: []
