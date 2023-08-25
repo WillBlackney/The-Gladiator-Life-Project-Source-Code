@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 3D
   m_EditorClassIdentifier: 
   pageTag: 7
-  headerText: Header
-  pageSprite: {fileID: 0}
+  headerText: Welcome to Breedmarsh
+  pageSprite: {fileID: 21300000, guid: c4ef4d712ccb6a74299551c834e206c9, type: 3}
   bodyText: "You've something of a score to settle with the imperium yourself, so
     you decide to throw a nearby broom towards the lumberjack to hit the militiaman
     with. Unfortunately your aim is a bit off, and the militiaman snaps up the broom

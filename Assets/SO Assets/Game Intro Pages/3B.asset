@@ -13,18 +13,23 @@ MonoBehaviour:
   m_Name: 3B
   m_EditorClassIdentifier: 
   pageTag: 5
-  headerText: Header
-  pageSprite: {fileID: 0}
-  bodyText: "<color=#FFFFFF>\u201CBut that\u2019s not-\u201C</color> The Nipple Pincher
-    starts to object before a broom handle breaks across his jaw. \r\n\r\nThe Broom
-    Wielder throws down the broken broom. \r\n\r\n<color=#FFFFFF>\u201CI haven\u2019t
-    seen you two before. You're not looking for an arena fighter, are you?\u201D</color>
-    He asks."
+  headerText: Welcome to Breedmarsh
+  pageSprite: {fileID: 21300000, guid: 1fbc33ce53f05dd4ca5db430fcd27daa, type: 3}
+  bodyText: "The broom wielder sighs. He turns to place the broom against the tavern
+    wall. As soon as his back is turned, the Nipple Pincher barges him off the platform.
+    The broom wielder falls into the marshy water below while clutching his nipples
+    and screaming.\r\n\r\n<color=#FFFFFF>\u201CHow did you bull rush that guy AND
+    pinch his nipples at the same time?\u201D</color> Asks The Kid as he stares off
+    the edge of the platform.\r\n\r\n<color=#FFFFFF>\u201CI\u2019m very good with
+    my fingers. I could teach you?\u201D</color> The Nipple Pincher brags, wiggling
+    his digits. \r\n\r\n<color=#FFFFFF>\u201CYou two aren\u2019t putting a crew together
+    for the Arena are you? I like it when people take my side.\u201D</color>\r\n\r\nThe
+    kid looks at the goblin then back at you with a sort of 'can we keep him?' look."
   choices:
-  - buttonText: '"Welcome to the company!"'
+  - buttonText: "\u201CStay away from my nipples, and I think we can make this work.\u201D"
     possiblePagesLoaded: 0a0000000b0000000c000000
     charactersGained:
-    - {fileID: 11400000, guid: 780461277cd0a8f47b0da5cf12f52ed9, type: 2}
+    - {fileID: 11400000, guid: 677dd367dd92cb548906a8dd9f2c062f, type: 2}
   - buttonText: '"No thanks..."'
     possiblePagesLoaded: 0a0000000b0000000c000000
     charactersGained: []

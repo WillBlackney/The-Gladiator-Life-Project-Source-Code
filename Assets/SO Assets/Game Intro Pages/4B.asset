@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 4B
   m_EditorClassIdentifier: 
   pageTag: 11
-  headerText: Header
-  pageSprite: {fileID: 0}
+  headerText: Welcome to Breedmarsh
+  pageSprite: {fileID: 21300000, guid: 0eec48b989427a8438bbfcf7069e8b80, type: 3}
   bodyText: "Inside the tavern is crowded, and warm. The bouncer, a Satyr, uses an
     arcane spell to eject a trio of rowdy patrons, an Orc beats out a breakneck rhythm
     on a collection of skulls, logs, and skin drums, and an elf dazzles a table with

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 2C
   m_EditorClassIdentifier: 
   pageTag: 3
-  headerText: Header
-  pageSprite: {fileID: 0}
+  headerText: Welcome to Breedmarsh
+  pageSprite: {fileID: 21300000, guid: 1954b3701a9c2c64e94f7d52697c220c, type: 3}
   bodyText: "Breedmarsh is as grim as the name suggests. An awesome and disgusting
     network of intestine-like walkways, cobbled together from roots and vines. The
     buildings drip with mire from the marsh below. Yet despite the muck, there's

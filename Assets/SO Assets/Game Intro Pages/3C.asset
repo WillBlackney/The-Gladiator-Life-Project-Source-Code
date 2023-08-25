@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 3C
   m_EditorClassIdentifier: 
   pageTag: 6
-  headerText: Header
-  pageSprite: {fileID: 0}
+  headerText: Welcome to Breedmarsh
+  pageSprite: {fileID: 21300000, guid: 3698bd7cbff1bdf4686123574fcaf408, type: 3}
   bodyText: "You yell at the two to stop, and offer to buy the orc a new drink to
     avoid a scrap. Though their postures ease, the orc looks at you doubtfully with
     an eye browed raised.\r\n\r\n<color=#FFFFFF>\u201CYou will?...Well, that's generous

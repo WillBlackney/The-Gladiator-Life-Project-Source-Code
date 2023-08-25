@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Final (No Choice)
   m_EditorClassIdentifier: 
   pageTag: 14
-  headerText: Header
-  pageSprite: {fileID: 0}
+  headerText: Welcome to Breedmarsh
+  pageSprite: {fileID: 21300000, guid: 8d31560a84b0a9f41855a44a3bce6e2f, type: 3}
   bodyText: 'You quickly grab another fighter to add to your roster, then realize
     The Kid is nowhere to be seen. After a moment of panic, you hear the sound of
     a swelling chant outside. You grab your newest recruit and leave the tavern.
@@ -30,4 +30,4 @@ MonoBehaviour:
   choices:
   - buttonText: '"I should probably keep a closer eye on him..."'
     possiblePagesLoaded: 
-    characterGained: {fileID: 0}
+    charactersGained: []

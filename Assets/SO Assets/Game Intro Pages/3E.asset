@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 3E
   m_EditorClassIdentifier: 
   pageTag: 8
-  headerText: Header
-  pageSprite: {fileID: 0}
+  headerText: Welcome to Breedmarsh
+  pageSprite: {fileID: 21300000, guid: c4ef4d712ccb6a74299551c834e206c9, type: 3}
   bodyText: "<color=#FFFFFF>\u201CBut that\u2019s not-\u201C</color> The Nipple Pincher
     starts to object before a glass breaks across his forehead. \r\n\r\nThe orc militiaman
     dusts the remaining glass shards from his hands. \r\n\r\n<color=#FFFFFF>\u201CUnlike
