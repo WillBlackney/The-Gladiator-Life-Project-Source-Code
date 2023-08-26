@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Imperial Initiate
   m_EditorClassIdentifier: 
   myName: Imperial Initiate
+  randomizeRace: 1
   race: 1
+  possibleRaces: 01000000
   audioProfile: 1
   modelSize: 0
   xpReward: 15
@@ -85,23 +87,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
     - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
     - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
-    - {fileID: 11400000, guid: 5ea73452997566e4b9f7c15c306b772b, type: 2}
     - {fileID: 11400000, guid: e724601a8b1fda642824cbf7fc3faea9, type: 2}
     offhandProspects:
     - {fileID: 0}
     - {fileID: 11400000, guid: 67933190d00ec95478f7e153f088ddb2, type: 2}
-  - mainHandProspects:
-    - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
-    - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
-    - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
-    - {fileID: 11400000, guid: 5ea73452997566e4b9f7c15c306b772b, type: 2}
-    - {fileID: 11400000, guid: e724601a8b1fda642824cbf7fc3faea9, type: 2}
-    offhandProspects:
-    - {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
-  - mainHandProspects:
-    - {fileID: 11400000, guid: 9b8e828332b12524ea8077dc9f45ad24, type: 2}
-    - {fileID: 11400000, guid: eb90f828c8b2d7349b3e2ab18a132000, type: 2}
-    offhandProspects: []
+    - {fileID: 11400000, guid: 75767cfe858462342ba51e06076cf58c, type: 2}
   useUCM: 1
   modelParts:
   - Human_Chest_1

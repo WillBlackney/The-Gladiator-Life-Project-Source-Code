@@ -23,7 +23,17 @@ namespace WeAreGladiators.Characters
         [BoxGroup("General Info")]
         [LabelWidth(100)]
         [GUIColor("Yellow")]
+        public bool randomizeRace;
+        [BoxGroup("General Info")]
+        [LabelWidth(100)]
+        [GUIColor("Yellow")]
+        [ShowIf("ShowRace")]
         public CharacterRace race;
+        [BoxGroup("General Info")]
+        [LabelWidth(100)]
+        [GUIColor("Yellow")]
+        [ShowIf("ShowPossibleRaces")]
+        public CharacterRace[] possibleRaces;
         [BoxGroup("General Info")]
         [LabelWidth(100)]
         [GUIColor("Yellow")]
@@ -116,6 +126,14 @@ namespace WeAreGladiators.Characters
 
         // Odin Show Ifs
         #region
+        public bool ShowRace()
+        {
+            return !randomizeRace;
+        }
+        public bool ShowPossibleRaces()
+        {
+            return randomizeRace;
+        }
         public bool ShowModelParts()
         {
             return useUCM;

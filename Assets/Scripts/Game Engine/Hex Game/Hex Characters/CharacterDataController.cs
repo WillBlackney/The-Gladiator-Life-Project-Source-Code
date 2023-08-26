@@ -11,6 +11,7 @@ using WeAreGladiators.Audio;
 using WeAreGladiators.Boons;
 using System.Globalization;
 using Sirenix.Utilities;
+using System.ComponentModel;
 
 namespace WeAreGladiators.Characters
 {
@@ -260,12 +261,26 @@ namespace WeAreGladiators.Characters
 
             // Set up background + story data
             newCharacter.myName = template.myName;
-            newCharacter.race = template.race;
             newCharacter.audioProfile = template.audioProfile;
             newCharacter.modelSize = template.modelSize;
             newCharacter.xpReward = template.xpReward;
             newCharacter.baseArmour = template.baseArmour;
             newCharacter.ignoreStress = template.ignoreStress;
+
+            if (template.randomizeRace)
+            {
+                newCharacter.race = template.possibleRaces.ShuffledCopy()[0];
+                newCharacter.audioProfile = GetAudioProfileForRace(newCharacter.race);
+                newCharacter.modelParts = new List<string>();
+                newCharacter.modelParts.AddRange(GetRandomModelTemplate(newCharacter.race).bodyParts);
+            }
+            else
+            {
+                // Model Data
+                newCharacter.modelParts = new List<string>();
+                newCharacter.modelParts.AddRange(template.modelParts);
+                newCharacter.modelPrefab = template.modelPrefab;
+            }
 
             // Setup stats
             newCharacter.attributeSheet = new AttributeSheet();
@@ -278,12 +293,7 @@ namespace WeAreGladiators.Characters
             // Set up health
             if (template.randomizeHealth)
                 SetCharacterMaxHealth(newCharacter, RandomGenerator.NumberBetween(template.lowerHealthLimit, template.upperHealthLimit));
-            SetCharacterHealth(newCharacter, StatCalculator.GetTotalMaxHealth(newCharacter));
-
-            // Model Data
-            newCharacter.modelParts = new List<string>();
-            newCharacter.modelParts.AddRange(template.modelParts);
-            newCharacter.modelPrefab = template.modelPrefab;
+            SetCharacterHealth(newCharacter, StatCalculator.GetTotalMaxHealth(newCharacter));            
 
             // Ai Routine
             newCharacter.behaviour = template.behaviour;
@@ -1077,7 +1087,7 @@ namespace WeAreGladiators.Characters
             return ret;
 
         }
-        public CharacterModelTemplateSO GetRandomModelTemplate(CharacterRace race)
+        private CharacterModelTemplateSO GetRandomModelTemplate(CharacterRace race)
         {
             List<CharacterModelTemplateSO> validTemplates = new List<CharacterModelTemplateSO>();
 
