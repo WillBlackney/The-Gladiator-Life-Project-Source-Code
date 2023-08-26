@@ -22,8 +22,6 @@ namespace WeAreGladiators.UCM
             {
                 EnableAndSetElementOnModel(model, part);
             }
-
-
         }
         public static void BuildModelFromStringReferencesAsMugshot(UniversalCharacterModel model, List<string> partNames)
         {
@@ -83,7 +81,7 @@ namespace WeAreGladiators.UCM
                 bool shouldBreak = false;
                 foreach (UniversalCharacterModelElement ucme in model.AllMainHandWeapons)
                 {
-                    foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
+                    foreach (ItemDataSO itemData in ucme.hexItemsWithMyView)
                     {
                         if (itemData.itemName == itemSet.mainHandItem.itemName)
                         {
@@ -103,7 +101,7 @@ namespace WeAreGladiators.UCM
                 bool shouldBreak = false;
                 foreach (UniversalCharacterModelElement ucme in model.AllOffHandWeapons)
                 {
-                    foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
+                    foreach (ItemDataSO itemData in ucme.hexItemsWithMyView)
                     {
                         if (itemData.itemName == itemSet.offHandItem.itemName)
                         {
@@ -123,7 +121,7 @@ namespace WeAreGladiators.UCM
                 bool shouldBreak = false;
                 foreach (UniversalCharacterModelElement ucme in model.AllChestArmour)
                 {
-                    foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
+                    foreach (ItemDataSO itemData in ucme.hexItemsWithMyView)
                     {
                         if (itemData != null && itemData.itemName == itemSet.bodyArmour.itemName)
                         {
@@ -144,7 +142,7 @@ namespace WeAreGladiators.UCM
                 bool shouldBreak = false;
                 foreach (UniversalCharacterModelElement ucme in model.AllHeadArmour)
                 {
-                    foreach (Items.ItemDataSO itemData in ucme.hexItemsWithMyView)
+                    foreach (ItemDataSO itemData in ucme.hexItemsWithMyView)
                     {
                         if (itemData != null && itemData.itemName == itemSet.headArmour.itemName)
                         {
@@ -899,7 +897,6 @@ namespace WeAreGladiators.UCM
         }
         #endregion
 
-
         // Fading Logic
         #region
         public static void FadeOutCharacterModel(CharacterModel model, float speed = 1f)
@@ -911,17 +908,6 @@ namespace WeAreGladiators.UCM
                     sr.DOFade(0, speed);
             }
 
-            /*
-            // Stop particles
-            if (model.activeChestParticles != null)
-            {
-                ParticleSystem[] ps = model.activeChestParticles.GetComponentsInChildren<ParticleSystem>();
-                foreach (ParticleSystem p in ps)
-                {
-                    p.Stop();
-                }
-            }*/
-
         }
         public static void FadeInCharacterModel(CharacterModel model, float speed = 1f)
         {
@@ -932,18 +918,6 @@ namespace WeAreGladiators.UCM
                     sr.DOKill();
                 sr.DOFade(1, speed);
             }
-
-            /*
-            // Restart particles
-            if (model.activeChestParticles != null)
-            {
-                ParticleSystem[] ps = model.activeChestParticles.GetComponentsInChildren<ParticleSystem>();
-                foreach (ParticleSystem p in ps)
-                {
-                    p.Clear();
-                    p.Play();
-                }
-            }*/
         }
         public static void FadeInCharacterShadow(HexCharacterView view, float speed, System.Action onCompleteCallBack = null)
         {

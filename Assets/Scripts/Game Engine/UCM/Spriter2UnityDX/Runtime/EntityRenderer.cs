@@ -112,7 +112,6 @@ namespace Spriter2UnityDX {
 
 		private void Awake () {
 			RefreshRenders ();
-            //myEntity = GetComponentInParent<LivingEntity>();
 		}
 		private void Start()
 		{

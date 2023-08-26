@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
+  m_Name: Imperial Marksman
+  m_EditorClassIdentifier: 
+  myName: Outlaw Marksman
+  race: 1
+  audioProfile: 1
+  modelSize: 0
+  xpReward: 15
+  ignoreStress: 0
+  attributeSheet:
+    might:
+      value: 0
+      stars: 0
+    constitution:
+      value: 55
+      stars: 0
+    dodge:
+      value: 5
+      stars: 0
+    accuracy:
+      value: 65
+      stars: 0
+    resolve:
+      value: 5
+      stars: 0
+    fitness:
+      value: 100
+      stars: 0
+    wits:
+      value: 10
+      stars: 0
+    maxHealth: 0
+    apRecovery: 8
+    apMaximum: 8
+    initiative: 15
+    fatigueRecovery: 15
+    criticalChance: 5
+    criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
+    auraSize: 1
+    vision: 0
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+    deathResistance: 25
+  baseArmour: 0
+  randomizeHealth: 0
+  lowerHealthLimit: 50
+  upperHealthLimit: 60
+  behaviour: {fileID: 11400000, guid: 77d34f821a2e7fd40b1b283022ce1213, type: 2}
+  abilityBook:
+    activeAbilities: []
+  serializedPassiveManager:
+    perks: []
+  randomizeItemSet: 1
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: c420762d59a4b8f4788afabeee27eb35, type: 2}
+    offHandItem: {fileID: 0}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  possibleArmourLoadouts:
+  - headProspects:
+    - {fileID: 11400000, guid: c40c9e4ca934ded4e8c27cbeb88cb759, type: 2}
+    bodyProspects:
+    - {fileID: 11400000, guid: ae95f085284e4354f90181106f16a763, type: 2}
+    - {fileID: 11400000, guid: 8949fc1582e2d5e4ca3a600894a46196, type: 2}
+    - {fileID: 11400000, guid: 39e6763cac1ab444aae987cd45525c72, type: 2}
+  recruitWeaponLoadouts:
+  - mainHandProspects:
+    - {fileID: 11400000, guid: 623ec2e1eab053346b93e30e2d91c862, type: 2}
+    offhandProspects: []
+  modelParts:
+  - Human_Chest_1
+  - Human_Face_8
+  - Human_Head_10
+  - Human_Right_Hand_1
+  - Human_Right_Leg_1

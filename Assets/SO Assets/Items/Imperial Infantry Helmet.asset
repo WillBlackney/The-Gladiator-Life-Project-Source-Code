@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3002d4383aeb850498f71069697a5ed8, type: 3}
+  m_Name: Imperial Infantry Helmet
+  m_EditorClassIdentifier: 
+  itemSprite: {fileID: 21300000, guid: 30fe352be5737644496c4f9dbc34f5b2, type: 3}
+  itemName: Imperial Infantry Helmet
+  itemDescription: A simple and functional helmet made of metal or leather, often
+    worn by soldiers and footmen in battle. Its design is utilitarian and practical,
+    providing adequate protection without being overly bulky or heavy.
+  itemType: 1
+  rarity: 1
+  fatiguePenalty: 4
+  baseGoldValue: 175
+  canSpawnInShop: 1
+  canBeCombatContractReward: 0
+  includeInLibrary: 1
+  weaponClass: 0
+  handRequirement: 0
+  allowedSlot: 0
+  injuryTypesCaused: 
+  weaponAttackAnimationType: 0
+  healthDamage: 1
+  armourDamage: 1
+  armourPenetration: 0.25
+  minArmourRoll: 35
+  maxArmourRoll: 35
+  grantedAbilities: []
+  itemEffectSets: []
+  equipSFX: 126
+  swingSFX: 8
+  hitSFX: 8

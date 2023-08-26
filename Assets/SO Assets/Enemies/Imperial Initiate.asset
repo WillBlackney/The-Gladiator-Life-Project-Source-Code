@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
+  m_Name: Imperial Initiate
+  m_EditorClassIdentifier: 
+  myName: Imperial Initiate
+  race: 1
+  audioProfile: 1
+  modelSize: 0
+  xpReward: 15
+  ignoreStress: 0
+  attributeSheet:
+    might:
+      value: 0
+      stars: 0
+    constitution:
+      value: 55
+      stars: 0
+    dodge:
+      value: 5
+      stars: 0
+    accuracy:
+      value: 65
+      stars: 0
+    resolve:
+      value: 5
+      stars: 0
+    fitness:
+      value: 100
+      stars: 0
+    wits:
+      value: 10
+      stars: 0
+    maxHealth: 0
+    apRecovery: 8
+    apMaximum: 8
+    initiative: 15
+    fatigueRecovery: 15
+    criticalChance: 5
+    criticalModifier: 50
+    physicalDamageBonus: 0
+    magicDamageBonus: 0
+    auraSize: 1
+    vision: 0
+    physicalResistance: 0
+    magicResistance: 0
+    debuffResistance: 0
+    stressResistance: 0
+    injuryResistance: 0
+    deathResistance: 25
+  baseArmour: 0
+  randomizeHealth: 0
+  lowerHealthLimit: 50
+  upperHealthLimit: 60
+  behaviour: {fileID: 11400000, guid: 0e79202b5a0692a4e8c1a2e08077a9c7, type: 2}
+  abilityBook:
+    activeAbilities: []
+  serializedPassiveManager:
+    perks: []
+  randomizeItemSet: 1
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    offHandItem: {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  possibleArmourLoadouts:
+  - headProspects:
+    - {fileID: 11400000, guid: def6a32e42cfd7646976a6b46a3752a0, type: 2}
+    - {fileID: 0}
+    bodyProspects:
+    - {fileID: 11400000, guid: 9c82d8fa69ec50443a7f388f71928851, type: 2}
+    - {fileID: 11400000, guid: c8fa646825673a74fa6d3a61e70cda06, type: 2}
+  recruitWeaponLoadouts:
+  - mainHandProspects:
+    - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
+    - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
+    - {fileID: 11400000, guid: 5ea73452997566e4b9f7c15c306b772b, type: 2}
+    - {fileID: 11400000, guid: e724601a8b1fda642824cbf7fc3faea9, type: 2}
+    offhandProspects:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 67933190d00ec95478f7e153f088ddb2, type: 2}
+  - mainHandProspects:
+    - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
+    - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
+    - {fileID: 11400000, guid: 5ea73452997566e4b9f7c15c306b772b, type: 2}
+    - {fileID: 11400000, guid: e724601a8b1fda642824cbf7fc3faea9, type: 2}
+    offhandProspects:
+    - {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
+  - mainHandProspects:
+    - {fileID: 11400000, guid: 9b8e828332b12524ea8077dc9f45ad24, type: 2}
+    - {fileID: 11400000, guid: eb90f828c8b2d7349b3e2ab18a132000, type: 2}
+    offhandProspects: []
+  useUCM: 1
+  modelParts:
+  - Human_Chest_1
+  - Human_Face_8
+  - Human_Head_10
+  - Human_Right_Hand_1
+  - Human_Right_Leg_1
+  modelPrefab: {fileID: 0}
