@@ -391,6 +391,7 @@ namespace WeAreGladiators
         Gnoll = 7,
         Ent = 8,
         Demon = 9,
+        Beast = 10,
     }
     public enum ActivationPhase
     {
@@ -449,6 +450,8 @@ namespace WeAreGladiators
         FearOfGreenskins = 207,
         HateOfHumanity = 208,
         FearOfHumanity = 209,
+        HateOfBeasts = 231,
+        FearOfBeasts = 232,
 
         None = 0,
         Abusive = 107,
@@ -645,6 +648,7 @@ namespace WeAreGladiators
         SturdyDefense = 228,
         AgileDefense = 229,
         FormationLeader = 230,
+        BestialFrenzy = 233,
     }
     public enum PerkQuality
     {

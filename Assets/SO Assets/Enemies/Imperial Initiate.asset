@@ -77,8 +77,7 @@ MonoBehaviour:
     trinket: {fileID: 0}
   possibleArmourLoadouts:
   - headProspects:
-    - {fileID: 11400000, guid: def6a32e42cfd7646976a6b46a3752a0, type: 2}
-    - {fileID: 0}
+    - {fileID: 11400000, guid: 6257418e3377eb04e9b5bdc3a26febc0, type: 2}
     bodyProspects:
     - {fileID: 11400000, guid: 9c82d8fa69ec50443a7f388f71928851, type: 2}
     - {fileID: 11400000, guid: c8fa646825673a74fa6d3a61e70cda06, type: 2}

@@ -277,6 +277,7 @@ namespace WeAreGladiators.Characters
             else
             {
                 // Model Data
+                newCharacter.race = template.race;
                 newCharacter.modelParts = new List<string>();
                 newCharacter.modelParts.AddRange(template.modelParts);
                 newCharacter.modelPrefab = template.modelPrefab;

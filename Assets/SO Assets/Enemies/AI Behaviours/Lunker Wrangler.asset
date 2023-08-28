@@ -1,0 +1,237 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e977228e81fbff4cb36aab28582ba06, type: 3}
+  m_Name: Lunker Wrangler
+  m_EditorClassIdentifier: 
+  directives:
+  - action:
+      actionType: 1
+      targettingPriority: 090000000800000003000000
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Whip Beast
+    requirements:
+    - requirementType: 23
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      fatigueReq: 14
+      stressReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 8
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      fatigueReq: 0
+      stressReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 6
+      range: 0
+      perkPairing:
+        perkTag: 233
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      fatigueReq: 0
+      stressReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 3
+      targettingPriority: 08000000
+      getRangeFromAbility: 0
+      range: 2
+      abilityName: 
+    requirements:
+    - requirementType: 8
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      fatigueReq: 0
+      stressReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 4
+      fatigueReq: 0
+      stressReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Ensnare
+    requirements:
+    - requirementType: 6
+      range: 0
+      perkPairing:
+        perkTag: 79
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      fatigueReq: 0
+      stressReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 6
+      range: 0
+      perkPairing:
+        perkTag: 60
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      fatigueReq: 0
+      stressReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Thrust
+    requirements: []
+  - action:
+      actionType: 7
+      targettingPriority: 
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: 
+    requirements:
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 4
+      fatigueReq: 0
+      stressReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 23
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      fatigueReq: 11
+      stressReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 8
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      fatigueReq: 0
+      stressReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 41
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      fatigueReq: 0
+      stressReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 1
+  - action:
+      actionType: 2
+      targettingPriority: 01000000
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: 
+    requirements:
+    - requirementType: 12
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      fatigueReq: 0
+      stressReq: 0
+      turnReq: 0
+      alliesAlive: 2
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0

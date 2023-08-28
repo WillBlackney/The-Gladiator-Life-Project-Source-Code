@@ -1931,9 +1931,11 @@ namespace WeAreGladiators.Characters
 
                 // Fortified
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fortified) && character.currentHealth > 0)                
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Fortified, -1, true, 0.5f);          
-                             
-                                
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Fortified, -1, true, 0.5f);
+
+                // Bestial Frenzy
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BestialFrenzy) && character.currentHealth > 0)
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.BestialFrenzy, -1, true, 0.5f);
                 #endregion
 
                 // MISC

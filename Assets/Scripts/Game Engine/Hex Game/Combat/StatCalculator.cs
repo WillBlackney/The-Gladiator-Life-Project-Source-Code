@@ -275,6 +275,9 @@ namespace WeAreGladiators
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ClutchHitter))
                 accuracy += 5;
 
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BestialFrenzy))
+                accuracy += 15;
+
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
@@ -398,10 +401,7 @@ namespace WeAreGladiators
             int dodge = 0;
             dodge += c.attributeSheet.dodge.value;
             float mod = 1f;
-
-            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
-                dodge += 3;
-
+            
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
@@ -426,6 +426,12 @@ namespace WeAreGladiators
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepFaceCut))
                     mod -= 0.25f;
             }
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
+                dodge += 3;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BestialFrenzy))
+                dodge += 15;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Rooted))
                 dodge -= 10;
@@ -1093,6 +1099,9 @@ namespace WeAreGladiators
             intitiative += GetTotalWits(c);
             float mod = 1f;
 
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BestialFrenzy))
+                intitiative += 15;
+
             // Items
             intitiative += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Initiative, c.itemSet);
 
@@ -1221,6 +1230,9 @@ namespace WeAreGladiators
         {
             int apRecovery = c.attributeSheet.apRecovery;
 
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BestialFrenzy))
+                apRecovery += 4;
+
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
@@ -1263,6 +1275,9 @@ namespace WeAreGladiators
         public static int GetTotalMaxActionPoints(HexCharacterModel c)
         {
             int maxEnergy = c.attributeSheet.apMaximum;
+
+            if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BestialFrenzy))
+                maxEnergy += 4;
 
             // Items
             maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxActionPoints, c.itemSet);
