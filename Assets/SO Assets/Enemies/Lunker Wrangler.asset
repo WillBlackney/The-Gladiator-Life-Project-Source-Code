@@ -45,7 +45,7 @@ MonoBehaviour:
     maxHealth: 0
     apRecovery: 8
     apMaximum: 8
-    initiative: 20
+    initiative: 25
     fatigueRecovery: 15
     criticalChance: 5
     criticalModifier: 50

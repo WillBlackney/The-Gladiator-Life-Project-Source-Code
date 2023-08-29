@@ -24,7 +24,7 @@ MonoBehaviour:
     randomizeVolume: 0
     randomVolumeLowerLimit: 0.3
     randomVolumeUpperLimit: 0.4
-    volume: 0.25
+    volume: 0.2
     randomizePitch: 0
     randomPitchLowerLimit: 0.8
     randomPitchUpperLimit: 1.2
@@ -44,7 +44,7 @@ MonoBehaviour:
     randomizeVolume: 0
     randomVolumeLowerLimit: 0.3
     randomVolumeUpperLimit: 0.4
-    volume: 0.25
+    volume: 0.2
     randomizePitch: 0
     randomPitchLowerLimit: 0.8
     randomPitchUpperLimit: 1.2
@@ -65,7 +65,7 @@ MonoBehaviour:
     randomizeVolume: 0
     randomVolumeLowerLimit: 0.3
     randomVolumeUpperLimit: 0.4
-    volume: 0.25
+    volume: 0.2
     randomizePitch: 0
     randomPitchLowerLimit: 0.8
     randomPitchUpperLimit: 1.2
@@ -85,7 +85,7 @@ MonoBehaviour:
     randomizeVolume: 0
     randomVolumeLowerLimit: 0.3
     randomVolumeUpperLimit: 0.4
-    volume: 0.25
+    volume: 0.2
     randomizePitch: 0
     randomPitchLowerLimit: 0.8
     randomPitchUpperLimit: 1.2

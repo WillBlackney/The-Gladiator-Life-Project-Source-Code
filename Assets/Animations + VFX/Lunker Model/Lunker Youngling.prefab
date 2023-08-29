@@ -122,7 +122,7 @@ MonoBehaviour:
   baseFacingIsRight: 0
   allowAutoSorting: 1
   rootSortingGroup: {fileID: 6900985275723958967}
-  combatScale: 0.04
+  combatScale: 0.0325
   totalDeathAnims: 2
   totalDecapitationAnims: 1
   allModelElements: []

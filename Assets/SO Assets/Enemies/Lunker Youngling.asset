@@ -25,10 +25,10 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 80
+      value: 70
       stars: 0
     dodge:
-      value: 10
+      value: 5
       stars: 0
     accuracy:
       value: 65
@@ -37,7 +37,7 @@ MonoBehaviour:
       value: 5
       stars: 0
     fitness:
-      value: 150
+      value: 125
       stars: 0
     wits:
       value: 10
