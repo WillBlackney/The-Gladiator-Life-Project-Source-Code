@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
   m_Name: Imperial Marksman
   m_EditorClassIdentifier: 
-  myName: Outlaw Marksman
+  myName: Imperial Marksman
+  randomizeRace: 1
   race: 1
+  possibleRaces: 01000000
   audioProfile: 1
   modelSize: 0
   xpReward: 15
@@ -75,18 +77,19 @@ MonoBehaviour:
     trinket: {fileID: 0}
   possibleArmourLoadouts:
   - headProspects:
-    - {fileID: 11400000, guid: c40c9e4ca934ded4e8c27cbeb88cb759, type: 2}
+    - {fileID: 11400000, guid: 1a1a6451514e39a4a9bb3258a55d41c7, type: 2}
     bodyProspects:
-    - {fileID: 11400000, guid: ae95f085284e4354f90181106f16a763, type: 2}
-    - {fileID: 11400000, guid: 8949fc1582e2d5e4ca3a600894a46196, type: 2}
-    - {fileID: 11400000, guid: 39e6763cac1ab444aae987cd45525c72, type: 2}
+    - {fileID: 11400000, guid: 9c82d8fa69ec50443a7f388f71928851, type: 2}
+    - {fileID: 11400000, guid: c8fa646825673a74fa6d3a61e70cda06, type: 2}
   recruitWeaponLoadouts:
   - mainHandProspects:
     - {fileID: 11400000, guid: 623ec2e1eab053346b93e30e2d91c862, type: 2}
     offhandProspects: []
+  useUCM: 0
   modelParts:
   - Human_Chest_1
   - Human_Face_8
   - Human_Head_10
   - Human_Right_Hand_1
   - Human_Right_Leg_1
+  modelPrefab: {fileID: 0}

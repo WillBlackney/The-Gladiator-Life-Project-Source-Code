@@ -47,7 +47,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'detection range is increased/decreased by the enemy character''s '
+    phrase: 'detection range is increased or decreased by the enemy character''s '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -101,4 +101,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

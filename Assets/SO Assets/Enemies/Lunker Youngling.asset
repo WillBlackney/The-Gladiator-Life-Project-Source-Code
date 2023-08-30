@@ -25,7 +25,7 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 70
+      value: 75
       stars: 0
     dodge:
       value: 5
