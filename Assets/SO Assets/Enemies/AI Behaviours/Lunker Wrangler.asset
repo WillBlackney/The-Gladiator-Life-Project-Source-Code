@@ -68,9 +68,9 @@ MonoBehaviour:
   - action:
       actionType: 3
       targettingPriority: 08000000
-      getRangeFromAbility: 0
+      getRangeFromAbility: 1
       range: 2
-      abilityName: 
+      abilityName: Whip Beast
     requirements:
     - requirementType: 8
       range: 0

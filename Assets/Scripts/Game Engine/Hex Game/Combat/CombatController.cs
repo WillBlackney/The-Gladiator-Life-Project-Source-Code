@@ -1328,7 +1328,7 @@ namespace WeAreGladiators.Combat
             // Check and handle death
             LevelNode targetTile = target.currentTile;
             if (target.currentHealth <= 0 && target.livingState == LivingState.Alive)
-                HandleDeathBlow(target, parentEvent);
+                HandleDeathBlow(target, parentEvent, false, weaponUsed);
 
             // Combat Token Expiries >>
             if (target.livingState == LivingState.Alive)
@@ -1636,7 +1636,7 @@ namespace WeAreGladiators.Combat
 
         // Handle Death
         #region
-        public void HandleDeathBlow(HexCharacterModel character, VisualEvent parentEvent = null, bool guaranteedDeath = false)
+        public void HandleDeathBlow(HexCharacterModel character, VisualEvent parentEvent = null, bool guaranteedDeath = false, ItemData killingWeapon = null)
         {
             Debug.Log("CombatLogic.HandleDeathBlow() started for " + character.myName);
 
@@ -1648,6 +1648,9 @@ namespace WeAreGladiators.Combat
             // Mark as dead
             character.livingState = LivingState.Dead;
             HexCharacterController.Instance.Graveyard.Add(character);
+
+            // Roll for death or survival
+            DeathRollResult result = RollForDeathResist(character);
 
             // Remove from persitency
             if (character.allegiance == Allegiance.Enemy)
@@ -1698,13 +1701,19 @@ namespace WeAreGladiators.Combat
                 view.ucmMovementParent.transform.DOMove(finalPos, 0.5f);
                 view.model.transform.DORotate(new Vector3(0, 0, randomDeathRotation), 0.5f);
 
+                // Prevent decap animation if survived
+                if (result.pass && character.controller == Controller.Player)
+                {
+                    randomDeathAnim = 0;
+                }
+
                 // Normal Death anim
                 if (view.model.TotalDecapitationAnims == 0 || randomDeathAnim == 0)
                 {
                     HexCharacterController.Instance.PlayDeathAnimation(view);
                 }
                 // Decapitation anim
-                else
+                else if (killingWeapon != null && killingWeapon.canDecapitate == true)
                 {
                     spatters = 3;
                     VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
@@ -1724,8 +1733,7 @@ namespace WeAreGladiators.Combat
 
             // Roll for death or knock down on player characters
             if (character.controller == Controller.Player)
-            {
-                DeathRollResult result = RollForDeathResist(character);
+            {               
                 if (result.pass && !guaranteedDeath)
                 {
                     // Gain permanent injury
@@ -1766,7 +1774,7 @@ namespace WeAreGladiators.Combat
                 {
                     if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FragileBinding))
                     {
-                        HandleDeathBlow(c, c.GetLastStackEventParent());
+                        HandleDeathBlow(c, c.GetLastStackEventParent(), true);
                     }
                 }
             }

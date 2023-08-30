@@ -66,6 +66,10 @@ namespace WeAreGladiators.Items
         [LabelWidth(100)]
         [ShowIf("ShowWeaponField")]
         public WeaponAttackAnimationType weaponAttackAnimationType;
+        [BoxGroup("Weapon Info")]
+        [LabelWidth(100)]
+        [ShowIf("ShowWeaponField")]
+        public bool canDecapitate = false;
 
         [BoxGroup("Weapon Info")]
         [LabelWidth(125)]

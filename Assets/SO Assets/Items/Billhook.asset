@@ -28,6 +28,7 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 0100000002000000
   weaponAttackAnimationType: 1
+  canDecapitate: 1
   healthDamage: 1
   armourDamage: 1.15
   armourPenetration: 0.3

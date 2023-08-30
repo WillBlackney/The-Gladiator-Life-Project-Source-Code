@@ -843,28 +843,31 @@ namespace WeAreGladiators
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenRibs))
-                    mod -= 0.35f;
+                    mod -= 0.25f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CrushedWindpipe))
-                    mod -= 0.5f;
+                    mod -= 0.4f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedRibs))
-                    mod -= 0.25f;
+                    mod -= 0.15f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ScarredLung))
-                    mod -= 0.5f;
+                    mod -= 0.4f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepAbdominalCut))
-                    mod -= 0.25f;
+                    mod -= 0.15f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepChestCut))
-                    mod -= 0.35f;
+                    mod -= 0.2f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.PiercedLung))
-                    mod -= 0.6f;
+                    mod -= 0.4f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedGuts))
-                    mod -= 0.4f;
+                    mod -= 0.2f;
+
+                if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Sick))
+                    mod -= 0.25f;
             }
 
             // Items
@@ -899,28 +902,28 @@ namespace WeAreGladiators
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenRibs))
-                    mod -= 0.35f;
+                    mod -= 0.25f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrushedWindpipe))
-                    mod -= 0.5f;
+                    mod -= 0.4f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedRibs))
-                    mod -= 0.25f;
+                    mod -= 0.15f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ScarredLung))
-                    mod -= 0.5f;
+                    mod -= 0.4f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepAbdominalCut))
-                    mod -= 0.25f;
+                    mod -= 0.15f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepChestCut))
-                    mod -= 0.35f;
+                    mod -= 0.2f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.PiercedLung))
-                    mod -= 0.6f;
+                    mod -= 0.4f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedGuts))
-                    mod -= 0.4f;
+                    mod -= 0.2f;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sick))
                     mod -= 0.25f;
@@ -1168,7 +1171,7 @@ namespace WeAreGladiators
                     fatRecovery -= 3;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CrushedWindpipe))
-                    fatRecovery -= 10;
+                    fatRecovery -= 8;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedCheek))
                     fatRecovery -= 3;
@@ -1205,7 +1208,7 @@ namespace WeAreGladiators
                     fatRecovery -= 3;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrushedWindpipe))
-                    fatRecovery -= 10;
+                    fatRecovery -= 8;
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedCheek))
                     fatRecovery -= 3;

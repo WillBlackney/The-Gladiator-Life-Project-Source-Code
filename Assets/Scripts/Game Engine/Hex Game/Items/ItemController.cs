@@ -155,6 +155,7 @@ namespace WeAreGladiators.Items
 
             i.rarity = d.rarity;
             i.weaponClass = d.weaponClass;
+            i.canDecapitate = d.canDecapitate;
             i.handRequirement = d.handRequirement;
             i.allowedSlot = d.allowedSlot;
             i.injuryTypesCaused = d.injuryTypesCaused;
@@ -191,6 +192,7 @@ namespace WeAreGladiators.Items
 
             i.rarity = original.rarity;
             i.weaponClass = original.weaponClass;
+            i.canDecapitate = original.canDecapitate;
             i.handRequirement = original.handRequirement;
             i.allowedSlot = original.allowedSlot;
             i.injuryTypesCaused = original.injuryTypesCaused;

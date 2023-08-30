@@ -30,6 +30,7 @@ namespace WeAreGladiators.Items
         public float armourDamage = 1f;
         public float armourPenetration = 0.25f;
         public WeaponAttackAnimationType weaponAttackAnimationType;
+        public bool canDecapitate;
 
         // Armour Properties
         public int fatiguePenalty;

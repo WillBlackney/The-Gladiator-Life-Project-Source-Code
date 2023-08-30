@@ -25,13 +25,13 @@ MonoBehaviour:
       value: 0
       stars: 0
     constitution:
-      value: 55
+      value: 50
       stars: 0
     dodge:
-      value: 0
+      value: 5
       stars: 0
     accuracy:
-      value: 60
+      value: 65
       stars: 0
     resolve:
       value: 5
@@ -45,7 +45,7 @@ MonoBehaviour:
     maxHealth: 0
     apRecovery: 8
     apMaximum: 8
-    initiative: 25
+    initiative: 20
     fatigueRecovery: 15
     criticalChance: 5
     criticalModifier: 50
