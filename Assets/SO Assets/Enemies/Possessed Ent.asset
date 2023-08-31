@@ -63,7 +63,7 @@ MonoBehaviour:
   randomizeHealth: 0
   lowerHealthLimit: 50
   upperHealthLimit: 60
-  behaviour: {fileID: 0}
+  behaviour: {fileID: 11400000, guid: d7c66fe9534b31942b3a36d85aa6a2ae, type: 2}
   abilityBook:
     activeAbilities: []
   serializedPassiveManager:

@@ -51,6 +51,7 @@ namespace WeAreGladiators.VisualEvents
         public const string RELOAD_CROSSBOW = "RELOAD_CROSSBOW";
         public const string SHATTERED = "SHATTERED";
         public const string BITE = "BITE";
+        public const string STOMP = "STOMP";
         #endregion
 
         // Core Functions
@@ -127,6 +128,18 @@ namespace WeAreGladiators.VisualEvents
                 {
                     AudioManager.Instance.PlaySound(user.AudioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerBiteAttackAnimation(user.hexCharacterView, targetView.WorldPosition, cData);
+                }, stackEvent).SetCoroutineData(cData);
+            }
+
+            // Stomp
+            else if (vEvent.characterAnimation == CharacterAnimation.Stomp)
+            {
+                HexCharacterView targetView = targetCharacter.hexCharacterView;
+                TaskTracker cData = new TaskTracker();
+                VisualEventManager.CreateVisualEvent(() =>
+                {
+                    AudioManager.Instance.PlaySound(user.AudioProfile, AudioSet.Attack);
+                    HexCharacterController.Instance.TriggerStompAnimation(user.hexCharacterView, cData);
                 }, stackEvent).SetCoroutineData(cData);
             }
 
