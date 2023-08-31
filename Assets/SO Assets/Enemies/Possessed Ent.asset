@@ -18,7 +18,7 @@ MonoBehaviour:
   possibleRaces: 0a000000
   audioProfile: 4
   modelSize: 0
-  xpReward: 50
+  xpReward: 75
   ignoreStress: 1
   attributeSheet:
     might:
@@ -31,7 +31,7 @@ MonoBehaviour:
       value: 0
       stars: 0
     accuracy:
-      value: 80
+      value: 75
       stars: 0
     resolve:
       value: 25
@@ -63,11 +63,23 @@ MonoBehaviour:
   randomizeHealth: 0
   lowerHealthLimit: 50
   upperHealthLimit: 60
-  behaviour: {fileID: 11400000, guid: d7c66fe9534b31942b3a36d85aa6a2ae, type: 2}
+  behaviour: {fileID: 11400000, guid: 6c4f914aae46b71408eb8d7d28994ec7, type: 2}
   abilityBook:
-    activeAbilities: []
+    activeAbilities:
+    - {fileID: 11400000, guid: 9b2c48e159af4d149be4754825c28ee5, type: 2}
+    - {fileID: 11400000, guid: b486fbdfa34b57140875016c8ed21496, type: 2}
+    - {fileID: 11400000, guid: 91106c75e0af40d489e048277bf79d4a, type: 2}
   serializedPassiveManager:
-    perks: []
+    perks:
+    - perkTag: 234
+      stacks: 1
+      freshInjury: 0
+    - perkTag: 235
+      stacks: 1
+      freshInjury: 0
+    - perkTag: 236
+      stacks: 1
+      freshInjury: 0
   randomizeItemSet: 0
   itemSet:
     mainHandItem: {fileID: 0}

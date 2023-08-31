@@ -1679,7 +1679,9 @@ namespace WeAreGladiators.Characters
                     VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Burning!", PerkController.Instance.GetPerkIconDataByTag(Perk.Burning).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
 
                     // Calculate and deal Magic damage
-                    DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Burning), DamageType.Magic);
+                    int fireDamage = 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Burning);
+                    if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FireVulnerability)) fireDamage = (int) (fireDamage * 1.5f);
+                    DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, fireDamage, DamageType.Magic);
                     VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.FireExplosion, view.WorldPosition));
                     CombatController.Instance.HandleDamage(character, damageResult, DamageType.Magic, true);
                     VisualEventManager.InsertTimeDelayInQueue(0.5f);

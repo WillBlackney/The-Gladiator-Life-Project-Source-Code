@@ -649,6 +649,9 @@ namespace WeAreGladiators
         AgileDefense = 229,
         FormationLeader = 230,
         BestialFrenzy = 233,
+        AxeVulnerability = 234,
+        FireVulnerability = 235,
+        InjuryImmunity = 236,
     }
     public enum PerkQuality
     {

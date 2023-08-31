@@ -467,6 +467,8 @@ namespace WeAreGladiators.Combat
             // Can only be injured by ability based attacks (e.g. cant be injured from Bleeding, Poisoned, etc)
             if (ability == null || effect == null) return;
 
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.InjuryImmunity)) return;
+
             int roll = RandomGenerator.NumberBetween(1, 1000);
             float baseInjuryChance = 25;
             float healthLostModifier = StatCalculator.GetPercentage(damageResult.totalHealthLost, StatCalculator.GetTotalMaxHealth(character));
@@ -1087,6 +1089,14 @@ namespace WeAreGladiators.Combat
                         PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.TwoHandedDominance))
                     {
                         penetrationMod += 0.15f;
+                    }
+
+                    // Check axe vulnerability on target
+                    if (attacker != null && 
+                        weaponUsed.weaponClass == WeaponClass.Axe && 
+                        PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.AxeVulnerability))
+                    {
+                        healthDamageMod += 0.5f;
                     }
                 }
 
