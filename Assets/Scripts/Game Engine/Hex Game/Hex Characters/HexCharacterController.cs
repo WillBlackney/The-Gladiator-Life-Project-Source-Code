@@ -1342,49 +1342,22 @@ namespace WeAreGladiators.Characters
             StartCoroutine(TriggerStompAnimationCoroutine(view, cData));
         }
         public IEnumerator TriggerStompAnimationCoroutine(HexCharacterView view, TaskTracker cData)
-        {
-            yield return null; cData.MarkAsCompleted();
-            /*
+        {            
             if (view == null)
             {
                 if (cData != null) cData.MarkAsCompleted();
                 yield break;
             }
 
-            Ease moveTowardsEase = Ease.InExpo;
-            Ease moveBackEase = Ease.OutSine;
             string animationString = AnimationEventController.STOMP;
-            view.CurrentAnimation = animationString;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
 
-            // 60 sample rate
-            float offset = -0.04f;
             float frameToMilliseconds = 0.016667f;
-            float pauseTimeBeforeInitialMove = 8f * frameToMilliseconds;
-            float initialMoveTime = 12f * frameToMilliseconds;
-            float postImpactPause = 30f * frameToMilliseconds;
-            float moveBackTime = 30f * frameToMilliseconds;
+            float framesTilStomp = 40f * frameToMilliseconds;
             view.CurrentAnimation = animationString;
-
-            // Start attack animation
             view.ucmAnimator.SetTrigger(animationString);
-            yield return new WaitForSeconds(pauseTimeBeforeInitialMove);
-
-            // Move a bit foward
-            Vector2 startPos = view.WorldPosition;
-            float xMod = 0.75f;
-            if (view.character.currentFacing == Facing.Left) xMod = -xMod;
-            Vector2 forwardPos = new Vector2(startPos.x + xMod, startPos.y);
-            view.ucmMovementParent.transform.DOMove(forwardPos, initialMoveTime).SetEase(moveTowardsEase);
-            yield return new WaitForSeconds(initialMoveTime + offset);
-
-            // Pause at impact point
-            if (cData != null) cData.MarkAsCompleted();
-            yield return new WaitForSeconds(postImpactPause);
-
-            // Move back to start point
-            view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
-            */
+            yield return new WaitForSeconds(framesTilStomp);
+            cData.MarkAsCompleted();
         }
         public void TriggerAoeMeleeAttackAnimation(HexCharacterView view, ItemData weaponUsed, TaskTracker cData)
         {

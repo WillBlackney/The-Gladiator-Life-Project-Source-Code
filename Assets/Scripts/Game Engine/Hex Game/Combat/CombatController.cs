@@ -1711,19 +1711,18 @@ namespace WeAreGladiators.Combat
                 view.ucmMovementParent.transform.DOMove(finalPos, 0.5f);
                 view.model.transform.DORotate(new Vector3(0, 0, randomDeathRotation), 0.5f);
 
-                // Prevent decap animation if survived
-                if (result.pass && character.controller == Controller.Player)
-                {
-                    randomDeathAnim = 0;
-                }
-
                 // Normal Death anim
-                if (view.model.TotalDecapitationAnims == 0 || randomDeathAnim == 0)
+                if (randomDeathAnim == 0 ||
+                    view.model.TotalDecapitationAnims == 0 ||
+                    killingWeapon == null ||
+                    (killingWeapon != null && killingWeapon.canDecapitate == false) ||
+                    (result.pass && character.controller == Controller.Player))
                 {
                     HexCharacterController.Instance.PlayDeathAnimation(view);
                 }
+
                 // Decapitation anim
-                else if (killingWeapon != null && killingWeapon.canDecapitate == true)
+                else
                 {
                     spatters = 3;
                     VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);

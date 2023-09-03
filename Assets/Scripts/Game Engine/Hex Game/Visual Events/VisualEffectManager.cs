@@ -39,6 +39,7 @@ namespace WeAreGladiators.VisualEvents
         public GameObject crossbowBolt;
         public GameObject throwingNet;
         public GameObject javelin;
+        public GameObject stoneBoulder;
         public GameObject fireBall;
         public GameObject poisonBall;
         public GameObject shadowBall;
@@ -236,6 +237,10 @@ namespace WeAreGladiators.VisualEvents
             else if (projectileFired == ProjectileFired.Javelin)
             {
                 ShootJavelin(start, end, cData);
+            }
+            else if (projectileFired == ProjectileFired.StoneBoulder)
+            {
+                ShootStoneBoulder(start, end, cData);
             }
             else if (projectileFired == ProjectileFired.PoisonBall1)
             {
@@ -438,6 +443,11 @@ namespace WeAreGladiators.VisualEvents
         private void ShootJavelin(Vector3 startPos, Vector3 endPos, TaskTracker cData)
         {
             Projectile projectileScript = Instantiate(javelin, startPos, Quaternion.identity).GetComponent<Projectile>();
+            projectileScript.Initialize(startPos, endPos, () => cData.MarkAsCompleted());
+        }
+        private void ShootStoneBoulder(Vector3 startPos, Vector3 endPos, TaskTracker cData)
+        {
+            Projectile projectileScript = Instantiate(stoneBoulder, startPos, Quaternion.identity).GetComponent<Projectile>();
             projectileScript.Initialize(startPos, endPos, () => cData.MarkAsCompleted());
         }
         private void ShootThrowingNet(Vector3 startPos, Vector3 endPos, TaskTracker cData)

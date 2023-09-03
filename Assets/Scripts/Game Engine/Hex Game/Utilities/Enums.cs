@@ -845,6 +845,7 @@ namespace WeAreGladiators
         FireMeteor = 9,
         Javelin = 10,
         ThrowingNet = 11,
+        StoneBoulder = 14,
     }
     public enum ProjectileStartPosition
     {

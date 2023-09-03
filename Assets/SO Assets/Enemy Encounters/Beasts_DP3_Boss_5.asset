@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8ad5d7c5edf914b8061f29d31b419f, type: 3}
   m_Name: Beasts_DP3_Boss_5
   m_EditorClassIdentifier: 
-  baseXpReward: 150
+  baseXpReward: 200
   deploymentLimit: 3
   difficulty: 2
   enemyGroups:

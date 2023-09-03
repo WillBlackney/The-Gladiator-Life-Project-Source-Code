@@ -96,6 +96,11 @@ namespace WeAreGladiators.UCM
         {
             return this is UniversalCharacterModel == false;
         }
+        public virtual void StopAnimController()
+        {
+            // Must be called at some point during each death animation file as an anim event.
+            myAnimator.enabled = false;
+        }
 
         #endregion
 

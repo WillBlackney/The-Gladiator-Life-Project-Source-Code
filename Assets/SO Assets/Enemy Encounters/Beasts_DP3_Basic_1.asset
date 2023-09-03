@@ -21,7 +21,7 @@ MonoBehaviour:
     spawnPosition: {x: 2, y: 0}
   - possibleEnemies:
     - {fileID: 11400000, guid: b472c483a8180654ca442518f5dbc184, type: 2}
-    spawnPosition: {x: 2, y: 0}
+    spawnPosition: {x: 2, y: 1}
   - possibleEnemies:
     - {fileID: 11400000, guid: 0230bb66df275744083e1b1302b0a253, type: 2}
     spawnPosition: {x: 3, y: 1}

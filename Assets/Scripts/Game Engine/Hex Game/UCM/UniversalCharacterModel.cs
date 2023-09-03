@@ -10,6 +10,7 @@ using WeAreGladiators.Items;
 using WeAreGladiators;
 using UnityEngine.Rendering;
 using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
 
 namespace WeAreGladiators.UCM
 {
@@ -205,7 +206,7 @@ namespace WeAreGladiators.UCM
         }
         public void SetIdleAnim()
         {
-            myAnimator.SetTrigger("Idle");
+            myAnimator.SetTrigger(AnimationEventController.IDLE);
 
         }
         public void ShowHurtFace()
@@ -225,7 +226,7 @@ namespace WeAreGladiators.UCM
             }
         }
 
-        public void StopAnimController()
+        public override void StopAnimController()
         {
             myAnimator.enabled = false;
         }

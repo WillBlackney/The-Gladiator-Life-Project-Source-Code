@@ -19,7 +19,7 @@ MonoBehaviour:
   modelSize: 0
   attributeSheet:
     might:
-      value: 0
+      value: 100
       stars: 0
     constitution:
       value: 1000
@@ -28,7 +28,7 @@ MonoBehaviour:
       value: 0
       stars: 0
     accuracy:
-      value: 0
+      value: 200
       stars: 0
     resolve:
       value: 5

@@ -25,7 +25,7 @@ MonoBehaviour:
       value: 25
       stars: 0
     constitution:
-      value: 125
+      value: 150
       stars: 0
     dodge:
       value: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
     stressResistance: 0
     injuryResistance: 0
     deathResistance: 25
-  baseArmour: 175
+  baseArmour: 200
   randomizeHealth: 0
   lowerHealthLimit: 50
   upperHealthLimit: 60
@@ -78,6 +78,9 @@ MonoBehaviour:
       stacks: 1
       freshInjury: 0
     - perkTag: 236
+      stacks: 1
+      freshInjury: 0
+    - perkTag: 60
       stacks: 1
       freshInjury: 0
   randomizeItemSet: 0
