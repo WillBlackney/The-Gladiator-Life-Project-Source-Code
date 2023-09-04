@@ -15,10 +15,10 @@ MonoBehaviour:
   abilityName: Overcharge
   displayedName: Overcharge
   includeInGame: 1
-  baseAbilityDescription: Gain 3 Action points. At the end of your turn, become Stunned.
+  baseAbilityDescription: Gain 4 Action points. At the end of your turn, become Stunned.
   abilitySprite: {fileID: 21300000, guid: 438b3796f3ec98345a1e25b44f9f8dc1, type: 3}
   energyCost: 0
-  fatigueCost: 10
+  fatigueCost: 0
   baseCooldown: 3
   abilityType: 01000000
   doesNotBreakStealth: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
       stressAmountMin: 0
       stressAmountMax: 0
       successChance: 0
-    energyGained: 3
+    energyGained: 4
     normalTeleportVFX: 1
     tilesMoved: 0
     lineLength: 0

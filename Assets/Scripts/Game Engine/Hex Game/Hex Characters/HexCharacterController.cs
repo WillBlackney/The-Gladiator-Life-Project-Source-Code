@@ -1640,8 +1640,8 @@ namespace WeAreGladiators.Characters
                     VisualEventManager.InsertTimeDelayInQueue(0.5f);
 
                     // Remove 1 stack of poisoned
-                    if (character.currentHealth > 0)
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Poisoned, -1, false);
+                    //if (character.currentHealth > 0)
+                     //   PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Poisoned, -1, false);
 
                 }
 
@@ -1660,9 +1660,30 @@ namespace WeAreGladiators.Characters
                     VisualEventManager.InsertTimeDelayInQueue(0.5f);
                     
                     // Remove 1 stack of burning
-                    if (character.currentHealth > 0)
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Burning, -1);
+                   // if (character.currentHealth > 0)
+                    //    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Burning, -1);
                     
+                }
+
+                // Bleeding
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Bleeding) && character.currentHealth > 0)
+                {
+                    // Notification event
+                    VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Bleeding!", PerkController.Instance.GetPerkIconDataByTag(Perk.Bleeding).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
+
+                    // Calculate and deal Magic damage
+                    DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Bleeding), DamageType.Physical);
+                    VisualEventManager.CreateVisualEvent(() =>
+                    {
+                        AudioManager.Instance.PlaySound(Sound.Ability_Bloody_Stab);
+                        VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
+                    });
+                    CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
+                    VisualEventManager.InsertTimeDelayInQueue(0.5f);
+
+                    // Remove 1 stack of bleeding
+                    //if (character.currentHealth > 0)
+                    //     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Bleeding, -1);
                 }
 
                 // Cut Artery
@@ -1698,29 +1719,7 @@ namespace WeAreGladiators.Characters
                     CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
                     VisualEventManager.InsertTimeDelayInQueue(0.5f);
                 }
-
-                // Bleeding
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Bleeding) && character.currentHealth > 0)
-                {
-                    // Notification event
-                    VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Bleeding!", PerkController.Instance.GetPerkIconDataByTag(Perk.Bleeding).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
-
-                    // Calculate and deal Magic damage
-                    DamageResult damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, 5 * PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Bleeding), DamageType.Physical);
-                    VisualEventManager.CreateVisualEvent(() =>
-                    {
-                        AudioManager.Instance.PlaySound(Sound.Ability_Bloody_Stab);
-                        VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
-                    }); 
-                    CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
-                    VisualEventManager.InsertTimeDelayInQueue(0.5f);
-
-                    // Remove 1 stack of bleeding
-                    if (character.currentHealth > 0)
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Bleeding, -1);
-
-
-                }
+                
                 #endregion
 
                 // PASSIVE EXPIRIES
@@ -1741,8 +1740,8 @@ namespace WeAreGladiators.Characters
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.SpearWall, -1, true, 0.5f);              
 
                 // Reload
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Reload) && character.currentHealth > 0)
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Reload, -1, true, 0.5f);
+                //if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Reload) && character.currentHealth > 0)
+                //    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Reload, -1, true, 0.5f);
 
                 // 'Boundless' perks
                 // Boundless Anger
@@ -2751,8 +2750,7 @@ namespace WeAreGladiators.Characters
             {
                 if(h.myCharacter != null &&
                     h.myCharacter.allegiance != character.allegiance &&
-                    h.myCharacter.itemSet.mainHandItem != null &&
-                    h.myCharacter.itemSet.mainHandItem.IsMeleeWeapon &&
+                    (h.myCharacter.itemSet.mainHandItem == null || (h.myCharacter.itemSet.mainHandItem != null && h.myCharacter.itemSet.mainHandItem.IsMeleeWeapon)) &&
                     IsCharacterAbleToTakeActions(h.myCharacter))
                 {
                     engagedEnemies += 1;

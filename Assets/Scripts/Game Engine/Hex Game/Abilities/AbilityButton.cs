@@ -140,7 +140,7 @@ namespace WeAreGladiators.Abilities
                 myAbilityData.currentCooldown == 0 && 
                 myAbilityData.myCharacter.currentActionPoints >= AbilityController.Instance.GetAbilityActionPointCost(myAbilityData.myCharacter, myAbilityData) &&
                 (StatCalculator.GetTotalMaxFatigue(myAbilityData.myCharacter) - myAbilityData.myCharacter.currentFatigue >= AbilityController.Instance.GetAbilityFatigueCost(myAbilityData.myCharacter, myAbilityData)) &&
-                AbilityController.Instance.IsAbilityUseable(myAbilityData.myCharacter, myAbilityData))
+                AbilityController.Instance.IsAbilityUseable(myAbilityData.myCharacter, myAbilityData, false))
             {
                 greyScaleImage.DOKill();
                 greyScaleImage.DOFade(0, 0.2f);

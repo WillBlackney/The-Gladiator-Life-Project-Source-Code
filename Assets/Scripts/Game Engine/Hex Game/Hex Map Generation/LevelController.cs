@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using WeAreGladiators.MainMenu;
 
 namespace WeAreGladiators.HexTiles
 {
@@ -1147,7 +1148,10 @@ namespace WeAreGladiators.HexTiles
         #region
         private IEnumerator ShowTileInfoPopup(LevelNode destination, LevelNode start = null)
         {
-            if (GameController.Instance.GameState != GameState.CombatActive) yield break;
+            if (GameController.Instance.GameState != GameState.CombatActive || 
+                CharacterRosterViewController.Instance.MainVisualParent.activeSelf ||
+                EnemyInfoPanel.Instance.PanelIsActive ||
+                MainMenuController.Instance.InGameMenuScreenParent) yield break;
 
             yield return new WaitForSeconds(popupDelay);
             if (HexMousedOver != destination) yield break;

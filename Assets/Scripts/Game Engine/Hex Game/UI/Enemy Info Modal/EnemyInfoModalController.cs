@@ -14,6 +14,7 @@ using WeAreGladiators.Libraries;
 using System.Linq;
 using WeAreGladiators.HexTiles;
 using WeAreGladiators.Abilities;
+using WeAreGladiators.MainMenu;
 
 namespace WeAreGladiators.UI
 {
@@ -75,7 +76,10 @@ namespace WeAreGladiators.UI
             if (queuedShow == null || 
                 queuedShow != thisQueuedShow || 
                 CombatController.Instance.CurrentCombatState == CombatGameState.CombatInactive ||
-                AbilityController.Instance.AwaitingAbilityOrder()) yield break;
+                AbilityController.Instance.AwaitingAbilityOrder() ||
+                CharacterRosterViewController.Instance.MainVisualParent.activeSelf ||
+                EnemyInfoPanel.Instance.PanelIsActive ||
+                MainMenuController.Instance.InGameMenuScreenParent) yield break;
 
             // Reset
             mainCg.DOKill();

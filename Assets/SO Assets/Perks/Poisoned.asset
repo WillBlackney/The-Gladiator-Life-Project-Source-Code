@@ -31,31 +31,42 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'damage for each stack, then a stack is removed. '
+    phrase: 'damage for each stack. Maximum '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '10 '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: stacks.
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords: []
   maxAllowedStacks: 10
   showStackCount: 1
   hiddenOnPassivePanel: 0
-  isRewardable: 0
   resistanceBlocksIncrease: 1
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 1
   runeBlocksDecrease: 0
+  isOnPerkTree: 0
+  perkTreeTier: 0
   isInjury: 0
   isPermanentInjury: 0
-  severity: 0
-  injuryType: 0
-  minInjuryDuration: 0
-  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 0
   backgroundPerkQuality: 0
+  severity: 0
+  injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 51000000
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication:
   - eventType: 3
     screenOverlayType: 0

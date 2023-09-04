@@ -162,6 +162,10 @@ namespace WeAreGladiators.MainMenu
         {
             get { return characterBuild; }
         }
+        public GameObject InGameMenuScreenParent
+        {
+            get { return inGameMenuScreenParent; }
+        }
         #endregion
 
         // Custom Character Validity Logic

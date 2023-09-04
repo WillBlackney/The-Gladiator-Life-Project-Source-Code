@@ -103,7 +103,7 @@ namespace WeAreGladiators.AI
 
                     // Check ability useability
                     AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.abilityName);
-                    if (ability == null || !AbilityController.Instance.IsAbilityUseable(character, ability))
+                    if (ability == null || !AbilityController.Instance.IsAbilityUseable(character, ability, false))
                     {
                         Debug.Log("AILogic.IsDirectiveActionable() ability '" + directive.action.abilityName +
                            "' is not useable");
@@ -136,7 +136,7 @@ namespace WeAreGladiators.AI
                     }
 
 
-                    if (!AbilityController.Instance.IsAbilityUseable(character, ability))
+                    if (!AbilityController.Instance.IsAbilityUseable(character, ability, false))
                     {
                         Debug.Log("AILogic.IsDirectiveActionable() ability '" + directive.action.abilityName +
                            "' is not useable");
@@ -613,7 +613,7 @@ namespace WeAreGladiators.AI
                 // Check conditions, then use ability
                 if ( (target != null || (target == null && ability.targetRequirement == TargetRequirement.NoTarget)) && 
                     ability != null &&
-                    AbilityController.Instance.IsAbilityUseable(character, ability) &&
+                    AbilityController.Instance.IsAbilityUseable(character, ability, false) &&
                     AbilityController.Instance.IsTargetOfAbilityValid(character, target, ability))
                 {
                     AbilityController.Instance.UseAbility(character, ability, target);
@@ -631,7 +631,7 @@ namespace WeAreGladiators.AI
 
                 // Check conditions, then use ability
                 if (ability != null &&
-                    AbilityController.Instance.IsAbilityUseable(character, ability))
+                    AbilityController.Instance.IsAbilityUseable(character, ability, false))
                 {
                     List<LevelNode> validSummonLocations = new List<LevelNode>();
 

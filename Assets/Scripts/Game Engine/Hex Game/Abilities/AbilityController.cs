@@ -1931,7 +1931,7 @@ namespace WeAreGladiators.Abilities
             Debug.Log("AbilityController.IsTargetOfAbilityValid() returning " + bRet.ToString());
             return bRet;
         }
-        public bool IsAbilityUseable(HexCharacterModel character, AbilityData ability)
+        public bool IsAbilityUseable(HexCharacterModel character, AbilityData ability, bool showErrors = true)
         {
             // This called when the player first clicks an ability button
             Debug.Log("AbilityController.IsAbilityUseable() called, validating '" + ability.abilityName + "' usage by character " + character.myName);
@@ -1943,7 +1943,7 @@ namespace WeAreGladiators.Abilities
                 (TurnController.Instance.EntityActivated == character && character.activationPhase != ActivationPhase.ActivationPhase))
             {
                 Debug.Log("IsAbilityUseable() returning false: cannot use abilities when it is not your turn");
-                ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "It is not this character's turn");
+                if (showErrors) ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "It is not this character's turn");
                 bRet = false;
             }
 
@@ -1955,7 +1955,7 @@ namespace WeAreGladiators.Abilities
                    !HexCharacterController.Instance.IsCharacterAbleToMove(character))
                 {
                     Debug.Log("IsAbilityUseable() returning false: cannot take movement actions while rooted");
-                    ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character is unable to move right now");
+                    if (showErrors) ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character is unable to move right now");
                     bRet = false;
                 }
             }
@@ -1971,7 +1971,7 @@ namespace WeAreGladiators.Abilities
             if (!DoesCharacterHaveEnoughActionPoints(character, ability))
             {
                 Debug.Log("IsAbilityUseable() returning false: not enough energy");
-                ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Not enough Action Points");
+                if (showErrors) ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Not enough Action Points");
                 bRet =  false;
             }
 
@@ -1986,7 +1986,7 @@ namespace WeAreGladiators.Abilities
             if (!DoesCharacterHaveEnoughFatigue(character, ability))
             {
                 Debug.Log("IsAbilityUseable() returning false: not enough fatigue");
-                ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character is too fatigued");
+                if (showErrors) ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character is too fatigued");
                 bRet = false;
             }
 
@@ -1994,7 +1994,7 @@ namespace WeAreGladiators.Abilities
             if (ability.currentCooldown != 0 )
             {
                 Debug.Log("IsAbilityUseable() returning false: ability is on cooldown");
-                ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Ability is on cooldown");
+                if (showErrors) ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Ability is on cooldown");
                 bRet = false;
             }
 
@@ -2013,13 +2013,13 @@ namespace WeAreGladiators.Abilities
                 bRet = false;
             }
 
-            // check unloaded crossbow
+            // Check unloaded crossbow
             if(ability.abilityType.Contains(AbilityType.WeaponAttack) && 
                 ability.abilityType.Contains(AbilityType.RangedAttack) &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Reload))
             {
                 Debug.Log("IsAbilityUseable() returning false: character trying to use a ranged weapon attack with 'Reload' status...");
-                ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character needs to reload first");
+                if (showErrors) ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character needs to reload first");
                 bRet = false;
             }           
 

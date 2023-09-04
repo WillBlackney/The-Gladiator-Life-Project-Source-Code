@@ -625,7 +625,6 @@ namespace WeAreGladiators.Combat
                 CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Warfare, 1))
             {
                 warfareBonus = CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Warfare) * 5;
-                //if (warfareBonus != 0) ret.details.Add(new HitChanceDetailData("Warfare Talent", warfareBonus));
             }
 
             // ranger talent bonus
@@ -635,7 +634,6 @@ namespace WeAreGladiators.Combat
                 CharacterDataController.Instance.DoesCharacterHaveTalent(attacker.talentPairings, TalentSchool.Ranger, 1))
             {
                 rangerBonus = CharacterDataController.Instance.GetCharacterTalentLevel(attacker.talentPairings, TalentSchool.Ranger) * 5;
-                //if (rangerBonus != 0) ret.details.Add(new HitChanceDetailData("Ranger Talent", rangerBonus));
             }
 
             // Assassin background bonus
@@ -645,7 +643,6 @@ namespace WeAreGladiators.Combat
                 StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(target) < 50)
             {
                 assassinBonus = 5;
-                //ret.details.Add(new HitChanceDetailData("Assassin Bonus", assassinBonus));
             }
 
             // Lumberjack background bonus
@@ -657,7 +654,6 @@ namespace WeAreGladiators.Combat
                 )
             {
                 lumberjackBonus = 5;
-                //ret.details.Add(new HitChanceDetailData("Lumberjack Bonus", lumberjackBonus));
             }
 
             // Poacher background bonus
@@ -669,7 +665,6 @@ namespace WeAreGladiators.Combat
                 )
             {
                 poacherBonus = 5;
-                //ret.details.Add(new HitChanceDetailData("Poacher Bonus", lumberjackBonus));
             }
 
 
@@ -689,7 +684,6 @@ namespace WeAreGladiators.Combat
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.DeadEye))
             {
                 deadEyeBonus = 5;
-                //if (deadEyeBonus != 0) ret.details.Add(new HitChanceDetailData("Dead Eye Perk", deadEyeBonus));
             }
 
             // Brawny
@@ -699,7 +693,6 @@ namespace WeAreGladiators.Combat
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Brawny))
             {
                 brawnyBonus = 5;
-                //if (brawnyBonus != 0) ret.details.Add(new HitChanceDetailData("Brawny Perk", brawnyBonus));
             }
 
             // Base hit chance
@@ -772,8 +765,10 @@ namespace WeAreGladiators.Combat
             }
 
             // Check shooting at engaged target or shooting from melee
-            if (ability != null && ability.abilityType.Contains(AbilityType.RangedAttack) &&
-                !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.MeticulousAim))
+            if (ability != null && 
+                ability.abilityType.Contains(AbilityType.RangedAttack) &&
+                !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.MeticulousAim) &&
+                ability.accuracyPenaltyFromMelee == true)
             {
                 if (HexCharacterController.Instance.IsCharacterEngagedInMelee(attacker))
                     ret.details.Add(new HitChanceDetailData("Shooting from melee", -10));

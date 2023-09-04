@@ -260,10 +260,10 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Accuracy '
-  - color: 0
+  - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: penalty when used from melee.
+    phrase: penalty from melee.
   keyWords:
   - kewWordType: 1
     passiveType: 7

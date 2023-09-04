@@ -15,8 +15,8 @@ MonoBehaviour:
   abilityName: Bite
   displayedName: Bite
   includeInGame: 1
-  baseAbilityDescription: Deal 100% Physical damage to target and apply 2 Bleeding.
-    On a Critical Strike, apply 3 Bleeding.
+  baseAbilityDescription: Deal 100% Physical damage to target and apply 1 Bleeding.
+    On a Critical Strike, apply 2 Bleeding.
   abilitySprite: {fileID: 21300000, guid: e2fce06ad1188b647a5175a31dd38bc0, type: 3}
   energyCost: 4
   fatigueCost: 15
@@ -204,7 +204,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 7
-      passiveStacks: 2
+      passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
   onCritEffects:
@@ -264,7 +264,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 7
-      passiveStacks: 3
+      passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
   onPerkAppliedSuccessEffects: []
@@ -291,7 +291,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '2 '
+    phrase: '1 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -311,7 +311,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '3 '
+    phrase: '2 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
