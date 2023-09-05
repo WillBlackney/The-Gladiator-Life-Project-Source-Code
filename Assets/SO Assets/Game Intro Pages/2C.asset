@@ -33,9 +33,9 @@ MonoBehaviour:
     Kid. <color=#FFFFFF>\u201COi, you two! What do you reckon? Should we be allowed
     weapons or not?\u201D</color>"
   choices:
-  - buttonText: "\"All\u2019s fair in love and war.\u201D"
+  - buttonText: '"All''s fair in love and war."'
     possiblePagesLoaded: 08000000
     charactersGained: []
-  - buttonText: '"I usually leave weapons out of my friendly brawls."'
+  - buttonText: '"I usually leave weapons out of my"friendly brawls''."'
     possiblePagesLoaded: 09000000
     charactersGained: []

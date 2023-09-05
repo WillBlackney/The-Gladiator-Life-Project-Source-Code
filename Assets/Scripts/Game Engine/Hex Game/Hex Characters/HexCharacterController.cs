@@ -19,11 +19,7 @@ using WeAreGladiators.Pathfinding;
 using WeAreGladiators.UI;
 using WeAreGladiators.Items;
 using WeAreGladiators.Libraries;
-using System.Threading.Tasks;
 using Sirenix.Utilities;
-using UnityEditor;
-using UnityEditor.PackageManager;
-using UnityEngine.TextCore.Text;
 using WeAreGladiators.CombatLog;
 
 namespace WeAreGladiators.Characters
