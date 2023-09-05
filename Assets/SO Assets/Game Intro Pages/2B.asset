@@ -18,24 +18,17 @@ MonoBehaviour:
   bodyText: "Breedmarsh is as grim as the name suggests. An awesome and disgusting
     network of intestine-like walkways, cobbled together from roots and vines. The
     buildings drip with mire from the marsh below. Yet despite the muck, there's
-    an elusive charm to the place.\r\n\r\nWhen you arrive at the tavern, you don\u2019t
-    get a chance to enter before a pair of bodies tumble out the door. One fighter's
-    tooth bounces past your shoe and into the murky bog water below. The grappling
-    duo unclinch and scramble to their feet. One of them, an orc from the local militia,
-    the other, a monstrously large human lumberjack. \r\n\r\nUpon your arrival at
-    the tavern, you're halted in your tracks by a peculiar spectacle. A lively commotion
-    spills out the tavern door, and two figures tumble into view. A tooth from one
-    of the fighters bounces carelessly past your shoe, landing in the murky bog water.
-    The grappling pair disentangle themselves and swiftly regain their footing. One
-    of them, a monstrously large human lumberjack, stands imposingly over the other,
-    an orc from the local militia. \n\n<color=#FFFFFF>\u201CThought you'd scull my
-    drink and i wouldn't notice?! Apologize, then go buy me another!\u201D</color>
-    the orc huffs and puffs as he points his finger up at the lumberjacks face. \r\n\r\n<color=#FFFFFF>\u201COk.
+    an elusive charm to the place.\r\n\r\nUpon your arrival at the tavern, a lively
+    commotion spills out the door. Two figures tumble into view. One fighter's tooth
+    bounces past your shoe and into the murky bog water below. The grappling duo
+    unclinch and scramble to their feet. One of them, a monstrously large human lumberjack,
+    stands imposingly over the other, an orc soldier, wearing the purple of the empire.\n\n<color=#FFFFFF>\u201CThought
+    you'd piss in my drink and i wouldn't notice?! Apologize, then go buy me another!
+    Or how about i make you drink it?\u201D</color> the orc huffs and puffs as he
+    points his finger up at the lumberjack's face. \r\n\r\n<color=#FFFFFF>\u201COk.
     I'll apologize. I'm sorry you're a traitorous, imperial bootlicker.\u201D</color>
-    the lumberjack retorts back in a manner that makes you think this may be a little
-    more personal to him than a random bar brawl ought to be. \r\n\r\nThe two widen
-    their bases and prime themselves to re-engage. You sense an opportunity to intervene
-    before the two fools kill each other."
+    the lumberjack roars.\r\n\r\nThe two widen their fighting stances, ready to re-engage.
+    You sense an opportunity to intervene before the two fools kill each other."
   choices:
   - buttonText: Offer to replace the militiaman's drink.
     possiblePagesLoaded: 06000000

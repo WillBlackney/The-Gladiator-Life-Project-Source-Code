@@ -15,20 +15,19 @@ MonoBehaviour:
   pageTag: 12
   headerText: Welcome to Breedmarsh
   pageSprite: {fileID: 21300000, guid: 0eec48b989427a8438bbfcf7069e8b80, type: 3}
-  bodyText: "Inside the tavern is crowded, and warm. The bouncer, a Satyr, uses an
-    arcane spell to eject a trio of rowdy patrons, an Orc beats out a breakneck rhythm
-    on a collection of skulls, logs, and skin drums, and an elf dazzles a table with
-    magic card tricks. The enchanted cards race around the room, multiplying, disappearing,
-    and instilling awe in all who look on. \r\n\r\nAs you survey the room, you notice
-    two patrons sitting quietly in the corner of the room. One of them, an elf scholar
-    in blue robes, nurses a drink while staring intently at a board game infront
-    of her. The other, a skeletal witch shrouded in black robes, beckons you over
-    with a curling bony finger gesture. As you approach the table, the skeleton grins
-    and pulls out a chair for you.\r\n\r\n<color=#FFFFFF>\"I've no interest in small
-    talk human. I heard you and the morons out front talk of forming a team. We want
-    in. I'm more than capable of wielding dark magic when it suits it me. And this
-    seductive sorceress here? Well...let's just say that IF she wasn't so skilled
-    in pyrokinetics, i'd still have my skin.\"</color>"
+  bodyText: "You enter the crowded tavern. The bouncer, a satyr, uses an arcane spell
+    to eject a trio of rowdy patrons, an gnoll beats out a breakneck rhythm on a
+    collection of skulls, logs, and skin drums, and an elf dazzles a table with magic
+    card tricks. The enchanted cards race around the room, multiplying, disappearing,
+    and instilling awe in all who look on. \r\n\nYou notice a peculiar pair seated
+    in the corner of the room. One of them, an elf scholar drains her drink, staring
+    through her drunken haze at the board game infront of her. The other, a gnoll
+    witch shrouded in black robes, beckons you over with a curling finger. As you
+    approach the gnoll grins.\n\r\n<color=#FFFFFF>\"I've no interest in small talk.
+    I heard you and the morons out front talk of forming a team. We want in. I'm
+    more than capable of wielding old magic when it suits it me. And this, drunken
+    seductress here also happens to be the most creative sadist with a wand this
+    side of the capital.\"</color>"
   choices:
   - buttonText: Recruit the Witch
     possiblePagesLoaded: 0e000000

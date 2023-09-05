@@ -15,13 +15,17 @@ MonoBehaviour:
   pageTag: 7
   headerText: Welcome to Breedmarsh
   pageSprite: {fileID: 21300000, guid: c4ef4d712ccb6a74299551c834e206c9, type: 3}
-  bodyText: "You've something of a score to settle with the imperium yourself, so
-    you decide to throw a nearby broom towards the lumberjack to hit the militiaman
-    with. Unfortunately your aim is a bit off, and the militiaman snaps up the broom
-    mid air, then brings it down hard on the lumberjack's head, knocking him down
-    and out in a one swift movement. The miltiaman drops the broken broom and dusts
-    off his hands.\r\n\r\n<color=#FFFFFF>\u201CThanks, old timer. You're looking
-    for arena fighters, aren't you?\u201D</color> He asks."
+  bodyText: "You yell at the two to stop. With all the charisma you can muster, you
+    offer to buy the orc a new drink. Thankfully, postures ease. The orc looks at
+    you doubtfully. He picks up a barrel lid that got knocked over in the scrap.
+    It looks as though he's tidying up after himself.\r\n\n<color=#FFFFFF>\u201CYou
+    will?...Well, that's mighty generous of you, but it's not about the drink. It's
+    about justice. It's about the sanctity of our empire. It's about...</color> before
+    he can finish, the lumberjack charges at him.\n\nThe orc uses the barrel lid
+    as a sheild. With a deft flick, he rediverts the charging lumberjack. The mans
+    momentum carries him off the raised platform and into the bog below.\n\n<color=#FFFFFF>\u201CNow,
+    about that drink? Great timing. To be honest I'm a bit down on my luck. No chance
+    you two could help me earn an extra bit of coin?\"</color> He asks."
   choices:
   - buttonText: '"Welcome to the company!"'
     possiblePagesLoaded: 0a0000000b0000000c000000

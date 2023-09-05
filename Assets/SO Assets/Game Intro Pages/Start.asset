@@ -17,17 +17,16 @@ MonoBehaviour:
   pageSprite: {fileID: 21300000, guid: 6a1c2676c31d0e64c8acf4b1f3219191, type: 3}
   bodyText: "The murky town of Breedmarsh emerges through dense bogland. Mud-soaked
     palisades rise up between craggy, twisted trees. A brightly dressed town guard
-    ushers you closer to the gate as you arrive.\r\n\r\n<color=#FFFFFF>\u201CWelcome
+    ushers you closer to the gate as you arrive.\r\n\r\n<color=#FFFFFF>\"Welcome
     weary traveller! And what a jubilant afternoon might I add! May I ask reason
-    for entering?\u201D</color> He says. \r\n\r\nYou\u2019ve never been in a drearier
+    for entering?\"</color> He says. \r\n\r\nYou\u2019ve never been in a drearier
     place. With a sigh, you and the Kid look to one another. If you told the guard
-    about \u2018the plan\u2019 you\u2019d be executed on the spot.\r\n\r\n<color=#FFFFFF>\u201CWe\u2019re
-    here for the tournament.\u201D</color> Says the Kid. He doesn\u2019t lie, but
-    smartly he doesn\u2019t tell the whole truth.\r\n\r\n<color=#FFFFFF>\u201COh,
-    jolly! Blood for the blood god!\u201D</color> Announces the guard, clapping in
-    jubilation. <color=#FFFFFF>\u201CYou\u2019ll require at least 3 reliable fighters
-    to enter. If you\u2019re in need, our excellent tavern is sure to provide you
-    with stalwart comrades!\u201D</color>"
+    about <i>the plan</i> you\u2019d be executed on the spot.\r\n\r\n<color=#FFFFFF>\"We're
+    here for the tournament.\"</color> Says the Kid. He doesn't lie, but smartly
+    he doesn't tell the whole truth.\r\n\r\n<color=#FFFFFF>\"Oh, jolly! Blood for
+    the blood god!\"</color> Announces the guard, clapping in jubilation. <color=#FFFFFF>\"You'll
+    require at least 3 reliable fighters to enter. If you\u2019re in need, our excellent
+    tavern is sure to provide you with stalwart comrades!\"</color>"
   choices:
   - buttonText: '"Here goes nothing..."'
     possiblePagesLoaded: 010000000200000003000000

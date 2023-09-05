@@ -15,28 +15,23 @@ MonoBehaviour:
   pageTag: 11
   headerText: Welcome to Breedmarsh
   pageSprite: {fileID: 21300000, guid: 0eec48b989427a8438bbfcf7069e8b80, type: 3}
-  bodyText: "Inside the tavern is crowded, and warm. The bouncer, a Satyr, uses an
-    arcane spell to eject a trio of rowdy patrons, an Orc beats out a breakneck rhythm
-    on a collection of skulls, logs, and skin drums, and an elf dazzles a table with
-    magic card tricks. The enchanted cards race around the room, multiplying, disappearing,
-    and instilling awe in all who look on. \r\n\r\nAs you survey the room, you notice
-    two patrons sitting quietly in the corner of the room. One of them, an satyr
-    poacher in green robes, nurses a drink while staring intently at a board game
-    infront of him. The other, an elf scholar in blue robes beckons you over with
-    a seductive 'come hither' hand gesture. As you approach the table, the elf slouches
-    back, kicks out a chair for you, and smiles flirtatiously.\r\n\r\n<color=#FFFFFF>\"Well,
-    hello handsome! Haven't seen you around here before, where are you and your son
-    from?</color> the elf asks, batting her eye lashes and twirling a finger through
-    her hair. The satyr across her from smirks and snorts as he struggles to contain
-    his laughter at her desperate attempt at flirtation. Feeling bad for her, you
-    relieve the tension by half smiling back and insisting get the point on why she
-    really called you over.\r\n\r\n<color=#FFFFFF>\"Fair enough, silver fox. With
-    the imperium inquisitors snooping around, there's no legal place in the world
-    for my type of magic anymore. None except the arena. You're forming a team, and
-    we want in. I perfected a brand new spell the other day, I'll have you know.
-    Almost turned a gnoll completely inside out with it! And Fuz here, he's the best
-    archer in all the empire. I once saw him shoot the hair off a spider's ass while
-    drunk! \"</color>"
+  bodyText: "You enter the crowded tavern. The bouncer, a satyr, uses an arcane spell
+    to eject a trio of rowdy patrons, an gnoll beats out a breakneck rhythm on a
+    collection of skulls, logs, and skin drums, and an elf dazzles a table with magic
+    card tricks. The enchanted cards race around the room, multiplying, disappearing,
+    and instilling awe in all who look on.\n\nYou notice a peculiar pair seated in
+    the corner of the room. A demure satyr poacher nurses a drink while staring intently
+    at a board game. The other, an elf scholar in blue robes beckons you over with
+    a seductive 'come hither' gesture. As you approach the elf reclines, smiling
+    flirtatiously.\r\n\r\n<color=#FFFFFF>\"Hello handsome! Are you new here? I couldn't
+    help but overhear that you're putting a team together. I'd just love for us to
+    get better acquaninted. You can believe me when I say we're worth it?\"</color>
+    the elf flutters her eyelashes and twirls a finger through her hair. The satyr
+    smirks, struggling to contain her laughter at the elfs drunken flirtation. The
+    elf continues, oblivious. \n\n<color=#FFFFFF>\"I perfected a brand new spell
+    the other day. Almost turned a gnoll completely inside out with it! And Pretty
+    here, she's the best archer in all the empire. I once saw her shoot the hair
+    off a spider's arse while drunk!\"</color>"
   choices:
   - buttonText: Recruit the Scholar
     possiblePagesLoaded: 0e000000

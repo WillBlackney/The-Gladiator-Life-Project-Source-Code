@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myName: Scar
   mySubName: The Disgraced
-  race: 3
+  race: 7
   background: 6
   modelSize: 0
   attributeSheet:
@@ -70,11 +70,11 @@ MonoBehaviour:
       stacks: 1
       freshInjury: 0
   modelParts:
-  - Undead_Chest_3
-  - Undead_Head_3
-  - Undead_Face_3
-  - Undead_Right_Hand_3
-  - Undead_Right_Leg_3
+  - Gnoll_Chest_2
+  - Gnoll_Head_2
+  - Gnoll_Face_2
+  - Gnoll_Right_Hand_2
+  - Gnoll_Right_Leg_2
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 005acd1971ac4a441b18a990b77c5206, type: 2}
     offHandItem: {fileID: 11400000, guid: 86f2685cb0b56c84fb2670dfdaae794f, type: 2}
