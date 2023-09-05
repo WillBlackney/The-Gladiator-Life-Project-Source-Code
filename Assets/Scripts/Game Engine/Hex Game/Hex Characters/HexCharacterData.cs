@@ -42,8 +42,7 @@ namespace WeAreGladiators.Characters
         public int currentLevel;
 
         [Header("Model Properties")]
-        public List<string> modelParts;
-        public CharacterModel modelPrefab;
+        public List<string> modelParts;        
 
         [Header("AI Logic")]
         public AIBehaviour behaviour;
@@ -63,7 +62,7 @@ namespace WeAreGladiators.Characters
         [OdinSerialize]
         private PerkTreeData perkTree;
         public int perkPoints = 0;
-        //public List<TalentRollResult> talentRolls = new List<TalentRollResult>();
+
         public int talentPoints = 0;
         public PerkTreeData PerkTree
         {
@@ -85,6 +84,25 @@ namespace WeAreGladiators.Characters
                     audioProfile = CharacterDataController.Instance.GetAudioProfileForRace(race);
                 }
                 return audioProfile;
+            }
+        }
+
+        public string modelPrefabString;
+                
+        public CharacterModel ModelPrefab
+        {
+            get
+            {
+                CharacterModel ret = null;
+                foreach (CharacterModel model in CharacterDataController.Instance.AllCharacterModels)
+                {
+                    if(model.name == modelPrefabString)
+                    {
+                        ret = model;
+                        break;
+                    }
+                }
+                return ret;
             }
         }
 

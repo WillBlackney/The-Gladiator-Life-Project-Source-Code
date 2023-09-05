@@ -386,18 +386,18 @@ namespace WeAreGladiators.Characters
                 Debug.LogWarning("Routine is null...");
 
             // Build UCM
-            if(data.modelPrefab == null)
+            if(data.ModelPrefab == null)
             {
                 CharacterModeller.BuildModelFromStringReferences(character.hexCharacterView.model.GetComponent<UniversalCharacterModel>(), data.modelParts);
             }
-            else if (data.modelPrefab != null)
+            else if (data.ModelPrefab != null)
             {
                 // to do: setup a fixed model?? how??
 
                 Transform parent = character.hexCharacterView.ucmVisualParent.transform;
                 Destroy(character.hexCharacterView.model.gameObject);
 
-                CharacterModel newModel = Instantiate(data.modelPrefab, parent);
+                CharacterModel newModel = Instantiate(data.ModelPrefab, parent);
 
                 // Assign animator, model and ER from new prefab
                 character.hexCharacterView.entityRenderer = newModel.myEntityRenderer;

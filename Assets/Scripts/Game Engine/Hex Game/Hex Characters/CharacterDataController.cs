@@ -12,6 +12,7 @@ using WeAreGladiators.Boons;
 using System.Globalization;
 using Sirenix.Utilities;
 using System.ComponentModel;
+using WeAreGladiators.UCM;
 
 namespace WeAreGladiators.Characters
 {
@@ -26,7 +27,8 @@ namespace WeAreGladiators.Characters
         [SerializeField] private TalentDataSO[] allTalentData;
         [SerializeField] private RaceDataSO[] allRacialData;
         [SerializeField] private BackgroundDataSO[] allCharacterBackgroundSOs;
-        [SerializeField] private EnemyTemplateSO[] allEnemyTemplateSOs; 
+        [SerializeField] private EnemyTemplateSO[] allEnemyTemplateSOs;
+        [SerializeField] private CharacterModel[] allCharacterModels;
 
         [Header("Recruit Generation")]
         [SerializeField] private List<CharacterModelTemplateSO> allModelTemplateSOs;  
@@ -105,6 +107,10 @@ namespace WeAreGladiators.Characters
         public List<CharacterRace> PlayableRaces
         {
             get { return validCharacterRaces; }
+        }
+        public CharacterModel[] AllCharacterModels
+        {
+            get { return allCharacterModels; }
         }
         public TalentDataSO[] AllTalentData
         {
@@ -280,7 +286,7 @@ namespace WeAreGladiators.Characters
                 newCharacter.race = template.race;
                 newCharacter.modelParts = new List<string>();
                 newCharacter.modelParts.AddRange(template.modelParts);
-                newCharacter.modelPrefab = template.modelPrefab;
+                newCharacter.modelPrefabString = template.modelPrefab.name;
             }
 
             // Setup stats
@@ -364,7 +370,7 @@ namespace WeAreGladiators.Characters
             // UCM Data
             newCharacter.modelParts = new List<string>();
             newCharacter.modelParts.AddRange(original.modelParts);
-            newCharacter.modelPrefab = original.modelPrefab;
+            newCharacter.modelPrefabString = original.modelPrefabString;
 
             // Item Data
             newCharacter.itemSet = new ItemSet();
@@ -372,8 +378,6 @@ namespace WeAreGladiators.Characters
 
             // Ability Data
             newCharacter.abilityBook = new AbilityBook(original.abilityBook);
-           // foreach (AbilityData a in original.abilityBook.knownAbilities)
-           //     newCharacter.abilityBook.HandleLearnNewAbility(a);
 
             // Attribute rolls        
             newCharacter.attributeRolls = new List<AttributeRollResult>();

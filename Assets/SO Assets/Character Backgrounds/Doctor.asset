@@ -76,7 +76,7 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'gains are incresed by '
+      phrase: 'gains are increased by '
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

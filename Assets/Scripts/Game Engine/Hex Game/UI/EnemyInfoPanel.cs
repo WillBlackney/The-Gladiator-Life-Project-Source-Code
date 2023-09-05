@@ -31,6 +31,8 @@ namespace WeAreGladiators.UI
         [SerializeField] private GameObject uiAbilityIconPrefab;
         [SerializeField] private UIPerkIcon[] passiveIcons;
         [SerializeField] private UniversalCharacterModel characterPanelUcm;
+        [SerializeField] private GameObject ucmParent;
+        [SerializeField] private GameObject nonUcmParent;
 
         [Header("Core Attribute Components")]
         [SerializeField] private TextMeshProUGUI mightText;
@@ -63,6 +65,8 @@ namespace WeAreGladiators.UI
         [SerializeField] private TextMeshProUGUI magicResistanceText;
         [SerializeField] private TextMeshProUGUI injuryResistanceText;
         [SerializeField] private TextMeshProUGUI debuffResistanceText;
+
+        private CharacterModel currentModel;
 
         public bool PanelIsActive
         {
@@ -165,9 +169,31 @@ namespace WeAreGladiators.UI
         }
         private void BuildCharacterViewPanelModel(HexCharacterData character)
         {
-            CharacterModeller.BuildModelFromStringReferences(characterPanelUcm, character.modelParts);
-            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, characterPanelUcm);
-            characterPanelUcm.SetIdleAnim();
+            ucmParent.SetActive(false);
+            nonUcmParent.SetActive(false);
+            if(currentModel != null)
+            {
+                Destroy(currentModel.gameObject);
+                currentModel = null;
+            }
+
+            if(character.ModelPrefab != null)
+            {
+                nonUcmParent.SetActive(true);
+                CharacterModel newCM = Instantiate(character.ModelPrefab, nonUcmParent.transform);
+                newCM.myAnimator.SetTrigger("IDLE");
+                currentModel = newCM;
+                newCM.myEntityRenderer.SortingOrder = 1032;
+                newCM.transform.DOScale(4, 0f);
+            }
+            else
+            {
+                ucmParent.SetActive(true);
+                CharacterModeller.BuildModelFromStringReferences(characterPanelUcm, character.modelParts);
+                CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, characterPanelUcm);
+                characterPanelUcm.SetIdleAnim();
+            }
+            
         }
         private void BuildAbilitiesSection(HexCharacterData character)
         {

@@ -5,6 +5,7 @@ using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
 using WeAreGladiators.UCM;
 using WeAreGladiators.UI;
+using UnityEngine.UI;
 
 namespace WeAreGladiators.TownFeatures
 {
@@ -14,6 +15,7 @@ namespace WeAreGladiators.TownFeatures
         #region
         [Header("Components")]
         [SerializeField] Vector2 gridPosition;
+        [SerializeField] private Image portraitSprite;
         [SerializeField] GameObject portraitVisualParent;
         [SerializeField] UniversalCharacterModel portraitModel;
         [SerializeField] Allegiance allowedCharacter;
@@ -92,9 +94,22 @@ namespace WeAreGladiators.TownFeatures
             portraitVisualParent.SetActive(true);
             myCharacterData = character;
 
-            // Build model mugshot
-            CharacterModeller.BuildModelFromStringReferencesAsMugshot(portraitModel, character.modelParts);
-            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, portraitModel);            
+            if (myCharacterData.ModelPrefab != null)
+            {
+                portraitSprite.gameObject.SetActive(true);
+                portraitModel.gameObject.SetActive(false);
+                portraitSprite.sprite = myCharacterData.ModelPrefab.PortraitSprite;
+            }
+            else
+            {  
+                portraitSprite.gameObject.SetActive(false);
+                portraitModel.gameObject.SetActive(true);
+                
+                // Build model mugshot
+                CharacterModeller.BuildModelFromStringReferencesAsMugshot(portraitModel, character.modelParts);
+                CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, portraitModel);   
+            }
+                     
         }
         public void SetUnoccupiedState()
         {
