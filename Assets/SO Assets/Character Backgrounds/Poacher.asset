@@ -15,8 +15,8 @@ MonoBehaviour:
   backgroundSprite: {fileID: 21300000, guid: 0831c90633e0ac64eb6b56ee1e1c5aa2, type: 3}
   backgroundType: 16
   description: Humble peasants that feed themselves and their families by bow hunting
-    animals of the deserts and plains. If you enjoy eating desert snake for breakfast,
-    hire a poacher.
+    animals. If you enjoy eating desert snake or swamp lunker for breakfast, hire
+    a poacher.
   recruitable: 1
   spawnChance: 60
   lowerLevelLimit: 1

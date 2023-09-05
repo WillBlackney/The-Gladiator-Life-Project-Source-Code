@@ -253,6 +253,7 @@ namespace WeAreGladiators
         None = 2,
         MainHand = 0,
         Offhand = 1,
+        EitherHand = 3,
     }
     public enum RosterSlotType
     {

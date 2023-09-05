@@ -302,7 +302,7 @@ namespace WeAreGladiators.Items
             {
                 if ((item.allowedSlot == WeaponSlot.MainHand && slot.SlotType == RosterSlotType.MainHand) ||
                     (item.allowedSlot == WeaponSlot.Offhand && slot.SlotType == RosterSlotType.OffHand) ||
-                    (item.handRequirement == HandRequirement.OneHanded && item.allowedSlot == WeaponSlot.MainHand && item.IsMeleeWeapon && slot.SlotType == RosterSlotType.OffHand))
+                    (item.allowedSlot == WeaponSlot.EitherHand && (slot.SlotType == RosterSlotType.OffHand || slot.SlotType == RosterSlotType.MainHand)))
                     bRet = true;
             }
 

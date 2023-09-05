@@ -51,6 +51,11 @@ namespace WeAreGladiators.GameIntroEvent
 
         private List<HexCharacterData> chosenCharacters = new List<HexCharacterData>();
 
+        public bool ViewIsActive
+        {
+            get { return mainVisualParent.activeSelf; }
+        }
+
 
         #region Start + End Event Logic
         public void StartEvent()

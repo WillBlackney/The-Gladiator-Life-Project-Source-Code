@@ -1827,7 +1827,14 @@ namespace WeAreGladiators.Characters
             }
 
             // Was character killed by a DoT or heart attack?
-            if (character.currentHealth <= 0) return;
+            if (character.currentHealth <= 0 && character.controller == Controller.Player)
+            {
+                // Disable and hide player combat UI
+               // CombatUIController.Instance.SetInteractability(false);
+               // TaskTracker fadeOutEvent = new TaskTracker();
+                //VisualEventManager.CreateVisualEvent(() => CombatUIController.Instance.HideViewsOnTurnEnd(fadeOutEvent)).SetCoroutineData(fadeOutEvent);
+                return;
+            }
 
             // AI Start turn 
             if (character.controller == Controller.AI)

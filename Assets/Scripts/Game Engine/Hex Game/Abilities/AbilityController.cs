@@ -2108,7 +2108,7 @@ namespace WeAreGladiators.Abilities
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stealth) &&
                 !ignoreStealth)
             {
-                if (showErrorPanel) ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Character needs to reload first");
+                if (showErrorPanel) ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target has Stealth");
                 bRet = false;
             }
 

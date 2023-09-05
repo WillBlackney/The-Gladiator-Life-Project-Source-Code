@@ -1670,6 +1670,16 @@ namespace WeAreGladiators.Combat
             // Remove from activation order
             TurnController.Instance.RemoveEntityFromActivationOrder(character);
 
+            // Disable and hide player combat UI
+            if(character.controller == Controller.Player && TurnController.Instance.EntityActivated == character)
+            {
+                VisualEventManager.CreateVisualEvent(() =>
+                {
+                    CombatUIController.Instance.SetInteractability(false);
+                    CombatUIController.Instance.HideViewsOnTurnEnd();
+                });
+            }           
+
             // Fade out world space GUI
             VisualEventManager.CreateVisualEvent(() =>
             {

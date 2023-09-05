@@ -9,6 +9,7 @@ using WeAreGladiators.TownFeatures;
 using WeAreGladiators.Libraries;
 using UnityEngine.EventSystems;
 using WeAreGladiators.Items;
+using WeAreGladiators.GameIntroEvent;
 
 namespace WeAreGladiators.UI
 {
@@ -127,7 +128,8 @@ namespace WeAreGladiators.UI
             if ((TownController.Instance.HospitalViewIsActive ||
                  TownController.Instance.LibraryViewIsActive ||
                  TownController.Instance.DeploymentViewIsActive) &&
-                 !InventoryController.Instance.VisualParent.activeSelf)
+                 !InventoryController.Instance.VisualParent.activeSelf &&
+                 !GameIntroController.Instance.ViewIsActive)
             {
                 PortraitDragController.Instance.OnRosterCharacterPanelDragStart(this);
             }
@@ -135,7 +137,8 @@ namespace WeAreGladiators.UI
         }
         public void OnLevelButtonClicked()
         {
-            if(!InventoryController.Instance.VisualParent.activeSelf)
+            if(!InventoryController.Instance.VisualParent.activeSelf &&
+                !GameIntroController.Instance.ViewIsActive)
                 CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
         }
         private void SetIndicatorParentViewStates(bool onOrOff)
@@ -147,7 +150,8 @@ namespace WeAreGladiators.UI
         public void OnPointerClick(PointerEventData eventData)
         {
             if(eventData.button == PointerEventData.InputButton.Right &&
-                !InventoryController.Instance.VisualParent.activeSelf)
+                !InventoryController.Instance.VisualParent.activeSelf &&
+                !GameIntroController.Instance.ViewIsActive)
             {
                 CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
             }

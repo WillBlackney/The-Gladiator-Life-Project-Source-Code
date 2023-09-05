@@ -24,9 +24,10 @@ MonoBehaviour:
   includeInLibrary: 1
   weaponClass: 1
   handRequirement: 0
-  allowedSlot: 0
+  allowedSlot: 3
   injuryTypesCaused: 01000000
   weaponAttackAnimationType: 1
+  canDecapitate: 1
   healthDamage: 1.1
   armourDamage: 0.6
   armourPenetration: 0.4

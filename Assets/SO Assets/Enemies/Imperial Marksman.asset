@@ -28,7 +28,7 @@ MonoBehaviour:
       value: 55
       stars: 0
     dodge:
-      value: 5
+      value: 0
       stars: 0
     accuracy:
       value: 65

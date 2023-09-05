@@ -28,10 +28,10 @@ MonoBehaviour:
       value: 75
       stars: 0
     dodge:
-      value: 10
+      value: 5
       stars: 0
     accuracy:
-      value: 75
+      value: 70
       stars: 0
     resolve:
       value: 15

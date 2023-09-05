@@ -24,7 +24,7 @@ MonoBehaviour:
   includeInLibrary: 1
   weaponClass: 2
   handRequirement: 0
-  allowedSlot: 0
+  allowedSlot: 3
   injuryTypesCaused: 01000000
   weaponAttackAnimationType: 0
   canDecapitate: 1
