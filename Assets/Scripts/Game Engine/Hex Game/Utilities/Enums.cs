@@ -424,7 +424,6 @@ namespace WeAreGladiators
     {
         ComboStriker = 175,
         Gifted = 179,
-        SpellMastery = 180,
         RangedMastery = 181,
         BoundlessAnger = 182,
         BoundlessBravery = 183,

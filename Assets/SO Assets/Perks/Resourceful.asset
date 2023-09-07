@@ -59,7 +59,7 @@ MonoBehaviour:
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
   isOnPerkTree: 1
-  perkTreeTier: 4
+  perkTreeTier: 1
   isInjury: 0
   isPermanentInjury: 0
   isRacial: 0
@@ -73,4 +73,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

@@ -1685,15 +1685,7 @@ namespace WeAreGladiators.Abilities
                 apCost -= 1;
             }
 
-            // Spell Mastery
-            if (character != null &&
-                ability.abilityType.Contains(AbilityType.Spell) &&
-                character.spellAbilitiesUsedThisTurn == 0 &&
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SpellMastery))
-            {
-                apCost -= 1;
-            }
-
+            
             // prevent cost going negative
             if (apCost < 0)
                 apCost = 0;

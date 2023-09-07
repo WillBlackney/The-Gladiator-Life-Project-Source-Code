@@ -1061,7 +1061,7 @@ namespace WeAreGladiators.Combat
 
             float healthDamageMod = 1f;
             float armourDamageMod = 1f;
-            float penetrationMod = 0.25f;
+            float penetrationMod = 0.05f;
             int finalPenetration = 0;
 
             if (ability != null)
@@ -1166,8 +1166,9 @@ namespace WeAreGladiators.Combat
 
                         // Calculate health damage from armour penetration
                         float armourPenDamage = totalDamage * penetrationMod;
-                        float remainingArmourPenalty = (target.currentArmour - totalArmourLost) * 0.1f;
-                        int finalPenetrationHealthDamage = (int)(armourPenDamage - remainingArmourPenalty);
+                        //float remainingArmourPenalty = (target.currentArmour - totalArmourLost) * 0.1f;
+                        //int finalPenetrationHealthDamage = (int)(armourPenDamage - remainingArmourPenalty);
+                        int finalPenetrationHealthDamage = (int) armourPenDamage;
                         if (finalPenetrationHealthDamage < 0) finalPenetrationHealthDamage = 0;
 
                         damageResult.totalHealthLost += finalPenetrationHealthDamage;
