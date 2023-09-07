@@ -367,7 +367,6 @@ namespace WeAreGladiators.TownFeatures
             recruitRightPanelAccuracySlider.Build(character.attributeSheet.accuracy.value, character.attributeSheet.accuracy.stars);
             recruitRightPanelConstitutionSlider.Build(character.attributeSheet.constitution.value, character.attributeSheet.constitution.stars);
             recruitRightPanelResolveSlider.Build(character.attributeSheet.resolve.value, character.attributeSheet.resolve.stars);
-            recruitRightPanelFatigueSlider.Build(character.attributeSheet.fitness.value, character.attributeSheet.fitness.stars);
             recruitRightPanelWitsSlider.Build(character.attributeSheet.wits.value, character.attributeSheet.wits.stars);
 
             // Build perk buttons

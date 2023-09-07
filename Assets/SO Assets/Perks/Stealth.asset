@@ -55,23 +55,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '. Using an ability or taking damage removes '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '1 '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'stack. Maximum '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '3 '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: stacks.
+    phrase: . Using an ability or taking damage removes this.
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
@@ -79,8 +63,8 @@ MonoBehaviour:
     passiveType: 0
   - kewWordType: 21
     passiveType: 0
-  maxAllowedStacks: 3
-  showStackCount: 1
+  maxAllowedStacks: 1
+  showStackCount: 0
   hiddenOnPassivePanel: 0
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0

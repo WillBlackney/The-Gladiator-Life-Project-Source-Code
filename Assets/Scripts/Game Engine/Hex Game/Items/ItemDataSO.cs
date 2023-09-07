@@ -32,9 +32,6 @@ namespace WeAreGladiators.Items
         public Rarity rarity;
         [VerticalGroup("General Info/Stats")]
         [LabelWidth(100)]
-        public int fatiguePenalty;
-        [VerticalGroup("General Info/Stats")]
-        [LabelWidth(100)]
         public int baseGoldValue;
         [VerticalGroup("General Info/Stats")]
         [LabelWidth(100)]

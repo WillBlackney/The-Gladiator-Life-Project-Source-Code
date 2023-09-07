@@ -43,14 +43,6 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Fitness
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: ', '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
     phrase: 'Resolve '
   - color: 1
     getPhraseFromAbilityValue: 0
@@ -70,8 +62,6 @@ MonoBehaviour:
   - kewWordType: 31
     passiveType: 0
   - kewWordType: 13
-    passiveType: 0
-  - kewWordType: 33
     passiveType: 0
   - kewWordType: 14
     passiveType: 0
@@ -99,4 +89,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

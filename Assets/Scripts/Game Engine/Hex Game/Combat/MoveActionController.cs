@@ -230,8 +230,8 @@ namespace WeAreGladiators.Combat
                 int energyCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
                 ShowPathCostPopup(energyCost);
                 CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter(character.currentActionPoints, energyCost);
-                CombatUIController.Instance.DoFatigueCostDemo(Pathfinder.GetFatigueCostOfPath(character, character.currentTile, p.HexsOnPath),
-                    character.currentFatigue, StatCalculator.GetTotalMaxFatigue(character));
+               // CombatUIController.Instance.DoFatigueCostDemo(Pathfinder.GetFatigueCostOfPath(character, character.currentTile, p.HexsOnPath),
+                //    character.currentFatigue, StatCalculator.GetTotalMaxFatigue(character));
 
                 // Characters with Slippery perk are immune to free strikes.
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Slippery)) return;

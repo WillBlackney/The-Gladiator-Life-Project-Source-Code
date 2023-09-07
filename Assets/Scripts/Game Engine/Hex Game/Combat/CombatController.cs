@@ -558,7 +558,7 @@ namespace WeAreGladiators.Combat
 
                         // In case injury affects max health or max fatigue, update current health and current fatigue                   
                         HexCharacterController.Instance.ModifyMaxHealth(character, 0);
-                        HexCharacterController.Instance.ModifyCurrentFatigue(character, 0);
+                        //HexCharacterController.Instance.ModifyCurrentFatigue(character, 0);
 
                         // Stress Check events on injury applied
                         CreateStressCheck(character, StressEventType.InjuryGained);
@@ -1220,6 +1220,7 @@ namespace WeAreGladiators.Combat
                 totalArmourLost = (int)(damageResult.totalArmourLost * 0.75f);
             }
 
+            /*
             // Check Agile Defense
             if (ability != null &&
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.AgileDefense))
@@ -1229,7 +1230,7 @@ namespace WeAreGladiators.Combat
                 adMod = 1f - (adMod - itemFatPenaltyMod);
                 damageResult.totalHealthLost = (int)(damageResult.totalHealthLost * adMod);
                 totalHealthLost = (int)(damageResult.totalHealthLost * adMod);
-            }
+            }*/
 
             Debug.Log("XX ExecuteHandleDamage() results: " +
                 "Base damage = " + totalDamage.ToString() +

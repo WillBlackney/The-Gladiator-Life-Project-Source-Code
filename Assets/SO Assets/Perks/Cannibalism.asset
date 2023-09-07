@@ -23,7 +23,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '3 '
+    phrase: '5 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -42,25 +42,29 @@ MonoBehaviour:
     phrase: tile of it.
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords: []
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1
-  isRewardable: 0
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
+  isOnPerkTree: 0
+  perkTreeTier: 0
   isInjury: 0
   isPermanentInjury: 0
-  severity: 0
-  injuryType: 0
-  minInjuryDuration: 0
-  maxInjuryDuration: 0
   isRacial: 1
   race: 7
   isBackground: 0
   backgroundPerkQuality: 0
+  severity: 0
+  injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

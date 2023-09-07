@@ -23,11 +23,11 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '-6 '
+    phrase: '-5 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Fatigue Recovery
+    phrase: Wits
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -35,27 +35,30 @@ MonoBehaviour:
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
-  - kewWordType: 34
+  - kewWordType: 29
     passiveType: 0
   maxAllowedStacks: 99
   showStackCount: 0
   hiddenOnPassivePanel: 0
-  isRewardable: 0
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
+  isOnPerkTree: 0
+  perkTreeTier: 0
   isInjury: 1
   isPermanentInjury: 0
-  severity: 1
-  injuryType: 2
-  minInjuryDuration: 2
-  maxInjuryDuration: 2
   isRacial: 0
   race: 0
   isBackground: 0
   backgroundPerkQuality: 0
+  severity: 1
+  injuryType: 2
+  minInjuryDuration: 2
+  maxInjuryDuration: 2
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

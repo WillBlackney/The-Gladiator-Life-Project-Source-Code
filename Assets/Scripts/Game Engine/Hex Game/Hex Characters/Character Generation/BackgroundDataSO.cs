@@ -90,18 +90,8 @@ namespace WeAreGladiators.Characters
         [LabelWidth(125)]
         [Range(-30, 30)]
         public int dodgeUpper;
-        [Space(10)]       
-
-        [BoxGroup("Stat Ranges")]
-        [LabelWidth(125)]
-        [Range(-30, 30)]
-        public int fatigueLower;
-        [BoxGroup("Stat Ranges")]
-        [LabelWidth(125)]
-        [Range(-30, 30)]
-        public int fatigueUpper;
-        [Space(10)]
-
+        [Space(10)]    
+        
         [BoxGroup("Stat Ranges")]
         [LabelWidth(125)]
         [Range(-30, 30)]
@@ -250,9 +240,6 @@ namespace WeAreGladiators.Characters
 
             constitutionLower = data.constitutionLower;
             constitutionUpper = data.constitutionUpper;
-
-            fatigueLower = data.fatigueLower;
-            fatigueUpper = data.fatigueUpper;
 
             accuracyLower = data.accuracyLower;
             accuracyUpper = data.accuracyUpper;

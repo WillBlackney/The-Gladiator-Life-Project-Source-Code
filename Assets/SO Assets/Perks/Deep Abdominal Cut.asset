@@ -31,25 +31,11 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'and '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '-15% '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Fitness
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
     phrase: .
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
   - kewWordType: 13
-    passiveType: 0
-  - kewWordType: 33
     passiveType: 0
   maxAllowedStacks: 99
   showStackCount: 0

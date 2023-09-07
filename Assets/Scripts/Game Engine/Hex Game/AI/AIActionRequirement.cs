@@ -32,10 +32,6 @@ namespace WeAreGladiators.AI
         [LabelWidth(100)]
         public int energyReq;
 
-        [ShowIf("ShowFatigueReq")]
-        [LabelWidth(100)]
-        public int fatigueReq;
-
         [ShowIf("ShowStressReq")]
         [LabelWidth(100)]
         public int stressReq;
@@ -90,15 +86,7 @@ namespace WeAreGladiators.AI
         {
             return requirementType == AIActionRequirementType.TargetHasLessStressThanX ||
                 requirementType == AIActionRequirementType.TargetHasMoreStressThanX;
-        }
-        public bool ShowFatigueReq()
-        {
-            if (requirementType == AIActionRequirementType.HasMoreFatigueThanX)
-            {
-                return true;
-            }
-            else return false;
-        }
+        }       
         public bool ShowEnemiesInMeleeRange()
         {
             if (requirementType == AIActionRequirementType.SelfEngagedInMelee ||
@@ -168,7 +156,6 @@ namespace WeAreGladiators.AI
         TargetPositionedForKnockBackStun = 20,
         TargetIsElevated = 21,
         TargetIsNotElevated = 22,
-        HasMoreFatigueThanX = 23,
         TargetHasLessStressThanX = 24,
         TargetHasMoreStressThanX = 25,
         IsLessThanTurnX = 26,

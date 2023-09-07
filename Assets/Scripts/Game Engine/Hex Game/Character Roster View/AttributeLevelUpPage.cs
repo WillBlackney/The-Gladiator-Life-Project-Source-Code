@@ -89,8 +89,6 @@ namespace WeAreGladiators.UI
                     currentCharacter.attributeSheet.resolve.value += currentCharacter.attributeRolls[0].resolveRoll;                
                 else if (w.MyAttribute == CoreAttribute.Wits)
                     currentCharacter.attributeSheet.wits.value += currentCharacter.attributeRolls[0].witsRoll;
-                else if (w.MyAttribute == CoreAttribute.Fitness)
-                    currentCharacter.attributeSheet.fitness.value += currentCharacter.attributeRolls[0].fitnessRoll;
                 else if (w.MyAttribute == CoreAttribute.Constitution)
                 {
                     currentCharacter.attributeSheet.constitution.value += currentCharacter.attributeRolls[0].constitutionRoll;

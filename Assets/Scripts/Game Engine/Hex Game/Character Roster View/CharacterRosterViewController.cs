@@ -347,15 +347,10 @@ namespace WeAreGladiators.UI
             witsText.text = StatCalculator.GetTotalWits(character).ToString();
             BuildStars(witsStars, character.attributeSheet.wits.stars);
 
-            fitnessText.text = StatCalculator.GetTotalFitness(character).ToString();
-            BuildStars(fitnessStars, character.attributeSheet.fitness.stars);
-
             criticalChanceText.text = StatCalculator.GetTotalCriticalChance(character).ToString() + "%";
             criticalModifierText.text = StatCalculator.GetTotalCriticalModifier(character).ToString() + "%";
             energyRecoveryText.text = StatCalculator.GetTotalActionPointRecovery(character).ToString();
             maxEnergyText.text = StatCalculator.GetTotalMaxActionPoints(character).ToString();
-            maxFatigueText.text = StatCalculator.GetTotalMaxFatigue(character).ToString();
-            fatigueRecoveryText.text = StatCalculator.GetTotalFatigueRecovery(character).ToString();
             initiativeText.text = StatCalculator.GetTotalInitiative(character).ToString();
             visionText.text = StatCalculator.GetTotalVision(character).ToString();
             physicalDamageText.text = StatCalculator.GetTotalPhysicalDamageBonus(character).ToString() + "%";

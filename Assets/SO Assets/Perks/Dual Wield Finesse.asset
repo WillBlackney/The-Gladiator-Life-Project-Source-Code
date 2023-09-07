@@ -19,31 +19,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'While dual wielding melee weapons, this character''s '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'Weapon Attack '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'abilities generate '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '25% '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'less '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'Fatigue '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'and they gain '
+    phrase: 'While dual wielding melee weapons, this character gains '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -68,8 +44,6 @@ MonoBehaviour:
   effectDetailTabs: []
   keyWords:
   - kewWordType: 38
-    passiveType: 0
-  - kewWordType: 36
     passiveType: 0
   - kewWordType: 12
     passiveType: 0
@@ -97,4 +71,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

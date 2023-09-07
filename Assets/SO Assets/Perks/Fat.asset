@@ -23,11 +23,11 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '-20 '
+    phrase: '-10 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Fitness '
+    phrase: 'Initiative '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
-  - kewWordType: 33
+  - kewWordType: 24
     passiveType: 0
   - kewWordType: 13
     passiveType: 0

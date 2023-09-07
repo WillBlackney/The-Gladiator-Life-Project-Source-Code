@@ -165,7 +165,6 @@ namespace WeAreGladiators.Items
             i.armourPenetration = d.armourPenetration;
             i.weaponAttackAnimationType = d.weaponAttackAnimationType;
 
-            i.fatiguePenalty = d.fatiguePenalty;
             i.minArmourRoll = d.minArmourRoll;
             i.maxArmourRoll = d.maxArmourRoll;
 

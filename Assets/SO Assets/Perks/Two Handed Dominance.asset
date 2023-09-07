@@ -39,22 +39,6 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'and generate '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '25% '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'less '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Fatigue
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
     phrase: .
   passiveItalicDescription: 
   effectDetailTabs: []
@@ -62,8 +46,6 @@ MonoBehaviour:
   - kewWordType: 42
     passiveType: 0
   - kewWordType: 38
-    passiveType: 0
-  - kewWordType: 36
     passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
@@ -87,4 +69,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

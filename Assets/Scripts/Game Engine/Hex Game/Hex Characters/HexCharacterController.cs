@@ -504,10 +504,10 @@ namespace WeAreGladiators.Characters
                 SetEndDelay(0.5f);
                 
                 // Gain 2 guard
-                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Guard, 2, true, 0.5f);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Guard, 3, true, 0.5f);
 
                 // Recover all fatigue
-                ModifyCurrentFatigue(character, -character.currentFatigue);
+               // ModifyCurrentFatigue(character, -character.currentFatigue);
             }
         }
         public void ModifyMaxHealth(HexCharacterModel character, int maxHealthGainedOrLost)
@@ -1588,8 +1588,8 @@ namespace WeAreGladiators.Characters
                 ModifyActionPoints(character, apGain, false, false);
 
                 // Recover fatigue+ update fatigue views
-                int fatigueRecovered = StatCalculator.GetTotalFatigueRecovery(character);
-                ModifyCurrentFatigue(character, -fatigueRecovered, false);
+               // int fatigueRecovered = StatCalculator.GetTotalFatigueRecovery(character);
+               // ModifyCurrentFatigue(character, -fatigueRecovered, false);
             }
 
             // Turn start SFX + turn highlight activation
@@ -1976,7 +1976,7 @@ namespace WeAreGladiators.Characters
                             VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Abusive!", PerkController.Instance.GetPerkIconDataByTag(Perk.Abusive).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
 
                         foreach (HexCharacterModel ally in allies)
-                            CombatController.Instance.CreateStressCheck(ally, new StressEventData(2, 3, 75), true);
+                            CombatController.Instance.CreateStressCheck(ally, new StressEventData(2, 2, 100), true);
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
                     }                  
@@ -1996,7 +1996,7 @@ namespace WeAreGladiators.Characters
 
 
                         foreach (HexCharacterModel enemy in enemies)
-                            CombatController.Instance.CreateStressCheck(enemy, new StressEventData(1, 1, 75), true);
+                            CombatController.Instance.CreateStressCheck(enemy, new StressEventData(2, 2, 100), true);
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
                     }                   
@@ -2278,30 +2278,6 @@ namespace WeAreGladiators.Characters
                     
                 }
 
-                // Formation Leader
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FormationLeader) && character.currentHealth > 0)
-                {
-                    List<HexCharacterModel> allies = GetAlliesWithinCharacterAura(character);
-                    if(allies.Count > 0)
-                    {
-                        VisualEventManager.CreateVisualEvent(() =>
-                        {
-                            AudioManager.Instance.PlaySound(Sound.Ability_Heroic_Buff);
-                            VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Formation Leader!", PerkController.Instance.GetPerkIconDataByTag(Perk.FormationLeader).
-                                passiveSprite, StatusFrameType.CircularBrown);
-                        }).SetEndDelay(0.5f);
-
-                        foreach (HexCharacterModel ally in allies)
-                        {
-                            ModifyCurrentFatigue(ally, -5, true);
-                            VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySound(Sound.Passive_General_Buff));
-                        }
-
-                        VisualEventManager.InsertTimeDelayInQueue(0.5f);
-                    }
-                    
-                }
-
                 // Regeneration
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Regeneration) && character.currentHealth > 0)
                 {
@@ -2456,55 +2432,6 @@ namespace WeAreGladiators.Characters
 
             if (character.attributeSheet.apMaximum < 0)            
                 character.attributeSheet.apMaximum = 0;      
-        }
-        public void ModifyCurrentFatigue(HexCharacterModel character, int fatigueGainedOrLost, bool showVFX = false)
-        {
-            character.currentFatigue += fatigueGainedOrLost;
-            HexCharacterView view = character.hexCharacterView;
-            int maxFat = StatCalculator.GetTotalMaxFatigue(character);
-
-            if (character.currentFatigue < 0)            
-                character.currentFatigue = 0;            
-
-            else if (character.currentFatigue > maxFat)            
-                character.currentFatigue = maxFat;            
-
-            if (showVFX && view != null)
-            {
-                if (fatigueGainedOrLost > 0)
-                {
-                    // Status notification
-                    VisualEventManager.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Fatigue +" + fatigueGainedOrLost.ToString()));
-
-                    // Buff sparkle VFX
-                    VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.CreateGeneralBuffEffect(view.WorldPosition));
-                }
-                else if (fatigueGainedOrLost < 0)
-                {
-                    // Status notification
-                    VisualEventManager.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Fatigue " + fatigueGainedOrLost.ToString()));
-
-                    // Debuff sparkle VFX
-                    VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.CreateGeneralDebuffEffect(view.WorldPosition));
-                }
-            }
-
-            // Update GUI
-            if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
-            {
-                int currentFat = character.currentFatigue;
-
-                // Modify Screen UI elements
-                VisualEventManager.CreateVisualEvent(() => CombatUIController.Instance.UpdateFatigueComponents(currentFat, maxFat));
-                VisualEventManager.CreateVisualEvent(() => CombatUIController.Instance.UpdateCurrentInitiativeComponents(character));
-                
-                // Update ability button validity overlays
-                foreach (AbilityButton b in CombatUIController.Instance.AbilityButtons)
-                    b.UpdateAbilityButtonUnusableOverlay();
-            }
-
         }
         #endregion
 
@@ -3098,10 +3025,6 @@ namespace WeAreGladiators.Characters
                 return true;
 
             else return false;
-        }
-        public bool DoesCharacterHaveEnoughFatigue(HexCharacterModel caster, int fatigueCost)
-        {
-            return StatCalculator.GetTotalMaxFatigue(caster) - caster.currentFatigue >= fatigueCost;
         }
         public bool CanCharacterBeStunnedNow(HexCharacterModel c)
         {

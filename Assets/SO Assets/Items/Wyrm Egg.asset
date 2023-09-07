@@ -18,7 +18,6 @@ MonoBehaviour:
     the molten rage of a volcano or angry spirit.
   itemType: 4
   rarity: 4
-  fatiguePenalty: 0
   baseGoldValue: 2500
   canSpawnInShop: 0
   canBeCombatContractReward: 0
@@ -28,6 +27,7 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
@@ -40,7 +40,7 @@ MonoBehaviour:
       attributeModified: 0
       modAmount: 0
       perkGained:
-        perkTag: 212
+        perkTag: 60
         stacks: 1
         freshInjury: 0
       gainPerkChance: 50

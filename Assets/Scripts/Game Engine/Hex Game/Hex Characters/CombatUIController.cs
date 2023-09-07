@@ -140,9 +140,6 @@ namespace WeAreGladiators.Characters
             // Stress Components
             UpdateStressComponents(character.currentStress, character);
 
-            // Fatigue 
-            UpdateFatigueComponents(character.currentFatigue, StatCalculator.GetTotalMaxFatigue(character));
-
             // Initiative
             UpdateCurrentInitiativeComponents(character);
 
@@ -220,15 +217,15 @@ namespace WeAreGladiators.Characters
         private void BuildCurrentInitiativeModal(HexCharacterModel character)
         {
             int baseInitiative = StatCalculator.GetTotalInitiative(character, false);
-            int fatPenalty = StatCalculator.GetFatiguePenaltyToInitiative(character);
+            //int fatPenalty = StatCalculator.GetFatiguePenaltyToInitiative(character);
             int delayPenalty = StatCalculator.GetTurnDelayPenaltyToInitiative(character);
             initiativeModalRows.ForEach(x => x.gameObject.SetActive(false));
 
             initiativeModalRows[0].Build("Base Initiative: " + TextLogic.ReturnColoredText(baseInitiative.ToString(), TextLogic.blueNumber), DotStyle.Green);
-            if(fatPenalty != 0)
+            /*if(fatPenalty != 0)
             {
                 initiativeModalRows[1].Build("Fatigue Penalty: " + TextLogic.ReturnColoredText("-" + fatPenalty.ToString(), TextLogic.redText), DotStyle.Red);
-            }
+            }*/
             if (delayPenalty != 0)
             {
                 initiativeModalRows[2].Build("Delay Turn Penalty: " + TextLogic.ReturnColoredText("-" + delayPenalty.ToString(), TextLogic.redText), DotStyle.Red);

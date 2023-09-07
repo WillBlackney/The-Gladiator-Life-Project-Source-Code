@@ -210,7 +210,6 @@ namespace WeAreGladiators.Abilities
             a.talentRequirementData = d.talentRequirementData;
 
             a.energyCost = d.energyCost;
-            a.fatigueCost = d.fatigueCost;
             a.baseCooldown = d.baseCooldown;
 
             a.baseRange = d.baseRange;
@@ -500,7 +499,7 @@ namespace WeAreGladiators.Abilities
                 if (hitResult.Result == HitRollResult.Hit)
                 {
                     // Gain 5 fatigue from being hit.
-                    HexCharacterController.Instance.ModifyCurrentFatigue(target, 5);
+                    //HexCharacterController.Instance.ModifyCurrentFatigue(target, 5);
 
                     DamageResult damageResult = null;
                     damageResult = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(caster, target, ability, abilityEffect, didCrit);
@@ -617,7 +616,7 @@ namespace WeAreGladiators.Abilities
                 else if (hitResult.Result == HitRollResult.Miss)
                 {
                     // Gain 3 fatigue from being hit.
-                    HexCharacterController.Instance.ModifyCurrentFatigue(target, 2);
+                    //HexCharacterController.Instance.ModifyCurrentFatigue(target, 2);
 
                     // Miss notification
                     VisualEventManager.CreateVisualEvent(() =>
@@ -738,7 +737,7 @@ namespace WeAreGladiators.Abilities
                         charactersHit.Add(character, hitRoll);
 
                         // Gain 5 fatigue from being hit.
-                        HexCharacterController.Instance.ModifyCurrentFatigue(character, 5);
+                        //HexCharacterController.Instance.ModifyCurrentFatigue(character, 5);
 
                         // Do on hit visual effects for this ability
                         VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySound(Sound.Crowd_Cheer_1), character.GetLastStackEventParent());
@@ -752,7 +751,7 @@ namespace WeAreGladiators.Abilities
                         CombatLogController.Instance.CreateCharacterHitResultEntry(caster, character, hitRoll);
 
                         // Gain 1 fatigue for dodging.
-                        HexCharacterController.Instance.ModifyCurrentFatigue(character, 2);
+                        //HexCharacterController.Instance.ModifyCurrentFatigue(character, 2);
 
                         // Miss notification
                         Vector3 pos = character.hexCharacterView.WorldPosition;
@@ -1374,7 +1373,7 @@ namespace WeAreGladiators.Abilities
         {
             // Pay Energy Cost
             HexCharacterController.Instance.ModifyActionPoints(character, -GetAbilityActionPointCost(character, ability));
-            HexCharacterController.Instance.ModifyCurrentFatigue(character, GetAbilityFatigueCost(character, ability));
+           // HexCharacterController.Instance.ModifyCurrentFatigue(character, GetAbilityFatigueCost(character, ability));
 
             // Check shed perk: remove if ability used was an aspect ability
             if (ability.abilityType.Contains(AbilityType.Aspect) && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
@@ -1701,64 +1700,6 @@ namespace WeAreGladiators.Abilities
 
             return apCost;
         }
-        public int GetAbilityFatigueCost(HexCharacterModel character, AbilityData ability)
-        {
-            int fatigueCost = ability.fatigueCost;
-            float mod = 1f;
-
-            // Muscles memories perk
-            if (fatigueCost > 0 &&
-                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.MusclesMemories))
-                return 0;
-
-            // Well Drilled perk
-            if (fatigueCost > 0 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.WellDrilled))
-                mod -= 0.5f;
-
-            // WEAPON SPECIALIZATIONS
-            // Shield specialist perk
-            if (ability.abilityName == "Raise Shield" &&
-                fatigueCost > 0 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.ShieldSpecialist))
-                mod -= 0.25f;
-
-            // Dual wield finesse
-            if (character.itemSet.IsDualWieldingMeleeWeapons() &&
-                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.DualWieldFinesse))
-                mod -= 0.25f;
-
-            // Two hand dominance
-            if (character.itemSet.IsWieldingTwoHandMeleeWeapon() &&
-                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.TwoHandedDominance))
-                mod -= 0.25f;
-
-            // Master of Archery
-            if (character.itemSet.IsWieldingBowOrCrossbow() &&
-                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.MasterOfArchery))
-                mod -= 0.25f;
-
-            // One hand expertise
-            if (character.itemSet.IsWieldingOneHandMeleeWeaponWithEmptyOffhand() &&
-                ability.abilityType.Contains(AbilityType.WeaponAttack) &&
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.OneHandedExpertise))
-                mod -= 0.25f;
-
-            // Arcane Mastery
-            if (ability.abilityType.Contains(AbilityType.Spell) &&
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.ArcaneMastery))
-                mod -= 0.25f;
-
-            fatigueCost = (int) (fatigueCost * mod);
-
-            // prevent cost going negative
-            if (fatigueCost < 0)
-                fatigueCost = 0;
-
-            return fatigueCost;
-        }
         public List<LevelNode> GetTargettableTilesOfAbility(AbilityData ability, HexCharacterModel caster)
         {
             List<LevelNode> targettableTiles = new List<LevelNode>();
@@ -1982,14 +1923,6 @@ namespace WeAreGladiators.Abilities
                 bRet = false;
             }
 
-            // check has enough fatigue
-            if (!DoesCharacterHaveEnoughFatigue(character, ability))
-            {
-                Debug.Log("IsAbilityUseable() returning false: not enough fatigue");
-                if (showErrors) ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character is too fatigued");
-                bRet = false;
-            }
-
             // check cooldown
             if (ability.currentCooldown != 0 )
             {
@@ -2076,11 +2009,7 @@ namespace WeAreGladiators.Abilities
         private bool DoesCharacterHaveEnoughActionPoints(HexCharacterModel caster, AbilityData ability)
         {
             return caster.currentActionPoints >= GetAbilityActionPointCost(caster, ability);
-        }
-        private bool DoesCharacterHaveEnoughFatigue(HexCharacterModel caster, AbilityData ability)
-        {
-            return StatCalculator.GetTotalMaxFatigue(caster) - caster.currentFatigue >= GetAbilityFatigueCost(caster, ability);
-        }
+        }        
         private bool IsTargetOfAbilityInRange(HexCharacterModel caster, HexCharacterModel target, AbilityData ability)
         {
             bool bRet = false;

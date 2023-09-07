@@ -418,7 +418,7 @@ namespace WeAreGladiators.HexTiles
             {
                 // Pay energy + fatigue costs
                 HexCharacterController.Instance.ModifyActionPoints(character, -Pathfinder.GetActionPointCostOfPath(character, character.currentTile, path.HexsOnPath));
-                HexCharacterController.Instance.ModifyCurrentFatigue(character, Pathfinder.GetFatigueCostOfPath(character, character.currentTile, path.HexsOnPath));
+               // HexCharacterController.Instance.ModifyCurrentFatigue(character, Pathfinder.GetFatigueCostOfPath(character, character.currentTile, path.HexsOnPath));
             }
 
             // Play movement animation, hide activation node marker before moving
@@ -1178,10 +1178,10 @@ namespace WeAreGladiators.HexTiles
             else if(start == null)
             {
                 tileEffectDotRows[0].Build("Costs " + TextLogic.ReturnColoredText(destination.BaseMoveActionPointCost.ToString(), TextLogic.blueNumber) +
-                   " " + TextLogic.ReturnColoredText("Action Points", TextLogic.neutralYellow) + " and " +
+                   " " + TextLogic.ReturnColoredText("Action Points", TextLogic.neutralYellow) + /*" and " +
                     TextLogic.ReturnColoredText(destination.BaseMoveFatigueCost.ToString(), TextLogic.blueNumber) +
                     " " + TextLogic.ReturnColoredText("Fatigue", TextLogic.neutralYellow) +
-                    " to traverse.", DotStyle.Neutral);
+                    */" to traverse.", DotStyle.Neutral);
             }
             else if (start != null && 
                 start.myCharacter != null &&
@@ -1189,24 +1189,24 @@ namespace WeAreGladiators.HexTiles
                 start.myCharacter.activationPhase == ActivationPhase.ActivationPhase)
             {
                 int apCostDifference = Pathfinder.GetActionPointCostBetweenHexs(start.myCharacter, start, destination) - destination.BaseMoveActionPointCost;
-                int fatigueCostDifference = Pathfinder.GetFatigueCostBetweenHexs(start.myCharacter, start, destination) - destination.BaseMoveFatigueCost;
+                //int fatigueCostDifference = Pathfinder.GetFatigueCostBetweenHexs(start.myCharacter, start, destination) - destination.BaseMoveFatigueCost;
                 if (apCostDifference > 0)
                 {
                     tileEffectDotRows[0].Build("Costs " + TextLogic.ReturnColoredText(destination.BaseMoveActionPointCost.ToString(), TextLogic.blueNumber) +
                      " + " + TextLogic.ReturnColoredText(apCostDifference.ToString(), TextLogic.blueNumber) + " " +
-                    TextLogic.ReturnColoredText("Action Points", TextLogic.neutralYellow) + " and " +
+                    TextLogic.ReturnColoredText("Action Points", TextLogic.neutralYellow) + /*" and " +
                     TextLogic.ReturnColoredText(destination.BaseMoveFatigueCost.ToString(), TextLogic.blueNumber) +
                      " + " + TextLogic.ReturnColoredText(fatigueCostDifference.ToString(), TextLogic.blueNumber) +
                      TextLogic.ReturnColoredText(" Fatigue", TextLogic.neutralYellow) +
-                    " to traverse due to elevation difference.", DotStyle.Neutral);
+                    */" to traverse due to elevation difference.", DotStyle.Neutral);
                 }
                 else
                 {
                     tileEffectDotRows[0].Build("Costs " + TextLogic.ReturnColoredText(destination.BaseMoveActionPointCost.ToString(), TextLogic.blueNumber) +
-                    " " + TextLogic.ReturnColoredText("Action Points", TextLogic.neutralYellow) + " and " +
+                    " " + TextLogic.ReturnColoredText("Action Points", TextLogic.neutralYellow) + /*" and " +
                     TextLogic.ReturnColoredText(destination.BaseMoveFatigueCost.ToString(), TextLogic.blueNumber) +
                     " " + TextLogic.ReturnColoredText("Fatigue", TextLogic.neutralYellow) +
-                    " to traverse.", DotStyle.Neutral);
+                    */" to traverse.", DotStyle.Neutral);
                 }
           
             }

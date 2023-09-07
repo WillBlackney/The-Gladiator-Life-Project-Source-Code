@@ -23,31 +23,11 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Smashed Shield
+    phrase: 'Smashed Shield '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: ', it''s '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'Raise Shield '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'ability costs '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '0 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Fatigue
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: ', and it doubles the '
+    phrase: 'and it doubles the '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -69,8 +49,6 @@ MonoBehaviour:
   keyWords:
   - kewWordType: 1
     passiveType: 210
-  - kewWordType: 36
-    passiveType: 0
   - kewWordType: 12
     passiveType: 0
   - kewWordType: 1
@@ -97,4 +75,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

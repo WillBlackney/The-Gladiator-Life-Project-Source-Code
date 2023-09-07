@@ -199,19 +199,6 @@ namespace WeAreGladiators.UI
 
             nameText.text = data.displayedName;
             cooldownText.text = data.baseCooldown.ToString();
-            fatigueCostText.text = data.fatigueCost.ToString();
-
-            if (data.myCharacter != null)
-            {
-                string col = TextLogic.brownBodyText;
-                int baseCost = data.fatigueCost;
-                int dynamicCost = AbilityController.Instance.GetAbilityFatigueCost(data.myCharacter, data);
-                if (baseCost > dynamicCost) col = TextLogic.lightGreen;
-                else if (baseCost < dynamicCost) col = TextLogic.lightRed;
-                fatigueCostText.text = TextLogic.ReturnColoredText(dynamicCost.ToString(), col);
-            }
-
-
         }
         private void BuildDescriptionText(AbilityData data)
         {

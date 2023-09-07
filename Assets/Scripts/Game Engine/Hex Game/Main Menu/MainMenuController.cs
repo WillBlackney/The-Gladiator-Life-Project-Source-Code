@@ -311,6 +311,7 @@ namespace WeAreGladiators.MainMenu
             characterBuild.currentMaxXP = CharacterDataController.Instance.GetMaxXpCapForLevel(2);
 
             // Set to template 1 
+            ResetHeaderTabColourStates();
             RebuildAndShowOriginPageView();
 
             // Set to race 1
@@ -360,13 +361,7 @@ namespace WeAreGladiators.MainMenu
         public void OnOriginHeaderTabClicked()
         {
             CloseAllCustomCharacterScreenPanels();
-
-            // Reset 'selected' visual state on all tabs
-            for (int i = 0; i < headerTabImages.Length; i++)
-            {
-                headerTabImages[i].sprite = tabUnselectedSprite;
-                headerTabTexts[i].color = tabUnselectedFontColour;
-            }
+            ResetHeaderTabColourStates();
 
             headerTabImages[0].sprite = tabSelectedSprite;
             headerTabTexts[0].color = tabSelectedFontColour;
@@ -375,13 +370,7 @@ namespace WeAreGladiators.MainMenu
         public void OnPresetHeaderTabClicked()
         {
             CloseAllCustomCharacterScreenPanels();
-
-            // Reset 'selected' visual state on all tabs
-            for (int i = 0; i < headerTabImages.Length; i++)
-            {
-                headerTabImages[i].sprite = tabUnselectedSprite;
-                headerTabTexts[i].color = tabUnselectedFontColour;
-            }
+            ResetHeaderTabColourStates();
 
             headerTabImages[1].sprite = tabSelectedSprite;
             headerTabTexts[1].color = tabSelectedFontColour;
@@ -391,13 +380,7 @@ namespace WeAreGladiators.MainMenu
         public void OnItemsHeaderTabClicked()
         {
             CloseAllCustomCharacterScreenPanels();
-
-            // Reset 'selected' visual state on all tabs
-            for (int i = 0; i < headerTabImages.Length; i++)
-            {
-                headerTabImages[i].sprite = tabUnselectedSprite;
-                headerTabTexts[i].color = tabUnselectedFontColour;
-            }
+            ResetHeaderTabColourStates();
 
             headerTabImages[2].sprite = tabSelectedSprite;
             headerTabTexts[2].color = tabSelectedFontColour;
@@ -407,17 +390,18 @@ namespace WeAreGladiators.MainMenu
         public void OnPerksHeaderTabClicked()
         {
             CloseAllCustomCharacterScreenPanels();
-
-            // Reset 'selected' visual state on all tabs
+            ResetHeaderTabColourStates();
+            headerTabImages[3].sprite = tabSelectedSprite;
+            headerTabTexts[3].color = tabSelectedFontColour;
+            RebuildAndShowPerkPanel();
+        }
+        private void ResetHeaderTabColourStates()
+        {
             for (int i = 0; i < headerTabImages.Length; i++)
             {
                 headerTabImages[i].sprite = tabUnselectedSprite;
                 headerTabTexts[i].color = tabUnselectedFontColour;
             }
-
-            headerTabImages[3].sprite = tabSelectedSprite;
-            headerTabTexts[3].color = tabSelectedFontColour;
-            RebuildAndShowPerkPanel();
         }
         #endregion
 
@@ -428,6 +412,10 @@ namespace WeAreGladiators.MainMenu
             // Route to page
             CloseAllCustomCharacterScreenPanels();
             ccsOriginPanel.SetActive(true);
+
+            ResetHeaderTabColourStates();
+            headerTabImages[0].sprite = tabSelectedSprite;
+            headerTabTexts[0].color = tabSelectedFontColour;
 
             // Set name text
             originPanelPresetNameText.text = currentPreset.myName.ToString();
@@ -566,10 +554,7 @@ namespace WeAreGladiators.MainMenu
                 dif = characterBuild.attributeSheet.resolve.value - baselineAttributes.resolve.value;
             
             else if (att == CoreAttribute.Wits)            
-                dif = characterBuild.attributeSheet.wits.value - baselineAttributes.wits.value;
-            
-            else if (att == CoreAttribute.Fitness)            
-                dif = characterBuild.attributeSheet.fitness.value - baselineAttributes.fitness.value;            
+                dif = characterBuild.attributeSheet.wits.value - baselineAttributes.wits.value;          
 
             Debug.Log("MainMenuController.GetCharacterAttributeDifference() returning " + dif.ToString() +
                 " for attribute: " + att.ToString());
@@ -597,9 +582,6 @@ namespace WeAreGladiators.MainMenu
             
             else if (att == CoreAttribute.Wits)            
                 value = characterBuild.attributeSheet.wits.value;
-
-            else if (att == CoreAttribute.Fitness)
-                value = characterBuild.attributeSheet.fitness.value;
 
             Debug.Log("MainMenuController.GetCharacterAttributeValue) returning " + value.ToString() +
                " for attribute: " + att.ToString());
@@ -633,8 +615,6 @@ namespace WeAreGladiators.MainMenu
                 characterBuild.attributeSheet.resolve.value -= 1;
             else if (row.Attribute == CoreAttribute.Wits)
                 characterBuild.attributeSheet.wits.value -= 1;
-            else if (row.Attribute == CoreAttribute.Fitness)
-                characterBuild.attributeSheet.fitness.value -= 1;
 
             RebuildAttributeSection();
         }
@@ -652,8 +632,6 @@ namespace WeAreGladiators.MainMenu
                 characterBuild.attributeSheet.resolve.value += 1;
             else if (row.Attribute == CoreAttribute.Wits)
                 characterBuild.attributeSheet.wits.value += 1;
-            else if (row.Attribute == CoreAttribute.Fitness)
-                characterBuild.attributeSheet.fitness.value += 1;
 
             RebuildAttributeSection();
         }

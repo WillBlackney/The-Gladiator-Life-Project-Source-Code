@@ -37,22 +37,25 @@ MonoBehaviour:
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1
-  isRewardable: 0
   resistanceBlocksIncrease: 1
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 1
   runeBlocksDecrease: 0
+  isOnPerkTree: 0
+  perkTreeTier: 0
   isInjury: 0
   isPermanentInjury: 0
-  severity: 0
-  injuryType: 0
-  minInjuryDuration: 0
-  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 0
   backgroundPerkQuality: 0
+  severity: 0
+  injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   perksRemovedOnThisApplication: 0c000000
   perksGainedOnThisExpiry: 
   perksThatBlockThis: dd000000
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

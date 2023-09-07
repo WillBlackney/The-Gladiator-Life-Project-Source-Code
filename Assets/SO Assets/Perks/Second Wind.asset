@@ -19,7 +19,15 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'The first this character''s health drops below '
+    phrase: 'The first this character''s '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Health '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'drops below '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -27,19 +35,11 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'each combat, they recover all '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'Fatigue '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'and gain '
+    phrase: 'each combat, they gain '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '2 '
+    phrase: '3 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
-  - kewWordType: 36
+  - kewWordType: 41
     passiveType: 0
   - kewWordType: 1
     passiveType: 74
@@ -77,4 +77,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

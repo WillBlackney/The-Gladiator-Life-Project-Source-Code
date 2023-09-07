@@ -130,14 +130,6 @@ namespace WeAreGladiators.UI
             armourBar.value = armourBarFloat;
             armourText.text = character.currentArmour.ToString() + " / " + character.startingArmour.ToString();
 
-            // Fatigue bar
-            float currentFatigueFloat = character.currentFatigue;
-            float currentMaxFatigueFloat = StatCalculator.GetTotalMaxFatigue(character);
-            float fatigueBarFloat = currentFatigueFloat / currentMaxFatigueFloat;
-            fatigueBar.value = fatigueBarFloat;
-            fatigueText.text = character.currentFatigue.ToString() + " / " + currentMaxFatigueFloat.ToString();
-
-
             // Stress bar
             float currentStressFloat = character.currentStress;
             float currentMaxStressFloat = 20f;

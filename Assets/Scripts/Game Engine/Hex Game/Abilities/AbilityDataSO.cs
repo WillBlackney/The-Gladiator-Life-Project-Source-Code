@@ -47,10 +47,6 @@ namespace WeAreGladiators.Abilities
         [VerticalGroup("Core Data/Stats")]
         [LabelWidth(100)]
         [GUIColor("Blue")]
-        public int fatigueCost;
-        [VerticalGroup("Core Data/Stats")]
-        [LabelWidth(100)]
-        [GUIColor("Blue")]
         public int baseCooldown;
         [VerticalGroup("Core Data/Stats")]
         [LabelWidth(100)]

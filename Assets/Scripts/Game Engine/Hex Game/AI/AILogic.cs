@@ -310,11 +310,6 @@ namespace WeAreGladiators.AI
                 character.currentActionPoints < req.energyReq)
                 bRet = true;
 
-            // Check has MORE fatigue than X 
-            else if (req.requirementType == AIActionRequirementType.HasMoreFatigueThanX &&
-                HexCharacterController.Instance.DoesCharacterHaveEnoughFatigue(character, req.fatigueReq))
-                bRet = true;
-
             // Check has MORE than X perk stacks SELF
             else if (req.requirementType == AIActionRequirementType.HasMoreThanPerkStacksSelf &&
                 PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, req.perkPairing.perkTag) > req.perkPairing.passiveStacks)

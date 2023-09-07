@@ -31,18 +31,6 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: ', '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '-20% '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'Fitness '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
     phrase: 'and '
   - color: 2
     getPhraseFromAbilityValue: 0
@@ -60,8 +48,6 @@ MonoBehaviour:
   effectDetailTabs: []
   keyWords:
   - kewWordType: 13
-    passiveType: 0
-  - kewWordType: 33
     passiveType: 0
   - kewWordType: 11
     passiveType: 0

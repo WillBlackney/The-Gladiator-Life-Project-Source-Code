@@ -23,11 +23,11 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '-40% '
+    phrase: '-2 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Fitness
+    phrase: Action Point Recovery
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -35,7 +35,7 @@ MonoBehaviour:
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
-  - kewWordType: 33
+  - kewWordType: 8
     passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0

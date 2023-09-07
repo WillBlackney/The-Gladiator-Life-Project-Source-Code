@@ -19,15 +19,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'This character does not generate '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'Fatigue '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'when moving and never pays more than '
+    phrase: 'This character never pays more than '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -39,22 +31,20 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: to move.
+    phrase: to move per tile.
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
-  - kewWordType: 36
-    passiveType: 0
   - kewWordType: 2
     passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1
   resistanceBlocksIncrease: 0
-  resistanceBlocksDecrease: 1
+  resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0
-  runeBlocksDecrease: 1
-  isOnPerkTree: 1
+  runeBlocksDecrease: 0
+  isOnPerkTree: 0
   perkTreeTier: 4
   isInjury: 0
   isPermanentInjury: 0
@@ -69,4 +59,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

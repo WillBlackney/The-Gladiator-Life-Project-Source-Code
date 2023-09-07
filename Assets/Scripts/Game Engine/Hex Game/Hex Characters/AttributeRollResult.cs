@@ -33,7 +33,6 @@ namespace WeAreGladiators.Characters
             roll.resolveRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.resolve.stars;
             roll.constitutionRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.constitution.stars;
             roll.witsRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.wits.stars;
-            roll.fitnessRoll = RandomGenerator.NumberBetween(lower, upper) + character.attributeSheet.fitness.stars;
 
             return roll;
 

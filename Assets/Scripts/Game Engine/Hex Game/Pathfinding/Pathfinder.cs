@@ -160,8 +160,8 @@ namespace WeAreGladiators.Pathfinding
                     // Is the path between start/destination actually valid?
                     if (traversable &&
                         CanHexBeOccupied(key) &&
-                        GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentActionPoints &&
-                        GetFatigueCostOfPath(character, start, hexsOnPath) <= StatCalculator.GetTotalMaxFatigue(character) - character.currentFatigue)
+                        GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentActionPoints 
+                        /*GetFatigueCostOfPath(character, start, hexsOnPath) <= StatCalculator.GetTotalMaxFatigue(character) - character.currentFatigue*/)
                     {
                         pathReturned = new Path(start, hexsOnPath, character);
                         possiblePaths.Add(pathReturned);
@@ -217,8 +217,8 @@ namespace WeAreGladiators.Pathfinding
                 // Is the path between start/destination actually valid?
                 if (traversable &&
                     CanHexBeOccupied(key) &&
-                    GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentActionPoints &&
-                    GetFatigueCostOfPath(character, start, hexsOnPath) <= StatCalculator.GetTotalMaxFatigue(character) - character.currentFatigue)
+                    GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentActionPoints
+                    /*GetFatigueCostOfPath(character, start, hexsOnPath) <= StatCalculator.GetTotalMaxFatigue(character) - character.currentFatigue*/)
                 {
                     pathsReturned.Add(new Path(start, hexsOnPath, character));
                 }

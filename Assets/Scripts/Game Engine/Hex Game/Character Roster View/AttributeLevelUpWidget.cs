@@ -120,12 +120,6 @@ namespace WeAreGladiators.UI
                 currentStars = character.attributeSheet.wits.stars;
                 currentRoll = roll.witsRoll;
             }
-            else if (myAttribute == CoreAttribute.Fitness)
-            {
-                currentBaseStat = character.attributeSheet.fitness.value;
-                currentStars = character.attributeSheet.fitness.stars;
-                currentRoll = roll.fitnessRoll;
-            }
 
             rollText.text = "+" + currentRoll.ToString();
             attributeAmountText.text = currentBaseStat.ToString();

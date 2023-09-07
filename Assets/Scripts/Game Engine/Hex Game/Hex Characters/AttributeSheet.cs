@@ -30,10 +30,6 @@ namespace WeAreGladiators.Characters
         [BoxGroup("Core Attributes")]
         [LabelWidth(100)]
         [GUIColor("Green")]
-        public Attribute fitness = new Attribute(100, 0);
-        [BoxGroup("Core Attributes")]
-        [LabelWidth(100)]
-        [GUIColor("Green")]
         public Attribute wits = new Attribute(5, 0);
 
 
@@ -54,10 +50,6 @@ namespace WeAreGladiators.Characters
         [LabelWidth(100)]
         [GUIColor("Blue")]
         public int initiative = 15;
-        [BoxGroup("Secondary Attributes")]
-        [LabelWidth(100)]
-        [GUIColor("Blue")]
-        public int fatigueRecovery = 15;
 
         [BoxGroup("Misc Attributes", centerLabel: true)]
         [LabelWidth(100)]
@@ -135,10 +127,7 @@ namespace WeAreGladiators.Characters
             other.resolve.stars = resolve.stars;
             other.wits = wits;
             other.wits.stars = wits.stars;
-            other.fitness = fitness;
-            other.fitness.stars = fitness.stars;
-
-            other.fatigueRecovery = fatigueRecovery;          
+          
             other.maxHealth = maxHealth;
             other.apRecovery = apRecovery;
             other.apMaximum = apMaximum;
@@ -165,7 +154,6 @@ namespace WeAreGladiators.Characters
                 "accuracy: " + accuracy.value +", " +
                 "dodge: " + dodge.value +", " +
                 "wits: " + wits.value +", " +
-                "fatigue: " + fitness.value + ", " +
                 "resolve: " + resolve.value);
         }
 

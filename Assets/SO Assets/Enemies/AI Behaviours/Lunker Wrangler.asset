@@ -20,21 +20,6 @@ MonoBehaviour:
       range: 0
       abilityName: Whip Beast
     requirements:
-    - requirementType: 23
-      range: 0
-      perkPairing:
-        perkTag: 0
-        passiveStacks: 1
-      healthPercentage: 0
-      enemiesInMeleeRange: 1
-      energyReq: 0
-      fatigueReq: 14
-      stressReq: 0
-      turnReq: 0
-      alliesAlive: 0
-      abilityName: 
-      armourReq: 0
-      opponentsUnactivated: 0
     - requirementType: 8
       range: 0
       perkPairing:
@@ -43,7 +28,6 @@ MonoBehaviour:
       healthPercentage: 0
       enemiesInMeleeRange: 1
       energyReq: 0
-      fatigueReq: 0
       stressReq: 0
       turnReq: 0
       alliesAlive: 0
@@ -58,7 +42,6 @@ MonoBehaviour:
       healthPercentage: 0
       enemiesInMeleeRange: 1
       energyReq: 0
-      fatigueReq: 0
       stressReq: 0
       turnReq: 0
       alliesAlive: 0
@@ -80,7 +63,6 @@ MonoBehaviour:
       healthPercentage: 0
       enemiesInMeleeRange: 1
       energyReq: 0
-      fatigueReq: 0
       stressReq: 0
       turnReq: 0
       alliesAlive: 0
@@ -95,7 +77,6 @@ MonoBehaviour:
       healthPercentage: 0
       enemiesInMeleeRange: 1
       energyReq: 4
-      fatigueReq: 0
       stressReq: 0
       turnReq: 0
       alliesAlive: 0
@@ -117,7 +98,6 @@ MonoBehaviour:
       healthPercentage: 0
       enemiesInMeleeRange: 1
       energyReq: 0
-      fatigueReq: 0
       stressReq: 0
       turnReq: 0
       alliesAlive: 0
@@ -132,7 +112,6 @@ MonoBehaviour:
       healthPercentage: 0
       enemiesInMeleeRange: 1
       energyReq: 0
-      fatigueReq: 0
       stressReq: 0
       turnReq: 0
       alliesAlive: 0
@@ -161,22 +140,6 @@ MonoBehaviour:
       healthPercentage: 0
       enemiesInMeleeRange: 1
       energyReq: 4
-      fatigueReq: 0
-      stressReq: 0
-      turnReq: 0
-      alliesAlive: 0
-      abilityName: 
-      armourReq: 0
-      opponentsUnactivated: 0
-    - requirementType: 23
-      range: 0
-      perkPairing:
-        perkTag: 0
-        passiveStacks: 1
-      healthPercentage: 0
-      enemiesInMeleeRange: 1
-      energyReq: 0
-      fatigueReq: 11
       stressReq: 0
       turnReq: 0
       alliesAlive: 0
@@ -191,7 +154,6 @@ MonoBehaviour:
       healthPercentage: 0
       enemiesInMeleeRange: 1
       energyReq: 0
-      fatigueReq: 0
       stressReq: 0
       turnReq: 0
       alliesAlive: 0
@@ -206,7 +168,6 @@ MonoBehaviour:
       healthPercentage: 0
       enemiesInMeleeRange: 1
       energyReq: 0
-      fatigueReq: 0
       stressReq: 0
       turnReq: 0
       alliesAlive: 0
@@ -228,7 +189,6 @@ MonoBehaviour:
       healthPercentage: 0
       enemiesInMeleeRange: 1
       energyReq: 0
-      fatigueReq: 0
       stressReq: 0
       turnReq: 0
       alliesAlive: 2

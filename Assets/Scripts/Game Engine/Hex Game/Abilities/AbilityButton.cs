@@ -64,8 +64,8 @@ namespace WeAreGladiators.Abilities
                               (MyAbilityData.myCharacter.currentActionPoints, AbilityController.Instance.GetAbilityActionPointCost(MyAbilityData.myCharacter, MyAbilityData));
 
                 // Update fatigue gui on left panel for mouse over
-                CombatUIController.Instance.DoFatigueCostDemo(AbilityController.Instance.GetAbilityFatigueCost(MyAbilityData.myCharacter, MyAbilityData),
-                    MyAbilityData.myCharacter.currentFatigue, StatCalculator.GetTotalMaxFatigue(MyAbilityData.myCharacter));
+               // CombatUIController.Instance.DoFatigueCostDemo(AbilityController.Instance.GetAbilityFatigueCost(MyAbilityData.myCharacter, MyAbilityData),
+                //    MyAbilityData.myCharacter.currentFatigue, StatCalculator.GetTotalMaxFatigue(MyAbilityData.myCharacter));
             }
         }
 
@@ -85,8 +85,8 @@ namespace WeAreGladiators.Abilities
                           (a.myCharacter.currentActionPoints, AbilityController.Instance.GetAbilityActionPointCost(a.myCharacter, a));
 
                         // Update fatigue gui on left panel for mouse over
-                        CombatUIController.Instance.DoFatigueCostDemo(AbilityController.Instance.GetAbilityFatigueCost(a.myCharacter, MyAbilityData),
-                            a.myCharacter.currentFatigue, StatCalculator.GetTotalMaxFatigue(a.myCharacter));
+                        //CombatUIController.Instance.DoFatigueCostDemo(AbilityController.Instance.GetAbilityFatigueCost(a.myCharacter, MyAbilityData),
+                         //   a.myCharacter.currentFatigue, StatCalculator.GetTotalMaxFatigue(a.myCharacter));
 
 
                     }
@@ -139,7 +139,7 @@ namespace WeAreGladiators.Abilities
             if(myAbilityData.myCharacter != null &&
                 myAbilityData.currentCooldown == 0 && 
                 myAbilityData.myCharacter.currentActionPoints >= AbilityController.Instance.GetAbilityActionPointCost(myAbilityData.myCharacter, myAbilityData) &&
-                (StatCalculator.GetTotalMaxFatigue(myAbilityData.myCharacter) - myAbilityData.myCharacter.currentFatigue >= AbilityController.Instance.GetAbilityFatigueCost(myAbilityData.myCharacter, myAbilityData)) &&
+                /*(StatCalculator.GetTotalMaxFatigue(myAbilityData.myCharacter) - myAbilityData.myCharacter.currentFatigue >= AbilityController.Instance.GetAbilityFatigueCost(myAbilityData.myCharacter, myAbilityData)) &&*/
                 AbilityController.Instance.IsAbilityUseable(myAbilityData.myCharacter, myAbilityData, false))
             {
                 greyScaleImage.DOKill();
