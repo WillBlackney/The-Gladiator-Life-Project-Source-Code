@@ -15,10 +15,9 @@ MonoBehaviour:
   abilityName: Pin Down
   displayedName: Pin Down
   includeInGame: 1
-  baseAbilityDescription: Deal 125% weapon damage and apply 1 Rooted.
+  baseAbilityDescription: Deal 100% weapon damage and apply 1 Rooted.
   abilitySprite: {fileID: 21300000, guid: 54a7c35146229f34cb1967f156991f12, type: 3}
-  energyCost: 5
-  fatigueCost: 25
+  energyCost: 4
   baseCooldown: 3
   abilityType: 0300000004000000
   doesNotBreakStealth: 0
@@ -125,8 +124,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 36
-    maxBaseDamage: 40
+    minBaseDamage: 28
+    maxBaseDamage: 32
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0

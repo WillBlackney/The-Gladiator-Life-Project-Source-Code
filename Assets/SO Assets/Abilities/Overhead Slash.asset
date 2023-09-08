@@ -15,10 +15,9 @@ MonoBehaviour:
   abilityName: Overhead Slash
   displayedName: Overhead Slash
   includeInGame: 1
-  baseAbilityDescription: Deal 125% weapon damage. On Critical Strike, apply 1 Bleeding.
+  baseAbilityDescription: Deal 130% weapon damage. On Critical Strike, apply 1 Bleeding.
   abilitySprite: {fileID: 21300000, guid: 6461191eb23689d418e11243216f4949, type: 3}
   energyCost: 6
-  fatigueCost: 15
   baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -110,8 +109,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 36
-    maxBaseDamage: 40
+    minBaseDamage: 37
+    maxBaseDamage: 41
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0

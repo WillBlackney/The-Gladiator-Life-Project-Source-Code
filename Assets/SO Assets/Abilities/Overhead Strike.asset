@@ -15,10 +15,9 @@ MonoBehaviour:
   abilityName: Overhead Strike
   displayedName: Overhead Strike
   includeInGame: 1
-  baseAbilityDescription: Deal 125% weapon damage to an enemy. +10 Accuracy.
+  baseAbilityDescription: 'Deal 115% weapon damage to an enemy. '
   abilitySprite: {fileID: 21300000, guid: f621acd693640524f8e89df6c93d5df5, type: 3}
   energyCost: 6
-  fatigueCost: 15
   baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -38,7 +37,7 @@ MonoBehaviour:
   abilitySubRequirements: []
   baseRange: 1
   gainRangeBonusFromVision: 0
-  hitChanceModifier: 10
+  hitChanceModifier: 0
   hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
@@ -110,8 +109,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 36
-    maxBaseDamage: 40
+    minBaseDamage: 33
+    maxBaseDamage: 37
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0
@@ -154,18 +153,4 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'damage to an enemy. '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '+10 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: Accuracy
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: .
-  keyWords:
-  - kewWordType: 11
-    passiveType: 0
+  keyWords: []

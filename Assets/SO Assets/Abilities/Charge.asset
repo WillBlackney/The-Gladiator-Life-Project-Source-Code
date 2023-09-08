@@ -19,8 +19,7 @@ MonoBehaviour:
     another character, Stun them.
   abilitySprite: {fileID: 21300000, guid: eb0b6e8e66f551345bbef2cb54b40e53, type: 3}
   energyCost: 4
-  fatigueCost: 30
-  baseCooldown: 2
+  baseCooldown: 3
   abilityType: 01000000
   doesNotBreakStealth: 0
   guidanceInstruction: 6

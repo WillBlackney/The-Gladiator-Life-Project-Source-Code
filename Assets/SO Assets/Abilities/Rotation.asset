@@ -17,9 +17,8 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Switch places with an ally, then gain 1 Guard.
   abilitySprite: {fileID: 21300000, guid: 242ff9e6194ff3d448408ddc4790ddb3, type: 3}
-  energyCost: 3
-  fatigueCost: 15
-  baseCooldown: 1
+  energyCost: 2
+  baseCooldown: 2
   abilityType: 01000000
   doesNotBreakStealth: 0
   guidanceInstruction: 2

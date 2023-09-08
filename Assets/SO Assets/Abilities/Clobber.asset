@@ -15,11 +15,10 @@ MonoBehaviour:
   abilityName: Clobber
   displayedName: Clobber
   includeInGame: 1
-  baseAbilityDescription: Deal 125% damage to target. On a Critical Strike, the target
+  baseAbilityDescription: Deal 130% damage to target. On a Critical Strike, the target
     is Knocked Back 1 tile.
   abilitySprite: {fileID: 21300000, guid: f26cad39ca285c944bcc13cb436727f9, type: 3}
   energyCost: 6
-  fatigueCost: 15
   baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -111,8 +110,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 36
-    maxBaseDamage: 40
+    minBaseDamage: 37
+    maxBaseDamage: 41
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0

@@ -15,10 +15,9 @@ MonoBehaviour:
   abilityName: Flame Barrier
   displayedName: Flame Barrier
   includeInGame: 1
-  baseAbilityDescription: Gain 2 Guard. but also gain 2 Burning.
+  baseAbilityDescription: Gain 1 Guard. but also gain 1 Burning.
   abilitySprite: {fileID: 21300000, guid: 8295d91e27dc02b40a3796adf3e09c9e, type: 3}
-  energyCost: 3
-  fatigueCost: 10
+  energyCost: 0
   baseCooldown: 2
   abilityType: 05000000
   doesNotBreakStealth: 0
@@ -128,7 +127,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 74
-      passiveStacks: 2
+      passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
   - effectType: 1
@@ -187,7 +186,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 1
-      passiveStacks: 2
+      passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
@@ -204,7 +203,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '2 '
+    phrase: '1 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -212,11 +211,11 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: ', but gain '
+    phrase: ', but also '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '2 '
+    phrase: '1 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

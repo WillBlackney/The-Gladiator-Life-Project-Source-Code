@@ -15,11 +15,10 @@ MonoBehaviour:
   abilityName: Cheap Shot
   displayedName: Cheap Shot
   includeInGame: 1
-  baseAbilityDescription: Deal 125% Weapon damage. If Stealthed, Backstriking, or
+  baseAbilityDescription: Deal 115% Weapon damage. If Stealthed, Backstriking, or
     a Critical Strike, apply Stunned.
   abilitySprite: {fileID: 21300000, guid: 839859de67d43a649ae5bebb1e5c6714, type: 3}
   energyCost: 4
-  fatigueCost: 20
   baseCooldown: 2
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -126,8 +125,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 36
-    maxBaseDamage: 40
+    minBaseDamage: 33
+    maxBaseDamage: 37
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0

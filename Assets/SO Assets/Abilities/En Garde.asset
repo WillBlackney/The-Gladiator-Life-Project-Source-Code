@@ -15,11 +15,10 @@ MonoBehaviour:
   abilityName: En Garde
   displayedName: En Garde
   includeInGame: 1
-  baseAbilityDescription: Gain 2 Evasion and 2 Riposte.
+  baseAbilityDescription: Gain 1 Evasion and 1 Riposte.
   abilitySprite: {fileID: 21300000, guid: 690f98be9d5bc934c95a5579d9540d0d, type: 3}
-  energyCost: 6
-  fatigueCost: 35
-  baseCooldown: 3
+  energyCost: 4
+  baseCooldown: 2
   abilityType: 01000000
   doesNotBreakStealth: 0
   guidanceInstruction: 0
@@ -143,7 +142,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 76
-      passiveStacks: 2
+      passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
   - effectType: 1
@@ -187,7 +186,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 119
-      passiveStacks: 2
+      passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
@@ -204,7 +203,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '2 '
+    phrase: '1 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -216,7 +215,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '2 '
+    phrase: '1 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

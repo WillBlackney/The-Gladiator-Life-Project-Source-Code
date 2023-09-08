@@ -15,11 +15,10 @@ MonoBehaviour:
   abilityName: Bouncing Arrow
   displayedName: Bouncing Arrow
   includeInGame: 1
-  baseAbilityDescription: 'Deal 75% Physical damage to an enemy and a random enemy
+  baseAbilityDescription: 'Deal 100% Physical damage to an enemy and a random enemy
     adjacent to them. '
   abilitySprite: {fileID: 21300000, guid: 4e2fe7df41b0974488be11a14c5df765, type: 3}
   energyCost: 4
-  fatigueCost: 20
   baseCooldown: 2
   abilityType: 0300000004000000
   doesNotBreakStealth: 0
@@ -111,8 +110,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 21
-    maxBaseDamage: 24
+    minBaseDamage: 28
+    maxBaseDamage: 32
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0

@@ -19,7 +19,6 @@ MonoBehaviour:
     a Critical Hit, 100% chance to apply Stunned.
   abilitySprite: {fileID: 21300000, guid: 2d92a8b6224c2f148ac17bb9627a8d08, type: 3}
   energyCost: 4
-  fatigueCost: 25
   baseCooldown: 1
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -111,7 +110,7 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 21
+    minBaseDamage: 20
     maxBaseDamage: 24
     guaranteedHit: 0
     bonusCritDamage: 0

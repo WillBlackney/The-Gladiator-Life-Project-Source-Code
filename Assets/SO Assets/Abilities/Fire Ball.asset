@@ -15,11 +15,10 @@ MonoBehaviour:
   abilityName: Fire Ball
   displayedName: Fire Ball
   includeInGame: 1
-  baseAbilityDescription: Deal 125% Magic damage to an enemy and apply 1 Burning.
+  baseAbilityDescription: Deal 115% Magic damage to an enemy and apply 1 Burning.
     On a Critical Strike, apply 2 Burning.
   abilitySprite: {fileID: 21300000, guid: 1d619aecf64f54a4cadebb2c42c9e359, type: 3}
   energyCost: 4
-  fatigueCost: 20
   baseCooldown: 2
   abilityType: 0300000005000000
   doesNotBreakStealth: 0
@@ -126,8 +125,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 2
-    minBaseDamage: 36
-    maxBaseDamage: 40
+    minBaseDamage: 33
+    maxBaseDamage: 37
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0
@@ -137,7 +136,7 @@ MonoBehaviour:
     injuryTypesCaused: 02000000
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
-    characterSummonedName: ENTER NAME!!!
+    characterSummonedName: 
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0
@@ -197,7 +196,7 @@ MonoBehaviour:
     injuryTypesCaused: 
     damageEffectModifiers: []
     characterSummoned: {fileID: 0}
-    characterSummonedName: ENTER NAME!!!
+    characterSummonedName: 
     amountSummoned: 1
     modelFadeInSpeed: 0
     uiFadeInSpeed: 0

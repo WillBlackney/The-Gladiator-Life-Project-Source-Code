@@ -15,11 +15,10 @@ MonoBehaviour:
   abilityName: Vanish
   displayedName: Vanish
   includeInGame: 1
-  baseAbilityDescription: Gain 2 Stealth.
+  baseAbilityDescription: Gain Stealth.
   abilitySprite: {fileID: 21300000, guid: 5fab17ac5c9e59c45a459e84ea224544, type: 3}
-  energyCost: 4
-  fatigueCost: 30
-  baseCooldown: 2
+  energyCost: 2
+  baseCooldown: 3
   abilityType: 01000000
   doesNotBreakStealth: 1
   guidanceInstruction: 0
@@ -128,7 +127,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 77
-      passiveStacks: 2
+      passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
   onHitEffects: []
@@ -142,10 +141,6 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: 'Gain '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '2 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

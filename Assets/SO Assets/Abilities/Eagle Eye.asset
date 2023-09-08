@@ -15,10 +15,9 @@ MonoBehaviour:
   abilityName: Eagle Eye
   displayedName: Eagle Eye
   includeInGame: 1
-  baseAbilityDescription: Give 2 Focus and 2 True Sight to self or an ally.
+  baseAbilityDescription: Give 1 Focus and 2 True Sight to self or an ally.
   abilitySprite: {fileID: 21300000, guid: bbdd15ae7a5dd6243aac6f963d582df5, type: 3}
-  energyCost: 5
-  fatigueCost: 35
+  energyCost: 4
   baseCooldown: 3
   abilityType: 05000000
   doesNotBreakStealth: 0
@@ -143,7 +142,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 75
-      passiveStacks: 2
+      passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
   - effectType: 10
@@ -204,7 +203,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '2 '
+    phrase: '1 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

@@ -18,8 +18,7 @@ MonoBehaviour:
   baseAbilityDescription: Apply 2 Guard and 2 Fortified to self or ally. Removes
     Stunned and Rooted.
   abilitySprite: {fileID: 21300000, guid: 2de62fd6d213cd24a8c74da7f16715a9, type: 3}
-  energyCost: 6
-  fatigueCost: 25
+  energyCost: 5
   baseCooldown: 3
   abilityType: 05000000
   doesNotBreakStealth: 0

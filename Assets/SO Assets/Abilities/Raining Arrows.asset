@@ -15,12 +15,11 @@ MonoBehaviour:
   abilityName: Raining Arrows
   displayedName: Raining Arrows
   includeInGame: 1
-  baseAbilityDescription: 'Deal 100% Physical damage to all characters within 1 tile
+  baseAbilityDescription: 'Deal 115% Physical damage to all characters within 1 tile
     of target location. '
   abilitySprite: {fileID: 21300000, guid: 05ca0dd50ff15454295e98f20cdc90c2, type: 3}
-  energyCost: 5
-  fatigueCost: 30
-  baseCooldown: 2
+  energyCost: 6
+  baseCooldown: 3
   abilityType: 0300000004000000
   doesNotBreakStealth: 0
   guidanceInstruction: 5
@@ -96,8 +95,8 @@ MonoBehaviour:
     effectsAllies: 1
     effectsEnemies: 1
     damageType: 1
-    minBaseDamage: 28
-    maxBaseDamage: 32
+    minBaseDamage: 33
+    maxBaseDamage: 37
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0
@@ -143,7 +142,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'to ALL characters within  '
+    phrase: 'to all characters within  '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

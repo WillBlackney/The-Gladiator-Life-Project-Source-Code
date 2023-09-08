@@ -15,11 +15,10 @@ MonoBehaviour:
   abilityName: Storm Strike
   displayedName: Storm Strike
   includeInGame: 1
-  baseAbilityDescription: Deal 125% Weapon damage and apply 1 Vulnerable. On a Critical
-    Strike, apply 2 Vulnerable.
+  baseAbilityDescription: Deal 115% Weapon damage and apply 1 Crippled. On a Critical
+    Strike, apply 2 Crippled..
   abilitySprite: {fileID: 21300000, guid: 53d2e051740509542b7faa6df4b03f52, type: 3}
   energyCost: 4
-  fatigueCost: 15
   baseCooldown: 2
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -141,8 +140,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 36
-    maxBaseDamage: 40
+    minBaseDamage: 33
+    maxBaseDamage: 37
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0
@@ -310,7 +309,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Vulnerable
+    phrase: Crippled
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -330,13 +329,13 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Vulnerable
+    phrase: Crippled
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: .
   keyWords:
   - kewWordType: 1
-    passiveType: 48
+    passiveType: 5
   - kewWordType: 20
     passiveType: 0

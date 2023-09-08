@@ -15,11 +15,10 @@ MonoBehaviour:
   abilityName: Force Blast
   displayedName: Force Blast
   includeInGame: 1
-  baseAbilityDescription: Deal 125% Magic damage and knock a target back 1 tile.
+  baseAbilityDescription: Deal 115% Magic damage and knock a target back 1 tile.
     No Accuracy penalty when used in melee.
   abilitySprite: {fileID: 21300000, guid: e68b1ca20d34b91499acf7d053614cbf, type: 3}
   energyCost: 4
-  fatigueCost: 15
   baseCooldown: 2
   abilityType: 0300000005000000
   doesNotBreakStealth: 0
@@ -96,8 +95,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 2
-    minBaseDamage: 36
-    maxBaseDamage: 40
+    minBaseDamage: 33
+    maxBaseDamage: 37
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0

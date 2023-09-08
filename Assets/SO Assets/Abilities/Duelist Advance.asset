@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Duelist Advance
   displayedName: Duelist Advance
-  includeInGame: 1
+  includeInGame: 0
   baseAbilityDescription: Gain 1 Flight and 1 Riposte.
   abilitySprite: {fileID: 21300000, guid: cf90e1a9fbb58874fa7897d5ec665e1c, type: 3}
   energyCost: 4
-  fatigueCost: 25
   baseCooldown: 2
   abilityType: 01000000
   doesNotBreakStealth: 0

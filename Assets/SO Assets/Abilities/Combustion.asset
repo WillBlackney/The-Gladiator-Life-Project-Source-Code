@@ -15,11 +15,10 @@ MonoBehaviour:
   abilityName: Combustion
   displayedName: Combustion
   includeInGame: 1
-  baseAbilityDescription: Deal 125% Magic damage to target. Damage is increased by
+  baseAbilityDescription: Deal 130% Magic damage to target. Damage is increased by
     10% for each stack of Burning on the target.
   abilitySprite: {fileID: 21300000, guid: a7d8dcb04f2947c4cb1016514b33033c, type: 3}
   energyCost: 4
-  fatigueCost: 35
   baseCooldown: 3
   abilityType: 05000000
   doesNotBreakStealth: 0
@@ -111,8 +110,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 2
-    minBaseDamage: 36
-    maxBaseDamage: 40
+    minBaseDamage: 37
+    maxBaseDamage: 41
     guaranteedHit: 1
     bonusCritDamage: 0
     ignoresGuard: 0

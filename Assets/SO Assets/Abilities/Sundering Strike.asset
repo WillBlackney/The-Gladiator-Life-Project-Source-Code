@@ -15,11 +15,10 @@ MonoBehaviour:
   abilityName: Sundering Strike
   displayedName: Sundering Strike
   includeInGame: 1
-  baseAbilityDescription: Deal 125% Weapon damage to target and apply 1 Crippled.
-    On a Critical Strike, apply 2 Crippled.
+  baseAbilityDescription: Deal 115% Weapon damage to target and apply 1 Vulnerable.
+    On a Critical Strike, apply 2 Vulnerable.
   abilitySprite: {fileID: 21300000, guid: 83ffb8cbc09e4a44aa8205dc608504d8, type: 3}
   energyCost: 4
-  fatigueCost: 15
   baseCooldown: 2
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -111,8 +110,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 36
-    maxBaseDamage: 40
+    minBaseDamage: 33
+    maxBaseDamage: 37
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0
@@ -173,7 +172,7 @@ MonoBehaviour:
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
     perkPairing:
-      perkTag: 5
+      perkTag: 48
       passiveStacks: 1
     perkApplicationChance: 100
     knockBackDistance: 0
@@ -218,7 +217,7 @@ MonoBehaviour:
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
     perkPairing:
-      perkTag: 5
+      perkTag: 48
       passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
@@ -250,7 +249,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Crippled
+    phrase: Vulnerable
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -274,11 +273,13 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Crippled
+    phrase: 'Vulnerable '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: .
   keyWords:
   - kewWordType: 1
-    passiveType: 5
+    passiveType: 48
+  - kewWordType: 20
+    passiveType: 0

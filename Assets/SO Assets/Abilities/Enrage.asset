@@ -15,11 +15,10 @@ MonoBehaviour:
   abilityName: Enrage
   displayedName: Enrage
   includeInGame: 1
-  baseAbilityDescription: Gain 2 Wrath, but gain 1 1Vulnerable.
+  baseAbilityDescription: Gain 2 Wrath.
   abilitySprite: {fileID: 21300000, guid: 62eca44edea54cc468767da9503183f3, type: 3}
   energyCost: 3
-  fatigueCost: 10
-  baseCooldown: 2
+  baseCooldown: 3
   abilityType: 01000000
   doesNotBreakStealth: 0
   guidanceInstruction: 0
@@ -131,50 +130,6 @@ MonoBehaviour:
       passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
-  - effectType: 1
-    stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
-      successChance: 0
-    energyGained: 0
-    normalTeleportVFX: 1
-    tilesMoved: 0
-    lineLength: 0
-    healthGained: 0
-    healthLost: 0
-    requirements: []
-    chainedEffect: 0
-    triggersChainEffectSequence: 0
-    visualEventsOnStart: []
-    visualEventsOnHit: []
-    visualEventsOnEffectFinish: []
-    aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
-    damageType: 0
-    minBaseDamage: 0
-    maxBaseDamage: 0
-    guaranteedHit: 0
-    bonusCritDamage: 0
-    ignoresGuard: 0
-    ignoresArmour: 0
-    bonusArmourDamage: 0
-    weaponUsed: 0
-    injuryTypesCaused: 
-    damageEffectModifiers: []
-    characterSummoned: {fileID: 0}
-    characterSummonedName: ENTER NAME!!!
-    amountSummoned: 1
-    modelFadeInSpeed: 0
-    uiFadeInSpeed: 0
-    summonedCreatureVisualEvents: []
-    perkPairing:
-      perkTag: 48
-      passiveStacks: 1
-    perkApplicationChance: 100
-    knockBackDistance: 0
   onHitEffects: []
   onCritEffects: []
   onPerkAppliedSuccessEffects: []
@@ -193,19 +148,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Wrath '
-  - color: 1
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: ', but also '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '1 '
-  - color: 3
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: 'Vulnerable '
+    phrase: Wrath
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -213,5 +156,3 @@ MonoBehaviour:
   keyWords:
   - kewWordType: 1
     passiveType: 50
-  - kewWordType: 1
-    passiveType: 48

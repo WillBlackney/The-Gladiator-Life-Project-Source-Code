@@ -17,9 +17,8 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Apply 2 Burning to an enemy.
   abilitySprite: {fileID: 21300000, guid: f9d5f55a931f16343bd3092843a3f202, type: 3}
-  energyCost: 3
-  fatigueCost: 15
-  baseCooldown: 1
+  energyCost: 4
+  baseCooldown: 2
   abilityType: 05000000
   doesNotBreakStealth: 0
   guidanceInstruction: 1

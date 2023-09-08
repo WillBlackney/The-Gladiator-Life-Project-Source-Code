@@ -15,12 +15,11 @@ MonoBehaviour:
   abilityName: Decapitate
   displayedName: Decapitate
   includeInGame: 1
-  baseAbilityDescription: Deal 100% weapon damage to an enemy. Damage is increased
+  baseAbilityDescription: Deal 115% weapon damage to an enemy. Damage is increased
     by 1% for each point of health target has lost.
   abilitySprite: {fileID: 21300000, guid: 4d59a67d1fdae3b42b49c3d5353af734, type: 3}
   energyCost: 6
-  fatigueCost: 25
-  baseCooldown: 0
+  baseCooldown: 1
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
   guidanceInstruction: 1
@@ -126,8 +125,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 28
-    maxBaseDamage: 32
+    minBaseDamage: 33
+    maxBaseDamage: 37
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0
@@ -200,4 +199,6 @@ MonoBehaviour:
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
     phrase: missing on the target.
-  keyWords: []
+  keyWords:
+  - kewWordType: 41
+    passiveType: 0

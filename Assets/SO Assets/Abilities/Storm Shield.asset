@@ -14,12 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Storm Shield
   displayedName: Storm Shield
-  includeInGame: 1
+  includeInGame: 0
   baseAbilityDescription: The next 3 times target is attacked, deal 10 Magic damage
     back to the attacker.
   abilitySprite: {fileID: 21300000, guid: cdd547d3960d49b4aa2de1a63d3dd6e6, type: 3}
   energyCost: 3
-  fatigueCost: 15
   baseCooldown: 2
   abilityType: 05000000
   doesNotBreakStealth: 0

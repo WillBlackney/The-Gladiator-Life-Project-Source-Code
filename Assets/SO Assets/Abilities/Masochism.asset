@@ -18,8 +18,7 @@ MonoBehaviour:
   baseAbilityDescription: Lose 15 health. Gain 4 Action Points.
   abilitySprite: {fileID: 21300000, guid: 0056712a26a1ad6499060b6db1fee538, type: 3}
   energyCost: 0
-  fatigueCost: 0
-  baseCooldown: 3
+  baseCooldown: 4
   abilityType: 01000000
   doesNotBreakStealth: 0
   guidanceInstruction: 0

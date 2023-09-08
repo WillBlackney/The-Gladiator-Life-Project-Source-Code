@@ -15,11 +15,10 @@ MonoBehaviour:
   abilityName: Overhead Chop
   displayedName: Overhead Chop
   includeInGame: 1
-  baseAbilityDescription: Deal 125% Weapon damage to target and apply 1 Bleeding.
-    On a Critical Strike, apply 3 Bleeding.
+  baseAbilityDescription: Deal 130% Weapon damage to target and apply 1 Bleeding.
+    On a Critical Strike, apply 2 Bleeding.
   abilitySprite: {fileID: 21300000, guid: 3ca169a63305a9c4b87caf3873d457d6, type: 3}
   energyCost: 6
-  fatigueCost: 15
   baseCooldown: 0
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
@@ -111,8 +110,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 36
-    maxBaseDamage: 40
+    minBaseDamage: 37
+    maxBaseDamage: 41
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0
@@ -234,7 +233,7 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 7
-      passiveStacks: 3
+      passiveStacks: 2
     perkApplicationChance: 100
     knockBackDistance: 0
   onPerkAppliedSuccessEffects: []
@@ -281,7 +280,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '3 '
+    phrase: '2 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
