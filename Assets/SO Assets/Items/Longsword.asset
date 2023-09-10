@@ -18,7 +18,6 @@ MonoBehaviour:
     strikes.
   itemType: 3
   rarity: 1
-  fatiguePenalty: 10
   baseGoldValue: 250
   canSpawnInShop: 1
   canBeCombatContractReward: 0
@@ -31,7 +30,7 @@ MonoBehaviour:
   canDecapitate: 1
   healthDamage: 1.1
   armourDamage: 0.75
-  armourPenetration: 0.25
+  armourPenetration: 0.05
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

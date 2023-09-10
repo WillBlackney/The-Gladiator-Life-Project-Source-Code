@@ -21,7 +21,7 @@ MonoBehaviour:
   upperLevelLimit: 1
   dailyWageMin: 10
   dailyWageMax: 10
-  baseRecruitCost: 0
+  baseRecruitCost: 75
   mightLower: 0
   mightUpper: 0
   constitutionLower: 0
@@ -30,8 +30,6 @@ MonoBehaviour:
   accuracyUpper: 0
   dodgeLower: 0
   dodgeUpper: 0
-  fatigueLower: 0
-  fatigueUpper: 0
   resolveLower: 0
   resolveUpper: 0
   witsLower: 0
@@ -47,4 +45,5 @@ MonoBehaviour:
     - headProspects: []
       bodyProspects:
       - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
+  possibleSubNames: []
   passiveEffectDescriptions: []

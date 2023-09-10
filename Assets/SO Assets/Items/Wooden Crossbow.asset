@@ -19,7 +19,6 @@ MonoBehaviour:
     a full turn to reload.
   itemType: 3
   rarity: 1
-  fatiguePenalty: 8
   baseGoldValue: 250
   canSpawnInShop: 1
   canBeCombatContractReward: 0
@@ -29,9 +28,10 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 01000000
   weaponAttackAnimationType: 1
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 0.7
-  armourPenetration: 0.5
+  armourPenetration: 0.15
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

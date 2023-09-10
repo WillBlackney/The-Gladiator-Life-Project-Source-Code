@@ -18,7 +18,6 @@ MonoBehaviour:
     thrusts and controlling enemies.
   itemType: 3
   rarity: 1
-  fatiguePenalty: 12
   baseGoldValue: 75
   canSpawnInShop: 1
   canBeCombatContractReward: 0
@@ -28,9 +27,10 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 01000000
   weaponAttackAnimationType: 1
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 0.65
-  armourPenetration: 0.25
+  armourPenetration: 0.05
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

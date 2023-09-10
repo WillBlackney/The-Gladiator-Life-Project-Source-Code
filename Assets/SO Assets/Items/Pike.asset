@@ -18,7 +18,6 @@ MonoBehaviour:
     the enemy at bay.
   itemType: 3
   rarity: 2
-  fatiguePenalty: 12
   baseGoldValue: 500
   canSpawnInShop: 1
   canBeCombatContractReward: 1
@@ -28,9 +27,10 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 01000000
   weaponAttackAnimationType: 1
+  canDecapitate: 0
   healthDamage: 1.1
   armourDamage: 1
-  armourPenetration: 0.3
+  armourPenetration: 0.05
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

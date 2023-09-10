@@ -252,7 +252,6 @@ namespace WeAreGladiators.Combat
                 HidePathCostPopup();
                 CursorController.Instance.SetCursor(CursorType.NormalPointer);
                 CombatUIController.Instance.EnergyBar.UpdateIcons(character.currentActionPoints, 0.25f);
-                CombatUIController.Instance.ResetFatigueCostPreview();
             }
 
         }
@@ -286,7 +285,6 @@ namespace WeAreGladiators.Combat
             if(TurnController.Instance.EntityActivated != null && resetEnergyBar)
             {
                 CombatUIController.Instance.EnergyBar.UpdateIcons(TurnController.Instance.EntityActivated.currentActionPoints, 0.25f);
-                CombatUIController.Instance.ResetFatigueCostPreview();
             }
                
             clickedHex = null;

@@ -93,7 +93,7 @@ namespace WeAreGladiators.Abilities
                     else
                     {
                         CombatUIController.Instance.EnergyBar.UpdateIcons(MyAbilityData.myCharacter.currentActionPoints, 0.25f);
-                        CombatUIController.Instance.ResetFatigueCostPreview();
+                        //CombatUIController.Instance.ResetFatigueCostPreview();
                     }
 
 

@@ -18,7 +18,6 @@ MonoBehaviour:
     heavily armoured foes.
   itemType: 3
   rarity: 1
-  fatiguePenalty: 16
   baseGoldValue: 250
   canSpawnInShop: 1
   canBeCombatContractReward: 0
@@ -28,9 +27,10 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 02000000
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 0.75
   armourDamage: 1.25
-  armourPenetration: 0.5
+  armourPenetration: 0.15
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

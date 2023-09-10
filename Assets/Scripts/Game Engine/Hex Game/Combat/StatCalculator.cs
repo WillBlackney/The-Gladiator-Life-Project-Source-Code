@@ -880,8 +880,8 @@ namespace WeAreGladiators
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BigMuscles))
                 pdBonus += 10;
 
-            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.TournamentKnight))
-                pdBonus += 5;
+            //if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.TournamentKnight))
+            //    pdBonus += 5;
 
             // Items
             pdBonus += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.PhysicalDamageBonus, c.itemSet);
@@ -897,8 +897,8 @@ namespace WeAreGladiators
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BigMuscles))
                 pdBonus += 10;
 
-            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.TournamentKnight))
-                pdBonus += 5;
+            //if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.TournamentKnight))
+             //   pdBonus += 5;
 
             // Items
             pdBonus += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.PhysicalDamageBonus, c.itemSet);

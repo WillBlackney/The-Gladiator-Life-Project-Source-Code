@@ -18,7 +18,6 @@ MonoBehaviour:
     Effective even in the hands of laymen, but requires almost a full turn to reload.
   itemType: 3
   rarity: 2
-  fatiguePenalty: 8
   baseGoldValue: 500
   canSpawnInShop: 1
   canBeCombatContractReward: 1
@@ -28,9 +27,10 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 01000000
   weaponAttackAnimationType: 1
+  canDecapitate: 0
   healthDamage: 1.1
-  armourDamage: 0.7
-  armourPenetration: 0.55
+  armourDamage: 0.75
+  armourPenetration: 0.15
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

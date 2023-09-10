@@ -329,7 +329,6 @@ namespace WeAreGladiators.Abilities
             if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
             {
                 CombatUIController.Instance.EnergyBar.UpdateIcons(TurnController.Instance.EntityActivated.currentActionPoints);
-                CombatUIController.Instance.ResetFatigueCostPreview();
             }                
 
             OnAbilityUsedStart(character, ability, target);
@@ -367,10 +366,11 @@ namespace WeAreGladiators.Abilities
                 // Weapon attack specific
                 if (ability.abilityType.Contains(AbilityType.WeaponAttack))
                 {
+                    /*
                     if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.PoisonedWeapon))
                         PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.PoisonedWeapon, -1);
                     if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FlamingWeapon))
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.FlamingWeapon, -1);
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.FlamingWeapon, -1);*/
                 }
 
                 // Check and apply furiously assault to target

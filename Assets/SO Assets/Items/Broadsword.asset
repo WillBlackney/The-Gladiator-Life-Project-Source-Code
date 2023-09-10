@@ -18,7 +18,6 @@ MonoBehaviour:
     and swinging.
   itemType: 3
   rarity: 2
-  fatiguePenalty: 6
   baseGoldValue: 400
   canSpawnInShop: 1
   canBeCombatContractReward: 1
@@ -31,7 +30,7 @@ MonoBehaviour:
   canDecapitate: 1
   healthDamage: 1.2
   armourDamage: 0.8
-  armourPenetration: 0.25
+  armourPenetration: 0.05
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

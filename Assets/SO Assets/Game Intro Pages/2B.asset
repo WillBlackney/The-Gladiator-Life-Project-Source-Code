@@ -31,8 +31,8 @@ MonoBehaviour:
     You sense an opportunity to intervene before the two fools kill each other."
   choices:
   - buttonText: Offer to replace the militiaman's drink.
-    possiblePagesLoaded: 06000000
+    possiblePagesLoaded: 07000000
     charactersGained: []
   - buttonText: Give the lumberjack the nearby broom as a weapon.
-    possiblePagesLoaded: 07000000
+    possiblePagesLoaded: 06000000
     charactersGained: []

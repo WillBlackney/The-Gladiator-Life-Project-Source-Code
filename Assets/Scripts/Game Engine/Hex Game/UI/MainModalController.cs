@@ -36,7 +36,7 @@ namespace WeAreGladiators.UI
 
         [Header("Background Components")]
         [SerializeField] GameObject backgroundStatRangeSectionParent;
-        [SerializeField] TextMeshProUGUI accuracyText, dodgeText, mightText, fitnessText, constitutionText, resolveText, witsTexts;
+        [SerializeField] TextMeshProUGUI accuracyText, dodgeText, mightText, constitutionText, resolveText, witsTexts;
 
         // Non inspector values
         private ModalDirection currentDir = ModalDirection.SouthWest;
@@ -499,7 +499,6 @@ namespace WeAreGladiators.UI
             accuracyText.text = (data.accuracyLower + source.AccuracyLower).ToString() + " - " + (data.accuracyUpper + source.AccuracyUpper).ToString();
             dodgeText.text = (data.dodgeLower + source.DodgeLower).ToString() + " - " + (data.dodgeUpper + source.DodgeUpper).ToString();
             mightText.text = (data.mightLower + source.MightLower).ToString() + " - " + (data.mightUpper + source.MightUpper).ToString();
-            fitnessText.text = (data.fatigueLower + source.FitnessLower).ToString() + " - " + (data.fatigueUpper + source.FitnessUpper).ToString();
             constitutionText.text = (data.constitutionLower + source.ConstitutionLower).ToString() + " - " + (data.constitutionUpper + source.ConstitutionUpper).ToString();
             resolveText.text = (data.resolveLower + source.ResolveLower).ToString() + " - " + (data.resolveUpper + source.ResolveUpper).ToString();
             witsTexts.text = (data.witsLower + source.WitsLower).ToString() + " - " + (data.witsUpper + source.WitsUpper).ToString();

@@ -23,20 +23,18 @@ MonoBehaviour:
   dailyWageMin: 33
   dailyWageMax: 37
   baseRecruitCost: 125
-  mightLower: 7
+  mightLower: 8
   mightUpper: 8
-  constitutionLower: 12
-  constitutionUpper: 13
-  accuracyLower: 13
+  constitutionLower: 8
+  constitutionUpper: 8
+  accuracyLower: 10
   accuracyUpper: 10
   dodgeLower: 5
   dodgeUpper: 5
-  fatigueLower: 15
-  fatigueUpper: 10
-  resolveLower: 7
-  resolveUpper: 5
-  witsLower: -2
-  witsUpper: -3
+  resolveLower: 8
+  resolveUpper: 8
+  witsLower: 0
+  witsUpper: 0
   minStartingAbilities: 2
   maxStartingAbilities: 2
   validRaces: 0100000002000000
@@ -64,4 +62,5 @@ MonoBehaviour:
       - {fileID: 11400000, guid: b120371936fc1334b927f94d3602b160, type: 2}
       - {fileID: 11400000, guid: a1fe3290d4534334eabf9ba2ff5ab62a, type: 2}
       - {fileID: 11400000, guid: c89d7d867b89eda42bd96838671cfe77, type: 2}
+  possibleSubNames: []
   passiveEffectDescriptions: []

@@ -202,7 +202,7 @@ namespace WeAreGladiators.Items
 
             // Row 3
             BuildArmourSection(item);
-            BuildMaxFatigueSection(item);
+            //BuildMaxFatigueSection(item);
 
             // Row 4
             BuildDamageModRows(item);

@@ -17,7 +17,6 @@ MonoBehaviour:
   itemDescription: A one-handed axe with a medium long shaft and a broad head.
   itemType: 3
   rarity: 2
-  fatiguePenalty: 10
   baseGoldValue: 400
   canSpawnInShop: 1
   canBeCombatContractReward: 1
@@ -30,7 +29,7 @@ MonoBehaviour:
   canDecapitate: 1
   healthDamage: 1.15
   armourDamage: 0.95
-  armourPenetration: 0.4
+  armourPenetration: 0.1
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

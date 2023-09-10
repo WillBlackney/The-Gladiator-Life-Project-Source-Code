@@ -1962,6 +1962,14 @@ namespace WeAreGladiators.Characters
                 // Bestial Frenzy
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BestialFrenzy) && character.currentHealth > 0)
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.BestialFrenzy, -1, true, 0.5f);
+
+                // Poisoned Weapon
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.PoisonedWeapon) && character.currentHealth > 0)
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.PoisonedWeapon, -1, true, 0.5f);
+
+                // Flaming Weapon
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FlamingWeapon) && character.currentHealth > 0)
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.FlamingWeapon, -1, true, 0.5f);
                 #endregion
 
                 // MISC

@@ -15,11 +15,10 @@ MonoBehaviour:
   abilityName: Twin Strike
   displayedName: Twin Strike
   includeInGame: 1
-  baseAbilityDescription: Deal 50% weapon damage to an enemy twice.
+  baseAbilityDescription: Deal 65% weapon damage to an enemy twice.
   abilitySprite: {fileID: 21300000, guid: c7c5f4c480fcbb4488e768a203d18e84, type: 3}
-  energyCost: 4
-  fatigueCost: 20
-  baseCooldown: 0
+  energyCost: 6
+  baseCooldown: 2
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
   guidanceInstruction: 1
@@ -110,8 +109,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 13
-    maxBaseDamage: 17
+    minBaseDamage: 17
+    maxBaseDamage: 21
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0
@@ -214,8 +213,8 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     damageType: 1
-    minBaseDamage: 13
-    maxBaseDamage: 17
+    minBaseDamage: 18
+    maxBaseDamage: 21
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0

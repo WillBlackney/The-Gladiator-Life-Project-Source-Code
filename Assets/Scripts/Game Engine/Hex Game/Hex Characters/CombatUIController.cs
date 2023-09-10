@@ -67,12 +67,6 @@ namespace WeAreGladiators.Characters
         [SerializeField] private TextMeshProUGUI stressText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        [Header("Fatigue Bar UI References")]
-        [SerializeField] private Slider fatigueBarUI;
-        [SerializeField] private Slider fatigueSubBarUI;
-        [SerializeField] private TextMeshProUGUI fatigueText;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("End + Delay Turn Button Components")]
         public Button endTurnButton;
         public Button delayTurnButton;
@@ -228,7 +222,7 @@ namespace WeAreGladiators.Characters
             }*/
             if (delayPenalty != 0)
             {
-                initiativeModalRows[2].Build("Delay Turn Penalty: " + TextLogic.ReturnColoredText("-" + delayPenalty.ToString(), TextLogic.redText), DotStyle.Red);
+                initiativeModalRows[1].Build("Delay Turn Penalty: " + TextLogic.ReturnColoredText("-" + delayPenalty.ToString(), TextLogic.redText), DotStyle.Red);
             }
 
             TransformUtils.RebuildLayouts(initiativeModalLayouts);
@@ -279,35 +273,7 @@ namespace WeAreGladiators.Characters
             stressText.text = currentStressFloat.ToString() + "/" + currentMaxStressFloat.ToString();
 
             stressPanel.BuildPanelViews(character);
-        }
-        public void UpdateFatigueComponents(int fatigue, int maxFatigue, float speed = 0.25f)
-        {
-            float currentFat = fatigue;
-            float maxFatFloat = maxFatigue;
-            float fatBarFloat = 0f;
-            if (maxFatigue > 0) fatBarFloat = currentFat / maxFatFloat;
-
-            // Modify UI elements
-            fatigueSubBarUI.DOKill();
-            fatigueBarUI.DOKill();
-            fatigueSubBarUI.DOValue(fatBarFloat, speed);
-            fatigueBarUI.DOValue(fatBarFloat, speed);
-            fatigueText.text = currentFat.ToString() + "/" + maxFatFloat.ToString();
-        }
-        public void DoFatigueCostDemo(int fatCost, int currentFat, int maxFat)
-        {
-            float sum = fatCost + currentFat;
-            if (sum == 0 || maxFat == 0) return;
-            float fatBarFloat = sum / maxFat;
-            fatigueSubBarUI.DOKill();
-            fatigueSubBarUI.DOValue(fatBarFloat, 0.25f);
-            Debug.Log("DoFatigueCostDemo() demo value = " + fatBarFloat.ToString() + ", normal value = " + fatigueBarUI.value.ToString());
-        }
-        public void ResetFatigueCostPreview()
-        {
-            fatigueSubBarUI.DOKill();
-            fatigueSubBarUI.DOValue(fatigueBarUI.value, 0.25f);
-        }
+        }         
         #endregion
 
         #region Energy Bar Logic

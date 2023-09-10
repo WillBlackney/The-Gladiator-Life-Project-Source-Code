@@ -18,7 +18,6 @@ MonoBehaviour:
     person in half.
   itemType: 3
   rarity: 2
-  fatiguePenalty: 14
   baseGoldValue: 500
   canSpawnInShop: 1
   canBeCombatContractReward: 1
@@ -31,7 +30,7 @@ MonoBehaviour:
   canDecapitate: 1
   healthDamage: 1.1
   armourDamage: 1
-  armourPenetration: 0.4
+  armourPenetration: 0.1
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

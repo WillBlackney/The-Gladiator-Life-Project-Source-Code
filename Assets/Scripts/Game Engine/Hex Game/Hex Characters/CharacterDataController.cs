@@ -224,7 +224,7 @@ namespace WeAreGladiators.Characters
             newCharacter.audioProfile = GetAudioProfileForRace(newCharacter.race);
             newCharacter.modelSize = template.modelSize;
             SetStartingLevelAndXpValues(newCharacter);
-            if (template.background == CharacterBackground.None) newCharacter.background = GetBackgroundData(CharacterBackground.Unknown);
+            if (template.background == CharacterBackground.None) newCharacter.background = GetBackgroundData(CharacterBackground.Companion);
             else newCharacter.background = GetBackgroundData(template.background);
 
             // Setup stats

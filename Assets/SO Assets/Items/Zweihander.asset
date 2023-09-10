@@ -18,7 +18,6 @@ MonoBehaviour:
     slashing.
   itemType: 3
   rarity: 3
-  fatiguePenalty: 10
   baseGoldValue: 720
   canSpawnInShop: 1
   canBeCombatContractReward: 1
@@ -31,7 +30,7 @@ MonoBehaviour:
   canDecapitate: 1
   healthDamage: 1.3
   armourDamage: 0.85
-  armourPenetration: 0.25
+  armourPenetration: 0.05
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

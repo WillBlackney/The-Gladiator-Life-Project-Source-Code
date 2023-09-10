@@ -33,9 +33,6 @@ MonoBehaviour:
     resolve:
       value: 18
       stars: 0
-    fitness:
-      value: 100
-      stars: 0
     wits:
       value: 18
       stars: 0
@@ -43,7 +40,6 @@ MonoBehaviour:
     apRecovery: 8
     apMaximum: 8
     initiative: 15
-    fatigueRecovery: 15
     criticalChance: 5
     criticalModifier: 50
     physicalDamageBonus: 0
@@ -64,9 +60,6 @@ MonoBehaviour:
   serializedPassiveManager:
     perks:
     - perkTag: 208
-      stacks: 1
-      freshInjury: 0
-    - perkTag: 160
       stacks: 1
       freshInjury: 0
   modelParts:

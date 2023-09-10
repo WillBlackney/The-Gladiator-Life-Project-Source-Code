@@ -17,7 +17,6 @@ MonoBehaviour:
   itemDescription: A long and sturdy spear built for battle.
   itemType: 3
   rarity: 3
-  fatiguePenalty: 8
   baseGoldValue: 600
   canSpawnInShop: 1
   canBeCombatContractReward: 1
@@ -29,8 +28,8 @@ MonoBehaviour:
   weaponAttackAnimationType: 1
   canDecapitate: 0
   healthDamage: 1.2
-  armourDamage: 0.75
-  armourPenetration: 0.4
+  armourDamage: 0.8
+  armourPenetration: 0.05
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:
@@ -51,7 +50,7 @@ MonoBehaviour:
         perkTag: 0
         passiveStacks: 1
       innateItemEffectType: 1
-      innateAccuracyMod: 20
+      innateAccuracyMod: 15
       innateAccuracyAgainstAdjacentMod: 0
       innateWeaponRangeBonus: 0
       innateBackstabPenetrationBonus: 0

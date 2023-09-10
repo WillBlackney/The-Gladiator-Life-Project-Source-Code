@@ -17,7 +17,6 @@ MonoBehaviour:
   itemDescription: A pointy dagger made specifically for poking holes in people.
   itemType: 3
   rarity: 2
-  fatiguePenalty: 0
   baseGoldValue: 400
   canSpawnInShop: 1
   canBeCombatContractReward: 1
@@ -30,7 +29,7 @@ MonoBehaviour:
   canDecapitate: 1
   healthDamage: 1.2
   armourDamage: 0.6
-  armourPenetration: 0.45
+  armourPenetration: 0.1
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

@@ -24,19 +24,17 @@ MonoBehaviour:
   dailyWageMin: 23
   dailyWageMax: 27
   baseRecruitCost: 75
-  mightLower: -3
-  mightUpper: -2
+  mightLower: -5
+  mightUpper: -5
   constitutionLower: -5
   constitutionUpper: -5
-  accuracyLower: 7
-  accuracyUpper: 7
-  dodgeLower: 2
-  dodgeUpper: 2
-  fatigueLower: -5
-  fatigueUpper: -5
-  resolveLower: 7
+  accuracyLower: 8
+  accuracyUpper: 8
+  dodgeLower: 0
+  dodgeUpper: 0
+  resolveLower: 8
   resolveUpper: 8
-  witsLower: 2
+  witsLower: 3
   witsUpper: 3
   minStartingAbilities: 1
   maxStartingAbilities: 2

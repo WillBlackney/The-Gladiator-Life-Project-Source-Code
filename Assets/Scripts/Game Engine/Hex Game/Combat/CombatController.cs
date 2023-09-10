@@ -1083,7 +1083,7 @@ namespace WeAreGladiators.Combat
                         attacker.itemSet.IsWieldingTwoHandMeleeWeapon() &&
                         PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.TwoHandedDominance))
                     {
-                        penetrationMod += 0.15f;
+                        penetrationMod += 0.1f;
                     }
 
                     // Check axe vulnerability on target

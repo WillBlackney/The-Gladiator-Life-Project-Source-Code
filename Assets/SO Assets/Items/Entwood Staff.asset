@@ -18,7 +18,6 @@ MonoBehaviour:
     the power of nature and used by druids and other nature-based spellcasters.
   itemType: 3
   rarity: 2
-  fatiguePenalty: 12
   baseGoldValue: 500
   canSpawnInShop: 1
   canBeCombatContractReward: 1
@@ -28,9 +27,10 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 02000000
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1.1
   armourDamage: 0.75
-  armourPenetration: 0.35
+  armourPenetration: 0.1
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:
