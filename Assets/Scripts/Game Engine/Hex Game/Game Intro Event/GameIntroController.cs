@@ -136,7 +136,7 @@ namespace WeAreGladiators.GameIntroEvent
             {
                 pageData = broomWielderPage;
             }
-            else if (chosenCharacters[0].background.backgroundType == CharacterBackground.Militia)
+            else if (chosenCharacters[0].background.backgroundType == CharacterBackground.ImperialDeserter)
             {
                 pageData = militiamanPage;
             }

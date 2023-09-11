@@ -39,7 +39,7 @@ MonoBehaviour:
   witsUpper: 5
   minStartingAbilities: 1
   maxStartingAbilities: 1
-  validRaces: 01000000040000000500000003000000
+  validRaces: 07000000050000000300000002000000
   loadoutBuckets:
   - possibleStartingTalents: 0b00000009000000
     possibleAbilities:
@@ -53,6 +53,9 @@ MonoBehaviour:
       offhandProspects:
       - {fileID: 11400000, guid: 37c5a755b3ef9ff4cbea114e6c96a44c, type: 2}
       - {fileID: 11400000, guid: 86f2685cb0b56c84fb2670dfdaae794f, type: 2}
+    - mainHandProspects:
+      - {fileID: 11400000, guid: aa1a47e725a62694ba9484249adb7fe8, type: 2}
+      offhandProspects: []
     possibleArmourLoadouts:
     - headProspects:
       - {fileID: 11400000, guid: cd162f05e1609124bb190e25d7de5556, type: 2}

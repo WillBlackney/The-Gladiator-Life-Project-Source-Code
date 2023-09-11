@@ -288,7 +288,7 @@ namespace WeAreGladiators.Characters
         Assassin = 15,
         Poacher = 16,
         Inquisitor = 17,
-        Militia = 18,
+        ImperialDeserter = 18,
         Companion = 19,
         WyrmHunter = 21,
 
