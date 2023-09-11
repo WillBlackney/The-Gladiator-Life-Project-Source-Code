@@ -18,7 +18,7 @@ MonoBehaviour:
   baseAbilityDescription: Apply 2 Burning and 2 Vulnerable to all characters in a
     line up to 3 tiles away
   abilitySprite: {fileID: 21300000, guid: d28deb3b7ec4ae34daa6b92b354747be, type: 3}
-  energyCost: 3
+  energyCost: 4
   baseCooldown: 2
   abilityType: 01000000
   doesNotBreakStealth: 0

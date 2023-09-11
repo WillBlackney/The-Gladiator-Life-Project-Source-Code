@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Dark Shroud
   displayedName: Dark Shroud
-  includeInGame: 1
+  includeInGame: 0
   baseAbilityDescription: Apply 1 Stealth to an ally.
   abilitySprite: {fileID: 21300000, guid: 1e344fd69420afd46b6dc9a8bc4236a2, type: 3}
-  energyCost: 4
-  fatigueCost: 15
+  energyCost: 2
   baseCooldown: 3
   abilityType: 05000000
   doesNotBreakStealth: 1

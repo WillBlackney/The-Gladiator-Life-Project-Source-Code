@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Flare
   displayedName: Flare
-  includeInGame: 0
+  includeInGame: 1
   baseAbilityDescription: Apply 1 Crippled and remove Stealth from all enemies within
     1 of target location.
   abilitySprite: {fileID: 21300000, guid: dcba22fa14f84b842a13e0d46a793096, type: 3}
-  energyCost: 6
+  energyCost: 4
   baseCooldown: 3
   abilityType: 01000000
   doesNotBreakStealth: 0

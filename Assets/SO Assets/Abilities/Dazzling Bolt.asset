@@ -18,8 +18,7 @@ MonoBehaviour:
   baseAbilityDescription: Deal 100% Magic damage to target and apply 1 Blinded.
   abilitySprite: {fileID: 21300000, guid: d7b224d19ba47384e9f96bee5264466f, type: 3}
   energyCost: 4
-  fatigueCost: 20
-  baseCooldown: 1
+  baseCooldown: 2
   abilityType: 0300000005000000
   doesNotBreakStealth: 0
   guidanceInstruction: 1

@@ -19,8 +19,7 @@ MonoBehaviour:
     Shield Wall and Riposte from the target.
   abilitySprite: {fileID: 21300000, guid: 56dc2487159646b4fb19b775a0138b10, type: 3}
   energyCost: 4
-  fatigueCost: 25
-  baseCooldown: 0
+  baseCooldown: 1
   abilityType: 0200000004000000
   doesNotBreakStealth: 0
   guidanceInstruction: 1

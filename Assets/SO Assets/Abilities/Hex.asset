@@ -15,10 +15,9 @@ MonoBehaviour:
   abilityName: Hex
   displayedName: Hex
   includeInGame: 1
-  baseAbilityDescription: Apply 2 Vulnerable to target.
+  baseAbilityDescription: Apply 2 Vulnerable to an enemy.
   abilitySprite: {fileID: 21300000, guid: 796eed51dced5944fbf160ec32c43b3d, type: 3}
   energyCost: 3
-  fatigueCost: 10
   baseCooldown: 2
   abilityType: 05000000
   doesNotBreakStealth: 0
