@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
+  m_Name: Page 4B
+  m_EditorClassIdentifier: 
+  pageSprite: {fileID: 0}
+  pageDescription: '{CHARACTER_1_NAME} hefts the sack of gold. <color=#FFFFFF>"That
+    will do nicely, Captain. Very nicely indeed. Quite generous of you. I won''t
+    forget-"</color>
+
+
+    You cut them off. <color=#FFFFFF>"Get out of my sight."</color>
+
+
+    {CHARACTER_1_NAME}
+    leaves, but not before picking up his coin that lay in the dust between the two
+    of you.'
+  onPageLoadEffects:
+  - effectType: 12
+    characterTargetIndex: 0
+    pageToLoad: {fileID: 0}
+    boonGained: 0
+    backgroundAddedToTavern: 0
+    totalCharactersAddedToTavern: 0
+    itemGained: {fileID: 0}
+    goldGained: 0
+    goldLost: 200
+    perkGained: 0
+    gainPerkChance: 100
+    injurySeverity: 0
+    injuryType: 0
+    experienceGained: 0
+    characterJoining: {fileID: 0}
+    stressRecoveryChance: 100
+    stressRecoveredMin: 0
+    stressRecoveredMax: 0
+    healthLostPercentage: 0.5
+    wageIncreasePercentage: 0.1
+    characterLeaveProbability: 50
+  allChoices:
+  - {fileID: 11400000, guid: 3f5d177d83e9b8442a8f94f1e12fda76, type: 2}

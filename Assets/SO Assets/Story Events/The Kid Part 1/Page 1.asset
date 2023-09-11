@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
+  m_Name: Page 1
+  m_EditorClassIdentifier: 
+  pageSprite: {fileID: 21300000, guid: 950e40cf22cbd5f44b9beb30bcf368f8, type: 3}
+  pageDescription: "The Kid, rushes to you, covered in gore. You can\u2019t avoid
+    their bloody embrace. When they finally let go, you too are dripping in remnants
+    of the arena\u2019s carnage. \r\n\r\n<color=#FFFFFF>\"Did you see me!?\"</color>
+    Asks The Kid. <color=#FFFFFF>\"I was unstoppable! I really felt them. All those
+    souls; guiding my blade, raising my shield. I think I heard one whisper in my
+    ear!\"</color>\n\r\nYou try to hush The Kid, but they bat your hand away.\r\n\r\n<color=#FFFFFF>\"It\u2019s
+    real. I felt it. We\u2019re going to do this! That crazy old witch was right!
+    If we stick to the plan, we\u2019re going to be the most powerful people this
+    Empire has ever seen!\"</color>\n\r\nYou grab The Kid and pull them close. <color=#FFFFFF>\"So,
+    watch your mouth. Cause if anything gets out, we\u2019re going to be the most
+    dead people this empire has ever seen.\"</color>\r\n\r\nThe Kid jokingly puts
+    a finger to their lips before skipping away. You notice one of your fighters
+    standing a little too close and realize they\u2019ve heard every word. "
+  onPageLoadEffects: []
+  allChoices:
+  - {fileID: 11400000, guid: 8b3a488e84349524babc49d51385d23e, type: 2}
+  - {fileID: 11400000, guid: 01ce74cb8604756448659eb8515087f2, type: 2}

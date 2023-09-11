@@ -64,5 +64,6 @@ namespace WeAreGladiators.StoryEvents
         HasXorLessGold = 4,
         DoesNotHaveBoon = 5,
         HasBoon = 6,
+        TheKidIsInRoster = 7,
     }
 }

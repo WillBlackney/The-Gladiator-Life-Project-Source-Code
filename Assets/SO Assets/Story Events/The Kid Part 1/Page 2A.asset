@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
+  m_Name: Page 2A
+  m_EditorClassIdentifier: 
+  pageSprite: {fileID: 0}
+  pageDescription: "You're not too surprised to see Imperial Guards later that evening.
+    They kick down your bedroom door and in that moment you're sure they've figured
+    out The Plan. They stand meanicingly around you, hands on sword hilts before
+    their captain speaks.\r\n\r\n<color=#FFFFFF>\"Whats this I hear of people wanting
+    to be more powerful than the Emperor?\"</color> She says. A small quaver in her
+    voice alerts you to the fact that she doesn't seem to know quite as much as you
+    thought.\r\n\r\n<color=#FFFFFF>\"Thats impossible Ma'am. No one could be more
+    powerful than the Emperor. Thats why we call him The Emperor; Most Powerful.\"</color>\n\r\n<color=#FFFFFF>\"Yes.
+    Well I heard something about some of your men wanting to be more powerful than
+    him.\"</color>\n\r\n<color=#FFFFFF>\"Pipe dreams, Ma'am. Kids hopped up on the
+    thrill of their first battle. I'm sure you've seen it in your own recruits.\"</color>\n\r\n<color=#FFFFFF>\"Yes...well...I
+    suppose I have. And whats this I hear about ghosts?\"</color>\n\r\n<color=#FFFFFF>\"Some
+    of my fighters have their superstitions. I've not been able to assuage them.
+    Try as I might.\"</color>\n\r\n<color=#FFFFFF>\"Right. So you're not trying to
+    overthrow the Emperor with an army of ghosts?\"</color>\n\r\nYou stay silent.
+    One of the Captains men stifles a laugh. You hold your breath, trying not to
+    laugh yourself. \r\n\r\n<color=#FFFFFF>\"We're going to have to have a very stern
+    chat with one of your men, Captain.\"</color> Says the Imperial Captain. <color=#FFFFFF>\"I'm
+    sorry to say but they may not be up to fighting in the arena tomorrow. But intentional
+    misinformation to an Imperial Guardsmen must be punished.\"</color>\n\r\nThey
+    leave your room in a hurry. Moments later you hear {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME}
+    scream in agony. For once, you can't blame the Guards. If they hadn't maimed
+    {CHARACTER_1_NAME} you would have had to do it yourself."
+  onPageLoadEffects:
+  - effectType: 10
+    characterTargetIndex: 0
+    pageToLoad: {fileID: 0}
+    boonGained: 0
+    backgroundAddedToTavern: 0
+    totalCharactersAddedToTavern: 0
+    itemGained: {fileID: 0}
+    goldGained: 0
+    goldLost: 0
+    perkGained: 134
+    gainPerkChance: 100
+    injurySeverity: 0
+    injuryType: 0
+    experienceGained: 0
+    characterJoining: {fileID: 0}
+    stressRecoveryChance: 100
+    stressRecoveredMin: 0
+    stressRecoveredMax: 0
+    healthLostPercentage: 0.5
+    wageIncreasePercentage: 0.1
+    characterLeaveProbability: 50
+  allChoices:
+  - {fileID: 11400000, guid: ea8f7891a0988bb459b842213c302fe6, type: 2}

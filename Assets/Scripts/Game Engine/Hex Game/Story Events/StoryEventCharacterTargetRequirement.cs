@@ -18,6 +18,10 @@ namespace WeAreGladiators.StoryEvents
         [Header("Background Requirements")]
         [ShowIf("ShowRequiredBackgrounds")]
         public CharacterBackground[] requiredBackgrounds;
+
+        [Header("Perk Requirements")]
+        [ShowIf("ShowPerk")]
+        public Perk perk;
         #endregion
 
         #region Odin Showifs
@@ -26,7 +30,10 @@ namespace WeAreGladiators.StoryEvents
             return reqType == StoryEventCharacterTargetRequirementType.DoesNotHaveBackground ||
                 reqType == StoryEventCharacterTargetRequirementType.HasBackground;
         }
-
+        public bool ShowPerk()
+        {
+            return reqType == StoryEventCharacterTargetRequirementType.DoesNotHavePerk;
+        }
 
         #endregion
     }
@@ -44,6 +51,7 @@ namespace WeAreGladiators.StoryEvents
         DoesNotHaveBackground = 2,
         XorMoreHealth = 3,
         XorLessHealth = 4,
+        DoesNotHavePerk = 5,
 
     }
     

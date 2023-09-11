@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11d0c0d84b0e264ba6d1c1c1d65ae53, type: 3}
+  m_Name: Page 5
+  m_EditorClassIdentifier: 
+  pageSprite: {fileID: 0}
+  pageDescription: "It's not the last you hear of it...\r\n\r\nLater that night you
+    arrive at the tavern to find a body strung up. There's a dagger pinning a note
+    to their chest. The note says \"This Theif murdered the best of us.\"\r\n\r\nYou
+    enter the Tavern to find {CHARACTER_1_NAME}'s body laid to rest on a table in
+    the centre of the room. A wreath of flowers lies gently on their chest. It doesn't
+    take you long to find out the story. \r\n\r\n{CHARACTER_1_NAME} was being awful
+    boastful in flashing their new coin. The thief looked to take advantage of it.
+    {CHARACTER_1_NAME} wouldn't give up the coin without a fight. The thief slayed
+    {CHARACTER_1_NAME}. The patrons took revenge on, and left a note to warn others
+    about what they'd do in defence of \"the best of them.\"\r\n\r\n{CHARACTER_1_NAME}
+    didn't seem like the best of anything to you. In fact they seemed like one of
+    the worst people you'd met. It takes you a while to discover what changed everyones
+    mind.\r\n\r\n<color=#FFFFFF>\"They bought us all a round of drinks. Every single
+    one. Didn't leave anyone out. Even the bartenders. Most generous, kindest, thoughtful
+    person I ever had the pleasure of knowing.\"</color>\n\r\nWhen they find out
+    you're {CHARACTER_1_NAME}'s Captain, they present you with his effects, whats
+    left of his coin, and the items they stripped from the thief."
+  onPageLoadEffects:
+  - effectType: 3
+    characterTargetIndex: 0
+    pageToLoad: {fileID: 0}
+    boonGained: 0
+    backgroundAddedToTavern: 0
+    totalCharactersAddedToTavern: 0
+    itemGained: {fileID: 0}
+    goldGained: 100
+    goldLost: 0
+    perkGained: 0
+    gainPerkChance: 100
+    injurySeverity: 0
+    injuryType: 0
+    experienceGained: 0
+    characterJoining: {fileID: 0}
+    stressRecoveryChance: 100
+    stressRecoveredMin: 0
+    stressRecoveredMax: 0
+    healthLostPercentage: 0.5
+    wageIncreasePercentage: 0.1
+    characterLeaveProbability: 50
+  - effectType: 7
+    characterTargetIndex: 0
+    pageToLoad: {fileID: 0}
+    boonGained: 0
+    backgroundAddedToTavern: 0
+    totalCharactersAddedToTavern: 0
+    itemGained: {fileID: 0}
+    goldGained: 0
+    goldLost: 0
+    perkGained: 0
+    gainPerkChance: 100
+    injurySeverity: 0
+    injuryType: 0
+    experienceGained: 0
+    characterJoining: {fileID: 0}
+    stressRecoveryChance: 100
+    stressRecoveredMin: 0
+    stressRecoveredMax: 0
+    healthLostPercentage: 0.5
+    wageIncreasePercentage: 0.1
+    characterLeaveProbability: 50
+  allChoices:
+  - {fileID: 11400000, guid: 90432293203f05f40abcdf785f7b05e6, type: 2}

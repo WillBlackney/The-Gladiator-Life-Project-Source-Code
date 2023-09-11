@@ -16,7 +16,6 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using WeAreGladiators.Scoring;
 
@@ -424,6 +423,17 @@ namespace WeAreGladiators.StoryEvents
             {
                 ret = !BoonController.Instance.DoesPlayerHaveBoon(requirement.requiredBoon);
             }
+            else if (requirement.reqType == StoryEventRequirementType.TheKidIsInRoster)
+            {
+                foreach(HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
+                {
+                    if(character.background.backgroundType == CharacterBackground.TheKid)
+                    {
+                        return true;
+                    }
+                }
+                ret = false;
+            }
             return ret;
         }
         private bool TheKidIsAlive()
@@ -487,7 +497,19 @@ namespace WeAreGladiators.StoryEvents
                 }
                 ret = pass;
             }
-
+            else if (req.reqType == StoryEventCharacterTargetRequirementType.DoesNotHavePerk)
+            {
+                bool pass = true;
+                foreach (ActivePerk p in character.passiveManager.perks)
+                {
+                    if (p.perkTag == req.perk)
+                    {
+                        pass = false;
+                        break;
+                    }
+                }
+                ret = pass;
+            }
             return ret;
                     
         }
