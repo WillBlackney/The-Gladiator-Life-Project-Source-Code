@@ -56,6 +56,8 @@ namespace WeAreGladiators.Abilities
         private AbilityData currentAbilityAwaiting;
         private AbilitySelectionPhase currentSelectionPhase;
         private HexCharacterModel firstSelectionCharacter;
+
+        public Dictionary<HexCharacterModel, Action> onAbilityEndVisualEventQueue = new Dictionary<HexCharacterModel, Action>();
         #endregion
 
         // Getters + Accessors
@@ -343,9 +345,17 @@ namespace WeAreGladiators.Abilities
             {
                 TriggerAbilityEffect(ability, e, character, target, tileTarget);
             }
-
             
             OnAbilityUsedFinish(character, ability);
+
+            foreach(var kwp in onAbilityEndVisualEventQueue)
+            {
+                if(kwp.Key.livingState == LivingState.Alive)
+                {
+                    kwp.Value.Invoke();
+                }
+            }
+            onAbilityEndVisualEventQueue.Clear();
 
             // Check for removal of damage/accuracy related tokens
             if(ability.abilityType.Contains(AbilityType.MeleeAttack) ||

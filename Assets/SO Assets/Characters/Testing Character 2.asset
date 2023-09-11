@@ -19,7 +19,7 @@ MonoBehaviour:
   modelSize: 0
   attributeSheet:
     might:
-      value: 0
+      value: 30
       stars: 0
     constitution:
       value: 1000
@@ -33,9 +33,6 @@ MonoBehaviour:
     resolve:
       value: 5
       stars: 0
-    fitness:
-      value: 1000
-      stars: 0
     wits:
       value: 5
       stars: 0
@@ -43,7 +40,6 @@ MonoBehaviour:
     apRecovery: 100
     apMaximum: 100
     initiative: 200
-    fatigueRecovery: 15
     criticalChance: 100
     criticalModifier: 50
     physicalDamageBonus: 0
@@ -58,7 +54,7 @@ MonoBehaviour:
     deathResistance: 25
   abilityBook:
     activeAbilities:
-    - {fileID: 11400000, guid: f2990956e456afa46af43accbd061445, type: 2}
+    - {fileID: 11400000, guid: 6c3343bfc6662a742897620834e447ae, type: 2}
     - {fileID: 11400000, guid: 3dc85c0a7ccd4904a972e6aa977e23b3, type: 2}
     - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
   serializedPassiveManager:
@@ -70,7 +66,7 @@ MonoBehaviour:
   - Undead_Right_Hand_1
   - Undead_Right_Leg_1
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 623ec2e1eab053346b93e30e2d91c862, type: 2}
+    mainHandItem: {fileID: 11400000, guid: e8567b630dd37c042a06a339a93e409e, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}

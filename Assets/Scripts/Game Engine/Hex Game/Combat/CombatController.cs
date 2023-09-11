@@ -550,9 +550,9 @@ namespace WeAreGladiators.Combat
                     if (injuryGained != null)
                     {
                         int injuryStacks = RandomGenerator.NumberBetween(injuryGained.minInjuryDuration, injuryGained.maxInjuryDuration);
-                        VisualEventManager.InsertTimeDelayInQueue(0.5f, character.GetLastStackEventParent());
+                        //VisualEventManager.InsertTimeDelayInQueue(0.5f, character.GetLastStackEventParent());
                         PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, injuryGained.perkTag, injuryStacks, true, 1f);
-                        VisualEventManager.InsertTimeDelayInQueue(0.5f, character.GetLastStackEventParent());
+                        //VisualEventManager.InsertTimeDelayInQueue(0.5f, character.GetLastStackEventParent());
 
                         CombatLogController.Instance.CreateInjuryEntry(character, injuryGained.passiveName, (int) (roll * 0.1f), (int) (injuryChanceActual * 0.1f));
 
@@ -1061,7 +1061,7 @@ namespace WeAreGladiators.Combat
 
             float healthDamageMod = 1f;
             float armourDamageMod = 1f;
-            float penetrationMod = 0.05f;
+            float penetrationMod = 0.1f;
             int finalPenetration = 0;
 
             if (ability != null)

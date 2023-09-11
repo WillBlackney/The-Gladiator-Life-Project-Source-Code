@@ -29,7 +29,7 @@ MonoBehaviour:
   canDecapitate: 0
   healthDamage: 1
   armourDamage: 0.75
-  armourPenetration: 0.05
+  armourPenetration: 0.1
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:

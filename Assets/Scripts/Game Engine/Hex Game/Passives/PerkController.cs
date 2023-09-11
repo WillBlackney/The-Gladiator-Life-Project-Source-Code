@@ -11,6 +11,7 @@ using DG.Tweening;
 using WeAreGladiators.Scoring;
 using WeAreGladiators.CombatLog;
 using WeAreGladiators.UCM;
+using WeAreGladiators.Abilities;
 
 namespace WeAreGladiators.Perks
 {
@@ -531,7 +532,7 @@ namespace WeAreGladiators.Perks
                     // Update character world UI
                     character.hexCharacterView.perkIconsPanel.HandleAddNewIconToPanel(perkData, stacksAppliedActual);
 
-                    // Update player ovelray UI
+                    // Update player overlay UI
                     if (TurnLogic.TurnController.Instance.EntityActivated == character)
                     {
                         CombatUIController.Instance.PerkPanel.ResetPanel();
@@ -545,8 +546,12 @@ namespace WeAreGladiators.Perks
                     // Status Notification
                     if (perkData.isInjury)
                     {
-                        VisualEventManager.CreateVisualEvent(() =>
-                            VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName, perkData.passiveSprite, StatusFrameType.CircularRed), character.GetLastStackEventParent());
+                        AbilityController.Instance.onAbilityEndVisualEventQueue.Add(character, () =>
+                        {
+                            VisualEventManager.CreateVisualEvent(() =>
+                                VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName, perkData.passiveSprite, StatusFrameType.CircularRed), character.GetLastStackEventParent());
+                            VisualEventManager.InsertTimeDelayInQueue(vfxDelay, character.GetLastStackEventParent());
+                        });
                     }
                     else
                     {
@@ -568,7 +573,7 @@ namespace WeAreGladiators.Perks
                 }
 
                 // Create brief delay
-                if (showVFX)                
+                if (showVFX && !perkData.isInjury)                
                     VisualEventManager.InsertTimeDelayInQueue(vfxDelay, character.GetLastStackEventParent());                
             }
 
