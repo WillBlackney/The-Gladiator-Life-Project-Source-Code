@@ -57,18 +57,13 @@ namespace WeAreGladiators.VisualEvents
 
         // Setup
         #region
-        public void InitializeSetup(int damage)
+       
+        public void InitializeSetup(int amount)
         {
             transform.position = new Vector2(transform.position.x - 0.2f, transform.position.y);
-            amountText.text = damage.ToString();
-            PlayUpAnim();
-
-        }
-        public void InitializeSetup(bool increase)
-        {
-            transform.position = new Vector2(transform.position.x - 0.2f, transform.position.y);
-            if (increase) iconImage.sprite = stressIncreaseSprite;
+            if (amount > 0) iconImage.sprite = stressIncreaseSprite;
             else iconImage.sprite = stressDecreaseSprite;
+            amountText.text = amount > 0 ? "Stress +" + amount.ToString() : "Stress" + amount.ToString();
             PlayUpAnim();
 
         }

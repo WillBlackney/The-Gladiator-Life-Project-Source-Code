@@ -365,9 +365,7 @@ namespace WeAreGladiators.VisualEvents
         {
             Debug.Log("VisualEffectManager.CreateStressGainedEffect() called...");
             GameObject stressEffect = Instantiate(StressEffectPrefab, location, Quaternion.identity);
-            bool increase = true;
-            if (stressAmount < 0) increase = false;
-            stressEffect.GetComponent<StressEffect>().InitializeSetup(increase);
+            stressEffect.GetComponent<StressEffect>().InitializeSetup(stressAmount);
         }
         public void CreateGroundBloodSpatter(Vector3 location)
         {
