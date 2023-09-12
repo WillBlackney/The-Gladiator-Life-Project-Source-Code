@@ -1150,13 +1150,11 @@ namespace WeAreGladiators.HexTiles
         #region
         private IEnumerator ShowTileInfoPopup(LevelNode destination, LevelNode start = null)
         {
-            Debug.LogWarning("ShowTileInfoPopup");
             if (GameController.Instance.GameState != GameState.CombatActive ||
                 CharacterRosterViewController.Instance.MainVisualParent.activeSelf ||
                 EnemyInfoPanel.Instance.PanelIsActive ||
                 MainMenuController.Instance.InGameMenuScreenParent.activeSelf)
             {
-                Debug.LogWarning("breaking1");
                 yield break;
             }
 
@@ -1165,7 +1163,6 @@ namespace WeAreGladiators.HexTiles
 
             HexDataSO data = destination.TileData;
             if (!data) yield break;
-            Debug.LogWarning("ShowTileInfoPopup3");
 
             tileInfoRootCanvas.enabled = true;
             tileInfoPositionParent.transform.position = destination.WorldPosition;

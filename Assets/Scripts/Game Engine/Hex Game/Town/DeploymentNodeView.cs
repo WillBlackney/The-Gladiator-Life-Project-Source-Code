@@ -61,7 +61,8 @@ namespace WeAreGladiators.TownFeatures
         {
             if (myCharacterData != null &&
                 allowedCharacter == Allegiance.Enemy &&
-                !EnemyInfoPanel.Instance.PanelIsActive)
+                !EnemyInfoPanel.Instance.PanelIsActive &&
+                !CharacterRosterViewController.Instance.MainVisualParent.activeSelf)
             {
                 AudioManager.Instance.PlaySound(Sound.UI_Button_Click);
                 EnemyInfoPanel.Instance.HandleBuildAndShowPanel(myCharacterData);

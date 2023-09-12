@@ -819,6 +819,7 @@ namespace WeAreGladiators.Characters
             data.attributeSheet = new AttributeSheet();
             GenerateRecruitCharacterCoreAttributeRolls(data.attributeSheet, data.background);
             GenerateCharacterStarRolls(data.attributeSheet, 3);
+            data.dailyWage = RandomGenerator.NumberBetween(data.background.dailyWageMin, data.background.dailyWageMax);
 
             // Randomize starting perk
             var possiblePerks = new List<ActivePerk>();

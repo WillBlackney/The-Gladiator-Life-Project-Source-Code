@@ -1100,7 +1100,7 @@ namespace WeAreGladiators.TownFeatures
         private void ShowBossWarning()
         {
             deploymentWarningPopupVisualParent.SetActive(true);
-            deploymentWarningPopupContinueButton.SetActive(false);
+            //deploymentWarningPopupContinueButton.SetActive(false);
             deploymentWarningPopupText.text = "This is a boss fight: if you lose this fight, your game is over. Are you certain you're ready to proceed?";
         }
         private void ShowNoCharactersDeployedPopup()

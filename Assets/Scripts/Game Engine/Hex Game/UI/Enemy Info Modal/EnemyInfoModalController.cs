@@ -79,7 +79,7 @@ namespace WeAreGladiators.UI
                 AbilityController.Instance.AwaitingAbilityOrder() ||
                 CharacterRosterViewController.Instance.MainVisualParent.activeSelf ||
                 EnemyInfoPanel.Instance.PanelIsActive ||
-                MainMenuController.Instance.InGameMenuScreenParent) yield break;
+                MainMenuController.Instance.InGameMenuScreenParent.activeSelf) yield break;
 
             // Reset
             mainCg.DOKill();
