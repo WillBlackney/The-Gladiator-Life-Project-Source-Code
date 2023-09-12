@@ -23,19 +23,18 @@ MonoBehaviour:
     tooth bounces past your shoe and into the murky bog water below. The grappling
     duo unclinch and scramble to their feet. One of them, an orc militiaman, picks
     up a nearby bottle and stands menacingly over his opponent: a tiny, but vicious
-    looking goblin thief. \r\n\r\n<color=#FFFFFF>\u201CHey! No fair.\u201D</color>
-    Says the goblin. <color=#FFFFFF>\u201CThis is a friendly brawl, no weapons allowed.\u201D</color>\n\r\n<color=#FFFFFF>
-    \u201CYou pinched my nipple, you green little RAT!\u201D</color> the orc bellows
-    back.\r\n\r\n<color=#FFFFFF>\u201CAnd i would again, you big oaf! Come at me
-    once more, and that nipple will belong to me!\u201D</color> \r\n\r\nAs the goblin
-    eyes dart around looking for something sharp or heavy to use as a weapon, he
-    notices you and the kid staring.\r\n\r\nThe Nipple Pincher turns to you and The
-    Kid. <color=#FFFFFF>\u201COi, you two! What do you reckon? Should we be allowed
-    weapons or not?\u201D</color>"
+    looking goblin thief. \r\n\r\n<color=#FFFFFF>\"Hey! No fair.\"</color> Says the
+    goblin. <color=#FFFFFF>\"This is a friendly brawl, no weapons allowed.\"</color>\n\r\n<color=#FFFFFF>
+    \"You pinched my nipple, you green little RAT!\"</color> the orc bellows back.\r\n\r\n<color=#FFFFFF>\"And
+    i would again, you big oaf! Come at me once more, and that nipple will belong
+    to me!\"</color> \r\n\r\nAs the goblin eyes dart around looking for something
+    sharp or heavy to use as a weapon, he notices you and the kid staring.\r\n\r\nThe
+    Nipple Pincher turns to you and The Kid. <color=#FFFFFF>\"Oi, you two! What do
+    you reckon? Should we be allowed weapons or not?\"</color>"
   choices:
   - buttonText: '"All''s fair in love and war."'
     possiblePagesLoaded: 08000000
     charactersGained: []
-  - buttonText: '"I usually leave weapons out of my"friendly brawls''."'
+  - buttonText: '"I usually leave weapons out of my friendly brawls."'
     possiblePagesLoaded: 09000000
     charactersGained: []

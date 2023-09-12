@@ -37,6 +37,6 @@ MonoBehaviour:
   - buttonText: '"All''s fair in love and war."'
     possiblePagesLoaded: 04000000
     charactersGained: []
-  - buttonText: '"I usually leave weapons out of my"friendly brawls''."'
+  - buttonText: '"I usually leave weapons out of my friendly brawls."'
     possiblePagesLoaded: 05000000
     charactersGained: []

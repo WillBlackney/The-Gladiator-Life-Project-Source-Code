@@ -34,10 +34,7 @@ MonoBehaviour:
       value: 65
       stars: 0
     resolve:
-      value: 5
-      stars: 0
-    fitness:
-      value: 100
+      value: 10
       stars: 0
     wits:
       value: 10
@@ -46,7 +43,6 @@ MonoBehaviour:
     apRecovery: 8
     apMaximum: 8
     initiative: 15
-    fatigueRecovery: 15
     criticalChance: 5
     criticalModifier: 50
     physicalDamageBonus: 0

@@ -53,6 +53,7 @@ namespace WeAreGladiators.Characters
         public Slider stressBarWorld;
         public Image stressBarShatteredGlowWorld;
         public Image stressStateIconWorld;
+        public TextMeshProUGUI stressTextWorld;
         [PropertySpace(SpaceBefore = 50, SpaceAfter = 0)]    
 
         [Header("Custom Components")]
@@ -149,6 +150,7 @@ namespace WeAreGladiators.Characters
         {
             armourTextWorld.gameObject.SetActive(true);
             healthTextWorld.gameObject.SetActive(true);
+            stressTextWorld.gameObject.SetActive(true);
             mouseOverWorldUI = true;
             if(UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
                 HexCharacterController.Instance.FadeInCharacterWorldCanvas(this, null, 0.25f);
@@ -157,6 +159,7 @@ namespace WeAreGladiators.Characters
         {
             armourTextWorld.gameObject.SetActive(false);
             healthTextWorld.gameObject.SetActive(false);
+            stressTextWorld.gameObject.SetActive(false);
             mouseOverWorldUI = false;
             StartCoroutine(OnAnyWorldUiMouseExitCoroutine());
 
@@ -167,6 +170,7 @@ namespace WeAreGladiators.Characters
             {
                 armourTextWorld.gameObject.SetActive(false);
                 healthTextWorld.gameObject.SetActive(false);
+                stressTextWorld.gameObject.SetActive(false);
             }
 
             yield return new WaitForSeconds(0.25f);
@@ -175,6 +179,7 @@ namespace WeAreGladiators.Characters
             {
                 armourTextWorld.gameObject.SetActive(false);
                 healthTextWorld.gameObject.SetActive(false);
+                stressTextWorld.gameObject.SetActive(false);
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(this, null, 0.25f, 0.001f);
             }        
                            

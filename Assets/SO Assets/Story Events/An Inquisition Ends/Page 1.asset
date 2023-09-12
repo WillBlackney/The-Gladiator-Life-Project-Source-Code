@@ -15,11 +15,11 @@ MonoBehaviour:
   pageSprite: {fileID: 21300000, guid: 117f2ea35cc83fa4da0ac4775c8e725c, type: 3}
   pageDescription: 'A local inquisition into demonic activity has reached it''s dramatic
     conclusion. All the witches that could be found were taken outside the town walls
-    and tied to trees. The scaled lunkers ate well last night.
+    and tied to trees. The swamp lunkers ate well last night.
 
 
-    Without any
-    witches left to burn, the local inquisitors are without a job to do...'
+    Without any witches
+    left to burn, the local inquisitors are without a job to do...'
   onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: f02418534cefa4a448eef9dedced43f3, type: 2}

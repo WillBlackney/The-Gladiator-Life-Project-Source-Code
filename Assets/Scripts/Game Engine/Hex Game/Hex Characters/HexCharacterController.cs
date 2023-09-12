@@ -765,7 +765,7 @@ namespace WeAreGladiators.Characters
 
             // Modify WORLD space ui
             character.hexCharacterView.stressBarWorld.value = stressBarFloat;
-
+            character.hexCharacterView.stressTextWorld.text = stress.ToString();
             // Update stres state image
             StressState stressState = CombatController.Instance.GetStressStateFromStressAmount(stress);
             Sprite stressSprite = SpriteLibrary.Instance.GetStressStateSprite(stressState);
@@ -1902,18 +1902,11 @@ namespace WeAreGladiators.Characters
                     CombatUIController.Instance.HideViewsOnTurnEnd(fadeOutEvent)).SetCoroutineData(fadeOutEvent);
             }
 
-            if (!character.hasRequestedTurnDelay)
+            if (/*!character.hasRequestedTurnDelay*/ !firstTimeDelay)
             {
                 // DEBUFF EXPIRIES
                 #region
-
-                // Smashed Shield
-                /*
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SmashedShield) && character.currentHealth > 0)
-                {
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.SmashedShield, -1, true, 0.5f);
-
-                }*/
+                                
                 // Furiously Assaulted
                 int assaultStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.FuriouslyAssaulted);
                 if (assaultStacks > 0 && character.currentHealth > 0)
