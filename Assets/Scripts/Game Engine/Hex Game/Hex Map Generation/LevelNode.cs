@@ -129,7 +129,7 @@ namespace WeAreGladiators.HexTiles
             get
             {
                 int sum = 2;
-                if (tileData != null) sum += tileData.fatigueCostModifier;
+                //if (tileData != null) sum += tileData.fatigueCostModifier;
                 if(sum < 0) sum = 0;
                 return sum;
             }

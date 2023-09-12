@@ -19,7 +19,6 @@ namespace WeAreGladiators.HexTiles
         public List<CustomString> description;
         public ModalDotRowBuildData[] effectDescriptions;
         public int moveCostModifier;
-        public int fatigueCostModifier;
         public bool allowElevation;
 
        

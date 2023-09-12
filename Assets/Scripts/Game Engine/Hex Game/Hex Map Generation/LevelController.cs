@@ -1150,21 +1150,27 @@ namespace WeAreGladiators.HexTiles
         #region
         private IEnumerator ShowTileInfoPopup(LevelNode destination, LevelNode start = null)
         {
-            if (GameController.Instance.GameState != GameState.CombatActive || 
+            Debug.LogWarning("ShowTileInfoPopup");
+            if (GameController.Instance.GameState != GameState.CombatActive ||
                 CharacterRosterViewController.Instance.MainVisualParent.activeSelf ||
                 EnemyInfoPanel.Instance.PanelIsActive ||
-                MainMenuController.Instance.InGameMenuScreenParent) yield break;
+                MainMenuController.Instance.InGameMenuScreenParent.activeSelf)
+            {
+                Debug.LogWarning("breaking1");
+                yield break;
+            }
 
             yield return new WaitForSeconds(popupDelay);
             if (HexMousedOver != destination) yield break;
 
             HexDataSO data = destination.TileData;
             if (!data) yield break;
+            Debug.LogWarning("ShowTileInfoPopup3");
 
             tileInfoRootCanvas.enabled = true;
             tileInfoPositionParent.transform.position = destination.WorldPosition;
             tileInfoCg.alpha = 0;
-            tileInfoCg.DOFade(1, 0.5f);
+            tileInfoCg.DOFade(1, 0.25f);
 
             // build views logic
             tileInfoNameText.text = data.tileName;
@@ -1212,8 +1218,6 @@ namespace WeAreGladiators.HexTiles
                 }
           
             }
-
-            // to do: add dotted rows for elevated tile (+10 accuracy and dodge ahainst unelevated enemies, +1 range)
 
             int extraDotRows = 0;
 
