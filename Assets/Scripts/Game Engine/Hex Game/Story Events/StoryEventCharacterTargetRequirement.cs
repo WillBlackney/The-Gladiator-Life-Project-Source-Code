@@ -1,9 +1,7 @@
-using WeAreGladiators.Characters;
-using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using Sirenix.OdinInspector;
+using UnityEngine;
+using WeAreGladiators.Characters;
 
 namespace WeAreGladiators.StoryEvents
 {
@@ -11,10 +9,10 @@ namespace WeAreGladiators.StoryEvents
     public class StoryEventCharacterTargetRequirement
     {
         #region Components + Variables
+
         [Header("Core Requirements")]
         public StoryEventCharacterTargetRequirementType reqType;
         [Space(10)]
-
         [Header("Background Requirements")]
         [ShowIf("ShowRequiredBackgrounds")]
         public CharacterBackground[] requiredBackgrounds;
@@ -22,9 +20,11 @@ namespace WeAreGladiators.StoryEvents
         [Header("Perk Requirements")]
         [ShowIf("ShowPerk")]
         public Perk perk;
+
         #endregion
 
         #region Odin Showifs
+
         public bool ShowRequiredBackgrounds()
         {
             return reqType == StoryEventCharacterTargetRequirementType.DoesNotHaveBackground ||
@@ -51,8 +51,8 @@ namespace WeAreGladiators.StoryEvents
         DoesNotHaveBackground = 2,
         XorMoreHealth = 3,
         XorLessHealth = 4,
-        DoesNotHavePerk = 5,
+        DoesNotHavePerk = 5
 
     }
-    
+
 }

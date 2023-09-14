@@ -1,7 +1,7 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine;
-using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities.Editor;
+using UnityEngine;
 
 namespace WeAreGladiators.CustomOdinGUI
 {
@@ -11,7 +11,7 @@ namespace WeAreGladiators.CustomOdinGUI
 
         protected override void Initialize()
         {
-            this.isExpanded = this.GetPersistentValue<bool>("ColorFoldoutGroupAttributeDrawer.isExpanded",
+            isExpanded = this.GetPersistentValue("ColorFoldoutGroupAttributeDrawer.isExpanded",
                 GeneralDrawerConfig.Instance.ExpandFoldoutByDefault);
         }
 
@@ -24,7 +24,6 @@ namespace WeAreGladiators.CustomOdinGUI
 
             isExpanded.Value = SirenixEditorGUI.Foldout(isExpanded.Value, label);
             SirenixEditorGUI.EndBoxHeader();
-
 
             if (SirenixEditorGUI.BeginFadeGroup(this, isExpanded.Value))
             {

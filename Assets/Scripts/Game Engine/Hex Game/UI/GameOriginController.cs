@@ -1,29 +1,31 @@
 using DG.Tweening;
-using WeAreGladiators.MainMenu;
-using WeAreGladiators.Utilities;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using WeAreGladiators.MainMenu;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.GameOrigin
 {
     public class GameOriginController : Singleton<GameOriginController>
     {
         #region Components + Variables
+
         [Header("Core Components")]
-        [SerializeField] GameObject visualParent;
-        [SerializeField] CanvasGroup contentCg;
-        [SerializeField] Image blackUnderlay;
+        [SerializeField]
+        private GameObject visualParent;
+        [SerializeField] private CanvasGroup contentCg;
+        [SerializeField] private Image blackUnderlay;
 
         [Header("Movement Components")]
-        [SerializeField] RectTransform onScreenPosition;
-        [SerializeField] RectTransform offScreenPosition;
-        [SerializeField] RectTransform movementParent;
+        [SerializeField]
+        private RectTransform onScreenPosition;
+        [SerializeField] private RectTransform offScreenPosition;
+        [SerializeField] private RectTransform movementParent;
 
         #endregion
 
         #region UI Logic
+
         public void ShowOriginScreen()
         {
             visualParent.SetActive(true);
@@ -58,9 +60,11 @@ namespace WeAreGladiators.GameOrigin
                 visualParent.SetActive(false);
             });
         }
+
         #endregion
 
         #region Buttons Logic
+
         public void OnCloseOriginPageButtClicked()
         {
             HideOriginScreen();
@@ -76,6 +80,7 @@ namespace WeAreGladiators.GameOrigin
                 MainMenuController.Instance.HideFrontScreen();
             });
         }
+
         #endregion
     }
 }

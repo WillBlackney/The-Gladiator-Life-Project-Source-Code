@@ -1,10 +1,9 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine;
-using UnityEditor;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
-using WeAreGladiators.Abilities;
+using Sirenix.Utilities.Editor;
+using UnityEditor;
+using UnityEngine;
 using WeAreGladiators.Characters;
 
 namespace WeAreGladiators.Editor
@@ -12,11 +11,6 @@ namespace WeAreGladiators.Editor
 
     public class EnemyDataEditor : OdinMenuEditorWindow
     {
-        [MenuItem("Tools/Hex Game Tools/Enemy Editor")]
-        private static void OpenWindow()
-        {
-            GetWindow<EnemyDataEditor>().Show();
-        }
 
         private CreateNewEnemyData createNewEnemyData;
         protected override void OnDestroy()
@@ -28,10 +22,15 @@ namespace WeAreGladiators.Editor
                 DestroyImmediate(createNewEnemyData.enemyDataSO);
             }
         }
+        [MenuItem("Tools/Hex Game Tools/Enemy Editor")]
+        private static void OpenWindow()
+        {
+            GetWindow<EnemyDataEditor>().Show();
+        }
 
         protected override OdinMenuTree BuildMenuTree()
         {
-            var tree = new OdinMenuTree();
+            OdinMenuTree tree = new OdinMenuTree();
 
             createNewEnemyData = new CreateNewEnemyData();
             tree.Add("Create New", new CreateNewEnemyData());
@@ -42,7 +41,7 @@ namespace WeAreGladiators.Editor
 
         protected override void OnBeginDrawEditors()
         {
-            OdinMenuTreeSelection selected = this.MenuTree.Selection;
+            OdinMenuTreeSelection selected = MenuTree.Selection;
 
             SirenixEditorGUI.BeginHorizontalToolbar();
             {
@@ -81,9 +80,7 @@ namespace WeAreGladiators.Editor
                 enemyDataSO = CreateInstance<EnemyTemplateSO>();
                 enemyDataSO.myName = "New Ability Data";
             }
-
         }
-
     }
 }
 #endif

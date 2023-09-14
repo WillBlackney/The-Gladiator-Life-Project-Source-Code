@@ -1,16 +1,16 @@
-using WeAreGladiators.UCM;
 using DG.Tweening;
-using WeAreGladiators.Abilities;
-using WeAreGladiators.Perks;
-using WeAreGladiators.TurnLogic;
-using WeAreGladiators.UI;
-using WeAreGladiators.Utilities;
-using WeAreGladiators.VisualEvents;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Perks;
+using WeAreGladiators.TurnLogic;
+using WeAreGladiators.UCM;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
 
 namespace WeAreGladiators.Characters
 {
@@ -18,9 +18,8 @@ namespace WeAreGladiators.Characters
     {
         [Header("Core Canvas Components")]
         [SerializeField] private Canvas canvasRoot;
-        [SerializeField] private CanvasGroup mainCanvasCg;     
+        [SerializeField] private CanvasGroup mainCanvasCg;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Positioning Components")]
         [SerializeField] private Transform middlePanelTransform;
         [SerializeField] private Transform middlePanelOnScreenPos;
@@ -34,39 +33,34 @@ namespace WeAreGladiators.Characters
         [SerializeField] private Transform rightPanelOnScreenPos;
         [SerializeField] private Transform rightPanelOffScreenPos;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Middle Section Components")]
         [SerializeField] private AbilityButton[] abilityButtons;
         [SerializeField] private EnergyPanelView energyBar;
         [SerializeField] private PerkLayoutPanel perkPanel;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Left Section Components")]
         [SerializeField] private UniversalCharacterModel uiPotraitUCM;
         [SerializeField] private TextMeshProUGUI characterNameTextUI;
         [SerializeField] private StressPanelView stressPanel;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Current Initiative Components")]
-        [SerializeField] TextMeshProUGUI currentInitiativePanelText;
-        [SerializeField] ModalDottedRow[] initiativeModalRows;
-        [SerializeField] RectTransform[] initiativeModalLayouts;
+        [SerializeField]
+        private TextMeshProUGUI currentInitiativePanelText;
+        [SerializeField] private ModalDottedRow[] initiativeModalRows;
+        [SerializeField] private RectTransform[] initiativeModalLayouts;
 
         [Header("Health Bar UI References")]
         [SerializeField] private Slider healthBarUI;
         [SerializeField] private TextMeshProUGUI currentHealthText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Armour Bar UI References")]
         [SerializeField] private Slider armourBarUI;
         [SerializeField] private TextMeshProUGUI currentArmourText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Stress Bar UI References")]
         [SerializeField] private Slider stressBarUI;
         [SerializeField] private TextMeshProUGUI stressText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("End + Delay Turn Button Components")]
         public Button endTurnButton;
         public Button delayTurnButton;
@@ -74,39 +68,23 @@ namespace WeAreGladiators.Characters
         public Sprite delayTurnButtonReadySprite;
         public Sprite delayTurnButtonNotReadySprite;
 
-
         #region Getters + Accessors
-        public PerkLayoutPanel PerkPanel
-        {
-            get { return perkPanel; }
-        }
-        public EnergyPanelView EnergyBar
-        {
-            get { return energyBar; }
-        }
-        public TextMeshProUGUI CurrentArmourText
-        {
-            get { return currentArmourText; }
-        }
-        public AbilityButton[] AbilityButtons
-        {
-            get { return abilityButtons; }
-        }
-        public bool ViewIsActive
-        {
-            get 
-            { 
-                return canvasRoot.isActiveAndEnabled; 
-            } 
-        }
+
+        public PerkLayoutPanel PerkPanel => perkPanel;
+        public EnergyPanelView EnergyBar => energyBar;
+        public TextMeshProUGUI CurrentArmourText => currentArmourText;
+        public AbilityButton[] AbilityButtons => abilityButtons;
+        public bool ViewIsActive => canvasRoot.isActiveAndEnabled;
+
         #endregion
 
         #region Build Show, Hide and Animate Main Views
+
         public void BuildAndShowViewsOnTurnStart(HexCharacterModel character)
         {
             SetInteractability(true);
             canvasRoot.enabled = true;
-                        
+
             middlePanelTransform.localPosition = middlePanelOffScreenPos.localPosition;
             rightPanelTransform.localPosition = rightPanelOffScreenPos.localPosition;
             leftPanelTransform.localPosition = leftPanelOffScreenPos.localPosition;
@@ -161,7 +139,7 @@ namespace WeAreGladiators.Characters
             leftPanelTransform.localPosition = leftPanelOnScreenPos.localPosition;
 
             MovePanelsOffScreen(speed);
-            
+
             // Fade out views
             CharacterModeller.FadeOutCharacterModel(uiPotraitUCM, speed);
             DelayUtils.DelayedCall(speed * 0.5f, () =>
@@ -169,7 +147,10 @@ namespace WeAreGladiators.Characters
                 mainCanvasCg.DOFade(0f, speed * 0.5f).OnComplete(() =>
                 {
                     canvasRoot.enabled = false;
-                    if (tracker != null) tracker.MarkAsCompleted();
+                    if (tracker != null)
+                    {
+                        tracker.MarkAsCompleted();
+                    }
                 });
 
             });
@@ -205,9 +186,11 @@ namespace WeAreGladiators.Characters
             mainCanvasCg.interactable = onOrOff;
             mainCanvasCg.blocksRaycasts = onOrOff;
         }
+
         #endregion
 
         #region Update Health / Stress Sliders
+
         private void BuildCurrentInitiativeModal(HexCharacterModel character)
         {
             int baseInitiative = StatCalculator.GetTotalInitiative(character, false);
@@ -222,21 +205,21 @@ namespace WeAreGladiators.Characters
             }*/
             if (delayPenalty != 0)
             {
-                initiativeModalRows[1].Build("Delay Turn Penalty: " + TextLogic.ReturnColoredText("-" + delayPenalty.ToString(), TextLogic.redText), DotStyle.Red);
+                initiativeModalRows[1].Build("Delay Turn Penalty: " + TextLogic.ReturnColoredText("-" + delayPenalty, TextLogic.redText), DotStyle.Red);
             }
 
             TransformUtils.RebuildLayouts(initiativeModalLayouts);
         }
         public void UpdateCurrentInitiativeComponents(HexCharacterModel character)
         {
-            if (character != null && 
-                TurnController.Instance.EntityActivated == character && 
+            if (character != null &&
+                TurnController.Instance.EntityActivated == character &&
                 character.controller == Controller.Player)
             {
                 BuildCurrentInitiativeModal(character);
                 currentInitiativePanelText.text = StatCalculator.GetTotalInitiative(character).ToString();
             }
-                
+
         }
         public void UpdateHealthComponents(int health, int maxHealth)
         {
@@ -244,11 +227,14 @@ namespace WeAreGladiators.Characters
             float currentHealthFloat = health;
             float currentMaxHealthFloat = maxHealth;
             float healthBarFloat = 0f;
-            if (maxHealth > 0) healthBarFloat = currentHealthFloat / currentMaxHealthFloat;
+            if (maxHealth > 0)
+            {
+                healthBarFloat = currentHealthFloat / currentMaxHealthFloat;
+            }
 
             // Modify UI elements
             healthBarUI.value = healthBarFloat;
-            currentHealthText.text = currentHealthFloat.ToString() + "/" + currentMaxHealthFloat.ToString();
+            currentHealthText.text = currentHealthFloat + "/" + currentMaxHealthFloat;
         }
         public void UpdateArmourComponents(int armour, int maxArmour)
         {
@@ -256,11 +242,14 @@ namespace WeAreGladiators.Characters
             float currentArmourFloat = armour;
             float currentMaxArmourFloat = maxArmour;
             float armourBarFloat = 0f;
-            if (maxArmour > 0) armourBarFloat = currentArmourFloat / currentMaxArmourFloat;
+            if (maxArmour > 0)
+            {
+                armourBarFloat = currentArmourFloat / currentMaxArmourFloat;
+            }
 
             // Modify UI elements
             armourBarUI.value = armourBarFloat;
-            currentArmourText.text = currentArmourFloat.ToString() + "/" + currentMaxArmourFloat.ToString();
+            currentArmourText.text = currentArmourFloat + "/" + currentMaxArmourFloat;
         }
         public void UpdateStressComponents(int stress, HexCharacterModel character)
         {
@@ -270,10 +259,11 @@ namespace WeAreGladiators.Characters
 
             // Modify UI elements
             stressBarUI.value = stressBarFloat;
-            stressText.text = currentStressFloat.ToString() + "/" + currentMaxStressFloat.ToString();
+            stressText.text = currentStressFloat + "/" + currentMaxStressFloat;
 
             stressPanel.BuildPanelViews(character);
-        }         
+        }
+
         #endregion
 
         #region Energy Bar Logic
@@ -281,21 +271,29 @@ namespace WeAreGladiators.Characters
         #endregion
 
         #region Ability Bar Logic
+
         private void BuildHexCharacterAbilityBar(HexCharacterModel character)
         {
             ResetCharacterAbilityBar();
 
-            for (int i = 0; i < character.abilityBook.activeAbilities.Count; i++)            
+            for (int i = 0; i < character.abilityBook.activeAbilities.Count; i++)
+            {
                 abilityButtons[i].BuildButton(character.abilityBook.activeAbilities[i]);
-        }             
+            }
+        }
         private void ResetCharacterAbilityBar()
         {
-            foreach (AbilityButton b in abilityButtons)            
-                b.ResetButton();            
-        }       
+            foreach (AbilityButton b in abilityButtons)
+            {
+                b.ResetButton();
+            }
+        }
         public AbilityButton FindAbilityButton(AbilityData ability)
         {
-            if (ability == null || ability.myCharacter == null) return null;
+            if (ability == null || ability.myCharacter == null)
+            {
+                return null;
+            }
 
             AbilityButton bRet = null;
             foreach (AbilityButton b in abilityButtons)
@@ -309,9 +307,11 @@ namespace WeAreGladiators.Characters
 
             return bRet;
         }
+
         #endregion
 
         #region End + Delay Turn Buttons Logic
+
         private void BuildTurnButtons(HexCharacterModel character)
         {
             SetEndTurnButtonInteractions(true);
@@ -334,7 +334,6 @@ namespace WeAreGladiators.Characters
         {
             delayTurnButton.interactable = interactable;
         }
-
 
         #endregion
     }

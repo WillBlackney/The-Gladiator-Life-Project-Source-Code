@@ -1,6 +1,5 @@
-﻿using Sirenix.Utilities;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace WeAreGladiators.Characters
@@ -12,25 +11,27 @@ namespace WeAreGladiators.Characters
         [SerializeField] private ParticleSystem stunnedParticles;
         [SerializeField] private ParticleSystem[] dashTrailParticles;
         [SerializeField] private ParticleSystem movementPoofParticles;
-
-        private bool playStunned = false;
         [SerializeField] private Animator shatteredAnimator;
 
-        private bool playingDashTrail = false;
-        private bool playingRunPoofs = false;
+        private bool playingDashTrail;
+        private bool playingRunPoofs;
+
+        private bool playStunned;
 
         // Core Logic
         #region
+
         public void StopAllEffects()
         {
             StopStunned();
             StopShattered();
-        }       
-        
+        }
+
         #endregion
 
         // Stunned Effect
         #region
+
         public void PlayStunned()
         {
             playStunned = true;
@@ -42,8 +43,11 @@ namespace WeAreGladiators.Characters
             stunnedParticles.Stop(true);
             stunnedParticles.Play(true);
             yield return new WaitForSeconds(5f);
-            if (!playStunned) yield break;
-            else PlayStunned();
+            if (!playStunned)
+            {
+                yield break;
+            }
+            PlayStunned();
         }
         public void StopStunned()
         {
@@ -53,7 +57,10 @@ namespace WeAreGladiators.Characters
         }
         public void PlayMovementDirtPoofs()
         {
-            if (playingRunPoofs) return;
+            if (playingRunPoofs)
+            {
+                return;
+            }
             playingRunPoofs = true;
             movementPoofParticles.Play();
         }
@@ -64,7 +71,10 @@ namespace WeAreGladiators.Characters
         }
         public void PlayDashTrail()
         {
-            if (playingDashTrail) return;
+            if (playingDashTrail)
+            {
+                return;
+            }
             playingDashTrail = true;
             dashTrailParticles.ForEach(x => x.Play());
         }
@@ -73,22 +83,34 @@ namespace WeAreGladiators.Characters
             playingDashTrail = false;
             dashTrailParticles.ForEach(x => x.Stop());
         }
+
         #endregion
 
         // Shattered Effect
         #region
+
         public void PlayShattered()
         {
-            if (shatteredAnimator == null) return;
+            if (shatteredAnimator == null)
+            {
+                return;
+            }
             shatteredAnimator.gameObject.SetActive(true);
             shatteredAnimator.SetTrigger("Play Normal");
-            if (myView != null) myView.DoShatteredGlow();
+            if (myView != null)
+            {
+                myView.DoShatteredGlow();
+            }
         }
         public void StopShattered()
         {
             shatteredAnimator.gameObject.SetActive(false);
-            if (myView != null) myView.StopShatteredGlow();
+            if (myView != null)
+            {
+                myView.StopShatteredGlow();
+            }
         }
+
         #endregion
     }
 }

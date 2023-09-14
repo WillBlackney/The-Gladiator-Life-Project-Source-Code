@@ -1,8 +1,7 @@
-using WeAreGladiators.Abilities;
-using WeAreGladiators.Items;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Items;
 
 namespace WeAreGladiators.Characters
 {
@@ -16,9 +15,8 @@ namespace WeAreGladiators.Characters
         public List<TalentPairing> talentPairings = new List<TalentPairing>();
 
         [Space(20)]
-
         [Header("Attributes Modifiers")]
-        [Range(0,10)]
+        [Range(0, 10)]
         public int strengthMod;
         [Range(0, 10)]
         public int intelligenceMod;

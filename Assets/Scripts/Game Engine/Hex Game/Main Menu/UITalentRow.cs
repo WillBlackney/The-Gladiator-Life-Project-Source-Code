@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using WeAreGladiators.Characters;
 
 namespace WeAreGladiators.UI
 {
     public class UITalentRow : MonoBehaviour
     {
-        [SerializeField] TextMeshProUGUI talentNameText;
-        [SerializeField] UITalentIcon talentIcon;
+        [SerializeField] private TextMeshProUGUI talentNameText;
+        [SerializeField] private UITalentIcon talentIcon;
 
         public void HideAndReset()
         {

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace WeAreGladiators.VisualEvents
@@ -55,18 +54,18 @@ namespace WeAreGladiators.VisualEvents
         }
         private void SetScale(GameObject parent, float scalePercentage)
         {
-            Debug.Log("SetScale() called for " + parent.name + ", scaling by " + scalePercentage.ToString());
+            Debug.Log("SetScale() called for " + parent.name + ", scaling by " + scalePercentage);
 
             // get current scale
             Vector3 originalScale = parent.transform.localScale;
-            Debug.Log(parent.name + " original scale: " + originalScale.x.ToString() + ", " + originalScale.y.ToString() + ", " + originalScale.z.ToString());
+            Debug.Log(parent.name + " original scale: " + originalScale.x + ", " + originalScale.y + ", " + originalScale.z);
 
             // calculate new scale
             Vector3 newScale = new Vector3(originalScale.x * scalePercentage, originalScale.y * scalePercentage, originalScale.z * scalePercentage);
 
             // set new scale
             parent.transform.localScale = newScale;
-            Debug.Log(parent.name + " new scale: " + parent.transform.localScale.x.ToString() + ", " + parent.transform.localScale.y.ToString() + ", " + parent.transform.localScale.z.ToString());
+            Debug.Log(parent.name + " new scale: " + parent.transform.localScale.x + ", " + parent.transform.localScale.y + ", " + parent.transform.localScale.z);
         }
         private void StopAllEmissions()
         {

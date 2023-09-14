@@ -1,49 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Utilities;
-using TMPro;
 using DG.Tweening;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UI
 {
     public class TargetGuidanceController : Singleton<TargetGuidanceController>
     {
         #region Components
+
         [Header("Settings")]
-        [SerializeField] Ease onScreenEase = Ease.Linear;
-        [SerializeField] Ease offScreenEase = Ease.Linear;
+        [SerializeField]
+        private Ease onScreenEase = Ease.Linear;
+        [SerializeField] private Ease offScreenEase = Ease.Linear;
 
         [Space(10)]
-
         [Header("Core Components")]
-        [SerializeField] Canvas rootCanvas;
-        [SerializeField] CanvasGroup cg;
-        [SerializeField] TextMeshProUGUI messageText;
-        [SerializeField] Image iconImage;
+        [SerializeField]
+        private Canvas rootCanvas;
+        [SerializeField] private CanvasGroup cg;
+        [SerializeField] private TextMeshProUGUI messageText;
+        [SerializeField] private Image iconImage;
 
         [Space(10)]
-
         [Header("Movement Components")]
-        [SerializeField] RectTransform movementParent;
-        [SerializeField] RectTransform onScreenPosition;
-        [SerializeField] RectTransform offScreenPosition;
+        [SerializeField]
+        private RectTransform movementParent;
+        [SerializeField] private RectTransform onScreenPosition;
+        [SerializeField] private RectTransform offScreenPosition;
 
         [Header("Icon Sprites")]
-        [SerializeField] Sprite allyIcon;
-        [SerializeField] Sprite enemyIcon;
-        [SerializeField] Sprite characterIcon;
-        [SerializeField] Sprite directionIcon;
-        [SerializeField] Sprite tileIcon;
-        [SerializeField] Sprite destinationIcon;
+        [SerializeField]
+        private Sprite allyIcon;
+        [SerializeField] private Sprite enemyIcon;
+        [SerializeField] private Sprite characterIcon;
+        [SerializeField] private Sprite directionIcon;
+        [SerializeField] private Sprite tileIcon;
+        [SerializeField] private Sprite destinationIcon;
 
         #endregion
 
         #region Logic
+
         public void BuildAndShow(GuidanceInstruction guidance, float showSpeed = 0.35f)
         {
-            if (guidance == GuidanceInstruction.None) return;
+            if (guidance == GuidanceInstruction.None)
+            {
+                return;
+            }
             MoveOnScreen(showSpeed);
             BuildMessage(guidance);
         }
@@ -68,7 +73,7 @@ namespace WeAreGladiators.UI
             movementParent.DOKill();
             cg.DOKill();
             movementParent.DOMove(offScreenPosition.position, speed * 0.75f).SetEase(offScreenEase);
-            cg.DOFade(0f, speed).OnComplete(() => 
+            cg.DOFade(0f, speed).OnComplete(() =>
             {
                 rootCanvas.enabled = false;
                 iconImage.transform.DOKill();
@@ -114,7 +119,6 @@ namespace WeAreGladiators.UI
             }
         }
 
-
         #endregion
     }
     public enum GuidanceInstruction
@@ -126,6 +130,6 @@ namespace WeAreGladiators.UI
         SelectACharacter = 4,
         SelectATile = 5,
         SelectADirection = 6,
-        SelectDestination = 7,
+        SelectDestination = 7
     }
 }

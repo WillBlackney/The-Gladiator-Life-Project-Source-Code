@@ -1,9 +1,8 @@
-﻿using WeAreGladiators.UI;
-using WeAreGladiators.Utilities;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.HexTiles
 {
@@ -20,7 +19,5 @@ namespace WeAreGladiators.HexTiles
         public ModalDotRowBuildData[] effectDescriptions;
         public int moveCostModifier;
         public bool allowElevation;
-
-       
     }
 }

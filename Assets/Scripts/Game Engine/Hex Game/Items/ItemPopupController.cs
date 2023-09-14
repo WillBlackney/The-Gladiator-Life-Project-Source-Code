@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Utilities;
-using UnityEngine.UI;
-using TMPro;
+﻿using System;
 using DG.Tweening;
-using WeAreGladiators.Abilities;
-using WeAreGladiators.UI;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 using WeAreGladiators.Perks;
-using WeAreGladiators.TownFeatures;
 using WeAreGladiators.RewardSystems;
-using System;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.Items
 {
@@ -18,42 +15,52 @@ namespace WeAreGladiators.Items
     {
         // Properties + Components
         #region
+
         [Header("Core Panel Components")]
-        [SerializeField] GameObject visualParent;
-        [SerializeField] RectTransform[] transformsRebuilt;
-        [SerializeField] CanvasGroup mainCg;
+        [SerializeField]
+        private GameObject visualParent;
+        [SerializeField] private RectTransform[] transformsRebuilt;
+        [SerializeField] private CanvasGroup mainCg;
 
         [Header("Name + Icon Row Components")]
-        [SerializeField] TextMeshProUGUI nameText;
-        [SerializeField] TextMeshProUGUI descriptionText;
-        [SerializeField] Image itemImage;
+        [SerializeField]
+        private TextMeshProUGUI nameText;
+        [SerializeField] private TextMeshProUGUI descriptionText;
+        [SerializeField] private Image itemImage;
 
         [Header("Type + Rarity Row Components")]
-        [SerializeField] TextMeshProUGUI itemTypeText;
-        [SerializeField] TextMeshProUGUI rarityText;
-        [SerializeField] TextMeshProUGUI goldValueText;
+        [SerializeField]
+        private TextMeshProUGUI itemTypeText;
+        [SerializeField] private TextMeshProUGUI rarityText;
+        [SerializeField] private TextMeshProUGUI goldValueText;
 
         [Header("Damage Modifier Row Components")]
-        [SerializeField] GameObject damageModParent;
-        [SerializeField] TextMeshProUGUI armourDamageText;
-        [SerializeField] TextMeshProUGUI healthDamageText;
-        [SerializeField] TextMeshProUGUI penetrationText;
+        [SerializeField]
+        private GameObject damageModParent;
+        [SerializeField] private TextMeshProUGUI armourDamageText;
+        [SerializeField] private TextMeshProUGUI healthDamageText;
+        [SerializeField] private TextMeshProUGUI penetrationText;
 
         [Header("Granted Ability Row Components")]
-        [SerializeField] GameObject abilitiesParent;
-        [SerializeField] UiAbilityIconRow[] abilityRows;
+        [SerializeField]
+        private GameObject abilitiesParent;
+        [SerializeField] private UiAbilityIconRow[] abilityRows;
 
         [Header("Effects Row Components")]
-        [SerializeField] GameObject effectsParent;
-        [SerializeField] ModalDottedRow[] effectRows;
+        [SerializeField]
+        private GameObject effectsParent;
+        [SerializeField] private ModalDottedRow[] effectRows;
 
         [Header("Armour Components")]
-        [SerializeField] GameObject armourParent;
-        [SerializeField] TextMeshProUGUI armourText;
+        [SerializeField]
+        private GameObject armourParent;
+        [SerializeField] private TextMeshProUGUI armourText;
 
         [Header("Fatigue Penalty Components")]
-        [SerializeField] GameObject fatiguePenaltyParent;
-        [SerializeField] TextMeshProUGUI fatiguePenaltyText;
+        [SerializeField]
+        private GameObject fatiguePenaltyParent;
+        [SerializeField] private TextMeshProUGUI fatiguePenaltyText;
+
         #endregion
 
         // Getters + Accessors
@@ -63,6 +70,7 @@ namespace WeAreGladiators.Items
 
         // Input
         #region
+
         public void OnCombatItemLootIconMousedOver(CombatLootIcon icon)
         {
             FadeInPanel();
@@ -113,12 +121,14 @@ namespace WeAreGladiators.Items
         }
         public void OnInventoryItemMouseExit()
         {
-            HidePanel(); 
+            HidePanel();
         }
+
         #endregion
 
         // Show + Hide Panel Logic
         #region
+
         private void FadeInPanel()
         {
             visualParent.transform.DOKill();
@@ -135,10 +145,12 @@ namespace WeAreGladiators.Items
             mainCg.alpha = 0f;
             visualParent.SetActive(false);
         }
+
         #endregion
 
         // Place + Position Panel
         #region
+
         private void PlacePanelAboveTransform(Transform t)
         {
             RectTransform rect = visualParent.GetComponent<RectTransform>();
@@ -183,6 +195,7 @@ namespace WeAreGladiators.Items
             rect.position = view.transform.position;
             rect.localPosition = new Vector3(rect.localPosition.x - xOffset, rect.localPosition.y - yOffset, 0);
         }
+
         #endregion
 
         // Build + Place Panel
@@ -213,7 +226,6 @@ namespace WeAreGladiators.Items
             // Row 6
             BuildGrantedEffectsSection(item);
 
-          
         }
         private string GetItemTypeString(ItemData item)
         {
@@ -228,31 +240,42 @@ namespace WeAreGladiators.Items
                 {
                     ret = "Offhand";
                 }
-                else ret = TextLogic.SplitByCapitals(item.handRequirement.ToString());
-                ret += " " + item.weaponClass.ToString();
-            }        
+                else
+                {
+                    ret = TextLogic.SplitByCapitals(item.handRequirement.ToString());
+                }
+                ret += " " + item.weaponClass;
+            }
             else if (item.itemType == ItemType.Trinket)
+            {
                 ret = "Trinket";
+            }
             else if (item.itemType == ItemType.Head)
-                ret = "Head Armour"; 
+            {
+                ret = "Head Armour";
+            }
             else if (item.itemType == ItemType.Body)
+            {
                 ret = "Chest Armour";
+            }
 
             return ret;
         }
         private void BuildGrantedAbilitiesSection(ItemData item)
         {
             abilitiesParent.SetActive(false);
-            for(int i = 0; i < abilityRows.Length; i++)            
+            for (int i = 0; i < abilityRows.Length; i++)
+            {
                 abilityRows[i].Hide();
-            
-            if(item.grantedAbilities.Count > 0)
+            }
+
+            if (item.grantedAbilities.Count > 0)
             {
                 abilitiesParent.SetActive(true);
-                for(int i = 0; i < item.grantedAbilities.Count; i++)
+                for (int i = 0; i < item.grantedAbilities.Count; i++)
                 {
                     abilityRows[i].Build(item.grantedAbilities[i]);
-                }               
+                }
             }
         }
 
@@ -260,18 +283,18 @@ namespace WeAreGladiators.Items
         {
             damageModParent.SetActive(false);
 
-            if(item.IsMeleeWeapon || item.IsRangedWeapon)
+            if (item.IsMeleeWeapon || item.IsRangedWeapon)
             {
                 damageModParent.SetActive(true);
-                healthDamageText.text = Math.Round(item.healthDamage * 100f).ToString() +"%";
-                armourDamageText.text = Math.Round(item.armourDamage * 100f).ToString() + "%";
-                penetrationText.text = Math.Round(item.armourPenetration * 100f).ToString() + "%";
+                healthDamageText.text = Math.Round(item.healthDamage * 100f) + "%";
+                armourDamageText.text = Math.Round(item.armourDamage * 100f) + "%";
+                penetrationText.text = Math.Round(item.armourPenetration * 100f) + "%";
             }
         }
         private void BuildArmourSection(ItemData item)
         {
             armourParent.SetActive(false);
-            if(item.armourAmount != 0)
+            if (item.armourAmount != 0)
             {
                 armourParent.SetActive(true);
                 armourText.text = item.armourAmount.ToString();
@@ -282,13 +305,15 @@ namespace WeAreGladiators.Items
             // Reset
             effectsParent.SetActive(false);
             for (int i = 0; i < effectRows.Length; i++)
+            {
                 effectRows[i].gameObject.SetActive(false);
+            }
 
             int iBoost = 0;
             if (item.itemEffects.Count > 0)
             {
                 effectsParent.SetActive(true);
-                for(int i = 0; i < item.itemEffects.Count;i++)
+                for (int i = 0; i < item.itemEffects.Count; i++)
                 {
                     ModalDottedRow row = effectRows[i + iBoost];
                     ItemEffect effect = item.itemEffects[i];
@@ -299,15 +324,24 @@ namespace WeAreGladiators.Items
                         dotStyle = DotStyle.Green;
                         string attributeText = TextLogic.SplitByCapitals(effect.attributeModified.ToString());
                         string modAmountString = "";
-                        if (effect.modAmount >= 0) modAmountString += "+";
-                        else dotStyle = DotStyle.Red;
+                        if (effect.modAmount >= 0)
+                        {
+                            modAmountString += "+";
+                        }
+                        else
+                        {
+                            dotStyle = DotStyle.Red;
+                        }
                         modAmountString += effect.modAmount.ToString();
                         if (effect.attributeModified == ItemCoreAttribute.WeaponDamageBonus)
                         {
                             modAmountString += "%";
                             attributeText = TextLogic.ReturnColoredText("Weapon Ability", TextLogic.neutralYellow) + " damage";
                         }
-                        else attributeText = TextLogic.ReturnColoredText(attributeText, TextLogic.neutralYellow);
+                        else
+                        {
+                            attributeText = TextLogic.ReturnColoredText(attributeText, TextLogic.neutralYellow);
+                        }
 
                         row.Build(TextLogic.ReturnColoredText(modAmountString + " ", TextLogic.blueNumber) + attributeText, dotStyle);
 
@@ -319,12 +353,12 @@ namespace WeAreGladiators.Items
                         string one = TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkApplied.perkTag.ToString()), TextLogic.neutralYellow);
                         string two = effect.effectChance.ToString();
 
-                        row.Build(String.Format("On hit: Apply {0} {1} ({2}% chance).", zero, one, two), DotStyle.Green);
+                        row.Build(string.Format("On hit: Apply {0} {1} ({2}% chance).", zero, one, two), DotStyle.Green);
 
                     }
                     else if (item.itemEffects[i].effectType == ItemEffectType.GainPerk)
                     {
-                        var pd = effect.perkGained.Data;
+                        PerkIconData pd = effect.perkGained.Data;
                         string s = TextLogic.ConvertCustomStringListToString(pd.passiveDescription);
                         s = s.Replace("X", effect.perkGained.stacks.ToString());
                         row.Build(s, dotStyle);
@@ -332,31 +366,31 @@ namespace WeAreGladiators.Items
 
                     else if (item.itemEffects[i].effectType == ItemEffectType.GainPerkTurnStart)
                     {
-                        row.Build("On turn start, " + TextLogic.ReturnColoredText(effect.gainPerkChance.ToString() + "%", TextLogic.blueNumber) + 
-                           " chance to gain " + TextLogic.ReturnColoredText(effect.perkGained.stacks.ToString(), TextLogic.blueNumber) + " " +
-                           TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkGained.perkTag.ToString()), TextLogic.neutralYellow), DotStyle.Green);
+                        row.Build("On turn start, " + TextLogic.ReturnColoredText(effect.gainPerkChance + "%", TextLogic.blueNumber) +
+                            " chance to gain " + TextLogic.ReturnColoredText(effect.perkGained.stacks.ToString(), TextLogic.blueNumber) + " " +
+                            TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkGained.perkTag.ToString()), TextLogic.neutralYellow), DotStyle.Green);
                     }
                     else if (item.itemEffects[i].effectType == ItemEffectType.GainPerkCombatStart)
                     {
                         row.Build("On combat start, gain " + TextLogic.ReturnColoredText(effect.perkGained.stacks.ToString(), TextLogic.blueNumber) + " " +
-                           TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkGained.perkTag.ToString()), TextLogic.neutralYellow) + ".", DotStyle.Green);
+                            TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.perkGained.perkTag.ToString()), TextLogic.neutralYellow) + ".", DotStyle.Green);
                     }
                     else if (item.itemEffects[i].effectType == ItemEffectType.InnateWeaponEffect)
                     {
-                        if(item.itemEffects[i].innateItemEffectType == InnateItemEffectType.InnateAccuracyModifier)
+                        if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.InnateAccuracyModifier)
                         {
                             // +X Hit Chance with attacks using this weapon.
                             dotStyle = DotStyle.Green;
                             string zero = "+";
                             string one = TextLogic.ReturnColoredText(effect.innateAccuracyMod.ToString(), TextLogic.blueNumber);
                             string two = TextLogic.ReturnColoredText("Accuracy", TextLogic.neutralYellow);
-                            
-                            if(effect.innateAccuracyMod < 0)
+
+                            if (effect.innateAccuracyMod < 0)
                             {
                                 dotStyle = DotStyle.Red;
                                 zero = "";
                             }
-                            row.Build(String.Format("{0}{1} {2} with attacks using this weapon.", zero, one, two), dotStyle);
+                            row.Build(string.Format("{0}{1} {2} with attacks using this weapon.", zero, one, two), dotStyle);
                         }
                         else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.InnateAccuracyAgainstAdjacentModifier)
                         {
@@ -371,7 +405,7 @@ namespace WeAreGladiators.Items
                                 dotStyle = DotStyle.Red;
                                 zero = "";
                             }
-                            row.Build(String.Format("{0}{1} {2} with attacks using this weapon against adjacent targets.", zero, one, two), dotStyle);
+                            row.Build(string.Format("{0}{1} {2} with attacks using this weapon against adjacent targets.", zero, one, two), dotStyle);
                         }
                         else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.InnatePerkGainedOnUse)
                         {
@@ -380,29 +414,29 @@ namespace WeAreGladiators.Items
                             string zero = TextLogic.ReturnColoredText(effect.innatePerkGainedOnUse.stacks.ToString(), TextLogic.blueNumber);
                             string one = TextLogic.ReturnColoredText(TextLogic.SplitByCapitals(effect.innatePerkGainedOnUse.perkTag.ToString()), TextLogic.neutralYellow);
 
-                            row.Build(String.Format("Whenever you attack with this weapon, apply {0} {1} to self.", zero, one), DotStyle.Red);
+                            row.Build(string.Format("Whenever you attack with this weapon, apply {0} {1} to self.", zero, one), DotStyle.Red);
                         }
                         else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.BonusMeleeRange)
                         {
                             dotStyle = DotStyle.Red;
                             string symbol = "";
-                            if(effect.innateWeaponRangeBonus > 0)
+                            if (effect.innateWeaponRangeBonus > 0)
                             {
                                 dotStyle = DotStyle.Green;
                                 symbol = "+";
                             }
-                            string zero = TextLogic.ReturnColoredText(symbol + effect.innateWeaponRangeBonus.ToString(), TextLogic.blueNumber);
-                            row.Build(String.Format("{0} range with attacks using this weapon.", zero), dotStyle);
+                            string zero = TextLogic.ReturnColoredText(symbol + effect.innateWeaponRangeBonus, TextLogic.blueNumber);
+                            row.Build(string.Format("{0} range with attacks using this weapon.", zero), dotStyle);
 
                         }
                         else if (item.itemEffects[i].innateItemEffectType == InnateItemEffectType.PenetrationBonusOnBackstab)
                         {
                             // bonus penetration on backstab
                             dotStyle = DotStyle.Green;
-                            string zero = TextLogic.ReturnColoredText("+" + effect.innateBackstabPenetrationBonus.ToString() +"%", TextLogic.blueNumber);
+                            string zero = TextLogic.ReturnColoredText("+" + effect.innateBackstabPenetrationBonus + "%", TextLogic.blueNumber);
                             string one = TextLogic.ReturnColoredText("Penetration", TextLogic.neutralYellow);
-                            string two = TextLogic.ReturnColoredText("Backstabbing" ,TextLogic.neutralYellow);
-                            row.Build(String.Format("{0} {1} when {2} with this weapon.", zero, one, two), dotStyle);
+                            string two = TextLogic.ReturnColoredText("Backstabbing", TextLogic.neutralYellow);
+                            row.Build(string.Format("{0} {1} when {2} with this weapon.", zero, one, two), dotStyle);
 
                         }
                     }
@@ -416,10 +450,10 @@ namespace WeAreGladiators.Items
             if (item.fatiguePenalty > 0)
             {
                 fatiguePenaltyParent.SetActive(true);
-                fatiguePenaltyText.text = "-" + item.fatiguePenalty.ToString();
+                fatiguePenaltyText.text = "-" + item.fatiguePenalty;
             }
         }
-        #endregion
 
+        #endregion
     }
 }

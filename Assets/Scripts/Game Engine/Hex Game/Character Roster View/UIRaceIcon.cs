@@ -1,11 +1,8 @@
-﻿using WeAreGladiators.Perks;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using WeAreGladiators.Characters;
-using System.Linq;
 
 namespace WeAreGladiators.UI
 {
@@ -14,26 +11,23 @@ namespace WeAreGladiators.UI
     {
         // Properties + Components
         #region
+
         [SerializeField] private Image raceImage;
         [SerializeField] [HideInInspector] private RaceDataSO raceData;
+
         #endregion
 
         // Getters + Accessors
         #region
-        public Image RaceImage
-        {
-            get { return raceImage; }
-        }
-        public RaceDataSO RaceData
-        {
-            get { return raceData; }
-        }
 
+        public Image RaceImage => raceImage;
+        public RaceDataSO RaceData => raceData;
 
         #endregion
 
         // Logic
-        #region      
+        #region
+
         public void BuildFromRacialData(RaceDataSO p)
         {
             HideAndReset();
@@ -47,17 +41,19 @@ namespace WeAreGladiators.UI
             gameObject.SetActive(false);
             raceData = null;
         }
+
         #endregion
 
         // Input
         #region
+
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (raceData != null)
             {
                 KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(raceData.racialPassiveKeyWords.ToList());
                 MainModalController.Instance.BuildAndShowModal(raceData);
-            }                
+            }
         }
         public void OnPointerExit(PointerEventData eventData)
         {
@@ -67,8 +63,7 @@ namespace WeAreGladiators.UI
                 KeyWordLayoutController.Instance.FadeOutMainView();
             }
         }
+
         #endregion
-
-
     }
 }

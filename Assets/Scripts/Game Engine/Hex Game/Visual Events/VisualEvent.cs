@@ -1,7 +1,5 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using WeAreGladiators.Characters;
 
 namespace WeAreGladiators.VisualEvents
@@ -9,21 +7,16 @@ namespace WeAreGladiators.VisualEvents
     public class VisualEvent
     {
         public TaskTracker cData;
+        public float endDelay;
         public Action eventFunction;
 
-        public bool isPlaying;
-        public bool isClosed;
         public VisualEventType eventType;
-        public float startDelay;
-        public float endDelay;
+        public bool isClosed;
+
+        public bool isPlaying;
 
         public HexCharacterModel myCharacter;
-
-        private List<VisualEvent> eventStack = new List<VisualEvent>();
-        public List<VisualEvent> EventStack
-        {
-            get { return eventStack; }
-        }
+        public float startDelay;
 
         public VisualEvent(Action _eventFunction, float _startDelay, float _endDelay, VisualEventType _eventType)
         {
@@ -32,14 +25,17 @@ namespace WeAreGladiators.VisualEvents
             endDelay = _endDelay;
             eventType = _eventType;
         }
+        public List<VisualEvent> EventStack { get; } = new List<VisualEvent>();
         public void AddEventToStack(VisualEvent newEvent)
         {
-            eventStack.Add(newEvent);
+            EventStack.Add(newEvent);
         }
         public void RemoveEventFromStack(VisualEvent visualEvent)
         {
-            if (eventStack.Contains(visualEvent))
-                eventStack.Remove(visualEvent);
+            if (EventStack.Contains(visualEvent))
+            {
+                EventStack.Remove(visualEvent);
+            }
         }
         public VisualEvent SetStartDelay(float delay)
         {
@@ -60,8 +56,7 @@ namespace WeAreGladiators.VisualEvents
     public enum VisualEventType
     {
         Single = 1,
-        StackParent = 2,
+        StackParent = 2
     }
-
 
 }

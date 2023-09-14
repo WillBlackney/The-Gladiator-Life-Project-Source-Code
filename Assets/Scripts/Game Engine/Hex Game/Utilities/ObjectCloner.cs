@@ -2,13 +2,14 @@
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 namespace WeAreGladiators.Utilities
 {
     public static class ObjectCloner
     {
         /// <summary>
-        /// Perform a deep Copy of the object.
+        ///     Perform a deep Copy of the object.
         /// </summary>
         /// <typeparam name="T">The type of object being copied.</typeparam>
         /// <param name="source">The object instance to copy.</param>
@@ -21,7 +22,7 @@ namespace WeAreGladiators.Utilities
             }
 
             // Don't serialize a null object, simply return the default for that object
-            if (Object.ReferenceEquals(source, null))
+            if (ReferenceEquals(source, null))
             {
                 return default(T);
             }
@@ -32,24 +33,23 @@ namespace WeAreGladiators.Utilities
             {
                 formatter.Serialize(stream, source);
                 stream.Seek(0, SeekOrigin.Begin);
-                return (T)formatter.Deserialize(stream);
+                return (T) formatter.Deserialize(stream);
             }
         }
 
         public static T CloneJSON<T>(this T source)
         {
             // Don't serialize a null object, simply return the default for that object
-            if (Object.ReferenceEquals(source, null))
+            if (ReferenceEquals(source, null))
             {
-                UnityEngine.Debug.LogWarning("ObjectCloner.CloneJSON() was givien a null object to clone, returning the original...");
+                Debug.LogWarning("ObjectCloner.CloneJSON() was givien a null object to clone, returning the original...");
                 return default(T);
             }
 
             Type typeParameterType = typeof(T);
 
-            var jsonString = UnityEngine.JsonUtility.ToJson(source);
-            return (T)UnityEngine.JsonUtility.FromJson(jsonString, typeParameterType);
+            string jsonString = JsonUtility.ToJson(source);
+            return (T) JsonUtility.FromJson(jsonString, typeParameterType);
         }
-
     }
 }

@@ -1,18 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using TMPro;
-using WeAreGladiators.Characters;
 using UnityEngine.UI;
+using WeAreGladiators.Characters;
 using WeAreGladiators.Perks;
 
 namespace WeAreGladiators.UI
 {
     public class PerkTalentLevelUpPage : MonoBehaviour
     {
+
+        // Getters + Accessors
+        #region
+
+        public PerkTalentLevelUpCard[] AllLevelUpCards => allLevelUpCards;
+
+        #endregion
         // Properties + Components
         #region
-        [Header("Core Components")]       
+
+        [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
         [SerializeField] private TextMeshProUGUI headerText;
         [SerializeField] private PerkTalentLevelUpCard[] allLevelUpCards;
@@ -24,21 +30,18 @@ namespace WeAreGladiators.UI
 
         // Non inspector fields
         private HexCharacterData currentCharacter;
-        #endregion
 
-        // Getters + Accessors
-        #region
-        public PerkTalentLevelUpCard[] AllLevelUpCards
-        {
-            get { return allLevelUpCards; }
-        }
         #endregion
 
         // Input
         #region
+
         public void OnConfirmButtonClicked()
         {
-            if (!HasMadeSelection()) return;
+            if (!HasMadeSelection())
+            {
+                return;
+            }
             HandleSelectionConfirmed();
 
         }
@@ -47,15 +50,16 @@ namespace WeAreGladiators.UI
             currentCharacter = null;
             mainVisualParent.SetActive(false);
         }
+
         #endregion
 
         // Logic
-        #region     
-       
+        #region
+
         private bool HasMadeSelection()
         {
             bool ret = false;
-            foreach(PerkTalentLevelUpCard card in allLevelUpCards)
+            foreach (PerkTalentLevelUpCard card in allLevelUpCards)
             {
                 if (card.Selected)
                 {
@@ -83,10 +87,10 @@ namespace WeAreGladiators.UI
             PerkTalentLevelUpCard card = GetSelectedCard();
 
             // Perk
-            if(card.PerkData != null)
+            if (card.PerkData != null)
             {
                 PerkController.Instance.ModifyPerkOnCharacterData(currentCharacter.passiveManager, card.PerkData.perkTag, 1);
-                currentCharacter.perkPoints -= 1;                
+                currentCharacter.perkPoints -= 1;
             }
 
             // Talent
@@ -103,11 +107,16 @@ namespace WeAreGladiators.UI
         }
         public void UpdateConfirmButtonState()
         {
-            if (HasMadeSelection())           
-                confirmButtonImage.sprite = readyImage;            
-            else confirmButtonImage.sprite = notReadyImage;
+            if (HasMadeSelection())
+            {
+                confirmButtonImage.sprite = readyImage;
+            }
+            else
+            {
+                confirmButtonImage.sprite = notReadyImage;
+            }
         }
-        #endregion
 
+        #endregion
     }
 }

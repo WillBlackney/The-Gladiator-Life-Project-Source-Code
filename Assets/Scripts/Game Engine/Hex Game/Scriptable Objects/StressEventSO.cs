@@ -1,45 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace WeAreGladiators.Combat
 {
     [CreateAssetMenu(fileName = "New Stress Event Data", menuName = "Stress Event Data", order = 52)]
     public class StressEventSO : ScriptableObject
     {
-        [SerializeField] StressEventType type;
-        [SerializeField] bool negativeEvent = true;
+        [SerializeField] private StressEventType type;
+        [SerializeField] private bool negativeEvent = true;
 
         [Range(-50, 50)]
-        [SerializeField] int stressAmountMin;
+        [SerializeField]
+        private int stressAmountMin;
         [Range(-50, 50)]
-        [SerializeField] int stressAmountMax;
+        [SerializeField]
+        private int stressAmountMax;
 
-        [Range(1,100)]
-        [SerializeField] int successChance;
+        [Range(1, 100)]
+        [SerializeField]
+        private int successChance;
 
-        public StressEventType Type
-        {
-            get { return type; }
-        }
-        public bool NegativeEvent
-        {
-            get { return negativeEvent; }
-        }
-        public int StressAmountMin
-        {
-            get { return stressAmountMin; }
-        }
-        public int StressAmountMax
-        {
-            get { return stressAmountMax; }
-        }
-        public int SuccessChance
-        {
-            get { return successChance; }
-        }
-
+        public StressEventType Type => type;
+        public bool NegativeEvent => negativeEvent;
+        public int StressAmountMin => stressAmountMin;
+        public int StressAmountMax => stressAmountMax;
+        public int SuccessChance => successChance;
     }
 
-    
 }

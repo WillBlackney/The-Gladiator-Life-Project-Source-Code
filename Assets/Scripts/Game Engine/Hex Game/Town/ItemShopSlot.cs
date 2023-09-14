@@ -1,94 +1,107 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Abilities;
+﻿using DG.Tweening;
+using Sirenix.Serialization;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using WeAreGladiators.Libraries;
+using WeAreGladiators.Boons;
+using WeAreGladiators.Items;
 using WeAreGladiators.Player;
 using WeAreGladiators.Utilities;
-using WeAreGladiators.UI;
-using WeAreGladiators.Items;
-using DG.Tweening;
-using Sirenix.Serialization;
-using WeAreGladiators.Boons;
 
 namespace WeAreGladiators.TownFeatures
 {
     public class ItemShopSlot : MonoBehaviour
     {
-        // Properties + Components
-        #region
-        [Header("Components")]
-        [SerializeField] TextMeshProUGUI itemNameText;
-        [SerializeField] TextMeshProUGUI goldCostText;
-        [SerializeField] Image itemImage;
-        [SerializeField] Transform scaleParent;
-
-        // Non inspector fields
-        private ItemShopData myData;
-        #endregion
 
         // Getters + Accessors
         #region
-        public ItemShopData MyData
-        {
-            get { return myData; }
-        }
+
+        public ItemShopData MyData { get; private set; }
+
+        #endregion
+        // Properties + Components
+        #region
+
+        [Header("Components")]
+        [SerializeField]
+        private TextMeshProUGUI itemNameText;
+        [SerializeField] private TextMeshProUGUI goldCostText;
+        [SerializeField] private Image itemImage;
+        [SerializeField] private Transform scaleParent;
+
+        // Non inspector fields
+
         #endregion
 
         // Input
         #region
+
         public void MouseClick()
-        {            
+        {
             if (AbleToBuy())
-                TownController.Instance.HandleBuyItemFromArmoury(MyData);            
+            {
+                TownController.Instance.HandleBuyItemFromArmoury(MyData);
+            }
         }
         public void MouseEnter()
-        {            
-            if (myData != null)            
-                ItemPopupController.Instance.OnShopItemMousedOver(this);         
+        {
+            if (MyData != null)
+            {
+                ItemPopupController.Instance.OnShopItemMousedOver(this);
+            }
         }
         public void MouseExit()
-        {            
-            if (myData != null)            
-                ItemPopupController.Instance.HidePanel();          
+        {
+            if (MyData != null)
+            {
+                ItemPopupController.Instance.HidePanel();
+            }
         }
+
         #endregion
 
         // Logic
         #region
+
         private bool AbleToBuy()
         {
             bool ret = false;
 
             if (MyData.GoldCost <= PlayerDataController.Instance.CurrentGold &&
                 InventoryController.Instance.HasFreeInventorySpace())
+            {
                 ret = true;
+            }
             return ret;
         }
         public void BuildFromItemShopData(ItemShopData data)
         {
             gameObject.SetActive(true);
-            myData = data;
+            MyData = data;
             itemNameText.text = data.Item.itemName;
             itemImage.sprite = data.Item.ItemSprite;
 
             // Color cost text red if not enough gold, or green if selling at a discount
             string col = "<color=#FFFFFF>";
-            if (PlayerDataController.Instance.CurrentGold < data.GoldCost) col = TextLogic.lightRed;
-            else if (data.GoldCost < data.Item.baseGoldValue) col = TextLogic.lightGreen;
+            if (PlayerDataController.Instance.CurrentGold < data.GoldCost)
+            {
+                col = TextLogic.lightRed;
+            }
+            else if (data.GoldCost < data.Item.baseGoldValue)
+            {
+                col = TextLogic.lightGreen;
+            }
             goldCostText.text = TextLogic.ReturnColoredText(data.GoldCost.ToString(), col);
         }
         public void Reset()
         {
             gameObject.SetActive(false);
-            myData = null;
+            MyData = null;
         }
         public void Enlarge()
         {
             // Calculate enlargement scale and convert it to to a vector 3
-            Vector3 endScale = new Vector3(1.15f,1.15f, 1f);
+            Vector3 endScale = new Vector3(1.15f, 1.15f, 1f);
 
             // Scale the transform to its new size
             scaleParent.DOKill();
@@ -103,15 +116,16 @@ namespace WeAreGladiators.TownFeatures
             scaleParent.DOKill();
             scaleParent.DOScale(endScale, speed);
         }
+
         #endregion
     }
 
     public class ItemShopData
     {
         [OdinSerialize]
-        private ItemData item;
-        [OdinSerialize]
         private int baseGoldCost;
+        [OdinSerialize]
+        private ItemData item;
 
         public ItemShopData(ItemData item, int baseGoldCost)
         {
@@ -121,20 +135,20 @@ namespace WeAreGladiators.TownFeatures
 
         public int GoldCost
         {
-            get 
+            get
             {
                 float priceMod = 1f;
-                if(BoonController.Instance != null)
+                if (BoonController.Instance != null)
                 {
-                    if (BoonController.Instance.DoesPlayerHaveBoon(BoonTag.ArmourySurplus)) priceMod -= 0.5f;
+                    if (BoonController.Instance.DoesPlayerHaveBoon(BoonTag.ArmourySurplus))
+                    {
+                        priceMod -= 0.5f;
+                    }
                 }
 
-                return (int) (baseGoldCost * priceMod); 
+                return (int) (baseGoldCost * priceMod);
             }
         }
-        public ItemData Item
-        {
-            get { return item; }
-        }
+        public ItemData Item => item;
     }
 }

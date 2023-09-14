@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,22 +7,23 @@ namespace WeAreGladiators.StoryEvents
     public class StoryEventResultItemRow : MonoBehaviour
     {
         [Header("Core Components")]
-        [SerializeField] GameObject visualParent;
-        [SerializeField] TextMeshProUGUI messageText;
-        [SerializeField] Image unframedIconImage;
+        [SerializeField]
+        private GameObject visualParent;
+        [SerializeField] private TextMeshProUGUI messageText;
+        [SerializeField] private Image unframedIconImage;
 
         [Space(10)]
-
         [Header("Framed Image Components")]
-        [SerializeField] Image framedIconImage;
-        [SerializeField] GameObject framedIconImageParent;
+        [SerializeField]
+        private Image framedIconImage;
+        [SerializeField] private GameObject framedIconImageParent;
 
         [Space(10)]
-
         [Header("Sprites")]
-        [SerializeField] Sprite star;
-        [SerializeField] Sprite skull;
-        [SerializeField] Sprite goldCoins;
+        [SerializeField]
+        private Sprite star;
+        [SerializeField] private Sprite skull;
+        [SerializeField] private Sprite goldCoins;
         public void Hide()
         {
             visualParent.SetActive(false);
@@ -37,7 +36,7 @@ namespace WeAreGladiators.StoryEvents
             messageText.text = data.message;
             // to do: set icon sprite
 
-            if(data.iconType == ResultRowIcon.FramedSprite && data.iconSprite != null)
+            if (data.iconType == ResultRowIcon.FramedSprite && data.iconSprite != null)
             {
                 framedIconImageParent.SetActive(true);
                 framedIconImage.sprite = data.iconSprite;
@@ -47,7 +46,7 @@ namespace WeAreGladiators.StoryEvents
                 unframedIconImage.gameObject.SetActive(true);
                 unframedIconImage.sprite = data.iconSprite;
             }
-            else if(data.iconType == ResultRowIcon.Skull)
+            else if (data.iconType == ResultRowIcon.Skull)
             {
                 unframedIconImage.gameObject.SetActive(true);
                 unframedIconImage.sprite = skull;
@@ -73,6 +72,6 @@ namespace WeAreGladiators.StoryEvents
         Skull = 3,
         UserIcon = 4,
         Star = 5,
-        GoldCoins = 7,
+        GoldCoins = 7
     }
 }

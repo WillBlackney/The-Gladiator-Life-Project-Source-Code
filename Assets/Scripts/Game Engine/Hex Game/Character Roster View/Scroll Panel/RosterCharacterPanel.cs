@@ -1,36 +1,46 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
-using WeAreGladiators.UCM;
-using WeAreGladiators.Characters;
-using WeAreGladiators.TownFeatures;
-using WeAreGladiators.Libraries;
 using UnityEngine.EventSystems;
-using WeAreGladiators.Items;
+using UnityEngine.UI;
+using WeAreGladiators.Characters;
 using WeAreGladiators.GameIntroEvent;
+using WeAreGladiators.Items;
+using WeAreGladiators.Libraries;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.UCM;
 
 namespace WeAreGladiators.UI
 {
     public class RosterCharacterPanel : MonoBehaviour, IPointerClickHandler
     {
+
+        // Getters + Accessors
+        #region
+
+        public HexCharacterData MyCharacterData { get; private set; }
+
+        #endregion
         // Components
         #region
+
         [Header("Core Components")]
-        [SerializeField] TextMeshProUGUI nameText;
-        [SerializeField] UniversalCharacterModel portaitModel;
+        [SerializeField]
+        private TextMeshProUGUI nameText;
+        [SerializeField] private UniversalCharacterModel portaitModel;
 
         [Header("Health Bar Components")]
-        [SerializeField] Slider healthBar;
-        [SerializeField] TextMeshProUGUI  healthText;
+        [SerializeField]
+        private Slider healthBar;
+        [SerializeField] private TextMeshProUGUI healthText;
 
         [Header("Stress Bar Components")]
-        [SerializeField] Slider stressBar;
+        [SerializeField]
+        private Slider stressBar;
         //[SerializeField] TextMeshProUGUI stressText;
 
         [Header("Perk + Injury Components")]
-        [SerializeField] UIPerkIcon[] perkIcons;
+        [SerializeField]
+        private UIPerkIcon[] perkIcons;
 
         [Header("Activity Indicator Components")]
         [SerializeField] private GameObject[] activityIndicatorParents;
@@ -41,22 +51,15 @@ namespace WeAreGladiators.UI
         [SerializeField] private TextMeshProUGUI currentLevelText;
 
         // Non-inspector properties
-        private HexCharacterData myCharacterData;
-        #endregion
 
-        // Getters + Accessors
-        #region
-        public HexCharacterData MyCharacterData
-        {
-            get { return myCharacterData; }
-        }
         #endregion
 
         // Logic
         #region
+
         public void BuildFromCharacterData(HexCharacterData data)
         {
-            myCharacterData = data;
+            MyCharacterData = data;
 
             UpdateActivityIndicator();
 
@@ -71,19 +74,23 @@ namespace WeAreGladiators.UI
             portaitModel.SetBaseAnim();
 
             // Build bars
-            healthBar.value = (float)((float) data.currentHealth / (float) StatCalculator.GetTotalMaxHealth(data));
-            stressBar.value = (float)((float) data.currentStress / 20f);
+            healthBar.value = data.currentHealth / (float) StatCalculator.GetTotalMaxHealth(data);
+            stressBar.value = data.currentStress / 20f;
 
             // Reset perk icons
             foreach (UIPerkIcon b in perkIcons)
+            {
                 b.HideAndReset();
+            }
 
             // Injury perk icons
             for (int i = 0; i < data.passiveManager.perks.Count && i < perkIcons.Length; i++)
             {
-                if(data.passiveManager.perks[i].Data.isInjury ||
+                if (data.passiveManager.perks[i].Data.isInjury ||
                     data.passiveManager.perks[i].Data.isPermanentInjury)
+                {
                     perkIcons[i].BuildFromActivePerk(data.passiveManager.perks[i]);
+                }
             }
 
             // Level stuff
@@ -92,23 +99,26 @@ namespace WeAreGladiators.UI
         }
         public void UpdateActivityIndicator()
         {
-            if (myCharacterData.currentTownActivity == TownActivity.None)
+            if (MyCharacterData.currentTownActivity == TownActivity.None)
             {
                 SetIndicatorParentViewStates(false);
             }
             else
             {
                 SetIndicatorParentViewStates(true);
-                activityIndicatorImage.sprite = SpriteLibrary.Instance.GetTownActivitySprite(myCharacterData.currentTownActivity);
+                activityIndicatorImage.sprite = SpriteLibrary.Instance.GetTownActivitySprite(MyCharacterData.currentTownActivity);
             }
         }
         private void UpdateLevelUpIndicator()
         {
-            if (myCharacterData == null) return;
+            if (MyCharacterData == null)
+            {
+                return;
+            }
             levelUpIndicator.Hide();
-            if (myCharacterData.attributeRolls.Count > 0 ||
-                myCharacterData.talentPoints > 0 ||
-                myCharacterData.perkPoints > 0)
+            if (MyCharacterData.attributeRolls.Count > 0 ||
+                MyCharacterData.talentPoints > 0 ||
+                MyCharacterData.perkPoints > 0)
             {
                 Debug.Log("Showing indicator!");
                 levelUpIndicator.ShowAndAnimate();
@@ -120,26 +130,28 @@ namespace WeAreGladiators.UI
         }
         public void ResetAndHide()
         {
-            myCharacterData = null;
+            MyCharacterData = null;
             gameObject.SetActive(false);
         }
         public void OnClickAndDragStart()
         {
             if ((TownController.Instance.HospitalViewIsActive ||
-                 TownController.Instance.LibraryViewIsActive ||
-                 TownController.Instance.DeploymentViewIsActive) &&
-                 !InventoryController.Instance.VisualParent.activeSelf &&
-                 !GameIntroController.Instance.ViewIsActive)
+                    TownController.Instance.LibraryViewIsActive ||
+                    TownController.Instance.DeploymentViewIsActive) &&
+                !InventoryController.Instance.VisualParent.activeSelf &&
+                !GameIntroController.Instance.ViewIsActive)
             {
                 PortraitDragController.Instance.OnRosterCharacterPanelDragStart(this);
             }
-           
+
         }
         public void OnLevelButtonClicked()
         {
-            if(!InventoryController.Instance.VisualParent.activeSelf &&
+            if (!InventoryController.Instance.VisualParent.activeSelf &&
                 !GameIntroController.Instance.ViewIsActive)
-                CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
+            {
+                CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(MyCharacterData);
+            }
         }
         private void SetIndicatorParentViewStates(bool onOrOff)
         {
@@ -149,13 +161,14 @@ namespace WeAreGladiators.UI
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if(eventData.button == PointerEventData.InputButton.Right &&
+            if (eventData.button == PointerEventData.InputButton.Right &&
                 !InventoryController.Instance.VisualParent.activeSelf &&
                 !GameIntroController.Instance.ViewIsActive)
             {
-                CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(myCharacterData);
+                CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(MyCharacterData);
             }
         }
+
         #endregion
     }
 }

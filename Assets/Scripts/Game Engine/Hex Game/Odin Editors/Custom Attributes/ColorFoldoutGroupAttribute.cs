@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace WeAreGladiators.CustomOdinGUI
 {
@@ -22,13 +22,12 @@ namespace WeAreGladiators.CustomOdinGUI
 
         protected override void CombineValuesWith(PropertyGroupAttribute other)
         {
-            var otherAttr = (ColorFoldoutGroupAttribute)other;
+            ColorFoldoutGroupAttribute otherAttr = (ColorFoldoutGroupAttribute) other;
 
             R = Mathf.Max(otherAttr.R, R);
             G = Mathf.Max(otherAttr.G, G);
             B = Mathf.Max(otherAttr.B, B);
             A = Mathf.Max(otherAttr.A, A);
         }
-
     }
 }

@@ -1,51 +1,64 @@
-﻿using WeAreGladiators.Characters;
-using WeAreGladiators.HexTiles;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using WeAreGladiators.Combat;
-using WeAreGladiators.Perks;
-using WeAreGladiators.Items;
 using WeAreGladiators.Abilities;
-using UnityEngine.Rendering.VirtualTexturing;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Combat;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Items;
+using WeAreGladiators.Perks;
 
 namespace WeAreGladiators
 {
-    public static class StatCalculator 
+    public static class StatCalculator
     {
 
         // Core Attributes
         #region
+
         public static int GetTotalMight(HexCharacterModel c)
         {
             int might = c.attributeSheet.might.value;
             float mod = 1f;
 
             // Injuries
-            if(!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
+            if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenArm))
+                {
                     mod -= 0.5f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.TornRotatorCuff))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutArmSinew))
+                {
                     mod -= 0.4f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CrippledShoulder))
-                    mod -= 0.3f;                
+                {
+                    mod -= 0.3f;
+                }
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
+            {
                 might += 3;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brute))
+            {
                 might += 10;
+            }
 
             int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.WhatHasntKilledMe);
             might += wdkmStacks * 3;
 
             // Check Fear + Hate of X Perks
-            var myAura = LevelController.Instance.GetAllHexsWithinRange(c.currentTile, GetTotalAuraSize(c));
+            List<LevelNode> myAura = LevelController.Instance.GetAllHexsWithinRange(c.currentTile, GetTotalAuraSize(c));
             bool hasHateOfUndead = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HateOfUndead);
             bool hasFearOfUndead = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FearOfUndead);
             bool hasHateOfHumanity = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HateOfHumanity);
@@ -58,19 +71,31 @@ namespace WeAreGladiators
                 {
                     if (otherCharacter.race == CharacterRace.Undead && myAura.Contains(otherCharacter.currentTile))
                     {
-                        if (hasHateOfUndead) might += 5;
-                        else if (hasFearOfUndead) might -= 5;
+                        if (hasHateOfUndead)
+                        {
+                            might += 5;
+                        }
+                        else if (hasFearOfUndead)
+                        {
+                            might -= 5;
+                        }
                     }
                 }
             }
-            if(hasHateOfHumanity || hasFearOfHumanity)
+            if (hasHateOfHumanity || hasFearOfHumanity)
             {
                 foreach (HexCharacterModel otherCharacter in HexCharacterController.Instance.AllCharacters)
                 {
                     if (otherCharacter.race == CharacterRace.Human && myAura.Contains(otherCharacter.currentTile))
                     {
-                        if (hasHateOfHumanity) might += 5;
-                        else if (hasFearOfHumanity) might -= 5;
+                        if (hasHateOfHumanity)
+                        {
+                            might += 5;
+                        }
+                        else if (hasFearOfHumanity)
+                        {
+                            might -= 5;
+                        }
                     }
                 }
             }
@@ -78,19 +103,27 @@ namespace WeAreGladiators
             {
                 foreach (HexCharacterModel otherCharacter in HexCharacterController.Instance.AllCharacters)
                 {
-                    if ((otherCharacter.race == CharacterRace.Orc || otherCharacter.race == CharacterRace.Goblin) && 
+                    if ((otherCharacter.race == CharacterRace.Orc || otherCharacter.race == CharacterRace.Goblin) &&
                         myAura.Contains(otherCharacter.currentTile))
                     {
-                        if (hasHateOfGreenskins) might += 5;
-                        else if (hasFearOfGreenskins) might -= 5;
+                        if (hasHateOfGreenskins)
+                        {
+                            might += 5;
+                        }
+                        else if (hasFearOfGreenskins)
+                        {
+                            might -= 5;
+                        }
                     }
                 }
             }
 
-
             // Items
             might += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Might, c.itemSet);
-            if (mod < 0) mod = 0;
+            if (mod < 0)
+            {
+                mod = 0;
+            }
             might = (int) (might * mod);
             return might;
 
@@ -104,52 +137,77 @@ namespace WeAreGladiators
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenArm))
+                {
                     mod -= 0.5f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.TornRotatorCuff))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutArmSinew))
+                {
                     mod -= 0.4f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrippledShoulder))
+                {
                     mod -= 0.3f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sick))
+                {
                     mod -= 0.25f;
+                }
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Polymath))
+            {
                 might += 3;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Brute))
+            {
                 might += 10;
+            }
 
             int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.passiveManager, Perk.WhatHasntKilledMe);
             might += wdkmStacks * 3;
 
             // Items
             might += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Might, c.itemSet);
-            if (mod < 0) mod = 0;
-            might = (int)(might * mod);
+            if (mod < 0)
+            {
+                mod = 0;
+            }
+            might = (int) (might * mod);
             return might;
-        }              
+        }
         public static int GetTotalConstitution(HexCharacterModel c)
         {
             int constitution = c.attributeSheet.constitution.value;
             float mod = 1f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
+            {
                 constitution += 3;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Frail))
+            {
                 constitution -= 10;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Strong))
+            {
                 constitution += 10;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fat))
+            {
                 constitution += 20;
+            }
 
             int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.WhatHasntKilledMe);
             constitution += wdkmStacks * 3;
@@ -157,39 +215,58 @@ namespace WeAreGladiators
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedKidney))
+                {
                     mod -= 0.3f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutArtery))
+                {
                     mod -= 0.2f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedGuts))
+                {
                     mod -= 0.2f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutNeckVein))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepAbdominalCut))
+                {
                     mod -= 0.15f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepChestCut))
+                {
                     mod -= 0.20f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ExposedRibs))
+                {
                     mod -= 0.20f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CompromisedLiver))
+                {
                     mod -= 0.3f;
+                }
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Tenacious))
+            {
                 mod += 0.25f;
-
-            
+            }
 
             // Items
             constitution += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Constituition, c.itemSet);
-            constitution = (int)(constitution * mod);
-            if (constitution < 1) constitution = 1;
+            constitution = (int) (constitution * mod);
+            if (constitution < 1)
+            {
+                constitution = 1;
+            }
 
             return constitution;
         }
@@ -199,57 +276,88 @@ namespace WeAreGladiators
             float mod = 1f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Polymath))
+            {
                 constitution += 3;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Frail))
+            {
                 constitution -= 10;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Strong))
+            {
                 constitution += 10;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fat))
+            {
                 constitution += 20;
+            }
 
             int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.passiveManager, Perk.WhatHasntKilledMe);
             constitution += wdkmStacks * 3;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Tenacious))
+            {
                 mod += 0.25f;
+            }
 
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedKidney))
+                {
                     mod -= 0.3f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutArtery))
+                {
                     mod -= 0.2f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedGuts))
+                {
                     mod -= 0.2f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutNeckVein))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepAbdominalCut))
+                {
                     mod -= 0.15f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepChestCut))
+                {
                     mod -= 0.20f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ExposedRibs))
+                {
                     mod -= 0.20f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CompromisedLiver))
+                {
                     mod -= 0.3f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sick))
+                {
                     mod -= 0.25f;
+                }
             }
 
             // Items
             constitution += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Constituition, c.itemSet);
-            constitution = (int)(constitution * mod);
-            if (constitution < 1) constitution = 1;
+            constitution = (int) (constitution * mod);
+            if (constitution < 1)
+            {
+                constitution = 1;
+            }
             return constitution;
         }
         public static int GetTotalAccuracy(HexCharacterModel c)
@@ -258,73 +366,114 @@ namespace WeAreGladiators
             float mod = 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
+            {
                 accuracy += 3;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Blinded))
+            {
                 accuracy -= 30;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Focus))
+            {
                 accuracy += 30;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brute))
+            {
                 accuracy -= 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Sloppy))
+            {
                 accuracy -= 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ClutchHitter))
+            {
                 accuracy += 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BestialFrenzy))
+            {
                 accuracy += 15;
+            }
 
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenArm))
+                {
                     mod -= 0.5f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CrippledShoulder))
+                {
                     mod -= 0.3f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingEye))
+                {
                     mod -= 0.5f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutEyeSocket))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedHand))
+                {
                     mod -= 0.2f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingFingers))
+                {
                     mod -= 0.2f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepChestCut))
+                {
                     mod -= 0.35f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepFaceCut))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenFinger))
+                {
                     mod -= 0.1f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutArm))
+                {
                     mod -= 0.15f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedSkull))
+                {
                     mod -= 0.50f;
+                }
             }
-                      
 
             // Water tile
-            if (c.currentTile.tileName == "Water") accuracy -= 10;       
+            if (c.currentTile.tileName == "Water")
+            {
+                accuracy -= 10;
+            }
 
             // Stress State Modifier
             accuracy += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress), c);
 
             // Items
             accuracy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Accuracy, c.itemSet);
-            if (mod < 0) mod = 0;
+            if (mod < 0)
+            {
+                mod = 0;
+            }
             accuracy = (int) (accuracy * mod);
 
             return accuracy;
@@ -335,64 +484,101 @@ namespace WeAreGladiators
             float mod = 1f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Polymath))
-                accuracy += 3;                       
+            {
+                accuracy += 3;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Blinded))
+            {
                 accuracy -= 30;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Focus))
+            {
                 accuracy += 30;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Brute))
+            {
                 accuracy -= 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sloppy))
+            {
                 accuracy -= 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ClutchHitter))
+            {
                 accuracy += 5;
+            }
 
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenArm))
+                {
                     mod -= 0.5f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrippledShoulder))
+                {
                     mod -= 0.3f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingEye))
+                {
                     mod -= 0.5f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutEyeSocket))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedHand))
+                {
                     mod -= 0.2f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingFingers))
+                {
                     mod -= 0.2f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepChestCut))
+                {
                     mod -= 0.35f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepFaceCut))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenFinger))
+                {
                     mod -= 0.1f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutArm))
+                {
                     mod -= 0.15f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedSkull))
+                {
                     mod -= 0.50f;
+                }
             }
 
             // Items
             accuracy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Accuracy, c.itemSet);
-            if (mod < 0) mod = 0;
-            accuracy = (int)(accuracy * mod);
+            if (mod < 0)
+            {
+                mod = 0;
+            }
+            accuracy = (int) (accuracy * mod);
 
             return accuracy;
         }
@@ -401,58 +587,90 @@ namespace WeAreGladiators
             int dodge = 0;
             dodge += c.attributeSheet.dodge.value;
             float mod = 1f;
-            
+
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutLegMuscles))
+                {
                     mod -= 0.4f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedElbow))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedLegMuscles))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Concussed))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedSkull))
+                {
                     mod -= 0.5f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.TornKneeLigament))
+                {
                     mod -= 0.3f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeepFaceCut))
+                {
                     mod -= 0.25f;
+                }
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
+            {
                 dodge += 3;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BestialFrenzy))
+            {
                 dodge += 15;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Rooted))
+            {
                 dodge -= 10;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Crippled))
+            {
                 dodge -= 30;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Evasion))
+            {
                 dodge += 30;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ShieldWall))
+            {
                 dodge += 10;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.PoorReflexes))
+            {
                 dodge -= 5;
-                    
+            }
+
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Quick))
+            {
                 dodge += 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Paranoid))
+            {
                 dodge += 5;
+            }
 
             // Shield Wall Passive
             foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(c))
@@ -461,23 +679,34 @@ namespace WeAreGladiators
                     LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, GetTotalAuraSize(ally)).Contains(c.currentTile))
                 {
                     dodge += 5;
-                    if (PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.ShieldSpecialist)) dodge += 5;
+                    if (PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.ShieldSpecialist))
+                    {
+                        dodge += 5;
+                    }
                 }
             }
 
             // Water tile
-            if (c.currentTile.tileName == "Water") dodge -= 10;
+            if (c.currentTile.tileName == "Water")
+            {
+                dodge -= 10;
+            }
 
             // Manipulation talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Manipulation, 1))
+            {
                 dodge += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Manipulation) * 5;
+            }
 
             // Goblin racial perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Cunning) ||
-                (c.race == CharacterRace.Goblin && c.controller == Controller.Player))
+                c.race == CharacterRace.Goblin && c.controller == Controller.Player)
             {
-                int bonus = (int)(GetTotalInitiative(c) * 0.25f);
-                if (bonus > 0) dodge += bonus;
+                int bonus = (int) (GetTotalInitiative(c) * 0.25f);
+                if (bonus > 0)
+                {
+                    dodge += bonus;
+                }
             }
 
             // Stress State Modifier
@@ -489,12 +718,17 @@ namespace WeAreGladiators
             // Check Smashed Shield
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.SmashedShield) &&
                 c.itemSet.offHandItem != null && c.itemSet.offHandItem.weaponClass == WeaponClass.Shield)
+            {
                 dodge -= ItemController.Instance.GetCharacterDodgeBonusFromShield(c.itemSet);
+            }
 
-            if (mod < 0) mod = 0;
-            dodge = (int)(dodge * mod);
+            if (mod < 0)
+            {
+                mod = 0;
+            }
+            dodge = (int) (dodge * mod);
 
-            Debug.Log(System.String.Format("Dodge returned for {0}: {1}", c.myName, dodge.ToString()));
+            Debug.Log(string.Format("Dodge returned for {0}: {1}", c.myName, dodge.ToString()));
             return dodge;
         }
         public static int GetTotalDodge(HexCharacterData c)
@@ -507,61 +741,95 @@ namespace WeAreGladiators
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutLegMuscles))
+                {
                     mod -= 0.4f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedElbow))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedLegMuscles))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Concussed))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedSkull))
+                {
                     mod -= 0.5f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.TornKneeLigament))
+                {
                     mod -= 0.3f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeepFaceCut))
+                {
                     mod -= 0.25f;
+                }
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Polymath))
+            {
                 dodge += 3;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Crippled))
+            {
                 dodge -= 30;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Evasion))
+            {
                 dodge += 30;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.PoorReflexes))
+            {
                 dodge -= 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Quick))
+            {
                 dodge += 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Paranoid))
+            {
                 dodge += 5;
+            }
 
             // Manipulation talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Manipulation, 1))
+            {
                 dodge += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Manipulation) * 5;
+            }
 
             // Goblin racial perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Cunning) ||
-                    c.race == CharacterRace.Goblin)
+                c.race == CharacterRace.Goblin)
             {
-                int bonus = (int)(GetTotalInitiative(c) * 0.25f);
-                if (bonus > 0) dodge += bonus;
+                int bonus = (int) (GetTotalInitiative(c) * 0.25f);
+                if (bonus > 0)
+                {
+                    dodge += bonus;
+                }
             }
 
             // Items
             dodge += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Dodge, c.itemSet);
-            if (mod < 0) mod = 0;
-            dodge = (int)(dodge * mod);
+            if (mod < 0)
+            {
+                mod = 0;
+            }
+            dodge = (int) (dodge * mod);
             return dodge;
         }
         public static int GetTotalResolve(HexCharacterModel c, bool allowRecursion = true)
@@ -573,20 +841,30 @@ namespace WeAreGladiators
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.PermanentlyConcussed))
+                {
                     mod += 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeeplyDisturbed))
+                {
                     mod -= 0.5f;
-            }            
+                }
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Cowardly))
+            {
                 resolve -= 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brave))
+            {
                 resolve += 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
+            {
                 resolve += 3;
+            }
 
             int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.pManager, Perk.WhatHasntKilledMe);
             resolve += wdkmStacks * 3;
@@ -599,11 +877,11 @@ namespace WeAreGladiators
                     if (PerkController.Instance.DoesCharacterHavePerk(ally.pManager, Perk.InspiringPresence) &&
                         LevelController.Instance.GetAllHexsWithinRange(ally.currentTile, GetTotalAuraSize(ally)).Contains(c.currentTile))
                     {
-                        resolve += (int)(GetTotalResolve(ally, false) * 0.35f);
+                        resolve += (int) (GetTotalResolve(ally, false) * 0.35f);
                         break;
                     }
                 }
-            }           
+            }
 
             /*
             // Check for Fearsome enemies
@@ -617,7 +895,7 @@ namespace WeAreGladiators
             }
             */
             // Check Fear + Hate of X Perks
-            var myAura = LevelController.Instance.GetAllHexsWithinRange(c.currentTile, GetTotalAuraSize(c));
+            List<LevelNode> myAura = LevelController.Instance.GetAllHexsWithinRange(c.currentTile, GetTotalAuraSize(c));
             bool hasHateOfUndead = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HateOfUndead);
             bool hasFearOfUndead = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FearOfUndead);
             bool hasHateOfHumanity = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HateOfHumanity);
@@ -630,8 +908,14 @@ namespace WeAreGladiators
                 {
                     if (otherCharacter.race == CharacterRace.Undead && myAura.Contains(otherCharacter.currentTile))
                     {
-                        if (hasHateOfUndead) resolve += 5;
-                        else if (hasFearOfUndead) resolve -= 5;
+                        if (hasHateOfUndead)
+                        {
+                            resolve += 5;
+                        }
+                        else if (hasFearOfUndead)
+                        {
+                            resolve -= 5;
+                        }
                     }
                 }
             }
@@ -641,8 +925,14 @@ namespace WeAreGladiators
                 {
                     if (otherCharacter.race == CharacterRace.Human && myAura.Contains(otherCharacter.currentTile))
                     {
-                        if (hasHateOfHumanity) resolve += 5;
-                        else if (hasFearOfHumanity) resolve -= 5;
+                        if (hasHateOfHumanity)
+                        {
+                            resolve += 5;
+                        }
+                        else if (hasFearOfHumanity)
+                        {
+                            resolve -= 5;
+                        }
                     }
                 }
             }
@@ -653,8 +943,14 @@ namespace WeAreGladiators
                     if ((otherCharacter.race == CharacterRace.Orc || otherCharacter.race == CharacterRace.Goblin) &&
                         myAura.Contains(otherCharacter.currentTile))
                     {
-                        if (hasHateOfGreenskins) resolve += 5;
-                        else if (hasFearOfGreenskins) resolve -= 5;
+                        if (hasHateOfGreenskins)
+                        {
+                            resolve += 5;
+                        }
+                        else if (hasFearOfGreenskins)
+                        {
+                            resolve -= 5;
+                        }
                     }
                 }
             }
@@ -664,8 +960,11 @@ namespace WeAreGladiators
 
             // Items
             resolve += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Resolve, c.itemSet);
-            if (mod < 0) mod = 0;
-            resolve = (int)(resolve * mod);
+            if (mod < 0)
+            {
+                mod = 0;
+            }
+            resolve = (int) (resolve * mod);
             return resolve;
         }
         public static int GetTotalResolve(HexCharacterData c)
@@ -677,31 +976,46 @@ namespace WeAreGladiators
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.PermanentlyConcussed))
+                {
                     mod += 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeeplyDisturbed))
+                {
                     mod -= 0.5f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sick))
+                {
                     mod -= 0.25f;
+                }
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Cowardly))
+            {
                 resolve -= 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Brave))
+            {
                 resolve += 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Polymath))
+            {
                 resolve += 3;
+            }
 
             int wdkmStacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(c.passiveManager, Perk.WhatHasntKilledMe);
             resolve += wdkmStacks * 3;
 
             // Items
             resolve += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Resolve, c.itemSet);
-            if (mod < 0) mod = 0;
-            resolve = (int)(resolve * mod);
+            if (mod < 0)
+            {
+                mod = 0;
+            }
+            resolve = (int) (resolve * mod);
             return resolve;
         }
         public static int GetTotalWits(HexCharacterModel c)
@@ -713,55 +1027,88 @@ namespace WeAreGladiators
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BruisedLeg))
+                {
                     mod -= 0.2f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.TornEar))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Concussed))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedLegMuscles))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingEar))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenNose))
+                {
                     wits -= 5;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedCheek))
+                {
                     wits -= 10;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeeplyDisturbed))
+                {
                     mod -= 0.5f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BrokenLeg))
+                {
                     mod -= 0.4f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutLegMuscles))
+                {
                     mod -= 0.4f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingNose))
+                {
                     mod -= 0.5f;
-            }            
+                }
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Indecisive))
+            {
                 wits -= 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Paranoid))
+            {
                 wits -= 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Perceptive))
+            {
                 wits += 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Polymath))
+            {
                 wits += 3;
+            }
 
             // Items
             wits += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Wits, c.itemSet);
-            if (mod < 0) mod = 0;
-            wits = (int)(wits * mod);
+            if (mod < 0)
+            {
+                mod = 0;
+            }
+            wits = (int) (wits * mod);
             return wits;
         }
         public static int GetTotalWits(HexCharacterData c)
@@ -773,83 +1120,129 @@ namespace WeAreGladiators
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenNose))
+                {
                     wits -= 5;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedCheek))
+                {
                     wits -= 10;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BruisedLeg))
+                {
                     mod -= 0.2f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.TornEar))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Concussed))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedLegMuscles))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingEar))
+                {
                     mod -= 0.25f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeeplyDisturbed))
+                {
                     mod -= 0.5f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BrokenLeg))
+                {
                     mod -= 0.4f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutLegMuscles))
+                {
                     mod -= 0.4f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingNose))
+                {
                     mod -= 0.5f;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sick))
+                {
                     mod -= 0.25f;
+                }
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Indecisive))
+            {
                 wits -= 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Paranoid))
+            {
                 wits -= 5;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Polymath))
+            {
                 wits += 3;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Perceptive))
+            {
                 wits += 5;
+            }
 
             // Items
             wits += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Wits, c.itemSet);
-            if (mod < 0) mod = 0;
-            wits = (int)(wits * mod);
+            if (mod < 0)
+            {
+                mod = 0;
+            }
+            wits = (int) (wits * mod);
             return wits;
         }
-        
+
         #endregion
 
         // Secondary Attributes
-        #region       
+        #region
+
         public static float GetCharacterXpGainRate(HexCharacterData character)
         {
             float ret = 1;
 
             if (PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, Perk.FastLearner))
+            {
                 ret += 0.25f;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, Perk.DimWitted))
+            {
                 ret -= 0.25f;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, Perk.PermanentlyConcussed))
+            {
                 ret -= 0.25f;
+            }
 
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Doctor))
+            {
                 ret += 0.10f;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(character.passiveManager, Perk.Apprenctice))
+            {
                 ret += 0.5f;
+            }
 
             return ret;
         }
@@ -876,9 +1269,13 @@ namespace WeAreGladiators
             int pdBonus = c.attributeSheet.physicalDamageBonus;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Wimp))
+            {
                 pdBonus -= 10;
+            }
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BigMuscles))
+            {
                 pdBonus += 10;
+            }
 
             //if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.TournamentKnight))
             //    pdBonus += 5;
@@ -893,12 +1290,16 @@ namespace WeAreGladiators
             int pdBonus = c.attributeSheet.physicalDamageBonus;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Wimp))
+            {
                 pdBonus -= 10;
+            }
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.BigMuscles))
+            {
                 pdBonus += 10;
+            }
 
             //if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.TournamentKnight))
-             //   pdBonus += 5;
+            //   pdBonus += 5;
 
             // Items
             pdBonus += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.PhysicalDamageBonus, c.itemSet);
@@ -910,14 +1311,22 @@ namespace WeAreGladiators
             int mdBonus = c.attributeSheet.magicDamageBonus;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.PermanentlyConcussed))
+            {
                 mdBonus -= 50;
+            }
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Slow))
+            {
                 mdBonus -= 10;
+            }
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Wise))
+            {
                 mdBonus += 10;
+            }
 
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Scholar))
+            {
                 mdBonus += 10;
+            }
 
             // Items
             mdBonus += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicDamageBonus, c.itemSet);
@@ -928,14 +1337,22 @@ namespace WeAreGladiators
             int mdBonus = c.attributeSheet.magicDamageBonus;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.PermanentlyConcussed))
+            {
                 mdBonus -= 50;
+            }
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Slow))
+            {
                 mdBonus -= 10;
+            }
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Wise))
+            {
                 mdBonus += 10;
+            }
 
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Scholar))
+            {
                 mdBonus += 10;
+            }
 
             // Items
             mdBonus += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicDamageBonus, c.itemSet);
@@ -957,19 +1374,26 @@ namespace WeAreGladiators
             float mod = 1f;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BestialFrenzy))
+            {
                 intitiative += 15;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Fat))
+            {
                 intitiative -= 10;
+            }
 
             // Items
-            intitiative += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Initiative, c.itemSet);        
+            intitiative += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Initiative, c.itemSet);
 
             // Apply multiplicative modifier
             intitiative = (int) (intitiative * mod);
 
             // Cant go negative
-            if (intitiative < 0) intitiative = 0;           
+            if (intitiative < 0)
+            {
+                intitiative = 0;
+            }
 
             return intitiative;
         }
@@ -978,7 +1402,9 @@ namespace WeAreGladiators
             int intitiative = c.attributeSheet.initiative;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Fat))
+            {
                 intitiative -= 10;
+            }
 
             intitiative += GetTotalWits(c);
 
@@ -986,15 +1412,21 @@ namespace WeAreGladiators
             intitiative += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Initiative, c.itemSet);
 
             // Cant go negative
-            if (intitiative < 0) intitiative = 0;            
+            if (intitiative < 0)
+            {
+                intitiative = 0;
+            }
 
             return intitiative;
-        }        
+        }
         public static int GetTurnDelayPenaltyToInitiative(HexCharacterModel c)
         {
             int initiative = GetTotalInitiative(c, false);
             float penalty = 0f;
-            if ((c.hasRequestedTurnDelay || c.hasDelayedPreviousTurn) && initiative > 0) penalty = initiative * 0.25f;
+            if ((c.hasRequestedTurnDelay || c.hasDelayedPreviousTurn) && initiative > 0)
+            {
+                penalty = initiative * 0.25f;
+            }
             return (int) penalty;
 
         }
@@ -1003,41 +1435,62 @@ namespace WeAreGladiators
             int apRecovery = c.attributeSheet.apRecovery;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BestialFrenzy))
+            {
                 apRecovery += 4;
+            }
 
             // Injuries
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedRibs))
+                {
                     apRecovery -= 1;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ScarredLung))
+                {
                     apRecovery -= 2;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingNose))
+                {
                     apRecovery -= 1;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StabbedGuts))
+                {
                     apRecovery -= 1;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DislocatedShoulder))
+                {
                     apRecovery -= 2;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.PiercedLung))
+                {
                     apRecovery -= 3;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CrushedWindpipe))
+                {
                     apRecovery -= 4;
-            }          
-                
+                }
+            }
+
             // cant go below
             if (apRecovery < 0)
+            {
                 apRecovery = 0;
+            }
 
             // Items
             apRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.ActionPointRecovery, c.itemSet);
 
-            if (apRecovery < 0) apRecovery = 0;
+            if (apRecovery < 0)
+            {
+                apRecovery = 0;
+            }
             return apRecovery;
 
         }
@@ -1049,34 +1502,53 @@ namespace WeAreGladiators
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedRibs))
+                {
                     apRecovery -= 1;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ScarredLung))
+                {
                     apRecovery -= 2;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingNose))
+                {
                     apRecovery -= 1;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StabbedGuts))
+                {
                     apRecovery -= 1;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DislocatedShoulder))
+                {
                     apRecovery -= 2;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.PiercedLung))
+                {
                     apRecovery -= 3;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CrushedWindpipe))
+                {
                     apRecovery -= 4;
+                }
             }
 
             // Cant go below
             if (apRecovery < 0)
+            {
                 apRecovery = 0;
+            }
 
             // Items
             apRecovery += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.ActionPointRecovery, c.itemSet);
-            if (apRecovery < 0) apRecovery = 0;
+            if (apRecovery < 0)
+            {
+                apRecovery = 0;
+            }
             return apRecovery;
 
         }
@@ -1085,11 +1557,16 @@ namespace WeAreGladiators
             int maxEnergy = c.attributeSheet.apMaximum;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.BestialFrenzy))
+            {
                 maxEnergy += 4;
+            }
 
             // Items
             maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxActionPoints, c.itemSet);
-            if (maxEnergy < 0) maxEnergy = 0;
+            if (maxEnergy < 0)
+            {
+                maxEnergy = 0;
+            }
             return maxEnergy;
         }
         public static int GetTotalMaxActionPoints(HexCharacterData c)
@@ -1098,7 +1575,10 @@ namespace WeAreGladiators
 
             // Items
             maxEnergy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MaxActionPoints, c.itemSet);
-            if (maxEnergy < 0) maxEnergy = 0;
+            if (maxEnergy < 0)
+            {
+                maxEnergy = 0;
+            }
             return maxEnergy;
         }
         public static float GetTotalCriticalChance(HexCharacterModel c)
@@ -1109,20 +1589,30 @@ namespace WeAreGladiators
 
             // Satyr perk
             if (c.race == CharacterRace.Satyr && c.controller == Controller.Player)
+            {
                 crit += 5;
+            }
 
             // Stealth
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Stealth))
+            {
                 crit += 25;
+            }
 
             // Items
             crit += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.CriticalChance, c.itemSet);
 
             // Cant go negative
-            if (crit < 0) crit = 0;
+            if (crit < 0)
+            {
+                crit = 0;
+            }
 
             // Cant go over 100 
-            if (crit > 100) crit = 100;           
+            if (crit > 100)
+            {
+                crit = 100;
+            }
 
             return crit;
         }
@@ -1130,21 +1620,29 @@ namespace WeAreGladiators
         {
             float crit = c.attributeSheet.criticalChance;
 
-            crit += (float)GetTotalWits(c) / 2f;
+            crit += GetTotalWits(c) / 2f;
 
             // Satyr perk
             if (c.race == CharacterRace.Satyr)
+            {
                 crit += 5;
+            }
 
             // Items
             crit += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.CriticalChance, c.itemSet);
 
             // Cant go negative
-            if (crit < 0) crit = 0;
+            if (crit < 0)
+            {
+                crit = 0;
+            }
 
             // Cant go over 100 negative
-            if (crit > 100) crit = 100;
-           
+            if (crit > 100)
+            {
+                crit = 100;
+            }
+
             return crit;
         }
         public static int GetTotalCriticalModifier(HexCharacterModel c, AbilityEffect effect = null)
@@ -1153,24 +1651,36 @@ namespace WeAreGladiators
 
             // Sadistic perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Sadistic))
+            {
                 criticalModifier += 50;
+            }
 
             // Outlaw background
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Outlaw))
+            {
                 criticalModifier += 10;
+            }
 
             // Scoundrel talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Scoundrel, 1))
+            {
                 criticalModifier += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Scoundrel) * 20;
+            }
 
-            if (effect != null) criticalModifier += effect.bonusCritDamage;
+            if (effect != null)
+            {
+                criticalModifier += effect.bonusCritDamage;
+            }
 
             // Items
             criticalModifier += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.CriticalModifier, c.itemSet);
 
             // Cant go negative
-            if (criticalModifier < 0) criticalModifier = 0;
-            
+            if (criticalModifier < 0)
+            {
+                criticalModifier = 0;
+            }
+
             return criticalModifier;
         }
         public static int GetTotalCriticalModifier(HexCharacterData c)
@@ -1179,24 +1689,33 @@ namespace WeAreGladiators
 
             // Sadistic perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Sadistic))
+            {
                 criticalModifier += 50;
+            }
 
             // Outlaw background
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Outlaw))
+            {
                 criticalModifier += 10;
+            }
 
             // Scoundrel talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Scoundrel, 1))
+            {
                 criticalModifier += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Scoundrel) * 20;
+            }
 
             // Items
             criticalModifier += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.CriticalModifier, c.itemSet);
 
             // Cant go negative
-            if (criticalModifier < 0) criticalModifier = 0;
-           
+            if (criticalModifier < 0)
+            {
+                criticalModifier = 0;
+            }
+
             return criticalModifier;
-        }             
+        }
         public static int GetTotalAuraSize(HexCharacterModel c)
         {
             int aura = c.attributeSheet.auraSize;
@@ -1205,9 +1724,14 @@ namespace WeAreGladiators
             aura += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.AuraSize, c.itemSet);
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.StrikingPresence))
+            {
                 aura += 1;
+            }
 
-            if (aura < 1) aura = 1;
+            if (aura < 1)
+            {
+                aura = 1;
+            }
             return aura;
         }
         public static int GetTotalAuraSize(HexCharacterData c)
@@ -1215,12 +1739,17 @@ namespace WeAreGladiators
             int aura = c.attributeSheet.auraSize;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.StrikingPresence))
+            {
                 aura += 1;
+            }
 
             // Items
             aura += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.AuraSize, c.itemSet);
 
-            if (aura < 1) aura = 1;
+            if (aura < 1)
+            {
+                aura = 1;
+            }
             return aura;
         }
         public static int GetTotalVision(HexCharacterModel c)
@@ -1231,26 +1760,40 @@ namespace WeAreGladiators
             if (!PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.MissingEye))
+                {
                     vision -= 1;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.FracturedSkull))
+                {
                     vision -= 2;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CutEyeSocket))
+                {
                     vision -= 1;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Concussed))
+                {
                     vision -= 1;
+                }
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.TrueSight))
-                vision += 1;           
+            {
+                vision += 1;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Clairvoyant))
-                vision += 1;                       
+            {
+                vision += 1;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ShortSighted))
+            {
                 vision -= 1;
+            }
 
             return vision;
         }
@@ -1262,26 +1805,40 @@ namespace WeAreGladiators
             if (!PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.MissingEye))
+                {
                     vision -= 1;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.FracturedSkull))
+                {
                     vision -= 2;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CutEyeSocket))
+                {
                     vision -= 1;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Concussed))
+                {
                     vision -= 1;
+                }
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.TrueSight))
+            {
                 vision += 1;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Clairvoyant))
-                vision += 1;                       
+            {
+                vision += 1;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.ShortSighted))
+            {
                 vision -= 1;
+            }
 
             return vision;
         }
@@ -1290,22 +1847,27 @@ namespace WeAreGladiators
 
         // Resistances
         #region
+
         public static int GetTotalPhysicalResistance(HexCharacterModel c)
         {
             int resistanceReturned = c.attributeSheet.physicalResistance;
 
             // Guardian talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Guardian, 1))
+            {
                 resistanceReturned += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Guardian) * 10;
+            }
 
             // hard Noggin
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HardNoggin))
+            {
                 resistanceReturned += 10;
+            }
 
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.PhysicalResistance, c.itemSet);
 
-            Debug.Log("StatCalculator.GetTotalPhysicalResistance() calculated " + c.myName + " total physical resistance as " + resistanceReturned.ToString());
+            Debug.Log("StatCalculator.GetTotalPhysicalResistance() calculated " + c.myName + " total physical resistance as " + resistanceReturned);
             return resistanceReturned;
         }
         public static int GetTotalPhysicalResistance(HexCharacterData c)
@@ -1313,16 +1875,20 @@ namespace WeAreGladiators
             int resistanceReturned = c.attributeSheet.physicalResistance;
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.HardNoggin))
+            {
                 resistanceReturned += 10;
+            }
 
             // Guardian talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Guardian, 1))
+            {
                 resistanceReturned += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Guardian) * 10;
+            }
 
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.PhysicalResistance, c.itemSet);
 
-            Debug.Log("StatCalculator.GetTotalPhysicalResistance() calculated " + c.myName + " total physical resistance as " + resistanceReturned.ToString());
+            Debug.Log("StatCalculator.GetTotalPhysicalResistance() calculated " + c.myName + " total physical resistance as " + resistanceReturned);
             return resistanceReturned;
         }
         public static int GetTotalMagicResistance(HexCharacterModel c)
@@ -1331,11 +1897,12 @@ namespace WeAreGladiators
 
             // Naturalism talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Naturalism, 1))
+            {
                 resistanceReturned += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Naturalism) * 10;
+            }
 
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicResistance, c.itemSet);
-
 
             return resistanceReturned;
         }
@@ -1345,8 +1912,10 @@ namespace WeAreGladiators
 
             // Naturalism talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Naturalism, 1))
+            {
                 resistanceReturned += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Naturalism) * 10;
-            
+            }
+
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.MagicResistance, c.itemSet);
 
@@ -1376,7 +1945,9 @@ namespace WeAreGladiators
 
             // Divinity talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Divinity, 1))
+            {
                 sr += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Divinity) * 10;
+            }
 
             // Check Retired Soldier background perk: +5 SR if within an ally's aura
             foreach (HexCharacterModel ally in HexCharacterController.Instance.GetAllAlliesOfCharacter(c))
@@ -1386,18 +1957,22 @@ namespace WeAreGladiators
                 {
                     sr += 5;
                 }
-            }            
+            }
 
             // Inquisitor background
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Inquisitor))
+            {
                 sr += 10;
+            }
 
             // Items
             sr += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.StressResistance, c.itemSet);
 
             // Satyr perk
             if (c.race == CharacterRace.Satyr && c.controller == Controller.Player)
+            {
                 sr += 10;
+            }
 
             return sr;
         }
@@ -1407,15 +1982,21 @@ namespace WeAreGladiators
 
             // Satyr perk
             if (c.race == CharacterRace.Satyr)
+            {
                 sr += 10;
+            }
 
             // Divinity talent bonus
             if (CharacterDataController.Instance.DoesCharacterHaveTalent(c.talentPairings, TalentSchool.Divinity, 1))
+            {
                 sr += CharacterDataController.Instance.GetCharacterTalentLevel(c.talentPairings, TalentSchool.Divinity) * 10;
+            }
 
             // Inquisitor background
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Inquisitor))
+            {
                 sr += 10;
+            }
 
             // Items
             sr += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.StressResistance, c.itemSet);
@@ -1424,63 +2005,82 @@ namespace WeAreGladiators
         }
         public static int GetTotalInjuryResistance(HexCharacterModel c)
         {
-            int resistanceReturned = 0;//c.attributeSheet.injuryResistance + GetTotalResolve(c);
+            int resistanceReturned = 0; //c.attributeSheet.injuryResistance + GetTotalResolve(c);
             float mod = 1f;
 
             // Undead Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.DeadHeart))
+            {
                 resistanceReturned += 25;
+            }
             else if (c.race == CharacterRace.Undead && c.controller == Controller.Player)
+            {
                 resistanceReturned += 25;
+            }
 
             // Farmer background
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Farmer))
+            {
                 resistanceReturned += 10;
+            }
 
             // hard noggin Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HardNoggin))
+            {
                 resistanceReturned += 10;
+            }
 
             // Multiplicare modifiers
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Tenacious))
+            {
                 mod += 0.25f;
+            }
 
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.InjuryResistance, c.itemSet);
 
             // Apply modifiers
-            resistanceReturned = (int)(resistanceReturned * mod);
+            resistanceReturned = (int) (resistanceReturned * mod);
 
             return resistanceReturned;
         }
         public static int GetTotalInjuryResistance(HexCharacterData c)
         {
-            int resistanceReturned = 0;//c.attributeSheet.injuryResistance + GetTotalResolve(c);
+            int resistanceReturned = 0; //c.attributeSheet.injuryResistance + GetTotalResolve(c);
             float mod = 1f;
 
             // Undead Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.DeadHeart))
+            {
                 resistanceReturned += 25;
+            }
 
             else if (c.race == CharacterRace.Undead)
+            {
                 resistanceReturned += 25;
+            }
 
             // Farmer background
             if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.Farmer))
+            {
                 resistanceReturned += 10;
+            }
 
             // hard noggin Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.HardNoggin))
+            {
                 resistanceReturned += 10;
-
+            }
 
             // Multiplicare modifiers
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.Tenacious))
+            {
                 mod += 0.25f;
+            }
 
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.InjuryResistance, c.itemSet);
-            resistanceReturned = (int)(resistanceReturned * mod);
+            resistanceReturned = (int) (resistanceReturned * mod);
             return resistanceReturned;
         }
         public static int GetTotalDeathResistance(HexCharacterModel c)
@@ -1489,10 +2089,14 @@ namespace WeAreGladiators
 
             // Iron Will Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.IronWill))
+            {
                 resistanceReturned += 25;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.CompromisedLiver))
+            {
                 resistanceReturned -= 20;
+            }
 
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.DeathResistance, c.itemSet);
@@ -1505,22 +2109,28 @@ namespace WeAreGladiators
 
             // Iron Will Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.IronWill))
+            {
                 resistanceReturned += 25;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.CompromisedLiver))
+            {
                 resistanceReturned -= 20;
+            }
 
             // Items
             resistanceReturned += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.DeathResistance, c.itemSet);
 
             return resistanceReturned;
         }
+
         #endregion
 
         // Misc Calculators
         #region
+
         /// <summary>
-        /// Returns a whole number represented as a float. For example, if a character is at 50% health, this will return 50.0, not 0.5
+        ///     Returns a whole number represented as a float. For example, if a character is at 50% health, this will return 50.0, not 0.5
         /// </summary>
         /// <param name="character"></param>
         /// <returns></returns>
@@ -1528,20 +2138,21 @@ namespace WeAreGladiators
         {
             float current = character.currentHealth;
             float max = GetTotalMaxHealth(character);
-            float sum = (current / max) * 100f;
+            float sum = current / max * 100f;
             return sum;
         }
         public static float GetCurrentHealthAsPercentageOfMaxHealth(HexCharacterData character)
         {
             float current = character.currentHealth;
             float max = GetTotalMaxHealth(character);
-            float sum = (current / max) * 100f;
+            float sum = current / max * 100f;
             return sum;
         }
         public static float GetPercentage(float numerator, float denominator)
         {
-            return (numerator / denominator) * 100f;
+            return numerator / denominator * 100f;
         }
+
         #endregion
     }
 }

@@ -1,46 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using WeAreGladiators.Utilities;
-using System.Linq;
 using WeAreGladiators.Perks;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UI
 {
     public class HitChanceDetailBox : MonoBehaviour
     {
-        // Components
-        #region
-        [SerializeField] private Image bonusImage;
-        [SerializeField] private Image penaltyImage;
-        [SerializeField] private TextMeshProUGUI reasonText;
-        #endregion
-
-        // Getters + Accessors
-        #region
-        public Image BonusImage
-        {
-            get { return bonusImage; }
-        }
-        public Image PenaltyImage
-        {
-            get { return penaltyImage; }
-        }
-        public TextMeshProUGUI ReasonText
-        {
-            get { return reasonText; }
-        }
-        #endregion
 
         // Misc
         #region
+
         public void BuildFromDetailData(HitChanceDetailData data)
         {
             gameObject.SetActive(true);
             reasonText.text = data.reason + ": " + TextLogic.ReturnColoredText(data.accuracyMod.ToString(), TextLogic.neutralYellow);
-            if(data.accuracyMod < 0)
+            if (data.accuracyMod < 0)
             {
                 penaltyImage.gameObject.SetActive(true);
                 bonusImage.gameObject.SetActive(false);
@@ -51,14 +28,32 @@ namespace WeAreGladiators.UI
                 bonusImage.gameObject.SetActive(true);
             }
         }
+
+        #endregion
+        // Components
+        #region
+
+        [SerializeField] private Image bonusImage;
+        [SerializeField] private Image penaltyImage;
+        [SerializeField] private TextMeshProUGUI reasonText;
+
+        #endregion
+
+        // Getters + Accessors
+        #region
+
+        public Image BonusImage => bonusImage;
+        public Image PenaltyImage => penaltyImage;
+        public TextMeshProUGUI ReasonText => reasonText;
+
         #endregion
     }
 
     public class HitChanceDataSet
     {
+        public bool clampResult = true;
         public List<HitChanceDetailData> details = new List<HitChanceDetailData>();
         public bool guaranteedHit = false;
-        public bool clampResult = true;
         public PerkIconData perk;
 
         public int FinalHitChance
@@ -66,26 +61,30 @@ namespace WeAreGladiators.UI
             get
             {
                 int ret = 0;
-                if (guaranteedHit) return 100;
+                if (guaranteedHit)
+                {
+                    return 100;
+                }
 
-                foreach(HitChanceDetailData detail in details)
+                foreach (HitChanceDetailData detail in details)
                 {
                     ret += detail.accuracyMod;
                 }
 
                 if (clampResult)
+                {
                     return Mathf.Clamp(ret, 5, 95);
-                else return Mathf.Clamp(ret, 0, 100);
+                }
+                return Mathf.Clamp(ret, 0, 100);
             }
 
         }
-
     }
     public class HitChanceDetailData
     {
-        public string reason;
         public int accuracyMod;
-        public bool hideAccuracyMod = false;
+        public bool hideAccuracyMod;
+        public string reason;
 
         public HitChanceDetailData(string reason, int accuracyMod, bool hideAccuracyMod = false)
         {

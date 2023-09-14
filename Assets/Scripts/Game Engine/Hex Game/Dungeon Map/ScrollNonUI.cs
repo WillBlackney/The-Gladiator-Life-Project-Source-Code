@@ -1,6 +1,6 @@
 ﻿using DG.Tweening;
-using WeAreGladiators.CameraSystems;
 using UnityEngine;
+using WeAreGladiators.CameraSystems;
 
 namespace WeAreGladiators.DungeonMap
 {
@@ -12,19 +12,25 @@ namespace WeAreGladiators.DungeonMap
         public FloatMinMax xConstraints = new FloatMinMax();
         public bool freezeY;
         public FloatMinMax yConstraints = new FloatMinMax();
+        private bool dragging;
+        private Camera mainCamera;
+
+        private readonly float mouseWheelScrollAmount = 3f;
         private Vector2 offset;
         // distance from the center of this Game Object to the point where we clicked to start dragging 
         private Vector3 pointerDisplacement;
         private float zDisplacement;
-        private bool dragging;
-        private Camera mainCamera;
-
-        private float mouseWheelScrollAmount = 3f;
 
         private void Awake()
         {
             mainCamera = CameraController.Instance.MainCamera;
             zDisplacement = -mainCamera.transform.position.z + transform.position.z;
+        }
+
+        private void Update()
+        {
+            DragWithMouse();
+            DragWithMouseWheel();
         }
 
         public void OnMouseDown()
@@ -39,17 +45,14 @@ namespace WeAreGladiators.DungeonMap
             dragging = false;
             TweenBack();
         }
-
-        private void Update()
-        {
-            DragWithMouse();
-            DragWithMouseWheel();
-        }
         private void DragWithMouse()
         {
-            if (!dragging) return;
+            if (!dragging)
+            {
+                return;
+            }
 
-            var mousePos = MouseInWorldCoords();
+            Vector3 mousePos = MouseInWorldCoords();
             //Debug.Log(mousePos);
             transform.position = new Vector3(
                 freezeX ? transform.position.x : mousePos.x - pointerDisplacement.x,
@@ -74,7 +77,7 @@ namespace WeAreGladiators.DungeonMap
 
             if (doMove)
             {
-                Debug.Log("My local y pos = " + transform.localPosition.y.ToString());
+                Debug.Log("My local y pos = " + transform.localPosition.y);
 
                 if (transform.localPosition.y >= yConstraints.min && transform.localPosition.y <= yConstraints.max)
                 {
@@ -83,16 +86,13 @@ namespace WeAreGladiators.DungeonMap
                 else
                 {
                     newY = transform.localPosition.y < yConstraints.min ? yConstraints.min : yConstraints.max;
-                }  
-
+                }
 
                 transform.DOKill();
                 transform.DOLocalMoveY(newY, 0.1f).SetEase(Ease.Linear);
 
                 TweenBack();
             }
-
-
 
             /*
             bool doMove = false;
@@ -116,11 +116,11 @@ namespace WeAreGladiators.DungeonMap
                 {
                     newY = -35f;
                 }
-                  
+
                 else if (newY > 1f)
                 {
                     newY = 1;
-                }                   
+                }
 
                 transform.DOKill();
                 transform.DOMove(new Vector3(transform.position.x, newY, 0.1f), transform.position.z).SetEase(Ease.Linear);
@@ -133,7 +133,7 @@ namespace WeAreGladiators.DungeonMap
         // returns mouse position in World coordinates for our GameObject to follow. 
         private Vector3 MouseInWorldCoords()
         {
-            var screenMousePos = Input.mousePosition;
+            Vector3 screenMousePos = Input.mousePosition;
             //Debug.Log(screenMousePos);
             screenMousePos.z = zDisplacement;
             return mainCamera.ScreenToWorldPoint(screenMousePos);
@@ -144,18 +144,22 @@ namespace WeAreGladiators.DungeonMap
             if (freezeY)
             {
                 if (transform.localPosition.x >= xConstraints.min && transform.localPosition.x <= xConstraints.max)
+                {
                     return;
+                }
 
-                var targetX = transform.localPosition.x < xConstraints.min ? xConstraints.min : xConstraints.max;
+                float targetX = transform.localPosition.x < xConstraints.min ? xConstraints.min : xConstraints.max;
                 transform.DOKill();
                 transform.DOLocalMoveX(targetX, tweenBackDuration).SetEase(tweenBackEase);
             }
             else if (freezeX)
             {
                 if (transform.localPosition.y >= yConstraints.min && transform.localPosition.y <= yConstraints.max)
+                {
                     return;
+                }
 
-                var targetY = transform.localPosition.y < yConstraints.min ? yConstraints.min : yConstraints.max;
+                float targetY = transform.localPosition.y < yConstraints.min ? yConstraints.min : yConstraints.max;
                 transform.DOKill();
                 transform.DOLocalMoveY(targetY, tweenBackDuration).SetEase(tweenBackEase);
             }

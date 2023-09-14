@@ -1,71 +1,130 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine;
-using UnityEditor;
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using Sirenix.Utilities.Editor;
+using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
-using WeAreGladiators.CustomOdinGUI;
-using WeAreGladiators.Characters;
+using Sirenix.Utilities.Editor;
+using UnityEditor;
+using UnityEngine;
 using WeAreGladiators.Abilities;
-using WeAreGladiators.Items;
-using WeAreGladiators.Perks;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Characters;
+using WeAreGladiators.CustomOdinGUI;
 using WeAreGladiators.HexTiles;
+using WeAreGladiators.Items;
+using WeAreGladiators.Libraries;
+using WeAreGladiators.Perks;
 using WeAreGladiators.Utilities;
 using WeAreGladiators.VisualEvents;
-using WeAreGladiators.Audio;
-using WeAreGladiators.Libraries;
 
 namespace WeAreGladiators.Editor
 {
 
     public class ProjectManager : OdinMenuEditorWindow
     {
+        public enum ManagerState
+        {
+            GlobalSettings,
+
+            AbilityData,
+            Characters,
+            PerkData,
+            ItemData,
+            EnemyTemplateData,
+            EnemyEncounterData,
+            MapSeedData,
+            RecruitClassTemplates,
+            StartingCharacterPresets,
+            CharacterModelTemplates,
+            CharacterBackgrounds,
+
+            LevelController,
+            CharacterDataController,
+            PrefabHolder,
+            VisualEffectManager,
+            AudioManager,
+            ItemController,
+            AbilityController,
+            PerkController,
+            ColorLibrary
+
+        }
+
+        // Hard coded file directory paths to specific SO's
+        private readonly string abilityPath = "Assets/SO Assets/Abilities";
+        private readonly string characterBackgroundsPath = "Assets/SO Assets/Character Backgrounds";
+        private readonly string characterModelTemplatesPath = "Assets/SO Assets/Character Model Templates";
+        private readonly string characterTemplatePath = "Assets/SO Assets/Characters";
+
+        // Create field for each type of scriptable object in project to be drawn
+        private readonly DrawSelected<AbilityDataSO> drawAbilities = new DrawSelected<AbilityDataSO>();
+        private readonly DrawAbilityController drawAbilityController = new DrawAbilityController();
+        private readonly DrawAudioManager drawAudioManager = new DrawAudioManager();
+        private readonly DrawSelected<BackgroundDataSO> drawCharacterBackgrounds = new DrawSelected<BackgroundDataSO>();
+        private readonly DrawCharacterDataController drawCharacterDataController = new DrawCharacterDataController();
+        private readonly DrawSelected<CharacterModelTemplateSO> drawCharacterModelTemplates = new DrawSelected<CharacterModelTemplateSO>();
+        private readonly DrawSelected<HexCharacterTemplateSO> drawCharacterTemplates = new DrawSelected<HexCharacterTemplateSO>();
+        private readonly DrawColorLibrary drawColorLibrary = new DrawColorLibrary();
+        private readonly DrawSelected<EnemyTemplateSO> drawEnemies = new DrawSelected<EnemyTemplateSO>();
+        private readonly DrawSelected<EnemyEncounterSO> drawEnemyEncounters = new DrawSelected<EnemyEncounterSO>();
+
+        // Create field for each type of manager object in project to be drawn       
+        private readonly DrawGlobalSettings drawGlobalSettings = new DrawGlobalSettings();
+        private readonly DrawItemController drawItemController = new DrawItemController();
+        private readonly DrawSelected<ItemDataSO> drawItems = new DrawSelected<ItemDataSO>();
+        private readonly DrawLevelController drawLevelController = new DrawLevelController();
+        private readonly DrawSelected<HexMapSeedDataSO> drawMapSeeds = new DrawSelected<HexMapSeedDataSO>();
+        private readonly DrawPerkController drawPerkController = new DrawPerkController();
+        private readonly DrawSelected<PerkIconDataSO> drawPerks = new DrawSelected<PerkIconDataSO>();
+        private readonly DrawPrefabHolder drawPrefabHolder = new DrawPrefabHolder();
+        private readonly DrawSelected<HexCharacterTemplateSO> drawStartingCharacterPresets = new DrawSelected<HexCharacterTemplateSO>();
+        private readonly DrawVisualEffectManager drawVisualEffectManager = new DrawVisualEffectManager();
+        private readonly string enemyEncounterPath = "Assets/SO Assets/Enemy Encounters";
+        private readonly string enemyPath = "Assets/SO Assets/Enemies";
+        private int enumIndex;
+        private readonly string itemPath = "Assets/SO Assets/Items";
         [OnValueChanged("StateChange")]
         [LabelText("Manager View")]
         [LabelWidth(100f)]
         [EnumToggleButtons]
         [ShowInInspector]
         private ManagerState managerState;
-        private int enumIndex = 0;
-        private bool treeRebuild = false;
+        private readonly string mapSeedPath = "Assets/SO Assets/Hex Map Seeds";
+        private readonly string perkPath = "Assets/SO Assets/Perks";
+        private readonly string startingCharacterPresetsPath = "Assets/SO Assets/Starting Character Presets";
+        private bool treeRebuild;
+        protected override void OnGUI()
+        {
+            // Did we toggle to a new page? 
+            // Should we rebuild the menu tree?
+            if (treeRebuild && Event.current.type == EventType.Layout)
+            {
+                ForceMenuTreeRebuild();
+                treeRebuild = false;
+            }
 
-        // Create field for each type of scriptable object in project to be drawn
-        private DrawSelected<AbilityDataSO> drawAbilities = new DrawSelected<AbilityDataSO>();
-        private DrawSelected<HexCharacterTemplateSO> drawCharacterTemplates = new DrawSelected<HexCharacterTemplateSO>();
-        private DrawSelected<PerkIconDataSO> drawPerks = new DrawSelected<PerkIconDataSO>();
-        private DrawSelected<ItemDataSO> drawItems = new DrawSelected<ItemDataSO>();
-        private DrawSelected<EnemyTemplateSO> drawEnemies = new DrawSelected<EnemyTemplateSO>();
-        private DrawSelected<EnemyEncounterSO> drawEnemyEncounters = new DrawSelected<EnemyEncounterSO>();
-        private DrawSelected<HexMapSeedDataSO> drawMapSeeds = new DrawSelected<HexMapSeedDataSO>();
-        private DrawSelected<HexCharacterTemplateSO> drawStartingCharacterPresets = new DrawSelected<HexCharacterTemplateSO>();
-        private DrawSelected<CharacterModelTemplateSO> drawCharacterModelTemplates = new DrawSelected<CharacterModelTemplateSO>();
-        private DrawSelected<BackgroundDataSO> drawCharacterBackgrounds = new DrawSelected<BackgroundDataSO>();
+            SirenixEditorGUI.Title("The Project Manager", "Hex Game Engine", TextAlignment.Center, true);
+            EditorGUILayout.Space();
 
-        // Hard coded file directory paths to specific SO's
-        private string abilityPath = "Assets/SO Assets/Abilities";
-        private string characterTemplatePath = "Assets/SO Assets/Characters";
-        private string perkPath = "Assets/SO Assets/Perks";
-        private string itemPath = "Assets/SO Assets/Items";
-        private string enemyPath = "Assets/SO Assets/Enemies";
-        private string enemyEncounterPath = "Assets/SO Assets/Enemy Encounters";
-        private string mapSeedPath = "Assets/SO Assets/Hex Map Seeds";
-        private string startingCharacterPresetsPath = "Assets/SO Assets/Starting Character Presets";
-        private string characterModelTemplatesPath = "Assets/SO Assets/Character Model Templates";
-        private string characterBackgroundsPath = "Assets/SO Assets/Character Backgrounds";
+            switch (managerState)
+            {
+                case ManagerState.EnemyTemplateData:
+                case ManagerState.ItemData:
+                case ManagerState.AbilityData:
+                case ManagerState.EnemyEncounterData:
+                case ManagerState.PerkData:
+                case ManagerState.MapSeedData:
+                case ManagerState.Characters:
+                case ManagerState.RecruitClassTemplates:
+                case ManagerState.StartingCharacterPresets:
+                case ManagerState.CharacterModelTemplates:
+                case ManagerState.CharacterBackgrounds:
+                    DrawEditor(enumIndex);
+                    break;
+            }
 
-        // Create field for each type of manager object in project to be drawn       
-        private DrawGlobalSettings drawGlobalSettings = new DrawGlobalSettings();
-        private DrawLevelController drawLevelController = new DrawLevelController();
-        private DrawCharacterDataController drawCharacterDataController = new DrawCharacterDataController();
-        private DrawPrefabHolder drawPrefabHolder = new DrawPrefabHolder();
-        private DrawVisualEffectManager drawVisualEffectManager= new DrawVisualEffectManager();
-        private DrawAudioManager drawAudioManager = new DrawAudioManager();
-        private DrawItemController drawItemController = new DrawItemController();
-        private DrawAbilityController drawAbilityController = new DrawAbilityController();
-        private DrawPerkController drawPerkController = new DrawPerkController();
-        private DrawColorLibrary drawColorLibrary = new DrawColorLibrary();       
-
+            EditorGUILayout.Space();
+            base.OnGUI();
+        }
 
         [MenuItem("Tools/Hex Game Tools/PROJECT MANAGER")]
         public static void OpenWindow()
@@ -105,42 +164,6 @@ namespace WeAreGladiators.Editor
             drawAbilityController.FindMyObject();
             drawPerkController.FindMyObject();
             drawColorLibrary.FindMyObject();
-        }
-        protected override void OnGUI()
-        {
-            // Did we toggle to a new page? 
-            // Should we rebuild the menu tree?
-            if (treeRebuild && Event.current.type == EventType.Layout)
-            {
-                ForceMenuTreeRebuild();
-                treeRebuild = false;
-            }
-
-            SirenixEditorGUI.Title("The Project Manager", "Hex Game Engine", TextAlignment.Center, true);
-            EditorGUILayout.Space();
-
-            switch (managerState)
-            {
-                case ManagerState.EnemyTemplateData:
-                case ManagerState.ItemData:
-                case ManagerState.AbilityData:
-                case ManagerState.EnemyEncounterData:
-                case ManagerState.PerkData:
-                case ManagerState.MapSeedData:
-                case ManagerState.Characters:
-                case ManagerState.RecruitClassTemplates:
-                case ManagerState.StartingCharacterPresets:
-                case ManagerState.CharacterModelTemplates:
-                case ManagerState.CharacterBackgrounds:
-                    DrawEditor(enumIndex);
-                    break;
-                default:
-                    break;
-            }
-
-
-            EditorGUILayout.Space();
-            base.OnGUI();
         }
         protected override void DrawEditors()
         {
@@ -189,7 +212,7 @@ namespace WeAreGladiators.Editor
 
                 case ManagerState.ColorLibrary:
                     DrawEditor(enumIndex);
-                    break;           
+                    break;
 
                 case ManagerState.EnemyTemplateData:
                     drawEnemies.SetSelected(MenuTree.Selection.SelectedValue);
@@ -234,7 +257,7 @@ namespace WeAreGladiators.Editor
 
             // Which editor window should be drawn?
             // just cast the enum value as int to be used as the index
-            DrawEditor((int)managerState);
+            DrawEditor((int) managerState);
         }
         protected override IEnumerable<object> GetTargets()
         {
@@ -292,8 +315,6 @@ namespace WeAreGladiators.Editor
                 case ManagerState.CharacterModelTemplates:
                 case ManagerState.CharacterBackgrounds:
                     base.DrawMenu();
-                    break;
-                default:
                     break;
             }
         }
@@ -356,86 +377,44 @@ namespace WeAreGladiators.Editor
             }
             return tree;
         }
-        public enum ManagerState
-        {
-            GlobalSettings,
-
-            AbilityData,
-            Characters,
-            PerkData,
-            ItemData,
-            EnemyTemplateData,
-            EnemyEncounterData,
-            MapSeedData,
-            RecruitClassTemplates,
-            StartingCharacterPresets,
-            CharacterModelTemplates,
-            CharacterBackgrounds,
-
-            LevelController,
-            CharacterDataController,
-            PrefabHolder,
-            VisualEffectManager,
-            AudioManager,
-            ItemController,
-            AbilityController,
-            PerkController,
-            ColorLibrary,
-
-        };
-
-
     }
 
     // Draw Manager Classes
     #region
-    
+
     public class DrawGlobalSettings : DrawSceneObject<GlobalSettings>
     {
-
     }
     public class DrawLevelController : DrawSceneObject<LevelController>
     {
-
     }
     public class DrawCharacterDataController : DrawSceneObject<CharacterDataController>
     {
-
     }
     public class DrawPrefabHolder : DrawSceneObject<PrefabHolder>
     {
-
     }
-    public class DrawVisualEffectManager: DrawSceneObject<VisualEffectManager>
+    public class DrawVisualEffectManager : DrawSceneObject<VisualEffectManager>
     {
-
     }
     public class DrawAudioManager : DrawSceneObject<AudioManager>
     {
-
     }
     public class DrawItemController : DrawSceneObject<ItemController>
     {
-
     }
     public class DrawAbilityController : DrawSceneObject<AbilityController>
     {
-
     }
     public class DrawPerkController : DrawSceneObject<PerkController>
     {
-
     }
     public class DrawColorLibrary : DrawSceneObject<ColorLibrary>
     {
-
     }
-
 
     #endregion
 
 }
-
-
 
 #endif

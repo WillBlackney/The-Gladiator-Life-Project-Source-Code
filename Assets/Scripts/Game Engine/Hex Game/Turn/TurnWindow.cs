@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DG.Tweening;
+using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.EventSystems;
-using Sirenix.OdinInspector;
 using WeAreGladiators.Characters;
 using WeAreGladiators.UCM;
-using WeAreGladiators.HexTiles;
-using DG.Tweening;
 
 namespace WeAreGladiators.TurnLogic
 {
@@ -16,6 +12,7 @@ namespace WeAreGladiators.TurnLogic
     {
         // Properties + Component References
         #region
+
         [Header("Component References")]
         [SerializeField] private GameObject visualParent;
         public TextMeshProUGUI rollText;
@@ -24,20 +21,20 @@ namespace WeAreGladiators.TurnLogic
         public Image portraitImage;
 
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Properties")]
         public HexCharacterModel myCharacter;
         public bool animateNumberText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Colouring References")]
         [SerializeField] private Image frameImage;
         [SerializeField] private Color normalColor;
         [SerializeField] private Color highlightColor;
+
         #endregion
 
         // Mouse + Pointer Events
         #region
+
         public void MouseEnter()
         {
             frameImage.DOKill();
@@ -70,8 +67,7 @@ namespace WeAreGladiators.TurnLogic
             frameImage.color = normalColor;
             visualParent.SetActive(true);
         }
-        #endregion
 
+        #endregion
     }
 }
-

@@ -1,38 +1,27 @@
-﻿using WeAreGladiators.Utilities;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.HexTiles
 {
 
-
     public class HexObstacle : MonoBehaviour
     {
-        [Header("Components")]       
-        [SerializeField] SpriteRenderer[] obstacleSprites;
-        SpriteRenderer mySR;
+        [Header("Components")]
+        [SerializeField]
+        private SpriteRenderer[] obstacleSprites;
 
-        private Hex myHex;
-
-        public Hex MyHex
-        {
-            get { return myHex; }
-        }
-        public SpriteRenderer MySR
-        {
-            get { return mySR; }
-        }
+        public Hex MyHex { get; private set; }
+        public SpriteRenderer MySR { get; private set; }
 
         public void SetMyHex(Hex h)
         {
-            myHex = h;
+            MyHex = h;
         }
 
         public void RandomizeObstacleSprite()
         {
             SpriteRenderer sr = obstacleSprites[RandomGenerator.NumberBetween(0, obstacleSprites.Length - 1)];
-            mySR = sr;
+            MySR = sr;
             sr.gameObject.SetActive(true);
         }
     }

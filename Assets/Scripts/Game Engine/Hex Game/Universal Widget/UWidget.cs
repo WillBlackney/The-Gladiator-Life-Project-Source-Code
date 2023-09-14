@@ -1,9 +1,7 @@
-using WeAreGladiators.UI;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using WeAreGladiators.UI;
 
 namespace WeAreGladiators.UWidget
 {
@@ -11,104 +9,103 @@ namespace WeAreGladiators.UWidget
     {
         // Variables + Component References
         #region
+
         [Header("Core Properties")]
         [Tooltip("Sets the type of input events this Widget should intercept and listen for.")]
         public WidgetInputType inputType;
         [Tooltip("If true, any animation events playing on this widget will stop when a new input event is triggered.")]
         public bool killPreviousTweensOnNewSequenceStart = true;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Event Data")]
         [Tooltip("Events that will be triggered when the Widget is clicked down and up using the left mouse button")]
-        [SerializeField] WidgetEventData[] onClickEvents;
+        [SerializeField]
+        private WidgetEventData[] onClickEvents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Tooltip("Events that will be triggered when the Widget is clicked down and up using the right mouse button")]
-        [SerializeField] WidgetEventData[] onRightClickEvents;
+        [SerializeField]
+        private WidgetEventData[] onRightClickEvents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Tooltip("Events that will be triggered during the first frame in which the user left/right clicks down while their mouse " +
             "is within the volume of the Widget's Rect Transform or Collider component.")]
-        [SerializeField] WidgetEventData[] mouseDownEvents;
+        [SerializeField]
+        private WidgetEventData[] mouseDownEvents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Tooltip("Events that will be triggered during the first frame in which the user moves their mouse " +
             "within the volume of the Widget's Rect Transform or Collider component.")]
-        [SerializeField] WidgetEventData[] mouseEnterEvents;
+        [SerializeField]
+        private WidgetEventData[] mouseEnterEvents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Tooltip("Events that will be triggered during the first frame in which the user moves their mouse" +
             " outside the volume of the Widget's Rect Transform or Collider component.")]
-        [SerializeField] WidgetEventData[] mouseExitEvents;
+        [SerializeField]
+        private WidgetEventData[] mouseExitEvents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Tooltip("Events that will be triggered when the UI element is disabled")]
-        [SerializeField] WidgetEventData[] onDisableEvents;
+        [SerializeField]
+        private WidgetEventData[] onDisableEvents;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [Header("Input State")]
-        private float timeSinceLastPointerEnter;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Misc Properties")]
-        private bool hasRunSetup = false;
+        private bool hasRunSetup;
 
-        private static UWidget mousedOver;
-        private bool didMouseDown = false;
+        private bool didMouseDown;
+
         #endregion
 
         //  Properties + Accessors
         #region
-        public static UWidget MousedOver
-        {
-            get { return mousedOver; }
-            private set { mousedOver = value; }
-        }       
-        public float TimeSinceLastPointerEnter
-        {
-            get { return timeSinceLastPointerEnter; }
-            private set { timeSinceLastPointerEnter = value; }
-        }
+
+        public static UWidget MousedOver { get; private set; }
+        [field: PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [field: Header("Input State")]
+        public float TimeSinceLastPointerEnter { get; private set; }
         public WidgetEventData[] MouseDownEvents
         {
-            get { return mouseDownEvents; }
-            private set { mouseDownEvents = value; }
+            get => mouseDownEvents;
+            private set => mouseDownEvents = value;
         }
         public WidgetEventData[] MouseEnterEvents
         {
-            get { return mouseEnterEvents; }
-            private set { mouseEnterEvents = value; }
+            get => mouseEnterEvents;
+            private set => mouseEnterEvents = value;
         }
         public WidgetEventData[] OnClickEvents
         {
-            get { return onClickEvents; }
-            private set { onClickEvents = value; }
+            get => onClickEvents;
+            private set => onClickEvents = value;
         }
         public WidgetEventData[] OnRightClickEvents
         {
-            get { return onRightClickEvents; }
-            private set { onRightClickEvents = value; }
+            get => onRightClickEvents;
+            private set => onRightClickEvents = value;
         }
         public WidgetEventData[] MouseExitEvents
         {
-            get { return mouseExitEvents; }
-            private set { mouseExitEvents = value; }
+            get => mouseExitEvents;
+            private set => mouseExitEvents = value;
         }
         public WidgetEventData[] OnDisableEvents
         {
-            get { return onDisableEvents; }
-            private set { onDisableEvents = value; }
+            get => onDisableEvents;
+            private set => onDisableEvents = value;
         }
+
         #endregion
 
         // Input Listeners
         #region
+
         public void OnPointerUp(PointerEventData eventData)
-        {            
+        {
             if (UWidgetController.Instance != null && inputType == WidgetInputType.IPointer && didMouseDown)
             {
-                if (eventData.button == PointerEventData.InputButton.Right) UWidgetController.Instance.HandleWidgetEvents(this, OnRightClickEvents, "Right Click");                
-                else if (eventData.button == PointerEventData.InputButton.Left) UWidgetController.Instance.HandleWidgetEvents(this, OnClickEvents, "Left Click");
+                if (eventData.button == PointerEventData.InputButton.Right)
+                {
+                    UWidgetController.Instance.HandleWidgetEvents(this, OnRightClickEvents, "Right Click");
+                }
+                else if (eventData.button == PointerEventData.InputButton.Left)
+                {
+                    UWidgetController.Instance.HandleWidgetEvents(this, OnClickEvents, "Left Click");
+                }
                 didMouseDown = false;
             }
         }
@@ -145,7 +142,7 @@ namespace WeAreGladiators.UWidget
             }
 
         }
-        void OnMouseDown()
+        private void OnMouseDown()
         {
             if (UWidgetController.Instance != null && inputType == WidgetInputType.Collider)
             {
@@ -157,14 +154,21 @@ namespace WeAreGladiators.UWidget
         public void OnMouseOver()
         {
             if (inputType == WidgetInputType.Collider &&
-                (Input.GetKeyUp(KeyCode.Mouse1) || Input.GetKeyUp(KeyCode.Mouse0))) didMouseDown = true;
+                (Input.GetKeyUp(KeyCode.Mouse1) || Input.GetKeyUp(KeyCode.Mouse0)))
+            {
+                didMouseDown = true;
+            }
 
             if (UWidgetController.Instance != null && inputType == WidgetInputType.Collider && didMouseDown)
             {
-                if(Input.GetKeyUp(KeyCode.Mouse1))
+                if (Input.GetKeyUp(KeyCode.Mouse1))
+                {
                     UWidgetController.Instance.HandleWidgetEvents(this, OnRightClickEvents, "Right Click");
+                }
                 else if (Input.GetKeyUp(KeyCode.Mouse0))
+                {
                     UWidgetController.Instance.HandleWidgetEvents(this, OnClickEvents, "Left Click");
+                }
 
                 didMouseDown = false;
             }
@@ -180,7 +184,7 @@ namespace WeAreGladiators.UWidget
             }
         }
         public void OnMouseExit()
-        {           
+        {
             if (UWidgetController.Instance != null && inputType == WidgetInputType.Collider)
             {
                 didMouseDown = false;
@@ -192,17 +196,21 @@ namespace WeAreGladiators.UWidget
                 UWidgetController.Instance.HandleWidgetEvents(this, MouseExitEvents, "Mouse Exit");
             }
         }
-        void OnDisable()
+        private void OnDisable()
         {
             didMouseDown = false;
             if (UWidgetController.Instance != null)
+            {
                 UWidgetController.Instance.HandleWidgetEvents(this, OnDisableEvents, "On Disabled");
+            }
         }
+
         #endregion
 
         // Setup + Initialization
         #region
-        void Start()
+
+        private void Start()
         {
             // Runs the setup as soon as the application is launched.
             // NOTE: 'Start' is only executed on game objects that are active, if the
@@ -210,11 +218,11 @@ namespace WeAreGladiators.UWidget
             // To remedy this, whenever this game object is enabled, it will check if the set up
             // has already executed. If it hasn't, it will run the set up as part of the 'OnEnable' event.
             if (!hasRunSetup)
-            {           
+            {
                 RunSetup();
             }
         }
-        void OnEnable()
+        private void OnEnable()
         {
             // If the set up was not executed during 'Start' (because this game object was disabled)
             // then run the setup on first enable.
@@ -223,7 +231,7 @@ namespace WeAreGladiators.UWidget
                 RunSetup();
             }
         }
-        void RunSetup()
+        private void RunSetup()
         {
             Debug.Log("Running setup on " + gameObject.name);
             // Set and cache original scaling values of transforms for shrink/enlarge/etc events,
@@ -359,6 +367,7 @@ namespace WeAreGladiators.UWidget
 
             hasRunSetup = true;
         }
+
         #endregion
     }
 }

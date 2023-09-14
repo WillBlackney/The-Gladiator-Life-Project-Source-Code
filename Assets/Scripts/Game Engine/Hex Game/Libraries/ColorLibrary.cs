@@ -7,6 +7,7 @@ namespace WeAreGladiators.Libraries
     {
         // Talent Colors
         #region
+
         [Header("Talent Colors")]
         public Color neutralColor;
         public Color warfareColor;
@@ -29,15 +30,18 @@ namespace WeAreGladiators.Libraries
 
         // Rarity Colors
         #region
+
         [Header("Rarity Colors")]
         public Color commonColor;
         public Color rareColor;
         public Color epicColor;
         public Color legendaryColor;
+
         #endregion
 
         // Overlay Colors
         #region
+
         [Header("Screen Overlay Colors")]
         public Color whiteOverlayColour;
         public Color fireOverlayColour;
@@ -46,10 +50,12 @@ namespace WeAreGladiators.Libraries
 
         [Header("Font Colors")]
         public Color cardUpgradeFontColor;
+
         #endregion
 
         // Logic
         #region
+
         public Color GetTalentColor(TalentSchool talent)
         {
             Color colorReturned = neutralColor;
@@ -82,7 +88,7 @@ namespace WeAreGladiators.Libraries
             {
                 colorReturned = shadowcraftColor;
             }
-            
+
             else if (talent == TalentSchool.Divinity)
             {
                 colorReturned = divinityColor;
@@ -121,8 +127,6 @@ namespace WeAreGladiators.Libraries
                 colorReturned = legendaryColor;
             }
 
-
-
             return colorReturned;
         }
         public Color GetOverlayColor(ScreenOverlayColor overlay)
@@ -148,7 +152,7 @@ namespace WeAreGladiators.Libraries
 
             return colorReturned;
         }
-        #endregion
 
+        #endregion
     }
 }

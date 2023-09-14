@@ -1,29 +1,33 @@
-﻿using System.Linq;
-using UnityEngine;
-using WeAreGladiators.Utilities;
+﻿using UnityEngine;
 using WeAreGladiators.Persistency;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.DungeonMap
 {
     public class MapManager : Singleton<MapManager>
     {
+
+        // Getters + Accessors
+        #region
+
+        public Map CurrentMap { get; private set; }
+
+        #endregion
         // Components + Properties
         #region
+
         [Header("Components")]
         public DungeonMapSeed config;
         public MapView view;
 
         [Header("Properties")]
-        [SerializeField] private bool testingMode = false;
-        #endregion
+        [SerializeField] private bool testingMode;
 
-        // Getters + Accessors
-        #region
-        public Map CurrentMap { get; private set; }
         #endregion
 
         // Generate + Set Map
         #region
+
         private void Start()
         {
             if (testingMode)
@@ -52,9 +56,9 @@ namespace WeAreGladiators.DungeonMap
             int totalShops = 0;
             int totalBosses = 0;
 
-            for(int i = 0; i < map.nodes.Count; i++)
+            for (int i = 0; i < map.nodes.Count; i++)
             {
-                if(map.nodes[i].NodeType == EncounterType.BasicEnemy)
+                if (map.nodes[i].NodeType == EncounterType.BasicEnemy)
                 {
                     totalBasics++;
                 }
@@ -78,23 +82,24 @@ namespace WeAreGladiators.DungeonMap
                 }
             }
 
-            Debug.Log("Total Basic Enemies: " + totalBasics.ToString());
-            Debug.Log("Total Elite Enemies: " + totalElites.ToString());
-            Debug.Log("Total Shops: " + totalShops.ToString());
-            Debug.Log("Total Camp Sites: " + totalCamps.ToString());
-            Debug.Log("Total Boss: " + totalBosses.ToString());
+            Debug.Log("Total Basic Enemies: " + totalBasics);
+            Debug.Log("Total Elite Enemies: " + totalElites);
+            Debug.Log("Total Shops: " + totalShops);
+            Debug.Log("Total Camp Sites: " + totalCamps);
+            Debug.Log("Total Boss: " + totalBosses);
 
         }
+
         #endregion
 
         // Save + Load Logic
         #region
+
         public void SaveMyDataToSaveFile(SaveGameData saveFile)
         {
-            if(CurrentMap == null)
+            if (CurrentMap == null)
             {
                 Debug.LogWarning("MapManager.SaveMyDataToSaveFile() failed, current map is null...");
-                return;
             }
             //saveFile.map = CurrentMap.ToJson();
         }
@@ -102,6 +107,7 @@ namespace WeAreGladiators.DungeonMap
         {
             //CurrentMap = JsonConvert.DeserializeObject<Map>(saveFile.map);
         }
+
         #endregion
     }
 

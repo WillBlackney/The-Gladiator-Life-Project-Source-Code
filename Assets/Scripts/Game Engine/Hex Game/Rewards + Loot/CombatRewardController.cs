@@ -1,33 +1,62 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Utilities;
-using WeAreGladiators.Characters;
-using WeAreGladiators.Abilities;
-using WeAreGladiators.Perks;
+﻿using System.Collections.Generic;
 using DG.Tweening;
-using System;
-using Sirenix.OdinInspector;
-using WeAreGladiators.Cards;
-using WeAreGladiators.Persistency;
-using WeAreGladiators.JourneyLogic;
-using WeAreGladiators.UCM;
-using WeAreGladiators.Combat;
-using WeAreGladiators.DungeonMap;
-using WeAreGladiators.TownFeatures;
-using WeAreGladiators.Player;
-using WeAreGladiators.Items;
 using TMPro;
-using WeAreGladiators.UI;
+using UnityEngine;
 using UnityEngine.UI;
 using WeAreGladiators.Audio;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Items;
+using WeAreGladiators.JourneyLogic;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Persistency;
+using WeAreGladiators.Player;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.UCM;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.RewardSystems
 {
     public class CombatRewardController : Singleton<CombatRewardController>
     {
+
+        // Getters + Accesors
+        #region
+
+        public List<CharacterCombatStatData> CurrentStatResults { get; private set; } = new List<CharacterCombatStatData>();
+
+        #endregion
+
+        // Items Loot Reward Logic
+        #region
+
+        public void HandleGainRewardsOfContract(CombatContractData contract)
+        {
+            PlayerDataController.Instance.ModifyPlayerGold(contract.combatRewardData.goldAmount);
+            InventoryController.Instance.AddItemToInventory(contract.combatRewardData.item);
+            InventoryController.Instance.AddItemToInventory(contract.combatRewardData.abilityAwarded);
+        }
+
+        #endregion
+
+        #region Movement + Anims
+
+        private void MoveContentOnScreen()
+        {
+            blackUnderlay.DOKill();
+            blackUnderlay.DOFade(0, 0);
+            blackUnderlay.DOFade(0.5f, 0.5f);
+
+            contentRect.DOKill();
+            contentRect.position = contentOffScreenRect.position;
+            contentRect.DOMove(contentOnScreenRect.position, 1.5f).SetEase(Ease.OutBack);
+
+        }
+
+        #endregion
         // Properties + Components
         #region
+
         [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
         [SerializeField] private RectTransform contentRect;
@@ -45,50 +74,45 @@ namespace WeAreGladiators.RewardSystems
         [SerializeField] private List<CombatLootIcon> lootIcons;
 
         [Header("Button Components")]
-        [SerializeField] Sprite selectedButtonSprite;
-        [SerializeField] Sprite unselectedButtonSprite;
-        [SerializeField] Image statsHeaderButtonImage;
-        [SerializeField] Image lootHeaderButtonImage;
+        [SerializeField]
+        private Sprite selectedButtonSprite;
+        [SerializeField] private Sprite unselectedButtonSprite;
+        [SerializeField] private Image statsHeaderButtonImage;
+        [SerializeField] private Image lootHeaderButtonImage;
 
         [Header("Game Over Screen Components")]
         [SerializeField] private GameObject gameOverVisualParent;
-
-        private List<CharacterCombatStatData> currentStatResults = new List<CharacterCombatStatData>();
 
         private WindowState currentWindowViewing = WindowState.CharactersPage;
         private enum WindowState
         {
             CharactersPage = 0,
-            LootPage = 1,
+            LootPage = 1
         }
-        #endregion
 
-        // Getters + Accesors
-        #region
-        public List<CharacterCombatStatData> CurrentStatResults
-        {
-            get { return currentStatResults; }
-        }
         #endregion
 
         // Persistency Controller
         #region
+
         public void SaveMyDataToSaveFile(SaveGameData saveData)
         {
-            saveData.currentCombatStatResult = currentStatResults;
+            saveData.currentCombatStatResult = CurrentStatResults;
         }
         public void BuildMyDataFromSaveFile(SaveGameData saveData)
         {
-            currentStatResults = saveData.currentCombatStatResult;
+            CurrentStatResults = saveData.currentCombatStatResult;
         }
         public void CacheStatResult(List<CharacterCombatStatData> result)
         {
-            currentStatResults = result;
+            CurrentStatResults = result;
         }
+
         #endregion
 
         // Xp Reward Logic
         #region
+
         public List<CharacterCombatStatData> GenerateCombatStatResultsForCharacters(List<HexCharacterModel> characters, bool victory)
         {
             List<CharacterCombatStatData> dataRet = new List<CharacterCombatStatData>();
@@ -96,13 +120,15 @@ namespace WeAreGladiators.RewardSystems
             // Calculate xp gain          
             int baseXp = RunController.Instance.CurrentCombatContractData.enemyEncounterData.baseXpReward / characters.Count;
             int killXpSlice = 0;
-            var encounterData = RunController.Instance.CurrentCombatContractData.enemyEncounterData;
+            EnemyEncounterData encounterData = RunController.Instance.CurrentCombatContractData.enemyEncounterData;
             int totalKillingBlowXp = 0;
 
             // Prevent divide by zero error
             if (encounterData.TotalEnemyXP != 0 &&
                 encounterData.TotalEnemies != 0)
+            {
                 killXpSlice = encounterData.TotalEnemyXP / encounterData.TotalEnemies;
+            }
 
             // Determine if any enemies were killed indirectly by player (from burning, poisoned, etc)
             // Split their xp value evenly over all player characters
@@ -124,12 +150,17 @@ namespace WeAreGladiators.RewardSystems
                 dataRet.Add(result);
 
                 // Dead characters dont get XP
-                if (character.characterData.currentHealth <= 0 || !victory) continue;
+                if (character.characterData.currentHealth <= 0 || !victory)
+                {
+                    continue;
+                }
 
                 // Apply xp gain + level up
-                int xpGained = baseXp + (killXpSlice * character.totalKills);
-                if (character.characterData.currentXP + (xpGained * StatCalculator.GetCharacterXpGainRate(character.characterData)) >= character.characterData.currentMaxXP)
+                int xpGained = baseXp + killXpSlice * character.totalKills;
+                if (character.characterData.currentXP + xpGained * StatCalculator.GetCharacterXpGainRate(character.characterData) >= character.characterData.currentMaxXP)
+                {
                     result.didLevelUp = true;
+                }
                 result.xpGained = xpGained;
             }
 
@@ -155,31 +186,26 @@ namespace WeAreGladiators.RewardSystems
             result.damageDealt = character.damageDealtThisCombat;
             result.injuriesGained.AddRange(character.injuriesGainedThisCombat);
             result.permanentInjuriesGained.AddRange(character.permanentInjuriesGainedThisCombat);
-            if (character.characterData.currentHealth <= 0) result.died = true;
+            if (character.characterData.currentHealth <= 0)
+            {
+                result.died = true;
+            }
 
             return result;
         }
-        #endregion
 
-        // Items Loot Reward Logic
-        #region
-        public void HandleGainRewardsOfContract(CombatContractData contract)
-        {
-            PlayerDataController.Instance.ModifyPlayerGold(contract.combatRewardData.goldAmount);
-            InventoryController.Instance.AddItemToInventory(contract.combatRewardData.item);
-            InventoryController.Instance.AddItemToInventory(contract.combatRewardData.abilityAwarded);
-        }
         #endregion
 
         // Build + Show Screen views
         #region
+
         public void HidePostCombatRewardScreen()
         {
             mainVisualParent.SetActive(false);
         }
         public void BuildAndShowPostCombatScreen(List<CharacterCombatStatData> data, CombatContractData contractData, bool victory)
         {
-            SetContentDefaultViewState();           
+            SetContentDefaultViewState();
             BuildCharacterStatCardPage(data);
             MoveContentOnScreen();
             if (victory)
@@ -194,7 +220,9 @@ namespace WeAreGladiators.RewardSystems
                 headerText.text = "DEFEAT!";
                 // Hide Loot Icons
                 for (int i = 0; i < lootIcons.Count; i++)
-                    lootIcons[i].Reset();                
+                {
+                    lootIcons[i].Reset();
+                }
             }
 
         }
@@ -211,7 +239,9 @@ namespace WeAreGladiators.RewardSystems
         {
             // Reset views
             foreach (CharacterCombatStatCard c in allCharacterStatCards)
+            {
                 c.gameObject.SetActive(false);
+            }
 
             // Build a card for each character
             for (int i = 0; i < data.Count; i++)
@@ -230,7 +260,9 @@ namespace WeAreGladiators.RewardSystems
 
             // Reset
             foreach (UIPerkIcon p in card.InjuryIcons)
+            {
                 p.HideAndReset();
+            }
             card.DeathIndicatorParent.SetActive(false);
             card.Ucm.gameObject.SetActive(true);
             card.KnockDownIndicatorParent.SetActive(false);
@@ -246,7 +278,9 @@ namespace WeAreGladiators.RewardSystems
 
             // Knock down views setup
             if (data.permanentInjuriesGained.Count > 0)
+            {
                 card.KnockDownIndicatorParent.SetActive(true);
+            }
 
             // Death views setup
             else if (data.died)
@@ -268,8 +302,14 @@ namespace WeAreGladiators.RewardSystems
             card.KillsText.text = data.totalKills.ToString();
 
             // level up indicator
-            if (data.didLevelUp) card.ShowLevelUpIndicator();
-            else card.LevelUpParent.SetActive(false);
+            if (data.didLevelUp)
+            {
+                card.ShowLevelUpIndicator();
+            }
+            else
+            {
+                card.LevelUpParent.SetActive(false);
+            }
 
             // build injury icons
             List<Perk> injuriesShown = new List<Perk>();
@@ -285,7 +325,9 @@ namespace WeAreGladiators.RewardSystems
         private void BuildLootPageFromContractLootData(CombatContractData contract)
         {
             for (int i = 0; i < lootIcons.Count; i++)
+            {
                 lootIcons[i].Reset();
+            }
 
             int iconIndex = 0;
             if (contract.combatRewardData.item != null)
@@ -305,10 +347,12 @@ namespace WeAreGladiators.RewardSystems
             }
 
         }
+
         #endregion
 
         // Input + Buttons Logic
         #region
+
         public void OnStatsButtonClicked()
         {
             if (currentWindowViewing != WindowState.CharactersPage)
@@ -337,43 +381,33 @@ namespace WeAreGladiators.RewardSystems
         }
         public void OnContinueButtonClicked()
         {
-            if (currentWindowViewing == WindowState.CharactersPage) OnLootButtonClicked();
-            else GameController.Instance.HandlePostCombatToTownTransistion();
+            if (currentWindowViewing == WindowState.CharactersPage)
+            {
+                OnLootButtonClicked();
+            }
+            else
+            {
+                GameController.Instance.HandlePostCombatToTownTransistion();
+            }
         }
 
         #endregion
-
-        #region Movement + Anims
-        private void MoveContentOnScreen()
-        {
-            blackUnderlay.DOKill();
-            blackUnderlay.DOFade(0, 0);
-            blackUnderlay.DOFade(0.5f, 0.5f);
-
-            contentRect.DOKill();
-            contentRect.position = contentOffScreenRect.position;
-            contentRect.DOMove(contentOnScreenRect.position, 1.5f).SetEase(Ease.OutBack);
-
-        }
-
-        #endregion
-
     }
 
     public class CharacterCombatStatData
     {
-        public HexCharacterModel hexCharacter;
-        public HexCharacterData characterData; 
-        public int xpGained;
-        public bool didLevelUp;
-        public int totalKills;
-        public int healthLost;
-        public int stressGained;
         public int armourLost;
+        public HexCharacterData characterData;
         public int damageDealt;
+        public bool didLevelUp;
+        public bool died;
+        public int healthLost;
+        public HexCharacterModel hexCharacter;
         public List<Perk> injuriesGained = new List<Perk>();
         public List<Perk> permanentInjuriesGained = new List<Perk>();
-        public bool died = false;
+        public int stressGained;
+        public int totalKills;
+        public int xpGained;
     }
-   
+
 }

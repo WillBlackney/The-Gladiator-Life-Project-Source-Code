@@ -1,9 +1,9 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine;
-using UnityEditor;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities.Editor;
+using UnityEditor;
+using UnityEngine;
 using WeAreGladiators.Characters;
 
 namespace WeAreGladiators.Editor
@@ -11,11 +11,6 @@ namespace WeAreGladiators.Editor
 
     public class StartingCharacterPresetEditor : OdinMenuEditorWindow
     {
-        [MenuItem("Tools/Hex Game Tools/Starting Character Preset Editor")]
-        private static void OpenWindow()
-        {
-            GetWindow<StartingCharacterPresetEditor>().Show();
-        }
 
         private CreateNewCharacterTemplateData createNewCharacterTemplateData;
         protected override void OnDestroy()
@@ -27,10 +22,15 @@ namespace WeAreGladiators.Editor
                 DestroyImmediate(createNewCharacterTemplateData.templateDataSO);
             }
         }
+        [MenuItem("Tools/Hex Game Tools/Starting Character Preset Editor")]
+        private static void OpenWindow()
+        {
+            GetWindow<StartingCharacterPresetEditor>().Show();
+        }
 
         protected override OdinMenuTree BuildMenuTree()
         {
-            var tree = new OdinMenuTree();
+            OdinMenuTree tree = new OdinMenuTree();
 
             createNewCharacterTemplateData = new CreateNewCharacterTemplateData();
             tree.Add("Create New", new CreateNewCharacterTemplateData());
@@ -41,7 +41,7 @@ namespace WeAreGladiators.Editor
 
         protected override void OnBeginDrawEditors()
         {
-            OdinMenuTreeSelection selected = this.MenuTree.Selection;
+            OdinMenuTreeSelection selected = MenuTree.Selection;
 
             SirenixEditorGUI.BeginHorizontalToolbar();
             {
@@ -80,9 +80,7 @@ namespace WeAreGladiators.Editor
                 templateDataSO = CreateInstance<HexCharacterTemplateSO>();
                 templateDataSO.myName = "New Character Template";
             }
-
         }
-
     }
 }
 #endif

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using System;
 using Sirenix.OdinInspector;
 using WeAreGladiators.Audio;
 
@@ -45,18 +42,15 @@ namespace WeAreGladiators.VisualEvents
         [ShowIf("ShowScreenOverlay")]
         public float overlayFadeOutTime;
 
-
         [VerticalGroup("General Properties")]
         [LabelWidth(250)]
         [ShowIf("ShowParticleEffect")]
         public ParticleEffect particleEffect;
 
-
         [VerticalGroup("General Properties")]
         [LabelWidth(250)]
         [ShowIf("ShowCameraShake")]
         public CameraShakeType cameraShake;
-
 
         [VerticalGroup("General Properties")]
         [LabelWidth(250)]
@@ -68,18 +62,15 @@ namespace WeAreGladiators.VisualEvents
         [ShowIf("ShowSoundEffect")]
         public Sound soundEffect;
 
-
         [VerticalGroup("General Properties")]
         [LabelWidth(250)]
         [ShowIf("ShowCharacterAnimation")]
         public CharacterAnimation characterAnimation;
 
-
         [VerticalGroup("General Properties")]
         [LabelWidth(250)]
         [ShowIf("ShowDelayDuration")]
         public float delayDuration;
-
 
         [VerticalGroup("General Properties")]
         [LabelWidth(250)]
@@ -95,8 +86,6 @@ namespace WeAreGladiators.VisualEvents
         [LabelWidth(250)]
         [ShowIf("ShowOnCharacter")]
         public CreateOnCharacter onCharacter;
-
-
 
         public bool ShowSoundEffect()
         {
@@ -133,10 +122,7 @@ namespace WeAreGladiators.VisualEvents
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
         public bool ShowOnCharacter()
         {
@@ -146,7 +132,6 @@ namespace WeAreGladiators.VisualEvents
         {
             return eventType == AnimationEventType.ScreenOverlay;
         }
-
     }
 
 }

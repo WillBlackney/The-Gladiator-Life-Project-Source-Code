@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using DG.Tweening;
 using WeAreGladiators.Audio;
 
 namespace WeAreGladiators.Cards
@@ -77,9 +75,6 @@ namespace WeAreGladiators.Cards
             // return CardController.Instance.IsCursorOverTable();
             return true;
         }
-
-
     }
-
 
 }

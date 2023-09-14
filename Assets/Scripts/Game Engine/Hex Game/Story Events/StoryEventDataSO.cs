@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 namespace WeAreGladiators.StoryEvents
 {
@@ -10,7 +8,7 @@ namespace WeAreGladiators.StoryEvents
     {
         [BoxGroup("General Data", true, true)]
         [LabelWidth(125)]
-        public string storyEventName;               
+        public string storyEventName;
 
         [BoxGroup("General Data")]
         [LabelWidth(125)]
@@ -18,7 +16,7 @@ namespace WeAreGladiators.StoryEvents
 
         [BoxGroup("General Data")]
         [LabelWidth(125)]
-        public bool excludeFromGame = false;
+        public bool excludeFromGame;
 
         [BoxGroup("General Data")]
         [LabelWidth(100)]
@@ -31,6 +29,5 @@ namespace WeAreGladiators.StoryEvents
         [BoxGroup("Requirements")]
         [LabelWidth(100)]
         public StoryEventCharacterTarget[] characterRequirements;
-
     }
 }

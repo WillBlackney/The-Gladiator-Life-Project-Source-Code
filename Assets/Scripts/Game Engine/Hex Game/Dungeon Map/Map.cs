@@ -5,10 +5,10 @@ namespace WeAreGladiators.DungeonMap
 {
     public class Map
     {
+        public string bossNodeName;
+        public string configName;
         public List<Node> nodes;
         public List<Point> path;
-        public string bossNodeName;
-        public string configName; 
         public Map(string configName, string bossNodeName, List<Node> nodes, List<Point> path)
         {
             this.configName = configName;
@@ -24,11 +24,13 @@ namespace WeAreGladiators.DungeonMap
 
         public float DistanceBetweenFirstAndLastLayers()
         {
-            var bossNode = GetBossNode();
-            var firstLayerNode = nodes.FirstOrDefault(n => n.point.y == 0);
+            Node bossNode = GetBossNode();
+            Node firstLayerNode = nodes.FirstOrDefault(n => n.point.y == 0);
 
             if (bossNode == null || firstLayerNode == null)
+            {
                 return 0f;
+            }
 
             return bossNode.position.y - firstLayerNode.position.y;
         }

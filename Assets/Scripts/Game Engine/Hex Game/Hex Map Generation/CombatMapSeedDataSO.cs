@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 namespace WeAreGladiators.HexTiles
 {
@@ -23,11 +21,9 @@ namespace WeAreGladiators.HexTiles
         public int obstructionPercentage;
         public bool allowObstaclesOnElevation = true;
         public int maximumObstructions = 5;
-
     }
 
-    
-    [System.Serializable]
+    [Serializable]
     public class CombatMapTilingConfig
     {
         public HexDataSO hexData;
@@ -36,5 +32,5 @@ namespace WeAreGladiators.HexTiles
         [Range(1, 100)]
         public int upperProbability;
     }
-    
+
 }

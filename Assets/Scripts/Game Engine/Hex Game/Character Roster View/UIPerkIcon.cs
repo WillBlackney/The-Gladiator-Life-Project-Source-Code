@@ -1,10 +1,8 @@
-﻿using WeAreGladiators.Perks;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Linq;
+using UnityEngine.UI;
+using WeAreGladiators.Perks;
 
 namespace WeAreGladiators.UI
 {
@@ -13,38 +11,31 @@ namespace WeAreGladiators.UI
     {
         // Properties + Components
         #region
+
         [SerializeField] private Image perkImage;
         [SerializeField] private PerkIconData perkDataRef;
-        private ActivePerk activePerk;
+
         #endregion
 
         // Getters + Accessors
         #region
-        public Image PerkImage
-        {
-            get { return perkImage; }
-        }
-        public PerkIconData PerkDataRef
-        {
-            get { return perkDataRef; }
-        }       
-        public ActivePerk ActivePerk
-        {
-            get { return activePerk; }
-        }
 
+        public Image PerkImage => perkImage;
+        public PerkIconData PerkDataRef => perkDataRef;
+        public ActivePerk ActivePerk { get; private set; }
 
         #endregion
 
         // Logic
         #region
+
         public void SetMyDataReference(PerkIconData data)
         {
             perkDataRef = data;
         }
         public void BuildFromActivePerk(ActivePerk p)
         {
-            activePerk = p;
+            ActivePerk = p;
             SetMyDataReference(p.Data);
             gameObject.SetActive(true);
             PerkImage.sprite = p.Data.passiveSprite;
@@ -54,28 +45,29 @@ namespace WeAreGladiators.UI
         {
             gameObject.SetActive(false);
             perkDataRef = null;
-            activePerk = null;
+            ActivePerk = null;
         }
+
         #endregion
 
         // Input
         #region
+
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if(activePerk != null)
+            if (ActivePerk != null)
             {
-                MainModalController.Instance.BuildAndShowModal(activePerk);
-                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(activePerk.Data.keywords.ToList());
+                MainModalController.Instance.BuildAndShowModal(ActivePerk);
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(ActivePerk.Data.keywords.ToList());
             }
-                          
+
         }
         public void OnPointerExit(PointerEventData eventData)
         {
             MainModalController.Instance.HideModal();
             KeyWordLayoutController.Instance.FadeOutMainView();
         }
-        #endregion
 
-        
+        #endregion
     }
 }

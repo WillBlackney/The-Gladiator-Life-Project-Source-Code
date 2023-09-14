@@ -1,92 +1,101 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Abilities;
+﻿using DG.Tweening;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Items;
 using WeAreGladiators.Libraries;
 using WeAreGladiators.Player;
-using WeAreGladiators.Utilities;
 using WeAreGladiators.UI;
-using WeAreGladiators.Items;
-using DG.Tweening;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.TownFeatures
 {
     public class AbilityTomeShopSlot : MonoBehaviour
     {
-        // Properties + Components
-        #region
-        [Header("Components")]
-        [SerializeField] TextMeshProUGUI abilityNameText;
-        [SerializeField] TextMeshProUGUI goldCostText;
-        [SerializeField] Image abilityBookImage;
-        [SerializeField] Transform scaleParent;
-
-        // Non inspector fields
-        private AbilityTomeShopData myData;
-        #endregion
 
         // Getters + Accessors
         #region
-        public AbilityTomeShopData MyData
-        {
-            get { return myData; }
-        }
+
+        public AbilityTomeShopData MyData { get; private set; }
+
+        #endregion
+        // Properties + Components
+        #region
+
+        [Header("Components")]
+        [SerializeField]
+        private TextMeshProUGUI abilityNameText;
+        [SerializeField] private TextMeshProUGUI goldCostText;
+        [SerializeField] private Image abilityBookImage;
+        [SerializeField] private Transform scaleParent;
+
+        // Non inspector fields
+
         #endregion
 
         // Input
         #region
+
         public void MouseClick()
         {
-            if (AbleToBuy())            
-                TownController.Instance.HandleBuyAbilityTomeFromLibrary(MyData);            
+            if (AbleToBuy())
+            {
+                TownController.Instance.HandleBuyAbilityTomeFromLibrary(MyData);
+            }
         }
         public void MouseEnter()
         {
-            if (myData != null)
+            if (MyData != null)
             {
-                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(myData.ability.keyWords);
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyData.ability.keyWords);
                 AbilityPopupController.Instance.OnAbilityShopTomeMousedOver(this);
             }
         }
         public void MouseExit()
         {
-            if (myData != null)
+            if (MyData != null)
             {
                 KeyWordLayoutController.Instance.FadeOutMainView();
                 AbilityPopupController.Instance.OnAbilityButtonMousedExit();
             }
         }
+
         #endregion
 
         // Logic
         #region
+
         private bool AbleToBuy()
         {
             bool ret = false;
 
             if (MyData.goldCost <= PlayerDataController.Instance.CurrentGold &&
                 InventoryController.Instance.HasFreeInventorySpace())
+            {
                 ret = true;
+            }
             return ret;
         }
         public void BuildFromTomeShopData(AbilityTomeShopData data)
         {
             gameObject.SetActive(true);
-            myData = data;
+            MyData = data;
             abilityNameText.text = data.ability.displayedName;
             abilityBookImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(data.ability.talentRequirementData.talentSchool);
 
             // Color cost text red if not enough gold
             string col = TextLogic.brownBodyText;
-            if (PlayerDataController.Instance.CurrentGold < data.goldCost) col = TextLogic.redText;
+            if (PlayerDataController.Instance.CurrentGold < data.goldCost)
+            {
+                col = TextLogic.redText;
+            }
             goldCostText.text = TextLogic.ReturnColoredText(data.goldCost.ToString(), col);
         }
         public void Reset()
         {
             gameObject.SetActive(false);
-            myData = null;
+            MyData = null;
         }
         public void Enlarge()
         {
@@ -106,6 +115,7 @@ namespace WeAreGladiators.TownFeatures
             scaleParent.DOKill();
             scaleParent.DOScale(endScale, speed);
         }
+
         #endregion
     }
 
@@ -114,7 +124,7 @@ namespace WeAreGladiators.TownFeatures
         public AbilityData ability;
         public int goldCost;
 
-        public AbilityTomeShopData (AbilityData ability, int goldCost)
+        public AbilityTomeShopData(AbilityData ability, int goldCost)
         {
             this.ability = ability;
             this.goldCost = goldCost;

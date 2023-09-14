@@ -1,39 +1,11 @@
-﻿using Sirenix.OdinInspector;
-using System;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace WeAreGladiators.VisualEvents
 {
     public class Projectile : MonoBehaviour
     {
-        // This script is for NON PARTICLE FX based projectiles
-        // Properties + Component References
-        #region       
-
-        // Inspector Fields
-        [Header("Movement Settings")]
-        [Tooltip("Adjusts the starting position of the projectile.")]
-        [SerializeField] private float yOffset;
-        [SerializeField] float movementSpeed = 10f;
-        [SerializeField] bool moveAsParabola = true;
-        [Tooltip("Determines the amount of parabola effect on the projectile. " +
-            "A value of 0 means the projectile will travel in absolutely straight line from starting point to target.")]
-        [Range(0, 0.5f)]
-        [ShowIf("ShowMaxParabolaY")]
-        [SerializeField] float maxParabolaY = 0.25f;
-
-        // Fields
-        Vector3 start;
-        Vector3 destination;
-        bool readyToMove = false;
-        bool destinationReached = false;
-        float initialDistanceX;
-        float nextX;
-        float baseY;
-        float height;
-        Action onImpactCallback;
-
-        #endregion
 
         // Initialization 
         #region
@@ -44,30 +16,87 @@ namespace WeAreGladiators.VisualEvents
             start = transform.position;
             destination = endPos;
             initialDistanceX = Mathf.Abs(destination.x - start.x);
-            if (initialDistanceX == 0f) initialDistanceX = 0.01f;
+            if (initialDistanceX == 0f)
+            {
+                initialDistanceX = 0.01f;
+            }
             this.onImpactCallback = onImpactCallback;
             readyToMove = true;
         }
+
+        #endregion
+
+        public bool ShowMaxParabolaY()
+        {
+            return moveAsParabola;
+        }
+        // This script is for NON PARTICLE FX based projectiles
+        // Properties + Component References
+        #region
+
+        // Inspector Fields
+        [Header("Movement Settings")]
+        [Tooltip("Adjusts the starting position of the projectile.")]
+        [SerializeField] private float yOffset;
+        [SerializeField] private float movementSpeed = 10f;
+        [SerializeField] private bool moveAsParabola = true;
+        [Tooltip("Determines the amount of parabola effect on the projectile. " +
+            "A value of 0 means the projectile will travel in absolutely straight line from starting point to target.")]
+        [Range(0, 0.5f)]
+        [ShowIf("ShowMaxParabolaY")]
+        [SerializeField]
+        private float maxParabolaY = 0.25f;
+
+        // Fields
+        private Vector3 start;
+        private Vector3 destination;
+        private bool readyToMove;
+        private bool destinationReached;
+        private float initialDistanceX;
+        private float nextX;
+        private float baseY;
+        private float height;
+        private Action onImpactCallback;
+
         #endregion
 
         // Movement logic
         #region
+
         private void Update()
         {
-            if (readyToMove) MoveTowardsTarget();            
+            if (readyToMove)
+            {
+                MoveTowardsTarget();
+            }
         }
         private void MoveTowardsTarget()
         {
-            if (destinationReached) return;
-            if (transform.position.x == destination.x) moveAsParabola = false;
-            if (moveAsParabola) MoveParabola();
-            else MoveNormally();
+            if (destinationReached)
+            {
+                return;
+            }
+            if (transform.position.x == destination.x)
+            {
+                moveAsParabola = false;
+            }
+            if (moveAsParabola)
+            {
+                MoveParabola();
+            }
+            else
+            {
+                MoveNormally();
+            }
 
             float vectorDistance = Vector2.Distance(transform.position, destination);
             if (transform.position == destination || vectorDistance <= 0.05f)
             {
                 destinationReached = true;
-                if (onImpactCallback != null) onImpactCallback.Invoke();
+                if (onImpactCallback != null)
+                {
+                    onImpactCallback.Invoke();
+                }
                 DestroySelf();
             }
         }
@@ -90,10 +119,12 @@ namespace WeAreGladiators.VisualEvents
             transform.rotation = LookAtTarget(movePosition - transform.position);
             transform.position = movePosition;
         }
+
         #endregion
 
         // Misc Logic
         #region
+
         public static Quaternion LookAtTarget(Vector2 rotation)
         {
             return Quaternion.Euler(0, 0, Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg);
@@ -103,12 +134,7 @@ namespace WeAreGladiators.VisualEvents
             gameObject.SetActive(false);
             Destroy(gameObject, 0.25f);
         }
+
         #endregion
-
-        public bool ShowMaxParabolaY()
-        {
-            return moveAsParabola;
-        }
-
     }
 }

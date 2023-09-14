@@ -1,37 +1,15 @@
-using WeAreGladiators.Abilities;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using WeAreGladiators.Abilities;
 
 namespace WeAreGladiators.UI
 {
     public class UIAbilityIconSelectable : MonoBehaviour
     {
-        #region Properties + Components
-
-        [SerializeField] GameObject selectedParent;
-        [SerializeField] GameObject unselectedParent;
-        public UIAbilityIcon icon;
-
-        #endregion
-
-        #region Getters + Accessors
-        public GameObject SelectedParent
-        {
-            get { return selectedParent; }
-        }
-        public GameObject UnselectedParent
-        {
-            get { return unselectedParent; }
-        }
-        #endregion
         public void OnClick()
         {
             CharacterRosterViewController.Instance.OnSelectableAbilityButtonClicked(this);
         }
-        
+
         public void Hide()
         {
             gameObject.SetActive(false);
@@ -56,5 +34,19 @@ namespace WeAreGladiators.UI
                 unselectedParent.SetActive(true);
             }
         }
+        #region Properties + Components
+
+        [SerializeField] private GameObject selectedParent;
+        [SerializeField] private GameObject unselectedParent;
+        public UIAbilityIcon icon;
+
+        #endregion
+
+        #region Getters + Accessors
+
+        public GameObject SelectedParent => selectedParent;
+        public GameObject UnselectedParent => unselectedParent;
+
+        #endregion
     }
 }

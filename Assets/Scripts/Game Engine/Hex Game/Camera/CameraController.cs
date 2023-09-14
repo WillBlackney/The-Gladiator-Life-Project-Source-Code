@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using DG.Tweening;
-using Sirenix.OdinInspector;
+﻿using DG.Tweening;
 using EZCameraShake;
+using Sirenix.OdinInspector;
+using UnityEngine;
 using WeAreGladiators.Utilities;
-using WeAreGladiators.HexTiles;
 
 namespace WeAreGladiators.CameraSystems
 {
@@ -13,49 +10,43 @@ namespace WeAreGladiators.CameraSystems
     {
         // Properties + Component References
         #region
+
         [Header("Component References")]
         [SerializeField] private Camera mainCamera;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Small Shake Properties")]
         public float sMagnitude;
         public float sRoughness;
         public float sDuration;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Medium Shake Properties")]
         public float mMagnitude;
         public float mRoughness;
         public float mDuration;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Large Shake Properties")]
         public float lMagnitude;
         public float lRoughness;
         public float lDuration;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        private bool cameraLocked;
         #endregion
 
         // Getters + Accessors
         #region
+
         public Camera MainCamera
         {
-            get { return mainCamera; }
-            private set { mainCamera = value; }
+            get => mainCamera;
+            private set => mainCamera = value;
         }
-        public bool CameraLocked
-        {
-            get { return cameraLocked; }
-            private set { cameraLocked = value; }
-        }
-       
+        [field: PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        public bool CameraLocked { get; private set; }
+
         #endregion
 
         // Camera Shake Logic
         #region
-               
+
         public void CreateCameraShake(CameraShakeType shakeType)
         {
             if (shakeType == CameraShakeType.Small)
@@ -83,10 +74,12 @@ namespace WeAreGladiators.CameraSystems
         {
             CameraShaker.Instance.ShakeOnce(lMagnitude, lRoughness, 0.1f, lDuration);
         }
+
         #endregion
 
         // Camera Zoom + Move
         #region
+
         public void DoCameraZoom(float startOrthoSize, float endOrthoSize, float duration)
         {
             MainCamera.orthographicSize = startOrthoSize;
@@ -110,8 +103,7 @@ namespace WeAreGladiators.CameraSystems
             // Reset Orthographic size
             MainCamera.DOOrthoSize(5, duration);
         }
-       
-        #endregion
 
+        #endregion
     }
 }

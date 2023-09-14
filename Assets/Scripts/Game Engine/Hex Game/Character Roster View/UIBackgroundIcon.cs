@@ -1,9 +1,6 @@
-using WeAreGladiators.Perks;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using WeAreGladiators.Characters;
 
 namespace WeAreGladiators.UI
@@ -12,30 +9,26 @@ namespace WeAreGladiators.UI
     {
         // Properties + Components
         #region
+
         [SerializeField] private Image backgroundImage;
-        private BackgroundData backgroundData;
+
         #endregion
 
         // Getters + Accessors
         #region
-        public Image BackgroundImage
-        {
-            get { return backgroundImage; }
-        }
-        public BackgroundData BackgroundData
-        {
-            get { return backgroundData; }
-        }
 
+        public Image BackgroundImage => backgroundImage;
+        public BackgroundData BackgroundData { get; private set; }
 
         #endregion
 
         // Logic
-        #region      
+        #region
+
         public void BuildFromBackgroundData(BackgroundData p)
         {
             HideAndReset();
-            backgroundData = p;
+            BackgroundData = p;
             gameObject.SetActive(true);
             backgroundImage.sprite = p.BackgroundSprite;
         }
@@ -43,23 +36,26 @@ namespace WeAreGladiators.UI
         public void HideAndReset()
         {
             gameObject.SetActive(false);
-            backgroundData = null;
+            BackgroundData = null;
         }
+
         #endregion
 
         // Input
         #region
+
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (backgroundData != null)
-                MainModalController.Instance.BuildAndShowModal(backgroundData);
+            if (BackgroundData != null)
+            {
+                MainModalController.Instance.BuildAndShowModal(BackgroundData);
+            }
         }
         public void OnPointerExit(PointerEventData eventData)
         {
             MainModalController.Instance.HideModal();
         }
+
         #endregion
-
-
     }
 }

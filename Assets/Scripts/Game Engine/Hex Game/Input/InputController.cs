@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.TurnLogic;
-using WeAreGladiators.Characters;
+﻿using UnityEngine;
 using WeAreGladiators.Abilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.TurnLogic;
 using WeAreGladiators.UI;
 
 namespace WeAreGladiators.Utilities
@@ -16,7 +14,9 @@ namespace WeAreGladiators.Utilities
             {
                 HexCharacterModel character = null;
                 if (TurnController.Instance != null)
+                {
                     character = TurnController.Instance.EntityActivated;
+                }
 
                 // Spell bar hotkeys
                 if (character != null && character.controller == Controller.Player)
@@ -78,15 +78,14 @@ namespace WeAreGladiators.Utilities
 
                     if (didPress && CombatUIController.Instance.AbilityButtons[key - 1] != null)
                     {
-                        var uiCharacter = TurnController.Instance.EntityActivated;
-                        if(uiCharacter.controller == Controller.Player)
+                        HexCharacterModel uiCharacter = TurnController.Instance.EntityActivated;
+                        if (uiCharacter.controller == Controller.Player)
                         {
                             AbilityData ab = CombatUIController.Instance.AbilityButtons[key - 1].MyAbilityData;
                             int cost = AbilityController.Instance.GetAbilityActionPointCost(uiCharacter, ab);
                             CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter(uiCharacter.currentActionPoints, cost);
                             AbilityController.Instance.OnAbilityButtonClicked(CombatUIController.Instance.AbilityButtons[key - 1]);
                         }
-                       
 
                     }
 
@@ -100,14 +99,17 @@ namespace WeAreGladiators.Utilities
 
                 // End turn with E
                 if (TurnController.Instance != null && Input.GetKeyDown(KeyCode.E))
+                {
                     TurnController.Instance.OnEndTurnButtonClicked();
+                }
 
                 // Delay turn with SPACE
                 if (TurnController.Instance != null && Input.GetKeyDown(KeyCode.Space))
+                {
                     TurnController.Instance.OnDelayTurnButtonClicked();
-            }           
+                }
+            }
 
         }
     }
 }
-

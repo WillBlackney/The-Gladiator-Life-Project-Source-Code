@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using DG.Tweening;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using WeAreGladiators.Characters;
-using WeAreGladiators.Libraries;
 using WeAreGladiators.Items;
-using WeAreGladiators.Abilities;
+using WeAreGladiators.Libraries;
 using WeAreGladiators.UI;
-using DG.Tweening;
 
 namespace WeAreGladiators.TownFeatures
 {
@@ -16,6 +12,7 @@ namespace WeAreGladiators.TownFeatures
     {
         // Properties + Components
         #region
+
         [Header("Difficulty Components")]
         [SerializeField] private GameObject basicSkullsParent;
         [SerializeField] private GameObject eliteSkullsParent;
@@ -34,74 +31,66 @@ namespace WeAreGladiators.TownFeatures
         [SerializeField] private Image abilityTomeImage;
 
         // Non inspector fields
-        private CombatContractData myContractData;
-        private static CombatContractCard selectectedCombatCard = null;
+
         #endregion
 
         // Getters + Accessors
         #region
-        public static CombatContractCard SelectectedCombatCard
-        {
-            get { return selectectedCombatCard; }
-            private set { selectectedCombatCard = value; }                
-        }
-        public CombatContractData MyContractData
-        {
-            get { return myContractData; }
-        }
-        public Image AbilityTomeImage
-        {
-            get { return abilityTomeImage; }
-        }
-        public Image ItemImage
-        {
-            get { return itemImage; }
-        }
-        public TextMeshProUGUI DeploymentLimitText
-        {
-            get { return deploymentLimitText; }
-        }
+
+        public static CombatContractCard SelectectedCombatCard { get; private set; }
+        public CombatContractData MyContractData { get; private set; }
+        public Image AbilityTomeImage => abilityTomeImage;
+        public Image ItemImage => itemImage;
+        public TextMeshProUGUI DeploymentLimitText => deploymentLimitText;
+
         #endregion
 
         // Input Events
         #region
+
         public void OnCardMouseOver()
         {
-            if (selectectedCombatCard == this) return;
+            if (SelectectedCombatCard == this)
+            {
+                return;
+            }
             gameObject.transform.DOKill();
             gameObject.transform.DOScale(1.1f, 0.2f);
         }
         public void OnCardMouseExit()
         {
-            if (selectectedCombatCard == this) return;
+            if (SelectectedCombatCard == this)
+            {
+                return;
+            }
             gameObject.transform.DOKill();
             gameObject.transform.DOScale(1f, 0.2f);
-        }      
+        }
         public void OnCardClicked()
         {
-            if (selectectedCombatCard == this)
+            if (SelectectedCombatCard == this)
             {
                 HandleDeselect();
                 return;
             }
-            if(selectectedCombatCard != null)
+            if (SelectectedCombatCard != null)
             {
                 // Deselct + shrink old selection
-                selectectedCombatCard.glowOutline.SetActive(false);
-                selectectedCombatCard.gameObject.transform.DOKill();
-                selectectedCombatCard.gameObject.transform.DOScale(1f, 0.2f);                
+                SelectectedCombatCard.glowOutline.SetActive(false);
+                SelectectedCombatCard.gameObject.transform.DOKill();
+                SelectectedCombatCard.gameObject.transform.DOScale(1f, 0.2f);
             }
 
             // Scale up this card and flag as selected
             TownController.Instance.SetDeploymentButtonReadyState(true);
-            selectectedCombatCard = this;
-            selectectedCombatCard.glowOutline.SetActive(true);
-            selectectedCombatCard.gameObject.transform.DOKill();
-            selectectedCombatCard.gameObject.transform.DOScale(1.1f, 0f);
-        }       
+            SelectectedCombatCard = this;
+            SelectectedCombatCard.glowOutline.SetActive(true);
+            SelectectedCombatCard.gameObject.transform.DOKill();
+            SelectectedCombatCard.gameObject.transform.DOScale(1.1f, 0f);
+        }
         public void OnItemBoxMouseOver()
         {
-            ItemPopupController.Instance.OnCombatContractItemIconMousedOver(this);            
+            ItemPopupController.Instance.OnCombatContractItemIconMousedOver(this);
         }
         public void OnItemBoxMouseExit()
         {
@@ -115,24 +104,37 @@ namespace WeAreGladiators.TownFeatures
         {
             AbilityPopupController.Instance.HidePanel();
         }
+
         #endregion
 
         // Logic
         #region
+
         public void BuildFromContractData(CombatContractData data)
         {
             ResetAndHide();
-            myContractData = data;
+            MyContractData = data;
             gameObject.SetActive(true);
             gameObject.transform.parent.gameObject.SetActive(true);
             gameObject.transform.localScale = new Vector3(1, 1, 1);
 
-            if (data.enemyEncounterData.difficulty == CombatDifficulty.Basic) basicSkullsParent.SetActive(true);
-            else if (data.enemyEncounterData.difficulty == CombatDifficulty.Elite) eliteSkullsParent.SetActive(true);
-            else if (data.enemyEncounterData.difficulty == CombatDifficulty.Boss) bossSkullsParent.SetActive(true);
+            if (data.enemyEncounterData.difficulty == CombatDifficulty.Basic)
+            {
+                basicSkullsParent.SetActive(true);
+            }
+            else if (data.enemyEncounterData.difficulty == CombatDifficulty.Elite)
+            {
+                eliteSkullsParent.SetActive(true);
+            }
+            else if (data.enemyEncounterData.difficulty == CombatDifficulty.Boss)
+            {
+                bossSkullsParent.SetActive(true);
+            }
 
             for (int i = 0; i < enemyRows.Length; i++)
+            {
                 enemyRows[i].HideAndReset();
+            }
 
             for (int i = 0; i < enemyRows.Length && i < data.enemyEncounterData.enemiesInEncounter.Count; i++)
             {
@@ -143,39 +145,41 @@ namespace WeAreGladiators.TownFeatures
             goldRewardText.text = data.combatRewardData.goldAmount.ToString();
             abilityTomeImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(data.combatRewardData.abilityAwarded.talentRequirementData.talentSchool);
             itemParent.SetActive(false);
-            
-            if(data.combatRewardData.item != null)
+
+            if (data.combatRewardData.item != null)
             {
                 itemParent.SetActive(true);
                 itemRarityOverlay.color = ColorLibrary.Instance.GetRarityColor(data.combatRewardData.item.rarity);
                 itemImage.sprite = data.combatRewardData.item.ItemSprite;
             }
-          
 
         }
         public void ResetAndHide()
         {
             gameObject.transform.parent.gameObject.SetActive(false);
             gameObject.SetActive(false);
-            myContractData = null;
+            MyContractData = null;
             basicSkullsParent.SetActive(false);
             eliteSkullsParent.SetActive(false);
             bossSkullsParent.SetActive(false);
             itemParent.SetActive(false);
             for (int i = 0; i < enemyRows.Length; i++)
+            {
                 enemyRows[i].HideAndReset();
+            }
         }
         public static void HandleDeselect(float speed = 0.2f)
         {
             TownController.Instance.SetDeploymentButtonReadyState(false);
-            if (selectectedCombatCard != null)
+            if (SelectectedCombatCard != null)
             {
-                selectectedCombatCard.gameObject.transform.DOKill();
-                selectectedCombatCard.gameObject.transform.DOScale(1f, speed);
-                selectectedCombatCard.glowOutline.SetActive(false);
-                selectectedCombatCard = null;
+                SelectectedCombatCard.gameObject.transform.DOKill();
+                SelectectedCombatCard.gameObject.transform.DOScale(1f, speed);
+                SelectectedCombatCard.glowOutline.SetActive(false);
+                SelectectedCombatCard = null;
             }
         }
+
         #endregion
     }
 }

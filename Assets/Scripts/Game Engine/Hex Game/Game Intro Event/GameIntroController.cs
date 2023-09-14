@@ -1,63 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Utilities;
-using TMPro;
-using UnityEngine.UI;
-using DG.Tweening;
-using WeAreGladiators.Characters;
-using WeAreGladiators.UI;
-using WeAreGladiators.Persistency;
-using WeAreGladiators.JourneyLogic;
-using WeAreGladiators.Audio;
 using System;
-using Sirenix.Utilities;
+using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
+using Sirenix.Utilities;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Characters;
+using WeAreGladiators.JourneyLogic;
+using WeAreGladiators.Persistency;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.GameIntroEvent
 {
     public class GameIntroController : Singleton<GameIntroController>
     {
         [Header("Core Components")]
-        [SerializeField] GameObject mainVisualParent;
-        [SerializeField] TextMeshProUGUI headerPanelText;
-        [SerializeField] Image eventImage;
-        [SerializeField] TextMeshProUGUI bodyText;
-        [SerializeField] ScrollRect mainContentScrollView;
-        [SerializeField] Scrollbar contentScrollbar;
-        [SerializeField] GameIntroButton[] choiceButtons;
-        [SerializeField] RectTransform[] allFitters;
-        [SerializeField] HexCharacterTemplateSO[] possibleCharacterPoolOne;
-        [SerializeField] HexCharacterTemplateSO[] possibleCharacterPoolTwo;
-        [SerializeField] GameIntroPageData[] allPages;
+        [SerializeField]
+        private GameObject mainVisualParent;
+        [SerializeField] private TextMeshProUGUI headerPanelText;
+        [SerializeField] private Image eventImage;
+        [SerializeField] private TextMeshProUGUI bodyText;
+        [SerializeField] private ScrollRect mainContentScrollView;
+        [SerializeField] private Scrollbar contentScrollbar;
+        [SerializeField] private GameIntroButton[] choiceButtons;
+        [SerializeField] private RectTransform[] allFitters;
+        [SerializeField] private HexCharacterTemplateSO[] possibleCharacterPoolOne;
+        [SerializeField] private HexCharacterTemplateSO[] possibleCharacterPoolTwo;
+        [SerializeField] private GameIntroPageData[] allPages;
 
         [Header("Page Animation Components")]
-        [SerializeField] RectTransform pageMovementParent;
-        [SerializeField] RectTransform pageOffscreenPos;
-        [SerializeField] RectTransform pageOnscreenPos;
-        [SerializeField] Image blackUnderlay;        
-        
+        [SerializeField]
+        private RectTransform pageMovementParent;
+        [SerializeField] private RectTransform pageOffscreenPos;
+        [SerializeField] private RectTransform pageOnscreenPos;
+        [SerializeField] private Image blackUnderlay;
+
         [Header("Page One Settings")]
-        [SerializeField] string pageOneHeaderText;
-        [SerializeField] Sprite pageOneSprite;
+        [SerializeField]
+        private string pageOneHeaderText;
+        [SerializeField] private Sprite pageOneSprite;
         [TextArea(0, 200)]
-        [SerializeField] string pageOneBodyText;
+        [SerializeField]
+        private string pageOneBodyText;
 
         [Header("Final Pages")]
-        [SerializeField] GameIntroPageData nipplePincherPage;
-        [SerializeField] GameIntroPageData broomWielderPage;
-        [SerializeField] GameIntroPageData militiamanPage;
-        [SerializeField] GameIntroPageData noChoicePage;
+        [SerializeField]
+        private GameIntroPageData nipplePincherPage;
+        [SerializeField] private GameIntroPageData broomWielderPage;
+        [SerializeField] private GameIntroPageData militiamanPage;
+        [SerializeField] private GameIntroPageData noChoicePage;
 
-        private List<HexCharacterData> chosenCharacters = new List<HexCharacterData>();
+        private readonly List<HexCharacterData> chosenCharacters = new List<HexCharacterData>();
 
-        public bool ViewIsActive
-        {
-            get { return mainVisualParent.activeSelf; }
-        }
-
+        public bool ViewIsActive => mainVisualParent.activeSelf;
 
         #region Start + End Event Logic
+
         public void StartEvent()
         {
             chosenCharacters.Clear();
@@ -76,7 +77,7 @@ namespace WeAreGladiators.GameIntroEvent
                 AudioManager.Instance.PlaySound(Sound.Effects_Story_Event_Start);
                 pageMovementParent.DOMove(pageOnscreenPos.position, 1f).SetEase(Ease.OutBack);
             });
-            
+
         }
         private void FinishEvent()
         {
@@ -90,14 +91,14 @@ namespace WeAreGladiators.GameIntroEvent
             blackUnderlay.DOKill();
             blackUnderlay.DOFade(0f, 1.25f).OnComplete(() =>
             {
-                mainVisualParent.SetActive(false);                
+                mainVisualParent.SetActive(false);
             });
         }
-        #endregion       
-       
+
+        #endregion
+
         #region Build Specific Pages
 
-       
         private void BuildPageFromTag(PageTag tag)
         {
             if (tag == PageTag.Final)
@@ -112,7 +113,7 @@ namespace WeAreGladiators.GameIntroEvent
             headerPanelText.text = pageData.HeaderText;
             eventImage.sprite = pageData.PageSprite;
 
-            for(int i = 0; i < pageData.Choices.Length; i++)
+            for (int i = 0; i < pageData.Choices.Length; i++)
             {
                 choiceButtons[i].Build(pageData.Choices[i]);
             }
@@ -152,15 +153,20 @@ namespace WeAreGladiators.GameIntroEvent
             choiceButtons[0].BuildAndShow(pageData.Choices[0].buttonText, FinishEvent);
             TransformUtils.RebuildLayouts(allFitters);
         }
+
         #endregion
 
         #region Misc Logic
+
         public void HandleChoiceButtonClicked(GameIntroButton button)
         {
-            if (button.ChoiceData == null) return;
+            if (button.ChoiceData == null)
+            {
+                return;
+            }
             if (button.ChoiceData.charactersGained != null)
             {
-                button.ChoiceData.charactersGained.ForEach((c) =>
+                button.ChoiceData.charactersGained.ForEach(c =>
                 {
                     HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(c);
                     CharacterDataController.Instance.RandomizeOpeningEventCharacter(character);
@@ -177,7 +183,10 @@ namespace WeAreGladiators.GameIntroEvent
         }
         private void ResetChoiceButtons()
         {
-            foreach (GameIntroButton b in choiceButtons) b.HideAndReset();
+            foreach (GameIntroButton b in choiceButtons)
+            {
+                b.HideAndReset();
+            }
         }
         private void ResetPageBeforeNextPageBuilt()
         {
@@ -193,9 +202,11 @@ namespace WeAreGladiators.GameIntroEvent
         {
             bodyText.text = text;
         }
+
         #endregion
 
         #region Page Specific On Click Events
+
         private GameIntroPageData GetPage(PageTag tag)
         {
             return Array.Find(allPages, p => p.PageTag == tag);

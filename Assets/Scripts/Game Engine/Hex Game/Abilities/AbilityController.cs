@@ -1,105 +1,213 @@
-﻿using WeAreGladiators.Characters;
-using WeAreGladiators.Combat;
-using WeAreGladiators.HexTiles;
-using WeAreGladiators.TurnLogic;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using DG.Tweening;
-using WeAreGladiators.Perks;
-using WeAreGladiators.Pathfinding;
-using WeAreGladiators.Utilities;
-using WeAreGladiators.UI;
-using WeAreGladiators.VisualEvents;
-using WeAreGladiators.UCM;
 using System.Linq;
-using System;
-using WeAreGladiators.Items;
+using DG.Tweening;
+using TMPro;
+using UnityEngine;
 using WeAreGladiators.Audio;
-using UnityEngine.TextCore.Text;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Combat;
 using WeAreGladiators.CombatLog;
+using WeAreGladiators.HexTiles;
+using WeAreGladiators.Items;
+using WeAreGladiators.Pathfinding;
+using WeAreGladiators.Perks;
+using WeAreGladiators.TurnLogic;
+using WeAreGladiators.UCM;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
 
 namespace WeAreGladiators.Abilities
 {
     public class AbilityController : Singleton<AbilityController>
     {
+
+        // Learn + Unlearn Abilities
+        #region
+
+        public void BuildHexCharacterAbilityBookFromData(HexCharacterModel character, AbilityBook data)
+        {
+            // Copy ability book from data character into hex character
+            character.abilityBook = new AbilityBook(data);
+
+            // Link hex character to ability data
+            foreach (AbilityData a in character.abilityBook.activeAbilities)
+            {
+                a.myCharacter = character;
+            }
+
+        }
+
+        #endregion
+
+        // Dynamic Description Logic
+        #region
+
+        public string GetDynamicDescriptionFromAbility(AbilityData ability)
+        {
+            string sRet = "";
+            HexCharacterModel character = ability.myCharacter;
+
+            foreach (CustomString cs in ability.dynamicDescription)
+            {
+                // Does the custom string even have a dynamic value?
+                if (cs.getPhraseFromAbilityValue == false)
+                {
+                    sRet += TextLogic.ConvertCustomStringToString(cs);
+                }
+                else
+                {
+                    // It does, start searching for an ability effect that
+                    // matches the effect value of the custom string
+
+                    AbilityEffect matchingEffect = null;
+                    foreach (AbilityEffect effect in ability.abilityEffects)
+                    {
+                        if (effect.effectType == cs.abilityEffectType)
+                        {
+                            // Found a match, cache it and break
+                            matchingEffect = effect;
+                            break;
+                        }
+                    }
+
+                    // Check on hit effects for matching effects if couldnt find them in "abilities effects" list
+                    if (matchingEffect == null)
+                    {
+                        foreach (AbilityEffect effect in ability.onHitEffects)
+                        {
+                            if (effect.effectType == cs.abilityEffectType)
+                            {
+                                // Found a match, cache it and break
+                                matchingEffect = effect;
+                                break;
+                            }
+                        }
+                    }
+
+                    // Check on hit effects for matching effects if couldnt find them in "abilities effects" list
+                    if (matchingEffect == null)
+                    {
+                        foreach (AbilityEffect effect in ability.onCritEffects)
+                        {
+                            if (effect.effectType == cs.abilityEffectType)
+                            {
+                                // Found a match, cache it and break
+                                matchingEffect = effect;
+                                break;
+                            }
+                        }
+                    }
+                    // Check on collision effects for matching effects if couldnt find them in "abilities effects" list
+                    if (matchingEffect == null)
+                    {
+                        foreach (AbilityEffect effect in ability.onCollisionEffects)
+                        {
+                            if (effect.effectType == cs.abilityEffectType)
+                            {
+                                // Found a match, cache it and break
+                                matchingEffect = effect;
+                                break;
+                            }
+                        }
+
+                    }
+
+                    // Damage Target
+                    if (cs.abilityEffectType == AbilityEffectType.DamageTarget ||
+                        cs.abilityEffectType == AbilityEffectType.DamageAoe)
+                    {
+                        if (character != null)
+                        {
+                            DamageResult dr = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, null, ability, matchingEffect, false);
+                            sRet += TextLogic.ReturnColoredText(dr.damageLowerLimit.ToString(), TextLogic.blueNumber) + " - " +
+                                TextLogic.ReturnColoredText(dr.damageUpperLimit.ToString(), TextLogic.blueNumber);
+
+                        }
+                        else
+                        {
+                            sRet += TextLogic.ReturnColoredText(matchingEffect.minBaseDamage.ToString(), TextLogic.blueNumber) + " - " +
+                                TextLogic.ReturnColoredText(matchingEffect.maxBaseDamage.ToString(), TextLogic.blueNumber);
+                        }
+                    }
+                }
+
+            }
+
+            return sRet;
+        }
+
+        #endregion
         // Properties + Components
         #region
+
         [Header("Ability Data Files")]
         [SerializeField] private AbilityDataSO[] allAbilityDataSOs;
         [SerializeField] private AbilityDataSO freeStrikeAbilityData;
         [SerializeField] private AbilityDataSO riposteAbilityData;
         [SerializeField] private AbilityDataSO spearWallStrikeAbilityData;
-        private AbilityData[] allAbilities;
 
         [Header("Hit Chance Pop Up Components")]
-        [SerializeField] Canvas hitChanceRootCanvas;
-        [SerializeField] GameObject hitChancePositionParent;
-        [SerializeField] CanvasGroup hitChanceCg;
-        [SerializeField] RectTransform[] hitChanceLayouts;
+        [SerializeField]
+        private Canvas hitChanceRootCanvas;
+        [SerializeField] private GameObject hitChancePositionParent;
+        [SerializeField] private CanvasGroup hitChanceCg;
+        [SerializeField] private RectTransform[] hitChanceLayouts;
         [Space(10)]
-        [SerializeField] GameObject hitChanceHeaderParent;
-        [SerializeField] TextMeshProUGUI hitChanceText;
-        [SerializeField] GameObject hitChanceBoxesParent;
-        [SerializeField] ModalDottedRow[] hitChanceBoxes;
+        [SerializeField]
+        private GameObject hitChanceHeaderParent;
+        [SerializeField] private TextMeshProUGUI hitChanceText;
+        [SerializeField] private GameObject hitChanceBoxesParent;
+        [SerializeField] private ModalDottedRow[] hitChanceBoxes;
         [Space(10)]
-        [SerializeField] GameObject applyPassiveHeaderParent;
-        [SerializeField] TextMeshProUGUI applyPassiveText;
-        [SerializeField] UIPerkIcon applyPassiveIcon;
-        [SerializeField] GameObject applyPassiveBoxesParent;
-        [SerializeField] ModalDottedRow[] applyPassiveBoxes;
-
-        
+        [SerializeField]
+        private GameObject applyPassiveHeaderParent;
+        [SerializeField] private TextMeshProUGUI applyPassiveText;
+        [SerializeField] private UIPerkIcon applyPassiveIcon;
+        [SerializeField] private GameObject applyPassiveBoxesParent;
+        [SerializeField] private ModalDottedRow[] applyPassiveBoxes;
 
         // Ability caching properties
-        private AbilityData currentAbilityAwaiting;
-        private AbilitySelectionPhase currentSelectionPhase;
         private HexCharacterModel firstSelectionCharacter;
 
         public Dictionary<HexCharacterModel, Action> onAbilityEndVisualEventQueue = new Dictionary<HexCharacterModel, Action>();
+
         #endregion
 
         // Getters + Accessors
         #region
-        public bool HitChanceModalIsVisible
-        {
-            get { return hitChanceRootCanvas.isActiveAndEnabled; }
-        }
+
+        public bool HitChanceModalIsVisible => hitChanceRootCanvas.isActiveAndEnabled;
         public AbilityData SpearWallStrikeAbility
         {
-            get; private set;
+            get;
+            private set;
         }
         public AbilityData FreeStrikeAbility
         {
-            get; private set;
+            get;
+            private set;
         }
         public AbilityData RiposteAbility
         {
-            get; private set;
+            get;
+            private set;
         }
-        public AbilityData[] AllAbilities
-        {
-            get { return allAbilities; }
-            private set { allAbilities = value; }
-        }
+        public AbilityData[] AllAbilities { get; private set; }
         public AbilityDataSO[] AllAbilityDataSOs
         {
-            get { return allAbilityDataSOs; }
-            private set { allAbilityDataSOs = value; }
+            get => allAbilityDataSOs;
+            private set => allAbilityDataSOs = value;
         }
-        public AbilityData CurrentAbilityAwaiting
-        {
-            get { return currentAbilityAwaiting; }
-        }
-        public AbilitySelectionPhase CurrentSelectionPhase
-        {
-            get { return currentSelectionPhase; }
-        }
+        public AbilityData CurrentAbilityAwaiting { get; private set; }
+        public AbilitySelectionPhase CurrentSelectionPhase { get; private set; }
+
         #endregion
 
         // Initialization + Build Library
         #region
+
         protected override void Awake()
         {
             base.Awake();
@@ -114,7 +222,9 @@ namespace WeAreGladiators.Abilities
             foreach (AbilityDataSO dataSO in allAbilityDataSOs)
             {
                 if (dataSO != null && dataSO.includeInGame)
+                {
                     tempList.Add(BuildAbilityDataFromScriptableObjectData(dataSO));
+                }
             }
 
             AllAbilities = tempList.ToArray();
@@ -125,10 +235,12 @@ namespace WeAreGladiators.Abilities
             SpearWallStrikeAbility = BuildAbilityDataFromScriptableObjectData(spearWallStrikeAbilityData);
 
         }
+
         #endregion
 
         // Search Logic
         #region
+
         public AbilityData GetCharacterAbilityByName(HexCharacterModel character, string name)
         {
             AbilityData abilityReturned = null;
@@ -145,8 +257,19 @@ namespace WeAreGladiators.Abilities
         }
         public AbilityData GetRandomAbilityTomeAbility()
         {
-            List<TalentSchool> talentSchools = new List<TalentSchool> { TalentSchool.Divinity, TalentSchool.Guardian, TalentSchool.Manipulation,
-            TalentSchool.Naturalism, TalentSchool.Pyromania, TalentSchool.Ranger, TalentSchool.Scoundrel, TalentSchool.Shadowcraft, TalentSchool.Warfare, TalentSchool.Metamorph };
+            List<TalentSchool> talentSchools = new List<TalentSchool>
+            {
+                TalentSchool.Divinity,
+                TalentSchool.Guardian,
+                TalentSchool.Manipulation,
+                TalentSchool.Naturalism,
+                TalentSchool.Pyromania,
+                TalentSchool.Ranger,
+                TalentSchool.Scoundrel,
+                TalentSchool.Shadowcraft,
+                TalentSchool.Warfare,
+                TalentSchool.Metamorph
+            };
 
             talentSchools.Shuffle();
             TalentSchool ts = talentSchools[0];
@@ -154,7 +277,9 @@ namespace WeAreGladiators.Abilities
             foreach (AbilityData a in AllAbilities)
             {
                 if (a.talentRequirementData.talentSchool == ts)
+                {
                     validAbilities.Add(a);
+                }
             }
 
             validAbilities.Shuffle();
@@ -164,11 +289,13 @@ namespace WeAreGladiators.Abilities
         {
             List<AbilityData> ret = new List<AbilityData>();
 
-            for(int i = 0; i < allAbilities.Length; i++)
+            for (int i = 0; i < AllAbilities.Length; i++)
             {
-                if (allAbilities[i].talentRequirementData != null &&
-                    allAbilities[i].talentRequirementData.talentSchool == ts)
-                    ret.Add(allAbilities[i]);
+                if (AllAbilities[i].talentRequirementData != null &&
+                    AllAbilities[i].talentRequirementData.talentSchool == ts)
+                {
+                    ret.Add(AllAbilities[i]);
+                }
             }
 
             return ret;
@@ -176,7 +303,7 @@ namespace WeAreGladiators.Abilities
         public AbilityData FindAbilityData(string abilityName)
         {
             AbilityData ret = null;
-            foreach(AbilityData a in allAbilities)
+            foreach (AbilityData a in AllAbilities)
             {
                 if (a.abilityName == abilityName)
                 {
@@ -184,13 +311,15 @@ namespace WeAreGladiators.Abilities
                     break;
                 }
             }
-               
+
             return ret;
         }
+
         #endregion
 
         // Data Conversion
         #region
+
         public AbilityData BuildAbilityDataFromScriptableObjectData(AbilityDataSO d)
         {
             AbilityData a = new AbilityData();
@@ -228,58 +357,57 @@ namespace WeAreGladiators.Abilities
             a.abilityEffects = new List<AbilityEffect>();
             foreach (AbilityEffect effect in d.abilityEffects)
             {
-                a.abilityEffects.Add(ObjectCloner.CloneJSON(effect));
+                a.abilityEffects.Add(effect.CloneJSON());
             }
             a.onHitEffects = new List<AbilityEffect>();
             foreach (AbilityEffect effect in d.onHitEffects)
             {
-                a.onHitEffects.Add(ObjectCloner.CloneJSON(effect));
+                a.onHitEffects.Add(effect.CloneJSON());
             }
             a.onCritEffects = new List<AbilityEffect>();
             foreach (AbilityEffect effect in d.onCritEffects)
             {
-                a.onCritEffects.Add(ObjectCloner.CloneJSON(effect));
+                a.onCritEffects.Add(effect.CloneJSON());
             }
             a.onPerkAppliedSuccessEffects = new List<AbilityEffect>();
             foreach (AbilityEffect effect in d.onPerkAppliedSuccessEffects)
             {
-                a.onPerkAppliedSuccessEffects.Add(ObjectCloner.CloneJSON(effect));
+                a.onPerkAppliedSuccessEffects.Add(effect.CloneJSON());
             }
             a.onCollisionEffects = new List<AbilityEffect>();
             foreach (AbilityEffect effect in d.onCollisionEffects)
             {
-                a.onCollisionEffects.Add(ObjectCloner.CloneJSON(effect));
+                a.onCollisionEffects.Add(effect.CloneJSON());
             }
             a.chainedEffects = new List<AbilityEffect>();
             foreach (AbilityEffect effect in d.chainedEffects)
             {
-                a.chainedEffects.Add(ObjectCloner.CloneJSON(effect));
+                a.chainedEffects.Add(effect.CloneJSON());
             }
 
             // Keyword Model Data
             a.keyWords = new List<KeyWordModel>();
             foreach (KeyWordModel kwdm in d.keyWords)
             {
-                a.keyWords.Add(ObjectCloner.CloneJSON(kwdm));
+                a.keyWords.Add(kwdm.CloneJSON());
             }
 
             // Custom string Data
             a.dynamicDescription = new List<CustomString>();
             foreach (CustomString cs in d.dynamicDescription)
             {
-                a.dynamicDescription.Add(ObjectCloner.CloneJSON(cs));
+                a.dynamicDescription.Add(cs.CloneJSON());
             }
 
             // Requirements
             a.abilitySubRequirements = new List<AbilityRequirement>();
             foreach (AbilityRequirement ar in d.abilitySubRequirements)
             {
-                a.abilitySubRequirements.Add(ObjectCloner.CloneJSON(ar));
+                a.abilitySubRequirements.Add(ar.CloneJSON());
             }
 
-
             return a;
-        }        
+        }
         public AbilityBook ConvertSerializedAbilityBookToUnserialized(SerializedAbilityBook data)
         {
             AbilityBook a = new AbilityBook();
@@ -295,33 +423,19 @@ namespace WeAreGladiators.Abilities
 
         #endregion
 
-        // Learn + Unlearn Abilities
-        #region
-        public void BuildHexCharacterAbilityBookFromData(HexCharacterModel character, AbilityBook data)
-        {
-            // Copy ability book from data character into hex character
-            character.abilityBook = new AbilityBook(data);
-
-            // Link hex character to ability data
-            foreach (AbilityData a in character.abilityBook.activeAbilities)            
-                a.myCharacter = character;         
-            
-
-        }
-        #endregion       
-
         // Ability Usage Logic
-        #region     
+        #region
+
         public void UseAbility(HexCharacterModel character, AbilityData ability, HexCharacterModel target = null, LevelNode tileTarget = null)
         {
             CombatLogController.Instance.CreateCharacterUsedAbilityEntry(character, ability, target);
 
             // Status effect for enemies + AI characters
             if (character.controller == Controller.AI)
-            {                
+            {
                 HexCharacterView view = character.hexCharacterView;
                 VisualEventManager.CreateVisualEvent(() =>
-                VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, ability.abilityName, ability.AbilitySprite, StatusFrameType.SquareBrown)).SetEndDelay(1f);
+                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, ability.abilityName, ability.AbilitySprite, StatusFrameType.SquareBrown)).SetEndDelay(1f);
             }
 
             // Hide pop up
@@ -331,26 +445,30 @@ namespace WeAreGladiators.Abilities
             if (TurnController.Instance.EntityActivated == character && character.controller == Controller.Player)
             {
                 CombatUIController.Instance.EnergyBar.UpdateIcons(TurnController.Instance.EntityActivated.currentActionPoints);
-            }                
+            }
 
             OnAbilityUsedStart(character, ability, target);
 
             // Face target
             if (target != null && target != character && ability.abilityType.Contains(AbilityType.Skill) == false)
+            {
                 LevelController.Instance.FaceCharacterTowardsTargetCharacter(character, target);
+            }
             else if (tileTarget != null && ability.abilityType.Contains(AbilityType.Skill) == false)
+            {
                 LevelController.Instance.FaceCharacterTowardsHex(character, tileTarget);
+            }
 
             foreach (AbilityEffect e in ability.abilityEffects)
             {
                 TriggerAbilityEffect(ability, e, character, target, tileTarget);
             }
-            
+
             OnAbilityUsedFinish(character, ability);
 
-            foreach(var kwp in onAbilityEndVisualEventQueue)
+            foreach (KeyValuePair<HexCharacterModel, Action> kwp in onAbilityEndVisualEventQueue)
             {
-                if(kwp.Key.livingState == LivingState.Alive)
+                if (kwp.Key.livingState == LivingState.Alive)
                 {
                     kwp.Value.Invoke();
                 }
@@ -358,20 +476,30 @@ namespace WeAreGladiators.Abilities
             onAbilityEndVisualEventQueue.Clear();
 
             // Check for removal of damage/accuracy related tokens
-            if(ability.abilityType.Contains(AbilityType.MeleeAttack) ||
+            if (ability.abilityType.Contains(AbilityType.MeleeAttack) ||
                 ability.abilityType.Contains(AbilityType.RangedAttack) ||
                 ability.abilityType.Contains(AbilityType.WeaponAttack))
             {
-                if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Wrath))                
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Wrath, -1);                
-                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Weakened))                
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Wrath))
+                {
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Wrath, -1);
+                }
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Weakened))
+                {
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Weakened, -1);
+                }
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Focus))
+                {
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Focus, -1);
+                }
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Blinded))
+                {
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Blinded, -1);
+                }
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Combo))
+                {
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Combo, -1);
+                }
 
                 // Weapon attack specific
                 if (ability.abilityType.Contains(AbilityType.WeaponAttack))
@@ -384,10 +512,12 @@ namespace WeAreGladiators.Abilities
                 }
 
                 // Check and apply furiously assault to target
-                if(target != null &&
-                    target.livingState == LivingState.Alive && 
-                    PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FuriousAssault))                
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.FuriouslyAssaulted, 1);                
+                if (target != null &&
+                    target.livingState == LivingState.Alive &&
+                    PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FuriousAssault))
+                {
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.FuriouslyAssaulted, 1);
+                }
             }
 
             // Item 'on use' apply perk to self effects
@@ -418,7 +548,9 @@ namespace WeAreGladiators.Abilities
             {
                 // Update ability button validity overlays
                 foreach (AbilityButton b in CombatUIController.Instance.AbilityButtons)
+                {
                     b.UpdateAbilityButtonUnusableOverlay();
+                }
             }
         }
         private void TriggerAbilityEffect(AbilityData ability, AbilityEffect abilityEffect, HexCharacterModel caster, HexCharacterModel target, LevelNode tileTarget = null, HexCharacterModel previousChainTarget = null)
@@ -429,12 +561,12 @@ namespace WeAreGladiators.Abilities
             // Stop and return if effect requires a target and that target is dying/dead/null/no longer valid      
             if ((target == null || target.livingState == LivingState.Dead) &&
                 (
-                abilityEffect.effectType == AbilityEffectType.DamageTarget ||
-                abilityEffect.effectType == AbilityEffectType.ApplyPassiveTarget ||
-                abilityEffect.effectType == AbilityEffectType.RemovePassiveTarget ||
-                abilityEffect.effectType == AbilityEffectType.KnockBack
+                    abilityEffect.effectType == AbilityEffectType.DamageTarget ||
+                    abilityEffect.effectType == AbilityEffectType.ApplyPassiveTarget ||
+                    abilityEffect.effectType == AbilityEffectType.RemovePassiveTarget ||
+                    abilityEffect.effectType == AbilityEffectType.KnockBack
                 )
-                )
+               )
             {
                 Debug.Log("AbilityController.TriggerAbilityEffect() cancelling: target is no longer valid");
                 return;
@@ -447,17 +579,24 @@ namespace WeAreGladiators.Abilities
             }
 
             // Check effect sub requirements
-            if (!DoesAbilityEffectMeetAllRequirements(ability, abilityEffect, caster, target, tileTarget)) return;
+            if (!DoesAbilityEffectMeetAllRequirements(ability, abilityEffect, caster, target, tileTarget))
+            {
+                return;
+            }
 
             // Determine weapon used
             ItemData weaponUsed = null;
             if (abilityEffect.weaponUsed == WeaponSlot.Offhand &&
                 caster.itemSet.offHandItem != null)
+            {
                 weaponUsed = caster.itemSet.offHandItem;
+            }
 
             else if (abilityEffect.weaponUsed == WeaponSlot.MainHand &&
-                caster.itemSet.mainHandItem != null)
+                     caster.itemSet.mainHandItem != null)
+            {
                 weaponUsed = caster.itemSet.mainHandItem;
+            }
 
             // Dynamic weapon used check: make sure the ability actually belongs to the main hand weapon if directed.
             if (ability.abilityType.Contains(AbilityType.WeaponAttack) &&
@@ -478,7 +617,7 @@ namespace WeAreGladiators.Abilities
 
                 if (!foundMatch)
                 {
-                    Debug.Log(String.Format("AbilityController.TriggerAbilityEffect() weapon derived ability '{0}' does not exist on weapon '{1}', using off hand weapon instead", ability.abilityName, caster.itemSet.mainHandItem.itemName));
+                    Debug.Log(string.Format("AbilityController.TriggerAbilityEffect() weapon derived ability '{0}' does not exist on weapon '{1}', using off hand weapon instead", ability.abilityName, caster.itemSet.mainHandItem.itemName));
                     weaponUsed = caster.itemSet.offHandItem;
                 }
             }
@@ -488,11 +627,15 @@ namespace WeAreGladiators.Abilities
             {
                 // if effect is not chained
                 if (abilityEffect.chainedEffect == false)
+                {
                     AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, tileTarget, weaponUsed);
+                }
 
                 // if effect is chained, the effect starts from previous chain target
-                else if (abilityEffect.chainedEffect == true)
+                else if (abilityEffect.chainedEffect)
+                {
                     AnimationEventController.Instance.PlayAnimationEvent(vEvent, previousChainTarget, target, tileTarget, weaponUsed);
+                }
             }
 
             // RESOLVE EFFECT LOGIC START!
@@ -517,12 +660,16 @@ namespace WeAreGladiators.Abilities
 
                     // Resolve bonus armour damage
                     if (abilityEffect.bonusArmourDamage > 0)
+                    {
                         HexCharacterController.Instance.ModifyArmour(target, -abilityEffect.bonusArmourDamage);
+                    }
 
                     // Do on hit visual effects for this ability
                     VisualEventManager.CreateVisualEvent(() => AudioManager.Instance.PlaySound(Sound.Crowd_Cheer_1), target.GetLastStackEventParent());
                     foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
+                    {
                         AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, weaponUsed, target.GetLastStackEventParent());
+                    }
 
                     // Cache hex position, in case target is killed before chain effect triggers
                     LevelNode lastChainHex = target.currentTile;
@@ -547,7 +694,9 @@ namespace WeAreGladiators.Abilities
                     if (didCrit &&
                         CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
                         caster.livingState == LivingState.Alive)
+                    {
                         CombatController.Instance.CreateStressCheck(caster, StressEventType.LandedCriticalStrike);
+                    }
 
                     // Trigger on hit/crit effects
                     if (abilityEffect.chainedEffect == false)
@@ -570,13 +719,17 @@ namespace WeAreGladiators.Abilities
                     }
 
                     // Trigger chain effect here
-                    if (ability.chainedEffects.Count > 0 && abilityEffect.chainedEffect == false && abilityEffect.triggersChainEffectSequence == true)
+                    if (ability.chainedEffects.Count > 0 && abilityEffect.chainedEffect == false && abilityEffect.triggersChainEffectSequence)
                     {
                         Allegiance targetAllegiance = Allegiance.Player;
                         if (caster.allegiance == Allegiance.Player)
+                        {
                             targetAllegiance = Allegiance.Enemy;
+                        }
                         else if (caster.allegiance == Allegiance.Enemy)
+                        {
                             targetAllegiance = Allegiance.Player;
+                        }
 
                         // TO DO ABOVE: chain effects can only hit enemies now, if there is a chain effect that targets allies of the caster (e.g. a chain heal or buff)
                         // then we need to write some more code to be specific about whether allies or enemies are effected by the chain sequence.
@@ -600,9 +753,13 @@ namespace WeAreGladiators.Abilities
 
                             // randomly decide the next target to be chained onto
                             if (possibleTargets.Count == 1)
+                            {
                                 nextChainTarget = possibleTargets[0];
+                            }
                             else if (possibleTargets.Count > 1)
+                            {
                                 nextChainTarget = possibleTargets[RandomGenerator.NumberBetween(0, possibleTargets.Count - 1)];
+                            }
 
                             // found a valid target to chain onto
                             if (nextChainTarget != null)
@@ -618,9 +775,8 @@ namespace WeAreGladiators.Abilities
                             }
                         }
 
-                        Debug.Log("Total loops of chain effect completed = " + totalLoopsCompleted.ToString());
+                        Debug.Log("Total loops of chain effect completed = " + totalLoopsCompleted);
                     }
-
 
                 }
                 else if (hitResult.Result == HitRollResult.Miss)
@@ -638,15 +794,19 @@ namespace WeAreGladiators.Abilities
 
                     // Check Evasion
                     if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Evasion))
+                    {
                         PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Evasion, -1);
+                    }
 
                     // Check Crippled
                     if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Crippled))
+                    {
                         PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Crippled, -1);
+                    }
 
                     // Duck animation on miss
                     VisualEventManager.CreateVisualEvent(() =>
-                    HexCharacterController.Instance.PlayDuckAnimation(target.hexCharacterView), target.GetLastStackEventParent()).SetEndDelay(0.5f);
+                        HexCharacterController.Instance.PlayDuckAnimation(target.hexCharacterView), target.GetLastStackEventParent()).SetEndDelay(0.5f);
 
                     if (!PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.Slippery) &&
                         HexCharacterController.Instance.IsCharacterAbleToMakeRiposteAttack(target) &&
@@ -655,7 +815,7 @@ namespace WeAreGladiators.Abilities
                         // Cant riposte against another riposte, or free strike
                         ability.abilityName != RiposteAbility.abilityName &&
                         ability.abilityName != FreeStrikeAbility.abilityName &&
-                         ability.abilityName != SpearWallStrikeAbility.abilityName)
+                        ability.abilityName != SpearWallStrikeAbility.abilityName)
                     {
                         // Start free strike attack
                         UseAbility(target, RiposteAbility, caster);
@@ -674,15 +834,33 @@ namespace WeAreGladiators.Abilities
                 Dictionary<HexCharacterModel, HitRoll> charactersHit = new Dictionary<HexCharacterModel, HitRoll>();
 
                 // Get Aoe Area
-                if (abilityEffect.aoeType == AoeType.Aura) tilesEffected = HexCharacterController.Instance.GetCharacterAura(caster, true);
-                else if (abilityEffect.aoeType == AoeType.ZoneOfControl) tilesEffected = HexCharacterController.Instance.GetCharacterZoneOfControl(caster);
-                else if (abilityEffect.aoeType == AoeType.AtTarget) tilesEffected = LevelController.Instance.GetAllHexsWithinRange(tileTarget, abilityEffect.aoeSize, true);
-                else if (abilityEffect.aoeType == AoeType.Global) tilesEffected.AddRange(LevelController.Instance.AllLevelNodes.ToList());
+                if (abilityEffect.aoeType == AoeType.Aura)
+                {
+                    tilesEffected = HexCharacterController.Instance.GetCharacterAura(caster, true);
+                }
+                else if (abilityEffect.aoeType == AoeType.ZoneOfControl)
+                {
+                    tilesEffected = HexCharacterController.Instance.GetCharacterZoneOfControl(caster);
+                }
+                else if (abilityEffect.aoeType == AoeType.AtTarget)
+                {
+                    tilesEffected = LevelController.Instance.GetAllHexsWithinRange(tileTarget, abilityEffect.aoeSize, true);
+                }
+                else if (abilityEffect.aoeType == AoeType.Global)
+                {
+                    tilesEffected.AddRange(LevelController.Instance.AllLevelNodes.ToList());
+                }
                 else if (abilityEffect.aoeType == AoeType.Line)
                 {
                     LevelNode firstHexHit = null;
-                    if (target != null) firstHexHit = target.currentTile;
-                    else if (tileTarget != null) firstHexHit = tileTarget;
+                    if (target != null)
+                    {
+                        firstHexHit = target.currentTile;
+                    }
+                    else if (tileTarget != null)
+                    {
+                        firstHexHit = tileTarget;
+                    }
 
                     HexDirection direction = LevelController.Instance.GetDirectionToTargetHex(caster.currentTile, firstHexHit);
                     LevelNode previousHex = firstHexHit;
@@ -696,13 +874,10 @@ namespace WeAreGladiators.Abilities
                         {
                             break;
                         }
-                        else
-                        {
-                            // Tile in direction from current tile is valid to move over
-                            tilesEffected.Add(nextHex);
-                            previousHex = nextHex;
-                            nextHex = null;
-                        }
+                        // Tile in direction from current tile is valid to move over
+                        tilesEffected.Add(nextHex);
+                        previousHex = nextHex;
+                        nextHex = null;
                     }
                 }
 
@@ -711,28 +886,32 @@ namespace WeAreGladiators.Abilities
                 {
                     if ((abilityEffect.aoeType == AoeType.Aura || abilityEffect.aoeType == AoeType.Global) &&
                         tilesEffected.Contains(caster.currentTile))
+                    {
                         tilesEffected.Remove(caster.currentTile);
+                    }
 
                     else if (abilityEffect.aoeType == AoeType.AtTarget &&
-                        tilesEffected.Contains(tileTarget))
+                             tilesEffected.Contains(tileTarget))
+                    {
                         tilesEffected.Remove(tileTarget);
+                    }
                 }
 
-                Debug.Log("Tiles effected = " + tilesEffected.Count.ToString());
+                Debug.Log("Tiles effected = " + tilesEffected.Count);
 
                 // Filter out enemies or allies where applicable
                 foreach (LevelNode h in tilesEffected)
                 {
                     if (h.myCharacter != null)
                     {
-                        if ((h.myCharacter.allegiance == caster.allegiance && abilityEffect.effectsAllies) ||
-                            (h.myCharacter.allegiance != caster.allegiance && abilityEffect.effectsEnemies))
+                        if (h.myCharacter.allegiance == caster.allegiance && abilityEffect.effectsAllies ||
+                            h.myCharacter.allegiance != caster.allegiance && abilityEffect.effectsEnemies)
                         {
                             charactersEffected.Add(h.myCharacter);
                         }
                     }
                 }
-                Debug.Log("Characters effected = " + charactersEffected.Count.ToString());
+                Debug.Log("Characters effected = " + charactersEffected.Count);
 
                 // Roll for hits + play on Hit animations or on miss animations
                 foreach (HexCharacterModel character in charactersEffected)
@@ -767,7 +946,10 @@ namespace WeAreGladiators.Abilities
                         Vector3 pos = character.hexCharacterView.WorldPosition;
                         VisualEventManager.CreateVisualEvent(() =>
                         {
-                            if (character.hexCharacterView != null) pos = character.hexCharacterView.WorldPosition;
+                            if (character.hexCharacterView != null)
+                            {
+                                pos = character.hexCharacterView.WorldPosition;
+                            }
                             VisualEffectManager.Instance.CreateStatusEffect(pos, "MISS");
                             AudioManager.Instance.PlaySound(Sound.Crowd_Ooh_1);
                             LevelController.Instance.AnimateCrowdOnMiss();
@@ -775,11 +957,15 @@ namespace WeAreGladiators.Abilities
 
                         // Check Evasion
                         if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Evasion))
+                        {
                             PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Evasion, -1);
+                        }
 
                         // Check Crippled
                         if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Crippled))
+                        {
                             PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Crippled, -1);
+                        }
 
                         // Duck animation on miss
                         VisualEventManager.CreateVisualEvent(() =>
@@ -789,7 +975,7 @@ namespace WeAreGladiators.Abilities
                 }
 
                 // Calcuate and deal damage
-                foreach (var character in charactersHit)
+                foreach (KeyValuePair<HexCharacterModel, HitRoll> character in charactersHit)
                 {
                     bool didCrit = CombatController.Instance.RollForCrit(caster, character.Key, ability, abilityEffect);
                     DamageResult dResult = null;
@@ -800,7 +986,9 @@ namespace WeAreGladiators.Abilities
 
                     // Resolve bonus armour damage
                     if (abilityEffect.bonusArmourDamage > 0)
+                    {
                         HexCharacterController.Instance.ModifyArmour(target, -abilityEffect.bonusArmourDamage);
+                    }
 
                     // Deal damage
                     CombatController.Instance.HandleDamage(caster, character.Key, dResult, ability, abilityEffect, weaponUsed, false, character.Key.GetLastStackEventParent());
@@ -822,7 +1010,9 @@ namespace WeAreGladiators.Abilities
                     if (didCrit &&
                         CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
                         caster.livingState == LivingState.Alive)
+                    {
                         CombatController.Instance.CreateStressCheck(caster, StressEventType.LandedCriticalStrike);
+                    }
 
                     // Trigger on hit/crit effects
                     if (didCrit && ability.onCritEffects.Count > 0)
@@ -858,27 +1048,39 @@ namespace WeAreGladiators.Abilities
                 List<HexCharacterModel> charactersHit = new List<HexCharacterModel>();
 
                 // Get Aoe Area
-                if (abilityEffect.aoeType == AoeType.Aura)                
-                    tilesEffected = HexCharacterController.Instance.GetCharacterAura(caster, true);                
-                else if (abilityEffect.aoeType == AoeType.ZoneOfControl)                
-                    tilesEffected = HexCharacterController.Instance.GetCharacterZoneOfControl(caster);                
-                else if (abilityEffect.aoeType == AoeType.AtTarget)                
-                    tilesEffected = LevelController.Instance.GetAllHexsWithinRange(tileTarget, abilityEffect.aoeSize, true);                
-                else if (abilityEffect.aoeType == AoeType.Global)                
-                    tilesEffected.AddRange(LevelController.Instance.AllLevelNodes.ToList());                
+                if (abilityEffect.aoeType == AoeType.Aura)
+                {
+                    tilesEffected = HexCharacterController.Instance.GetCharacterAura(caster, true);
+                }
+                else if (abilityEffect.aoeType == AoeType.ZoneOfControl)
+                {
+                    tilesEffected = HexCharacterController.Instance.GetCharacterZoneOfControl(caster);
+                }
+                else if (abilityEffect.aoeType == AoeType.AtTarget)
+                {
+                    tilesEffected = LevelController.Instance.GetAllHexsWithinRange(tileTarget, abilityEffect.aoeSize, true);
+                }
+                else if (abilityEffect.aoeType == AoeType.Global)
+                {
+                    tilesEffected.AddRange(LevelController.Instance.AllLevelNodes.ToList());
+                }
 
                 // Determine targets to roll against.
-                foreach (LevelNode h in tilesEffected)                
-                    if (h.myCharacter != null && 
-                        !HexCharacterController.Instance.IsTargetFriendly(h.myCharacter, caster))                    
-                        charactersEffected.Add(h.myCharacter);                   
-                
+                foreach (LevelNode h in tilesEffected)
+                {
+                    if (h.myCharacter != null &&
+                        !HexCharacterController.Instance.IsTargetFriendly(h.myCharacter, caster))
+                    {
+                        charactersEffected.Add(h.myCharacter);
+                    }
+                }
+
                 // Roll for hits + play on Hit animations or on miss animations
                 foreach (HexCharacterModel character in charactersEffected)
                 {
                     VisualEventManager.CreateStackParentVisualEvent(character);
                     CombatController.Instance.CreateStressCheck(character, abilityEffect.stressEventData, true);
-                }                                          
+                }
             }
 
             // Apply passive to target
@@ -889,12 +1091,16 @@ namespace WeAreGladiators.Abilities
                 bool success = false;
 
                 if (roll)
+                {
                     success = PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, abilityEffect.perkPairing.perkTag, stacks, true, 0.5f, caster.pManager);
+                }
 
                 if (success)
                 {
                     foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
+                    {
                         AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, target, null, null, target.GetLastStackEventParent());
+                    }
 
                     foreach (AbilityEffect e in ability.onPerkAppliedSuccessEffects)
                     {
@@ -935,28 +1141,32 @@ namespace WeAreGladiators.Abilities
                 {
                     if ((abilityEffect.aoeType == AoeType.Aura || abilityEffect.aoeType == AoeType.Global) &&
                         tilesEffected.Contains(caster.currentTile))
+                    {
                         tilesEffected.Remove(caster.currentTile);
+                    }
 
                     else if (abilityEffect.aoeType == AoeType.AtTarget &&
-                        tilesEffected.Contains(tileTarget))
+                             tilesEffected.Contains(tileTarget))
+                    {
                         tilesEffected.Remove(tileTarget);
+                    }
                 }
 
-                Debug.Log("Tiles effected = " + tilesEffected.Count.ToString());
+                Debug.Log("Tiles effected = " + tilesEffected.Count);
 
                 // Filter out enemies or allies where applicable
                 foreach (LevelNode h in tilesEffected)
                 {
                     if (h.myCharacter != null)
                     {
-                        if ((h.myCharacter.allegiance == caster.allegiance && abilityEffect.effectsAllies) ||
-                            (h.myCharacter.allegiance != caster.allegiance && abilityEffect.effectsEnemies))
+                        if (h.myCharacter.allegiance == caster.allegiance && abilityEffect.effectsAllies ||
+                            h.myCharacter.allegiance != caster.allegiance && abilityEffect.effectsEnemies)
                         {
                             charactersEffected.Add(h.myCharacter);
                         }
                     }
                 }
-                Debug.Log("Characters effected = " + charactersEffected.Count.ToString());
+                Debug.Log("Characters effected = " + charactersEffected.Count);
 
                 // Roll for hits + play on Hit animations or on miss animations
                 foreach (HexCharacterModel character in charactersEffected)
@@ -972,10 +1182,15 @@ namespace WeAreGladiators.Abilities
                     bool success = false;
 
                     if (roll)
+                    {
                         success = PerkController.Instance.ModifyPerkOnCharacterEntity
-                         (character.pManager, abilityEffect.perkPairing.perkTag, abilityEffect.perkPairing.passiveStacks, true, 0f, caster.pManager);
+                            (character.pManager, abilityEffect.perkPairing.perkTag, abilityEffect.perkPairing.passiveStacks, true, 0f, caster.pManager);
+                    }
 
-                    if (success) charactersHit.Add(character);
+                    if (success)
+                    {
+                        charactersHit.Add(character);
+                    }
                 }
 
                 // On passive succesfully applied visual events + effects
@@ -1009,7 +1224,10 @@ namespace WeAreGladiators.Abilities
                 // Do probability roll
                 bool roll = RandomGenerator.NumberBetween(1, 100) <= abilityEffect.perkApplicationChance;
 
-                if (roll) PerkController.Instance.ModifyPerkOnCharacterEntity(caster.pManager, abilityEffect.perkPairing.perkTag, stacks, true, 0.5f, caster.pManager);
+                if (roll)
+                {
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(caster.pManager, abilityEffect.perkPairing.perkTag, stacks, true, 0.5f, caster.pManager);
+                }
 
             }
 
@@ -1030,13 +1248,10 @@ namespace WeAreGladiators.Abilities
                     {
                         break;
                     }
-                    else
-                    {
-                        // Tile in direction from current tile is valid to move over
-                        hexsOnPath.Add(nextHex);
-                        previousHex = nextHex;
-                        nextHex = null;
-                    }
+                    // Tile in direction from current tile is valid to move over
+                    hexsOnPath.Add(nextHex);
+                    previousHex = nextHex;
+                    nextHex = null;
                 }
 
                 // Filter out enemies or allies where applicable
@@ -1047,7 +1262,7 @@ namespace WeAreGladiators.Abilities
                         charactersEffected.Add(h.myCharacter);
                     }
                 }
-                Debug.Log("Characters effected = " + charactersEffected.Count.ToString());
+                Debug.Log("Characters effected = " + charactersEffected.Count);
 
                 // Roll for hits + play on Hit animations or on miss animations
                 foreach (HexCharacterModel character in charactersEffected)
@@ -1062,10 +1277,16 @@ namespace WeAreGladiators.Abilities
                     bool roll = RandomGenerator.NumberBetween(1, 100) <= abilityEffect.perkApplicationChance;
                     bool success = false;
 
-                    if (roll) success = PerkController.Instance.ModifyPerkOnCharacterEntity
-                         (character.pManager, abilityEffect.perkPairing.perkTag, abilityEffect.perkPairing.passiveStacks, true, 0f, caster.pManager);
+                    if (roll)
+                    {
+                        success = PerkController.Instance.ModifyPerkOnCharacterEntity
+                            (character.pManager, abilityEffect.perkPairing.perkTag, abilityEffect.perkPairing.passiveStacks, true, 0f, caster.pManager);
+                    }
 
-                    if (success) charactersHit.Add(character);
+                    if (success)
+                    {
+                        charactersHit.Add(character);
+                    }
                 }
 
                 // On passive succesfully applied visual events
@@ -1090,7 +1311,9 @@ namespace WeAreGladiators.Abilities
             {
                 int stacks = PerkController.Instance.GetStackCountOfPerkOnCharacter(target.pManager, abilityEffect.perkPairing.perkTag);
                 if (stacks > 0)
+                {
                     PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, abilityEffect.perkPairing.perkTag, -stacks, true, 0.5f, caster.pManager);
+                }
             }
 
             // Gain Energy Target
@@ -1158,12 +1381,23 @@ namespace WeAreGladiators.Abilities
                 foreach (LevelNode h in targetBackTiles)
                 {
                     if (Pathfinder.CanHexBeOccupied(h))
+                    {
                         validTiles.Add(h);
+                    }
                 }
 
-                if (validTiles.Count == 0) return;
-                else if (validTiles.Count == 1) destination = validTiles[0];
-                else destination = validTiles[RandomGenerator.NumberBetween(0, validTiles.Count - 1)];
+                if (validTiles.Count == 0)
+                {
+                    return;
+                }
+                if (validTiles.Count == 1)
+                {
+                    destination = validTiles[0];
+                }
+                else
+                {
+                    destination = validTiles[RandomGenerator.NumberBetween(0, validTiles.Count - 1)];
+                }
 
                 LevelController.Instance.HandleTeleportCharacter(caster, destination);
                 LevelController.Instance.FaceCharacterTowardsHex(caster, target.currentTile);
@@ -1186,8 +1420,8 @@ namespace WeAreGladiators.Abilities
                     nextHex = LevelController.Instance.GetAdjacentHexByDirection(previousHex, direction);
 
                     // Hitting an enemy
-                    if (nextHex != null && 
-                        nextHex.myCharacter != null && 
+                    if (nextHex != null &&
+                        nextHex.myCharacter != null &&
                         !HexCharacterController.Instance.IsTargetFriendly(nextHex.myCharacter, caster))
                     {
                         // Collision end point found
@@ -1197,13 +1431,13 @@ namespace WeAreGladiators.Abilities
                         break;
                     }
                     // Hitting an friendly character or obstruction
-                    else if (nextHex != null && !Pathfinder.CanHexBeOccupied(nextHex))
+                    if (nextHex != null && !Pathfinder.CanHexBeOccupied(nextHex))
                     {
                         // Collision end point found
                         //obstructionHex = nextHex;
                         break;
                     }
-                    else if (nextHex != null)
+                    if (nextHex != null)
                     {
                         // Tile in direction from current tile is valid to move over
                         hexsOnPath.Add(nextHex);
@@ -1217,7 +1451,7 @@ namespace WeAreGladiators.Abilities
                 {
                     // to do: animation type and speed (charge, dash, run, etc, and speed)
                     LevelController.Instance.ChargeDownPath(caster, hexsOnPath);
-                }                    
+                }
 
                 // Trigger on collision effects
                 if (abilityEffect.chainedEffect == false && obstructionHex != null)
@@ -1225,10 +1459,9 @@ namespace WeAreGladiators.Abilities
                     foreach (AbilityEffect e in ability.onCollisionEffects)
                     {
                         TriggerAbilityEffect(ability, e, caster, obstructionHex.myCharacter, obstructionHex);
-                    }                                     
-                                        
-                }
+                    }
 
+                }
 
             }
 
@@ -1252,7 +1485,10 @@ namespace WeAreGladiators.Abilities
                         if (LevelController.Instance.GetDirectionToTargetHex(previousTile, h) == dir)
                         {
                             // Found next tile in direction
-                            if (Pathfinder.CanHexBeOccupied(h)) previousTile = h;
+                            if (Pathfinder.CanHexBeOccupied(h))
+                            {
+                                previousTile = h;
+                            }
                             else
                             {
                                 obstruction = h;
@@ -1264,7 +1500,9 @@ namespace WeAreGladiators.Abilities
                     }
 
                     if (forceBreak)
+                    {
                         break;
+                    }
                 }
 
                 // found a hex that is valid to be knocked on to?
@@ -1274,10 +1512,10 @@ namespace WeAreGladiators.Abilities
                 }
 
                 // Characters that are knocked into on obstacle/player become stunned.
-                if(shouldStun)
+                if (shouldStun)
                 {
                     // Knock back and forth towards obstruction
-                    if(obstruction != null)
+                    if (obstruction != null)
                     {
                         TaskTracker tracker = new TaskTracker();
                         VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.TriggerKnockedBackIntoObstructionAnimation
@@ -1301,7 +1539,9 @@ namespace WeAreGladiators.Abilities
                         foreach (LevelNode h in LevelController.Instance.AllLevelNodes)
                         {
                             if (Pathfinder.CanHexBeOccupied(h))
+                            {
                                 possibleTiles.Add(h);
+                            }
                         }
 
                         if (possibleTiles.Count > 0)
@@ -1311,7 +1551,10 @@ namespace WeAreGladiators.Abilities
                         }
                     }
 
-                    if (!spawnLocation) break;
+                    if (!spawnLocation)
+                    {
+                        break;
+                    }
 
                     // Create character
                     HexCharacterModel newSummon =
@@ -1341,7 +1584,7 @@ namespace WeAreGladiators.Abilities
 
                     // Update all window slot positions + activation pointer arrow
                     HexCharacterModel entityActivated = TurnController.Instance.EntityActivated;
-                    var cachedOrder = TurnController.Instance.ActivationOrder.ToList();
+                    List<HexCharacterModel> cachedOrder = TurnController.Instance.ActivationOrder.ToList();
                     VisualEventManager.CreateVisualEvent(() =>
                     {
                         TurnController.Instance.UpdateWindowPositions(cachedOrder);
@@ -1349,7 +1592,7 @@ namespace WeAreGladiators.Abilities
                         HexCharacterController.Instance.FadeInCharacterWorldCanvas(view, null, abilityEffect.uiFadeInSpeed);
                         CharacterModeller.FadeInCharacterModel(view.model, abilityEffect.modelFadeInSpeed);
                         CharacterModeller.FadeInCharacterShadow(view, 1f);
-                    });                    
+                    });
 
                     // Resolve visual events
                     foreach (AnimationEventData vEvent in abilityEffect.summonedCreatureVisualEvents)
@@ -1357,8 +1600,6 @@ namespace WeAreGladiators.Abilities
                         AnimationEventController.Instance.PlayAnimationEvent(vEvent, newSummon, newSummon);
                     }
                 }
-                
-
 
             }
 
@@ -1383,34 +1624,45 @@ namespace WeAreGladiators.Abilities
         {
             // Pay Energy Cost
             HexCharacterController.Instance.ModifyActionPoints(character, -GetAbilityActionPointCost(character, ability));
-           // HexCharacterController.Instance.ModifyCurrentFatigue(character, GetAbilityFatigueCost(character, ability));
+            // HexCharacterController.Instance.ModifyCurrentFatigue(character, GetAbilityFatigueCost(character, ability));
 
             // Check shed perk: remove if ability used was an aspect ability
             if (ability.abilityType.Contains(AbilityType.Aspect) && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
+            {
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Shed, -1);
+            }
 
             // Increment skills used this turn
             character.abilitiesUsedThisCombat++;
-            if (ability.abilityType.Contains(AbilityType.Skill))            
+            if (ability.abilityType.Contains(AbilityType.Skill))
+            {
                 character.skillAbilitiesUsedThisTurn++;
+            }
             else if (ability.abilityType.Contains(AbilityType.RangedAttack))
+            {
                 character.rangedAttackAbilitiesUsedThisTurn++;
+            }
             else if (ability.abilityType.Contains(AbilityType.MeleeAttack))
+            {
                 character.meleeAttackAbilitiesUsedThisTurn++;
+            }
             else if (ability.abilityType.Contains(AbilityType.WeaponAttack))
+            {
                 character.weaponAbilitiesUsedThisTurn++;
+            }
             else if (ability.abilityType.Contains(AbilityType.Spell))
+            {
                 character.spellAbilitiesUsedThisTurn++;
+            }
         }
         private void OnAbilityUsedFinish(HexCharacterModel character, AbilityData ability, HexCharacterModel target = null)
         {
             SetAbilityOnCooldown(ability);
-            if(PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Stealth) &&
+            if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Stealth) &&
                 ability.doesNotBreakStealth == false)
             {
                 PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Stealth, -1);
             }
-
 
         }
         private void SetAbilityOnCooldown(AbilityData ability)
@@ -1422,17 +1674,17 @@ namespace WeAreGladiators.Abilities
             if (ability.myCharacter != null &&
                 TurnController.Instance.EntityActivated == ability.myCharacter &&
                 ability.myCharacter.controller == Controller.Player)
-            { 
-                foreach(AbilityButton b in CombatUIController.Instance.AbilityButtons)
+            {
+                foreach (AbilityButton b in CombatUIController.Instance.AbilityButtons)
                 {
-                    if(b.MyAbilityData == ability)
+                    if (b.MyAbilityData == ability)
                     {
                         b.UpdateAbilityButtonUnusableOverlay();
                         break;
                     }
                 }
             }
-            
+
         }
         public void ReduceCharacterAbilityCooldownsOnTurnStart(HexCharacterModel character)
         {
@@ -1445,14 +1697,17 @@ namespace WeAreGladiators.Abilities
             }
         }
 
-
         #endregion
 
         // Input
         #region
+
         public void OnAbilityButtonClicked(AbilityButton b)
         {
-            if (b.MyAbilityData == null) return;
+            if (b.MyAbilityData == null)
+            {
+                return;
+            }
             if (IsAbilityUseable(b.MyAbilityData.myCharacter, b.MyAbilityData))
             {
                 AudioManager.Instance.PlaySound(Sound.UI_Button_Click);
@@ -1469,19 +1724,22 @@ namespace WeAreGladiators.Abilities
             HexCharacterModel caster = b.MyAbilityData.myCharacter;
             AbilityData ability = b.MyAbilityData;
 
-            if (currentAbilityAwaiting != null || ability.targetRequirement == TargetRequirement.NoTarget)
+            if (CurrentAbilityAwaiting != null || ability.targetRequirement == TargetRequirement.NoTarget)
             {
                 // player clicked a different ability, handle new selection
                 TargetGuidanceController.Instance.Hide(0);
                 LevelController.Instance.UnmarkAllTiles();
                 LevelController.Instance.UnmarkAllSubTargetMarkers();
-                var selectedButton = CombatUIController.Instance.FindAbilityButton(currentAbilityAwaiting);
-                if (selectedButton != null) selectedButton.SetSelectedGlow(false);
+                AbilityButton selectedButton = CombatUIController.Instance.FindAbilityButton(CurrentAbilityAwaiting);
+                if (selectedButton != null)
+                {
+                    selectedButton.SetSelectedGlow(false);
+                }
             }
 
             // cache ability, get ready for second click, or for instant use
-            currentAbilityAwaiting = b.MyAbilityData;           
-            currentSelectionPhase = AbilitySelectionPhase.None;
+            CurrentAbilityAwaiting = b.MyAbilityData;
+            CurrentSelectionPhase = AbilitySelectionPhase.None;
 
             // Set cursor
             CursorController.Instance.SetFallbackCursor(CursorType.TargetClick);
@@ -1491,44 +1749,52 @@ namespace WeAreGladiators.Abilities
             if (ability.targetRequirement != TargetRequirement.NoTarget)
             {
                 bool neutral = true;
-                if (ability.targetRequirement == TargetRequirement.Enemy) neutral = false;
-                CombatUIController.Instance.FindAbilityButton(currentAbilityAwaiting).SetSelectedGlow(true);
+                if (ability.targetRequirement == TargetRequirement.Enemy)
+                {
+                    neutral = false;
+                }
+                CombatUIController.Instance.FindAbilityButton(CurrentAbilityAwaiting).SetSelectedGlow(true);
                 LevelController.Instance.MarkTilesInRange(GetTargettableTilesOfAbility(ability, caster), neutral);
                 TargetGuidanceController.Instance.BuildAndShow(ability.guidanceInstruction, 0.5f);
             }
             else if (ability.targetRequirement == TargetRequirement.NoTarget)
             {
-                UseAbility(caster, currentAbilityAwaiting);
+                UseAbility(caster, CurrentAbilityAwaiting);
                 HandleCancelCurrentAbilityOrder();
             }
 
             // Handle keyboard pressed to trigger ability click, and hit chance
             // modal is open while moused over the previous target
-            if (AwaitingAbilityOrder() && currentAbilityAwaiting.targetRequirement == TargetRequirement.Enemy &&
+            if (AwaitingAbilityOrder() && CurrentAbilityAwaiting.targetRequirement == TargetRequirement.Enemy &&
                 LevelController.HexMousedOver != null && LevelController.HexMousedOver.myCharacter != null)
             {
                 ShowHitChancePopup(TurnController.Instance.EntityActivated, LevelController.HexMousedOver.myCharacter,
                     CurrentAbilityAwaiting, TurnController.Instance.EntityActivated.itemSet.mainHandItem);
             }
-            else HideHitChancePopup();
+            else
+            {
+                HideHitChancePopup();
+            }
         }
         public void HandleTargetSelectionMade(HexCharacterModel target)
         {
-            HexCharacterModel caster = currentAbilityAwaiting.myCharacter;
-            if (IsTargetOfAbilityValid(caster, target, currentAbilityAwaiting))
+            HexCharacterModel caster = CurrentAbilityAwaiting.myCharacter;
+            if (IsTargetOfAbilityValid(caster, target, CurrentAbilityAwaiting))
             {
                 // multiple target selection abilities (e.g. telekinesis, phase shift, etc)
-                if (currentAbilityAwaiting.secondaryTargetRequirement != SecondaryTargetRequirement.None &&
-                    currentSelectionPhase == AbilitySelectionPhase.None)
+                if (CurrentAbilityAwaiting.secondaryTargetRequirement != SecondaryTargetRequirement.None &&
+                    CurrentSelectionPhase == AbilitySelectionPhase.None)
                 {
                     // Player has made their first selection, and the selection is valid, prepare for the 2nd selection
-                    if (currentAbilityAwaiting.secondaryTargetRequirement == SecondaryTargetRequirement.UnoccupiedHexWithinRangeOfTarget)
+                    if (CurrentAbilityAwaiting.secondaryTargetRequirement == SecondaryTargetRequirement.UnoccupiedHexWithinRangeOfTarget)
                     {
                         List<LevelNode> validHexs = new List<LevelNode>();
-                        foreach (LevelNode h in LevelController.Instance.GetAllHexsWithinRange(target.currentTile, currentAbilityAwaiting.rangeFromTarget))
+                        foreach (LevelNode h in LevelController.Instance.GetAllHexsWithinRange(target.currentTile, CurrentAbilityAwaiting.rangeFromTarget))
                         {
                             if (Pathfinder.CanHexBeOccupied(h))
+                            {
                                 validHexs.Add(h);
+                            }
                         }
 
                         // If player selected a target with no valid adjacent tiles, cancel the ability selection process
@@ -1536,19 +1802,19 @@ namespace WeAreGladiators.Abilities
                         {
                             return;
                         }
-                        else
+                        // Get ready for second selection
+                        CurrentSelectionPhase = AbilitySelectionPhase.First;
+                        LevelController.Instance.UnmarkAllTiles();
+                        LevelController.Instance.UnmarkAllSubTargetMarkers();
+                        TargetGuidanceController.Instance.Hide(0);
+                        bool neutral = true;
+                        if (CurrentAbilityAwaiting.targetRequirement == TargetRequirement.Enemy)
                         {
-                            // Get ready for second selection
-                            currentSelectionPhase = AbilitySelectionPhase.First;
-                            LevelController.Instance.UnmarkAllTiles();
-                            LevelController.Instance.UnmarkAllSubTargetMarkers();
-                            TargetGuidanceController.Instance.Hide(0);
-                            bool neutral = true;
-                            if (currentAbilityAwaiting.targetRequirement == TargetRequirement.Enemy) neutral = false;
-                            LevelController.Instance.MarkTilesInRange(validHexs, neutral);
-                            TargetGuidanceController.Instance.BuildAndShow(currentAbilityAwaiting.guidanceInstructionTwo);
-                            firstSelectionCharacter = target;
+                            neutral = false;
                         }
+                        LevelController.Instance.MarkTilesInRange(validHexs, neutral);
+                        TargetGuidanceController.Instance.BuildAndShow(CurrentAbilityAwaiting.guidanceInstructionTwo);
+                        firstSelectionCharacter = target;
                     }
 
                 }
@@ -1556,7 +1822,7 @@ namespace WeAreGladiators.Abilities
                 // single target selection abilities
                 else
                 {
-                    UseAbility(caster, currentAbilityAwaiting, target);
+                    UseAbility(caster, CurrentAbilityAwaiting, target);
                     HandleCancelCurrentAbilityOrder();
                 }
 
@@ -1565,31 +1831,31 @@ namespace WeAreGladiators.Abilities
         public void HandleTargetSelectionMade(LevelNode target)
         {
             // overload function for abilities that target a hex, not a character (e.g. teleport to location, throw grenade at location, etc)
-            HexCharacterModel caster = currentAbilityAwaiting.myCharacter;
-            if (currentSelectionPhase == AbilitySelectionPhase.None && IsTargetOfAbilityValid(caster, target, currentAbilityAwaiting))
+            HexCharacterModel caster = CurrentAbilityAwaiting.myCharacter;
+            if (CurrentSelectionPhase == AbilitySelectionPhase.None && IsTargetOfAbilityValid(caster, target, CurrentAbilityAwaiting))
             {
-                UseAbility(caster, currentAbilityAwaiting, null, target);
+                UseAbility(caster, CurrentAbilityAwaiting, null, target);
                 HandleCancelCurrentAbilityOrder();
             }
-            else if (currentSelectionPhase == AbilitySelectionPhase.First)
+            else if (CurrentSelectionPhase == AbilitySelectionPhase.First)
             {
                 // Secondary target that must be an unoccupied hex with range of the first character selection
-                if (currentAbilityAwaiting.secondaryTargetRequirement == SecondaryTargetRequirement.UnoccupiedHexWithinRangeOfTarget)
+                if (CurrentAbilityAwaiting.secondaryTargetRequirement == SecondaryTargetRequirement.UnoccupiedHexWithinRangeOfTarget)
                 {
                     // is the tile selected valid?
-                    if (Pathfinder.CanHexBeOccupied(target) && LevelController.Instance.GetAllHexsWithinRange(firstSelectionCharacter.currentTile, currentAbilityAwaiting.rangeFromTarget).Contains(target))
+                    if (Pathfinder.CanHexBeOccupied(target) && LevelController.Instance.GetAllHexsWithinRange(firstSelectionCharacter.currentTile, CurrentAbilityAwaiting.rangeFromTarget).Contains(target))
                     {
                         // it is, use the ability
 
                         // make sure that the target is teleportable if the effect is a teleport
-                        if (currentAbilityAwaiting.abilityEffects.Count > 0 &&
-                            currentAbilityAwaiting.abilityEffects[0].effectType == AbilityEffectType.TeleportTargetToTile &&
+                        if (CurrentAbilityAwaiting.abilityEffects.Count > 0 &&
+                            CurrentAbilityAwaiting.abilityEffects[0].effectType == AbilityEffectType.TeleportTargetToTile &&
                             !HexCharacterController.Instance.IsCharacterTeleportable(firstSelectionCharacter))
                         {
                             return;
                         }
 
-                        UseAbility(caster, currentAbilityAwaiting, firstSelectionCharacter, target);
+                        UseAbility(caster, CurrentAbilityAwaiting, firstSelectionCharacter, target);
                         HandleCancelCurrentAbilityOrder();
                     }
                 }
@@ -1597,11 +1863,14 @@ namespace WeAreGladiators.Abilities
         }
         private void HandleCancelCurrentAbilityOrder()
         {
-            var selectedButton = CombatUIController.Instance.FindAbilityButton(currentAbilityAwaiting);
-            if (selectedButton != null) selectedButton.SetSelectedGlow(false);
-            currentAbilityAwaiting = null;
+            AbilityButton selectedButton = CombatUIController.Instance.FindAbilityButton(CurrentAbilityAwaiting);
+            if (selectedButton != null)
+            {
+                selectedButton.SetSelectedGlow(false);
+            }
+            CurrentAbilityAwaiting = null;
             firstSelectionCharacter = null;
-            currentSelectionPhase = AbilitySelectionPhase.None;
+            CurrentSelectionPhase = AbilitySelectionPhase.None;
             LevelController.Instance.UnmarkAllSubTargetMarkers();
             LevelController.Instance.UnmarkAllTiles();
             TargetGuidanceController.Instance.Hide();
@@ -1611,27 +1880,38 @@ namespace WeAreGladiators.Abilities
         }
         private void Update()
         {
-            if (GameController.Instance.GameState != GameState.CombatActive) return;
+            if (GameController.Instance.GameState != GameState.CombatActive)
+            {
+                return;
+            }
 
             if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
                 HandleCancelCurrentAbilityOrder();
+            }
 
-            if (hitChanceRootCanvas.isActiveAndEnabled == true &&
+            if (hitChanceRootCanvas.isActiveAndEnabled &&
                 LevelController.HexMousedOver != null &&
-               hitChancePositionParent.transform.position != LevelController.HexMousedOver.WorldPosition)
+                hitChancePositionParent.transform.position != LevelController.HexMousedOver.WorldPosition)
+            {
                 hitChancePositionParent.transform.position = LevelController.HexMousedOver.WorldPosition;
+            }
         }
+
         #endregion
 
         // Get Ability Calculations
         #region
+
         public int GetAbilityActionPointCost(HexCharacterModel character, AbilityData ability)
         {
             int apCost = ability.energyCost;
 
             // Check shed perk: aspect ability costs 0
             if (ability.abilityType.Contains(AbilityType.Aspect) && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Shed))
+            {
                 return 0;
+            }
 
             // Gifted Perk
             if (character != null &&
@@ -1644,7 +1924,7 @@ namespace WeAreGladiators.Abilities
             // MASTERY PERKS
             // Master of Archer
             if (character != null &&
-                (ability.abilityName == "Load Bolt" || ability.abilityName == "Plink") && 
+                (ability.abilityName == "Load Bolt" || ability.abilityName == "Plink") &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.MasterOfArchery))
             {
                 apCost -= 1;
@@ -1695,10 +1975,11 @@ namespace WeAreGladiators.Abilities
                 apCost -= 1;
             }
 
-            
             // prevent cost going negative
             if (apCost < 0)
+            {
                 apCost = 0;
+            }
 
             return apCost;
         }
@@ -1706,8 +1987,10 @@ namespace WeAreGladiators.Abilities
         {
             List<LevelNode> targettableTiles = new List<LevelNode>();
             bool includeSelfTile = false;
-            if (ability.targetRequirement == TargetRequirement.AllyOrSelf || ability.targetRequirement == TargetRequirement.AllCharacters)            
-                includeSelfTile = true;            
+            if (ability.targetRequirement == TargetRequirement.AllyOrSelf || ability.targetRequirement == TargetRequirement.AllCharacters)
+            {
+                includeSelfTile = true;
+            }
 
             targettableTiles = LevelController.Instance.GetAllHexsWithinRange(caster.currentTile, CalculateFinalRangeOfAbility(ability, caster), includeSelfTile);
 
@@ -1752,26 +2035,35 @@ namespace WeAreGladiators.Abilities
 
                 // Check elevation range bonus
                 if (caster.currentTile.Elevation == TileElevation.Elevated)
-                   rangeReturned += 1;
+                {
+                    rangeReturned += 1;
+                }
 
                 if (ability.abilityType.Contains(AbilityType.Spell) && PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.SpellSight))
+                {
                     rangeReturned += 1;
+                }
             }
 
-            if(caster.itemSet.mainHandItem != null && ability.abilityType.Contains(AbilityType.WeaponAttack))
+            if (caster.itemSet.mainHandItem != null && ability.abilityType.Contains(AbilityType.WeaponAttack))
             {
                 rangeReturned += ItemController.Instance.GetInnateModifierFromWeapon(InnateItemEffectType.BonusMeleeRange, caster.itemSet.mainHandItem);
             }
 
-            if (rangeReturned < 1) rangeReturned = 1;
+            if (rangeReturned < 1)
+            {
+                rangeReturned = 1;
+            }
 
-            Debug.Log("Final calculated range of '" + ability.abilityName + "' is " + rangeReturned.ToString());
+            Debug.Log("Final calculated range of '" + ability.abilityName + "' is " + rangeReturned);
             return rangeReturned;
         }
+
         #endregion
 
         // Ability Useability + Validation Logic
         #region
+
         private bool DoesAbilityEffectMeetAllRequirements(AbilityData abilityUsed, AbilityEffect effect, HexCharacterModel character, HexCharacterModel target = null, LevelNode location = null)
         {
             bool bRet = true;
@@ -1792,7 +2084,7 @@ namespace WeAreGladiators.Abilities
                 {
                     if (!PerkController.Instance.DoesCharacterHavePerk(target.pManager, req.perk))
                     {
-                        Debug.Log("AbilityController.DoesAbilityEffectMeetAllRequirements() failed 'Target Has Perk' requirement check (required" + req.perk.ToString() +").");
+                        Debug.Log("AbilityController.DoesAbilityEffectMeetAllRequirements() failed 'Target Has Perk' requirement check (required" + req.perk + ").");
                         bRet = false;
                         break;
                     }
@@ -1802,7 +2094,7 @@ namespace WeAreGladiators.Abilities
                 {
                     if (!PerkController.Instance.DoesCharacterHavePerk(character.pManager, req.perk))
                     {
-                        Debug.Log("AbilityController.DoesAbilityEffectMeetAllRequirements() failed 'Caster Has Perk' requirement check (required" + req.perk.ToString() + ").");
+                        Debug.Log("AbilityController.DoesAbilityEffectMeetAllRequirements() failed 'Caster Has Perk' requirement check (required" + req.perk + ").");
                         bRet = false;
                         break;
                     }
@@ -1812,7 +2104,7 @@ namespace WeAreGladiators.Abilities
                 {
                     if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, req.perk))
                     {
-                        Debug.Log("AbilityController.DoesAbilityEffectMeetAllRequirements() failed 'Target Does Not Have Perk' requirement check (required" + req.perk.ToString() + ").");
+                        Debug.Log("AbilityController.DoesAbilityEffectMeetAllRequirements() failed 'Target Does Not Have Perk' requirement check (required" + req.perk + ").");
                         bRet = false;
                         break;
                     }
@@ -1821,7 +2113,7 @@ namespace WeAreGladiators.Abilities
                 {
                     if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, req.perk))
                     {
-                        Debug.Log("AbilityController.DoesAbilityEffectMeetAllRequirements() failed 'Caster Does Not Have Perk' requirement check (required" + req.perk.ToString() + ").");
+                        Debug.Log("AbilityController.DoesAbilityEffectMeetAllRequirements() failed 'Caster Does Not Have Perk' requirement check (required" + req.perk + ").");
                         bRet = false;
                         break;
                     }
@@ -1832,10 +2124,13 @@ namespace WeAreGladiators.Abilities
         }
         public bool IsTargetOfAbilityValid(HexCharacterModel caster, HexCharacterModel target, AbilityData ability)
         {
-            if (ability.targetRequirement == TargetRequirement.NoTarget) return true;
+            if (ability.targetRequirement == TargetRequirement.NoTarget)
+            {
+                return true;
+            }
 
             Debug.Log("AbilityController.IsTargetOfAbilityValid() called, validating '" + ability.abilityName + "' usage by character " + caster.myName +
-                " against target " + target.myName);           
+                " against target " + target.myName);
 
             // Function used AFTER "IsAbilityUseable" to check if the selected target of the ability is valid.
             bool bRet = false;
@@ -1848,15 +2143,18 @@ namespace WeAreGladiators.Abilities
                 bRet = true;
             }
 
-            Debug.Log("AbilityController.IsTargetOfAbilityValid() returning " + bRet.ToString());
+            Debug.Log("AbilityController.IsTargetOfAbilityValid() returning " + bRet);
             return bRet;
         }
         private bool IsTargetOfAbilityValid(HexCharacterModel caster, LevelNode target, AbilityData ability)
         {
-            if (ability.targetRequirement == TargetRequirement.NoTarget) return true;
+            if (ability.targetRequirement == TargetRequirement.NoTarget)
+            {
+                return true;
+            }
 
             Debug.Log("AbilityController.IsTargetOfAbilityValid() called, validating '" + ability.abilityName + "' usage by character " + caster.myName +
-                " on hex tile " + target.GridPosition.x.ToString() + ", " + target.GridPosition.y.ToString());        
+                " on hex tile " + target.GridPosition.x + ", " + target.GridPosition.y);
 
             // Function used AFTER "IsAbilityUseable" to check if the selected target of the ability is valid.
             bool bRet = false;
@@ -1871,7 +2169,7 @@ namespace WeAreGladiators.Abilities
                 ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target is out of range");
             }
 
-            Debug.Log("AbilityController.IsTargetOfAbilityValid() returning " + bRet.ToString());
+            Debug.Log("AbilityController.IsTargetOfAbilityValid() returning " + bRet);
             return bRet;
         }
         public bool IsAbilityUseable(HexCharacterModel character, AbilityData ability, bool showErrors = true)
@@ -1883,10 +2181,13 @@ namespace WeAreGladiators.Abilities
 
             // check its actually characters turn
             if (TurnController.Instance.EntityActivated != character ||
-                (TurnController.Instance.EntityActivated == character && character.activationPhase != ActivationPhase.ActivationPhase))
+                TurnController.Instance.EntityActivated == character && character.activationPhase != ActivationPhase.ActivationPhase)
             {
                 Debug.Log("IsAbilityUseable() returning false: cannot use abilities when it is not your turn");
-                if (showErrors) ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "It is not this character's turn");
+                if (showErrors)
+                {
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "It is not this character's turn");
+                }
                 bRet = false;
             }
 
@@ -1894,11 +2195,14 @@ namespace WeAreGladiators.Abilities
             foreach (AbilityEffect ef in ability.abilityEffects)
             {
                 if ((ef.effectType == AbilityEffectType.MoveInLine ||
-                   ef.effectType == AbilityEffectType.MoveToTile) &&
-                   !HexCharacterController.Instance.IsCharacterAbleToMove(character))
+                        ef.effectType == AbilityEffectType.MoveToTile) &&
+                    !HexCharacterController.Instance.IsCharacterAbleToMove(character))
                 {
                     Debug.Log("IsAbilityUseable() returning false: cannot take movement actions while rooted");
-                    if (showErrors) ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character is unable to move right now");
+                    if (showErrors)
+                    {
+                        ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character is unable to move right now");
+                    }
                     bRet = false;
                 }
             }
@@ -1914,22 +2218,28 @@ namespace WeAreGladiators.Abilities
             if (!DoesCharacterHaveEnoughActionPoints(character, ability))
             {
                 Debug.Log("IsAbilityUseable() returning false: not enough energy");
-                if (showErrors) ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Not enough Action Points");
-                bRet =  false;
+                if (showErrors)
+                {
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Not enough Action Points");
+                }
+                bRet = false;
             }
 
             // Check sub reqs
-            if (!DoesAbilityMeetSubRequirements(character, ability, null))
+            if (!DoesAbilityMeetSubRequirements(character, ability))
             {
                 Debug.Log("IsAbilityUseable() returning false: did not meet sub requirements");
                 bRet = false;
             }
 
             // check cooldown
-            if (ability.currentCooldown != 0 )
+            if (ability.currentCooldown != 0)
             {
                 Debug.Log("IsAbilityUseable() returning false: ability is on cooldown");
-                if (showErrors) ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Ability is on cooldown");
+                if (showErrors)
+                {
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Ability is on cooldown");
+                }
                 bRet = false;
             }
 
@@ -1941,7 +2251,7 @@ namespace WeAreGladiators.Abilities
             }
 
             // Check smashed shield
-            if(ability.weaponRequirement == WeaponRequirement.Shield &&
+            if (ability.weaponRequirement == WeaponRequirement.Shield &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SmashedShield))
             {
                 Debug.Log("IsAbilityUseable() returning false: character has 'Smashed Shield' perk");
@@ -1949,14 +2259,17 @@ namespace WeAreGladiators.Abilities
             }
 
             // Check unloaded crossbow
-            if(ability.abilityType.Contains(AbilityType.WeaponAttack) && 
+            if (ability.abilityType.Contains(AbilityType.WeaponAttack) &&
                 ability.abilityType.Contains(AbilityType.RangedAttack) &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Reload))
             {
                 Debug.Log("IsAbilityUseable() returning false: character trying to use a ranged weapon attack with 'Reload' status...");
-                if (showErrors) ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character needs to reload first");
+                if (showErrors)
+                {
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character needs to reload first");
+                }
                 bRet = false;
-            }           
+            }
 
             return bRet;
         }
@@ -1965,65 +2278,88 @@ namespace WeAreGladiators.Abilities
             bool bRet = false;
 
             if (weaponReq == WeaponRequirement.None)
+            {
                 bRet = true;
+            }
 
             else if (weaponReq == WeaponRequirement.MeleeWeapon &&
-                itemSet.mainHandItem != null &&
-                itemSet.mainHandItem.IsMeleeWeapon)
+                     itemSet.mainHandItem != null &&
+                     itemSet.mainHandItem.IsMeleeWeapon)
+            {
                 bRet = true;
+            }
 
             else if (weaponReq == WeaponRequirement.RangedWeapon &&
-                itemSet.mainHandItem != null &&
-                itemSet.mainHandItem.IsRangedWeapon)
+                     itemSet.mainHandItem != null &&
+                     itemSet.mainHandItem.IsRangedWeapon)
+            {
                 bRet = true;
+            }
 
             else if (weaponReq == WeaponRequirement.Shield &&
-               itemSet.offHandItem != null &&
-               itemSet.offHandItem.weaponClass == WeaponClass.Shield)
+                     itemSet.offHandItem != null &&
+                     itemSet.offHandItem.weaponClass == WeaponClass.Shield)
+            {
                 bRet = true;
+            }
 
             else if (weaponReq == WeaponRequirement.Bow &&
-              itemSet.mainHandItem != null &&
-              itemSet.mainHandItem.weaponClass == WeaponClass.Bow)
+                     itemSet.mainHandItem != null &&
+                     itemSet.mainHandItem.weaponClass == WeaponClass.Bow)
+            {
                 bRet = true;
+            }
 
             else if (weaponReq == WeaponRequirement.Crossbow &&
-            itemSet.mainHandItem != null &&
-            itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow)
+                     itemSet.mainHandItem != null &&
+                     itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow)
+            {
                 bRet = true;
+            }
 
             else if (weaponReq == WeaponRequirement.BowOrCrossbow &&
-            itemSet.mainHandItem != null &&
-            (itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow || itemSet.mainHandItem.weaponClass == WeaponClass.Bow))
+                     itemSet.mainHandItem != null &&
+                     (itemSet.mainHandItem.weaponClass == WeaponClass.Crossbow || itemSet.mainHandItem.weaponClass == WeaponClass.Bow))
+            {
                 bRet = true;
+            }
 
             else if (weaponReq == WeaponRequirement.ThrowingNet &&
-              itemSet.offHandItem != null &&
-              itemSet.offHandItem.weaponClass == WeaponClass.ThrowingNet)
+                     itemSet.offHandItem != null &&
+                     itemSet.offHandItem.weaponClass == WeaponClass.ThrowingNet)
+            {
                 bRet = true;
+            }
 
             else if (weaponReq == WeaponRequirement.EmptyOffhand &&
-            itemSet.offHandItem == null)
+                     itemSet.offHandItem == null)
+            {
                 bRet = true;
+            }
 
             return bRet;
         }
         private bool DoesCharacterHaveEnoughActionPoints(HexCharacterModel caster, AbilityData ability)
         {
             return caster.currentActionPoints >= GetAbilityActionPointCost(caster, ability);
-        }        
+        }
         private bool IsTargetOfAbilityInRange(HexCharacterModel caster, HexCharacterModel target, AbilityData ability)
         {
             bool bRet = false;
             bRet = GetTargettableTilesOfAbility(ability, caster).Contains(target.currentTile);
             bool showErrorPanel = false;
-            if (TurnController.Instance.EntityActivated != null && 
-                TurnController.Instance.EntityActivated.controller == Controller.Player) 
+            if (TurnController.Instance.EntityActivated != null &&
+                TurnController.Instance.EntityActivated.controller == Controller.Player)
+            {
                 showErrorPanel = true;
+            }
 
             if (!bRet)
             {
-                if (showErrorPanel) ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target is out of range");
+                if (showErrorPanel)
+                {
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target is out of range");
+                }
                 return false;
             }
 
@@ -2031,7 +2367,10 @@ namespace WeAreGladiators.Abilities
             bool ignoreStealth = PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.TrueSight) ||
                 PerkController.Instance.DoesCharacterHavePerk(caster.pManager, Perk.EyelessSight);
 
-            if (stealthDistance < 1) stealthDistance = 1;
+            if (stealthDistance < 1)
+            {
+                stealthDistance = 1;
+            }
 
             // Check stealth + true eye / sniper (ignores stealth)
             if (caster.currentTile.Distance(target.currentTile) > stealthDistance &&
@@ -2039,7 +2378,10 @@ namespace WeAreGladiators.Abilities
                 PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Stealth) &&
                 !ignoreStealth)
             {
-                if (showErrorPanel) ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target has Stealth");
+                if (showErrorPanel)
+                {
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target has Stealth");
+                }
                 bRet = false;
             }
 
@@ -2059,28 +2401,28 @@ namespace WeAreGladiators.Abilities
             List<HexCharacterModel> allies = HexCharacterController.Instance.GetAllAlliesOfCharacter(caster, false);
             List<HexCharacterModel> enemies = HexCharacterController.Instance.GetAllEnemiesOfCharacter(caster);
 
-            if(ability.targetRequirement == TargetRequirement.Ally &&
+            if (ability.targetRequirement == TargetRequirement.Ally &&
                 allies.Contains(target))
             {
                 bRet = true;
             }
             else if (ability.targetRequirement == TargetRequirement.AllyOrSelf &&
-               (allies.Contains(target) || caster == target))
+                     (allies.Contains(target) || caster == target))
             {
                 bRet = true;
             }
-            else if(ability.targetRequirement == TargetRequirement.Enemy &&
-                enemies.Contains(target))
+            else if (ability.targetRequirement == TargetRequirement.Enemy &&
+                     enemies.Contains(target))
             {
                 bRet = true;
             }
             else if (ability.targetRequirement == TargetRequirement.AllCharacters &&
-                target != null)
+                     target != null)
             {
                 bRet = true;
             }
             else if (ability.targetRequirement == TargetRequirement.AllCharactersExceptSelf &&
-               target != caster)
+                     target != caster)
             {
                 bRet = true;
             }
@@ -2102,7 +2444,7 @@ namespace WeAreGladiators.Abilities
 
             // check its actually characters turn
             if (TurnController.Instance.EntityActivated != caster ||
-                (TurnController.Instance.EntityActivated == caster && caster.activationPhase != ActivationPhase.ActivationPhase))
+                TurnController.Instance.EntityActivated == caster && caster.activationPhase != ActivationPhase.ActivationPhase)
             {
                 Debug.Log("IsAbilityUseable() returning false: cannot use abilities when it is not your turn");
                 ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "It is not this character's turn");
@@ -2113,7 +2455,10 @@ namespace WeAreGladiators.Abilities
             {
                 if (ar.type == AbilityRequirementType.TargetHasUnoccupiedBackTile)
                 {
-                    if (target == null) continue;
+                    if (target == null)
+                    {
+                        continue;
+                    }
 
                     bool shouldContinue = false;
                     foreach (LevelNode n in HexCharacterController.Instance.GetCharacterBackArcTiles(target))
@@ -2125,60 +2470,75 @@ namespace WeAreGladiators.Abilities
                             break;
                         }
                     }
-                    if (shouldContinue) continue;
-                    else
+                    if (shouldContinue)
                     {
-                        ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target's back tiles are obstructed.");
+                        continue;
                     }
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target's back tiles are obstructed.");
                 }
 
                 else if (ar.type == AbilityRequirementType.TargetHasRace)
                 {
-                    if (target == null || (target != null && target.race == ar.race)) continue;
+                    if (target == null || target != null && target.race == ar.race)
+                    {
+                        continue;
+                    }
                 }
 
                 else if (ar.type == AbilityRequirementType.TargetHasPerk)
                 {
-                    if (target == null || (target != null && PerkController.Instance.DoesCharacterHavePerk(target.pManager, ar.perk))) continue;
+                    if (target == null || target != null && PerkController.Instance.DoesCharacterHavePerk(target.pManager, ar.perk))
+                    {
+                        continue;
+                    }
                 }
 
-                else if (ar.type == AbilityRequirementType.CasterHasPerk && 
-                    PerkController.Instance.DoesCharacterHavePerk(caster.pManager, ar.perk))
+                else if (ar.type == AbilityRequirementType.CasterHasPerk &&
+                         PerkController.Instance.DoesCharacterHavePerk(caster.pManager, ar.perk))
                 {
                     continue;
                 }
 
                 else if (ar.type == AbilityRequirementType.CasterDoesNotHavePerk &&
-                    !PerkController.Instance.DoesCharacterHavePerk(caster.pManager, ar.perk))
+                         !PerkController.Instance.DoesCharacterHavePerk(caster.pManager, ar.perk))
                 {
                     continue;
-                }                 
-                
+                }
+
                 else if (ar.type == AbilityRequirementType.TargetDoesNotHavePerk)
                 {
-                    if (target == null || (target != null && !PerkController.Instance.DoesCharacterHavePerk(target.pManager, ar.perk))) continue;
+                    if (target == null || target != null && !PerkController.Instance.DoesCharacterHavePerk(target.pManager, ar.perk))
+                    {
+                        continue;
+                    }
                 }
 
                 else if (ar.type == AbilityRequirementType.TargetHasShield)
                 {
-                    if (target == null || (target != null && target.itemSet.offHandItem != null && target.itemSet.offHandItem.weaponClass == WeaponClass.Shield)) continue;
-                    else ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target does not have a shield");
+                    if (target == null || target != null && target.itemSet.offHandItem != null && target.itemSet.offHandItem.weaponClass == WeaponClass.Shield)
+                    {
+                        continue;
+                    }
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target does not have a shield");
                 }
 
                 else if (ar.type == AbilityRequirementType.TargetIsTeleportable)
                 {
-                    if (target == null || (target != null && HexCharacterController.Instance.IsCharacterTeleportable(target))) continue;
-                    else ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target cannot be teleported");
+                    if (target == null || target != null && HexCharacterController.Instance.IsCharacterTeleportable(target))
+                    {
+                        continue;
+                    }
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target cannot be teleported");
                 }
 
                 else if (ar.type == AbilityRequirementType.CasterIsTeleportable &&
-                    HexCharacterController.Instance.IsCharacterTeleportable(caster))
+                         HexCharacterController.Instance.IsCharacterTeleportable(caster))
                 {
                     continue;
                 }
 
                 else if (ar.type == AbilityRequirementType.CasterHasEnoughHealth &&
-                   caster.currentHealth >= ar.healthRequired)
+                         caster.currentHealth >= ar.healthRequired)
                 {
                     continue;
                 }
@@ -2192,14 +2552,16 @@ namespace WeAreGladiators.Abilities
         }
         public bool AwaitingAbilityOrder()
         {
-            return currentAbilityAwaiting != null;
+            return CurrentAbilityAwaiting != null;
         }
+
         #endregion
 
         // Hit Chance Popup Logic
         #region
+
         public void ShowHitChancePopup(HexCharacterModel caster, HexCharacterModel target, AbilityData ability, ItemData weaponUsed = null)
-        {            
+        {
             hitChanceBoxesParent.SetActive(false);
             hitChanceHeaderParent.SetActive(false);
             applyPassiveBoxesParent.SetActive(false);
@@ -2219,10 +2581,10 @@ namespace WeAreGladiators.Abilities
                     hitChanceData.details = hitChanceData.details.OrderByDescending(x => x.accuracyMod).ToList();
 
                     // to do: try find passive apply effect and add to hit chance modal display
-                    AbilityEffect effect = FindDebuffEffect(ability);                    
-                    BuildHitChancePopup(hitChanceData);                       
-                    
-                    if(effect != null)
+                    AbilityEffect effect = FindDebuffEffect(ability);
+                    BuildHitChancePopup(hitChanceData);
+
+                    if (effect != null)
                     {
                         HitChanceDataSet applyDebuffData = CombatController.Instance.GetDebuffChance(caster, target, ability, effect);
                         applyDebuffData.details = applyDebuffData.details.OrderByDescending(x => x.accuracyMod).ToList();
@@ -2234,11 +2596,14 @@ namespace WeAreGladiators.Abilities
                     hitChanceCg.DOFade(1, 0.5f);
                     TransformUtils.RebuildLayouts(hitChanceLayouts);
                 }
-                
-                else if(ability.abilityType.Contains(AbilityType.Spell) || ability.abilityType.Contains(AbilityType.Skill))
-                { 
+
+                else if (ability.abilityType.Contains(AbilityType.Spell) || ability.abilityType.Contains(AbilityType.Skill))
+                {
                     AbilityEffect effect = FindDebuffEffect(ability);
-                    if (effect == null) return;
+                    if (effect == null)
+                    {
+                        return;
+                    }
 
                     applyPassiveBoxesParent.SetActive(true);
                     applyPassiveHeaderParent.SetActive(true);
@@ -2252,7 +2617,7 @@ namespace WeAreGladiators.Abilities
                     BuildApplyPassiveChancePopup(applyDebuffData, applyDebuffData.perk.passiveSprite);
                     TransformUtils.RebuildLayouts(hitChanceLayouts);
                 }
-            }          
+            }
         }
         private void BuildHitChancePopup(HitChanceDataSet data)
         {
@@ -2260,19 +2625,24 @@ namespace WeAreGladiators.Abilities
             hitChanceHeaderParent.SetActive(true);
 
             // Header text
-            hitChanceText.text = TextLogic.ReturnColoredText(data.FinalHitChance.ToString() + "%", TextLogic.neutralYellow) + " chance to hit";
+            hitChanceText.text = TextLogic.ReturnColoredText(data.FinalHitChance + "%", TextLogic.neutralYellow) + " chance to hit";
 
             // Reset tabs
-            for(int i = 0; i < hitChanceBoxes.Length; i++)            
+            for (int i = 0; i < hitChanceBoxes.Length; i++)
+            {
                 hitChanceBoxes[i].gameObject.SetActive(false);
-            
-            for(int i = 0; i < data.details.Count; i++)
+            }
+
+            for (int i = 0; i < data.details.Count; i++)
             {
                 string extra = data.details[i].accuracyMod > 0 ? "+" : "";
-                if (i == hitChanceBoxes.Length - 1) break;
-                hitChanceBoxes[i].Build(data.details[i].reason + ": " + 
-                    TextLogic.ReturnColoredText(extra + data.details[i].accuracyMod.ToString(), 
-                    TextLogic.neutralYellow), data.details[i].accuracyMod > 0 ? DotStyle.Green : DotStyle.Red);
+                if (i == hitChanceBoxes.Length - 1)
+                {
+                    break;
+                }
+                hitChanceBoxes[i].Build(data.details[i].reason + ": " +
+                    TextLogic.ReturnColoredText(extra + data.details[i].accuracyMod,
+                        TextLogic.neutralYellow), data.details[i].accuracyMod > 0 ? DotStyle.Green : DotStyle.Red);
             }
         }
         private void BuildApplyPassiveChancePopup(HitChanceDataSet data, Sprite iconSprite)
@@ -2281,20 +2651,28 @@ namespace WeAreGladiators.Abilities
             applyPassiveHeaderParent.SetActive(true);
 
             // Header text
-            applyPassiveText.text = TextLogic.ReturnColoredText(data.FinalHitChance.ToString() + "%", TextLogic.neutralYellow) + " chance";
+            applyPassiveText.text = TextLogic.ReturnColoredText(data.FinalHitChance + "%", TextLogic.neutralYellow) + " chance";
             applyPassiveIcon.PerkImage.sprite = iconSprite;
 
             // Reset tabs
-            for (int i = 0; i < applyPassiveBoxes.Length; i++)            
+            for (int i = 0; i < applyPassiveBoxes.Length; i++)
+            {
                 applyPassiveBoxes[i].gameObject.SetActive(false);
-            
+            }
+
             for (int i = 0; i < data.details.Count; i++)
             {
                 string extra = data.details[i].accuracyMod > 0 ? "+" : "";
-                if (i == applyPassiveBoxes.Length - 1) break;
+                if (i == applyPassiveBoxes.Length - 1)
+                {
+                    break;
+                }
 
-                string accuracyModText = ": " + TextLogic.ReturnColoredText(extra + data.details[i].accuracyMod.ToString(), TextLogic.neutralYellow);
-                if (data.details[i].hideAccuracyMod) accuracyModText = "";
+                string accuracyModText = ": " + TextLogic.ReturnColoredText(extra + data.details[i].accuracyMod, TextLogic.neutralYellow);
+                if (data.details[i].hideAccuracyMod)
+                {
+                    accuracyModText = "";
+                }
                 applyPassiveBoxes[i].Build(data.details[i].reason + accuracyModText, data.details[i].accuracyMod > 0 ? DotStyle.Green : DotStyle.Red);
             }
         }
@@ -2304,15 +2682,15 @@ namespace WeAreGladiators.Abilities
             hitChanceCg.DOKill();
             hitChanceCg.DOFade(0f, 0.15f).OnComplete(() => hitChanceRootCanvas.enabled = false);
             //hitChanceRootCanvas.enabled = false;
-           // hitChanceCg.alpha = 0;
+            // hitChanceCg.alpha = 0;
         }
         private AbilityEffect FindDebuffEffect(AbilityData ability)
         {
             AbilityEffect ret = null;
 
-            foreach(AbilityEffect e in ability.abilityEffects)
+            foreach (AbilityEffect e in ability.abilityEffects)
             {
-                if(e.effectType == AbilityEffectType.ApplyPassiveTarget)
+                if (e.effectType == AbilityEffectType.ApplyPassiveTarget)
                 {
                     ret = e;
                     break;
@@ -2353,103 +2731,7 @@ namespace WeAreGladiators.Abilities
 
             return ret;
         }
-        #endregion
 
-        // Dynamic Description Logic
-        #region
-        public string GetDynamicDescriptionFromAbility(AbilityData ability)
-        {
-            string sRet = "";
-            HexCharacterModel character = ability.myCharacter;
-
-            foreach(CustomString cs in ability.dynamicDescription)
-            {
-                // Does the custom string even have a dynamic value?
-                if (cs.getPhraseFromAbilityValue == false)
-                    sRet += TextLogic.ConvertCustomStringToString(cs);
-                else
-                {
-                    // It does, start searching for an ability effect that
-                    // matches the effect value of the custom string
-
-                    AbilityEffect matchingEffect = null;
-                    foreach (AbilityEffect effect in ability.abilityEffects)
-                    {
-                        if (effect.effectType == cs.abilityEffectType)
-                        {
-                            // Found a match, cache it and break
-                            matchingEffect = effect;
-                            break;
-                        }
-                    }
-
-                    // Check on hit effects for matching effects if couldnt find them in "abilities effects" list
-                    if(matchingEffect == null)
-                    {
-                        foreach (AbilityEffect effect in ability.onHitEffects)
-                        {
-                            if (effect.effectType == cs.abilityEffectType)
-                            {
-                                // Found a match, cache it and break
-                                matchingEffect = effect;
-                                break;
-                            }
-                        }
-                    }
-
-                    // Check on hit effects for matching effects if couldnt find them in "abilities effects" list
-                    if (matchingEffect == null)
-                    {
-                        foreach (AbilityEffect effect in ability.onCritEffects)
-                        {
-                            if (effect.effectType == cs.abilityEffectType)
-                            {
-                                // Found a match, cache it and break
-                                matchingEffect = effect;
-                                break;
-                            }
-                        }
-                    }
-                    // Check on collision effects for matching effects if couldnt find them in "abilities effects" list
-                    if (matchingEffect == null)
-                    {
-                        foreach (AbilityEffect effect in ability.onCollisionEffects)
-                        {
-                            if (effect.effectType == cs.abilityEffectType)
-                            {
-                                // Found a match, cache it and break
-                                matchingEffect = effect;
-                                break;
-                            }
-                        }
-
-
-                    }
-
-                    // Damage Target
-                    if (cs.abilityEffectType == AbilityEffectType.DamageTarget ||
-                        cs.abilityEffectType == AbilityEffectType.DamageAoe)
-                    {
-                        if (character != null)
-                        {
-                            DamageResult dr = CombatController.Instance.GetFinalDamageValueAfterAllCalculations(character, null, ability, matchingEffect, false);
-                            sRet += TextLogic.ReturnColoredText(dr.damageLowerLimit.ToString(), TextLogic.blueNumber) + " - " +
-                                TextLogic.ReturnColoredText(dr.damageUpperLimit.ToString(), TextLogic.blueNumber);
-
-                        }
-                        else
-                        {
-                            sRet += TextLogic.ReturnColoredText(matchingEffect.minBaseDamage.ToString(), TextLogic.blueNumber) + " - " +
-                                TextLogic.ReturnColoredText(matchingEffect.maxBaseDamage.ToString(), TextLogic.blueNumber);
-                        }
-                    }
-                }
-
-               
-            }
-
-            return sRet;
-        }
         #endregion
     }
 }

@@ -1,16 +1,14 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace WeAreGladiators.AI
 {
-    [System.Serializable]
+    [Serializable]
     public class AIAction
     {
         [Header("Core Properties")]
         [LabelWidth(100)]
-   
         public AIActionType actionType;
         [LabelWidth(100)]
         [ShowIf("ShowTargettingPriority")]
@@ -22,8 +20,6 @@ namespace WeAreGladiators.AI
         [ShowIf("ShowRange")]
         [LabelWidth(100)]
         public int range;
-        
-
 
         [Header("Ability Properties")]
         [ShowIf("ShowAbilityName")]
@@ -32,30 +28,36 @@ namespace WeAreGladiators.AI
 
         public bool ShowTargettingPriority()
         {
-            return actionType != AIActionType.DelayTurn;            
+            return actionType != AIActionType.DelayTurn;
         }
 
         public bool ShowAbilityName()
         {
             if (actionType == AIActionType.UseAbilityCharacterTarget ||
                 actionType == AIActionType.UseCharacterTargettedSummonAbility ||
-                (actionType == AIActionType.MoveWithinRangeOfTarget && getRangeFromAbility))
+                actionType == AIActionType.MoveWithinRangeOfTarget && getRangeFromAbility)
             {
                 return true;
             }
-            else return false;
+            return false;
         }
 
         public bool ShowRange()
         {
-            if (actionType == AIActionType.MoveWithinRangeOfTarget && !getRangeFromAbility) return true;
-            else return false;
+            if (actionType == AIActionType.MoveWithinRangeOfTarget && !getRangeFromAbility)
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool ShowGetRangeFromAbility()
         {
-            if (actionType == AIActionType.MoveWithinRangeOfTarget) return true;
-            else return false;
+            if (actionType == AIActionType.MoveWithinRangeOfTarget)
+            {
+                return true;
+            }
+            return false;
         }
     }
 
@@ -67,7 +69,7 @@ namespace WeAreGladiators.AI
         MoveToEngageInMelee = 2,
         MoveWithinRangeOfTarget = 3,
         MoveToElevationOrGrassCloserToTarget = 6,
-        DelayTurn = 7,
+        DelayTurn = 7
     }
 
     public enum TargettingPriority
@@ -81,6 +83,6 @@ namespace WeAreGladiators.AI
         MostEndangeredValidFriendly = 7,
         RandomAlly = 3,
         RandomValidFriendlyOrSelf = 4,
-        Self = 2,
+        Self = 2
     }
 }

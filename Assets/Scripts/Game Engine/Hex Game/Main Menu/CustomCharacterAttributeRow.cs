@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine;
 using WeAreGladiators.MainMenu;
 
 namespace WeAreGladiators.UI
@@ -10,45 +7,34 @@ namespace WeAreGladiators.UI
     public class CustomCharacterAttributeRow : MonoBehaviour
     {
         #region Properties + Components
+
         [Header("Data")]
-        [SerializeField] CoreAttribute attribute;
-        [SerializeField] Color normalStatTextColor;
-        [SerializeField] Color boostedStatTextColor;
+        [SerializeField]
+        private CoreAttribute attribute;
+        [SerializeField] private Color normalStatTextColor;
+        [SerializeField] private Color boostedStatTextColor;
         [Space(10)]
         [Header("Components")]
-        [SerializeField] TextMeshProUGUI amountText;
-        [SerializeField] GameObject plusButtonParent;
-        [SerializeField] GameObject minusButtonParent;
+        [SerializeField]
+        private TextMeshProUGUI amountText;
+        [SerializeField] private GameObject plusButtonParent;
+        [SerializeField] private GameObject minusButtonParent;
+
         #endregion
 
         #region Getters + Accessors
-        public CoreAttribute Attribute
-        {
-            get { return attribute; }
-        }
-        public Color NormalStatTextColor
-        {
-            get { return normalStatTextColor; }
-        }
-        public Color BoostedStatTextColor
-        {
-            get { return boostedStatTextColor; }
-        }
-        public TextMeshProUGUI AmountText
-        {
-            get { return amountText; }
-        }
-        public GameObject PlusButtonParent
-        {
-            get { return plusButtonParent; }
-        }
-        public GameObject MinusButtonParent
-        {
-            get { return minusButtonParent; }
-        }
+
+        public CoreAttribute Attribute => attribute;
+        public Color NormalStatTextColor => normalStatTextColor;
+        public Color BoostedStatTextColor => boostedStatTextColor;
+        public TextMeshProUGUI AmountText => amountText;
+        public GameObject PlusButtonParent => plusButtonParent;
+        public GameObject MinusButtonParent => minusButtonParent;
+
         #endregion
 
         #region Logic
+
         public void OnIncreaseAttributeButtonClicked()
         {
             MainMenuController.Instance.OnIncreaseAttributeButtonClicked(this);
@@ -57,9 +43,7 @@ namespace WeAreGladiators.UI
         {
             MainMenuController.Instance.OnDecreaseAttributeButtonClicked(this);
         }
+
         #endregion
-
-
-
     }
 }

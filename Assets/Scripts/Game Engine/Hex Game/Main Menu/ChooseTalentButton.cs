@@ -1,41 +1,31 @@
+using UnityEngine;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
 using WeAreGladiators.MainMenu;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace WeAreGladiators.UI
 {
     public class ChooseTalentButton : MonoBehaviour
     {
         #region Properties + Components
-        [SerializeField] UITalentIcon talentIcon;
-        [SerializeField] GameObject unselectedVisualParent;
-        [SerializeField] TalentPairing talentPairing;
-        private bool selected = false;
+
+        [SerializeField] private UITalentIcon talentIcon;
+        [SerializeField] private GameObject unselectedVisualParent;
+        [SerializeField] private TalentPairing talentPairing;
+
         #endregion
 
         #region Getters + Accessors
-        public UITalentIcon TalentIcon
-        {
-            get { return talentIcon; }
-        }
-        public GameObject SelectedVisualParent
-        {
-            get { return unselectedVisualParent; }
-        }
-        public bool Selected
-        {
-            get { return selected; }
-        }
-        public TalentPairing TalentPairing
-        {
-            get { return talentPairing; }
-        }
+
+        public UITalentIcon TalentIcon => talentIcon;
+        public GameObject SelectedVisualParent => unselectedVisualParent;
+        public bool Selected { get; private set; }
+        public TalentPairing TalentPairing => talentPairing;
+
         #endregion
 
         #region Logic
+
         public void ResetAndHide()
         {
             gameObject.SetActive(false);
@@ -50,12 +40,12 @@ namespace WeAreGladiators.UI
         {
             if (selection)
             {
-                selected = true;
+                Selected = true;
                 unselectedVisualParent.SetActive(false);
             }
             else
             {
-                selected = false;
+                Selected = false;
                 unselectedVisualParent.SetActive(true);
             }
 
@@ -64,15 +54,19 @@ namespace WeAreGladiators.UI
         public void OnClick()
         {
             // to do handle select and deselect + check for excedding choice limit of 3
-            if (selected)
+            if (Selected)
+            {
                 HandleChangeSelectionState(false);
-            else if (!selected && MainMenuController.Instance.GetSelectedTalents().Count < 2)
+            }
+            else if (!Selected && MainMenuController.Instance.GetSelectedTalents().Count < 2)
+            {
                 HandleChangeSelectionState(true);
+            }
 
             MainMenuController.Instance.UpdateChosenTalentsText();
 
-
         }
+
         #endregion
     }
 }

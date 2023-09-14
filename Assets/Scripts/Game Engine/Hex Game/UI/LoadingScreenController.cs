@@ -1,30 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Utilities;
-using TMPro;
-using UnityEngine.UI;
 using DG.Tweening;
-using System;
+using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.LoadingScreen
 {
     public class LoadingScreenController : Singleton<LoadingScreenController>
     {
         [Header("Core Components")]
-        [SerializeField] GameObject visualParent;
-        [SerializeField] CanvasGroup mainCg;
-        [SerializeField] TextMeshProUGUI tipsText;
-        [SerializeField] TextMeshProUGUI loadText;
-        [SerializeField] Image mainImage;
+        [SerializeField]
+        private GameObject visualParent;
+        [SerializeField] private CanvasGroup mainCg;
+        [SerializeField] private TextMeshProUGUI tipsText;
+        [SerializeField] private TextMeshProUGUI loadText;
+        [SerializeField] private Image mainImage;
 
         [Header("Images + Tips Data")]
-        [SerializeField] List<Sprite> allBackgroundSprites;
-        private List<Sprite> sessionSpriteQueue = new List<Sprite>();
+        [SerializeField]
+        private List<Sprite> allBackgroundSprites;
 
-        [SerializeField] List<LoadingScreenTip> allTips;
-        private List<LoadingScreenTip> sessionTipsQueue = new List<LoadingScreenTip>();
+        [SerializeField] private List<LoadingScreenTip> allTips;
+        private readonly List<Sprite> sessionSpriteQueue = new List<Sprite>();
+        private readonly List<LoadingScreenTip> sessionTipsQueue = new List<LoadingScreenTip>();
 
         protected override void Awake()
         {
@@ -38,7 +40,7 @@ namespace WeAreGladiators.LoadingScreen
                     StartCoroutine(StartPreloaderSequence());
                 }
             });
-            
+
         }
 
         public void ShowLoadingScreen(float showInSpeed = 1.5f, float hideOutSpeed = 1f, Action onPauseReached = null, Action onPauseFinished = null, Func<bool> awaitCondition = null)
@@ -62,12 +64,21 @@ namespace WeAreGladiators.LoadingScreen
             // Fade in
             mainCg.DOFade(1f, showInSpeed);
             yield return new WaitForSeconds(showInSpeed);
-            if (awaitCondition != null) yield return new WaitUntil(awaitCondition);
-            if (onPauseReached != null) onPauseReached.Invoke();
+            if (awaitCondition != null)
+            {
+                yield return new WaitUntil(awaitCondition);
+            }
+            if (onPauseReached != null)
+            {
+                onPauseReached.Invoke();
+            }
 
             // Hold screen to show tip
             yield return new WaitForSeconds(showDuration);
-            if (onPauseFinished != null) onPauseFinished.Invoke();
+            if (onPauseFinished != null)
+            {
+                onPauseFinished.Invoke();
+            }
 
             // Start hide views
             mainCg.DOFade(0f, hideOutSpeed).OnComplete(() =>
@@ -77,43 +88,9 @@ namespace WeAreGladiators.LoadingScreen
             });
         }
 
-
-        #region Background Image Logic
-        private void PopulateAndShuffleSessionSpriteQueue()
-        {
-            sessionSpriteQueue.Clear();
-            sessionSpriteQueue.AddRange(allBackgroundSprites);
-            sessionSpriteQueue.Shuffle();
-        }
-        private Sprite GetNextBackgroundImage()
-        {
-            Sprite ret = null;
-            if (sessionSpriteQueue.Count == 0) PopulateAndShuffleSessionSpriteQueue();
-            ret = sessionSpriteQueue[0];
-            sessionSpriteQueue.RemoveAt(0);
-            return ret;            
-        }
-        #endregion
-
-        #region Tips Logic
-        private void PopulateAndShuffleSessionTipsQueue()
-        {
-            sessionTipsQueue.Clear();
-            sessionTipsQueue.AddRange(allTips);
-            sessionTipsQueue.Shuffle();
-        }
-        private string GetNextTip()
-        {
-            string ret = "";
-            if (sessionTipsQueue.Count == 0) PopulateAndShuffleSessionTipsQueue();
-            ret = TextLogic.ConvertCustomStringListToString(sessionTipsQueue[0].message);
-            sessionTipsQueue.RemoveAt(0);
-            return ret;
-        }
-        #endregion
-
         #region Preloader logic
-        IEnumerator StartPreloaderSequence()
+
+        private IEnumerator StartPreloaderSequence()
         {
             // Reset + setup
             mainCg.blocksRaycasts = true;
@@ -136,7 +113,7 @@ namespace WeAreGladiators.LoadingScreen
             {
                 float progress = Mathf.Clamp01(operation.progress / .9f);
                 Debug.Log("Load progress = " + progress);
-                loadText.text = "Loading " + ((int)(progress * 100f)).ToString() + "%";
+                loadText.text = "Loading " + ((int) (progress * 100f)) + "%";
                 yield return null;
             }
 
@@ -151,16 +128,60 @@ namespace WeAreGladiators.LoadingScreen
         }
 
         #endregion
+
+        #region Background Image Logic
+
+        private void PopulateAndShuffleSessionSpriteQueue()
+        {
+            sessionSpriteQueue.Clear();
+            sessionSpriteQueue.AddRange(allBackgroundSprites);
+            sessionSpriteQueue.Shuffle();
+        }
+        private Sprite GetNextBackgroundImage()
+        {
+            Sprite ret = null;
+            if (sessionSpriteQueue.Count == 0)
+            {
+                PopulateAndShuffleSessionSpriteQueue();
+            }
+            ret = sessionSpriteQueue[0];
+            sessionSpriteQueue.RemoveAt(0);
+            return ret;
+        }
+
+        #endregion
+
+        #region Tips Logic
+
+        private void PopulateAndShuffleSessionTipsQueue()
+        {
+            sessionTipsQueue.Clear();
+            sessionTipsQueue.AddRange(allTips);
+            sessionTipsQueue.Shuffle();
+        }
+        private string GetNextTip()
+        {
+            string ret = "";
+            if (sessionTipsQueue.Count == 0)
+            {
+                PopulateAndShuffleSessionTipsQueue();
+            }
+            ret = TextLogic.ConvertCustomStringListToString(sessionTipsQueue[0].message);
+            sessionTipsQueue.RemoveAt(0);
+            return ret;
+        }
+
+        #endregion
     }
 
     public class LoadingScreenTracker
     {
+        public bool finished = false;
         public bool finishedFadeIn = false;
         public bool startedFadeOut = false;
-        public bool finished = false;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class LoadingScreenTip
     {
         public List<CustomString> message;

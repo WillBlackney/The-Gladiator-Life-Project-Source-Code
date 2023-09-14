@@ -1,6 +1,4 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,17 +6,20 @@ namespace WeAreGladiators.UI
 {
     public class CharacterRosterPageButton : MonoBehaviour
     {
-        [SerializeField] Color normalColor;
-        [SerializeField] Color selectedColor;
-        [SerializeField] Image buttonBgImage;
-        [SerializeField] Transform scalingParent;
-        [SerializeField] LevelUpButton levelUpButton;
+        [SerializeField] private Color normalColor;
+        [SerializeField] private Color selectedColor;
+        [SerializeField] private Image buttonBgImage;
+        [SerializeField] private Transform scalingParent;
+        [SerializeField] private LevelUpButton levelUpButton;
 
         public static CharacterRosterPageButton selectedButton { get; private set; }
 
         public void SetSelectedViewState(float speed)
         {
-            if (selectedButton != null) selectedButton.SetUnselectedViewState(speed);
+            if (selectedButton != null)
+            {
+                selectedButton.SetUnselectedViewState(speed);
+            }
 
             selectedButton = this;
             scalingParent.DOKill();
@@ -37,8 +38,14 @@ namespace WeAreGladiators.UI
         }
         public void ShowLevelUpIcon(bool onOrOff)
         {
-            if (onOrOff) levelUpButton.ShowAndAnimate();
-            else levelUpButton.Hide();
+            if (onOrOff)
+            {
+                levelUpButton.ShowAndAnimate();
+            }
+            else
+            {
+                levelUpButton.Hide();
+            }
         }
     }
 }

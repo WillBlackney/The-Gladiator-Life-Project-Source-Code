@@ -7,11 +7,11 @@ namespace WeAreGladiators.DungeonMap
     public class DungeonMapSeed : ScriptableObject
     {
         public List<NodeBlueprint> nodeBlueprints;
-        public int GridWidth => Mathf.Max(numOfPreBossNodes.max, numOfStartingNodes.max);
 
         public IntMinMax numOfPreBossNodes;
         public IntMinMax numOfStartingNodes;
 
         public MapLayer[] layers;
+        public int GridWidth => Mathf.Max(numOfPreBossNodes.max, numOfStartingNodes.max);
     }
 }

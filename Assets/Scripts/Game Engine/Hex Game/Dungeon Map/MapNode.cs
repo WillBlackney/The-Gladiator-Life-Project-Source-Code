@@ -1,13 +1,13 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
-using WeAreGladiators.Audio;
 
 namespace WeAreGladiators.DungeonMap
 {
     public class MapNode : MonoBehaviour
     {
+        private const float HoverScaleFactor = 1.35f;
+
+        private const float MaxClickDuration = 0.5f;
         [Header("Components")]
         public SpriteRenderer encounterSprite;
         public SpriteRenderer[] encounterGlowSprites;
@@ -23,25 +23,74 @@ namespace WeAreGladiators.DungeonMap
         public Color boxBgNormalColor;
         public Color boxBgHighlightColor;
 
+        private float initialScale;
+        private float mouseDownTime;
 
         public Node Node { get; private set; }
         public NodeBlueprint Blueprint { get; private set; }
 
-        private float initialScale;
-        private const float HoverScaleFactor = 1.35f;
-        private float mouseDownTime;
+        private void OnMouseDown()
+        {
+            mouseDownTime = Time.time;
+        }
 
-        private const float MaxClickDuration = 0.5f;
+        private void OnMouseEnter()
+        {
+            //encounterSprite.transform.DOKill();
+            //boxBgSprite.color = boxBgHighlightColor;
+            //boxGlowOutline.gameObject.SetActive(true);
+            float alphaMod = 0.05f;
+            float currentAlphaBonus = 0f;
+
+            foreach (SpriteRenderer sr in encounterGlowSprites)
+            {
+                sr.DOKill();
+                sr.DOFade(0, 0);
+                sr.DOFade(0.1f + currentAlphaBonus, 0.2f);
+                currentAlphaBonus += alphaMod;
+            }
+
+            //AudioManager.Instance.PlaySoundPooled(Sound.GUI_Button_Mouse_Over);
+        }
+
+        private void OnMouseExit()
+        {
+            foreach (SpriteRenderer sr in encounterGlowSprites)
+            {
+                sr.DOKill();
+                sr.DOFade(0f, 0f);
+            }
+
+            //graphicGlow.gameObject.SetActive(false);
+            //  boxBgSprite.color = boxBgNormalColor;
+            //boxGlowOutline.gameObject.SetActive(false);
+            // encounterSprite.transform.DOKill();
+            //encounterSprite.transform.DOScale(initialScale, 0.2f);
+        }
+
+        private void OnMouseUp()
+        {
+            if (Time.time - mouseDownTime < MaxClickDuration)
+            {
+                // user clicked on this node:
+                MapPlayerTracker.Instance.SelectNode(this);
+            }
+        }
 
         public void SetUp(Node node, NodeBlueprint blueprint)
         {
             Node = node;
             Blueprint = blueprint;
             encounterSprite.sprite = blueprint.sprite;
-            foreach(SpriteRenderer sr in encounterGlowSprites)
+            foreach (SpriteRenderer sr in encounterGlowSprites)
+            {
                 sr.sprite = blueprint.outlineSprite;
+            }
             encounterSpriteShadow.sprite = blueprint.sprite;
-            if (node.NodeType == EncounterType.BossEnemy) transform.localScale *= 1.5f;
+            if (node.NodeType == EncounterType.BossEnemy)
+            {
+                transform.localScale *= 1.5f;
+            }
             initialScale = encounterSprite.transform.localScale.x;
             SetState(NodeStates.Locked);
             AutoSetSortingOrder();
@@ -49,11 +98,11 @@ namespace WeAreGladiators.DungeonMap
         private void AutoSetSortingOrder()
         {
             boxGlowOutline.sortingOrder = MapView.Instance.BaseMapSortingLayer + 1;
-            for(int i = 0; i < encounterGlowSprites.Length; i++)
+            for (int i = 0; i < encounterGlowSprites.Length; i++)
             {
                 encounterGlowSprites[i].sortingOrder = MapView.Instance.BaseMapSortingLayer + 1 + i;
             }
-                
+
             encounterSprite.sortingOrder = MapView.Instance.BaseMapSortingLayer + 10;
             for (int i = 0; i < redXSprites.Length; i++)
             {
@@ -63,12 +112,12 @@ namespace WeAreGladiators.DungeonMap
 
         public void SetState(NodeStates state)
         {
-            if(state == NodeStates.Attainable && !MapPlayerTracker.Instance.Locked)
+            if (state == NodeStates.Attainable && !MapPlayerTracker.Instance.Locked)
             {
                 scalingParent.DOKill();
                 scalingParent.DOScale(1.3f, 0.5f).SetLoops(-1, LoopType.Yoyo);
             }
-            else if(state == NodeStates.Visited)
+            else if (state == NodeStates.Visited)
             {
                 scalingParent.DOKill();
                 encounterSprite.sprite = Blueprint.greyScaleSprite;
@@ -99,55 +148,5 @@ namespace WeAreGladiators.DungeonMap
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);
             }*/
         }
-
-        private void OnMouseEnter()
-        {
-            //encounterSprite.transform.DOKill();
-            //boxBgSprite.color = boxBgHighlightColor;
-            //boxGlowOutline.gameObject.SetActive(true);
-            float alphaMod = 0.05f;
-            float currentAlphaBonus = 0f;
-
-            foreach (SpriteRenderer sr in encounterGlowSprites)
-            {
-                sr.DOKill();
-                sr.DOFade(0, 0);
-                sr.DOFade(0.1f + currentAlphaBonus, 0.2f);
-                currentAlphaBonus += alphaMod;
-            }
-
-               
-            //AudioManager.Instance.PlaySoundPooled(Sound.GUI_Button_Mouse_Over);
-        }
-
-        private void OnMouseExit()
-        {
-            foreach (SpriteRenderer sr in encounterGlowSprites)
-            {
-                sr.DOKill();
-                sr.DOFade(0f, 0f);
-            }
-
-            //graphicGlow.gameObject.SetActive(false);
-            //  boxBgSprite.color = boxBgNormalColor;
-            //boxGlowOutline.gameObject.SetActive(false);
-            // encounterSprite.transform.DOKill();
-            //encounterSprite.transform.DOScale(initialScale, 0.2f);
-        }
-
-        private void OnMouseDown()
-        {
-            mouseDownTime = Time.time;
-        }
-
-        private void OnMouseUp()
-        {
-            if (Time.time - mouseDownTime < MaxClickDuration)
-            {
-                // user clicked on this node:
-                MapPlayerTracker.Instance.SelectNode(this);
-            }
-        }
-       
     }
 }

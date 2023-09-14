@@ -1,17 +1,15 @@
-﻿using WeAreGladiators.Characters;
-using WeAreGladiators.Combat;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Combat;
+using WeAreGladiators.CombatLog;
+using WeAreGladiators.Items;
+using WeAreGladiators.Scoring;
+using WeAreGladiators.TurnLogic;
+using WeAreGladiators.UCM;
 using WeAreGladiators.Utilities;
 using WeAreGladiators.VisualEvents;
-using WeAreGladiators.Items;
-using System.Linq;
-using DG.Tweening;
-using WeAreGladiators.Scoring;
-using WeAreGladiators.CombatLog;
-using WeAreGladiators.UCM;
-using WeAreGladiators.Abilities;
 
 namespace WeAreGladiators.Perks
 {
@@ -19,45 +17,24 @@ namespace WeAreGladiators.Perks
     {
         // Properties + Component References
         #region
+
         [Header("Passive Library Properties")]
         [SerializeField] private PerkIconDataSO[] allIconScriptableObjects;
-        private PerkIconData[] allPerks;
-
-        private PerkIconData[] negativeQuirks;
-        private PerkIconData[] positiveQuirks;
-        private PerkIconData[] neutralQuirks;
 
         private List<PerkIconData> perkTreePerks;
 
         // Getters
-        public PerkIconData[] AllPerks
-        {
-            get { return allPerks; }
-            private set { allPerks = value; }
-        }
-        public PerkIconDataSO[] AllIconScriptableObjects
-        {
-            get { return allIconScriptableObjects; }
-        }
-        public PerkIconData[] NegativeQuirks
-        {
-            get { return negativeQuirks; }
-            private set { negativeQuirks = value; }
-        }
-        public PerkIconData[] PositiveQuirks
-        {
-            get { return positiveQuirks; }
-            private set { positiveQuirks = value; }
-        }
-        public PerkIconData[] NeutralQuirks
-        {
-            get { return neutralQuirks; }
-            private set { neutralQuirks = value; }
-        }
+        public PerkIconData[] AllPerks { get; private set; }
+        public PerkIconDataSO[] AllIconScriptableObjects => allIconScriptableObjects;
+        public PerkIconData[] NegativeQuirks { get; private set; }
+        public PerkIconData[] PositiveQuirks { get; private set; }
+        public PerkIconData[] NeutralQuirks { get; private set; }
+
         #endregion
 
         // Library Logic
         #region
+
         private void Start()
         {
             BuildIconLibrary();
@@ -68,7 +45,10 @@ namespace WeAreGladiators.Perks
 
             foreach (PerkIconDataSO dataSO in allIconScriptableObjects)
             {
-                if(dataSO != null) tempList.Add(BuildIconDataFromScriptableObjectData(dataSO));
+                if (dataSO != null)
+                {
+                    tempList.Add(BuildIconDataFromScriptableObjectData(dataSO));
+                }
             }
 
             AllPerks = tempList.ToArray();
@@ -81,9 +61,18 @@ namespace WeAreGladiators.Perks
             {
                 if (p.isBackground)
                 {
-                    if (p.backgroundPerkQuality == PerkQuality.Negative) negTemp.Add(p);
-                    else if (p.backgroundPerkQuality == PerkQuality.Positive) posTemp.Add(p);
-                    else if (p.backgroundPerkQuality == PerkQuality.Neutral) neutralTemp.Add(p);
+                    if (p.backgroundPerkQuality == PerkQuality.Negative)
+                    {
+                        negTemp.Add(p);
+                    }
+                    else if (p.backgroundPerkQuality == PerkQuality.Positive)
+                    {
+                        posTemp.Add(p);
+                    }
+                    else if (p.backgroundPerkQuality == PerkQuality.Neutral)
+                    {
+                        neutralTemp.Add(p);
+                    }
                 }
             }
 
@@ -100,7 +89,7 @@ namespace WeAreGladiators.Perks
             p.passiveItalicDescription = data.passiveItalicDescription;
             p.effectDetailTabs = data.effectDetailTabs;
             p.keywords = data.keyWords;
-            p.passiveSprite = data.passiveSprite;// GetPassiveSpriteByName(data.passiveName);
+            p.passiveSprite = data.passiveSprite; // GetPassiveSpriteByName(data.passiveName);
             p.showStackCount = data.showStackCount;
             p.maxAllowedStacks = data.maxAllowedStacks;
             p.hiddenOnPassivePanel = data.hiddenOnPassivePanel;
@@ -124,27 +113,35 @@ namespace WeAreGladiators.Perks
             p.race = data.race;
 
             foreach (Perk pt in data.perksGainedOnThisExpiry)
+            {
                 p.perksGainedOnThisExpiry.Add(pt);
+            }
 
             foreach (Perk pt in data.perksRemovedOnThisApplication)
+            {
                 p.perksRemovedOnThisApplication.Add(pt);
+            }
 
             foreach (Perk pt in data.perksThatBlockThis)
+            {
                 p.perksThatBlockThis.Add(pt);
+            }
 
             foreach (CharacterRace race in data.racesThatBlockThis)
+            {
                 p.racesThatBlockThis.Add(race);
+            }
 
             foreach (string subname in data.possibleSubNames)
+            {
                 p.possibleSubNames.Add(subname);
+            }
 
             foreach (AnimationEventData a in data.visualEventsOnApplication)
             {
                 // p.visualEventsOnApplication.Add(ObjectCloner.CloneJSON<AnimationEventData>(a));
                 p.visualEventsOnApplication.Add(a);
             }
-
-
 
             return p;
         }
@@ -209,9 +206,9 @@ namespace WeAreGladiators.Perks
         {
             PerkIconData rp = null;
 
-            foreach(PerkIconData d in allPerks)
+            foreach (PerkIconData d in AllPerks)
             {
-                if(d.isRacial && d.race == race)
+                if (d.isRacial && d.race == race)
                 {
                     rp = d;
                     break;
@@ -221,11 +218,17 @@ namespace WeAreGladiators.Perks
         }
         public List<PerkIconData> GetAllPerkTreePerks()
         {
-            if(perkTreePerks == null || perkTreePerks.Count == 0)
+            if (perkTreePerks == null || perkTreePerks.Count == 0)
             {
                 perkTreePerks = new List<PerkIconData>();
-                foreach (PerkIconData p in allPerks) if (p.isOnPerkTree) perkTreePerks.Add(p);
-                Debug.Log("PerkController.GetAllPerkTreePerks() found " + perkTreePerks.Count.ToString() + " total perk tree perks");
+                foreach (PerkIconData p in AllPerks)
+                {
+                    if (p.isOnPerkTree)
+                    {
+                        perkTreePerks.Add(p);
+                    }
+                }
+                Debug.Log("PerkController.GetAllPerkTreePerks() found " + perkTreePerks.Count + " total perk tree perks");
 
                 int t1 = 0;
                 int t2 = 0;
@@ -235,22 +238,37 @@ namespace WeAreGladiators.Perks
 
                 foreach (PerkIconData p in perkTreePerks)
                 {
-                    if (p.perkTreeTier == 1) t1++;
-                    else if (p.perkTreeTier == 2) t2++;
-                    else if (p.perkTreeTier == 3) t3++;
-                    else if (p.perkTreeTier == 4) t4++;
-                    else if (p.perkTreeTier == 5) t5++;
+                    if (p.perkTreeTier == 1)
+                    {
+                        t1++;
+                    }
+                    else if (p.perkTreeTier == 2)
+                    {
+                        t2++;
+                    }
+                    else if (p.perkTreeTier == 3)
+                    {
+                        t3++;
+                    }
+                    else if (p.perkTreeTier == 4)
+                    {
+                        t4++;
+                    }
+                    else if (p.perkTreeTier == 5)
+                    {
+                        t5++;
+                    }
                 }
 
                 Debug.Log("PerkController.GetAllPerkTreePerks() " +
-                "tier 1 perks = " + t1.ToString() + ", " +
-                "tier 2 perks = " + t2.ToString() + ", " +
-                "tier 3 perks = " + t3.ToString() + ", " +
-                "tier 4 perks = " + t4.ToString() + ", " +
-                "tier 5 perks = " + t5.ToString());
-            } 
-            
-            return perkTreePerks;           
+                    "tier 1 perks = " + t1 + ", " +
+                    "tier 2 perks = " + t2 + ", " +
+                    "tier 3 perks = " + t3 + ", " +
+                    "tier 4 perks = " + t4 + ", " +
+                    "tier 5 perks = " + t5);
+            }
+
+            return perkTreePerks;
         }
         public List<ActivePerk> GetAllLevelUpPerksOnCharacter(HexCharacterData character)
         {
@@ -258,7 +276,9 @@ namespace WeAreGladiators.Perks
             foreach (ActivePerk ap in character.passiveManager.perks)
             {
                 if (ap.Data.isOnPerkTree)
+                {
                     perks.Add(ap);
+                }
             }
             return perks;
         }
@@ -271,7 +291,7 @@ namespace WeAreGladiators.Perks
 
             // filter out invalid perks
             foreach (PerkIconData p in validPerks)
-            {                
+            {
                 if (DoesCharacterHavePerk(character.passiveManager, p.perkTag))
                     invalidPerks.Add(p);
                 else
@@ -301,10 +321,12 @@ namespace WeAreGladiators.Perks
             return validPerks;
             */
         }
+
         #endregion
 
         // Setup Logic
         #region
+
         public void BuildPassiveManagerFromOtherPassiveManager(PerkManagerModel originalData, PerkManagerModel newClone)
         {
             Debug.Log("PassiveController.BuildPassiveManagerFromOtherPassiveManager() called...");
@@ -319,7 +341,7 @@ namespace WeAreGladiators.Perks
             pManager.perks.Clear();
             foreach (ActivePerk ap in original.perks)
             {
-                pManager.perks.Add(ObjectCloner.CloneJSON(ap));
+                pManager.perks.Add(ap.CloneJSON());
             }
         }
         public void BuildPlayerCharacterEntityPassivesFromCharacterData(HexCharacterModel character, HexCharacterData data)
@@ -347,6 +369,7 @@ namespace WeAreGladiators.Perks
 
         // Apply Perks
         #region
+
         public ActivePerk ModifyPerkOnCharacterData(PerkManagerModel pManager, Perk p, int stacks)
         {
             Debug.Log("PassiveController.ModifyPerkOnCharacterData() called...");
@@ -364,7 +387,7 @@ namespace WeAreGladiators.Perks
                 }
             }
 
-            if(pManager.myCharacterData != null &&
+            if (pManager.myCharacterData != null &&
                 perkData.racesThatBlockThis.Contains(pManager.myCharacterData.race))
             {
                 Debug.Log("ModifyPerkOnCharacterData() cancelling application of " + perkName + " as character is racially immune to it.");
@@ -375,23 +398,28 @@ namespace WeAreGladiators.Perks
             int stacksAppliedActual = stacks;
             int maxAllowedStacks = perkData.maxAllowedStacks;
             int currentStacks = GetStackCountOfPerkOnCharacter(pManager, p);
-            int overflowStacks = (currentStacks + stacksAppliedActual) - maxAllowedStacks;
+            int overflowStacks = currentStacks + stacksAppliedActual - maxAllowedStacks;
             if (overflowStacks > 0)
             {
                 stacksAppliedActual -= overflowStacks;
             }
 
             // Score penalty for getting injured
-            if(perkData.isInjury && CharacterDataController.Instance.AllPlayerCharacters.Contains(pManager.myCharacterData))            
-                ScoreController.Instance.CurrentScoreData.injuriesGained += 1;           
+            if (perkData.isInjury && CharacterDataController.Instance.AllPlayerCharacters.Contains(pManager.myCharacterData))
+            {
+                ScoreController.Instance.CurrentScoreData.injuriesGained += 1;
+            }
 
             // Add the new perk to the perk manager model's perk list, or increment stack count if it is already contained ithin the list.
             int previousMaxHealth = StatCalculator.GetTotalMaxHealth(pManager.myCharacterData);
-            var newPerk =  HandleApplyActivePerk(pManager, p, stacksAppliedActual);
+            ActivePerk newPerk = HandleApplyActivePerk(pManager, p, stacksAppliedActual);
             int newMaxHealth = StatCalculator.GetTotalMaxHealth(pManager.myCharacterData);
             CharacterDataController.Instance.OnConstitutionOrMaxHealthChanged(pManager.myCharacterData, newMaxHealth);
             int maxHealthDif = newMaxHealth - previousMaxHealth;
-            if(maxHealthDif > 0) CharacterDataController.Instance.SetCharacterHealth(pManager.myCharacterData, pManager.myCharacterData.currentHealth + maxHealthDif);
+            if (maxHealthDif > 0)
+            {
+                CharacterDataController.Instance.SetCharacterHealth(pManager.myCharacterData, pManager.myCharacterData.currentHealth + maxHealthDif);
+            }
             return newPerk;
         }
         public bool ModifyPerkOnCharacterEntity(PerkManagerModel pManager, Perk perk, int stacks, bool showVFX = true, float vfxDelay = 0f, PerkManagerModel applier = null, bool ignoreResistance = false)
@@ -407,17 +435,20 @@ namespace WeAreGladiators.Perks
             PerkIconData perkData = GetPerkIconDataByTag(perk);
             HexCharacterModel character = pManager.myCharacterEntity;
             HexCharacterModel applyingCharacter = null;
-            if (applier != null) applyingCharacter = applier.myCharacterEntity;
+            if (applier != null)
+            {
+                applyingCharacter = applier.myCharacterEntity;
+            }
             int previousStacks = GetStackCountOfPerkOnCharacter(pManager, perk);
 
             // Check if character has any perks that provide immunity to the current perk being applied
-            foreach(Perk ptag in perkData.perksThatBlockThis)
+            foreach (Perk ptag in perkData.perksThatBlockThis)
             {
-                if(DoesCharacterHavePerk(pManager, ptag) && stacks > 0)
+                if (DoesCharacterHavePerk(pManager, ptag) && stacks > 0)
                 {
                     Debug.Log("ModifyPerkOnCharacterEntity() cancelling application of " + perkName + " as it is blocked by " + TextLogic.SplitByCapitals(ptag.ToString()));
                     VisualEventManager.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "IMMUNE!", perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
+                        VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "IMMUNE!", perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
                     return false;
                 }
             }
@@ -432,7 +463,7 @@ namespace WeAreGladiators.Perks
             // Check specific resistances
             // Undead = immune to bleeding
             if (character != null &&
-                character.race == CharacterRace.Undead && 
+                character.race == CharacterRace.Undead &&
                 character.controller == Controller.Player &&
                 perk == Perk.Bleeding)
             {
@@ -445,28 +476,28 @@ namespace WeAreGladiators.Perks
             if (ShouldRuneBlockThisPassiveApplication(pManager, perkData, stacks) && character != null)
             {
                 // Character is protected by rune: Cancel this status application, remove a rune, then return.
-                Debug.Log("ModifyPerkOnCharacterEntity() cancelling application of " + perkName + " as character is protected by Rune.");                
+                Debug.Log("ModifyPerkOnCharacterEntity() cancelling application of " + perkName + " as character is protected by Rune.");
                 ModifyPerkOnCharacterEntity(pManager, Perk.Rune, -1, showVFX, vfxDelay, applier);
                 VisualEventManager.CreateVisualEvent(() =>
-                  VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "BLOCKED!", perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
+                    VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "BLOCKED!", perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
 
-                return false; 
+                return false;
             }
 
             // Check for resistance + roll
             if (!ignoreResistance)
             {
-                if (character != null &&                    
+                if (character != null &&
                     ShouldResistanceBlockThisPassiveApplication(perkData, stacks) &&
-                    CombatController.Instance.RollForDebuffResist(applyingCharacter, character, perkData) == true)
+                    CombatController.Instance.RollForDebuffResist(applyingCharacter, character, perkData))
                 {
-                    
+
                     // Character resisted the debuff, cancel the rest of this function and do resist VFX
                     if (showVFX)
                     {
                         // Combat log: resist!
                         VisualEventManager.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "RESISTED!", perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
+                            VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "RESISTED!", perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
                         return false;
                     }
                 }
@@ -476,9 +507,9 @@ namespace WeAreGladiators.Perks
             int stacksAppliedActual = stacks;
 
             // Check 'Torturer' perk for bleeding/poisoned/burning
-            if((perk == Perk.Burning || perk == Perk.Bleeding || perk == Perk.Poisoned) &&
+            if ((perk == Perk.Burning || perk == Perk.Bleeding || perk == Perk.Poisoned) &&
                 applier != null &&
-                stacksAppliedActual > 0 && 
+                stacksAppliedActual > 0 &&
                 DoesCharacterHavePerk(applier, Perk.Torturer))
             {
                 stacksAppliedActual += 1;
@@ -486,9 +517,9 @@ namespace WeAreGladiators.Perks
 
             // Check 'Best Friend' perk for extra stack of buff
             if (stacks > 0 &&
-                RandomGenerator.NumberBetween(1,10) <= 5 &&
-                (perk == Perk.Focus || perk == Perk.Wrath || perk == Perk.Guard 
-                || perk == Perk.Evasion || perk == Perk.Courage || perk == Perk.Combo) &&
+                RandomGenerator.NumberBetween(1, 10) <= 5 &&
+                (perk == Perk.Focus || perk == Perk.Wrath || perk == Perk.Guard
+                    || perk == Perk.Evasion || perk == Perk.Courage || perk == Perk.Combo) &&
                 applier != null &&
                 applier.myCharacterEntity.allegiance == pManager.myCharacterEntity.allegiance &&
                 DoesCharacterHavePerk(applier, Perk.LoyalFriend))
@@ -498,14 +529,20 @@ namespace WeAreGladiators.Perks
 
             int maxAllowedStacks = perkData.maxAllowedStacks;
             int currentStacks = GetStackCountOfPerkOnCharacter(pManager, perk);
-            int overflowStacks = (currentStacks + stacksAppliedActual) - maxAllowedStacks;
-            if (overflowStacks > 0) stacksAppliedActual -= overflowStacks;            
+            int overflowStacks = currentStacks + stacksAppliedActual - maxAllowedStacks;
+            if (overflowStacks > 0)
+            {
+                stacksAppliedActual -= overflowStacks;
+            }
 
             // Add the new perk to the perk manager model's perk list, or increment stack count if it is already contained ithin the list.
             HandleApplyActivePerk(pManager, perk, stacksAppliedActual);
             int newFinalStackcount = GetStackCountOfPerkOnCharacter(pManager, perk);
 
-            if(showVFX && !perkData.isInjury && !perkData.isPermanentInjury) CombatLogController.Instance.CreateCharacterGainedPassive(pManager.myCharacterEntity, applier?.myCharacterEntity, stacksAppliedActual, perkName);
+            if (showVFX && !perkData.isInjury && !perkData.isPermanentInjury)
+            {
+                CombatLogController.Instance.CreateCharacterGainedPassive(pManager.myCharacterEntity, applier?.myCharacterEntity, stacksAppliedActual, perkName);
+            }
 
             // Visual Events
             if (character != null)
@@ -514,11 +551,11 @@ namespace WeAreGladiators.Perks
                 if (showVFX)
                 {
                     // Update character world UI
-                    VisualEventManager.CreateVisualEvent(() =>                   
+                    VisualEventManager.CreateVisualEvent(() =>
                         character.hexCharacterView.perkIconsPanel.HandleAddNewIconToPanel(perkData, stacksAppliedActual), character.GetLastStackEventParent());
 
                     // Update player overlay UI
-                    if (TurnLogic.TurnController.Instance.EntityActivated == character)
+                    if (TurnController.Instance.EntityActivated == character)
                     {
                         VisualEventManager.CreateVisualEvent(() =>
                         {
@@ -533,13 +570,13 @@ namespace WeAreGladiators.Perks
                     character.hexCharacterView.perkIconsPanel.HandleAddNewIconToPanel(perkData, stacksAppliedActual);
 
                     // Update player overlay UI
-                    if (TurnLogic.TurnController.Instance.EntityActivated == character)
+                    if (TurnController.Instance.EntityActivated == character)
                     {
                         CombatUIController.Instance.PerkPanel.ResetPanel();
                         CombatUIController.Instance.PerkPanel.BuildFromPerkManager(pManager);
                     }
                 }
-                
+
                 // Status notification + 'On Perk Applied' vfx and particles
                 if (stacksAppliedActual > 0 && showVFX)
                 {
@@ -556,34 +593,38 @@ namespace WeAreGladiators.Perks
                     else
                     {
                         string stackText = "";
-                        if (stacksAppliedActual > 1) stackText = " +" + stacksAppliedActual.ToString();
+                        if (stacksAppliedActual > 1)
+                        {
+                            stackText = " +" + stacksAppliedActual;
+                        }
 
                         VisualEventManager.CreateVisualEvent(() =>
                             VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName + stackText, perkData.passiveSprite, StatusFrameType.CircularBrown), character.GetLastStackEventParent());
-                    }                 
-                    
+                    }
+
                     // On perk applied VFX go here 
-                    if(pManager.myCharacterEntity != null)
+                    if (pManager.myCharacterEntity != null)
                     {
                         foreach (AnimationEventData a in perkData.visualEventsOnApplication)
                         {
                             AnimationEventController.Instance.PlayAnimationEvent(a, pManager.myCharacterEntity);
                         }
-                    }                   
+                    }
                 }
 
                 // Create brief delay
-                if (showVFX && !perkData.isInjury)                
-                    VisualEventManager.InsertTimeDelayInQueue(vfxDelay, character.GetLastStackEventParent());                
+                if (showVFX && !perkData.isInjury)
+                {
+                    VisualEventManager.InsertTimeDelayInQueue(vfxDelay, character.GetLastStackEventParent());
+                }
             }
 
-
             // Perks removed on this perk applied
-            if(previousStacks == 0 && stacksAppliedActual > 0 && newFinalStackcount > 0)
+            if (previousStacks == 0 && stacksAppliedActual > 0 && newFinalStackcount > 0)
             {
-                foreach(Perk pt in perkData.perksRemovedOnThisApplication)
+                foreach (Perk pt in perkData.perksRemovedOnThisApplication)
                 {
-                    if(DoesCharacterHavePerk(pManager, pt))
+                    if (DoesCharacterHavePerk(pManager, pt))
                     {
                         ModifyPerkOnCharacterEntity(pManager, pt, -GetStackCountOfPerkOnCharacter(pManager, pt), false);
                     }
@@ -591,9 +632,9 @@ namespace WeAreGladiators.Perks
             }
 
             // Perks gained on this perk expired
-            if(previousStacks > 0 && newFinalStackcount == 0 && stacksAppliedActual < 0)
+            if (previousStacks > 0 && newFinalStackcount == 0 && stacksAppliedActual < 0)
             {
-                foreach(Perk pt in perkData.perksGainedOnThisExpiry)
+                foreach (Perk pt in perkData.perksGainedOnThisExpiry)
                 {
                     ModifyPerkOnCharacterEntity(pManager, pt, 1, showVFX, vfxDelay, applier, ignoreResistance);
                 }
@@ -608,32 +649,50 @@ namespace WeAreGladiators.Perks
                     ap.freshInjury = true;
                     character.injuriesGainedThisCombat.Add(perk);
                 }
-                else if (perkData.isPermanentInjury) character.permanentInjuriesGainedThisCombat.Add(perk);
+                else if (perkData.isPermanentInjury)
+                {
+                    character.permanentInjuriesGainedThisCombat.Add(perk);
+                }
             }
 
-            if(perk == Perk.Stunned && showVFX)
+            if (perk == Perk.Stunned && showVFX)
             {
-                if (newFinalStackcount > 0) VisualEventManager.CreateVisualEvent(() => character.hexCharacterView.vfxManager.PlayStunned());
-                else VisualEventManager.CreateVisualEvent(() => character.hexCharacterView.vfxManager.StopStunned());
+                if (newFinalStackcount > 0)
+                {
+                    VisualEventManager.CreateVisualEvent(() => character.hexCharacterView.vfxManager.PlayStunned());
+                }
+                else
+                {
+                    VisualEventManager.CreateVisualEvent(() => character.hexCharacterView.vfxManager.StopStunned());
+                }
             }
             if (perk == Perk.SmashedShield && showVFX)
             {
-                var myUcm = character.hexCharacterView.model.GetComponent<UniversalCharacterModel>();
+                UniversalCharacterModel myUcm = character.hexCharacterView.model.GetComponent<UniversalCharacterModel>();
 
-                if (myUcm != null && newFinalStackcount > 0) VisualEventManager.CreateVisualEvent(() =>
+                if (myUcm != null && newFinalStackcount > 0)
                 {
-                    HexCharacterController.Instance.PlayHurtAnimation(character.hexCharacterView);
-                    // to do: shield snapping and flying off VFX
-                    if (myUcm != null) myUcm.activeOffHandWeapon.gameObject.SetActive(false);
-                });
+                    VisualEventManager.CreateVisualEvent(() =>
+                    {
+                        HexCharacterController.Instance.PlayHurtAnimation(character.hexCharacterView);
+                        // to do: shield snapping and flying off VFX
+                        if (myUcm != null)
+                        {
+                            myUcm.activeOffHandWeapon.gameObject.SetActive(false);
+                        }
+                    });
+                }
                 else if (myUcm != null)
                 {
                     VisualEventManager.CreateVisualEvent(() =>
                     {
-                        if (myUcm != null) myUcm.activeOffHandWeapon.gameObject.SetActive(true);
+                        if (myUcm != null)
+                        {
+                            myUcm.activeOffHandWeapon.gameObject.SetActive(true);
+                        }
                     });
                 }
-                   
+
             }
 
             return true;
@@ -644,24 +703,24 @@ namespace WeAreGladiators.Perks
             ActivePerk activePerk = null;
 
             // Check if character is already effected by the perk
-            foreach(ActivePerk ap in perkManager.perks)
+            foreach (ActivePerk ap in perkManager.perks)
             {
-                if(ap.perkTag == perk)
+                if (ap.perkTag == perk)
                 {
                     activePerk = ap;
                 }
             }
 
             // Already affected by the perk?
-            if(activePerk != null)
+            if (activePerk != null)
             {
                 // They are, increment stack count
                 activePerk.stacks += stacks;
 
                 // Remove the perk from active perks lists if its stack count equals 0
-                if(activePerk.stacks == 0)
+                if (activePerk.stacks == 0)
                 {
-                    Debug.Log("PerkController.HandleApplyActivePerk() removing perk: " + perk.ToString());
+                    Debug.Log("PerkController.HandleApplyActivePerk() removing perk: " + perk);
                     perkManager.perks.Remove(activePerk);
                 }
             }
@@ -675,10 +734,12 @@ namespace WeAreGladiators.Perks
 
             return activePerk;
         }
+
         #endregion
 
         // Update Passive Icons and Panel View
         #region
+
         /*
         public void BuildPassiveIconViewFromData(PerkIconView icon, PerkIconData iconData)
         {
@@ -775,10 +836,12 @@ namespace WeAreGladiators.Perks
 
         }
         */
+
         #endregion
 
         // Conditional Checks + Getters
         #region
+
         public int GetStackCountOfPerkOnCharacter(PerkManagerModel perkManager, Perk perk)
         {
             int stacks = 0;
@@ -792,37 +855,42 @@ namespace WeAreGladiators.Perks
             }
 
             if (perkManager.myCharacterEntity != null)
+            {
                 stacks += ItemController.Instance.GetTotalStacksOfPerkFromItemSet(perk, perkManager.myCharacterEntity.itemSet);
+            }
             else if (perkManager.myCharacterData != null)
+            {
                 stacks += ItemController.Instance.GetTotalStacksOfPerkFromItemSet(perk, perkManager.myCharacterData.itemSet);
+            }
 
-
-            Debug.Log("PerkController.GetStackCountOfPerkOnCharacter() found " + stacks.ToString() + " stacks of " + perk.ToString());
+            Debug.Log("PerkController.GetStackCountOfPerkOnCharacter() found " + stacks + " stacks of " + perk);
 
             return stacks;
         }
         public bool DoesCharacterHavePerk(PerkManagerModel pManager, Perk perk)
         {
             bool bRet = false;
-            foreach(ActivePerk ap in pManager.perks)
+            foreach (ActivePerk ap in pManager.perks)
             {
-                if(ap.perkTag == perk && ap.stacks != 0)
+                if (ap.perkTag == perk && ap.stacks != 0)
                 {
                     bRet = true;
                     break;
                 }
             }
 
-            if(bRet == false)
+            if (bRet == false)
             {
                 if (pManager.myCharacterEntity != null)
                 {
                     bRet = ItemController.Instance.GetTotalStacksOfPerkFromItemSet(perk, pManager.myCharacterEntity.itemSet) > 0;
                 }
                 else if (pManager.myCharacterData != null)
+                {
                     bRet = ItemController.Instance.GetTotalStacksOfPerkFromItemSet(perk, pManager.myCharacterData.itemSet) > 0;
+                }
 
-                if(pManager.myCharacterEntity == null &&
+                if (pManager.myCharacterEntity == null &&
                     pManager.myCharacterData == null)
                 {
                     Debug.Log("PerkController.DoesCharacterHavePerk() perk manager has null character data and entity data");
@@ -832,37 +900,32 @@ namespace WeAreGladiators.Perks
         }
         private bool ShouldResistanceBlockThisPassiveApplication(PerkIconData iconData, int stacks)
         {
-            if ((iconData.resistanceBlocksIncrease && stacks > 0) || (iconData.resistanceBlocksDecrease && stacks < 0))
+            if (iconData.resistanceBlocksIncrease && stacks > 0 || iconData.resistanceBlocksDecrease && stacks < 0)
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
         private bool ShouldRuneBlockThisPassiveApplication(PerkManagerModel pManager, PerkIconData iconData, int stacks)
         {
-            if (DoesCharacterHavePerk(pManager, Perk.Rune) && 
-                ((iconData.runeBlocksIncrease && stacks > 0) || (iconData.runeBlocksDecrease && stacks < 0)))
+            if (DoesCharacterHavePerk(pManager, Perk.Rune) &&
+                (iconData.runeBlocksIncrease && stacks > 0 || iconData.runeBlocksDecrease && stacks < 0))
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
-      
+
         #endregion
 
         // Injury Logic
         #region
+
         private List<PerkIconData> GetValidInjuries(PerkManagerModel character, InjurySeverity severity, InjuryType injuryType)
         {
             List<PerkIconData> matchingInjuries = new List<PerkIconData>();
 
-            foreach (PerkIconData d in allPerks)
+            foreach (PerkIconData d in AllPerks)
             {
                 if (d.isInjury &&
                     (d.severity == severity || severity == InjurySeverity.None) &&
@@ -886,10 +949,14 @@ namespace WeAreGladiators.Perks
                 Debug.Log("PerkController.GetRandomValidInjury() couldn't find a valid injury, returning null...");
                 return null;
             }
-            else if (injuries.Count == 1)
+            if (injuries.Count == 1)
+            {
                 iRet = injuries[0];
+            }
             else
+            {
                 iRet = injuries[RandomGenerator.NumberBetween(0, injuries.Count - 1)];
+            }
 
             Debug.Log("PerkController.GetRandomValidInjury() returning injury " + iRet.passiveName);
 
@@ -904,7 +971,9 @@ namespace WeAreGladiators.Perks
             {
                 PerkIconData pData = p.Data;
                 if (pData.isInjury)
+                {
                     ret.Add(p);
+                }
             }
 
             return ret;
@@ -941,31 +1010,41 @@ namespace WeAreGladiators.Perks
         }
         public void HandleTickDownInjuriesOnNewDayStart()
         {
-            foreach(HexCharacterData c in CharacterDataController.Instance.AllPlayerCharacters)
+            foreach (HexCharacterData c in CharacterDataController.Instance.AllPlayerCharacters)
             {
                 List<ActivePerk> injuries = GetAllInjuriesOnCharacter(c);
 
-                foreach(ActivePerk p in injuries)
+                foreach (ActivePerk p in injuries)
                 {
                     // Injuries gained from the previous combat do not tick down until the next day.
-                    if (p.freshInjury) p.freshInjury = false;
-                    else ModifyPerkOnCharacterData(c.passiveManager, p.perkTag, -1);
+                    if (p.freshInjury)
+                    {
+                        p.freshInjury = false;
+                    }
+                    else
+                    {
+                        ModifyPerkOnCharacterData(c.passiveManager, p.perkTag, -1);
+                    }
                 }
 
             }
         }
+
         #endregion
 
         // Permanent Injury Logic
         #region
+
         public List<PerkIconData> GetAllPermanentInjuries()
         {
             List<PerkIconData> matchingInjuries = new List<PerkIconData>();
 
-            foreach (PerkIconData d in allPerks)
+            foreach (PerkIconData d in AllPerks)
             {
                 if (d.isPermanentInjury)
+                {
                     matchingInjuries.Add(d);
+                }
             }
 
             return matchingInjuries;
@@ -974,7 +1053,7 @@ namespace WeAreGladiators.Perks
         {
             List<PerkIconData> matchingInjuries = new List<PerkIconData>();
 
-            foreach (PerkIconData d in allPerks)
+            foreach (PerkIconData d in AllPerks)
             {
                 if (d.isPermanentInjury &&
                     !DoesCharacterHavePerk(character.pManager, d.perkTag))
@@ -996,10 +1075,14 @@ namespace WeAreGladiators.Perks
                 Debug.Log("PerkController.GetRandomValidInjury() couldn't find a valid permanent injury, returning null...");
                 return null;
             }
-            else if (permanentInjuries.Count == 1)
+            if (permanentInjuries.Count == 1)
+            {
                 iRet = permanentInjuries[0];
+            }
             else
+            {
                 iRet = permanentInjuries[RandomGenerator.NumberBetween(0, permanentInjuries.Count - 1)];
+            }
 
             Debug.Log("PerkController.GetRandomValidInjury() returning permanent injury " + iRet.passiveName);
 
@@ -1014,7 +1097,9 @@ namespace WeAreGladiators.Perks
             {
                 PerkIconData pData = p.Data;
                 if (pData.isPermanentInjury)
+                {
                     ret.Add(p);
+                }
             }
 
             return ret;
@@ -1034,9 +1119,7 @@ namespace WeAreGladiators.Perks
 
             return bRet;
         }
+
         #endregion
-
-
-
     }
 }

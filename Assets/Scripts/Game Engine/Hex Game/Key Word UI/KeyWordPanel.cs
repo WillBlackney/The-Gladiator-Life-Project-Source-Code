@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 namespace WeAreGladiators.UI
 {
@@ -22,6 +20,5 @@ namespace WeAreGladiators.UI
 
         [Header("Transform + Layout Components")]
         public RectTransform rootLayoutRect;
-
     }
 }

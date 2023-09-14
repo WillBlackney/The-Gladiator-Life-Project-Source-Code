@@ -4,7 +4,7 @@ namespace WeAreGladiators.DungeonMap
 {
     public class DottedLineRenderer : MonoBehaviour
     {
-        public bool scaleInUpdate = false;
+        public bool scaleInUpdate;
         private LineRenderer lR;
         private Renderer rend;
 
@@ -14,17 +14,17 @@ namespace WeAreGladiators.DungeonMap
             enabled = scaleInUpdate;
         }
 
-        public void ScaleMaterial()
+        private void Update()
         {
-            lR = GetComponent<LineRenderer>();
-            rend = GetComponent<Renderer>();
             rend.material.mainTextureScale =
                 new Vector2(Vector2.Distance(lR.GetPosition(0), lR.GetPosition(lR.positionCount - 1)) / lR.widthMultiplier,
                     1);
         }
 
-        private void Update()
+        public void ScaleMaterial()
         {
+            lR = GetComponent<LineRenderer>();
+            rend = GetComponent<Renderer>();
             rend.material.mainTextureScale =
                 new Vector2(Vector2.Distance(lR.GetPosition(0), lR.GetPosition(lR.positionCount - 1)) / lR.widthMultiplier,
                     1);

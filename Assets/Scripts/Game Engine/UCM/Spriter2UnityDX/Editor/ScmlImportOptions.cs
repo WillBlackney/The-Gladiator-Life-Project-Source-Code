@@ -1,41 +1,41 @@
 ﻿#if UNITY_EDITOR
+using System;
 using UnityEditor;
 using UnityEngine;
-using System.Collections;
 
 namespace Spriter2UnityDX.Importing
 {
     public class ScmlImportOptionsWindow : EditorWindow
     {
-        public System.Action OnClose;
-        
-        void OnEnable()
+        public Action OnClose;
+
+        private void OnEnable()
         {
             titleContent = new GUIContent("Import Options");
-            if(ScmlImportOptions.options == null)
+            if (ScmlImportOptions.options == null)
             {
                 ScmlImportOptions.options = new ScmlImportOptions();
             }
         }
 
-        void OnGUI()
+        private void OnDestroy()
+        {
+            OnClose();
+        }
+
+        private void OnGUI()
         {
             ScmlImportOptions.options.pixelsPerUnit = EditorGUILayout.FloatField(ScmlImportOptions.options.pixelsPerUnit);
-            if(GUILayout.Button("Done"))
+            if (GUILayout.Button("Done"))
             {
                 Close();
             }
-        }
-
-        void OnDestroy()
-        {
-            OnClose();
         }
     }
 
     public class ScmlImportOptions
     {
-        public static ScmlImportOptions options = null;
+        public static ScmlImportOptions options;
 
         public float pixelsPerUnit = 100f;
     }

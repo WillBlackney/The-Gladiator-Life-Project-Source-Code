@@ -1,21 +1,58 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Sirenix.OdinInspector;
 using TMPro;
-using UnityEngine.UI;
-using Sirenix.OdinInspector;
-using DG.Tweening;
-using WeAreGladiators.Utilities;
+using UnityEngine;
 using WeAreGladiators.Characters;
-using WeAreGladiators.MainMenu;
 using WeAreGladiators.Items;
+using WeAreGladiators.MainMenu;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UI
 {
     public class TopBarController : Singleton<TopBarController>
     {
+
+        // Keypad Control Logic
+        #region
+
+        private void Update()
+        {
+            // Handle key board input
+            if ((mainTopBarRootCanvas.isActiveAndEnabled || combatTopBarRootCanvas.isActiveAndEnabled) && Input.GetKeyDown(KeyCode.C))
+            {
+                CharacterRosterViewController.Instance?.OnCharacterRosterTopbarButtonClicked();
+            }
+            else if (mainTopBarRootCanvas.isActiveAndEnabled && Input.GetKeyDown(KeyCode.I))
+            {
+                InventoryController.Instance?.OnInventoryTopBarButtonClicked();
+            }
+            else if ((mainTopBarRootCanvas.isActiveAndEnabled || combatTopBarRootCanvas.isActiveAndEnabled) && Input.GetKeyDown(KeyCode.Escape))
+            {
+                MainMenuController.Instance.OnTopBarSettingsButtonClicked();
+            }
+
+        }
+
+        #endregion
+
+        // Update Texts
+        #region
+
+        public void UpdateGoldText(string value)
+        {
+            currentGoldText.text = value;
+        }
+
+        #endregion
+
+        public void OnGoldPanelMouseEnter()
+        {
+            string one = TextLogic.ReturnColoredText(CharacterDataController.Instance.GetTotalRosterDailyWage().ToString(), TextLogic.blueNumber);
+            string two = TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow);
+            currentGoldInfoPopupText.text = string.Format("Currently paying {0} {1} each day in wages.", one, two);
+        }
         // Properties + Components
         #region
+
         [Header("Core Components")]
         [SerializeField] private Canvas mainTopBarRootCanvas;
         [SerializeField] private Canvas combatTopBarRootCanvas;
@@ -30,19 +67,18 @@ namespace WeAreGladiators.UI
 
         // Getters + Accessors
         #region
+
         public TextMeshProUGUI CurrentGoldText
         {
             get { return currentGoldText; }
-        }     
-        public TextMeshProUGUI CurrentDaytext
-        {
-            get { return currentDaytext; }
         }
-       
+        public TextMeshProUGUI CurrentDaytext => currentDaytext;
+
         #endregion
 
         // Core Functions
         #region
+
         public void ShowMainTopBar()
         {
             mainTopBarRootCanvas.enabled = true;
@@ -63,34 +99,5 @@ namespace WeAreGladiators.UI
         }
 
         #endregion
-
-        // Keypad Control Logic
-        #region
-        private void Update()
-        {
-            // Handle key board input
-            if ((mainTopBarRootCanvas.isActiveAndEnabled == true || combatTopBarRootCanvas.isActiveAndEnabled == true) && Input.GetKeyDown(KeyCode.C)) CharacterRosterViewController.Instance?.OnCharacterRosterTopbarButtonClicked();
-            else if (mainTopBarRootCanvas.isActiveAndEnabled == true && Input.GetKeyDown(KeyCode.I)) InventoryController.Instance?.OnInventoryTopBarButtonClicked();
-            else if ((mainTopBarRootCanvas.isActiveAndEnabled == true || combatTopBarRootCanvas.isActiveAndEnabled == true) && Input.GetKeyDown(KeyCode.Escape)) MainMenuController.Instance.OnTopBarSettingsButtonClicked();
-
-        }
-        #endregion
-
-        // Update Texts
-        #region
-
-        public void UpdateGoldText(string value)
-        {
-            currentGoldText.text = value;
-        }      
-       
-        #endregion
-
-        public void OnGoldPanelMouseEnter()
-        {
-            string one = TextLogic.ReturnColoredText(CharacterDataController.Instance.GetTotalRosterDailyWage().ToString(), TextLogic.blueNumber);
-            string two = TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow);
-            currentGoldInfoPopupText.text = System.String.Format("Currently paying {0} {1} each day in wages.", one, two);
-        }
     }
 }

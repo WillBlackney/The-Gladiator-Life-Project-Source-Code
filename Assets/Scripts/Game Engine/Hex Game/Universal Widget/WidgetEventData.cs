@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
-using UnityEngine.Events;
-using DG.Tweening;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 using WeAreGladiators.Audio;
 using WeAreGladiators.UI;
 
@@ -17,6 +14,7 @@ namespace WeAreGladiators.UWidget
     {
         // Properties + References
         #region
+
         [Header("Core Event Properties")]
         [Tooltip("The type of event triggered.")]
         public WidgetEvent widgetEventType;
@@ -28,11 +26,11 @@ namespace WeAreGladiators.UWidget
         [Tooltip("When checked, this event will wait for a specified amount of time to elapse before starting.")]
         public bool enableStartDelay;
 
-        [ShowIf("enableStartDelay", true)]
+        [ShowIf("enableStartDelay")]
         [Tooltip("The duration in seconds that this event will wait before starting.")]
         public float startDelay;
 
-        [ShowIf("enableStartDelay", true)]
+        [ShowIf("enableStartDelay")]
         [Tooltip("When checked, this event will only start if the user has kept their mouse/finger over the specified object for the duration of the start delay.")]
         public bool onlyIfMouseIsStillOverMe;
 
@@ -67,7 +65,6 @@ namespace WeAreGladiators.UWidget
         [Tooltip("The colour the given element will transistion to.")]
         public Color endColour;
 
-
         // Movement Properties + Values
         [ShowIf("ShowMovementType")]
         [Tooltip("The direction of the movement")]
@@ -87,7 +84,7 @@ namespace WeAreGladiators.UWidget
         public float transistionSpeed;
 
         // Scaling Properties + Values
-        private bool originalScaleIsSet = false;
+        private bool originalScaleIsSet;
         private Vector3 originalScale;
 
         [Header("General Transform Settings")]
@@ -118,10 +115,10 @@ namespace WeAreGladiators.UWidget
         public float shrinkSpeed;
 
         // Wiggle Properties
-        private bool originalPositionIsSet = false;
+        private bool originalPositionIsSet;
         private Vector3 originalPosition;
 
-        private bool originalRotationIsSet = false;
+        private bool originalRotationIsSet;
         private Vector3 originalRotation;
 
         [Header("Wiggle Settings")]
@@ -143,11 +140,11 @@ namespace WeAreGladiators.UWidget
 
         [ShowIf("ShowWiggleType")]
         [Tooltip("When checked, the wiggle event will loop infintely while the user has their mouse/finger over the element.")]
-        public bool wiggleInfinetly = false;
+        public bool wiggleInfinetly;
 
         [ShowIf("ShowNumberOfWiggles")]
         [Tooltip("The amount of times the wiggle event will repeat itself (NOTE: if this value is 0, the wiggle will only occur once).")]
-        public int wiggleLoops = 0;
+        public int wiggleLoops;
 
         [ShowIf("ShowRotationDegrees")]
         [Tooltip("The amount in degrees by which the transform's rotation Z value will change, relative to its original rotation" +
@@ -161,40 +158,43 @@ namespace WeAreGladiators.UWidget
 
         // Accessors + Getters
         #region
+
         public bool OriginalScaleIsSet
         {
-            get { return originalScaleIsSet; }
-            private set { originalScaleIsSet = value; }
+            get => originalScaleIsSet;
+            private set => originalScaleIsSet = value;
         }
         public Vector3 OriginalScale
         {
-            get { return originalScale; }
-            private set { originalScale = value; }
+            get => originalScale;
+            private set => originalScale = value;
         }
         public bool OriginalPositionIsSet
         {
-            get { return originalPositionIsSet; }
-            private set { originalPositionIsSet = value; }
+            get => originalPositionIsSet;
+            private set => originalPositionIsSet = value;
         }
         public Vector3 OriginalPosition
         {
-            get { return originalPosition; }
-            private set { originalPosition = value; }
+            get => originalPosition;
+            private set => originalPosition = value;
         }
         public Vector3 OriginalRotation
         {
-            get { return originalRotation; }
-            private set { originalRotation = value; }
+            get => originalRotation;
+            private set => originalRotation = value;
         }
         public bool OriginalRotationIsSet
         {
-            get { return originalRotationIsSet; }
-            private set { originalRotationIsSet = value; }
+            get => originalRotationIsSet;
+            private set => originalRotationIsSet = value;
         }
+
         #endregion
 
         // Misc Logic
         #region
+
         public void SetOriginalScale(Vector3 originalScale)
         {
             OriginalScale = originalScale;
@@ -210,10 +210,12 @@ namespace WeAreGladiators.UWidget
             OriginalRotation = originalRotation;
             OriginalRotationIsSet = true;
         }
+
         #endregion
 
         // Conditional Inspector View Logic
         #region
+
         public bool ShowCursorType()
         {
             return widgetEventType == WidgetEvent.CursorSpriteChange;
@@ -290,12 +292,12 @@ namespace WeAreGladiators.UWidget
         public bool ShowFadeSpeed()
         {
             return widgetEventType == WidgetEvent.FadeInCanvasGroup ||
-                   widgetEventType == WidgetEvent.FadeOutCanvasGroup ||
-                   widgetEventType == WidgetEvent.FadeInImage ||
-                   widgetEventType == WidgetEvent.FadeOutImage ||
-                   widgetEventType == WidgetEvent.TransisitionImageColour ||
-                   widgetEventType == WidgetEvent.TransistionTextColour ||
-                   widgetEventType == WidgetEvent.Move;
+                widgetEventType == WidgetEvent.FadeOutCanvasGroup ||
+                widgetEventType == WidgetEvent.FadeInImage ||
+                widgetEventType == WidgetEvent.FadeOutImage ||
+                widgetEventType == WidgetEvent.TransisitionImageColour ||
+                widgetEventType == WidgetEvent.TransistionTextColour ||
+                widgetEventType == WidgetEvent.Move;
         }
         public bool ShowMovementType()
         {
@@ -309,6 +311,7 @@ namespace WeAreGladiators.UWidget
         {
             return widgetEventType == WidgetEvent.Move;
         }
+
         #endregion
     }
     public enum WidgetEvent
@@ -328,24 +331,24 @@ namespace WeAreGladiators.UWidget
         PlaySound = 4,
         Shrink = 12,
         TransisitionImageColour = 9,
-        TransistionTextColour = 10,             
-        Wiggle = 14,
+        TransistionTextColour = 10,
+        Wiggle = 14
     }
     public enum WidgetInputType
     {
         IPointer = 0,
-        Collider = 1,
+        Collider = 1
     }
     public enum WiggleType
     {
         RotateOnTheSpot = 0,
         SideToSide = 1,
-        UpAndDown = 2,
+        UpAndDown = 2
     }
     public enum ScaleEventOrder
     {
         EnlargeThenShrink = 0,
-        ShrinkThenEnlarge = 1,
+        ShrinkThenEnlarge = 1
     }
     public enum MovementType
     {
@@ -353,6 +356,6 @@ namespace WeAreGladiators.UWidget
         Right = 1,
         Up = 2,
         Down = 3,
-        ReturnToOriginalPosition = 4,
+        ReturnToOriginalPosition = 4
     }
 }

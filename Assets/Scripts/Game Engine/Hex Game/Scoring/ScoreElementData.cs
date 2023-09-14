@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace WeAreGladiators.Scoring
 {
-    public class ScoreElementData 
+    public class ScoreElementData
     {
         public int totalScore;
         public ScoreElementType type;

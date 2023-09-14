@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using Sirenix.OdinInspector;
+﻿using System.Collections.Generic;
 
 namespace WeAreGladiators.Characters
 {
@@ -10,11 +6,11 @@ namespace WeAreGladiators.Characters
     {
         public int baseXpReward;
         public int deploymentLimit;
-        public List<CharacterWithSpawnData> enemiesInEncounter = new List<CharacterWithSpawnData>();
         public CombatDifficulty difficulty;
+        public List<CharacterWithSpawnData> enemiesInEncounter = new List<CharacterWithSpawnData>();
         public int TotalEnemyXP
         {
-            get 
+            get
             {
                 int xp = 0;
                 foreach (CharacterWithSpawnData c in enemiesInEncounter)
@@ -25,9 +21,6 @@ namespace WeAreGladiators.Characters
                 return xp;
             }
         }
-        public int TotalEnemies
-        {
-            get { return enemiesInEncounter.Count; }
-        }
+        public int TotalEnemies => enemiesInEncounter.Count;
     }
 }

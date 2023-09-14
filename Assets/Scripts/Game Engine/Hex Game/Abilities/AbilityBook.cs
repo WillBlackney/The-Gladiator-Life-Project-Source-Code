@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using WeAreGladiators.Items;
@@ -9,28 +9,34 @@ namespace WeAreGladiators.Abilities
     public class AbilityBook
     {
         #region Properties
+
         public List<AbilityData> activeAbilities = new List<AbilityData>();
         public List<AbilityData> knownAbilities = new List<AbilityData>();
-        public static int ActiveAbilityLimit
-        {
-            get { return 10; }
-        }
+        public static int ActiveAbilityLimit => 10;
+
         #endregion
 
         #region Learn + Unlearn Abilities
+
         public void HandleLearnNewAbility(AbilityData ability)
         {
-            if (KnowsAbility(ability.abilityName)) return;
+            if (KnowsAbility(ability.abilityName))
+            {
+                return;
+            }
 
-            AbilityData newAbility = ObjectCloner.CloneJSON(ability);
+            AbilityData newAbility = ability.CloneJSON();
 
             knownAbilities.Add(newAbility);
 
-            if (activeAbilities.Count < ActiveAbilityLimit) activeAbilities.Add(newAbility);
+            if (activeAbilities.Count < ActiveAbilityLimit)
+            {
+                activeAbilities.Add(newAbility);
+            }
         }
         public void HandleLearnNewAbilities(List<AbilityData> abilities)
         {
-            foreach(AbilityData a in abilities)
+            foreach (AbilityData a in abilities)
             {
                 HandleLearnNewAbility(a);
             }
@@ -48,25 +54,35 @@ namespace WeAreGladiators.Abilities
             }
 
             knownAbilities.Remove(abilityUnlearnt);
-            if (activeAbilities.Contains(abilityUnlearnt)) activeAbilities.Remove(abilityUnlearnt);
+            if (activeAbilities.Contains(abilityUnlearnt))
+            {
+                activeAbilities.Remove(abilityUnlearnt);
+            }
         }
         public void SetAbilityAsActive(AbilityData a)
         {
-            if(knownAbilities.Contains(a))
+            if (knownAbilities.Contains(a))
+            {
                 activeAbilities.Add(a);
+            }
         }
         public void SetAbilityAsInactive(AbilityData a)
         {
-            if(activeAbilities.Contains(a)) activeAbilities.Remove(a);
+            if (activeAbilities.Contains(a))
+            {
+                activeAbilities.Remove(a);
+            }
         }
         public void ForgetAllAbilities()
         {
             activeAbilities.Clear();
             knownAbilities.Clear();
         }
+
         #endregion
 
         #region Conditional Checks
+
         public bool KnowsAbility(string abilityName)
         {
             bool ret = false;
@@ -95,9 +111,11 @@ namespace WeAreGladiators.Abilities
 
             return ret;
         }
+
         #endregion
 
         #region Item Ability Logic
+
         public List<AbilityData> GetAbilitiesFromItemSet(ItemSet itemSet, bool includeLoadOutAbility = true)
         {
             List<AbilityData> ret = new List<AbilityData>();
@@ -109,9 +127,9 @@ namespace WeAreGladiators.Abilities
                 {
                     // Characters dont gain special weapon ability if they have an off hand weapon
                     if (itemSet.offHandItem == null ||
-                        (itemSet.offHandItem != null && d.weaponAbilityType == WeaponAbilityType.Basic) ||
-                        (itemSet.offHandItem != null && !itemSet.offHandItem.IsMeleeWeapon) ||
-                        (itemSet.offHandItem != null && itemSet.offHandItem.weaponClass == itemSet.mainHandItem.weaponClass))
+                        itemSet.offHandItem != null && d.weaponAbilityType == WeaponAbilityType.Basic ||
+                        itemSet.offHandItem != null && !itemSet.offHandItem.IsMeleeWeapon ||
+                        itemSet.offHandItem != null && itemSet.offHandItem.weaponClass == itemSet.mainHandItem.weaponClass)
                     {
                         ret.Add(d);
                     }
@@ -124,23 +142,25 @@ namespace WeAreGladiators.Abilities
                 foreach (AbilityData d in itemSet.offHandItem.grantedAbilities)
                 {
                     if (itemSet.mainHandItem == null ||
-                        (itemSet.mainHandItem != null &&
-                        itemSet.offHandItem.weaponClass != itemSet.mainHandItem.weaponClass))
+                        itemSet.mainHandItem != null &&
+                        itemSet.offHandItem.weaponClass != itemSet.mainHandItem.weaponClass)
                     {
                         if (d.weaponAbilityType == WeaponAbilityType.Basic)
                         {
                             ret.Add(d);
                         }
                     }
-                        
+
                 }
             }
 
             if (includeLoadOutAbility)
             {
                 List<AbilityData> loadOutAbilities = GetLoadoutAbilitiesFromItemSet(itemSet);
-                foreach(var a in loadOutAbilities)                
+                foreach (AbilityData a in loadOutAbilities)
+                {
                     ret.Add(a);
+                }
             }
             string abilityNames = "";
             ret.ForEach(x => abilityNames += x.abilityName + ", ");
@@ -149,23 +169,29 @@ namespace WeAreGladiators.Abilities
         }
         private List<AbilityData> GetLoadoutAbilitiesFromItemSet(ItemSet itemSet)
         {
-            List <AbilityData> loadOutAbilities = new List<AbilityData>();
+            List<AbilityData> loadOutAbilities = new List<AbilityData>();
 
             // 2H melee: Smash Shield
-            if (itemSet.IsWieldingTwoHandMeleeWeapon())            
-                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Smash Shield (Native 2h)"));            
+            if (itemSet.IsWieldingTwoHandMeleeWeapon())
+            {
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Smash Shield (Native 2h)"));
+            }
 
             // Dual wielding 1h: Twin Strike
             else if (itemSet.IsDualWieldingMeleeWeapons())
-                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Twin Strike"));            
+            {
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Twin Strike"));
+            }
 
             // 1h melee weapon: shove
-            else if (itemSet.IsWieldingOneHandMeleeWeaponWithEmptyOffhand())            
-                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Shove"));            
+            else if (itemSet.IsWieldingOneHandMeleeWeaponWithEmptyOffhand())
+            {
+                loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Shove"));
+            }
 
             // Main hand empty: Jab + Shove
             else if (itemSet.mainHandItem == null &&
-                itemSet.offHandItem != null)
+                     itemSet.offHandItem != null)
             {
                 loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Jab"));
                 loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Shove"));
@@ -173,7 +199,7 @@ namespace WeAreGladiators.Abilities
 
             // Main hand AND off hand empty: Jab, Hook and Shove
             else if (itemSet.mainHandItem == null &&
-               itemSet.offHandItem == null)
+                     itemSet.offHandItem == null)
             {
                 loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Jab"));
                 loadOutAbilities.Add(AbilityController.Instance.FindAbilityData("Hook"));
@@ -185,16 +211,19 @@ namespace WeAreGladiators.Abilities
         public void HandleLearnAbilitiesFromItemSet(ItemSet itemSet, bool unlearnPreviousItemAbilities = true)
         {
             // Below line if for enemies, so that their abilities are not tied to their weapons
-            if(unlearnPreviousItemAbilities) HandleUnlearnAbilitiesFromCurrentItemSet();
+            if (unlearnPreviousItemAbilities)
+            {
+                HandleUnlearnAbilitiesFromCurrentItemSet();
+            }
 
-            var itemAbilities = GetAbilitiesFromItemSet(itemSet);
+            List<AbilityData> itemAbilities = GetAbilitiesFromItemSet(itemSet);
             int difference = itemAbilities.Count + activeAbilities.Count - ActiveAbilityLimit;
 
             // Item abilities must always be active and placed at the front of active abilities list
             // Remove other non item abilities to make room for item abilities if needed
-            if(difference > 0)
+            if (difference > 0)
             {
-                for(int i = 0; i < difference; i++)
+                for (int i = 0; i < difference; i++)
                 {
                     SetAbilityAsInactive(activeAbilities[activeAbilities.Count - 1]);
                 }
@@ -206,7 +235,7 @@ namespace WeAreGladiators.Abilities
             }
 
             // Move new item abilities to the front of active and known abilities
-            for(int i = 0; i < itemAbilities.Count; i++)
+            for (int i = 0; i < itemAbilities.Count; i++)
             {
                 AbilityData a = activeAbilities[activeAbilities.Count - 1];
                 //Debug.Log("Previous index: " + activeAbilities.IndexOf(a).ToString());
@@ -214,7 +243,7 @@ namespace WeAreGladiators.Abilities
                 activeAbilities.Insert(0, a);
                 knownAbilities.Remove(a);
                 knownAbilities.Insert(0, a);
-               // Debug.Log("New index: " + activeAbilities.IndexOf(a).ToString());
+                // Debug.Log("New index: " + activeAbilities.IndexOf(a).ToString());
             }
 
         }
@@ -225,30 +254,36 @@ namespace WeAreGladiators.Abilities
             foreach (AbilityData a in knownAbilities)
             {
                 if (a.derivedFromWeapon || a.derivedFromItemLoadout)
+                {
                     abilitiesRemoved.Add(a);
+                }
             }
 
             foreach (AbilityData a in abilitiesRemoved)
             {
                 knownAbilities.Remove(a);
                 if (activeAbilities.Contains(a))
+                {
                     activeAbilities.Remove(a);
+                }
             }
         }
         public void OnItemSetChanged(ItemSet itemSet)
         {
             HandleLearnAbilitiesFromItemSet(itemSet);
         }
+
         #endregion
 
         #region Misc
+
         public AbilityData GetKnownAbility(string abilityName)
         {
             AbilityData ret = null;
 
-            foreach(AbilityData a in knownAbilities)
+            foreach (AbilityData a in knownAbilities)
             {
-                if(a.abilityName == abilityName)
+                if (a.abilityName == abilityName)
                 {
                     ret = a;
                     break;
@@ -261,17 +296,21 @@ namespace WeAreGladiators.Abilities
         {
             List<AbilityData> ret = new List<AbilityData>();
 
-            foreach(AbilityData a in knownAbilities)
+            foreach (AbilityData a in knownAbilities)
             {
                 if (a.derivedFromItemLoadout == false && a.derivedFromWeapon == false)
+                {
                     ret.Add(a);
+                }
             }
 
             return ret;
         }
+
         #endregion
 
         #region Constructors
+
         public AbilityBook()
         {
 
@@ -279,17 +318,25 @@ namespace WeAreGladiators.Abilities
         public AbilityBook(AbilityBook original)
         {
             foreach (AbilityData a in original.knownAbilities)
+            {
                 HandleLearnNewAbility(a);
+            }
         }
         public AbilityBook(SerializedAbilityBook original)
         {
             foreach (AbilityDataSO a in original.activeAbilities)
-                if(a != null) HandleLearnNewAbility(AbilityController.Instance.BuildAbilityDataFromScriptableObjectData(a));
+            {
+                if (a != null)
+                {
+                    HandleLearnNewAbility(AbilityController.Instance.BuildAbilityDataFromScriptableObjectData(a));
+                }
+            }
         }
+
         #endregion
     }
 
-    [System.Serializable]
+    [Serializable]
     public class SerializedAbilityBook
     {
         // Class is used to assign abilities to characters templates / enemy data models in the inspector

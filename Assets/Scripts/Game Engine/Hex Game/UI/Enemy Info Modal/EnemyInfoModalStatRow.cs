@@ -1,14 +1,14 @@
-using WeAreGladiators.Perks;
-using WeAreGladiators.Utilities;
 using TMPro;
 using UnityEngine;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UI
 {
     public class EnemyInfoModalStatRow : MonoBehaviour
     {
-        [SerializeField] UIPerkIcon icon;
-        [SerializeField] TextMeshProUGUI perkNameText;
+        [SerializeField] private UIPerkIcon icon;
+        [SerializeField] private TextMeshProUGUI perkNameText;
 
         public void BuildAndShow(ActivePerk p)
         {

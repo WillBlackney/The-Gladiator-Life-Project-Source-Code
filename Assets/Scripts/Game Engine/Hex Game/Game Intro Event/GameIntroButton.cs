@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -8,28 +6,26 @@ namespace WeAreGladiators.GameIntroEvent
 {
     public class GameIntroButton : MonoBehaviour
     {
-        [SerializeField] GameObject visualParent;
-        [SerializeField] TextMeshProUGUI buttonText;
-        GameIntroChoiceData choiceData;
+        [SerializeField] private GameObject visualParent;
+        [SerializeField] private TextMeshProUGUI buttonText;
+
+        private bool dynamicCallback;
         private Action onClickCallback;
 
-        bool dynamicCallback = false;
-
-        public GameIntroChoiceData ChoiceData => choiceData;
-
+        public GameIntroChoiceData ChoiceData { get; private set; }
 
         public void HideAndReset()
         {
             visualParent.SetActive(false);
             onClickCallback = null;
-            choiceData = null;
+            ChoiceData = null;
         }
         public void Build(GameIntroChoiceData choiceData)
         {
             dynamicCallback = false;
             visualParent.SetActive(true);
             buttonText.text = choiceData.buttonText;
-            this.choiceData = choiceData;
+            this.ChoiceData = choiceData;
         }
         public void BuildAndShow(string text, Action onClick)
         {
@@ -49,7 +45,7 @@ namespace WeAreGladiators.GameIntroEvent
             {
                 GameIntroController.Instance.HandleChoiceButtonClicked(this);
             }
-           
+
         }
     }
 }

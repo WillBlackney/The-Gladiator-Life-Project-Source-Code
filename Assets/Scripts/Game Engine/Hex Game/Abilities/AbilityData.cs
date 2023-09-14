@@ -1,57 +1,56 @@
-﻿using WeAreGladiators.Characters;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using WeAreGladiators.Utilities;
+using WeAreGladiators.Characters;
 using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.Abilities
 {
-    public class AbilityData 
+    public class AbilityData
     {
-        public HexCharacterModel myCharacter;
-        public string abilityName;
-        public string displayedName;
-        public string baseAbilityDescription;
-        public WeaponAbilityType weaponAbilityType;
-
-        public AbilityType[] abilityType;
-        public bool doesNotBreakStealth;
-        public GuidanceInstruction guidanceInstruction;
-        public GuidanceInstruction guidanceInstructionTwo;
-        public TargetRequirement targetRequirement;
-        public WeaponRequirement weaponRequirement;
-        public bool derivedFromWeapon = false;
-        public bool derivedFromItemLoadout = false;
-        public WeaponClass weaponClass;
-        public TalentPairing talentRequirementData;
-        public int talentLevelRequirement = 0;
-        public List<AbilityRequirement> abilitySubRequirements;
-        public SecondaryTargetRequirement secondaryTargetRequirement;
-        public int rangeFromTarget;
-
-        public int energyCost;
-        public int baseCooldown;
-        public int currentCooldown = 0;       
-
-        public int baseRange = 0;
-        public bool gainRangeBonusFromVision = false;
-        public int hitChanceModifier;
-        public bool accuracyPenaltyFromMelee = false;
-        public int hitChanceModifierAgainstAdjacent;
 
         public List<AbilityEffect> abilityEffects;
-        public List<AbilityEffect> onHitEffects;
-        public List<AbilityEffect> onCritEffects;
-        public List<AbilityEffect> onPerkAppliedSuccessEffects;
-        public List<AbilityEffect> onCollisionEffects;
-        public List<CustomString> dynamicDescription;
-        public List<KeyWordModel> keyWords;
-
-        public int chainLoops;
-        public List<AbilityEffect> chainedEffects;
+        public string abilityName;
 
         private Sprite abilitySprite;
+        public List<AbilityRequirement> abilitySubRequirements;
+
+        public AbilityType[] abilityType;
+        public bool accuracyPenaltyFromMelee = false;
+        public string baseAbilityDescription;
+        public int baseCooldown;
+
+        public int baseRange = 0;
+        public List<AbilityEffect> chainedEffects;
+
+        public int chainLoops;
+        public int currentCooldown = 0;
+        public bool derivedFromItemLoadout = false;
+        public bool derivedFromWeapon = false;
+        public string displayedName;
+        public bool doesNotBreakStealth;
+        public List<CustomString> dynamicDescription;
+
+        public int energyCost;
+        public bool gainRangeBonusFromVision = false;
+        public GuidanceInstruction guidanceInstruction;
+        public GuidanceInstruction guidanceInstructionTwo;
+        public int hitChanceModifier;
+        public int hitChanceModifierAgainstAdjacent;
+        public List<KeyWordModel> keyWords;
+        public HexCharacterModel myCharacter;
+        public List<AbilityEffect> onCollisionEffects;
+        public List<AbilityEffect> onCritEffects;
+        public List<AbilityEffect> onHitEffects;
+        public List<AbilityEffect> onPerkAppliedSuccessEffects;
+        public int rangeFromTarget;
+        public SecondaryTargetRequirement secondaryTargetRequirement;
+        public int talentLevelRequirement = 0;
+        public TalentPairing talentRequirementData;
+        public TargetRequirement targetRequirement;
+        public WeaponAbilityType weaponAbilityType;
+        public WeaponClass weaponClass;
+        public WeaponRequirement weaponRequirement;
         public Sprite AbilitySprite
         {
             get
@@ -61,10 +60,7 @@ namespace WeAreGladiators.Abilities
                     abilitySprite = GetMySprite();
                     return abilitySprite;
                 }
-                else
-                {
-                    return abilitySprite;
-                }
+                return abilitySprite;
             }
         }
         private Sprite GetMySprite()
@@ -81,8 +77,9 @@ namespace WeAreGladiators.Abilities
             }
 
             if (s == null)
+            {
                 Debug.LogWarning("ItemData.GetMySprite() could not sprite for item " + abilityName + ", returning null...");
-
+            }
 
             return s;
         }
@@ -92,6 +89,6 @@ namespace WeAreGladiators.Abilities
     {
         None = 0,
         Basic = 1,
-        Special = 2,
+        Special = 2
     }
 }

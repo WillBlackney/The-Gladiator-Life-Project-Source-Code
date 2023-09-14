@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using System;
+using System.Collections;
 using DG.Tweening;
-using System;
+using UnityEngine;
 
 namespace WeAreGladiators.Utilities
 {
@@ -11,13 +11,8 @@ namespace WeAreGladiators.Utilities
         [SerializeField] private CanvasGroup cg;
         [SerializeField] private GameObject visualParent;
 
-        [Header("Properties")]
-        private bool fadeInProgess;
-        public bool FadeInProgress
-        {
-            get { return fadeInProgess; }
-            private set { fadeInProgess = value; }
-        }
+        [field: Header("Properties")]
+        public bool FadeInProgress { get; private set; }
 
         public void FadeOutAndBackIn(float outDuration, float middlePause, float inDuration, Action onPauseReachedCallBack)
         {
@@ -32,7 +27,10 @@ namespace WeAreGladiators.Utilities
             yield return new WaitForSeconds(outDuration);
 
             // Middle pause + run callback
-            if (onPauseReachedCallBack != null) onPauseReachedCallBack.Invoke();
+            if (onPauseReachedCallBack != null)
+            {
+                onPauseReachedCallBack.Invoke();
+            }
             yield return new WaitForSeconds(middlePause);
 
             // Fade back in
@@ -41,27 +39,30 @@ namespace WeAreGladiators.Utilities
         }
         public void FadeOutScreen(float duration, Action onCompleteCallBack = null, bool enableClickOnComplete = true)
         {
-            fadeInProgess = true;
+            FadeInProgress = true;
             cg.alpha = 0;
             DisableClickThrough();
             Sequence s = DOTween.Sequence();
             s.Append(cg.DOFade(1, duration));
 
             s.OnComplete(() =>
-            {                
+            {
                 if (enableClickOnComplete)
                 {
                     EnableClickThrough();
-                    fadeInProgess = false;
+                    FadeInProgress = false;
                 }
-                
-                if (onCompleteCallBack != null) onCompleteCallBack.Invoke();
+
+                if (onCompleteCallBack != null)
+                {
+                    onCompleteCallBack.Invoke();
+                }
             });
         }
         public void FadeInScreen(float duration, Action onCompleteCallBack = null, bool enableClickOnComplete = true)
         {
             // Reset alpha / set transparent
-            fadeInProgess = true;
+            FadeInProgress = true;
             cg.alpha = 1;
             DisableClickThrough();
             Sequence s = DOTween.Sequence();
@@ -72,9 +73,12 @@ namespace WeAreGladiators.Utilities
                 if (enableClickOnComplete)
                 {
                     EnableClickThrough();
-                    fadeInProgess = false;
+                    FadeInProgress = false;
                 }
-                if (onCompleteCallBack != null) onCompleteCallBack.Invoke();
+                if (onCompleteCallBack != null)
+                {
+                    onCompleteCallBack.Invoke();
+                }
             });
         }
         public void DoInstantFadeOut()
@@ -89,6 +93,5 @@ namespace WeAreGladiators.Utilities
         {
             cg.blocksRaycasts = true;
         }
-
     }
 }

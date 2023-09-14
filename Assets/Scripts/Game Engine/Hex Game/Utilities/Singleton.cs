@@ -7,15 +7,19 @@ namespace WeAreGladiators.Utilities
     {
         // Properties
         #region
+
         public static T Instance { get; private set; }
 
         [Header("Singleton Properties")]
-        [SerializeField] bool dontDestroyOnLoad;
+        [SerializeField]
+        private bool dontDestroyOnLoad;
         [PropertySpace(SpaceBefore = 0, SpaceAfter = 20)]
+
         #endregion
 
         // Singleton Creation Logic
         #region
+
         protected virtual void Awake()
         {
             BuildSingleton();
@@ -38,7 +42,5 @@ namespace WeAreGladiators.Utilities
         }
 
         #endregion
-
-
     }
 }

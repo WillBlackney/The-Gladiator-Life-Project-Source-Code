@@ -1,61 +1,54 @@
-﻿using WeAreGladiators.UCM;
+﻿using UnityEngine;
 using WeAreGladiators.Characters;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using WeAreGladiators.UCM;
 
 namespace WeAreGladiators.UI
 {
     public class RosterFormationButton : MonoBehaviour
     {
-        // Properties + Components
-        #region
-        [SerializeField] private Vector2 formationPosition;
-        [SerializeField] private GameObject characterVisualParent;
-        [SerializeField] private UniversalCharacterModel ucm;
-        private HexCharacterData characterDataRef;
-        #endregion
-
-        // Getters + Accessors
-        #region
-        public Vector2 FormationPosition
-        {
-            get { return formationPosition; }
-        }
-        public UniversalCharacterModel Ucm
-        {
-            get { return ucm; }
-        }
-        public GameObject CharacterVisualParent
-        {
-            get { return characterVisualParent; }
-        }
-        public HexCharacterData CharacterDataRef
-        {
-            get { return characterDataRef; }
-        }
-        #endregion
 
         // Input + Dragging Logic
         #region
+
         public void OnClick()
         {
             Debug.Log("RosterFormationButton.OnClick()");
             CharacterRosterViewController.Instance.OnFormationButtonClicked(this);
         }
+
+        #endregion
+        // Properties + Components
+        #region
+
+        [SerializeField] private Vector2 formationPosition;
+        [SerializeField] private GameObject characterVisualParent;
+        [SerializeField] private UniversalCharacterModel ucm;
+
+        #endregion
+
+        // Getters + Accessors
+        #region
+
+        public Vector2 FormationPosition => formationPosition;
+        public UniversalCharacterModel Ucm => ucm;
+        public GameObject CharacterVisualParent => characterVisualParent;
+        public HexCharacterData CharacterDataRef { get; private set; }
+
         #endregion
 
         // Misc
         #region
+
         public void SetMyCharacter(HexCharacterData character)
         {
-            characterDataRef = character;
+            CharacterDataRef = character;
         }
         public void Reset()
         {
-            characterDataRef = null;
+            CharacterDataRef = null;
             characterVisualParent.SetActive(false);
         }
+
         #endregion
     }
 }

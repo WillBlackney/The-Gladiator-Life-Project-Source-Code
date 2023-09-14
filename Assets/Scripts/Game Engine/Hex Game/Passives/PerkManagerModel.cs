@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using WeAreGladiators.Characters;
 
 namespace WeAreGladiators.Perks
 {
     public class PerkManagerModel
     {
+        public HexCharacterData myCharacterData;
         // Properties + References
         public HexCharacterModel myCharacterEntity;
-        public HexCharacterData myCharacterData;
         public List<ActivePerk> perks = new List<ActivePerk>();
 
         public PerkManagerModel(HexCharacterModel character)

@@ -1,20 +1,15 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine;
-using UnityEditor;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities.Editor;
+using UnityEditor;
+using UnityEngine;
 using WeAreGladiators.Perks;
 
 namespace WeAreGladiators.Editor
 {
     public class PerkDataEditor : OdinMenuEditorWindow
     {
-        [MenuItem("Tools/Hex Game Tools/Passives Editor")]
-        private static void OpenWindow()
-        {
-            GetWindow<PerkDataEditor>().Show();
-        }
 
         private CreatePerkData createNewPerkData;
         protected override void OnDestroy()
@@ -26,10 +21,15 @@ namespace WeAreGladiators.Editor
                 DestroyImmediate(createNewPerkData.perkDataSO);
             }
         }
+        [MenuItem("Tools/Hex Game Tools/Passives Editor")]
+        private static void OpenWindow()
+        {
+            GetWindow<PerkDataEditor>().Show();
+        }
 
         protected override OdinMenuTree BuildMenuTree()
         {
-            var tree = new OdinMenuTree();
+            OdinMenuTree tree = new OdinMenuTree();
 
             createNewPerkData = new CreatePerkData();
             tree.Add("Create New", new CreatePerkData());
@@ -40,7 +40,7 @@ namespace WeAreGladiators.Editor
 
         protected override void OnBeginDrawEditors()
         {
-            OdinMenuTreeSelection selected = this.MenuTree.Selection;
+            OdinMenuTreeSelection selected = MenuTree.Selection;
 
             SirenixEditorGUI.BeginHorizontalToolbar();
             {
@@ -79,9 +79,7 @@ namespace WeAreGladiators.Editor
                 perkDataSO = CreateInstance<PerkIconDataSO>();
                 perkDataSO.passiveName = "New Perk Data";
             }
-
         }
-
     }
 }
 #endif

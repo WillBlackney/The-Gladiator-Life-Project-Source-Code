@@ -1,8 +1,7 @@
-using WeAreGladiators.UI;
-using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using WeAreGladiators.UI;
 
 namespace WeAreGladiators.Characters
 {
@@ -29,13 +28,13 @@ namespace WeAreGladiators.Characters
 
         [VerticalGroup("Core Data/Stats")]
         [LabelWidth(100)]
-        [Range(1,100)]
+        [Range(1, 100)]
         [ShowIf("ShowSpawnChance")]
         public int spawnChance = 25;
 
         [BoxGroup("Level Data", true, true)]
         [LabelWidth(150)]
-        [Range(1,6)]
+        [Range(1, 6)]
         public int lowerLevelLimit;
         [BoxGroup("Level Data")]
         [LabelWidth(150)]
@@ -61,7 +60,6 @@ namespace WeAreGladiators.Characters
         [Range(-30, 30)]
         public int mightUpper;
         [Space(10)]
-
         [BoxGroup("Stat Ranges")]
         [LabelWidth(125)]
         [Range(-30, 30)]
@@ -71,7 +69,6 @@ namespace WeAreGladiators.Characters
         [Range(-30, 30)]
         public int constitutionUpper;
         [Space(10)]
-
         [BoxGroup("Stat Ranges")]
         [LabelWidth(125)]
         [Range(-30, 30)]
@@ -81,7 +78,6 @@ namespace WeAreGladiators.Characters
         [Range(-30, 30)]
         public int accuracyUpper;
         [Space(10)]
-
         [BoxGroup("Stat Ranges")]
         [LabelWidth(125)]
         [Range(-30, 30)]
@@ -90,8 +86,7 @@ namespace WeAreGladiators.Characters
         [LabelWidth(125)]
         [Range(-30, 30)]
         public int dodgeUpper;
-        [Space(10)]    
-        
+        [Space(10)]
         [BoxGroup("Stat Ranges")]
         [LabelWidth(125)]
         [Range(-30, 30)]
@@ -101,7 +96,6 @@ namespace WeAreGladiators.Characters
         [Range(-30, 30)]
         public int resolveUpper;
         [Space(10)]
-
         [BoxGroup("Stat Ranges")]
         [LabelWidth(125)]
         [Range(-30, 30)]
@@ -111,10 +105,9 @@ namespace WeAreGladiators.Characters
         [Range(-30, 30)]
         public int witsUpper;
         [Space(10)]
-
         [BoxGroup("Recruit Generation Settings", true, true)]
         [LabelWidth(125)]
-        [Range(0,3)]
+        [Range(0, 3)]
         public int minStartingAbilities = 1;
         [BoxGroup("Recruit Generation Settings")]
         [LabelWidth(125)]
@@ -135,90 +128,19 @@ namespace WeAreGladiators.Characters
         public ModalDotRowBuildData[] passiveEffectDescriptions;
 
         #region Odin Showifs
+
         public bool ShowSpawnChance()
         {
             return recruitable;
         }
-        #endregion
 
+        #endregion
     }
-    public  class BackgroundData
+    public class BackgroundData
     {
-        #region Properties
-        public Sprite backgroundSprite;
-        public CharacterBackground backgroundType;
-        public string description;
-        public bool recruitable;
-        public int spawnChance;
-        public int dailyWageMin;
-        public int dailyWageMax;
-        public int baseRecruitCost;
-        public int minStartingAbilities;
-        public int maxStartingAbilities;
-
-        public int mightLower;
-        public int mightUpper;
-        public int accuracyLower;
-        public int accuracyUpper;
-        public int dodgeLower;
-        public int dodgeUpper;
-        public int constitutionLower;
-        public int constitutionUpper;   
-        public int fatigueLower;
-        public int fatigueUpper;
-        public int resolveLower;
-        public int resolveUpper;
-        public int witsLower;
-        public int witsUpper;
-
-        public int lowerLevelLimit;
-        public int upperLevelLimit;
-
-        public List<string> possibleSubNames = new List<string>();
-        public List<RecruitLoadoutData> loadoutBuckets = new List<RecruitLoadoutData>();
-        public List<CharacterRace> validRaces = new List<CharacterRace>();
-        public List<ModalDotRowBuildData> passiveEffectDescriptions = new List<ModalDotRowBuildData>();
-
-        #endregion
-
-        #region Getters + Accessors
-        public Sprite BackgroundSprite
-        {
-            get
-            {
-                if (backgroundSprite == null)
-                {
-                    backgroundSprite = GetMySprite();
-                    return backgroundSprite;
-                }
-                else
-                {
-                    return backgroundSprite;
-                }
-            }
-        }
-        private Sprite GetMySprite()
-        {
-            Sprite s = null;
-
-            foreach (BackgroundData i in CharacterDataController.Instance.AllCharacterBackgrounds)
-            {
-                if (i.backgroundType == backgroundType)
-                {
-                    s = i.backgroundSprite;
-                    break;
-                }
-            }
-
-            if (s == null)
-                Debug.LogWarning("BackgroundData.GetMySprite() could not sprite for background " + backgroundType + ", returning null...");
-
-
-            return s;
-        }
-        #endregion
 
         #region Logic
+
         public BackgroundData(BackgroundDataSO data)
         {
             backgroundSprite = data.backgroundSprite;
@@ -233,7 +155,6 @@ namespace WeAreGladiators.Characters
             upperLevelLimit = data.upperLevelLimit;
             minStartingAbilities = data.minStartingAbilities;
             maxStartingAbilities = data.maxStartingAbilities;
-
 
             mightLower = data.mightLower;
             mightUpper = data.mightUpper;
@@ -254,20 +175,102 @@ namespace WeAreGladiators.Characters
             witsUpper = data.witsUpper;
 
             foreach (string subname in data.possibleSubNames)
+            {
                 possibleSubNames.Add(subname);
+            }
 
             foreach (RecruitLoadoutData ld in data.loadoutBuckets)
+            {
                 loadoutBuckets.Add(ld);
+            }
 
             foreach (CharacterRace race in data.validRaces)
+            {
                 validRaces.Add(race);
+            }
 
-            foreach(ModalDotRowBuildData d in data.passiveEffectDescriptions)
+            foreach (ModalDotRowBuildData d in data.passiveEffectDescriptions)
+            {
                 passiveEffectDescriptions.Add(d);
+            }
 
         }
+
+        #endregion
+        #region Properties
+
+        public Sprite backgroundSprite;
+        public CharacterBackground backgroundType;
+        public string description;
+        public bool recruitable;
+        public int spawnChance;
+        public int dailyWageMin;
+        public int dailyWageMax;
+        public int baseRecruitCost;
+        public int minStartingAbilities;
+        public int maxStartingAbilities;
+
+        public int mightLower;
+        public int mightUpper;
+        public int accuracyLower;
+        public int accuracyUpper;
+        public int dodgeLower;
+        public int dodgeUpper;
+        public int constitutionLower;
+        public int constitutionUpper;
+        public int fatigueLower;
+        public int fatigueUpper;
+        public int resolveLower;
+        public int resolveUpper;
+        public int witsLower;
+        public int witsUpper;
+
+        public int lowerLevelLimit;
+        public int upperLevelLimit;
+
+        public List<string> possibleSubNames = new List<string>();
+        public List<RecruitLoadoutData> loadoutBuckets = new List<RecruitLoadoutData>();
+        public List<CharacterRace> validRaces = new List<CharacterRace>();
+        public List<ModalDotRowBuildData> passiveEffectDescriptions = new List<ModalDotRowBuildData>();
+
         #endregion
 
+        #region Getters + Accessors
+
+        public Sprite BackgroundSprite
+        {
+            get
+            {
+                if (backgroundSprite == null)
+                {
+                    backgroundSprite = GetMySprite();
+                    return backgroundSprite;
+                }
+                return backgroundSprite;
+            }
+        }
+        private Sprite GetMySprite()
+        {
+            Sprite s = null;
+
+            foreach (BackgroundData i in CharacterDataController.Instance.AllCharacterBackgrounds)
+            {
+                if (i.backgroundType == backgroundType)
+                {
+                    s = i.backgroundSprite;
+                    break;
+                }
+            }
+
+            if (s == null)
+            {
+                Debug.LogWarning("BackgroundData.GetMySprite() could not sprite for background " + backgroundType + ", returning null...");
+            }
+
+            return s;
+        }
+
+        #endregion
     }
     public enum CharacterBackground
     {
@@ -290,8 +293,7 @@ namespace WeAreGladiators.Characters
         Inquisitor = 17,
         ImperialDeserter = 18,
         Companion = 19,
-        WyrmHunter = 21,
-
+        WyrmHunter = 21
 
     }
 }

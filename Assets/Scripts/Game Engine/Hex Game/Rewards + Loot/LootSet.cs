@@ -1,7 +1,5 @@
-﻿using WeAreGladiators.Items;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using WeAreGladiators.Items;
 
 namespace WeAreGladiators.RewardSystems
 {
@@ -9,6 +7,5 @@ namespace WeAreGladiators.RewardSystems
     {
         public int goldReward;
         public List<ItemData> items = new List<ItemData>();
-
     }
 }

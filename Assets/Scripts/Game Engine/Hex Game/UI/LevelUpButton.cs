@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
-using UnityEngine.Events;
+using UnityEngine;
 
 namespace WeAreGladiators.UI
 {
     public class LevelUpButton : MonoBehaviour
     {
-        [SerializeField] Transform scalingParent;
+        [SerializeField] private Transform scalingParent;
 
         public void ShowAndAnimate()
         {
@@ -24,7 +21,5 @@ namespace WeAreGladiators.UI
             scalingParent.transform.DOScale(new Vector3(1, 1, 1), 0);
             gameObject.SetActive(false);
         }
-
-
     }
 }

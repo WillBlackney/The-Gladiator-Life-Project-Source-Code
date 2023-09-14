@@ -1,27 +1,28 @@
-using WeAreGladiators.Utilities;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.StoryEvents
 {
     public class StoryEventChoiceButton : MonoBehaviour
     {
-        #region Components + Variables
-        [Header("Components")]
-        [SerializeField] GameObject visualParent;
-        [SerializeField] TextMeshProUGUI buttonText;
-
-        private StoryEventChoiceSO myChoiceData;
-        #endregion
 
         #region Getters + Accessors
-        public StoryEventChoiceSO MyChoiceData { get { return myChoiceData; } }
+
+        public StoryEventChoiceSO MyChoiceData { get; private set; }
+
+        #endregion
+        #region Components + Variables
+
+        [Header("Components")]
+        [SerializeField]
+        private GameObject visualParent;
+        [SerializeField] private TextMeshProUGUI buttonText;
+
         #endregion
 
         #region Logic
+
         public void HideAndReset()
         {
             visualParent.SetActive(false);
@@ -30,12 +31,13 @@ namespace WeAreGladiators.StoryEvents
         {
             visualParent.SetActive(true);
             buttonText.text = StoryEventController.Instance.GetDynamicValueString(TextLogic.ConvertCustomStringListToString(choiceData.choiceTextOnButton));
-            myChoiceData = choiceData;
+            MyChoiceData = choiceData;
         }
         public void OnClick()
         {
             StoryEventController.Instance.HandleChoiceButtonClicked(this);
         }
+
         #endregion
     }
 }

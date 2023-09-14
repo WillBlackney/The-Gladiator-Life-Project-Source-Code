@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using System;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace WeAreGladiators.Utilities
 {
@@ -10,7 +8,7 @@ namespace WeAreGladiators.Utilities
     public class CustomString
     {
         public TextColor color;
-        public bool getPhraseFromAbilityValue = false;
+        public bool getPhraseFromAbilityValue;
 
         [ShowIf("ShowAbilityEffectType")]
         public AbilityEffectType abilityEffectType;
@@ -19,17 +17,13 @@ namespace WeAreGladiators.Utilities
         [TextArea]
         public string phrase;
 
-
         public bool ShowAbilityEffectType()
         {
-            if (getPhraseFromAbilityValue == true)
+            if (getPhraseFromAbilityValue)
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
         public bool ShowPhrase()
         {
@@ -37,13 +31,8 @@ namespace WeAreGladiators.Utilities
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
-
     }
-
 
 }

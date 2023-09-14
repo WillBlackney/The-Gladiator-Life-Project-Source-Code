@@ -1,7 +1,6 @@
-﻿using Sirenix.OdinInspector;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace WeAreGladiators.VisualEvents
@@ -14,13 +13,15 @@ namespace WeAreGladiators.VisualEvents
         [SerializeField] private float projectileDestroyDelay;
 
         [Header("Movement Settings")]
-        [SerializeField] float movementSpeed = 10f;
-        [SerializeField] bool moveAsParabola = true;
+        [SerializeField]
+        private float movementSpeed = 10f;
+        [SerializeField] private bool moveAsParabola = true;
         [Tooltip("Determines the amount of parabola effect on the projectile. " +
             "A value of 0 means the projectile will travel in absolutely straight line from starting point to target.")]
         [Range(0, 0.5f)]
         [ShowIf("ShowMaxParabolaY")]
-        [SerializeField] float maxParabolaY = 0.25f;
+        [SerializeField]
+        private float maxParabolaY = 0.25f;
 
         [Header("Component References")]
         [SerializeField] private Rigidbody myRigidBody;
@@ -30,16 +31,21 @@ namespace WeAreGladiators.VisualEvents
         [SerializeField] private GameObject impactParticle; // Effect spawned when projectile hits a collider
         [SerializeField] private GameObject projectileParticle; // Effect attached to the gameobject as child
         [SerializeField] private GameObject muzzleParticle; // Effect instantly spawned when gameobject is spawned
+        private float baseY;
+        private Vector3 destination;
+        private bool destinationReached;
+        private float height;
+        private float initialDistanceX;
+        private float nextX;
+        private Action onImpactCallback;
+        private bool readyToMove;
 
-        Vector3 start;
-        Vector3 destination;
-        bool readyToMove = false;
-        bool destinationReached = false;
-        float initialDistanceX;
-        float nextX;
-        float baseY;
-        float height;
-        Action onImpactCallback;
+        private Vector3 start;
+
+        public bool ShowMaxParabolaY()
+        {
+            return moveAsParabola;
+        }
 
         // Setup + Initialization
         #region
@@ -54,7 +60,10 @@ namespace WeAreGladiators.VisualEvents
             start = startPos;
             destination = endPos;
             initialDistanceX = Mathf.Abs(destination.x - start.x);
-            if (initialDistanceX <= 0f) initialDistanceX = 0.01f;
+            if (initialDistanceX <= 0f)
+            {
+                initialDistanceX = 0.01f;
+            }
             this.onImpactCallback = onImpactCallback;
 
             // Set parent scale + sorting order
@@ -62,7 +71,7 @@ namespace WeAreGladiators.VisualEvents
             mySortingOrder = sortingOrder;
 
             // Create missle 
-            projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
+            projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation);
             projectileParticle.transform.parent = transform;
             SetSortingOrder(projectileParticle, sortingOrder);
             SetScale(projectileParticle, myScaleModifier);
@@ -70,7 +79,7 @@ namespace WeAreGladiators.VisualEvents
             // Create muzzle
             if (muzzleParticle)
             {
-                muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation) as GameObject;
+                muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation);
                 SetSortingOrder(muzzleParticle, sortingOrder);
                 SetScale(muzzleParticle, myScaleModifier);
                 Destroy(muzzleParticle, 1.5f); // 2nd parameter is lifetime of effect in seconds
@@ -81,8 +90,14 @@ namespace WeAreGladiators.VisualEvents
         }
         private void GetMyComponents()
         {
-            if (myRigidBody == null) myRigidBody = GetComponent<Rigidbody>();
-            if (mySphereCollider == null) mySphereCollider = transform.GetComponent<SphereCollider>();            
+            if (myRigidBody == null)
+            {
+                myRigidBody = GetComponent<Rigidbody>();
+            }
+            if (mySphereCollider == null)
+            {
+                mySphereCollider = transform.GetComponent<SphereCollider>();
+            }
         }
         private void SetSortingOrder(GameObject parent, int sortingOrder)
         {
@@ -113,36 +128,52 @@ namespace WeAreGladiators.VisualEvents
         }
         private void SetScale(GameObject parent, float scalePercentage)
         {
-            Debug.Log("SetScale() called for " + parent.name + ", scaling by " + scalePercentage.ToString());
+            Debug.Log("SetScale() called for " + parent.name + ", scaling by " + scalePercentage);
 
             // get current scale
             Vector3 originalScale = parent.transform.localScale;
-            Debug.Log(parent.name + " original scale: " + originalScale.x.ToString() + ", " + originalScale.y.ToString() + ", " + originalScale.z.ToString());
+            Debug.Log(parent.name + " original scale: " + originalScale.x + ", " + originalScale.y + ", " + originalScale.z);
 
             // calculate new scale
             Vector3 newScale = new Vector3(originalScale.x * scalePercentage, originalScale.y * scalePercentage, originalScale.z * scalePercentage);
 
             // set new scale
             parent.transform.localScale = newScale;
-            Debug.Log(parent.name + " new scale: " + parent.transform.localScale.x.ToString() + ", " + parent.transform.localScale.y.ToString() + ", " + parent.transform.localScale.z.ToString());
+            Debug.Log(parent.name + " new scale: " + parent.transform.localScale.x + ", " + parent.transform.localScale.y + ", " + parent.transform.localScale.z);
         }
+
         #endregion
 
         // Travel Logic
         #region
-       
+
         private void Update()
         {
-            if (readyToMove) MoveTowardsTarget();
+            if (readyToMove)
+            {
+                MoveTowardsTarget();
+            }
         }
         private void MoveTowardsTarget()
         {
-            if (destinationReached) return;
+            if (destinationReached)
+            {
+                return;
+            }
 
-            if (transform.position.x == destination.x) moveAsParabola = false;
+            if (transform.position.x == destination.x)
+            {
+                moveAsParabola = false;
+            }
 
-            if (moveAsParabola) MoveParabola();
-            else MoveNormally();
+            if (moveAsParabola)
+            {
+                MoveParabola();
+            }
+            else
+            {
+                MoveNormally();
+            }
 
             float vectorDistance = Vector2.Distance(transform.position, destination);
             if (transform.position == destination || vectorDistance <= 0.05f)
@@ -173,7 +204,7 @@ namespace WeAreGladiators.VisualEvents
         private void OnDestinationReached()
         {
             // Create impact / explosion
-            GameObject impactP = Instantiate(impactParticle, transform.position, Quaternion.identity) as GameObject;
+            GameObject impactP = Instantiate(impactParticle, transform.position, Quaternion.identity);
             SetSortingOrder(impactP, mySortingOrder);
             SetScale(impactP, myScaleModifier);
 
@@ -195,13 +226,12 @@ namespace WeAreGladiators.VisualEvents
             Destroy(impactP, 3.5f); // Destroy impact / explosion effect
             Destroy(gameObject, 10); // Destroy this script + gameobject
 
-            if (onImpactCallback != null) onImpactCallback.Invoke();
+            if (onImpactCallback != null)
+            {
+                onImpactCallback.Invoke();
+            }
         }
-        #endregion
 
-        public bool ShowMaxParabolaY()
-        {
-            return moveAsParabola;
-        }
+        #endregion
     }
 }

@@ -1,17 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Utilities;
+﻿using DG.Tweening;
 using TMPro;
-using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.Characters;
-using WeAreGladiators.Libraries;
 using WeAreGladiators.Items;
-using WeAreGladiators.TownFeatures;
+using WeAreGladiators.Libraries;
 using WeAreGladiators.RewardSystems;
-using System.Linq;
+using WeAreGladiators.TownFeatures;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UI
 {
@@ -19,36 +16,43 @@ namespace WeAreGladiators.UI
     {
         // Components + Properties
         #region
-        [Header("Core Panel Components")]
-        [SerializeField] Canvas rootCanvas;
-        [SerializeField] RectTransform mainPositioningRect;
-        [SerializeField] RectTransform[] transformsRebuilt;
-        [SerializeField] CanvasGroup mainCg;
-        [SerializeField] TextMeshProUGUI nameText;
-        [SerializeField] TextMeshProUGUI energyCostText;
-        [SerializeField] TextMeshProUGUI cooldownText;
-        [SerializeField] TextMeshProUGUI fatigueCostText;
-        [SerializeField] TextMeshProUGUI descriptionText;
 
-        [Header("Range Section Components")]      
-        [SerializeField] TextMeshProUGUI rangeText;
-        [SerializeField] TextMeshProUGUI plusText;
-        [SerializeField] TextMeshProUGUI auraText;
-        [SerializeField] GameObject visionIcon;
+        [Header("Core Panel Components")]
+        [SerializeField]
+        private Canvas rootCanvas;
+        [SerializeField] private RectTransform mainPositioningRect;
+        [SerializeField] private RectTransform[] transformsRebuilt;
+        [SerializeField] private CanvasGroup mainCg;
+        [SerializeField] private TextMeshProUGUI nameText;
+        [SerializeField] private TextMeshProUGUI energyCostText;
+        [SerializeField] private TextMeshProUGUI cooldownText;
+        [SerializeField] private TextMeshProUGUI fatigueCostText;
+        [SerializeField] private TextMeshProUGUI descriptionText;
+
+        [Header("Range Section Components")]
+        [SerializeField]
+        private TextMeshProUGUI rangeText;
+        [SerializeField] private TextMeshProUGUI plusText;
+        [SerializeField] private TextMeshProUGUI auraText;
+        [SerializeField] private GameObject visionIcon;
 
         [Header("Requirement Components")]
-        [SerializeField] GameObject requirementsParent;
-        [SerializeField] ModalDottedRow[] requirementRows;
-        [SerializeField] GameObject talentReqRowParent;
-        [SerializeField] Image[] talentReqImages;
-        [SerializeField] TextMeshProUGUI talentReqRowText;
+        [SerializeField]
+        private GameObject requirementsParent;
+        [SerializeField] private ModalDottedRow[] requirementRows;
+        [SerializeField] private GameObject talentReqRowParent;
+        [SerializeField] private Image[] talentReqImages;
+        [SerializeField] private TextMeshProUGUI talentReqRowText;
 
         [Header("Ability Type Components")]
-        [SerializeField] TextMeshProUGUI abilityTypeText;
+        [SerializeField]
+        private TextMeshProUGUI abilityTypeText;
+
         #endregion
 
         // Input
         #region
+
         public void OnCombatAbilityLootIconMousedOver(CombatLootIcon b)
         {
             FadeInPanel();
@@ -80,14 +84,24 @@ namespace WeAreGladiators.UI
             BuildPanelFromAbilityData(b.MyDataRef);
             TransformUtils.RebuildLayouts(transformsRebuilt);
             if (above)
+            {
                 PlacePanelAboveAbilityIcon(b);
-            else PlacePanelWestOfAbilityIcon(b);
+            }
+            else
+            {
+                PlacePanelWestOfAbilityIcon(b);
+            }
             TransformUtils.RebuildLayouts(transformsRebuilt);
             if (above)
+            {
                 PlacePanelAboveAbilityIcon(b);
-            else PlacePanelWestOfAbilityIcon(b);
+            }
+            else
+            {
+                PlacePanelWestOfAbilityIcon(b);
+            }
         }
-       
+
         public void OnAbilityBookItemMousedOver(InventoryItemView item)
         {
             FadeInPanel();
@@ -112,16 +126,17 @@ namespace WeAreGladiators.UI
             TransformUtils.RebuildLayouts(transformsRebuilt);
             PlacePanelOnLibraryAbilityDropSlotPosition(slot);
         }
-        
+
         public void OnAbilityButtonMousedExit()
         {
             HidePanel();
         }
-       
+
         #endregion
 
         // Show + Hide Logic
         #region
+
         private void FadeInPanel()
         {
             mainCg.DOKill();
@@ -163,7 +178,7 @@ namespace WeAreGladiators.UI
 
             mainPositioningRect.position = b.transform.position;
             mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x, mainPositioningRect.localPosition.y + yOffSet, 0);
-        }       
+        }
         private void PlacePanelOnInventoryItemPosition(InventoryItemView item)
         {
             mainPositioningRect.position = item.transform.position;
@@ -181,13 +196,14 @@ namespace WeAreGladiators.UI
         {
             mainPositioningRect.position = slot.transform.position;
             float xOffset = mainPositioningRect.rect.width / 2 + 80;
-            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x + xOffset, mainPositioningRect.localPosition.y + (slot.GetComponent<RectTransform>().rect.height / 2) - mainPositioningRect.rect.height, 0);
+            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x + xOffset, mainPositioningRect.localPosition.y + slot.GetComponent<RectTransform>().rect.height / 2 - mainPositioningRect.rect.height, 0);
         }
 
         #endregion
 
         // Setup + Build Individual Components
         #region
+
         private void BuildPanelFromAbilityData(AbilityData data)
         {
             BuildDescriptionText(data);
@@ -207,7 +223,9 @@ namespace WeAreGladiators.UI
         private void BuildRequirementsText(AbilityData data)
         {
             for (int i = 0; i < requirementRows.Length; i++)
+            {
                 requirementRows[i].gameObject.SetActive(false);
+            }
             requirementsParent.SetActive(false);
             int modalRowCount = 0;
 
@@ -215,13 +233,17 @@ namespace WeAreGladiators.UI
             {
                 DotStyle dotStyle = DotStyle.Neutral;
                 if (data.myCharacter != null && CharacterDataController.Instance.DoesCharacterHaveTalent(data.myCharacter.talentPairings, data.talentRequirementData.talentSchool, 1))
+                {
                     dotStyle = DotStyle.Green;
+                }
                 else if (data.myCharacter != null && !CharacterDataController.Instance.DoesCharacterHaveTalent(data.myCharacter.talentPairings, data.talentRequirementData.talentSchool, 1))
+                {
                     dotStyle = DotStyle.Red;
+                }
 
                 requirementsParent.SetActive(true);
                 requirementRows[modalRowCount].gameObject.SetActive(true);
-                requirementRows[modalRowCount].Build("Requires " + data.talentRequirementData.talentSchool.ToString() + " Talent", dotStyle);
+                requirementRows[modalRowCount].Build("Requires " + data.talentRequirementData.talentSchool + " Talent", dotStyle);
 
                 modalRowCount++;
             }
@@ -230,9 +252,13 @@ namespace WeAreGladiators.UI
             {
                 DotStyle dotStyle = DotStyle.Neutral;
                 if (data.myCharacter != null && AbilityController.Instance.DoesCharacterMeetAbilityWeaponRequirement(data.myCharacter.itemSet, data.weaponRequirement))
+                {
                     dotStyle = DotStyle.Green;
+                }
                 if (data.myCharacter != null && !AbilityController.Instance.DoesCharacterMeetAbilityWeaponRequirement(data.myCharacter.itemSet, data.weaponRequirement))
+                {
                     dotStyle = DotStyle.Red;
+                }
 
                 requirementsParent.SetActive(true);
                 requirementRows[modalRowCount].gameObject.SetActive(true);
@@ -243,13 +269,19 @@ namespace WeAreGladiators.UI
         private void BuildEnergyCostSection(AbilityData data)
         {
             energyCostText.text = data.energyCost.ToString();
-            if(data.myCharacter != null)
+            if (data.myCharacter != null)
             {
                 string col = TextLogic.brownBodyText;
                 int baseCost = data.energyCost;
                 int dynamicCost = AbilityController.Instance.GetAbilityActionPointCost(data.myCharacter, data);
-                if (baseCost > dynamicCost) col = TextLogic.lightGreen;
-                else if (baseCost < dynamicCost) col = TextLogic.lightRed;
+                if (baseCost > dynamicCost)
+                {
+                    col = TextLogic.lightGreen;
+                }
+                else if (baseCost < dynamicCost)
+                {
+                    col = TextLogic.lightRed;
+                }
                 energyCostText.text = TextLogic.ReturnColoredText(dynamicCost.ToString(), col);
             }
         }
@@ -273,7 +305,6 @@ namespace WeAreGladiators.UI
             auraText.gameObject.SetActive(false);
             visionIcon.SetActive(false);
 
-          
             if (data.abilityEffects[0] != null && data.abilityEffects[0].aoeType == AoeType.Aura)
             {
                 auraText.gameObject.SetActive(true);
@@ -288,7 +319,7 @@ namespace WeAreGladiators.UI
             {
                 rangeText.gameObject.SetActive(true);
                 rangeText.text = data.baseRange.ToString();
-            }            
+            }
         }
         private void BuildTalentRequirementSection(AbilityData data)
         {
@@ -310,15 +341,17 @@ namespace WeAreGladiators.UI
         private void SetTalentRequirementImages(Sprite s)
         {
             foreach (Image i in talentReqImages)
+            {
                 i.sprite = s;
+            }
         }
+
         #endregion
-                 
     }
 
     public enum PopupPositon
     {
         CharacterRoster = 0,
-        DraftCharacterSheet = 1,
+        DraftCharacterSheet = 1
     }
 }

@@ -1,9 +1,9 @@
 #if UNITY_EDITOR
-using UnityEngine;
-using UnityEditor;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities.Editor;
+using UnityEditor;
+using UnityEngine;
 using WeAreGladiators.Characters;
 
 namespace WeAreGladiators.Editor
@@ -11,11 +11,6 @@ namespace WeAreGladiators.Editor
 
     public class CharacterBackgroundEditor : OdinMenuEditorWindow
     {
-        [MenuItem("Tools/Hex Game Tools/Background Editor")]
-        private static void OpenWindow()
-        {
-            GetWindow<CharacterBackgroundEditor>().Show();
-        }
 
         private CreateNewBackgroundData createNewBackgroundData;
         protected override void OnDestroy()
@@ -27,10 +22,15 @@ namespace WeAreGladiators.Editor
                 DestroyImmediate(createNewBackgroundData.dataFile);
             }
         }
+        [MenuItem("Tools/Hex Game Tools/Background Editor")]
+        private static void OpenWindow()
+        {
+            GetWindow<CharacterBackgroundEditor>().Show();
+        }
 
         protected override OdinMenuTree BuildMenuTree()
         {
-            var tree = new OdinMenuTree();
+            OdinMenuTree tree = new OdinMenuTree();
 
             createNewBackgroundData = new CreateNewBackgroundData();
             tree.Add("Create New", new CreateNewBackgroundData());
@@ -41,7 +41,7 @@ namespace WeAreGladiators.Editor
 
         protected override void OnBeginDrawEditors()
         {
-            OdinMenuTreeSelection selected = this.MenuTree.Selection;
+            OdinMenuTreeSelection selected = MenuTree.Selection;
 
             SirenixEditorGUI.BeginHorizontalToolbar();
             {
@@ -72,15 +72,13 @@ namespace WeAreGladiators.Editor
             [Button("Create New Background")]
             public void CreateNewData()
             {
-                AssetDatabase.CreateAsset(dataFile, "Assets/SO Assets/Character Backgrounds/" + dataFile.backgroundType.ToString() + ".asset");
+                AssetDatabase.CreateAsset(dataFile, "Assets/SO Assets/Character Backgrounds/" + dataFile.backgroundType + ".asset");
                 AssetDatabase.SaveAssets();
 
                 // Create the SO 
                 dataFile = CreateInstance<BackgroundDataSO>();
             }
-
         }
-
     }
 }
 #endif

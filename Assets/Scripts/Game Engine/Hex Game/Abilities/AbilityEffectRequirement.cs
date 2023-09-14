@@ -1,11 +1,9 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+using Sirenix.OdinInspector;
 
 namespace WeAreGladiators.Abilities
 {
-    [System.Serializable]
+    [Serializable]
     public class AbilityEffectRequirement
     {
         public AbilityEffectRequirementType requirementType;
@@ -28,6 +26,6 @@ namespace WeAreGladiators.Abilities
         TargetHasPerk = 2,
         TargetDoesNotHavePerk = 3,
         CasterHasPerk = 4,
-        CasterDoesNotHavePerk = 5,
+        CasterDoesNotHavePerk = 5
     }
 }

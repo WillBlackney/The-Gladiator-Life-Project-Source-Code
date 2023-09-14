@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using TbsFramework.Pathfinding.Algorithms;
 using TbsFramework.Pathfinding.DataStructs;
-using WeAreGladiators.HexTiles;
+using UnityEngine;
 using WeAreGladiators.Characters;
+using WeAreGladiators.HexTiles;
 using WeAreGladiators.Perks;
 
 namespace WeAreGladiators.Pathfinding
@@ -13,19 +12,26 @@ namespace WeAreGladiators.Pathfinding
     {
         // Properties 
         #region
-        private static DPathfinder dijikstra = new DPathfinder();
+
+        private static readonly DPathfinder dijikstra = new DPathfinder();
+
         #endregion
 
         // Action Point + Fatigue Cost Logic
         #region
+
         public static int GetFatigueCostBetweenHexs(HexCharacterModel character, LevelNode start, LevelNode destination)
         {
             int cost = destination.BaseMoveFatigueCost;
             if (start.Elevation != destination.Elevation)
+            {
                 cost += 2;
+            }
 
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Pathfinder))
+            {
                 cost = 0;
+            }
 
             return cost;
         }
@@ -33,9 +39,11 @@ namespace WeAreGladiators.Pathfinding
         {
             int pathCost = 0;
             if (path.Count == 0)
+            {
                 return 0;
+            }
 
-            else if (path.Count == 1)
+            if (path.Count == 1)
             {
                 pathCost += GetFatigueCostBetweenHexs(character, start, path[0]);
             }
@@ -44,52 +52,68 @@ namespace WeAreGladiators.Pathfinding
                 List<LevelNode> fullPath = new List<LevelNode>();
                 fullPath.Add(start);
                 fullPath.AddRange(path);
-                for (int i = 0; i < fullPath.Count - 1; i++)                
-                    pathCost += GetFatigueCostBetweenHexs(character, fullPath[i], fullPath[i + 1]);                
+                for (int i = 0; i < fullPath.Count - 1; i++)
+                {
+                    pathCost += GetFatigueCostBetweenHexs(character, fullPath[i], fullPath[i + 1]);
+                }
             }
 
-            Debug.Log("Fatigue cost of path = " + pathCost.ToString());
+            Debug.Log("Fatigue cost of path = " + pathCost);
             return pathCost;
         }
         public static int GetActionPointCostBetweenHexs(HexCharacterModel character, LevelNode start, LevelNode destination)
         {
             int cost = destination.BaseMoveActionPointCost;
             if (start.Elevation != destination.Elevation)
+            {
                 cost += 1;
-            
+            }
+
             // Injuries
-            if(!PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FleshAscension))
+            if (!PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FleshAscension))
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BruisedLeg))
+                {
                     cost += 1;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.BrokenLeg))
+                {
                     cost += 2;
+                }
 
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.TornKneeLigament))
+                {
                     cost += 1;
-            }            
+                }
+            }
 
             if (cost > 2 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Pathfinder))
+            {
                 cost = 2;
+            }
 
             return cost;
-        }       
+        }
         public static int GetActionPointCostOfPath(HexCharacterModel character, LevelNode start, List<LevelNode> path)
         {
             int pathCost = 0;
             if (path.Count == 0)
-                return 0;
-
-            else if (path.Count == 1)
             {
-                if((PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Nimble) && character.tilesMovedThisTurn == 0)
-                   || PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Flight))
+                return 0;
+            }
+
+            if (path.Count == 1)
+            {
+                if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Nimble) && character.tilesMovedThisTurn == 0
+                    || PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Flight))
                 {
 
                 }
                 else
+                {
                     pathCost += GetActionPointCostBetweenHexs(character, start, path[0]);
+                }
             }
             else if (path.Count > 1)
             {
@@ -98,17 +122,19 @@ namespace WeAreGladiators.Pathfinding
                 fullPath.AddRange(path);
                 int freeMoves = 0;
                 if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Nimble) && character.tilesMovedThisTurn == 0)
+                {
                     freeMoves++;
+                }
                 freeMoves += PerkController.Instance.GetStackCountOfPerkOnCharacter(character.pManager, Perk.Flight);
 
                 for (int i = 0; i < fullPath.Count - 1; i++)
                 {
-                    if(i >= freeMoves)
+                    if (i >= freeMoves)
                     {
                         pathCost += GetActionPointCostBetweenHexs(character, fullPath[i], fullPath[i + 1]);
                     }
                 }
-                
+
                 /*
                 pathCost += GetEnergyCostBetweenHexs(character, start, path[0]);
                 for (int i = 0; i < path.Count - 1; i++)
@@ -118,15 +144,15 @@ namespace WeAreGladiators.Pathfinding
                 */
             }
 
-            Debug.Log("Energy cost of path = " + pathCost.ToString());
+            Debug.Log("Energy cost of path = " + pathCost);
             return pathCost;
-        }       
-     
+        }
+
         #endregion
 
         // Get Paths + Valid Destinations
         #region
-       
+
         public static Path GetValidPath(HexCharacterModel character, LevelNode start, LevelNode destination, List<LevelNode> allHexes)
         {
             // Simple way to get a path from A to B. If it is impossible to draw a path between A and B, 
@@ -160,7 +186,7 @@ namespace WeAreGladiators.Pathfinding
                     // Is the path between start/destination actually valid?
                     if (traversable &&
                         CanHexBeOccupied(key) &&
-                        GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentActionPoints 
+                        GetActionPointCostOfPath(character, start, hexsOnPath) <= character.currentActionPoints
                         /*GetFatigueCostOfPath(character, start, hexsOnPath) <= StatCalculator.GetTotalMaxFatigue(character) - character.currentFatigue*/)
                     {
                         pathReturned = new Path(start, hexsOnPath, character);
@@ -169,7 +195,7 @@ namespace WeAreGladiators.Pathfinding
                 }
             }
 
-            Debug.Log("PathFinder.GetPath() valid paths between " + start.PrintGridPosition() + " and " + destination.PrintGridPosition() + " = " + possiblePaths.Count.ToString());
+            Debug.Log("PathFinder.GetPath() valid paths between " + start.PrintGridPosition() + " and " + destination.PrintGridPosition() + " = " + possiblePaths.Count);
 
             return pathReturned;
         }
@@ -184,8 +210,8 @@ namespace WeAreGladiators.Pathfinding
                 validDestinations.Add(p.Destination);
             }
 
-            Debug.Log("Pathfinder.GetAllValidPathableDestinations() found " + validDestinations.Count.ToString() + " valid pathable destinations from start hex: " +
-                start.GridPosition.x.ToString() + ", " + start.GridPosition.y.ToString());
+            Debug.Log("Pathfinder.GetAllValidPathableDestinations() found " + validDestinations.Count + " valid pathable destinations from start hex: " +
+                start.GridPosition.x + ", " + start.GridPosition.y);
 
             return validDestinations;
         }
@@ -224,12 +250,13 @@ namespace WeAreGladiators.Pathfinding
                 }
             }
 
-            Debug.Log("Pathfinder.GetAllValidPathsFromStart() found " + pathsReturned.Count.ToString() + " valid paths from start hex " +
-                start.GridPosition.x.ToString() + ", " + start.GridPosition.y.ToString());
+            Debug.Log("Pathfinder.GetAllValidPathsFromStart() found " + pathsReturned.Count + " valid paths from start hex " +
+                start.GridPosition.x + ", " + start.GridPosition.y);
 
             return pathsReturned;
 
         }
+
         #endregion
 
         // Movement + Placement
@@ -244,28 +271,30 @@ namespace WeAreGladiators.Pathfinding
 
             hex.myCharacter = character;
             character.currentTile = hex;
-        }      
+        }
+
         #endregion
 
         // Misc
         #region
+
         private static Dictionary<LevelNode, Dictionary<LevelNode, float>> GetGraphEdges(HexCharacterModel character, List<LevelNode> cells)
         {
             Dictionary<LevelNode, Dictionary<LevelNode, float>> ret = new Dictionary<LevelNode, Dictionary<LevelNode, float>>();
 
-            foreach (var cell in cells)
+            foreach (LevelNode cell in cells)
             {
                 if (cell.Equals(character.currentTile) || IsHexTraversable(cell, character))
                 {
                     ret[cell] = new Dictionary<LevelNode, float>();
-                    foreach (var neighbour in cell.NeighbourNodes(cells))
+                    foreach (LevelNode neighbour in cell.NeighbourNodes(cells))
                     {
                         ret[cell][neighbour] = GetActionPointCostBetweenHexs(character, cell, neighbour);
                     }
                 }
             }
 
-            Debug.Log("GetGraphEdges() graph edges count: " + ret.Count.ToString());
+            Debug.Log("GetGraphEdges() graph edges count: " + ret.Count);
             return ret;
         }
 
@@ -273,6 +302,7 @@ namespace WeAreGladiators.Pathfinding
 
         // Combat Grid Bools And Checks
         #region
+
         public static bool IsPathValid(Path p)
         {
             // in future, may possible put more conditions here, so place holder for now
@@ -280,8 +310,7 @@ namespace WeAreGladiators.Pathfinding
             {
                 return true;
             }
-            else
-                return false;
+            return false;
         }
         public static bool CanHexBeOccupied(LevelNode hex)
         {
@@ -296,35 +325,41 @@ namespace WeAreGladiators.Pathfinding
             // NOTE: characters can move through allies: if enemy or obstruction on tile, should return false, else true
 
             if (hex.Obstructed)
+            {
                 return false;
+            }
 
             //else 
             if (hex.myCharacter != null)
             {
                 // Characters can move over and through allies
-                if (HexCharacterController.Instance.GetAllAlliesOfCharacter(mover).Contains(hex.myCharacter))                
-                    return true;                
-                else return false;
+                if (HexCharacterController.Instance.GetAllAlliesOfCharacter(mover).Contains(hex.myCharacter))
+                {
+                    return true;
+                }
+                return false;
             }
 
-            else return true;
-            
+            return true;
+
         }
         public static bool IsHexSpawnable(LevelNode hex)
         {
-            return hex.myCharacter == null && hex.Obstructed == false; 
+            return hex.myCharacter == null && hex.Obstructed == false;
         }
-        #endregion        
+
+        #endregion
 
         // Dijisktra Logic
         #region
+
         private static Dictionary<LevelNode, List<LevelNode>> GetDijisktraPaths(HexCharacterModel character, LevelNode start, List<LevelNode> cells)
         {
-            var edges = GetGraphEdges(character, cells);
-            var paths = dijikstra.FindAllPaths(edges, start);
+            Dictionary<LevelNode, Dictionary<LevelNode, float>> edges = GetGraphEdges(character, cells);
+            Dictionary<LevelNode, List<LevelNode>> paths = dijikstra.FindAllPaths(edges, start);
             return paths;
         }
-       
+
         #endregion
 
     }
@@ -342,11 +377,11 @@ namespace WeAreGladiators.Pathfinding
 
             while (frontier.Count != 0)
             {
-                var current = frontier.Dequeue();
-                var neighbours = GetNeigbours(edges, current);
-                foreach (var neighbour in neighbours)
+                LevelNode current = frontier.Dequeue();
+                List<LevelNode> neighbours = GetNeigbours(edges, current);
+                foreach (LevelNode neighbour in neighbours)
                 {
-                    var newCost = costSoFar[current] + edges[current][neighbour];
+                    float newCost = costSoFar[current] + edges[current][neighbour];
                     if (!costSoFar.ContainsKey(neighbour) || newCost < costSoFar[neighbour])
                     {
                         costSoFar[neighbour] = newCost;
@@ -360,7 +395,7 @@ namespace WeAreGladiators.Pathfinding
             foreach (LevelNode destination in cameFrom.Keys)
             {
                 List<LevelNode> path = new List<LevelNode>();
-                var current = destination;
+                LevelNode current = destination;
                 while (!current.Equals(originNode))
                 {
                     path.Add(current);
@@ -382,11 +417,11 @@ namespace WeAreGladiators.Pathfinding
 
             while (frontier.Count != 0)
             {
-                var current = frontier.Dequeue();
-                var neighbours = GetNeigbours(edges, current);
-                foreach (var neighbour in neighbours)
+                T current = frontier.Dequeue();
+                List<T> neighbours = GetNeigbours(edges, current);
+                foreach (T neighbour in neighbours)
                 {
-                    var newCost = costSoFar[current] + edges[current][neighbour];
+                    float newCost = costSoFar[current] + edges[current][neighbour];
                     if (!costSoFar.ContainsKey(neighbour) || newCost < costSoFar[neighbour])
                     {
                         costSoFar[neighbour] = newCost;
@@ -394,18 +429,23 @@ namespace WeAreGladiators.Pathfinding
                         frontier.Enqueue(neighbour, newCost);
                     }
                 }
-                if (current.Equals(destinationNode)) break;
+                if (current.Equals(destinationNode))
+                {
+                    break;
+                }
             }
             List<T> path = new List<T>();
             if (!cameFrom.ContainsKey(destinationNode))
+            {
                 return path;
+            }
 
             path.Add(destinationNode);
-            var temp = destinationNode;
+            T temp = destinationNode;
 
             while (!cameFrom[temp].Equals(originNode))
             {
-                var currentPathElement = cameFrom[temp];
+                T currentPathElement = cameFrom[temp];
                 path.Add(currentPathElement);
 
                 temp = currentPathElement;
@@ -466,7 +506,7 @@ namespace WeAreGladiators.Pathfinding
                     n.PrintGridPosition();
                 }
             }
-            
+
             return paths;
         }
         public override List<T> FindPath<T>(Dictionary<T, Dictionary<T, float>> edges, T originNode, T destinationNode)

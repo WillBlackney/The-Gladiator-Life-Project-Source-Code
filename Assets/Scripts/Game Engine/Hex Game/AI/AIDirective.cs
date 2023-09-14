@@ -1,13 +1,12 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace WeAreGladiators.AI
 {
-    [System.Serializable]
-    public class AIDirective 
-    {        
+    [Serializable]
+    public class AIDirective
+    {
         public AIAction action;
         [Header("Requirements + Conditions")]
         [LabelWidth(150)]

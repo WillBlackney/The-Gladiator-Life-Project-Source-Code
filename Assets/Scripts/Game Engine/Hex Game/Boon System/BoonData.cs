@@ -1,44 +1,25 @@
-using WeAreGladiators.UI;
-using WeAreGladiators.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.Boons
 {
     public class BoonData
     {
+        public string boonDisplayName;
+        public List<ModalDotRowBuildData> boonEffectDescriptions;
         private Sprite boonSprite;
         public BoonTag boonTag;
-        public string boonDisplayName;
-        public BoonDurationType durationType;
-        public int minDuration = 1;
-        public int maxDuration = 1;
-        public string italicDescription;
-        public List<KeyWordModel> keyWordModels;       
-        public List<ModalDotRowBuildData> boonEffectDescriptions;
         public int currentTimerStacks;
-
-        public Sprite BoonSprite
-        {
-            get
-            {
-                if (boonSprite == null)
-                {
-                    boonSprite = GetMySprite();
-                    return boonSprite;
-                }
-                else
-                    return boonSprite;
-            }
-        }
-
-        private Sprite GetMySprite()
-        {
-            return BoonController.Instance.GetBoonDataByTag(boonTag).boonSprite;
-        }
+        public BoonDurationType durationType;
+        public string italicDescription;
+        public List<KeyWordModel> keyWordModels;
+        public int maxDuration = 1;
+        public int minDuration = 1;
 
         /// <summary>
-        /// Create from scriptable object equivalent
+        ///     Create from scriptable object equivalent
         /// </summary>
         /// <param name="data"></param>
         /// <param name="currentTimerStacks"></param>
@@ -55,17 +36,21 @@ namespace WeAreGladiators.Boons
 
             // Keyword Model Data
             keyWordModels = new List<KeyWordModel>();
-            foreach (KeyWordModel kwdm in data.keyWordModels)            
-                keyWordModels.Add(ObjectCloner.CloneJSON(kwdm));
+            foreach (KeyWordModel kwdm in data.keyWordModels)
+            {
+                keyWordModels.Add(kwdm.CloneJSON());
+            }
 
             // Effect descriptions
             boonEffectDescriptions = new List<ModalDotRowBuildData>();
             foreach (ModalDotRowBuildData cs in data.boonEffectDescriptions)
-                boonEffectDescriptions.Add(ObjectCloner.CloneJSON(cs));
+            {
+                boonEffectDescriptions.Add(cs.CloneJSON());
+            }
         }
 
         /// <summary>
-        /// Clone from another BoonData
+        ///     Clone from another BoonData
         /// </summary>
         /// <param name="original"></param>
         public BoonData(BoonData original)
@@ -82,20 +67,42 @@ namespace WeAreGladiators.Boons
             // Keyword Model Data
             keyWordModels = new List<KeyWordModel>();
             foreach (KeyWordModel kwdm in original.keyWordModels)
-                keyWordModels.Add(ObjectCloner.CloneJSON(kwdm));
+            {
+                keyWordModels.Add(kwdm.CloneJSON());
+            }
 
             // Effect descriptions
             boonEffectDescriptions = new List<ModalDotRowBuildData>();
             foreach (ModalDotRowBuildData cs in original.boonEffectDescriptions)
-                boonEffectDescriptions.Add(ObjectCloner.CloneJSON(cs));
+            {
+                boonEffectDescriptions.Add(cs.CloneJSON());
+            }
         }
 
         /// <summary>
-        /// Empty constructor
+        ///     Empty constructor
         /// </summary>
         public BoonData()
         {
 
+        }
+
+        public Sprite BoonSprite
+        {
+            get
+            {
+                if (boonSprite == null)
+                {
+                    boonSprite = GetMySprite();
+                    return boonSprite;
+                }
+                return boonSprite;
+            }
+        }
+
+        private Sprite GetMySprite()
+        {
+            return BoonController.Instance.GetBoonDataByTag(boonTag).boonSprite;
         }
     }
 }

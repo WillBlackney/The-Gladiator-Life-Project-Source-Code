@@ -1,14 +1,13 @@
+using System;
+using Sirenix.OdinInspector;
+using UnityEngine;
 using WeAreGladiators.Boons;
 using WeAreGladiators.Characters;
 using WeAreGladiators.Items;
-using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace WeAreGladiators.StoryEvents
 {
-    [System.Serializable]
+    [Serializable]
     public class StoryChoiceEffect
     {
         // General Fields
@@ -16,12 +15,11 @@ namespace WeAreGladiators.StoryEvents
         [LabelWidth(150)]
         public StoryChoiceEffectType effectType;
         [Space(10)]
-
         [Header("Target Settings")]
         [ShowIf("ShowCharacterTargetIndex")]
         [LabelWidth(150)]
         [Range(0, 9)]
-        public int characterTargetIndex = 0;
+        public int characterTargetIndex;
         [Space(10)]
 
         // Load page fields
@@ -41,7 +39,7 @@ namespace WeAreGladiators.StoryEvents
         public CharacterBackground backgroundAddedToTavern;
 
         [ShowIf("ShowRecruitFields")]
-        [Range(0,5)]
+        [Range(0, 5)]
         [LabelWidth(200)]
         public int totalCharactersAddedToTavern;
 
@@ -78,7 +76,7 @@ namespace WeAreGladiators.StoryEvents
 
         [ShowIf("ShowExperienceGained")]
         [LabelWidth(150)]
-        public int experienceGained = 0;
+        public int experienceGained;
 
         [ShowIf("ShowCharacterJoining")]
         [LabelWidth(150)]
@@ -92,15 +90,15 @@ namespace WeAreGladiators.StoryEvents
 
         [ShowIf("ShowStressRecoverySettings")]
         [LabelWidth(150)]
-        public int stressRecoveredMin = 0;
+        public int stressRecoveredMin;
 
         [ShowIf("ShowStressRecoverySettings")]
         [LabelWidth(150)]
-        public int stressRecoveredMax = 0;
+        public int stressRecoveredMax;
 
         [ShowIf("ShowHealthLost")]
         [LabelWidth(150)]
-        [Range(0.01f,1f)]
+        [Range(0.01f, 1f)]
         public float healthLostPercentage = 0.5f;
 
         [ShowIf("ShowWageIncreasePercentage")]
@@ -113,7 +111,8 @@ namespace WeAreGladiators.StoryEvents
         [Range(0, 100)]
         public int characterLeaveProbability = 50;
 
-        #region Odin Show Ifs  
+        #region Odin Show Ifs
+
         public bool ShowCharacterLeaveProbability()
         {
             return effectType == StoryChoiceEffectType.CharactersLeave;
@@ -140,7 +139,7 @@ namespace WeAreGladiators.StoryEvents
         }
         public bool ShowCharacterTargetIndex()
         {
-            return effectType == StoryChoiceEffectType.CharacterKilled || 
+            return effectType == StoryChoiceEffectType.CharacterKilled ||
                 effectType == StoryChoiceEffectType.GainPerk ||
                 effectType == StoryChoiceEffectType.GainRandomInjury ||
                 effectType == StoryChoiceEffectType.GainExperience ||
@@ -150,7 +149,7 @@ namespace WeAreGladiators.StoryEvents
         {
             return effectType == StoryChoiceEffectType.GainExperience;
         }
-        public bool ShowCharacterJoining()  
+        public bool ShowCharacterJoining()
         {
             return effectType == StoryChoiceEffectType.CharacterJoinsRoster;
         }
@@ -189,15 +188,15 @@ namespace WeAreGladiators.StoryEvents
         {
             return effectType == StoryChoiceEffectType.AddRecruitsToTavern;
         }
-        #endregion
 
+        #endregion
     }
 
-    [System.Serializable]
+    [Serializable]
     public class StoryChoiceEffectSet
     {
-        [Range(0,100)]
-        public int lowerProbability = 0;
+        [Range(0, 100)]
+        public int lowerProbability;
         [Range(0, 100)]
         public int upperProbability = 100;
         public StoryChoiceEffect[] effects;
@@ -224,6 +223,6 @@ namespace WeAreGladiators.StoryEvents
         RecoverStressAll = 17,
         GainStressAll = 18,
         IncreaseDailyWageAll = 19,
-        CharactersLeave = 20,
+        CharactersLeave = 20
     }
 }

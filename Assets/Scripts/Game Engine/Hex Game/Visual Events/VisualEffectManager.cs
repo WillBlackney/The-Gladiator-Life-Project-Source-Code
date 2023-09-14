@@ -1,18 +1,31 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
-using WeAreGladiators.Utilities;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Libraries;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.VisualEvents
 {
     public class VisualEffectManager : Singleton<VisualEffectManager>
     {
+
+        // MISC
+        #region
+
+        public void CreateToxicRain()
+        {
+            Debug.Log("VisualEffectManager.CreateToxicRain() called...");
+            GameObject hn = Instantiate(toxicRain, new Vector3(0, 7, 0), toxicRain.transform.rotation);
+            ToonEffect teScript = hn.GetComponent<ToonEffect>();
+            teScript.InitializeSetup(0, 1);
+        }
+
+        #endregion
         // Prefabs, Components And Properties
         #region
+
         [Header("Screen Overlay Components + Properties")]
         public GameObject edgeOverlayParent;
         public CanvasGroup edgeOverlayCg;
@@ -90,9 +103,10 @@ namespace WeAreGladiators.VisualEvents
 
         // CORE FUNCTIONS
         #region
+
         public void CreateEffectAtLocation(ParticleEffect effect, Vector3 location)
         {
-            Debug.Log("VisualEffectManager.CreateEffectAtLocation() called, effect: " + effect.ToString());
+            Debug.Log("VisualEffectManager.CreateEffectAtLocation() called, effect: " + effect);
 
             if (effect == ParticleEffect.None)
             {
@@ -275,10 +289,12 @@ namespace WeAreGladiators.VisualEvents
                 ShootCrossbowBolt(start, end, cData);
             }
         }
+
         #endregion
 
         // SCREEN OVERLAY LOGIC
         #region
+
         public void DoScreenOverlayEffect(ScreenOverlayType type, ScreenOverlayColor color, float duration, float fadeInDuration, float fadeOutDuration)
         {
             StartCoroutine(DoScreenOverlayEffectCoroutine(type, color, duration, fadeInDuration, fadeOutDuration));
@@ -315,10 +331,12 @@ namespace WeAreGladiators.VisualEvents
             yield return new WaitForSeconds(fadeOutDuration);
 
         }
+
         #endregion
 
         // CARD FX
         #region
+
         // Glow Trail
         public ToonEffect CreateYellowGlowTrailEffect(Vector3 location, int sortingOrderBonus = 15, float scaleModifier = 1f)
         {
@@ -349,13 +367,14 @@ namespace WeAreGladiators.VisualEvents
                 AudioManager.Instance.PlaySound(Sound.Explosion_Fire_1);
             }
         }
+
         #endregion
 
         // GENERAL FX
         #region
 
         // Damage Text Value Effect
-        
+
         public void CreateDamageTextEffect(Vector3 location, int damageAmount, bool crit = false, bool heal = false)
         {
             GameObject damageEffect = Instantiate(DamageEffectPrefab, location, Quaternion.identity);
@@ -376,8 +395,14 @@ namespace WeAreGladiators.VisualEvents
             // Randomize position
             float randY = RandomGenerator.NumberBetween(1, 35) / 100f;
             float randX = RandomGenerator.NumberBetween(1, 85) / 100f;
-            if (RandomGenerator.NumberBetween(0, 1) == 0) randY = -randY;
-            if (RandomGenerator.NumberBetween(0, 1) == 0) randX = -randX;
+            if (RandomGenerator.NumberBetween(0, 1) == 0)
+            {
+                randY = -randY;
+            }
+            if (RandomGenerator.NumberBetween(0, 1) == 0)
+            {
+                randX = -randX;
+            }
             sr.transform.position = new Vector3(sr.transform.position.x + randX, sr.transform.position.y + randY, sr.transform.position.z);
             sr.sprite = s;
 
@@ -385,7 +410,6 @@ namespace WeAreGladiators.VisualEvents
             sr.DOFade(0, 0);
             sr.DOFade(0.75f, 1);
         }
-
 
         // Status Text Effect
         public void CreateStatusEffect(Vector3 location, string statusEffectName, Sprite iconSprite = null, StatusFrameType frameType = StatusFrameType.None)
@@ -420,9 +444,8 @@ namespace WeAreGladiators.VisualEvents
             BuffEffect teScript = hn.GetComponent<BuffEffect>();
             teScript.InitializeSetup(location, sortingOrderBonus);
         }
+
         #endregion
-
-
 
         // PROJECTILES
         #region
@@ -437,7 +460,7 @@ namespace WeAreGladiators.VisualEvents
         {
             Projectile projectileScript = Instantiate(crossbowBolt, startPos, Quaternion.identity).GetComponent<Projectile>();
             projectileScript.Initialize(startPos, endPos, () => cData.MarkAsCompleted());
-        } 
+        }
         private void ShootJavelin(Vector3 startPos, Vector3 endPos, TaskTracker cData)
         {
             Projectile projectileScript = Instantiate(javelin, startPos, Quaternion.identity).GetComponent<Projectile>();
@@ -461,7 +484,10 @@ namespace WeAreGladiators.VisualEvents
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
                 AudioManager.Instance.PlaySound(Sound.Explosion_Fire_1);
-                if (cData != null) cData.MarkAsCompleted();
+                if (cData != null)
+                {
+                    cData.MarkAsCompleted();
+                }
             });
         }
         private void ShootShadowBall(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
@@ -471,7 +497,10 @@ namespace WeAreGladiators.VisualEvents
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
                 //AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Shadow_1);
-                if (cData != null) cData.MarkAsCompleted();
+                if (cData != null)
+                {
+                    cData.MarkAsCompleted();
+                }
             });
         }
         private void ShootPoisonBall(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
@@ -480,8 +509,11 @@ namespace WeAreGladiators.VisualEvents
             ToonProjectile tsScript = Instantiate(poisonBall, startPos, poisonBall.transform.rotation).GetComponent<ToonProjectile>();
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
-               // AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Poison_1);
-                if (cData != null) cData.MarkAsCompleted();
+                // AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Poison_1);
+                if (cData != null)
+                {
+                    cData.MarkAsCompleted();
+                }
             });
         }
         private void ShootLightningBall(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
@@ -491,7 +523,10 @@ namespace WeAreGladiators.VisualEvents
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
                 //AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Lightning_1);
-                if (cData != null) cData.MarkAsCompleted();
+                if (cData != null)
+                {
+                    cData.MarkAsCompleted();
+                }
             });
         }
         private void ShootHolyBall(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
@@ -499,7 +534,10 @@ namespace WeAreGladiators.VisualEvents
             ToonProjectile tsScript = Instantiate(holyBall, startPos, holyBall.transform.rotation).GetComponent<ToonProjectile>();
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
-                if (cData != null) cData.MarkAsCompleted();
+                if (cData != null)
+                {
+                    cData.MarkAsCompleted();
+                }
             });
         }
         private void ShootFrostBall(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 0.7f)
@@ -507,19 +545,26 @@ namespace WeAreGladiators.VisualEvents
             ToonProjectile tsScript = Instantiate(frostBall, startPos, frostBall.transform.rotation).GetComponent<ToonProjectile>();
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
-                if (cData != null) cData.MarkAsCompleted();
+                if (cData != null)
+                {
+                    cData.MarkAsCompleted();
+                }
             });
         }
         private void ShootFireMeteor(Vector3 startPos, Vector3 endPos, TaskTracker cData, int sortingOrderBonus = 15, float scaleModifier = 3f)
         {
-           // AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Fireball_Fired);
+            // AudioManager.Instance.PlaySoundPooled(Sound.Projectile_Fireball_Fired);
             ToonProjectile tsScript = Instantiate(fireMeteor, startPos, fireMeteor.transform.rotation).GetComponent<ToonProjectile>();
             tsScript.Initialize(sortingOrderBonus, scaleModifier, startPos, endPos, () =>
             {
                 AudioManager.Instance.PlaySound(Sound.Explosion_Fire_1);
-                if (cData != null) cData.MarkAsCompleted();
+                if (cData != null)
+                {
+                    cData.MarkAsCompleted();
+                }
             });
         }
+
         #endregion
 
         // APPLY BUFF + DEBUFF FX
@@ -560,10 +605,12 @@ namespace WeAreGladiators.VisualEvents
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
         }
+
         #endregion
 
         // MELEE ATTACK VFX
         #region
+
         // Small Melee Impact
         public void CreateSmallMeleeImpact(Vector3 location, int sortingOrderBonus = 15, float scaleModifier = 1f)
         {
@@ -581,6 +628,7 @@ namespace WeAreGladiators.VisualEvents
             BuffEffect teScript = hn.GetComponent<BuffEffect>();
             teScript.InitializeSetup(location, sortingOrderBonus);
         }
+
         #endregion
 
         // EXPLOSIONS
@@ -660,10 +708,12 @@ namespace WeAreGladiators.VisualEvents
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
             //AudioManager.Instance.PlaySound(Sound.Passive_General_Debuff);
         }
+
         #endregion
 
         // NOVAS
         #region
+
         // Fire Nova
         public void CreateFireNova(Vector3 location, int sortingOrderBonus = 15, float scaleModifier = 1f)
         {
@@ -711,10 +761,12 @@ namespace WeAreGladiators.VisualEvents
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
         }
+
         #endregion
 
         // RITUAL CIRCLES
         #region
+
         public void CreateRitualCircleYellow(Vector3 location, int sortingOrderBonus = 5, float scaleModifier = 1f)
         {
             GameObject hn = Instantiate(ritualCircleYellow, location, ritualCircleYellow.transform.rotation);
@@ -727,19 +779,7 @@ namespace WeAreGladiators.VisualEvents
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
         }
+
         #endregion
-
-        // MISC
-        #region
-        public void CreateToxicRain()
-        {
-            Debug.Log("VisualEffectManager.CreateToxicRain() called...");
-            GameObject hn = Instantiate(toxicRain, new Vector3(0,7,0), toxicRain.transform.rotation);
-            ToonEffect teScript = hn.GetComponent<ToonEffect>();
-            teScript.InitializeSetup(0, 1);
-        }
-        #endregion
-
-
     }
 }

@@ -1,8 +1,7 @@
-using WeAreGladiators.Utilities;
-using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UI
 {
@@ -11,6 +10,7 @@ namespace WeAreGladiators.UI
     {
         // Properties
         #region
+
         [Header("Properties")]
         public KeyWordType kewWordType;
 
@@ -26,10 +26,12 @@ namespace WeAreGladiators.UI
         [ShowIf("ShowSprite")]
         [PreviewField(75)]
         public Sprite sprite;
+
         #endregion
 
         // Odin Show if's
         #region
+
         public bool ShowSprite()
         {
             return useSprite;
@@ -44,11 +46,9 @@ namespace WeAreGladiators.UI
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
+
         #endregion
     }
 }

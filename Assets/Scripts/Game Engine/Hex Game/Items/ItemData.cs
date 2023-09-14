@@ -1,15 +1,14 @@
-﻿using WeAreGladiators.Abilities;
-using WeAreGladiators.Audio;
-using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Audio;
 
 namespace WeAreGladiators.Items
 {
     public class ItemData
     {
         #region Properties
+
         // Core Properties
         public string itemName;
         private Sprite itemSprite;
@@ -43,11 +42,13 @@ namespace WeAreGladiators.Items
         public ItemEffectSet[] itemEffectSets;
 
         public Sound swingSFX = Sound.None;
-        public Sound hitSFX = Sound.None; 
+        public Sound hitSFX = Sound.None;
         public Sound equipSFX = Sound.None;
+
         #endregion
 
         #region Getters + Accessors
+
         public Sprite ItemSprite
         {
             get
@@ -57,10 +58,7 @@ namespace WeAreGladiators.Items
                     itemSprite = GetMySprite();
                     return itemSprite;
                 }
-                else
-                {
-                    return itemSprite;
-                }
+                return itemSprite;
             }
         }
         private Sprite GetMySprite()
@@ -77,36 +75,26 @@ namespace WeAreGladiators.Items
             }
 
             if (s == null)
+            {
                 Debug.LogWarning("ItemData.GetMySprite() could not sprite for item " + itemName + ", returning null...");
-
+            }
 
             return s;
         }
+
         #endregion
 
         #region Misc
-        public bool IsMeleeWeapon
-        {
-            get
-            {
-                return
-                weaponClass != WeaponClass.None &&
-                weaponClass != WeaponClass.Holdable &&
-                weaponClass != WeaponClass.ThrowingNet &&                
-                weaponClass != WeaponClass.Shield &&
-                weaponClass != WeaponClass.Bow &&
-                weaponClass != WeaponClass.Crossbow;
-            }
-        }
-        public bool IsRangedWeapon
-        {
-            get
-            {
-                return
-                weaponClass == WeaponClass.Bow ||
-                weaponClass == WeaponClass.Crossbow;
-            }
-        }
+
+        public bool IsMeleeWeapon => weaponClass != WeaponClass.None &&
+            weaponClass != WeaponClass.Holdable &&
+            weaponClass != WeaponClass.ThrowingNet &&
+            weaponClass != WeaponClass.Shield &&
+            weaponClass != WeaponClass.Bow &&
+            weaponClass != WeaponClass.Crossbow;
+        public bool IsRangedWeapon => weaponClass == WeaponClass.Bow ||
+            weaponClass == WeaponClass.Crossbow;
+
         #endregion
     }
 }

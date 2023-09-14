@@ -1,46 +1,17 @@
-﻿using UnityEngine;
-using System.Collections;
-using DG.Tweening;
-using WeAreGladiators.RewardSystems;
+﻿using DG.Tweening;
+using UnityEngine;
 using WeAreGladiators.CameraSystems;
+using WeAreGladiators.RewardSystems;
 
 namespace WeAreGladiators.Cards
 {
     public class Draggable : MonoBehaviour
     {
-        // Properties + Component References
-        #region
-        // a flag to know if we are currently dragging this GameObject
-        private bool dragging = false;
-        private bool lockedOn = false;
-
-        // distance from the center of this Game Object to the point where we clicked to start dragging 
-        private Vector3 pointerDisplacement;
-
-        // distance from camera to mouse on Z axis 
-        private float zDisplacement;
-
-        // reference to DraggingActions script. Dragging Actions should be attached to the same GameObject.
-        [SerializeField] private DraggingActions da;
-
-        // STATIC property that returns the instance of Draggable that is currently being dragged
-        private static Draggable _draggingThis;
-        public static Draggable DraggingThis
-        {
-            get { return _draggingThis; }
-        }
-
-        public DraggingActions Da
-        {
-            get { return da; }
-            private set { da = value; }
-        }
-
-        #endregion
 
         // Follow Mouse Logic
         #region
-        void Update()
+
+        private void Update()
         {
 
             if (dragging && !lockedOn && Da is DragSpellNoTarget)
@@ -52,7 +23,9 @@ namespace WeAreGladiators.Cards
                 da.OnDraggingInUpdate();
 
                 if (transform.position == mousePos)
+                {
                     lockedOn = true;
+                }
             }
             else if (dragging && lockedOn && Da is DragSpellNoTarget)
             {
@@ -61,24 +34,55 @@ namespace WeAreGladiators.Cards
                 da.OnDraggingInUpdate();
             }
         }
+
+        #endregion
+        // Properties + Component References
+        #region
+
+        // a flag to know if we are currently dragging this GameObject
+        private bool dragging;
+        private bool lockedOn;
+
+        // distance from the center of this Game Object to the point where we clicked to start dragging 
+        private Vector3 pointerDisplacement;
+
+        // distance from camera to mouse on Z axis 
+        private float zDisplacement;
+
+        // reference to DraggingActions script. Dragging Actions should be attached to the same GameObject.
+        [SerializeField] private DraggingActions da;
+
+        // STATIC property that returns the instance of Draggable that is currently being dragged
+        public static Draggable DraggingThis { get; private set; }
+
+        public DraggingActions Da
+        {
+            get => da;
+            private set => da = value;
+        }
+
         #endregion
 
         // Input Hooks
         #region
+
         public void TriggerOnMouseDown()
         {
             OnMouseDown();
         }
         public void TriggerOnMouseUp(bool forceFailure = false)
         {
-            if (RewardController.Instance.LootScreenIsActive()) return;
+            if (RewardController.Instance.LootScreenIsActive())
+            {
+                return;
+            }
 
             if (dragging)
             {
                 dragging = false;
                 // turn all previews back on
                 HoverPreview.PreviewsAllowed = true;
-                _draggingThis = null;
+                DraggingThis = null;
                 da.OnEndDrag(forceFailure);
             }
 
@@ -102,7 +106,7 @@ namespace WeAreGladiators.Cards
                     da.OnEndDrag(forceFailure);
                 }
             }
-            
+
             else if (GlobalSettings.Instance.deviceMode == DeviceMode.Mobile)
             {
                 if (dragging)
@@ -119,9 +123,12 @@ namespace WeAreGladiators.Cards
             }
             */
         }
-        void OnMouseDown()
+        private void OnMouseDown()
         {
-            if (RewardController.Instance.LootScreenIsActive()) return;
+            if (RewardController.Instance.LootScreenIsActive())
+            {
+                return;
+            }
 
             if (da != null && da.CanDrag)
             {
@@ -129,7 +136,7 @@ namespace WeAreGladiators.Cards
                 dragging = true;
                 // when we are dragging something, all previews should be off
                 HoverPreview.PreviewsAllowed = false;
-                _draggingThis = this;
+                DraggingThis = this;
                 da.OnStartDrag();
                 zDisplacement = -CameraController.Instance.MainCamera.transform.position.z + transform.position.z;
                 pointerDisplacement = -transform.position + MouseInWorldCoords();
@@ -140,7 +147,7 @@ namespace WeAreGladiators.Cards
             {
                 CardController.Instance.HandleChooseScreenCardSelection(da.CardVM().card);
             }
-            
+
 
             if (da != null && da.CanDrag)
             {
@@ -159,16 +166,19 @@ namespace WeAreGladiators.Cards
             */
         }
 
-        void OnMouseUp()
+        private void OnMouseUp()
         {
-            if (RewardController.Instance.LootScreenIsActive()) return;
+            if (RewardController.Instance.LootScreenIsActive())
+            {
+                return;
+            }
 
             if (dragging)
             {
                 dragging = false;
                 // turn all previews back on
                 HoverPreview.PreviewsAllowed = true;
-                _draggingThis = null;
+                DraggingThis = null;
                 da.OnEndDrag();
             }
 
@@ -209,7 +219,7 @@ namespace WeAreGladiators.Cards
             */
         }
 
-        void OnMouseOver()
+        private void OnMouseOver()
         {
             /*
             if (GlobalSettings.Instance.deviceMode == DeviceMode.Mobile &&
@@ -275,13 +285,15 @@ namespace WeAreGladiators.Cards
             }
             */
         }
+
         #endregion
 
         // Misc Functions
         #region
+
         private Vector3 MouseInWorldCoords()
         {
-            var screenMousePos = Input.mousePosition;
+            Vector3 screenMousePos = Input.mousePosition;
             screenMousePos.z = zDisplacement;
             return CameraController.Instance.MainCamera.ScreenToWorldPoint(screenMousePos);
         }
@@ -292,7 +304,7 @@ namespace WeAreGladiators.Cards
             return CameraController.Instance.MainCamera.ScreenToWorldPoint(screenMousePos);
 
         }
-        #endregion
 
+        #endregion
     }
 }

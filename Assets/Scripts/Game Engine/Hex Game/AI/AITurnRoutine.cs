@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
 namespace WeAreGladiators.AI
 {
-    [System.Serializable]
-    public class AITurnRoutine 
+    [Serializable]
+    public class AITurnRoutine
     {
         public AIDirective[] directives;
     }

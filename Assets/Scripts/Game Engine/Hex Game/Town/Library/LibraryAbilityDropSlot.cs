@@ -1,13 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.UCM;
-using WeAreGladiators.Characters;
-using WeAreGladiators.UI;
-using WeAreGladiators.Player;
-using WeAreGladiators.Perks;
-using WeAreGladiators.Abilities;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.UI;
 
 namespace WeAreGladiators.TownFeatures
 {
@@ -15,32 +9,32 @@ namespace WeAreGladiators.TownFeatures
     {
         // Components + Properties
         #region
+
         [Header("Core Components")]
-        [SerializeField] Image bookImage;
+        [SerializeField]
+        private Image bookImage;
 
         // Non inspector fields
-        private AbilityData myAbilityData;
-        private static bool mousedOver = false;
+
         #endregion
 
         // Getters + Accessors
         #region
-        public AbilityData MyAbilityData
-        {
-            get { return myAbilityData; }
-        }
-        public static bool MousedOver
-        {
-            get { return mousedOver; }
-        }
+
+        public AbilityData MyAbilityData { get; private set; }
+        public static bool MousedOver { get; private set; }
+
         #endregion
 
         // Input 
         #region
-        void Update()
+
+        private void Update()
         {
-            if (mousedOver && Input.GetKeyDown(KeyCode.Mouse1))
+            if (MousedOver && Input.GetKeyDown(KeyCode.Mouse1))
+            {
                 OnRightClick();
+            }
         }
         private void OnRightClick()
         {
@@ -48,41 +42,42 @@ namespace WeAreGladiators.TownFeatures
         }
         public void MouseEnter()
         {
-            mousedOver = true;
-            if (myAbilityData != null)
+            MousedOver = true;
+            if (MyAbilityData != null)
             {
-                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(myAbilityData.keyWords);
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyAbilityData.keyWords);
                 AbilityPopupController.Instance.OnLibraryAbilityDropSlotMousedOver(this);
             }
         }
         public void MouseExit()
         {
-            mousedOver = false;
-            if (myAbilityData != null)
+            MousedOver = false;
+            if (MyAbilityData != null)
             {
                 KeyWordLayoutController.Instance.FadeOutMainView();
                 AbilityPopupController.Instance.OnAbilityButtonMousedExit();
             }
         }
+
         #endregion
 
         // Logic
         #region
+
         public void BuildFromAbility(AbilityData a)
         {
-            myAbilityData = a;
+            MyAbilityData = a;
             bookImage.sprite = a.AbilitySprite;
             bookImage.gameObject.SetActive(true);
             TownController.Instance.EvaluateLibrarySlots();
         }
         public void ClearAbility()
         {
-            myAbilityData = null;
+            MyAbilityData = null;
             bookImage.gameObject.SetActive(false);
             TownController.Instance.EvaluateLibrarySlots();
         }
 
         #endregion
-
     }
 }

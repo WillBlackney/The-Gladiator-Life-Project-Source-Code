@@ -13,11 +13,8 @@ namespace WeAreGladiators.StoryEvents
         public string pageDescription;
 
         [Space(10)]
-
         [Header("Choices + Effects")]
         public StoryChoiceEffect[] onPageLoadEffects;
-        public StoryEventChoiceSO[] allChoices;       
-        
-
+        public StoryEventChoiceSO[] allChoices;
     }
 }

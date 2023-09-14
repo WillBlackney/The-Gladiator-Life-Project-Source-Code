@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace WeAreGladiators.Cards
 {
@@ -21,27 +19,18 @@ namespace WeAreGladiators.Cards
         // reference to a canvas on this object to set sorting order
         [SerializeField] private Canvas canvas;
 
-        // a value for canvas sorting order when we want to show this object above everything
-        private int TopSortingOrder = 1100;
-
         [SerializeField] private int baseHandSortingOrder;
 
-        // PROPERTIES
-        private int slot = -1;
-        public int Slot
-        {
-            get { return slot; }
-
-            set
-            {
-                slot = value;
-            }
-        }
-
         [SerializeField] private VisualStates state;
+
+        // PROPERTIES
+
+        // a value for canvas sorting order when we want to show this object above everything
+        private readonly int TopSortingOrder = 1100;
+        public int Slot { get; set; } = -1;
         public VisualStates VisualState
         {
-            get { return state; }
+            get => state;
 
             set
             {
@@ -70,8 +59,10 @@ namespace WeAreGladiators.Cards
         // we want to set an index first and set the sorting order only when the card arrives to hand. 
         public void SetHandSortingOrder()
         {
-            if (slot != -1)
-                canvas.sortingOrder = HandSortingOrder(slot);
+            if (Slot != -1)
+            {
+                canvas.sortingOrder = HandSortingOrder(Slot);
+            }
             //canvas.sortingLayerName = "Cards";
             canvas.overrideSorting = true;
 
@@ -80,8 +71,7 @@ namespace WeAreGladiators.Cards
 
         private int HandSortingOrder(int placeInHand)
         {
-            return baseHandSortingOrder + (-(placeInHand + 1) * 10);
+            return baseHandSortingOrder + -(placeInHand + 1) * 10;
         }
-
     }
 }

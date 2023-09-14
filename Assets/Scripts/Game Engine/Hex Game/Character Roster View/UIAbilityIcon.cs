@@ -1,9 +1,7 @@
-﻿using WeAreGladiators.Abilities;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using WeAreGladiators.Abilities;
 
 namespace WeAreGladiators.UI
 {
@@ -11,34 +9,30 @@ namespace WeAreGladiators.UI
     {
         // Properties + Components
         #region
-        [SerializeField] Image abilityImage;
-        private AbilityData myDataRef;
-        [SerializeField] bool placeModalAbove = true;
+
+        [SerializeField] private Image abilityImage;
+        [SerializeField] private bool placeModalAbove = true;
+
         #endregion
 
         // Getters + Accessors
         #region
-        public Image AbilityImage
-        {
-            get { return abilityImage; }
-        }       
-        public AbilityData MyDataRef
-        {
-            get { return myDataRef; }
-        }
 
+        public Image AbilityImage => abilityImage;
+        public AbilityData MyDataRef { get; private set; }
 
         #endregion
 
         // Input
         #region
+
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if(MyDataRef != null)
+            if (MyDataRef != null)
             {
                 KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyDataRef.keyWords);
                 AbilityPopupController.Instance.OnRosterAbilityButtonMousedOver(this, placeModalAbove);
-            }                       
+            }
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -47,12 +41,14 @@ namespace WeAreGladiators.UI
             {
                 KeyWordLayoutController.Instance.FadeOutMainView();
                 AbilityPopupController.Instance.OnAbilityButtonMousedExit();
-            }            
+            }
         }
+
         #endregion
 
         // Misc
         #region
+
         public void BuildFromAbilityData(AbilityData d)
         {
             AbilityImage.sprite = d.AbilitySprite;
@@ -61,14 +57,14 @@ namespace WeAreGladiators.UI
         }
         public void SetMyDataReference(AbilityData data)
         {
-            myDataRef = data;
+            MyDataRef = data;
         }
         public void HideAndReset()
         {
             gameObject.SetActive(false);
-            myDataRef = null;
+            MyDataRef = null;
         }
-        #endregion
 
+        #endregion
     }
 }

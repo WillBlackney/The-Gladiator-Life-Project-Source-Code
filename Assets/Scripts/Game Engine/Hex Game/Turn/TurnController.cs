@@ -1,117 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
 using DG.Tweening;
-using TMPro;
 using Sirenix.OdinInspector;
-using UnityEngine.UI;
+using TMPro;
+using UnityEngine;
+using WeAreGladiators.Audio;
+using WeAreGladiators.CameraSystems;
 using WeAreGladiators.Characters;
 using WeAreGladiators.Combat;
-using WeAreGladiators.Utilities;
-using WeAreGladiators.CameraSystems;
-using WeAreGladiators.VisualEvents;
-using WeAreGladiators.UCM;
-using WeAreGladiators.Audio;
-using WeAreGladiators.Perks;
-using UnityEngine.TextCore.Text;
 using WeAreGladiators.CombatLog;
+using WeAreGladiators.Perks;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
 
 namespace WeAreGladiators.TurnLogic
 {
     public class TurnController : Singleton<TurnController>
     {
-        #region Properties + Component References
-        [Header("Component References")]
-        [SerializeField] private GameObject windowStartPos;
-        [SerializeField] private GameObject activationPanelParent;
-        [SerializeField] private GameObject panelArrow;
-        [SerializeField] private GameObject activationSlotContentParent;
-        [SerializeField] private GameObject activationWindowContentParent;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
 
-        [Header("Turn Change Component References")]
-        [SerializeField] private TextMeshProUGUI whoseTurnText;
-        [SerializeField] private CanvasGroup visualParentCG;
-        [SerializeField] private RectTransform blackBarImageRect;
-        [SerializeField] private RectTransform middlePos;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [Header("Combat Start Screen Components")]
-        [SerializeField] private GameObject shieldParent;
-        [SerializeField] private Transform leftSwordRect;
-        [SerializeField] private Transform rightSwordRect;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [SerializeField] private Transform leftSwordStartPos;
-        [SerializeField] private Transform rightSwordStartPos;
-        [SerializeField] private Transform swordEndPos;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [Header("Turn Change Properties")]
-        [SerializeField] private float alphaChangeSpeed;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
-        [Header("Variables")]
-        private List<HexCharacterModel> activationOrder = new List<HexCharacterModel>();
-        private List<GameObject> panelSlots = new List<GameObject>();
-        private HexCharacterModel entityActivated;
-        private int currentTurn;
-        #endregion
-
-        #region Getters + Accessors
-        public HexCharacterModel EntityActivated
-        {
-            get
-            {
-                return entityActivated;
-            }
-            private set
-            {
-                entityActivated = value;
-            }
-        }
-        public int CurrentTurn
-        {
-            get { return currentTurn; }
-            private set { currentTurn = value; }
-        }
-        public List<HexCharacterModel> ActivationOrder
-        {
-            get { return activationOrder; }
-        }
-        public void RemoveEntityFromActivationOrder(HexCharacterModel entity)
-        {
-            if (activationOrder.Contains(entity)) activationOrder.Remove(entity);
-            
-        }
-        public void AddEntityToActivationOrder(HexCharacterModel entity)
-        {
-            activationOrder.Add(entity);
-        }
-        public void DisablePanelSlotAtIndex(int index)
-        {
-            panelSlots[index].SetActive(false);
-        }
-        public void EnablePanelSlotAtIndex(int index)
-        {
-            panelSlots[index].SetActive(true);
-        }
-        public int GetCharacterTurnsUntilTheirTurn(HexCharacterModel character)
-        {
-            if (!activationOrder.Contains(character)) return 0;
-            else return activationOrder.IndexOf(character) - activationOrder.IndexOf(entityActivated);            
-        }
-        public HexCharacterModel LastToActivate
-        {
-            get
-            {
-                return ActivationOrder[ActivationOrder.Count - 1];
-            }
-        }
-        #endregion
-        
         #region Setup + Initializaton
+
         public void CreateTurnWindow(HexCharacterModel entity)
         {
             // Create slot
@@ -144,12 +54,12 @@ namespace WeAreGladiators.TurnLogic
             }
             else
             {
-                if(entity.hexCharacterView.model is UniversalCharacterModel)
+                if (entity.hexCharacterView.model is UniversalCharacterModel)
                 {
                     newWindowScript.portraitImage.gameObject.SetActive(false);
                     CharacterModeller.BuildModelFromModelClone(newWindowScript.myUCM, entity.hexCharacterView.model.GetComponent<UniversalCharacterModel>());
                     newWindowScript.myUCM.SetBaseAnim();
-                }                   
+                }
 
                 else
                 {
@@ -159,17 +69,89 @@ namespace WeAreGladiators.TurnLogic
                 }
             }
         }
+
         #endregion
-        
+        #region Properties + Component References
+
+        [Header("Component References")]
+        [SerializeField] private GameObject windowStartPos;
+        [SerializeField] private GameObject activationPanelParent;
+        [SerializeField] private GameObject panelArrow;
+        [SerializeField] private GameObject activationSlotContentParent;
+        [SerializeField] private GameObject activationWindowContentParent;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [Header("Turn Change Component References")]
+        [SerializeField] private TextMeshProUGUI whoseTurnText;
+        [SerializeField] private CanvasGroup visualParentCG;
+        [SerializeField] private RectTransform blackBarImageRect;
+        [SerializeField] private RectTransform middlePos;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [Header("Combat Start Screen Components")]
+        [SerializeField] private GameObject shieldParent;
+        [SerializeField] private Transform leftSwordRect;
+        [SerializeField] private Transform rightSwordRect;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [SerializeField] private Transform leftSwordStartPos;
+        [SerializeField] private Transform rightSwordStartPos;
+        [SerializeField] private Transform swordEndPos;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [Header("Turn Change Properties")]
+        [SerializeField] private float alphaChangeSpeed;
+        private readonly List<GameObject> panelSlots = new List<GameObject>();
+
+        #endregion
+
+        #region Getters + Accessors
+
+        public HexCharacterModel EntityActivated { get; private set; }
+        public int CurrentTurn { get; private set; }
+        [field: PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [field: Header("Variables")]
+        public List<HexCharacterModel> ActivationOrder { get; private set; } = new List<HexCharacterModel>();
+        public void RemoveEntityFromActivationOrder(HexCharacterModel entity)
+        {
+            if (ActivationOrder.Contains(entity))
+            {
+                ActivationOrder.Remove(entity);
+            }
+
+        }
+        public void AddEntityToActivationOrder(HexCharacterModel entity)
+        {
+            ActivationOrder.Add(entity);
+        }
+        public void DisablePanelSlotAtIndex(int index)
+        {
+            panelSlots[index].SetActive(false);
+        }
+        public void EnablePanelSlotAtIndex(int index)
+        {
+            panelSlots[index].SetActive(true);
+        }
+        public int GetCharacterTurnsUntilTheirTurn(HexCharacterModel character)
+        {
+            if (!ActivationOrder.Contains(character))
+            {
+                return 0;
+            }
+            return ActivationOrder.IndexOf(character) - ActivationOrder.IndexOf(EntityActivated);
+        }
+        public HexCharacterModel LastToActivate => ActivationOrder[ActivationOrder.Count - 1];
+
+        #endregion
+
         #region Turn Events
+
         public void OnNewCombatEventStarted()
         {
             CurrentTurn = 0;
             CombatController.Instance.SetCombatState(CombatGameState.CombatActive);
 
             // Apply starting perks (elf, human and orc racials, etc)
-            foreach (HexCharacterModel c in activationOrder)
+            foreach (HexCharacterModel c in ActivationOrder)
+            {
                 HexCharacterController.Instance.ApplyCombatStartPerkEffects(c);
+            }
             // Start first turn
             StartNewTurnSequence();
         }
@@ -218,7 +200,7 @@ namespace WeAreGladiators.TurnLogic
                 });
 
                 // Play window move anims
-                HexCharacterModel[] characters1 = activationOrder.ToArray();
+                HexCharacterModel[] characters1 = ActivationOrder.ToArray();
                 VisualEventManager.CreateVisualEvent(() => MoveAllWindowsToStartPositions(characters1)).SetEndDelay(0.5f);
             }
 
@@ -232,15 +214,18 @@ namespace WeAreGladiators.TurnLogic
             }
 
             // Re-roll for initiative
-            HexCharacterModel[] characters = activationOrder.ToArray();
+            HexCharacterModel[] characters = ActivationOrder.ToArray();
             GenerateInitiativeRolls();
             SetActivationOrderBasedOnCurrentInitiativeRolls();
 
             // Reset turn delay properties
-            foreach(HexCharacterModel c in activationOrder)
+            foreach (HexCharacterModel c in ActivationOrder)
             {
                 c.hasMadeDelayedTurn = false;
-                if (c.hasDelayedPreviousTurn) c.hasDelayedPreviousTurn = false;
+                if (c.hasDelayedPreviousTurn)
+                {
+                    c.hasDelayedPreviousTurn = false;
+                }
                 if (c.hasRequestedTurnDelay)
                 {
                     c.hasRequestedTurnDelay = false;
@@ -249,25 +234,25 @@ namespace WeAreGladiators.TurnLogic
             }
 
             // Play roll animation sequence
-            HexCharacterModel[] characters2 = activationOrder.ToArray();
+            HexCharacterModel[] characters2 = ActivationOrder.ToArray();
             TaskTracker rollsCoroutine = new TaskTracker();
             VisualEventManager.CreateVisualEvent(() => PlayActivationRollSequence(characters2, rollsCoroutine)).SetCoroutineData(rollsCoroutine);
 
             // Move windows to new positions
-            var cachedOrder = ActivationOrder.ToList();
+            List<HexCharacterModel> cachedOrder = ActivationOrder.ToList();
             VisualEventManager.CreateVisualEvent(() => UpdateWindowPositions(cachedOrder)).SetEndDelay(1);
 
             // Play turn change notification
             CombatLogController.Instance.CreateTurnCycleStartEntry();
             TaskTracker turnNotificationCoroutine = new TaskTracker();
             VisualEventManager.CreateVisualEvent(() => DisplayTurnChangeNotification(turnNotificationCoroutine)).SetCoroutineData(turnNotificationCoroutine);
-            
+
             // Activate the first character in the turn cycle
-            ActivateEntity(activationOrder[0]);
+            ActivateEntity(ActivationOrder[0]);
         }
         public void DestroyAllActivationWindows()
         {
-            foreach (HexCharacterModel entity in activationOrder)
+            foreach (HexCharacterModel entity in ActivationOrder)
             {
                 if (entity.hexCharacterView.myActivationWindow != null)
                 {
@@ -288,25 +273,30 @@ namespace WeAreGladiators.TurnLogic
                 Destroy(panelSlots[0]);
             }
 
-            activationOrder.Clear();
+            ActivationOrder.Clear();
             panelSlots.Clear();
 
             // Hide activation arrow
             SetPanelArrowViewState(false);
 
         }
+
         #endregion
 
         #region Logic + Calculations
+
         private int CalculateInitiativeRoll(HexCharacterModel entity)
         {
             int roll = StatCalculator.GetTotalInitiative(entity);
-            if (roll < 0) roll = 0;
+            if (roll < 0)
+            {
+                roll = 0;
+            }
             return roll + RandomGenerator.NumberBetween(1, 3);
         }
         private void GenerateInitiativeRolls()
         {
-            foreach (HexCharacterModel entity in activationOrder)
+            foreach (HexCharacterModel entity in ActivationOrder)
             {
                 entity.currentInitiativeRoll = CalculateInitiativeRoll(entity);
             }
@@ -314,43 +304,49 @@ namespace WeAreGladiators.TurnLogic
         private void SetActivationOrderBasedOnCurrentInitiativeRolls()
         {
             // Re arrange the activation order list based on the entity rolls
-            List<HexCharacterModel> sortedList = activationOrder.OrderBy(entity => entity.currentInitiativeRoll).ToList();
+            List<HexCharacterModel> sortedList = ActivationOrder.OrderBy(entity => entity.currentInitiativeRoll).ToList();
             List<HexCharacterModel> inattentiveCharacters = new List<HexCharacterModel>();
             sortedList.Reverse();
-            foreach(HexCharacterModel c in sortedList)
+            foreach (HexCharacterModel c in sortedList)
             {
-                if(PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Inattentive))
+                if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Inattentive))
                 {
                     inattentiveCharacters.Add(c);
                 }
             }
             foreach (HexCharacterModel c in inattentiveCharacters)
+            {
                 sortedList.Remove(c);
+            }
             foreach (HexCharacterModel c in inattentiveCharacters)
+            {
                 sortedList.Add(c);
+            }
 
-            activationOrder = sortedList;
+            ActivationOrder = sortedList;
         }
         public void HandleMoveCharacterToEndOfTurnOrder(HexCharacterModel character)
         {
-            activationOrder.Remove(character);
-            activationOrder.Add(character);
-            var cachedOrder = ActivationOrder.ToList();
+            ActivationOrder.Remove(character);
+            ActivationOrder.Add(character);
+            List<HexCharacterModel> cachedOrder = ActivationOrder.ToList();
             VisualEventManager.CreateVisualEvent(() => UpdateWindowPositions(cachedOrder));
         }
+
         #endregion
 
         #region Player Input + UI interactions
+
         public void OnEndTurnButtonClicked()
         {
             Debug.Log("TurnController.OnEndTurnButtonClicked() called...");
 
             // wait until all visual events have completed
             // prevent function if game over sequence triggered
-            if (CombatUIController.Instance.endTurnButton.interactable == true &&
+            if (CombatUIController.Instance.endTurnButton.interactable &&
                 CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
-                 EntityActivated.controller == Controller.Player &&
-                 EntityActivated.activationPhase == ActivationPhase.ActivationPhase)
+                EntityActivated.controller == Controller.Player &&
+                EntityActivated.activationPhase == ActivationPhase.ActivationPhase)
             {
                 CombatUIController.Instance.SetEndTurnButtonInteractions(false);
 
@@ -364,8 +360,8 @@ namespace WeAreGladiators.TurnLogic
         public void OnDelayTurnButtonClicked()
         {
             Debug.Log("TurnController.OnDelayTurnButtonClicked() called...");
-            if (CombatUIController.Instance.delayTurnButton.interactable == true &&
-                EntityActivated != activationOrder[activationOrder.Count - 1] &&
+            if (CombatUIController.Instance.delayTurnButton.interactable &&
+                EntityActivated != ActivationOrder[ActivationOrder.Count - 1] &&
                 CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
                 EntityActivated.controller == Controller.Player &&
                 EntityActivated.activationPhase == ActivationPhase.ActivationPhase &&
@@ -379,7 +375,7 @@ namespace WeAreGladiators.TurnLogic
 
                 // Move this character to the end of the turn order.
                 HandleMoveCharacterToEndOfTurnOrder(EntityActivated);
-                var cachedOrder = ActivationOrder.ToList();
+                List<HexCharacterModel> cachedOrder = ActivationOrder.ToList();
                 VisualEventManager.CreateVisualEvent(() => UpdateWindowPositions(cachedOrder));
 
                 // Trigger character on activation end sequence and events
@@ -391,9 +387,11 @@ namespace WeAreGladiators.TurnLogic
             Debug.Log("ActivationManager.SetActivationWindowsParentViewState() called...");
             activationPanelParent.SetActive(onOrOff);
         }
+
         #endregion
 
         #region Entity / Activation related
+
         private void ActivateEntity(HexCharacterModel entity)
         {
             Debug.Log("Activating entity: " + entity.myName);
@@ -402,7 +400,7 @@ namespace WeAreGladiators.TurnLogic
             entity.hasMadeTurn = true;
 
             // Move arrow to point at activated enemy
-            GameObject panelSlot = panelSlots[activationOrder.IndexOf(cachedEntityRef)];
+            GameObject panelSlot = panelSlots[ActivationOrder.IndexOf(cachedEntityRef)];
             CombatLogController.Instance.CreateCharacterTurnStartEntry(cachedEntityRef);
             VisualEventManager.CreateVisualEvent(() => MoveActivationArrowTowardsEntityWindow(cachedEntityRef, panelSlot));
 
@@ -432,11 +430,11 @@ namespace WeAreGladiators.TurnLogic
             }
             else
             {
-                foreach (HexCharacterModel entity in activationOrder)
+                foreach (HexCharacterModel entity in ActivationOrder)
                 {
                     // check if the character is alive, and not yet activated this turn cycle
                     if (entity.livingState == LivingState.Alive &&
-                        ((entity.hasMadeTurn == false && entity.wasSummonedThisTurn == false) || (entity.hasRequestedTurnDelay == true && entity.hasMadeDelayedTurn == false)))
+                        (entity.hasMadeTurn == false && entity.wasSummonedThisTurn == false || entity.hasRequestedTurnDelay && entity.hasMadeDelayedTurn == false))
                     {
                         nextEntityToActivate = entity;
                         break;
@@ -447,8 +445,8 @@ namespace WeAreGladiators.TurnLogic
                 {
                     // Update all window slot positions + activation pointer arrow
 
-                    var cachedOrder = ActivationOrder.ToList();
-                    GameObject panelSlot = panelSlots[activationOrder.IndexOf(nextEntityToActivate)];
+                    List<HexCharacterModel> cachedOrder = ActivationOrder.ToList();
+                    GameObject panelSlot = panelSlots[ActivationOrder.IndexOf(nextEntityToActivate)];
                     VisualEventManager.CreateVisualEvent(() => UpdateWindowPositions(cachedOrder));
                     VisualEventManager.CreateVisualEvent(() => MoveActivationArrowTowardsEntityWindow(nextEntityToActivate, panelSlot));
 
@@ -466,9 +464,9 @@ namespace WeAreGladiators.TurnLogic
         {
             Debug.Log("ActivationManager.AllEntitiesHaveActivatedThisTurn() called...");
             bool boolReturned = true;
-            foreach (HexCharacterModel entity in activationOrder)
+            foreach (HexCharacterModel entity in ActivationOrder)
             {
-                if (entity.hasMadeTurn == false || (entity.hasMadeTurn == true && entity.hasRequestedTurnDelay == true && entity.hasMadeDelayedTurn == false))
+                if (entity.hasMadeTurn == false || entity.hasMadeTurn && entity.hasRequestedTurnDelay && entity.hasMadeDelayedTurn == false)
                 {
                     boolReturned = false;
                     break;
@@ -476,12 +474,14 @@ namespace WeAreGladiators.TurnLogic
             }
             return boolReturned;
         }
+
         #endregion
 
         #region Visual Events
 
         // Number roll sequence visual events
         #region
+
         private void PlayActivationRollSequence(HexCharacterModel[] characters, TaskTracker cData)
         {
             StartCoroutine(PlayActivationRollSequenceCoroutine(characters, cData));
@@ -555,7 +555,7 @@ namespace WeAreGladiators.TurnLogic
             window.animateNumberText = true;
             window.rollText.enabled = true;
 
-            while (window.animateNumberText == true)
+            while (window.animateNumberText)
             {
                 //Debug.Log("Animating roll number text....");
                 numberDisplayed++;
@@ -568,21 +568,23 @@ namespace WeAreGladiators.TurnLogic
                 yield return new WaitForEndOfFrame();
             }
         }
+
         #endregion
 
         // Destroy activation window visual events
         #region
+
         private void FadeOutAndDestroyActivationWindow(TurnWindow window)
         {
             GameObject slotDestroyed = panelSlots[panelSlots.Count - 1];
-            RemoveEntityFromActivationOrder(window.myCharacter);            
+            RemoveEntityFromActivationOrder(window.myCharacter);
 
             // Remove slot from list and destroy
             panelSlots.Remove(slotDestroyed);
             Destroy(slotDestroyed);
 
             // Destroy window GO
-            DestroyActivationWindow(window);         
+            DestroyActivationWindow(window);
         }
         private void DestroyActivationWindow(TurnWindow window)
         {
@@ -600,20 +602,29 @@ namespace WeAreGladiators.TurnLogic
 
             // If the entity that just died wasn't killed during its activation, do this
             if (cachedOrder.Contains(currentlyActivated))
+            {
                 MoveActivationArrowTowardsEntityWindow(cachedOrder[cachedOrder.IndexOf(currentlyActivated)]);
+            }
 
             else if (cachedOrder.Contains(EntityActivated))
+            {
                 MoveActivationArrowTowardsEntityWindow(cachedOrder[cachedOrder.IndexOf(EntityActivated)]);
+            }
 
         }
+
         #endregion
 
         // Update window position visual events
         #region
+
         public void UpdateWindowPositions(List<HexCharacterModel> cachedOrder = null)
         {
-            if (cachedOrder == null) cachedOrder = activationOrder;
-            cachedOrder.ForEach(x => MoveWindowTowardsSlotPosition(x, cachedOrder));      
+            if (cachedOrder == null)
+            {
+                cachedOrder = ActivationOrder;
+            }
+            cachedOrder.ForEach(x => MoveWindowTowardsSlotPosition(x, cachedOrder));
         }
         private void MoveWindowTowardsSlotPosition(HexCharacterModel character, List<HexCharacterModel> cachedActivationOrder)
         {
@@ -634,12 +645,16 @@ namespace WeAreGladiators.TurnLogic
         private void MoveAllWindowsToStartPositions(HexCharacterModel[] characters)
         {
             for (int i = 0; i < characters.Length; i++)
+            {
                 characters[i].hexCharacterView.myActivationWindow.transform.DOMoveX(panelSlots[i].transform.position.x, 0.25f);
+            }
         }
+
         #endregion
 
         // Arrow pointer visual events
         #region
+
         private void SetPanelArrowViewState(bool onOrOff)
         {
             panelArrow.SetActive(onOrOff);
@@ -648,7 +663,10 @@ namespace WeAreGladiators.TurnLogic
         {
             Debug.Log("ActivationManager.MoveActivationArrowTowardsPosition() called...");
 
-            if (panelSlot == null && activationOrder.Contains(character)) panelSlot = panelSlots[activationOrder.IndexOf(character)];            
+            if (panelSlot == null && ActivationOrder.Contains(character))
+            {
+                panelSlot = panelSlots[ActivationOrder.IndexOf(character)];
+            }
 
             if (panelSlot != null)
             {
@@ -667,10 +685,12 @@ namespace WeAreGladiators.TurnLogic
             }
 
         }
+
         #endregion
 
         // Turn Change Notification visual events
         #region
+
         private void DisplayTurnChangeNotification(TaskTracker cData)
         {
             StartCoroutine(DisplayTurnChangeNotificationCoroutine(cData));
@@ -690,7 +710,7 @@ namespace WeAreGladiators.TurnLogic
             textParent.localScale = new Vector3(4f, 4f, 1);
             blackBarImageRect.localScale = new Vector3(1f, 0.1f, 1);
             visualParentCG.alpha = 0;
-            whoseTurnText.text = "Turn " + CurrentTurn.ToString();
+            whoseTurnText.text = "Turn " + CurrentTurn;
 
             AudioManager.Instance.FadeInSound(Sound.Events_New_Turn_Notification, 0.5f);
             visualParentCG.DOFade(1f, 0.5f);
@@ -703,7 +723,10 @@ namespace WeAreGladiators.TurnLogic
             blackBarImageRect.DOScaleY(0.1f, 0.5f);
 
             // Resolve
-            if (cData != null) cData.MarkAsCompleted();            
+            if (cData != null)
+            {
+                cData.MarkAsCompleted();
+            }
         }
         private void DisplayCombatStartNotification(TaskTracker cData)
         {
@@ -803,9 +826,9 @@ namespace WeAreGladiators.TurnLogic
                 cData.MarkAsCompleted();
             }
         }
+
         #endregion
 
         #endregion Visual Events
-
     }
 }

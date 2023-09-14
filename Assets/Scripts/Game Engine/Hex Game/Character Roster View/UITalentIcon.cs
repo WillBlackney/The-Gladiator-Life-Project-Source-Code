@@ -1,10 +1,8 @@
-﻿using WeAreGladiators.Characters;
-using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using TMPro;
+using UnityEngine.UI;
+using WeAreGladiators.Characters;
 
 namespace WeAreGladiators.UI
 {
@@ -12,39 +10,33 @@ namespace WeAreGladiators.UI
     {
         // Properties + Components
         #region
-        [SerializeField] Image talentImage;
-        [SerializeField] TextMeshProUGUI talentLevelText;
-        [SerializeField] GameObject talentLevelParent;
-        private TalentPairing myTalentPairing;
+
+        [SerializeField] private Image talentImage;
+        [SerializeField] private TextMeshProUGUI talentLevelText;
+        [SerializeField] private GameObject talentLevelParent;
+
         #endregion
 
         // Getters + Accessors
         #region
-        public Image TalentImage
-        {
-            get { return talentImage; }
-        }
-        public TextMeshProUGUI TalentLevelText
-        {
-            get { return talentLevelText; }
-        }        
-        public TalentPairing MyTalentPairing
-        {
-            get { return myTalentPairing; }
-        }
-       
+
+        public Image TalentImage => talentImage;
+        public TextMeshProUGUI TalentLevelText => talentLevelText;
+        public TalentPairing MyTalentPairing { get; private set; }
+
         #endregion
 
         // Input
         #region
+
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (myTalentPairing != null)
+            if (MyTalentPairing != null)
             {
-                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(myTalentPairing.Data.keyWords);
-                MainModalController.Instance.BuildAndShowModal(myTalentPairing);
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyTalentPairing.Data.keyWords);
+                MainModalController.Instance.BuildAndShowModal(MyTalentPairing);
             }
-                
+
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -52,24 +44,36 @@ namespace WeAreGladiators.UI
             MainModalController.Instance.HideModal();
             KeyWordLayoutController.Instance.FadeOutMainView();
         }
+
         #endregion
 
         // Misc
         #region
+
         public void BuildFromTalentPairing(TalentPairing tp)
         {
-            myTalentPairing = tp;
+            MyTalentPairing = tp;
             gameObject.SetActive(true);
             TalentImage.sprite = tp.Data.talentSprite;
-            if (talentLevelParent) talentLevelParent.SetActive(true);
-            if (talentLevelText) talentLevelText.text = tp.level.ToString();
-        }      
+            if (talentLevelParent)
+            {
+                talentLevelParent.SetActive(true);
+            }
+            if (talentLevelText)
+            {
+                talentLevelText.text = tp.level.ToString();
+            }
+        }
         public void HideAndReset()
         {
             gameObject.SetActive(false);
-            if (talentLevelParent) talentLevelParent.SetActive(false);
-            myTalentPairing = null;
+            if (talentLevelParent)
+            {
+                talentLevelParent.SetActive(false);
+            }
+            MyTalentPairing = null;
         }
+
         #endregion
     }
 }

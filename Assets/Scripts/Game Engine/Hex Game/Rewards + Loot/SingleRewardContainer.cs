@@ -1,16 +1,14 @@
-﻿using WeAreGladiators.Abilities;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using WeAreGladiators.Abilities;
 using WeAreGladiators.Characters;
 
 namespace WeAreGladiators.RewardSystems
 {
     public class SingleRewardContainer
     {
-        public RewardType rewardType;
-        public Perk perkOffered;
         public AbilityData abilityOffered;
+        public Perk perkOffered;
+        public RewardType rewardType;
         public TalentSchool talentOffered;
 
         // Constructors
@@ -45,7 +43,7 @@ namespace WeAreGladiators.RewardSystems
         None = 0,
         Ability = 1,
         Perk = 2,
-        Talent = 3,
+        Talent = 3
     }
 
 }

@@ -1,7 +1,6 @@
-﻿using UnityEngine.Audio;
-using UnityEngine;
-using System;
+﻿using System;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace WeAreGladiators.Audio
 {
@@ -11,7 +10,7 @@ namespace WeAreGladiators.Audio
         [HorizontalGroup("General Properties", 75)]
         [HideLabel]
         [ShowIf("ShowAudioClip")]
-        public AudioClip audioClip;       
+        public AudioClip audioClip;
 
         [VerticalGroup("General Properties/Stats")]
         [LabelWidth(100)]
@@ -85,7 +84,6 @@ namespace WeAreGladiators.Audio
         [HideInInspector] public bool fadingIn;
         [HideInInspector] public bool fadingOut;
 
-
         public bool ShowAudioClip()
         {
             return !randomizeClip;
@@ -100,7 +98,7 @@ namespace WeAreGladiators.Audio
         }
         public bool ShowRandomVolumeSettings()
         {
-            return randomizeVolume == true;
+            return randomizeVolume;
         }
 
         public bool ShowPitch()
@@ -109,11 +107,8 @@ namespace WeAreGladiators.Audio
         }
         public bool ShowRandomPitchSettings()
         {
-            return randomizePitch == true;
+            return randomizePitch;
         }
-
-
-
     }
     public enum CombatMusicCategory
     {

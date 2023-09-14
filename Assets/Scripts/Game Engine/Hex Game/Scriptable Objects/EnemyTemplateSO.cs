@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using WeAreGladiators.Items;
+using UnityEngine;
 using WeAreGladiators.Abilities;
-using WeAreGladiators.Perks;
 using WeAreGladiators.AI;
 using WeAreGladiators.Audio;
+using WeAreGladiators.Items;
+using WeAreGladiators.Perks;
 using WeAreGladiators.UCM;
 
 namespace WeAreGladiators.Characters
@@ -49,9 +47,7 @@ namespace WeAreGladiators.Characters
         [BoxGroup("General Info")]
         [LabelWidth(100)]
         [GUIColor("Yellow")]
-        public bool ignoreStress = false;
-
-
+        public bool ignoreStress;
 
         [BoxGroup("Attributes", centerLabel: true)]
         [LabelWidth(100)]
@@ -91,7 +87,7 @@ namespace WeAreGladiators.Characters
 
         [BoxGroup("Items + Weapons", centerLabel: true)]
         [Header("Item Properties")]
-        public bool randomizeItemSet = false;
+        public bool randomizeItemSet;
 
         [BoxGroup("Items + Weapons")]
         [ShowIf("ShowItemSet")]
@@ -119,13 +115,16 @@ namespace WeAreGladiators.Characters
 
         // GUI Colours
         #region
+
         private Color Blue() { return Color.cyan; }
         private Color Green() { return Color.green; }
         private Color Yellow() { return Color.yellow; }
+
         #endregion
 
         // Odin Show Ifs
         #region
+
         public bool ShowRace()
         {
             return !randomizeRace;
@@ -156,8 +155,9 @@ namespace WeAreGladiators.Characters
         }
         public bool ShowRandomHealthFields()
         {
-            return randomizeHealth == true;
+            return randomizeHealth;
         }
-        #endregion        
+
+        #endregion
     }
 }

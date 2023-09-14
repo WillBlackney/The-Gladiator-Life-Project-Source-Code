@@ -4,12 +4,9 @@ namespace WeAreGladiators.Items
 {
     public class InventorySlot : MonoBehaviour
     {
-        [SerializeField] InventoryItemView myItemView;
+        [SerializeField] private InventoryItemView myItemView;
 
-        public InventoryItemView MyItemView
-        {
-            get { return myItemView; }
-        }
+        public InventoryItemView MyItemView => myItemView;
         public void Reset()
         {
             gameObject.SetActive(false);

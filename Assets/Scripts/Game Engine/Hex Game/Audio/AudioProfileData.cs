@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace WeAreGladiators.Audio
 {
@@ -9,11 +9,10 @@ namespace WeAreGladiators.Audio
         [Header("General Properties")]
         public AudioProfileType audioProfileType;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("SFX Buckets")]
         public AudioModel[] meleeAttackSounds;
         public AudioModel[] dieSounds;
-        public AudioModel[] hurtSounds;       
+        public AudioModel[] hurtSounds;
         public AudioModel[] turnStartSounds;
     }
 
@@ -27,7 +26,7 @@ namespace WeAreGladiators.Audio
         Goblin_1 = 5,
         Gnoll_1 = 6,
         Satyr_1 = 7,
-        Lunker_Youngling = 8,
+        Lunker_Youngling = 8
     }
 
     public enum AudioSet
@@ -37,6 +36,6 @@ namespace WeAreGladiators.Audio
         Hurt = 2,
         Die = 3,
         Buff = 4,
-        TurnStart = 5,
+        TurnStart = 5
     }
 }

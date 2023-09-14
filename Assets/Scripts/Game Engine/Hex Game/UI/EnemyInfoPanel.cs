@@ -1,16 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Utilities;
-using WeAreGladiators.Characters;
-using WeAreGladiators.Perks;
-using TMPro;
-using UnityEngine.UI;
-using WeAreGladiators.Items;
-using WeAreGladiators.UCM;
-using WeAreGladiators.Abilities;
-using WeAreGladiators.Cards;
 using DG.Tweening;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Items;
+using WeAreGladiators.Perks;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UI
 {
@@ -18,6 +16,7 @@ namespace WeAreGladiators.UI
     {
         // Properties + Components
         #region
+
         [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
         [SerializeField] private Scrollbar[] scrollBarResets;
@@ -53,7 +52,6 @@ namespace WeAreGladiators.UI
         [SerializeField] private TextMeshProUGUI witsText;
         [SerializeField] private GameObject[] witsStars;
         [Space(20)]
-
         [Header("Secondary Attribute Text Components")]
         [SerializeField] private TextMeshProUGUI criticalChanceText;
         [SerializeField] private TextMeshProUGUI criticalModifierText;
@@ -68,21 +66,22 @@ namespace WeAreGladiators.UI
 
         private CharacterModel currentModel;
 
-        public bool PanelIsActive
-        {
-            get { return mainVisualParent.activeSelf; }
-        }
+        public bool PanelIsActive => mainVisualParent.activeSelf;
 
         #endregion
 
         // Show, Hide and Build
         #region
-        
+
         public void HandleBuildAndShowPanel(HexCharacterData data)
         {
             if (!mainVisualParent.activeInHierarchy)
+            {
                 for (int i = 0; i < scrollBarResets.Length; i++)
+                {
                     scrollBarResets[i].value = 1;
+                }
+            }
             mainVisualParent.SetActive(true);
             BuildPanelForEnemy(data);
 
@@ -105,28 +104,36 @@ namespace WeAreGladiators.UI
         {
             mainVisualParent.SetActive(false);
         }
+
         #endregion
 
         // Build Sections
         #region
+
         private void BuildPerkViews(HexCharacterData character)
         {
             foreach (UIPerkIcon b in passiveIcons)
+            {
                 b.HideAndReset();
+            }
 
             // Build Icons
             List<ActivePerk> allPerks = new List<ActivePerk>();
 
             // Get character perks
             for (int i = 0; i < character.passiveManager.perks.Count; i++)
+            {
                 allPerks.Add(character.passiveManager.perks[i]);
+            }
 
             // Add perks from items
             allPerks.AddRange(ItemController.Instance.GetActivePerksFromItemSet(character.itemSet));
 
             // Build perk button for each perk
             for (int i = 0; i < allPerks.Count; i++)
+            {
                 passiveIcons[i].BuildFromActivePerk(allPerks[i]);
+            }
         }
         private void BuildAttributeSection(HexCharacterData character)
         {
@@ -148,8 +155,8 @@ namespace WeAreGladiators.UI
             witsText.text = StatCalculator.GetTotalWits(character).ToString();
             BuildStars(witsStars, 0);
 
-            criticalChanceText.text = StatCalculator.GetTotalCriticalChance(character).ToString() + "%";
-            criticalModifierText.text = StatCalculator.GetTotalCriticalModifier(character).ToString() + "%";
+            criticalChanceText.text = StatCalculator.GetTotalCriticalChance(character) + "%";
+            criticalModifierText.text = StatCalculator.GetTotalCriticalModifier(character) + "%";
             initiativeText.text = StatCalculator.GetTotalInitiative(character).ToString();
             visionText.text = StatCalculator.GetTotalVision(character).ToString();
 
@@ -162,22 +169,26 @@ namespace WeAreGladiators.UI
         {
             // Reset
             for (int i = 0; i < arr.Length; i++)
+            {
                 arr[i].gameObject.SetActive(false);
+            }
 
             for (int i = 0; i < starCount; i++)
+            {
                 arr[i].gameObject.SetActive(true);
+            }
         }
         private void BuildCharacterViewPanelModel(HexCharacterData character)
         {
             ucmParent.SetActive(false);
             nonUcmParent.SetActive(false);
-            if(currentModel != null)
+            if (currentModel != null)
             {
                 Destroy(currentModel.gameObject);
                 currentModel = null;
             }
 
-            if(character.ModelPrefab != null)
+            if (character.ModelPrefab != null)
             {
                 nonUcmParent.SetActive(true);
                 CharacterModel newCM = Instantiate(character.ModelPrefab, nonUcmParent.transform);
@@ -193,7 +204,7 @@ namespace WeAreGladiators.UI
                 CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, characterPanelUcm);
                 characterPanelUcm.SetIdleAnim();
             }
-            
+
         }
         private void BuildAbilitiesSection(HexCharacterData character)
         {
@@ -201,7 +212,9 @@ namespace WeAreGladiators.UI
 
             // reset ability buttons
             foreach (UIAbilityIcon b in abilityIcons)
+            {
                 b.HideAndReset();
+            }
 
             for (int i = 0; i < character.abilityBook.knownAbilities.Count; i++)
             {
@@ -217,6 +230,7 @@ namespace WeAreGladiators.UI
             }
 
         }
+
         #endregion
     }
 }

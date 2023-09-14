@@ -1,62 +1,52 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using DG.Tweening;
-using WeAreGladiators.CameraSystems;
+using UnityEngine;
 using UnityEngine.Events;
-using WeAreGladiators.UI;
 using WeAreGladiators.Audio;
+using WeAreGladiators.CameraSystems;
+using WeAreGladiators.UI;
 
 namespace WeAreGladiators.TownFeatures
 {
     public class TownBuildingView : MonoBehaviour
     {
-        [Header("World Building Components")]
-        [SerializeField] Color normalColor;
-        [SerializeField] Color mouseOverColor;
-        [SerializeField] SpriteRenderer[] buildingSprites;
-        [SerializeField] RectTransform popUpRect;
-        [SerializeField] RectTransform startPos;
-        [SerializeField] RectTransform endPos;
-        [Space(10)]
-        [SerializeField] CanvasGroup popUpCg;
-        [SerializeField] GameObject outlineSprite;
-        [SerializeField] RectTransform cameraZoomToPoint;
-        [SerializeField] Sound entranceSound;
 
-        private static bool blockMouseActions = false;
+        private static bool blockMouseActions;
+        [Header("World Building Components")]
+        [SerializeField]
+        private Color normalColor;
+        [SerializeField] private Color mouseOverColor;
+        [SerializeField] private SpriteRenderer[] buildingSprites;
+        [SerializeField] private RectTransform popUpRect;
+        [SerializeField] private RectTransform startPos;
+        [SerializeField] private RectTransform endPos;
+        [Space(10)]
+        [SerializeField]
+        private CanvasGroup popUpCg;
+        [SerializeField] private GameObject outlineSprite;
+        [SerializeField] private RectTransform cameraZoomToPoint;
+        [SerializeField] private Sound entranceSound;
 
         [Header("Page Components")]
-        [SerializeField] UnityEvent pageBuildFunction;
-        [SerializeField] GameObject pageVisualParent;
-        [SerializeField] RectTransform pageMovementParent;
-        [SerializeField] CanvasGroup pageCg;
-        [SerializeField] RectTransform pageStartPos;
-        [SerializeField] RectTransform pageEndPos;
+        [SerializeField]
+        private UnityEvent pageBuildFunction;
+        [SerializeField] private GameObject pageVisualParent;
+        [SerializeField] private RectTransform pageMovementParent;
+        [SerializeField] private CanvasGroup pageCg;
+        [SerializeField] private RectTransform pageStartPos;
+        [SerializeField] private RectTransform pageEndPos;
 
-        public RectTransform PageMovementParent
-        {
-            get { return pageMovementParent; }
-        }
-        public GameObject PageVisualParent
-        {
-            get { return pageVisualParent; }
-        }
-        public RectTransform PageStartPos
-        {
-            get { return pageStartPos; }
-        }
-        public CanvasGroup PageCg
-        {
-            get { return pageCg; }
-        }
+        public RectTransform PageMovementParent => pageMovementParent;
+        public GameObject PageVisualParent => pageVisualParent;
+        public RectTransform PageStartPos => pageStartPos;
+        public CanvasGroup PageCg => pageCg;
 
         private IEnumerator LeaveCoroutine()
         {
-            if (blockMouseActions) yield break;
+            if (blockMouseActions)
+            {
+                yield break;
+            }
             blockMouseActions = true;
 
             // Move canvas to start pos + setup
@@ -77,7 +67,7 @@ namespace WeAreGladiators.TownFeatures
             AudioManager.Instance.FadeOutSound(entranceSound, 0.75f);
 
             // Move and zoom out camera
-            var c = CameraController.Instance.MainCamera;
+            Camera c = CameraController.Instance.MainCamera;
             c.DOOrthoSize(5, 0.65f);
             c.transform.DOMove(new Vector3(0, 0, -15), 0.66f).OnComplete(() =>
             {
@@ -88,7 +78,7 @@ namespace WeAreGladiators.TownFeatures
         public void OnLeaveFeatureButtonClicked()
         {
             StartCoroutine(LeaveCoroutine());
-        }     
+        }
         public void SnapToArenaViewSettings()
         {
             // Move canvas to start pos + setup
@@ -111,16 +101,20 @@ namespace WeAreGladiators.TownFeatures
             pageVisualParent.SetActive(false);
         }
 
-
         #region Input Events
 
         public void MouseEnter()
         {
-            if (blockMouseActions || TownController.Instance.AnyFeaturePageIsActive) return;
+            if (blockMouseActions || TownController.Instance.AnyFeaturePageIsActive)
+            {
+                return;
+            }
             CursorController.Instance.SetCursor(CursorType.Enter_Door);
 
             foreach (SpriteRenderer i in buildingSprites)
+            {
                 i.color = mouseOverColor;
+            }
 
             popUpRect.DOKill();
             popUpCg.DOKill();
@@ -131,11 +125,16 @@ namespace WeAreGladiators.TownFeatures
         }
         public void MouseExit()
         {
-            if (blockMouseActions || TownController.Instance.AnyFeaturePageIsActive) return;
+            if (blockMouseActions || TownController.Instance.AnyFeaturePageIsActive)
+            {
+                return;
+            }
             CursorController.Instance.SetCursor(CursorType.NormalPointer);
 
             foreach (SpriteRenderer i in buildingSprites)
+            {
                 i.color = normalColor;
+            }
 
             popUpRect.DOKill();
             popUpCg.DOKill();
@@ -151,11 +150,16 @@ namespace WeAreGladiators.TownFeatures
         private IEnumerator ClickCoroutine()
         {
             yield return null;
-            if (blockMouseActions || TownController.Instance.AnyFeaturePageIsActive) yield break;
+            if (blockMouseActions || TownController.Instance.AnyFeaturePageIsActive)
+            {
+                yield break;
+            }
             blockMouseActions = true;
             CursorController.Instance.SetCursor(CursorType.NormalPointer);
             foreach (SpriteRenderer i in buildingSprites)
+            {
                 i.color = normalColor;
+            }
 
             popUpRect.DOKill();
             popUpCg.DOKill();
@@ -179,7 +183,7 @@ namespace WeAreGladiators.TownFeatures
             pageCg.DOFade(1f, 0.5f);
 
             // Move + zoom camera towards building
-            var cam = CameraController.Instance.MainCamera;
+            Camera cam = CameraController.Instance.MainCamera;
             cam.DOOrthoSize(2.5f, 0.65f).SetEase(Ease.OutCubic);
             cam.transform.DOMove(new Vector3(cameraZoomToPoint.position.x, cameraZoomToPoint.position.y, -15), 0.5f).SetEase(Ease.OutCubic);
             yield return new WaitForSeconds(0.66f);
@@ -192,6 +196,7 @@ namespace WeAreGladiators.TownFeatures
                 .SetEase(Ease.OutBack)
                 .OnComplete(() => blockMouseActions = false);
         }
+
         #endregion
     }
 }

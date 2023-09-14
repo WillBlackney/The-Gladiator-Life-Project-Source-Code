@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace WeAreGladiators
 {
     static class ArrayExtensions
     {
 
+        private static readonly RNGCryptoServiceProvider _generator = new RNGCryptoServiceProvider();
+
         /// <summary>
-        /// Randomizes the order of all elements currently in the array.
+        ///     Randomizes the order of all elements currently in the array.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array"></param>
@@ -20,9 +22,12 @@ namespace WeAreGladiators
             while (n > 1)
             {
                 byte[] box = new byte[1];
-                do provider.GetBytes(box);
-                while (!(box[0] < n * (Byte.MaxValue / n)));
-                int k = (box[0] % n);
+                do
+                {
+                    provider.GetBytes(box);
+                }
+                while (!(box[0] < n * (byte.MaxValue / n)));
+                int k = box[0] % n;
                 n--;
                 T value = array[k];
                 array[k] = array[n];
@@ -30,9 +35,8 @@ namespace WeAreGladiators
             }
         }
 
-
         /// <summary>
-        /// Creates a copy of the array, randomizes the order of the elements, then returns the copy.
+        ///     Creates a copy of the array, randomizes the order of the elements, then returns the copy.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array"></param>
@@ -46,9 +50,12 @@ namespace WeAreGladiators
             while (n > 1)
             {
                 byte[] box = new byte[1];
-                do provider.GetBytes(box);
-                while (!(box[0] < n * (Byte.MaxValue / n)));
-                int k = (box[0] % n);
+                do
+                {
+                    provider.GetBytes(box);
+                }
+                while (!(box[0] < n * (byte.MaxValue / n)));
+                int k = box[0] % n;
                 n--;
                 T value = newArray[k];
                 newArray[k] = newArray[n];
@@ -57,22 +64,23 @@ namespace WeAreGladiators
             return newArray;
         }
 
-
         /// <summary>
-        /// Returns a random element from the list
+        ///     Returns a random element from the list
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array"></param>
         /// <returns></returns>
         public static T GetRandomElement<T>(this T[] array)
         {
-            if (array.Length == 1) return array[0];
-            else return array[NumberBetween(0, array.Length - 1)];
+            if (array.Length == 1)
+            {
+                return array[0];
+            }
+            return array[NumberBetween(0, array.Length - 1)];
         }
 
-
         /// <summary>
-        /// Removes a random element from the array, then returns it.
+        ///     Removes a random element from the array, then returns it.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array"></param>
@@ -86,8 +94,8 @@ namespace WeAreGladiators
         }
 
         /// <summary>
-        /// Returns a random element from the array X times, where X is the argument 'elementsCount'.
-        /// This function will NOT return the same element twice
+        ///     Returns a random element from the array X times, where X is the argument 'elementsCount'.
+        ///     This function will NOT return the same element twice
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
@@ -97,17 +105,20 @@ namespace WeAreGladiators
         {
             T[] arrRet = new T[elementsCount];
             List<int> indexes = new List<int>();
-            for(int i = 0; i < array.Length; i++)            
+            for (int i = 0; i < array.Length; i++)
+            {
                 indexes.Add(i);
+            }
             indexes.Shuffle();
-            for(int i = 0; i < elementsCount; i++)            
+            for (int i = 0; i < elementsCount; i++)
+            {
                 arrRet[i] = array[indexes[i]];
-            return arrRet;            
+            }
+            return arrRet;
         }
 
-
         /// <summary>
-        /// Returns the last element in the array.
+        ///     Returns the last element in the array.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
@@ -116,10 +127,9 @@ namespace WeAreGladiators
         {
             return array[array.Length - 1];
         }
-               
 
         /// <summary>
-        /// Returns a new array, with all elements copied over.
+        ///     Returns a new array, with all elements copied over.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
@@ -130,10 +140,6 @@ namespace WeAreGladiators
             Array.Copy(array, newArray, array.Length);
             return newArray;
         }
-
-
-
-        private static readonly RNGCryptoServiceProvider _generator = new RNGCryptoServiceProvider();
         private static int NumberBetween(int minimumValue, int maximumValue)
         {
             byte[] randomNumber = new byte[1];
@@ -145,18 +151,14 @@ namespace WeAreGladiators
             // We are using Math.Max, and substracting 0.00000000001,
             // to ensure "multiplier" will always be between 0.0 and .99999999999
             // Otherwise, it's possible for it to be "1", which causes problems in our rounding.
-            double multiplier = Math.Max(0, (asciiValueOfRandomCharacter / 255d) - 0.00000000001d);
+            double multiplier = Math.Max(0, asciiValueOfRandomCharacter / 255d - 0.00000000001d);
 
             // We need to add one to the range, to allow for the rounding done with Math.Floor
             int range = maximumValue - minimumValue + 1;
 
             double randomValueInRange = Math.Floor(multiplier * range);
 
-            return (int)(minimumValue + randomValueInRange);
+            return (int) (minimumValue + randomValueInRange);
         }
-
-
     }
 }
-
-

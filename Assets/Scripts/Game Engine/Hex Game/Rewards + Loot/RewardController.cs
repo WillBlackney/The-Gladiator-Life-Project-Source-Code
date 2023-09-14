@@ -1,15 +1,14 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Utilities;
-using WeAreGladiators.Characters;
-using WeAreGladiators.Abilities;
-using WeAreGladiators.Perks;
 using DG.Tweening;
-using System;
 using Sirenix.OdinInspector;
+using UnityEngine;
+using WeAreGladiators.Abilities;
 using WeAreGladiators.Cards;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Perks;
 using WeAreGladiators.Persistency;
+using WeAreGladiators.Utilities;
 
 // free to delete this class in future as its not longer used
 namespace WeAreGladiators.RewardSystems
@@ -17,7 +16,8 @@ namespace WeAreGladiators.RewardSystems
     public class RewardController : Singleton<RewardController>
     {
         // Properties + Components
-        #region    
+        #region
+
         [Header("Reward Tab + Panel Components")]
         [SerializeField] private RewardTab[] allRewardTabs;
         [SerializeField] private RewardScreenCardViewModel[] rewardCardViewModels;
@@ -32,10 +32,12 @@ namespace WeAreGladiators.RewardSystems
         [SerializeField] private GameObject chooseCardScreenParent;
         [SerializeField] private CanvasGroup chooseCardScreenCg;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+
         #endregion
 
         // Getters + Accessors
         #region
+
         public RewardContainerSet CurrentRewardResult
         {
             get { return currentRewardResult; }
@@ -45,10 +47,12 @@ namespace WeAreGladiators.RewardSystems
         {
             return visualParent.activeSelf;
         }
+
         #endregion
 
         // Reward Generation Logic
         #region
+
         public void AutoSetAndCacheNewLootResult()
         {
             CurrentRewardResult = GenerateNewCombatRewardResult();
@@ -57,7 +61,6 @@ namespace WeAreGladiators.RewardSystems
         {
             Debug.Log("RewardController.GenerateNewCombatRewardResult() called...");
             // to do in future: if we have gold and items as rewards, generate them here
-
 
             RewardContainerSet newRewardSet = new RewardContainerSet();
             foreach (HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
@@ -98,7 +101,7 @@ namespace WeAreGladiators.RewardSystems
             validPerks.Shuffle();
             validTalents.Shuffle();
 
-            for(int i = 0; i < 2 && i < validAbilities.Count; i++)
+            for (int i = 0; i < 2 && i < validAbilities.Count; i++)
             {
                 allPossibleRewards.Add(new SingleRewardContainer(validAbilities[i]));
             }
@@ -111,12 +114,12 @@ namespace WeAreGladiators.RewardSystems
                 allPossibleRewards.Add(new SingleRewardContainer(validTalents[i].talentSchool));
             }
 
-            Debug.Log("RewardController.GenerateRewardChoicesForCharacter() found " + allPossibleRewards.Count.ToString() +
+            Debug.Log("RewardController.GenerateRewardChoicesForCharacter() found " + allPossibleRewards.Count +
                 " possible Perk/Ability/Talent rewards for character: " + character.myName);
 
             // choose 3 random perks/abilities/talents to create as choices
             allPossibleRewards.Shuffle();
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 rewards.rewardChoices.Add(allPossibleRewards[i]);
             }
@@ -127,9 +130,9 @@ namespace WeAreGladiators.RewardSystems
         {
             List<AbilityData> validAbilities = new List<AbilityData>();
 
-            foreach(AbilityData ability in AbilityController.Instance.AllAbilities)
+            foreach (AbilityData ability in AbilityController.Instance.AllAbilities)
             {
-                if( // Does character meet talent requirement?
+                if ( // Does character meet talent requirement?
                     CharacterDataController.Instance.DoesCharacterHaveTalent(character.talentPairings, ability.talentRequirementData.talentSchool, ability.talentRequirementData.level) &&
                     // has character already learnt the ability?
                     !character.abilityBook.KnowsAbility(ability.abilityName))
@@ -138,8 +141,8 @@ namespace WeAreGladiators.RewardSystems
                 }
             }
 
-            Debug.Log("RewardController.GetValidAbilityRewardsForCharacter() found " + 
-                validAbilities.Count.ToString() + " valid learnable abilities for character: " + character.myName);
+            Debug.Log("RewardController.GetValidAbilityRewardsForCharacter() found " +
+                validAbilities.Count + " valid learnable abilities for character: " + character.myName);
             return validAbilities;
         }
         private List<Perk> GetValidPerkRewardsForCharacter(HexCharacterData character)
@@ -155,7 +158,7 @@ namespace WeAreGladiators.RewardSystems
             }
 
             Debug.Log("RewardController.GetValidPerkRewardsForCharacter() found " +
-               validPerks.Count.ToString() + " valid learnable perks for character: " + character.myName);
+                validPerks.Count + " valid learnable perks for character: " + character.myName);
 
             return validPerks;
         }
@@ -172,21 +175,25 @@ namespace WeAreGladiators.RewardSystems
             }
 
             Debug.Log("RewardController.GetValidTalentRewardsForCharacter() found " +
-             validTalents.Count.ToString() + " valid learnable talents for character: " + character.myName);
+                validTalents.Count + " valid learnable talents for character: " + character.myName);
 
             return validTalents;
         }
+
         #endregion
 
         // Build Views Logic
         #region
+
         public void BuildLootScreenElementsFromRewardContainerSet(RewardContainerSet data)
         {
             Debug.Log("RewardController.BuildLootScreenElementsFromRewardContainerSet() called...");
 
             // Reset reward tabs first
             foreach (RewardTab rt in allRewardTabs)
+            {
                 HideRewardTab(rt);
+            }
 
             // Build Choose reward buttons
             for (int i = 0; i < data.allCharacterRewards.Count; i++)
@@ -210,10 +217,12 @@ namespace WeAreGladiators.RewardSystems
                 rewardCardViewModels[i].myRewardDataRef = rewards[i];
             }
         }
+
         #endregion
 
         // On Click Events
         #region
+
         public void OnRewardTabButtonClicked(RewardTab buttonClicked)
         {
             Debug.Log("RewardController.OnRewardTabButtonClicked() called...");
@@ -256,8 +265,8 @@ namespace WeAreGladiators.RewardSystems
             // Ability chosen reward to character
             if (chosenReward.rewardType == RewardType.Ability)
             {
-               // AbilityController.Instance.HandleCharacterDataLearnNewAbility
-               //     (character, character.abilityBook, chosenReward.abilityOffered);
+                // AbilityController.Instance.HandleCharacterDataLearnNewAbility
+                //     (character, character.abilityBook, chosenReward.abilityOffered);
             }
             else if (chosenReward.rewardType == RewardType.Perk)
             {
@@ -275,17 +284,19 @@ namespace WeAreGladiators.RewardSystems
             // TO DO: find a better way to find the matching card tab
             // hide add card to deck button
             HideRewardTab(allRewardTabs[CharacterDataController.Instance.AllPlayerCharacters.IndexOf(currentCharacterSelection)]);
-            
+
         }
         public void OnChooseCardScreenBackButtonClicked()
         {
             HideChooseCardScreen();
             ShowFrontPageView();
         }
+
         #endregion
 
         // Show + Hide Screens and Transistions
         #region
+
         public void FadeInMainRewardView(float speed = 0.5f)
         {
             visualParentCg.alpha = 0;
@@ -328,13 +339,13 @@ namespace WeAreGladiators.RewardSystems
         public void HideChooseCardScreen()
         {
             chooseCardScreenParent.SetActive(false);
-            
+
             // Reset card scales
             foreach (RewardScreenCardViewModel card in rewardCardViewModels)
             {
                 card.ResetSelfOnEventComplete();
             }
-            
+
         }
         public void ShowRewardTab(RewardTab tab)
         {
@@ -344,10 +355,12 @@ namespace WeAreGladiators.RewardSystems
         {
             tab.gameObject.SetActive(false);
         }
+
         #endregion
 
         // Save + Load Logic
         #region
+
         public void SaveMyDataToSaveFile(SaveGameData saveFile)
         {
             saveFile.currentLootResult = CurrentRewardResult;
@@ -356,6 +369,7 @@ namespace WeAreGladiators.RewardSystems
         {
             CurrentRewardResult = saveFile.currentLootResult;
         }
+
         #endregion
     }
 }

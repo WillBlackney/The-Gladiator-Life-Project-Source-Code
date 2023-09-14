@@ -1,56 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
-using WeAreGladiators.Utilities;
-using UnityEngine.UI;
-using WeAreGladiators.CameraSystems;
 using TMPro;
-using WeAreGladiators.Perks;
-using WeAreGladiators.Characters;
+using UnityEngine;
+using UnityEngine.UI;
 using WeAreGladiators.Boons;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UI
 {
     public class MainModalController : Singleton<MainModalController>
     {
-        // Components + Properties
-        #region
-        [Header("Properties")]
-        [SerializeField] ModalBuildDataSO[] buildDataFiles;
-        [SerializeField] private float mouseOffsetX = 50f;
-        [SerializeField] private float mouseOffsetY = 10f;
-
-        [Header("Components")]
-        [SerializeField] Canvas mainCanvas;
-        [SerializeField] CanvasGroup mainCg;
-        [SerializeField] RectTransform positionParent;
-        [SerializeField] RectTransform[] fitters;
-        [SerializeField] ModalDottedRow[] dottedRows;
-        [SerializeField] TextMeshProUGUI headerText;
-        [SerializeField] TextMeshProUGUI descriptionText;
-        [SerializeField] Image framedImage;
-        [SerializeField] GameObject framedImageParent;
-        [SerializeField] Image unframedImage;
-        [SerializeField] GameObject unframedImageParent;
-
-        [Header("Background Components")]
-        [SerializeField] GameObject backgroundStatRangeSectionParent;
-        [SerializeField] TextMeshProUGUI accuracyText, dodgeText, mightText, constitutionText, resolveText, witsTexts;
-
-        // Non inspector values
-        private ModalDirection currentDir = ModalDirection.SouthWest;
-        private bool shouldRebuild = false;
-        #endregion
 
         // Getters + Accessors
         #region
+
         private ModalBuildDataSO GetBuildData(ModalBuildPreset preset)
         {
             ModalBuildDataSO ret = null;
-            foreach(ModalBuildDataSO m in buildDataFiles)
+            foreach (ModalBuildDataSO m in buildDataFiles)
             {
-                if(m.myPreset == preset)
+                if (m.myPreset == preset)
                 {
                     ret = m;
                     break;
@@ -58,10 +30,45 @@ namespace WeAreGladiators.UI
             }
             return ret;
         }
+
+        #endregion
+        // Components + Properties
+        #region
+
+        [Header("Properties")]
+        [SerializeField]
+        private ModalBuildDataSO[] buildDataFiles;
+        [SerializeField] private float mouseOffsetX = 50f;
+        [SerializeField] private float mouseOffsetY = 10f;
+
+        [Header("Components")]
+        [SerializeField]
+        private Canvas mainCanvas;
+        [SerializeField] private CanvasGroup mainCg;
+        [SerializeField] private RectTransform positionParent;
+        [SerializeField] private RectTransform[] fitters;
+        [SerializeField] private ModalDottedRow[] dottedRows;
+        [SerializeField] private TextMeshProUGUI headerText;
+        [SerializeField] private TextMeshProUGUI descriptionText;
+        [SerializeField] private Image framedImage;
+        [SerializeField] private GameObject framedImageParent;
+        [SerializeField] private Image unframedImage;
+        [SerializeField] private GameObject unframedImageParent;
+
+        [Header("Background Components")]
+        [SerializeField]
+        private GameObject backgroundStatRangeSectionParent;
+        [SerializeField] private TextMeshProUGUI accuracyText, dodgeText, mightText, constitutionText, resolveText, witsTexts;
+
+        // Non inspector values
+        private ModalDirection currentDir = ModalDirection.SouthWest;
+        private bool shouldRebuild;
+
         #endregion
 
         // Misc Logic
         #region
+
         private void Update()
         {
             if (mainCanvas.isActiveAndEnabled)
@@ -69,7 +76,7 @@ namespace WeAreGladiators.UI
                 Vector2 pos;
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(mainCanvas.transform as RectTransform, Input.mousePosition, mainCanvas.worldCamera, out pos);
                 positionParent.position = mainCanvas.transform.TransformPoint(pos);
-                positionParent.localPosition += (Vector3)GetMouseOffset(currentDir);
+                positionParent.localPosition += (Vector3) GetMouseOffset(currentDir);
 
                 if (shouldRebuild)
                 {
@@ -86,35 +93,32 @@ namespace WeAreGladiators.UI
             float yLimit = Screen.height / 4f;
 
             // too far north east
-            if (mousePos.x > (Screen.width - xLimit) &&
-                mousePos.y > (Screen.height - yLimit))
+            if (mousePos.x > Screen.width - xLimit &&
+                mousePos.y > Screen.height - yLimit)
             {
                 Debug.Log("Too far north east");
                 currentDir = ModalDirection.SouthWest;
             }
 
-
             // too far north west
             else if (mousePos.x < xLimit &&
-                mousePos.y > (Screen.height - yLimit))
+                     mousePos.y > Screen.height - yLimit)
             {
                 Debug.Log("Too far north west");
                 currentDir = ModalDirection.SouthEast;
             }
 
-
             // too far south east
-            else if (mousePos.x > (Screen.width - xLimit) &&
-                mousePos.y < yLimit)
+            else if (mousePos.x > Screen.width - xLimit &&
+                     mousePos.y < yLimit)
             {
                 Debug.Log("Too far south east");
                 currentDir = ModalDirection.NorthWest;
             }
 
-
             // too far south west
             else if (mousePos.x < xLimit &&
-                mousePos.y < yLimit)
+                     mousePos.y < yLimit)
             {
                 Debug.Log("Too far south west");
                 currentDir = ModalDirection.NorthEast;
@@ -128,14 +132,14 @@ namespace WeAreGladiators.UI
             }
 
             // too far east
-            else if (mousePos.x > (Screen.width - xLimit))
+            else if (mousePos.x > Screen.width - xLimit)
             {
                 Debug.Log("Too far east");
                 currentDir = ModalDirection.SouthWest;
             }
 
             // too far north
-            else if (mousePos.y > (Screen.height - yLimit))
+            else if (mousePos.y > Screen.height - yLimit)
             {
                 Debug.Log("Too far north");
                 currentDir = ModalDirection.SouthEast;
@@ -156,25 +160,24 @@ namespace WeAreGladiators.UI
 
             if (dir == ModalDirection.SouthEast)
             {
-                x = ((positionParent.rect.width / 2) + mouseOffsetX);
-                y = -((positionParent.rect.height / 2) - mouseOffsetY);
+                x = positionParent.rect.width / 2 + mouseOffsetX;
+                y = -(positionParent.rect.height / 2 - mouseOffsetY);
             }
             else if (dir == ModalDirection.SouthWest)
             {
-                x = -((positionParent.rect.width / 2) + mouseOffsetX);
-                y = -((positionParent.rect.height / 2) - mouseOffsetY);
+                x = -(positionParent.rect.width / 2 + mouseOffsetX);
+                y = -(positionParent.rect.height / 2 - mouseOffsetY);
             }
             else if (dir == ModalDirection.NorthEast)
             {
-                x = ((positionParent.rect.width / 2) + mouseOffsetX);
-                y = ((positionParent.rect.height / 2) + mouseOffsetY);
+                x = positionParent.rect.width / 2 + mouseOffsetX;
+                y = positionParent.rect.height / 2 + mouseOffsetY;
             }
             else if (dir == ModalDirection.NorthWest)
             {
-                x = -((positionParent.rect.width / 2) + mouseOffsetX);
-                y = ((positionParent.rect.height / 2) + mouseOffsetY);
+                x = -(positionParent.rect.width / 2 + mouseOffsetX);
+                y = positionParent.rect.height / 2 + mouseOffsetY;
             }
-
 
             ret = new Vector2(x, y);
             return ret;
@@ -193,7 +196,9 @@ namespace WeAreGladiators.UI
             unframedImageParent.gameObject.SetActive(false);
 
             foreach (ModalDottedRow row in dottedRows)
+            {
                 row.gameObject.SetActive(false);
+            }
         }
         private void FadeInModal()
         {
@@ -202,10 +207,12 @@ namespace WeAreGladiators.UI
             mainCg.alpha = 0.01f;
             mainCg.DOFade(1f, 0.25f);
         }
+
         #endregion
 
         // Build + Show Modal
         #region
+
         public void BuildAndShowModal(string headerText, string descriptionText)
         {
             UpdateDynamicDirection();
@@ -215,7 +222,10 @@ namespace WeAreGladiators.UI
             CustomString cs = new CustomString();
             cs.phrase = descriptionText;
             cs.color = TextColor.BrownBodyText;
-            BuildModalContent(headerText, new List<CustomString> { cs }, null, false);
+            BuildModalContent(headerText, new List<CustomString>
+            {
+                cs
+            }, null, false);
             TransformUtils.RebuildLayouts(fitters);
             shouldRebuild = true;
         }
@@ -232,7 +242,7 @@ namespace WeAreGladiators.UI
             ModalBuildDataSO data = GetBuildData(w.preset);
             if (!data && !w.customData)
             {
-                Debug.LogWarning("MainModalController.BuildAndShowModal() provided could not find data from preset '" + w.preset.ToString() +
+                Debug.LogWarning("MainModalController.BuildAndShowModal() provided could not find data from preset '" + w.preset +
                     "', cancelling...");
                 yield break;
             }
@@ -314,13 +324,15 @@ namespace WeAreGladiators.UI
             TransformUtils.RebuildLayouts(fitters);
             shouldRebuild = true;
         }
+
         #endregion
 
         // Build From Content
         #region
+
         private void BuildModalContent(BoonData data)
         {
-            headerText.text = data.boonDisplayName; 
+            headerText.text = data.boonDisplayName;
 
             // Main Image
             framedImageParent.SetActive(true);
@@ -342,16 +354,18 @@ namespace WeAreGladiators.UI
             // Expiration message
             string expirationMessage = "Permanent";
             string daysText = data.currentTimerStacks > 1 ? " days." : " day.";
-            if (data.durationType == BoonDurationType.DayTimer)            
-                expirationMessage = "Expires in " + TextLogic.ReturnColoredText(data.currentTimerStacks.ToString(), TextLogic.blueNumber) + daysText;            
+            if (data.durationType == BoonDurationType.DayTimer)
+            {
+                expirationMessage = "Expires in " + TextLogic.ReturnColoredText(data.currentTimerStacks.ToString(), TextLogic.blueNumber) + daysText;
+            }
             dottedRows[durationIndex].Build(expirationMessage, DotStyle.Neutral);
         }
         private void BuildModalContent(ModalBuildDataSO data)
-        {           
+        {
             headerText.text = data.headerName;
 
             // Main Image
-            if(data.mainSprite == null)
+            if (data.mainSprite == null)
             {
                 headerText.margin = new Vector4(0, 0, 0, 0);
             }
@@ -368,18 +382,29 @@ namespace WeAreGladiators.UI
 
             // Build description text
             string description = TextLogic.ConvertCustomStringListToString(data.description);
-            if (description == "") descriptionText.gameObject.SetActive(false);
+            if (description == "")
+            {
+                descriptionText.gameObject.SetActive(false);
+            }
             else
             {
-                if(data.italicDescription) descriptionText.fontStyle = FontStyles.Italic;
-                else descriptionText.fontStyle = FontStyles.Normal;
+                if (data.italicDescription)
+                {
+                    descriptionText.fontStyle = FontStyles.Italic;
+                }
+                else
+                {
+                    descriptionText.fontStyle = FontStyles.Normal;
+                }
                 descriptionText.gameObject.SetActive(true);
                 descriptionText.text = description;
             }
 
             // Build dot points
             for (int i = 0; i < data.infoRows.Length; i++)
+            {
                 dottedRows[i].Build(data.infoRows[i]);
+            }
         }
         private void BuildModalContent(string headerMessage, List<CustomString> descriptionMessage, Sprite headerSprite, bool frameImage)
         {
@@ -425,7 +450,7 @@ namespace WeAreGladiators.UI
                 descriptionText.gameObject.SetActive(true);
                 descriptionText.text = description;
             }
-            
+
 
             // todo: change below once we had effect detail data to perk data files
             dottedRows[0].Build(TextLogic.ConvertCustomStringListToString(ap.Data.passiveDescription), DotStyle.Neutral);
@@ -435,7 +460,7 @@ namespace WeAreGladiators.UI
                 string mes = "Will heal in " + TextLogic.ReturnColoredText(ap.stacks.ToString(), TextLogic.blueNumber) + " days.";
                 dottedRows[1].Build(mes, DotStyle.Red);
             }
-            else if (ap.Data.isPermanentInjury)            
+            else if (ap.Data.isPermanentInjury)
                 dottedRows[1].Build("PERMANENT", DotStyle.Red);
             */
 
@@ -449,7 +474,9 @@ namespace WeAreGladiators.UI
                 dottedRows[0].Build(mes, DotStyle.Red);
             }
             else if (ap.Data.isPermanentInjury)
+            {
                 dottedRows[0].Build("PERMANENT", DotStyle.Red);
+            }
 
         }
         private void BuildModalContent(TalentPairing tp)
@@ -491,17 +518,19 @@ namespace WeAreGladiators.UI
 
             // Build dot points
             for (int i = 0; i < data.passiveEffectDescriptions.Count; i++)
+            {
                 dottedRows[i].Build(data.passiveEffectDescriptions[i]);
+            }
 
             // stat sections
-            var source = CharacterDataController.Instance;
+            CharacterDataController source = CharacterDataController.Instance;
             backgroundStatRangeSectionParent.SetActive(true);
-            accuracyText.text = (data.accuracyLower + source.AccuracyLower).ToString() + " - " + (data.accuracyUpper + source.AccuracyUpper).ToString();
-            dodgeText.text = (data.dodgeLower + source.DodgeLower).ToString() + " - " + (data.dodgeUpper + source.DodgeUpper).ToString();
-            mightText.text = (data.mightLower + source.MightLower).ToString() + " - " + (data.mightUpper + source.MightUpper).ToString();
-            constitutionText.text = (data.constitutionLower + source.ConstitutionLower).ToString() + " - " + (data.constitutionUpper + source.ConstitutionUpper).ToString();
-            resolveText.text = (data.resolveLower + source.ResolveLower).ToString() + " - " + (data.resolveUpper + source.ResolveUpper).ToString();
-            witsTexts.text = (data.witsLower + source.WitsLower).ToString() + " - " + (data.witsUpper + source.WitsUpper).ToString();
+            accuracyText.text = data.accuracyLower + source.AccuracyLower + " - " + (data.accuracyUpper + source.AccuracyUpper);
+            dodgeText.text = data.dodgeLower + source.DodgeLower + " - " + (data.dodgeUpper + source.DodgeUpper);
+            mightText.text = data.mightLower + source.MightLower + " - " + (data.mightUpper + source.MightUpper);
+            constitutionText.text = data.constitutionLower + source.ConstitutionLower + " - " + (data.constitutionUpper + source.ConstitutionUpper);
+            resolveText.text = data.resolveLower + source.ResolveLower + " - " + (data.resolveUpper + source.ResolveUpper);
+            witsTexts.text = data.witsLower + source.WitsLower + " - " + (data.witsUpper + source.WitsUpper);
         }
         private void BuildModalContent(RaceDataSO data)
         {
@@ -518,12 +547,16 @@ namespace WeAreGladiators.UI
 
             // Build dot points
             for (int i = 0; i < data.racialPassiveDotRows.Length; i++)
+            {
                 dottedRows[i].Build(data.racialPassiveDotRows[i]);
+            }
         }
-        #endregion      
+
+        #endregion
 
         // Input
         #region
+
         public void WidgetMouseExit(ModalSceneWidget w)
         {
             HideModal();
@@ -532,8 +565,8 @@ namespace WeAreGladiators.UI
         {
             BuildAndShowModal(w);
         }
-        #endregion
 
+        #endregion
     }
 
     public enum ModalBuildPreset
@@ -574,7 +607,7 @@ namespace WeAreGladiators.UI
         Experience = 28,
         ExperienceReward = 33,
         Gold = 30,
-        
+
         Armour = 31,
         UnusedLevelUp = 32,
         Fatigue = 37,
@@ -595,9 +628,7 @@ namespace WeAreGladiators.UI
         CharacterRoster = 48,
         Inventory = 49,
         ShowHideUI = 50,
-        Settings = 51,
-
-       
+        Settings = 51
 
     }
     public enum ModalDirection
@@ -610,6 +641,6 @@ namespace WeAreGladiators.UI
         SouthWest = 5,
         NorthWest = 6,
         East = 7,
-        West = 8,
+        West = 8
     }
 }

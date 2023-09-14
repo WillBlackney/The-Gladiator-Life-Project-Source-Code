@@ -1,7 +1,5 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using Sirenix.OdinInspector;
 
 namespace WeAreGladiators.Characters
@@ -19,20 +17,16 @@ namespace WeAreGladiators.Characters
 
         [LabelWidth(200)]
         [ShowIf("ShowEnemyEncounterData")]
-        public List<EnemyEncounterSO> possibleEnemyEncounters;      
+        public List<EnemyEncounterSO> possibleEnemyEncounters;
         public bool ShowEnemyEncounterData()
         {
-            if ((combatDifficulty == CombatDifficulty.Basic ||
+            if (combatDifficulty == CombatDifficulty.Basic ||
                 combatDifficulty == CombatDifficulty.Elite ||
-                combatDifficulty == CombatDifficulty.Boss))
+                combatDifficulty == CombatDifficulty.Boss)
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
-
     }
 }

@@ -1,9 +1,7 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using Sirenix.OdinInspector;
-using UnityEngine.TextCore.Text;
+using UnityEngine;
 using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.Characters
@@ -16,7 +14,7 @@ namespace WeAreGladiators.Characters
         public int baseXpReward;
         [BoxGroup("General Info")]
         [LabelWidth(100)]
-        [Range(1,5)]
+        [Range(1, 5)]
         public int deploymentLimit;
         [BoxGroup("General Info")]
         [LabelWidth(100)]
@@ -25,8 +23,6 @@ namespace WeAreGladiators.Characters
         [BoxGroup("Enemy Groupings", centerLabel: true)]
         [LabelWidth(100)]
         public List<EnemyGroup> enemyGroups;
-
-       
 
     }
 
@@ -40,17 +36,16 @@ namespace WeAreGladiators.Characters
     public class PlayerGroup
     {
         [Header("Settings")]
-        public CharacterDataSource characterDataType;    
+        public CharacterDataSource characterDataType;
         [PropertySpace(0, 10)]
         public Vector2 spawnPosition;
 
         [ShowIf("ShowPossibleCharacters")]
-        [PropertySpace(10,10)]
+        [PropertySpace(10, 10)]
         public HexCharacterTemplateSO[] possibleCharacters;
         [ShowIf("ShowBackgrounds")]
         [PropertySpace(10, 10)]
         public BackgroundDataSO[] possibleBackgrounds;
-       
 
         public bool ShowPossibleCharacters()
         {
@@ -80,7 +75,7 @@ namespace WeAreGladiators.Characters
         public enum CharacterDataSource
         {
             UseTemplates = 0,
-            UseBackgrounds = 1,
+            UseBackgrounds = 1
         }
 
     }
@@ -94,7 +89,7 @@ namespace WeAreGladiators.Characters
             characterData = data;
         }
 
-        /*         
+        /*
             player back row
             - x = -3
             - north node is y -1

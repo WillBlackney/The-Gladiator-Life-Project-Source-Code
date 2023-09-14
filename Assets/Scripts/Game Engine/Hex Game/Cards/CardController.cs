@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Utilities;
-using WeAreGladiators.RewardSystems;
+﻿using System;
 using DG.Tweening;
-using System;
-using WeAreGladiators.Abilities;
-using WeAreGladiators.Libraries;
+using UnityEngine;
 using UnityEngine.UI;
-using WeAreGladiators.Perks;
+using WeAreGladiators.Abilities;
 using WeAreGladiators.Characters;
-using WeAreGladiators.Items;
+using WeAreGladiators.Libraries;
+using WeAreGladiators.Perks;
+using WeAreGladiators.RewardSystems;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.Cards
 {
@@ -19,16 +16,23 @@ namespace WeAreGladiators.Cards
 
         // Build Cards + View Models
         #region
+
         public void BuildCardViewModelFromRewardData(SingleRewardContainer reward, CardViewModel cardVM)
         {
             Debug.Log("CardController.BuildCardViewModelFromRewardData() called...");
 
             if (reward.rewardType == RewardType.Ability)
+            {
                 BuildCardViewModelFromAbilityData(reward.abilityOffered, cardVM);
+            }
             else if (reward.rewardType == RewardType.Perk)
+            {
                 BuildCardViewModelFromPerkTag(reward.perkOffered, cardVM);
+            }
             else if (reward.rewardType == RewardType.Talent)
+            {
                 BuildCardViewModelFromTalentData(reward.talentOffered, cardVM);
+            }
         }
         private void BuildCardViewModelFromAbilityData(AbilityData ability, CardViewModel cardVM)
         {
@@ -41,7 +45,7 @@ namespace WeAreGladiators.Cards
 
             // type
             SetAbilityTypeIconVisbility(cardVM, true);
-           // SetCardViewModelAbilityTypeIconImage(cardVM, SpriteLibrary.Instance.GetAbilityTypeSprite(ability.abilityType));
+            // SetCardViewModelAbilityTypeIconImage(cardVM, SpriteLibrary.Instance.GetAbilityTypeSprite(ability.abilityType));
 
             // energy cost
             SetEnergyIconVisbility(cardVM, true);
@@ -87,10 +91,12 @@ namespace WeAreGladiators.Cards
             SetCardViewModelGraphicImage(cardVM, talentData.talentSprite);
             //ApplyCardViewModelTalentColoring(cardVM, ColorLibrary.Instance.GetTalentColor(talent));
         }
+
         #endregion
 
         // Build Card View Model Specific Components
         #region
+
         private void SetCardViewModelNameText(CardViewModel cvm, string name)
         {
             cvm.nameText.text = name;
@@ -108,7 +114,9 @@ namespace WeAreGladiators.Cards
 
             // Apply change to 
             if (cvm.myPreviewCard != null)
+            {
                 cvm.myPreviewCard.descriptionText.text = description;
+            }
         }
         private void AutoUpdateCardViewModelDescriptionTextFromPerkData(CardViewModel cvm, PerkIconData data)
         {
@@ -117,7 +125,9 @@ namespace WeAreGladiators.Cards
 
             // Apply change to 
             if (cvm.myPreviewCard != null)
+            {
                 cvm.myPreviewCard.descriptionText.text = description;
+            }
         }
         private void AutoUpdateCardViewModelDescriptionTextFromTalentData(CardViewModel cvm, TalentDataSO data)
         {
@@ -126,7 +136,9 @@ namespace WeAreGladiators.Cards
 
             // Apply change to 
             if (cvm.myPreviewCard != null)
+            {
                 cvm.myPreviewCard.descriptionText.text = description;
+            }
         }
         private void SetCardViewModelGraphicImage(CardViewModel cvm, Sprite sprite)
         {
@@ -139,51 +151,79 @@ namespace WeAreGladiators.Cards
         private void SetCardViewModelEnergyIconText(CardViewModel cvm, string value)
         {
             cvm.energyText.text = value;
-            if (cvm.myPreviewCard != null) SetCardViewModelEnergyIconText(cvm.myPreviewCard, value);
+            if (cvm.myPreviewCard != null)
+            {
+                SetCardViewModelEnergyIconText(cvm.myPreviewCard, value);
+            }
         }
         private void SetCardViewModelCooldownIconText(CardViewModel cvm, string value)
         {
             cvm.energyText.text = value;
-            if (cvm.myPreviewCard != null) SetCardViewModelCooldownIconText(cvm.myPreviewCard, value);
+            if (cvm.myPreviewCard != null)
+            {
+                SetCardViewModelCooldownIconText(cvm.myPreviewCard, value);
+            }
         }
         private void SetCardViewModelTalentIconImage(CardViewModel cvm, Sprite sprite)
         {
             cvm.talentIconImage.sprite = sprite;
-            if (cvm.myPreviewCard != null) SetCardViewModelTalentIconImage(cvm.myPreviewCard, sprite);
+            if (cvm.myPreviewCard != null)
+            {
+                SetCardViewModelTalentIconImage(cvm.myPreviewCard, sprite);
+            }
         }
         private void SetCardViewModelAbilityTypeIconImage(CardViewModel cvm, Sprite sprite)
         {
             cvm.abilityTypeImage.sprite = sprite;
-            if (cvm.myPreviewCard != null) SetCardViewModelAbilityTypeIconImage(cvm.myPreviewCard, sprite);
+            if (cvm.myPreviewCard != null)
+            {
+                SetCardViewModelAbilityTypeIconImage(cvm.myPreviewCard, sprite);
+            }
         }
+
         #endregion
 
         // Show + Hide Card Icon Components
         #region
+
         private void SetEnergyIconVisbility(CardViewModel cvm, bool onOrOff)
         {
             cvm.energyIconVisualParent.SetActive(onOrOff);
-            if (cvm.myPreviewCard != null) SetEnergyIconVisbility(cvm.myPreviewCard, onOrOff);
+            if (cvm.myPreviewCard != null)
+            {
+                SetEnergyIconVisbility(cvm.myPreviewCard, onOrOff);
+            }
         }
         private void SetCooldownIconVisbility(CardViewModel cvm, bool onOrOff)
         {
             cvm.cooldownIconVisualParent.SetActive(onOrOff);
-            if (cvm.myPreviewCard != null) SetCooldownIconVisbility(cvm.myPreviewCard, onOrOff);
+            if (cvm.myPreviewCard != null)
+            {
+                SetCooldownIconVisbility(cvm.myPreviewCard, onOrOff);
+            }
         }
         private void SetTalentIconVisbility(CardViewModel cvm, bool onOrOff)
         {
             cvm.talentIconVisualParent.SetActive(onOrOff);
-            if (cvm.myPreviewCard != null) SetTalentIconVisbility(cvm.myPreviewCard, onOrOff);
+            if (cvm.myPreviewCard != null)
+            {
+                SetTalentIconVisbility(cvm.myPreviewCard, onOrOff);
+            }
         }
         private void SetAbilityTypeIconVisbility(CardViewModel cvm, bool onOrOff)
         {
             cvm.abilityTypeIconVisualParent.SetActive(onOrOff);
-            if (cvm.myPreviewCard != null) SetAbilityTypeIconVisbility(cvm.myPreviewCard, onOrOff);
+            if (cvm.myPreviewCard != null)
+            {
+                SetAbilityTypeIconVisbility(cvm.myPreviewCard, onOrOff);
+            }
         }
+
         #endregion
 
         // Card View Model Colouring
         #region
+
         private void ApplyCardViewModelTalentColoring(CardViewModel cvm, Color color)
         {
             foreach (Image sr in cvm.talentRenderers)
@@ -221,10 +261,12 @@ namespace WeAreGladiators.Cards
                 ApplyCardViewModelRarityColoring(cvm.myPreviewCard, color);
             }
         }
+
         #endregion
 
         // Card Movement
         #region
+
         public void MoveCardVMToPlayPreviewSpot(CardViewModel cvm, HandVisual hv)
         {
             MoveTransformToLocation(cvm.movementParent, hv.PlayPreviewSpot.position, 0.25f);
@@ -250,6 +292,7 @@ namespace WeAreGladiators.Cards
                 }
             });
         }
+
         #endregion
     }
 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 namespace WeAreGladiators.DungeonMap
 {
     [CreateAssetMenu]
@@ -13,6 +12,5 @@ namespace WeAreGladiators.DungeonMap
         public Sprite sprite;
         public Sprite greyScaleSprite;
         public Sprite outlineSprite;
-       
     }
 }

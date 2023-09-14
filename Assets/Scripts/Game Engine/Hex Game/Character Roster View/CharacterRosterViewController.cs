@@ -1,21 +1,67 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Utilities;
-using WeAreGladiators.Characters;
-using WeAreGladiators.Perks;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using WeAreGladiators.Items;
 using WeAreGladiators.Abilities;
-using WeAreGladiators.UCM;
 using WeAreGladiators.Audio;
+using WeAreGladiators.Characters;
+using WeAreGladiators.Items;
+using WeAreGladiators.Perks;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UI
 {
     public class CharacterRosterViewController : Singleton<CharacterRosterViewController>
     {
+
+        // Build Perk Section
+        #region
+
+        private void BuildActivePerksSection(HexCharacterData character)
+        {
+            foreach (UIPerkIcon b in perkButtons)
+            {
+                b.HideAndReset();
+            }
+
+            // Build Icons
+            List<ActivePerk> allPerks = new List<ActivePerk>();
+
+            // Get character perks
+            for (int i = 0; i < character.passiveManager.perks.Count; i++)
+            {
+                allPerks.Add(character.passiveManager.perks[i]);
+            }
+
+            // Add perks from items
+            allPerks.AddRange(ItemController.Instance.GetActivePerksFromItemSet(character.itemSet));
+
+            // Build perk button for each perk
+            for (int i = 0; i < allPerks.Count; i++)
+            {
+                perkButtons[i].BuildFromActivePerk(allPerks[i]);
+            }
+
+            Debug.Log("Active perk icons = " + allPerks.Count);
+
+        }
+
+        #endregion
+
+        // NEW LOGIC
+
+        public void OnTalentsPageButtonClicked()
+        {
+            perkPageParent.SetActive(false);
+            talentPageParent.SetActive(true);
+            abilityPageParent.SetActive(false);
+
+            talentPageButton.SetSelectedViewState(0.25f);
+        }
         // Properties + Components
         #region
+
         [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
         [SerializeField] private Scrollbar[] scrollBarResets;
@@ -35,7 +81,6 @@ namespace WeAreGladiators.UI
         [SerializeField] private TextMeshProUGUI xpBarText;
         [SerializeField] private Slider xpbar;
         [Space(20)]
-
         [Header("Level Up Components")]
         [SerializeField] private LevelUpButton attributeLevelUpButton;
         [SerializeField] private AttributeLevelUpPage attributeLevelUpPageComponent;
@@ -46,22 +91,18 @@ namespace WeAreGladiators.UI
         private UILevelUpPerkIcon currentSelectedLevelUpPerkChoice;
         private UILevelUpTalentIcon currentSelectedLevelUpTalentChoice;
         [Space(20)]
-
         [Header("Abilities Section Components")]
         [SerializeField] private List<UIAbilityIconSelectable> selectableAbilityButtons;
         [SerializeField] private GameObject selectableAbilityButtonPrefab;
         [SerializeField] private TextMeshProUGUI activeAbilitiesText;
         [SerializeField] private Transform selectableAbilityButtonsParent;
         [Space(20)]
-
         [Header("Talent Section Components")]
         [SerializeField] private UILevelUpTalentIcon[] talentLevelUpIcons;
         [Space(20)]
-
         [Header("Perk Section Components")]
         [SerializeField] private UIPerkIcon[] perkButtons;
         [Space(20)]
-
         [Header("Character View Panel Components")]
         [SerializeField] private UniversalCharacterModel characterPanelUcm;
         [SerializeField] private RosterItemSlot mainHandSlot;
@@ -76,7 +117,6 @@ namespace WeAreGladiators.UI
         [SerializeField] private TMP_InputField characterSubNameInputField;
         [SerializeField] private TextMeshProUGUI dailyWageText;
         [Space(20)]
-
         [Header("Core Attribute Components")]
         [SerializeField] private TextMeshProUGUI mightText;
         [SerializeField] private GameObject[] mightStars;
@@ -99,7 +139,6 @@ namespace WeAreGladiators.UI
         [SerializeField] private TextMeshProUGUI fitnessText;
         [SerializeField] private GameObject[] fitnessStars;
         [Space(20)]
-
         [Header("Secondary Attribute Text Components")]
         [SerializeField] private TextMeshProUGUI criticalChanceText;
         [SerializeField] private TextMeshProUGUI criticalModifierText;
@@ -120,93 +159,94 @@ namespace WeAreGladiators.UI
         [SerializeField] private TextMeshProUGUI debuffResistanceText;
         [SerializeField] private TextMeshProUGUI deathResistanceText;
         [Space(20)]
-
         [Header("New Components")]
-        [SerializeField] CharacterRosterPageButton perkPageButton;
-        [SerializeField] CharacterRosterPageButton talentPageButton;
-        [SerializeField] CharacterRosterPageButton abilityPageButton;
+        [SerializeField]
+        private CharacterRosterPageButton perkPageButton;
+        [SerializeField] private CharacterRosterPageButton talentPageButton;
+        [SerializeField] private CharacterRosterPageButton abilityPageButton;
 
-        [SerializeField] GameObject perkPageParent;
-        [SerializeField] GameObject talentPageParent;
-        [SerializeField] GameObject abilityPageParent;
+        [SerializeField] private GameObject perkPageParent;
+        [SerializeField] private GameObject talentPageParent;
+        [SerializeField] private GameObject abilityPageParent;
 
-        [SerializeField] TextMeshProUGUI perkPointsText;
-        [SerializeField] TextMeshProUGUI talentsPointsText;
+        [SerializeField] private TextMeshProUGUI perkPointsText;
+        [SerializeField] private TextMeshProUGUI talentsPointsText;
 
         [Header("Dismiss Character Page Components")]
-        [SerializeField] GameObject dismissVisualParent;
-        [SerializeField] UniversalCharacterModel dismissUcm;
-        [SerializeField] TextMeshProUGUI dismissPageHeaderText;
+        [SerializeField]
+        private GameObject dismissVisualParent;
+        [SerializeField] private UniversalCharacterModel dismissUcm;
+        [SerializeField] private TextMeshProUGUI dismissPageHeaderText;
 
-        private HexCharacterData characterCurrentlyViewing;
         private bool currentlyEditingName;
+
         #endregion
 
         // Getters + Accessors
         #region
-        public UniversalCharacterModel CharacterPanelUcm
-        {
-            get { return characterPanelUcm; }
-        }
-        public HexCharacterData CharacterCurrentlyViewing
-        {
-            get { return characterCurrentlyViewing; }
-        }
-        public GameObject MainVisualParent
-        {
-            get { return mainVisualParent; }
-        }
-        public RosterItemSlot MainHandSlot
-        {
-            get { return mainHandSlot; }
-        }
-        public RosterItemSlot OffHandSLot
-        {
-            get { return offHandSlot; }
-        }
-        public RosterItemSlot HeadSlot
-        {
-            get { return headSlot; }
-        }
-        public RosterItemSlot BodySLot
-        {
-            get { return bodySlot; }
-        }
-        public RosterItemSlot TrinketSlot
-        {
-            get { return trinketSlot; }
-        }
+
+        public UniversalCharacterModel CharacterPanelUcm => characterPanelUcm;
+        public HexCharacterData CharacterCurrentlyViewing { get; private set; }
+        public GameObject MainVisualParent => mainVisualParent;
+        public RosterItemSlot MainHandSlot => mainHandSlot;
+        public RosterItemSlot OffHandSLot => offHandSlot;
+        public RosterItemSlot HeadSlot => headSlot;
+        public RosterItemSlot BodySLot => bodySlot;
+        public RosterItemSlot TrinketSlot => trinketSlot;
+
         #endregion
 
         // Show + Hide Main View Logic
         #region
+
         public void OnCharacterRosterTopbarButtonClicked()
         {
             if (GameController.Instance.GameState == GameState.StoryEvent ||
-                currentlyEditingName) return;
+                currentlyEditingName)
+            {
+                return;
+            }
 
             if (mainVisualParent.activeSelf)
+            {
                 HideCharacterRosterScreen();
+            }
             else
+            {
                 HandleBuildAndShowCharacterRoster();
+            }
         }
         public void BuildAndShowFromCharacterData(HexCharacterData data)
         {
-            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0) return;
+            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0)
+            {
+                return;
+            }
             if (!mainVisualParent.activeInHierarchy)
+            {
                 for (int i = 0; i < scrollBarResets.Length; i++)
-                scrollBarResets[i].value = 1;
+                {
+                    scrollBarResets[i].value = 1;
+                }
+            }
             mainVisualParent.SetActive(true);
             BuildRosterForCharacter(data);
             characterPanelUcm.SetIdleAnim();
         }
         private void HandleBuildAndShowCharacterRoster()
-        {            
+        {
             Debug.Log("ShowCharacterRosterScreen()");
-            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0) return;
+            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0)
+            {
+                return;
+            }
             if (!mainVisualParent.activeInHierarchy)
+            {
                 for (int i = 0; i < scrollBarResets.Length; i++)
+                {
                     scrollBarResets[i].value = 1;
+                }
+            }
             mainVisualParent.SetActive(true);
             HexCharacterData data = CharacterDataController.Instance.AllPlayerCharacters[0];
             BuildRosterForCharacter(data);
@@ -218,13 +258,19 @@ namespace WeAreGladiators.UI
         }
         private void BuildRosterForCharacter(HexCharacterData data)
         {
-            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0) return;
+            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0)
+            {
+                return;
+            }
             // Build all sections
-            if (characterCurrentlyViewing != data) AudioManager.Instance.PlaySound(data.AudioProfile, AudioSet.TurnStart);
-            characterCurrentlyViewing = data;
+            if (CharacterCurrentlyViewing != data)
+            {
+                AudioManager.Instance.PlaySound(data.AudioProfile, AudioSet.TurnStart);
+            }
+            CharacterCurrentlyViewing = data;
             characterNameInputField.text = data.myName;
             characterSubNameInputField.text = data.mySubName;
-            dailyWageText.text = data.dailyWage.ToString();         
+            dailyWageText.text = data.dailyWage.ToString();
             BuildActivePerksSection(data);
             BuildAttributeSection(data);
             BuildGeneralInfoSection(data);
@@ -235,12 +281,12 @@ namespace WeAreGladiators.UI
             BuildPerkPage(data);
 
             OnPerksPageButtonClicked();
-            
+
         }
         public void HideCharacterRosterScreen()
         {
             Debug.Log("HideCharacterRosterScreen()");
-            characterCurrentlyViewing = null;
+            CharacterCurrentlyViewing = null;
             mainVisualParent.SetActive(false);
         }
 
@@ -248,45 +294,67 @@ namespace WeAreGladiators.UI
 
         // Input
         #region
+
         public void OnFormationButtonClicked(RosterFormationButton button)
         {
-            if (button.CharacterDataRef == null) return;
+            if (button.CharacterDataRef == null)
+            {
+                return;
+            }
 
             BuildRosterForCharacter(button.CharacterDataRef);
         }
         public void OnPreviousCharacterButtonClicked()
         {
             Debug.Log("OnPreviousCharacterButtonClicked");
-            int index = CharacterDataController.Instance.AllPlayerCharacters.IndexOf(characterCurrentlyViewing);
-            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0) return;
+            int index = CharacterDataController.Instance.AllPlayerCharacters.IndexOf(CharacterCurrentlyViewing);
+            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0)
+            {
+                return;
+            }
             int nextIndex = 0;
-            if (index == 0) nextIndex = CharacterDataController.Instance.AllPlayerCharacters.Count - 1;
-            else nextIndex = index - 1;
+            if (index == 0)
+            {
+                nextIndex = CharacterDataController.Instance.AllPlayerCharacters.Count - 1;
+            }
+            else
+            {
+                nextIndex = index - 1;
+            }
             BuildRosterForCharacter(CharacterDataController.Instance.AllPlayerCharacters[nextIndex]);
         }
         public void OnNextCharacterButtonClicked()
         {
             Debug.Log("OnNextCharacterButtonClicked");
-            int index = CharacterDataController.Instance.AllPlayerCharacters.IndexOf(characterCurrentlyViewing);
-            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0) return;
+            int index = CharacterDataController.Instance.AllPlayerCharacters.IndexOf(CharacterCurrentlyViewing);
+            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0)
+            {
+                return;
+            }
             int nextIndex = 0;
-            if (index == CharacterDataController.Instance.AllPlayerCharacters.Count - 1) nextIndex = 0;
-            else nextIndex = index + 1;
+            if (index == CharacterDataController.Instance.AllPlayerCharacters.Count - 1)
+            {
+                nextIndex = 0;
+            }
+            else
+            {
+                nextIndex = index + 1;
+            }
             BuildRosterForCharacter(CharacterDataController.Instance.AllPlayerCharacters[nextIndex]);
         }
         public void OnLevelUpAttributeButtonClicked()
         {
-            attributeLevelUpPageComponent.ShowAndBuildPage(characterCurrentlyViewing);
+            attributeLevelUpPageComponent.ShowAndBuildPage(CharacterCurrentlyViewing);
         }
         public void OnNameInputFieldValueChanged()
         {
             currentlyEditingName = false;
-            characterCurrentlyViewing.myName = characterNameInputField.text;
+            CharacterCurrentlyViewing.myName = characterNameInputField.text;
             CharacterScrollPanelController.Instance.RebuildViews();
         }
         public void OnSubInputFieldValueChanged()
         {
-            characterCurrentlyViewing.mySubName = characterSubNameInputField.text;
+            CharacterCurrentlyViewing.mySubName = characterSubNameInputField.text;
             CharacterScrollPanelController.Instance.RebuildViews();
             currentlyEditingName = false;
         }
@@ -297,36 +365,9 @@ namespace WeAreGladiators.UI
 
         #endregion
 
-        // Build Perk Section
-        #region      
-        private void BuildActivePerksSection(HexCharacterData character)
-        {
-            foreach (UIPerkIcon b in perkButtons)            
-                b.HideAndReset();            
-
-            // Build Icons
-            List<ActivePerk> allPerks = new List<ActivePerk>();
-
-            // Get character perks
-            for (int i = 0; i < character.passiveManager.perks.Count; i++)            
-                allPerks.Add(character.passiveManager.perks[i]);            
-
-            // Add perks from items
-            allPerks.AddRange(ItemController.Instance.GetActivePerksFromItemSet(character.itemSet));
-
-            // Build perk button for each perk
-            for (int i = 0; i < allPerks.Count; i++)
-                perkButtons[i].BuildFromActivePerk(allPerks[i]);          
-
-            Debug.Log("Active perk icons = " + allPerks.Count.ToString());           
-
-
-        }
-       
-        #endregion
-
         // Build Attribute Section
         #region
+
         private void BuildAttributeSection(HexCharacterData character)
         {
             mightText.text = StatCalculator.GetTotalMight(character).ToString();
@@ -347,39 +388,50 @@ namespace WeAreGladiators.UI
             witsText.text = StatCalculator.GetTotalWits(character).ToString();
             BuildStars(witsStars, character.attributeSheet.wits.stars);
 
-            criticalChanceText.text = StatCalculator.GetTotalCriticalChance(character).ToString() + "%";
-            criticalModifierText.text = StatCalculator.GetTotalCriticalModifier(character).ToString() + "%";
+            criticalChanceText.text = StatCalculator.GetTotalCriticalChance(character) + "%";
+            criticalModifierText.text = StatCalculator.GetTotalCriticalModifier(character) + "%";
             energyRecoveryText.text = StatCalculator.GetTotalActionPointRecovery(character).ToString();
             maxEnergyText.text = StatCalculator.GetTotalMaxActionPoints(character).ToString();
             initiativeText.text = StatCalculator.GetTotalInitiative(character).ToString();
             visionText.text = StatCalculator.GetTotalVision(character).ToString();
-            physicalDamageText.text = StatCalculator.GetTotalPhysicalDamageBonus(character).ToString() + "%";
-            magicDamageText.text = StatCalculator.GetTotalMagicDamageBonus(character).ToString() + "%";
+            physicalDamageText.text = StatCalculator.GetTotalPhysicalDamageBonus(character) + "%";
+            magicDamageText.text = StatCalculator.GetTotalMagicDamageBonus(character) + "%";
 
-            physicalResistanceText.text = StatCalculator.GetTotalPhysicalResistance(character).ToString() + "%";
-            magicResistanceText.text = StatCalculator.GetTotalMagicResistance(character).ToString() + "%";
-            stressResistanceText.text = StatCalculator.GetTotalStressResistance(character).ToString() + "%";
-            injuryResistanceText.text = StatCalculator.GetTotalInjuryResistance(character).ToString() + "%";
-            debuffResistanceText.text = StatCalculator.GetTotalDebuffResistance(character).ToString() + "%";
-            deathResistanceText.text = StatCalculator.GetTotalDeathResistance(character).ToString() + "%";
+            physicalResistanceText.text = StatCalculator.GetTotalPhysicalResistance(character) + "%";
+            magicResistanceText.text = StatCalculator.GetTotalMagicResistance(character) + "%";
+            stressResistanceText.text = StatCalculator.GetTotalStressResistance(character) + "%";
+            injuryResistanceText.text = StatCalculator.GetTotalInjuryResistance(character) + "%";
+            debuffResistanceText.text = StatCalculator.GetTotalDebuffResistance(character) + "%";
+            deathResistanceText.text = StatCalculator.GetTotalDeathResistance(character) + "%";
 
             if (character.attributeRolls.Count > 0)
+            {
                 attributeLevelUpButton.ShowAndAnimate();
-            else attributeLevelUpButton.Hide();
+            }
+            else
+            {
+                attributeLevelUpButton.Hide();
+            }
         }
         private void BuildStars(GameObject[] arr, int starCount)
         {
             // Reset
-            for(int i = 0; i < arr.Length; i++)            
+            for (int i = 0; i < arr.Length; i++)
+            {
                 arr[i].gameObject.SetActive(false);
+            }
 
             for (int i = 0; i < starCount; i++)
+            {
                 arr[i].gameObject.SetActive(true);
+            }
         }
+
         #endregion
 
         // Build General Info Section
         #region
+
         private void BuildGeneralInfoSection(HexCharacterData character)
         {
             BuildHealthBar(character);
@@ -398,7 +450,7 @@ namespace WeAreGladiators.UI
             healthBar.value = healthBarFloat;
 
             // Update health text
-            healthBarText.text = character.currentHealth.ToString() + " / " + maxHealth.ToString();
+            healthBarText.text = character.currentHealth + " / " + maxHealth;
         }
         private void BuildXpBar(HexCharacterData character)
         {
@@ -409,7 +461,7 @@ namespace WeAreGladiators.UI
             xpbar.value = xpBarFloat;
 
             // Update xp text + level text
-            xpBarText.text = xp.ToString() + " / " + maxXp.ToString();
+            xpBarText.text = xp + " / " + maxXp;
             currentLevelText.text = character.currentLevel.ToString();
         }
         private void BuildStressBar(HexCharacterData character)
@@ -421,12 +473,14 @@ namespace WeAreGladiators.UI
             stressBar.value = stresBarFloat;
 
             // Update stress text
-            stressBarText.text = stress.ToString() + " / " + maxStress.ToString();
+            stressBarText.text = stress + " / " + maxStress;
         }
+
         #endregion
 
         // Build Character View Panel Section
         #region
+
         private void BuildCharacterViewPanelModel(HexCharacterData character)
         {
             CharacterModeller.BuildModelFromStringReferences(characterPanelUcm, character.modelParts);
@@ -450,7 +504,10 @@ namespace WeAreGladiators.UI
         }
         private void BuildItemSlotFromItemData(RosterItemSlot slot, ItemData item)
         {
-            if (item == null) return;
+            if (item == null)
+            {
+                return;
+            }
             slot.SetMyDataReference(item);
             slot.ItemImage.sprite = item.ItemSprite;
             slot.ItemImage.gameObject.SetActive(true);
@@ -460,10 +517,12 @@ namespace WeAreGladiators.UI
             slot.ItemImage.gameObject.SetActive(false);
             slot.SetMyDataReference(null);
         }
+
         #endregion
 
         // Perk Tree Section Logic
         #region
+
         public void OnPerksPageButtonClicked()
         {
             perkPageParent.SetActive(true);
@@ -474,9 +533,12 @@ namespace WeAreGladiators.UI
         }
         private void BuildPerkPage(HexCharacterData character)
         {
-            if (character.PerkTree == null) return;
+            if (character.PerkTree == null)
+            {
+                return;
+            }
 
-            for(int i = 0; i < character.PerkTree.PerkChoices.Count; i++)
+            for (int i = 0; i < character.PerkTree.PerkChoices.Count; i++)
             {
                 perkLevelUpIcons[i].BuildFromCharacterAndPerkData(character, character.PerkTree.PerkChoices[i]);
             }
@@ -486,10 +548,13 @@ namespace WeAreGladiators.UI
         }
         public void OnPerkTreeIconClicked(UILevelUpPerkIcon icon)
         {
-            if (icon.alreadyKnown || 
-                icon.myCharacter.perkPoints == 0 || 
+            if (icon.alreadyKnown ||
+                icon.myCharacter.perkPoints == 0 ||
                 icon.myCharacter.currentLevel - 1 < icon.myPerkData.tier ||
-                icon.myPerkData.tier != icon.myCharacter.PerkTree.nextAvailableTier) return;
+                icon.myPerkData.tier != icon.myCharacter.PerkTree.nextAvailableTier)
+            {
+                return;
+            }
 
             currentSelectedLevelUpPerkChoice = icon;
             currentSelectedLevelUpTalentChoice = null;
@@ -500,8 +565,8 @@ namespace WeAreGladiators.UI
 
             // Build page card
             perkLevelUpScreenUICard.BuildCard(
-                icon.perkIcon.PerkDataRef.passiveName, 
-                TextLogic.ConvertCustomStringListToString(icon.perkIcon.PerkDataRef.passiveDescription), 
+                icon.perkIcon.PerkDataRef.passiveName,
+                TextLogic.ConvertCustomStringListToString(icon.perkIcon.PerkDataRef.passiveDescription),
                 icon.perkIcon.PerkDataRef.passiveSprite);
         }
         public void OnConfirmLevelUpPerkPageConfirmButtonClicked()
@@ -521,7 +586,7 @@ namespace WeAreGladiators.UI
             }
 
             // Gain perk 
-            if(perk != null)
+            if (perk != null)
             {
                 // Pay perk point + increment perk tree tier
                 character.perkPoints--;
@@ -535,7 +600,7 @@ namespace WeAreGladiators.UI
             if (talent != null)
             {
                 character.talentPoints--;
-                CharacterDataController.Instance.HandleLearnNewTalent(character, talent.myTalentData.talentSchool);   
+                CharacterDataController.Instance.HandleLearnNewTalent(character, talent.myTalentData.talentSchool);
             }
 
             // Close views
@@ -554,10 +619,12 @@ namespace WeAreGladiators.UI
             currentSelectedLevelUpPerkChoice = null;
             currentSelectedLevelUpTalentChoice = null;
         }
+
         #endregion
 
         // Build Abilities Section
         #region
+
         public void OnAbilitiesPageButtonClicked()
         {
             perkPageParent.SetActive(false);
@@ -571,12 +638,14 @@ namespace WeAreGladiators.UI
             Debug.Log("CharacterRosterViewController.BuildAbilitiesSection() called...");
 
             // reset ability buttons
-            foreach (UIAbilityIconSelectable b in selectableAbilityButtons)            
-                b.Hide();            
-
-            for(int i = 0; i < character.abilityBook.knownAbilities.Count; i++)
+            foreach (UIAbilityIconSelectable b in selectableAbilityButtons)
             {
-                if(selectableAbilityButtons.Count < character.abilityBook.knownAbilities.Count)
+                b.Hide();
+            }
+
+            for (int i = 0; i < character.abilityBook.knownAbilities.Count; i++)
+            {
+                if (selectableAbilityButtons.Count < character.abilityBook.knownAbilities.Count)
                 {
                     UIAbilityIconSelectable newIcon = Instantiate(selectableAbilityButtonPrefab, selectableAbilityButtonsParent).GetComponent<UIAbilityIconSelectable>();
                     newIcon.Hide();
@@ -588,44 +657,47 @@ namespace WeAreGladiators.UI
             }
 
             // Update active abilities text
-            activeAbilitiesText.text = character.abilityBook.activeAbilities.Count.ToString() + 
-                " / " + AbilityBook.ActiveAbilityLimit.ToString();
+            activeAbilitiesText.text = character.abilityBook.activeAbilities.Count +
+                " / " + AbilityBook.ActiveAbilityLimit;
 
         }
         public void OnSelectableAbilityButtonClicked(UIAbilityIconSelectable button)
         {
-            AbilityBook book = characterCurrentlyViewing.abilityBook;
+            AbilityBook book = CharacterCurrentlyViewing.abilityBook;
             AbilityData ability = button.icon.MyDataRef;
 
             // Make inactive ability go active
             if (!book.HasActiveAbility(ability.abilityName) &&
                 book.activeAbilities.Count < AbilityBook.ActiveAbilityLimit)
             {
-                characterCurrentlyViewing.abilityBook.SetAbilityAsActive(book.GetKnownAbility(ability.abilityName));
+                CharacterCurrentlyViewing.abilityBook.SetAbilityAsActive(book.GetKnownAbility(ability.abilityName));
                 button.SetSelectedViewState(true);
-                activeAbilitiesText.text = book.activeAbilities.Count.ToString() + " / " + AbilityBook.ActiveAbilityLimit.ToString();
+                activeAbilitiesText.text = book.activeAbilities.Count + " / " + AbilityBook.ActiveAbilityLimit;
             }
 
             // Make active ability go inactive
             else if (book.HasActiveAbility(ability.abilityName) &&
-                !ability.derivedFromItemLoadout && 
-                !ability.derivedFromWeapon)
+                     !ability.derivedFromItemLoadout &&
+                     !ability.derivedFromWeapon)
             {
-                characterCurrentlyViewing.abilityBook.SetAbilityAsInactive(book.GetKnownAbility(ability.abilityName));
+                CharacterCurrentlyViewing.abilityBook.SetAbilityAsInactive(book.GetKnownAbility(ability.abilityName));
                 button.SetSelectedViewState(false);
-                activeAbilitiesText.text = book.activeAbilities.Count.ToString() + " / " + AbilityBook.ActiveAbilityLimit.ToString();
+                activeAbilitiesText.text = book.activeAbilities.Count + " / " + AbilityBook.ActiveAbilityLimit;
             }
         }
+
         #endregion
 
         // Build Talent Section Parent
-        #region       
+        #region
+
         private void BuildTalentsPage(HexCharacterData character)
         {
             // reset buttons
-            foreach(UILevelUpTalentIcon b in talentLevelUpIcons)            
+            foreach (UILevelUpTalentIcon b in talentLevelUpIcons)
+            {
                 b.HideAndReset();
-            
+            }
 
             for (int i = 0; i < CharacterDataController.Instance.AllTalentData.Length && i < talentLevelUpIcons.Length; i++)
             {
@@ -638,7 +710,10 @@ namespace WeAreGladiators.UI
         public void OnLevelUpTalentIconClicked(UILevelUpTalentIcon icon)
         {
             if (icon.alreadyKnown ||
-                icon.myCharacter.talentPoints == 0) return;
+                icon.myCharacter.talentPoints == 0)
+            {
+                return;
+            }
 
             currentSelectedLevelUpTalentChoice = icon;
             currentSelectedLevelUpPerkChoice = null;
@@ -653,13 +728,17 @@ namespace WeAreGladiators.UI
                 TextLogic.ConvertCustomStringListToString(icon.myTalentData.talentDescription),
                 icon.myTalentData.talentSprite);
         }
+
         #endregion
 
         #region Dismiss Character Modal Logic
+
         public void OnDismissButtonClicked()
         {
-            if(CharacterDataController.Instance.AllPlayerCharacters.Count > 1)
+            if (CharacterDataController.Instance.AllPlayerCharacters.Count > 1)
+            {
                 BuildAndShowDismissPage(CharacterCurrentlyViewing);
+            }
         }
         private void BuildAndShowDismissPage(HexCharacterData character)
         {
@@ -667,23 +746,38 @@ namespace WeAreGladiators.UI
 
             // Set header text
             dismissPageHeaderText.text = "Are you sure you want to dismiss " + character.myName + " " + character.mySubName + "?";
-           
+
             // Build model
             CharacterModeller.BuildModelFromStringReferences(dismissUcm, character.modelParts);
             CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, dismissUcm);
-            dismissUcm.SetIdleAnim();            
+            dismissUcm.SetIdleAnim();
         }
         public void OnConfirmDismissButtonClicked()
         {
             dismissVisualParent.SetActive(false);
 
             // Strip items and send to inventory
-            if (CharacterCurrentlyViewing.itemSet.headArmour != null) InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.headArmour);
-            if (CharacterCurrentlyViewing.itemSet.bodyArmour != null) InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.bodyArmour);
-            if (CharacterCurrentlyViewing.itemSet.mainHandItem != null) InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.mainHandItem);
-            if (CharacterCurrentlyViewing.itemSet.offHandItem != null) InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.offHandItem);
-            if (CharacterCurrentlyViewing.itemSet.trinket != null) InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.trinket);
-            
+            if (CharacterCurrentlyViewing.itemSet.headArmour != null)
+            {
+                InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.headArmour);
+            }
+            if (CharacterCurrentlyViewing.itemSet.bodyArmour != null)
+            {
+                InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.bodyArmour);
+            }
+            if (CharacterCurrentlyViewing.itemSet.mainHandItem != null)
+            {
+                InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.mainHandItem);
+            }
+            if (CharacterCurrentlyViewing.itemSet.offHandItem != null)
+            {
+                InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.offHandItem);
+            }
+            if (CharacterCurrentlyViewing.itemSet.trinket != null)
+            {
+                InventoryController.Instance.AddItemToInventory(CharacterCurrentlyViewing.itemSet.trinket);
+            }
+
             // Add character to roster
             CharacterDataController.Instance.RemoveCharacterFromRoster(CharacterCurrentlyViewing);
 
@@ -697,21 +791,5 @@ namespace WeAreGladiators.UI
         }
 
         #endregion
-
-        // NEW LOGIC
-
-        public void OnTalentsPageButtonClicked()
-        {
-            perkPageParent.SetActive(false);
-            talentPageParent.SetActive(true);
-            abilityPageParent.SetActive(false);
-
-            talentPageButton.SetSelectedViewState(0.25f);
-        }
-        
-
-
-
-
     }
 }

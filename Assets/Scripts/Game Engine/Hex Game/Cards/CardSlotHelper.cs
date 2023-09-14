@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DG.Tweening;
 using UnityEngine;
-using DG.Tweening;
 
 namespace WeAreGladiators.Cards
 {
     public class CardSlotHelper : MonoBehaviour
     {
-        [SerializeField] Transform t;
+        [SerializeField] private Transform t;
         public void UpdateAngles(int myIndex, float middleIndex)
         {
             t.DOKill();
@@ -20,18 +18,22 @@ namespace WeAreGladiators.Cards
 
             // Rotate left or right
             if (myIndex < middleIndex || myIndex > middleIndex)
+            {
                 t.DORotate(new Vector3(0, 0, 2f * myDif), 0.2f);
+            }
 
             // Rotate as the centre card
             else
+            {
                 t.transform.DORotate(new Vector3(0, 0, 0), 0.2f);
+            }
         }
         private void UpdateYDrop(int myIndex, float middleIndex)
         {
             float slotStartY = 0f;
             float yStep = 0.08f;
             float myDif = Mathf.Abs(myIndex - middleIndex);
-            t.DOLocalMoveY(slotStartY - (yStep * myDif), 0.2f);
+            t.DOLocalMoveY(slotStartY - yStep * myDif, 0.2f);
         }
         public void ResetAngles()
         {

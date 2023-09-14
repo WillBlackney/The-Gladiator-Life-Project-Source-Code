@@ -1,116 +1,103 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using TbsFramework.Cells;
-using TbsFramework.Pathfinding.DataStructs;
 using TMPro;
+using UnityEngine;
 using WeAreGladiators.Characters;
-using WeAreGladiators.Abilities;
 
 namespace WeAreGladiators.HexTiles
-{   
+{
     public class Hex : Hexagon
     {
+
+        // Obstacle Logic
+        #region
+
+        public void SetMyHexObstacle(HexObstacle o)
+        {
+            MyHexObstacle = o;
+        }
+
+        #endregion
         // Properties + Components
         #region
+
         [Header("Elevation + Transform Components")]
-        [SerializeField] Transform elevationParent;
-        [SerializeField] GameObject grassOverlayParent;
+        [SerializeField]
+        private Transform elevationParent;
+        [SerializeField] private GameObject grassOverlayParent;
 
         [Header("Sprite Components")]
-        [SerializeField] SpriteRenderer tileSprite;
-        [SerializeField] GameObject inRangeMarker;
-        [SerializeField] GameObject zoneOfControlMarker;
-        [SerializeField] SpriteRenderer[] allRenderers;
-        [SerializeField] GameObject moveMarker;
-        [SerializeField] GameObject mouseOverParent;
+        [SerializeField]
+        private SpriteRenderer tileSprite;
+        [SerializeField] private GameObject inRangeMarker;
+        [SerializeField] private GameObject zoneOfControlMarker;
+        [SerializeField] private SpriteRenderer[] allRenderers;
+        [SerializeField] private GameObject moveMarker;
+        [SerializeField] private GameObject mouseOverParent;
 
         [Header("Coord Components")]
-        [SerializeField] GameObject gridPositionVisualParent;
-        [SerializeField] TextMeshProUGUI xText;
-        [SerializeField] TextMeshProUGUI yText;
+        [SerializeField]
+        private GameObject gridPositionVisualParent;
+        [SerializeField] private TextMeshProUGUI xText;
+        [SerializeField] private TextMeshProUGUI yText;
 
         [HideInInspector] public TileElevation elevation;
         [HideInInspector] public HexDataSO myHexData;
 
-        private List<Hex> neighbourHexs = null;
+        private List<Hex> neighbourHexs;
         public HexCharacterModel myCharacter;
-        private HexObstacle myHexObstacle;
-        #endregion        
+
+        #endregion
 
         // Getters + Accessors
         #region
-        public HexObstacle MyHexObstacle
-        {
-            get { return myHexObstacle; }
-        }
+
+        public HexObstacle MyHexObstacle { get; private set; }
         public string PrintGridPosition()
         {
-            return "X:" + GridPosition.x.ToString() + ", Y:" + GridPosition.y.ToString();
+            return "X:" + GridPosition.x + ", Y:" + GridPosition.y;
         }
         public List<Hex> NeighbourHexs(List<Hex> otherHexs = null)
         {
             if (neighbourHexs == null)
             {
                 neighbourHexs = new List<Hex>();
-                foreach (var direction in _directions)
+                foreach (Vector3 direction in _directions)
                 {
-                    var neighbour = otherHexs.Find(c => c.OffsetCoord == CubeToOffsetCoords(CubeCoord + direction));
-                    if (neighbour == null) continue;
+                    Hex neighbour = otherHexs.Find(c => c.OffsetCoord == CubeToOffsetCoords(CubeCoord + direction));
+                    if (neighbour == null)
+                    {
+                        continue;
+                    }
                     neighbourHexs.Add(neighbour);
                 }
-               // Debug.Log("Neighbours found = " + myNeighbours.Count);
+                // Debug.Log("Neighbours found = " + myNeighbours.Count);
             }
             return neighbourHexs;
         }
         public int Distance(Hex other)
         {
-            return (int)(Mathf.Abs(CubeCoord.x - other.CubeCoord.x) + Mathf.Abs(CubeCoord.y - other.CubeCoord.y) +
+            return (int) (Mathf.Abs(CubeCoord.x - other.CubeCoord.x) + Mathf.Abs(CubeCoord.y - other.CubeCoord.y) +
                 Mathf.Abs(CubeCoord.z - other.CubeCoord.z)) / 2;
         }
-        public GameObject GridPositionVisualParent
-        {
-            get { return gridPositionVisualParent; }
-        }
-        public GameObject MouseOverParent
-        {
-            get { return mouseOverParent; }
-        }
-        public TextMeshProUGUI XText
-        {
-            get { return xText; }
-        }
-        public TextMeshProUGUI YText
-        {
-            get { return yText; }
-        }
-        public SpriteRenderer TileSprite
-        {
-            get { return tileSprite; }
-        }
-        public Transform ElevationParent
-        {
-            get { return elevationParent; }
-        }
-        public GameObject GrassOverlayParent
-        {
-            get { return grassOverlayParent; }
-        }
-        public Vector3 WorldPosition
-        {
-            get { return elevationParent.transform.position; }
-        }
-        public Vector2 GridPosition
-        {
-            get { return OffsetCoord; }
-        }        
+        public GameObject GridPositionVisualParent => gridPositionVisualParent;
+        public GameObject MouseOverParent => mouseOverParent;
+        public TextMeshProUGUI XText => xText;
+        public TextMeshProUGUI YText => yText;
+        public SpriteRenderer TileSprite => tileSprite;
+        public Transform ElevationParent => elevationParent;
+        public GameObject GrassOverlayParent => grassOverlayParent;
+        public Vector3 WorldPosition => elevationParent.transform.position;
+        public Vector2 GridPosition => OffsetCoord;
+
         #endregion
 
         // Inherited Logic
         #region
+
         public override Vector3 GetCellDimensions()
         {
-            return new Vector3(5.3f / 4f, 4.6f / 4f, 0f );
+            return new Vector3(5.3f / 4f, 4.6f / 4f, 0f);
         }
         public override void MarkAsReachable()
         {
@@ -133,42 +120,47 @@ namespace WeAreGladiators.HexTiles
 
         // Colour + Sort Order Logic
         #region
+
         private void SetColor(Color color)
         {
         }
         public void AutoSetSortingOrder()
         {
-            foreach(SpriteRenderer sr in allRenderers)
+            foreach (SpriteRenderer sr in allRenderers)
             {
                 sr.sortingOrder += Mathf.RoundToInt(elevationParent.position.y * 100f) * -1;
             }
-            if(myHexObstacle != null)
+            if (MyHexObstacle != null)
             {
-                myHexObstacle.RandomizeObstacleSprite();
-                myHexObstacle.MySR.sortingOrder += Mathf.RoundToInt(elevationParent.position.y * 100f) * -1;
+                MyHexObstacle.RandomizeObstacleSprite();
+                MyHexObstacle.MySR.sortingOrder += Mathf.RoundToInt(elevationParent.position.y * 100f) * -1;
             }
         }
+
         #endregion
 
         // Input 
         #region
+
         protected override void OnMouseDown()
         {
-           // if(AbilityButton.CurrentButtonMousedOver == null)
+            // if(AbilityButton.CurrentButtonMousedOver == null)
             //    LevelController.Instance.OnHexClicked(this);
         }
         protected override void OnMouseEnter()
         {
-           // LevelController.Instance.OnHexMouseEnter(this);
+            // LevelController.Instance.OnHexMouseEnter(this);
         }
         protected override void OnMouseExit()
         {
             //LevelController.Instance.OnHexMouseExit(this);
         }
+
         #endregion
 
         // Marking Logic
         #region
+
         public void ShowMoveMarker()
         {
             Debug.Log("ShowMoveMarker() called...");
@@ -195,17 +187,8 @@ namespace WeAreGladiators.HexTiles
         {
             zoneOfControlMarker.SetActive(false);
         }
-        #endregion
 
-        // Obstacle Logic
-        #region
-        public void SetMyHexObstacle(HexObstacle o)
-        {
-            myHexObstacle = o;
-        }
         #endregion
     }
-
-
 
 }

@@ -1,5 +1,5 @@
-using DG.Tweening;
 using System;
+using DG.Tweening;
 using UnityEngine;
 
 namespace WeAreGladiators.VisualEvents
@@ -11,7 +11,6 @@ namespace WeAreGladiators.VisualEvents
         {
             Transform trans = gameObject.transform;
             trans.position = start;
-            this.
             sr.DOFade(0.5f, 0f);
             trans.DOScale(0.25f, 0f);
 
@@ -27,6 +26,5 @@ namespace WeAreGladiators.VisualEvents
             });
 
         }
-
     }
 }

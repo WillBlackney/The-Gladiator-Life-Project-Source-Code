@@ -1,10 +1,6 @@
-using WeAreGladiators.UI;
-using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using WeAreGladiators.UI;
 
 namespace WeAreGladiators.Boons
 {
@@ -30,7 +26,9 @@ namespace WeAreGladiators.Boons
         public void MouseEnter()
         {
             if (MyBoonData != null)
+            {
                 MainModalController.Instance.BuildAndShowModal(MyBoonData);
+            }
         }
         public void MouseExit()
         {

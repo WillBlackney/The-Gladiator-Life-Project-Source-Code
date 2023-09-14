@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.Items;
 using WeAreGladiators.Libraries;
@@ -14,6 +12,7 @@ namespace WeAreGladiators.RewardSystems
     {
         // Properties + Components
         #region
+
         [Header("Gold Components")]
         [SerializeField] private TextMeshProUGUI goldAmountText;
         [SerializeField] private GameObject goldParent;
@@ -28,31 +27,31 @@ namespace WeAreGladiators.RewardSystems
         [SerializeField] private Image itemRarityOverlayImage;
 
         // Non inspector fields
-        private AbilityData abilityReward;
-        private ItemData itemReward;
         private int goldReward;
+
         #endregion
 
         // Getters + Accessors
         #region
-        public ItemData ItemReward
-        {
-            get { return itemReward; }
-        }
-        public AbilityData AbilityReward
-        {
-            get { return abilityReward; }
-        }
+
+        public ItemData ItemReward { get; private set; }
+        public AbilityData AbilityReward { get; private set; }
+
         #endregion
 
         // Input 
         #region
+
         public void MouseEnter()
         {
-            if(itemReward != null)
+            if (ItemReward != null)
+            {
                 ItemPopupController.Instance.OnCombatItemLootIconMousedOver(this);
-            else if (abilityReward != null)
+            }
+            else if (AbilityReward != null)
+            {
                 AbilityPopupController.Instance.OnCombatAbilityLootIconMousedOver(this);
+            }
 
             // to do in future: gold info pop up
         }
@@ -61,26 +60,28 @@ namespace WeAreGladiators.RewardSystems
             ItemPopupController.Instance.HidePanel();
             AbilityPopupController.Instance.HidePanel();
         }
+
         #endregion
 
         // Logic
         #region
+
         public void Reset()
         {
-            abilityReward = null;
-            itemReward = null;
+            AbilityReward = null;
+            ItemReward = null;
             goldReward = 0;
 
             gameObject.SetActive(false);
             goldParent.SetActive(false);
             abilityBookParent.SetActive(false);
             itemParent.SetActive(false);
-            
+
         }
         public void BuildAsItemReward(ItemData item)
         {
             gameObject.SetActive(true);
-            itemReward = item;
+            ItemReward = item;
             itemParent.SetActive(true);
             itemImage.sprite = item.ItemSprite;
             itemRarityOverlayImage.color = ColorLibrary.Instance.GetRarityColor(item.rarity);
@@ -88,7 +89,7 @@ namespace WeAreGladiators.RewardSystems
         public void BuildAsAbilityReward(AbilityData ability)
         {
             gameObject.SetActive(true);
-            abilityReward = ability;
+            AbilityReward = ability;
             abilityBookParent.SetActive(true);
             abilityBookImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(ability.talentRequirementData.talentSchool);
         }
@@ -99,6 +100,7 @@ namespace WeAreGladiators.RewardSystems
             goldAmountText.text = goldReward.ToString();
             goldParent.SetActive(true);
         }
+
         #endregion
     }
 }

@@ -1,21 +1,96 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using Sirenix.OdinInspector;
-using WeAreGladiators.Perks;
-using WeAreGladiators.VisualEvents;
+using Sirenix.Serialization;
+using UnityEngine;
 using WeAreGladiators.Characters;
 using WeAreGladiators.Combat;
-using Sirenix.Serialization;
+using WeAreGladiators.Perks;
+using WeAreGladiators.VisualEvents;
 
 namespace WeAreGladiators.Abilities
 {
     [Serializable]
     public class AbilityEffect
     {
+
+        // Effect Range Properties
+        [BoxGroup("Effect Range Settings", true, true)]
+        [LabelWidth(200)]
+        [ShowIf("ShowAoeType")]
+        public AoeType aoeType;
+
+        [BoxGroup("Effect Range Settings")]
+        [LabelWidth(200)]
+        [ShowIf("ShowIncludeCentreTile")]
+        public bool includeCentreTile = true;
+
+        [BoxGroup("Effect Range Settings")]
+        [LabelWidth(200)]
+        [ShowIf("ShowAoeSize")]
+        [Range(1, 3)]
+        public int aoeSize = 1;
+
+        [BoxGroup("Effect Range Settings")]
+        [LabelWidth(200)]
+        [ShowIf("ShowEffectsAlliesOrEnemies")]
+        public bool effectsAllies;
+
+        [BoxGroup("Effect Range Settings")]
+        [LabelWidth(200)]
+        [ShowIf("ShowEffectsAlliesOrEnemies")]
+        public bool effectsEnemies;
+
+        // Knock Back Settings Properties
+        #region
+
+        [BoxGroup("Knock Back Settings", true, true)]
+        [ShowIf("ShowKnockBackDistance")]
+        [LabelWidth(200)]
+        public int knockBackDistance;
+
+        #endregion
+
+        // Perks
+        #region
+
+        public bool ShowPerkPairing()
+        {
+            if (effectType == AbilityEffectType.ApplyPassiveSelf ||
+                effectType == AbilityEffectType.ApplyPassiveTarget ||
+                effectType == AbilityEffectType.ApplyPassiveAoe ||
+                effectType == AbilityEffectType.ApplyPassiveInLine ||
+                effectType == AbilityEffectType.RemovePassiveTarget)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        #endregion
+
+        // Summon
+        #region
+
+        public bool ShowSummonProperties()
+        {
+            return effectType == AbilityEffectType.SummonCharacter;
+        }
+
+        #endregion
+
+        // Misc
+        #region
+
+        public bool ShowStressEventData()
+        {
+            return effectType == AbilityEffectType.StressCheck || effectType == AbilityEffectType.StressCheckAoe;
+        }
+
+        #endregion
         // General Properties
         #region
+
         [BoxGroup("General Settings", true, true)]
         [LabelWidth(200)]
         public AbilityEffectType effectType;
@@ -68,16 +143,18 @@ namespace WeAreGladiators.Abilities
         [BoxGroup("General Settings")]
         [LabelWidth(200)]
         [ShowIf("ShowChainedEffect")]
-        public bool chainedEffect = false;
+        public bool chainedEffect;
 
         [BoxGroup("General Settings")]
         [LabelWidth(200)]
         [ShowIf("ShowTriggersChainEffectSequence")]
-        public bool triggersChainEffectSequence = false;
+        public bool triggersChainEffectSequence;
+
         #endregion
 
         // Visual Event Properties
         #region
+
         [BoxGroup("Visual Events", true, true)]
         [LabelWidth(200)]
         [Header("On Start")]
@@ -90,38 +167,12 @@ namespace WeAreGladiators.Abilities
         [LabelWidth(200)]
         [Header("On Finish")]
         public List<AnimationEventData> visualEventsOnEffectFinish;
+
         #endregion
-
-        // Effect Range Properties
-        [BoxGroup("Effect Range Settings", true, true)]      
-        [LabelWidth(200)]
-        [ShowIf("ShowAoeType")]
-        public AoeType aoeType;
-
-        [BoxGroup("Effect Range Settings")]
-        [LabelWidth(200)]
-        [ShowIf("ShowIncludeCentreTile")]
-        public bool includeCentreTile = true;
-
-        [BoxGroup("Effect Range Settings")]
-        [LabelWidth(200)]
-        [ShowIf("ShowAoeSize")]
-        [Range(1,3)]
-        public int aoeSize = 1;
-
-        [BoxGroup("Effect Range Settings")]
-        [LabelWidth(200)]
-        [ShowIf("ShowEffectsAlliesOrEnemies")]
-        public bool effectsAllies;
-
-        [BoxGroup("Effect Range Settings")]
-        [LabelWidth(200)]
-        [ShowIf("ShowEffectsAlliesOrEnemies")]
-        public bool effectsEnemies;      
-                
 
         // Damage Properties
         #region
+
         [BoxGroup("Damage Settings", true, true)]
         [ShowIf("ShowDamageType")]
         [LabelWidth(200)]
@@ -145,8 +196,8 @@ namespace WeAreGladiators.Abilities
         [BoxGroup("Damage Settings")]
         [LabelWidth(200)]
         [ShowIf("ShowBonusCritDamage")]
-        [Range(0,100)]
-        public int bonusCritDamage = 0;
+        [Range(0, 100)]
+        public int bonusCritDamage;
 
         [BoxGroup("Damage Settings")]
         [LabelWidth(200)]
@@ -177,10 +228,12 @@ namespace WeAreGladiators.Abilities
         [LabelWidth(200)]
         [ShowIf("ShowDamageEffectModifiers")]
         public List<DamageEffectModifier> damageEffectModifiers;
+
         #endregion
 
         // Summon Properties
         #region
+
         [BoxGroup("Summon Settings", true, true)]
         [ShowIf("ShowSummonProperties")]
         [LabelWidth(200)]
@@ -215,16 +268,20 @@ namespace WeAreGladiators.Abilities
         [ShowIf("ShowSummonProperties")]
         [LabelWidth(150)]
         public AnimationEventData[] summonedCreatureVisualEvents;
+
         #endregion
 
         // Getters + Accessors
         #region
+
         public EnemyTemplateSO CharacterSummoned
         {
             get
             {
-                if(characterSummoned == null)                
+                if (characterSummoned == null)
+                {
                     characterSummoned = CharacterDataController.Instance.FindEnemyTemplateByName(characterSummonedName);
+                }
                 return characterSummoned;
             }
         }
@@ -233,13 +290,20 @@ namespace WeAreGladiators.Abilities
         {
             Debug.Log("OnCharacterSummonedChanged");
             if (characterSummoned != null)
+            {
                 characterSummonedName = characterSummoned.myName;
-            else characterSummonedName = "";
+            }
+            else
+            {
+                characterSummonedName = "";
+            }
         }
+
         #endregion
 
         // Pasive Properties
-        #region      
+        #region
+
         [BoxGroup("Perk Settings", true, true)]
         [ShowIf("ShowPerkPairing")]
         [LabelWidth(200)]
@@ -248,22 +312,16 @@ namespace WeAreGladiators.Abilities
         [BoxGroup("Perk Settings")]
         [ShowIf("ShowPerkPairing")]
         [LabelWidth(200)]
-        [Range(0,100)]
+        [Range(0, 100)]
         public int perkApplicationChance = 100;
-        #endregion
 
-        // Knock Back Settings Properties
-        #region      
-        [BoxGroup("Knock Back Settings", true, true)]
-        [ShowIf("ShowKnockBackDistance")]
-        [LabelWidth(200)]
-        public int knockBackDistance;
         #endregion
 
         // SHOW IFS
 
         // Damage  
         #region
+
         public bool ShowHealthLost()
         {
             return effectType == AbilityEffectType.LoseHealthSelf;
@@ -275,12 +333,12 @@ namespace WeAreGladiators.Abilities
         public bool ShowBaseDamage()
         {
             if (effectType == AbilityEffectType.DamageTarget ||
-               effectType == AbilityEffectType.DamageAoe)
+                effectType == AbilityEffectType.DamageAoe)
             {
                 return true;
             }
 
-            else return false;
+            return false;
         }
         public bool ShowWeaponUsed()
         {
@@ -306,71 +364,66 @@ namespace WeAreGladiators.Abilities
         {
             return effectType == AbilityEffectType.DamageAoe || effectType == AbilityEffectType.DamageTarget;
         }
-        #endregion
 
-        // Perks
-        #region
-        public bool ShowPerkPairing()
-        {
-            if (effectType == AbilityEffectType.ApplyPassiveSelf ||
-                effectType == AbilityEffectType.ApplyPassiveTarget ||
-                effectType == AbilityEffectType.ApplyPassiveAoe ||
-                effectType == AbilityEffectType.ApplyPassiveInLine ||
-                effectType == AbilityEffectType.RemovePassiveTarget)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
         #endregion
 
         // Aoe
         #region
+
         public bool ShowIncludeCentreTile()
         {
             if ((effectType == AbilityEffectType.ApplyPassiveAoe ||
-                effectType == AbilityEffectType.DamageAoe) &&
+                    effectType == AbilityEffectType.DamageAoe) &&
                 aoeType != AoeType.ZoneOfControl)
+            {
                 return true;
-            else return false;
+            }
+            return false;
         }
         public bool ShowAoeSize()
         {
             if ((effectType == AbilityEffectType.ApplyPassiveAoe ||
-               effectType == AbilityEffectType.DamageAoe || 
-               effectType == AbilityEffectType.StressCheckAoe) &&
-               (aoeType == AoeType.AtTarget || aoeType == AoeType.Line))
+                    effectType == AbilityEffectType.DamageAoe ||
+                    effectType == AbilityEffectType.StressCheckAoe) &&
+                (aoeType == AoeType.AtTarget || aoeType == AoeType.Line))
+            {
                 return true;
-            else return false;
+            }
+            return false;
         }
         public bool ShowAoeType()
         {
             if (effectType == AbilityEffectType.ApplyPassiveAoe ||
-               effectType == AbilityEffectType.DamageAoe ||
-               effectType == AbilityEffectType.StressCheckAoe)
+                effectType == AbilityEffectType.DamageAoe ||
+                effectType == AbilityEffectType.StressCheckAoe)
+            {
                 return true;
-            else return false;
+            }
+            return false;
         }
         public bool ShowEffectsAlliesOrEnemies()
         {
             if (effectType == AbilityEffectType.ApplyPassiveAoe ||
-               effectType == AbilityEffectType.DamageAoe)
+                effectType == AbilityEffectType.DamageAoe)
+            {
                 return true;
-            else return false;
+            }
+            return false;
         }
         public bool ShowKnockBackDistance()
         {
             if (effectType == AbilityEffectType.KnockBack)
+            {
                 return true;
-            else return false;
+            }
+            return false;
         }
+
         #endregion
 
         // Chain related
         #region
+
         public bool ShowTriggersChainEffectSequence()
         {
             if (chainedEffect == false)
@@ -378,7 +431,7 @@ namespace WeAreGladiators.Abilities
                 return true;
             }
 
-            else return false;
+            return false;
         }
         public bool ShowChainedEffect()
         {
@@ -387,12 +440,14 @@ namespace WeAreGladiators.Abilities
                 return true;
             }
 
-            else return false;
+            return false;
         }
+
         #endregion
 
         // Movement related
         #region
+
         public bool ShowTilesMoved()
         {
             if (effectType == AbilityEffectType.MoveInLine)
@@ -400,7 +455,7 @@ namespace WeAreGladiators.Abilities
                 return true;
             }
 
-            else return false;
+            return false;
         }
         public bool ShowTileLineLength()
         {
@@ -409,7 +464,7 @@ namespace WeAreGladiators.Abilities
                 return true;
             }
 
-            else return false;
+            return false;
         }
         public bool ShowNormalTeleportVFX()
         {
@@ -418,7 +473,7 @@ namespace WeAreGladiators.Abilities
                 return true;
             }
 
-            else return false;
+            return false;
         }
         public bool ShowEnergyGained()
         {
@@ -428,27 +483,11 @@ namespace WeAreGladiators.Abilities
                 return true;
             }
 
-            else return false;
+            return false;
         }
-        #endregion
 
-        // Summon
-        #region 
-        public bool ShowSummonProperties()
-        {
-            return effectType == AbilityEffectType.SummonCharacter;
-        }
-        #endregion
-
-        // Misc
-        #region
-        public bool ShowStressEventData()
-        {
-            return effectType == AbilityEffectType.StressCheck || effectType == AbilityEffectType.StressCheckAoe;
-        }
         #endregion
     }
-
 
     [Serializable]
     public class DamageEffectModifier
@@ -473,46 +512,55 @@ namespace WeAreGladiators.Abilities
         [Range(0f, 1f)]
         public float extraCriticalDamage;
 
-
         // Odin Show Ifs
         #region
+
         public bool ShowBonusDamageModifier()
         {
             if (type == DamageEffectModifierType.ExtraDamageAgainstRace ||
-               type == DamageEffectModifierType.ExtraDamageIfTargetHasSpecificPerk ||
-               type == DamageEffectModifierType.ExtraDamageIfCasterHasSpecificPerk ||
-               type == DamageEffectModifierType.AddHealthMissingOnTargetToDamage ||
-               type == DamageEffectModifierType.AddHealthMissingOnSelfToDamage)
+                type == DamageEffectModifierType.ExtraDamageIfTargetHasSpecificPerk ||
+                type == DamageEffectModifierType.ExtraDamageIfCasterHasSpecificPerk ||
+                type == DamageEffectModifierType.AddHealthMissingOnTargetToDamage ||
+                type == DamageEffectModifierType.AddHealthMissingOnSelfToDamage)
+            {
                 return true;
-            else return false;
-        }        
-        
+            }
+            return false;
+        }
+
         public bool ShowBonusCriticalModifier()
         {
             if (type == DamageEffectModifierType.ExtraCriticalChanceAgainstRace ||
-               type == DamageEffectModifierType.ExtraCriticalChanceIfTargetHasSpecificPerk)
+                type == DamageEffectModifierType.ExtraCriticalChanceIfTargetHasSpecificPerk)
+            {
                 return true;
-            else return false;
+            }
+            return false;
         }
         public bool ShowPerk()
         {
             if (type == DamageEffectModifierType.ExtraDamageIfTargetHasSpecificPerk ||
                 type == DamageEffectModifierType.ExtraDamageIfCasterHasSpecificPerk ||
-               type == DamageEffectModifierType.ExtraCriticalChanceIfTargetHasSpecificPerk)
+                type == DamageEffectModifierType.ExtraCriticalChanceIfTargetHasSpecificPerk)
+            {
                 return true;
-            else return false;
+            }
+            return false;
         }
         public bool ShowTargetRace()
         {
             if (type == DamageEffectModifierType.ExtraCriticalChanceAgainstRace ||
-               type == DamageEffectModifierType.ExtraDamageAgainstRace)
+                type == DamageEffectModifierType.ExtraDamageAgainstRace)
+            {
                 return true;
-            else return false;
+            }
+            return false;
         }
         public bool ShowBonusCriticalDamage()
         {
             return type == DamageEffectModifierType.ExtraCriticalDamage;
         }
+
         #endregion
     }
     public enum DamageEffectModifierType
@@ -524,9 +572,8 @@ namespace WeAreGladiators.Abilities
         ExtraCriticalChanceAgainstRace = 4,
         ExtraCriticalChanceIfTargetHasSpecificPerk = 6,
         ExtraDamageIfCasterHasSpecificPerk = 8,
-        ExtraDamageIfTargetHasSpecificPerk = 5,       
-        ExtraDamageAgainstRace = 3,   
-        ExtraCriticalDamage = 10,
+        ExtraDamageIfTargetHasSpecificPerk = 5,
+        ExtraDamageAgainstRace = 3,
+        ExtraCriticalDamage = 10
     }
 }
-

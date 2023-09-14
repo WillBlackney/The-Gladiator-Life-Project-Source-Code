@@ -1,7 +1,4 @@
 ﻿using WeAreGladiators.Abilities;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace WeAreGladiators.Items
 {
@@ -26,8 +23,13 @@ namespace WeAreGladiators.Items
             int ret = 0;
             // TO DO: any effects that modify sell price should be calculated here
             if (itemData != null)
-                ret = (int)(itemData.baseGoldValue * 0.15f);
-            else if (abilityData != null) ret = 10;
+            {
+                ret = (int) (itemData.baseGoldValue * 0.15f);
+            }
+            else if (abilityData != null)
+            {
+                ret = 10;
+            }
 
             return ret;
         }

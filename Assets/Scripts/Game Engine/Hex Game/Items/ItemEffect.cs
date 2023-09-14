@@ -1,15 +1,15 @@
-﻿using WeAreGladiators.Perks;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 using Sirenix.OdinInspector;
+using UnityEngine;
+using WeAreGladiators.Perks;
 
 namespace WeAreGladiators.Items
 {
-    [System.Serializable]
-    public class ItemEffect 
+    [Serializable]
+    public class ItemEffect
     {
         #region Properties
+
         [Header("General Properties")]
         [LabelWidth(200)]
         public ItemEffectType effectType;
@@ -29,7 +29,7 @@ namespace WeAreGladiators.Items
 
         [ShowIf("ShowGainPerkChance")]
         [LabelWidth(200)]
-        [Range(1,100)]
+        [Range(1, 100)]
         public int gainPerkChance = 50;
 
         [Header("On Hit Effect Data")]
@@ -60,12 +60,12 @@ namespace WeAreGladiators.Items
         [ShowIf("ShowInnateWeaponRangeBonus")]
         [LabelWidth(200)]
         [Range(0, 2)]
-        public int innateWeaponRangeBonus = 0;
+        public int innateWeaponRangeBonus;
 
         [ShowIf("ShowInnateBackstabPenetrationBonus")]
         [LabelWidth(200)]
         [Range(0, 100)]
-        public int innateBackstabPenetrationBonus = 0;
+        public int innateBackstabPenetrationBonus;
 
         [ShowIf("ShowInnatePerkGainedOnUse")]
         [LabelWidth(200)]
@@ -74,6 +74,7 @@ namespace WeAreGladiators.Items
         #endregion
 
         #region Constructors
+
         public ItemEffect() { }
         public ItemEffect(ItemCoreAttribute attribute, int mod)
         {
@@ -81,9 +82,11 @@ namespace WeAreGladiators.Items
             attributeModified = attribute;
             modAmount = mod;
         }
+
         #endregion
 
         #region Odin Show ifs
+
         public bool ShowOnHitEffectFields()
         {
             return effectType == ItemEffectType.OnHitEffect;
@@ -95,8 +98,8 @@ namespace WeAreGladiators.Items
         public bool ShowPerkGained()
         {
             return effectType == ItemEffectType.GainPerk ||
-                 effectType == ItemEffectType.GainPerkTurnStart || 
-                 effectType == ItemEffectType.GainPerkCombatStart;
+                effectType == ItemEffectType.GainPerkTurnStart ||
+                effectType == ItemEffectType.GainPerkCombatStart;
         }
         public bool ShowGainPerkChance()
         {
@@ -126,6 +129,7 @@ namespace WeAreGladiators.Items
         {
             return effectType == ItemEffectType.InnateWeaponEffect && innateItemEffectType == InnateItemEffectType.BonusMeleeRange;
         }
+
         #endregion
     }
 
@@ -137,7 +141,7 @@ namespace WeAreGladiators.Items
         GainPerkCombatStart = 4,
         GainPerkTurnStart = 5,
         OnHitEffect = 3,
-        InnateWeaponEffect = 6,
+        InnateWeaponEffect = 6
     }
 
     public enum InnateItemEffectType
@@ -147,8 +151,7 @@ namespace WeAreGladiators.Items
         InnateAccuracyAgainstAdjacentModifier = 2,
         InnatePerkGainedOnUse = 3,
         BonusMeleeRange = 4,
-        PenetrationBonusOnBackstab = 5,
-}
+        PenetrationBonusOnBackstab = 5
+    }
 
-    
 }

@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace WeAreGladiators.DungeonMap
 {
-    [System.Serializable]
+    [Serializable]
     public class LineConnection
     {
         public LineRenderer lr;
@@ -21,9 +22,9 @@ namespace WeAreGladiators.DungeonMap
             // Debug.Log("In setcolor");
             // lr.material.color = color;
 
-            var gradient = lr.colorGradient;
-            var colorKeys = gradient.colorKeys;
-            for (var j = 0; j < colorKeys.Length; j++)
+            Gradient gradient = lr.colorGradient;
+            GradientColorKey[] colorKeys = gradient.colorKeys;
+            for (int j = 0; j < colorKeys.Length; j++)
             {
                 colorKeys[j].color = color;
             }

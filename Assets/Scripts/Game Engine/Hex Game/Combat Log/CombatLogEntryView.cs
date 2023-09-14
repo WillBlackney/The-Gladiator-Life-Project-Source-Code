@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +6,8 @@ namespace WeAreGladiators.CombatLog
 {
     public class CombatLogEntryView : MonoBehaviour
     {
-        [SerializeField] Image icon;
-        [SerializeField] TextMeshProUGUI descriptionText;
+        [SerializeField] private Image icon;
+        [SerializeField] private TextMeshProUGUI descriptionText;
 
         public void Build(CombatLogEntryData data)
         {

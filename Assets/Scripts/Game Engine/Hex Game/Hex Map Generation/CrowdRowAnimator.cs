@@ -1,16 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
 namespace WeAreGladiators.UI
 {
     public class CrowdRowAnimator : MonoBehaviour
     {
-        [SerializeField] float moveSpeed;
-        [SerializeField] float moveDistance;
+        [SerializeField] private float moveSpeed;
+        [SerializeField] private float moveDistance;
+        private bool hasCachedStart;
         private Vector3 startPos;
-        private bool hasCachedStart = false;
 
         private void Awake()
         {
@@ -32,7 +30,7 @@ namespace WeAreGladiators.UI
         public void StopAnimation()
         {
             gameObject.transform.DOKill();
-            CacheStartPosition();            
+            CacheStartPosition();
             gameObject.transform.DOLocalMove(startPos, 0f);
         }
         private void CacheStartPosition()

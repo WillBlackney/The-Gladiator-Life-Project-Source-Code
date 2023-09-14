@@ -1,31 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using WeAreGladiators.Utilities;
 using WeAreGladiators.CameraSystems;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.Cards
 {
     public class TargettingArrowController : Singleton<TargettingArrowController>
     {
 
-#pragma warning disable 649
-        [SerializeField]
-        private GameObject bodyPrefab;
-        [SerializeField]
-        private GameObject headPrefab;
-
-#pragma warning restore 649
-
         private const int NumPartsTargetingArrow = 17;
         private readonly List<GameObject> arrow = new List<GameObject>(NumPartsTargetingArrow);
-        private Camera mainCamera;
-        private bool isArrowEnabled;
         private CardViewModel cvm;
+        private bool isArrowEnabled;
+        private Camera mainCamera;
 
         private void Start()
         {
-            for (var i = 0; i < NumPartsTargetingArrow - 1; i++)
+            for (int i = 0; i < NumPartsTargetingArrow - 1; i++)
             {
                 GameObject body;
 
@@ -42,69 +33,58 @@ namespace WeAreGladiators.Cards
                 arrow.Add(body);
             }
 
-            var head = Instantiate(headPrefab, gameObject.transform);
+            GameObject head = Instantiate(headPrefab, gameObject.transform);
             arrow.Add(head);
             head.GetComponent<SpriteRenderer>().enabled = false;
 
-            foreach (var part in arrow)
+            foreach (GameObject part in arrow)
+            {
                 part.SetActive(false);
+            }
 
             mainCamera = CameraController.Instance.MainCamera;
-        }
-
-        public void EnableArrow(CardViewModel cardVM)
-        {
-            cvm = cardVM;
-            isArrowEnabled = true;
-            foreach (var part in arrow)
-                part.SetActive(true);
-        }
-        public void DisableArrow()
-        {
-            cvm = null;
-            isArrowEnabled = false;
-            foreach (var part in arrow)
-                part.SetActive(false);
         }
 
         private void LateUpdate()
         {
             if (!isArrowEnabled || !cvm)
+            {
                 return;
+            }
 
-            var mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            var mouseX = mousePos.x;
-            var mouseY = mousePos.y;
+            Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            float mouseX = mousePos.x;
+            float mouseY = mousePos.y;
 
             // const float centerX = 0.0f;
             //const float centerY = -4.0f;
             float centerX = cvm.movementParent.position.x;
             float centerY = cvm.movementParent.position.y;
 
-            var controlAx = centerX - (mouseX - centerX) * 0.3f;
-            var controlAy = centerY + (mouseY - centerY) * 0.8f;
-            var controlBx = centerX + (mouseX - centerX) * 0.1f;
-            var controlBy = centerY + (mouseY - centerY) * 1.4f;
+            float controlAx = centerX - (mouseX - centerX) * 0.3f;
+            float controlAy = centerY + (mouseY - centerY) * 0.8f;
+            float controlBx = centerX + (mouseX - centerX) * 0.1f;
+            float controlBy = centerY + (mouseY - centerY) * 1.4f;
 
-            for (var i = 0; i < arrow.Count; i++)
+            for (int i = 0; i < arrow.Count; i++)
             {
-                var part = arrow[i];
+                GameObject part = arrow[i];
 
-                var t = (i + 1) * 1.0f / arrow.Count;
-                var tt = t * t;
-                var ttt = tt * t;
-                var u = 1.0f - t;
-                var uu = u * u;
-                var uuu = uu * u;
+                float t = (i + 1) * 1.0f / arrow.Count;
+                float tt = t * t;
+                float ttt = tt * t;
+                float u = 1.0f - t;
+                float uu = u * u;
+                float uuu = uu * u;
 
-                var arrowX = uuu * centerX +
-                             3 * uu * t * controlAx +
-                             3 * u * tt * controlBx +
-                             ttt * mouseX;
-                var arrowY = uuu * centerY +
-                             3 * uu * t * controlAy +
-                             3 * u * tt * controlBy +
-                             ttt * mouseY;
+                float arrowX = uuu * centerX +
+                    3 * uu * t * controlAx +
+                    3 * u * tt * controlBx +
+                    ttt * mouseX;
+                float arrowY = uuu * centerY +
+                    3 * uu * t * controlAy +
+                    3 * u * tt * controlBy +
+                    ttt * mouseY;
 
                 arrow[i].transform.position = new Vector3(arrowX, arrowY, 0.0f);
 
@@ -138,6 +118,31 @@ namespace WeAreGladiators.Cards
             }
         }
 
+        public void EnableArrow(CardViewModel cardVM)
+        {
+            cvm = cardVM;
+            isArrowEnabled = true;
+            foreach (GameObject part in arrow)
+            {
+                part.SetActive(true);
+            }
+        }
+        public void DisableArrow()
+        {
+            cvm = null;
+            isArrowEnabled = false;
+            foreach (GameObject part in arrow)
+            {
+                part.SetActive(false);
+            }
+        }
 
+#pragma warning disable 649
+        [SerializeField]
+        private GameObject bodyPrefab;
+        [SerializeField]
+        private GameObject headPrefab;
+
+#pragma warning restore 649
     }
 }

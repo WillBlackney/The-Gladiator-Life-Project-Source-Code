@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DG.Tweening;
-using System;
+using UnityEngine;
 
 namespace WeAreGladiators.Cards
 {
@@ -10,6 +8,7 @@ namespace WeAreGladiators.Cards
     {
         // Properties + Component References
         #region
+
         [Header("Component References")]
         public SameDistanceChildren slots;
 
@@ -20,11 +19,13 @@ namespace WeAreGladiators.Cards
         public Transform PlayPreviewSpot;
 
         [Header("Variables")]
-        private List<GameObject> cardsInHand = new List<GameObject>();
+        private readonly List<GameObject> cardsInHand = new List<GameObject>();
+
         #endregion
 
         // Get + Remove Cards
         #region
+
         public void AddCard(GameObject card)
         {
             // Always insert a new card as 0th element in CardsInHand List 
@@ -60,17 +61,23 @@ namespace WeAreGladiators.Cards
 
             cardsInHand.Clear();
         }
+
         #endregion
 
         // Slot Logic
         #region
+
         private void UpdatePlacementOfSlots()
         {
             float posX;
             if (cardsInHand.Count > 0)
+            {
                 posX = (slots.Children[0].transform.localPosition.x - slots.Children[cardsInHand.Count - 1].transform.localPosition.x) / 2f;
+            }
             else
+            {
                 posX = 0f;
+            }
 
             // tween Slots GameObject to new position in 0.3 seconds
             slots.gameObject.transform.DOLocalMoveX(posX, 0.3f);
@@ -96,15 +103,17 @@ namespace WeAreGladiators.Cards
             }
 
         }
+
         #endregion
 
         // Rotation + Spreading Logic
         #region
+
         public void UpdateCardRotationsAndYDrops()
         {
             foreach (GameObject g in cardsInHand)
             {
-                g.GetComponent<CardSlotHelper>().UpdateAngles(cardsInHand.IndexOf(g) + 1, (cardsInHand.Count / 2f) + 0.5f);
+                g.GetComponent<CardSlotHelper>().UpdateAngles(cardsInHand.IndexOf(g) + 1, cardsInHand.Count / 2f + 0.5f);
             }
         }
         private void UpdateRotationOfCards()
@@ -125,15 +134,13 @@ namespace WeAreGladiators.Cards
                 float myDif = myIndex - middleIndex;
 
                 // Rotate left or right
-                if (myIndex < middleIndex || myIndex > middleIndex)            
-                    g.transform.DORotate(new Vector3(0, 0, 2.5f * myDif), 0.2f);            
+                if (myIndex < middleIndex || myIndex > middleIndex)
+                    g.transform.DORotate(new Vector3(0, 0, 2.5f * myDif), 0.2f);
 
                 // Rotate as the centre card
-                else            
-                    g.transform.DORotate(new Vector3(0, 0, 0), 0.2f);     
+                else
+                    g.transform.DORotate(new Vector3(0, 0, 0), 0.2f);
             }*/
-
-
 
         }
         private void UpdateYDropOfCards()
@@ -162,7 +169,7 @@ namespace WeAreGladiators.Cards
             */
         }
 
-
     }
+
     #endregion
 }

@@ -1,36 +1,33 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Utilities;
 using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UI
 {
     public class AlphaWarningController : Singleton<AlphaWarningController>
     {
         [Header("Components")]
-        [SerializeField] GameObject visualParent;
-        [SerializeField] Image blackUnderlayImage;
-        [SerializeField] Button confirmButton;
+        [SerializeField]
+        private GameObject visualParent;
+        [SerializeField] private Image blackUnderlayImage;
+        [SerializeField] private Button confirmButton;
 
         [Space(10)]
-
         [Header("Content Movement")]
-        [SerializeField] RectTransform movementParent;
-        [SerializeField] RectTransform onScreenPosition;
-        [SerializeField] RectTransform offScreenPosition;
-        
+        [SerializeField]
+        private RectTransform movementParent;
+        [SerializeField] private RectTransform onScreenPosition;
+        [SerializeField] private RectTransform offScreenPosition;
 
-        bool hasShownWarningThisSession = false;
-        Action onConfirm;
+        private Action onConfirm;
 
-        public bool HasShownWarningThisSession => hasShownWarningThisSession;
+        public bool HasShownWarningThisSession { get; private set; }
 
         public void ShowWarningPage(Action onConfirmClicked = null)
         {
-            hasShownWarningThisSession = true;
+            HasShownWarningThisSession = true;
             onConfirm = onConfirmClicked;
             confirmButton.onClick.AddListener(OnConfirmButtonClicked);
 
@@ -44,7 +41,7 @@ namespace WeAreGladiators.UI
             // Show
             blackUnderlayImage.DOFade(0.5f, 0.75f);
             movementParent.DOMove(onScreenPosition.position, 1f).SetEase(Ease.OutBack)
-                .OnComplete(()=> confirmButton.interactable = true);
+                .OnComplete(() => confirmButton.interactable = true);
         }
 
         private void OnConfirmButtonClicked()
@@ -53,12 +50,14 @@ namespace WeAreGladiators.UI
             blackUnderlayImage.DOKill();
             movementParent.DOKill();
             blackUnderlayImage.DOFade(0f, 1f);
-            movementParent.DOMove(offScreenPosition.position, 1f).SetEase(Ease.InBack).OnComplete(() => 
-            { 
-                if (onConfirm != null) onConfirm.Invoke();
+            movementParent.DOMove(offScreenPosition.position, 1f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                if (onConfirm != null)
+                {
+                    onConfirm.Invoke();
+                }
                 visualParent.SetActive(false);
             });
-
 
         }
     }

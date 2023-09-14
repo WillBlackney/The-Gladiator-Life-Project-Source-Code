@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ namespace WeAreGladiators.Characters
         public CharacterRace race;
         public List<string> bodyParts = new List<string>();
     }
-    [System.Serializable]
+    [Serializable]
     public class CharacterModelTemplateBasket
     {
         [Header("Properties")]

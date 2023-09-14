@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
 namespace WeAreGladiators.Items
 {
-    [System.Serializable]
-    public class ItemEffectSet 
+    [Serializable]
+    public class ItemEffectSet
     {
         public ItemEffect[] possibleEffects;
     }

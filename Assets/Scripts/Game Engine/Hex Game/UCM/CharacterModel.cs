@@ -1,15 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using Spriter2UnityDX;
-using UnityEngine.UI;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
-using WeAreGladiators.Items;
-using WeAreGladiators;
+using Spriter2UnityDX;
+using UnityEngine;
 using UnityEngine.Rendering;
-using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UCM
 {
@@ -19,20 +11,25 @@ namespace WeAreGladiators.UCM
         public Animator myAnimator;
         public EntityRenderer myEntityRenderer;
         [ShowIf("ShowPortraitSprite")]
-        [SerializeField] Sprite portraitSprite;
-        [SerializeField] bool baseFacingIsRight = true;
+        [SerializeField]
+        private Sprite portraitSprite;
+        [SerializeField] private bool baseFacingIsRight = true;
         [Tooltip("Leave this unticked if you need this UCM to be masked by masks that are not childed to this game object (e.g. scroll character roster).")]
-        [SerializeField] bool allowAutoSorting = true;
+        [SerializeField]
+        private bool allowAutoSorting = true;
 
         [ShowIf("ShowRootSorting")]
-        [SerializeField] SortingGroup rootSortingGroup;
-        [SerializeField] float combatScale = 1f;
+        [SerializeField]
+        private SortingGroup rootSortingGroup;
+        [SerializeField] private float combatScale = 1f;
 
         [Header("Animation Specifics")]
         [SerializeField]
-        [Range(0, 5)] int totalDeathAnims = 1;
+        [Range(0, 5)]
+        private int totalDeathAnims = 1;
         [SerializeField]
-        [Range(0, 5)] int totalDecapitationAnims = 1;
+        [Range(0, 5)]
+        private int totalDecapitationAnims = 1;
 
         [HideInInspector] public UniversalCharacterModelElement[] allModelElements;
 
@@ -47,16 +44,18 @@ namespace WeAreGladiators.UCM
         {
             get
             {
-                if (allModelElements == null || allModelElements.Length == 0) RunSetup(true);
+                if (allModelElements == null || allModelElements.Length == 0)
+                {
+                    RunSetup(true);
+                }
                 return allModelElements;
             }
-            protected set { allModelElements = value; }
+            protected set => allModelElements = value;
         }
-       
 
         #region Lifecycle + Init
 
-        protected bool hasRunSetup = false;
+        protected bool hasRunSetup;
         protected virtual void Awake()
         {
             RunSetup();
@@ -71,10 +70,13 @@ namespace WeAreGladiators.UCM
         }
         protected virtual void RunSetup(bool allowRerun = false)
         {
-            if ((!hasRunSetup || (hasRunSetup && allowRerun)) && Application.isPlaying)
+            if ((!hasRunSetup || hasRunSetup && allowRerun) && Application.isPlaying)
             {
                 Debug.Log("UCM.RunSetup() called and executing setup...");
-                if (hasRunSetup && allowRerun) Debug.Log("UCM.RunSetup() already had previous setup, now rerunning...");
+                if (hasRunSetup && allowRerun)
+                {
+                    Debug.Log("UCM.RunSetup() already had previous setup, now rerunning...");
+                }
 
                 // Get all elements
                 AllModelElements = GetComponentsInChildren<UniversalCharacterModelElement>(true);
@@ -84,6 +86,7 @@ namespace WeAreGladiators.UCM
                 hasRunSetup = true;
             }
         }
+
         #endregion
 
         #region Odin ShowIfs
@@ -103,6 +106,5 @@ namespace WeAreGladiators.UCM
         }
 
         #endregion
-
     }
 }

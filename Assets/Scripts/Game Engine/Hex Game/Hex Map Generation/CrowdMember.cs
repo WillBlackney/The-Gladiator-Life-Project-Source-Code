@@ -1,39 +1,41 @@
 using DG.Tweening;
-using WeAreGladiators.HexTiles;
-using WeAreGladiators.Utilities;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UI
 {
     public class CrowdMember : MonoBehaviour
     {
         #region Components + Variables
+
         [Header("Core Components")]
-        [SerializeField] GameObject movementParent;
-        [SerializeField] GameObject reactionMovementParent;
+        [SerializeField]
+        private GameObject movementParent;
+        [SerializeField] private GameObject reactionMovementParent;
 
         [Header("Cheering Components")]
-        [SerializeField] GameObject cheeringArmsParent;
-        [SerializeField] GameObject cheeringRightArmParent;
-        [SerializeField] GameObject cheeringLeftArmParent;
+        [SerializeField]
+        private GameObject cheeringArmsParent;
+        [SerializeField] private GameObject cheeringRightArmParent;
+        [SerializeField] private GameObject cheeringLeftArmParent;
 
         [Header("Dissapointed Components")]
-        [SerializeField] GameObject dissapointedArmsParent;
-        [SerializeField] GameObject dissapointedRightArmParent;
-        [SerializeField] GameObject dissapointedLeftArmParent;
+        [SerializeField]
+        private GameObject dissapointedArmsParent;
+        [SerializeField] private GameObject dissapointedRightArmParent;
+        [SerializeField] private GameObject dissapointedLeftArmParent;
 
-        bool allowSelfMove = false;
-        float selfMoveSpeed = 22.5f;
-        private bool cheering = false;
-        private bool dissapointing = false;
-        bool moveDown = false;
-        Vector3 startingLocalPos = Vector3.zero;
+        private bool allowSelfMove;
+        private float selfMoveSpeed = 22.5f;
+        private bool cheering;
+        private bool dissapointing;
+        private bool moveDown;
+        private readonly Vector3 startingLocalPos = Vector3.zero;
+
         #endregion
 
-        #region Initialization + Setup + Reset        
+        #region Initialization + Setup + Reset
+
         public void StartSelfMove()
         {
             // startingLocalPos = movementParent.transform.localPosition;
@@ -60,16 +62,21 @@ namespace WeAreGladiators.UI
             reactionMovementParent.transform.DOKill();
             reactionMovementParent.transform.localPosition = Vector3.zero;
         }
+
         #endregion
 
         #region Animate and Move
+
         private void Update()
         {
             SelfMove();
         }
         public void DoCheerAnimation()
         {
-            if (cheering || dissapointing) return;
+            if (cheering || dissapointing)
+            {
+                return;
+            }
 
             cheering = true;
             float speed = RandomGenerator.NumberBetween(80, 120) * 0.01f;
@@ -82,8 +89,14 @@ namespace WeAreGladiators.UI
             {
                 // Randomize anim / arms
                 int anim = RandomGenerator.NumberBetween(1, 3);
-                if (anim == 1) cheeringRightArmParent.SetActive(true);
-                else if (anim == 2) cheeringLeftArmParent.SetActive(true);
+                if (anim == 1)
+                {
+                    cheeringRightArmParent.SetActive(true);
+                }
+                else if (anim == 2)
+                {
+                    cheeringLeftArmParent.SetActive(true);
+                }
                 else
                 {
                     cheeringRightArmParent.SetActive(true);
@@ -112,12 +125,15 @@ namespace WeAreGladiators.UI
                     })
                 );
 
-            });             
+            });
 
         }
         public void DoDissapointedAnimation()
-        {            
-            if (cheering || dissapointing) return;
+        {
+            if (cheering || dissapointing)
+            {
+                return;
+            }
             dissapointing = true;
             float speed = RandomGenerator.NumberBetween(85, 115) * 0.01f;
             float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
@@ -129,8 +145,14 @@ namespace WeAreGladiators.UI
             {
                 // Randomize anim / arms
                 int anim = RandomGenerator.NumberBetween(1, 3);
-                if (anim == 1) dissapointedLeftArmParent.SetActive(true);
-                else if (anim == 2) dissapointedRightArmParent.SetActive(true);
+                if (anim == 1)
+                {
+                    dissapointedLeftArmParent.SetActive(true);
+                }
+                else if (anim == 2)
+                {
+                    dissapointedRightArmParent.SetActive(true);
+                }
                 else
                 {
                     dissapointedRightArmParent.SetActive(true);
@@ -152,12 +174,15 @@ namespace WeAreGladiators.UI
                         dissapointing = false;
                     })
                 );
-            });            
+            });
 
         }
         public void DoCombatFinishedAnimation()
         {
-            if (cheering || dissapointing) return;
+            if (cheering || dissapointing)
+            {
+                return;
+            }
 
             float speed = RandomGenerator.NumberBetween(80, 120) * 0.01f;
             float startDelay = RandomGenerator.NumberBetween(1, 3) * 0.1f;
@@ -182,20 +207,29 @@ namespace WeAreGladiators.UI
         }
         private void SelfMove()
         {
-            if (!allowSelfMove) return;
+            if (!allowSelfMove)
+            {
+                return;
+            }
 
             if (moveDown)
             {
                 movementParent.transform.localPosition = Vector2.MoveTowards(movementParent.transform.localPosition, new Vector2(0, -10), selfMoveSpeed * Time.deltaTime);
-                if (movementParent.transform.localPosition.y <= -10) moveDown = false;
+                if (movementParent.transform.localPosition.y <= -10)
+                {
+                    moveDown = false;
+                }
             }
             else
             {
                 movementParent.transform.localPosition = Vector2.MoveTowards(movementParent.transform.localPosition, new Vector2(0, 10), selfMoveSpeed * Time.deltaTime);
-                if (movementParent.transform.localPosition.y >= 10) moveDown = true;
+                if (movementParent.transform.localPosition.y >= 10)
+                {
+                    moveDown = true;
+                }
             }
         }
-        #endregion
 
+        #endregion
     }
 }

@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using Sirenix.OdinInspector;
 
 namespace WeAreGladiators.Cards
 {
@@ -11,9 +9,10 @@ namespace WeAreGladiators.Cards
     {
         // Properties + Component References
         #region
-      //  [Header("General Properties")]
-       // [HideInInspector] public Card card;
-       // [HideInInspector] public CampCard campCard;
+
+        //  [Header("General Properties")]
+        // [HideInInspector] public Card card;
+        // [HideInInspector] public CampCard campCard;
         [HideInInspector] public EventSetting eventSetting;
 
         [Header("General Components")]
@@ -21,7 +20,6 @@ namespace WeAreGladiators.Cards
         public CardViewModel myPreviewCard;
         public bool isPreviewCard;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Core GUI Components")]
         public CardLocationTracker locationTracker;
         public DraggingActions draggingActions;
@@ -29,13 +27,11 @@ namespace WeAreGladiators.Cards
         public HoverPreview hoverPreview;
         public CardSlotHelper mySlotHelper;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Text References")]
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI descriptionText;
 
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Energy Components")]
         public GameObject energyIconVisualParent;
         public TextMeshProUGUI energyText;
@@ -55,22 +51,19 @@ namespace WeAreGladiators.Cards
         [Header("Image References")]
         public Image graphicImage;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Glow Outline References")]
         public Animator glowAnimator;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Colouring References")]
         public Image[] talentRenderers;
         public Image[] rarityRenderers;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Canvas References")]
         public Canvas canvas;
         public CanvasGroup cg;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-        #endregion
 
+        #endregion
         private void OnEnable()
         {
             if (isPreviewCard)
@@ -84,6 +77,6 @@ namespace WeAreGladiators.Cards
     public enum EventSetting
     {
         None = 0,
-        Camping = 1,
+        Camping = 1
     }
 }

@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1357
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Console
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -244,8 +244,8 @@ MonoBehaviour:
     y: 0
     width: 728
     height: 764
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -301,8 +301,8 @@ MonoBehaviour:
     y: 0
     width: 815
     height: 1307
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 24}
   m_Panes:
   - {fileID: 24}
@@ -435,24 +435,24 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 512}
-      m_SelectedIDs: d2910000
-      m_LastClickedID: 37330
-      m_ExpandedIDs: 24fbffff2867000076710000c07a0000b87c0000048a00000eac00006cac000004bb0000
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: b2540000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 06fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Enemy Info Page
-        m_OriginalName: Enemy Info Page
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 37330
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -1332,7 +1332,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_SearchFilter:
-    m_NameFilter: hexdataso
+    m_NameFilter: 
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -1344,22 +1344,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/SO Assets/Hex Tiles
+    - Assets/Scripts/Game Engine/Hex Game/Abilities
     m_Globs: []
-    m_OriginalText: hexdataso
+    m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/SO Assets/Hex Tiles
+  - Assets/Scripts/Game Engine/Hex Game/Abilities
   m_LastFoldersGridSize: 96
   m_LastProjectPath: C:\Users\WB\Documents\GitHub\Arena-RPG-Roguelike
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 154}
-    m_SelectedIDs: b8370200
-    m_LastClickedID: 145336
-    m_ExpandedIDs: 00000000083702005e370200a237020000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 282}
+    m_SelectedIDs: 5c390200
+    m_LastClickedID: 145756
+    m_ExpandedIDs: 000000001a3702006e37020070370200583902005a39020000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1387,7 +1387,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000008370200
+    m_ExpandedIDs: 000000001a370200
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1412,8 +1412,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: b87c0000
-    m_LastClickedInstanceID: 31928
+    m_SelectedInstanceIDs: b2540000
+    m_LastClickedInstanceID: 21682
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000026650600c6c9000072630000ea250100f02501005c2801006e630000626300008c26020000110100e8d990008ed80100d6120100720f0100f2120100de110100ec110100801301003631020076130100ca0f010046130100c8110100422b0100942001005414010052140100e0de010070e0010056e00100a0e0010012e0010012e1010006de0100d4df0100dc8817007c79faffd0a601000000000064880000e494000046d80000848800006288000026a0000014a801009e6c00009ae50000cc1501003a47010050de0100aae30100e8e6010044e7010022ea0100b017010068d20100b0e70100e4e901004e55020006e701009ee149007e260100ec8c00004a8901005c64000050ec010064ea0100383a0200723b020058190100d445010010640000a098000044980000ee990000c88f00000c8e0000a6910000f0630000
     m_RenameOverlay:

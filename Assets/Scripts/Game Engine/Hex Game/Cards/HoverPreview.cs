@@ -1,53 +1,66 @@
-﻿using UnityEngine;
-using System.Collections;
-using DG.Tweening;
-using WeAreGladiators.UI;
+﻿using DG.Tweening;
+using UnityEngine;
 using WeAreGladiators.Audio;
-using WeAreGladiators.Utilities;
+using WeAreGladiators.UI;
 
 namespace WeAreGladiators.Cards
 {
     public class HoverPreview : MonoBehaviour
     {
+
+        // Life cycle
+        #region
+
+        private void Awake()
+        {
+            ThisPreviewEnabled = ActivateInAwake;
+        }
+
+        #endregion
         // Properties + Componet References
         #region
+
         // PUBLIC FIELDS
-        public GameObject[] TurnTheseOffWhenPreviewing;  // if this is null, will not turn off anything 
+        public GameObject[] TurnTheseOffWhenPreviewing; // if this is null, will not turn off anything 
         public Vector3 TargetPosition;
         public float TargetScale;
         public GameObject previewGameObject;
-        public bool ActivateInAwake = false;
+        public bool ActivateInAwake;
         [SerializeField] private CardViewModel mainCardVM;
         [HideInInspector] public bool inChooseScreenTransistion;
 
         // PRIVATE FIELDS
-        private static HoverPreview currentlyViewing = null;
+        private static HoverPreview currentlyViewing;
 
         // PROPERTIES WITH UNDERLYING PRIVATE FIELDS
         private static bool _PreviewsAllowed = true;
         public static bool PreviewsAllowed
         {
-            get { return _PreviewsAllowed; }
+            get => _PreviewsAllowed;
 
             set
             {
                 Debug.Log("Hover Previews Allowed is now: " + value);
                 _PreviewsAllowed = value;
                 if (!_PreviewsAllowed)
+                {
                     StopAllPreviews();
+                }
             }
         }
 
-        private bool _thisPreviewEnabled = false;
+        private bool _thisPreviewEnabled;
         public bool ThisPreviewEnabled
         {
-            get { return _thisPreviewEnabled; }
+            get => _thisPreviewEnabled;
 
             set
             {
                 _thisPreviewEnabled = value;
                 if (!_thisPreviewEnabled)
+                {
                     StopThisPreview();
+                }
             }
         }
 
@@ -55,16 +68,9 @@ namespace WeAreGladiators.Cards
 
         #endregion
 
-        // Life cycle
-        #region
-        void Awake()
-        {
-            ThisPreviewEnabled = ActivateInAwake;
-        }
-        #endregion
-
         // Input Hooks
         #region
+
         private void OnMouseOver()
         {
             /*
@@ -115,7 +121,7 @@ namespace WeAreGladiators.Cards
             */
         }
 
-        void OnMouseEnter()
+        private void OnMouseEnter()
         {
             /*
             if (GlobalSettings.Instance.deviceMode == DeviceMode.Desktop)
@@ -157,7 +163,7 @@ namespace WeAreGladiators.Cards
             {
                 PreviewThisObject();
             }
-            
+
             else if (mainCardVM.eventSetting == EventSetting.Camping &&
                 PreviewsAllowed)
             {
@@ -167,7 +173,7 @@ namespace WeAreGladiators.Cards
 
         }
 
-        void OnMouseExit()
+        private void OnMouseExit()
         {
             OverCollider = false;
             if (!PreviewingSomeCard())
@@ -205,17 +211,18 @@ namespace WeAreGladiators.Cards
             }
             */
 
-
         }
+
         #endregion
 
         // Misc Logic
         #region
+
         public void SetChooseCardScreenTransistionState(bool newState)
         {
             inChooseScreenTransistion = newState;
         }
-        void PreviewThisObject()
+        private void PreviewThisObject()
         {
             Debug.Log("HoverPreview.PreviewThisObject() called...");
 
@@ -273,7 +280,7 @@ namespace WeAreGladiators.Cards
             */
 
         }
-        void StopThisPreview()
+        private void StopThisPreview()
         {
             Debug.Log("HoverPreview.StopThisPreview() called...");
 
@@ -301,14 +308,18 @@ namespace WeAreGladiators.Cards
         private static bool PreviewingSomeCard()
         {
             if (!PreviewsAllowed)
+            {
                 return false;
+            }
 
             HoverPreview[] allHoverBlowups = FindObjectsOfType<HoverPreview>();
 
             foreach (HoverPreview hb in allHoverBlowups)
             {
                 if (hb.OverCollider && hb.ThisPreviewEnabled)
+                {
                     return true;
+                }
             }
 
             return false;
@@ -327,7 +338,7 @@ namespace WeAreGladiators.Cards
                 TurnTheseOffWhenPreviewing[i].gameObject.SetActive(true);
             }
         }
-        #endregion
 
+        #endregion
     }
 }

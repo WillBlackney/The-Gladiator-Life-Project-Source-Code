@@ -1,17 +1,77 @@
+using System.Collections;
 using DG.Tweening;
+using UnityEngine;
 using WeAreGladiators.Audio;
 using WeAreGladiators.UI;
 using WeAreGladiators.Utilities;
-using System.Collections;
-using UnityEngine;
 
 namespace WeAreGladiators.UWidget
 {
     public class UWidgetController : Singleton<UWidgetController>
     {
 
+        // Misc Logic
+        #region
+
+        private void KillAllAnimationsOnWidget(UWidget widget)
+        {
+            //Debug.Log("WidgetController.KillAllAnimationsOnWidget() called on game object: " + widget.gameObject.name);
+
+            if (widget.killPreviousTweensOnNewSequenceStart == false)
+            {
+                return;
+            }
+
+            for (int i = 0; i < widget.OnClickEvents.Length; i++)
+            {
+                // Kill transform scaling anims
+                if (widget.OnClickEvents[i].transformToScale != null) //&&
+                    //  DOTween.IsTweening(widget.OnClickEvents[i].transformToScale))
+                {
+                    widget.OnClickEvents[i].transformToScale.DOKill();
+                }
+
+                // Kill wiggle anims
+                if (widget.OnClickEvents[i].transformToWiggle != null) //&&
+                    // DOTween.IsTweening(widget.OnClickEvents[i].transformToWiggle))
+                {
+                    widget.OnClickEvents[i].transformToWiggle.DOKill();
+                }
+
+                // Kill image anims
+                if (widget.OnClickEvents[i].image != null) // &&
+                    // DOTween.IsTweening(widget.OnClickEvents[i].image))
+                {
+                    widget.OnClickEvents[i].image.DOKill();
+                }
+
+                // Kill cg anims
+                if (widget.OnClickEvents[i].canvasGroup != null) //&& DOTween.IsTweening(widget.OnClickEvents[i].canvasGroup))
+                {
+                    widget.OnClickEvents[i].canvasGroup.DOKill();
+                }
+
+                // Kill text anims
+                if (widget.OnClickEvents[i].text != null) // && DOTween.IsTweening(widget.OnClickEvents[i].text))
+                {
+                    widget.OnClickEvents[i].text.DOKill();
+                }
+
+                // Kill move anims
+                if (widget.OnClickEvents[i].transformToMove != null)
+                    //  && DOTween.IsTweening(widget.OnClickEvents[i].transformToMove))
+                {
+                    widget.OnClickEvents[i].transformToMove.DOKill();
+                }
+
+            }
+        }
+
+        #endregion
+
         // Core Logic for Handling Widget Events
         #region
+
         public void HandleWidgetEvents(UWidget widget, WidgetEventData[] wEvents, string eventType)
         {
             Debug.Log("WidgetController.HandleWidgetEvents() called on game object '" + widget.gameObject.name +
@@ -28,7 +88,7 @@ namespace WeAreGladiators.UWidget
         private IEnumerator HandleWidgetEvent(UWidget widget, WidgetEventData wEvent)
         {
             Debug.Log("WidgetController.HandleWidgetEvent() called on game object: " + widget.gameObject.name + ", event type: "
-                + wEvent.widgetEventType.ToString());
+                + wEvent.widgetEventType);
 
             // Wait for start delay
             if (wEvent.enableStartDelay)
@@ -38,7 +98,7 @@ namespace WeAreGladiators.UWidget
                 // Cancel if the pointer needs to be held over the
                 // object, and the user has moved their mouse off the widget
                 if (wEvent.onlyIfMouseIsStillOverMe &&
-                    (UWidget.MousedOver != widget || ((Time.realtimeSinceStartup - widget.TimeSinceLastPointerEnter) < wEvent.startDelay)))
+                    (UWidget.MousedOver != widget || Time.realtimeSinceStartup - widget.TimeSinceLastPointerEnter < wEvent.startDelay))
                 {
                     yield break;
                 }
@@ -49,7 +109,7 @@ namespace WeAreGladiators.UWidget
                 if (wEvent.objectToEnable == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target GameObject " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target GameObject " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -60,7 +120,7 @@ namespace WeAreGladiators.UWidget
                 if (wEvent.objectToDisable == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target GameObject " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target GameObject " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -71,7 +131,7 @@ namespace WeAreGladiators.UWidget
                 if (wEvent.functionInvoked == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but its target function to invoke " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but its target function to invoke " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -86,7 +146,7 @@ namespace WeAreGladiators.UWidget
                 if (wEvent.canvasGroup == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but its target CanvasGroup component " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but its target CanvasGroup component " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -99,7 +159,7 @@ namespace WeAreGladiators.UWidget
                 if (wEvent.canvasGroup == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target CanvasGroup component " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target CanvasGroup component " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -112,7 +172,7 @@ namespace WeAreGladiators.UWidget
                 if (wEvent.image == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target Image component " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target Image component " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -125,7 +185,7 @@ namespace WeAreGladiators.UWidget
                 if (wEvent.image == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target Image component " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target Image component " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -139,7 +199,7 @@ namespace WeAreGladiators.UWidget
                 if (wEvent.image == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target Image component " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target Image component " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -152,7 +212,7 @@ namespace WeAreGladiators.UWidget
                 if (wEvent.text == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target TextMeshProUGUI component " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target TextMeshProUGUI component " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -165,7 +225,7 @@ namespace WeAreGladiators.UWidget
                 if (wEvent.transformToScale == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target Transform component " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target Transform component " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -184,7 +244,7 @@ namespace WeAreGladiators.UWidget
                 if (wEvent.transformToScale == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target Transform component " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target Transform component " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -204,7 +264,7 @@ namespace WeAreGladiators.UWidget
                 if (wEvent.transformToScale == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target Transform component " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target Transform component " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -239,14 +299,13 @@ namespace WeAreGladiators.UWidget
                     s.OnComplete(() => wEvent.transformToScale.DOScale(enlargeScale, wEvent.enlargeSpeed));
                 }
 
-
             }
             else if (wEvent.widgetEventType == WidgetEvent.Move)
             {
                 if (wEvent.transformToMove == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target Transform component " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target Transform component " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -293,12 +352,12 @@ namespace WeAreGladiators.UWidget
                 }
             }
             else if (wEvent.widgetEventType == WidgetEvent.Wiggle &&
-                wEvent.wiggleType == WiggleType.RotateOnTheSpot)
+                     wEvent.wiggleType == WiggleType.RotateOnTheSpot)
             {
                 if (wEvent.transformToWiggle == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target Transform component " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target Transform component " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -307,24 +366,24 @@ namespace WeAreGladiators.UWidget
             }
 
             else if (wEvent.widgetEventType == WidgetEvent.Wiggle &&
-               wEvent.wiggleType == WiggleType.SideToSide)
+                     wEvent.wiggleType == WiggleType.SideToSide)
             {
                 if (wEvent.transformToWiggle == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target Transform component " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target Transform component " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
                 WiggleSideToSide(wEvent);
             }
             else if (wEvent.widgetEventType == WidgetEvent.Wiggle &&
-              wEvent.wiggleType == WiggleType.UpAndDown)
+                     wEvent.wiggleType == WiggleType.UpAndDown)
             {
                 if (wEvent.transformToWiggle == null)
                 {
                     Debug.LogWarning("::: WARNING ::: The widget on object " + widget.gameObject +
-                        " is trying to execute an event of type " + wEvent.widgetEventType.ToString() + ", but it's target Transform component " +
+                        " is trying to execute an event of type " + wEvent.widgetEventType + ", but it's target Transform component " +
                         "is null, did you forget to assign the value in the inspector?");
                     yield break;
                 }
@@ -336,53 +395,12 @@ namespace WeAreGladiators.UWidget
             }
 
         }
-        #endregion
 
-        // Misc Logic
-        #region
-        private void KillAllAnimationsOnWidget(UWidget widget)
-        {
-            //Debug.Log("WidgetController.KillAllAnimationsOnWidget() called on game object: " + widget.gameObject.name);
-
-            if (widget.killPreviousTweensOnNewSequenceStart == false)
-                return;
-
-            for (int i = 0; i < widget.OnClickEvents.Length; i++)
-            {
-                // Kill transform scaling anims
-                if (widget.OnClickEvents[i].transformToScale != null) //&&
-                                                                      //  DOTween.IsTweening(widget.OnClickEvents[i].transformToScale))
-                    widget.OnClickEvents[i].transformToScale.DOKill();
-
-                // Kill wiggle anims
-                if (widget.OnClickEvents[i].transformToWiggle != null) //&&
-                                                                       // DOTween.IsTweening(widget.OnClickEvents[i].transformToWiggle))
-                    widget.OnClickEvents[i].transformToWiggle.DOKill();
-
-                // Kill image anims
-                if (widget.OnClickEvents[i].image != null)// &&
-                                                          // DOTween.IsTweening(widget.OnClickEvents[i].image))
-                    widget.OnClickEvents[i].image.DOKill();
-
-                // Kill cg anims
-                if (widget.OnClickEvents[i].canvasGroup != null) //&& DOTween.IsTweening(widget.OnClickEvents[i].canvasGroup))
-                    widget.OnClickEvents[i].canvasGroup.DOKill();
-
-                // Kill text anims
-                if (widget.OnClickEvents[i].text != null)                  // && DOTween.IsTweening(widget.OnClickEvents[i].text))
-                    widget.OnClickEvents[i].text.DOKill();
-
-                // Kill move anims
-                if (widget.OnClickEvents[i].transformToMove != null)
-                    //  && DOTween.IsTweening(widget.OnClickEvents[i].transformToMove))
-                    widget.OnClickEvents[i].transformToMove.DOKill();
-
-            }
-        }
         #endregion
 
         // Wiggle + Transform Events
         #region
+
         private void WiggleOnTheSpot(WidgetEventData wEvent)
         {
             // Calculate the left and right rotation positions, relative to current rotation position
@@ -394,7 +412,9 @@ namespace WeAreGladiators.UWidget
             // Wiggle infinetly?
             int wiggleCount = wEvent.wiggleLoops + 1;
             if (wEvent.wiggleInfinetly)
+            {
                 wiggleCount = -1;
+            }
 
             // Start the rotation !
             Sequence s = DOTween.Sequence();
@@ -413,7 +433,9 @@ namespace WeAreGladiators.UWidget
             // How many times should this move side to side?
             int wiggleCount = wEvent.wiggleLoops + 1;
             if (wEvent.wiggleInfinetly)
+            {
                 wiggleCount = -1;
+            }
 
             // Snap move object to it's starting position
             wEvent.transformToWiggle.DOLocalMove(wEvent.OriginalPosition, 0f);
@@ -421,11 +443,11 @@ namespace WeAreGladiators.UWidget
             // Start move sequence
             Sequence s = DOTween.Sequence();
             // 1. Move from start position towards right position
-            s.Append(wEvent.transformToWiggle.DOLocalMoveX(wEvent.OriginalPosition.x + (wEvent.wiggleDistance / 2f), wEvent.wiggleSpeed / 2f));
+            s.Append(wEvent.transformToWiggle.DOLocalMoveX(wEvent.OriginalPosition.x + wEvent.wiggleDistance / 2f, wEvent.wiggleSpeed / 2f));
             // 2. Move from right position towards left position
             s.Append(wEvent.transformToWiggle.DOLocalMoveX(wEvent.OriginalPosition.x - wEvent.wiggleDistance, wEvent.wiggleSpeed));
             // 3. Move from left position back towards starting position
-            s.Append(wEvent.transformToWiggle.DOLocalMoveX(wEvent.OriginalPosition.x + (wEvent.wiggleDistance / 2f), wEvent.wiggleSpeed / 2f));
+            s.Append(wEvent.transformToWiggle.DOLocalMoveX(wEvent.OriginalPosition.x + wEvent.wiggleDistance / 2f, wEvent.wiggleSpeed / 2f));
             // Repeat the event, if the user has marked to do so
             s.SetLoops(wiggleCount);
         }
@@ -435,28 +457,31 @@ namespace WeAreGladiators.UWidget
             // How many times should this move up and down?
             int wiggleCount = wEvent.wiggleLoops + 1;
             if (wEvent.wiggleInfinetly)
+            {
                 wiggleCount = -1;
+            }
 
             // Move back to start pos
             wEvent.transformToWiggle.DOLocalMove(wEvent.OriginalPosition, 0f);
 
             Sequence s = DOTween.Sequence();
             // 1. Move from start position towards north most position
-            s.Append(wEvent.transformToWiggle.DOLocalMoveY(wEvent.OriginalPosition.y + (wEvent.wiggleDistance / 2f), wEvent.wiggleSpeed / 2f));
+            s.Append(wEvent.transformToWiggle.DOLocalMoveY(wEvent.OriginalPosition.y + wEvent.wiggleDistance / 2f, wEvent.wiggleSpeed / 2f));
             // 2. Move from north position towards south position
             s.Append(wEvent.transformToWiggle.DOLocalMoveY(wEvent.OriginalPosition.y - wEvent.wiggleDistance, wEvent.wiggleSpeed));
             // 3. Move from south position back towards starting position
-            s.Append(wEvent.transformToWiggle.DOLocalMoveY(wEvent.OriginalPosition.y + (wEvent.wiggleDistance / 2f), wEvent.wiggleSpeed / 2f));
+            s.Append(wEvent.transformToWiggle.DOLocalMoveY(wEvent.OriginalPosition.y + wEvent.wiggleDistance / 2f, wEvent.wiggleSpeed / 2f));
             // Repeat the event, if the user has marked to do so
             s.SetLoops(wiggleCount);
         }
+
         #endregion
     }
 
     public enum InputDevice
     {
         Mouse = 0,
-        TouchScreen = 1,
+        TouchScreen = 1
     }
 
 }

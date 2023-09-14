@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,49 +12,64 @@ namespace WeAreGladiators.CombatLog
 {
     public class CombatLogController : Singleton<CombatLogController>
     {
+
+        #region Misc Logic
+
+        private Sprite GetIconSprite(EntryIcon type)
+        {
+            Sprite sprite = null;
+
+            return sprite;
+        }
+
+        #endregion
         #region Components + Variables
+
         [Header("Core Components")]
-        [SerializeField] Canvas mainCanvas;
-        [SerializeField] CombatLogEntryView logEntryViewPrefab;
-        [SerializeField] Transform logEntryViewParent;
-        [SerializeField] GameObject logContentParent;
-        [SerializeField] ScrollRect logScrollRect;
-        [SerializeField] Scrollbar logSlider;
-        [SerializeField] List<CombatLogEntryView> allEntryViews = new List<CombatLogEntryView>();
+        [SerializeField]
+        private Canvas mainCanvas;
+        [SerializeField] private CombatLogEntryView logEntryViewPrefab;
+        [SerializeField] private Transform logEntryViewParent;
+        [SerializeField] private GameObject logContentParent;
+        [SerializeField] private ScrollRect logScrollRect;
+        [SerializeField] private Scrollbar logSlider;
+        [SerializeField] private List<CombatLogEntryView> allEntryViews = new List<CombatLogEntryView>();
 
         [Space(10)]
-
         [Header("Maximize/Minimize Log Button")]
-        [SerializeField] Button minMaxButton;
-        [SerializeField] Image minMaxButtonImage;
+        [SerializeField]
+        private Button minMaxButton;
+        [SerializeField] private Image minMaxButtonImage;
 
         [Space(10)]
-
         [Header("Sprites")]
-        [SerializeField] Sprite turnCycleStart;
-        [SerializeField] Sprite abilityUsed;
-        [SerializeField] Sprite hit;
-        [SerializeField] Sprite miss;
-        [SerializeField] Sprite tookDamage;
-        [SerializeField] Sprite lostHealth;
-        [SerializeField] Sprite death;
-        [SerializeField] Sprite knockDown;
-        [SerializeField] Sprite characterStartTurn;
-        [SerializeField] Sprite characterEndTurn;
-        [SerializeField] Sprite characterDelayTurn;
-        [SerializeField] Sprite gainedInjury;
-        [SerializeField] Sprite stressGained;
-        [SerializeField] Sprite stressStateChanged;
-        [SerializeField] Sprite gainedPositivePassive;
-        [SerializeField] Sprite gainedNegativePassive;
-        [SerializeField] Sprite resistedNegativePassive;
+        [SerializeField]
+        private Sprite turnCycleStart;
+        [SerializeField] private Sprite abilityUsed;
+        [SerializeField] private Sprite hit;
+        [SerializeField] private Sprite miss;
+        [SerializeField] private Sprite tookDamage;
+        [SerializeField] private Sprite lostHealth;
+        [SerializeField] private Sprite death;
+        [SerializeField] private Sprite knockDown;
+        [SerializeField] private Sprite characterStartTurn;
+        [SerializeField] private Sprite characterEndTurn;
+        [SerializeField] private Sprite characterDelayTurn;
+        [SerializeField] private Sprite gainedInjury;
+        [SerializeField] private Sprite stressGained;
+        [SerializeField] private Sprite stressStateChanged;
+        [SerializeField] private Sprite gainedPositivePassive;
+        [SerializeField] private Sprite gainedNegativePassive;
+        [SerializeField] private Sprite resistedNegativePassive;
 
-        List<CombatLogEntryData> allEntryData = new List<CombatLogEntryData>();
-        bool maximized = false;
-        int maxEntriesShown = 50;
+        private readonly List<CombatLogEntryData> allEntryData = new List<CombatLogEntryData>();
+        private bool maximized;
+        private readonly int maxEntriesShown = 50;
+
         #endregion
 
         #region Core Logic
+
         private void Start()
         {
             minMaxButton.onClick.RemoveAllListeners();
@@ -65,7 +79,10 @@ namespace WeAreGladiators.CombatLog
         {
             allEntryViews.ForEach(v => v.gameObject.SetActive(false));
             mainCanvas.enabled = true;
-            if (maximize) MaximizeLog();
+            if (maximize)
+            {
+                MaximizeLog();
+            }
         }
         public void HideLog()
         {
@@ -76,6 +93,7 @@ namespace WeAreGladiators.CombatLog
         #endregion
 
         #region Draw Entries Logic
+
         private void RenderEntries()
         {
             List<CombatLogEntryData> source = new List<CombatLogEntryData>();
@@ -83,12 +101,18 @@ namespace WeAreGladiators.CombatLog
             VisualEventManager.CreateVisualEvent(() =>
             {
                 int dataStartIndex = source.Count - 1 - maxEntriesShown;
-                if(dataStartIndex < 0) dataStartIndex = 0;
+                if (dataStartIndex < 0)
+                {
+                    dataStartIndex = 0;
+                }
 
                 allEntryViews.ForEach(v => v?.gameObject.SetActive(false));
                 for (int i = 0; i < source.Count && i < maxEntriesShown; i++)
                 {
-                    if (i >= allEntryViews.Count) CreateNewEntryView();
+                    if (i >= allEntryViews.Count)
+                    {
+                        CreateNewEntryView();
+                    }
                     allEntryViews[i].Build(source[i + dataStartIndex]);
                 }
 
@@ -98,7 +122,7 @@ namespace WeAreGladiators.CombatLog
                     logScrollRect.verticalNormalizedPosition = 0f;
                 });
             });
-            
+
         }
         private CombatLogEntryView CreateNewEntryView()
         {
@@ -106,13 +130,21 @@ namespace WeAreGladiators.CombatLog
             allEntryViews.Add(newEntry);
             return newEntry;
         }
+
         #endregion
 
         #region Min / Max Logic
+
         private void OnMinMaxButtonClicked()
         {
-            if (maximized) MinimizeLog();
-            else MaximizeLog();
+            if (maximized)
+            {
+                MinimizeLog();
+            }
+            else
+            {
+                MaximizeLog();
+            }
         }
         private void MaximizeLog()
         {
@@ -127,9 +159,11 @@ namespace WeAreGladiators.CombatLog
             minMaxButtonImage.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
             logContentParent.SetActive(false);
         }
+
         #endregion
 
         #region Modify Entries Logic
+
         public void ClearAllEntries()
         {
             allEntryData.Clear();
@@ -147,50 +181,77 @@ namespace WeAreGladiators.CombatLog
         public void CreateCharacterTurnStartEntry(HexCharacterModel character)
         {
             string col = TextLogic.lightGreen;
-            if (character.allegiance == Allegiance.Enemy) col = TextLogic.lightRed;
+            if (character.allegiance == Allegiance.Enemy)
+            {
+                col = TextLogic.lightRed;
+            }
             string nameText = TextLogic.ReturnColoredText(character.myName, col);
             CreateNewEntry(characterStartTurn, nameText + " started their turn.");
         }
         public void CreateCharacterTurnDelayEntry(HexCharacterModel character)
         {
             string col = TextLogic.lightGreen;
-            if (character.allegiance == Allegiance.Enemy) col = TextLogic.lightRed;
+            if (character.allegiance == Allegiance.Enemy)
+            {
+                col = TextLogic.lightRed;
+            }
             string nameText = TextLogic.ReturnColoredText(character.myName, col);
             CreateNewEntry(characterDelayTurn, nameText + " delayed their turn.");
         }
         public void CreateCharacterTurnEndEntry(HexCharacterModel character)
         {
             string col = TextLogic.lightGreen;
-            if (character.allegiance == Allegiance.Enemy) col = TextLogic.lightRed;
+            if (character.allegiance == Allegiance.Enemy)
+            {
+                col = TextLogic.lightRed;
+            }
             string nameText = TextLogic.ReturnColoredText(character.myName, col);
             CreateNewEntry(characterEndTurn, nameText + " ended their turn.");
         }
         public void CreateCharacterUsedAbilityEntry(HexCharacterModel character, AbilityData ability, HexCharacterModel target = null)
         {
             string casterCol = TextLogic.lightGreen;
-            if (character.allegiance == Allegiance.Enemy) casterCol = TextLogic.lightRed;
+            if (character.allegiance == Allegiance.Enemy)
+            {
+                casterCol = TextLogic.lightRed;
+            }
             string casterNameText = TextLogic.ReturnColoredText(character.myName, casterCol);
 
             string targetCol = TextLogic.lightGreen;
             string targetNameText = "";
             if (target != null)
             {
-                if (target.allegiance == Allegiance.Enemy) targetCol = TextLogic.lightRed;
+                if (target.allegiance == Allegiance.Enemy)
+                {
+                    targetCol = TextLogic.lightRed;
+                }
                 targetNameText = TextLogic.ReturnColoredText(target.myName, targetCol);
             }
 
             string abilityText = TextLogic.ReturnColoredText(ability.abilityName, TextLogic.neutralYellow);
-            if(target == null) CreateNewEntry(abilityUsed, casterNameText + " used ability " + abilityText + ".");
-            else CreateNewEntry(abilityUsed, casterNameText + " used ability " + abilityText + " on " + targetNameText + ".");
+            if (target == null)
+            {
+                CreateNewEntry(abilityUsed, casterNameText + " used ability " + abilityText + ".");
+            }
+            else
+            {
+                CreateNewEntry(abilityUsed, casterNameText + " used ability " + abilityText + " on " + targetNameText + ".");
+            }
         }
         public void CreateCharacterHitResultEntry(HexCharacterModel character, HexCharacterModel target, HitRoll data, bool critical = false)
         {
             string casterCol = TextLogic.lightGreen;
-            if (character.allegiance == Allegiance.Enemy) casterCol = TextLogic.lightRed;
+            if (character.allegiance == Allegiance.Enemy)
+            {
+                casterCol = TextLogic.lightRed;
+            }
             string casterNameText = TextLogic.ReturnColoredText(character.myName, casterCol);
 
             string targetCol = TextLogic.lightGreen;
-            if (target.allegiance == Allegiance.Enemy) targetCol = TextLogic.lightRed;
+            if (target.allegiance == Allegiance.Enemy)
+            {
+                targetCol = TextLogic.lightRed;
+            }
             string targetNameText = TextLogic.ReturnColoredText(target.myName, targetCol);
             string hitText = "hit";
             Sprite icon = hit;
@@ -200,7 +261,10 @@ namespace WeAreGladiators.CombatLog
                 icon = miss;
                 hitText = "missed";
             }
-            else if (critical) hitText = "critically hit";
+            else if (critical)
+            {
+                hitText = "critically hit";
+            }
             string rollText = TextLogic.ReturnColoredText(data.Roll.ToString(), TextLogic.blueNumber);
             string requiredText = TextLogic.ReturnColoredText(data.RequiredRoll.ToString(), TextLogic.blueNumber);
             CreateNewEntry(icon, casterNameText + " " + hitText + " " + targetNameText + " (rolled " + rollText + ", required " + requiredText + " or less).");
@@ -208,7 +272,10 @@ namespace WeAreGladiators.CombatLog
         public void CreateCharacterDamageEntry(HexCharacterModel target, int healthDamage, int armourDamage)
         {
             string casterCol = TextLogic.lightGreen;
-            if (target.allegiance == Allegiance.Enemy) casterCol = TextLogic.lightRed;
+            if (target.allegiance == Allegiance.Enemy)
+            {
+                casterCol = TextLogic.lightRed;
+            }
             string casterNameText = TextLogic.ReturnColoredText(target.myName, casterCol);
             string totalDamageText = TextLogic.ReturnColoredText((healthDamage + armourDamage).ToString(), TextLogic.blueNumber);
             string healthNameText = TextLogic.ReturnColoredText("Health", TextLogic.neutralYellow);
@@ -220,22 +287,31 @@ namespace WeAreGladiators.CombatLog
         public void CreateCharacterDiedEntry(HexCharacterModel character, DeathRollResult result)
         {
             string col = TextLogic.lightGreen;
-            if (character.allegiance == Allegiance.Enemy) col = TextLogic.lightRed;
+            if (character.allegiance == Allegiance.Enemy)
+            {
+                col = TextLogic.lightRed;
+            }
             string nameText = TextLogic.ReturnColoredText(character.myName, col);
 
-            if(result != null)
+            if (result != null)
             {
                 string rollText = TextLogic.ReturnColoredText(result.roll.ToString(), TextLogic.blueNumber);
                 string requiredText = TextLogic.ReturnColoredText(result.required.ToString(), TextLogic.blueNumber);
                 CreateNewEntry(death, nameText + " was killed (rolled " + rollText + ", required " + requiredText + " or less to survive).");
 
             }
-            else CreateNewEntry(death, nameText + " was killed.");
+            else
+            {
+                CreateNewEntry(death, nameText + " was killed.");
+            }
         }
         public void CreatePermanentInjuryEntry(HexCharacterModel character, DeathRollResult result, string injuryName)
         {
             string col = TextLogic.lightGreen;
-            if (character.allegiance == Allegiance.Enemy) col = TextLogic.lightRed;
+            if (character.allegiance == Allegiance.Enemy)
+            {
+                col = TextLogic.lightRed;
+            }
             string nameText = TextLogic.ReturnColoredText(character.myName, col);
             string injuryText = TextLogic.ReturnColoredText(injuryName, TextLogic.neutralYellow);
 
@@ -246,12 +322,18 @@ namespace WeAreGladiators.CombatLog
                 CreateNewEntry(death, nameText + " survived a killing blow and suffered a permanent injury: " + injuryText + " (rolled " + rollText + ", required " + requiredText + " or less to survive).");
 
             }
-            else CreateNewEntry(death, nameText + " was killed.");
+            else
+            {
+                CreateNewEntry(death, nameText + " was killed.");
+            }
         }
         public void CreateInjuryEntry(HexCharacterModel character, string injuryName, int roll, int required)
         {
             string col = TextLogic.lightGreen;
-            if (character.allegiance == Allegiance.Enemy) col = TextLogic.lightRed;
+            if (character.allegiance == Allegiance.Enemy)
+            {
+                col = TextLogic.lightRed;
+            }
             string nameText = TextLogic.ReturnColoredText(character.myName, col);
             string injuryText = TextLogic.ReturnColoredText(injuryName, TextLogic.neutralYellow);
             string rollText = TextLogic.ReturnColoredText(roll.ToString(), TextLogic.blueNumber);
@@ -262,7 +344,10 @@ namespace WeAreGladiators.CombatLog
         public void CreateStressStateChangedEntry(HexCharacterModel character, string stressStateName)
         {
             string col = TextLogic.lightGreen;
-            if (character.allegiance == Allegiance.Enemy) col = TextLogic.lightRed;
+            if (character.allegiance == Allegiance.Enemy)
+            {
+                col = TextLogic.lightRed;
+            }
             string nameText = TextLogic.ReturnColoredText(character.myName, col);
             string stressText = TextLogic.ReturnColoredText(stressStateName, TextLogic.neutralYellow);
             CreateNewEntry(stressStateChanged, nameText + " is now " + stressStateName + ".");
@@ -271,31 +356,34 @@ namespace WeAreGladiators.CombatLog
         {
             string stacksText = TextLogic.ReturnColoredText(stacks.ToString(), TextLogic.blueNumber);
             string tCol = TextLogic.lightGreen;
-            if (target.allegiance == Allegiance.Enemy) tCol = TextLogic.lightRed;
+            if (target.allegiance == Allegiance.Enemy)
+            {
+                tCol = TextLogic.lightRed;
+            }
             string tNameText = TextLogic.ReturnColoredText(target.myName, tCol);
 
             string applCol = TextLogic.lightGreen;
             string appNameText = "";
             if (applier != null)
             {
-                if (applier.allegiance == Allegiance.Enemy) applCol = TextLogic.lightRed;
+                if (applier.allegiance == Allegiance.Enemy)
+                {
+                    applCol = TextLogic.lightRed;
+                }
                 appNameText = TextLogic.ReturnColoredText(applier.myName, applCol);
             }
 
             string passiveNameText = TextLogic.ReturnColoredText(passiveName, TextLogic.neutralYellow);
-            if (applier == null || applier == target) CreateNewEntry(gainedPositivePassive, tNameText + " gained " + stacksText + " " + passiveNameText + ".");
-            else CreateNewEntry(gainedPositivePassive, tNameText + " gained " + stacksText + " " + passiveNameText + " from " + appNameText + ".");
+            if (applier == null || applier == target)
+            {
+                CreateNewEntry(gainedPositivePassive, tNameText + " gained " + stacksText + " " + passiveNameText + ".");
+            }
+            else
+            {
+                CreateNewEntry(gainedPositivePassive, tNameText + " gained " + stacksText + " " + passiveNameText + " from " + appNameText + ".");
+            }
         }
-        #endregion
 
-
-        #region Misc Logic
-        private Sprite GetIconSprite(EntryIcon type) 
-        { 
-            Sprite sprite = null;
-
-            return sprite;
-        }
         #endregion
     }
 
@@ -318,7 +406,7 @@ namespace WeAreGladiators.CombatLog
         StressStateChanged = 13,
         GainedPositivePassive = 14,
         GainedNegativePassive = 15,
-        ResistedNegativePassive = 16,
+        ResistedNegativePassive = 16
 
     }
 }

@@ -1,14 +1,11 @@
-using WeAreGladiators.StoryEvents;
-using WeAreGladiators;
+using System;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using WeAreGladiators.Characters;
 
 namespace WeAreGladiators.StoryEvents
 {
-    [System.Serializable]
+    [Serializable]
     public class StoryChoiceRequirement
     {
         [Header("Core Data")]
@@ -21,10 +18,12 @@ namespace WeAreGladiators.StoryEvents
 
         // Odin Showifs
         #region
+
         public bool ShowRequiredBackground()
         {
             return requirementType == StoryChoiceReqType.CharacterWithBackground;
         }
+
         #endregion
     }
 }

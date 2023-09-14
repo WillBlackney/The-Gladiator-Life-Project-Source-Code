@@ -1,9 +1,6 @@
-﻿using UnityEngine;
-using DG.Tweening;
-using WeAreGladiators.Utilities;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using WeAreGladiators.UI;
-using System.Collections.Generic;
 
 namespace WeAreGladiators.Characters
 {

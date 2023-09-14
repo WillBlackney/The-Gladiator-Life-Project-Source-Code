@@ -1,38 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 namespace WeAreGladiators.Perks
 {
-    [System.Serializable]
+    [Serializable]
     public class ActivePerk
     {
         public Perk perkTag;
         public int stacks;
-        [HideInInspector] public bool freshInjury = false;
+        [HideInInspector] public bool freshInjury;
         private PerkIconData data;
-        public PerkIconData Data
-        {
-            get 
-            { 
-                if(data == null)
-                {
-                    data = PerkController.Instance.GetPerkIconDataByTag(perkTag);
-                };
-                return data;
-            }
-        }
 
         public ActivePerk(Perk perk, int stacks)
         {
-            this.perkTag = perk;
+            perkTag = perk;
             this.stacks = stacks;
         }
         public ActivePerk(Perk perk, int stacks, PerkIconData data)
         {
-            this.perkTag = perk;
+            perkTag = perk;
             this.stacks = stacks;
             this.data = data;
+        }
+        public PerkIconData Data
+        {
+            get
+            {
+                if (data == null)
+                {
+                    data = PerkController.Instance.GetPerkIconDataByTag(perkTag);
+                }
+                ;
+                return data;
+            }
         }
     }
 }

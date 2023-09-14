@@ -1,7 +1,7 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine;
-using UnityEditor;
 using Sirenix.OdinInspector;
+using UnityEditor;
+using UnityEngine;
 
 namespace WeAreGladiators.CustomOdinGUI
 {
@@ -19,7 +19,7 @@ namespace WeAreGladiators.CustomOdinGUI
             // Finds the manager game object in the scene
             if (myObject == null)
             {
-                myObject = GameObject.FindObjectOfType<T>();
+                myObject = Object.FindObjectOfType<T>();
             }
         }
 
@@ -41,10 +41,9 @@ namespace WeAreGladiators.CustomOdinGUI
         private void CreateManagerObject()
         {
             GameObject newManager = new GameObject();
-            newManager.name = "New " + typeof(T).ToString();
+            newManager.name = "New " + typeof(T);
             myObject = newManager.AddComponent<T>();
         }
-        
     }
 }
 

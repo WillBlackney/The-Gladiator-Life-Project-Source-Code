@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.VisualEvents
@@ -9,20 +7,23 @@ namespace WeAreGladiators.VisualEvents
     {
         // Properties + Components
         #region
+
         [Header("Global Light Components")]
         [SerializeField] private GameObject standardGlobalLight;
         [SerializeField] private GameObject nightTimeGlobalLight;
         [SerializeField] private GameObject dayTimeGlobalLight;
+
         #endregion
 
         // Logic
         #region
+
         private void DisableAllGlobalLights()
         {
             standardGlobalLight.SetActive(false);
             nightTimeGlobalLight.SetActive(false);
             dayTimeGlobalLight.SetActive(false);
-        }       
+        }
         public void EnableStandardGlobalLight()
         {
             DisableAllGlobalLights();
@@ -38,8 +39,7 @@ namespace WeAreGladiators.VisualEvents
             DisableAllGlobalLights();
             dayTimeGlobalLight.SetActive(true);
         }
+
         #endregion
-
-
     }
 }

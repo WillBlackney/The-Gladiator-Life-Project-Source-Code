@@ -1,14 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace WeAreGladiators.Items
 {
     public class ItemSet
     {
-        public ItemData mainHandItem;
-        public ItemData offHandItem;
         public ItemData bodyArmour;
         public ItemData headArmour;
+        public ItemData mainHandItem;
+        public ItemData offHandItem;
         public ItemData trinket;
 
         public bool IsDualWieldingMeleeWeapons()
@@ -18,7 +19,7 @@ namespace WeAreGladiators.Items
                 mainHandItem.handRequirement == HandRequirement.OneHanded &&
                 offHandItem != null &&
                 offHandItem.IsMeleeWeapon &&
-                offHandItem.handRequirement == HandRequirement.OneHanded;          
+                offHandItem.handRequirement == HandRequirement.OneHanded;
         }
         public bool IsWieldingTwoHandMeleeWeapon()
         {
@@ -34,13 +35,13 @@ namespace WeAreGladiators.Items
         public bool IsWieldingOneHandMeleeWeaponWithEmptyOffhand()
         {
             return mainHandItem != null &&
-               mainHandItem.IsMeleeWeapon &&
-               mainHandItem.handRequirement == HandRequirement.OneHanded &&
-               offHandItem == null;
+                mainHandItem.IsMeleeWeapon &&
+                mainHandItem.handRequirement == HandRequirement.OneHanded &&
+                offHandItem == null;
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class SerializedItemSet
     {
         [Header("Weapons")]
@@ -58,16 +59,15 @@ namespace WeAreGladiators.Items
         [Header("Extra")]
         [LabelWidth(100)]
         public ItemDataSO trinket;
-
     }
 
-    [System.Serializable]
+    [Serializable]
     public class RecruitWeaponLoadout
     {
         public ItemDataSO[] mainHandProspects;
         public ItemDataSO[] offhandProspects;
     }
-    [System.Serializable]
+    [Serializable]
     public class RecruitArmourLoadout
     {
         public ItemDataSO[] headProspects;

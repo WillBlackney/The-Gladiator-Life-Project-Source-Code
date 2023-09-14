@@ -1,37 +1,29 @@
+using System;
+using UnityEngine;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.MainMenu;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace WeAreGladiators.UI
 {
     public class ChooseAbilityButton : MonoBehaviour
     {
         #region Properties + Components
-        [SerializeField] UIAbilityIcon abilityIcon;
-        [SerializeField] GameObject[] selectedStateObjects;
-        private bool selected = false;
+
+        [SerializeField] private UIAbilityIcon abilityIcon;
+        [SerializeField] private GameObject[] selectedStateObjects;
+
         #endregion
 
         #region Getters + Accesors
-        public UIAbilityIcon AbilityIcon
-        {
-            get { return abilityIcon; }
-        }
-        public GameObject[] SelectedStateObjects
-        {
-            get { return selectedStateObjects; }
-        }
-        public bool Selected
-        {
-            get { return selected; }
-        }
+
+        public UIAbilityIcon AbilityIcon => abilityIcon;
+        public GameObject[] SelectedStateObjects => selectedStateObjects;
+        public bool Selected { get; private set; }
+
         #endregion
 
         #region Logic
+
         public void ResetAndHide()
         {
             gameObject.SetActive(false);
@@ -46,25 +38,28 @@ namespace WeAreGladiators.UI
         {
             if (selection)
             {
-                selected = true;
+                Selected = true;
                 Array.ForEach(selectedStateObjects, x => x.SetActive(true));
             }
             else
             {
-                selected = false;
+                Selected = false;
                 Array.ForEach(selectedStateObjects, x => x.SetActive(false));
             }
         }
         public void OnClick()
         {
             // to do handle select and deselect + check for excedding choice limit of 3
-            if (selected)            
+            if (Selected)
+            {
                 HandleChangeSelectionState(false);
-            else if(!selected && MainMenuController.Instance.GetSelectedAbilities().Count < 3)            
+            }
+            else if (!Selected && MainMenuController.Instance.GetSelectedAbilities().Count < 3)
+            {
                 HandleChangeSelectionState(true);
+            }
 
             MainMenuController.Instance.UpdateChosenAbilitiesText();
-
 
         }
 
@@ -73,7 +68,7 @@ namespace WeAreGladiators.UI
             if (abilityIcon.MyDataRef != null)
             {
                 abilityIcon.OnPointerEnter(null);
-               // KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(abilityIcon.MyDataRef.keyWords);
+                // KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(abilityIcon.MyDataRef.keyWords);
                 //AbilityPopupController.Instance.OnRosterAbilityButtonMousedOver(abilityIcon);
             }
         }
@@ -87,6 +82,7 @@ namespace WeAreGladiators.UI
                 // AbilityPopupController.Instance.OnAbilityButtonMousedExit();
             }
         }
+
         #endregion
     }
 }

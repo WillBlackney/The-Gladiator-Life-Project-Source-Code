@@ -1,11 +1,10 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using Spriter2UnityDX;
 using DG.Tweening;
-using WeAreGladiators.Items;
+using Spriter2UnityDX;
+using UnityEngine;
 using WeAreGladiators.Characters;
-
+using WeAreGladiators.Items;
 
 namespace WeAreGladiators.UCM
 {
@@ -13,6 +12,7 @@ namespace WeAreGladiators.UCM
     {
         // View Logic
         #region
+
         public static void BuildModelFromStringReferences(UniversalCharacterModel model, List<string> partNames)
         {
             DisableAllActiveModelElementViews(model);
@@ -34,13 +34,21 @@ namespace WeAreGladiators.UCM
             }
 
             if (model.activeLeftLeg)
+            {
                 DisableAndClearElementOnModel(model, model.activeLeftLeg);
+            }
             if (model.activeRightLeg)
+            {
                 DisableAndClearElementOnModel(model, model.activeRightLeg);
+            }
             if (model.activeLeftLegWear)
+            {
                 DisableAndClearElementOnModel(model, model.activeLeftLegWear);
+            }
             if (model.activeRightLegWear)
+            {
                 DisableAndClearElementOnModel(model, model.activeRightLegWear);
+            }
         }
         public static void BuildModelFromModelClone(UniversalCharacterModel modelToBuild, UniversalCharacterModel modelClonedFrom)
         {
@@ -91,7 +99,10 @@ namespace WeAreGladiators.UCM
                             break;
                         }
                     }
-                    if (shouldBreak) break;
+                    if (shouldBreak)
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -111,7 +122,10 @@ namespace WeAreGladiators.UCM
                             break;
                         }
                     }
-                    if (shouldBreak) break;
+                    if (shouldBreak)
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -132,7 +146,10 @@ namespace WeAreGladiators.UCM
                         }
                     }
 
-                    if (shouldBreak) break;
+                    if (shouldBreak)
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -152,7 +169,10 @@ namespace WeAreGladiators.UCM
                             break;
                         }
                     }
-                    if (shouldBreak) break;
+                    if (shouldBreak)
+                    {
+                        break;
+                    }
                 }
             }
         }
@@ -276,11 +296,14 @@ namespace WeAreGladiators.UCM
         }
         public static void AutoSetSortingOrderValues(CharacterModel model)
         {
-            if(model is UniversalCharacterModel)
+            if (model is UniversalCharacterModel)
             {
-                UniversalCharacterModel ucm = (UniversalCharacterModel)model;
+                UniversalCharacterModel ucm = (UniversalCharacterModel) model;
                 int headSortOrder = ucm.myEntityRenderer.SortingOrder + 10;
-                if (ucm.HeadSortingGroup != null) ucm.HeadSortingGroup.sortingOrder = headSortOrder;
+                if (ucm.HeadSortingGroup != null)
+                {
+                    ucm.HeadSortingGroup.sortingOrder = headSortOrder;
+                }
                 if (ucm.RootSortingGroup != null)
                 {
                     if (ucm.AllowAutoSorting)
@@ -319,12 +342,14 @@ namespace WeAreGladiators.UCM
                     model.RootSortingGroup.sortingOrder = model.myEntityRenderer.SortingOrder;
                 }
             }
-            
+
         }
+
         #endregion
 
         // Set Specific Body Parts
         #region
+
         public static void EnableAndSetElementOnModel(UniversalCharacterModel model, UniversalCharacterModelElement element)
         {
             // Set Active Body Part Reference
@@ -549,7 +574,7 @@ namespace WeAreGladiators.UCM
             if (element == null)
             {
                 Debug.Log("CharacterModelController.EnableAndSetElementOnModel() could not find an model element with the name "
-                + elementName + ", cancelling element enabling...");
+                    + elementName + ", cancelling element enabling...");
                 return;
             }
 
@@ -777,7 +802,10 @@ namespace WeAreGladiators.UCM
         public static void DisableAndClearElementOnModel(UniversalCharacterModel model, UniversalCharacterModelElement element)
         {
             // disable view
-            if (element == null) return;
+            if (element == null)
+            {
+                return;
+            }
             element.gameObject.SetActive(false);
 
             // Clear reference on model
@@ -895,17 +923,21 @@ namespace WeAreGladiators.UCM
             }
 
         }
+
         #endregion
 
         // Fading Logic
         #region
+
         public static void FadeOutCharacterModel(CharacterModel model, float speed = 1f)
         {
             EntityRenderer view = model.myEntityRenderer;
             foreach (SpriteRenderer sr in view.renderers)
             {
                 if (sr.gameObject.activeSelf)
+                {
                     sr.DOFade(0, speed);
+                }
             }
 
         }
@@ -915,11 +947,13 @@ namespace WeAreGladiators.UCM
             foreach (SpriteRenderer sr in view.renderers)
             {
                 if (sr.gameObject.activeSelf)
+                {
                     sr.DOKill();
+                }
                 sr.DOFade(1, speed);
             }
         }
-        public static void FadeInCharacterShadow(HexCharacterView view, float speed, System.Action onCompleteCallBack = null)
+        public static void FadeInCharacterShadow(HexCharacterView view, float speed, Action onCompleteCallBack = null)
         {
             view.ucmShadowCg.DOFade(0f, 0f);
             Sequence s = DOTween.Sequence();
@@ -935,6 +969,7 @@ namespace WeAreGladiators.UCM
             view.ucmShadowCg.DOFade(1f, 0f);
             view.ucmShadowCg.DOFade(0f, speed);
         }
+
         #endregion
     }
 }

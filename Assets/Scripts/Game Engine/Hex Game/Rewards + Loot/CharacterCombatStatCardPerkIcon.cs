@@ -1,38 +1,41 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.UCM;
-using TMPro;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using WeAreGladiators.Perks;
-using UnityEngine.EventSystems;
 
 namespace WeAreGladiators.RewardSystems
 {
     public class CharacterCombatStatCardPerkIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+
+        // Misc
+        #region
+
+        public void SetMyDataReference(PerkIconData data)
+        {
+            perkDataRef = data;
+        }
+
+        #endregion
         // Properties + Components
         #region
+
         [SerializeField] private Image perkImage;
         [SerializeField] private PerkIconData perkDataRef;
+
         #endregion
 
         // Getters + Accessors
         #region
-        public Image PerkImage
-        {
-            get { return perkImage; }
-        }
-        public PerkIconData PerkDataRef
-        {
-            get { return perkDataRef; }
-        }
 
+        public Image PerkImage => perkImage;
+        public PerkIconData PerkDataRef => perkDataRef;
 
         #endregion
 
         // Input
         #region
+
         public void OnPointerEnter(PointerEventData eventData)
         {
 
@@ -42,14 +45,7 @@ namespace WeAreGladiators.RewardSystems
         {
 
         }
-        #endregion
 
-        // Misc
-        #region
-        public void SetMyDataReference(PerkIconData data)
-        {
-            perkDataRef = data;
-        }
         #endregion
     }
 }

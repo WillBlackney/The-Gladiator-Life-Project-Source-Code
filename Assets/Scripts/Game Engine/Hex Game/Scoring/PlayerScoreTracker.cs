@@ -1,30 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace WeAreGladiators.Scoring
 {
     public class PlayerScoreTracker
     {
-        public int daysPassed;
         public int basicCombatsCompleted;
-        public int eliteCombatsCompleted;
-        public int bossCombatsCompleted;
 
         public int basicCombatsCompletedWithoutDeath;
-        public int eliteCombatsCompletedWithoutDeath;
+        public int bossCombatsCompleted;
         public int bossCombatsCompletedWithoutDeath;
+        public int combatDefeats;
+        public int daysPassed;
+        public int eliteCombatsCompleted;
+        public int eliteCombatsCompletedWithoutDeath;
+        public int injuriesGained;
 
         // Penalties
         public int playerCharactersKilled;
-        public int injuriesGained;
-        public int combatDefeats;
-
     }
 
     public enum ScoreElementType
     {
-        None = 0,        
+        None = 0,
         BasicCombatVictories = 2,
         EliteCombatVictories = 3,
         BossCombatVictories = 4,
@@ -38,8 +33,7 @@ namespace WeAreGladiators.Scoring
         DaysPassed = 1,
         WellArmed = 8,
         WellArmoured = 9,
-        FatherOfTheYear = 13,
-
+        FatherOfTheYear = 13
 
     }
 }

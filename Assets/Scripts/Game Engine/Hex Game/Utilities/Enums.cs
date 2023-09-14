@@ -1,16 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace WeAreGladiators
+﻿namespace WeAreGladiators
 {
-    public class Enums 
+    public class Enums
     {
-       
     }
 
     // Commonly Shared
     #region
+
     public enum KeyWordType
     {
         None = 0,
@@ -34,7 +30,7 @@ namespace WeAreGladiators
         FreeStrike = 25,
         Health = 41,
         Initiative = 24,
-        Injury = 40, 
+        Injury = 40,
         InjuryResistance = 17,
         MagicDamage = 10,
         MaximumFatigue = 39,
@@ -43,20 +39,20 @@ namespace WeAreGladiators
         MeleeAttack = 3,
         Might = 31,
         Perk = 1,
-        PhysicalResistance = 27, 
+        PhysicalResistance = 27,
         RangedAttack = 4,
         Resolve = 14,
         Skill = 5,
         Spell = 37,
         PhysicalDamage = 9,
         Stress = 32,
-        StressResistance = 15,        
+        StressResistance = 15,
         Teleport = 22,
         Vision = 21,
         WeaponAttack = 38,
         Wits = 29,
-        ZoneOfControl = 18,       
-        
+        ZoneOfControl = 18
+
     }
     public enum CoreAttribute
     {
@@ -66,7 +62,7 @@ namespace WeAreGladiators
         Constitution = 4,
         Resolve = 5,
         Wits = 6,
-        Fitness = 7,
+        Fitness = 7
     }
     public enum ItemCoreAttribute
     {
@@ -93,8 +89,8 @@ namespace WeAreGladiators
         PhysicalResistance = 10,
         MagicResistance = 11,
         InjuryResistance = 17,
-        DeathResistance = 22,
-        
+        DeathResistance = 22
+
     }
     public enum Rarity
     {
@@ -102,21 +98,23 @@ namespace WeAreGladiators
         Common = 1,
         Rare = 2,
         Epic = 3,
-        Legendary = 4,
+        Legendary = 4
     }
+
     #endregion
 
     // Hex + Mapping
     #region
+
     public enum TileElevation
     {
         Ground = 0,
-        Elevated = 1,
+        Elevated = 1
     }
     public enum HexMapShape
     {
         Hexagonal = 0,
-        Rectangular = 1,
+        Rectangular = 1
     }
     public enum HexDirection
     {
@@ -128,23 +126,24 @@ namespace WeAreGladiators
         SouthWest = 5,
         NorthWest = 6,
         East = 7,
-        West = 8,
+        West = 8
     }
     public enum WorldTileType
     {
         Grass = 0,
-        Dirt = 1,
+        Dirt = 1
     }
     public enum FogOfWarState
     {
         Hidden = 0,
-        Revealed = 1,
+        Revealed = 1
     }
 
     #endregion
 
     // Dungeon Map
     #region
+
     public enum NodeStates
     {
         Locked,
@@ -158,10 +157,12 @@ namespace WeAreGladiators
         RightToLeft,
         LeftToRight
     }
+
     #endregion
 
     // World Map
     #region
+
     /*
     public enum HexGridType
     {
@@ -170,10 +171,12 @@ namespace WeAreGladiators
         even_r,
         odd_r
     };*/
+
     #endregion
 
     // Talents
     #region
+
     public enum TalentSchool
     {
         None = 0,
@@ -187,7 +190,7 @@ namespace WeAreGladiators
         Divinity = 10,
         Shadowcraft = 11,
         Naturalism = 13,
-        Metamorph = 14,
+        Metamorph = 14
     }
     public enum TargetRequirement
     {
@@ -197,8 +200,8 @@ namespace WeAreGladiators
         Enemy = 3,
         AllCharacters = 4,
         AllCharactersExceptSelf = 6,
-        Hex = 5,
-    };
+        Hex = 5
+    }
     public enum SecondaryTargetRequirement
     {
         None = 0,
@@ -206,8 +209,8 @@ namespace WeAreGladiators
         AllyOrSelf = 2,
         Enemy = 3,
         AllCharacters = 4,
-        UnoccupiedHexWithinRangeOfTarget = 5,
-    };
+        UnoccupiedHexWithinRangeOfTarget = 5
+    }
     public enum AbilityRequirementType
     {
         None = 0,
@@ -220,25 +223,27 @@ namespace WeAreGladiators
         TargetHasPerk = 7,
         TargetDoesNotHavePerk = 8,
         CasterHasPerk = 9,
-        CasterDoesNotHavePerk = 10,
+        CasterDoesNotHavePerk = 10
 
     }
     public enum AbilitySelectionPhase
     {
         None = 0,
         First = 1,
-        Second = 2,
+        Second = 2
     }
+
     #endregion
 
     // Items
     #region
+
     public enum ItemArmourClass
     {
         None = 0,
         Light = 1,
         Medium = 2,
-        Heavy = 3,
+        Heavy = 3
     }
     public enum ItemType
     {
@@ -246,14 +251,14 @@ namespace WeAreGladiators
         Head = 1,
         Body = 2,
         Weapon = 3,
-        Trinket = 4,
+        Trinket = 4
     }
     public enum WeaponSlot
     {
         None = 2,
         MainHand = 0,
         Offhand = 1,
-        EitherHand = 3,
+        EitherHand = 3
     }
     public enum RosterSlotType
     {
@@ -262,12 +267,12 @@ namespace WeAreGladiators
         MainHand = 2,
         OffHand = 3,
         Head = 4,
-        Body = 5,
+        Body = 5
     }
     public enum HandRequirement
     {
         OneHanded = 0,
-        TwoHanded = 1,
+        TwoHanded = 1
     }
     public enum WeaponClass
     {
@@ -283,12 +288,12 @@ namespace WeAreGladiators
         Shield = 9,
         Spear = 5,
         Staff = 6,
-        Sword = 2,     
+        Sword = 2,
         ThrowingNet = 13,
         Unarmed = 15,
         TwoHanded = 16,
-        DualWielding = 17,
-      
+        DualWielding = 17
+
     }
     public enum WeaponRequirement
     {
@@ -300,7 +305,7 @@ namespace WeAreGladiators
         Crossbow = 8,
         Shield = 4,
         ThrowingNet = 5,
-        EmptyOffhand = 6,
+        EmptyOffhand = 6
 
     }
 
@@ -308,11 +313,12 @@ namespace WeAreGladiators
 
     // Abilities
     #region
+
     public enum DamageType
     {
         None = 0,
         Physical = 1,
-        Magic = 2,
+        Magic = 2
     }
     public enum AbilityType
     {
@@ -324,7 +330,7 @@ namespace WeAreGladiators
         Spell = 5,
         Aspect = 6,
         Hymn = 7,
-        Summon = 8,
+        Summon = 8
     }
     public enum AbilityEffectRange
     {
@@ -332,7 +338,7 @@ namespace WeAreGladiators
         Self = 1,
         ZoneOfControl = 2,
         Aura = 3,
-        AoeAtTarget = 4,
+        AoeAtTarget = 4
     }
     public enum AoeType
     {
@@ -340,7 +346,7 @@ namespace WeAreGladiators
         ZoneOfControl = 1,
         Aura = 2,
         Global = 3,
-        Line = 4,
+        Line = 4
     }
     public enum AbilityEffectType
     {
@@ -362,24 +368,24 @@ namespace WeAreGladiators
         RemovePassiveTarget = 18,
         StressCheck = 9,
         StressCheckAoe = 21,
-        SummonCharacter = 16,       
+        SummonCharacter = 16,
         TeleportSelf = 8,
         TeleportTargetToTile = 13,
         TeleportSelfBehindTarget = 14,
-        TeleportSwitchWithTarget = 15,
-       
-     
-     
+        TeleportSwitchWithTarget = 15
+
     }
     public enum AbilityDamageSource
     {
         Ability = 0,
-        Weapon = 1,
+        Weapon = 1
     }
+
     #endregion
 
     // Character Related
     #region
+
     public enum CharacterRace
     {
         None = 0,
@@ -392,34 +398,36 @@ namespace WeAreGladiators
         Gnoll = 7,
         Ent = 8,
         Demon = 9,
-        Beast = 10,
+        Beast = 10
     }
     public enum ActivationPhase
     {
         NotActivated = 0,
         StartPhase = 1,
         ActivationPhase = 2,
-        EndPhase = 3,
+        EndPhase = 3
     }
     public enum Allegiance
     {
         Player = 0,
-        Enemy = 1,
+        Enemy = 1
     }
     public enum Controller
     {
         Player = 0,
-        AI = 1,
+        AI = 1
     }
     public enum LivingState
     {
         Alive = 0,
-        Dead = 1,
+        Dead = 1
     }
+
     #endregion
 
     // Perks + Passives
     #region
+
     public enum Perk
     {
         ComboStriker = 175,
@@ -458,7 +466,7 @@ namespace WeAreGladiators
         Blinded = 4,
         Guard = 74,
         BloodOfTheAncients = 66,
-        BloodThirsty = 63,  
+        BloodThirsty = 63,
         Brave = 91,
         Brawny = 110,
         Brute = 115,
@@ -479,8 +487,8 @@ namespace WeAreGladiators
         DragonAspect = 145,
         Eager = 19,
 
-        TrueSight = 9,           
-       
+        TrueSight = 9,
+
         Evasion = 76,
         Executioner = 16,
         FastLearner = 101,
@@ -494,7 +502,7 @@ namespace WeAreGladiators
         Footwork = 13,
         Fortified = 156,
         Frail = 94,
-        FragileBinding = 85,            
+        FragileBinding = 85,
         FlamingWeapon = 8,
         GraveRush = 205,
         HardNoggin = 112,
@@ -515,10 +523,10 @@ namespace WeAreGladiators
         LoversScorn = 211,
         Vengeful = 82,
         Motivated = 122,
-        Nimble = 18,        
+        Nimble = 18,
         Opportunist = 71,
         Overcharged = 149,
-       
+
         Overload = 73,
         Paranoid = 114,
         Pathfinder = 124,
@@ -557,7 +565,7 @@ namespace WeAreGladiators
         StormShield = 148,
         StrikingPresence = 57,
         Strong = 93,
-        Stunned = 3,       
+        Stunned = 3,
         StunImmunity = 86,
         Survivor = 61,
         Taunt = 78,
@@ -565,11 +573,11 @@ namespace WeAreGladiators
         Thorns = 142,
         TigerAspect = 144,
         Torturer = 83,
-        Tough = 68,  
+        Tough = 68,
         TurtleAspect = 143,
         HateOfUndead = 111,
         Vulnerable = 48,
-        Weakened = 49, 
+        Weakened = 49,
         Wimp = 88,
         Wise = 89,
         Wrath = 50,
@@ -606,7 +614,6 @@ namespace WeAreGladiators
         StabbedGuts = 167,
         TornRotatorCuff = 168,
 
-
         // Permanent Injuries
         CompromisedLiver = 129,
         CrippledShoulder = 130,
@@ -625,7 +632,7 @@ namespace WeAreGladiators
         Tenacious = 217,
         StrongStarter = 218,
         FuriousAssault = 219,
-        FuriouslyAssaulted = 220, 
+        FuriouslyAssaulted = 220,
 
         ShieldSpecialist = 221,
         TwoHandedDominance = 222,
@@ -638,46 +645,50 @@ namespace WeAreGladiators
         BestialFrenzy = 233,
         AxeVulnerability = 234,
         FireVulnerability = 235,
-        InjuryImmunity = 236,
+        InjuryImmunity = 236
     }
     public enum PerkQuality
     {
         Negative = 0,
         Positive = 1,
-        Neutral = 2,
+        Neutral = 2
     }
+
     #endregion
 
     // Town Related
     #region
+
     public enum TownActivity
     {
         None = 0,
         BedRest = 1,
         Surgery = 2,
-        Therapy = 3,
+        Therapy = 3
     }
+
     #endregion
 
     // Stress + Combat + Injuries
     #region
+
     public enum InjurySeverity
     {
         None = 0,
         Mild = 1,
-        Severe = 2,
+        Severe = 2
     }
     public enum InjuryType
     {
         None = 0,
         Sharp = 1,
         Blunt = 2,
-        Misc = 3,
+        Misc = 3
     }
     public enum HitRollResult
     {
         Hit = 0,
-        Miss = 1,
+        Miss = 1
         //Dodge = 2,
         // in future, maybe we have block, parry, etc
     }
@@ -695,7 +706,7 @@ namespace WeAreGladiators
         AllyMoraleStateImproved = 13,
         EnemyKilled = 8,
         EnemyInjured = 9,
-        LandedCriticalStrike = 10,
+        LandedCriticalStrike = 10
     }
     public enum StressState
     {
@@ -704,12 +715,14 @@ namespace WeAreGladiators
         Steady = 2,
         Nervous = 3,
         Panicking = 4,
-        Shattered = 5,
+        Shattered = 5
     }
+
     #endregion
 
     // UI + Visual Events
     #region
+
     public enum TextColor
     {
         None = 0,
@@ -726,13 +739,14 @@ namespace WeAreGladiators
         PoisonGreen = 8,
         LightRed = 10,
         LightGreen = 12,
-        RareTextBlue = 11,
-    }    
+        RareTextBlue = 11
+    }
 
     #endregion
 
     // Animation Event Data
     #region
+
     public enum AnimationEventType
     {
         None = 0,
@@ -743,27 +757,27 @@ namespace WeAreGladiators
         SoundEffect = 5,
         ScreenOverlay = 7,
         Delay = 6,
-        WeaponHitSound = 8,
+        WeaponHitSound = 8
 
     }
     public enum ScreenOverlayType
     {
         None = 0,
-        EdgeOverlay = 1,
+        EdgeOverlay = 1
     }
     public enum ScreenOverlayColor
     {
         White = 0,
         Fire = 1,
         Purple = 2,
-        PoisonGreen = 3,
+        PoisonGreen = 3
     }
     public enum MovementAnimEvent
     {
         None = 0,
         MoveTowardsTarget = 1,
         MoveToCentre = 2,
-        MoveToMyNode = 3,
+        MoveToMyNode = 3
     }
     public enum CharacterAnimation
     {
@@ -784,7 +798,7 @@ namespace WeAreGladiators
         ReloadCrossbow = 15,
         ThrowNetOffhand = 16,
         Bite = 17,
-        Stomp = 18,
+        Stomp = 18
     }
     public enum ParticleEffect
     {
@@ -814,7 +828,7 @@ namespace WeAreGladiators
         HolyNova = 13,
         RitualCircleYellow = 19,
         RitualCirclePurple = 20,
-        ToxicRain = 26,
+        ToxicRain = 26
 
     }
     public enum ProjectileFired
@@ -832,7 +846,7 @@ namespace WeAreGladiators
         FireMeteor = 9,
         Javelin = 10,
         ThrowingNet = 11,
-        StoneBoulder = 14,
+        StoneBoulder = 14
     }
     public enum ProjectileStartPosition
     {
@@ -845,7 +859,7 @@ namespace WeAreGladiators
         None = 0,
         Small = 1,
         Medium = 2,
-        Large = 3,
+        Large = 3
     }
     public enum CreateOnCharacter
     {
@@ -854,18 +868,20 @@ namespace WeAreGladiators
         Target,
         All,
         AllAllies,
-        AllEnemies,
+        AllEnemies
     }
+
     #endregion
 
     // UCM + Model Related
     #region
+
     public enum CharacterModelSize
     {
         Small = 1,
         Normal = 0,
         Large = 2,
-        Massive = 3,
+        Massive = 3
     }
     public enum BodyPartType
     {
@@ -894,12 +910,14 @@ namespace WeAreGladiators
         MainHandWeapon = 18,
         OffHandWeapon = 19,
         BodyParticles = 20,
-        BodyLighting = 21,
-    };
+        BodyLighting = 21
+    }
+
     #endregion
 
     // Journey + Encounter Related
     #region
+
     public enum EncounterType
     {
         None = 0,
@@ -912,13 +930,13 @@ namespace WeAreGladiators
         TreasureRoom = 9,
         MysteryCombat = 10,
         Town = 11,
-        Shop = 12,
+        Shop = 12
     }
     public enum CombatDifficulty
     {
         Basic = 0,
         Elite = 1,
-        Boss = 2,
+        Boss = 2
     }
     public enum SaveCheckPoint
     {
@@ -927,19 +945,21 @@ namespace WeAreGladiators
         CombatEnd = 2,
         Town = 3,
         GameIntroEvent = 4,
-        StoryEvent = 5,
+        StoryEvent = 5
     }
+
     #endregion
 
     // Misc
     #region
+
     public enum CombatGameState
     {
         None = 0,
         CombatInactive = 1,
-        CombatActive = 2,
+        CombatActive = 2
     }
-    #endregion
 
+    #endregion
 
 }

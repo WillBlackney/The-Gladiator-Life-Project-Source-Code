@@ -1,19 +1,17 @@
-using WeAreGladiators.Boons;
+using System;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using WeAreGladiators.Boons;
 
 namespace WeAreGladiators.StoryEvents
 {
-    [System.Serializable]
+    [Serializable]
     public class StoryEventRequirement
     {
         [LabelWidth(100)]
         public StoryEventRequirementType reqType;
 
         [Space(10)]
-
         [Header("Character Requirement Settings")]
         [ShowIf("ShowRequiredCharactersInRosterCount")]
         [LabelWidth(100)]
@@ -21,7 +19,7 @@ namespace WeAreGladiators.StoryEvents
 
         [ShowIf("ShowIncludeTheKid")]
         [LabelWidth(100)]
-        public bool includeTheKid = false;
+        public bool includeTheKid;
 
         [ShowIf("ShowGoldRequired")]
         [LabelWidth(100)]
@@ -32,6 +30,7 @@ namespace WeAreGladiators.StoryEvents
         public BoonTag requiredBoon;
 
         #region Odin Showifs
+
         public bool ShowRequiredBoon()
         {
             return reqType == StoryEventRequirementType.HasBoon ||
@@ -52,6 +51,7 @@ namespace WeAreGladiators.StoryEvents
             return reqType == StoryEventRequirementType.XorMoreCharactersInRoster ||
                 reqType == StoryEventRequirementType.XorLessCharactersInRoster;
         }
+
         #endregion
     }
 
@@ -64,6 +64,6 @@ namespace WeAreGladiators.StoryEvents
         HasXorLessGold = 4,
         DoesNotHaveBoon = 5,
         HasBoon = 6,
-        TheKidIsInRoster = 7,
+        TheKidIsInRoster = 7
     }
 }

@@ -1,17 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
-using System;
-using Sirenix.OdinInspector;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.Audio;
 
 namespace WeAreGladiators.Items
 {
     [CreateAssetMenu(fileName = "New Item Data", menuName = "Item Data", order = 52)]
-    public class ItemDataSO: ScriptableObject
+    public class ItemDataSO : ScriptableObject
     {
         #region Properties
+
         [HorizontalGroup("General Info", 75)]
         [HideLabel]
         [PreviewField(75)]
@@ -66,7 +64,7 @@ namespace WeAreGladiators.Items
         [BoxGroup("Weapon Info")]
         [LabelWidth(100)]
         [ShowIf("ShowWeaponField")]
-        public bool canDecapitate = false;
+        public bool canDecapitate;
 
         [BoxGroup("Weapon Info")]
         [LabelWidth(125)]
@@ -94,7 +92,7 @@ namespace WeAreGladiators.Items
         [LabelWidth(100)]
         [Range(0, 400)]
         [ShowIf("ShowArmourFields")]
-        public int minArmourRoll;             
+        public int minArmourRoll;
 
         [BoxGroup("Armour Info")]
         [LabelWidth(100)]
@@ -124,10 +122,10 @@ namespace WeAreGladiators.Items
         [LabelWidth(100)]
         public Sound hitSFX = Sound.None;
 
-     
         #endregion
 
         #region Odin Showifs
+
         public bool ShowAudioWeaponFields()
         {
             return itemType == ItemType.Weapon;
@@ -150,27 +148,25 @@ namespace WeAreGladiators.Items
         }
         public bool ShowWeaponDamageField()
         {
-            if(itemType == ItemType.Weapon &&
-              (weaponClass != WeaponClass.Holdable && weaponClass != WeaponClass.Shield && weaponClass != WeaponClass.None)
-                )
+            if (itemType == ItemType.Weapon &&
+                weaponClass != WeaponClass.Holdable && weaponClass != WeaponClass.Shield && weaponClass != WeaponClass.None
+               )
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
         public bool ShowArmourValue()
         {
-            return (itemType == ItemType.Weapon && weaponClass == WeaponClass.Shield) || itemType == ItemType.Head || itemType == ItemType.Body;
+            return itemType == ItemType.Weapon && weaponClass == WeaponClass.Shield || itemType == ItemType.Head || itemType == ItemType.Body;
         }
+
         #endregion
     }
 
     public enum WeaponAttackAnimationType
     {
         Overhead = 0,
-        Thrust = 1,
+        Thrust = 1
     }
 }

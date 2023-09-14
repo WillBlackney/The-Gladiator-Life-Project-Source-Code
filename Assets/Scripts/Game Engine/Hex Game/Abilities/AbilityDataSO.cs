@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
-using WeAreGladiators.Utilities;
-using WeAreGladiators.UI;
-using WeAreGladiators.Characters;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
+using UnityEngine;
+using WeAreGladiators.Characters;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.Abilities
 {
@@ -25,7 +26,6 @@ namespace WeAreGladiators.Abilities
         [BoxGroup("General Info")]
         [LabelWidth(100)]
         public bool includeInGame = true;
-      
 
         [GUIColor("Blue")]
         [BoxGroup("General Info")]
@@ -56,7 +56,7 @@ namespace WeAreGladiators.Abilities
         [VerticalGroup("Core Data/Stats")]
         [LabelWidth(150)]
         [GUIColor("Blue")]
-        public bool doesNotBreakStealth = false;
+        public bool doesNotBreakStealth;
         [VerticalGroup("Core Data/Stats")]
         [LabelWidth(150)]
         [GUIColor("Blue")]
@@ -117,13 +117,13 @@ namespace WeAreGladiators.Abilities
         [LabelWidth(200)]
         [GUIColor("Yellow")]
         [ShowIf("ShowBaseRangeBonus")]
-        public int baseRange = 0;
+        public int baseRange;
 
         [BoxGroup("Range Settings")]
         [LabelWidth(200)]
         [GUIColor("Yellow")]
         [ShowIf("ShowGainRangeBonusFromVision")]
-        public bool gainRangeBonusFromVision = false;
+        public bool gainRangeBonusFromVision;
 
         [BoxGroup("Range Settings")]
         [LabelWidth(200)]
@@ -143,7 +143,7 @@ namespace WeAreGladiators.Abilities
         [LabelWidth(200)]
         [GUIColor("Yellow")]
         [ShowIf("ShowAccuracyPenaltyFromMelee")]
-        public bool accuracyPenaltyFromMelee = false;
+        public bool accuracyPenaltyFromMelee;
 
         [VerticalGroup("Ability Effects")]
         [LabelWidth(200)]
@@ -175,26 +175,25 @@ namespace WeAreGladiators.Abilities
         [LabelWidth(200)]
         public List<KeyWordModel> keyWords;
 
-
         // GUI Colours
         #region
+
         private Color Blue() { return Color.cyan; }
         private Color Green() { return Color.green; }
         private Color Yellow() { return Color.yellow; }
+
         #endregion
 
         // Odin Showifs
         #region
+
         public bool ShowSpecialWeaponAbility()
         {
             if (weaponRequirement != WeaponRequirement.None)
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
         public bool ShowWeaponAbilityType()
         {
@@ -202,12 +201,9 @@ namespace WeAreGladiators.Abilities
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
-       
+
         public bool ShowGainRangeBonusFromWeapon()
         {
             return targetRequirement != TargetRequirement.NoTarget;
@@ -234,10 +230,9 @@ namespace WeAreGladiators.Abilities
         }
 
         #endregion
-
     }
 
-    [System.Serializable]
+    [Serializable]
     public class AbilityRequirement
     {
         public AbilityRequirementType type;

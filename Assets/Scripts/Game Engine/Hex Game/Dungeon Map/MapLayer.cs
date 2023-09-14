@@ -1,13 +1,14 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace WeAreGladiators.DungeonMap
 {
-    [System.Serializable]
+    [Serializable]
     public class MapLayer
     {
         [Tooltip("Default node for this map layer. If Randomize Nodes is 0, you will get this node 100% of the time")]
-        public EncounterType nodeType; 
+        public EncounterType nodeType;
         public FloatMinMax layerXDifference;
         [Tooltip("Distance between the nodes on this layer")]
         public float nodeYDistance;

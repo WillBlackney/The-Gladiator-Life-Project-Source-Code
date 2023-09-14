@@ -4,7 +4,8 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Main"
+        "Main",
+        "TBS"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

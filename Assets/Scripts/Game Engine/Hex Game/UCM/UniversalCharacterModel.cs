@@ -1,14 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using Spriter2UnityDX;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
-using WeAreGladiators.Items;
-using WeAreGladiators;
+using UnityEngine;
 using UnityEngine.Rendering;
+using WeAreGladiators.Items;
 using WeAreGladiators.Utilities;
 using WeAreGladiators.VisualEvents;
 
@@ -18,76 +13,88 @@ namespace WeAreGladiators.UCM
     {
         // Properties + Component References
         #region
-        [SerializeField] GameObject headMasksParent;
-        [SerializeField] GameObject[] oneHandAnimationBones;
-        [SerializeField] GameObject[] twoHandAnimationBones;
-      
-       
-        [ShowIf("ShowRootSorting")]
-        [SerializeField] SortingGroup headSortingGroup;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]       
 
+        [SerializeField] private GameObject headMasksParent;
+        [SerializeField] private GameObject[] oneHandAnimationBones;
+        [SerializeField] private GameObject[] twoHandAnimationBones;
+
+        [ShowIf("ShowRootSorting")]
+        [SerializeField]
+        private SortingGroup headSortingGroup;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
         [Header("Active Particle References")]
         [HideInInspector] public UniversalCharacterModelElement activeChestParticles;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [Header("Active Lighting References")]
         [HideInInspector] public UniversalCharacterModelElement activeChestLighting;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-
         [HideInInspector] public SpriteMask[] allHeadWearSpriteMasks;
         [HideInInspector] public UniversalCharacterModelElement[] allMainHandWeapons;
         [HideInInspector] public UniversalCharacterModelElement[] allOffHandWeapons;
         [HideInInspector] public UniversalCharacterModelElement[] allChestArmour;
         [HideInInspector] public UniversalCharacterModelElement[] allHeadArmour;
 
-             
         public SortingGroup HeadSortingGroup => headSortingGroup;
-       
+
         public SpriteMask[] AllHeadWearSpriteMasks
         {
             get
             {
-                if (allHeadWearSpriteMasks == null || allHeadWearSpriteMasks.Length == 0) RunSetup(true);
+                if (allHeadWearSpriteMasks == null || allHeadWearSpriteMasks.Length == 0)
+                {
+                    RunSetup(true);
+                }
                 return allHeadWearSpriteMasks;
             }
-            private set { allHeadWearSpriteMasks = value; }
+            private set => allHeadWearSpriteMasks = value;
         }
         public UniversalCharacterModelElement[] AllMainHandWeapons
         {
             get
             {
-                if (allMainHandWeapons == null || allMainHandWeapons.Length == 0) RunSetup(true);
+                if (allMainHandWeapons == null || allMainHandWeapons.Length == 0)
+                {
+                    RunSetup(true);
+                }
                 return allMainHandWeapons;
             }
-            private set { allMainHandWeapons = value; }
+            private set => allMainHandWeapons = value;
         }
         public UniversalCharacterModelElement[] AllOffHandWeapons
         {
             get
             {
-                if (allOffHandWeapons == null || allOffHandWeapons.Length == 0) RunSetup(true);
+                if (allOffHandWeapons == null || allOffHandWeapons.Length == 0)
+                {
+                    RunSetup(true);
+                }
                 return allOffHandWeapons;
             }
-            private set { allOffHandWeapons = value; }
+            private set => allOffHandWeapons = value;
         }
         public UniversalCharacterModelElement[] AllChestArmour
         {
             get
             {
-                if (allChestArmour == null || allChestArmour.Length == 0) RunSetup(true);
+                if (allChestArmour == null || allChestArmour.Length == 0)
+                {
+                    RunSetup(true);
+                }
                 return allChestArmour;
             }
-            private set { allChestArmour = value; }
+            private set => allChestArmour = value;
         }
         public UniversalCharacterModelElement[] AllHeadArmour
         {
             get
             {
-                if (allHeadArmour == null || allHeadArmour.Length == 0) RunSetup(true);
+                if (allHeadArmour == null || allHeadArmour.Length == 0)
+                {
+                    RunSetup(true);
+                }
                 return allHeadArmour;
             }
-            private set { allHeadArmour = value; }
+            private set => allHeadArmour = value;
         }
 
         [Header("Active Body Part References")]
@@ -118,10 +125,12 @@ namespace WeAreGladiators.UCM
         [HideInInspector] public UniversalCharacterModelElement activeOffHandWeapon;
 
         private Sprite normalFaceSprite;
+
         #endregion
 
         // Initialization
         #region
+
         protected override void Awake()
         {
             RunSetup();
@@ -136,10 +145,13 @@ namespace WeAreGladiators.UCM
         }
         protected override void RunSetup(bool allowRerun = false)
         {
-            if ((!hasRunSetup || (hasRunSetup && allowRerun)) && Application.isPlaying)
+            if ((!hasRunSetup || hasRunSetup && allowRerun) && Application.isPlaying)
             {
                 Debug.Log("UCM.RunSetup() called and executing setup...");
-                if (hasRunSetup && allowRerun) Debug.Log("UCM.RunSetup() already had previous setup, now rerunning...");
+                if (hasRunSetup && allowRerun)
+                {
+                    Debug.Log("UCM.RunSetup() already had previous setup, now rerunning...");
+                }
 
                 // Get all elements
                 AllModelElements = GetComponentsInChildren<UniversalCharacterModelElement>(true);
@@ -153,7 +165,7 @@ namespace WeAreGladiators.UCM
                 List<UniversalCharacterModelElement> chestElements = new List<UniversalCharacterModelElement>();
                 List<UniversalCharacterModelElement> headElements = new List<UniversalCharacterModelElement>();
 
-                foreach (var element in AllModelElements)
+                foreach (UniversalCharacterModelElement element in AllModelElements)
                 {
                     switch (element.bodyPartType)
                     {
@@ -186,11 +198,12 @@ namespace WeAreGladiators.UCM
                 hasRunSetup = true;
             }
         }
-        
+
         #endregion
 
         // Animation Logic
-        #region 
+        #region
+
         public void ResetAnimationSpeed()
         {
             myAnimator.speed = 1;
@@ -211,7 +224,7 @@ namespace WeAreGladiators.UCM
         }
         public void ShowHurtFace()
         {
-            if(activeFace != null)
+            if (activeFace != null)
             {
                 SpriteRenderer sr = activeFace.GetComponent<SpriteRenderer>();
                 normalFaceSprite = sr.sprite;
@@ -238,22 +251,28 @@ namespace WeAreGladiators.UCM
 
         public UcmMode UcmMode
         {
-            get; private set;
+            get;
+            private set;
         }
         public void SetModeFromItemSet(ItemSet itemSet)
         {
             // Do weapons first
             if (itemSet.mainHandItem != null &&
-            itemSet.mainHandItem.IsMeleeWeapon &&
+                itemSet.mainHandItem.IsMeleeWeapon &&
                 itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+            {
                 SetMode(UcmMode.TwoHandMelee);
+            }
 
-            else SetMode(UcmMode.Standard);
+            else
+            {
+                SetMode(UcmMode.Standard);
+            }
         }
         public void SetMode(UcmMode mode)
         {
             UcmMode = mode;
-            if(mode == UcmMode.Standard)
+            if (mode == UcmMode.Standard)
             {
                 oneHandAnimationBones.ForEach(x => x.SetActive(true));
                 twoHandAnimationBones.ForEach(x => x.SetActive(false));
@@ -265,16 +284,12 @@ namespace WeAreGladiators.UCM
             }
         }
 
-        
         #endregion
-
-      
-
     }
 
     public enum UcmMode
     {
         Standard = 0,
-        TwoHandMelee = 1,
+        TwoHandMelee = 1
     }
 }

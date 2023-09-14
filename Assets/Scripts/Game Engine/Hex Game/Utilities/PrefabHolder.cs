@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace WeAreGladiators.Utilities
 {
@@ -8,6 +6,7 @@ namespace WeAreGladiators.Utilities
     {
         // Inspector Prefab References
         #region
+
         [Header("Character Entity Prefabs")]
         [SerializeField] private GameObject passiveIconViewPrefab;
         [SerializeField] private GameObject characterEntityModel;
@@ -19,22 +18,12 @@ namespace WeAreGladiators.Utilities
         #endregion
         // Getters + Accessors
         #region
-        public GameObject CharacterEntityModel
-        {
-            get { return characterEntityModel; }
-        }
-        public GameObject ActivationWindowPrefab
-        {
-            get { return activationWindowPrefab; }
-        }
-        public GameObject PanelSlotPrefab
-        {
-            get { return panelSlotPrefab; }
-        }
-        public GameObject PassiveIconViewPrefab
-        {
-            get { return passiveIconViewPrefab; }
-        }
+
+        public GameObject CharacterEntityModel => characterEntityModel;
+        public GameObject ActivationWindowPrefab => activationWindowPrefab;
+        public GameObject PanelSlotPrefab => panelSlotPrefab;
+        public GameObject PassiveIconViewPrefab => passiveIconViewPrefab;
+
         #endregion
     }
 }

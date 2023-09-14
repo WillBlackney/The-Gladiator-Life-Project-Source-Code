@@ -1,11 +1,9 @@
 #if UNITY_EDITOR
-using UnityEngine;
-using UnityEditor;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
-using WeAreGladiators.Characters;
-using UnityEngine.Audio;
+using Sirenix.Utilities.Editor;
+using UnityEditor;
+using UnityEngine;
 using WeAreGladiators.Audio;
 
 namespace WeAreGladiators.Editor
@@ -13,11 +11,6 @@ namespace WeAreGladiators.Editor
 
     public class AudioProfileEditor : OdinMenuEditorWindow
     {
-        [MenuItem("Tools/Hex Game Tools/Audio Profile Editor")]
-        private static void OpenWindow()
-        {
-            GetWindow<AudioProfileEditor>().Show();
-        }
 
         private CreateNewAudioProfile createNewAudioProfile;
         protected override void OnDestroy()
@@ -29,10 +22,15 @@ namespace WeAreGladiators.Editor
                 DestroyImmediate(createNewAudioProfile.data);
             }
         }
+        [MenuItem("Tools/Hex Game Tools/Audio Profile Editor")]
+        private static void OpenWindow()
+        {
+            GetWindow<AudioProfileEditor>().Show();
+        }
 
         protected override OdinMenuTree BuildMenuTree()
         {
-            var tree = new OdinMenuTree();
+            OdinMenuTree tree = new OdinMenuTree();
 
             createNewAudioProfile = new CreateNewAudioProfile();
             tree.Add("Create New", new CreateNewAudioProfile());
@@ -43,7 +41,7 @@ namespace WeAreGladiators.Editor
 
         protected override void OnBeginDrawEditors()
         {
-            OdinMenuTreeSelection selected = this.MenuTree.Selection;
+            OdinMenuTreeSelection selected = MenuTree.Selection;
 
             SirenixEditorGUI.BeginHorizontalToolbar();
             {
@@ -74,16 +72,13 @@ namespace WeAreGladiators.Editor
             [Button("Add New Profile")]
             public void CreateNewData()
             {
-                AssetDatabase.CreateAsset(data, "Assets/SO Assets/Audio/Audio Profiles/" + data.audioProfileType.ToString() + ".asset");
+                AssetDatabase.CreateAsset(data, "Assets/SO Assets/Audio/Audio Profiles/" + data.audioProfileType + ".asset");
                 AssetDatabase.SaveAssets();
 
                 // Create the SO 
                 data = CreateInstance<AudioProfileData>();
             }
-
         }
-
     }
 }
 #endif
-

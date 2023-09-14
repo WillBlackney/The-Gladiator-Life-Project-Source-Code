@@ -1,23 +1,23 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Utilities;
-using WeAreGladiators.Characters;
-using System;
-using Sirenix.OdinInspector;
-using WeAreGladiators.Persistency;
 using DG.Tweening;
-using UnityEngine.EventSystems;
-using WeAreGladiators.Audio;
-using UnityEngine.UI;
+using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using TMPro;
-using WeAreGladiators.UI;
-using WeAreGladiators.UCM;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using WeAreGladiators.Abilities;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Characters;
+using WeAreGladiators.GameOrigin;
 using WeAreGladiators.Items;
 using WeAreGladiators.Perks;
-using Sirenix.Utilities;
-using WeAreGladiators.GameOrigin;
+using WeAreGladiators.Persistency;
+using WeAreGladiators.UCM;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.MainMenu
 {
@@ -25,6 +25,7 @@ namespace WeAreGladiators.MainMenu
     {
         // Properties + Components
         #region
+
         [Header("Front Screen Components")]
         [SerializeField] private GameObject frontScreenParent;
         [SerializeField] private GameObject frontScreenBgParent;
@@ -36,59 +37,64 @@ namespace WeAreGladiators.MainMenu
         [SerializeField] private GameObject abandonRunPopupParent;
         [SerializeField] private CrowdRowAnimator[] frontScreenCrowdRows;
         [Space(20)]
-
         [Header("Settings Screen Components")]
-        [SerializeField] GameObject settingsScreenVisualParent;
-        [SerializeField] CanvasGroup settingsScreenContentCg;
-        [SerializeField] Image settingsScreenBlackUnderlay;
-        [SerializeField] TMP_Dropdown resolutionDropdown;
-        [SerializeField] RectTransform settingsScreenOnScreenPosition;
-        [SerializeField] RectTransform settingsScreenOffScreenPosition;
-        [SerializeField] RectTransform settingsScreenMovementParent;
+        [SerializeField]
+        private GameObject settingsScreenVisualParent;
+        [SerializeField] private CanvasGroup settingsScreenContentCg;
+        [SerializeField] private Image settingsScreenBlackUnderlay;
+        [SerializeField] private TMP_Dropdown resolutionDropdown;
+        [SerializeField] private RectTransform settingsScreenOnScreenPosition;
+        [SerializeField] private RectTransform settingsScreenOffScreenPosition;
+        [SerializeField] private RectTransform settingsScreenMovementParent;
 
         [Header("In Game Menu Components")]
         [SerializeField] private GameObject inGameMenuScreenParent;
         [SerializeField] private CanvasGroup inGameMenuScreenCg;
         [Space(40)]
-        [Title("Custom Character Screen Components")]    
-        [SerializeField] UniversalCharacterModel customCharacterScreenUCM;
-        [SerializeField] GameObject chooseCharacterScreenVisualParent;
-        [SerializeField] CharacterModelTemplateBasket[] modelTemplateBaskets;
+        [Title("Custom Character Screen Components")]
+        [SerializeField]
+        private UniversalCharacterModel customCharacterScreenUCM;
+        [SerializeField] private GameObject chooseCharacterScreenVisualParent;
+        [SerializeField] private CharacterModelTemplateBasket[] modelTemplateBaskets;
         [Space(20)]
         [Header("Custom Character Screen Data")]
-        [SerializeField] SerializedAttrbuteSheet baselineAttributes;
-        [SerializeField] int maxAllowedAttributePoints = 15;
-        [SerializeField] int individualAttributeBoostLimit = 10;
+        [SerializeField]
+        private SerializedAttrbuteSheet baselineAttributes;
+        [SerializeField] private int maxAllowedAttributePoints = 15;
+        [SerializeField] private int individualAttributeBoostLimit = 10;
         [Space(20)]
         [Header("Custom Character Screen Header Tab Refs")]
-        [SerializeField] Sprite tabSelectedSprite;
-        [SerializeField] Sprite tabUnselectedSprite;
-        [SerializeField] Color tabSelectedFontColour;
-        [SerializeField] Color tabUnselectedFontColour;
-        [SerializeField] Image[] headerTabImages;
-        [SerializeField] TextMeshProUGUI[] headerTabTexts;
+        [SerializeField]
+        private Sprite tabSelectedSprite;
+        [SerializeField] private Sprite tabUnselectedSprite;
+        [SerializeField] private Color tabSelectedFontColour;
+        [SerializeField] private Color tabUnselectedFontColour;
+        [SerializeField] private Image[] headerTabImages;
+        [SerializeField] private TextMeshProUGUI[] headerTabTexts;
         [Space(20)]
         [Header("Custom Character Screen Pages")]
-        [SerializeField] GameObject ccsOriginPanel;
-        [SerializeField] GameObject ccsPresetPanel;
-        [SerializeField] GameObject ccsItemsPanel;
-        [SerializeField] GameObject ccsPerkPanel;
-        [SerializeField] GameObject ccsAbilityPanel;
-        [SerializeField] GameObject ccsTalentPanel;
+        [SerializeField]
+        private GameObject ccsOriginPanel;
+        [SerializeField] private GameObject ccsPresetPanel;
+        [SerializeField] private GameObject ccsItemsPanel;
+        [SerializeField] private GameObject ccsPerkPanel;
+        [SerializeField] private GameObject ccsAbilityPanel;
+        [SerializeField] private GameObject ccsTalentPanel;
 
         [Space(20)]
         [Header("Perk Panel Components")]
-        [SerializeField] List<CustomCharacterChoosePerkPanel> allChoosePerkPanels;
-        [SerializeField] Transform choosePerkPanelsParent;
-        [SerializeField] GameObject choosePerkPanelPrefab;
-        [SerializeField] TextMeshProUGUI availablePerkPointsText;
+        [SerializeField]
+        private List<CustomCharacterChoosePerkPanel> allChoosePerkPanels;
+        [SerializeField] private Transform choosePerkPanelsParent;
+        [SerializeField] private GameObject choosePerkPanelPrefab;
+        [SerializeField] private TextMeshProUGUI availablePerkPointsText;
 
         [Space(20)]
         [Header("Origin Panel Components")]
         [SerializeField] private TMP_InputField characterNameInputField;
         [SerializeField] private TextMeshProUGUI originPanelRacialNameText;
         [SerializeField] private UIRaceIcon originPanelRacialIcon;
-        [SerializeField] private TextMeshProUGUI originPanelRacialDescriptionText; 
+        [SerializeField] private TextMeshProUGUI originPanelRacialDescriptionText;
         [SerializeField] private TextMeshProUGUI originPanelPresetNameText;
         [SerializeField] private UIAbilityIcon[] originPanelAbilityIcons;
         [SerializeField] private UITalentRow[] originPanelTalentRows;
@@ -101,7 +107,7 @@ namespace WeAreGladiators.MainMenu
         [Space(20)]
         [Header("Choose Ability Panel Components")]
         [SerializeField] private RectTransform[] chooseAbilityPanelLayouts;
-        [SerializeField] private TextMeshProUGUI totalChosenAbilitiesText;      
+        [SerializeField] private TextMeshProUGUI totalChosenAbilitiesText;
         [SerializeField] private TextMeshProUGUI chooseAbilityButtonsHeaderTextOne;
         [SerializeField] private ChooseAbilityButton[] chooseAbilityButtonsSectionOne;
         [SerializeField] private TextMeshProUGUI chooseAbilityButtonsHeaderTextTwo;
@@ -123,62 +129,77 @@ namespace WeAreGladiators.MainMenu
 
         [Space(20)]
         [Header("Character Validty Components")]
-        [SerializeField] GameObject validityModalParent;
-        [SerializeField] GameObject[] reasonRows;
-        [SerializeField] GameObject invalidNameRow;
-        [SerializeField] GameObject unusedPerkRow;
-        [SerializeField] GameObject unusedTalentsRow;
-        [SerializeField] GameObject unusedAbilitiesRow;
-        [SerializeField] GameObject unusedAttributesRow;
+        [SerializeField]
+        private GameObject validityModalParent;
+        [SerializeField] private GameObject[] reasonRows;
+        [SerializeField] private GameObject invalidNameRow;
+        [SerializeField] private GameObject unusedPerkRow;
+        [SerializeField] private GameObject unusedTalentsRow;
+        [SerializeField] private GameObject unusedAbilitiesRow;
+        [SerializeField] private GameObject unusedAttributesRow;
 
         // Non inspector proerties
-        private HexCharacterData characterBuild;
         private HexCharacterData currentPreset;
         private RaceDataSO currentCustomCharacterRace;
         private CharacterModelTemplateSO currentModelTemplate;
-        private List<PerkIconData> starterLevelUpPerks = new List<PerkIconData>();
-        private int availableChoosePerkPoints = 0;
+        private readonly List<PerkIconData> starterLevelUpPerks = new List<PerkIconData>();
+        private int availableChoosePerkPoints;
         private const int totalAllowedPerkChoices = 1;
 
         private void Start()
         {
             RenderMenuButtons();
         }
+
         #endregion
 
         // Init
         #region
-        Resolution[] resolutions;
+
+        private Resolution[] resolutions;
         protected override void Awake()
         {
             base.Awake();
             BuildResolutionsDropdown();
         }
+
         #endregion
 
         // Getters + Accessors
         #region
-        public HexCharacterData CharacterBuild
-        {
-            get { return characterBuild; }
-        }
-        public GameObject InGameMenuScreenParent
-        {
-            get { return inGameMenuScreenParent; }
-        }
+
+        public HexCharacterData CharacterBuild { get; private set; }
+        public GameObject InGameMenuScreenParent => inGameMenuScreenParent;
+
         #endregion
 
         // Custom Character Validity Logic
         #region
+
         private void BuildAndShowValidityModal(List<string> validationErrors)
         {
             validityModalParent.SetActive(true);
             reasonRows.ForEach(i => i.gameObject.SetActive(false));
-            if (validationErrors.Contains("Name")) invalidNameRow.SetActive(true);
-            if (validationErrors.Contains("Perk")) unusedPerkRow.SetActive(true);
-            if (validationErrors.Contains("Talents")) unusedTalentsRow.SetActive(true);
-            if (validationErrors.Contains("Abilities")) unusedAbilitiesRow.SetActive(true);
-            if (validationErrors.Contains("Attributes")) unusedAttributesRow.SetActive(true);
+            if (validationErrors.Contains("Name"))
+            {
+                invalidNameRow.SetActive(true);
+            }
+            if (validationErrors.Contains("Perk"))
+            {
+                unusedPerkRow.SetActive(true);
+            }
+            if (validationErrors.Contains("Talents"))
+            {
+                unusedTalentsRow.SetActive(true);
+            }
+            if (validationErrors.Contains("Abilities"))
+            {
+                unusedAbilitiesRow.SetActive(true);
+            }
+            if (validationErrors.Contains("Attributes"))
+            {
+                unusedAttributesRow.SetActive(true);
+            }
         }
         private void HideValidityModal()
         {
@@ -191,13 +212,29 @@ namespace WeAreGladiators.MainMenu
         private List<string> GetValidationErrors()
         {
             List<string> validationErrors = new List<string>();
-            if (characterNameInputField.text.Length < 2) validationErrors.Add("Name");
-            if (availableChoosePerkPoints > 0) validationErrors.Add("Perk");
-            if (characterBuild.talentPairings.Count < 2) validationErrors.Add("Talents");
-            if (characterBuild.abilityBook.GetAllKnownNonItemSetAbilities().Count < 3) validationErrors.Add("Abilities");
-            if (GetTotalAttributePointsSpent() < maxAllowedAttributePoints) validationErrors.Add("Attributes");
+            if (characterNameInputField.text.Length < 2)
+            {
+                validationErrors.Add("Name");
+            }
+            if (availableChoosePerkPoints > 0)
+            {
+                validationErrors.Add("Perk");
+            }
+            if (CharacterBuild.talentPairings.Count < 2)
+            {
+                validationErrors.Add("Talents");
+            }
+            if (CharacterBuild.abilityBook.GetAllKnownNonItemSetAbilities().Count < 3)
+            {
+                validationErrors.Add("Abilities");
+            }
+            if (GetTotalAttributePointsSpent() < maxAllowedAttributePoints)
+            {
+                validationErrors.Add("Attributes");
+            }
             return validationErrors;
         }
+
         #endregion
 
         // On Button Click Events
@@ -206,14 +243,20 @@ namespace WeAreGladiators.MainMenu
         public void OnStartGameButtonClicked()
         {
             // TO DO: validate selections
-            var errors = GetValidationErrors();
+            List<string> errors = GetValidationErrors();
 
             // Start process
-            if (errors.Count == 0) GameController.Instance.HandleStartNewGameFromMainMenuEvent();
-            else BuildAndShowValidityModal(errors);
+            if (errors.Count == 0)
+            {
+                GameController.Instance.HandleStartNewGameFromMainMenuEvent();
+            }
+            else
+            {
+                BuildAndShowValidityModal(errors);
+            }
         }
         public void OnBackToMainMenuButtonClicked()
-        {            
+        {
             BlackScreenController.Instance.FadeOutAndBackIn(0.5f, 0.25f, 0.5f, () =>
             {
                 HideChooseCharacterScreen();
@@ -281,10 +324,12 @@ namespace WeAreGladiators.MainMenu
             EventSystem.current.SetSelectedGameObject(null);
             GameController.Instance.HandleQuitToMainMenuFromInGame();
         }
+
         #endregion
 
         // Custom Character Screen Logic : General
         #region
+
         public void ShowChooseCharacterScreen()
         {
             chooseCharacterScreenVisualParent.SetActive(true);
@@ -297,18 +342,18 @@ namespace WeAreGladiators.MainMenu
         {
             // Set up modular character data
             HexCharacterData startingClassTemplate = CharacterDataController.Instance.AllCustomCharacterTemplates[0];
-            characterBuild = CharacterDataController.Instance.CloneCharacterData(startingClassTemplate);
-            characterBuild.attributeSheet = new AttributeSheet();
-            characterBuild.PerkTree = new PerkTreeData();
-            baselineAttributes.CopyValuesIntoOther(characterBuild.attributeSheet);
-            characterBuild.mySubName = "The Kid";
-            characterBuild.background = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.TheKid);
-            characterBuild.dailyWage = RandomGenerator.NumberBetween(characterBuild.background.dailyWageMin, characterBuild.background.dailyWageMax);
+            CharacterBuild = CharacterDataController.Instance.CloneCharacterData(startingClassTemplate);
+            CharacterBuild.attributeSheet = new AttributeSheet();
+            CharacterBuild.PerkTree = new PerkTreeData();
+            baselineAttributes.CopyValuesIntoOther(CharacterBuild.attributeSheet);
+            CharacterBuild.mySubName = "The Kid";
+            CharacterBuild.background = CharacterDataController.Instance.GetBackgroundData(CharacterBackground.TheKid);
+            CharacterBuild.dailyWage = RandomGenerator.NumberBetween(CharacterBuild.background.dailyWageMin, CharacterBuild.background.dailyWageMax);
             HandleChangeClassPreset(startingClassTemplate);
 
             // Start at level 2
-            characterBuild.currentLevel = 2;
-            characterBuild.currentMaxXP = CharacterDataController.Instance.GetMaxXpCapForLevel(2);
+            CharacterBuild.currentLevel = 2;
+            CharacterBuild.currentMaxXP = CharacterDataController.Instance.GetMaxXpCapForLevel(2);
 
             // Set to template 1 
             ResetHeaderTabColourStates();
@@ -323,28 +368,28 @@ namespace WeAreGladiators.MainMenu
             currentPreset = preset;
 
             // Update abilities
-            characterBuild.abilityBook = new AbilityBook(preset.abilityBook);
+            CharacterBuild.abilityBook = new AbilityBook(preset.abilityBook);
 
             // Update talents
-            characterBuild.talentPairings.Clear();
-            characterBuild.talentPairings.AddRange(preset.talentPairings);
+            CharacterBuild.talentPairings.Clear();
+            CharacterBuild.talentPairings.AddRange(preset.talentPairings);
 
             // Update attributes
-            preset.attributeSheet.CopyValuesIntoOther(characterBuild.attributeSheet);
+            preset.attributeSheet.CopyValuesIntoOther(CharacterBuild.attributeSheet);
 
             // Update perks
-            PerkController.Instance.BuildPassiveManagerFromOtherPassiveManager(preset.passiveManager, characterBuild.passiveManager);
+            PerkController.Instance.BuildPassiveManagerFromOtherPassiveManager(preset.passiveManager, CharacterBuild.passiveManager);
 
-            int maxHealth = StatCalculator.GetTotalMaxHealth(characterBuild);
-            CharacterDataController.Instance.OnConstitutionOrMaxHealthChanged(characterBuild, maxHealth);
-            CharacterDataController.Instance.SetCharacterHealth(characterBuild, maxHealth);
+            int maxHealth = StatCalculator.GetTotalMaxHealth(CharacterBuild);
+            CharacterDataController.Instance.OnConstitutionOrMaxHealthChanged(CharacterBuild, maxHealth);
+            CharacterDataController.Instance.SetCharacterHealth(CharacterBuild, maxHealth);
 
             // Update weapons + clothing items
             HandleSetItemsFromPreset(preset);
 
             // Rebuild Origin page
             RebuildAndShowOriginPageView();
-        }       
+        }
         private void CloseAllCustomCharacterScreenPanels()
         {
             ccsOriginPanel.SetActive(false);
@@ -354,10 +399,12 @@ namespace WeAreGladiators.MainMenu
             ccsAbilityPanel.SetActive(false);
             ccsTalentPanel.SetActive(false);
         }
-        #endregion        
+
+        #endregion
 
         // Custom Character Screen Logic : Header nav tabs
         #region
+
         public void OnOriginHeaderTabClicked()
         {
             CloseAllCustomCharacterScreenPanels();
@@ -403,10 +450,12 @@ namespace WeAreGladiators.MainMenu
                 headerTabTexts[i].color = tabUnselectedFontColour;
             }
         }
+
         #endregion
 
         // Custom Character Screen Logic : Origin Panel
         #region
+
         private void RebuildAndShowOriginPageView()
         {
             // Route to page
@@ -418,22 +467,30 @@ namespace WeAreGladiators.MainMenu
             headerTabTexts[0].color = tabSelectedFontColour;
 
             // Set name text
-            originPanelPresetNameText.text = currentPreset.myName.ToString();
+            originPanelPresetNameText.text = currentPreset.myName;
 
             // Reset and build ability icons
-            var nonItemAbilities = characterBuild.abilityBook.GetAllKnownNonItemSetAbilities();
+            List<AbilityData> nonItemAbilities = CharacterBuild.abilityBook.GetAllKnownNonItemSetAbilities();
             foreach (UIAbilityIcon a in originPanelAbilityIcons)
+            {
                 a.HideAndReset();
-            for(int i = 0; i < nonItemAbilities.Count && i < originPanelAbilityIcons.Length; i++)            
+            }
+            for (int i = 0; i < nonItemAbilities.Count && i < originPanelAbilityIcons.Length; i++)
+            {
                 originPanelAbilityIcons[i].BuildFromAbilityData(nonItemAbilities[i]);
+            }
 
             // Reset and build talent rows
             foreach (UITalentRow r in originPanelTalentRows)
+            {
                 r.HideAndReset();
-            for (int i = 0; i < characterBuild.talentPairings.Count && i < originPanelTalentRows.Length; i++)
-                originPanelTalentRows[i].BuildFromTalentPairing(characterBuild.talentPairings[i]);
+            }
+            for (int i = 0; i < CharacterBuild.talentPairings.Count && i < originPanelTalentRows.Length; i++)
+            {
+                originPanelTalentRows[i].BuildFromTalentPairing(CharacterBuild.talentPairings[i]);
+            }
 
-            customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
+            customCharacterScreenUCM.SetModeFromItemSet(CharacterBuild.itemSet);
 
         }
         public void OnNextClassPresetButtonClicked()
@@ -443,10 +500,14 @@ namespace WeAreGladiators.MainMenu
 
             int currentIndex = Array.IndexOf(templates, currentPreset);
             if (currentIndex == templates.Length - 1)
+            {
                 nextTemplate = templates[0];
+            }
 
             else
+            {
                 nextTemplate = templates[currentIndex + 1];
+            }
 
             HandleChangeClassPreset(nextTemplate);
         }
@@ -456,23 +517,28 @@ namespace WeAreGladiators.MainMenu
             HexCharacterData nextTemplate = null;
             int currentIndex = Array.IndexOf(templates, currentPreset);
             if (currentIndex == 0)
+            {
                 nextTemplate = templates[templates.Length - 1];
+            }
 
             else
+            {
                 nextTemplate = templates[currentIndex - 1];
+            }
 
             HandleChangeClassPreset(nextTemplate);
         }
         public void OnNameInputFieldValueChanged()
         {
-            characterBuild.myName = characterNameInputField.text;
-            characterBuild.mySubName = "The Kid";
+            CharacterBuild.myName = characterNameInputField.text;
+            CharacterBuild.mySubName = "The Kid";
         }
 
         #endregion
 
         // Custom Character Screen Logic: Preset Panel
         #region
+
         private void RebuildAndShowPresetPanel()
         {
             // Show preset panel + hide other panels
@@ -486,8 +552,10 @@ namespace WeAreGladiators.MainMenu
         private void RebuildAttributeSection()
         {
             // Rebuild each row
-            foreach(CustomCharacterAttributeRow row in presetPanelAttributeRows)            
+            foreach (CustomCharacterAttributeRow row in presetPanelAttributeRows)
+            {
                 RebuildAttributeRow(row);
+            }
 
             // Update availble attribute points text
             presetPanelAttributePointsText.text = (maxAllowedAttributePoints - GetTotalAttributePointsSpent()).ToString();
@@ -496,20 +564,28 @@ namespace WeAreGladiators.MainMenu
         private void RebuildPresetPanelAbilitySection()
         {
             // Reset and build ability icons
-            var nonItemAbilities = characterBuild.abilityBook.GetAllKnownNonItemSetAbilities();
+            List<AbilityData> nonItemAbilities = CharacterBuild.abilityBook.GetAllKnownNonItemSetAbilities();
             foreach (UIAbilityIcon a in presetPanelAbilityIcons)
+            {
                 a.HideAndReset();
+            }
             for (int i = 0; i < nonItemAbilities.Count && i < presetPanelAbilityIcons.Length; i++)
+            {
                 presetPanelAbilityIcons[i].BuildFromAbilityData(nonItemAbilities[i]);
+            }
 
         }
         private void RebuildPresetPanelTalentSection()
         {
             // Reset and build talent rows
             foreach (UITalentIcon r in presetPanelTalentIcons)
+            {
                 r.HideAndReset();
-            for (int i = 0; i < characterBuild.talentPairings.Count && i < presetPanelTalentIcons.Length; i++)
-                presetPanelTalentIcons[i].BuildFromTalentPairing(characterBuild.talentPairings[i]);
+            }
+            for (int i = 0; i < CharacterBuild.talentPairings.Count && i < presetPanelTalentIcons.Length; i++)
+            {
+                presetPanelTalentIcons[i].BuildFromTalentPairing(CharacterBuild.talentPairings[i]);
+            }
         }
         private void RebuildAttributeRow(CustomCharacterAttributeRow row)
         {
@@ -522,42 +598,68 @@ namespace WeAreGladiators.MainMenu
             // Set plus and minus button view states
             row.MinusButtonParent.SetActive(false);
             row.PlusButtonParent.SetActive(false);
-            if (dif > 0) row.MinusButtonParent.SetActive(true);            
-            if (dif < individualAttributeBoostLimit) row.PlusButtonParent.SetActive(true);
+            if (dif > 0)
+            {
+                row.MinusButtonParent.SetActive(true);
+            }
+            if (dif < individualAttributeBoostLimit)
+            {
+                row.PlusButtonParent.SetActive(true);
+            }
 
             // Hide plus button if player already spent all points
             if (GetTotalAttributePointsSpent() >= maxAllowedAttributePoints)
+            {
                 row.PlusButtonParent.SetActive(false);
+            }
 
             // Set text colouring
-            if (dif > 0) row.AmountText.color = row.BoostedStatTextColor;
-            else row.AmountText.color = row.NormalStatTextColor;
+            if (dif > 0)
+            {
+                row.AmountText.color = row.BoostedStatTextColor;
+            }
+            else
+            {
+                row.AmountText.color = row.NormalStatTextColor;
+            }
 
         }
         private int GetCharacterAttributeDifference(CoreAttribute att)
         {
             int dif = 0;
 
-            if (att == CoreAttribute.Might)            
-                dif = characterBuild.attributeSheet.might.value - baselineAttributes.might.value;
-            
-            else if (att == CoreAttribute.Accuracy)            
-                dif = characterBuild.attributeSheet.accuracy.value - baselineAttributes.accuracy.value;
-            
-            else if (att == CoreAttribute.Dodge)            
-                dif = characterBuild.attributeSheet.dodge.value - baselineAttributes.dodge.value;
-            
-            else if (att == CoreAttribute.Constitution)            
-                dif = characterBuild.attributeSheet.constitution.value - baselineAttributes.constitution.value;
-            
-            else if (att == CoreAttribute.Resolve)            
-                dif = characterBuild.attributeSheet.resolve.value - baselineAttributes.resolve.value;
-            
-            else if (att == CoreAttribute.Wits)            
-                dif = characterBuild.attributeSheet.wits.value - baselineAttributes.wits.value;          
+            if (att == CoreAttribute.Might)
+            {
+                dif = CharacterBuild.attributeSheet.might.value - baselineAttributes.might.value;
+            }
 
-            Debug.Log("MainMenuController.GetCharacterAttributeDifference() returning " + dif.ToString() +
-                " for attribute: " + att.ToString());
+            else if (att == CoreAttribute.Accuracy)
+            {
+                dif = CharacterBuild.attributeSheet.accuracy.value - baselineAttributes.accuracy.value;
+            }
+
+            else if (att == CoreAttribute.Dodge)
+            {
+                dif = CharacterBuild.attributeSheet.dodge.value - baselineAttributes.dodge.value;
+            }
+
+            else if (att == CoreAttribute.Constitution)
+            {
+                dif = CharacterBuild.attributeSheet.constitution.value - baselineAttributes.constitution.value;
+            }
+
+            else if (att == CoreAttribute.Resolve)
+            {
+                dif = CharacterBuild.attributeSheet.resolve.value - baselineAttributes.resolve.value;
+            }
+
+            else if (att == CoreAttribute.Wits)
+            {
+                dif = CharacterBuild.attributeSheet.wits.value - baselineAttributes.wits.value;
+            }
+
+            Debug.Log("MainMenuController.GetCharacterAttributeDifference() returning " + dif +
+                " for attribute: " + att);
 
             return dif;
         }
@@ -565,83 +667,118 @@ namespace WeAreGladiators.MainMenu
         {
             int value = 0;
 
-            if (att == CoreAttribute.Might)            
-                value = characterBuild.attributeSheet.might.value;
-                        
-            else if (att == CoreAttribute.Accuracy)            
-                value = characterBuild.attributeSheet.accuracy.value;
-            
-            else if (att == CoreAttribute.Dodge)            
-                value = characterBuild.attributeSheet.dodge.value;
-            
-            else if (att == CoreAttribute.Constitution)            
-                value = characterBuild.attributeSheet.constitution.value;
-            
-            else if (att == CoreAttribute.Resolve)            
-                value = characterBuild.attributeSheet.resolve.value;
-            
-            else if (att == CoreAttribute.Wits)            
-                value = characterBuild.attributeSheet.wits.value;
+            if (att == CoreAttribute.Might)
+            {
+                value = CharacterBuild.attributeSheet.might.value;
+            }
 
-            Debug.Log("MainMenuController.GetCharacterAttributeValue) returning " + value.ToString() +
-               " for attribute: " + att.ToString());
+            else if (att == CoreAttribute.Accuracy)
+            {
+                value = CharacterBuild.attributeSheet.accuracy.value;
+            }
+
+            else if (att == CoreAttribute.Dodge)
+            {
+                value = CharacterBuild.attributeSheet.dodge.value;
+            }
+
+            else if (att == CoreAttribute.Constitution)
+            {
+                value = CharacterBuild.attributeSheet.constitution.value;
+            }
+
+            else if (att == CoreAttribute.Resolve)
+            {
+                value = CharacterBuild.attributeSheet.resolve.value;
+            }
+
+            else if (att == CoreAttribute.Wits)
+            {
+                value = CharacterBuild.attributeSheet.wits.value;
+            }
+
+            Debug.Log("MainMenuController.GetCharacterAttributeValue) returning " + value +
+                " for attribute: " + att);
 
             return value;
         }
         private int GetTotalAttributePointsSpent()
         {
             int dif = 0;
-            dif += GetCharacterAttributeDifference(CoreAttribute.Might) ;
-            dif += GetCharacterAttributeDifference(CoreAttribute.Constitution) ;
-            dif += GetCharacterAttributeDifference(CoreAttribute.Accuracy) ;
-            dif += GetCharacterAttributeDifference(CoreAttribute.Dodge) ;
-            dif += GetCharacterAttributeDifference(CoreAttribute.Resolve) ;
-            dif += GetCharacterAttributeDifference(CoreAttribute.Wits) ;
+            dif += GetCharacterAttributeDifference(CoreAttribute.Might);
+            dif += GetCharacterAttributeDifference(CoreAttribute.Constitution);
+            dif += GetCharacterAttributeDifference(CoreAttribute.Accuracy);
+            dif += GetCharacterAttributeDifference(CoreAttribute.Dodge);
+            dif += GetCharacterAttributeDifference(CoreAttribute.Resolve);
+            dif += GetCharacterAttributeDifference(CoreAttribute.Wits);
             dif += GetCharacterAttributeDifference(CoreAttribute.Fitness);
-            Debug.Log("MainMenuController.GetTotalAttributePointsSpent() returning: " + dif.ToString());
+            Debug.Log("MainMenuController.GetTotalAttributePointsSpent() returning: " + dif);
             return dif;
-        }           
+        }
         public void OnDecreaseAttributeButtonClicked(CustomCharacterAttributeRow row)
         {
             if (row.Attribute == CoreAttribute.Might)
-                characterBuild.attributeSheet.might.value -= 1;
+            {
+                CharacterBuild.attributeSheet.might.value -= 1;
+            }
             else if (row.Attribute == CoreAttribute.Accuracy)
-                characterBuild.attributeSheet.accuracy.value -= 1;
+            {
+                CharacterBuild.attributeSheet.accuracy.value -= 1;
+            }
             else if (row.Attribute == CoreAttribute.Dodge)
-                characterBuild.attributeSheet.dodge.value -= 1;
+            {
+                CharacterBuild.attributeSheet.dodge.value -= 1;
+            }
             else if (row.Attribute == CoreAttribute.Constitution)
-                characterBuild.attributeSheet.constitution.value -= 1;
+            {
+                CharacterBuild.attributeSheet.constitution.value -= 1;
+            }
             else if (row.Attribute == CoreAttribute.Resolve)
-                characterBuild.attributeSheet.resolve.value -= 1;
+            {
+                CharacterBuild.attributeSheet.resolve.value -= 1;
+            }
             else if (row.Attribute == CoreAttribute.Wits)
-                characterBuild.attributeSheet.wits.value -= 1;
+            {
+                CharacterBuild.attributeSheet.wits.value -= 1;
+            }
 
             RebuildAttributeSection();
         }
         public void OnIncreaseAttributeButtonClicked(CustomCharacterAttributeRow row)
         {
             if (row.Attribute == CoreAttribute.Might)
-                characterBuild.attributeSheet.might.value += 1;
+            {
+                CharacterBuild.attributeSheet.might.value += 1;
+            }
             else if (row.Attribute == CoreAttribute.Accuracy)
-                characterBuild.attributeSheet.accuracy.value += 1;
+            {
+                CharacterBuild.attributeSheet.accuracy.value += 1;
+            }
             else if (row.Attribute == CoreAttribute.Dodge)
-                characterBuild.attributeSheet.dodge.value += 1;
+            {
+                CharacterBuild.attributeSheet.dodge.value += 1;
+            }
             else if (row.Attribute == CoreAttribute.Constitution)
-                characterBuild.attributeSheet.constitution.value += 1;
+            {
+                CharacterBuild.attributeSheet.constitution.value += 1;
+            }
             else if (row.Attribute == CoreAttribute.Resolve)
-                characterBuild.attributeSheet.resolve.value += 1;
+            {
+                CharacterBuild.attributeSheet.resolve.value += 1;
+            }
             else if (row.Attribute == CoreAttribute.Wits)
-                characterBuild.attributeSheet.wits.value += 1;
+            {
+                CharacterBuild.attributeSheet.wits.value += 1;
+            }
 
             RebuildAttributeSection();
         }
-
-
 
         #endregion
 
         // Custom Character Screen Logic: Perks Panel
         #region
+
         private void RebuildAndShowPerkPanel()
         {
             // Show preset panel + hide other panels
@@ -652,35 +789,37 @@ namespace WeAreGladiators.MainMenu
             // Get and cache all level up perks if havent already
             if (starterLevelUpPerks.Count == 0)
             {
-                foreach(var p in PerkController.Instance.GetAllPerkTreePerks())
+                foreach (PerkIconData p in PerkController.Instance.GetAllPerkTreePerks())
                 {
-                    if(p.perkTreeTier == 1)
+                    if (p.perkTreeTier == 1)
                     {
                         starterLevelUpPerks.Add(p);
                     }
                 }
-            }     
+            }
 
             // Reset all perk panels to default state
-            for(int i = 0; i < allChoosePerkPanels.Count; i++)            
+            for (int i = 0; i < allChoosePerkPanels.Count; i++)
+            {
                 allChoosePerkPanels[i].Reset();
-            
+            }
+
             // Build a choose perk panel for each level up perk option
-            for(int i = 0; i < starterLevelUpPerks.Count; i++)
+            for (int i = 0; i < starterLevelUpPerks.Count; i++)
             {
                 // Create new panels in list if there arent enough to show all the perks
-                if(allChoosePerkPanels.Count <= i)
+                if (allChoosePerkPanels.Count <= i)
                 {
                     CustomCharacterChoosePerkPanel newPanel = Instantiate(choosePerkPanelPrefab, choosePerkPanelsParent).GetComponent<CustomCharacterChoosePerkPanel>();
                     allChoosePerkPanels.Add(newPanel);
                 }
 
                 // Build the panel from perk
-                var panel = allChoosePerkPanels[i];
+                CustomCharacterChoosePerkPanel panel = allChoosePerkPanels[i];
                 panel.Build(new ActivePerk(starterLevelUpPerks[i].perkTag, 1));
 
                 // If already has the perk, set that perk as selected and deduct a perk choice point.
-                if(PerkController.Instance.DoesCharacterHavePerk(characterBuild.passiveManager, starterLevelUpPerks[i].perkTag))
+                if (PerkController.Instance.DoesCharacterHavePerk(CharacterBuild.passiveManager, starterLevelUpPerks[i].perkTag))
                 {
                     SetAvailableChoosePerkPoints(availableChoosePerkPoints - 1);
                     panel.SetSelectedViewState(true);
@@ -690,51 +829,53 @@ namespace WeAreGladiators.MainMenu
         }
         public void HandleChoosePerkPanelClicked(CustomCharacterChoosePerkPanel panel)
         {
-            bool hasPerk = PerkController.Instance.DoesCharacterHavePerk(characterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag);
+            bool hasPerk = PerkController.Instance.DoesCharacterHavePerk(CharacterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag);
 
             // Already selected: unselect
             if (hasPerk)
             {
                 SetAvailableChoosePerkPoints(availableChoosePerkPoints + 1);
                 panel.SetSelectedViewState(false);
-                PerkController.Instance.ModifyPerkOnCharacterData(characterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag, -panel.PerkIcon.ActivePerk.stacks);
+                PerkController.Instance.ModifyPerkOnCharacterData(CharacterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag, -panel.PerkIcon.ActivePerk.stacks);
             }
             // No current selection: make this the new selection.
-            else if(!hasPerk && availableChoosePerkPoints > 0)
+            else if (!hasPerk && availableChoosePerkPoints > 0)
             {
                 SetAvailableChoosePerkPoints(availableChoosePerkPoints - 1);
                 panel.SetSelectedViewState(true);
-                PerkController.Instance.ModifyPerkOnCharacterData(characterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag, panel.PerkIcon.ActivePerk.stacks);
+                PerkController.Instance.ModifyPerkOnCharacterData(CharacterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag, panel.PerkIcon.ActivePerk.stacks);
 
             }
             // Already made a selection: unselect current and make this the current selection
             else if (!hasPerk && availableChoosePerkPoints == 0)
             {
-                foreach(CustomCharacterChoosePerkPanel pPanel in allChoosePerkPanels)
+                foreach (CustomCharacterChoosePerkPanel pPanel in allChoosePerkPanels)
                 {
-                    if (PerkController.Instance.DoesCharacterHavePerk(characterBuild.passiveManager, pPanel.PerkIcon.ActivePerk.perkTag))
+                    if (PerkController.Instance.DoesCharacterHavePerk(CharacterBuild.passiveManager, pPanel.PerkIcon.ActivePerk.perkTag))
                     {
-                        PerkController.Instance.ModifyPerkOnCharacterData(characterBuild.passiveManager, pPanel.PerkIcon.ActivePerk.perkTag, -pPanel.PerkIcon.ActivePerk.stacks);
+                        PerkController.Instance.ModifyPerkOnCharacterData(CharacterBuild.passiveManager, pPanel.PerkIcon.ActivePerk.perkTag, -pPanel.PerkIcon.ActivePerk.stacks);
                         pPanel.SetSelectedViewState(false);
                         break;
                     }
                 }
 
                 panel.SetSelectedViewState(true);
-                PerkController.Instance.ModifyPerkOnCharacterData(characterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag, panel.PerkIcon.ActivePerk.stacks);               
+                PerkController.Instance.ModifyPerkOnCharacterData(CharacterBuild.passiveManager, panel.PerkIcon.ActivePerk.perkTag, panel.PerkIcon.ActivePerk.stacks);
             }
-            int newMaxHealth = StatCalculator.GetTotalMaxHealth(characterBuild);
-            CharacterDataController.Instance.SetCharacterHealth(characterBuild, newMaxHealth);
+            int newMaxHealth = StatCalculator.GetTotalMaxHealth(CharacterBuild);
+            CharacterDataController.Instance.SetCharacterHealth(CharacterBuild, newMaxHealth);
         }
         private void SetAvailableChoosePerkPoints(int amount)
         {
             availableChoosePerkPoints = amount;
             availablePerkPointsText.text = amount.ToString();
         }
+
         #endregion
 
         // Custom Character Screen Logic : Items Page
         #region
+
         private void RebuildAndShowItemsPanel()
         {
             // Route to page
@@ -750,19 +891,23 @@ namespace WeAreGladiators.MainMenu
         {
             // Reset and build ability icons
             foreach (UIAbilityIcon a in itemsPanelAbilityIcons)
+            {
                 a.HideAndReset();
+            }
 
             // Determine + create weapon abilities
-            List<AbilityData> weaponAbilities = characterBuild.abilityBook.GetAbilitiesFromItemSet(characterBuild.itemSet);
+            List<AbilityData> weaponAbilities = CharacterBuild.abilityBook.GetAbilitiesFromItemSet(CharacterBuild.itemSet);
 
             // Build icons from weapon abilities
             for (int i = 0; i < weaponAbilities.Count && i < itemsPanelAbilityIcons.Length; i++)
+            {
                 itemsPanelAbilityIcons[i].BuildFromAbilityData(weaponAbilities[i]);
+            }
         }
         private void HandleSetItemsFromPreset(HexCharacterData preset)
         {
-            ItemController.Instance.CopyItemManagerDataIntoOtherItemManager(preset.itemSet, characterBuild.itemSet);
-            CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+            ItemController.Instance.CopyItemManagerDataIntoOtherItemManager(preset.itemSet, CharacterBuild.itemSet);
+            CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
 
             // Rebuild icon views for items + abilities
             UpdateItemSlotViews();
@@ -771,22 +916,28 @@ namespace WeAreGladiators.MainMenu
         private void UpdateItemSlotViews()
         {
             //headItemIcon.BuildFromData(characterBuild.itemSet.headArmour);
-            if (characterBuild.itemSet.headArmour == null) CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeHeadWear);
+            if (CharacterBuild.itemSet.headArmour == null)
+            {
+                CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeHeadWear);
+            }
             //bodyItemIcon.BuildFromData(characterBuild.itemSet.bodyArmour);
-            mainHandItemIcon.BuildFromData(characterBuild.itemSet.mainHandItem);
-            offHandItemIcon.BuildFromData(characterBuild.itemSet.offHandItem);
-            if (characterBuild.itemSet.offHandItem == null) CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
+            mainHandItemIcon.BuildFromData(CharacterBuild.itemSet.mainHandItem);
+            offHandItemIcon.BuildFromData(CharacterBuild.itemSet.offHandItem);
+            if (CharacterBuild.itemSet.offHandItem == null)
+            {
+                CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
+            }
         }
         public void OnNextHeadItemClicked()
         {
 
             // Not currently wearing a head item
-            if (characterBuild.itemSet.headArmour == null)
+            if (CharacterBuild.itemSet.headArmour == null)
             {
                 ItemData headItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingHeadItems[0].itemName));
-                characterBuild.itemSet.headArmour = headItem;
-                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-               // headItemIcon.BuildFromData(headItem);
+                CharacterBuild.itemSet.headArmour = headItem;
+                CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
+                // headItemIcon.BuildFromData(headItem);
             }
 
             else
@@ -794,7 +945,7 @@ namespace WeAreGladiators.MainMenu
                 ItemDataSO currentHead = null;
                 foreach (ItemDataSO headData in allStartingHeadItems)
                 {
-                    if (headData.itemName == characterBuild.itemSet.headArmour.itemName)
+                    if (headData.itemName == CharacterBuild.itemSet.headArmour.itemName)
                     {
                         currentHead = headData;
                     }
@@ -805,9 +956,9 @@ namespace WeAreGladiators.MainMenu
                 // Set no item
                 if (currentIndex == allStartingHeadItems.Length - 1)
                 {
-                    characterBuild.itemSet.headArmour = null;
+                    CharacterBuild.itemSet.headArmour = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeHeadWear);
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     //headItemIcon.BuildFromData(null);
                 }
 
@@ -815,23 +966,22 @@ namespace WeAreGladiators.MainMenu
                 else
                 {
                     ItemData headItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingHeadItems[currentIndex + 1].itemName));
-                    characterBuild.itemSet.headArmour = headItem;
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    CharacterBuild.itemSet.headArmour = headItem;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     //headItemIcon.BuildFromData(headItem);
                 }
 
             }
 
-
         }
         public void OnPreviousHeadItemClicked()
         {
             // Not currently wearing a head item
-            if (characterBuild.itemSet.headArmour == null)
+            if (CharacterBuild.itemSet.headArmour == null)
             {
                 ItemData headItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingHeadItems[allStartingHeadItems.Length - 1].itemName));
-                characterBuild.itemSet.headArmour = headItem;
-                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                CharacterBuild.itemSet.headArmour = headItem;
+                CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                 //headItemIcon.BuildFromData(headItem);
             }
 
@@ -840,7 +990,7 @@ namespace WeAreGladiators.MainMenu
                 ItemDataSO currentHead = null;
                 foreach (ItemDataSO headData in allStartingHeadItems)
                 {
-                    if (headData.itemName == characterBuild.itemSet.headArmour.itemName)
+                    if (headData.itemName == CharacterBuild.itemSet.headArmour.itemName)
                     {
                         currentHead = headData;
                     }
@@ -850,17 +1000,17 @@ namespace WeAreGladiators.MainMenu
                 // Set no item
                 if (currentIndex == 0)
                 {
-                    characterBuild.itemSet.headArmour = null;
+                    CharacterBuild.itemSet.headArmour = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeHeadWear);
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     //headItemIcon.BuildFromData(null);
                 }
                 // Set previous item
                 else
                 {
                     ItemData headItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingHeadItems[currentIndex - 1].itemName));
-                    characterBuild.itemSet.headArmour = headItem;
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    CharacterBuild.itemSet.headArmour = headItem;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     //headItemIcon.BuildFromData(headItem);
                 }
 
@@ -870,11 +1020,11 @@ namespace WeAreGladiators.MainMenu
         public void OnNextBodyItemClicked()
         {
             // Not currently wearing a head item
-            if (characterBuild.itemSet.bodyArmour == null)
+            if (CharacterBuild.itemSet.bodyArmour == null)
             {
                 ItemData bodyItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingBodyItems[0].itemName));
-                characterBuild.itemSet.bodyArmour = bodyItem;
-                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                CharacterBuild.itemSet.bodyArmour = bodyItem;
+                CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                 //bodyItemIcon.BuildFromData(bodyItem);
             }
 
@@ -883,8 +1033,10 @@ namespace WeAreGladiators.MainMenu
                 ItemDataSO currentBody = null;
                 foreach (ItemDataSO bodyData in allStartingBodyItems)
                 {
-                    if (bodyData.itemName == characterBuild.itemSet.bodyArmour.itemName)
+                    if (bodyData.itemName == CharacterBuild.itemSet.bodyArmour.itemName)
+                    {
                         currentBody = bodyData;
+                    }
                 }
 
                 int currentIndex = Array.IndexOf(allStartingBodyItems, currentBody);
@@ -892,9 +1044,9 @@ namespace WeAreGladiators.MainMenu
                 // Set no item
                 if (currentIndex == allStartingBodyItems.Length - 1)
                 {
-                    characterBuild.itemSet.bodyArmour = null;
+                    CharacterBuild.itemSet.bodyArmour = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeChestWear);
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     //bodyItemIcon.BuildFromData(null);
                 }
 
@@ -902,23 +1054,22 @@ namespace WeAreGladiators.MainMenu
                 else
                 {
                     ItemData bodyItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingBodyItems[currentIndex + 1].itemName));
-                    characterBuild.itemSet.bodyArmour = bodyItem;
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    CharacterBuild.itemSet.bodyArmour = bodyItem;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     //bodyItemIcon.BuildFromData(bodyItem);
                 }
 
             }
 
-
         }
         public void OnPreviousBodyItemClicked()
         {
             // Not currently wearing a head item
-            if (characterBuild.itemSet.bodyArmour == null)
+            if (CharacterBuild.itemSet.bodyArmour == null)
             {
                 ItemData bodyItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingBodyItems[allStartingBodyItems.Length - 1].itemName));
-                characterBuild.itemSet.bodyArmour = bodyItem;
-                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                CharacterBuild.itemSet.bodyArmour = bodyItem;
+                CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                 //bodyItemIcon.BuildFromData(bodyItem);
             }
 
@@ -927,25 +1078,27 @@ namespace WeAreGladiators.MainMenu
                 ItemDataSO currentBody = null;
                 foreach (ItemDataSO bodyData in allStartingBodyItems)
                 {
-                    if (bodyData.itemName == characterBuild.itemSet.bodyArmour.itemName)
+                    if (bodyData.itemName == CharacterBuild.itemSet.bodyArmour.itemName)
+                    {
                         currentBody = bodyData;
+                    }
                 }
                 int currentIndex = Array.IndexOf(allStartingBodyItems, currentBody);
 
                 // Set no item
                 if (currentIndex == 0)
                 {
-                    characterBuild.itemSet.bodyArmour = null;
+                    CharacterBuild.itemSet.bodyArmour = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeChestWear);
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     //bodyItemIcon.BuildFromData(null);
                 }
                 // Set previous item
                 else
                 {
                     ItemData bodyItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetItemDataByName(allStartingBodyItems[currentIndex - 1].itemName));
-                    characterBuild.itemSet.bodyArmour = bodyItem;
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    CharacterBuild.itemSet.bodyArmour = bodyItem;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     //bodyItemIcon.BuildFromData(bodyItem);
                 }
 
@@ -954,17 +1107,20 @@ namespace WeAreGladiators.MainMenu
         }
         public void OnNextMainHandItemClicked()
         {
-            if (characterBuild.itemSet.mainHandItem == null)
+            if (CharacterBuild.itemSet.mainHandItem == null)
             {
                 ItemData item = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[0].itemName);
-                if (item != null) item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
-                characterBuild.itemSet.mainHandItem = item;
-                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                if (item != null)
+                {
+                    item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
+                }
+                CharacterBuild.itemSet.mainHandItem = item;
+                CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                 mainHandItemIcon.BuildFromData(item);
 
-                if (characterBuild.itemSet.offHandItem != null && item.handRequirement == HandRequirement.TwoHanded)
+                if (CharacterBuild.itemSet.offHandItem != null && item.handRequirement == HandRequirement.TwoHanded)
                 {
-                    characterBuild.itemSet.offHandItem = null;
+                    CharacterBuild.itemSet.offHandItem = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
                     offHandItemIcon.BuildFromData(null);
                 }
@@ -975,8 +1131,10 @@ namespace WeAreGladiators.MainMenu
                 ItemDataSO currentMH = null;
                 foreach (ItemDataSO mainHandItem in allStartingMainHandItems)
                 {
-                    if (mainHandItem.itemName == characterBuild.itemSet.mainHandItem.itemName)
+                    if (mainHandItem.itemName == CharacterBuild.itemSet.mainHandItem.itemName)
+                    {
                         currentMH = mainHandItem;
+                    }
                 }
 
                 int currentIndex = Array.IndexOf(allStartingMainHandItems, currentMH);
@@ -984,9 +1142,9 @@ namespace WeAreGladiators.MainMenu
                 // Set no item
                 if (currentIndex == allStartingMainHandItems.Length - 1)
                 {
-                    characterBuild.itemSet.mainHandItem = null;
+                    CharacterBuild.itemSet.mainHandItem = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     mainHandItemIcon.BuildFromData(null);
                 }
 
@@ -994,39 +1152,48 @@ namespace WeAreGladiators.MainMenu
                 else
                 {
                     ItemData item = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[currentIndex + 1].itemName);
-                    if (item != null) item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
-                    characterBuild.itemSet.mainHandItem = item;
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    if (item != null)
+                    {
+                        item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
+                    }
+                    CharacterBuild.itemSet.mainHandItem = item;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     mainHandItemIcon.BuildFromData(item);
 
                     // Remove off hand item when equipping a 2h weapon
-                    if (characterBuild.itemSet.offHandItem != null && item.handRequirement == HandRequirement.TwoHanded)
+                    if (CharacterBuild.itemSet.offHandItem != null && item.handRequirement == HandRequirement.TwoHanded)
                     {
-                        characterBuild.itemSet.offHandItem = null;
+                        CharacterBuild.itemSet.offHandItem = null;
                         CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
                         offHandItemIcon.BuildFromData(null);
                     }
-                }                
+                }
             }
-            customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
+            customCharacterScreenUCM.SetModeFromItemSet(CharacterBuild.itemSet);
             RebuildItemPanelWeaponAbilityIcons();
 
             // On equip SFX
-            if (characterBuild.itemSet.mainHandItem != null) AudioManager.Instance.PlaySound(characterBuild.itemSet.mainHandItem.equipSFX);
+            if (CharacterBuild.itemSet.mainHandItem != null)
+            {
+                AudioManager.Instance.PlaySound(CharacterBuild.itemSet.mainHandItem.equipSFX);
+            }
         }
         public void OnPreviousMainHandItemClicked()
         {
-            if (characterBuild.itemSet.mainHandItem == null)
+            if (CharacterBuild.itemSet.mainHandItem == null)
             {
                 ItemData item = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[allStartingMainHandItems.Length - 1].itemName);
-                if (item != null) item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
-                characterBuild.itemSet.mainHandItem = item;
-                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                if (item != null)
+                {
+                    item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
+                }
+                CharacterBuild.itemSet.mainHandItem = item;
+                CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                 mainHandItemIcon.BuildFromData(item);
 
-                if (characterBuild.itemSet.offHandItem != null && item.handRequirement == HandRequirement.TwoHanded)
+                if (CharacterBuild.itemSet.offHandItem != null && item.handRequirement == HandRequirement.TwoHanded)
                 {
-                    characterBuild.itemSet.offHandItem = null;
+                    CharacterBuild.itemSet.offHandItem = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
                     offHandItemIcon.BuildFromData(null);
                 }
@@ -1037,60 +1204,73 @@ namespace WeAreGladiators.MainMenu
                 ItemDataSO currentMH = null;
                 foreach (ItemDataSO mhData in allStartingMainHandItems)
                 {
-                    if (mhData.itemName == characterBuild.itemSet.mainHandItem.itemName)
+                    if (mhData.itemName == CharacterBuild.itemSet.mainHandItem.itemName)
+                    {
                         currentMH = mhData;
+                    }
                 }
                 int currentIndex = Array.IndexOf(allStartingMainHandItems, currentMH);
 
                 // Set no item
                 if (currentIndex == 0)
                 {
-                    characterBuild.itemSet.mainHandItem = null;
+                    CharacterBuild.itemSet.mainHandItem = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     mainHandItemIcon.BuildFromData(null);
                 }
                 // Set previous item
                 else
                 {
                     ItemData mhItem = ItemController.Instance.GetItemDataByName(allStartingMainHandItems[currentIndex - 1].itemName);
-                    if (mhItem != null) mhItem = ItemController.Instance.GenerateNewItemWithRandomEffects(mhItem);
-                    characterBuild.itemSet.mainHandItem = mhItem;
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    if (mhItem != null)
+                    {
+                        mhItem = ItemController.Instance.GenerateNewItemWithRandomEffects(mhItem);
+                    }
+                    CharacterBuild.itemSet.mainHandItem = mhItem;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     mainHandItemIcon.BuildFromData(mhItem);
 
                     // Remove off hand item when equipping a 2h weapon
-                    if (characterBuild.itemSet.offHandItem != null && mhItem.handRequirement == HandRequirement.TwoHanded)
+                    if (CharacterBuild.itemSet.offHandItem != null && mhItem.handRequirement == HandRequirement.TwoHanded)
                     {
-                        characterBuild.itemSet.offHandItem = null;
+                        CharacterBuild.itemSet.offHandItem = null;
                         CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
                         offHandItemIcon.BuildFromData(null);
                     }
                 }
             }
-            customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
+            customCharacterScreenUCM.SetModeFromItemSet(CharacterBuild.itemSet);
             RebuildItemPanelWeaponAbilityIcons();
 
             // On equip SFX
-            if (characterBuild.itemSet.mainHandItem != null) AudioManager.Instance.PlaySound(characterBuild.itemSet.mainHandItem.equipSFX);
+            if (CharacterBuild.itemSet.mainHandItem != null)
+            {
+                AudioManager.Instance.PlaySound(CharacterBuild.itemSet.mainHandItem.equipSFX);
+            }
         }
         public void OnNextOffHandItemClicked()
         {
-            if (characterBuild.itemSet.mainHandItem != null &&
-                characterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+            if (CharacterBuild.itemSet.mainHandItem != null &&
+                CharacterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+            {
                 return;
+            }
 
-            if (characterBuild.itemSet.offHandItem == null)
+            if (CharacterBuild.itemSet.offHandItem == null)
             {
                 ItemData item = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[0].itemName);
-                if (item != null) item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
-                characterBuild.itemSet.offHandItem = item;
-                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                if (item != null)
+                {
+                    item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
+                }
+                CharacterBuild.itemSet.offHandItem = item;
+                CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                 offHandItemIcon.BuildFromData(item);
 
-                if (characterBuild.itemSet.mainHandItem != null && characterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+                if (CharacterBuild.itemSet.mainHandItem != null && CharacterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
                 {
-                    characterBuild.itemSet.mainHandItem = null;
+                    CharacterBuild.itemSet.mainHandItem = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
                     mainHandItemIcon.BuildFromData(null);
                 }
@@ -1101,8 +1281,10 @@ namespace WeAreGladiators.MainMenu
                 ItemDataSO currentOH = null;
                 foreach (ItemDataSO offhandItem in allStartingOffHandItems)
                 {
-                    if (offhandItem.itemName == characterBuild.itemSet.offHandItem.itemName)
+                    if (offhandItem.itemName == CharacterBuild.itemSet.offHandItem.itemName)
+                    {
                         currentOH = offhandItem;
+                    }
                 }
 
                 int currentIndex = Array.IndexOf(allStartingOffHandItems, currentOH);
@@ -1110,9 +1292,9 @@ namespace WeAreGladiators.MainMenu
                 // Set no item
                 if (currentIndex == allStartingOffHandItems.Length - 1)
                 {
-                    characterBuild.itemSet.offHandItem = null;
+                    CharacterBuild.itemSet.offHandItem = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     offHandItemIcon.BuildFromData(null);
                 }
 
@@ -1120,44 +1302,55 @@ namespace WeAreGladiators.MainMenu
                 else
                 {
                     ItemData item = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[currentIndex + 1].itemName);
-                    if (item != null) item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
-                    characterBuild.itemSet.offHandItem = item;
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    if (item != null)
+                    {
+                        item = ItemController.Instance.GenerateNewItemWithRandomEffects(item);
+                    }
+                    CharacterBuild.itemSet.offHandItem = item;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     offHandItemIcon.BuildFromData(item);
 
-                    if (characterBuild.itemSet.mainHandItem != null && characterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+                    if (CharacterBuild.itemSet.mainHandItem != null && CharacterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
                     {
-                        characterBuild.itemSet.mainHandItem = null;
+                        CharacterBuild.itemSet.mainHandItem = null;
                         CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
                         mainHandItemIcon.BuildFromData(null);
                     }
                 }
 
             }
-            customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
+            customCharacterScreenUCM.SetModeFromItemSet(CharacterBuild.itemSet);
             RebuildItemPanelWeaponAbilityIcons();
 
             // On equip SFX
-            if (characterBuild.itemSet.offHandItem != null) AudioManager.Instance.PlaySound(characterBuild.itemSet.offHandItem.equipSFX);
+            if (CharacterBuild.itemSet.offHandItem != null)
+            {
+                AudioManager.Instance.PlaySound(CharacterBuild.itemSet.offHandItem.equipSFX);
+            }
         }
         public void OnPreviousOffHandItemClicked()
         {
-            if (characterBuild.itemSet.mainHandItem != null &&
-               characterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+            if (CharacterBuild.itemSet.mainHandItem != null &&
+                CharacterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+            {
                 return;
+            }
 
             // Not currently using an off hand item
-            if (characterBuild.itemSet.offHandItem == null)
+            if (CharacterBuild.itemSet.offHandItem == null)
             {
                 ItemData ohItem = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[allStartingOffHandItems.Length - 1].itemName);
-                if (ohItem != null) ohItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ohItem);
-                characterBuild.itemSet.offHandItem = ohItem;
-                CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                if (ohItem != null)
+                {
+                    ohItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ohItem);
+                }
+                CharacterBuild.itemSet.offHandItem = ohItem;
+                CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                 offHandItemIcon.BuildFromData(ohItem);
 
-                if (characterBuild.itemSet.mainHandItem != null && characterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+                if (CharacterBuild.itemSet.mainHandItem != null && CharacterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
                 {
-                    characterBuild.itemSet.mainHandItem = null;
+                    CharacterBuild.itemSet.mainHandItem = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
                     mainHandItemIcon.BuildFromData(null);
                 }
@@ -1168,57 +1361,67 @@ namespace WeAreGladiators.MainMenu
                 ItemDataSO currentOH = null;
                 foreach (ItemDataSO bodyData in allStartingOffHandItems)
                 {
-                    if (bodyData.itemName == characterBuild.itemSet.offHandItem.itemName)
+                    if (bodyData.itemName == CharacterBuild.itemSet.offHandItem.itemName)
+                    {
                         currentOH = bodyData;
+                    }
                 }
                 int currentIndex = Array.IndexOf(allStartingOffHandItems, currentOH);
 
                 // Set no item
                 if (currentIndex == 0)
                 {
-                    characterBuild.itemSet.offHandItem = null;
+                    CharacterBuild.itemSet.offHandItem = null;
                     CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeOffHandWeapon);
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     offHandItemIcon.BuildFromData(null);
                 }
                 // Set previous item
                 else
                 {
                     ItemData ohItem = ItemController.Instance.GetItemDataByName(allStartingOffHandItems[currentIndex - 1].itemName);
-                    if (ohItem != null) ohItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ohItem);
-                    characterBuild.itemSet.offHandItem = ohItem;
-                    CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
+                    if (ohItem != null)
+                    {
+                        ohItem = ItemController.Instance.GenerateNewItemWithRandomEffects(ohItem);
+                    }
+                    CharacterBuild.itemSet.offHandItem = ohItem;
+                    CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
                     offHandItemIcon.BuildFromData(ohItem);
 
-                    if (characterBuild.itemSet.mainHandItem != null && characterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+                    if (CharacterBuild.itemSet.mainHandItem != null && CharacterBuild.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
                     {
-                        characterBuild.itemSet.mainHandItem = null;
+                        CharacterBuild.itemSet.mainHandItem = null;
                         CharacterModeller.DisableAndClearElementOnModel(customCharacterScreenUCM, customCharacterScreenUCM.activeMainHandWeapon);
                         mainHandItemIcon.BuildFromData(null);
                     }
                 }
 
             }
-            customCharacterScreenUCM.SetModeFromItemSet(characterBuild.itemSet);
+            customCharacterScreenUCM.SetModeFromItemSet(CharacterBuild.itemSet);
             RebuildItemPanelWeaponAbilityIcons();
 
             // On equip SFX
-            if (characterBuild.itemSet.offHandItem != null) AudioManager.Instance.PlaySound(characterBuild.itemSet.offHandItem.equipSFX);
+            if (CharacterBuild.itemSet.offHandItem != null)
+            {
+                AudioManager.Instance.PlaySound(CharacterBuild.itemSet.offHandItem.equipSFX);
+            }
         }
         public void OnNextRacialModelButtonClicked()
         {
-            HandleChangeRacialModel(GetNextRacialModel(characterBuild.race));
+            HandleChangeRacialModel(GetNextRacialModel(CharacterBuild.race));
         }
         public void OnPreviousRacialModelButtonClicked()
         {
-            HandleChangeRacialModel(GetPreviousRacialModel(characterBuild.race));
+            HandleChangeRacialModel(GetPreviousRacialModel(CharacterBuild.race));
         }
+
         #endregion
 
         // Custom Character Screen Logic : Choose Abilities Sub Screeb
         #region
+
         public void OnAbilitySectionEditButtonClicked()
-        {           
+        {
             BuildChooseAbilitiesPanel();
             TransformUtils.RebuildLayouts(chooseAbilityPanelLayouts);
         }
@@ -1228,40 +1431,47 @@ namespace WeAreGladiators.MainMenu
 
             // save ability changes
             List<AbilityData> newAbilities = new List<AbilityData>();
-            foreach(ChooseAbilityButton b in GetSelectedAbilities())
+            foreach (ChooseAbilityButton b in GetSelectedAbilities())
             {
                 newAbilities.Add(b.AbilityIcon.MyDataRef);
             }
-            characterBuild.abilityBook.ForgetAllAbilities();
-            characterBuild.abilityBook.HandleLearnNewAbilities(newAbilities);
+            CharacterBuild.abilityBook.ForgetAllAbilities();
+            CharacterBuild.abilityBook.HandleLearnNewAbilities(newAbilities);
 
             // show preset panel
             RebuildAndShowPresetPanel();
-        }       
+        }
         private void BuildChooseAbilitiesPanel()
         {
-            if (characterBuild.talentPairings.Count == 0) return;
+            if (CharacterBuild.talentPairings.Count == 0)
+            {
+                return;
+            }
 
             CloseAllCustomCharacterScreenPanels();
             ccsAbilityPanel.SetActive(true);
-            TalentSchool talentSchoolOne = characterBuild.talentPairings[0].talentSchool;
-            chooseAbilityButtonsHeaderTextOne.text = talentSchoolOne.ToString() + " Abilities";
+            TalentSchool talentSchoolOne = CharacterBuild.talentPairings[0].talentSchool;
+            chooseAbilityButtonsHeaderTextOne.text = talentSchoolOne + " Abilities";
             List<AbilityData> allTalentOneAbilities = AbilityController.Instance.GetAllAbilitiesOfTalent(talentSchoolOne);
 
             // Reset all first
-            for(int i = 0; i < chooseAbilityButtonsSectionOne.Length; i++)            
+            for (int i = 0; i < chooseAbilityButtonsSectionOne.Length; i++)
+            {
                 chooseAbilityButtonsSectionOne[i].ResetAndHide();
-            
+            }
+
             // Rebuild
-            for (int i = 0; i < allTalentOneAbilities.Count && i < chooseAbilityButtonsSectionOne.Length; i++)            
+            for (int i = 0; i < allTalentOneAbilities.Count && i < chooseAbilityButtonsSectionOne.Length; i++)
+            {
                 chooseAbilityButtonsSectionOne[i].BuildAndShow(allTalentOneAbilities[i]);
+            }
 
             // Select buttons based on known abilities of character
-            foreach(AbilityData a in characterBuild.abilityBook.knownAbilities)
+            foreach (AbilityData a in CharacterBuild.abilityBook.knownAbilities)
             {
-                foreach(ChooseAbilityButton button in chooseAbilityButtonsSectionOne)
+                foreach (ChooseAbilityButton button in chooseAbilityButtonsSectionOne)
                 {
-                    if(button.AbilityIcon.MyDataRef != null && a.abilityName == button.AbilityIcon.MyDataRef.abilityName)
+                    if (button.AbilityIcon.MyDataRef != null && a.abilityName == button.AbilityIcon.MyDataRef.abilityName)
                     {
                         button.HandleChangeSelectionState(true);
                         break;
@@ -1270,23 +1480,27 @@ namespace WeAreGladiators.MainMenu
             }
 
             // Build for 2nd talent (if character has a second talent
-            if(characterBuild.talentPairings.Count > 1)
+            if (CharacterBuild.talentPairings.Count > 1)
             {
-                TalentSchool talentSchoolTwo = characterBuild.talentPairings[1].talentSchool;
+                TalentSchool talentSchoolTwo = CharacterBuild.talentPairings[1].talentSchool;
                 chooseAbilityButtonsHeaderTextTwo.gameObject.SetActive(true);
-                chooseAbilityButtonsHeaderTextTwo.text = talentSchoolTwo.ToString() + " Abilities";
+                chooseAbilityButtonsHeaderTextTwo.text = talentSchoolTwo + " Abilities";
                 List<AbilityData> allTalentTwoAbilities = AbilityController.Instance.GetAllAbilitiesOfTalent(talentSchoolTwo);
 
                 // Reset all first
                 for (int i = 0; i < chooseAbilityButtonsSectionTwo.Length; i++)
+                {
                     chooseAbilityButtonsSectionTwo[i].ResetAndHide();
+                }
 
                 // Rebuild
                 for (int i = 0; i < allTalentTwoAbilities.Count && i < chooseAbilityButtonsSectionTwo.Length; i++)
+                {
                     chooseAbilityButtonsSectionTwo[i].BuildAndShow(allTalentTwoAbilities[i]);
+                }
 
                 // Select buttons based on known abilities of character
-                foreach (AbilityData a in characterBuild.abilityBook.knownAbilities)
+                foreach (AbilityData a in CharacterBuild.abilityBook.knownAbilities)
                 {
                     foreach (ChooseAbilityButton button in chooseAbilityButtonsSectionTwo)
                     {
@@ -1303,7 +1517,9 @@ namespace WeAreGladiators.MainMenu
                 // Reset all 
                 chooseAbilityButtonsHeaderTextTwo.gameObject.SetActive(false);
                 for (int i = 0; i < chooseAbilityButtonsSectionTwo.Length; i++)
+                {
                     chooseAbilityButtonsSectionTwo[i].ResetAndHide();
+                }
             }
 
             UpdateChosenAbilitiesText();
@@ -1316,17 +1532,19 @@ namespace WeAreGladiators.MainMenu
             allButtons.AddRange(chooseAbilityButtonsSectionOne);
             allButtons.AddRange(chooseAbilityButtonsSectionTwo);
 
-            foreach(ChooseAbilityButton b in allButtons)
+            foreach (ChooseAbilityButton b in allButtons)
             {
                 if (b.Selected)
+                {
                     ret.Add(b);
+                }
             }
 
             return ret;
         }
         public void UpdateChosenAbilitiesText()
         {
-            totalChosenAbilitiesText.text = GetSelectedAbilities().Count.ToString() + "/3";
+            totalChosenAbilitiesText.text = GetSelectedAbilities().Count + "/3";
         }
         private void HandleUnlearnAbilitiesOnTalentsChanged()
         {
@@ -1334,36 +1552,48 @@ namespace WeAreGladiators.MainMenu
             List<TalentSchool> newTalents = new List<TalentSchool>();
 
             // Determine current talents
-            foreach (TalentPairing tp in characterBuild.talentPairings)
+            foreach (TalentPairing tp in CharacterBuild.talentPairings)
+            {
                 newTalents.Add(tp.talentSchool);
+            }
 
             // Find invalid abilities
-            foreach(AbilityData a in characterBuild.abilityBook.knownAbilities)
+            foreach (AbilityData a in CharacterBuild.abilityBook.knownAbilities)
             {
-                if(newTalents.Contains(a.talentRequirementData.talentSchool) == false)                
-                    invalidAbilities.Add(a);                
+                if (newTalents.Contains(a.talentRequirementData.talentSchool) == false)
+                {
+                    invalidAbilities.Add(a);
+                }
             }
 
             // Remove invalid abilities
-            foreach(AbilityData a in invalidAbilities)            
-                characterBuild.abilityBook.HandleUnlearnAbility(a.abilityName);            
+            foreach (AbilityData a in invalidAbilities)
+            {
+                CharacterBuild.abilityBook.HandleUnlearnAbility(a.abilityName);
+            }
         }
+
         #endregion
 
         // Custom Character Screen Logic : Choose Talents Sub Screeb
         #region
+
         public void BuildChooseTalentsPanel()
         {
             // Reset all first
             for (int i = 0; i < chooseTalentButtons.Length; i++)
+            {
                 chooseTalentButtons[i].ResetAndHide();
+            }
 
             // Rebuild
             for (int i = 0; i < chooseTalentButtons.Length; i++)
+            {
                 chooseTalentButtons[i].BuildAndShow();
+            }
 
             // Select buttons based on known abilities of character
-            foreach (TalentPairing tp in characterBuild.talentPairings)
+            foreach (TalentPairing tp in CharacterBuild.talentPairings)
             {
                 foreach (ChooseTalentButton button in chooseTalentButtons)
                 {
@@ -1378,7 +1608,7 @@ namespace WeAreGladiators.MainMenu
         }
         public void OnTalentSectionEditButtonClicked()
         {
-            CloseAllCustomCharacterScreenPanels();         
+            CloseAllCustomCharacterScreenPanels();
             ccsTalentPanel.SetActive(true);
             BuildChooseTalentsPanel();
         }
@@ -1387,9 +1617,11 @@ namespace WeAreGladiators.MainMenu
             CloseAllCustomCharacterScreenPanels();
 
             // Apply and save talent changes
-            characterBuild.talentPairings.Clear();
-            foreach (ChooseTalentButton b in GetSelectedTalents())            
-                characterBuild.talentPairings.Add(new TalentPairing(b.TalentPairing.talentSchool, 1));
+            CharacterBuild.talentPairings.Clear();
+            foreach (ChooseTalentButton b in GetSelectedTalents())
+            {
+                CharacterBuild.talentPairings.Add(new TalentPairing(b.TalentPairing.talentSchool, 1));
+            }
 
             // Unlearn abilities from old talents
             HandleUnlearnAbilitiesOnTalentsChanged();
@@ -1403,25 +1635,29 @@ namespace WeAreGladiators.MainMenu
             foreach (ChooseTalentButton b in chooseTalentButtons)
             {
                 if (b.Selected)
+                {
                     ret.Add(b);
+                }
             }
 
             return ret;
         }
         public void UpdateChosenTalentsText()
         {
-            totalChosenTalentsText.text = GetSelectedTalents().Count.ToString() + "/2";
+            totalChosenTalentsText.text = GetSelectedTalents().Count + "/2";
         }
+
         #endregion
 
         // Custom Character Screen Logic : Update Model + Race
         #region
+
         private void HandleChangeRace(CharacterRace race)
         {
             // Get + cache race data
-            var racialData = CharacterDataController.Instance.GetRaceData(race);
+            RaceDataSO racialData = CharacterDataController.Instance.GetRaceData(race);
             currentCustomCharacterRace = racialData;
-            characterBuild.race = racialData.racialTag;
+            CharacterBuild.race = racialData.racialTag;
 
             // Build race icon image
             originPanelRacialIcon.BuildFromRacialData(racialData);
@@ -1430,16 +1666,16 @@ namespace WeAreGladiators.MainMenu
             originPanelRacialNameText.text = racialData.racialTag.ToString();
 
             // Rebuild UCM as default model of race
-            HandleChangeRacialModel(GetRacialModelBasket(characterBuild.race).templates[0]);
+            HandleChangeRacialModel(GetRacialModelBasket(CharacterBuild.race).templates[0]);
         }
         private void HandleChangeRacialModel(CharacterModelTemplateSO newModel)
         {
             currentModelTemplate = newModel;
-            characterBuild.modelParts = newModel.bodyParts;
+            CharacterBuild.modelParts = newModel.bodyParts;
             CharacterModeller.BuildModelFromStringReferences(customCharacterScreenUCM, newModel.bodyParts);
-            CharacterModeller.ApplyItemSetToCharacterModelView(characterBuild.itemSet, customCharacterScreenUCM);
-            int index = Array.IndexOf(GetRacialModelBasket(characterBuild.race).templates, currentModelTemplate);
-            currentBodyModelText.text = "Body " + (index + 1).ToString();
+            CharacterModeller.ApplyItemSetToCharacterModelView(CharacterBuild.itemSet, customCharacterScreenUCM);
+            int index = Array.IndexOf(GetRacialModelBasket(CharacterBuild.race).templates, currentModelTemplate);
+            currentBodyModelText.text = "Body " + (index + 1);
         }
         public void OnChooseRaceNextButtonClicked()
         {
@@ -1449,10 +1685,14 @@ namespace WeAreGladiators.MainMenu
             int currentIndex = Array.IndexOf(playableRaces, currentCustomCharacterRace.racialTag);
 
             if (currentIndex == playableRaces.Length - 1)
+            {
                 nextValidRace = playableRaces[0];
+            }
 
             else
+            {
                 nextValidRace = playableRaces[currentIndex + 1];
+            }
 
             HandleChangeRace(nextValidRace);
 
@@ -1465,10 +1705,14 @@ namespace WeAreGladiators.MainMenu
             int currentIndex = Array.IndexOf(playableRaces, currentCustomCharacterRace.racialTag);
 
             if (currentIndex == 0)
+            {
                 nextValidRace = playableRaces[playableRaces.Length - 1];
+            }
 
             else
+            {
                 nextValidRace = playableRaces[currentIndex - 1];
+            }
 
             HandleChangeRace(nextValidRace);
         }
@@ -1476,9 +1720,9 @@ namespace WeAreGladiators.MainMenu
         {
             CharacterModelTemplateBasket ret = null;
 
-            foreach(CharacterModelTemplateBasket basket in modelTemplateBaskets)
+            foreach (CharacterModelTemplateBasket basket in modelTemplateBaskets)
             {
-                if(basket.race == race)
+                if (basket.race == race)
                 {
                     ret = basket;
                     break;
@@ -1494,12 +1738,17 @@ namespace WeAreGladiators.MainMenu
 
             foreach (CharacterModelTemplateBasket b in modelTemplateBaskets)
             {
-                if(b.race == race)
+                if (b.race == race)
                 {
                     int index = Array.IndexOf(b.templates, currentModelTemplate);
                     if (index == b.templates.Length - 1)
+                    {
                         ret = b.templates[0];
-                    else ret = b.templates[index + 1];
+                    }
+                    else
+                    {
+                        ret = b.templates[index + 1];
+                    }
 
                     break;
                 }
@@ -1517,8 +1766,13 @@ namespace WeAreGladiators.MainMenu
                 {
                     int index = Array.IndexOf(b.templates, currentModelTemplate);
                     if (index == 0)
+                    {
                         ret = b.templates[b.templates.Length - 1];
-                    else ret = b.templates[index - 1];
+                    }
+                    else
+                    {
+                        ret = b.templates[index - 1];
+                    }
 
                     break;
                 }
@@ -1528,9 +1782,10 @@ namespace WeAreGladiators.MainMenu
         }
 
         #endregion
-      
+
         // Front Screen Logic
         #region
+
         public void RenderMenuButtons()
         {
             AutoSetAbandonRunButtonViewState();
@@ -1540,7 +1795,7 @@ namespace WeAreGladiators.MainMenu
         public void ShowFrontScreen()
         {
             frontScreenParent.SetActive(true);
-            foreach(CrowdRowAnimator cra in frontScreenCrowdRows)
+            foreach (CrowdRowAnimator cra in frontScreenCrowdRows)
             {
                 cra.StopAnimation();
                 cra.PlayAnimation();
@@ -1549,8 +1804,10 @@ namespace WeAreGladiators.MainMenu
         public void HideFrontScreen()
         {
             frontScreenParent.SetActive(false);
-            foreach (CrowdRowAnimator cra in frontScreenCrowdRows)            
-                cra.StopAnimation();            
+            foreach (CrowdRowAnimator cra in frontScreenCrowdRows)
+            {
+                cra.StopAnimation();
+            }
         }
         private bool ShouldShowContinueButton()
         {
@@ -1625,10 +1882,12 @@ namespace WeAreGladiators.MainMenu
         {
             abandonRunPopupParent.SetActive(false);
         }
+
         #endregion
 
         // Settings Screen Logic
         #region
+
         public void ShowSettingsScreen()
         {
             settingsScreenVisualParent.SetActive(true);
@@ -1701,10 +1960,12 @@ namespace WeAreGladiators.MainMenu
             resolutionDropdown.value = currentResolutionIndex;
             resolutionDropdown.RefreshShownValue();
         }
+
         #endregion
 
         // In Game Menu Logic
         #region
+
         public void ShowInGameMenuView()
         {
             inGameMenuScreenCg.alpha = 0;
@@ -1716,10 +1977,12 @@ namespace WeAreGladiators.MainMenu
             inGameMenuScreenParent.SetActive(false);
             inGameMenuScreenCg.alpha = 0;
         }
+
         #endregion
 
         // Animations + Sequences
         #region
+
         public void DoGameStartMainMenuRevealSequence()
         {
             StartCoroutine(DoGameStartMainMenuRevealSequenceCoroutine());
@@ -1727,7 +1990,7 @@ namespace WeAreGladiators.MainMenu
         private IEnumerator DoGameStartMainMenuRevealSequenceCoroutine()
         {
             mainMenuButtonsParent.SetActive(false);
-            ShowFrontScreen();            
+            ShowFrontScreen();
 
             frontScreenGuiCg.alpha = 0;
             frontScreenBgParent.transform.DOScale(1.25f, 0f);
@@ -1745,16 +2008,20 @@ namespace WeAreGladiators.MainMenu
                 {
                     mainMenuButtonsParent.SetActive(true);
                     frontScreenGuiCg.DOFade(1f, 1f).SetEase(Ease.OutCubic);
-                });               
+                });
             };
 
             // Alpha warning
-            if (!AlphaWarningController.Instance.HasShownWarningThisSession && GlobalSettings.Instance.ShowAlphaWarning) 
+            if (!AlphaWarningController.Instance.HasShownWarningThisSession && GlobalSettings.Instance.ShowAlphaWarning)
+            {
                 AlphaWarningController.Instance.ShowWarningPage(showMenu);
-            else showMenu.Invoke();
+            }
+            else
+            {
+                showMenu.Invoke();
+            }
         }
+
         #endregion
-
-
     }
 }

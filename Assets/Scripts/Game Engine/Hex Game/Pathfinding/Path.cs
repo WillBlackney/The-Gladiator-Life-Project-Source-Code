@@ -1,71 +1,53 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using System.Linq;
-using WeAreGladiators.HexTiles;
+using UnityEngine;
 using WeAreGladiators.Characters;
+using WeAreGladiators.HexTiles;
 
 namespace WeAreGladiators.Pathfinding
 {
     public class Path
     {
 
-        // Properties
-        #region
-        LevelNode start;
-        List<LevelNode> hexsOnPath = new List<LevelNode>();
-        HexCharacterModel character;
-
-        #endregion
-
-        // Getters + Accessors
-        #region
-        public LevelNode Start
+        public Path(LevelNode start, List<LevelNode> hexsOnPath, HexCharacterModel character)
         {
-            get { return start; }
-        }
-        public LevelNode Destination
-        {
-            get { return HexsOnPath.LastOrDefault(); }
-        }
-        public List<LevelNode> HexsOnPath
-        {
-            get { return hexsOnPath; }
-        }
-        public HexCharacterModel Character
-        {
-            get { return character; }
-        }
-        public int Length
-        {
-            get { return hexsOnPath.Count; }
-        }
-        #endregion
-
-
-        public Path(LevelNode start, List<LevelNode> hexsOnPath, HexCharacterModel character )
-        {
-            this.start = start;
-            this.hexsOnPath = hexsOnPath;
-            this.character = character;
+            Start = start;
+            HexsOnPath = hexsOnPath;
+            Character = character;
         }
 
         public void LogPath()
         {
             Debug.Log(":::: PATH DATA START ::::");
-            Debug.Log("Path Length: " + hexsOnPath.Count.ToString());
-            Debug.Log("Start Grid Pos: " + start.GridPosition.x.ToString() + ", " + start.GridPosition.y.ToString());
+            Debug.Log("Path Length: " + HexsOnPath.Count);
+            Debug.Log("Start Grid Pos: " + Start.GridPosition.x + ", " + Start.GridPosition.y);
 
             int pathIndex = 1;
-            foreach (LevelNode h in hexsOnPath)
+            foreach (LevelNode h in HexsOnPath)
             {
-                Debug.Log("Hex " + pathIndex.ToString() + " Grid Pos: " + h.GridPosition.x.ToString() + ", " + h.GridPosition.y.ToString());
+                Debug.Log("Hex " + pathIndex + " Grid Pos: " + h.GridPosition.x + ", " + h.GridPosition.y);
                 pathIndex++;
             }
 
-            Debug.Log("Destination = " + Destination.GridPosition.x.ToString() + ", " + Destination.GridPosition.y.ToString());
+            Debug.Log("Destination = " + Destination.GridPosition.x + ", " + Destination.GridPosition.y);
             //Debug.Log("Path validity: " + IsValid.ToString());
             Debug.Log(":::: PATH DATA END ::::");
         }
+
+        // Properties
+        #region
+
+        #endregion
+
+        // Getters + Accessors
+        #region
+
+        public LevelNode Start { get; }
+        public LevelNode Destination => HexsOnPath.LastOrDefault();
+        public List<LevelNode> HexsOnPath { get; } = new List<LevelNode>();
+        public HexCharacterModel Character { get; }
+        public int Length => HexsOnPath.Count;
+
+        #endregion
     }
 }

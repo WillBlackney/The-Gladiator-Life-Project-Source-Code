@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace WeAreGladiators.GameIntroEvent
@@ -8,12 +6,12 @@ namespace WeAreGladiators.GameIntroEvent
     public class GameIntroPageData : ScriptableObject
     {
         [SerializeField] private PageTag pageTag;
-        [SerializeField] string headerText;
-        [SerializeField] Sprite pageSprite;
+        [SerializeField] private string headerText;
+        [SerializeField] private Sprite pageSprite;
         [TextArea(0, 200)]
-        [SerializeField] string bodyText;
-        [SerializeField] GameIntroChoiceData[] choices;
-
+        [SerializeField]
+        private string bodyText;
+        [SerializeField] private GameIntroChoiceData[] choices;
 
         public PageTag PageTag => pageTag;
         public string HeaderText => headerText;
@@ -38,6 +36,6 @@ namespace WeAreGladiators.GameIntroEvent
         FourA = 10,
         FourB = 11,
         FourC = 12,
-        Final = 14,
+        Final = 14
     }
 }

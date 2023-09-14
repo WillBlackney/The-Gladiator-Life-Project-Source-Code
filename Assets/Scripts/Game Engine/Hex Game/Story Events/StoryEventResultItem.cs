@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace WeAreGladiators.StoryEvents
 {
     public class StoryEventResultItem
     {
-        public string message;
-        public ResultRowIcon iconType;
         public Sprite iconSprite;
+        public ResultRowIcon iconType;
+        public string message;
 
         public StoryEventResultItem(string message, ResultRowIcon iconType, Sprite iconSprite = null)
         {

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine;
 using WeAreGladiators.UI;
-using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.Boons
 {
@@ -47,7 +46,6 @@ namespace WeAreGladiators.Boons
         [ShowIf("ShowDayDurationFields")]
         public int maxDuration = 1;
 
-
         [Header("Keywords + Description")]
         [VerticalGroup("List Groups")]
         [LabelWidth(200)]
@@ -61,8 +59,6 @@ namespace WeAreGladiators.Boons
         {
             return durationType == BoonDurationType.DayTimer;
         }
-
-
     }
 
     public enum BoonTag
@@ -71,13 +67,13 @@ namespace WeAreGladiators.Boons
         ArmourySurplus = 1,
         UnemployedGladiators = 2,
         UnemployedInquisitors = 3,
-        WitchAccession = 4,
+        WitchAccession = 4
 
     }
 
     public enum BoonDurationType
     {
         Permanent = 0,
-        DayTimer = 1,
+        DayTimer = 1
     }
 }

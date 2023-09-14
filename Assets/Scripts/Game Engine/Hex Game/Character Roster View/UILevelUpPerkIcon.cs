@@ -1,10 +1,6 @@
-using WeAreGladiators.Perks;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using WeAreGladiators.Characters;
+using WeAreGladiators.Perks;
 
 namespace WeAreGladiators.UI
 {
@@ -32,9 +28,9 @@ namespace WeAreGladiators.UI
             {
                 alreadyChosenParent.SetActive(true);
             }
-            else if(character.perkPoints == 0 || 
-                character.currentLevel < myPerkData.tier ||
-                myPerkData.tier != character.PerkTree.nextAvailableTier)
+            else if (character.perkPoints == 0 ||
+                     character.currentLevel < myPerkData.tier ||
+                     myPerkData.tier != character.PerkTree.nextAvailableTier)
             {
                 unavailableParent.SetActive(true);
             }
@@ -42,7 +38,10 @@ namespace WeAreGladiators.UI
         public void OnClick()
         {
             Debug.Log("UILevelUpPerkIcon() click!");
-            if (alreadyKnown) return;
+            if (alreadyKnown)
+            {
+                return;
+            }
             CharacterRosterViewController.Instance.OnPerkTreeIconClicked(this);
         }
     }

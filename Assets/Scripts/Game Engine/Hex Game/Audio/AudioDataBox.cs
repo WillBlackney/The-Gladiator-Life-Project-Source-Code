@@ -1,6 +1,4 @@
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace WeAreGladiators.Audio
@@ -87,7 +85,6 @@ namespace WeAreGladiators.Audio
         [LabelWidth(100)]
         public bool loop;
 
-
         public bool ShowAudioClip()
         {
             return !randomizeClip;
@@ -102,7 +99,7 @@ namespace WeAreGladiators.Audio
         }
         public bool ShowRandomVolumeSettings()
         {
-            return randomizeVolume == true;
+            return randomizeVolume;
         }
         public bool ShowPitch()
         {
@@ -110,10 +107,7 @@ namespace WeAreGladiators.Audio
         }
         public bool ShowRandomPitchSettings()
         {
-            return randomizePitch == true;
+            return randomizePitch;
         }
-
-
-
     }
 }

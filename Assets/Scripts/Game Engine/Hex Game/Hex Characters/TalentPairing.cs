@@ -1,27 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 namespace WeAreGladiators.Characters
 {
-    [System.Serializable]
+    [Serializable]
     public class TalentPairing
     {
         public TalentSchool talentSchool;
-        [Range(0,2)]
+        [Range(0, 2)]
         public int level;
         private TalentDataSO data;
-        public TalentDataSO Data
-        {
-            get
-            {
-                if (data == null)
-                {
-                    data = CharacterDataController.Instance.GetTalentDataFromTalentEnum(talentSchool);
-                };
-                return data;
-            }
-        }
 
         public TalentPairing()
         {
@@ -30,6 +18,18 @@ namespace WeAreGladiators.Characters
         {
             this.level = level;
             this.talentSchool = talentSchool;
+        }
+        public TalentDataSO Data
+        {
+            get
+            {
+                if (data == null)
+                {
+                    data = CharacterDataController.Instance.GetTalentDataFromTalentEnum(talentSchool);
+                }
+                ;
+                return data;
+            }
         }
     }
 }

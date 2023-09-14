@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using WeAreGladiators.Items;
+using UnityEngine;
 using WeAreGladiators.Abilities;
+using WeAreGladiators.Items;
 using WeAreGladiators.Perks;
 
 namespace WeAreGladiators.Characters
@@ -57,10 +55,12 @@ namespace WeAreGladiators.Characters
 
         // GUI Colours for Odin
         #region
+
         private Color Blue() { return Color.cyan; }
         private Color Green() { return Color.green; }
         private Color Yellow() { return Color.yellow; }
         private Color Red() { return Color.red; }
+
         #endregion
     }
 }

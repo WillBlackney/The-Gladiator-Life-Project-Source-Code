@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using UnityEngine;
+using WeAreGladiators.UI;
 using WeAreGladiators.Utilities;
 using WeAreGladiators.VisualEvents;
-using WeAreGladiators.UI;
 
 namespace WeAreGladiators.Perks
 {
@@ -44,8 +43,7 @@ namespace WeAreGladiators.Perks
         public bool showStackCount;
         [VerticalGroup("Core Data/Properties")]
         [LabelWidth(200)]
-        public bool hiddenOnPassivePanel;      
-      
+        public bool hiddenOnPassivePanel;
 
         [Header("Resistance Interactions")]
         [VerticalGroup("Resistance Interactions")]
@@ -61,10 +59,9 @@ namespace WeAreGladiators.Perks
         public bool runeBlocksIncrease;
         [VerticalGroup("Resistance Interactions")]
         [LabelWidth(200)]
-        public bool runeBlocksDecrease;              
-       
-        [Space(10)]
+        public bool runeBlocksDecrease;
 
+        [Space(10)]
         [Header("Subtype Properties")]
         [VerticalGroup("Subtype Interactions")]
         [LabelWidth(200)]
@@ -73,7 +70,7 @@ namespace WeAreGladiators.Perks
         [VerticalGroup("Subtype Interactions")]
         [ShowIf("ShowPerkTreeTier")]
         [LabelWidth(200)]
-        [Range(1,5)]
+        [Range(1, 5)]
         public int perkTreeTier;
 
         [VerticalGroup("Subtype Properties")]
@@ -89,7 +86,7 @@ namespace WeAreGladiators.Perks
         [VerticalGroup("Subtype Interactions")]
         [LabelWidth(200)]
         public bool isRacial;
-     
+
         [VerticalGroup("Subtype Interactions")]
         [ShowIf("ShowRace")]
         [LabelWidth(200)]
@@ -103,8 +100,6 @@ namespace WeAreGladiators.Perks
         [ShowIf("ShowBackgroundPerkQuality")]
         [LabelWidth(200)]
         public PerkQuality backgroundPerkQuality;
-
-       
 
         [Header("Injury Properties")]
         [VerticalGroup("Injury Interactions")]
@@ -175,6 +170,5 @@ namespace WeAreGladiators.Perks
         {
             return isBackground;
         }
-
     }
 }

@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 using WeAreGladiators.Utilities;
-
-#if UNITY_EDITOR
+                                #if UNITY_EDITOR
 using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
 #endif
@@ -11,8 +10,18 @@ namespace WeAreGladiators.Libraries
 {
     public class SpriteLibrary : Singleton<SpriteLibrary>
     {
+
+        // Misc Images
+        #region
+
+        [Header("Misc Images")]
+        [PreviewField(75)]
+        public Sprite weaponAbilityIcon;
+
+        #endregion
         // Talent School Badges
         #region
+
         [Header("Talent School Badges")]
         [PreviewField(75)]
         [SerializeField]
@@ -47,11 +56,12 @@ namespace WeAreGladiators.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite metamorphBadge;
-        
+
         #endregion
 
         // Attribute Images Images
         #region
+
         [Header("Core Attribute Images")]
         [PreviewField(75)]
         [SerializeField]
@@ -74,10 +84,12 @@ namespace WeAreGladiators.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite fitness;
+
         #endregion
 
         // Ability Type Images
         #region
+
         [Header("Ability Type Images")]
         [PreviewField(75)]
         [SerializeField]
@@ -88,10 +100,12 @@ namespace WeAreGladiators.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite skill;
+
         #endregion
 
         // Weapon Images
         #region
+
         [Header("Weapon Images")]
         [PreviewField(75)]
         [SerializeField]
@@ -138,10 +152,12 @@ namespace WeAreGladiators.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite dualWieldingIcon;
+
         #endregion
 
         // Skill Book Images
         #region
+
         [Header("Skill Book Images")]
         [PreviewField(75)]
         [SerializeField]
@@ -173,10 +189,12 @@ namespace WeAreGladiators.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite metamorphBook;
-        #endregion             
+
+        #endregion
 
         // Stress State Images
         #region
+
         [Header("Stress State Images")]
         [PreviewField(75)]
         [SerializeField]
@@ -193,10 +211,12 @@ namespace WeAreGladiators.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite shattered;
+
         #endregion
 
         // Town Activity Images
         #region
+
         [Header("Town Activity Images")]
         [PreviewField(75)]
         [SerializeField]
@@ -207,34 +227,59 @@ namespace WeAreGladiators.Libraries
         [PreviewField(75)]
         [SerializeField]
         private Sprite therapy;
-        #endregion
 
-        // Misc Images
-        #region
-        [Header("Misc Images")]
-        [PreviewField(75)]
-        public Sprite weaponAbilityIcon;
         #endregion
 
         // Get Sprites Logic 
         #region
+
         public Sprite GetTownActivitySprite(TownActivity activity)
         {
-            if (activity == TownActivity.BedRest) return bedRest;
-            else if (activity == TownActivity.Surgery) return surgery;
-            else if (activity == TownActivity.Therapy) return therapy;
-            else return null;
+            if (activity == TownActivity.BedRest)
+            {
+                return bedRest;
+            }
+            if (activity == TownActivity.Surgery)
+            {
+                return surgery;
+            }
+            if (activity == TownActivity.Therapy)
+            {
+                return therapy;
+            }
+            return null;
         }
         public Sprite GetAttributeSprite(CoreAttribute attribute)
         {
-            if (attribute == CoreAttribute.Might) return might;
-            else if (attribute == CoreAttribute.Accuracy) return accuracy;
-            else if (attribute == CoreAttribute.Constitution) return constitution;
-            else if (attribute == CoreAttribute.Dodge) return dodge;
-            else if (attribute == CoreAttribute.Resolve) return resolve;
-            else if (attribute == CoreAttribute.Wits) return wits;
-            else if (attribute == CoreAttribute.Fitness) return fitness;
-            else return null;
+            if (attribute == CoreAttribute.Might)
+            {
+                return might;
+            }
+            if (attribute == CoreAttribute.Accuracy)
+            {
+                return accuracy;
+            }
+            if (attribute == CoreAttribute.Constitution)
+            {
+                return constitution;
+            }
+            if (attribute == CoreAttribute.Dodge)
+            {
+                return dodge;
+            }
+            if (attribute == CoreAttribute.Resolve)
+            {
+                return resolve;
+            }
+            if (attribute == CoreAttribute.Wits)
+            {
+                return wits;
+            }
+            if (attribute == CoreAttribute.Fitness)
+            {
+                return fitness;
+            }
+            return null;
         }
         public Sprite GetStressStateSprite(StressState state)
         {
@@ -261,7 +306,6 @@ namespace WeAreGladiators.Libraries
                 spriteReturned = shattered;
             }
 
-
             return spriteReturned;
         }
         public Sprite GetTalentSchoolSprite(TalentSchool ts)
@@ -280,7 +324,7 @@ namespace WeAreGladiators.Libraries
             {
                 spriteReturned = rangerBadge;
             }
-            
+
             else if (ts == TalentSchool.Divinity)
             {
                 spriteReturned = divinityBadge;
@@ -430,7 +474,7 @@ namespace WeAreGladiators.Libraries
             }
             else if (ts == TalentSchool.Naturalism)
             {
-                spriteReturned = naturalismBook ;
+                spriteReturned = naturalismBook;
             }
             else if (ts == TalentSchool.Pyromania)
             {
@@ -447,8 +491,8 @@ namespace WeAreGladiators.Libraries
 
             return spriteReturned;
         }
-        #endregion
 
+        #endregion
     }
 
 #if UNITY_EDITOR
@@ -471,14 +515,13 @@ namespace WeAreGladiators.Libraries
 
         protected override void CombineValuesWith(PropertyGroupAttribute other)
         {
-            var otherAttr = (ColorFoldoutGroupAttribute)other;
+            ColorFoldoutGroupAttribute otherAttr = (ColorFoldoutGroupAttribute) other;
 
             R = Mathf.Max(otherAttr.R, R);
             G = Mathf.Max(otherAttr.G, G);
             B = Mathf.Max(otherAttr.B, B);
             A = Mathf.Max(otherAttr.A, A);
         }
-
     }
 
     public class ColorFoldoutGroupAttributeDrawer : OdinGroupDrawer<ColorFoldoutGroupAttribute>
@@ -487,7 +530,7 @@ namespace WeAreGladiators.Libraries
 
         protected override void Initialize()
         {
-            this.isExpanded = this.GetPersistentValue<bool>("ColorFoldoutGroupAttributeDrawer.isExpaned",
+            isExpanded = this.GetPersistentValue("ColorFoldoutGroupAttributeDrawer.isExpaned",
                 GeneralDrawerConfig.Instance.ExpandFoldoutByDefault);
         }
 
@@ -500,7 +543,6 @@ namespace WeAreGladiators.Libraries
 
             isExpanded.Value = SirenixEditorGUI.Foldout(isExpanded.Value, label);
             SirenixEditorGUI.EndBoxHeader();
-
 
             if (SirenixEditorGUI.BeginFadeGroup(this, isExpanded.Value))
             {

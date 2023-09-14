@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
-using Sirenix.OdinInspector;
-using WeAreGladiators.HexTiles;
 using WeAreGladiators.Characters;
+using WeAreGladiators.HexTiles;
 using WeAreGladiators.StoryEvents;
 
 namespace WeAreGladiators.Utilities
@@ -12,6 +10,7 @@ namespace WeAreGladiators.Utilities
     {
         // Properties
         #region
+
         [Header("General Settings")]
         [LabelWidth(200)]
         [SerializeField] private GameMode gameMode;
@@ -24,15 +23,12 @@ namespace WeAreGladiators.Utilities
         [Title("Character Settings")]
         [SerializeField] private int startingXpBonus;
         [Space(10)]
-
         [Title("Combat Settings")]
         [SerializeField] private int baseHitChance;
         [Space(10)]
-
         [Title("Resource Settings")]
         [SerializeField] private int baseStartingGold;
         [Space(10)]
-
         [Title("Starting Timeline Settings")]
         [Range(1, 5)]
         [ShowIf("ShowStartingTimeSettings")]
@@ -68,78 +64,34 @@ namespace WeAreGladiators.Utilities
         [ShowIf("ShowSandboxEnemyEncounter")]
         [SerializeField] private EnemyEncounterSO[] sandboxEnemyEncounters;
 
-
         #endregion
 
         // Getters + Accessors
         #region
-        public GameMode GameMode
-        {
-            get { return gameMode; }
-        }
+
+        public GameMode GameMode => gameMode;
         public bool PreventAudioProfiles => preventAudioProfiles;
         public bool IncludeGameIntroEvent => includeGameIntroEvent;
-        public bool ShowAlphaWarning
-        {
-            get { return showAlphaWarning && GameMode == GameMode.Standard; }
-        }
-        public int StartingDay
-        {
-            get { return startingDay; }
-        }
-        public int StartingXpBonus
-        {
-            get { return startingXpBonus; }
-        }
-        public StoryEventDataSO SandboxStoryEvent
-        {
-            get { return sandboxStoryEvent; }
-        }
-        public int StartingChapter
-        {
-            get { return startingChapter; }
-        }
-        public CombatMapSeedDataSO SandboxCombatMapSeed
-        {
-            get { return sandboxCombatMapSeed; }
-        }
-        public EnemyEncounterSO[] SandboxEnemyEncounters
-        {
-            get { return sandboxEnemyEncounters; }
-        }
-        public EnemyEncounterSO PlayerAiCharacters
-        {
-            get { return playerAiCharacters; }
-        }
-        public PlayerCharacterSpawnSetting PlayerCharacterSpawnSetting
-        {
-            get { return playerCharacterSpawnSetting; }
-        }
-        public bool RandomizePlayerCharacters
-        {
-            get { return randomizePlayerCharacters; }
-        }
-        public int TotalRandomCharacters
-        {
-            get { return totalRandomCharacters; }
-        }
-        public int BaseStartingGold
-        {
-            get { return baseStartingGold; }
-        }
-        public PlayerGroup[] StartingPlayerCharacters
-        {
-            get { return startingPlayerCharacters; }
-        }
-        public int BaseHitChance
-        {
-            get { return baseHitChance; }
-        }
+        public bool ShowAlphaWarning => showAlphaWarning && GameMode == GameMode.Standard;
+        public int StartingDay => startingDay;
+        public int StartingXpBonus => startingXpBonus;
+        public StoryEventDataSO SandboxStoryEvent => sandboxStoryEvent;
+        public int StartingChapter => startingChapter;
+        public CombatMapSeedDataSO SandboxCombatMapSeed => sandboxCombatMapSeed;
+        public EnemyEncounterSO[] SandboxEnemyEncounters => sandboxEnemyEncounters;
+        public EnemyEncounterSO PlayerAiCharacters => playerAiCharacters;
+        public PlayerCharacterSpawnSetting PlayerCharacterSpawnSetting => playerCharacterSpawnSetting;
+        public bool RandomizePlayerCharacters => randomizePlayerCharacters;
+        public int TotalRandomCharacters => totalRandomCharacters;
+        public int BaseStartingGold => baseStartingGold;
+        public PlayerGroup[] StartingPlayerCharacters => startingPlayerCharacters;
+        public int BaseHitChance => baseHitChance;
 
         #endregion
 
         // Logic
         #region
+
         protected override void Awake()
         {
             base.Awake();
@@ -148,8 +100,13 @@ namespace WeAreGladiators.Utilities
         private void SetLogging()
         {
             if (enableDebugLogs && Application.isEditor)
+            {
                 Debug.unityLogger.logEnabled = true;
-            else Debug.unityLogger.logEnabled = false;
+            }
+            else
+            {
+                Debug.unityLogger.logEnabled = false;
+            }
         }
         public void ApplyStartingXPBonus()
         {
@@ -163,10 +120,12 @@ namespace WeAreGladiators.Utilities
             gameMode = GameMode.IntegrationTesting;
             Debug.unityLogger.logEnabled = false;
         }
+
         #endregion
 
         // Odin Showifs
-        #region         
+        #region
+
         public bool ShowSandBoxStoryEvent()
         {
             return gameMode == GameMode.StoryEventSandbox;
@@ -178,7 +137,7 @@ namespace WeAreGladiators.Utilities
         public bool ShowSandBoxLevelSeed()
         {
             return gameMode == GameMode.CombatSandbox;
-        }       
+        }
         public bool ShowPlayerCharacterSpawnSetting()
         {
             return gameMode != GameMode.Standard;
@@ -186,10 +145,10 @@ namespace WeAreGladiators.Utilities
         public bool ShowStartingPlayerCharacters()
         {
             return gameMode != GameMode.Standard && playerCharacterSpawnSetting == PlayerCharacterSpawnSetting.Normal;
-        }       
+        }
         public bool ShowPlayerAiCharacters()
         {
-            return gameMode != GameMode.Standard && playerCharacterSpawnSetting == PlayerCharacterSpawnSetting.EnemyVsEnemy == true;
+            return gameMode != GameMode.Standard && playerCharacterSpawnSetting == PlayerCharacterSpawnSetting.EnemyVsEnemy;
         }
         public bool ShowTotalRandomCharacters()
         {
@@ -203,8 +162,8 @@ namespace WeAreGladiators.Utilities
         {
             return gameMode != GameMode.Standard;
         }
-        #endregion
 
+        #endregion
     }
 
     public enum GameMode
@@ -214,11 +173,11 @@ namespace WeAreGladiators.Utilities
         TownSandbox = 5,
         PostCombatReward = 2,
         StoryEventSandbox = 4,
-        IntegrationTesting = 6,
+        IntegrationTesting = 6
     }
     public enum PlayerCharacterSpawnSetting
     {
         Normal = 0,
-        EnemyVsEnemy = 1,
+        EnemyVsEnemy = 1
     }
 }

@@ -1,23 +1,46 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Items;
-using WeAreGladiators.Abilities;
-using WeAreGladiators.Perks;
-using WeAreGladiators.Utilities;
-using WeAreGladiators.Persistency;
-using WeAreGladiators.Player;
 using System.Linq;
+using UnityEngine;
+using WeAreGladiators.Abilities;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Boons;
-using System.Globalization;
-using Sirenix.Utilities;
-using System.ComponentModel;
+using WeAreGladiators.Items;
+using WeAreGladiators.Perks;
+using WeAreGladiators.Persistency;
+using WeAreGladiators.Player;
 using WeAreGladiators.UCM;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.Characters
 {
     public class CharacterDataController : Singleton<CharacterDataController>
     {
+
+        // Racial Data
+        #region
+
+        public RaceDataSO GetRaceData(CharacterRace race)
+        {
+            RaceDataSO ret = null;
+
+            foreach (RaceDataSO r in allRacialData)
+            {
+                if (r.racialTag == race)
+                {
+                    ret = r;
+                    break;
+                }
+            }
+
+            if (ret == null)
+            {
+                Debug.LogWarning("GetRaceData() could not racial data for " + race + ", returning null...");
+            }
+
+            return ret;
+        }
+
+        #endregion
         // Properties + Components
         #region
 
@@ -31,20 +54,20 @@ namespace WeAreGladiators.Characters
         [SerializeField] private CharacterModel[] allCharacterModels;
 
         [Header("Recruit Generation")]
-        [SerializeField] private List<CharacterModelTemplateSO> allModelTemplateSOs;  
+        [SerializeField] private List<CharacterModelTemplateSO> allModelTemplateSOs;
 
         [Header("Character Name Buckets")]
-        [SerializeField] string[] humanNames;
-        [SerializeField] string[] elfNames;
-        [SerializeField] string[] orcNames;
-        [SerializeField] string[] satyrNames;
-        [SerializeField] string[] goblinNames;
-        [SerializeField] string[] entNames;
-        [SerializeField] string[] demonNames;
-        [SerializeField] string[] gnollNames;
-        [SerializeField] string[] undeadNames;
+        [SerializeField]
+        private string[] humanNames;
+        [SerializeField] private string[] elfNames;
+        [SerializeField] private string[] orcNames;
+        [SerializeField] private string[] satyrNames;
+        [SerializeField] private string[] goblinNames;
+        [SerializeField] private string[] entNames;
+        [SerializeField] private string[] demonNames;
+        [SerializeField] private string[] gnollNames;
+        [SerializeField] private string[] undeadNames;
         [Space(20)]
-
         [Header("Recruit Base Attribute Ranges")]
         [SerializeField] private int mightLower = 5;
         [SerializeField] private int mightUpper = 10;
@@ -55,7 +78,7 @@ namespace WeAreGladiators.Characters
         [SerializeField] private int accuracyLower = 55;
         [SerializeField] private int accuracyUpper = 65;
         [Space(10)]
-        [SerializeField] private int dodgeLower= 5;
+        [SerializeField] private int dodgeLower = 5;
         [SerializeField] private int dodgeUpper = 10;
         [Space(10)]
         [SerializeField] private int fitnessLower = 95;
@@ -82,67 +105,36 @@ namespace WeAreGladiators.Characters
         public int WitsLower => witsLower;
         public int WitsUpper => witsUpper;
 
-
         // Non-Inspector 
-        private HexCharacterData[] allCustomCharacterTemplates;
-        private BackgroundData[] allCharacterBackgrounds;
-        private List<HexCharacterData> allPlayerCharacters = new List<HexCharacterData>();
-        private List<HexCharacterData> characterDeck = new List<HexCharacterData>();
-        private List<CharacterRace> validCharacterRaces = new List<CharacterRace>
-        { 
-            CharacterRace.Elf, 
-            CharacterRace.Gnoll, 
-            CharacterRace.Goblin,
-            CharacterRace.Human,
-            CharacterRace.Orc, 
-            CharacterRace.Satyr, 
-            CharacterRace.Undead
-        };
-       
 
         #endregion
 
         // Getters + Accessors
         #region
-        public List<CharacterRace> PlayableRaces
+
+        public List<CharacterRace> PlayableRaces { get; } = new List<CharacterRace>
         {
-            get { return validCharacterRaces; }
-        }
-        public CharacterModel[] AllCharacterModels
-        {
-            get { return allCharacterModels; }
-        }
-        public TalentDataSO[] AllTalentData
-        {
-            get { return allTalentData; }
-        }
-        public BackgroundData[] AllCharacterBackgrounds
-        {
-            get { return allCharacterBackgrounds; }
-            private set { allCharacterBackgrounds = value; }
-        }
-       
-        public HexCharacterData[] AllCustomCharacterTemplates
-        {
-            get { return allCustomCharacterTemplates; }
-            private set { allCustomCharacterTemplates = value; }
-        }
-        public List<HexCharacterData> AllPlayerCharacters
-        {
-            get { return allPlayerCharacters; }
-            private set { allPlayerCharacters = value; }
-        }
-        public List<HexCharacterData> CharacterDeck
-        {
-            get { return characterDeck; }
-            private set { characterDeck = value; }
-        }
+            CharacterRace.Elf,
+            CharacterRace.Gnoll,
+            CharacterRace.Goblin,
+            CharacterRace.Human,
+            CharacterRace.Orc,
+            CharacterRace.Satyr,
+            CharacterRace.Undead
+        };
+        public CharacterModel[] AllCharacterModels => allCharacterModels;
+        public TalentDataSO[] AllTalentData => allTalentData;
+        public BackgroundData[] AllCharacterBackgrounds { get; private set; }
+
+        public HexCharacterData[] AllCustomCharacterTemplates { get; private set; }
+        public List<HexCharacterData> AllPlayerCharacters { get; } = new List<HexCharacterData>();
+        public List<HexCharacterData> CharacterDeck { get; private set; } = new List<HexCharacterData>();
         public EnemyTemplateSO FindEnemyTemplateByName(string name)
         {
             EnemyTemplateSO ret = null;
-            foreach(EnemyTemplateSO e in allEnemyTemplateSOs)
+            foreach (EnemyTemplateSO e in allEnemyTemplateSOs)
             {
-                if(e.myName == name)
+                if (e.myName == name)
                 {
                     ret = e;
                     break;
@@ -150,36 +142,17 @@ namespace WeAreGladiators.Characters
             }
             return ret;
         }
-        #endregion
 
-        // Racial Data
-        #region
-        public RaceDataSO GetRaceData(CharacterRace race)
-        {
-            RaceDataSO ret = null;
-
-            foreach(RaceDataSO r in allRacialData)
-            {
-                if(r.racialTag == race)
-                {
-                    ret = r;
-                    break;
-                }
-            }
-
-            if (ret == null) Debug.LogWarning("GetRaceData() could not racial data for " + race.ToString() + ", returning null...");
-
-            return ret;
-        }
         #endregion
 
         // Initialization + Setup
         #region
+
         protected override void Awake()
         {
             base.Awake();
             BuildBackgroundLibrary();
-            BuildCustomTemplateLibrary();           
+            BuildCustomTemplateLibrary();
         }
         private void BuildBackgroundLibrary()
         {
@@ -194,7 +167,7 @@ namespace WeAreGladiators.Characters
 
             AllCharacterBackgrounds = tempList.ToArray();
         }
-      
+
         private void BuildCustomTemplateLibrary()
         {
             Debug.Log("CharacterDataController.BuildCustomTemplateLibrary() called...");
@@ -208,10 +181,12 @@ namespace WeAreGladiators.Characters
 
             AllCustomCharacterTemplates = tempList.ToArray();
         }
+
         #endregion
 
         // Data Conversion + Cloning
         #region
+
         public HexCharacterData ConvertCharacterTemplateToCharacterData(HexCharacterTemplateSO template)
         {
             Debug.Log("CharacterDataController.ConvertCharacterTemplateToCharacterData() called...");
@@ -224,8 +199,14 @@ namespace WeAreGladiators.Characters
             newCharacter.audioProfile = GetAudioProfileForRace(newCharacter.race);
             newCharacter.modelSize = template.modelSize;
             SetStartingLevelAndXpValues(newCharacter);
-            if (template.background == CharacterBackground.None) newCharacter.background = GetBackgroundData(CharacterBackground.Companion);
-            else newCharacter.background = GetBackgroundData(template.background);
+            if (template.background == CharacterBackground.None)
+            {
+                newCharacter.background = GetBackgroundData(CharacterBackground.Companion);
+            }
+            else
+            {
+                newCharacter.background = GetBackgroundData(template.background);
+            }
 
             // Setup stats
             newCharacter.attributeSheet = new AttributeSheet();
@@ -299,8 +280,10 @@ namespace WeAreGladiators.Characters
 
             // Set up health
             if (template.randomizeHealth)
+            {
                 SetCharacterMaxHealth(newCharacter, RandomGenerator.NumberBetween(template.lowerHealthLimit, template.upperHealthLimit));
-            SetCharacterHealth(newCharacter, StatCalculator.GetTotalMaxHealth(newCharacter));            
+            }
+            SetCharacterHealth(newCharacter, StatCalculator.GetTotalMaxHealth(newCharacter));
 
             // Ai Routine
             newCharacter.behaviour = template.behaviour;
@@ -309,8 +292,10 @@ namespace WeAreGladiators.Characters
             newCharacter.itemSet = new ItemSet();
 
             // Fixed item loadout
-            if(!template.randomizeItemSet)
+            if (!template.randomizeItemSet)
+            {
                 ItemController.Instance.CopySerializedItemManagerIntoStandardItemManager(template.itemSet, newCharacter.itemSet);
+            }
 
             // Random item loadout
             else
@@ -338,7 +323,7 @@ namespace WeAreGladiators.Characters
             newCharacter.mySubName = original.mySubName;
             newCharacter.race = original.race;
             newCharacter.audioProfile = original.audioProfile;
-            
+
             newCharacter.background = original.background;
             newCharacter.modelSize = original.modelSize;
             newCharacter.xpReward = original.xpReward;
@@ -381,12 +366,16 @@ namespace WeAreGladiators.Characters
 
             // Attribute rolls        
             newCharacter.attributeRolls = new List<AttributeRollResult>();
-            foreach (AttributeRollResult arr in original.attributeRolls)            
-                newCharacter.attributeRolls.Add(arr);            
+            foreach (AttributeRollResult arr in original.attributeRolls)
+            {
+                newCharacter.attributeRolls.Add(arr);
+            }
 
             // Talent Data
-            foreach (TalentPairing tp in original.talentPairings)            
-                newCharacter.talentPairings.Add(new TalentPairing(tp.talentSchool, tp.level));            
+            foreach (TalentPairing tp in original.talentPairings)
+            {
+                newCharacter.talentPairings.Add(new TalentPairing(tp.talentSchool, tp.level));
+            }
 
             return newCharacter;
 
@@ -395,9 +384,9 @@ namespace WeAreGladiators.Characters
         {
             BackgroundData ret = null;
 
-            foreach(BackgroundData data in allCharacterBackgrounds)
+            foreach (BackgroundData data in AllCharacterBackgrounds)
             {
-                if(data.backgroundType == bg)
+                if (data.backgroundType == bg)
                 {
                     ret = data;
                     break;
@@ -406,43 +395,57 @@ namespace WeAreGladiators.Characters
 
             return ret;
         }
+
         #endregion
 
         // Modify Attributes + Stats + Health
         #region
+
         public void SetCharacterStress(HexCharacterData data, int newValue)
         {
             Debug.Log("CharacterDataController.SetCharacterStress() called for '" +
-                data.myName + "', new stress value = " + newValue.ToString());
+                data.myName + "', new stress value = " + newValue);
 
             data.currentStress = newValue;
 
             // prevent stress exceeding limits
             if (data.currentStress > 20)
+            {
                 data.currentStress = 20;
+            }
             // Zealots can never reach shattered stress state
             if (DoesCharacterHaveBackground(data.background, CharacterBackground.Witch) &&
-                data.currentStress > 19) data.currentStress = 19;
+                data.currentStress > 19)
+            {
+                data.currentStress = 19;
+            }
             else if (data.currentStress < 0)
+            {
                 data.currentStress = 0;
+            }
         }
         public void SetCharacterHealth(HexCharacterData data, int newValue)
         {
             Debug.Log("CharacterDataController.SetCharacterHealth() called for '" +
-                data.myName + "', new health value = " + newValue.ToString());
+                data.myName + "', new health value = " + newValue);
 
             data.currentHealth = newValue;
 
             // prevent current health exceeding max health
             int maxHealth = StatCalculator.GetTotalMaxHealth(data);
             if (data.currentHealth > maxHealth)
+            {
                 data.currentHealth = maxHealth;
-            else if (data.currentHealth < 0) data.currentHealth = 0;
+            }
+            else if (data.currentHealth < 0)
+            {
+                data.currentHealth = 0;
+            }
         }
         public void SetCharacterMaxHealth(HexCharacterData data, int newValue)
         {
             Debug.Log("CharacterDataController.SetCharacterMaxHealth() called for '" +
-                data.myName + "', new max health value = " + newValue.ToString());
+                data.myName + "', new max health value = " + newValue);
 
             data.attributeSheet.maxHealth = newValue;
             int totalMaxHealth = StatCalculator.GetTotalMaxHealth(data);
@@ -454,7 +457,9 @@ namespace WeAreGladiators.Characters
         {
             // prevent current health exceeding max health
             if (character.currentHealth > newTotalMaxHealth)
+            {
                 character.currentHealth = newTotalMaxHealth;
+            }
 
         }
 
@@ -462,21 +467,30 @@ namespace WeAreGladiators.Characters
 
         // Build Character Roster
         #region
+
         public void BuildCharacterRoster(List<HexCharacterData> characters)
         {
             AllPlayerCharacters.Clear();
             foreach (HexCharacterData c in characters)
+            {
                 AddCharacterToRoster(c);
+            }
         }
         public void AddCharacterToRoster(HexCharacterData character)
         {
-            if(AllPlayerCharacters.Contains(character) == false) AllPlayerCharacters.Add(character);
+            if (AllPlayerCharacters.Contains(character) == false)
+            {
+                AllPlayerCharacters.Add(character);
+            }
         }
         public void RemoveCharacterFromRoster(HexCharacterData character, bool death = true)
         {
-            if (AllPlayerCharacters.Contains(character)) AllPlayerCharacters.Remove(character);
-            if (death) 
-            { 
+            if (AllPlayerCharacters.Contains(character))
+            {
+                AllPlayerCharacters.Remove(character);
+            }
+            if (death)
+            {
                 // to do: add character info to orbituary, apply character death to score, etc
             }
         }
@@ -488,53 +502,56 @@ namespace WeAreGladiators.Characters
         {
             CharacterDeck.Clear();
         }
+
         #endregion
 
         // Town + New day logic
         #region
+
         public void HandlePayDailyWagesOnNewDayStart()
         {
-            foreach(HexCharacterData character in AllPlayerCharacters)
+            foreach (HexCharacterData character in AllPlayerCharacters)
             {
-                if(PlayerDataController.Instance.CurrentGold > character.dailyWage)
+                if (PlayerDataController.Instance.CurrentGold > character.dailyWage)
                 {
                     PlayerDataController.Instance.ModifyPlayerGold(-character.dailyWage);
                 }
                 // if not enough money to pay wage, chance that character will eave the roster, or gain stress?
-                else
-                {
-
-                }
             }
         }
         public int GetTotalRosterDailyWage()
         {
             int ret = 0;
-            foreach (HexCharacterData character in AllPlayerCharacters) ret += character.dailyWage;
+            foreach (HexCharacterData character in AllPlayerCharacters)
+            {
+                ret += character.dailyWage;
+            }
             return ret;
         }
         public void HandlePassiveStressAndHealthRecoveryOnNewDayStart()
         {
-            foreach(HexCharacterData c in AllPlayerCharacters)
+            foreach (HexCharacterData c in AllPlayerCharacters)
             {
                 //SetCharacterStress(c, c.currentStress - 1);
-                SetCharacterHealth(c, c.currentHealth + (int)(StatCalculator.GetTotalMaxHealth(c) * 0.1f));
+                SetCharacterHealth(c, c.currentHealth + (int) (StatCalculator.GetTotalMaxHealth(c) * 0.1f));
             }
         }
+
         #endregion
 
         // Talent Logic
         #region
+
         public void HandleLearnNewTalent(HexCharacterData character, TalentSchool talentSchool)
         {
             Debug.Log("CharacterDataController.HandleLearnNewTalent() called, character " + character.myName +
-                " gaining talent: " + talentSchool.ToString());
+                " gaining talent: " + talentSchool);
 
-            if(DoesCharacterHaveTalent(character.talentPairings, talentSchool, 1))
+            if (DoesCharacterHaveTalent(character.talentPairings, talentSchool, 1))
             {
-                foreach(TalentPairing tp in character.talentPairings)
+                foreach (TalentPairing tp in character.talentPairings)
                 {
-                    if(tp.talentSchool == talentSchool)
+                    if (tp.talentSchool == talentSchool)
                     {
                         tp.level++;
                     }
@@ -552,7 +569,7 @@ namespace WeAreGladiators.Characters
 
             foreach (TalentPairing t in talents)
             {
-                if(t.talentSchool == ts && t.level >= level)
+                if (t.talentSchool == ts && t.level >= level)
                 {
                     bRet = true;
                     break;
@@ -563,28 +580,31 @@ namespace WeAreGladiators.Characters
         }
         public bool DoesCharacterHaveBackground(BackgroundData character, CharacterBackground background)
         {
-            if (character != null && character.backgroundType == background) return true;
-            else return false;
+            if (character != null && character.backgroundType == background)
+            {
+                return true;
+            }
+            return false;
         }
         public int GetCharacterTalentLevel(List<TalentPairing> allTalents, TalentSchool ts)
         {
             int ret = 0;
-            foreach(TalentPairing t in allTalents)
+            foreach (TalentPairing t in allTalents)
             {
-                if(t.talentSchool == ts)
+                if (t.talentSchool == ts)
                 {
                     ret = t.level;
                     break;
-                }                  
+                }
             }
             return ret;
         }
         public Sprite GetTalentSprite(TalentSchool talent)
         {
             Sprite sRet = null;
-            foreach(TalentDataSO t in AllTalentData)
+            foreach (TalentDataSO t in AllTalentData)
             {
-                if(t.talentSchool == talent)
+                if (t.talentSchool == talent)
                 {
                     sRet = t.talentSprite;
                     break;
@@ -597,9 +617,9 @@ namespace WeAreGladiators.Characters
         {
             TalentDataSO dataRet = null;
 
-            foreach(TalentDataSO t in AllTalentData)
+            foreach (TalentDataSO t in AllTalentData)
             {
-                if(t.talentSchool == talent)
+                if (t.talentSchool == talent)
                 {
                     dataRet = t;
                     break;
@@ -660,39 +680,51 @@ namespace WeAreGladiators.Characters
                     }
                 }
             }
-            
+
             */
             return ret;
         }
+
         #endregion
 
         // Save + Load Logic
         #region
+
         public void BuildMyDataFromSaveFile(SaveGameData saveFile)
         {
             // Build character roster
             AllPlayerCharacters.Clear();
-            foreach (HexCharacterData characterData in saveFile.characterRoster)            
-                AddCharacterToRoster(characterData);            
+            foreach (HexCharacterData characterData in saveFile.characterRoster)
+            {
+                AddCharacterToRoster(characterData);
+            }
 
             // Build character deck
             CharacterDeck.Clear();
             foreach (HexCharacterData cd in saveFile.characterDeck)
+            {
                 CharacterDeck.Add(cd);
+            }
         }
         public void SaveMyDataToSaveFile(SaveGameData saveFile)
         {
             foreach (HexCharacterData character in AllPlayerCharacters)
+            {
                 saveFile.characterRoster.Add(character);
+            }
 
             foreach (HexCharacterData character in CharacterDeck)
+            {
                 saveFile.characterDeck.Add(character);
+            }
 
         }
+
         #endregion
 
         // XP + Leveling Logic
         #region
+
         private void SetStartingLevelAndXpValues(HexCharacterData character)
         {
             character.currentXP = 0;
@@ -702,8 +734,11 @@ namespace WeAreGladiators.Characters
         public int GetMaxXpCapForLevel(int level)
         {
             // each level requires 50 more XP than the previous.
-            if (level == 1) return 50;
-            else return 50 + (75 * (level - 1));
+            if (level == 1)
+            {
+                return 50;
+            }
+            return 50 + 75 * (level - 1);
         }
         private void SetCharacterLevel(HexCharacterData data, int newLevelValue)
         {
@@ -713,13 +748,16 @@ namespace WeAreGladiators.Characters
         {
             int ret = 0;
             float xpGainMod = 1f;
-            if(applyXpMods) xpGainMod = StatCalculator.GetCharacterXpGainRate(data);        
+            if (applyXpMods)
+            {
+                xpGainMod = StatCalculator.GetCharacterXpGainRate(data);
+            }
 
-            xpGained = (int)(xpGained * xpGainMod);
+            xpGained = (int) (xpGained * xpGainMod);
             ret = xpGained;
 
             // check spill over + level up first
-            int spillOver = (data.currentXP + xpGained) - data.currentMaxXP;
+            int spillOver = data.currentXP + xpGained - data.currentMaxXP;
 
             // Level up occured with spill over XP
             if (spillOver > 0)
@@ -749,7 +787,10 @@ namespace WeAreGladiators.Characters
         }
         public void HandleLevelUp(HexCharacterData data)
         {
-            if (data.currentLevel == 6) return;
+            if (data.currentLevel == 6)
+            {
+                return;
+            }
 
             // Gain level
             SetCharacterLevel(data, data.currentLevel + 1);
@@ -759,11 +800,15 @@ namespace WeAreGladiators.Characters
 
             // Gain perk level up
             if (PerkController.Instance.GetAllLevelUpPerksOnCharacter(data).Count < 5)
+            {
                 data.perkPoints++;
+            }
 
             // Gain talent level up
             if ((data.currentLevel == 3 || data.currentLevel == 5) && data.talentPairings.Count < 3)
+            {
                 data.talentPoints += 1;
+            }
 
             // Reset current xp
             data.currentXP = 0;
@@ -771,10 +816,12 @@ namespace WeAreGladiators.Characters
             // Increase max xp on level up
             data.currentMaxXP = GetMaxXpCapForLevel(data.currentLevel);
         }
+
         #endregion
 
         // Recruit Generation + Character Deck Logic
         #region
+
         private List<HexCharacterData> GenerateCharacterDeck(int deckSize = 20)
         {
             List<HexCharacterData> newCharacterDeck = new List<HexCharacterData>();
@@ -786,24 +833,28 @@ namespace WeAreGladiators.Characters
             int currentIndex = 0;
             int totalLoops = 0;
 
-            while(newCharacterDeck.Count < deckSize && totalLoops < 1000)
+            while (newCharacterDeck.Count < deckSize && totalLoops < 1000)
             {
                 BackgroundData bg = backgrounds[currentIndex];
                 if (bg.recruitable)
                 {
                     // Roll for character generation, then generate on success
                     if (RandomGenerator.NumberBetween(1, 100) <= bg.spawnChance)
+                    {
                         newCharacterDeck.Add(GenerateRecruitCharacter(bg));
+                    }
                 }
 
                 if (currentIndex >= backgrounds.Count() - 1)
+                {
                     currentIndex = -1;
+                }
 
                 currentIndex++;
                 totalLoops++;
             }
 
-            Debug.Log("GenerateCharacterDeck() complete, total background iterations: " + totalLoops.ToString());
+            Debug.Log("GenerateCharacterDeck() complete, total background iterations: " + totalLoops);
 
             return newCharacterDeck;
         }
@@ -818,20 +869,20 @@ namespace WeAreGladiators.Characters
             // Randomzie stats and stars
             data.attributeSheet = new AttributeSheet();
             GenerateRecruitCharacterCoreAttributeRolls(data.attributeSheet, data.background);
-            GenerateCharacterStarRolls(data.attributeSheet, 3);
+            GenerateCharacterStarRolls(data.attributeSheet);
             data.dailyWage = RandomGenerator.NumberBetween(data.background.dailyWageMin, data.background.dailyWageMax);
 
             // Randomize starting perk
-            var possiblePerks = new List<ActivePerk>();
+            List<ActivePerk> possiblePerks = new List<ActivePerk>();
             possiblePerks.AddRange(data.passiveManager.perks);
             data.passiveManager.perks.Shuffle();
-            var chosenPerk = data.passiveManager.perks[0];
+            ActivePerk chosenPerk = data.passiveManager.perks[0];
             data.passiveManager.perks.Clear();
             PerkController.Instance.ModifyPerkOnCharacterData(data.passiveManager, chosenPerk.perkTag, 1);
 
             // Randomize talent
             TalentSchool chosenTalent = data.talentPairings[0].talentSchool;
-            if(data.talentPairings.Count > 0)
+            if (data.talentPairings.Count > 0)
             {
                 List<TalentSchool> possibleTalents = new List<TalentSchool>();
                 data.talentPairings.ForEach(t => possibleTalents.Add(t.talentSchool));
@@ -839,7 +890,7 @@ namespace WeAreGladiators.Characters
                 chosenTalent = possibleTalents[0];
                 data.talentPairings.Clear();
                 HandleLearnNewTalent(data, chosenTalent);
-            }         
+            }
 
             // Learn random ability
             List<AbilityData> possibleAbilities = new List<AbilityData>();
@@ -847,7 +898,7 @@ namespace WeAreGladiators.Characters
             possibleAbilities.Shuffle();
             data.abilityBook.ForgetAllAbilities();
             data.abilityBook.HandleLearnAbilitiesFromItemSet(data.itemSet);
-            foreach(AbilityData ability in possibleAbilities)
+            foreach (AbilityData ability in possibleAbilities)
             {
                 if (DoesCharacterHaveTalent(data.talentPairings, ability.talentRequirementData.talentSchool, 1))
                 {
@@ -858,7 +909,7 @@ namespace WeAreGladiators.Characters
         }
         public HexCharacterData GenerateRecruitCharacter(BackgroundData bgData, bool allowLevelBoosts = true)
         {
-            Debug.Log("CharacterDataController.GenerateRecruitCharacter() called, generating from background: " + bgData.backgroundType.ToString());
+            Debug.Log("CharacterDataController.GenerateRecruitCharacter() called, generating from background: " + bgData.backgroundType);
 
             // Setup
             HexCharacterData newCharacter = new HexCharacterData();
@@ -870,15 +921,15 @@ namespace WeAreGladiators.Characters
             newCharacter.race = GetRandomRace(bgData.validRaces);
             newCharacter.myName = GetRandomCharacterName(newCharacter.race);
             newCharacter.dailyWage = RandomGenerator.NumberBetween(newCharacter.background.dailyWageMin, newCharacter.background.dailyWageMax);
-                                               
+
             // Setup stats + stars
             newCharacter.attributeSheet = new AttributeSheet();
             GenerateRecruitCharacterCoreAttributeRolls(newCharacter.attributeSheet, newCharacter.background);
-            GenerateCharacterStarRolls(newCharacter.attributeSheet, 3);
+            GenerateCharacterStarRolls(newCharacter.attributeSheet);
 
             // Set up perks + quirks
             newCharacter.passiveManager = new PerkManagerModel(newCharacter);
-            var quirks = GetAndApplyRandomQuirksToCharacter(newCharacter);
+            List<PerkIconData> quirks = GetAndApplyRandomQuirksToCharacter(newCharacter);
             newCharacter.PerkTree = new PerkTreeData(newCharacter);
 
             // Generate Subname
@@ -886,7 +937,7 @@ namespace WeAreGladiators.Characters
 
             // Set up health
             SetCharacterMaxHealth(newCharacter, 0);
-            SetCharacterHealth(newCharacter, StatCalculator.GetTotalMaxHealth(newCharacter));                       
+            SetCharacterHealth(newCharacter, StatCalculator.GetTotalMaxHealth(newCharacter));
 
             // Set up starting XP + level
             SetStartingLevelAndXpValues(newCharacter);
@@ -894,9 +945,10 @@ namespace WeAreGladiators.Characters
             {
                 int startingLevelBoosts = RandomGenerator.NumberBetween(bgData.lowerLevelLimit, bgData.upperLevelLimit) - newCharacter.currentLevel;
                 for (int i = 0; i < startingLevelBoosts; i++)
+                {
                     HandleLevelUp(newCharacter);
+                }
             }
-           
 
             // Randomize character appearance 
             newCharacter.modelParts = new List<string>();
@@ -915,9 +967,11 @@ namespace WeAreGladiators.Characters
             // Determine and learn abilities
             newCharacter.abilityBook = new AbilityBook();
             List<AbilityData> abilities = GenerateRecruitAbilities(newCharacter, loadoutData, RandomGenerator.NumberBetween(bgData.minStartingAbilities, bgData.maxStartingAbilities));
-            foreach(AbilityData a in abilities)            
+            foreach (AbilityData a in abilities)
+            {
                 newCharacter.abilityBook.HandleLearnNewAbility(a);
-            
+            }
+
             // Learn weapon abilities
             newCharacter.abilityBook.HandleLearnAbilitiesFromItemSet(newCharacter.itemSet);
 
@@ -925,7 +979,7 @@ namespace WeAreGladiators.Characters
             // TO DO: generate character background story
 
             return newCharacter;
-        }       
+        }
         private void GenerateRecruitCharacterCoreAttributeRolls(AttributeSheet sheet, BackgroundData background)
         {
             sheet.might.value = RandomGenerator.NumberBetween(background.mightLower + mightLower, background.mightUpper + mightUpper);
@@ -937,71 +991,98 @@ namespace WeAreGladiators.Characters
         }
         private void GenerateCharacterWeapons(HexCharacterData character, RecruitWeaponLoadout[] loadout)
         {
-            if (loadout.Length == 0) return;
+            if (loadout.Length == 0)
+            {
+                return;
+            }
             RecruitWeaponLoadout weaponBasket = loadout[RandomGenerator.NumberBetween(0, loadout.Length - 1)];
             ItemDataSO chosenMH = null;
             ItemDataSO chosenOH = null;
 
             // Choose random item data  
             if (weaponBasket.mainHandProspects.Length > 0)
+            {
                 chosenMH = weaponBasket.mainHandProspects[RandomGenerator.NumberBetween(0, weaponBasket.mainHandProspects.Length - 1)];
+            }
 
             if (weaponBasket.offhandProspects.Length > 0)
+            {
                 chosenOH = weaponBasket.offhandProspects[RandomGenerator.NumberBetween(0, weaponBasket.offhandProspects.Length - 1)];
+            }
 
             // Create and assign items
             if (chosenMH != null)
+            {
                 character.itemSet.mainHandItem = ItemController.Instance.GenerateNewItemWithRandomEffects(chosenMH);
+            }
 
-            if (chosenOH != null && (chosenMH == null || (chosenMH != null && chosenMH.handRequirement == HandRequirement.OneHanded)))
+            if (chosenOH != null && (chosenMH == null || chosenMH != null && chosenMH.handRequirement == HandRequirement.OneHanded))
+            {
                 character.itemSet.offHandItem = ItemController.Instance.GenerateNewItemWithRandomEffects(chosenOH);
+            }
         }
         private void GenerateCharacterArmour(HexCharacterData character, RecruitArmourLoadout[] loadout)
         {
-            if (loadout.Length == 0) return;
+            if (loadout.Length == 0)
+            {
+                return;
+            }
             RecruitArmourLoadout armourBasket = loadout[RandomGenerator.NumberBetween(0, loadout.Length - 1)];
             ItemDataSO chosenBody = null;
             ItemDataSO chosenHead = null;
 
             // Choose random item data
             if (armourBasket.bodyProspects.Length > 0)
+            {
                 chosenBody = armourBasket.bodyProspects[RandomGenerator.NumberBetween(0, armourBasket.bodyProspects.Length - 1)];
+            }
 
-            if (armourBasket.headProspects.Length > 0)            
+            if (armourBasket.headProspects.Length > 0)
+            {
                 chosenHead = armourBasket.headProspects[RandomGenerator.NumberBetween(0, armourBasket.headProspects.Length - 1)];
-                        
+            }
+
             // Create and assign items
             if (chosenBody != null)
+            {
                 character.itemSet.bodyArmour = ItemController.Instance.GenerateNewItemWithRandomEffects(chosenBody);
+            }
 
             if (chosenHead != null)
+            {
                 character.itemSet.headArmour = ItemController.Instance.GenerateNewItemWithRandomEffects(chosenHead);
+            }
         }
-        private List<AbilityData> GenerateRecruitAbilities(HexCharacterData character,  RecruitLoadoutData loadout, int totalAbilities = 1)
+        private List<AbilityData> GenerateRecruitAbilities(HexCharacterData character, RecruitLoadoutData loadout, int totalAbilities = 1)
         {
             List<AbilityData> ret = new List<AbilityData>();
             List<AbilityDataSO> prospects = new List<AbilityDataSO>();
             List<TalentSchool> characterTalents = new List<TalentSchool>();
             foreach (TalentPairing tp in character.talentPairings)
-                characterTalents.Add(tp.talentSchool);
-
-            foreach(AbilityDataSO a in loadout.possibleAbilities)
             {
-                if(a.talentRequirementData == null ||
-                  (a.talentRequirementData != null &&
-                   characterTalents.Contains(a.talentRequirementData.talentSchool)))
+                characterTalents.Add(tp.talentSchool);
+            }
+
+            foreach (AbilityDataSO a in loadout.possibleAbilities)
+            {
+                if (a.talentRequirementData == null ||
+                    a.talentRequirementData != null &&
+                    characterTalents.Contains(a.talentRequirementData.talentSchool))
                 {
-                    if(AbilityController.Instance.DoesCharacterMeetAbilityWeaponRequirement(character.itemSet, a.weaponRequirement) ||
-                       (character.itemSet.mainHandItem == null && character.itemSet.offHandItem == null))                    
-                        prospects.Add(a);  
+                    if (AbilityController.Instance.DoesCharacterMeetAbilityWeaponRequirement(character.itemSet, a.weaponRequirement) ||
+                        character.itemSet.mainHandItem == null && character.itemSet.offHandItem == null)
+                    {
+                        prospects.Add(a);
+                    }
                 }
             }
 
             // Get X random abilities, convert to data file, add them to returned list
             prospects.Shuffle();
             for (int i = 0; i < totalAbilities && i < prospects.Count; i++)
+            {
                 ret.Add(AbilityController.Instance.BuildAbilityDataFromScriptableObjectData(prospects[i]));
-
+            }
 
             return ret;
         }
@@ -1014,7 +1095,7 @@ namespace WeAreGladiators.Characters
                 CoreAttribute.Dodge,
                 CoreAttribute.Resolve,
                 CoreAttribute.Might,
-                CoreAttribute.Wits,
+                CoreAttribute.Wits
             };
 
             // Reset
@@ -1027,48 +1108,83 @@ namespace WeAreGladiators.Characters
 
             attributes.Shuffle();
 
-            for(int i = 0; i < statsStarred; i++)
+            for (int i = 0; i < statsStarred; i++)
             {
                 int starsGained = RandomGenerator.NumberBetween(minStarsGainedPerStat, maxStarsGainedPerStat);
 
-                if (attributes[i] == CoreAttribute.Accuracy) sheet.accuracy.stars = starsGained;
-                else if (attributes[i] == CoreAttribute.Constitution) sheet.constitution.stars = starsGained;
-                else if (attributes[i] == CoreAttribute.Dodge) sheet.dodge.stars = starsGained;
-                else if (attributes[i] == CoreAttribute.Resolve) sheet.resolve.stars = starsGained;
-                else if (attributes[i] == CoreAttribute.Might) sheet.might.stars = starsGained;
-                else if (attributes[i] == CoreAttribute.Wits) sheet.wits.stars = starsGained;
+                if (attributes[i] == CoreAttribute.Accuracy)
+                {
+                    sheet.accuracy.stars = starsGained;
+                }
+                else if (attributes[i] == CoreAttribute.Constitution)
+                {
+                    sheet.constitution.stars = starsGained;
+                }
+                else if (attributes[i] == CoreAttribute.Dodge)
+                {
+                    sheet.dodge.stars = starsGained;
+                }
+                else if (attributes[i] == CoreAttribute.Resolve)
+                {
+                    sheet.resolve.stars = starsGained;
+                }
+                else if (attributes[i] == CoreAttribute.Might)
+                {
+                    sheet.might.stars = starsGained;
+                }
+                else if (attributes[i] == CoreAttribute.Wits)
+                {
+                    sheet.wits.stars = starsGained;
+                }
             }
         }
         private string GetRandomCharacterName(CharacterRace race)
         {
             string nameReturned = "";
             if (race == CharacterRace.Demon)
+            {
                 nameReturned = demonNames[RandomGenerator.NumberBetween(0, demonNames.Length - 1)];
+            }
 
             if (race == CharacterRace.Elf)
+            {
                 nameReturned = elfNames[RandomGenerator.NumberBetween(0, elfNames.Length - 1)];
+            }
 
             if (race == CharacterRace.Ent)
+            {
                 nameReturned = entNames[RandomGenerator.NumberBetween(0, entNames.Length - 1)];
+            }
 
             if (race == CharacterRace.Gnoll)
+            {
                 nameReturned = gnollNames[RandomGenerator.NumberBetween(0, gnollNames.Length - 1)];
+            }
 
             if (race == CharacterRace.Goblin)
+            {
                 nameReturned = goblinNames[RandomGenerator.NumberBetween(0, goblinNames.Length - 1)];
+            }
 
             if (race == CharacterRace.Human)
+            {
                 nameReturned = humanNames[RandomGenerator.NumberBetween(0, humanNames.Length - 1)];
+            }
 
             if (race == CharacterRace.Orc)
+            {
                 nameReturned = orcNames[RandomGenerator.NumberBetween(0, orcNames.Length - 1)];
+            }
 
             if (race == CharacterRace.Satyr)
+            {
                 nameReturned = satyrNames[RandomGenerator.NumberBetween(0, satyrNames.Length - 1)];
+            }
 
             if (race == CharacterRace.Undead)
+            {
                 nameReturned = undeadNames[RandomGenerator.NumberBetween(0, undeadNames.Length - 1)];
-
+            }
 
             return nameReturned;
         }
@@ -1077,10 +1193,13 @@ namespace WeAreGladiators.Characters
             string ret = "";
             List<string> possibleSubNames = new List<string>();
 
-            for (int i = 0; i < quirks.Count; i++) possibleSubNames.AddRange(quirks[i].possibleSubNames);
+            for (int i = 0; i < quirks.Count; i++)
+            {
+                possibleSubNames.AddRange(quirks[i].possibleSubNames);
+            }
             possibleSubNames.AddRange(bgData.possibleSubNames);
             possibleSubNames.AddRange(GetRaceData(race).possibleSubNames);
-            if(possibleSubNames.Count > 0)
+            if (possibleSubNames.Count > 0)
             {
                 possibleSubNames.Shuffle();
                 ret = possibleSubNames[0];
@@ -1096,7 +1215,9 @@ namespace WeAreGladiators.Characters
             foreach (CharacterModelTemplateSO mt in allModelTemplateSOs)
             {
                 if (mt.race == race)
+                {
                     validTemplates.Add(mt);
+                }
             }
 
             return validTemplates[RandomGenerator.NumberBetween(0, validTemplates.Count - 1)];
@@ -1105,26 +1226,35 @@ namespace WeAreGladiators.Characters
         public CharacterRace GetRandomRace(List<CharacterRace> validRaces)
         {
             return validRaces[RandomGenerator.NumberBetween(0, validRaces.Count - 1)];
-        }      
+        }
         private List<PerkIconData> GetAndApplyRandomQuirksToCharacter(HexCharacterData character)
         {
             List<PerkIconData> ret = new List<PerkIconData>();
             for (int i = 0; i < 2; i++)
             {
                 int roll = RandomGenerator.NumberBetween(1, 2);
-                if(i == 0 || (i != 0 && roll == 1))
+                if (i == 0 || i != 0 && roll == 1)
                 {
                     int typeRoll = RandomGenerator.NumberBetween(1, 100);
 
                     // Good perk
-                    if (typeRoll < 45) ret.Add(GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.PositiveQuirks));
+                    if (typeRoll < 45)
+                    {
+                        ret.Add(GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.PositiveQuirks));
+                    }
 
                     // Bad perk
-                    else if (typeRoll < 90) ret.Add(GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NegativeQuirks));
+                    else if (typeRoll < 90)
+                    {
+                        ret.Add(GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NegativeQuirks));
+                    }
 
                     // Neutral perk
-                    else ret.Add(GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NeutralQuirks));
-                }          
+                    else
+                    {
+                        ret.Add(GetAndApplyRandomQuirkToCharacter(character, PerkController.Instance.NeutralQuirks));
+                    }
+                }
             }
             return ret;
         }
@@ -1152,7 +1282,10 @@ namespace WeAreGladiators.Characters
                     }
 
                     // Check race
-                    if (possiblePerk.racesThatBlockThis.Contains(character.race)) pass = false;
+                    if (possiblePerk.racesThatBlockThis.Contains(character.race))
+                    {
+                        pass = false;
+                    }
 
                     if (pass)
                     {
@@ -1173,22 +1306,22 @@ namespace WeAreGladiators.Characters
             cost += levelMod + itemsCost;
 
             // Check boons
-            if(character.background.backgroundType == CharacterBackground.Gladiator &&
+            if (character.background.backgroundType == CharacterBackground.Gladiator &&
                 BoonController.Instance.DoesPlayerHaveBoon(BoonTag.UnemployedGladiators))
             {
                 cost = (int) (cost * 0.5f);
             }
 
             else if (character.background.backgroundType == CharacterBackground.Inquisitor &&
-               BoonController.Instance.DoesPlayerHaveBoon(BoonTag.UnemployedInquisitors))
+                     BoonController.Instance.DoesPlayerHaveBoon(BoonTag.UnemployedInquisitors))
             {
-                cost = (int)(cost * 0.5f);
+                cost = (int) (cost * 0.5f);
             }
 
             else if (character.background.backgroundType == CharacterBackground.Witch &&
-              BoonController.Instance.DoesPlayerHaveBoon(BoonTag.WitchAccession))
+                     BoonController.Instance.DoesPlayerHaveBoon(BoonTag.WitchAccession))
             {
-                cost = (int)(cost * 0.5f);
+                cost = (int) (cost * 0.5f);
             }
 
             // round to the nearest 10 gold
@@ -1198,32 +1331,45 @@ namespace WeAreGladiators.Characters
         public AudioProfileType GetAudioProfileForRace(CharacterRace race)
         {
             if (race == CharacterRace.Human)
+            {
                 return AudioProfileType.Human_1;
+            }
 
-            else if (race == CharacterRace.Elf)
+            if (race == CharacterRace.Elf)
+            {
                 return AudioProfileType.Elf_1;
+            }
 
-            else if (race == CharacterRace.Undead ||
+            if (race == CharacterRace.Undead ||
                 race == CharacterRace.Demon ||
                 race == CharacterRace.Ent)
+            {
                 return AudioProfileType.Undead_1;
+            }
 
-            else if (race == CharacterRace.Satyr)
+            if (race == CharacterRace.Satyr)
+            {
                 return AudioProfileType.Satyr_1;
+            }
 
-            else if (race == CharacterRace.Orc)
+            if (race == CharacterRace.Orc)
+            {
                 return AudioProfileType.Orc_1;
+            }
 
-            else if (race == CharacterRace.Goblin)
+            if (race == CharacterRace.Goblin)
+            {
                 return AudioProfileType.Goblin_1;
+            }
 
-            else if (race == CharacterRace.Gnoll)
+            if (race == CharacterRace.Gnoll)
+            {
                 return AudioProfileType.Gnoll_1;
+            }
 
-            else
-                return AudioProfileType.None;
+            return AudioProfileType.None;
         }
-        #endregion
 
+        #endregion
     }
 }

@@ -1,37 +1,50 @@
-﻿using WeAreGladiators.Utilities;
-using System.Collections;
-using System.Collections.Generic;
-using TbsFramework.Players;
-using UnityEngine;
-using UnityEngine.Audio;
+﻿using UnityEngine;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.Audio
 {
     public class AudioPlayer : MonoBehaviour
     {
-        [SerializeField] AudioSource source;
-        AudioDataBox myCurrentData;
+        [SerializeField] private AudioSource source;
 
         public AudioSource Source => source;
-        public AudioDataBox MyCurrentData => myCurrentData;
+        public AudioDataBox MyCurrentData { get; private set; }
 
         public void BuildFromData(AudioDataBox data)
         {
-            myCurrentData = data;
-            source.loop = myCurrentData.loop;
-            source.outputAudioMixerGroup = AudioManager.Instance.GetBus(myCurrentData.bus);
+            MyCurrentData = data;
+            source.loop = MyCurrentData.loop;
+            source.outputAudioMixerGroup = AudioManager.Instance.GetBus(MyCurrentData.bus);
 
             // Randomize clip
-            if (myCurrentData.randomizeClip) source.clip = myCurrentData.audioClips[RandomGenerator.NumberBetween(0, myCurrentData.audioClips.Length - 1)];
-            else source.clip = myCurrentData.audioClip;
+            if (MyCurrentData.randomizeClip)
+            {
+                source.clip = MyCurrentData.audioClips[RandomGenerator.NumberBetween(0, MyCurrentData.audioClips.Length - 1)];
+            }
+            else
+            {
+                source.clip = MyCurrentData.audioClip;
+            }
 
             // Randomize pitch if marked to do so
-            if (myCurrentData.randomizePitch) source.pitch = RandomGenerator.NumberBetween(myCurrentData.randomPitchLowerLimit, myCurrentData.randomPitchUpperLimit);
-            else source.pitch = myCurrentData.pitch;
+            if (MyCurrentData.randomizePitch)
+            {
+                source.pitch = RandomGenerator.NumberBetween(MyCurrentData.randomPitchLowerLimit, MyCurrentData.randomPitchUpperLimit);
+            }
+            else
+            {
+                source.pitch = MyCurrentData.pitch;
+            }
 
             // Randomize volume if marked to do so
-            if (myCurrentData.randomizeVolume) source.volume = RandomGenerator.NumberBetween(myCurrentData.randomVolumeLowerLimit, myCurrentData.randomVolumeUpperLimit);
-            else source.volume = myCurrentData.volume;
+            if (MyCurrentData.randomizeVolume)
+            {
+                source.volume = RandomGenerator.NumberBetween(MyCurrentData.randomVolumeLowerLimit, MyCurrentData.randomVolumeUpperLimit);
+            }
+            else
+            {
+                source.volume = MyCurrentData.volume;
+            }
         }
     }
 }

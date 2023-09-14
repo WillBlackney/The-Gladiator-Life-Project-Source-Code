@@ -1,9 +1,9 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine;
-using UnityEditor;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities.Editor;
 using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities.Editor;
+using UnityEditor;
+using UnityEngine;
 using WeAreGladiators.Items;
 
 namespace WeAreGladiators.Editor
@@ -11,11 +11,6 @@ namespace WeAreGladiators.Editor
 
     public class ItemDataEditor : OdinMenuEditorWindow
     {
-        [MenuItem("Tools/Hex Game Tools/Item Editor")]
-        private static void OpenWindow()
-        {
-            GetWindow<ItemDataEditor>().Show();
-        }
 
         private CreateNewItemData createNewItemData;
         protected override void OnDestroy()
@@ -27,21 +22,26 @@ namespace WeAreGladiators.Editor
                 DestroyImmediate(createNewItemData.itemData);
             }
         }
+        [MenuItem("Tools/Hex Game Tools/Item Editor")]
+        private static void OpenWindow()
+        {
+            GetWindow<ItemDataEditor>().Show();
+        }
 
         protected override OdinMenuTree BuildMenuTree()
         {
-            var tree = new OdinMenuTree();
+            OdinMenuTree tree = new OdinMenuTree();
 
             createNewItemData = new CreateNewItemData();
             tree.Add("Create New", new CreateNewItemData());
-            tree.AddAllAssetsAtPath("All Items", "Assets/SO Assets/Items", typeof(Items.ItemDataSO));
+            tree.AddAllAssetsAtPath("All Items", "Assets/SO Assets/Items", typeof(ItemDataSO));
             tree.SortMenuItemsByName();
             return tree;
         }
 
         protected override void OnBeginDrawEditors()
         {
-            OdinMenuTreeSelection selected = this.MenuTree.Selection;
+            OdinMenuTreeSelection selected = MenuTree.Selection;
 
             SirenixEditorGUI.BeginHorizontalToolbar();
             {
@@ -49,7 +49,7 @@ namespace WeAreGladiators.Editor
 
                 if (SirenixEditorGUI.ToolbarButton("Delete Current"))
                 {
-                    Items.ItemDataSO asset = selected.SelectedValue as Items.ItemDataSO;
+                    ItemDataSO asset = selected.SelectedValue as ItemDataSO;
                     string path = AssetDatabase.GetAssetPath(asset);
                     AssetDatabase.DeleteAsset(path);
                     AssetDatabase.SaveAssets();
@@ -62,11 +62,11 @@ namespace WeAreGladiators.Editor
         public class CreateNewItemData
         {
             [InlineEditor(ObjectFieldMode = InlineEditorObjectFieldModes.Hidden)]
-            public Items.ItemDataSO itemData;
+            public ItemDataSO itemData;
 
             public CreateNewItemData()
             {
-                itemData = CreateInstance<Items.ItemDataSO>();
+                itemData = CreateInstance<ItemDataSO>();
                 itemData.itemName = "New Item Name";
             }
 
@@ -77,12 +77,10 @@ namespace WeAreGladiators.Editor
                 AssetDatabase.SaveAssets();
 
                 // Create the SO 
-                itemData = CreateInstance<Items.ItemDataSO>();
+                itemData = CreateInstance<ItemDataSO>();
                 itemData.itemName = "New Item Data";
             }
-
         }
-
     }
 }
 #endif

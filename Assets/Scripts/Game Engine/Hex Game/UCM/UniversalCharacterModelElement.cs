@@ -1,7 +1,7 @@
-﻿using WeAreGladiators.Items;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using System.Collections.Generic;
 using UnityEngine;
+using WeAreGladiators.Items;
 
 namespace WeAreGladiators.UCM
 {
@@ -17,12 +17,9 @@ namespace WeAreGladiators.UCM
         [ShowIf("ShowHurtFace")]
         public Sprite hurtFace;
 
-
         public bool ShowHurtFace()
         {
             return bodyPartType == BodyPartType.Face;
         }
-
-
     }
 }

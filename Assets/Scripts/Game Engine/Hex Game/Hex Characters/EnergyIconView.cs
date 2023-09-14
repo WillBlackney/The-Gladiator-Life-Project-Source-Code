@@ -1,31 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using WeAreGladiators.Combat;
-using WeAreGladiators.Libraries;
-using WeAreGladiators.Utilities;
-using WeAreGladiators.UI;
-using DG.Tweening;
 
 namespace WeAreGladiators.Characters
 {
     public class EnergyIconView : MonoBehaviour
     {
-        #region Components + Properties
-        [Header("Components")]
-        [SerializeField] Image iconImage;
-
-        [Header("Sprite References")]
-        [SerializeField] Color red;
-        [SerializeField] Color yellow;
-        #endregion
-
-        #region Getters + Accessors
-        #endregion
 
         #region Logic
+
         public void SetViewState(EnergyIconViewState state, float speed = 0f)
         {
             if (state == EnergyIconViewState.None)
@@ -45,14 +28,30 @@ namespace WeAreGladiators.Characters
                 iconImage.DOColor(red, speed);
             }
         }
+
+        #endregion
+        #region Components + Properties
+
+        [Header("Components")]
+        [SerializeField]
+        private Image iconImage;
+
+        [Header("Sprite References")]
+        [SerializeField]
+        private Color red;
+        [SerializeField] private Color yellow;
+
         #endregion
 
+        #region Getters + Accessors
+
+        #endregion
     }
     public enum EnergyIconViewState
     {
         None = 0,
         Yellow = 1,
-        Red = 2,
-        
+        Red = 2
+
     }
 }

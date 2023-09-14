@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
-using DG.Tweening;
 using WeAreGladiators.Audio;
-using WeAreGladiators.CameraSystems;
 
 namespace WeAreGladiators.Cards
 {
@@ -17,7 +14,7 @@ namespace WeAreGladiators.Cards
             get
             {
                 Debug.Log("DragSpellOnTarget.CanDrag() called...");
-                return (base.CanDrag);
+                return base.CanDrag;
             }
         }
         public override void OnStartDrag()
@@ -33,9 +30,8 @@ namespace WeAreGladiators.Cards
             if (cardVM.eventSetting == EventSetting.Camping)
             {
                 cardVM.mySlotHelper.ResetAngles();
-               // CardController.Instance.MoveCardVMToPlayPreviewSpot(cardVM, CampSiteController.Instance.HandVisual);
+                // CardController.Instance.MoveCardVMToPlayPreviewSpot(cardVM, CampSiteController.Instance.HandVisual);
             }
-
 
             // play sfx
             AudioManager.Instance.FadeInSound(Sound.UI_Dragging_Constant, 0.2f);
@@ -94,7 +90,7 @@ namespace WeAreGladiators.Cards
                 TargettingArrowController.Instance.DisableArrow();
 
                 // return target and arrow to original position
-                // this position is special for spell cards to show the arrow on top       
+                // this position is special for spell cards to show the arrow on top
                 transform.localPosition = new Vector3(0f, 0f, -0.1f);
             }
             */
@@ -178,10 +174,10 @@ namespace WeAreGladiators.Cards
                 TargettingArrow.Instance.DisableArrow();
 
                 // return target and arrow to original position
-                // this position is special for spell cards to show the arrow on top       
+                // this position is special for spell cards to show the arrow on top
                 transform.localPosition = new Vector3(0f, 0f, -0.1f);
             }
-            
+
             else if (cardVM.eventSetting == EventSetting.Camping)
             {
                 // Stop dragging SFX
@@ -232,7 +228,7 @@ namespace WeAreGladiators.Cards
                 TargettingArrow.Instance.DisableArrow();
 
                 // return target and arrow to original position
-                // this position is special for spell cards to show the arrow on top       
+                // this position is special for spell cards to show the arrow on top
                 transform.localPosition = new Vector3(0f, 0f, -0.1f);
             }
             */

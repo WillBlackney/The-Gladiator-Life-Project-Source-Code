@@ -6,39 +6,31 @@ namespace WeAreGladiators.DungeonMap
 {
     public class Node
     {
-        public readonly Point point;
         public readonly List<Point> incoming = new List<Point>();
         public readonly List<Point> outgoing = new List<Point>();
-        private EncounterType nodeType;
-        private string blueprintName;        
+        public readonly Point point;
         public Vector2 position;
-
-        public EncounterType NodeType
-        {
-            get { return nodeType; }
-            private set { nodeType = value; }
-        }
-        public string BlueprintName
-        {
-            get { return blueprintName; }
-            private set { blueprintName = value; }
-        }
         public Node(EncounterType nodeType, string blueprintName, Point point)
         {
-            this.NodeType = nodeType;
-            this.BlueprintName = blueprintName;
+            NodeType = nodeType;
+            BlueprintName = blueprintName;
             this.point = point;
         }
+
+        public EncounterType NodeType { get; private set; }
+        public string BlueprintName { get; private set; }
         public void RerollType(EncounterType type, string blueprintName)
         {
-            this.NodeType = type;
-            this.BlueprintName = blueprintName;
+            NodeType = type;
+            BlueprintName = blueprintName;
         }
 
         public void AddIncoming(Point p)
         {
             if (incoming.Any(element => element.Equals(p)))
+            {
                 return;
+            }
 
             incoming.Add(p);
         }
@@ -46,7 +38,9 @@ namespace WeAreGladiators.DungeonMap
         public void AddOutgoing(Point p)
         {
             if (outgoing.Any(element => element.Equals(p)))
+            {
                 return;
+            }
 
             outgoing.Add(p);
         }

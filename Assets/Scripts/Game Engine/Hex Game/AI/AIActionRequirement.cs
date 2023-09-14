@@ -1,12 +1,11 @@
-﻿using WeAreGladiators.Perks;
+﻿using System;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using WeAreGladiators.Perks;
 
 namespace WeAreGladiators.AI
 {
-    [System.Serializable]
+    [Serializable]
     public class AIActionRequirement
     {
         [LabelWidth(100)]
@@ -80,13 +79,13 @@ namespace WeAreGladiators.AI
             {
                 return true;
             }
-            else return false;
+            return false;
         }
         public bool ShowStressReq()
         {
             return requirementType == AIActionRequirementType.TargetHasLessStressThanX ||
                 requirementType == AIActionRequirementType.TargetHasMoreStressThanX;
-        }       
+        }
         public bool ShowEnemiesInMeleeRange()
         {
             if (requirementType == AIActionRequirementType.SelfEngagedInMelee ||
@@ -94,7 +93,7 @@ namespace WeAreGladiators.AI
             {
                 return true;
             }
-            else return false;
+            return false;
         }
         public bool ShowRange()
         {
@@ -102,7 +101,7 @@ namespace WeAreGladiators.AI
             {
                 return true;
             }
-            else return false;
+            return false;
         }
         public bool ShowHealthPercentage()
         {
@@ -111,7 +110,7 @@ namespace WeAreGladiators.AI
             {
                 return true;
             }
-            else return false;
+            return false;
         }
         public bool ShowPerkPairing()
         {
@@ -122,11 +121,11 @@ namespace WeAreGladiators.AI
             {
                 return true;
             }
-            else return false;
+            return false;
         }
         public bool ShowAlliesAlive()
         {
-            return requirementType == AIActionRequirementType.LessThanAlliesAlive || 
+            return requirementType == AIActionRequirementType.LessThanAlliesAlive ||
                 requirementType == AIActionRequirementType.MoreThanAlliesAlive;
         }
     }
@@ -172,6 +171,6 @@ namespace WeAreGladiators.AI
         TargetHasAllyDirectyBehindThem = 33,
         MeleeHasStarted = 36,
         MeleeHasNotStarted = 37,
-        XorMoreOpponentsUnactivated = 41,
+        XorMoreOpponentsUnactivated = 41
     }
 }

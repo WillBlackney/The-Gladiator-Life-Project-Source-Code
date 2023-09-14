@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using Random = UnityEngine.Random;
 
 namespace WeAreGladiators.DungeonMap
 {
-    [System.Serializable]
+    [Serializable]
     public class FloatMinMax
     {
         public float min;
@@ -17,7 +18,7 @@ namespace WeAreGladiators.DungeonMap
 
 namespace WeAreGladiators.DungeonMap
 {
-    [System.Serializable]
+    [Serializable]
     public class IntMinMax
     {
         public int min;

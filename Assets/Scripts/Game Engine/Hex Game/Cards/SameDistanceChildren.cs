@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace WeAreGladiators.Cards
 {
@@ -9,15 +8,15 @@ namespace WeAreGladiators.Cards
         public Transform[] Children;
 
         // Use this for initialization
-        void Awake()
+        private void Awake()
         {
             Vector3 firstElementPos = Children[0].transform.position;
             Vector3 lastElementPos = Children[Children.Length - 1].transform.position;
 
             // dividing by Children.Length - 1 because for example: between 10 points that are 9 segments
-            float XDist = (lastElementPos.x - firstElementPos.x) / (float)(Children.Length - 1);
-            float YDist = (lastElementPos.y - firstElementPos.y) / (float)(Children.Length - 1);
-            float ZDist = (lastElementPos.z - firstElementPos.z) / (float)(Children.Length - 1);
+            float XDist = (lastElementPos.x - firstElementPos.x) / (Children.Length - 1);
+            float YDist = (lastElementPos.y - firstElementPos.y) / (Children.Length - 1);
+            float ZDist = (lastElementPos.z - firstElementPos.z) / (Children.Length - 1);
 
             Vector3 Dist = new Vector3(XDist, YDist, ZDist);
 
@@ -26,7 +25,5 @@ namespace WeAreGladiators.Cards
                 Children[i].transform.position = Children[i - 1].transform.position + Dist;
             }
         }
-
-
     }
 }

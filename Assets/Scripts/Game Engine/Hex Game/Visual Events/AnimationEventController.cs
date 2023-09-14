@@ -1,61 +1,19 @@
-﻿using WeAreGladiators.Characters;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators;
-using WeAreGladiators.CameraSystems;
-using WeAreGladiators.HexTiles;
-using WeAreGladiators.Utilities;
+﻿using UnityEngine;
 using WeAreGladiators.Audio;
+using WeAreGladiators.CameraSystems;
+using WeAreGladiators.Characters;
+using WeAreGladiators.HexTiles;
 using WeAreGladiators.Items;
-using DG.Tweening;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.VisualEvents
 {
     public class AnimationEventController : Singleton<AnimationEventController>
     {
-        #region Constants
-        public const string MAIN_HAND_MELEE_ATTACK_OVERHEAD = "MAIN_HAND_MELEE_ATTACK_OVERHEAD";
-        public const string MAIN_HAND_MELEE_ATTACK_THRUST = "MAIN_HAND_MELEE_ATTACK_THRUST";
-        public const string MAIN_HAND_MELEE_ATTACK_CLEAVE = "MAIN_HAND_MELEE_ATTACK_CLEAVE";
-        public const string OFF_HAND_MELEE_ATTACK_OVERHEAD = "OFF_HAND_MELEE_ATTACK_OVERHEAD";
-        public const string OFF_HAND_MELEE_ATTACK_THRUST = "OFF_HAND_MELEE_ATTACK_THRUST";
-        public const string OFF_HAND_THROW_NET = "OFF_HAND_THROW_NET";
-        public const string TWO_HAND_MELEE_ATTACK_OVERHEAD_1 = "TWO_HAND_MELEE_ATTACK_OVERHEAD_1";
-        public const string TWO_HAND_MELEE_ATTACK_OVERHEAD_2 = "TWO_HAND_MELEE_ATTACK_OVERHEAD_2";
-        public const string TWO_HAND_MELEE_ATTACK_THRUST = "TWO_HAND_MELEE_ATTACK_THRUST";
-        public const string TWO_HAND_MELEE_ATTACK_CLEAVE = "TWO_HAND_MELEE_ATTACK_CLEAVE";
-        public const string RAISE_SHIELD = "RAISE_SHIELD";
-        public const string SHIELD_BASH = "SHIELD_BASH";
-        public const string OFF_HAND_PUSH = "OFF_HAND_PUSH";
-        public const string CHARGE = "CHARGE"; 
-        public const string CHARGE_END = "CHARGE_END";
-        public const string DUCK = "DUCK";
-        public const string IDLE = "IDLE";
-        public const string SHOOT_BOW = "Shoot Bow";
-        public const string SHOOT_CROSSBOW = "Shoot Crossbow";
-        public const string RUN = "RUN";
-        public const string HURT = "HURT";
-        public const string DIE_1 = "DIE_1";
-        public const string DIE_2 = "DIE_2";
-        public const string DIE_3 = "DIE_3";
-        public const string DIE_4 = "DIE_4";
-        public const string DECAPITATION_1 = "DECAPITATION_1";
-        public const string DECAPITATION_2 = "DECAPITATION_2";
-        public const string RESSURECT = "Ressurect";
-        public const string LEFT_HAND_SHOOT_MAGIC = "LEFT_HAND_SHOOT_MAGIC";
-        public const string TWO_HAND_SHOOT_MAGIC = "TWO_HAND_SHOOT_MAGIC";
-        public const string GENERIC_SKILL_1 = "GENERIC_SKILL_1";
-        public const string TACKLE = "TACKLE";
-        public const string TACKLE_END = "TACKLE_END";
-        public const string RELOAD_CROSSBOW = "RELOAD_CROSSBOW";
-        public const string SHATTERED = "SHATTERED";
-        public const string BITE = "BITE";
-        public const string STOMP = "STOMP";
-        #endregion
 
         // Core Functions
         #region
+
         public void PlayAnimationEvent(AnimationEventData vEvent, HexCharacterModel user = null, HexCharacterModel targetCharacter = null, LevelNode targetTile = null, ItemData weaponUsed = null, VisualEvent stackEvent = null)
         {
             if (vEvent.eventType == AnimationEventType.CameraShake)
@@ -92,13 +50,56 @@ namespace WeAreGladiators.VisualEvents
                 ResolveScreenOverlay(vEvent, stackEvent);
             }
         }
+
+        #endregion
+        #region Constants
+
+        public const string MAIN_HAND_MELEE_ATTACK_OVERHEAD = "MAIN_HAND_MELEE_ATTACK_OVERHEAD";
+        public const string MAIN_HAND_MELEE_ATTACK_THRUST = "MAIN_HAND_MELEE_ATTACK_THRUST";
+        public const string MAIN_HAND_MELEE_ATTACK_CLEAVE = "MAIN_HAND_MELEE_ATTACK_CLEAVE";
+        public const string OFF_HAND_MELEE_ATTACK_OVERHEAD = "OFF_HAND_MELEE_ATTACK_OVERHEAD";
+        public const string OFF_HAND_MELEE_ATTACK_THRUST = "OFF_HAND_MELEE_ATTACK_THRUST";
+        public const string OFF_HAND_THROW_NET = "OFF_HAND_THROW_NET";
+        public const string TWO_HAND_MELEE_ATTACK_OVERHEAD_1 = "TWO_HAND_MELEE_ATTACK_OVERHEAD_1";
+        public const string TWO_HAND_MELEE_ATTACK_OVERHEAD_2 = "TWO_HAND_MELEE_ATTACK_OVERHEAD_2";
+        public const string TWO_HAND_MELEE_ATTACK_THRUST = "TWO_HAND_MELEE_ATTACK_THRUST";
+        public const string TWO_HAND_MELEE_ATTACK_CLEAVE = "TWO_HAND_MELEE_ATTACK_CLEAVE";
+        public const string RAISE_SHIELD = "RAISE_SHIELD";
+        public const string SHIELD_BASH = "SHIELD_BASH";
+        public const string OFF_HAND_PUSH = "OFF_HAND_PUSH";
+        public const string CHARGE = "CHARGE";
+        public const string CHARGE_END = "CHARGE_END";
+        public const string DUCK = "DUCK";
+        public const string IDLE = "IDLE";
+        public const string SHOOT_BOW = "Shoot Bow";
+        public const string SHOOT_CROSSBOW = "Shoot Crossbow";
+        public const string RUN = "RUN";
+        public const string HURT = "HURT";
+        public const string DIE_1 = "DIE_1";
+        public const string DIE_2 = "DIE_2";
+        public const string DIE_3 = "DIE_3";
+        public const string DIE_4 = "DIE_4";
+        public const string DECAPITATION_1 = "DECAPITATION_1";
+        public const string DECAPITATION_2 = "DECAPITATION_2";
+        public const string RESSURECT = "Ressurect";
+        public const string LEFT_HAND_SHOOT_MAGIC = "LEFT_HAND_SHOOT_MAGIC";
+        public const string TWO_HAND_SHOOT_MAGIC = "TWO_HAND_SHOOT_MAGIC";
+        public const string GENERIC_SKILL_1 = "GENERIC_SKILL_1";
+        public const string TACKLE = "TACKLE";
+        public const string TACKLE_END = "TACKLE_END";
+        public const string RELOAD_CROSSBOW = "RELOAD_CROSSBOW";
+        public const string SHATTERED = "SHATTERED";
+        public const string BITE = "BITE";
+        public const string STOMP = "STOMP";
+
         #endregion
 
         // Handle specific events
         #region
+
         private void ResolveCameraShake(AnimationEventData vEvent, VisualEvent stackEvent)
         {
-            VisualEventManager.CreateVisualEvent(() => 
+            VisualEventManager.CreateVisualEvent(() =>
                 CameraController.Instance.CreateCameraShake(vEvent.cameraShake), stackEvent);
         }
         private void ResolveDelay(AnimationEventData vEvent, VisualEvent stackEvent)
@@ -116,7 +117,7 @@ namespace WeAreGladiators.VisualEvents
                 {
                     AudioManager.Instance.PlaySound(user.AudioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerMeleeAttackAnimation(user.hexCharacterView, targetView.WorldPosition, weaponUsed, cData);
-                }, stackEvent).SetCoroutineData(cData);            
+                }, stackEvent).SetCoroutineData(cData);
             }
 
             // Bite
@@ -150,7 +151,10 @@ namespace WeAreGladiators.VisualEvents
                 TaskTracker cData = new TaskTracker();
                 HexDirection direction = LevelController.Instance.GetDirectionToTargetHex(user.currentTile, targetCharacter.currentTile);
                 LevelNode knockbackNode = LevelController.Instance.GetAdjacentHexByDirection(targetCharacter.currentTile, direction);
-                if (knockbackNode != null) knockbackNode = targetCharacter.currentTile;
+                if (knockbackNode != null)
+                {
+                    knockbackNode = targetCharacter.currentTile;
+                }
 
                 VisualEventManager.CreateVisualEvent(() =>
                 {
@@ -179,7 +183,7 @@ namespace WeAreGladiators.VisualEvents
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 TaskTracker cData = new TaskTracker();
                 VisualEventManager.CreateVisualEvent(() =>
-                HexCharacterController.Instance.TriggerOffhandThrowNetAnimation(user.hexCharacterView, targetView.WorldPosition, cData), stackEvent).SetCoroutineData(cData);
+                    HexCharacterController.Instance.TriggerOffhandThrowNetAnimation(user.hexCharacterView, targetView.WorldPosition, cData), stackEvent).SetCoroutineData(cData);
             }
             // Shield Bash
             else if (vEvent.characterAnimation == CharacterAnimation.ShieldBash)
@@ -189,7 +193,7 @@ namespace WeAreGladiators.VisualEvents
                 VisualEventManager.CreateVisualEvent(() =>
                 {
                     AudioManager.Instance.PlaySound(user.AudioProfile, AudioSet.Attack);
-                    HexCharacterController.Instance.TriggerShieldBashAnimation(user.hexCharacterView, targetView.WorldPosition, cData); 
+                    HexCharacterController.Instance.TriggerShieldBashAnimation(user.hexCharacterView, targetView.WorldPosition, cData);
                 }, stackEvent).SetCoroutineData(cData);
             }
             // AoE Melee Attack 
@@ -239,29 +243,44 @@ namespace WeAreGladiators.VisualEvents
                 TaskTracker cData = new TaskTracker();
 
                 // Crossbow
-                if (weaponUsed != null && weaponUsed.weaponClass == WeaponClass.Crossbow)                
+                if (weaponUsed != null && weaponUsed.weaponClass == WeaponClass.Crossbow)
+                {
                     VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootCrossbowAnimation(user.hexCharacterView, weaponUsed, cData), stackEvent).SetCoroutineData(cData);
-                                
+                }
+
                 // Normal Bow
-                else                
+                else
+                {
                     VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayShootBowAnimation(user.hexCharacterView, weaponUsed, cData), stackEvent).SetCoroutineData(cData);
-             }
+                }
+            }
 
             // Shoot Magic + Shoot Projectile 
             else if (vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture || vEvent.characterAnimation == CharacterAnimation.ShootProjectileUnanimated)
             {
                 // Play character shoot anim
                 TaskTracker animCdata = new TaskTracker();
-                if(vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture)
+                if (vEvent.characterAnimation == CharacterAnimation.ShootMagicWithHandGesture)
+                {
                     VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.TriggerShootMagicHandGestureAnimation(user.hexCharacterView, animCdata), stackEvent);
+                }
 
-                if (vEvent.projectileFired == ProjectileFired.None) return;
+                if (vEvent.projectileFired == ProjectileFired.None)
+                {
+                    return;
+                }
 
                 // Destination is a character or hex tile target?
                 Vector3 targetPos = new Vector3(0, 0, 0);
                 Vector3 projectileStartPos = new Vector3(0, 0, 0);
-                if (targetTile != null) targetPos = targetTile.WorldPosition;
-                else targetPos = targetCharacter.hexCharacterView.WorldPosition;
+                if (targetTile != null)
+                {
+                    targetPos = targetTile.WorldPosition;
+                }
+                else
+                {
+                    targetPos = targetCharacter.hexCharacterView.WorldPosition;
+                }
 
                 // Where does the projectile start from?              
                 if (vEvent.projectileStartPosition == ProjectileStartPosition.Shooter)
@@ -270,10 +289,10 @@ namespace WeAreGladiators.VisualEvents
 
                     // Create projectile
                     TaskTracker cData2 = new TaskTracker();
-                    VisualEventManager.CreateVisualEvent(() => 
+                    VisualEventManager.CreateVisualEvent(() =>
                     {
-                        if(user != null &&
-                           user.hexCharacterView != null)
+                        if (user != null &&
+                            user.hexCharacterView != null)
                         {
                             projectileStartPos = user.hexCharacterView.WorldPosition;
                         }
@@ -282,28 +301,34 @@ namespace WeAreGladiators.VisualEvents
                         // Dynamic arrow or bolt, depending on if the weapon was a bow or a crossbow
                         if (weaponUsed != null && vEvent.projectileFired == ProjectileFired.ArrowOrBolt)
                         {
-                            if (weaponUsed.weaponClass == WeaponClass.Crossbow) dynamicProjectile = ProjectileFired.CrossbowBolt;
-                            else dynamicProjectile = ProjectileFired.Arrow;
+                            if (weaponUsed.weaponClass == WeaponClass.Crossbow)
+                            {
+                                dynamicProjectile = ProjectileFired.CrossbowBolt;
+                            }
+                            else
+                            {
+                                dynamicProjectile = ProjectileFired.Arrow;
+                            }
                         }
-                            
+
                         VisualEffectManager.Instance.ShootProjectileAtLocation(dynamicProjectile, projectileStartPos, targetPos, cData2);
                     }, stackEvent).SetCoroutineData(cData2);
                     return;
 
                 }
-                else if (vEvent.projectileStartPosition == ProjectileStartPosition.AboveTargetOffScreen)
-                {                       
+                if (vEvent.projectileStartPosition == ProjectileStartPosition.AboveTargetOffScreen)
+                {
                     projectileStartPos = new Vector3(targetPos.x, targetPos.y + 10, targetPos.z);
                 }
                 else if (vEvent.projectileStartPosition == ProjectileStartPosition.SkyCentreOffScreen)
                 {
-                    projectileStartPos = new Vector3(0, 8, 0);                    
+                    projectileStartPos = new Vector3(0, 8, 0);
                 }
 
                 // Create projectile
                 TaskTracker cData = new TaskTracker();
                 VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.ShootProjectileAtLocation
-                (vEvent.projectileFired, projectileStartPos, targetPos, cData), stackEvent).SetCoroutineData(cData);
+                    (vEvent.projectileFired, projectileStartPos, targetPos, cData), stackEvent).SetCoroutineData(cData);
             }
         }
         private void ResolveParticleEffect(AnimationEventData vEvent, HexCharacterModel user, HexCharacterModel characterTarget = null, LevelNode tileTarget = null, VisualEvent stackEvent = null)
@@ -319,20 +344,20 @@ namespace WeAreGladiators.VisualEvents
                 {
                     HexCharacterView view = user.hexCharacterView;
                     VisualEventManager.CreateVisualEvent(() =>
-                       VisualEffectManager.Instance.CreateEffectAtLocation(vEvent.particleEffect, view.WorldPosition), stackEvent);
+                        VisualEffectManager.Instance.CreateEffectAtLocation(vEvent.particleEffect, view.WorldPosition), stackEvent);
                 }
             }
             else if (vEvent.onCharacter == CreateOnCharacter.Target && characterTarget != null)
             {
                 HexCharacterView view = characterTarget.hexCharacterView;
                 VisualEventManager.CreateVisualEvent(() =>
-                VisualEffectManager.Instance.CreateEffectAtLocation(vEvent.particleEffect, view.WorldPosition), stackEvent);
+                    VisualEffectManager.Instance.CreateEffectAtLocation(vEvent.particleEffect, view.WorldPosition), stackEvent);
             }
 
             else if (vEvent.onCharacter == CreateOnCharacter.None)
             {
                 VisualEventManager.CreateVisualEvent(() =>
-                   VisualEffectManager.Instance.CreateEffectAtLocation(vEvent.particleEffect, new Vector3(0,0,0)), stackEvent);
+                    VisualEffectManager.Instance.CreateEffectAtLocation(vEvent.particleEffect, new Vector3(0, 0, 0)), stackEvent);
 
             }
 

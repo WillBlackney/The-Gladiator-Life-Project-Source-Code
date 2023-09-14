@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace WeAreGladiators.VisualEvents
+﻿namespace WeAreGladiators.VisualEvents
 {
     public class TaskTracker
     {
@@ -16,7 +12,5 @@ namespace WeAreGladiators.VisualEvents
         {
             complete = true;
         }
-
-
     }
 }

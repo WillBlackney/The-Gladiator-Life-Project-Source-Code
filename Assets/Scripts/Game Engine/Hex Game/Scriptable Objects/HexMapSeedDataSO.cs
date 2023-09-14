@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace WeAreGladiators.HexTiles
 {
@@ -31,6 +30,7 @@ namespace WeAreGladiators.HexTiles
 
         // Odin Show If's
         #region
+
         public bool ShowRadius()
         {
             return shape == HexMapShape.Hexagonal;
@@ -43,10 +43,11 @@ namespace WeAreGladiators.HexTiles
         {
             return shape == HexMapShape.Rectangular;
         }
+
         #endregion
     }
 
-    [System.Serializable]
+    [Serializable]
     public class HexMapTilingConfig
     {
         public HexDataSO hexData;

@@ -1,7 +1,4 @@
-﻿using WeAreGladiators;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace WeAreGladiators.Utilities
@@ -16,7 +13,7 @@ namespace WeAreGladiators.Utilities
         public float Delta;
 
         // Utility fields
-        List<GameObject> dots = new List<GameObject>();
+        private readonly List<GameObject> dots = new List<GameObject>();
 
         private void DrawDottedLine(Vector2 start, Vector2 end)
         {
@@ -28,7 +25,7 @@ namespace WeAreGladiators.Utilities
             {
                 //if(!positions.Contains(point))
                 positions.Add(point);
-                point += (direction * Delta);
+                point += direction * Delta;
             }
 
             Render(start, end, positions);
@@ -36,24 +33,24 @@ namespace WeAreGladiators.Utilities
         public void DrawPathAlongPoints(List<Vector2> points)
         {
             DestroyAllPaths();
-            for(int i = 0; i < points.Count - 1; i++)
+            for (int i = 0; i < points.Count - 1; i++)
             {
                 DrawDottedLine(points[i], points[i + 1]);
             }
         }
         public void DestroyAllPaths()
         {
-            foreach (var dot in dots)
+            foreach (GameObject dot in dots)
             {
                 Destroy(dot);
             }
 
             dots.Clear();
         }
-               
-        GameObject GetOneArrow()
+
+        private GameObject GetOneArrow()
         {
-            var gameObject = Instantiate(ArrowPrefab);
+            GameObject gameObject = Instantiate(ArrowPrefab);
             gameObject.transform.localScale = Vector3.one * Size;
             gameObject.transform.parent = transform;
             return gameObject;
@@ -61,13 +58,13 @@ namespace WeAreGladiators.Utilities
 
         private void Render(Vector2 start, Vector2 end, List<Vector2> renderPositions)
         {
-            var dir = end - start;
-            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            Vector2 dir = end - start;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
             foreach (Vector2 position in renderPositions)
             {
                 // var g = GetOneDot();
-                var g = GetOneArrow();
+                GameObject g = GetOneArrow();
                 g.transform.position = position;
                 g.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 dots.Add(g);
@@ -79,7 +76,6 @@ namespace WeAreGladiators.Utilities
             }
 
         }
-
     }
 
 }

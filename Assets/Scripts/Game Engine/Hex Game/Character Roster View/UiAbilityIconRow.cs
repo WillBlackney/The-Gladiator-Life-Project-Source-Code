@@ -1,22 +1,12 @@
-using WeAreGladiators.Abilities;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine;
+using WeAreGladiators.Abilities;
 
 namespace WeAreGladiators.UI
 {
     public class UiAbilityIconRow : MonoBehaviour
     {
-        // Properties + Components
-        #region
-        [SerializeField] UIAbilityIcon abilityIcon;
-        [SerializeField] TextMeshProUGUI abilityNameText;
 
-        #endregion
-    
         public void Build(AbilityData data)
         {
             gameObject.SetActive(true);
@@ -27,5 +17,12 @@ namespace WeAreGladiators.UI
         {
             gameObject.SetActive(false);
         }
+        // Properties + Components
+        #region
+
+        [SerializeField] private UIAbilityIcon abilityIcon;
+        [SerializeField] private TextMeshProUGUI abilityNameText;
+
+        #endregion
     }
 }

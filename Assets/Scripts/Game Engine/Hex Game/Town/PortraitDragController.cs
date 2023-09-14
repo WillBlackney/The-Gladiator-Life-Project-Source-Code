@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.Utilities;
-using WeAreGladiators.UCM;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
 using WeAreGladiators.TownFeatures;
-using WeAreGladiators.Audio;
+using WeAreGladiators.UCM;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UI
 {
@@ -14,6 +11,7 @@ namespace WeAreGladiators.UI
     {
         // Components + Properties
         #region
+
         [Header("Core Components")]
         [SerializeField] private UniversalCharacterModel potraitUcm;
         [SerializeField] private GameObject followMouseParent;
@@ -23,17 +21,20 @@ namespace WeAreGladiators.UI
         [SerializeField] private RectTransform dragRect;
 
         // Non inspector fields
-        private HexCharacterData draggedCharacterData = null;
-        private DeploymentNodeView draggedNode = null;
+        private HexCharacterData draggedCharacterData;
+        private DeploymentNodeView draggedNode;
+
         #endregion
 
         // Getters + Accessors
         #region
+
         #endregion
 
         // Logic
         #region
-        void Update()
+
+        private void Update()
         {
             if (followMouseParent.activeSelf)
             {
@@ -46,7 +47,7 @@ namespace WeAreGladiators.UI
                 }
             }
         }
-        void HandleEndDrag()
+        private void HandleEndDrag()
         {
             Debug.Log("PortraitDragController.HandleEndDrag");
             followMouseParent.SetActive(false);
@@ -64,10 +65,10 @@ namespace WeAreGladiators.UI
                 draggedNode != null &&
                 draggedCharacterData != null)
             {
-                var draggedCharacter = draggedCharacterData;
-                var dragNode = draggedNode;
-                var swapCharacter = DeploymentNodeView.NodeMousedOver.MyCharacterData;               
-                var swapNode = DeploymentNodeView.NodeMousedOver;
+                HexCharacterData draggedCharacter = draggedCharacterData;
+                DeploymentNodeView dragNode = draggedNode;
+                HexCharacterData swapCharacter = DeploymentNodeView.NodeMousedOver.MyCharacterData;
+                DeploymentNodeView swapNode = DeploymentNodeView.NodeMousedOver;
 
                 AudioManager.Instance.PlaySound(Sound.UI_Drag_Drop_End);
                 TownController.Instance.HandleDropCharacterOnDeploymentNode(swapNode, draggedCharacter);
@@ -79,19 +80,27 @@ namespace WeAreGladiators.UI
             {
                 AudioManager.Instance.PlaySound(Sound.UI_Drag_Drop_End);
                 if (DeploymentNodeView.NodeMousedOver.AllowedCharacter == Allegiance.Player)
-                    TownController.Instance.HandleDropCharacterOnDeploymentNode(DeploymentNodeView.NodeMousedOver, draggedCharacterData);      
-                else if(draggedNode != null)
-                    TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);                    
-            }            
+                {
+                    TownController.Instance.HandleDropCharacterOnDeploymentNode(DeploymentNodeView.NodeMousedOver, draggedCharacterData);
+                }
+                else if (draggedNode != null)
+                {
+                    TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);
+                }
+            }
 
             // Handle dragging a node (not character panel) and drag did not end on a new node: rebuild old node position
-            else if (DeploymentNodeView.NodeMousedOver == null && draggedNode != null )            
-                TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);                                   
-            
+            else if (DeploymentNodeView.NodeMousedOver == null && draggedNode != null)
+            {
+                TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);
+            }
+
             // Handle drag on to hospital feature slot
-            else if(HospitalDropSlot.SlotMousedOver != null)            
-                TownController.Instance.HandleDropCharacterOnHospitalSlot(HospitalDropSlot.SlotMousedOver, draggedCharacterData);           
-            
+            else if (HospitalDropSlot.SlotMousedOver != null)
+            {
+                TownController.Instance.HandleDropCharacterOnHospitalSlot(HospitalDropSlot.SlotMousedOver, draggedCharacterData);
+            }
+
             draggedCharacterData = null;
             draggedNode = null;
         }
@@ -104,15 +113,21 @@ namespace WeAreGladiators.UI
         public void OnRosterCharacterPanelDragStart(RosterCharacterPanel panel)
         {
             if (!TownController.Instance.IsCharacterDraggableFromRosterToDeploymentNode(panel.MyCharacterData) ||
-                TownController.Instance.IsCharacterPlacedInHospital(panel.MyCharacterData)) return;
+                TownController.Instance.IsCharacterPlacedInHospital(panel.MyCharacterData))
+            {
+                return;
+            }
 
             AudioManager.Instance.FadeInSound(Sound.UI_Dragging_Constant, 0.2f);
             BuildAndShowPortrait(panel.MyCharacterData);
             draggedCharacterData = panel.MyCharacterData;
         }
         public void OnDeploymentNodeDragStart(DeploymentNodeView node)
-        {            
-            if (node.MyCharacterData == null) return;
+        {
+            if (node.MyCharacterData == null)
+            {
+                return;
+            }
             AudioManager.Instance.FadeInSound(Sound.UI_Dragging_Constant, 0.2f);
             BuildAndShowPortrait(node.MyCharacterData);
             draggedCharacterData = node.MyCharacterData;
@@ -128,9 +143,8 @@ namespace WeAreGladiators.UI
             // Follow the mouse
             followMouseParent.transform.position = dragCanvas.transform.TransformPoint(pos);
         }
+
         #endregion
-
-
     }
 
 }

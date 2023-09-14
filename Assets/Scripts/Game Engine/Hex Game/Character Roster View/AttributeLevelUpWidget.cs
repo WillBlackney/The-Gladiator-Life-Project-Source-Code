@@ -1,19 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using DG.Tweening;
+using Sirenix.Utilities;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using WeAreGladiators.Characters;
 using WeAreGladiators.Libraries;
-using Sirenix.Utilities;
-using DG.Tweening;
 
 namespace WeAreGladiators.UI
 {
     public class AttributeLevelUpWidget : MonoBehaviour
     {
+
+        // Input
+        #region
+
+        public void OnAttributeButtonClicked()
+        {
+            // Deselect
+            if (Selected)
+            {
+                attributeAmountText.text = currentBaseStat.ToString();
+                Selected = false;
+                buttonImage.color = normalColor;
+            }
+
+            // Select
+            else if (!Selected)
+            {
+                if (myPage.GetSelectedAttributes().Count >= 3)
+                {
+                    return;
+                }
+                Selected = true;
+                buttonImage.color = selectedColor;
+                attributeAmountText.text = (currentBaseStat + currentRoll).ToString();
+            }
+            UpdateSlider();
+            myPage.UpdateTotalSelectedAttributes();
+        }
+
+        #endregion
         // Properties + Components
         #region
+
         [Header("Properties")]
         [SerializeField] private CoreAttribute myAttribute;
 
@@ -31,53 +60,23 @@ namespace WeAreGladiators.UI
         [SerializeField] private Color normalColor;
         [SerializeField] private Color selectedColor;
 
-        private bool selected = false;
-
-        int currentBaseStat;
-        int currentRoll;
-        int currentStars;
+        private int currentBaseStat;
+        private int currentRoll;
+        private int currentStars;
 
         #endregion
 
         // Getters + Accessors
         #region
-        public bool Selected
-        {
-            get { return selected; }
-        }
-        public CoreAttribute MyAttribute
-        {
-            get { return myAttribute; }
-        }
-        #endregion
 
-        // Input
-        #region
-        public void OnAttributeButtonClicked()
-        {
-            // Deselect
-            if (selected)
-            {
-                attributeAmountText.text = currentBaseStat.ToString();
-                selected = false;
-                buttonImage.color = normalColor;
-            }
+        public bool Selected { get; private set; }
+        public CoreAttribute MyAttribute => myAttribute;
 
-            // Select
-            else if (!selected)
-            {
-                if (myPage.GetSelectedAttributes().Count >= 3) return;
-                selected = true;
-                buttonImage.color = selectedColor;
-                attributeAmountText.text = (currentBaseStat + currentRoll).ToString();
-            }
-            UpdateSlider();
-            myPage.UpdateTotalSelectedAttributes();
-        }
         #endregion
 
         // Logic
         #region
+
         public void BuildViews(HexCharacterData character)
         {
             attributeNameText.text = myAttribute.ToString();
@@ -121,15 +120,21 @@ namespace WeAreGladiators.UI
                 currentRoll = roll.witsRoll;
             }
 
-            rollText.text = "+" + currentRoll.ToString();
+            rollText.text = "+" + currentRoll;
             attributeAmountText.text = currentBaseStat.ToString();
-            for (int i = 0; i < currentStars; i++) stars[i].SetActive(true);
+            for (int i = 0; i < currentStars; i++)
+            {
+                stars[i].SetActive(true);
+            }
             UpdateSlider(0);
         }
         private void UpdateSlider(float speed = 0.5f)
-        {            
+        {
             float current = currentBaseStat;
-            if (selected) current = currentBaseStat + currentRoll;
+            if (Selected)
+            {
+                current = currentBaseStat + currentRoll;
+            }
             float max = 100f;
             statSlider.DOKill();
             statSlider.DOValue(current / max, speed);
@@ -139,11 +144,12 @@ namespace WeAreGladiators.UI
             currentStars = 0;
             currentBaseStat = 0;
             currentRoll = 0;
-            selected = false;
+            Selected = false;
             buttonImage.color = normalColor;
             stars.ForEach(x => x.SetActive(false));
             UpdateSlider(0f);
         }
+
         #endregion
     }
 }

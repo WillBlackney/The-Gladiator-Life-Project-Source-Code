@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using TMPro;
-using WeAreGladiators.Characters;
+using UnityEngine;
 using UnityEngine.UI;
 using WeAreGladiators.Audio;
+using WeAreGladiators.Characters;
 
 namespace WeAreGladiators.UI
 {
@@ -12,6 +11,7 @@ namespace WeAreGladiators.UI
     {
         // Properties + Components
         #region
+
         [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
         [SerializeField] private AttributeLevelUpWidget[] attributeRows;
@@ -24,27 +24,34 @@ namespace WeAreGladiators.UI
 
         // Non inspector fields
         private HexCharacterData currentCharacter;
+
         #endregion
 
         // Input
         #region
+
         public void OnConfirmButtonClicked()
         {
             List<AttributeLevelUpWidget> selectedAttributes = GetSelectedAttributes();
 
             // Validate selections
-            if (selectedAttributes.Count != 3) return;
-            HandleSelectionsConfirmed(selectedAttributes);            
+            if (selectedAttributes.Count != 3)
+            {
+                return;
+            }
+            HandleSelectionsConfirmed(selectedAttributes);
         }
         public void OnCancelButtonClicked()
         {
             currentCharacter = null;
             mainVisualParent.SetActive(false);
         }
+
         #endregion
 
         // Logic
         #region
+
         public void ShowAndBuildPage(HexCharacterData character)
         {
             mainVisualParent.SetActive(true);
@@ -57,38 +64,58 @@ namespace WeAreGladiators.UI
             }
 
             UpdateTotalSelectedAttributes();
-        }       
+        }
         public List<AttributeLevelUpWidget> GetSelectedAttributes()
         {
             List<AttributeLevelUpWidget> ret = new List<AttributeLevelUpWidget>();
-            foreach (AttributeLevelUpWidget a in attributeRows)            
-                if (a.Selected)                
-                    ret.Add(a);                
-            
+            foreach (AttributeLevelUpWidget a in attributeRows)
+            {
+                if (a.Selected)
+                {
+                    ret.Add(a);
+                }
+            }
+
             return ret;
         }
         public void UpdateTotalSelectedAttributes()
         {
             int selected = GetSelectedAttributes().Count;
-            totalSelectedAttributesText.text = selected.ToString() + "/3";
-            if (selected >= 3) confirmButtonImage.sprite = readyImage;
-            else confirmButtonImage.sprite = notReadyImage;
+            totalSelectedAttributesText.text = selected + "/3";
+            if (selected >= 3)
+            {
+                confirmButtonImage.sprite = readyImage;
+            }
+            else
+            {
+                confirmButtonImage.sprite = notReadyImage;
+            }
         }
         private void HandleSelectionsConfirmed(List<AttributeLevelUpWidget> selections)
         {
             // Apply stat boosts
-            foreach(AttributeLevelUpWidget w in selections)
+            foreach (AttributeLevelUpWidget w in selections)
             {
-                if(w.MyAttribute == CoreAttribute.Might)                
+                if (w.MyAttribute == CoreAttribute.Might)
+                {
                     currentCharacter.attributeSheet.might.value += currentCharacter.attributeRolls[0].mightRoll;
+                }
                 else if (w.MyAttribute == CoreAttribute.Accuracy)
+                {
                     currentCharacter.attributeSheet.accuracy.value += currentCharacter.attributeRolls[0].accuracyRoll;
+                }
                 else if (w.MyAttribute == CoreAttribute.Dodge)
+                {
                     currentCharacter.attributeSheet.dodge.value += currentCharacter.attributeRolls[0].dodgeRoll;
+                }
                 else if (w.MyAttribute == CoreAttribute.Resolve)
-                    currentCharacter.attributeSheet.resolve.value += currentCharacter.attributeRolls[0].resolveRoll;                
+                {
+                    currentCharacter.attributeSheet.resolve.value += currentCharacter.attributeRolls[0].resolveRoll;
+                }
                 else if (w.MyAttribute == CoreAttribute.Wits)
+                {
                     currentCharacter.attributeSheet.wits.value += currentCharacter.attributeRolls[0].witsRoll;
+                }
                 else if (w.MyAttribute == CoreAttribute.Constitution)
                 {
                     currentCharacter.attributeSheet.constitution.value += currentCharacter.attributeRolls[0].constitutionRoll;
@@ -108,6 +135,7 @@ namespace WeAreGladiators.UI
             CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
             CharacterScrollPanelController.Instance.RebuildViews();
         }
+
         #endregion
     }
 }

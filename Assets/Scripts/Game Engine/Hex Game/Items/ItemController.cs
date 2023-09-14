@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using WeAreGladiators.UCM;
-using WeAreGladiators.Characters;
-using WeAreGladiators.Abilities;
-using WeAreGladiators.Utilities;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using WeAreGladiators.UI;
+using UnityEngine;
+using WeAreGladiators.Abilities;
+using WeAreGladiators.Audio;
+using WeAreGladiators.Characters;
 using WeAreGladiators.Perks;
 using WeAreGladiators.Player;
-using WeAreGladiators.Audio;
+using WeAreGladiators.UCM;
+using WeAreGladiators.UI;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.Items
 {
@@ -17,27 +17,27 @@ namespace WeAreGladiators.Items
     {
         // Variables + Properties
         #region
+
         [Header("Item Library Properties")]
         [SerializeField] private ItemDataSO[] allItemScriptableObjects;
-        private ItemData[] allItems;
+
         #endregion
 
         // Getters
         #region
-        public ItemData[] AllItems
-        {
-            get { return allItems; }
-            private set { allItems = value; }
-        }
+
+        public ItemData[] AllItems { get; private set; }
         public ItemDataSO[] AllItemScriptableObjects
         {
-            get { return allItemScriptableObjects; }
-            private set { allItemScriptableObjects = value; }
+            get => allItemScriptableObjects;
+            private set => allItemScriptableObjects = value;
         }
+
         #endregion
 
         // Library Logic + Initialization
         #region
+
         protected override void Awake()
         {
             base.Awake();
@@ -52,11 +52,13 @@ namespace WeAreGladiators.Items
             foreach (ItemDataSO dataSO in allItemScriptableObjects)
             {
                 if (dataSO.includeInLibrary)
+                {
                     tempList.Add(BuildItemDataFromScriptableObjectData(dataSO));
+                }
             }
 
             AllItems = tempList.ToArray();
-        }      
+        }
         public ItemData GetItemDataByName(string name)
         {
             ItemData itemReturned = null;
@@ -85,63 +87,64 @@ namespace WeAreGladiators.Items
         }
         public List<ItemData> GetAllShopSpawnableItems()
         {
-            return Array.FindAll(allItems, i => i.canSpawnInShop).ToList();
+            return Array.FindAll(AllItems, i => i.canSpawnInShop).ToList();
         }
         public List<ItemData> GetAllShopSpawnableItems(Rarity rarity, ItemType type)
         {
-            return Array.FindAll(allItems, i => i.canSpawnInShop && i.rarity == rarity && i.itemType == type).ToList();
+            return Array.FindAll(AllItems, i => i.canSpawnInShop && i.rarity == rarity && i.itemType == type).ToList();
         }
         public List<ItemData> GetAllShopSpawnableItems(ItemType type, int goldLower, int goldUpper)
         {
-            return Array.FindAll(allItems, i => i.canSpawnInShop && i.baseGoldValue >= goldLower && i.baseGoldValue <= goldUpper && i.itemType == type).ToList();
+            return Array.FindAll(AllItems, i => i.canSpawnInShop && i.baseGoldValue >= goldLower && i.baseGoldValue <= goldUpper && i.itemType == type).ToList();
         }
 
         public List<ItemData> GetAllShopSpawnableItems(Rarity rarity, WeaponClass weaponClass)
         {
-            return Array.FindAll(allItems, i => i.canSpawnInShop && i.rarity == rarity && i.weaponClass == weaponClass).ToList();
+            return Array.FindAll(AllItems, i => i.canSpawnInShop && i.rarity == rarity && i.weaponClass == weaponClass).ToList();
         }
         public List<ItemData> GetAllShopSpawnableItems(ItemType type, WeaponClass weaponClass, int goldLower, int goldUpper)
         {
-            return Array.FindAll(allItems, i => i.canSpawnInShop && i.weaponClass == weaponClass && i.baseGoldValue >= goldLower && i.baseGoldValue <= goldUpper && i.itemType == type).ToList();
+            return Array.FindAll(AllItems, i => i.canSpawnInShop && i.weaponClass == weaponClass && i.baseGoldValue >= goldLower && i.baseGoldValue <= goldUpper && i.itemType == type).ToList();
         }
         public List<ItemData> GetAllContractRewardableItems(Rarity rarity)
         {
-            return Array.FindAll(allItems, i => i.canBeCombatContractReward && i.rarity == rarity).ToList();
+            return Array.FindAll(AllItems, i => i.canBeCombatContractReward && i.rarity == rarity).ToList();
         }
         public List<ItemData> GetAllContractRewardableItems(int lowerGoldLimit, int upperGoldLimit)
         {
-            return Array.FindAll(allItems, i => 
-            i.canBeCombatContractReward && 
-            i.baseGoldValue >= lowerGoldLimit && i.baseGoldValue <= upperGoldLimit &&
-            i.rarity != Rarity.Common && 
-            i.rarity != Rarity.None).ToList();
+            return Array.FindAll(AllItems, i =>
+                i.canBeCombatContractReward &&
+                i.baseGoldValue >= lowerGoldLimit && i.baseGoldValue <= upperGoldLimit &&
+                i.rarity != Rarity.Common &&
+                i.rarity != Rarity.None).ToList();
         }
         public List<ItemData> GetAllNonShopAndContractItems()
         {
-            return Array.FindAll(allItems, i => i.canSpawnInShop == false && i.canBeCombatContractReward == false).ToList();
+            return Array.FindAll(AllItems, i => i.canSpawnInShop == false && i.canBeCombatContractReward == false).ToList();
         }
-       
+
         public ItemData GetRandomShopItemByRarity(Rarity rarity)
         {
             ItemData ret = null;
-            var items = GetAllShopSpawnableItems();
+            List<ItemData> items = GetAllShopSpawnableItems();
             items.Shuffle();
-            for(int i = 0; i < items.Count; i++)
+            for (int i = 0; i < items.Count; i++)
             {
-                if(items[i].rarity == rarity)
+                if (items[i].rarity == rarity)
                 {
                     ret = items[i];
                     break;
-                }                      
+                }
             }
 
             return ret;
         }
-       
+
         #endregion
 
         // Data Conversion
-        #region 
+        #region
+
         public ItemData BuildItemDataFromScriptableObjectData(ItemDataSO d)
         {
             ItemData i = new ItemData();
@@ -239,10 +242,10 @@ namespace WeAreGladiators.Items
         }
         private List<ItemEffect> GenerateRandomItemEffects(ItemData itemData)
         {
-            List<ItemEffect> ret = new List<ItemEffect>();            
+            List<ItemEffect> ret = new List<ItemEffect>();
 
             // Generate effects
-            for(int i = 0; i < itemData.itemEffectSets.Length; i++)
+            for (int i = 0; i < itemData.itemEffectSets.Length; i++)
             {
                 ItemEffectSet set = itemData.itemEffectSets[i];
                 if (i == 0)
@@ -257,29 +260,32 @@ namespace WeAreGladiators.Items
                     {
                         foreach (ItemEffect ie2 in ret)
                         {
-                            if(ie2.effectType == ItemEffectType.ModifyAttribute &&
+                            if (ie2.effectType == ItemEffectType.ModifyAttribute &&
                                 ie2.attributeModified == ie1.attributeModified) { }
                             else
+                            {
                                 validEffects.Add(ie1);
-                            
+                            }
+
                         }
                     }
 
-                    if(validEffects.Count > 0)
+                    if (validEffects.Count > 0)
                     {
                         validEffects.Shuffle();
                         ret.Add(validEffects[0]);
                     }
-                    
+
                 }
             }
             return ret;
         }
+
         #endregion
 
         // Character Logic
         #region
-         
+
         public bool IsItemValidOnSlot(ItemData item, RosterItemSlot slot, HexCharacterData character = null)
         {
             bool bRet = false;
@@ -292,21 +298,28 @@ namespace WeAreGladiators.Items
             }
 
             if (itemType == ItemType.Trinket && slot.SlotType == RosterSlotType.Trinket)
+            {
                 bRet = true;
+            }
             else if (itemType == ItemType.Head && slot.SlotType == RosterSlotType.Head)
+            {
                 bRet = true;
+            }
             else if (itemType == ItemType.Body && slot.SlotType == RosterSlotType.Body)
+            {
                 bRet = true;
+            }
             else if (itemType == ItemType.Weapon)
             {
-                if ((item.allowedSlot == WeaponSlot.MainHand && slot.SlotType == RosterSlotType.MainHand) ||
-                    (item.allowedSlot == WeaponSlot.Offhand && slot.SlotType == RosterSlotType.OffHand) ||
-                    (item.allowedSlot == WeaponSlot.EitherHand && (slot.SlotType == RosterSlotType.OffHand || slot.SlotType == RosterSlotType.MainHand)))
+                if (item.allowedSlot == WeaponSlot.MainHand && slot.SlotType == RosterSlotType.MainHand ||
+                    item.allowedSlot == WeaponSlot.Offhand && slot.SlotType == RosterSlotType.OffHand ||
+                    item.allowedSlot == WeaponSlot.EitherHand && (slot.SlotType == RosterSlotType.OffHand || slot.SlotType == RosterSlotType.MainHand))
+                {
                     bRet = true;
+                }
             }
 
-
-            Debug.LogWarning("IsItemValidOnSlot() returning " + bRet.ToString());
+            Debug.LogWarning("IsItemValidOnSlot() returning " + bRet);
 
             return bRet;
 
@@ -320,7 +333,9 @@ namespace WeAreGladiators.Items
             // Dont apply appearance of weapons to enemies, they get this look directly from their UCM string references
             UniversalCharacterModel ucm = character.hexCharacterView.model.GetComponent<UniversalCharacterModel>();
             if (ucm != null && character.controller != Controller.AI)
+            {
                 CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, ucm);
+            }
 
         }
         public void CopyItemManagerDataIntoOtherItemManager(ItemSet originalData, ItemSet clone)
@@ -333,43 +348,63 @@ namespace WeAreGladiators.Items
         }
         public void CopySerializedItemManagerIntoStandardItemManager(SerializedItemSet data, ItemSet iManager)
         {
-            if (data.mainHandItem != null)            
-                iManager.mainHandItem = GenerateNewItemWithRandomEffects(GetItemDataByName(data.mainHandItem.itemName));     
-            if (data.offHandItem != null)            
-                iManager.offHandItem = GenerateNewItemWithRandomEffects(GetItemDataByName(data.offHandItem.itemName));  
-            if (data.chestArmour != null)            
-                iManager.bodyArmour = GenerateNewItemWithRandomEffects(GetItemDataByName(data.chestArmour.itemName));            
-            if (data.headArmour != null)            
+            if (data.mainHandItem != null)
+            {
+                iManager.mainHandItem = GenerateNewItemWithRandomEffects(GetItemDataByName(data.mainHandItem.itemName));
+            }
+            if (data.offHandItem != null)
+            {
+                iManager.offHandItem = GenerateNewItemWithRandomEffects(GetItemDataByName(data.offHandItem.itemName));
+            }
+            if (data.chestArmour != null)
+            {
+                iManager.bodyArmour = GenerateNewItemWithRandomEffects(GetItemDataByName(data.chestArmour.itemName));
+            }
+            if (data.headArmour != null)
+            {
                 iManager.headArmour = GenerateNewItemWithRandomEffects(GetItemDataByName(data.headArmour.itemName));
+            }
             if (data.trinket != null)
+            {
                 iManager.trinket = GenerateNewItemWithRandomEffects(GetItemDataByName(data.trinket.itemName));
+            }
 
         }
         public void HandleSendItemFromCharacterToInventory(HexCharacterData character, RosterItemSlot slot)
         {
             // Add item back to inventory
-            InventoryController.Instance.AddItemToInventory(slot.ItemDataRef, false);
+            InventoryController.Instance.AddItemToInventory(slot.ItemDataRef);
 
             // Remove item from character
             // Main hand
             if (slot.SlotType == RosterSlotType.MainHand)
+            {
                 character.itemSet.mainHandItem = null;
+            }
 
             // Off hand
             else if (slot.SlotType == RosterSlotType.OffHand)
+            {
                 character.itemSet.offHandItem = null;
+            }
 
             // Trinket
             else if (slot.SlotType == RosterSlotType.Trinket)
+            {
                 character.itemSet.trinket = null;
+            }
 
             // Head
             else if (slot.SlotType == RosterSlotType.Head)
+            {
                 character.itemSet.headArmour = null;
+            }
 
             // Trinket
             else if (slot.SlotType == RosterSlotType.Body)
+            {
                 character.itemSet.bodyArmour = null;
+            }
 
             // Update item abilities
             character.abilityBook.OnItemSetChanged(character.itemSet);
@@ -385,24 +420,24 @@ namespace WeAreGladiators.Items
         public void HandleGiveItemToCharacterFromInventory(HexCharacterData character, InventoryItem newItem, RosterItemSlot slot)
         {
             Debug.LogWarning("ItemController.HandleGiveItemToCharacterFromInventory() called, character = " +
-                character.myName + ", item = " + newItem.itemData.itemName + ", slot = " + slot.SlotType.ToString());
+                character.myName + ", item = " + newItem.itemData.itemName + ", slot = " + slot.SlotType);
 
             ItemData previousItem = slot.ItemDataRef;
             Sound equipSound = newItem.itemData.equipSFX;
-            Debug.LogWarning("SOUND: " + equipSound.ToString());
+            Debug.LogWarning("SOUND: " + equipSound);
 
             // remove new item from inventory
             int index = InventoryController.Instance.Inventory.IndexOf(newItem);
-            InventoryController.Instance.RemoveItemFromInventory(newItem);                       
+            InventoryController.Instance.RemoveItemFromInventory(newItem);
 
             if (previousItem != null)
             {
-                Debug.LogWarning("Item " + previousItem.itemName + " already in slot: " + slot.SlotType.ToString() + ", returning it to inventory...");
+                Debug.LogWarning("Item " + previousItem.itemName + " already in slot: " + slot.SlotType + ", returning it to inventory...");
                 InventoryController.Instance.AddItemToInventory(previousItem, false, index);
             }
 
             // Check if equipping 2H item while using two 1h items: send off hand to inventory too
-            if(newItem.itemData.handRequirement == HandRequirement.TwoHanded &&
+            if (newItem.itemData.handRequirement == HandRequirement.TwoHanded &&
                 character.itemSet.offHandItem != null)
             {
                 InventoryController.Instance.AddItemToInventory(character.itemSet.offHandItem, false, index);
@@ -410,24 +445,34 @@ namespace WeAreGladiators.Items
             }
 
             // Main hand
-            if (slot.SlotType == RosterSlotType.MainHand)            
-                character.itemSet.mainHandItem = newItem.itemData;            
+            if (slot.SlotType == RosterSlotType.MainHand)
+            {
+                character.itemSet.mainHandItem = newItem.itemData;
+            }
 
             // Off hand
-            else if (slot.SlotType == RosterSlotType.OffHand)            
-                character.itemSet.offHandItem = newItem.itemData;            
+            else if (slot.SlotType == RosterSlotType.OffHand)
+            {
+                character.itemSet.offHandItem = newItem.itemData;
+            }
 
             // Trinket
-            else if (slot.SlotType == RosterSlotType.Trinket)            
+            else if (slot.SlotType == RosterSlotType.Trinket)
+            {
                 character.itemSet.trinket = newItem.itemData;
+            }
 
             // Head
             else if (slot.SlotType == RosterSlotType.Head)
+            {
                 character.itemSet.headArmour = newItem.itemData;
+            }
 
             // Body
             else if (slot.SlotType == RosterSlotType.Body)
+            {
                 character.itemSet.bodyArmour = newItem.itemData;
+            }
 
             AudioManager.Instance.PlaySound(equipSound);
 
@@ -444,24 +489,44 @@ namespace WeAreGladiators.Items
         public int GetCharacterItemsGoldValue(ItemSet itemSet)
         {
             int value = 0;
-            if (itemSet.headArmour != null) value += itemSet.headArmour.baseGoldValue;
-            if (itemSet.bodyArmour != null) value += itemSet.bodyArmour.baseGoldValue;
-            if (itemSet.mainHandItem != null) value += itemSet.mainHandItem.baseGoldValue;
-            if (itemSet.offHandItem != null) value += itemSet.offHandItem.baseGoldValue;
-            if (itemSet.trinket != null) value += itemSet.trinket.baseGoldValue;
+            if (itemSet.headArmour != null)
+            {
+                value += itemSet.headArmour.baseGoldValue;
+            }
+            if (itemSet.bodyArmour != null)
+            {
+                value += itemSet.bodyArmour.baseGoldValue;
+            }
+            if (itemSet.mainHandItem != null)
+            {
+                value += itemSet.mainHandItem.baseGoldValue;
+            }
+            if (itemSet.offHandItem != null)
+            {
+                value += itemSet.offHandItem.baseGoldValue;
+            }
+            if (itemSet.trinket != null)
+            {
+                value += itemSet.trinket.baseGoldValue;
+            }
             return value;
         }
+
         #endregion
 
         // Item Effects Logic
         #region
+
         public int GetCharacterDodgeBonusFromShield(ItemSet set)
         {
             return GetTotalAttributeBonusFromItemData(ItemCoreAttribute.Dodge, set.offHandItem);
         }
         public int GetTotalAttributeBonusFromItemSet(ItemCoreAttribute attribute, ItemSet set)
         {
-            if (set == null) return 0;
+            if (set == null)
+            {
+                return 0;
+            }
             int ret = 0;
             ret += GetTotalAttributeBonusFromItemData(attribute, set.mainHandItem);
             ret += GetTotalAttributeBonusFromItemData(attribute, set.offHandItem);
@@ -473,44 +538,83 @@ namespace WeAreGladiators.Items
         public int GetTotalMaximumFatiguePenaltyFromItemSet(ItemSet set)
         {
             int ret = 0;
-            if (set.mainHandItem != null) ret += set.mainHandItem.fatiguePenalty;
-            if (set.offHandItem != null) ret += set.offHandItem.fatiguePenalty;
-            if (set.trinket != null) ret += set.trinket.fatiguePenalty;
-            if (set.headArmour != null) ret += set.headArmour.fatiguePenalty;
-            if (set.bodyArmour != null) ret += set.bodyArmour.fatiguePenalty;
+            if (set.mainHandItem != null)
+            {
+                ret += set.mainHandItem.fatiguePenalty;
+            }
+            if (set.offHandItem != null)
+            {
+                ret += set.offHandItem.fatiguePenalty;
+            }
+            if (set.trinket != null)
+            {
+                ret += set.trinket.fatiguePenalty;
+            }
+            if (set.headArmour != null)
+            {
+                ret += set.headArmour.fatiguePenalty;
+            }
+            if (set.bodyArmour != null)
+            {
+                ret += set.bodyArmour.fatiguePenalty;
+            }
 
-            Debug.Log("ItemController.GetTotalArmourBonusFromItemSet() returning: " + ret.ToString());
+            Debug.Log("ItemController.GetTotalArmourBonusFromItemSet() returning: " + ret);
             return ret;
         }
         public int GetTotalMaximumFatiguePenaltyFromHeadAndBodyItems(ItemSet set)
         {
             int ret = 0;
-            if (set.headArmour != null) ret += set.headArmour.fatiguePenalty;
-            if (set.bodyArmour != null) ret += set.bodyArmour.fatiguePenalty;
+            if (set.headArmour != null)
+            {
+                ret += set.headArmour.fatiguePenalty;
+            }
+            if (set.bodyArmour != null)
+            {
+                ret += set.bodyArmour.fatiguePenalty;
+            }
 
-            Debug.Log("ItemController.GetTotalMaximumFatiguePenaltyFromHeadAndBodyItems() returning: " + ret.ToString());
+            Debug.Log("ItemController.GetTotalMaximumFatiguePenaltyFromHeadAndBodyItems() returning: " + ret);
             return ret;
         }
         public int GetTotalArmourBonusFromItemSet(ItemSet set)
         {
             int ret = 0;
-            if (set.mainHandItem != null) ret += set.mainHandItem.armourAmount;
-            if (set.offHandItem != null) ret += set.offHandItem.armourAmount;
-            if (set.trinket != null) ret += set.trinket.armourAmount;
-            if (set.headArmour != null) ret += set.headArmour.armourAmount;
-            if (set.bodyArmour != null) ret += set.bodyArmour.armourAmount;
+            if (set.mainHandItem != null)
+            {
+                ret += set.mainHandItem.armourAmount;
+            }
+            if (set.offHandItem != null)
+            {
+                ret += set.offHandItem.armourAmount;
+            }
+            if (set.trinket != null)
+            {
+                ret += set.trinket.armourAmount;
+            }
+            if (set.headArmour != null)
+            {
+                ret += set.headArmour.armourAmount;
+            }
+            if (set.bodyArmour != null)
+            {
+                ret += set.bodyArmour.armourAmount;
+            }
 
-            Debug.Log("ItemController.GetTotalArmourBonusFromItemSet() returning: " + ret.ToString());
+            Debug.Log("ItemController.GetTotalArmourBonusFromItemSet() returning: " + ret);
             return ret;
         }
         private int GetTotalAttributeBonusFromItemData(ItemCoreAttribute attribute, ItemData item)
         {
             int ret = 0;
-            if (item == null) return 0;
-
-            for(int i = 0; i < item.itemEffects.Count; i++)
+            if (item == null)
             {
-                if(item.itemEffects[i].effectType == ItemEffectType.ModifyAttribute &&
+                return 0;
+            }
+
+            for (int i = 0; i < item.itemEffects.Count; i++)
+            {
+                if (item.itemEffects[i].effectType == ItemEffectType.ModifyAttribute &&
                     item.itemEffects[i].attributeModified == attribute)
                 {
                     ret += item.itemEffects[i].modAmount;
@@ -522,7 +626,10 @@ namespace WeAreGladiators.Items
         public int GetInnateModifierFromWeapon(InnateItemEffectType innateEffect, ItemData item)
         {
             int ret = 0;
-            if (item == null) return 0;
+            if (item == null)
+            {
+                return 0;
+            }
 
             for (int i = 0; i < item.itemEffects.Count; i++)
             {
@@ -530,24 +637,35 @@ namespace WeAreGladiators.Items
                 if (effect.effectType == ItemEffectType.InnateWeaponEffect &&
                     effect.innateItemEffectType == innateEffect)
                 {
-                    if(innateEffect == InnateItemEffectType.InnateAccuracyModifier)
+                    if (innateEffect == InnateItemEffectType.InnateAccuracyModifier)
+                    {
                         ret += effect.innateAccuracyMod;
+                    }
                     else if (innateEffect == InnateItemEffectType.InnateAccuracyAgainstAdjacentModifier)
+                    {
                         ret += effect.innateAccuracyAgainstAdjacentMod;
+                    }
                     else if (innateEffect == InnateItemEffectType.BonusMeleeRange)
+                    {
                         ret += effect.innateWeaponRangeBonus;
+                    }
                     else if (innateEffect == InnateItemEffectType.PenetrationBonusOnBackstab)
+                    {
                         ret += effect.innateBackstabPenetrationBonus;
+                    }
                 }
             }
 
-            Debug.Log("GetInnateModifierFromWeapon() returning " + ret.ToString() + " for innate effect type: " + innateEffect.ToString());
+            Debug.Log("GetInnateModifierFromWeapon() returning " + ret + " for innate effect type: " + innateEffect);
 
             return ret;
         }
         public int GetTotalStacksOfPerkFromItemSet(Perk perk, ItemSet set)
         {
-            if (set == null) return 0;
+            if (set == null)
+            {
+                return 0;
+            }
             int ret = 0;
             ret += GetTotalStacksOfPerkFromItem(perk, set.mainHandItem);
             ret += GetTotalStacksOfPerkFromItem(perk, set.offHandItem);
@@ -559,7 +677,10 @@ namespace WeAreGladiators.Items
         private int GetTotalStacksOfPerkFromItem(Perk perk, ItemData item)
         {
             int ret = 0;
-            if (item == null) return 0;
+            if (item == null)
+            {
+                return 0;
+            }
             for (int i = 0; i < item.itemEffects.Count; i++)
             {
                 if (item.itemEffects[i].effectType == ItemEffectType.GainPerk &&
@@ -579,7 +700,7 @@ namespace WeAreGladiators.Items
             perks.AddRange(GetActivePerksFromItem(set.trinket));
             perks.AddRange(GetActivePerksFromItem(set.headArmour));
             perks.AddRange(GetActivePerksFromItem(set.bodyArmour));
-            Debug.Log("ItemController.GetActivePerksFromItemSet() found " + perks.Count.ToString() +
+            Debug.Log("ItemController.GetActivePerksFromItemSet() found " + perks.Count +
                 " perks from items");
             return perks;
         }
@@ -588,18 +709,21 @@ namespace WeAreGladiators.Items
             Debug.Log("ItemController.GetActivePerksFromItem() called");
 
             List<ActivePerk> perks = new List<ActivePerk>();
-            if (item == null) return perks;
+            if (item == null)
+            {
+                return perks;
+            }
 
             foreach (ItemEffect i in item.itemEffects)
             {
-                if(i.effectType == ItemEffectType.GainPerk)
+                if (i.effectType == ItemEffectType.GainPerk)
                 {
                     Debug.Log("Found a perk effect on item!");
                     ActivePerk oldPerk = null;
                     bool createNew = true;
-                    foreach(ActivePerk ap in perks)
+                    foreach (ActivePerk ap in perks)
                     {
-                        if(ap.perkTag == i.perkGained.perkTag)
+                        if (ap.perkTag == i.perkGained.perkTag)
                         {
                             oldPerk = ap;
                             createNew = false;
@@ -607,8 +731,14 @@ namespace WeAreGladiators.Items
                         }
                     }
 
-                    if (createNew) perks.Add(new ActivePerk(i.perkGained.perkTag, i.perkGained.stacks));
-                    else oldPerk.stacks += i.perkGained.stacks;
+                    if (createNew)
+                    {
+                        perks.Add(new ActivePerk(i.perkGained.perkTag, i.perkGained.stacks));
+                    }
+                    else
+                    {
+                        oldPerk.stacks += i.perkGained.stacks;
+                    }
                 }
             }
 
@@ -619,7 +749,10 @@ namespace WeAreGladiators.Items
             Debug.Log("ItemController.GetInnateOnUseActivePerksFromItem() called");
 
             List<ActivePerk> perks = new List<ActivePerk>();
-            if (item == null) return perks;
+            if (item == null)
+            {
+                return perks;
+            }
 
             foreach (ItemEffect i in item.itemEffects)
             {
@@ -642,12 +775,17 @@ namespace WeAreGladiators.Items
         }
         private void ApplyCombatStartPerkEffectsToCharacterFromItem(HexCharacterModel character, ItemData item)
         {
-            if (item == null) return;
+            if (item == null)
+            {
+                return;
+            }
             for (int i = 0; i < item.itemEffects.Count; i++)
             {
-                if (item.itemEffects[i].effectType == ItemEffectType.GainPerkCombatStart)                
-                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, item.itemEffects[i].perkGained.perkTag, item.itemEffects[i].perkGained.stacks, false);                
-            }            
+                if (item.itemEffects[i].effectType == ItemEffectType.GainPerkCombatStart)
+                {
+                    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, item.itemEffects[i].perkGained.perkTag, item.itemEffects[i].perkGained.stacks, false);
+                }
+            }
         }
         public void ApplyTurnStartPerkEffectsToCharacterFromItemSet(HexCharacterModel character)
         {
@@ -659,26 +797,31 @@ namespace WeAreGladiators.Items
         }
         private void ApplyTurnStartPerkEffectsToCharacterFromItem(HexCharacterModel character, ItemData item)
         {
-            if (item == null) return;
+            if (item == null)
+            {
+                return;
+            }
             for (int i = 0; i < item.itemEffects.Count; i++)
             {
                 if (item.itemEffects[i].effectType == ItemEffectType.GainPerkTurnStart && RandomGenerator.NumberBetween(1, 100) <= item.itemEffects[i].gainPerkChance)
+                {
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, item.itemEffects[i].perkGained.perkTag, item.itemEffects[i].perkGained.stacks, true, 0.5f);
+                }
             }
         }
         public bool IsCharacterUsingWeaponClass(ItemSet set, WeaponClass weaponClass)
         {
             bool ret = false;
 
-            if ((set.mainHandItem != null && set.mainHandItem.weaponClass == weaponClass) ||
-                (set.offHandItem != null && set.offHandItem.weaponClass == weaponClass))
+            if (set.mainHandItem != null && set.mainHandItem.weaponClass == weaponClass ||
+                set.offHandItem != null && set.offHandItem.weaponClass == weaponClass)
+            {
                 ret = true;
+            }
 
             return ret;
         }
+
         #endregion
-
-
-
     }
 }

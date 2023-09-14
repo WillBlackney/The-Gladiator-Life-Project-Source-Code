@@ -1,10 +1,8 @@
-﻿using DG.Tweening;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
-using WeAreGladiators.Utilities;
 using WeAreGladiators.Perks;
-using WeAreGladiators.Libraries;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UI
 {
@@ -12,10 +10,10 @@ namespace WeAreGladiators.UI
     {
         // Properties + Component References
         #region
+
         [Header("Data")]
         [SerializeField] private KeyWordDataBox[] allKeyWordData;
         [Space(10)]
-
         [Header("Transform + Parent Component")]
         [SerializeField] private Canvas rootCanvas;
         [SerializeField] private RectTransform panelFitterParent;
@@ -26,11 +24,13 @@ namespace WeAreGladiators.UI
         [SerializeField] private CanvasGroup mainCg;
         [Space(10)]
         [Header("Keyword Panel Components")]
-        [SerializeField] private KeyWordPanel[] allKeyWordPanels;       
+        [SerializeField] private KeyWordPanel[] allKeyWordPanels;
+
         #endregion
 
         // Build Keyword Panels
         #region
+
         public void BuildAllViewsFromKeyWordModels(List<KeyWordModel> keyWords)
         {
             // Enable + reset main view
@@ -120,10 +120,12 @@ namespace WeAreGladiators.UI
             panel.unframedImageParent.SetActive(false);
             panel.framedImage.sprite = data.passiveSprite;
         }
+
         #endregion
 
         // Get data
         #region
+
         private KeyWordDataBox GetMatchingKeyWordData(KeyWordModel model)
         {
             KeyWordDataBox dataReturned = null;
@@ -140,7 +142,7 @@ namespace WeAreGladiators.UI
             if (dataReturned == null)
             {
                 Debug.LogWarning("GetMatchingKeyWordData() could not find a matching key word data object for '" +
-                    model.ToString() + "' key word modelm, returning null!...");
+                    model + "' key word modelm, returning null!...");
             }
 
             return dataReturned;
@@ -172,10 +174,12 @@ namespace WeAreGladiators.UI
 
             return stringReturned;
         }
+
         #endregion
 
         // View Logic
         #region
+
         private void ResetAllKeyWordPanels()
         {
             foreach (KeyWordPanel panel in allKeyWordPanels)
@@ -189,8 +193,13 @@ namespace WeAreGladiators.UI
             if (GameController.Instance.GameState == GameState.CombatActive ||
                 GameController.Instance.GameState == GameState.CombatRewardPhase ||
                 GameController.Instance.GameState == GameState.MainMenu)
+            {
                 panelFitterParent.position = combatPos.position;
-            else panelFitterParent.position = normalPos.position;
+            }
+            else
+            {
+                panelFitterParent.position = normalPos.position;
+            }
         }
         private void DisableMainView()
         {
@@ -208,8 +217,7 @@ namespace WeAreGladiators.UI
             mainCg.DOKill();
             mainCg.alpha = 0f;
         }
+
         #endregion
-
-
     }
 }

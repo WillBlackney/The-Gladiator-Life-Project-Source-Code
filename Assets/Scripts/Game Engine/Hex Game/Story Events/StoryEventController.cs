@@ -1,4 +1,10 @@
-﻿using DG.Tweening;
+﻿using System;
+using System.Collections.Generic;
+using DG.Tweening;
+using Sirenix.Utilities;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Boons;
 using WeAreGladiators.Characters;
@@ -8,63 +14,101 @@ using WeAreGladiators.Libraries;
 using WeAreGladiators.Perks;
 using WeAreGladiators.Persistency;
 using WeAreGladiators.Player;
+using WeAreGladiators.Scoring;
 using WeAreGladiators.TownFeatures;
 using WeAreGladiators.UI;
 using WeAreGladiators.Utilities;
-using Sirenix.Utilities;
-using System;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-using WeAreGladiators.Scoring;
 
 namespace WeAreGladiators.StoryEvents
 {
     public class StoryEventController : Singleton<StoryEventController>
     {
+
+        #region Start Events
+
+        public void StartNextEvent()
+        {
+            visualParent.SetActive(true);
+
+            // Flush old data
+            choiceCharacterTarget = null;
+            currentResultItems.Clear();
+
+            // Get new targets (if event requires it)
+            DetermineAndCacheCharacterTargetsOnEventStart(CurrentStoryEvent);
+
+            // Trigger on event start effects
+            CurrentStoryEvent.onStartEffects.ForEach(i => ResolveChoiceEffect(i));
+
+            // Build UI for first page
+            eventHeaderText.text = CurrentStoryEvent.storyEventName;
+            BuildAllViewsFromPage(CurrentStoryEvent.firstPage);
+            ShowUI();
+
+            // Play event start fanfare SFX
+            AudioManager.Instance.PlaySound(Sound.Effects_Story_Event_Start);
+        }
+
+        #endregion
+
+        #region Buttons + Input
+
+        public void HandleChoiceButtonClicked(StoryEventChoiceButton button)
+        {
+            if (button.MyChoiceData != null)
+            {
+                AudioManager.Instance.PlaySound(Sound.UI_Button_Click);
+                HandleAllChoiceEffects(button.MyChoiceData);
+            }
+
+        }
+
+        #endregion
         #region Components
+
         [Header("Core Data")]
-        [SerializeField] StoryEventDataSO[] allStoryEvents;
+        [SerializeField]
+        private StoryEventDataSO[] allStoryEvents;
 
         [Space(10)]
-
         [Header("Core UI Components")]
-        [SerializeField] GameObject visualParent;
-        [SerializeField] CanvasGroup rootCg;
-        [SerializeField] Image blackUnderlay;
-        [SerializeField] TextMeshProUGUI eventHeaderText;
-        [SerializeField] TextMeshProUGUI eventDescriptionText;
-        [SerializeField] Image eventImage;
-        [SerializeField] ScrollRect mainContentScrollView;
-        [SerializeField] Scrollbar verticalContentScrollbar;
-        [SerializeField] StoryEventChoiceButton[] fittedChoiceButtons;
-        [SerializeField] StoryEventChoiceButton[] unfittedChoiceButtons;
-        [SerializeField] RectTransform[] layoutsRebuilt;
+        [SerializeField]
+        private GameObject visualParent;
+        [SerializeField] private CanvasGroup rootCg;
+        [SerializeField] private Image blackUnderlay;
+        [SerializeField] private TextMeshProUGUI eventHeaderText;
+        [SerializeField] private TextMeshProUGUI eventDescriptionText;
+        [SerializeField] private Image eventImage;
+        [SerializeField] private ScrollRect mainContentScrollView;
+        [SerializeField] private Scrollbar verticalContentScrollbar;
+        [SerializeField] private StoryEventChoiceButton[] fittedChoiceButtons;
+        [SerializeField] private StoryEventChoiceButton[] unfittedChoiceButtons;
+        [SerializeField] private RectTransform[] layoutsRebuilt;
 
         [Space(10)]
-
         [Header("Result Item Components")]
-        [SerializeField] Transform resultItemsParent;
-        [SerializeField] GameObject resultItemRowPrefab;
-        [SerializeField] List<StoryEventResultItemRow> resultItemRows;
+        [SerializeField]
+        private Transform resultItemsParent;
+        [SerializeField] private GameObject resultItemRowPrefab;
+        [SerializeField] private List<StoryEventResultItemRow> resultItemRows;
 
         [Space(10)]
-
         [Header("Movement Components")]
-        [SerializeField] RectTransform movementParent;
-        [SerializeField] RectTransform onScreenPosition;
-        [SerializeField] RectTransform offScreenPosition;
+        [SerializeField]
+        private RectTransform movementParent;
+        [SerializeField] private RectTransform onScreenPosition;
+        [SerializeField] private RectTransform offScreenPosition;
 
         [Header("Button Auto Fitting")]
-        [SerializeField] RectTransform content;
-        [SerializeField] Transform unfittedButtonsParent;
-        [SerializeField] Transform fittedButtonsParent;
+        [SerializeField]
+        private RectTransform content;
+        [SerializeField] private Transform unfittedButtonsParent;
+        [SerializeField] private Transform fittedButtonsParent;
 
         // Hidden fields
         private List<string> eventsAlreadyEncountered = new List<string>();
-        private List<StoryEventResultItem> currentResultItems = new List<StoryEventResultItem>();
-        private List<HexCharacterData> characterTargets = new List<HexCharacterData>();
+        private readonly List<StoryEventResultItem> currentResultItems = new List<StoryEventResultItem>();
+        private readonly List<HexCharacterData> characterTargets = new List<HexCharacterData>();
         private HexCharacterData choiceCharacterTarget;
 
         private const string CHARACTER_1_NAME_KEY = "{CHARACTER_1_NAME}";
@@ -74,20 +118,29 @@ namespace WeAreGladiators.StoryEvents
 
         private const string CHOICE_CHARACTER_NAME_KEY = "{CHOICE_CHARACTER_NAME}";
         private const string CHOICE_CHARACTER_SUB_NAME_KEY = "{CHOICE_CHARACTER_SUB_NAME}";
+
         #endregion
 
         #region Getters + Accessors
+
         public StoryEventDataSO CurrentStoryEvent { get; private set; }
-        public StoryEventDataSO[] AllStoryEvents { get { return allStoryEvents; } }
+
+        public StoryEventDataSO[] AllStoryEvents => allStoryEvents;
 
         #endregion
 
         #region Persistency Logic
+
         public void SaveMyDataToSaveFile(SaveGameData saveFile)
         {
             if (CurrentStoryEvent != null)
+            {
                 saveFile.currentStoryEvent = CurrentStoryEvent.storyEventName;
-            else saveFile.currentStoryEvent = "";
+            }
+            else
+            {
+                saveFile.currentStoryEvent = "";
+            }
 
             saveFile.encounteredStoryEvents = eventsAlreadyEncountered;
         }
@@ -105,39 +158,16 @@ namespace WeAreGladiators.StoryEvents
 
             eventsAlreadyEncountered = saveFile.encounteredStoryEvents;
         }
-        #endregion
 
-        #region Start Events
-        public void StartNextEvent()
-        {
-            visualParent.SetActive(true);
-
-            // Flush old data
-            choiceCharacterTarget = null;
-            currentResultItems.Clear();
-
-            // Get new targets (if event requires it)
-            DetermineAndCacheCharacterTargetsOnEventStart(CurrentStoryEvent);
-           
-            // Trigger on event start effects
-            CurrentStoryEvent.onStartEffects.ForEach(i => ResolveChoiceEffect(i));
-
-            // Build UI for first page
-            eventHeaderText.text = CurrentStoryEvent.storyEventName;
-            BuildAllViewsFromPage(CurrentStoryEvent.firstPage);
-            ShowUI();
-
-            // Play event start fanfare SFX
-            AudioManager.Instance.PlaySound(Sound.Effects_Story_Event_Start);
-        }
         #endregion
 
         #region UI + View Logic
+
         private void ShowUI()
         {
             // Make UI clickable
             rootCg.interactable = true;
-            visualParent.SetActive(true);            
+            visualParent.SetActive(true);
 
             // Reset tweens
             movementParent.DOKill();
@@ -151,7 +181,7 @@ namespace WeAreGladiators.StoryEvents
                 movementParent.DOMove(onScreenPosition.position, 0.65f).SetEase(Ease.OutBack);
                 TransformUtils.RebuildLayouts(layoutsRebuilt);
             });
-            
+
         }
         private void HideUI(float speed = 1f, Action onComplete = null)
         {
@@ -167,7 +197,10 @@ namespace WeAreGladiators.StoryEvents
             movementParent.DOMove(offScreenPosition.position, speed).SetEase(Ease.InBack).OnComplete(() =>
             {
                 visualParent.SetActive(false);
-                if (onComplete != null) onComplete.Invoke();
+                if (onComplete != null)
+                {
+                    onComplete.Invoke();
+                }
             });
         }
         private void BuildAllViewsFromPage(StoryEventPageSO page)
@@ -185,7 +218,10 @@ namespace WeAreGladiators.StoryEvents
             BuildResultItemsSection();
 
             // Set event image
-            if (page.pageSprite != null) eventImage.sprite = page.pageSprite;
+            if (page.pageSprite != null)
+            {
+                eventImage.sprite = page.pageSprite;
+            }
 
             // Flush result items from previous page
             currentResultItems.Clear();
@@ -216,14 +252,14 @@ namespace WeAreGladiators.StoryEvents
                 {
                     unfittedChoiceButtons[i].BuildAndShow(page.allChoices[i]);
                     fittedChoiceButtons[i].BuildAndShow(page.allChoices[i]);
-                }               
+                }
             }
         }
         private bool DoesChoiceMeetAllRequirements(StoryEventChoiceSO choice)
         {
             bool ret = true;
 
-            foreach(StoryChoiceRequirement req in choice.requirements)
+            foreach (StoryChoiceRequirement req in choice.requirements)
             {
                 bool pass = IsStoryChoiceRequirementMet(req);
                 if (!pass)
@@ -238,12 +274,12 @@ namespace WeAreGladiators.StoryEvents
         private bool IsStoryChoiceRequirementMet(StoryChoiceRequirement req)
         {
             bool ret = true;
-            if(req.requirementType == StoryChoiceReqType.CharacterWithBackground)
+            if (req.requirementType == StoryChoiceReqType.CharacterWithBackground)
             {
                 bool foundMatch = false;
-                foreach(HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
+                foreach (HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
                 {
-                    if(character.background.backgroundType == req.requiredBackground)
+                    if (character.background.backgroundType == req.requiredBackground)
                     {
                         foundMatch = true;
                         choiceCharacterTarget = character;
@@ -306,7 +342,7 @@ namespace WeAreGladiators.StoryEvents
             // page descriptions and choice button text fields
 
             string ret = original;
-            if(characterTargets.Count >= 1)
+            if (characterTargets.Count >= 1)
             {
                 ret = ret.Replace(CHARACTER_1_NAME_KEY, TextLogic.ReturnColoredText(characterTargets[0].myName, TextLogic.neutralYellow));
                 ret = ret.Replace(CHARACTER_1_SUB_NAME_KEY, TextLogic.ReturnColoredText(characterTargets[0].mySubName, TextLogic.neutralYellow));
@@ -327,6 +363,7 @@ namespace WeAreGladiators.StoryEvents
         #endregion
 
         #region Determine Next Event Logic
+
         public StoryEventDataSO DetermineAndCacheNextStoryEvent()
         {
             // If sandbox mode, use the global settings predetermined event
@@ -349,7 +386,9 @@ namespace WeAreGladiators.StoryEvents
 
             // Add chosen event to list of events all experienced (so that it isn't show twice)
             if (eventsAlreadyEncountered.Contains(CurrentStoryEvent.storyEventName) == false)
+            {
                 eventsAlreadyEncountered.Add(CurrentStoryEvent.storyEventName);
+            }
 
             return CurrentStoryEvent;
         }
@@ -359,22 +398,31 @@ namespace WeAreGladiators.StoryEvents
             foreach (StoryEventDataSO s in AllStoryEvents)
             {
                 if (IsStoryEventValid(s))
+                {
                     listReturned.Add(s);
+                }
             }
-            if (shuffled) return listReturned.ShuffledCopy();
-            else return listReturned;
+            if (shuffled)
+            {
+                return listReturned.ShuffledCopy();
+            }
+            return listReturned;
         }
+
         #endregion
 
         #region Story Event Requirements + Validity Checking
+
         private bool IsStoryEventValid(StoryEventDataSO storyEvent)
         {
             if (eventsAlreadyEncountered.Contains(storyEvent.storyEventName) == false &&
                 !storyEvent.excludeFromGame &&
                 DoesStoryEventMeetBaseRequirements(storyEvent) &&
                 DoesStoryEventMeetCharacterTargetRequirements(storyEvent))
+            {
                 return true;
-            else return false;
+            }
+            return false;
         }
         private bool DoesStoryEventMeetBaseRequirements(StoryEventDataSO storyEvent)
         {
@@ -398,13 +446,19 @@ namespace WeAreGladiators.StoryEvents
             if (requirement.reqType == StoryEventRequirementType.XorMoreCharactersInRoster)
             {
                 int characterCount = CharacterDataController.Instance.AllPlayerCharacters.Count;
-                if (requirement.includeTheKid == false && TheKidIsAlive()) characterCount = characterCount - 1;
+                if (requirement.includeTheKid == false && TheKidIsAlive())
+                {
+                    characterCount = characterCount - 1;
+                }
                 ret = characterCount > requirement.requiredCharactersInRosterCount;
             }
             else if (requirement.reqType == StoryEventRequirementType.XorLessCharactersInRoster)
             {
                 int characterCount = CharacterDataController.Instance.AllPlayerCharacters.Count;
-                if (requirement.includeTheKid == false && TheKidIsAlive()) characterCount = characterCount - 1;
+                if (requirement.includeTheKid == false && TheKidIsAlive())
+                {
+                    characterCount = characterCount - 1;
+                }
                 ret = characterCount < requirement.requiredCharactersInRosterCount;
             }
             else if (requirement.reqType == StoryEventRequirementType.HasXorLessGold)
@@ -425,9 +479,9 @@ namespace WeAreGladiators.StoryEvents
             }
             else if (requirement.reqType == StoryEventRequirementType.TheKidIsInRoster)
             {
-                foreach(HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
+                foreach (HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
                 {
-                    if(character.background.backgroundType == CharacterBackground.TheKid)
+                    if (character.background.backgroundType == CharacterBackground.TheKid)
                     {
                         return true;
                     }
@@ -465,7 +519,7 @@ namespace WeAreGladiators.StoryEvents
                     ret = false;
                     break;
                 }
-                else chosenCharacterProspects.Add(character);
+                chosenCharacterProspects.Add(character);
             }
 
             return ret;
@@ -475,9 +529,9 @@ namespace WeAreGladiators.StoryEvents
             bool ret = false;
             if (req.reqType == StoryEventCharacterTargetRequirementType.HasBackground)
             {
-                foreach(CharacterBackground cbg in req.requiredBackgrounds)
+                foreach (CharacterBackground cbg in req.requiredBackgrounds)
                 {
-                    if(character.background.backgroundType == cbg)
+                    if (character.background.backgroundType == cbg)
                     {
                         ret = true;
                         break;
@@ -511,35 +565,27 @@ namespace WeAreGladiators.StoryEvents
                 ret = pass;
             }
             return ret;
-                    
-        }
-        #endregion
-
-        #region Buttons + Input
-        public void HandleChoiceButtonClicked(StoryEventChoiceButton button)
-        {
-            if (button.MyChoiceData != null)
-            {
-                AudioManager.Instance.PlaySound(Sound.UI_Button_Click);
-                HandleAllChoiceEffects(button.MyChoiceData);
-            }
 
         }
 
         #endregion
 
         #region Handle Choices
+
         private void HandleAllChoiceEffects(StoryEventChoiceSO choice)
         {
             // Determine set
             StoryChoiceEffectSet set = null;
-            if (choice.effectSets.Length == 1) set = choice.effectSets[0];
+            if (choice.effectSets.Length == 1)
+            {
+                set = choice.effectSets[0];
+            }
             else
             {
                 int roll = RandomGenerator.NumberBetween(1, 100);
-                foreach(StoryChoiceEffectSet s in choice.effectSets)
+                foreach (StoryChoiceEffectSet s in choice.effectSets)
                 {
-                    if(roll >= s.lowerProbability && roll <= s.upperProbability)
+                    if (roll >= s.lowerProbability && roll <= s.upperProbability)
                     {
                         set = s;
                         break;
@@ -590,7 +636,7 @@ namespace WeAreGladiators.StoryEvents
                     (goldLost.ToString(), TextLogic.blueNumber) + " " + TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow) + ".", ResultRowIcon.GoldCoins);
                 currentResultItems.Add(newResultItem);
             }
-            else if(effect.effectType == StoryChoiceEffectType.GainBoon)
+            else if (effect.effectType == StoryChoiceEffectType.GainBoon)
             {
                 BoonData boonGained = new BoonData(BoonController.Instance.GetBoonDataByTag(effect.boonGained));
                 BoonController.Instance.HandleGainBoon(boonGained);
@@ -599,17 +645,17 @@ namespace WeAreGladiators.StoryEvents
             }
             else if (effect.effectType == StoryChoiceEffectType.GainItem)
             {
-                var ic = ItemController.Instance;
+                ItemController ic = ItemController.Instance;
                 ItemData item = ic.GenerateNewItemWithRandomEffects(ic.GetItemDataByName(effect.itemGained.itemName));
                 InventoryController.Instance.AddItemToInventory(item);
 
-                StoryEventResultItem newResultItem = new StoryEventResultItem("Gained item: " + TextLogic.ReturnColoredText(item.itemName, TextLogic.neutralYellow) +".", ResultRowIcon.FramedSprite, item.ItemSprite);
+                StoryEventResultItem newResultItem = new StoryEventResultItem("Gained item: " + TextLogic.ReturnColoredText(item.itemName, TextLogic.neutralYellow) + ".", ResultRowIcon.FramedSprite, item.ItemSprite);
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.AddRecruitsToTavern)
             {
                 BackgroundData bgData = CharacterDataController.Instance.GetBackgroundData(effect.backgroundAddedToTavern);
-                for(int i = 0; i < effect.totalCharactersAddedToTavern; i++)
+                for (int i = 0; i < effect.totalCharactersAddedToTavern; i++)
                 {
                     HexCharacterData newCharacter = CharacterDataController.Instance.GenerateRecruitCharacter(bgData);
                     TownController.Instance.HandleAddNewRecruitToTavernFromStoryEvent(newCharacter);
@@ -618,7 +664,7 @@ namespace WeAreGladiators.StoryEvents
                     currentResultItems.Add(newResultItem);
                 }
             }
-            else if(effect.effectType == StoryChoiceEffectType.CharacterKilled)
+            else if (effect.effectType == StoryChoiceEffectType.CharacterKilled)
             {
                 // todo: determine target correctly
                 HexCharacterData target = characterTargets[effect.characterTargetIndex];
@@ -635,21 +681,27 @@ namespace WeAreGladiators.StoryEvents
             else if (effect.effectType == StoryChoiceEffectType.GainExperience)
             {
                 HexCharacterData target = characterTargets[effect.characterTargetIndex];
-                int xpGainedActual = CharacterDataController.Instance.HandleGainXP(target, effect.experienceGained, true);
+                int xpGainedActual = CharacterDataController.Instance.HandleGainXP(target, effect.experienceGained);
                 StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    target.myName + " " + target.mySubName + " gained " + 
+                    target.myName + " " + target.mySubName + " gained " +
                     TextLogic.ReturnColoredText(xpGainedActual.ToString(), TextLogic.blueNumber) + " " + TextLogic.ReturnColoredText("Experience", TextLogic.neutralYellow) + ".", ResultRowIcon.Star);
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.GainPerk)
             {
                 int roll = RandomGenerator.NumberBetween(1, 100);
-                if (roll > effect.gainPerkChance) return;
+                if (roll > effect.gainPerkChance)
+                {
+                    return;
+                }
 
                 int stacks = 1;
                 HexCharacterData target = characterTargets[effect.characterTargetIndex];
                 PerkIconData perkData = PerkController.Instance.GetPerkIconDataByTag(effect.perkGained);
-                if (perkData.isInjury) stacks = RandomGenerator.NumberBetween(perkData.minInjuryDuration, perkData.maxInjuryDuration);                
+                if (perkData.isInjury)
+                {
+                    stacks = RandomGenerator.NumberBetween(perkData.minInjuryDuration, perkData.maxInjuryDuration);
+                }
                 PerkController.Instance.ModifyPerkOnCharacterData(target.passiveManager, perkData.perkTag, stacks);
 
                 StoryEventResultItem newResultItem = new StoryEventResultItem(
@@ -659,7 +711,10 @@ namespace WeAreGladiators.StoryEvents
             else if (effect.effectType == StoryChoiceEffectType.GainRandomInjury)
             {
                 int roll = RandomGenerator.NumberBetween(1, 100);
-                if (roll > effect.gainPerkChance) return;
+                if (roll > effect.gainPerkChance)
+                {
+                    return;
+                }
 
                 HexCharacterData target = characterTargets[effect.characterTargetIndex];
                 PerkIconData injuryData = PerkController.Instance.GetRandomValidInjury(target.passiveManager, effect.injurySeverity, effect.injuryType);
@@ -668,9 +723,11 @@ namespace WeAreGladiators.StoryEvents
                 PerkController.Instance.ModifyPerkOnCharacterData(target.passiveManager, injuryData.perkTag, injuryStacks);
 
                 // Check 'What Doesn't Kill Me Perk': gain permanent stats
-                if (PerkController.Instance.DoesCharacterHavePerk(target.passiveManager, Perk.WhatDoesntKillMe))                
+                if (PerkController.Instance.DoesCharacterHavePerk(target.passiveManager, Perk.WhatDoesntKillMe))
+                {
                     PerkController.Instance.ModifyPerkOnCharacterData(target.passiveManager, Perk.WhatDoesntKillMe, 1);
-                
+                }
+
                 StoryEventResultItem newResultItem = new StoryEventResultItem(
                     target.myName + " " + target.mySubName + " gained injury: " + TextLogic.ReturnColoredText(injuryData.passiveName, TextLogic.neutralYellow) + ".", ResultRowIcon.FramedSprite, injuryData.passiveSprite);
                 currentResultItems.Add(newResultItem);
@@ -694,11 +751,11 @@ namespace WeAreGladiators.StoryEvents
                 for (int i = 0; i < characters.Count; i++)
                 {
                     int currentWage = characters[i].dailyWage;
-                    int newWage = (int)(characters[i].dailyWage * (effect.wageIncreasePercentage + 1f));
+                    int newWage = (int) (characters[i].dailyWage * (effect.wageIncreasePercentage + 1f));
                     characters[i].dailyWage = newWage;
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    characters[i].myName + " " + characters[i].mySubName + " daily wage increased from " + TextLogic.ReturnColoredText(currentWage.ToString(), TextLogic.blueNumber)
-                    + " to " + TextLogic.ReturnColoredText(newWage.ToString(), TextLogic.blueNumber) + ".", ResultRowIcon.GoldCoins);
+                        characters[i].myName + " " + characters[i].mySubName + " daily wage increased from " + TextLogic.ReturnColoredText(currentWage.ToString(), TextLogic.blueNumber)
+                        + " to " + TextLogic.ReturnColoredText(newWage.ToString(), TextLogic.blueNumber) + ".", ResultRowIcon.GoldCoins);
                     currentResultItems.Add(newResultItem);
                 }
             }
@@ -714,14 +771,20 @@ namespace WeAreGladiators.StoryEvents
                 {
                     // Prevent non deserters from leaving
                     if (prospects[i].background.backgroundType == CharacterBackground.TheKid ||
-                        prospects[i].background.backgroundType == CharacterBackground.Slave) continue;
+                        prospects[i].background.backgroundType == CharacterBackground.Slave)
+                    {
+                        continue;
+                    }
 
                     int roll = RandomGenerator.NumberBetween(1, 100);
-                    if (roll > effect.characterLeaveProbability) continue;
+                    if (roll > effect.characterLeaveProbability)
+                    {
+                        continue;
+                    }
                     CharacterDataController.Instance.RemoveCharacterFromRoster(prospects[i]);
 
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    prospects[i].myName + " " + prospects[i].mySubName + " left the company.", ResultRowIcon.Skull);
+                        prospects[i].myName + " " + prospects[i].mySubName + " left the company.", ResultRowIcon.Skull);
                     currentResultItems.Add(newResultItem);
                     charactersEffectedActualCount += 1;
                 }
@@ -731,7 +794,7 @@ namespace WeAreGladiators.StoryEvents
                 {
                     CharacterDataController.Instance.RemoveCharacterFromRoster(prospects[0]);
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    prospects[0].myName + " " + prospects[0].mySubName + " left the company.", ResultRowIcon.Skull);
+                        prospects[0].myName + " " + prospects[0].mySubName + " left the company.", ResultRowIcon.Skull);
                     currentResultItems.Add(newResultItem);
                 }
             }
@@ -739,32 +802,38 @@ namespace WeAreGladiators.StoryEvents
             {
                 // Get targets
                 List<HexCharacterData> prospects = new List<HexCharacterData>();
-                prospects.AddRange(CharacterDataController.Instance.AllPlayerCharacters); 
+                prospects.AddRange(CharacterDataController.Instance.AllPlayerCharacters);
                 prospects.Shuffle();
 
                 int charactersEffectedActualCount = 0;
                 int stacks = 1;
                 PerkIconData perkData = PerkController.Instance.GetPerkIconDataByTag(effect.perkGained);
-                if (perkData.isInjury) stacks = RandomGenerator.NumberBetween(perkData.minInjuryDuration, perkData.maxInjuryDuration);
+                if (perkData.isInjury)
+                {
+                    stacks = RandomGenerator.NumberBetween(perkData.minInjuryDuration, perkData.maxInjuryDuration);
+                }
 
                 for (int i = 0; i < prospects.Count; i++)
                 {
                     int roll = RandomGenerator.NumberBetween(1, 100);
-                    if (roll > effect.gainPerkChance) continue;
+                    if (roll > effect.gainPerkChance)
+                    {
+                        continue;
+                    }
                     PerkController.Instance.ModifyPerkOnCharacterData(prospects[i].passiveManager, perkData.perkTag, stacks);
                     charactersEffectedActualCount++;
 
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    prospects[i].myName + " " + prospects[i].mySubName + " gained passive: " + TextLogic.ReturnColoredText(perkData.passiveName, TextLogic.neutralYellow), ResultRowIcon.FramedSprite, perkData.passiveSprite);
+                        prospects[i].myName + " " + prospects[i].mySubName + " gained passive: " + TextLogic.ReturnColoredText(perkData.passiveName, TextLogic.neutralYellow), ResultRowIcon.FramedSprite, perkData.passiveSprite);
                     currentResultItems.Add(newResultItem);
                 }
 
                 // Make sure atleast 1 character was affected
-                if(charactersEffectedActualCount == 0 && prospects.Count > 0)
+                if (charactersEffectedActualCount == 0 && prospects.Count > 0)
                 {
                     PerkController.Instance.ModifyPerkOnCharacterData(prospects[0].passiveManager, perkData.perkTag, 1);
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    prospects[0].myName + " " + prospects[0].mySubName + " gained passive: " + TextLogic.ReturnColoredText(perkData.passiveName, TextLogic.neutralYellow), ResultRowIcon.FramedSprite, perkData.passiveSprite);
+                        prospects[0].myName + " " + prospects[0].mySubName + " gained passive: " + TextLogic.ReturnColoredText(perkData.passiveName, TextLogic.neutralYellow), ResultRowIcon.FramedSprite, perkData.passiveSprite);
                     currentResultItems.Add(newResultItem);
                 }
             }
@@ -777,14 +846,17 @@ namespace WeAreGladiators.StoryEvents
                 for (int i = 0; i < prospects.Count; i++)
                 {
                     int roll = RandomGenerator.NumberBetween(1, 100);
-                    if (roll > effect.stressRecoveryChance) continue;
+                    if (roll > effect.stressRecoveryChance)
+                    {
+                        continue;
+                    }
 
                     int stressRecovered = RandomGenerator.NumberBetween(effect.stressRecoveredMin, effect.stressRecoveredMax);
                     CharacterDataController.Instance.SetCharacterStress(prospects[i], prospects[i].currentStress - stressRecovered);
 
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    prospects[i].myName + " " + prospects[i].mySubName + " reduced " + TextLogic.ReturnColoredText("Stress", TextLogic.neutralYellow) + " by " + 
-                    TextLogic.ReturnColoredText(stressRecovered.ToString(), TextLogic.blueNumber), ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetStressStateSprite(StressState.Confident));
+                        prospects[i].myName + " " + prospects[i].mySubName + " reduced " + TextLogic.ReturnColoredText("Stress", TextLogic.neutralYellow) + " by " +
+                        TextLogic.ReturnColoredText(stressRecovered.ToString(), TextLogic.blueNumber), ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetStressStateSprite(StressState.Confident));
                     currentResultItems.Add(newResultItem);
                 }
             }
@@ -797,37 +869,44 @@ namespace WeAreGladiators.StoryEvents
                 for (int i = 0; i < prospects.Count; i++)
                 {
                     int roll = RandomGenerator.NumberBetween(1, 100);
-                    if (roll > effect.stressRecoveryChance) continue;
+                    if (roll > effect.stressRecoveryChance)
+                    {
+                        continue;
+                    }
 
                     int stressGained = RandomGenerator.NumberBetween(effect.stressRecoveredMin, effect.stressRecoveredMax);
                     CharacterDataController.Instance.SetCharacterStress(prospects[i], prospects[i].currentStress + stressGained);
 
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
-                    prospects[i].myName + " " + prospects[i].mySubName + " increased " + TextLogic.ReturnColoredText("Stress", TextLogic.neutralYellow) + " by " +
-                    TextLogic.ReturnColoredText(stressGained.ToString(), TextLogic.blueNumber), ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetStressStateSprite(StressState.Nervous));
+                        prospects[i].myName + " " + prospects[i].mySubName + " increased " + TextLogic.ReturnColoredText("Stress", TextLogic.neutralYellow) + " by " +
+                        TextLogic.ReturnColoredText(stressGained.ToString(), TextLogic.blueNumber), ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetStressStateSprite(StressState.Nervous));
                     currentResultItems.Add(newResultItem);
                 }
             }
-            else if(effect.effectType == StoryChoiceEffectType.CharacterJoinsRoster)
+            else if (effect.effectType == StoryChoiceEffectType.CharacterJoinsRoster)
             {
                 HexCharacterData character = CharacterDataController.Instance.ConvertCharacterTemplateToCharacterData(effect.characterJoining);
                 BackgroundData bgData = CharacterDataController.Instance.GetBackgroundData(character.background.backgroundType);
-                if(bgData != null)
+                if (bgData != null)
                 {
                     int startingLevelBoosts = RandomGenerator.NumberBetween(bgData.lowerLevelLimit, bgData.upperLevelLimit) - character.currentLevel;
                     for (int i = 0; i < startingLevelBoosts; i++)
+                    {
                         CharacterDataController.Instance.HandleLevelUp(character);
+                    }
                 }
-                
-                CharacterDataController.Instance.AddCharacterToRoster(character);                
+
+                CharacterDataController.Instance.AddCharacterToRoster(character);
                 string message = character.myName + " " + character.mySubName + " joined the company.";
                 StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.Star);
                 currentResultItems.Add(newResultItem);
             }
         }
+
         #endregion
 
         #region Character Targeting Logic
+
         private HexCharacterData TryFindSuitableCharacterTarget(StoryEventCharacterTarget reqSet, List<HexCharacterData> excludedCharacters = null)
         {
             HexCharacterData ret = null;
@@ -836,7 +915,12 @@ namespace WeAreGladiators.StoryEvents
 
             // Get all player characters not explicitly excluded
             foreach (HexCharacterData c in CharacterDataController.Instance.AllPlayerCharacters)
-                if (excludedCharacters.Contains(c) == false) allProspects.Add(c);
+            {
+                if (excludedCharacters.Contains(c) == false)
+                {
+                    allProspects.Add(c);
+                }
+            }
 
             foreach (HexCharacterData prospect in allProspects)
             {
@@ -850,16 +934,25 @@ namespace WeAreGladiators.StoryEvents
                     }
                 }
 
-                if (passed) validProspects.Add(prospect);
+                if (passed)
+                {
+                    validProspects.Add(prospect);
+                }
             }
 
             // If multiple valid characters, choose one randomly
-            if (validProspects.Count > 1) ret = validProspects[RandomGenerator.NumberBetween(0, validProspects.Count - 1)];            
-            else if (validProspects.Count == 1) ret = validProspects[0];
-
-            for(int i = 0; i < validProspects.Count; i++)
+            if (validProspects.Count > 1)
             {
-                Debug.Log("TryFindSuitableCharacterTarget() propective target " + (i + 1).ToString() + ": " + validProspects[i].myName + " " + validProspects[i].mySubName);
+                ret = validProspects[RandomGenerator.NumberBetween(0, validProspects.Count - 1)];
+            }
+            else if (validProspects.Count == 1)
+            {
+                ret = validProspects[0];
+            }
+
+            for (int i = 0; i < validProspects.Count; i++)
+            {
+                Debug.Log("TryFindSuitableCharacterTarget() propective target " + (i + 1) + ": " + validProspects[i].myName + " " + validProspects[i].mySubName);
             }
 
             return ret;
@@ -871,19 +964,24 @@ namespace WeAreGladiators.StoryEvents
             int requiredCharacters = storyEvent.characterRequirements.Length;
 
             // Fuck it. I'm not in the mood to write a well engineered solution. I'm brute forcing this shit and moving onto the next feature.            
-            for(int i = 0; i < 500; i++)
+            for (int i = 0; i < 500; i++)
             {
                 characterTargets.Clear();
                 foreach (StoryEventCharacterTarget c in storyEvent.characterRequirements)
                 {
                     HexCharacterData target = TryFindSuitableCharacterTarget(c, characterTargets);
-                    if (target != null) characterTargets.Add(target);
+                    if (target != null)
+                    {
+                        characterTargets.Add(target);
+                    }
                 }
-                if (characterTargets.Count == requiredCharacters) break;
+                if (characterTargets.Count == requiredCharacters)
+                {
+                    break;
+                }
             }
         }
+
         #endregion
-
-
     }
 }

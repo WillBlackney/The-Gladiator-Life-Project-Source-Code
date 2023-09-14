@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
@@ -7,8 +6,37 @@ namespace WeAreGladiators.Utilities
 {
     public static class TextLogic
     {
+
+        // General string functions
+        #region
+
+        public static string SplitByCapitals(string originalString)
+        {
+            // Function seperates a string by capitals, 
+            // puts a space at the end of each string, then
+            // recombines them into one string
+
+            string stringReturned = originalString;
+
+            StringBuilder builder = new StringBuilder();
+            foreach (char c in stringReturned)
+            {
+                if (char.IsUpper(c) && builder.Length > 0)
+                {
+                    builder.Append(' ');
+                }
+                builder.Append(c);
+            }
+
+            stringReturned = builder.ToString();
+
+            return stringReturned;
+        }
+
+        #endregion
         // Properties + Color Codes  </color>   
         #region
+
         [Header("RGBA Colour Codes")]
         public static string white = "<color=#FFFFFF>";
         public static string brownBodyText = "<color=#DDC6AB>";
@@ -33,6 +61,7 @@ namespace WeAreGladiators.Utilities
 
         // Build stuff
         #region
+
         public static string ConvertCustomStringListToString(List<CustomString> csList)
         {
             string stringReturned = "";
@@ -47,16 +76,21 @@ namespace WeAreGladiators.Utilities
         {
             return ReturnColoredText(cs.phrase, GetColorCodeFromEnum(cs.color));
         }
+
         #endregion
 
         // Get strings, colours and text
         #region
+
         public static string ReturnColoredText(string text, string color)
         {
             // Just give it a string and a color reference,
             // and this function takes care of everything
-            if (color == "") return text;
-            return (color + text + "</color>");
+            if (color == "")
+            {
+                return text;
+            }
+            return color + text + "</color>";
         }
         private static string GetColorCodeFromEnum(TextColor color)
         {
@@ -130,31 +164,7 @@ namespace WeAreGladiators.Utilities
 
             return colorCodeReturned;
         }
+
         #endregion
-
-        // General string functions
-        #region
-        public static string SplitByCapitals(string originalString)
-        {
-            // Function seperates a string by capitals, 
-            // puts a space at the end of each string, then
-            // recombines them into one string
-
-            string stringReturned = originalString;
-
-            StringBuilder builder = new StringBuilder();
-            foreach (char c in stringReturned)
-            {
-                if (Char.IsUpper(c) && builder.Length > 0) builder.Append(' ');
-                builder.Append(c);
-            }
-
-            stringReturned = builder.ToString();
-
-            return stringReturned;
-        }
-        #endregion
-
-        
     }
 }

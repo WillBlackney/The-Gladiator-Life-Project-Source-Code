@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using WeAreGladiators.Utilities;
-using Sirenix.OdinInspector;
-using System;
 
 namespace WeAreGladiators.UI
 {
@@ -10,9 +10,10 @@ namespace WeAreGladiators.UI
     public class ModalSceneWidget : MonoBehaviour
     {
         #region Properties + Components
+
         [ShowIf("ShowPreset")]
         public ModalBuildPreset preset;
-        public bool customData = false;
+        public bool customData;
 
         [ShowIf("ShowCustomDataFields")]
         public string headerMessage;
@@ -22,41 +23,43 @@ namespace WeAreGladiators.UI
         public Sprite headerSprite;
         [ShowIf("ShowCustomDataFields")]
         public bool frameSprite;
+
         #endregion
 
         #region Getters + Accessors
-        private static ModalSceneWidget mousedOver;
-        public static ModalSceneWidget MousedOver
-        {
-            get { return mousedOver; }
-        }
+
+        public static ModalSceneWidget MousedOver { get; private set; }
+
         #endregion
 
         #region Events
+
         public void MouseEnter()
         {
-            mousedOver = this;
+            MousedOver = this;
             MainModalController.Instance.WidgetMouseEnter(this);
         }
         public void MouseExit()
         {
-            if(mousedOver == this)
+            if (MousedOver == this)
             {
-                mousedOver = null;
+                MousedOver = null;
                 MainModalController.Instance.WidgetMouseExit(this);
             }
         }
-        void OnDisable()
+        private void OnDisable()
         {
-            if (mousedOver == this)
+            if (MousedOver == this)
             {
-                mousedOver = null;
+                MousedOver = null;
                 MainModalController.Instance.WidgetMouseExit(this);
             }
         }
+
         #endregion
 
         #region Odin Showifs
+
         public bool ShowPreset()
         {
             return customData == false;

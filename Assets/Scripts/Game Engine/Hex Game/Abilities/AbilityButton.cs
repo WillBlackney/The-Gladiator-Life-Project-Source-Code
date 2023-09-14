@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+﻿using DG.Tweening;
 using TMPro;
-using WeAreGladiators.UI;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using WeAreGladiators.Characters;
-using DG.Tweening;
+using WeAreGladiators.UI;
 
 namespace WeAreGladiators.Abilities
 {
@@ -14,31 +12,24 @@ namespace WeAreGladiators.Abilities
     {
         // Properties
         #region
-        private AbilityData myAbilityData;
-        [SerializeField] Image[] abilityImages;
-        [SerializeField] GameObject abilityImageParent;
-        [SerializeField] Image greyScaleImage;
-        [SerializeField] Image unuseableOverlay;
-        [SerializeField] GameObject cooldownOverlay;
-        [SerializeField] TextMeshProUGUI cooldownText;
-        [SerializeField] CanvasGroup selectedGlow;
+
+        [SerializeField] private Image[] abilityImages;
+        [SerializeField] private GameObject abilityImageParent;
+        [SerializeField] private Image greyScaleImage;
+        [SerializeField] private Image unuseableOverlay;
+        [SerializeField] private GameObject cooldownOverlay;
+        [SerializeField] private TextMeshProUGUI cooldownText;
+        [SerializeField] private CanvasGroup selectedGlow;
 
         #endregion
 
         // Getters + Accessors
         #region
-        public AbilityData MyAbilityData
-        {
-            get { return myAbilityData; }
-        }
-        public GameObject CooldownOverlay
-        {
-            get { return cooldownOverlay; }
-        }
-        public TextMeshProUGUI CooldownText
-        {
-            get { return cooldownText; }
-        }
+
+        public AbilityData MyAbilityData { get; private set; }
+        public GameObject CooldownOverlay => cooldownOverlay;
+        public TextMeshProUGUI CooldownText => cooldownText;
+
         #endregion
 
         // Input Listeners
@@ -46,7 +37,8 @@ namespace WeAreGladiators.Abilities
 
         public static AbilityButton CurrentButtonMousedOver
         {
-            get; private set;
+            get;
+            private set;
         }
         public void OnPointerClick(PointerEventData eventData)
         {
@@ -61,10 +53,10 @@ namespace WeAreGladiators.Abilities
                 KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyAbilityData.keyWords);
                 AbilityPopupController.Instance.OnAbilityButtonMousedOver(this);
                 CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter
-                              (MyAbilityData.myCharacter.currentActionPoints, AbilityController.Instance.GetAbilityActionPointCost(MyAbilityData.myCharacter, MyAbilityData));
+                    (MyAbilityData.myCharacter.currentActionPoints, AbilityController.Instance.GetAbilityActionPointCost(MyAbilityData.myCharacter, MyAbilityData));
 
                 // Update fatigue gui on left panel for mouse over
-               // CombatUIController.Instance.DoFatigueCostDemo(AbilityController.Instance.GetAbilityFatigueCost(MyAbilityData.myCharacter, MyAbilityData),
+                // CombatUIController.Instance.DoFatigueCostDemo(AbilityController.Instance.GetAbilityFatigueCost(MyAbilityData.myCharacter, MyAbilityData),
                 //    MyAbilityData.myCharacter.currentFatigue, StatCalculator.GetTotalMaxFatigue(MyAbilityData.myCharacter));
             }
         }
@@ -73,7 +65,7 @@ namespace WeAreGladiators.Abilities
         {
             if (CurrentButtonMousedOver == this || CurrentButtonMousedOver == null)
             {
-                if(MyAbilityData != null && MyAbilityData.myCharacter != null)
+                if (MyAbilityData != null && MyAbilityData.myCharacter != null)
                 {
                     AbilityPopupController.Instance.OnAbilityButtonMousedExit();
                     KeyWordLayoutController.Instance.FadeOutMainView();
@@ -82,12 +74,11 @@ namespace WeAreGladiators.Abilities
                         AbilityData a = AbilityController.Instance.CurrentAbilityAwaiting;
                         CombatUIController.Instance.EnergyBar.UpdateIcons(a.myCharacter.currentActionPoints);
                         CombatUIController.Instance.EnergyBar.OnAbilityButtonMouseEnter
-                          (a.myCharacter.currentActionPoints, AbilityController.Instance.GetAbilityActionPointCost(a.myCharacter, a));
+                            (a.myCharacter.currentActionPoints, AbilityController.Instance.GetAbilityActionPointCost(a.myCharacter, a));
 
                         // Update fatigue gui on left panel for mouse over
                         //CombatUIController.Instance.DoFatigueCostDemo(AbilityController.Instance.GetAbilityFatigueCost(a.myCharacter, MyAbilityData),
-                         //   a.myCharacter.currentFatigue, StatCalculator.GetTotalMaxFatigue(a.myCharacter));
-
+                        //   a.myCharacter.currentFatigue, StatCalculator.GetTotalMaxFatigue(a.myCharacter));
 
                     }
                     else
@@ -96,21 +87,21 @@ namespace WeAreGladiators.Abilities
                         //CombatUIController.Instance.ResetFatigueCostPreview();
                     }
 
+                }
 
-                }                   
-             
                 CurrentButtonMousedOver = null;
             }
-               
 
         }
+
         #endregion
 
         // Misc
-        #region 
+        #region
+
         public void ResetButton()
         {
-            myAbilityData = null;
+            MyAbilityData = null;
             greyScaleImage.DOKill();
             greyScaleImage.DOFade(0, 0.2f);
             unuseableOverlay.DOKill();
@@ -122,11 +113,13 @@ namespace WeAreGladiators.Abilities
         public void BuildButton(AbilityData data)
         {
             // link data to button
-            myAbilityData = data;
+            MyAbilityData = data;
 
             // set sprite
-            for(int i = 0; i < abilityImages.Length; i++)
+            for (int i = 0; i < abilityImages.Length; i++)
+            {
                 abilityImages[i].sprite = data.AbilitySprite;
+            }
             abilityImageParent.SetActive(true);
 
             // set cooldown text + views if needed
@@ -134,13 +127,16 @@ namespace WeAreGladiators.Abilities
         }
         public void UpdateAbilityButtonUnusableOverlay()
         {
-            if (myAbilityData == null) return;
-            CooldownText.text = myAbilityData.currentCooldown.ToString();
-            if(myAbilityData.myCharacter != null &&
-                myAbilityData.currentCooldown == 0 && 
-                myAbilityData.myCharacter.currentActionPoints >= AbilityController.Instance.GetAbilityActionPointCost(myAbilityData.myCharacter, myAbilityData) &&
+            if (MyAbilityData == null)
+            {
+                return;
+            }
+            CooldownText.text = MyAbilityData.currentCooldown.ToString();
+            if (MyAbilityData.myCharacter != null &&
+                MyAbilityData.currentCooldown == 0 &&
+                MyAbilityData.myCharacter.currentActionPoints >= AbilityController.Instance.GetAbilityActionPointCost(MyAbilityData.myCharacter, MyAbilityData) &&
                 /*(StatCalculator.GetTotalMaxFatigue(myAbilityData.myCharacter) - myAbilityData.myCharacter.currentFatigue >= AbilityController.Instance.GetAbilityFatigueCost(myAbilityData.myCharacter, myAbilityData)) &&*/
-                AbilityController.Instance.IsAbilityUseable(myAbilityData.myCharacter, myAbilityData, false))
+                AbilityController.Instance.IsAbilityUseable(MyAbilityData.myCharacter, MyAbilityData, false))
             {
                 greyScaleImage.DOKill();
                 greyScaleImage.DOFade(0, 0.2f);
@@ -150,7 +146,7 @@ namespace WeAreGladiators.Abilities
                 CooldownText.gameObject.SetActive(false);
                 cooldownOverlay.gameObject.SetActive(false);
             }
-            else if (myAbilityData.currentCooldown > 0)
+            else if (MyAbilityData.currentCooldown > 0)
             {
                 greyScaleImage.DOKill();
                 greyScaleImage.DOFade(1, 0.2f);
@@ -174,10 +170,13 @@ namespace WeAreGladiators.Abilities
         {
             selectedGlow.DOKill();
             selectedGlow.alpha = 0;
-            if (onOrOff == true)            
+            if (onOrOff)
+            {
                 selectedGlow.DOFade(1f, 0.25f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Yoyo);
-            
+            }
+
         }
+
         #endregion
     }
 }

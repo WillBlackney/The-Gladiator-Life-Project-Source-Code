@@ -1,36 +1,17 @@
-using WeAreGladiators.Items;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using WeAreGladiators.Items;
 
 namespace WeAreGladiators.UI
 {
     public class CustomItemIcon : MonoBehaviour
     {
-        // Properties + Components
-        #region
-        [SerializeField] private Image itemImage;
-        [SerializeField] private ItemData itemDataRef;
-
-        #endregion
-
-        // Getters + Accessors
-        #region       
-        public Image ItemImage
-        {
-            get { return itemImage; }
-        }
-        public ItemData ItemDataRef
-        {
-            get { return itemDataRef; }
-        }
-        #endregion
 
         // Misc
-        #region       
+        #region
+
         public void BuildFromData(ItemData data)
-        {           
+        {
             itemDataRef = data;
             itemImage.gameObject.SetActive(true);
             if (data == null)
@@ -40,19 +21,40 @@ namespace WeAreGladiators.UI
             }
             itemImage.sprite = data.ItemSprite;
         }
+
+        #endregion
+        // Properties + Components
+        #region
+
+        [SerializeField] private Image itemImage;
+        [SerializeField] private ItemData itemDataRef;
+
+        #endregion
+
+        // Getters + Accessors
+        #region
+
+        public Image ItemImage => itemImage;
+        public ItemData ItemDataRef => itemDataRef;
+
         #endregion
 
         // Input
         #region
+
         public void MouseEnter()
         {
-            if (itemDataRef == null) return;
+            if (itemDataRef == null)
+            {
+                return;
+            }
             ItemPopupController.Instance.OnCustomCharacterItemSlotMousedOver(this);
         }
         public void MouseExit()
         {
             ItemPopupController.Instance.OnInventoryItemMouseExit();
         }
+
         #endregion
     }
 }

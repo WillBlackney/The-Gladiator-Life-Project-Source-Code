@@ -1,75 +1,70 @@
-﻿using WeAreGladiators.UI;
-using WeAreGladiators.VisualEvents;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using WeAreGladiators.Persistency;
+using WeAreGladiators.UI;
 using WeAreGladiators.Utilities;
-using WeAreGladiators.Persistency;
+using WeAreGladiators.VisualEvents;
 
 namespace WeAreGladiators.Player
 {
     public class PlayerDataController : Singleton<PlayerDataController>
     {
-        // Properties + Components
-        #region
-        private int currentGold;
-        private int currentFood;
-        #endregion
-
-        // Getters + Accessors
-        #region
-        public int CurrentGold
-        {
-            get { return currentGold; }
-        }
-        public int CurrentFood
-        {
-            get { return currentFood; }
-        }
-        #endregion
 
         // Initialization
-        #region       
+        #region
+
         public void SetGameStartValues()
         {
             ModifyPlayerGold(GlobalSettings.Instance.BaseStartingGold);
             //DeploymentLimit = GlobalSettings.Instance.StartingDeploymentLimit;
         }
+
+        #endregion
+        // Properties + Components
+        #region
+
+        #endregion
+
+        // Getters + Accessors
+        #region
+
+        public int CurrentGold { get; private set; }
+        public int CurrentFood { get; }
+
         #endregion
 
         // Persistency
         #region
+
         public void BuildMyDataFromSaveFile(SaveGameData saveFile)
         {
             SetPlayerGold(saveFile.currentGold);
         }
         public void SaveMyDataToSaveFile(SaveGameData saveData)
         {
-            saveData.currentGold = currentGold;
+            saveData.currentGold = CurrentGold;
         }
-        #endregion      
+
+        #endregion
 
         // Gold Logic
         #region
+
         public void ModifyPlayerGold(int goldGainedOrLost)
         {
-            currentGold += goldGainedOrLost;
-            int vEventValue = currentGold;
+            CurrentGold += goldGainedOrLost;
+            int vEventValue = CurrentGold;
 
             // update food text;
             VisualEventManager.CreateVisualEvent(() => TopBarController.Instance.UpdateGoldText(vEventValue.ToString()));
         }
         private void SetPlayerGold(int newValue)
         {
-            currentGold = newValue;
-            int vEventValue = currentGold;
+            CurrentGold = newValue;
+            int vEventValue = CurrentGold;
 
             // update food text;
             VisualEventManager.CreateVisualEvent(() => TopBarController.Instance.UpdateGoldText(vEventValue.ToString()));
         }
+
         #endregion
-
-
-
     }
 }

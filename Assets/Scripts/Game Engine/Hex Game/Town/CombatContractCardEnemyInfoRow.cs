@@ -1,22 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine;
 using WeAreGladiators.Characters;
-using WeAreGladiators.Libraries;
-using WeAreGladiators.Items;
-using WeAreGladiators.Abilities;
 using WeAreGladiators.UI;
-using DG.Tweening;
 
 namespace WeAreGladiators.TownFeatures
 {
     // TO DO: on right click, bring up the enemy info panel when its created in the future.
     public class CombatContractCardEnemyInfoRow : MonoBehaviour
     {
-        [SerializeField] TextMeshProUGUI enemyNameText;
-        [SerializeField] HexCharacterData myCharacterData;
+        [SerializeField] private TextMeshProUGUI enemyNameText;
+        [SerializeField] private HexCharacterData myCharacterData;
 
         public void BuildFromEnemyData(CharacterWithSpawnData data)
         {
@@ -35,6 +28,5 @@ namespace WeAreGladiators.TownFeatures
         {
             EnemyInfoPanel.Instance.HandleBuildAndShowPanel(myCharacterData);
         }
-
     }
 }

@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace WeAreGladiators
 {
     public class ScrollBarHandle : MonoBehaviour
     {
-        [SerializeField] float handleSize = 0.1f;
-        [SerializeField] Scrollbar mySB;
+        [SerializeField] private float handleSize = 0.1f;
+        [SerializeField] private Scrollbar mySB;
 
         private void LateUpdate()
         {

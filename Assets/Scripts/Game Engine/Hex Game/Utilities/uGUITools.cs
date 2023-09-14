@@ -1,32 +1,40 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+public class uGUITools : MonoBehaviour
+{
+    [MenuItem("Tools/uGUI/Anchors to Corners %[")]
+    private static void AnchorsToCorners()
+    {
+        RectTransform t = Selection.activeTransform as RectTransform;
+        RectTransform pt = Selection.activeTransform.parent as RectTransform;
 
-public class uGUITools : MonoBehaviour {
-	[MenuItem("Tools/uGUI/Anchors to Corners %[")]
-	static void AnchorsToCorners(){
-		RectTransform t = Selection.activeTransform as RectTransform;
-		RectTransform pt = Selection.activeTransform.parent as RectTransform;
+        if (t == null || pt == null)
+        {
+            return;
+        }
 
-		if(t == null || pt == null) return;
-		
-		Vector2 newAnchorsMin = new Vector2(t.anchorMin.x + t.offsetMin.x / pt.rect.width,
-		                                    t.anchorMin.y + t.offsetMin.y / pt.rect.height);
-		Vector2 newAnchorsMax = new Vector2(t.anchorMax.x + t.offsetMax.x / pt.rect.width,
-		                                    t.anchorMax.y + t.offsetMax.y / pt.rect.height);
+        Vector2 newAnchorsMin = new Vector2(t.anchorMin.x + t.offsetMin.x / pt.rect.width,
+            t.anchorMin.y + t.offsetMin.y / pt.rect.height);
+        Vector2 newAnchorsMax = new Vector2(t.anchorMax.x + t.offsetMax.x / pt.rect.width,
+            t.anchorMax.y + t.offsetMax.y / pt.rect.height);
 
-		t.anchorMin = newAnchorsMin;
-		t.anchorMax = newAnchorsMax;
-		t.offsetMin = t.offsetMax = new Vector2(0, 0);
-	}
+        t.anchorMin = newAnchorsMin;
+        t.anchorMax = newAnchorsMax;
+        t.offsetMin = t.offsetMax = new Vector2(0, 0);
+    }
 
-	[MenuItem("Tools/uGUI/Corners to Anchors %]")]
-	static void CornersToAnchors(){
-		RectTransform t = Selection.activeTransform as RectTransform;
+    [MenuItem("Tools/uGUI/Corners to Anchors %]")]
+    private static void CornersToAnchors()
+    {
+        RectTransform t = Selection.activeTransform as RectTransform;
 
-		if(t == null) return;
+        if (t == null)
+        {
+            return;
+        }
 
-		t.offsetMin = t.offsetMax = new Vector2(0, 0);
-	}
+        t.offsetMin = t.offsetMax = new Vector2(0, 0);
+    }
 }
 #endif
