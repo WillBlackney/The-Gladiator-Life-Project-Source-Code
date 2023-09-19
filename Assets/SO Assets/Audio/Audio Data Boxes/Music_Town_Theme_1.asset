@@ -17,13 +17,15 @@ MonoBehaviour:
   allowDuplicates: 0
   randomizeClip: 1
   audioClips:
-  - {fileID: 8300000, guid: 2c017667f6f6481429d8ba0540cf9762, type: 3}
+  - {fileID: 8300000, guid: 8fd4cea9d481e38458fce927e715feef, type: 3}
+  - {fileID: 8300000, guid: fa285fc9c9f96864196ca02db3773fb1, type: 3}
+  - {fileID: 8300000, guid: 5ab1fd7461427cb4fb8d068940c0816a, type: 3}
   soundType: 98
   combatCategory: 0
   randomizeVolume: 0
   randomVolumeLowerLimit: 0.3
   randomVolumeUpperLimit: 0.5
-  volume: 0.15
+  volume: 0.175
   randomizePitch: 0
   randomPitchLowerLimit: 0.8
   randomPitchUpperLimit: 1.2
