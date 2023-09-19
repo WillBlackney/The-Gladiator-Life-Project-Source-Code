@@ -54,13 +54,27 @@ namespace WeAreGladiators.UI
             AudioManager.Instance.FadeOutSound(Sound.UI_Dragging_Constant, 0.2f);
 
             // Handle drag on library learn ability slot
-            if (LibraryCharacterDropSlot.MousedOver && draggedCharacterData != null)
+            if (LibraryCharacterDropSlot.MousedOver && draggedCharacterData != null && TownController.Instance.LibraryViewIsActive)
             {
                 TownController.Instance.LibraryCharacterSlot.BuildFromCharacter(draggedCharacterData);
             }
 
+            // Handle drag on to hospital feature slot
+            else if (HospitalDropSlot.SlotMousedOver != null && TownController.Instance.HospitalViewIsActive)
+            {
+                TownController.Instance.HandleDropCharacterOnHospitalSlot(HospitalDropSlot.SlotMousedOver, draggedCharacterData);
+            }
+
+            else if(TownController.Instance.DeploymentViewIsActive && draggedCharacterData.currentMoraleState == MoraleState.Shattered)
+            {
+                // to do: show warning to player: cant deploy shattered characters
+                ActionErrorGuidanceController.Instance.ShowErrorMessage(null, "Cannot deploy characters with Shattered morale.");
+
+
+            }
+
             // Handle drag and swap two character positions
-            if (DeploymentNodeView.NodeMousedOver != null &&
+            else if (DeploymentNodeView.NodeMousedOver != null &&
                 DeploymentNodeView.NodeMousedOver.MyCharacterData != null &&
                 draggedNode != null &&
                 draggedCharacterData != null)
@@ -93,12 +107,6 @@ namespace WeAreGladiators.UI
             else if (DeploymentNodeView.NodeMousedOver == null && draggedNode != null)
             {
                 TownController.Instance.HandleDropCharacterOnDeploymentNode(draggedNode, draggedCharacterData);
-            }
-
-            // Handle drag on to hospital feature slot
-            else if (HospitalDropSlot.SlotMousedOver != null)
-            {
-                TownController.Instance.HandleDropCharacterOnHospitalSlot(HospitalDropSlot.SlotMousedOver, draggedCharacterData);
             }
 
             draggedCharacterData = null;

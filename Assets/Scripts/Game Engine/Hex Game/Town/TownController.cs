@@ -488,7 +488,7 @@ namespace WeAreGladiators.TownFeatures
                 }
 
                 // Cant stress heal characters already at 0 stress
-                if (slot.FeatureType == TownActivity.Therapy && draggedCharacter.currentMoraleState == 0)
+                if (slot.FeatureType == TownActivity.Therapy && (int) draggedCharacter.currentMoraleState >= 5)
                 {
                     return;
                 }
@@ -511,23 +511,25 @@ namespace WeAreGladiators.TownFeatures
                 // Update page text views
                 UpdateHospitalFeatureCostTexts();
 
+                // Heal 30%
                 if (slot.FeatureType == TownActivity.BedRest)
                 {
-                    CharacterDataController.Instance.SetCharacterHealth(draggedCharacter, StatCalculator.GetTotalMaxHealth(draggedCharacter));
+                    int healAmount =(int)(StatCalculator.GetTotalMaxHealth(draggedCharacter) * 0.3f);
+                    CharacterDataController.Instance.SetCharacterHealth(draggedCharacter, draggedCharacter.currentHealth + healAmount);
                 }
 
+                // Increase morale state by 1
                 else if (slot.FeatureType == TownActivity.Therapy)
                 {
-                    CharacterDataController.Instance.SetCharacterMoraleState(draggedCharacter, 0);
+                    CharacterDataController.Instance.SetCharacterMoraleState(draggedCharacter, draggedCharacter.currentMoraleState + 1);
                 }
 
+                // Remove random injury
                 else if (slot.FeatureType == TownActivity.Surgery)
                 {
                     List<ActivePerk> allInjuries = PerkController.Instance.GetAllInjuriesOnCharacter(draggedCharacter);
-                    foreach (ActivePerk p in allInjuries)
-                    {
-                        PerkController.Instance.ModifyPerkOnCharacterData(draggedCharacter.passiveManager, p.perkTag, -p.stacks);
-                    }
+                    ActivePerk randomInjury = allInjuries.Shuffle()[0];
+                    PerkController.Instance.ModifyPerkOnCharacterData(draggedCharacter.passiveManager, randomInjury.perkTag, -randomInjury.stacks);
                 }
 
                 // Rebuild croll roster to reflect changes to character

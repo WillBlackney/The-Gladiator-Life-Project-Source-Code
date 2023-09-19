@@ -49,7 +49,14 @@ namespace WeAreGladiators.UI
 
         // Logic
         #region
-
+        public void OnMoraleIconMouseEnter()
+        {
+            MainModalController.Instance.BuildAndShowModal(MyCharacterData.currentMoraleState);
+        }
+        public void OnMoraleIconMouseExit()
+        {
+            MainModalController.Instance.HideModal();
+        }
         public void BuildFromCharacterData(HexCharacterData data)
         {
             MyCharacterData = data;

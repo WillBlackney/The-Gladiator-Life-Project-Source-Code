@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WeAreGladiators.Boons;
 using WeAreGladiators.Characters;
+using WeAreGladiators.Combat;
 using WeAreGladiators.Perks;
 using WeAreGladiators.Utilities;
 
@@ -324,6 +325,16 @@ namespace WeAreGladiators.UI
             TransformUtils.RebuildLayouts(fitters);
             shouldRebuild = true;
         }
+        public void BuildAndShowModal(MoraleState morale)
+        {
+            UpdateDynamicDirection();
+            FadeInModal();
+            ResetContent();
+            TransformUtils.RebuildLayouts(fitters);
+            BuildModalContent(morale);
+            TransformUtils.RebuildLayouts(fitters);
+            shouldRebuild = true;
+        }
 
         #endregion
 
@@ -439,31 +450,6 @@ namespace WeAreGladiators.UI
             framedImageParent.SetActive(true);
             framedImage.sprite = ap.Data.passiveSprite;
 
-            // TO DO: uncomment and fix when we add italic desriptions to perks
-            // Build description text
-            /*
-            string description = ap.Data.passiveItalicDescription;
-            if (description == "") descriptionText.gameObject.SetActive(false);
-            else
-            {
-                descriptionText.fontStyle = FontStyles.Italic;
-                descriptionText.gameObject.SetActive(true);
-                descriptionText.text = description;
-            }
-
-
-            // todo: change below once we had effect detail data to perk data files
-            dottedRows[0].Build(TextLogic.ConvertCustomStringListToString(ap.Data.passiveDescription), DotStyle.Neutral);
-
-            if (ap.Data.isInjury)
-            {
-                string mes = "Will heal in " + TextLogic.ReturnColoredText(ap.stacks.ToString(), TextLogic.blueNumber) + " days.";
-                dottedRows[1].Build(mes, DotStyle.Red);
-            }
-            else if (ap.Data.isPermanentInjury)
-                dottedRows[1].Build("PERMANENT", DotStyle.Red);
-            */
-
             descriptionText.fontStyle = FontStyles.Normal;
             descriptionText.gameObject.SetActive(true);
             descriptionText.text = TextLogic.ConvertCustomStringListToString(ap.Data.passiveDescription);
@@ -486,18 +472,6 @@ namespace WeAreGladiators.UI
             // Main Image
             framedImageParent.SetActive(true);
             framedImage.sprite = tp.Data.talentSprite;
-
-            // TO DO: uncomment and fix when we add italic descriptions to talents
-            // Build description text
-            /*
-            string description = tp.Data.passiveItalicDescription;
-            if (description == "") descriptionText.gameObject.SetActive(false);
-            else
-            {
-                descriptionText.gameObject.SetActive(true);
-                descriptionText.text = description;
-            }
-            */
             descriptionText.gameObject.SetActive(true);
             descriptionText.text = TextLogic.ConvertCustomStringListToString(tp.Data.talentDescription);
             descriptionText.fontStyle = FontStyles.Normal;
@@ -551,7 +525,29 @@ namespace WeAreGladiators.UI
                 dottedRows[i].Build(data.racialPassiveDotRows[i]);
             }
         }
+        private void BuildModalContent(MoraleState moraleState)
+        {
+            MoraleStateData data = CombatController.Instance.GetMoraleStateData(moraleState);
 
+            headerText.text = data.moraleState.ToString();
+
+            // Main Image
+            framedImageParent.SetActive(false);
+            unframedImageParent.SetActive(true);
+            unframedImage.sprite = data.icon;
+
+            // Lore text
+            descriptionText.fontStyle = FontStyles.Italic;
+            descriptionText.gameObject.SetActive(true);
+            descriptionText.text = TextLogic.ConvertCustomStringListToString(data.description);
+
+            // Build dot points
+            for (int i = 0; i < data.effectDescriptions.Count; i++)
+            {
+                dottedRows[i].Build(data.effectDescriptions[i]);
+            }
+        }
+        
         #endregion
 
         // Input

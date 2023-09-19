@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,7 @@ using WeAreGladiators.Abilities;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
 using WeAreGladiators.Items;
+using WeAreGladiators.Libraries;
 using WeAreGladiators.Perks;
 using WeAreGladiators.UCM;
 using WeAreGladiators.Utilities;
@@ -14,51 +16,6 @@ namespace WeAreGladiators.UI
 {
     public class CharacterRosterViewController : Singleton<CharacterRosterViewController>
     {
-
-        // Build Perk Section
-        #region
-
-        private void BuildActivePerksSection(HexCharacterData character)
-        {
-            foreach (UIPerkIcon b in perkButtons)
-            {
-                b.HideAndReset();
-            }
-
-            // Build Icons
-            List<ActivePerk> allPerks = new List<ActivePerk>();
-
-            // Get character perks
-            for (int i = 0; i < character.passiveManager.perks.Count; i++)
-            {
-                allPerks.Add(character.passiveManager.perks[i]);
-            }
-
-            // Add perks from items
-            allPerks.AddRange(ItemController.Instance.GetActivePerksFromItemSet(character.itemSet));
-
-            // Build perk button for each perk
-            for (int i = 0; i < allPerks.Count; i++)
-            {
-                perkButtons[i].BuildFromActivePerk(allPerks[i]);
-            }
-
-            Debug.Log("Active perk icons = " + allPerks.Count);
-
-        }
-
-        #endregion
-
-        // NEW LOGIC
-
-        public void OnTalentsPageButtonClicked()
-        {
-            perkPageParent.SetActive(false);
-            talentPageParent.SetActive(true);
-            abilityPageParent.SetActive(false);
-
-            talentPageButton.SetSelectedViewState(0.25f);
-        }
         // Properties + Components
         #region
 
@@ -71,8 +28,8 @@ namespace WeAreGladiators.UI
         [SerializeField] private Slider healthBar;
         [Space(20)]
         [Header("Stress Components")]
-        [SerializeField] private TextMeshProUGUI stressBarText;
-        [SerializeField] private Slider stressBar;
+        [SerializeField] private Image moraleImage;
+        [SerializeField] private TextMeshProUGUI moraleStateText;
         [Space(20)]
         [Header("XP + Level Components")]
         [SerializeField] private UIRaceIcon racialIcon;
@@ -181,6 +138,52 @@ namespace WeAreGladiators.UI
         private bool currentlyEditingName;
 
         #endregion
+
+        // Build Perk Section
+        #region
+
+        private void BuildActivePerksSection(HexCharacterData character)
+        {
+            foreach (UIPerkIcon b in perkButtons)
+            {
+                b.HideAndReset();
+            }
+
+            // Build Icons
+            List<ActivePerk> allPerks = new List<ActivePerk>();
+
+            // Get character perks
+            for (int i = 0; i < character.passiveManager.perks.Count; i++)
+            {
+                allPerks.Add(character.passiveManager.perks[i]);
+            }
+
+            // Add perks from items
+            allPerks.AddRange(ItemController.Instance.GetActivePerksFromItemSet(character.itemSet));
+
+            // Build perk button for each perk
+            for (int i = 0; i < allPerks.Count; i++)
+            {
+                perkButtons[i].BuildFromActivePerk(allPerks[i]);
+            }
+
+            Debug.Log("Active perk icons = " + allPerks.Count);
+
+        }
+
+        #endregion
+
+        // NEW LOGIC
+
+        public void OnTalentsPageButtonClicked()
+        {
+            perkPageParent.SetActive(false);
+            talentPageParent.SetActive(true);
+            abilityPageParent.SetActive(false);
+
+            talentPageButton.SetSelectedViewState(0.25f);
+        }
+       
 
         // Getters + Accessors
         #region
@@ -294,6 +297,14 @@ namespace WeAreGladiators.UI
 
         // Input
         #region
+        public void OnMoraleIconMouseEnter()
+        {
+            MainModalController.Instance.BuildAndShowModal(CharacterCurrentlyViewing.currentMoraleState);
+        }
+        public void OnMoraleIconMouseExit()
+        {
+            MainModalController.Instance.HideModal();
+        }
 
         public void OnFormationButtonClicked(RosterFormationButton button)
         {
@@ -436,7 +447,7 @@ namespace WeAreGladiators.UI
         {
             BuildHealthBar(character);
             BuildXpBar(character);
-            BuildStressBar(character);
+            BuildMoraleSection(character);
             racialIcon.BuildFromRacialData(CharacterDataController.Instance.GetRaceData(character.race));
             backgroundIcon.BuildFromBackgroundData(character.background);
             totalArmourText.text = ItemController.Instance.GetTotalArmourBonusFromItemSet(character.itemSet).ToString();
@@ -464,16 +475,10 @@ namespace WeAreGladiators.UI
             xpBarText.text = xp + " / " + maxXp;
             currentLevelText.text = character.currentLevel.ToString();
         }
-        private void BuildStressBar(HexCharacterData character)
+        private void BuildMoraleSection(HexCharacterData character)
         {
-            // Update slider
-            //float maxStress = 20;
-            //float stress = character.currentMoraleState;
-            //float stresBarFloat = stress / maxStress;
-            //stressBar.value = stresBarFloat;
-
-            // Update stress text
-            //stressBarText.text = stress + " / " + maxStress;
+            moraleImage.sprite = SpriteLibrary.Instance.GetMoraleStateSprite(character.currentMoraleState);
+            moraleStateText.text = character.currentMoraleState.ToString();
         }
 
         #endregion

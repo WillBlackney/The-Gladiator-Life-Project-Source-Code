@@ -164,7 +164,7 @@ namespace WeAreGladiators.UI
         }
         private void BuildStressStateSection(HexCharacterModel character)
         {
-            if (character.characterData != null && character.characterData.ignoreStress)
+            if (character.characterData != null && (character.characterData.ignoreStress || PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearless)))
             {
                 stressStateParent.SetActive(false);
                 stressBarVisualParent.SetActive(false);

@@ -12,7 +12,7 @@ namespace WeAreGladiators.UI
 
         public void ShowErrorMessage(HexCharacterModel user, string message, float showSpeed = 0.15f)
         {
-            if (!ShouldShowErrorMessage(user))
+            if (user != null && !ShouldShowErrorMessage(user))
             {
                 return;
             }

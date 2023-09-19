@@ -15,7 +15,7 @@ namespace WeAreGladiators
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
-        public static void Shuffle<T>(this IList<T> list)
+        public static List<T> Shuffle<T>(this IList<T> list)
         {
             RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
             int n = list.Count;
@@ -33,6 +33,7 @@ namespace WeAreGladiators
                 list[k] = list[n];
                 list[n] = value;
             }
+            return (List<T>)list;
         }
 
         /// <summary>

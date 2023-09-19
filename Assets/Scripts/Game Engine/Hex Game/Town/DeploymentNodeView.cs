@@ -19,6 +19,7 @@ namespace WeAreGladiators.TownFeatures
         }
 
         #endregion
+
         // Components + Properties
         #region
 

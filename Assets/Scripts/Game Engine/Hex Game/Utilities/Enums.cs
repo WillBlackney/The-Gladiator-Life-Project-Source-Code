@@ -454,6 +454,7 @@
         FearOfHumanity = 209,
         HateOfBeasts = 231,
         FearOfBeasts = 232,
+        Fearless = 237,
 
         None = 0,
         Abusive = 107,

@@ -57,10 +57,6 @@ namespace WeAreGladiators.Characters
         [SerializeField] private Slider armourBarUI;
         [SerializeField] private TextMeshProUGUI currentArmourText;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-        [Header("Stress Bar UI References")]
-        [SerializeField] private Slider stressBarUI;
-        [SerializeField] private TextMeshProUGUI stressText;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
         [Header("End + Delay Turn Button Components")]
         public Button endTurnButton;
         public Button delayTurnButton;
@@ -194,15 +190,10 @@ namespace WeAreGladiators.Characters
         private void BuildCurrentInitiativeModal(HexCharacterModel character)
         {
             int baseInitiative = StatCalculator.GetTotalInitiative(character, false);
-            //int fatPenalty = StatCalculator.GetFatiguePenaltyToInitiative(character);
             int delayPenalty = StatCalculator.GetTurnDelayPenaltyToInitiative(character);
             initiativeModalRows.ForEach(x => x.gameObject.SetActive(false));
 
             initiativeModalRows[0].Build("Base Initiative: " + TextLogic.ReturnColoredText(baseInitiative.ToString(), TextLogic.blueNumber), DotStyle.Green);
-            /*if(fatPenalty != 0)
-            {
-                initiativeModalRows[1].Build("Fatigue Penalty: " + TextLogic.ReturnColoredText("-" + fatPenalty.ToString(), TextLogic.redText), DotStyle.Red);
-            }*/
             if (delayPenalty != 0)
             {
                 initiativeModalRows[1].Build("Delay Turn Penalty: " + TextLogic.ReturnColoredText("-" + delayPenalty, TextLogic.redText), DotStyle.Red);
@@ -253,15 +244,19 @@ namespace WeAreGladiators.Characters
         }
         public void UpdateStressComponents(HexCharacterModel character)
         {
-            //float currentStressFloat = stress;
-            //float currentMaxStressFloat = 20f;
-            //float stressBarFloat = currentStressFloat / currentMaxStressFloat;
-
-            // Modify UI elements
-            //stressBarUI.value = stressBarFloat;
-            //stressText.text = currentStressFloat + "/" + currentMaxStressFloat;
-
             stressPanel.BuildPanelViews(character);
+        }
+        public void OnMoraleIconMouseEnter()
+        {
+            if(TurnController.Instance.EntityActivated.controller == Controller.Player)
+            {
+                MainModalController.Instance.BuildAndShowModal(TurnController.Instance.EntityActivated.currentMoraleState);
+            }
+           
+        }
+        public void OnMoraleIconMouseExit()
+        {
+            MainModalController.Instance.HideModal();
         }
 
         #endregion

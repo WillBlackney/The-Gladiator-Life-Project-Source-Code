@@ -29,6 +29,11 @@ namespace WeAreGladiators.Combat
         #region
 
         public CombatGameState CurrentCombatState { get; private set; }
+        
+        public MoraleStateData GetMoraleStateData(MoraleState moraleState)
+        {
+            return Array.Find(moraleStateData, data => data.moraleState == moraleState);
+        }
 
         #endregion
 
@@ -491,6 +496,7 @@ namespace WeAreGladiators.Combat
 
         [Header("Stress Data")]
         [SerializeField] private StressEventSO[] allStressEventData;
+        [SerializeField] private MoraleStateData[] moraleStateData;
 
         #endregion
 
@@ -772,7 +778,7 @@ namespace WeAreGladiators.Combat
         public void CreateMoraleCheck(HexCharacterModel character, StressEventType eventType, bool allowRecursiveChecks = true)
         {
             // Non player characters dont use the stress mechanic
-            if (character.characterData.ignoreStress)
+            if (character.characterData.ignoreStress || PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearless))
             {
                 return;
             }
@@ -842,7 +848,7 @@ namespace WeAreGladiators.Combat
             Debug.Log("CombatController.CreateMoraleCheck() called, character = " + character.myName);
 
             // Non player characters dont use the stress mechanic
-            if (character.characterData.ignoreStress)
+            if (character.characterData.ignoreStress || PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearless))
             {
                 return;
             }
@@ -884,7 +890,7 @@ namespace WeAreGladiators.Combat
         {
             int multiplier = 0;
             // Enemies dont interact with stress system
-            if (character.characterData.ignoreStress)
+            if (character.characterData.ignoreStress || PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearless))
             {
                 Debug.Log(string.Format("GetStatMultiplierFromStressState() character {0} does not benefit/suffer from stress state, returning 0...", character.myName));
                 return 0;
@@ -2234,4 +2240,12 @@ namespace WeAreGladiators.Combat
         public int roll;
     }
 
+    [Serializable]
+    public class MoraleStateData
+    {
+        public Sprite icon;
+        public MoraleState moraleState;
+        public List<CustomString> description;
+        public List<ModalDotRowBuildData> effectDescriptions;
+    }
 }

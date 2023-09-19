@@ -2166,7 +2166,7 @@ namespace WeAreGladiators.Abilities
             }
             else
             {
-                ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target is out of range");
+                ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target is out of range.");
             }
 
             Debug.Log("AbilityController.IsTargetOfAbilityValid() returning " + bRet);
@@ -2186,7 +2186,7 @@ namespace WeAreGladiators.Abilities
                 Debug.Log("IsAbilityUseable() returning false: cannot use abilities when it is not your turn");
                 if (showErrors)
                 {
-                    ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "It is not this character's turn");
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "It is not this character's turn.");
                 }
                 bRet = false;
             }
@@ -2201,7 +2201,7 @@ namespace WeAreGladiators.Abilities
                     Debug.Log("IsAbilityUseable() returning false: cannot take movement actions while rooted");
                     if (showErrors)
                     {
-                        ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character is unable to move right now");
+                        ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character is unable to move right now.");
                     }
                     bRet = false;
                 }
@@ -2220,7 +2220,7 @@ namespace WeAreGladiators.Abilities
                 Debug.Log("IsAbilityUseable() returning false: not enough energy");
                 if (showErrors)
                 {
-                    ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Not enough Action Points");
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Not enough Action Points.");
                 }
                 bRet = false;
             }
@@ -2238,7 +2238,7 @@ namespace WeAreGladiators.Abilities
                 Debug.Log("IsAbilityUseable() returning false: ability is on cooldown");
                 if (showErrors)
                 {
-                    ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Ability is on cooldown");
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Ability is on cooldown.");
                 }
                 bRet = false;
             }
@@ -2266,7 +2266,7 @@ namespace WeAreGladiators.Abilities
                 Debug.Log("IsAbilityUseable() returning false: character trying to use a ranged weapon attack with 'Reload' status...");
                 if (showErrors)
                 {
-                    ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character needs to reload first");
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character needs to reload first.");
                 }
                 bRet = false;
             }
@@ -2358,7 +2358,7 @@ namespace WeAreGladiators.Abilities
             {
                 if (showErrorPanel)
                 {
-                    ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target is out of range");
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target is out of range.");
                 }
                 return false;
             }
@@ -2380,7 +2380,7 @@ namespace WeAreGladiators.Abilities
             {
                 if (showErrorPanel)
                 {
-                    ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target has Stealth");
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target has Stealth.");
                 }
                 bRet = false;
             }
@@ -2431,7 +2431,7 @@ namespace WeAreGladiators.Abilities
                 TurnController.Instance.EntityActivated != null &&
                 TurnController.Instance.EntityActivated.controller == Controller.Player)
             {
-                ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Invalid target for this ability");
+                ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Invalid target for this ability.");
             }
 
             Debug.Log("AbilityController.DoesTargetOfAbilityMeetAllegianceRequirement() returning " + bRet);
@@ -2447,7 +2447,7 @@ namespace WeAreGladiators.Abilities
                 TurnController.Instance.EntityActivated == caster && caster.activationPhase != ActivationPhase.ActivationPhase)
             {
                 Debug.Log("IsAbilityUseable() returning false: cannot use abilities when it is not your turn");
-                ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "It is not this character's turn");
+                ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "It is not this character's turn.");
                 bRet = false;
             }
 
@@ -2519,7 +2519,7 @@ namespace WeAreGladiators.Abilities
                     {
                         continue;
                     }
-                    ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target does not have a shield");
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target does not have a shield.");
                 }
 
                 else if (ar.type == AbilityRequirementType.TargetIsTeleportable)
@@ -2528,7 +2528,7 @@ namespace WeAreGladiators.Abilities
                     {
                         continue;
                     }
-                    ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target cannot be teleported");
+                    ActionErrorGuidanceController.Instance.ShowErrorMessage(caster, "Target cannot be teleported.");
                 }
 
                 else if (ar.type == AbilityRequirementType.CasterIsTeleportable &&

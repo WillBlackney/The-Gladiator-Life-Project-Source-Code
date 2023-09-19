@@ -21,7 +21,7 @@ MonoBehaviour:
   - lowerProbability: 0
     upperProbability: 100
     effects:
-    - effectType: 18
+    - effectType: 17
       characterTargetIndex: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
@@ -36,10 +36,12 @@ MonoBehaviour:
       injuryType: 0
       experienceGained: 0
       characterJoining: {fileID: 0}
-      stressRecoveryChance: 100
-      stressRecoveredMin: 2
-      stressRecoveredMax: 4
+      moraleChangeChance: 75
+      moraleChangeMin: -1
+      moraleChangeMax: -2
       healthLostPercentage: 0.5
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 1
       characterTargetIndex: 0
       pageToLoad: {fileID: 11400000, guid: fa2a530e15ad97c4faf8fd281e003133, type: 2}
@@ -55,8 +57,10 @@ MonoBehaviour:
       injuryType: 0
       experienceGained: 0
       characterJoining: {fileID: 0}
-      stressRecoveryChance: 100
-      stressRecoveredMin: 0
-      stressRecoveredMax: 0
+      moraleChangeChance: 100
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       healthLostPercentage: 50
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
   requirements: []

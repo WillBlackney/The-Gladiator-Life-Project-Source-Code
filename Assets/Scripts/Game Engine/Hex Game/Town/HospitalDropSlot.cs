@@ -31,15 +31,15 @@ namespace WeAreGladiators.TownFeatures
             // the costs of features should probably be determined by GlobalSettings
             if (feature == TownActivity.BedRest)
             {
-                return 125;
+                return 75;
             }
             if (feature == TownActivity.Therapy)
             {
-                return 150;
+                return 50;
             }
             if (feature == TownActivity.Surgery)
             {
-                return 200;
+                return 100;
             }
             return 0;
         }

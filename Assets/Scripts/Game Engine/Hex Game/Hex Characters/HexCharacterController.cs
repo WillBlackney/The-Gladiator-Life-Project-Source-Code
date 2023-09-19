@@ -707,7 +707,7 @@ namespace WeAreGladiators.Characters
             HexCharacterView view = character.hexCharacterView;
 
             // Check + Update views first
-            if (character.characterData.ignoreStress)
+            if (character.characterData.ignoreStress || PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearless))
             {
                 if (view != null)
                 {
@@ -715,7 +715,7 @@ namespace WeAreGladiators.Characters
                 }
                 return;
             }
-            if (!character.characterData.ignoreStress && view != null)
+            if (!character.characterData.ignoreStress && !PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearless) && view != null)
             {
                 view.stressBarVisualParent.SetActive(true);
             }
@@ -862,7 +862,7 @@ namespace WeAreGladiators.Characters
             character.hexCharacterView.stressStateIconWorld.sprite = stressSprite;
 
             // Modify UI elements
-            if (TurnController.Instance.EntityActivated == character && !character.characterData.ignoreStress)
+            if (TurnController.Instance.EntityActivated == character && !character.characterData.ignoreStress && !PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearless))
             {
                 CombatUIController.Instance.UpdateStressComponents(character);
             }

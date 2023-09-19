@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
+  m_Name: Fearless
+  m_EditorClassIdentifier: 
+  passiveSprite: {fileID: 21300000, guid: e24760b45e22e12499f3831d497a04de, type: 3}
+  passiveName: Fearless
+  perkTag: 237
+  passiveDescription:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'This character is always '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Steady '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and it''s '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Morale '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: state never changes.
+  passiveItalicDescription: 
+  effectDetailTabs: []
+  keyWords:
+  - kewWordType: 32
+    passiveType: 0
+  maxAllowedStacks: 5
+  showStackCount: 0
+  hiddenOnPassivePanel: 1
+  resistanceBlocksIncrease: 0
+  resistanceBlocksDecrease: 0
+  runeBlocksIncrease: 0
+  runeBlocksDecrease: 0
+  isOnPerkTree: 0
+  perkTreeTier: 0
+  isInjury: 0
+  isPermanentInjury: 0
+  isRacial: 0
+  race: 0
+  isBackground: 0
+  backgroundPerkQuality: 0
+  severity: 0
+  injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
+  perksRemovedOnThisApplication: 
+  perksGainedOnThisExpiry: 
+  perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
+  visualEventsOnApplication: []
