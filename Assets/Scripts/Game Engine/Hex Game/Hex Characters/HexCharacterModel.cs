@@ -40,7 +40,7 @@ namespace WeAreGladiators.Characters
         public int currentFatigue;
         public int currentHealth;
         public int currentInitiativeRoll;
-        public int currentStress;
+        public MoraleState currentMoraleState;
 
         [Header("Position Properties")]
         public LevelNode currentTile;
@@ -76,7 +76,7 @@ namespace WeAreGladiators.Characters
         public int skillAbilitiesUsedThisTurn;
         public int spellAbilitiesUsedThisTurn;
         public int startingArmour;
-        public int stressGainedThisCombat;
+        public int moraleStatesLoweredThisCombat;
 
         public List<TalentPairing> talentPairings = new List<TalentPairing>();
 

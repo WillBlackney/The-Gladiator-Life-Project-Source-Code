@@ -76,16 +76,20 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'Whenever this character kills an enemy, they recover '
-    - color: 2
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: '3 '
+      phrase: 'Whenever this character kills an enemy, their '
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: Stress
+      phrase: 'Morale '
     - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'increases all the way to '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Confident
+    - color: 13
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
       phrase: .

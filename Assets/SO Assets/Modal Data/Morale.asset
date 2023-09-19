@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accb5c33da2a75e479ff64dac541103c, type: 3}
+  m_Name: Morale
+  m_EditorClassIdentifier: 
+  myPreset: 25
+  mainSprite: {fileID: 21300000, guid: c0ea8c0aabfbbed42ad555b91ce57389, type: 3}
+  frameSprite: 0
+  headerName: Morale
+  italicDescription: 0
+  description:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'A character''s '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Morale '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'state decreases in combat when negative things happen, and increases
+      when positive things happen. Each state boosts (or reduces) a character''s '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Accuracy
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Dodge '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Resolve
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'There are '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '5 '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Morale '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'states: Confident, Steady, Nervous, Panicking and'
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Shattered
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '. While '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Shattered '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', characters cannot take any action, and may suffer a heart attack at
+      the start of each turn.'
+  infoRows: []

@@ -21,8 +21,8 @@ namespace WeAreGladiators.Combat
 
         public StressEventType Type => type;
         public bool NegativeEvent => negativeEvent;
-        public int StressAmountMin => stressAmountMin;
-        public int StressAmountMax => stressAmountMax;
+        public int MoraleChangeMin => stressAmountMin;
+        public int MoraleChangeMax => stressAmountMax;
         public int SuccessChance => successChance;
     }
 

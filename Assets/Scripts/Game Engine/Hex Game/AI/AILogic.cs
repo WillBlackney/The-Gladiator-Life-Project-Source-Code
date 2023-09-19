@@ -676,16 +676,16 @@ namespace WeAreGladiators.AI
 
             // Check has LESS stress than X TARGET
             else if (target != null &&
-                     req.requirementType == AIActionRequirementType.TargetHasLessStressThanX &&
-                     target.currentStress < req.stressReq)
+                     req.requirementType == AIActionRequirementType.TargetHasLowerMoraleThanX &&
+                     target.currentMoraleState < req.moraleReq)
             {
                 bRet = true;
             }
 
             // Check has MORE stress than X TARGET
             else if (target != null &&
-                     req.requirementType == AIActionRequirementType.TargetHasMoreStressThanX &&
-                     target.currentStress > req.stressReq)
+                     req.requirementType == AIActionRequirementType.TargetHasHigherMoraleThanX &&
+                     target.currentMoraleState > req.moraleReq)
             {
                 bRet = true;
             }

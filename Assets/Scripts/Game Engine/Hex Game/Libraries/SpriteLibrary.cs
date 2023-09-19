@@ -281,27 +281,27 @@ namespace WeAreGladiators.Libraries
             }
             return null;
         }
-        public Sprite GetStressStateSprite(StressState state)
+        public Sprite GetMoraleStateSprite(MoraleState state)
         {
             Sprite spriteReturned = null;
 
-            if (state == StressState.Confident)
+            if (state == MoraleState.Confident)
             {
                 spriteReturned = confident;
             }
-            else if (state == StressState.Steady)
+            else if (state == MoraleState.Steady)
             {
                 spriteReturned = steady;
             }
-            else if (state == StressState.Nervous)
+            else if (state == MoraleState.Nervous)
             {
                 spriteReturned = nervous;
             }
-            else if (state == StressState.Panicking)
+            else if (state == MoraleState.Panicking)
             {
                 spriteReturned = panicking;
             }
-            else if (state == StressState.Shattered)
+            else if (state == MoraleState.Shattered)
             {
                 spriteReturned = shattered;
             }

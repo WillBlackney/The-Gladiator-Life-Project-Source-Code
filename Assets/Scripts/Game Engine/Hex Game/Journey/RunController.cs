@@ -116,8 +116,6 @@ namespace WeAreGladiators.JourneyLogic
             // Reduce all injury duration by 1 day
             PerkController.Instance.HandleTickDownInjuriesOnNewDayStart();
 
-            // Generate and apply effect of new random town events 
-
             // Generate new daily recruits
             TownController.Instance.GenerateDailyRecruits(RandomGenerator.NumberBetween(5, 7));
 
@@ -133,8 +131,8 @@ namespace WeAreGladiators.JourneyLogic
             // Characters in town features gain effect of hospital feature (heal, remove stress, remove all injuries, etc)
             //TownController.Instance.HandleApplyHospitalFeaturesOnNewDayStart();
 
-            // All characters heal 10% health and 5 stress
-            CharacterDataController.Instance.HandlePassiveStressAndHealthRecoveryOnNewDayStart();
+            // All characters heal 10% health of max health
+            //CharacterDataController.Instance.HandlePassiveStressAndHealthRecoveryOnNewDayStart();
 
             return newChapterStarted;
 

@@ -32,7 +32,7 @@ namespace WeAreGladiators.Characters
         public int currentMaxXP;
 
         [Header("Stress Properties")]
-        public int currentStress;
+        public MoraleState currentMoraleState = MoraleState.Steady;
         public TownActivity currentTownActivity = TownActivity.None;
 
         [Header("XP Attributes")]

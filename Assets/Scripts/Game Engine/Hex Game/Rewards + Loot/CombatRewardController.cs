@@ -181,7 +181,7 @@ namespace WeAreGladiators.RewardSystems
             result.characterData = character.characterData;
             result.totalKills = character.totalKills;
             result.healthLost = character.healthLostThisCombat;
-            result.stressGained = character.stressGainedThisCombat;
+            result.stressGained = character.moraleStatesLoweredThisCombat;
             result.armourLost = character.armourLostThisCombat;
             result.damageDealt = character.damageDealtThisCombat;
             result.injuriesGained.AddRange(character.injuriesGainedThisCombat);

@@ -339,7 +339,7 @@ namespace WeAreGladiators.Characters
             newCharacter.PerkTree = new PerkTreeData(original);
 
             // Set stress
-            newCharacter.currentStress = original.currentStress;
+            newCharacter.currentMoraleState = original.currentMoraleState;
 
             // Setup stats
             newCharacter.attributeSheet = new AttributeSheet();
@@ -401,27 +401,27 @@ namespace WeAreGladiators.Characters
         // Modify Attributes + Stats + Health
         #region
 
-        public void SetCharacterStress(HexCharacterData data, int newValue)
+        public void SetCharacterMoraleState(HexCharacterData data, MoraleState newState)
         {
             Debug.Log("CharacterDataController.SetCharacterStress() called for '" +
-                data.myName + "', new stress value = " + newValue);
+                data.myName + "', new morale state = " + newState.ToString());
 
-            data.currentStress = newValue;
+            data.currentMoraleState = newState;
 
             // prevent stress exceeding limits
-            if (data.currentStress > 20)
+            if ((int)data.currentMoraleState > 5)
             {
-                data.currentStress = 20;
+                data.currentMoraleState = (MoraleState)5;
             }
             // Zealots can never reach shattered stress state
             if (DoesCharacterHaveBackground(data.background, CharacterBackground.Witch) &&
-                data.currentStress > 19)
+                (int)data.currentMoraleState > 4)
             {
-                data.currentStress = 19;
+                data.currentMoraleState = (MoraleState) 4;
             }
-            else if (data.currentStress < 0)
+            else if ((int)data.currentMoraleState < 1)
             {
-                data.currentStress = 0;
+                data.currentMoraleState = (MoraleState) 1;
             }
         }
         public void SetCharacterHealth(HexCharacterData data, int newValue)

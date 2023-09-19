@@ -139,11 +139,11 @@ namespace WeAreGladiators.UI
             armourText.text = character.currentArmour + " / " + character.startingArmour;
 
             // Stress bar
-            float currentStressFloat = character.currentStress;
-            float currentMaxStressFloat = 20f;
-            float stressBarFloat = currentStressFloat / currentMaxStressFloat;
-            stressBar.value = stressBarFloat;
-            stressText.text = character.currentStress + " / 20";
+           // float currentStressFloat = character.currentMoraleState;
+           // float currentMaxStressFloat = 20f;
+           // float stressBarFloat = currentStressFloat / currentMaxStressFloat;
+           // stressBar.value = stressBarFloat;
+            //stressText.text = character.currentMoraleState + " / 20";
         }
 
         private void BuildTurnSection(HexCharacterModel character)
@@ -173,8 +173,8 @@ namespace WeAreGladiators.UI
 
             stressBarVisualParent.SetActive(true);
             stressStateParent.SetActive(true);
-            StressState stressState = CombatController.Instance.GetStressStateFromStressAmount(character.currentStress);
-            Sprite stressSprite = SpriteLibrary.Instance.GetStressStateSprite(stressState);
+            MoraleState stressState = character.currentMoraleState;
+            Sprite stressSprite = SpriteLibrary.Instance.GetMoraleStateSprite(stressState);
             stressStateImage.sprite = stressSprite;
             stressStateText.text = TextLogic.SplitByCapitals(stressState.ToString());
         }

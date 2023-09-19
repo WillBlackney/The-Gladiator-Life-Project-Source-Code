@@ -1,12 +1,12 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using WeAreGladiators.Libraries;
 
 namespace WeAreGladiators.VisualEvents
 {
     public class StressEffect : MonoBehaviour
     {
-
         // Getters + Accessors
         #region
 
@@ -17,23 +17,17 @@ namespace WeAreGladiators.VisualEvents
         // Setup
         #region
 
-        public void InitializeSetup(int amount)
+        public void InitializeSetup(MoraleState moraleState)
         {
             transform.position = new Vector2(transform.position.x - 0.2f, transform.position.y);
-            if (amount > 0)
-            {
-                iconImage.sprite = stressIncreaseSprite;
-            }
-            else
-            {
-                iconImage.sprite = stressDecreaseSprite;
-            }
-            amountText.text = amount > 0 ? "Stress +" + amount : "Stress" + amount;
+            Sprite s = SpriteLibrary.Instance.GetMoraleStateSprite(moraleState);
+            iconImage.sprite = s;
+            amountText.text = moraleState.ToString();
             PlayUpAnim();
-
         }
 
         #endregion
+
         // Components + Properties
         #region
 
@@ -57,17 +51,6 @@ namespace WeAreGladiators.VisualEvents
         public void ChooseRandomDirection()
         {
             myAnim.SetTrigger("Left");
-            /*
-            int randomNumber = Random.Range(0, 100);
-            if (randomNumber < 50)
-            {
-                myAnim.SetTrigger("Right");
-            }
-            else
-            {
-                myAnim.SetTrigger("Left");
-            }
-            */
         }
         public void PlayUpAnim()
         {

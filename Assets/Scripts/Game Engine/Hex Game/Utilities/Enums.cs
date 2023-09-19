@@ -45,8 +45,8 @@
         Skill = 5,
         Spell = 37,
         PhysicalDamage = 9,
-        Stress = 32,
-        StressResistance = 15,
+        Morale = 32,
+        Bravery = 15,
         Teleport = 22,
         Vision = 21,
         WeaponAttack = 38,
@@ -84,7 +84,7 @@
         Vision = 15,
         AuraSize = 16,
         FatigueRecovery = 20,
-        StressResistance = 8,
+        Bravery = 8,
         DebuffResistance = 9,
         PhysicalResistance = 10,
         MagicResistance = 11,
@@ -442,7 +442,6 @@
         EncouragingLeader = 188,
         SoulCollector = 190,
         SoulDevourer = 191,
-        Unshakeable = 193,
         LoyalFriend = 194,
         ComboStrike = 195,
         SpellSight = 197,
@@ -708,14 +707,14 @@
         EnemyInjured = 9,
         LandedCriticalStrike = 10
     }
-    public enum StressState
+    public enum MoraleState
     {
         None = 0,
-        Confident = 1,
-        Steady = 2,
+        Confident = 5,
+        Steady = 4,
         Nervous = 3,
-        Panicking = 4,
-        Shattered = 5
+        Panicking = 2,
+        Shattered = 1
     }
 
     #endregion

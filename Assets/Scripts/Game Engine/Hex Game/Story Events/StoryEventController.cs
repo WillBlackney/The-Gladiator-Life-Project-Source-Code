@@ -852,11 +852,11 @@ namespace WeAreGladiators.StoryEvents
                     }
 
                     int stressRecovered = RandomGenerator.NumberBetween(effect.stressRecoveredMin, effect.stressRecoveredMax);
-                    CharacterDataController.Instance.SetCharacterStress(prospects[i], prospects[i].currentStress - stressRecovered);
+                    CharacterDataController.Instance.SetCharacterMoraleState(prospects[i], prospects[i].currentMoraleState - stressRecovered);
 
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
                         prospects[i].myName + " " + prospects[i].mySubName + " reduced " + TextLogic.ReturnColoredText("Stress", TextLogic.neutralYellow) + " by " +
-                        TextLogic.ReturnColoredText(stressRecovered.ToString(), TextLogic.blueNumber), ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetStressStateSprite(StressState.Confident));
+                        TextLogic.ReturnColoredText(stressRecovered.ToString(), TextLogic.blueNumber), ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetMoraleStateSprite(MoraleState.Confident));
                     currentResultItems.Add(newResultItem);
                 }
             }
@@ -875,11 +875,11 @@ namespace WeAreGladiators.StoryEvents
                     }
 
                     int stressGained = RandomGenerator.NumberBetween(effect.stressRecoveredMin, effect.stressRecoveredMax);
-                    CharacterDataController.Instance.SetCharacterStress(prospects[i], prospects[i].currentStress + stressGained);
+                    CharacterDataController.Instance.SetCharacterMoraleState(prospects[i], prospects[i].currentMoraleState + stressGained);
 
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
                         prospects[i].myName + " " + prospects[i].mySubName + " increased " + TextLogic.ReturnColoredText("Stress", TextLogic.neutralYellow) + " by " +
-                        TextLogic.ReturnColoredText(stressGained.ToString(), TextLogic.blueNumber), ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetStressStateSprite(StressState.Nervous));
+                        TextLogic.ReturnColoredText(stressGained.ToString(), TextLogic.blueNumber), ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetMoraleStateSprite(MoraleState.Nervous));
                     currentResultItems.Add(newResultItem);
                 }
             }

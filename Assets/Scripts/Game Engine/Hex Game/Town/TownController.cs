@@ -488,7 +488,7 @@ namespace WeAreGladiators.TownFeatures
                 }
 
                 // Cant stress heal characters already at 0 stress
-                if (slot.FeatureType == TownActivity.Therapy && draggedCharacter.currentStress == 0)
+                if (slot.FeatureType == TownActivity.Therapy && draggedCharacter.currentMoraleState == 0)
                 {
                     return;
                 }
@@ -518,7 +518,7 @@ namespace WeAreGladiators.TownFeatures
 
                 else if (slot.FeatureType == TownActivity.Therapy)
                 {
-                    CharacterDataController.Instance.SetCharacterStress(draggedCharacter, 0);
+                    CharacterDataController.Instance.SetCharacterMoraleState(draggedCharacter, 0);
                 }
 
                 else if (slot.FeatureType == TownActivity.Surgery)
@@ -579,7 +579,7 @@ namespace WeAreGladiators.TownFeatures
                 }
                 else if (character.currentTownActivity == TownActivity.Therapy)
                 {
-                    CharacterDataController.Instance.SetCharacterStress(character, 0);
+                    CharacterDataController.Instance.SetCharacterMoraleState(character, 0);
                 }
                 else if (character.currentTownActivity == TownActivity.Surgery)
                 {

@@ -593,7 +593,7 @@ namespace WeAreGladiators.UI
 
         PhysicalResistance = 16,
         MagicResistance = 17,
-        StressResistance = 18,
+        Bravery = 18,
         InjuryResistance = 19,
         DeathResistance = 20,
         DebuffResistance = 21,
@@ -601,7 +601,7 @@ namespace WeAreGladiators.UI
         DailyWage = 22,
         RecruitCost = 23,
         Health = 24,
-        Stress = 25,
+        Morale = 25,
         Level = 26,
         AbilityTome = 27,
         Experience = 28,

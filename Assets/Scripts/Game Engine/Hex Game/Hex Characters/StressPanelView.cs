@@ -16,17 +16,16 @@ namespace WeAreGladiators.Characters
 
         public void BuildPanelViews(HexCharacterModel character)
         {
-            StressState stressState = CombatController.Instance.GetStressStateFromStressAmount(character.currentStress);
-            Sprite stressSprite = SpriteLibrary.Instance.GetStressStateSprite(stressState);
+            MoraleState stressState = character.currentMoraleState;
+            Sprite stressSprite = SpriteLibrary.Instance.GetMoraleStateSprite(stressState);
             int stressMod = CombatController.Instance.GetStatMultiplierFromStressState(stressState, character);
-            int[] stressRanges = CombatController.Instance.GetStressStateRanges(stressState);
+            //int[] stressRanges = CombatController.Instance.GetStressStateRanges(stressState);
             stressStateText.text = stressState.ToString();
             stressStateIcon.sprite = stressSprite;
 
             // Popup
             popUpStressStateIcon.sprite = stressSprite;
-            popUpHeaderText.text = stressState +
-                TextLogic.ReturnColoredText(" (" + stressRanges[0] + " - " + stressRanges[1] + ")", TextLogic.neutralYellow);
+            popUpHeaderText.text = stressState.ToString();
 
             // to do: italic description text
 
@@ -39,7 +38,7 @@ namespace WeAreGladiators.Characters
             {
                 DotStyle style = DotStyle.Red;
                 string modSymbol = "";
-                if (stressState == StressState.Confident)
+                if (stressState == MoraleState.Confident)
                 {
                     style = DotStyle.Green;
                     modSymbol = "+";

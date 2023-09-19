@@ -466,7 +466,7 @@ namespace WeAreGladiators
             }
 
             // Stress State Modifier
-            accuracy += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress), c);
+            accuracy += CombatController.Instance.GetStatMultiplierFromStressState(c.currentMoraleState, c);
 
             // Items
             accuracy += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Accuracy, c.itemSet);
@@ -710,7 +710,7 @@ namespace WeAreGladiators
             }
 
             // Stress State Modifier
-            dodge += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress), c);
+            dodge += CombatController.Instance.GetStatMultiplierFromStressState(c.currentMoraleState, c);
 
             // Items
             dodge += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Dodge, c.itemSet);
@@ -956,7 +956,7 @@ namespace WeAreGladiators
             }
 
             // Stress State Modifier
-            resolve += CombatController.Instance.GetStatMultiplierFromStressState(CombatController.Instance.GetStressStateFromStressAmount(c.currentStress), c);
+            resolve += CombatController.Instance.GetStatMultiplierFromStressState(c.currentMoraleState, c);
 
             // Items
             resolve += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Resolve, c.itemSet);
@@ -1939,7 +1939,7 @@ namespace WeAreGladiators
 
             return resistanceReturned;
         }
-        public static int GetTotalStressResistance(HexCharacterModel c)
+        public static int GetTotalBravery(HexCharacterModel c)
         {
             int sr = c.attributeSheet.stressResistance + GetTotalResolve(c);
 
@@ -1966,7 +1966,7 @@ namespace WeAreGladiators
             }
 
             // Items
-            sr += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.StressResistance, c.itemSet);
+            sr += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Bravery, c.itemSet);
 
             // Satyr perk
             if (c.race == CharacterRace.Satyr && c.controller == Controller.Player)
@@ -1976,7 +1976,7 @@ namespace WeAreGladiators
 
             return sr;
         }
-        public static int GetTotalStressResistance(HexCharacterData c)
+        public static int GetTotalBravery(HexCharacterData c)
         {
             int sr = c.attributeSheet.stressResistance + GetTotalResolve(c);
 
@@ -1999,7 +1999,7 @@ namespace WeAreGladiators
             }
 
             // Items
-            sr += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.StressResistance, c.itemSet);
+            sr += ItemController.Instance.GetTotalAttributeBonusFromItemSet(ItemCoreAttribute.Bravery, c.itemSet);
 
             return sr;
         }

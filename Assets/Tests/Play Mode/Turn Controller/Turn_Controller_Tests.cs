@@ -153,9 +153,9 @@ namespace Tests
 
             // Act
             Stopwatch stopwatch = Stopwatch.StartNew();
-            HexCharacterController.Instance.ModifyStress(enemyCharacter, 20, false, false, false);
-            HexCharacterController.Instance.ModifyStress(enemyCharacterTwo, 20, false, false, false);
-            HexCharacterController.Instance.ModifyStress(enemyCharacterThree, 20, false, false, false);
+            HexCharacterController.Instance.ModifyMoraleState(enemyCharacter, -20, false, false, false);
+            HexCharacterController.Instance.ModifyMoraleState(enemyCharacterTwo, -20, false, false, false);
+            HexCharacterController.Instance.ModifyMoraleState(enemyCharacterThree, -20, false, false, false);
             TurnController.Instance.OnNewCombatEventStarted();
             HexCharacterController.Instance.CharacterOnTurnEnd(playerCharacter);
             yield return new WaitUntil(() => TurnController.Instance.CurrentTurn == 2 || stopwatch.Elapsed.Seconds >= TEST_TIME_OUT_LIMIT);

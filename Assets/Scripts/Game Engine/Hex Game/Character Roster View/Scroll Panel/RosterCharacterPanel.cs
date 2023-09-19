@@ -75,7 +75,7 @@ namespace WeAreGladiators.UI
 
             // Build bars
             healthBar.value = data.currentHealth / (float) StatCalculator.GetTotalMaxHealth(data);
-            stressBar.value = data.currentStress / 20f;
+            //stressBar.value = data.currentMoraleState / 20f;
 
             // Reset perk icons
             foreach (UIPerkIcon b in perkIcons)

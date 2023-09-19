@@ -399,7 +399,7 @@ namespace WeAreGladiators.UI
 
             physicalResistanceText.text = StatCalculator.GetTotalPhysicalResistance(character) + "%";
             magicResistanceText.text = StatCalculator.GetTotalMagicResistance(character) + "%";
-            stressResistanceText.text = StatCalculator.GetTotalStressResistance(character) + "%";
+            stressResistanceText.text = StatCalculator.GetTotalBravery(character) + "%";
             injuryResistanceText.text = StatCalculator.GetTotalInjuryResistance(character) + "%";
             debuffResistanceText.text = StatCalculator.GetTotalDebuffResistance(character) + "%";
             deathResistanceText.text = StatCalculator.GetTotalDeathResistance(character) + "%";
@@ -467,13 +467,13 @@ namespace WeAreGladiators.UI
         private void BuildStressBar(HexCharacterData character)
         {
             // Update slider
-            float maxStress = 20;
-            float stress = character.currentStress;
-            float stresBarFloat = stress / maxStress;
-            stressBar.value = stresBarFloat;
+            //float maxStress = 20;
+            //float stress = character.currentMoraleState;
+            //float stresBarFloat = stress / maxStress;
+            //stressBar.value = stresBarFloat;
 
             // Update stress text
-            stressBarText.text = stress + " / " + maxStress;
+            //stressBarText.text = stress + " / " + maxStress;
         }
 
         #endregion

@@ -110,7 +110,7 @@ namespace WeAreGladiators.Characters
             UpdateArmourComponents(character.currentArmour, character.startingArmour);
 
             // Stress Components
-            UpdateStressComponents(character.currentStress, character);
+            UpdateStressComponents(character);
 
             // Initiative
             UpdateCurrentInitiativeComponents(character);
@@ -251,15 +251,15 @@ namespace WeAreGladiators.Characters
             armourBarUI.value = armourBarFloat;
             currentArmourText.text = currentArmourFloat + "/" + currentMaxArmourFloat;
         }
-        public void UpdateStressComponents(int stress, HexCharacterModel character)
+        public void UpdateStressComponents(HexCharacterModel character)
         {
-            float currentStressFloat = stress;
-            float currentMaxStressFloat = 20f;
-            float stressBarFloat = currentStressFloat / currentMaxStressFloat;
+            //float currentStressFloat = stress;
+            //float currentMaxStressFloat = 20f;
+            //float stressBarFloat = currentStressFloat / currentMaxStressFloat;
 
             // Modify UI elements
-            stressBarUI.value = stressBarFloat;
-            stressText.text = currentStressFloat + "/" + currentMaxStressFloat;
+            //stressBarUI.value = stressBarFloat;
+            //stressText.text = currentStressFloat + "/" + currentMaxStressFloat;
 
             stressPanel.BuildPanelViews(character);
         }

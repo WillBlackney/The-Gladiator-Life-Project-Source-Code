@@ -800,7 +800,7 @@ namespace WeAreGladiators.Combat
             }
 
             // Calculate total resolve + roll for 'Irrational' perk.
-            int characterStressResistance = StatCalculator.GetTotalStressResistance(character);
+            int characterStressResistance = StatCalculator.GetTotalBravery(character);
             if (data.NegativeEvent && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Irrational))
             {
                 int irrationalRoll = RandomGenerator.NumberBetween(1, 2);
@@ -832,8 +832,8 @@ namespace WeAreGladiators.Combat
             if (roll <= requiredRoll)
             {
                 Debug.Log("Character rolled below the required roll threshold, applying effects of stress event...");
-                int finalStressAmount = RandomGenerator.NumberBetween(data.StressAmountMin, data.StressAmountMax);
-                HexCharacterController.Instance.ModifyStress(character, finalStressAmount, true, true, allowRecursiveChecks);
+                int finalStateChangeAmount = RandomGenerator.NumberBetween(data.MoraleChangeMin, data.MoraleChangeMax);
+                HexCharacterController.Instance.ModifyMoraleState(character, finalStateChangeAmount, true, true, allowRecursiveChecks);
             }
 
         }
@@ -851,7 +851,7 @@ namespace WeAreGladiators.Combat
             int roll = RandomGenerator.NumberBetween(1, 100);
 
             // Calculate total resolve + roll for 'Irrational' perk.
-            int characterStressResistance = StatCalculator.GetTotalStressResistance(character);
+            int characterStressResistance = StatCalculator.GetTotalBravery(character);
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Irrational))
             {
                 int irrationalRoll = RandomGenerator.NumberBetween(1, 2);
@@ -876,35 +876,11 @@ namespace WeAreGladiators.Combat
             {
                 Debug.Log("Character rolled below the required roll threshold, applying effects of stress event...");
                 int finalStressAmount = RandomGenerator.NumberBetween(data.stressAmountMin, data.stressAmountMax);
-                HexCharacterController.Instance.ModifyStress(character, finalStressAmount, true, showVFX);
+                HexCharacterController.Instance.ModifyMoraleState(character, finalStressAmount, true, showVFX);
             }
 
         }
-        public StressState GetStressStateFromStressAmount(int stressAmount)
-        {
-            if (stressAmount >= 0 && stressAmount <= 4)
-            {
-                return StressState.Confident;
-            }
-            if (stressAmount >= 5 && stressAmount <= 9)
-            {
-                return StressState.Steady;
-            }
-            if (stressAmount >= 10 && stressAmount <= 14)
-            {
-                return StressState.Nervous;
-            }
-            if (stressAmount >= 15 && stressAmount <= 19)
-            {
-                return StressState.Panicking;
-            }
-            if (stressAmount >= 20)
-            {
-                return StressState.Shattered;
-            }
-            return StressState.None;
-        }
-        public int GetStatMultiplierFromStressState(StressState stressState, HexCharacterModel character)
+        public int GetStatMultiplierFromStressState(MoraleState stressState, HexCharacterModel character)
         {
             int multiplier = 0;
             // Enemies dont interact with stress system
@@ -914,59 +890,59 @@ namespace WeAreGladiators.Combat
                 return 0;
             }
 
-            if (stressState == StressState.Confident && !CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Slave))
+            if (stressState == MoraleState.Confident && !CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Slave))
             {
                 multiplier = 5;
             }
-            else if (stressState == StressState.Steady)
+            else if (stressState == MoraleState.Steady)
             {
                 multiplier = 0;
             }
-            else if (stressState == StressState.Nervous)
+            else if (stressState == MoraleState.Nervous)
             {
                 multiplier = -5;
             }
-            else if (stressState == StressState.Panicking)
+            else if (stressState == MoraleState.Panicking)
             {
                 multiplier = -10;
             }
-            else if (stressState == StressState.Shattered)
+            else if (stressState == MoraleState.Shattered)
             {
                 multiplier = -15;
             }
             return multiplier;
         }
-        public int[] GetStressStateRanges(StressState state)
+        public int[] GetStressStateRanges(MoraleState state)
         {
-            if (state == StressState.Confident)
+            if (state == MoraleState.Confident)
             {
                 return new int[2]
                 {
                     0, 4
                 };
             }
-            if (state == StressState.Steady)
+            if (state == MoraleState.Steady)
             {
                 return new int[2]
                 {
                     5, 9
                 };
             }
-            if (state == StressState.Nervous)
+            if (state == MoraleState.Nervous)
             {
                 return new int[2]
                 {
                     10, 14
                 };
             }
-            if (state == StressState.Panicking)
+            if (state == MoraleState.Panicking)
             {
                 return new int[2]
                 {
                     15, 19
                 };
             }
-            if (state == StressState.Shattered)
+            if (state == MoraleState.Shattered)
             {
                 return new int[2]
                 {
@@ -997,9 +973,9 @@ namespace WeAreGladiators.Combat
             }
 
             // Calculate stress state mod
-            StressState attackerStressState = GetStressStateFromStressAmount(attacker.currentStress);
+            MoraleState attackerStressState = attacker.currentMoraleState;
             int attackerStressMod = GetStatMultiplierFromStressState(attackerStressState, attacker);
-            StressState targetStressState = GetStressStateFromStressAmount(target.currentStress);
+            MoraleState targetStressState = target.currentMoraleState;
             int targetStressMod = GetStatMultiplierFromStressState(targetStressState, target);
 
             // Warfare talent bonus
@@ -2022,10 +1998,10 @@ namespace WeAreGladiators.Combat
                         HexCharacterController.Instance.ModifyActionPoints(attacker, 6);
                     }
 
-                    // Gladiator background: recover 3 stress on kill
+                    // Gladiator background: become confident on kill
                     if (CharacterDataController.Instance.DoesCharacterHaveBackground(attacker.background, CharacterBackground.Gladiator))
                     {
-                        HexCharacterController.Instance.ModifyStress(attacker, -3, true, true);
+                        HexCharacterController.Instance.ModifyMoraleState(attacker, 1000, true, true);
                     }
 
                     // Perk Soul Collector: permanently gain 1 constitution

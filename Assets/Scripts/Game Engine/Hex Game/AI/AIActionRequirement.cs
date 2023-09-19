@@ -33,7 +33,7 @@ namespace WeAreGladiators.AI
 
         [ShowIf("ShowStressReq")]
         [LabelWidth(100)]
-        public int stressReq;
+        public MoraleState moraleReq;
 
         [ShowIf("ShowTurnReq")]
         [LabelWidth(100)]
@@ -83,8 +83,8 @@ namespace WeAreGladiators.AI
         }
         public bool ShowStressReq()
         {
-            return requirementType == AIActionRequirementType.TargetHasLessStressThanX ||
-                requirementType == AIActionRequirementType.TargetHasMoreStressThanX;
+            return requirementType == AIActionRequirementType.TargetHasLowerMoraleThanX ||
+                requirementType == AIActionRequirementType.TargetHasHigherMoraleThanX;
         }
         public bool ShowEnemiesInMeleeRange()
         {
@@ -155,8 +155,8 @@ namespace WeAreGladiators.AI
         TargetPositionedForKnockBackStun = 20,
         TargetIsElevated = 21,
         TargetIsNotElevated = 22,
-        TargetHasLessStressThanX = 24,
-        TargetHasMoreStressThanX = 25,
+        TargetHasLowerMoraleThanX = 24,
+        TargetHasHigherMoraleThanX = 25,
         IsLessThanTurnX = 26,
         IsMoreThanTurnX = 27,
         TargetHasMoreArmorThanX = 28,

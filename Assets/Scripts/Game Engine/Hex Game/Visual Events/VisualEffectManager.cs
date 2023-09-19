@@ -380,11 +380,11 @@ namespace WeAreGladiators.VisualEvents
             GameObject damageEffect = Instantiate(DamageEffectPrefab, location, Quaternion.identity);
             damageEffect.GetComponent<DamageEffect>().InitializeSetup(damageAmount, crit, heal);
         }
-        public void CreateStressGainedEffect(Vector3 location, int stressAmount)
+        public void CreateStressGainedEffect(Vector3 location, MoraleState moraleState)
         {
             Debug.Log("VisualEffectManager.CreateStressGainedEffect() called...");
             GameObject stressEffect = Instantiate(StressEffectPrefab, location, Quaternion.identity);
-            stressEffect.GetComponent<StressEffect>().InitializeSetup(stressAmount);
+            stressEffect.GetComponent<StressEffect>().InitializeSetup(moraleState);
         }
         public void CreateGroundBloodSpatter(Vector3 location)
         {
