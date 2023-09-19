@@ -27,15 +27,15 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'times this character would gain '
+    phrase: times this character would lower their
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Stress
+    phrase: Morale
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: ', ignore it.'
+    phrase: ', prevent it.'
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
@@ -44,22 +44,25 @@ MonoBehaviour:
   maxAllowedStacks: 3
   showStackCount: 1
   hiddenOnPassivePanel: 1
-  isRewardable: 0
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
+  isOnPerkTree: 0
+  perkTreeTier: 0
   isInjury: 0
   isPermanentInjury: 0
-  severity: 0
-  injuryType: 0
-  minInjuryDuration: 0
-  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 0
   backgroundPerkQuality: 0
+  severity: 0
+  injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

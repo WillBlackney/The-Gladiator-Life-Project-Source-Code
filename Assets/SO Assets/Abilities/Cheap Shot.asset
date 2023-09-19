@@ -15,8 +15,8 @@ MonoBehaviour:
   abilityName: Cheap Shot
   displayedName: Cheap Shot
   includeInGame: 1
-  baseAbilityDescription: Deal 115% Weapon damage. If Stealthed, Backstriking, or
-    a Critical Strike, apply Stunned.
+  baseAbilityDescription: Deal 115% Weapon damage to an enemy and reduce their Morale.
+    If Stealthed, Backstriking, or a Critical Strike, apply Stunned.
   abilitySprite: {fileID: 21300000, guid: 839859de67d43a649ae5bebb1e5c6714, type: 3}
   energyCost: 4
   baseCooldown: 2
@@ -42,10 +42,16 @@ MonoBehaviour:
   hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
-  - effectType: 2
+  - aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    knockBackDistance: 0
+    effectType: 21
     stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       successChance: 0
     energyGained: 0
     normalTeleportVFX: 1
@@ -119,11 +125,6 @@ MonoBehaviour:
       projectileFired: 0
       projectileStartPosition: 0
       onCharacter: 0
-    aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
     damageType: 1
     minBaseDamage: 33
     maxBaseDamage: 37
@@ -145,12 +146,61 @@ MonoBehaviour:
       perkTag: 0
       passiveStacks: 0
     perkApplicationChance: 100
-    knockBackDistance: 0
   onHitEffects:
-  - effectType: 10
+  - aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    knockBackDistance: 0
+    effectType: 9
     stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
+      moraleChangeMin: -1
+      moraleChangeMax: -1
+      successChance: 100
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish: []
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    bonusCritDamage: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
+    weaponUsed: 2
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 0
+      passiveStacks: 1
+    perkApplicationChance: 100
+  - aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    knockBackDistance: 0
+    effectType: 10
+    stressEventData:
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       successChance: 0
     energyGained: 0
     normalTeleportVFX: 1
@@ -183,11 +233,6 @@ MonoBehaviour:
       projectileFired: 0
       projectileStartPosition: 0
       onCharacter: 0
-    aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
     damageType: 0
     minBaseDamage: 0
     maxBaseDamage: 0
@@ -209,11 +254,16 @@ MonoBehaviour:
       perkTag: 3
       passiveStacks: 1
     perkApplicationChance: 100
+  - aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
     knockBackDistance: 0
-  - effectType: 10
+    effectType: 10
     stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       successChance: 0
     energyGained: 0
     normalTeleportVFX: 1
@@ -244,11 +294,6 @@ MonoBehaviour:
       projectileFired: 0
       projectileStartPosition: 0
       onCharacter: 0
-    aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
     damageType: 0
     minBaseDamage: 0
     maxBaseDamage: 0
@@ -270,7 +315,6 @@ MonoBehaviour:
       perkTag: 3
       passiveStacks: 1
     perkApplicationChance: 100
-    knockBackDistance: 0
   onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
@@ -292,7 +336,15 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'damage to an enemy. If '
+    phrase: 'damage to an enemy and reduce their '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Morale
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '. If '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -326,6 +378,8 @@ MonoBehaviour:
     abilityEffectType: 0
     phrase: .
   keyWords:
+  - kewWordType: 32
+    passiveType: 0
   - kewWordType: 1
     passiveType: 77
   - kewWordType: 7

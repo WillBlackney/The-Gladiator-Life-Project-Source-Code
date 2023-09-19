@@ -27,15 +27,19 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'gain '
-  - color: 2
-    getPhraseFromAbilityValue: 0
-    abilityEffectType: 0
-    phrase: '2 '
+    phrase: 'reduce their '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Stress
+    phrase: 'Morale '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'by '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 1
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

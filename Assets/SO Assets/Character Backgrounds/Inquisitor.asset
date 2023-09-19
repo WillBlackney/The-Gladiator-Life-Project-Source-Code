@@ -74,7 +74,7 @@ MonoBehaviour:
     - color: 3
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: Stress Resistance
+      phrase: Bravery
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0

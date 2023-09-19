@@ -824,7 +824,7 @@ namespace WeAreGladiators.Characters
             {
                 foreach (HexCharacterModel ally in GetAllAlliesOfCharacter(character, false))
                 {
-                    CombatController.Instance.CreateStressCheck(ally, StressEventType.AllyShattered, false);
+                    CombatController.Instance.CreateMoraleCheck(ally, StressEventType.AllyShattered, false);
                 }
             }
 
@@ -833,7 +833,7 @@ namespace WeAreGladiators.Characters
             {
                 foreach (HexCharacterModel ally in GetAllAlliesOfCharacter(character, false))
                 {
-                    CombatController.Instance.CreateStressCheck(ally, StressEventType.AllyMoraleStateWorsened, false);
+                    CombatController.Instance.CreateMoraleCheck(ally, StressEventType.AllyMoraleStateWorsened, false);
                 }
             }
 
@@ -842,7 +842,7 @@ namespace WeAreGladiators.Characters
             {
                 foreach (HexCharacterModel ally in GetAllAlliesOfCharacter(character, false))
                 {
-                    CombatController.Instance.CreateStressCheck(ally, StressEventType.AllyMoraleStateImproved, false);
+                    CombatController.Instance.CreateMoraleCheck(ally, StressEventType.AllyMoraleStateImproved, false);
                 }
             }
         }
@@ -2268,7 +2268,7 @@ namespace WeAreGladiators.Characters
 
                         foreach (HexCharacterModel ally in allies)
                         {
-                            CombatController.Instance.CreateStressCheck(ally, new StressEventData(2, 2, 100), true);
+                            CombatController.Instance.CreateMoraleCheck(ally, new StressEventData(-1, -1, 100), true);
                         }
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
@@ -2289,7 +2289,7 @@ namespace WeAreGladiators.Characters
 
                         foreach (HexCharacterModel enemy in enemies)
                         {
-                            CombatController.Instance.CreateStressCheck(enemy, new StressEventData(2, 2, 100), true);
+                            CombatController.Instance.CreateMoraleCheck(enemy, new StressEventData(-1, -1, 100), true);
                         }
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);

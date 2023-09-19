@@ -695,7 +695,7 @@ namespace WeAreGladiators.Abilities
                         CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
                         caster.livingState == LivingState.Alive)
                     {
-                        CombatController.Instance.CreateStressCheck(caster, StressEventType.LandedCriticalStrike);
+                        CombatController.Instance.CreateMoraleCheck(caster, StressEventType.LandedCriticalStrike);
                     }
 
                     // Trigger on hit/crit effects
@@ -1011,7 +1011,7 @@ namespace WeAreGladiators.Abilities
                         CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
                         caster.livingState == LivingState.Alive)
                     {
-                        CombatController.Instance.CreateStressCheck(caster, StressEventType.LandedCriticalStrike);
+                        CombatController.Instance.CreateMoraleCheck(caster, StressEventType.LandedCriticalStrike);
                     }
 
                     // Trigger on hit/crit effects
@@ -1034,13 +1034,13 @@ namespace WeAreGladiators.Abilities
             }
 
             // Stress Check
-            else if (abilityEffect.effectType == AbilityEffectType.StressCheck)
+            else if (abilityEffect.effectType == AbilityEffectType.MoraleCheck)
             {
-                CombatController.Instance.CreateStressCheck(target, abilityEffect.stressEventData, true);
+                CombatController.Instance.CreateMoraleCheck(target, abilityEffect.stressEventData, true);
             }
 
             // Stress Check AoE
-            else if (abilityEffect.effectType == AbilityEffectType.StressCheckAoe)
+            else if (abilityEffect.effectType == AbilityEffectType.MoraleCheckAoe)
             {
                 triggerEffectEndEvents = false;
                 List<LevelNode> tilesEffected = new List<LevelNode>();
@@ -1079,7 +1079,7 @@ namespace WeAreGladiators.Abilities
                 foreach (HexCharacterModel character in charactersEffected)
                 {
                     VisualEventManager.CreateStackParentVisualEvent(character);
-                    CombatController.Instance.CreateStressCheck(character, abilityEffect.stressEventData, true);
+                    CombatController.Instance.CreateMoraleCheck(character, abilityEffect.stressEventData, true);
                 }
             }
 

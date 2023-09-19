@@ -41,10 +41,16 @@ MonoBehaviour:
   hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
-  - effectType: 12
+  - aoeType: 2
+    includeCentreTile: 0
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 1
+    knockBackDistance: 0
+    effectType: 12
     stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       successChance: 0
     energyGained: 0
     normalTeleportVFX: 1
@@ -103,11 +109,6 @@ MonoBehaviour:
       projectileStartPosition: 0
       onCharacter: 2
     visualEventsOnEffectFinish: []
-    aoeType: 2
-    includeCentreTile: 0
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 1
     damageType: 0
     minBaseDamage: 0
     maxBaseDamage: 0
@@ -129,7 +130,50 @@ MonoBehaviour:
       perkTag: 48
       passiveStacks: 2
     perkApplicationChance: 100
+  - aoeType: 2
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
     knockBackDistance: 0
+    effectType: 21
+    stressEventData:
+      moraleChangeMin: -1
+      moraleChangeMax: -1
+      successChance: 100
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish: []
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    bonusCritDamage: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
+    weaponUsed: 2
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 0
+      passiveStacks: 1
+    perkApplicationChance: 100
   onHitEffects: []
   onCritEffects: []
   onPerkAppliedSuccessEffects: []
@@ -156,7 +200,15 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Aura
+    phrase: 'Aura '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and reduce their '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Morale
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -165,4 +217,6 @@ MonoBehaviour:
   - kewWordType: 1
     passiveType: 48
   - kewWordType: 6
+    passiveType: 0
+  - kewWordType: 32
     passiveType: 0

@@ -19,19 +19,19 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'This character gains '
+    phrase: 'This character has a chance to lower their '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Stress '
+    phrase: 'Morale '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'whenever ANY character is '
+    phrase: 'whenever any character suffers an '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Injured
+    phrase: Injury
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -40,6 +40,8 @@ MonoBehaviour:
   effectDetailTabs: []
   keyWords:
   - kewWordType: 32
+    passiveType: 0
+  - kewWordType: 40
     passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0

@@ -35,7 +35,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'Stress Resistance '
+    phrase: 'Bravery '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -43,15 +43,17 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Stress Checks
+    phrase: 'Morale '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: .
+    phrase: checks.
   passiveItalicDescription: 
   effectDetailTabs: []
   keyWords:
   - kewWordType: 15
+    passiveType: 0
+  - kewWordType: 32
     passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0

@@ -82,9 +82,9 @@ namespace WeAreGladiators.Abilities
         // Misc
         #region
 
-        public bool ShowStressEventData()
+        public bool ShowMoraleEventData()
         {
-            return effectType == AbilityEffectType.StressCheck || effectType == AbilityEffectType.StressCheckAoe;
+            return effectType == AbilityEffectType.MoraleCheck || effectType == AbilityEffectType.MoraleCheckAoe;
         }
 
         #endregion
@@ -98,7 +98,7 @@ namespace WeAreGladiators.Abilities
         // Stress Attack Fields
         [BoxGroup("General Settings")]
         [LabelWidth(200)]
-        [ShowIf("ShowStressEventData")]
+        [ShowIf("ShowMoraleEventData")]
         public StressEventData stressEventData;
 
         // Energy Fields
@@ -384,7 +384,7 @@ namespace WeAreGladiators.Abilities
         {
             if ((effectType == AbilityEffectType.ApplyPassiveAoe ||
                     effectType == AbilityEffectType.DamageAoe ||
-                    effectType == AbilityEffectType.StressCheckAoe) &&
+                    effectType == AbilityEffectType.MoraleCheckAoe) &&
                 (aoeType == AoeType.AtTarget || aoeType == AoeType.Line))
             {
                 return true;
@@ -395,7 +395,7 @@ namespace WeAreGladiators.Abilities
         {
             if (effectType == AbilityEffectType.ApplyPassiveAoe ||
                 effectType == AbilityEffectType.DamageAoe ||
-                effectType == AbilityEffectType.StressCheckAoe)
+                effectType == AbilityEffectType.MoraleCheckAoe)
             {
                 return true;
             }

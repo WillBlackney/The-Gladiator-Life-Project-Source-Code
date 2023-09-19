@@ -530,12 +530,12 @@ namespace WeAreGladiators.HexTiles
                     // Moved into back arc 
                     if (HexCharacterController.Instance.GetCharacterBackArcTiles(enemy).Contains(character.currentTile))
                     {
-                        CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedBehindMe);
+                        CombatController.Instance.CreateMoraleCheck(enemy, StressEventType.EnemyMovedBehindMe);
                     }
                     // Moved into a non back arc tile
                     else
                     {
-                        CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedIntoMelee);
+                        CombatController.Instance.CreateMoraleCheck(enemy, StressEventType.EnemyMovedIntoMelee);
                     }
 
                 }
@@ -582,12 +582,12 @@ namespace WeAreGladiators.HexTiles
                         // Moved into back arc 
                         if (HexCharacterController.Instance.GetCharacterBackArcTiles(enemy).Contains(character.currentTile))
                         {
-                            CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedBehindMe);
+                            CombatController.Instance.CreateMoraleCheck(enemy, StressEventType.EnemyMovedBehindMe);
                         }
                         // Moved into a non back arc tile
                         else
                         {
-                            CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedIntoMelee);
+                            CombatController.Instance.CreateMoraleCheck(enemy, StressEventType.EnemyMovedIntoMelee);
                         }
 
                     }
@@ -840,12 +840,12 @@ namespace WeAreGladiators.HexTiles
                     // Moved into back arc 
                     if (HexCharacterController.Instance.GetCharacterBackArcTiles(enemy).Contains(character.currentTile))
                     {
-                        CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedBehindMe);
+                        CombatController.Instance.CreateMoraleCheck(enemy, StressEventType.EnemyMovedBehindMe);
                     }
                     // Moved into a non back arc tile
                     else
                     {
-                        CombatController.Instance.CreateStressCheck(enemy, StressEventType.EnemyMovedIntoMelee);
+                        CombatController.Instance.CreateMoraleCheck(enemy, StressEventType.EnemyMovedIntoMelee);
                     }
 
                 }
