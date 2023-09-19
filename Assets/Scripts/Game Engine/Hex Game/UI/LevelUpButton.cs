@@ -13,7 +13,6 @@ namespace WeAreGladiators.UI
             scalingParent.DOKill();
             scalingParent.transform.DOScale(new Vector3(1, 1, 1), 0);
             scalingParent.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.25f).SetLoops(-1, LoopType.Yoyo);
-
         }
         public void Hide()
         {

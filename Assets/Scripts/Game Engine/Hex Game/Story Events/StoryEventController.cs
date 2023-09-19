@@ -837,7 +837,7 @@ namespace WeAreGladiators.StoryEvents
                     currentResultItems.Add(newResultItem);
                 }
             }
-            else if (effect.effectType == StoryChoiceEffectType.RecoverStressAll)
+            else if (effect.effectType == StoryChoiceEffectType.ChangeMoraleAll)
             {
                 // Get targets
                 List<HexCharacterData> prospects = new List<HexCharacterData>();
@@ -846,40 +846,16 @@ namespace WeAreGladiators.StoryEvents
                 for (int i = 0; i < prospects.Count; i++)
                 {
                     int roll = RandomGenerator.NumberBetween(1, 100);
-                    if (roll > effect.stressRecoveryChance)
+                    if (roll > effect.moraleChangeChance)
                     {
                         continue;
                     }
 
-                    int stressRecovered = RandomGenerator.NumberBetween(effect.stressRecoveredMin, effect.stressRecoveredMax);
-                    CharacterDataController.Instance.SetCharacterMoraleState(prospects[i], prospects[i].currentMoraleState - stressRecovered);
+                    int moraleChangeAmount = RandomGenerator.NumberBetween(effect.moraleChangeMin, effect.moraleChangeMax);
+                    CharacterDataController.Instance.SetCharacterMoraleState(prospects[i], prospects[i].currentMoraleState + moraleChangeAmount);
 
                     StoryEventResultItem newResultItem = new StoryEventResultItem(
-                        prospects[i].myName + " " + prospects[i].mySubName + " reduced " + TextLogic.ReturnColoredText("Stress", TextLogic.neutralYellow) + " by " +
-                        TextLogic.ReturnColoredText(stressRecovered.ToString(), TextLogic.blueNumber), ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetMoraleStateSprite(MoraleState.Confident));
-                    currentResultItems.Add(newResultItem);
-                }
-            }
-            else if (effect.effectType == StoryChoiceEffectType.GainStressAll)
-            {
-                // Get targets
-                List<HexCharacterData> prospects = new List<HexCharacterData>();
-                prospects.AddRange(CharacterDataController.Instance.AllPlayerCharacters);
-
-                for (int i = 0; i < prospects.Count; i++)
-                {
-                    int roll = RandomGenerator.NumberBetween(1, 100);
-                    if (roll > effect.stressRecoveryChance)
-                    {
-                        continue;
-                    }
-
-                    int stressGained = RandomGenerator.NumberBetween(effect.stressRecoveredMin, effect.stressRecoveredMax);
-                    CharacterDataController.Instance.SetCharacterMoraleState(prospects[i], prospects[i].currentMoraleState + stressGained);
-
-                    StoryEventResultItem newResultItem = new StoryEventResultItem(
-                        prospects[i].myName + " " + prospects[i].mySubName + " increased " + TextLogic.ReturnColoredText("Stress", TextLogic.neutralYellow) + " by " +
-                        TextLogic.ReturnColoredText(stressGained.ToString(), TextLogic.blueNumber), ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetMoraleStateSprite(MoraleState.Nervous));
+                        prospects[i].myName + " " + prospects[i].mySubName + " became " + TextLogic.ReturnColoredText(prospects[i].currentMoraleState.ToString(), TextLogic.neutralYellow) + ".", ResultRowIcon.UnframedSprite, SpriteLibrary.Instance.GetMoraleStateSprite(prospects[i].currentMoraleState));
                     currentResultItems.Add(newResultItem);
                 }
             }

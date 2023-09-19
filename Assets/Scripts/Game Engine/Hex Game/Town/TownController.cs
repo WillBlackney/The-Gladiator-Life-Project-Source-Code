@@ -592,7 +592,6 @@ namespace WeAreGladiators.TownFeatures
 
                 // Rebuild character's panel views to be available
                 character.currentTownActivity = TownActivity.None;
-                CharacterScrollPanelController.Instance.GetCharacterPanel(character)?.UpdateActivityIndicator();
             }
 
             // Reset hospital drop slot

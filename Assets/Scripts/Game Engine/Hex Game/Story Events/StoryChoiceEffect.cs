@@ -86,15 +86,15 @@ namespace WeAreGladiators.StoryEvents
         [ShowIf("ShowStressRecoverySettings")]
         [LabelWidth(150)]
         [Range(0, 100)]
-        public int stressRecoveryChance = 100;
+        public int moraleChangeChance = 100;
 
         [ShowIf("ShowStressRecoverySettings")]
         [LabelWidth(150)]
-        public int stressRecoveredMin;
+        public int moraleChangeMin;
 
         [ShowIf("ShowStressRecoverySettings")]
         [LabelWidth(150)]
-        public int stressRecoveredMax;
+        public int moraleChangeMax;
 
         [ShowIf("ShowHealthLost")]
         [LabelWidth(150)]
@@ -127,7 +127,7 @@ namespace WeAreGladiators.StoryEvents
         }
         public bool ShowStressRecoverySettings()
         {
-            return effectType == StoryChoiceEffectType.RecoverStressAll || effectType == StoryChoiceEffectType.GainStressAll;
+            return effectType == StoryChoiceEffectType.ChangeMoraleAll;
         }
         public bool ShowInjuryType()
         {
@@ -220,8 +220,7 @@ namespace WeAreGladiators.StoryEvents
         GainExperience = 14,
         GainRandomInjury = 15,
         LoseHealth = 16,
-        RecoverStressAll = 17,
-        GainStressAll = 18,
+        ChangeMoraleAll = 17,
         IncreaseDailyWageAll = 19,
         CharactersLeave = 20
     }

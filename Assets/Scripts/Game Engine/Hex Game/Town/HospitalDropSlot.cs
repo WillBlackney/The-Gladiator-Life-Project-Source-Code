@@ -91,7 +91,6 @@ namespace WeAreGladiators.TownFeatures
                 MyCharacterData = null;
                 PlayerDataController.Instance.ModifyPlayerGold(GetFeatureGoldCost(featureType));
                 BuildViews();
-                CharacterScrollPanelController.Instance.GetCharacterPanel(character).UpdateActivityIndicator();
             }
         }
         public void BuildViews()

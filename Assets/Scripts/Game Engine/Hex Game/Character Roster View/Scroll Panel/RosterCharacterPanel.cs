@@ -13,13 +13,13 @@ namespace WeAreGladiators.UI
 {
     public class RosterCharacterPanel : MonoBehaviour, IPointerClickHandler
     {
-
         // Getters + Accessors
         #region
 
         public HexCharacterData MyCharacterData { get; private set; }
 
         #endregion
+
         // Components
         #region
 
@@ -29,22 +29,15 @@ namespace WeAreGladiators.UI
         [SerializeField] private UniversalCharacterModel portaitModel;
 
         [Header("Health Bar Components")]
-        [SerializeField]
-        private Slider healthBar;
+        [SerializeField] private Slider healthBar;
         [SerializeField] private TextMeshProUGUI healthText;
 
         [Header("Stress Bar Components")]
-        [SerializeField]
-        private Slider stressBar;
-        //[SerializeField] TextMeshProUGUI stressText;
+        [SerializeField] private Image moralStateImage;
 
         [Header("Perk + Injury Components")]
         [SerializeField]
         private UIPerkIcon[] perkIcons;
-
-        [Header("Activity Indicator Components")]
-        [SerializeField] private GameObject[] activityIndicatorParents;
-        [SerializeField] private Image activityIndicatorImage;
 
         [Header("Level Components")]
         [SerializeField] private LevelUpButton levelUpIndicator;
@@ -61,12 +54,10 @@ namespace WeAreGladiators.UI
         {
             MyCharacterData = data;
 
-            UpdateActivityIndicator();
-
             // Texts
             nameText.text = "<color=#BC8252>" + data.myName + "<color=#DDC6AB>    " + data.mySubName;
             healthText.text = data.currentHealth.ToString();
-            //stressText.text = data.currentStress.ToString();
+            moralStateImage.sprite = SpriteLibrary.Instance.GetMoraleStateSprite(data.currentMoraleState);
 
             // Build model
             CharacterModeller.BuildModelFromStringReferencesAsMugshot(portaitModel, data.modelParts);
@@ -75,7 +66,6 @@ namespace WeAreGladiators.UI
 
             // Build bars
             healthBar.value = data.currentHealth / (float) StatCalculator.GetTotalMaxHealth(data);
-            //stressBar.value = data.currentMoraleState / 20f;
 
             // Reset perk icons
             foreach (UIPerkIcon b in perkIcons)
@@ -96,18 +86,6 @@ namespace WeAreGladiators.UI
             // Level stuff
             UpdateLevelUpIndicator();
             currentLevelText.text = data.currentLevel.ToString();
-        }
-        public void UpdateActivityIndicator()
-        {
-            if (MyCharacterData.currentTownActivity == TownActivity.None)
-            {
-                SetIndicatorParentViewStates(false);
-            }
-            else
-            {
-                SetIndicatorParentViewStates(true);
-                activityIndicatorImage.sprite = SpriteLibrary.Instance.GetTownActivitySprite(MyCharacterData.currentTownActivity);
-            }
         }
         private void UpdateLevelUpIndicator()
         {
@@ -152,12 +130,7 @@ namespace WeAreGladiators.UI
             {
                 CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(MyCharacterData);
             }
-        }
-        private void SetIndicatorParentViewStates(bool onOrOff)
-        {
-            //foreach (GameObject g in activityIndicatorParents)
-            //    g.SetActive(onOrOff);
-        }
+        }        
 
         public void OnPointerClick(PointerEventData eventData)
         {

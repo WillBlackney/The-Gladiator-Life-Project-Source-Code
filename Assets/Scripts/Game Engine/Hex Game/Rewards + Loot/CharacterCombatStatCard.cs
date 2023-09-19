@@ -7,24 +7,7 @@ using WeAreGladiators.UI;
 namespace WeAreGladiators.RewardSystems
 {
     public class CharacterCombatStatCard : MonoBehaviour
-    {
-
-        public void ShowLevelUpIndicator()
-        {
-            LevelUpParent.SetActive(true);
-            LevelUpParent.transform.DOKill();
-            LevelUpParent.transform.DOScale(new Vector3(2, 2, 2), 0f);
-            LevelUpParent.transform.DOScale(new Vector3(2.25f, 2.25f, 2.25f), 1f).SetLoops(-1, LoopType.Yoyo);
-            LevelUpParent.transform.DOLocalRotate(new Vector3(0.0f, 0.0f, 360), 2f)
-                .SetLoops(-1, LoopType.Incremental)
-                .SetEase(Ease.Linear)
-                .SetRelative();
-
-            levelUpParentCg.DOKill();
-            levelUpParentCg.DOFade(0.65f, 0f);
-            levelUpParentCg.DOFade(1f, 1f).SetLoops(-1, LoopType.Yoyo);
-
-        }
+    {       
         // Properties + Components
         #region
 
@@ -74,5 +57,22 @@ namespace WeAreGladiators.RewardSystems
         public TextMeshProUGUI DamageDealtText => damageDealtText;
 
         #endregion
+
+        public void ShowLevelUpIndicator()
+        {
+            LevelUpParent.SetActive(true);
+            LevelUpParent.transform.DOKill();
+            LevelUpParent.transform.DOScale(new Vector3(2, 2, 2), 0f);
+            LevelUpParent.transform.DOScale(new Vector3(2.25f, 2.25f, 2.25f), 1f).SetLoops(-1, LoopType.Yoyo);
+            LevelUpParent.transform.DOLocalRotate(new Vector3(0.0f, 0.0f, 360), 2f)
+                .SetLoops(-1, LoopType.Incremental)
+                .SetEase(Ease.Linear)
+                .SetRelative();
+
+            levelUpParentCg.DOKill();
+            levelUpParentCg.DOFade(0.65f, 0f);
+            levelUpParentCg.DOFade(1f, 1f).SetLoops(-1, LoopType.Yoyo);
+
+        }
     }
 }
