@@ -16,4 +16,4 @@ MonoBehaviour:
   negativeEvent: 1
   stressAmountMin: -1
   stressAmountMax: -1
-  successChance: 25
+  successChance: 20

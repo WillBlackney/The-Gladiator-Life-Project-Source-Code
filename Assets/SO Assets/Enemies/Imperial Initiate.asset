@@ -21,40 +21,40 @@ MonoBehaviour:
   xpReward: 15
   ignoreStress: 0
   attributeSheet:
-    might:
-      value: 0
-      stars: 0
-    constitution:
-      value: 55
-      stars: 0
-    dodge:
-      value: 0
-      stars: 0
     accuracy:
       value: 65
       stars: 0
+    apMaximum: 8
+    apRecovery: 8
+    auraSize: 1
+    constitution:
+      value: 55
+      stars: 0
+    criticalChance: 5
+    criticalModifier: 50
+    deathResistance: 25
+    debuffResistance: 0
+    dodge:
+      value: 0
+      stars: 0
+    initiative: 15
+    injuryResistance: 0
+    magicDamageBonus: 0
+    magicResistance: 0
+    maxHealth: 0
+    might:
+      value: 0
+      stars: 0
+    physicalDamageBonus: 0
+    physicalResistance: 0
     resolve:
       value: 10
       stars: 0
+    stressResistance: 0
+    vision: 0
     wits:
       value: 10
       stars: 0
-    maxHealth: 0
-    apRecovery: 8
-    apMaximum: 8
-    initiative: 15
-    criticalChance: 5
-    criticalModifier: 50
-    physicalDamageBonus: 0
-    magicDamageBonus: 0
-    auraSize: 1
-    vision: 0
-    physicalResistance: 0
-    magicResistance: 0
-    debuffResistance: 0
-    stressResistance: 0
-    injuryResistance: 0
-    deathResistance: 25
   baseArmour: 0
   randomizeHealth: 0
   lowerHealthLimit: 50
@@ -73,7 +73,7 @@ MonoBehaviour:
     trinket: {fileID: 0}
   possibleArmourLoadouts:
   - headProspects:
-    - {fileID: 11400000, guid: 6257418e3377eb04e9b5bdc3a26febc0, type: 2}
+    - {fileID: 11400000, guid: 1a1a6451514e39a4a9bb3258a55d41c7, type: 2}
     bodyProspects:
     - {fileID: 11400000, guid: 9c82d8fa69ec50443a7f388f71928851, type: 2}
     - {fileID: 11400000, guid: c8fa646825673a74fa6d3a61e70cda06, type: 2}

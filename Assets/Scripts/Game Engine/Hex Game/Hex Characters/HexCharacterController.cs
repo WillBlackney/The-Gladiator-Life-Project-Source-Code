@@ -832,7 +832,7 @@ namespace WeAreGladiators.Characters
             {
                 foreach (HexCharacterModel ally in GetAllAlliesOfCharacter(character, false))
                 {
-                    CombatController.Instance.CreateMoraleCheck(ally, StressEventType.AllyShattered, false);
+                    CombatController.Instance.CreateMoraleCheck(ally, character.currentTile, StressEventType.AllyShattered, false);
                 }
             }
 
@@ -841,7 +841,7 @@ namespace WeAreGladiators.Characters
             {
                 foreach (HexCharacterModel ally in GetAllAlliesOfCharacter(character, false))
                 {
-                    CombatController.Instance.CreateMoraleCheck(ally, StressEventType.AllyMoraleStateWorsened, false);
+                    CombatController.Instance.CreateMoraleCheck(ally, character.currentTile, StressEventType.AllyMoraleStateWorsened, false);
                 }
             }
 
@@ -850,7 +850,7 @@ namespace WeAreGladiators.Characters
             {
                 foreach (HexCharacterModel ally in GetAllAlliesOfCharacter(character, false))
                 {
-                    CombatController.Instance.CreateMoraleCheck(ally, StressEventType.AllyMoraleStateImproved, false);
+                    CombatController.Instance.CreateMoraleCheck(ally, character.currentTile, StressEventType.AllyMoraleStateImproved, false);
                 }
             }
         }
@@ -2063,7 +2063,7 @@ namespace WeAreGladiators.Characters
                     }).SetEndDelay(0.5f);
 
                     // Recover morale state to nervous
-                    ModifyMoraleState(character, 2, true, true);
+                    ModifyMoraleState(character, 2, true, true, true, true);
 
                     // End turn
                     CharacterOnTurnEnd(character);

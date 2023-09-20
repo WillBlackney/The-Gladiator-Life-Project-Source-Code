@@ -204,12 +204,12 @@ namespace WeAreGladiators.Combat
                         //HexCharacterController.Instance.ModifyCurrentFatigue(character, 0);
 
                         // Stress Check events on injury applied
-                        CreateMoraleCheck(character, StressEventType.InjuryGained);
+                        CreateMoraleCheck(character, character.currentTile, StressEventType.InjuryGained);
 
                         // Check ally injured stress check
                         foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(character))
                         {
-                            CreateMoraleCheck(c, StressEventType.AllyInjured);
+                            CreateMoraleCheck(c, character.currentTile, StressEventType.AllyInjured);
                         }
 
                         // Check enemy injured stress check
@@ -218,11 +218,11 @@ namespace WeAreGladiators.Combat
                             // Check squeamish trait
                             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Squeamish))
                             {
-                                CreateMoraleCheck(c, StressEventType.AllyInjured);
+                                CreateMoraleCheck(c, character.currentTile, StressEventType.AllyInjured);
                             }
                             else
                             {
-                                CreateMoraleCheck(c, StressEventType.EnemyInjured);
+                                CreateMoraleCheck(c, character.currentTile, StressEventType.EnemyInjured);
                             }
                         }
 
@@ -766,7 +766,7 @@ namespace WeAreGladiators.Combat
         // Stress Events Logic
         #region
 
-        public void CreateMoraleCheck(HexCharacterModel character, StressEventType eventType, bool allowRecursiveChecks = true)
+        public void CreateMoraleCheck(HexCharacterModel character, LevelNode originTile, StressEventType eventType, bool allowRecursiveChecks = true)
         {
             // Non player characters dont use the stress mechanic
             if (character.characterData.ignoreStress || PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearless))
@@ -799,6 +799,12 @@ namespace WeAreGladiators.Combat
 
             // Calculate total resolve + roll for 'Irrational' perk.
             int characterBravery = StatCalculator.GetTotalBravery(character);
+
+            // Calculate distance modifier
+            int distance = originTile.Distance(character.currentTile) - 1;
+            if (distance < 0) distance = 0;
+            int distanceModifier = distance * 5;
+
             if (data.NegativeEvent && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Irrational))
             {
                 int irrationalRoll = RandomGenerator.NumberBetween(1, 2);
@@ -816,11 +822,11 @@ namespace WeAreGladiators.Combat
             int requiredRoll = 0;
             if (data.NegativeEvent)
             {
-                requiredRoll = Mathf.Clamp(data.SuccessChance - characterBravery, 5, 95);
+                requiredRoll = Mathf.Clamp(data.SuccessChance - distanceModifier - characterBravery, 5, 95);
             }
             else
             {
-                requiredRoll = Mathf.Clamp(data.SuccessChance + characterBravery, 5, 95);
+                requiredRoll = Mathf.Clamp(data.SuccessChance - distanceModifier + characterBravery, 5, 95);
             }
 
             Debug.Log("CreateStressCheck() Stress event stats: Roll = " + roll + ", Bravery: " + characterBravery +
@@ -1922,12 +1928,12 @@ namespace WeAreGladiators.Combat
             if (totalHealthLost > 0 && target.currentHealth > 0 && target.livingState == LivingState.Alive)
             {
                 // Target 'On Health Lost' stress check
-                CreateMoraleCheck(target, StressEventType.HealthLost);
+                CreateMoraleCheck(target, target.currentTile, StressEventType.HealthLost);
 
                 // ALlies' 'On Ally Health Lost' stress check
                 foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(target, false))
                 {
-                    CreateMoraleCheck(c, StressEventType.AllyLosesHealth);
+                    CreateMoraleCheck(c, target.currentTile, StressEventType.AllyLosesHealth);
                 }
             }
 
@@ -2039,13 +2045,13 @@ namespace WeAreGladiators.Combat
                 // Enemy Killed (Positive)
                 foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllEnemiesOfCharacter(target))
                 {
-                    CreateMoraleCheck(c, StressEventType.EnemyKilled);
+                    CreateMoraleCheck(c, targetTile, StressEventType.EnemyKilled);
                 }
 
                 // Ally Killed (Negative)
                 foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(target, false))
                 {
-                    CreateMoraleCheck(c, StressEventType.AllyKilled);
+                    CreateMoraleCheck(c, targetTile, StressEventType.AllyKilled);
                 }
 
                 //HandleDeathBlow(target, parentEvent);

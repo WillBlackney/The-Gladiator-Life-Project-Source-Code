@@ -697,7 +697,7 @@ namespace WeAreGladiators.Abilities
                         CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
                         caster.livingState == LivingState.Alive)
                     {
-                        CombatController.Instance.CreateMoraleCheck(caster, StressEventType.LandedCriticalStrike);
+                        CombatController.Instance.CreateMoraleCheck(caster, caster.currentTile, StressEventType.LandedCriticalStrike);
                     }
 
                     // Trigger on hit/crit effects
@@ -1013,7 +1013,7 @@ namespace WeAreGladiators.Abilities
                         CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
                         caster.livingState == LivingState.Alive)
                     {
-                        CombatController.Instance.CreateMoraleCheck(caster, StressEventType.LandedCriticalStrike);
+                        CombatController.Instance.CreateMoraleCheck(caster, caster.currentTile, StressEventType.LandedCriticalStrike);
                     }
 
                     // Trigger on hit/crit effects
