@@ -883,17 +883,6 @@ namespace WeAreGladiators
                 }
             }
 
-            /*
-            // Check for Fearsome enemies
-            foreach (HexCharacterModel enemy in HexCharacterController.Instance.GetAllEnemiesOfCharacter(c))
-            {
-                if (PerkController.Instance.DoesCharacterHavePerk(enemy.pManager, Perk.Fearsome) &&
-                    LevelController.Instance.GetAllHexsWithinRange(enemy.currentTile, GetTotalAuraSize(enemy)).Contains(c.currentTile))
-                {
-                    resolve -= 5;
-                }
-            }
-            */
             // Check Fear + Hate of X Perks
             List<LevelNode> myAura = LevelController.Instance.GetAllHexsWithinRange(c.currentTile, GetTotalAuraSize(c));
             bool hasHateOfUndead = PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.HateOfUndead);

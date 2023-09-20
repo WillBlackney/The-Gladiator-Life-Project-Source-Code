@@ -31,9 +31,9 @@ namespace WeAreGladiators.UI
         [SerializeField] private RectTransform[] layouts;
         [Space(20)]
         [Header("Stress State")]
-        [SerializeField] private GameObject stressStateParent;
-        [SerializeField] private Image stressStateImage;
-        [SerializeField] private TextMeshProUGUI stressStateText;
+        [SerializeField] private GameObject moraleStateParent;
+        [SerializeField] private Image moraleStateImage;
+        [SerializeField] private TextMeshProUGUI moraleStateText;
         [Space(20)]
         [Header("Sliders / Stats")]
         [SerializeField] private Slider healthBar;
@@ -41,13 +41,6 @@ namespace WeAreGladiators.UI
         [Space(10)]
         [SerializeField] private Slider armourBar;
         [SerializeField] private TextMeshProUGUI armourText;
-        [Space(10)]
-        [SerializeField] private GameObject stressBarVisualParent;
-        [SerializeField] private Slider stressBar;
-        [SerializeField] private TextMeshProUGUI stressText;
-        [Space(10)]
-        [SerializeField] private Slider fatigueBar;
-        [SerializeField] private TextMeshProUGUI fatigueText;
         [Space(20)]
         [Header("Perks")]
         [SerializeField] private GameObject perksParent;
@@ -166,17 +159,15 @@ namespace WeAreGladiators.UI
         {
             if (character.characterData != null && (character.characterData.ignoreStress || PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearless)))
             {
-                stressStateParent.SetActive(false);
-                stressBarVisualParent.SetActive(false);
+                moraleStateParent.SetActive(false);
                 return;
             }
 
-            stressBarVisualParent.SetActive(true);
-            stressStateParent.SetActive(true);
+            moraleStateParent.SetActive(true);
             MoraleState stressState = character.currentMoraleState;
             Sprite stressSprite = SpriteLibrary.Instance.GetMoraleStateSprite(stressState);
-            stressStateImage.sprite = stressSprite;
-            stressStateText.text = TextLogic.SplitByCapitals(stressState.ToString());
+            moraleStateImage.sprite = stressSprite;
+            moraleStateText.text = TextLogic.SplitByCapitals(stressState.ToString());
         }
         private void BuildPerksSection(HexCharacterModel character)
         {

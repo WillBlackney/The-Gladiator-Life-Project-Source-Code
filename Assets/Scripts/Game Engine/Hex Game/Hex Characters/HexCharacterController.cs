@@ -700,7 +700,7 @@ namespace WeAreGladiators.Characters
         // Modify Stress
         #region
 
-        public void ModifyMoraleState(HexCharacterModel character, int moraleGainedOrLost, bool relayToCharacterData = true, bool showVFX = false, bool allowRecursiveChecks = true)
+        public void ModifyMoraleState(HexCharacterModel character, int moraleGainedOrLost, bool relayToCharacterData = true, bool showVFX = false, bool allowRecursiveChecks = true, bool allowShatteredRally = false)
         {
             Debug.Log("CharacterEntityController.ModifyStress() called for " + character.myName);
 
@@ -711,13 +711,13 @@ namespace WeAreGladiators.Characters
             {
                 if (view != null)
                 {
-                    view.stressBarVisualParent.SetActive(false);
+                    view.moraleContentVisualParent.SetActive(false);
                 }
                 return;
             }
             if (!character.characterData.ignoreStress && !PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearless) && view != null)
             {
-                view.stressBarVisualParent.SetActive(true);
+                view.moraleContentVisualParent.SetActive(true);
             }
 
             // Cant go below shattered
@@ -727,8 +727,15 @@ namespace WeAreGladiators.Characters
             }
 
             // Cant exceed confident
-            if ((int)character.currentMoraleState >= 5 && moraleGainedOrLost > 0)
+            if (character.currentMoraleState == MoraleState.Confident && moraleGainedOrLost > 0)
             {
+                return;
+            }
+
+            // Can't increase morale from shattered state (unless it is a rally event)
+            if(character.currentMoraleState == MoraleState.Shattered && moraleGainedOrLost > 0 && !allowShatteredRally)
+            {
+                Debug.Log("PREVENTED RALLY");
                 return;
             }
 
@@ -785,20 +792,19 @@ namespace WeAreGladiators.Characters
             // Stress VFX
             // Un comment to reenable stress gained VFX
             if (moraleGainedOrLost != 0 && showVFX)
-            {                
+            {       
+                // UNCOMMENT TO RE-ENABLE MORALE CHANGE VFX
                 if (character.GetLastStackEventParent() != null &&
                     !character.GetLastStackEventParent().isClosed)
                 {
                     VisualEventManager.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, (MoraleState) finalMoraleState), character.GetLastStackEventParent()).SetStartDelay(0.25f);
+                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, ((MoraleState)finalMoraleState).ToString(), SpriteLibrary.Instance.GetMoraleStateSprite((MoraleState)finalMoraleState), StatusFrameType.ImageWithoutFrame), character.GetLastStackEventParent()).SetStartDelay(0.25f);
                 }
                 else
                 {
                     VisualEventManager.CreateVisualEvent(() =>
-                        VisualEffectManager.Instance.CreateStressGainedEffect(view.WorldPosition, (MoraleState) finalMoraleState));
+                        VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, ((MoraleState)finalMoraleState).ToString(), SpriteLibrary.Instance.GetMoraleStateSprite((MoraleState)finalMoraleState), StatusFrameType.ImageWithoutFrame));
                 }
-                
-
             }
 
             // Update stress related GUI
@@ -810,10 +816,12 @@ namespace WeAreGladiators.Characters
             // Check if shattered
             if ((MoraleState) finalMoraleState == MoraleState.Shattered && showVFX)
             {
+                Sprite shatteredSprite = SpriteLibrary.Instance.GetMoraleStateSprite(MoraleState.Shattered);
+
                 // Notification event
                 VisualEventManager.CreateVisualEvent(() =>
                 {
-                    VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "SHATTERED!");
+                    //VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Shattered!", shatteredSprite, StatusFrameType.NoImageOrFrame);
                     view.vfxManager.PlayShattered();
                     PlayShatteredAnimation(view);
                 }).SetStartDelay(0.5f).SetEndDelay(0.5f);
@@ -859,7 +867,7 @@ namespace WeAreGladiators.Characters
             // Update stres state image
             MoraleState stressState = (MoraleState) moraleState;
             Sprite stressSprite = SpriteLibrary.Instance.GetMoraleStateSprite(stressState);
-            character.hexCharacterView.stressStateIconWorld.sprite = stressSprite;
+            character.hexCharacterView.moraleIcon.sprite = stressSprite;
 
             // Modify UI elements
             if (TurnController.Instance.EntityActivated == character && !character.characterData.ignoreStress && !PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearless))
@@ -2268,7 +2276,7 @@ namespace WeAreGladiators.Characters
 
                         foreach (HexCharacterModel ally in allies)
                         {
-                            CombatController.Instance.CreateMoraleCheck(ally, new StressEventData(-1, -1, 100), true);
+                            CombatController.Instance.CreateMoraleCheck(ally, new StressEventData(-1, -1, 75), true, false);
                         }
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
@@ -2289,7 +2297,7 @@ namespace WeAreGladiators.Characters
 
                         foreach (HexCharacterModel enemy in enemies)
                         {
-                            CombatController.Instance.CreateMoraleCheck(enemy, new StressEventData(-1, -1, 100), true);
+                            CombatController.Instance.CreateMoraleCheck(enemy, new StressEventData(-1, -1, 75), true, false);
                         }
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);

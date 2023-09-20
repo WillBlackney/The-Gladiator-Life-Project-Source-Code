@@ -373,7 +373,8 @@ namespace WeAreGladiators.Abilities
         public bool ShowIncludeCentreTile()
         {
             if ((effectType == AbilityEffectType.ApplyPassiveAoe ||
-                    effectType == AbilityEffectType.DamageAoe) &&
+                    effectType == AbilityEffectType.DamageAoe ||
+                effectType == AbilityEffectType.MoraleCheckAoe) &&
                 aoeType != AoeType.ZoneOfControl)
             {
                 return true;
@@ -404,7 +405,8 @@ namespace WeAreGladiators.Abilities
         public bool ShowEffectsAlliesOrEnemies()
         {
             if (effectType == AbilityEffectType.ApplyPassiveAoe ||
-                effectType == AbilityEffectType.DamageAoe)
+                effectType == AbilityEffectType.DamageAoe || 
+                effectType == AbilityEffectType.MoraleCheckAoe)
             {
                 return true;
             }

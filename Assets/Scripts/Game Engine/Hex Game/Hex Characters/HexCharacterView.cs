@@ -62,11 +62,9 @@ namespace WeAreGladiators.Characters
         public TextMeshProUGUI armourTextWorld;
         [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
         [Header("Stress Bar World References")]
-        public GameObject stressBarVisualParent;
-        public Slider stressBarWorld;
-        public Image stressBarShatteredGlowWorld;
-        public Image stressStateIconWorld;
-        public TextMeshProUGUI stressTextWorld;
+        public GameObject moraleContentVisualParent;
+        public Image moraleIconShatteredGlow;
+        public Image moraleIcon;
         [PropertySpace(SpaceBefore = 50, SpaceAfter = 0)]
         [Header("Custom Components")]
         [HideInInspector] public TurnWindow myActivationWindow;
@@ -154,7 +152,6 @@ namespace WeAreGladiators.Characters
         {
             armourTextWorld.gameObject.SetActive(true);
             healthTextWorld.gameObject.SetActive(true);
-            stressTextWorld.gameObject.SetActive(true);
             mouseOverWorldUI = true;
             if (UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
             {
@@ -165,7 +162,6 @@ namespace WeAreGladiators.Characters
         {
             armourTextWorld.gameObject.SetActive(false);
             healthTextWorld.gameObject.SetActive(false);
-            stressTextWorld.gameObject.SetActive(false);
             mouseOverWorldUI = false;
             StartCoroutine(OnAnyWorldUiMouseExitCoroutine());
 
@@ -176,7 +172,6 @@ namespace WeAreGladiators.Characters
             {
                 armourTextWorld.gameObject.SetActive(false);
                 healthTextWorld.gameObject.SetActive(false);
-                stressTextWorld.gameObject.SetActive(false);
             }
 
             yield return new WaitForSeconds(0.25f);
@@ -185,7 +180,6 @@ namespace WeAreGladiators.Characters
             {
                 armourTextWorld.gameObject.SetActive(false);
                 healthTextWorld.gameObject.SetActive(false);
-                stressTextWorld.gameObject.SetActive(false);
                 HexCharacterController.Instance.FadeOutCharacterWorldCanvas(this, null, 0.25f, 0.001f);
             }
 
@@ -208,14 +202,14 @@ namespace WeAreGladiators.Characters
 
         public void DoShatteredGlow()
         {
-            stressBarShatteredGlowWorld.DOKill();
-            stressBarShatteredGlowWorld.DOFade(0, 0);
-            stressBarShatteredGlowWorld.DOFade(1, 0.5f).SetLoops(-1, LoopType.Yoyo);
+            moraleIconShatteredGlow.DOKill();
+            moraleIconShatteredGlow.DOFade(0, 0);
+            moraleIconShatteredGlow.DOFade(1, 0.5f).SetLoops(-1, LoopType.Yoyo);
         }
         public void StopShatteredGlow()
         {
-            stressBarShatteredGlowWorld.DOKill();
-            stressBarShatteredGlowWorld.DOFade(0, 0.25f);
+            moraleIconShatteredGlow.DOKill();
+            moraleIconShatteredGlow.DOFade(0, 0.25f);
         }
 
         #endregion

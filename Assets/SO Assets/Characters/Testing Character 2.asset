@@ -18,47 +18,53 @@ MonoBehaviour:
   background: 20
   modelSize: 0
   attributeSheet:
-    might:
-      value: 30
-      stars: 0
-    constitution:
-      value: 1000
-      stars: 0
-    dodge:
-      value: 0
-      stars: 0
     accuracy:
       value: 100
       stars: 0
+    apMaximum: 100
+    apRecovery: 100
+    auraSize: 1
+    constitution:
+      value: 1000
+      stars: 0
+    criticalChance: 100
+    criticalModifier: 50
+    deathResistance: 25
+    debuffResistance: 0
+    dodge:
+      value: 0
+      stars: 0
+    initiative: 200
+    injuryResistance: 0
+    magicDamageBonus: 0
+    magicResistance: 0
+    maxHealth: 0
+    might:
+      value: 30
+      stars: 0
+    physicalDamageBonus: 0
+    physicalResistance: 0
     resolve:
       value: 5
       stars: 0
+    stressResistance: 0
+    vision: 5
     wits:
       value: 5
       stars: 0
-    maxHealth: 0
-    apRecovery: 100
-    apMaximum: 100
-    initiative: 200
-    criticalChance: 100
-    criticalModifier: 50
-    physicalDamageBonus: 0
-    magicDamageBonus: 0
-    auraSize: 1
-    vision: 5
-    physicalResistance: 0
-    magicResistance: 0
-    debuffResistance: 0
-    stressResistance: 0
-    injuryResistance: 0
-    deathResistance: 25
   abilityBook:
     activeAbilities:
-    - {fileID: 11400000, guid: 6c3343bfc6662a742897620834e447ae, type: 2}
-    - {fileID: 11400000, guid: 3dc85c0a7ccd4904a972e6aa977e23b3, type: 2}
-    - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
+    - {fileID: 11400000, guid: c1061f44ef3eb3c408eb895d2b7064bb, type: 2}
+    - {fileID: 11400000, guid: 16e76af6c245d1b44b45f27ca5118113, type: 2}
+    - {fileID: 11400000, guid: a0eec0cf113916e40bbb19662454dc56, type: 2}
+    - {fileID: 11400000, guid: 6451adb01f12c8e4b956aa5692dddb09, type: 2}
+    - {fileID: 11400000, guid: 7438f6132b8f4544aa2ecfd3edf7886c, type: 2}
+    - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
   serializedPassiveManager:
-    perks: []
+    perks:
+    - perkTag: 237
+      stacks: 1
+      freshInjury: 0
   modelParts:
   - Undead_Chest_1
   - Undead_Head_1
@@ -66,7 +72,7 @@ MonoBehaviour:
   - Undead_Right_Hand_1
   - Undead_Right_Leg_1
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: e8567b630dd37c042a06a339a93e409e, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}

@@ -537,7 +537,7 @@ namespace WeAreGladiators.UI
             unframedImage.sprite = data.icon;
 
             // Lore text
-            descriptionText.fontStyle = FontStyles.Italic;
+            descriptionText.fontStyle = FontStyles.Normal;
             descriptionText.gameObject.SetActive(true);
             descriptionText.text = TextLogic.ConvertCustomStringListToString(data.description);
 

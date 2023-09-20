@@ -710,12 +710,12 @@
     }
     public enum MoraleState
     {
-        None = 0,
         Confident = 5,
         Steady = 4,
         Nervous = 3,
         Panicking = 2,
-        Shattered = 1
+        Shattered = 1,
+        None = 0,
     }
 
     #endregion

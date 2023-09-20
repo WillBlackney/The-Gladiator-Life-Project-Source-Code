@@ -283,7 +283,7 @@ namespace WeAreGladiators.Libraries
         }
         public Sprite GetMoraleStateSprite(MoraleState state)
         {
-            Sprite spriteReturned = null;
+            Sprite spriteReturned;
 
             if (state == MoraleState.Confident)
             {
@@ -304,6 +304,10 @@ namespace WeAreGladiators.Libraries
             else if (state == MoraleState.Shattered)
             {
                 spriteReturned = shattered;
+            }
+            else
+            {
+                spriteReturned = steady;
             }
 
             return spriteReturned;

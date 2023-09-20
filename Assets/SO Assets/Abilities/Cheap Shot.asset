@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Cheap Shot
   displayedName: Cheap Shot
   includeInGame: 1
-  baseAbilityDescription: Deal 115% Weapon damage to an enemy and reduce their Morale.
+  baseAbilityDescription: Deal 100% Weapon damage to an enemy and reduce their Morale.
     If Stealthed, Backstriking, or a Critical Strike, apply Stunned.
   abilitySprite: {fileID: 21300000, guid: 839859de67d43a649ae5bebb1e5c6714, type: 3}
   energyCost: 4
@@ -48,7 +48,7 @@ MonoBehaviour:
     effectsAllies: 0
     effectsEnemies: 0
     knockBackDistance: 0
-    effectType: 21
+    effectType: 2
     stressEventData:
       moraleChangeMin: 0
       moraleChangeMax: 0
@@ -126,8 +126,8 @@ MonoBehaviour:
       projectileStartPosition: 0
       onCharacter: 0
     damageType: 1
-    minBaseDamage: 33
-    maxBaseDamage: 37
+    minBaseDamage: 28
+    maxBaseDamage: 32
     guaranteedHit: 0
     bonusCritDamage: 0
     ignoresGuard: 0
@@ -147,50 +147,6 @@ MonoBehaviour:
       passiveStacks: 0
     perkApplicationChance: 100
   onHitEffects:
-  - aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
-    knockBackDistance: 0
-    effectType: 9
-    stressEventData:
-      moraleChangeMin: -1
-      moraleChangeMax: -1
-      successChance: 100
-    energyGained: 0
-    normalTeleportVFX: 1
-    tilesMoved: 0
-    lineLength: 0
-    healthGained: 0
-    healthLost: 0
-    requirements: []
-    chainedEffect: 0
-    triggersChainEffectSequence: 0
-    visualEventsOnStart: []
-    visualEventsOnHit: []
-    visualEventsOnEffectFinish: []
-    damageType: 0
-    minBaseDamage: 0
-    maxBaseDamage: 0
-    guaranteedHit: 0
-    bonusCritDamage: 0
-    ignoresGuard: 0
-    ignoresArmour: 0
-    bonusArmourDamage: 0
-    weaponUsed: 2
-    injuryTypesCaused: 
-    damageEffectModifiers: []
-    characterSummoned: {fileID: 0}
-    characterSummonedName: ENTER NAME!!!
-    amountSummoned: 1
-    modelFadeInSpeed: 0
-    uiFadeInSpeed: 0
-    summonedCreatureVisualEvents: []
-    perkPairing:
-      perkTag: 0
-      passiveStacks: 1
-    perkApplicationChance: 100
   - aoeType: 0
     includeCentreTile: 1
     aoeSize: 1
@@ -315,7 +271,110 @@ MonoBehaviour:
       perkTag: 3
       passiveStacks: 1
     perkApplicationChance: 100
-  onCritEffects: []
+  - aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    knockBackDistance: 0
+    effectType: 9
+    stressEventData:
+      moraleChangeMin: -1
+      moraleChangeMax: -1
+      successChance: 75
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish: []
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    bonusCritDamage: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
+    weaponUsed: 2
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 0
+      passiveStacks: 1
+    perkApplicationChance: 100
+  onCritEffects:
+  - aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    knockBackDistance: 0
+    effectType: 10
+    stressEventData:
+      moraleChangeMin: 0
+      moraleChangeMax: 0
+      successChance: 0
+    energyGained: 0
+    normalTeleportVFX: 1
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish:
+    - eventType: 6
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0.5
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    bonusCritDamage: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
+    weaponUsed: 0
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 3
+      passiveStacks: 1
+    perkApplicationChance: 100
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0

@@ -1124,7 +1124,6 @@ namespace WeAreGladiators.HexTiles
             {
                 h.myCharacter.hexCharacterView.armourTextWorld.gameObject.SetActive(true);
                 h.myCharacter.hexCharacterView.healthTextWorld.gameObject.SetActive(true);
-                h.myCharacter.hexCharacterView.stressTextWorld.gameObject.SetActive(true);
                 h.myCharacter.hexCharacterView.mouseOverModel = true;
                 if (UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
                 {
@@ -1167,7 +1166,6 @@ namespace WeAreGladiators.HexTiles
                 {
                     h.myCharacter.hexCharacterView.armourTextWorld.gameObject.SetActive(false);
                     h.myCharacter.hexCharacterView.healthTextWorld.gameObject.SetActive(false);
-                    h.myCharacter.hexCharacterView.stressTextWorld.gameObject.SetActive(false);
                     h.myCharacter.hexCharacterView.mouseOverModel = false;
                     if (h.myCharacter.hexCharacterView.mouseOverModel == false &&
                         h.myCharacter.hexCharacterView.mouseOverWorldUI == false)

@@ -32,6 +32,7 @@ namespace WeAreGladiators.Combat
         
         public MoraleStateData GetMoraleStateData(MoraleState moraleState)
         {
+            if (moraleState == MoraleState.None) moraleState = MoraleState.Steady;
             return Array.Find(moraleStateData, data => data.moraleState == moraleState);
         }
 
@@ -64,16 +65,6 @@ namespace WeAreGladiators.Combat
                 Debug.Log("CalculateFinalDamageTypeOfAttack() attacker has 'Overload' perk, damage dealt converted to Magic damage");
                 damageTypeReturned = DamageType.Magic;
             }
-
-            // Check 'Flaming Weapon' buff
-            /*
-            if (ability.weaponRequirement != WeaponRequirement.None &&
-                PerkController.Instance.DoesCharacterHavePerk(entity.pManager, Perk.FlamingWeapon))
-            {
-                Debug.Log("CalculateFinalDamageTypeOfAttack() attacker has 'Flaming Weapon' buff, damage dealt converted to Magic damage");
-                damageTypeReturned = DamageType.Magic;
-            }
-            */
 
             Debug.Log("CombatController.GetFinalFinalDamageTypeOfAbility() final damage type returned: " + damageTypeReturned);
             return damageTypeReturned;
@@ -802,21 +793,22 @@ namespace WeAreGladiators.Combat
             // Check data was actually found
             if (data == null)
             {
+                Debug.LogWarning("CombatController.CreateMoraleCheck() no event data found for for morale event '" + eventType.ToString() + "', cancelling...");
                 return;
             }
 
             // Calculate total resolve + roll for 'Irrational' perk.
-            int characterStressResistance = StatCalculator.GetTotalBravery(character);
+            int characterBravery = StatCalculator.GetTotalBravery(character);
             if (data.NegativeEvent && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Irrational))
             {
                 int irrationalRoll = RandomGenerator.NumberBetween(1, 2);
                 if (irrationalRoll == 1)
                 {
-                    characterStressResistance -= 15;
+                    characterBravery -= 15;
                 }
                 else
                 {
-                    characterStressResistance += 15;
+                    characterBravery += 15;
                 }
             }
 
@@ -824,14 +816,14 @@ namespace WeAreGladiators.Combat
             int requiredRoll = 0;
             if (data.NegativeEvent)
             {
-                requiredRoll = Mathf.Clamp(data.SuccessChance - characterStressResistance, 5, 95);
+                requiredRoll = Mathf.Clamp(data.SuccessChance - characterBravery, 5, 95);
             }
             else
             {
-                requiredRoll = Mathf.Clamp(data.SuccessChance + characterStressResistance, 5, 95);
+                requiredRoll = Mathf.Clamp(data.SuccessChance + characterBravery, 5, 95);
             }
 
-            Debug.Log("CreateStressCheck() Stress event stats: Roll = " + roll + ", Stress Resistance: " + characterStressResistance +
+            Debug.Log("CreateStressCheck() Stress event stats: Roll = " + roll + ", Bravery: " + characterBravery +
                 ", Required roll to pass: " + requiredRoll);
 
             // Negative event roll failure + positive event roll success
@@ -843,7 +835,7 @@ namespace WeAreGladiators.Combat
             }
 
         }
-        public void CreateMoraleCheck(HexCharacterModel character, StressEventData data, bool showVFX)
+        public void CreateMoraleCheck(HexCharacterModel character, StressEventData data, bool showVFX, bool allowRecursiveChecks = true, bool allowShatteredRally = false)
         {
             Debug.Log("CombatController.CreateMoraleCheck() called, character = " + character.myName);
 
@@ -857,34 +849,42 @@ namespace WeAreGladiators.Combat
             int roll = RandomGenerator.NumberBetween(1, 100);
 
             // Calculate total resolve + roll for 'Irrational' perk.
-            int characterStressResistance = StatCalculator.GetTotalBravery(character);
+            int targetBravery = StatCalculator.GetTotalBravery(character);
             if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Irrational))
             {
                 int irrationalRoll = RandomGenerator.NumberBetween(1, 2);
                 if (irrationalRoll == 1)
                 {
-                    characterStressResistance -= 15;
+                    targetBravery -= 15;
                 }
                 else
                 {
-                    characterStressResistance += 15;
+                    targetBravery += 15;
                 }
             }
 
-            // Determine roll required to pass the stress check
-            int requiredRoll = Mathf.Clamp(data.successChance - characterStressResistance, 5, 95);
 
-            Debug.Log("CreateStressCheck() Stress event stats: Roll = " + roll + ", Stress Resistance: " + characterStressResistance +
+            // Determine roll required to pass the morale check
+            int requiredRoll = 0;
+            if (data.moraleChangeMin < 0)
+            {
+                requiredRoll = Mathf.Clamp(data.successChance - targetBravery, 5, 95);
+            }
+            else
+            {
+                requiredRoll = Mathf.Clamp(data.successChance + targetBravery, 5, 95);
+            }
+
+            Debug.Log("CreateStressCheck() Stress event stats: Roll = " + roll + ", Bravery: " + targetBravery +
                 ", Required roll to pass: " + requiredRoll);
 
-            // negative event roll failure + positice event roll success
+            // Negative event roll failure + positive event roll success
             if (roll <= requiredRoll)
             {
                 Debug.Log("Character rolled below the required roll threshold, applying effects of stress event...");
-                int finalStressAmount = RandomGenerator.NumberBetween(data.moraleChangeMin, data.moraleChangeMax);
-                HexCharacterController.Instance.ModifyMoraleState(character, finalStressAmount, true, showVFX);
+                int finalStateChangeAmount = RandomGenerator.NumberBetween(data.moraleChangeMin, data.moraleChangeMax);
+                HexCharacterController.Instance.ModifyMoraleState(character, finalStateChangeAmount, true, true, allowRecursiveChecks);
             }
-
         }
         public int GetStatMultiplierFromStressState(MoraleState stressState, HexCharacterModel character)
         {
@@ -917,48 +917,6 @@ namespace WeAreGladiators.Combat
                 multiplier = -15;
             }
             return multiplier;
-        }
-        public int[] GetStressStateRanges(MoraleState state)
-        {
-            if (state == MoraleState.Confident)
-            {
-                return new int[2]
-                {
-                    0, 4
-                };
-            }
-            if (state == MoraleState.Steady)
-            {
-                return new int[2]
-                {
-                    5, 9
-                };
-            }
-            if (state == MoraleState.Nervous)
-            {
-                return new int[2]
-                {
-                    10, 14
-                };
-            }
-            if (state == MoraleState.Panicking)
-            {
-                return new int[2]
-                {
-                    15, 19
-                };
-            }
-            if (state == MoraleState.Shattered)
-            {
-                return new int[2]
-                {
-                    20, 20
-                };
-            }
-            return new int[2]
-            {
-                0, 0
-            };
         }
 
         #endregion

@@ -16,9 +16,10 @@ namespace WeAreGladiators.Characters
 
         public void BuildPanelViews(HexCharacterModel character)
         {
-            MoraleState stressState = character.currentMoraleState;
-            Sprite stressSprite = SpriteLibrary.Instance.GetMoraleStateSprite(stressState);
-            stressStateText.text = stressState.ToString();
+            MoraleState moraleState = character.currentMoraleState;
+            if (character.currentMoraleState == MoraleState.None) moraleState = MoraleState.Steady;
+            Sprite stressSprite = SpriteLibrary.Instance.GetMoraleStateSprite(moraleState);
+            stressStateText.text = moraleState.ToString();
             stressStateIcon.sprite = stressSprite;
         }
 

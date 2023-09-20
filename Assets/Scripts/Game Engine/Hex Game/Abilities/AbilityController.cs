@@ -555,7 +555,7 @@ namespace WeAreGladiators.Abilities
         }
         private void TriggerAbilityEffect(AbilityData ability, AbilityEffect abilityEffect, HexCharacterModel caster, HexCharacterModel target, LevelNode tileTarget = null, HexCharacterModel previousChainTarget = null)
         {
-            //bool effectSuccessful = false;
+
             bool triggerEffectEndEvents = true;
 
             // Stop and return if effect requires a target and that target is dying/dead/null/no longer valid      
@@ -564,7 +564,8 @@ namespace WeAreGladiators.Abilities
                     abilityEffect.effectType == AbilityEffectType.DamageTarget ||
                     abilityEffect.effectType == AbilityEffectType.ApplyPassiveTarget ||
                     abilityEffect.effectType == AbilityEffectType.RemovePassiveTarget ||
-                    abilityEffect.effectType == AbilityEffectType.KnockBack
+                    abilityEffect.effectType == AbilityEffectType.KnockBack ||
+                    abilityEffect.effectType == AbilityEffectType.MoraleCheck
                 )
                )
             {
@@ -639,6 +640,7 @@ namespace WeAreGladiators.Abilities
             }
 
             // RESOLVE EFFECT LOGIC START!
+            Debug.Log("AbilityController.TriggerAbilityEffect() resolving effect " + abilityEffect.effectType.ToString() + " for ability " + ability.abilityName);
 
             // Damage Target
             if (abilityEffect.effectType == AbilityEffectType.DamageTarget)
@@ -1036,7 +1038,7 @@ namespace WeAreGladiators.Abilities
             // Stress Check
             else if (abilityEffect.effectType == AbilityEffectType.MoraleCheck)
             {
-                CombatController.Instance.CreateMoraleCheck(target, abilityEffect.stressEventData, true);
+                CombatController.Instance.CreateMoraleCheck(target, abilityEffect.stressEventData, true, true, true);
             }
 
             // Stress Check AoE
@@ -1050,7 +1052,7 @@ namespace WeAreGladiators.Abilities
                 // Get Aoe Area
                 if (abilityEffect.aoeType == AoeType.Aura)
                 {
-                    tilesEffected = HexCharacterController.Instance.GetCharacterAura(caster, true);
+                    tilesEffected = HexCharacterController.Instance.GetCharacterAura(caster, abilityEffect.includeCentreTile);
                 }
                 else if (abilityEffect.aoeType == AoeType.ZoneOfControl)
                 {
@@ -1065,13 +1067,16 @@ namespace WeAreGladiators.Abilities
                     tilesEffected.AddRange(LevelController.Instance.AllLevelNodes.ToList());
                 }
 
-                // Determine targets to roll against.
+                // Filter out enemies or allies where applicable
                 foreach (LevelNode h in tilesEffected)
                 {
-                    if (h.myCharacter != null &&
-                        !HexCharacterController.Instance.IsTargetFriendly(h.myCharacter, caster))
+                    if (h.myCharacter != null)
                     {
-                        charactersEffected.Add(h.myCharacter);
+                        if (h.myCharacter.allegiance == caster.allegiance && abilityEffect.effectsAllies ||
+                            h.myCharacter.allegiance != caster.allegiance && abilityEffect.effectsEnemies)
+                        {
+                            charactersEffected.Add(h.myCharacter);
+                        }
                     }
                 }
 
@@ -1079,7 +1084,7 @@ namespace WeAreGladiators.Abilities
                 foreach (HexCharacterModel character in charactersEffected)
                 {
                     VisualEventManager.CreateStackParentVisualEvent(character);
-                    CombatController.Instance.CreateMoraleCheck(character, abilityEffect.stressEventData, true);
+                    CombatController.Instance.CreateMoraleCheck(character, abilityEffect.stressEventData, true, false, true);
                 }
             }
 
@@ -1171,7 +1176,6 @@ namespace WeAreGladiators.Abilities
                 // Roll for hits + play on Hit animations or on miss animations
                 foreach (HexCharacterModel character in charactersEffected)
                 {
-                    //character.eventStacks.Add(VisualEventManager.Instance.CreateStackParentVisualEvent(character));
                     VisualEventManager.CreateStackParentVisualEvent(character);
                 }
 
@@ -1571,7 +1575,6 @@ namespace WeAreGladiators.Abilities
                     // Hide model
                     HexCharacterController.Instance.FadeOutCharacterModel(view.model, 0);
                     HexCharacterController.Instance.FadeOutCharacterShadow(view, 0);
-                    //view.blockMouseOver = true;
 
                     // Enable activation window
                     int windowIndex = TurnController.Instance.ActivationOrder.IndexOf(newSummon);

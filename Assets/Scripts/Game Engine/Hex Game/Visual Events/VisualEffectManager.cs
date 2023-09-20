@@ -412,7 +412,7 @@ namespace WeAreGladiators.VisualEvents
         }
 
         // Status Text Effect
-        public void CreateStatusEffect(Vector3 location, string statusEffectName, Sprite iconSprite = null, StatusFrameType frameType = StatusFrameType.None)
+        public void CreateStatusEffect(Vector3 location, string statusEffectName, Sprite iconSprite = null, StatusFrameType frameType = StatusFrameType.NoImageOrFrame)
         {
             GameObject damageEffect = Instantiate(StatusEffectPrefab, location, Quaternion.identity);
             damageEffect.GetComponent<StatusEffect>().InitializeSetup(statusEffectName, iconSprite, frameType);

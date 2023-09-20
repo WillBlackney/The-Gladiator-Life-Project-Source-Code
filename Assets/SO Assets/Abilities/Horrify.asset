@@ -147,16 +147,16 @@ MonoBehaviour:
       passiveStacks: 2
     perkApplicationChance: 100
   - aoeType: 2
-    includeCentreTile: 1
+    includeCentreTile: 0
     aoeSize: 1
     effectsAllies: 0
-    effectsEnemies: 0
+    effectsEnemies: 1
     knockBackDistance: 0
     effectType: 21
     stressEventData:
       moraleChangeMin: -1
       moraleChangeMax: -1
-      successChance: 100
+      successChance: 75
     energyGained: 0
     normalTeleportVFX: 1
     tilesMoved: 0
@@ -166,7 +166,22 @@ MonoBehaviour:
     requirements: []
     chainedEffect: 0
     triggersChainEffectSequence: 0
-    visualEventsOnStart: []
+    visualEventsOnStart:
+    - eventType: 6
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0.5
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
     visualEventsOnHit: []
     visualEventsOnEffectFinish: []
     damageType: 0

@@ -29,8 +29,8 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'state decreases in combat when negative things happen, and increases
-      when positive things happen. Each state boosts (or reduces) a character''s '
+    phrase: 'state decreases when frightening things happen, and increases when inspiring
+      things happen. Each state boosts (or reduces) a character''s '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -70,7 +70,39 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'states: Confident, Steady, Nervous, Panicking and'
+    phrase: 'states: '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Confident
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Steady
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Nervous
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Panicking '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

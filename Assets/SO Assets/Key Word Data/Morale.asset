@@ -26,8 +26,36 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'decreases in combat when negative things happen, and increases when
-      positive things happen. There are '
+    phrase: 'state decreases when frightening things happen, and increases when inspiring
+      things happen. Each state boosts (or reduces) a character''s '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Accuracy
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Dodge '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Resolve
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'There are '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -39,7 +67,39 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'states: Confident, Steady, Nervous, Panicking and'
+    phrase: 'states: '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Confident
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Steady
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Nervous
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ', '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'Panicking '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'and '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
@@ -55,7 +115,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: ', characters cannot take any action, and have a chance to suffer a heart
-      attack and die at the start of each turn.'
+    phrase: ', characters cannot take any action, and may suffer a heart attack at
+      the start of each turn.'
   useSprite: 1
   sprite: {fileID: 21300000, guid: c0ea8c0aabfbbed42ad555b91ce57389, type: 3}

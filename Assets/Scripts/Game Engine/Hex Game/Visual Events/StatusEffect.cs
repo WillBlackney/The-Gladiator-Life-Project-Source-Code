@@ -22,17 +22,22 @@ namespace WeAreGladiators.VisualEvents
         [SerializeField] private GameObject squareIconParent;
         [SerializeField] private Image squareIconImage;
 
+        [Header("Frameless Icon Components")]
+        [SerializeField] private Image framelessIconImage;
+
         [Header("Sprites")]
         [SerializeField]
         private Sprite brownCircleFrame;
         [SerializeField] private Sprite redCircleFrame;
 
-        public void InitializeSetup(string statusName, Sprite sprite = null, StatusFrameType frameType = StatusFrameType.None)
+        public void InitializeSetup(string statusName, Sprite sprite = null, StatusFrameType frameType = StatusFrameType.NoImageOrFrame)
         {
             statusText.text = TextLogic.ReturnColoredText(statusName, TextLogic.white);
             TransformUtils.RebuildLayout(textFitter);
             circleIconParent.SetActive(false);
             squareIconParent.SetActive(false);
+            framelessIconImage.gameObject.SetActive(false);
+
             if (sprite != null)
             {
                 float textScaleLocal = 0.016f;
@@ -65,6 +70,18 @@ namespace WeAreGladiators.VisualEvents
                     statusText.transform.position = new Vector3(statusText.transform.position.x + recenteringOffset, statusText.transform.position.y, statusText.transform.position.z);
 
                 }
+                else if (frameType == StatusFrameType.ImageWithoutFrame)
+                {
+                    framelessIconImage.gameObject.SetActive(true);
+                    framelessIconImage.sprite = sprite;
+                    float iconWidth = framelessIconImage.GetComponent<RectTransform>().rect.width;
+                    float recenteringOffset = iconWidth * 0.5f;
+                    float iconOffset = iconWidth * 0.75f;
+                    float newIconX = statusText.transform.position.x - statusText.GetComponent<RectTransform>().rect.width * textScaleLocal * 0.5f - iconOffset + recenteringOffset;
+                    framelessIconImage.transform.position = new Vector3(newIconX, framelessIconImage.transform.position.y, framelessIconImage.transform.position.z);
+                    statusText.transform.position = new Vector3(statusText.transform.position.x + recenteringOffset, statusText.transform.position.y, statusText.transform.position.z);
+
+                }
             }
             PlayAnimation();
         }
@@ -90,7 +107,8 @@ namespace WeAreGladiators.VisualEvents
 
     public enum StatusFrameType
     {
-        None = 0,
+        NoImageOrFrame = 0,
+        ImageWithoutFrame = 4,
         CircularBrown = 1,
         CircularRed = 2,
         SquareBrown = 3
