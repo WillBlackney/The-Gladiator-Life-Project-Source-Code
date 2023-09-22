@@ -71,7 +71,7 @@ namespace WeAreGladiators.UI
             }
 
             // Set total characters text
-            int maxCharacters = 10; // TO DO: get the actual max character limit
+            int maxCharacters = CharacterDataController.Instance.MaxAllowedCharacters; 
             totalCharactersText.text = characters.Count + " / " + maxCharacters;
 
             // Reset all

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: The Wyrm Hunter
   m_EditorClassIdentifier: 
   storyEventName: The Wyrm Hunter
-  excludeFromGame: 0
   firstPage: {fileID: 11400000, guid: aaabae6c71429c144a674a01c30e96e9, type: 2}
+  excludeFromGame: 0
   onStartEffects: []
   requirements:
   - reqType: 3
@@ -22,4 +22,11 @@ MonoBehaviour:
     includeTheKid: 0
     goldRequired: 1000
     requiredBoon: 0
+    rosterSpaceRequired: 1
+  - reqType: 8
+    requiredCharactersInRosterCount: 0
+    includeTheKid: 0
+    goldRequired: 0
+    requiredBoon: 0
+    rosterSpaceRequired: 1
   characterRequirements: []

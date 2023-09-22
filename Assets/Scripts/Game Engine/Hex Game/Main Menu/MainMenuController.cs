@@ -1658,6 +1658,7 @@ namespace WeAreGladiators.MainMenu
             RaceDataSO racialData = CharacterDataController.Instance.GetRaceData(race);
             currentCustomCharacterRace = racialData;
             CharacterBuild.race = racialData.racialTag;
+            CharacterBuild.audioProfile = CharacterDataController.Instance.GetAudioProfileForRace(race);
 
             // Build race icon image
             originPanelRacialIcon.BuildFromRacialData(racialData);

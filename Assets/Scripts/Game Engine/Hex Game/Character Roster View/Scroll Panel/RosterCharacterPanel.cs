@@ -6,6 +6,7 @@ using WeAreGladiators.Characters;
 using WeAreGladiators.GameIntroEvent;
 using WeAreGladiators.Items;
 using WeAreGladiators.Libraries;
+using WeAreGladiators.StoryEvents;
 using WeAreGladiators.TownFeatures;
 using WeAreGladiators.UCM;
 
@@ -51,11 +52,17 @@ namespace WeAreGladiators.UI
         #region
         public void OnMoraleIconMouseEnter()
         {
-            MainModalController.Instance.BuildAndShowModal(MyCharacterData.currentMoraleState);
+            if (AllowInput())
+            {
+                MainModalController.Instance.BuildAndShowModal(MyCharacterData.currentMoraleState);
+            }           
         }
         public void OnMoraleIconMouseExit()
         {
-            MainModalController.Instance.HideModal();
+            if (AllowInput())
+            {
+                MainModalController.Instance.HideModal();
+            }
         }
         public void BuildFromCharacterData(HexCharacterData data)
         {
@@ -72,7 +79,7 @@ namespace WeAreGladiators.UI
             portaitModel.SetBaseAnim();
 
             // Build bars
-            healthBar.value = data.currentHealth / (float) StatCalculator.GetTotalMaxHealth(data);
+            healthBar.value = data.currentHealth / (float)StatCalculator.GetTotalMaxHealth(data);
 
             // Reset perk icons
             foreach (UIPerkIcon b in perkIcons)
@@ -124,7 +131,7 @@ namespace WeAreGladiators.UI
                     TownController.Instance.LibraryViewIsActive ||
                     TownController.Instance.DeploymentViewIsActive) &&
                 !InventoryController.Instance.VisualParent.activeSelf &&
-                !GameIntroController.Instance.ViewIsActive)
+                AllowInput())
             {
                 PortraitDragController.Instance.OnRosterCharacterPanelDragStart(this);
             }
@@ -133,22 +140,35 @@ namespace WeAreGladiators.UI
         public void OnLevelButtonClicked()
         {
             if (!InventoryController.Instance.VisualParent.activeSelf &&
-                !GameIntroController.Instance.ViewIsActive)
-            {
-                CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(MyCharacterData);
-            }
-        }        
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (eventData.button == PointerEventData.InputButton.Right &&
-                !InventoryController.Instance.VisualParent.activeSelf &&
-                !GameIntroController.Instance.ViewIsActive)
+                AllowInput())
             {
                 CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(MyCharacterData);
             }
         }
 
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.button == PointerEventData.InputButton.Right &&
+                !InventoryController.Instance.VisualParent.activeSelf &&
+                AllowInput())
+            {
+                CharacterRosterViewController.Instance.BuildAndShowFromCharacterData(MyCharacterData);
+            }
+        }
+
+        private bool AllowInput()
+        {
+            bool ret = true;
+
+            if(StoryEventController.Instance.ViewIsActive ||
+                GameIntroController.Instance.ViewIsActive)
+            {
+                ret = false;
+            }
+
+            return ret;
+
+        }
         #endregion
     }
 }

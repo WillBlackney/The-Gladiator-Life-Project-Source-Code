@@ -29,8 +29,15 @@ namespace WeAreGladiators.StoryEvents
         [LabelWidth(100)]
         public BoonTag requiredBoon;
 
-        #region Odin Showifs
+        [ShowIf("ShowRosterSpaceRequired")]
+        [LabelWidth(100)]
+        public int rosterSpaceRequired = 1;
 
+        #region Odin Showifs
+        public bool ShowRosterSpaceRequired()
+        {
+            return reqType == StoryEventRequirementType.HasSpaceInCharacterRoster;
+        }
         public bool ShowRequiredBoon()
         {
             return reqType == StoryEventRequirementType.HasBoon ||
@@ -60,6 +67,7 @@ namespace WeAreGladiators.StoryEvents
         None = 0,
         XorMoreCharactersInRoster = 1,
         XorLessCharactersInRoster = 2,
+        HasSpaceInCharacterRoster = 8,
         HasXorMoreGold = 3,
         HasXorLessGold = 4,
         DoesNotHaveBoon = 5,

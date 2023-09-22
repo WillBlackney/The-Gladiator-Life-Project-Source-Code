@@ -15,11 +15,10 @@ MonoBehaviour:
   pageTag: 4
   headerText: Welcome to Breedmarsh
   pageSprite: {fileID: 21300000, guid: 3698bd7cbff1bdf4686123574fcaf408, type: 3}
-  bodyText: "<color=#FFFFFF>\u201CBut that's not-\u201C</color> The Nipple Pincher
-    starts to object before a broom handle breaks across his jaw. \r\n\r\nThe Broom
-    Wielder throws down the broken broom. \r\n\r\n<color=#FFFFFF>\u201CI haven't
-    seen you two before. You're not looking for an arena fighter, are you?\u201D</color>
-    He asks."
+  bodyText: "<color=#FFFFFF>\"But that's not-\"</color> The Nipple Pincher starts
+    to object before a broom handle breaks across his jaw. \r\n\r\nThe Broom Wielder
+    throws down the broken broom. \r\n\r\n<color=#FFFFFF>\"I haven't seen you two
+    before. You're not looking for an arena fighter, are you?\"</color> He asks."
   choices:
   - buttonText: '"Welcome to the company!"'
     possiblePagesLoaded: 0a0000000b0000000c000000

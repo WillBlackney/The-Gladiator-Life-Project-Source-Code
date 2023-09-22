@@ -22,13 +22,13 @@ MonoBehaviour:
     commotion spills out the door. Two figures tumble into view. One fighter's tooth
     bounces past your shoe and into the murky bog water below. The grappling duo
     unclinch and scramble to their feet. One of them, a monstrously large human lumberjack,
-    stands imposingly over the other, an orc soldier, wearing the purple of the empire.\n\n<color=#FFFFFF>\u201CThought
+    stands imposingly over the other, an orc soldier, wearing the purple of the empire.\n\n<color=#FFFFFF>\"Thought
     you'd piss in my drink and i wouldn't notice?! Apologize, then go buy me another!
-    Or how about i make you drink it?\u201D</color> the orc huffs and puffs as he
-    points his finger up at the lumberjack's face. \r\n\r\n<color=#FFFFFF>\u201COk.
-    I'll apologize. I'm sorry you're a traitorous, imperial bootlicker.\u201D</color>
-    the lumberjack roars.\r\n\r\nThe two widen their fighting stances, ready to re-engage.
-    You sense an opportunity to intervene before the two fools kill each other."
+    Or how about i make you drink it?\"</color> the orc huffs and puffs as he points
+    his finger up at the lumberjack's face. \r\n\r\n<color=#FFFFFF>\"Ok. I'll apologize.
+    I'm sorry you're a traitorous, imperial bootlicker.\"</color> the lumberjack
+    roars.\r\n\r\nThe two widen their fighting stances, ready to re-engage. You sense
+    an opportunity to intervene before the two fools kill each other."
   choices:
   - buttonText: Offer to replace the militiaman's drink.
     possiblePagesLoaded: 07000000

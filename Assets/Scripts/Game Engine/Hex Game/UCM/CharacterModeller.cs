@@ -882,6 +882,11 @@ namespace WeAreGladiators.UCM
             else if (element.bodyPartType == BodyPartType.LeftHandWear)
             {
                 model.activeLeftHandWear = null;
+                if (model.activeLeftHandWear2H != null)
+                {
+                    model.activeLeftHandWear2H.gameObject.SetActive(false);
+                    model.activeLeftHandWear2H = null;
+                }
             }
             else if (element.bodyPartType == BodyPartType.LeftHandWear2h)
             {
@@ -890,6 +895,11 @@ namespace WeAreGladiators.UCM
             else if (element.bodyPartType == BodyPartType.RightHandWear)
             {
                 model.activeRightHandWear = null;
+                if(model.activeRightHandWear2H != null)
+                {
+                    model.activeRightHandWear2H.gameObject.SetActive(false);
+                    model.activeRightHandWear2H = null;
+                }
             }
             else if (element.bodyPartType == BodyPartType.RightHandWear2h)
             {

@@ -644,15 +644,19 @@ namespace WeAreGladiators.Perks
             if ((perkData.isInjury || perkData.isPermanentInjury) && character != null && character.characterData != null && character.allegiance == Allegiance.Player && character.controller == Controller.Player)
             {
                 ActivePerk ap = ModifyPerkOnCharacterData(character.characterData.passiveManager, perk, stacks);
-                if (perkData.isInjury)
+                if(CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive)
                 {
-                    ap.freshInjury = true;
-                    character.injuriesGainedThisCombat.Add(perk);
+                    if (perkData.isInjury)
+                    {
+                        ap.freshInjury = true;
+                        character.injuriesGainedThisCombat.Add(perk);
+                    }
+                    else if (perkData.isPermanentInjury)
+                    {
+                        character.permanentInjuriesGainedThisCombat.Add(perk);
+                    }
                 }
-                else if (perkData.isPermanentInjury)
-                {
-                    character.permanentInjuriesGainedThisCombat.Add(perk);
-                }
+                
             }
 
             if (perk == Perk.Stunned && showVFX)

@@ -19,46 +19,42 @@ MonoBehaviour:
   audioProfile: 4
   modelSize: 0
   xpReward: 75
-  ignoreStress: 1
+  ignoreStress: 0
   attributeSheet:
-    might:
-      value: 25
+    accuracy:
+      value: 85
       stars: 0
+    apMaximum: 8
+    apRecovery: 8
+    auraSize: 1
     constitution:
       value: 150
       stars: 0
+    criticalChance: 5
+    criticalModifier: 50
+    deathResistance: 25
+    debuffResistance: 0
     dodge:
       value: 0
       stars: 0
-    accuracy:
-      value: 75
+    initiative: 10
+    injuryResistance: 0
+    magicDamageBonus: 0
+    magicResistance: 0
+    maxHealth: 0
+    might:
+      value: 25
       stars: 0
+    physicalDamageBonus: 0
+    physicalResistance: 25
     resolve:
       value: 25
       stars: 0
-    fitness:
-      value: 150
-      stars: 0
+    stressResistance: 0
+    vision: 0
     wits:
       value: 10
       stars: 0
-    maxHealth: 0
-    apRecovery: 8
-    apMaximum: 8
-    initiative: 10
-    fatigueRecovery: 15
-    criticalChance: 5
-    criticalModifier: 50
-    physicalDamageBonus: 0
-    magicDamageBonus: 0
-    auraSize: 1
-    vision: 0
-    physicalResistance: 25
-    magicResistance: 0
-    debuffResistance: 0
-    stressResistance: 0
-    injuryResistance: 0
-    deathResistance: 25
   baseArmour: 200
   randomizeHealth: 0
   lowerHealthLimit: 50
@@ -81,6 +77,9 @@ MonoBehaviour:
       stacks: 1
       freshInjury: 0
     - perkTag: 60
+      stacks: 1
+      freshInjury: 0
+    - perkTag: 237
       stacks: 1
       freshInjury: 0
   randomizeItemSet: 0

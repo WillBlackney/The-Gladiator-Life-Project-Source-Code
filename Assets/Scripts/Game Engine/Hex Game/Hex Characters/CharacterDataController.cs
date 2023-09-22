@@ -90,6 +90,8 @@ namespace WeAreGladiators.Characters
         [SerializeField] private int witsLower = 5;
         [SerializeField] private int witsUpper = 10;
 
+        private int maxAllowedCharacters = 8;
+
         public int MightLower => mightLower;
         public int MightUpper => mightUpper;
         public int AccuracyLower => accuracyLower;
@@ -104,6 +106,7 @@ namespace WeAreGladiators.Characters
         public int ResolveUpper => resolveUpper;
         public int WitsLower => witsLower;
         public int WitsUpper => witsUpper;
+        public int MaxAllowedCharacters => maxAllowedCharacters;
 
         // Non-Inspector 
 
@@ -478,7 +481,7 @@ namespace WeAreGladiators.Characters
         }
         public void AddCharacterToRoster(HexCharacterData character)
         {
-            if (AllPlayerCharacters.Contains(character) == false)
+            if (AllPlayerCharacters.Contains(character) == false && AllPlayerCharacters.Count < MaxAllowedCharacters)
             {
                 AllPlayerCharacters.Add(character);
             }

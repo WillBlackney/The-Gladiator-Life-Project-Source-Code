@@ -127,6 +127,11 @@ namespace WeAreGladiators.StoryEvents
 
         public StoryEventDataSO[] AllStoryEvents => allStoryEvents;
 
+        public bool ViewIsActive
+        {
+            get { return visualParent.activeSelf == true; }
+        }
+
         #endregion
 
         #region Persistency Logic
@@ -460,6 +465,11 @@ namespace WeAreGladiators.StoryEvents
                     characterCount = characterCount - 1;
                 }
                 ret = characterCount < requirement.requiredCharactersInRosterCount;
+            }
+            else if (requirement.reqType == StoryEventRequirementType.HasSpaceInCharacterRoster)
+            {
+                int characterCount = CharacterDataController.Instance.AllPlayerCharacters.Count;
+                ret = characterCount + requirement.rosterSpaceRequired <= CharacterDataController.Instance.MaxAllowedCharacters;
             }
             else if (requirement.reqType == StoryEventRequirementType.HasXorLessGold)
             {
