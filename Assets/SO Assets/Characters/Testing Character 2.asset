@@ -54,12 +54,7 @@ MonoBehaviour:
       stars: 0
   abilityBook:
     activeAbilities:
-    - {fileID: 11400000, guid: c1061f44ef3eb3c408eb895d2b7064bb, type: 2}
-    - {fileID: 11400000, guid: 16e76af6c245d1b44b45f27ca5118113, type: 2}
-    - {fileID: 11400000, guid: a0eec0cf113916e40bbb19662454dc56, type: 2}
-    - {fileID: 11400000, guid: 6451adb01f12c8e4b956aa5692dddb09, type: 2}
-    - {fileID: 11400000, guid: 7438f6132b8f4544aa2ecfd3edf7886c, type: 2}
-    - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
+    - {fileID: 11400000, guid: 90e62be2d401c2f4383195876bbc8ff5, type: 2}
   serializedPassiveManager:
     perks:
     - perkTag: 237
