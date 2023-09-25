@@ -275,6 +275,10 @@ namespace WeAreGladiators.UCM
             {
                 model.activeRightHandWear.gameObject.SetActive(false);
             }
+            if (model.activeRightHandWear2H)
+            {
+                model.activeRightHandWear2H.gameObject.SetActive(false);
+            }
             if (model.activeLeftArmWear)
             {
                 model.activeLeftArmWear.gameObject.SetActive(false);
@@ -282,6 +286,10 @@ namespace WeAreGladiators.UCM
             if (model.activeLeftHandWear)
             {
                 model.activeLeftHandWear.gameObject.SetActive(false);
+            }
+            if (model.activeLeftHandWear2H)
+            {
+                model.activeLeftHandWear2H.gameObject.SetActive(false);
             }
 
             // Weapons
