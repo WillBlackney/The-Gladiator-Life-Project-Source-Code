@@ -587,7 +587,7 @@ namespace WeAreGladiators.Perks
                         {
                             VisualEventManager.CreateVisualEvent(() =>
                                 VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, perkName, perkData.passiveSprite, StatusFrameType.CircularRed), character.GetLastStackEventParent());
-                            VisualEventManager.InsertTimeDelayInQueue(vfxDelay, character.GetLastStackEventParent());
+                            VisualEventManager.InsertTimeDelayInQueue(vfxDelay);
                         });
                     }
                     else

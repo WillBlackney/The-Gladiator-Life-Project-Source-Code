@@ -153,7 +153,7 @@ namespace WeAreGladiators.Persistency
             byte[] bytes = SerializationUtility.SerializeValue(saveFile, DataFormat.Binary);
             File.WriteAllBytes(GetSaveFileDirectory(), bytes);
         }
-        public SaveGameData LoadGameFromDisk()
+        private SaveGameData LoadGameFromDisk()
         {
             SaveGameData newLoad;
             byte[] bytes = File.ReadAllBytes(GetSaveFileDirectory());
@@ -162,8 +162,6 @@ namespace WeAreGladiators.Persistency
         }
         public void DeleteSaveFileOnDisk()
         {
-            Debug.Log("PersistencyManager.DeleteSaveFileOnDisk() called");
-
             if (DoesSaveFileExist())
             {
                 File.Delete(GetSaveFileDirectory());

@@ -468,7 +468,10 @@ namespace WeAreGladiators.Abilities
 
             foreach (KeyValuePair<HexCharacterModel, Action> kwp in onAbilityEndVisualEventQueue)
             {
-                if (kwp.Key.livingState == LivingState.Alive)
+                if(CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
+                    kwp.Key != null && 
+                    kwp.Key.hexCharacterView != null && 
+                    kwp.Key.livingState == LivingState.Alive)
                 {
                     kwp.Value.Invoke();
                 }
@@ -501,16 +504,6 @@ namespace WeAreGladiators.Abilities
                     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Combo, -1);
                 }
 
-                // Weapon attack specific
-                if (ability.abilityType.Contains(AbilityType.WeaponAttack))
-                {
-                    /*
-                    if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.PoisonedWeapon))
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.PoisonedWeapon, -1);
-                    if (PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.FlamingWeapon))
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.FlamingWeapon, -1);*/
-                }
-
                 // Check and apply furiously assault to target
                 if (target != null &&
                     target.livingState == LivingState.Alive &&
@@ -538,7 +531,6 @@ namespace WeAreGladiators.Abilities
                 VisualEvent stack = c.GetLastStackEventParent();
                 if (stack != null)
                 {
-                    Debug.Log("Closing stack event parent");
                     stack.isClosed = true;
                 }
             }

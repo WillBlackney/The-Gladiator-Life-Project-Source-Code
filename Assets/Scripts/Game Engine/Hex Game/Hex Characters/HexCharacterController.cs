@@ -735,7 +735,6 @@ namespace WeAreGladiators.Characters
             // Can't increase morale from shattered state (unless it is a rally event)
             if(character.currentMoraleState == MoraleState.Shattered && moraleGainedOrLost > 0 && !allowShatteredRally)
             {
-                Debug.Log("PREVENTED RALLY");
                 return;
             }
 
@@ -757,7 +756,6 @@ namespace WeAreGladiators.Characters
             int originalMoraleState = (int) character.currentMoraleState;
             int finalMoraleState = (int) character.currentMoraleState;
             MoraleState previousStressState = character.currentMoraleState;
-
 
             finalMoraleState += moraleGainedOrLost;
 
@@ -793,7 +791,6 @@ namespace WeAreGladiators.Characters
             // Un comment to reenable stress gained VFX
             if (moraleGainedOrLost != 0 && showVFX)
             {       
-                // UNCOMMENT TO RE-ENABLE MORALE CHANGE VFX
                 if (character.GetLastStackEventParent() != null &&
                     !character.GetLastStackEventParent().isClosed)
                 {
@@ -821,7 +818,6 @@ namespace WeAreGladiators.Characters
                 // Notification event
                 VisualEventManager.CreateVisualEvent(() =>
                 {
-                    //VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Shattered!", shatteredSprite, StatusFrameType.NoImageOrFrame);
                     view.vfxManager.PlayShattered();
                     PlayShatteredAnimation(view);
                 }).SetStartDelay(0.5f).SetEndDelay(0.5f);

@@ -40,7 +40,7 @@ MonoBehaviour:
     magicResistance: 0
     maxHealth: 0
     might:
-      value: 30
+      value: 0
       stars: 0
     physicalDamageBonus: 0
     physicalResistance: 0
@@ -56,10 +56,7 @@ MonoBehaviour:
     activeAbilities:
     - {fileID: 11400000, guid: 90e62be2d401c2f4383195876bbc8ff5, type: 2}
   serializedPassiveManager:
-    perks:
-    - perkTag: 237
-      stacks: 1
-      freshInjury: 0
+    perks: []
   modelParts:
   - Undead_Chest_1
   - Undead_Head_1
@@ -67,7 +64,7 @@ MonoBehaviour:
   - Undead_Right_Hand_1
   - Undead_Right_Leg_1
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    mainHandItem: {fileID: 11400000, guid: cfee4a2308420914785497fd0724d558, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}

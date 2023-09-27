@@ -264,13 +264,20 @@ namespace WeAreGladiators.Characters
                 newCharacter.modelParts = new List<string>();
                 newCharacter.modelParts.AddRange(GetRandomModelTemplate(newCharacter.race).bodyParts);
             }
-            else
+            else if (template.modelPrefab != null) 
             {
                 // Model Data
                 newCharacter.race = template.race;
                 newCharacter.modelParts = new List<string>();
                 newCharacter.modelParts.AddRange(template.modelParts);
                 newCharacter.modelPrefabString = template.modelPrefab.name;
+            }
+            else
+            {
+                newCharacter.race = template.race;
+                newCharacter.audioProfile = GetAudioProfileForRace(newCharacter.race);
+                newCharacter.modelParts = new List<string>();
+                newCharacter.modelParts.AddRange(template.modelParts);
             }
 
             // Setup stats
