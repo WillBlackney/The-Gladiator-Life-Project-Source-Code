@@ -4,6 +4,7 @@ using WeAreGladiators.Abilities;
 using WeAreGladiators.Characters;
 using WeAreGladiators.Combat;
 using WeAreGladiators.CombatLog;
+using WeAreGladiators.DungeonMap;
 using WeAreGladiators.Items;
 using WeAreGladiators.Scoring;
 using WeAreGladiators.TurnLogic;
@@ -333,7 +334,8 @@ namespace WeAreGladiators.Perks
             newClone.perks.Clear();
             foreach (ActivePerk ap in originalData.perks)
             {
-                ModifyPerkOnCharacterEntity(newClone, ap.perkTag, ap.stacks, false);
+                //ModifyPerkOnCharacterEntity(newClone, ap.perkTag, ap.stacks, false);
+                newClone.perks.Add(ap.CloneJSON());
             }
         }
         public void BuildPassiveManagerFromSerializedPassiveManager(PerkManagerModel pManager, SerializedPerkManagerModel original)
@@ -372,7 +374,7 @@ namespace WeAreGladiators.Perks
 
         public ActivePerk ModifyPerkOnCharacterData(PerkManagerModel pManager, Perk p, int stacks)
         {
-            Debug.Log("PassiveController.ModifyPerkOnCharacterData() called...");
+            Debug.Log("PassiveController.ModifyPerkOnCharacterData() called, perk = " + p.ToString() + ", stacks = " + stacks.ToString());
 
             string perkName = TextLogic.SplitByCapitals(p.ToString());
             PerkIconData perkData = GetPerkIconDataByTag(p);
@@ -405,7 +407,7 @@ namespace WeAreGladiators.Perks
             }
 
             // Score penalty for getting injured
-            if (perkData.isInjury && CharacterDataController.Instance.AllPlayerCharacters.Contains(pManager.myCharacterData))
+            if (stacks > 0 && perkData.isInjury && CharacterDataController.Instance.AllPlayerCharacters.Contains(pManager.myCharacterData))
             {
                 ScoreController.Instance.CurrentScoreData.injuriesGained += 1;
             }
@@ -704,6 +706,7 @@ namespace WeAreGladiators.Perks
         }
         private ActivePerk HandleApplyActivePerk(PerkManagerModel perkManager, Perk perk, int stacks)
         {
+            Debug.Log("PerkController.HandleApplyActivePerk() modifying perk: " + perk + " by " + stacks.ToString());
             ActivePerk activePerk = null;
 
             // Check if character is already effected by the perk
@@ -979,6 +982,8 @@ namespace WeAreGladiators.Perks
                     ret.Add(p);
                 }
             }
+
+            Debug.Log("PerkController.GetAllInjuriesOnCharacter() found " + ret.Count.ToString() + " injuries on character " + c.myName);
 
             return ret;
         }

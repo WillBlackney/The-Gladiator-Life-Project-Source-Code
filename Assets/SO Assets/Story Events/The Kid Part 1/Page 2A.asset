@@ -16,13 +16,13 @@ MonoBehaviour:
   pageDescription: "You're not too surprised to see Imperial Guards later that evening.
     They kick down your bedroom door and in that moment you're sure they've figured
     out The Plan. They stand meanicingly around you, hands on sword hilts before
-    their captain speaks.\r\n\r\n<color=#FFFFFF>\"Whats this I hear of people wanting
+    their captain speaks.\r\n\n<color=#FFFFFF>\"Whats this I hear of people wanting
     to be more powerful than the Emperor?\"</color> She says. A small quaver in her
     voice alerts you to the fact that she doesn't seem to know quite as much as you
-    thought.\r\n\r\n<color=#FFFFFF>\"Thats impossible Ma'am. No one could be more
-    powerful than the Emperor. Thats why we call him The Emperor; Most Powerful.\"</color>\n\r\n<color=#FFFFFF>\"Yes.
+    thought.\r\n\n<color=#FFFFFF>\"Thats impossible Ma'am. No one could be more powerful
+    than the Emperor. Thats why we call him The Emperor; Most Powerful.\"</color>\n\n<color=#FFFFFF>\"Yes.
     Well I heard something about some of your men wanting to be more powerful than
-    him.\"</color>\n\r\n<color=#FFFFFF>\"Pipe dreams, Ma'am. Kids hopped up on the
+    him.\"</color>\n\n<color=#FFFFFF>\"Pipe dreams, Ma'am. Kids hopped up on the
     thrill of their first battle. I'm sure you've seen it in your own recruits.\"</color>\n\r\n<color=#FFFFFF>\"Yes...well...I
     suppose I have. And whats this I hear about ghosts?\"</color>\n\r\n<color=#FFFFFF>\"Some
     of my fighters have their superstitions. I've not been able to assuage them.
@@ -52,9 +52,9 @@ MonoBehaviour:
     injuryType: 0
     experienceGained: 0
     characterJoining: {fileID: 0}
-    stressRecoveryChance: 100
-    stressRecoveredMin: 0
-    stressRecoveredMax: 0
+    moraleChangeChance: 100
+    moraleChangeMin: 0
+    moraleChangeMax: 0
     healthLostPercentage: 0.5
     wageIncreasePercentage: 0.1
     characterLeaveProbability: 50

@@ -42,7 +42,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: by
+    phrase: 'by '
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

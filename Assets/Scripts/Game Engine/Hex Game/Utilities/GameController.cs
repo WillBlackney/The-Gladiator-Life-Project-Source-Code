@@ -17,6 +17,7 @@ using WeAreGladiators.Items;
 using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.LoadingScreen;
 using WeAreGladiators.MainMenu;
+using WeAreGladiators.Perks;
 using WeAreGladiators.Persistency;
 using WeAreGladiators.RewardSystems;
 using WeAreGladiators.Scoring;

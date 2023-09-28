@@ -128,12 +128,6 @@ namespace WeAreGladiators.JourneyLogic
             // Refresh armoury items
             TownController.Instance.GenerateDailyArmouryItems();
 
-            // Characters in town features gain effect of hospital feature (heal, remove stress, remove all injuries, etc)
-            //TownController.Instance.HandleApplyHospitalFeaturesOnNewDayStart();
-
-            // All characters heal 10% health of max health
-            //CharacterDataController.Instance.HandlePassiveStressAndHealthRecoveryOnNewDayStart();
-
             return newChapterStarted;
 
         }

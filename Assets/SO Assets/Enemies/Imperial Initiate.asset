@@ -22,7 +22,7 @@ MonoBehaviour:
   ignoreStress: 0
   attributeSheet:
     accuracy:
-      value: 65
+      value: 70
       stars: 0
     apMaximum: 8
     apRecovery: 8
@@ -35,7 +35,7 @@ MonoBehaviour:
     deathResistance: 25
     debuffResistance: 0
     dodge:
-      value: 0
+      value: 5
       stars: 0
     initiative: 15
     injuryResistance: 0

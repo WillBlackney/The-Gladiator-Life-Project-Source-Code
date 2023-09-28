@@ -193,15 +193,12 @@ namespace WeAreGladiators.Combat
                     if (injuryGained != null)
                     {
                         int injuryStacks = RandomGenerator.NumberBetween(injuryGained.minInjuryDuration, injuryGained.maxInjuryDuration);
-                        //VisualEventManager.InsertTimeDelayInQueue(0.5f, character.GetLastStackEventParent());
                         PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, injuryGained.perkTag, injuryStacks, true, 1f);
-                        //VisualEventManager.InsertTimeDelayInQueue(0.5f, character.GetLastStackEventParent());
 
                         CombatLogController.Instance.CreateInjuryEntry(character, injuryGained.passiveName, (int) (roll * 0.1f), (int) (injuryChanceActual * 0.1f));
 
                         // In case injury affects max health or max fatigue, update current health and current fatigue                   
                         HexCharacterController.Instance.ModifyMaxHealth(character, 0);
-                        //HexCharacterController.Instance.ModifyCurrentFatigue(character, 0);
 
                         // Stress Check events on injury applied
                         CreateMoraleCheck(character, character.currentTile, StressEventType.InjuryGained);

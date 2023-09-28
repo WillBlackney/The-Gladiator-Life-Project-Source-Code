@@ -8,7 +8,7 @@ namespace WeAreGladiators.Perks
     {
         public Perk perkTag;
         public int stacks;
-        [HideInInspector] public bool freshInjury;
+        [SerializeField] [HideInInspector] public bool freshInjury;
         private PerkIconData data;
 
         public ActivePerk(Perk perk, int stacks)

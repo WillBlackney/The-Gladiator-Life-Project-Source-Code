@@ -42,6 +42,14 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: attribute.
+    phrase: 'attribute (normally '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 8
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: ).
   useSprite: 1
   sprite: {fileID: 21300000, guid: 838484f41d964e34e9e25cc006426cd6, type: 3}

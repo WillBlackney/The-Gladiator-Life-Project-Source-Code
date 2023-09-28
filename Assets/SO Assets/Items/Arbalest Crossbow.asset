@@ -30,8 +30,8 @@ MonoBehaviour:
   weaponAttackAnimationType: 1
   canDecapitate: 0
   healthDamage: 1.2
-  armourDamage: 0.7
-  armourPenetration: 0.2
+  armourDamage: 0.8
+  armourPenetration: 0.25
   minArmourRoll: 0
   maxArmourRoll: 0
   grantedAbilities:
