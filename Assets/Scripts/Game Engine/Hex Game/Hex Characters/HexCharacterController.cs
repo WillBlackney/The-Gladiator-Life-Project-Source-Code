@@ -1822,10 +1822,16 @@ namespace WeAreGladiators.Characters
                 AbilityController.Instance.ReduceCharacterAbilityCooldownsOnTurnStart(character);
             }
 
-            if (character.controller == Controller.Player && IsCharacterAbleToTakeActions(character))
+            if (IsCharacterAbleToTakeActions(character))
             {
-                // Build combat GUI
-                VisualEventManager.CreateVisualEvent(() => CombatUIController.Instance.BuildAndShowViewsOnTurnStart(character));
+                VisualEventManager.CreateVisualEvent(() =>
+                    AudioManager.Instance.PlaySound(character.AudioProfile, AudioSet.TurnStart)).SetEndDelay(0.25f);
+
+                if(character.controller == Controller.Player)
+                {
+                    // Build combat GUI
+                    VisualEventManager.CreateVisualEvent(() => CombatUIController.Instance.BuildAndShowViewsOnTurnStart(character));
+                }                
             }
 
             if (!character.hasRequestedTurnDelay)
@@ -1833,22 +1839,6 @@ namespace WeAreGladiators.Characters
                 // Gain AP + update AP views
                 int apGain = StatCalculator.GetTotalActionPointRecovery(character);
                 ModifyActionPoints(character, apGain, false, false);
-
-                // Recover fatigue+ update fatigue views
-                // int fatigueRecovered = StatCalculator.GetTotalFatigueRecovery(character);
-                // ModifyCurrentFatigue(character, -fatigueRecovered, false);
-            }
-
-            // Turn start SFX + turn highlight activation
-            if (IsCharacterAbleToTakeActions(character))
-            {
-                VisualEventManager.CreateVisualEvent(() =>
-                    AudioManager.Instance.PlaySound(character.AudioProfile, AudioSet.TurnStart)).SetEndDelay(0.25f);
-            }
-
-            // Check effects that are triggered on the first turn only
-            if (TurnController.Instance.CurrentTurn == 1 && !character.hasRequestedTurnDelay)
-            {
             }
 
             // Perk expiries on turn start
@@ -2066,7 +2056,7 @@ namespace WeAreGladiators.Characters
                 }
 
                 // Heart atack => Death
-                if (roll == 3)
+                else if (roll == 3)
                 {
                     Debug.Log("HexCharacterController.OnTurnStart() character had a heart attack from being shattered");
 
@@ -2118,8 +2108,8 @@ namespace WeAreGladiators.Characters
             }
 
             // PLAYER Start turn
-            if (character.controller == Controller.Player)
-            {
+            else if (character.controller == Controller.Player)
+            { 
                 // Check stunned + unable to take actions
                 if (IsCharacterAbleToTakeActions(character))
                 {
@@ -2180,7 +2170,7 @@ namespace WeAreGladiators.Characters
                     CombatUIController.Instance.HideViewsOnTurnEnd(fadeOutEvent)).SetCoroutineData(fadeOutEvent);
             }
 
-            if ( /*!character.hasRequestedTurnDelay*/ !firstTimeDelay)
+            if (!firstTimeDelay)
             {
                 // DEBUFF EXPIRIES
                 #region

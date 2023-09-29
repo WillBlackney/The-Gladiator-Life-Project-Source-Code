@@ -150,11 +150,12 @@ namespace WeAreGladiators.Characters
                     tierOnePerks.Contains(p.perkTag) == false)
                 {
                     perkChoices[0] = new PerkTreePerk(p, 1);
-                    nextAvailableTier += 1;
+                    nextAvailableTier = 2;
                     break;
                 }
             }
         }
+
     }
 
     public class PerkTreePerk

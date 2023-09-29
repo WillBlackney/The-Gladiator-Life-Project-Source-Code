@@ -553,11 +553,14 @@ namespace WeAreGladiators.UI
         }
         public void OnPerkTreeIconClicked(UILevelUpPerkIcon icon)
         {
+            Debug.Log("CharacterRosterViewController.OnPerkTreeIconClicked, tier = " + icon.myPerkData.tier.ToString() + 
+                ", next available tier = " + icon.myCharacter.perkTree.nextAvailableTier);
             if (icon.alreadyKnown ||
                 icon.myCharacter.perkPoints == 0 ||
                 icon.myCharacter.currentLevel - 1 < icon.myPerkData.tier ||
                 icon.myPerkData.tier != icon.myCharacter.PerkTree.nextAvailableTier)
             {
+                Debug.Log("CharacterRosterViewController.OnPerkTreeIconClicked() cancelling");
                 return;
             }
 

@@ -59,7 +59,7 @@ namespace WeAreGladiators.Characters
         public PerkManagerModel passiveManager;
         public int perkPoints = 0;
         [OdinSerialize]
-        private PerkTreeData perkTree;
+        public PerkTreeData perkTree;
         public CharacterRace race;
         public List<TalentPairing> talentPairings = new List<TalentPairing>();
 
