@@ -17,6 +17,7 @@ using WeAreGladiators.TurnLogic;
 using WeAreGladiators.UI;
 using WeAreGladiators.Utilities;
 using WeAreGladiators.VisualEvents;
+using static UnityEngine.GraphicsBuffer;
 
 namespace WeAreGladiators.HexTiles
 {
@@ -432,33 +433,37 @@ namespace WeAreGladiators.HexTiles
                 FlipCharacterSprite(character.hexCharacterView, Facing.Right);
             }
         }
-        private void FlipCharacterSprite(HexCharacterView character, Facing direction)
+        private void FlipCharacterSprite(HexCharacterView characterView, Facing direction)
         {
             Debug.Log("PositionLogic.FlipCharacterSprite() called...");
-            float scale = Mathf.Abs(character.ucmVisualParent.transform.localScale.x);
+            float scale = Mathf.Abs(characterView.ucmVisualParent.transform.localScale.x);
+            Transform transTarget = characterView.ucmVisualParent.transform;
+            HexCharacterModel modelTarget = characterView.character;
+
+            if (modelTarget == null) return;
 
             if (direction == Facing.Right)
             {
-                if (character.ucmVisualParent != null)
+                if (characterView.ucmVisualParent != null)
                 {
-                    if (!character.model.BaseFacingIsRight)
+                    if (!characterView.model.BaseFacingIsRight)
                     {
                         scale = -scale;
                     }
-                    VisualEventManager.CreateVisualEvent(() => character.ucmVisualParent.transform.localScale = new Vector3(scale, Mathf.Abs(scale)));
+                    VisualEventManager.CreateVisualEvent(() => { if (transTarget != null) transTarget.localScale = new Vector3(scale, Mathf.Abs(scale)); }, modelTarget.GetLastStackEventParent());
                 }
             }
 
             else
             {
-                if (character.ucmVisualParent != null)
+                if (characterView.ucmVisualParent != null)
                 {
                     float final = -scale;
-                    if (!character.model.BaseFacingIsRight)
+                    if (!characterView.model.BaseFacingIsRight)
                     {
                         final = scale;
                     }
-                    VisualEventManager.CreateVisualEvent(() => character.ucmVisualParent.transform.localScale = new Vector3(final, Mathf.Abs(scale)));
+                    VisualEventManager.CreateVisualEvent(() => { if (transTarget != null) transTarget.localScale = new Vector3(final, Mathf.Abs(scale)); }, modelTarget.GetLastStackEventParent());
                 }
             }
 

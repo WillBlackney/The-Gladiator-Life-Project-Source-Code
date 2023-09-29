@@ -203,7 +203,7 @@ namespace WeAreGladiators.UI
         }
         private void DisableMainView()
         {
-            rootCanvas.enabled = false;
+            if(rootCanvas) rootCanvas.enabled = false;
         }
         private void FadeInMainView()
         {

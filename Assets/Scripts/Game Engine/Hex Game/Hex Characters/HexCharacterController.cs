@@ -2063,8 +2063,6 @@ namespace WeAreGladiators.Characters
 
                     // End turn
                     CharacterOnTurnEnd(character);
-                    return;
-
                 }
 
                 // Heart atack => Death
@@ -2087,17 +2085,16 @@ namespace WeAreGladiators.Characters
 
                     // Notification
                     VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Frozen by Fear...")).SetEndDelay(0.5f);
+                    CharacterOnTurnEnd(character);
                 }
+
+                return;
 
             }
 
             // Was character killed by a DoT or heart attack?
             if (character.currentHealth <= 0 && character.controller == Controller.Player)
             {
-                // Disable and hide player combat UI
-                // CombatUIController.Instance.SetInteractability(false);
-                // TaskTracker fadeOutEvent = new TaskTracker();
-                //VisualEventManager.CreateVisualEvent(() => CombatUIController.Instance.HideViewsOnTurnEnd(fadeOutEvent)).SetCoroutineData(fadeOutEvent);
                 return;
             }
 

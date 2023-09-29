@@ -17,7 +17,7 @@ namespace Tests
         }
         public static void TearDownAfterTest()
         {
-            VisualEvent handle = VisualEventManager.HandleEventQueueTearDown();
+            VisualEventManager.HandleEventQueueTearDown();
             GameObject dd = GameObject.Find("DontDestroyOnLoad");
             if (dd != null) GameObject.Destroy(dd);
         }

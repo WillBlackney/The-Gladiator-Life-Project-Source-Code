@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Sirenix.Serialization;
 using UnityEngine;
 using WeAreGladiators.Boons;
@@ -17,9 +18,26 @@ namespace WeAreGladiators.Persistency
 {
     public class PersistencyController : Singleton<PersistencyController>
     {
+        #region Properties + Getters
 
-        // Conditionals + Checks
-        #region
+        private const string SAVE_DIRECTORY = "/SaveFile.sav";
+        private const string TEST_SAVE_DIRECTORY = "/TestSaveFile.sav";
+        private string GetSaveFileDirectory()
+        {
+            if (GlobalSettings.Instance == null)
+            {
+                return Application.persistentDataPath + SAVE_DIRECTORY;
+            }
+            if (GlobalSettings.Instance.GameMode == GameMode.Standard)
+            {
+                return Application.persistentDataPath + SAVE_DIRECTORY;
+            }
+            return Application.persistentDataPath + TEST_SAVE_DIRECTORY;
+        }
+
+        #endregion
+
+        #region Conditionals + Checks
 
         public bool DoesSaveFileExist()
         {
@@ -34,8 +52,7 @@ namespace WeAreGladiators.Persistency
 
         #endregion
 
-        // Build Session Data
-        #region
+        #region Build Session Data
 
         public void SetUpGameSessionDataFromSaveFile()
         {
@@ -54,28 +71,8 @@ namespace WeAreGladiators.Persistency
         }
 
         #endregion
-        // Properties + Getters
-        #region
 
-        private const string SAVE_DIRECTORY = "/SaveFile.json";
-        private const string TEST_SAVE_DIRECTORY = "/TestSaveFile.json";
-        private string GetSaveFileDirectory()
-        {
-            if (GlobalSettings.Instance == null)
-            {
-                return Application.persistentDataPath + SAVE_DIRECTORY;
-            }
-            if (GlobalSettings.Instance.GameMode == GameMode.Standard)
-            {
-                return Application.persistentDataPath + SAVE_DIRECTORY;
-            }
-            return Application.persistentDataPath + TEST_SAVE_DIRECTORY;
-        }
-
-        #endregion
-
-        // Build Save Files Data
-        #region
+        #region Build Save Files Data
 
         public void BuildNewSaveFileOnNewGameStarted(HexCharacterData startingCharacter = null)
         {
@@ -145,20 +142,32 @@ namespace WeAreGladiators.Persistency
 
         #endregion
 
-        // Save, Load and Delete From Disk 
-        #region
+        #region Save, Load and Delete From Disk 
 
         private void SaveGameToDisk(SaveGameData saveFile)
         {
             byte[] bytes = SerializationUtility.SerializeValue(saveFile, DataFormat.Binary);
             File.WriteAllBytes(GetSaveFileDirectory(), bytes);
+
+            /*
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(GetSaveFileDirectory(), FileMode.Create);
+            formatter.Serialize(stream, saveFile);
+            stream.Close();*/
         }
         private SaveGameData LoadGameFromDisk()
-        {
+        {            
             SaveGameData newLoad;
             byte[] bytes = File.ReadAllBytes(GetSaveFileDirectory());
             newLoad = SerializationUtility.DeserializeValue<SaveGameData>(bytes, DataFormat.Binary);
             return newLoad;
+
+            /*
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(GetSaveFileDirectory(), FileMode.Open);
+            SaveGameData saveData = formatter.Deserialize(stream) as SaveGameData;
+            stream.Close();
+            return saveData;*/
         }
         public void DeleteSaveFileOnDisk()
         {

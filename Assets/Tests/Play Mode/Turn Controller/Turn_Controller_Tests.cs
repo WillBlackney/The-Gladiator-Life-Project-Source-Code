@@ -52,6 +52,7 @@ namespace Tests
         {
             yield return null;
             TestUtils.TearDownAfterTest();
+            yield return new WaitForSeconds(1);
         }
         #endregion
 

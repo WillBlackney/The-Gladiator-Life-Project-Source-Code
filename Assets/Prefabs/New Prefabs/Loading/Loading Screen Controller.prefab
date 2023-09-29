@@ -957,7 +957,7 @@ MonoBehaviour:
       phrase: Positioning your units strategically can sometimes make a difference
         in battles. Or not.
   - message:
-    - color: 0
+    - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
       phrase: Make sure to read the descriptions of your abilities. Sometimes they
@@ -980,29 +980,8 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: "Only pussies wear armour in the arena. Are you a pussy? Didnt think
+      phrase: "Only cowards wear armour in the arena. Are you a coward? Didn't think
         so\u2026"
-  - message:
-    - color: 1
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: 'At the start of each day, characters passively recover '
-    - color: 2
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: '10% '
-    - color: 1
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: 'of their '
-    - color: 3
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: Health
-    - color: 1
-      getPhraseFromAbilityValue: 0
-      abilityEffectType: 0
-      phrase: .
 --- !u!1 &5335863795943007318
 GameObject:
   m_ObjectHideFlags: 0
