@@ -23,12 +23,14 @@ MonoBehaviour:
     effects:
     - effectType: 7
       characterTargetIndex: 1
+      returnEquippedItems: 1
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -44,18 +46,20 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 14
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
       injurySeverity: 0
       injuryType: 0
-      experienceGained: 150
+      experienceGained: 200
       characterJoining: {fileID: 0}
       moraleChangeChance: 100
       moraleChangeMin: 0
@@ -65,12 +69,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 16
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -86,12 +92,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 15
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -107,12 +115,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 17
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -128,12 +138,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 1
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 11400000, guid: 83edec7daca68a3449ac5ad9dec94630, type: 2}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -152,12 +164,14 @@ MonoBehaviour:
     effects:
     - effectType: 7
       characterTargetIndex: 0
+      returnEquippedItems: 1
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -173,18 +187,20 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 14
       characterTargetIndex: 1
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
       injurySeverity: 0
       injuryType: 0
-      experienceGained: 150
+      experienceGained: 200
       characterJoining: {fileID: 0}
       moraleChangeChance: 100
       moraleChangeMin: 0
@@ -194,12 +210,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 16
       characterTargetIndex: 1
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -215,12 +233,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 15
       characterTargetIndex: 1
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -236,12 +256,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 17
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -257,12 +279,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 1
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 11400000, guid: 0c6117883f39565489298874a156a655, type: 2}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -281,12 +305,14 @@ MonoBehaviour:
     effects:
     - effectType: 15
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -302,12 +328,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 16
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -323,12 +351,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 14
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -344,12 +374,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 15
       characterTargetIndex: 1
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -365,12 +397,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 16
       characterTargetIndex: 1
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -386,12 +420,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 14
       characterTargetIndex: 1
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -407,12 +443,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 17
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -428,12 +466,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 1
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 11400000, guid: cac4c8873b21ca043bab1fc00627cce7, type: 2}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100

@@ -30,27 +30,6 @@ MonoBehaviour:
     Before it was blood money in the figurative sense. Figurative never suited you
     so much as the literal, you think as you heft the sack, still warm with {CHARACTER_1_NAME}\u2019s
     blood."
-  onPageLoadEffects:
-  - effectType: 7
-    characterTargetIndex: 0
-    pageToLoad: {fileID: 0}
-    boonGained: 0
-    backgroundAddedToTavern: 0
-    totalCharactersAddedToTavern: 0
-    itemGained: {fileID: 0}
-    goldGained: 0
-    goldLost: 0
-    perkGained: 0
-    gainPerkChance: 100
-    injurySeverity: 0
-    injuryType: 0
-    experienceGained: 0
-    characterJoining: {fileID: 0}
-    stressRecoveryChance: 100
-    stressRecoveredMin: 0
-    stressRecoveredMax: 0
-    healthLostPercentage: 0.5
-    wageIncreasePercentage: 0.1
-    characterLeaveProbability: 50
+  onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: a8ad452276b480f42ae083ef83a94ea1, type: 2}

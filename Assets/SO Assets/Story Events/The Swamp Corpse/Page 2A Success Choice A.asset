@@ -19,16 +19,18 @@ MonoBehaviour:
     phrase: '"Get the axe"'
   effectSets:
   - lowerProbability: 1
-    upperProbability: 50
+    upperProbability: 66
     effects:
     - effectType: 8
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 11400000, guid: d9bb0e9c9791abc4e9e1803e40457da3, type: 2}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -36,20 +38,22 @@ MonoBehaviour:
       injuryType: 0
       experienceGained: 0
       characterJoining: {fileID: 0}
-      stressRecoveryChance: 100
-      stressRecoveredMin: 0
-      stressRecoveredMax: 0
+      moraleChangeChance: 100
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       healthLostPercentage: 0.5
       wageIncreasePercentage: 0.1
       characterLeaveProbability: 50
     - effectType: 1
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 11400000, guid: 986d3cb31539cd44d9629fb68a109282, type: 2}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -57,23 +61,25 @@ MonoBehaviour:
       injuryType: 0
       experienceGained: 0
       characterJoining: {fileID: 0}
-      stressRecoveryChance: 100
-      stressRecoveredMin: 0
-      stressRecoveredMax: 0
+      moraleChangeChance: 100
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       healthLostPercentage: 0.5
       wageIncreasePercentage: 0.1
       characterLeaveProbability: 50
-  - lowerProbability: 51
+  - lowerProbability: 67
     upperProbability: 100
     effects:
     - effectType: 7
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -81,20 +87,22 @@ MonoBehaviour:
       injuryType: 0
       experienceGained: 0
       characterJoining: {fileID: 0}
-      stressRecoveryChance: 100
-      stressRecoveredMin: 0
-      stressRecoveredMax: 0
+      moraleChangeChance: 100
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       healthLostPercentage: 0.5
       wageIncreasePercentage: 0.1
       characterLeaveProbability: 50
     - effectType: 1
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 11400000, guid: 7af83f058308f614b926c169cc4d1cfe, type: 2}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -102,9 +110,9 @@ MonoBehaviour:
       injuryType: 0
       experienceGained: 0
       characterJoining: {fileID: 0}
-      stressRecoveryChance: 100
-      stressRecoveredMin: 0
-      stressRecoveredMax: 0
+      moraleChangeChance: 100
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       healthLostPercentage: 0.5
       wageIncreasePercentage: 0.1
       characterLeaveProbability: 50

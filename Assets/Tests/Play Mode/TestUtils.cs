@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WeAreGladiators.VisualEvents;
 
 namespace Tests
 {
@@ -16,6 +17,7 @@ namespace Tests
         }
         public static void TearDownAfterTest()
         {
+            VisualEvent handle = VisualEventManager.HandleEventQueueTearDown();
             GameObject dd = GameObject.Find("DontDestroyOnLoad");
             if (dd != null) GameObject.Destroy(dd);
         }

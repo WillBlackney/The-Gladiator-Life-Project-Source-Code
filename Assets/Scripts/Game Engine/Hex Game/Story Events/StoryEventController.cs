@@ -638,6 +638,14 @@ namespace WeAreGladiators.StoryEvents
                     (effect.goldLost.ToString(), TextLogic.blueNumber) + " " + TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow) + ".", ResultRowIcon.GoldCoins);
                 currentResultItems.Add(newResultItem);
             }
+            else if (effect.effectType == StoryChoiceEffectType.LoseGoldPercentageOfCurrent)
+            {
+                int goldLost = (int) (PlayerDataController.Instance.CurrentGold * effect.goldLostPercentage);
+                PlayerDataController.Instance.ModifyPlayerGold(-goldLost);
+                StoryEventResultItem newResultItem = new StoryEventResultItem("Lost " + TextLogic.ReturnColoredText
+                    (goldLost.ToString(), TextLogic.blueNumber) + " " + TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow) + ".", ResultRowIcon.GoldCoins);
+                currentResultItems.Add(newResultItem);
+            }
             else if (effect.effectType == StoryChoiceEffectType.LoseAllGold)
             {
                 int goldLost = PlayerDataController.Instance.CurrentGold;
@@ -683,7 +691,27 @@ namespace WeAreGladiators.StoryEvents
                 StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.Skull);
                 currentResultItems.Add(newResultItem);
 
-                // to do: add to orbituary
+                if (effect.returnEquippedItems)
+                {
+                    List<ItemData> items = new List<ItemData>
+                    {
+                        target.itemSet.headArmour,
+                        target.itemSet.bodyArmour,
+                        target.itemSet.mainHandItem,
+                        target.itemSet.offHandItem,
+                        target.itemSet.trinket,
+                    };
+
+                    foreach(ItemData i in items)
+                    {
+                        if(i != null)
+                        {
+                            InventoryController.Instance.AddItemToInventory(i);
+                            StoryEventResultItem ri = new StoryEventResultItem("Recovered item: " + TextLogic.ReturnColoredText(i.itemName, TextLogic.neutralYellow) + ".", ResultRowIcon.FramedSprite, i.ItemSprite);
+                            currentResultItems.Add(ri);
+                        }
+                    }
+                }
 
                 // Update score data
                 ScoreController.Instance.CurrentScoreData.playerCharactersKilled += 1;

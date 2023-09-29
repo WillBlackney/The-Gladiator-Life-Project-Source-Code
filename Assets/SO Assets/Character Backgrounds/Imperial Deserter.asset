@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
+  m_Name: Imperial Deserter
+  m_EditorClassIdentifier: 
+  backgroundSprite: {fileID: 21300000, guid: 867a1fcaa3a446045a0ab28b235c188a, type: 3}
+  backgroundType: 18
+  description: Former militiaman and soldiers of the Imperium that fled their duties.
+    Thought they have decent martial training, cowardice isn't a great quality in
+    a gladiator.
+  recruitable: 1
+  spawnChance: 60
+  lowerLevelLimit: 1
+  upperLevelLimit: 1
+  dailyWageMin: 9
+  dailyWageMax: 11
+  baseRecruitCost: 50
+  mightLower: 0
+  mightUpper: 0
+  constitutionLower: 0
+  constitutionUpper: 0
+  accuracyLower: 5
+  accuracyUpper: 5
+  dodgeLower: 5
+  dodgeUpper: 5
+  resolveLower: -5
+  resolveUpper: -5
+  witsLower: 0
+  witsUpper: 0
+  minStartingAbilities: 1
+  maxStartingAbilities: 1
+  validRaces: 01000000060000000200000004000000
+  loadoutBuckets:
+  - possibleStartingTalents: 05000000
+    possibleAbilities:
+    - {fileID: 11400000, guid: 507ff3973c3f4a44ea421a51ff989b75, type: 2}
+    - {fileID: 11400000, guid: 1900acc88f1878541b128ad5ff956abd, type: 2}
+    possibleWeaponLoadouts:
+    - mainHandProspects:
+      - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
+      - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+      offhandProspects:
+      - {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
+    possibleArmourLoadouts:
+    - headProspects:
+      - {fileID: 11400000, guid: eb2b4dc7ace074444a4c2a4c78aaadb7, type: 2}
+      - {fileID: 11400000, guid: 6257418e3377eb04e9b5bdc3a26febc0, type: 2}
+      bodyProspects:
+      - {fileID: 11400000, guid: f2efc3e42cf551c45afb69d7a41dcccf, type: 2}
+      - {fileID: 11400000, guid: ff35482cc265db443a859f8d0ab917f5, type: 2}
+      - {fileID: 11400000, guid: 06cb8fd7ea8f3804caa9f91b98906478, type: 2}
+      - {fileID: 11400000, guid: c8fa646825673a74fa6d3a61e70cda06, type: 2}
+  possibleSubNames:
+  - Stout Heart
+  - The Sheriff
+  passiveEffectDescriptions: []

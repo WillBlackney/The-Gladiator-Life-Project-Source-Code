@@ -77,11 +77,18 @@ namespace WeAreGladiators.Items
             HexCharacterData character = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
 
             // Check equipping 2h item with two 1h items already equip without enough inventory space.
-            if (MyItemRef.itemData != null &&
-                MyItemRef.itemData.handRequirement == HandRequirement.TwoHanded &&
+            if (MyItemRef.itemData.handRequirement == HandRequirement.TwoHanded &&
                 character.itemSet.mainHandItem != null &&
                 character.itemSet.offHandItem != null &&
                 !InventoryController.Instance.HasFreeInventorySpace(2))
+            {
+                return;
+            }
+
+            // check equipping off hand item when using a 2H item
+            if (MyItemRef.itemData.allowedSlot == WeaponSlot.Offhand &&
+                character.itemSet.mainHandItem != null &&
+                character.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
             {
                 return;
             }

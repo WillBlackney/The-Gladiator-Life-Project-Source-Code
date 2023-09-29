@@ -92,7 +92,7 @@ namespace WeAreGladiators.UI
         {
             // Build all sections
             characterNameText.text = data.myName;
-            totalArmourText.text = data.baseArmour.ToString();
+            totalArmourText.text = (ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet) + data.baseArmour).ToString();
             xpRewardValueText.text = data.xpReward.ToString();
 
             BuildPerkViews(data);
@@ -140,7 +140,7 @@ namespace WeAreGladiators.UI
             mightText.text = StatCalculator.GetTotalMight(character).ToString();
             BuildStars(mightStars, 0);
 
-            constitutionText.text = (StatCalculator.GetTotalConstitution(character) + character.currentHealth).ToString();
+            constitutionText.text = (StatCalculator.GetTotalConstitution(character)).ToString();
             BuildStars(constitutionStars, 0);
 
             accuracyText.text = StatCalculator.GetTotalAccuracy(character).ToString();

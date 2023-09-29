@@ -18,53 +18,46 @@ MonoBehaviour:
   background: 18
   modelSize: 0
   attributeSheet:
-    might:
-      value: 0
-      stars: 0
-    constitution:
-      value: 64
-      stars: 0
-    dodge:
-      value: 10
-      stars: 0
     accuracy:
       value: 66
       stars: 0
+    apMaximum: 8
+    apRecovery: 8
+    auraSize: 1
+    constitution:
+      value: 64
+      stars: 0
+    criticalChance: 5
+    criticalModifier: 50
+    deathResistance: 25
+    debuffResistance: 0
+    dodge:
+      value: 10
+      stars: 0
+    initiative: 15
+    injuryResistance: 0
+    magicDamageBonus: 0
+    magicResistance: 0
+    maxHealth: 0
+    might:
+      value: 0
+      stars: 0
+    physicalDamageBonus: 0
+    physicalResistance: 0
     resolve:
       value: 5
       stars: 0
-    fitness:
-      value: 104
-      stars: 0
+    stressResistance: 0
+    vision: 1
     wits:
       value: 12
       stars: 0
-    maxHealth: 0
-    apRecovery: 8
-    apMaximum: 8
-    initiative: 15
-    fatigueRecovery: 15
-    criticalChance: 5
-    criticalModifier: 50
-    physicalDamageBonus: 0
-    magicDamageBonus: 0
-    auraSize: 1
-    vision: 1
-    physicalResistance: 0
-    magicResistance: 0
-    debuffResistance: 0
-    stressResistance: 0
-    injuryResistance: 0
-    deathResistance: 25
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: 507ff3973c3f4a44ea421a51ff989b75, type: 2}
     - {fileID: 11400000, guid: 1900acc88f1878541b128ad5ff956abd, type: 2}
   serializedPassiveManager:
     perks:
-    - perkTag: 91
-      stacks: 1
-      freshInjury: 0
     - perkTag: 93
       stacks: 1
       freshInjury: 0

@@ -22,6 +22,10 @@ namespace WeAreGladiators.StoryEvents
         public int characterTargetIndex;
         [Space(10)]
 
+        [ShowIf("ShowReturnEquippedItems")]
+        [LabelWidth(150)]
+        public bool returnEquippedItems;
+
         // Load page fields
         [ShowIf("ShowPageToLoad")]
         [Header("Page Settings")]
@@ -50,6 +54,11 @@ namespace WeAreGladiators.StoryEvents
         [ShowIf("ShowGoldGained")]
         [LabelWidth(150)]
         public int goldGained;
+
+        [ShowIf("ShowGoldLostPercentage")]
+        [LabelWidth(150)]
+        [Range(0.1f, 1)]
+        public float goldLostPercentage;
 
         [ShowIf("ShowGoldLost")]
         [LabelWidth(150)]
@@ -145,6 +154,10 @@ namespace WeAreGladiators.StoryEvents
                 effectType == StoryChoiceEffectType.GainExperience ||
                 effectType == StoryChoiceEffectType.LoseHealth;
         }
+        public bool ShowReturnEquippedItems()
+        {
+            return effectType == StoryChoiceEffectType.CharacterKilled;
+        }
         public bool ShowExperienceGained()
         {
             return effectType == StoryChoiceEffectType.GainExperience;
@@ -156,6 +169,10 @@ namespace WeAreGladiators.StoryEvents
         public bool ShowGoldLost()
         {
             return effectType == StoryChoiceEffectType.LoseGold;
+        }
+        public bool ShowGoldLostPercentage()
+        {
+            return effectType == StoryChoiceEffectType.LoseGoldPercentageOfCurrent;
         }
         public bool ShowPerkGained()
         {
@@ -209,6 +226,7 @@ namespace WeAreGladiators.StoryEvents
         FinishEvent = 2,
         GainGold = 3,
         LoseGold = 12,
+        LoseGoldPercentageOfCurrent = 21,
         LoseAllGold = 9,
         GainBoon = 4,
         GainItem = 8,

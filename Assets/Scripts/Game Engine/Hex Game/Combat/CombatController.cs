@@ -14,11 +14,13 @@ using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Perks;
 using WeAreGladiators.Player;
 using WeAreGladiators.Scoring;
+using WeAreGladiators.StoryEvents;
 using WeAreGladiators.TurnLogic;
 using WeAreGladiators.UCM;
 using WeAreGladiators.UI;
 using WeAreGladiators.Utilities;
 using WeAreGladiators.VisualEvents;
+using static UnityEngine.GraphicsBuffer;
 
 namespace WeAreGladiators.Combat
 {
@@ -382,6 +384,24 @@ namespace WeAreGladiators.Combat
                 {
                     CharacterDataController.Instance.RemoveCharacterFromRoster(character.characterData);
                     CombatLogController.Instance.CreateCharacterDiedEntry(character, result);
+
+                    // 50% chance to recover each item on a killed player character
+                    List<ItemData> items = new List<ItemData>
+                    {
+                        character.itemSet.headArmour,
+                        character.itemSet.bodyArmour,
+                        character.itemSet.mainHandItem,
+                        character.itemSet.offHandItem,
+                        character.itemSet.trinket,
+                    };
+
+                    foreach (ItemData i in items)
+                    {
+                        if (i != null && RandomGenerator.NumberBetween(1, 2) == 1)
+                        {
+                            InventoryController.Instance.AddItemToInventory(i);
+                        }
+                    }
                 }
             }
             else

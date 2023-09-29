@@ -23,12 +23,14 @@ MonoBehaviour:
     effects:
     - effectType: 17
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 0}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -44,12 +46,14 @@ MonoBehaviour:
       characterLeaveProbability: 50
     - effectType: 1
       characterTargetIndex: 0
+      returnEquippedItems: 0
       pageToLoad: {fileID: 11400000, guid: fa2a530e15ad97c4faf8fd281e003133, type: 2}
       boonGained: 0
       backgroundAddedToTavern: 0
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100

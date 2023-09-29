@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ using WeAreGladiators.Perks;
 using WeAreGladiators.TownFeatures;
 using WeAreGladiators.TurnLogic;
 using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
 
 namespace Tests
 {
@@ -54,6 +56,7 @@ namespace Tests
         {
             yield return null;
             TestUtils.TearDownAfterTest();
+            yield return null;
         }
         #endregion
 

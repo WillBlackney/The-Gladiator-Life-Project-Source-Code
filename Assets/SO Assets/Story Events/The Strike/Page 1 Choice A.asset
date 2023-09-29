@@ -29,6 +29,7 @@ MonoBehaviour:
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -41,7 +42,7 @@ MonoBehaviour:
       moraleChangeMax: 0
       healthLostPercentage: 0.5
       wageIncreasePercentage: 0.1
-      characterLeaveProbability: 35
+      characterLeaveProbability: 25
     - effectType: 17
       characterTargetIndex: 0
       pageToLoad: {fileID: 0}
@@ -50,6 +51,7 @@ MonoBehaviour:
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
@@ -71,6 +73,7 @@ MonoBehaviour:
       totalCharactersAddedToTavern: 0
       itemGained: {fileID: 0}
       goldGained: 0
+      goldLostPercentage: 0
       goldLost: 0
       perkGained: 0
       gainPerkChance: 100
