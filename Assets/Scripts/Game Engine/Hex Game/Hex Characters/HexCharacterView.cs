@@ -153,7 +153,7 @@ namespace WeAreGladiators.Characters
             armourTextWorld.gameObject.SetActive(true);
             healthTextWorld.gameObject.SetActive(true);
             mouseOverWorldUI = true;
-            if (UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
+            if (InputController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
             {
                 HexCharacterController.Instance.FadeInCharacterWorldCanvas(this, null, 0.25f);
             }
@@ -168,7 +168,7 @@ namespace WeAreGladiators.Characters
         }
         private IEnumerator OnAnyWorldUiMouseExitCoroutine()
         {
-            if (UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.Always)
+            if (InputController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.Always)
             {
                 armourTextWorld.gameObject.SetActive(false);
                 healthTextWorld.gameObject.SetActive(false);
@@ -176,7 +176,7 @@ namespace WeAreGladiators.Characters
 
             yield return new WaitForSeconds(0.25f);
             if (!mouseOverWorldUI && !mouseOverModel &&
-                UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
+                InputController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
             {
                 armourTextWorld.gameObject.SetActive(false);
                 healthTextWorld.gameObject.SetActive(false);

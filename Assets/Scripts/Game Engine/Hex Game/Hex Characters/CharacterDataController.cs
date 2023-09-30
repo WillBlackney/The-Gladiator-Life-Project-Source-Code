@@ -5,6 +5,7 @@ using WeAreGladiators.Abilities;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Boons;
 using WeAreGladiators.Items;
+using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Perks;
 using WeAreGladiators.Persistency;
 using WeAreGladiators.Player;
@@ -522,9 +523,9 @@ namespace WeAreGladiators.Characters
         {
             foreach (HexCharacterData character in AllPlayerCharacters)
             {
-                if (PlayerDataController.Instance.CurrentGold > character.dailyWage)
+                if (RunController.Instance.CurrentGold > character.dailyWage)
                 {
-                    PlayerDataController.Instance.ModifyPlayerGold(-character.dailyWage);
+                    RunController.Instance.ModifyPlayerGold(-character.dailyWage);
                 }
                 // if not enough money to pay wage, chance that character will eave the roster, or gain stress?
             }

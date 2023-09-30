@@ -11,15 +11,17 @@ namespace Tests
         public static void CreateGlobalSettings()
         {
             GameObject freshGs = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            freshGs.name = "GS";
             freshGs.AddComponent<WeAreGladiators.Utilities.GlobalSettings>();
             GameObject.DontDestroyOnLoad(freshGs);
             freshGs.GetComponent<WeAreGladiators.Utilities.GlobalSettings>().SetTestEnvironment();
         }
-        public static void TearDownAfterTest()
+
+        public static IEnumerator TearDownAfterTest()
         {
+            yield return new WaitForSeconds(0.25f);
             VisualEventManager.HandleEventQueueTearDown();
-            GameObject dd = GameObject.Find("DontDestroyOnLoad");
-            if (dd != null) GameObject.Destroy(dd);
+            yield return new WaitForSeconds(1);
         }
     }
 }

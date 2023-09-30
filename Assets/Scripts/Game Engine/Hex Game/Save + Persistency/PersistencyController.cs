@@ -62,7 +62,6 @@ namespace WeAreGladiators.Persistency
             RunController.Instance.BuildMyDataFromSaveFile(newLoad);
             CharacterDataController.Instance.BuildMyDataFromSaveFile(newLoad);
             TownController.Instance.BuildMyDataFromSaveFile(newLoad);
-            PlayerDataController.Instance.BuildMyDataFromSaveFile(newLoad);
             CombatRewardController.Instance.BuildMyDataFromSaveFile(newLoad);
             InventoryController.Instance.BuildMyDataFromSaveFile(newLoad);
             StoryEventController.Instance.BuildMyDataFromSaveFile(newLoad);
@@ -107,9 +106,6 @@ namespace WeAreGladiators.Persistency
             TownController.Instance.GenerateDailyAbilityTomes();
             TownController.Instance.GenerateDailyArmouryItems();
 
-            // Player Data
-            PlayerDataController.Instance.SetGameStartValues();
-
             // Inventory
             InventoryController.Instance.Inventory.Clear();
 
@@ -129,7 +125,6 @@ namespace WeAreGladiators.Persistency
             RunController.Instance.SaveMyDataToSaveFile(newSave);
             CharacterDataController.Instance.SaveMyDataToSaveFile(newSave);
             TownController.Instance.SaveMyDataToSaveFile(newSave);
-            PlayerDataController.Instance.SaveMyDataToSaveFile(newSave);
             CombatRewardController.Instance.SaveMyDataToSaveFile(newSave);
             InventoryController.Instance.SaveMyDataToSaveFile(newSave);
             StoryEventController.Instance.SaveMyDataToSaveFile(newSave);

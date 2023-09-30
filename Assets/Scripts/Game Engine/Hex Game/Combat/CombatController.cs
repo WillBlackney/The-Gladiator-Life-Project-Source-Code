@@ -2029,7 +2029,7 @@ namespace WeAreGladiators.Combat
                             VisualEffectManager.Instance.CreateStatusEffect(attacker.hexCharacterView.WorldPosition, "Mercenary!", CharacterDataController.Instance.GetBackgroundData(CharacterBackground.Mercenary).BackgroundSprite, StatusFrameType.CircularBrown), attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
 
                         // Gain gold
-                        PlayerDataController.Instance.ModifyPlayerGold(10);
+                        RunController.Instance.ModifyPlayerGold(10);
                     }
 
                     // Increment kills this turn

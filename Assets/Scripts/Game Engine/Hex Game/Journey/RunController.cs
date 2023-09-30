@@ -8,6 +8,7 @@ using WeAreGladiators.Persistency;
 using WeAreGladiators.TownFeatures;
 using WeAreGladiators.UI;
 using WeAreGladiators.Utilities;
+using WeAreGladiators.VisualEvents;
 
 namespace WeAreGladiators.JourneyLogic
 {
@@ -34,7 +35,7 @@ namespace WeAreGladiators.JourneyLogic
 
         // Getters + Accessors
         #region
-
+        public int CurrentGold { get; private set; }
         public CombatContractData CurrentCombatContractData { get; private set; }
         public List<CharacterWithSpawnData> CurrentDeployedCharacters { get; private set; } = new List<CharacterWithSpawnData>();
         public SaveCheckPoint SaveCheckPoint { get; private set; }
@@ -57,6 +58,7 @@ namespace WeAreGladiators.JourneyLogic
             CurrentCombatMapData = saveData.currentCombatMapData;
             SetCheckPoint(saveData.saveCheckPoint);
             runTimer = saveData.runTimer;
+            SetPlayerGold(saveData.currentGold);
 
             StartTimer();
             UpdateDayAndChapterTopbarText();
@@ -70,6 +72,7 @@ namespace WeAreGladiators.JourneyLogic
             saveFile.saveCheckPoint = SaveCheckPoint;
             saveFile.playerCombatCharacters = CurrentDeployedCharacters;
             saveFile.runTimer = runTimer;
+            saveFile.currentGold = CurrentGold;
         }
         public void SetGameStartValues()
         {
@@ -84,6 +87,8 @@ namespace WeAreGladiators.JourneyLogic
             SetCheckPoint(SaveCheckPoint.GameIntroEvent);
             StartTimer();
             CurrentCombatContractData = null;
+
+            ModifyPlayerGold(GlobalSettings.Instance.BaseStartingGold);
         }
 
         #endregion
@@ -282,6 +287,28 @@ namespace WeAreGladiators.JourneyLogic
         {
             runTimerVisualParent.SetActive(false);
             updateTimer = false;
+        }
+
+        #endregion
+
+        // Gold Logic
+        #region
+
+        public void ModifyPlayerGold(int goldGainedOrLost)
+        {
+            CurrentGold += goldGainedOrLost;
+            int vEventValue = CurrentGold;
+
+            // update food text;
+            VisualEventManager.CreateVisualEvent(() => TopBarController.Instance.UpdateGoldText(vEventValue.ToString()));
+        }
+        private void SetPlayerGold(int newValue)
+        {
+            CurrentGold = newValue;
+            int vEventValue = CurrentGold;
+
+            // update food text;
+            VisualEventManager.CreateVisualEvent(() => TopBarController.Instance.UpdateGoldText(vEventValue.ToString()));
         }
 
         #endregion

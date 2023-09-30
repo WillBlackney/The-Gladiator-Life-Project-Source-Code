@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.Items;
+using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Libraries;
 using WeAreGladiators.Player;
 using WeAreGladiators.UI;
@@ -70,7 +71,7 @@ namespace WeAreGladiators.TownFeatures
         {
             bool ret = false;
 
-            if (MyData.goldCost <= PlayerDataController.Instance.CurrentGold &&
+            if (MyData.goldCost <= RunController.Instance.CurrentGold &&
                 InventoryController.Instance.HasFreeInventorySpace())
             {
                 ret = true;
@@ -86,7 +87,7 @@ namespace WeAreGladiators.TownFeatures
 
             // Color cost text red if not enough gold
             string col = TextLogic.brownBodyText;
-            if (PlayerDataController.Instance.CurrentGold < data.goldCost)
+            if (RunController.Instance.CurrentGold < data.goldCost)
             {
                 col = TextLogic.redText;
             }

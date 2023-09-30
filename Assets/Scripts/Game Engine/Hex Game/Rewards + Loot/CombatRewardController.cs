@@ -19,7 +19,6 @@ namespace WeAreGladiators.RewardSystems
 {
     public class CombatRewardController : Singleton<CombatRewardController>
     {
-
         // Getters + Accesors
         #region
 
@@ -32,7 +31,7 @@ namespace WeAreGladiators.RewardSystems
 
         public void HandleGainRewardsOfContract(CombatContractData contract)
         {
-            PlayerDataController.Instance.ModifyPlayerGold(contract.combatRewardData.goldAmount);
+            RunController.Instance.ModifyPlayerGold(contract.combatRewardData.goldAmount);
             InventoryController.Instance.AddItemToInventory(contract.combatRewardData.item);
             InventoryController.Instance.AddItemToInventory(contract.combatRewardData.abilityAwarded);
         }

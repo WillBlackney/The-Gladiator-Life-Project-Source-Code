@@ -29,6 +29,8 @@ namespace Tests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
+            // Load and prepare data
+            TestUtils.CreateGlobalSettings();
             playerData = AssetDatabase.LoadAssetAtPath<HexCharacterTemplateSO>("Assets/Tests/Play Mode/Turn Controller/Test Objects/Test_Player_Character_1.asset");
             enemyEncounterData = AssetDatabase.LoadAssetAtPath<EnemyEncounterSO>("Assets/Tests/Play Mode/Turn Controller/Test Objects/Test_Enemy_Encounter_1.asset");
             enemyTemplate = AssetDatabase.LoadAssetAtPath<EnemyTemplateSO>("Assets/Tests/Play Mode/Turn Controller/Test Objects/Test_Enemy_Character_1.asset");
@@ -37,8 +39,7 @@ namespace Tests
         [UnitySetUp]
         public IEnumerator Setup()
         {
-            TestUtils.CreateGlobalSettings();
-
+            yield return null;
             // Load Scene, wait until completed
             AsyncOperation loading = SceneManager.LoadSceneAsync(TestUtils.SCENE_NAME);
             yield return new WaitUntil(() => loading.isDone);
@@ -50,9 +51,7 @@ namespace Tests
         [UnityTearDown]
         public IEnumerator Teardown()
         {
-            yield return null;
-            TestUtils.TearDownAfterTest();
-            yield return new WaitForSeconds(1);
+            yield return TestUtils.TearDownAfterTest();
         }
         #endregion
 

@@ -17,7 +17,7 @@ namespace WeAreGladiators.UWidget
         {
             //Debug.Log("WidgetController.KillAllAnimationsOnWidget() called on game object: " + widget.gameObject.name);
 
-            if (widget.killPreviousTweensOnNewSequenceStart == false)
+            if (widget == null || widget.killPreviousTweensOnNewSequenceStart == false)
             {
                 return;
             }
@@ -74,9 +74,6 @@ namespace WeAreGladiators.UWidget
 
         public void HandleWidgetEvents(UWidget widget, WidgetEventData[] wEvents, string eventType)
         {
-            Debug.Log("WidgetController.HandleWidgetEvents() called on game object '" + widget.gameObject.name +
-                "', executing all widget events for input event '" + eventType + "'.");
-
             // Stop + Kill any animations from previous events
             KillAllAnimationsOnWidget(widget);
 
@@ -87,9 +84,6 @@ namespace WeAreGladiators.UWidget
         }
         private IEnumerator HandleWidgetEvent(UWidget widget, WidgetEventData wEvent)
         {
-            Debug.Log("WidgetController.HandleWidgetEvent() called on game object: " + widget.gameObject.name + ", event type: "
-                + wEvent.widgetEventType);
-
             // Wait for start delay
             if (wEvent.enableStartDelay)
             {

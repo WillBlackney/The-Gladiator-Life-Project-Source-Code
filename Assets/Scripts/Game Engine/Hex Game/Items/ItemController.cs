@@ -5,6 +5,7 @@ using UnityEngine;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
+using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Perks;
 using WeAreGladiators.Player;
 using WeAreGladiators.UCM;
@@ -483,7 +484,7 @@ namespace WeAreGladiators.Items
         {
             AudioManager.Instance.PlaySound(Sound.Gold_Cha_Ching);
             InventoryController.Instance.RemoveItemFromInventory(item);
-            PlayerDataController.Instance.ModifyPlayerGold(item.GetSellPrice());
+            RunController.Instance.ModifyPlayerGold(item.GetSellPrice());
             InventoryController.Instance.RebuildInventoryView();
         }
         public int GetCharacterItemsGoldValue(ItemSet itemSet)

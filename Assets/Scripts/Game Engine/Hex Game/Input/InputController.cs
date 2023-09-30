@@ -8,6 +8,7 @@ namespace WeAreGladiators.Utilities
 {
     public class InputController : Singleton<InputController>
     {
+        public ShowCharacterWorldUiState CharacterWorldUiState { get; private set; } = ShowCharacterWorldUiState.Always;
         private void Update()
         {
             if (GameController.Instance.GameState == GameState.CombatActive)
@@ -94,7 +95,7 @@ namespace WeAreGladiators.Utilities
                 // Toggle character world space GUI
                 if (Input.GetKeyDown(KeyCode.LeftAlt))
                 {
-                    UIController.Instance.OnAltKeyPressed();
+                    OnAltKeyPressed();
                 }
 
                 // End turn with E
@@ -111,5 +112,37 @@ namespace WeAreGladiators.Utilities
             }
 
         }
+
+        public void OnAltKeyPressed()
+        {
+            if (CharacterWorldUiState == ShowCharacterWorldUiState.Always)
+            {
+                CharacterWorldUiState = ShowCharacterWorldUiState.OnMouseOver;
+
+                // hide all character world UI's
+                foreach (HexCharacterModel c in HexCharacterController.Instance.AllCharacters)
+                {
+                    HexCharacterController.Instance.FadeOutCharacterWorldCanvas(c.hexCharacterView, null, 0.25f, 0.001f);
+                }
+            }
+            else if (CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
+            {
+                CharacterWorldUiState = ShowCharacterWorldUiState.Always;
+
+                // show all character UI's
+                foreach (HexCharacterModel c in HexCharacterController.Instance.AllCharacters)
+                {
+                    HexCharacterController.Instance.FadeInCharacterWorldCanvas(c.hexCharacterView, null, 0.25f);
+                }
+            }
+        }
     }
+
+    public enum ShowCharacterWorldUiState
+    {
+        OnMouseOver = 0,
+        Always = 1
+    }
+
+   
 }

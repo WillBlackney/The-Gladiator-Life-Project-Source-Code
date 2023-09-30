@@ -1130,7 +1130,7 @@ namespace WeAreGladiators.HexTiles
                 h.myCharacter.hexCharacterView.armourTextWorld.gameObject.SetActive(true);
                 h.myCharacter.hexCharacterView.healthTextWorld.gameObject.SetActive(true);
                 h.myCharacter.hexCharacterView.mouseOverModel = true;
-                if (UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
+                if (InputController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
                 {
                     HexCharacterController.Instance.FadeInCharacterWorldCanvas(h.myCharacter.hexCharacterView, null, 0.25f);
                 }
@@ -1167,7 +1167,7 @@ namespace WeAreGladiators.HexTiles
             if (HexMousedOver == h)
             {
                 // Hide the world space UI of the character on the tile
-                if (HexMousedOver.myCharacter != null && UIController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
+                if (HexMousedOver.myCharacter != null && InputController.Instance.CharacterWorldUiState == ShowCharacterWorldUiState.OnMouseOver)
                 {
                     h.myCharacter.hexCharacterView.armourTextWorld.gameObject.SetActive(false);
                     h.myCharacter.hexCharacterView.healthTextWorld.gameObject.SetActive(false);

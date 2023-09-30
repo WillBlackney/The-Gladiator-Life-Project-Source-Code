@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 using WeAreGladiators.Characters;
+using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Player;
 using WeAreGladiators.UCM;
 using WeAreGladiators.UI;
@@ -94,7 +95,7 @@ namespace WeAreGladiators.TownFeatures
             // Wage and recruit costs
             int cost = CharacterDataController.Instance.GetCharacterInitialHiringCost(data);
             string col = "<color=#DDC6AB>";
-            if (PlayerDataController.Instance.CurrentGold < cost)
+            if (RunController.Instance.CurrentGold < cost)
             {
                 col = TextLogic.lightRed;
             }

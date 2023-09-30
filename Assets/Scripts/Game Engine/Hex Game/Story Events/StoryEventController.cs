@@ -473,11 +473,11 @@ namespace WeAreGladiators.StoryEvents
             }
             else if (requirement.reqType == StoryEventRequirementType.HasXorLessGold)
             {
-                ret = PlayerDataController.Instance.CurrentGold <= requirement.goldRequired;
+                ret = RunController.Instance.CurrentGold <= requirement.goldRequired;
             }
             else if (requirement.reqType == StoryEventRequirementType.HasXorMoreGold)
             {
-                ret = PlayerDataController.Instance.CurrentGold >= requirement.goldRequired;
+                ret = RunController.Instance.CurrentGold >= requirement.goldRequired;
             }
             else if (requirement.reqType == StoryEventRequirementType.HasBoon)
             {
@@ -626,30 +626,30 @@ namespace WeAreGladiators.StoryEvents
             }
             else if (effect.effectType == StoryChoiceEffectType.GainGold)
             {
-                PlayerDataController.Instance.ModifyPlayerGold(effect.goldGained);
+                RunController.Instance.ModifyPlayerGold(effect.goldGained);
                 StoryEventResultItem newResultItem = new StoryEventResultItem("Gained " + TextLogic.ReturnColoredText
                     (effect.goldGained.ToString(), TextLogic.blueNumber) + " " + TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow) + ".", ResultRowIcon.GoldCoins);
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.LoseGold)
             {
-                PlayerDataController.Instance.ModifyPlayerGold(-effect.goldLost);
+                RunController.Instance.ModifyPlayerGold(-effect.goldLost);
                 StoryEventResultItem newResultItem = new StoryEventResultItem("Lost " + TextLogic.ReturnColoredText
                     (effect.goldLost.ToString(), TextLogic.blueNumber) + " " + TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow) + ".", ResultRowIcon.GoldCoins);
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.LoseGoldPercentageOfCurrent)
             {
-                int goldLost = (int) (PlayerDataController.Instance.CurrentGold * effect.goldLostPercentage);
-                PlayerDataController.Instance.ModifyPlayerGold(-goldLost);
+                int goldLost = (int) (RunController.Instance.CurrentGold * effect.goldLostPercentage);
+                RunController.Instance.ModifyPlayerGold(-goldLost);
                 StoryEventResultItem newResultItem = new StoryEventResultItem("Lost " + TextLogic.ReturnColoredText
                     (goldLost.ToString(), TextLogic.blueNumber) + " " + TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow) + ".", ResultRowIcon.GoldCoins);
                 currentResultItems.Add(newResultItem);
             }
             else if (effect.effectType == StoryChoiceEffectType.LoseAllGold)
             {
-                int goldLost = PlayerDataController.Instance.CurrentGold;
-                PlayerDataController.Instance.ModifyPlayerGold(-PlayerDataController.Instance.CurrentGold);
+                int goldLost = RunController.Instance.CurrentGold;
+                RunController.Instance.ModifyPlayerGold(-RunController.Instance.CurrentGold);
                 StoryEventResultItem newResultItem = new StoryEventResultItem("Lost " + TextLogic.ReturnColoredText
                     (goldLost.ToString(), TextLogic.blueNumber) + " " + TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow) + ".", ResultRowIcon.GoldCoins);
                 currentResultItems.Add(newResultItem);

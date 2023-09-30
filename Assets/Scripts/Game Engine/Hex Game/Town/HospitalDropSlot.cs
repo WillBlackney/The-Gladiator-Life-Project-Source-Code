@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using WeAreGladiators.Characters;
+using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Player;
 using WeAreGladiators.UCM;
 using WeAreGladiators.UI;
@@ -89,7 +90,7 @@ namespace WeAreGladiators.TownFeatures
                 HexCharacterData character = MyCharacterData;
                 MyCharacterData.currentTownActivity = TownActivity.None;
                 MyCharacterData = null;
-                PlayerDataController.Instance.ModifyPlayerGold(GetFeatureGoldCost(featureType));
+                RunController.Instance.ModifyPlayerGold(GetFeatureGoldCost(featureType));
                 BuildViews();
             }
         }

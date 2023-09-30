@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WeAreGladiators.Boons;
 using WeAreGladiators.Items;
+using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Player;
 using WeAreGladiators.Utilities;
 
@@ -67,7 +68,7 @@ namespace WeAreGladiators.TownFeatures
         {
             bool ret = false;
 
-            if (MyData.GoldCost <= PlayerDataController.Instance.CurrentGold &&
+            if (MyData.GoldCost <= RunController.Instance.CurrentGold &&
                 InventoryController.Instance.HasFreeInventorySpace())
             {
                 ret = true;
@@ -83,7 +84,7 @@ namespace WeAreGladiators.TownFeatures
 
             // Color cost text red if not enough gold, or green if selling at a discount
             string col = "<color=#FFFFFF>";
-            if (PlayerDataController.Instance.CurrentGold < data.GoldCost)
+            if (RunController.Instance.CurrentGold < data.GoldCost)
             {
                 col = TextLogic.lightRed;
             }

@@ -342,13 +342,13 @@ namespace WeAreGladiators.TownFeatures
 
             // to do: check if player has roster space before recruiting
             if ( // enough space in roster &&
-                PlayerDataController.Instance.CurrentGold < cost)
+                RunController.Instance.CurrentGold < cost)
             {
                 return;
             }
 
             // Pay for recruit
-            PlayerDataController.Instance.ModifyPlayerGold(-cost);
+            RunController.Instance.ModifyPlayerGold(-cost);
 
             // Add character to roster
             CharacterDataController.Instance.AddCharacterToRoster(selectedRecruitTab.MyCharacterData);
@@ -380,7 +380,7 @@ namespace WeAreGladiators.TownFeatures
             recruitRightPanelLevelText.text = character.currentLevel.ToString();
             recruitRightPanelNameText.text = "<color=#BC8252>" + character.myName + "<color=#DDC6AB>  " + character.mySubName;
             string col = "<color=#DDC6AB>";
-            if (PlayerDataController.Instance.CurrentGold < cost)
+            if (RunController.Instance.CurrentGold < cost)
             {
                 col = TextLogic.lightRed;
             }
@@ -478,7 +478,7 @@ namespace WeAreGladiators.TownFeatures
             Debug.Log("TownController.HandleDropCharacterOnHospitalSlot");
 
             // check slot available and player has enough gold
-            if (slot.Available && PlayerDataController.Instance.CurrentGold >= HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType))
+            if (slot.Available && RunController.Instance.CurrentGold >= HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType))
             {
                 // Validation
                 // Cant heal characters already at full health
@@ -506,7 +506,7 @@ namespace WeAreGladiators.TownFeatures
                 // INSTANT HOSPITAL FEATURE EFFECT
 
                 // Pay gold price
-                PlayerDataController.Instance.ModifyPlayerGold(-HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType));
+                RunController.Instance.ModifyPlayerGold(-HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType));
 
                 // Update page text views
                 UpdateHospitalFeatureCostTexts();
@@ -554,7 +554,7 @@ namespace WeAreGladiators.TownFeatures
         }
         private void UpdateHospitalFeatureCostTexts()
         {
-            int playerGold = PlayerDataController.Instance.CurrentGold;
+            int playerGold = RunController.Instance.CurrentGold;
             bedrestCostText.text = TextLogic.ReturnColoredText(TextLogic.brownBodyText, HospitalDropSlot.GetFeatureGoldCost(TownActivity.BedRest).ToString());
             surgeryCostText.text = TextLogic.ReturnColoredText(TextLogic.brownBodyText, HospitalDropSlot.GetFeatureGoldCost(TownActivity.Surgery).ToString());
             therapyCostText.text = TextLogic.ReturnColoredText(TextLogic.brownBodyText, HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy).ToString());
@@ -671,7 +671,7 @@ namespace WeAreGladiators.TownFeatures
         public void HandleBuyAbilityTomeFromLibrary(AbilityTomeShopData data)
         {
             // Pay gold cost
-            PlayerDataController.Instance.ModifyPlayerGold(-data.goldCost);
+            RunController.Instance.ModifyPlayerGold(-data.goldCost);
 
             // Add tome to inventory
             InventoryController.Instance.AddItemToInventory(data.ability);
@@ -811,7 +811,7 @@ namespace WeAreGladiators.TownFeatures
         public void HandleBuyItemFromArmoury(ItemShopData data)
         {
             // Pay gold cost
-            PlayerDataController.Instance.ModifyPlayerGold(-data.GoldCost);
+            RunController.Instance.ModifyPlayerGold(-data.GoldCost);
 
             // Add tome to inventory
             InventoryController.Instance.AddItemToInventory(data.Item);
