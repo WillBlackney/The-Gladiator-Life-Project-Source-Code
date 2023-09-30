@@ -23,6 +23,57 @@ namespace WeAreGladiators.StoryEvents
 {
     public class StoryEventController : Singleton<StoryEventController>
     {
+        #region Components
+
+        [Header("Core Data")]
+        [SerializeField] private StoryEventDataSO[] allStoryEvents;
+
+        [Space(10)]
+        [Header("Core UI Components")]
+        [SerializeField] private GameObject visualParent;
+        [SerializeField] private CanvasGroup rootCg;
+        [SerializeField] private Image blackUnderlay;
+        [SerializeField] private TextMeshProUGUI eventHeaderText;
+        [SerializeField] private TextMeshProUGUI eventDescriptionText;
+        [SerializeField] private Image eventImage;
+        [SerializeField] private ScrollRect mainContentScrollView;
+        [SerializeField] private Scrollbar verticalContentScrollbar;
+        [SerializeField] private StoryEventChoiceButton[] fittedChoiceButtons;
+        [SerializeField] private StoryEventChoiceButton[] unfittedChoiceButtons;
+        [SerializeField] private RectTransform[] layoutsRebuilt;
+
+        [Space(10)]
+        [Header("Result Item Components")]
+        [SerializeField] private Transform resultItemsParent;
+        [SerializeField] private GameObject resultItemRowPrefab;
+        [SerializeField] private List<StoryEventResultItemRow> resultItemRows;
+
+        [Space(10)]
+        [Header("Movement Components")]
+        [SerializeField] private RectTransform movementParent;
+        [SerializeField] private RectTransform onScreenPosition;
+        [SerializeField] private RectTransform offScreenPosition;
+
+        [Header("Button Auto Fitting")]
+        [SerializeField] private RectTransform content;
+        [SerializeField] private Transform unfittedButtonsParent;
+        [SerializeField] private Transform fittedButtonsParent;
+
+        // Hidden fields
+        private List<string> eventsAlreadyEncountered = new List<string>();
+        private readonly List<StoryEventResultItem> currentResultItems = new List<StoryEventResultItem>();
+        private readonly List<HexCharacterData> characterTargets = new List<HexCharacterData>();
+        private HexCharacterData choiceCharacterTarget;
+
+        private const string CHARACTER_1_NAME_KEY = "{CHARACTER_1_NAME}";
+        private const string CHARACTER_1_SUB_NAME_KEY = "{CHARACTER_1_SUB_NAME}";
+        private const string CHARACTER_2_NAME_KEY = "{CHARACTER_2_NAME}";
+        private const string CHARACTER_2_SUB_NAME_KEY = "{CHARACTER_2_SUB_NAME}";
+
+        private const string CHOICE_CHARACTER_NAME_KEY = "{CHOICE_CHARACTER_NAME}";
+        private const string CHOICE_CHARACTER_SUB_NAME_KEY = "{CHOICE_CHARACTER_SUB_NAME}";
+
+        #endregion
 
         #region Start Events
 
@@ -63,63 +114,7 @@ namespace WeAreGladiators.StoryEvents
 
         }
 
-        #endregion
-        #region Components
-
-        [Header("Core Data")]
-        [SerializeField]
-        private StoryEventDataSO[] allStoryEvents;
-
-        [Space(10)]
-        [Header("Core UI Components")]
-        [SerializeField]
-        private GameObject visualParent;
-        [SerializeField] private CanvasGroup rootCg;
-        [SerializeField] private Image blackUnderlay;
-        [SerializeField] private TextMeshProUGUI eventHeaderText;
-        [SerializeField] private TextMeshProUGUI eventDescriptionText;
-        [SerializeField] private Image eventImage;
-        [SerializeField] private ScrollRect mainContentScrollView;
-        [SerializeField] private Scrollbar verticalContentScrollbar;
-        [SerializeField] private StoryEventChoiceButton[] fittedChoiceButtons;
-        [SerializeField] private StoryEventChoiceButton[] unfittedChoiceButtons;
-        [SerializeField] private RectTransform[] layoutsRebuilt;
-
-        [Space(10)]
-        [Header("Result Item Components")]
-        [SerializeField]
-        private Transform resultItemsParent;
-        [SerializeField] private GameObject resultItemRowPrefab;
-        [SerializeField] private List<StoryEventResultItemRow> resultItemRows;
-
-        [Space(10)]
-        [Header("Movement Components")]
-        [SerializeField]
-        private RectTransform movementParent;
-        [SerializeField] private RectTransform onScreenPosition;
-        [SerializeField] private RectTransform offScreenPosition;
-
-        [Header("Button Auto Fitting")]
-        [SerializeField]
-        private RectTransform content;
-        [SerializeField] private Transform unfittedButtonsParent;
-        [SerializeField] private Transform fittedButtonsParent;
-
-        // Hidden fields
-        private List<string> eventsAlreadyEncountered = new List<string>();
-        private readonly List<StoryEventResultItem> currentResultItems = new List<StoryEventResultItem>();
-        private readonly List<HexCharacterData> characterTargets = new List<HexCharacterData>();
-        private HexCharacterData choiceCharacterTarget;
-
-        private const string CHARACTER_1_NAME_KEY = "{CHARACTER_1_NAME}";
-        private const string CHARACTER_1_SUB_NAME_KEY = "{CHARACTER_1_SUB_NAME}";
-        private const string CHARACTER_2_NAME_KEY = "{CHARACTER_2_NAME}";
-        private const string CHARACTER_2_SUB_NAME_KEY = "{CHARACTER_2_SUB_NAME}";
-
-        private const string CHOICE_CHARACTER_NAME_KEY = "{CHOICE_CHARACTER_NAME}";
-        private const string CHOICE_CHARACTER_SUB_NAME_KEY = "{CHOICE_CHARACTER_SUB_NAME}";
-
-        #endregion
+        #endregion       
 
         #region Getters + Accessors
 

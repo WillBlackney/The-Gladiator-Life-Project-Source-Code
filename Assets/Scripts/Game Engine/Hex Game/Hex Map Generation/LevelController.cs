@@ -17,56 +17,12 @@ using WeAreGladiators.TurnLogic;
 using WeAreGladiators.UI;
 using WeAreGladiators.Utilities;
 using WeAreGladiators.VisualEvents;
-using static UnityEngine.GraphicsBuffer;
 
 namespace WeAreGladiators.HexTiles
 {
     public class LevelController : Singleton<LevelController>
     {
-
-        // Obstruction Logic
-        #region
-
-        public LevelNode IsTargetObstructed(HexCharacterModel attacker, HexCharacterModel target)
-        {
-            // used in range attack accuracy calculations. determines if the LoS
-            // to the target is obstructed by a nearby character or obstacle.
-            // if it is, this function returns the hex that is obstructing it
-
-            LevelNode hRet = null;
-
-            List<LevelNode> adjacentHexs = GetAllHexsWithinRange(target.currentTile, 1);
-
-            // Return if attacker is adjacent to target (impossible to be obstructed)
-            if (adjacentHexs.Contains(attacker.currentTile))
-            {
-                return null;
-            }
-
-            HexDirection directionToAttacker = GetDirectionToTargetHex(target.currentTile, attacker.currentTile);
-
-            foreach (LevelNode h in adjacentHexs)
-            {
-                if (GetDirectionToTargetHex(target.currentTile, h) == directionToAttacker)
-                {
-                    if (h.myCharacter != null) //|| h.MyHexObstacle != null)
-                    {
-                        // Obstruction detected
-                        Debug.Log("LevelController.IsTargetObstructed() determined obstructed line of sight from " + attacker.myName + " to " + target.myName);
-                        hRet = h;
-                        break;
-                    }
-                }
-            }
-
-            return hRet;
-
-        }
-
-        #endregion
-        // Properties + Components
-        #region
-
+        #region Properties + Components
         [Header("Prefabs + Core Components")]
         [SerializeField]
         private CombatMapSeedDataSO[] allCombatMapSeeds;
@@ -107,8 +63,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Getters + Accessors
-        #region
+        #region Getters + Accessors
 
         public List<CrowdMember> AllCrowdMembers => allCrowdMembers;
         public HexDataSO[] AllHexTileData => allHexTileData;
@@ -143,8 +98,47 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Map Generation + Teardown
-        #region
+        #region Obstruction Logic
+
+        public LevelNode IsTargetObstructed(HexCharacterModel attacker, HexCharacterModel target)
+        {
+            // used in range attack accuracy calculations. determines if the LoS
+            // to the target is obstructed by a nearby character or obstacle.
+            // if it is, this function returns the hex that is obstructing it
+
+            LevelNode hRet = null;
+
+            List<LevelNode> adjacentHexs = GetAllHexsWithinRange(target.currentTile, 1);
+
+            // Return if attacker is adjacent to target (impossible to be obstructed)
+            if (adjacentHexs.Contains(attacker.currentTile))
+            {
+                return null;
+            }
+
+            HexDirection directionToAttacker = GetDirectionToTargetHex(target.currentTile, attacker.currentTile);
+
+            foreach (LevelNode h in adjacentHexs)
+            {
+                if (GetDirectionToTargetHex(target.currentTile, h) == directionToAttacker)
+                {
+                    if (h.myCharacter != null) //|| h.MyHexObstacle != null)
+                    {
+                        // Obstruction detected
+                        Debug.Log("LevelController.IsTargetObstructed() determined obstructed line of sight from " + attacker.myName + " to " + target.myName);
+                        hRet = h;
+                        break;
+                    }
+                }
+            }
+
+            return hRet;
+
+        }
+
+        #endregion
+
+        #region Map Generation + Teardown
 
         public void HandleTearDownAllCombatViews()
         {
@@ -314,8 +308,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Spawn Zone Logic
-        #region
+        #region Spawn Zone Logic
 
         public List<LevelNode> GetPlayerSpawnZone()
         {
@@ -401,8 +394,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Character Direction + Facing
-        #region
+        #region Character Direction + Facing
 
         public void FaceCharacterTowardsTargetCharacter(HexCharacterModel character, HexCharacterModel target)
         {
@@ -471,8 +463,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Placement + Moving
-        #region
+        #region Placement + Moving
 
         public void DisconnectCharacterFromTheirHex(HexCharacterModel character)
         {
@@ -790,8 +781,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Teleportation Logic
-        #region
+        #region Teleportation Logic
 
         public void HandleTeleportCharacter(HexCharacterModel character, LevelNode destination)
         {
@@ -942,8 +932,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Knock Back Logic
-        #region
+        #region Knock Back Logic
 
         public LevelNode GetAdjacentHexByDirection(LevelNode start, HexDirection direction)
         {
@@ -1047,8 +1036,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Hex Clicking
-        #region
+        #region Hex Clicking
 
         public void OnHexClicked(LevelNode h)
         {
@@ -1197,9 +1185,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Tile Marking
-        #region
-
+        #region Tile Marking
         private void HandleSubTargettingOnTileMouseEnter(AbilityData ability, HexCharacterModel caster, LevelNode mousedOverTile)
         {
             if (ability.targetRequirement == TargetRequirement.Enemy && mousedOverTile && mousedOverTile.myCharacter != null)
@@ -1235,8 +1221,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Get Hexs Logic
-        #region
+        #region Get Hexs Logic
 
         public LevelNode GetHexAtGridPosition(Vector2 gridPos)
         {
@@ -1304,8 +1289,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Tile Info Pop up Logic
-        #region
+        #region Tile Info Pop up Logic
 
         private IEnumerator ShowTileInfoPopup(LevelNode destination, LevelNode start = null)
         {
@@ -1414,8 +1398,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Level Node View Logic
-        #region
+        #region Level Node View Logic
 
         public void HideAllNodeViews()
         {
@@ -1428,8 +1411,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Scenery Logic
-        #region
+        #region Scenery Logic
 
         // Arena            
         public void EnableDayTimeArenaScenery()

@@ -7,6 +7,22 @@ namespace WeAreGladiators.Boons
 {
     public class BoonController : Singleton<BoonController>
     {
+        #region Components
+
+        [Header("Boon Library Properties")]
+        [SerializeField] private BoonDataSO[] allBoonData;
+
+        [Space(10)]
+        [Header("UI Components")]
+        [SerializeField] private Canvas boonIconsPanelCanvas;
+        [SerializeField] private Transform boonIconsParent;
+        [SerializeField] private UIBoonIcon uiBoonIconPrefab;
+        [SerializeField] private List<UIBoonIcon> boonIcons = new List<UIBoonIcon>();
+
+        [Space(10)]
+        private List<BoonData> activePlayerBoons = new List<BoonData>();
+
+        #endregion
 
         #region Library Logic
 
@@ -44,6 +60,30 @@ namespace WeAreGladiators.Boons
             BuildAndShowBoonIconsPanel();
         }
 
+        private void RemoveBoon(BoonData boon)
+        {
+            activePlayerBoons.Remove(boon);
+            BuildAndShowBoonIconsPanel();
+        }
+
+        public void TickDownBoonsOnNewDayStart()
+        {
+            List<BoonData> removals =new List<BoonData>();
+            foreach(BoonData boon in activePlayerBoons)
+            {
+                if(boon.durationType == BoonDurationType.DayTimer)
+                {
+                    boon.currentTimerStacks -= 1;
+                    if(boon.currentTimerStacks <= 0)
+                    {
+                        removals.Add(boon);
+                    }
+                }
+            }
+
+            removals.ForEach(t => RemoveBoon(t));
+        }
+
         #endregion
 
         #region Conditional Checks + Bools
@@ -65,23 +105,13 @@ namespace WeAreGladiators.Boons
 
         }
 
-        #endregion
-        #region Components
-
-        [Header("Boon Library Properties")]
-        [SerializeField] private BoonDataSO[] allBoonData;
-
-        [Space(10)]
-        [Header("UI Components")]
-        [SerializeField] private Canvas boonIconsPanelCanvas;
-        [SerializeField] private Transform boonIconsParent;
-        [SerializeField] private GameObject uiBoonIconPrefab;
-        [SerializeField] private List<UIBoonIcon> boonIcons = new List<UIBoonIcon>();
-
-        [Space(10)]
-        private List<BoonData> activePlayerBoons = new List<BoonData>();
+        public bool BoonIconPanelIsActive
+        {
+            get { return boonIconsPanelCanvas.isActiveAndEnabled; }
+        }
 
         #endregion
+       
 
         #region Persitency Logic
 
@@ -118,7 +148,7 @@ namespace WeAreGladiators.Boons
                 // Create a new UI icon if not enough to show every player boon
                 if (i >= boonIcons.Count)
                 {
-                    UIBoonIcon newIcon = Instantiate(uiBoonIconPrefab, boonIconsParent).GetComponent<UIBoonIcon>();
+                    UIBoonIcon newIcon = Instantiate(uiBoonIconPrefab, boonIconsParent);
                     boonIcons.Add(newIcon);
                 }
 

@@ -233,14 +233,6 @@ namespace WeAreGladiators
             // Apply global settings
             GlobalSettings.Instance.ApplyStartingXPBonus();
 
-            // testing injures + stress + health
-            /*
-            HexCharacterData character = CharacterDataController.Instance.AllPlayerCharacters[0];
-            CharacterDataController.Instance.SetCharacterHealth(character, character.currentHealth - 20);
-            CharacterDataController.Instance.SetCharacterStress(character, 10);
-            var injury = PerkController.Instance.GetRandomValidInjury(character.passiveManager, InjurySeverity.Severe, InjuryType.Blunt);
-            PerkController.Instance.ModifyPerkOnCharacterData(character.passiveManager, injury.perkTag, 3);*/
-
             // Reset+ Centre camera
             CameraController.Instance.ResetMainCameraPositionAndZoom();
 
@@ -259,63 +251,9 @@ namespace WeAreGladiators
                 GameIntroController.Instance.StartEvent();
             }
 
-            InventoryController.Instance.PopulateInventoryWithMockDataItems(30);
+            //InventoryController.Instance.PopulateInventoryWithMockDataItems(30);
         }
-        public void RunTestEnvironmentCombat(List<HexCharacterTemplateSO> playerCharacters, EnemyEncounterSO enemyEncounter)
-        {
-            List<CharacterWithSpawnData> charactersWithSpawnPos = BuildNewSaveFileForTestingEnvironment(playerCharacters);
-
-            // Set state
-            SetGameState(GameState.CombatActive);
-
-            // Show UI
-            TopBarController.Instance.ShowCombatTopBar();
-            CombatLogController.Instance.ShowLog();
-
-            // Build mock save file + journey data
-            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
-
-            // Enable world view
-            LightController.Instance.EnableDayTimeGlobalLight();
-            LevelController.Instance.EnableDayTimeArenaScenery();
-            LevelController.Instance.ShowAllNodeViews();
-            LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
-
-            // Generate enemy wave + enemies data
-            CombatContractData sandboxContractData = TownController.Instance.GenerateSandboxContractData(enemyEncounter);
-            RunController.Instance.SetCurrentContractData(sandboxContractData);
-
-            // Generate combat map data
-            List<LevelNode> spawnPositions = LevelController.Instance.GetCharacterStartPositions(
-                RunController.Instance.CurrentCombatContractData.enemyEncounterData.enemiesInEncounter,
-                charactersWithSpawnPos);
-
-            // Randomize level node elevation and obstructions
-            RunController.Instance.SetCurrentCombatMapData(LevelController.Instance.GenerateLevelNodes(spawnPositions));
-
-            // Save data to persistency
-            PersistencyController.Instance.AutoUpdateSaveFile();
-
-            // Setup player characters
-            HexCharacterController.Instance.CreateAllPlayerCombatCharacters(charactersWithSpawnPos);
-
-            // Animate Crowd
-            LevelController.Instance.StopAllCrowdMembers(true);
-
-            // Combat Music
-            AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
-            AudioManager.Instance.FadeInSound(Sound.Ambience_Crowd_1, 1f);
-
-            // Spawn enemies in world
-            HexCharacterController.Instance.SpawnEnemyEncounter(sandboxContractData.enemyEncounterData);
-
-            // Place characters off screen
-            HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();
-
-            // Move characters towards start nodes
-            VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(null));
-
-        }
+       
         private void RunSandboxCombat()
         {
             List<CharacterWithSpawnData> charactersWithSpawnPos = BuildNewSaveFileForSandboxEnvironment();
@@ -1131,6 +1069,86 @@ namespace WeAreGladiators
             return charactersWithSpawnPos;
         }
 
+        #endregion
+
+        #region Test Environments
+        public void RunTestEnvironmentCombat(List<HexCharacterTemplateSO> playerCharacters, EnemyEncounterSO enemyEncounter)
+        {
+            List<CharacterWithSpawnData> charactersWithSpawnPos = BuildNewSaveFileForTestingEnvironment(playerCharacters);
+
+            // Set state
+            SetGameState(GameState.CombatActive);
+
+            // Show UI
+            TopBarController.Instance.ShowCombatTopBar();
+            CombatLogController.Instance.ShowLog();
+
+            // Build mock save file + journey data
+            RunController.Instance.SetCheckPoint(SaveCheckPoint.CombatStart);
+
+            // Enable world view
+            LightController.Instance.EnableDayTimeGlobalLight();
+            LevelController.Instance.EnableDayTimeArenaScenery();
+            LevelController.Instance.ShowAllNodeViews();
+            LevelController.Instance.SetLevelNodeDayOrNightViewState(true);
+
+            // Generate enemy wave + enemies data
+            CombatContractData sandboxContractData = TownController.Instance.GenerateSandboxContractData(enemyEncounter);
+            RunController.Instance.SetCurrentContractData(sandboxContractData);
+
+            // Generate combat map data
+            List<LevelNode> spawnPositions = LevelController.Instance.GetCharacterStartPositions(
+                RunController.Instance.CurrentCombatContractData.enemyEncounterData.enemiesInEncounter,
+                charactersWithSpawnPos);
+
+            // Randomize level node elevation and obstructions
+            RunController.Instance.SetCurrentCombatMapData(LevelController.Instance.GenerateLevelNodes(spawnPositions));
+
+            // Save data to persistency
+            PersistencyController.Instance.AutoUpdateSaveFile();
+
+            // Setup player characters
+            HexCharacterController.Instance.CreateAllPlayerCombatCharacters(charactersWithSpawnPos);
+
+            // Animate Crowd
+            LevelController.Instance.StopAllCrowdMembers(true);
+
+            // Combat Music
+            AudioManager.Instance.AutoPlayBasicCombatMusic(1f);
+            AudioManager.Instance.FadeInSound(Sound.Ambience_Crowd_1, 1f);
+
+            // Spawn enemies in world
+            HexCharacterController.Instance.SpawnEnemyEncounter(sandboxContractData.enemyEncounterData);
+
+            // Place characters off screen
+            HexCharacterController.Instance.MoveAllCharactersToOffScreenPosition();
+
+            // Move characters towards start nodes
+            VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(null));
+
+        }
+
+        public void RunTestEnvironmentTown(List<HexCharacterTemplateSO> playerCharacters)
+        {
+            BuildNewSaveFileForTestingEnvironment(playerCharacters);
+
+            // Set state
+            SetGameState(GameState.Town);
+
+            // Show UI
+            TopBarController.Instance.ShowMainTopBar();
+
+            // Build and prepare all session data
+            PersistencyController.Instance.SetUpGameSessionDataFromSaveFile();
+
+            // Reset+ Centre camera
+            CameraController.Instance.ResetMainCameraPositionAndZoom();
+
+            // Build town views here
+            TownController.Instance.ShowTownView();
+            CharacterScrollPanelController.Instance.BuildAndShowPanel();
+
+        }
         #endregion
     }
 

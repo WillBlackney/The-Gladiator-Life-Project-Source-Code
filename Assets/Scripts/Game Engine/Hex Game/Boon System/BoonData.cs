@@ -102,7 +102,7 @@ namespace WeAreGladiators.Boons
 
         private Sprite GetMySprite()
         {
-            return BoonController.Instance.GetBoonDataByTag(boonTag).boonSprite;
+            return BoonController.Instance.GetBoonDataByTag(boonTag)?.boonSprite;
         }
     }
 }

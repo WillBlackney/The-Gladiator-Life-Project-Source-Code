@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using WeAreGladiators.Boons;
 using WeAreGladiators.Characters;
 using WeAreGladiators.HexTiles;
 using WeAreGladiators.Perks;
@@ -114,6 +115,9 @@ namespace WeAreGladiators.JourneyLogic
 
             // Update day + act GUI
             UpdateDayAndChapterTopbarText();
+
+            // Boon expiries
+            BoonController.Instance.TickDownBoonsOnNewDayStart();
 
             // Pay daily wages
             CharacterDataController.Instance.HandlePayDailyWagesOnNewDayStart();

@@ -25,27 +25,7 @@ namespace WeAreGladiators.TownFeatures
 {
     public class TownController : Singleton<TownController>
     {
-
-        // Misc
-        #region
-
-        public void TearDownOnExitToMainMenu()
-        {
-            foreach (HospitalDropSlot slot in hospitalSlots)
-            {
-                slot.ClearAndReset();
-            }
-            HideTownView();
-            HideDeploymentPage();
-            foreach (TownBuildingView tbv in allFeatureBuildings)
-            {
-                tbv.CloseAndResetAllUiViews();
-            }
-        }
-
-        #endregion
-        // Properties + Components
-        #region
+        #region Properties + Components
 
         [Title("Town Page Components")]
         [SerializeField]
@@ -137,8 +117,7 @@ namespace WeAreGladiators.TownFeatures
 
         #endregion
 
-        // Getters + Accessors
-        #region
+        #region Getters + Accessors
 
         public bool ArmouryViewIsActive => armouryPageVisualParent.activeSelf;
         public bool HospitalViewIsActive => hospitalPageVisualParent.activeSelf;
@@ -166,8 +145,25 @@ namespace WeAreGladiators.TownFeatures
 
         #endregion
 
-        // Save + Load Logic
-        #region
+        #region Misc
+
+        public void TearDownOnExitToMainMenu()
+        {
+            foreach (HospitalDropSlot slot in hospitalSlots)
+            {
+                slot.ClearAndReset();
+            }
+            HideTownView();
+            HideDeploymentPage();
+            foreach (TownBuildingView tbv in allFeatureBuildings)
+            {
+                tbv.CloseAndResetAllUiViews();
+            }
+        }
+
+        #endregion
+
+        #region Save + Load Logic
 
         public void BuildMyDataFromSaveFile(SaveGameData saveFile)
         {
@@ -204,8 +200,7 @@ namespace WeAreGladiators.TownFeatures
 
         #endregion
 
-        // Show + Hide Main View Logic
-        #region
+        #region Show + Hide Main View Logic
 
         public void ShowTownView()
         {
@@ -218,8 +213,7 @@ namespace WeAreGladiators.TownFeatures
 
         #endregion
 
-        // Recruit Characters Page Logic
-        #region
+        #region Recruit Characters Page Logic
 
         public void GenerateDailyRecruits(int amount)
         {
@@ -448,8 +442,7 @@ namespace WeAreGladiators.TownFeatures
 
         #endregion
 
-        // Hospital Page Logic
-        #region
+        #region Hospital Page Logic
 
         public void BuildAndShowHospitalPage()
         {
@@ -628,8 +621,7 @@ namespace WeAreGladiators.TownFeatures
 
         #endregion
 
-        // Library Logic
-        #region
+        #region Library Logic
 
         public void BuildAndShowLibraryPage()
         {
@@ -777,8 +769,7 @@ namespace WeAreGladiators.TownFeatures
 
         #endregion
 
-        // Armoury Logic
-        #region
+        #region Armoury Logic
 
         public void BuildAndShowArmouryPage()
         {
@@ -897,8 +888,7 @@ namespace WeAreGladiators.TownFeatures
 
         #endregion
 
-        // Feature Buttons On Click 
-        #region
+        #region Feature Buttons On Click 
 
         public void OnArmouryPageLeaveButtonClicked()
         {
@@ -990,8 +980,7 @@ namespace WeAreGladiators.TownFeatures
 
         #endregion
 
-        // Choose Combat Contract Page Logic
-        #region
+        #region Choose Combat Contract Page Logic
 
         public CombatContractData GenerateSandboxContractData(EnemyEncounterSO enemyData = null)
         {
@@ -1115,8 +1104,7 @@ namespace WeAreGladiators.TownFeatures
 
         #endregion
 
-        // Deployment Page Logic
-        #region
+        #region Deployment Page Logic
 
         private void BuildAndShowDeploymentPage()
         {
