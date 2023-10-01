@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 116
+  controlID: 84406
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,12 +139,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1274
+    width: 1428
     height: 939
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 59
+  controlID: 84411
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,12 +165,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1274
+    width: 1428
     height: 535
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 60
+  controlID: 84412
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -188,10 +188,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 301
+    width: 434
     height: 535
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -212,12 +212,12 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 301
+    x: 434
     y: 0
-    width: 358
+    width: 894
     height: 535
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -225,7 +225,7 @@ MonoBehaviour:
   - {fileID: 17}
   - {fileID: 18}
   m_Selected: 0
-  m_LastSelected: 3
+  m_LastSelected: 1
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -241,9 +241,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 659
+    x: 1328
     y: 0
-    width: 615
+    width: 100
     height: 535
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
@@ -269,7 +269,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 535
-    width: 1274
+    width: 1428
     height: 404
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
@@ -290,25 +290,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: TestRunnerWindow
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1274
+    x: 1428
     y: 0
-    width: 646
+    width: 492
     height: 939
-  m_MinSize: {x: 101, y: 121}
+  m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 23}
+  m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
   - {fileID: 23}
   - {fileID: 24}
   - {fileID: 25}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -330,9 +330,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 659
+    x: 1328
     y: 73
-    width: 613
+    width: 98
     height: 514
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 613, y: 345}
+  m_TargetSize: {x: 98, y: 55}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -360,10 +360,10 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -306.5
-    m_HBaseRangeMax: 306.5
-    m_VBaseRangeMin: -172.5
-    m_VBaseRangeMax: 172.5
+    m_HBaseRangeMin: -49
+    m_HBaseRangeMax: 49
+    m_VBaseRangeMin: -27.5
+    m_VBaseRangeMax: 27.5
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -381,23 +381,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 613
+      width: 98
       height: 493
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 306.5, y: 246.5}
+    m_Translation: {x: 49, y: 246.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -306.5
+      x: -49
       y: -246.5
-      width: 613
+      width: 98
       height: 493
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 613, y: 514}
+  m_LastWindowPixelSize: {x: 98, y: 514}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -426,7 +426,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 300
+    width: 433
     height: 514
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -435,10 +435,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 3063cffed463cffe8c30e0feaecce5fe52cde5fe0469ebfe9608f1fe3a09f1fee0a4f6fe1245fcfeb645fcfe54e101fffe7b07ffa27c07ff38180dffaab212ff4eb312ffe44e18ff1af11dffbef11dff405724ffacf029ff50f129fffabd3aff8a5840ff2e5940ff60e765ff62a16bff06a26bff5453faff28fbffff3a440c00484f0c00865f0c00bc620c001e850c00768a0c00
+      scrollPos: {x: 0, y: 51}
+      m_SelectedIDs: 20820200
+      m_LastClickedID: 164384
+      m_ExpandedIDs: 2063f1ff2263f1ff2863f1ff2e63f1ff148ef1ff24e2f1ff96f2f1ffbcf2f1ffc2f2f1ffe0f2f1ff14f3f1ff6c0ff2ff740ff2ff760ff2ff7e0ff2ff8e26f2ff9426f2ff9626f2ff9826f2ffc490f2ffca90f2ffde90f2ff7098f2ffe4b5f2ffe8b5f2ffd4b6f2ffe0aef3ffa646f5ffd6d2f7ff3a60faff28fbffff8e7c0200be7d0200367e020020820200be820200de820200508402003885020024870200fa88020066890200e68a0200448c0200848c0200ea8c0200528e020070920200da9d0200fa9d0200269e0200
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -483,9 +483,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 301
+    x: 434
     y: 73
-    width: 356
+    width: 892
     height: 514
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -744,9 +744,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.959199, y: -0.12611248, z: 526.42267}
+    m_Target: {x: 0.5229125, y: -0.3597303, z: 943.8789}
     speed: 2
-    m_Value: {x: -1.959199, y: -0.12611248, z: 526.42267}
+    m_Value: {x: 0.20462021, y: -0.30468726, z: 903.79175}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -797,9 +797,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 6.5513573
+    m_Target: 6.7801294
     speed: 2
-    m_Value: 6.5513573
+    m_Value: 6.488162
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -856,7 +856,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 178252
+  m_LastSelectedObjectID: 163164
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1059,7 +1059,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 608
-    width: 1273
+    width: 1427
     height: 383
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1089,7 +1089,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 608
-    width: 1273
+    width: 1427
     height: 383
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1109,22 +1109,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Tests/Play Mode/Town Controller
+    - Assets/Prefabs/New Prefabs/GUI Widgets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Tests/Play Mode/Town Controller
+  - Assets/Prefabs/New Prefabs/GUI Widgets
   m_LastFoldersGridSize: 96
   m_LastProjectPath: C:\Users\willi\Desktop\Unity Projects\The-Gladiator-Life-Project-Source-Code
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 281}
-    m_SelectedIDs: cc360200
-    m_LastClickedID: 145100
-    m_ExpandedIDs: 000000003c3602003e360200b2360200b8360200ba360200be360200cc36020000ca9a3b
+    scrollPos: {x: 0, y: 393}
+    m_SelectedIDs: 86590200
+    m_LastClickedID: 153990
+    m_ExpandedIDs: 000000003e36020040360200423602004436020046360200483602004a360200aa3602000e11060000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1152,7 +1152,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003c3602003e360200
+    m_ExpandedIDs: 000000003e36020040360200423602004436020046360200483602004a36020000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1179,8 +1179,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c623000026650600c6c9000072630000ea250100f02501005c2801006e630000626300008c26020000110100e8d990008ed80100d6120100720f0100f2120100de110100ec110100801301003631020076130100ca0f010046130100c8110100422b0100942001005414010052140100e0de010070e0010056e00100a0e0010012e0010012e1010006de0100d4df0100dc8817007c79faffd0a601000000000064880000e494000046d80000848800006288000026a0000014a801009e6c00009ae50000cc1501003a47010050de0100aae30100e8e6010044e7010022ea0100b017010068d20100b0e70100e4e901004e55020006e701009ee149007e260100ec8c00004a8901005c64000050ec010064ea0100383a0200723b020058190100d445010010640000a098000044980000ee990000c88f00000c8e0000a6910000f0630000f2180100c6180100c45d0100fa6300002aad00006c460100f082000004550100ba6a0000dcac0000e4ac0000224b0200940202001c5501001447010066c6080064c6080010530100
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c623000026650600c6c9000072630000ea250100f02501005c2801006e630000626300008c26020000110100e8d990008ed80100d6120100720f0100f2120100de110100ec110100801301003631020076130100ca0f010046130100c8110100422b0100942001005414010052140100e0de010070e0010056e00100a0e0010012e0010012e1010006de0100d4df0100dc8817007c79faffd0a601000000000064880000e494000046d80000848800006288000026a0000014a801009e6c00009ae50000cc1501003a47010050de0100aae30100e8e6010044e7010022ea0100b017010068d20100b0e70100e4e901004e55020006e701009ee149007e260100ec8c00004a8901005c64000050ec010064ea0100383a0200723b020058190100d445010010640000a098000044980000ee990000c88f00000c8e0000a6910000f0630000f2180100c6180100c45d0100fa6300002aad00006c460100f082000004550100ba6a0000dcac0000e4ac0000224b0200940202001c5501001447010066c6080064c6080010530100ea8d0500e28d0500ba15010038590200e4470100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1258,9 +1258,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1433
+    x: 1428
     y: 73
-    width: 486
+    width: 491
     height: 918
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1310,7 +1310,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_Spl:
-    ID: 148
+    ID: 172
     splitterInitialOffset: 610
     currentActiveSplitter: -1
     realSizes:
@@ -2029,12 +2029,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type AbilityDataSO - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -2349,12 +2348,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type AIBehaviour - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -4574,12 +4572,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type AbilityDataSO - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -4898,12 +4895,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type AIBehaviour - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -6503,12 +6499,11 @@ MonoBehaviour:
         has been created for the UnityEngine.Object type LevelNode - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -6990,13 +6985,12 @@ MonoBehaviour:
         created for the UnityEngine.Object type SpriteRenderer - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
         (System.Reflection.RuntimeConstructorInfo , System.Object , System.Object[]
         , System.Exception& ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
         at System.Reflection.RuntimeConstructorInfo.InternalInvoke (System.Object
@@ -7164,13 +7158,12 @@ MonoBehaviour:
         created for the UnityEngine.Object type ParticleSystem - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
         (System.Reflection.RuntimeConstructorInfo , System.Object , System.Object[]
         , System.Exception& ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
         at System.Reflection.RuntimeConstructorInfo.InternalInvoke (System.Object
@@ -7329,12 +7322,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type HexCharacterView - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -7488,13 +7480,12 @@ MonoBehaviour:
         created for the UnityEngine.Object type CanvasGroup - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
         (System.Reflection.RuntimeConstructorInfo , System.Object , System.Object[]
         , System.Exception& ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
         at System.Reflection.RuntimeConstructorInfo.InternalInvoke (System.Object
@@ -7653,13 +7644,12 @@ MonoBehaviour:
         created for the UnityEngine.Object type RectTransform - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
         (System.Reflection.RuntimeConstructorInfo , System.Object , System.Object[]
         , System.Exception& ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
         at System.Reflection.RuntimeConstructorInfo.InternalInvoke (System.Object
@@ -8328,12 +8318,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type TextMeshProUGUI - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -8498,12 +8487,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type TMP_FontAsset - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -9229,12 +9217,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type UniversalCharacterModel - this is
         *strongly* discouraged. Unity should be allowed to handle serialization and
         deserialization of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -9596,12 +9583,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type EntityRenderer - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -9788,13 +9774,12 @@ MonoBehaviour:
         created for the UnityEngine.Object type SortingGroup - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
         (System.Reflection.RuntimeConstructorInfo , System.Object , System.Object[]
         , System.Exception& ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
         at System.Reflection.RuntimeConstructorInfo.InternalInvoke (System.Object
@@ -10371,12 +10356,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type CharacterVfxManager - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -10541,12 +10525,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type PerkLayoutPanel - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -14067,12 +14050,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type AbilityDataSO - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -14391,12 +14373,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type AIBehaviour - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -16552,13 +16533,12 @@ MonoBehaviour:
         been created for the UnityEngine.Object type Sprite - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
         (System.Reflection.RuntimeConstructorInfo , System.Object , System.Object[]
         , System.Exception& ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
         at System.Reflection.RuntimeConstructorInfo.InternalInvoke (System.Object
@@ -16700,12 +16680,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type AbilityDataSO - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -17086,12 +17065,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type AIBehaviour - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <a40b0ad4a868437393ad434631fb6ff1>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d966f0601d26456d91652d8d979d3635>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
