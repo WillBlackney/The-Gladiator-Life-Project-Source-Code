@@ -28,10 +28,7 @@ namespace Tests
         [UnitySetUp]
         public IEnumerator Setup()
         {
-            yield return null;
-            // Load Scene, wait until completed
-            AsyncOperation loading = SceneManager.LoadSceneAsync(TestUtils.SCENE_NAME);
-            yield return new WaitUntil(() => loading.isDone);
+            yield return TestUtils.SetupBeforeTest();
         }
         [UnityTearDown]
         public IEnumerator Teardown()

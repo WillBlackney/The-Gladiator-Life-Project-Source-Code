@@ -527,21 +527,6 @@ namespace WeAreGladiators.TownFeatures
 
                 // Rebuild croll roster to reflect changes to character
                 CharacterScrollPanelController.Instance.RebuildViews();
-
-                // UNCOMMENT TO GO BACK TO TIMED HOSPITAL FEATURES
-                /*
-                // Attach character to slot
-                slot.OnCharacterDragDropSuccess(draggedCharacter);
-
-                // Pay gold price
-                PlayerDataController.Instance.ModifyPlayerGold(-HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType));
-
-                // Update page text views
-                UpdateHospitalFeatureCostTexts();
-
-                // Update character's scroll panel activity indicator
-                CharacterScrollPanelController.Instance.GetCharacterPanel(draggedCharacter).UpdateActivityIndicator();
-                */
             }
 
         }

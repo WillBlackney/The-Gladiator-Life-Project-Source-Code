@@ -38,10 +38,7 @@ namespace Tests
         [UnitySetUp]
         public IEnumerator Setup()
         {
-            yield return null;
-            // Load Scene, wait until completed
-            AsyncOperation loading = SceneManager.LoadSceneAsync(TestUtils.SCENE_NAME);
-            yield return new WaitUntil(() => loading.isDone);
+            yield return TestUtils.SetupBeforeTest();
 
             // Run!
             GameController.Instance.RunTestEnvironmentCombat(new List<HexCharacterTemplateSO> { playerData }, enemyEncounterData);
@@ -111,7 +108,7 @@ namespace Tests
             HexCharacterController.Instance.ModifyHealth(playerCharacterTwo, 100);
             int reduction = 50;
             int expected = playerCharacterTwo.currentHealth - reduction;
-            HexCharacterController.Instance.ModifyMaxHealth(playerCharacterTwo, -reduction);
+            HexCharacterController.Instance.ModifyMaxHealth(playerCharacterTwo, -reduction);           
 
             // Assert
             Assert.AreEqual(expected, playerCharacterTwo.currentHealth);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using WeAreGladiators.VisualEvents;
 
 namespace Tests
@@ -11,6 +12,7 @@ namespace Tests
         public static void CreateGlobalSettings()
         {
             GameObject freshGs = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            freshGs.GetComponent<Renderer>().enabled = false;
             freshGs.name = "GS";
             freshGs.AddComponent<WeAreGladiators.Utilities.GlobalSettings>();
             GameObject.DontDestroyOnLoad(freshGs);
@@ -22,6 +24,13 @@ namespace Tests
             yield return new WaitForSeconds(0.25f);
             VisualEventManager.HandleEventQueueTearDown();
             yield return new WaitForSeconds(1);
+        }
+
+        public static IEnumerator SetupBeforeTest()
+        {
+            yield return null;
+            AsyncOperation loading = SceneManager.LoadSceneAsync(SCENE_NAME);
+            yield return new WaitUntil(() => loading.isDone);
         }
     }
 }
