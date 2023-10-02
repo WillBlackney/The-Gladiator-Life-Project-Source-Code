@@ -375,7 +375,7 @@ namespace WeAreGladiators.Scoring
             // Gain +5 score for each tier 3 weapon collected
             int score = 0;
 
-            foreach (InventoryItem i in InventoryController.Instance.Inventory)
+            foreach (InventoryItem i in InventoryController.Instance.PlayerInventory)
             {
                 if (i.itemData != null &&
                     i.itemData.rarity == Rarity.Epic &&
@@ -404,7 +404,7 @@ namespace WeAreGladiators.Scoring
             // Gain +5 score for head/body piece with 150 or more armour
             int score = 0;
 
-            foreach (InventoryItem i in InventoryController.Instance.Inventory)
+            foreach (InventoryItem i in InventoryController.Instance.PlayerInventory)
             {
                 if (i.itemData != null &&
                     i.itemData.armourAmount >= 150 &&

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Graphs;
 using UnityEngine;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.Characters;
@@ -25,7 +26,7 @@ namespace WeAreGladiators.Items
             }
             if (!visualParent.activeSelf)
             {
-                BuildAndShowInventoryView();
+                //BuildAndShowInventoryView();
             }
             else
             {
@@ -40,7 +41,7 @@ namespace WeAreGladiators.Items
 
         public bool HasFreeInventorySpace(int freeSpace = 1)
         {
-            return Inventory.Count + freeSpace <= maxInventorySize;
+            return PlayerInventory.Count + freeSpace <= maxInventorySize;
         }
 
         #endregion
@@ -89,6 +90,7 @@ namespace WeAreGladiators.Items
         [Header("Misc Stuff")]
         [SerializeField] private Transform dragParent;
 
+
         #endregion
 
         // Getters + Accessors
@@ -96,7 +98,7 @@ namespace WeAreGladiators.Items
 
         public GameObject VisualParent => visualParent;
         public Transform DragParent => dragParent;
-        public List<InventoryItem> Inventory { get; private set; } = new List<InventoryItem>();
+        public List<InventoryItem> PlayerInventory { get; private set; } = new List<InventoryItem>();
         public List<InventorySlot> AllInventorySlots => allInventorySlots;
 
         #endregion
@@ -106,11 +108,11 @@ namespace WeAreGladiators.Items
 
         public void SaveMyDataToSaveFile(SaveGameData saveData)
         {
-            saveData.inventory = Inventory;
+            saveData.inventory = PlayerInventory;
         }
         public void BuildMyDataFromSaveFile(SaveGameData saveData)
         {
-            Inventory = saveData.inventory;
+            PlayerInventory = saveData.inventory;
         }
 
         #endregion
@@ -120,10 +122,10 @@ namespace WeAreGladiators.Items
 
         public void BuildAndShowInventoryView()
         {
-            visualParent.gameObject.SetActive(true);
-            //rootCanvas.enabled = true;
-            BuildInventoryView();
-            UpdateMaxSlotsTexts();
+            //visualParent.gameObject.SetActive(true);
+            //BuildInventoryView();
+            //UpdateMaxSlotsTexts();
+            //BuildInventoryView();
         }
         public void HideInventoryView()
         {
@@ -139,7 +141,7 @@ namespace WeAreGladiators.Items
         public void RebuildInventoryView()
         {
             BuildInventoryView();
-            UpdateMaxSlotsTexts();
+            //UpdateMaxSlotsTexts();
         }
         private void BuildInventoryView()
         {
@@ -153,13 +155,13 @@ namespace WeAreGladiators.Items
                 s.Reset();
             }
 
-            // Always show at least 24 slots
-            for (int i = 0; i < 24; i++)
+            // Always show at least 100 slots
+            for (int i = 0; i < 100; i++)
             {
                 AllInventorySlots[i].Show();
             }
 
-            for (int i = 0; i < Inventory.Count; i++)
+            for (int i = 0; i < PlayerInventory.Count; i++)
             {
                 // Create a new slot if not enough available
                 if (i >= allInventorySlots.Count)
@@ -170,7 +172,7 @@ namespace WeAreGladiators.Items
                 }
                 allInventorySlots[i].Show();
 
-                BuildInventoryItemViewFromInventoryItemData(allInventoryItemViews[i], Inventory[i]);
+                BuildInventoryItemViewFromInventoryItemData(allInventoryItemViews[i], PlayerInventory[i]);
             }
         }
         private void BuildInventoryItemViewFromInventoryItemData(InventoryItemView view, InventoryItem item)
@@ -187,7 +189,6 @@ namespace WeAreGladiators.Items
             {
                 view.WeaponVisualParent.SetActive(true);
                 view.WeaponImage.sprite = item.itemData.ItemSprite;
-                view.RarityOutline.color = ColorLibrary.Instance.GetRarityColor(item.itemData.rarity);
             }
 
             if (TownController.Instance.ArmouryViewIsActive)
@@ -261,11 +262,11 @@ namespace WeAreGladiators.Items
             {
                 if (inventoryIndex >= 0)
                 {
-                    Inventory.Insert(inventoryIndex, item);
+                    PlayerInventory.Insert(inventoryIndex, item);
                 }
                 else
                 {
-                    Inventory.Add(item);
+                    PlayerInventory.Add(item);
                 }
             }
 
@@ -278,11 +279,11 @@ namespace WeAreGladiators.Items
                 InventoryItem inventoryItem = CreateInventoryItemFromItemData(item);
                 if (inventoryIndex >= 0)
                 {
-                    Inventory.Insert(inventoryIndex, inventoryItem);
+                    PlayerInventory.Insert(inventoryIndex, inventoryItem);
                 }
                 else
                 {
-                    Inventory.Add(inventoryItem);
+                    PlayerInventory.Add(inventoryItem);
                 }
             }
 
@@ -295,11 +296,11 @@ namespace WeAreGladiators.Items
                 InventoryItem inventoryItem = CreateInventoryItemAbilityData(ability);
                 if (inventoryIndex >= 0)
                 {
-                    Inventory.Insert(inventoryIndex, inventoryItem);
+                    PlayerInventory.Insert(inventoryIndex, inventoryItem);
                 }
                 else
                 {
-                    Inventory.Add(inventoryItem);
+                    PlayerInventory.Add(inventoryItem);
                 }
             }
 
@@ -307,9 +308,9 @@ namespace WeAreGladiators.Items
 
         public void RemoveItemFromInventory(InventoryItem item)
         {
-            if (Inventory.Contains(item))
+            if (PlayerInventory.Contains(item))
             {
-                Inventory.Remove(item);
+                PlayerInventory.Remove(item);
             }
         }
 

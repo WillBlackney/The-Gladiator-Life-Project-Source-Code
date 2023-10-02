@@ -14,6 +14,7 @@ namespace WeAreGladiators.Items
     {
         // Properties + Components
         #region
+        [SerializeField] private ItemGridScrollView myItemGrid;
 
         [Header("Ability Book Components")]
         [SerializeField] private GameObject bookVisualParent;
@@ -22,18 +23,16 @@ namespace WeAreGladiators.Items
         [Header("Item Components")]
         [SerializeField] private GameObject weaponVisualParent;
         [SerializeField] private Image weaponImage;
-        [SerializeField] private Image rarityOutline;
 
         [Header("Cost Components")]
         [SerializeField] private GameObject goldCostParent;
         [SerializeField] private TextMeshProUGUI goldCostText;
 
-        public static InventoryItemView itemDragged { get; private set; }
+        public static InventoryItemView ItemDragged { get; private set; }
 
         // Drag values
         [HideInInspector] public bool currentlyBeingDragged;
-        private Canvas dragCanvas;
-        private RectTransform dragTransform;
+        
 
         #endregion
 
@@ -46,7 +45,6 @@ namespace WeAreGladiators.Items
         public Image BookImage => bookImage;
         public GameObject WeaponVisualParent => weaponVisualParent;
         public Image WeaponImage => weaponImage;
-        public Image RarityOutline => rarityOutline;
         public InventoryItem MyItemRef { get; private set; }
 
         #endregion
@@ -57,7 +55,7 @@ namespace WeAreGladiators.Items
         public void RightClick()
         {
             Debug.Log("InventoryItemView.RightClick()");
-            if (itemDragged != null)
+            if (ItemDragged != null)
             {
                 return;
             }
@@ -128,7 +126,7 @@ namespace WeAreGladiators.Items
         public void MouseEnter()
         {
             Debug.Log("InventoryItemView.MouseEnter()");
-            if (itemDragged != null)
+            if (ItemDragged != null)
             {
                 return;
             }
@@ -144,7 +142,7 @@ namespace WeAreGladiators.Items
         public void MouseExit()
         {
             Debug.Log("InventoryItemView.MouseExit()");
-            if (itemDragged != null)
+            if (ItemDragged != null)
             {
                 return;
             }
@@ -162,7 +160,7 @@ namespace WeAreGladiators.Items
             if (currentlyBeingDragged)
             {
                 currentlyBeingDragged = false;
-                itemDragged = null;
+                ItemDragged = null;
                 HexCharacterData character = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
 
                 // Stop dragging SFX
@@ -180,7 +178,7 @@ namespace WeAreGladiators.Items
 
                     // Move item back towards slot position
                     Sequence s = DOTween.Sequence();
-                    InventorySlot slot = InventoryController.Instance.AllInventorySlots[InventoryController.Instance.Inventory.IndexOf(MyItemRef)];
+                    InventorySlot slot = myItemGrid.Slots[InventoryController.Instance.PlayerInventory.IndexOf(MyItemRef)];
                     s.Append(transform.DOMove(slot.transform.position, 0.25f));
 
                     // Re-parent self on arrival
@@ -192,7 +190,7 @@ namespace WeAreGladiators.Items
                 if (DragSuccessful())
                 {
                     // Snap drag item view back to inventory slot position
-                    InventorySlot slot = InventoryController.Instance.AllInventorySlots[InventoryController.Instance.Inventory.IndexOf(MyItemRef)];
+                    InventorySlot slot = myItemGrid.Slots[InventoryController.Instance.PlayerInventory.IndexOf(MyItemRef)];
 
                     Sequence s = DOTween.Sequence();
                     s.Append(transform.DOMove(slot.transform.position, 0f));
@@ -207,7 +205,8 @@ namespace WeAreGladiators.Items
                         // re build roster, inventory and model views
                         CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
                         CharacterScrollPanelController.Instance.RebuildViews();
-                        InventoryController.Instance.RebuildInventoryView();
+                        myItemGrid.BuildInventoryView();
+                        //InventoryController.Instance.RebuildInventoryView();
                     }
                     else if (MyItemRef.abilityData != null)
                     {
@@ -221,7 +220,7 @@ namespace WeAreGladiators.Items
                 {
                     // Move item back towards slot position
                     Sequence s = DOTween.Sequence();
-                    InventorySlot slot = InventoryController.Instance.AllInventorySlots[InventoryController.Instance.Inventory.IndexOf(MyItemRef)];
+                    InventorySlot slot = myItemGrid.Slots[InventoryController.Instance.PlayerInventory.IndexOf(MyItemRef)];
                     s.Append(transform.DOMove(slot.transform.position, 0.25f));
 
                     // Re-parent self on arrival
@@ -242,7 +241,7 @@ namespace WeAreGladiators.Items
             if (currentlyBeingDragged == false)
             {
                 currentlyBeingDragged = true;
-                itemDragged = this;
+                ItemDragged = this;
 
                 // Play dragging SFX
                 AudioManager.Instance.FadeInSound(Sound.UI_Dragging_Constant, 0.2f);
@@ -252,26 +251,32 @@ namespace WeAreGladiators.Items
             }
 
             // Unparent from vert fitter, so it wont be masked while dragging
-            transform.SetParent(InventoryController.Instance.DragParent);
+            //transform.SetParent(InventoryController.Instance.DragParent);
+            transform.SetParent(myItemGrid.DragTransform);
 
             // Get the needed components, if we dont have them already
+            /*
             if (dragCanvas == null)
             {
-                dragCanvas = InventoryController.Instance.VisualParent.GetComponent<Canvas>();
-            }
+                //dragCanvas = InventoryController.Instance.VisualParent.GetComponent<Canvas>();
+                dragCanvas = GetComponentInParent<Canvas>(true);
+                Debug.LogWarning("dragCanvas = " + dragCanvas.gameObject.name);
+            }*/
 
+            /*
             if (dragTransform == null)
             {
-                dragTransform = InventoryController.Instance.VisualParent.transform as RectTransform;
-            }
+                dragTransform = GetComponentInParent<Canvas>(true).transform as RectTransform;
+                Debug.LogWarning("dragTransform = " + dragTransform.gameObject.name);
+            }*/
 
             // Weird hoki poki magic for dragging in local space on a non screen overlay canvas
             Vector2 pos;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(dragTransform, Input.mousePosition,
-                dragCanvas.worldCamera, out pos);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(myItemGrid.DragTransform, Input.mousePosition,
+                myItemGrid.DragCanvas.worldCamera, out pos);
 
             // Follow the mouse
-            transform.position = dragCanvas.transform.TransformPoint(pos);
+            transform.position = myItemGrid.DragCanvas.transform.TransformPoint(pos);
 
         }
         private bool DragSuccessful()

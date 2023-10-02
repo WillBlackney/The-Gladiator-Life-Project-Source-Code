@@ -144,6 +144,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1810803562493506596}
     m_Modifications:
+    - target: {fileID: 3098703235173204467, guid: 97d4ac0dff8282141a25ccff8debabd5,
+        type: 3}
+      propertyPath: onClickEvents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5372134533846226550, guid: 97d4ac0dff8282141a25ccff8debabd5,
         type: 3}
       propertyPath: m_Name

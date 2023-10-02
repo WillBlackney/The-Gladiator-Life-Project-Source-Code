@@ -428,7 +428,7 @@ namespace WeAreGladiators.Items
             Debug.LogWarning("SOUND: " + equipSound);
 
             // remove new item from inventory
-            int index = InventoryController.Instance.Inventory.IndexOf(newItem);
+            int index = InventoryController.Instance.PlayerInventory.IndexOf(newItem);
             InventoryController.Instance.RemoveItemFromInventory(newItem);
 
             if (previousItem != null)

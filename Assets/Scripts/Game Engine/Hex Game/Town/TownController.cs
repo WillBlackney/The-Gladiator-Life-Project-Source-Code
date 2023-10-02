@@ -710,7 +710,7 @@ namespace WeAreGladiators.TownFeatures
             LibraryCharacterSlot.MyCharacterData.abilityBook.HandleLearnNewAbility(LibraryAbilitySlot.MyAbilityData);
 
             // Remove tome from inventory
-            foreach (InventoryItem i in InventoryController.Instance.Inventory)
+            foreach (InventoryItem i in InventoryController.Instance.PlayerInventory)
             {
                 if (i.abilityData != null &&
                     i.abilityData.abilityName == libraryAbilitySlot.MyAbilityData.abilityName)

@@ -107,7 +107,7 @@ namespace WeAreGladiators.Persistency
             TownController.Instance.GenerateDailyArmouryItems();
 
             // Inventory
-            InventoryController.Instance.Inventory.Clear();
+            InventoryController.Instance.PlayerInventory.Clear();
 
             // Score data
             ScoreController.Instance.GenerateGameStartValues();

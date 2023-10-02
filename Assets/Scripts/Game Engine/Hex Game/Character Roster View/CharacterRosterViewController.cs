@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Xml;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +21,7 @@ namespace WeAreGladiators.UI
         [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
         [SerializeField] private Scrollbar[] scrollBarResets;
+        [SerializeField] private ItemGridScrollView playerInventory;
         [Space(20)]
         [Header("Health Components")]
         [SerializeField] private TextMeshProUGUI healthBarText;
@@ -139,6 +139,19 @@ namespace WeAreGladiators.UI
 
         #endregion
 
+        #region Getters + Accessors
+
+        public UniversalCharacterModel CharacterPanelUcm => characterPanelUcm;
+        public HexCharacterData CharacterCurrentlyViewing { get; private set; }
+        public GameObject MainVisualParent => mainVisualParent;
+        public RosterItemSlot MainHandSlot => mainHandSlot;
+        public RosterItemSlot OffHandSLot => offHandSlot;
+        public RosterItemSlot HeadSlot => headSlot;
+        public RosterItemSlot BodySLot => bodySlot;
+        public RosterItemSlot TrinketSlot => trinketSlot;
+        public ItemGridScrollView PlayerInventory => playerInventory;
+        #endregion
+
         // Build Perk Section
         #region
 
@@ -185,19 +198,7 @@ namespace WeAreGladiators.UI
         }
        
 
-        // Getters + Accessors
-        #region
-
-        public UniversalCharacterModel CharacterPanelUcm => characterPanelUcm;
-        public HexCharacterData CharacterCurrentlyViewing { get; private set; }
-        public GameObject MainVisualParent => mainVisualParent;
-        public RosterItemSlot MainHandSlot => mainHandSlot;
-        public RosterItemSlot OffHandSLot => offHandSlot;
-        public RosterItemSlot HeadSlot => headSlot;
-        public RosterItemSlot BodySLot => bodySlot;
-        public RosterItemSlot TrinketSlot => trinketSlot;
-
-        #endregion
+       
 
         // Show + Hide Main View Logic
         #region
@@ -254,6 +255,7 @@ namespace WeAreGladiators.UI
             HexCharacterData data = CharacterDataController.Instance.AllPlayerCharacters[0];
             BuildRosterForCharacter(data);
             characterPanelUcm.SetIdleAnim();
+            playerInventory.BuildInventoryView();
         }
         public void HandleRedrawRosterOnCharacterUpdated()
         {
