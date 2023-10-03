@@ -89,7 +89,7 @@ namespace WeAreGladiators.UI
             }
             else
             {
-                PlacePanelWestOfAbilityIcon(b);
+                PlacePanelEastOfAbilityIcon(b);
             }
             TransformUtils.RebuildLayouts(transformsRebuilt);
             if (above)
@@ -98,7 +98,7 @@ namespace WeAreGladiators.UI
             }
             else
             {
-                PlacePanelWestOfAbilityIcon(b);
+                PlacePanelEastOfAbilityIcon(b);
             }
         }
 
@@ -165,12 +165,12 @@ namespace WeAreGladiators.UI
             mainPositioningRect.position = b.transform.position;
             mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x, mainPositioningRect.localPosition.y + yOffSet, 0);
         }
-        private void PlacePanelWestOfAbilityIcon(UIAbilityIcon b)
+        private void PlacePanelEastOfAbilityIcon(UIAbilityIcon b)
         {
             mainPositioningRect.position = b.transform.position;
             float xOffset = mainPositioningRect.rect.width / 2 + 40;
-            float yOffset = mainPositioningRect.rect.height - 100;
-            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x - xOffset, mainPositioningRect.localPosition.y - yOffset, 0);
+            float yOffset = mainPositioningRect.rect.height * 0.5f;
+            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x + xOffset, mainPositioningRect.localPosition.y - yOffset, 0);
         }
         private void PlacePanelAboveTransform(Transform b)
         {

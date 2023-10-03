@@ -37,7 +37,7 @@ namespace WeAreGladiators.Items
             slots.ForEach(slot => itemViews.Add(slot.MyItemView));
         }
 
-        public void BuildInventoryView()
+        public void BuildInventoryView(bool resetSliders = false)
         {
             GetItemViewsComponents();
 
@@ -68,7 +68,7 @@ namespace WeAreGladiators.Items
             }
 
             TransformUtils.RebuildLayouts(layoutsRebuilt);
-            ResetScrollView();
+            if(resetSliders) ResetScrollView();
         }
 
         private void BuildInventoryItemViewFromInventoryItemData(InventoryItemView view, InventoryItem item)

@@ -240,7 +240,7 @@ namespace WeAreGladiators.UI
             HexCharacterData data = CharacterDataController.Instance.AllPlayerCharacters[0];
             BuildRosterForCharacter(data);
             characterPanelUcm.SetIdleAnim();
-            playerInventory.BuildInventoryView();
+            playerInventory.BuildInventoryView(true);
         }
         public void HandleRedrawRosterOnCharacterUpdated()
         {
