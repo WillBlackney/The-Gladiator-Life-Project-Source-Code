@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
@@ -20,15 +21,16 @@ namespace WeAreGladiators.UI
 
         [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
-        [SerializeField] private Scrollbar[] scrollBarResets;
+        [SerializeField] private ScrollRect statsPageScrollView;
+        [SerializeField] private Scrollbar statsPageScrollBar;
         [SerializeField] private ItemGridScrollView playerInventory;
         [Space(20)]
         [Header("Health Components")]
         [SerializeField] private TextMeshProUGUI healthBarText;
-        [SerializeField] private Slider healthBar;
+        [SerializeField] private UnityEngine.UI.Slider healthBar;
         [Space(20)]
         [Header("Morale Components")]
-        [SerializeField] private Image moraleImage;
+        [SerializeField] private UnityEngine.UI.Image moraleImage;
         //[SerializeField] private TextMeshProUGUI moraleStateText;
 
         [Space(20)]
@@ -37,7 +39,7 @@ namespace WeAreGladiators.UI
         [SerializeField] private UIBackgroundIcon backgroundIcon;
         [SerializeField] private TextMeshProUGUI currentLevelText;
         [SerializeField] private TextMeshProUGUI xpBarText;
-        [SerializeField] private Slider xpbar;
+        [SerializeField] private UnityEngine.UI.Slider xpbar;
         [Space(20)]
         [Header("Level Up Components")]
         [SerializeField] private LevelUpButton attributeLevelUpButton;
@@ -101,15 +103,13 @@ namespace WeAreGladiators.UI
         [SerializeField] private TextMeshProUGUI debuffResistanceText;
         [SerializeField] private TextMeshProUGUI deathResistanceText;
         [Space(20)]
-        [Header("New Components")]
-        [SerializeField]
-        private CharacterRosterPageButton perkPageButton;
-        [SerializeField] private CharacterRosterPageButton talentPageButton;
-        [SerializeField] private CharacterRosterPageButton abilityPageButton;
 
-        [SerializeField] private GameObject perkPageParent;
-        [SerializeField] private GameObject talentPageParent;
-        [SerializeField] private GameObject abilityPageParent;
+        [Header("New Components")]
+        [SerializeField] private CharacterRosterPageButton perksTalentsPageButton;
+        [SerializeField] private CharacterRosterPageButton statsPageButton;
+
+        [SerializeField] private GameObject perksTalentsPageParent;
+        [SerializeField] private GameObject statsPageParent;
 
         [SerializeField] private TextMeshProUGUI perkPointsText;
         [SerializeField] private TextMeshProUGUI talentsPointsText;
@@ -173,13 +173,11 @@ namespace WeAreGladiators.UI
 
         // NEW LOGIC
 
-        public void OnTalentsPageButtonClicked()
+        public void OnPerksTalentsPageButtonClicked()
         {
-            perkPageParent.SetActive(false);
-            talentPageParent.SetActive(true);
-            abilityPageParent.SetActive(false);
-
-            talentPageButton.SetSelectedViewState(0.25f);
+            perksTalentsPageParent.SetActive(true);
+            statsPageParent.SetActive(false);
+            perksTalentsPageButton.SetSelectedViewState();
         }
        
 
@@ -213,10 +211,8 @@ namespace WeAreGladiators.UI
             }
             if (!mainVisualParent.activeInHierarchy)
             {
-                for (int i = 0; i < scrollBarResets.Length; i++)
-                {
-                    scrollBarResets[i].value = 1;
-                }
+                statsPageScrollView.verticalNormalizedPosition = 1;
+                statsPageScrollBar.value = 1;
             }
             mainVisualParent.SetActive(true);
             BuildRosterForCharacter(data);
@@ -231,10 +227,8 @@ namespace WeAreGladiators.UI
             }
             if (!mainVisualParent.activeInHierarchy)
             {
-                for (int i = 0; i < scrollBarResets.Length; i++)
-                {
-                    scrollBarResets[i].value = 1;
-                }
+                statsPageScrollView.verticalNormalizedPosition = 1;
+                statsPageScrollBar.value = 1;
             }
             mainVisualParent.SetActive(true);
             HexCharacterData data = CharacterDataController.Instance.AllPlayerCharacters[0];
@@ -269,8 +263,9 @@ namespace WeAreGladiators.UI
             BuildAbilitiesPage(data);
             BuildTalentsPage(data);
             BuildPerkPage(data);
-
-            OnPerksPageButtonClicked();
+            bool wasViewingPerks = perksTalentsPageParent.activeSelf;
+            if (wasViewingPerks) OnPerksTalentsPageButtonClicked();
+            else OnStatsPageButtonClicked();
 
         }
         public void HideCharacterRosterScreen()
@@ -320,6 +315,7 @@ namespace WeAreGladiators.UI
                 nextIndex = index - 1;
             }
             BuildRosterForCharacter(CharacterDataController.Instance.AllPlayerCharacters[nextIndex]);
+           
         }
         public void OnNextCharacterButtonClicked()
         {
@@ -491,13 +487,11 @@ namespace WeAreGladiators.UI
         // Perk Tree Section Logic
         #region
 
-        public void OnPerksPageButtonClicked()
+        public void OnStatsPageButtonClicked()
         {
-            perkPageParent.SetActive(true);
-            talentPageParent.SetActive(false);
-            abilityPageParent.SetActive(false);
-
-            perkPageButton.SetSelectedViewState(0.25f);
+            perksTalentsPageParent.SetActive(false);
+            statsPageParent.SetActive(true);
+            statsPageButton.SetSelectedViewState();
         }
         private void BuildPerkPage(HexCharacterData character)
         {
@@ -511,7 +505,7 @@ namespace WeAreGladiators.UI
                 perkLevelUpIcons[i].BuildFromCharacterAndPerkData(character, character.PerkTree.PerkChoices[i]);
             }
 
-            perkPageButton.ShowLevelUpIcon(character.perkPoints > 0);
+            perksTalentsPageButton.ShowLevelUpIcon(character.perkPoints > 0 || character.talentPoints > 0);
             perkPointsText.text = character.perkPoints.ToString();
         }
         public void OnPerkTreeIconClicked(UILevelUpPerkIcon icon)
@@ -596,14 +590,6 @@ namespace WeAreGladiators.UI
         // Build Abilities Section
         #region
 
-        public void OnAbilitiesPageButtonClicked()
-        {
-            perkPageParent.SetActive(false);
-            talentPageParent.SetActive(false);
-            abilityPageParent.SetActive(true);
-
-            abilityPageButton.SetSelectedViewState(0.25f);
-        }
         private void BuildAbilitiesPage(HexCharacterData character)
         {
             Debug.Log("CharacterRosterViewController.BuildAbilitiesSection() called...");
@@ -679,7 +665,7 @@ namespace WeAreGladiators.UI
                 talentLevelUpIcons[i].BuildFromCharacterAndTalentData(character, CharacterDataController.Instance.AllTalentData[i]);
             }
 
-            talentPageButton.ShowLevelUpIcon(character.talentPoints > 0);
+            perksTalentsPageButton.ShowLevelUpIcon(character.talentPoints > 0 || character.perkPoints > 0);
             talentsPointsText.text = character.talentPoints.ToString();
         }
         public void OnLevelUpTalentIconClicked(UILevelUpTalentIcon icon)
@@ -758,7 +744,15 @@ namespace WeAreGladiators.UI
 
             // Rebuild character scroll roster + normal roster
             CharacterScrollPanelController.Instance.RebuildViews();
-            HandleBuildAndShowCharacterRoster();
+            if(CharacterDataController.Instance.AllPlayerCharacters.Count > 0)
+            {
+                HandleBuildAndShowCharacterRoster();
+            }
+            else
+            {
+                HideCharacterRosterScreen();
+            }
+            
         }
         public void OnCancelDismissButtonClicked()
         {

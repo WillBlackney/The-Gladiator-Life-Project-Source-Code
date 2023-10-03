@@ -6,35 +6,24 @@ namespace WeAreGladiators.UI
 {
     public class CharacterRosterPageButton : MonoBehaviour
     {
-        [SerializeField] private Color normalColor;
-        [SerializeField] private Color selectedColor;
-        [SerializeField] private Image buttonBgImage;
-        [SerializeField] private Transform scalingParent;
+        [SerializeField] private GameObject selected;
         [SerializeField] private LevelUpButton levelUpButton;
 
         public static CharacterRosterPageButton selectedButton { get; private set; }
 
-        public void SetSelectedViewState(float speed)
+        public void SetSelectedViewState()
         {
             if (selectedButton != null)
             {
-                selectedButton.SetUnselectedViewState(speed);
+                selectedButton.SetUnselectedViewState();
             }
 
             selectedButton = this;
-            scalingParent.DOKill();
-            buttonBgImage.DOKill();
-
-            scalingParent.DOScale(1.1f, speed);
-            buttonBgImage.DOColor(selectedColor, speed);
+            selected.SetActive(true);
         }
-        public void SetUnselectedViewState(float speed)
+        public void SetUnselectedViewState()
         {
-            scalingParent.DOKill();
-            buttonBgImage.DOKill();
-
-            scalingParent.DOScale(1f, speed);
-            buttonBgImage.DOColor(normalColor, speed);
+            selected.SetActive(false);
         }
         public void ShowLevelUpIcon(bool onOrOff)
         {

@@ -27,7 +27,7 @@ namespace WeAreGladiators.Items
         [SerializeField] private Scrollbar scrollBar;
 
         private List<InventoryItemView> itemViews = new List<InventoryItemView>();
-        public List<InventorySlot> Slots  => slots;
+        public List<InventorySlot> Slots => slots;
         public Canvas DragCanvas => dragCanvas;
         public RectTransform DragTransform => dragCanvas.transform as RectTransform;
 
@@ -68,7 +68,7 @@ namespace WeAreGladiators.Items
             }
 
             TransformUtils.RebuildLayouts(layoutsRebuilt);
-            if(resetSliders) ResetScrollView();
+            if (resetSliders) ResetScrollView();
         }
 
         private void BuildInventoryItemViewFromInventoryItemData(InventoryItemView view, InventoryItem item)
@@ -105,6 +105,12 @@ namespace WeAreGladiators.Items
         private void OnEnable()
         {
             ResetScrollView();
+            SetVerticalScrolling(true);
+        }
+
+        public void SetVerticalScrolling(bool onOrOff)
+        {
+            scrollView.vertical = onOrOff;
         }
 
 

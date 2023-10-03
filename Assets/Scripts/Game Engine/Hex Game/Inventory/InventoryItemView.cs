@@ -157,6 +157,7 @@ namespace WeAreGladiators.Items
 
         private void OnMouseUp()
         {
+            myItemGrid.SetVerticalScrolling(true);
             if (currentlyBeingDragged)
             {
                 currentlyBeingDragged = false;
@@ -235,6 +236,8 @@ namespace WeAreGladiators.Items
             {
                 return;
             }
+
+            myItemGrid.SetVerticalScrolling(false);
 
             // On drag start logic
             if (currentlyBeingDragged == false)

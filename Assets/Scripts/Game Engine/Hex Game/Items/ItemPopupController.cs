@@ -166,7 +166,7 @@ namespace WeAreGladiators.Items
             float yOffset = 0;
 
             rect.position = view.transform.position;
-            rect.localPosition = new Vector3(rect.localPosition.x - xOffset, rect.localPosition.y - yOffset, 0);
+            rect.localPosition = new Vector3(rect.localPosition.x + xOffset, rect.localPosition.y - yOffset, 0);
         }
         private void PlacePanelAtShopItemSlotPosition(ItemShopSlot view)
         {
@@ -180,8 +180,8 @@ namespace WeAreGladiators.Items
         private void PlacePanelAtRosterItemSlotPosition(RosterItemSlot view)
         {
             RectTransform rect = visualParent.GetComponent<RectTransform>();
-            float xOffset = rect.rect.width / 2 + 40;
-            float yOffset = 25 + rect.rect.height;
+            float xOffset = rect.rect.width / 2 + 80;
+            float yOffset = rect.rect.height * 0.5f;//25; //25 + rect.rect.height;
 
             rect.position = view.transform.position;
             rect.localPosition = new Vector3(rect.localPosition.x + xOffset, rect.localPosition.y + yOffset, 0);
