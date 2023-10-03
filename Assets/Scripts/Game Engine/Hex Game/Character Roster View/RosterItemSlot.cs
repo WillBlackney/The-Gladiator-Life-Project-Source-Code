@@ -7,36 +7,36 @@ namespace WeAreGladiators.UI
 {
     public class RosterItemSlot : MonoBehaviour
     {
+        #region Properties + Components
+
+        [SerializeField] private Image itemImage;
+        [SerializeField] private GameObject itemViewParent;
+        [SerializeField] private ItemData itemDataRef;
+        [SerializeField] private RosterSlotType slotType;
+
+        #endregion
 
         // Misc
         #region
 
         public void SetMyDataReference(ItemData data)
         {
-            slotTypeImage.gameObject.SetActive(false);
+            itemViewParent.SetActive(true);
             if (data == null)
             {
-                slotTypeImage.gameObject.SetActive(true);
+                itemViewParent.SetActive(false);
             }
             itemDataRef = data;
         }
 
-        #endregion
-        // Properties + Components
-        #region
-
-        [SerializeField] private Image itemImage;
-        [SerializeField] private ItemData itemDataRef;
-        [SerializeField] private RosterSlotType slotType;
-        [SerializeField] private Image slotTypeImage;
-
-        #endregion
+        #endregion        
 
         // Getters + Accessors
         #region
 
         public static RosterItemSlot SlotMousedOver { get; private set; }
         public Image ItemImage => itemImage;
+        public GameObject ItemViewParent => itemViewParent;
         public ItemData ItemDataRef => itemDataRef;
         public RosterSlotType SlotType => slotType;
 

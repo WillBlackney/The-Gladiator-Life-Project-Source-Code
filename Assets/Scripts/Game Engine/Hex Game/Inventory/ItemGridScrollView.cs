@@ -27,7 +27,6 @@ namespace WeAreGladiators.Items
         [SerializeField] private Scrollbar scrollBar;
 
         private List<InventoryItemView> itemViews = new List<InventoryItemView>();
-
         public List<InventorySlot> Slots  => slots;
         public Canvas DragCanvas => dragCanvas;
         public RectTransform DragTransform => dragCanvas.transform as RectTransform;
@@ -37,7 +36,6 @@ namespace WeAreGladiators.Items
             itemViews.Clear();
             slots.ForEach(slot => itemViews.Add(slot.MyItemView));
         }
-
 
         public void BuildInventoryView()
         {

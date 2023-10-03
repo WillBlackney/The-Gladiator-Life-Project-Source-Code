@@ -27,9 +27,10 @@ namespace WeAreGladiators.UI
         [SerializeField] private TextMeshProUGUI healthBarText;
         [SerializeField] private Slider healthBar;
         [Space(20)]
-        [Header("Stress Components")]
+        [Header("Morale Components")]
         [SerializeField] private Image moraleImage;
-        [SerializeField] private TextMeshProUGUI moraleStateText;
+        //[SerializeField] private TextMeshProUGUI moraleStateText;
+
         [Space(20)]
         [Header("XP + Level Components")]
         [SerializeField] private UIRaceIcon racialIcon;
@@ -51,7 +52,7 @@ namespace WeAreGladiators.UI
         [Header("Abilities Section Components")]
         [SerializeField] private List<UIAbilityIconSelectable> selectableAbilityButtons;
         [SerializeField] private GameObject selectableAbilityButtonPrefab;
-        [SerializeField] private TextMeshProUGUI activeAbilitiesText;
+        //[SerializeField] private TextMeshProUGUI activeAbilitiesText;
         [SerializeField] private Transform selectableAbilityButtonsParent;
         [Space(20)]
         [Header("Talent Section Components")]
@@ -75,34 +76,18 @@ namespace WeAreGladiators.UI
         [SerializeField] private TextMeshProUGUI dailyWageText;
         [Space(20)]
         [Header("Core Attribute Components")]
-        [SerializeField] private TextMeshProUGUI mightText;
-        [SerializeField] private GameObject[] mightStars;
-        [Space(10)]
-        [SerializeField] private TextMeshProUGUI constitutionText;
-        [SerializeField] private GameObject[] constitutionStars;
-        [Space(10)]
-        [SerializeField] private TextMeshProUGUI accuracyText;
-        [SerializeField] private GameObject[] accuracyStars;
-        [Space(10)]
-        [SerializeField] private TextMeshProUGUI dodgeText;
-        [SerializeField] private GameObject[] dodgeStars;
-        [Space(10)]
-        [SerializeField] private TextMeshProUGUI resolveText;
-        [SerializeField] private GameObject[] resolveStars;
-        [Space(10)]
-        [SerializeField] private TextMeshProUGUI witsText;
-        [SerializeField] private GameObject[] witsStars;
-        [Space(20)]
-        [SerializeField] private TextMeshProUGUI fitnessText;
-        [SerializeField] private GameObject[] fitnessStars;
+        [SerializeField] private UIAttributeSlider accuracySlider;
+        [SerializeField] private UIAttributeSlider dodgeSlider;
+        [SerializeField] private UIAttributeSlider constitutionSlider;
+        [SerializeField] private UIAttributeSlider mightSlider;
+        [SerializeField] private UIAttributeSlider resolveSlider;
+        [SerializeField] private UIAttributeSlider witsSlider;
         [Space(20)]
         [Header("Secondary Attribute Text Components")]
         [SerializeField] private TextMeshProUGUI criticalChanceText;
         [SerializeField] private TextMeshProUGUI criticalModifierText;
         [SerializeField] private TextMeshProUGUI energyRecoveryText;
         [SerializeField] private TextMeshProUGUI maxEnergyText;
-        [SerializeField] private TextMeshProUGUI maxFatigueText;
-        [SerializeField] private TextMeshProUGUI fatigueRecoveryText;
         [SerializeField] private TextMeshProUGUI initiativeText;
         [SerializeField] private TextMeshProUGUI visionText;
         [SerializeField] private TextMeshProUGUI physicalDamageText;
@@ -383,23 +368,12 @@ namespace WeAreGladiators.UI
 
         private void BuildAttributeSection(HexCharacterData character)
         {
-            mightText.text = StatCalculator.GetTotalMight(character).ToString();
-            BuildStars(mightStars, character.attributeSheet.might.stars);
-
-            constitutionText.text = StatCalculator.GetTotalConstitution(character).ToString();
-            BuildStars(constitutionStars, character.attributeSheet.constitution.stars);
-
-            accuracyText.text = StatCalculator.GetTotalAccuracy(character).ToString();
-            BuildStars(accuracyStars, character.attributeSheet.accuracy.stars);
-
-            dodgeText.text = StatCalculator.GetTotalDodge(character).ToString();
-            BuildStars(dodgeStars, character.attributeSheet.dodge.stars);
-
-            resolveText.text = StatCalculator.GetTotalResolve(character).ToString();
-            BuildStars(resolveStars, character.attributeSheet.resolve.stars);
-
-            witsText.text = StatCalculator.GetTotalWits(character).ToString();
-            BuildStars(witsStars, character.attributeSheet.wits.stars);
+            accuracySlider.Build(StatCalculator.GetTotalAccuracy(character), character.attributeSheet.accuracy.stars);
+            dodgeSlider.Build(StatCalculator.GetTotalDodge(character), character.attributeSheet.dodge.stars);
+            constitutionSlider.Build(StatCalculator.GetTotalConstitution(character), character.attributeSheet.constitution.stars);
+            mightSlider.Build(StatCalculator.GetTotalMight(character), character.attributeSheet.might.stars);
+            resolveSlider.Build(StatCalculator.GetTotalResolve(character), character.attributeSheet.resolve.stars);
+            witsSlider.Build(StatCalculator.GetTotalWits(character), character.attributeSheet.wits.stars);
 
             criticalChanceText.text = StatCalculator.GetTotalCriticalChance(character) + "%";
             criticalModifierText.text = StatCalculator.GetTotalCriticalModifier(character) + "%";
@@ -425,20 +399,7 @@ namespace WeAreGladiators.UI
             {
                 attributeLevelUpButton.Hide();
             }
-        }
-        private void BuildStars(GameObject[] arr, int starCount)
-        {
-            // Reset
-            for (int i = 0; i < arr.Length; i++)
-            {
-                arr[i].gameObject.SetActive(false);
-            }
-
-            for (int i = 0; i < starCount; i++)
-            {
-                arr[i].gameObject.SetActive(true);
-            }
-        }
+        }       
 
         #endregion
 
@@ -480,7 +441,7 @@ namespace WeAreGladiators.UI
         private void BuildMoraleSection(HexCharacterData character)
         {
             moraleImage.sprite = SpriteLibrary.Instance.GetMoraleStateSprite(character.currentMoraleState);
-            moraleStateText.text = character.currentMoraleState.ToString();
+           // moraleStateText.text = character.currentMoraleState.ToString();
         }
 
         #endregion
@@ -517,11 +478,11 @@ namespace WeAreGladiators.UI
             }
             slot.SetMyDataReference(item);
             slot.ItemImage.sprite = item.ItemSprite;
-            slot.ItemImage.gameObject.SetActive(true);
+            slot.ItemViewParent.SetActive(true);
         }
         private void ResetItemSlot(RosterItemSlot slot)
         {
-            slot.ItemImage.gameObject.SetActive(false);
+            slot.ItemViewParent.SetActive(false);
             slot.SetMyDataReference(null);
         }
 
@@ -653,6 +614,8 @@ namespace WeAreGladiators.UI
                 b.Hide();
             }
 
+            bool showSelectionState = character.abilityBook.knownAbilities.Count > AbilityBook.ActiveAbilityLimit;
+
             for (int i = 0; i < character.abilityBook.knownAbilities.Count; i++)
             {
                 if (selectableAbilityButtons.Count < character.abilityBook.knownAbilities.Count)
@@ -663,12 +626,12 @@ namespace WeAreGladiators.UI
                 }
 
                 bool active = character.abilityBook.activeAbilities.Contains(character.abilityBook.knownAbilities[i]);
-                selectableAbilityButtons[i].Build(character.abilityBook.knownAbilities[i], active);
+                selectableAbilityButtons[i].Build(character.abilityBook.knownAbilities[i], active, showSelectionState);
             }
 
             // Update active abilities text
-            activeAbilitiesText.text = character.abilityBook.activeAbilities.Count +
-                " / " + AbilityBook.ActiveAbilityLimit;
+            //activeAbilitiesText.text = character.abilityBook.activeAbilities.Count +
+            //    " / " + AbilityBook.ActiveAbilityLimit;
 
         }
         public void OnSelectableAbilityButtonClicked(UIAbilityIconSelectable button)
@@ -676,13 +639,15 @@ namespace WeAreGladiators.UI
             AbilityBook book = CharacterCurrentlyViewing.abilityBook;
             AbilityData ability = button.icon.MyDataRef;
 
+            if (book.activeAbilities.Count <= AbilityBook.ActiveAbilityLimit) return;
+
             // Make inactive ability go active
             if (!book.HasActiveAbility(ability.abilityName) &&
                 book.activeAbilities.Count < AbilityBook.ActiveAbilityLimit)
             {
                 CharacterCurrentlyViewing.abilityBook.SetAbilityAsActive(book.GetKnownAbility(ability.abilityName));
                 button.SetSelectedViewState(true);
-                activeAbilitiesText.text = book.activeAbilities.Count + " / " + AbilityBook.ActiveAbilityLimit;
+               // activeAbilitiesText.text = book.activeAbilities.Count + " / " + AbilityBook.ActiveAbilityLimit;
             }
 
             // Make active ability go inactive
@@ -692,7 +657,7 @@ namespace WeAreGladiators.UI
             {
                 CharacterCurrentlyViewing.abilityBook.SetAbilityAsInactive(book.GetKnownAbility(ability.abilityName));
                 button.SetSelectedViewState(false);
-                activeAbilitiesText.text = book.activeAbilities.Count + " / " + AbilityBook.ActiveAbilityLimit;
+                //activeAbilitiesText.text = book.activeAbilities.Count + " / " + AbilityBook.ActiveAbilityLimit;
             }
         }
 

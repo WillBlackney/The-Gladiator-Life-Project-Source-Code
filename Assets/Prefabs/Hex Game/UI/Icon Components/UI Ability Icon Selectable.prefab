@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5606c3a70a27834d8876ea88edcc8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectStateParent: {fileID: 1615641597831747832}
   selectedParent: {fileID: 1615641597671981068}
   unselectedParent: {fileID: 1615641599271842319}
   icon: {fileID: 3761898448524937730}
@@ -146,7 +147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1615641597831747833
 RectTransform:
   m_ObjectHideFlags: 0

@@ -5,6 +5,14 @@ namespace WeAreGladiators.UI
 {
     public class UIAbilityIconSelectable : MonoBehaviour
     {
+        #region Properties + Components
+
+        [SerializeField] private GameObject selectStateParent;
+        [SerializeField] private GameObject selectedParent;
+        [SerializeField] private GameObject unselectedParent;
+        public UIAbilityIcon icon;
+
+        #endregion
         public void OnClick()
         {
             CharacterRosterViewController.Instance.OnSelectableAbilityButtonClicked(this);
@@ -13,13 +21,19 @@ namespace WeAreGladiators.UI
         public void Hide()
         {
             gameObject.SetActive(false);
+            selectStateParent.SetActive(false);
         }
 
-        public void Build(AbilityData data, bool selected)
+        public void Build(AbilityData data, bool selected, bool showSelectionState)
         {
+            selectStateParent.SetActive(false);
             gameObject.SetActive(true);
             icon.BuildFromAbilityData(data);
-            SetSelectedViewState(selected);
+            if (showSelectionState)
+            {
+                selectStateParent.SetActive(true);
+                SetSelectedViewState(selected);
+            }
         }
         public void SetSelectedViewState(bool selected)
         {
@@ -34,13 +48,7 @@ namespace WeAreGladiators.UI
                 unselectedParent.SetActive(true);
             }
         }
-        #region Properties + Components
-
-        [SerializeField] private GameObject selectedParent;
-        [SerializeField] private GameObject unselectedParent;
-        public UIAbilityIcon icon;
-
-        #endregion
+      
 
         #region Getters + Accessors
 

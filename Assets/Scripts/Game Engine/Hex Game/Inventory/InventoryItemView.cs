@@ -119,7 +119,7 @@ namespace WeAreGladiators.Items
                 // Rebuild roster, inventory and model views
                 CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
                 CharacterScrollPanelController.Instance.RebuildViews();
-                InventoryController.Instance.RebuildInventoryView();
+                myItemGrid.BuildInventoryView();
             }
 
         }
@@ -206,7 +206,6 @@ namespace WeAreGladiators.Items
                         CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
                         CharacterScrollPanelController.Instance.RebuildViews();
                         myItemGrid.BuildInventoryView();
-                        //InventoryController.Instance.RebuildInventoryView();
                     }
                     else if (MyItemRef.abilityData != null)
                     {
@@ -250,25 +249,7 @@ namespace WeAreGladiators.Items
                 ItemPopupController.Instance.HidePanel();
             }
 
-            // Unparent from vert fitter, so it wont be masked while dragging
-            //transform.SetParent(InventoryController.Instance.DragParent);
             transform.SetParent(myItemGrid.DragTransform);
-
-            // Get the needed components, if we dont have them already
-            /*
-            if (dragCanvas == null)
-            {
-                //dragCanvas = InventoryController.Instance.VisualParent.GetComponent<Canvas>();
-                dragCanvas = GetComponentInParent<Canvas>(true);
-                Debug.LogWarning("dragCanvas = " + dragCanvas.gameObject.name);
-            }*/
-
-            /*
-            if (dragTransform == null)
-            {
-                dragTransform = GetComponentInParent<Canvas>(true).transform as RectTransform;
-                Debug.LogWarning("dragTransform = " + dragTransform.gameObject.name);
-            }*/
 
             // Weird hoki poki magic for dragging in local space on a non screen overlay canvas
             Vector2 pos;
