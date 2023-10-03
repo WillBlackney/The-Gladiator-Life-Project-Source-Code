@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using WeAreGladiators.Abilities;
@@ -24,6 +25,7 @@ namespace WeAreGladiators.UI
         [SerializeField] private ScrollRect statsPageScrollView;
         [SerializeField] private Scrollbar statsPageScrollBar;
         [SerializeField] private ItemGridScrollView playerInventory;
+        [SerializeField] private RectTransform[] layoutsRebuilt;
         [Space(20)]
         [Header("Health Components")]
         [SerializeField] private TextMeshProUGUI healthBarText;
@@ -122,6 +124,8 @@ namespace WeAreGladiators.UI
 
         private bool currentlyEditingName;
 
+        private InventoryItemView currentSelectedAbilityTome;
+
         #endregion
 
         #region Getters + Accessors
@@ -178,10 +182,8 @@ namespace WeAreGladiators.UI
             perksTalentsPageParent.SetActive(true);
             statsPageParent.SetActive(false);
             perksTalentsPageButton.SetSelectedViewState();
-        }
-       
-
-       
+        }  
+              
 
         // Show + Hide Main View Logic
         #region
@@ -261,12 +263,15 @@ namespace WeAreGladiators.UI
             BuildItemSlots(data);
             BuildCharacterViewPanelModel(data);
             BuildAbilitiesPage(data);
-            BuildTalentsPage(data);
-            BuildPerkPage(data);
+            BuildPerksAndTalentsPage(data);
             bool wasViewingPerks = perksTalentsPageParent.activeSelf;
             if (wasViewingPerks) OnPerksTalentsPageButtonClicked();
             else OnStatsPageButtonClicked();
 
+            perksTalentsPageButton.ShowLevelUpIcon(CharacterCurrentlyViewing.talentPoints > 0 || CharacterCurrentlyViewing.perkPoints > 0);
+            statsPageButton.ShowLevelUpIcon(CharacterCurrentlyViewing.attributeRolls.Count > 0);
+
+            TransformUtils.RebuildLayouts(layoutsRebuilt);
         }
         public void HideCharacterRosterScreen()
         {
@@ -493,7 +498,7 @@ namespace WeAreGladiators.UI
             statsPageParent.SetActive(true);
             statsPageButton.SetSelectedViewState();
         }
-        private void BuildPerkPage(HexCharacterData character)
+        private void BuildPerksAndTalentsPage(HexCharacterData character)
         {
             if (character.PerkTree == null)
             {
@@ -505,8 +510,20 @@ namespace WeAreGladiators.UI
                 perkLevelUpIcons[i].BuildFromCharacterAndPerkData(character, character.PerkTree.PerkChoices[i]);
             }
 
-            perksTalentsPageButton.ShowLevelUpIcon(character.perkPoints > 0 || character.talentPoints > 0);
             perkPointsText.text = character.perkPoints.ToString();
+
+            // reset buttons
+            foreach (UILevelUpTalentIcon b in talentLevelUpIcons)
+            {
+                b.HideAndReset();
+            }
+
+            for (int i = 0; i < CharacterDataController.Instance.AllTalentData.Length && i < talentLevelUpIcons.Length; i++)
+            {
+                talentLevelUpIcons[i].BuildFromCharacterAndTalentData(character, CharacterDataController.Instance.AllTalentData[i]);
+            }
+
+            talentsPointsText.text = character.talentPoints.ToString();
         }
         public void OnPerkTreeIconClicked(UILevelUpPerkIcon icon)
         {
@@ -523,6 +540,7 @@ namespace WeAreGladiators.UI
 
             currentSelectedLevelUpPerkChoice = icon;
             currentSelectedLevelUpTalentChoice = null;
+            currentSelectedAbilityTome = null;
 
             // Build and show confirm perk choice
             perkLevelUpConfirmChoiceScreenParent.SetActive(true);
@@ -534,6 +552,40 @@ namespace WeAreGladiators.UI
                 TextLogic.ConvertCustomStringListToString(icon.perkIcon.PerkDataRef.passiveDescription),
                 icon.perkIcon.PerkDataRef.passiveSprite);
         }
+        public void OnAbilityTomeRightClicked(InventoryItemView abilityTome)
+        {
+            // check that current user is valid
+            var ability = abilityTome.MyItemRef.abilityData;
+
+            // Doesn't meet talent req
+            if (!CharacterDataController.Instance.DoesCharacterHaveTalent(CharacterCurrentlyViewing.talentPairings,
+                    ability.talentRequirementData.talentSchool, ability.talentRequirementData.level))
+            {
+                // to do: warning guidance "this character does not have the required talent"
+                return;
+            }
+
+            // Already knows the ability
+            else if (CharacterCurrentlyViewing.abilityBook.KnowsAbility(ability.abilityName))
+            {
+                // to do: warning guidance "this character already knows this ability"
+                return;
+            }
+
+            currentSelectedAbilityTome = abilityTome;
+            currentSelectedLevelUpPerkChoice = null;
+            currentSelectedLevelUpTalentChoice = null;
+
+            // Build and show confirm perk choice
+            perkLevelUpConfirmChoiceScreenParent.SetActive(true);
+            perkLevelUpConfirmChoiceScreenHeaderText.text = "Are you sure you want to learn this ability?";
+
+            // Build page card
+            perkLevelUpScreenUICard.BuildCard(
+                ability.displayedName,
+                TextLogic.ConvertCustomStringListToString(ability.dynamicDescription),
+                ability.AbilitySprite);
+        }
         public void OnConfirmLevelUpPerkPageConfirmButtonClicked()
         {
             HexCharacterData character = null;
@@ -543,37 +595,56 @@ namespace WeAreGladiators.UI
             {
                 perk = currentSelectedLevelUpPerkChoice;
                 character = currentSelectedLevelUpPerkChoice.myCharacter;
+
+                // Gain perk 
+                if (perk != null)
+                {
+                    // Pay perk point + increment perk tree tier
+                    character.perkPoints--;
+                    character.PerkTree.nextAvailableTier += 1;
+
+                    // Learn new perk
+                    PerkController.Instance.ModifyPerkOnCharacterData(character.passiveManager, currentSelectedLevelUpPerkChoice.perkIcon.ActivePerk.perkTag, 1);
+                }
             }
             else if (currentSelectedLevelUpTalentChoice != null)
             {
                 talent = currentSelectedLevelUpTalentChoice;
                 character = currentSelectedLevelUpTalentChoice.myCharacter;
+
+                // Learn talent
+                if (talent != null)
+                {
+                    character.talentPoints--;
+                    CharacterDataController.Instance.HandleLearnNewTalent(character, talent.myTalentData.talentSchool);
+                }
             }
 
-            // Gain perk 
-            if (perk != null)
+            else if (currentSelectedAbilityTome != null)
             {
-                // Pay perk point + increment perk tree tier
-                character.perkPoints--;
-                character.PerkTree.nextAvailableTier += 1;
+                // Teach ability to character
+                CharacterCurrentlyViewing.abilityBook.HandleLearnNewAbility(currentSelectedAbilityTome.MyItemRef.abilityData);
 
-                // Learn new perk
-                PerkController.Instance.ModifyPerkOnCharacterData(character.passiveManager, currentSelectedLevelUpPerkChoice.perkIcon.ActivePerk.perkTag, 1);
-            }
-
-            // Learn talent
-            if (talent != null)
-            {
-                character.talentPoints--;
-                CharacterDataController.Instance.HandleLearnNewTalent(character, talent.myTalentData.talentSchool);
-            }
+                // Remove tome from inventory
+                foreach (InventoryItem i in InventoryController.Instance.PlayerInventory)
+                {
+                    if (i.abilityData != null &&
+                        i.abilityData.abilityName == currentSelectedAbilityTome.MyItemRef.abilityData.abilityName)
+                    {
+                        InventoryController.Instance.RemoveItemFromInventory(i);
+                        break;
+                    }
+                }
+            }                         
 
             // Close views
             perkLevelUpConfirmChoiceScreenParent.SetActive(false);
             currentSelectedLevelUpPerkChoice = null;
             currentSelectedLevelUpTalentChoice = null;
+            currentSelectedAbilityTome = null;
 
             // Rebuild character roster views
+            playerInventory.BuildInventoryView();
             AudioManager.Instance.PlaySound(Sound.Effects_Confirm_Level_Up);
             HandleRedrawRosterOnCharacterUpdated();
             CharacterScrollPanelController.Instance.RebuildViews();
@@ -583,6 +654,7 @@ namespace WeAreGladiators.UI
             perkLevelUpConfirmChoiceScreenParent.SetActive(false);
             currentSelectedLevelUpPerkChoice = null;
             currentSelectedLevelUpTalentChoice = null;
+            currentSelectedAbilityTome = null;
         }
 
         #endregion
@@ -649,25 +721,9 @@ namespace WeAreGladiators.UI
 
         #endregion
 
-        // Build Talent Section Parent
-        #region
 
-        private void BuildTalentsPage(HexCharacterData character)
-        {
-            // reset buttons
-            foreach (UILevelUpTalentIcon b in talentLevelUpIcons)
-            {
-                b.HideAndReset();
-            }
+        #region Build Talent Section Parent
 
-            for (int i = 0; i < CharacterDataController.Instance.AllTalentData.Length && i < talentLevelUpIcons.Length; i++)
-            {
-                talentLevelUpIcons[i].BuildFromCharacterAndTalentData(character, CharacterDataController.Instance.AllTalentData[i]);
-            }
-
-            perksTalentsPageButton.ShowLevelUpIcon(character.talentPoints > 0 || character.perkPoints > 0);
-            talentsPointsText.text = character.talentPoints.ToString();
-        }
         public void OnLevelUpTalentIconClicked(UILevelUpTalentIcon icon)
         {
             if (icon.alreadyKnown ||
@@ -678,6 +734,7 @@ namespace WeAreGladiators.UI
 
             currentSelectedLevelUpTalentChoice = icon;
             currentSelectedLevelUpPerkChoice = null;
+            currentSelectedAbilityTome = null;
 
             // Build and show confirm perk choice
             perkLevelUpConfirmChoiceScreenParent.SetActive(true);

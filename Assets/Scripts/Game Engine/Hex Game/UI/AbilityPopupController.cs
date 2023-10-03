@@ -184,7 +184,7 @@ namespace WeAreGladiators.UI
             mainPositioningRect.position = item.transform.position;
             float xOffset = mainPositioningRect.rect.width / 2 + 80;
             float yOffset = mainPositioningRect.rect.height - 100;
-            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x - xOffset, mainPositioningRect.localPosition.y - yOffset, 0);
+            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x + xOffset, mainPositioningRect.localPosition.y - yOffset, 0);
         }
         private void PlacePanelOnAbilityTomeShopSlotPosition(AbilityTomeShopSlot slot)
         {

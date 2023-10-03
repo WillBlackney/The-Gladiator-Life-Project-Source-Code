@@ -60,16 +60,23 @@ namespace WeAreGladiators.Items
                 return;
             }
 
+            /*
             // TRY SELL
             if (TownController.Instance.ArmouryViewIsActive && !CharacterRosterViewController.Instance.MainVisualParent.activeSelf)
             {
                 ItemController.Instance.HandleSellItemToArmoury(MyItemRef);
                 return;
-            }
+            }*/
 
             // TRY EQUIP
-            if (MyItemRef.itemData == null)
+            if (MyItemRef.itemData == null && MyItemRef.abilityData == null)
             {
+                return;
+            }
+
+            if(MyItemRef.abilityData != null)
+            {
+                CharacterRosterViewController.Instance.OnAbilityTomeRightClicked(this);
                 return;
             }
             HexCharacterData character = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
@@ -158,6 +165,8 @@ namespace WeAreGladiators.Items
         private void OnMouseUp()
         {
             myItemGrid.SetVerticalScrolling(true);
+            if (MyItemRef == null || (MyItemRef != null && MyItemRef.abilityData != null)) return;
+
             if (currentlyBeingDragged)
             {
                 currentlyBeingDragged = false;
@@ -232,7 +241,7 @@ namespace WeAreGladiators.Items
         {
             Debug.Log("InventoryItemView.Drag()");
             //if (myItemRef == null || myItemRef.itemData == null) return;
-            if (MyItemRef == null)
+            if (MyItemRef == null || (MyItemRef != null && MyItemRef.abilityData != null))
             {
                 return;
             }
