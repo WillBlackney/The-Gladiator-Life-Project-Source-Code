@@ -461,73 +461,7 @@ namespace WeAreGladiators.TownFeatures
             hospitalUCM.SetIdleAnim();
             hospitalPageVisualParent.SetActive(true);            
             BuildHospitalViewsForCharacter(CharacterDataController.Instance.AllPlayerCharacters[0]);           
-        }
-       
-        public void HandleDropCharacterOnHospitalSlot(HospitalDropSlot slot, HexCharacterData draggedCharacter)
-        {
-            Debug.Log("TownController.HandleDropCharacterOnHospitalSlot");
-
-            // check slot available and player has enough gold
-            if (slot.Available && RunController.Instance.CurrentGold >= HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType))
-            {
-                // Validation
-                // Cant heal characters already at full health
-                if (slot.FeatureType == TownActivity.BedRest && draggedCharacter.currentHealth >= StatCalculator.GetTotalMaxHealth(draggedCharacter))
-                {
-                    return;
-                }
-
-                // Cant stress heal characters already at 0 stress
-                if (slot.FeatureType == TownActivity.Therapy && (int) draggedCharacter.currentMoraleState >= 5)
-                {
-                    return;
-                }
-
-                // Cant remove injuries if character has none
-                if (slot.FeatureType == TownActivity.Surgery && !PerkController.Instance.IsCharacteInjured(draggedCharacter.passiveManager))
-                {
-                    return;
-                }
-
-                AudioManager.Instance.PlaySound(Sound.UI_Buy_Item);
-
-                // todo in future: error messages above for the player, explaing why they cant drop player on slot (not stress, not enough old, etc)
-
-                // INSTANT HOSPITAL FEATURE EFFECT
-
-                // Pay gold price
-                RunController.Instance.ModifyPlayerGold(-HospitalDropSlot.GetFeatureGoldCost(slot.FeatureType));
-
-                // Update page text views
-                UpdateHospitalFeatureCostTexts();
-                UpdateHospitalFeatureButtons();
-
-                // Heal 30%
-                if (slot.FeatureType == TownActivity.BedRest)
-                {
-                    int healAmount =(int)(StatCalculator.GetTotalMaxHealth(draggedCharacter) * 0.3f);
-                    CharacterDataController.Instance.SetCharacterHealth(draggedCharacter, draggedCharacter.currentHealth + healAmount);
-                }
-
-                // Increase morale state by 1
-                else if (slot.FeatureType == TownActivity.Therapy)
-                {
-                    CharacterDataController.Instance.SetCharacterMoraleState(draggedCharacter, draggedCharacter.currentMoraleState + 1);
-                }
-
-                // Remove random injury
-                else if (slot.FeatureType == TownActivity.Surgery)
-                {
-                    List<ActivePerk> allInjuries = PerkController.Instance.GetAllInjuriesOnCharacter(draggedCharacter);
-                    ActivePerk randomInjury = allInjuries.Shuffle()[0];
-                    PerkController.Instance.ModifyPerkOnCharacterData(draggedCharacter.passiveManager, randomInjury.perkTag, -randomInjury.stacks);
-                }
-
-                // Rebuild croll roster to reflect changes to character
-                CharacterScrollPanelController.Instance.RebuildViews();
-            }
-
-        }
+        }       
         private void UpdateHospitalFeatureCostTexts()
         {
             int playerGold = RunController.Instance.CurrentGold;
@@ -547,7 +481,6 @@ namespace WeAreGladiators.TownFeatures
                 therapyCostText.text = TextLogic.ReturnColoredText(TextLogic.redText, HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy).ToString());
             }
         }
-
         private void UpdateHospitalFeatureButtons()
         {
             hospitalBedRestButton.interactable = true;
@@ -585,6 +518,7 @@ namespace WeAreGladiators.TownFeatures
             // morale state component
             hospitalMoraleIcon.sprite = SpriteLibrary.Instance.GetMoraleStateSprite(character.currentMoraleState);
             hospitalMoraleText.text = character.currentMoraleState.ToString();
+            TransformUtils.RebuildLayout(hospitalMoraleText.transform.parent as RectTransform);
 
             // Injuries bar
             hospitalPerkButtons.ForEach(b => b.HideAndReset());
@@ -606,7 +540,68 @@ namespace WeAreGladiators.TownFeatures
             UpdateHospitalFeatureCostTexts();
             UpdateHospitalFeatureButtons();
         }
+        public void OnTherapyButtonClicked()
+        {
+            // Validate
+            if (RunController.Instance.CurrentGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy) ||
+                (int)currentHospitalCharacter.currentMoraleState >= 5)
+            {
+                return;
+            }
 
+            // Pay gold price
+            AudioManager.Instance.PlaySound(Sound.UI_Buy_Item);
+            RunController.Instance.ModifyPlayerGold(-HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy));
+
+            // Remove random injury
+            CharacterDataController.Instance.SetCharacterMoraleState(currentHospitalCharacter, currentHospitalCharacter.currentMoraleState + 1);
+
+            // Update views
+            CharacterScrollPanelController.Instance.RebuildViews();
+            BuildHospitalViewsForCharacter(currentHospitalCharacter);
+        }
+        public void OnSurgeryButtonClicked()
+        {
+            // Validate
+            if (RunController.Instance.CurrentGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.Surgery) ||
+                !PerkController.Instance.IsCharacteInjured(currentHospitalCharacter.passiveManager))
+            {
+                return;
+            }
+
+            // Pay gold price
+            AudioManager.Instance.PlaySound(Sound.UI_Buy_Item);
+            RunController.Instance.ModifyPlayerGold(-HospitalDropSlot.GetFeatureGoldCost(TownActivity.Surgery));
+
+            // Remove random injury
+            List<ActivePerk> allInjuries = PerkController.Instance.GetAllInjuriesOnCharacter(currentHospitalCharacter);
+            ActivePerk randomInjury = allInjuries.Shuffle()[0];
+            PerkController.Instance.ModifyPerkOnCharacterData(currentHospitalCharacter.passiveManager, randomInjury.perkTag, -randomInjury.stacks);
+
+            // Update views
+            CharacterScrollPanelController.Instance.RebuildViews();
+            BuildHospitalViewsForCharacter(currentHospitalCharacter);
+        }
+        public void OnBedrestButtonClicked()
+        {
+            // Validate
+            if (RunController.Instance.CurrentGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.BedRest) ||
+                currentHospitalCharacter.currentHealth >= StatCalculator.GetTotalMaxHealth(currentHospitalCharacter))
+            {
+                return;
+            }
+
+            // Pay gold price
+            AudioManager.Instance.PlaySound(Sound.UI_Buy_Item);
+            RunController.Instance.ModifyPlayerGold(-HospitalDropSlot.GetFeatureGoldCost(TownActivity.BedRest));
+
+            int healAmount = (int)(StatCalculator.GetTotalMaxHealth(currentHospitalCharacter) * 0.3f);
+            CharacterDataController.Instance.SetCharacterHealth(currentHospitalCharacter, currentHospitalCharacter.currentHealth + healAmount);
+
+            // Update views
+            CharacterScrollPanelController.Instance.RebuildViews();
+            BuildHospitalViewsForCharacter(currentHospitalCharacter);
+        }
         public void OnHospitalNextCharacterButtonClicked()
         {
             Debug.Log("OnNextCharacterButtonClicked");
@@ -646,7 +641,14 @@ namespace WeAreGladiators.TownFeatures
             }
             BuildHospitalViewsForCharacter(CharacterDataController.Instance.AllPlayerCharacters[nextIndex]);
         }
-
+        public void OnHospitalPageMoraleIconMouseEnter()
+        {
+            MainModalController.Instance.BuildAndShowModal(currentHospitalCharacter.currentMoraleState);
+        }
+        public void OnHospitalPageMoraleIconMouseExit()
+        {
+            MainModalController.Instance.HideModal();
+        }
         #endregion
 
         #region Library Logic
