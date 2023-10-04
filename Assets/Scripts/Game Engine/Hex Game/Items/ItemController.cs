@@ -8,6 +8,7 @@ using WeAreGladiators.Characters;
 using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Perks;
 using WeAreGladiators.Player;
+using WeAreGladiators.TownFeatures;
 using WeAreGladiators.UCM;
 using WeAreGladiators.UI;
 using WeAreGladiators.Utilities;
@@ -485,7 +486,7 @@ namespace WeAreGladiators.Items
             AudioManager.Instance.PlaySound(Sound.Gold_Cha_Ching);
             InventoryController.Instance.RemoveItemFromInventory(item);
             RunController.Instance.ModifyPlayerGold(item.GetSellPrice());
-            InventoryController.Instance.RebuildInventoryView();
+            TownController.Instance.BuildAndShowArmouryPage();
         }
         public int GetCharacterItemsGoldValue(ItemSet itemSet)
         {

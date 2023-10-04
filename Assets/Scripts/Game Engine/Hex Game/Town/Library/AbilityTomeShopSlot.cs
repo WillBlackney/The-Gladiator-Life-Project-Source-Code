@@ -14,29 +14,22 @@ namespace WeAreGladiators.TownFeatures
 {
     public class AbilityTomeShopSlot : MonoBehaviour
     {
-
-        // Getters + Accessors
-        #region
-
-        public AbilityTomeShopData MyData { get; private set; }
-
-        #endregion
-        // Properties + Components
-        #region
-
+        #region Properties + Components
         [Header("Components")]
-        [SerializeField]
-        private TextMeshProUGUI abilityNameText;
+        [SerializeField] private TextMeshProUGUI abilityNameText;
         [SerializeField] private TextMeshProUGUI goldCostText;
         [SerializeField] private Image abilityBookImage;
         [SerializeField] private Transform scaleParent;
 
-        // Non inspector fields
+        #endregion
+
+        #region Getters + Accessors
+
+        public AbilityTomeShopData MyData { get; private set; }
 
         #endregion
 
-        // Input
-        #region
+        #region Input
 
         public void MouseClick()
         {
@@ -64,8 +57,7 @@ namespace WeAreGladiators.TownFeatures
 
         #endregion
 
-        // Logic
-        #region
+        #region Logic
 
         private bool AbleToBuy()
         {

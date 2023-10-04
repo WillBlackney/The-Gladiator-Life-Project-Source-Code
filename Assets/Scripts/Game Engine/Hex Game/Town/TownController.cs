@@ -36,14 +36,20 @@ namespace WeAreGladiators.TownFeatures
         [SerializeField] private TownBuildingView[] allFeatureBuildings;
         [Space(20)]
 
-        [Title("Recruit Page Core Components")]
+        [Header("Recruit Page Attribute Components")]
+        [SerializeField] private UIAttributeSlider recruitRightPanelMightSlider;
+        [SerializeField] private UIAttributeSlider recruitRightPanelAccuracySlider;
+        [SerializeField] private UIAttributeSlider recruitRightPanelDodgeSlider;
+        [SerializeField] private UIAttributeSlider recruitRightPanelConstitutionSlider;
+        [SerializeField] private UIAttributeSlider recruitRightPanelResolveSlider;
+        [SerializeField] private UIAttributeSlider recruitRightPanelWitsSlider;
+        [Space(20)]
+
+        [Header("Recruit Page Core Components")]
         [SerializeField] private GameObject recruitPageVisualParent;
         [SerializeField] private List<RecruitableCharacterTab> allRecruitTabs = new List<RecruitableCharacterTab>();
         [SerializeField] private GameObject recruitTabPrefab;
         [SerializeField] private GameObject recruitTabParent;
-        [Space(20)]
-
-        [Header("Recruit Page Core Components")]
         [SerializeField] private GameObject[] recruitRightPanelRows;
         [SerializeField] private TextMeshProUGUI recruitRightPanelNameText;
         [SerializeField] private UniversalCharacterModel recruitRightPanelUcm;
@@ -59,16 +65,7 @@ namespace WeAreGladiators.TownFeatures
         [SerializeField] private UIPerkIcon[] recruitPerkIcons;
         [SerializeField] private UITalentIcon[] recruitTalentIcons;
         [SerializeField] private UIAbilityIcon[] recruitAbilityIcons;
-        [Space(10)]
-
-        [Header("Recruit Page Attribute Components")]
-        [SerializeField] private UIAttributeSlider recruitRightPanelMightSlider;
-        [SerializeField] private UIAttributeSlider recruitRightPanelAccuracySlider;
-        [SerializeField] private UIAttributeSlider recruitRightPanelDodgeSlider;
-        [SerializeField] private UIAttributeSlider recruitRightPanelConstitutionSlider;
-        [SerializeField] private UIAttributeSlider recruitRightPanelResolveSlider;
-        [SerializeField] private UIAttributeSlider recruitRightPanelWitsSlider;
-        [SerializeField] private UIAttributeSlider recruitRightPanelFatigueSlider;
+        [Space(10)]        
 
         [Title("Hospital Page Core Components")]
         [SerializeField] private GameObject hospitalPageVisualParent;
@@ -103,9 +100,8 @@ namespace WeAreGladiators.TownFeatures
 
         [Title("Armoury Page Components")]
         [SerializeField] private GameObject armouryPageVisualParent;
-        [SerializeField] private List<ItemShopSlot> itemShopSlots;
-        [SerializeField] private GameObject itemShopSlotPrefab;
-        [SerializeField] private Transform itemShopSlotsParent;
+        [SerializeField] private ItemGridScrollView playerInventoryGridArmouryPage;
+        [SerializeField] private ItemGridScrollView armouryItemGrid;
         [Space(20)]
 
         [Title("Choose Combat Page Components")]
@@ -129,7 +125,7 @@ namespace WeAreGladiators.TownFeatures
         private RecruitableCharacterTab selectedRecruitTab;
         private readonly List<CombatContractData> currentDailyCombatContracts = new List<CombatContractData>();
         private readonly List<AbilityTomeShopData> currentLibraryTomes = new List<AbilityTomeShopData>();
-        private readonly List<ItemShopData> currentItems = new List<ItemShopData>();
+        public readonly List<ItemShopData> currentArmouryItems = new List<ItemShopData>();
         private HexCharacterData currentHospitalCharacter;
 
         #endregion
@@ -189,8 +185,8 @@ namespace WeAreGladiators.TownFeatures
             currentDailyCombatContracts.AddRange(saveFile.currentDailyCombatContracts);
             currentLibraryTomes.Clear();
             currentLibraryTomes.AddRange(saveFile.currentLibraryTomes);
-            currentItems.Clear();
-            currentItems.AddRange(saveFile.currentItems);
+            currentArmouryItems.Clear();
+            currentArmouryItems.AddRange(saveFile.currentItems);
         }
         public void SaveMyDataToSaveFile(SaveGameData saveFile)
         {
@@ -207,7 +203,7 @@ namespace WeAreGladiators.TownFeatures
             saveFile.currentLibraryTomes.AddRange(currentLibraryTomes);
 
             saveFile.currentItems.Clear();
-            saveFile.currentItems.AddRange(currentItems);
+            saveFile.currentItems.AddRange(currentArmouryItems);
         }
 
         #endregion
@@ -804,30 +800,8 @@ namespace WeAreGladiators.TownFeatures
         public void BuildAndShowArmouryPage()
         {
             armouryPageVisualParent.SetActive(true);
-
-            // Reset item slots
-            for (int i = 0; i < itemShopSlots.Count; i++)
-            {
-                itemShopSlots[i].Reset();
-            }
-
-            // Build items
-            for (int i = 0; i < currentItems.Count; i++)
-            {
-                if (i >= itemShopSlots.Count)
-                {
-                    ItemShopSlot newSlot = Instantiate(itemShopSlotPrefab, itemShopSlotsParent).GetComponent<ItemShopSlot>();
-                    itemShopSlots.Add(newSlot);
-                }
-                itemShopSlots[i].BuildFromItemShopData(currentItems[i]);
-            }
-
-            // Show player item sell prices
-            if (InventoryController.Instance.VisualParent.activeSelf)
-            {
-                InventoryController.Instance.RebuildInventoryView();
-            }
-
+            armouryItemGrid.BuildInventoryView();
+            playerInventoryGridArmouryPage.BuildInventoryView();
         }
         public void HandleBuyItemFromArmoury(ItemShopData data)
         {
@@ -838,14 +812,14 @@ namespace WeAreGladiators.TownFeatures
             InventoryController.Instance.AddItemToInventory(data.Item);
 
             // Remove from shop
-            currentItems.Remove(data);
+            currentArmouryItems.Remove(data);
 
             // Rebuild page
             BuildAndShowArmouryPage();
         }
         public void GenerateDailyArmouryItems()
         {
-            currentItems.Clear();
+            currentArmouryItems.Clear();
 
             List<ItemData> initialItems = new List<ItemData>();
 
@@ -912,7 +886,7 @@ namespace WeAreGladiators.TownFeatures
                 Debug.Log("Initial base cost: " + item.baseGoldValue);
                 int finalCost = item.baseGoldValue;
                 Debug.Log("Final cost: " + finalCost);
-                currentItems.Add(new ItemShopData(item, finalCost));
+                currentArmouryItems.Add(new ItemShopData(item, finalCost));
             }
         }
 

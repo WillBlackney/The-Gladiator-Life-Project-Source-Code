@@ -58,48 +58,51 @@ namespace WeAreGladiators.Items
             if (ItemDragged != null)
             {
                 return;
-            }
+            }            
 
-            /*
-            // TRY SELL
-            if (TownController.Instance.ArmouryViewIsActive && !CharacterRosterViewController.Instance.MainVisualParent.activeSelf)
-            {
-                ItemController.Instance.HandleSellItemToArmoury(MyItemRef);
-                return;
-            }*/
-
-            // TRY EQUIP
             if (MyItemRef.itemData == null && MyItemRef.abilityData == null)
             {
                 return;
             }
-
-            if(MyItemRef.abilityData != null)
+            
+            // TRY SELL
+            if (myItemGrid.CollectionSource == ItemCollectionSource.PlayerInventoryShop &&
+                TownController.Instance.ArmouryViewIsActive && !CharacterRosterViewController.Instance.MainVisualParent.activeSelf)
             {
-                CharacterRosterViewController.Instance.OnAbilityTomeRightClicked(this);
-                return;
-            }
-            HexCharacterData character = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
-
-            // Check equipping 2h item with two 1h items already equip without enough inventory space.
-            if (MyItemRef.itemData.handRequirement == HandRequirement.TwoHanded &&
-                character.itemSet.mainHandItem != null &&
-                character.itemSet.offHandItem != null &&
-                !InventoryController.Instance.HasFreeInventorySpace(2))
-            {
+                ItemController.Instance.HandleSellItemToArmoury(MyItemRef);
                 return;
             }
 
-            // check equipping off hand item when using a 2H item
-            if (MyItemRef.itemData.allowedSlot == WeaponSlot.Offhand &&
-                character.itemSet.mainHandItem != null &&
-                character.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+            // TRY EQUIP
+            if (myItemGrid.CollectionSource == ItemCollectionSource.PlayerInventoryCharacterRoster)
             {
-                return;
-            }
+                if (MyItemRef.abilityData != null)
+                {
+                    CharacterRosterViewController.Instance.OnAbilityTomeRightClicked(this);
+                    return;
+                }
 
-            // Get correct slot
-            List<RosterItemSlot> allSlots = new List<RosterItemSlot>
+                HexCharacterData character = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
+
+                // Check equipping 2h item with two 1h items already equip without enough inventory space.
+                if (MyItemRef.itemData.handRequirement == HandRequirement.TwoHanded &&
+                    character.itemSet.mainHandItem != null &&
+                    character.itemSet.offHandItem != null &&
+                    !InventoryController.Instance.HasFreeInventorySpace(2))
+                {
+                    return;
+                }
+
+                // check equipping off hand item when using a 2H item
+                if (MyItemRef.itemData.allowedSlot == WeaponSlot.Offhand &&
+                    character.itemSet.mainHandItem != null &&
+                    character.itemSet.mainHandItem.handRequirement == HandRequirement.TwoHanded)
+                {
+                    return;
+                }
+
+                // Get correct slot
+                List<RosterItemSlot> allSlots = new List<RosterItemSlot>
             {
                 CharacterRosterViewController.Instance.MainHandSlot,
                 CharacterRosterViewController.Instance.OffHandSLot,
@@ -108,26 +111,28 @@ namespace WeAreGladiators.Items
                 CharacterRosterViewController.Instance.TrinketSlot
             };
 
-            RosterItemSlot matchingSlot = null;
-            foreach (RosterItemSlot ris in allSlots)
-            {
-                if (ItemController.Instance.IsItemValidOnSlot(MyItemRef.itemData, ris))
+                RosterItemSlot matchingSlot = null;
+                foreach (RosterItemSlot ris in allSlots)
                 {
-                    matchingSlot = ris;
-                    break;
+                    if (ItemController.Instance.IsItemValidOnSlot(MyItemRef.itemData, ris))
+                    {
+                        matchingSlot = ris;
+                        break;
+                    }
+                }
+
+                if (matchingSlot != null)
+                {
+                    // Add item to player
+                    ItemController.Instance.HandleGiveItemToCharacterFromInventory(character, MyItemRef, matchingSlot);
+
+                    // Rebuild roster, inventory and model views
+                    CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
+                    CharacterScrollPanelController.Instance.RebuildViews();
+                    myItemGrid.BuildInventoryView();
                 }
             }
-
-            if (matchingSlot != null)
-            {
-                // Add item to player
-                ItemController.Instance.HandleGiveItemToCharacterFromInventory(character, MyItemRef, matchingSlot);
-
-                // Rebuild roster, inventory and model views
-                CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
-                CharacterScrollPanelController.Instance.RebuildViews();
-                myItemGrid.BuildInventoryView();
-            }
+            
 
         }
         public void MouseEnter()
@@ -165,6 +170,10 @@ namespace WeAreGladiators.Items
         private void OnMouseUp()
         {
             myItemGrid.SetVerticalScrolling(true);
+            if (myItemGrid.CollectionSource == ItemCollectionSource.PlayerInventoryShop)
+            {
+                return;
+            }
             if (MyItemRef == null || (MyItemRef != null && MyItemRef.abilityData != null)) return;
 
             if (currentlyBeingDragged)
@@ -240,7 +249,10 @@ namespace WeAreGladiators.Items
         public void OnMouseDrag()
         {
             Debug.Log("InventoryItemView.Drag()");
-            //if (myItemRef == null || myItemRef.itemData == null) return;
+            if(myItemGrid.CollectionSource == ItemCollectionSource.PlayerInventoryShop)
+            {
+                return;
+            }
             if (MyItemRef == null || (MyItemRef != null && MyItemRef.abilityData != null))
             {
                 return;
