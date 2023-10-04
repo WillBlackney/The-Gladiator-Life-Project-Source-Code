@@ -120,8 +120,7 @@ namespace WeAreGladiators.UI
         }
         public void OnRosterCharacterPanelDragStart(RosterCharacterPanel panel)
         {
-            if (!TownController.Instance.IsCharacterDraggableFromRosterToDeploymentNode(panel.MyCharacterData) ||
-                TownController.Instance.IsCharacterPlacedInHospital(panel.MyCharacterData))
+            if (!TownController.Instance.IsCharacterDraggableFromRosterToDeploymentNode(panel.MyCharacterData))
             {
                 return;
             }

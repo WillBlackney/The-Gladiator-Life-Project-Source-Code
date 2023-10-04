@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using TMPro;
+using UnityEditor.Graphs;
 using UnityEngine;
 using UnityEngine.UI;
 using WeAreGladiators.Abilities;
@@ -14,6 +16,7 @@ using WeAreGladiators.CameraSystems;
 using WeAreGladiators.Characters;
 using WeAreGladiators.Items;
 using WeAreGladiators.JourneyLogic;
+using WeAreGladiators.Libraries;
 using WeAreGladiators.Perks;
 using WeAreGladiators.Persistency;
 using WeAreGladiators.Player;
@@ -28,33 +31,36 @@ namespace WeAreGladiators.TownFeatures
         #region Properties + Components
 
         [Title("Town Page Components")]
-        [SerializeField]
-        private GameObject mainVisualParent;
+        [SerializeField] private GameObject mainVisualParent;
         [SerializeField] private TownBuildingView arenaBuilding;
         [SerializeField] private TownBuildingView[] allFeatureBuildings;
         [Space(20)]
+
         [Title("Recruit Page Core Components")]
-        [SerializeField]
-        private GameObject recruitPageVisualParent;
+        [SerializeField] private GameObject recruitPageVisualParent;
         [SerializeField] private List<RecruitableCharacterTab> allRecruitTabs = new List<RecruitableCharacterTab>();
         [SerializeField] private GameObject recruitTabPrefab;
         [SerializeField] private GameObject recruitTabParent;
         [Space(20)]
+
         [Header("Recruit Page Core Components")]
         [SerializeField] private GameObject[] recruitRightPanelRows;
         [SerializeField] private TextMeshProUGUI recruitRightPanelNameText;
         [SerializeField] private UniversalCharacterModel recruitRightPanelUcm;
-        [Space(20)]
+        [Space(10)]
+
         [SerializeField] private UIRaceIcon recruitRightPanelRacialIcon;
         [SerializeField] private TextMeshProUGUI recruitRightPanelLevelText;
         [SerializeField] private UIBackgroundIcon recruitRightPanelBackgroundIcon;
         [SerializeField] private TextMeshProUGUI recruitRightPanelCostText;
         [SerializeField] private TextMeshProUGUI recruitRightPanelUpkeepText;
-        [Space(20)]
+        [Space(10)]
+
         [SerializeField] private UIPerkIcon[] recruitPerkIcons;
         [SerializeField] private UITalentIcon[] recruitTalentIcons;
         [SerializeField] private UIAbilityIcon[] recruitAbilityIcons;
-        [Space(20)]
+        [Space(10)]
+
         [Header("Recruit Page Attribute Components")]
         [SerializeField] private UIAttributeSlider recruitRightPanelMightSlider;
         [SerializeField] private UIAttributeSlider recruitRightPanelAccuracySlider;
@@ -66,17 +72,24 @@ namespace WeAreGladiators.TownFeatures
 
         [Title("Hospital Page Core Components")]
         [SerializeField] private GameObject hospitalPageVisualParent;
-        [SerializeField] private HospitalDropSlot[] hospitalSlots;
-        [Header("Bed Rest Components")]
+        [SerializeField] private UniversalCharacterModel hospitalUCM;
+        [SerializeField] private TextMeshProUGUI hospitalHealthBarText;
+        [SerializeField] private Slider hospitalHealthBar;
+        [SerializeField] private Image hospitalMoraleIcon;
+        [SerializeField] private TextMeshProUGUI hospitalMoraleText;
+        [SerializeField] private TextMeshProUGUI hospitalNameText;
+        [SerializeField] private TextMeshProUGUI hospitalSubnameText;
+        [SerializeField] private UIPerkIcon[] hospitalPerkButtons;
+        [Space(10)]
+
+        [SerializeField] private Button hospitalBedRestButton;
+        [SerializeField] private Button hospitalTherapyButton;
+        [SerializeField] private Button hospitalSurgeryButton;
         [SerializeField] private TextMeshProUGUI bedrestCostText;
-        [SerializeField] private Image bedrestIcon;
-        [Header("Surgery Components")]
         [SerializeField] private TextMeshProUGUI surgeryCostText;
-        [SerializeField] private Image surgeryIcon;
-        [Header("Therapy Components")]
         [SerializeField] private TextMeshProUGUI therapyCostText;
-        [SerializeField] private Image therapyIcon;
         [Space(20)]
+
         [Title("Library Page Components")]
         [SerializeField] private GameObject libraryPageVisualParent;
         [SerializeField] private AbilityTomeShopSlot[] abilityTomeShopSlots;
@@ -86,12 +99,14 @@ namespace WeAreGladiators.TownFeatures
         [SerializeField] private Image confirmLearnAbilityImage;
         [SerializeField] private Sprite invalidButtonSprite;
         [SerializeField] private Sprite validButtonSprite;
+        [Space(20)]
 
         [Title("Armoury Page Components")]
         [SerializeField] private GameObject armouryPageVisualParent;
         [SerializeField] private List<ItemShopSlot> itemShopSlots;
         [SerializeField] private GameObject itemShopSlotPrefab;
         [SerializeField] private Transform itemShopSlotsParent;
+        [Space(20)]
 
         [Title("Choose Combat Page Components")]
         [SerializeField] private GameObject chooseCombatPageMainVisualParent;
@@ -99,6 +114,7 @@ namespace WeAreGladiators.TownFeatures
         [SerializeField] private Image goToDeploymentButton;
         [SerializeField] private Sprite readyButtonSprite;
         [SerializeField] private Sprite notReadyButtonSprite;
+        [Space(20)]
 
         [Title("Deployment Page Components")]
         [SerializeField] private GameObject deploymentPageMainVisualParent;
@@ -114,6 +130,7 @@ namespace WeAreGladiators.TownFeatures
         private readonly List<CombatContractData> currentDailyCombatContracts = new List<CombatContractData>();
         private readonly List<AbilityTomeShopData> currentLibraryTomes = new List<AbilityTomeShopData>();
         private readonly List<ItemShopData> currentItems = new List<ItemShopData>();
+        private HexCharacterData currentHospitalCharacter;
 
         #endregion
 
@@ -123,7 +140,6 @@ namespace WeAreGladiators.TownFeatures
         public bool HospitalViewIsActive => hospitalPageVisualParent.activeSelf;
         public bool LibraryViewIsActive => libraryPageVisualParent.activeSelf;
         public bool DeploymentViewIsActive => deploymentPageMainVisualParent.activeSelf;
-        public HospitalDropSlot[] HospitalSlots => hospitalSlots;
         public LibraryAbilityDropSlot LibraryAbilitySlot => libraryAbilitySlot;
         public LibraryCharacterDropSlot LibraryCharacterSlot => libraryCharacterSlot;
         public bool AnyFeaturePageIsActive
@@ -149,10 +165,6 @@ namespace WeAreGladiators.TownFeatures
 
         public void TearDownOnExitToMainMenu()
         {
-            foreach (HospitalDropSlot slot in hospitalSlots)
-            {
-                slot.ClearAndReset();
-            }
             HideTownView();
             HideDeploymentPage();
             foreach (TownBuildingView tbv in allFeatureBuildings)
@@ -446,26 +458,11 @@ namespace WeAreGladiators.TownFeatures
 
         public void BuildAndShowHospitalPage()
         {
-            hospitalPageVisualParent.SetActive(true);
-            foreach (HospitalDropSlot slot in hospitalSlots)
-            {
-                slot.BuildViews();
-            }
-            UpdateHospitalFeatureCostTexts();
+            hospitalUCM.SetIdleAnim();
+            hospitalPageVisualParent.SetActive(true);            
+            BuildHospitalViewsForCharacter(CharacterDataController.Instance.AllPlayerCharacters[0]);           
         }
-        public bool IsCharacterPlacedInHospital(HexCharacterData character)
-        {
-            bool ret = false;
-            foreach (HospitalDropSlot slot in hospitalSlots)
-            {
-                if (slot.MyCharacterData == character)
-                {
-                    ret = true;
-                    break;
-                }
-            }
-            return ret;
-        }
+       
         public void HandleDropCharacterOnHospitalSlot(HospitalDropSlot slot, HexCharacterData draggedCharacter)
         {
             Debug.Log("TownController.HandleDropCharacterOnHospitalSlot");
@@ -503,6 +500,7 @@ namespace WeAreGladiators.TownFeatures
 
                 // Update page text views
                 UpdateHospitalFeatureCostTexts();
+                UpdateHospitalFeatureButtons();
 
                 // Heal 30%
                 if (slot.FeatureType == TownActivity.BedRest)
@@ -549,59 +547,104 @@ namespace WeAreGladiators.TownFeatures
                 therapyCostText.text = TextLogic.ReturnColoredText(TextLogic.redText, HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy).ToString());
             }
         }
-        public void HandleApplyHospitalFeaturesOnNewDayStart()
+
+        private void UpdateHospitalFeatureButtons()
         {
-            foreach (HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
+            hospitalBedRestButton.interactable = true;
+            hospitalSurgeryButton.interactable = true;
+            hospitalTherapyButton.interactable = true;
+
+            int playerGold = RunController.Instance.CurrentGold;
+            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.BedRest) ||
+                currentHospitalCharacter.currentHealth >= StatCalculator.GetTotalMaxHealth(currentHospitalCharacter))
             {
-                if (character.currentTownActivity == TownActivity.BedRest)
-                {
-                    CharacterDataController.Instance.SetCharacterHealth(character, StatCalculator.GetTotalMaxHealth(character));
-                }
-                else if (character.currentTownActivity == TownActivity.Therapy)
-                {
-                    CharacterDataController.Instance.SetCharacterMoraleState(character, 0);
-                }
-                else if (character.currentTownActivity == TownActivity.Surgery)
-                {
-                    List<ActivePerk> allInjuries = PerkController.Instance.GetAllInjuriesOnCharacter(character);
-                    foreach (ActivePerk p in allInjuries)
-                    {
-                        PerkController.Instance.ModifyPerkOnCharacterData(character.passiveManager, p.perkTag, -p.stacks);
-                    }
-                }
-
-                // Rebuild character's panel views to be available
-                character.currentTownActivity = TownActivity.None;
+                hospitalBedRestButton.interactable = false;
             }
-
-            // Reset hospital drop slot
-            foreach (HospitalDropSlot slot in hospitalSlots)
+            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.Surgery) ||
+                !PerkController.Instance.IsCharacteInjured(currentHospitalCharacter.passiveManager))
             {
-                slot.ClearAndReset();
+                hospitalSurgeryButton.interactable = false;
             }
-
+            if (playerGold < HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy) ||
+                (int)currentHospitalCharacter.currentMoraleState >= 5)
+            {
+                hospitalTherapyButton.interactable = false;
+            }
         }
-        public void HandleAssignCharactersToHospitalSlotsOnGameLoad()
+        private void BuildHospitalViewsForCharacter(HexCharacterData character)
         {
-            List<HexCharacterData> characters = CharacterDataController.Instance.AllPlayerCharacters;
+            currentHospitalCharacter = character;
 
-            foreach (HexCharacterData c in characters)
+            // health bar
+            float maxHealth = StatCalculator.GetTotalMaxHealth(character);
+            float health = character.currentHealth;
+            float healthBarFloat = health / maxHealth;
+            hospitalHealthBar.value = healthBarFloat;
+            hospitalHealthBarText.text = character.currentHealth + " / " + maxHealth;
+
+            // morale state component
+            hospitalMoraleIcon.sprite = SpriteLibrary.Instance.GetMoraleStateSprite(character.currentMoraleState);
+            hospitalMoraleText.text = character.currentMoraleState.ToString();
+
+            // Injuries bar
+            hospitalPerkButtons.ForEach(b => b.HideAndReset());
+            List<ActivePerk> allPerks = PerkController.Instance.GetAllInjuriesOnCharacter(character);
+            for (int i = 0; i < allPerks.Count; i++)
             {
-                if (c.currentTownActivity == TownActivity.None)
-                {
-                    continue;
-                }
+                hospitalPerkButtons[i].BuildFromActivePerk(allPerks[i]);
+            }            
 
-                foreach (HospitalDropSlot slot in hospitalSlots)
-                {
-                    if (slot.MyCharacterData == null &&
-                        slot.FeatureType == c.currentTownActivity)
-                    {
-                        slot.OnCharacterDragDropSuccess(c);
-                        break;
-                    }
-                }
+            // name and sub name texts
+            hospitalNameText.text = character.myName;
+            hospitalSubnameText.text = character.mySubName;
+
+            // UCM
+            CharacterModeller.BuildModelFromStringReferences(hospitalUCM, character.modelParts);
+            CharacterModeller.ApplyItemSetToCharacterModelView(character.itemSet, hospitalUCM);
+
+            // Update buttons
+            UpdateHospitalFeatureCostTexts();
+            UpdateHospitalFeatureButtons();
+        }
+
+        public void OnHospitalNextCharacterButtonClicked()
+        {
+            Debug.Log("OnNextCharacterButtonClicked");
+            int index = CharacterDataController.Instance.AllPlayerCharacters.IndexOf(currentHospitalCharacter);
+            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0)
+            {
+                return;
             }
+
+            int nextIndex = 0;
+            if (index == CharacterDataController.Instance.AllPlayerCharacters.Count - 1)
+            {
+                nextIndex = 0;
+            }
+            else
+            {
+                nextIndex = index + 1;
+            }
+            BuildHospitalViewsForCharacter(CharacterDataController.Instance.AllPlayerCharacters[nextIndex]);
+        }
+        public void OnHospitalPreviousCharacterButtonClicked()
+        {
+            Debug.Log("OnPreviousCharacterButtonClicked");
+            int index = CharacterDataController.Instance.AllPlayerCharacters.IndexOf(currentHospitalCharacter);
+            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0)
+            {
+                return;
+            }
+            int nextIndex = 0;
+            if (index == 0)
+            {
+                nextIndex = CharacterDataController.Instance.AllPlayerCharacters.Count - 1;
+            }
+            else
+            {
+                nextIndex = index - 1;
+            }
+            BuildHospitalViewsForCharacter(CharacterDataController.Instance.AllPlayerCharacters[nextIndex]);
         }
 
         #endregion
@@ -909,6 +952,10 @@ namespace WeAreGladiators.TownFeatures
         }
         public void OnHospitalPageButtonClicked()
         {
+            if(CharacterDataController.Instance.AllPlayerCharacters.Count == 0)
+            {
+                return;
+            }
             BuildAndShowHospitalPage();
         }
         public void OnHospitalPageLeaveButtonClicked()

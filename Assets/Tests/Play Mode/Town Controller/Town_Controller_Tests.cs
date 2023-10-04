@@ -44,6 +44,8 @@ namespace Tests
         [Test]
         public void Hospital_Bedrest_Does_Heal_Correctly()
         {
+            Assert.Fail();
+            /*
             // Arrange
             GameController.Instance.RunTestEnvironmentTown(new List<HexCharacterTemplateSO> { playerData });
             HexCharacterData playerCharacter = CharacterDataController.Instance.AllPlayerCharacters[0];
@@ -59,12 +61,14 @@ namespace Tests
 
             // Assert
             Assert.AreEqual(expectFinalGold, RunController.Instance.CurrentGold);
-            Assert.AreEqual(expectedFinalHealth, playerCharacter.currentHealth);            
+            Assert.AreEqual(expectedFinalHealth, playerCharacter.currentHealth); */           
         }
 
         [Test]
         public void Hospital_Therapy_Does_Boost_Morale_State_Correctly()
         {
+            Assert.Fail();
+            /*
             // Arrange
             GameController.Instance.RunTestEnvironmentTown(new List<HexCharacterTemplateSO> { playerData });
             HexCharacterData playerCharacter = CharacterDataController.Instance.AllPlayerCharacters[0];
@@ -80,12 +84,14 @@ namespace Tests
 
             // Assert
             Assert.AreEqual(expectFinalGold, RunController.Instance.CurrentGold);
-            Assert.AreEqual(expectedFinalMoraleState, playerCharacter.currentMoraleState);
+            Assert.AreEqual(expectedFinalMoraleState, playerCharacter.currentMoraleState);*/
         }
 
         [Test]
         public void Hospital_Surgery_Does_Remove_Injury_Correctly()
         {
+            Assert.Fail();
+            /*
             // Arrange
             GameController.Instance.RunTestEnvironmentTown(new List<HexCharacterTemplateSO> { playerData });
             HexCharacterData playerCharacter = CharacterDataController.Instance.AllPlayerCharacters[0];
@@ -112,6 +118,7 @@ namespace Tests
             // Assert
             Assert.AreEqual(expectFinalGold, RunController.Instance.CurrentGold);
             Assert.AreEqual(expectedInjuryTotal, PerkController.Instance.GetAllInjuriesOnCharacter(playerCharacter).Count);
+            */
         }
         #endregion
     }

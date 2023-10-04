@@ -10,38 +10,40 @@ namespace WeAreGladiators.TownFeatures
 {
     public class TownBuildingView : MonoBehaviour
     {
-
-        private static bool blockMouseActions;
+        #region Components + Variables
         [Header("World Building Components")]
-        [SerializeField]
-        private Color normalColor;
+        [SerializeField] private Color normalColor;
         [SerializeField] private Color mouseOverColor;
         [SerializeField] private SpriteRenderer[] buildingSprites;
         [SerializeField] private RectTransform popUpRect;
         [SerializeField] private RectTransform startPos;
         [SerializeField] private RectTransform endPos;
-        [Space(10)]
-        [SerializeField]
-        private CanvasGroup popUpCg;
+        [SerializeField] private CanvasGroup popUpCg;
         [SerializeField] private GameObject outlineSprite;
         [SerializeField] private RectTransform cameraZoomToPoint;
         [SerializeField] private Sound entranceSound;
+        [Space(20)]
 
         [Header("Page Components")]
-        [SerializeField]
-        private UnityEvent pageBuildFunction;
+        [SerializeField] private UnityEvent pageBuildFunction;
         [SerializeField] private GameObject pageVisualParent;
         [SerializeField] private RectTransform pageMovementParent;
         [SerializeField] private CanvasGroup pageCg;
         [SerializeField] private RectTransform pageStartPos;
         [SerializeField] private RectTransform pageEndPos;
 
+        private static bool blockMouseActions;
+        #endregion
+
+        #region Getters + Accessors
         public RectTransform PageMovementParent => pageMovementParent;
         public GameObject PageVisualParent => pageVisualParent;
         public RectTransform PageStartPos => pageStartPos;
         public CanvasGroup PageCg => pageCg;
+        #endregion
 
-        private IEnumerator LeaveCoroutine()
+        #region Core Logic
+        private IEnumerator LeaveFeature()
         {
             if (blockMouseActions)
             {
@@ -75,79 +77,7 @@ namespace WeAreGladiators.TownFeatures
                 pageVisualParent.SetActive(false);
             });
         }
-        public void OnLeaveFeatureButtonClicked()
-        {
-            StartCoroutine(LeaveCoroutine());
-        }
-        public void SnapToArenaViewSettings()
-        {
-            // Move canvas to start pos + setup
-            pageCg.DOKill();
-            pageMovementParent.DOKill();
-            pageCg.alpha = 1f;
-            pageVisualParent.SetActive(true);
-            pageBuildFunction.Invoke();
-            pageMovementParent.position = pageEndPos.position;
-            CameraController.Instance.MainCamera.DOOrthoSize(2.5f, 0f);
-            CameraController.Instance.MainCamera.transform.position = new Vector3(cameraZoomToPoint.position.x, cameraZoomToPoint.position.y, -15);
-        }
-        public void CloseAndResetAllUiViews()
-        {
-            blockMouseActions = false;
-            pageCg.DOKill();
-            pageMovementParent.DOKill();
-            pageCg.DOFade(0f, 0f);
-            pageMovementParent.DOMove(pageStartPos.position, 0.35f);
-            pageVisualParent.SetActive(false);
-        }
-
-        #region Input Events
-
-        public void MouseEnter()
-        {
-            if (blockMouseActions || TownController.Instance.AnyFeaturePageIsActive)
-            {
-                return;
-            }
-            CursorController.Instance.SetCursor(CursorType.Enter_Door);
-
-            foreach (SpriteRenderer i in buildingSprites)
-            {
-                i.color = mouseOverColor;
-            }
-
-            popUpRect.DOKill();
-            popUpCg.DOKill();
-
-            outlineSprite.SetActive(true);
-            popUpRect.DOMove(endPos.position, 0.25f);
-            popUpCg.DOFade(1f, 0.15f);
-        }
-        public void MouseExit()
-        {
-            if (blockMouseActions || TownController.Instance.AnyFeaturePageIsActive)
-            {
-                return;
-            }
-            CursorController.Instance.SetCursor(CursorType.NormalPointer);
-
-            foreach (SpriteRenderer i in buildingSprites)
-            {
-                i.color = normalColor;
-            }
-
-            popUpRect.DOKill();
-            popUpCg.DOKill();
-
-            outlineSprite.SetActive(false);
-            popUpRect.DOMove(startPos.position, 0.25f);
-            popUpCg.DOFade(0f, 0.15f);
-        }
-        public void MouseClick()
-        {
-            StartCoroutine(ClickCoroutine());
-        }
-        private IEnumerator ClickCoroutine()
+        private IEnumerator EnterFeature()
         {
             yield return null;
             if (blockMouseActions || TownController.Instance.AnyFeaturePageIsActive)
@@ -196,6 +126,80 @@ namespace WeAreGladiators.TownFeatures
                 .SetEase(Ease.OutBack)
                 .OnComplete(() => blockMouseActions = false);
         }
+        public void OnLeaveFeatureButtonClicked()
+        {
+            StartCoroutine(LeaveFeature());
+        }
+        public void SnapToArenaViewSettings()
+        {
+            // Move canvas to start pos + setup
+            pageCg.DOKill();
+            pageMovementParent.DOKill();
+            pageCg.alpha = 1f;
+            pageVisualParent.SetActive(true);
+            pageBuildFunction.Invoke();
+            pageMovementParent.position = pageEndPos.position;
+            CameraController.Instance.MainCamera.DOOrthoSize(2.5f, 0f);
+            CameraController.Instance.MainCamera.transform.position = new Vector3(cameraZoomToPoint.position.x, cameraZoomToPoint.position.y, -15);
+        }
+        public void CloseAndResetAllUiViews()
+        {
+            blockMouseActions = false;
+            pageCg.DOKill();
+            pageMovementParent.DOKill();
+            pageCg.DOFade(0f, 0f);
+            pageMovementParent.DOMove(pageStartPos.position, 0.35f);
+            pageVisualParent.SetActive(false);
+        }
+        #endregion
+
+        #region Input Events
+
+        public void MouseEnter()
+        {
+            if (blockMouseActions || TownController.Instance.AnyFeaturePageIsActive)
+            {
+                return;
+            }
+            CursorController.Instance.SetCursor(CursorType.Enter_Door);
+
+            foreach (SpriteRenderer i in buildingSprites)
+            {
+                i.color = mouseOverColor;
+            }
+
+            popUpRect.DOKill();
+            popUpCg.DOKill();
+
+            outlineSprite.SetActive(true);
+            popUpRect.DOMove(endPos.position, 0.25f);
+            popUpCg.DOFade(1f, 0.15f);
+        }
+        public void MouseExit()
+        {
+            if (blockMouseActions || TownController.Instance.AnyFeaturePageIsActive)
+            {
+                return;
+            }
+            CursorController.Instance.SetCursor(CursorType.NormalPointer);
+
+            foreach (SpriteRenderer i in buildingSprites)
+            {
+                i.color = normalColor;
+            }
+
+            popUpRect.DOKill();
+            popUpCg.DOKill();
+
+            outlineSprite.SetActive(false);
+            popUpRect.DOMove(startPos.position, 0.25f);
+            popUpCg.DOFade(0f, 0.15f);
+        }
+        public void MouseClick()
+        {
+            StartCoroutine(EnterFeature());
+        }
+       
 
         #endregion
     }

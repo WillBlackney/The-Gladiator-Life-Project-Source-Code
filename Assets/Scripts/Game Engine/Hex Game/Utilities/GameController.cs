@@ -891,9 +891,6 @@ namespace WeAreGladiators
                     TownController.Instance.ShowTownView();
                     CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
-                    // Assign hospital slots
-                    TownController.Instance.HandleAssignCharactersToHospitalSlotsOnGameLoad();
-
                     // Start music, fade in
                     DelayUtils.DelayedCall(1f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
                     AudioManager.Instance.FadeInSound(Sound.Ambience_Town_1, 1f);

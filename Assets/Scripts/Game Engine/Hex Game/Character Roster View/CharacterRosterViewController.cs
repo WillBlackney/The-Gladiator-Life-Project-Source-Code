@@ -33,7 +33,6 @@ namespace WeAreGladiators.UI
         [Space(20)]
         [Header("Morale Components")]
         [SerializeField] private UnityEngine.UI.Image moraleImage;
-        //[SerializeField] private TextMeshProUGUI moraleStateText;
 
         [Space(20)]
         [Header("XP + Level Components")]
@@ -56,7 +55,6 @@ namespace WeAreGladiators.UI
         [Header("Abilities Section Components")]
         [SerializeField] private List<UIAbilityIconSelectable> selectableAbilityButtons;
         [SerializeField] private GameObject selectableAbilityButtonPrefab;
-        //[SerializeField] private TextMeshProUGUI activeAbilitiesText;
         [SerializeField] private Transform selectableAbilityButtonsParent;
         [Space(20)]
         [Header("Talent Section Components")]
