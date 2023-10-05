@@ -485,8 +485,17 @@ namespace WeAreGladiators.Items
         {
             AudioManager.Instance.PlaySound(Sound.Gold_Cha_Ching);
             InventoryController.Instance.RemoveItemFromInventory(item);
+            TownController.Instance.currentArmouryItems.Add(item);
             RunController.Instance.ModifyPlayerGold(item.GetSellPrice());
-            TownController.Instance.BuildAndShowArmouryPage();
+            TownController.Instance.BuildAndShowArmouryPage(false);
+        }
+        public void HandleSellItemToLibrary(InventoryItem item)
+        {
+            AudioManager.Instance.PlaySound(Sound.Gold_Cha_Ching);
+            InventoryController.Instance.RemoveItemFromInventory(item);
+            TownController.Instance.currentLibraryTomes.Add(item);
+            RunController.Instance.ModifyPlayerGold(item.GetSellPrice());
+            TownController.Instance.BuildAndShowArmouryPage(false);
         }
         public int GetCharacterItemsGoldValue(ItemSet itemSet)
         {

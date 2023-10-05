@@ -208,12 +208,6 @@ namespace WeAreGladiators.Items
                         CharacterScrollPanelController.Instance.RebuildViews();
                         InventoryController.Instance.RebuildInventoryView();
                     }
-                    else if (MyItemRef.abilityData != null)
-                    {
-                        // to do: only run this code if the library page is actually open
-                        AudioManager.Instance.PlaySound(Sound.UI_Drag_Drop_End);
-                        TownController.Instance.LibraryAbilitySlot.BuildFromAbility(MyItemRef.abilityData);
-                    }
                 }
 
                 else

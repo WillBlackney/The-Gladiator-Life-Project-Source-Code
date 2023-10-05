@@ -67,9 +67,16 @@ namespace WeAreGladiators.Items
             
             // TRY SELL
             if (myItemGrid.CollectionSource == ItemCollectionSource.PlayerInventoryShop &&
-                TownController.Instance.ArmouryViewIsActive && !CharacterRosterViewController.Instance.MainVisualParent.activeSelf)
+                !CharacterRosterViewController.Instance.MainVisualParent.activeSelf)
             {
-                ItemController.Instance.HandleSellItemToArmoury(MyItemRef);
+                if (TownController.Instance.ArmouryViewIsActive)
+                {
+                    ItemController.Instance.HandleSellItemToArmoury(MyItemRef);
+                }
+                else if(TownController.Instance.LibraryViewIsActive)
+                {
+                    ItemController.Instance.HandleSellItemToLibrary(MyItemRef);
+                }
                 return;
             }
 
@@ -225,12 +232,6 @@ namespace WeAreGladiators.Items
                         CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
                         CharacterScrollPanelController.Instance.RebuildViews();
                         myItemGrid.BuildInventoryView();
-                    }
-                    else if (MyItemRef.abilityData != null)
-                    {
-                        // to do: only run this code if the library page is actually open
-                        AudioManager.Instance.PlaySound(Sound.UI_Drag_Drop_End);
-                        TownController.Instance.LibraryAbilitySlot.BuildFromAbility(MyItemRef.abilityData);
                     }
                 }
 

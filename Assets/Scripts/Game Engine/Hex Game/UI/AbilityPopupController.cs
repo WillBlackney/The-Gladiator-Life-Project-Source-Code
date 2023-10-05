@@ -110,21 +110,13 @@ namespace WeAreGladiators.UI
             TransformUtils.RebuildLayouts(transformsRebuilt);
             PlacePanelOnInventoryItemPosition(item);
         }
-        public void OnAbilityShopTomeMousedOver(AbilityTomeShopSlot slot)
+        public void OnAbilityShopTomeMousedOver(ItemShopSlot slot)
         {
             FadeInPanel();
-            BuildPanelFromAbilityData(slot.MyData.ability);
+            BuildPanelFromAbilityData(slot.MyAbilityTomeData.ability);
             PlacePanelOnAbilityTomeShopSlotPosition(slot);
             TransformUtils.RebuildLayouts(transformsRebuilt);
             PlacePanelOnAbilityTomeShopSlotPosition(slot);
-        }
-        public void OnLibraryAbilityDropSlotMousedOver(LibraryAbilityDropSlot slot)
-        {
-            FadeInPanel();
-            BuildPanelFromAbilityData(slot.MyAbilityData);
-            PlacePanelOnLibraryAbilityDropSlotPosition(slot);
-            TransformUtils.RebuildLayouts(transformsRebuilt);
-            PlacePanelOnLibraryAbilityDropSlotPosition(slot);
         }
 
         public void OnAbilityButtonMousedExit()
@@ -186,18 +178,13 @@ namespace WeAreGladiators.UI
             float yOffset = mainPositioningRect.rect.height - 100;
             mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x + xOffset, mainPositioningRect.localPosition.y - yOffset, 0);
         }
-        private void PlacePanelOnAbilityTomeShopSlotPosition(AbilityTomeShopSlot slot)
+        private void PlacePanelOnAbilityTomeShopSlotPosition(ItemShopSlot slot)
         {
             mainPositioningRect.position = slot.transform.position;
             float xOffset = mainPositioningRect.rect.width / 2 + 80;
             mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x - xOffset, mainPositioningRect.localPosition.y, 0);
         }
-        private void PlacePanelOnLibraryAbilityDropSlotPosition(LibraryAbilityDropSlot slot)
-        {
-            mainPositioningRect.position = slot.transform.position;
-            float xOffset = mainPositioningRect.rect.width / 2 + 80;
-            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x + xOffset, mainPositioningRect.localPosition.y + slot.GetComponent<RectTransform>().rect.height / 2 - mainPositioningRect.rect.height, 0);
-        }
+        
 
         #endregion
 

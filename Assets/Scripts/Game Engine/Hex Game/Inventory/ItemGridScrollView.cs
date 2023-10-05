@@ -31,6 +31,7 @@ namespace WeAreGladiators.Items
         private List<InventoryItemView> inventoryItemViews = new List<InventoryItemView>();
         private List<ItemShopSlot> armouryItemViews = new List<ItemShopSlot>();
         private bool initialized = false;
+        private FilterSetting filterSetting = FilterSetting.All;
 
         public ItemCollectionSource CollectionSource => collectionSource;
         public List<InventorySlot> Slots => slots;
@@ -75,6 +76,7 @@ namespace WeAreGladiators.Items
                 slots[i].Show();
             }
 
+            int slotIndex = 0;
             if (collectionSource == ItemCollectionSource.PlayerInventoryShop ||
                 collectionSource == ItemCollectionSource.PlayerInventoryCharacterRoster)
             {
@@ -85,7 +87,12 @@ namespace WeAreGladiators.Items
                     {
                         slots[i].Show();
                     }
-                    BuildInventoryItemViewFromData(inventoryItemViews[i], InventoryController.Instance.PlayerInventory[i]);
+                    if (DoesInventoryItemMatchFilter(InventoryController.Instance.PlayerInventory[i], filterSetting))
+                    {
+                        BuildInventoryItemViewFromData(inventoryItemViews[slotIndex], InventoryController.Instance.PlayerInventory[i]);
+                        slotIndex += 1;
+                    }
+                       
                 }
             }
 
@@ -98,9 +105,31 @@ namespace WeAreGladiators.Items
                     {
                         slots[i].Show();
                     }
-                    armouryItemViews[i].BuildFromItemShopData(TownController.Instance.currentArmouryItems[i]);
+
+                    if(DoesItemMatchFilter(TownController.Instance.currentArmouryItems[i].Item, filterSetting))
+                    {
+                        armouryItemViews[slotIndex].BuildFromItemShopData(TownController.Instance.currentArmouryItems[i]);
+                        slotIndex += 1;
+                    }                    
                 }
-            }            
+            }
+
+            else if (collectionSource == ItemCollectionSource.LibraryShop)
+            {
+                // Build items
+                for (int i = 0; i < TownController.Instance.currentLibraryTomes.Count; i++)
+                {
+                    if (i >= minimumSlotsShown)
+                    {
+                        slots[i].Show();
+                    }
+                    if(filterSetting == FilterSetting.All || filterSetting == FilterSetting.AbilityBooks)
+                    {
+                        armouryItemViews[slotIndex].BuildFromTomeShopData(TownController.Instance.currentLibraryTomes[i]);
+                        slotIndex += 1;
+                    }                    
+                }
+            }
 
             TransformUtils.RebuildLayouts(layoutsRebuilt);
             if (resetSliders) ResetScrollView();
@@ -146,6 +175,76 @@ namespace WeAreGladiators.Items
             scrollView.vertical = onOrOff;
         }
 
+        public bool DoesItemMatchFilter(ItemData item, FilterSetting filter)
+        {
+            bool ret = false;
+            if(filter == FilterSetting.All)
+            {
+                ret = true;
+            }
+            else if(filter == FilterSetting.Weapons &&
+                item.itemType != ItemType.Trinket &&
+                (item.allowedSlot == WeaponSlot.Offhand ||
+                item.allowedSlot == WeaponSlot.MainHand ||
+                item.allowedSlot == WeaponSlot.EitherHand))
+            {
+                ret = true;
+            }
+            else if (filter == FilterSetting.Head && item.itemType == ItemType.Head)
+            {
+                ret = true;
+            }
+            else if (filter == FilterSetting.Body && item.itemType == ItemType.Body)
+            {
+                ret = true;
+            }
+            else if (filter == FilterSetting.Trinket && item.itemType == ItemType.Trinket)
+            {
+                ret = true;
+            }
+
+            return ret;
+        }
+        public bool DoesInventoryItemMatchFilter(InventoryItem item, FilterSetting filter)
+        {
+            bool ret = false;
+            if (filter == FilterSetting.All)
+            {
+                ret = true;
+            }
+            else if(item.abilityData != null && filter == FilterSetting.AbilityBooks)
+            {
+                ret = true;
+            }
+            else if (filter == FilterSetting.Weapons &&
+                item.itemData.itemType != ItemType.Trinket &&
+                (item.itemData.allowedSlot == WeaponSlot.Offhand ||
+                item.itemData.allowedSlot == WeaponSlot.MainHand ||
+                item.itemData.allowedSlot == WeaponSlot.EitherHand))
+            {
+                ret = true;
+            }
+            else if (filter == FilterSetting.Head && item.itemData.itemType == ItemType.Head)
+            {
+                ret = true;
+            }
+            else if (filter == FilterSetting.Body && item.itemData.itemType == ItemType.Body)
+            {
+                ret = true;
+            }
+            else if (filter == FilterSetting.Trinket && item.itemData.itemType == ItemType.Trinket)
+            {
+                ret = true;
+            }
+
+            return ret;
+        }
+
+        public void SetFilter(FilterSetting filter)
+        {
+            filterSetting = filter;
+        }
+
 
     }
 
@@ -155,5 +254,16 @@ namespace WeAreGladiators.Items
         PlayerInventoryShop = 1,
         ArmouryShop = 2,
         LibraryShop = 3,
+    }
+
+    public enum FilterSetting
+    {
+        All = 0,
+        AbilityBooks = 1,
+        Weapons = 2,
+        Head = 3,
+        Body = 4,
+        Trinket = 5,
+
     }
 }

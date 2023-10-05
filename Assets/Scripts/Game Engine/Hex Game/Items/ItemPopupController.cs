@@ -114,7 +114,7 @@ namespace WeAreGladiators.Items
         public void OnShopItemMousedOver(ItemShopSlot item)
         {
             FadeInPanel();
-            BuildPanelFromItemData(item.MyData.Item);
+            BuildPanelFromItemData(item.MyItemData.Item);
             PlacePanelAtShopItemSlotPosition(item);
             TransformUtils.RebuildLayouts(transformsRebuilt);
             PlacePanelAtShopItemSlotPosition(item);

@@ -89,13 +89,8 @@ namespace WeAreGladiators.TownFeatures
 
         [Title("Library Page Components")]
         [SerializeField] private GameObject libraryPageVisualParent;
-        [SerializeField] private AbilityTomeShopSlot[] abilityTomeShopSlots;
-        [SerializeField] private LibraryCharacterDropSlot libraryCharacterSlot;
-        [SerializeField] private LibraryAbilityDropSlot libraryAbilitySlot;
-        [SerializeField] private TextMeshProUGUI invalidLibraryActionText;
-        [SerializeField] private Image confirmLearnAbilityImage;
-        [SerializeField] private Sprite invalidButtonSprite;
-        [SerializeField] private Sprite validButtonSprite;
+        [SerializeField] private ItemGridScrollView playerInventoryGridLibraryPage;
+        [SerializeField] private ItemGridScrollView libraryItemGrid;
         [Space(20)]
 
         [Title("Armoury Page Components")]
@@ -124,7 +119,7 @@ namespace WeAreGladiators.TownFeatures
         private readonly List<HexCharacterData> currentRecruits = new List<HexCharacterData>();
         private RecruitableCharacterTab selectedRecruitTab;
         private readonly List<CombatContractData> currentDailyCombatContracts = new List<CombatContractData>();
-        private readonly List<AbilityTomeShopData> currentLibraryTomes = new List<AbilityTomeShopData>();
+        public readonly List<AbilityTomeShopData> currentLibraryTomes = new List<AbilityTomeShopData>();
         public readonly List<ItemShopData> currentArmouryItems = new List<ItemShopData>();
         private HexCharacterData currentHospitalCharacter;
 
@@ -136,8 +131,6 @@ namespace WeAreGladiators.TownFeatures
         public bool HospitalViewIsActive => hospitalPageVisualParent.activeSelf;
         public bool LibraryViewIsActive => libraryPageVisualParent.activeSelf;
         public bool DeploymentViewIsActive => deploymentPageMainVisualParent.activeSelf;
-        public LibraryAbilityDropSlot LibraryAbilitySlot => libraryAbilitySlot;
-        public LibraryCharacterDropSlot LibraryCharacterSlot => libraryCharacterSlot;
         public bool AnyFeaturePageIsActive
         {
             get
@@ -649,21 +642,17 @@ namespace WeAreGladiators.TownFeatures
 
         #region Library Logic
 
-        public void BuildAndShowLibraryPage()
+        public void BuildAndShowLibraryPage(bool resetFilter)
         {
             libraryPageVisualParent.SetActive(true);
-
-            // Reset tome slots
-            for (int i = 0; i < abilityTomeShopSlots.Length; i++)
+            if (resetFilter)
             {
-                abilityTomeShopSlots[i].Reset();
+                libraryItemGrid.SetFilter(FilterSetting.All);
+                playerInventoryGridLibraryPage.SetFilter(FilterSetting.All);
             }
-
-            // Build tomes
-            for (int i = 0; i < currentLibraryTomes.Count && i < abilityTomeShopSlots.Length; i++)
-            {
-                abilityTomeShopSlots[i].BuildFromTomeShopData(currentLibraryTomes[i]);
-            }
+            
+            libraryItemGrid.BuildInventoryView();
+            playerInventoryGridLibraryPage.BuildInventoryView();
         }
         public void GenerateDailyAbilityTomes()
         {
@@ -698,107 +687,21 @@ namespace WeAreGladiators.TownFeatures
             currentLibraryTomes.Remove(data);
 
             // Rebuild page
-            BuildAndShowLibraryPage();
+            BuildAndShowLibraryPage(false);
         }
-        public void EvaluateLibrarySlots()
-        {
-            confirmLearnAbilityImage.sprite = invalidButtonSprite;
-            invalidLibraryActionText.text = "";
-
-            // Both character and ability have been slotted, evaluate validity
-            if (libraryAbilitySlot.MyAbilityData != null &&
-                libraryCharacterSlot.MyCharacterData != null)
-            {
-                HexCharacterData character = libraryCharacterSlot.MyCharacterData;
-                AbilityData ability = libraryAbilitySlot.MyAbilityData;
-
-                // Doesn't meet talent req
-                if (!CharacterDataController.Instance.DoesCharacterHaveTalent(character.talentPairings,
-                        ability.talentRequirementData.talentSchool, ability.talentRequirementData.level))
-                {
-                    invalidLibraryActionText.text = TextLogic.ReturnColoredText("INVALID \n" +
-                        character.myName + " does not have the required talent: " + ability.talentRequirementData.talentSchool +
-                        " " + ability.talentRequirementData.level + ".", TextLogic.redText);
-                }
-
-                // Already knows the ability
-                else if (character.abilityBook.KnowsAbility(ability.abilityName))
-                {
-                    invalidLibraryActionText.text = TextLogic.ReturnColoredText("INVALID \n" +
-                        character.myName + " already has already learnt " + ability.abilityName + ".", TextLogic.redText);
-                }
-
-                // Valid
-                else
-                {
-                    confirmLearnAbilityImage.sprite = validButtonSprite;
-                    invalidLibraryActionText.text = "Are you sure you want to teach " +
-                        TextLogic.ReturnColoredText(ability.displayedName, TextLogic.neutralYellow) +
-                        " to " + TextLogic.ReturnColoredText(character.myName, TextLogic.neutralYellow) + "?";
-                }
-            }
-        }
-        public void OnLibraryConfirmLearnActionButtonClicked()
-        {
-            if (!IsTeachAbilityActionValidAndReady())
-            {
-                return;
-            }
-
-            AudioManager.Instance.PlaySound(Sound.Effects_Confirm_Level_Up);
-
-            // Teach ability to character
-            LibraryCharacterSlot.MyCharacterData.abilityBook.HandleLearnNewAbility(LibraryAbilitySlot.MyAbilityData);
-
-            // Remove tome from inventory
-            foreach (InventoryItem i in InventoryController.Instance.PlayerInventory)
-            {
-                if (i.abilityData != null &&
-                    i.abilityData.abilityName == libraryAbilitySlot.MyAbilityData.abilityName)
-                {
-                    InventoryController.Instance.RemoveItemFromInventory(i);
-                    break;
-                }
-            }
-
-            // Rebuild inventory view, if open
-            if (InventoryController.Instance.VisualParent.activeSelf)
-            {
-                InventoryController.Instance.BuildAndShowInventoryView();
-            }
-
-            // Clear slots
-            libraryAbilitySlot.ClearAbility();
-            libraryCharacterSlot.ClearCharacter();
-
-            // Rebuild views
-            BuildAndShowLibraryPage();
-        }
-        private bool IsTeachAbilityActionValidAndReady()
-        {
-            bool ret = false;
-
-            if (libraryAbilitySlot.MyAbilityData != null &&
-                libraryCharacterSlot.MyCharacterData != null &&
-                CharacterDataController.Instance.DoesCharacterHaveTalent(libraryCharacterSlot.MyCharacterData.talentPairings,
-                    libraryAbilitySlot.MyAbilityData.talentRequirementData.talentSchool, libraryAbilitySlot.MyAbilityData.talentRequirementData.level) &&
-                !libraryCharacterSlot.MyCharacterData.abilityBook.KnowsAbility(libraryAbilitySlot.MyAbilityData.abilityName)
-               )
-            {
-                ret = true;
-            }
-
-            Debug.Log("IsTeachAbilityActionValidAndReady() returning " + ret);
-
-            return ret;
-        }
+        
 
         #endregion
 
         #region Armoury Logic
 
-        public void BuildAndShowArmouryPage()
+        public void BuildAndShowArmouryPage(bool resetFilter = true)
         {
+            if(resetFilter)
+            {
+                armouryItemGrid.SetFilter(FilterSetting.All);
+                playerInventoryGridArmouryPage.SetFilter(FilterSetting.All);
+            }
             armouryPageVisualParent.SetActive(true);
             armouryItemGrid.BuildInventoryView();
             playerInventoryGridArmouryPage.BuildInventoryView();
@@ -815,7 +718,7 @@ namespace WeAreGladiators.TownFeatures
             currentArmouryItems.Remove(data);
 
             // Rebuild page
-            BuildAndShowArmouryPage();
+            BuildAndShowArmouryPage(false);
         }
         public void GenerateDailyArmouryItems()
         {
@@ -897,10 +800,6 @@ namespace WeAreGladiators.TownFeatures
         public void OnArmouryPageLeaveButtonClicked()
         {
             armouryPageVisualParent.SetActive(false);
-            if (InventoryController.Instance.VisualParent.activeSelf)
-            {
-                InventoryController.Instance.RebuildInventoryView();
-            }
         }
         public void OnArmouryPageButtonClicked()
         {
@@ -916,14 +815,10 @@ namespace WeAreGladiators.TownFeatures
         }
         public void OnLibraryPageButtonClicked()
         {
-            BuildAndShowLibraryPage();
+            BuildAndShowLibraryPage(true);
         }
         public void OnLibraryPageLeaveButtonClicked()
         {
-            // Reset drop slots
-            libraryAbilitySlot.ClearAbility();
-            libraryCharacterSlot.ClearCharacter();
-
             libraryPageVisualParent.SetActive(false);
         }
         public void OnHospitalPageButtonClicked()
