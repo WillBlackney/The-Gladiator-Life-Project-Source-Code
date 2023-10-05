@@ -28,46 +28,40 @@ namespace WeAreGladiators.TownFeatures
         #region Getters + Accessors
 
         public ItemShopData MyItemData { get; private set; }
-        public AbilityTomeShopData MyAbilityTomeData { get; private set; }
         #endregion
 
         #region Input
 
         public void MouseClick()
         {
+            if (MyItemData == null) return;
             if (AbleToBuyItem())
             {
-                if(MyItemData != null)
-                {
-                    TownController.Instance.HandleBuyItemFromArmoury(MyItemData);
-                }
-                else if (MyAbilityTomeData != null)
-                {
-                    TownController.Instance.HandleBuyAbilityTomeFromLibrary(MyAbilityTomeData);
-                }
-               
+                TownController.Instance.HandleBuyItem(MyItemData);
             }
         }
         public void MouseEnter()
         {
-            if (MyItemData != null)
+            if (MyItemData == null) return;
+            if (MyItemData.Item != null)
             {
                 ItemPopupController.Instance.OnShopItemMousedOver(this);
             }
-            else if (MyAbilityTomeData != null)
+            else if (MyItemData.ability != null)
             {
-                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyAbilityTomeData.ability.keyWords);
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyItemData.ability.keyWords);
                 AbilityPopupController.Instance.OnAbilityShopTomeMousedOver(this);
             }
 
         }
         public void MouseExit()
         {
-            if (MyItemData != null)
+            if (MyItemData == null) return;
+            if (MyItemData.Item != null)
             {
                 ItemPopupController.Instance.HidePanel();
             }
-            else if (MyAbilityTomeData != null)
+            else if (MyItemData.ability != null)
             {
                 KeyWordLayoutController.Instance.FadeOutMainView();
                 AbilityPopupController.Instance.OnAbilityButtonMousedExit();
@@ -80,11 +74,12 @@ namespace WeAreGladiators.TownFeatures
 
         private bool AbleToBuyItem()
         {
+            if (MyItemData == null) return false;
+
             bool ret = false;
 
             int cost = 100000;
-            if (MyItemData != null) cost = MyItemData.GoldCost;
-            else if (MyAbilityTomeData != null) cost = MyAbilityTomeData.goldCost;
+            if (MyItemData.Item != null || MyItemData.ability != null) cost = MyItemData.GoldCost;
             else return false;
 
             if (cost <= RunController.Instance.CurrentGold &&
@@ -96,46 +91,31 @@ namespace WeAreGladiators.TownFeatures
         }
         public void BuildFromItemShopData(ItemShopData data)
         {
-            MyAbilityTomeData = null;
+            //MyAbilityTomeData = null;
             MyItemData = data;
 
-            gameObject.SetActive(true);            
-            itemImage.sprite = data.Item.ItemSprite;
+            gameObject.SetActive(true);   
+            if(data.Item != null) itemImage.sprite = data.Item.ItemSprite;
+            else if (data.ability != null) itemImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(data.ability.talentRequirementData.talentSchool);
 
             // Color cost text red if not enough gold, or green if selling at a discount
             string col = "<color=#FFFFFF>";
-            if (RunController.Instance.CurrentGold < data.GoldCost)
-            {
-                col = TextLogic.lightRed;
-            }
-            else if (data.GoldCost < data.Item.baseGoldValue)
+            
+            if (data.Item != null && data.GoldCost < data.Item.baseGoldValue)
             {
                 col = TextLogic.lightGreen;
             }
-            goldCostText.text = TextLogic.ReturnColoredText(data.GoldCost.ToString(), col);
-        }
-        public void BuildFromTomeShopData(AbilityTomeShopData data)
-        {
-            MyAbilityTomeData = data;
-            MyItemData = null;
-
-            gameObject.SetActive(true);
-            itemImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(data.ability.talentRequirementData.talentSchool);
-
-            // Color cost text red if not enough gold, or green if selling at a discount
-            string col = "<color=#FFFFFF>";
-            if (RunController.Instance.CurrentGold < data.goldCost)
+            else if (RunController.Instance.CurrentGold < data.GoldCost)
             {
                 col = TextLogic.lightRed;
             }
-            goldCostText.text = TextLogic.ReturnColoredText(data.goldCost.ToString(), col);
-
+            goldCostText.text = TextLogic.ReturnColoredText(data.GoldCost.ToString(), col);
         }
         public void Reset()
         {
             gameObject.SetActive(false);
             MyItemData = null;
-            MyAbilityTomeData = null;
+            //MyAbilityTomeData = null;
         }
        
 
@@ -144,14 +124,22 @@ namespace WeAreGladiators.TownFeatures
 
     public class ItemShopData
     {
-        [OdinSerialize] private int baseGoldCost;
+        [OdinSerialize] private int baseGoldPrice;
         [OdinSerialize] private ItemData item;
-
+        [OdinSerialize] public AbilityData ability;
         public ItemData Item => item;
+        public int BaseGoldPrice => baseGoldPrice;
         public ItemShopData(ItemData item, int baseGoldCost)
         {
+            ability = null;
             this.item = item;
-            this.baseGoldCost = baseGoldCost;
+            baseGoldPrice = baseGoldCost;
+        }
+        public ItemShopData(AbilityData ability, int baseGoldCost)
+        {
+            item = null;
+            this.ability = ability;
+            baseGoldPrice = baseGoldCost;
         }
         public int GoldCost
         {
@@ -160,18 +148,20 @@ namespace WeAreGladiators.TownFeatures
                 float priceMod = 1f;
                 if (BoonController.Instance != null)
                 {
-                    if (BoonController.Instance.DoesPlayerHaveBoon(BoonTag.ArmourySurplus))
+                    if (BoonController.Instance.DoesPlayerHaveBoon(BoonTag.ArmourySurplus) &&
+                        ability == null)
                     {
                         priceMod -= 0.5f;
                     }
                 }
 
-                return (int) (baseGoldCost * priceMod);
+                return (int) (baseGoldPrice * priceMod);
             }
         }
         
     }
 
+    /*
     public class AbilityTomeShopData
     {
         public AbilityData ability;
@@ -182,5 +172,5 @@ namespace WeAreGladiators.TownFeatures
             this.ability = ability;
             this.goldCost = goldCost;
         }
-    }
+    }*/
 }

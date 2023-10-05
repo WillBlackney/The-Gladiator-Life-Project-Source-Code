@@ -481,21 +481,36 @@ namespace WeAreGladiators.Items
             // Update item abilities
             character.abilityBook.OnItemSetChanged(character.itemSet);
         }
-        public void HandleSellItemToArmoury(InventoryItem item)
+        public void HandleSellItem(InventoryItem item)
         {
             AudioManager.Instance.PlaySound(Sound.Gold_Cha_Ching);
             InventoryController.Instance.RemoveItemFromInventory(item);
-            TownController.Instance.currentArmouryItems.Add(item);
-            RunController.Instance.ModifyPlayerGold(item.GetSellPrice());
-            TownController.Instance.BuildAndShowArmouryPage(false);
-        }
-        public void HandleSellItemToLibrary(InventoryItem item)
-        {
-            AudioManager.Instance.PlaySound(Sound.Gold_Cha_Ching);
-            InventoryController.Instance.RemoveItemFromInventory(item);
-            TownController.Instance.currentLibraryTomes.Add(item);
-            RunController.Instance.ModifyPlayerGold(item.GetSellPrice());
-            TownController.Instance.BuildAndShowArmouryPage(false);
+            if(TownController.Instance.ArmouryViewIsActive)
+            {
+                if (item.abilityData != null)
+                {
+                    TownController.Instance.currentArmouryItems.Add(new ItemShopData(item.abilityData, 50));
+                }
+                else if (item.itemData != null)
+                {
+                    TownController.Instance.currentArmouryItems.Add(new ItemShopData(item.itemData, item.itemData.baseGoldValue));
+                }
+                RunController.Instance.ModifyPlayerGold(item.GetSellPrice());
+                TownController.Instance.BuildAndShowArmouryPage(false);
+            }
+            else if (TownController.Instance.LibraryViewIsActive)
+            {
+                if (item.abilityData != null)
+                {
+                    TownController.Instance.currentLibraryItems.Add(new ItemShopData(item.abilityData, 50));
+                }
+                else if (item.itemData != null)
+                {
+                    TownController.Instance.currentLibraryItems.Add(new ItemShopData(item.itemData, item.itemData.baseGoldValue));
+                }
+                RunController.Instance.ModifyPlayerGold(item.GetSellPrice());
+                TownController.Instance.BuildAndShowLibraryPage(false);
+            }
         }
         public int GetCharacterItemsGoldValue(ItemSet itemSet)
         {

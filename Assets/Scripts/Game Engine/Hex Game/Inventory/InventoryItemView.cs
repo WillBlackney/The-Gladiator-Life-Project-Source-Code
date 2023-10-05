@@ -69,19 +69,12 @@ namespace WeAreGladiators.Items
             if (myItemGrid.CollectionSource == ItemCollectionSource.PlayerInventoryShop &&
                 !CharacterRosterViewController.Instance.MainVisualParent.activeSelf)
             {
-                if (TownController.Instance.ArmouryViewIsActive)
-                {
-                    ItemController.Instance.HandleSellItemToArmoury(MyItemRef);
-                }
-                else if(TownController.Instance.LibraryViewIsActive)
-                {
-                    ItemController.Instance.HandleSellItemToLibrary(MyItemRef);
-                }
+                ItemController.Instance.HandleSellItem(MyItemRef);
                 return;
             }
 
             // TRY EQUIP
-            if (myItemGrid.CollectionSource == ItemCollectionSource.PlayerInventoryCharacterRoster)
+            else if (myItemGrid.CollectionSource == ItemCollectionSource.PlayerInventoryCharacterRoster)
             {
                 if (MyItemRef.abilityData != null)
                 {
@@ -152,6 +145,7 @@ namespace WeAreGladiators.Items
             if (MyItemRef.abilityData != null)
             {
                 AbilityPopupController.Instance.OnAbilityBookItemMousedOver(this);
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyItemRef.abilityData.keyWords);
             }
             if (MyItemRef.itemData != null)
             {
@@ -167,6 +161,7 @@ namespace WeAreGladiators.Items
             }
             AbilityPopupController.Instance.HidePanel();
             ItemPopupController.Instance.HidePanel();
+            KeyWordLayoutController.Instance.FadeOutMainView();
         }
 
         #endregion

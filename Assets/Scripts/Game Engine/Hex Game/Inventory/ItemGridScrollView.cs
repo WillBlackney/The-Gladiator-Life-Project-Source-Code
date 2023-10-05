@@ -1,10 +1,6 @@
-using Sirenix.Utilities;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using WeAreGladiators.Libraries;
 using WeAreGladiators.TownFeatures;
 using WeAreGladiators.Utilities;
@@ -117,17 +113,19 @@ namespace WeAreGladiators.Items
             else if (collectionSource == ItemCollectionSource.LibraryShop)
             {
                 // Build items
-                for (int i = 0; i < TownController.Instance.currentLibraryTomes.Count; i++)
+                for (int i = 0; i < TownController.Instance.currentLibraryItems.Count; i++)
                 {
+
                     if (i >= minimumSlotsShown)
                     {
                         slots[i].Show();
                     }
-                    if(filterSetting == FilterSetting.All || filterSetting == FilterSetting.AbilityBooks)
+
+                    if (DoesItemMatchFilter(TownController.Instance.currentLibraryItems[i].Item, filterSetting))
                     {
-                        armouryItemViews[slotIndex].BuildFromTomeShopData(TownController.Instance.currentLibraryTomes[i]);
+                        armouryItemViews[slotIndex].BuildFromItemShopData(TownController.Instance.currentLibraryItems[i]);
                         slotIndex += 1;
-                    }                    
+                    }                 
                 }
             }
 
@@ -182,7 +180,12 @@ namespace WeAreGladiators.Items
             {
                 ret = true;
             }
+            else if (filter == FilterSetting.AbilityBooks && item == null)
+            {
+                ret = true;
+            }
             else if(filter == FilterSetting.Weapons &&
+                item != null &&
                 item.itemType != ItemType.Trinket &&
                 (item.allowedSlot == WeaponSlot.Offhand ||
                 item.allowedSlot == WeaponSlot.MainHand ||
@@ -190,15 +193,15 @@ namespace WeAreGladiators.Items
             {
                 ret = true;
             }
-            else if (filter == FilterSetting.Head && item.itemType == ItemType.Head)
+            else if (filter == FilterSetting.Head && item != null && item.itemType == ItemType.Head)
             {
                 ret = true;
             }
-            else if (filter == FilterSetting.Body && item.itemType == ItemType.Body)
+            else if (filter == FilterSetting.Body && item != null && item.itemType == ItemType.Body)
             {
                 ret = true;
             }
-            else if (filter == FilterSetting.Trinket && item.itemType == ItemType.Trinket)
+            else if (filter == FilterSetting.Trinket && item != null && item.itemType == ItemType.Trinket)
             {
                 ret = true;
             }
@@ -217,6 +220,7 @@ namespace WeAreGladiators.Items
                 ret = true;
             }
             else if (filter == FilterSetting.Weapons &&
+                item.itemData != null &&
                 item.itemData.itemType != ItemType.Trinket &&
                 (item.itemData.allowedSlot == WeaponSlot.Offhand ||
                 item.itemData.allowedSlot == WeaponSlot.MainHand ||
@@ -224,15 +228,15 @@ namespace WeAreGladiators.Items
             {
                 ret = true;
             }
-            else if (filter == FilterSetting.Head && item.itemData.itemType == ItemType.Head)
+            else if (filter == FilterSetting.Head && item.itemData != null && item.itemData.itemType == ItemType.Head)
             {
                 ret = true;
             }
-            else if (filter == FilterSetting.Body && item.itemData.itemType == ItemType.Body)
+            else if (filter == FilterSetting.Body && item.itemData != null && item.itemData.itemType == ItemType.Body)
             {
                 ret = true;
             }
-            else if (filter == FilterSetting.Trinket && item.itemData.itemType == ItemType.Trinket)
+            else if (filter == FilterSetting.Trinket && item.itemData != null && item.itemData.itemType == ItemType.Trinket)
             {
                 ret = true;
             }

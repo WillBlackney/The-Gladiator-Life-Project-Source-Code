@@ -9,6 +9,7 @@ using WeAreGladiators.Libraries;
 using WeAreGladiators.RewardSystems;
 using WeAreGladiators.TownFeatures;
 using WeAreGladiators.Utilities;
+using static UnityEditor.Progress;
 
 namespace WeAreGladiators.UI
 {
@@ -113,7 +114,7 @@ namespace WeAreGladiators.UI
         public void OnAbilityShopTomeMousedOver(ItemShopSlot slot)
         {
             FadeInPanel();
-            BuildPanelFromAbilityData(slot.MyAbilityTomeData.ability);
+            BuildPanelFromAbilityData(slot.MyItemData.ability);
             PlacePanelOnAbilityTomeShopSlotPosition(slot);
             TransformUtils.RebuildLayouts(transformsRebuilt);
             PlacePanelOnAbilityTomeShopSlotPosition(slot);
@@ -180,9 +181,15 @@ namespace WeAreGladiators.UI
         }
         private void PlacePanelOnAbilityTomeShopSlotPosition(ItemShopSlot slot)
         {
+            /*
             mainPositioningRect.position = slot.transform.position;
             float xOffset = mainPositioningRect.rect.width / 2 + 80;
-            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x - xOffset, mainPositioningRect.localPosition.y, 0);
+            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x - xOffset, mainPositioningRect.localPosition.y, 0);*/
+
+            mainPositioningRect.position = slot.transform.position;
+            float xOffset = mainPositioningRect.rect.width / 2 + 80;
+            float yOffset = mainPositioningRect.rect.height - 100;
+            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x + xOffset, mainPositioningRect.localPosition.y - yOffset, 0);
         }
         
 

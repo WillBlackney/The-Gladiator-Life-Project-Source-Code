@@ -119,7 +119,7 @@ namespace WeAreGladiators.TownFeatures
         private readonly List<HexCharacterData> currentRecruits = new List<HexCharacterData>();
         private RecruitableCharacterTab selectedRecruitTab;
         private readonly List<CombatContractData> currentDailyCombatContracts = new List<CombatContractData>();
-        public readonly List<AbilityTomeShopData> currentLibraryTomes = new List<AbilityTomeShopData>();
+        public readonly List<ItemShopData> currentLibraryItems = new List<ItemShopData>();
         public readonly List<ItemShopData> currentArmouryItems = new List<ItemShopData>();
         private HexCharacterData currentHospitalCharacter;
 
@@ -176,8 +176,8 @@ namespace WeAreGladiators.TownFeatures
 
             currentDailyCombatContracts.Clear();
             currentDailyCombatContracts.AddRange(saveFile.currentDailyCombatContracts);
-            currentLibraryTomes.Clear();
-            currentLibraryTomes.AddRange(saveFile.currentLibraryTomes);
+            currentLibraryItems.Clear();
+            currentLibraryItems.AddRange(saveFile.currentLibraryTomes);
             currentArmouryItems.Clear();
             currentArmouryItems.AddRange(saveFile.currentItems);
         }
@@ -193,7 +193,7 @@ namespace WeAreGladiators.TownFeatures
             saveFile.currentDailyCombatContracts.AddRange(currentDailyCombatContracts);
 
             saveFile.currentLibraryTomes.Clear();
-            saveFile.currentLibraryTomes.AddRange(currentLibraryTomes);
+            saveFile.currentLibraryTomes.AddRange(currentLibraryItems);
 
             saveFile.currentItems.Clear();
             saveFile.currentItems.AddRange(currentArmouryItems);
@@ -656,7 +656,7 @@ namespace WeAreGladiators.TownFeatures
         }
         public void GenerateDailyAbilityTomes()
         {
-            currentLibraryTomes.Clear();
+            currentLibraryItems.Clear();
             List<AbilityData> abilities = new List<AbilityData>();
             foreach (AbilityData a in AbilityController.Instance.AllAbilities)
             {
@@ -671,23 +671,9 @@ namespace WeAreGladiators.TownFeatures
             for (int i = 0; i < 9; i++)
             {
                 int goldCost = RandomGenerator.NumberBetween(40, 60);
-                currentLibraryTomes.Add(new AbilityTomeShopData(abilities[i], goldCost));
+                currentLibraryItems.Add(new ItemShopData(abilities[i], goldCost));
             }
 
-        }
-        public void HandleBuyAbilityTomeFromLibrary(AbilityTomeShopData data)
-        {
-            // Pay gold cost
-            RunController.Instance.ModifyPlayerGold(-data.goldCost);
-
-            // Add tome to inventory
-            InventoryController.Instance.AddItemToInventory(data.ability);
-
-            // Remove from shop
-            currentLibraryTomes.Remove(data);
-
-            // Rebuild page
-            BuildAndShowLibraryPage(false);
         }
         
 
@@ -706,19 +692,32 @@ namespace WeAreGladiators.TownFeatures
             armouryItemGrid.BuildInventoryView();
             playerInventoryGridArmouryPage.BuildInventoryView();
         }
-        public void HandleBuyItemFromArmoury(ItemShopData data)
+        public void HandleBuyItem(ItemShopData data)
         {
             // Pay gold cost
             RunController.Instance.ModifyPlayerGold(-data.GoldCost);
 
-            // Add tome to inventory
-            InventoryController.Instance.AddItemToInventory(data.Item);
+            // Add item to inventory
+            if (data.Item != null) InventoryController.Instance.AddItemToInventory(data.Item);
+            else if (data.ability != null) InventoryController.Instance.AddItemToInventory(data.ability);
 
-            // Remove from shop
-            currentArmouryItems.Remove(data);
+            if (ArmouryViewIsActive)
+            {
+                // Remove from shop
+                currentArmouryItems.Remove(data);
 
-            // Rebuild page
-            BuildAndShowArmouryPage(false);
+                // Rebuild page
+                BuildAndShowArmouryPage(false);
+            }
+            else if (LibraryViewIsActive)
+            {
+                // Remove from shop
+                currentLibraryItems.Remove(data);
+
+                // Rebuild page
+                BuildAndShowLibraryPage(false);
+            }
+
         }
         public void GenerateDailyArmouryItems()
         {
