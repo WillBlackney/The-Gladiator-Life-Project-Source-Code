@@ -8,10 +8,19 @@ namespace WeAreGladiators.UI
 {
     public class CharacterScrollPanelController : Singleton<CharacterScrollPanelController>
     {
+        #region Components + Properties
 
-        // Getters + Accessors
-        #region
+        [Header("Components")]
+        [SerializeField] private GameObject mainVisualParent;
+        [SerializeField] private TextMeshProUGUI totalCharactersText;
+        [SerializeField] private List<RosterCharacterPanel> allCharacterPanels;
+        [SerializeField] private RectTransform[] dynamicContentFitters;
+        [SerializeField] private GameObject characterPanelPrefab;
+        [SerializeField] private Transform characterPanelParent;
 
+        #endregion
+
+        #region Getters + Accessors
         public RosterCharacterPanel GetCharacterPanel(HexCharacterData character)
         {
             RosterCharacterPanel ret = null;
@@ -28,21 +37,8 @@ namespace WeAreGladiators.UI
         }
 
         #endregion
-        // Components + Properties
-        #region
 
-        [Header("Components")]
-        [SerializeField] private GameObject mainVisualParent;
-        [SerializeField] private TextMeshProUGUI totalCharactersText;
-        [SerializeField] private List<RosterCharacterPanel> allCharacterPanels;
-        [SerializeField] private RectTransform[] dynamicContentFitters;
-        [SerializeField] private GameObject characterPanelPrefab;
-        [SerializeField] private Transform characterPanelParent;
-
-        #endregion
-
-        // Show + Hide Logic
-        #region
+        #region Show + Hide Logic
 
         public void ShowMainView()
         {
@@ -55,8 +51,7 @@ namespace WeAreGladiators.UI
 
         #endregion
 
-        // Build Logic
-        #region
+        #region Build Logic
 
         public void BuildAndShowPanel()
         {

@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using DG.Tweening;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
@@ -22,6 +21,8 @@ namespace WeAreGladiators.UI
 
         [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
+        [SerializeField] private Transform scalingParent;
+        [SerializeField] private Image blackUnderlay;
         [SerializeField] private ScrollRect statsPageScrollView;
         [SerializeField] private Scrollbar statsPageScrollBar;
         [SerializeField] private ItemGridScrollView playerInventory;
@@ -203,22 +204,8 @@ namespace WeAreGladiators.UI
                 HandleBuildAndShowCharacterRoster();
             }
         }
-        public void BuildAndShowFromCharacterData(HexCharacterData data)
-        {
-            if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0)
-            {
-                return;
-            }
-            if (!mainVisualParent.activeInHierarchy)
-            {
-                statsPageScrollView.verticalNormalizedPosition = 1;
-                statsPageScrollBar.value = 1;
-            }
-            mainVisualParent.SetActive(true);
-            BuildRosterForCharacter(data);
-            characterPanelUcm.SetIdleAnim();
-        }
-        private void HandleBuildAndShowCharacterRoster()
+       
+        public void HandleBuildAndShowCharacterRoster(HexCharacterData character = null)
         {
             Debug.Log("ShowCharacterRosterScreen()");
             if (CharacterDataController.Instance.AllPlayerCharacters.Count == 0)
@@ -227,14 +214,42 @@ namespace WeAreGladiators.UI
             }
             if (!mainVisualParent.activeInHierarchy)
             {
-                statsPageScrollView.verticalNormalizedPosition = 1;
-                statsPageScrollBar.value = 1;
+                RevealAnimateCharacterRoster();
             }
+
+            if(character == null)
+            {
+                character = CharacterDataController.Instance.AllPlayerCharacters[0];
+            }
+
             mainVisualParent.SetActive(true);
-            HexCharacterData data = CharacterDataController.Instance.AllPlayerCharacters[0];
-            BuildRosterForCharacter(data);
+            BuildRosterForCharacter(character);
             characterPanelUcm.SetIdleAnim();
             playerInventory.BuildInventoryView(true);
+        }
+        private void RevealAnimateCharacterRoster()
+        {
+            blackUnderlay.DOKill();
+            blackUnderlay.DOFade(0.5f, 0.5f);
+
+            scalingParent.DOKill();
+            if(scalingParent.localScale.x == 1)
+            {
+                scalingParent.DOScale(0.001f, 0);
+            }
+            
+            scalingParent.DOScale(1f, 0.25f).SetEase(Ease.OutCubic);
+
+            statsPageScrollView.verticalNormalizedPosition = 1;
+            statsPageScrollBar.value = 1;
+        }
+        private void HideAnimateCharacterRoster()
+        {
+            blackUnderlay.DOKill();
+            blackUnderlay.DOFade(0f, 0.25f);
+
+            scalingParent.DOKill();
+            scalingParent.DOScale(0.001f, 0.25f).SetEase(Ease.OutCubic).OnComplete(()=> mainVisualParent.SetActive(false));
         }
         public void HandleRedrawRosterOnCharacterUpdated()
         {
@@ -275,7 +290,8 @@ namespace WeAreGladiators.UI
         {
             Debug.Log("HideCharacterRosterScreen()");
             CharacterCurrentlyViewing = null;
-            mainVisualParent.SetActive(false);
+            HideAnimateCharacterRoster();
+            
         }
 
         #endregion
