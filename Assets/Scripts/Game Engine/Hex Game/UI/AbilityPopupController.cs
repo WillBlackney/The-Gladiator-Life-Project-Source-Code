@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using TMPro;
+using UnityEditor.Graphs;
 using UnityEngine;
 using UnityEngine.UI;
 using WeAreGladiators.Abilities;
@@ -58,9 +59,9 @@ namespace WeAreGladiators.UI
         {
             FadeInPanel();
             BuildPanelFromAbilityData(b.AbilityReward);
-            PlacePanelAboveTransform(b.transform);
+            PlacePanelRightOfTransform(b.transform);
             TransformUtils.RebuildLayouts(transformsRebuilt);
-            PlacePanelAboveTransform(b.transform);
+            PlacePanelRightOfTransform(b.transform);
         }
         public void OnCombatContractAbilityIconMousedOver(CombatContractCard b)
         {
@@ -172,6 +173,21 @@ namespace WeAreGladiators.UI
             mainPositioningRect.position = b.transform.position;
             mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x, mainPositioningRect.localPosition.y + yOffSet, 0);
         }
+        private void PlacePanelRightOfTransform(Transform b)
+        {
+            /*
+            RectTransform rect = mainPositioningRect;
+            float xOffset = rect.rect.width / 2 + 80;
+            float yOffset = 20;
+
+            rect.position = b.transform.position;
+            rect.localPosition = new Vector3(rect.localPosition.x + xOffset, rect.localPosition.y + yOffset, 0);*/
+
+            mainPositioningRect.position = b.transform.position;
+            float xOffset = mainPositioningRect.rect.width / 2 + 80;
+            float yOffset = mainPositioningRect.rect.height - 100;
+            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x + xOffset, mainPositioningRect.localPosition.y - yOffset, 0);
+        }
         private void PlacePanelOnInventoryItemPosition(InventoryItemView item)
         {
             mainPositioningRect.position = item.transform.position;
@@ -181,11 +197,6 @@ namespace WeAreGladiators.UI
         }
         private void PlacePanelOnAbilityTomeShopSlotPosition(ItemShopSlot slot)
         {
-            /*
-            mainPositioningRect.position = slot.transform.position;
-            float xOffset = mainPositioningRect.rect.width / 2 + 80;
-            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x - xOffset, mainPositioningRect.localPosition.y, 0);*/
-
             mainPositioningRect.position = slot.transform.position;
             float xOffset = mainPositioningRect.rect.width / 2 + 80;
             float yOffset = mainPositioningRect.rect.height - 100;

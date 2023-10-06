@@ -45,7 +45,7 @@ namespace WeAreGladiators.Items
             targets.ForEach(t =>
             {
                 t.SetFilter(filterMode);
-                t.BuildInventoryView();
+                t.BuildItemCollectionView();
             });
         }
 

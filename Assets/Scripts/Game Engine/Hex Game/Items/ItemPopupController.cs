@@ -75,9 +75,9 @@ namespace WeAreGladiators.Items
         {
             FadeInPanel();
             BuildPanelFromItemData(icon.ItemReward);
-            PlacePanelAboveTransform(icon.transform);
+            PlacePanelRightOfTransform(icon.transform);
             TransformUtils.RebuildLayouts(transformsRebuilt);
-            PlacePanelAboveTransform(icon.transform);
+            PlacePanelRightOfTransform(icon.transform);
         }
         public void OnCombatContractItemIconMousedOver(CombatContractCard card)
         {
@@ -151,8 +151,18 @@ namespace WeAreGladiators.Items
         // Place + Position Panel
         #region
 
-        private void PlacePanelAboveTransform(Transform t)
+        private void PlacePanelRightOfTransform(Transform t)
         {
+            RectTransform rect = visualParent.GetComponent<RectTransform>();
+            float xOffset = rect.rect.width / 2 + 80;
+            float yOffset = 100;
+
+            rect.position = t.transform.position;
+            rect.localPosition = new Vector3(rect.localPosition.x + xOffset, rect.localPosition.y + yOffset, 0);
+        }
+
+        private void PlacePanelAboveTransform(Transform t)
+        {            
             RectTransform rect = visualParent.GetComponent<RectTransform>();
             float yOffset = 50 + rect.rect.height;
 
@@ -163,16 +173,16 @@ namespace WeAreGladiators.Items
         {
             RectTransform rect = visualParent.GetComponent<RectTransform>();
             float xOffset = rect.rect.width / 2 + 80;
-            float yOffset = 0;
+            float yOffset = 100;
 
             rect.position = view.transform.position;
-            rect.localPosition = new Vector3(rect.localPosition.x + xOffset, rect.localPosition.y - yOffset, 0);
+            rect.localPosition = new Vector3(rect.localPosition.x + xOffset, rect.localPosition.y + yOffset, 0);
         }
         private void PlacePanelAtShopItemSlotPosition(ItemShopSlot view)
         {
             RectTransform rect = visualParent.GetComponent<RectTransform>();
             float xOffset = rect.rect.width / 2 + 80;
-            float yOffset = rect.rect.height / 2;
+            float yOffset = 100;
 
             rect.position = view.transform.position;
             rect.localPosition = new Vector3(rect.localPosition.x + xOffset, rect.localPosition.y + yOffset, 0);

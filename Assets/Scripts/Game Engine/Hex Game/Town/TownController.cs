@@ -651,8 +651,8 @@ namespace WeAreGladiators.TownFeatures
                 playerInventoryGridLibraryPage.SetFilter(FilterSetting.All);
             }
             
-            libraryItemGrid.BuildInventoryView();
-            playerInventoryGridLibraryPage.BuildInventoryView();
+            libraryItemGrid.BuildItemCollectionView();
+            playerInventoryGridLibraryPage.BuildItemCollectionView();
         }
         public void GenerateDailyAbilityTomes()
         {
@@ -689,8 +689,8 @@ namespace WeAreGladiators.TownFeatures
                 playerInventoryGridArmouryPage.SetFilter(FilterSetting.All);
             }
             armouryPageVisualParent.SetActive(true);
-            armouryItemGrid.BuildInventoryView();
-            playerInventoryGridArmouryPage.BuildInventoryView();
+            armouryItemGrid.BuildItemCollectionView();
+            playerInventoryGridArmouryPage.BuildItemCollectionView();
         }
         public void HandleBuyItem(ItemShopData data)
         {

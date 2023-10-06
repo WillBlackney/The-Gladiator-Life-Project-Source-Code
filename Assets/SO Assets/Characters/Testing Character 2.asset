@@ -19,15 +19,15 @@ MonoBehaviour:
   modelSize: 0
   attributeSheet:
     accuracy:
-      value: 100
+      value: 200
       stars: 0
-    apMaximum: 8
-    apRecovery: 8
+    apMaximum: 100
+    apRecovery: 100
     auraSize: 1
     constitution:
       value: 1000
       stars: 0
-    criticalChance: 100
+    criticalChance: 5
     criticalModifier: 50
     deathResistance: 25
     debuffResistance: 0
@@ -53,13 +53,9 @@ MonoBehaviour:
       value: 5
       stars: 0
   abilityBook:
-    activeAbilities:
-    - {fileID: 11400000, guid: 90e62be2d401c2f4383195876bbc8ff5, type: 2}
+    activeAbilities: []
   serializedPassiveManager:
-    perks:
-    - perkTag: 17
-      stacks: 1
-      freshInjury: 0
+    perks: []
   modelParts:
   - Undead_Chest_1
   - Undead_Head_1
@@ -67,8 +63,8 @@ MonoBehaviour:
   - Undead_Right_Hand_1
   - Undead_Right_Leg_1
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
-    offHandItem: {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
+    mainHandItem: {fileID: 11400000, guid: e8567b630dd37c042a06a339a93e409e, type: 2}
+    offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}

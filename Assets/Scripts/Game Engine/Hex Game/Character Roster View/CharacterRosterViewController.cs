@@ -225,7 +225,7 @@ namespace WeAreGladiators.UI
             mainVisualParent.SetActive(true);
             BuildRosterForCharacter(character);
             characterPanelUcm.SetIdleAnim();
-            playerInventory.BuildInventoryView(true);
+            playerInventory.BuildItemCollectionView(true);
         }
         private void RevealAnimateCharacterRoster()
         {
@@ -658,7 +658,7 @@ namespace WeAreGladiators.UI
             currentSelectedAbilityTome = null;
 
             // Rebuild character roster views
-            playerInventory.BuildInventoryView();
+            playerInventory.BuildItemCollectionView();
             AudioManager.Instance.PlaySound(Sound.Effects_Confirm_Level_Up);
             HandleRedrawRosterOnCharacterUpdated();
             CharacterScrollPanelController.Instance.RebuildViews();

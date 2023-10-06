@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using WeAreGladiators.Libraries;
+using WeAreGladiators.RewardSystems;
 using WeAreGladiators.TownFeatures;
 using WeAreGladiators.Utilities;
 
@@ -26,6 +27,7 @@ namespace WeAreGladiators.Items
 
         private List<InventoryItemView> inventoryItemViews = new List<InventoryItemView>();
         private List<ItemShopSlot> armouryItemViews = new List<ItemShopSlot>();
+        private List<CombatLootIcon> lootIconViews = new List<CombatLootIcon>();
         private bool initialized = false;
         private FilterSetting filterSetting = FilterSetting.All;
 
@@ -45,32 +47,15 @@ namespace WeAreGladiators.Items
 
             armouryItemViews.Clear();
             slots.ForEach(slot => armouryItemViews.Add(slot.MyArmouryItemView));
+
+            lootIconViews.Clear();
+            slots.ForEach(slot => lootIconViews.Add(slot.MylootIconView));
         }
 
-        public void BuildInventoryView(bool resetSliders = false)
+        public void BuildItemCollectionView(bool resetSliders = false)
         {
             GetItemViewsComponents();
-
-            // Reset item views + slots
-            foreach (InventoryItemView i in inventoryItemViews)
-            {
-                i.Reset();
-            }
-            foreach (InventorySlot s in slots)
-            {
-                s.Reset();
-            }
-            foreach (ItemShopSlot s in armouryItemViews)
-            {
-                s.Reset();
-            }
-
-
-            // Show minimum slots
-            for (int i = 0; i < minimumSlotsShown; i++)
-            {
-                slots[i].Show();
-            }
+            ResetSlots();
 
             int slotIndex = 0;
             if (collectionSource == ItemCollectionSource.PlayerInventoryShop ||
@@ -88,7 +73,7 @@ namespace WeAreGladiators.Items
                         BuildInventoryItemViewFromData(inventoryItemViews[slotIndex], InventoryController.Instance.PlayerInventory[i]);
                         slotIndex += 1;
                     }
-                       
+
                 }
             }
 
@@ -102,11 +87,11 @@ namespace WeAreGladiators.Items
                         slots[i].Show();
                     }
 
-                    if(DoesItemMatchFilter(TownController.Instance.currentArmouryItems[i].Item, filterSetting))
+                    if (DoesItemMatchFilter(TownController.Instance.currentArmouryItems[i].Item, filterSetting))
                     {
                         armouryItemViews[slotIndex].BuildFromItemShopData(TownController.Instance.currentArmouryItems[i]);
                         slotIndex += 1;
-                    }                    
+                    }
                 }
             }
 
@@ -125,14 +110,54 @@ namespace WeAreGladiators.Items
                     {
                         armouryItemViews[slotIndex].BuildFromItemShopData(TownController.Instance.currentLibraryItems[i]);
                         slotIndex += 1;
-                    }                 
+                    }
                 }
             }
+            
 
             TransformUtils.RebuildLayouts(layoutsRebuilt);
             if (resetSliders) ResetScrollView();
         }
 
+        public void BuildForLootRewards(CombatContractData contract, List<ItemData> extraLoot = null)
+        {
+            int nextSlotIndex = 0;
+            ResetSlots();
+            BuildItemCollectionView(true);
+            if(contract.combatRewardData.goldAmount > 0)
+            {
+                lootIconViews[nextSlotIndex].BuildAsGoldReward(contract.combatRewardData.goldAmount);
+                nextSlotIndex += 1;
+            }
+            if (contract.combatRewardData.abilityAwarded != null)
+            {
+                lootIconViews[nextSlotIndex].BuildAsAbilityReward(contract.combatRewardData.abilityAwarded);
+                nextSlotIndex += 1;
+            }
+            if (contract.combatRewardData.item != null)
+            {
+                lootIconViews[nextSlotIndex].BuildAsItemReward(contract.combatRewardData.item);
+                nextSlotIndex += 1;
+            }
+
+            // to do in future: build slots for bonus loot
+
+        }
+
+        public void ResetSlots()
+        {
+            // Reset item views + slots
+            inventoryItemViews.ForEach(i => i.Reset());
+            armouryItemViews.ForEach(i => i.Reset());
+            lootIconViews.ForEach(i => i.Reset());
+            slots.ForEach(i => i.Reset());
+
+            // Show minimum slots
+            for (int i = 0; i < minimumSlotsShown; i++)
+            {
+                slots[i].Show();
+            }
+        }
         private void BuildInventoryItemViewFromData(InventoryItemView view, InventoryItem item)
         {
             view.gameObject.SetActive(true);
@@ -258,6 +283,7 @@ namespace WeAreGladiators.Items
         PlayerInventoryShop = 1,
         ArmouryShop = 2,
         LibraryShop = 3,
+        RewardScreenLoot = 4,
     }
 
     public enum FilterSetting

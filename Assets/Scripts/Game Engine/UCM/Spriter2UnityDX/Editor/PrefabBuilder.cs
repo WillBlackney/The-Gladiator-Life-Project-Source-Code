@@ -30,6 +30,7 @@ namespace Spriter2UnityDX.Prefabs
             ProcessingInfo = info;
         }
 
+        [Obsolete]
         public bool Build(ScmlObject obj, string scmlPath)
         {
             //The process begins by loading up all the textures
@@ -81,6 +82,7 @@ namespace Spriter2UnityDX.Prefabs
             return success;
         }
 
+        [Obsolete]
         private void TryBuild(Entity entity, GameObject prefab, GameObject instance, string directory, string prefabPath, IDictionary<int, IDictionary<int, Sprite>> folders)
         {
             string controllerPath = string.Format("{0}/{1}.controller", directory, entity.name);
@@ -229,6 +231,8 @@ namespace Spriter2UnityDX.Prefabs
             PrefabUtility.ReplacePrefab(instance, prefab, ReplacePrefabOptions.ConnectToPrefab);
             DestroyImmediate(instance); //Apply the instance's changes to the prefab, then destroy the instance.
         }
+
+        [Obsolete]
         private Sprite GetSpriteAtPath(string path, File file, ref bool success)
         {
             TextureImporter importer = AssetImporter.GetAtPath(path) as TextureImporter;

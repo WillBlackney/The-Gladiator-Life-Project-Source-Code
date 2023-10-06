@@ -24,11 +24,9 @@ namespace WeAreGladiators.RewardSystems
 
         [Header("Text Components")]
         [SerializeField] private TextMeshProUGUI nameText;
-        [SerializeField] private TextMeshProUGUI subNameText;
         [SerializeField] private TextMeshProUGUI currentLevelText;
         [SerializeField] private TextMeshProUGUI xpText;
         [SerializeField] private TextMeshProUGUI healthLostText;
-        [SerializeField] private TextMeshProUGUI stressGainedText;
         [SerializeField] private TextMeshProUGUI killsText;
         [SerializeField] private TextMeshProUGUI armourLostText;
         [SerializeField] private TextMeshProUGUI damageDealtText;
@@ -42,16 +40,12 @@ namespace WeAreGladiators.RewardSystems
         public GameObject DeathIndicatorParent => deathIndicatorParent;
         public GameObject PortraitDeathIcon => portraitDeathIcon;
         public UniversalCharacterModel Ucm => ucm;
-
         public GameObject LevelUpParent => levelUpParent;
-
         public UIPerkIcon[] InjuryIcons => injuryIcons;
         public TextMeshProUGUI CurrentLevelText => currentLevelText;
         public TextMeshProUGUI NameText => nameText;
-        public TextMeshProUGUI SubNameText => subNameText;
         public TextMeshProUGUI XpText => xpText;
         public TextMeshProUGUI HealthLostText => healthLostText;
-        public TextMeshProUGUI StressGainedText => stressGainedText;
         public TextMeshProUGUI KillsText => killsText;
         public TextMeshProUGUI ArmourLostText => armourLostText;
         public TextMeshProUGUI DamageDealtText => damageDealtText;

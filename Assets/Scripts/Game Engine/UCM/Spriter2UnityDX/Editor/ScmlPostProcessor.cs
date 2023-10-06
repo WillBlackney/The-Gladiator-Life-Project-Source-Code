@@ -22,6 +22,7 @@ namespace Spriter2UnityDX.PostProcessing
         private static readonly IList<string> cachedPaths = new List<string>();
 
         //Called after an import, detects if imported files end in .scml
+        [System.Obsolete]
         private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
         {
             List<string> filesToProcess = new List<string>();
@@ -62,6 +63,7 @@ namespace Spriter2UnityDX.PostProcessing
 
         }
 
+        [System.Obsolete]
         private static void ProcessFiles(IList<string> paths)
         {
             ScmlProcessingInfo info = new ScmlProcessingInfo();

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
 using WeAreGladiators.Items;
@@ -19,15 +21,33 @@ namespace WeAreGladiators.RewardSystems
 {
     public class CombatRewardController : Singleton<CombatRewardController>
     {
-        // Getters + Accesors
-        #region
+        #region Properties + Components
+
+        [Header("Core Components")]
+        [SerializeField] private GameObject mainVisualParent;
+        [SerializeField] private TextMeshProUGUI headerText;
+        [SerializeField] private RectTransform contentRect;
+        [SerializeField] private RectTransform contentOffScreenRect;
+        [SerializeField] private RectTransform contentOnScreenRect;
+        [SerializeField] private UnityEngine.UI.Image blackUnderlay;
+        [SerializeField] private ItemGridScrollView lootGrid;
+        [SerializeField] private ScrollRect characterStatsScrollView;
+        [SerializeField] private Scrollbar characterStatsScrollBar;
+
+        [Header("Page UI Components")]
+        [SerializeField] private List<CharacterCombatStatCard> allCharacterStatCards;
+        [SerializeField] private GameObject characterStatCardPrefab;
+        [SerializeField] private Transform characterStatCardParent;
+
+        #endregion
+
+        #region Getters + Accesors
 
         public List<CharacterCombatStatData> CurrentStatResults { get; private set; } = new List<CharacterCombatStatData>();
 
         #endregion
 
-        // Items Loot Reward Logic
-        #region
+        #region Items Loot Reward Logic
 
         public void HandleGainRewardsOfContract(CombatContractData contract)
         {
@@ -36,7 +56,7 @@ namespace WeAreGladiators.RewardSystems
             InventoryController.Instance.AddItemToInventory(contract.combatRewardData.abilityAwarded);
         }
 
-        #endregion
+        #endregion 
 
         #region Movement + Anims
 
@@ -49,50 +69,11 @@ namespace WeAreGladiators.RewardSystems
             contentRect.DOKill();
             contentRect.position = contentOffScreenRect.position;
             contentRect.DOMove(contentOnScreenRect.position, 1.5f).SetEase(Ease.OutBack);
-
-        }
-
-        #endregion
-        // Properties + Components
-        #region
-
-        [Header("Core Components")]
-        [SerializeField] private GameObject mainVisualParent;
-        [SerializeField] private RectTransform contentRect;
-        [SerializeField] private RectTransform contentOffScreenRect;
-        [SerializeField] private RectTransform contentOnScreenRect;
-        [SerializeField] private Image blackUnderlay;
-
-        [Header("Page UI Components")]
-        [SerializeField] private TextMeshProUGUI headerText;
-        [SerializeField] private GameObject characterStatPageVisualParent;
-        [SerializeField] private GameObject lootPageVisualParent;
-        [SerializeField] private List<CharacterCombatStatCard> allCharacterStatCards;
-        [SerializeField] private GameObject characterStatCardPrefab;
-        [SerializeField] private Transform characterStatCardParent;
-        [SerializeField] private List<CombatLootIcon> lootIcons;
-
-        [Header("Button Components")]
-        [SerializeField]
-        private Sprite selectedButtonSprite;
-        [SerializeField] private Sprite unselectedButtonSprite;
-        [SerializeField] private Image statsHeaderButtonImage;
-        [SerializeField] private Image lootHeaderButtonImage;
-
-        [Header("Game Over Screen Components")]
-        [SerializeField] private GameObject gameOverVisualParent;
-
-        private WindowState currentWindowViewing = WindowState.CharactersPage;
-        private enum WindowState
-        {
-            CharactersPage = 0,
-            LootPage = 1
         }
 
         #endregion
 
-        // Persistency Controller
-        #region
+        #region Persistency Controller
 
         public void SaveMyDataToSaveFile(SaveGameData saveData)
         {
@@ -109,8 +90,7 @@ namespace WeAreGladiators.RewardSystems
 
         #endregion
 
-        // Xp Reward Logic
-        #region
+        #region XP Reward Logic
 
         public List<CharacterCombatStatData> GenerateCombatStatResultsForCharacters(List<HexCharacterModel> characters, bool victory)
         {
@@ -195,8 +175,7 @@ namespace WeAreGladiators.RewardSystems
 
         #endregion
 
-        // Build + Show Screen views
-        #region
+        #region Build + Show Screen views
 
         public void HidePostCombatRewardScreen()
         {
@@ -204,36 +183,27 @@ namespace WeAreGladiators.RewardSystems
         }
         public void BuildAndShowPostCombatScreen(List<CharacterCombatStatData> data, CombatContractData contractData, bool victory)
         {
-            SetContentDefaultViewState();
+            mainVisualParent.SetActive(true);
             BuildCharacterStatCardPage(data);
-            MoveContentOnScreen();
+            lootGrid.ResetSlots();
+
             if (victory)
             {
                 AudioManager.Instance.PlaySound(Sound.Music_Victory_Fanfare);
                 headerText.text = "VICTORY!";
-                BuildLootPageFromContractLootData(contractData);
+                lootGrid.BuildForLootRewards(contractData);
             }
             else
             {
                 AudioManager.Instance.PlaySound(Sound.Music_Defeat_Fanfare);
                 headerText.text = "DEFEAT!";
-                // Hide Loot Icons
-                for (int i = 0; i < lootIcons.Count; i++)
-                {
-                    lootIcons[i].Reset();
-                }
+                lootGrid.ResetSlots();
             }
 
+            MoveContentOnScreen();
+            ResetScrollView();
         }
-        private void SetContentDefaultViewState()
-        {
-            mainVisualParent.SetActive(true);
-            characterStatPageVisualParent.SetActive(true);
-            currentWindowViewing = WindowState.CharactersPage;
-            lootPageVisualParent.SetActive(false);
-            statsHeaderButtonImage.sprite = selectedButtonSprite;
-            lootHeaderButtonImage.sprite = unselectedButtonSprite;
-        }
+
         private void BuildCharacterStatCardPage(List<CharacterCombatStatData> data)
         {
             // Reset views
@@ -290,14 +260,12 @@ namespace WeAreGladiators.RewardSystems
             }
 
             // text fields
-            card.NameText.text = character.myName;
-            card.SubNameText.text = character.mySubName;
+            card.NameText.text = TextLogic.ReturnColoredText(character.myName, TextLogic.orangeHeaderText) + " " + TextLogic.ReturnColoredText(character.mySubName, TextLogic.brownBodyText);
             card.CurrentLevelText.text = character.currentLevel.ToString();
             card.XpText.text = data.xpGained.ToString();
             card.HealthLostText.text = Mathf.Abs(data.healthLost).ToString();
             card.ArmourLostText.text = Mathf.Abs(data.armourLost).ToString();
             card.DamageDealtText.text = data.damageDealt.ToString();
-            card.StressGainedText.text = data.stressGained.ToString();
             card.KillsText.text = data.totalKills.ToString();
 
             // level up indicator
@@ -321,73 +289,21 @@ namespace WeAreGladiators.RewardSystems
             }
 
         }
-        private void BuildLootPageFromContractLootData(CombatContractData contract)
+        private void ResetScrollView()
         {
-            for (int i = 0; i < lootIcons.Count; i++)
-            {
-                lootIcons[i].Reset();
-            }
-
-            int iconIndex = 0;
-            if (contract.combatRewardData.item != null)
-            {
-                lootIcons[iconIndex].BuildAsItemReward(contract.combatRewardData.item);
-                iconIndex++;
-            }
-            if (contract.combatRewardData.abilityAwarded != null)
-            {
-                lootIcons[iconIndex].BuildAsAbilityReward(contract.combatRewardData.abilityAwarded);
-                iconIndex++;
-            }
-            if (contract.combatRewardData.goldAmount > 0)
-            {
-                lootIcons[iconIndex].BuildAsGoldReward(contract.combatRewardData.goldAmount);
-                iconIndex++;
-            }
-
+            characterStatsScrollView.verticalNormalizedPosition = 1;
+            characterStatsScrollBar.value = 1;
         }
 
         #endregion
 
-        // Input + Buttons Logic
-        #region
+        #region Input + Buttons Logic
 
-        public void OnStatsButtonClicked()
-        {
-            if (currentWindowViewing != WindowState.CharactersPage)
-            {
-                currentWindowViewing = WindowState.CharactersPage;
-                characterStatPageVisualParent.SetActive(true);
-                lootPageVisualParent.SetActive(false);
 
-                // set button states
-                statsHeaderButtonImage.sprite = selectedButtonSprite;
-                lootHeaderButtonImage.sprite = unselectedButtonSprite;
-            }
-        }
-        public void OnLootButtonClicked()
-        {
-            if (currentWindowViewing != WindowState.LootPage)
-            {
-                currentWindowViewing = WindowState.LootPage;
-                characterStatPageVisualParent.SetActive(false);
-                lootPageVisualParent.SetActive(true);
 
-                // set button states
-                statsHeaderButtonImage.sprite = unselectedButtonSprite;
-                lootHeaderButtonImage.sprite = selectedButtonSprite;
-            }
-        }
         public void OnContinueButtonClicked()
         {
-            if (currentWindowViewing == WindowState.CharactersPage)
-            {
-                OnLootButtonClicked();
-            }
-            else
-            {
-                GameController.Instance.HandlePostCombatToTownTransistion();
-            }
+            GameController.Instance.HandlePostCombatToTownTransistion();
         }
 
         #endregion

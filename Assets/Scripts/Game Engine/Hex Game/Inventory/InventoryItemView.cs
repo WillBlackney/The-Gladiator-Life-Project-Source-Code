@@ -129,7 +129,7 @@ namespace WeAreGladiators.Items
                     // Rebuild roster, inventory and model views
                     CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
                     CharacterScrollPanelController.Instance.RebuildViews();
-                    myItemGrid.BuildInventoryView();
+                    myItemGrid.BuildItemCollectionView();
                 }
             }
             
@@ -226,7 +226,7 @@ namespace WeAreGladiators.Items
                         // re build roster, inventory and model views
                         CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
                         CharacterScrollPanelController.Instance.RebuildViews();
-                        myItemGrid.BuildInventoryView();
+                        myItemGrid.BuildItemCollectionView();
                     }
                 }
 

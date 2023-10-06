@@ -13,21 +13,14 @@ namespace WeAreGladiators.RewardSystems
         // Properties + Components
         #region
 
-        [Header("Gold Components")]
+        [Header("Components")]
         [SerializeField] private TextMeshProUGUI goldAmountText;
         [SerializeField] private GameObject goldParent;
-
-        [Header("Ability Book Components")]
-        [SerializeField] private GameObject abilityBookParent;
-        [SerializeField] private Image abilityBookImage;
-
-        [Header("Item Components")]
-        [SerializeField] private GameObject itemParent;
         [SerializeField] private Image itemImage;
-        [SerializeField] private Image itemRarityOverlayImage;
 
         // Non inspector fields
         private int goldReward;
+        private bool isGoldReward = false;
 
         #endregion
 
@@ -36,6 +29,7 @@ namespace WeAreGladiators.RewardSystems
 
         public ItemData ItemReward { get; private set; }
         public AbilityData AbilityReward { get; private set; }
+        public bool IsGoldReward => isGoldReward;
 
         #endregion
 
@@ -51,14 +45,15 @@ namespace WeAreGladiators.RewardSystems
             else if (AbilityReward != null)
             {
                 AbilityPopupController.Instance.OnCombatAbilityLootIconMousedOver(this);
+                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(AbilityReward.keyWords);
             }
-
-            // to do in future: gold info pop up
         }
         public void MouseExit()
         {
             ItemPopupController.Instance.HidePanel();
             AbilityPopupController.Instance.HidePanel();
+            MainModalController.Instance.HideModal();
+            KeyWordLayoutController.Instance.FadeOutMainView();
         }
 
         #endregion
@@ -70,35 +65,40 @@ namespace WeAreGladiators.RewardSystems
         {
             AbilityReward = null;
             ItemReward = null;
+            isGoldReward = false;
             goldReward = 0;
 
             gameObject.SetActive(false);
             goldParent.SetActive(false);
-            abilityBookParent.SetActive(false);
-            itemParent.SetActive(false);
+            itemImage.gameObject.SetActive(false);
 
         }
         public void BuildAsItemReward(ItemData item)
         {
             gameObject.SetActive(true);
+            itemImage.gameObject.SetActive(true);
+            goldParent.SetActive(false);
+
             ItemReward = item;
-            itemParent.SetActive(true);
             itemImage.sprite = item.ItemSprite;
-            itemRarityOverlayImage.color = ColorLibrary.Instance.GetRarityColor(item.rarity);
         }
         public void BuildAsAbilityReward(AbilityData ability)
         {
             gameObject.SetActive(true);
+            itemImage.gameObject.SetActive(true);
+            goldParent.SetActive(false);
+
             AbilityReward = ability;
-            abilityBookParent.SetActive(true);
-            abilityBookImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(ability.talentRequirementData.talentSchool);
+            itemImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(ability.talentRequirementData.talentSchool);
         }
         public void BuildAsGoldReward(int goldAmount)
         {
             gameObject.SetActive(true);
+            goldParent.SetActive(true);
+            itemImage.gameObject.SetActive(false);
+
             goldReward = goldAmount;
             goldAmountText.text = goldReward.ToString();
-            goldParent.SetActive(true);
         }
 
         #endregion
