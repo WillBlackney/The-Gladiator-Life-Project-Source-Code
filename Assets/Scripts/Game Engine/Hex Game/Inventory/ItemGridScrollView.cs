@@ -16,6 +16,7 @@ namespace WeAreGladiators.Items
         [Space(20)]
 
         [Header("Components")]
+        [SerializeField] private InventorySlot slotPrefab;
         [SerializeField] private List<InventorySlot> slots;
         [SerializeField] private Canvas dragCanvas;
         [Space(20)]
@@ -25,6 +26,8 @@ namespace WeAreGladiators.Items
         [SerializeField] private ScrollRect scrollView;
         [SerializeField] private Scrollbar scrollBar;
 
+
+        private GridLayoutGroup gridLayoutFitter;
         private List<InventoryItemView> inventoryItemViews = new List<InventoryItemView>();
         private List<ItemShopSlot> armouryItemViews = new List<ItemShopSlot>();
         private List<CombatLootIcon> lootIconViews = new List<CombatLootIcon>();
@@ -35,6 +38,17 @@ namespace WeAreGladiators.Items
         public List<InventorySlot> Slots => slots;
         public Canvas DragCanvas => dragCanvas;
         public RectTransform DragTransform => dragCanvas.transform as RectTransform;
+        public GridLayoutGroup GridLayoutFitter
+        {
+            get
+            {
+                if(gridLayoutFitter == null)
+                {
+                    gridLayoutFitter = GetComponentInChildren<GridLayoutGroup>(true);
+                }
+                return gridLayoutFitter;
+            }
+        }
 
         private void GetItemViewsComponents()
         {
@@ -61,24 +75,28 @@ namespace WeAreGladiators.Items
             if (collectionSource == ItemCollectionSource.PlayerInventoryShop ||
                 collectionSource == ItemCollectionSource.PlayerInventoryCharacterRoster)
             {
+                EnsureEnoughSlots(InventoryController.Instance.PlayerInventory.Count);
+
                 // Build item view for each player item
                 for (int i = 0; i < InventoryController.Instance.PlayerInventory.Count; i++)
                 {
                     if (i >= minimumSlotsShown)
                     {
                         slots[i].Show();
-                    }
+                    }                    
+
                     if (DoesInventoryItemMatchFilter(InventoryController.Instance.PlayerInventory[i], filterSetting))
                     {
                         BuildInventoryItemViewFromData(inventoryItemViews[slotIndex], InventoryController.Instance.PlayerInventory[i]);
                         slotIndex += 1;
                     }
-
                 }
             }
 
             else if (collectionSource == ItemCollectionSource.ArmouryShop)
             {
+                EnsureEnoughSlots(TownController.Instance.currentArmouryItems.Count);
+
                 // Build items
                 for (int i = 0; i < TownController.Instance.currentArmouryItems.Count; i++)
                 {
@@ -97,10 +115,11 @@ namespace WeAreGladiators.Items
 
             else if (collectionSource == ItemCollectionSource.LibraryShop)
             {
+                EnsureEnoughSlots(TownController.Instance.currentLibraryItems.Count);
+
                 // Build items
                 for (int i = 0; i < TownController.Instance.currentLibraryItems.Count; i++)
                 {
-
                     if (i >= minimumSlotsShown)
                     {
                         slots[i].Show();
@@ -113,8 +132,8 @@ namespace WeAreGladiators.Items
                     }
                 }
             }
-            
 
+            EnsureEvenRows(slotIndex);
             TransformUtils.RebuildLayouts(layoutsRebuilt);
             if (resetSliders) ResetScrollView();
         }
@@ -158,6 +177,7 @@ namespace WeAreGladiators.Items
                 slots[i].Show();
             }
         }
+
         private void BuildInventoryItemViewFromData(InventoryItemView view, InventoryItem item)
         {
             view.gameObject.SetActive(true);
@@ -233,6 +253,7 @@ namespace WeAreGladiators.Items
 
             return ret;
         }
+
         public bool DoesInventoryItemMatchFilter(InventoryItem item, FilterSetting filter)
         {
             bool ret = false;
@@ -272,6 +293,41 @@ namespace WeAreGladiators.Items
         public void SetFilter(FilterSetting filter)
         {
             filterSetting = filter;
+        }
+
+        private void EnsureEvenRows(int slotsInUse)
+        {
+            if (slotsInUse < minimumSlotsShown) return;
+            int slotsPerRow = GridLayoutFitter.constraintCount;
+            int slotsOnIncompleteRow = slotsInUse % slotsPerRow;
+            int toShow = slotsPerRow - slotsOnIncompleteRow;
+            Debug.Log("Slots in use = " + slotsInUse.ToString() + ", loose slots = " + slotsOnIncompleteRow.ToString());
+            for (int i = 0; i < toShow; i++)
+            {
+                slots[slotsInUse + i].Show();
+            }
+        }
+
+        private void EnsureEnoughSlots(int requiredSlots)
+        {
+            int slotsToCreate = requiredSlots - slots.Count;
+            if(slotsToCreate <= 0)
+            {
+                return;
+            }
+
+            slotsToCreate += GridLayoutFitter.constraintCount;
+
+            for (int i = 0; i < slotsToCreate; i++)
+            {
+                InventorySlot newSlot = Instantiate(slotPrefab, GridLayoutFitter.transform);
+                newSlot.MyItemView.AssignGrid(this);
+                slots.Add(newSlot);
+                newSlot.Reset();
+            }
+
+            initialized = false;
+            GetItemViewsComponents();
         }
 
 

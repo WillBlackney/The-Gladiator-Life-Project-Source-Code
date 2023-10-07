@@ -133,8 +133,7 @@ namespace WeAreGladiators.UI
         }
         public void OnLevelButtonClicked()
         {
-            if (!InventoryController.Instance.VisualParent.activeSelf &&
-                AllowInput())
+            if (AllowInput())
             {
                 CharacterRosterViewController.Instance.HandleBuildAndShowCharacterRoster(MyCharacterData);
             }

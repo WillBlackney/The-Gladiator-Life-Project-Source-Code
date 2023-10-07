@@ -14,30 +14,18 @@ namespace WeAreGladiators.Items
 {
     public class InventoryController : Singleton<InventoryController>
     {
+        #region Properties + Components       
 
-        // Input Logic
-        #region
-
-        public void OnInventoryTopBarButtonClicked()
-        {
-            if (GameController.Instance.GameState == GameState.StoryEvent)
-            {
-                return;
-            }
-            if (!visualParent.activeSelf)
-            {
-                //BuildAndShowInventoryView();
-            }
-            else
-            {
-                HideInventoryView();
-            }
-        }
+        private readonly int maxInventorySize = 10000;
 
         #endregion
 
-        // Conditional Checks
-        #region
+        #region Getters + Accessors
+        public List<InventoryItem> PlayerInventory { get; private set; } = new List<InventoryItem>();
+
+        #endregion
+
+        #region Conditional Checks
 
         public bool HasFreeInventorySpace(int freeSpace = 1)
         {
@@ -46,65 +34,8 @@ namespace WeAreGladiators.Items
 
         #endregion
 
-        // Item Usage Logic
-        #region
-
-        public void OnItemViewClicked(InventoryItemView view)
-        {
-            // Close pop views
-            AbilityPopupController.Instance.HidePanel();
-            ItemPopupController.Instance.HidePanel();
-
-            // Left click (use)
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                BuildAndShowConfirmActionScreenFromItem(view.MyItemRef, ItemActionType.Use);
-            }
-
-            // Right click (destroy)
-            else if (Input.GetKey(KeyCode.Mouse1))
-            {
-                BuildAndShowConfirmActionScreenFromItem(view.MyItemRef, ItemActionType.Discard);
-            }
-        }
-
-        #endregion
-        // Properties + Components
-        #region
-
-        [Header("Core Components")]
-        [SerializeField] private GameObject visualParent;
-        [SerializeField] private List<InventorySlot> allInventorySlots = new List<InventorySlot>();
-        [SerializeField] private List<InventoryItemView> allInventoryItemViews = new List<InventoryItemView>();
-        [SerializeField] private TextMeshProUGUI slotsMaxCountText;
-        [SerializeField] private InventorySlot inventorySlotPrefab;
-        [SerializeField] private Transform slotsParent;
-        private readonly int maxInventorySize = 1000;
-
-        [Header("Confirm Action Screen Components")]
-        [SerializeField] private GameObject confirmActionScreenVisualParent;
-        [SerializeField] private TextMeshProUGUI confirmActionScreenText;
-        private InventoryItem itemInSelection;
-        private ItemActionType currentActionType;
-
-        [Header("Misc Stuff")]
-        [SerializeField] private Transform dragParent;
-
-
-        #endregion
-
-        // Getters + Accessors
-        #region
-
-        public GameObject VisualParent => visualParent;
-        public Transform DragParent => dragParent;
-        public List<InventoryItem> PlayerInventory { get; private set; } = new List<InventoryItem>();
-        public List<InventorySlot> AllInventorySlots => allInventorySlots;
-
-        #endregion
-
-        // Persistency Logic
-        #region
+        
+        #region Persistency Logic
 
         public void SaveMyDataToSaveFile(SaveGameData saveData)
         {
@@ -117,96 +48,7 @@ namespace WeAreGladiators.Items
 
         #endregion
 
-        // Build + Show Inventory Views
-        #region
-
-        public void BuildAndShowInventoryView()
-        {
-            //visualParent.gameObject.SetActive(true);
-            //BuildInventoryView();
-            //UpdateMaxSlotsTexts();
-            //BuildInventoryView();
-        }
-        public void HideInventoryView()
-        {
-            //rootCanvas.enabled = false;
-            visualParent.gameObject.SetActive(false);
-        }
-
-        #endregion
-
-        // Build Inventory View
-        #region
-
-        public void RebuildInventoryView()
-        {
-            BuildInventoryView();
-            //UpdateMaxSlotsTexts();
-        }
-        private void BuildInventoryView()
-        {
-            // Reset item views + slots
-            foreach (InventoryItemView i in allInventoryItemViews)
-            {
-                i.Reset();
-            }
-            foreach (InventorySlot s in allInventorySlots)
-            {
-                s.Reset();
-            }
-
-            // Always show at least 100 slots
-            for (int i = 0; i < 100; i++)
-            {
-                AllInventorySlots[i].Show();
-            }
-
-            for (int i = 0; i < PlayerInventory.Count; i++)
-            {
-                // Create a new slot if not enough available
-                if (i >= allInventorySlots.Count)
-                {
-                    InventorySlot newSlot = Instantiate(inventorySlotPrefab, slotsParent).GetComponent<InventorySlot>();
-                    allInventorySlots.Add(newSlot);
-                    allInventoryItemViews.Add(newSlot.MyItemView);
-                }
-                allInventorySlots[i].Show();
-
-                BuildInventoryItemViewFromInventoryItemData(allInventoryItemViews[i], PlayerInventory[i]);
-            }
-        }
-        private void BuildInventoryItemViewFromInventoryItemData(InventoryItemView view, InventoryItem item)
-        {
-            view.gameObject.SetActive(true);
-            view.SetMyItemRef(item);
-
-            if (item.abilityData != null)
-            {
-                view.BookVisualParent.SetActive(true);
-                view.BookImage.sprite = SpriteLibrary.Instance.GetTalentSchoolBookSprite(item.abilityData.talentRequirementData.talentSchool);
-            }
-            else if (item.itemData != null)
-            {
-                view.WeaponVisualParent.SetActive(true);
-                view.WeaponImage.sprite = item.itemData.ItemSprite;
-            }
-
-            if (TownController.Instance.ArmouryViewIsActive)
-            {
-                view.GoldCostParent.SetActive(true);
-                view.GoldCostText.text = item.GetSellPrice().ToString();
-            }
-
-        }
-        private void UpdateMaxSlotsTexts()
-        {
-            //slotsMaxCountText.text = inventory.Count.ToString() + " / " + maxInventorySize.ToString();
-        }
-
-        #endregion
-
-        // Create Inventory items
-        #region
+        #region Create Inventory items
 
         public InventoryItem CreateInventoryItemAbilityData(AbilityData abilityData)
         {
@@ -220,13 +62,6 @@ namespace WeAreGladiators.Items
         {
             // to do in future: add arguments for rarity and type
             List<ItemData> items = ItemController.Instance.GetAllShopSpawnableItems();
-            items.Shuffle();
-            return CreateInventoryItemFromItemData(ItemController.Instance.GenerateNewItemWithRandomEffects(items[0]));
-        }
-        private InventoryItem GenerateRandomNonEquipableItem()
-        {
-            // to do in future: add arguments for rarity and type
-            List<ItemData> items = ItemController.Instance.GetAllNonShopAndContractItems();
             items.Shuffle();
             return CreateInventoryItemFromItemData(ItemController.Instance.GenerateNewItemWithRandomEffects(items[0]));
         }
@@ -252,8 +87,7 @@ namespace WeAreGladiators.Items
 
         #endregion
 
-        // Modify Inventory Contents
-        #region
+        #region Modify Inventory Contents
 
         public void AddItemToInventory(InventoryItem item, bool ignoreSpaceRequirement = false, int inventoryIndex = -1)
         {
@@ -305,7 +139,6 @@ namespace WeAreGladiators.Items
             }
 
         }
-
         public void RemoveItemFromInventory(InventoryItem item)
         {
             if (PlayerInventory.Contains(item))
@@ -316,8 +149,7 @@ namespace WeAreGladiators.Items
 
         #endregion
 
-        // Misc
-        #region
+        #region Misc
 
         public void PopulateInventoryWithMockDataItems(int totalItemsGenerated)
         {
@@ -333,82 +165,10 @@ namespace WeAreGladiators.Items
 
         #endregion
 
-        // Item Confirm Action Screen Logic
-        #region
+        #region Item Confirm Action Screen Logic
 
-        private void BuildAndShowConfirmActionScreenFromItem(InventoryItem item, ItemActionType actionType)
-        {
-            // TO DO: Recreate discard item screen pop up, the uncomment
-            /*
-            HexCharacterData c = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
-            itemInSelection = item;
-            currentActionType = actionType;
-            confirmActionScreenVisualParent.SetActive(true);
-
-            if(item.abilityData != null && c != null && actionType == ItemActionType.Use)
-            {
-                // check ability learn is valid
-                if (!AbilityController.Instance.DoesCharacterMeetAbilityBookRequirements(c, item.abilityData) ||
-                    GameController.Instance.GameState == GameState.CombatActive)
-                {
-                    itemInSelection = null;
-                    currentActionType = ItemActionType.None;
-                    confirmActionScreenVisualParent.SetActive(false);
-                }
-
-                confirmActionScreenText.text = "Are you sure you want to teach " + item.abilityData.abilityName +
-                    " to " + c.myName + "?";
-            }
-            else if (actionType == ItemActionType.Discard)
-            {
-                string itemName = "";
-                if (item.abilityData != null)
-                    itemName = item.abilityData.abilityName + " Book";
-                else if (item.itemData != null)
-                    itemName = item.itemData.itemName;
-
-                confirmActionScreenText.text = "Are you sure you want to discard " + itemName + "?";
-            }
-            else
-            {
-                itemInSelection = null;
-                currentActionType = ItemActionType.None;
-                confirmActionScreenVisualParent.SetActive(false);
-            }
-            */
-
-        }
-        public void OnConfirmActionScreenConfirmButtonClicked()
-        {
-            HexCharacterData c = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
-
-            if (currentActionType == ItemActionType.Use && itemInSelection.abilityData != null && c != null)
-            {
-                c.abilityBook.HandleLearnNewAbility(itemInSelection.abilityData);
-                // discard the ability book on usage
-
-                // rerender character roster screen + inventory
-                CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
-                RemoveItemFromInventory(itemInSelection);
-                BuildAndShowInventoryView();
-            }
-            else if (currentActionType == ItemActionType.Discard)
-            {
-                // discard item logic here
-                RemoveItemFromInventory(itemInSelection);
-                BuildAndShowInventoryView();
-            }
-
-            currentActionType = ItemActionType.None;
-            itemInSelection = null;
-            confirmActionScreenVisualParent.SetActive(false);
-        }
-        public void OnConfirmActionScreenCancelButtonClicked()
-        {
-            itemInSelection = null;
-            currentActionType = ItemActionType.None;
-            confirmActionScreenVisualParent.SetActive(false);
-        }
+       
+       
 
         #endregion
     }

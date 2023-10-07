@@ -46,6 +46,10 @@ namespace WeAreGladiators.Items
         public GameObject WeaponVisualParent => weaponVisualParent;
         public Image WeaponImage => weaponImage;
         public InventoryItem MyItemRef { get; private set; }
+        public void AssignGrid(ItemGridScrollView grid)
+        {
+            myItemGrid = grid;
+        }
 
         #endregion
 

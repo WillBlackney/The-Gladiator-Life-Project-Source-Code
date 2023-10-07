@@ -21,5 +21,7 @@ namespace WeAreGladiators.Items
         {
             gameObject.SetActive(true);
         }
+
+        
     }
 }

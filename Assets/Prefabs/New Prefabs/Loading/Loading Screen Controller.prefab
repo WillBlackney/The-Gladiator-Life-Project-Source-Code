@@ -892,6 +892,11 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
+      phrase: '"Your inventory size is unlimited. Your welcome." - The programmer.'
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
       phrase: 'Roses are '
     - color: 10
       getPhraseFromAbilityValue: 0

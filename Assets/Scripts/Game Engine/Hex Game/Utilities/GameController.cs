@@ -251,7 +251,7 @@ namespace WeAreGladiators
                 GameIntroController.Instance.StartEvent();
             }
 
-            InventoryController.Instance.PopulateInventoryWithMockDataItems(30);
+            InventoryController.Instance.PopulateInventoryWithMockDataItems(202);
         }
        
         private void RunSandboxCombat()
@@ -847,7 +847,6 @@ namespace WeAreGladiators
                     // Hide UI + town views
                     TownController.Instance.TearDownOnExitToMainMenu();
                     CharacterScrollPanelController.Instance.HideMainView();
-                    InventoryController.Instance.HideInventoryView();
                     CharacterRosterViewController.Instance.HideCharacterRosterScreen();
                     GameIntroController.Instance.HideAllViews();
                     CombatRewardController.Instance.HidePostCombatRewardScreen();

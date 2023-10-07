@@ -813,6 +813,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimumSlotsShown: 100
   collectionSource: 0
+  slotPrefab: {fileID: 8910634554541728055, guid: da0149aaf9441c048ac6e16aefdc360e,
+    type: 3}
   slots:
   - {fileID: 947947225913733149}
   - {fileID: 7498061694468447516}

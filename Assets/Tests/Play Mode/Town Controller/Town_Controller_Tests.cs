@@ -44,8 +44,6 @@ namespace Tests
         [Test]
         public void Hospital_Bedrest_Does_Heal_Correctly()
         {
-            Assert.Fail();
-            /*
             // Arrange
             GameController.Instance.RunTestEnvironmentTown(new List<HexCharacterTemplateSO> { playerData });
             HexCharacterData playerCharacter = CharacterDataController.Instance.AllPlayerCharacters[0];
@@ -56,19 +54,17 @@ namespace Tests
             int expectFinalGold = RunController.Instance.CurrentGold - HospitalDropSlot.GetFeatureGoldCost(TownActivity.BedRest);
 
             // Act
-            HospitalDropSlot bedrestSlot = Array.Find(TownController.Instance.HospitalSlots, slot => slot.FeatureType == TownActivity.BedRest);
-            TownController.Instance.HandleDropCharacterOnHospitalSlot(bedrestSlot, playerCharacter);
+            TownController.Instance.BuildAndShowHospitalPage();
+            TownController.Instance.OnBedrestButtonClicked();
 
             // Assert
             Assert.AreEqual(expectFinalGold, RunController.Instance.CurrentGold);
-            Assert.AreEqual(expectedFinalHealth, playerCharacter.currentHealth); */           
+            Assert.AreEqual(expectedFinalHealth, playerCharacter.currentHealth);       
         }
 
         [Test]
         public void Hospital_Therapy_Does_Boost_Morale_State_Correctly()
         {
-            Assert.Fail();
-            /*
             // Arrange
             GameController.Instance.RunTestEnvironmentTown(new List<HexCharacterTemplateSO> { playerData });
             HexCharacterData playerCharacter = CharacterDataController.Instance.AllPlayerCharacters[0];
@@ -78,20 +74,18 @@ namespace Tests
             int expectFinalGold = RunController.Instance.CurrentGold - (HospitalDropSlot.GetFeatureGoldCost(TownActivity.Therapy) * 2);
 
             // Act
-            HospitalDropSlot bedrestSlot = Array.Find(TownController.Instance.HospitalSlots, slot => slot.FeatureType == TownActivity.Therapy);
-            TownController.Instance.HandleDropCharacterOnHospitalSlot(bedrestSlot, playerCharacter);
-            TownController.Instance.HandleDropCharacterOnHospitalSlot(bedrestSlot, playerCharacter);
+            TownController.Instance.BuildAndShowHospitalPage();
+            TownController.Instance.OnTherapyButtonClicked();
+            TownController.Instance.OnTherapyButtonClicked();
 
             // Assert
             Assert.AreEqual(expectFinalGold, RunController.Instance.CurrentGold);
-            Assert.AreEqual(expectedFinalMoraleState, playerCharacter.currentMoraleState);*/
+            Assert.AreEqual(expectedFinalMoraleState, playerCharacter.currentMoraleState);
         }
 
         [Test]
         public void Hospital_Surgery_Does_Remove_Injury_Correctly()
         {
-            Assert.Fail();
-            /*
             // Arrange
             GameController.Instance.RunTestEnvironmentTown(new List<HexCharacterTemplateSO> { playerData });
             HexCharacterData playerCharacter = CharacterDataController.Instance.AllPlayerCharacters[0];
@@ -111,14 +105,14 @@ namespace Tests
             int expectFinalGold = RunController.Instance.CurrentGold - (HospitalDropSlot.GetFeatureGoldCost(TownActivity.Surgery) * 2);
 
             // Act
-            HospitalDropSlot bedrestSlot = Array.Find(TownController.Instance.HospitalSlots, slot => slot.FeatureType == TownActivity.Surgery);
-            TownController.Instance.HandleDropCharacterOnHospitalSlot(bedrestSlot, playerCharacter);
-            TownController.Instance.HandleDropCharacterOnHospitalSlot(bedrestSlot, playerCharacter);
+            TownController.Instance.BuildAndShowHospitalPage();
+            TownController.Instance.OnSurgeryButtonClicked();
+            TownController.Instance.OnSurgeryButtonClicked();
 
             // Assert
             Assert.AreEqual(expectFinalGold, RunController.Instance.CurrentGold);
             Assert.AreEqual(expectedInjuryTotal, PerkController.Instance.GetAllInjuriesOnCharacter(playerCharacter).Count);
-            */
+            
         }
         #endregion
     }

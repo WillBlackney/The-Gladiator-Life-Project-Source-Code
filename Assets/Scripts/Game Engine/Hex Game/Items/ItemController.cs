@@ -416,7 +416,7 @@ namespace WeAreGladiators.Items
             // Redraw Inventory and Character roster views
             CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
             CharacterScrollPanelController.Instance.RebuildViews();
-            InventoryController.Instance.RebuildInventoryView();
+            CharacterRosterViewController.Instance.PlayerInventory.BuildItemCollectionView();
 
         }
         public void HandleGiveItemToCharacterFromInventory(HexCharacterData character, InventoryItem newItem, RosterItemSlot slot)

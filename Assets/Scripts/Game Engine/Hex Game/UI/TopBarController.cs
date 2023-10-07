@@ -21,10 +21,6 @@ namespace WeAreGladiators.UI
             {
                 CharacterRosterViewController.Instance?.OnCharacterRosterTopbarButtonClicked();
             }
-            else if (mainTopBarRootCanvas.isActiveAndEnabled && Input.GetKeyDown(KeyCode.I))
-            {
-                InventoryController.Instance?.OnInventoryTopBarButtonClicked();
-            }
             else if ((mainTopBarRootCanvas.isActiveAndEnabled || combatTopBarRootCanvas.isActiveAndEnabled) && Input.GetKeyDown(KeyCode.Escape))
             {
                 MainMenuController.Instance.OnTopBarSettingsButtonClicked();

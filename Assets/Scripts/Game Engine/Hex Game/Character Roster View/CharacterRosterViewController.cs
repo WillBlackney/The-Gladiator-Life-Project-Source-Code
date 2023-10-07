@@ -16,9 +16,7 @@ namespace WeAreGladiators.UI
 {
     public class CharacterRosterViewController : Singleton<CharacterRosterViewController>
     {
-        // Properties + Components
-        #region
-
+        #region Properties + Components
         [Header("Core Components")]
         [SerializeField] private GameObject mainVisualParent;
         [SerializeField] private Transform scalingParent;
@@ -30,10 +28,10 @@ namespace WeAreGladiators.UI
         [Space(20)]
         [Header("Health Components")]
         [SerializeField] private TextMeshProUGUI healthBarText;
-        [SerializeField] private UnityEngine.UI.Slider healthBar;
+        [SerializeField] private Slider healthBar;
         [Space(20)]
         [Header("Morale Components")]
-        [SerializeField] private UnityEngine.UI.Image moraleImage;
+        [SerializeField] private Image moraleImage;
 
         [Space(20)]
         [Header("XP + Level Components")]
@@ -41,7 +39,7 @@ namespace WeAreGladiators.UI
         [SerializeField] private UIBackgroundIcon backgroundIcon;
         [SerializeField] private TextMeshProUGUI currentLevelText;
         [SerializeField] private TextMeshProUGUI xpBarText;
-        [SerializeField] private UnityEngine.UI.Slider xpbar;
+        [SerializeField] private Slider xpbar;
         [Space(20)]
         [Header("Level Up Components")]
         [SerializeField] private LevelUpButton attributeLevelUpButton;
@@ -116,8 +114,7 @@ namespace WeAreGladiators.UI
         [SerializeField] private TextMeshProUGUI talentsPointsText;
 
         [Header("Dismiss Character Page Components")]
-        [SerializeField]
-        private GameObject dismissVisualParent;
+        [SerializeField] private GameObject dismissVisualParent;
         [SerializeField] private UniversalCharacterModel dismissUcm;
         [SerializeField] private TextMeshProUGUI dismissPageHeaderText;
 
