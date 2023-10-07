@@ -24,6 +24,7 @@ namespace Tests
         private EnemyEncounterSO enemyEncounterData;
         private HexCharacterTemplateSO playerData;
         private EnemyTemplateSO enemyTemplate;
+        private CombatMapSeedDataSO combatMapSeed;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -33,6 +34,7 @@ namespace Tests
             playerData = AssetDatabase.LoadAssetAtPath<HexCharacterTemplateSO>("Assets/Tests/Play Mode/Turn Controller/Test Objects/Test_Player_Character_1.asset");
             enemyEncounterData = AssetDatabase.LoadAssetAtPath<EnemyEncounterSO>("Assets/Tests/Play Mode/Turn Controller/Test Objects/Test_Enemy_Encounter_1.asset");
             enemyTemplate = AssetDatabase.LoadAssetAtPath<EnemyTemplateSO>("Assets/Tests/Play Mode/Turn Controller/Test Objects/Test_Enemy_Character_1.asset");
+            combatMapSeed = AssetDatabase.LoadAssetAtPath<CombatMapSeedDataSO>("Assets/Tests/Play Mode/Combat Controller/Test Objects/Test_Comat_Map_Seed_1.asset");
         }
 
         [UnitySetUp]
@@ -41,7 +43,7 @@ namespace Tests
             yield return TestUtils.SetupBeforeTest();
 
             // Run!
-            GameController.Instance.RunTestEnvironmentCombat(new List<HexCharacterTemplateSO> { playerData }, enemyEncounterData);
+            GameController.Instance.RunTestEnvironmentCombat(new List<HexCharacterTemplateSO> { playerData }, enemyEncounterData, combatMapSeed);
         }
         [UnityTearDown]
         public IEnumerator Teardown()

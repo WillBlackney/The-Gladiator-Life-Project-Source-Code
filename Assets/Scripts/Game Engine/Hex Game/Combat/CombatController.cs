@@ -492,7 +492,7 @@ namespace WeAreGladiators.Combat
 
             // If this character died during their turn (but no during end turn phase), 
             // resolve the transition to next character activation
-            if (character == TurnController.Instance.EntityActivated)
+            else if (character == TurnController.Instance.EntityActivated)
             {
                 TurnController.Instance.ActivateNextEntity();
             }

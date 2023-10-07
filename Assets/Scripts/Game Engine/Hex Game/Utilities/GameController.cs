@@ -1068,7 +1068,7 @@ namespace WeAreGladiators
         #endregion
 
         #region Test Environments
-        public void RunTestEnvironmentCombat(List<HexCharacterTemplateSO> playerCharacters, EnemyEncounterSO enemyEncounter)
+        public void RunTestEnvironmentCombat(List<HexCharacterTemplateSO> playerCharacters, EnemyEncounterSO enemyEncounter, CombatMapSeedDataSO seed)
         {
             List<CharacterWithSpawnData> charactersWithSpawnPos = BuildNewSaveFileForTestingEnvironment(playerCharacters);
 
@@ -1098,7 +1098,7 @@ namespace WeAreGladiators
                 charactersWithSpawnPos);
 
             // Randomize level node elevation and obstructions
-            RunController.Instance.SetCurrentCombatMapData(LevelController.Instance.GenerateLevelNodes(spawnPositions));
+            RunController.Instance.SetCurrentCombatMapData(LevelController.Instance.GenerateLevelNodes(spawnPositions, seed));
 
             // Save data to persistency
             PersistencyController.Instance.AutoUpdateSaveFile();

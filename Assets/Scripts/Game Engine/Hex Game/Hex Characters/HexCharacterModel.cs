@@ -77,6 +77,7 @@ namespace WeAreGladiators.Characters
         public int spellAbilitiesUsedThisTurn;
         public int startingArmour;
         public int moraleStatesLoweredThisCombat;
+        public bool guaranteedHeartAttacks = false;
 
         public List<TalentPairing> talentPairings = new List<TalentPairing>();
 

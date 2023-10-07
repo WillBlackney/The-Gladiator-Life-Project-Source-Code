@@ -2022,17 +2022,21 @@ namespace WeAreGladiators.Characters
                 }
 
                 // On turn start perk effects from items
-                ItemController.Instance.ApplyTurnStartPerkEffectsToCharacterFromItemSet(character);
+                if (character.currentHealth > 0)
+                {
+                    ItemController.Instance.ApplyTurnStartPerkEffectsToCharacterFromItemSet(character);
+                }
+                
             }
 
             // If shattered, determine result
-            if (character.currentMoraleState == MoraleState.Shattered)
+            if (character.currentMoraleState == MoraleState.Shattered && character.currentHealth > 0)
             {
                 int roll = RandomGenerator.NumberBetween(1, 4);
                 Debug.Log("HexCharacterController.OnTurnStart() resolving shattered stress state event...");
 
                 // Rally
-                if (roll <= 2)
+                if (roll <= 2 && !character.guaranteedHeartAttacks)
                 {
                     Debug.Log("HexCharacterController.OnTurnStart() character rallied from shattered");
 
@@ -2056,7 +2060,7 @@ namespace WeAreGladiators.Characters
                 }
 
                 // Heart atack => Death
-                else if (roll == 3)
+                else if (roll == 3 || character.guaranteedHeartAttacks)
                 {
                     Debug.Log("HexCharacterController.OnTurnStart() character had a heart attack from being shattered");
 
@@ -2083,7 +2087,7 @@ namespace WeAreGladiators.Characters
             }
 
             // Was character killed by a DoT or heart attack?
-            if (character.currentHealth <= 0 && character.controller == Controller.Player)
+            if (character.currentHealth <= 0)
             {
                 return;
             }
@@ -2151,6 +2155,8 @@ namespace WeAreGladiators.Characters
                 KeyWordLayoutController.Instance.FadeOutMainView();
                 MainModalController.Instance.HideModal();
                 EnemyInfoModalController.Instance.HideModal();
+                ActionErrorGuidanceController.Instance.HideErrorMessage();
+                TargetGuidanceController.Instance.Hide();
             }
 
             // Stop if combat has ended

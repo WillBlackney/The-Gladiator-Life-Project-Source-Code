@@ -146,6 +146,8 @@ namespace WeAreGladiators.HexTiles
             EnemyInfoModalController.Instance.HideModal();
             AbilityPopupController.Instance.HidePanel();
             MoveActionController.Instance.HidePathCostPopup();
+            ActionErrorGuidanceController.Instance.HideErrorMessage(0f);
+            TargetGuidanceController.Instance.Hide(0f);
             DisableAllArenas();
             HideTileInfoPopup();
             HideAllNodeViews();
@@ -175,19 +177,22 @@ namespace WeAreGladiators.HexTiles
             return ret;
         }
 
-        public SerializedCombatMapData GenerateLevelNodes(List<LevelNode> characterSpawnPositions = null)
+        public SerializedCombatMapData GenerateLevelNodes(List<LevelNode> characterSpawnPositions = null, CombatMapSeedDataSO levelSeed = null)
         {
             SerializedCombatMapData ret = new SerializedCombatMapData();
 
             // Get seed
-            CombatMapSeedDataSO seed = allCombatMapSeeds.GetRandomElement();
+            if(levelSeed == null)
+            {
+                levelSeed = allCombatMapSeeds.GetRandomElement();
+            }
             if (GlobalSettings.Instance.GameMode == GameMode.CombatSandbox &&
                 GlobalSettings.Instance.SandboxCombatMapSeed != null)
             {
-                seed = GlobalSettings.Instance.SandboxCombatMapSeed;
+                levelSeed = GlobalSettings.Instance.SandboxCombatMapSeed;
             }
 
-            if (!seed)
+            if (!levelSeed)
             {
                 return null;
             }
@@ -213,11 +218,11 @@ namespace WeAreGladiators.HexTiles
             // Determine tiling probabilities
             List<TileProbability> tileSpawnData = new List<TileProbability>();
             TileProbability previous = null;
-            for (int i = 0; i < seed.tilingConfigs.Length; i++)
+            for (int i = 0; i < levelSeed.tilingConfigs.Length; i++)
             {
                 int lower = 0;
                 int upper = 0;
-                HexMapTilingConfig data = seed.tilingConfigs[i];
+                HexMapTilingConfig data = levelSeed.tilingConfigs[i];
 
                 if (previous == null)
                 {
@@ -240,8 +245,8 @@ namespace WeAreGladiators.HexTiles
             foreach (LevelNode n in AllLevelNodes)
             {
                 int elevationRoll = RandomGenerator.NumberBetween(1, 100);
-                if (elevationRoll >= 1 && elevationRoll <= seed.elevationPercentage &&
-                    elevations < seed.maximumElevations)
+                if (elevationRoll >= 1 && elevationRoll <= levelSeed.elevationPercentage &&
+                    elevations < levelSeed.maximumElevations)
                 {
                     n.SetHexTileElevation(TileElevation.Elevated);
                     elevations += 1;
@@ -249,7 +254,7 @@ namespace WeAreGladiators.HexTiles
 
                 // Set up tile type + data
                 int tileTypeRoll = RandomGenerator.NumberBetween(1, 100);
-                HexDataSO randomHexType = seed.defaultTile;
+                HexDataSO randomHexType = levelSeed.defaultTile;
                 foreach (TileProbability c in tileSpawnData)
                 {
                     if (tileTypeRoll >= c.lowerLimit &&
@@ -264,11 +269,11 @@ namespace WeAreGladiators.HexTiles
 
                 // Randomize and set obstacle
                 int obstructionRoll = RandomGenerator.NumberBetween(1, 100);
-                if (obstructions < seed.maximumObstructions &&
-                    obstructionRoll >= 1 && obstructionRoll <= seed.obstructionPercentage &&
+                if (obstructions < levelSeed.maximumObstructions &&
+                    obstructionRoll >= 1 && obstructionRoll <= levelSeed.obstructionPercentage &&
                     Pathfinder.IsHexSpawnable(n) &&
                     !spawnPositions.Contains(n) &&
-                    (n.Elevation == TileElevation.Ground || seed.allowObstaclesOnElevation && n.Elevation == TileElevation.Elevated))
+                    (n.Elevation == TileElevation.Ground || levelSeed.allowObstaclesOnElevation && n.Elevation == TileElevation.Elevated))
                 {
                     n.SetHexObstruction(true);
                     obstructions += 1;
