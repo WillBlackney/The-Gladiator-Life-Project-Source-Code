@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using TMPro;
-using UnityEditor.Graphs;
 using UnityEngine;
 using UnityEngine.UI;
 using WeAreGladiators.Abilities;
@@ -10,7 +9,6 @@ using WeAreGladiators.Libraries;
 using WeAreGladiators.RewardSystems;
 using WeAreGladiators.TownFeatures;
 using WeAreGladiators.Utilities;
-using static UnityEditor.Progress;
 
 namespace WeAreGladiators.UI
 {

@@ -3,7 +3,7 @@
 // Copyright (c) Sirenix ApS. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-
+#if UNITY_EDITOR
 namespace Sirenix.OdinInspector.Internal
 {
     using Sirenix.OdinInspector.Editor;
@@ -241,3 +241,4 @@ namespace Sirenix.OdinInspector.Internal
         }
     }
 }
+#endif
