@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using DG.Tweening;
+using Spriter2UnityDX.Importing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,6 +40,9 @@ namespace WeAreGladiators.RewardSystems
         [SerializeField] private GameObject characterStatCardPrefab;
         [SerializeField] private Transform characterStatCardParent;
 
+        private List<ItemData> bonusLootItems = new List<ItemData>();
+
+
         #endregion
 
         #region Getters + Accesors
@@ -54,6 +58,16 @@ namespace WeAreGladiators.RewardSystems
             RunController.Instance.ModifyPlayerGold(contract.combatRewardData.goldAmount);
             InventoryController.Instance.AddItemToInventory(contract.combatRewardData.item);
             InventoryController.Instance.AddItemToInventory(contract.combatRewardData.abilityAwarded);
+        }      
+        public void AddBonusLootToInventory()
+        {
+            Debug.LogWarning("AddBonusLootToInventory() new items added to inventory = " + bonusLootItems.Count.ToString());
+            bonusLootItems.ForEach(i => InventoryController.Instance.AddItemToInventory(i));
+        }
+        public void TrackBonusLoot(List<ItemData> items)
+        {
+            bonusLootItems.AddRange(items);
+            Debug.LogWarning("TrackBonusLoot() total current tracking = " + bonusLootItems.Count.ToString());
         }
 
         #endregion 
@@ -78,14 +92,16 @@ namespace WeAreGladiators.RewardSystems
         public void SaveMyDataToSaveFile(SaveGameData saveData)
         {
             saveData.currentCombatStatResult = CurrentStatResults;
+            saveData.currentBonusLoot = bonusLootItems;
         }
         public void BuildMyDataFromSaveFile(SaveGameData saveData)
         {
             CurrentStatResults = saveData.currentCombatStatResult;
+            bonusLootItems = saveData.currentBonusLoot;
         }
         public void CacheStatResult(List<CharacterCombatStatData> result)
         {
-            CurrentStatResults = result;
+            CurrentStatResults = result;            
         }
 
         #endregion
@@ -191,7 +207,7 @@ namespace WeAreGladiators.RewardSystems
             {
                 AudioManager.Instance.PlaySound(Sound.Music_Victory_Fanfare);
                 headerText.text = "VICTORY!";
-                lootGrid.BuildForLootRewards(contractData);
+                lootGrid.BuildForLootRewards(contractData, bonusLootItems);
             }
             else
             {
@@ -202,6 +218,7 @@ namespace WeAreGladiators.RewardSystems
 
             MoveContentOnScreen();
             ResetScrollView();
+            bonusLootItems.Clear();
         }
 
         private void BuildCharacterStatCardPage(List<CharacterCombatStatData> data)

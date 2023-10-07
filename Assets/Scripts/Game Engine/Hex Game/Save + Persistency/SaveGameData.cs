@@ -36,6 +36,7 @@ namespace WeAreGladiators.Persistency
         public CombatContractData currentCombatContractData;
         public SerializedCombatMapData currentCombatMapData;
         public List<CharacterCombatStatData> currentCombatStatResult = new List<CharacterCombatStatData>();
+        public List<ItemData> currentBonusLoot = new List<ItemData>();
         public List<CombatContractData> currentDailyCombatContracts = new List<CombatContractData>();
         public List<ItemShopData> currentItems = new List<ItemShopData>();
         public List<ItemShopData> currentLibraryTomes = new List<ItemShopData>();

@@ -13,6 +13,7 @@ using WeAreGladiators.Items;
 using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Perks;
 using WeAreGladiators.Player;
+using WeAreGladiators.RewardSystems;
 using WeAreGladiators.Scoring;
 using WeAreGladiators.StoryEvents;
 using WeAreGladiators.TurnLogic;
@@ -259,7 +260,7 @@ namespace WeAreGladiators.Combat
             HexCharacterController.Instance.Graveyard.Add(character);
 
             // Roll for death or survival
-            DeathRollResult result = RollForDeathResist(character);
+            DeathRollResult deathRollResult = RollForDeathResist(character);
 
             // Remove from persitency
             if (character.allegiance == Allegiance.Enemy)
@@ -340,7 +341,7 @@ namespace WeAreGladiators.Combat
                     view.model.TotalDecapitationAnims == 0 ||
                     killingWeapon == null ||
                     killingWeapon != null && killingWeapon.canDecapitate == false ||
-                    result.pass && character.controller == Controller.Player)
+                    deathRollResult.pass && character.controller == Controller.Player)
                 {
                     HexCharacterController.Instance.PlayDeathAnimation(view);
                 }
@@ -370,7 +371,7 @@ namespace WeAreGladiators.Combat
             // Roll for death or knock down on player characters
             if (character.controller == Controller.Player)
             {
-                if (result.pass && !guaranteedDeath)
+                if (deathRollResult.pass && !guaranteedDeath)
                 {
                     // Gain permanent injury
                     PerkIconData permInjury = PerkController.Instance.GetRandomValidPermanentInjury(character);
@@ -378,36 +379,21 @@ namespace WeAreGladiators.Combat
 
                     // Move health to 1 (since 0 is invalid and they're not dead)
                     CharacterDataController.Instance.SetCharacterHealth(character.characterData, 1);
-                    CombatLogController.Instance.CreatePermanentInjuryEntry(character, result, TextLogic.SplitByCapitals(permInjury.passiveName));
+                    CombatLogController.Instance.CreatePermanentInjuryEntry(character, deathRollResult, TextLogic.SplitByCapitals(permInjury.passiveName));
                 }
                 else
                 {
                     CharacterDataController.Instance.RemoveCharacterFromRoster(character.characterData);
-                    CombatLogController.Instance.CreateCharacterDiedEntry(character, result);
-
-                    // 50% chance to recover each item on a killed player character
-                    List<ItemData> items = new List<ItemData>
-                    {
-                        character.itemSet.headArmour,
-                        character.itemSet.bodyArmour,
-                        character.itemSet.mainHandItem,
-                        character.itemSet.offHandItem,
-                        character.itemSet.trinket,
-                    };
-
-                    foreach (ItemData i in items)
-                    {
-                        if (i != null && RandomGenerator.NumberBetween(1, 2) == 1)
-                        {
-                            InventoryController.Instance.AddItemToInventory(i);
-                        }
-                    }
+                    CombatLogController.Instance.CreateCharacterDiedEntry(character, deathRollResult);                    
                 }
             }
             else
             {
                 CombatLogController.Instance.CreateCharacterDiedEntry(character, null);
             }
+
+            // Gain loot + gear of fallen character
+            CombatRewardController.Instance.TrackBonusLoot(DetermineAndGetLootFromDeadCharacter(character));
 
             // Break references
             LevelController.Instance.DisconnectCharacterFromTheirHex(character);
@@ -498,6 +484,58 @@ namespace WeAreGladiators.Combat
             }
         }
 
+        private List<ItemData> DetermineAndGetLootFromDeadCharacter(HexCharacterModel character)
+        {            
+            List<ItemData> ret = new List<ItemData>();
+
+            if (character.allegiance == Allegiance.Player &&
+               !CharacterDataController.Instance.AllPlayerCharacters.Contains(character.characterData))
+            {
+                // 50% chance to recover each item on a killed player character
+                List<ItemData> items = new List<ItemData>
+                    {
+                        character.itemSet.headArmour,
+                        character.itemSet.bodyArmour,
+                        character.itemSet.mainHandItem,
+                        character.itemSet.offHandItem,
+                        character.itemSet.trinket,
+                    };
+
+                
+                foreach (ItemData i in items)
+                {
+                    if (i != null && RandomGenerator.NumberBetween(1, 2) == 1)
+                    {
+                        ret.Add(i);
+                    }
+                }
+            }
+
+            else if(character.allegiance == Allegiance.Enemy)
+            {
+                // 25% chance to recover each item on a killed enemy character
+                List<ItemData> items = new List<ItemData>
+                    {
+                        character.itemSet.headArmour,
+                        character.itemSet.bodyArmour,
+                        character.itemSet.mainHandItem,
+                        character.itemSet.offHandItem,
+                        character.itemSet.trinket,
+                    };
+
+
+                foreach (ItemData i in items)
+                {
+                    if (i != null && RandomGenerator.NumberBetween(1, 4) == 1)
+                    {
+                        ret.Add(i);
+                    }
+                }
+            }
+
+            Debug.LogWarning("DetermineAndGetLootFromDeadCharacter() new loot = " + ret.Count.ToString());
+            return ret;
+        }
         #endregion
         // Properties + Variables
         #region

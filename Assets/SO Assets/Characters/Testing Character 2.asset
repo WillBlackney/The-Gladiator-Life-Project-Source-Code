@@ -21,8 +21,8 @@ MonoBehaviour:
     accuracy:
       value: 200
       stars: 0
-    apMaximum: 100
-    apRecovery: 100
+    apMaximum: 200
+    apRecovery: 200
     auraSize: 1
     constitution:
       value: 1000
@@ -40,7 +40,7 @@ MonoBehaviour:
     magicResistance: 0
     maxHealth: 0
     might:
-      value: 0
+      value: 200
       stars: 0
     physicalDamageBonus: 0
     physicalResistance: 0

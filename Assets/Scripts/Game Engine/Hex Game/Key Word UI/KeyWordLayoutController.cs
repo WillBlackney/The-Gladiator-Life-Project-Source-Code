@@ -214,6 +214,7 @@ namespace WeAreGladiators.UI
         public void FadeOutMainView()
         {
             DisableMainView();
+            if (mainCg == null) return;
             mainCg.DOKill();
             mainCg.alpha = 0f;
         }

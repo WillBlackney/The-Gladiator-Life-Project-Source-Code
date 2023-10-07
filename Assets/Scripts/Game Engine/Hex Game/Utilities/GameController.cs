@@ -415,6 +415,7 @@ namespace WeAreGladiators
 
             // Gain loot
             CombatRewardController.Instance.HandleGainRewardsOfContract(RunController.Instance.CurrentCombatContractData);
+            CombatRewardController.Instance.AddBonusLootToInventory();
 
             // Determine combat results (for scoring)
             CombatController.Instance.UpdateScoreDataPostCombat();
@@ -638,6 +639,7 @@ namespace WeAreGladiators
 
             // Gain loot
             CombatRewardController.Instance.HandleGainRewardsOfContract(RunController.Instance.CurrentCombatContractData);
+            CombatRewardController.Instance.AddBonusLootToInventory();
 
             // Wait until v queue count = 0
             yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);

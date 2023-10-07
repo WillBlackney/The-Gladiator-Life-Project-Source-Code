@@ -109,6 +109,8 @@ namespace Tests
         [UnityTest]
         public IEnumerator Stunned_Characters_Skip_Their_Turn()
         {
+            yield return new WaitForSeconds(1f);
+
             // Arrange           
             int expectedTurnNumber = 2;
             HexCharacterModel playerCharacter = HexCharacterController.Instance.AllPlayerCharacters[0];

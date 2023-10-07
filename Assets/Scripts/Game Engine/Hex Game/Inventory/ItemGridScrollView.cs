@@ -138,7 +138,7 @@ namespace WeAreGladiators.Items
             if (resetSliders) ResetScrollView();
         }
 
-        public void BuildForLootRewards(CombatContractData contract, List<ItemData> extraLoot = null)
+        public void BuildForLootRewards(CombatContractData contract, List<ItemData> extraLoot)
         {
             int nextSlotIndex = 0;
             ResetSlots();
@@ -159,7 +159,11 @@ namespace WeAreGladiators.Items
                 nextSlotIndex += 1;
             }
 
-            // to do in future: build slots for bonus loot
+            // Bonus loot
+            for(int i = 0; i < extraLoot.Count; i++)
+            {
+                lootIconViews[nextSlotIndex + i].BuildAsItemReward(extraLoot[i]);
+            }
 
         }
 
