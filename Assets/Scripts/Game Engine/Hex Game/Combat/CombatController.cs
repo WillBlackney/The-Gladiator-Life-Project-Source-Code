@@ -2072,7 +2072,7 @@ namespace WeAreGladiators.Combat
 
                     // Increment kills this turn
                     attacker.charactersKilledThisTurn++;
-                    attacker.totalKills++;
+                    attacker.killedEnemies.Add(target);
                 }
 
                 // Check nearby gnoll enemies: gnolls heal when a character is killed within 1 of them

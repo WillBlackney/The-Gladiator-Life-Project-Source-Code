@@ -241,7 +241,6 @@ namespace WeAreGladiators.JourneyLogic
         {
             EnemyEncounterData ret = new EnemyEncounterData();
 
-            ret.baseXpReward = template.baseXpReward;
             ret.difficulty = template.difficulty;
             ret.deploymentLimit = template.deploymentLimit;
             ret.enemiesInEncounter = new List<CharacterWithSpawnData>();

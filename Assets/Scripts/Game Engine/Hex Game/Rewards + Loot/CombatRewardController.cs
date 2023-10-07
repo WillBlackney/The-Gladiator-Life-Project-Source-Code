@@ -111,31 +111,23 @@ namespace WeAreGladiators.RewardSystems
         public List<CharacterCombatStatData> GenerateCombatStatResultsForCharacters(List<HexCharacterModel> characters, bool victory)
         {
             List<CharacterCombatStatData> dataRet = new List<CharacterCombatStatData>();
+            EnemyEncounterData encounterData = RunController.Instance.CurrentCombatContractData.enemyEncounterData;
 
             // Calculate xp gain          
-            int baseXp = RunController.Instance.CurrentCombatContractData.enemyEncounterData.baseXpReward / characters.Count;
-            int killXpSlice = 0;
-            EnemyEncounterData encounterData = RunController.Instance.CurrentCombatContractData.enemyEncounterData;
-            int totalKillingBlowXp = 0;
-
-            // Prevent divide by zero error
-            if (encounterData.TotalEnemyXP != 0 &&
-                encounterData.TotalEnemies != 0)
+            int baseXp = encounterData.BaseXpReward;
+            int nonKillingBlowEnemyXpShare = encounterData.TotalEnemyXP;
+           
+            foreach(HexCharacterModel playerCharacter in characters)
             {
-                killXpSlice = encounterData.TotalEnemyXP / encounterData.TotalEnemies;
+                foreach(HexCharacterModel slainEnemy in playerCharacter.killedEnemies)
+                {
+                    nonKillingBlowEnemyXpShare -= slainEnemy.characterData.xpReward;
+                }
             }
 
-            // Determine if any enemies were killed indirectly by player (from burning, poisoned, etc)
-            // Split their xp value evenly over all player characters
-            foreach (HexCharacterModel character in characters)
+            if(nonKillingBlowEnemyXpShare > 0)
             {
-                totalKillingBlowXp += character.charactersKilledThisTurn * killXpSlice;
-            }
-
-            // Is there experience from an enemy death that has gone unrewarded?
-            if (totalKillingBlowXp < encounterData.TotalEnemyXP)
-            {
-                baseXp += (encounterData.TotalEnemyXP - totalKillingBlowXp) / characters.Count;
+                nonKillingBlowEnemyXpShare = nonKillingBlowEnemyXpShare / characters.Count;
             }
 
             // Start xp reward process
@@ -143,6 +135,8 @@ namespace WeAreGladiators.RewardSystems
             {
                 CharacterCombatStatData result = GenerateCharacterCombatStatResult(character);
                 dataRet.Add(result);
+                int myKbXp = 0;
+                character.killedEnemies.ForEach(c => myKbXp += c.characterData.xpReward);
 
                 // Dead characters dont get XP
                 if (character.characterData.currentHealth <= 0 || !victory)
@@ -151,7 +145,7 @@ namespace WeAreGladiators.RewardSystems
                 }
 
                 // Apply xp gain + level up
-                int xpGained = baseXp + killXpSlice * character.totalKills;
+                int xpGained = baseXp + myKbXp + nonKillingBlowEnemyXpShare;
                 if (character.characterData.currentXP + xpGained * StatCalculator.GetCharacterXpGainRate(character.characterData) >= character.characterData.currentMaxXP)
                 {
                     result.didLevelUp = true;
@@ -174,7 +168,7 @@ namespace WeAreGladiators.RewardSystems
 
             result.hexCharacter = character;
             result.characterData = character.characterData;
-            result.totalKills = character.totalKills;
+            result.totalKills = character.killedEnemies.Count;
             result.healthLost = character.healthLostThisCombat;
             result.stressGained = character.moraleStatesLoweredThisCombat;
             result.armourLost = character.armourLostThisCombat;

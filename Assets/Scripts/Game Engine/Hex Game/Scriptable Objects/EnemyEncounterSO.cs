@@ -11,9 +11,6 @@ namespace WeAreGladiators.Characters
     {
         [BoxGroup("General Info", centerLabel: true)]
         [LabelWidth(100)]
-        public int baseXpReward;
-        [BoxGroup("General Info")]
-        [LabelWidth(100)]
         [Range(1, 5)]
         public int deploymentLimit;
         [BoxGroup("General Info")]

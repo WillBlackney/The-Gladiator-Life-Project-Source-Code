@@ -85,7 +85,7 @@ namespace WeAreGladiators.Characters
         public int tilesMovedThisTurn;
 
         [Header("Combat Statistics Properties")]
-        public int totalKills;
+        public List<HexCharacterModel> killedEnemies = new List<HexCharacterModel>();
         public bool wasSummonedThisTurn = false;
         public int weaponAbilitiesUsedThisTurn;
 

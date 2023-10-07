@@ -889,6 +889,9 @@ namespace WeAreGladiators.Characters
             Debug.Log("CharacterEntityController.AddDefenderPersistency() called, adding: " + character.myName);
             AllCharacters.Add(character);
             AllSummonedPlayerCharacters.Add(character);
+
+            // to do: put this code at the point where the actual character is created
+            character.characterData.xpReward = 0;
         }
         public void AddEnemyToPersistency(HexCharacterModel character)
         {
