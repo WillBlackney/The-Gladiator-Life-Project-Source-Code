@@ -16,9 +16,15 @@ namespace WeAreGladiators.UI
 
         #endregion
 
-        // Misc
-        #region
+        #region Getters + Accessors
+        public static RosterItemSlot SlotMousedOver { get; private set; }
+        public Image ItemImage => itemImage;
+        public GameObject ItemViewParent => itemViewParent;
+        public ItemData ItemDataRef => itemDataRef;
+        public RosterSlotType SlotType => slotType;
+        #endregion
 
+        #region Misc
         public void SetMyDataReference(ItemData data)
         {
             itemViewParent.SetActive(true);
@@ -28,26 +34,19 @@ namespace WeAreGladiators.UI
             }
             itemDataRef = data;
         }
-
-        #endregion        
-
-        // Getters + Accessors
-        #region
-
-        public static RosterItemSlot SlotMousedOver { get; private set; }
-        public Image ItemImage => itemImage;
-        public GameObject ItemViewParent => itemViewParent;
-        public ItemData ItemDataRef => itemDataRef;
-        public RosterSlotType SlotType => slotType;
-
         #endregion
 
-        // Input
-        #region
-
+        #region Input
         private void HandleRightClick()
         {
             Debug.Log("RosterItemSlot.HandleRightClick()");
+
+            if (CharacterRosterViewController.Instance.PerkTalentLevelUpPageViewIsActive ||
+                   CharacterRosterViewController.Instance.AttributeLevelUpPageComponent.ViewIsActive)
+            {
+                return;
+            }
+
             if (itemDataRef != null && InventoryController.Instance.HasFreeInventorySpace())
             {
                 HexCharacterData character = CharacterRosterViewController.Instance.CharacterCurrentlyViewing;
@@ -58,6 +57,12 @@ namespace WeAreGladiators.UI
         }
         private void OnMouseOver()
         {
+            if(CharacterRosterViewController.Instance.PerkTalentLevelUpPageViewIsActive ||
+                    CharacterRosterViewController.Instance.AttributeLevelUpPageComponent.ViewIsActive)
+            {
+                return;
+            }
+
             if (SlotMousedOver != this)
             {
                 SlotMousedOver = this;
@@ -78,6 +83,12 @@ namespace WeAreGladiators.UI
         }
         public void OnMouseExit()
         {
+            if (CharacterRosterViewController.Instance.PerkTalentLevelUpPageViewIsActive ||
+                   CharacterRosterViewController.Instance.AttributeLevelUpPageComponent.ViewIsActive)
+            {
+                return;
+            }
+
             if (SlotMousedOver == this)
             {
                 SlotMousedOver = null;
@@ -87,7 +98,6 @@ namespace WeAreGladiators.UI
             CursorController.Instance.SetCursor(CursorType.NormalPointer);
 
         }
-
         #endregion
     }
 }

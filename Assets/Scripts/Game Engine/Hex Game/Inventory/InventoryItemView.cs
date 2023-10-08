@@ -107,13 +107,13 @@ namespace WeAreGladiators.Items
 
                 // Get correct slot
                 List<RosterItemSlot> allSlots = new List<RosterItemSlot>
-            {
+                {
                 CharacterRosterViewController.Instance.MainHandSlot,
                 CharacterRosterViewController.Instance.OffHandSLot,
                 CharacterRosterViewController.Instance.BodySLot,
                 CharacterRosterViewController.Instance.HeadSlot,
                 CharacterRosterViewController.Instance.TrinketSlot
-            };
+                };
 
                 RosterItemSlot matchingSlot = null;
                 foreach (RosterItemSlot ris in allSlots)

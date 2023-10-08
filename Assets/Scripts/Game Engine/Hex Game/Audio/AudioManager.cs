@@ -498,7 +498,6 @@ namespace WeAreGladiators.Audio
         Explosion_Lightning_1 = 22,
         Explosion_Poison_1 = 23,
 
-        Gold_Cha_Ching = 53,
         Gold_Gain = 51,
         Gold_Dropping = 52,
 

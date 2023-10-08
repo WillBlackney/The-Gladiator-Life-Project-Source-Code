@@ -13,43 +13,42 @@ using WeAreGladiators.VisualEvents;
 
 namespace WeAreGladiators.JourneyLogic
 {
-
     public class RunController : Singleton<RunController>
     {
-        // Properties + Component Refs
-        #region
-
+        #region Properties + Component
         [Header("Run Timer Components")]
         [Tooltip("When disabled, the game will not track or display the play time duration of the player's runs")]
         [SerializeField] private bool disableRunTiming;
         [SerializeField] private TextMeshProUGUI runTimerText;
         [SerializeField] private GameObject runTimerVisualParent;
         [Space(10)]
+
         [Header("Combat Encounter Data")]
         [SerializeField] private EnemyEncounterSet[] allCombatEncounterSets;
-
-        // Non inspector fields     
+    
         private float runTimer;
         private bool updateTimer;
-
         #endregion
 
-        // Getters + Accessors
-        #region
+        #region Getters + Accessors
         public int CurrentGold { get; private set; }
         public CombatContractData CurrentCombatContractData { get; private set; }
         public List<CharacterWithSpawnData> CurrentDeployedCharacters { get; private set; } = new List<CharacterWithSpawnData>();
         public SaveCheckPoint SaveCheckPoint { get; private set; }
         public int CurrentDay { get; private set; }
         public int CurrentChapter { get; private set; }
-
         public SerializedCombatMapData CurrentCombatMapData { get; private set; }
-
         #endregion
 
-        // Initialization, Save + Load Logic
-        #region
-
+        #region Initialization, Save + Load Logic
+        private void Start()
+        {
+            runTimerVisualParent.SetActive(true);
+            if (disableRunTiming)
+            {
+                runTimerVisualParent.SetActive(false);
+            }
+        }
         public void BuildMyDataFromSaveFile(SaveGameData saveData)
         {
             CurrentDay = saveData.currentDay;
@@ -91,16 +90,12 @@ namespace WeAreGladiators.JourneyLogic
 
             ModifyPlayerGold(GlobalSettings.Instance.BaseStartingGold);
         }
-
         #endregion
 
-        // Core Events
-        #region
-
+        #region Core Game Cycle Events
         public bool OnNewDayStart()
         {
             bool newChapterStarted = false;
-            // Increment day
             if (CurrentDay == 5)
             {
                 newChapterStarted = true;
@@ -143,14 +138,11 @@ namespace WeAreGladiators.JourneyLogic
         public void OnNewChapterStart()
         {
             // TO DO: generate reputation reward choices
-
         }
 
         #endregion
 
-        // Modify Core Journey Properties
-        #region
-
+        #region Modify Core Journey Properties
         public void SetCheckPoint(SaveCheckPoint type)
         {
             SaveCheckPoint = type;
@@ -159,12 +151,9 @@ namespace WeAreGladiators.JourneyLogic
         {
             TopBarController.Instance.CurrentDaytext.text = "Day: " + CurrentDay + " of 5";
         }
-
         #endregion
 
-        // Get + Set Enemy Waves
-        #region
-
+        #region Get + Set Enemy Waves
         public void SetCurrentCombatMapData(SerializedCombatMapData mapData)
         {
             CurrentCombatMapData = mapData;
@@ -257,12 +246,9 @@ namespace WeAreGladiators.JourneyLogic
 
             return ret;
         }
-
         #endregion
 
-        // Run Timer Logic
-        #region
-
+        #region Run Timer Logic
         private void Update()
         {
             if (!disableRunTiming && updateTimer)
@@ -283,34 +269,29 @@ namespace WeAreGladiators.JourneyLogic
         }
         public void StartTimer()
         {
+            if (disableRunTiming) return;
             runTimerVisualParent.SetActive(true);
             updateTimer = true;
         }
         public void PauseTimer()
         {
+            if (disableRunTiming) return;
             runTimerVisualParent.SetActive(false);
             updateTimer = false;
         }
-
         #endregion
 
-        // Gold Logic
-        #region
-
+        #region Gold Logic
         public void ModifyPlayerGold(int goldGainedOrLost)
         {
             CurrentGold += goldGainedOrLost;
             int vEventValue = CurrentGold;
-
-            // update food text;
             VisualEventManager.CreateVisualEvent(() => TopBarController.Instance.UpdateGoldText(vEventValue.ToString()));
         }
         private void SetPlayerGold(int newValue)
         {
             CurrentGold = newValue;
             int vEventValue = CurrentGold;
-
-            // update food text;
             VisualEventManager.CreateVisualEvent(() => TopBarController.Instance.UpdateGoldText(vEventValue.ToString()));
         }
 

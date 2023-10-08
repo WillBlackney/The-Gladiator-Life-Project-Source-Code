@@ -159,6 +159,19 @@ namespace WeAreGladiators.TownFeatures
                 tbv.CloseAndResetAllUiViews();
             }
         }
+        public void RefreshAllTownItemGrids()
+        {
+            if(ArmouryViewIsActive)
+            {
+                playerInventoryGridArmouryPage.BuildItemCollectionView();
+                //armouryItemGrid.BuildItemCollectionView();
+            }
+            if(LibraryViewIsActive)
+            {
+                playerInventoryGridLibraryPage.BuildItemCollectionView(); 
+                //libraryItemGrid.BuildItemCollectionView();
+            }            
+        }
 
         #endregion
 
@@ -341,6 +354,7 @@ namespace WeAreGladiators.TownFeatures
             }
 
             // Pay for recruit
+            AudioManager.Instance.PlaySound(Sound.UI_Buy_Item);
             RunController.Instance.ModifyPlayerGold(-cost);
 
             // Add character to roster
@@ -689,34 +703,7 @@ namespace WeAreGladiators.TownFeatures
             armouryPageVisualParent.SetActive(true);
             armouryItemGrid.BuildItemCollectionView();
             playerInventoryGridArmouryPage.BuildItemCollectionView();
-        }
-        public void HandleBuyItem(ItemShopData data)
-        {
-            // Pay gold cost
-            RunController.Instance.ModifyPlayerGold(-data.GoldCost);
-
-            // Add item to inventory
-            if (data.Item != null) InventoryController.Instance.AddItemToInventory(data.Item);
-            else if (data.ability != null) InventoryController.Instance.AddItemToInventory(data.ability);
-
-            if (ArmouryViewIsActive)
-            {
-                // Remove from shop
-                currentArmouryItems.Remove(data);
-
-                // Rebuild page
-                BuildAndShowArmouryPage(false);
-            }
-            else if (LibraryViewIsActive)
-            {
-                // Remove from shop
-                currentLibraryItems.Remove(data);
-
-                // Rebuild page
-                BuildAndShowLibraryPage(false);
-            }
-
-        }
+        }       
         public void GenerateDailyArmouryItems()
         {
             currentArmouryItems.Clear();

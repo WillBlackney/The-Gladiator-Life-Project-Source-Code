@@ -48,12 +48,23 @@ MonoBehaviour:
       value: 5
       stars: 0
     stressResistance: 0
-    vision: 5
+    vision: 20
     wits:
       value: 5
       stars: 0
   abilityBook:
-    activeAbilities: []
+    activeAbilities:
+    - {fileID: 11400000, guid: 36a0268a5ac37d742960a07bfe17be42, type: 2}
+    - {fileID: 11400000, guid: 6c3343bfc6662a742897620834e447ae, type: 2}
+    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
+    - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
+    - {fileID: 11400000, guid: e9972b20921e6e7468dbf49561e14ac9, type: 2}
+    - {fileID: 11400000, guid: fb57f167ec3edab43baad8230d973425, type: 2}
+    - {fileID: 11400000, guid: f4ff335dffe397e4199a69bce357c79c, type: 2}
+    - {fileID: 11400000, guid: 90e62be2d401c2f4383195876bbc8ff5, type: 2}
+    - {fileID: 11400000, guid: 63b93d8887404354592f0b988319347e, type: 2}
+    - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
+    - {fileID: 11400000, guid: c367e762d7251324b9199c63a443d4af, type: 2}
   serializedPassiveManager:
     perks: []
   modelParts:
@@ -63,7 +74,7 @@ MonoBehaviour:
   - Undead_Right_Hand_1
   - Undead_Right_Leg_1
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: e8567b630dd37c042a06a339a93e409e, type: 2}
+    mainHandItem: {fileID: 11400000, guid: ab6f2b51cf50eaa43bba82ed52ef5342, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}

@@ -6,9 +6,11 @@ using UnityEngine.UI;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
+using WeAreGladiators.Combat;
 using WeAreGladiators.Items;
 using WeAreGladiators.Libraries;
 using WeAreGladiators.Perks;
+using WeAreGladiators.TownFeatures;
 using WeAreGladiators.UCM;
 using WeAreGladiators.Utilities;
 
@@ -135,6 +137,11 @@ namespace WeAreGladiators.UI
         public RosterItemSlot BodySLot => bodySlot;
         public RosterItemSlot TrinketSlot => trinketSlot;
         public ItemGridScrollView PlayerInventory => playerInventory;
+        public bool PerkTalentLevelUpPageViewIsActive
+        {
+            get { return perkLevelUpConfirmChoiceScreenParent.activeSelf; }
+        }
+        public AttributeLevelUpPage AttributeLevelUpPageComponent => attributeLevelUpPageComponent;
         #endregion
 
         // Build Perk Section
@@ -659,6 +666,7 @@ namespace WeAreGladiators.UI
             AudioManager.Instance.PlaySound(Sound.Effects_Confirm_Level_Up);
             HandleRedrawRosterOnCharacterUpdated();
             CharacterScrollPanelController.Instance.RebuildViews();
+            TownController.Instance.RefreshAllTownItemGrids();
         }
         public void OnConfirmLevelUpPerkPageCancelButtonClicked()
         {
@@ -708,7 +716,10 @@ namespace WeAreGladiators.UI
             AbilityBook book = CharacterCurrentlyViewing.abilityBook;
             AbilityData ability = button.icon.MyDataRef;
 
-            if (book.activeAbilities.Count <= AbilityBook.ActiveAbilityLimit) return;
+            if (book.knownAbilities.Count <= AbilityBook.ActiveAbilityLimit || GameController.Instance.GameState != GameState.Town)
+            {
+                return;
+            }
 
             // Make inactive ability go active
             if (!book.HasActiveAbility(ability.abilityName) &&
@@ -716,7 +727,6 @@ namespace WeAreGladiators.UI
             {
                 CharacterCurrentlyViewing.abilityBook.SetAbilityAsActive(book.GetKnownAbility(ability.abilityName));
                 button.SetSelectedViewState(true);
-               // activeAbilitiesText.text = book.activeAbilities.Count + " / " + AbilityBook.ActiveAbilityLimit;
             }
 
             // Make active ability go inactive
@@ -726,7 +736,6 @@ namespace WeAreGladiators.UI
             {
                 CharacterCurrentlyViewing.abilityBook.SetAbilityAsInactive(book.GetKnownAbility(ability.abilityName));
                 button.SetSelectedViewState(false);
-                //activeAbilitiesText.text = book.activeAbilities.Count + " / " + AbilityBook.ActiveAbilityLimit;
             }
         }
 

@@ -80,7 +80,7 @@ namespace WeAreGladiators.Utilities
                     if (didPress && CombatUIController.Instance.AbilityButtons[key - 1] != null)
                     {
                         HexCharacterModel uiCharacter = TurnController.Instance.EntityActivated;
-                        if (uiCharacter.controller == Controller.Player)
+                        if (uiCharacter.controller == Controller.Player && CombatUIController.Instance.ViewIsActive)
                         {
                             AbilityData ab = CombatUIController.Instance.AbilityButtons[key - 1].MyAbilityData;
                             int cost = AbilityController.Instance.GetAbilityActionPointCost(uiCharacter, ab);

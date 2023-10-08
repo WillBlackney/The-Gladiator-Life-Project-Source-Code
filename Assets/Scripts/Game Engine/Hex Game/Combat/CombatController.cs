@@ -1667,19 +1667,7 @@ namespace WeAreGladiators.Combat
             {
                 damageResult.totalArmourLost = (int) (damageResult.totalArmourLost * 0.75f);
                 totalArmourLost = (int) (damageResult.totalArmourLost * 0.75f);
-            }
-
-            /*
-            // Check Agile Defense
-            if (ability != null &&
-                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.AgileDefense))
-            {
-                float adMod = 0.25f;
-                float itemFatPenaltyMod = ItemController.Instance.GetTotalMaximumFatiguePenaltyFromHeadAndBodyItems(target.itemSet) * 0.01f;
-                adMod = 1f - (adMod - itemFatPenaltyMod);
-                damageResult.totalHealthLost = (int)(damageResult.totalHealthLost * adMod);
-                totalHealthLost = (int)(damageResult.totalHealthLost * adMod);
-            }*/
+            }            
 
             Debug.Log("XX ExecuteHandleDamage() results: " +
                 "Base damage = " + totalDamage +
@@ -1811,6 +1799,7 @@ namespace WeAreGladiators.Combat
             LevelNode targetTile = target.currentTile;
             if (target.currentHealth <= 0 && target.livingState == LivingState.Alive)
             {
+                if (attacker != null) attacker.killedEnemies.Add(target);
                 HandleDeathBlow(target, parentEvent, false, weaponUsed);
             }
 
@@ -1884,7 +1873,6 @@ namespace WeAreGladiators.Combat
             }
 
             // Tiger Aspect => apply bleeding
-
             if (target.currentHealth > 0 &&
                 target.livingState == LivingState.Alive &&
                 attacker != null &&
@@ -1985,7 +1973,7 @@ namespace WeAreGladiators.Combat
                 // Target 'On Health Lost' stress check
                 CreateMoraleCheck(target, target.currentTile, StressEventType.HealthLost);
 
-                // ALlies' 'On Ally Health Lost' stress check
+                // Allies' 'On Ally Health Lost' stress check
                 foreach (HexCharacterModel c in HexCharacterController.Instance.GetAllAlliesOfCharacter(target, false))
                 {
                     CreateMoraleCheck(c, target.currentTile, StressEventType.AllyLosesHealth);
@@ -2002,8 +1990,6 @@ namespace WeAreGladiators.Combat
             // Check and handle death
             if (target.currentHealth <= 0 && target.livingState == LivingState.Dead)
             {
-                //HandleDeathBlow(target, parentEvent);
-
                 // Attacker 'on killed an enemy' events
                 if (attacker != null &&
                     attacker.currentHealth > 0 &&
@@ -2071,8 +2057,7 @@ namespace WeAreGladiators.Combat
                     }
 
                     // Increment kills this turn
-                    attacker.charactersKilledThisTurn++;
-                    attacker.killedEnemies.Add(target);
+                    attacker.charactersKilledThisTurn++;                    
                 }
 
                 // Check nearby gnoll enemies: gnolls heal when a character is killed within 1 of them
@@ -2108,8 +2093,6 @@ namespace WeAreGladiators.Combat
                 {
                     CreateMoraleCheck(c, targetTile, StressEventType.AllyKilled);
                 }
-
-                //HandleDeathBlow(target, parentEvent);
             }
 
         }

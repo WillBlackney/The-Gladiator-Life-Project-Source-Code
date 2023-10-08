@@ -15,6 +15,18 @@ namespace WeAreGladiators.Scoring
 {
     public class ScoreController : Singleton<ScoreController>
     {
+        #region Components + Variables
+
+        [Header("Core Components")]
+        [SerializeField] private GameObject visualParent;
+        [SerializeField] private CanvasGroup mainCg;
+        [SerializeField] private TextMeshProUGUI headerText;
+        [SerializeField] private Button continueButton;
+        [SerializeField] private ScoreElementPanel[] scorePanels;
+        [SerializeField] private TextMeshProUGUI finalScoreText;
+        [SerializeField] private GameObject contentCompleteWindow;
+
+        #endregion
 
         #region Getters + Accessors
 
@@ -37,20 +49,7 @@ namespace WeAreGladiators.Scoring
             CurrentScoreData.combatDefeats += 2;
         }
 
-        #endregion
-        #region Components + Variables
-
-        [Header("Core Components")]
-        [SerializeField]
-        private GameObject visualParent;
-        [SerializeField] private CanvasGroup mainCg;
-        [SerializeField] private TextMeshProUGUI headerText;
-        [SerializeField] private Button continueButton;
-        [SerializeField] private ScoreElementPanel[] scorePanels;
-        [SerializeField] private TextMeshProUGUI finalScoreText;
-        [SerializeField] private GameObject contentCompleteWindow;
-
-        #endregion
+        #endregion     
 
         #region Score Value Constants
 
@@ -428,7 +427,7 @@ namespace WeAreGladiators.Scoring
                 }
             }
 
-            return new ScoreElementData(score, ScoreElementType.WellArmed);
+            return new ScoreElementData(score, ScoreElementType.WellArmoured);
         }
         private ScoreElementData CalculateFatherOfTheYear()
         {

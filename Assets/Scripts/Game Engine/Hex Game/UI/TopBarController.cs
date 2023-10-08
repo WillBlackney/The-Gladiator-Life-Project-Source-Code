@@ -2,7 +2,6 @@
 using TMPro;
 using UnityEngine;
 using WeAreGladiators.Characters;
-using WeAreGladiators.Items;
 using WeAreGladiators.MainMenu;
 using WeAreGladiators.Utilities;
 
@@ -10,45 +9,7 @@ namespace WeAreGladiators.UI
 {
     public class TopBarController : Singleton<TopBarController>
     {
-
-        // Keypad Control Logic
-        #region
-
-        private void Update()
-        {
-            // Handle key board input
-            if ((mainTopBarRootCanvas.isActiveAndEnabled || combatTopBarRootCanvas.isActiveAndEnabled) && Input.GetKeyDown(KeyCode.C))
-            {
-                CharacterRosterViewController.Instance?.OnCharacterRosterTopbarButtonClicked();
-            }
-            else if ((mainTopBarRootCanvas.isActiveAndEnabled || combatTopBarRootCanvas.isActiveAndEnabled) && Input.GetKeyDown(KeyCode.Escape))
-            {
-                MainMenuController.Instance.OnTopBarSettingsButtonClicked();
-            }
-
-        }
-
-        #endregion
-
-        // Update Texts
-        #region
-
-        public void UpdateGoldText(string value)
-        {
-            currentGoldText.text = value;
-        }
-
-        #endregion
-
-        public void OnGoldPanelMouseEnter()
-        {
-            string one = TextLogic.ReturnColoredText(CharacterDataController.Instance.GetTotalRosterDailyWage().ToString(), TextLogic.blueNumber);
-            string two = TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow);
-            currentGoldInfoPopupText.text = string.Format("Currently paying {0} {1} each day in wages.", one, two);
-        }
-        // Properties + Components
-        #region
-
+        #region Properties + Components
         [Header("Core Components")]
         [SerializeField] private Canvas mainTopBarRootCanvas;
         [SerializeField] private Canvas combatTopBarRootCanvas;
@@ -61,8 +22,7 @@ namespace WeAreGladiators.UI
 
         #endregion
 
-        // Getters + Accessors
-        #region
+        #region Getters + Accessors
 
         public TextMeshProUGUI CurrentGoldText
         {
@@ -72,9 +32,32 @@ namespace WeAreGladiators.UI
 
         #endregion
 
-        // Core Functions
-        #region
+        #region Keypad Control Logic
 
+        private void Update()
+        {
+            // Handle key board input
+            if ((mainTopBarRootCanvas.isActiveAndEnabled || combatTopBarRootCanvas.isActiveAndEnabled) && Input.GetKeyDown(KeyCode.C))
+            {
+                CharacterRosterViewController.Instance?.OnCharacterRosterTopbarButtonClicked();
+            }
+            else if ((mainTopBarRootCanvas.isActiveAndEnabled || combatTopBarRootCanvas.isActiveAndEnabled) && Input.GetKeyDown(KeyCode.Escape))
+            {
+                MainMenuController.Instance.OnTopBarSettingsButtonClicked();
+            }
+        }
+
+        #endregion
+
+        #region Update Texts
+        public void UpdateGoldText(string value)
+        {
+            currentGoldText.text = value;
+        }
+
+        #endregion        
+
+        #region Core Functions
         public void ShowMainTopBar()
         {
             mainTopBarRootCanvas.enabled = true;
@@ -92,6 +75,12 @@ namespace WeAreGladiators.UI
         public void HideCombatTopBar()
         {
             combatTopBarRootCanvas.enabled = false;
+        }
+        public void OnGoldPanelMouseEnter()
+        {
+            string one = TextLogic.ReturnColoredText(CharacterDataController.Instance.GetTotalRosterDailyWage().ToString(), TextLogic.blueNumber);
+            string two = TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow);
+            currentGoldInfoPopupText.text = string.Format("Currently paying {0} {1} each day in wages.", one, two);
         }
 
         #endregion

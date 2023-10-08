@@ -135,6 +135,10 @@ namespace WeAreGladiators.UI
             CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
             CharacterScrollPanelController.Instance.RebuildViews();
         }
+        public bool ViewIsActive
+        {
+            get { return mainVisualParent.activeSelf; }
+        }
 
         #endregion
     }

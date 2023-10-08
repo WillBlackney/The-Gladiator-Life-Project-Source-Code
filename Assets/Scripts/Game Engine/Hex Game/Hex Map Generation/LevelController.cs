@@ -709,7 +709,7 @@ namespace WeAreGladiators.HexTiles
                 (character.hexCharacterView, destination, cData, moveSpeed, ease)).SetCoroutineData(cData);
 
             // TO DO: events that trigger when the character steps onto a new tile go here (maybe?)...
-            character.tilesMovedThisTurn++;
+            character.tilesMovedThisTurn += 1;
 
             // Determine which enemies are valid to take a spear wall attack
             if (!PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Slippery))
@@ -798,10 +798,7 @@ namespace WeAreGladiators.HexTiles
 
             DisconnectCharacterFromTheirHex(character);
             PlaceCharacterOnHex(character, destination);
-
             HexCharacterView view = character.hexCharacterView;
-
-            // Create teleport VFX on character position
 
             // Make character model + world space UI vanish
             VisualEventManager.CreateVisualEvent(() =>

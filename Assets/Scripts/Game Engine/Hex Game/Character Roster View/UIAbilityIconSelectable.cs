@@ -13,17 +13,23 @@ namespace WeAreGladiators.UI
         public UIAbilityIcon icon;
 
         #endregion
+
+        #region Getters + Accessors
+        public GameObject SelectedParent => selectedParent;
+        public GameObject UnselectedParent => unselectedParent;
+
+        #endregion
+
+        #region Logic
         public void OnClick()
         {
             CharacterRosterViewController.Instance.OnSelectableAbilityButtonClicked(this);
         }
-
         public void Hide()
         {
             gameObject.SetActive(false);
             selectStateParent.SetActive(false);
         }
-
         public void Build(AbilityData data, bool selected, bool showSelectionState)
         {
             selectStateParent.SetActive(false);
@@ -48,13 +54,6 @@ namespace WeAreGladiators.UI
                 unselectedParent.SetActive(true);
             }
         }
-      
-
-        #region Getters + Accessors
-
-        public GameObject SelectedParent => selectedParent;
-        public GameObject UnselectedParent => unselectedParent;
-
         #endregion
     }
 }

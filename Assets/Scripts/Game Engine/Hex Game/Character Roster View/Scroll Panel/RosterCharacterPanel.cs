@@ -1,10 +1,10 @@
-﻿using TMPro;
+﻿using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using WeAreGladiators.Characters;
 using WeAreGladiators.GameIntroEvent;
-using WeAreGladiators.Items;
 using WeAreGladiators.Libraries;
 using WeAreGladiators.StoryEvents;
 using WeAreGladiators.TownFeatures;
@@ -125,6 +125,7 @@ namespace WeAreGladiators.UI
         public void OnClickAndDragStart()
         {
             if (TownController.Instance.DeploymentViewIsActive &&
+                !CharacterRosterViewController.Instance.MainVisualParent.activeSelf &&
                 AllowInput())
             {
                 PortraitDragController.Instance.OnRosterCharacterPanelDragStart(this);
@@ -133,7 +134,8 @@ namespace WeAreGladiators.UI
         }
         public void OnLevelButtonClicked()
         {
-            if (AllowInput())
+            if (AllowInput() && 
+                !PortraitDragController.Instance.ActivelyDragging)
             {
                 CharacterRosterViewController.Instance.HandleBuildAndShowCharacterRoster(MyCharacterData);
             }
@@ -141,7 +143,8 @@ namespace WeAreGladiators.UI
         public void OnPointerClick(PointerEventData eventData)
         {
             if (eventData.button == PointerEventData.InputButton.Right &&
-                AllowInput())
+                AllowInput() && 
+                !PortraitDragController.Instance.ActivelyDragging)
             {
                 CharacterRosterViewController.Instance.HandleBuildAndShowCharacterRoster(MyCharacterData);
             }
@@ -151,7 +154,9 @@ namespace WeAreGladiators.UI
             bool ret = true;
 
             if(StoryEventController.Instance.ViewIsActive ||
-                GameIntroController.Instance.ViewIsActive)
+                GameIntroController.Instance.ViewIsActive ||
+                CharacterRosterViewController.Instance.PerkTalentLevelUpPageViewIsActive ||
+                CharacterRosterViewController.Instance.AttributeLevelUpPageComponent.ViewIsActive)
             {
                 ret = false;
             }

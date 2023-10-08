@@ -319,8 +319,36 @@ namespace WeAreGladiators.Abilities
         {
             foreach (AbilityData a in original.knownAbilities)
             {
+                AbilityData newAbility = a.CloneJSON();
+                knownAbilities.Add(newAbility);
+                if(original.HasActiveAbility(a.abilityName))
+                {
+                    activeAbilities.Add(newAbility);
+                }
+            }
+
+
+
+            /*
+            foreach (AbilityData a in original.knownAbilities)
+            {
                 HandleLearnNewAbility(a);
             }
+
+            List<AbilityData> abilitiesMovedOutOfActive = new List<AbilityData>();
+            foreach(AbilityData a in activeAbilities)
+            {
+                if (!original.HasActiveAbility(a.abilityName))
+                {
+                    abilitiesMovedOutOfActive.Add(a);
+                }
+            }
+
+            foreach(AbilityData a in abilitiesMovedOutOfActive)
+            {
+                activeAbilities.Remove(a);
+            }*/
+
         }
         public AbilityBook(SerializedAbilityBook original)
         {

@@ -417,6 +417,7 @@ namespace WeAreGladiators.Items
             CharacterRosterViewController.Instance.HandleRedrawRosterOnCharacterUpdated();
             CharacterScrollPanelController.Instance.RebuildViews();
             CharacterRosterViewController.Instance.PlayerInventory.BuildItemCollectionView();
+            TownController.Instance.RefreshAllTownItemGrids();
 
         }
         public void HandleGiveItemToCharacterFromInventory(HexCharacterData character, InventoryItem newItem, RosterItemSlot slot)
@@ -480,10 +481,11 @@ namespace WeAreGladiators.Items
 
             // Update item abilities
             character.abilityBook.OnItemSetChanged(character.itemSet);
+            TownController.Instance.RefreshAllTownItemGrids();
         }
         public void HandleSellItem(InventoryItem item)
         {
-            AudioManager.Instance.PlaySound(Sound.Gold_Cha_Ching);
+            AudioManager.Instance.PlaySound(Sound.UI_Sell_Item);
             InventoryController.Instance.RemoveItemFromInventory(item);
             if(TownController.Instance.ArmouryViewIsActive)
             {
@@ -509,6 +511,33 @@ namespace WeAreGladiators.Items
                     TownController.Instance.currentLibraryItems.Add(new ItemShopData(item.itemData, item.itemData.baseGoldValue));
                 }
                 RunController.Instance.ModifyPlayerGold(item.GetSellPrice());
+                TownController.Instance.BuildAndShowLibraryPage(false);
+            }
+        }
+        public void HandleBuyItem(ItemShopData data)
+        {
+            // Pay gold cost
+            RunController.Instance.ModifyPlayerGold(-data.GoldCost);
+            AudioManager.Instance.PlaySound(Sound.UI_Buy_Item);
+
+            // Add item to inventory
+            if (data.Item != null) InventoryController.Instance.AddItemToInventory(data.Item);
+            else if (data.ability != null) InventoryController.Instance.AddItemToInventory(data.ability);
+
+            if (TownController.Instance.ArmouryViewIsActive)
+            {
+                // Remove from shop
+                TownController.Instance.currentArmouryItems.Remove(data);
+
+                // Rebuild page
+                TownController.Instance.BuildAndShowArmouryPage(false);
+            }
+            else if (TownController.Instance.LibraryViewIsActive)
+            {
+                // Remove from shop
+                TownController.Instance.currentLibraryItems.Remove(data);
+
+                // Rebuild page
                 TownController.Instance.BuildAndShowLibraryPage(false);
             }
         }

@@ -37,7 +37,7 @@ namespace WeAreGladiators.TownFeatures
             if (MyItemData == null) return;
             if (AbleToBuyItem())
             {
-                TownController.Instance.HandleBuyItem(MyItemData);
+                ItemController.Instance.HandleBuyItem(MyItemData);
             }
         }
         public void MouseEnter()

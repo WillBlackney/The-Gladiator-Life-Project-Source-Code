@@ -123,7 +123,7 @@ namespace WeAreGladiators.Combat
                     continue;
                 }
 
-                // Not free strikes if first Nimble move
+                // No free strikes if first Nimble move
                 if (h == p.HexsOnPath[0] &&
                     allowNimbleCheck &&
                     characterMoving.tilesMovedThisTurn == 0 &&
@@ -192,7 +192,7 @@ namespace WeAreGladiators.Combat
                     continue;
                 }
 
-                // Not free strikes if first Nimble move
+                // No free strikes if first Nimble move
                 if (h == p.HexsOnPath[0] &&
                     allowNimbleCheck &&
                     characterMoving.tilesMovedThisTurn == 0 &&

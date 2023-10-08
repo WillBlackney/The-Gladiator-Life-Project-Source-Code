@@ -9,8 +9,7 @@ namespace WeAreGladiators.UI
 {
     public class PortraitDragController : Singleton<PortraitDragController>
     {
-        // Components + Properties
-        #region
+        #region Components + Properties
 
         [Header("Core Components")]
         [SerializeField] private UniversalCharacterModel potraitUcm;
@@ -20,9 +19,22 @@ namespace WeAreGladiators.UI
         [SerializeField] private Canvas dragCanvas;
         [SerializeField] private RectTransform dragRect;
 
-        // Non inspector fields
         private HexCharacterData draggedCharacterData;
         private DeploymentNodeView draggedNode;
+
+        public bool ActivelyDragging
+        {
+            get
+            {
+                bool ret = false;
+                if (draggedCharacterData != null || 
+                    draggedNode != null)
+                {
+                    ret = true;
+                }
+                return ret;
+            }
+        }
 
         #endregion
 
