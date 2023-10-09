@@ -12,8 +12,7 @@ namespace WeAreGladiators.Items
 {
     public class InventoryItemView : MonoBehaviour
     {
-        // Properties + Components
-        #region
+        #region Properties + Components
         [SerializeField] private ItemGridScrollView myItemGrid;
 
         [Header("Ability Book Components")]
@@ -28,17 +27,12 @@ namespace WeAreGladiators.Items
         [SerializeField] private GameObject goldCostParent;
         [SerializeField] private TextMeshProUGUI goldCostText;
 
-        public static InventoryItemView ItemDragged { get; private set; }
-
-        // Drag values
-        [HideInInspector] public bool currentlyBeingDragged;
-        
-
+        private bool currentlyBeingDragged;
+        [HideInInspector] public bool allowKeyWordModal = true;
         #endregion
 
-        // Getters + Accessors
-        #region
-
+        #region Getters + Accessors
+        public static InventoryItemView ItemDragged { get; private set; }
         public GameObject GoldCostParent => goldCostParent;
         public TextMeshProUGUI GoldCostText => goldCostText;
         public GameObject BookVisualParent => bookVisualParent;
@@ -53,12 +47,9 @@ namespace WeAreGladiators.Items
 
         #endregion
 
-        // Input
-        #region
-
+        #region Input
         public void RightClick()
         {
-            Debug.Log("InventoryItemView.RightClick()");
             if (ItemDragged != null)
             {
                 return;
@@ -141,7 +132,6 @@ namespace WeAreGladiators.Items
         }
         public void MouseEnter()
         {
-            Debug.Log("InventoryItemView.MouseEnter()");
             if (ItemDragged != null)
             {
                 return;
@@ -149,7 +139,7 @@ namespace WeAreGladiators.Items
             if (MyItemRef.abilityData != null)
             {
                 AbilityPopupController.Instance.OnAbilityBookItemMousedOver(this);
-                KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyItemRef.abilityData.keyWords);
+                if(allowKeyWordModal) KeyWordLayoutController.Instance.BuildAllViewsFromKeyWordModels(MyItemRef.abilityData.keyWords);
             }
             if (MyItemRef.itemData != null)
             {
@@ -158,7 +148,6 @@ namespace WeAreGladiators.Items
         }
         public void MouseExit()
         {
-            Debug.Log("InventoryItemView.MouseExit()");
             if (ItemDragged != null)
             {
                 return;
@@ -170,8 +159,7 @@ namespace WeAreGladiators.Items
 
         #endregion
 
-        // Drag Logic
-        #region
+        #region Drag Logic
 
         private void OnMouseUp()
         {
@@ -317,9 +305,7 @@ namespace WeAreGladiators.Items
 
         #endregion
 
-        // Misc
-        #region
-
+        #region Misc
         public void Reset()
         {
             gameObject.SetActive(false);
@@ -332,7 +318,6 @@ namespace WeAreGladiators.Items
         {
             MyItemRef = item;
         }
-
         #endregion
     }
 }

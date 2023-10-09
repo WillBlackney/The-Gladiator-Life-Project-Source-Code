@@ -102,6 +102,17 @@ namespace WeAreGladiators.UI
             }
         }
 
+        public void OnChooseAbilityButtonMousedOver(ChooseAbilityButton b)
+        {
+            Debug.Log("AbilityPopupController.OnRosterAbilityButtonMousedOver()");
+            FadeInPanel();
+            BuildPanelFromAbilityData(b.AbilityIcon.MyDataRef);
+            TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelWestOfAbilityIcon(b.AbilityIcon);
+            TransformUtils.RebuildLayouts(transformsRebuilt);
+            PlacePanelWestOfAbilityIcon(b.AbilityIcon);
+        }
+
         public void OnAbilityBookItemMousedOver(InventoryItemView item)
         {
             FadeInPanel();
@@ -164,6 +175,13 @@ namespace WeAreGladiators.UI
             float yOffset = mainPositioningRect.rect.height * 0.5f;
             mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x + xOffset, mainPositioningRect.localPosition.y - yOffset, 0);
         }
+        private void PlacePanelWestOfAbilityIcon(UIAbilityIcon b)
+        {
+            mainPositioningRect.position = b.transform.position;
+            float xOffset = mainPositioningRect.rect.width / 2 + 40;
+            float yOffset = mainPositioningRect.rect.height * 0.5f;
+            mainPositioningRect.localPosition = new Vector3(mainPositioningRect.localPosition.x - xOffset, mainPositioningRect.localPosition.y - yOffset, 0);
+        }
         private void PlacePanelAboveTransform(Transform b)
         {
             float yOffSet = 50f;
@@ -173,14 +191,6 @@ namespace WeAreGladiators.UI
         }
         private void PlacePanelRightOfTransform(Transform b)
         {
-            /*
-            RectTransform rect = mainPositioningRect;
-            float xOffset = rect.rect.width / 2 + 80;
-            float yOffset = 20;
-
-            rect.position = b.transform.position;
-            rect.localPosition = new Vector3(rect.localPosition.x + xOffset, rect.localPosition.y + yOffset, 0);*/
-
             mainPositioningRect.position = b.transform.position;
             float xOffset = mainPositioningRect.rect.width / 2 + 80;
             float yOffset = mainPositioningRect.rect.height - 100;

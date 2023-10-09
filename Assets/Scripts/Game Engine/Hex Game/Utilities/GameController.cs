@@ -251,7 +251,7 @@ namespace WeAreGladiators
                 GameIntroController.Instance.StartEvent();
             }
 
-            InventoryController.Instance.PopulateInventoryWithMockDataItems(202);
+            InventoryController.Instance.PopulateInventoryWithMockDataItems(100);
         }
        
         private void RunSandboxCombat()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sirenix.Serialization;
+using UnityEngine;
 using WeAreGladiators.Perks;
 using WeAreGladiators.Utilities;
 
@@ -149,9 +150,13 @@ namespace WeAreGladiators.Characters
                 if (p.Data.isOnPerkTree && p.Data.perkTreeTier == 1 &&
                     tierOnePerks.Contains(p.perkTag) == false)
                 {
-                    perkChoices[0] = new PerkTreePerk(p, 1);
                     nextAvailableTier = 2;
-                    break;
+                    if(tierOnePerks.Contains(p.perkTag) == false)
+                    {
+                        perkChoices[0] = new PerkTreePerk(p, 1);
+                        nextAvailableTier = 2;
+                        break;
+                    }                    
                 }
             }
         }

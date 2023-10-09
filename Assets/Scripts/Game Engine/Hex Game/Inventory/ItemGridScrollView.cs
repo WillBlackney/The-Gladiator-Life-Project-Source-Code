@@ -88,6 +88,11 @@ namespace WeAreGladiators.Items
                     if (DoesInventoryItemMatchFilter(InventoryController.Instance.PlayerInventory[i], filterSetting))
                     {
                         BuildInventoryItemViewFromData(inventoryItemViews[slotIndex], InventoryController.Instance.PlayerInventory[i]);
+                        inventoryItemViews[slotIndex].allowKeyWordModal = true;
+                        if (collectionSource == ItemCollectionSource.PlayerInventoryCharacterRoster)
+                        {
+                            inventoryItemViews[slotIndex].allowKeyWordModal = false;
+                        }
                         slotIndex += 1;
                     }
                 }
