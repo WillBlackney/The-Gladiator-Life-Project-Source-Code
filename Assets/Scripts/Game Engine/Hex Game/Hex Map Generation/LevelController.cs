@@ -633,27 +633,16 @@ namespace WeAreGladiators.HexTiles
             List<LevelNode> adjacentTiles = GetAllHexsWithinRange(character.currentTile, 1);
             bool didPauseMoveAnim = false;
 
-            // Determine which enemies are valid and able to take a free strike
-            if (!PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Slippery))
-            {
-                foreach (HexCharacterModel c in allEnemies)
-                {
-                    if (adjacentTiles.Contains(c.currentTile) &&
-                        HexCharacterController.Instance.IsCharacterAbleToMakeFreeStrikes(c) &&
-                        destination.myCharacter == null)
-                    {
-                        freeStrikeEnemies.Add(c);
-                    }
-                }
+            Path p = new Path(character.currentTile, new List<LevelNode> { destination }, character);
+            var freeStrikers = MoveActionController.Instance.GetFreeStrikersOnPath(character, p);
 
-                if (freeStrikeEnemies.Count > 0)
-                {
-                    didPauseMoveAnim = true;
-                    VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayIdleAnimation(character.hexCharacterView));
-                }
+            if (freeStrikers.Count > 0)
+            {
+                didPauseMoveAnim = true;
+                VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayIdleAnimation(character.hexCharacterView));
 
                 // Resolve free strike for each character
-                foreach (HexCharacterModel c in freeStrikeEnemies)
+                foreach (HexCharacterModel c in freeStrikers)
                 {
                     if (character.currentHealth > 0 && character.livingState == LivingState.Alive)
                     {
@@ -664,7 +653,7 @@ namespace WeAreGladiators.HexTiles
                         VisualEventManager.InsertTimeDelayInQueue(1f);
                     }
                 }
-            }
+            }            
 
             // Cancel if character was killed from free strikes
             if (character == null ||

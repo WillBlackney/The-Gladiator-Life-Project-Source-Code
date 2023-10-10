@@ -53,9 +53,13 @@ MonoBehaviour:
       value: 5
       stars: 0
   abilityBook:
-    activeAbilities: []
+    activeAbilities:
+    - {fileID: 11400000, guid: 43ea47fa523c20a46991726e98d06d04, type: 2}
   serializedPassiveManager:
-    perks: []
+    perks:
+    - perkTag: 18
+      stacks: 1
+      freshInjury: 0
   modelParts:
   - Undead_Chest_1
   - Undead_Head_1

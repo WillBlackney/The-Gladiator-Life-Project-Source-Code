@@ -113,8 +113,6 @@ namespace WeAreGladiators.Combat
             tilesMovedFrom.Remove(p.Destination);
 
             // Determine which characters are able to free strike the tile.
-            //HexCharacterController.Instance.HideAllFreeStrikeIndicators();
-            bool allowNimbleCheck = true;
             foreach (LevelNode h in tilesMovedFrom)
             {
                 // Enemies dont free strike when a character moves through an ally
@@ -122,18 +120,6 @@ namespace WeAreGladiators.Combat
                 {
                     continue;
                 }
-
-                // No free strikes if first Nimble move
-                if (h == p.HexsOnPath[0] &&
-                    allowNimbleCheck &&
-                    characterMoving.tilesMovedThisTurn == 0 &&
-                    PerkController.Instance.DoesCharacterHavePerk(characterMoving.pManager, Perk.Nimble))
-                {
-                    allowNimbleCheck = false;
-                    continue;
-                }
-
-                allowNimbleCheck = false;
 
                 List<LevelNode> meleeTiles = LevelController.Instance.GetAllHexsWithinRange(h, 1);
                 foreach (LevelNode meleeHex in meleeTiles)
@@ -144,6 +130,12 @@ namespace WeAreGladiators.Combat
                         HexCharacterController.Instance.IsCharacterAbleToMakeFreeStrikes(meleeHex.myCharacter) &&
                         !freeStrikers.Contains(meleeHex.myCharacter))
                     {
+                        if (h == tilesMovedFrom[0] &&
+                           characterMoving.tilesMovedThisTurn == 0 &&
+                           PerkController.Instance.DoesCharacterHavePerk(characterMoving.pManager, Perk.Nimble))
+                        {
+                            continue;
+                        }
                         freeStrikers.Add(meleeHex.myCharacter);
                     }
                 }
@@ -167,6 +159,7 @@ namespace WeAreGladiators.Combat
                 }
             }
 
+            Debug.LogWarning("GetFreeStrikersAndSpearWallStrikersOnPath() returning = " + freeStrikers.Count.ToString());
             return freeStrikers;
         }
         public List<HexCharacterModel> GetFreeStrikersOnPath(HexCharacterModel characterMoving, Path p)
@@ -183,26 +176,15 @@ namespace WeAreGladiators.Combat
             tilesMovedFrom.Remove(p.Destination);
 
             // Determine which characters are able to free strike the tile.
-            bool allowNimbleCheck = true;
-            foreach (LevelNode h in tilesMovedFrom)
+            for(int i = 0; i < tilesMovedFrom.Count; i++)
             {
+                LevelNode h = tilesMovedFrom[i];
+
                 // Enemies dont free strike when a character moves through an ally
                 if (h.myCharacter != null && h.myCharacter != characterMoving)
                 {
                     continue;
                 }
-
-                // No free strikes if first Nimble move
-                if (h == p.HexsOnPath[0] &&
-                    allowNimbleCheck &&
-                    characterMoving.tilesMovedThisTurn == 0 &&
-                    PerkController.Instance.DoesCharacterHavePerk(characterMoving.pManager, Perk.Nimble))
-                {
-                    allowNimbleCheck = false;
-                    continue;
-                }
-
-                allowNimbleCheck = false;
 
                 List<LevelNode> meleeTiles = LevelController.Instance.GetAllHexsWithinRange(h, 1);
                 foreach (LevelNode meleeHex in meleeTiles)
@@ -213,10 +195,18 @@ namespace WeAreGladiators.Combat
                         HexCharacterController.Instance.IsCharacterAbleToMakeFreeStrikes(meleeHex.myCharacter) &&
                         !freeStrikers.Contains(meleeHex.myCharacter))
                     {
+                        if(h == tilesMovedFrom[0] &&
+                           characterMoving.tilesMovedThisTurn == 0 &&
+                           PerkController.Instance.DoesCharacterHavePerk(characterMoving.pManager, Perk.Nimble))
+                        {
+                            continue;
+                        }
                         freeStrikers.Add(meleeHex.myCharacter);
                     }
                 }
             }
+
+            Debug.LogWarning("GetFreeStrikersOnPath() returning = " + freeStrikers.Count.ToString());
 
             return freeStrikers;
         }
