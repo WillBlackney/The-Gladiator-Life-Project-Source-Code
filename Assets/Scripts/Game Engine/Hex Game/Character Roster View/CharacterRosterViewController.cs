@@ -173,7 +173,6 @@ namespace WeAreGladiators.UI
             }
 
             Debug.Log("Active perk icons = " + allPerks.Count);
-
         }
 
         #endregion

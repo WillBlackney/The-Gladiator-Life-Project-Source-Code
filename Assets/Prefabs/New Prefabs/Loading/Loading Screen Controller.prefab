@@ -979,8 +979,8 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: "for when you want to stab someone, but don\u2019t feel like walking
-        over to them."
+      phrase: for when you want to stab someone, but don't feel like walking over
+        to them.
   - message:
     - color: 1
       getPhraseFromAbilityValue: 0

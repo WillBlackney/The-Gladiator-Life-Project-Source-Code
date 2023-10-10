@@ -42,7 +42,8 @@ namespace WeAreGladiators.UI
             Debug.Log("RosterItemSlot.HandleRightClick()");
 
             if (CharacterRosterViewController.Instance.PerkTalentLevelUpPageViewIsActive ||
-                   CharacterRosterViewController.Instance.AttributeLevelUpPageComponent.ViewIsActive)
+                   CharacterRosterViewController.Instance.AttributeLevelUpPageComponent.ViewIsActive ||
+                   !CharacterRosterViewController.Instance.MainVisualParent.activeSelf)
             {
                 return;
             }

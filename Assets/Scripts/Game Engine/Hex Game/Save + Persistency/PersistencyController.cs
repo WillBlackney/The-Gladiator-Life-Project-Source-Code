@@ -97,8 +97,6 @@ namespace WeAreGladiators.Persistency
 
             CharacterDataController.Instance.AddCharacterToRoster(startingCharacter);
 
-            CharacterDataController.Instance.HandleGainXP(startingCharacter, 200);
-
             // Build character recruit deck
             CharacterDataController.Instance.AutoGenerateAndCacheNewCharacterDeck();
 

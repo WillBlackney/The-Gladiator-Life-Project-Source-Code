@@ -147,8 +147,7 @@ namespace WeAreGladiators.Characters
             }
             foreach (ActivePerk p in myCharacter.passiveManager.perks)
             {
-                if (p.Data.isOnPerkTree && p.Data.perkTreeTier == 1 &&
-                    tierOnePerks.Contains(p.perkTag) == false)
+                if (p.Data.isOnPerkTree && p.Data.perkTreeTier == 1)
                 {
                     nextAvailableTier = 2;
                     if(tierOnePerks.Contains(p.perkTag) == false)

@@ -88,6 +88,7 @@ namespace WeAreGladiators.JourneyLogic
             StartTimer();
             CurrentCombatContractData = null;
 
+            CurrentGold = 0;
             ModifyPlayerGold(GlobalSettings.Instance.BaseStartingGold);
         }
         #endregion
