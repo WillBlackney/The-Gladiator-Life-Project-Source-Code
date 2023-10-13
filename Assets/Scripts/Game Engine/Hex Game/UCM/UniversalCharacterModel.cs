@@ -220,7 +220,10 @@ namespace WeAreGladiators.UCM
         public void SetIdleAnim()
         {
             myAnimator.SetTrigger(AnimationEventController.IDLE);
-
+        }
+        public void SetWalkAnim()
+        {
+            myAnimator.SetTrigger("Walk");
         }
         public void ShowHurtFace()
         {
