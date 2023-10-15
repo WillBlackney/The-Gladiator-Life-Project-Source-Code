@@ -2805,17 +2805,6 @@ namespace WeAreGladiators.Characters
                 }
             }
 
-            /*
-            // Stop particles
-            if (model.activeChestParticles != null)
-            {
-                ParticleSystem[] ps = model.activeChestParticles.GetComponentsInChildren<ParticleSystem>();
-                foreach (ParticleSystem p in ps)
-                {
-                    p.Stop();
-                }
-            }*/
-
         }
         public void FadeInCharacterModel(CharacterModel model, float speed = 1f)
         {
@@ -2828,18 +2817,6 @@ namespace WeAreGladiators.Characters
                 }
                 sr.DOFade(1, speed);
             }
-
-            /*
-            // Restart particles
-            if (model.activeChestParticles != null)
-            {
-                ParticleSystem[] ps = model.activeChestParticles.GetComponentsInChildren<ParticleSystem>();
-                foreach (ParticleSystem p in ps)
-                {
-                    p.Clear();
-                    p.Play();
-                }
-            }*/
         }
         public void FadeInCharacterShadow(HexCharacterView view, float speed, Action onCompleteCallBack = null)
         {

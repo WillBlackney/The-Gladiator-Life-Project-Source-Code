@@ -5,6 +5,7 @@ using Spriter2UnityDX;
 using UnityEngine;
 using WeAreGladiators.Characters;
 using WeAreGladiators.Items;
+using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.UCM
 {
@@ -947,19 +948,7 @@ namespace WeAreGladiators.UCM
         // Fading Logic
         #region
 
-        public static void FadeOutCharacterModel(CharacterModel model, float speed = 1f)
-        {
-            EntityRenderer view = model.myEntityRenderer;
-            foreach (SpriteRenderer sr in view.renderers)
-            {
-                if (sr.gameObject.activeSelf)
-                {
-                    sr.DOFade(0, speed);
-                }
-            }
-
-        }
-        public static void FadeInCharacterModel(CharacterModel model, float speed = 1f)
+        public static void FadeOutCharacterModel(CharacterModel model, float speed = 1f, Action onComplete = null)
         {
             EntityRenderer view = model.myEntityRenderer;
             foreach (SpriteRenderer sr in view.renderers)
@@ -967,9 +956,24 @@ namespace WeAreGladiators.UCM
                 if (sr.gameObject.activeSelf)
                 {
                     sr.DOKill();
+                    sr.DOFade(0, speed);
                 }
-                sr.DOFade(1, speed);
             }
+            if(onComplete != null) DelayUtils.DelayedCall(speed, onComplete);
+
+        }
+        public static void FadeInCharacterModel(CharacterModel model, float speed = 1f, Action onComplete = null)
+        {
+            EntityRenderer view = model.myEntityRenderer;
+            foreach (SpriteRenderer sr in view.renderers)
+            {
+                if (sr.gameObject.activeSelf)
+                {
+                    sr.DOKill();
+                    sr.DOFade(1, speed);
+                }
+            }
+            if (onComplete != null) DelayUtils.DelayedCall(speed, onComplete);
         }
         public static void FadeInCharacterShadow(HexCharacterView view, float speed, Action onCompleteCallBack = null)
         {

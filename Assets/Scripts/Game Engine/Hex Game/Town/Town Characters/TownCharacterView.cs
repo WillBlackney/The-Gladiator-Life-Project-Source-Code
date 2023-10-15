@@ -13,7 +13,9 @@ namespace WeAreGladiators.TownFeatures
         [SerializeField] private UniversalCharacterModel ucm;
 
         private List<TownMovementNode> currentPath = new List<TownMovementNode>();
-        private const float WALK_SPEED = 0.25F;
+        private const float WALK_SPEED = 1f;
+
+        public UniversalCharacterModel Ucm => ucm;
 
         public void Initialize(TownCharacterSeed seed, TownPath path)
         {
@@ -23,25 +25,36 @@ namespace WeAreGladiators.TownFeatures
 
             // Setup model
             CharacterModeller.BuildModelFromStringReferences(ucm, seed.GetRandomAppearance());
-            ucm.SetWalkAnim();
+            ucm.SetIdleAnim();
 
-            // Place at at start
-            TownMovementNode start = path.Nodes[0];
-            transform.DOMove(start.transform.position, 0f);
-            currentPath.RemoveAt(0);
+            DelayUtils.DelayedCall(0.5f, () =>
+            {
+                CharacterModeller.FadeInCharacterModel(ucm, 1f, () =>
+                {
+                    ucm.SetWalkAnim();
 
-            // Start move
-            MoveToNode(currentPath[0]);
+                    // Place at at start
+                    TownMovementNode start = path.Nodes[0];
+                    start.OnCharacterArrived(this);
+                    transform.DOMove(start.transform.position, 0f);
+                    currentPath.RemoveAt(0);
+
+                    // Start move
+                    MoveToNode(currentPath[0]);
+                });
+            });
+                      
         }
 
         private void OnNodeReached(TownMovementNode node)
         {
             currentPath.Remove(node);
-            // to do apply effects of node
-            if(currentPath.Count == 0 )
+            node.OnCharacterArrived(this);
+
+            if (currentPath.Count == 0 )
             {
-                // to do: handle end of path
-                Destroy(gameObject);
+                ucm.SetIdleAnim();
+                CharacterModeller.FadeOutCharacterModel(ucm, 1f, () => Destroy(gameObject));
                 return;
             }
             MoveToNode(currentPath[0]);
