@@ -13,7 +13,7 @@ namespace WeAreGladiators.TownFeatures
         [SerializeField] private UniversalCharacterModel ucm;
 
         private List<TownMovementNode> currentPath = new List<TownMovementNode>();
-        private const float WALK_SPEED = 1f;
+        private const float WALK_SPEED = 0.33f;
 
         public UniversalCharacterModel Ucm => ucm;
 
@@ -25,25 +25,21 @@ namespace WeAreGladiators.TownFeatures
 
             // Setup model
             CharacterModeller.BuildModelFromStringReferences(ucm, seed.GetRandomAppearance());
-            ucm.SetIdleAnim();
+            ucm.SetWalkAnim();
 
             DelayUtils.DelayedCall(0.5f, () =>
             {
-                CharacterModeller.FadeInCharacterModel(ucm, 1f, () =>
-                {
-                    ucm.SetWalkAnim();
+                // Place at at start
+                TownMovementNode start = path.Nodes[0];
+                transform.DOMove(start.transform.position, 0f);
+                start.OnCharacterArrived(this);                
+                currentPath.RemoveAt(0);
 
-                    // Place at at start
-                    TownMovementNode start = path.Nodes[0];
-                    start.OnCharacterArrived(this);
-                    transform.DOMove(start.transform.position, 0f);
-                    currentPath.RemoveAt(0);
-
-                    // Start move
-                    MoveToNode(currentPath[0]);
-                });
+                // Start move
+                MoveToNode(currentPath[0]);
             });
-                      
+            
+
         }
 
         private void OnNodeReached(TownMovementNode node)
@@ -62,11 +58,23 @@ namespace WeAreGladiators.TownFeatures
 
         private void MoveToNode(TownMovementNode nextNode)
         {
-            //float speed = Vector2.Distance(transform.position, nextNode.transform.position) / 1f;
+            SetFacing(transform.position, nextNode.transform.position);
             transform.DOMove(nextNode.transform.position, WALK_SPEED)
                 .SetSpeedBased(true)
                 .SetEase(Ease.Linear)
                 .OnComplete(()=> OnNodeReached(nextNode));
+        }
+
+        private void SetFacing(Vector3 current, Vector3 next)
+        {
+            if(current.x < next.x)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
         }
     }
 }
