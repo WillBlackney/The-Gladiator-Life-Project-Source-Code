@@ -1,4 +1,5 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WeAreGladiators.MainMenu;
@@ -11,16 +12,15 @@ namespace WeAreGladiators.GameOrigin
         #region Components + Variables
 
         [Header("Core Components")]
-        [SerializeField]
-        private GameObject visualParent;
+        [SerializeField] private GameObject visualParent;
         [SerializeField] private CanvasGroup contentCg;
         [SerializeField] private Image blackUnderlay;
 
         [Header("Movement Components")]
-        [SerializeField]
-        private RectTransform onScreenPosition;
+        [SerializeField] private RectTransform onScreenPosition;
         [SerializeField] private RectTransform offScreenPosition;
         [SerializeField] private RectTransform movementParent;
+        [SerializeField] private TextMeshProUGUI goldModText;
 
         #endregion
 
@@ -35,8 +35,9 @@ namespace WeAreGladiators.GameOrigin
             blackUnderlay.DOFade(0f, 0f);
             movementParent.DOKill();
             movementParent.position = offScreenPosition.position;
-
-            // to do: build content to default state
+            goldModText.text = "Start with " +
+                TextLogic.ReturnColoredText(GlobalSettings.Instance.BaseStartingGold.ToString(), TextLogic.blueNumber) + " " +
+                TextLogic.ReturnColoredText("Gold", TextLogic.neutralYellow) + ".";
 
             blackUnderlay.DOFade(0.5f, 0.5f);
             movementParent.DOMove(onScreenPosition.position, 0.65f).SetEase(Ease.OutBack).OnComplete(() =>
@@ -51,8 +52,6 @@ namespace WeAreGladiators.GameOrigin
             contentCg.interactable = false;
             blackUnderlay.DOKill();
             movementParent.DOKill();
-
-            // to do: build content to default state
 
             blackUnderlay.DOFade(0f, speed * 0.75f);
             movementParent.DOMove(offScreenPosition.position, speed).SetEase(Ease.InBack).OnComplete(() =>

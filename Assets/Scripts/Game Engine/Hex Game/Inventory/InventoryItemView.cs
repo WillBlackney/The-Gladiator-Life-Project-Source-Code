@@ -50,7 +50,7 @@ namespace WeAreGladiators.Items
         #region Input
         public void RightClick()
         {
-            if (ItemDragged != null)
+            if (ItemDragged != null || GameController.Instance.GameState != GameState.Town)
             {
                 return;
             }            
@@ -237,7 +237,7 @@ namespace WeAreGladiators.Items
         public void OnMouseDrag()
         {
             Debug.Log("InventoryItemView.Drag()");
-            if(myItemGrid.CollectionSource == ItemCollectionSource.PlayerInventoryShop)
+            if(myItemGrid.CollectionSource == ItemCollectionSource.PlayerInventoryShop || GameController.Instance.GameState != GameState.Town)
             {
                 return;
             }
@@ -245,6 +245,7 @@ namespace WeAreGladiators.Items
             {
                 return;
             }
+
 
             myItemGrid.SetVerticalScrolling(false);
 

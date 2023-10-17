@@ -732,6 +732,9 @@ namespace WeAreGladiators.MainMenu
             else if (row.Attribute == CoreAttribute.Constitution)
             {
                 CharacterBuild.attributeSheet.constitution.value -= 1;
+                int maxHealth = StatCalculator.GetTotalMaxHealth(CharacterBuild);
+                CharacterDataController.Instance.OnConstitutionOrMaxHealthChanged(CharacterBuild, maxHealth);
+                CharacterDataController.Instance.SetCharacterHealth(CharacterBuild, maxHealth);
             }
             else if (row.Attribute == CoreAttribute.Resolve)
             {
@@ -761,6 +764,9 @@ namespace WeAreGladiators.MainMenu
             else if (row.Attribute == CoreAttribute.Constitution)
             {
                 CharacterBuild.attributeSheet.constitution.value += 1;
+                int maxHealth = StatCalculator.GetTotalMaxHealth(CharacterBuild);
+                CharacterDataController.Instance.OnConstitutionOrMaxHealthChanged(CharacterBuild, maxHealth);
+                CharacterDataController.Instance.SetCharacterHealth(CharacterBuild, maxHealth);
             }
             else if (row.Attribute == CoreAttribute.Resolve)
             {

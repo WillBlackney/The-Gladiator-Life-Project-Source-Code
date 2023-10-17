@@ -75,3 +75,13 @@ MonoBehaviour:
   talentPairings:
   - talentSchool: 2
     level: 1
+  - talentSchool: 3
+    level: 1
+  - talentSchool: 5
+    level: 1
+  - talentSchool: 6
+    level: 1
+  - talentSchool: 8
+    level: 1
+  - talentSchool: 9
+    level: 1
