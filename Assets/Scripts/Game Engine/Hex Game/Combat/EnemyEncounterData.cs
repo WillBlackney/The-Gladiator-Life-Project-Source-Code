@@ -29,15 +29,15 @@ namespace WeAreGladiators.Characters
                 int ret = 0;
                 if(difficulty == CombatDifficulty.Basic)
                 {
-                    ret =  25;
+                    ret =  35;
                 }
                 else if (difficulty == CombatDifficulty.Elite)
                 {
-                    ret = 50;
+                    ret = 60;
                 }
                 if (difficulty == CombatDifficulty.Boss)
                 {
-                    ret = 75;
+                    ret = 85;
                 }
 
                 return ret;

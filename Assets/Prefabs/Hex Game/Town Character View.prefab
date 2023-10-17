@@ -46,6 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ucm: {fileID: 9089733211126657714}
+  staticCharacter: 0
+  characterSeed: {fileID: 0}
+  sortOrder: 2
+  faceLeft: 0
 --- !u!1001 &959394487048585532
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63,15 +67,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4168412347097908, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.095
+      value: 0.085
       objectReference: {fileID: 0}
     - target: {fileID: 4168412347097908, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.095
+      value: 0.085
       objectReference: {fileID: 0}
     - target: {fileID: 4168412347097908, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.095
+      value: 0.085
       objectReference: {fileID: 0}
     - target: {fileID: 4168412347097908, guid: 81e9b41ae9d8afe47a07faf8f67e5bb9, type: 3}
       propertyPath: m_LocalPosition.x

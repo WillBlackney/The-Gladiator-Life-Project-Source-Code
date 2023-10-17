@@ -23,6 +23,8 @@ namespace WeAreGladiators.TownFeatures
         [Range(0, 15)]
         [SerializeField] private int baseSortOrder;
 
+        public TownCharacterView myPausedCharacter;
+
         public bool AdjustCharacterSortOrderOnArrival => adjustCharacterSortOrderOnArrival;
         public int BaseSortOrder => baseSortOrder;
 
@@ -35,6 +37,7 @@ namespace WeAreGladiators.TownFeatures
         {
             if(adjustCharacterSortOrderOnArrival)
             {
+                townCharacterView.Ucm.RootSortingGroup.sortingOrder = baseSortOrder + 1;
                 townCharacterView.Ucm.RootSortingGroup.sortingOrder = baseSortOrder + 1;
             }
         }

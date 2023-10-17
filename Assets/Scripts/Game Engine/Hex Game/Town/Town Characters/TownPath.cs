@@ -9,15 +9,7 @@ namespace WeAreGladiators.TownFeatures
     {
         [Header("Scene Components")]
         [SerializeField] private TownMovementNode[] nodes;
-
-        private TownHive myHive;
-        public TownMovementNode[] Nodes => nodes;
-                    
-
-        public void Initialize(TownHive hive)
-        {
-            myHive = hive;
-        }
+        public TownMovementNode[] Nodes => nodes;          
 
     }
 }

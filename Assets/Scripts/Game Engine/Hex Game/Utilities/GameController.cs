@@ -33,9 +33,68 @@ namespace WeAreGladiators
 {
     public class GameController : Singleton<GameController>
     {
+        #region Properties + Component References
 
-        // Load Encounters Logic (General)
-        #region
+        [SerializeField] private GameObject actNotifVisualParent;
+        [SerializeField] private CanvasGroup actNotifCg;
+        [SerializeField] private CanvasGroup actNotifTextParentCg;
+        [SerializeField] private TextMeshProUGUI actNotifCountText;
+        [SerializeField] private TextMeshProUGUI actNotifNameText;
+
+        #endregion
+
+        #region Game State Logic 
+        public GameState GameState { get; private set; }
+        public void SetGameState(GameState newState)
+        {
+            GameState = newState;
+        }
+
+        #endregion
+
+        #region Initialization + Setup
+        protected override void Awake()
+        {
+            base.Awake();
+            VisualEventManager.Initialize();
+        }
+        private void Start()
+        {
+            RunApplication();
+        }
+        private void RunApplication()
+        {
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+            if (GlobalSettings.Instance.GameMode == GameMode.Standard)
+            {
+                RunStandardGameModeSetup();
+            }
+
+            else if (GlobalSettings.Instance.GameMode == GameMode.CombatSandbox)
+            {
+                RunSandboxCombat();
+            }
+
+            else if (GlobalSettings.Instance.GameMode == GameMode.TownSandbox)
+            {
+                RunSandboxTown();
+            }
+
+            else if (GlobalSettings.Instance.GameMode == GameMode.StoryEventSandbox)
+            {
+                RunSandboxStoryEvent();
+            }
+
+            else if (GlobalSettings.Instance.GameMode == GameMode.PostCombatReward)
+            {
+                RunPostCombatRewardTestEventSetup();
+            }
+        }
+
+        #endregion
+
+        #region Load Encounters Logic (General)
 
         public void HandleLoadIntoCombatFromDeploymentScreen()
         {
@@ -44,7 +103,6 @@ namespace WeAreGladiators
             AudioManager.Instance.FadeOutSound(Sound.Music_Town_Theme_1, 1f);
             LoadingScreenController.Instance.ShowLoadingScreen(1.5f, 1f, null, () =>
             {
-
                 // Animate Crowd
                 LevelController.Instance.StopAllCrowdMembers(true);
 
@@ -54,8 +112,7 @@ namespace WeAreGladiators
 
                 // Hide town views
                 BlackScreenController.Instance.FadeInScreen(1f);
-                TownController.Instance.HideTownView();
-                TownController.Instance.HideDeploymentPage();
+                TownController.Instance.TearDownOnExit();
                 CharacterScrollPanelController.Instance.HideMainView();
                 TopBarController.Instance.ShowCombatTopBar();
                 CombatLogController.Instance.ShowLog();
@@ -104,75 +161,8 @@ namespace WeAreGladiators
         }
 
         #endregion
-        // Properties + Component References
-        #region
 
-        [SerializeField] private GameObject actNotifVisualParent;
-        [SerializeField] private CanvasGroup actNotifCg;
-        [SerializeField] private CanvasGroup actNotifTextParentCg;
-        [SerializeField] private TextMeshProUGUI actNotifCountText;
-        [SerializeField] private TextMeshProUGUI actNotifNameText;
-
-        #endregion
-
-        // Game State Logic 
-        #region
-
-        public GameState GameState { get; private set; }
-        public void SetGameState(GameState newState)
-        {
-            GameState = newState;
-        }
-
-        #endregion
-
-        // Initialization + Setup
-        #region
-
-        protected override void Awake()
-        {
-            base.Awake();
-            VisualEventManager.Initialize();
-        }
-        private void Start()
-        {
-            RunApplication();
-        }
-        private void RunApplication()
-        {
-            Screen.sleepTimeout = SleepTimeout.NeverSleep;
-
-            if (GlobalSettings.Instance.GameMode == GameMode.Standard)
-            {
-                RunStandardGameModeSetup();
-            }
-
-            else if (GlobalSettings.Instance.GameMode == GameMode.CombatSandbox)
-            {
-                RunSandboxCombat();
-            }
-
-            else if (GlobalSettings.Instance.GameMode == GameMode.TownSandbox)
-            {
-                RunSandboxTown();
-            }
-
-            else if (GlobalSettings.Instance.GameMode == GameMode.StoryEventSandbox)
-            {
-                RunSandboxStoryEvent();
-            }
-
-            else if (GlobalSettings.Instance.GameMode == GameMode.PostCombatReward)
-            {
-                RunPostCombatRewardTestEventSetup();
-            }
-        }
-
-        #endregion
-
-        // Specific Game Mode Setups
-        #region
-
+        #region Specific Game Mode Setups
         private void RunStandardGameModeSetup()
         {
             SetGameState(GameState.MainMenu);
@@ -205,7 +195,7 @@ namespace WeAreGladiators
             CameraController.Instance.ResetMainCameraPositionAndZoom();
 
             // Build town views here
-            TownController.Instance.ShowTownView();
+            TownController.Instance.ShowTownView(true);
             CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
             // Fade in sound + views
@@ -237,7 +227,7 @@ namespace WeAreGladiators
             CameraController.Instance.ResetMainCameraPositionAndZoom();
 
             // Build town views here
-            TownController.Instance.ShowTownView();
+            TownController.Instance.ShowTownView(true);
             CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
             DelayUtils.DelayedCall(2f, () => AudioManager.Instance.FadeInSound(Sound.Music_Town_Theme_1, 1f));
@@ -252,8 +242,7 @@ namespace WeAreGladiators
             }
 
             InventoryController.Instance.PopulateInventoryWithMockDataItems(100);
-        }
-       
+        }       
         private void RunSandboxCombat()
         {
             List<CharacterWithSpawnData> charactersWithSpawnPos = BuildNewSaveFileForSandboxEnvironment();
@@ -376,17 +365,13 @@ namespace WeAreGladiators
 
         #endregion
 
-        // Post Combat Logic
-        #region
-
+        #region Post Combat Logic
         public void StartCombatVictorySequence()
         {
             StartCoroutine(StartCombatVictorySequenceCoroutine());
         }
         private IEnumerator StartCombatVictorySequenceCoroutine()
         {
-            Debug.Log("GameController.StartCombatVictorySequenceCoroutine() called");
-
             // Set state
             SetGameState(GameState.CombatRewardPhase);
             EnemyInfoModalController.Instance.HideModal();
@@ -727,7 +712,7 @@ namespace WeAreGladiators
                 CombatRewardController.Instance.HidePostCombatRewardScreen();
 
                 // Show town UI
-                TownController.Instance.ShowTownView();
+                TownController.Instance.ShowTownView(true);
                 CharacterScrollPanelController.Instance.BuildAndShowPanel();
                 TopBarController.Instance.ShowMainTopBar();
 
@@ -751,9 +736,7 @@ namespace WeAreGladiators
 
         #endregion
 
-        // Main menu to game transisitions
-        #region
-
+        #region Main menu to game transisitions
         public void HandleStartNewGameFromMainMenuEvent()
         {
             AudioManager.Instance.PlaySound(Sound.Events_New_Game_Started);
@@ -781,7 +764,7 @@ namespace WeAreGladiators
                     MainMenuController.Instance.HideChooseCharacterScreen();
 
                     // Build town views 
-                    TownController.Instance.ShowTownView();
+                    TownController.Instance.ShowTownView(true);
                     CharacterScrollPanelController.Instance.BuildAndShowPanel();
                 },
                 () =>
@@ -847,7 +830,7 @@ namespace WeAreGladiators
                     ScoreController.Instance.HideScoreScreen(0f);
 
                     // Hide UI + town views
-                    TownController.Instance.TearDownOnExitToMainMenu();
+                    TownController.Instance.TearDownOnExit();
                     CharacterScrollPanelController.Instance.HideMainView();
                     CharacterRosterViewController.Instance.HideCharacterRosterScreen();
                     GameIntroController.Instance.HideAllViews();
@@ -889,7 +872,7 @@ namespace WeAreGladiators
 
                     // Enable GUI
                     TopBarController.Instance.ShowMainTopBar();
-                    TownController.Instance.ShowTownView();
+                    TownController.Instance.ShowTownView(true);
                     CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
                     // Start music, fade in
@@ -903,7 +886,7 @@ namespace WeAreGladiators
 
                     // Enable GUI
                     TopBarController.Instance.ShowMainTopBar();
-                    TownController.Instance.ShowTownView();
+                    TownController.Instance.ShowTownView(true);
                     CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
                     // Start music, fade in
@@ -918,7 +901,7 @@ namespace WeAreGladiators
 
                     // Enable GUI
                     TopBarController.Instance.ShowMainTopBar();
-                    TownController.Instance.ShowTownView();
+                    TownController.Instance.ShowTownView(true);
                     CharacterScrollPanelController.Instance.BuildAndShowPanel();
 
                     // Start music, fade in
@@ -1143,8 +1126,10 @@ namespace WeAreGladiators
             CameraController.Instance.ResetMainCameraPositionAndZoom();
 
             // Build town views here
-            TownController.Instance.ShowTownView();
+            TownController.Instance.ShowTownView(true);
             CharacterScrollPanelController.Instance.BuildAndShowPanel();
+
+            // Tried to ceate procedural characters, ended up with old man congo lines
 
         }
         #endregion

@@ -27,9 +27,9 @@ namespace WeAreGladiators.TownFeatures
     public class TownController : Singleton<TownController>
     {
         #region Properties + Components
-
         [Title("Town Page Components")]
         [SerializeField] private GameObject mainVisualParent;
+        [SerializeField] private TownHive currentHive;
         [SerializeField] private TownBuildingView arenaBuilding;
         [SerializeField] private TownBuildingView[] allFeatureBuildings;
         [Space(20)]
@@ -150,7 +150,7 @@ namespace WeAreGladiators.TownFeatures
 
         #region Misc
 
-        public void TearDownOnExitToMainMenu()
+        public void TearDownOnExit()
         {
             HideTownView();
             HideDeploymentPage();
@@ -158,18 +158,17 @@ namespace WeAreGladiators.TownFeatures
             {
                 tbv.CloseAndResetAllUiViews();
             }
+            currentHive.TearDown();
         }
         public void RefreshAllTownItemGrids()
         {
             if(ArmouryViewIsActive)
             {
                 playerInventoryGridArmouryPage.BuildItemCollectionView();
-                //armouryItemGrid.BuildItemCollectionView();
             }
             if(LibraryViewIsActive)
             {
                 playerInventoryGridLibraryPage.BuildItemCollectionView(); 
-                //libraryItemGrid.BuildItemCollectionView();
             }            
         }
 
@@ -214,9 +213,13 @@ namespace WeAreGladiators.TownFeatures
 
         #region Show + Hide Main View Logic
 
-        public void ShowTownView()
+        public void ShowTownView(bool startHive = false)
         {
             mainVisualParent.SetActive(true);
+            if(startHive && currentHive.HiveIsActive == false) 
+            {
+                currentHive.StartTownPopulation();
+            }
         }
         public void HideTownView()
         {

@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f65c386a0e82f049ba54cb5a67b7f0f, type: 3}
+  m_Name: Breedmarsh Citizens 1
+  m_EditorClassIdentifier: 
+  possibleOutfits:
+  - clothing:
+    - Cloth_Rags
+  - clothing:
+    - Fine_Robes
+  - clothing:
+    - Brown_Hood
+    - Leather_Arm_Guards
+  - clothing:
+    - Brown_Hood
+    - Leather_Arm_Guards
+  - clothing:
+    - Thick_Leather
+  - clothing:
+    - Reinforced_Leather
+  - clothing:
+    - Studded_Leather
+  - clothing:
+    - Forest_Tunic
+  - clothing:
+    - Forest_Tunic
+    - Green_Hood
+  - clothing:
+    - Magus_Hat
+    - Magus_Robes
+  - clothing:
+    - Black_Face_Mask
+    - Padded_Leather
+  - clothing:
+    - Black_Robes
+    - Black_Hood
+  possibleTemplates:
+  - {fileID: 11400000, guid: 886f2a0b1ff1df5458043d3e9f14d462, type: 2}
+  - {fileID: 11400000, guid: 3eb126519d27bca49b1e30c41cfe188f, type: 2}
+  - {fileID: 11400000, guid: c9581c74b76da8f4e8d28551d19fa269, type: 2}
+  - {fileID: 11400000, guid: debb61acc3478e64f9901cab83852896, type: 2}
+  - {fileID: 11400000, guid: bebce1821bd260f4aad017c11522d759, type: 2}
+  - {fileID: 11400000, guid: 747b48d71829a2e4e9c26404a7e18800, type: 2}
+  - {fileID: 11400000, guid: d53dca17e358b5748953848685669bf5, type: 2}
+  - {fileID: 11400000, guid: a6a2f496cd57fa34db94d1377c6c374f, type: 2}
+  - {fileID: 11400000, guid: ae43bc7d0d8efc844984fe4e65ea2998, type: 2}
+  - {fileID: 11400000, guid: 212c067fe39ab7f48b924d648077488f, type: 2}
+  - {fileID: 11400000, guid: 718932214541d154d926a494d30f0ce1, type: 2}
+  - {fileID: 11400000, guid: 1e59ae2d71f6c7f49b284bc0b705406b, type: 2}
+  - {fileID: 11400000, guid: 21806521942ef074ca86386114e0f714, type: 2}
+  - {fileID: 11400000, guid: d813ee7210850534b908f903003d32a3, type: 2}
+  - {fileID: 11400000, guid: c0336f40a5c0f394686101838ae7c22e, type: 2}
+  - {fileID: 11400000, guid: 3f64f2f0664d935499695c58c94f1d9c, type: 2}
+  - {fileID: 11400000, guid: 4a1c89ab495166c4d80b386f34fdf488, type: 2}
+  - {fileID: 11400000, guid: 809639a8a1abf6540a397a7eb0219084, type: 2}
+  - {fileID: 11400000, guid: 28178ecc7047f084bb913fdecaedf89e, type: 2}
+  - {fileID: 11400000, guid: 4efeb1fd2f1378d4a8a36db8926d77c4, type: 2}
+  - {fileID: 11400000, guid: 6faa76aada59ac442a07c9deb920c607, type: 2}
+  - {fileID: 11400000, guid: 88e29291da07308409d720ddb26a8176, type: 2}
+  - {fileID: 11400000, guid: 776976c96b7ecb747aa28fce17cc7e7b, type: 2}
+  - {fileID: 11400000, guid: 15643693153e05c4da55e13fa93f6571, type: 2}
+  - {fileID: 11400000, guid: 00267782f93c9d44c9fa073e1e2d6021, type: 2}
+  - {fileID: 11400000, guid: 362dd1357ea9fea469b4397f2de13e97, type: 2}
+  - {fileID: 11400000, guid: f258cf0090b2ca34e9972ce140492b28, type: 2}
