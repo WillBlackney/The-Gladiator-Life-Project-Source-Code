@@ -111,7 +111,7 @@ namespace WeAreGladiators.Abilities
         [BoxGroup("General Settings")]
         [LabelWidth(200)]
         [ShowIf("ShowNormalTeleportVFX")]
-        public bool normalTeleportVFX = true;
+        public TeleportVfxType teleportVFX;
 
         // Movement Effect Properties
         [BoxGroup("General Settings")]
@@ -470,12 +470,7 @@ namespace WeAreGladiators.Abilities
         }
         public bool ShowNormalTeleportVFX()
         {
-            if (effectType == AbilityEffectType.TeleportSwitchWithTarget)
-            {
-                return true;
-            }
-
-            return false;
+            return effectType == AbilityEffectType.TeleportSelf || effectType == AbilityEffectType.TeleportSwitchWithTarget;
         }
         public bool ShowEnergyGained()
         {
@@ -577,5 +572,12 @@ namespace WeAreGladiators.Abilities
         ExtraDamageIfTargetHasSpecificPerk = 5,
         ExtraDamageAgainstRace = 3,
         ExtraCriticalDamage = 10
+    }
+
+    public enum TeleportVfxType
+    {
+        Teleport = 0,
+        Glide = 1,
+        Jump = 2,
     }
 }

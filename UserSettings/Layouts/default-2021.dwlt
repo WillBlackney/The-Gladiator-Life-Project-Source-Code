@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Console
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 16131
+  controlID: 32691
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,12 +139,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1276
+    width: 1295
     height: 939
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 16107
+  controlID: 32692
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,12 +165,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1276
+    width: 1295
     height: 479
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 16108
+  controlID: 32693
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -188,10 +188,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 385
+    width: 384
     height: 479
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -212,12 +212,12 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 385
+    x: 384
     y: 0
-    width: 484
+    width: 367
     height: 479
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -225,7 +225,7 @@ MonoBehaviour:
   - {fileID: 17}
   - {fileID: 18}
   m_Selected: 0
-  m_LastSelected: 3
+  m_LastSelected: 1
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -236,23 +236,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GameView
+  m_Name: AnimationWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 869
+    x: 751
     y: 0
-    width: 407
+    width: 544
     height: 479
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 13}
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
+  m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 13}
   - {fileID: 19}
   - {fileID: 20}
-  m_Selected: 0
+  m_Selected: 1
   m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -264,23 +264,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
     y: 479
-    width: 1276
+    width: 1295
     height: 460
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 22}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
   - {fileID: 22}
-  m_Selected: 1
-  m_LastSelected: 0
+  - {fileID: 23}
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -291,25 +292,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: TestRunnerWindow
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1276
+    x: 1295
     y: 0
-    width: 644
+    width: 625
     height: 939
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 24}
   m_Panes:
-  - {fileID: 23}
   - {fileID: 24}
   - {fileID: 25}
   - {fileID: 26}
-  m_Selected: 1
-  m_LastSelected: 0
+  - {fileID: 27}
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -331,9 +332,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 869
+    x: 985
     y: 73
-    width: 405
+    width: 308
     height: 458
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -346,7 +347,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 405, y: 228}
+  m_TargetSize: {x: 308, y: 173}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -361,10 +362,10 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -202.5
-    m_HBaseRangeMax: 202.5
-    m_VBaseRangeMin: -114
-    m_VBaseRangeMax: 114
+    m_HBaseRangeMin: -154
+    m_HBaseRangeMax: 154
+    m_VBaseRangeMin: -86.5
+    m_VBaseRangeMax: 86.5
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -382,23 +383,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 405
+      width: 308
       height: 437
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 202.5, y: 218.5}
+    m_Translation: {x: 154, y: 218.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -202.5
+      x: -154
       y: -218.5
-      width: 405
+      width: 308
       height: 437
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 405, y: 458}
+  m_LastWindowPixelSize: {x: 308, y: 458}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000001000000000000
@@ -427,7 +428,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 384
+    width: 383
     height: 458
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -439,7 +440,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 301d9afed61d9afee29ce5ff22fbffff346700009a7000008c7900006a8b0000208c0000fe930000e6950000049600006a9a00006ab00000fcc30000fac60000
+      m_ExpandedIDs: 22fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -484,9 +485,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 385
+    x: 384
     y: 73
-    width: 482
+    width: 365
     height: 458
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -745,9 +746,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.61485904, y: -0.8873117, z: 702.4457}
+    m_Target: {x: -3.188052, y: 0.6035807, z: 1436.7344}
     speed: 2
-    m_Value: {x: 0.61485904, y: -0.8873117, z: 702.4457}
+    m_Value: {x: -7.799421, y: 7.6713996, z: -0.11605442}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -789,7 +790,7 @@ MonoBehaviour:
         m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
-      m_Size: {x: 0.125, y: 0.125}
+      m_Size: {x: 0.03125, y: 0.03125}
     m_ShowGrid: 1
     m_GridAxis: 1
     m_gridOpacity: 0.5
@@ -798,9 +799,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 6.493321
+    m_Target: 12.56641
     speed: 2
-    m_Value: 6.493321
+    m_Value: 24.379362
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -846,10 +847,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 419
+    x: 384
     y: 73
-    width: 692
-    height: 502
+    width: 599
+    height: 458
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -862,14 +863,14 @@ MonoBehaviour:
     - {fileID: 633217777793600280, guid: ee865598187f01c40a1ee124e88276bf, type: 2}
     - {fileID: 983107047006527998, guid: b6766307d074af54587a122769eca2d1, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.6533647
+    - e00: 0.49919555
       e01: 0
       e02: 0
-      e03: -158.99298
+      e03: 108.44011
       e10: 0
-      e11: 0.6533647
+      e11: 0.49919555
       e12: 0
-      e13: 200.65018
+      e13: 88.63855
       e20: 0
       e21: 0
       e22: 1
@@ -894,14 +895,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.81764317
+    - e00: 0.5693193
       e01: 0
       e02: 0
-      e03: -1.7457733
+      e03: -32.33867
       e10: 0
-      e11: 0.81764317
+      e11: 0.5693193
       e12: 0
-      e13: 170.33916
+      e13: 155.48846
       e20: 0
       e21: 0
       e22: 1
@@ -927,10 +928,10 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 1db7febcc72b2264aaf6fd11ee6b5224,
+  m_AnimatorController: {fileID: 9100000, guid: ee865598187f01c40a1ee124e88276bf,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1107966388082178082, guid: 1db7febcc72b2264aaf6fd11ee6b5224,
+  - m_Target: {fileID: 633217777793600280, guid: ee865598187f01c40a1ee124e88276bf,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -1091,10 +1092,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1113
+    x: 751
     y: 73
-    width: 320
-    height: 502
+    width: 542
+    height: 458
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1102,7 +1103,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 50172
+  m_LastSelectedObjectID: 13977278
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1123,10 +1124,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 695
+    x: 780
     y: 73
-    width: 738
-    height: 502
+    width: 660
+    height: 458
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1177,7 +1178,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 552
-    width: 1275
+    width: 1294
     height: 439
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1207,7 +1208,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 552
-    width: 1275
+    width: 1294
     height: 439
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1225,23 +1226,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/SO Assets/Starting Character Presets
+    - Assets/Animations + VFX/Lunker Model
     m_Globs: []
     m_OriginalText: 
     m_FilterByTypeIntersection: 0
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/SO Assets/Starting Character Presets
+  - Assets/Animations + VFX/Lunker Model
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\willi\Desktop\Unity Projects\The-Gladiator-Life-Project-Source-Code
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 337}
-    m_SelectedIDs: 7ef00d00
-    m_LastClickedID: 913534
-    m_ExpandedIDs: 00000000380003006c00030000ca9a3b
+    scrollPos: {x: 0, y: 127}
+    m_SelectedIDs: 0e020300
+    m_LastClickedID: 197134
+    m_ExpandedIDs: 000000006a000300840003007c03030000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1269,7 +1270,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003800030000ca9a3b
+    m_ExpandedIDs: 000000006a00030000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1296,8 +1297,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c623000026650600c6c9000072630000ea250100f02501005c2801006e630000626300008c26020000110100e8d990008ed80100d6120100720f0100f2120100de110100ec110100801301003631020076130100ca0f010046130100c8110100422b0100942001005414010052140100e0de010070e0010056e00100a0e0010012e0010012e1010006de0100d4df0100dc8817007c79faffd0a601000000000064880000e494000046d80000848800006288000026a0000014a801009e6c00009ae50000cc1501003a47010050de0100aae30100e8e6010044e7010022ea0100b017010068d20100b0e70100e4e901004e55020006e701009ee149007e260100ec8c00004a8901005c64000050ec010064ea0100383a0200723b020058190100d445010010640000a098000044980000ee990000c88f00000c8e0000a6910000f2180100c6180100c45d0100fa6300002aad00006c460100f082000004550100ba6a0000dcac0000e4ac0000224b0200940202001c5501001447010066c6080064c6080010530100ea8d0500e28d0500ba15010038590200e44701005479000034610400ecef0000a4710000e4c40000f06300008624010044a40200eaa50200aa24010084c80200b6260100d6230100e421010046b70200be260100ee230100ee21010062f70000b2140200
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c623000026650600c6c9000072630000ea250100f02501005c2801006e630000626300008c26020000110100e8d990008ed80100d6120100720f0100f2120100de110100ec110100801301003631020076130100ca0f010046130100c8110100422b0100942001005414010052140100e0de010070e0010056e00100a0e0010012e0010012e1010006de0100d4df0100dc8817007c79faffd0a601000000000064880000e494000046d80000848800006288000026a0000014a801009e6c00009ae50000cc1501003a47010050de0100aae30100e8e6010044e7010022ea0100b017010068d20100b0e70100e4e901004e55020006e701009ee149007e260100ec8c00004a8901005c64000050ec010064ea0100383a0200723b020058190100d445010010640000a098000044980000ee990000c88f00000c8e0000a6910000f2180100c6180100c45d0100fa6300002aad00006c460100f082000004550100ba6a0000dcac0000e4ac0000224b0200940202001c5501001447010066c6080064c6080010530100ea8d0500e28d0500ba15010038590200e44701005479000034610400ecef0000a4710000e4c40000f06300008624010044a40200eaa50200aa24010084c80200b6260100d6230100e421010046b70200be260100ee230100ee21010062f70000b2140200e82e0100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1333,6 +1334,35 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c66a740a74845a08dc18bab7f2ffa03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 560, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Recorder
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 0
+    y: 552
+    width: 1275
+    height: 439
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+--- !u!114 &24
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12019, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
@@ -1346,9 +1376,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1276
+    x: 1295
     y: 73
-    width: 643
+    width: 624
     height: 918
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -1368,7 +1398,7 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
---- !u!114 &24
+--- !u!114 &25
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1398,7 +1428,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_Spl:
-    ID: 16219
+    ID: 162
     splitterInitialOffset: 609
     currentActiveSplitter: -1
     realSizes:
@@ -1423,13 +1453,13 @@ MonoBehaviour:
     oldSplitSize: 0
   m_TestTypeToolbarIndex: 0
   m_PlayModeTestListGUI:
-    m_Window: {fileID: 24}
+    m_Window: {fileID: 25}
     m_NewResultList:
     - id: 1005
       uniqueId: '[We Are Gladiators][suite]'
       name: We Are Gladiators
       fullName: We Are Gladiators
-      resultStatus: 1
+      resultStatus: 0
       duration: 204.24121
       messages: 
       output: 
@@ -1445,7 +1475,7 @@ MonoBehaviour:
       uniqueId: '[PlayMode.dll][suite]'
       name: PlayMode.dll
       fullName: C:/Users/willi/Desktop/Unity Projects/The-Gladiator-Life-Project-Source-Code/Library/ScriptAssemblies/PlayMode.dll
-      resultStatus: 1
+      resultStatus: 0
       duration: 203.90137
       messages: 
       output: 
@@ -1461,7 +1491,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/[PlayMode][Tests][suite]
       name: Tests
       fullName: Tests
-      resultStatus: 1
+      resultStatus: 0
       duration: 203.89082
       messages: 
       output: 
@@ -1477,7 +1507,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Boon_Controller_Tests][suite]
       name: Boon_Controller_Tests
       fullName: Tests.Boon_Controller_Tests
-      resultStatus: 1
+      resultStatus: 0
       duration: 22.158949
       messages: 
       output: 
@@ -1493,7 +1523,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Boon_Controller_Tests/[PlayMode][Tests.Boon_Controller_Tests.Boon_UI_Panel_Hides_When_Last_Boon_Is_Removed]
       name: Boon_UI_Panel_Hides_When_Last_Boon_Is_Removed
       fullName: Tests.Boon_Controller_Tests.Boon_UI_Panel_Hides_When_Last_Boon_Is_Removed
-      resultStatus: 1
+      resultStatus: 0
       duration: 7.826621
       messages: 
       output: "The referenced script (Unknown) on this Behaviour is missing!\r\nThe
@@ -2005,13 +2035,12 @@ MonoBehaviour:
         has been created for the UnityEngine.Object type Sprite - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
         (System.Reflection.RuntimeConstructorInfo , System.Object , System.Object[]
         , System.Exception& ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
         at System.Reflection.RuntimeConstructorInfo.InternalInvoke (System.Object
@@ -2121,12 +2150,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type AbilityDataSO - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -2443,12 +2471,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type AIBehaviour - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -2726,7 +2753,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Boon_Controller_Tests/[PlayMode][Tests.Boon_Controller_Tests.Boon_UI_Panel_Is_Shown_If_Player_Has_Atleast_One_Active_Boon]
       name: Boon_UI_Panel_Is_Shown_If_Player_Has_Atleast_One_Active_Boon
       fullName: Tests.Boon_Controller_Tests.Boon_UI_Panel_Is_Shown_If_Player_Has_Atleast_One_Active_Boon
-      resultStatus: 1
+      resultStatus: 0
       duration: 7.3272386
       messages: 
       output: "Running setup on Combat Ability Button 1\r\nRunning setup on UI Boon
@@ -3408,7 +3435,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Boon_Controller_Tests/[PlayMode][Tests.Boon_Controller_Tests.Day_Timed_Boon_Is_Removed_Correctly_When_Timer_Reaches_Zero]
       name: Day_Timed_Boon_Is_Removed_Correctly_When_Timer_Reaches_Zero
       fullName: Tests.Boon_Controller_Tests.Day_Timed_Boon_Is_Removed_Correctly_When_Timer_Reaches_Zero
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.9734006
       messages: 
       output: "Running setup on Combat Ability Button 1\r\nRunning setup on UI Boon
@@ -4092,7 +4119,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Combat_Controller_Tests][suite]
       name: Combat_Controller_Tests
       fullName: Tests.Combat_Controller_Tests
-      resultStatus: 1
+      resultStatus: 0
       duration: 59.751366
       messages: 
       output: 
@@ -4108,7 +4135,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Enemy_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character]
       name: Enemy_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character
       fullName: Tests.Combat_Controller_Tests.Enemy_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.948902
       messages: 
       output: "Running setup on Initiative Panel\r\nRunning setup on Energy Icon
@@ -4810,7 +4837,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Handle_Damage_Correctly_Sets_Death_State_When_Health_Reaches_0]
       name: Handle_Damage_Correctly_Sets_Death_State_When_Health_Reaches_0
       fullName: Tests.Combat_Controller_Tests.Handle_Damage_Correctly_Sets_Death_State_When_Health_Reaches_0
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.5774145
       messages: 
       output: "LevelController.SetDirection() called, setting direction of Right\r\nPositionLogic.FlipCharacterSprite()
@@ -5474,7 +5501,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Last_Enemy_Character_Death_By_Damage_Does_Trigger_Victory_Event]
       name: Last_Enemy_Character_Death_By_Damage_Does_Trigger_Victory_Event
       fullName: Tests.Combat_Controller_Tests.Last_Enemy_Character_Death_By_Damage_Does_Trigger_Victory_Event
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.7836185
       messages: 
       output: "Running setup on Combat Ability Button 1\r\nRunning setup on UI Boon
@@ -6594,13 +6621,12 @@ MonoBehaviour:
         created for the UnityEngine.Object type SpriteRenderer - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
         (System.Reflection.RuntimeConstructorInfo , System.Object , System.Object[]
         , System.Exception& ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
         at System.Reflection.RuntimeConstructorInfo.InternalInvoke (System.Object
@@ -6777,13 +6803,12 @@ MonoBehaviour:
         created for the UnityEngine.Object type ParticleSystem - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
         (System.Reflection.RuntimeConstructorInfo , System.Object , System.Object[]
         , System.Exception& ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
         at System.Reflection.RuntimeConstructorInfo.InternalInvoke (System.Object
@@ -6951,12 +6976,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type HexCharacterView - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -7119,13 +7143,12 @@ MonoBehaviour:
         created for the UnityEngine.Object type CanvasGroup - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
         (System.Reflection.RuntimeConstructorInfo , System.Object , System.Object[]
         , System.Exception& ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
         at System.Reflection.RuntimeConstructorInfo.InternalInvoke (System.Object
@@ -7293,13 +7316,12 @@ MonoBehaviour:
         created for the UnityEngine.Object type RectTransform - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
         (System.Reflection.RuntimeConstructorInfo , System.Object , System.Object[]
         , System.Exception& ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
         at System.Reflection.RuntimeConstructorInfo.InternalInvoke (System.Object
@@ -8027,12 +8049,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type TextMeshProUGUI - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -8206,12 +8227,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type TMP_FontAsset - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -8973,12 +8993,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type UniversalCharacterModel - this is
         *strongly* discouraged. Unity should be allowed to handle serialization and
         deserialization of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -9358,12 +9377,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type EntityRenderer - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -9559,13 +9577,12 @@ MonoBehaviour:
         created for the UnityEngine.Object type SortingGroup - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.EmptyTypeFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
         (System.Reflection.RuntimeConstructorInfo , System.Object , System.Object[]
         , System.Exception& ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
         at System.Reflection.RuntimeConstructorInfo.InternalInvoke (System.Object
@@ -10169,12 +10186,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type CharacterVfxManager - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -10348,12 +10364,11 @@ MonoBehaviour:
         created for the UnityEngine.Object type PerkLayoutPanel - this is *strongly*
         discouraged. Unity should be allowed to handle serialization and deserialization
         of its own weird objects. Remember to serialize with a UnityReferenceResolver
-        as the external index reference resolver in the serialization context.\n\n
-        Stacktrace:   at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000]
-        in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Object.__icall_wrapper_mono_generic_class_init
-        (System.IntPtr ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n 
-        at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
-        \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
+        as the external index reference resolver in the serialization context.\n\nStacktrace:  
+        at Sirenix.Serialization.BaseFormatter`1[T]..cctor () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0
+        \r\n  at System.Object.__icall_wrapper_mono_generic_class_init (System.IntPtr
+        ) [0x00000] in <afe256a0391e468fbcdb82154daad696>:0 \r\n  at Sirenix.Serialization.EasyBaseFormatter`1[T]..ctor
+        () [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at Sirenix.Serialization.FormatterEmitter+RuntimeEmittedFormatter`1[T]..ctor
         (Sirenix.Serialization.FormatterEmitter+ReadDataEntryMethodDelegate`1[T]
         read, Sirenix.Serialization.FormatterEmitter+WriteDataEntriesMethodDelegate`1[T]
         write) [0x00000] in <d22866a9c8aa4bc2ad9bc87d6e668d6f>:0 \r\n  at System.Reflection.RuntimeConstructorInfo.InternalInvoke
@@ -10571,7 +10586,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Last_Enemy_Character_Death_By_DoT_Does_Trigger_Victory_Event]
       name: Last_Enemy_Character_Death_By_DoT_Does_Trigger_Victory_Event
       fullName: Tests.Combat_Controller_Tests.Last_Enemy_Character_Death_By_DoT_Does_Trigger_Victory_Event
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.544081
       messages: 
       output: "LevelController.SetDirection() called, setting direction of Right\r\nPositionLogic.FlipCharacterSprite()
@@ -11249,7 +11264,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Last_Enemy_Character_Death_By_Heart_Attack_Does_Trigger_Victory_Event]
       name: Last_Enemy_Character_Death_By_Heart_Attack_Does_Trigger_Victory_Event
       fullName: Tests.Combat_Controller_Tests.Last_Enemy_Character_Death_By_Heart_Attack_Does_Trigger_Victory_Event
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.51382
       messages: 
       output: "LevelController.SetDirection() called, setting direction of Right\r\nPositionLogic.FlipCharacterSprite()
@@ -11902,7 +11917,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Last_Player_Character_Death_By_Damage_Does_Trigger_Defeat_Event]
       name: Last_Player_Character_Death_By_Damage_Does_Trigger_Defeat_Event
       fullName: Tests.Combat_Controller_Tests.Last_Player_Character_Death_By_Damage_Does_Trigger_Defeat_Event
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.602489
       messages: 
       output: "LevelController.SetDirection() called, setting direction of Right\r\nPositionLogic.FlipCharacterSprite()
@@ -12531,7 +12546,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Last_Player_Character_Death_By_Heart_Attack_Does_Trigger_Defeat_Event]
       name: Last_Player_Character_Death_By_Heart_Attack_Does_Trigger_Defeat_Event
       fullName: Tests.Combat_Controller_Tests.Last_Player_Character_Death_By_Heart_Attack_Does_Trigger_Defeat_Event
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.568875
       messages: 
       output: "Running setup on Combat Ability Button 1\r\nRunning setup on UI Boon
@@ -13174,7 +13189,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Player_Character_Death_During_Turn_Does_Activate_Next_Character]
       name: Player_Character_Death_During_Turn_Does_Activate_Next_Character
       fullName: Tests.Combat_Controller_Tests.Player_Character_Death_During_Turn_Does_Activate_Next_Character
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.5117736
       messages: 
       output: "Running setup on Combat Ability Button 1\r\nRunning setup on UI Boon
@@ -13867,7 +13882,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Combat_Controller_Tests/[PlayMode][Tests.Combat_Controller_Tests.Player_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character]
       name: Player_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character
       fullName: Tests.Combat_Controller_Tests.Player_Character_Death_During_Turn_End_Sequence_Does_Activate_Next_Character
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.6462755
       messages: 
       output: "Running setup on Combat Ability Button 1\r\nRunning setup on UI Boon
@@ -14596,7 +14611,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Hex_Character_Controller_Tests][suite]
       name: Hex_Character_Controller_Tests
       fullName: Tests.Hex_Character_Controller_Tests
-      resultStatus: 1
+      resultStatus: 0
       duration: 26.639885
       messages: 
       output: 
@@ -14612,7 +14627,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Hex_Character_Controller_Tests/[PlayMode][Tests.Hex_Character_Controller_Tests.Create_Character_Functions_Correctly_Add_Characters_To_Persistency]
       name: Create_Character_Functions_Correctly_Add_Characters_To_Persistency
       fullName: Tests.Hex_Character_Controller_Tests.Create_Character_Functions_Correctly_Add_Characters_To_Persistency
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.631499
       messages: 
       output: "Running setup on Initiative Panel\r\nRunning setup on Energy Icon
@@ -15312,7 +15327,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Hex_Character_Controller_Tests/[PlayMode][Tests.Hex_Character_Controller_Tests.Modify_Health_Cant_Set_Health_Above_Maximum]
       name: Modify_Health_Cant_Set_Health_Above_Maximum
       fullName: Tests.Hex_Character_Controller_Tests.Modify_Health_Cant_Set_Health_Above_Maximum
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.6881223
       messages: 
       output: "LevelController.SetDirection() called, setting direction of Right\r\nPositionLogic.FlipCharacterSprite()
@@ -15951,7 +15966,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Hex_Character_Controller_Tests/[PlayMode][Tests.Hex_Character_Controller_Tests.Modify_Health_Cant_Set_Health_Below_Zero]
       name: Modify_Health_Cant_Set_Health_Below_Zero
       fullName: Tests.Hex_Character_Controller_Tests.Modify_Health_Cant_Set_Health_Below_Zero
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.6707864
       messages: 
       output: "LevelController.SetDirection() called, setting direction of Right\r\nPositionLogic.FlipCharacterSprite()
@@ -16608,7 +16623,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Hex_Character_Controller_Tests/[PlayMode][Tests.Hex_Character_Controller_Tests.Modify_Max_Health_Adjusts_Current_Health_Below_Maximum_If_Maximum_Is_Exceeded]
       name: Modify_Max_Health_Adjusts_Current_Health_Below_Maximum_If_Maximum_Is_Exceeded
       fullName: Tests.Hex_Character_Controller_Tests.Modify_Max_Health_Adjusts_Current_Health_Below_Maximum_If_Maximum_Is_Exceeded
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.6264915
       messages: 
       output: "LevelController.SetDirection() called, setting direction of Right\r\nPositionLogic.FlipCharacterSprite()
@@ -17293,7 +17308,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Town_Controller_Tests][suite]
       name: Town_Controller_Tests
       fullName: Tests.Town_Controller_Tests
-      resultStatus: 1
+      resultStatus: 0
       duration: 20.956558
       messages: 
       output: 
@@ -17309,7 +17324,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Town_Controller_Tests/[PlayMode][Tests.Town_Controller_Tests.Hospital_Bedrest_Does_Heal_Correctly]
       name: Hospital_Bedrest_Does_Heal_Correctly
       fullName: Tests.Town_Controller_Tests.Hospital_Bedrest_Does_Heal_Correctly
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.993857
       messages: 
       output: "Running setup on Initiative Panel\r\nRunning setup on Energy Icon
@@ -17879,7 +17894,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Town_Controller_Tests/[PlayMode][Tests.Town_Controller_Tests.Hospital_Surgery_Does_Remove_Injury_Correctly]
       name: Hospital_Surgery_Does_Remove_Injury_Correctly
       fullName: Tests.Town_Controller_Tests.Hospital_Surgery_Does_Remove_Injury_Correctly
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.9709115
       messages: 
       output: "UCM.RunSetup() called and executing setup...\r\nRunning setup on Combat
@@ -18523,7 +18538,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Town_Controller_Tests/[PlayMode][Tests.Town_Controller_Tests.Hospital_Therapy_Does_Boost_Morale_State_Correctly]
       name: Hospital_Therapy_Does_Boost_Morale_State_Correctly
       fullName: Tests.Town_Controller_Tests.Hospital_Therapy_Does_Boost_Morale_State_Correctly
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.970943
       messages: 
       output: "UCM.RunSetup() called and executing setup...\r\nRunning setup on Combat
@@ -19142,7 +19157,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Turn_Controller_Tests][suite]
       name: Turn_Controller_Tests
       fullName: Tests.Turn_Controller_Tests
-      resultStatus: 1
+      resultStatus: 0
       duration: 74.375984
       messages: 
       output: 
@@ -19158,7 +19173,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Turn_Controller_Tests/[PlayMode][Tests.Turn_Controller_Tests.Cant_Delay_Turn_Twice]
       name: Cant_Delay_Turn_Twice
       fullName: Tests.Turn_Controller_Tests.Cant_Delay_Turn_Twice
-      resultStatus: 1
+      resultStatus: 0
       duration: 7.7874
       messages: 
       output: "Running setup on Initiative Panel\r\nRunning setup on Energy Icon
@@ -19850,7 +19865,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Turn_Controller_Tests/[PlayMode][Tests.Turn_Controller_Tests.Delay_Turn_Action_Correctly_Moves_Entity_To_The_End_Of_Turn_Order]
       name: Delay_Turn_Action_Correctly_Moves_Entity_To_The_End_Of_Turn_Order
       fullName: Tests.Turn_Controller_Tests.Delay_Turn_Action_Correctly_Moves_Entity_To_The_End_Of_Turn_Order
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.6725645
       messages: 
       output: "Running setup on Combat Ability Button 1\r\nRunning setup on UI Boon
@@ -20518,7 +20533,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Turn_Controller_Tests/[PlayMode][Tests.Turn_Controller_Tests.Entity_Can_Take_Delayed_Turn_Later]
       name: Entity_Can_Take_Delayed_Turn_Later
       fullName: Tests.Turn_Controller_Tests.Entity_Can_Take_Delayed_Turn_Later
-      resultStatus: 1
+      resultStatus: 0
       duration: 8.614733
       messages: 
       output: "LevelController.SetDirection() called, setting direction of Right\r\nPositionLogic.FlipCharacterSprite()
@@ -21166,7 +21181,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Turn_Controller_Tests/[PlayMode][Tests.Turn_Controller_Tests.Entity_Cant_Delay_Turn_If_It_Is_The_Last_Character_In_The_Activation_Order]
       name: Entity_Cant_Delay_Turn_If_It_Is_The_Last_Character_In_The_Activation_Order
       fullName: Tests.Turn_Controller_Tests.Entity_Cant_Delay_Turn_If_It_Is_The_Last_Character_In_The_Activation_Order
-      resultStatus: 1
+      resultStatus: 0
       duration: 7.913502
       messages: 
       output: "Running setup on Combat Ability Button 1\r\nRunning setup on UI Boon
@@ -21816,7 +21831,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Turn_Controller_Tests/[PlayMode][Tests.Turn_Controller_Tests.Entity_Does_Gain_On_Combat_Start_Perks]
       name: Entity_Does_Gain_On_Combat_Start_Perks
       fullName: Tests.Turn_Controller_Tests.Entity_Does_Gain_On_Combat_Start_Perks
-      resultStatus: 1
+      resultStatus: 0
       duration: 7.056063
       messages: 
       output: "Running setup on Combat Ability Button 1\r\nRunning setup on UI Boon
@@ -22476,7 +22491,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Turn_Controller_Tests/[PlayMode][Tests.Turn_Controller_Tests.Entity_Ending_Turn_Activates_Next_Character_In_Initiative_Queue]
       name: Entity_Ending_Turn_Activates_Next_Character_In_Initiative_Queue
       fullName: Tests.Turn_Controller_Tests.Entity_Ending_Turn_Activates_Next_Character_In_Initiative_Queue
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.9908752
       messages: 
       output: "LevelController.SetDirection() called, setting direction of Right\r\nPositionLogic.FlipCharacterSprite()
@@ -23122,7 +23137,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Turn_Controller_Tests/[PlayMode][Tests.Turn_Controller_Tests.Entity_Ending_Turn_Cycles_Back_To_First_Character_After_Last_Character_Ends_Turn]
       name: Entity_Ending_Turn_Cycles_Back_To_First_Character_After_Last_Character_Ends_Turn
       fullName: Tests.Turn_Controller_Tests.Entity_Ending_Turn_Cycles_Back_To_First_Character_After_Last_Character_Ends_Turn
-      resultStatus: 1
+      resultStatus: 0
       duration: 6.9159136
       messages: 
       output: "LevelController.SetDirection() called, setting direction of Right\r\nPositionLogic.FlipCharacterSprite()
@@ -23759,7 +23774,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Turn_Controller_Tests/[PlayMode][Tests.Turn_Controller_Tests.On_New_Combat_Event_Started_Function_Activates_First_Character_In_Initiative_Queue]
       name: On_New_Combat_Event_Started_Function_Activates_First_Character_In_Initiative_Queue
       fullName: Tests.Turn_Controller_Tests.On_New_Combat_Event_Started_Function_Activates_First_Character_In_Initiative_Queue
-      resultStatus: 1
+      resultStatus: 0
       duration: 7.161739
       messages: 
       output: "LevelController.SetDirection() called, setting direction of Right\r\nPositionLogic.FlipCharacterSprite()
@@ -24403,7 +24418,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Turn_Controller_Tests/[PlayMode][Tests.Turn_Controller_Tests.Shattered_Characters_Skip_Their_Turn]
       name: Shattered_Characters_Skip_Their_Turn
       fullName: Tests.Turn_Controller_Tests.Shattered_Characters_Skip_Their_Turn
-      resultStatus: 1
+      resultStatus: 0
       duration: 7.01138
       messages: 
       output: "LevelController.SetDirection() called, setting direction of Right\r\nPositionLogic.FlipCharacterSprite()
@@ -25166,7 +25181,7 @@ MonoBehaviour:
       uniqueId: PlayMode.dll/Tests/Turn_Controller_Tests/[PlayMode][Tests.Turn_Controller_Tests.Stunned_Characters_Skip_Their_Turn]
       name: Stunned_Characters_Skip_Their_Turn
       fullName: Tests.Turn_Controller_Tests.Stunned_Characters_Skip_Their_Turn
-      resultStatus: 1
+      resultStatus: 0
       duration: 8.229235
       messages: 
       output: "LevelController.SetDirection() called, setting direction of Left\r\nPositionLogic.FlipCharacterSprite()
@@ -25928,10 +25943,10 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1008
       parentUniqueId: PlayMode.dll/Tests/[PlayMode][Tests.Turn_Controller_Tests][suite]
-    m_ResultText: Tests (203.891s)
+    m_ResultText: 
     m_ResultStacktrace: 
     m_TestListState:
-      scrollPos: {x: 0, y: 56}
+      scrollPos: {x: 0, y: 0}
       m_SelectedIDs: bc805a6d
       m_LastClickedID: 1834647740
       m_ExpandedIDs: 9f5c62b6ee9192d7e234d20c75e0f80e2be61e15ce9d721b4f140c2fec64bf5ebc805a6d253a6d77ffffff7f
@@ -25962,7 +25977,7 @@ MonoBehaviour:
       - Uncategorized
     m_SelectedOption: 0
   m_EditModeTestListGUI:
-    m_Window: {fileID: 24}
+    m_Window: {fileID: 25}
     m_NewResultList:
     - id: 1000
       uniqueId: '[We Are Gladiators][suite]'
@@ -26012,7 +26027,7 @@ MonoBehaviour:
       selectedCategoryMask: 0
       availableCategories:
       - Uncategorized
---- !u!114 &25
+--- !u!114 &26
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -26069,7 +26084,7 @@ MonoBehaviour:
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 0}
     m_SearchString: 
---- !u!114 &26
+--- !u!114 &27
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}

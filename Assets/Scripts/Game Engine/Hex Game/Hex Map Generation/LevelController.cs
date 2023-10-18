@@ -2,12 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CodiceApp.EventTracking.Plastic;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
 using WeAreGladiators.Abilities;
+using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
 using WeAreGladiators.Combat;
 using WeAreGladiators.MainMenu;
@@ -777,7 +779,7 @@ namespace WeAreGladiators.HexTiles
 
         #region Teleportation Logic
 
-        public void HandleTeleportCharacter(HexCharacterModel character, LevelNode destination)
+        public void HandleTeleportCharacter(HexCharacterModel character, LevelNode destination, TeleportVfxType vfxType)
         {
             // Cancel if character is immune to teleport
             if (!HexCharacterController.Instance.IsCharacterTeleportable(character))
@@ -789,32 +791,50 @@ namespace WeAreGladiators.HexTiles
             PlaceCharacterOnHex(character, destination);
             HexCharacterView view = character.hexCharacterView;
 
-            // Make character model + world space UI vanish
-            VisualEventManager.CreateVisualEvent(() =>
-            {
-                VisualEffectManager.Instance.CreateTeleportEffect(view.WorldPosition);
-                HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null, 0.2f);
-                HexCharacterController.Instance.FadeOutCharacterModel(view.model, 0.2f);
-                HexCharacterController.Instance.FadeOutCharacterShadow(view, 0.2f);
-            });
-
-            VisualEventManager.InsertTimeDelayInQueue(0.2f);
-            VisualEventManager.CreateVisualEvent(() => SnapCharacterViewToHex(view, destination));
-            // Create teleport VFX at character's destination
-
-            // Make character model + world space UI reappear
             bool updateActivationHex = TurnController.Instance.EntityActivated == character;
-            VisualEventManager.CreateVisualEvent(() =>
+            if (vfxType == TeleportVfxType.Teleport)
             {
-                VisualEffectManager.Instance.CreateTeleportEffect(view.WorldPosition);
-                HexCharacterController.Instance.FadeInCharacterWorldCanvas(view, null, 0.2f);
-                HexCharacterController.Instance.FadeInCharacterModel(view.model, 0.2f);
-                HexCharacterController.Instance.FadeInCharacterShadow(view, 0.2f);
+                // Make character model + world space UI vanish
+                VisualEventManager.CreateVisualEvent(() =>
+                {
+                    VisualEffectManager.Instance.CreateTeleportEffect(view.WorldPosition);
+                    HexCharacterController.Instance.FadeOutCharacterWorldCanvas(view, null, 0.2f);
+                    HexCharacterController.Instance.FadeOutCharacterModel(view.model, 0.2f);
+                    HexCharacterController.Instance.FadeOutCharacterShadow(view, 0.2f);
+                });
+
+                VisualEventManager.InsertTimeDelayInQueue(0.2f);
+                VisualEventManager.CreateVisualEvent(() => SnapCharacterViewToHex(view, destination));
+                // Create teleport VFX at character's destination
+
+                // Make character model + world space UI reappear
+                VisualEventManager.CreateVisualEvent(() =>
+                {
+                    VisualEffectManager.Instance.CreateTeleportEffect(view.WorldPosition);
+                    HexCharacterController.Instance.FadeInCharacterWorldCanvas(view, null, 0.2f);
+                    HexCharacterController.Instance.FadeInCharacterModel(view.model, 0.2f);
+                    HexCharacterController.Instance.FadeInCharacterShadow(view, 0.2f);
+                    if (updateActivationHex)
+                    {
+                        character.currentTile.ShowActivationMarker();
+                    }
+                });
+            }
+
+            else if(vfxType == TeleportVfxType.Jump)
+            {                
+                TaskTracker cData = new TaskTracker();
+                VisualEventManager.CreateVisualEvent(() =>
+                {
+                    Vector3 dest = destination.WorldPosition;
+                    HexCharacterController.Instance.PlayLongJumpAnimation(view, dest, cData);
+                }).SetCoroutineData(cData);
+
                 if (updateActivationHex)
                 {
                     character.currentTile.ShowActivationMarker();
                 }
-            });
+            }           
 
             // Handle stress event: Enemy moved into my melee range + moved into back arc (on destination only)
             List<LevelNode> tiles = GetAllHexsWithinRange(character.currentTile, 1);
@@ -837,7 +857,7 @@ namespace WeAreGladiators.HexTiles
                 }
             }
         }
-        public void HandleTeleportSwitchTwoCharacters(HexCharacterModel a, HexCharacterModel b, bool normalTeleportVFX = true)
+        public void HandleTeleportSwitchTwoCharacters(HexCharacterModel a, HexCharacterModel b, TeleportVfxType teleportVfxType)
         {
             // Cancel if either character is immune to teleport
             if (!HexCharacterController.Instance.IsCharacterTeleportable(a) ||
@@ -859,7 +879,7 @@ namespace WeAreGladiators.HexTiles
             HexCharacterView viewB = b.hexCharacterView;
 
             // Create teleport VFX on character position
-            if (normalTeleportVFX)
+            if (teleportVfxType == TeleportVfxType.Teleport)
             {
                 // Make character model + world space UI vanish
                 // A
@@ -905,7 +925,7 @@ namespace WeAreGladiators.HexTiles
                     HexCharacterController.Instance.FadeInCharacterShadow(viewB, 0.2f);
                 });
             }
-            else
+            else if(teleportVfxType == TeleportVfxType.Glide) 
             {
                 VisualEventManager.CreateVisualEvent(() => DoCharacterMoveVisualEventDOTWEEN
                     (viewA, aDestination, null, 5f, Ease.OutBack));

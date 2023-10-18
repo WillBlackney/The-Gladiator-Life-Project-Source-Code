@@ -1605,6 +1605,78 @@ namespace WeAreGladiators.Characters
             // Move back to start point
             view.ucmMovementParent.transform.DOMove(startPos, moveBackTime).SetEase(moveBackEase);
         }
+
+        public void PlayLongJumpAnimation(HexCharacterView view, Vector3 destination, TaskTracker cData)
+        {
+            StartCoroutine(PlayLongJumpAnimationCoroutine(view, destination, cData));
+        }
+        public IEnumerator PlayLongJumpAnimationCoroutine(HexCharacterView view, Vector3 destination, TaskTracker cData)
+        {
+            if (view == null)
+            {
+                if (cData != null)
+                {
+                    cData.MarkAsCompleted();
+                }
+                yield break;
+            }
+
+            string animationString = "LONG_JUMP";
+            view.CurrentAnimation = animationString;
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+
+            // 60 sample rate
+            float frameToMilliseconds = 0.016667f;
+            float pauseBeforeOffGround = 22f * frameToMilliseconds;
+            float landDuration = 30f * frameToMilliseconds;
+
+            // Start attack animation
+            view.ucmAnimator.SetTrigger(animationString);
+            yield return new WaitForSeconds(pauseBeforeOffGround);
+
+            // Trigger jump SFX
+            //AudioManager.Instance.PlaySound();
+
+            float x = destination.x;
+            float endY = destination.y;
+            float middleY = endY + 0.35f;
+            float firstYDuration = 0.6f;
+            float lastYDuration = 0.4f;
+            float dynamicSpeed = Vector2.Distance(view.mainMovementParent.transform.position, destination) / 8.5f;
+
+            // if jumping downwards
+            if(view.mainMovementParent.transform.position.y >= endY)
+            {
+                firstYDuration = 0.4f;
+                lastYDuration = 0.6f;
+                middleY = view.mainMovementParent.transform.position.y + 0.25f;
+            }
+
+            // jumping up
+            else if (view.mainMovementParent.transform.position.y < endY)
+            {
+                middleY = endY + 0.15f;
+            }
+
+            view.mainMovementParent.transform.DOMoveX(x, dynamicSpeed).SetEase(Ease.Linear);
+            view.mainMovementParent.transform.DOMoveY(middleY, dynamicSpeed * firstYDuration).SetEase(Ease.OutQuad).OnComplete(() =>
+                view.mainMovementParent.transform.DOMoveY(endY, dynamicSpeed * lastYDuration).SetEase(Ease.InQuad));
+            yield return new WaitForSeconds(dynamicSpeed * 0.85f);            
+
+            view.CurrentAnimation = "JUMP_LAND";
+            view.ucmAnimator.SetTrigger("JUMP_LAND");
+            yield return new WaitForSeconds(dynamicSpeed * 0.15f);
+
+            if (cData != null)
+            {
+                cData.MarkAsCompleted();
+            }
+
+            yield return new WaitForSeconds(landDuration - (dynamicSpeed * 0.15f));
+
+            // TO DO: landing SFX          
+
+        }
         public void PlayChargeAnimation(HexCharacterView view)
         {
             if (view == null)

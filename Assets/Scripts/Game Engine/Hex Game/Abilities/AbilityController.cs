@@ -22,10 +22,92 @@ namespace WeAreGladiators.Abilities
 {
     public class AbilityController : Singleton<AbilityController>
     {
+        #region Properties + Components
+        [Header("Ability Data Files")]
+        [SerializeField] private AbilityDataSO[] allAbilityDataSOs;
+        [SerializeField] private AbilityDataSO freeStrikeAbilityData;
+        [SerializeField] private AbilityDataSO riposteAbilityData;
+        [SerializeField] private AbilityDataSO spearWallStrikeAbilityData;
+        [Space(20)]
 
-        // Learn + Unlearn Abilities
-        #region
+        [Header("Hit Chance Pop Up Components")]
+        [SerializeField] private Canvas hitChanceRootCanvas;
+        [SerializeField] private GameObject hitChancePositionParent;
+        [SerializeField] private CanvasGroup hitChanceCg;
+        [SerializeField] private RectTransform[] hitChanceLayouts;
+        [Space(10)]
+        [SerializeField] private GameObject hitChanceHeaderParent;
+        [SerializeField] private TextMeshProUGUI hitChanceText;
+        [SerializeField] private GameObject hitChanceBoxesParent;
+        [SerializeField] private ModalDottedRow[] hitChanceBoxes;
+        [Space(10)]
+        [SerializeField] private GameObject applyPassiveHeaderParent;
+        [SerializeField] private TextMeshProUGUI applyPassiveText;
+        [SerializeField] private UIPerkIcon applyPassiveIcon;
+        [SerializeField] private GameObject applyPassiveBoxesParent;
+        [SerializeField] private ModalDottedRow[] applyPassiveBoxes;
 
+        private HexCharacterModel firstSelectionCharacter;
+        public Dictionary<HexCharacterModel, Action> onAbilityEndVisualEventQueue = new Dictionary<HexCharacterModel, Action>();
+
+        #endregion
+
+        #region Getters + Accessors
+        public bool HitChanceModalIsVisible => hitChanceRootCanvas.isActiveAndEnabled;
+        public AbilityData SpearWallStrikeAbility
+        {
+            get;
+            private set;
+        }
+        public AbilityData FreeStrikeAbility
+        {
+            get;
+            private set;
+        }
+        public AbilityData RiposteAbility
+        {
+            get;
+            private set;
+        }
+        public AbilityData[] AllAbilities { get; private set; }
+        public AbilityDataSO[] AllAbilityDataSOs
+        {
+            get => allAbilityDataSOs;
+            private set => allAbilityDataSOs = value;
+        }
+        public AbilityData CurrentAbilityAwaiting { get; private set; }
+        public AbilitySelectionPhase CurrentSelectionPhase { get; private set; }
+        #endregion
+
+        #region Initialization + Build Library
+        protected override void Awake()
+        {
+            base.Awake();
+            BuildAbilityLibrary();
+        }
+        private void BuildAbilityLibrary()
+        {
+            List<AbilityData> tempList = new List<AbilityData>();
+
+            foreach (AbilityDataSO dataSO in allAbilityDataSOs)
+            {
+                if (dataSO != null && dataSO.includeInGame)
+                {
+                    tempList.Add(BuildAbilityDataFromScriptableObjectData(dataSO));
+                }
+            }
+
+            AllAbilities = tempList.ToArray();
+
+            // Setup free strike + globally shared abilities
+            FreeStrikeAbility = BuildAbilityDataFromScriptableObjectData(freeStrikeAbilityData);
+            RiposteAbility = BuildAbilityDataFromScriptableObjectData(riposteAbilityData);
+            SpearWallStrikeAbility = BuildAbilityDataFromScriptableObjectData(spearWallStrikeAbilityData);
+
+        }
+        #endregion
+
+        #region Learn + Unlearn Abilities
         public void BuildHexCharacterAbilityBookFromData(HexCharacterModel character, AbilityBook data)
         {
             // Copy ability book from data character into hex character
@@ -36,14 +118,11 @@ namespace WeAreGladiators.Abilities
             {
                 a.myCharacter = character;
             }
-
         }
 
         #endregion
 
-        // Dynamic Description Logic
-        #region
-
+        #region Dynamic Description Logic
         public string GetDynamicDescriptionFromAbility(AbilityData ability)
         {
             string sRet = "";
@@ -139,108 +218,8 @@ namespace WeAreGladiators.Abilities
         }
 
         #endregion
-        // Properties + Components
-        #region
 
-        [Header("Ability Data Files")]
-        [SerializeField] private AbilityDataSO[] allAbilityDataSOs;
-        [SerializeField] private AbilityDataSO freeStrikeAbilityData;
-        [SerializeField] private AbilityDataSO riposteAbilityData;
-        [SerializeField] private AbilityDataSO spearWallStrikeAbilityData;
-
-        [Header("Hit Chance Pop Up Components")]
-        [SerializeField]
-        private Canvas hitChanceRootCanvas;
-        [SerializeField] private GameObject hitChancePositionParent;
-        [SerializeField] private CanvasGroup hitChanceCg;
-        [SerializeField] private RectTransform[] hitChanceLayouts;
-        [Space(10)]
-        [SerializeField]
-        private GameObject hitChanceHeaderParent;
-        [SerializeField] private TextMeshProUGUI hitChanceText;
-        [SerializeField] private GameObject hitChanceBoxesParent;
-        [SerializeField] private ModalDottedRow[] hitChanceBoxes;
-        [Space(10)]
-        [SerializeField]
-        private GameObject applyPassiveHeaderParent;
-        [SerializeField] private TextMeshProUGUI applyPassiveText;
-        [SerializeField] private UIPerkIcon applyPassiveIcon;
-        [SerializeField] private GameObject applyPassiveBoxesParent;
-        [SerializeField] private ModalDottedRow[] applyPassiveBoxes;
-
-        // Ability caching properties
-        private HexCharacterModel firstSelectionCharacter;
-
-        public Dictionary<HexCharacterModel, Action> onAbilityEndVisualEventQueue = new Dictionary<HexCharacterModel, Action>();
-
-        #endregion
-
-        // Getters + Accessors
-        #region
-
-        public bool HitChanceModalIsVisible => hitChanceRootCanvas.isActiveAndEnabled;
-        public AbilityData SpearWallStrikeAbility
-        {
-            get;
-            private set;
-        }
-        public AbilityData FreeStrikeAbility
-        {
-            get;
-            private set;
-        }
-        public AbilityData RiposteAbility
-        {
-            get;
-            private set;
-        }
-        public AbilityData[] AllAbilities { get; private set; }
-        public AbilityDataSO[] AllAbilityDataSOs
-        {
-            get => allAbilityDataSOs;
-            private set => allAbilityDataSOs = value;
-        }
-        public AbilityData CurrentAbilityAwaiting { get; private set; }
-        public AbilitySelectionPhase CurrentSelectionPhase { get; private set; }
-
-        #endregion
-
-        // Initialization + Build Library
-        #region
-
-        protected override void Awake()
-        {
-            base.Awake();
-            BuildAbilityLibrary();
-        }
-        private void BuildAbilityLibrary()
-        {
-            Debug.Log("AbilityController.BuildAbilityLibrary() called...");
-
-            List<AbilityData> tempList = new List<AbilityData>();
-
-            foreach (AbilityDataSO dataSO in allAbilityDataSOs)
-            {
-                if (dataSO != null && dataSO.includeInGame)
-                {
-                    tempList.Add(BuildAbilityDataFromScriptableObjectData(dataSO));
-                }
-            }
-
-            AllAbilities = tempList.ToArray();
-
-            // Setup free strike + globally shared abilities
-            FreeStrikeAbility = BuildAbilityDataFromScriptableObjectData(freeStrikeAbilityData);
-            RiposteAbility = BuildAbilityDataFromScriptableObjectData(riposteAbilityData);
-            SpearWallStrikeAbility = BuildAbilityDataFromScriptableObjectData(spearWallStrikeAbilityData);
-
-        }
-
-        #endregion
-
-        // Search Logic
-        #region
-
+        #region Search Logic
         public AbilityData GetCharacterAbilityByName(HexCharacterModel character, string name)
         {
             AbilityData abilityReturned = null;
@@ -317,8 +296,7 @@ namespace WeAreGladiators.Abilities
 
         #endregion
 
-        // Data Conversion
-        #region
+        #region Data Conversion
 
         public AbilityData BuildAbilityDataFromScriptableObjectData(AbilityDataSO d)
         {
@@ -423,9 +401,7 @@ namespace WeAreGladiators.Abilities
 
         #endregion
 
-        // Ability Usage Logic
-        #region
-
+        #region Ability Usage Logic
         public void UseAbility(HexCharacterModel character, AbilityData ability, HexCharacterModel target = null, LevelNode tileTarget = null)
         {
             CombatLogController.Instance.CreateCharacterUsedAbilityEntry(character, ability, target);
@@ -1352,19 +1328,19 @@ namespace WeAreGladiators.Abilities
             // Teleport Self
             else if (abilityEffect.effectType == AbilityEffectType.TeleportSelf)
             {
-                LevelController.Instance.HandleTeleportCharacter(caster, tileTarget);
+                LevelController.Instance.HandleTeleportCharacter(caster, tileTarget, abilityEffect.teleportVFX);
             }
 
             // Teleport Target
             else if (abilityEffect.effectType == AbilityEffectType.TeleportTargetToTile)
             {
-                LevelController.Instance.HandleTeleportCharacter(target, tileTarget);
+                LevelController.Instance.HandleTeleportCharacter(target, tileTarget, abilityEffect.teleportVFX);
             }
 
             // Teleport Switch With Target
             else if (abilityEffect.effectType == AbilityEffectType.TeleportSwitchWithTarget)
             {
-                LevelController.Instance.HandleTeleportSwitchTwoCharacters(caster, target, abilityEffect.normalTeleportVFX);
+                LevelController.Instance.HandleTeleportSwitchTwoCharacters(caster, target, abilityEffect.teleportVFX);
             }
 
             // Teleport Behind Target
@@ -1395,7 +1371,7 @@ namespace WeAreGladiators.Abilities
                     destination = validTiles[RandomGenerator.NumberBetween(0, validTiles.Count - 1)];
                 }
 
-                LevelController.Instance.HandleTeleportCharacter(caster, destination);
+                LevelController.Instance.HandleTeleportCharacter(caster, destination, abilityEffect.teleportVFX);
                 LevelController.Instance.FaceCharacterTowardsHex(caster, target.currentTile);
 
             }
@@ -1694,9 +1670,7 @@ namespace WeAreGladiators.Abilities
 
         #endregion
 
-        // Input
-        #region
-
+        #region Input
         public void OnAbilityButtonClicked(AbilityButton b)
         {
             if (b.MyAbilityData == null)
@@ -1895,9 +1869,7 @@ namespace WeAreGladiators.Abilities
 
         #endregion
 
-        // Get Ability Calculations
-        #region
-
+        #region Get Ability Calculations
         public int GetAbilityActionPointCost(HexCharacterModel character, AbilityData ability)
         {
             int apCost = ability.energyCost;
@@ -2056,9 +2028,7 @@ namespace WeAreGladiators.Abilities
 
         #endregion
 
-        // Ability Useability + Validation Logic
-        #region
-
+        #region Ability Useability + Validation Logic
         private bool DoesAbilityEffectMeetAllRequirements(AbilityData abilityUsed, AbilityEffect effect, HexCharacterModel character, HexCharacterModel target = null, LevelNode location = null)
         {
             bool bRet = true;
@@ -2549,12 +2519,9 @@ namespace WeAreGladiators.Abilities
         {
             return CurrentAbilityAwaiting != null;
         }
-
         #endregion
 
-        // Hit Chance Popup Logic
-        #region
-
+        #region Hit Chance Popup Logic
         public void ShowHitChancePopup(HexCharacterModel caster, HexCharacterModel target, AbilityData ability, ItemData weaponUsed = null)
         {
             hitChanceBoxesParent.SetActive(false);
@@ -2676,8 +2643,6 @@ namespace WeAreGladiators.Abilities
             hitChanceCg.alpha = 1;
             hitChanceCg.DOKill();
             hitChanceCg.DOFade(0f, 0.15f).OnComplete(() => hitChanceRootCanvas.enabled = false);
-            //hitChanceRootCanvas.enabled = false;
-            // hitChanceCg.alpha = 0;
         }
         private AbilityEffect FindDebuffEffect(AbilityData ability)
         {
@@ -2726,7 +2691,6 @@ namespace WeAreGladiators.Abilities
 
             return ret;
         }
-
         #endregion
     }
 }
