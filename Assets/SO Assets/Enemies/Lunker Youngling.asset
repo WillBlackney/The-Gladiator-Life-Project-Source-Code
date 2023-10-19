@@ -63,6 +63,7 @@ MonoBehaviour:
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: e3485f3770f42714f9f7ca5a647d25e5, type: 2}
+    - {fileID: 11400000, guid: 9d93f96f71001714b9c3d86f9a76e708, type: 2}
   serializedPassiveManager:
     perks:
     - perkTag: 124

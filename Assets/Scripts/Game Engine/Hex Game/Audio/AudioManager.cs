@@ -462,6 +462,8 @@ namespace WeAreGladiators.Audio
         Ability_Bite_Light = 155,
         Ability_Bite_Heavy = 156,
         Ability_Whip_Crack = 157,
+        Ability_Jump_Start = 158,
+        Ability_Jump_Land = 159,
 
         Ambience_Outdoor_Spooky = 39,
         Ambience_Town_1 = 99,

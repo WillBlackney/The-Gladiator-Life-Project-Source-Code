@@ -14,16 +14,149 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   directives:
   - action:
-      actionType: 1
-      targettingPriority: 050000000100000006000000
+      actionType: 2
+      targettingPriority: 05000000
+      movementType: 1
       getRangeFromAbility: 0
+      range: 1
+      abilityName: 
+      teleportAbilityName: Leap
+    requirements:
+    - requirementType: 10
       range: 0
-      abilityName: Bite
-    requirements: []
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 7
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
   - action:
       actionType: 2
       targettingPriority: 01000000
+      movementType: 1
+      getRangeFromAbility: 0
+      range: 1
+      abilityName: 
+      teleportAbilityName: Leap
+    requirements:
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 7
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Bite
+      teleportAbilityName: 
+    requirements: []
+  - action:
+      actionType: 7
+      targettingPriority: 
+      movementType: 0
       getRangeFromAbility: 0
       range: 0
       abilityName: 
-    requirements: []
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 37
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 3
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 3
+      abilityName: Leap
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 37
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 2
+      targettingPriority: 01000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 36
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 2
+      targettingPriority: 01000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 27
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 1
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0

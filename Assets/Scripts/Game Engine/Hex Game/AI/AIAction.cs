@@ -14,6 +14,10 @@ namespace WeAreGladiators.AI
         [ShowIf("ShowTargettingPriority")]
         public TargettingPriority[] targettingPriority;
 
+        [ShowIf("ShowMovementType")]
+        [LabelWidth(150)]
+        public MovementType movementType;
+
         [ShowIf("ShowGetRangeFromAbility")]
         [LabelWidth(150)]
         public bool getRangeFromAbility;
@@ -25,6 +29,10 @@ namespace WeAreGladiators.AI
         [ShowIf("ShowAbilityName")]
         [LabelWidth(100)]
         public string abilityName;
+
+        [ShowIf("ShowTeleportAbilityName")]
+        [LabelWidth(100)]
+        public string teleportAbilityName;
 
         public bool ShowTargettingPriority()
         {
@@ -59,6 +67,26 @@ namespace WeAreGladiators.AI
             }
             return false;
         }
+
+        public bool ShowMovementType()
+        {
+            return actionType == AIActionType.MoveWithinRangeOfTarget ||
+                actionType == AIActionType.MoveToElevationOrGrassCloserToTarget ||
+               actionType == AIActionType.MoveToEngageInMelee;
+        }
+
+        public bool ShowTeleportAbilityName()
+        {
+            return (actionType == AIActionType.MoveWithinRangeOfTarget ||
+                actionType == AIActionType.MoveToElevationOrGrassCloserToTarget ||
+               actionType == AIActionType.MoveToEngageInMelee) && movementType == MovementType.Teleport;
+        }
+    }
+
+    public enum MovementType
+    {
+        Move = 0,
+        Teleport = 1,
     }
 
     public enum AIActionType

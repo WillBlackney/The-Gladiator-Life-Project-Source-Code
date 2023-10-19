@@ -114,63 +114,95 @@ namespace WeAreGladiators.AI
 
             else if (directive.action.actionType == AIActionType.MoveToEngageInMelee)
             {
-                List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
-                List<LevelNode> targetMeleeTiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1);
-
-                Path bestPath = null;
-                int shortestDistance = 10000;
-                int lowestApCost = 10000;
-
-                foreach (Path p in allPossiblePaths)
+                if (directive.action.movementType == MovementType.Move)
                 {
-                    int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
-                    if (targetMeleeTiles.Contains(p.Destination) &&
-                        target.currentTile.Distance(p.Destination) <= target.currentTile.Distance(character.currentTile) &&
-                        MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0 &&
-                        p.Length <= shortestDistance &&
-                        apCost < lowestApCost)
-                    {
-                        lowestApCost = apCost;
-                        shortestDistance = p.Length;
-                        bestPath = p;
-                    }
-                }
+                    List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
+                    List<LevelNode> targetMeleeTiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1);
 
-                // Able to move into melee?
-                if (bestPath != null)
-                {
-                    LevelController.Instance.HandleMoveDownPath(character, bestPath);
-                    VisualEventManager.InsertTimeDelayInQueue(1);
-                    actionTaken = true;
-                }
+                    Path bestPath = null;
+                    int shortestDistance = 10000;
+                    int lowestApCost = 10000;
 
-                // Cant move far enough to get in melee range: just move as far as possible towards target
-                else
-                {
-                    // Which of the target's melee range tiles is closest to this character?
-                    LevelNode closestMeleeRangeHex = LevelController.Instance.GetClosestAvailableHexFromStart(character.currentTile, targetMeleeTiles);
-                    Path currentBestPath = null;
-                    int currentShortestDistance = 10000;
-
-                    // Out of all the cached paths, which one's destination is closest to the closest melee range hex?
                     foreach (Path p in allPossiblePaths)
                     {
-                        if (closestMeleeRangeHex != null)
+                        int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
+                        if (targetMeleeTiles.Contains(p.Destination) &&
+                            target.currentTile.Distance(p.Destination) <= target.currentTile.Distance(character.currentTile) &&
+                            MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0 &&
+                            p.Length <= shortestDistance &&
+                            apCost < lowestApCost)
                         {
-                            int distance = p.Destination.Distance(closestMeleeRangeHex);
-                            if (distance < currentShortestDistance)
+                            lowestApCost = apCost;
+                            shortestDistance = p.Length;
+                            bestPath = p;
+                        }
+                    }
+
+                    // Able to move into melee?
+                    if (bestPath != null)
+                    {
+                        LevelController.Instance.HandleMoveDownPath(character, bestPath);
+                        VisualEventManager.InsertTimeDelayInQueue(1);
+                        actionTaken = true;
+                    }
+
+                    // Cant move far enough to get in melee range: just move as far as possible towards target
+                    else
+                    {
+                        // Which of the target's melee range tiles is closest to this character?
+                        LevelNode closestMeleeRangeHex = LevelController.Instance.GetClosestAvailableHexFromStart(character.currentTile, targetMeleeTiles);
+                        Path currentBestPath = null;
+                        int currentShortestDistance = 10000;
+
+                        // Out of all the cached paths, which one's destination is closest to the closest melee range hex?
+                        foreach (Path p in allPossiblePaths)
+                        {
+                            if (closestMeleeRangeHex != null)
                             {
-                                currentShortestDistance = distance;
-                                currentBestPath = p;
+                                int distance = p.Destination.Distance(closestMeleeRangeHex);
+                                if (distance < currentShortestDistance)
+                                {
+                                    currentShortestDistance = distance;
+                                    currentBestPath = p;
+                                }
                             }
+
+                        }
+
+                        if (currentBestPath != null)
+                        {
+                            LevelController.Instance.HandleMoveDownPath(character, currentBestPath);
+                            VisualEventManager.InsertTimeDelayInQueue(1);
+                            actionTaken = true;
                         }
 
                     }
+                }
+                
+                else if (directive.action.movementType == MovementType.Teleport)
+                {
+                    AbilityData teleportAbility = AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.teleportAbilityName);
+                    List<LevelNode> allMeleeTiles = LevelController.Instance.GetAllHexsWithinRange(target.currentTile, 1)
+                        .FindAll(node => Pathfinder.CanHexBeOccupied(node) && 
+                        node.Distance(character.currentTile) <= AbilityController.Instance.CalculateFinalRangeOfAbility(teleportAbility, character));
 
-                    if (currentBestPath != null)
+                    LevelNode bestDestination = allMeleeTiles.Find(tile => tile.Elevation == TileElevation.Elevated);
+                    if (bestDestination == null)
                     {
-                        LevelController.Instance.HandleMoveDownPath(character, currentBestPath);
-                        VisualEventManager.InsertTimeDelayInQueue(1);
+                        bestDestination = allMeleeTiles.Find(tile => tile.TileData.tileName == "Dirt" || tile.TileData.tileName == "Grass");
+                    }
+
+                    if (bestDestination == null)
+                    {
+                        bestDestination = allMeleeTiles.GetRandomElement();
+                    }
+
+
+                    // Able to teleport to target into melee?
+                    if (bestDestination != null)
+                    {
+                        AbilityController.Instance.UseAbility(character, teleportAbility, null, bestDestination);
+                        VisualEventManager.InsertTimeDelayInQueue(1.5f);
                         actionTaken = true;
                     }
 
@@ -460,7 +492,11 @@ namespace WeAreGladiators.AI
                 {
                     // Able to move and has a target?
                     if (!HexCharacterController.Instance.IsCharacterAbleToMove(character) ||
-                        tpt.Target == null)
+                        tpt.Target == null ||
+                        (directive.action.movementType == MovementType.Teleport && 
+                        !HexCharacterController.Instance.IsCharacterTeleportable(character)) ||
+                        (directive.action.movementType == MovementType.Teleport && 
+                        !AbilityController.Instance.IsAbilityUseable(character, AbilityController.Instance.GetCharacterAbilityByName(character, directive.action.teleportAbilityName), false)))
                     {
                         continue;
                     }
@@ -692,21 +728,21 @@ namespace WeAreGladiators.AI
 
             // Check self engaged in melee
             else if (req.requirementType == AIActionRequirementType.SelfEngagedInMelee &&
-                     HexCharacterController.Instance.IsCharacterEngagedInMelee(character, req.enemiesInMeleeRange))
+                     HexCharacterController.Instance.IsCharacterEngagedOrEngagingInMelee(character, req.enemiesInMeleeRange))
             {
                 bRet = true;
             }
 
             // Check target engaged in melee
             else if (req.requirementType == AIActionRequirementType.TargetEngagedInMelee &&
-                     target != null && HexCharacterController.Instance.IsCharacterEngagedInMelee(target, req.enemiesInMeleeRange))
+                     target != null && HexCharacterController.Instance.IsCharacterEngagedOrEngagingInMelee(target, req.enemiesInMeleeRange))
             {
                 bRet = true;
             }
 
             // Check NOT engaged in melee
             else if (req.requirementType == AIActionRequirementType.SelfNotEngagedInMelee &&
-                     !HexCharacterController.Instance.IsCharacterEngagedInMelee(character))
+                     !HexCharacterController.Instance.IsCharacterEngagedOrEngagingInMelee(character))
             {
                 bRet = true;
             }
@@ -767,7 +803,7 @@ namespace WeAreGladiators.AI
             // Target is not engaged
             else if (req.requirementType == AIActionRequirementType.TargetNotEngagedInMelee)
             {
-                if (!HexCharacterController.Instance.IsCharacterEngagedInMelee(target))
+                if (!HexCharacterController.Instance.IsCharacterEngagedOrEngagingInMelee(target))
                 {
                     bRet = true;
                 }
@@ -853,29 +889,39 @@ namespace WeAreGladiators.AI
             // Melee has started
             else if (req.requirementType == AIActionRequirementType.MeleeHasStarted)
             {
-                List<HexCharacterModel> allies = HexCharacterController.Instance.GetAllAlliesOfCharacter(character);
-                foreach (HexCharacterModel ally in allies)
+                List<HexCharacterModel> characters = new List<HexCharacterModel>();
+                characters.AddRange(HexCharacterController.Instance.GetAllEnemiesOfCharacter(character));
+                characters.AddRange(HexCharacterController.Instance.GetAllAlliesOfCharacter(character));
+                foreach (HexCharacterModel entity in characters)
                 {
-                    if (HexCharacterController.Instance.IsCharacterEngagedInMelee(ally))
+                    if (HexCharacterController.Instance.IsCharacterEngagedOrEngagingInMelee(entity))
                     {
                         bRet = true;
+                        Debug.LogWarning("MeleeHasStarted returning = " + bRet.ToString());
                         break;
                     }
                 }
+
+                Debug.LogWarning("MeleeHasStarted returning = " + bRet.ToString());
             }
 
             // Melee has NOT started
             else if (req.requirementType == AIActionRequirementType.MeleeHasNotStarted)
             {
-                List<HexCharacterModel> allies = HexCharacterController.Instance.GetAllAlliesOfCharacter(character);
-                foreach (HexCharacterModel ally in allies)
-                {
-                    if (HexCharacterController.Instance.IsCharacterEngagedInMelee(ally))
+                List<HexCharacterModel> characters = new List<HexCharacterModel>();
+                characters.AddRange(HexCharacterController.Instance.GetAllEnemiesOfCharacter(character));
+                characters.AddRange(HexCharacterController.Instance.GetAllAlliesOfCharacter(character));
+                foreach (HexCharacterModel entity in characters) 
+                { 
+                    if (HexCharacterController.Instance.IsCharacterEngagedOrEngagingInMelee(entity))
                     {
                         bRet = false;
+                        Debug.LogWarning("MeleeHasNotStarted returning = " + bRet.ToString());
                         break;
                     }
                 }
+                bRet = true;
+                Debug.LogWarning("MeleeHasNotStarted returning = " + bRet.ToString());
             }
 
             // Target is elevated

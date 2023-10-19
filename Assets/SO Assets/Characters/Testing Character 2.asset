@@ -25,7 +25,7 @@ MonoBehaviour:
     apRecovery: 200
     auraSize: 1
     constitution:
-      value: 1000
+      value: 200
       stars: 0
     criticalChance: 5
     criticalModifier: 50
@@ -40,7 +40,7 @@ MonoBehaviour:
     magicResistance: 0
     maxHealth: 0
     might:
-      value: 200
+      value: 0
       stars: 0
     physicalDamageBonus: 0
     physicalResistance: 0
@@ -53,14 +53,9 @@ MonoBehaviour:
       value: 5
       stars: 0
   abilityBook:
-    activeAbilities:
-    - {fileID: 11400000, guid: 05296a3be57f6b546beb21fc1b565e5a, type: 2}
-    - {fileID: 11400000, guid: 9d93f96f71001714b9c3d86f9a76e708, type: 2}
+    activeAbilities: []
   serializedPassiveManager:
-    perks:
-    - perkTag: 18
-      stacks: 1
-      freshInjury: 0
+    perks: []
   modelParts:
   - Undead_Chest_1
   - Undead_Head_1
@@ -68,7 +63,7 @@ MonoBehaviour:
   - Undead_Right_Hand_1
   - Undead_Right_Leg_1
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: ab6f2b51cf50eaa43bba82ed52ef5342, type: 2}
+    mainHandItem: {fileID: 11400000, guid: eb90f828c8b2d7349b3e2ab18a132000, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}

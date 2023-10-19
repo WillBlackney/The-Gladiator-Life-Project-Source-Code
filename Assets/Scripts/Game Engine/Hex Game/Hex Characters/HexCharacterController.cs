@@ -1630,12 +1630,13 @@ namespace WeAreGladiators.Characters
             float pauseBeforeOffGround = 22f * frameToMilliseconds;
             float landDuration = 30f * frameToMilliseconds;
 
+            // Trigger jump SFX
+            AudioManager.Instance.PlaySound(Sound.Ability_Jump_Start);
+
             // Start attack animation
             view.ucmAnimator.SetTrigger(animationString);
             yield return new WaitForSeconds(pauseBeforeOffGround);
 
-            // Trigger jump SFX
-            //AudioManager.Instance.PlaySound();
 
             float x = destination.x;
             float endY = destination.y;
@@ -1665,6 +1666,8 @@ namespace WeAreGladiators.Characters
 
             view.CurrentAnimation = "JUMP_LAND";
             view.ucmAnimator.SetTrigger("JUMP_LAND");
+            AudioManager.Instance.PlaySound(Sound.Ability_Oomph_Impact);
+            AudioManager.Instance.PlaySound(Sound.Ability_Jump_Land);
             yield return new WaitForSeconds(dynamicSpeed * 0.15f);
 
             if (cData != null)
@@ -1673,8 +1676,6 @@ namespace WeAreGladiators.Characters
             }
 
             yield return new WaitForSeconds(landDuration - (dynamicSpeed * 0.15f));
-
-            // TO DO: landing SFX          
 
         }
         public void PlayChargeAnimation(HexCharacterView view)
@@ -3054,7 +3055,7 @@ namespace WeAreGladiators.Characters
 
             return bRet;
         }
-        public bool IsCharacterEngagedInMelee(HexCharacterModel character, int engagingEnemies = 1)
+        public bool IsCharacterEngagedOrEngagingInMelee(HexCharacterModel character, int engagingEnemies = 1)
         {
             bool bRet = false;
             int engagedEnemies = 0;
@@ -3064,8 +3065,8 @@ namespace WeAreGladiators.Characters
             {
                 if (h.myCharacter != null &&
                     h.myCharacter.allegiance != character.allegiance &&
-                    (h.myCharacter.itemSet.mainHandItem == null || h.myCharacter.itemSet.mainHandItem != null && h.myCharacter.itemSet.mainHandItem.IsMeleeWeapon) &&
-                    IsCharacterAbleToTakeActions(h.myCharacter))
+                    ((h.myCharacter.itemSet.mainHandItem != null && h.myCharacter.itemSet.mainHandItem.IsMeleeWeapon && IsCharacterAbleToTakeActions(h.myCharacter)) ||
+                    (character.itemSet.mainHandItem != null && character.itemSet.mainHandItem.IsMeleeWeapon && IsCharacterAbleToTakeActions(character))))
                 {
                     engagedEnemies += 1;
                 }
@@ -3082,6 +3083,7 @@ namespace WeAreGladiators.Characters
             {
                 bRet = false;
             }
+            Debug.LogWarning("IsCharacterEngagedInMelee returning = " + bRet.ToString() + " for character " + character.myName);
             return bRet;
         }
         public bool IsCharacterTeleportable(HexCharacterModel character)

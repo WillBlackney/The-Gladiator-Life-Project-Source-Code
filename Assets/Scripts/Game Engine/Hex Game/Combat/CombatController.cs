@@ -1177,12 +1177,12 @@ namespace WeAreGladiators.Combat
                 !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.MeticulousAim) &&
                 ability.accuracyPenaltyFromMelee)
             {
-                if (HexCharacterController.Instance.IsCharacterEngagedInMelee(attacker))
+                if (HexCharacterController.Instance.IsCharacterEngagedOrEngagingInMelee(attacker))
                 {
                     ret.details.Add(new HitChanceDetailData("Shooting from melee", -10));
                 }
 
-                if (HexCharacterController.Instance.IsCharacterEngagedInMelee(target))
+                if (HexCharacterController.Instance.IsCharacterEngagedOrEngagingInMelee(target))
                 {
                     ret.details.Add(new HitChanceDetailData("Shooting into melee", -10));
                 }

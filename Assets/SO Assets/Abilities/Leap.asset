@@ -16,9 +16,9 @@ MonoBehaviour:
   displayedName: Leap
   includeInGame: 1
   baseAbilityDescription: Teleport to a tile within 3.
-  abilitySprite: {fileID: 21300000, guid: 8b9830c5d33785847b882148594ca2de, type: 3}
-  energyCost: 0
-  baseCooldown: 0
+  abilitySprite: {fileID: 21300000, guid: 4b17d062f1aa62d48971d866476a93cd, type: 3}
+  energyCost: 4
+  baseCooldown: 2
   abilityType: 01000000
   doesNotBreakStealth: 0
   guidanceInstruction: 7
