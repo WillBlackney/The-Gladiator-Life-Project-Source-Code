@@ -1740,6 +1740,16 @@ namespace WeAreGladiators.Characters
             view.CurrentAnimation = AnimationEventController.GENERIC_SKILL_1;
             AudioManager.Instance.StopSound(Sound.Character_Footsteps);
         }
+        public void PlayTurnStartAnimation(HexCharacterView view)
+        {
+            if (view == null)
+            {
+                return;
+            }
+            view.ucmAnimator.SetTrigger(AnimationEventController.TURN_START_1);
+            view.CurrentAnimation = AnimationEventController.TURN_START_1;
+            AudioManager.Instance.StopSound(Sound.Character_Footsteps);
+        }
         public void PlayRaiseShieldAnimation(HexCharacterView view)
         {
             if (view == null)
@@ -1901,13 +1911,14 @@ namespace WeAreGladiators.Characters
             if (IsCharacterAbleToTakeActions(character))
             {
                 VisualEventManager.CreateVisualEvent(() =>
-                    AudioManager.Instance.PlaySound(character.AudioProfile, AudioSet.TurnStart)).SetEndDelay(0.25f);
-
-                if(character.controller == Controller.Player)
                 {
-                    // Build combat GUI
-                    VisualEventManager.CreateVisualEvent(() => CombatUIController.Instance.BuildAndShowViewsOnTurnStart(character));
-                }                
+                    if (character.controller == Controller.Player)
+                    {
+                        CombatUIController.Instance.BuildAndShowViewsOnTurnStart(character);
+                    }
+                    AudioManager.Instance.PlaySound(character.AudioProfile, AudioSet.TurnStart);
+                    PlayTurnStartAnimation(view);
+                }).SetEndDelay(0.8f);                
             }
 
             if (!character.hasRequestedTurnDelay)

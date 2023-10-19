@@ -61,7 +61,8 @@ MonoBehaviour:
   upperHealthLimit: 60
   behaviour: {fileID: 11400000, guid: 77d34f821a2e7fd40b1b283022ce1213, type: 2}
   abilityBook:
-    activeAbilities: []
+    activeAbilities:
+    - {fileID: 11400000, guid: 54c98d698a2d4054aac0406f0d58abbc, type: 2}
   serializedPassiveManager:
     perks: []
   randomizeItemSet: 1

@@ -85,6 +85,7 @@ namespace WeAreGladiators.VisualEvents
         public const string LEFT_HAND_SHOOT_MAGIC = "LEFT_HAND_SHOOT_MAGIC";
         public const string TWO_HAND_SHOOT_MAGIC = "TWO_HAND_SHOOT_MAGIC";
         public const string GENERIC_SKILL_1 = "GENERIC_SKILL_1";
+        public const string TURN_START_1 = "TURN_START_1";
         public const string TACKLE = "TACKLE";
         public const string TACKLE_END = "TACKLE_END";
         public const string RELOAD_CROSSBOW = "RELOAD_CROSSBOW";

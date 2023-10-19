@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Weapon_Crossbow_Reload
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 3b3dd6d3271321c4caeb9746a777de71, type: 3}
+  bus: 0
+  allowDuplicates: 1
   randomizeClip: 1
   audioClips:
   - {fileID: 8300000, guid: 3b3dd6d3271321c4caeb9746a777de71, type: 3}
@@ -25,8 +27,5 @@ MonoBehaviour:
   randomizePitch: 0
   randomPitchLowerLimit: 0.8
   randomPitchUpperLimit: 1.2
-  pitch: 1
+  pitch: 1.2
   loop: 0
-  source: {fileID: 0}
-  fadingIn: 0
-  fadingOut: 0

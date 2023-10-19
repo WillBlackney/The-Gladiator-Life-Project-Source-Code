@@ -15,10 +15,9 @@ MonoBehaviour:
   abilityName: Smash Shield (Axe 1h)
   displayedName: Smash Shield
   includeInGame: 1
-  baseAbilityDescription: Apply 1 Smashed Shield to an enemy
+  baseAbilityDescription: Apply 1 Smashed Shield to an enemy and lower their Morale.
   abilitySprite: {fileID: 21300000, guid: 0b595433b76944d44825199645b3c3cb, type: 3}
   energyCost: 4
-  fatigueCost: 20
   baseCooldown: 1
   abilityType: 01000000
   doesNotBreakStealth: 0
@@ -54,13 +53,19 @@ MonoBehaviour:
   hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
-  - effectType: 10
+  - aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    knockBackDistance: 0
+    effectType: 10
     stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       successChance: 0
     energyGained: 0
-    normalTeleportVFX: 1
+    teleportVFX: 0
     tilesMoved: 0
     lineLength: 0
     healthGained: 0
@@ -100,12 +105,22 @@ MonoBehaviour:
       projectileStartPosition: 0
       onCharacter: 0
     visualEventsOnHit: []
-    visualEventsOnEffectFinish: []
-    aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
+    visualEventsOnEffectFinish:
+    - eventType: 6
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0.5
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
     damageType: 1
     minBaseDamage: 18
     maxBaseDamage: 22
@@ -127,7 +142,50 @@ MonoBehaviour:
       perkTag: 210
       passiveStacks: 1
     perkApplicationChance: 100
+  - aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
     knockBackDistance: 0
+    effectType: 9
+    stressEventData:
+      moraleChangeMin: -1
+      moraleChangeMax: -1
+      successChance: 75
+    energyGained: 0
+    teleportVFX: 0
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish: []
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    bonusCritDamage: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
+    weaponUsed: 2
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 0
+      passiveStacks: 1
+    perkApplicationChance: 100
   onHitEffects: []
   onCritEffects: []
   onPerkAppliedSuccessEffects: []
@@ -150,7 +208,17 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: to an enemy.
+    phrase: 'to an enemy and reduce their '
+  - color: 3
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Morale
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: .
   keyWords:
   - kewWordType: 1
     passiveType: 210
+  - kewWordType: 32
+    passiveType: 0
