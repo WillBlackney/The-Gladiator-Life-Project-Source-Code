@@ -798,7 +798,8 @@
         ReloadCrossbow = 15,
         ThrowNetOffhand = 16,
         Bite = 17,
-        Stomp = 18
+        Stomp = 18,
+        ThrowJavelin = 19,
     }
     public enum ParticleEffect
     {

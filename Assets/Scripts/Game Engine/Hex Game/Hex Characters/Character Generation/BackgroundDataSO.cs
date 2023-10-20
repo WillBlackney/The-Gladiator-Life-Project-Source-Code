@@ -287,6 +287,7 @@ namespace WeAreGladiators.Characters
         Doctor = 9,
         Labourer = 10,
         RetiredWarrior = 12,
+        TournamentKnight = 13,
         Mercenary = 14,
         Assassin = 15,
         Poacher = 16,

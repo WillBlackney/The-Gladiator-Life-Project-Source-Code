@@ -1168,6 +1168,43 @@ namespace WeAreGladiators.Characters
 
         }
 
+        public void TriggerThrowJavelinAnimation(HexCharacterView view, TaskTracker tracker)
+        {
+            StartCoroutine(TriggerThrowJavelinAnimationCoroutine(view, tracker));
+        }
+        private IEnumerator TriggerThrowJavelinAnimationCoroutine(HexCharacterView view, TaskTracker tracker)
+        {
+            HexCharacterModel model = view.character;
+            if (model == null)
+            {
+                if (tracker != null)
+                {
+                    tracker.MarkAsCompleted();
+                }
+                yield break;
+            }
+
+            string animationString = "MAIN_HAND_THROW_JAVELIN";
+
+            // 60 sample rate
+            float frameToMilliseconds = 0.016667f;
+            float timeTillThrowStartPoint = 23 * frameToMilliseconds;
+            view.CurrentAnimation = animationString;
+
+            // Start attack animation
+            view.ucmAnimator.SetTrigger(animationString);
+            yield return new WaitForSeconds(timeTillThrowStartPoint);
+
+            // Trigger SFX weapon swing
+            AudioManager.Instance.PlaySound(Sound.Ability_Swish);
+
+            // Pause at impact point
+            if (tracker != null)
+            {
+                tracker.MarkAsCompleted();
+            }
+        }
+
         public void TriggerBiteAttackAnimation(HexCharacterView view, Vector2 targetPos, TaskTracker tracker)
         {
             StartCoroutine(TriggerBiteAttackAnimationCoroutine(view, targetPos, tracker));

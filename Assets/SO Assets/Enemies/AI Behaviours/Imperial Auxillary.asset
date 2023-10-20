@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e977228e81fbff4cb36aab28582ba06, type: 3}
+  m_Name: Imperial Auxillary
+  m_EditorClassIdentifier: 
+  directives:
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Throw Pila
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 8
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 3
+      targettingPriority: 01000000
+      movementType: 0
+      getRangeFromAbility: 1
+      range: 2
+      abilityName: Throw Pila
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 8
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 02000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Riposte
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 2
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 2
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Slash
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 4
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Thrust
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 4
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 02000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Raise Shield
+      teleportAbilityName: 
+    requirements: []
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Slash
+      teleportAbilityName: 
+    requirements: []
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Thrust
+      teleportAbilityName: 
+    requirements: []
+  - action:
+      actionType: 7
+      targettingPriority: 
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 3
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 8
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 41
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 1

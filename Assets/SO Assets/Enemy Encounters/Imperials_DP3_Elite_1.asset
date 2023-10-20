@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8ad5d7c5edf914b8061f29d31b419f, type: 3}
   m_Name: Imperials_DP3_Elite_1
   m_EditorClassIdentifier: 
-  baseXpReward: 150
   deploymentLimit: 3
   difficulty: 1
   enemyGroups:
@@ -21,6 +20,7 @@ MonoBehaviour:
     spawnPosition: {x: 2, y: 0}
   - possibleEnemies:
     - {fileID: 11400000, guid: dbe2fd0090b88944889c1320d013f00d, type: 2}
+    - {fileID: 11400000, guid: e4c6979ede8f989418e8e99c4a7a6ed2, type: 2}
     spawnPosition: {x: 2, y: -1}
   - possibleEnemies:
     - {fileID: 11400000, guid: 7532af1fcfea8b14fb36c206ca3a55ac, type: 2}

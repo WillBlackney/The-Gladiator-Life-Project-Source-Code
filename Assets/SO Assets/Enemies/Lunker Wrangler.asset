@@ -64,10 +64,7 @@ MonoBehaviour:
     activeAbilities:
     - {fileID: 11400000, guid: 28516306129d6d04fa8cb72fe2ade695, type: 2}
   serializedPassiveManager:
-    perks:
-    - perkTag: 124
-      stacks: 1
-      freshInjury: 0
+    perks: []
   randomizeItemSet: 1
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}

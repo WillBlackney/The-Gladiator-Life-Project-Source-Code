@@ -37,7 +37,7 @@ MonoBehaviour:
     dodge:
       value: 10
       stars: 0
-    initiative: 15
+    initiative: 10
     injuryResistance: 0
     magicDamageBonus: 0
     magicResistance: 0
@@ -79,17 +79,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 06cb8fd7ea8f3804caa9f91b98906478, type: 2}
     - {fileID: 11400000, guid: ff35482cc265db443a859f8d0ab917f5, type: 2}
   recruitWeaponLoadouts:
-  - mainHandProspects:
-    - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
-    - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
-    - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
-    - {fileID: 11400000, guid: e724601a8b1fda642824cbf7fc3faea9, type: 2}
-    - {fileID: 11400000, guid: dc6b3fc110b08af419ef25d556632aad, type: 2}
-    - {fileID: 11400000, guid: 51e31aac9500e9648bfe3740136d9331, type: 2}
-    - {fileID: 11400000, guid: fdbba9a1a3fd6bb47b54983b749ceac0, type: 2}
-    - {fileID: 11400000, guid: 104f3ca6cbc20e9448ffedc364cf9f63, type: 2}
-    offhandProspects:
-    - {fileID: 11400000, guid: 75767cfe858462342ba51e06076cf58c, type: 2}
   - mainHandProspects:
     - {fileID: 11400000, guid: 112fa67cd3343dc4f9e3ce2c9f31ad8c, type: 2}
     - {fileID: 11400000, guid: 4bcfa30ac0a47b945b2c2af6d1eeab42, type: 2}

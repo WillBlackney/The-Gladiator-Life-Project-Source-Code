@@ -331,6 +331,43 @@ namespace WeAreGladiators.VisualEvents
                 VisualEventManager.CreateVisualEvent(() => VisualEffectManager.Instance.ShootProjectileAtLocation
                     (vEvent.projectileFired, projectileStartPos, targetPos, cData), stackEvent).SetCoroutineData(cData);
             }
+
+            // Throw javelin
+            else if (vEvent.characterAnimation == CharacterAnimation.ThrowJavelin)
+            {
+                // Play character shoot anim
+                TaskTracker animCdata = new TaskTracker();
+                VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.TriggerThrowJavelinAnimation(user.hexCharacterView, animCdata), stackEvent).SetCoroutineData(animCdata);
+
+                // Destination is a character or hex tile target?
+                Vector3 targetPos = new Vector3(0, 0, 0);
+                Vector3 projectileStartPos = new Vector3(0, 0, 0);
+                if (targetTile != null)
+                {
+                    targetPos = targetTile.WorldPosition;
+                }
+                else
+                {
+                    targetPos = targetCharacter.hexCharacterView.WorldPosition;
+                }
+
+                projectileStartPos = user.hexCharacterView.WorldPosition;
+
+                // Create projectile
+                TaskTracker cData2 = new TaskTracker();
+                VisualEventManager.CreateVisualEvent(() =>
+                {
+                    if (user != null &&
+                        user.hexCharacterView != null)
+                    {
+                        projectileStartPos = user.hexCharacterView.WorldPosition;
+                    }
+
+                    ProjectileFired dynamicProjectile = ProjectileFired.Javelin;
+
+                    VisualEffectManager.Instance.ShootProjectileAtLocation(dynamicProjectile, projectileStartPos, targetPos, cData2);
+                }, stackEvent).SetCoroutineData(cData2);
+            }
         }
         private void ResolveParticleEffect(AnimationEventData vEvent, HexCharacterModel user, HexCharacterModel characterTarget = null, LevelNode tileTarget = null, VisualEvent stackEvent = null)
         {

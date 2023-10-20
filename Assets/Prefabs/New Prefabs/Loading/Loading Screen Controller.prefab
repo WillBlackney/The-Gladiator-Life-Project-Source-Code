@@ -993,6 +993,32 @@ MonoBehaviour:
       abilityEffectType: 0
       phrase: You can rename your characters by clicking their name in the character
         roster page.
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'You can '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '[Right-Click] '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: on enemies in combat to view more information about them.
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Enemies killed in combat have a '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '25% '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: chance to drop their items as loot.
 --- !u!1 &5335863795943007318
 GameObject:
   m_ObjectHideFlags: 0

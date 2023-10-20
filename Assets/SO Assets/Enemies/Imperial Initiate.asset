@@ -75,18 +75,14 @@ MonoBehaviour:
   - headProspects:
     - {fileID: 11400000, guid: 1a1a6451514e39a4a9bb3258a55d41c7, type: 2}
     bodyProspects:
-    - {fileID: 11400000, guid: 9c82d8fa69ec50443a7f388f71928851, type: 2}
     - {fileID: 11400000, guid: c8fa646825673a74fa6d3a61e70cda06, type: 2}
   recruitWeaponLoadouts:
   - mainHandProspects:
-    - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
-    - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
     - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
     - {fileID: 11400000, guid: e724601a8b1fda642824cbf7fc3faea9, type: 2}
     offhandProspects:
     - {fileID: 0}
     - {fileID: 11400000, guid: 67933190d00ec95478f7e153f088ddb2, type: 2}
-    - {fileID: 11400000, guid: 75767cfe858462342ba51e06076cf58c, type: 2}
   useUCM: 1
   modelParts:
   - Human_Chest_1
