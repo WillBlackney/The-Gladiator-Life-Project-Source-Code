@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Elevated_Generic
   m_EditorClassIdentifier: 
   elevationPercentage: 25
-  maximumElevations: 3
+  maximumElevations: 20
   defaultTile: {fileID: 11400000, guid: d9a12c9bbebc9ca46a208837c764a48c, type: 2}
   tilingConfigs:
   - hexData: {fileID: 11400000, guid: ef2cfea870e69bc43b2e1577533f12c8, type: 2}
