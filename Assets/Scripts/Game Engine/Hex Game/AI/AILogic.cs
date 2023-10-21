@@ -123,10 +123,12 @@ namespace WeAreGladiators.AI
                     int shortestDistance = 10000;
                     int lowestApCost = 10000;
 
+                    // Try engage on high ground
                     foreach (Path p in allPossiblePaths)
                     {
                         int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
-                        if (targetMeleeTiles.Contains(p.Destination) &&
+                        if (p.Destination.Elevation == TileElevation.Elevated &&
+                            targetMeleeTiles.Contains(p.Destination) &&
                             target.currentTile.Distance(p.Destination) <= target.currentTile.Distance(character.currentTile) &&
                             MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0 &&
                             p.Length <= shortestDistance &&
@@ -135,6 +137,45 @@ namespace WeAreGladiators.AI
                             lowestApCost = apCost;
                             shortestDistance = p.Length;
                             bestPath = p;
+                        }
+                    }
+
+                    // No high ground found, engage on non water tile
+                    if(bestPath == null)
+                    {
+                        foreach (Path p in allPossiblePaths)
+                        {
+                            int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
+                            if (p.Destination.name != "Water" && 
+                                targetMeleeTiles.Contains(p.Destination) &&
+                                target.currentTile.Distance(p.Destination) <= target.currentTile.Distance(character.currentTile) &&
+                                MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0 &&
+                                p.Length <= shortestDistance &&
+                                apCost < lowestApCost)
+                            {
+                                lowestApCost = apCost;
+                                shortestDistance = p.Length;
+                                bestPath = p;
+                            }
+                        }
+                    }
+
+                    // No good position available, engage on mud or water
+                    if (bestPath == null)
+                    {
+                        foreach (Path p in allPossiblePaths)
+                        {
+                            int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
+                            if (targetMeleeTiles.Contains(p.Destination) &&
+                                target.currentTile.Distance(p.Destination) <= target.currentTile.Distance(character.currentTile) &&
+                                MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0 &&
+                                p.Length <= shortestDistance &&
+                                apCost < lowestApCost)
+                            {
+                                lowestApCost = apCost;
+                                shortestDistance = p.Length;
+                                bestPath = p;
+                            }
                         }
                     }
 
@@ -239,10 +280,12 @@ namespace WeAreGladiators.AI
                 int cheapestApCost = 1000;
                 Path bestPath = null;
 
+                // Try get elevated destination first
                 foreach (Path p in allPossiblePaths)
                 {
                     int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
-                    if (targetShootRangeTiles.Contains(p.Destination) &&
+                    if (p.Destination.Elevation == TileElevation.Elevated &&
+                        targetShootRangeTiles.Contains(p.Destination) &&
                         p.Length <= currentClosestDistance &&
                         apCost < cheapestApCost &&
                         MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
@@ -252,6 +295,45 @@ namespace WeAreGladiators.AI
                         bestPath = p;
                     }
                 }
+
+                // Didn't find elevated tile, try find non elevated, non water
+                if(bestPath == null)
+                {
+                    foreach (Path p in allPossiblePaths)
+                    {
+                        int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
+                        if (p.Destination.name != "Water" &&
+                            targetShootRangeTiles.Contains(p.Destination) &&
+                            p.Length <= currentClosestDistance &&
+                            apCost < cheapestApCost &&
+                            MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
+                        {
+                            cheapestApCost = apCost;
+                            currentClosestDistance = p.Length;
+                            bestPath = p;
+                        }
+                    }
+                }
+
+                // Advance to any tile type
+                if (bestPath == null)
+                {
+                    foreach (Path p in allPossiblePaths)
+                    {
+                        int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
+                        if (p.Destination.name != "Water" &&
+                            targetShootRangeTiles.Contains(p.Destination) &&
+                            p.Length <= currentClosestDistance &&
+                            apCost < cheapestApCost &&
+                            MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
+                        {
+                            cheapestApCost = apCost;
+                            currentClosestDistance = p.Length;
+                            bestPath = p;
+                        }
+                    }
+                }
+
 
                 // Able to move into melee?
                 if (bestPath != null)
@@ -565,6 +647,46 @@ namespace WeAreGladiators.AI
                             bestPath = p;
                         }
                     }
+
+                    // Didn't find elevated tile, try find non elevated, non water
+                    if (bestPath == null)
+                    {
+                        foreach (Path p in allPossiblePaths)
+                        {
+                            int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
+                            if (p.Destination.name != "Water" &&
+                                targetShootRangeTiles.Contains(p.Destination) &&
+                                p.Length <= currentClosestDistance &&
+                                apCost < cheapestApCost &&
+                                MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
+                            {
+                                cheapestApCost = apCost;
+                                currentClosestDistance = p.Length;
+                                bestPath = p;
+                            }
+                        }
+                    }
+
+                    // Advance to any tile type
+                    if (bestPath == null)
+                    {
+                        foreach (Path p in allPossiblePaths)
+                        {
+                            int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
+                            if (p.Destination.name != "Water" &&
+                                targetShootRangeTiles.Contains(p.Destination) &&
+                                p.Length <= currentClosestDistance &&
+                                apCost < cheapestApCost &&
+                                MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
+                            {
+                                cheapestApCost = apCost;
+                                currentClosestDistance = p.Length;
+                                bestPath = p;
+                            }
+                        }
+                    }
+
+
 
                     //
 
