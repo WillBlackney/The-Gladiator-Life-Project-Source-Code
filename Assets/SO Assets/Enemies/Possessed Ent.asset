@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Possessed Ent
   m_EditorClassIdentifier: 
   myName: Possessed Ent
+  myDescription: An abominable amalgamation of a dead ent possesed by a demonic spirit.
+    They typically serve the Breedmarsh witch covens that reanimate them, but occasionaly
+    they break free from their necromantic shackles...
   randomizeRace: 0
   race: 10
   possibleRaces: 0a000000

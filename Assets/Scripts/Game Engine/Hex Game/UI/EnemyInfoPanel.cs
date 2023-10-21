@@ -23,6 +23,7 @@ namespace WeAreGladiators.UI
         [Space(20)]
         [Header("Left Panel Components")]
         [SerializeField] private TextMeshProUGUI characterNameText;
+        [SerializeField] private TextMeshProUGUI characterDescriptionText;
         [SerializeField] private TextMeshProUGUI totalArmourText;
         [SerializeField] private List<UIAbilityIcon> abilityIcons;
         [SerializeField] private Transform uiAbilityIconsParent;
@@ -93,6 +94,7 @@ namespace WeAreGladiators.UI
         {
             // Build all sections
             characterNameText.text = data.myName;
+            characterDescriptionText.text = data.myDescription;
             totalArmourText.text = (ItemController.Instance.GetTotalArmourBonusFromItemSet(data.itemSet) + data.baseArmour).ToString();
 
             BuildPerkViews(data);

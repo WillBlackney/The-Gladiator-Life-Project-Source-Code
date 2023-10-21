@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Lunker Youngling
   m_EditorClassIdentifier: 
   myName: Lunker Youngling
+  myDescription: Ferocious, unsatiable beasts found in the tropical climates of the
+    Imperium. They have strong legs, a powerful bite, and a reasonable level of intellegence
+    that allows them to hunt effectively in packs.
   randomizeRace: 0
   race: 10
   possibleRaces: 0a000000

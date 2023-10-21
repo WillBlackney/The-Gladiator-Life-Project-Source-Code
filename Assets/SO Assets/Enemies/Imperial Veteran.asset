@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: Imperial Veteran
   m_EditorClassIdentifier: 
   myName: Imperial Veteran
+  myDescription: Seasoned warriors of many campaigns, these troops make up the backbone
+    of Imperial armies and provide training and leadership to Imperial recruits.
+    Well trained, well armed, and motivated by the zeal of Imperial propaganda, they
+    are formiddible foes.
   randomizeRace: 1
   race: 1
   possibleRaces: 01000000

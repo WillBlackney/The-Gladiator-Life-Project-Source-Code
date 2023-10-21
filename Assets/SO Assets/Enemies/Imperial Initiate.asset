@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Imperial Initiate
   m_EditorClassIdentifier: 
   myName: Imperial Initiate
+  myDescription: 'Fresh recruits of the Imperium levied from local towns, equipped
+    with second hand armour and weapons. '
   randomizeRace: 1
   race: 1
   possibleRaces: 01000000

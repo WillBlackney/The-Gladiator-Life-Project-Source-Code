@@ -78,7 +78,7 @@ namespace WeAreGladiators.Editor
 
                 // Create the SO 
                 enemyDataSO = CreateInstance<EnemyTemplateSO>();
-                enemyDataSO.myName = "New Ability Data";
+                enemyDataSO.myName = "New Enemy Data";
             }
         }
     }

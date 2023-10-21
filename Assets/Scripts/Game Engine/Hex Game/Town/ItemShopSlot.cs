@@ -101,7 +101,8 @@ namespace WeAreGladiators.TownFeatures
             // Color cost text red if not enough gold, or green if selling at a discount
             string col = "<color=#FFFFFF>";
             
-            if (data.Item != null && data.GoldCost < data.Item.baseGoldValue)
+            if (data.Item != null && data.GoldCost < data.Item.baseGoldValue &&
+                data.GoldCost <= RunController.Instance.CurrentGold)
             {
                 col = TextLogic.lightGreen;
             }
@@ -115,7 +116,6 @@ namespace WeAreGladiators.TownFeatures
         {
             gameObject.SetActive(false);
             MyItemData = null;
-            //MyAbilityTomeData = null;
         }
        
 

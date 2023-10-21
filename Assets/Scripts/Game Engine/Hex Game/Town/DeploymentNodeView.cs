@@ -56,10 +56,7 @@ namespace WeAreGladiators.TownFeatures
                 SetUnoccupiedState();
                 TownController.Instance.UpdateCharactersDeployedText();
             }
-        }
-        public void OnLeftClick()
-        {
-            if (MyCharacterData != null &&
+            else if (MyCharacterData != null &&
                 allowedCharacter == Allegiance.Enemy &&
                 !EnemyInfoPanel.Instance.PanelIsActive &&
                 !CharacterRosterViewController.Instance.MainVisualParent.activeSelf)
@@ -77,13 +74,11 @@ namespace WeAreGladiators.TownFeatures
         }
         public void MouseEnter()
         {
-            Debug.Log("MouseEnter");
             NodeMousedOver = this;
         }
         public void MouseExit()
         {
-            Debug.Log("MouseExit");
-            NodeMousedOver = null;
+            if(NodeMousedOver == this) NodeMousedOver = null;
         }
 
         #endregion

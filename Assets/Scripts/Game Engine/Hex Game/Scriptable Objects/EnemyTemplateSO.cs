@@ -20,6 +20,11 @@ namespace WeAreGladiators.Characters
         public string myName;
         [BoxGroup("General Info")]
         [LabelWidth(100)]
+        [TextArea(5,5)]
+        [GUIColor("Yellow")]
+        public string myDescription;
+        [BoxGroup("General Info")]
+        [LabelWidth(100)]
         [GUIColor("Yellow")]
         public bool randomizeRace;
         [BoxGroup("General Info")]

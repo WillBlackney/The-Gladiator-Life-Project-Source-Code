@@ -892,7 +892,7 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: '"Your inventory size is unlimited. Your welcome." - The programmer.'
+      phrase: <i>"Your inventory size is unlimited. Your welcome."</i> - The programmer.
   - message:
     - color: 1
       getPhraseFromAbilityValue: 0
@@ -1019,6 +1019,109 @@ MonoBehaviour:
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
       phrase: chance to drop their items as loot.
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'There is never less than a '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '5% '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'chance or more than a '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 95%
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: chance to hit with an attack or apply a debuff.
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Whenever a character loses at least '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '10% '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'of their '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Health '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'from an attack or ability, there is a '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '25% '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'chance that they will suffer an '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Injury
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: .
+  - message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'When a character''s '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Health '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'reaches '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 0
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: ', there is a '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '75% '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'chance that they die, and a '
+    - color: 2
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: '25% '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'chance that they survive with a '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: Permanent Injury
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: .
 --- !u!1 &5335863795943007318
 GameObject:
   m_ObjectHideFlags: 0

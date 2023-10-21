@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Imperial Auxillary
   m_EditorClassIdentifier: 
   myName: Imperial Auxillary
+  myDescription: Light infantry that are often placed at the vanguard of Imperial
+    forces. Though they may be excellent skirmishers, they lack the armour and courage
+    to face down determined foes in melee.
   randomizeRace: 1
   race: 1
   possibleRaces: 01000000

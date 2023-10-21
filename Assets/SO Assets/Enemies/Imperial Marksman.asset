@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Imperial Marksman
   m_EditorClassIdentifier: 
   myName: Imperial Marksman
+  myDescription: 'Well trained ranged units of the Imperium, selected from pools
+    of fresh initiates that show an aptitude for marksmanship. '
   randomizeRace: 1
   race: 1
   possibleRaces: 01000000

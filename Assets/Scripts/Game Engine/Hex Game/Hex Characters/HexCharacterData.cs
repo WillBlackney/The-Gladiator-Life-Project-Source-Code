@@ -12,7 +12,6 @@ namespace WeAreGladiators.Characters
 {
     public class HexCharacterData
     {
-
         [Header("Item Properties")]
         public AbilityBook abilityBook;
         public List<AttributeRollResult> attributeRolls = new List<AttributeRollResult>();
@@ -54,6 +53,7 @@ namespace WeAreGladiators.Characters
         [Header("Story Properties")]
         public string myName;
         public string mySubName;
+        public string myDescription;
 
         [Header("Passive Properties")]
         public PerkManagerModel passiveManager;

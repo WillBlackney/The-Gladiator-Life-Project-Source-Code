@@ -252,6 +252,7 @@ namespace WeAreGladiators.Characters
 
             // Set up background + story data
             newCharacter.myName = template.myName;
+            newCharacter.myDescription = template.myDescription;
             newCharacter.audioProfile = template.audioProfile;
             newCharacter.modelSize = template.modelSize;
             newCharacter.xpReward = template.xpReward;
