@@ -142,8 +142,8 @@ namespace WeAreGladiators.Abilities
                 foreach (AbilityData d in itemSet.offHandItem.grantedAbilities)
                 {
                     if (itemSet.mainHandItem == null ||
-                        itemSet.mainHandItem != null &&
-                        itemSet.offHandItem.weaponClass != itemSet.mainHandItem.weaponClass)
+                        (itemSet.mainHandItem != null &&
+                        itemSet.offHandItem.weaponClass != itemSet.mainHandItem.weaponClass))
                     {
                         if (d.weaponAbilityType == WeaponAbilityType.Basic)
                         {
@@ -326,29 +326,6 @@ namespace WeAreGladiators.Abilities
                     activeAbilities.Add(newAbility);
                 }
             }
-
-
-
-            /*
-            foreach (AbilityData a in original.knownAbilities)
-            {
-                HandleLearnNewAbility(a);
-            }
-
-            List<AbilityData> abilitiesMovedOutOfActive = new List<AbilityData>();
-            foreach(AbilityData a in activeAbilities)
-            {
-                if (!original.HasActiveAbility(a.abilityName))
-                {
-                    abilitiesMovedOutOfActive.Add(a);
-                }
-            }
-
-            foreach(AbilityData a in abilitiesMovedOutOfActive)
-            {
-                activeAbilities.Remove(a);
-            }*/
-
         }
         public AbilityBook(SerializedAbilityBook original)
         {

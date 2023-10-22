@@ -64,8 +64,7 @@ MonoBehaviour:
   upperHealthLimit: 60
   behaviour: {fileID: 11400000, guid: b1178010d7d3c1547ac0698bbc5ffa50, type: 2}
   abilityBook:
-    activeAbilities:
-    - {fileID: 11400000, guid: 8c58d8e679286e6488caf5351d988284, type: 2}
+    activeAbilities: []
   serializedPassiveManager:
     perks:
     - perkTag: 124
@@ -87,7 +86,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
     - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
     offhandProspects:
-    - {fileID: 11400000, guid: 75767cfe858462342ba51e06076cf58c, type: 2}
+    - {fileID: 11400000, guid: 718e0c6d2d53a724c8578bef6a8d2e06, type: 2}
   useUCM: 1
   modelParts:
   - Human_Chest_1

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: 0.1
-  movementSpeed: 10
+  movementSpeed: 11
   moveAsParabola: 1
   maxParabolaY: 0.15
 --- !u!1 &403316759560591623
@@ -160,7 +160,7 @@ Transform:
   m_GameObject: {fileID: 1129745320912528202}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -0.25, y: 0.25, z: 1}
+  m_LocalScale: {x: -0.225, y: 0.225, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3581451022280501302}

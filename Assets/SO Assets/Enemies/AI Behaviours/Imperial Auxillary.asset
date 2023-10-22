@@ -19,7 +19,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
-      abilityName: Throw Pila
+      abilityName: Throw Pila (Shield)
       teleportAbilityName: 
     requirements:
     - requirementType: 8
@@ -42,7 +42,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 1
       range: 2
-      abilityName: Throw Pila
+      abilityName: Throw Pila (Shield)
       teleportAbilityName: 
     requirements:
     - requirementType: 8
