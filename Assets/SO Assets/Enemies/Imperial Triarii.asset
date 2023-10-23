@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
+  m_Name: Imperial Triarii
+  m_EditorClassIdentifier: 
+  myName: Imperial Triarii
+  myDescription: Seasoned warriors of many campaigns, these troops make up the backbone
+    of Imperial armies and provide training and leadership to Imperial recruits.
+    Well trained, well armed, and motivated by the zeal of Imperial propaganda, they
+    are formiddible foes.
+  randomizeRace: 1
+  race: 1
+  possibleRaces: 01000000
+  audioProfile: 1
+  modelSize: 0
+  xpReward: 35
+  ignoreStress: 0
+  attributeSheet:
+    accuracy:
+      value: 80
+      stars: 0
+    apMaximum: 8
+    apRecovery: 8
+    auraSize: 1
+    constitution:
+      value: 85
+      stars: 0
+    criticalChance: 5
+    criticalModifier: 50
+    deathResistance: 25
+    debuffResistance: 0
+    dodge:
+      value: 15
+      stars: 0
+    initiative: 10
+    injuryResistance: 0
+    magicDamageBonus: 0
+    magicResistance: 0
+    maxHealth: 0
+    might:
+      value: 10
+      stars: 0
+    physicalDamageBonus: 0
+    physicalResistance: 0
+    resolve:
+      value: 30
+      stars: 0
+    stressResistance: 0
+    vision: 0
+    wits:
+      value: 10
+      stars: 0
+  baseArmour: 0
+  randomizeHealth: 0
+  lowerHealthLimit: 50
+  upperHealthLimit: 60
+  behaviour: {fileID: 11400000, guid: 0e79202b5a0692a4e8c1a2e08077a9c7, type: 2}
+  abilityBook:
+    activeAbilities: []
+  serializedPassiveManager:
+    perks: []
+  randomizeItemSet: 1
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    offHandItem: {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  possibleArmourLoadouts:
+  - headProspects:
+    - {fileID: 11400000, guid: 4830f26d2cb381046b94005679617a40, type: 2}
+    bodyProspects:
+    - {fileID: 11400000, guid: 578557db4e4f2354786967e13127e106, type: 2}
+  recruitWeaponLoadouts:
+  - mainHandProspects:
+    - {fileID: 11400000, guid: 104f3ca6cbc20e9448ffedc364cf9f63, type: 2}
+    - {fileID: 11400000, guid: 51e31aac9500e9648bfe3740136d9331, type: 2}
+    - {fileID: 11400000, guid: fdbba9a1a3fd6bb47b54983b749ceac0, type: 2}
+    offhandProspects:
+    - {fileID: 11400000, guid: 75767cfe858462342ba51e06076cf58c, type: 2}
+  useUCM: 1
+  modelParts:
+  - Human_Chest_1
+  - Human_Face_8
+  - Human_Head_10
+  - Human_Right_Hand_1
+  - Human_Right_Leg_1
+  modelPrefab: {fileID: 0}

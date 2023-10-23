@@ -45,5 +45,7 @@ MonoBehaviour:
   maxInjuryDuration: 0
   perksRemovedOnThisApplication: 0c00000077000000ca000000
   perksGainedOnThisExpiry: 06000000
-  perksThatBlockThis: 060000003c00000056000000
+  perksThatBlockThis: 060000003c00000056000000e5000000
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

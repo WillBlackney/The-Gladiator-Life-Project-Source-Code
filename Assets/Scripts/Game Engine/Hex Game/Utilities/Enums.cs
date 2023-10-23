@@ -645,7 +645,8 @@
         BestialFrenzy = 233,
         AxeVulnerability = 234,
         FireVulnerability = 235,
-        InjuryImmunity = 236
+        InjuryImmunity = 236,
+        Invulnerable = 229,
     }
     public enum PerkQuality
     {

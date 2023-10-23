@@ -1699,8 +1699,17 @@ namespace WeAreGladiators.Combat
                 }, attacker.GetLastStackEventParent()).SetEndDelay(0.5f);
             }
 
+            // Check invulnerable 
+            if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Invulnerable))
+            {
+                totalHealthLost = 0;
+                damageResult.totalHealthLost = 0;
+                totalArmourLost = 0;
+                damageResult.totalArmourLost = 0;
+            }
+
             // Check for barrier
-            if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Barrier) &&
+            else if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Barrier) &&
                 totalHealthLost > 0)
             {
                 totalHealthLost = 0;
@@ -1804,7 +1813,7 @@ namespace WeAreGladiators.Combat
             }
 
             // Combat Token Expiries >>
-            if (target.livingState == LivingState.Alive)
+            if (target.livingState == LivingState.Alive && !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Invulnerable))
             {
                 // Check Block
                 if (ability != null &&

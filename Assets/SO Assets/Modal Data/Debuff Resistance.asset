@@ -28,8 +28,8 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: Each point increases a character's chance to completely resist a negative
-        effect by
+      phrase: 'Each point increases a character''s chance to completely resist a
+        negative effect by '
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
