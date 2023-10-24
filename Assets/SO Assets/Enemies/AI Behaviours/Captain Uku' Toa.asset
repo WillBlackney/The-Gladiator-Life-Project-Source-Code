@@ -14,25 +14,113 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   directives:
   - action:
-      actionType: 2
-      targettingPriority: 050000000100000006000000
-      movementType: 1
+      actionType: 1
+      targettingPriority: 02000000
+      movementType: 0
       getRangeFromAbility: 0
-      range: 1
-      abilityName: 
-      teleportAbilityName: Dark Flight
+      range: 0
+      abilityName: Booming Warcry
+      teleportAbilityName: 
     requirements:
-    - requirementType: 10
+    - requirementType: 3
+      range: 0
+      perkPairing:
+        perkTag: 230
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 26
       range: 0
       perkPairing:
         perkTag: 0
         passiveStacks: 1
       healthPercentage: 0
       enemiesInMeleeRange: 1
-      energyReq: 7
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 4
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 02000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Demon Form
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 3
+      range: 0
+      perkPairing:
+        perkTag: 230
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
       moraleReq: 0
       turnReq: 0
       alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 27
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 3
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 02000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Demon Form
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 3
+      range: 0
+      perkPairing:
+        perkTag: 230
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 12
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 3
+      alliesAlive: 1
       abilityName: 
       armourReq: 0
       opponentsUnactivated: 0
@@ -45,6 +133,20 @@ MonoBehaviour:
       abilityName: Shove
       teleportAbilityName: 
     requirements:
+    - requirementType: 4
+      range: 0
+      perkPairing:
+        perkTag: 230
+        passiveStacks: 0
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
     - requirementType: 30
       range: 0
       perkPairing:
@@ -73,6 +175,43 @@ MonoBehaviour:
       abilityName: 
       armourReq: 0
       opponentsUnactivated: 0
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 7
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 2
+      targettingPriority: 050000000100000006000000
+      movementType: 1
+      getRangeFromAbility: 0
+      range: 1
+      abilityName: 
+      teleportAbilityName: Dark Flight
+    requirements:
+    - requirementType: 4
+      range: 0
+      perkPairing:
+        perkTag: 230
+        passiveStacks: 0
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
   - action:
       actionType: 1
       targettingPriority: 050000000100000006000000
@@ -81,7 +220,21 @@ MonoBehaviour:
       range: 0
       abilityName: Slash
       teleportAbilityName: 
-    requirements: []
+    requirements:
+    - requirementType: 4
+      range: 0
+      perkPairing:
+        perkTag: 230
+        passiveStacks: 0
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
   - action:
       actionType: 2
       targettingPriority: 01000000
@@ -91,6 +244,20 @@ MonoBehaviour:
       abilityName: 
       teleportAbilityName: 
     requirements:
+    - requirementType: 4
+      range: 0
+      perkPairing:
+        perkTag: 230
+        passiveStacks: 0
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
     - requirementType: 8
       range: 0
       perkPairing:

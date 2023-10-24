@@ -647,6 +647,7 @@
         FireVulnerability = 235,
         InjuryImmunity = 236,
         Invulnerable = 229,
+        DemonForm = 230,
     }
     public enum PerkQuality
     {

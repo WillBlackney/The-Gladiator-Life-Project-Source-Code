@@ -18,7 +18,7 @@ MonoBehaviour:
   baseAbilityDescription: Reduce the Morale of all enemies by 1.
   abilitySprite: {fileID: 21300000, guid: a1e6e39b271d2ad47b0f080c2cd18f61, type: 3}
   energyCost: 6
-  baseCooldown: 0
+  baseCooldown: 1
   abilityType: 01000000
   doesNotBreakStealth: 0
   guidanceInstruction: 0

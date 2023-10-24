@@ -34,7 +34,11 @@ MonoBehaviour:
   talentRequirementData:
     talentSchool: 0
     level: 0
-  abilitySubRequirements: []
+  abilitySubRequirements:
+  - type: 10
+    healthRequired: 0
+    race: 0
+    perk: 230
   baseRange: 0
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0
@@ -229,8 +233,8 @@ MonoBehaviour:
     uiFadeInSpeed: 0
     summonedCreatureVisualEvents: []
     perkPairing:
-      perkTag: 229
-      passiveStacks: -1
+      perkTag: 230
+      passiveStacks: 1
     perkApplicationChance: 100
   onHitEffects: []
   onCritEffects: []
@@ -238,5 +242,9 @@ MonoBehaviour:
   onCollisionEffects: []
   chainLoops: 0
   chainedEffects: []
-  dynamicDescription: []
+  dynamicDescription:
+  - color: 4
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Transform into a monstrous demon.
   keyWords: []

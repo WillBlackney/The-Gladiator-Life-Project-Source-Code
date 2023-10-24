@@ -34,7 +34,7 @@ MonoBehaviour:
   - kewWordType: 1
     passiveType: 3
   maxAllowedStacks: 1
-  showStackCount: 1
+  showStackCount: 0
   hiddenOnPassivePanel: 0
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0

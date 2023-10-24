@@ -63,7 +63,7 @@ MonoBehaviour:
   randomizeHealth: 0
   lowerHealthLimit: 50
   upperHealthLimit: 60
-  behaviour: {fileID: 11400000, guid: 0e79202b5a0692a4e8c1a2e08077a9c7, type: 2}
+  behaviour: {fileID: 11400000, guid: 7b0c9dea650b30141b474ccac6f490d8, type: 2}
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: cc3f94c232c250241858c3e30d4797cf, type: 2}
@@ -71,9 +71,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: be2036d169be1724595a6388d6554113, type: 2}
   serializedPassiveManager:
     perks:
-    - perkTag: 204
-      stacks: 1
-      freshInjury: 0
     - perkTag: 237
       stacks: 1
       freshInjury: 0
