@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using WeAreGladiators.Audio;
 
@@ -16,6 +17,11 @@ namespace WeAreGladiators.VisualEvents
         [VerticalGroup("General Properties")]
         [LabelWidth(250)]
         public AnimationEventType eventType;
+
+        [VerticalGroup("General Properties")]
+        [LabelWidth(250)]
+        [ShowIf("ShowUcmParts")]
+        public List<string> newUcmParts;
 
         [VerticalGroup("General Properties")]
         [LabelWidth(250)]
@@ -87,6 +93,10 @@ namespace WeAreGladiators.VisualEvents
         [ShowIf("ShowOnCharacter")]
         public CreateOnCharacter onCharacter;
 
+        public bool ShowUcmParts()
+        {
+            return eventType == AnimationEventType.ChangeUcmParts;
+        }
         public bool ShowSoundEffect()
         {
             return eventType == AnimationEventType.SoundEffect;

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
   m_Name: Captain Uku' Toa
   m_EditorClassIdentifier: 
-  myName: Imperial Veteran
-  myDescription: Seasoned warriors of many campaigns, these troops make up the backbone
-    of Imperial armies and provide training and leadership to Imperial recruits.
-    Well trained, well armed, and motivated by the zeal of Imperial propaganda, they
-    are formiddible foes.
+  myName: Captain Uku' Toa
+  myDescription: A Breedmarsh native and local, Uku' Toa betrayed his clan for a
+    ticket to the upper echelons of the imperial order. His reputation as a ruthlessly
+    ambitious sadist gives weight to the recent rumours that he has conspired with
+    demons to further his own craven ambitions.
   randomizeRace: 0
   race: 2
   possibleRaces: 01000000
@@ -66,6 +66,8 @@ MonoBehaviour:
   behaviour: {fileID: 11400000, guid: 0e79202b5a0692a4e8c1a2e08077a9c7, type: 2}
   abilityBook:
     activeAbilities:
+    - {fileID: 11400000, guid: cc3f94c232c250241858c3e30d4797cf, type: 2}
+    - {fileID: 11400000, guid: b98c818b65737e34bb38a519db264ed5, type: 2}
     - {fileID: 11400000, guid: be2036d169be1724595a6388d6554113, type: 2}
   serializedPassiveManager:
     perks:

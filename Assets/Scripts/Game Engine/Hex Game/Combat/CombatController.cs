@@ -896,14 +896,16 @@ namespace WeAreGladiators.Combat
             }
 
         }
-        public void CreateMoraleCheck(HexCharacterModel character, StressEventData data, bool showVFX, bool allowRecursiveChecks = true, bool allowShatteredRally = false)
+        public bool CreateMoraleCheck(HexCharacterModel character, StressEventData data, bool showVFX, bool allowRecursiveChecks = true, bool allowShatteredRally = false)
         {
             Debug.Log("CombatController.CreateMoraleCheck() called, character = " + character.myName);
+
+            bool success = false;
 
             // Non player characters dont use the stress mechanic
             if (character.characterData.ignoreStress || PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Fearless))
             {
-                return;
+                return false;
             }
 
             // Generate a roll
@@ -945,7 +947,10 @@ namespace WeAreGladiators.Combat
                 Debug.Log("Character rolled below the required roll threshold, applying effects of stress event...");
                 int finalStateChangeAmount = RandomGenerator.NumberBetween(data.moraleChangeMin, data.moraleChangeMax);
                 HexCharacterController.Instance.ModifyMoraleState(character, finalStateChangeAmount, true, true, allowRecursiveChecks);
+                success = true;
             }
+
+            return success;
         }
         public int GetStatMultiplierFromStressState(MoraleState stressState, HexCharacterModel character)
         {

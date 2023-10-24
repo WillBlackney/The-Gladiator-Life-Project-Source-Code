@@ -15,7 +15,8 @@ MonoBehaviour:
   abilityName: Intimidating Shout
   displayedName: Intimidating Shout
   includeInGame: 1
-  baseAbilityDescription: Apply 2 Vulnerable to all enemies within your Aura.
+  baseAbilityDescription: Apply 2 Vulnerable to all enemies within your Aura and
+    reduce their Morale.
   abilitySprite: {fileID: 21300000, guid: a1e6e39b271d2ad47b0f080c2cd18f61, type: 3}
   energyCost: 3
   baseCooldown: 2
@@ -53,7 +54,7 @@ MonoBehaviour:
       moraleChangeMax: 0
       successChance: 0
     energyGained: 0
-    normalTeleportVFX: 1
+    teleportVFX: 0
     tilesMoved: 0
     lineLength: 0
     healthGained: 0
@@ -63,6 +64,7 @@ MonoBehaviour:
     triggersChainEffectSequence: 0
     visualEventsOnStart:
     - eventType: 2
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -78,6 +80,7 @@ MonoBehaviour:
       projectileStartPosition: 0
       onCharacter: 0
     - eventType: 5
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -86,7 +89,7 @@ MonoBehaviour:
       particleEffect: 0
       cameraShake: 0
       movementAnimation: 0
-      soundEffect: 138
+      soundEffect: 56
       characterAnimation: 0
       delayDuration: 0
       projectileFired: 0
@@ -94,6 +97,7 @@ MonoBehaviour:
       onCharacter: 0
     visualEventsOnHit:
     - eventType: 3
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -142,7 +146,7 @@ MonoBehaviour:
       moraleChangeMax: -1
       successChance: 75
     energyGained: 0
-    normalTeleportVFX: 1
+    teleportVFX: 0
     tilesMoved: 0
     lineLength: 0
     healthGained: 0
@@ -152,6 +156,7 @@ MonoBehaviour:
     triggersChainEffectSequence: 0
     visualEventsOnStart:
     - eventType: 6
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0

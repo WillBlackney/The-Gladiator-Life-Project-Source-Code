@@ -19,7 +19,7 @@ MonoBehaviour:
   abilitySprite: {fileID: 21300000, guid: 1e344fd69420afd46b6dc9a8bc4236a2, type: 3}
   energyCost: 0
   baseCooldown: 0
-  abilityType: 
+  abilityType: 05000000
   doesNotBreakStealth: 0
   guidanceInstruction: 0
   guidanceInstructionTwo: 0
@@ -40,7 +40,198 @@ MonoBehaviour:
   hitChanceModifier: 0
   hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
-  abilityEffects: []
+  abilityEffects:
+  - aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    knockBackDistance: 0
+    effectType: 1
+    stressEventData:
+      moraleChangeMin: 0
+      moraleChangeMax: 0
+      successChance: 0
+    energyGained: 0
+    teleportVFX: 0
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart:
+    - eventType: 5
+      newUcmParts: []
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 20
+      characterAnimation: 0
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    - eventType: 5
+      newUcmParts: []
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 138
+      characterAnimation: 0
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    - eventType: 7
+      newUcmParts: []
+      screenOverlayType: 1
+      overlayColor: 1
+      overlayFadeInTime: 1
+      overlayDuration: 1
+      overlayFadeOutTime: 1
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    - eventType: 6
+      newUcmParts: []
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 1
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    - eventType: 3
+      newUcmParts: []
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 20
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 1
+    - eventType: 3
+      newUcmParts: []
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 4
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 1
+    - eventType: 9
+      newUcmParts:
+      - Demon_Head_1
+      - Demon_Face_2
+      - Demon_Chest_1
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    - eventType: 2
+      newUcmParts: []
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 4
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    - eventType: 6
+      newUcmParts: []
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 1
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish: []
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    bonusCritDamage: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
+    weaponUsed: 2
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 229
+      passiveStacks: -1
+    perkApplicationChance: 100
   onHitEffects: []
   onCritEffects: []
   onPerkAppliedSuccessEffects: []

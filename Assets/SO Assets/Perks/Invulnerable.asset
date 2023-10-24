@@ -30,9 +30,11 @@ MonoBehaviour:
     phrase: .
   passiveItalicDescription: 
   effectDetailTabs: []
-  keyWords: []
+  keyWords:
+  - kewWordType: 1
+    passiveType: 3
   maxAllowedStacks: 1
-  showStackCount: 0
+  showStackCount: 1
   hiddenOnPassivePanel: 0
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0

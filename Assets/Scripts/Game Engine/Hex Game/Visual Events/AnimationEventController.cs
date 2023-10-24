@@ -4,6 +4,7 @@ using WeAreGladiators.CameraSystems;
 using WeAreGladiators.Characters;
 using WeAreGladiators.HexTiles;
 using WeAreGladiators.Items;
+using WeAreGladiators.UCM;
 using WeAreGladiators.Utilities;
 
 namespace WeAreGladiators.VisualEvents
@@ -34,6 +35,20 @@ namespace WeAreGladiators.VisualEvents
             else if (vEvent.eventType == AnimationEventType.ParticleEffect)
             {
                 ResolveParticleEffect(vEvent, user, targetCharacter, targetTile, stackEvent);
+            }
+
+            else if (vEvent.eventType == AnimationEventType.ChangeUcmParts)
+            {
+                UniversalCharacterModel worldModel = user.hexCharacterView.model.GetComponent<UniversalCharacterModel>();
+                UniversalCharacterModel turnWindowModel = user.hexCharacterView.myActivationWindow.myUCM;
+
+                VisualEventManager.CreateVisualEvent(() =>
+                {
+                    CharacterModeller.BuildModelFromStringReferences(worldModel, vEvent.newUcmParts);
+                    CharacterModeller.BuildModelFromStringReferences(turnWindowModel, vEvent.newUcmParts);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(user.characterData.itemSet, worldModel);
+                    CharacterModeller.ApplyItemSetToCharacterModelView(user.characterData.itemSet, turnWindowModel);
+                }, stackEvent);
             }
 
             else if (vEvent.eventType == AnimationEventType.SoundEffect)

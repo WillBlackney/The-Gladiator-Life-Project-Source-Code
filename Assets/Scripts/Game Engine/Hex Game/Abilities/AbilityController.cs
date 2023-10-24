@@ -1052,7 +1052,24 @@ namespace WeAreGladiators.Abilities
                 foreach (HexCharacterModel character in charactersEffected)
                 {
                     VisualEventManager.CreateStackParentVisualEvent(character);
-                    CombatController.Instance.CreateMoraleCheck(character, abilityEffect.stressEventData, true, false, true);
+                    bool hit = CombatController.Instance.CreateMoraleCheck(character, abilityEffect.stressEventData, true, false, true);
+                    if(hit) charactersHit.Add(character);
+                }
+
+                // On morale change succesful events + effects
+                foreach (HexCharacterModel character in charactersHit)
+                {
+                    if (CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive &&
+                        caster.livingState == LivingState.Alive)
+                    {
+                        if (character != null && character.livingState == LivingState.Alive)
+                        {
+                            foreach (AnimationEventData vEvent in abilityEffect.visualEventsOnHit)
+                            {
+                                AnimationEventController.Instance.PlayAnimationEvent(vEvent, caster, character, null, weaponUsed, character.GetLastStackEventParent());
+                            }
+                        }
+                    }
                 }
             }
 

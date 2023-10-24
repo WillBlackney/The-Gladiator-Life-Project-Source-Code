@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Ability_Enrage_Short
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: d941b082616edba4a859eed3319915bf, type: 3}
+  bus: 0
+  allowDuplicates: 1
   randomizeClip: 0
   audioClips: []
   soundType: 56
@@ -20,12 +22,9 @@ MonoBehaviour:
   randomizeVolume: 0
   randomVolumeLowerLimit: 0.3
   randomVolumeUpperLimit: 0.5
-  volume: 0.25
-  randomizePitch: 1
+  volume: 0.35
+  randomizePitch: 0
   randomPitchLowerLimit: 0.9
   randomPitchUpperLimit: 1.1
   pitch: 1
   loop: 0
-  source: {fileID: 0}
-  fadingIn: 0
-  fadingOut: 0

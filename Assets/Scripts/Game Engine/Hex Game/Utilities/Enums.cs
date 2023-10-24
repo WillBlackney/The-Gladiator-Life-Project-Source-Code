@@ -758,7 +758,8 @@
         SoundEffect = 5,
         ScreenOverlay = 7,
         Delay = 6,
-        WeaponHitSound = 8
+        WeaponHitSound = 8,
+        ChangeUcmParts = 9,
 
     }
     public enum ScreenOverlayType

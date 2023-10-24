@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e977228e81fbff4cb36aab28582ba06, type: 3}
+  m_Name: Captain Uku' Toa
+  m_EditorClassIdentifier: 
+  directives:
+  - action:
+      actionType: 2
+      targettingPriority: 050000000100000006000000
+      movementType: 1
+      getRangeFromAbility: 0
+      range: 1
+      abilityName: 
+      teleportAbilityName: Dark Flight
+    requirements:
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 7
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Shove
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 30
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 20
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: Slash
+      teleportAbilityName: 
+    requirements: []
+  - action:
+      actionType: 2
+      targettingPriority: 01000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 8
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
