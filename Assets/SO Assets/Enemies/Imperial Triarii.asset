@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: Imperial Triarii
   m_EditorClassIdentifier: 
   myName: Imperial Triarii
-  myDescription: Seasoned warriors of many campaigns, these troops make up the backbone
-    of Imperial armies and provide training and leadership to Imperial recruits.
-    Well trained, well armed, and motivated by the zeal of Imperial propaganda, they
-    are formiddible foes.
+  myDescription: Disguished heroes of many campaigns and undyingly loyal to the Imperium.
+    These troops act as personal guards to important imperial diplomats.
   randomizeRace: 1
   race: 1
   possibleRaces: 01000000
@@ -52,7 +50,7 @@ MonoBehaviour:
     physicalDamageBonus: 0
     physicalResistance: 0
     resolve:
-      value: 30
+      value: 25
       stars: 0
     stressResistance: 0
     vision: 0

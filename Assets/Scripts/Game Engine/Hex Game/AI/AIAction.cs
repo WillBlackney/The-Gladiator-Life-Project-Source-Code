@@ -97,7 +97,8 @@ namespace WeAreGladiators.AI
         MoveToEngageInMelee = 2,
         MoveWithinRangeOfTarget = 3,
         MoveToElevationOrGrassCloserToTarget = 6,
-        DelayTurn = 7
+        DelayTurn = 7,
+        ChargeAndStun = 8,
     }
 
     public enum TargettingPriority

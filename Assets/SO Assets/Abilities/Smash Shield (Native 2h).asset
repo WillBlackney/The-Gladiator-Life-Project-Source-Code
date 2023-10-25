@@ -75,6 +75,7 @@ MonoBehaviour:
     triggersChainEffectSequence: 0
     visualEventsOnStart:
     - eventType: 2
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -90,6 +91,7 @@ MonoBehaviour:
       projectileStartPosition: 0
       onCharacter: 0
     - eventType: 5
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -107,6 +109,7 @@ MonoBehaviour:
     visualEventsOnHit: []
     visualEventsOnEffectFinish:
     - eventType: 6
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -117,7 +120,7 @@ MonoBehaviour:
       movementAnimation: 0
       soundEffect: 0
       characterAnimation: 0
-      delayDuration: 0.5
+      delayDuration: 0.25
       projectileFired: 0
       projectileStartPosition: 0
       onCharacter: 0

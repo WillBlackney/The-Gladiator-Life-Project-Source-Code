@@ -73,8 +73,8 @@ MonoBehaviour:
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
     offHandItem: {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
-    headArmour: {fileID: 11400000, guid: 1a1a6451514e39a4a9bb3258a55d41c7, type: 2}
-    chestArmour: {fileID: 11400000, guid: a607139243f4b2a4b89ea760b67d1c97, type: 2}
+    headArmour: {fileID: 11400000, guid: eb2b4dc7ace074444a4c2a4c78aaadb7, type: 2}
+    chestArmour: {fileID: 11400000, guid: f2efc3e42cf551c45afb69d7a41dcccf, type: 2}
     trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 5

@@ -681,7 +681,6 @@ namespace WeAreGladiators.Perks
                     VisualEventManager.CreateVisualEvent(() =>
                     {
                         HexCharacterController.Instance.PlayHurtAnimation(character.hexCharacterView);
-                        // to do: shield snapping and flying off VFX
                         if (myUcm != null)
                         {
                             myUcm.activeOffHandWeapon.gameObject.SetActive(false);

@@ -59,7 +59,8 @@ MonoBehaviour:
       - {fileID: 11400000, guid: ff35482cc265db443a859f8d0ab917f5, type: 2}
       - {fileID: 11400000, guid: 06cb8fd7ea8f3804caa9f91b98906478, type: 2}
       - {fileID: 11400000, guid: c8fa646825673a74fa6d3a61e70cda06, type: 2}
+      - {fileID: 11400000, guid: 9c82d8fa69ec50443a7f388f71928851, type: 2}
   possibleSubNames:
-  - Stout Heart
-  - The Sheriff
+  - The Spineless
+  - Yellow Belly
   passiveEffectDescriptions: []

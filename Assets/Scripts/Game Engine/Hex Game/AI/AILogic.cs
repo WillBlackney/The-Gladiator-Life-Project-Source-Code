@@ -28,7 +28,7 @@ namespace WeAreGladiators.AI
             {
                 // Delays status VFX
                 VisualEventManager.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "Delay Turn") /*, character.GetLastStackEventParent()*/);
+                    VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "Delay Turn"));
                 VisualEventManager.InsertTimeDelayInQueue(1f);
 
                 // Move character to the end of the turn order.
@@ -54,6 +54,55 @@ namespace WeAreGladiators.AI
                     AbilityController.Instance.UseAbility(character, ability, target);
                     VisualEventManager.InsertTimeDelayInQueue(1.5f);
                     actionTaken = true;
+                }
+            }
+
+            else if (directive.action.actionType == AIActionType.ChargeAndStun)
+            {
+                // Set up
+                AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, "Charge");
+
+                // Check conditions, then use ability
+                if (ability != null &&
+                    HexCharacterController.Instance.IsCharacterAbleToMove(character) &&
+                    AbilityController.Instance.IsAbilityUseable(character, ability, false))
+                {
+                    LevelNode targetMoveHex = null;
+                    foreach (LevelNode node in LevelController.Instance.GetAllHexsWithinRange(character.currentTile, 1))
+                    {
+                        if(node.myCharacter != null &&
+                            node.myCharacter.allegiance != character.allegiance &&
+                            HexCharacterController.Instance.CanCharacterBeStunnedNow(node.myCharacter))
+                        {
+                            targetMoveHex = node;
+                            break;
+                        }
+
+                        // Prevent charging through characters or obstructions
+                        if(!Pathfinder.CanHexBeOccupied(node))
+                        {
+                            continue;
+                        }
+
+                        HexDirection direction = LevelController.Instance.GetDirectionToTargetHex(character.currentTile, node);
+                        LevelNode secondMoveTile = LevelController.Instance.GetAdjacentHexByDirection(node, direction);
+
+                        if(secondMoveTile != null &&
+                            secondMoveTile.myCharacter != null &&
+                            secondMoveTile.myCharacter.allegiance != character.allegiance &&
+                            HexCharacterController.Instance.CanCharacterBeStunnedNow(secondMoveTile.myCharacter))
+                        {
+                            targetMoveHex = node;
+                            break;
+                        }
+                    }
+
+                    if(targetMoveHex != null)
+                    {
+                        AbilityController.Instance.UseAbility(character, ability, null, targetMoveHex);
+                        VisualEventManager.InsertTimeDelayInQueue(1.5f);
+                        actionTaken = true;
+                    }                    
                 }
             }
 
@@ -496,6 +545,62 @@ namespace WeAreGladiators.AI
                 return new TargetPriorityTuple(null, TargettingPriority.None);
             }
 
+            else if (directive.action.actionType == AIActionType.ChargeAndStun)
+            {
+                foreach (AIActionRequirement req in directive.requirements)
+                {
+                    if (!IsActionRequirementMet(character, req))
+                    {
+                        return null;
+                    }
+                }
+
+                // Set up
+                AbilityData ability = AbilityController.Instance.GetCharacterAbilityByName(character, "Charge");
+
+                // Check conditions, then use ability
+                if (ability != null &&
+                    HexCharacterController.Instance.IsCharacterAbleToMove(character) &&
+                    AbilityController.Instance.IsAbilityUseable(character, ability, false))
+                {
+                    LevelNode targetMoveHex = null;
+                    foreach (LevelNode node in LevelController.Instance.GetAllHexsWithinRange(character.currentTile, 1))
+                    {
+                        if (node.myCharacter != null &&
+                            node.myCharacter.allegiance != character.allegiance &&
+                            HexCharacterController.Instance.CanCharacterBeStunnedNow(node.myCharacter))
+                        {
+                            targetMoveHex = node;
+                            break;
+                        }
+
+                        // Prevent charging through characters or obstructions
+                        if (!Pathfinder.CanHexBeOccupied(node))
+                        {
+                            continue;
+                        }
+
+                        HexDirection direction = LevelController.Instance.GetDirectionToTargetHex(character.currentTile, node);
+                        LevelNode secondMoveTile = LevelController.Instance.GetAdjacentHexByDirection(node, direction);
+
+                        if (secondMoveTile != null &&
+                            secondMoveTile.myCharacter != null &&
+                            secondMoveTile.myCharacter.allegiance != character.allegiance &&
+                            HexCharacterController.Instance.CanCharacterBeStunnedNow(secondMoveTile.myCharacter))
+                        {
+                            targetMoveHex = node;
+                            break;
+                        }
+                    }
+
+                    if (targetMoveHex != null)
+                    {
+                        return new TargetPriorityTuple(null, TargettingPriority.None);
+                    }
+                }
+
+            }
+
             // TARGETTABLE DIRECTIVES
             List<TargetPriorityTuple> possibleTargets = GetValidTargetsOrderedByPriority(character, directive);
             TargetPriorityTuple validDirective = null;
@@ -567,7 +672,7 @@ namespace WeAreGladiators.AI
                     }
 
                     validDirective = tpt;
-                }
+                }               
 
                 // Move to Engage in Melee
                 else if (directive.action.actionType == AIActionType.MoveToEngageInMelee)
