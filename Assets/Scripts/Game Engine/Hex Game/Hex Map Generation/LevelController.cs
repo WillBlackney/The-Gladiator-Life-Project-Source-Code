@@ -148,6 +148,8 @@ namespace WeAreGladiators.HexTiles
             MoveActionController.Instance.HidePathCostPopup();
             ActionErrorGuidanceController.Instance.HideErrorMessage(0f);
             TargetGuidanceController.Instance.Hide(0f);
+            UnmarkAllTiles();
+            UnmarkAllSubTargetMarkers();
             DisableAllArenas();
             HideTileInfoPopup();
             HideAllNodeViews();
@@ -1305,7 +1307,8 @@ namespace WeAreGladiators.HexTiles
             if (GameController.Instance.GameState != GameState.CombatActive ||
                 CharacterRosterViewController.Instance.MainVisualParent.activeSelf ||
                 EnemyInfoPanel.Instance.PanelIsActive ||
-                MainMenuController.Instance.InGameMenuScreenParent.activeSelf)
+                MainMenuController.Instance.InGameMenuScreenParent.activeSelf ||
+                (Application.isMobilePlatform && Input.touchCount == 0))
             {
                 yield break;
             }

@@ -918,6 +918,10 @@ namespace WeAreGladiators.Characters
                     break;
                 }
             }
+
+            int maxHealth = StatCalculator.GetTotalMaxHealth(data);
+            OnConstitutionOrMaxHealthChanged(data, maxHealth);
+            SetCharacterHealth(data, maxHealth);
         }
         public HexCharacterData GenerateRecruitCharacter(BackgroundData bgData, bool allowLevelBoosts = true)
         {

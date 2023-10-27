@@ -1694,6 +1694,12 @@ namespace WeAreGladiators.Abilities
             {
                 return;
             }
+
+            if(CurrentAbilityAwaiting != null && CurrentAbilityAwaiting == b.MyAbilityData)
+            {
+                HandleCancelCurrentAbilityOrder();
+            }
+
             if (IsAbilityUseable(b.MyAbilityData.myCharacter, b.MyAbilityData))
             {
                 AudioManager.Instance.PlaySound(Sound.UI_Button_Click);
@@ -2600,6 +2606,7 @@ namespace WeAreGladiators.Abilities
         }
         private void BuildHitChancePopup(HitChanceDataSet data)
         {
+            if (Application.isMobilePlatform && Input.touchCount == 0) return;
             hitChanceBoxesParent.SetActive(true);
             hitChanceHeaderParent.SetActive(true);
 

@@ -2281,6 +2281,8 @@ namespace WeAreGladiators.Characters
                 EnemyInfoModalController.Instance.HideModal();
                 ActionErrorGuidanceController.Instance.HideErrorMessage();
                 TargetGuidanceController.Instance.Hide();
+                LevelController.Instance.UnmarkAllTiles();
+                LevelController.Instance.UnmarkAllSubTargetMarkers();
             }
 
             // Stop if combat has ended

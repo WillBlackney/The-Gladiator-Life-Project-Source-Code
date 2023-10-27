@@ -232,6 +232,13 @@ namespace WeAreGladiators.HexTiles
         {
             LevelController.Instance.OnHexMouseExit(this);
         }
+        private void OnMouseUp()
+        {
+            if (Application.isMobilePlatform)
+            {
+                LevelController.Instance.OnHexMouseExit(this);
+            }
+        }
 
         #endregion
 

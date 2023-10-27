@@ -68,7 +68,8 @@ namespace WeAreGladiators.UI
                 AbilityController.Instance.AwaitingAbilityOrder() ||
                 CharacterRosterViewController.Instance.MainVisualParent.activeSelf ||
                 EnemyInfoPanel.Instance.PanelIsActive ||
-                MainMenuController.Instance.InGameMenuScreenParent.activeSelf)
+                MainMenuController.Instance.InGameMenuScreenParent.activeSelf ||
+                (Application.isMobilePlatform && Input.touchCount == 0))
             {
                 yield break;
             }

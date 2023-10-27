@@ -48,18 +48,28 @@ namespace WeAreGladiators.Items
         #endregion
 
         #region Input
+        public void OnTap()
+        {
+            if (!Application.isMobilePlatform) return;
+            HandleRightClickOrTap();
+        }
         public void RightClick()
+        {
+            HandleRightClickOrTap();
+        }
+
+        void HandleRightClickOrTap()
         {
             if (ItemDragged != null || GameController.Instance.GameState != GameState.Town)
             {
                 return;
-            }            
+            }
 
             if (MyItemRef.itemData == null && MyItemRef.abilityData == null)
             {
                 return;
             }
-            
+
             // TRY SELL
             if (myItemGrid.CollectionSource == ItemCollectionSource.PlayerInventoryShop &&
                 !CharacterRosterViewController.Instance.MainVisualParent.activeSelf)
@@ -127,8 +137,6 @@ namespace WeAreGladiators.Items
                     myItemGrid.BuildItemCollectionView();
                 }
             }
-            
-
         }
         public void MouseEnter()
         {

@@ -41,6 +41,11 @@ namespace WeAreGladiators.LoadingScreen
                 }
             });
 
+            if(Application.isMobilePlatform)
+            {
+                Screen.orientation = ScreenOrientation.LandscapeLeft;
+            }           
+
         }
 
         public void ShowLoadingScreen(float showInSpeed = 1.5f, float hideOutSpeed = 1f, Action onPauseReached = null, Action onPauseFinished = null, Func<bool> awaitCondition = null)

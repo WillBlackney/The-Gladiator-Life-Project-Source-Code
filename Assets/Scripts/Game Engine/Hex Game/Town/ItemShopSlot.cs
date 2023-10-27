@@ -31,14 +31,22 @@ namespace WeAreGladiators.TownFeatures
         #endregion
 
         #region Input
-
-        public void MouseClick()
+        private void HandleRightClickOrTap()
         {
             if (MyItemData == null) return;
             if (AbleToBuyItem())
             {
                 ItemController.Instance.HandleBuyItem(MyItemData);
             }
+        }
+        public void OnTap()
+        {
+            if(!Application.isMobilePlatform) return;
+            HandleRightClickOrTap();
+        }
+        public void MouseClick()
+        {
+            HandleRightClickOrTap();
         }
         public void MouseEnter()
         {
