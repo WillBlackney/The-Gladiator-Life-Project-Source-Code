@@ -1023,7 +1023,7 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'There is never less than a '
+      phrase: 'The chance to hit with attacks and debuffs is clamped between '
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
@@ -1031,7 +1031,7 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: 'chance or more than a '
+      phrase: 'and '
     - color: 2
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
@@ -1039,7 +1039,7 @@ MonoBehaviour:
     - color: 1
       getPhraseFromAbilityValue: 0
       abilityEffectType: 0
-      phrase: chance to hit with an attack or apply a debuff.
+      phrase: .
   - message:
     - color: 1
       getPhraseFromAbilityValue: 0

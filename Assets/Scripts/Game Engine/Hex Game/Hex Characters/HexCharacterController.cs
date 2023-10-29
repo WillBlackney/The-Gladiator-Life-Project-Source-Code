@@ -2275,14 +2275,16 @@ namespace WeAreGladiators.Characters
             if (character.controller == Controller.Player)
             {
                 AbilityPopupController.Instance.HidePanel();
-                AbilityController.Instance.HideHitChancePopup();
+                AbilityController.Instance.HandleCancelCurrentAbilityOrder();
                 KeyWordLayoutController.Instance.FadeOutMainView();
                 MainModalController.Instance.HideModal();
                 EnemyInfoModalController.Instance.HideModal();
                 ActionErrorGuidanceController.Instance.HideErrorMessage();
-                TargetGuidanceController.Instance.Hide();
-                LevelController.Instance.UnmarkAllTiles();
-                LevelController.Instance.UnmarkAllSubTargetMarkers();
+
+                //AbilityController.Instance.HideHitChancePopup();
+                // TargetGuidanceController.Instance.Hide();
+                //LevelController.Instance.UnmarkAllTiles();
+                //LevelController.Instance.UnmarkAllSubTargetMarkers();
             }
 
             // Stop if combat has ended

@@ -1700,7 +1700,7 @@ namespace WeAreGladiators.Abilities
                 HandleCancelCurrentAbilityOrder();
             }
 
-            if (IsAbilityUseable(b.MyAbilityData.myCharacter, b.MyAbilityData))
+            else if (IsAbilityUseable(b.MyAbilityData.myCharacter, b.MyAbilityData))
             {
                 AudioManager.Instance.PlaySound(Sound.UI_Button_Click);
 
@@ -1853,7 +1853,7 @@ namespace WeAreGladiators.Abilities
                 }
             }
         }
-        private void HandleCancelCurrentAbilityOrder()
+        public void HandleCancelCurrentAbilityOrder()
         {
             AbilityButton selectedButton = CombatUIController.Instance.FindAbilityButton(CurrentAbilityAwaiting);
             if (selectedButton != null)

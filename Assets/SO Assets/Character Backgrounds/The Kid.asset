@@ -32,8 +32,6 @@ MonoBehaviour:
   accuracyUpper: 0
   dodgeLower: 0
   dodgeUpper: 0
-  fatigueLower: 0
-  fatigueUpper: 0
   resolveLower: 0
   resolveUpper: 0
   witsLower: 0
@@ -51,4 +49,18 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 396003f6fcbead348b33bff027dd3d9e, type: 2}
   possibleSubNames:
   - The Kid
-  passiveEffectDescriptions: []
+  passiveEffectDescriptions:
+  - dotStyle: 3
+    message:
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'This character is guaranteed to survive '
+    - color: 3
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: 'Death Blows '
+    - color: 1
+      getPhraseFromAbilityValue: 0
+      abilityEffectType: 0
+      phrase: in combat.

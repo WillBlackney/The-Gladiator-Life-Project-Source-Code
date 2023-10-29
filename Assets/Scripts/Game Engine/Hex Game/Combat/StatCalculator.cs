@@ -2076,6 +2076,12 @@ namespace WeAreGladiators
         {
             int resistanceReturned = c.attributeSheet.deathResistance;
 
+            // The kid cant die
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.TheKid))
+            {
+                return 100;
+            }
+
             // Iron Will Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.IronWill))
             {
@@ -2095,6 +2101,12 @@ namespace WeAreGladiators
         public static int GetTotalDeathResistance(HexCharacterData c)
         {
             int resistanceReturned = c.attributeSheet.deathResistance;
+
+            // The kid cant die
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(c.background, CharacterBackground.TheKid))
+            {
+                return 100;
+            }
 
             // Iron Will Perk
             if (PerkController.Instance.DoesCharacterHavePerk(c.passiveManager, Perk.IronWill))
