@@ -25,6 +25,10 @@ namespace WeAreGladiators.AI
         [LabelWidth(100)]
         public int range;
 
+        [ShowIf("ShowMaxMoveDistance")]
+        [LabelWidth(100)]
+        public int maxMoveDistance;
+
         [Header("Ability Properties")]
         [ShowIf("ShowAbilityName")]
         [LabelWidth(100)]
@@ -36,7 +40,7 @@ namespace WeAreGladiators.AI
 
         public bool ShowTargettingPriority()
         {
-            return actionType != AIActionType.DelayTurn;
+            return actionType != AIActionType.DelayTurn && actionType != AIActionType.MoveToNearbyElevation;
         }
 
         public bool ShowAbilityName()
@@ -57,6 +61,11 @@ namespace WeAreGladiators.AI
                 return true;
             }
             return false;
+        }
+
+        public bool ShowMaxMoveDistance()
+        {
+            return actionType == AIActionType.MoveToNearbyElevation;
         }
 
         public bool ShowGetRangeFromAbility()
@@ -97,6 +106,7 @@ namespace WeAreGladiators.AI
         MoveToEngageInMelee = 2,
         MoveWithinRangeOfTarget = 3,
         MoveToElevationOrGrassCloserToTarget = 6,
+        MoveToNearbyElevation = 9,
         DelayTurn = 7,
         ChargeAndStun = 8,
     }

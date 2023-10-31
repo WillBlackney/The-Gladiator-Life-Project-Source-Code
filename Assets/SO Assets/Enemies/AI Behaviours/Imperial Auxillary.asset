@@ -19,6 +19,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Throw Pila (Shield)
       teleportAbilityName: 
     requirements:
@@ -42,6 +43,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 1
       range: 2
+      maxMoveDistance: 0
       abilityName: Throw Pila (Shield)
       teleportAbilityName: 
     requirements:
@@ -65,6 +67,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Riposte
       teleportAbilityName: 
     requirements:
@@ -88,6 +91,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Slash
       teleportAbilityName: 
     requirements:
@@ -111,6 +115,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Thrust
       teleportAbilityName: 
     requirements:
@@ -134,6 +139,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Raise Shield
       teleportAbilityName: 
     requirements: []
@@ -143,6 +149,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Slash
       teleportAbilityName: 
     requirements: []
@@ -152,6 +159,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Thrust
       teleportAbilityName: 
     requirements: []
@@ -161,6 +169,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:

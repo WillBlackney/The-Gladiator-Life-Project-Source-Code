@@ -19,15 +19,31 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
-    requirements: []
+    requirements:
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 7
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
   - action:
       actionType: 3
       targettingPriority: 01000000
       movementType: 0
       getRangeFromAbility: 0
       range: 2
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:
@@ -65,6 +81,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Raise Shield
       teleportAbilityName: 
     requirements:
@@ -116,6 +133,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Shove
       teleportAbilityName: 
     requirements:
@@ -153,6 +171,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Ensnare
       teleportAbilityName: 
     requirements:
@@ -190,6 +209,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Riposte
       teleportAbilityName: 
     requirements:
@@ -213,6 +233,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Raise Shield
       teleportAbilityName: 
     requirements:
@@ -236,6 +257,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Slash
       teleportAbilityName: 
     requirements: []
@@ -245,6 +267,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Puncture
       teleportAbilityName: 
     requirements:
@@ -268,6 +291,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Quick Shank
       teleportAbilityName: 
     requirements: []
@@ -277,6 +301,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Head Bonk
       teleportAbilityName: 
     requirements:
@@ -300,6 +325,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Bash
       teleportAbilityName: 
     requirements: []
@@ -309,6 +335,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Smash Shield (Axe 1h)
       teleportAbilityName: 
     requirements:
@@ -346,6 +373,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Chop
       teleportAbilityName: 
     requirements: []
@@ -355,6 +383,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Thrust
       teleportAbilityName: 
     requirements: []
@@ -364,6 +393,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Smash Shield (Native 2h)
       teleportAbilityName: 
     requirements:
@@ -429,6 +459,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Round Swing
       teleportAbilityName: 
     requirements:
@@ -452,6 +483,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Pound
       teleportAbilityName: 
     requirements: []
@@ -461,6 +493,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Decapitate
       teleportAbilityName: 
     requirements:
@@ -484,6 +517,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Overhead Chop
       teleportAbilityName: 
     requirements: []
@@ -493,6 +527,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Line Strike
       teleportAbilityName: 
     requirements:
@@ -516,6 +551,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Overhead Slash
       teleportAbilityName: 
     requirements: []
@@ -525,6 +561,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 2
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:
@@ -562,6 +599,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:
@@ -641,6 +679,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 3
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:
@@ -664,6 +703,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:
@@ -701,6 +741,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:
@@ -738,6 +779,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:
@@ -789,6 +831,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:
@@ -854,6 +897,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:
@@ -919,6 +963,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:
@@ -956,6 +1001,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:
@@ -1007,6 +1053,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:

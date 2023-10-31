@@ -14,11 +14,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   directives:
   - action:
+      actionType: 9
+      targettingPriority: 
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 1
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 8
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
       actionType: 1
       targettingPriority: 02000000
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Load Bolt
       teleportAbilityName: 
     requirements:
@@ -42,6 +67,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Pin Down
       teleportAbilityName: 
     requirements:
@@ -65,6 +91,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Plink
       teleportAbilityName: 
     requirements:
@@ -88,6 +115,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Steady Shot
       teleportAbilityName: 
     requirements: []
@@ -97,6 +125,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Shoot Bolt
       teleportAbilityName: 
     requirements: []
@@ -106,6 +135,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Plink
       teleportAbilityName: 
     requirements: []
@@ -115,6 +145,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:
@@ -152,6 +183,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 1
       range: 0
+      maxMoveDistance: 0
       abilityName: Steady Shot
       teleportAbilityName: 
     requirements:
@@ -189,6 +221,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 1
       range: 0
+      maxMoveDistance: 0
       abilityName: Plink
       teleportAbilityName: 
     requirements:
@@ -226,6 +259,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 1
       range: 0
+      maxMoveDistance: 0
       abilityName: Shoot Bolt
       teleportAbilityName: 
     requirements:

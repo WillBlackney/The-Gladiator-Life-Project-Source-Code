@@ -57,6 +57,57 @@ namespace WeAreGladiators.AI
                 }
             }
 
+            else if(directive.action.actionType == AIActionType.MoveToNearbyElevation)
+            {
+                List<LevelNode> possibleTiles = new List<LevelNode>();
+
+                // Check conditions, then use ability
+                if (HexCharacterController.Instance.IsCharacterAbleToMove(character) &&
+                    character.currentTile.Elevation != TileElevation.Elevated)
+                {
+                    foreach (LevelNode node in LevelController.Instance.GetAllHexsWithinRange(character.currentTile, directive.action.maxMoveDistance))
+                    {
+                        if (node.Elevation == TileElevation.Elevated &&
+                            Pathfinder.CanHexBeOccupied(node))
+                        {
+                            possibleTiles.Add(node);
+                        }
+                    }
+                }
+
+                // Set up
+                List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
+                int currentClosestDistance = 1000;
+                int cheapestApCost = 1000;
+                Path bestPath = null;
+                HexCharacterModel closestEnemy = GetClosestUnfriendlyCharacter(character);
+                int currentBestDistanceToNearestEnemyAtDestination = 10000;
+
+                // Determine the shortest and most action point efficient path
+                foreach (Path p in allPossiblePaths)
+                {
+                    int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
+                    if (possibleTiles.Contains(p.Destination) &&
+                        p.Destination.Distance(closestEnemy.currentTile) <= currentBestDistanceToNearestEnemyAtDestination &&
+                        p.Length <= currentClosestDistance &&
+                        apCost < cheapestApCost &&
+                        MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
+                    {
+                        currentBestDistanceToNearestEnemyAtDestination = p.Destination.Distance(closestEnemy.currentTile);
+                        cheapestApCost = apCost;
+                        currentClosestDistance = p.Length;
+                        bestPath = p;
+                    }
+                }
+
+                if (bestPath != null)
+                {
+                    LevelController.Instance.HandleMoveDownPath(character, bestPath);
+                    VisualEventManager.InsertTimeDelayInQueue(1);
+                    actionTaken = true;
+                }
+            }
+
             else if (directive.action.actionType == AIActionType.ChargeAndStun)
             {
                 // Set up
@@ -601,6 +652,63 @@ namespace WeAreGladiators.AI
 
             }
 
+            else if (directive.action.actionType == AIActionType.MoveToNearbyElevation)
+            {
+                foreach (AIActionRequirement req in directive.requirements)
+                {
+                    if (!IsActionRequirementMet(character, req))
+                    {
+                        return null;
+                    }
+                }
+
+                List<LevelNode> possibleTiles = new List<LevelNode>();
+
+                // Check conditions, then use ability
+                if (HexCharacterController.Instance.IsCharacterAbleToMove(character) &&
+                    character.currentTile.Elevation != TileElevation.Elevated)
+                {
+                    foreach (LevelNode node in LevelController.Instance.GetAllHexsWithinRange(character.currentTile, directive.action.maxMoveDistance))
+                    {
+                        if(node.Elevation == TileElevation.Elevated &&
+                            node.myCharacter == null)
+                        {
+                            possibleTiles.Add(node);
+                        }
+                    }                    
+                }
+
+                // Set up
+                List<Path> allPossiblePaths = Pathfinder.GetAllValidPathsFromStart(character, character.currentTile, LevelController.Instance.AllLevelNodes.ToList());
+                int currentClosestDistance = 1000;
+                int cheapestApCost = 1000;
+                Path bestPath = null;
+                HexCharacterModel closestEnemy = GetClosestUnfriendlyCharacter(character);
+                int currentBestDistanceToNearestEnemyAtDestination = 10000;
+
+                // Determine the shortest and most action point efficient path
+                foreach (Path p in allPossiblePaths)
+                {
+                    int apCost = Pathfinder.GetActionPointCostOfPath(character, character.currentTile, p.HexsOnPath);
+                    if (possibleTiles.Contains(p.Destination) &&
+                        p.Destination.Distance(closestEnemy.currentTile) <= currentBestDistanceToNearestEnemyAtDestination &&
+                        p.Length <= currentClosestDistance &&
+                        apCost < cheapestApCost &&
+                        MoveActionController.Instance.GetFreeStrikersOnPath(character, p).Count == 0)
+                    {
+                        currentBestDistanceToNearestEnemyAtDestination = p.Destination.Distance(closestEnemy.currentTile);
+                        cheapestApCost = apCost;
+                        currentClosestDistance = p.Length;
+                        bestPath = p;
+                    }
+                }
+
+                if (bestPath != null)
+                {
+                    return new TargetPriorityTuple(null, TargettingPriority.None);
+                }
+
+            }
             // TARGETTABLE DIRECTIVES
             List<TargetPriorityTuple> possibleTargets = GetValidTargetsOrderedByPriority(character, directive);
             TargetPriorityTuple validDirective = null;
