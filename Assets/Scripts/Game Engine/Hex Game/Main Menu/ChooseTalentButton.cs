@@ -48,8 +48,6 @@ namespace WeAreGladiators.UI
                 Selected = false;
                 unselectedVisualParent.SetActive(true);
             }
-
-            AudioManager.Instance.PlaySound(Sound.UI_Button_Click);
         }
         public void OnClick()
         {

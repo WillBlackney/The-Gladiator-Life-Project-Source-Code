@@ -896,7 +896,7 @@ namespace WeAreGladiators.Combat
             }
 
         }
-        public bool CreateMoraleCheck(HexCharacterModel character, StressEventData data, bool showVFX, bool allowRecursiveChecks = true, bool allowShatteredRally = false)
+        public bool CreateMoraleCheck(HexCharacterModel character, StressEventData data, bool allowRecursiveChecks = true, bool allowShatteredRally = false)
         {
             Debug.Log("CombatController.CreateMoraleCheck() called, character = " + character.myName);
 
@@ -946,7 +946,7 @@ namespace WeAreGladiators.Combat
             {
                 Debug.Log("Character rolled below the required roll threshold, applying effects of stress event...");
                 int finalStateChangeAmount = RandomGenerator.NumberBetween(data.moraleChangeMin, data.moraleChangeMax);
-                HexCharacterController.Instance.ModifyMoraleState(character, finalStateChangeAmount, true, true, allowRecursiveChecks);
+                HexCharacterController.Instance.ModifyMoraleState(character, finalStateChangeAmount, true, true, allowRecursiveChecks, allowShatteredRally);
                 success = true;
             }
 

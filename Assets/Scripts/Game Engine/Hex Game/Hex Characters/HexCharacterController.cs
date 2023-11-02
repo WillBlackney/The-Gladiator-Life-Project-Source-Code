@@ -554,8 +554,8 @@ namespace WeAreGladiators.Characters
             // Check 'Second Wind'
             if (StatCalculator.GetCurrentHealthAsPercentageOfMaxHealth(character) < 50 &&
                 character.currentHealth > 0 &&
-                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SecondWind) &&
-                character.hasTriggeredSecondWind == false)
+                character.hasTriggeredSecondWind == false &&
+                PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.SecondWind))
             {
                 Vector3 pos = character.hexCharacterView.WorldPosition;
                 character.hasTriggeredSecondWind = true;
@@ -567,10 +567,8 @@ namespace WeAreGladiators.Characters
                 }, character.GetLastStackEventParent()).SetStartDelay(0.5f).SetEndDelay(0.5f);
 
                 // Gain 2 guard
-                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Guard, 3, true, 0.5f);
-
-                // Recover all fatigue
-                // ModifyCurrentFatigue(character, -character.currentFatigue);
+                PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Guard, 2, true, 0.5f);
+                ModifyMoraleState(character, 1, true, true);
             }
         }
         public void ModifyMaxHealth(HexCharacterModel character, int maxHealthGainedOrLost)

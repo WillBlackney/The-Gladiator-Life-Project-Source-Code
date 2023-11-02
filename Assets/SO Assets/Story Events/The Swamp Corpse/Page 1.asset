@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Page 1
   m_EditorClassIdentifier: 
   pageSprite: {fileID: 21300000, guid: c6dcf9c6971a7f64590ae409a2c01b79, type: 3}
-  pageDescription: 'While foraging outside Breedmarsh with {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME},
-    you happen upon an eviscerated and half eaten corpse of a high ranking town guard.
+  pageDescription: 'While foraging outside Breedmarsh with {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME}
+    and {CHARACTER_2_NAME} {CHARACTER_2_SUB_NAME}, you happen upon the half eaten
+    corpse of a high ranking imperial guard from town.
 
 
     <color=#FFFFFF>"Might
@@ -24,9 +25,10 @@ MonoBehaviour:
 
 
     The wounds and footprints
-    look very fresh, so it''s likely that whatever did this is still nearby. You
+    look quite fresh, so it''s likely that whatever did this is still nearby. You
     could clammer about taking some loot, but the monster might return...'
   onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: 5ddf1eaf6f73c6d47963550e1da0e388, type: 2}
+  - {fileID: 11400000, guid: 331c27aa6540f7d48a6c15df717466d9, type: 2}
   - {fileID: 11400000, guid: d171899469e833244b75ac6256a643e7, type: 2}

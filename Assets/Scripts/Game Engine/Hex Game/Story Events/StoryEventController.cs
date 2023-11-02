@@ -13,7 +13,6 @@ using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Libraries;
 using WeAreGladiators.Perks;
 using WeAreGladiators.Persistency;
-using WeAreGladiators.Player;
 using WeAreGladiators.Scoring;
 using WeAreGladiators.TownFeatures;
 using WeAreGladiators.UI;
@@ -909,6 +908,14 @@ namespace WeAreGladiators.StoryEvents
                 string message = character.myName + " " + character.mySubName + " joined the company.";
                 StoryEventResultItem newResultItem = new StoryEventResultItem(message, ResultRowIcon.Star);
                 currentResultItems.Add(newResultItem);
+            }
+            else if (effect.effectType == StoryChoiceEffectType.SetChoiceCharacterTarget)
+            {
+
+                HexCharacterData newTarget = characterTargets[effect.characterTargetIndex];
+                choiceCharacterTarget = newTarget;
+                characterTargets.Remove(newTarget);
+                characterTargets.Insert(0, newTarget);
             }
         }
 

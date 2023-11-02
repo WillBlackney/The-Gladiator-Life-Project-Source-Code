@@ -30,14 +30,14 @@ MonoBehaviour:
     apRecovery: 8
     auraSize: 1
     constitution:
-      value: 85
+      value: 80
       stars: 0
     criticalChance: 5
     criticalModifier: 50
     deathResistance: 25
     debuffResistance: 0
     dodge:
-      value: 15
+      value: 10
       stars: 0
     initiative: 10
     injuryResistance: 0

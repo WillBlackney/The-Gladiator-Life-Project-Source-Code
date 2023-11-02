@@ -14,23 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pageSprite: {fileID: 21300000, guid: 80f28ce60dfd50d4c98d3ffc6d109e20, type: 3}
   pageDescription: "Being careful not to make any noise, you point towards the axe
-    in the tree and soundlessly mouth out at {CHARACTER_1_NAME} {CHARACTER_1_SUB_NAME}
-    <color=#FFFFFF>\"Get, the, axe... get, the, axe...\".</color> {CHARACTER_1_NAME}
+    in the tree and soundlessly mouth out at {CHOICE_CHARACTER_NAME} {CHOICE_CHARACTER_SUB_NAME}
+    <color=#FFFFFF>\"Get, the, axe... get, the, axe...\".</color> {CHOICE_CHARACTER_NAME}
     stares at you with blankly for a few moments, glances over his shoulder towards
     where you're pointing, then looks back at you with the same glazed look of stupidity.
     After a pause, the message finally gets through. A grin washes over his face
-    and he silently mouthes back at you <color=#FFFFFF>\"Oooooh, the axe!\".</color>\r\n\r\n{CHARACTER_1_NAME}
+    and he silently mouthes back at you <color=#FFFFFF>\"Oooooh, the axe!\".</color>\r\n\r\n{CHOICE_CHARACTER_NAME}
     tiptoes over to the tree, places both hands firmly on the handle of the axe,
     and begins tugging away to no effect. He places a foot against the base of the
-    tree, and with a few more tugs the axe comes loose, sending {CHARACTER_1_NAME}
+    tree, and with a few more tugs the axe comes loose, sending {CHOICE_CHARACTER_NAME}
     flying head over heels and onto the muddy ground with a wet thud.\n\r\nA low,
     guttural growl reverberates through the forest. You both freeze, eyes darting
-    around to locate the source of the sound. After a tense silence, {CHARACTER_1_NAME}
+    around to locate the source of the sound. After a tense silence, {CHOICE_CHARACTER_NAME}
     lets out a sigh of relief, when suddenly\u2026\n\r\nA huge, scaley fingorn emerges
-    from the brackish water with a roar. Powerful jaws clamp down on {CHARACTER_1_NAME}.
+    from the brackish water with a roar. Powerful jaws clamp down on {CHOICE_CHARACTER_NAME}.
     A furious mauling follows. When it has ended, the beast slinks below the surface
-    of the water leaving {CHARACTER_1_NAME} a bloody mess, indistinguishable from
-    the corpse he just looted. "
+    of the water leaving {CHOICE_CHARACTER_NAME} a bloody mess, indistinguishable
+    from the corpse he just looted. "
   onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: 2ede1bcbd6120b64e89f1fce5314d49e, type: 2}

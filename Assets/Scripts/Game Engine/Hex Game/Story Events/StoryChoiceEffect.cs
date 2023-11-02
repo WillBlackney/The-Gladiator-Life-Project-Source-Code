@@ -152,7 +152,8 @@ namespace WeAreGladiators.StoryEvents
                 effectType == StoryChoiceEffectType.GainPerk ||
                 effectType == StoryChoiceEffectType.GainRandomInjury ||
                 effectType == StoryChoiceEffectType.GainExperience ||
-                effectType == StoryChoiceEffectType.LoseHealth;
+                effectType == StoryChoiceEffectType.LoseHealth ||
+                effectType == StoryChoiceEffectType.SetChoiceCharacterTarget;
         }
         public bool ShowReturnEquippedItems()
         {
@@ -240,6 +241,7 @@ namespace WeAreGladiators.StoryEvents
         LoseHealth = 16,
         ChangeMoraleAll = 17,
         IncreaseDailyWageAll = 19,
-        CharactersLeave = 20
+        CharactersLeave = 20,
+        SetChoiceCharacterTarget = 22,
     }
 }

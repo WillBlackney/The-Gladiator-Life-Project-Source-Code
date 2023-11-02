@@ -18,11 +18,17 @@ MonoBehaviour:
   onStartEffects: []
   requirements:
   - reqType: 1
-    requiredCharactersInRosterCount: 1
+    requiredCharactersInRosterCount: 2
     includeTheKid: 0
     goldRequired: 0
     requiredBoon: 0
+    rosterSpaceRequired: 1
   characterRequirements:
   - requirements:
     - reqType: 2
       requiredBackgrounds: 14000000
+      perk: 0
+  - requirements:
+    - reqType: 2
+      requiredBackgrounds: 14000000
+      perk: 0

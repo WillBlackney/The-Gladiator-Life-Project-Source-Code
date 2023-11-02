@@ -14,22 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pageSprite: {fileID: 21300000, guid: 6e32a985d2f39b247866da3b0ac96cee, type: 3}
   pageDescription: 'There''s no point in staying quiet. The best knows where you
-    are. You yell out to {CHARACTER_1_NAME} to grab the helmet and run like the wind.
-    Still flat on his back from the fall, {CHARACTER_1_NAME} rolls over and crawls
-    through the mud to the corpse. He fumbles with helmet''s chin strap as the marshwater
-    begins to bubble and churn.
+    are. You yell out to {CHOICE_CHARACTER_NAME} to grab the helmet and run like
+    the wind. Still flat on his back from the fall, {CHOICE_CHARACTER_NAME} rolls
+    over and crawls through the mud to the corpse. He fumbles with helmet''s chin
+    strap as the marshwater begins to bubble and churn.
 
 
-    {CHARACTER_1_NAME} is taking too long. Surely
-    this is how they die. You''re about to yell out to them to forget the helmet
-    when {CHARACTER_1_NAME} jumps to their feet holding the helmet up triumphantly.
-    They run back toward you, nearly slipping and falling with every step. From dry
-    ground, you reach out a hand to help them.
+    {CHOICE_CHARACTER_NAME}
+    is taking too long. Surely this is how they die. You''re about to yell out to
+    them to forget the helmet when {CHOICE_CHARACTER_NAME} jumps to their feet holding
+    the helmet up triumphantly. They run back toward you, nearly slipping and falling
+    with every step. From dry ground, you reach out a hand to help them.
 
 
-    <color=#FFFFFF>"Get out of my
-    fucking way!"</color>{CHARACTER_1_NAME} screams as they barge past you. You turn
-    and run yourself desperately trying to keep up.'
+    <color=#FFFFFF>"Get
+    out of my fucking way!"</color>{CHOICE_CHARACTER_NAME} screams as they barge
+    past. You and {CHARACTER_2_NAME} {CHARACTER_2_SUB_NAME} turn and run, desperately
+    trying to keep up.'
   onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: ca24dd9278c97384fb1a62b94f2f1430, type: 2}

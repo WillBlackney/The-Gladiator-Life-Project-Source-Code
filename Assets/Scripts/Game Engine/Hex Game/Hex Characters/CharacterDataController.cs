@@ -740,17 +740,16 @@ namespace WeAreGladiators.Characters
         private void SetStartingLevelAndXpValues(HexCharacterData character)
         {
             character.currentXP = 0;
-            character.currentMaxXP = 50;
+            character.currentMaxXP = 35;
             SetCharacterLevel(character, 1);
         }
         public int GetMaxXpCapForLevel(int level)
         {
-            // each level requires 50 more XP than the previous.
             if (level == 1)
             {
-                return 50;
+                return 35;
             }
-            return 50 + 75 * (level - 1);
+            return 50 + (75 * (level - 1));
         }
         private void SetCharacterLevel(HexCharacterData data, int newLevelValue)
         {

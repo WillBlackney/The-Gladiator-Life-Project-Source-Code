@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pageSprite: {fileID: 21300000, guid: 80f28ce60dfd50d4c98d3ffc6d109e20, type: 3}
   pageDescription: 'There''s no more need to be quiet. The beast knows where you
-    are. You yell out to {CHARACTER_1_NAME} to quickly snatch the helmet and run
-    like the wind. Still flat on his back from the fall, {CHARACTER_1_NAME} rolls
-    over and crawls through the mud to the corpse. As he fumbles with the helmet''s
+    are. You yell out to {CHOICE_CHARACTER_NAME} to quickly snatch the helmet and
+    run like the wind. Still flat on his back from the fall, {CHOICE_CHARACTER_NAME}
+    rolls over and crawls through the mud to the corpse. As he fumbles with the helmet''s
     chin strap, brackish marsh water begins to churn and roil.
 
 
     A huge, scaley
-    fingorn emerges from the water with a roar. Powerful jaws clamp down on {CHARACTER_1_NAME}.
+    fingorn emerges from the water with a roar. Powerful jaws clamp down on {CHOICE_CHARACTER_NAME}.
     A furious mauling follows. When it has ended, the beast slinks below the surface
-    of the water leaving {CHARACTER_1_NAME} a bloody mess, indistinguishable from
-    the corpse he just looted. '
+    of the water leaving {CHOICE_CHARACTER_NAME} a bloody mess, indistinguishable
+    from the corpse he just looted. '
   onPageLoadEffects: []
   allChoices:
   - {fileID: 11400000, guid: 2ede1bcbd6120b64e89f1fce5314d49e, type: 2}

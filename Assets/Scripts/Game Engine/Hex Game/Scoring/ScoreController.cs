@@ -8,6 +8,7 @@ using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
 using WeAreGladiators.Items;
 using WeAreGladiators.JourneyLogic;
+using WeAreGladiators.Perks;
 using WeAreGladiators.Persistency;
 using WeAreGladiators.Utilities;
 
@@ -237,7 +238,7 @@ namespace WeAreGladiators.Scoring
             }
             if (element == ScoreElementType.FatherOfTheYear)
             {
-                return "Gain " + TextLogic.ReturnColoredText(FATHER_OF_THE_YEAR_SCORE.ToString(), TextLogic.blueNumber) + " points if 'The Kid' was not killed.";
+                return "Gain " + TextLogic.ReturnColoredText(FATHER_OF_THE_YEAR_SCORE.ToString(), TextLogic.blueNumber) + " points if 'The Kid' did not suffer a " + TextLogic.ReturnColoredText("Permanent Injury", TextLogic.neutralYellow) + ".";
             }
 
             // Penalties
@@ -436,7 +437,8 @@ namespace WeAreGladiators.Scoring
 
             foreach (HexCharacterData character in CharacterDataController.Instance.AllPlayerCharacters)
             {
-                if (character.background.backgroundType == CharacterBackground.TheKid)
+                if (character.background.backgroundType == CharacterBackground.TheKid &&
+                    PerkController.Instance.GetAllPermanentInjuriesOnCharacter(character).Count == 0)
                 {
                     score += FATHER_OF_THE_YEAR_SCORE;
                     break;

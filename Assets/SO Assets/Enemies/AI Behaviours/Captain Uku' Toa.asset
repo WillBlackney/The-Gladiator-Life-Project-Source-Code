@@ -19,6 +19,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Booming Warcry
       teleportAbilityName: 
     requirements:
@@ -56,6 +57,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Demon Form
       teleportAbilityName: 
     requirements:
@@ -93,6 +95,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Demon Form
       teleportAbilityName: 
     requirements:
@@ -130,6 +133,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Shove
       teleportAbilityName: 
     requirements:
@@ -195,6 +199,7 @@ MonoBehaviour:
       movementType: 1
       getRangeFromAbility: 0
       range: 1
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: Dark Flight
     requirements:
@@ -212,12 +217,27 @@ MonoBehaviour:
       abilityName: 
       armourReq: 0
       opponentsUnactivated: 0
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 7
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
   - action:
       actionType: 1
       targettingPriority: 050000000100000006000000
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: Slash
       teleportAbilityName: 
     requirements:
@@ -241,6 +261,7 @@ MonoBehaviour:
       movementType: 0
       getRangeFromAbility: 0
       range: 0
+      maxMoveDistance: 0
       abilityName: 
       teleportAbilityName: 
     requirements:

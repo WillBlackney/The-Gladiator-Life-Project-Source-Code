@@ -21,6 +21,29 @@ MonoBehaviour:
   - lowerProbability: 1
     upperProbability: 33
     effects:
+    - effectType: 22
+      characterTargetIndex: 0
+      returnEquippedItems: 0
+      pageToLoad: {fileID: 0}
+      boonGained: 0
+      backgroundAddedToTavern: 0
+      totalCharactersAddedToTavern: 0
+      itemGained: {fileID: 0}
+      goldGained: 0
+      goldLostPercentage: 0
+      goldLost: 0
+      perkGained: 0
+      gainPerkChance: 100
+      injurySeverity: 0
+      injuryType: 0
+      experienceGained: 0
+      characterJoining: {fileID: 0}
+      moraleChangeChance: 100
+      moraleChangeMin: 0
+      moraleChangeMax: 0
+      healthLostPercentage: 0.5
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 7
       characterTargetIndex: 0
       returnEquippedItems: 0
@@ -70,6 +93,29 @@ MonoBehaviour:
   - lowerProbability: 34
     upperProbability: 100
     effects:
+    - effectType: 22
+      characterTargetIndex: 0
+      returnEquippedItems: 0
+      pageToLoad: {fileID: 0}
+      boonGained: 0
+      backgroundAddedToTavern: 0
+      totalCharactersAddedToTavern: 0
+      itemGained: {fileID: 0}
+      goldGained: 0
+      goldLostPercentage: 0
+      goldLost: 0
+      perkGained: 0
+      gainPerkChance: 100
+      injurySeverity: 0
+      injuryType: 0
+      experienceGained: 0
+      characterJoining: {fileID: 0}
+      moraleChangeChance: 100
+      moraleChangeMin: 0
+      moraleChangeMax: 0
+      healthLostPercentage: 0.5
+      wageIncreasePercentage: 0.1
+      characterLeaveProbability: 50
     - effectType: 3
       characterTargetIndex: 0
       returnEquippedItems: 0

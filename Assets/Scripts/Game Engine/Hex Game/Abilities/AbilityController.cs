@@ -1006,7 +1006,7 @@ namespace WeAreGladiators.Abilities
             // Stress Check
             else if (abilityEffect.effectType == AbilityEffectType.MoraleCheck)
             {
-                CombatController.Instance.CreateMoraleCheck(target, abilityEffect.stressEventData, true, true, true);
+                CombatController.Instance.CreateMoraleCheck(target, abilityEffect.stressEventData, true, true);
             }
 
             // Stress Check AoE
@@ -1052,7 +1052,7 @@ namespace WeAreGladiators.Abilities
                 foreach (HexCharacterModel character in charactersEffected)
                 {
                     VisualEventManager.CreateStackParentVisualEvent(character);
-                    bool hit = CombatController.Instance.CreateMoraleCheck(character, abilityEffect.stressEventData, true, false, true);
+                    bool hit = CombatController.Instance.CreateMoraleCheck(character, abilityEffect.stressEventData, false, true);
                     if(hit) charactersHit.Add(character);
                 }
 
@@ -1908,7 +1908,7 @@ namespace WeAreGladiators.Abilities
                 character.abilitiesUsedThisCombat == 0 &&
                 PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Gifted))
             {
-                apCost -= 3;
+                apCost -= 2;
             }
 
             // MASTERY PERKS
