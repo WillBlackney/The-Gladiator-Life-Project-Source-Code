@@ -145,6 +145,9 @@ MonoBehaviour:
       perkTag: 210
       passiveStacks: 1
     perkApplicationChance: 100
+  onHitEffects: []
+  onCritEffects: []
+  onPerkAppliedSuccessEffects:
   - aoeType: 0
     includeCentreTile: 1
     aoeSize: 1
@@ -189,9 +192,6 @@ MonoBehaviour:
       perkTag: 0
       passiveStacks: 1
     perkApplicationChance: 100
-  onHitEffects: []
-  onCritEffects: []
-  onPerkAppliedSuccessEffects: []
   onCollisionEffects: []
   chainLoops: 0
   chainedEffects: []

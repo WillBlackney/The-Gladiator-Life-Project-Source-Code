@@ -55,8 +55,6 @@ MonoBehaviour:
     passiveType: 0
   - kewWordType: 38
     passiveType: 0
-  - kewWordType: 36
-    passiveType: 0
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 1

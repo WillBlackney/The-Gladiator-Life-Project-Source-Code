@@ -91,7 +91,7 @@ namespace WeAreGladiators.UI
             Vector2 mousePos = Input.mousePosition;
             currentDir = ModalDirection.SouthEast;
             float xLimit = Screen.width / 5f;
-            float yLimit = Screen.height / 4f;
+            float yLimit = Screen.height / 3.25f;
 
             // too far north east
             if (mousePos.x > Screen.width - xLimit &&
