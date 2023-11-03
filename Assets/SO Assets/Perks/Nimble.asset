@@ -69,4 +69,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

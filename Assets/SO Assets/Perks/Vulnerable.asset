@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Vulnerable
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: c1232754a7a252a48bce8b5f517ad34e, type: 3}
+  passiveSprite: {fileID: 21300000, guid: e7fa3e1535f1e6f4ebe8c944dbacbde5, type: 3}
   passiveName: Vulnerable
   perkTag: 48
   passiveDescription:
@@ -63,4 +63,5 @@ MonoBehaviour:
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
   racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

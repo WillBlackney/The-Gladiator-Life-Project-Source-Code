@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Opportunist
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 5686fcc012206e343a7b6547cbe1b68e, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 2d2716ca288c93e479c30a5270cd6851, type: 3}
   passiveName: Opportunist
   perkTag: 71
   passiveDescription:
@@ -89,4 +89,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

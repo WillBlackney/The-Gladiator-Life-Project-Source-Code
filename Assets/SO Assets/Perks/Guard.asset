@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Guard
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: b8e857b13b1d8cf4ca7089c2fa3f885c, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 42d71a49fc9859241a28d80de1cd40aa, type: 3}
   passiveName: Guard
   perkTag: 74
   passiveDescription:
@@ -63,4 +63,5 @@ MonoBehaviour:
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
   racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

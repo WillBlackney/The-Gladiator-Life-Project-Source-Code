@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Evasion
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: d8c4539de8db06c4c97f76844b96b336, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 7b96881a9ca8f1f4c80a403a67ebbe49, type: 3}
   passiveName: Evasion
   perkTag: 76
   passiveDescription:
@@ -48,22 +48,25 @@ MonoBehaviour:
   maxAllowedStacks: 3
   showStackCount: 1
   hiddenOnPassivePanel: 0
-  isRewardable: 0
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
+  isOnPerkTree: 0
+  perkTreeTier: 0
   isInjury: 0
   isPermanentInjury: 0
-  severity: 0
-  injuryType: 0
-  minInjuryDuration: 0
-  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 0
   backgroundPerkQuality: 0
+  severity: 0
+  injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

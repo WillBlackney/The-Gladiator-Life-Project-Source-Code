@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Flaming Weapon
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: a1ef0af99795c6348b82d8cbbfbb9490, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 96df4264b66fc444eaf682a75d5cbcbc, type: 3}
   passiveName: Flaming Weapon
   perkTag: 8
   passiveDescription:

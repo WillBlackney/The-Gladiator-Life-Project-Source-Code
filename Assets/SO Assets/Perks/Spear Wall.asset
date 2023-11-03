@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Spear Wall
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 672106a955e19964d9ce3e854bee1004, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 8d01c1c04edec30448804b2b37daf416, type: 3}
   passiveName: Spear Wall
   perkTag: 202
   passiveDescription:
@@ -31,25 +31,29 @@ MonoBehaviour:
       attack them. '
   passiveItalicDescription: 
   effectDetailTabs: []
+  keyWords: []
   maxAllowedStacks: 1
   showStackCount: 0
   hiddenOnPassivePanel: 0
-  isRewardable: 0
   resistanceBlocksIncrease: 0
   resistanceBlocksDecrease: 0
   runeBlocksIncrease: 0
   runeBlocksDecrease: 0
+  isOnPerkTree: 0
+  perkTreeTier: 0
   isInjury: 0
   isPermanentInjury: 0
-  severity: 0
-  injuryType: 0
-  minInjuryDuration: 0
-  maxInjuryDuration: 0
   isRacial: 0
   race: 0
   isBackground: 0
   backgroundPerkQuality: 0
+  severity: 0
+  injuryType: 0
+  minInjuryDuration: 0
+  maxInjuryDuration: 0
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

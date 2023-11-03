@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Paranoid
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 0cce7a6142fb11141ac34e4c01a607fe, type: 3}
+  passiveSprite: {fileID: 21300000, guid: cd72c5d548c53294d8e74e6c2d943a4d, type: 3}
   passiveName: Paranoid
   perkTag: 114
   passiveDescription:

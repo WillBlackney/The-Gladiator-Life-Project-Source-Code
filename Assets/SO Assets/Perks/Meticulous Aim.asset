@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Meticulous Aim
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 6bfad0bd2a6c2d64594d9f8233e13f60, type: 3}
+  passiveSprite: {fileID: 21300000, guid: a03965fdc90c34b42b90a033ad68f0cf, type: 3}
   passiveName: Meticulous Aim
   perkTag: 70
   passiveDescription:
@@ -64,4 +64,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

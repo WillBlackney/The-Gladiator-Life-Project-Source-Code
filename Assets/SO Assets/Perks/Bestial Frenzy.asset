@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Bestial Frenzy
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: e2fce06ad1188b647a5175a31dd38bc0, type: 3}
+  passiveSprite: {fileID: 21300000, guid: d20c1f50ead06914faf15365928e9eba, type: 3}
   passiveName: Bestial Frenzy
   perkTag: 233
   passiveDescription:

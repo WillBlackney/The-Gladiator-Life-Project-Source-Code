@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Brawny
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 75bab9d9e1320d3459f51b64bad1f4c1, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 13ed6eaa645091d4aa879cf4ac62f2bf, type: 3}
   passiveName: Brawny
   perkTag: 110
   passiveDescription:

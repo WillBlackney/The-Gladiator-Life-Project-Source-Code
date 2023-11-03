@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Furious Assault
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: eb781a9821129a540803617a07ea173b, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 789cbdca73c333948b3456a8aa1cb935, type: 3}
   passiveName: Furious Assault
   perkTag: 219
   passiveDescription:
@@ -68,4 +68,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

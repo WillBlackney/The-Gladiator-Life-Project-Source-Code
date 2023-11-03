@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Smashed Shield
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 79315dfe66030a84aa951be088d77a44, type: 3}
+  passiveSprite: {fileID: 21300000, guid: e4048a27aa969584a9dbcc9eb26f2e61, type: 3}
   passiveName: Smashed Shield
   perkTag: 210
   passiveDescription:

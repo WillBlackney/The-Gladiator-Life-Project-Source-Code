@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Implaccable
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 1961b7923b9af554cb2d4c932a8e2b70, type: 3}
+  passiveSprite: {fileID: 21300000, guid: c82bc61bd35cc3c4c902b98f08187e29, type: 3}
   passiveName: Implaccable
   perkTag: 60
   passiveDescription:
@@ -85,4 +85,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []
