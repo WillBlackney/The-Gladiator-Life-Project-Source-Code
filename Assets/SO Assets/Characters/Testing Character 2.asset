@@ -55,6 +55,7 @@ MonoBehaviour:
   abilityBook:
     activeAbilities:
     - {fileID: 11400000, guid: b566ecb35016fa449ae9e743e809d086, type: 2}
+    - {fileID: 11400000, guid: bcab22104b6e8354687e12dc4eb19cbf, type: 2}
   serializedPassiveManager:
     perks: []
   modelParts:

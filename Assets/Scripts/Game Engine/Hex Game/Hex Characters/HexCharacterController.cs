@@ -1731,6 +1731,19 @@ namespace WeAreGladiators.Characters
             view.CurrentAnimation = AnimationEventController.RELOAD_CROSSBOW;
             view.ucmAnimator.SetTrigger(AnimationEventController.RELOAD_CROSSBOW);
         }
+        public void PlayKickDirtAnimation(HexCharacterView view, Vector2 targetPos)
+        {
+            if (view == null)
+            {
+                return;
+            }
+            view.CurrentAnimation = AnimationEventController.KICK_DIRT;
+            view.ucmAnimator.SetTrigger(AnimationEventController.KICK_DIRT);
+
+            Vector2 startPos = view.WorldPosition;
+            Vector2 forwardPos = (startPos + targetPos) / 2f;
+            view.ucmMovementParent.transform.DOMove(forwardPos, 0.3f).SetEase(Ease.OutQuad).SetLoops(2, LoopType.Yoyo);
+        }
         public void PlayChargeEndAnimation(HexCharacterView view)
         {
             if (view == null)

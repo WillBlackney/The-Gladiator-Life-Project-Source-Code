@@ -803,6 +803,7 @@
         Bite = 17,
         Stomp = 18,
         ThrowJavelin = 19,
+        KickDirt = 20,
     }
     public enum ParticleEffect
     {
@@ -832,7 +833,9 @@
         HolyNova = 13,
         RitualCircleYellow = 19,
         RitualCirclePurple = 20,
-        ToxicRain = 26
+        ToxicRain = 26,
+        DustExplosion = 27,
+        GoldCoinExplosion = 28,
 
     }
     public enum ProjectileFired

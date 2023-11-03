@@ -18,8 +18,7 @@ MonoBehaviour:
   baseAbilityDescription: Apply 2 Blinded to an enemy.
   abilitySprite: {fileID: 21300000, guid: e92533acd1945234b92e59ffb7f347ae, type: 3}
   energyCost: 3
-  fatigueCost: 10
-  baseCooldown: 2
+  baseCooldown: 0
   abilityType: 01000000
   doesNotBreakStealth: 0
   guidanceInstruction: 1
@@ -42,13 +41,19 @@ MonoBehaviour:
   hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
-  - effectType: 10
+  - aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    knockBackDistance: 0
+    effectType: 10
     stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       successChance: 0
     energyGained: 0
-    normalTeleportVFX: 1
+    teleportVFX: 0
     tilesMoved: 0
     lineLength: 0
     healthGained: 0
@@ -58,6 +63,7 @@ MonoBehaviour:
     triggersChainEffectSequence: 0
     visualEventsOnStart:
     - eventType: 2
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -67,12 +73,13 @@ MonoBehaviour:
       cameraShake: 0
       movementAnimation: 0
       soundEffect: 0
-      characterAnimation: 4
+      characterAnimation: 20
       delayDuration: 0
       projectileFired: 0
       projectileStartPosition: 0
       onCharacter: 0
     - eventType: 5
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -87,13 +94,24 @@ MonoBehaviour:
       projectileFired: 0
       projectileStartPosition: 0
       onCharacter: 0
+    - eventType: 3
+      newUcmParts: []
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 27
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 2
     visualEventsOnHit: []
     visualEventsOnEffectFinish: []
-    aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
     damageType: 0
     minBaseDamage: 0
     maxBaseDamage: 0
@@ -115,10 +133,53 @@ MonoBehaviour:
       perkTag: 4
       passiveStacks: 2
     perkApplicationChance: 100
-    knockBackDistance: 0
   onHitEffects: []
   onCritEffects: []
-  onPerkAppliedSuccessEffects: []
+  onPerkAppliedSuccessEffects:
+  - aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    knockBackDistance: 0
+    effectType: 0
+    stressEventData:
+      moraleChangeMin: 0
+      moraleChangeMax: 0
+      successChance: 0
+    energyGained: 0
+    teleportVFX: 0
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart: []
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish: []
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    bonusCritDamage: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
+    weaponUsed: 2
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 0}
+    characterSummonedName: ENTER NAME!!!
+    amountSummoned: 1
+    modelFadeInSpeed: 0
+    uiFadeInSpeed: 0
+    summonedCreatureVisualEvents: []
+    perkPairing:
+      perkTag: 0
+      passiveStacks: 1
+    perkApplicationChance: 100
   onCollisionEffects: []
   chainLoops: 0
   chainedEffects: []

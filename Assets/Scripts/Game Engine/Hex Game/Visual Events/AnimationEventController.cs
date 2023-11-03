@@ -11,10 +11,50 @@ namespace WeAreGladiators.VisualEvents
 {
     public class AnimationEventController : Singleton<AnimationEventController>
     {
+        #region Constants
 
-        // Core Functions
-        #region
+        public const string MAIN_HAND_MELEE_ATTACK_OVERHEAD = "MAIN_HAND_MELEE_ATTACK_OVERHEAD";
+        public const string MAIN_HAND_MELEE_ATTACK_THRUST = "MAIN_HAND_MELEE_ATTACK_THRUST";
+        public const string MAIN_HAND_MELEE_ATTACK_CLEAVE = "MAIN_HAND_MELEE_ATTACK_CLEAVE";
+        public const string OFF_HAND_MELEE_ATTACK_OVERHEAD = "OFF_HAND_MELEE_ATTACK_OVERHEAD";
+        public const string OFF_HAND_MELEE_ATTACK_THRUST = "OFF_HAND_MELEE_ATTACK_THRUST";
+        public const string OFF_HAND_THROW_NET = "OFF_HAND_THROW_NET";
+        public const string TWO_HAND_MELEE_ATTACK_OVERHEAD_1 = "TWO_HAND_MELEE_ATTACK_OVERHEAD_1";
+        public const string TWO_HAND_MELEE_ATTACK_OVERHEAD_2 = "TWO_HAND_MELEE_ATTACK_OVERHEAD_2";
+        public const string TWO_HAND_MELEE_ATTACK_THRUST = "TWO_HAND_MELEE_ATTACK_THRUST";
+        public const string TWO_HAND_MELEE_ATTACK_CLEAVE = "TWO_HAND_MELEE_ATTACK_CLEAVE";
+        public const string RAISE_SHIELD = "RAISE_SHIELD";
+        public const string SHIELD_BASH = "SHIELD_BASH";
+        public const string OFF_HAND_PUSH = "OFF_HAND_PUSH";
+        public const string CHARGE = "CHARGE";
+        public const string CHARGE_END = "CHARGE_END";
+        public const string DUCK = "DUCK";
+        public const string IDLE = "IDLE";
+        public const string SHOOT_BOW = "Shoot Bow";
+        public const string SHOOT_CROSSBOW = "Shoot Crossbow";
+        public const string RUN = "RUN";
+        public const string HURT = "HURT";
+        public const string DIE_1 = "DIE_1";
+        public const string DIE_2 = "DIE_2";
+        public const string DIE_3 = "DIE_3";
+        public const string DIE_4 = "DIE_4";
+        public const string DECAPITATION_1 = "DECAPITATION_1";
+        public const string DECAPITATION_2 = "DECAPITATION_2";
+        public const string RESSURECT = "Ressurect";
+        public const string LEFT_HAND_SHOOT_MAGIC = "LEFT_HAND_SHOOT_MAGIC";
+        public const string TWO_HAND_SHOOT_MAGIC = "TWO_HAND_SHOOT_MAGIC";
+        public const string GENERIC_SKILL_1 = "GENERIC_SKILL_1";
+        public const string TURN_START_1 = "TURN_START_1";
+        public const string TACKLE = "TACKLE";
+        public const string TACKLE_END = "TACKLE_END";
+        public const string RELOAD_CROSSBOW = "RELOAD_CROSSBOW";
+        public const string SHATTERED = "SHATTERED";
+        public const string BITE = "BITE";
+        public const string STOMP = "STOMP";
+        public const string KICK_DIRT = "KICK_DIRT";
+        #endregion
 
+        #region Core Functions
         public void PlayAnimationEvent(AnimationEventData vEvent, HexCharacterModel user = null, HexCharacterModel targetCharacter = null, LevelNode targetTile = null, ItemData weaponUsed = null, VisualEvent stackEvent = null)
         {
             if (vEvent.eventType == AnimationEventType.CameraShake)
@@ -67,51 +107,8 @@ namespace WeAreGladiators.VisualEvents
         }
 
         #endregion
-        #region Constants
 
-        public const string MAIN_HAND_MELEE_ATTACK_OVERHEAD = "MAIN_HAND_MELEE_ATTACK_OVERHEAD";
-        public const string MAIN_HAND_MELEE_ATTACK_THRUST = "MAIN_HAND_MELEE_ATTACK_THRUST";
-        public const string MAIN_HAND_MELEE_ATTACK_CLEAVE = "MAIN_HAND_MELEE_ATTACK_CLEAVE";
-        public const string OFF_HAND_MELEE_ATTACK_OVERHEAD = "OFF_HAND_MELEE_ATTACK_OVERHEAD";
-        public const string OFF_HAND_MELEE_ATTACK_THRUST = "OFF_HAND_MELEE_ATTACK_THRUST";
-        public const string OFF_HAND_THROW_NET = "OFF_HAND_THROW_NET";
-        public const string TWO_HAND_MELEE_ATTACK_OVERHEAD_1 = "TWO_HAND_MELEE_ATTACK_OVERHEAD_1";
-        public const string TWO_HAND_MELEE_ATTACK_OVERHEAD_2 = "TWO_HAND_MELEE_ATTACK_OVERHEAD_2";
-        public const string TWO_HAND_MELEE_ATTACK_THRUST = "TWO_HAND_MELEE_ATTACK_THRUST";
-        public const string TWO_HAND_MELEE_ATTACK_CLEAVE = "TWO_HAND_MELEE_ATTACK_CLEAVE";
-        public const string RAISE_SHIELD = "RAISE_SHIELD";
-        public const string SHIELD_BASH = "SHIELD_BASH";
-        public const string OFF_HAND_PUSH = "OFF_HAND_PUSH";
-        public const string CHARGE = "CHARGE";
-        public const string CHARGE_END = "CHARGE_END";
-        public const string DUCK = "DUCK";
-        public const string IDLE = "IDLE";
-        public const string SHOOT_BOW = "Shoot Bow";
-        public const string SHOOT_CROSSBOW = "Shoot Crossbow";
-        public const string RUN = "RUN";
-        public const string HURT = "HURT";
-        public const string DIE_1 = "DIE_1";
-        public const string DIE_2 = "DIE_2";
-        public const string DIE_3 = "DIE_3";
-        public const string DIE_4 = "DIE_4";
-        public const string DECAPITATION_1 = "DECAPITATION_1";
-        public const string DECAPITATION_2 = "DECAPITATION_2";
-        public const string RESSURECT = "Ressurect";
-        public const string LEFT_HAND_SHOOT_MAGIC = "LEFT_HAND_SHOOT_MAGIC";
-        public const string TWO_HAND_SHOOT_MAGIC = "TWO_HAND_SHOOT_MAGIC";
-        public const string GENERIC_SKILL_1 = "GENERIC_SKILL_1";
-        public const string TURN_START_1 = "TURN_START_1";
-        public const string TACKLE = "TACKLE";
-        public const string TACKLE_END = "TACKLE_END";
-        public const string RELOAD_CROSSBOW = "RELOAD_CROSSBOW";
-        public const string SHATTERED = "SHATTERED";
-        public const string BITE = "BITE";
-        public const string STOMP = "STOMP";
-
-        #endregion
-
-        // Handle specific events
-        #region
+        #region Handle specific events
 
         private void ResolveCameraShake(AnimationEventData vEvent, VisualEvent stackEvent)
         {
@@ -212,6 +209,7 @@ namespace WeAreGladiators.VisualEvents
                     HexCharacterController.Instance.TriggerShieldBashAnimation(user.hexCharacterView, targetView.WorldPosition, cData);
                 }, stackEvent).SetCoroutineData(cData);
             }
+
             // AoE Melee Attack 
             else if (vEvent.characterAnimation == CharacterAnimation.AoeMeleeAttack)
             {
@@ -221,6 +219,12 @@ namespace WeAreGladiators.VisualEvents
                     AudioManager.Instance.PlaySound(user.AudioProfile, AudioSet.Attack);
                     HexCharacterController.Instance.TriggerAoeMeleeAttackAnimation(user.hexCharacterView, weaponUsed, cData);
                 }, stackEvent).SetCoroutineData(cData);
+            }
+            // Kick Dirt
+            else if (vEvent.characterAnimation == CharacterAnimation.KickDirt)
+            {
+                HexCharacterView targetView = targetCharacter.hexCharacterView;
+                VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.PlayKickDirtAnimation(user.hexCharacterView, targetView.WorldPosition), stackEvent);
             }
             // Reload Crossbow
             else if (vEvent.characterAnimation == CharacterAnimation.ReloadCrossbow)

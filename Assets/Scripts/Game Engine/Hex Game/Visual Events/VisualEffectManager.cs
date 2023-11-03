@@ -32,6 +32,7 @@ namespace WeAreGladiators.VisualEvents
 
         [Header("Card VFX Prefabs")]
         public GameObject ExpendEffectPrefab;
+        public GameObject DustExplosionPrefab;
         public GameObject GreenGlowTrailEffectPrefab;
         public GameObject YellowGlowTrailEffectPrefab;
 
@@ -163,11 +164,15 @@ namespace WeAreGladiators.VisualEvents
             {
                 CreateShadowExplosion(location);
             }
+            else if (effect == ParticleEffect.DustExplosion)
+            {
+                CreateDustExplosion(location);
+            }
             else if (effect == ParticleEffect.BloodExplosion)
             {
                 CreateBloodExplosion(location);
             }
-            else if (effect == ParticleEffect.BloodExplosion)
+            else if (effect == ParticleEffect.GoldCoinExplosion)
             {
                 CreateGoldCoinExplosion(location);
             }
@@ -690,7 +695,13 @@ namespace WeAreGladiators.VisualEvents
             GameObject hn = Instantiate(smallShadowExplosion, location, smallShadowExplosion.transform.rotation);
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-            //AudioManager.Instance.PlaySoundPooled(Sound.Explosion_Shadow_1);
+        }
+        // Dust Explosion
+        public void CreateDustExplosion(Vector3 location, int sortingOrderBonus = 0, float scaleModifier = 1f)
+        {
+            GameObject hn = Instantiate(DustExplosionPrefab, location, DustExplosionPrefab.transform.rotation);
+            ToonEffect teScript = hn.GetComponent<ToonEffect>();
+            teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
         }
         // Ghost Explosion Purple
         public void CreateGhostExplosionPurple(Vector3 location, int sortingOrderBonus = 15, float scaleModifier = 1f)
