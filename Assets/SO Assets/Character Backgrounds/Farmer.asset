@@ -18,7 +18,7 @@ MonoBehaviour:
     farmers great vitality and strength. Between cleaning horse shit and making far
     too many babies, they never made time to read, so don\u2019t expect much in the
     way of wit and wisdom from these folk."
-  recruitable: 1
+  recruitable: 0
   spawnChance: 60
   lowerLevelLimit: 1
   upperLevelLimit: 1

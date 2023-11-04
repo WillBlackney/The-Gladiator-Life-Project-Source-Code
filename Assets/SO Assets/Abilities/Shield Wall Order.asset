@@ -16,12 +16,13 @@ MonoBehaviour:
   displayedName: Shield Wall Order
   includeInGame: 1
   baseAbilityDescription: Apply 1 Guard to all allies.
-  abilitySprite: {fileID: 21300000, guid: e2ee8334d81fdfb4499d152e34d25d62, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 88dc82b248675a345aecde161923dac1, type: 3}
   energyCost: 5
-  fatigueCost: 0
   baseCooldown: 2
   abilityType: 01000000
   doesNotBreakStealth: 0
+  guidanceInstruction: 0
+  guidanceInstructionTwo: 0
   weaponRequirement: 0
   derivedFromWeapon: 0
   derivedFromItemLoadout: 0
@@ -40,13 +41,19 @@ MonoBehaviour:
   hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
-  - effectType: 12
+  - aoeType: 3
+    includeCentreTile: 0
+    aoeSize: 1
+    effectsAllies: 1
+    effectsEnemies: 0
+    knockBackDistance: 0
+    effectType: 12
     stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       successChance: 0
     energyGained: 0
-    normalTeleportVFX: 1
+    teleportVFX: 0
     tilesMoved: 0
     lineLength: 0
     healthGained: 0
@@ -56,6 +63,7 @@ MonoBehaviour:
     triggersChainEffectSequence: 0
     visualEventsOnStart:
     - eventType: 2
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -72,6 +80,7 @@ MonoBehaviour:
       onCharacter: 0
     visualEventsOnHit:
     - eventType: 3
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -88,6 +97,7 @@ MonoBehaviour:
       onCharacter: 2
     visualEventsOnEffectFinish:
     - eventType: 6
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -102,11 +112,6 @@ MonoBehaviour:
       projectileFired: 0
       projectileStartPosition: 0
       onCharacter: 0
-    aoeType: 3
-    includeCentreTile: 0
-    aoeSize: 1
-    effectsAllies: 1
-    effectsEnemies: 0
     damageType: 0
     minBaseDamage: 0
     maxBaseDamage: 0
@@ -128,7 +133,6 @@ MonoBehaviour:
       perkTag: 74
       passiveStacks: 1
     perkApplicationChance: 100
-    knockBackDistance: 0
   onHitEffects: []
   onCritEffects: []
   onPerkAppliedSuccessEffects: []

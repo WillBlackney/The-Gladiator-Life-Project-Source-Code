@@ -828,12 +828,17 @@ namespace WeAreGladiators.HexTiles
                 {
                     Vector3 dest = destination.WorldPosition;
                     HexCharacterController.Instance.PlayLongJumpAnimation(view, dest, cData);
+                    if (updateActivationHex)
+                    {
+                        character.currentTile.ShowActivationMarker();
+                    }
                 }).SetCoroutineData(cData);
 
+                /*
                 if (updateActivationHex)
                 {
                     character.currentTile.ShowActivationMarker();
-                }
+                }*/
             }           
 
             // Handle stress event: Enemy moved into my melee range + moved into back arc (on destination only)

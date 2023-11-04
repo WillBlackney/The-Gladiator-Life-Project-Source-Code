@@ -18,7 +18,7 @@ MonoBehaviour:
     anything less than fearsome fighters. Though old age may have worn down their
     health and fitness, retired warriors maintain remarkable technique, discipline
     and courage."
-  recruitable: 1
+  recruitable: 0
   spawnChance: 40
   lowerLevelLimit: 1
   upperLevelLimit: 2

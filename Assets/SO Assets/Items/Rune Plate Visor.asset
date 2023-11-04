@@ -18,8 +18,7 @@ MonoBehaviour:
     imbuing the wearer with magical power.
   itemType: 1
   rarity: 2
-  fatiguePenalty: 9
-  baseGoldValue: 375
+  baseGoldValue: 465
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -28,11 +27,12 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 75
-  maxArmourRoll: 75
+  minArmourRoll: 55
+  maxArmourRoll: 55
   grantedAbilities: []
   itemEffectSets: []
   equipSFX: 127

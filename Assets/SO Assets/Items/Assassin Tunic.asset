@@ -20,8 +20,7 @@ MonoBehaviour:
     ideal for agile and stealthy characters.
   itemType: 2
   rarity: 2
-  fatiguePenalty: 9
-  baseGoldValue: 450
+  baseGoldValue: 550
   canSpawnInShop: 1
   canBeCombatContractReward: 0
   includeInLibrary: 1
@@ -30,11 +29,12 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 90
-  maxArmourRoll: 90
+  minArmourRoll: 65
+  maxArmourRoll: 65
   grantedAbilities: []
   itemEffectSets: []
   equipSFX: 125

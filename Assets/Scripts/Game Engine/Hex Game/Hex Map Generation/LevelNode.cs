@@ -11,41 +11,7 @@ namespace WeAreGladiators.HexTiles
 {
     public class LevelNode : Hexagon
     {
-
-        // Elevation Pillar sprite logic
-        #region
-
-        public void SetPillarSprites(bool dayTime)
-        {
-            if (dayTime)
-            {
-                foreach (SpriteRenderer sr in elevationPillarCircleRenderers)
-                {
-                    sr.sprite = dayTimeCircle;
-                }
-
-                foreach (SpriteRenderer sr in elevationPillarSquareRenderers)
-                {
-                    sr.sprite = dayTimeSquare;
-                }
-            }
-            else if (!dayTime)
-            {
-                foreach (SpriteRenderer sr in elevationPillarCircleRenderers)
-                {
-                    sr.sprite = nightTimeCircle;
-                }
-
-                foreach (SpriteRenderer sr in elevationPillarSquareRenderers)
-                {
-                    sr.sprite = nightTimeSquare;
-                }
-            }
-        }
-
-        #endregion
-        // Components + Properties
-        #region
+        #region Components + Properties
 
         [Header("Properties")]
         [Tooltip("If marked false, this node will be removed from view and game play logic. Use this to shrink/expand the size of the play area.")]
@@ -99,9 +65,37 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Getters + Accessors
-        #region
+        #region Elevation Pillar sprite logic
+        public void SetPillarSprites(bool dayTime)
+        {
+            if (dayTime)
+            {
+                foreach (SpriteRenderer sr in elevationPillarCircleRenderers)
+                {
+                    sr.sprite = dayTimeCircle;
+                }
 
+                foreach (SpriteRenderer sr in elevationPillarSquareRenderers)
+                {
+                    sr.sprite = dayTimeSquare;
+                }
+            }
+            else if (!dayTime)
+            {
+                foreach (SpriteRenderer sr in elevationPillarCircleRenderers)
+                {
+                    sr.sprite = nightTimeCircle;
+                }
+
+                foreach (SpriteRenderer sr in elevationPillarSquareRenderers)
+                {
+                    sr.sprite = nightTimeSquare;
+                }
+            }
+        }
+        #endregion       
+
+        #region Getters + Accessors
         public bool Exists => exists;
         public bool Obstructed { get; private set; }
         public HexDataSO TileData { get; private set; }
@@ -172,9 +166,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Events
-        #region
-
+        #region Events
         public void BuildFromData(HexDataSO data)
         {
             TileData = data;
@@ -214,8 +206,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Input 
-        #region
+        #region Input
 
         protected override void OnMouseDown()
         {
@@ -242,8 +233,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Inherited Logic
-        #region
+        #region Inherited Logic
 
         public override Vector3 GetCellDimensions()
         {
@@ -268,9 +258,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Marking Logic
-        #region
-
+        #region Marking Logic
         public void ShowMoveMarker()
         {
             Debug.Log("ShowMoveMarker() called...");
@@ -309,17 +297,11 @@ namespace WeAreGladiators.HexTiles
             CurrentActivationNode = null;
         }
 
-        public static LevelNode CurrentActivationNode
-        {
-            get;
-            private set;
-        }
+        private static LevelNode CurrentActivationNode;
 
         #endregion
 
-        // Elevation Logic
-        #region
-
+        #region Elevation Logic
         public void SetHexTileElevation(TileElevation elevation)
         {
             Elevation = elevation;
@@ -362,8 +344,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Sub Targetting Logic
-        #region
+        #region Sub Targetting Logic
 
         public void ShowSubTargettingMarker(LevelNodeColor frameColor)
         {
@@ -401,8 +382,7 @@ namespace WeAreGladiators.HexTiles
 
         #endregion
 
-        // Misc
-        #region
+        #region Misc
 
         public string PrintGridPosition()
         {

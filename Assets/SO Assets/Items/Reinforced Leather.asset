@@ -18,8 +18,7 @@ MonoBehaviour:
     protection against slashing and piercing attacks.
   itemType: 2
   rarity: 1
-  fatiguePenalty: 8
-  baseGoldValue: 300
+  baseGoldValue: 375
   canSpawnInShop: 1
   canBeCombatContractReward: 0
   includeInLibrary: 1
@@ -28,11 +27,12 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 60
-  maxArmourRoll: 60
+  minArmourRoll: 45
+  maxArmourRoll: 45
   grantedAbilities: []
   itemEffectSets: []
   equipSFX: 126

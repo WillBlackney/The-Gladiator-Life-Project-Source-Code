@@ -18,8 +18,7 @@ MonoBehaviour:
     against magical attacks.
   itemType: 2
   rarity: 2
-  fatiguePenalty: 25
-  baseGoldValue: 750
+  baseGoldValue: 925
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -28,11 +27,12 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 150
-  maxArmourRoll: 150
+  minArmourRoll: 115
+  maxArmourRoll: 115
   grantedAbilities: []
   itemEffectSets: []
   equipSFX: 127

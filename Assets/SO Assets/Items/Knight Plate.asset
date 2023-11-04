@@ -17,8 +17,7 @@ MonoBehaviour:
   itemDescription: A full suit of heavy plate armor, polished to a shine.
   itemType: 2
   rarity: 3
-  fatiguePenalty: 30
-  baseGoldValue: 850
+  baseGoldValue: 1075
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -27,11 +26,12 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 170
-  maxArmourRoll: 170
+  minArmourRoll: 130
+  maxArmourRoll: 130
   grantedAbilities: []
   itemEffectSets: []
   equipSFX: 127

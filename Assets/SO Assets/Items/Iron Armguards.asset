@@ -19,8 +19,7 @@ MonoBehaviour:
     soldiers in conjunction with other armor pieces.
   itemType: 2
   rarity: 2
-  fatiguePenalty: 12
-  baseGoldValue: 400
+  baseGoldValue: 500
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -29,11 +28,12 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 80
-  maxArmourRoll: 80
+  minArmourRoll: 65
+  maxArmourRoll: 65
   grantedAbilities: []
   itemEffectSets: []
   equipSFX: 126

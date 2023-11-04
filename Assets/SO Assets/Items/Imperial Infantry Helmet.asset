@@ -19,8 +19,7 @@ MonoBehaviour:
     providing adequate protection without being overly bulky or heavy.
   itemType: 1
   rarity: 1
-  fatiguePenalty: 4
-  baseGoldValue: 175
+  baseGoldValue: 215
   canSpawnInShop: 0
   canBeCombatContractReward: 0
   includeInLibrary: 1

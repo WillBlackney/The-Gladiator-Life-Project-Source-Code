@@ -18,7 +18,7 @@ MonoBehaviour:
     Thought they have decent martial training, cowardice isn't a great quality in
     a gladiator.
   recruitable: 1
-  spawnChance: 60
+  spawnChance: 50
   lowerLevelLimit: 1
   upperLevelLimit: 1
   dailyWageMin: 9

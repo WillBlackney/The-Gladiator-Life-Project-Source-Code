@@ -19,7 +19,7 @@ MonoBehaviour:
     dangerous. Try not to fall asleep around them though, and certainly don\u2019t
     drink any wine they give you."
   recruitable: 1
-  spawnChance: 20
+  spawnChance: 25
   lowerLevelLimit: 1
   upperLevelLimit: 2
   dailyWageMin: 23

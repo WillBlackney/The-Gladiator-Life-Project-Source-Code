@@ -1482,6 +1482,7 @@ namespace WeAreGladiators.Characters
         }
         private IEnumerator TriggerKnockedBackIntoObstructionAnimationCoroutine(HexCharacterView view, Vector2 targetPos, TaskTracker cData)
         {
+            Debug.LogWarning("TriggerKnockedBackIntoObstructionAnimationCoroutine, targetPos position = " + targetPos.ToString());
             HexCharacterModel model = view.character;
             if (model == null)
             {
@@ -1500,19 +1501,23 @@ namespace WeAreGladiators.Characters
             }
 
             Vector2 startPos = view.WorldPosition;
-
+            Debug.LogWarning("TriggerKnockedBackIntoObstructionAnimationCoroutine, startPos position = " + targetPos.ToString());
             // Move 66% of the way towards the target position
-            Vector2 forwardPos = (startPos + targetPos) / 1.8f;
+            //Vector2 forwardPos = (startPos + targetPos) * 0.5f;
+            //Vector2 forwardPos = (targetPos + startPos);
+            Vector2 forwardPos = targetPos;
+            //Vector2 forwardPos = Vector2.Lerp(startPos, targetPos, 0.5f);
+            Debug.LogWarning("TriggerKnockedBackIntoObstructionAnimationCoroutine, final midpoint position = " + forwardPos.ToString());
 
             view.ucmMovementParent.transform.DOMove(forwardPos, moveSpeedTime).SetEase(Ease.OutBack);
-            yield return new WaitForSeconds(moveSpeedTime / 2);
+            yield return new WaitForSeconds(moveSpeedTime * 0.5f);
 
             if (cData != null)
             {
                 cData.MarkAsCompleted();
             }
 
-            yield return new WaitForSeconds(moveSpeedTime / 2);
+            yield return new WaitForSeconds(moveSpeedTime * 0.5f);
 
             // move back to start pos
             view.ucmMovementParent.transform.DOMove(startPos, moveSpeedTime);
@@ -1940,7 +1945,6 @@ namespace WeAreGladiators.Characters
             SetCharacterActivationPhase(character, ActivationPhase.StartPhase);
             LevelNode hex = character.currentTile;
             HexCharacterView view = character.hexCharacterView;
-            VisualEventManager.CreateVisualEvent(() => hex.ShowActivationMarker());
 
             // Brief delay on start 
             VisualEventManager.InsertTimeDelayInQueue(0.5f);
@@ -1960,6 +1964,7 @@ namespace WeAreGladiators.Characters
             {
                 VisualEventManager.CreateVisualEvent(() =>
                 {
+                    hex.ShowActivationMarker();
                     if (character.controller == Controller.Player)
                     {
                         CombatUIController.Instance.BuildAndShowViewsOnTurnStart(character);
@@ -2291,11 +2296,6 @@ namespace WeAreGladiators.Characters
                 MainModalController.Instance.HideModal();
                 EnemyInfoModalController.Instance.HideModal();
                 ActionErrorGuidanceController.Instance.HideErrorMessage();
-
-                //AbilityController.Instance.HideHitChancePopup();
-                // TargetGuidanceController.Instance.Hide();
-                //LevelController.Instance.UnmarkAllTiles();
-                //LevelController.Instance.UnmarkAllSubTargetMarkers();
             }
 
             // Stop if combat has ended
@@ -2772,7 +2772,7 @@ namespace WeAreGladiators.Characters
             if (character.controller == Controller.AI && character.livingState == LivingState.Alive)
             {
                 // Brief pause at the end of enemy action, so player can process whats happened
-                VisualEventManager.InsertTimeDelayInQueue(1.5f);
+                VisualEventManager.InsertTimeDelayInQueue(1f);
             }
 
             if (firstTimeDelay)

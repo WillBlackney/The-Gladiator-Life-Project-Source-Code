@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Codice.CM.Common;
+using TbsFramework.Players;
+using UnityEngine;
 using WeAreGladiators.Audio;
 using WeAreGladiators.CameraSystems;
 using WeAreGladiators.Characters;
@@ -162,19 +164,15 @@ namespace WeAreGladiators.VisualEvents
             {
                 HexCharacterView targetView = targetCharacter.hexCharacterView;
                 TaskTracker cData = new TaskTracker();
-                HexDirection direction = LevelController.Instance.GetDirectionToTargetHex(user.currentTile, targetCharacter.currentTile);
-                LevelNode knockbackNode = LevelController.Instance.GetAdjacentHexByDirection(targetCharacter.currentTile, direction);
-                if (knockbackNode != null)
-                {
-                    knockbackNode = targetCharacter.currentTile;
-                }
 
                 VisualEventManager.CreateVisualEvent(() =>
                 {
+                    Vector2 destination = Vector2.MoveTowards(targetCharacter.currentTile.WorldPosition, user.currentTile.WorldPosition, -0.5f);
+
                     HexCharacterController.Instance.TriggerTackleAnimation(user.hexCharacterView, targetView.WorldPosition, cData);
                     DelayUtils.DelayedCall(0.1f, () =>
                     {
-                        HexCharacterController.Instance.TriggerKnockedBackIntoObstructionAnimation(targetView, knockbackNode.WorldPosition, null);
+                        HexCharacterController.Instance.TriggerKnockedBackIntoObstructionAnimation(targetView, destination, null);
                     });
                 }, stackEvent).SetCoroutineData(cData);
 

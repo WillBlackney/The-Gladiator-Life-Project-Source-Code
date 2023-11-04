@@ -19,7 +19,7 @@ namespace WeAreGladiators.Characters
 
         [VerticalGroup("Core Data/Stats")]
         [LabelWidth(100)]
-        [TextArea]
+        [TextArea(5,5)]
         public string description;
 
         [VerticalGroup("Core Data/Stats")]

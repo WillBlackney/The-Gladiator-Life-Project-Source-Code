@@ -17,7 +17,7 @@ MonoBehaviour:
   description: "Professional hunters of witches, necromancers and all things foul.
     Not particularly talkative or good drinking buddies\u2026"
   recruitable: 1
-  spawnChance: 40
+  spawnChance: 50
   lowerLevelLimit: 1
   upperLevelLimit: 2
   dailyWageMin: 12

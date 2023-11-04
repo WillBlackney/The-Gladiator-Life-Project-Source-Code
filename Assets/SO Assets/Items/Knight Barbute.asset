@@ -19,8 +19,7 @@ MonoBehaviour:
     and breath in. '
   itemType: 1
   rarity: 3
-  fatiguePenalty: 11
-  baseGoldValue: 450
+  baseGoldValue: 560
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -29,11 +28,12 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 90
-  maxArmourRoll: 90
+  minArmourRoll: 70
+  maxArmourRoll: 70
   grantedAbilities: []
   itemEffectSets: []
   equipSFX: 127

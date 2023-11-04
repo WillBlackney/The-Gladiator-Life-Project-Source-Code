@@ -122,7 +122,7 @@ namespace WeAreGladiators.JourneyLogic
             PerkController.Instance.HandleTickDownInjuriesOnNewDayStart();
 
             // Generate new daily recruits
-            TownController.Instance.GenerateDailyRecruits(RandomGenerator.NumberBetween(5, 7));
+            TownController.Instance.GenerateDailyRecruits(RandomGenerator.NumberBetween(6, 8));
 
             // Generate new combat contracts
             TownController.Instance.GenerateDailyCombatContracts();

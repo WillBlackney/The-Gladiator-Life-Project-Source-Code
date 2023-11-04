@@ -17,9 +17,8 @@ MonoBehaviour:
   includeInGame: 1
   baseAbilityDescription: Deal 100% Physical damage and apply Stunned to all characters
     within your Aura.
-  abilitySprite: {fileID: 21300000, guid: b666f68f6fe94cc469268e6402a33e26, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 5eadd08454dc6704d854ba16e84f2726, type: 3}
   energyCost: 4
-  fatigueCost: 20
   baseCooldown: 2
   abilityType: 01000000
   doesNotBreakStealth: 0
@@ -43,13 +42,19 @@ MonoBehaviour:
   hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
-  - effectType: 3
+  - aoeType: 2
+    includeCentreTile: 0
+    aoeSize: 1
+    effectsAllies: 1
+    effectsEnemies: 1
+    knockBackDistance: 0
+    effectType: 3
     stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       successChance: 0
     energyGained: 0
-    normalTeleportVFX: 1
+    teleportVFX: 0
     tilesMoved: 0
     lineLength: 0
     healthGained: 0
@@ -59,6 +64,7 @@ MonoBehaviour:
     triggersChainEffectSequence: 0
     visualEventsOnStart:
     - eventType: 2
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -74,6 +80,7 @@ MonoBehaviour:
       projectileStartPosition: 2
       onCharacter: 0
     - eventType: 3
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -89,6 +96,7 @@ MonoBehaviour:
       projectileStartPosition: 0
       onCharacter: 2
     - eventType: 4
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -106,6 +114,7 @@ MonoBehaviour:
     visualEventsOnHit: []
     visualEventsOnEffectFinish:
     - eventType: 6
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -120,11 +129,6 @@ MonoBehaviour:
       projectileFired: 0
       projectileStartPosition: 0
       onCharacter: 0
-    aoeType: 2
-    includeCentreTile: 0
-    aoeSize: 1
-    effectsAllies: 1
-    effectsEnemies: 1
     damageType: 1
     minBaseDamage: 28
     maxBaseDamage: 32
@@ -146,15 +150,20 @@ MonoBehaviour:
       perkTag: 0
       passiveStacks: 0
     perkApplicationChance: 100
-    knockBackDistance: 0
   onHitEffects:
-  - effectType: 10
+  - aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    knockBackDistance: 0
+    effectType: 10
     stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       successChance: 0
     energyGained: 0
-    normalTeleportVFX: 1
+    teleportVFX: 0
     tilesMoved: 0
     lineLength: 0
     healthGained: 0
@@ -165,11 +174,6 @@ MonoBehaviour:
     visualEventsOnStart: []
     visualEventsOnHit: []
     visualEventsOnEffectFinish: []
-    aoeType: 0
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 0
-    effectsEnemies: 0
     damageType: 0
     minBaseDamage: 0
     maxBaseDamage: 0
@@ -191,7 +195,6 @@ MonoBehaviour:
       perkTag: 3
       passiveStacks: 1
     perkApplicationChance: 100
-    knockBackDistance: 0
   onCritEffects: []
   onPerkAppliedSuccessEffects: []
   onCollisionEffects: []

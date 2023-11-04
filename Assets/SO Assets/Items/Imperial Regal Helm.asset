@@ -18,7 +18,7 @@ MonoBehaviour:
     that can be raised or lowered.
   itemType: 1
   rarity: 3
-  baseGoldValue: 400
+  baseGoldValue: 500
   canSpawnInShop: 0
   canBeCombatContractReward: 0
   includeInLibrary: 1
@@ -31,8 +31,8 @@ MonoBehaviour:
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 75
-  maxArmourRoll: 75
+  minArmourRoll: 65
+  maxArmourRoll: 65
   grantedAbilities: []
   itemEffectSets: []
   equipSFX: 127

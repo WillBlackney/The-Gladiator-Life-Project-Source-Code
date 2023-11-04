@@ -18,8 +18,7 @@ MonoBehaviour:
     armored soldiers and knights.
   itemType: 3
   rarity: 3
-  fatiguePenalty: 18
-  baseGoldValue: 600
+  baseGoldValue: 750
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -28,6 +27,7 @@ MonoBehaviour:
   allowedSlot: 1
   injuryTypesCaused: 02000000
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 0.65
   armourPenetration: 0.25

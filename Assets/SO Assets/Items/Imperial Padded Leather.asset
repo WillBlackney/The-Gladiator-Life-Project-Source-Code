@@ -18,8 +18,7 @@ MonoBehaviour:
     while remaining flexible and comfortable.
   itemType: 2
   rarity: 1
-  fatiguePenalty: 4
-  baseGoldValue: 175
+  baseGoldValue: 215
   canSpawnInShop: 0
   canBeCombatContractReward: 0
   includeInLibrary: 1
@@ -28,6 +27,7 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

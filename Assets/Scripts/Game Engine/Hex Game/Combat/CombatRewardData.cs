@@ -42,8 +42,9 @@ namespace WeAreGladiators.Characters
             baseGoldReward = RandomGenerator.NumberBetween(lowerGoldReward, upperGoldReward);
 
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
-            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(375, 525).ShuffledCopy()[0]);
+            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(375, 550).ShuffledCopy()[0]);
             crd.goldAmount = baseGoldReward - crd.item.baseGoldValue;
+            crd.goldAmount += 150;
             if (crd.goldAmount < 50)
             {
                 crd.goldAmount = 50;
@@ -64,8 +65,9 @@ namespace WeAreGladiators.Characters
             baseGoldReward = RandomGenerator.NumberBetween(lowerGoldReward, upperGoldReward);
 
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
-            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(550, 1025).ShuffledCopy()[0]);
+            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(600, 1025).ShuffledCopy()[0]);
             crd.goldAmount = baseGoldReward - crd.item.baseGoldValue;
+            crd.goldAmount += 150;
             if (crd.goldAmount < 50)
             {
                 crd.goldAmount = 50;
@@ -75,13 +77,11 @@ namespace WeAreGladiators.Characters
         {
             int maxGoldSum = 2500;
             int baseGoldReward = (int) (maxGoldSum * GetActsPassedGoldRewardModifier());
-            //int lowerGoldReward = (int)(baseGoldReward * 0.9f);
-            // int upperGoldReward = (int)(baseGoldReward * 1.1f);
-            //baseGoldReward = RandomGenerator.NumberBetween(lowerGoldReward, upperGoldReward);
 
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
             crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems((int) (baseGoldReward * 0.25f), (int) (baseGoldReward * 0.85f)).ShuffledCopy()[0]);
             crd.goldAmount = baseGoldReward - crd.item.baseGoldValue;
+            crd.goldAmount += 150;
             if (crd.goldAmount < 50)
             {
                 crd.goldAmount = 50;

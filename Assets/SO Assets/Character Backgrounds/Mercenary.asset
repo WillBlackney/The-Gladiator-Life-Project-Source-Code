@@ -17,7 +17,7 @@ MonoBehaviour:
   description: "Doesn\u2019t matter whether it\u2019s caravan raiding, gladiator
     pit fights, or fighting local lords, if there\u2019s blood to be spilled and
     gold to be made, mercenaries will gladly offer their services."
-  recruitable: 1
+  recruitable: 0
   spawnChance: 40
   lowerLevelLimit: 2
   upperLevelLimit: 3

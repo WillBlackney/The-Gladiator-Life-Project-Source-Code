@@ -18,8 +18,7 @@ MonoBehaviour:
     the shoulders while leaving the torso unencumbered. '
   itemType: 2
   rarity: 2
-  fatiguePenalty: 8
-  baseGoldValue: 375
+  baseGoldValue: 465
   canSpawnInShop: 0
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -28,11 +27,12 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 75
-  maxArmourRoll: 75
+  minArmourRoll: 60
+  maxArmourRoll: 60
   grantedAbilities: []
   itemEffectSets: []
   equipSFX: 125

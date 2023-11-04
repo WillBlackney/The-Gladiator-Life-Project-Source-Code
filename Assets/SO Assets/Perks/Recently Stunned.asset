@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Recently Stunned
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: 06af7d04bd570d3459ad50c01e4b3123, type: 3}
+  passiveSprite: {fileID: 21300000, guid: ff099ea580f427a499e95046eca784f6, type: 3}
   passiveName: Recently Stunned
   perkTag: 6
   passiveDescription:
@@ -71,4 +71,6 @@ MonoBehaviour:
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
   perksThatBlockThis: 
+  racesThatBlockThis: 
+  possibleSubNames: []
   visualEventsOnApplication: []

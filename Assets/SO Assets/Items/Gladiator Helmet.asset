@@ -19,8 +19,7 @@ MonoBehaviour:
     decorative elements and designs.
   itemType: 1
   rarity: 3
-  fatiguePenalty: 13
-  baseGoldValue: 550
+  baseGoldValue: 680
   canSpawnInShop: 0
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -29,11 +28,12 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 110
-  maxArmourRoll: 110
+  minArmourRoll: 80
+  maxArmourRoll: 80
   grantedAbilities: []
   itemEffectSets: []
   equipSFX: 127

@@ -1507,9 +1507,12 @@ namespace WeAreGladiators.Abilities
                     if (obstruction != null)
                     {
                         TaskTracker tracker = new TaskTracker();
-                        VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.TriggerKnockedBackIntoObstructionAnimation
-                            (target.hexCharacterView, obstruction.WorldPosition, tracker)).SetCoroutineData(tracker);
-
+                        VisualEventManager.CreateVisualEvent(() =>
+                        {
+                            Vector2 destination = Vector2.MoveTowards(target.currentTile.WorldPosition, caster.currentTile.WorldPosition, -0.5f);
+                            HexCharacterController.Instance.TriggerKnockedBackIntoObstructionAnimation
+                                (target.hexCharacterView, destination, tracker);
+                        }).SetCoroutineData(tracker);
                     }
                     PerkController.Instance.ModifyPerkOnCharacterEntity(target.pManager, Perk.Stunned, 1, true, 0.5f);
                 }

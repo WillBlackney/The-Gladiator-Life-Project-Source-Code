@@ -19,8 +19,7 @@ MonoBehaviour:
     and warriors who prefer speed and agility in combat.
   itemType: 2
   rarity: 3
-  fatiguePenalty: 14
-  baseGoldValue: 575
+  baseGoldValue: 750
   canSpawnInShop: 0
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -29,11 +28,12 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 115
-  maxArmourRoll: 115
+  minArmourRoll: 90
+  maxArmourRoll: 90
   grantedAbilities: []
   itemEffectSets: []
   equipSFX: 126

@@ -18,7 +18,7 @@ MonoBehaviour:
     anatomy, and are well accustomed to seeing blood and guts. What more could you
     ask for in a gladiator?
   recruitable: 1
-  spawnChance: 40
+  spawnChance: 25
   lowerLevelLimit: 1
   upperLevelLimit: 2
   dailyWageMin: 23

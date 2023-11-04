@@ -16,7 +16,7 @@ MonoBehaviour:
   displayedName: Demon Form
   includeInGame: 1
   baseAbilityDescription: Transform into a monstrous demon.
-  abilitySprite: {fileID: 21300000, guid: 1e344fd69420afd46b6dc9a8bc4236a2, type: 3}
+  abilitySprite: {fileID: 21300000, guid: 662fd00a69702a14b98b966f080a9303, type: 3}
   energyCost: 0
   baseCooldown: 0
   abilityType: 05000000

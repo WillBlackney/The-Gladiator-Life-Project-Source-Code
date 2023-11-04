@@ -18,7 +18,7 @@ MonoBehaviour:
     and worn by high order knights.
   itemType: 2
   rarity: 3
-  baseGoldValue: 650
+  baseGoldValue: 810
   canSpawnInShop: 0
   canBeCombatContractReward: 0
   includeInLibrary: 1
@@ -31,8 +31,8 @@ MonoBehaviour:
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 125
-  maxArmourRoll: 125
+  minArmourRoll: 105
+  maxArmourRoll: 105
   grantedAbilities: []
   itemEffectSets: []
   equipSFX: 127

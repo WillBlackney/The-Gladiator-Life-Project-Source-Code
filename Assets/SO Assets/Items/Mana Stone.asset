@@ -18,8 +18,7 @@ MonoBehaviour:
     power and imbued with ancient enchantments.
   itemType: 4
   rarity: 2
-  fatiguePenalty: 0
-  baseGoldValue: 500
+  baseGoldValue: 250
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -28,6 +27,7 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

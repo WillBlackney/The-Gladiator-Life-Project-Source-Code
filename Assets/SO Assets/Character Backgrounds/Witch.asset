@@ -19,7 +19,7 @@ MonoBehaviour:
     faith also makes them astonishngly stupid, so best cover these idiots in heavy
     armour before sending them to their god. '
   recruitable: 1
-  spawnChance: 60
+  spawnChance: 75
   lowerLevelLimit: 1
   upperLevelLimit: 1
   dailyWageMin: 6

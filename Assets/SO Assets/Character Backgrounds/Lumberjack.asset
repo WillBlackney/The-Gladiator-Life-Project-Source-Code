@@ -18,7 +18,7 @@ MonoBehaviour:
     of swinging an axe makes them strong, fit and great at murdering people with
     axes.'
   recruitable: 1
-  spawnChance: 60
+  spawnChance: 75
   lowerLevelLimit: 1
   upperLevelLimit: 2
   dailyWageMin: 12

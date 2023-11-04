@@ -19,8 +19,7 @@ MonoBehaviour:
     and bulkiness can slow the wearer down and limit mobility.
   itemType: 2
   rarity: 2
-  fatiguePenalty: 18
-  baseGoldValue: 550
+  baseGoldValue: 700
   canSpawnInShop: 1
   canBeCombatContractReward: 1
   includeInLibrary: 1
@@ -29,11 +28,12 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
-  minArmourRoll: 110
-  maxArmourRoll: 110
+  minArmourRoll: 80
+  maxArmourRoll: 80
   grantedAbilities: []
   itemEffectSets: []
   equipSFX: 126

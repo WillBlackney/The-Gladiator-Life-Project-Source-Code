@@ -716,17 +716,17 @@ namespace WeAreGladiators.TownFeatures
             // 1 Common Trinket
             initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Trinket).ShuffledCopy()[0]);
 
-            // 2-3 Common Head/Body Items
+            // 4-6 Common Head/Body Items
             List<ItemData> commonHeadBodyItems = new List<ItemData>();
-            commonHeadBodyItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Body).Where(i => i.baseGoldValue >= 225));
-            commonHeadBodyItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Head).Where(i => i.baseGoldValue >= 125));
+            commonHeadBodyItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Body).Where(i => i.minArmourRoll >= 30));
+            commonHeadBodyItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Head).Where(i => i.minArmourRoll >= 25));
             commonHeadBodyItems.Shuffle();
-            for (int i = 0; i < RandomGenerator.NumberBetween(2, 3) && i < commonHeadBodyItems.Count; i++)
+            for (int i = 0; i < RandomGenerator.NumberBetween(4, 6) && i < commonHeadBodyItems.Count; i++)
             {
                 initialItems.Add(commonHeadBodyItems[i]);
             }
 
-            // 2-3 Common Weapon Items
+            // 4-6 Common Weapon Items
             List<ItemData> commonWeaponItems = new List<ItemData>();
             commonWeaponItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Weapon).Where(i => i.baseGoldValue >= 150));
             commonWeaponItems.Shuffle();
@@ -738,8 +738,10 @@ namespace WeAreGladiators.TownFeatures
             // 0-1 Net
             initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, WeaponClass.ThrowingNet)[0]);
 
-            // 0-1 Common Shield
+            // All shields
             initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, WeaponClass.Shield)[0]);
+            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, WeaponClass.Shield)[0]);
+            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, WeaponClass.Shield)[0]);
 
             // 0-1 Offhand Talisman
             initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, WeaponClass.Holdable)[0]);
@@ -750,20 +752,20 @@ namespace WeAreGladiators.TownFeatures
             initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, ItemType.Trinket).ShuffledCopy()[0]);
             initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, ItemType.Weapon).ShuffledCopy()[0]);
 
-            // 33% chance to add each: epic head, body, trinket and weapon
-            if (RandomGenerator.NumberBetween(0, 2) == 1)
+            // 50% chance to add each: epic head, body, trinket and weapon
+            if (RandomGenerator.NumberBetween(0, 1) == 1)
             {
                 initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Weapon).ShuffledCopy()[0]);
             }
-            if (RandomGenerator.NumberBetween(0, 2) == 1)
+            if (RandomGenerator.NumberBetween(0, 1) == 1)
             {
                 initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Trinket).ShuffledCopy()[0]);
             }
-            if (RandomGenerator.NumberBetween(0, 2) == 1)
+            if (RandomGenerator.NumberBetween(0, 1) == 1)
             {
                 initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Head).ShuffledCopy()[0]);
             }
-            if (RandomGenerator.NumberBetween(0, 2) == 1)
+            if (RandomGenerator.NumberBetween(0, 1) == 1)
             {
                 initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Body).ShuffledCopy()[0]);
             }
