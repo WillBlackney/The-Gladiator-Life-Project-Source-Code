@@ -1,6 +1,4 @@
-﻿using Codice.CM.Common;
-using TbsFramework.Players;
-using UnityEngine;
+﻿using UnityEngine;
 using WeAreGladiators.Audio;
 using WeAreGladiators.CameraSystems;
 using WeAreGladiators.Characters;

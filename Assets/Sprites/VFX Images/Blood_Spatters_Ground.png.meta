@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -103,6 +103,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -316,15 +328,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Blood_Spatters_Ground_8: -2144163186
-      Blood_Spatters_Ground_3: -787177343
-      Blood_Spatters_Ground_7: -833811895
-      Blood_Spatters_Ground_4: 1736502138
-      Blood_Spatters_Ground_2: -922676942
-      Blood_Spatters_Ground_6: 1761788985
-      Blood_Spatters_Ground_1: -1008665741
-      Blood_Spatters_Ground_5: -2090297395
       Blood_Spatters_Ground_0: -1053640613
+      Blood_Spatters_Ground_1: -1008665741
+      Blood_Spatters_Ground_2: -922676942
+      Blood_Spatters_Ground_3: -787177343
+      Blood_Spatters_Ground_4: 1736502138
+      Blood_Spatters_Ground_5: -2090297395
+      Blood_Spatters_Ground_6: 1761788985
+      Blood_Spatters_Ground_7: -833811895
+      Blood_Spatters_Ground_8: -2144163186
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
