@@ -120,6 +120,9 @@ namespace Tests
             playerCharacter.attributeSheet.initiative = 300;
             enemyCharacter.attributeSheet.initiative = 200;
             enemyCharacterTwo.attributeSheet.initiative = 100;
+            playerCharacter.attributeSheet.resolve.value = 0;
+            enemyCharacter.attributeSheet.resolve.value = 0;
+            enemyCharacterTwo.attributeSheet.resolve.value = 0;
 
             // Act
             Stopwatch stopwatch = Stopwatch.StartNew();
