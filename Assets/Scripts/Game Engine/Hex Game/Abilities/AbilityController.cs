@@ -2151,7 +2151,8 @@ namespace WeAreGladiators.Abilities
             bool bRet = false;
 
             // check target is in range
-            if (IsTargetOfAbilityInRange(caster, target, ability))
+            if (IsTargetOfAbilityInRange(caster, target, ability) &&
+                DoesAbilityMeetSubRequirements(caster, ability, null, target))
             {
                 bRet = true;
             }
@@ -2189,7 +2190,6 @@ namespace WeAreGladiators.Abilities
                         ef.effectType == AbilityEffectType.MoveToTile) &&
                     !HexCharacterController.Instance.IsCharacterAbleToMove(character))
                 {
-                    Debug.Log("IsAbilityUseable() returning false: cannot take movement actions while rooted");
                     if (showErrors)
                     {
                         ActionErrorGuidanceController.Instance.ShowErrorMessage(character, "Character is unable to move right now.");
@@ -2429,7 +2429,7 @@ namespace WeAreGladiators.Abilities
             return bRet;
 
         }
-        private bool DoesAbilityMeetSubRequirements(HexCharacterModel caster, AbilityData ability, HexCharacterModel target = null)
+        private bool DoesAbilityMeetSubRequirements(HexCharacterModel caster, AbilityData ability, HexCharacterModel target = null, LevelNode targetTile = null)
         {
             bool bRet = true;
 
@@ -2530,6 +2530,13 @@ namespace WeAreGladiators.Abilities
 
                 else if (ar.type == AbilityRequirementType.CasterHasEnoughHealth &&
                          caster.currentHealth >= ar.healthRequired)
+                {
+                    continue;
+                }
+
+                else if (targetTile == null ||
+                         (ar.type == AbilityRequirementType.TargetTileCanBeOccupied &&
+                         Pathfinder.CanHexBeOccupied(targetTile)))
                 {
                     continue;
                 }
