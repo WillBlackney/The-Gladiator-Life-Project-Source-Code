@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: UI_Non_Button_Enter
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 1eb2a783a7b601942b6bef7a90ea0eea, type: 3}
+  bus: 0
+  allowDuplicates: 1
   randomizeClip: 0
   audioClips: []
   soundType: 130
@@ -20,12 +22,9 @@ MonoBehaviour:
   randomizeVolume: 0
   randomVolumeLowerLimit: 0.3
   randomVolumeUpperLimit: 0.5
-  volume: 0.25
+  volume: 0.15
   randomizePitch: 0
   randomPitchLowerLimit: 0.8
   randomPitchUpperLimit: 1.2
   pitch: 1
   loop: 0
-  source: {fileID: 0}
-  fadingIn: 0
-  fadingOut: 0
