@@ -21,7 +21,7 @@ MonoBehaviour:
   race: 2
   possibleRaces: 01000000
   audioProfile: 3
-  modelSize: 0
+  modelSize: 2
   xpReward: 75
   ignoreStress: 0
   attributeSheet:
