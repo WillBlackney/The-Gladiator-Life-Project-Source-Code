@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c332a1f403e665468640b734668f781, type: 3}
+  m_Name: Summon Shambler
+  m_EditorClassIdentifier: 
+  abilityName: Summon Shambler
+  displayedName: Summon Shambler
+  includeInGame: 1
+  baseAbilityDescription: Summon a Shambler at target location.
+  abilitySprite: {fileID: 21300000, guid: b6fe9d5d4db3f5a40a38865fe9579e3e, type: 3}
+  energyCost: 4
+  baseCooldown: 1
+  abilityType: 0100000008000000
+  doesNotBreakStealth: 0
+  guidanceInstruction: 5
+  guidanceInstructionTwo: 0
+  weaponRequirement: 0
+  derivedFromWeapon: 0
+  derivedFromItemLoadout: 0
+  weaponAbilityType: 0
+  weaponClass: 0
+  targetRequirement: 5
+  secondaryTargetRequirement: 0
+  rangeFromTarget: 0
+  talentRequirementData:
+    talentSchool: 0
+    level: 0
+  abilitySubRequirements: []
+  baseRange: 3
+  gainRangeBonusFromVision: 1
+  hitChanceModifier: 0
+  hitChanceModifierAgainstAdjacent: 0
+  accuracyPenaltyFromMelee: 0
+  abilityEffects:
+  - aoeType: 0
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 0
+    effectsEnemies: 0
+    knockBackDistance: 0
+    effectType: 16
+    stressEventData:
+      moraleChangeMin: 0
+      moraleChangeMax: 0
+      successChance: 0
+    energyGained: 0
+    teleportVFX: 0
+    tilesMoved: 0
+    lineLength: 0
+    healthGained: 0
+    healthLost: 0
+    requirements: []
+    chainedEffect: 0
+    triggersChainEffectSequence: 0
+    visualEventsOnStart:
+    - eventType: 2
+      newUcmParts: []
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 4
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    - eventType: 5
+      newUcmParts: []
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 58
+      characterAnimation: 0
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    visualEventsOnHit: []
+    visualEventsOnEffectFinish:
+    - eventType: 6
+      newUcmParts: []
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 0
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0.5
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 0
+    damageType: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    guaranteedHit: 0
+    bonusCritDamage: 0
+    ignoresGuard: 0
+    ignoresArmour: 0
+    bonusArmourDamage: 0
+    weaponUsed: 0
+    injuryTypesCaused: 
+    damageEffectModifiers: []
+    characterSummoned: {fileID: 11400000, guid: b7812d817f099604d813ecc5cb62fb08,
+      type: 2}
+    characterSummonedName: Shambler
+    amountSummoned: 1
+    modelFadeInSpeed: 0.5
+    uiFadeInSpeed: 0.5
+    summonedCreatureVisualEvents:
+    - eventType: 3
+      newUcmParts: []
+      screenOverlayType: 0
+      overlayColor: 0
+      overlayFadeInTime: 0
+      overlayDuration: 0
+      overlayFadeOutTime: 0
+      particleEffect: 20
+      cameraShake: 0
+      movementAnimation: 0
+      soundEffect: 0
+      characterAnimation: 0
+      delayDuration: 0
+      projectileFired: 0
+      projectileStartPosition: 0
+      onCharacter: 2
+    perkPairing:
+      perkTag: 0
+      passiveStacks: 0
+    perkApplicationChance: 100
+  onHitEffects: []
+  onCritEffects: []
+  onPerkAppliedSuccessEffects: []
+  onCollisionEffects: []
+  chainLoops: 0
+  chainedEffects: []
+  dynamicDescription:
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: Summon a Shambler at target location.
+  keyWords: []
