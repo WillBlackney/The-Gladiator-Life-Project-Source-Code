@@ -16,5 +16,17 @@ MonoBehaviour:
   difficulty: 2
   enemyGroups:
   - possibleEnemies:
-    - {fileID: 11400000, guid: dbe2fd0090b88944889c1320d013f00d, type: 2}
-    spawnPosition: {x: 0, y: 0}
+    - {fileID: 11400000, guid: b7812d817f099604d813ecc5cb62fb08, type: 2}
+    spawnPosition: {x: 2, y: 0}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: b7812d817f099604d813ecc5cb62fb08, type: 2}
+    spawnPosition: {x: 2, y: 1}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: b7812d817f099604d813ecc5cb62fb08, type: 2}
+    spawnPosition: {x: 2, y: -1}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: b7812d817f099604d813ecc5cb62fb08, type: 2}
+    spawnPosition: {x: 3, y: 0}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: b7812d817f099604d813ecc5cb62fb08, type: 2}
+    spawnPosition: {x: 3, y: 1}

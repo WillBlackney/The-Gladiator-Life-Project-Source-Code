@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
+  m_Name: Shambler
+  m_EditorClassIdentifier: 
+  myName: Shambler
+  myDescription: Undead cretins summoned and stitched together by necromancers and
+    foul beings.
+  randomizeRace: 0
+  race: 3
+  possibleRaces: 01000000
+  audioProfile: 4
+  modelSize: 0
+  xpReward: 15
+  ignoreStress: 0
+  attributeSheet:
+    accuracy:
+      value: 60
+      stars: 0
+    apMaximum: 6
+    apRecovery: 6
+    auraSize: 1
+    constitution:
+      value: 100
+      stars: 0
+    criticalChance: 5
+    criticalModifier: 50
+    deathResistance: 25
+    debuffResistance: 0
+    dodge:
+      value: 0
+      stars: 0
+    initiative: 5
+    injuryResistance: 0
+    magicDamageBonus: 0
+    magicResistance: 0
+    maxHealth: 0
+    might:
+      value: 0
+      stars: 0
+    physicalDamageBonus: 30
+    physicalResistance: 0
+    resolve:
+      value: 5
+      stars: 0
+    stressResistance: 0
+    vision: 0
+    wits:
+      value: 5
+      stars: 0
+  baseArmour: 0
+  randomizeHealth: 0
+  lowerHealthLimit: 50
+  upperHealthLimit: 60
+  behaviour: {fileID: 11400000, guid: 7cb1cb08e59073e46882e5c4f2c44f52, type: 2}
+  abilityBook:
+    activeAbilities: []
+  serializedPassiveManager:
+    perks:
+    - perkTag: 24
+      stacks: 1
+      freshInjury: 0
+    - perkTag: 235
+      stacks: 1
+      freshInjury: 0
+    - perkTag: 237
+      stacks: 1
+      freshInjury: 0
+    - perkTag: 204
+      stacks: 1
+      freshInjury: 0
+    - perkTag: 71
+      stacks: 1
+      freshInjury: 0
+  randomizeItemSet: 1
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    offHandItem: {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  possibleArmourLoadouts: []
+  recruitWeaponLoadouts:
+  - mainHandProspects:
+    - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
+    - {fileID: 11400000, guid: e724601a8b1fda642824cbf7fc3faea9, type: 2}
+    - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
+    - {fileID: 11400000, guid: 5ea73452997566e4b9f7c15c306b772b, type: 2}
+    offhandProspects:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
+  - mainHandProspects:
+    - {fileID: 11400000, guid: 0f95f17f27e7b5644acf4f7f76e19bdd, type: 2}
+    - {fileID: 11400000, guid: 34df69d12f28a604281ba0f64f77561e, type: 2}
+    - {fileID: 11400000, guid: 9b8e828332b12524ea8077dc9f45ad24, type: 2}
+    - {fileID: 11400000, guid: eb90f828c8b2d7349b3e2ab18a132000, type: 2}
+    offhandProspects: []
+  useUCM: 1
+  modelParts:
+  - Undead_Chest_Shambler
+  - Undead_Face_Shambler
+  - Undead_Head_Shambler
+  - Undead_Right_Hand_Shambler
+  - Undead_Right_Leg_Shambler
+  modelPrefab: {fileID: 0}
