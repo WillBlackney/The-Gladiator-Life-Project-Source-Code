@@ -652,7 +652,7 @@ namespace WeAreGladiators.HexTiles
 
                         // Start free strike attack
                         AbilityController.Instance.UseAbility(c, AbilityController.Instance.FreeStrikeAbility, character);
-                        VisualEventManager.InsertTimeDelayInQueue(1f);
+                        VisualEventManager.InsertTimeDelayInQueue(0.5f);
                     }
                 }
             }            
@@ -729,7 +729,7 @@ namespace WeAreGladiators.HexTiles
                     {
                         // Start free strike attack
                         AbilityController.Instance.UseAbility(c, AbilityController.Instance.SpearWallStrikeAbility, character);
-                        VisualEventManager.InsertTimeDelayInQueue(1f);
+                        VisualEventManager.InsertTimeDelayInQueue(0.5f);
                     }
                 }
             }

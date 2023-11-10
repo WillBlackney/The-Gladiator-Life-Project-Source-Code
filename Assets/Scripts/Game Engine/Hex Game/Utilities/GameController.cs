@@ -56,6 +56,7 @@ namespace WeAreGladiators
         protected override void Awake()
         {
             base.Awake();
+            //Time.timeScale = 2;
             VisualEventManager.Initialize();
         }
         private void Start()

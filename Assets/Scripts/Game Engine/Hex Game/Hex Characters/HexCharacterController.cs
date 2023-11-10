@@ -1947,7 +1947,7 @@ namespace WeAreGladiators.Characters
             HexCharacterView view = character.hexCharacterView;
 
             // Brief delay on start 
-            VisualEventManager.InsertTimeDelayInQueue(0.5f);
+            VisualEventManager.InsertTimeDelayInQueue(0.25f);
 
             if (character.hasRequestedTurnDelay)
             {
@@ -1971,7 +1971,7 @@ namespace WeAreGladiators.Characters
                     }
                     AudioManager.Instance.PlaySound(character.AudioProfile, AudioSet.TurnStart);
                     PlayTurnStartAnimation(view);
-                }).SetEndDelay(0.8f);                
+                }).SetEndDelay(0.75f);                
             }
 
             if (!character.hasRequestedTurnDelay)
@@ -2013,10 +2013,6 @@ namespace WeAreGladiators.Characters
                     CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
                     VisualEventManager.InsertTimeDelayInQueue(0.5f);
 
-                    // Remove 1 stack of poisoned
-                    //if (character.currentHealth > 0)
-                    //   PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Poisoned, -1, false);
-
                 }
 
                 // Burning
@@ -2036,10 +2032,6 @@ namespace WeAreGladiators.Characters
                     CombatController.Instance.HandleDamage(character, damageResult, DamageType.Magic, true);
                     VisualEventManager.InsertTimeDelayInQueue(0.5f);
 
-                    // Remove 1 stack of burning
-                    // if (character.currentHealth > 0)
-                    //    PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Burning, -1);
-
                 }
 
                 // Bleeding
@@ -2057,10 +2049,6 @@ namespace WeAreGladiators.Characters
                     });
                     CombatController.Instance.HandleDamage(character, damageResult, DamageType.Physical, true);
                     VisualEventManager.InsertTimeDelayInQueue(0.5f);
-
-                    // Remove 1 stack of bleeding
-                    //if (character.currentHealth > 0)
-                    //     PerkController.Instance.ModifyPerkOnCharacterEntity(character.pManager, Perk.Bleeding, -1);
                 }
 
                 // Cut Artery
@@ -2239,7 +2227,7 @@ namespace WeAreGladiators.Characters
                 AILogic.UpdateCurrentRangedAdvantage();
 
                 // Do AI turn
-                VisualEventManager.InsertTimeDelayInQueue(1f);
+                VisualEventManager.InsertTimeDelayInQueue(0.25f);
                 SetCharacterActivationPhase(character, ActivationPhase.ActivationPhase);
                 await AILogic.RunEnemyRoutine(character);
 
@@ -2772,7 +2760,7 @@ namespace WeAreGladiators.Characters
             if (character.controller == Controller.AI && character.livingState == LivingState.Alive)
             {
                 // Brief pause at the end of enemy action, so player can process whats happened
-                VisualEventManager.InsertTimeDelayInQueue(1f);
+                VisualEventManager.InsertTimeDelayInQueue(0.5f);
             }
 
             if (firstTimeDelay)

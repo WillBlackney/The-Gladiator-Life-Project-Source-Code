@@ -29,11 +29,11 @@ namespace WeAreGladiators.AI
                 // Delays status VFX
                 VisualEventManager.CreateVisualEvent(() =>
                     VisualEffectManager.Instance.CreateStatusEffect(character.hexCharacterView.WorldPosition, "Delay Turn"));
-                VisualEventManager.InsertTimeDelayInQueue(1f);
+                VisualEventManager.InsertTimeDelayInQueue(0.5f);
 
                 // Move character to the end of the turn order.
                 TurnController.Instance.HandleMoveCharacterToEndOfTurnOrder(character);
-                VisualEventManager.InsertTimeDelayInQueue(0.5f);
+                VisualEventManager.InsertTimeDelayInQueue(0.25f);
 
                 // Trigger character on activation end sequence and events
                 HexCharacterController.Instance.CharacterOnTurnEnd(character, true);
@@ -52,7 +52,7 @@ namespace WeAreGladiators.AI
                     AbilityController.Instance.IsTargetOfAbilityValid(character, target, ability))
                 {
                     AbilityController.Instance.UseAbility(character, ability, target);
-                    VisualEventManager.InsertTimeDelayInQueue(1.5f);
+                    VisualEventManager.InsertTimeDelayInQueue(0.75f);
                     actionTaken = true;
                 }
             }
@@ -103,7 +103,7 @@ namespace WeAreGladiators.AI
                 if (bestPath != null)
                 {
                     LevelController.Instance.HandleMoveDownPath(character, bestPath);
-                    VisualEventManager.InsertTimeDelayInQueue(1);
+                    VisualEventManager.InsertTimeDelayInQueue(0.5f);
                     actionTaken = true;
                 }
             }
@@ -151,7 +151,7 @@ namespace WeAreGladiators.AI
                     if(targetMoveHex != null)
                     {
                         AbilityController.Instance.UseAbility(character, ability, null, targetMoveHex);
-                        VisualEventManager.InsertTimeDelayInQueue(1.5f);
+                        VisualEventManager.InsertTimeDelayInQueue(0.5f);
                         actionTaken = true;
                     }                    
                 }
@@ -206,7 +206,7 @@ namespace WeAreGladiators.AI
                     {
                         // Summon the character
                         AbilityController.Instance.UseAbility(character, ability, null, spawnHex);
-                        VisualEventManager.InsertTimeDelayInQueue(1.5f);
+                        VisualEventManager.InsertTimeDelayInQueue(0.5f);
                         actionTaken = true;
                     }
                 }
@@ -283,7 +283,7 @@ namespace WeAreGladiators.AI
                     if (bestPath != null)
                     {
                         LevelController.Instance.HandleMoveDownPath(character, bestPath);
-                        VisualEventManager.InsertTimeDelayInQueue(1);
+                        VisualEventManager.InsertTimeDelayInQueue(0.5f);
                         actionTaken = true;
                     }
 
@@ -313,7 +313,7 @@ namespace WeAreGladiators.AI
                         if (currentBestPath != null)
                         {
                             LevelController.Instance.HandleMoveDownPath(character, currentBestPath);
-                            VisualEventManager.InsertTimeDelayInQueue(1);
+                            VisualEventManager.InsertTimeDelayInQueue(0.5f);
                             actionTaken = true;
                         }
 
@@ -343,7 +343,7 @@ namespace WeAreGladiators.AI
                     if (bestDestination != null)
                     {
                         AbilityController.Instance.UseAbility(character, teleportAbility, null, bestDestination);
-                        VisualEventManager.InsertTimeDelayInQueue(1.5f);
+                        VisualEventManager.InsertTimeDelayInQueue(0.5f);
                         actionTaken = true;
                     }
 
@@ -439,7 +439,7 @@ namespace WeAreGladiators.AI
                 if (bestPath != null)
                 {
                     LevelController.Instance.HandleMoveDownPath(character, bestPath);
-                    VisualEventManager.InsertTimeDelayInQueue(1);
+                    VisualEventManager.InsertTimeDelayInQueue(0.5f);
                     actionTaken = true;
                 }
 
@@ -469,7 +469,7 @@ namespace WeAreGladiators.AI
                     if (currentBestPath != null)
                     {
                         LevelController.Instance.HandleMoveDownPath(character, currentBestPath);
-                        VisualEventManager.InsertTimeDelayInQueue(1);
+                        VisualEventManager.InsertTimeDelayInQueue(0.5f);
                         actionTaken = true;
                     }
                 }
@@ -519,7 +519,7 @@ namespace WeAreGladiators.AI
                 if (bestPath != null)
                 {
                     LevelController.Instance.HandleMoveDownPath(character, bestPath);
-                    VisualEventManager.InsertTimeDelayInQueue(1);
+                    VisualEventManager.InsertTimeDelayInQueue(0.5f);
                     actionTaken = true;
                 }
             }

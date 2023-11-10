@@ -181,7 +181,7 @@ namespace WeAreGladiators.TurnLogic
                 }
 
                 // Wait for character move on screen animations to finish
-                VisualEventManager.InsertTimeDelayInQueue(1.5f);
+                VisualEventManager.InsertTimeDelayInQueue(1);
 
                 TaskTracker combatStartNotif = new TaskTracker();
                 VisualEventManager.CreateVisualEvent(() => DisplayCombatStartNotification(combatStartNotif)).SetCoroutineData(combatStartNotif);
