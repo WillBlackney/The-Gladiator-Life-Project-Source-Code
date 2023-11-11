@@ -49,7 +49,7 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 4d83fcdcd2945f4408eeed0b1230ad2a, type: 2}
       - {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
       offhandProspects:
-      - {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
+      - {fileID: 11400000, guid: 75767cfe858462342ba51e06076cf58c, type: 2}
     possibleArmourLoadouts:
     - headProspects:
       - {fileID: 11400000, guid: eb2b4dc7ace074444a4c2a4c78aaadb7, type: 2}
