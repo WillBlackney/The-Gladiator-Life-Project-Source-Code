@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sirenix.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -44,6 +45,10 @@ namespace WeAreGladiators.Items
         {
             base.Awake();
             BuildItemLibrary();
+
+            List<ItemData> logItems = Array.FindAll(AllItems, i => i.itemType == ItemType.Weapon && i.rarity == Rarity.Common).ToList();
+            var poo  = logItems.OrderBy(item => item.maxArmourRoll);
+            poo.ForEach(i => Debug.LogWarning(i.itemName + ", armour = " + i.maxArmourRoll.ToString()));
         }
         private void BuildItemLibrary()
         {

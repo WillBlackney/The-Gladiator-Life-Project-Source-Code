@@ -712,65 +712,75 @@ namespace WeAreGladiators.TownFeatures
             currentArmouryItems.Clear();
 
             List<ItemData> initialItems = new List<ItemData>();
+            var allValidShopItems = ItemController.Instance.GetAllShopSpawnableItems();
 
-            // 1 Common Trinket
-            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Trinket).ShuffledCopy()[0]);
+            // Head items set 1
+            List<ItemData> headSetOne = allValidShopItems.FindAll(item =>
+                item.itemType == ItemType.Head &&
+                item.maxArmourRoll >= 15 &&
+                item.maxArmourRoll <= 35)
+                .GetRandomDifferentElements(RandomGenerator.NumberBetween(2, 3));
 
-            // 4-6 Common Head/Body Items
-            List<ItemData> commonHeadBodyItems = new List<ItemData>();
-            commonHeadBodyItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Body).Where(i => i.minArmourRoll >= 30));
-            commonHeadBodyItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Head).Where(i => i.minArmourRoll >= 25));
-            commonHeadBodyItems.Shuffle();
-            for (int i = 0; i < RandomGenerator.NumberBetween(4, 6) && i < commonHeadBodyItems.Count; i++)
-            {
-                initialItems.Add(commonHeadBodyItems[i]);
-            }
+            // Head items set 2
+            List<ItemData> headSetTwo = allValidShopItems.FindAll(item =>
+                item.itemType == ItemType.Head &&
+                item.maxArmourRoll >= 40 &&
+                item.maxArmourRoll <= 60)
+                .GetRandomDifferentElements(RandomGenerator.NumberBetween(2, 3));
 
-            // 4-6 Common Weapon Items
-            List<ItemData> commonWeaponItems = new List<ItemData>();
-            commonWeaponItems.AddRange(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, ItemType.Weapon).Where(i => i.baseGoldValue >= 150));
-            commonWeaponItems.Shuffle();
-            for (int i = 0; i < RandomGenerator.NumberBetween(2, 3) && i < commonWeaponItems.Count; i++)
-            {
-                initialItems.Add(commonWeaponItems[i]);
-            }
+            // Head items set 3
+            List<ItemData> headSetThree = allValidShopItems.FindAll(item =>
+                item.itemType == ItemType.Head &&
+                item.maxArmourRoll >= 65)
+                .GetRandomDifferentElements(RandomGenerator.NumberBetween(1, 2));
 
-            // 0-1 Net
-            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, WeaponClass.ThrowingNet)[0]);
+            // Body items set 1
+            List<ItemData> bodySetOne = allValidShopItems.FindAll(item =>
+                item.itemType == ItemType.Body &&
+                item.maxArmourRoll >= 35 &&
+                item.maxArmourRoll <= 60)
+                .GetRandomDifferentElements(RandomGenerator.NumberBetween(3, 4));
 
-            // All shields
-            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, WeaponClass.Shield)[0]);
-            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, WeaponClass.Shield)[0]);
-            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, WeaponClass.Shield)[0]);
+            // Body items set 2
+            List<ItemData> bodySetTwo = allValidShopItems.FindAll(item =>
+                item.itemType == ItemType.Body &&
+                item.maxArmourRoll >= 60 &&
+                item.maxArmourRoll <= 90)
+                .GetRandomDifferentElements(RandomGenerator.NumberBetween(2, 3));
 
-            // 0-1 Offhand Talisman
-            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Common, WeaponClass.Holdable)[0]);
+            // Body items set 3
+            List<ItemData> bodySetThree = allValidShopItems.FindAll(item =>
+                item.itemType == ItemType.Body &&
+                item.maxArmourRoll >= 100)
+                .GetRandomDifferentElements(RandomGenerator.NumberBetween(1, 2));
 
-            // 1 of each rare: Weapon, Trinket, Head and Body
-            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, ItemType.Body).ShuffledCopy()[0]);
-            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, ItemType.Head).ShuffledCopy()[0]);
-            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, ItemType.Trinket).ShuffledCopy()[0]);
-            initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Rare, ItemType.Weapon).ShuffledCopy()[0]);
+            // Common Weapons
+            List<ItemData> commonWeapons = allValidShopItems.FindAll(item =>
+                item.itemType == ItemType.Weapon &&
+                item.rarity == Rarity.Common)
+                .GetRandomDifferentElements(RandomGenerator.NumberBetween(5, 8));
 
-            // 50% chance to add each: epic head, body, trinket and weapon
-            if (RandomGenerator.NumberBetween(0, 1) == 1)
-            {
-                initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Weapon).ShuffledCopy()[0]);
-            }
-            if (RandomGenerator.NumberBetween(0, 1) == 1)
-            {
-                initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Trinket).ShuffledCopy()[0]);
-            }
-            if (RandomGenerator.NumberBetween(0, 1) == 1)
-            {
-                initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Head).ShuffledCopy()[0]);
-            }
-            if (RandomGenerator.NumberBetween(0, 1) == 1)
-            {
-                initialItems.Add(ItemController.Instance.GetAllShopSpawnableItems(Rarity.Epic, ItemType.Body).ShuffledCopy()[0]);
-            }
+            // Rare Weapons
+            List<ItemData> rareWeapons = allValidShopItems.FindAll(item =>
+                item.itemType == ItemType.Weapon &&
+                item.rarity == Rarity.Rare)
+                .GetRandomDifferentElements(RandomGenerator.NumberBetween(3, 4));
 
-            // TO DO IN FUTURE: any town events/effects that modifier item spawning should be applied here
+            // Epic Weapons
+            List<ItemData> epicWeapons = allValidShopItems.FindAll(item =>
+                item.itemType == ItemType.Weapon &&
+                item.rarity == Rarity.Epic)
+                .GetRandomDifferentElements(RandomGenerator.NumberBetween(1, 2));
+
+            initialItems.AddRange(headSetOne);
+            initialItems.AddRange(headSetTwo);
+            initialItems.AddRange(headSetThree);
+            initialItems.AddRange(bodySetOne);
+            initialItems.AddRange(bodySetTwo);
+            initialItems.AddRange(bodySetThree);
+            initialItems.AddRange(commonWeapons);
+            initialItems.AddRange(rareWeapons);
+            initialItems.AddRange(epicWeapons);
 
             for (int i = 0; i < initialItems.Count; i++)
             {
@@ -780,6 +790,7 @@ namespace WeAreGladiators.TownFeatures
                 Debug.Log("Final cost: " + finalCost);
                 currentArmouryItems.Add(new ItemShopData(item, finalCost));
             }
+
         }
 
         #endregion

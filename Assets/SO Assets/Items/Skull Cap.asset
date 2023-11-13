@@ -18,9 +18,8 @@ MonoBehaviour:
     kettle or cauldron. Often worn by archers for its visibility and modest protection.
   itemType: 1
   rarity: 1
-  fatiguePenalty: 2
   baseGoldValue: 100
-  canSpawnInShop: 0
+  canSpawnInShop: 1
   canBeCombatContractReward: 0
   includeInLibrary: 1
   weaponClass: 0
@@ -28,6 +27,7 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
