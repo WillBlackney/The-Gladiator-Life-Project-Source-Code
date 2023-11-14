@@ -132,7 +132,7 @@ namespace WeAreGladiators
         {
             List<T> listRet = new List<T>();
             List<T> shuffledList = list.ShuffledCopy();
-            for (int i = 0; i < elementsCount; i++)
+            for (int i = 0; i < elementsCount && i < list.Count; i++)
             {
                 listRet.Add(shuffledList[i]);
             }

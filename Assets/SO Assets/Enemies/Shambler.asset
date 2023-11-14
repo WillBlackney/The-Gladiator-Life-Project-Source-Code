@@ -88,7 +88,13 @@ MonoBehaviour:
     headArmour: {fileID: 0}
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
-  possibleArmourLoadouts: []
+  possibleArmourLoadouts:
+  - headProspects:
+    - {fileID: 11400000, guid: 54dba957ba24d744d940ec502d92c76f, type: 2}
+    - {fileID: 0}
+    bodyProspects:
+    - {fileID: 11400000, guid: 0da0fb58daa8a7b4c9648db461f2056b, type: 2}
+    - {fileID: 0}
   recruitWeaponLoadouts:
   - mainHandProspects:
     - {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}

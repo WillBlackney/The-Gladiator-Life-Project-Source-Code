@@ -13,8 +13,20 @@ MonoBehaviour:
   m_Name: Sandbox_Encounter
   m_EditorClassIdentifier: 
   deploymentLimit: 3
-  difficulty: 2
+  difficulty: 0
   enemyGroups:
   - possibleEnemies:
-    - {fileID: 11400000, guid: 0e5c6b4f07c4b124e9b467a9513cfd25, type: 2}
+    - {fileID: 11400000, guid: bd906dc6cb352ef4eb438175b91110ff, type: 2}
+    spawnPosition: {x: 2, y: 0}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: bd906dc6cb352ef4eb438175b91110ff, type: 2}
+    spawnPosition: {x: 2, y: 1}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: bd906dc6cb352ef4eb438175b91110ff, type: 2}
+    spawnPosition: {x: 3, y: 0}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: bd906dc6cb352ef4eb438175b91110ff, type: 2}
     spawnPosition: {x: 3, y: 1}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: bd906dc6cb352ef4eb438175b91110ff, type: 2}
+    spawnPosition: {x: 3, y: 2}
