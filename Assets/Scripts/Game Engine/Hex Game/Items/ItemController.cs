@@ -87,11 +87,6 @@ namespace WeAreGladiators.Items
 
             return itemReturned;
         }
-        public List<ItemData> GetArmourySpawnableItems()
-        {
-            List<ItemData> ret = new List<ItemData>();
-            return ret;
-        }
         public List<ItemData> GetAllShopSpawnableItems()
         {
             return Array.FindAll(AllItems, i => i.canSpawnInShop).ToList();

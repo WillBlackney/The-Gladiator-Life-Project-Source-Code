@@ -953,7 +953,7 @@ namespace WeAreGladiators.TownFeatures
 
             }
 
-            // on 4th day, only offer the boss fight
+            // on 5th day, only offer the boss fight
             else
             {
                 currentDailyCombatContracts.Add(GenerateRandomDailyCombatContract(RunController.Instance.CurrentChapter, CombatDifficulty.Boss));

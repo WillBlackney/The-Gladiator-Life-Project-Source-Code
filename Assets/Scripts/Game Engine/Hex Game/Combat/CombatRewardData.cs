@@ -1,4 +1,6 @@
-﻿using WeAreGladiators.Abilities;
+﻿using System;
+using System.Linq;
+using WeAreGladiators.Abilities;
 using WeAreGladiators.Items;
 using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Utilities;
@@ -23,69 +25,47 @@ namespace WeAreGladiators.Characters
             }
             else if (difficulty == CombatDifficulty.Boss)
             {
-                BuildAsThreeSkullReward(this);
+                BuildAsThreeSkullReward(this, deploymentLimit);
             }
         }
 
         private void BuildAsOneSkullReward(CombatRewardData crd, int deploymentLimit)
         {
-            int maxGoldSum = 750;
-            int deploymentBonus = (deploymentLimit - 3) * 150;
-            if (deploymentBonus > 0)
-            {
-                maxGoldSum += deploymentBonus;
-            }
+            int basicReward = 200;
+            int perPersonBonus = 100 * deploymentLimit;
+            int baseGoldReward = perPersonBonus + basicReward;
+            baseGoldReward = RandomGenerator.NumberBetween(baseGoldReward - 50, baseGoldReward + 50);
+            ItemData commonTrinket = Array.FindAll(ItemController.Instance.AllItems, item => item.itemType == ItemType.Trinket && item.rarity == Rarity.Common && item.canBeCombatContractReward).ToList().GetRandomElement();
 
-            int baseGoldReward = (int) (maxGoldSum * GetActsPassedGoldRewardModifier());
-            int lowerGoldReward = (int) (baseGoldReward * 0.95f);
-            int upperGoldReward = (int) (baseGoldReward * 1.05f);
-            baseGoldReward = RandomGenerator.NumberBetween(lowerGoldReward, upperGoldReward);
-
+            crd.goldAmount = baseGoldReward;
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
-            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(375, 550).ShuffledCopy()[0]);
-            crd.goldAmount = baseGoldReward - crd.item.baseGoldValue;
-            crd.goldAmount += 150;
-            if (crd.goldAmount < 50)
-            {
-                crd.goldAmount = 50;
-            }
+            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(commonTrinket);
         }
+
         private void BuildAsTwoSkullReward(CombatRewardData crd, int deploymentLimit)
         {
-            int maxGoldSum = 1250;
-            int deploymentBonus = (deploymentLimit - 3) * 150;
-            if (deploymentBonus > 0)
-            {
-                maxGoldSum += deploymentBonus;
-            }
+            int eliteReward = 500;
+            int perPersonBonus = 100 * deploymentLimit;
+            int baseGoldReward = perPersonBonus + eliteReward;
+            baseGoldReward = RandomGenerator.NumberBetween(baseGoldReward - 50, baseGoldReward + 50);
+            ItemData commonTrinket = Array.FindAll(ItemController.Instance.AllItems, item => item.itemType == ItemType.Trinket && item.rarity == Rarity.Rare && item.canBeCombatContractReward).ToList().GetRandomElement();
 
-            int baseGoldReward = (int) (maxGoldSum * GetActsPassedGoldRewardModifier());
-            int lowerGoldReward = (int) (baseGoldReward * 0.95f);
-            int upperGoldReward = (int) (baseGoldReward * 1.05f);
-            baseGoldReward = RandomGenerator.NumberBetween(lowerGoldReward, upperGoldReward);
-
+            crd.goldAmount = baseGoldReward;
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
-            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems(600, 1025).ShuffledCopy()[0]);
-            crd.goldAmount = baseGoldReward - crd.item.baseGoldValue;
-            crd.goldAmount += 150;
-            if (crd.goldAmount < 50)
-            {
-                crd.goldAmount = 50;
-            }
+            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(commonTrinket);
         }
-        private void BuildAsThreeSkullReward(CombatRewardData crd)
+        
+        private void BuildAsThreeSkullReward(CombatRewardData crd, int deploymentLimit)
         {
-            int maxGoldSum = 2500;
-            int baseGoldReward = (int) (maxGoldSum * GetActsPassedGoldRewardModifier());
+            int bossReward = 800;
+            int perPersonBonus = 100 * deploymentLimit;
+            int baseGoldReward = perPersonBonus + bossReward;
+            baseGoldReward = RandomGenerator.NumberBetween(baseGoldReward - 50, baseGoldReward + 50);
+            ItemData commonTrinket = Array.FindAll(ItemController.Instance.AllItems, item => item.itemType == ItemType.Trinket && item.rarity == Rarity.Epic && item.canBeCombatContractReward).ToList().GetRandomElement();
 
+            crd.goldAmount = baseGoldReward;
             crd.abilityAwarded = AbilityController.Instance.GetRandomAbilityTomeAbility();
-            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(ItemController.Instance.GetAllContractRewardableItems((int) (baseGoldReward * 0.25f), (int) (baseGoldReward * 0.85f)).ShuffledCopy()[0]);
-            crd.goldAmount = baseGoldReward - crd.item.baseGoldValue;
-            crd.goldAmount += 150;
-            if (crd.goldAmount < 50)
-            {
-                crd.goldAmount = 50;
-            }
+            crd.item = ItemController.Instance.GenerateNewItemWithRandomEffects(commonTrinket);
         }
         private float GetActsPassedGoldRewardModifier()
         {
