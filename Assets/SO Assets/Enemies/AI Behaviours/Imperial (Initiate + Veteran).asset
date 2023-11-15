@@ -469,6 +469,72 @@ MonoBehaviour:
       opponentsUnactivated: 0
   - action:
       actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: Smash Shield (Native 2h)
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 31
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 6
+      range: 0
+      perkPairing:
+        perkTag: 210
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 5
+      range: 0
+      perkPairing:
+        perkTag: 12
+        passiveStacks: 0
+      healthPercentage: 0
+      enemiesInMeleeRange: 2
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 26
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 4
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
       targettingPriority: 02000000
       movementType: 0
       getRangeFromAbility: 0
@@ -607,6 +673,44 @@ MonoBehaviour:
       abilityName: 
       armourReq: 0
       opponentsUnactivated: 2
+  - action:
+      actionType: 2
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 1
+      range: 2
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 7
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
   - action:
       actionType: 7
       targettingPriority: 

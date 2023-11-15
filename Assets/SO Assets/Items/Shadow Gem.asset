@@ -18,9 +18,8 @@ MonoBehaviour:
     shadows themselves and imbued with their power.
   itemType: 4
   rarity: 3
-  fatiguePenalty: 0
   baseGoldValue: 1500
-  canSpawnInShop: 1
+  canSpawnInShop: 0
   canBeCombatContractReward: 1
   includeInLibrary: 1
   weaponClass: 0
@@ -28,6 +27,7 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

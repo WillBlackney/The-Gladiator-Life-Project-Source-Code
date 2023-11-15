@@ -19,7 +19,7 @@ MonoBehaviour:
   itemType: 4
   rarity: 1
   baseGoldValue: 500
-  canSpawnInShop: 1
+  canSpawnInShop: 0
   canBeCombatContractReward: 1
   includeInLibrary: 1
   weaponClass: 0

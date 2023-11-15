@@ -18,9 +18,8 @@ MonoBehaviour:
     and thieves to hide their identity.
   itemType: 1
   rarity: 1
-  fatiguePenalty: 0
   baseGoldValue: 65
-  canSpawnInShop: 0
+  canSpawnInShop: 1
   canBeCombatContractReward: 0
   includeInLibrary: 1
   weaponClass: 0
@@ -28,6 +27,7 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25

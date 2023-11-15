@@ -18,9 +18,8 @@ MonoBehaviour:
     of an undead creature or cursed individual.
   itemType: 4
   rarity: 3
-  fatiguePenalty: 0
   baseGoldValue: 2000
-  canSpawnInShop: 1
+  canSpawnInShop: 0
   canBeCombatContractReward: 1
   includeInLibrary: 0
   weaponClass: 0
@@ -28,6 +27,7 @@ MonoBehaviour:
   allowedSlot: 0
   injuryTypesCaused: 
   weaponAttackAnimationType: 0
+  canDecapitate: 0
   healthDamage: 1
   armourDamage: 1
   armourPenetration: 0.25
