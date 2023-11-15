@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
+  m_Name: Adventuring Protector
+  m_EditorClassIdentifier: 
+  myName: Adventuring Protector
+  myDescription: 
+  randomizeRace: 1
+  race: 1
+  possibleRaces: 010000000200000006000000
+  audioProfile: 1
+  modelSize: 0
+  xpReward: 25
+  ignoreStress: 0
+  attributeSheet:
+    accuracy:
+      value: 65
+      stars: 0
+    apMaximum: 8
+    apRecovery: 8
+    auraSize: 1
+    constitution:
+      value: 80
+      stars: 0
+    criticalChance: 5
+    criticalModifier: 50
+    deathResistance: 25
+    debuffResistance: 0
+    dodge:
+      value: 5
+      stars: 0
+    initiative: 15
+    injuryResistance: 0
+    magicDamageBonus: 0
+    magicResistance: -25
+    maxHealth: 0
+    might:
+      value: 5
+      stars: 0
+    physicalDamageBonus: 0
+    physicalResistance: 25
+    resolve:
+      value: 25
+      stars: 0
+    stressResistance: 0
+    vision: 0
+    wits:
+      value: 5
+      stars: 0
+  baseArmour: 0
+  randomizeHealth: 0
+  lowerHealthLimit: 50
+  upperHealthLimit: 60
+  behaviour: {fileID: 11400000, guid: 15b72171419f1d94ebca7eb4f2659abb, type: 2}
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: 6c906fd5c22e64f43adc16680c0264ea, type: 2}
+    - {fileID: 11400000, guid: 507ff3973c3f4a44ea421a51ff989b75, type: 2}
+    - {fileID: 11400000, guid: 1d653fb7e4e89d448bae7106e8b49b73, type: 2}
+  serializedPassiveManager:
+    perks:
+    - perkTag: 13
+      stacks: 1
+      freshInjury: 0
+  randomizeItemSet: 1
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    offHandItem: {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  possibleArmourLoadouts:
+  - headProspects: []
+    bodyProspects:
+    - {fileID: 11400000, guid: c89d7d867b89eda42bd96838671cfe77, type: 2}
+  recruitWeaponLoadouts:
+  - mainHandProspects:
+    - {fileID: 11400000, guid: 51e31aac9500e9648bfe3740136d9331, type: 2}
+    offhandProspects:
+    - {fileID: 11400000, guid: edb22d9ccea3b19418cfe6f116ab3637, type: 2}
+  useUCM: 1
+  modelParts: []
+  modelPrefab: {fileID: 0}

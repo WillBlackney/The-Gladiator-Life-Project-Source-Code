@@ -79,8 +79,7 @@ MonoBehaviour:
     chestArmour: {fileID: 0}
     trinket: {fileID: 0}
   possibleArmourLoadouts:
-  - headProspects:
-    - {fileID: 11400000, guid: eb2b4dc7ace074444a4c2a4c78aaadb7, type: 2}
+  - headProspects: []
     bodyProspects:
     - {fileID: 11400000, guid: ae95f085284e4354f90181106f16a763, type: 2}
   recruitWeaponLoadouts:
