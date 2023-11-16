@@ -47,7 +47,7 @@ MonoBehaviour:
     might:
       value: 0
       stars: 0
-    physicalDamageBonus: 30
+    physicalDamageBonus: 0
     physicalResistance: 0
     resolve:
       value: 5

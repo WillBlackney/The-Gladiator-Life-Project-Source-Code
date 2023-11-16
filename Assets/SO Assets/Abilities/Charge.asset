@@ -35,7 +35,11 @@ MonoBehaviour:
   talentRequirementData:
     talentSchool: 2
     level: 1
-  abilitySubRequirements: []
+  abilitySubRequirements:
+  - type: 11
+    healthRequired: 0
+    race: 0
+    perk: 0
   baseRange: 1
   gainRangeBonusFromVision: 0
   hitChanceModifier: 0

@@ -1003,13 +1003,13 @@ namespace WeAreGladiators.Abilities
 
             }
 
-            // Stress Check
+            // Morale Check
             else if (abilityEffect.effectType == AbilityEffectType.MoraleCheck)
             {
                 CombatController.Instance.CreateMoraleCheck(target, abilityEffect.stressEventData, true, true);
             }
 
-            // Stress Check AoE
+            // Morale Check AoE
             else if (abilityEffect.effectType == AbilityEffectType.MoraleCheckAoe)
             {
                 triggerEffectEndEvents = false;

@@ -765,15 +765,15 @@ namespace WeAreGladiators.Characters
             }
 
             // prevent stress going less then 1 (Shattered)
-            if (finalMoraleState < 0)
+            if (finalMoraleState < 1)
             {
-                finalMoraleState = 0;
+                finalMoraleState = 1;
             }
 
-            // Zealots cant exceed 19
-            if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Witch) && finalMoraleState > 4)
+            // Witches cant exceed 'Panicking'
+            if (CharacterDataController.Instance.DoesCharacterHaveBackground(character.background, CharacterBackground.Witch) && finalMoraleState < 2)
             {
-                finalMoraleState = 4;
+                finalMoraleState = 2;
             }
 
             // Set stress after calculation
