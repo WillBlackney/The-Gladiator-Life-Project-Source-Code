@@ -84,6 +84,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ae95f085284e4354f90181106f16a763, type: 2}
   recruitWeaponLoadouts:
   - mainHandProspects:
+    - {fileID: 11400000, guid: eb90f828c8b2d7349b3e2ab18a132000, type: 2}
     - {fileID: 11400000, guid: 112fa67cd3343dc4f9e3ce2c9f31ad8c, type: 2}
     offhandProspects: []
   useUCM: 1

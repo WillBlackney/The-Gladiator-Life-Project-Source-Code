@@ -53,7 +53,8 @@ MonoBehaviour:
       value: 5
       stars: 0
   abilityBook:
-    activeAbilities: []
+    activeAbilities:
+    - {fileID: 11400000, guid: 98601a46175ae304d9a3fdfda8dab8e1, type: 2}
   serializedPassiveManager:
     perks:
     - perkTag: 87
