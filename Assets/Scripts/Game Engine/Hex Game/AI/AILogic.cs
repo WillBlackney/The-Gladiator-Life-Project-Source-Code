@@ -1075,6 +1075,13 @@ namespace WeAreGladiators.AI
                 bRet = true;
             }
 
+            // Check can backstrike target
+            else if (req.requirementType == AIActionRequirementType.CanBackStrikeTarget &&
+                     target != null && HexCharacterController.Instance.IsCharacterBackStrikingTarget(character, target))
+            {
+                bRet = true;
+            }
+
             // Check NOT engaged in melee
             else if (req.requirementType == AIActionRequirementType.SelfNotEngagedInMelee &&
                      !HexCharacterController.Instance.IsCharacterEngagedOrEngagingInMelee(character))
@@ -1269,6 +1276,20 @@ namespace WeAreGladiators.AI
             // Target is NOT elevated
             else if (req.requirementType == AIActionRequirementType.TargetIsNotElevated &&
                      target.currentTile.Elevation != TileElevation.Elevated)
+            {
+                bRet = true;
+            }
+
+            // Self is elevated
+            else if (req.requirementType == AIActionRequirementType.SelfIsElevated &&
+                     character.currentTile.Elevation == TileElevation.Elevated)
+            {
+                bRet = true;
+            }
+
+            // Self is NOT elevated
+            else if (req.requirementType == AIActionRequirementType.SelfIsNotElevated &&
+                     character.currentTile.Elevation != TileElevation.Elevated)
             {
                 bRet = true;
             }

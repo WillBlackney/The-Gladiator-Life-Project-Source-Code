@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Sirenix.Utilities;
 using Spriter2UnityDX;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.AI;
@@ -3239,6 +3240,10 @@ namespace WeAreGladiators.Characters
             }
 
             return bonusRet;
+        }
+        public bool IsCharacterBackStrikingTarget(HexCharacterModel character, HexCharacterModel target)
+        {
+            return GetCharacterBackArcTiles(target).Contains(character.currentTile);
         }
         public int CalculateElevationAccuracyModifier(HexCharacterModel attacker, HexCharacterModel target)
         {

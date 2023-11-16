@@ -1,0 +1,647 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e977228e81fbff4cb36aab28582ba06, type: 3}
+  m_Name: Adventuring Tomb Raider
+  m_EditorClassIdentifier: 
+  directives:
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: Shadow Step
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 7
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 15
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: Cheap Shot
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: Cheap Shot
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 30
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 7
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 5
+      range: 0
+      perkPairing:
+        perkTag: 77
+        passiveStacks: 0
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: Cheap Shot
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 30
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 7
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 42
+      range: 0
+      perkPairing:
+        perkTag: 77
+        passiveStacks: 0
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: Throwing Knife
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 8
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 51
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 18
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 5
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 9
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 1
+      abilityName: Overhead Chop
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 15
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: Throwing Knife
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 6
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: Puncture
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 28
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 79
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: Puncture
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 5
+      range: 0
+      perkPairing:
+        perkTag: 74
+        passiveStacks: 0
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 1
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: Quick Shank
+      teleportAbilityName: 
+    requirements: []
+  - action:
+      actionType: 3
+      targettingPriority: 01000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 2
+      maxMoveDistance: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 8
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 43
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 7
+      targettingPriority: 
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 3
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 8
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 37
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 41
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 1
+  - action:
+      actionType: 2
+      targettingPriority: 050000000100000006000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 1
+      range: 2
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 7
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 3
+      targettingPriority: 01000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 2
+      maxMoveDistance: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 36
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 41
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 2
+  - action:
+      actionType: 2
+      targettingPriority: 01000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 8
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 27
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 1
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 2
+      targettingPriority: 01000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 8
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 36
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 1
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 2
+      targettingPriority: 01000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 36
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 1
+      range: 2
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+  - action:
+      actionType: 7
+      targettingPriority: 
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 26
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 2
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 10
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 2
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 41
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 1
+  - action:
+      actionType: 2
+      targettingPriority: 01000000
+      movementType: 0
+      getRangeFromAbility: 0
+      range: 0
+      maxMoveDistance: 0
+      abilityName: 
+      teleportAbilityName: 
+    requirements:
+    - requirementType: 36
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 0
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0
+    - requirementType: 27
+      range: 0
+      perkPairing:
+        perkTag: 0
+        passiveStacks: 1
+      healthPercentage: 0
+      enemiesInMeleeRange: 1
+      energyReq: 0
+      moraleReq: 0
+      turnReq: 1
+      alliesAlive: 0
+      abilityName: 
+      armourReq: 0
+      opponentsUnactivated: 0

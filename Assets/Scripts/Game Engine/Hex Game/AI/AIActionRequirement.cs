@@ -155,6 +155,8 @@ namespace WeAreGladiators.AI
         TargetPositionedForKnockBackStun = 20,
         TargetIsElevated = 21,
         TargetIsNotElevated = 22,
+        SelfIsNotElevated = 43,
+        SelfIsElevated = 44,
         TargetHasLowerMoraleThanX = 24,
         TargetHasHigherMoraleThanX = 25,
         IsLessThanTurnX = 26,
@@ -171,6 +173,8 @@ namespace WeAreGladiators.AI
         TargetHasAllyDirectyBehindThem = 33,
         MeleeHasStarted = 36,
         MeleeHasNotStarted = 37,
-        XorMoreOpponentsUnactivated = 41
+        XorMoreOpponentsUnactivated = 41,
+        CanBackStrikeTarget = 42,
+
     }
 }

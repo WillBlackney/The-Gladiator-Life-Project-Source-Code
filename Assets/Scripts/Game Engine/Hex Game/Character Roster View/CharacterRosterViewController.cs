@@ -404,7 +404,7 @@ namespace WeAreGladiators.UI
 
             physicalResistanceText.text = StatCalculator.GetTotalPhysicalResistance(character) + "%";
             magicResistanceText.text = StatCalculator.GetTotalMagicResistance(character) + "%";
-            stressResistanceText.text = StatCalculator.GetTotalBravery(character) + "%";
+            stressResistanceText.text = StatCalculator.GetTotalBravery(character).ToString();
             injuryResistanceText.text = StatCalculator.GetTotalInjuryResistance(character) + "%";
             debuffResistanceText.text = StatCalculator.GetTotalDebuffResistance(character) + "%";
             deathResistanceText.text = StatCalculator.GetTotalDeathResistance(character) + "%";

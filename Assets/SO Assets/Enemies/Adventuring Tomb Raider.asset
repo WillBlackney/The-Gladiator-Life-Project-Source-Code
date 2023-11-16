@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
+  m_Name: Adventuring Tomb Raider
+  m_EditorClassIdentifier: 
+  myName: Adventuring Tomb Raider
+  myDescription: 
+  randomizeRace: 1
+  race: 1
+  possibleRaces: 030000000700000005000000
+  audioProfile: 1
+  modelSize: 0
+  xpReward: 25
+  ignoreStress: 0
+  attributeSheet:
+    accuracy:
+      value: 80
+      stars: 0
+    apMaximum: 8
+    apRecovery: 8
+    auraSize: 1
+    constitution:
+      value: 40
+      stars: 0
+    criticalChance: 5
+    criticalModifier: 50
+    deathResistance: 25
+    debuffResistance: 0
+    dodge:
+      value: 15
+      stars: 0
+    initiative: 15
+    injuryResistance: 0
+    magicDamageBonus: 0
+    magicResistance: 0
+    maxHealth: 0
+    might:
+      value: 0
+      stars: 0
+    physicalDamageBonus: 0
+    physicalResistance: 0
+    resolve:
+      value: 10
+      stars: 0
+    stressResistance: 0
+    vision: 0
+    wits:
+      value: 15
+      stars: 0
+  baseArmour: 0
+  randomizeHealth: 0
+  lowerHealthLimit: 50
+  upperHealthLimit: 60
+  behaviour: {fileID: 11400000, guid: acf9201b5dc73614390dace8c8591eac, type: 2}
+  abilityBook:
+    activeAbilities:
+    - {fileID: 11400000, guid: 36a0268a5ac37d742960a07bfe17be42, type: 2}
+    - {fileID: 11400000, guid: f01c425f08c1b3b478636965b20146cd, type: 2}
+    - {fileID: 11400000, guid: f2990956e456afa46af43accbd061445, type: 2}
+  serializedPassiveManager:
+    perks:
+    - perkTag: 173
+      stacks: 1
+      freshInjury: 0
+  randomizeItemSet: 1
+  itemSet:
+    mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}
+    offHandItem: {fileID: 11400000, guid: 331f106ebb9f16e47ab434d3a23aafe7, type: 2}
+    headArmour: {fileID: 0}
+    chestArmour: {fileID: 0}
+    trinket: {fileID: 0}
+  possibleArmourLoadouts:
+  - headProspects:
+    - {fileID: 11400000, guid: cd0cd6f5705583841a730322c779e99b, type: 2}
+    bodyProspects:
+    - {fileID: 11400000, guid: 2cce4423c9ed57d42b7c9d7736934204, type: 2}
+  recruitWeaponLoadouts:
+  - mainHandProspects:
+    - {fileID: 11400000, guid: ab6f2b51cf50eaa43bba82ed52ef5342, type: 2}
+    - {fileID: 11400000, guid: 74b057af6b7ca014ebb30ee19bb10460, type: 2}
+    offhandProspects:
+    - {fileID: 0}
+  useUCM: 1
+  modelParts: []
+  modelPrefab: {fileID: 0}
