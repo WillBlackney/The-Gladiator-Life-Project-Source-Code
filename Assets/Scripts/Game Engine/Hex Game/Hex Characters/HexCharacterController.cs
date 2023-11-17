@@ -2551,7 +2551,7 @@ namespace WeAreGladiators.Characters
                     {
                         VisualEventManager.CreateVisualEvent(() =>
                             VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "Savage Leader!", PerkController.Instance.GetPerkIconDataByTag(Perk.SavageLeader).passiveSprite, StatusFrameType.CircularBrown)).SetEndDelay(0.5f);
-                        PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Wrath, 1, true, 0, character.pManager);
+                        PerkController.Instance.ModifyPerkOnCharacterEntity(ally.pManager, Perk.Focus, 1, true, 0, character.pManager);
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);
                     }
                 }

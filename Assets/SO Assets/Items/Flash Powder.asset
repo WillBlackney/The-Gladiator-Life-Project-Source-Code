@@ -17,7 +17,7 @@ MonoBehaviour:
   itemDescription: A small pouch of shimmering and colorful powder, used by performers
     and illusionists to create dramatic effects.
   itemType: 4
-  rarity: 2
+  rarity: 1
   baseGoldValue: 500
   canSpawnInShop: 0
   canBeCombatContractReward: 1

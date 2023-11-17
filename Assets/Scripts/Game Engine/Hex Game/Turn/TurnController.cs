@@ -19,6 +19,75 @@ namespace WeAreGladiators.TurnLogic
 {
     public class TurnController : Singleton<TurnController>
     {
+        #region Properties + Component References
+
+        [Header("Component References")]
+        [SerializeField] private GameObject windowStartPos;
+        [SerializeField] private GameObject activationPanelParent;
+        [SerializeField] private GameObject panelArrow;
+        [SerializeField] private GameObject activationSlotContentParent;
+        [SerializeField] private GameObject activationWindowContentParent;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [Header("Turn Change Component References")]
+        [SerializeField] private TextMeshProUGUI whoseTurnText;
+        [SerializeField] private CanvasGroup visualParentCG;
+        [SerializeField] private RectTransform blackBarImageRect;
+        [SerializeField] private RectTransform middlePos;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [Header("Combat Start Screen Components")]
+        [SerializeField] private GameObject shieldParent;
+        [SerializeField] private Transform leftSwordRect;
+        [SerializeField] private Transform rightSwordRect;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [SerializeField] private Transform leftSwordStartPos;
+        [SerializeField] private Transform rightSwordStartPos;
+        [SerializeField] private Transform swordEndPos;
+        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [Header("Turn Change Properties")]
+        [SerializeField] private float alphaChangeSpeed;
+        private readonly List<GameObject> panelSlots = new List<GameObject>();
+
+        #endregion
+
+        #region Getters + Accessors
+
+        public HexCharacterModel EntityActivated { get; private set; }
+        public int CurrentTurn { get; private set; }
+
+        [field: PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
+        [field: Header("Variables")]
+        public List<HexCharacterModel> ActivationOrder { get; private set; } = new List<HexCharacterModel>();
+        public void RemoveEntityFromActivationOrder(HexCharacterModel entity)
+        {
+            if (ActivationOrder.Contains(entity))
+            {
+                ActivationOrder.Remove(entity);
+            }
+
+        }
+        public void AddEntityToActivationOrder(HexCharacterModel entity)
+        {
+            ActivationOrder.Add(entity);
+        }
+        public void DisablePanelSlotAtIndex(int index)
+        {
+            panelSlots[index].SetActive(false);
+        }
+        public void EnablePanelSlotAtIndex(int index)
+        {
+            panelSlots[index].SetActive(true);
+        }
+        public int GetCharacterTurnsUntilTheirTurn(HexCharacterModel character)
+        {
+            if (!ActivationOrder.Contains(character))
+            {
+                return 0;
+            }
+            return ActivationOrder.IndexOf(character) - ActivationOrder.IndexOf(EntityActivated);
+        }
+        public HexCharacterModel LastToActivate => ActivationOrder[ActivationOrder.Count - 1];
+
+        #endregion
 
         #region Setup + Initializaton
 
@@ -70,75 +139,7 @@ namespace WeAreGladiators.TurnLogic
             }
         }
 
-        #endregion
-        #region Properties + Component References
-
-        [Header("Component References")]
-        [SerializeField] private GameObject windowStartPos;
-        [SerializeField] private GameObject activationPanelParent;
-        [SerializeField] private GameObject panelArrow;
-        [SerializeField] private GameObject activationSlotContentParent;
-        [SerializeField] private GameObject activationWindowContentParent;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-        [Header("Turn Change Component References")]
-        [SerializeField] private TextMeshProUGUI whoseTurnText;
-        [SerializeField] private CanvasGroup visualParentCG;
-        [SerializeField] private RectTransform blackBarImageRect;
-        [SerializeField] private RectTransform middlePos;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-        [Header("Combat Start Screen Components")]
-        [SerializeField] private GameObject shieldParent;
-        [SerializeField] private Transform leftSwordRect;
-        [SerializeField] private Transform rightSwordRect;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-        [SerializeField] private Transform leftSwordStartPos;
-        [SerializeField] private Transform rightSwordStartPos;
-        [SerializeField] private Transform swordEndPos;
-        [PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-        [Header("Turn Change Properties")]
-        [SerializeField] private float alphaChangeSpeed;
-        private readonly List<GameObject> panelSlots = new List<GameObject>();
-
-        #endregion
-
-        #region Getters + Accessors
-
-        public HexCharacterModel EntityActivated { get; private set; }
-        public int CurrentTurn { get; private set; }
-        [field: PropertySpace(SpaceBefore = 20, SpaceAfter = 0)]
-        [field: Header("Variables")]
-        public List<HexCharacterModel> ActivationOrder { get; private set; } = new List<HexCharacterModel>();
-        public void RemoveEntityFromActivationOrder(HexCharacterModel entity)
-        {
-            if (ActivationOrder.Contains(entity))
-            {
-                ActivationOrder.Remove(entity);
-            }
-
-        }
-        public void AddEntityToActivationOrder(HexCharacterModel entity)
-        {
-            ActivationOrder.Add(entity);
-        }
-        public void DisablePanelSlotAtIndex(int index)
-        {
-            panelSlots[index].SetActive(false);
-        }
-        public void EnablePanelSlotAtIndex(int index)
-        {
-            panelSlots[index].SetActive(true);
-        }
-        public int GetCharacterTurnsUntilTheirTurn(HexCharacterModel character)
-        {
-            if (!ActivationOrder.Contains(character))
-            {
-                return 0;
-            }
-            return ActivationOrder.IndexOf(character) - ActivationOrder.IndexOf(EntityActivated);
-        }
-        public HexCharacterModel LastToActivate => ActivationOrder[ActivationOrder.Count - 1];
-
-        #endregion
+        #endregion        
 
         #region Turn Events
 
@@ -306,10 +307,15 @@ namespace WeAreGladiators.TurnLogic
             // Re arrange the activation order list based on the entity rolls
             List<HexCharacterModel> sortedList = ActivationOrder.OrderBy(entity => entity.currentInitiativeRoll).ToList();
             List<HexCharacterModel> inattentiveCharacters = new List<HexCharacterModel>();
+            List<HexCharacterModel> priorityCharacters = new List<HexCharacterModel>();
             sortedList.Reverse();
             foreach (HexCharacterModel c in sortedList)
             {
                 if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Inattentive))
+                {
+                    priorityCharacters.Add(c);
+                }
+                else if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Inattentive))
                 {
                     inattentiveCharacters.Add(c);
                 }

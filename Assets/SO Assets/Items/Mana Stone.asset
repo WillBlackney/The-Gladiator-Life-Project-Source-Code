@@ -17,8 +17,8 @@ MonoBehaviour:
   itemDescription: A glittering and ethereal stone, said to be a source of magical
     power and imbued with ancient enchantments.
   itemType: 4
-  rarity: 2
-  baseGoldValue: 250
+  rarity: 1
+  baseGoldValue: 500
   canSpawnInShop: 0
   canBeCombatContractReward: 1
   includeInLibrary: 1

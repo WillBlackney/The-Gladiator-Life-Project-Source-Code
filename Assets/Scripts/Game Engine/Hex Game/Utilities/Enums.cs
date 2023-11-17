@@ -485,8 +485,10 @@
         Cunning = 22,
         DeadHeart = 24,
         DimWitted = 102,
+        DivineBlessing = 238,
         DragonAspect = 145,
         Eager = 19,
+        Enthusiastic = 239,
 
         TrueSight = 9,
 
@@ -501,6 +503,7 @@
         Flight = 147,
         Focus = 75,
         Footwork = 13,
+        Foresight = 241,
         Fortified = 156,
         Frail = 94,
         FragileBinding = 85,
@@ -553,6 +556,7 @@
         Shed = 146,
         ShieldWall = 12,
         SpearWall = 202,
+        ShieldBreaker = 240,
         ShortSighted = 105,
         Sick = 213,
         Slippery = 56,

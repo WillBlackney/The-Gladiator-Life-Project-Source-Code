@@ -17,7 +17,7 @@ MonoBehaviour:
   itemDescription: A necklace made of bleached white bones that clatter together,
     said to ward off evil spirits.
   itemType: 4
-  rarity: 2
+  rarity: 1
   baseGoldValue: 500
   canSpawnInShop: 0
   canBeCombatContractReward: 1

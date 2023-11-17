@@ -65,11 +65,11 @@ MonoBehaviour:
   - Undead_Right_Hand_1
   - Undead_Right_Leg_1
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 6059ca145ad175f419625f2fefd31a17, type: 2}
-    offHandItem: {fileID: 11400000, guid: 67933190d00ec95478f7e153f088ddb2, type: 2}
+    mainHandItem: {fileID: 11400000, guid: e8567b630dd37c042a06a339a93e409e, type: 2}
+    offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: eb2b4dc7ace074444a4c2a4c78aaadb7, type: 2}
     chestArmour: {fileID: 11400000, guid: 9c82d8fa69ec50443a7f388f71928851, type: 2}
-    trinket: {fileID: 0}
+    trinket: {fileID: 11400000, guid: 5a79f89ca4eb7494cb9d491ac702932d, type: 2}
   talentPairings:
   - talentSchool: 2
     level: 1

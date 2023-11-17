@@ -656,6 +656,10 @@ namespace WeAreGladiators.Combat
             if (effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Wrath))
             {
                 damageModPercentageAdditive += 0.3f;
+                if (PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.Enthusiastic))
+                {
+                    damageModPercentageAdditive += 0.15f;
+                }
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Wrath modifier = " + damageModPercentageAdditive);
             }
 
@@ -673,10 +677,14 @@ namespace WeAreGladiators.Combat
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Vulnerable modifier = " + damageModPercentageAdditive);
             }
 
-            // Block
+            // Guard
             if (target != null && effect != null && attacker != null && PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Guard) && effect.ignoresGuard == false)
             {
                 damageModPercentageAdditive -= 0.3f;
+                if (PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Enthusiastic))
+                {
+                    damageModPercentageAdditive -= 0.15f;
+                }
                 Debug.Log("ExecuteGetFinalDamageValueAfterAllCalculations() Additive damage modifier after adding in Block modifier = " + damageModPercentageAdditive);
             }
 
@@ -1118,6 +1126,16 @@ namespace WeAreGladiators.Combat
 
             // Target Dodge
             int dodgeMod = -(StatCalculator.GetTotalDodge(target) + dualWieldMod - targetStressMod);
+
+            // Check Smashed Breaker
+            if (target.itemSet.offHandItem != null && 
+                target.itemSet.offHandItem.weaponClass == WeaponClass.Shield &&
+                !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.SmashedShield) &&
+                PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.ShieldBreaker))
+            {
+                dodgeMod -= ItemController.Instance.GetCharacterDodgeBonusFromShield(target.itemSet);
+            }
+
             if (dodgeMod != 0)
             {
                 ret.details.Add(new HitChanceDetailData("Target dodge", dodgeMod));

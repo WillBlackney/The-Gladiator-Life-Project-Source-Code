@@ -17,8 +17,8 @@ MonoBehaviour:
   itemDescription: A dark and gleaming gemstone, said to have been created by the
     shadows themselves and imbued with their power.
   itemType: 4
-  rarity: 3
-  baseGoldValue: 1500
+  rarity: 2
+  baseGoldValue: 1000
   canSpawnInShop: 0
   canBeCombatContractReward: 1
   includeInLibrary: 1

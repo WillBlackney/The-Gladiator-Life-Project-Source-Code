@@ -21,7 +21,7 @@ MonoBehaviour:
   baseGoldValue: 1000
   canSpawnInShop: 0
   canBeCombatContractReward: 1
-  includeInLibrary: 0
+  includeInLibrary: 1
   weaponClass: 0
   handRequirement: 0
   allowedSlot: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
   - possibleEffects:
     - effectType: 1
       attributeModified: 0
-      modAmount: 15
+      modAmount: 10
       perkGained:
         perkTag: 0
         stacks: 0
@@ -57,28 +57,7 @@ MonoBehaviour:
         perkTag: 0
         stacks: 0
         freshInjury: 0
-  - possibleEffects:
-    - effectType: 1
-      attributeModified: 10
-      modAmount: -15
-      perkGained:
-        perkTag: 0
-        stacks: 0
-        freshInjury: 0
-      gainPerkChance: 50
-      effectChance: 0
-      perkApplied:
-        perkTag: 0
-        passiveStacks: 1
-      innateItemEffectType: 0
-      innateAccuracyMod: 0
-      innateAccuracyAgainstAdjacentMod: 0
-      innateWeaponRangeBonus: 0
-      innateBackstabPenetrationBonus: 0
-      innatePerkGainedOnUse:
-        perkTag: 0
-        stacks: 0
-        freshInjury: 0
+  - possibleEffects: []
   equipSFX: 124
   swingSFX: 8
   hitSFX: 8

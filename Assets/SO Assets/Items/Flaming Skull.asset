@@ -17,11 +17,11 @@ MonoBehaviour:
   itemDescription: A skull that is wreathed in constant flames, said to be the remains
     of an undead creature or cursed individual.
   itemType: 4
-  rarity: 3
-  baseGoldValue: 2000
+  rarity: 2
+  baseGoldValue: 1000
   canSpawnInShop: 0
   canBeCombatContractReward: 1
-  includeInLibrary: 0
+  includeInLibrary: 1
   weaponClass: 0
   handRequirement: 0
   allowedSlot: 0

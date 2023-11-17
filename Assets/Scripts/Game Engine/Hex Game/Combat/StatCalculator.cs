@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.Characters;
@@ -378,6 +379,10 @@ namespace WeAreGladiators
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Focus))
             {
                 accuracy += 30;
+                if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Enthusiastic))
+                {
+                    accuracy += 15;
+                }
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Brute))
@@ -650,6 +655,10 @@ namespace WeAreGladiators
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Evasion))
             {
                 dodge += 30;
+                if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Enthusiastic))
+                {
+                    dodge += 15;
+                }
             }
 
             if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.ShieldWall))

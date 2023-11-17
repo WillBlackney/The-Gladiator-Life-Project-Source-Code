@@ -64,11 +64,12 @@ MonoBehaviour:
   maxInjuryDuration: 0
   perksRemovedOnThisApplication: 
   perksGainedOnThisExpiry: 
-  perksThatBlockThis: 51000000
+  perksThatBlockThis: 51000000ee000000
   racesThatBlockThis: 
   possibleSubNames: []
   visualEventsOnApplication:
   - eventType: 3
+    newUcmParts: []
     screenOverlayType: 0
     overlayColor: 0
     overlayFadeInTime: 0
