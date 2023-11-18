@@ -1127,13 +1127,20 @@ namespace WeAreGladiators.Combat
             // Target Dodge
             int dodgeMod = -(StatCalculator.GetTotalDodge(target) + dualWieldMod - targetStressMod);
 
-            // Check Smashed Breaker
+            // Check Shield Breaker
             if (target.itemSet.offHandItem != null && 
                 target.itemSet.offHandItem.weaponClass == WeaponClass.Shield &&
                 !PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.SmashedShield) &&
                 PerkController.Instance.DoesCharacterHavePerk(attacker.pManager, Perk.ShieldBreaker))
             {
                 dodgeMod -= ItemController.Instance.GetCharacterDodgeBonusFromShield(target.itemSet);
+            }
+
+            // Anticipation
+            if (ability != null && ability.abilityType.Contains(AbilityType.RangedAttack) &&
+                PerkController.Instance.DoesCharacterHavePerk(target.pManager, Perk.Anticipation))
+            {
+                dodgeMod += 15;
             }
 
             if (dodgeMod != 0)
@@ -1161,6 +1168,8 @@ namespace WeAreGladiators.Combat
             {
                 ret.details.Add(new HitChanceDetailData("Strong Starter", 35));
             }
+
+                       
 
             // Melee modifiers
             if (ability != null && ability.abilityType.Contains(AbilityType.MeleeAttack))

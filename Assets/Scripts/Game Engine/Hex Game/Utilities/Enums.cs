@@ -11,7 +11,7 @@
     {
         None = 0,
         Accuracy = 11,
-        ActionPointRecovery = 8,
+        ActionPointRecovery = 8,        
         Aura = 6,
         Armour = 30,
         ArmourPenetration = 42,
@@ -459,6 +459,7 @@
 
         None = 0,
         Abusive = 107,
+        Anticipation = 242,
         WeaponMastery = 126,
         Barrier = 47,
         Berserk = 46,

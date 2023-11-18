@@ -57,7 +57,6 @@ MonoBehaviour:
         perkTag: 0
         stacks: 0
         freshInjury: 0
-  - possibleEffects: []
   equipSFX: 124
   swingSFX: 8
   hitSFX: 8
