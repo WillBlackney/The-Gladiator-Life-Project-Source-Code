@@ -20,7 +20,7 @@ namespace WeAreGladiators.TownFeatures
 
         [Header("Core Components")]
         [SerializeField] private CombatContractCardEnemyInfoRow[] enemyRows;
-        [SerializeField] private GameObject glowOutline;
+        [SerializeField] private Image glowOutline;
         [SerializeField] private TextMeshProUGUI deploymentLimitText;
 
         [Header("Reward Components")]
@@ -64,7 +64,7 @@ namespace WeAreGladiators.TownFeatures
                 return;
             }
             gameObject.transform.DOKill();
-            gameObject.transform.DOScale(1f, 0.2f);
+            gameObject.transform.DOScale(1f, 0.1f);
         }
         public void OnCardClicked()
         {
@@ -76,15 +76,19 @@ namespace WeAreGladiators.TownFeatures
             if (SelectectedCombatCard != null)
             {
                 // Deselct + shrink old selection
-                SelectectedCombatCard.glowOutline.SetActive(false);
+                SelectectedCombatCard.glowOutline.DOKill();
                 SelectectedCombatCard.gameObject.transform.DOKill();
-                SelectectedCombatCard.gameObject.transform.DOScale(1f, 0.2f);
+
+                SelectectedCombatCard.glowOutline.DOFade(0f, 0.1f);
+                SelectectedCombatCard.gameObject.transform.DOScale(1f, 0.1f);
             }
 
             // Scale up this card and flag as selected
             TownController.Instance.SetDeploymentButtonReadyState(true);
             SelectectedCombatCard = this;
-            SelectectedCombatCard.glowOutline.SetActive(true);
+            SelectectedCombatCard.glowOutline.DOKill();
+            SelectectedCombatCard.glowOutline.DOFade(0.2f, 0.1f);
+
             SelectectedCombatCard.gameObject.transform.DOKill();
             SelectectedCombatCard.gameObject.transform.DOScale(1.1f, 0f);
         }
@@ -168,14 +172,15 @@ namespace WeAreGladiators.TownFeatures
                 enemyRows[i].HideAndReset();
             }
         }
-        public static void HandleDeselect(float speed = 0.2f)
+        public static void HandleDeselect(float speed = 0.1f)
         {
             TownController.Instance.SetDeploymentButtonReadyState(false);
             if (SelectectedCombatCard != null)
             {
                 SelectectedCombatCard.gameObject.transform.DOKill();
                 SelectectedCombatCard.gameObject.transform.DOScale(1f, speed);
-                SelectectedCombatCard.glowOutline.SetActive(false);
+                SelectectedCombatCard.glowOutline.DOKill();
+                SelectectedCombatCard.glowOutline.DOFade(0f, 0.1f);
                 SelectectedCombatCard = null;
             }
         }

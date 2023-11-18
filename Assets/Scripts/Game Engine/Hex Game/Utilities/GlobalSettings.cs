@@ -26,8 +26,9 @@ namespace WeAreGladiators.Utilities
         [Title("Combat Settings")]
         [SerializeField] private int baseHitChance;
         [Space(10)]
-        [Title("Resource Settings")]
+        [Title("Core Settings")]
         [SerializeField] private int baseStartingGold;
+        [SerializeField] private int actDurationInDays = 7;
         [Space(10)]
         [Title("Starting Timeline Settings")]
         [Range(1, 5)]
@@ -84,6 +85,7 @@ namespace WeAreGladiators.Utilities
         public bool RandomizePlayerCharacters => randomizePlayerCharacters;
         public int TotalRandomCharacters => totalRandomCharacters;
         public int BaseStartingGold => baseStartingGold;
+        public int ActDurationInDays => actDurationInDays;
         public PlayerGroup[] StartingPlayerCharacters => startingPlayerCharacters;
         public int BaseHitChance => baseHitChance;
 

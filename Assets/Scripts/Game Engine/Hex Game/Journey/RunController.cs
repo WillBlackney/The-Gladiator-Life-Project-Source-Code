@@ -150,7 +150,7 @@ namespace WeAreGladiators.JourneyLogic
         }
         private void UpdateDayAndChapterTopbarText()
         {
-            TopBarController.Instance.CurrentDaytext.text = "Day: " + CurrentDay + " of 5";
+            TopBarController.Instance.CurrentDaytext.text = "Day: " + CurrentDay + " of " + GlobalSettings.Instance.ActDurationInDays.ToString();
         }
         #endregion
 

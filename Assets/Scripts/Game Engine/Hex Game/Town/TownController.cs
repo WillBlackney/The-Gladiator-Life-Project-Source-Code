@@ -901,7 +901,7 @@ namespace WeAreGladiators.TownFeatures
             currentDailyCombatContracts.Clear();
 
             // On normal days, generate 2 basics and 1 elite combat. On every 7th day, generate only boss fight
-            if (RunController.Instance.CurrentDay % 7 != 0)
+            if (RunController.Instance.CurrentDay % GlobalSettings.Instance.ActDurationInDays != 0)
             {
                 // Get all basic combats that match the day + act conditions
                 List<EnemyEncounterSO> filteredBasics = new List<EnemyEncounterSO>();
@@ -909,13 +909,11 @@ namespace WeAreGladiators.TownFeatures
                 allValidBasics.Shuffle();
                 List<EncounterTag> bannedTags = new List<EncounterTag>();
 
-                // Determine a 1, 2 or 3 man contract
+                // Determine a 1 or 2 man contract
                 foreach (EnemyEncounterSO encounter in allValidBasics)
                 {
-                    List<int> allowedLimits = new List<int> { 1, 2, 3 };
-
-                    if ((encounter.deploymentLimit == 1 || encounter.deploymentLimit == 2 || encounter.deploymentLimit == 3) &&
-                        !bannedTags.Contains(encounter.encounterTag))
+                    if ((encounter.deploymentLimit == 1 || encounter.deploymentLimit == 2) &&
+                        bannedTags.Contains(encounter.encounterTag) == false)
                     {
                         bannedTags.Add(encounter.encounterTag);
                         filteredBasics.Add(encounter);
@@ -923,13 +921,24 @@ namespace WeAreGladiators.TownFeatures
                     }
                 }
 
-                // Determine a 4 or 5 man contract
+                // Determine a 3 or 4 man contract
                 foreach (EnemyEncounterSO encounter in allValidBasics)
                 {
-                    if ((encounter.deploymentLimit == 4 || encounter.deploymentLimit == 5) &&
-                        !bannedTags.Contains(encounter.encounterTag))
+                    if ((encounter.deploymentLimit == 3 || encounter.deploymentLimit == 4) &&
+                        bannedTags.Contains(encounter.encounterTag) == false)
                     {
                         bannedTags.Add(encounter.encounterTag);
+                        filteredBasics.Add(encounter);
+                        break;
+                    }
+                }
+
+                // Determine a 5 man contract
+                foreach (EnemyEncounterSO encounter in allValidBasics)
+                {
+                    if (encounter.deploymentLimit == 5 &&
+                        bannedTags.Contains(encounter.encounterTag) == false)
+                    {
                         filteredBasics.Add(encounter);
                         break;
                     }
