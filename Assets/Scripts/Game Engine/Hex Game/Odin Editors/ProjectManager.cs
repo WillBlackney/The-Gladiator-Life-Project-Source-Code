@@ -92,7 +92,7 @@ namespace WeAreGladiators.Editor
         private readonly string perkPath = "Assets/SO Assets/Perks";
         private readonly string startingCharacterPresetsPath = "Assets/SO Assets/Starting Character Presets";
         private bool treeRebuild;
-        protected override void OnGUI()
+        protected override void OnImGUI()
         {
             // Did we toggle to a new page? 
             // Should we rebuild the menu tree?
@@ -123,7 +123,7 @@ namespace WeAreGladiators.Editor
             }
 
             EditorGUILayout.Space();
-            base.OnGUI();
+            base.OnImGUI();
         }
 
         [MenuItem("Tools/Hex Game Tools/PROJECT MANAGER")]
