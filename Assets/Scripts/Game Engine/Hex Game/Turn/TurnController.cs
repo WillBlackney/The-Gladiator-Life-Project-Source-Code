@@ -343,7 +343,7 @@ namespace WeAreGladiators.TurnLogic
 
         #region Player Input + UI interactions
 
-        public void OnEndTurnButtonClicked()
+        public void OnEndTurnButtonClicked(bool playClickSFX = true)
         {
             Debug.Log("TurnController.OnEndTurnButtonClicked() called...");
 
@@ -357,7 +357,7 @@ namespace WeAreGladiators.TurnLogic
                 CombatUIController.Instance.SetEndTurnButtonInteractions(false);
 
                 // Mouse click SFX
-                AudioManager.Instance.PlaySound(Sound.UI_Heavy_Click);
+                if(playClickSFX) AudioManager.Instance.PlaySound(Sound.UI_Heavy_Click);
 
                 // Trigger character on activation end sequence and events
                 HexCharacterController.Instance.CharacterOnTurnEnd(EntityActivated);

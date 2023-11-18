@@ -3,6 +3,8 @@ using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
+using WeAreGladiators.Abilities;
 using WeAreGladiators.Characters;
 using WeAreGladiators.HexTiles;
 using WeAreGladiators.Pathfinding;
@@ -94,6 +96,11 @@ namespace WeAreGladiators.Combat
                 LevelController.Instance.HandleMoveDownPath(activatedCharacter, currentPath);
                 ResetSelectionState();
 
+                // Auto end turn
+                if (AbilityController.Instance.SafeToAutoEndTurn(activatedCharacter))
+                {
+                    TurnController.Instance.OnEndTurnButtonClicked(false);
+                }
             }
 
             // New hex selection

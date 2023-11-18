@@ -519,6 +519,12 @@ namespace WeAreGladiators.Abilities
                 {
                     b.UpdateAbilityButtonUnusableOverlay();
                 }
+
+                // Auto end turn
+                if (SafeToAutoEndTurn(character))
+                {
+                    TurnController.Instance.OnEndTurnButtonClicked(false);
+                }
             }
         }
         private void TriggerAbilityEffect(AbilityData ability, AbilityEffect abilityEffect, HexCharacterModel caster, HexCharacterModel target, LevelNode tileTarget = null, HexCharacterModel previousChainTarget = null)
@@ -1687,7 +1693,36 @@ namespace WeAreGladiators.Abilities
                 }
             }
         }
+        public bool SafeToAutoEndTurn(HexCharacterModel character)
+        {
+            if(TurnController.Instance.EntityActivated != character || character.controller != Controller.Player ||
+                character.livingState != LivingState.Alive)
+            {
+                return false;
+            }
 
+            if(character.currentActionPoints >= 2)
+            {
+                Debug.LogWarning("SafeToAutoEndTurn() is false, has 2 or more action points");
+                return false;
+            }
+
+            if(character.tilesMovedThisTurn == 0 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Nimble))
+            {
+                Debug.LogWarning("SafeToAutoEndTurn() is false, can still do nimble move");
+                return false;
+            }
+            foreach(AbilityData ability in character.abilityBook.activeAbilities)
+            {
+                if(IsAbilityUseable(character, ability, false))
+                {
+                    Debug.LogWarning("SafeToAutoEndTurn() is false, can still use ability: " + ability.abilityName);
+                    return false;
+                }
+            }
+            Debug.LogWarning("SafeToAutoEndTurn() is true");
+            return true;
+        }
         #endregion
 
         #region Input
