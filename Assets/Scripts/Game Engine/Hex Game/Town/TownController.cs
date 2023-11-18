@@ -900,45 +900,37 @@ namespace WeAreGladiators.TownFeatures
         {
             currentDailyCombatContracts.Clear();
 
-            // On normal days, generate 2 basics and 1 elite combat. On every 4th day, generate only boss fight
-            if (RunController.Instance.CurrentDay % 5 != 0)
+            // On normal days, generate 2 basics and 1 elite combat. On every 7th day, generate only boss fight
+            if (RunController.Instance.CurrentDay % 7 != 0)
             {
-                List<int> deploymentLimits = new List<int>
-                {
-                    1,
-                    2,
-                    3,
-                    5
-                };
-
-                // On first 2 days, only generate combat with deployment limits of 1,2 and 3
-                /*
-                if (RunController.Instance.CurrentChapter == 1 &&
-                (RunController.Instance.CurrentDay == 1 || RunController.Instance.CurrentDay == 2))
-                {
-                    deploymentLimits.Remove(5);
-                }*/
-
                 // Get all basic combats that match the day + act conditions
                 List<EnemyEncounterSO> filteredBasics = new List<EnemyEncounterSO>();
                 List<EnemyEncounterSO> allValidBasics = RunController.Instance.GetCombatData(RunController.Instance.CurrentChapter, CombatDifficulty.Basic).ShuffledCopy();
-
                 allValidBasics.Shuffle();
-                //for (int i = 0; i < 2; i++) filteredBasics.Add(allValidBasics[i]);
+                List<EncounterTag> bannedTags = new List<EncounterTag>();
 
-                // Filter for 2 combats with different deployment limits
-
+                // Determine a 1, 2 or 3 man contract
                 foreach (EnemyEncounterSO encounter in allValidBasics)
                 {
-                    if (deploymentLimits.Contains(encounter.deploymentLimit))
-                    {
-                        filteredBasics.Add(encounter);
-                        deploymentLimits.Remove(encounter.deploymentLimit);
-                    }
+                    List<int> allowedLimits = new List<int> { 1, 2, 3 };
 
-                    // Break once 2 combats have been determined
-                    if (filteredBasics.Count == 2)
+                    if ((encounter.deploymentLimit == 1 || encounter.deploymentLimit == 2 || encounter.deploymentLimit == 3) &&
+                        !bannedTags.Contains(encounter.encounterTag))
                     {
+                        bannedTags.Add(encounter.encounterTag);
+                        filteredBasics.Add(encounter);
+                        break;
+                    }
+                }
+
+                // Determine a 4 or 5 man contract
+                foreach (EnemyEncounterSO encounter in allValidBasics)
+                {
+                    if ((encounter.deploymentLimit == 4 || encounter.deploymentLimit == 5) &&
+                        !bannedTags.Contains(encounter.encounterTag))
+                    {
+                        bannedTags.Add(encounter.encounterTag);
+                        filteredBasics.Add(encounter);
                         break;
                     }
                 }

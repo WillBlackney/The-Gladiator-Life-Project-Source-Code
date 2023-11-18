@@ -18,7 +18,7 @@ MonoBehaviour:
     about everything. Except dying. They\u2019re pretty good at that! They also have
     no fear of death since their lives are so miserable, so there's that too."
   recruitable: 1
-  spawnChance: 50
+  spawnChance: 25
   lowerLevelLimit: 1
   upperLevelLimit: 1
   dailyWageMin: 0

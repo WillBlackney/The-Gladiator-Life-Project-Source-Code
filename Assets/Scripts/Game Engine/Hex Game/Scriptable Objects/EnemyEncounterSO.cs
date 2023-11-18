@@ -16,6 +16,9 @@ namespace WeAreGladiators.Characters
         [BoxGroup("General Info")]
         [LabelWidth(100)]
         public CombatDifficulty difficulty;
+        [BoxGroup("General Info")]
+        [LabelWidth(100)]
+        public EncounterTag encounterTag;
 
         [BoxGroup("Enemy Groupings", centerLabel: true)]
         [LabelWidth(100)]
@@ -107,6 +110,14 @@ namespace WeAreGladiators.Characters
             - north node is y -2
             - south node is y 2
          */
+    }
+    public enum EncounterTag
+    {
+        None = 0,
+        Imperials = 1,
+        Undead = 2,
+        Beasts = 3,
+        Adventurers = 4,
     }
 
 }

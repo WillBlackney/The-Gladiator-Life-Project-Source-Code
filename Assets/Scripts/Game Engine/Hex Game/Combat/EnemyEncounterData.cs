@@ -6,6 +6,7 @@ namespace WeAreGladiators.Characters
     {
         public int deploymentLimit;
         public CombatDifficulty difficulty;
+        public EncounterTag encounterTag;
         public List<CharacterWithSpawnData> enemiesInEncounter = new List<CharacterWithSpawnData>();
         public int TotalEnemyXP
         {

@@ -38,7 +38,7 @@ MonoBehaviour:
   - possibleEffects:
     - effectType: 1
       attributeModified: 1
-      modAmount: 10
+      modAmount: 15
       perkGained:
         perkTag: 0
         stacks: 0

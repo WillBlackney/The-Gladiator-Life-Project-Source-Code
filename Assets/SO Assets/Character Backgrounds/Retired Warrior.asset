@@ -18,8 +18,8 @@ MonoBehaviour:
     anything less than fearsome fighters. Though old age may have worn down their
     health and fitness, retired warriors maintain remarkable technique, discipline
     and courage."
-  recruitable: 0
-  spawnChance: 40
+  recruitable: 1
+  spawnChance: 25
   lowerLevelLimit: 1
   upperLevelLimit: 2
   dailyWageMin: 14
@@ -58,7 +58,6 @@ MonoBehaviour:
       - {fileID: 11400000, guid: eb2b4dc7ace074444a4c2a4c78aaadb7, type: 2}
       - {fileID: 11400000, guid: d59ff56574bd40d449959fd58947eda5, type: 2}
       - {fileID: 11400000, guid: 0c2183f61ac32a34ab074906266768c7, type: 2}
-      - {fileID: 11400000, guid: 4f71d88b58dfd4d45af2b0c3ba8f52ea, type: 2}
       bodyProspects:
       - {fileID: 11400000, guid: a607139243f4b2a4b89ea760b67d1c97, type: 2}
       - {fileID: 11400000, guid: 2cce4423c9ed57d42b7c9d7736934204, type: 2}

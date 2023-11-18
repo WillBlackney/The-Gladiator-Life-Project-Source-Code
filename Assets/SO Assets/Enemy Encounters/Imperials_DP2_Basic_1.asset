@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8ad5d7c5edf914b8061f29d31b419f, type: 3}
+  m_Name: Imperials_DP2_Basic_1
+  m_EditorClassIdentifier: 
+  deploymentLimit: 2
+  difficulty: 0
+  encounterTag: 1
+  enemyGroups:
+  - possibleEnemies:
+    - {fileID: 11400000, guid: 2034f1598dc716249b750cf98ddefc70, type: 2}
+    spawnPosition: {x: 2, y: 0}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: 7532af1fcfea8b14fb36c206ca3a55ac, type: 2}
+    spawnPosition: {x: 3, y: 0}

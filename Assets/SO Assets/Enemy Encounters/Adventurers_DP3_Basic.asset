@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deploymentLimit: 3
   difficulty: 0
+  encounterTag: 4
   enemyGroups:
   - possibleEnemies:
     - {fileID: 11400000, guid: bcc7107a2f655c44983cbf1f71c93993, type: 2}

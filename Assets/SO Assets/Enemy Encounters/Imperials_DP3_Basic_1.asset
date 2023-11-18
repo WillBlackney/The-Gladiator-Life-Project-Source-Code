@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deploymentLimit: 3
   difficulty: 0
+  encounterTag: 1
   enemyGroups:
   - possibleEnemies:
-    - {fileID: 11400000, guid: dbe2fd0090b88944889c1320d013f00d, type: 2}
-    - {fileID: 11400000, guid: e4c6979ede8f989418e8e99c4a7a6ed2, type: 2}
+    - {fileID: 11400000, guid: 2034f1598dc716249b750cf98ddefc70, type: 2}
     spawnPosition: {x: 2, y: 0}
   - possibleEnemies:
-    - {fileID: 11400000, guid: 7532af1fcfea8b14fb36c206ca3a55ac, type: 2}
-    spawnPosition: {x: 3, y: 0}
+    - {fileID: 11400000, guid: dbe2fd0090b88944889c1320d013f00d, type: 2}
+    spawnPosition: {x: 2, y: 1}
   - possibleEnemies:
     - {fileID: 11400000, guid: 7532af1fcfea8b14fb36c206ca3a55ac, type: 2}
     spawnPosition: {x: 3, y: 1}

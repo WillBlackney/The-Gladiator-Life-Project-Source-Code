@@ -63,7 +63,7 @@ MonoBehaviour:
     passiveType: 79
   - kewWordType: 23
     passiveType: 0
-  maxAllowedStacks: 1
+  maxAllowedStacks: 3
   showStackCount: 0
   hiddenOnPassivePanel: 1
   resistanceBlocksIncrease: 0

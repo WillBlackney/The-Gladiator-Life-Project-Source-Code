@@ -232,6 +232,7 @@ namespace WeAreGladiators.JourneyLogic
             EnemyEncounterData ret = new EnemyEncounterData();
 
             ret.difficulty = template.difficulty;
+            ret.encounterTag = template.encounterTag;
             ret.deploymentLimit = template.deploymentLimit;
             ret.enemiesInEncounter = new List<CharacterWithSpawnData>();
 
