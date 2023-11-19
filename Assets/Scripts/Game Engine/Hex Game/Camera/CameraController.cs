@@ -80,10 +80,10 @@ namespace WeAreGladiators.CameraSystems
         // Camera Zoom + Move
         #region
 
-        public void DoCameraZoom(float startOrthoSize, float endOrthoSize, float duration)
+        public void DoCameraZoom(float startOrthoSize, float endOrthoSize, float duration, Ease ease = Ease.OutQuad)
         {
             MainCamera.orthographicSize = startOrthoSize;
-            MainCamera.DOOrthoSize(endOrthoSize, duration).SetEase(Ease.OutQuad);
+            MainCamera.DOOrthoSize(endOrthoSize, duration).SetEase(ease);
         }
         public void DoCameraMove(float x, float y, float duration)
         {

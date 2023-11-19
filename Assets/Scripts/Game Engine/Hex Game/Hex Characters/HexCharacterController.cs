@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Sirenix.Utilities;
 using Spriter2UnityDX;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.AI;
@@ -3359,7 +3358,7 @@ namespace WeAreGladiators.Characters
             }
 
             // Animate crowd + starting cheer
-            AudioManager.Instance.PlaySound(Sound.Crowd_Cheer_1);
+            AudioManager.Instance.FadeInSound(Sound.Crowd_Big_Cheer_1, 2f);
             LevelController.Instance.AnimateCrowdOnCombatStart();
 
             if (data != null)

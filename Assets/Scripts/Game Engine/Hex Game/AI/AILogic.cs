@@ -1354,7 +1354,7 @@ namespace WeAreGladiators.AI
 
         // Shared Misc AI Logic
         #region
-
+        
         private static List<TargetPriorityTuple> GetValidTargetsOrderedByPriority(HexCharacterModel attacker, AIDirective directive)
         {
             List<TargetPriorityTuple> ret = new List<TargetPriorityTuple>();
@@ -1413,7 +1413,8 @@ namespace WeAreGladiators.AI
                         continue;
                     }
 
-                    foreach (HexCharacterModel enemy in GetAllEnemiesWithinRange(attacker, AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker)))
+                    int finalRange = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker);
+                    foreach (HexCharacterModel enemy in GetAllEnemiesWithinRange(attacker, finalRange))
                     {
                         if (AbilityController.Instance.IsTargetOfAbilityValid(attacker, enemy, ability) &&
                             PerkController.Instance.DoesCharacterHavePerk(enemy.pManager, Perk.Taunt))
@@ -1475,7 +1476,9 @@ namespace WeAreGladiators.AI
                             includeSelf = true;
                         }
                         List<HexCharacterModel> allies = new List<HexCharacterModel>();
-                        foreach (HexCharacterModel ally in GetAllAlliesWithinRange(attacker, AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker), includeSelf))
+                        int finalRange = AbilityController.Instance.CalculateFinalRangeOfAbility(ability, attacker);
+
+                        foreach (HexCharacterModel ally in GetAllAlliesWithinRange(attacker, finalRange, includeSelf))
                         {
                             if (AbilityController.Instance.IsTargetOfAbilityValid(attacker, ally, ability))
                             {
@@ -1498,7 +1501,7 @@ namespace WeAreGladiators.AI
             }
 
             return ret;
-        }
+        }        
         private static HexCharacterModel GetClosestFriendlyCharacter(HexCharacterModel character)
         {
             HexCharacterModel closestAlly = null;

@@ -507,7 +507,7 @@ namespace WeAreGladiators.TurnLogic
                 StartCoroutine(PlayRandomNumberAnim(entity.hexCharacterView.myActivationWindow));
             }
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
 
             foreach (HexCharacterModel entity in characters)
             {
@@ -523,23 +523,18 @@ namespace WeAreGladiators.TurnLogic
                 // chime ping SFX
                 AudioManager.Instance.PlaySound(Sound.UI_Chime_1);
 
-                // do breath effect on window
-                float currentScale = window.rollText.transform.localScale.x;
-                float endScale = currentScale * 1.5f;
-                float animSpeed = 0.25f;
-                window.rollText.transform.DOScale(endScale, animSpeed).SetEase(Ease.OutQuint);
-                yield return new WaitForSeconds(animSpeed);
-                window.rollText.transform.DOScale(currentScale, animSpeed).SetEase(Ease.OutQuint);
+                // Do breath effect on window
+                window.rollText.transform.DOScale(1.5f, 0.25f).SetEase(Ease.OutCubic).SetLoops(2, LoopType.Yoyo);
 
                 // brief yield before animating next window
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.25f);
             }
 
             // stop rolling sfx
             AudioManager.Instance.StopSound(Sound.UI_Rolling_Bells);
 
             // brief yield
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.75f);
 
             // Disable roll number text components
             foreach (HexCharacterModel entity in characters)
@@ -560,6 +555,8 @@ namespace WeAreGladiators.TurnLogic
             int numberDisplayed = 0;
             window.animateNumberText = true;
             window.rollText.enabled = true;
+            window.rollText.transform.DOKill();
+            window.rollText.transform.DOScale(1, 0f);
 
             while (window.animateNumberText)
             {

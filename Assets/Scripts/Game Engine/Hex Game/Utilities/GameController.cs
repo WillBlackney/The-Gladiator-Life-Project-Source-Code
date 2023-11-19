@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -154,7 +155,11 @@ namespace WeAreGladiators
 
                 // Move characters towards start nodes
                 TaskTracker cData = new TaskTracker();
-                VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
+                VisualEventManager.CreateVisualEvent(() =>
+                {
+                    CameraController.Instance.DoCameraZoom(6.25f, 5f, 1f);
+                    HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData);
+                });
 
                 // Start a new combat event
                 TurnController.Instance.OnNewCombatEventStarted();
@@ -308,7 +313,11 @@ namespace WeAreGladiators
 
             // Move characters towards start nodes
             TaskTracker cData = new TaskTracker();
-            VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
+            VisualEventManager.CreateVisualEvent(() =>
+            {
+                CameraController.Instance.DoCameraZoom(6.25f, 5f, 1f);
+                HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData);
+            });
 
             // Start a new combat event
             TurnController.Instance.OnNewCombatEventStarted();
@@ -945,7 +954,11 @@ namespace WeAreGladiators
 
                     // Move characters towards start nodes
                     TaskTracker cData = new TaskTracker();
-                    VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData));
+                    VisualEventManager.CreateVisualEvent(() =>
+                    {
+                        CameraController.Instance.DoCameraZoom(6.25f, 5f, 1f);
+                        HexCharacterController.Instance.MoveAllCharactersToStartingNodes(cData);
+                    });
 
                     // Start a new combat event
                     TurnController.Instance.OnNewCombatEventStarted();
@@ -1107,7 +1120,6 @@ namespace WeAreGladiators
 
             // Move characters towards start nodes
             VisualEventManager.CreateVisualEvent(() => HexCharacterController.Instance.MoveAllCharactersToStartingNodes(null));
-
         }
 
         public void RunTestEnvironmentTown(List<HexCharacterTemplateSO> playerCharacters)
