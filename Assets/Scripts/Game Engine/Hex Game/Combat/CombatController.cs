@@ -12,16 +12,13 @@ using WeAreGladiators.HexTiles;
 using WeAreGladiators.Items;
 using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Perks;
-using WeAreGladiators.Player;
 using WeAreGladiators.RewardSystems;
 using WeAreGladiators.Scoring;
-using WeAreGladiators.StoryEvents;
 using WeAreGladiators.TurnLogic;
 using WeAreGladiators.UCM;
 using WeAreGladiators.UI;
 using WeAreGladiators.Utilities;
 using WeAreGladiators.VisualEvents;
-using static UnityEngine.GraphicsBuffer;
 
 namespace WeAreGladiators.Combat
 {

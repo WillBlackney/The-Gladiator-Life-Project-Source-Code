@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Fearless
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: e24760b45e22e12499f3831d497a04de, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 6aa3a8cb955a31f41b16f9bed09bcc01, type: 3}
   passiveName: Fearless
   perkTag: 237
   passiveDescription:

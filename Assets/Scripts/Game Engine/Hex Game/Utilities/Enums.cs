@@ -225,6 +225,7 @@
         CasterHasPerk = 9,
         CasterDoesNotHavePerk = 10,
         TargetTileCanBeOccupied = 11,
+        TargetTileIsNotOccupiedByAlly = 12,
 
     }
     public enum AbilitySelectionPhase
@@ -465,6 +466,7 @@
         Berserk = 46,
         BigMuscles = 87,
         Bleeding = 7,
+        BleedingImmunity = 243,
         Blinded = 4,
         Guard = 74,
         BloodOfTheAncients = 66,

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cabf09b060bb0f247ab97ea799f36a2b, type: 3}
   m_Name: Armoured Shambler
   m_EditorClassIdentifier: 
-  myName: Shambler
+  myName: Armoured Shambler
   myDescription: Undead cretins summoned and stitched together by necromancers and
     foul beings.
   randomizeRace: 0
@@ -66,10 +66,10 @@ MonoBehaviour:
     activeAbilities: []
   serializedPassiveManager:
     perks:
-    - perkTag: 24
+    - perkTag: 236
       stacks: 1
       freshInjury: 0
-    - perkTag: 235
+    - perkTag: 243
       stacks: 1
       freshInjury: 0
     - perkTag: 237
@@ -79,6 +79,9 @@ MonoBehaviour:
       stacks: 1
       freshInjury: 0
     - perkTag: 71
+      stacks: 1
+      freshInjury: 0
+    - perkTag: 235
       stacks: 1
       freshInjury: 0
   randomizeItemSet: 1

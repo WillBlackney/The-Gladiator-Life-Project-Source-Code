@@ -21,8 +21,8 @@ MonoBehaviour:
     accuracy:
       value: 200
       stars: 0
-    apMaximum: 8
-    apRecovery: 8
+    apMaximum: 200
+    apRecovery: 200
     auraSize: 1
     constitution:
       value: 1000

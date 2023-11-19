@@ -151,7 +151,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: of ALL enemies,
+    phrase: of ALL enemies.
   keyWords:
   - kewWordType: 32
     passiveType: 0

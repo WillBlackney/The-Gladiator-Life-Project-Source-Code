@@ -27,7 +27,15 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: 'reduce their '
+    phrase: 'have a '
+  - color: 2
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: '50% '
+  - color: 1
+    getPhraseFromAbilityValue: 0
+    abilityEffectType: 0
+    phrase: 'chance to reduce their '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

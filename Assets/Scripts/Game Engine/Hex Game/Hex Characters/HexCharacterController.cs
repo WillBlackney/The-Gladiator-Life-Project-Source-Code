@@ -2197,6 +2197,8 @@ namespace WeAreGladiators.Characters
                         VisualEffectManager.Instance.CreateStatusEffect(view.WorldPosition, "HEART ATTACK!")).SetEndDelay(0.5f);
 
                     // Die
+                    character.currentHealth = 0;
+                    CharacterDataController.Instance.SetCharacterHealth(character.characterData, 0);
                     CombatController.Instance.HandleDeathBlow(character, null, true);
                 }
 
@@ -2413,7 +2415,7 @@ namespace WeAreGladiators.Characters
 
                         foreach (HexCharacterModel enemy in enemies)
                         {
-                            CombatController.Instance.CreateMoraleCheck(enemy, new StressEventData(-1, -1, 75), true, false);
+                            CombatController.Instance.CreateMoraleCheck(enemy, new StressEventData(-1, -1, 50), true, false);
                         }
 
                         VisualEventManager.InsertTimeDelayInQueue(0.5f);

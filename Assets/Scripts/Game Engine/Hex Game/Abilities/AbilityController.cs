@@ -2576,6 +2576,14 @@ namespace WeAreGladiators.Abilities
                     continue;
                 }
 
+                else if (targetTile == null ||
+                         (ar.type == AbilityRequirementType.TargetTileIsNotOccupiedByAlly &&
+                         (targetTile.myCharacter == null || targetTile.myCharacter.allegiance != caster.allegiance) &&
+                         !targetTile.Obstructed))
+                {
+                    continue;
+                }
+
                 bRet = false;
                 break;
             }

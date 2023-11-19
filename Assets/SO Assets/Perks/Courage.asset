@@ -27,7 +27,7 @@ MonoBehaviour:
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: times this character would lower their
+    phrase: 'times this character would lower their '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

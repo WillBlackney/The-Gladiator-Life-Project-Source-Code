@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfc90905c1d7a04b87c425ab93c0fb3, type: 3}
   m_Name: Injury Immunity
   m_EditorClassIdentifier: 
-  passiveSprite: {fileID: 21300000, guid: b16fe1e5acb909049ac3c5cdd593d5e0, type: 3}
+  passiveSprite: {fileID: 21300000, guid: 0c9ce9ad6206b1a439849bd3eea48d80, type: 3}
   passiveName: Injury Immunity
   perkTag: 236
   passiveDescription:

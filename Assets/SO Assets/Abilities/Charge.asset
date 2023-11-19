@@ -36,7 +36,7 @@ MonoBehaviour:
     talentSchool: 2
     level: 1
   abilitySubRequirements:
-  - type: 11
+  - type: 12
     healthRequired: 0
     race: 0
     perk: 0

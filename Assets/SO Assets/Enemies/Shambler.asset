@@ -66,10 +66,10 @@ MonoBehaviour:
     activeAbilities: []
   serializedPassiveManager:
     perks:
-    - perkTag: 24
+    - perkTag: 236
       stacks: 1
       freshInjury: 0
-    - perkTag: 235
+    - perkTag: 243
       stacks: 1
       freshInjury: 0
     - perkTag: 237
@@ -79,6 +79,9 @@ MonoBehaviour:
       stacks: 1
       freshInjury: 0
     - perkTag: 71
+      stacks: 1
+      freshInjury: 0
+    - perkTag: 235
       stacks: 1
       freshInjury: 0
   randomizeItemSet: 1

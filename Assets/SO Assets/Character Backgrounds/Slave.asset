@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8911545aa7a629740b523504f1832b71, type: 3}
   m_Name: Slave
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: 2a4240ee8dc48f848aeca0931cac8174, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: f08ba11c1286a7345948462830a6a3a5, type: 3}
   backgroundType: 4
   description: "Sold or born into a life of servitude, slaves are hopeless at just
     about everything. Except dying. They\u2019re pretty good at that! They also have
