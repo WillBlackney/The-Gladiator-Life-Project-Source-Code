@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Concealing Clouds
   displayedName: Concealing Clouds
   includeInGame: 1
-  baseAbilityDescription: Give 2 Evasion to self and all allies within your Aura.
+  baseAbilityDescription: Give 1 Evasion to self and all allies within your Aura.
   abilitySprite: {fileID: 21300000, guid: 8296075aa14eb6846be250e32e0ba693, type: 3}
   energyCost: 4
   baseCooldown: 3
@@ -41,13 +41,19 @@ MonoBehaviour:
   hitChanceModifierAgainstAdjacent: 0
   accuracyPenaltyFromMelee: 0
   abilityEffects:
-  - effectType: 12
+  - aoeType: 2
+    includeCentreTile: 1
+    aoeSize: 1
+    effectsAllies: 1
+    effectsEnemies: 0
+    knockBackDistance: 0
+    effectType: 12
     stressEventData:
-      stressAmountMin: 0
-      stressAmountMax: 0
+      moraleChangeMin: 0
+      moraleChangeMax: 0
       successChance: 0
     energyGained: 0
-    normalTeleportVFX: 1
+    teleportVFX: 0
     tilesMoved: 0
     lineLength: 0
     healthGained: 0
@@ -57,6 +63,7 @@ MonoBehaviour:
     triggersChainEffectSequence: 0
     visualEventsOnStart:
     - eventType: 2
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -73,6 +80,7 @@ MonoBehaviour:
       onCharacter: 0
     visualEventsOnHit:
     - eventType: 3
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -88,6 +96,7 @@ MonoBehaviour:
       projectileStartPosition: 0
       onCharacter: 2
     - eventType: 5
+      newUcmParts: []
       screenOverlayType: 0
       overlayColor: 0
       overlayFadeInTime: 0
@@ -103,11 +112,6 @@ MonoBehaviour:
       projectileStartPosition: 0
       onCharacter: 0
     visualEventsOnEffectFinish: []
-    aoeType: 2
-    includeCentreTile: 1
-    aoeSize: 1
-    effectsAllies: 1
-    effectsEnemies: 0
     damageType: 0
     minBaseDamage: 0
     maxBaseDamage: 0
@@ -127,9 +131,8 @@ MonoBehaviour:
     summonedCreatureVisualEvents: []
     perkPairing:
       perkTag: 76
-      passiveStacks: 2
+      passiveStacks: 1
     perkApplicationChance: 100
-    knockBackDistance: 0
   onHitEffects: []
   onCritEffects: []
   onPerkAppliedSuccessEffects: []
@@ -144,7 +147,7 @@ MonoBehaviour:
   - color: 2
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: '2 '
+    phrase: '1 '
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0

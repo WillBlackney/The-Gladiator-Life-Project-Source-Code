@@ -21,11 +21,12 @@ MonoBehaviour:
   possibleRaces: 0a000000
   audioProfile: 8
   modelSize: 0
+  bloodColour: 2
   xpReward: 15
   ignoreStress: 0
   attributeSheet:
     accuracy:
-      value: 70
+      value: 75
       stars: 0
     apMaximum: 8
     apRecovery: 8

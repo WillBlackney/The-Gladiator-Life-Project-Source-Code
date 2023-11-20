@@ -13,16 +13,18 @@ MonoBehaviour:
   m_Name: Lunker Wrangler
   m_EditorClassIdentifier: 
   myName: Lunker Wrangler
+  myDescription: 
   randomizeRace: 1
   race: 2
   possibleRaces: 01000000
   audioProfile: 1
   modelSize: 0
+  bloodColour: 0
   xpReward: 15
   ignoreStress: 0
   attributeSheet:
     accuracy:
-      value: 70
+      value: 75
       stars: 0
     apMaximum: 8
     apRecovery: 8

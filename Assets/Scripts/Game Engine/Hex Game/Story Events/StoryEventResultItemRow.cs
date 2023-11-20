@@ -34,7 +34,6 @@ namespace WeAreGladiators.StoryEvents
         {
             visualParent.SetActive(true);
             messageText.text = data.message;
-            // to do: set icon sprite
 
             if (data.iconType == ResultRowIcon.FramedSprite && data.iconSprite != null)
             {

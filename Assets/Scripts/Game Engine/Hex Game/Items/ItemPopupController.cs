@@ -13,63 +13,49 @@ namespace WeAreGladiators.Items
 {
     public class ItemPopupController : Singleton<ItemPopupController>
     {
-        // Properties + Components
-        #region
+        #region Properties + Components
 
         [Header("Core Panel Components")]
-        [SerializeField]
-        private GameObject visualParent;
+        [SerializeField] private GameObject visualParent;
         [SerializeField] private RectTransform[] transformsRebuilt;
         [SerializeField] private CanvasGroup mainCg;
 
         [Header("Name + Icon Row Components")]
-        [SerializeField]
-        private TextMeshProUGUI nameText;
+        [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private Image itemImage;
 
         [Header("Type + Rarity Row Components")]
-        [SerializeField]
-        private TextMeshProUGUI itemTypeText;
+        [SerializeField] private GameObject rarityRowParent;
+        [SerializeField] private TextMeshProUGUI itemTypeText;
         [SerializeField] private TextMeshProUGUI rarityText;
         [SerializeField] private TextMeshProUGUI goldValueText;
 
         [Header("Damage Modifier Row Components")]
-        [SerializeField]
-        private GameObject damageModParent;
+        [SerializeField] private GameObject damageModParent;
         [SerializeField] private TextMeshProUGUI armourDamageText;
         [SerializeField] private TextMeshProUGUI healthDamageText;
         [SerializeField] private TextMeshProUGUI penetrationText;
 
         [Header("Granted Ability Row Components")]
-        [SerializeField]
-        private GameObject abilitiesParent;
+        [SerializeField] private GameObject abilitiesParent;
         [SerializeField] private UiAbilityIconRow[] abilityRows;
 
         [Header("Effects Row Components")]
-        [SerializeField]
-        private GameObject effectsParent;
+        [SerializeField] private GameObject effectsParent;
         [SerializeField] private ModalDottedRow[] effectRows;
 
         [Header("Armour Components")]
-        [SerializeField]
-        private GameObject armourParent;
+        [SerializeField] private GameObject armourParent;
         [SerializeField] private TextMeshProUGUI armourText;
 
         [Header("Fatigue Penalty Components")]
-        [SerializeField]
-        private GameObject fatiguePenaltyParent;
+        [SerializeField] private GameObject fatiguePenaltyParent;
         [SerializeField] private TextMeshProUGUI fatiguePenaltyText;
 
         #endregion
 
-        // Getters + Accessors
-        #region
-
-        #endregion
-
-        // Input
-        #region
+        #region Input
 
         public void OnCombatItemLootIconMousedOver(CombatLootIcon icon)
         {
@@ -126,8 +112,7 @@ namespace WeAreGladiators.Items
 
         #endregion
 
-        // Show + Hide Panel Logic
-        #region
+        #region Show + Hide Panel Logic
 
         private void FadeInPanel()
         {
@@ -148,8 +133,7 @@ namespace WeAreGladiators.Items
 
         #endregion
 
-        // Place + Position Panel
-        #region
+        #region Place + Position Panel
 
         private void PlacePanelRightOfTransform(Transform t)
         {
@@ -208,8 +192,7 @@ namespace WeAreGladiators.Items
 
         #endregion
 
-        // Build + Place Panel
-        #region
+        #region Build + Place Panel
 
         private void BuildPanelFromItemData(ItemData item)
         {
@@ -220,12 +203,16 @@ namespace WeAreGladiators.Items
 
             // Row 2
             itemTypeText.text = GetItemTypeString(item);
-            rarityText.text = item.rarity.ToString();
+            rarityRowParent.gameObject.SetActive(false);
+            if (item.itemType == ItemType.Trinket)
+            {
+                rarityRowParent.gameObject.SetActive(true);
+                rarityText.text = item.rarity.ToString();
+            }
             goldValueText.text = item.baseGoldValue.ToString();
 
             // Row 3
             BuildArmourSection(item);
-            //BuildMaxFatigueSection(item);
 
             // Row 4
             BuildDamageModRows(item);

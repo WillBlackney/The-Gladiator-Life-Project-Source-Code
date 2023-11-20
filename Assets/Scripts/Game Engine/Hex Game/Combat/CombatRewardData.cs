@@ -44,7 +44,7 @@ namespace WeAreGladiators.Characters
 
         private void BuildAsTwoSkullReward(CombatRewardData crd, int deploymentLimit)
         {
-            int eliteReward = 500;
+            int eliteReward = 600;
             int perPersonBonus = 100 * deploymentLimit;
             int baseGoldReward = perPersonBonus + eliteReward;
             baseGoldReward = RandomGenerator.NumberBetween(baseGoldReward - 50, baseGoldReward + 50);

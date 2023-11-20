@@ -19,11 +19,12 @@ MonoBehaviour:
   possibleRaces: 010000000200000006000000
   audioProfile: 1
   modelSize: 0
+  bloodColour: 0
   xpReward: 25
   ignoreStress: 0
   attributeSheet:
     accuracy:
-      value: 75
+      value: 80
       stars: 0
     apMaximum: 8
     apRecovery: 8
@@ -36,7 +37,7 @@ MonoBehaviour:
     deathResistance: 25
     debuffResistance: 0
     dodge:
-      value: 5
+      value: 10
       stars: 0
     initiative: 15
     injuryResistance: 0
