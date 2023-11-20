@@ -4,6 +4,7 @@ using UnityEngine;
 using WeAreGladiators.Abilities;
 using WeAreGladiators.Items;
 using WeAreGladiators.Perks;
+using WeAreGladiators.VisualEvents;
 
 namespace WeAreGladiators.Characters
 {
@@ -31,6 +32,10 @@ namespace WeAreGladiators.Characters
         [LabelWidth(100)]
         [GUIColor("Yellow")]
         public CharacterModelSize modelSize;
+        [BoxGroup("General Info")]
+        [LabelWidth(100)]
+        [GUIColor("Yellow")]
+        public BloodColour bloodColour;
 
         public SerializedAttrbuteSheet attributeSheet;
 

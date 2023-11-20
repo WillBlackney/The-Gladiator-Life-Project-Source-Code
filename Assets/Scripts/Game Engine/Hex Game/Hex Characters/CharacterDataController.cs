@@ -202,6 +202,8 @@ namespace WeAreGladiators.Characters
             newCharacter.race = template.race;
             newCharacter.audioProfile = GetAudioProfileForRace(newCharacter.race);
             newCharacter.modelSize = template.modelSize;
+            newCharacter.bloodColour = template.bloodColour;
+
             SetStartingLevelAndXpValues(newCharacter);
             if (template.background == CharacterBackground.None)
             {
@@ -258,6 +260,7 @@ namespace WeAreGladiators.Characters
             newCharacter.xpReward = template.xpReward;
             newCharacter.baseArmour = template.baseArmour;
             newCharacter.ignoreStress = template.ignoreStress;
+            newCharacter.bloodColour = template.bloodColour;
 
             if (template.randomizeRace)
             {
@@ -265,6 +268,7 @@ namespace WeAreGladiators.Characters
                 newCharacter.audioProfile = GetAudioProfileForRace(newCharacter.race);
                 newCharacter.modelParts = new List<string>();
                 newCharacter.modelParts.AddRange(GetRandomModelTemplate(newCharacter.race).bodyParts);
+                if (newCharacter.race == CharacterRace.Undead) newCharacter.bloodColour = VisualEvents.BloodColour.Black;
             }
             else if (template.modelPrefab != null) 
             {
@@ -335,12 +339,12 @@ namespace WeAreGladiators.Characters
             newCharacter.mySubName = original.mySubName;
             newCharacter.race = original.race;
             newCharacter.audioProfile = original.audioProfile;
-
             newCharacter.background = original.background;
             newCharacter.modelSize = original.modelSize;
             newCharacter.xpReward = original.xpReward;
             newCharacter.baseArmour = original.baseArmour;
             newCharacter.ignoreStress = original.ignoreStress;
+            newCharacter.bloodColour = original.bloodColour;
 
             // Set Xp + Level
             newCharacter.currentLevel = original.currentLevel;

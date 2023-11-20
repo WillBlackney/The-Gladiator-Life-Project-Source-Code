@@ -19,6 +19,7 @@ using WeAreGladiators.UCM;
 using WeAreGladiators.UI;
 using WeAreGladiators.Utilities;
 using WeAreGladiators.VisualEvents;
+using static UnityEngine.GraphicsBuffer;
 
 namespace WeAreGladiators.Combat
 {
@@ -352,9 +353,14 @@ namespace WeAreGladiators.Combat
                 }
 
                 // Create random blood spatters
+                BloodColour bloodColour = BloodColour.Red;
+                if (character.characterData != null)
+                {
+                    bloodColour = character.characterData.bloodColour;
+                }
                 for (int i = 0; i < spatters; i++)
                 {
-                    VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition);
+                    VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition, bloodColour);
                 }
 
             }, parentEvent).SetEndDelay(1f);
@@ -447,7 +453,8 @@ namespace WeAreGladiators.Combat
             {
                 SetCombatState(CombatGameState.CombatInactive);
                 // Game over? or just normal defeat?
-                if (RunController.Instance.CurrentCombatContractData.enemyEncounterData.difficulty == CombatDifficulty.Boss)
+                if (RunController.Instance.CurrentCombatContractData.enemyEncounterData.difficulty == CombatDifficulty.Boss ||
+                    CharacterDataController.Instance.AllPlayerCharacters.Count == 0)
                 {
                     GameController.Instance.HandleGameOverBossCombatDefeat();
                 }
@@ -1801,8 +1808,13 @@ namespace WeAreGladiators.Combat
             // Create blood in ground VFX  
             if (totalHealthLost > 0)
             {
+                BloodColour bloodColour = BloodColour.Red;
+                if(target.characterData != null)
+                {
+                    bloodColour = target.characterData.bloodColour;
+                }
                 VisualEventManager.CreateVisualEvent(() =>
-                    VisualEffectManager.Instance.CreateGroundBloodSpatter(target.hexCharacterView.WorldPosition), parentEvent);
+                    VisualEffectManager.Instance.CreateGroundBloodSpatter(target.hexCharacterView.WorldPosition, bloodColour), parentEvent);
             }
 
             // Animate crowd

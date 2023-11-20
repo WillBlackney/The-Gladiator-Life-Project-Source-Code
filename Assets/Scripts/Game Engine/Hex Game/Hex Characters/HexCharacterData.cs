@@ -7,6 +7,7 @@ using WeAreGladiators.Audio;
 using WeAreGladiators.Items;
 using WeAreGladiators.Perks;
 using WeAreGladiators.UCM;
+using WeAreGladiators.VisualEvents;
 
 namespace WeAreGladiators.Characters
 {
@@ -19,6 +20,7 @@ namespace WeAreGladiators.Characters
         [Header("Attributes")]
         public AttributeSheet attributeSheet;
         public AudioProfileType audioProfile;
+        public BloodColour bloodColour;
         public BackgroundData background;
         public int baseArmour;
 

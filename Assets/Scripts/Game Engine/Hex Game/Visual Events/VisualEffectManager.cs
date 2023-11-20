@@ -100,6 +100,11 @@ namespace WeAreGladiators.VisualEvents
         [Header("Weather + Static VFX Prefabs")]
         public GameObject toxicRain;
 
+        [Header("Blood Colours")]
+        [SerializeField] private Color redBlood;
+        [SerializeField] private Color lightGreenBlood;
+        [SerializeField] private Color blackBlood;
+
         #endregion
 
         // CORE FUNCTIONS
@@ -391,7 +396,7 @@ namespace WeAreGladiators.VisualEvents
             GameObject stressEffect = Instantiate(StressEffectPrefab, location, Quaternion.identity);
             stressEffect.GetComponent<StressEffect>().InitializeSetup(moraleState);
         }
-        public void CreateGroundBloodSpatter(Vector3 location)
+        public void CreateGroundBloodSpatter(Vector3 location, BloodColour bloodColour)
         {
             GameObject bloodSpatterEffect = Instantiate(BloodSpatterGroundPrefab, location, Quaternion.identity);
             Sprite s = BloodSpatterGroundSprites[RandomGenerator.NumberBetween(0, BloodSpatterGroundSprites.Length - 1)];
@@ -410,6 +415,8 @@ namespace WeAreGladiators.VisualEvents
             }
             sr.transform.position = new Vector3(sr.transform.position.x + randX, sr.transform.position.y + randY, sr.transform.position.z);
             sr.sprite = s;
+
+            sr.color = GetBloodColour(bloodColour);
 
             // Fade in
             sr.DOFade(0, 0);
@@ -792,5 +799,19 @@ namespace WeAreGladiators.VisualEvents
         }
 
         #endregion
+
+        private Color GetBloodColour(BloodColour colour)
+        {
+            if (colour == BloodColour.Black) return blackBlood;
+            else if (colour == BloodColour.LightGreen) return lightGreenBlood;
+            else return redBlood;
+        }
+    }
+
+    public enum BloodColour
+    {
+        Red = 0,
+        Black = 1,
+        LightGreen = 2,
     }
 }
