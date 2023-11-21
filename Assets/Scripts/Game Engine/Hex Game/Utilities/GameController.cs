@@ -819,6 +819,8 @@ namespace WeAreGladiators
 
                     // Set menu state
                     SetGameState(GameState.MainMenu);
+                    CombatController.Instance.SetCombatState(CombatGameState.CombatInactive);
+                    GlobalSettings.Instance.FastCombat = GlobalSettings.Instance.FastCombat;
 
                     // Pause run timer
                     RunController.Instance.PauseTimer();
@@ -929,10 +931,9 @@ namespace WeAreGladiators
                 }
                 else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatStart)
                 {
-                    GlobalSettings.Instance.FastCombat = GlobalSettings.Instance.FastCombat;
                     TopBarController.Instance.ShowCombatTopBar();
                     CombatLogController.Instance.ShowLog();
-                    SetGameState(GameState.CombatActive);
+                    SetGameState(GameState.CombatActive);                    
                     LevelController.Instance.GenerateLevelNodes(RunController.Instance.CurrentCombatMapData);
 
                     // Set up combat level views + lighting
@@ -967,6 +968,9 @@ namespace WeAreGladiators
 
                     // Start a new combat event
                     TurnController.Instance.OnNewCombatEventStarted();
+
+                    // Update speed
+                    GlobalSettings.Instance.FastCombat = GlobalSettings.Instance.FastCombat;
                 }
                 else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatEnd)
                 {

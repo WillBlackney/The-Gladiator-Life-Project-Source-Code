@@ -17,6 +17,7 @@ MonoBehaviour:
   race: 7
   background: 20
   modelSize: 0
+  bloodColour: 0
   attributeSheet:
     accuracy:
       value: 200
@@ -65,11 +66,11 @@ MonoBehaviour:
   - Undead_Right_Hand_1
   - Undead_Right_Leg_1
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: e8567b630dd37c042a06a339a93e409e, type: 2}
+    mainHandItem: {fileID: 11400000, guid: 51e31aac9500e9648bfe3740136d9331, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: eb2b4dc7ace074444a4c2a4c78aaadb7, type: 2}
     chestArmour: {fileID: 11400000, guid: 9c82d8fa69ec50443a7f388f71928851, type: 2}
-    trinket: {fileID: 11400000, guid: 5a79f89ca4eb7494cb9d491ac702932d, type: 2}
+    trinket: {fileID: 0}
   talentPairings:
   - talentSchool: 2
     level: 1

@@ -86,6 +86,10 @@ namespace WeAreGladiators.Utilities
                 {
                     Time.timeScale = 2f;
                 }
+                else
+                {
+                    Time.timeScale = 1f;
+                }
             }
         }
 
