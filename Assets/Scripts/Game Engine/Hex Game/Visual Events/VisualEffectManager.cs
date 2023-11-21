@@ -45,6 +45,7 @@ namespace WeAreGladiators.VisualEvents
         public GameObject HealEffectPrefab;
         public GameObject AoeMeleeAttackEffectPrefab;
         public GameObject TeleportEffectPrefab;
+        public GameObject bloodJetEffectPrefab;
         public GameObject BloodSpatterGroundPrefab;
         public Sprite[] BloodSpatterGroundSprites;
 
@@ -657,6 +658,14 @@ namespace WeAreGladiators.VisualEvents
         public void CreateBloodExplosion(Vector3 location, int sortingOrderBonus = 0, float scaleModifier = 1f)
         {
             GameObject hn = Instantiate(bloodSplatterEffect, location, bloodSplatterEffect.transform.rotation);
+            ToonEffect teScript = hn.GetComponent<ToonEffect>();
+            teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
+        }
+
+        // Blood Jet
+        public void CreateBloodJet(Vector3 location, int sortingOrderBonus = 0, float scaleModifier = 1f)
+        {
+            GameObject hn = Instantiate(bloodJetEffectPrefab, location, bloodSplatterEffect.transform.rotation);
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
         }

@@ -41,7 +41,7 @@ MonoBehaviour:
     magicResistance: 0
     maxHealth: 0
     might:
-      value: 0
+      value: 100
       stars: 0
     physicalDamageBonus: 0
     physicalResistance: 0
