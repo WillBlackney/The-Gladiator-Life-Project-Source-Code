@@ -113,6 +113,7 @@ namespace WeAreGladiators
                 AudioManager.Instance.FadeInSound(Sound.Ambience_Crowd_1, 1f);
 
                 // Hide town views
+                GlobalSettings.Instance.FastCombat = GlobalSettings.Instance.FastCombat;
                 BlackScreenController.Instance.FadeInScreen(1f);
                 TownController.Instance.TearDownOnExit();
                 CharacterScrollPanelController.Instance.HideMainView();
@@ -265,6 +266,7 @@ namespace WeAreGladiators
 
             // Apply global settings
             GlobalSettings.Instance.ApplyStartingXPBonus();
+            GlobalSettings.Instance.FastCombat = GlobalSettings.Instance.FastCombat;
 
             // Enable world view
             LightController.Instance.EnableDayTimeGlobalLight();
@@ -421,7 +423,7 @@ namespace WeAreGladiators
 
             // Wait until v queue count = 0
             yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);
-
+            GlobalSettings.Instance.FastCombat = GlobalSettings.Instance.FastCombat;
             AudioManager.Instance.FadeOutAllCombatMusic(0.25f);
 
             // Tear down summoned characters
@@ -506,7 +508,7 @@ namespace WeAreGladiators
 
             // Wait until v queue count = 0
             yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);
-
+            GlobalSettings.Instance.FastCombat = GlobalSettings.Instance.FastCombat;
             AudioManager.Instance.FadeOutAllCombatMusic(0.25f);
 
             // Disable any enemy character gui's if they're still active
@@ -556,6 +558,7 @@ namespace WeAreGladiators
 
             // Wait until v queue count = 0
             yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);
+            GlobalSettings.Instance.FastCombat = GlobalSettings.Instance.FastCombat;
 
             // Calculate score and delete save file
             CombatController.Instance.UpdateScoreDataPostCombat(false);
@@ -638,6 +641,7 @@ namespace WeAreGladiators
 
             // Wait until v queue count = 0
             yield return new WaitUntil(() => VisualEventManager.EventQueue.Count == 0);
+            GlobalSettings.Instance.FastCombat = GlobalSettings.Instance.FastCombat;
 
             // Calculate score and delete save file
             CombatController.Instance.UpdateScoreDataPostCombat();
@@ -925,6 +929,7 @@ namespace WeAreGladiators
                 }
                 else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatStart)
                 {
+                    GlobalSettings.Instance.FastCombat = GlobalSettings.Instance.FastCombat;
                     TopBarController.Instance.ShowCombatTopBar();
                     CombatLogController.Instance.ShowLog();
                     SetGameState(GameState.CombatActive);
@@ -965,6 +970,7 @@ namespace WeAreGladiators
                 }
                 else if (RunController.Instance.SaveCheckPoint == SaveCheckPoint.CombatEnd)
                 {
+                    GlobalSettings.Instance.FastCombat = GlobalSettings.Instance.FastCombat;
                     SetGameState(GameState.CombatRewardPhase);
                     TopBarController.Instance.ShowCombatTopBar();
                     CombatLogController.Instance.HideLog();
@@ -1073,6 +1079,7 @@ namespace WeAreGladiators
 
             // Set state
             SetGameState(GameState.CombatActive);
+            GlobalSettings.Instance.FastCombat = GlobalSettings.Instance.FastCombat;
 
             // Show UI
             TopBarController.Instance.ShowCombatTopBar();

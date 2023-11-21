@@ -1941,6 +1941,10 @@ namespace WeAreGladiators.MainMenu
         {
             Screen.fullScreen = isFullscreen;
         }
+        public void SetFastCombat(bool isOn)
+        {
+            GlobalSettings.Instance.FastCombat = isOn;
+        }
         public void SetResolution(int resolutionIndex)
         {
             Resolution resolution = resolutions[resolutionIndex];

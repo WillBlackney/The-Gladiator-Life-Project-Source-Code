@@ -1,6 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 using WeAreGladiators.Characters;
+using WeAreGladiators.Combat;
 using WeAreGladiators.HexTiles;
 using WeAreGladiators.StoryEvents;
 
@@ -19,6 +20,7 @@ namespace WeAreGladiators.Utilities
         [SerializeField] private bool preventAudioProfiles = true;
         [SerializeField] private bool showAlphaWarning = true;
         [SerializeField] private bool includeGameIntroEvent = true;
+        [SerializeField] private bool fastCombat = false;
 
         [Title("Character Settings")]
         [SerializeField] private int startingXpBonus;
@@ -64,6 +66,28 @@ namespace WeAreGladiators.Utilities
 
         [ShowIf("ShowSandboxEnemyEncounter")]
         [SerializeField] private EnemyEncounterSO[] sandboxEnemyEncounters;
+
+        public bool FastCombat
+        {
+            get
+            {
+                return fastCombat;
+            }
+            set
+            {
+                fastCombat = value;
+                if(fastCombat == false)
+                {
+                    Time.timeScale = 1f;
+                }
+                else if(fastCombat == true && 
+                    CombatController.Instance != null &&
+                    CombatController.Instance.CurrentCombatState == CombatGameState.CombatActive)
+                {
+                    Time.timeScale = 2f;
+                }
+            }
+        }
 
         #endregion
 
