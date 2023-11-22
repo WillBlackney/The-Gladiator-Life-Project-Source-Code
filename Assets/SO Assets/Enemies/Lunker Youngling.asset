@@ -39,7 +39,7 @@ MonoBehaviour:
     deathResistance: 25
     debuffResistance: 0
     dodge:
-      value: 10
+      value: 15
       stars: 0
     initiative: 20
     injuryResistance: 0

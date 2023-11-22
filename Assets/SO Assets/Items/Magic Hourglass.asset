@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Magic Hourglass
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 2663ec0dd6f916f4db31dff91b81a102, type: 3}
-  itemName: Palantir
+  itemName: Magic Hourglass
   itemDescription: An unassuming hourglass that seems to  slightly slow down time
     around it.
   itemType: 4
