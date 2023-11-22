@@ -6,6 +6,7 @@
 
 namespace Sirenix.OdinInspector.Internal
 {
+    #if UNITY_EDITOR
     using Sirenix.OdinInspector.Editor;
     using Sirenix.Utilities;
     using System;
@@ -240,4 +241,5 @@ namespace Sirenix.OdinInspector.Internal
             }
         }
     }
+    #endif
 }

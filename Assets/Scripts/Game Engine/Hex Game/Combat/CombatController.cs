@@ -333,7 +333,7 @@ namespace WeAreGladiators.Combat
                 Vector3 finalPos = new Vector3(view.ucmMovementParent.transform.position.x + randX, view.ucmMovementParent.transform.position.y + randY, view.ucmMovementParent.transform.position.z);
                 view.ucmMovementParent.transform.DOMove(finalPos, 0.5f);
                 view.model.transform.DORotate(new Vector3(0, 0, randomDeathRotation), 0.5f);
-                /*
+                
                 // Normal Death anim
                 if (randomDeathAnim == 0 ||
                     view.model.TotalDecapitationAnims == 0 ||
@@ -350,12 +350,12 @@ namespace WeAreGladiators.Combat
                     spatters = 3;
                     VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
                     HexCharacterController.Instance.PlayDecapitateAnimation(view);
-                }*/
+                }
 
                 // testing, remove and uncomment above later
-                spatters = 3;
-                VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
-                HexCharacterController.Instance.PlayDecapitateAnimation(view);
+                //spatters = 3;
+                //VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
+                //HexCharacterController.Instance.PlayDecapitateAnimation(view);
 
                 // Create random blood spatters
                 BloodColour bloodColour = BloodColour.Red;
