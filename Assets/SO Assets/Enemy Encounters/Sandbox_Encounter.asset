@@ -17,5 +17,17 @@ MonoBehaviour:
   encounterTag: 0
   enemyGroups:
   - possibleEnemies:
-    - {fileID: 11400000, guid: 2034f1598dc716249b750cf98ddefc70, type: 2}
+    - {fileID: 11400000, guid: b7812d817f099604d813ecc5cb62fb08, type: 2}
     spawnPosition: {x: 2, y: 0}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: bd906dc6cb352ef4eb438175b91110ff, type: 2}
+    spawnPosition: {x: 2, y: 1}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: b7812d817f099604d813ecc5cb62fb08, type: 2}
+    spawnPosition: {x: 2, y: -1}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: 62b98b7c3a0ef8444aa410704e58e4d7, type: 2}
+    spawnPosition: {x: 3, y: 0}
+  - possibleEnemies:
+    - {fileID: 11400000, guid: d914be26761414648b4c5647391ef322, type: 2}
+    spawnPosition: {x: 3, y: 1}

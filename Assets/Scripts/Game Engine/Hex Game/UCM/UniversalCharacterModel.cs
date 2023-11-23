@@ -17,6 +17,7 @@ namespace WeAreGladiators.UCM
         [SerializeField] private GameObject headMasksParent;
         [SerializeField] private GameObject[] oneHandAnimationBones;
         [SerializeField] private GameObject[] twoHandAnimationBones;
+        public ParticleSystem bloodJetParticles;
 
         [ShowIf("ShowRootSorting")]
         [SerializeField]

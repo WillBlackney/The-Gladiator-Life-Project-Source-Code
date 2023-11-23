@@ -19,7 +19,6 @@ using WeAreGladiators.UCM;
 using WeAreGladiators.UI;
 using WeAreGladiators.Utilities;
 using WeAreGladiators.VisualEvents;
-using static UnityEngine.GraphicsBuffer;
 
 namespace WeAreGladiators.Combat
 {
@@ -333,7 +332,15 @@ namespace WeAreGladiators.Combat
                 Vector3 finalPos = new Vector3(view.ucmMovementParent.transform.position.x + randX, view.ucmMovementParent.transform.position.y + randY, view.ucmMovementParent.transform.position.z);
                 view.ucmMovementParent.transform.DOMove(finalPos, 0.5f);
                 view.model.transform.DORotate(new Vector3(0, 0, randomDeathRotation), 0.5f);
-                
+
+                // Determine blood spatter colour
+                BloodColour bloodColour = BloodColour.Red;
+                if (character.characterData != null)
+                {
+                    bloodColour = character.characterData.bloodColour;
+                }
+
+                /*
                 // Normal Death anim
                 if (randomDeathAnim == 0 ||
                     view.model.TotalDecapitationAnims == 0 ||
@@ -350,19 +357,25 @@ namespace WeAreGladiators.Combat
                     spatters = 3;
                     VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
                     HexCharacterController.Instance.PlayDecapitateAnimation(view);
-                }
+                }*/
 
-                // testing, remove and uncomment above later
-                //spatters = 3;
-                //VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
-                //HexCharacterController.Instance.PlayDecapitateAnimation(view);
-
-                // Create random blood spatters
-                BloodColour bloodColour = BloodColour.Red;
-                if (character.characterData != null)
+                // Testing, remove and uncomment above later
+                spatters = 3;
+                UniversalCharacterModel worldModel = view.model.GetComponent<UniversalCharacterModel>();
+                if(worldModel != null)
                 {
-                    bloodColour = character.characterData.bloodColour;
+                    ParticleSystem ps = worldModel.bloodJetParticles.GetComponent<ParticleSystem>();
+                    ParticleSystem.MainModule ma = ps.main;
+                    ma.startColor = VisualEffectManager.Instance.GetBloodColour(bloodColour);
                 }
+
+                // Blood Explosion particles
+                VisualEffectManager.Instance.CreateBloodExplosion(view.WorldPosition, 0, 1, bloodColour);
+
+                // Play decap anim
+                HexCharacterController.Instance.PlayDecapitateAnimation(view);
+                              
+                // Create random blood spatters
                 for (int i = 0; i < spatters; i++)
                 {
                     VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition, bloodColour);

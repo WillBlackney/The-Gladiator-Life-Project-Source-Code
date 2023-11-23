@@ -92,7 +92,9 @@ namespace WeAreGladiators.VisualEvents
         public GameObject smallShadowExplosion;
         public GameObject ghostExplosionPurple;
         public GameObject confettiExplosionRainbow;
-        public GameObject bloodSplatterEffect;
+        public GameObject redBloodSplatterEffect;
+        public GameObject blackBloodSplatterEffect;
+        public GameObject lightGreenBloodSplatterEffect;
         public GameObject goldCoinExplosion;
 
         [Header("Melee Impact Prefab References")]
@@ -655,19 +657,17 @@ namespace WeAreGladiators.VisualEvents
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
         }
         // Blood Explosion
-        public void CreateBloodExplosion(Vector3 location, int sortingOrderBonus = 0, float scaleModifier = 1f)
+        public void CreateBloodExplosion(Vector3 location, int sortingOrderBonus = 0, float scaleModifier = 1f, BloodColour colour = BloodColour.Red)
         {
-            GameObject hn = Instantiate(bloodSplatterEffect, location, bloodSplatterEffect.transform.rotation);
-            ToonEffect teScript = hn.GetComponent<ToonEffect>();
-            teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
-        }
+            GameObject prefab = redBloodSplatterEffect;
+            if (colour == BloodColour.Black) prefab = blackBloodSplatterEffect;
+            else if (colour == BloodColour.LightGreen) prefab = lightGreenBloodSplatterEffect;
 
-        // Blood Jet
-        public void CreateBloodJet(Vector3 location, int sortingOrderBonus = 0, float scaleModifier = 1f)
-        {
-            GameObject hn = Instantiate(bloodJetEffectPrefab, location, bloodSplatterEffect.transform.rotation);
+            GameObject hn = Instantiate(prefab, location, prefab.transform.rotation);
             ToonEffect teScript = hn.GetComponent<ToonEffect>();
             teScript.InitializeSetup(sortingOrderBonus, scaleModifier);
+
+            // set colour
         }
 
         // Lightning Explosion
@@ -809,7 +809,7 @@ namespace WeAreGladiators.VisualEvents
 
         #endregion
 
-        private Color GetBloodColour(BloodColour colour)
+        public Color GetBloodColour(BloodColour colour)
         {
             if (colour == BloodColour.Black) return blackBlood;
             else if (colour == BloodColour.LightGreen) return lightGreenBlood;
