@@ -48,14 +48,14 @@ MonoBehaviour:
       value: 0
       stars: 0
     physicalDamageBonus: 0
-    physicalResistance: 0
+    physicalResistance: 25
     resolve:
       value: 10
       stars: 0
     stressResistance: 0
     vision: 0
     wits:
-      value: 10
+      value: 5
       stars: 0
   baseArmour: 0
   randomizeHealth: 0
@@ -67,13 +67,16 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 68ebbc5400e2348409a99ff9ca0ec6c5, type: 2}
   serializedPassiveManager:
     perks:
-    - perkTag: 24
+    - perkTag: 236
       stacks: 1
       freshInjury: 0
-    - perkTag: 235
+    - perkTag: 243
       stacks: 1
       freshInjury: 0
     - perkTag: 237
+      stacks: 1
+      freshInjury: 0
+    - perkTag: 235
       stacks: 1
       freshInjury: 0
   randomizeItemSet: 1

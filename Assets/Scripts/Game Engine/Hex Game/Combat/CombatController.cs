@@ -339,8 +339,7 @@ namespace WeAreGladiators.Combat
                 {
                     bloodColour = character.characterData.bloodColour;
                 }
-
-                /*
+                
                 // Normal Death anim
                 if (randomDeathAnim == 0 ||
                     view.model.TotalDecapitationAnims == 0 ||
@@ -355,25 +354,20 @@ namespace WeAreGladiators.Combat
                 else
                 {
                     spatters = 3;
-                    VisualEffectManager.Instance.CreateEffectAtLocation(ParticleEffect.BloodExplosion, view.WorldPosition);
+                    UniversalCharacterModel worldModel = view.model.GetComponent<UniversalCharacterModel>();
+                    if (worldModel != null)
+                    {
+                        ParticleSystem ps = worldModel.bloodJetParticles.GetComponent<ParticleSystem>();
+                        ParticleSystem.MainModule ma = ps.main;
+                        ma.startColor = VisualEffectManager.Instance.GetBloodColour(bloodColour);
+                    }
+
+                    // Blood Explosion particles
+                    VisualEffectManager.Instance.CreateBloodExplosion(view.WorldPosition, 0, 1, bloodColour);
+
+                    // Play decap anim
                     HexCharacterController.Instance.PlayDecapitateAnimation(view);
-                }*/
-
-                // Testing, remove and uncomment above later
-                spatters = 3;
-                UniversalCharacterModel worldModel = view.model.GetComponent<UniversalCharacterModel>();
-                if(worldModel != null)
-                {
-                    ParticleSystem ps = worldModel.bloodJetParticles.GetComponent<ParticleSystem>();
-                    ParticleSystem.MainModule ma = ps.main;
-                    ma.startColor = VisualEffectManager.Instance.GetBloodColour(bloodColour);
                 }
-
-                // Blood Explosion particles
-                VisualEffectManager.Instance.CreateBloodExplosion(view.WorldPosition, 0, 1, bloodColour);
-
-                // Play decap anim
-                HexCharacterController.Instance.PlayDecapitateAnimation(view);
                               
                 // Create random blood spatters
                 for (int i = 0; i < spatters; i++)
@@ -381,13 +375,13 @@ namespace WeAreGladiators.Combat
                     VisualEffectManager.Instance.CreateGroundBloodSpatter(view.WorldPosition, bloodColour);
                 }
 
-            }, parentEvent).SetEndDelay(1f);
+            }, parentEvent).SetEndDelay(0.75f);
 
             // Destroy characters activation window and update other window positions
             HexCharacterModel currentlyActivatedEntity = TurnController.Instance.EntityActivated;
             List<HexCharacterModel> cachedOrder = TurnController.Instance.ActivationOrder.ToList();
             VisualEventManager.CreateVisualEvent(() =>
-                TurnController.Instance.OnCharacterKilledVisualEvent(window, currentlyActivatedEntity, cachedOrder), parentEvent).SetEndDelay(1f);
+                TurnController.Instance.OnCharacterKilledVisualEvent(window, currentlyActivatedEntity, cachedOrder), parentEvent).SetEndDelay(0.75f);
 
             // Roll for death or knock down on player characters
             if (character.controller == Controller.Player)
@@ -462,7 +456,7 @@ namespace WeAreGladiators.Combat
                     }
                 }
 
-                VisualEventManager.InsertTimeDelayInQueue(0.5f);
+                VisualEventManager.InsertTimeDelayInQueue(0.25f);
             }
 
             // Check if the combat defeat event should be triggered
