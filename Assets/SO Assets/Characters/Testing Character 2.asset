@@ -60,10 +60,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 30fba2b2b3154994f91264dd96a76258, type: 2}
     - {fileID: 11400000, guid: cf911e75338237b45a6321623d1f8c84, type: 2}
   serializedPassiveManager:
-    perks:
-    - perkTag: 237
-      stacks: 1
-      freshInjury: 0
+    perks: []
   modelParts:
   - Undead_Chest_1
   - Undead_Head_1

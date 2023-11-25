@@ -312,7 +312,7 @@ namespace WeAreGladiators.TurnLogic
             sortedList.Reverse();
             foreach (HexCharacterModel c in sortedList)
             {
-                if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Inattentive))
+                if (PerkController.Instance.DoesCharacterHavePerk(c.pManager, Perk.Foresight))
                 {
                     priorityCharacters.Add(c);
                 }
@@ -324,10 +324,12 @@ namespace WeAreGladiators.TurnLogic
             foreach (HexCharacterModel c in inattentiveCharacters)
             {
                 sortedList.Remove(c);
-            }
-            foreach (HexCharacterModel c in inattentiveCharacters)
-            {
                 sortedList.Add(c);
+            }
+            foreach (HexCharacterModel c in priorityCharacters)
+            {
+                sortedList.Remove(c);
+                sortedList.Insert(0, c);
             }
 
             ActivationOrder = sortedList;

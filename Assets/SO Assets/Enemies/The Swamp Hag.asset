@@ -71,6 +71,9 @@ MonoBehaviour:
     - perkTag: 237
       stacks: 1
       freshInjury: 0
+    - perkTag: 86
+      stacks: 1
+      freshInjury: 0
   randomizeItemSet: 1
   itemSet:
     mainHandItem: {fileID: 11400000, guid: 1d6c1e5643e95614b868f94e8033e150, type: 2}

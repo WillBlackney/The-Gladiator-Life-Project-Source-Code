@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Ambience_Crowd_1
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 7963230fca38f194e9639a9b812bd1d4, type: 3}
+  bus: 0
+  allowDuplicates: 1
   randomizeClip: 0
   audioClips: []
   soundType: 88
@@ -20,12 +22,9 @@ MonoBehaviour:
   randomizeVolume: 0
   randomVolumeLowerLimit: 0.3
   randomVolumeUpperLimit: 0.5
-  volume: 0.4
+  volume: 0.5
   randomizePitch: 0
   randomPitchLowerLimit: 0.8
   randomPitchUpperLimit: 1.2
   pitch: 1.2
   loop: 1
-  source: {fileID: 0}
-  fadingIn: 0
-  fadingOut: 0

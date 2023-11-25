@@ -35,7 +35,7 @@ MonoBehaviour:
   - color: 3
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
-    phrase: Ranged Attack
+    phrase: 'Ranged Attack '
   - color: 1
     getPhraseFromAbilityValue: 0
     abilityEffectType: 0
