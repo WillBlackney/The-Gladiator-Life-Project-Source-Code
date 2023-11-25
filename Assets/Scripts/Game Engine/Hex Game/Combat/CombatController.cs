@@ -549,7 +549,7 @@ namespace WeAreGladiators.Combat
                 }
             }
 
-            Debug.LogWarning("DetermineAndGetLootFromDeadCharacter() new loot = " + ret.Count.ToString());
+            Debug.Log("DetermineAndGetLootFromDeadCharacter() new loot = " + ret.Count.ToString());
             return ret;
         }
         #endregion

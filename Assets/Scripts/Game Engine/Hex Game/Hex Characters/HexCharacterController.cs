@@ -3136,7 +3136,7 @@ namespace WeAreGladiators.Characters
             {
                 bRet = false;
             }
-            Debug.LogWarning("IsCharacterEngagedInMelee returning = " + bRet.ToString() + " for character " + character.myName);
+            Debug.Log("IsCharacterEngagedInMelee returning = " + bRet.ToString() + " for character " + character.myName);
             return bRet;
         }
         public bool IsCharacterTeleportable(HexCharacterModel character)

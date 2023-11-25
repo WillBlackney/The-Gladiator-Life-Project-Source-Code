@@ -213,7 +213,7 @@ namespace WeAreGladiators.Combat
                 }
             }
 
-            Debug.LogWarning("GetFreeStrikersOnPath() returning = " + freeStrikers.Count.ToString());
+            Debug.Log("GetFreeStrikersOnPath() returning = " + freeStrikers.Count.ToString());
 
             return freeStrikers;
         }

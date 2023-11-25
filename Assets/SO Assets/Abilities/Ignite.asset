@@ -86,7 +86,7 @@ MonoBehaviour:
       overlayFadeInTime: 0
       overlayDuration: 0
       overlayFadeOutTime: 0
-      particleEffect: 4
+      particleEffect: 16
       cameraShake: 0
       movementAnimation: 0
       soundEffect: 0

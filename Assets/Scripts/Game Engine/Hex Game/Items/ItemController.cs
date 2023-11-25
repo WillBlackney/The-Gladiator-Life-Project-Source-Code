@@ -1,5 +1,4 @@
-﻿using Sirenix.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +7,6 @@ using WeAreGladiators.Audio;
 using WeAreGladiators.Characters;
 using WeAreGladiators.JourneyLogic;
 using WeAreGladiators.Perks;
-using WeAreGladiators.Player;
 using WeAreGladiators.TownFeatures;
 using WeAreGladiators.UCM;
 using WeAreGladiators.UI;
@@ -45,10 +43,6 @@ namespace WeAreGladiators.Items
         {
             base.Awake();
             BuildItemLibrary();
-
-            List<ItemData> logItems = Array.FindAll(AllItems, i => i.itemType == ItemType.Weapon && i.rarity == Rarity.Common).ToList();
-            var poo  = logItems.OrderBy(item => item.maxArmourRoll);
-            poo.ForEach(i => Debug.LogWarning(i.itemName + ", armour = " + i.maxArmourRoll.ToString()));
         }
         private void BuildItemLibrary()
         {

@@ -146,6 +146,7 @@ namespace WeAreGladiators.TurnLogic
         public void OnNewCombatEventStarted()
         {
             CurrentTurn = 0;
+            CombatLogController.Instance.ClearAllEntries();
             CombatController.Instance.SetCombatState(CombatGameState.CombatActive);
 
             // Apply starting perks (elf, human and orc racials, etc)

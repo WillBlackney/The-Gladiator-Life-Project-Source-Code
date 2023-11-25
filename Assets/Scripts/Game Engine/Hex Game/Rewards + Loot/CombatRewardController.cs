@@ -57,13 +57,13 @@ namespace WeAreGladiators.RewardSystems
         }      
         public void AddBonusLootToInventory()
         {
-            Debug.LogWarning("AddBonusLootToInventory() new items added to inventory = " + bonusLootItems.Count.ToString());
+            Debug.Log("AddBonusLootToInventory() new items added to inventory = " + bonusLootItems.Count.ToString());
             bonusLootItems.ForEach(i => InventoryController.Instance.AddItemToInventory(i));
         }
         public void TrackBonusLoot(List<ItemData> items)
         {
             bonusLootItems.AddRange(items);
-            Debug.LogWarning("TrackBonusLoot() total current tracking = " + bonusLootItems.Count.ToString());
+            Debug.Log("TrackBonusLoot() total current tracking = " + bonusLootItems.Count.ToString());
         }
 
         #endregion 

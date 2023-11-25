@@ -529,7 +529,6 @@ namespace WeAreGladiators.Abilities
         }
         private void TriggerAbilityEffect(AbilityData ability, AbilityEffect abilityEffect, HexCharacterModel caster, HexCharacterModel target, LevelNode tileTarget = null, HexCharacterModel previousChainTarget = null)
         {
-
             bool triggerEffectEndEvents = true;
 
             // Stop and return if effect requires a target and that target is dying/dead/null/no longer valid      
@@ -540,8 +539,7 @@ namespace WeAreGladiators.Abilities
                     abilityEffect.effectType == AbilityEffectType.RemovePassiveTarget ||
                     abilityEffect.effectType == AbilityEffectType.KnockBack ||
                     abilityEffect.effectType == AbilityEffectType.MoraleCheck
-                )
-               )
+                ))
             {
                 Debug.Log("AbilityController.TriggerAbilityEffect() cancelling: target is no longer valid");
                 return;
@@ -1703,24 +1701,24 @@ namespace WeAreGladiators.Abilities
 
             if(character.currentActionPoints >= 2)
             {
-                Debug.LogWarning("SafeToAutoEndTurn() is false, has 2 or more action points");
+                Debug.Log("SafeToAutoEndTurn() is false, has 2 or more action points");
                 return false;
             }
 
             if(character.tilesMovedThisTurn == 0 && PerkController.Instance.DoesCharacterHavePerk(character.pManager, Perk.Nimble))
             {
-                Debug.LogWarning("SafeToAutoEndTurn() is false, can still do nimble move");
+                Debug.Log("SafeToAutoEndTurn() is false, can still do nimble move");
                 return false;
             }
             foreach(AbilityData ability in character.abilityBook.activeAbilities)
             {
                 if(IsAbilityUseable(character, ability, false))
                 {
-                    Debug.LogWarning("SafeToAutoEndTurn() is false, can still use ability: " + ability.abilityName);
+                    Debug.Log("SafeToAutoEndTurn() is false, can still use ability: " + ability.abilityName);
                     return false;
                 }
             }
-            Debug.LogWarning("SafeToAutoEndTurn() is true");
+            Debug.Log("SafeToAutoEndTurn() is true");
             return true;
         }
         #endregion

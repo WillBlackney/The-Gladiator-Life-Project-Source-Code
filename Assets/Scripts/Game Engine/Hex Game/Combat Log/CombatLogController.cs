@@ -12,22 +12,10 @@ namespace WeAreGladiators.CombatLog
 {
     public class CombatLogController : Singleton<CombatLogController>
     {
-
-        #region Misc Logic
-
-        private Sprite GetIconSprite(EntryIcon type)
-        {
-            Sprite sprite = null;
-
-            return sprite;
-        }
-
-        #endregion
         #region Components + Variables
 
         [Header("Core Components")]
-        [SerializeField]
-        private Canvas mainCanvas;
+        [SerializeField] private Canvas mainCanvas;
         [SerializeField] private CombatLogEntryView logEntryViewPrefab;
         [SerializeField] private Transform logEntryViewParent;
         [SerializeField] private GameObject logContentParent;
@@ -37,14 +25,12 @@ namespace WeAreGladiators.CombatLog
 
         [Space(10)]
         [Header("Maximize/Minimize Log Button")]
-        [SerializeField]
-        private Button minMaxButton;
+        [SerializeField] private Button minMaxButton;
         [SerializeField] private Image minMaxButtonImage;
 
         [Space(10)]
         [Header("Sprites")]
-        [SerializeField]
-        private Sprite turnCycleStart;
+        [SerializeField] private Sprite turnCycleStart;
         [SerializeField] private Sprite abilityUsed;
         [SerializeField] private Sprite hit;
         [SerializeField] private Sprite miss;
@@ -62,11 +48,11 @@ namespace WeAreGladiators.CombatLog
         [SerializeField] private Sprite gainedNegativePassive;
         [SerializeField] private Sprite resistedNegativePassive;
 
-        private readonly List<CombatLogEntryData> allEntryData = new List<CombatLogEntryData>();
+        private List<CombatLogEntryData> allEntryData = new List<CombatLogEntryData>();
         private bool maximized;
-        private readonly int maxEntriesShown = 50;
+        private int maxEntriesShown = 50;
 
-        #endregion
+        #endregion                     
 
         #region Core Logic
 
@@ -96,24 +82,34 @@ namespace WeAreGladiators.CombatLog
 
         private void RenderEntries()
         {
+            if(!maximized || allEntryData.Count == 0)
+            {
+                return;
+            }
+
             List<CombatLogEntryData> source = new List<CombatLogEntryData>();
             source.AddRange(allEntryData);
             VisualEventManager.CreateVisualEvent(() =>
             {
                 int dataStartIndex = source.Count - 1 - maxEntriesShown;
+                int overflow = 0;
+                if(source.Count > maxEntriesShown)
+                {
+                    overflow = 1;
+                }
                 if (dataStartIndex < 0)
                 {
                     dataStartIndex = 0;
                 }
 
-                allEntryViews.ForEach(v => v?.gameObject.SetActive(false));
+                allEntryViews.ForEach(v => { if (v != null) v.gameObject.SetActive(false); });
                 for (int i = 0; i < source.Count && i < maxEntriesShown; i++)
                 {
                     if (i >= allEntryViews.Count)
                     {
                         CreateNewEntryView();
                     }
-                    allEntryViews[i].Build(source[i + dataStartIndex]);
+                    allEntryViews[i].Build(source[i + dataStartIndex + overflow]);
                 }
 
                 DelayUtils.DoNextFrame(() =>

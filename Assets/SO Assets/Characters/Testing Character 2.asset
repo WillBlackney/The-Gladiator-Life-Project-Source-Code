@@ -55,10 +55,15 @@ MonoBehaviour:
       stars: 0
   abilityBook:
     activeAbilities:
-    - {fileID: 11400000, guid: d70a84b2c72b1614abf7299614e0551f, type: 2}
-    - {fileID: 11400000, guid: a02ebfe8b4a47c742ab43f030a771ce1, type: 2}
+    - {fileID: 11400000, guid: c7e6eaa1a69f97b4980c6dc7faa7f372, type: 2}
+    - {fileID: 11400000, guid: abb8cd12e082108429c6734cc2c90d87, type: 2}
+    - {fileID: 11400000, guid: 30fba2b2b3154994f91264dd96a76258, type: 2}
+    - {fileID: 11400000, guid: cf911e75338237b45a6321623d1f8c84, type: 2}
   serializedPassiveManager:
-    perks: []
+    perks:
+    - perkTag: 237
+      stacks: 1
+      freshInjury: 0
   modelParts:
   - Undead_Chest_1
   - Undead_Head_1
@@ -66,7 +71,7 @@ MonoBehaviour:
   - Undead_Right_Hand_1
   - Undead_Right_Leg_1
   itemSet:
-    mainHandItem: {fileID: 11400000, guid: 51e31aac9500e9648bfe3740136d9331, type: 2}
+    mainHandItem: {fileID: 11400000, guid: e8567b630dd37c042a06a339a93e409e, type: 2}
     offHandItem: {fileID: 0}
     headArmour: {fileID: 11400000, guid: eb2b4dc7ace074444a4c2a4c78aaadb7, type: 2}
     chestArmour: {fileID: 11400000, guid: 9c82d8fa69ec50443a7f388f71928851, type: 2}
